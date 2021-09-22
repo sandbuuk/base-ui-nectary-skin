@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "pretty": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "jsx": "preserve",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "paths": {
+      "ReactApp1/Container": [
+        "../react-1/src/container.tsx"
+      ],
+      "ReactApp2/Container": [
+        "../react-2/src/container.tsx"
+      ],
+      "VueApp/Container": [
+        "../vue/src/container.ts"
+      ],
+      "AngularApp/Container": [
+        "../angular/src/container.ts"
+      ]
+    }
+  },
+}

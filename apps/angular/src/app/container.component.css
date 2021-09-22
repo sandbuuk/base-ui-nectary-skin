@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  border: 2px blue dashed;
+  padding: 20px;
+  width: 200px;
+}
+
+h3 {
+  margin: 0 0 20px;
+}
