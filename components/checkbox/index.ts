@@ -1,16 +1,9 @@
+import templateHTML from './template.html'
 import { defineCustomElement, getEventHandler } from '../utils'
 
 const template = document.createElement('template')
 
-template.innerHTML = `
-<style>
-  input {
-    background-color: white;
-    color: blue;
-  }
-</style>
-<input type="checkbox"/>
-`
+template.innerHTML = templateHTML
 
 defineCustomElement('sinch-checkbox', class extends HTMLElement {
   input: HTMLInputElement

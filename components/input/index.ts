@@ -1,17 +1,9 @@
+import templateHTML from './template.html'
 import { defineCustomElement, getEventHandler } from '../utils'
 
 const template = document.createElement('template')
 
-template.innerHTML = `
-<style>
-  input {
-    width: 100%;
-    background-color: white;
-    color: var(--sinch-input-text-color);
-  }
-</style>
-<input type="text"/>
-`
+template.innerHTML = templateHTML
 
 defineCustomElement('sinch-input', class extends HTMLElement {
   input: HTMLInputElement

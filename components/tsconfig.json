@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "noEmit": true,
     "skipLibCheck": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
@@ -14,5 +13,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
+    "declaration": true,
+    "emitDeclarationOnly": true
   },
 }

@@ -1,16 +1,9 @@
+import templateHTML from './template.html'
 import { defineCustomElement, getEventHandler } from '../utils'
 
 const template = document.createElement('template')
 
-template.innerHTML = `
-<style>
-  button {
-    background-color: white;
-    color: var(--sinch-button-text-color);
-  }
-</style>
-<button/>
-`
+template.innerHTML = templateHTML
 
 defineCustomElement('sinch-button', class extends HTMLElement {
   button: HTMLButtonElement
