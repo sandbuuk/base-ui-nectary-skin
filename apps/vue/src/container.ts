@@ -26,7 +26,7 @@ class SinchVueApp extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'closed' })
+    const shadowRoot = this.attachShadow({ mode: 'open' })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
