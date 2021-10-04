@@ -20,13 +20,9 @@ bus.addEventListener('message', (e) => {
       reactApp2Element.remove()
       stepsElement.appendChild(vueAppElement)
 
+      vueAppElement.setAttribute('first-name', firstName)
+
       import('VueApp/Container').catch(console.error)
-
-      break
-    }
-
-    case 'SECOND_STEP_READY': {
-      bus.postMessage({ type: 'SECOND_STEP_DATA', value: firstName })
 
       break
     }
@@ -37,19 +33,10 @@ bus.addEventListener('message', (e) => {
       vueAppElement.remove()
       stepsElement.appendChild(angularAppElement)
 
+      angularAppElement.setAttribute('first-name', firstName)
+      angularAppElement.setAttribute('last-name', lastName)
+
       import('AngularApp/Container').catch(console.error)
-
-      break
-    }
-
-    case 'THIRD_STEP_READY': {
-      bus.postMessage({
-        type: 'THIRD_STEP_DATA',
-        value: {
-          firstName,
-          lastName
-        }
-      })
 
       break
     }

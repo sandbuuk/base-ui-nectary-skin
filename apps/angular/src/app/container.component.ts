@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core'
+import { Component, Input, ViewEncapsulation } from '@angular/core'
 
 @Component({
   encapsulation: ViewEncapsulation.ShadowDom,
@@ -8,4 +8,7 @@ import { Component, ViewEncapsulation } from '@angular/core'
   ]
 })
 
-export class ContainerComponent {}
+export class ContainerComponent {
+  @Input() firstName!: string
+  @Input() lastName!: string
+}

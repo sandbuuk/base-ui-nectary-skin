@@ -34,7 +34,9 @@ class SinchVueApp extends HTMLElement {
   }
 
   connectedCallback() {
-    this.app = createApp(App)
+    this.app = createApp(App, {
+      firstName: this.getAttribute('first-name')
+    })
 
 		this.app.mount(this.appElement)
   }

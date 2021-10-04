@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import '@saas/components/button'
 import '@saas/components/input'
 
@@ -8,21 +8,12 @@ import '@saas/components/input'
 })
 
 export class AppComponent {
+  @Input() firstName!: string
+  @Input() lastName!: string
   bus!: BroadcastChannel
-  firstName = ''
-  lastName = ''
 
   ngOnInit() {
     this.bus = new BroadcastChannel('TEST_CHANNEL')
-
-    this.bus.addEventListener('message', (e: MessageEvent) => {
-      if (e.data.type === 'THIRD_STEP_DATA') {
-        this.firstName = e.data.value.firstName
-        this.lastName = e.data.value.lastName
-      }
-    })
-
-    this.bus.postMessage({ type: 'THIRD_STEP_READY' })
   }
 
   ngOnDestroy() {

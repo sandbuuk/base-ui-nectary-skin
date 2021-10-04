@@ -15,11 +15,6 @@ import "@saas/components/checkbox";
 
 export default {
   methods: {
-    onMessage(e) {
-      if (e.data.type === "SECOND_STEP_DATA") {
-        this.firstName = e.data.value;
-      }
-    },
     onClick() {
       this.bus.postMessage({
         type: "SECOND_STEP_DONE",
@@ -27,17 +22,16 @@ export default {
       });
     },
   },
+  props: {
+    firstName: String,
+  },
   data() {
     return {
-      firstName: "",
       secondName: "Doe",
     };
   },
   mounted() {
     this.bus = new BroadcastChannel("TEST_CHANNEL");
-
-    this.bus.addEventListener("message", this.onMessage);
-    this.bus.postMessage({ type: "SECOND_STEP_READY" });
   },
 
   unmounted() {
