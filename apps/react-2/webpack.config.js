@@ -20,6 +20,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        loader: 'raw-loader'
+      },
+      {
         test: /\.[jt]sx?$/,
         loader: 'babel-loader',
         options: {

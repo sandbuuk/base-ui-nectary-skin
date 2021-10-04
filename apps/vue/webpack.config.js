@@ -22,6 +22,19 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          compilerOptions: {
+            isCustomElement: (tag) => tag.startsWith('sinch-')
+          }
+        }
+      },
+      {
+        test: /\.html$/,
+        loader: 'raw-loader'
+      },
+      {
         test: /\.(js|ts)$/,
         loader: 'babel-loader',
         options: {
@@ -45,15 +58,6 @@ module.exports = {
           ]
         }
       },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          compilerOptions: {
-            isCustomElement: (tag) => tag.startsWith('sinch-')
-          }
-        }
-      }
     ]
   },
   devServer: {

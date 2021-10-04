@@ -15,6 +15,14 @@ module.exports = {
     host: 'localhost',
     port: PORT,
   },
+  module: {
+    rules: [
+      {
+        test: /\.html$/,
+        loader: 'raw-loader'
+      },
+    ]
+  },
   plugins: [
     new MFLiveReloadPlugin({
       container: CONTAINER,
