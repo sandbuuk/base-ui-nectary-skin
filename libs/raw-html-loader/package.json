@@ -1,0 +1,7 @@
+{
+  "name": "raw-html-loader",
+  "version": "0.0.1",
+  "dependencies": {
+    "html-minifier-terser": "^6.0.2"
+  }
+}

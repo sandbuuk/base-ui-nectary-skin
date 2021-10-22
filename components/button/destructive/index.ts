@@ -17,7 +17,7 @@ defineCustomElement('sinch-button-destructive', class extends HTMLElement {
 
     this.button = shadowRoot.querySelector('button')!
 
-    this.button.addEventListener('click', this.#onClick)
+    this.button.addEventListener('click', this.onClick)
   }
 
   static get observedAttributes() {
@@ -76,10 +76,10 @@ defineCustomElement('sinch-button-destructive', class extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.button.removeEventListener('click', this.#onClick)
+    this.button.removeEventListener('click', this.onClick)
   }
 
-  #onClick = (e: MouseEvent) => {
+  onClick = (e: MouseEvent) => {
     const onClick = getEventHandler(this, 'onClick')
 
     if (onClick != null) {

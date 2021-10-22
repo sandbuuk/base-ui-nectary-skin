@@ -2,8 +2,6 @@
   "name": "@saas/components",
   "version": "0.0.0",
   "files": [
-    "utils.js",
-    "utils.d.ts",
     "theme.css",
     "*/index.js",
     "*/index.d.ts"
@@ -16,7 +14,7 @@
   "devDependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.5",
-    "babel-plugin-transform-html-import-to-string": "^2.0.0",
+    "html-minifier-terser": "^6.0.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.4.2"
   }

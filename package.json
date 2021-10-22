@@ -3,7 +3,8 @@
   "workspaces": [
     "apps/*",
     "components/",
-    "configs/*"
+    "configs/*",
+    "libs/*"
   ],
   "scripts": {
     "start": "concurrently --raw npm:react-1 npm:react-2 npm:vue npm:angular npm:shell",
