@@ -28,6 +28,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           babelrc: false,
+          comments: false,
           presets: [
             [
               '@babel/preset-env',
@@ -40,6 +41,6 @@ module.exports = {
     ],
   },
   optimization: {
-    minimize: true,
+    minimize: false,
   },
 }

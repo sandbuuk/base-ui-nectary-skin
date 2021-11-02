@@ -3,19 +3,23 @@
   "version": "0.0.0",
   "files": [
     "theme.css",
-    "*/index.js",
-    "*/index.d.ts"
+    "**/*/index.js",
+    "**/*/index.d.ts"
   ],
   "scripts": {
-    "prebuild": "rimraf utils.{js,d.ts} */index.{js,d.ts}",
-    "build": "babel . --extensions '.ts' --ignore '*.d.ts' --out-dir .",
+    "build": "webpack build",
     "postbuild": "tsc"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.5",
-    "html-minifier-terser": "^6.0.2",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "raw-html-loader": "^0.0.1",
+    "raw-loader": "^4.0.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.2",
+    "webpack-cli": "^4.9.1",
+    "webpack": "^5.61.0"
   }
 }
