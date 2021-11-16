@@ -129,7 +129,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
     return attrValue === '' || Boolean(attrValue)
   }
 
-  attributeChangedCallback(name: string, _: string, newVal: string) {
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
         this.$input.textContent = newVal
@@ -144,7 +144,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
       }
 
       case 'placeholder': {
-        this.$input.placeholder = newVal
+        this.$input.placeholder = newVal ?? ''
 
         break
       }

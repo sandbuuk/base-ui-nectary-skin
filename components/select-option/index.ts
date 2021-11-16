@@ -24,7 +24,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
     return ['text']
   }
 
-  attributeChangedCallback(name: string, oldVal: string, newVal: string) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     if (oldVal === newVal) {
       return
     }

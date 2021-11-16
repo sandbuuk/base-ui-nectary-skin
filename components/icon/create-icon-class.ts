@@ -44,7 +44,7 @@ export const createIconClass = (templateHTML: string) => {
       }
     }
 
-    attributeChangedCallback(name: string, _: string, newVal: string | null) {
+    attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
       switch (name) {
         case 'size': {
           this.$svg.setAttribute(

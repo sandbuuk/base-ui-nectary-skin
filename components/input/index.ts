@@ -129,10 +129,10 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     return attrValue === '' || Boolean(attrValue)
   }
 
-  attributeChangedCallback(name: string, _: string, newVal: string) {
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.$input.value = newVal
+        this.$input.value = newVal ?? ''
 
         break
       }
@@ -144,7 +144,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
       }
 
       case 'placeholder': {
-        this.$input.placeholder = newVal
+        this.$input.placeholder = newVal ?? ''
 
         break
       }
@@ -176,19 +176,13 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   onInput = (e: Event) => {
-    const onChange = getEventHandler(this, 'onChange')
-
-    if (onChange != null) {
-      onChange(this.$input.value)
-    }
+    getEventHandler(this, 'onChange')?.(this.$input.value)
 
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: this.$input.value,
       })
     )
-
-    this.$input.value = this.value
 
     e.stopPropagation()
   }

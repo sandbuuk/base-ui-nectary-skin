@@ -30,7 +30,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['checked', 'indeterminate', 'disabled', 'text']
+    return ['checked', 'disabled', 'text']
   }
 
   set checked(isChecked: boolean) {
@@ -83,10 +83,10 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     return this.getAttribute('text') ?? ''
   }
 
-  attributeChangedCallback(name: string, _: boolean | string, newVal: boolean | string) {
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.$label.textContent = String(newVal)
+        this.$label.textContent = newVal
 
         break
       }
@@ -104,19 +104,13 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 
   onInput = (e: Event) => {
-    const onChange = getEventHandler(this, 'onChange')
-
-    if (onChange != null) {
-      onChange(this.$input.checked)
-    }
+    getEventHandler(this, 'onChange')?.(this.$input.checked)
 
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: this.$input.checked,
       })
     )
-
-    this.$input.checked = this.checked
 
     e.stopPropagation()
   }

@@ -76,10 +76,10 @@ defineCustomElement('sinch-button', class extends HTMLElement {
     return attrValue === '' || Boolean(attrValue)
   }
 
-  attributeChangedCallback(name: string, _: unknown, newVal: unknown) {
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.$text.textContent = String(newVal)
+        this.$text.textContent = newVal
 
         break
       }

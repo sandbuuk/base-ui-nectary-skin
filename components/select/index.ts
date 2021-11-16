@@ -150,14 +150,14 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return attrValue === '' || Boolean(attrValue)
   }
 
-  attributeChangedCallback(name: string, oldVal: string, newVal: string) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     if (oldVal === newVal) {
       return
     }
 
     switch (name) {
       case 'value': {
-        this.onValueChange(newVal)
+        this.onValueChange(newVal ?? '')
 
         break
       }
