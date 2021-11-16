@@ -1,4 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
+import { useStoryWrapper } from './use-story-wrapper'
 import type { TSinchSelect } from '@saas/components/select'
 import type { Meta, Story } from '@storybook/html'
 import '@saas/components/select'
@@ -65,17 +66,10 @@ const Template: Story<TSinchSelect> = ({
     disabled,
   }, updateArgs] = useArgs()
 
+  const $wrapper = useStoryWrapper()
   const inputRef = useRef<(HTMLElement & TSinchSelect) | null>(null)
-  const wrapperRef = useRef<(HTMLElement) | null>(null)
 
   if (inputRef.current === null) {
-    const $wrapper = document.createElement('div')
-
-    $wrapper.style.height = '300px'
-    $wrapper.style.display = 'flex'
-    $wrapper.style.justifyContent = 'center'
-    $wrapper.style.alignItems = 'center'
-
     const $input = document.createElement('sinch-select')
 
     $input.innerHTML = `
@@ -96,9 +90,7 @@ const Template: Story<TSinchSelect> = ({
     }
 
     $wrapper.appendChild($input)
-
     inputRef.current = $input
-    wrapperRef.current = $wrapper
   }
 
   const $input = inputRef.current!
@@ -111,7 +103,7 @@ const Template: Story<TSinchSelect> = ({
   $input.invalidText = invalidText
   $input.disabled = disabled
 
-  return wrapperRef.current!
+  return $wrapper
 }
 
 export const Select = Template.bind({})

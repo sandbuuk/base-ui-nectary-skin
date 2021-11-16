@@ -20,7 +20,7 @@ const Template: Story<TSinchButton> = ({ onClick }) => {
   const [{ type, text, disabled, small }] = useArgs()
   const buttonRef = useRef<(HTMLElement & TSinchButton) | null>(null)
 
-  if (buttonRef.current == null) {
+  if (buttonRef.current === null) {
     const $button = document.createElement('sinch-button')
 
     $button.onClick = onClick

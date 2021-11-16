@@ -1,4 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
+import { useStoryWrapper } from './use-story-wrapper'
 import type { TSinchTextarea } from '@saas/components/textarea'
 import type { Meta, Story } from '@storybook/html'
 import '@saas/components/input-tooltip'
@@ -62,6 +63,7 @@ const Template: Story<TSinchTextarea> = ({ onChange }) => {
     invalidText,
     disabled,
   }, updateArgs] = useArgs()
+  const $wrapper = useStoryWrapper()
   const inputRef = useRef<(HTMLElement & TSinchTextarea) | null>(null)
 
   if (inputRef.current === null) {
@@ -74,6 +76,7 @@ const Template: Story<TSinchTextarea> = ({ onChange }) => {
       updateArgs({ value: newValue })
     }
 
+    $wrapper.appendChild($input)
     inputRef.current = $input
   }
 
@@ -87,7 +90,7 @@ const Template: Story<TSinchTextarea> = ({ onChange }) => {
   $input.invalidText = invalidText
   $input.disabled = disabled
 
-  return $input
+  return $wrapper
 }
 
 export const Textarea = Template.bind({})
