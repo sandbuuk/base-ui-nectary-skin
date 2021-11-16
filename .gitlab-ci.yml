@@ -1,0 +1,17 @@
+image: node:16
+
+cache:
+  paths:
+    - node_modules/
+    - .yarn
+
+stages:
+  - lint
+
+Lint:
+  stage: lint
+  before_script:
+    - yarn config set cache-folder .yarn
+    - yarn install --frozen-lockfile
+  script:
+    - yarn lint
