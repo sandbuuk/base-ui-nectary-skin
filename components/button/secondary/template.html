@@ -1,0 +1,60 @@
+<style>
+  :host {
+    --sinch-color-button-secondary-background: var(--sinch-color-snow-100);
+    --sinch-color-button-secondary-background-hover: var(--sinch-color-tropical-100);
+    --sinch-color-button-secondary-background-focus: var(--sinch-color-tropical-100);
+    --sinch-color-button-secondary-background-active: var(--sinch-color-tropical-100);
+    --sinch-color-button-secondary-background-disabled: var(--sinch-color-snow-100);
+    --sinch-color-button-secondary-text: var(--sinch-color-tropical-500);
+    --sinch-color-button-secondary-text-hover: var(--sinch-color-tropical-500);
+    --sinch-color-button-secondary-text-focus: var(--sinch-color-tropical-500);
+    --sinch-color-button-secondary-text-active: var(--sinch-color-tropical-500);
+    --sinch-color-button-secondary-text-disabled: var(--sinch-color-tropical-100);
+    --sinch-color-button-secondary-border: var(--sinch-color-tropical-500);
+    --sinch-color-button-secondary-border-hover: var(--sinch-color-tropical-500);
+    --sinch-color-button-secondary-border-focus: var(--sinch-color-tropical-700);
+    --sinch-color-button-secondary-border-active: var(--sinch-color-tropical-500);
+    --sinch-color-button-secondary-border-disabled: var(--sinch-color-tropical-100);
+  }
+
+  button {
+    all: initial;
+    padding: 0 24px;
+    line-height: 48px;
+    color: var(--sinch-color-button-secondary-text);
+    background-color: var(--sinch-color-button-secondary-background);
+    box-shadow: 0 0 0 1px var(--sinch-color-button-secondary-border) inset;
+    border-radius: 4px;
+  }
+
+  button:hover {
+    color: var(--sinch-color-button-secondary-text-hover);
+    background-color: var(--sinch-color-button-secondary-background-hover);
+    box-shadow: 0 0 0 1px var(--sinch-color-button-secondary-border-hover) inset;
+  }
+
+  button:focus {
+    color: var(--sinch-color-button-secondary-text-focus);
+    background-color: var(--sinch-color-button-secondary-background-focus);
+    box-shadow: 0 0 0 2px var(--sinch-color-button-secondary-border-focus) inset;
+  }
+
+  button:active {
+    color: var(--sinch-color-button-secondary-text-active);
+    background-color: var(--sinch-color-button-secondary-background-active);
+    box-shadow: 0 0 0 2px var(--sinch-color-button-secondary-border-active) inset;
+  }
+
+  button[disabled] {
+    color: var(--sinch-color-button-secondary-text-disabled);
+    background-color: var(--sinch-color-button-secondary-background-disabled);
+    box-shadow: 0 0 0 1px var(--sinch-color-button-secondary-border-disabled) inset;
+  }
+
+  :host([small]) > button {
+    line-height: 32px;
+    padding: 0 16px;
+  }
+</style>
+
+<button/>

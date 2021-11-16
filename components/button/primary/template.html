@@ -1,28 +1,54 @@
 <style>
+  :host {
+    --sinch-color-button-primary-background: var(--sinch-color-tropical-500);
+    --sinch-color-button-primary-background-hover: var(--sinch-color-tropical-400);
+    --sinch-color-button-primary-background-focus: var(--sinch-color-tropical-600);
+    --sinch-color-button-primary-background-active: var(--sinch-color-tropical-600);
+    --sinch-color-button-primary-background-disabled: var(--sinch-color-tropical-100);
+    --sinch-color-button-primary-text: var(--sinch-color-text-inverted);
+    --sinch-color-button-primary-text-hover: var(--sinch-color-text-inverted);
+    --sinch-color-button-primary-text-focus: var(--sinch-color-text-inverted);
+    --sinch-color-button-primary-text-active: var(--sinch-color-text-inverted);
+    --sinch-color-button-primary-text-disabled: var(--sinch-color-text-inverted);
+    --sinch-color-button-primary-border: var(--sinch-color-transparent);
+    --sinch-color-button-primary-border-hover: var(--sinch-color-transparent);
+    --sinch-color-button-primary-border-focus: var(--sinch-color-tropical-700);
+    --sinch-color-button-primary-border-active: var(--sinch-color-transparent);
+    --sinch-color-button-primary-border-disabled: var(--sinch-color-transparent);
+  }
+
   button {
     all: initial;
-    background-color: var(--sinch-color-tropical-500);
-    color: var(--sinch-color-text-inverted);
+    color: var(--sinch-color-button-primary-text);
+    background-color: var(--sinch-color-button-primary-background);
     line-height: 48px;
     padding: 0 24px;
     border-radius: 4px;
+    /* box-shadow: 0 0 0 0px var(--sinch-color-button-primary-border) inset; */
   }
 
   button:hover {
-    background-color: var(--sinch-color-tropical-400);
-  }
-
-  button:active {
-    background-color: var(--sinch-color-tropical-600);
+    color: var(--sinch-color-button-primary-text-hover);
+    background-color: var(--sinch-color-button-primary-background-hover);
+    /* box-shadow: 0 0 0 0px var(--sinch-color-button-primary-border-hover) inset; */
   }
 
   button:focus {
-    background-color: var(--sinch-color-tropical-600);
-    box-shadow: 0 0 0 2px #003D3D inset;
+    color: var(--sinch-color-button-primary-text-focus);
+    background-color: var(--sinch-color-button-primary-background-focus);
+    box-shadow: 0 0 0 2px var(--sinch-color-button-primary-border-focus) inset;
+  }
+
+  button:active {
+    color: var(--sinch-color-button-primary-text-active);
+    background-color: var(--sinch-color-button-primary-background-active);
+    /* box-shadow: 0 0 0 0px var(--sinch-color-button-primary-border-active) inset; */
   }
 
   button[disabled] {
-    background-color: var(--sinch-color-tropical-100);
+    color: var(--sinch-color-button-primary-text-disabled);
+    background-color: var(--sinch-color-button-primary-background-disabled);
+    /* box-shadow: 0 0 0 0px var(--sinch-color-button-primary-border-disabled) inset; */
   }
 
   :host([small]) > button {

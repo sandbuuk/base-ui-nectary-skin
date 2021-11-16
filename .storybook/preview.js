@@ -13,6 +13,17 @@ export const parameters = {
      },
   },
   viewMode: 'docs',
+  options: {
+    storySort: {
+      order: [
+        'Components',
+        [
+          'Button',
+          ['Primary', 'Secondary', 'Cta', 'Destructive']
+        ]
+      ],
+    },
+  },
   // previewTabs: {
   //   canvas: {
   //     hidden: true,

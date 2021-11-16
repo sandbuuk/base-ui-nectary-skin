@@ -1,0 +1,60 @@
+<style>
+  :host {
+    --sinch-color-button-destructive-background: var(--sinch-color-snow-100);
+    --sinch-color-button-destructive-background-hover: var(--sinch-color-snow-100);
+    --sinch-color-button-destructive-background-focus: var(--sinch-color-error-200);
+    --sinch-color-button-destructive-background-active: var(--sinch-color-error-200);
+    --sinch-color-button-destructive-background-disabled: var(--sinch-color-snow-100);
+    --sinch-color-button-destructive-text: var(--sinch-color-text-invalid);
+    --sinch-color-button-destructive-text-hover: var(--sinch-color-text-invalid);
+    --sinch-color-button-destructive-text-focus: var(--sinch-color-text-invalid);
+    --sinch-color-button-destructive-text-active: var(--sinch-color-text-invalid);
+    --sinch-color-button-destructive-text-disabled: var(--sinch-color-error-200);
+    --sinch-color-button-destructive-border: var(--sinch-color-error-500);
+    --sinch-color-button-destructive-border-hover: var(--sinch-color-error-500);
+    --sinch-color-button-destructive-border-focus: var(--sinch-color-error-800);
+    --sinch-color-button-destructive-border-active: var(--sinch-color-error-500);
+    --sinch-color-button-destructive-border-disabled: var(--sinch-color-error-200);
+  }
+
+  button {
+    all: initial;
+    padding: 0 24px;
+    line-height: 48px;
+    color: var(--sinch-color-button-destructive-text);
+    background-color: var(--sinch-color-button-destructive-background);
+    box-shadow: 0 0 0 1px var(--sinch-color-button-destructive-border) inset;
+    border-radius: 4px;
+  }
+
+  button:hover {
+    color: var(--sinch-color-button-destructive-text-hover);
+    background-color: var(--sinch-color-button-destructive-background-hover);
+    box-shadow: 0 0 0 2px var(--sinch-color-button-destructive-border-hover) inset;
+  }
+
+  button:focus {
+    color: var(--sinch-color-button-destructive-text-focus);
+    background-color: var(--sinch-color-button-destructive-background-focus);
+    box-shadow: 0 0 0 2px var(--sinch-color-button-destructive-border-focus) inset;
+  }
+
+  button:active {
+    color: var(--sinch-color-button-destructive-text-active);
+    background-color: var(--sinch-color-button-destructive-background-active);
+    box-shadow: 0 0 0 2px var(--sinch-color-button-destructive-border-active) inset;
+  }
+
+  button[disabled] {
+    color: var(--sinch-color-button-destructive-text-disabled);
+    background-color: var(--sinch-color-button-destructive-background-disabled);
+    box-shadow: 0 0 0 1px var(--sinch-color-button-destructive-border-disabled) inset;
+  }
+
+  :host([small]) > button {
+    line-height: 32px;
+    padding: 0 16px;
+  }
+</style>
+
+<button/>

@@ -1,10 +1,10 @@
 import type { TSinchButtonPrimary } from '@saas/components/button/primary'
-import type { Meta, Story } from '@storybook/html'
+import type { Story, Meta } from '@storybook/html'
 import '@saas/components/theme.css'
 import '@saas/components/button/primary'
 
 export default {
-  title: 'Button',
+  title: 'Components/Button/Primary',
   argTypes: {
     value: { control: 'text' },
     disabled: { action: 'boolean' },
@@ -24,18 +24,18 @@ const Template: Story<TSinchButtonPrimary> = ({ value, disabled, small, onClick 
   return button
 }
 
-export const ButtonPrimary = Template.bind({})
+export const Primary = Template.bind({})
 
-ButtonPrimary.args = {
+Primary.args = {
   value: 'Click me',
   disabled: false,
   small: false,
 }
 
-ButtonPrimary.parameters = {
+Primary.parameters = {
   docs: {
     source: {
-      code: '<sinch-button-primary value="Click me" onClick={setValue}></sinch-button-primary>',
+      code: '<sinch-button-primary value="Click me" onClick={onClick}></sinch-button-primary>',
     },
   },
 }
