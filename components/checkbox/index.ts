@@ -6,8 +6,8 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-checkbox', class extends HTMLElement {
-  input: HTMLInputElement
-  label: HTMLLabelElement
+  $input: HTMLInputElement
+  $label: HTMLLabelElement
   onChange!: (isChecked: boolean) => void
 
   constructor() {
@@ -17,14 +17,14 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.input = shadowRoot.querySelector('input')!
-    this.input.addEventListener('input', this.onInput)
+    this.$input = shadowRoot.querySelector('input')!
+    this.$input.addEventListener('input', this.onInput)
 
-    this.label = shadowRoot.querySelector('label')!
+    this.$label = shadowRoot.querySelector('label')!
   }
 
   disconnectedCallback() {
-    this.input.removeEventListener('click', this.onInput)
+    this.$input.removeEventListener('click', this.onInput)
   }
 
   static get observedAttributes() {
@@ -81,20 +81,20 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     return this.getAttribute('text') ?? ''
   }
 
-  attributeChangedCallback(name: string, oldVal: boolean | string, newVal: boolean | string) {
+  attributeChangedCallback(name: string, _: boolean | string, newVal: boolean | string) {
     switch (name) {
       case 'text': {
-        this.label.textContent = String(newVal)
+        this.$label.textContent = String(newVal)
 
         break
       }
       case 'checked': {
-        this.input.checked = newVal === '' || Boolean(newVal)
+        this.$input.checked = newVal === '' || Boolean(newVal)
 
         break
       }
       case 'disabled': {
-        this.input.disabled = newVal === '' || Boolean(newVal)
+        this.$input.disabled = newVal === '' || Boolean(newVal)
 
         break
       }
@@ -105,16 +105,16 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     const onChange = getEventHandler(this, 'onChange')
 
     if (onChange != null) {
-      onChange(this.input.checked)
+      onChange(this.$input.checked)
     }
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: this.input.checked,
+        detail: this.$input.checked,
       })
     )
 
-    this.input.checked = this.checked
+    this.$input.checked = this.checked
 
     e.stopPropagation()
   }
