@@ -6,16 +6,16 @@ import '@saas/components/button/cta'
 export default {
   title: 'Components/Button/Cta',
   argTypes: {
-    value: { control: 'text' },
+    text: { control: 'text' },
     disabled: { action: 'boolean' },
     onClick: { action: 'onClick' },
   },
 } as Meta
 
-const Template: Story<TSinchButtonCta> = ({ value, disabled, onClick }) => {
+const Template: Story<TSinchButtonCta> = ({ text, disabled, onClick }) => {
   const button = document.createElement('sinch-button-cta')
 
-  button.value = value
+  button.text = text
   button.disabled = disabled
   button.onClick = onClick
 
@@ -25,14 +25,14 @@ const Template: Story<TSinchButtonCta> = ({ value, disabled, onClick }) => {
 export const Cta = Template.bind({})
 
 Cta.args = {
-  value: 'Click me',
+  text: 'Click me',
   disabled: false,
 }
 
 Cta.parameters = {
   docs: {
     source: {
-      code: '<sinch-button-cta value="Click me" onClick={onClick}></sinch-button-cta>',
+      code: '<sinch-button-cta text="Click me" onClick={onClick}></sinch-button-cta>',
     },
   },
 }

@@ -6,17 +6,17 @@ import '@saas/components/button/destructive'
 export default {
   title: 'Components/Button/Destructive',
   argTypes: {
-    value: { control: 'text' },
+    text: { control: 'text' },
     disabled: { action: 'boolean' },
     small: { action: 'boolean' },
     onClick: { action: 'onClick' },
   },
 } as Meta
 
-const Template: Story<TSinchButtonDestructive> = ({ value, disabled, small, onClick }) => {
+const Template: Story<TSinchButtonDestructive> = ({ text, disabled, small, onClick }) => {
   const button = document.createElement('sinch-button-destructive')
 
-  button.value = value
+  button.text = text
   button.disabled = disabled
   button.small = small
   button.onClick = onClick
@@ -27,7 +27,7 @@ const Template: Story<TSinchButtonDestructive> = ({ value, disabled, small, onCl
 export const Destructive = Template.bind({})
 
 Destructive.args = {
-  value: 'Click me',
+  text: 'Click me',
   disabled: false,
   small: false,
 }
@@ -35,7 +35,7 @@ Destructive.args = {
 Destructive.parameters = {
   docs: {
     source: {
-      code: '<sinch-button-destructive value="Click me" onClick={onClick}></sinch-button-destructive>',
+      code: '<sinch-button-destructive text="Click me" onClick={onClick}></sinch-button-destructive>',
     },
   },
 }

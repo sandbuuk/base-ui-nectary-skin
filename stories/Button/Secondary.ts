@@ -6,17 +6,17 @@ import '@saas/components/button/secondary'
 export default {
   title: 'Components/Button/Secondary',
   argTypes: {
-    value: { control: 'text' },
+    text: { control: 'text' },
     disabled: { action: 'boolean' },
     small: { action: 'boolean' },
     onClick: { action: 'onClick' },
   },
 } as Meta
 
-const Template: Story<TSinchButtonSecondary> = ({ value, disabled, small, onClick }) => {
+const Template: Story<TSinchButtonSecondary> = ({ text, disabled, small, onClick }) => {
   const button = document.createElement('sinch-button-secondary')
 
-  button.value = value
+  button.text = text
   button.disabled = disabled
   button.small = small
   button.onClick = onClick
@@ -27,7 +27,7 @@ const Template: Story<TSinchButtonSecondary> = ({ value, disabled, small, onClic
 export const Secondary = Template.bind({})
 
 Secondary.args = {
-  value: 'Click me',
+  text: 'Click me',
   disabled: false,
   small: false,
 }
@@ -35,7 +35,7 @@ Secondary.args = {
 Secondary.parameters = {
   docs: {
     source: {
-      code: '<sinch-button-secondary value="Click me" onClick={onClick}></sinch-button-secondary>',
+      code: '<sinch-button-secondary text="Click me" onClick={onClick}></sinch-button-secondary>',
     },
   },
 }
