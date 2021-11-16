@@ -49,4 +49,25 @@
   --sinch-color-warning-500: #F35B1C;
   --sinch-color-warning-200: #FFE8D6;
   --sinch-color-transparent: transparent;
+
+  --sinch-font-family-title: 'Gilroy', 'Arial', 'sans-serif';
+  --sinch-font-family-body: 'Arial', 'sans-serif';
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 600;
+  font-style: normal;
+  src:
+    local('Gilroy-SemiBold'),
+    url('https://d2vu40klajma73.cloudfront.net/Gilroy-SemiBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 700;
+  font-style: normal;
+  src:
+    local('Gilroy-Bold'),
+    url('https://d2vu40klajma73.cloudfront.net/Gilroy-Bold.woff') format('woff');
 }
