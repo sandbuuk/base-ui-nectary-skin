@@ -29,7 +29,9 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     this.$additionalText = shadowRoot.querySelector('#additional')!
     this.$invalidText = shadowRoot.querySelector('#invalid')!
     this.$selectSlot = shadowRoot.querySelector('slot[name="select"]')!
+  }
 
+  connectedCallback() {
     this.$button.addEventListener('click', this.onButtonClick)
     this.$listbox.addEventListener('blur', this.onOutside, true)
     this.$listbox.addEventListener('click', this.onListboxClick, true)

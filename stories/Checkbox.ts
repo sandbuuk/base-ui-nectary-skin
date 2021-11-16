@@ -1,3 +1,4 @@
+import { useArgs, useRef } from '@storybook/addons'
 import type { TSinchCheckbox } from '@saas/components/checkbox'
 import type { Meta, Story } from '@storybook/html'
 import '@saas/components/checkbox'
@@ -13,21 +14,29 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchCheckbox> = ({ checked, indeterminate, disabled, text, onChange }) => {
-  const checkbox = document.createElement('sinch-checkbox')
+const Template: Story<TSinchCheckbox> = ({ onChange }) => {
+  const [{ checked, indeterminate, disabled, text }, updateArgs] = useArgs()
+  const checkboxRef = useRef<(HTMLElement & TSinchCheckbox) | null>(null)
 
-  checkbox.checked = checked
-  checkbox.indeterminate = indeterminate
-  checkbox.disabled = disabled
-  checkbox.text = text
+  if (checkboxRef.current === null) {
+    const $checkbox = document.createElement('sinch-checkbox')
 
-  checkbox.onChange = (newIsChecked) => {
-    checkbox.checked = newIsChecked
+    $checkbox.onChange = (isChecked) => {
+      onChange(isChecked)
+      updateArgs({ checked: isChecked })
+    }
 
-    onChange(newIsChecked)
+    checkboxRef.current = $checkbox
   }
 
-  return checkbox
+  const $checkbox = checkboxRef.current!
+
+  $checkbox.checked = checked
+  $checkbox.indeterminate = indeterminate
+  $checkbox.disabled = disabled
+  $checkbox.text = text
+
+  return $checkbox
 }
 
 export const Checkbox = Template.bind({})

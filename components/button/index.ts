@@ -18,8 +18,14 @@ defineCustomElement('sinch-button', class extends HTMLElement {
 
     this.$button = shadowRoot.querySelector('button')!
     this.$text = shadowRoot.querySelector('#text')!
+  }
 
+  connectedCallback() {
     this.$button.addEventListener('click', this.onClick)
+  }
+
+  disconnectedCallback() {
+    this.$button.removeEventListener('click', this.onClick)
   }
 
   static get observedAttributes() {
@@ -83,10 +89,6 @@ defineCustomElement('sinch-button', class extends HTMLElement {
         break
       }
     }
-  }
-
-  disconnectedCallback() {
-    this.$button.removeEventListener('click', this.onClick)
   }
 
   onClick = (e: MouseEvent) => {

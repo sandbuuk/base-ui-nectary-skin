@@ -1,3 +1,4 @@
+import { useArgs, useRef } from '@storybook/addons'
 import type { TSinchButton } from '@saas/components/button'
 import type { Story, Meta } from '@storybook/html'
 import '@saas/components/theme.css'
@@ -15,16 +16,26 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchButton> = ({ type, text, disabled, small, onClick }) => {
-  const button = document.createElement('sinch-button')
+const Template: Story<TSinchButton> = ({ onClick }) => {
+  const [{ type, text, disabled, small }] = useArgs()
+  const buttonRef = useRef<(HTMLElement & TSinchButton) | null>(null)
 
-  button.type = type
-  button.text = text
-  button.disabled = disabled
-  button.small = small
-  button.onClick = onClick
+  if (buttonRef.current == null) {
+    const $button = document.createElement('sinch-button')
 
-  return button
+    $button.onClick = onClick
+
+    buttonRef.current = $button
+  }
+
+  const $button = buttonRef.current!
+
+  $button.type = type
+  $button.text = text
+  $button.disabled = disabled
+  $button.small = small
+
+  return $button
 }
 
 export const Button = Template.bind({})

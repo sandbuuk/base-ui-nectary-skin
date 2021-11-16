@@ -1,3 +1,4 @@
+import { useArgs, useRef } from '@storybook/addons'
 import type { TSinchSelect } from '@saas/components/select'
 import type { Meta, Story } from '@storybook/html'
 // https://github.com/storybookjs/storybook/issues/11657
@@ -54,40 +55,50 @@ export default {
 } as Meta
 
 const Template: Story<TSinchSelect> = ({
-  value,
-  label,
-  placeholder,
-  additionalText,
-  optionalText,
-  invalidText,
-  disabled,
   onChange,
 }) => {
-  // const [{ value }, updateArgs] = useArgs()
-  const input = document.createElement('sinch-select')
+  const [{
+    value,
+    label,
+    placeholder,
+    additionalText,
+    optionalText,
+    invalidText,
+    disabled,
+  }, updateArgs] = useArgs()
 
-  input.innerHTML = `
-    <sinch-select-option value="1" text="Option 1 value" slot="select"></sinch-select-option>
-    <sinch-select-option value="2" text="Option 2 value" disabled slot="select"></sinch-select-option>
-    <sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
-  `
+  const inputRef = useRef<(HTMLElement & TSinchSelect) | null>(null)
 
-  input.value = value
-  input.label = label
-  input.placeholder = placeholder
-  input.additionalText = additionalText
-  input.optionalText = optionalText
-  input.invalidText = invalidText
-  input.disabled = disabled
+  if (inputRef.current === null) {
+    const $input = document.createElement('sinch-select')
 
-  input.onChange = (newValue) => {
-    input.value = newValue
+    $input.innerHTML = `
+      <sinch-input-tooltip text="Tooltip text long" slot="tooltip"></sinch-input-tooltip>
+      <sinch-select-option value="1" text="Option 1 value" slot="select"></sinch-select-option>
+      <sinch-select-option value="2" text="Option 2 value" slot="select" disabled></sinch-select-option>
+      <sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
+      <sinch-select-option value="4" text="Option 4 value" slot="select"></sinch-select-option>
+    `
 
-    onChange(newValue)
-    // updateArgs({ value: newValue })
+    $input.onChange = (newValue) => {
+      onChange(newValue)
+      updateArgs({ value: newValue })
+    }
+
+    inputRef.current = $input
   }
 
-  return input
+  const $input = inputRef.current!
+
+  $input.value = value
+  $input.label = label
+  $input.placeholder = placeholder
+  $input.additionalText = additionalText
+  $input.optionalText = optionalText
+  $input.invalidText = invalidText
+  $input.disabled = disabled
+
+  return $input
 }
 
 export const Select = Template.bind({})
@@ -104,7 +115,15 @@ Select.args = {
 Select.parameters = {
   docs: {
     source: {
-      code: '<sinch-select value={value} onChange={setValue}></sinch-input>',
+      code: `
+<sinch-select value={value} onChange={setValue}>
+  <sinch-input-tooltip text="Tooltip text long" slot="tooltip"></sinch-input-tooltip>
+  <sinch-select-option value="1" text="Option 1 value" slot="select"></sinch-select-option>
+  <sinch-select-option value="2" text="Option 2 value" slot="select" disabled></sinch-select-option>
+  <sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
+  <sinch-select-option value="4" text="Option 4 value" slot="select"></sinch-select-option>
+</sinch-input>
+`,
     },
   },
 }

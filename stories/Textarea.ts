@@ -1,3 +1,4 @@
+import { useArgs, useRef } from '@storybook/addons'
 import type { TSinchTextarea } from '@saas/components/textarea'
 import type { Meta, Story } from '@storybook/html'
 // https://github.com/storybookjs/storybook/issues/11657
@@ -53,38 +54,42 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchTextarea> = ({
-  value,
-  label,
-  placeholder,
-  additionalText,
-  optionalText,
-  invalidText,
-  disabled,
-  onChange,
-}) => {
-  // const [{ value }, updateArgs] = useArgs()
-  const input = document.createElement('sinch-textarea')
+const Template: Story<TSinchTextarea> = ({ onChange }) => {
+  const [{
+    value,
+    label,
+    placeholder,
+    additionalText,
+    optionalText,
+    invalidText,
+    disabled,
+  }, updateArgs] = useArgs()
+  const inputRef = useRef<(HTMLElement & TSinchTextarea) | null>(null)
 
-  input.innerHTML = `
-  <sinch-input-tooltip text="Tooltip text long"/>`
+  if (inputRef.current === null) {
+    const $input = document.createElement('sinch-textarea')
 
-  input.value = value
-  input.label = label
-  input.placeholder = placeholder
-  input.additionalText = additionalText
-  input.optionalText = optionalText
-  input.invalidText = invalidText
-  input.disabled = disabled
+    $input.innerHTML = '<sinch-input-tooltip text="Tooltip text long"></sinch-input-tooltip>'
 
-  input.onChange = (newValue) => {
-    input.value = newValue
+    $input.onChange = (newValue) => {
+      onChange(newValue)
+      updateArgs({ value: newValue })
+    }
 
-    onChange(newValue)
-    // updateArgs({ value: newValue })
+    inputRef.current = $input
   }
 
-  return input
+  const $input = inputRef.current!
+
+  $input.value = value
+  $input.label = label
+  $input.placeholder = placeholder
+  $input.additionalText = additionalText
+  $input.optionalText = optionalText
+  $input.invalidText = invalidText
+  $input.disabled = disabled
+
+  return $input
 }
 
 export const Textarea = Template.bind({})
@@ -102,7 +107,7 @@ Textarea.args = {
 Textarea.parameters = {
   docs: {
     source: {
-      code: '<sinch-textarea value={value} onChange={setValue}></sinch-textarea>',
+      code: '<sinch-textarea value={value} onChange={setValue}>\n  <sinch-input-tooltip text="Tooltip text long"></sinch-input-tooltip>\n</sinch-textarea>',
     },
   },
 }

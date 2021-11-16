@@ -18,13 +18,15 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.$input = shadowRoot.querySelector('input')!
-    this.$input.addEventListener('input', this.onInput)
-
     this.$label = shadowRoot.querySelector('label')!
   }
 
+  connectedCallback() {
+    this.$input.addEventListener('input', this.onInput)
+  }
+
   disconnectedCallback() {
-    this.$input.removeEventListener('click', this.onInput)
+    this.$input.removeEventListener('input', this.onInput)
   }
 
   static get observedAttributes() {

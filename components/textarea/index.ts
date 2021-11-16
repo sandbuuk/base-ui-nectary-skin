@@ -25,12 +25,14 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
     this.$optionalText = shadowRoot.querySelector('#optional')!
     this.$additionalText = shadowRoot.querySelector('#additional')!
     this.$invalidText = shadowRoot.querySelector('#invalid')!
+  }
 
+  connectedCallback() {
     this.$input.addEventListener('input', this.onInput)
   }
 
   disconnectedCallback() {
-    this.$input.removeEventListener('click', this.onInput)
+    this.$input.removeEventListener('input', this.onInput)
   }
 
   static get observedAttributes() {

@@ -1,5 +1,6 @@
 import { defineCustomElement } from '../utils'
 import templateHTML from './template.html'
+import '../icon/tooltip'
 
 const template = document.createElement('template')
 
@@ -16,9 +17,6 @@ defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.$tooltipText = shadowRoot.querySelector('#text')!
-  }
-
-  disconnectedCallback() {
   }
 
   static get observedAttributes() {

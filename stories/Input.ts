@@ -1,3 +1,4 @@
+import { useArgs, useRef } from '@storybook/addons'
 import type { TSinchInput } from '@saas/components/input'
 import type { Meta, Story } from '@storybook/html'
 // https://github.com/storybookjs/storybook/issues/11657
@@ -53,38 +54,42 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchInput> = ({
-  value,
-  label,
-  placeholder,
-  additionalText,
-  optionalText,
-  invalidText,
-  disabled,
-  onChange,
-}) => {
-  // const [{ value }, updateArgs] = useArgs()
-  const input = document.createElement('sinch-input')
+const Template: Story<TSinchInput> = ({ onChange }) => {
+  const [{
+    value,
+    label,
+    placeholder,
+    additionalText,
+    optionalText,
+    invalidText,
+    disabled,
+  }, updateArgs] = useArgs()
+  const inputRef = useRef<(HTMLElement & TSinchInput) | null>(null)
 
-  input.innerHTML = `
-  <sinch-input-tooltip text="Tooltip text long"/>`
+  if (inputRef.current == null) {
+    const $input = document.createElement('sinch-input')
 
-  input.value = value
-  input.label = label
-  input.placeholder = placeholder
-  input.additionalText = additionalText
-  input.optionalText = optionalText
-  input.invalidText = invalidText
-  input.disabled = disabled
+    $input.innerHTML = '<sinch-input-tooltip text="Tooltip text long"></sinch-input-tooltip>'
 
-  input.onChange = (newValue) => {
-    input.value = newValue
+    $input.onChange = (newValue) => {
+      onChange(newValue)
+      updateArgs({ value: newValue })
+    }
 
-    onChange(newValue)
-    // updateArgs({ value: newValue })
+    inputRef.current = $input
   }
 
-  return input
+  const $input = inputRef.current!
+
+  $input.value = value
+  $input.label = label
+  $input.placeholder = placeholder
+  $input.additionalText = additionalText
+  $input.optionalText = optionalText
+  $input.invalidText = invalidText
+  $input.disabled = disabled
+
+  return $input
 }
 
 export const Input = Template.bind({})
@@ -102,7 +107,7 @@ Input.args = {
 Input.parameters = {
   docs: {
     source: {
-      code: '<sinch-input value={value} onChange={setValue}></sinch-input>',
+      code: '<sinch-input value={value} onChange={setValue}>\n  <sinch-input-tooltip text="Tooltip text long"></sinch-input-tooltip>\n</sinch-input>',
     },
   },
 }
