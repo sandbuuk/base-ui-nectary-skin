@@ -56,7 +56,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 
   set value(value: string) {
-    this.setAttribute('value', value)
+    this.setAttribute('value', value.trim())
   }
 
   get value(): string {
@@ -137,10 +137,20 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return attrValue === '' || Boolean(attrValue)
   }
 
-  attributeChangedCallback(name: string, _: string, newVal: string) {
+  attributeChangedCallback(name: string, oldVal: string, newVal: string) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'value': {
         this.onValueChange(newVal)
+
+        break
+      }
+
+      case 'placeholder': {
+        this.onValueChange(this.value)
 
         break
       }
@@ -186,7 +196,14 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 
   onListboxClick = (e: Event) => {
-    if (e.target === null || !(e.target instanceof Element)) {
+    // Listbox overlaps button and label. Clicking on listbox should collapse it.
+    if (e.target === this.$listbox) {
+      this.onCollapse()
+
+      return
+    }
+
+    if (!(e.target instanceof Element)) {
       return
     }
 
@@ -210,19 +227,9 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     }
 
     if (e.target.type === 'submit' || this.lastKeyboardHoverId === e.target.id) {
-      console.log('ACTIVATE', this.lastKeyboardHoverId)
+      const $input = this.$listbox.querySelector<HTMLInputElement>(`#${this.lastKeyboardHoverId}`)!
 
-      const $input = this.$listbox.querySelector(`#${this.lastKeyboardHoverId}`)! as HTMLInputElement
-
-      // Check single input
-      this.clearCheckedAttributes()
-      $input.setAttribute('data-checked', '')
-
-      const onChange = getEventHandler(this, 'onChange')
-
-      if (onChange != null) {
-        onChange($input.value)
-      }
+      getEventHandler(this, 'onChange')?.($input.value)
 
       this.dispatchEvent(
         new CustomEvent('change', {
@@ -230,7 +237,8 @@ defineCustomElement('sinch-select', class extends HTMLElement {
         })
       )
 
-      this.onCollapse()
+      // This collapses the listbox
+      this.$button.focus()
     }
 
     this.lastKeyboardHoverId = e.target.id
@@ -265,7 +273,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     })
 
     // Create Form Submit if not created
-    if (this.$listboxSubmit == null) {
+    if (this.$listboxSubmit === null) {
       this.$listboxSubmit = document.createElement('input')
       this.$listboxSubmit.type = 'submit'
       this.$listboxSubmit.id = 'submit'
@@ -276,11 +284,16 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
     this.$listbox.replaceChildren($fragment)
 
+    // Update data-checked attribute and button textContent
     this.onValueChange(this.value)
   }
 
   onOutside = (e: FocusEvent) => {
-    if (e.target !== this.$listbox && !this.$listbox.contains(e.relatedTarget as Node)) {
+    if (
+      e.target !== this.$listbox &&
+      e.relatedTarget !== this.$listbox &&
+      !this.$listbox.contains(e.relatedTarget as Node | null)
+    ) {
       this.onCollapse()
     }
   }
@@ -288,11 +301,8 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   onExpand = () => {
     this.$button.setAttribute('aria-expanded', 'true')
 
-    const $input: HTMLInputElement | null = this.$listbox.querySelector(`input[value="${this.value}"]`)
-
-    if ($input != null) {
-      $input.focus()
-    }
+    // Focus selected input upon expand
+    this.$listbox.querySelector<HTMLInputElement>(`input[value="${this.value}"]`)?.focus()
   }
 
   onCollapse = () => {
@@ -300,21 +310,19 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 
   onValueChange = (value: string) => {
+    this.clearCheckedAttributes()
+
     const $input = this.$listbox.querySelector(`input[value="${value}"]`)
 
-    if ($input == null) {
+    if ($input === null) {
+      this.$button.textContent = this.placeholder
+
       return
     }
 
     $input.setAttribute('data-checked', '')
 
-    const $label = $input.nextElementSibling
-
-    if ($label != null) {
-      this.$button.textContent = $label.textContent
-    } else {
-      this.$button.textContent = this.placeholder
-    }
+    this.$button.textContent = $input.nextElementSibling!.textContent
   }
 
   clearCheckedAttributes = () => {
@@ -327,6 +335,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 export type TSinchSelect = {
   value: string,
   label: string,
+  placeholder?: string,
   optionalText?: string,
   invalidText?: string,
   additionalText?: string,

@@ -16,6 +16,10 @@ export default {
       description: 'Input value',
       control: 'text',
     },
+    placeholder: {
+      description: 'Placeholder value',
+      control: 'text',
+    },
     label: {
       description: 'Label',
       control: 'text',
@@ -52,6 +56,7 @@ export default {
 const Template: Story<TSinchSelect> = ({
   value,
   label,
+  placeholder,
   additionalText,
   optionalText,
   invalidText,
@@ -69,6 +74,7 @@ const Template: Story<TSinchSelect> = ({
 
   input.value = value
   input.label = label
+  input.placeholder = placeholder
   input.additionalText = additionalText
   input.optionalText = optionalText
   input.invalidText = invalidText
@@ -89,6 +95,7 @@ export const Select = Template.bind({})
 Select.args = {
   value: '2',
   label: 'Label',
+  placeholder: 'Placeholder',
   optionalText: 'Optional',
   additionalText: 'Additional',
   disabled: false,
