@@ -60,7 +60,9 @@
   font-style: normal;
   src:
     local('Gilroy-SemiBold'),
-    url('https://d2vu40klajma73.cloudfront.net/Gilroy-SemiBold.woff') format('woff');
+    url('https://d2vu40klajma73.cloudfront.net/Gilroy-SemiBold.woff2') format('woff2'),
+    url('https://d2vu40klajma73.cloudfront.net/Gilroy-SemiBold.woff') format('woff'),
+    url('https://d2vu40klajma73.cloudfront.net/Gilroy-SemiBold.otf') format('opentype');
 }
 
 @font-face {
@@ -69,5 +71,7 @@
   font-style: normal;
   src:
     local('Gilroy-Bold'),
-    url('https://d2vu40klajma73.cloudfront.net/Gilroy-Bold.woff') format('woff');
+    url('https://d2vu40klajma73.cloudfront.net/Gilroy-Bold.woff2') format('woff2'),
+    url('https://d2vu40klajma73.cloudfront.net/Gilroy-Bold.woff') format('woff'),
+    url('https://d2vu40klajma73.cloudfront.net/Gilroy-Bold.otf') format('opentype');
 }

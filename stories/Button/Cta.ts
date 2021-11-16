@@ -8,7 +8,6 @@ export default {
   argTypes: {
     value: { control: 'text' },
     disabled: { action: 'boolean' },
-    small: { action: 'boolean' },
     onClick: { action: 'onClick' },
   },
 } as Meta
