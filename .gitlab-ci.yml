@@ -6,13 +6,13 @@ stages:
 Lint:
   stage: lint-test
   cache:
-    - key:
-        files:
-          - yarn.lock
-        prefix: $CI_JOB_NAME
-      paths:
-        - node_modules/
-        - .yarn/
+    key:
+      files:
+        - yarn.lock
+      prefix: $CI_JOB_NAME
+    paths:
+      - node_modules/
+      - .yarn/
   before_script:
     - yarn config set cache-folder $PWD/.yarn
     - yarn install --frozen-lockfile
@@ -23,17 +23,45 @@ Test:
   stage: lint-test
   image: mcr.microsoft.com/playwright:focal
   cache:
-    - key:
-        files:
-          - yarn.lock
-        prefix: $CI_JOB_NAME
-      paths:
-        - node_modules/
-        - .yarn/
-        - .browsers/
+    key:
+      files:
+        - yarn.lock
+      prefix: $CI_JOB_NAME
+    paths:
+      - node_modules/
+      - .yarn/
+      - .browsers/
   before_script:
     - yarn config set cache-folder $PWD/.yarn
     - yarn install --frozen-lockfile
     - yarn test-playwright-install
   script:
     - yarn test
+
+Storybook:
+  # only:
+  #   - main
+  cache:
+    key:
+      files:
+        - yarn.lock
+      prefix: $CI_JOB_NAME
+    paths:
+      - node_modules/
+      - .yarn/
+  before_script:
+    - yarn config set cache-folder $PWD/.yarn
+    - yarn install --frozen-lockfile
+  script:
+    - yarn build-storybook
+    - git config --global user.email "${GIT_USER_EMAIL:-$GITLAB_USER_EMAIL}"
+    - git config --global user.name "${GIT_USER_NAME:-$GITLAB_USER_NAME}"
+    - git branch -D storybook || true
+    - git checkout --orphan storybook
+    - git reset
+    - git add public
+    - git commit -m "build storybok"
+    - git push --force origin storybook
+  artifacts:
+    paths:
+      - public

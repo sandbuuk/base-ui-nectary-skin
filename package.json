@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "storybook": "start-storybook --port 4000",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook --output-dir public",
     "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html'",
     "test": "concurrently --success=first --kill-others --raw npm:test-playwright npm:test-storybook",
     "test-playwright": "wait-on http://localhost:4000 && PLAYWRIGHT_BROWSERS_PATH=.browsers/ playwright test --browser=all",
