@@ -1,6 +1,6 @@
 node_modules/
 dist/
 *.d.ts
-!html.d.ts
+!imports.d.ts
 *.js
 !webpack.config.js
