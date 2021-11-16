@@ -30,14 +30,14 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     this.$invalidText = shadowRoot.querySelector('#invalid')!
     this.$selectSlot = shadowRoot.querySelector('slot[name="select"]')!
 
-    this.$button.addEventListener('click', this.onToggle)
+    this.$button.addEventListener('click', this.onButtonClick)
     this.$listbox.addEventListener('blur', this.onOutside, true)
     this.$listbox.addEventListener('click', this.onListboxClick, true)
     this.$selectSlot.addEventListener('slotchange', this.onSlotChange)
   }
 
   disconnectedCallback() {
-    this.$button.removeEventListener('click', this.onToggle)
+    this.$button.removeEventListener('click', this.onButtonClick)
     this.$listbox.removeEventListener('blur', this.onOutside, true)
     this.$listbox.removeEventListener('click', this.onListboxClick)
     this.$selectSlot.removeEventListener('slotchange', this.onSlotChange)
@@ -181,12 +181,16 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       case 'disabled': {
         this.$button.disabled = newVal === '' || Boolean(newVal)
 
+        if (this.$button.disabled) {
+          this.onCollapse()
+        }
+
         break
       }
     }
   }
 
-  onToggle = (e: Event) => {
+  onButtonClick = (e: Event) => {
     if (this.$button.ariaExpanded !== 'true') {
       this.onExpand()
     }
@@ -238,19 +242,14 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       return
     }
 
-    // Disable radio checked value
-    // Space key sends click events only for unchecked radio
+    // Uncheck radio input
+    // Space key sends click events only for unchecked radio inputs
     e.target.checked = false
-
-    // Safari forced focus
-    if (document.activeElement !== e.target && e.target.type === 'radio') {
-      e.target.focus()
-    }
 
     if (
       // Enter key press after navigating with arrow keys
       (e.target.type === 'submit' && this.prevKeyboardFocusId !== '') ||
-      // Mouse click on option
+      // Mouse click or Space key
       // Click on input received after clicking on label
       this.prevKeyboardFocusId === e.target.id
     ) {
@@ -264,7 +263,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       this.$button.focus()
     } else {
       // Click received by navigating with arrow keys
-      this.prevKeyboardFocusId = e.target.id
+      this.focusInput(e.target)
     }
 
     e.stopPropagation()
@@ -331,8 +330,10 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     if ($input !== null && $input.disabled === false) {
       $input.setAttribute('data-checked', '')
       this.$listbox.setAttribute('aria-activedescendant', $input.id)
+      this.$button.removeAttribute('unselected')
       this.$button.textContent = $input.nextElementSibling!.textContent
     } else {
+      this.$button.setAttribute('unselected', '')
       this.$button.textContent = this.placeholder
     }
   }
