@@ -1,27 +1,22 @@
 <style>
   :host {
     display: inline-block;
+    position: relative;
     height: 96px;
     max-width: 300px;
   }
 
   #input {
-    all: initial;
+    appearance: none;
     border: 1px solid var(--sinch-color-stormy-200);
     box-sizing: border-box;
     border-radius: 2px;
     width: 100%;
-    height: 46px;
-    padding: 0 12px;
+    margin: 2px 0;
+    padding: 8px 37px 8px 12px;
     font: var(--sinch-font-body);
     color: var(--sinch-color-text-default);
-    margin-bottom: 2px;
-    margin-top: 2px;
-  }
-
-  #input::placeholder {
-    font: var(--sinch-font-body);
-    color: var(--sinch-color-text-muted);
+    outline: none;
   }
 
   #input:disabled {
@@ -29,9 +24,14 @@
     color: var(--sinch-color-stormy-100);
   }
 
-  #input:disabled::placeholder {
+  /* #input::placeholder {
+    font: var(--sinch-font-body);
+    color: var(--sinch-color-text-muted);
+  } */
+
+  /* #input:disabled::placeholder {
     color: var(--sinch-color-snow-500);
-  }
+  } */
 
   #input:focus {
     border-color: var(--sinch-color-stormy-300);
@@ -39,6 +39,14 @@
 
   :host([invalidtext]) #input:not(:disabled) {
     border-color: var(--sinch-color-text-invalid);
+  }
+
+  #dropdown-icon {
+    position: absolute;
+    right: 16px;
+    top: 43px;
+    fill: var(--sinch-color-stormy-500);
+    pointer-events: none;
   }
 
   #top,
@@ -93,7 +101,8 @@
   :host([disabled]) #label,
   :host([disabled]) #additional,
   :host([disabled]) #optional,
-  :host([disabled]) #invalid {
+  :host([disabled]) #invalid,
+  :host([disabled]) #dropdown-icon {
     color: var(--sinch-color-stormy-100);
   }
 
@@ -101,15 +110,25 @@
     align-self: center;
     margin: 0 8px;
   }
+
+  #hidden {
+    display: none;
+  }
 </style>
 
 <div id="top">
   <label id="label" for="input"></label>
-  <slot></slot>
+  <slot name="tooltip"></slot>
   <span id="optional"></span>
 </div>
-<input id="input" type="text"/>
+<select id="input"></select>
+<svg id="dropdown-icon" width="12" height="8">
+  <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
+</svg>
 <div id="bottom">
   <span id="invalid"></span>
   <span id="additional"></span>
+</div>
+<div id="hidden">
+  <slot name="select"></slot>
 </div>
