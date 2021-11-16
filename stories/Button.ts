@@ -49,7 +49,6 @@ Button.args = {
 
 Button.parameters = {
   docs: {
-    inlineStories: true,
     source: {
       code: '<sinch-button type="primary" text="Click me" onClick={onClick}></sinch-button>',
     },
