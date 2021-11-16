@@ -1,12 +1,13 @@
-import { defineCustomElement, getEventHandler } from '../../utils'
+import { defineCustomElement, getEventHandler } from '../utils'
 import templateHTML from './template.html'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-button-secondary', class extends HTMLElement {
-  button: HTMLButtonElement
+defineCustomElement('sinch-button', class extends HTMLElement {
+  $button: HTMLButtonElement
+  $text: HTMLSpanElement
 
   constructor() {
     super()
@@ -15,13 +16,22 @@ defineCustomElement('sinch-button-secondary', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.button = shadowRoot.querySelector('button')!
+    this.$button = shadowRoot.querySelector('button')!
+    this.$text = shadowRoot.querySelector('#text')!
 
-    this.button.addEventListener('click', this.onClick)
+    this.$button.addEventListener('click', this.onClick)
   }
 
   static get observedAttributes() {
     return ['text', 'disabled']
+  }
+
+  set type(value: string) {
+    this.setAttribute('type', value)
+  }
+
+  get type(): string {
+    return this.getAttribute('type') ?? ''
   }
 
   set text(text: string) {
@@ -63,12 +73,12 @@ defineCustomElement('sinch-button-secondary', class extends HTMLElement {
   attributeChangedCallback(name: string, _: unknown, newVal: unknown) {
     switch (name) {
       case 'text': {
-        this.button.textContent = String(newVal)
+        this.$text.textContent = String(newVal)
 
         break
       }
       case 'disabled': {
-        this.button.disabled = newVal === '' || Boolean(newVal)
+        this.$button.disabled = newVal === '' || Boolean(newVal)
 
         break
       }
@@ -76,25 +86,22 @@ defineCustomElement('sinch-button-secondary', class extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.button.removeEventListener('click', this.onClick)
+    this.$button.removeEventListener('click', this.onClick)
   }
 
   onClick = (e: MouseEvent) => {
-    const onClick = getEventHandler(this, 'onClick')
-
-    if (onClick != null) {
-      onClick()
-    }
+    getEventHandler(this, 'onClick')?.()
 
     this.dispatchEvent(
-      new CustomEvent('click')
+      new CustomEvent('click', { bubbles: true })
     )
 
     e.stopPropagation()
   }
 })
 
-export type TSinchButtonSecondary = {
+export type TSinchButton = {
+  type: 'primary' | 'secondary' | 'cta' | 'destructive',
   text: string,
   disabled?: boolean,
   small?: boolean,
@@ -104,11 +111,11 @@ export type TSinchButtonSecondary = {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-button-secondary': TSinchButtonSecondary,
+      'sinch-button': TSinchButton,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-button-secondary': HTMLElement & TSinchButtonSecondary,
+    'sinch-button': HTMLElement & TSinchButton,
   }
 }
