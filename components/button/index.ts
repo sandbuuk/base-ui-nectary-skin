@@ -1,5 +1,5 @@
-import templateHTML from './template.html'
 import { defineCustomElement, getEventHandler } from '../utils'
+import templateHTML from './template.html'
 
 const template = document.createElement('template')
 
@@ -7,7 +7,6 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-button', class extends HTMLElement {
   button: HTMLButtonElement
-  onClick!: () => void
 
   constructor() {
     super()
@@ -43,7 +42,7 @@ defineCustomElement('sinch-button', class extends HTMLElement {
     this.button.removeEventListener('click', this.#onClick)
   }
 
-  #onClick = (e: MouseEvent) => {
+  #onClick(e: MouseEvent) {
     const onClick = getEventHandler(this, 'onClick')
 
     if (onClick != null) {
@@ -60,17 +59,17 @@ defineCustomElement('sinch-button', class extends HTMLElement {
 
 export type TSinchButton = {
   value: string,
-  onClick: () => void
+  onClick: () => void,
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-button': TSinchButton
+      'sinch-button': TSinchButton,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-button': HTMLElement & TSinchButton
+    'sinch-button': HTMLElement & TSinchButton,
   }
 }

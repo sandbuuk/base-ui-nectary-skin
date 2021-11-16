@@ -1,5 +1,5 @@
-import templateHTML from './template.html'
 import { defineCustomElement, getEventHandler } from '../utils'
+import templateHTML from './template.html'
 
 const template = document.createElement('template')
 
@@ -43,7 +43,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     }
   }
 
-  #onInput = (e: Event) => {
+  #onInput(e: Event) {
     const onChange = getEventHandler(this, 'onChange')
 
     if (onChange != null) {
@@ -52,7 +52,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: this.input.checked
+        detail: this.input.checked,
       })
     )
 
@@ -64,17 +64,17 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
 
 export type TSinchCheckbox = {
   isChecked: boolean,
-  onChange: (isChecked: boolean) => void
+  onChange: (isChecked: boolean) => void,
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-checkbox': TSinchCheckbox
+      'sinch-checkbox': TSinchCheckbox,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-checkbox': HTMLElement & TSinchCheckbox
+    'sinch-checkbox': HTMLElement & TSinchCheckbox,
   }
 }

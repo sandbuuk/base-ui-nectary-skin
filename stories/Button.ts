@@ -1,13 +1,13 @@
-import { Meta, Story } from '@storybook/html'
 import type { TSinchButton } from '@saas/components/button'
+import type { Meta, Story } from '@storybook/html'
 import '@saas/components/button'
 
 export default {
   title: 'Button',
   argTypes: {
     value: { control: 'text' },
-    onClick: { action: 'onClick' }
-  }
+    onClick: { action: 'onClick' },
+  },
 } as Meta
 
 const Template: Story<TSinchButton> = ({ value, onClick }) => {
@@ -22,7 +22,7 @@ const Template: Story<TSinchButton> = ({ value, onClick }) => {
 export const Button = Template.bind({})
 
 Button.args = {
-  value: 'Click me'
+  value: 'Click me',
 }
 
 Button.parameters = {

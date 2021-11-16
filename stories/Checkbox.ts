@@ -1,19 +1,20 @@
-import { Meta, Story } from '@storybook/html'
 import type { TSinchCheckbox } from '@saas/components/checkbox'
+import type { Meta, Story } from '@storybook/html'
 import '@saas/components/checkbox'
 
 export default {
   title: 'Checkbox',
   argTypes: {
     isChecked: { control: 'boolean' },
-    onChange: { action: 'onChange' }
-  }
+    onChange: { action: 'onChange' },
+  },
 } as Meta
 
 const Template: Story<TSinchCheckbox> = ({ isChecked, onChange }) => {
   const checkbox = document.createElement('sinch-checkbox')
 
   checkbox.isChecked = isChecked
+
   checkbox.onChange = (newIsChecked) => {
     checkbox.isChecked = newIsChecked
 
@@ -26,7 +27,7 @@ const Template: Story<TSinchCheckbox> = ({ isChecked, onChange }) => {
 export const Checkbox = Template.bind({})
 
 Checkbox.args = {
-  isChecked: true
+  isChecked: true,
 }
 
 Checkbox.parameters = {

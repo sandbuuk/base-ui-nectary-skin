@@ -1,5 +1,5 @@
-import templateHTML from './template.html'
 import { defineCustomElement, getEventHandler } from '../utils'
+import templateHTML from './template.html'
 
 const template = document.createElement('template')
 
@@ -44,7 +44,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     }
   }
 
-  #onInput = (e: Event) => {
+  #onInput(e: Event) {
     const onChange = getEventHandler(this, 'onChange')
 
     if (onChange != null) {
@@ -53,7 +53,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: this.input.value
+        detail: this.input.value,
       })
     )
 
@@ -65,17 +65,17 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
 export type TSinchInput = {
   value: string,
-  onChange: (value: string) => void
+  onChange: (value: string) => void,
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-input': TSinchInput
+      'sinch-input': TSinchInput,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-input': HTMLElement & TSinchInput
+    'sinch-input': HTMLElement & TSinchInput,
   }
 }
