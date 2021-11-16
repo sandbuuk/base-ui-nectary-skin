@@ -6,8 +6,8 @@
     max-width: 300px;
   }
 
-  #input {
-    appearance: none;
+  #button {
+    all: initial;
     border: 1px solid var(--sinch-color-stormy-200);
     box-sizing: border-box;
     border-radius: 2px;
@@ -16,28 +16,18 @@
     padding: 8px 37px 8px 12px;
     font: var(--sinch-font-body);
     color: var(--sinch-color-text-default);
-    outline: none;
   }
 
-  #input:disabled {
+  #button:disabled {
     border-color: var(--sinch-color-snow-500);
     color: var(--sinch-color-stormy-100);
   }
 
-  /* #input::placeholder {
-    font: var(--sinch-font-body);
-    color: var(--sinch-color-text-muted);
-  } */
-
-  /* #input:disabled::placeholder {
-    color: var(--sinch-color-snow-500);
-  } */
-
-  #input:focus {
+  #button:focus {
     border-color: var(--sinch-color-stormy-300);
   }
 
-  :host([invalidtext]) #input:not(:disabled) {
+  :host([invalidtext]) #button:not(:disabled) {
     border-color: var(--sinch-color-text-invalid);
   }
 
@@ -114,14 +104,60 @@
   #hidden {
     display: none;
   }
+
+  #listbox {
+    position: absolute;
+    left: 0;
+    top: 68px;
+    width: 100%;
+    display: none;
+    list-style: none;
+    background-color: white;
+  }
+
+  #listbox > label {
+    display: block;
+  }
+
+  #listbox > input,
+  #submit {
+    all: initial;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  #listbox > label:active,
+  #listbox > label:hover,
+  #listbox > input:focus + label {
+    background-color: lightgray;
+  }
+
+  #listbox > input[data-checked] + label {
+    background-color: red;
+  }
+
+  #button[aria-expanded="true"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  #button[aria-expanded="true"] ~ #listbox {
+    display: block;
+  }
 </style>
 
 <div id="top">
-  <label id="label" for="input"></label>
+  <label id="label" for="button"></label>
   <slot name="tooltip"></slot>
   <span id="optional"></span>
 </div>
-<select id="input"></select>
+<button
+  id="button"
+  aria-haspopup="listbox"
+  aria-expanded="false"
+  aria-labelledby="label button"
+>Option 1</button>
 <svg id="dropdown-icon" width="12" height="8">
   <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
 </svg>
@@ -132,3 +168,10 @@
 <div id="hidden">
   <slot name="select"></slot>
 </div>
+<form
+  id="listbox"
+  role="listbox"
+  aria-activedescendant="option1"
+  tabindex="-1"
+  onsubmit="return false"
+></form>

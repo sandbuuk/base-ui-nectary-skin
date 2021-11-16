@@ -6,12 +6,15 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-select', class extends HTMLElement {
-  $input: HTMLSelectElement
+  $button: HTMLButtonElement
   $label: HTMLLabelElement
   $optionalText: HTMLSpanElement
   $additionalText: HTMLSpanElement
   $invalidText: HTMLSpanElement
-  onChange!: (e: any) => void
+  $selectSlot: HTMLSlotElement
+  $listbox: HTMLUListElement
+  $listboxSubmit: HTMLInputElement | null = null
+  lastKeyboardHoverId = ''
 
   constructor() {
     super()
@@ -20,40 +23,25 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$input = shadowRoot.querySelector('#input')!
+    this.$button = shadowRoot.querySelector('#button')!
+    this.$listbox = shadowRoot.querySelector('#listbox')!
     this.$label = shadowRoot.querySelector('#label')!
     this.$optionalText = shadowRoot.querySelector('#optional')!
     this.$additionalText = shadowRoot.querySelector('#additional')!
     this.$invalidText = shadowRoot.querySelector('#invalid')!
+    this.$selectSlot = shadowRoot.querySelector('slot[name="select"]')!
 
-    this.$input.addEventListener('input', this.onInput)
-
-    const slot: HTMLSlotElement = shadowRoot.querySelector('slot[name="select"]')!
-
-    slot.addEventListener('slotchange', () => {
-      const $fragment = document.createDocumentFragment()
-
-      for (const node of slot.assignedNodes()) {
-        if (node instanceof HTMLElement && node.tagName === 'SINCH-SELECT-OPTION') {
-          const $option = document.createElement('option')
-
-          $option.textContent = node.getAttribute('text') ?? ''
-          $option.value = node.getAttribute('value') ?? ''
-
-          const disabledAttributeValue = node.getAttribute('disabled')
-
-          $option.disabled = disabledAttributeValue === '' || Boolean(disabledAttributeValue)
-
-          $fragment.appendChild($option)
-        }
-      }
-
-      this.$input.replaceChildren($fragment)
-    })
+    this.$button.addEventListener('click', this.onToggle)
+    this.$listbox.addEventListener('blur', this.onOutside, true)
+    this.$listbox.addEventListener('click', this.onListboxClick, true)
+    this.$selectSlot.addEventListener('slotchange', this.onSlotChange)
   }
 
   disconnectedCallback() {
-    this.$input.removeEventListener('click', this.onInput)
+    this.$button.removeEventListener('click', this.onToggle)
+    this.$listbox.removeEventListener('blur', this.onOutside, true)
+    this.$listbox.removeEventListener('click', this.onListboxClick)
+    this.$selectSlot.removeEventListener('slotchange', this.onSlotChange)
   }
 
   static get observedAttributes() {
@@ -152,7 +140,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   attributeChangedCallback(name: string, _: string, newVal: string) {
     switch (name) {
       case 'value': {
-        this.$input.value = newVal
+        this.onValueChange(newVal)
 
         break
       }
@@ -182,29 +170,157 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       }
 
       case 'disabled': {
-        this.$input.disabled = newVal === '' || Boolean(newVal)
+        this.$button.disabled = newVal === '' || Boolean(newVal)
 
         break
       }
     }
   }
 
-  onInput = (e: Event) => {
-    const onChange = getEventHandler(this, 'onChange')
-
-    if (onChange != null) {
-      onChange(this.$input.value)
+  onToggle = (e: Event) => {
+    if (this.$button.ariaExpanded !== 'true') {
+      this.onExpand()
     }
 
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: this.$input.value,
-      })
-    )
+    e.stopPropagation()
+  }
 
-    this.$input.value = this.value
+  onListboxClick = (e: Event) => {
+    if (e.target === null || !(e.target instanceof Element)) {
+      return
+    }
+
+    if (e.target.tagName === 'LABEL') {
+      this.lastKeyboardHoverId = e.target.getAttribute('for') ?? ''
+
+      return
+    }
+
+    if (!(e.target instanceof HTMLInputElement)) {
+      return
+    }
+
+    if (e.target.type === 'radio') {
+      e.target.checked = false
+    }
+
+    // Safari focus
+    if (document.activeElement !== e.target && e.target.type === 'radio') {
+      e.target.focus()
+    }
+
+    if (e.target.type === 'submit' || this.lastKeyboardHoverId === e.target.id) {
+      console.log('ACTIVATE', this.lastKeyboardHoverId)
+
+      const $input = this.$listbox.querySelector(`#${this.lastKeyboardHoverId}`)! as HTMLInputElement
+
+      // Check single input
+      this.clearCheckedAttributes()
+      $input.setAttribute('data-checked', '')
+
+      const onChange = getEventHandler(this, 'onChange')
+
+      if (onChange != null) {
+        onChange($input.value)
+      }
+
+      this.dispatchEvent(
+        new CustomEvent('change', {
+          detail: $input.value,
+        })
+      )
+
+      this.onCollapse()
+    }
+
+    this.lastKeyboardHoverId = e.target.id
 
     e.stopPropagation()
+  }
+
+  onSlotChange = () => {
+    const $fragment = document.createDocumentFragment()
+
+    this.$selectSlot.assignedNodes().forEach((node, i) => {
+      if (node instanceof HTMLElement && node.tagName === 'SINCH-SELECT-OPTION') {
+        const $input = document.createElement('input')
+        const $label = document.createElement('label')
+
+        $input.type = 'radio'
+        $input.name = 'listbox'
+        $input.id = `input_${i}`
+        $input.value = node.getAttribute('value') ?? ''
+
+        $label.setAttribute('for', $input.id)
+        $label.setAttribute('role', 'option')
+        $label.textContent = node.getAttribute('text') ?? ''
+
+        const disabledAttributeValue = node.getAttribute('disabled')
+
+        $input.disabled = disabledAttributeValue === '' || Boolean(disabledAttributeValue)
+
+        $fragment.appendChild($input)
+        $fragment.appendChild($label)
+      }
+    })
+
+    // Create Form Submit if not created
+    if (this.$listboxSubmit == null) {
+      this.$listboxSubmit = document.createElement('input')
+      this.$listboxSubmit.type = 'submit'
+      this.$listboxSubmit.id = 'submit'
+    }
+
+    // Append Form Submit
+    $fragment.appendChild(this.$listboxSubmit)
+
+    this.$listbox.replaceChildren($fragment)
+
+    this.onValueChange(this.value)
+  }
+
+  onOutside = (e: FocusEvent) => {
+    if (e.target !== this.$listbox && !this.$listbox.contains(e.relatedTarget as Node)) {
+      this.onCollapse()
+    }
+  }
+
+  onExpand = () => {
+    this.$button.setAttribute('aria-expanded', 'true')
+
+    const $input: HTMLInputElement | null = this.$listbox.querySelector(`input[value="${this.value}"]`)
+
+    if ($input != null) {
+      $input.focus()
+    }
+  }
+
+  onCollapse = () => {
+    this.$button.setAttribute('aria-expanded', 'false')
+  }
+
+  onValueChange = (value: string) => {
+    const $input = this.$listbox.querySelector(`input[value="${value}"]`)
+
+    if ($input == null) {
+      return
+    }
+
+    $input.setAttribute('data-checked', '')
+
+    const $label = $input.nextElementSibling
+
+    if ($label != null) {
+      this.$button.textContent = $label.textContent
+    } else {
+      this.$button.textContent = this.placeholder
+    }
+  }
+
+  clearCheckedAttributes = () => {
+    for (const $inp of Array.from(this.$listbox.querySelectorAll('input[data-checked]'))) {
+      $inp.removeAttribute('data-checked')
+    }
   }
 })
 

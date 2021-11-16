@@ -62,11 +62,10 @@ const Template: Story<TSinchSelect> = ({
   const input = document.createElement('sinch-select')
 
   input.innerHTML = `
-  <sinch-select-option value="1" text="Option 1 value" slot="select"></sinch-select-option>
-  <sinch-select-option value="2" text="Option 2 value" slot="select"></sinch-select-option>
-  <sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
-  
-`
+    <sinch-select-option value="1" text="Option 1 value" slot="select"></sinch-select-option>
+    <sinch-select-option value="2" text="Option 2 value" slot="select"></sinch-select-option>
+    <sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
+  `
 
   input.value = value
   input.label = label
@@ -92,7 +91,6 @@ Select.args = {
   label: 'Label',
   optionalText: 'Optional',
   additionalText: 'Additional',
-  invalidText: 'Invalid',
   disabled: false,
 }
 
