@@ -1,3 +1,4 @@
 {
-  "extends": "@saas/typescript-config"
+  "extends": "@saas/typescript-config",
+  "exclude": [".browsers/"]
 }

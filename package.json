@@ -8,11 +8,16 @@
   "scripts": {
     "storybook": "start-storybook --port 4000",
     "build-storybook": "build-storybook",
-    "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html'"
+    "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html'",
+    "postinstall": "PLAYWRIGHT_BROWSERS_PATH=.browsers/ playwright install",
+    "test": "concurrently --success=first --kill-others --raw npm:test-playwright npm:test-storybook",
+    "test-playwright": "wait-on http://localhost:4000 && PLAYWRIGHT_BROWSERS_PATH=.browsers/ playwright test --browser=all",
+    "test-storybook": "BROWSER=none start-storybook --port 4000 --ci"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
+    "@playwright/test": "^1.16.3",
     "@saas/components": "*",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addons": "^6.3.12",
@@ -20,6 +25,7 @@
     "@storybook/html": "^6.3.12",
     "@types/node": "^14.0.0",
     "babel-loader": "^8.2.3",
+    "concurrently": "^6.3.0",
     "eslint": "^7.0.0",
     "postcss-html": "^1.2.0",
     "react": "^17.0.2",
@@ -27,6 +33,7 @@
     "stylelint": "^14.0.0",
     "stylelint-config-standard": "^23.0.0",
     "typescript": "^4.4.2",
+    "wait-on": "^6.0.0",
     "webpack": "^5.63.0"
   }
 }
