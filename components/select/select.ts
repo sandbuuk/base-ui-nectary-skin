@@ -13,8 +13,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   $invalidText: HTMLSpanElement
   $selectSlot: HTMLSlotElement
   $listbox: HTMLUListElement
-  $listboxSubmit: HTMLInputElement | null = null
-  lastKeyboardHoverId = ''
+  prevKeyboardFocusId = ''
 
   constructor() {
     super()
@@ -196,7 +195,8 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 
   onListboxClick = (e: Event) => {
-    // Listbox overlaps button and label. Clicking on listbox should collapse it.
+    // Listbox overlaps button and label when open.
+    // Clicking on listbox should collapse it.
     if (e.target === this.$listbox) {
       this.onCollapse()
 
@@ -207,8 +207,29 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       return
     }
 
+    // Click on label happens just before click is forwarded to input
     if (e.target.tagName === 'LABEL') {
-      this.lastKeyboardHoverId = e.target.getAttribute('for') ?? ''
+      const nextInputId = e.target.getAttribute('for')
+
+      // Check if input under label is enabled
+      if (
+        nextInputId !== null &&
+        nextInputId !== '' &&
+        this.$listbox.querySelector<HTMLInputElement>(`#${nextInputId}:not(:disabled)`) !== null
+      ) {
+        // Store id now, so forwarded input click event use it
+        this.prevKeyboardFocusId = nextInputId
+
+        return
+      }
+
+      // Input under this label is disabled or does not exist
+      // Since prev input lost focus because of label click, try focusing it back
+      this.focusInput(
+        this.prevKeyboardFocusId !== ''
+          ? this.$listbox.querySelector<HTMLInputElement>(`#${this.prevKeyboardFocusId}`)
+          : null
+      )
 
       return
     }
@@ -217,31 +238,34 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       return
     }
 
-    if (e.target.type === 'radio') {
-      e.target.checked = false
-    }
+    // Disable radio checked value
+    // Space key sends click events only for unchecked radio
+    e.target.checked = false
 
-    // Safari focus
+    // Safari forced focus
     if (document.activeElement !== e.target && e.target.type === 'radio') {
       e.target.focus()
     }
 
-    if (e.target.type === 'submit' || this.lastKeyboardHoverId === e.target.id) {
-      const $input = this.$listbox.querySelector<HTMLInputElement>(`#${this.lastKeyboardHoverId}`)!
+    if (
+      // Enter key press after navigating with arrow keys
+      (e.target.type === 'submit' && this.prevKeyboardFocusId !== '') ||
+      // Mouse click on option
+      // Click on input received after clicking on label
+      this.prevKeyboardFocusId === e.target.id
+    ) {
+      const $input = this.$listbox.querySelector<HTMLInputElement>(`#${this.prevKeyboardFocusId}`)!
 
+      this.dispatchEvent(new CustomEvent('change', { detail: $input.value }))
       getEventHandler(this, 'onChange')?.($input.value)
 
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: $input.value,
-        })
-      )
-
-      // This collapses the listbox
+      // Allows subsequent space and enter press to expand the listbox
+      // Collapses the listbox by blur event
       this.$button.focus()
+    } else {
+      // Click received by navigating with arrow keys
+      this.prevKeyboardFocusId = e.target.id
     }
-
-    this.lastKeyboardHoverId = e.target.id
 
     e.stopPropagation()
   }
@@ -272,17 +296,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       }
     })
 
-    // Create Form Submit if not created
-    if (this.$listboxSubmit === null) {
-      this.$listboxSubmit = document.createElement('input')
-      this.$listboxSubmit.type = 'submit'
-      this.$listboxSubmit.id = 'submit'
-    }
-
-    // Append Form Submit
-    $fragment.appendChild(this.$listboxSubmit)
-
-    this.$listbox.replaceChildren($fragment)
+    this.$listbox.firstElementChild!.replaceChildren($fragment)
 
     // Update data-checked attribute and button textContent
     this.onValueChange(this.value)
@@ -301,8 +315,8 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   onExpand = () => {
     this.$button.setAttribute('aria-expanded', 'true')
 
-    // Focus selected input upon expand
-    this.$listbox.querySelector<HTMLInputElement>(`input[value="${this.value}"]`)?.focus()
+    // Try focusing selected input upon expand
+    this.focusInput(this.$listbox.querySelector<HTMLInputElement>(`input[value="${this.value}"]`))
   }
 
   onCollapse = () => {
@@ -312,22 +326,37 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   onValueChange = (value: string) => {
     this.clearCheckedAttributes()
 
-    const $input = this.$listbox.querySelector(`input[value="${value}"]`)
+    const $input = this.$listbox.querySelector<HTMLInputElement>(`input[value="${value}"]`)
 
-    if ($input === null) {
+    if ($input !== null && $input.disabled === false) {
+      $input.setAttribute('data-checked', '')
+      this.$listbox.setAttribute('aria-activedescendant', $input.id)
+      this.$button.textContent = $input.nextElementSibling!.textContent
+    } else {
       this.$button.textContent = this.placeholder
-
-      return
     }
-
-    $input.setAttribute('data-checked', '')
-
-    this.$button.textContent = $input.nextElementSibling!.textContent
   }
 
   clearCheckedAttributes = () => {
     for (const $inp of Array.from(this.$listbox.querySelectorAll('input[data-checked]'))) {
       $inp.removeAttribute('data-checked')
+    }
+  }
+
+  focusInput = ($input: HTMLInputElement | null) => {
+    if ($input !== null && $input.disabled === false) {
+      this.prevKeyboardFocusId = $input.id
+      $input.focus()
+
+      return
+    }
+
+    // Try focusing first non-disabled input
+    const $enabledInput = this.$listbox.querySelector<HTMLInputElement>(`input:not([disabled])`)
+
+    if ($enabledInput !== null) {
+      this.prevKeyboardFocusId = $enabledInput.id
+      $enabledInput.focus()
     }
   }
 })
