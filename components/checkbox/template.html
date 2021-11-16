@@ -1,8 +1,68 @@
 <style>
-  input {
-    background-color: white;
-    color: blue;
+  :host {
+    display: inline-block;
+    font-family: var(--sinch-font-family-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 32px;
+  }
+  #checkbox {
+    all: initial;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  #icon {
+    display: inline-block;
+    position: relative;
+    width: 18px;
+    height: 18px;
+    background-color: red;
+    border-radius: 2px;
+    vertical-align: top;
+    top: 6px;
+  }
+  #icon-checkmark {
+    position: absolute;
+    left: 2px;
+    top: 3px;
+    pointer-events: none;
+    transition: opacity 0.1s linear;
+    opacity: 0;
+  }
+  #icon-line {
+    position: absolute;
+    left: 3px;
+    top: 8px;
+    pointer-events: none;
+    transition: opacity 0.1s linear;
+    opacity: 0;
+  }
+
+  #label {
+    padding-left: 14px;
+  }
+
+  :host(:not([indeterminate])) #checkbox:checked ~ #icon-checkmark {
+    opacity: 1;
+  }
+
+  :host([indeterminate]) #checkbox:checked ~ #icon-line {
+    opacity: 1;
   }
 </style>
 
-<input type="checkbox"/>
+<span id="icon">
+  <input id="checkbox" type="checkbox"/>
+  <svg id="icon-checkmark" width="14" height="11">
+    <path d="M14 1.99999L12.59 0.579987L4.98995 8.17L1.49997 4.5L0.0799694 5.91L4.98995 11L14 1.99999Z" fill="white"/>
+  </svg>
+  <svg id="icon-line" width="12" height="2">
+    <line y1="1" x2="12" y2="1" stroke="white" stroke-width="2"/>
+  </svg>
+</span><label for="checkbox" id="label">label text</label>
+

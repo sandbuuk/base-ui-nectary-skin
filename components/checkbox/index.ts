@@ -7,6 +7,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-checkbox', class extends HTMLElement {
   input: HTMLInputElement
+  label: HTMLLabelElement
   onChange!: (isChecked: boolean) => void
 
   constructor() {
@@ -17,33 +18,65 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.input = shadowRoot.querySelector('input')!
+    this.input.addEventListener('input', this.onInput)
 
-    this.input.addEventListener('input', this.#onInput)
+    this.label = shadowRoot.querySelector('label')!
   }
 
   static get observedAttributes() {
-    return ['ischecked']
+    return ['checked', 'indeterminate', 'text']
   }
 
-  set isChecked(isChecked: boolean) {
+  set checked(isChecked: boolean) {
     if (isChecked) {
-      this.setAttribute('ischecked', 'true')
+      this.setAttribute('checked', '')
     } else {
-      this.removeAttribute('ischecked')
+      this.removeAttribute('checked')
     }
   }
 
-  get isChecked() {
-    return this.getAttribute('ischecked') === 'true'
+  get checked(): boolean {
+    const attrValue = this.getAttribute('checked')
+
+    return attrValue === '' || Boolean(attrValue)
+  }
+
+  set indeterminate(isIndeterminate: boolean) {
+    if (isIndeterminate) {
+      this.setAttribute('indeterminate', '')
+    } else {
+      this.removeAttribute('indeterminate')
+    }
+  }
+
+  get indeterminate(): boolean {
+    const attrValue = this.getAttribute('indeterminate')
+
+    return attrValue === '' || Boolean(attrValue)
+  }
+
+  set text(value: string) {
+    this.setAttribute('text', value)
+  }
+
+  get text(): string {
+    return this.getAttribute('text') ?? ''
   }
 
   attributeChangedCallback(name: string, oldVal: boolean | string, newVal: boolean | string) {
-    if (name === 'ischecked') {
-      this.input.checked = newVal === true || newVal === 'true'
+    switch (name) {
+      case 'text': {
+        this.label.textContent = String(newVal)
+
+        break
+      }
+      case 'checked': {
+        this.input.checked = newVal === '' || Boolean(newVal)
+      }
     }
   }
 
-  #onInput(e: Event) {
+  onInput = (e: Event) => {
     const onChange = getEventHandler(this, 'onChange')
 
     if (onChange != null) {
@@ -56,14 +89,16 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
       })
     )
 
-    this.input.checked = this.isChecked
+    this.input.checked = this.checked
 
     e.stopPropagation()
   }
 })
 
 export type TSinchCheckbox = {
-  isChecked: boolean,
+  checked: boolean,
+  indeterminate?: boolean,
+  text: string,
   onChange: (isChecked: boolean) => void,
 }
 

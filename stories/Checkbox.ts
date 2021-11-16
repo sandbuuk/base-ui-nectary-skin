@@ -5,18 +5,22 @@ import '@saas/components/checkbox'
 export default {
   title: 'Components/Checkbox',
   argTypes: {
-    isChecked: { control: 'boolean' },
+    checked: { control: 'boolean' },
+    indeterminate: { control: 'boolean' },
+    text: { control: 'text' },
     onChange: { action: 'onChange' },
   },
 } as Meta
 
-const Template: Story<TSinchCheckbox> = ({ isChecked, onChange }) => {
+const Template: Story<TSinchCheckbox> = ({ checked, indeterminate, text, onChange }) => {
   const checkbox = document.createElement('sinch-checkbox')
 
-  checkbox.isChecked = isChecked
+  checkbox.checked = checked
+  checkbox.indeterminate = indeterminate
+  checkbox.text = text
 
   checkbox.onChange = (newIsChecked) => {
-    checkbox.isChecked = newIsChecked
+    checkbox.checked = newIsChecked
 
     onChange(newIsChecked)
   }
@@ -27,13 +31,15 @@ const Template: Story<TSinchCheckbox> = ({ isChecked, onChange }) => {
 export const Checkbox = Template.bind({})
 
 Checkbox.args = {
-  isChecked: true,
+  checked: true,
+  indeterminate: false,
+  text: 'Label',
 }
 
 Checkbox.parameters = {
   docs: {
     source: {
-      code: '<sinch-checkbox isChecked={isChecked} onChange={setIsChecked}></sinch-checkbox>',
+      code: '<sinch-checkbox checked={isChecked} onChange={setIsChecked}></sinch-checkbox>',
     },
   },
 }

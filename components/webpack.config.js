@@ -20,6 +20,10 @@ module.exports = {
         loader: 'raw-html-loader',
       },
       {
+        test: /\.svg$/,
+        loader: 'raw-loader',
+      },
+      {
         test: /\.(ts|js)$/,
         loader: 'babel-loader',
         options: {

@@ -18,7 +18,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
     this.input = shadowRoot.querySelector('input')!
 
-    this.input.addEventListener('input', this.#onInput)
+    this.input.addEventListener('input', this.onInput)
     // this.input.addEventListener('beforeinput', (e) => {
     //   console.log(e)
     //   e.stopPropagation()
@@ -44,7 +44,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     }
   }
 
-  #onInput(e: Event) {
+  onInput = (e: Event) => {
     const onChange = getEventHandler(this, 'onChange')
 
     if (onChange != null) {
