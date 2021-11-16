@@ -68,12 +68,20 @@ const Template: Story<TSinchSelect> = ({
   }, updateArgs] = useArgs()
 
   const inputRef = useRef<(HTMLElement & TSinchSelect) | null>(null)
+  const wrapperRef = useRef<(HTMLElement) | null>(null)
 
   if (inputRef.current === null) {
+    const $wrapper = document.createElement('div')
+
+    $wrapper.style.height = '300px'
+    $wrapper.style.display = 'flex'
+    $wrapper.style.justifyContent = 'center'
+    $wrapper.style.alignItems = 'center'
+
     const $input = document.createElement('sinch-select')
 
     $input.innerHTML = `
-      <sinch-input-tooltip text="Tooltip text long" slot="tooltip"></sinch-input-tooltip>
+      <sinch-input-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-input-tooltip>
       <sinch-select-option value="1" text="Option 1 value" slot="select">
         <sinch-icon-share></sinch-icon-share>
       </sinch-select-option>
@@ -89,7 +97,10 @@ const Template: Story<TSinchSelect> = ({
       updateArgs({ value: newValue })
     }
 
+    $wrapper.appendChild($input)
+
     inputRef.current = $input
+    wrapperRef.current = $wrapper
   }
 
   const $input = inputRef.current!
@@ -102,7 +113,7 @@ const Template: Story<TSinchSelect> = ({
   $input.invalidText = invalidText
   $input.disabled = disabled
 
-  return $input
+  return wrapperRef.current!
 }
 
 export const Select = Template.bind({})

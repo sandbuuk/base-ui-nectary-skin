@@ -1,23 +1,132 @@
 <style>
   :host {
-    display: inline-block;
-    height: 16px;
+    position: relative;
   }
 
-  #text {
+  #tooltip-icon {
+    display: block;
+  }
+
+  #container {
     position: absolute;
     pointer-events: none;
-    padding: 5px 8px;
-    font: var(--sinch-font-small-text);
+    padding: 2px 6px;
+    font: var(--sinch-font-extra-small-text);
     color: var(--sinch-color-text-default);
+    background-color: var(--sinch-color-snow-600);
+    width: max-content;
     opacity: 0%;
     transition: opacity 0.2s linear 0.2s;
+    border-radius: 2px;
+    fill: var(--sinch-color-snow-600);
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
   }
 
-  :host(:hover) #text {
+  #arrow {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  :host(:hover) #container {
     opacity: 100%;
   }
+
+  :host([inverted]) #container {
+    color: var(--sinch-color-text-inverted);
+    background-color: var(--sinch-color-stormy-500);
+    fill: var(--sinch-color-stormy-500);
+  }
+
+  :host([orientation="top-left"]) #container {
+    left: unset;
+    right: -9px;
+    transform: translateY(-100%);
+  }
+
+  :host([orientation="top-left"]) #arrow {
+    left: unset;
+    right: 8px;
+  }
+
+  :host([orientation="top-right"]) #container {
+    left: -9px;
+    transform: translateY(-100%);
+  }
+
+  :host([orientation="top-right"]) #arrow {
+    left: 17px;
+  }
+
+  :host([orientation="bottom-right"]) #container {
+    left: -9px;
+    top: 24px;
+    transform: unset;
+  }
+
+  :host([orientation="bottom-right"]) #arrow {
+    top: -4px;
+    left: 8px;
+    transform: translateX(50%) rotate(180deg);
+  }
+
+  :host([orientation="bottom-left"]) #container {
+    left: unset;
+    transform: unset;
+    top: 24px;
+    right: -9px;
+  }
+
+  :host([orientation="bottom-left"]) #arrow {
+    top: -4px;
+    left: unset;
+    right: 17px;
+    transform: translateX(50%) rotate(180deg);
+  }
+
+  :host([orientation="bottom"]) #container {
+    transform: translateX(-50%);
+    top: 24px;
+  }
+
+  :host([orientation="bottom"]) #arrow {
+    top: -4px;
+    transform: translateX(-50%) rotate(180deg);
+  }
+
+  :host([orientation="left"]) #container {
+    left: unset;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  :host([orientation="left"]) #arrow {
+    left: unset;
+    top: 50%;
+    right: -6px;
+    transform: translateY(-50%) rotate(270deg);
+  }
+
+  :host([orientation="right"]) #container {
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  :host([orientation="right"]) #arrow {
+    top: 50%;
+    left: -6px;
+    transform: translateY(-50%) rotate(90deg);
+  }
+
 </style>
 
 <sinch-icon-tooltip id="tooltip-icon" size="16"></sinch-icon-tooltip>
-<span id="text"></span>
+<div id="container">
+  <span id="text"></span>
+  <svg id="arrow" width="9" height="4"><path d="m4.5 4 4-4h-8l4 4Z"/></svg>
+</div>

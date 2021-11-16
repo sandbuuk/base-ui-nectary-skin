@@ -7,6 +7,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
+  $container: HTMLDivElement
   $tooltipText: HTMLSpanElement
 
   constructor() {
@@ -16,11 +17,12 @@ defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.$container = shadowRoot.querySelector('#container')!
     this.$tooltipText = shadowRoot.querySelector('#text')!
   }
 
   static get observedAttributes() {
-    return ['text']
+    return ['text', 'width']
   }
 
   get text(): string {
@@ -31,12 +33,50 @@ defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
     this.setAttribute('text', text)
   }
 
-  attributeChangedCallback(name: string, _: string, newVal: string) {
+  get width(): number | undefined {
+    const attrValue = parseInt(this.getAttribute('width') ?? '')
+
+    return Number.isInteger(attrValue) ? attrValue : void 0
+  }
+
+  set width(value: number | undefined) {
+    if (value != null && value >= 0) {
+      this.setAttribute('width', value.toFixed(0))
+    } else {
+      this.removeAttribute('width')
+    }
+  }
+
+  get inverted(): boolean {
+    const attrValue = this.getAttribute('inverted')
+
+    return attrValue === '' || Boolean(attrValue)
+  }
+
+  set inverted(isInverted: boolean | undefined) {
+    if (isInverted === true) {
+      this.setAttribute('inverted', '')
+    } else {
+      this.removeAttribute('inverted')
+    }
+  }
+
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
         this.$tooltipText.textContent = newVal
 
         break
+      }
+
+      case 'width': {
+        const value = parseInt(newVal ?? '')
+
+        if (Number.isInteger(value)) {
+          this.$container.style.maxWidth = `${value}px`
+        } else {
+          this.$container.style.maxWidth = 'unset'
+        }
       }
     }
   }
@@ -44,6 +84,8 @@ defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
 
 export type TSinchInput = {
   text: string,
+  width?: number,
+  inverted?: boolean,
 }
 
 declare global {
