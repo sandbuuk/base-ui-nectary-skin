@@ -24,6 +24,7 @@
     "@saas/components": "*",
     "@storybook/addons": "^6.3.12",
     "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-a11y": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addon-links": "^6.3.12",
     "@storybook/client-api": "^6.3.12",
