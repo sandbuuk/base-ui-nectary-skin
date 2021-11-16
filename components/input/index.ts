@@ -34,22 +34,42 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['value', 'label', 'optionaltext', 'additionaltext', 'invalidtext']
+    return [
+      'value',
+      'placeholder',
+      'label',
+      'optionaltext',
+      'additionaltext',
+      'invalidtext',
+      'disabled',
+    ]
   }
 
   set value(value: string) {
     this.setAttribute('value', value)
   }
 
-  get value() {
+  get value(): string {
     return this.getAttribute('value') ?? ''
+  }
+
+  set placeholder(value: string) {
+    if (value === '' || value === undefined) {
+      this.removeAttribute('placeholder')
+    } else {
+      this.setAttribute('placeholder', value)
+    }
+  }
+
+  get placeholder(): string {
+    return this.getAttribute('placeholder') ?? ''
   }
 
   set label(value: string) {
     this.setAttribute('label', value)
   }
 
-  get label() {
+  get label(): string {
     return this.getAttribute('label') ?? ''
   }
 
@@ -57,7 +77,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     this.setAttribute('optionaltext', value)
   }
 
-  get optionalText() {
+  get optionalText(): string {
     return this.getAttribute('optionaltext') ?? ''
   }
 
@@ -65,19 +85,37 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     this.setAttribute('additionaltext', value)
   }
 
-  get additionalText() {
+  get additionalText(): string {
     return this.getAttribute('additionaltext') ?? ''
   }
 
   set invalidText(value: string) {
-    this.setAttribute('invalidtext', value)
+    if (value === '' || value === undefined) {
+      this.removeAttribute('invalidtext')
+    } else {
+      this.setAttribute('invalidtext', value)
+    }
   }
 
-  get invalidText() {
+  get invalidText(): string {
     return this.getAttribute('invalidtext') ?? ''
   }
 
-  attributeChangedCallback(name: string, oldVal: string, newVal: string) {
+  set disabled(isDisabled: boolean) {
+    if (isDisabled) {
+      this.setAttribute('disabled', '')
+    } else {
+      this.removeAttribute('disabled')
+    }
+  }
+
+  get disabled(): boolean {
+    const attrValue = this.getAttribute('disabled')
+
+    return attrValue === '' || Boolean(attrValue)
+  }
+
+  attributeChangedCallback(name: string, _: string, newVal: string) {
     switch (name) {
       case 'value': {
         this.$input.value = newVal
@@ -87,6 +125,12 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
       case 'label': {
         this.$label.textContent = newVal
+
+        break
+      }
+
+      case 'placeholder': {
+        this.$input.placeholder = newVal
 
         break
       }
@@ -105,6 +149,12 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
       case 'invalidtext': {
         this.$invalidText.textContent = newVal
+
+        break
+      }
+
+      case 'disabled': {
+        this.$input.disabled = newVal === '' || Boolean(newVal)
 
         break
       }
@@ -133,9 +183,11 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 export type TSinchInput = {
   value: string,
   label: string,
+  placeholder?: string,
   optionalText?: string,
   invalidText?: string,
   additionalText?: string,
+  disabled?: boolean,
   onChange: (value: string) => void,
 }
 
