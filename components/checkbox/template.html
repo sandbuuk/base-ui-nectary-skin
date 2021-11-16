@@ -1,46 +1,112 @@
 <style>
   :host {
+    --sinch-color-icon: var(--sinch-color-snow-100);
+
+    --sinch-color-checkbox-circle: var(--sinch-color-transparent);
+    --sinch-color-checkbox-background: var(--sinch-color-snow-100);
+    --sinch-color-checkbox-border: var(--sinch-color-stormy-300);
+    --sinch-color-checkbox-circle-checked: var(--sinch-color-transparent);
+    --sinch-color-checkbox-background-checked: var(--sinch-color-tropical-500);
+    --sinch-color-checkbox-border-checked: var(--sinch-color-tropical-500);
+    
+    --sinch-color-checkbox-circle-hover: var(--sinch-color-snow-500);
+    --sinch-color-checkbox-background-hover: var(--sinch-color-snow-100);
+    --sinch-color-checkbox-border-hover: var(--sinch-color-stormy-300);
+    --sinch-color-checkbox-circle-hover-checked: var(--sinch-color-tropical-100);
+    --sinch-color-checkbox-background-hover-checked: var(--sinch-color-tropical-500);
+    --sinch-color-checkbox-border-hover-checked: var(--sinch-color-tropical-500);
+    
+    --sinch-color-checkbox-circle-focus: var(--sinch-color-snow-800);
+    --sinch-color-checkbox-background-focus: var(--sinch-color-snow-100);
+    --sinch-color-checkbox-border-focus: var(--sinch-color-stormy-300);
+    --sinch-color-checkbox-circle-focus-checked: var(--sinch-color-tropical-200);
+    --sinch-color-checkbox-background-focus-checked: var(--sinch-color-tropical-500);
+    --sinch-color-checkbox-border-focus-checked: var(--sinch-color-tropical-500);
+    
+    --sinch-color-checkbox-circle-active: var(--sinch-color-stormy-100);
+    --sinch-color-checkbox-background-active: var(--sinch-color-snow-100);
+    --sinch-color-checkbox-border-active: var(--sinch-color-stormy-300);
+    --sinch-color-checkbox-circle-active-checked: var(--sinch-color-tropical-300);
+    --sinch-color-checkbox-background-active-checked: var(--sinch-color-tropical-500);
+    --sinch-color-checkbox-border-active-checked: var(--sinch-color-tropical-500);
+    
+    --sinch-color-checkbox-circle-disabled: var(--sinch-color-transparent);
+    --sinch-color-checkbox-background-disabled: var(--sinch-color-snow-100);
+    --sinch-color-checkbox-border-disabled: var(--sinch-color-stormy-100);
+    --sinch-color-checkbox-circle-disabled-checked: var(--sinch-color-transparent);
+    --sinch-color-checkbox-background-disabled-checked: var(--sinch-color-stormy-100);
+    --sinch-color-checkbox-border-disabled-checked: var(--sinch-color-stormy-100);
+  }
+
+  :host {
     display: inline-block;
     font-family: var(--sinch-font-family-body);
     font-size: 16px;
     font-weight: 400;
     line-height: 32px;
   }
+
   #checkbox {
     all: initial;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 18px;
+    height: 18px;
     cursor: pointer;
   }
+  #checkbox:disabled {
+    cursor: initial;
+  }
 
-  #icon {
+  #icon-container {
     display: inline-block;
     position: relative;
     width: 18px;
     height: 18px;
-    background-color: red;
-    border-radius: 2px;
     vertical-align: top;
     top: 6px;
   }
+
+  /* Circle */
+  #checkbox::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: -7px;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    pointer-events: none;
+  }
+
+  /* Border / Background */
+  #checkbox::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
   #icon-checkmark {
     position: absolute;
     left: 2px;
     top: 3px;
-    pointer-events: none;
     transition: opacity 0.1s linear;
     opacity: 0;
+    pointer-events: none;
   }
   #icon-line {
     position: absolute;
     left: 3px;
     top: 8px;
-    pointer-events: none;
     transition: opacity 0.1s linear;
     opacity: 0;
+    pointer-events: none;
   }
 
   #label {
@@ -54,9 +120,95 @@
   :host([indeterminate]) #checkbox:checked ~ #icon-line {
     opacity: 1;
   }
+
+  /* Colors Default */
+  #checkbox::before {
+    background-color: var(--sinch-color-checkbox-circle);
+  }
+  #checkbox::after {
+    background-color: var(--sinch-color-checkbox-background);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border) inset;
+  }
+  /* Colors Checked */
+  #checkbox:checked::before {
+    background-color: var(--sinch-color-checkbox-circle-checked);
+  }
+  #checkbox:checked::after {
+    background-color: var(--sinch-color-checkbox-background-checked);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-checked) inset;
+  }
+
+  /* Colors Hover */
+  #checkbox:hover::before {
+    background-color: var(--sinch-color-checkbox-circle-hover);
+  }
+  #checkbox:hover::after {
+    background-color: var(--sinch-color-checkbox-background-hover);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-hover) inset;
+  }
+  /* Colors Hover Checked */
+  #checkbox:hover:checked::before {
+    background-color: var(--sinch-color-checkbox-circle-hover-checked);
+  }
+  #checkbox:hover:checked::after {
+    background-color: var(--sinch-color-checkbox-background-hover-checked);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-hover-checked) inset;
+  }
+
+  /* Colors Focus */
+  #checkbox:focus::before {
+    background-color: var(--sinch-color-checkbox-circle-focus);
+  }
+  #checkbox:focus::after {
+    background-color: var(--sinch-color-checkbox-background-focus);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-focus) inset;
+  }
+  /* Colors Focus Checked */
+  #checkbox:focus:checked::before {
+    background-color: var(--sinch-color-checkbox-circle-focus-checked);
+  }
+  #checkbox:focus:checked::after {
+    background-color: var(--sinch-color-checkbox-background-focus-checked);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-focus-checked) inset;
+  }
+
+  /* Colors Active */
+  #checkbox:active::before {
+    background-color: var(--sinch-color-checkbox-circle-active);
+  }
+  #checkbox:active::after {
+    background-color: var(--sinch-color-checkbox-background-active);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-active) inset;
+  }
+  /* Colors Active Checked */
+  #checkbox:active:checked::before {
+    background-color: var(--sinch-color-checkbox-circle-active-checked);
+  }
+  #checkbox:active:checked::after {
+    background-color: var(--sinch-color-checkbox-background-active-checked);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-active-checked) inset;
+  }
+
+  /* Colors Disabled */
+  #checkbox:disabled::before {
+    background-color: var(--sinch-color-checkbox-circle-disabled);
+  }
+  #checkbox:disabled::after {
+    background-color: var(--sinch-color-checkbox-background-disabled);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-disabled) inset;
+  }
+
+  /* Colors Disabled Checked */
+  #checkbox:disabled:checked::before {
+    background-color: var(--sinch-color-checkbox-circle-disabled-checked);
+  }
+  #checkbox:disabled:checked::after {
+    background-color: var(--sinch-color-checkbox-background-disabled-checked);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-disabled-checked) inset;
+  }
 </style>
 
-<span id="icon">
+<span id="icon-container">
   <input id="checkbox" type="checkbox"/>
   <svg id="icon-checkmark" width="14" height="11">
     <path d="M14 1.99999L12.59 0.579987L4.98995 8.17L1.49997 4.5L0.0799694 5.91L4.98995 11L14 1.99999Z" fill="white"/>
@@ -65,4 +217,3 @@
     <line y1="1" x2="12" y2="1" stroke="white" stroke-width="2"/>
   </svg>
 </span><label for="checkbox" id="label">label text</label>
-

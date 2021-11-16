@@ -7,16 +7,18 @@ export default {
   argTypes: {
     checked: { control: 'boolean' },
     indeterminate: { control: 'boolean' },
+    disabled: { control: 'boolean' },
     text: { control: 'text' },
     onChange: { action: 'onChange' },
   },
 } as Meta
 
-const Template: Story<TSinchCheckbox> = ({ checked, indeterminate, text, onChange }) => {
+const Template: Story<TSinchCheckbox> = ({ checked, indeterminate, disabled, text, onChange }) => {
   const checkbox = document.createElement('sinch-checkbox')
 
   checkbox.checked = checked
   checkbox.indeterminate = indeterminate
+  checkbox.disabled = disabled
   checkbox.text = text
 
   checkbox.onChange = (newIsChecked) => {
@@ -33,6 +35,7 @@ export const Checkbox = Template.bind({})
 Checkbox.args = {
   checked: true,
   indeterminate: false,
+  disabled: false,
   text: 'Label',
 }
 
