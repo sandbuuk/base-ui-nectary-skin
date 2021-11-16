@@ -1,4 +1,4 @@
-import { defineCustomElement } from '../utils'
+import { defineCustomElement, getAttribute, getBooleanAttribute, updateAttribute, updateBooleanAttribute } from '../utils'
 import templateHTML from './template.html'
 
 const template = document.createElement('template')
@@ -39,61 +39,43 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
   }
 
   set value(value: string) {
-    this.setAttribute('value', value)
+    updateAttribute(this, 'value', value)
   }
 
-  get value(): string {
-    return this.getAttribute('value') ?? ''
+  get value() {
+    return getAttribute(this, 'value', '')
   }
 
   set text(value: string) {
-    this.setAttribute('text', value)
+    updateAttribute(this, 'text', value)
   }
 
   get text(): string {
-    return this.getAttribute('text') ?? ''
+    return getAttribute(this, 'text', '')
   }
 
   set disabled(isDisabled: boolean | undefined) {
-    if (isDisabled === true) {
-      this.setAttribute('disabled', '')
-    } else {
-      this.removeAttribute('disabled')
-    }
+    updateBooleanAttribute(this, 'disabled', isDisabled)
   }
 
-  get disabled(): boolean {
-    const attrValue = this.getAttribute('disabled')
-
-    return attrValue === '' || Boolean(attrValue)
+  get disabled() {
+    return getBooleanAttribute(this, 'disabled')
   }
 
   set checked(isChecked: boolean | undefined) {
-    if (isChecked === true) {
-      this.setAttribute('checked', '')
-    } else {
-      this.removeAttribute('checked')
-    }
+    updateBooleanAttribute(this, 'checked', isChecked)
   }
 
-  get checked(): boolean {
-    const attrValue = this.getAttribute('checked')
-
-    return attrValue === '' || Boolean(attrValue)
+  get checked() {
+    return getBooleanAttribute(this, 'checked')
   }
 
   set selected(isSelected: boolean | undefined) {
-    if (isSelected === true) {
-      this.setAttribute('selected', '')
-    } else {
-      this.removeAttribute('selected')
-    }
+    updateBooleanAttribute(this, 'selected', isSelected)
   }
 
-  get selected(): boolean {
-    const attrValue = this.getAttribute('selected')
-
-    return attrValue === '' || Boolean(attrValue)
+  get selected() {
+    return getBooleanAttribute(this, 'selected')
   }
 })
 

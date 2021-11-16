@@ -1,4 +1,12 @@
-import { defineCustomElement, getEventHandler } from '../utils'
+import {
+  defineCustomElement,
+  getAttribute,
+  getBooleanAttribute,
+  getEventHandler,
+  isAttrTrue,
+  updateAttribute,
+  updateBooleanAttribute,
+} from '../utils'
 import templateHTML from './template.html'
 
 const template = document.createElement('template')
@@ -34,53 +42,35 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 
   set checked(isChecked: boolean) {
-    if (isChecked === true) {
-      this.setAttribute('checked', '')
-    } else {
-      this.removeAttribute('checked')
-    }
+    updateBooleanAttribute(this, 'checked', isChecked)
   }
 
-  get checked(): boolean {
-    const attrValue = this.getAttribute('checked')
-
-    return attrValue === '' || Boolean(attrValue)
+  get checked() {
+    return getBooleanAttribute(this, 'checked')
   }
 
   set indeterminate(isIndeterminate: boolean | undefined) {
-    if (isIndeterminate === true) {
-      this.setAttribute('indeterminate', '')
-    } else {
-      this.removeAttribute('indeterminate')
-    }
+    updateBooleanAttribute(this, 'indeterminate', isIndeterminate)
   }
 
-  get indeterminate(): boolean {
-    const attrValue = this.getAttribute('indeterminate')
-
-    return attrValue === '' || Boolean(attrValue)
+  get indeterminate() {
+    return getBooleanAttribute(this, 'indeterminate')
   }
 
   set disabled(isDisabled: boolean | undefined) {
-    if (isDisabled === true) {
-      this.setAttribute('disabled', '')
-    } else {
-      this.removeAttribute('disabled')
-    }
+    updateBooleanAttribute(this, 'disabled', isDisabled)
   }
 
-  get disabled(): boolean {
-    const attrValue = this.getAttribute('disabled')
-
-    return attrValue === '' || Boolean(attrValue)
+  get disabled() {
+    return getBooleanAttribute(this, 'disabled')
   }
 
   set text(value: string) {
-    this.setAttribute('text', value)
+    updateAttribute(this, 'text', value)
   }
 
-  get text(): string {
-    return this.getAttribute('text') ?? ''
+  get text() {
+    return getAttribute(this, 'text', '')
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -91,12 +81,12 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
         break
       }
       case 'checked': {
-        this.$input.checked = newVal === '' || Boolean(newVal)
+        this.$input.checked = isAttrTrue(newVal)
 
         break
       }
       case 'disabled': {
-        this.$input.disabled = newVal === '' || Boolean(newVal)
+        this.$input.disabled = isAttrTrue(newVal)
 
         break
       }

@@ -1,5 +1,17 @@
-import { defineCustomElement, getEventHandler } from '../utils'
+import {
+  defineCustomElement,
+  getBooleanAttribute,
+  getEventHandler,
+  getAttribute,
+  getLiteralAttribute,
+  isAttrTrue,
+  updateBooleanAttribute,
+  updateAttribute,
+  updateLiteralAttribute,
+} from '../utils'
 import templateHTML from './template.html'
+
+const buttonTypes = ['primary', 'secondary', 'cta', 'destructive'] as const
 
 const template = document.createElement('template')
 
@@ -32,50 +44,6 @@ defineCustomElement('sinch-button', class extends HTMLElement {
     return ['text', 'disabled']
   }
 
-  set type(value: string) {
-    this.setAttribute('type', value)
-  }
-
-  get type(): string {
-    return this.getAttribute('type') ?? ''
-  }
-
-  set text(text: string) {
-    this.setAttribute('text', text)
-  }
-
-  get text(): string {
-    return this.getAttribute('text') ?? ''
-  }
-
-  set disabled(isDisabled: boolean | undefined) {
-    if (isDisabled === true) {
-      this.setAttribute('disabled', '')
-    } else {
-      this.removeAttribute('disabled')
-    }
-  }
-
-  get disabled(): boolean {
-    const attrValue = this.getAttribute('disabled')
-
-    return attrValue === '' || Boolean(attrValue)
-  }
-
-  set small(isSmall: boolean | undefined) {
-    if (isSmall === true) {
-      this.setAttribute('small', '')
-    } else {
-      this.removeAttribute('small')
-    }
-  }
-
-  get small(): boolean {
-    const attrValue = this.getAttribute('small')
-
-    return attrValue === '' || Boolean(attrValue)
-  }
-
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
@@ -84,11 +52,43 @@ defineCustomElement('sinch-button', class extends HTMLElement {
         break
       }
       case 'disabled': {
-        this.$button.disabled = newVal === '' || Boolean(newVal)
+        this.$button.disabled = isAttrTrue(newVal)
 
         break
       }
     }
+  }
+
+  set type(value: TSinchButtonType) {
+    updateLiteralAttribute(this, buttonTypes, 'type', value)
+  }
+
+  get type(): TSinchButtonType {
+    return getLiteralAttribute(this, buttonTypes, 'type', 'primary')
+  }
+
+  set text(value: string) {
+    updateAttribute(this, 'text', value)
+  }
+
+  get text(): string {
+    return getAttribute(this, 'text', '')
+  }
+
+  set disabled(isDisabled: boolean | undefined) {
+    updateBooleanAttribute(this, 'disabled', isDisabled)
+  }
+
+  get disabled() {
+    return getBooleanAttribute(this, 'disabled')
+  }
+
+  set small(isSmall: boolean | undefined) {
+    updateBooleanAttribute(this, 'small', isSmall)
+  }
+
+  get small() {
+    return getBooleanAttribute(this, 'small')
   }
 
   onClick = (e: MouseEvent) => {
@@ -102,8 +102,10 @@ defineCustomElement('sinch-button', class extends HTMLElement {
   }
 })
 
+type TSinchButtonType = typeof buttonTypes[number]
+
 export type TSinchButton = {
-  type: 'primary' | 'secondary' | 'cta' | 'destructive',
+  type: TSinchButtonType,
   text: string,
   disabled?: boolean,
   small?: boolean,

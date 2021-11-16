@@ -1,4 +1,4 @@
-import { defineCustomElement, getEventHandler } from '../utils'
+import { defineCustomElement, getAttribute, getBooleanAttribute, getEventHandler, isAttrTrue, updateAttribute, updateBooleanAttribute } from '../utils'
 import templateHTML from './template.html'
 
 const template = document.createElement('template')
@@ -48,85 +48,59 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   set value(value: string) {
-    this.setAttribute('value', value)
+    updateAttribute(this, 'value', value)
   }
 
   get value(): string {
-    return this.getAttribute('value') ?? ''
+    return getAttribute(this, 'value', '')
   }
 
   set placeholder(value: string | undefined) {
-    // Storybook provides undefined value
-    if (value != null && value !== '') {
-      this.setAttribute('placeholder', value)
-    } else {
-      this.removeAttribute('placeholder')
-    }
+    updateAttribute(this, 'placeholder', value)
   }
 
-  get placeholder(): string {
-    return this.getAttribute('placeholder') ?? ''
+  get placeholder() {
+    return getAttribute(this, 'placeholder')
   }
 
   set label(value: string) {
-    this.setAttribute('label', value)
+    updateAttribute(this, 'label', value)
   }
 
-  get label(): string {
-    return this.getAttribute('label') ?? ''
+  get label() {
+    return getAttribute(this, 'label', '')
   }
 
-  set optionalText(value: string) {
-    // Storybook provides undefined value
-    if (value != null && value !== '') {
-      this.setAttribute('optionaltext', value)
-    } else {
-      this.removeAttribute('optionaltext')
-    }
+  set optionalText(value: string | undefined) {
+    updateAttribute(this, 'optionaltext', value)
   }
 
-  get optionalText(): string {
-    return this.getAttribute('optionaltext') ?? ''
+  get optionalText() {
+    return getAttribute(this, 'optionaltext')
   }
 
-  set additionalText(value: string) {
-    // Storybook provides undefined value
-    if (value != null && value !== '') {
-      this.setAttribute('additionaltext', value)
-    } else {
-      this.removeAttribute('additionaltext')
-    }
+  set additionalText(value: string | undefined) {
+    updateAttribute(this, 'additionaltext', value)
   }
 
-  get additionalText(): string {
-    return this.getAttribute('additionaltext') ?? ''
+  get additionalText() {
+    return getAttribute(this, 'additionaltext')
   }
 
   set invalidText(value: string | undefined) {
-    // Storybook provides undefined value
-    if (value != null && value !== '') {
-      this.setAttribute('invalidtext', value)
-    } else {
-      this.removeAttribute('invalidtext')
-    }
+    updateAttribute(this, 'placeholder', value)
   }
 
-  get invalidText(): string {
-    return this.getAttribute('invalidtext') ?? ''
+  get invalidText() {
+    return getAttribute(this, 'invalidtext')
   }
 
   set disabled(isDisabled: boolean | undefined) {
-    if (isDisabled === true) {
-      this.setAttribute('disabled', '')
-    } else {
-      this.removeAttribute('disabled')
-    }
+    updateBooleanAttribute(this, 'disabled', isDisabled)
   }
 
-  get disabled(): boolean {
-    const attrValue = this.getAttribute('disabled')
-
-    return attrValue === '' || Boolean(attrValue)
+  get disabled() {
+    return getBooleanAttribute(this, 'disabled')
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -168,7 +142,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
       }
 
       case 'disabled': {
-        this.$input.disabled = newVal === '' || Boolean(newVal)
+        this.$input.disabled = isAttrTrue(newVal)
 
         break
       }

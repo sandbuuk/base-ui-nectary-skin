@@ -1,3 +1,5 @@
+import { getIntegerAttribute, updateIntegerAttribute } from '../utils'
+
 const DEFAULT_SIZE = 16
 
 export const createIconClass = (templateHTML: string) => {
@@ -23,15 +25,11 @@ export const createIconClass = (templateHTML: string) => {
     }
 
     set size(value: number | undefined) {
-      if (Number.isInteger(value)) {
-        this.setAttribute('size', String(value))
-      } else {
-        this.removeAttribute('size')
-      }
+      updateIntegerAttribute(this, 'size', value)
     }
 
-    get size(): number {
-      return Number(this.getAttribute('size')) ?? DEFAULT_SIZE
+    get size() {
+      return getIntegerAttribute(this, 'size')
     }
 
     connectedCallback() {
@@ -47,12 +45,7 @@ export const createIconClass = (templateHTML: string) => {
     attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
       switch (name) {
         case 'size': {
-          this.$svg.setAttribute(
-            'width',
-            (newVal !== null && Number.isInteger(Number(newVal)))
-              ? newVal
-              : String(DEFAULT_SIZE)
-          )
+          updateIntegerAttribute(this.$svg, 'width', newVal)
 
           break
         }

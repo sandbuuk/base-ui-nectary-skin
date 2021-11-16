@@ -1,11 +1,19 @@
-import { defineCustomElement } from '../utils'
+import {
+  attrValueToPixels,
+  defineCustomElement,
+  getBooleanAttribute,
+  getIntegerAttribute,
+  getAttribute,
+  getLiteralAttribute,
+  updateBooleanAttribute,
+  updateIntegerAttribute,
+  updateAttribute,
+  updateLiteralAttribute,
+} from '../utils'
 import templateHTML from './template.html'
 import '../icon/tooltip'
 
 const orientationValues = ['top', 'bottom', 'left', 'right', 'top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
-const isOrientationValue = (value: string | undefined | null): value is (typeof orientationValues[number]) => {
-  return value != null && (orientationValues as readonly string[]).includes(value)
-}
 
 const template = document.createElement('template')
 
@@ -28,54 +36,36 @@ defineCustomElement('sinch-tooltip', class extends HTMLElement {
     return ['text', 'width']
   }
 
-  get text(): string {
-    return this.getAttribute('text') ?? ''
+  get text() {
+    return getAttribute(this, 'text', '')
   }
 
-  set text(text: string) {
-    this.setAttribute('text', text)
+  set text(value: string) {
+    updateAttribute(this, 'text', value)
   }
 
-  get width(): number | undefined {
-    const attrValue = parseInt(this.getAttribute('width') ?? '')
-
-    return Number.isInteger(attrValue) ? attrValue : void 0
+  get width() {
+    return getIntegerAttribute(this, 'width')
   }
 
   set width(value: number | undefined) {
-    if (value != null && value >= 0) {
-      this.setAttribute('width', value.toFixed(0))
-    } else {
-      this.removeAttribute('width')
-    }
+    updateIntegerAttribute(this, 'width', value)
   }
 
-  get inverted(): boolean {
-    const attrValue = this.getAttribute('inverted')
-
-    return attrValue === '' || Boolean(attrValue)
+  get inverted() {
+    return getBooleanAttribute(this, 'inverted')
   }
 
   set inverted(isInverted: boolean | undefined) {
-    if (isInverted === true) {
-      this.setAttribute('inverted', '')
-    } else {
-      this.removeAttribute('inverted')
-    }
+    updateBooleanAttribute(this, 'inverted', isInverted)
   }
 
-  get orientation(): TSinchTooltip['orientation'] {
-    const attrValue = this.getAttribute('orientation')
-
-    return isOrientationValue(attrValue) ? attrValue : void 0
+  get orientation() {
+    return getLiteralAttribute(this, orientationValues, 'orientation')
   }
 
-  set orientation(value: TSinchTooltip['orientation']) {
-    if (isOrientationValue(value)) {
-      this.setAttribute('orientation', value)
-    } else {
-      this.removeAttribute('orientation')
-    }
+  set orientation(value: TSinchTooltipOrientation | undefined) {
+    updateLiteralAttribute(this, orientationValues, 'orientation', value)
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -87,13 +77,7 @@ defineCustomElement('sinch-tooltip', class extends HTMLElement {
       }
 
       case 'width': {
-        const value = parseInt(newVal ?? '')
-
-        if (Number.isInteger(value)) {
-          this.$tooltipText.style.maxWidth = `${value}px`
-        } else {
-          this.$tooltipText.style.maxWidth = 'unset'
-        }
+        this.$tooltipText.style.maxWidth = attrValueToPixels(newVal)
 
         break
       }
@@ -101,11 +85,13 @@ defineCustomElement('sinch-tooltip', class extends HTMLElement {
   }
 })
 
+type TSinchTooltipOrientation = typeof orientationValues[number]
+
 export type TSinchTooltip = {
   text: string,
   width?: number,
   inverted?: boolean,
-  orientation?: typeof orientationValues[number],
+  orientation?: TSinchTooltipOrientation,
 }
 
 declare global {

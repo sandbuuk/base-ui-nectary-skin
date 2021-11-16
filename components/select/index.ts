@@ -1,4 +1,12 @@
-import { defineCustomElement, getEventHandler } from '../utils'
+import {
+  defineCustomElement,
+  getAttribute,
+  getBooleanAttribute,
+  getEventHandler,
+  isAttrTrue,
+  updateAttribute,
+  updateBooleanAttribute,
+} from '../utils'
 import templateHTML from './template.html'
 import type { TSinchSelectOption } from '../select-option'
 import '../select-option'
@@ -43,9 +51,9 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     this.$button.addEventListener('click', this.onButtonClick)
     this.$listbox.addEventListener('blur', this.onListboxBlur)
     this.$listbox.addEventListener('click', this.onListboxClick)
-    this.$selectSlot.addEventListener('slotchange', this.onSlotChange)
     this.$listbox.addEventListener('keydown', this.onListboxKeyDown)
     this.$listbox.addEventListener('keypress', this.onListboxKeyUp)
+    this.$selectSlot.addEventListener('slotchange', this.onSlotChange)
   }
 
   disconnectedCallback() {
@@ -69,85 +77,59 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 
   set value(value: string) {
-    this.setAttribute('value', value.trim())
+    updateAttribute(this, 'value', value.trim())
   }
 
   get value(): string {
-    return this.getAttribute('value') ?? ''
+    return getAttribute(this, 'value', '')
   }
 
   set placeholder(value: string | undefined) {
-    // Storybook provides undefined value
-    if (value != null && value !== '') {
-      this.setAttribute('placeholder', value)
-    } else {
-      this.removeAttribute('placeholder')
-    }
+    updateAttribute(this, 'placeholder', value)
   }
 
-  get placeholder(): string {
-    return this.getAttribute('placeholder') ?? ''
+  get placeholder() {
+    return getAttribute(this, 'placeholder')
   }
 
   set label(value: string) {
-    this.setAttribute('label', value)
+    updateAttribute(this, 'label', value)
   }
 
-  get label(): string {
-    return this.getAttribute('label') ?? ''
+  get label() {
+    return getAttribute(this, 'label', '')
   }
 
   set optionalText(value: string) {
-    // Storybook provides undefined value
-    if (value != null && value !== '') {
-      this.setAttribute('optionaltext', value)
-    } else {
-      this.removeAttribute('optionaltext')
-    }
+    updateAttribute(this, 'optionaltext', value)
   }
 
-  get optionalText(): string {
-    return this.getAttribute('optionaltext') ?? ''
+  get optionalText() {
+    return getAttribute(this, 'optionaltext', '')
   }
 
   set additionalText(value: string) {
-    // Storybook provides undefined value
-    if (value != null && value !== '') {
-      this.setAttribute('additionaltext', value)
-    } else {
-      this.removeAttribute('additionaltext')
-    }
+    updateAttribute(this, 'additionaltext', value)
   }
 
-  get additionalText(): string {
-    return this.getAttribute('additionaltext') ?? ''
+  get additionalText() {
+    return getAttribute(this, 'additionaltext', '')
   }
 
   set invalidText(value: string | undefined) {
-    // Storybook provides undefined value
-    if (value != null && value !== '') {
-      this.setAttribute('invalidtext', value)
-    } else {
-      this.removeAttribute('invalidtext')
-    }
+    updateAttribute(this, 'invalidtext', value)
   }
 
   get invalidText(): string {
-    return this.getAttribute('invalidtext') ?? ''
+    return getAttribute(this, 'placeholder', '')
   }
 
   set disabled(isDisabled: boolean | undefined) {
-    if (isDisabled === true) {
-      this.setAttribute('disabled', '')
-    } else {
-      this.removeAttribute('disabled')
-    }
+    updateBooleanAttribute(this, 'disabled', isDisabled)
   }
 
   get disabled(): boolean {
-    const attrValue = this.getAttribute('disabled')
-
-    return attrValue === '' || Boolean(attrValue)
+    return getBooleanAttribute(this, 'disabled')
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -193,7 +175,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       }
 
       case 'disabled': {
-        this.$button.disabled = newVal === '' || Boolean(newVal)
+        this.$button.disabled = isAttrTrue(newVal)
 
         if (this.$button.disabled) {
           this.onCollapse()
@@ -436,7 +418,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
     if ($option === null) {
       this.$button.setAttribute('data-unselected', '')
-      this.$buttonContent.textContent = this.placeholder
+      this.$buttonContent.textContent = this.placeholder ?? 'Select'
     } else {
       this.$button.removeAttribute('data-unselected')
       this.$buttonContent.textContent = $option.text

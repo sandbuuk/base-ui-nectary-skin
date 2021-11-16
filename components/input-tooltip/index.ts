@@ -1,14 +1,23 @@
-import { defineCustomElement } from '../utils'
+import {
+  defineCustomElement,
+  getAttribute,
+  getBooleanAttribute,
+  getIntegerAttribute,
+  updateAttribute,
+  updateBooleanAttribute,
+  updateIntegerAttribute,
+} from '../utils'
 import templateHTML from './template.html'
+import '../tooltip'
 import '../icon/tooltip'
+import type { TSinchTooltip } from '../tooltip'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
-  $container: HTMLDivElement
-  $tooltipText: HTMLSpanElement
+  $tooltip: HTMLElement & TSinchTooltip
 
   constructor() {
     super()
@@ -17,85 +26,82 @@ defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$container = shadowRoot.querySelector('#container')!
-    this.$tooltipText = shadowRoot.querySelector('#text')!
+    this.$tooltip = shadowRoot.querySelector('sinch-tooltip')!
   }
 
   static get observedAttributes() {
-    return ['text', 'width']
+    return ['text', 'width', 'orientation', 'inverted']
   }
 
-  get text(): string {
-    return this.getAttribute('text') ?? ''
+  get text() {
+    return getAttribute(this, 'text', '')
   }
 
-  set text(text: string) {
-    this.setAttribute('text', text)
+  set text(value: string) {
+    updateAttribute(this, 'text', value)
   }
 
-  get width(): number | undefined {
-    const attrValue = parseInt(this.getAttribute('width') ?? '')
-
-    return Number.isInteger(attrValue) ? attrValue : void 0
+  get width() {
+    return getIntegerAttribute(this, 'width')
   }
 
   set width(value: number | undefined) {
-    if (value != null && value >= 0) {
-      this.setAttribute('width', value.toFixed(0))
-    } else {
-      this.removeAttribute('width')
-    }
+    updateIntegerAttribute(this, 'width', value)
   }
 
-  get inverted(): boolean {
-    const attrValue = this.getAttribute('inverted')
-
-    return attrValue === '' || Boolean(attrValue)
+  get inverted() {
+    return getBooleanAttribute(this, 'inverted')
   }
 
   set inverted(isInverted: boolean | undefined) {
-    if (isInverted === true) {
-      this.setAttribute('inverted', '')
-    } else {
-      this.removeAttribute('inverted')
-    }
+    updateBooleanAttribute(this, 'inverted', isInverted)
+  }
+
+  get orientation() {
+    return getAttribute(this, 'orientation') as TSinchInputTooltip['orientation'] | undefined
+  }
+
+  set orientation(value: TSinchInputTooltip['orientation'] | undefined) {
+    updateAttribute(this, 'orientation', value)
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.$tooltipText.textContent = newVal
+        updateAttribute(this.$tooltip, 'text', newVal)
 
         break
       }
 
       case 'width': {
-        const value = parseInt(newVal ?? '')
+        updateAttribute(this.$tooltip, 'width', newVal)
 
-        if (Number.isInteger(value)) {
-          this.$container.style.maxWidth = `${value}px`
-        } else {
-          this.$container.style.maxWidth = 'unset'
-        }
+        break
+      }
+
+      case 'inverted': {
+        updateAttribute(this.$tooltip, 'inverted', newVal)
+
+        break
+      }
+
+      case 'orientation': {
+        updateAttribute(this.$tooltip, 'orientation', newVal)
       }
     }
   }
 })
 
-export type TSinchInput = {
-  text: string,
-  width?: number,
-  inverted?: boolean,
-}
+export type TSinchInputTooltip = TSinchTooltip
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-input-tooltip': TSinchInput,
+      'sinch-input-tooltip': TSinchInputTooltip,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-input-tooltip': HTMLElement & TSinchInput,
+    'sinch-input-tooltip': HTMLElement & TSinchInputTooltip,
   }
 }
