@@ -3,4 +3,4 @@ dist/
 *.d.ts
 !imports.d.ts
 *.js
-!webpack.config.js
+!babel.config.js
