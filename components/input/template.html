@@ -11,12 +11,11 @@
     box-sizing: border-box;
     border-radius: 2px;
     width: 100%;
-    height: 46px;
+    height: 48px;
+    margin: 2px 0;
     padding: 0 12px;
     font: var(--sinch-font-body);
     color: var(--sinch-color-text-default);
-    margin-bottom: 2px;
-    margin-top: 2px;
   }
 
   #input::placeholder {
@@ -65,22 +64,19 @@
     max-width: 50%;
   }
 
-  #optional,
-  #additional {
-    margin-left: auto;
-  }
-
   #label {
     font: var(--sinch-font-title-4);
     color: var(--sinch-color-text-default);
   }
 
   #optional {
+    margin-left: auto;
     font: var(--sinch-font-small-text);
     color: var(--sinch-color-text-muted);
   }
 
   #additional {
+    margin-left: auto;
     font: var(--sinch-font-extra-small-text);
     color: var(--sinch-color-text-muted);
   }
@@ -100,6 +96,10 @@
   ::slotted(sinch-input-tooltip) {
     align-self: center;
     margin: 0 8px;
+  }
+
+  :host([disabled]) ::slotted(sinch-input-tooltip) {
+    fill: var(--sinch-color-stormy-100);
   }
 </style>
 

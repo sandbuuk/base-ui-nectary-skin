@@ -1,10 +1,8 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { TSinchTextarea } from '@saas/components/textarea'
 import type { Meta, Story } from '@storybook/html'
-// https://github.com/storybookjs/storybook/issues/11657
-// import { useArgs } from '@storybook/client-api'
+import '@saas/components/input-tooltip'
 import '@saas/components/textarea'
-import '@saas/components/input'
 
 export default {
   title: 'Components/Textarea',
@@ -69,7 +67,7 @@ const Template: Story<TSinchTextarea> = ({ onChange }) => {
   if (inputRef.current === null) {
     const $input = document.createElement('sinch-textarea')
 
-    $input.innerHTML = '<sinch-tooltip text="Tooltip text long"></sinch-tooltip>'
+    $input.innerHTML = '<sinch-input-tooltip text="Tooltip text long"></sinch-input-tooltip>'
 
     $input.onChange = (newValue) => {
       onChange(newValue)

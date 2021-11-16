@@ -76,16 +76,21 @@
   max-width: 50%;
 }
 
-#optional,
-#additional {
+#label {
+  font: var(--sinch-font-title-4);
+  color: var(--sinch-color-text-default);
+}
+
+#optional {
   margin-left: auto;
   font: var(--sinch-font-small-text);
   color: var(--sinch-color-text-muted);
 }
 
-#label {
-  font: var(--sinch-font-title-4);
-  color: var(--sinch-color-text-default);
+#additional {
+  margin-left: auto;
+  font: var(--sinch-font-extra-small-text);
+  color: var(--sinch-color-text-muted);
 }
 
 #invalid {
@@ -96,10 +101,6 @@
 ::slotted(sinch-input-tooltip) {
   align-self: center;
   margin: 0 8px;
-}
-
-#hidden {
-  display: none;
 }
 
 #listbox {

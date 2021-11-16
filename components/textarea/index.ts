@@ -55,62 +55,6 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
     ]
   }
 
-  set value(value: string) {
-    updateAttribute(this, 'value', value)
-  }
-
-  get value() {
-    return getAttribute(this, 'value', '')
-  }
-
-  set placeholder(value: string | undefined) {
-    updateAttribute(this, 'placeholder', value)
-  }
-
-  get placeholder() {
-    return getAttribute(this, 'placeholder')
-  }
-
-  set label(value: string) {
-    updateAttribute(this, 'label', value)
-  }
-
-  get label(): string {
-    return getAttribute(this, 'label', '')
-  }
-
-  set optionalText(value: string | undefined) {
-    updateAttribute(this, 'optionaltext', value)
-  }
-
-  get optionalText() {
-    return getAttribute(this, 'optionaltext')
-  }
-
-  set additionalText(value: string | undefined) {
-    updateAttribute(this, 'additionaltext', value)
-  }
-
-  get additionalText() {
-    return getAttribute(this, 'additionaltext')
-  }
-
-  set invalidText(value: string | undefined) {
-    updateAttribute(this, 'invalidtext', value)
-  }
-
-  get invalidText() {
-    return getAttribute(this, 'invalidtext')
-  }
-
-  set disabled(isDisabled: boolean | undefined) {
-    updateBooleanAttribute(this, 'disabled', isDisabled)
-  }
-
-  get disabled() {
-    return getBooleanAttribute(this, 'disabled')
-  }
-
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
@@ -155,6 +99,62 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
         break
       }
     }
+  }
+
+  set value(value: string) {
+    updateAttribute(this, 'value', value)
+  }
+
+  get value() {
+    return getAttribute(this, 'value', '')
+  }
+
+  set placeholder(value: string | undefined) {
+    updateAttribute(this, 'placeholder', value)
+  }
+
+  get placeholder() {
+    return getAttribute(this, 'placeholder')
+  }
+
+  set label(value: string) {
+    updateAttribute(this, 'label', value)
+  }
+
+  get label() {
+    return getAttribute(this, 'label', '')
+  }
+
+  set optionalText(value: string | undefined) {
+    updateAttribute(this, 'optionaltext', value)
+  }
+
+  get optionalText() {
+    return getAttribute(this, 'optionaltext')
+  }
+
+  set additionalText(value: string | undefined) {
+    updateAttribute(this, 'additionaltext', value)
+  }
+
+  get additionalText() {
+    return getAttribute(this, 'additionaltext')
+  }
+
+  set invalidText(value: string | undefined) {
+    updateAttribute(this, 'invalidtext', value)
+  }
+
+  get invalidText() {
+    return getAttribute(this, 'invalidtext')
+  }
+
+  set disabled(isDisabled: boolean | undefined) {
+    updateBooleanAttribute(this, 'disabled', isDisabled)
+  }
+
+  get disabled() {
+    return getBooleanAttribute(this, 'disabled')
   }
 
   onInput = (e: Event) => {

@@ -1,8 +1,8 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { TSinchInput } from '@saas/components/input'
 import type { Meta, Story } from '@storybook/html'
+import '@saas/components/input-tooltip'
 import '@saas/components/input'
-import '@saas/components/tooltip'
 
 export default {
   title: 'Components/Input',
@@ -67,7 +67,7 @@ const Template: Story<TSinchInput> = ({ onChange }) => {
   if (inputRef.current == null) {
     const $input = document.createElement('sinch-input')
 
-    $input.innerHTML = '<sinch-tooltip text="Tooltip text long"></sinch-tooltip>'
+    $input.innerHTML = '<sinch-input-tooltip text="Tooltip text long"></sinch-input-tooltip>'
 
     $input.onChange = (newValue) => {
       onChange(newValue)
