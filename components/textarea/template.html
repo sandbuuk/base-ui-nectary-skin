@@ -1,0 +1,115 @@
+<style>
+  :host {
+    display: inline-block;
+    max-width: 300px;
+  }
+
+  #input {
+    all: initial;
+    border: 1px solid var(--sinch-color-stormy-200);
+    box-sizing: border-box;
+    border-radius: 2px;
+    width: 100%;
+    min-height: 86px;
+    padding: 8px 12px;
+    font: var(--sinch-font-body);
+    color: var(--sinch-input-text-color);
+    margin-bottom: 2px;
+    margin-top: 2px;
+    resize: vertical;
+  }
+
+  #input::placeholder {
+    font: var(--sinch-font-body);
+    color: var(--sinch-color-text-muted);
+  }
+
+  #input:disabled {
+    border-color: var(--sinch-color-snow-500);
+    color: var(--sinch-color-stormy-100);
+  }
+
+  #input:disabled::placeholder {
+    color: var(--sinch-color-snow-500);
+  }
+
+  #input:focus {
+    border-color: var(--sinch-color-stormy-300);
+  }
+
+  :host([invalidtext]) #input:not(:disabled) {
+    border-color: var(--sinch-color-text-invalid);
+  }
+
+  #top,
+  #bottom {
+    display: flex;
+    align-items: baseline;
+  }
+
+  #top {
+    line-height: 24px;
+  }
+
+  #bottom {
+    line-height: 20px;
+  }
+
+  #label,
+  #optional,
+  #additional,
+  #invalid {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 50%;
+  }
+
+  #optional,
+  #additional {
+    margin-left: auto;
+  }
+
+  #label {
+    font: var(--sinch-font-title-4);
+    color: var(--sinch-color-text-default);
+  }
+
+  #optional {
+    font: var(--sinch-font-small-text);
+    color: var(--sinch-color-text-muted);
+  }
+
+  #additional {
+    font: var(--sinch-font-extra-small-text);
+    color: var(--sinch-color-text-muted);
+  }
+
+  #invalid {
+    font: var(--sinch-font-extra-small-text);
+    color: var(--sinch-color-text-invalid);
+  }
+
+  :host([disabled]) #label,
+  :host([disabled]) #additional,
+  :host([disabled]) #optional,
+  :host([disabled]) #invalid {
+    color: var(--sinch-color-stormy-100);
+  }
+
+  ::slotted(sinch-input-tooltip) {
+    align-self: center;
+    margin: 0 8px;
+  }
+</style>
+
+<div id="top">
+  <label id="label" for="input"></label>
+  <slot></slot>
+  <span id="optional"></span>
+</div>
+<textarea id="input" rows="3"></textarea>
+<div id="bottom">
+  <span id="invalid"></span>
+  <span id="additional"></span>
+</div>
