@@ -12,7 +12,7 @@
     "test": "concurrently --success=first --kill-others --raw npm:test-playwright npm:test-storybook",
     "test-playwright": "wait-on http://localhost:4000 && PLAYWRIGHT_BROWSERS_PATH=.browsers/ playwright test --browser=all",
     "test-playwright-install": "PLAYWRIGHT_BROWSERS_PATH=.browsers/ playwright install",
-    "test-storybook": "BROWSER=none start-storybook --port 4000 --ci"
+    "test-storybook": "BROWSER=none start-storybook --port 4000 --ci --quiet"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
