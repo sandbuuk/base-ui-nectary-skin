@@ -53,11 +53,12 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     return this.getAttribute('value') ?? ''
   }
 
-  set placeholder(value: string) {
-    if (value === '' || value === undefined) {
-      this.removeAttribute('placeholder')
-    } else {
+  set placeholder(value: string | undefined) {
+    // Storybook provides undefined value
+    if (value != null && value !== '') {
       this.setAttribute('placeholder', value)
+    } else {
+      this.removeAttribute('placeholder')
     }
   }
 
@@ -74,7 +75,12 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   set optionalText(value: string) {
-    this.setAttribute('optionaltext', value)
+    // Storybook provides undefined value
+    if (value != null && value !== '') {
+      this.setAttribute('optionaltext', value)
+    } else {
+      this.removeAttribute('optionaltext')
+    }
   }
 
   get optionalText(): string {
@@ -82,18 +88,24 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   set additionalText(value: string) {
-    this.setAttribute('additionaltext', value)
+    // Storybook provides undefined value
+    if (value != null && value !== '') {
+      this.setAttribute('additionaltext', value)
+    } else {
+      this.removeAttribute('additionaltext')
+    }
   }
 
   get additionalText(): string {
     return this.getAttribute('additionaltext') ?? ''
   }
 
-  set invalidText(value: string) {
-    if (value === '' || value === undefined) {
-      this.removeAttribute('invalidtext')
-    } else {
+  set invalidText(value: string | undefined) {
+    // Storybook provides undefined value
+    if (value != null && value !== '') {
       this.setAttribute('invalidtext', value)
+    } else {
+      this.removeAttribute('invalidtext')
     }
   }
 
@@ -101,8 +113,8 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     return this.getAttribute('invalidtext') ?? ''
   }
 
-  set disabled(isDisabled: boolean) {
-    if (isDisabled) {
+  set disabled(isDisabled: boolean | undefined) {
+    if (isDisabled === true) {
       this.setAttribute('disabled', '')
     } else {
       this.removeAttribute('disabled')

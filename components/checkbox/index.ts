@@ -32,7 +32,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 
   set checked(isChecked: boolean) {
-    if (isChecked) {
+    if (isChecked === true) {
       this.setAttribute('checked', '')
     } else {
       this.removeAttribute('checked')
@@ -45,8 +45,8 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     return attrValue === '' || Boolean(attrValue)
   }
 
-  set indeterminate(isIndeterminate: boolean) {
-    if (isIndeterminate) {
+  set indeterminate(isIndeterminate: boolean | undefined) {
+    if (isIndeterminate === true) {
       this.setAttribute('indeterminate', '')
     } else {
       this.removeAttribute('indeterminate')
@@ -59,8 +59,8 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     return attrValue === '' || Boolean(attrValue)
   }
 
-  set disabled(isDisabled: boolean) {
-    if (isDisabled) {
+  set disabled(isDisabled: boolean | undefined) {
+    if (isDisabled === true) {
       this.setAttribute('disabled', '')
     } else {
       this.removeAttribute('disabled')

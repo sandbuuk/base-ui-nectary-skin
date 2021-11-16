@@ -32,8 +32,8 @@ defineCustomElement('sinch-button-destructive', class extends HTMLElement {
     return this.getAttribute('text') ?? ''
   }
 
-  set disabled(isDisabled: boolean) {
-    if (isDisabled) {
+  set disabled(isDisabled: boolean | undefined) {
+    if (isDisabled === true) {
       this.setAttribute('disabled', '')
     } else {
       this.removeAttribute('disabled')
@@ -46,8 +46,8 @@ defineCustomElement('sinch-button-destructive', class extends HTMLElement {
     return attrValue === '' || Boolean(attrValue)
   }
 
-  set small(isSmall: boolean) {
-    if (isSmall) {
+  set small(isSmall: boolean | undefined) {
+    if (isSmall === true) {
       this.setAttribute('small', '')
     } else {
       this.removeAttribute('small')

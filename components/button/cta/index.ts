@@ -32,8 +32,8 @@ defineCustomElement('sinch-button-cta', class extends HTMLElement {
     return this.getAttribute('text') ?? ''
   }
 
-  set disabled(isDisabled: boolean) {
-    if (isDisabled) {
+  set disabled(isDisabled: boolean | undefined) {
+    if (isDisabled === true) {
       this.setAttribute('disabled', '')
     } else {
       this.removeAttribute('disabled')
