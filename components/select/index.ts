@@ -3,16 +3,8 @@ import templateHTML from './template.html'
 import type { TSinchSelectOption } from '../select-option'
 import '../select-option'
 
-const isSinchSelectOption = (element: Element): element is (HTMLElement & TSinchSelectOption) => {
-  return element.tagName === 'SINCH-SELECT-OPTION'
-}
-
-const isLabelElement = (element: EventTarget | null): element is HTMLLabelElement => {
-  return element instanceof Element && element.tagName === 'LABEL'
-}
-
-const isInputElement = (element: EventTarget | null): element is HTMLInputElement => {
-  return element instanceof HTMLInputElement
+const isOptionElement = (element: EventTarget | Element | null): element is (HTMLElement & TSinchSelectOption) => {
+  return element instanceof Element && element.tagName === 'SINCH-SELECT-OPTION'
 }
 
 const template = document.createElement('template')
@@ -21,22 +13,24 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-select', class extends HTMLElement {
   $button: HTMLButtonElement
+  $buttonContent: HTMLSpanElement
   $label: HTMLLabelElement
   $optionalText: HTMLSpanElement
   $additionalText: HTMLSpanElement
   $invalidText: HTMLSpanElement
   $selectSlot: HTMLSlotElement
   $listbox: HTMLUListElement
-  prevKeyboardFocusId = ''
+  $selectedOption: (HTMLElement & TSinchSelectOption) | null = null
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'closed' })
+    const shadowRoot = this.attachShadow({ mode: 'closed', delegatesFocus: true })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.$button = shadowRoot.querySelector('#button')!
+    this.$buttonContent = shadowRoot.querySelector('#content')!
     this.$listbox = shadowRoot.querySelector('#listbox')!
     this.$label = shadowRoot.querySelector('#label')!
     this.$optionalText = shadowRoot.querySelector('#optional')!
@@ -47,15 +41,19 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
   connectedCallback() {
     this.$button.addEventListener('click', this.onButtonClick)
-    this.$listbox.addEventListener('blur', this.onOutsideClick, true)
-    this.$listbox.addEventListener('click', this.onListboxClick, true)
+    this.$listbox.addEventListener('blur', this.onListboxBlur)
+    this.$listbox.addEventListener('click', this.onListboxClick)
     this.$selectSlot.addEventListener('slotchange', this.onSlotChange)
+    this.$listbox.addEventListener('keydown', this.onListboxKeyDown)
+    this.$listbox.addEventListener('keypress', this.onListboxKeyUp)
   }
 
   disconnectedCallback() {
     this.$button.removeEventListener('click', this.onButtonClick)
-    this.$listbox.removeEventListener('blur', this.onOutsideClick, true)
+    this.$listbox.removeEventListener('blur', this.onListboxBlur)
     this.$listbox.removeEventListener('click', this.onListboxClick)
+    this.$listbox.addEventListener('keydown', this.onListboxKeyDown)
+    this.$listbox.addEventListener('keypress', this.onListboxKeyUp)
     this.$selectSlot.removeEventListener('slotchange', this.onSlotChange)
   }
 
@@ -207,178 +205,248 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 
   onButtonClick = (e: Event) => {
+    e.stopPropagation()
+
     if (this.$button.ariaExpanded !== 'true') {
       this.onExpand()
     }
-
-    e.stopPropagation()
   }
 
   onListboxClick = (e: Event) => {
+    e.stopPropagation()
+
     const $elem = e.target
 
-    // Listbox overlaps button and label when open.
-    // Clicking on listbox should collapse it.
     if ($elem === this.$listbox) {
       this.onCollapse()
 
       return
     }
 
-    // Click on label happens just before click is forwarded to input
-    if (isLabelElement($elem)) {
-      const nextInputId = $elem.getAttribute('for')
-
-      // Check if input under label is enabled
-      if (
-        nextInputId !== null &&
-        nextInputId !== '' &&
-        this.$listbox.querySelector<HTMLInputElement>(`#${nextInputId}:not(:disabled)`) !== null
-      ) {
-        // Store id now, so forwarded input click event use it
-        this.prevKeyboardFocusId = nextInputId
-
-        return
-      }
-
-      // Input under this label is disabled or does not exist
-      // Since prev input lost focus because of label click, try focusing it back
-      this.focusInput(
-        this.prevKeyboardFocusId !== ''
-          ? this.$listbox.querySelector<HTMLInputElement>(`#${this.prevKeyboardFocusId}`)
-          : null
-      )
-
-      return
+    if (isOptionElement($elem) && $elem.disabled !== true) {
+      this.selectOption($elem)
+      this.dispatchSelectedOption()
+      this.onCollapse()
+      this.$button.focus()
     }
+  }
 
-    if (isInputElement($elem)) {
-      // Uncheck radio input
-      // Space key sends click events only for unchecked radio inputs
-      $elem.checked = false
-
-      if (
-        // Enter key press after navigating with arrow keys
-        ($elem.type === 'submit' && this.prevKeyboardFocusId !== '') ||
-        // Mouse click or Space key
-        // Click on input received after clicking on label
-        this.prevKeyboardFocusId === $elem.id
-      ) {
-        const $input = this.$listbox.querySelector<HTMLInputElement>(`#${this.prevKeyboardFocusId}`)!
-
-        this.dispatchEvent(new CustomEvent('change', { detail: $input.value }))
-        getEventHandler(this, 'onChange')?.($input.value)
-
-        // Allows subsequent space and enter press to expand the listbox
-        // Collapses the listbox by blur event
+  onListboxKeyUp = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case 'Space':
+      case 'Enter': {
+        this.dispatchSelectedOption()
+        this.onCollapse()
         this.$button.focus()
-      } else {
-        // Click received by navigating with arrow keys
-        this.focusInput($elem)
+
+        break
       }
     }
+  }
 
-    e.stopPropagation()
+  onListboxKeyDown = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case 'ArrowUp': {
+        this.selectOption(this.getPrevOption())
+
+        break
+      }
+      case 'ArrowDown': {
+        this.selectOption(this.getNextOption())
+
+        break
+      }
+      case 'Escape': {
+        this.onCollapse()
+        this.$button.focus()
+
+        break
+      }
+    }
   }
 
   onSlotChange = () => {
-    const $fragment = document.createDocumentFragment()
-
-    this.$selectSlot.assignedElements().forEach(($elem, i) => {
-      if (!isSinchSelectOption($elem)) {
-        return
-      }
-
-      const $input = document.createElement('input')
-
-      $input.type = 'radio'
-      $input.name = 'listbox'
-      $input.id = `input_${i}`
-      $input.value = $elem.value
-      $input.disabled = Boolean($elem.disabled)
-
-      const $label = document.createElement('label')
-      const $icon = $elem.getIcon()
-
-      if ($icon != null) {
-        $label.appendChild($icon)
-      }
-
-      $label.setAttribute('for', $input.id)
-      $label.setAttribute('role', 'option')
-
-      const $labelSpan = document.createElement('span')
-
-      $labelSpan.textContent = $elem.text
-      $label.appendChild($labelSpan)
-
-      $fragment.appendChild($input)
-      $fragment.appendChild($label)
-    })
-
-    this.$listbox.firstElementChild!.replaceChildren($fragment)
+    this.onCollapse()
 
     // Update data-checked attribute and button textContent
     this.onValueChange(this.value)
   }
 
-  onOutsideClick = (e: FocusEvent) => {
-    if (
-      e.target !== this.$listbox &&
-      e.relatedTarget !== this.$listbox &&
-      !this.$listbox.contains(e.relatedTarget as Node | null)
-    ) {
+  onListboxBlur = (e: Event) => {
+    e.stopPropagation()
+
+    this.onCollapse()
+  }
+
+  onExpand() {
+    this.$button.setAttribute('aria-expanded', 'true')
+    this.$listbox.focus()
+    this.selectOption(this.getOptionWithValue(this.value) ?? this.getFirstOption())
+  }
+
+  onCollapse() {
+    this.$button.setAttribute('aria-expanded', 'false')
+    this.$listbox.blur()
+    this.selectOption(null)
+  }
+
+  onValueChange(value: string) {
+    this.uncheckAllOptions()
+
+    const $option = this.getOptionWithValue(value)
+
+    this.updateButtonContent($option)
+
+    if ($option !== null) {
+      $option.checked = true
+      this.$listbox.setAttribute('aria-activedescendant', $option.id)
+    }
+  }
+
+  uncheckAllOptions() {
+    for (const $option of this.$selectSlot.assignedElements()) {
+      if (isOptionElement($option)) {
+        $option.checked = false
+      }
+    }
+  }
+
+  getFirstOption() {
+    for (const $option of this.$selectSlot.assignedElements()) {
+      if (isOptionElement($option) && $option.disabled !== true) {
+        return $option
+      }
+    }
+
+    return null
+  }
+
+  getLastOption() {
+    for (const $option of this.$selectSlot.assignedElements().reverse()) {
+      if (isOptionElement($option) && $option.disabled !== true) {
+        return $option
+      }
+    }
+
+    return null
+  }
+
+  getNextOption() {
+    let $current: Element | null = this.$selectedOption
+
+    if ($current === null) {
+      // Cannot get element to start iteration
+      return this.getFirstOption()
+    }
+
+    const $parent = $current.parentElement!
+
+    // For-loop prevents infinite loop
+    for (let i = 0; i < $parent.childElementCount; ++i) {
+      $current = $current!.nextElementSibling
+
+      if ($current === null) {
+        // Reached end, get last element
+        $current = $parent.firstElementChild
+
+        if ($current === this.$selectedOption) {
+          // Completed full circle
+          return this.$selectedOption
+        }
+      }
+
+      if (isOptionElement($current) && $current.disabled !== true) {
+        return $current
+      }
+    }
+
+    return this.$selectedOption
+  }
+
+  getPrevOption() {
+    let $current: Element | null = this.$selectedOption
+
+    if ($current === null) {
+      // Cannot get element to start iteration
+      return this.getLastOption()
+    }
+
+    const $parent = $current.parentElement!
+
+    // For-loop prevents infinite loop
+    for (let i = 0; i < $parent.childElementCount; ++i) {
+      $current = $current!.previousElementSibling
+
+      if ($current === null) {
+        // Reached end, get last element
+        $current = $parent.lastElementChild
+
+        if ($current === this.$selectedOption) {
+          // Completed full circle
+          return this.$selectedOption
+        }
+      }
+
+      if (isOptionElement($current) && $current.disabled !== true) {
+        return $current
+      }
+    }
+
+    return this.$selectedOption
+  }
+
+  getOptionWithValue(value: string) {
+    for (const $option of this.$selectSlot.assignedElements()) {
+      if (isOptionElement($option) && $option.disabled !== true && $option.value === value) {
+        return $option
+      }
+    }
+
+    return null
+  }
+
+  dispatchSelectedOption() {
+    if (this.$selectedOption !== null) {
+      this.dispatchEvent(
+        new CustomEvent('change', { detail: this.$selectedOption.value })
+      )
+
+      getEventHandler(this, 'onChange')?.(this.$selectedOption.value)
       this.onCollapse()
     }
   }
 
-  onExpand = () => {
-    this.$button.setAttribute('aria-expanded', 'true')
+  selectOption($option: (HTMLElement & TSinchSelectOption) | null) {
+    if (this.$selectedOption !== null) {
+      this.$selectedOption.selected = false
+    }
 
-    // Try focusing selected input upon expand
-    this.focusInput(this.$listbox.querySelector<HTMLInputElement>(`input[value="${this.value}"]`))
+    this.$selectedOption = $option
+
+    if (this.$selectedOption !== null) {
+      this.$selectedOption.selected = true
+    }
   }
 
-  onCollapse = () => {
-    this.$button.setAttribute('aria-expanded', 'false')
-  }
+  updateButtonContent($option: (HTMLElement & TSinchSelectOption) | null) {
+    // Remove icon element
+    if (this.$button.firstElementChild !== this.$buttonContent) {
+      this.$button.removeChild(this.$button.firstElementChild!)
+    }
 
-  onValueChange = (value: string) => {
-    this.clearCheckedAttributes()
-
-    const $input = this.$listbox.querySelector<HTMLInputElement>(`input[value="${value}"]`)
-
-    if ($input !== null && $input.disabled === false) {
-      $input.setAttribute('data-checked', '')
-      this.$listbox.setAttribute('aria-activedescendant', $input.id)
-      this.$button.removeAttribute('unselected')
-      this.$button.textContent = $input.nextElementSibling!.lastElementChild!.textContent
+    if ($option === null) {
+      this.$button.setAttribute('data-unselected', '')
+      this.$buttonContent.textContent = this.placeholder
     } else {
-      this.$button.setAttribute('unselected', '')
-      this.$button.textContent = this.placeholder
-    }
-  }
+      this.$button.removeAttribute('data-unselected')
+      this.$buttonContent.textContent = $option.text
 
-  clearCheckedAttributes = () => {
-    for (const $inp of Array.from(this.$listbox.querySelectorAll('input[data-checked]'))) {
-      $inp.removeAttribute('data-checked')
-    }
-  }
+      // Try adding icon
+      const $icon = $option.shadowRoot!.querySelector('slot')?.assignedElements()[0]?.cloneNode(true)
 
-  focusInput = ($input: HTMLInputElement | null) => {
-    if ($input !== null && $input.disabled === false) {
-      this.prevKeyboardFocusId = $input.id
-      $input.focus()
-
-      return
-    }
-
-    // Try focusing first non-disabled input
-    const $enabledInput = this.$listbox.querySelector<HTMLInputElement>(`input:not([disabled])`)
-
-    if ($enabledInput !== null) {
-      this.prevKeyboardFocusId = $enabledInput.id
-      $enabledInput.focus()
+      if ($icon != null) {
+        this.$button.prepend($icon)
+      }
     }
   }
 })

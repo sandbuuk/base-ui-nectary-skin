@@ -4,31 +4,40 @@
   position: relative;
   height: 96px;
   max-width: 300px;
+  outline: none;
 }
 
 #button {
   all: initial;
+  display: flex;
+  align-items: center;
   border: 1px solid var(--sinch-color-stormy-200);
   box-sizing: border-box;
   border-radius: 2px;
   width: 100%;
-  height: 42px;
+  height: 48px;
   margin: 2px 0;
-  padding: 8px 37px 8px 12px;
+  padding: 8px 12px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
+  fill: var(--sinch-color-stormy-500);
 }
 
-#button[unselected] {
+#button > * {
+  pointer-events: none;
+}
+
+#button[data-unselected] {
   color: var(--sinch-color-text-muted);
 }
 
 #button:disabled {
   border-color: var(--sinch-color-snow-500);
   color: var(--sinch-color-stormy-100);
+  fill: var(--sinch-color-stormy-100);
 }
 
 #button:focus {
@@ -39,12 +48,8 @@
   border-color: var(--sinch-color-text-invalid);
 }
 
-#dropdown-icon {
-  position: absolute;
-  right: 16px;
-  top: 43px;
-  fill: var(--sinch-color-stormy-500);
-  pointer-events: none;
+#button > :not(:first-child) {
+  margin-left: 8px;
 }
 
 #top,
@@ -74,21 +79,13 @@
 #optional,
 #additional {
   margin-left: auto;
+  font: var(--sinch-font-small-text);
+  color: var(--sinch-color-text-muted);
 }
 
 #label {
   font: var(--sinch-font-title-4);
   color: var(--sinch-color-text-default);
-}
-
-#optional {
-  font: var(--sinch-font-small-text);
-  color: var(--sinch-color-text-muted);
-}
-
-#additional {
-  font: var(--sinch-font-extra-small-text);
-  color: var(--sinch-color-text-muted);
 }
 
 #invalid {
@@ -109,39 +106,14 @@
   position: absolute;
   left: 0;
   top: 0;
-  padding-top: 68px;
+  padding-top: 74px;
   width: 100%;
   display: none;
   list-style: none;
   outline: none;
 }
 
-#listbox label {
-  display: flex;
-  position: relative;
-  box-sizing: border-box;
-  padding: 6px 36px 6px 12px;
-  width: 100%;
-  align-items: center;
-}
-
-#listbox label > * {
-  pointer-events: none;
-}
-
-#listbox label > span {
-  flex-shrink: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-#listbox label > * + span {
-  margin-left: 12px;
-}
-
-#listbox > fieldset {
-  all: initial;
+#listbox > div {
   width: 100%;
   font: var(--sinch-font-body);
   background-color: var(--sinch-color-snow-100);
@@ -153,38 +125,11 @@
   box-shadow: 1px 2px 4px rgb(0 0 0 / 15%);
 }
 
-#listbox input {
-  all: initial;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  display: block;
-}
-
-#listbox label:active,
-#listbox label:hover,
-#listbox input:focus + label {
-  background-color: var(--sinch-color-snow-500);
-}
-
-#listbox input[data-checked] + label::after {
-  content: "";
-  position: absolute;
-  top: 10px;
-  right: 11px;
-  width: 18px;
-  height: 14px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 11.17 1.83 7 .41 8.41 6 14 18 2 16.59.59 6 11.17Z' fill='%230A273D'/%3E%3C/svg%3E");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 :host([disabled]) #label,
 :host([disabled]) #additional,
 :host([disabled]) #optional,
 :host([disabled]) #invalid,
-:host([disabled]) #dropdown-icon,
-#listbox input:disabled + label {
+:host([disabled]) ::slotted(sinch-input-tooltip) {
   color: var(--sinch-color-stormy-100);
   fill: var(--sinch-color-stormy-100);
 }
@@ -209,22 +154,21 @@
   aria-haspopup="listbox"
   aria-expanded="false"
   aria-labelledby="label button"
-></button>
-<svg id="dropdown-icon" width="12" height="8">
-  <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
-</svg>
+>
+  <span id="content"></span>
+  <svg id="dropdown-icon" width="12" height="8">
+    <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
+  </svg>
+</button>
 <div id="bottom">
   <span id="invalid"></span>
   <span id="additional"></span>
 </div>
-<div id="hidden">
-  <slot name="select"></slot>
-</div>
-<form
+<div
   id="listbox"
   tabindex="-1"
-  onsubmit="return false"
 >
-  <fieldset role="listbox"></fieldset>
-  <input type="submit"/>
-</form>
+  <div role="listbox">
+    <slot name="select"></slot>
+  </div>
+</div>
