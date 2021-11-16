@@ -11,6 +11,22 @@ export default {
       description: 'Input value',
       control: 'text',
     },
+    label: {
+      description: 'Label',
+      control: 'text',
+    },
+    optionalText: {
+      description: 'Optional',
+      control: 'text',
+    },
+    additionalText: {
+      description: 'Additional',
+      control: 'text',
+    },
+    invalidText: {
+      description: 'Invalid',
+      control: 'text',
+    },
     onChange: {
       description: 'Handler to sync input value with the state',
       action: 'onChange',
@@ -28,11 +44,22 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchInput> = ({ value, onChange }) => {
+const Template: Story<TSinchInput> = ({
+  value,
+  label,
+  additionalText,
+  optionalText,
+  invalidText,
+  onChange,
+}) => {
   // const [{ value }, updateArgs] = useArgs()
   const input = document.createElement('sinch-input')
 
   input.value = value
+  input.label = label
+  input.additionalText = additionalText
+  input.optionalText = optionalText
+  input.invalidText = invalidText
 
   input.onChange = (newValue) => {
     input.value = newValue
@@ -48,6 +75,10 @@ export const Input = Template.bind({})
 
 Input.args = {
   value: 'hi',
+  label: 'Label',
+  optionalText: 'Optional',
+  additionalText: 'Additional',
+  invalidText: 'Invalid',
 }
 
 Input.parameters = {

@@ -23,6 +23,10 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     this.label = shadowRoot.querySelector('label')!
   }
 
+  disconnectedCallback() {
+    this.input.removeEventListener('click', this.onInput)
+  }
+
   static get observedAttributes() {
     return ['checked', 'indeterminate', 'disabled', 'text']
   }

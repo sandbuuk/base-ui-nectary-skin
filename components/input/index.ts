@@ -6,7 +6,11 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-input', class extends HTMLElement {
-  input: HTMLInputElement
+  $input: HTMLInputElement
+  $label: HTMLLabelElement
+  $optionalText: HTMLSpanElement
+  $additionalText: HTMLSpanElement
+  $invalidText: HTMLSpanElement
   onChange!: (e: any) => void
 
   constructor() {
@@ -16,18 +20,21 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.input = shadowRoot.querySelector('input')!
+    this.$input = shadowRoot.querySelector('#input')!
+    this.$label = shadowRoot.querySelector('#label')!
+    this.$optionalText = shadowRoot.querySelector('#optional')!
+    this.$additionalText = shadowRoot.querySelector('#additional')!
+    this.$invalidText = shadowRoot.querySelector('#invalid')!
 
-    this.input.addEventListener('input', this.onInput)
-    // this.input.addEventListener('beforeinput', (e) => {
-    //   console.log(e)
-    //   e.stopPropagation()
-    //   e.preventDefault()
-    // })
+    this.$input.addEventListener('input', this.onInput)
+  }
+
+  disconnectedCallback() {
+    this.$input.removeEventListener('click', this.onInput)
   }
 
   static get observedAttributes() {
-    return ['value']
+    return ['value', 'label', 'optionaltext', 'additionaltext', 'invalidtext']
   }
 
   set value(value: string) {
@@ -38,9 +45,69 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     return this.getAttribute('value') ?? ''
   }
 
+  set label(value: string) {
+    this.setAttribute('label', value)
+  }
+
+  get label() {
+    return this.getAttribute('label') ?? ''
+  }
+
+  set optionalText(value: string) {
+    this.setAttribute('optionaltext', value)
+  }
+
+  get optionalText() {
+    return this.getAttribute('optionaltext') ?? ''
+  }
+
+  set additionalText(value: string) {
+    this.setAttribute('additionaltext', value)
+  }
+
+  get additionalText() {
+    return this.getAttribute('additionaltext') ?? ''
+  }
+
+  set invalidText(value: string) {
+    this.setAttribute('invalidtext', value)
+  }
+
+  get invalidText() {
+    return this.getAttribute('invalidtext') ?? ''
+  }
+
   attributeChangedCallback(name: string, oldVal: string, newVal: string) {
-    if (name === 'value') {
-      this.input.value = newVal
+    switch (name) {
+      case 'value': {
+        this.$input.value = newVal
+
+        break
+      }
+
+      case 'label': {
+        this.$label.textContent = newVal
+
+        break
+      }
+
+      case 'optionaltext': {
+        this.$optionalText.textContent = newVal
+
+        break
+      }
+
+      case 'additionaltext': {
+        this.$additionalText.textContent = newVal
+
+        break
+      }
+
+      case 'invalidtext': {
+        this.$invalidText.textContent = newVal
+
+        break
+      }
     }
   }
 
@@ -48,16 +115,16 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     const onChange = getEventHandler(this, 'onChange')
 
     if (onChange != null) {
-      onChange(this.input.value)
+      onChange(this.$input.value)
     }
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: this.input.value,
+        detail: this.$input.value,
       })
     )
 
-    this.input.value = this.value
+    this.$input.value = this.value
 
     e.stopPropagation()
   }
@@ -65,6 +132,10 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
 export type TSinchInput = {
   value: string,
+  label: string,
+  optionalText?: string,
+  invalidText?: string,
+  additionalText?: string,
   onChange: (value: string) => void,
 }
 
