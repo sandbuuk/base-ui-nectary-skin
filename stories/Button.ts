@@ -68,7 +68,7 @@ ButtonWithLeftIcon.args = Button.args
 ButtonWithLeftIcon.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-share slot="left-icon"></sinch-icon-share>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-share></sinch-icon-share>\n</sinch-button>',
     },
   },
 }
@@ -76,45 +76,7 @@ ButtonWithLeftIcon.decorators = [
   (Story) => {
     const button = Story() as Element
 
-    button.innerHTML = `<sinch-icon-share slot="left-icon"></sinch-icon-share>`
-
-    return button
-  },
-]
-
-export const ButtonWithRightIcon = Template.bind({})
-ButtonWithRightIcon.args = Button.args
-ButtonWithRightIcon.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-share slot="right-icon"></sinch-icon-share>\n</sinch-button>',
-    },
-  },
-}
-ButtonWithRightIcon.decorators = [
-  (Story) => {
-    const button = Story() as Element
-
-    button.innerHTML = `<sinch-icon-share slot="right-icon"></sinch-icon-share>`
-
-    return button
-  },
-]
-
-export const ButtonWithBothIcons = Template.bind({})
-ButtonWithBothIcons.args = Button.args
-ButtonWithBothIcons.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-share slot="left-icon"></sinch-icon-share>\n  <sinch-icon-share slot="right-icon"></sinch-icon-share>\n</sinch-button>',
-    },
-  },
-}
-ButtonWithBothIcons.decorators = [
-  (Story) => {
-    const button = Story() as Element
-
-    button.innerHTML = `<sinch-icon-share slot="left-icon"></sinch-icon-share><sinch-icon-share slot="right-icon"></sinch-icon-share>`
+    button.innerHTML = `<sinch-icon-share></sinch-icon-share>`
 
     return button
   },

@@ -109,25 +109,16 @@
     font-size: 14px;
   }
 
-  ::slotted([slot="left-icon"]) {
+  ::slotted(*) {
     margin-right: 16px;
   }
 
-  ::slotted([slot="right-icon"]) {
-    margin-left: 16px;
-  }
-
-  :host([small]:not([type="cta"])) ::slotted([slot="left-icon"]) {
+  :host([small]:not([type="cta"])) ::slotted(*) {
     margin-right: 12px;
-  }
-
-  :host([small]:not([type="cta"])) ::slotted([slot="right-icon"]) {
-    margin-left: 12px;
   }
 </style>
 
 <button>
-  <slot name="left-icon"></slot>
+  <slot></slot>
   <span id="text"></span>
-  <slot name="right-icon"></slot>
 </button>
