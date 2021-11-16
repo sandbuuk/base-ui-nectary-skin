@@ -21,19 +21,19 @@ defineCustomElement('sinch-button-secondary', class extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['value', 'disabled']
+    return ['text', 'disabled']
   }
 
-  set value(value: string) {
-    this.setAttribute('value', value)
+  set text(text: string) {
+    this.setAttribute('text', text)
   }
 
-  get value(): string {
-    return this.getAttribute('value') ?? ''
+  get text(): string {
+    return this.getAttribute('text') ?? ''
   }
 
-  set disabled(value: boolean) {
-    if (value) {
+  set disabled(isDisabled: boolean) {
+    if (isDisabled) {
       this.setAttribute('disabled', '')
     } else {
       this.removeAttribute('disabled')
@@ -46,8 +46,8 @@ defineCustomElement('sinch-button-secondary', class extends HTMLElement {
     return attrValue === '' || Boolean(attrValue)
   }
 
-  set small(value: boolean) {
-    if (value) {
+  set small(isSmall: boolean) {
+    if (isSmall) {
       this.setAttribute('small', '')
     } else {
       this.removeAttribute('small')
@@ -62,7 +62,7 @@ defineCustomElement('sinch-button-secondary', class extends HTMLElement {
 
   attributeChangedCallback(name: string, _: unknown, newVal: unknown) {
     switch (name) {
-      case 'value': {
+      case 'text': {
         this.button.textContent = String(newVal)
 
         break
@@ -95,7 +95,7 @@ defineCustomElement('sinch-button-secondary', class extends HTMLElement {
 })
 
 export type TSinchButtonSecondary = {
-  value: string,
+  text: string,
   disabled?: boolean,
   small?: boolean,
   onClick: () => void,
