@@ -1,9 +1,5 @@
 <style>
 :host {
-  display: block;
-}
-
-#label {
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -12,7 +8,7 @@
   align-items: center;
 }
 
-#label > * {
+* {
   pointer-events: none;
 }
 
@@ -32,11 +28,11 @@ span {
   background-color: var(--sinch-color-snow-500);
 }
 
-:host([checked]) #label {
+:host([checked]) {
   padding-right: 36px;
 }
 
-:host([checked]) #label::after {
+:host([checked])::after {
   content: "";
   position: absolute;
   top: 10px;
@@ -54,7 +50,5 @@ span {
 }
 </style>
 
-<div id="label" role="option">
-  <slot></slot>
-  <span></span>
-</div>
+<slot></slot>
+<span></span>

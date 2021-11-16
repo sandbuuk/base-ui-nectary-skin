@@ -20,6 +20,10 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
     this.$content = shadowRoot.querySelector('span')!
   }
 
+  connectedCallback() {
+    this.setAttribute('role', 'option')
+  }
+
   static get observedAttributes() {
     return ['text']
   }

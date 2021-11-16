@@ -48,6 +48,8 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'listbox')
+
     this.$button.addEventListener('click', this.onButtonClick)
     this.$listbox.addEventListener('blur', this.onListboxBlur)
     this.$listbox.addEventListener('click', this.onListboxClick)
