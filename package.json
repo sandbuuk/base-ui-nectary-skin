@@ -1,51 +1,32 @@
 {
   "private": true,
   "workspaces": [
-    "apps/*",
     "components/",
     "configs/*",
     "libs/*"
   ],
   "scripts": {
-    "start": "concurrently --raw npm:react-1 npm:react-2 npm:vue npm:angular npm:shell",
-    "react-1": "webpack serve --config apps/react-1/webpack.config.js",
-    "react-2": "webpack serve --config apps/react-2/webpack.config.js",
-    "vue": "webpack serve --config apps/vue/webpack.config.js",
-    "angular": "yarn workspace angular-app start",
-    "shell": "wait-on http://localhost:3001/ http://localhost:3002/ http://localhost:3003/ http://localhost:3004/ && webpack serve --config apps/shell/webpack.config.js",
     "storybook": "start-storybook --port 4000",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html'"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
+    "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
-    "@babel/preset-typescript": "^7.16.0",
-    "@module-federation/fmr": "^0.0.7",
     "@saas/components": "*",
-    "@storybook/addons": "^6.3.12",
-    "@storybook/addon-actions": "^6.3.12",
-    "@storybook/addon-a11y": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",
-    "@storybook/addon-links": "^6.3.12",
+    "@storybook/addons": "^6.3.12",
     "@storybook/client-api": "^6.3.12",
     "@storybook/html": "^6.3.12",
     "@types/node": "^14.0.0",
-    "babel-loader": "^8.2.2",
-    "concurrently": "^6.2.1",
-    "css-loader": "^6.2.0",
+    "babel-loader": "^8.2.3",
     "eslint": "^7.0.0",
-    "html-webpack-plugin": "^5.3.2",
-    "postcss-html": "^1.1.1",
-    "raw-loader": "^4.0.2",
+    "postcss-html": "^1.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "style-loader": "^3.2.1",
     "stylelint": "^14.0.0",
     "stylelint-config-standard": "^23.0.0",
     "typescript": "^4.4.2",
-    "wait-on": "^6.0.0",
-    "webpack": "^5.52.0",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.1.0"
+    "webpack": "^5.63.0"
   }
 }

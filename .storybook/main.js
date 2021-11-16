@@ -3,8 +3,6 @@ module.exports = {
     "../stories/**/*.ts",
   ],
   "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-a11y"
+    "@storybook/addon-essentials"
   ]
 }
