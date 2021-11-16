@@ -1,0 +1,118 @@
+<style>
+  :host {
+    position: relative;
+    display: inline-block;
+  }
+
+  #container {
+    pointer-events: none;
+    opacity: 0%;
+    transition: opacity 0.2s linear 0.2s;
+  }
+
+  :host(:hover) #container {
+    opacity: 100%;
+  }
+
+  #text {
+    position: absolute;
+    padding: 2px 6px;
+    font: var(--sinch-font-extra-small-text);
+    color: var(--sinch-color-text-default);
+    background-color: var(--sinch-color-snow-600);
+    width: max-content;
+    border-radius: 2px;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+  }
+
+  #arrow {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    fill: var(--sinch-color-snow-600);
+  }
+
+  :host([inverted]) #text {
+    color: var(--sinch-color-text-inverted);
+    background-color: var(--sinch-color-stormy-500);
+  }
+
+  :host([inverted]) #arrow {
+    fill: var(--sinch-color-stormy-500);
+  }
+
+  :host([orientation="top-left"]) #text {
+    left: unset;
+    right: -20%;
+    transform: translateY(-100%);
+  }
+
+  :host([orientation="top-right"]) #text {
+    left: -20%;
+    transform: translateY(-100%);
+  }
+
+  :host([orientation="bottom-right"]) #text {
+    left: -20%;
+    top: calc(100% + 8px);
+    transform: unset;
+  }
+
+  :host([orientation="bottom-left"]) #text {
+    left: unset;
+    transform: unset;
+    top: calc(100% + 8px);
+    right: -20%;
+  }
+
+  :host([orientation="bottom"]) #text {
+    transform: translateX(-50%);
+    top: calc(100% + 8px);
+  }
+
+  :host([orientation="bottom"]) #arrow,
+  :host([orientation="bottom-left"]) #arrow,
+  :host([orientation="bottom-right"]) #arrow {
+    top: calc(100% + 4px);
+    transform: translateX(-50%) rotate(180deg);
+  }
+
+  :host([orientation="left"]) #text {
+    left: unset;
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  :host([orientation="left"]) #arrow {
+    left: -11px;
+    top: 50%;
+    transform: translateY(-50%) rotate(270deg);
+  }
+
+  :host([orientation="right"]) #text {
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  :host([orientation="right"]) #arrow {
+    top: 50%;
+    left: calc(100% + 2px);
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  ::slotted(*) {
+    display: block;
+  }
+
+</style>
+
+<slot></slot>
+<div id="container">
+  <div id="text"></div>
+  <svg id="arrow" width="9" height="4"><path d="m4.5 4 4-4h-8l4 4Z"/></svg>
+</div>

@@ -1,8 +1,6 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { TSinchSelect } from '@saas/components/select'
 import type { Meta, Story } from '@storybook/html'
-// https://github.com/storybookjs/storybook/issues/11657
-// import { useArgs } from '@storybook/client-api'
 import '@saas/components/select'
 import '@saas/components/input-tooltip'
 
