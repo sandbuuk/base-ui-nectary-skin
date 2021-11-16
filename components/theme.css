@@ -1,4 +1,14 @@
 :root {
-  --sinch-button-text-color: green;
-  --sinch-input-text-color: blue;
+  --sinch-color-tropical-700: #003D3D;
+  --sinch-color-tropical-600: #005757;
+  --sinch-color-tropical-500: #007171;
+  --sinch-color-tropical-400: #338D8D;
+  --sinch-color-tropical-300: #66AAAA;
+  --sinch-color-tropical-200: #99C6C6;
+  --sinch-color-tropical-100: #CCE3E3;
+  --sinch-color-text-default: #0A273D;
+  --sinch-color-text-inverted: #FFFFFF;
+  --sinch-color-text-muted: #677784;
+  --sinch-color-text-link: #007171;
+  --sinch-color-text-invalid: #E31C3D;
 }
