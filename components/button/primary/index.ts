@@ -6,7 +6,8 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-button-primary', class extends HTMLElement {
-  button: HTMLButtonElement
+  $button: HTMLButtonElement
+  $text: HTMLSpanElement
 
   constructor() {
     super()
@@ -15,13 +16,22 @@ defineCustomElement('sinch-button-primary', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.button = shadowRoot.querySelector('button')!
+    this.$button = shadowRoot.querySelector('button')!
+    this.$text = shadowRoot.querySelector('#text')!
 
-    this.button.addEventListener('click', this.onClick)
+    this.$button.addEventListener('click', this.onClick)
   }
 
   static get observedAttributes() {
     return ['text', 'disabled']
+  }
+
+  set type(value: string) {
+    this.setAttribute('type', value)
+  }
+
+  get type(): string {
+    return this.getAttribute('type') ?? ''
   }
 
   set text(text: string) {
@@ -63,12 +73,12 @@ defineCustomElement('sinch-button-primary', class extends HTMLElement {
   attributeChangedCallback(name: string, _: unknown, newVal: unknown) {
     switch (name) {
       case 'text': {
-        this.button.textContent = String(newVal)
+        this.$text.textContent = String(newVal)
 
         break
       }
       case 'disabled': {
-        this.button.disabled = newVal === '' || Boolean(newVal)
+        this.$button.disabled = newVal === '' || Boolean(newVal)
 
         break
       }
@@ -76,15 +86,11 @@ defineCustomElement('sinch-button-primary', class extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.button.removeEventListener('click', this.onClick)
+    this.$button.removeEventListener('click', this.onClick)
   }
 
   onClick = (e: MouseEvent) => {
-    const onClick = getEventHandler(this, 'onClick')
-
-    if (onClick != null) {
-      onClick()
-    }
+    getEventHandler(this, 'onClick')?.()
 
     this.dispatchEvent(
       new CustomEvent('click', { bubbles: true })
@@ -95,6 +101,7 @@ defineCustomElement('sinch-button-primary', class extends HTMLElement {
 })
 
 export type TSinchButtonPrimary = {
+  type: 'primary' | 'secondary',
   text: string,
   disabled?: boolean,
   small?: boolean,

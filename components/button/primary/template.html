@@ -1,66 +1,133 @@
 <style>
   :host {
-    --sinch-color-button-primary-background: var(--sinch-color-tropical-500);
-    --sinch-color-button-primary-background-hover: var(--sinch-color-tropical-400);
-    --sinch-color-button-primary-background-focus: var(--sinch-color-tropical-500);
-    --sinch-color-button-primary-background-active: var(--sinch-color-tropical-600);
-    --sinch-color-button-primary-background-disabled: var(--sinch-color-tropical-100);
-    --sinch-color-button-primary-text: var(--sinch-color-text-inverted);
-    --sinch-color-button-primary-text-hover: var(--sinch-color-text-inverted);
-    --sinch-color-button-primary-text-focus: var(--sinch-color-text-inverted);
-    --sinch-color-button-primary-text-active: var(--sinch-color-text-inverted);
-    --sinch-color-button-primary-text-disabled: var(--sinch-color-text-inverted);
-    --sinch-color-button-primary-border: var(--sinch-color-transparent);
-    --sinch-color-button-primary-border-hover: var(--sinch-color-transparent);
-    --sinch-color-button-primary-border-focus: var(--sinch-color-tropical-700);
-    --sinch-color-button-primary-border-active: var(--sinch-color-transparent);
-    --sinch-color-button-primary-border-disabled: var(--sinch-color-transparent);
+    display: inline-block;
+  }
+
+  :host([type="primary"]) {
+    --sinch-color-button-background: var(--sinch-color-tropical-500);
+    --sinch-color-button-background-hover: var(--sinch-color-tropical-400);
+    --sinch-color-button-background-focus: var(--sinch-color-tropical-500);
+    --sinch-color-button-background-active: var(--sinch-color-tropical-600);
+    --sinch-color-button-background-disabled: var(--sinch-color-tropical-100);
+    --sinch-color-button-text: var(--sinch-color-text-inverted);
+    --sinch-color-button-text-disabled: var(--sinch-color-text-inverted);
+    --sinch-color-button-border: var(--sinch-color-transparent);
+    --sinch-color-button-border-hover: var(--sinch-color-transparent);
+    --sinch-color-button-border-focus: var(--sinch-color-tropical-700);
+    --sinch-color-button-border-active: var(--sinch-color-transparent);
+    --sinch-color-button-border-disabled: var(--sinch-color-transparent);
+  }
+
+  :host([type="secondary"]) {
+    --sinch-color-button-background: var(--sinch-color-snow-100);
+    --sinch-color-button-background-hover: var(--sinch-color-tropical-100);
+    --sinch-color-button-background-focus: var(--sinch-color-snow-100);
+    --sinch-color-button-background-active: var(--sinch-color-tropical-100);
+    --sinch-color-button-background-disabled: var(--sinch-color-snow-100);
+    --sinch-color-button-text: var(--sinch-color-tropical-500);
+    --sinch-color-button-text-disabled: var(--sinch-color-tropical-100);
+    --sinch-color-button-border: var(--sinch-color-tropical-500);
+    --sinch-color-button-border-hover: var(--sinch-color-tropical-500);
+    --sinch-color-button-border-focus: var(--sinch-color-tropical-700);
+    --sinch-color-button-border-active: var(--sinch-color-tropical-500);
+    --sinch-color-button-border-disabled: var(--sinch-color-tropical-100);
+  }
+
+  :host([type="cta"]) {
+    --sinch-color-button-background: var(--sinch-color-honey-500);
+    --sinch-color-button-background-hover: var(--sinch-color-honey-400);
+    --sinch-color-button-background-focus: var(--sinch-color-honey-500);
+    --sinch-color-button-background-active: var(--sinch-color-honey-600);
+    --sinch-color-button-background-disabled: var(--sinch-color-honey-100);
+    --sinch-color-button-text: var(--sinch-color-text-default);
+    --sinch-color-button-text-disabled: var(--sinch-color-stormy-300);
+    --sinch-color-button-border: var(--sinch-color-transparent);
+    --sinch-color-button-border-hover: var(--sinch-color-transparent);
+    --sinch-color-button-border-focus: var(--sinch-color-text-default);
+    --sinch-color-button-border-active: var(--sinch-color-transparent);
+    --sinch-color-button-border-disabled: var(--sinch-color-transparent);
+  }
+
+  :host([type="destructive"]) {
+    --sinch-color-button-background: var(--sinch-color-snow-100);
+    --sinch-color-button-background-hover: var(--sinch-color-snow-100);
+    --sinch-color-button-background-focus: var(--sinch-color-snow-100);
+    --sinch-color-button-background-active: var(--sinch-color-error-200);
+    --sinch-color-button-background-disabled: var(--sinch-color-snow-100);
+    --sinch-color-button-text: var(--sinch-color-text-invalid);
+    --sinch-color-button-text-disabled: var(--sinch-color-error-200);
+    --sinch-color-button-border: var(--sinch-color-error-500);
+    --sinch-color-button-border-hover: var(--sinch-color-error-500);
+    --sinch-color-button-border-focus: var(--sinch-color-error-800);
+    --sinch-color-button-border-active: var(--sinch-color-error-500);
+    --sinch-color-button-border-disabled: var(--sinch-color-error-200);
   }
 
   button {
     all: initial;
     font: var(--sinch-font-title-4);
     font-weight: 600;
-    color: var(--sinch-color-button-primary-text);
-    background-color: var(--sinch-color-button-primary-background);
+    color: var(--sinch-color-button-text);
+    fill: var(--sinch-color-button-text);
+    background-color: var(--sinch-color-button-background);
+    box-shadow: 0 0 0 1px var(--sinch-color-button-border) inset;
+    border-radius: 4px;
     line-height: 48px;
     padding: 0 24px;
-    border-radius: 4px;
-
-    /* box-shadow: 0 0 0 0px var(--sinch-color-button-primary-border) inset; */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-flex;
+    align-items: center;
   }
 
   button:hover {
-    color: var(--sinch-color-button-primary-text-hover);
-    background-color: var(--sinch-color-button-primary-background-hover);
-
-    /* box-shadow: 0 0 0 0px var(--sinch-color-button-primary-border-hover) inset; */
+    background-color: var(--sinch-color-button-background-hover);
+    box-shadow: 0 0 0 1px var(--sinch-color-button-border-hover) inset;
   }
 
   button:focus {
-    color: var(--sinch-color-button-primary-text-focus);
-    background-color: var(--sinch-color-button-primary-background-focus);
-    box-shadow: 0 0 0 2px var(--sinch-color-button-primary-border-focus) inset;
+    background-color: var(--sinch-color-button-background-focus);
+    box-shadow: 0 0 0 2px var(--sinch-color-button-border-focus) inset;
   }
 
   button:active {
-    color: var(--sinch-color-button-primary-text-active);
-    background-color: var(--sinch-color-button-primary-background-active);
-
-    /* box-shadow: 0 0 0 0px var(--sinch-color-button-primary-border-active) inset; */
+    background-color: var(--sinch-color-button-background-active);
+    box-shadow: 0 0 0 2px var(--sinch-color-button-border-active) inset;
   }
 
   button[disabled] {
-    color: var(--sinch-color-button-primary-text-disabled);
-    background-color: var(--sinch-color-button-primary-background-disabled);
-
-    /* box-shadow: 0 0 0 0px var(--sinch-color-button-primary-border-disabled) inset; */
+    color: var(--sinch-color-button-text-disabled);
+    fill: var(--sinch-color-button-text-disabled);
+    background-color: var(--sinch-color-button-background-disabled);
+    box-shadow: 0 0 0 1px var(--sinch-color-button-border-disabled) inset;
   }
 
-  :host([small]) > button {
+  :host([small]:not([type="cta"])) > button {
     line-height: 32px;
     padding: 0 16px;
+    font-size: 14px;
+  }
+
+  ::slotted([slot="left-icon"]) {
+    margin-right: 16px;
+  }
+
+  ::slotted([slot="right-icon"]) {
+    margin-left: 16px;
+  }
+
+  :host([small]:not([type="cta"])) ::slotted([slot="left-icon"]) {
+    margin-right: 12px;
+  }
+
+  :host([small]:not([type="cta"])) ::slotted([slot="right-icon"]) {
+    margin-left: 12px;
   }
 </style>
 
-<button/>
+<button>
+  <slot name="left-icon"></slot>
+  <span id="text"></span>
+  <slot name="right-icon"></slot>
+</button>
