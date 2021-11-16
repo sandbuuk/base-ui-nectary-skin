@@ -1,4 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
+import { useStoryWrapper } from './use-story-wrapper'
 import type { TSinchTooltip } from '@saas/components/tooltip'
 import type { Meta, Story } from '@storybook/html'
 import '@saas/components/tooltip'
@@ -44,28 +45,16 @@ const Template: Story<TSinchTooltip> = () => {
     inverted,
     orientation,
   }] = useArgs()
-
+  const $wrapper = useStoryWrapper()
   const tooltipef = useRef<(HTMLElement & TSinchTooltip) | null>(null)
-  const wrapperRef = useRef<(HTMLElement) | null>(null)
 
   if (tooltipef.current === null) {
-    const $wrapper = document.createElement('div')
-
-    $wrapper.style.height = '300px'
-    $wrapper.style.display = 'flex'
-    $wrapper.style.justifyContent = 'center'
-    $wrapper.style.alignItems = 'center'
-
     const $input = document.createElement('sinch-tooltip')
 
-    $input.innerHTML = `
-      <sinch-icon-share size=24></sinch-icon-share>
-    `
+    $input.innerHTML = '<sinch-icon-share size=24></sinch-icon-share>'
 
     $wrapper.appendChild($input)
-
     tooltipef.current = $input
-    wrapperRef.current = $wrapper
   }
 
   const tooltip = tooltipef.current!
@@ -75,7 +64,7 @@ const Template: Story<TSinchTooltip> = () => {
   tooltip.inverted = inverted
   tooltip.orientation = orientation
 
-  return wrapperRef.current!
+  return $wrapper
 }
 
 export const Tooltip = Template.bind({})
@@ -88,8 +77,10 @@ Tooltip.parameters = {
   docs: {
     source: {
       code: `
-      <sinch-tooltip text={text} width={width}></sinch-tooltip>
-      `,
+<sinch-tooltip text={text} width={width}>
+  <sinch-icon-share size=24></sinch-icon-share>
+</sinch-tooltip>
+`,
     },
   },
 }

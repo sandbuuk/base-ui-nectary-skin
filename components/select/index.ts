@@ -100,28 +100,28 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return getAttribute(this, 'label', '')
   }
 
-  set optionalText(value: string) {
+  set optionalText(value: string | undefined) {
     updateAttribute(this, 'optionaltext', value)
   }
 
   get optionalText() {
-    return getAttribute(this, 'optionaltext', '')
+    return getAttribute(this, 'optionaltext')
   }
 
-  set additionalText(value: string) {
+  set additionalText(value: string | undefined) {
     updateAttribute(this, 'additionaltext', value)
   }
 
   get additionalText() {
-    return getAttribute(this, 'additionaltext', '')
+    return getAttribute(this, 'additionaltext')
   }
 
   set invalidText(value: string | undefined) {
     updateAttribute(this, 'invalidtext', value)
   }
 
-  get invalidText(): string {
-    return getAttribute(this, 'placeholder', '')
+  get invalidText() {
+    return getAttribute(this, 'placeholder')
   }
 
   set disabled(isDisabled: boolean | undefined) {

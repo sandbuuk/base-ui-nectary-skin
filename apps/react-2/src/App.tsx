@@ -1,4 +1,5 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { FC } from 'react'
 import '@saas/components/button'
 import '@saas/components/input'
 import '@saas/components/checkbox'
@@ -22,8 +23,8 @@ export const App: FC<{}> = () => {
   return (
     <div>
       <p>First name:</p>
-      <sinch-input value={value} onChange={setValue}></sinch-input>
-      <sinch-button value="Next" onClick={onClick}></sinch-button>
+      <sinch-input label="Input" value={value} onChange={setValue}/>
+      <sinch-button type="cta" text="Next" onClick={onClick}/>
     </div>
   )
 }

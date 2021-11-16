@@ -1,4 +1,5 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { FC } from 'react'
 import '@saas/components/button'
 import '@saas/components/input'
 import '@saas/components/checkbox'
