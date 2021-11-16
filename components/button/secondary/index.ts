@@ -79,7 +79,7 @@ defineCustomElement('sinch-button-secondary', class extends HTMLElement {
     this.button.removeEventListener('click', this.#onClick)
   }
 
-  #onClick(e: MouseEvent) {
+  #onClick = (e: MouseEvent) => {
     const onClick = getEventHandler(this, 'onClick')
 
     if (onClick != null) {

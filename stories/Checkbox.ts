@@ -3,7 +3,7 @@ import type { Meta, Story } from '@storybook/html'
 import '@saas/components/checkbox'
 
 export default {
-  title: 'Checkbox',
+  title: 'Components/Checkbox',
   argTypes: {
     isChecked: { control: 'boolean' },
     onChange: { action: 'onChange' },

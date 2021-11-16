@@ -5,7 +5,7 @@ import type { Meta, Story } from '@storybook/html'
 import '@saas/components/input'
 
 export default {
-  title: 'Input',
+  title: 'Components/Input',
   argTypes: {
     value: {
       description: 'Input value',
