@@ -324,5 +324,10 @@ module.exports = {
       before: false,
       after: true,
     }],
+    indent: [2, 2, {
+      ignoredNodes: ['JSXElement', 'JSXElement > *', 'JSXAttribute', 'JSXIdentifier', 'JSXNamespacedName', 'JSXMemberExpression', 'JSXSpreadAttribute', 'JSXExpressionContainer', 'JSXOpeningElement', 'JSXClosingElement', 'JSXText', 'JSXEmptyExpression', 'JSXSpreadChild', 'TSIntersectionType'],
+      SwitchCase: 1,
+      flatTernaryExpressions: true,
+    }],
   },
 }

@@ -12,6 +12,7 @@ module.exports = {
       default: 'array',
       readonly: 'array',
     }],
+    indent: 0,
     '@typescript-eslint/indent': [2, 2, {
       ignoredNodes: ['JSXElement', 'JSXElement > *', 'JSXAttribute', 'JSXIdentifier', 'JSXNamespacedName', 'JSXMemberExpression', 'JSXSpreadAttribute', 'JSXExpressionContainer', 'JSXOpeningElement', 'JSXClosingElement', 'JSXText', 'JSXEmptyExpression', 'JSXSpreadChild', 'TSIntersectionType'],
       SwitchCase: 1,
