@@ -60,7 +60,7 @@ Storybook:
     - git branch -D storybook || true
     - git checkout --orphan storybook
     - git reset
-    - git add public
+    - git add -f public
     - git commit -m "build storybok"
     - git push --force origin storybook
   artifacts:
