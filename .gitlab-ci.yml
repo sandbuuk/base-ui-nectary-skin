@@ -3,21 +3,21 @@ image: node:16
 stages:
   - lint-test
 
-# Lint:
-#   stage: lint-test
-#   cache:
-#     key:
-#       files:
-#         - yarn.lock
-#       prefix: $CI_JOB_NAME
-#     paths:
-#       - node_modules/
-#       - .yarn/
-#   before_script:
-#     - yarn config set cache-folder $PWD/.yarn
-#     - yarn install --frozen-lockfile
-#   script:
-#     - yarn lint
+Lint:
+  stage: lint-test
+  cache:
+    key:
+      files:
+        - yarn.lock
+      prefix: $CI_JOB_NAME
+    paths:
+      - node_modules/
+      - .yarn/
+  before_script:
+    - yarn config set cache-folder $PWD/.yarn
+    - yarn install --frozen-lockfile
+  script:
+    - yarn lint
 
 # Test:
 #   stage: lint-test
