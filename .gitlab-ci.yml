@@ -41,8 +41,8 @@ lint:
 
 pages:
   stage: deploy
-  # only:
-  #   - main
+  only:
+    - main
   cache:
     key:
       files:
@@ -68,41 +68,41 @@ pages:
     paths:
       - public
 
-# pages:preview:
-#   stage: deploy
-#   rules:
-#     - if: $CI_MERGE_REQUEST_IID
-#   cache:
-#     key:
-#       files:
-#         - yarn.lock
-#       prefix: lint
-#     paths:
-#       - node_modules/
-#       - .yarn/
-#     policy: pull
-#   before_script:
-#     - yarn config set cache-folder $PWD/.yarn
-#     - yarn install --frozen-lockfile
-#   script:
-#     - yarn build-storybook
-#   artifacts:
-#     paths:
-#       - public
-#   environment:
-#     name: preview/${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}
-#     url: https://${CI_PROJECT_NAMESPACE}.gitlab.io/-/gl-pages/${CI_PROJECT_NAME}/-/jobs/${CI_JOB_ID}/artifacts/public/index.html
-#     # url: https://saas.pages.sinch.com/engage/engage/${CI_JOB_ID}
-#     on_stop: pages:preview:stop
+pages:preview:
+  stage: deploy
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+  cache:
+    key:
+      files:
+        - yarn.lock
+      prefix: lint
+    paths:
+      - node_modules/
+      - .yarn/
+    policy: pull
+  before_script:
+    - yarn config set cache-folder $PWD/.yarn
+    - yarn install --frozen-lockfile
+  script:
+    - yarn build-storybook
+  artifacts:
+    paths:
+      - public
+  environment:
+    name: preview/${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}
+    url: https://${CI_PROJECT_NAMESPACE}.gitlab.io/-/gl-pages/${CI_PROJECT_NAME}/-/jobs/${CI_JOB_ID}/artifacts/public/index.html
+    # url: https://saas.pages.sinch.com/engage/engage/${CI_JOB_ID}
+    on_stop: pages:preview:stop
 
-# pages:preview:stop:
-#   stage: deploy
-#   rules:
-#     - if: $CI_MERGE_REQUEST_IID
-#       when: manual
-#   allow_failure: true
-#   environment:
-#     name: preview/${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}
-#     action: stop
-#   script:
-#     - echo "👋 bye"
+pages:preview:stop:
+  stage: deploy
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+      when: manual
+  allow_failure: true
+  environment:
+    name: preview/${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}
+    action: stop
+  script:
+    - echo "👋 bye"
