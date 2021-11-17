@@ -56,9 +56,8 @@ Storybook:
     - yarn install --frozen-lockfile
   script:
     - yarn build-storybook
-    - git config --global user.email $GITLAB_USER_EMAIL
-    - git config --global user.name $GITLAB_USER_NAME
-    - git branch -D storybook || true
+    - git config --global user.email ci@sinch.com
+    - git config --global user.name Bot
     - git checkout --orphan storybook
     - git reset
     - git add -f public
