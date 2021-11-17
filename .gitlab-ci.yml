@@ -67,3 +67,31 @@ pages:
   artifacts:
     paths:
       - public
+
+🤔pages:preview:
+  stage: deploy
+  script:
+    - mkdir -p public/{js,css}
+    - cp ./website/index.html public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+  environment:
+    name: preview/${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}
+    # url: https://${CI_PROJECT_NAMESPACE}.gitlab.io/-/gl-pages/${CI_PROJECT_NAME}/-/jobs/${CI_JOB_ID}/artifacts/public/index.html
+    # url: https://saas.pages.sinch.com/engage/engage/
+    on_stop: 😢pages:preview:stop
+
+😢pages:preview:stop:
+  stage: deploy
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+      when: manual
+  allow_failure: true
+  environment:
+    name: preview/${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}
+    action: stop
+  script:
+    - echo "👋 bye"
