@@ -4,7 +4,7 @@ stages:
   - lint-test
   - deploy
 
-Lint:
+lint:
   stage: lint-test
   cache:
     key:
@@ -20,7 +20,7 @@ Lint:
   script:
     - yarn lint
 
-# Test:
+# test:
 #   stage: lint-test
 #   image: mcr.microsoft.com/playwright:focal
 #   cache:
@@ -39,7 +39,7 @@ Lint:
 #   script:
 #     - yarn test
 
-Storybook:
+pages:
   stage: deploy
   cache:
     key:
@@ -60,9 +60,8 @@ Storybook:
     - git checkout --orphan storybook
     - git reset
     - git add -f public
-    - git commit -m "build storybok"
+    - git commit -m "build storybook"
     - git push --force "https://gitlab-ci-token:$PROJECT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
   artifacts:
-    name: storybook
     paths:
       - public
