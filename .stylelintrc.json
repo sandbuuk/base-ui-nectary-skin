@@ -1,4 +1,13 @@
 {
   "extends": "stylelint-config-standard",
-  "customSyntax": "postcss-html"
+  "overrides": [{
+     "files": ["**/*.html"],
+     "customSyntax": "postcss-html"
+   }],
+  "rules": {
+    "color-hex-length": null,
+    "color-hex-case": null,
+    "font-family-name-quotes": null,
+    "custom-property-no-missing-var-function": null
+  }
 }
