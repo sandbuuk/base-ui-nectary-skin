@@ -57,11 +57,11 @@ Storybook:
     - yarn build-storybook
     - git config --global user.email ci@sinch.com
     - git config --global user.name Bot
-    - git checkout --orphan storybook
+    - git checkout main
     - git reset
     - git add -f public
-    - git commit -m "build storybok"
-    - git push --force "https://gitlab-ci-token:$PROJECT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
+    - git commit -m "deploy storybok"
+    - git push "https://gitlab-ci-token:$PROJECT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
   artifacts:
     name: storybook
     paths:
