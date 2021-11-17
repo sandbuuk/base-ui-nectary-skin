@@ -70,9 +70,20 @@ pages:
 
 🤔pages:preview:
   stage: deploy
+  cache:
+    key:
+      files:
+        - yarn.lock
+      prefix: lint
+    paths:
+      - node_modules/
+      - .yarn/
+    policy: pull
+  before_script:
+    - yarn config set cache-folder $PWD/.yarn
+    - yarn install --frozen-lockfile
   script:
-    - mkdir -p public/{js,css}
-    - cp ./website/index.html public
+    - yarn build-storybook
   artifacts:
     paths:
       - public
