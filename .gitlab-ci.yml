@@ -46,10 +46,11 @@ Storybook:
     key:
       files:
         - yarn.lock
-      prefix: $CI_JOB_NAME
+      prefix: Lint
     paths:
       - node_modules/
       - .yarn/
+    policy: pull
   before_script:
     - yarn config set cache-folder $PWD/.yarn
     - yarn install --frozen-lockfile
@@ -64,5 +65,6 @@ Storybook:
     - git commit -m "build storybok"
     - git push --force "https://gitlab-ci-token:$PROJECT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
   artifacts:
+    name: storybook
     paths:
       - public
