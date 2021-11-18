@@ -1,16 +1,20 @@
 <style>
   :host {
-    position: relative;
     display: inline-block;
   }
 
-  #container {
+  #wrapper {
+    position: relative;
+    display: block;
+  }
+
+  #tooltip {
     pointer-events: none;
     opacity: 0%;
     transition: opacity 0.2s linear 0.2s;
   }
 
-  :host(:hover) #container {
+  :host(:hover) #tooltip {
     opacity: 100%;
   }
 
@@ -111,8 +115,10 @@
 
 </style>
 
-<slot></slot>
-<div id="container">
-  <div id="text"></div>
-  <svg id="arrow" width="9" height="4"><path d="m4.5 4 4-4h-8l4 4Z"/></svg>
+<div id="wrapper">
+  <slot></slot>
+  <div id="tooltip">
+    <div id="text"></div>
+    <svg id="arrow" width="9" height="4"><path d="m4.5 4 4-4h-8l4 4Z"/></svg>
+  </div>
 </div>

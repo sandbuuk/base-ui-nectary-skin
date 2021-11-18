@@ -78,7 +78,7 @@ Tooltip.parameters = {
     source: {
       code: `
 <sinch-tooltip text={text} width={width}>
-  <sinch-icon-share size=24></sinch-icon-share>
+  <sinch-icon-share size="24"></sinch-icon-share>
 </sinch-tooltip>
 `,
     },

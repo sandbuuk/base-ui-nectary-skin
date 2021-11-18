@@ -24,6 +24,8 @@ const Template: Story<TSinchCheckbox> = ({ onChange }) => {
     $checkbox.onChange = (isChecked) => {
       onChange(isChecked)
       updateArgs({ checked: isChecked })
+      // https://github.com/storybookjs/storybook/issues/11657
+      setImmediate(() => $checkbox.focus())
     }
 
     checkboxRef.current = $checkbox

@@ -129,16 +129,6 @@
     box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-checked) inset;
   }
 
-  /* Colors Disabled */
-  #checkbox:disabled::before {
-    background-color: var(--sinch-color-checkbox-circle-disabled);
-  }
-
-  #checkbox:disabled::after {
-    background-color: var(--sinch-color-checkbox-background-disabled);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-disabled) inset;
-  }
-
   /* Colors Focus */
   #checkbox:focus::before {
     background-color: var(--sinch-color-checkbox-circle-focus);
@@ -147,16 +137,6 @@
   #checkbox:focus::after {
     background-color: var(--sinch-color-checkbox-background-focus);
     box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-focus) inset;
-  }
-
-  /* Colors Active */
-  #checkbox:active::before {
-    background-color: var(--sinch-color-checkbox-circle-active);
-  }
-
-  #checkbox:active::after {
-    background-color: var(--sinch-color-checkbox-background-active);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-active) inset;
   }
 
   /* Colors Hover */
@@ -169,14 +149,24 @@
     box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-hover) inset;
   }
 
-  /* Colors Hover Checked */
-  #checkbox:hover:checked::before {
-    background-color: var(--sinch-color-checkbox-circle-hover-checked);
+  /* Colors Active */
+  #checkbox:active::before {
+    background-color: var(--sinch-color-checkbox-circle-active);
   }
 
-  #checkbox:hover:checked::after {
-    background-color: var(--sinch-color-checkbox-background-hover-checked);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-hover-checked) inset;
+  #checkbox:active::after {
+    background-color: var(--sinch-color-checkbox-background-active);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-active) inset;
+  }
+
+  /* Colors Disabled */
+  #checkbox:disabled::before {
+    background-color: var(--sinch-color-checkbox-circle-disabled);
+  }
+
+  #checkbox:disabled::after {
+    background-color: var(--sinch-color-checkbox-background-disabled);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-disabled) inset;
   }
 
   /* Colors Focus Checked */
@@ -187,6 +177,16 @@
   #checkbox:focus:checked::after {
     background-color: var(--sinch-color-checkbox-background-focus-checked);
     box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-focus-checked) inset;
+  }
+
+  /* Colors Hover Checked */
+  #checkbox:hover:checked::before {
+    background-color: var(--sinch-color-checkbox-circle-hover-checked);
+  }
+
+  #checkbox:hover:checked::after {
+    background-color: var(--sinch-color-checkbox-background-hover-checked);
+    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-hover-checked) inset;
   }
 
   /* Colors Active Checked */

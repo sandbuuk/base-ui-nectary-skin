@@ -29,10 +29,14 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
   connectedCallback() {
     this.$input.addEventListener('input', this.onInput)
+    this.$input.addEventListener('focus', this.onInputFocus)
+    this.$input.addEventListener('blur', this.onInputBlur)
   }
 
   disconnectedCallback() {
     this.$input.removeEventListener('input', this.onInput)
+    this.$input.removeEventListener('focus', this.onInputFocus)
+    this.$input.removeEventListener('blur', this.onInputBlur)
   }
 
   static get observedAttributes() {
@@ -149,6 +153,14 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     }
   }
 
+  focus() {
+    this.$input.focus()
+  }
+
+  blur() {
+    this.$input.blur()
+  }
+
   onInput = (e: Event) => {
     getEventHandler(this, 'onChange')?.(this.$input.value)
 
@@ -156,6 +168,26 @@ defineCustomElement('sinch-input', class extends HTMLElement {
       new CustomEvent('change', {
         detail: this.$input.value,
       })
+    )
+
+    e.stopPropagation()
+  }
+
+  onInputFocus = (e: Event) => {
+    getEventHandler(this, 'onFocus')?.()
+
+    this.dispatchEvent(
+      new CustomEvent('focus')
+    )
+
+    e.stopPropagation()
+  }
+
+  onInputBlur = (e: Event) => {
+    getEventHandler(this, 'onBlur')?.()
+
+    this.dispatchEvent(
+      new CustomEvent('blur')
     )
 
     e.stopPropagation()
@@ -171,6 +203,13 @@ export type TSinchInput = {
   additionalText?: string,
   disabled?: boolean,
   onChange: (value: string) => void,
+  onFocus: () => void,
+  onBlur: () => void,
+}
+
+type TSinchInputElement = HTMLElement & {
+  focus: () => void,
+  blur: () => void,
 }
 
 declare global {
@@ -181,6 +220,6 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-input': HTMLElement & TSinchInput,
+    'sinch-input': TSinchInputElement & TSinchInput,
   }
 }
