@@ -74,6 +74,8 @@ const Template: Story<TSinchTextarea> = ({ onChange }) => {
     $input.onChange = (newValue) => {
       onChange(newValue)
       updateArgs({ value: newValue })
+      // https://github.com/storybookjs/storybook/issues/11657
+      setImmediate(() => $input.focus())
     }
 
     $wrapper.appendChild($input)

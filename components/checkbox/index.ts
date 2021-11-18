@@ -31,10 +31,14 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
 
   connectedCallback() {
     this.$input.addEventListener('input', this.onInput)
+    this.$input.addEventListener('focus', this.onInputFocus)
+    this.$input.addEventListener('blur', this.onInputBlur)
   }
 
   disconnectedCallback() {
     this.$input.removeEventListener('input', this.onInput)
+    this.$input.removeEventListener('focus', this.onInputFocus)
+    this.$input.removeEventListener('blur', this.onInputBlur)
   }
 
   static get observedAttributes() {
@@ -93,6 +97,14 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     }
   }
 
+  focus() {
+    this.$input.focus()
+  }
+
+  blur() {
+    this.$input.blur()
+  }
+
   onInput = (e: Event) => {
     getEventHandler(this, 'onChange')?.(this.$input.checked)
 
@@ -100,6 +112,26 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
       new CustomEvent('change', {
         detail: this.$input.checked,
       })
+    )
+
+    e.stopPropagation()
+  }
+
+  onInputFocus = (e: Event) => {
+    getEventHandler(this, 'onFocus')?.()
+
+    this.dispatchEvent(
+      new CustomEvent('focus')
+    )
+
+    e.stopPropagation()
+  }
+
+  onInputBlur = (e: Event) => {
+    getEventHandler(this, 'onBlur')?.()
+
+    this.dispatchEvent(
+      new CustomEvent('blur')
     )
 
     e.stopPropagation()
@@ -112,6 +144,13 @@ export type TSinchCheckbox = {
   disabled?: boolean,
   text: string,
   onChange: (isChecked: boolean) => void,
+  onFocus: () => void,
+  onBlur: () => void,
+}
+
+type TSinchCheckboxElement = HTMLElement & {
+  focus(): void,
+  blur(): void,
 }
 
 declare global {
@@ -122,6 +161,6 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-checkbox': HTMLElement & TSinchCheckbox,
+    'sinch-checkbox': TSinchCheckboxElement & TSinchCheckbox,
   }
 }

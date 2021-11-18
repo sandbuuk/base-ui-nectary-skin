@@ -222,6 +222,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
         this.dispatchSelectedOption()
         this.onCollapse()
         this.$button.focus()
+        e.preventDefault()
 
         break
       }
@@ -232,11 +233,13 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     switch (e.code) {
       case 'ArrowUp': {
         this.selectOption(this.getPrevOption())
+        e.preventDefault()
 
         break
       }
       case 'ArrowDown': {
         this.selectOption(this.getNextOption())
+        e.preventDefault()
 
         break
       }

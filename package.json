@@ -7,8 +7,8 @@
   ],
   "scripts": {
     "storybook": "start-storybook --port 4000",
-    "build-storybook": "build-storybook",
-    "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html'",
+    "build-storybook": "build-storybook --output-dir public --quiet",
+    "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html' 'components/theme.css'",
     "test": "concurrently --success=first --kill-others --raw npm:test-playwright npm:test-storybook",
     "test-playwright": "wait-on http://localhost:4000 && PLAYWRIGHT_BROWSERS_PATH=.browsers/ playwright test --browser=all",
     "test-playwright-install": "PLAYWRIGHT_BROWSERS_PATH=.browsers/ playwright install",
