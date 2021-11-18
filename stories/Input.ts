@@ -99,7 +99,6 @@ Input.args = {
   label: 'Label',
   optionalText: 'Optional',
   additionalText: 'Additional',
-  invalidText: 'Invalid',
   placeholder: 'Placeholder',
   disabled: false,
 }

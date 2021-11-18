@@ -92,7 +92,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   set invalidText(value: string | undefined) {
-    updateAttribute(this, 'placeholder', value)
+    updateAttribute(this, 'invalidtext', value)
   }
 
   get invalidText() {
