@@ -1,9 +1,9 @@
 import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
-import type { TSinchTooltip } from '@saas/components/tooltip'
+import type { TSinchTooltip } from '@nectary/components/tooltip'
 import type { Meta, Story } from '@storybook/html'
-import '@saas/components/tooltip'
-import '@saas/components/icon/share'
+import '@nectary/components/tooltip'
+import '@nectary/components/icon/share'
 
 export default {
   title: 'Components/Tooltip',

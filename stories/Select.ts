@@ -1,9 +1,9 @@
 import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
-import type { TSinchSelect } from '@saas/components/select'
+import type { TSinchSelect } from '@nectary/components/select'
 import type { Meta, Story } from '@storybook/html'
-import '@saas/components/select'
-import '@saas/components/input-tooltip'
+import '@nectary/components/select'
+import '@nectary/components/input-tooltip'
 
 export default {
   title: 'Components/Select',

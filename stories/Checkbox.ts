@@ -1,7 +1,7 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchCheckbox } from '@saas/components/checkbox'
+import type { TSinchCheckbox } from '@nectary/components/checkbox'
 import type { Meta, Story } from '@storybook/html'
-import '@saas/components/checkbox'
+import '@nectary/components/checkbox'
 
 export default {
   title: 'Components/Checkbox',

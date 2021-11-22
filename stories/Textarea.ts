@@ -1,9 +1,9 @@
 import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
-import type { TSinchTextarea } from '@saas/components/textarea'
+import type { TSinchTextarea } from '@nectary/components/textarea'
 import type { Meta, Story } from '@storybook/html'
-import '@saas/components/input-tooltip'
-import '@saas/components/textarea'
+import '@nectary/components/input-tooltip'
+import '@nectary/components/textarea'
 
 export default {
   title: 'Components/Textarea',

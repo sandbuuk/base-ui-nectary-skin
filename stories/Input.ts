@@ -1,8 +1,8 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchInput } from '@saas/components/input'
+import type { TSinchInput } from '@nectary/components/input'
 import type { Meta, Story } from '@storybook/html'
-import '@saas/components/input-tooltip'
-import '@saas/components/input'
+import '@nectary/components/input-tooltip'
+import '@nectary/components/input'
 
 export default {
   title: 'Components/Input',

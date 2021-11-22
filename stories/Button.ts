@@ -1,9 +1,9 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchButton } from '@saas/components/button'
+import type { TSinchButton } from '@nectary/components/button'
 import type { Story, Meta } from '@storybook/html'
-import '@saas/components/theme.css'
-import '@saas/components/button'
-import '@saas/components/icon/share'
+import '@nectary/components/theme.css'
+import '@nectary/components/button'
+import '@nectary/components/icon/share'
 
 export default {
   title: 'Components/Button',

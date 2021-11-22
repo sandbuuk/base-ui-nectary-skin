@@ -51,7 +51,7 @@ h2 {
 Import component:
 
 ```js
-import '@saas/components/button'
+import '@nectary/components/button'
 ```
 
 Use it in React/Vue/Angular/etc, for example:
