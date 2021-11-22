@@ -5,10 +5,6 @@ module.exports = {
       { modules: false },
     ],
     '@babel/preset-typescript',
-    [
-      '@babel/preset-react',
-      { runtime: 'automatic' },
-    ],
   ],
   plugins: [
     'babel-plugin-html-inline-minifier',

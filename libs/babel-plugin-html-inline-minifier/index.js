@@ -13,10 +13,7 @@ module.exports = function({ types: t }) {
           if (node.source.value.endsWith('.html')) {
             const dir = p.dirname(p.resolve(state.file.opts.filename))
             const absolutePath = p.resolve(dir, node.source.value)
-
-            // const html = fs.readFileSync(absolutePath, 'utf8')
-
-            const minHtml = cp.execSync(`npx html-minifier-terser --collapse-whitespace --keep-closing-slash --minify-css --remove-comments ${absolutePath}`).toString()
+            const minHtml = cp.execSync(`./node_modules/.bin/html-minifier-terser --collapse-whitespace --keep-closing-slash --minify-css --remove-comments ${absolutePath}`, { cwd: __dirname }).toString()
 
             path.replaceWith(t.variableDeclaration('const', [
               t.variableDeclarator(

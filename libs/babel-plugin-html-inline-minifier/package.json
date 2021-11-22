@@ -1,4 +1,7 @@
 {
   "name": "babel-plugin-html-inline-minifier",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "dependencies": {
+    "html-minifier-terser": "^6.1.0"
+  }
 }
