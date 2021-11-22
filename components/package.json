@@ -8,6 +8,9 @@
     "utils.js",
     "utils.d.ts"
   ],
+  "publishConfig": {
+    "registry": "https://nexus.int.clxnetworks.net/repository/sinch_npm/"
+  },
   "scripts": {
     "prebuild": "rimraf utils.{js,d.ts} */*.{js,d.ts} */**/*.{js,d.ts}",
     "build": "babel . --extensions '.ts' --ignore '*.d.ts' --out-dir .",
