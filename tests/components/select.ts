@@ -1,12 +1,97 @@
-import { test, expect } from '@playwright/test'
+import { test } from '@playwright/test'
+import { makeScreenshotTests } from '../utils'
 
-test('basic test', async ({ page }) => {
-  await page.goto('http://localhost:4000/iframe.html?id=components-select--select&viewMode=story')
+const shot = makeScreenshotTests(
+  'http://localhost:4000/select',
+  'sinch-select'
+)
 
-  const select = page.locator('sinch-select')
+test('disabled attribute', shot(async function* ({ $ }) {
+  await $.evaluate((el) => el.setAttribute('disabled', ''))
 
-  await expect(select).toBeVisible()
-})
+  yield { name: 'disabled' }
+
+  await $.evaluate((el) => el.removeAttribute('disabled'))
+
+  yield { name: 'enabled' }
+}))
+
+test('disabled property', shot(async function* ({ $ }) {
+  await $.evaluate((el) => {
+    (el as HTMLElementTagNameMap['sinch-select']).disabled = true
+  })
+
+  yield { name: 'disabled' }
+
+  await $.evaluate((el) => {
+    (el as HTMLElementTagNameMap['sinch-select']).disabled = false
+  })
+
+  yield { name: 'enabled' }
+}))
+
+test('click button', shot(async function* ({ $ }) {
+  await $.locator('[aria-haspopup]').click()
+
+  yield {
+    name: 'open',
+    include: [$.locator('#listbox')],
+  }
+}))
+
+test('click label', shot(async function* ({ $ }) {
+  await $.locator('label').click()
+
+  yield {
+    name: 'open',
+    include: [$.locator('#listbox')],
+  }
+}))
+
+test('click outside', shot(async function* ({ $, page }) {
+  await $.locator('[aria-haspopup]').click()
+
+  await page.click('body', { position: { x: 0, y: 0 } })
+
+  yield { name: 'close' }
+}))
+
+test('tooltip', shot(async function* ({ $ }) {
+  await $.locator('sinch-input-tooltip').hover()
+
+  yield {
+    name: 'show',
+    include: [$.locator('sinch-input-tooltip #text')],
+  }
+}))
+
+test('focus press-space', shot(async function* ({ $ }) {
+  await $.focus()
+  await $.press('Space')
+
+  yield {
+    name: 'open',
+    include: [$.locator('#listbox')],
+  }
+
+  await $.press('Space')
+
+  yield { name: 'close' }
+}))
+
+test('focus press-enter', shot(async function* ({ $ }) {
+  await $.focus()
+  await $.press('Enter')
+
+  yield {
+    name: 'open',
+    include: [$.locator('#listbox')],
+  }
+
+  await $.press('Enter')
+
+  yield { name: 'close' }
+}))
 
 // Open test
 // click button -> check listbox open

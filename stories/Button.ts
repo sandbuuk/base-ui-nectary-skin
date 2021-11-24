@@ -1,5 +1,4 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchButton } from '@nectary/components/button'
 import type { Story, Meta } from '@storybook/html'
 import '@nectary/components/theme.css'
 import '@nectary/components/button'
@@ -16,14 +15,14 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchButton> = ({ onClick }) => {
+const Template: Story<JSX.IntrinsicElements['sinch-button']> = ({ onClick }) => {
   const [{ type, text, disabled, small }] = useArgs()
-  const buttonRef = useRef<(HTMLElement & TSinchButton) | null>(null)
+  const buttonRef = useRef<HTMLElementTagNameMap['sinch-button'] | null>(null)
 
   if (buttonRef.current === null) {
     const $button = document.createElement('sinch-button')
 
-    $button.onClick = onClick
+    $button.addEventListener('click', onClick)
 
     buttonRef.current = $button
   }

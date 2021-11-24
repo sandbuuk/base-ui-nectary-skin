@@ -1,5 +1,6 @@
 import { defineCustomElement, getAttribute, getBooleanAttribute, getEventHandler, isAttrTrue, updateAttribute, updateBooleanAttribute } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchElementReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -16,7 +17,9 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'closed' })
+    const shadowRoot = this.attachShadow({
+      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+    })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -99,7 +102,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     return getAttribute(this, 'invalidtext')
   }
 
-  set disabled(isDisabled: boolean | undefined) {
+  set disabled(isDisabled: boolean) {
     updateBooleanAttribute(this, 'disabled', isDisabled)
   }
 
@@ -194,7 +197,19 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 })
 
-export type TSinchInput = {
+type TSinchInputElement = HTMLElement & {
+  value: string,
+  label: string,
+  placeholder?: string,
+  optionalText?: string,
+  invalidText?: string,
+  additionalText?: string,
+  disabled: boolean,
+  focus(): void,
+  blur(): void,
+}
+
+type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   value: string,
   label: string,
   placeholder?: string,
@@ -203,23 +218,18 @@ export type TSinchInput = {
   additionalText?: string,
   disabled?: boolean,
   onChange: (value: string) => void,
-  onFocus: () => void,
-  onBlur: () => void,
-}
-
-type TSinchInputElement = HTMLElement & {
-  focus: () => void,
-  blur: () => void,
+  onFocus?: () => void,
+  onBlur?: () => void,
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-input': TSinchInput,
+      'sinch-input': TSinchInputReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-input': TSinchInputElement & TSinchInput,
+    'sinch-input': TSinchInputElement,
   }
 }

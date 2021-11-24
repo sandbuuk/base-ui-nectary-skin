@@ -1,5 +1,4 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchInput } from '@nectary/components/input'
 import type { Meta, Story } from '@storybook/html'
 import '@nectary/components/input-tooltip'
 import '@nectary/components/input'
@@ -52,7 +51,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchInput> = ({ onChange }) => {
+const Template: Story<JSX.IntrinsicElements['sinch-input']> = ({ onChange }) => {
   const [{
     value,
     label,
@@ -62,19 +61,19 @@ const Template: Story<TSinchInput> = ({ onChange }) => {
     invalidText,
     disabled,
   }, updateArgs] = useArgs()
-  const inputRef = useRef<(HTMLElement & TSinchInput) | null>(null)
+  const inputRef = useRef<HTMLElementTagNameMap['sinch-input'] | null>(null)
 
   if (inputRef.current == null) {
     const $input = document.createElement('sinch-input')
 
     $input.innerHTML = '<sinch-input-tooltip text="Tooltip text long"></sinch-input-tooltip>'
 
-    $input.onChange = (newValue) => {
-      onChange(newValue)
-      updateArgs({ value: newValue })
+    $input.addEventListener('change', (e: any) => {
+      onChange(e.detail)
+      updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate(() => $input.focus())
-    }
+    })
 
     inputRef.current = $input
   }

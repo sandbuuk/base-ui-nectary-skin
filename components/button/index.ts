@@ -10,6 +10,7 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchElementReact } from '../types'
 
 const buttonTypes = ['primary', 'secondary', 'cta', 'destructive'] as const
 
@@ -24,7 +25,9 @@ defineCustomElement('sinch-button', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'closed' })
+    const shadowRoot = this.attachShadow({
+      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+    })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -33,11 +36,11 @@ defineCustomElement('sinch-button', class extends HTMLElement {
   }
 
   connectedCallback() {
-    this.$button.addEventListener('click', this.onClick)
+    this.$button.addEventListener('click', this.onButtonClick)
   }
 
   disconnectedCallback() {
-    this.$button.removeEventListener('click', this.onClick)
+    this.$button.removeEventListener('click', this.onButtonClick)
   }
 
   static get observedAttributes() {
@@ -75,7 +78,7 @@ defineCustomElement('sinch-button', class extends HTMLElement {
     return getAttribute(this, 'text', '')
   }
 
-  set disabled(isDisabled: boolean | undefined) {
+  set disabled(isDisabled: boolean) {
     updateBooleanAttribute(this, 'disabled', isDisabled)
   }
 
@@ -83,7 +86,7 @@ defineCustomElement('sinch-button', class extends HTMLElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set small(isSmall: boolean | undefined) {
+  set small(isSmall: boolean) {
     updateBooleanAttribute(this, 'small', isSmall)
   }
 
@@ -91,20 +94,27 @@ defineCustomElement('sinch-button', class extends HTMLElement {
     return getBooleanAttribute(this, 'small')
   }
 
-  onClick = (e: MouseEvent) => {
+  onButtonClick = (e: MouseEvent) => {
+    e.stopPropagation()
+
     getEventHandler(this, 'onClick')?.()
 
     this.dispatchEvent(
-      new CustomEvent('click', { bubbles: true })
+      new CustomEvent('click')
     )
-
-    e.stopPropagation()
   }
 })
 
 type TSinchButtonType = typeof buttonTypes[number]
 
-export type TSinchButton = {
+type TSinchButtonElement = HTMLElement & {
+  type: TSinchButtonType,
+  text: string,
+  disabled: boolean,
+  small: boolean,
+}
+
+type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   type: TSinchButtonType,
   text: string,
   disabled?: boolean,
@@ -115,11 +125,11 @@ export type TSinchButton = {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-button': TSinchButton,
+      'sinch-button': TSinchButtonReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-button': HTMLElement & TSinchButton,
+    'sinch-button': TSinchButtonElement,
   }
 }

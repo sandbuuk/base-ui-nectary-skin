@@ -1,5 +1,7 @@
 node_modules/
 public/
+test-results/
 .browsers/
 .DS_Store
 *.log
+fonts/.uuid

@@ -1,5 +1,6 @@
 import { defineCustomElement, getAttribute, getBooleanAttribute, updateAttribute, updateBooleanAttribute } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchElementReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -12,7 +13,9 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'open' })
+    const shadowRoot = this.attachShadow({
+      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+    })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -58,7 +61,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
     return getAttribute(this, 'text', '')
   }
 
-  set disabled(isDisabled: boolean | undefined) {
+  set disabled(isDisabled: boolean) {
     updateBooleanAttribute(this, 'disabled', isDisabled)
   }
 
@@ -66,7 +69,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set checked(isChecked: boolean | undefined) {
+  set checked(isChecked: boolean) {
     updateBooleanAttribute(this, 'checked', isChecked)
   }
 
@@ -74,7 +77,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
     return getBooleanAttribute(this, 'checked')
   }
 
-  set selected(isSelected: boolean | undefined) {
+  set selected(isSelected: boolean) {
     updateBooleanAttribute(this, 'selected', isSelected)
   }
 
@@ -83,7 +86,15 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
   }
 })
 
-export type TSinchSelectOption = {
+type TSinchSelectOptionElement = HTMLElement & {
+  value: string,
+  text: string,
+  checked: boolean,
+  selected: boolean,
+  disabled: boolean,
+}
+
+type TSinchSelectOptionReact = TSinchElementReact<TSinchSelectOptionElement> & {
   value: string,
   text: string,
   checked?: boolean,
@@ -94,11 +105,11 @@ export type TSinchSelectOption = {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-select-option': TSinchSelectOption,
+      'sinch-select-option': TSinchSelectOptionReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-select-option': HTMLElement & TSinchSelectOption,
+    'sinch-select-option': TSinchSelectOptionElement,
   }
 }
