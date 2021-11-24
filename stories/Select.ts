@@ -1,6 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
-import type { TSinchSelect } from '@nectary/components/select'
 import type { Meta, Story } from '@storybook/html'
 import '@nectary/components/select'
 import '@nectary/components/input-tooltip'
@@ -53,7 +52,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchSelect> = ({
+const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
   onChange,
 }) => {
   const [{
@@ -67,7 +66,7 @@ const Template: Story<TSinchSelect> = ({
   }, updateArgs] = useArgs()
 
   const $wrapper = useStoryWrapper()
-  const inputRef = useRef<(HTMLElement & TSinchSelect) | null>(null)
+  const inputRef = useRef<HTMLElementTagNameMap['sinch-select'] | null>(null)
 
   if (inputRef.current === null) {
     const $input = document.createElement('sinch-select')
@@ -84,10 +83,10 @@ const Template: Story<TSinchSelect> = ({
       <sinch-select-option value="4" text="Option 4 value" slot="select"></sinch-select-option>
     `
 
-    $input.onChange = (newValue) => {
-      onChange(newValue)
-      updateArgs({ value: newValue })
-    }
+    $input.addEventListener('change', (e: any) => {
+      onChange(e.detail)
+      updateArgs({ value: e.detail })
+    })
 
     $wrapper.appendChild($input)
     inputRef.current = $input
@@ -112,8 +111,6 @@ Select.args = {
   value: '2',
   label: 'Label',
   placeholder: 'Placeholder',
-  optionalText: 'Optional',
-  additionalText: 'Additional',
   disabled: false,
 }
 

@@ -1,5 +1,4 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchCheckbox } from '@nectary/components/checkbox'
 import type { Meta, Story } from '@storybook/html'
 import '@nectary/components/checkbox'
 
@@ -14,19 +13,19 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchCheckbox> = ({ onChange }) => {
+const Template: Story<JSX.IntrinsicElements['sinch-checkbox']> = ({ onChange }) => {
   const [{ checked, indeterminate, disabled, text }, updateArgs] = useArgs()
-  const checkboxRef = useRef<(HTMLElement & TSinchCheckbox) | null>(null)
+  const checkboxRef = useRef<HTMLElementTagNameMap['sinch-checkbox'] | null>(null)
 
   if (checkboxRef.current === null) {
     const $checkbox = document.createElement('sinch-checkbox')
 
-    $checkbox.onChange = (isChecked) => {
-      onChange(isChecked)
-      updateArgs({ checked: isChecked })
+    $checkbox.addEventListener('change', (e: any) => {
+      onChange(e.detail)
+      updateArgs({ checked: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate(() => $checkbox.focus())
-    }
+    })
 
     checkboxRef.current = $checkbox
   }

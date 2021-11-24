@@ -1,6 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
-import type { TSinchTooltip } from '@nectary/components/tooltip'
 import type { Meta, Story } from '@storybook/html'
 import '@nectary/components/tooltip'
 import '@nectary/components/icon/share'
@@ -38,7 +37,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchTooltip> = () => {
+const Template: Story<JSX.IntrinsicElements['sinch-tooltip']> = () => {
   const [{
     text,
     width,
@@ -46,7 +45,7 @@ const Template: Story<TSinchTooltip> = () => {
     orientation,
   }] = useArgs()
   const $wrapper = useStoryWrapper()
-  const tooltipef = useRef<(HTMLElement & TSinchTooltip) | null>(null)
+  const tooltipef = useRef<HTMLElementTagNameMap['sinch-tooltip'] | null>(null)
 
   if (tooltipef.current === null) {
     const $input = document.createElement('sinch-tooltip')

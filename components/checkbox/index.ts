@@ -8,6 +8,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchElementReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -21,7 +22,9 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'closed' })
+    const shadowRoot = this.attachShadow({
+      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+    })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -53,7 +56,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     return getBooleanAttribute(this, 'checked')
   }
 
-  set indeterminate(isIndeterminate: boolean | undefined) {
+  set indeterminate(isIndeterminate: boolean) {
     updateBooleanAttribute(this, 'indeterminate', isIndeterminate)
   }
 
@@ -61,7 +64,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     return getBooleanAttribute(this, 'indeterminate')
   }
 
-  set disabled(isDisabled: boolean | undefined) {
+  set disabled(isDisabled: boolean) {
     updateBooleanAttribute(this, 'disabled', isDisabled)
   }
 
@@ -138,29 +141,33 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 })
 
-export type TSinchCheckbox = {
+type TSinchCheckboxElement = HTMLElement & {
   checked: boolean,
+  indeterminate: boolean,
+  disabled: boolean,
+  text: string,
+  focus(): void,
+  blur(): void,
+}
+
+type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
+  checked?: boolean,
   indeterminate?: boolean,
   disabled?: boolean,
   text: string,
   onChange: (isChecked: boolean) => void,
-  onFocus: () => void,
-  onBlur: () => void,
-}
-
-type TSinchCheckboxElement = HTMLElement & {
-  focus(): void,
-  blur(): void,
+  onFocus?: () => void,
+  onBlur?: () => void,
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-checkbox': TSinchCheckbox,
+      'sinch-checkbox': TSinchCheckboxReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-checkbox': TSinchCheckboxElement & TSinchCheckbox,
+    'sinch-checkbox': TSinchCheckboxElement,
   }
 }

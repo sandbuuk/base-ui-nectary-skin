@@ -14,6 +14,8 @@ lint:
     paths:
       - node_modules/
       - .yarn/
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
   before_script:
     - yarn config set cache-folder $PWD/.yarn
     - yarn install --frozen-lockfile
@@ -22,7 +24,7 @@ lint:
 
 test:
   stage: test
-  image: mcr.microsoft.com/playwright:focal
+  image: mcr.microsoft.com/playwright:v1.16.3
   cache:
     key:
       files:
@@ -31,13 +33,15 @@ test:
     paths:
       - node_modules/
       - .yarn/
-      - .browsers/
   before_script:
     - yarn config set cache-folder $PWD/.yarn
     - yarn install --frozen-lockfile
-    - yarn test-playwright-install
   script:
     - yarn test
+  artifacts:
+    when: on_failure
+    paths:
+      - test-results
 
 pages:
   stage: deploy
@@ -52,11 +56,13 @@ pages:
       - node_modules/
       - .yarn/
     policy: pull
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
   before_script:
     - yarn config set cache-folder $PWD/.yarn
     - yarn install --frozen-lockfile
   script:
-    - yarn build-storybook
+    - yarn storybook:build
     - git config --global user.email ci@sinch.com
     - git config --global user.name Bot
     - git checkout --orphan storybook

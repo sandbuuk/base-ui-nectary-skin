@@ -12,6 +12,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import '../icon/tooltip'
+import type { TSinchElementReact } from '../types'
 
 const orientationValues = ['top', 'bottom', 'left', 'right', 'top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
 
@@ -25,7 +26,9 @@ defineCustomElement('sinch-tooltip', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'closed' })
+    const shadowRoot = this.attachShadow({
+      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+    })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -87,7 +90,14 @@ defineCustomElement('sinch-tooltip', class extends HTMLElement {
 
 type TSinchTooltipOrientation = typeof orientationValues[number]
 
-export type TSinchTooltip = {
+type TSinchTooltipElement = HTMLElement & {
+  text: string,
+  width?: number,
+  inverted?: boolean,
+  orientation?: TSinchTooltipOrientation,
+}
+
+type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
   text: string,
   width?: number,
   inverted?: boolean,
@@ -97,11 +107,11 @@ export type TSinchTooltip = {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tooltip': TSinchTooltip,
+      'sinch-tooltip': TSinchTooltipReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-tooltip': HTMLElement & TSinchTooltip,
+    'sinch-tooltip': TSinchTooltipElement,
   }
 }

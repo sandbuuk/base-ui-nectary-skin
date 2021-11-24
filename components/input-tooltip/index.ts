@@ -10,19 +10,20 @@ import {
 import templateHTML from './template.html'
 import '../tooltip'
 import '../icon/tooltip'
-import type { TSinchTooltip } from '../tooltip'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
-  $tooltip: HTMLElement & TSinchTooltip
+  $tooltip: HTMLElementTagNameMap['sinch-tooltip']
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'closed' })
+    const shadowRoot = this.attachShadow({
+      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+    })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -58,10 +59,10 @@ defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
   }
 
   get orientation() {
-    return getAttribute(this, 'orientation') as TSinchInputTooltip['orientation'] | undefined
+    return getAttribute(this, 'orientation')
   }
 
-  set orientation(value: TSinchInputTooltip['orientation'] | undefined) {
+  set orientation(value: string | undefined) {
     updateAttribute(this, 'orientation', value)
   }
 
@@ -92,16 +93,14 @@ defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
   }
 })
 
-export type TSinchInputTooltip = TSinchTooltip
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-input-tooltip': TSinchInputTooltip,
+      'sinch-input-tooltip': IntrinsicElements['sinch-tooltip'],
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-input-tooltip': HTMLElement & TSinchInputTooltip,
+    'sinch-input-tooltip': HTMLElementTagNameMap['sinch-tooltip'],
   }
 }

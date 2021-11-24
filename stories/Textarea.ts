@@ -1,6 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
-import type { TSinchTextarea } from '@nectary/components/textarea'
 import type { Meta, Story } from '@storybook/html'
 import '@nectary/components/input-tooltip'
 import '@nectary/components/textarea'
@@ -53,7 +52,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<TSinchTextarea> = ({ onChange }) => {
+const Template: Story<JSX.IntrinsicElements['sinch-textarea']> = ({ onChange }) => {
   const [{
     value,
     label,
@@ -64,19 +63,19 @@ const Template: Story<TSinchTextarea> = ({ onChange }) => {
     disabled,
   }, updateArgs] = useArgs()
   const $wrapper = useStoryWrapper()
-  const inputRef = useRef<(HTMLElement & TSinchTextarea) | null>(null)
+  const inputRef = useRef<HTMLElementTagNameMap['sinch-textarea'] | null>(null)
 
   if (inputRef.current === null) {
     const $input = document.createElement('sinch-textarea')
 
     $input.innerHTML = '<sinch-input-tooltip text="Tooltip text long"></sinch-input-tooltip>'
 
-    $input.onChange = (newValue) => {
-      onChange(newValue)
-      updateArgs({ value: newValue })
+    $input.addEventListener('change', (e: any) => {
+      onChange(e.detail)
+      updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate(() => $input.focus())
-    }
+    })
 
     $wrapper.appendChild($input)
     inputRef.current = $input

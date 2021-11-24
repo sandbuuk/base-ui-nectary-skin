@@ -1,4 +1,5 @@
 import { getIntegerAttribute, updateIntegerAttribute } from '../utils'
+import type { TSinchElementReact } from '../types'
 
 const DEFAULT_SIZE = 16
 
@@ -13,7 +14,9 @@ export const createIconClass = (templateHTML: string) => {
     constructor() {
       super()
 
-      const shadowRoot = this.attachShadow({ mode: 'closed' })
+      const shadowRoot = this.attachShadow({
+        mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      })
 
       shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -24,12 +27,12 @@ export const createIconClass = (templateHTML: string) => {
       return ['size']
     }
 
-    set size(value: number | undefined) {
+    set size(value: number) {
       updateIntegerAttribute(this, 'size', value)
     }
 
     get size() {
-      return getIntegerAttribute(this, 'size')
+      return getIntegerAttribute(this, 'size')!
     }
 
     connectedCallback() {
@@ -54,6 +57,9 @@ export const createIconClass = (templateHTML: string) => {
   }
 }
 
-export type TSinchIcon = {
+export type TSinchIconElement = HTMLElement & {
+  size: number,
+}
+export type TSinchIconReact = TSinchElementReact<TSinchIconElement> & {
   size?: number,
 }

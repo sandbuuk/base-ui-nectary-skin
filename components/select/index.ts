@@ -8,10 +8,10 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchSelectOption } from '../select-option'
 import '../select-option'
+import type { TSinchElementReact } from '../types'
 
-const isOptionElement = (element: EventTarget | Element | null): element is (HTMLElement & TSinchSelectOption) => {
+const isOptionElement = (element: EventTarget | Element | null): element is HTMLElementTagNameMap['sinch-select-option'] => {
   return element instanceof Element && element.tagName === 'SINCH-SELECT-OPTION'
 }
 
@@ -28,12 +28,15 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   $invalidText: HTMLSpanElement
   $selectSlot: HTMLSlotElement
   $listbox: HTMLUListElement
-  $selectedOption: (HTMLElement & TSinchSelectOption) | null = null
+  $selectedOption: HTMLElementTagNameMap['sinch-select-option'] | null = null
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'closed', delegatesFocus: true })
+    const shadowRoot = this.attachShadow({
+      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      delegatesFocus: true,
+    })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -126,7 +129,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return getAttribute(this, 'placeholder')
   }
 
-  set disabled(isDisabled: boolean | undefined) {
+  set disabled(isDisabled: boolean) {
     updateBooleanAttribute(this, 'disabled', isDisabled)
   }
 
@@ -135,10 +138,6 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'value': {
         this.onValueChange(newVal ?? '')
@@ -274,7 +273,6 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   onCollapse() {
     this.$button.setAttribute('aria-expanded', 'false')
     this.$listbox.blur()
-    this.selectOption(null)
   }
 
   onValueChange(value: string) {
@@ -403,7 +401,11 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     }
   }
 
-  selectOption($option: (HTMLElement & TSinchSelectOption) | null) {
+  selectOption($option: HTMLElementTagNameMap['sinch-select-option'] | null) {
+    if ($option === this.$selectedOption) {
+      return
+    }
+
     if (this.$selectedOption !== null) {
       this.$selectedOption.selected = false
     }
@@ -415,7 +417,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     }
   }
 
-  updateButtonContent($option: (HTMLElement & TSinchSelectOption) | null) {
+  updateButtonContent($option: HTMLElementTagNameMap['sinch-select-option'] | null) {
     // Remove icon element
     if (this.$button.firstElementChild !== this.$buttonContent) {
       this.$button.removeChild(this.$button.firstElementChild!)
@@ -438,7 +440,17 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 })
 
-export type TSinchSelect = {
+type TSinchSelectElement = HTMLElement & {
+  value: string,
+  label: string,
+  placeholder?: string,
+  optionalText?: string,
+  invalidText?: string,
+  additionalText?: string,
+  disabled: boolean,
+}
+
+type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
   value: string,
   label: string,
   placeholder?: string,
@@ -452,11 +464,11 @@ export type TSinchSelect = {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-select': TSinchSelect,
+      'sinch-select': TSinchSelectReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-select': HTMLElement & TSinchSelect,
+    'sinch-select': TSinchSelectElement,
   }
 }

@@ -52,6 +52,13 @@
   margin-left: 8px;
 }
 
+#content {
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 #top,
 #bottom {
   display: flex;
@@ -165,10 +172,7 @@
   <span id="invalid"></span>
   <span id="additional"></span>
 </div>
-<div
-  id="listbox"
-  tabindex="-1"
->
+<div id="listbox" tabindex="-1">
   <div>
     <slot name="select"></slot>
   </div>

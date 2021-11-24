@@ -8,6 +8,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchElementReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -24,7 +25,9 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'closed' })
+    const shadowRoot = this.attachShadow({
+      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+    })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -153,7 +156,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
     return getAttribute(this, 'invalidtext')
   }
 
-  set disabled(isDisabled: boolean | undefined) {
+  set disabled(isDisabled: boolean) {
     updateBooleanAttribute(this, 'disabled', isDisabled)
   }
 
@@ -202,7 +205,19 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   }
 })
 
-export type TSinchTextarea = {
+type TSinchTextareaElement = HTMLElement & {
+  value: string,
+  label: string,
+  placeholder?: string,
+  optionalText?: string,
+  invalidText?: string,
+  additionalText?: string,
+  disabled: boolean,
+  focus(): void,
+  blur(): void,
+}
+
+type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   value: string,
   label: string,
   placeholder?: string,
@@ -215,19 +230,14 @@ export type TSinchTextarea = {
   onBlur: () => void,
 }
 
-type TSinchTextareaElement = HTMLElement & {
-  focus(): void,
-  blur(): void,
-}
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-textarea': TSinchTextarea,
+      'sinch-textarea': TSinchTextareaReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-textarea': TSinchTextareaElement & TSinchTextarea,
+    'sinch-textarea': TSinchTextareaElement,
   }
 }
