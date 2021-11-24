@@ -61,6 +61,8 @@ pages:
   before_script:
     - yarn config set cache-folder $PWD/.yarn
     - yarn install --frozen-lockfile
+    - rm .gitattributes
+    - git lfs uninstall
   script:
     - yarn storybook:build
     - git config --global user.email ci@sinch.com
@@ -73,7 +75,6 @@ pages:
   artifacts:
     paths:
       - public
-
 # pages:preview:
 #   stage: deploy
 #   rules:
