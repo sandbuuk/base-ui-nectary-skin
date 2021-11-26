@@ -23,6 +23,16 @@ export const mergeBoundingBox = async (locators: Locator[]): Promise<BoundingBox
   })
 }
 
+const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInfo['snapshotPath'] =>
+  (snapshotName) => {
+    const result = snapshotPath(snapshotName)
+    const platform = /(chromium|firefox|webkit)/.exec(result)![0]
+
+    return result
+      .replace(/(-linux|-react|-vue|-angular|-chromium|-firefox|-webkit)/g, '')
+      .replace('.ts-snapshots', `-screenshots/${platform}`)
+  }
+
 type BoundingBox = Exclude<PageScreenshotOptions['clip'], undefined>
 
 type UpdateStateResult = {
@@ -38,6 +48,8 @@ type UpdateStateProps = {
 export const makeScreenshotTests = (pageUrl: string, elementSelector: string) =>
   (updateState: (props: UpdateStateProps) => AsyncIterable<UpdateStateResult>) =>
     async ({ page }: PlaywrightTestArgs, info: TestInfo) => {
+      info.snapshotPath = overrideScreenshotPath(info.snapshotPath)
+
       await page.goto(pageUrl, { waitUntil: 'networkidle' })
 
       const locator = page.locator(elementSelector)

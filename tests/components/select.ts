@@ -2,18 +2,36 @@ import { test } from '@playwright/test'
 import { makeScreenshotTests } from '../utils'
 
 const shot = makeScreenshotTests(
-  'http://localhost:4000/select',
+  '/select',
   'sinch-select'
 )
 
 test('disabled attribute', shot(async function* ({ $ }) {
   await $.evaluate((el) => el.setAttribute('disabled', ''))
-
   yield { name: 'disabled' }
 
   await $.evaluate((el) => el.removeAttribute('disabled'))
-
   yield { name: 'enabled' }
+}))
+
+test('value attribute', shot(async function* ({ $ }) {
+  await $.evaluate((el) => el.setAttribute('value', ''))
+  yield { name: 'option-empty' }
+
+  await $.evaluate((el) => el.setAttribute('value', '4'))
+  yield { name: 'option-4' }
+
+  await $.evaluate((el) => el.setAttribute('value', '3'))
+  yield { name: 'option-3' }
+
+  await $.evaluate((el) => el.setAttribute('value', '2'))
+  yield { name: 'option-disabled' }
+
+  await $.evaluate((el) => el.setAttribute('value', '1'))
+  yield { name: 'option-1' }
+
+  await $.evaluate((el) => el.setAttribute('value', 'missing'))
+  yield { name: 'option-missing' }
 }))
 
 test('disabled property', shot(async function* ({ $ }) {

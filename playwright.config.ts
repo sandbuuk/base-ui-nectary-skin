@@ -3,33 +3,66 @@ import type { PlaywrightTestConfig } from '@playwright/test'
 const config: PlaywrightTestConfig = {
   projects: [
     {
-      name: 'chromium',
+      name: 'chromium-react',
       use: {
         browserName: 'chromium',
-        contextOptions: {
-          deviceScaleFactor: 2,
-          reducedMotion: 'reduce',
-        },
+        baseURL: 'http://localhost:4000',
       },
     },
     {
-      name: 'firefox',
+      name: 'firefox-react',
       use: {
         browserName: 'firefox',
-        contextOptions: {
-          deviceScaleFactor: 2,
-          reducedMotion: 'reduce',
-        },
+        baseURL: 'http://localhost:4000',
       },
     },
     {
-      name: 'webkit',
+      name: 'webkit-react',
       use: {
         browserName: 'webkit',
-        contextOptions: {
-          deviceScaleFactor: 2,
-          reducedMotion: 'reduce',
-        },
+        baseURL: 'http://localhost:4000',
+      },
+    },
+    {
+      name: 'chromium-vue',
+      use: {
+        browserName: 'chromium',
+        baseURL: 'http://localhost:4001',
+      },
+    },
+    {
+      name: 'firefox-vue',
+      use: {
+        browserName: 'firefox',
+        baseURL: 'http://localhost:4001',
+      },
+    },
+    {
+      name: 'webkit-vue',
+      use: {
+        browserName: 'webkit',
+        baseURL: 'http://localhost:4001',
+      },
+    },
+    {
+      name: 'chromium-angular',
+      use: {
+        browserName: 'chromium',
+        baseURL: 'http://localhost:4002',
+      },
+    },
+    {
+      name: 'firefox-angular',
+      use: {
+        browserName: 'firefox',
+        baseURL: 'http://localhost:4002',
+      },
+    },
+    {
+      name: 'webkit-angular',
+      use: {
+        browserName: 'webkit',
+        baseURL: 'http://localhost:4002',
       },
     },
   ],
@@ -41,7 +74,18 @@ const config: PlaywrightTestConfig = {
   // },
   testDir: 'tests/components',
   testMatch: '*.ts',
-  updateSnapshots: process.env.CI != null ? 'none' : 'missing',
+  updateSnapshots: 'none',
+  use: {
+    deviceScaleFactor: 2,
+    contextOptions: {
+      reducedMotion: 'reduce',
+    },
+  },
+  // expect: {
+  //   toMatchSnapshot: {
+  //     threshold: 1,
+  //   },
+  // },
 }
 
 export default config
