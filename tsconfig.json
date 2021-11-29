@@ -1,4 +1,4 @@
 {
   "extends": "@saas/typescript-config",
-  "exclude": ["tests/apps/"]
+  "exclude": ["tests/visual/apps/"]
 }
