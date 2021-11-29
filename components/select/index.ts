@@ -153,6 +153,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
       case 'label': {
         this.$label.textContent = newVal
+        updateAttribute(this, 'aria-label', newVal)
 
         break
       }

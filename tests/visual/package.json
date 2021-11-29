@@ -1,0 +1,34 @@
+{
+  "name": "visual-tests",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "concurrently --success=first --kill-others --raw npm:test:playwright npm:test:app-all",
+    "test:playwright": "yarn test:wait-all && playwright test",
+    "test:wait-all": "wait-on http://localhost:4000 && wait-on http://localhost:4001 && wait-on http://localhost:4002",
+    "test:app-all": "concurrently --raw npm:test:app-react npm:test:app-vue npm:test:app-angular",
+    "test:app-react": "webpack serve --config apps/react/webpack.config.js",
+    "test:app-vue": "webpack serve --config apps/vue/webpack.config.js",
+    "test:app-angular": "yarn --cwd=apps/angular ng serve",
+    "test:update-screenshots": "yarn playwright test --project chromium-react --project firefox-react --project webkit-react -u",
+    "test:local": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/visual/entrypoint.sh"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@nectary/components": "*",
+    "@playwright/test": "1.16.3",
+    "@types/node": "^14.0.0",
+    "babel-loader": "^8.2.3",
+    "concurrently": "^6.3.0",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "postcss-html": "^1.2.0",
+    "raw-loader": "^4.0.2",
+    "style-loader": "^3.3.1",
+    "wait-on": "^6.0.0",
+    "webpack": "^5.64.2",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0"
+  }
+}

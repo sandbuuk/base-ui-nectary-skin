@@ -4,34 +4,25 @@
     "components/",
     "configs/*",
     "libs/*",
-    "tests/apps/*"
+    "tests/visual",
+    "tests/visual/apps/*",
+    "tests/accessibility"
   ],
   "scripts": {
     "storybook": "start-storybook --port 4000",
     "storybook:build": "build-storybook --output-dir public --quiet",
-    "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html' 'components/theme.css'",
-    "test": "concurrently --success=first --kill-others --raw npm:test:playwright npm:test:app-all",
-    "test:playwright": "yarn test:wait-all && playwright test",
-    "test:wait-all": "wait-on http://localhost:4000 && wait-on http://localhost:4001 && wait-on http://localhost:4002",
-    "test:app-all": "concurrently --raw npm:test:app-react npm:test:app-vue npm:test:app-angular",
-    "test:app-react": "webpack serve --config tests/apps/react/webpack.config.js",
-    "test:app-vue": "webpack serve --config tests/apps/vue/webpack.config.js",
-    "test:app-angular": "yarn --cwd=./tests/apps/angular ng serve",
-    "test:update-screenshots": "yarn playwright test --project chromium-react --project firefox-react --project webkit-react -u",
-    "test:local": "docker run -it --rm --ipc=host --network host -v $PWD:/app:delegated -v $PWD/fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 /app/tests/entrypoint.sh"
+    "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html' 'components/theme.css'"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "@nectary/components": "*",
-    "@playwright/test": "1.16.3",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addons": "^6.3.12",
     "@storybook/client-api": "^6.3.12",
     "@storybook/html": "^6.3.12",
     "@types/node": "^14.0.0",
     "babel-loader": "^8.2.3",
-    "concurrently": "^6.3.0",
     "css-loader": "^6.5.1",
     "eslint": "^7.0.0",
     "html-webpack-plugin": "^5.5.0",
@@ -43,7 +34,6 @@
     "stylelint": "^14.0.0",
     "stylelint-config-standard": "^23.0.0",
     "typescript": "^4.4.2",
-    "wait-on": "^6.0.0",
     "webpack": "^5.64.2",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.5.0"

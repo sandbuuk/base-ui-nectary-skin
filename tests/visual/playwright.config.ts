@@ -72,7 +72,7 @@ const config: PlaywrightTestConfig = {
   //   timeout: 120 * 1000,
   //   reuseExistingServer: process.env.CI != null,
   // },
-  testDir: 'tests/components',
+  testDir: 'components',
   testMatch: '*.ts',
   updateSnapshots: 'none',
   use: {
@@ -80,6 +80,10 @@ const config: PlaywrightTestConfig = {
     contextOptions: {
       reducedMotion: 'reduce',
     },
+  },
+  reportSlowTests: {
+    max: 0,
+    threshold: 30000,
   },
   // expect: {
   //   toMatchSnapshot: {

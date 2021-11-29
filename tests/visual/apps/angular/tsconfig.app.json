@@ -5,7 +5,7 @@
     "outDir": "./out-tsc/app",
     "types": ["node"],
     "paths": {
-      "@nectary/components/*": ["../../../components/*"]
+      "@nectary/components/*": ["../../../../components/*"]
     }
   },
   "files": [
@@ -13,7 +13,6 @@
     "src/polyfills.ts"
   ],
   "include": [
-    "src/**/*.d.ts",
-    "../../components/*/*.ts"
+    "src/**/*.d.ts"
   ]
 }
