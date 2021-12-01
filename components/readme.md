@@ -66,10 +66,10 @@ Use it in React/Vue/Angular/etc, for example:
 
 - [x] [Storybook](https://saas.pages.sinch.com/engage/engage/) (VPN is required)
 - [x] Follow the WCAG 2.1 guidelines
-- [ ] Tests
+- [x] Tests
   - [x] (in progress) Cross-browser Chromium/Firefox/WebKit visual regression tests
   - [x] Cross-framework React/Vue/Angular tests 
-  - [ ] a11y tests using [Axe](https://www.deque.com/axe/) library
+  - [x] a11y tests using [Axe](https://www.deque.com/axe/) library
 - [ ] CI/CD
   - [ ] Auto-publish on Git tag
   - [ ] Provide unique Storybook preview link in PRs
