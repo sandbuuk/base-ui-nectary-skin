@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "concurrently --success=first --kill-others --raw npm:test:playwright npm:test:app",
-    "test:playwright": "wait-on http://localhost:4000 && playwright test",
+    "test:ci": "concurrently --success=first --kill-others --raw npm:test:app npm:test:playwright",
+    "test:playwright": "wait-on http://localhost:3011 && playwright test",
     "test:app": "webpack serve --config webpack.config.js",
-    "test:local": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/accessibility/entrypoint.sh"
+    "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/accessibility/entrypoint.dev.sh",
+    "test": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/accessibility/entrypoint.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

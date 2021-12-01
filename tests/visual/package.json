@@ -3,15 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "concurrently --success=first --kill-others --raw npm:test:playwright npm:test:app-all",
+    "test:ci": "concurrently --success=first --kill-others --raw npm:test:app-all npm:test:playwright",
     "test:playwright": "yarn test:wait-all && playwright test",
-    "test:wait-all": "wait-on http://localhost:4000 && wait-on http://localhost:4001 && wait-on http://localhost:4002",
+    "test:wait-all": "wait-on http://localhost:3021 && wait-on http://localhost:3022 && wait-on http://localhost:3023",
     "test:app-all": "concurrently --raw npm:test:app-react npm:test:app-vue npm:test:app-angular",
     "test:app-react": "webpack serve --config apps/react/webpack.config.js",
     "test:app-vue": "webpack serve --config apps/vue/webpack.config.js",
     "test:app-angular": "yarn --cwd=apps/angular ng serve",
     "test:update-screenshots": "yarn playwright test --project chromium-react --project firefox-react --project webkit-react -u",
-    "test:local": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/visual/entrypoint.sh"
+    "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/visual/entrypoint.dev.sh",
+    "test": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/visual/entrypoint.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

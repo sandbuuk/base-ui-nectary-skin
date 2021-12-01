@@ -1,24 +1,23 @@
-image: node:16
-
 stages:
+  - lint
   - test
+  - build
   - deploy
 
 lint:
-  stage: test
+  image: node:16
+  stage: lint
   cache:
     key:
       files:
         - yarn.lock
-      prefix: lint
+      prefix: cache
     paths:
-      - node_modules/
       - .yarn/
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - yarn config set cache-folder $PWD/.yarn
-    - yarn install --frozen-lockfile
+    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
     - yarn lint
 
@@ -29,16 +28,14 @@ visual-tests:
     key:
       files:
         - yarn.lock
-      prefix: lint
+      prefix: cache
     paths:
-      - node_modules/
       - .yarn/
     policy: pull
   before_script:
-    - yarn config set cache-folder $PWD/.yarn
-    - yarn install --frozen-lockfile
+    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
-    - yarn --cwd=tests/visual test
+    - yarn --cwd=tests/visual test:ci
   artifacts:
     when: on_failure
     paths:
@@ -51,16 +48,93 @@ accessibility-tests:
     key:
       files:
         - yarn.lock
-      prefix: lint
+      prefix: cache
     paths:
-      - node_modules/
       - .yarn/
     policy: pull
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - yarn config set cache-folder $PWD/.yarn
-    - yarn install --frozen-lockfile
+    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
-    - yarn --cwd=tests/accessibility test
+    - yarn --cwd=tests/accessibility test:ci
+
+build-shell:
+  stage: build
+  only:
+    - main
+  image: node:16
+  cache:
+    key:
+      files:
+        - yarn.lock
+      prefix: cache
+    paths:
+      - .yarn/
+    policy: pull
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+    REMOTE_QUICKSTARTS: dn0wuruy8r35q.cloudfront.net
+  before_script:
+    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+  script:
+    - yarn build:shell --output-path dist/
+  artifacts:
+    paths:
+      - dist/
+
+build-quickstarts:
+  stage: build
+  only:
+    - main
+  image: node:16
+  cache:
+    key:
+      files:
+        - yarn.lock
+      prefix: cache
+    paths:
+      - .yarn/
+    policy: pull
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+  before_script:
+    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+  script:
+    - yarn build:quickstarts --output-path dist/
+  artifacts:
+    paths:
+      - dist/
+
+deploy-shell:
+  stage: deploy
+  only:
+    - main
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  dependencies:
+    - build-shell
+  needs:
+    - build-shell
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+  script:
+  - aws s3 cp ./dist/ s3://sinch-engage-shell-lab/ --recursive --include "*"
+  - aws cloudfront create-invalidation --distribution-id E1FUUKU2OB9PYS --paths "/*"
+
+deploy-quickstarts:
+  stage: deploy
+  only:
+    - main
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  dependencies:
+    - build-quickstarts
+  needs:
+    - build-quickstarts
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+  script:
+  - aws s3 cp ./dist/ s3://sinch-engage-quickstarts-lab/ --recursive --include "*"
+  - aws cloudfront create-invalidation --distribution-id E2DT4M7D8AY1QW --paths "/*"
 
 pages:
   stage: deploy
@@ -70,16 +144,14 @@ pages:
     key:
       files:
         - yarn.lock
-      prefix: lint
+      prefix: cache
     paths:
-      - node_modules/
       - .yarn/
     policy: pull
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - yarn config set cache-folder $PWD/.yarn
-    - yarn install --frozen-lockfile
+    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
     - rm -rf .git/hooks/
   script:
     - yarn storybook:build
@@ -93,41 +165,3 @@ pages:
   artifacts:
     paths:
       - public
-# pages:preview:
-#   stage: deploy
-#   rules:
-#     - if: $CI_MERGE_REQUEST_IID
-#   cache:
-#     key:
-#       files:
-#         - yarn.lock
-#       prefix: lint
-#     paths:
-#       - node_modules/
-#       - .yarn/
-#     policy: pull
-#   before_script:
-#     - yarn config set cache-folder $PWD/.yarn
-#     - yarn install --frozen-lockfile
-#   script:
-#     - yarn build-storybook
-#   artifacts:
-#     paths:
-#       - public
-#   environment:
-#     name: preview/${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}
-#     url: https://${CI_PROJECT_NAMESPACE}.gitlab.io/-/gl-pages/${CI_PROJECT_NAME}/-/jobs/${CI_JOB_ID}/artifacts/public/index.html
-#     # url: https://saas.pages.sinch.com/engage/engage/${CI_JOB_ID}
-#     on_stop: pages:preview:stop
-
-# pages:preview:stop:
-#   stage: deploy
-#   rules:
-#     - if: $CI_MERGE_REQUEST_IID
-#       when: manual
-#   allow_failure: true
-#   environment:
-#     name: preview/${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}
-#     action: stop
-#   script:
-#     - echo "👋 bye"

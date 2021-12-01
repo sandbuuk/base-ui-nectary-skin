@@ -6,72 +6,66 @@ const config: PlaywrightTestConfig = {
       name: 'chromium-react',
       use: {
         browserName: 'chromium',
-        baseURL: 'http://localhost:4000',
+        baseURL: 'http://localhost:3021',
       },
     },
     {
       name: 'firefox-react',
       use: {
         browserName: 'firefox',
-        baseURL: 'http://localhost:4000',
+        baseURL: 'http://localhost:3021',
       },
     },
     {
       name: 'webkit-react',
       use: {
         browserName: 'webkit',
-        baseURL: 'http://localhost:4000',
+        baseURL: 'http://localhost:3021',
       },
     },
     {
       name: 'chromium-vue',
       use: {
         browserName: 'chromium',
-        baseURL: 'http://localhost:4001',
+        baseURL: 'http://localhost:3022',
       },
     },
     {
       name: 'firefox-vue',
       use: {
         browserName: 'firefox',
-        baseURL: 'http://localhost:4001',
+        baseURL: 'http://localhost:3022',
       },
     },
     {
       name: 'webkit-vue',
       use: {
         browserName: 'webkit',
-        baseURL: 'http://localhost:4001',
+        baseURL: 'http://localhost:3022',
       },
     },
     {
       name: 'chromium-angular',
       use: {
         browserName: 'chromium',
-        baseURL: 'http://localhost:4002',
+        baseURL: 'http://localhost:3023',
       },
     },
     {
       name: 'firefox-angular',
       use: {
         browserName: 'firefox',
-        baseURL: 'http://localhost:4002',
+        baseURL: 'http://localhost:3023',
       },
     },
     {
       name: 'webkit-angular',
       use: {
         browserName: 'webkit',
-        baseURL: 'http://localhost:4002',
+        baseURL: 'http://localhost:3023',
       },
     },
   ],
-  // webServer: {
-  //   command: 'npm run storybook wait-on http://localhost:4000',
-  //   port: 4000,
-  //   timeout: 120 * 1000,
-  //   reuseExistingServer: process.env.CI != null,
-  // },
   testDir: 'components',
   testMatch: '*.ts',
   updateSnapshots: 'none',
