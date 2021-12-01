@@ -138,6 +138,7 @@ deploy-quickstarts:
 
 pages:
   stage: deploy
+  image: node:16
   only:
     - main
   cache:
