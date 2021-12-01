@@ -6,7 +6,7 @@ const config: PlaywrightTestConfig = {
       name: 'accessibility',
       use: {
         browserName: 'chromium',
-        baseURL: 'http://localhost:4000',
+        baseURL: 'http://localhost:3011',
       },
     },
   ],

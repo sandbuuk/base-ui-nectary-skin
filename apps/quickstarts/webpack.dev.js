@@ -1,13 +1,16 @@
 const path = require('path')
+const { MFLiveReloadPlugin } = require('@module-federation/fmr')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 
-const PORT = 3021
+const CONTAINER = 'Quickstarts'
+const PORT = 3001
 
 module.exports = {
   mode: 'development',
-  entry: require.resolve('./src/index.tsx'),
+  entry: require.resolve('./src/index.ts'),
   output: {
-    chunkFilename: '[name].js',
+    chunkFilename: '[name].[chunkhash].js',
     publicPath: 'auto',
     pathinfo: true,
   },
@@ -48,10 +51,36 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: PORT,
-    historyApiFallback: true,
   },
   watch: false,
   plugins: [
+    new MFLiveReloadPlugin({
+      container: CONTAINER,
+      port: PORT,
+    }),
+    new ModuleFederationPlugin({
+      name: CONTAINER,
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Container': require.resolve('./src/container.tsx'),
+      },
+      shared: {
+        '@nectary/components/button': {
+          requiredVersion: '^0.0.0',
+        },
+        '@nectary/components/theme.css': {
+          requiredVersion: '^0.0.0',
+        },
+        react: {
+          requiredVersion: '^17.0.0',
+          singleton: true,
+        },
+        'react-dom': {
+          requiredVersion: '^17.0.0',
+          singleton: true,
+        },
+      },
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './public/index.html'),
     }),

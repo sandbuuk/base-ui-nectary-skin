@@ -2,7 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
-const PORT = 4001
+const PORT = 3022
 
 module.exports = {
   mode: 'development',

@@ -1,13 +1,19 @@
 const path = require('path')
+const { MFLiveReloadPlugin } = require('@module-federation/fmr')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 
-const PORT = 3021
+const CONTAINER = 'Shell'
+const PORT = 3000
 
 module.exports = {
   mode: 'development',
-  entry: require.resolve('./src/index.tsx'),
+  entry: [
+    require.resolve('broadcastchannel-polyfill'),
+    require.resolve('./src/index.ts'),
+  ],
   output: {
-    chunkFilename: '[name].js',
+    chunkFilename: '[name].[chunkhash].js',
     publicPath: 'auto',
     pathinfo: true,
   },
@@ -48,10 +54,36 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: PORT,
-    historyApiFallback: true,
+    // open: true
   },
   watch: false,
   plugins: [
+    new MFLiveReloadPlugin({
+      container: CONTAINER,
+      port: PORT,
+    }),
+    new ModuleFederationPlugin({
+      name: CONTAINER,
+      remotes: {
+        Quickstarts: `Quickstarts@//${process.env.REMOTE_QUICKSTARTS}/remoteEntry.js`,
+      },
+      shared: {
+        '@nectary/components/button': {
+          requiredVersion: '^0.0.0',
+        },
+        '@nectary/components/theme.css': {
+          requiredVersion: '^0.0.0',
+        },
+        react: {
+          requiredVersion: '^17.0.0',
+          singleton: true,
+        },
+        'react-dom': {
+          requiredVersion: '^17.0.0',
+          singleton: true,
+        },
+      },
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './public/index.html'),
     }),

@@ -62,5 +62,6 @@ module.exports = {
       allowNullableNumber: false,
       allowAny: false,
     }],
+    'import/no-unresolved': 0,
   },
 }
