@@ -43,7 +43,7 @@ visual-tests:
   artifacts:
     when: on_failure
     paths:
-      - test-results
+      - tests/visual/test-results
 
 accessibility-tests:
   stage: test

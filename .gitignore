@@ -1,7 +1,6 @@
 node_modules/
 public/
 dist/
-test-results/
 .browsers/
 .DS_Store
 *.log
