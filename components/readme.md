@@ -71,5 +71,6 @@ Use it in React/Vue/Angular/etc, for example:
   - [x] Cross-framework React/Vue/Angular tests 
   - [x] a11y tests using [Axe](https://www.deque.com/axe/) library
 - [ ] CI/CD
-  - [ ] Auto-publish on Git tag
+  - [x] Auto-publish on Git tag
+  - [x] Send message/changelog to Slack
   - [ ] Provide unique Storybook preview link in PRs
