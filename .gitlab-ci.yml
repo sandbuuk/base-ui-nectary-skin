@@ -7,6 +7,8 @@ stages:
 lint:
   image: node:16
   stage: lint
+  except:
+    - tags
   cache:
     key:
       files:
@@ -24,6 +26,8 @@ lint:
 visual-tests:
   stage: test
   image: mcr.microsoft.com/playwright:v1.16.3
+  except:
+    - tags
   cache:
     key:
       files:
@@ -44,6 +48,8 @@ visual-tests:
 accessibility-tests:
   stage: test
   image: mcr.microsoft.com/playwright:v1.16.3
+  except:
+    - tags
   cache:
     key:
       files:
@@ -61,8 +67,8 @@ accessibility-tests:
 
 build-shell:
   stage: build
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^shell@/
   image: node:16
   cache:
     key:
@@ -85,8 +91,8 @@ build-shell:
 
 build-quickstarts:
   stage: build
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^quickstarts@/
   image: node:16
   cache:
     key:
@@ -108,8 +114,8 @@ build-quickstarts:
 
 deploy-shell:
   stage: deploy
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^shell@/
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   dependencies:
     - build-shell
@@ -123,8 +129,8 @@ deploy-shell:
 
 deploy-quickstarts:
   stage: deploy
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^quickstarts@/
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   dependencies:
     - build-quickstarts
@@ -139,7 +145,7 @@ deploy-quickstarts:
 publish-components:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_TAG =~ /^components@[0-9]+\.[0-9]+\.[0-9]+$/
+    - if: $CI_COMMIT_TAG =~ /^components@$/
   image: node:16
   cache:
     key:
@@ -163,7 +169,7 @@ pages:
   stage: deploy
   image: node:16
   rules:
-    - if: $CI_COMMIT_TAG =~ /^components@[0-9]+\.[0-9]+\.[0-9]+$/
+    - if: $CI_COMMIT_TAG =~ /^components@$/
   cache:
     key:
       files:
