@@ -43,8 +43,22 @@ module.exports = {
         },
       },
       {
+        test: /\.module\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { modules: true },
+          },
+        ],
+      },
+      {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        exclude: /\.module\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+        ],
       },
     ],
   },
@@ -84,13 +98,35 @@ module.exports = {
       template: path.join(__dirname, './public/index.html'),
     }),
     new MiniCssExtractPlugin({
-      insert: (linktag) => {
-        const sinchVar = getComputedStyle(document.documentElement).getPropertyValue('--sinch-theme')
+      insert: (linkElement) => {
+        const getFilename = (path) => path.substr(path.lastIndexOf('/'))
 
-        if (sinchVar === '') {
-          document.head.appendChild(linktag)
+        // Check if such css already exists in document.head
+        for (const child of document.head.children) {
+          if (child.tagName !== 'LINK') {
+            continue
+          }
+
+          if (getFilename(child.href) === getFilename(linkElement.href)) {
+            linkElement.onload?.({ type: 'load' })
+
+            return
+          }
+        }
+
+        const name = 'sinch-quickstarts-app'
+
+        if (document.getElementById(name) !== null) {
+          // Standalone app
+          document.head.appendChild(linkElement)
         } else {
-          linktag.onload?.({ type: 'load' })
+          // Embedded app
+          if (document.head[name] == null) {
+            document.head[name] = document.createDocumentFragment()
+          }
+
+          document.head[name].appendChild(linkElement)
+          linkElement.onload?.({ type: 'load' })
         }
       },
     }),

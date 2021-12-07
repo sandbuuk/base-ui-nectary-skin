@@ -2,22 +2,9 @@ import { render, unmountComponentAtNode } from 'react-dom'
 import { App } from './App'
 
 const template = document.createElement('template')
+const appName = 'sinch-quickstarts-app'
 
-template.innerHTML = `
-<style>
-  :host {
-    display: block;
-    border: 2px green dashed;
-    padding: 20px;
-    width: 200px;
-  }
-  h3 {
-    margin: 0 0 20px;
-  }
-</style>
-<h3>React App 1:</h3>
-<div id="app"></div>
-`
+template.innerHTML = `<div id="${appName}"></div>`
 
 class SinchReactApp extends HTMLElement {
   appElement: HTMLElement
@@ -29,7 +16,13 @@ class SinchReactApp extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.appElement = shadowRoot.getElementById('app')!
+    const stylesFrag = (document.head as any)[appName]
+
+    if (stylesFrag != null) {
+      shadowRoot.prepend(stylesFrag.cloneNode(true))
+    }
+
+    this.appElement = shadowRoot.getElementById(appName)!
   }
 
   connectedCallback() {
@@ -44,4 +37,4 @@ class SinchReactApp extends HTMLElement {
   }
 }
 
-global.customElements.define('sinch-quickstarts-app', SinchReactApp)
+global.customElements.define(appName, SinchReactApp)

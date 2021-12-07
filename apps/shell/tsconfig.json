@@ -14,10 +14,5 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
-    "paths": {
-      "Quickstarts/Container": [
-        "./types.d.ts"
-      ]
-    }
   },
 }

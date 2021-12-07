@@ -3,5 +3,5 @@ import { App } from './App'
 
 render(
   <App/>,
-  document.getElementById('app')
+  document.getElementById('sinch-quickstarts-app')
 )

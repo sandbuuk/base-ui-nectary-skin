@@ -1,6 +1,7 @@
 import '@nectary/components/theme.css'
 import '@nectary/components/button'
 import { useEffect, useRef } from 'react'
+import './App.css'
 import type { FC } from 'react'
 
 export const App: FC<{}> = () => {
@@ -23,9 +24,9 @@ export const App: FC<{}> = () => {
   })
 
   return (
-    <>
-      <h1>HI</h1>
+    <div className="wrapper">
+      <h3>Quickstarts</h3>
       <sinch-button text="Button" type="primary" onClick={() => {}}/>
-    </>
+    </div>
   )
 }
