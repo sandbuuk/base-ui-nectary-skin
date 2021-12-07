@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 
 const CONTAINER = 'Quickstarts'
-const PORT = 3001
 
 module.exports = {
   mode: 'production',
@@ -61,10 +60,6 @@ module.exports = {
         ],
       },
     ],
-  },
-  devServer: {
-    host: 'localhost',
-    port: PORT,
   },
   watch: false,
   optimization: {

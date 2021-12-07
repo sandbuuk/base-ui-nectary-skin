@@ -14,7 +14,7 @@ module.exports = {
   ],
   output: {
     chunkFilename: '[name].[chunkhash].js',
-    publicPath: 'auto',
+    publicPath: '/',
     pathinfo: true,
   },
   resolve: {
@@ -68,6 +68,7 @@ module.exports = {
     host: 'localhost',
     port: PORT,
     // open: true
+    historyApiFallback: true,
   },
   watch: false,
   plugins: [
