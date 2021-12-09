@@ -1,10 +1,21 @@
 import { render, unmountComponentAtNode } from 'react-dom'
-import { App } from './App'
+import { App } from './components/App'
 
 const template = document.createElement('template')
 const appName = 'sinch-quickstarts-app'
 
-template.innerHTML = `<div id="${appName}"></div>`
+template.innerHTML = `
+<style>
+:host {
+  display: block;
+}
+:host > #${appName} {
+  height: 100%;
+  box-sizing: border-box;
+}
+</style>
+<div id="${appName}"></div>
+`
 
 class SinchReactApp extends HTMLElement {
   appElement: HTMLElement

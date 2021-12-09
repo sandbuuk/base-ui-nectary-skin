@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import './Quickstarts.css'
 
 export const Quickstarts = () => {
   useEffect(() => {
