@@ -1,8 +1,4 @@
 {
   "extends": "@saas/typescript-config",
   "exclude": ["tests/visual/apps/"],
-  "references": [
-    {"path": "./apps/shell"},
-    {"path": "./apps/quickstarts"}
-  ]
 }

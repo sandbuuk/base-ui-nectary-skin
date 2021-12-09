@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "composite": true,
     "skipLibCheck": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
@@ -15,4 +14,9 @@
     "moduleResolution": "node",
     "noUnusedLocals": true,
   },
+  "include": [
+    "./src",
+    "./modules.d.ts",
+    "./apps.d.ts"
+  ]
 }
