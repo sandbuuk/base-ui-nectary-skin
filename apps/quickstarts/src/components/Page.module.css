@@ -1,0 +1,11 @@
+/* stylelint-disable selector-class-pattern */
+.page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.buttonWrapper {
+  margin-block-start: auto;
+  text-align: end;
+}

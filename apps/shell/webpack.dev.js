@@ -14,7 +14,7 @@ module.exports = {
   ],
   output: {
     chunkFilename: '[name].[chunkhash].js',
-    publicPath: 'auto',
+    publicPath: '/',
     pathinfo: true,
   },
   resolve: {
@@ -46,7 +46,20 @@ module.exports = {
         },
       },
       {
+        test: /\.module.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/,
+        exclude: /\.module.css$/,
         use: ['style-loader', 'css-loader'],
       },
     ],
@@ -55,6 +68,7 @@ module.exports = {
     host: 'localhost',
     port: PORT,
     // open: true
+    historyApiFallback: true,
   },
   watch: false,
   plugins: [

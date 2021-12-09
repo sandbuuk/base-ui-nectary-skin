@@ -8,6 +8,7 @@
     "color-hex-length": null,
     "color-hex-case": null,
     "font-family-name-quotes": null,
-    "custom-property-no-missing-var-function": null
+    "custom-property-no-missing-var-function": null,
+    "declaration-block-no-redundant-longhand-properties": null
   }
 }

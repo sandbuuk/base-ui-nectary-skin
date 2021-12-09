@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react'
+import { HashRouter, Routes, Route, Link } from 'react-router-dom'
+import styles from './App.module.css'
+import { Quickstarts } from './components/Qiuckstarts'
 import type { FC } from 'react'
 import '@nectary/components/theme.css'
-import '@nectary/components/button'
 
 export const App: FC<{}> = () => {
   const bus = useRef<BroadcastChannel>()
 
   useEffect(() => {
-    import('Quickstarts/Container').catch(console.error)
-
     bus.current = new BroadcastChannel('TEST_CHANNEL')
 
     bus.current.addEventListener('message', (e) => {
@@ -25,10 +25,28 @@ export const App: FC<{}> = () => {
   }, [])
 
   return (
-    <div>
-      <h1>SHELL</h1>
-      <sinch-button text="Shell Button" type="cta" onClick={() => {}}/>
-      <sinch-quickstarts-app/>
-    </div>
+    <HashRouter basename="/">
+      <div className={styles.app}>
+        <header className={styles.header}>
+          <h1>Header</h1>
+        </header>
+        <aside className={styles.aside}>
+          <h3>Menu</h3>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/quickstarts">Quickstarts</Link></li>
+          </ul>
+        </aside>
+        <main className={styles.main}>
+          <Routes>
+            <Route path="/" element={<h3>Home</h3>}/>
+            <Route path="/quickstarts/*" element={<Quickstarts/>}/>
+          </Routes>
+        </main>
+        <footer className={styles.footer}>
+          <h2>Footer</h2>
+        </footer>
+      </div>
+    </HashRouter>
   )
 }

@@ -6,6 +6,22 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const CONTAINER = 'Quickstarts'
 const PORT = 3001
 
+const styleLoaderInsert = (styleElement) => {
+  const name = 'sinch-quickstarts-app'
+
+  if (document.getElementById(name) !== null) {
+    // Standalone app
+    document.head.appendChild(styleElement)
+  } else {
+    // Embedded app
+    if (document.head[name] == null) {
+      document.head[name] = document.createDocumentFragment()
+    }
+
+    document.head[name].appendChild(styleElement)
+  }
+}
+
 module.exports = {
   mode: 'development',
   entry: require.resolve('./src/index.ts'),
@@ -40,17 +56,40 @@ module.exports = {
               { runtime: 'automatic' },
             ],
           ],
+          cacheDirectory: true,
+          cacheCompression: false,
         },
       },
       {
+        test: /\.module.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: { insert: styleLoaderInsert },
+          },
+          {
+            loader: 'css-loader',
+            options: { modules: true },
+          },
+        ],
+      },
+      {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        exclude: /\.module.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: { insert: styleLoaderInsert },
+          },
+          'css-loader',
+        ],
       },
     ],
   },
   devServer: {
     host: 'localhost',
     port: PORT,
+    historyApiFallback: true,
   },
   watch: false,
   plugins: [

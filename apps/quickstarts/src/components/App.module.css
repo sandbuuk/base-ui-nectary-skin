@@ -1,0 +1,9 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  border: 1px red dashed;
+  padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
+  font: var(--sinch-font-body);
+}

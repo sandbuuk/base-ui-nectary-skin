@@ -1,0 +1,38 @@
+.app {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header"
+    "aside main"
+    "footer footer";
+  height: 100%;
+  box-sizing: border-box;
+  font: var(--sinch-font-body);
+}
+
+.header {
+  grid-area: header;
+  border: 2px gray dashed;
+  padding: 20px;
+  font: var(--sinch-font-title-2);
+}
+
+.footer {
+  grid-area: footer;
+  border: 2px gray dashed;
+  padding: 20px;
+  font: var(--sinch-font-title-3);
+}
+
+.aside {
+  grid-area: aside;
+  border: 2px gray dashed;
+  padding: 20px;
+}
+
+.main {
+  grid-area: main;
+  border: 2px gray dashed;
+  padding: 20px;
+}

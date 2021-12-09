@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "composite": true,
     "skipLibCheck": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
@@ -14,10 +13,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
-    "paths": {
-      "Quickstarts/Container": [
-        "./types.d.ts"
-      ]
-    }
   },
+  "include": [
+    "./src",
+    "./modules.d.ts",
+    "./apps.d.ts"
+  ]
 }
