@@ -10,7 +10,11 @@ import { PageStepThree } from './PageStepThree'
 import { PageStepTwo } from './PageStepTwo'
 import type { FC } from 'react'
 
-export const App: FC<{}> = () => {
+type TApp = {
+  baseUrl: string,
+}
+
+export const App: FC<TApp> = ({ baseUrl }) => {
   const bus = useRef<BroadcastChannel>()
 
   useEffect(() => {
@@ -31,7 +35,7 @@ export const App: FC<{}> = () => {
 
   return (
     <div className={styles.app}>
-      <HashRouter basename="/quickstarts">
+      <HashRouter basename={baseUrl}>
         <Routes>
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Navigate to="step-1"/>}/>
