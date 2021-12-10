@@ -1,8 +1,8 @@
 import { render, unmountComponentAtNode } from 'react-dom'
 import { App } from './components/App'
 
-const template = document.createElement('template')
 const appName = 'sinch-quickstarts-app'
+const template = document.createElement('template')
 
 template.innerHTML = `
 <style>
@@ -38,7 +38,7 @@ class SinchReactApp extends HTMLElement {
 
   connectedCallback() {
     render(
-      <App/>,
+      <App baseUrl="/quickstarts"/>,
       this.appElement
     )
   }

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router-dom'
 import type { FC } from 'react'
 
 const paths = ['/step-1', '/step-2', '/step-3'] as const
@@ -37,7 +37,6 @@ export const PageContext: FC<{}> = ({ children }) => {
     navigate(getNextPath(pathname))
   }, [navigate, pathname])
   const reset = useCallback(() => {
-    console.log(paths[0])
     navigate(paths[0])
   }, [navigate])
 
