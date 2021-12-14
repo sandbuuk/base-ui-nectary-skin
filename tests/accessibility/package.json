@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test:ci": "concurrently --success=first --kill-others --raw npm:test:app npm:test:playwright",
+    "test:ci": "concurrently --success=first --kill-others --raw npm:test:playwright npm:test:app",
     "test:playwright": "wait-on http://localhost:3011 && playwright test",
     "test:app": "webpack serve --config webpack.config.js",
     "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/accessibility/entrypoint.dev.sh",
