@@ -1,3 +1,7 @@
+## v0.2.0
+
+* 💥 use Gilroy in all font styles
+
 ## v0.1.2
 
 * 🐞 Input, Textarea, Select: fix label max-width
