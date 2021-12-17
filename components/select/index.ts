@@ -65,8 +65,8 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     this.$button.removeEventListener('click', this.onButtonClick)
     this.$listbox.removeEventListener('blur', this.onListboxBlur)
     this.$listbox.removeEventListener('click', this.onListboxClick)
-    this.$listbox.addEventListener('keydown', this.onListboxKeyDown)
-    this.$listbox.addEventListener('keypress', this.onListboxKeyUp)
+    this.$listbox.removeEventListener('keydown', this.onListboxKeyDown)
+    this.$listbox.removeEventListener('keypress', this.onListboxKeyUp)
     this.$selectSlot.removeEventListener('slotchange', this.onSlotChange)
   }
 

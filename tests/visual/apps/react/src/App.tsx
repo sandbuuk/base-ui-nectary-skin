@@ -1,6 +1,7 @@
 import '@nectary/components'
 import './App.css'
 import { Select } from './components/Select'
+import { Radio } from './components/Radio'
 import type { FC } from 'react'
 
 export const App: FC<{}> = () => {
@@ -28,6 +29,12 @@ export const App: FC<{}> = () => {
         <sinch-input label="Label" value="" placeholder="Placeholder" onChange={() => {}}>
           <sinch-input-tooltip text="Input Tooltip"/>
         </sinch-input>
+      )
+    }
+
+    case '/radio': {
+      return (
+        <Radio width={200}/>
       )
     }
 
