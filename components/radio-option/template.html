@@ -1,0 +1,236 @@
+<style>
+  :host {
+    --sinch-color-radio-outer-circle: var(--sinch-color-transparent);
+    --sinch-color-radio-background: var(--sinch-color-snow-100);
+    --sinch-color-radio-border: var(--sinch-color-stormy-300);
+    --sinch-color-radio-outer-circle-checked: var(--sinch-color-transparent);
+    --sinch-color-radio-border-checked: var(--sinch-color-tropical-500);
+    --sinch-color-radio-outer-circle-hover: var(--sinch-color-snow-500);
+    --sinch-color-radio-border-hover: var(--sinch-color-stormy-300);
+    --sinch-color-radio-outer-circle-hover-checked: var(--sinch-color-tropical-100);
+    --sinch-color-radio-border-hover-checked: var(--sinch-color-tropical-500);
+    --sinch-color-radio-outer-circle-focus: var(--sinch-color-snow-800);
+    --sinch-color-radio-border-focus: var(--sinch-color-stormy-300);
+    --sinch-color-radio-outer-circle-focus-checked: var(--sinch-color-tropical-200);
+    --sinch-color-radio-border-focus-checked: var(--sinch-color-tropical-500);
+    --sinch-color-radio-outer-circle-active: var(--sinch-color-stormy-100);
+    --sinch-color-radio-border-active: var(--sinch-color-stormy-300);
+    --sinch-color-radio-outer-circle-active-checked: var(--sinch-color-tropical-300);
+    --sinch-color-radio-border-active-checked: var(--sinch-color-tropical-500);
+    --sinch-color-radio-outer-circle-disabled: var(--sinch-color-transparent);
+    --sinch-color-radio-border-disabled: var(--sinch-color-stormy-100);
+    --sinch-color-radio-outer-circle-disabled-checked: var(--sinch-color-transparent);
+    --sinch-color-radio-border-disabled-checked: var(--sinch-color-stormy-100);
+
+    display: flex;
+    font: var(--sinch-font-body);
+  }
+
+  #radio {
+    all: initial;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+
+  #radio:disabled {
+    cursor: initial;
+  }
+
+  #icon-container {
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    top: 2px;
+    vertical-align: top;
+  }
+
+  /* Outer Circle */
+  #radio::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    pointer-events: none;
+    background-color: var(--sinch-color-radio-outer-circle);
+  }
+
+  /* Border / Background */
+  #radio::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    pointer-events: none;
+    background-color: var(--sinch-color-radio-background);
+    box-shadow: 0 0 0 2px var(--sinch-color-radio-border) inset;
+  }
+
+  #icon-knob {
+    position: absolute;
+    left: 11px;
+    top: 11px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: opacity 0.1s linear;
+    opacity: 0%;
+    background-color: var(--sinch-color-radio-border);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion) {
+    #icon-knob {
+      transition: none;
+    }
+  }
+
+  #label {
+    display: inline-block;
+    padding: 6px 0 6px 8px;
+    color: var(--sinch-color-text-default);
+  }
+
+  :host([disabled]) > #label {
+    color: var(--sinch-color-stormy-200);
+  }
+
+  /* Colors Checked */
+  #radio:checked::before {
+    background-color: var(--sinch-color-radio-outer-circle-checked);
+  }
+
+  #radio:checked::after {
+    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-checked) inset;
+  }
+
+  #radio:checked ~ #icon-knob {
+    opacity: 100%;
+    background-color: var(--sinch-color-radio-border-checked);
+  }
+
+  /* Colors Focus */
+  #radio:focus::before {
+    background-color: var(--sinch-color-radio-outer-circle-focus);
+  }
+
+  #radio:focus::after {
+    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-focus) inset;
+  }
+
+  #radio:focus ~ #icon-knob {
+    background-color: var(--sinch-color-radio-border-focus);
+  }
+
+  /* Colors Hover */
+  #radio:hover::before {
+    background-color: var(--sinch-color-radio-outer-circle-hover);
+  }
+
+  #radio:hover::after {
+    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-hover) inset;
+  }
+
+  #radio:hover ~ #icon-knob {
+    background-color: var(--sinch-color-radio-border-hover);
+  }
+
+  /* Colors Active */
+  #radio:active::before {
+    background-color: var(--sinch-color-radio-outer-circle-active);
+  }
+
+  #radio:active::after {
+    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-active) inset;
+  }
+
+  #radio:active ~ #icon-knob {
+    background-color: var(--sinch-color-radio-border-active);
+  }
+
+  /* Colors Disabled */
+  #radio:disabled::before {
+    background-color: var(--sinch-color-radio-outer-circle-disabled);
+  }
+
+  #radio:disabled::after {
+    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-disabled) inset;
+  }
+
+  #radio:disabled ~ #icon-knob {
+    background-color: var(--sinch-color-radio-border-disabled);
+  }
+
+  /* Colors Focus Checked */
+  #radio:focus:checked::before {
+    background-color: var(--sinch-color-radio-outer-circle-focus-checked);
+  }
+
+  #radio:focus:checked::after {
+    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-focus-checked) inset;
+  }
+
+  #radio:focus:checked ~ #icon-knob {
+    opacity: 100%;
+    background-color: var(--sinch-color-radio-border-focus-checked);
+  }
+
+  /* Colors Hover Checked */
+  #radio:hover:checked::before {
+    background-color: var(--sinch-color-radio-outer-circle-hover-checked);
+  }
+
+  #radio:hover:checked::after {
+    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-hover-checked) inset;
+  }
+
+  #radio:hover:checked ~ #icon-knob {
+    opacity: 100%;
+    background-color: var(--sinch-color-radio-border-hover-checked);
+  }
+
+  /* Colors Active Checked */
+  #radio:active:checked::before {
+    background-color: var(--sinch-color-radio-outer-circle-active-checked);
+  }
+
+  #radio:active:checked::after {
+    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-active-checked) inset;
+  }
+
+  #radio:active:checked ~ #icon-knob {
+    opacity: 100%;
+    background-color: var(--sinch-color-radio-border-active-checked);
+  }
+
+  /* Colors Disabled Checked */
+  #radio:disabled:checked::before {
+    background-color: var(--sinch-color-radio-outer-circle-disabled-checked);
+  }
+
+  #radio:disabled:checked::after {
+    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-disabled-checked) inset;
+  }
+
+  #radio:disabled:checked ~ #icon-knob {
+    opacity: 100%;
+    background-color: var(--sinch-color-radio-border-disabled-checked);
+  }
+</style>
+
+<div id="icon-container">
+  <input id="radio" type="radio"/>
+  <div id="icon-knob"></div>
+</div>
+<label for="radio" id="label"></label>

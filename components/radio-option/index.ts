@@ -2,7 +2,6 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getEventHandler,
   isAttrTrue,
   updateAttribute,
   updateBooleanAttribute,
@@ -14,7 +13,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-checkbox', class extends HTMLElement {
+defineCustomElement('sinch-radio-option', class extends HTMLElement {
   $input: HTMLInputElement
   $label: HTMLLabelElement
 
@@ -32,19 +31,15 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 
   connectedCallback() {
-    this.$input.addEventListener('input', this.onInput)
-    this.$input.addEventListener('focus', this.onInputFocus)
-    this.$input.addEventListener('blur', this.onInputBlur)
+    this.$input.addEventListener('change', this.onInput)
   }
 
   disconnectedCallback() {
-    this.$input.removeEventListener('input', this.onInput)
-    this.$input.removeEventListener('focus', this.onInputFocus)
-    this.$input.removeEventListener('blur', this.onInputBlur)
+    this.$input.removeEventListener('change', this.onInput)
   }
 
   static get observedAttributes() {
-    return ['checked', 'disabled', 'text']
+    return ['checked', 'disabled', 'text', 'value']
   }
 
   set checked(isChecked: boolean) {
@@ -55,12 +50,12 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     return getBooleanAttribute(this, 'checked')
   }
 
-  set indeterminate(isIndeterminate: boolean) {
-    updateBooleanAttribute(this, 'indeterminate', isIndeterminate)
+  set value(value: string) {
+    updateAttribute(this, 'value', value)
   }
 
-  get indeterminate() {
-    return getBooleanAttribute(this, 'indeterminate')
+  get value() {
+    return getAttribute(this, 'value', '')
   }
 
   set disabled(isDisabled: boolean) {
@@ -96,6 +91,11 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
 
         break
       }
+      case 'value': {
+        this.$input.value = newVal ?? ''
+
+        break
+      }
     }
   }
 
@@ -103,70 +103,35 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     this.$input.focus()
   }
 
-  blur() {
-    this.$input.blur()
-  }
-
-  onInput = (e: Event) => {
-    getEventHandler(this, 'onChange')?.(this.$input.checked)
-
+  onInput = () => {
     this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: this.$input.checked,
-      })
+      new CustomEvent('change', { bubbles: true, detail: this.value })
     )
-
-    e.stopPropagation()
-  }
-
-  onInputFocus = (e: Event) => {
-    getEventHandler(this, 'onFocus')?.()
-
-    this.dispatchEvent(
-      new CustomEvent('focus')
-    )
-
-    e.stopPropagation()
-  }
-
-  onInputBlur = (e: Event) => {
-    getEventHandler(this, 'onBlur')?.()
-
-    this.dispatchEvent(
-      new CustomEvent('blur')
-    )
-
-    e.stopPropagation()
   }
 })
 
-type TSinchCheckboxElement = HTMLElement & {
+type TSinchRadioOptionElement = HTMLElement & {
+  value: string,
   checked: boolean,
-  indeterminate: boolean,
   disabled: boolean,
   text: string,
   focus(): void,
-  blur(): void,
 }
 
-type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
-  checked?: boolean,
-  indeterminate?: boolean,
+type TSinchRadioOptionReact = TSinchElementReact<TSinchRadioOptionElement> & {
+  value: string,
   disabled?: boolean,
   text: string,
-  onChange: (isChecked: boolean) => void,
-  onFocus?: () => void,
-  onBlur?: () => void,
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-checkbox': TSinchCheckboxReact,
+      'sinch-radio-option': TSinchRadioOptionReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-checkbox': TSinchCheckboxElement,
+    'sinch-radio-option': TSinchRadioOptionElement,
   }
 }

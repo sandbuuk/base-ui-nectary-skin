@@ -5,6 +5,9 @@
   <div v-if="pathname === '/select'">
     <Select width="200"/>
   </div>
+  <div v-if="pathname === '/radio'">
+    <Radio width="200"/>
+  </div>
 </template>
 
 <style>
@@ -16,6 +19,7 @@
 <script>
 import '@nectary/components'
 import Select from './components/Select.vue'
+import Radio from './components/Radio.vue'
 
 export default {
   data() {
@@ -24,7 +28,8 @@ export default {
     };
   },
   components: {
-    Select
+    Select,
+    Radio
   }
 };
 </script>
