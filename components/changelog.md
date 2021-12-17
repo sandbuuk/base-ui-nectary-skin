@@ -1,6 +1,6 @@
-## v0.2.1
+## v0.3.0
 
-* 🌱 add `sinch-radio` component
+* ➕ add `sinch-radio` component
 
 ## v0.2.0
 
