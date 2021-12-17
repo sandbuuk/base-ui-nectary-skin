@@ -1,3 +1,7 @@
+## v0.2.1
+
+* 🌱 add `sinch-radio` component
+
 ## v0.2.0
 
 * 💥 use Gilroy in all font styles
