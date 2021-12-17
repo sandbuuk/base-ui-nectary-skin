@@ -4,12 +4,18 @@
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "pretty": true,
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "jsx": "react-jsx",
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
   },
-  "include": ["./src", "./modules.d.ts", "./custom.d.ts"]
+  "include": [
+    "./src",
+    "./modules.d.ts"
+  ]
 }
