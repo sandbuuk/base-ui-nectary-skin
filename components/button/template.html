@@ -74,12 +74,12 @@
     border-radius: 4px;
     line-height: 48px;
     padding: 0 24px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    width: 100%;
     cursor: pointer;
+    box-sizing: border-box;
   }
 
   button:hover {
@@ -104,6 +104,12 @@
     box-shadow: 0 0 0 1px var(--sinch-color-button-border-disabled) inset;
   }
 
+  #text-wrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   :host([small]:not([type="cta"])) > button {
     line-height: 32px;
     padding: 0 16px;
@@ -121,5 +127,7 @@
 
 <button>
   <slot></slot>
-  <span id="text"></span>
+  <div id="text-wrapper">
+    <span id="text"></span>
+  </div>
 </button>
