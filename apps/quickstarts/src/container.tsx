@@ -1,3 +1,5 @@
+import createCache from '@emotion/cache'
+import { CacheProvider } from '@emotion/react'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { App } from './components/App'
 
@@ -25,20 +27,29 @@ class SinchReactApp extends HTMLElement {
 
     const shadowRoot = this.attachShadow({ mode: 'open' })
 
-    shadowRoot.appendChild(template.content.cloneNode(true))
-
+    // StyleLoader style inject
     const stylesFrag = (document.head as any)[appName]
 
     if (stylesFrag != null) {
-      shadowRoot.prepend(stylesFrag.cloneNode(true))
+      shadowRoot.appendChild(stylesFrag.cloneNode(true))
     }
+
+    shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.appElement = shadowRoot.getElementById(appName)!
   }
 
   connectedCallback() {
+    const cache = createCache({
+      key: 'css',
+      prepend: true,
+      container: this.shadowRoot as any as HTMLElement,
+    })
+
     render(
-      <App baseUrl="/quickstarts"/>,
+      <CacheProvider value={cache}>
+        <App baseUrl="/quickstarts"/>
+      </CacheProvider>,
       this.appElement
     )
   }
