@@ -1,13 +1,13 @@
-import styles from "./Page.module.css";
-import { usePageControl } from "./PageContext";
-import type { FC } from "react";
-import sinchlogo from "./images/sinchlogo.jpg";
-import signinimage from "./images/signin.jpg";
-import google from "./images/googlebg.jpg";
-import facebook from "./images/facebookbg.jpg";
+import styles from './Page.module.css'
+import { usePageControl } from './PageContext'
+import facebook from './images/facebookbg.jpg'
+import google from './images/googlebg.jpg'
+import signinimage from './images/signin.jpg'
+import sinchlogo from './images/sinchlogo.jpg'
+import type { FC } from 'react'
 
 export const PageStepTwo: FC = () => {
-  const { next } = usePageControl();
+  const { next } = usePageControl()
 
   return (
     <div className={styles.page}>
@@ -21,19 +21,19 @@ export const PageStepTwo: FC = () => {
               onChange={() => {}}
               label="E-mail"
               placeholder="john.doe@gmail.com"
-            ></sinch-input>
+            />
             <sinch-input
               value=""
               onChange={() => {}}
               label="Password"
               placeholder="Placeholder"
               optionalText="8+ characters"
-            ></sinch-input>
-            
+            />
+
             <div className={styles.createAccdiv}>
               <sinch-button
                 className={styles.createAcc}
-                style={{ height: "30px", width: "200px" }}
+                style={{ height: '30px', width: '200px' }}
                 type="cta"
                 onClick={next}
                 text="Login"
@@ -46,7 +46,7 @@ export const PageStepTwo: FC = () => {
               onClick={() => {}}
               text="Login with Google"
             >
-              <img className={styles.googleImg} src={google} />
+              <img className={styles.googleImg} src={google}/>
             </sinch-button>
             <div className={styles.facebookSignup}>
               <sinch-button
@@ -54,7 +54,7 @@ export const PageStepTwo: FC = () => {
                 onClick={() => {}}
                 text="Login with Facebook"
               >
-                <img className={styles.googleImg} src={facebook} />
+                <img className={styles.googleImg} src={facebook}/>
               </sinch-button>
             </div>
           </div>
@@ -63,7 +63,7 @@ export const PageStepTwo: FC = () => {
       <div className={styles.rightSide}>
         <div className={styles.nameAlogo}>
           <h1>Welcome back to Sinch! </h1>
-          <img src={sinchlogo} className={styles.sinchlogo} />
+          <img src={sinchlogo} className={styles.sinchlogo}/>
         </div>
         <div className={styles.description}>
           <h3>
@@ -71,9 +71,9 @@ export const PageStepTwo: FC = () => {
           </h3>
         </div>
         <div className={styles.simage}>
-          <img src={signinimage} className={styles.signinImage} />
+          <img src={signinimage} className={styles.signinImage}/>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

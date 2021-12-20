@@ -1,61 +1,61 @@
-const path = require("path");
-const { MFLiveReloadPlugin } = require("@module-federation/fmr");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const path = require('path')
+const { MFLiveReloadPlugin } = require('@module-federation/fmr')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 
-const CONTAINER = "Quickstarts";
-const PORT = 3001;
+const CONTAINER = 'Quickstarts'
+const PORT = 3001
 
 const styleLoaderInsert = (styleElement) => {
-  const name = "sinch-quickstarts-app";
+  const name = 'sinch-quickstarts-app'
 
   if (document.getElementById(name) !== null) {
     // Standalone app
-    document.head.appendChild(styleElement);
+    document.head.appendChild(styleElement)
   } else {
     // Embedded app
     if (document.head[name] == null) {
-      document.head[name] = document.createDocumentFragment();
+      document.head[name] = document.createDocumentFragment()
     }
 
-    document.head[name].appendChild(styleElement);
+    document.head[name].appendChild(styleElement)
   }
-};
+}
 
 module.exports = {
-  mode: "development",
-  entry: require.resolve("./src/index.ts"),
+  mode: 'development',
+  entry: require.resolve('./src/index.ts'),
   output: {
-    chunkFilename: "[name].[chunkhash].js",
-    publicPath: "auto",
+    chunkFilename: '[name].[chunkhash].js',
+    publicPath: 'auto',
     pathinfo: true,
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
   },
   module: {
     rules: [
       {
         test: /\.html$/,
-        loader: "raw-loader",
+        loader: 'raw-loader',
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/,
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
-          name: "assets/[name].[ext]",
+          name: 'assets/[name].[ext]',
         },
       },
       {
         test: /\.[jt]sx?$/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
           babelrc: false,
           compact: false,
           presets: [
-            ["@babel/preset-env", { modules: false }],
-            "@babel/preset-typescript",
-            ["@babel/preset-react", { runtime: "automatic" }],
+            ['@babel/preset-env', { modules: false }],
+            '@babel/preset-typescript',
+            ['@babel/preset-react', { runtime: 'automatic' }],
           ],
           cacheDirectory: true,
           cacheCompression: false,
@@ -65,11 +65,11 @@ module.exports = {
         test: /\.module.css$/,
         use: [
           {
-            loader: "style-loader",
+            loader: 'style-loader',
             options: { insert: styleLoaderInsert },
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: { modules: true },
           },
         ],
@@ -79,16 +79,16 @@ module.exports = {
         exclude: /\.module.css$/,
         use: [
           {
-            loader: "style-loader",
+            loader: 'style-loader',
             options: { insert: styleLoaderInsert },
           },
-          "css-loader",
+          'css-loader',
         ],
       },
     ],
   },
   devServer: {
-    host: "localhost",
+    host: 'localhost',
     port: PORT,
     historyApiFallback: true,
   },
@@ -100,33 +100,33 @@ module.exports = {
     }),
     new ModuleFederationPlugin({
       name: CONTAINER,
-      filename: "remoteEntry.js",
+      filename: 'remoteEntry.js',
       exposes: {
-        "./Container": require.resolve("./src/container.tsx"),
+        './Container': require.resolve('./src/container.tsx'),
       },
       shared: {
-        "@nectary/components/button": {
-          requiredVersion: "^0.0.0",
+        '@nectary/components/button': {
+          requiredVersion: '^0.0.0',
         },
-        "@nectary/components/theme.css": {
-          requiredVersion: "^0.0.0",
+        '@nectary/components/theme.css': {
+          requiredVersion: '^0.0.0',
         },
         react: {
-          requiredVersion: "^17.0.0",
+          requiredVersion: '^17.0.0',
           singleton: true,
         },
-        "react-dom": {
-          requiredVersion: "^17.0.0",
+        'react-dom': {
+          requiredVersion: '^17.0.0',
           singleton: true,
         },
-        "react-router-dom": {
-          requiredVersion: "^6.0.0",
+        'react-router-dom': {
+          requiredVersion: '^6.0.0',
           singleton: true,
         },
       },
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "./public/index.html"),
+      template: path.join(__dirname, './public/index.html'),
     }),
   ],
-};
+}

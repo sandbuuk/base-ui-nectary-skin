@@ -1,29 +1,25 @@
-import styles from "./Page.module.css";
-import { usePageControl } from "./PageContext";
-import { FC, useState } from "react";
-import chatlayerlogo from "./images/chatlayerlogo.jpg";
-import info from "./images/info.png";
-import { style } from "@mui/system";
-import { PageSteps } from "./PageSteps";
-import { useStepperControl } from "./StepperContext";
+import styles from './Page.module.css'
+import { usePageControl } from './PageContext'
+import { PageSteps } from './PageSteps'
+import { useStepperControl } from './StepperContext'
+import chatlayerlogo from './images/chatlayerlogo.jpg'
+import info from './images/info.png'
+import type { FC } from 'react'
+
 export const PageStepThree: FC = () => {
-  const { next } = usePageControl();
-  const { activeStep, handleNext, handleBack } = useStepperControl();
+  const { next } = usePageControl()
+  const { handleNext } = useStepperControl()
   //handleNext(0);
 
-  const nextPage = ()=>{
-    next();
-    handleNext();
-  }
-
-  const prevPage = ()=>{
-    handleBack();
+  const nextPage = () => {
+    next()
+    handleNext()
   }
 
   return (
     <div className={styles.botpageWhatsapp}>
       <div className={styles.botsteps}>
-        <PageSteps />
+        <PageSteps/>
       </div>
       <div className={styles.botmainBodyWhatsapp}>
         <div className={styles.botwhatsappHeading}>
@@ -37,10 +33,10 @@ export const PageStepThree: FC = () => {
           </div>
 
           <div className={styles.chatlayerLogo}>
-            <div className="empty"></div>
+            <div className="empty"/>
             <div className="actualLogo">
               <p className={styles.poweredBy}>Powered By:</p>
-              <img className={styles.chatLayer} src={chatlayerlogo} />
+              <img className={styles.chatLayer} src={chatlayerlogo}/>
             </div>
           </div>
         </div>
@@ -61,7 +57,7 @@ export const PageStepThree: FC = () => {
                   </p>
                   <div className={styles.botexclamation}>
                     <div className={styles.infoData}>
-                      <img className={styles.infoImg} src={info} />
+                      <img className={styles.infoImg} src={info}/>
                       <h4 className={styles.infoHead}>Don't worry!</h4>
                     </div>
                     <p className={styles.infoBody}>You will have all the answers once...</p>
@@ -74,7 +70,7 @@ export const PageStepThree: FC = () => {
                       onChange={() => {}}
                       label="Question 1"
                       placeholder="What is your name?"
-                    ></sinch-input>
+                    />
                   </div>
                   <div className={styles.botInput}>
                     <sinch-select
@@ -87,22 +83,22 @@ export const PageStepThree: FC = () => {
                         value="1"
                         text="Software Engineer"
                         slot="select"
-                      ></sinch-select-option>
+                      />
                       <sinch-select-option
                         value="2"
                         text="Data Analyst"
                         slot="select"
-                      ></sinch-select-option>
+                      />
                       <sinch-select-option
                         value="3"
                         text="Product Manager"
                         slot="select"
-                      ></sinch-select-option>
+                      />
                       <sinch-select-option
                         value="4"
                         text="Software Architect"
                         slot="select"
-                      ></sinch-select-option>
+                      />
                     </sinch-select>
                   </div>
                   <div className={styles.botInput}>
@@ -111,7 +107,7 @@ export const PageStepThree: FC = () => {
                       onChange={() => {}}
                       label="Save as"
                       placeholder="name"
-                    ></sinch-input>
+                    />
                   </div>
                 </div>
                 <div className={styles.botmessagesInput}>
@@ -121,7 +117,7 @@ export const PageStepThree: FC = () => {
                       onChange={() => {}}
                       label="Question 2"
                       placeholder="How much do you wanna spent?"
-                    ></sinch-input>
+                    />
                   </div>
                   <div className={styles.botInput}>
                     <sinch-select
@@ -134,22 +130,22 @@ export const PageStepThree: FC = () => {
                         value="1"
                         text="Software Engineer"
                         slot="select"
-                      ></sinch-select-option>
+                      />
                       <sinch-select-option
                         value="2"
                         text="Data Analyst"
                         slot="select"
-                      ></sinch-select-option>
+                      />
                       <sinch-select-option
                         value="3"
                         text="Product Manager"
                         slot="select"
-                      ></sinch-select-option>
+                      />
                       <sinch-select-option
                         value="4"
                         text="Software Architect"
                         slot="select"
-                      ></sinch-select-option>
+                      />
                     </sinch-select>
                   </div>
                   <div className={styles.botInput}>
@@ -158,14 +154,14 @@ export const PageStepThree: FC = () => {
                       onChange={() => {}}
                       label="Save as"
                       placeholder="price_range"
-                    ></sinch-input>
+                    />
                   </div>
                 </div>
                 <div className={styles.questionBtn}>
-                  <sinch-button type="primary" text="Add new question" onClick={()=>{}} />
+                  <sinch-button type="primary" text="Add new question" onClick={() => {}}/>
                 </div>
                 <div>
-                <sinch-input
+                  <sinch-input
                     value=""
                     onChange={() => {}}
                     label="Human Handover"
@@ -186,13 +182,13 @@ export const PageStepThree: FC = () => {
 
         <div className={styles.botbuttons}>
           <div className={styles.botbackBut}>
-            <sinch-button type="destructive" text="Cancel" onClick={nextPage} />
+            <sinch-button type="destructive" text="Cancel" onClick={nextPage}/>
           </div>
           <div className={styles.botsaveBut}>
-            <sinch-button type="primary" text="Next" onClick={nextPage} />
+            <sinch-button type="primary" text="Next" onClick={nextPage}/>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
