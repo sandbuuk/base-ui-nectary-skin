@@ -417,3 +417,25 @@ h2 {
   margin-left:9%;
   margin-top:0%;
 }
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: '#FFBE3C',
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+  color: '#FFBE3C',
+}
+
+.Mui-disabled .MuiStepIcon-root {
+  color: '#D4DADD' 
+}
+
+.MuiStepIcon-text{ 
+  display: 'none';
+  visibility: 'hidden' 
+}
+
+.css-qivjh0-MuiStepLabel-label{
+   font-weight: '600';
+   font-family: 'Gilroy' 
+}
