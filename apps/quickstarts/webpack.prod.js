@@ -23,7 +23,7 @@ module.exports = {
         loader: 'raw-loader',
       },
       {
-        test: /\.(png|jpe?g|gif|jp2|webp)$/,
+        test: /\.(png|jpg|jpeg|gif)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',
@@ -71,11 +71,26 @@ module.exports = {
         './Container': require.resolve('./src/container.tsx'),
       },
       shared: {
-        '@nectary/components/button': {
-          requiredVersion: '^0.0.0',
-        },
         '@nectary/components/theme.css': {
-          requiredVersion: '^0.0.0',
+          requiredVersion: '*',
+        },
+        '@nectary/components/button': {
+          requiredVersion: '*',
+        },
+        '@nectary/components/input': {
+          requiredVersion: '*',
+        },
+        '@nectary/components/input-tooltip': {
+          requiredVersion: '*',
+        },
+        '@nectary/components/select': {
+          requiredVersion: '*',
+        },
+        '@nectary/components/select-option': {
+          requiredVersion: '*',
+        },
+        '@nectary/components/textarea': {
+          requiredVersion: '*',
         },
         react: {
           requiredVersion: '^17.0.0',

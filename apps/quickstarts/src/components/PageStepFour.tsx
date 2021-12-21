@@ -4,7 +4,6 @@ import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
 import contactlogo from './images/contactlogo.jpg'
 import type { FC } from 'react'
-import '@nectary/components/button'
 
 export const PageStepFour: FC = () => {
   const { next } = usePageControl()
