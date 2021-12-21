@@ -10,15 +10,15 @@
     "test:app-vue": "webpack serve --config apps/vue/webpack.config.js",
     "test:app-angular": "yarn --cwd=apps/angular ng serve",
     "test:update-screenshots": "wait-on http://localhost:3021 && playwright test --project chromium-react --project firefox-react --project webkit-react -u",
-    "test:update": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/visual/entrypoint.update.sh",
-    "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/visual/entrypoint.dev.sh",
-    "test": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.16.3 ./tests/visual/entrypoint.sh"
+    "test:update": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.17.1 ./tests/visual/entrypoint.update.sh",
+    "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.17.1 ./tests/visual/entrypoint.dev.sh",
+    "test": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.17.1 ./tests/visual/entrypoint.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "@nectary/components": "*",
-    "@playwright/test": "1.16.3",
+    "@playwright/test": "1.17.1",
     "@types/node": "^14.0.0",
     "babel-loader": "^8.2.3",
     "concurrently": "^6.3.0",
