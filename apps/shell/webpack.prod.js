@@ -46,7 +46,7 @@ module.exports = {
         },
       },
       {
-        test: /\.module.css$/,
+        test: /\.module\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -59,7 +59,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /\.module.css$/,
+        exclude: /\.module\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
@@ -79,11 +79,26 @@ module.exports = {
         Quickstarts: `Quickstarts@//${process.env.REMOTE_QUICKSTARTS}/remoteEntry.js`,
       },
       shared: {
-        '@nectary/components/button': {
-          requiredVersion: '^0.0.0',
-        },
         '@nectary/components/theme.css': {
-          requiredVersion: '^0.0.0',
+          requiredVersion: '*',
+        },
+        '@nectary/components/button': {
+          requiredVersion: '*',
+        },
+        '@nectary/components/input': {
+          requiredVersion: '*',
+        },
+        '@nectary/components/input-tooltip': {
+          requiredVersion: '*',
+        },
+        '@nectary/components/select': {
+          requiredVersion: '*',
+        },
+        '@nectary/components/select-option': {
+          requiredVersion: '*',
+        },
+        '@nectary/components/textarea': {
+          requiredVersion: '*',
         },
         react: {
           requiredVersion: '^17.0.0',

@@ -1,10 +1,15 @@
 import '@nectary/components/theme.css'
 import '@nectary/components/button'
+import '@nectary/components/input'
+import '@nectary/components/input-tooltip'
+import '@nectary/components/select'
+import '@nectary/components/textarea'
 import { useEffect, useRef } from 'react'
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import styles from './App.module.css'
 import { PageLayout } from './PageLayout'
 import { PageNotFound } from './PageNotFound'
+import { PageStepFour } from './PageStepFour'
 import { PageStepOne } from './PageStepOne'
 import { PageStepThree } from './PageStepThree'
 import { PageStepTwo } from './PageStepTwo'
@@ -42,6 +47,7 @@ export const App: FC<TApp> = ({ baseUrl }) => {
             <Route path="step-1" element={<PageStepOne/>}/>
             <Route path="step-2" element={<PageStepTwo/>}/>
             <Route path="step-3" element={<PageStepThree/>}/>
+            <Route path="step-4" element={<PageStepFour/>}/>
             <Route path="*" element={<PageNotFound/>}/>
           </Route>
         </Routes>

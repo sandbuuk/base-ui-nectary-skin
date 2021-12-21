@@ -1,0 +1,4 @@
+{
+  "extends": "@saas/eslint-config"
+}
+ 

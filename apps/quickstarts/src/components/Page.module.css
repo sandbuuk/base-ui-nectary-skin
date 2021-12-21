@@ -1,11 +1,438 @@
 /* stylelint-disable selector-class-pattern */
-.page {
+* {
+  box-sizing: border-box;
+}
+
+h2 {
+  font: var(--sinch-font-title-1);
+  margin-bottom: 0%;
+}
+
+.form {
   display: flex;
   flex-direction: column;
+  width: 400px;
+}
+
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  font-family: "Gilroy-Regular", sans-serif;
+  flex: 8;
+  background-color: white;
+}
+
+.page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   flex: 1;
+  background-color: #e5e5e5;
 }
 
 .buttonWrapper {
   margin-block-start: auto;
   text-align: end;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+  background-color: #ffffff;
+  flex: 4;
+}
+
+.parentLogin {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  background-color: #ffffff;
+  flex: 4;
+}
+
+.buttonLarge {
+  width: 300px;
+}
+.signUp {
+  display: flex;
+  margin-left: 15%;
+  flex: 1;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+.signIn {
+  display: flex;
+  margin-left: 15%;
+  flex: 12;
+  justify-content: stretch;
+  flex-direction: column;
+}
+
+.creatrAcc {
+  height: 50px;
+  width: 300px;
+  background-color: chartreuse !important;
+}
+
+.picture {
+  background-color: lightblue;
+}
+
+.fontName {
+  font-family: "Gilroy-Regular", sans-serif;
+}
+
+.sinchlogo {
+  height: 30px;
+  width: 60px;
+  margin: 2%;
+}
+
+.nameAlogo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+}
+
+.simage {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.signupImage {
+  width: 430px;
+  height: 630px;
+}
+
+.createAccdiv {
+  display: flex;
+  justify-content: stretch;
+}
+
+.createAcc {
+  width: 100% !important;
+  height: 50px !important;
+  background-color: beige !important;
+}
+
+.signupFG {
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.signinFG {
+  margin-top: 30%;
+  margin-bottom: 20%;
+}
+
+.facebookSignup {
+  display: flex;
+  flex: 0 1 1000px;
+  margin-top: 4%;
+}
+
+.googleImg {
+  height: 30px;
+  width: 30px;
+}
+
+.signinImage {
+  height: 350px;
+  width: 630px;
+}
+
+.steps {
+  display: flex;
+  flex: 2;
+  justify-content: center;
+  align-items: center;
+}
+.botsteps {
+  display: flex;
+  flex: 2;
+  justify-content: center;
+  align-items: center;
+}
+
+.whatsappHeading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 3%;
+  padding: 1%;
+  border-radius: 2%;
+  background-color: #ffffff;
+}
+.botwhatsappHeading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 3%;
+  padding: 1%;
+  border-radius: 2%;
+  background-color: #ffffff;
+}
+
+.whatsappBody {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  margin: 0% 3%;
+}
+.botwhatsappBody {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  margin: 0% 3%;
+}
+
+.pageWhatsapp {
+  display: flex;
+  flex-direction: row;
+  background-color: #e5e5e5;
+}
+.botpageWhatsapp {
+  display: flex;
+  flex-direction: row;
+  background-color: #e5e5e5;
+}
+
+.mainBodyWhatsapp {
+  flex: 10;
+  display: flex;
+  flex-direction: column;
+}
+.botmainBodyWhatsapp {
+  flex: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.previewtext {
+  margin-left: 10%;
+  font-weight: bold;
+  font: var(--sinch-font-extra-small-text);
+  color: #e5e5e5;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 6;
+  margin: 2%;
+  margin-left: 4%;
+}
+
+.humanMessages {
+  display: flex;
+  flex-direction: column;
+  flex: 7;
+  margin: 2%;
+  margin-left: 6%;
+  align-items: center;
+}
+.bothumanMessages {
+  display: flex;
+  flex: 7;
+  margin: 1%;
+  margin-left: 6%;
+  justify-content: center;
+}
+.messagesInput {
+  display: flex;
+  flex-direction: row;
+}
+.botmessagesInput {
+  display: flex;
+  flex-direction: row;
+}
+
+.Input {
+  margin: 2%;
+}
+.botInput {
+  margin: 1%;
+}
+.messagesParent {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.botmessagesParent {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.whatsappMatterBody {
+  font: var(--sinch-font-extra-small-text);
+  margin-top: 0%;
+}
+.botwhatsappMatterBody {
+  font: var(--sinch-font-extra-small-text);
+  margin-top: 0%;
+}
+
+.preview {
+  display: flex;
+  flex: 5;
+}
+.botpreview {
+  display: flex;
+  flex: 5;
+}
+
+.mobilegif {
+  border-style: solid;
+  border-radius: 5%;
+  border-width: 3px;
+  border-color: black;
+  height: 90%;
+  width: 55%;
+  margin-top: 8%;
+  margin-right: 10%;
+}
+
+.botmobilegif {
+  border-style: solid;
+  border-radius: 8%;
+  border-width: 3px;
+  border-color: black;
+  height: 75%;
+  width: 57%;
+  margin-top: 8%;
+}
+
+.chatlayerLogo {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.actualLogo {
+  margin-right: 10%;
+}
+
+.chatLayer {
+  height: 30%;
+  width: 90%;
+}
+
+.poweredBy {
+  font: var(--sinch-font-extra-small-text);
+}
+
+.buttons {
+  display: flex;
+  background-color: white;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0% 3%;
+  margin-bottom: 2%;
+}
+
+.botbuttons {
+  display: flex;
+  background-color: white;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0% 3%;
+  margin-bottom: 2%;
+}
+
+.backBut {
+  margin: 4%;
+  margin-top: 0%;
+}
+
+.saveBut {
+  margin: 4%;
+  margin-top: 0%;
+}
+
+.botbackBut {
+  margin: 4%;
+  margin-top: 0%;
+}
+
+.botsaveBut {
+  margin: 4%;
+  margin-top: 0%;
+}
+
+.botGreet {
+  margin-left: 2%;
+}
+
+.botexclamation {
+  background-color: #d5e5f8;
+}
+
+.MuiStepLabel-labelContainer span {
+  font: var(--sinch-font-title-4) !IMPORTANT;
+}
+
+.questionBtn{
+  display: flex;
+  justify-content: center;
+}
+
+.infoImg{
+  height: 5%;
+  width: 5%;
+  margin: 2%;
+}
+
+.infoHead{
+  margin-top: 2%;
+  margin-bottom: 0%;
+}
+
+.infoData{
+  display: flex;
+  flex-direction: row;
+}
+
+.infoBody{
+  margin-left:9%;
+  margin-top:0%;
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: '#FFBE3C',
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+  color: '#FFBE3C',
+}
+
+.Mui-disabled .MuiStepIcon-root {
+  color: '#D4DADD' 
+}
+
+.MuiStepIcon-text{ 
+  display: 'none';
+  visibility: 'hidden' 
+}
+
+.css-qivjh0-MuiStepLabel-label{
+   font-weight: '600';
+   font-family: 'Gilroy' 
 }
