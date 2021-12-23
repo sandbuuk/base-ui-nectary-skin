@@ -33,6 +33,10 @@ const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInf
       .replace('.ts-snapshots', `-screenshots/${platform}`)
   }
 
+const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator) => (cb: (el: HTMLElementTagNameMap[T]) => void, arg?: any) => {
+  return $.evaluate(cb as ((el: SVGElement | HTMLElement) => void), arg)
+}
+
 type BoundingBox = Exclude<PageScreenshotOptions['clip'], undefined>
 
 type UpdateStateResult = {
@@ -40,13 +44,14 @@ type UpdateStateResult = {
   include?: Locator[],
 }
 
-type UpdateStateProps = {
+type UpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
   page: Page,
   $: Locator,
+  $eval: (cb: (el: HTMLElementTagNameMap[T], arg?: any) => void) => Promise<void>,
 }
 
-export const makeScreenshotTests = (pageUrl: string, elementSelector: string) =>
-  (updateState: (props: UpdateStateProps) => AsyncIterable<UpdateStateResult>) =>
+export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageUrl: string, elementSelector: T) =>
+  (updateState: (props: UpdateStateProps<T>) => AsyncIterable<UpdateStateResult>) =>
     async ({ page }: PlaywrightTestArgs, info: TestInfo) => {
       info.snapshotPath = overrideScreenshotPath(info.snapshotPath)
 
@@ -54,7 +59,7 @@ export const makeScreenshotTests = (pageUrl: string, elementSelector: string) =>
 
       const locator = page.locator(elementSelector)
 
-      for await (const { name, include } of updateState({ page, $: locator })) {
+      for await (const { name, include } of updateState({ page, $: locator, $eval: makeEval<T>(locator) })) {
         const clip = Array.isArray(include)
           ? await mergeBoundingBox([locator, ...include])
           : await locator.boundingBox()

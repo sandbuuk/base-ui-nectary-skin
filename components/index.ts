@@ -1,4 +1,5 @@
 import './theme.css'
+import './alert'
 import './button'
 import './checkbox'
 import './input'

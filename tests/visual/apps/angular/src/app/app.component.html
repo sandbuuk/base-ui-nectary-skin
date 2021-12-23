@@ -1,4 +1,5 @@
 <div [ngSwitch]="pathname">
+  <alert-component [width]="300" *ngSwitchCase="'/alert'"></alert-component>
   <select-component [width]="200" *ngSwitchCase="'/select'"></select-component>
   <radio-component [width]="200" *ngSwitchCase="'/radio'"></radio-component>
 </div>
