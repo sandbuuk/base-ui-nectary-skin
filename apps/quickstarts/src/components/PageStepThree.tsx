@@ -18,57 +18,16 @@ export const PageStepThree: FC = () => {
   const [flowCounter, setCounter] = useState(2)
   const WhatsappDetails: FC<Props> = (props): JSX.Element => {
     const k = props.name
-    const [selectedOption, setSelectedOption] = useState('')
 
     return (
       <div className={styles.botmessagesInput}>
-        <div className={styles.botInput}>
-          <sinch-input
-            value=""
-            onChange={() => {}}
-            label={`Question ${k}`}
-            placeholder="What is your name?"
-          />
-        </div>
-        <div className={styles.botInput}>
-          <sinch-select
-            value={selectedOption}
-            onChange={(value) => {
-              setSelectedOption(value)
-            }}
-            label="Type"
-            placeholder="Name"
-          >
-            <sinch-select-option
-              value="1"
-              text="Software Engineer"
-              slot="select"
-            />
-            <sinch-select-option
-              value="2"
-              text="Data Analyst"
-              slot="select"
-            />
-            <sinch-select-option
-              value="3"
-              text="Product Manager"
-              slot="select"
-            />
-            <sinch-select-option
-              value="4"
-              text="Software Architect"
-              slot="select"
-            />
-          </sinch-select>
-        </div>
-        <div className={styles.botInput}>
-          <sinch-input
-            value=""
-            onChange={() => {}}
-            label="Save as"
-            placeholder="name"
-          />
-        </div>
+        <sinch-input
+          value=""
+          style={{ width: '100%' }}
+          onChange={() => {}}
+          label={`Question ${k}`}
+          placeholder="What is your name?"
+        />
       </div>
     )
   }
