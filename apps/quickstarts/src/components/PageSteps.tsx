@@ -164,6 +164,3 @@ export const PageSteps: FC = () => {
     </div>
   )
 }
-
-/*name={styles.stepperLabel}*/
-
