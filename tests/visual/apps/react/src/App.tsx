@@ -1,11 +1,18 @@
 import '@nectary/components'
 import './App.css'
+import { Alert } from './components/Alert'
 import { Select } from './components/Select'
 import { Radio } from './components/Radio'
 import type { FC } from 'react'
 
 export const App: FC<{}> = () => {
   switch (window.location.pathname) {
+    case '/alert': {
+      return (
+        <Alert width={300}/>
+      )
+    }
+
     case '/button': {
       return (
         <sinch-button type="primary" text="Button" onClick={() => {}}/>
@@ -41,12 +48,6 @@ export const App: FC<{}> = () => {
     case '/select': {
       return (
         <Select width={200}/>
-      )
-    }
-
-    case '/select-narrow': {
-      return (
-        <Select width={100}/>
       )
     }
   }

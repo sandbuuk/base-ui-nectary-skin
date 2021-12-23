@@ -6,43 +6,43 @@ const shot = makeScreenshotTests(
   'sinch-select'
 )
 
-test('disabled attribute', shot(async function* ({ $ }) {
-  await $.evaluate((el) => el.setAttribute('disabled', ''))
+test('disabled attribute', shot(async function* ({ $eval }) {
+  await $eval((el) => el.setAttribute('disabled', ''))
   yield { name: 'disabled' }
 
-  await $.evaluate((el) => el.removeAttribute('disabled'))
+  await $eval((el) => el.removeAttribute('disabled'))
   yield { name: 'enabled' }
 }))
 
-test('value attribute', shot(async function* ({ $ }) {
-  await $.evaluate((el) => el.setAttribute('value', ''))
+test('value attribute', shot(async function* ({ $eval }) {
+  await $eval((el) => el.setAttribute('value', ''))
   yield { name: 'option-empty' }
 
-  await $.evaluate((el) => el.setAttribute('value', '4'))
+  await $eval((el) => el.setAttribute('value', '4'))
   yield { name: 'option-4' }
 
-  await $.evaluate((el) => el.setAttribute('value', '3'))
+  await $eval((el) => el.setAttribute('value', '3'))
   yield { name: 'option-3' }
 
-  await $.evaluate((el) => el.setAttribute('value', '2'))
+  await $eval((el) => el.setAttribute('value', '2'))
   yield { name: 'option-disabled' }
 
-  await $.evaluate((el) => el.setAttribute('value', '1'))
+  await $eval((el) => el.setAttribute('value', '1'))
   yield { name: 'option-1' }
 
-  await $.evaluate((el) => el.setAttribute('value', 'missing'))
+  await $eval((el) => el.setAttribute('value', 'missing'))
   yield { name: 'option-missing' }
 }))
 
-test('disabled property', shot(async function* ({ $ }) {
-  await $.evaluate((el) => {
-    (el as HTMLElementTagNameMap['sinch-select']).disabled = true
+test('disabled property', shot(async function* ({ $eval }) {
+  await $eval((el) => {
+    el.disabled = true
   })
 
   yield { name: 'disabled' }
 
-  await $.evaluate((el) => {
-    (el as HTMLElementTagNameMap['sinch-select']).disabled = false
+  await $eval((el) => {
+    el.disabled = false
   })
 
   yield { name: 'enabled' }
