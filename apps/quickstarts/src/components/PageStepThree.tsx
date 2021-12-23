@@ -18,12 +18,7 @@ export const PageStepThree: FC = () => {
   const [flowCounter, setCounter] = useState(2)
   const WhatsappDetails: FC<Props> = (props): JSX.Element => {
     const k = props.name
-    const [selectedOption, setSelectedOption] = useState(0)
-    const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const value = event.target.value
-
-      setSelectedOption(value)
-    }
+    const [selectedOption, setSelectedOption] = useState('')
 
     return (
       <div className={styles.botmessagesInput}>
@@ -37,8 +32,10 @@ export const PageStepThree: FC = () => {
         </div>
         <div className={styles.botInput}>
           <sinch-select
-            value="select"
-            onChange={selectChange}
+            value={selectedOption}
+            onChange={(value) => {
+              setSelectedOption(value)
+            }}
             label="Type"
             placeholder="Name"
           >
