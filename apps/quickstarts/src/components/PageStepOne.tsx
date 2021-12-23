@@ -1,5 +1,6 @@
+//import axios from 'axios'
+import { useState } from 'react'
 import styles from './Page.module.css'
-import { usePageControl } from './PageContext'
 import facebook from './images/facebookbg.jpg'
 import google from './images/googlebg.jpg'
 import signupimage from './images/signup.jpg'
@@ -9,7 +10,39 @@ import '@nectary/components/input'
 import '@nectary/components/select'
 
 export const PageStepOne: FC = () => {
-  const { next } = usePageControl()
+  //const { next } = usePageControl()
+
+  const [email, setEmail] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [role, setRole] = useState('')
+
+  async function getUsers() {
+    try {
+      const body = new FormData()
+
+      body.append('email', email)
+      body.append('firstName', firstName)
+      body.append('lastName', lastName)
+      body.append('role', role)
+
+      const res = await fetch('https://quickstart.default.labengage.sinch.com/account', {
+        method: 'POST',
+        body: JSON.stringify({ email, firstName, lastName, role }),
+      })
+      const k = await res.json()
+
+      console.log(k)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // async function getPostsData() {
+  //   const response = await axios.get('/account')
+
+  //   console.log(response)
+  // }
 
   return (
     <div className={styles.page}>
@@ -20,47 +53,60 @@ export const PageStepOne: FC = () => {
             <sinch-input
               className={styles.sinchInput}
               value=""
-              onChange={() => {}}
+              onChange={(value) => {
+                setEmail(value)
+              }}
               label="E-mail"
               placeholder="john.doe@gmail.com"
             />
             <sinch-input
               value=""
-              onChange={() => {}}
+              onChange={() => {
+              }}
               label="Password"
               placeholder="Placeholder"
               optionalText="8+ characters"
             />
             <sinch-input
-              value=""
-              onChange={() => {}}
+              value={firstName}
+              onChange={(value) => {
+                setFirstName(value)
+              }}
               label="First Name"
               placeholder="John"
             />
             <sinch-input
-              value=""
-              onChange={() => {}}
+              value={lastName}
+              onChange={(value) => {
+                setLastName(value)
+              }}
               label="Last Name"
               placeholder="Doe"
             />
-            <sinch-select value="" onChange={() => {}} label="Your role">
+            <sinch-select
+              value={role}
+              onChange={(value) => {
+                setRole(value)
+              }}
+              label="Your role"
+            >
               <sinch-select-option
-                value="1"
+                value="Software Engineer"
                 text="Software Engineer"
                 slot="select"
               />
               <sinch-select-option
-                value="2"
+                value="Data Analyst"
                 text="Data Analyst"
                 slot="select"
               />
               <sinch-select-option
-                value="3"
+                value="Product Manager"
                 text="Product Manager"
                 slot="select"
               />
               <sinch-select-option
-                value="4"
+                value="Software Architect"
                 text="Software Architect"
                 slot="select"
               />
@@ -69,7 +115,7 @@ export const PageStepOne: FC = () => {
               className={styles.createAcc}
               style={{ width: '75%' }}
               type="cta"
-              onClick={next}
+              onClick={getUsers}
               text="Create Account"
             />
             <div className={styles.signupFG}>
