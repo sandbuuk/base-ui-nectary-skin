@@ -200,11 +200,11 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
   }
 })
 
-type TSinchSelectElement = HTMLElement & {
+type TSinchRadioElement = HTMLElement & {
   value: string,
 }
 
-type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
+type TSinchRadioReact = TSinchElementReact<TSinchRadioElement> & {
   value: string,
   onChange: (value: string) => void,
 }
@@ -212,11 +212,11 @@ type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-radio': TSinchSelectReact,
+      'sinch-radio': TSinchRadioReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-radio': TSinchSelectElement,
+    'sinch-radio': TSinchRadioElement,
   }
 }
