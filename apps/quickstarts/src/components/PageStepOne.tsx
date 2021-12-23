@@ -67,12 +67,14 @@ export const PageStepOne: FC = () => {
             </sinch-select>
             <sinch-button
               className={styles.createAcc}
+              style={{ width: '75%' }}
               type="cta"
               onClick={next}
               text="Create Account"
             />
             <div className={styles.signupFG}>
               <sinch-button
+                style={{ width: '75%' }}
                 type="secondary"
                 onClick={() => {}}
                 text="Signup with Google"
@@ -81,6 +83,7 @@ export const PageStepOne: FC = () => {
               </sinch-button>
               <div className={styles.facebookSignup}>
                 <sinch-button
+                  style={{ width: '75%' }}
                   type="secondary"
                   onClick={() => {}}
                   text="Signup with Facebook"

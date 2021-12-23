@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
 import { PageSteps } from './PageSteps'
@@ -5,10 +6,43 @@ import { useStepperControl } from './StepperContext'
 import contactlogo from './images/contactlogo.jpg'
 import type { FC } from 'react'
 
+export const WhatsappQuestion: FC = () => {
+  return (
+    <div className={styles.messagesInput}>
+      <div className={styles.Input}>
+        <sinch-input
+          className={styles.agentName}
+          value=""
+          onChange={() => {}}
+          label="Agent name"
+          placeholder="What is your name?"
+        />
+      </div>
+      <div className={styles.Input}>
+        <sinch-input
+          value=""
+          onChange={() => {}}
+          label="Agent e-mail"
+          placeholder="What is your email?"
+        />
+      </div>
+    </div>
+  )
+}
+
 export const PageStepFour: FC = () => {
   const { next } = usePageControl()
   const { handleNext, handleBack } = useStepperControl()
   //handleNext(1);
+  const [questionCounter, setCounter] = useState(1)
+
+  const buttonCounter = () => {
+    console.log(questionCounter)
+
+    if (questionCounter < 5) {
+      setCounter((prevCounter) => prevCounter + 1)
+    }
+  }
 
   const nextPage = () => {
     next()
@@ -45,30 +79,13 @@ export const PageStepFour: FC = () => {
         <div className={styles.whatsappBody}>
           <div className={styles.messagesParent}>
             <div className={styles.humanMessages}>
-              <div className={styles.messagesInput}>
-                <div className={styles.Input}>
-                  <sinch-input
-                    value=""
-                    onChange={() => {}}
-                    label="Agent name"
-                    placeholder="What is your name?"
-                  />
-                </div>
-                <div className={styles.Input}>
-                  <sinch-input
-                    value=""
-                    onChange={() => {}}
-                    label="Agent e-mail"
-                    placeholder="What is your email?"
-                  />
-                </div>
-              </div>
-
+              { [...Array(questionCounter)].map((_, i) => <WhatsappQuestion key={i}/>) }
               <div>
                 <sinch-button
+                  style={{ width: '100%' }}
                   type="primary"
-                  onClick={() => {}}
-                  text="Add more agents (Up to 5)"
+                  onClick={buttonCounter}
+                  text={questionCounter < 5 ? `Add more Agents (Up to ${5 - questionCounter} )` : 'Add more Agents (Up to 0)'}
                 />
               </div>
 
