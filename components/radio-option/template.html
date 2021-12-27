@@ -61,6 +61,7 @@
     border-radius: 50%;
     pointer-events: none;
     background-color: var(--sinch-color-radio-outer-circle);
+    transition: background-color 0.1s linear;
   }
 
   /* Border / Background */
@@ -75,6 +76,7 @@
     pointer-events: none;
     background-color: var(--sinch-color-radio-background);
     box-shadow: 0 0 0 2px var(--sinch-color-radio-border) inset;
+    transition: background-color 0.1s linear;
   }
 
   #icon-knob {
@@ -92,6 +94,14 @@
 
   @media (prefers-reduced-motion) {
     #icon-knob {
+      transition: none;
+    }
+
+    #radio::before {
+      transition: none;
+    }
+
+    #radio::after {
       transition: none;
     }
   }

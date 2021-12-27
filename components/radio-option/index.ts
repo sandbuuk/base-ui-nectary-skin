@@ -104,6 +104,7 @@ defineCustomElement('sinch-radio-option', class extends HTMLElement {
   }
 
   onInput = () => {
+    this.$input.checked = false
     this.dispatchEvent(
       new CustomEvent('change', { bubbles: true, detail: this.value })
     )
