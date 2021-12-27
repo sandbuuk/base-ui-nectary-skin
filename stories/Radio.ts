@@ -27,6 +27,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-radio']> = ({ onChange }) => 
     $radio.addEventListener('change', (e: any) => {
       onChange(e.detail)
       updateArgs({ value: e.detail })
+      // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => el.focus(), document.activeElement)
     })
 
