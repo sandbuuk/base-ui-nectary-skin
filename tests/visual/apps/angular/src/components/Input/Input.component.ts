@@ -17,6 +17,7 @@ export class InputComponent {
   invalidText?: string
   placeholderText?: string
   tooltipText?: string
+  isDisabled: boolean
 
   constructor() {
     const url = new URL(location.href)
@@ -28,6 +29,7 @@ export class InputComponent {
     this.invalidText = url.searchParams.get('invalid') ?? undefined
     this.placeholderText = url.searchParams.get('placeholder') ?? undefined
     this.tooltipText = url.searchParams.get('tooltip') ?? undefined
+    this.isDisabled = url.searchParams.get('disabled') != null
   }
 
   onChange(e: Event) {

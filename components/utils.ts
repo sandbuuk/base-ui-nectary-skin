@@ -27,7 +27,7 @@ export const updateBooleanAttribute = ($element: HTMLElement, attrName: string, 
 }
 
 export const isAttrTrue = (attrValue: string | null): boolean => {
-  return attrValue === '' || Boolean(attrValue)
+  return attrValue === '' || (attrValue !== 'false' && attrValue !== null)
 }
 
 export const getBooleanAttribute = ($element: HTMLElement, attrName: string) => {

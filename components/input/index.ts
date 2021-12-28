@@ -1,4 +1,12 @@
-import { defineCustomElement, getAttribute, getBooleanAttribute, getEventHandler, isAttrTrue, updateAttribute, updateBooleanAttribute } from '../utils'
+import {
+  defineCustomElement,
+  getAttribute,
+  getBooleanAttribute,
+  getEventHandler,
+  isAttrTrue,
+  updateAttribute,
+  updateBooleanAttribute,
+} from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
@@ -165,6 +173,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   onInput = (e: Event) => {
+    e.stopPropagation()
     getEventHandler(this, 'onChange')?.(this.$input.value)
 
     this.dispatchEvent(
@@ -174,28 +183,24 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     )
 
     this.$input.value = this.value
-
-    e.stopPropagation()
   }
 
   onInputFocus = (e: Event) => {
+    e.stopPropagation()
     getEventHandler(this, 'onFocus')?.()
 
     this.dispatchEvent(
       new CustomEvent('focus')
     )
-
-    e.stopPropagation()
   }
 
   onInputBlur = (e: Event) => {
+    e.stopPropagation()
     getEventHandler(this, 'onBlur')?.()
 
     this.dispatchEvent(
       new CustomEvent('blur')
     )
-
-    e.stopPropagation()
   }
 })
 

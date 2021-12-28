@@ -1,10 +1,11 @@
-import { test } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 import { makeScreenshotTests } from '../utils'
 
 const shot = makeScreenshotTests('/input?width=200&label=Label', 'sinch-input')
 const withValue = makeScreenshotTests('/input?width=200&label=Label&value=Input%20value', 'sinch-input')
 const withPlaceholder = makeScreenshotTests('/input?width=200&label=Label&placeholder=Placeholder%20value', 'sinch-input')
 const withTooltip = makeScreenshotTests('/input?width=200&label=Label&tooltip=Tooltip%20text', 'sinch-input')
+const withEverything = makeScreenshotTests('/input?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=Input%20value', 'sinch-input')
 
 test('value attribute', withPlaceholder(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('value', 'Input Value'))
@@ -159,4 +160,32 @@ test('fill', shot(async function* ({ $ }) {
 
   await $input.fill('Filled text')
   yield { name: 'filled' }
+}))
+
+test('disabled property', withEverything(async function* ({ $, $eval }) {
+  await $eval((el) => {
+    el.disabled = true
+  })
+  yield { name: 'disabled' }
+  await expect($.locator('input').isDisabled()).resolves.toBe(true)
+
+  await $eval((el) => {
+    el.disabled = false
+  })
+  yield { name: 'enabled' }
+  await expect($.locator('input').isDisabled()).resolves.toBe(false)
+}))
+
+test('disabled attribute', withEverything(async function* ({ $, $eval }) {
+  await $eval((el) => {
+    el.setAttribute('disabled', '')
+  })
+  yield { name: 'disabled' }
+  await expect($.locator('input').isDisabled()).resolves.toBe(true)
+
+  await $eval((el) => {
+    el.removeAttribute('disabled')
+  })
+  yield { name: 'enabled' }
+  await expect($.locator('input').isDisabled()).resolves.toBe(false)
 }))
