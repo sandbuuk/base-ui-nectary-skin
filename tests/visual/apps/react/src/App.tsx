@@ -9,7 +9,7 @@ const mapElement = (url: URL) => {
   switch (url.pathname) {
     case '/alert': {
       return (
-        <Alert/>
+        <Alert search={url.searchParams}/>
       )
     }
 

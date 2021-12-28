@@ -2,7 +2,7 @@ import { test } from '@playwright/test'
 import { makeScreenshotTests } from '../utils'
 
 const shot = makeScreenshotTests(
-  '/alert?width=300',
+  '/alert?width=300&text=Alert%20text',
   'sinch-alert'
 )
 
@@ -76,7 +76,6 @@ test('dismissable property', shot(async function* ({ $eval }) {
 test('multiline property', shot(async function* ({ $eval }) {
   await $eval((el) => {
     el.title = ''
-    el.text = 'Alert text'
     el.actionText = 'Action'
     el.multiline = false
   })
@@ -84,7 +83,6 @@ test('multiline property', shot(async function* ({ $eval }) {
 
   await $eval((el) => {
     el.title = 'Alert Title'
-    el.text = 'Alert text'
     el.actionText = ''
     el.multiline = false
   })
@@ -92,7 +90,6 @@ test('multiline property', shot(async function* ({ $eval }) {
 
   await $eval((el) => {
     el.title = 'Alert Title'
-    el.text = 'Alert text'
     el.actionText = 'Action'
     el.multiline = true
   })
@@ -100,14 +97,12 @@ test('multiline property', shot(async function* ({ $eval }) {
 
   await $eval((el) => {
     el.title = ''
-    el.text = 'Alert text'
     el.actionText = 'Action'
     el.multiline = true
   })
   yield { name: 'action-multiline' }
   await $eval((el) => {
     el.title = 'Alert Title'
-    el.text = 'Alert text'
     el.actionText = ''
     el.multiline = true
   })
@@ -115,7 +110,6 @@ test('multiline property', shot(async function* ({ $eval }) {
   await $eval((el) => {
     el.title = 'Alert Title'
     el.actionText = 'Action'
-    el.text = 'Alert text'
     el.dismissable = true
     el.multiline = true
   })
@@ -126,12 +120,12 @@ test('multiline attribute', shot(async function* ({ $eval }) {
   await $eval((el) => {
     el.setAttribute('title', '')
     el.setAttribute('text', 'Alert text')
-    el.setAttribute('action-text', 'Action')
+    el.setAttribute('actiontext', 'Action')
   })
   yield { name: 'action-no-multiline' }
 
   await $eval((el) => {
-    el.setAttribute('action-text', '')
+    el.setAttribute('actiontext', '')
     el.setAttribute('text', 'Alert text')
     el.setAttribute('title', 'Alert Title')
   })
@@ -140,22 +134,19 @@ test('multiline attribute', shot(async function* ({ $eval }) {
   await $eval((el) => {
     el.setAttribute('multiline', '')
     el.setAttribute('title', 'Alert Title')
-    el.setAttribute('text', 'Alert text')
-    el.setAttribute('action-text', 'Action')
+    el.setAttribute('actiontext', 'Action')
   })
   yield { name: 'title-action-multiline' }
 
   await $eval((el) => {
     el.removeAttribute('title')
-    el.setAttribute('text', 'Alert text')
-    el.setAttribute('action-text', 'Action')
+    el.setAttribute('actiontext', 'Action')
     el.setAttribute('multiline', '')
   })
   yield { name: 'action-multiline' }
 
   await $eval((el) => {
-    el.removeAttribute('action-text')
-    el.setAttribute('text', 'Alert text')
+    el.removeAttribute('actiontext')
     el.setAttribute('title', 'Alert Title')
     el.setAttribute('multiline', '')
   })
@@ -163,8 +154,7 @@ test('multiline attribute', shot(async function* ({ $eval }) {
 
   await $eval((el) => {
     el.setAttribute('title', 'Alert Title')
-    el.setAttribute('text', 'Alert text')
-    el.setAttribute('action-text', 'Action')
+    el.setAttribute('actiontext', 'Action')
     el.setAttribute('dismissable', '')
     el.setAttribute('multiline', '')
   })
