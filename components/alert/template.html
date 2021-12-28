@@ -19,6 +19,9 @@
   font: var(--sinch-font-body);
   color: var(--sinch-color-stormy-600);
   background-color: var(--sinch-color-alert-info-background);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
 }
 
 #title {
@@ -35,10 +38,7 @@
   margin: 0;
 }
 
-#icon-info,
-#icon-success,
-#icon-warn,
-#icon-error {
+:is(#icon-info, #icon-success, #icon-warn, #icon-error) {
   display: none;
   position: absolute;
   left: 18px;
@@ -109,51 +109,49 @@
   display: block;
 }
 
-:host(:not([type])) #icon-info,
-:host([type="info"]) #icon-info {
+:host(:is([type="info"], :not([type]))) #icon-info {
   display: block;
 }
 
-:host([dismissable]) #wrapper {
+:host([dismissable]:not([dismissable="false"])) #wrapper {
   padding-right: 52px;
 }
 
-:host([dismissable]) #dismiss {
+:host([dismissable]:not([dismissable="false"])) #dismiss {
   display: block;
 }
 
-:host([multiline]) #wrapper {
+:host([multiline]:not([multiline="false"])) #wrapper {
   flex-direction: column;
   align-items: flex-start;
 }
 
-:host(:not([multiline])[action-text]:not([action-text=""])) #icon-info,
-:host(:not([multiline])[action-text]:not([action-text=""])) #icon-success,
-:host(:not([multiline])[action-text]:not([action-text=""])) #icon-warn,
-:host(:not([multiline])[action-text]:not([action-text=""])) #icon-error {
+/* stylelint-disable-next-line no-descending-specificity, max-line-length */
+:host(:is(:not([multiline]), [multiline="false"])[actiontext]:not([actiontext=""])) :is(#icon-info, #icon-success, #icon-warn, #icon-error) {
   top: 18px;
 }
 
-:host(:not([multiline])[action-text]:not([action-text=""])) #dismiss {
+/* stylelint-disable-next-line no-descending-specificity */
+:host(:is(:not([multiline]), [multiline="false"])[actiontext]:not([actiontext=""])) #dismiss {
   top: 16px;
 }
 
-:host([multiline]) #action {
+:host([multiline]:not([multiline="false"])) #action {
   margin-left: unset;
   margin-top: 16px;
   align-self: flex-start;
   max-width: 100%;
 }
 
-:host([action-text]:not([action-text=""])) #action {
+:host([actiontext]:not([actiontext=""])) #action {
   display: block;
 }
 
-:host([multiline][title]:not([title=""])) #title {
+:host([multiline]:not([multiline="false"])[title]:not([title=""])) #title {
   display: block;
 }
 
-:host([multiline]) #text {
+:host([multiline]:not([multiline="false"])) #text {
   overflow: unset;
   text-overflow: unset;
   white-space: unset;
