@@ -89,10 +89,7 @@
     color: var(--sinch-color-text-invalid);
   }
 
-  :host([disabled]) #label,
-  :host([disabled]) #additional,
-  :host([disabled]) #optional,
-  :host([disabled]) #invalid {
+  :host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
     color: var(--sinch-color-stormy-100);
   }
 
@@ -101,7 +98,7 @@
     margin: 0 8px;
   }
 
-  :host([disabled]) ::slotted(sinch-input-tooltip) {
+  :host([disabled]:not([disabled="false"])) ::slotted(sinch-input-tooltip) {
     fill: var(--sinch-color-stormy-100);
   }
 </style>
