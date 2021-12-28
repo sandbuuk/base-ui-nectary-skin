@@ -5,7 +5,7 @@
     </div>
     <Alert v-if="url.pathname === '/alert'" :search="url.searchParams"/>
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
-    <Radio v-if="url.pathname === '/radio'"/>
+    <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
     <Select v-if="url.pathname === '/select'"/>
   </div>
 </template>

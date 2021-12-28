@@ -9,12 +9,17 @@ import '@nectary/components/radio'
 
 export class RadioComponent {
   value: string
+  isControlled: boolean
 
   constructor() {
+    const url = new URL(location.href)
+    this.isControlled = url.searchParams.get('uncontrolled') === null
     this.value = ''
   }
 
   onChange(e: Event) {
-    this.value = (e as CustomEvent).detail
+    if (this.isControlled) {
+      this.value = (e as CustomEvent).detail
+    }
   }
 }

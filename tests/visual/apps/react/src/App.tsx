@@ -33,7 +33,7 @@ const mapElement = (url: URL) => {
 
     case '/radio': {
       return (
-        <Radio/>
+        <Radio search={url.searchParams}/>
       )
     }
 

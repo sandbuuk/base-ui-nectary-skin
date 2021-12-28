@@ -9,9 +9,19 @@
 
 <script>
 export default {
+  props: {
+    search: URLSearchParams
+  },
+  computed: {
+    isControlled() {
+      return this.search.get('uncontrolled') === null
+    },
+  },
   methods: {
     onChange(e) {
-      this.value = e.detail
+      if (this.isControlled) {
+        this.value = e.detail
+      }
     }
   },
   data() {
