@@ -1,10 +1,7 @@
 import { test } from '@playwright/test'
 import { makeScreenshotTests } from '../utils'
 
-const shot = makeScreenshotTests(
-  '/radio?width=200',
-  'sinch-radio'
-)
+const shot = makeScreenshotTests('/radio?width=200', 'sinch-radio')
 
 test('value attribute', shot(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('value', ''))
@@ -57,3 +54,4 @@ test('value property', shot(async function* ({ $eval }) {
   })
   yield { name: 'option-missing' }
 }))
+

@@ -112,7 +112,7 @@
     color: var(--sinch-color-text-default);
   }
 
-  :host([disabled]) > #label {
+  :host([disabled]:not([disabled="false"])) > #label {
     color: var(--sinch-color-stormy-200);
   }
 
