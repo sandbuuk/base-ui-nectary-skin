@@ -13,6 +13,7 @@ export const Input: FC<TInput> = ({ search }) => {
   const additionalText = useMemo(() => search.get('additional') ?? undefined, [search])
   const invalidText = useMemo(() => search.get('invalid') ?? undefined, [search])
   const placeholderText = useMemo(() => search.get('placeholder') ?? undefined, [search])
+  const isDisabled = useMemo(() => search.get('disabled') != null, [search])
   const tooltip = useMemo(
     () => search.get('tooltip') != null && (
       <sinch-input-tooltip text={search.get('tooltip')!}></sinch-input-tooltip>
@@ -27,6 +28,7 @@ export const Input: FC<TInput> = ({ search }) => {
       additionalText={additionalText}
       invalidText={invalidText}
       placeholder={placeholderText}
+      disabled={isDisabled}
       value={value}
       onChange={onChange}>
       {tooltip}

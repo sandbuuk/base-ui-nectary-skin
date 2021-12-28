@@ -4,6 +4,7 @@
   [attr.additionaltext]="additionalText"
   [attr.invalidtext]="invalidText"
   [attr.placeholder]="placeholderText"
+  [attr.disabled]="isDisabled"
   [value]="value"
   (change)="onChange($event)">
   <sinch-input-tooltip *ngIf="tooltipText != null" [text]="tooltipText"></sinch-input-tooltip>
