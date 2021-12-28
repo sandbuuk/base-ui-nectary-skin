@@ -3,7 +3,7 @@
     <div v-if="url.pathname === '/button'">
       <sinch-button type="cta" text="Button" @click="() => {}"></sinch-button>
     </div>
-    <Alert v-if="url.pathname === '/alert'"/>
+    <Alert v-if="url.pathname === '/alert'" :search="url.searchParams"/>
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'"/>
     <Select v-if="url.pathname === '/select'"/>

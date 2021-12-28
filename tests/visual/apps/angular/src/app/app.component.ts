@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-import '@nectary/components/input'
 
 @Component({
   styleUrls: ['./app.component.css'],

@@ -72,11 +72,11 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
   }
 
   get actionText() {
-    return getAttribute(this, 'action-text', '')
+    return getAttribute(this, 'actiontext', '')
   }
 
   set actionText(value: string) {
-    updateAttribute(this, 'action-text', value)
+    updateAttribute(this, 'actiontext', value)
   }
 
   get dismissable() {
@@ -96,7 +96,7 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'title', 'action-text']
+    return ['text', 'title', 'actiontext']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -111,7 +111,7 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
 
         break
       }
-      case 'action-text': {
+      case 'actiontext': {
         this.$action.textContent = newVal
 
         break
