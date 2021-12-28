@@ -34,7 +34,7 @@ const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInf
   }
 
 const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator) => (cb: (el: HTMLElementTagNameMap[T]) => void, arg?: any) => {
-  return $.evaluate(cb as ((el: SVGElement | HTMLElement) => void), arg)
+  return $.evaluate(cb as ((el: SVGElement | HTMLElement) => void), arg, { timeout: 1000 })
 }
 
 type BoundingBox = Exclude<PageScreenshotOptions['clip'], undefined>

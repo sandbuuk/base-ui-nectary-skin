@@ -1,40 +1,48 @@
 <template>
-  <div v-if="pathname === '/alert'">
-    <Alert width="300"/>
-  </div>
-  <div v-if="pathname === '/button'">
-    <sinch-button type="cta" text="Button" @click="() => {}"></sinch-button>
-  </div>
-  <div v-if="pathname === '/radio'">
-    <Radio width="200"/>
-  </div>
-  <div v-if="pathname === '/select'">
-    <Select width="200"/>
+  <div :style="style">
+    <div v-if="url.pathname === '/button'">
+      <sinch-button type="cta" text="Button" @click="() => {}"></sinch-button>
+    </div>
+    <Alert v-if="url.pathname === '/alert'"/>
+    <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
+    <Radio v-if="url.pathname === '/radio'"/>
+    <Select v-if="url.pathname === '/select'"/>
   </div>
 </template>
-
-<style>
-  body {
-    padding: 100px;
-  }
-</style>
 
 <script>
 import '@nectary/components'
 import Alert from './components/Alert.vue'
+import Input from './components/Input.vue'
 import Radio from './components/Radio.vue'
 import Select from './components/Select.vue'
 
 export default {
   data() {
     return {
-      pathname: window.location.pathname
+      url: new URL(window.location.href)
     };
+  },
+  computed: {
+    style () {
+      const width = Number(this.url.searchParams.get('width') ?? '0')
+      const style = width > 0 ? {
+        display: 'flex',
+        flexDirection: 'column',
+        width: width + 'px',
+        padding: '100px'
+      } : {
+        padding: '100px'
+      }
+
+      return style;
+    }
   },
   components: {
     Alert,
+    Input,
     Radio,
-    Select
+    Select,
   }
 };
 </script>

@@ -2,7 +2,7 @@ import { test } from '@playwright/test'
 import { makeScreenshotTests } from '../utils'
 
 const shot = makeScreenshotTests(
-  '/select',
+  '/select?width=200',
   'sinch-select'
 )
 

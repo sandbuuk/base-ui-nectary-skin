@@ -77,7 +77,7 @@ const config: PlaywrightTestConfig = {
   },
   reportSlowTests: {
     max: 0,
-    threshold: 30000,
+    threshold: 60000,
   },
   // expect: {
   //   toMatchSnapshot: {

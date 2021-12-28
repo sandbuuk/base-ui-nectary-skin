@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import '@nectary/components/input'
 
 @Component({
   styleUrls: ['./app.component.css'],
@@ -8,8 +9,20 @@ import { Component } from '@angular/core'
 
 export class AppComponent {
   pathname: string
+  style: object
 
   constructor() {
-    this.pathname = location.pathname
+    const url = new URL(location.href)
+    const width = Number(url.searchParams.get('width') ?? '0')
+
+    this.pathname = url.pathname
+    this.style = width > 0 ? {
+      display: 'flex' as const,
+      flexDirection: 'column' as const,
+      width: width + 'px',
+      padding: '100px'
+    } : {
+      padding: '100px'
+    }
   }
 }

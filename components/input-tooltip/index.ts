@@ -1,3 +1,7 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import '@nectary/components/tooltip'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import '@nectary/components/icon/tooltip'
 import {
   defineCustomElement,
   getAttribute,
@@ -8,8 +12,6 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import '../tooltip'
-import '../icon/tooltip'
 
 const template = document.createElement('template')
 

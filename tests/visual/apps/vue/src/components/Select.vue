@@ -1,5 +1,5 @@
 <template>
-  <sinch-select :style="style" label="Label" placeholder="Placeholder" :value="value" @change="onChange">
+  <sinch-select label="Label" placeholder="Placeholder" :value="value" @change="onChange">
     <sinch-input-tooltip text="Tooltip text long long" slot="tooltip"/>
     <sinch-select-option value="1" text="Option 1 value" slot="select">
       <sinch-icon-share/>
@@ -17,16 +17,6 @@ export default {
   methods: {
     onChange(e) {
       this.value = e.detail
-    }
-  },
-  props: {
-    width: Number
-  },
-  computed: {
-    style () {
-      return {
-        width: this.width != null ? `${this.width}px` : 'unset'
-      };
     }
   },
   data() {

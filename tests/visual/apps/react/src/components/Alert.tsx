@@ -1,15 +1,10 @@
 import type { FC } from 'react'
 
 type TAlert = {
-  width?: number,
 }
 
-export const Alert: FC<TAlert> = ({ width }) => {
-  const style = {
-    width: width != null ? `${width}px` : 'unset',
-  }
-
+export const Alert: FC<TAlert> = () => {
   return (
-    <sinch-alert style={style} type="info" text="Alert text"></sinch-alert>
+    <sinch-alert type="info" text="Alert text"></sinch-alert>
   )
 }

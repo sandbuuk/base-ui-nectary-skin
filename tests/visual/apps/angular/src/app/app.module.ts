@@ -3,6 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { SelectComponent } from '../components/Select/Select.component'
 import { RadioComponent } from '../components/Radio/Radio.component'
+import { InputComponent } from '../components/Input/Input.component'
 import { AlertComponent } from '../components/Alert/Alert.component'
 import { AppComponent } from './app.component'
 
@@ -12,6 +13,7 @@ import { AppComponent } from './app.component'
     AlertComponent,
     SelectComponent,
     RadioComponent,
+    InputComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

@@ -173,6 +173,8 @@ defineCustomElement('sinch-input', class extends HTMLElement {
       })
     )
 
+    this.$input.value = this.value
+
     e.stopPropagation()
   }
 

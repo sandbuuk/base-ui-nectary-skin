@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component } from '@angular/core'
 import '@nectary/components/icon/share'
 import '@nectary/components/input-tooltip'
 import '@nectary/components/select'
@@ -6,14 +6,13 @@ import '@nectary/components/select'
 @Component({
   selector: 'select-component',
   templateUrl: './Select.component.html',
+  styleUrls: ['./Select.component.css']
 })
 
 export class SelectComponent {
-  @Input() width: number
   value: string
 
   constructor() {
-    this.width = 200
     this.value = ''
   }
 
