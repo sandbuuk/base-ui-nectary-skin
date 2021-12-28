@@ -1,15 +1,15 @@
 import '@nectary/components'
-import './App.css'
 import { Alert } from './components/Alert'
 import { Select } from './components/Select'
 import { Radio } from './components/Radio'
+import { Input } from './components/Input'
 import type { FC } from 'react'
 
-export const App: FC<{}> = () => {
-  switch (window.location.pathname) {
+const mapElement = (url: URL) => {
+  switch (url.pathname) {
     case '/alert': {
       return (
-        <Alert width={300}/>
+        <Alert/>
       )
     }
 
@@ -27,30 +27,41 @@ export const App: FC<{}> = () => {
 
     case '/input': {
       return (
-        <sinch-input label="Input" value="" onChange={() => {}}/>
-      )
-    }
-
-    case '/input-with-tooltip': {
-      return (
-        <sinch-input label="Label" value="" placeholder="Placeholder" onChange={() => {}}>
-          <sinch-input-tooltip text="Input Tooltip"/>
-        </sinch-input>
+        <Input search={url.searchParams}/>
       )
     }
 
     case '/radio': {
       return (
-        <Radio width={200}/>
+        <Radio/>
       )
     }
 
     case '/select': {
       return (
-        <Select width={200}/>
+        <Select/>
       )
     }
   }
 
   return null
+}
+
+export const App: FC<{}> = () => {
+  const url = new URL(window.location.href)
+  const width = Number(url.searchParams.get('width') ?? '0')
+  const style = width > 0 ? {
+      display: 'flex' as const,
+      flexDirection: 'column' as const,
+      width: width + 'px',
+      padding: '100px'
+    } : {
+      padding: '100px'
+    }
+
+  return (
+    <div style={style}>
+      {mapElement(url)}
+    </div>
+  )
 }

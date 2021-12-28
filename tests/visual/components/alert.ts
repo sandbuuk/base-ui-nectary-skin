@@ -2,7 +2,7 @@ import { test } from '@playwright/test'
 import { makeScreenshotTests } from '../utils'
 
 const shot = makeScreenshotTests(
-  '/alert',
+  '/alert?width=300',
   'sinch-alert'
 )
 

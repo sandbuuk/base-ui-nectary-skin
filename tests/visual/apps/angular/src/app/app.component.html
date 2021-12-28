@@ -1,5 +1,6 @@
-<div [ngSwitch]="pathname">
-  <alert-component [width]="300" *ngSwitchCase="'/alert'"></alert-component>
-  <select-component [width]="200" *ngSwitchCase="'/select'"></select-component>
-  <radio-component [width]="200" *ngSwitchCase="'/radio'"></radio-component>
+<div [ngStyle]="style" [ngSwitch]="pathname">
+  <alert-component *ngSwitchCase="'/alert'"></alert-component>
+  <select-component *ngSwitchCase="'/select'"></select-component>
+  <radio-component *ngSwitchCase="'/radio'"></radio-component>
+  <input-component *ngSwitchCase="'/input'"></input-component>
 </div>

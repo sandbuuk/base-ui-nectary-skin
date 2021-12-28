@@ -72,7 +72,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-input']> = ({ onChange }) => 
       onChange(e.detail)
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
-      setImmediate(() => $input.focus())
+      setImmediate((el) => el.focus(), document.activeElement)
     })
 
     inputRef.current = $input

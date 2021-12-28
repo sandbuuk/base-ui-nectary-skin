@@ -2,7 +2,7 @@ import { test } from '@playwright/test'
 import { makeScreenshotTests } from '../utils'
 
 const shot = makeScreenshotTests(
-  '/radio',
+  '/radio?width=200',
   'sinch-radio'
 )
 

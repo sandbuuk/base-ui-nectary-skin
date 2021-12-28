@@ -2,18 +2,13 @@ import { useState } from 'react'
 import type { FC } from 'react'
 
 type TSelect = {
-  width?: number,
 }
 
-export const Select: FC<TSelect> = ({ width }) => {
+export const Select: FC<TSelect> = () => {
   const [value, setValue] = useState('')
 
-  const style = {
-    width: width != null ? `${width}px` : 'unset',
-  }
-
   return (
-    <sinch-select style={style} label="Label" placeholder="Placeholder" value={value} onChange={setValue}>
+    <sinch-select label="Label" placeholder="Placeholder" value={value} onChange={setValue}>
       <sinch-input-tooltip text="Tooltip text long long" slot="tooltip"/>
       <sinch-select-option value="1" text="Option 1 value" slot="select">
         <sinch-icon-share/>

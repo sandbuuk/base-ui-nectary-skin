@@ -1,8 +1,11 @@
 <style>
   :host {
     display: inline-block;
-    height: 96px;
-    max-width: 300px;
+  }
+
+  #wrapper {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   #input {
@@ -47,11 +50,11 @@
   }
 
   #top {
-    line-height: 24px;
+    height: 24px;
   }
 
   #bottom {
-    line-height: 20px;
+    height: 20px;
   }
 
   #label,
@@ -103,13 +106,15 @@
   }
 </style>
 
-<div id="top">
-  <label id="label" for="input"></label>
-  <slot></slot>
-  <span id="optional"></span>
-</div>
-<input id="input" type="text"/>
-<div id="bottom">
-  <span id="invalid"></span>
-  <span id="additional"></span>
+<div id="wrapper">
+  <div id="top">
+    <label id="label" for="input"></label>
+    <slot></slot>
+    <span id="optional"></span>
+  </div>
+  <input id="input" type="text"/>
+  <div id="bottom">
+    <span id="invalid"></span>
+    <span id="additional"></span>
+  </div>
 </div>
