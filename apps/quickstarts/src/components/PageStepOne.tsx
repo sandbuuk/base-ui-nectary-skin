@@ -17,26 +17,25 @@ export const PageStepOne: FC = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [role, setRole] = useState('')
+  const [emailInvalidtext, setEmailInvalidtext] = useState('')
+  const [firstnameInvalidtext, setfirstnameInvalidtext] = useState('')
+  const [lastnameInvalidtext, setlastnameInvalidtext] = useState('')
+  const [roleInvalidtext, setroleInvalidtext] = useState('')
 
   async function getUsers() {
     try {
       const body = new FormData()
       let flag = true
 
+      setEmailInvalidtext('')
+      setfirstnameInvalidtext('')
+      setlastnameInvalidtext('')
+      setroleInvalidtext('')
+
       body.append('email', email)
       body.append('firstName', firstName)
       body.append('lastName', lastName)
       body.append('role', role)
-
-      const emailError = document.getElementById('emailError')!
-      const firstNameError = document.getElementById('firstNameError')!
-      const lastNameError = document.getElementById('lastNameError')!
-      const roleError = document.getElementById('roleError')!
-
-      emailError.innerHTML = ''
-      firstNameError.innerHTML = ''
-      lastNameError.innerHTML = ''
-      roleError.innerHTML = ''
 
       const validateNames = (name: string) => {
         return /\d/.test(name)
@@ -50,66 +49,54 @@ export const PageStepOne: FC = () => {
       }
 
       if (!(email.length > 0)) {
-        const emailError = document.getElementById('emailError')!
+        setEmailInvalidtext('Email should not be empty')
 
         if (flag) {
           flag = false
         }
-
-        emailError.innerHTML = 'Email should not be empty'
       }
 
       if (!(firstName.length > 0)) {
-        const firstNameError = document.getElementById('firstNameError')!
+        setfirstnameInvalidtext('First name should not be empty')
 
         if (flag) {
           flag = false
         }
-
-        firstNameError.innerHTML = 'First name should not be empty'
       }
 
       if (!(lastName.length > 0)) {
-        const lastNameError = document.getElementById('lastNameError')!
+        setlastnameInvalidtext('Last name should not be empty')
 
         if (flag) {
           flag = false
         }
-
-        lastNameError.innerHTML = 'Last name should not be empty'
       }
 
       if (!(role.length > 0)) {
-        const roleError = document.getElementById('roleError')!
+        setroleInvalidtext('Role should not be empty')
 
         if (flag) {
           flag = false
         }
-
-        roleError.innerHTML = 'Role should not be empty'
       }
 
       if (firstName.length > 0) {
         if (validateNames(firstName)) {
-          const firstNameError = document.getElementById('firstNameError')!
+          setfirstnameInvalidtext('Last name should not contain numbers')
 
           if (flag) {
             flag = false
           }
-
-          firstNameError.innerHTML = 'First name should not contain numbers'
         }
       }
 
       if (lastName.length > 0) {
         if (validateNames(lastName)) {
-          const lastNameError = document.getElementById('lastNameError')!
+          setlastnameInvalidtext('Last name should not contain numbers')
 
           if (flag) {
             flag = false
           }
-
-          lastNameError.innerHTML = 'Last name should not contain numbers'
         }
       }
 
@@ -130,13 +117,11 @@ export const PageStepOne: FC = () => {
             }
           }
         } else {
-          const emailError = document.getElementById('emailError')!
+          setEmailInvalidtext('Email entered is not valid')
 
           if (flag) {
             flag = false
           }
-
-          emailError.innerHTML = 'Email entered is not valid'
         }
       }
     } catch (error) {
@@ -162,10 +147,10 @@ export const PageStepOne: FC = () => {
               onChange={(value) => {
                 setEmail(value)
               }}
+              invalidText={emailInvalidtext.length > 0 ? emailInvalidtext : undefined}
               label="E-mail"
               placeholder="john.doe@gmail.com"
             />
-            <span id="emailError" className={styles.validationError}/>
             {/* <sinch-input
               value=""
               onChange={() => {
@@ -180,23 +165,24 @@ export const PageStepOne: FC = () => {
                 setFirstName(value)
               }}
               label="First Name"
+              invalidText={firstnameInvalidtext.length > 0 ? firstnameInvalidtext : undefined}
               placeholder="John"
             />
-            <div id="firstNameError" className={styles.validationError}/>
             <sinch-input
               value={lastName}
               onChange={(value) => {
                 setLastName(value)
               }}
+              invalidText={lastnameInvalidtext.length > 0 ? lastnameInvalidtext : undefined}
               label="Last Name"
               placeholder="Doe"
             />
-            <div id="lastNameError" className={styles.validationError}/>
             <sinch-select
               value={role}
               onChange={(value) => {
                 setRole(value)
               }}
+              invalidText={roleInvalidtext.length > 0 ? roleInvalidtext : undefined}
               label="Your role"
             >
               <sinch-select-option
@@ -220,7 +206,6 @@ export const PageStepOne: FC = () => {
                 slot="select"
               />
             </sinch-select>
-            <div id="roleError" className={styles.validationError}/>
             <sinch-button
               className={styles.createAcc}
               style={{ width: '75%' }}
