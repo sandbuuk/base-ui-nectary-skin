@@ -448,3 +448,8 @@ h2 {
    font-weight: '600';
    font-family: 'Gilroy' 
 }
+
+.validationError{
+  font: var(--sinch-font-extra-small-text);
+  color: var(--sinch-color-error-500);
+}
