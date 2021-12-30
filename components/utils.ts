@@ -73,16 +73,28 @@ export function getLiteralAttribute($element: HTMLElement, literals: string[], a
   return isLiteralValue(literals, attrValue) ? attrValue : defaultValue
 }
 
-export const attrValueToInteger = (value: string | null): number | null => {
-  const int = parseInt(value ?? '')
+export const attrValueToInteger = (value: string | null, range: {min?: number, max?: number} = {}): number | null => {
+  let int = parseInt(value ?? '')
 
-  return Number.isInteger(int) ? int : null
+  if (!Number.isInteger(int)) {
+    return null
+  }
+
+  if (typeof range.min === 'number') {
+    int = Math.max(range.min, int)
+  }
+
+  if (typeof range.max === 'number') {
+    int = Math.min(range.max, int)
+  }
+
+  return int
 }
 
-export const attrValueToPixels = (value: string | null): string => {
-  const int = attrValueToInteger(value)
+export const attrValueToPixels = (value: string | null, options: {min?: number, max?: number, multiplier?: number} = {}): string => {
+  const int = attrValueToInteger(value, { min: options.min ?? 0, max: options.max })
 
-  return int !== null ? `${int}px` : 'unset'
+  return int === null ? 'unset' : `${int * (options.multiplier ?? 1)}px`
 }
 
 export const updateIntegerAttribute = ($element: HTMLElement | SVGElement, attrName: string, attrValue: string | number | null | undefined) => {

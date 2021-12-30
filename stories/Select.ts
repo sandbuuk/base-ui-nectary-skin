@@ -35,9 +35,21 @@ export default {
       description: 'Invalid',
       control: 'text',
     },
+    numVisibleItems: {
+      description: 'Number of visible items in the list',
+      control: 'number',
+    },
     onChange: {
       description: 'Handler to sync input value with the state',
       action: 'onChange',
+    },
+    onFocus: {
+      description: 'Focus handler',
+      action: 'onFocus',
+    },
+    onBlur: {
+      description: 'Blur handler',
+      action: 'onBlur',
     },
   },
   parameters: {
@@ -54,6 +66,8 @@ export default {
 
 const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
   onChange,
+  onFocus,
+  onBlur,
 }) => {
   const [{
     value,
@@ -62,6 +76,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
     additionalText,
     optionalText,
     invalidText,
+    numVisibleItems,
     disabled,
   }, updateArgs] = useArgs()
 
@@ -86,6 +101,16 @@ const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
     $input.addEventListener('change', (e: any) => {
       onChange(e.detail)
       updateArgs({ value: e.detail })
+      // https://github.com/storybookjs/storybook/issues/11657
+      setImmediate((el) => el.focus(), document.activeElement)
+    })
+
+    $input.addEventListener('focus', () => {
+      onFocus?.()
+    })
+
+    $input.addEventListener('blur', () => {
+      onBlur?.()
     })
 
     $wrapper.appendChild($input)
@@ -100,6 +125,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
   $input.additionalText = additionalText
   $input.optionalText = optionalText
   $input.invalidText = invalidText
+  $input.numVisibleItems = numVisibleItems
   $input.disabled = disabled
 
   return $wrapper
