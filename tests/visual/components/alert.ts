@@ -119,14 +119,12 @@ test('multiline property', shot(async function* ({ $eval }) {
 test('multiline attribute', shot(async function* ({ $eval }) {
   await $eval((el) => {
     el.setAttribute('title', '')
-    el.setAttribute('text', 'Alert text')
     el.setAttribute('actiontext', 'Action')
   })
   yield { name: 'action-no-multiline' }
 
   await $eval((el) => {
     el.setAttribute('actiontext', '')
-    el.setAttribute('text', 'Alert text')
     el.setAttribute('title', 'Alert Title')
   })
   yield { name: 'title-no-multiline' }

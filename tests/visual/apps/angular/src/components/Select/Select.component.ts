@@ -23,7 +23,7 @@ export class SelectComponent {
 
   constructor() {
     const url = new URL(location.href)
-    this.value = ''
+    this.value = url.searchParams.get('value') ?? ''
     this.isControlled = url.searchParams.get('uncontrolled') === null
     this.labelText = url.searchParams.get('label')
     this.optionalText = url.searchParams.get('optional')
@@ -33,8 +33,8 @@ export class SelectComponent {
     this.tooltipText = url.searchParams.get('tooltip')
     this.isDisabled = url.searchParams.get('disabled') != null
 
-    const val = url.searchParams.get('numvisibleitems')
-    this.numVisibleItems = val !== null ? parseInt(val) : null
+    const numVisibleValue = url.searchParams.get('numvisibleitems')
+    this.numVisibleItems = numVisibleValue !== null ? parseInt(numVisibleValue) : null
   }
 
   onChange(e: Event) {

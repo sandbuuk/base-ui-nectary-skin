@@ -3,7 +3,7 @@ import type { PlaywrightTestArgs, TestInfo } from '@playwright/test'
 import type { Locator, Page, PageScreenshotOptions } from 'playwright-core'
 
 export const mergeBoundingBox = async (locators: Locator[]): Promise<BoundingBox | null> => {
-  const bbs = await Promise.all(locators.map((l) => l.boundingBox({ timeout: 200 })))
+  const bbs = await Promise.all(locators.map((l) => l.boundingBox({ /* timeout: 1000 */ })))
 
   return bbs.reduce((a, b) => {
     if (a == null) {
@@ -34,7 +34,7 @@ const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInf
   }
 
 const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator) => (cb: (el: HTMLElementTagNameMap[T]) => void, arg?: any) => {
-  return $.evaluate(cb as ((el: SVGElement | HTMLElement) => void), arg, { timeout: 1000 })
+  return $.evaluate(cb as ((el: SVGElement | HTMLElement) => void), arg, { /* timeout: 1000 */ })
 }
 
 type BoundingBox = Exclude<PageScreenshotOptions['clip'], undefined>
@@ -62,7 +62,7 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
       for await (const { name, include } of updateState({ page, $: locator, $eval: makeEval<T>(locator) })) {
         const clip = Array.isArray(include)
           ? await mergeBoundingBox([locator, ...include])
-          : await locator.boundingBox({ timeout: 200 })
+          : await locator.boundingBox({ /* timeout: 1000 */ })
 
         if (clip == null) {
           throw new Error('Cannot get locator bounding box')
