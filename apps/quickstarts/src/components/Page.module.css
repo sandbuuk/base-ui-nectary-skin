@@ -7,7 +7,29 @@ h2 {
   font: var(--sinch-font-title-1);
   margin-bottom: 0%;
 }
-
+.congratsTitle{
+   font: var(--sinch-font-title-2);
+}
+.Congrats{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.congratsText{
+  display: flex;
+  justify-content: center;
+  width:800px;
+  margin-top: 0%;
+}
+.congratsimage{
+  width:120%;
+height: 120%;
+margin-bottom: 10%;
+}
 .form {
   display: flex;
   flex-direction: column;

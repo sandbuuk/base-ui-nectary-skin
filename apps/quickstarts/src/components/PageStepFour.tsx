@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { Congratsbox } from './Congratsbox'
 import styles from './Page.module.css'
-import { usePageControl } from './PageContext'
+//import { usePageControl } from './PageContext'
 import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
 import contactlogo from './images/contactlogo.jpg'
@@ -31,10 +32,20 @@ export const WhatsappQuestion: FC = () => {
 }
 
 export const PageStepFour: FC = () => {
-  const { next } = usePageControl()
-  const { handleNext, handleBack } = useStepperControl()
+  //const { next } = usePageControl()
+  const { handleBack } = useStepperControl()
   //handleNext(1);
   const [questionCounter, setCounter] = useState(1)
+
+  const [open, setOpen] = useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const buttonCounter = () => {
     console.log(questionCounter)
@@ -45,8 +56,7 @@ export const PageStepFour: FC = () => {
   }
 
   const nextPage = () => {
-    next()
-    handleNext()
+    handleClickOpen()
   }
 
   const prevPage = () => {
@@ -104,6 +114,7 @@ export const PageStepFour: FC = () => {
             <sinch-button type="destructive" text="Cancel" onClick={prevPage}/>
           </div>
           <div className={styles.saveBut}>
+            { <Congratsbox open={open} handleClickOpen={handleClickOpen} handleClose={handleClose}/> }
             <sinch-button type="primary" text="Next" onClick={nextPage}/>
           </div>
         </div>
