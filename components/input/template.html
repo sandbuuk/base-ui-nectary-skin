@@ -39,7 +39,7 @@
     border-color: var(--sinch-color-stormy-300);
   }
 
-  :host([invalidtext]) #input:not(:disabled) {
+  :host([invalidtext]:not([invalidtext=""])) #input:not(:disabled) {
     border-color: var(--sinch-color-text-invalid);
   }
 
@@ -79,7 +79,8 @@
   }
 
   #additional {
-    margin-left: auto;
+    flex: 1;
+    text-align: right;
     font: var(--sinch-font-extra-small-text);
     color: var(--sinch-color-text-muted);
   }
@@ -89,13 +90,13 @@
     color: var(--sinch-color-text-invalid);
   }
 
-  :host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
-    color: var(--sinch-color-stormy-100);
-  }
-
   ::slotted(sinch-input-tooltip) {
     align-self: center;
     margin: 0 8px;
+  }
+
+  :host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
+    color: var(--sinch-color-stormy-100);
   }
 
   :host([disabled]:not([disabled="false"])) ::slotted(sinch-input-tooltip) {

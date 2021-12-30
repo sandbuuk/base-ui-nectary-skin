@@ -39,7 +39,7 @@ const mapElement = (url: URL) => {
 
     case '/select': {
       return (
-        <Select/>
+        <Select search={url.searchParams}/>
       )
     }
   }

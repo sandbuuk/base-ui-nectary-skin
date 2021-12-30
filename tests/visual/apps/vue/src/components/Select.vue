@@ -1,6 +1,14 @@
 <template>
-  <sinch-select label="Label" placeholder="Placeholder" :value="value" @change="onChange">
-    <sinch-input-tooltip text="Tooltip text long long" slot="tooltip"/>
+  <sinch-select
+    v-bind:placeholder="placeholderText"
+    v-bind:label="labelText"
+    v-bind:optionaltext="optionalText"
+    v-bind:additionaltext="additionalText"
+    v-bind:invalidtext="invalidText"
+    v-bind:disabled="isDisabled"
+    :value="value"
+    @change="onChange">
+    <sinch-input-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-input-tooltip>
     <sinch-select-option value="1" text="Option 1 value" slot="select">
       <sinch-icon-share/>
     </sinch-select-option>
@@ -16,12 +24,43 @@
 export default {
   methods: {
     onChange(e) {
-      this.value = e.detail
+      if (this.isControlled) {
+        this.value = e.detail
+      }
     }
+  },
+  props: {
+    search: URLSearchParams
+  },
+  computed: {
+    placeholderText() {
+      return this.search.get('placeholder')
+    },
+    tooltipText() {
+      return this.search.get('tooltip')
+    },
+    labelText() {
+      return this.search.get('label')
+    },
+    optionalText() {
+      return this.search.get('optional')
+    },
+    additionalText() {
+      return this.search.get('additional')
+    },
+    invalidText() {
+      return this.search.get('invalid')
+    },
+    isDisabled() {
+      return this.search.get('disabled') !== null
+    },
+    isControlled() {
+      return this.search.get('uncontrolled') === null
+    },
   },
   data() {
     return {
-      value: ''
+      value: this.search.get('value') ?? ''
     }
   }
 }

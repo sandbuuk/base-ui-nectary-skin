@@ -6,10 +6,10 @@ export const useStoryWrapper = () => {
   if (wrapperRef.current === null) {
     const $wrapper = document.createElement('div')
 
-    $wrapper.style.height = '260px'
+    $wrapper.style.height = '200px'
     $wrapper.style.display = 'flex'
     $wrapper.style.paddingTop = '28px'
-    $wrapper.style.justifyContent = 'center'
+    $wrapper.style.paddingLeft = '28px'
 
     wrapperRef.current = $wrapper
   }

@@ -1,5 +1,13 @@
 <style>
 :host {
+  display: block;
+}
+
+* {
+  pointer-events: none;
+}
+
+#wrapper {
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -8,31 +16,28 @@
   align-items: center;
 }
 
-* {
-  pointer-events: none;
-}
-
-span {
+#content {
   flex-shrink: 1;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
+/* Icon */
 ::slotted(*) {
   margin-right: 12px;
 }
 
-:host(:hover),
-:host([selected]) {
+:host(:hover) > #wrapper,
+:host([selected]) > #wrapper {
   background-color: var(--sinch-color-snow-500);
 }
 
-:host([checked]) {
+:host([checked]) > #wrapper {
   padding-right: 36px;
 }
 
-:host([checked])::after {
+:host([checked]) > #wrapper::after {
   content: "";
   position: absolute;
   top: 10px;
@@ -44,11 +49,13 @@ span {
   background-repeat: no-repeat;
 }
 
-:host([disabled]) {
+:host([disabled]:not([disabled="false"])) > #wrapper {
   color: var(--sinch-color-stormy-100);
   fill: var(--sinch-color-stormy-100);
 }
 </style>
 
-<slot></slot>
-<span></span>
+<div id="wrapper">
+  <slot></slot>
+  <span id="content"></span>
+</div>

@@ -10,9 +10,9 @@
     "test:app-vue": "webpack serve --config apps/vue/webpack.config.js",
     "test:app-angular": "yarn --cwd=apps/angular ng serve",
     "test:update-screenshots": "wait-on http://localhost:3021 && playwright test --project chromium-react --project firefox-react --project webkit-react -u",
-    "test:update": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.17.1 ./tests/visual/entrypoint.update.sh",
+    "test:update": "docker run -it --rm --ipc=host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.17.1 ./tests/visual/entrypoint.update.sh",
     "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.17.1 ./tests/visual/entrypoint.dev.sh",
-    "test": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.17.1 ./tests/visual/entrypoint.sh",
+    "test": "docker run -it --rm --ipc=host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.17.1 ./tests/visual/entrypoint.sh",
     "remove-empty-dirs": "find ./test-results -type d -empty -delete"
   },
   "devDependencies": {
