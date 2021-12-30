@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Congratsbox } from './Congratsbox'
+import { Congratsbox } from './CongratsBox'
 import styles from './Page.module.css'
 //import { usePageControl } from './PageContext'
 import { PageSteps } from './PageSteps'
