@@ -6,6 +6,7 @@
     v-bind:additionaltext="additionalText"
     v-bind:invalidtext="invalidText"
     v-bind:disabled="isDisabled"
+    v-bind:numvisibleitems="numVisibleItems"
     :value="value"
     @change="onChange">
     <sinch-input-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-input-tooltip>
@@ -50,6 +51,10 @@ export default {
     },
     invalidText() {
       return this.search.get('invalid')
+    },
+    numVisibleItems() {
+      const val = this.search.get('numvisibleitems')
+      return val !== null ? parseInt(val) : null
     },
     isDisabled() {
       return this.search.get('disabled') !== null

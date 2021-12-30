@@ -19,6 +19,7 @@ export class SelectComponent {
   placeholderText: string | null
   tooltipText: string | null
   isDisabled: boolean
+  numVisibleItems: number | null
 
   constructor() {
     const url = new URL(location.href)
@@ -31,6 +32,9 @@ export class SelectComponent {
     this.placeholderText = url.searchParams.get('placeholder')
     this.tooltipText = url.searchParams.get('tooltip')
     this.isDisabled = url.searchParams.get('disabled') != null
+
+    const val = url.searchParams.get('numvisibleitems')
+    this.numVisibleItems = val !== null ? parseInt(val) : null
   }
 
   onChange(e: Event) {

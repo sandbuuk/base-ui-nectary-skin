@@ -3,7 +3,7 @@ import type { PlaywrightTestArgs, TestInfo } from '@playwright/test'
 import type { Locator, Page, PageScreenshotOptions } from 'playwright-core'
 
 export const mergeBoundingBox = async (locators: Locator[]): Promise<BoundingBox | null> => {
-  const bbs = await Promise.all(locators.map((l) => l.boundingBox()))
+  const bbs = await Promise.all(locators.map((l) => l.boundingBox({ timeout: 200 })))
 
   return bbs.reduce((a, b) => {
     if (a == null) {
@@ -62,7 +62,7 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
       for await (const { name, include } of updateState({ page, $: locator, $eval: makeEval<T>(locator) })) {
         const clip = Array.isArray(include)
           ? await mergeBoundingBox([locator, ...include])
-          : await locator.boundingBox()
+          : await locator.boundingBox({ timeout: 200 })
 
         if (clip == null) {
           throw new Error('Cannot get locator bounding box')

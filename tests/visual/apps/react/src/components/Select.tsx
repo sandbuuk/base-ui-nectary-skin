@@ -14,6 +14,10 @@ export const Select: FC<TSelect> = ({ search }) => {
   const invalidText = useMemo(() => search.get('invalid') ?? undefined, [search])
   const placeholderText = useMemo(() => search.get('placeholder') ?? undefined, [search])
   const isDisabled = useMemo(() => search.get('disabled') != null, [search])
+  const numVisibleItems = useMemo(() => {
+    const val = search.get('numvisibleitems')
+    return val !== null ? parseInt(val) : undefined
+  }, [search])
   const tooltip = useMemo(
     () => search.get('tooltip') != null && (
       <sinch-input-tooltip text={search.get('tooltip')!} slot="tooltip"></sinch-input-tooltip>
@@ -30,6 +34,7 @@ export const Select: FC<TSelect> = ({ search }) => {
       placeholder={placeholderText}
       disabled={isDisabled}
       value={value}
+      numVisibleItems={numVisibleItems}
       onChange={onChange}>
       {tooltip}
       <sinch-select-option value="1" text="Option 1 value" slot="select">
