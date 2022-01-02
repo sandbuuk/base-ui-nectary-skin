@@ -1,9 +1,6 @@
 <template>
   <sinch-radio :value="value" @change="onChange">
-    <sinch-radio-option value="1" text="Option 1 value"></sinch-radio-option>
-    <sinch-radio-option value="2" text="Option 2 value" disabled></sinch-radio-option>
-    <sinch-radio-option value="3" text="Option 3 value"></sinch-radio-option>
-    <sinch-radio-option value="4" text="Option 4 value"></sinch-radio-option>
+    <sinch-radio-option v-for="opt in options" :key="opt.value" :value="opt.value" :text="opt.text" :disabled="opt.disabled"></sinch-radio-option>
   </sinch-radio>
 </template>
 
@@ -16,6 +13,19 @@ export default {
     isControlled() {
       return this.search.get('uncontrolled') === null
     },
+    options() {
+      const data = this.search.get('options')
+
+      if (data === null) {
+        return []
+      }
+
+      try {
+        return JSON.parse(decodeURI(data))
+      } catch {
+        return []
+      }
+    }
   },
   methods: {
     onChange(e) {
@@ -26,7 +36,7 @@ export default {
   },
   data() {
     return {
-      value: ''
+      value: this.search.get('value') ?? ''
     }
   }
 }

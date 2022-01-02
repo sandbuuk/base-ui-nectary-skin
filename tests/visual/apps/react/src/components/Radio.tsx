@@ -8,13 +8,34 @@ type TRadio = {
 export const Radio: FC<TRadio> = ({ search }) => {
   const [value, setValue] = useState('')
   const onChange = useMemo(() => search.get('uncontrolled') === null ? setValue : () => {}, [search, setValue])
+  const options = useMemo(() => {
+    const data = search.get('options')
+
+    if (data === null) {
+      return null
+    }
+
+    try {
+      const options = JSON.parse(decodeURI(data))
+
+      return options.map((opt: any) => (
+        <sinch-radio-option
+          key={opt.value}
+          value={opt.value}
+          text={opt.text}
+          disabled={opt.disabled}/>
+      ))
+    } catch {
+      return null
+    }
+  }, [search])
+
+
+
 
   return (
     <sinch-radio value={value} onChange={onChange}>
-      <sinch-radio-option value="1" text="Option 1 value"/>
-      <sinch-radio-option value="2" text="Option 2 value" disabled/>
-      <sinch-radio-option value="3" text="Option 3 value" disabled={false}/>
-      <sinch-radio-option value="4" text="Option 4 value"/>
+      {options}
     </sinch-radio>
   )
 }
