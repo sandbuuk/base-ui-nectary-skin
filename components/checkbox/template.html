@@ -39,7 +39,6 @@
   #wrapper {
     display: flex;
     flex-direction: row;
-    align-items: center;
     box-sizing: border-box;
     width: 100%;
     height: 32px;
@@ -48,11 +47,9 @@
 
   #checkbox {
     all: initial;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 18px;
-    height: 18px;
+    display: block;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
   }
 
@@ -62,16 +59,16 @@
 
   #icon-container {
     position: relative;
-    width: 18px;
-    height: 18px;
+    width: 32px;
+    height: 32px;
   }
 
   /* Circle */
   #checkbox::before {
     content: "";
     position: absolute;
-    top: -7px;
-    left: -7px;
+    top: 0;
+    left: 0;
     width: 32px;
     height: 32px;
     border-radius: 16px;
@@ -84,8 +81,8 @@
   #checkbox::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 7px;
+    left: 7px;
     width: 18px;
     height: 18px;
     border-radius: 2px;
@@ -97,8 +94,8 @@
 
   #icon-checkmark {
     position: absolute;
-    left: 2px;
-    top: 3px;
+    left: 9px;
+    top: 10px;
     transition: opacity 0.1s linear;
     opacity: 0%;
     pointer-events: none;
@@ -106,8 +103,8 @@
 
   #icon-indeterminate {
     position: absolute;
-    left: 3px;
-    top: 8px;
+    left: 10px;
+    top: 15px;
     transition: opacity 0.1s linear;
     opacity: 0%;
     pointer-events: none;
@@ -124,10 +121,11 @@
 
   #label {
     flex: 1;
+    align-self: center;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    padding-left: 14px;
+    padding-left: 6px;
   }
 
   :host([disabled]:not([disabled="false"])) #label {
