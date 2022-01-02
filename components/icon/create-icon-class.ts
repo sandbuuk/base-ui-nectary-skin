@@ -1,7 +1,15 @@
-import { getIntegerAttribute, updateIntegerAttribute } from '../utils'
+import { getIntegerAttribute, updateAttribute, updateIntegerAttribute } from '../utils'
 import type { TSinchElementReact } from '../types'
 
 const DEFAULT_SIZE = 16
+const MIN_SIZE = 4
+const MAX_SIZE = 128
+
+const iconSymbol = Symbol('sinch-icon')
+
+export const isSinchIcon = (element: Element): element is TSinchIconElement => {
+  return (element as any)[iconSymbol] != null
+}
 
 export const createIconClass = (templateHTML: string) => {
   const template = document.createElement('template')
@@ -13,6 +21,8 @@ export const createIconClass = (templateHTML: string) => {
 
     constructor() {
       super()
+
+      ;(this as any)[iconSymbol] = true
 
       const shadowRoot = this.attachShadow({
         mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
@@ -28,11 +38,12 @@ export const createIconClass = (templateHTML: string) => {
     }
 
     set size(value: number) {
-      updateIntegerAttribute(this, 'size', value)
+      // Validation is handled in attributeChangeCallback
+      updateAttribute(this, 'size', value)
     }
 
     get size() {
-      return getIntegerAttribute(this, 'size')!
+      return getIntegerAttribute(this, 'size', DEFAULT_SIZE)
     }
 
     connectedCallback() {
@@ -48,7 +59,7 @@ export const createIconClass = (templateHTML: string) => {
     attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
       switch (name) {
         case 'size': {
-          updateIntegerAttribute(this.$svg, 'width', newVal)
+          updateIntegerAttribute(this.$svg, 'width', newVal, { min: MIN_SIZE, max: MAX_SIZE })
 
           break
         }

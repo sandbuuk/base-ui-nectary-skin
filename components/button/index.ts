@@ -1,3 +1,4 @@
+import { isSinchIcon } from '../icon/create-icon-class'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -13,6 +14,16 @@ import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
 const buttonTypes = ['primary', 'secondary', 'cta', 'destructive'] as const
+const ICON_SIZE = 18
+const ICON_SIZE_SMALL = 12
+
+const updateIconSize = ($slot: HTMLSlotElement, isSmall: boolean) => {
+  for (const $el of $slot.assignedElements()) {
+    if (isSinchIcon($el)) {
+      $el.size = isSmall ? ICON_SIZE_SMALL : ICON_SIZE
+    }
+  }
+}
 
 const template = document.createElement('template')
 
@@ -21,30 +32,39 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-button', class extends HTMLElement {
   $button: HTMLButtonElement
   $text: HTMLSpanElement
+  $slot: HTMLSlotElement
 
   constructor() {
     super()
 
     const shadowRoot = this.attachShadow({
       mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      delegatesFocus: true,
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.$button = shadowRoot.querySelector('button')!
     this.$text = shadowRoot.querySelector('#text')!
+    this.$slot = shadowRoot.querySelector('slot')!
   }
 
   connectedCallback() {
     this.$button.addEventListener('click', this.onButtonClick)
+    this.$button.addEventListener('focus', this.onButtonFocus)
+    this.$button.addEventListener('blur', this.onButtonBlur)
+    this.$slot.addEventListener('slotchange', this.onSlotChange)
   }
 
   disconnectedCallback() {
     this.$button.removeEventListener('click', this.onButtonClick)
+    this.$button.removeEventListener('focus', this.onButtonFocus)
+    this.$button.removeEventListener('blur', this.onButtonBlur)
+    this.$slot.removeEventListener('slotchange', this.onSlotChange)
   }
 
   static get observedAttributes() {
-    return ['text', 'disabled']
+    return ['text', 'disabled', 'small']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -56,6 +76,11 @@ defineCustomElement('sinch-button', class extends HTMLElement {
       }
       case 'disabled': {
         this.$button.disabled = isAttrTrue(newVal)
+
+        break
+      }
+      case 'small': {
+        updateIconSize(this.$slot, isAttrTrue(newVal))
 
         break
       }
@@ -103,6 +128,26 @@ defineCustomElement('sinch-button', class extends HTMLElement {
       new CustomEvent('click')
     )
   }
+
+  focus() {
+    this.$button.focus()
+  }
+
+  blur() {
+    this.$button.blur()
+  }
+
+  onButtonFocus = () => {
+    getEventHandler(this, 'onFocus')?.()
+  }
+
+  onButtonBlur = () => {
+    getEventHandler(this, 'onBlur')?.()
+  }
+
+  onSlotChange = () => {
+    updateIconSize(this.$slot, this.small)
+  }
 })
 
 type TSinchButtonType = typeof buttonTypes[number]
@@ -112,6 +157,8 @@ type TSinchButtonElement = HTMLElement & {
   text: string,
   disabled: boolean,
   small: boolean,
+  focus(): void,
+  blur(): void,
 }
 
 type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
@@ -120,6 +167,8 @@ type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   disabled?: boolean,
   small?: boolean,
   onClick: () => void,
+  onFocus?: () => void,
+  onBlur?: () => {},
 }
 
 declare global {

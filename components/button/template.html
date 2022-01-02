@@ -1,9 +1,5 @@
 <style>
   :host {
-    display: inline-block;
-  }
-
-  :host([type="primary"]) {
     --sinch-color-button-background: var(--sinch-color-tropical-500);
     --sinch-color-button-background-hover: var(--sinch-color-tropical-400);
     --sinch-color-button-background-focus: var(--sinch-color-tropical-500);
@@ -16,6 +12,9 @@
     --sinch-color-button-border-focus: var(--sinch-color-tropical-700);
     --sinch-color-button-border-active: var(--sinch-color-transparent);
     --sinch-color-button-border-disabled: var(--sinch-color-transparent);
+
+    display: inline-block;
+    outline: none;
   }
 
   :host([type="secondary"]) {
@@ -50,7 +49,7 @@
 
   :host([type="destructive"]) {
     --sinch-color-button-background: var(--sinch-color-snow-100);
-    --sinch-color-button-background-hover: var(--sinch-color-snow-100);
+    --sinch-color-button-background-hover: var(--sinch-color-error-200);
     --sinch-color-button-background-focus: var(--sinch-color-snow-100);
     --sinch-color-button-background-active: var(--sinch-color-error-200);
     --sinch-color-button-background-disabled: var(--sinch-color-snow-100);
@@ -65,26 +64,21 @@
 
   button {
     all: initial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 48px;
+    padding: 12px 24px;
+    border-radius: 4px;
     font: var(--sinch-font-title-4);
-    font-weight: 600;
     color: var(--sinch-color-button-text);
     fill: var(--sinch-color-button-text);
     background-color: var(--sinch-color-button-background);
     box-shadow: 0 0 0 1px var(--sinch-color-button-border) inset;
-    border-radius: 4px;
-    line-height: 48px;
-    padding: 0 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
     cursor: pointer;
-    box-sizing: border-box;
-  }
-
-  button:hover {
-    background-color: var(--sinch-color-button-background-hover);
-    box-shadow: 0 0 0 1px var(--sinch-color-button-border-hover) inset;
   }
 
   button:focus {
@@ -92,42 +86,44 @@
     box-shadow: 0 0 0 2px var(--sinch-color-button-border-focus) inset;
   }
 
+  button:hover {
+    background-color: var(--sinch-color-button-background-hover);
+    box-shadow: 0 0 0 1px var(--sinch-color-button-border-hover) inset;
+  }
+
   button:active {
     background-color: var(--sinch-color-button-background-active);
     box-shadow: 0 0 0 2px var(--sinch-color-button-border-active) inset;
   }
 
-  button[disabled] {
+  button[disabled]:not([disabled="false"]) {
     color: var(--sinch-color-button-text-disabled);
     fill: var(--sinch-color-button-text-disabled);
     background-color: var(--sinch-color-button-background-disabled);
     box-shadow: 0 0 0 1px var(--sinch-color-button-border-disabled) inset;
+    cursor: initial;
   }
 
-  #text-wrapper {
+  button > * {
+    pointer-events: none;
+  }
+
+  #text {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
-  :host([small]:not([type="cta"])) > button {
-    line-height: 32px;
-    padding: 0 16px;
+  :host([small]:not([small="false"])) > button {
+    height: 32px;
+    padding: 8px 16px;
+    line-height: 16px;
     font-size: 14px;
-  }
-
-  ::slotted(*) {
-    margin-right: 16px;
-  }
-
-  :host([small]:not([type="cta"])) ::slotted(*) {
-    margin-right: 12px;
+    gap: 10px;
   }
 </style>
 
 <button>
   <slot></slot>
-  <div id="text-wrapper">
-    <span id="text"></span>
-  </div>
+  <span id="text"></span>
 </button>

@@ -34,9 +34,9 @@ export const getBooleanAttribute = ($element: HTMLElement, attrName: string) => 
   return isAttrTrue($element.getAttribute(attrName))
 }
 
-export const updateAttribute = ($element: HTMLElement, attrName: string, attrValue: string | null | undefined) => {
+export const updateAttribute = ($element: HTMLElement, attrName: string, attrValue: string | number | boolean | null | undefined) => {
   if (attrValue != null) {
-    $element.setAttribute(attrName, attrValue)
+    $element.setAttribute(attrName, String(attrValue))
   } else {
     $element.removeAttribute(attrName)
   }
@@ -73,45 +73,63 @@ export function getLiteralAttribute($element: HTMLElement, literals: string[], a
   return isLiteralValue(literals, attrValue) ? attrValue : defaultValue
 }
 
-export const attrValueToInteger = (value: string | null, range: {min?: number, max?: number} = {}): number | null => {
-  let int = parseInt(value ?? '')
+type TRange = {
+  min?: number,
+  max?: number,
+}
 
-  if (!Number.isInteger(int)) {
-    return null
-  }
+const applyRange = (value: number, range: TRange) => {
+  let result = value
 
   if (typeof range.min === 'number') {
-    int = Math.max(range.min, int)
+    result = Math.max(range.min, result)
   }
 
   if (typeof range.max === 'number') {
-    int = Math.min(range.max, int)
+    result = Math.min(range.max, result)
   }
 
-  return int
+  return result
 }
 
-export const attrValueToPixels = (value: string | null, options: {min?: number, max?: number, multiplier?: number} = {}): string => {
+export const attrValueToInteger = (value: string | null, range: TRange = {}): number | null => {
+  if (value === null) {
+    return null
+  }
+
+  const int = parseInt(value)
+
+  if (!Number.isInteger(int)) {
+    // Couldn't parse attribute value
+    return null
+  }
+
+  return applyRange(int, range)
+}
+
+export const attrValueToPixels = (value: string | null, options: TRange & {multiplier?: number} = {}): string => {
   const int = attrValueToInteger(value, { min: options.min ?? 0, max: options.max })
 
   return int === null ? 'unset' : `${int * (options.multiplier ?? 1)}px`
 }
 
-export const updateIntegerAttribute = ($element: HTMLElement | SVGElement, attrName: string, attrValue: string | number | null | undefined) => {
-  const intValue = typeof attrValue === 'string'
-    ? attrValueToInteger(attrValue)
-    : attrValue
-
-  if (intValue != null) {
-    if (intValue < 0) {
-      // Silently ignnore negative integer value
-      return
-    }
-
-    $element.setAttribute(attrName, intValue.toFixed(0))
-  } else {
+export const updateIntegerAttribute = ($element: HTMLElement | SVGElement, attrName: string, attrValue: string | number | null | undefined, range: TRange = {}) => {
+  if (attrValue == null) {
     $element.removeAttribute(attrName)
+
+    return
   }
+
+  const intValue = typeof attrValue === 'string'
+    ? attrValueToInteger(attrValue, range)
+    : applyRange(attrValue, range)
+
+  if (intValue === null) {
+    // Couldn't parse attribute value
+    return
+  }
+
+  $element.setAttribute(attrName, intValue.toFixed(0))
 }
 
 export function getIntegerAttribute($element: HTMLElement, attrName: string): number | undefined
