@@ -22,36 +22,38 @@
     --sinch-color-radio-outer-circle-disabled-checked: var(--sinch-color-transparent);
     --sinch-color-radio-border-disabled-checked: var(--sinch-color-stormy-100);
 
-    display: flex;
-    font: var(--sinch-font-body);
+    display: block;
+    outline: none;
   }
 
-  #radio {
+  #wrapper {
+    display: flex;
+    font: var(--sinch-font-body);
+    height: 32px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  #input {
     all: initial;
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: block;
     width: 32px;
     height: 32px;
     cursor: pointer;
   }
 
-  #radio:disabled {
+  #input:disabled {
     cursor: initial;
   }
 
   #icon-container {
-    display: inline-block;
     position: relative;
-    flex-shrink: 0;
     width: 32px;
     height: 32px;
-    top: 2px;
-    vertical-align: top;
   }
 
   /* Outer Circle */
-  #radio::before {
+  #input::before {
     content: "";
     position: absolute;
     top: 0;
@@ -65,7 +67,7 @@
   }
 
   /* Border / Background */
-  #radio::after {
+  #input::after {
     content: "";
     position: absolute;
     top: 6px;
@@ -94,147 +96,153 @@
 
   @media (prefers-reduced-motion) {
     #icon-knob,
-    #radio::before,
-    #radio::after {
+    #input::before,
+    #input::after {
       transition: none;
     }
   }
 
   #label {
-    display: inline-block;
-    padding: 6px 0 6px 8px;
+    align-self: center;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 8px;
     color: var(--sinch-color-text-default);
   }
 
-  :host([disabled]:not([disabled="false"])) > #label {
+  :host([disabled]:not([disabled="false"])) #label {
     color: var(--sinch-color-stormy-200);
   }
 
   /* Colors Checked */
-  #radio:checked::before {
+  #input:checked::before {
     background-color: var(--sinch-color-radio-outer-circle-checked);
   }
 
-  #radio:checked::after {
+  #input:checked::after {
     box-shadow: 0 0 0 2px var(--sinch-color-radio-border-checked) inset;
   }
 
-  #radio:checked ~ #icon-knob {
+  #input:checked ~ #icon-knob {
     opacity: 100%;
     background-color: var(--sinch-color-radio-border-checked);
   }
 
   /* Colors Focus */
-  #radio:focus::before {
+  #input:focus::before {
     background-color: var(--sinch-color-radio-outer-circle-focus);
   }
 
-  #radio:focus::after {
+  #input:focus::after {
     box-shadow: 0 0 0 2px var(--sinch-color-radio-border-focus) inset;
   }
 
-  #radio:focus ~ #icon-knob {
+  #input:focus ~ #icon-knob {
     background-color: var(--sinch-color-radio-border-focus);
   }
 
   /* Colors Hover */
-  #radio:hover::before {
+  #input:hover::before {
     background-color: var(--sinch-color-radio-outer-circle-hover);
   }
 
-  #radio:hover::after {
+  #input:hover::after {
     box-shadow: 0 0 0 2px var(--sinch-color-radio-border-hover) inset;
   }
 
-  #radio:hover ~ #icon-knob {
+  #input:hover ~ #icon-knob {
     background-color: var(--sinch-color-radio-border-hover);
   }
 
   /* Colors Active */
-  #radio:active::before {
+  #input:active::before {
     background-color: var(--sinch-color-radio-outer-circle-active);
   }
 
-  #radio:active::after {
+  #input:active::after {
     box-shadow: 0 0 0 2px var(--sinch-color-radio-border-active) inset;
   }
 
-  #radio:active ~ #icon-knob {
+  #input:active ~ #icon-knob {
     background-color: var(--sinch-color-radio-border-active);
   }
 
   /* Colors Disabled */
-  #radio:disabled::before {
+  #input:disabled::before {
     background-color: var(--sinch-color-radio-outer-circle-disabled);
   }
 
-  #radio:disabled::after {
+  #input:disabled::after {
     box-shadow: 0 0 0 2px var(--sinch-color-radio-border-disabled) inset;
   }
 
-  #radio:disabled ~ #icon-knob {
+  #input:disabled ~ #icon-knob {
     background-color: var(--sinch-color-radio-border-disabled);
   }
 
   /* Colors Focus Checked */
-  #radio:focus:checked::before {
+  #input:focus:checked::before {
     background-color: var(--sinch-color-radio-outer-circle-focus-checked);
   }
 
-  #radio:focus:checked::after {
+  #input:focus:checked::after {
     box-shadow: 0 0 0 2px var(--sinch-color-radio-border-focus-checked) inset;
   }
 
-  #radio:focus:checked ~ #icon-knob {
+  #input:focus:checked ~ #icon-knob {
     opacity: 100%;
     background-color: var(--sinch-color-radio-border-focus-checked);
   }
 
   /* Colors Hover Checked */
-  #radio:hover:checked::before {
+  #input:hover:checked::before {
     background-color: var(--sinch-color-radio-outer-circle-hover-checked);
   }
 
-  #radio:hover:checked::after {
+  #input:hover:checked::after {
     box-shadow: 0 0 0 2px var(--sinch-color-radio-border-hover-checked) inset;
   }
 
-  #radio:hover:checked ~ #icon-knob {
+  #input:hover:checked ~ #icon-knob {
     opacity: 100%;
     background-color: var(--sinch-color-radio-border-hover-checked);
   }
 
   /* Colors Active Checked */
-  #radio:active:checked::before {
+  #input:active:checked::before {
     background-color: var(--sinch-color-radio-outer-circle-active-checked);
   }
 
-  #radio:active:checked::after {
+  #input:active:checked::after {
     box-shadow: 0 0 0 2px var(--sinch-color-radio-border-active-checked) inset;
   }
 
-  #radio:active:checked ~ #icon-knob {
+  #input:active:checked ~ #icon-knob {
     opacity: 100%;
     background-color: var(--sinch-color-radio-border-active-checked);
   }
 
   /* Colors Disabled Checked */
-  #radio:disabled:checked::before {
+  #input:disabled:checked::before {
     background-color: var(--sinch-color-radio-outer-circle-disabled-checked);
   }
 
-  #radio:disabled:checked::after {
+  #input:disabled:checked::after {
     box-shadow: 0 0 0 2px var(--sinch-color-radio-border-disabled-checked) inset;
   }
 
-  #radio:disabled:checked ~ #icon-knob {
+  #input:disabled:checked ~ #icon-knob {
     opacity: 100%;
     background-color: var(--sinch-color-radio-border-disabled-checked);
   }
 </style>
 
-<div id="icon-container">
-  <input id="radio" type="radio"/>
-  <div id="icon-knob"></div>
+<div id="wrapper">
+  <div id="icon-container">
+    <input id="input" type="radio"/>
+    <div id="icon-knob"></div>
+  </div>
+  <label for="input" id="label"></label>
 </div>
-<label for="radio" id="label"></label>
