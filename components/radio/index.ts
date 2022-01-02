@@ -71,18 +71,17 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-radio', class extends HTMLElement {
   $slot: HTMLSlotElement
-  $group: HTMLDivElement
 
   constructor() {
     super()
 
     const shadowRoot = this.attachShadow({
       mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      delegatesFocus: true,
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$group = shadowRoot.querySelector('#group')!
     this.$slot = shadowRoot.querySelector('slot')!
   }
 
