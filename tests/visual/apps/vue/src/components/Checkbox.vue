@@ -12,7 +12,6 @@
 export default {
   methods: {
     onChange(e) {
-      console.log('AAAA')
       if (this.isControlled) {
         this.checked = e.detail
       }
