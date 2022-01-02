@@ -23,6 +23,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
 
     const shadowRoot = this.attachShadow({
       mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      delegatesFocus: true,
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
@@ -108,15 +109,16 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 
   onInput = (e: Event) => {
-    getEventHandler(this, 'onChange')?.(this.$input.checked)
+    e.stopPropagation()
+
+    const isChecked = this.$input.checked
+
+    this.$input.checked = !isChecked
+    getEventHandler(this, 'onChange')?.(isChecked)
 
     this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: this.$input.checked,
-      })
+      new CustomEvent('change', { detail: isChecked })
     )
-
-    e.stopPropagation()
   }
 
   onInputFocus = (e: Event) => {
