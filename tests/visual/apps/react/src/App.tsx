@@ -1,5 +1,6 @@
 import '@nectary/components'
 import { Alert } from './components/Alert'
+import { Button } from './components/Button'
 import { Checkbox } from './components/Checkbox'
 import { Input } from './components/Input'
 import { Radio } from './components/Radio'
@@ -11,6 +12,12 @@ const mapElement = (url: URL) => {
     case '/alert': {
       return (
         <Alert search={url.searchParams}/>
+      )
+    }
+
+    case '/button': {
+      return (
+        <Button search={url.searchParams}/>
       )
     }
 

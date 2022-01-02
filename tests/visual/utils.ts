@@ -71,7 +71,7 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
 
       for await (const { name, include = [], includeRects = [] } of updateState({ page, $: locator, $eval: makeEval<T>(locator) })) {
         const rects = await getRects([locator, ...include])
-        const clip = mergeBoundingBox([...rects, ...includeRects])
+        const clip = mergeBoundingBox(rects.concat(includeRects))
 
         if (clip == null) {
           throw new Error('Cannot get locator bounding box')
