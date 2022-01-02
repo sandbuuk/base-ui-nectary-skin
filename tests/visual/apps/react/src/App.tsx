@@ -1,8 +1,9 @@
 import '@nectary/components'
 import { Alert } from './components/Alert'
-import { Select } from './components/Select'
-import { Radio } from './components/Radio'
+import { Checkbox } from './components/Checkbox'
 import { Input } from './components/Input'
+import { Radio } from './components/Radio'
+import { Select } from './components/Select'
 import type { FC } from 'react'
 
 const mapElement = (url: URL) => {
@@ -13,15 +14,9 @@ const mapElement = (url: URL) => {
       )
     }
 
-    case '/button': {
-      return (
-        <sinch-button type="primary" text="Button" onClick={() => {}}/>
-      )
-    }
-
     case '/checkbox': {
       return (
-        <sinch-checkbox text="Checkbox" onChange={() => {}}/>
+        <Checkbox search={url.searchParams}/>
       )
     }
 

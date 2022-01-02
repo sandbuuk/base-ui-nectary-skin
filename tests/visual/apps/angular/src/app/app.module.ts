@@ -5,6 +5,7 @@ import { SelectComponent } from '../components/Select/Select.component'
 import { RadioComponent } from '../components/Radio/Radio.component'
 import { InputComponent } from '../components/Input/Input.component'
 import { AlertComponent } from '../components/Alert/Alert.component'
+import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -14,6 +15,7 @@ import { AppComponent } from './app.component'
     SelectComponent,
     RadioComponent,
     InputComponent,
+    CheckboxComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
