@@ -7,7 +7,7 @@ const withNarrowWidth = makeScreenshotTests('/button?width=110&type=primary&icon
 const withDisabled = makeScreenshotTests('/button?type=primary&text=Button&disabled=true&icon=true', 'sinch-button')
 const withSmall = makeScreenshotTests('/button?type=primary&text=Button&small=true&icon=true', 'sinch-button')
 
-test.only('type attribute', withFitWidth(async function* ({ $eval }) {
+test('type attribute', withFitWidth(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('type', 'primary'))
   yield { name: 'primary' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
@@ -18,7 +18,7 @@ test.only('type attribute', withFitWidth(async function* ({ $eval }) {
   yield { name: 'destructive' }
 }))
 
-test.only('type property', withFitWidth(async function* ({ $eval }) {
+test('type property', withFitWidth(async function* ({ $eval }) {
   await $eval((el) => {
     el.type = 'primary'
   })
@@ -40,7 +40,7 @@ test.only('type property', withFitWidth(async function* ({ $eval }) {
   yield { name: 'destructive' }
 }))
 
-test.only('small type', withSmall(async function* ({ $eval }) {
+test('small type', withSmall(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('type', 'primary'))
   yield { name: 'primary' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
@@ -51,7 +51,7 @@ test.only('small type', withSmall(async function* ({ $eval }) {
   yield { name: 'destructive' }
 }))
 
-test.only('disabled type', withDisabled(async function* ({ $eval }) {
+test('disabled type', withDisabled(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('type', 'primary'))
   yield { name: 'primary' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
@@ -62,7 +62,7 @@ test.only('disabled type', withDisabled(async function* ({ $eval }) {
   yield { name: 'destructive' }
 }))
 
-test.only('focus', withFitWidth(async function* ({ $, $eval }) {
+test('focus', withFitWidth(async function* ({ $, $eval }) {
   await $.focus()
   await $eval((el) => el.setAttribute('type', 'secondary'))
   yield { name: 'secondary' }
@@ -74,7 +74,7 @@ test.only('focus', withFitWidth(async function* ({ $, $eval }) {
   yield { name: 'primary' }
 }))
 
-test.only('text attribute', withFitWidth(async function* ({ $eval }) {
+test('text attribute', withFitWidth(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('text', 'Updated Button'))
   yield { name: 'updated' }
 
@@ -82,7 +82,7 @@ test.only('text attribute', withFitWidth(async function* ({ $eval }) {
   yield { name: 'empty' }
 }))
 
-test.only('text property', withFitWidth(async function* ({ $eval }) {
+test('text property', withFitWidth(async function* ({ $eval }) {
   await $eval((el) => {
     el.text = 'Updated Button'
   })
@@ -94,7 +94,7 @@ test.only('text property', withFitWidth(async function* ({ $eval }) {
   yield { name: 'empty' }
 }))
 
-test.only('disabled property', withFitWidth(async function* ({ $, $eval }) {
+test('disabled property', withFitWidth(async function* ({ $, $eval }) {
   await $eval((el) => {
     el.disabled = true
   })
@@ -108,7 +108,7 @@ test.only('disabled property', withFitWidth(async function* ({ $, $eval }) {
   await expect($.locator('button').isDisabled()).resolves.toBe(false)
 }))
 
-test.only('disabled attribute', withFitWidth(async function* ({ $, $eval }) {
+test('disabled attribute', withFitWidth(async function* ({ $, $eval }) {
   await $eval((el) => el.setAttribute('disabled', ''))
   yield { name: 'disabled' }
   await expect($.locator('button').isDisabled()).resolves.toBe(true)
@@ -118,7 +118,7 @@ test.only('disabled attribute', withFitWidth(async function* ({ $, $eval }) {
   await expect($.locator('button').isDisabled()).resolves.toBe(false)
 }))
 
-test.only('small property', withFitWidth(async function* ({ $eval }) {
+test('small property', withFitWidth(async function* ({ $eval }) {
   await $eval((el) => {
     el.small = true
   })
@@ -130,7 +130,7 @@ test.only('small property', withFitWidth(async function* ({ $eval }) {
   yield { name: 'off' }
 }))
 
-test.only('small attribute', withFitWidth(async function* ({ $eval }) {
+test('small attribute', withFitWidth(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('small', ''))
   yield { name: 'on' }
 
@@ -138,19 +138,19 @@ test.only('small attribute', withFitWidth(async function* ({ $eval }) {
   yield { name: 'off' }
 }))
 
-test.only('narrow', withNarrowWidth(async function* ({ $eval }) {
+test('narrow', withNarrowWidth(async function* ({ $eval }) {
   yield { name: 'normal' }
   await $eval((el) => el.setAttribute('small', ''))
   yield { name: 'small' }
 }))
 
-test.only('wide', withWideWidth(async function* ({ $eval }) {
+test('wide', withWideWidth(async function* ({ $eval }) {
   yield { name: 'normal' }
   await $eval((el) => el.setAttribute('small', ''))
   yield { name: 'small' }
 }))
 
-test.only('mouse interaction', withFitWidth(async function* ({ $, $eval, page }) {
+test('mouse interaction', withFitWidth(async function* ({ $, $eval, page }) {
   const rect = (await $.boundingBox())!
 
   await page.mouse.move(rect.x + 5, rect.y + 15)
