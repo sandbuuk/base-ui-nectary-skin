@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { expandRect, makeScreenshotTests } from '../utils'
+import { makeScreenshotTests } from '../utils'
 
 const shot = makeScreenshotTests('/checkbox?width=100&text=Label', 'sinch-checkbox')
 const contentWidth = makeScreenshotTests('/checkbox?text=Label', 'sinch-checkbox')
@@ -29,20 +29,17 @@ test('checked property', shot(async function* ({ $eval }) {
 }))
 
 test('focus', shot(async function* ({ $, $eval }) {
-  const rect = (await $.boundingBox())!
-  const expanded = expandRect(rect, { left: 7 })
-
   await $.focus()
 
   await $eval((el) => {
     el.checked = true
   })
-  yield { name: 'checked', includeRects: [expanded] }
+  yield { name: 'checked' }
 
   await $eval((el) => {
     el.checked = false
   })
-  yield { name: 'unchecked', includeRects: [expanded] }
+  yield { name: 'unchecked' }
 }))
 
 test('indeterminate attribute', checked(async function* ({ $eval }) {
@@ -123,30 +120,17 @@ test('narrow', narrowLabel(async function* () {
 
 test('mouse interaction', shot(async function* ({ $, page }) {
   const rect = (await $.boundingBox())!
-  const expandedRect = expandRect(rect, { left: 7 })
 
   await page.mouse.move(rect.x + 5, rect.y + 15)
-  yield {
-    name: 'hover',
-    includeRects: [expandedRect],
-  }
+  yield { name: 'hover' }
 
   await page.mouse.down()
-  yield {
-    name: 'active',
-    includeRects: [expandedRect],
-  }
+  yield { name: 'active' }
 
   await page.mouse.up()
-  yield {
-    name: 'hover_checked',
-    includeRects: [expandedRect],
-  }
+  yield { name: 'hover_checked' }
 
   await page.mouse.down()
-  yield {
-    name: 'active_checked',
-    includeRects: [expandedRect],
-  }
+  yield { name: 'active_checked' }
 }))
 
