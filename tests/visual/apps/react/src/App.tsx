@@ -5,6 +5,7 @@ import { Checkbox } from './components/Checkbox'
 import { Input } from './components/Input'
 import { Radio } from './components/Radio'
 import { Select } from './components/Select'
+import { Textarea } from './components/Textarea'
 import type { FC } from 'react'
 
 const mapElement = (url: URL) => {
@@ -42,6 +43,12 @@ const mapElement = (url: URL) => {
     case '/select': {
       return (
         <Select search={url.searchParams}/>
+      )
+    }
+
+    case '/textarea': {
+      return (
+        <Textarea search={url.searchParams}/>
       )
     }
   }

@@ -6,6 +6,7 @@
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
     <Select v-if="url.pathname === '/select'" :search="url.searchParams"/>
+    <Textarea v-if="url.pathname === '/textarea'" :search="url.searchParams"/>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import Checkbox from './components/Checkbox.vue'
 import Input from './components/Input.vue'
 import Radio from './components/Radio.vue'
 import Select from './components/Select.vue'
+import Textarea from './components/Textarea.vue'
 
 export default {
   data() {
@@ -46,6 +48,7 @@ export default {
     Input,
     Radio,
     Select,
+    Textarea,
   }
 };
 </script>
