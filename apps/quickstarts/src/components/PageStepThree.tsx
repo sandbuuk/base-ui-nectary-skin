@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
+import { usePageThreeControl } from './PageStepThreeContext'
 import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
 import chatlayerlogo from './images/chatlayerlogo.jpg'
@@ -14,17 +15,27 @@ type Props = {
 export const PageStepThree: FC = () => {
   const { next } = usePageControl()
   const { handleNext } = useStepperControl()
+  const { botquestion, setBotquestion, greetingmsg, setGreetingmsg, humanhandover, setHumanhandover } = usePageThreeControl()
   //handleNext(0);
+
   const [flowCounter, setCounter] = useState(2)
   const WhatsappDetails: FC<Props> = (props): JSX.Element => {
     const k = props.name
 
+    console.log(botquestion)
+
     return (
       <div className={styles.botmessagesInput}>
         <sinch-input
-          value=""
+          key={k}
+          value={botquestion[k - 1]}
           style={{ width: '100%' }}
-          onChange={() => {}}
+          onChange={(value) => {
+            const ob = botquestion
+
+            ob[k - 1] = value
+            setBotquestion(botquestion)
+          }}
           label={`Question ${k}`}
           placeholder="What is your name?"
         />
@@ -76,8 +87,10 @@ export const PageStepThree: FC = () => {
                 <div className={styles.botGreet}>
                   <sinch-input
                     style={{ width: '100%' }}
-                    value=""
-                    onChange={() => {}}
+                    value={greetingmsg}
+                    onChange={(value) => {
+                      setGreetingmsg(value)
+                    }}
                     label="Greeting"
                     placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
                   />
@@ -93,7 +106,7 @@ export const PageStepThree: FC = () => {
                     <p className={styles.infoBody}>You will have all the answers once...</p>
                   </div>
                 </div>
-                { [...Array(flowCounter)].map((_, i) => <WhatsappDetails name={i + 1} key={i}/>) }
+                { [...Array(flowCounter)].map((_, i) => <WhatsappDetails name={i + 1} key={i}/>)}
                 <div className={styles.questionBtn}>
                   <sinch-button
                     style={{ width: '100%' }}
@@ -105,8 +118,10 @@ export const PageStepThree: FC = () => {
                 <div className={styles.humanHandover}>
                   <sinch-input
                     style={{ width: '100%' }}
-                    value=""
-                    onChange={() => {}}
+                    value={humanhandover}
+                    onChange={(value) => {
+                      setHumanhandover(value)
+                    }}
                     label="Human Handover"
                     placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
                   />

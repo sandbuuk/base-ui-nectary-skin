@@ -1,14 +1,20 @@
 import { Outlet } from 'react-router-dom'
 import { PageContext } from './PageContext'
+import { PageStepOneContext } from './PageStepOneContext'
+import { PageStepThreeContext } from './PageStepThreeContext'
 import { StepperContext } from './StepperContext'
 import type { FC } from 'react'
 
 export const PageLayout: FC = () => {
   return (
     <PageContext>
-      <StepperContext>
-        <Outlet/>
-      </StepperContext>
+      <PageStepThreeContext>
+        <PageStepOneContext>
+          <StepperContext>
+            <Outlet/>
+          </StepperContext>
+        </PageStepOneContext>
+      </PageStepThreeContext>
     </PageContext>
   )
 }

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
+import { usePageOneControl } from './PageStepOneContext'
 import facebook from './images/facebookbg.jpg'
 import google from './images/googlebg.jpg'
 import signupimage from './images/signup.jpg'
@@ -21,6 +22,7 @@ export const PageStepOne: FC = () => {
   const [firstnameInvalidtext, setfirstnameInvalidtext] = useState('')
   const [lastnameInvalidtext, setlastnameInvalidtext] = useState('')
   const [roleInvalidtext, setroleInvalidtext] = useState('')
+  const { accountId, setAccountId } = usePageOneControl()
 
   async function getUsers() {
     try {
@@ -113,6 +115,10 @@ export const PageStepOne: FC = () => {
 
             if (k.data.firstName === firstName) {
               console.log('Creation of user sucessful')
+              console.log(typeof (k.data.ID))
+              console.log(k.data.ID)
+              setAccountId(String(k.data.ID))
+              console.log(accountId)
               next()
             }
           }
