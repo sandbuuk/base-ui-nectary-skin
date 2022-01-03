@@ -1,7 +1,11 @@
 <style>
   :host {
     display: inline-block;
-    max-width: 300px;
+  }
+
+  #wrapper {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   #input {
@@ -11,10 +15,10 @@
     border-radius: 2px;
     width: 100%;
     min-height: 86px;
+    margin: 2px 0;
     padding: 8px 12px;
     font: var(--sinch-font-body);
     color: var(--sinch-color-text-default);
-    margin: 2px 0;
     resize: vertical;
   }
 
@@ -36,7 +40,7 @@
     border-color: var(--sinch-color-stormy-300);
   }
 
-  :host([invalidtext]) #input:not(:disabled) {
+  :host([invalidtext]:not([invalidtext=""])) #input:not(:disabled) {
     border-color: var(--sinch-color-text-invalid);
   }
 
@@ -47,11 +51,11 @@
   }
 
   #top {
-    line-height: 24px;
+    height: 24px;
   }
 
   #bottom {
-    line-height: 20px;
+    height: 20px;
   }
 
   #label,
@@ -76,7 +80,8 @@
   }
 
   #additional {
-    margin-left: auto;
+    flex: 1;
+    text-align: right;
     font: var(--sinch-font-extra-small-text);
     color: var(--sinch-color-text-muted);
   }
@@ -86,30 +91,29 @@
     color: var(--sinch-color-text-invalid);
   }
 
-  :host([disabled]) #label,
-  :host([disabled]) #additional,
-  :host([disabled]) #optional,
-  :host([disabled]) #invalid {
-    color: var(--sinch-color-stormy-100);
-  }
-
   ::slotted(sinch-input-tooltip) {
     align-self: center;
     margin: 0 8px;
   }
 
-  :host([disabled]) ::slotted(sinch-input-tooltip) {
+  :host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
+    color: var(--sinch-color-stormy-100);
+  }
+
+  :host([disabled]:not([disabled="false"])) ::slotted(sinch-input-tooltip) {
     fill: var(--sinch-color-stormy-100);
   }
 </style>
 
-<div id="top">
-  <label id="label" for="input"></label>
-  <slot></slot>
-  <span id="optional"></span>
-</div>
-<textarea id="input" rows="3"></textarea>
-<div id="bottom">
-  <span id="invalid"></span>
-  <span id="additional"></span>
+<div id="wrapper">
+  <div id="top">
+    <label id="label" for="input"></label>
+    <slot></slot>
+    <span id="optional"></span>
+  </div>
+  <textarea id="input" rows="3"></textarea>
+  <div id="bottom">
+    <span id="invalid"></span>
+    <span id="additional"></span>
+  </div>
 </div>
