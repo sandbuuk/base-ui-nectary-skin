@@ -8,6 +8,7 @@ import { AlertComponent } from '../components/Alert/Alert.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
 import { ButtonComponent } from '../components/Button/Button.component'
 import { TextareaComponent } from '../components/Textarea/Textarea.component'
+import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component'
     CheckboxComponent,
     ButtonComponent,
     TextareaComponent,
+    TooltipComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

@@ -6,6 +6,7 @@ import { Input } from './components/Input'
 import { Radio } from './components/Radio'
 import { Select } from './components/Select'
 import { Textarea } from './components/Textarea'
+import { Tooltip } from './components/Tooltip'
 import type { FC } from 'react'
 
 const mapElement = (url: URL) => {
@@ -49,6 +50,12 @@ const mapElement = (url: URL) => {
     case '/textarea': {
       return (
         <Textarea search={url.searchParams}/>
+      )
+    }
+
+    case '/tooltip': {
+      return (
+        <Tooltip search={url.searchParams}/>
       )
     }
   }
