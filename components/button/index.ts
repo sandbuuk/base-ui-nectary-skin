@@ -1,4 +1,5 @@
 import { isSinchIcon } from '../icon/create-icon-class'
+import { isSinchSpinner } from '../spinner'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -21,6 +22,10 @@ const updateIconSize = ($slot: HTMLSlotElement, isSmall: boolean) => {
   for (const $el of $slot.assignedElements()) {
     if (isSinchIcon($el)) {
       $el.size = isSmall ? ICON_SIZE_SMALL : ICON_SIZE
+    }
+
+    if (isSinchSpinner($el)) {
+      $el.type = isSmall ? 'small' : 'medium'
     }
   }
 }

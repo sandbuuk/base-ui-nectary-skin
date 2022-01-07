@@ -5,6 +5,7 @@
     v-bind:disabled="isDisabled"
     v-bind:small="isSmall">
     <sinch-icon-share v-if="hasIcon"></sinch-icon-share>
+    <sinch-spinner v-if="hasSpinner" static></sinch-spinner>
   </sinch-button>
 </template>
 
@@ -28,6 +29,9 @@ export default {
     },
     hasIcon() {
       return this.search.get('icon') !== null
+    },
+    hasSpinner() {
+      return this.search.get('spinner') !== null
     },
   }
 }

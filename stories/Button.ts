@@ -3,6 +3,7 @@ import type { Story, Meta } from '@storybook/html'
 import '@nectary/components/theme.css'
 import '@nectary/components/button'
 import '@nectary/components/icon/share'
+import '@nectary/components/spinner'
 
 export default {
   title: 'Components/Button',
@@ -17,14 +18,14 @@ export default {
   },
 } as Meta
 
-const Template: Story<JSX.IntrinsicElements['sinch-button']> = ({ onClick, onFocus, onBlur }) => {
+const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-button']> => ({ onClick, onFocus, onBlur }) => {
   const [{ type, text, disabled, small }] = useArgs()
   const buttonRef = useRef<HTMLElementTagNameMap['sinch-button'] | null>(null)
 
   if (buttonRef.current === null) {
     const $button = document.createElement('sinch-button')
 
-    $button.innerHTML = `<sinch-icon-share></sinch-icon-share>`
+    $button.innerHTML = innerHTML
 
     $button.addEventListener('click', () => {
       onClick()
@@ -49,7 +50,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-button']> = ({ onClick, onFoc
   return $button
 }
 
-export const Button = Template.bind({})
+export const Button = Template()
 
 Button.args = {
   type: 'primary',
@@ -61,7 +62,7 @@ Button.args = {
 Button.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-share></sinch-icon-share>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}></sinch-button>',
     },
   },
   backgrounds: {
@@ -70,5 +71,35 @@ Button.parameters = {
       { name: 'Light', value: '#fff' },
       { name: 'Dark', value: '#1c233f' },
     ],
+  },
+}
+
+export const ButtonWithIcon = Template('<sinch-icon-share></sinch-icon-share>')
+
+ButtonWithIcon.args = {
+  type: 'primary',
+  text: 'Click me',
+}
+
+ButtonWithIcon.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-share></sinch-icon-share>\n</sinch-button>',
+    },
+  },
+}
+
+export const ButtonWithSpinner = Template('<sinch-spinner></sinch-spinner>')
+
+ButtonWithSpinner.args = {
+  type: 'primary',
+  text: 'Click me',
+}
+
+ButtonWithSpinner.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner></sinch-spinner>\n</sinch-button>',
+    },
   },
 }

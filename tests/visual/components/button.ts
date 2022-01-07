@@ -6,6 +6,9 @@ const withFitWidth = makeScreenshotTests('/button?type=primary&text=Button&icon=
 const withNarrowWidth = makeScreenshotTests('/button?width=110&type=primary&icon=true&text=Button%text%20long%20long%20long', 'sinch-button')
 const withDisabled = makeScreenshotTests('/button?type=primary&text=Button&disabled=true&icon=true', 'sinch-button')
 const withSmall = makeScreenshotTests('/button?type=primary&text=Button&small=true&icon=true', 'sinch-button')
+const withSpinner = makeScreenshotTests('/button?type=primary&text=Button&spinner=true', 'sinch-button')
+const withSpinnerDisabled = makeScreenshotTests('/button?type=primary&text=Button&spinner=true&disabled=true', 'sinch-button')
+const withSpinnerSmall = makeScreenshotTests('/button?type=primary&text=Button&spinner=true&small=true', 'sinch-button')
 
 test('type attribute', withFitWidth(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('type', 'primary'))
@@ -174,3 +177,41 @@ test('mouse interaction', withFitWidth(async function* ({ $, $eval, page }) {
   yield { name: 'destructive-active' }
 }))
 
+test('spinner', withSpinner(async function* ({ $, $eval, page }) {
+  const rect = (await $.boundingBox())!
+
+  await page.mouse.move(rect.x + 5, rect.y + 15)
+  await $eval((el) => el.setAttribute('type', 'primary'))
+  yield { name: 'primary-hover' }
+  await $eval((el) => el.setAttribute('type', 'secondary'))
+  yield { name: 'secondary-hover' }
+  await $eval((el) => el.setAttribute('type', 'cta'))
+  yield { name: 'cta-hover' }
+  await $eval((el) => el.setAttribute('type', 'destructive'))
+  yield { name: 'destructive-hover' }
+
+  await page.mouse.down()
+  await $eval((el) => el.setAttribute('type', 'primary'))
+  yield { name: 'primary-active' }
+  await $eval((el) => el.setAttribute('type', 'secondary'))
+  yield { name: 'secondary-active' }
+  await $eval((el) => el.setAttribute('type', 'cta'))
+  yield { name: 'cta-active' }
+  await $eval((el) => el.setAttribute('type', 'destructive'))
+  yield { name: 'destructive-active' }
+}))
+
+test('spinner disabled', withSpinnerDisabled(async function* ({ $eval }) {
+  await $eval((el) => el.setAttribute('type', 'primary'))
+  yield { name: 'primary' }
+  await $eval((el) => el.setAttribute('type', 'secondary'))
+  yield { name: 'secondary' }
+  await $eval((el) => el.setAttribute('type', 'cta'))
+  yield { name: 'cta' }
+  await $eval((el) => el.setAttribute('type', 'destructive'))
+  yield { name: 'destructive' }
+}))
+
+test('spinner small', withSpinnerSmall(async function* () {
+  yield { name: 'shot' }
+}))
