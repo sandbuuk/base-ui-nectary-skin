@@ -1,4 +1,5 @@
 import { getIntegerAttribute, updateAttribute, updateIntegerAttribute } from '../utils'
+import iconStylesHtml from './icon-styles.html'
 import type { TSinchElementReact } from '../types'
 
 const DEFAULT_SIZE = 16
@@ -14,7 +15,7 @@ export const isSinchIcon = (element: Element): element is TSinchIconElement => {
 export const createIconClass = (templateHTML: string) => {
   const template = document.createElement('template')
 
-  template.innerHTML = templateHTML
+  template.innerHTML = iconStylesHtml + templateHTML
 
   return class extends HTMLElement {
     $svg: SVGElement

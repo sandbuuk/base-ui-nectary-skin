@@ -7,6 +7,7 @@ import { Radio } from './components/Radio'
 import { Select } from './components/Select'
 import { Textarea } from './components/Textarea'
 import { Tooltip } from './components/Tooltip'
+import { Spinner } from './components/Spinner'
 import type { FC } from 'react'
 
 const mapElement = (url: URL) => {
@@ -56,6 +57,12 @@ const mapElement = (url: URL) => {
     case '/tooltip': {
       return (
         <Tooltip search={url.searchParams}/>
+      )
+    }
+
+    case '/spinner': {
+      return (
+        <Spinner search={url.searchParams}/>
       )
     }
   }

@@ -13,6 +13,7 @@ export class ButtonComponent {
   isDisabled: boolean
   isSmall: boolean
   hasIcon: boolean
+  hasSpinner: boolean
 
   constructor() {
     const url = new URL(location.href)
@@ -21,5 +22,6 @@ export class ButtonComponent {
     this.isDisabled = url.searchParams.get('disabled') !== null
     this.isSmall = url.searchParams.get('small') !== null
     this.hasIcon = url.searchParams.get('icon') !== null
+    this.hasSpinner = url.searchParams.get('spinner') !== null
   }
 }
