@@ -33,7 +33,7 @@ export const PageStepTwo: FC = () => {
             <div className={styles.createAccdiv}>
               <sinch-button
                 className={styles.createAcc}
-                style={{ height: '30px', width: '200px' }}
+                style={{ width: '75%' }}
                 type="cta"
                 onClick={next}
                 text="Login"
@@ -42,6 +42,7 @@ export const PageStepTwo: FC = () => {
           </form>
           <div className={styles.signinFG}>
             <sinch-button
+              style={{ width: '75%' }}
               type="secondary"
               onClick={() => {}}
               text="Login with Google"
@@ -50,6 +51,7 @@ export const PageStepTwo: FC = () => {
             </sinch-button>
             <div className={styles.facebookSignup}>
               <sinch-button
+                style={{ width: '75%' }}
                 type="secondary"
                 onClick={() => {}}
                 text="Login with Facebook"

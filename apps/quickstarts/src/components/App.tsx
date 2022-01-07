@@ -12,7 +12,7 @@ import { PageNotFound } from './PageNotFound'
 import { PageStepFour } from './PageStepFour'
 import { PageStepOne } from './PageStepOne'
 import { PageStepThree } from './PageStepThree'
-import { PageStepTwo } from './PageStepTwo'
+// import { PageStepTwo } from './PageStepTwo'
 import type { FC } from 'react'
 
 type TApp = {
@@ -45,9 +45,9 @@ export const App: FC<TApp> = ({ baseUrl }) => {
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Navigate to="step-1"/>}/>
             <Route path="step-1" element={<PageStepOne/>}/>
-            <Route path="step-2" element={<PageStepTwo/>}/>
-            <Route path="step-3" element={<PageStepThree/>}/>
-            <Route path="step-4" element={<PageStepFour/>}/>
+            {/* <Route path="step-2" element={<PageStepTwo/>}/> */}
+            <Route path="step-2" element={<PageStepThree/>}/>
+            <Route path="step-3" element={<PageStepFour/>}/>
             <Route path="*" element={<PageNotFound/>}/>
           </Route>
         </Routes>

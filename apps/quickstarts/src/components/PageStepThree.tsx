@@ -1,15 +1,55 @@
+import { useState } from 'react'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
+import { usePageThreeControl } from './PageStepThreeContext'
 import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
 import chatlayerlogo from './images/chatlayerlogo.jpg'
 import info from './images/info.png'
 import type { FC } from 'react'
 
+type Props = {
+  name: number,
+}
+
 export const PageStepThree: FC = () => {
   const { next } = usePageControl()
   const { handleNext } = useStepperControl()
+  const { botquestion, setBotquestion, greetingmsg, setGreetingmsg, humanhandover, setHumanhandover } = usePageThreeControl()
   //handleNext(0);
+
+  const [flowCounter, setCounter] = useState(2)
+  const WhatsappDetails: FC<Props> = (props): JSX.Element => {
+    const k = props.name
+
+    console.log(botquestion)
+
+    return (
+      <div className={styles.botmessagesInput}>
+        <sinch-input
+          key={k}
+          value={botquestion[k - 1]}
+          style={{ width: '100%' }}
+          onChange={(value) => {
+            const ob = botquestion
+
+            ob[k - 1] = value
+            setBotquestion(botquestion)
+          }}
+          label={`Question ${k}`}
+          placeholder="What is your name?"
+        />
+      </div>
+    )
+  }
+
+  const buttonCounter = () => {
+    console.log(flowCounter)
+
+    if (flowCounter < 5) {
+      setCounter((prevCounter) => prevCounter + 1)
+    }
+  }
 
   const nextPage = () => {
     next()
@@ -46,8 +86,11 @@ export const PageStepThree: FC = () => {
               <div className={styles.botquestions}>
                 <div className={styles.botGreet}>
                   <sinch-input
-                    value=""
-                    onChange={() => {}}
+                    style={{ width: '100%' }}
+                    value={greetingmsg}
+                    onChange={(value) => {
+                      setGreetingmsg(value)
+                    }}
                     label="Greeting"
                     placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
                   />
@@ -63,107 +106,22 @@ export const PageStepThree: FC = () => {
                     <p className={styles.infoBody}>You will have all the answers once...</p>
                   </div>
                 </div>
-                <div className={styles.botmessagesInput}>
-                  <div className={styles.botInput}>
-                    <sinch-input
-                      value=""
-                      onChange={() => {}}
-                      label="Question 1"
-                      placeholder="What is your name?"
-                    />
-                  </div>
-                  <div className={styles.botInput}>
-                    <sinch-select
-                      value=""
-                      onChange={() => {}}
-                      label="Type"
-                      placeholder="Name"
-                    >
-                      <sinch-select-option
-                        value="1"
-                        text="Software Engineer"
-                        slot="select"
-                      />
-                      <sinch-select-option
-                        value="2"
-                        text="Data Analyst"
-                        slot="select"
-                      />
-                      <sinch-select-option
-                        value="3"
-                        text="Product Manager"
-                        slot="select"
-                      />
-                      <sinch-select-option
-                        value="4"
-                        text="Software Architect"
-                        slot="select"
-                      />
-                    </sinch-select>
-                  </div>
-                  <div className={styles.botInput}>
-                    <sinch-input
-                      value=""
-                      onChange={() => {}}
-                      label="Save as"
-                      placeholder="name"
-                    />
-                  </div>
-                </div>
-                <div className={styles.botmessagesInput}>
-                  <div className={styles.botInput}>
-                    <sinch-input
-                      value=""
-                      onChange={() => {}}
-                      label="Question 2"
-                      placeholder="How much do you wanna spent?"
-                    />
-                  </div>
-                  <div className={styles.botInput}>
-                    <sinch-select
-                      value=""
-                      onChange={() => {}}
-                      label="Type"
-                      placeholder="Custom"
-                    >
-                      <sinch-select-option
-                        value="1"
-                        text="Software Engineer"
-                        slot="select"
-                      />
-                      <sinch-select-option
-                        value="2"
-                        text="Data Analyst"
-                        slot="select"
-                      />
-                      <sinch-select-option
-                        value="3"
-                        text="Product Manager"
-                        slot="select"
-                      />
-                      <sinch-select-option
-                        value="4"
-                        text="Software Architect"
-                        slot="select"
-                      />
-                    </sinch-select>
-                  </div>
-                  <div className={styles.botInput}>
-                    <sinch-input
-                      value=""
-                      onChange={() => {}}
-                      label="Save as"
-                      placeholder="price_range"
-                    />
-                  </div>
-                </div>
+                { [...Array(flowCounter)].map((_, i) => <WhatsappDetails name={i + 1} key={i}/>)}
                 <div className={styles.questionBtn}>
-                  <sinch-button type="primary" text="Add new question" onClick={() => {}}/>
+                  <sinch-button
+                    style={{ width: '100%' }}
+                    type="primary"
+                    onClick={buttonCounter}
+                    text="Add new question"
+                  />
                 </div>
-                <div>
+                <div className={styles.humanHandover}>
                   <sinch-input
-                    value=""
-                    onChange={() => {}}
+                    style={{ width: '100%' }}
+                    value={humanhandover}
+                    onChange={(value) => {
+                      setHumanhandover(value)
+                    }}
                     label="Human Handover"
                     placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
                   />

@@ -7,7 +7,29 @@ h2 {
   font: var(--sinch-font-title-1);
   margin-bottom: 0%;
 }
-
+.congratsTitle{
+   font: var(--sinch-font-title-2);
+}
+.Congrats{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.congratsText{
+  display: flex;
+  justify-content: center;
+  width:800px;
+  margin-top: 0%;
+}
+.congratsimage{
+  width:120%;
+height: 120%;
+margin-bottom: 10%;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -261,10 +283,20 @@ h2 {
 .botmessagesInput {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin-left: 2%;
+}
+
+.humanHandover{
+  margin-left: 2%;
+  margin-top: 3%;
 }
 
 .Input {
   margin: 2%;
+}
+.agentName{
+  width: 100px;
 }
 .botInput {
   margin: 1%;
@@ -305,9 +337,10 @@ h2 {
   border-radius: 5%;
   border-width: 3px;
   border-color: black;
-  height: 90%;
-  width: 55%;
+  height: 520px;
+  width: 275px;
   margin-top: 8%;
+  margin-bottom: 5%;
   margin-right: 10%;
 }
 
@@ -316,8 +349,8 @@ h2 {
   border-radius: 8%;
   border-width: 3px;
   border-color: black;
-  height: 75%;
-  width: 57%;
+  height: 520px;
+  width: 275px;
   margin-top: 8%;
 }
 
@@ -392,6 +425,7 @@ h2 {
 .questionBtn{
   display: flex;
   justify-content: center;
+  margin-left: 2%;
 }
 
 .infoImg{
@@ -435,4 +469,9 @@ h2 {
 .css-qivjh0-MuiStepLabel-label{
    font-weight: '600';
    font-family: 'Gilroy' 
+}
+
+.validationError{
+  font: var(--sinch-font-extra-small-text);
+  color: var(--sinch-color-error-500);
 }

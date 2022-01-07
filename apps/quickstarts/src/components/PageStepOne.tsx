@@ -1,5 +1,8 @@
+//import axios from 'axios'
+import { useState } from 'react'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
+import { usePageOneControl } from './PageStepOneContext'
 import facebook from './images/facebookbg.jpg'
 import google from './images/googlebg.jpg'
 import signupimage from './images/signup.jpg'
@@ -11,6 +14,133 @@ import '@nectary/components/select'
 export const PageStepOne: FC = () => {
   const { next } = usePageControl()
 
+  const [email, setEmail] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [role, setRole] = useState('')
+  const [emailInvalidtext, setEmailInvalidtext] = useState('')
+  const [firstnameInvalidtext, setfirstnameInvalidtext] = useState('')
+  const [lastnameInvalidtext, setlastnameInvalidtext] = useState('')
+  const [roleInvalidtext, setroleInvalidtext] = useState('')
+  const { accountId, setAccountId } = usePageOneControl()
+
+  async function getUsers() {
+    try {
+      const body = new FormData()
+      let flag = true
+
+      setEmailInvalidtext('')
+      setfirstnameInvalidtext('')
+      setlastnameInvalidtext('')
+      setroleInvalidtext('')
+
+      body.append('email', email)
+      body.append('firstName', firstName)
+      body.append('lastName', lastName)
+      body.append('role', role)
+
+      const validateNames = (name: string) => {
+        return /\d/.test(name)
+      }
+
+      const validateEmail = (email: String) => {
+        return String(email)
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          )
+      }
+
+      if (!(email.length > 0)) {
+        setEmailInvalidtext('Email should not be empty')
+
+        if (flag) {
+          flag = false
+        }
+      }
+
+      if (!(firstName.length > 0)) {
+        setfirstnameInvalidtext('First name should not be empty')
+
+        if (flag) {
+          flag = false
+        }
+      }
+
+      if (!(lastName.length > 0)) {
+        setlastnameInvalidtext('Last name should not be empty')
+
+        if (flag) {
+          flag = false
+        }
+      }
+
+      if (!(role.length > 0)) {
+        setroleInvalidtext('Role should not be empty')
+
+        if (flag) {
+          flag = false
+        }
+      }
+
+      if (firstName.length > 0) {
+        if (validateNames(firstName)) {
+          setfirstnameInvalidtext('Last name should not contain numbers')
+
+          if (flag) {
+            flag = false
+          }
+        }
+      }
+
+      if (lastName.length > 0) {
+        if (validateNames(lastName)) {
+          setlastnameInvalidtext('Last name should not contain numbers')
+
+          if (flag) {
+            flag = false
+          }
+        }
+      }
+
+      if (email.length > 0) {
+        if (validateEmail(email) != null) {
+          if (flag) {
+            console.log('Valid Mail')
+
+            const res = await fetch('https://quickstart.default.labengage.sinch.com/account', {
+              method: 'POST',
+              body: JSON.stringify({ email, firstName, lastName, role }),
+            })
+            const k = await res.json()
+
+            if (k.data.firstName === firstName) {
+              console.log('Creation of user sucessful')
+              console.log(typeof (k.data.ID))
+              console.log(k.data.ID)
+              setAccountId(String(k.data.ID))
+              console.log(accountId)
+              next()
+            }
+          }
+        } else {
+          setEmailInvalidtext('Email entered is not valid')
+
+          if (flag) {
+            flag = false
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // async function getPostsData() {
+  //   const response = await axios.get('/account')
+
+  //   console.log(response)
+  // }
+
   return (
     <div className={styles.page}>
       <div className={styles.parent}>
@@ -20,59 +150,78 @@ export const PageStepOne: FC = () => {
             <sinch-input
               className={styles.sinchInput}
               value=""
-              onChange={() => {}}
+              onChange={(value) => {
+                setEmail(value)
+              }}
+              invalidText={emailInvalidtext.length > 0 ? emailInvalidtext : undefined}
               label="E-mail"
               placeholder="john.doe@gmail.com"
             />
-            <sinch-input
+            {/* <sinch-input
               value=""
-              onChange={() => {}}
+              onChange={() => {
+              }}
               label="Password"
               placeholder="Placeholder"
               optionalText="8+ characters"
-            />
+            /> */}
             <sinch-input
-              value=""
-              onChange={() => {}}
+              value={firstName}
+              onChange={(value) => {
+                setFirstName(value)
+              }}
               label="First Name"
+              invalidText={firstnameInvalidtext.length > 0 ? firstnameInvalidtext : undefined}
               placeholder="John"
             />
             <sinch-input
-              value=""
-              onChange={() => {}}
+              value={lastName}
+              onChange={(value) => {
+                setLastName(value)
+              }}
+              invalidText={lastnameInvalidtext.length > 0 ? lastnameInvalidtext : undefined}
               label="Last Name"
               placeholder="Doe"
             />
-            <sinch-select value="" onChange={() => {}} label="Your role">
+            <sinch-select
+              value={role}
+              onChange={(value) => {
+                setRole(value)
+              }}
+              invalidText={roleInvalidtext.length > 0 ? roleInvalidtext : undefined}
+              label="Your role"
+            >
               <sinch-select-option
-                value="1"
+                value="Software Engineer"
                 text="Software Engineer"
                 slot="select"
               />
               <sinch-select-option
-                value="2"
+                value="Data Analyst"
                 text="Data Analyst"
                 slot="select"
               />
               <sinch-select-option
-                value="3"
+                value="Product Manager"
                 text="Product Manager"
                 slot="select"
               />
               <sinch-select-option
-                value="4"
+                value="Software Architect"
                 text="Software Architect"
                 slot="select"
               />
             </sinch-select>
             <sinch-button
               className={styles.createAcc}
+              style={{ width: '75%' }}
               type="cta"
-              onClick={next}
+              onClick={getUsers}
               text="Create Account"
             />
             <div className={styles.signupFG}>
               <sinch-button
+                style={{ width: '75%' }}
                 type="secondary"
                 onClick={() => {}}
                 text="Signup with Google"
@@ -81,6 +230,7 @@ export const PageStepOne: FC = () => {
               </sinch-button>
               <div className={styles.facebookSignup}>
                 <sinch-button
+                  style={{ width: '75%' }}
                   type="secondary"
                   onClick={() => {}}
                   text="Signup with Facebook"
