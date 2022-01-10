@@ -172,7 +172,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       'additionaltext',
       'invalidtext',
       'disabled',
-      'numvisibleitems',
+      'maxvisibleitems',
     ]
   }
 
@@ -232,12 +232,12 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set numVisibleItems(value: number | undefined) {
-    updateIntegerAttribute(this, 'numvisibleitems', value)
+  set maxVisibleItems(value: number | undefined) {
+    updateIntegerAttribute(this, 'maxvisibleitems', value)
   }
 
-  get numVisibleItems() {
-    return getIntegerAttribute(this, 'numvisibleitems', 0)!
+  get maxVisibleItems() {
+    return getIntegerAttribute(this, 'maxvisibleitems', 0)!
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -289,7 +289,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
         break
       }
 
-      case 'numvisibleitems': {
+      case 'maxvisibleitems': {
         const $list = (this.$listbox.firstElementChild as HTMLElement)
 
         $list.style.maxHeight = attrValueToPixels(newVal, { min: 2, multiplier: ITEM_HEIGHT })
@@ -449,7 +449,7 @@ type TSinchSelectElement = HTMLElement & {
   invalidText?: string,
   additionalText?: string,
   disabled: boolean,
-  numVisibleItems: number,
+  maxVisibleItems: number,
   focus(): void,
   blur(): void,
 }
@@ -462,7 +462,7 @@ type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
   invalidText?: string,
   additionalText?: string,
   disabled?: boolean,
-  numVisibleItems?: number,
+  maxVisibleItems?: number,
   onChange: (value: string) => void,
   onFocus?: () => void,
   onBlur?: () => void,

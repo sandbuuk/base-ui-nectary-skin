@@ -19,7 +19,7 @@ export class SelectComponent {
   placeholderText: string | null
   tooltipText: string | null
   isDisabled: boolean
-  numVisibleItems: number | null
+  maxVisibleItems: number | null
 
   constructor() {
     const url = new URL(location.href)
@@ -33,8 +33,8 @@ export class SelectComponent {
     this.tooltipText = url.searchParams.get('tooltip')
     this.isDisabled = url.searchParams.get('disabled') != null
 
-    const numVisibleValue = url.searchParams.get('numvisibleitems')
-    this.numVisibleItems = numVisibleValue !== null ? parseInt(numVisibleValue) : null
+    const numVisibleValue = url.searchParams.get('maxvisibleitems')
+    this.maxVisibleItems = numVisibleValue !== null ? parseInt(numVisibleValue) : null
   }
 
   onChange(e: Event) {
