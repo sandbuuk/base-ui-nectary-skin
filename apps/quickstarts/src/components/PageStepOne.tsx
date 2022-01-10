@@ -22,9 +22,27 @@ export const PageStepOne: FC = () => {
   const [firstnameInvalidtext, setfirstnameInvalidtext] = useState('')
   const [lastnameInvalidtext, setlastnameInvalidtext] = useState('')
   const [roleInvalidtext, setroleInvalidtext] = useState('')
+  const [disabled, setDisabled] = useState(false)
   const { accountId, setAccountId } = usePageOneControl()
 
-  async function getUsers() {
+  async function sendData() {
+    const res = await fetch('https://quickstart.default.labengage.sinch.com/account', {
+      method: 'POST',
+      body: JSON.stringify({ email, firstName, lastName, role }),
+    })
+    const k = await res.json()
+
+    if (k.data.firstName === firstName) {
+      console.log('Creation of user sucessful')
+      console.log(typeof (k.data.ID))
+      console.log(k.data.ID)
+      setAccountId(k.data.ID)
+      console.log(accountId)
+      next()
+    }
+  }
+
+  function getUsers() {
     try {
       const body = new FormData()
       let flag = true
@@ -106,21 +124,7 @@ export const PageStepOne: FC = () => {
         if (validateEmail(email) != null) {
           if (flag) {
             console.log('Valid Mail')
-
-            const res = await fetch('https://quickstart.default.labengage.sinch.com/account', {
-              method: 'POST',
-              body: JSON.stringify({ email, firstName, lastName, role }),
-            })
-            const k = await res.json()
-
-            if (k.data.firstName === firstName) {
-              console.log('Creation of user sucessful')
-              console.log(typeof (k.data.ID))
-              console.log(k.data.ID)
-              setAccountId(String(k.data.ID))
-              console.log(accountId)
-              next()
-            }
+            setDisabled(false)
           }
         } else {
           setEmailInvalidtext('Email entered is not valid')
@@ -145,7 +149,7 @@ export const PageStepOne: FC = () => {
     <div className={styles.page}>
       <div className={styles.parent}>
         <div className={styles.signUp}>
-          <h2 className={styles.fontName}> Sign up to Sinch </h2>
+          <h2 className={styles.fontNameTitle}> Sign up to Sinch </h2>
           <form className={styles.form}>
             <sinch-input
               className={styles.sinchInput}
@@ -169,6 +173,7 @@ export const PageStepOne: FC = () => {
               value={firstName}
               onChange={(value) => {
                 setFirstName(value)
+                getUsers()
               }}
               label="First Name"
               invalidText={firstnameInvalidtext.length > 0 ? firstnameInvalidtext : undefined}
@@ -178,6 +183,7 @@ export const PageStepOne: FC = () => {
               value={lastName}
               onChange={(value) => {
                 setLastName(value)
+                getUsers()
               }}
               invalidText={lastnameInvalidtext.length > 0 ? lastnameInvalidtext : undefined}
               label="Last Name"
@@ -187,6 +193,7 @@ export const PageStepOne: FC = () => {
               value={role}
               onChange={(value) => {
                 setRole(value)
+                getUsers()
               }}
               invalidText={roleInvalidtext.length > 0 ? roleInvalidtext : undefined}
               label="Your role"
@@ -216,9 +223,18 @@ export const PageStepOne: FC = () => {
               className={styles.createAcc}
               style={{ width: '75%' }}
               type="cta"
-              onClick={getUsers}
+              disabled={disabled}
+              onClick={sendData}
               text="Create Account"
             />
+            <div className={styles.loginButton}>
+              <sinch-button
+                style={{ width: '75%' }}
+                type="secondary"
+                onClick={() => {}}
+                text="Login"
+              />
+            </div>
             <div className={styles.signupFG}>
               <sinch-button
                 style={{ width: '75%' }}
@@ -244,10 +260,10 @@ export const PageStepOne: FC = () => {
       </div>
       <div className={styles.rightSide}>
         <div className={styles.nameAlogo}>
-          <h1>Welcome to Sinch! </h1>
+          <h1 className={styles.fontName}>Welcome to Sinch! </h1>
           <img src={sinchlogo} className={styles.sinchlogo}/>
         </div>
-        <div className={styles.description}>
+        <div className={styles.signupDescription}>
           <h3>
             We help you deliver outstanding conversational customer experiences
           </h3>
