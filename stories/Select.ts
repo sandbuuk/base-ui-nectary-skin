@@ -35,7 +35,7 @@ export default {
       description: 'Invalid',
       control: 'text',
     },
-    numVisibleItems: {
+    maxVisibleItems: {
       description: 'Number of visible items in the list',
       control: 'number',
     },
@@ -76,7 +76,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
     additionalText,
     optionalText,
     invalidText,
-    numVisibleItems,
+    maxVisibleItems,
     disabled,
   }, updateArgs] = useArgs()
 
@@ -125,7 +125,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
   $input.additionalText = additionalText
   $input.optionalText = optionalText
   $input.invalidText = invalidText
-  $input.numVisibleItems = numVisibleItems
+  $input.maxVisibleItems = maxVisibleItems
   $input.disabled = disabled
 
   return $wrapper
