@@ -154,7 +154,7 @@ test('label attribute', shot(async function* ({ $eval }) {
 
 test.only('fill', shot(async function* ({ $, $eval }) {
   await $eval((el) => {
-    el.focus();
+    el.focus()
   })
   // Would be nice to verify focus some how. But document.activeElement
   // won't reach into the shadow dom. For now just verify that the custom
@@ -165,6 +165,7 @@ test.only('fill', shot(async function* ({ $, $eval }) {
   yield { name: 'focus' }
 
   const text = 'Filled text'
+
   await $eval((el, t) => {
     el.value = t
   }, text)

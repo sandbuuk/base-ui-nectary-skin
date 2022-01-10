@@ -36,11 +36,11 @@ const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInf
   }
 
 type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
-  <R, Arg>(cb: (el: HTMLElementTagNameMap[T], arg: Arg) => R, arg: Arg): Promise<R>;
-  <R>(cb: (el: HTMLElementTagNameMap[T]) => R): Promise<R>;
+  <R, Arg>(cb: (el: HTMLElementTagNameMap[T], arg: Arg) => R, arg: Arg): Promise<R>,
+  <R>(cb: (el: HTMLElementTagNameMap[T]) => R): Promise<R>,
 }
 
-const makeEval = <T extends keyof HTMLElementTagNameMap, Arg = unknown, R = unknown>($: Locator): EvalFunc<T> =>
+const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator): EvalFunc<T> =>
   (cb: any, arg?: any) =>
     $.evaluate(cb, arg, { /* timeout: 1000 */ })
 
