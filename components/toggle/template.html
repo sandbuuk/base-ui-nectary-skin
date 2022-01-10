@@ -1,0 +1,146 @@
+<style>
+  /* stylelint-disable no-descending-specificity */
+  :host {
+    display: inline-block;
+    outline: none;
+  }
+
+  #wrapper {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 100%;
+    height: 32px;
+    font: var(--sinch-font-body);
+  }
+
+  :host([small]:not([small="false"])) #wrapper {
+    font: var(--sinch-font-small-text);
+  }
+
+  #checkbox {
+    all: initial;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+    pointer-events: initial;
+  }
+
+  #checkbox:disabled {
+    cursor: initial;
+  }
+
+  #knob-container {
+    position: relative;
+    box-sizing: border-box;
+    align-self: center;
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    pointer-events: none;
+    padding: 2px;
+    background-color: var(--sinch-color-stormy-100);
+    overflow: hidden;
+  }
+
+  :host([checked]:not([checked="false"])) #knob-container {
+    background-color: var(--sinch-color-tropical-500);
+  }
+
+  :host([small]:not([small="false"])) #knob-container {
+    width: 32px;
+    height: 16px;
+    border-radius: 8px;
+  }
+
+  #knob {
+    position: relative;
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--sinch-color-snow-100);
+    transform: translateX(0);
+    transition: transform 0.1s ease-in-out;
+  }
+
+  :host([checked]:not([checked="false"])) #knob {
+    transform: translateX(20px);
+  }
+
+  :host([small]:not([small="false"])) #knob {
+    width: 12px;
+    height: 12px;
+  }
+
+  :host([small]:not([small="false"])[checked]:not([checked="false"])) #knob {
+    transform: translateX(16px);
+  }
+
+  #knob::before,
+  #knob::after {
+    color: var(--sinch-color-snow-100);
+    text-transform: uppercase;
+    font-size: 8px;
+    line-height: 16px;
+    display: none;
+    position: absolute;
+    top: 0;
+    padding: 0 3px;
+  }
+
+  #knob::before {
+    content: "on";
+    right: 100%;
+  }
+
+  #knob::after {
+    content: "off";
+    left: 100%;
+  }
+
+  :host([labeled]:not([labeled="false"]):is(:not([small]), [small="false"])) #knob::before,
+  :host([labeled]:not([labeled="false"]):is(:not([small]), [small="false"])) #knob::after {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion) {
+    #knob {
+      transition: none;
+    }
+  }
+
+  #label {
+    flex: 1;
+    align-self: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 8px;
+  }
+
+  :host([disabled]:not([disabled="false"])) #label {
+    color: var(--sinch-color-stormy-200);
+  }
+
+  :host([disabled]:not([disabled="false"])) #knob-container {
+    background-color: var(--sinch-color-snow-700);
+  }
+
+  :host([checked]:not([checked="false"])[disabled]:not([disabled="false"])) #knob-container {
+    background-color: var(--sinch-color-tropical-100);
+  }
+
+</style>
+
+<div id="wrapper">
+  <div id="knob-container">
+    <div id="knob"></div>
+    <input id="checkbox" type="checkbox">
+  </div>
+  <label for="checkbox" id="label"></label>
+</div>
