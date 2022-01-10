@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { makeScreenshotTests } from '../utils'
 
-const withWideWidth = makeScreenshotTests('/button?width=150&type=primary&text=Button&icon=true', 'sinch-button')
+const withWideWidth = makeScreenshotTests('/button?width=200&type=primary&text=Button&icon=true', 'sinch-button')
 const withFitWidth = makeScreenshotTests('/button?type=primary&text=Button&icon=true', 'sinch-button')
 const withNarrowWidth = makeScreenshotTests('/button?width=110&type=primary&icon=true&text=Button%text%20long%20long%20long', 'sinch-button')
 const withDisabled = makeScreenshotTests('/button?type=primary&text=Button&disabled=true&icon=true', 'sinch-button')
@@ -147,10 +147,8 @@ test('narrow', withNarrowWidth(async function* ({ $eval }) {
   yield { name: 'small' }
 }))
 
-test('wide', withWideWidth(async function* ({ $eval }) {
-  yield { name: 'normal' }
-  await $eval((el) => el.setAttribute('small', ''))
-  yield { name: 'small' }
+test('wide', withWideWidth(async function* () {
+  yield { name: 'shot' }
 }))
 
 test('mouse interaction', withFitWidth(async function* ({ $, $eval, page }) {
