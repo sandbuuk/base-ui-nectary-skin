@@ -2,12 +2,6 @@ import { defineCustomElement, getLiteralAttribute, updateLiteralAttribute } from
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
-const spinnerSymbol = Symbol('sinch-spinner')
-
-export const isSinchSpinner = (element: Element): element is TSinchSpinnerElement => {
-  return (element as any)[spinnerSymbol] != null
-}
-
 const spinnerTypes = ['large', 'medium', 'small'] as const
 
 const template = document.createElement('template')
@@ -19,8 +13,6 @@ defineCustomElement('sinch-spinner', class extends HTMLElement {
 
   constructor() {
     super()
-
-    ;(this as any)[spinnerSymbol] = true
 
     const shadowRoot = this.attachShadow({
       mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',

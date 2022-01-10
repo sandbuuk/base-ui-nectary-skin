@@ -1,5 +1,3 @@
-import { isSinchIcon } from '../icon/create-icon-class'
-import { isSinchSpinner } from '../spinner'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -15,20 +13,6 @@ import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
 const buttonTypes = ['primary', 'secondary', 'cta', 'destructive'] as const
-const ICON_SIZE = 18
-const ICON_SIZE_SMALL = 12
-
-const updateIconSize = ($slot: HTMLSlotElement, isSmall: boolean) => {
-  for (const $el of $slot.assignedElements()) {
-    if (isSinchIcon($el)) {
-      $el.size = isSmall ? ICON_SIZE_SMALL : ICON_SIZE
-    }
-
-    if (isSinchSpinner($el)) {
-      $el.type = isSmall ? 'small' : 'medium'
-    }
-  }
-}
 
 const template = document.createElement('template')
 
@@ -58,18 +42,16 @@ defineCustomElement('sinch-button', class extends HTMLElement {
     this.$button.addEventListener('click', this.onButtonClick)
     this.$button.addEventListener('focus', this.onButtonFocus)
     this.$button.addEventListener('blur', this.onButtonBlur)
-    this.$slot.addEventListener('slotchange', this.onSlotChange)
   }
 
   disconnectedCallback() {
     this.$button.removeEventListener('click', this.onButtonClick)
     this.$button.removeEventListener('focus', this.onButtonFocus)
     this.$button.removeEventListener('blur', this.onButtonBlur)
-    this.$slot.removeEventListener('slotchange', this.onSlotChange)
   }
 
   static get observedAttributes() {
-    return ['text', 'disabled', 'small']
+    return ['text', 'disabled']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -81,11 +63,6 @@ defineCustomElement('sinch-button', class extends HTMLElement {
       }
       case 'disabled': {
         this.$button.disabled = isAttrTrue(newVal)
-
-        break
-      }
-      case 'small': {
-        updateIconSize(this.$slot, isAttrTrue(newVal))
 
         break
       }
@@ -148,10 +125,6 @@ defineCustomElement('sinch-button', class extends HTMLElement {
 
   onButtonBlur = () => {
     getEventHandler(this, 'onBlur')?.()
-  }
-
-  onSlotChange = () => {
-    updateIconSize(this.$slot, this.small)
   }
 })
 

@@ -20,8 +20,8 @@ export const Button: FC<TButton> = ({ search }) => {
       small={isSmall}
       onClick={() => {}}
     >
-      {hasIcon && <sinch-icon-share></sinch-icon-share>}
-      {hasSpinner && <sinch-spinner static></sinch-spinner>}
+      {hasIcon && <sinch-icon-share size={isSmall ? 12 : 18}></sinch-icon-share>}
+      {hasSpinner && <sinch-spinner static type={isSmall ? 'small' : 'medium'}></sinch-spinner>}
     </sinch-button>
   )
 }

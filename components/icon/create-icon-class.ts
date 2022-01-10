@@ -4,13 +4,7 @@ import type { TSinchElementReact } from '../types'
 
 const DEFAULT_SIZE = 16
 const MIN_SIZE = 4
-const MAX_SIZE = 128
-
-const iconSymbol = Symbol('sinch-icon')
-
-export const isSinchIcon = (element: Element): element is TSinchIconElement => {
-  return (element as any)[iconSymbol] != null
-}
+const MAX_SIZE = 256
 
 export const createIconClass = (templateHTML: string) => {
   const template = document.createElement('template')
@@ -22,8 +16,6 @@ export const createIconClass = (templateHTML: string) => {
 
     constructor() {
       super()
-
-      ;(this as any)[iconSymbol] = true
 
       const shadowRoot = this.attachShadow({
         mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',

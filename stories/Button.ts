@@ -74,7 +74,7 @@ Button.parameters = {
   },
 }
 
-export const ButtonWithIcon = Template('<sinch-icon-share></sinch-icon-share>')
+export const ButtonWithIcon = Template('<sinch-icon-share size="18"></sinch-icon-share>')
 
 ButtonWithIcon.args = {
   type: 'primary',
@@ -84,7 +84,7 @@ ButtonWithIcon.args = {
 ButtonWithIcon.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-share></sinch-icon-share>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-share size="18"></sinch-icon-share>\n</sinch-button>',
     },
   },
 }
@@ -100,6 +100,38 @@ ButtonWithSpinner.parameters = {
   docs: {
     source: {
       code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner></sinch-spinner>\n</sinch-button>',
+    },
+  },
+}
+
+export const SmallButtonWithIcon = Template('<sinch-icon-share size="12"></sinch-icon-share>')
+
+SmallButtonWithIcon.args = {
+  type: 'primary',
+  text: 'Click me',
+  small: true,
+}
+
+SmallButtonWithIcon.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-share size="12"></sinch-icon-share>\n</sinch-button>',
+    },
+  },
+}
+
+export const SmallButtonWithSpinner = Template('<sinch-spinner type="small"></sinch-spinner>')
+
+SmallButtonWithSpinner.args = {
+  type: 'primary',
+  text: 'Click me',
+  small: true,
+}
+
+SmallButtonWithSpinner.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner type="small"></sinch-spinner>\n</sinch-button>',
     },
   },
 }
