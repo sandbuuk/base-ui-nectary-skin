@@ -1,4 +1,5 @@
 import styles from './Page.module.css'
+import { usePageControl } from './PageContext'
 import capturing from './images/capturing.png'
 import correct from './images/correct.png'
 import decision from './images/decision.png'
@@ -14,6 +15,8 @@ import whatsappLogo from './images/whatsappLogo.png'
 import type { FC } from 'react'
 
 export const OnBoarding: FC = () => {
+  const { next } = usePageControl()
+
   return (
     <div className={styles.onboardingPage}>
       <div className={styles.onboardingHeader}>
@@ -122,7 +125,7 @@ export const OnBoarding: FC = () => {
               <sinch-input class={styles.startnameInput} label="Quick Start Name" placeholder="My first Quick start" onChange={() => {}} value=""/>
             </div>
             <div>
-              <sinch-button class={styles.startnameButton} type="cta" text="start" onClick={() => {}}/>
+              <sinch-button class={styles.startnameButton} type="cta" text="start" onClick={next}/>
             </div>
           </div>
 
