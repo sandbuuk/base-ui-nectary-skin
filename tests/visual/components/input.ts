@@ -152,7 +152,7 @@ test('label attribute', shot(async function* ({ $eval }) {
   yield { name: 'empty' }
 }))
 
-test.only('fill', shot(async function* ({ $, $eval }) {
+test('fill', shot(async function* ({ $, $eval }) {
   await $eval((el) => {
     el.focus()
   })
