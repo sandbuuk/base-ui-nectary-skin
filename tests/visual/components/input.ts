@@ -152,13 +152,23 @@ test('label attribute', shot(async function* ({ $eval }) {
   yield { name: 'empty' }
 }))
 
-test('fill', shot(async function* ({ $ }) {
-  const $input = $.locator('input')
-
-  await $input.focus()
+test.only('fill', shot(async function* ({ $, $eval }) {
+  await $eval((el) => {
+    el.focus();
+  })
+  // Would be nice to verify focus some how. But document.activeElement
+  // won't reach into the shadow dom. For now just verify that the custom
+  // element is fucused.
+  await expect($eval((el) => {
+    return el === document.activeElement
+  })).resolves.toBe(true)
   yield { name: 'focus' }
 
-  await $input.fill('Filled text')
+  const text = 'Filled text'
+  await $eval((el, t) => {
+    el.value = t
+  }, text)
+  await expect($.locator('input').inputValue()).resolves.toBe(text)
   yield { name: 'filled' }
 }))
 
