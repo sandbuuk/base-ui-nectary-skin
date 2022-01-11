@@ -10,6 +10,7 @@ import { ButtonComponent } from '../components/Button/Button.component'
 import { TextareaComponent } from '../components/Textarea/Textarea.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { SpinnerComponent } from '../components/Spinner/Spinner.component'
+import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AppComponent } from './app.component'
     CheckboxComponent,
     ButtonComponent,
     TextareaComponent,
+    ToggleComponent,
     TooltipComponent,
     SpinnerComponent,
   ],

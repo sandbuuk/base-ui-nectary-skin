@@ -6,6 +6,7 @@ import { Input } from './components/Input'
 import { Radio } from './components/Radio'
 import { Select } from './components/Select'
 import { Textarea } from './components/Textarea'
+import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { Spinner } from './components/Spinner'
 import type { FC } from 'react'
@@ -51,6 +52,12 @@ const mapElement = (url: URL) => {
     case '/textarea': {
       return (
         <Textarea search={url.searchParams}/>
+      )
+    }
+
+    case '/toggle': {
+      return (
+        <Toggle search={url.searchParams}/>
       )
     }
 
