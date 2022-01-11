@@ -35,9 +35,14 @@ const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInf
       .replace('.ts-snapshots', `-screenshots/${platform}`)
   }
 
-const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator) => (cb: (el: HTMLElementTagNameMap[T]) => void, arg?: any) => {
-  return $.evaluate(cb as ((el: SVGElement | HTMLElement) => void), arg, { /* timeout: 1000 */ })
+type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
+  <R, Arg>(cb: (el: HTMLElementTagNameMap[T], arg: Arg) => R, arg: Arg): Promise<R>,
+  <R>(cb: (el: HTMLElementTagNameMap[T]) => R): Promise<R>,
 }
+
+const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator): EvalFunc<T> =>
+  (cb: any, arg?: any) =>
+    $.evaluate(cb, arg, { /* timeout: 1000 */ })
 
 type TPosition = {
   x: number,
@@ -57,7 +62,7 @@ type UpdateStateResult = {
 type UpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
   page: Page,
   $: Locator,
-  $eval: (cb: (el: HTMLElementTagNameMap[T], arg?: any) => void) => Promise<void>,
+  $eval: EvalFunc<T>,
 }
 
 export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageUrl: string, elementSelector: T) =>
