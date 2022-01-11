@@ -41,8 +41,7 @@ type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
 }
 
 const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator): EvalFunc<T> =>
-  (cb: any, arg?: any) =>
-    $.evaluate(cb, arg, { /* timeout: 1000 */ })
+  (cb: any, arg?: any) => $.evaluate(cb, arg, { /* timeout: 1000 */ })
 
 type TPosition = {
   x: number,
