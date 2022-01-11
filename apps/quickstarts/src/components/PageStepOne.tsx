@@ -1,5 +1,5 @@
 //import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
 import { usePageOneControl } from './PageStepOneContext'
@@ -124,7 +124,7 @@ export const PageStepOne: FC = () => {
         if (validateEmail(email) != null) {
           if (flag) {
             console.log('Valid Mail')
-            setDisabled(false)
+            setDisabled(true)
           }
         } else {
           setEmailInvalidtext('Email entered is not valid')
@@ -138,6 +138,19 @@ export const PageStepOne: FC = () => {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    getUsers()
+  }, [firstName])
+  useEffect(() => {
+    getUsers()
+  }, [lastName])
+  useEffect(() => {
+    getUsers()
+  }, [email])
+  useEffect(() => {
+    getUsers()
+  }, [role])
 
   // async function getPostsData() {
   //   const response = await axios.get('/account')
@@ -173,7 +186,6 @@ export const PageStepOne: FC = () => {
               value={firstName}
               onChange={(value) => {
                 setFirstName(value)
-                getUsers()
               }}
               label="First Name"
               invalidText={firstnameInvalidtext.length > 0 ? firstnameInvalidtext : undefined}
@@ -183,7 +195,6 @@ export const PageStepOne: FC = () => {
               value={lastName}
               onChange={(value) => {
                 setLastName(value)
-                getUsers()
               }}
               invalidText={lastnameInvalidtext.length > 0 ? lastnameInvalidtext : undefined}
               label="Last Name"
@@ -193,7 +204,6 @@ export const PageStepOne: FC = () => {
               value={role}
               onChange={(value) => {
                 setRole(value)
-                getUsers()
               }}
               invalidText={roleInvalidtext.length > 0 ? roleInvalidtext : undefined}
               label="Your role"
@@ -223,7 +233,7 @@ export const PageStepOne: FC = () => {
               className={styles.createAcc}
               style={{ width: '75%' }}
               type="cta"
-              disabled={disabled}
+              disabled={disabled ? undefined : false}
               onClick={sendData}
               text="Create Account"
             />
