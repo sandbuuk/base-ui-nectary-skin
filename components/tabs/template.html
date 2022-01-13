@@ -1,0 +1,24 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+}
+
+#scroll {
+  height: 54px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: row;
+}
+</style>
+
+<div id="scroll">
+  <div id="wrapper">
+    <slot></slot>
+  </div>
+</div>
