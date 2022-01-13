@@ -6,7 +6,6 @@ import {
   getAttribute,
   getLiteralAttribute,
   updateBooleanAttribute,
-  updateIntegerAttribute,
   updateAttribute,
   updateLiteralAttribute,
 } from '../utils'
@@ -48,11 +47,12 @@ defineCustomElement('sinch-tooltip', class extends HTMLElement {
   }
 
   get width() {
-    return getIntegerAttribute(this, 'width')
+    return getIntegerAttribute(this, 'width', 0)
   }
 
   set width(value: number | undefined) {
-    updateIntegerAttribute(this, 'width', value)
+    // Parsing is handled in attributeChangedCallback
+    updateAttribute(this, 'width', value)
   }
 
   get inverted() {

@@ -1,15 +1,10 @@
 export type TEventHandler = (arg?: any) => void
 
 export const getEventHandler = ($element: HTMLElement, handlerName: string): TEventHandler | null => {
-  if (Reflect.has($element, handlerName)) {
-    // @ts-expect-error
-    return $element[handlerName]
-  }
-
   // https://github.com/facebook/react/issues/7901
   for (const key in $element) {
     if (key.startsWith('__reactProps$')) {
-      // @ts-expect-error
+      // @ts-ignore
       return $element[key][handlerName]
     }
   }
@@ -32,16 +27,16 @@ export const updateBooleanAttribute = ($element: HTMLElement, attrName: string, 
 }
 
 export const isAttrTrue = (attrValue: string | null): boolean => {
-  return attrValue === '' || Boolean(attrValue)
+  return attrValue === '' || (attrValue !== 'false' && attrValue !== null)
 }
 
 export const getBooleanAttribute = ($element: HTMLElement, attrName: string) => {
   return isAttrTrue($element.getAttribute(attrName))
 }
 
-export const updateAttribute = ($element: HTMLElement, attrName: string, attrValue: string | null | undefined) => {
+export const updateAttribute = ($element: HTMLElement, attrName: string, attrValue: string | number | boolean | null | undefined) => {
   if (attrValue != null) {
-    $element.setAttribute(attrName, attrValue)
+    $element.setAttribute(attrName, String(attrValue))
   } else {
     $element.removeAttribute(attrName)
   }
@@ -78,33 +73,63 @@ export function getLiteralAttribute($element: HTMLElement, literals: string[], a
   return isLiteralValue(literals, attrValue) ? attrValue : defaultValue
 }
 
-export const attrValueToInteger = (value: string | null): number | null => {
-  const int = parseInt(value ?? '')
-
-  return Number.isInteger(int) ? int : null
+type TRange = {
+  min?: number,
+  max?: number,
 }
 
-export const attrValueToPixels = (value: string | null): string => {
-  const int = attrValueToInteger(value)
+const applyRange = (value: number, range: TRange) => {
+  let result = value
 
-  return int !== null ? `${int}px` : 'unset'
-}
-
-export const updateIntegerAttribute = ($element: HTMLElement | SVGElement, attrName: string, attrValue: string | number | null | undefined) => {
-  const intValue = typeof attrValue === 'string'
-    ? attrValueToInteger(attrValue)
-    : attrValue
-
-  if (intValue != null) {
-    if (intValue < 0) {
-      // Silently ignnore negative integer value
-      return
-    }
-
-    $element.setAttribute(attrName, intValue.toFixed(0))
-  } else {
-    $element.removeAttribute(attrName)
+  if (typeof range.min === 'number') {
+    result = Math.max(range.min, result)
   }
+
+  if (typeof range.max === 'number') {
+    result = Math.min(range.max, result)
+  }
+
+  return result
+}
+
+export const attrValueToInteger = (value: string | null, range: TRange = {}): number | null => {
+  if (value === null) {
+    return null
+  }
+
+  const int = parseInt(value)
+
+  if (!Number.isInteger(int)) {
+    // Couldn't parse attribute value
+    return null
+  }
+
+  return applyRange(int, range)
+}
+
+export const attrValueToPixels = (value: string | null, options: TRange & {multiplier?: number} = {}): string => {
+  const int = attrValueToInteger(value, { min: options.min ?? 0, max: options.max })
+
+  return int === null ? 'unset' : `${int * (options.multiplier ?? 1)}px`
+}
+
+export const updateIntegerAttribute = ($element: HTMLElement | SVGElement, attrName: string, attrValue: string | number | null | undefined, range: TRange = {}) => {
+  if (attrValue == null) {
+    $element.removeAttribute(attrName)
+
+    return
+  }
+
+  const intValue = typeof attrValue === 'string'
+    ? attrValueToInteger(attrValue, range)
+    : applyRange(attrValue, range)
+
+  if (intValue === null) {
+    // Couldn't parse attribute value
+    return
+  }
+
+  $element.setAttribute(attrName, intValue.toFixed(0))
 }
 
 export function getIntegerAttribute($element: HTMLElement, attrName: string): number | undefined

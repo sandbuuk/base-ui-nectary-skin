@@ -33,19 +33,23 @@
     --sinch-color-checkbox-border-disabled-checked: var(--sinch-color-stormy-100);
 
     display: inline-block;
+    outline: none;
+  }
+
+  #wrapper {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 100%;
+    height: 32px;
     font: var(--sinch-font-body);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 32px;
   }
 
   #checkbox {
     all: initial;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 18px;
-    height: 18px;
+    display: block;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
   }
 
@@ -54,68 +58,86 @@
   }
 
   #icon-container {
-    display: inline-block;
     position: relative;
-    width: 18px;
-    height: 18px;
-    vertical-align: top;
-    top: 6px;
+    width: 32px;
+    height: 32px;
   }
 
   /* Circle */
   #checkbox::before {
     content: "";
     position: absolute;
-    top: -7px;
-    left: -7px;
+    top: 0;
+    left: 0;
     width: 32px;
     height: 32px;
     border-radius: 16px;
     pointer-events: none;
     background-color: var(--sinch-color-checkbox-circle);
+    transition: background-color 0.1s linear;
   }
 
   /* Border / Background */
   #checkbox::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 7px;
+    left: 7px;
     width: 18px;
     height: 18px;
     border-radius: 2px;
     pointer-events: none;
     background-color: var(--sinch-color-checkbox-background);
     box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border) inset;
+    transition: background-color 0.1s linear;
   }
 
   #icon-checkmark {
     position: absolute;
-    left: 2px;
-    top: 3px;
+    left: 9px;
+    top: 10px;
     transition: opacity 0.1s linear;
     opacity: 0%;
     pointer-events: none;
   }
 
-  #icon-line {
+  #icon-indeterminate {
     position: absolute;
-    left: 3px;
-    top: 8px;
+    left: 10px;
+    top: 15px;
     transition: opacity 0.1s linear;
     opacity: 0%;
     pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion) {
+    #icon-checkmark,
+    #icon-indeterminate,
+    #checkbox::before,
+    #checkbox::after {
+      transition: none;
+    }
   }
 
   #label {
-    padding-left: 14px;
+    flex: 1;
+    align-self: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 6px;
   }
 
-  :host(:not([indeterminate])) #checkbox:checked ~ #icon-checkmark {
+  :host([disabled]:not([disabled="false"])) #label {
+    color: var(--sinch-color-stormy-200);
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  :host(:is(:not([indeterminate]), [indeterminate="false"])) #checkbox:checked ~ #icon-checkmark {
     opacity: 100%;
   }
 
-  :host([indeterminate]) #checkbox:checked ~ #icon-line {
+  :host([indeterminate]:not([indeterminate="false"])) #checkbox:checked ~ #icon-indeterminate {
     opacity: 100%;
   }
 
@@ -210,12 +232,15 @@
   }
 </style>
 
-<span id="icon-container">
-  <input id="checkbox" type="checkbox"/>
-  <svg id="icon-checkmark" width="14" height="11">
-    <path d="M14 1.99999L12.59 0.579987L4.98995 8.17L1.49997 4.5L0.0799694 5.91L4.98995 11L14 1.99999Z" fill="white"/>
-  </svg>
-  <svg id="icon-line" width="12" height="2">
-    <line y1="1" x2="12" y2="1" stroke="white" stroke-width="2"/>
-  </svg>
-</span><label for="checkbox" id="label">label text</label>
+<div id="wrapper">
+  <div id="icon-container">
+    <input id="checkbox" type="checkbox"/>
+    <svg id="icon-checkmark" width="14" height="11">
+      <path d="M14 1.99999L12.59 0.579987L4.98995 8.17L1.49997 4.5L0.0799694 5.91L4.98995 11L14 1.99999Z" fill="white"/>
+    </svg>
+    <svg id="icon-indeterminate" width="12" height="2">
+      <line y1="1" x2="12" y2="1" stroke="white" stroke-width="2"/>
+    </svg>
+  </div>
+  <label for="checkbox" id="label"></label>
+</div>
