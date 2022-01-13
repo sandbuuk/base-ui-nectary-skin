@@ -5,6 +5,7 @@ import { usePageThreeControl } from './PageStepThreeContext'
 import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
 import chatlayerlogo from './images/chatlayerlogo.jpg'
+import botMobile from './images/botMobile.png'
 //import info from './images/info.png'
 import type { FC } from 'react'
 
@@ -144,7 +145,7 @@ export const PageStepThree: FC = () => {
                   />
                   <hr style={{ border: '1px solid #e5e5e5' }}/>
                   <p className={styles.whatsappDescription}>
-                    You can add up to 5 questions before transfering your agent.
+                    You can add up to 5 questions before transfering your customer to your agent.
                   </p>
                   {/* <div className={styles.botexclamation}>
                     <div className={styles.infoData}>
@@ -169,7 +170,7 @@ export const PageStepThree: FC = () => {
             <div className={styles.botpreview}>
               <img
                 className={styles.botmobilegif}
-                src="https://i2.wp.com/chatlayer.ai/wp-content/uploads/2021/11/CL_21_HERO.gif?fit=472%2C1000&ssl=1"
+                src={botMobile}
               />
             </div>
           </div>

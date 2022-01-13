@@ -18,10 +18,12 @@ export const PageStepOne: FC = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [role, setRole] = useState('')
+  const [phoneNumber, setphoneNumber] = useState('')
   const [emailInvalidtext, setEmailInvalidtext] = useState('')
   const [firstnameInvalidtext, setfirstnameInvalidtext] = useState('')
   const [lastnameInvalidtext, setlastnameInvalidtext] = useState('')
   const [roleInvalidtext, setroleInvalidtext] = useState('')
+  const [phoneInvalidtext, setphoneInvalidtext] = useState('')
   const [disabled, setDisabled] = useState(false)
   const { accountId, setAccountId } = usePageOneControl()
 
@@ -51,11 +53,13 @@ export const PageStepOne: FC = () => {
       setfirstnameInvalidtext('')
       setlastnameInvalidtext('')
       setroleInvalidtext('')
+      setphoneInvalidtext('')
 
       body.append('email', email)
       body.append('firstName', firstName)
       body.append('lastName', lastName)
       body.append('role', role)
+      body.append('phoneNumber', phoneNumber)
 
       const validateNames = (name: string) => {
         return /\d/.test(name)
@@ -66,6 +70,11 @@ export const PageStepOne: FC = () => {
           .match(
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           )
+      }
+
+      const validatePhone = (phone: String) => {
+        return String(phone)
+          .match(/^[0-9\b]+$/)
       }
 
       if (!(email.length > 0)) {
@@ -100,6 +109,14 @@ export const PageStepOne: FC = () => {
         }
       }
 
+      if (!(phoneNumber.length > 0)) {
+        setphoneInvalidtext('Phone Number should not be empty')
+
+        if (flag) {
+          flag = false
+        }
+      }
+
       if (firstName.length > 0) {
         if (validateNames(firstName)) {
           setfirstnameInvalidtext('Last name should not contain numbers')
@@ -113,6 +130,16 @@ export const PageStepOne: FC = () => {
       if (lastName.length > 0) {
         if (validateNames(lastName)) {
           setlastnameInvalidtext('Last name should not contain numbers')
+
+          if (flag) {
+            flag = false
+          }
+        }
+      }
+
+      if (phoneNumber.length > 0) {
+        if (validatePhone(phoneNumber) == null) {
+          setphoneInvalidtext('Phone Number should contain only numbers')
 
           if (flag) {
             flag = false
@@ -151,6 +178,9 @@ export const PageStepOne: FC = () => {
   useEffect(() => {
     getUsers()
   }, [role])
+  useEffect(() => {
+    getUsers()
+  }, [phoneNumber])
 
   // async function getPostsData() {
   //   const response = await axios.get('/account')
@@ -199,6 +229,15 @@ export const PageStepOne: FC = () => {
               invalidText={lastnameInvalidtext.length > 0 ? lastnameInvalidtext : undefined}
               label="Last Name"
               placeholder="Doe"
+            />
+            <sinch-input
+              value={phoneNumber}
+              onChange={(value) => {
+                setphoneNumber(value)
+              }}
+              invalidText={phoneInvalidtext.length > 0 ? phoneInvalidtext : undefined}
+              label="Phone Number"
+              placeholder="0123456789"
             />
             <sinch-select
               value={role}

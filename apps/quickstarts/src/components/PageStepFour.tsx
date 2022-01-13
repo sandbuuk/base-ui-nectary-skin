@@ -8,6 +8,8 @@ import { usePageThreeControl } from './PageStepThreeContext'
 import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
 import contactlogo from './images/contactlogo.jpg'
+import humanMobile from './images/humanMobile.png'
+import verticalLine from './images/verticalLine.png'
 import type { FC } from 'react'
 
 export const PageStepFour: FC = () => {
@@ -112,6 +114,7 @@ export const PageStepFour: FC = () => {
             key={`${props.i}name`}
             className={styles.agentName}
             value={agentdetails[props.i].name}
+            style={{ width: '100%' }}
             onChange={(value) => {
               const ob = agentdetails
 
@@ -126,6 +129,7 @@ export const PageStepFour: FC = () => {
           <sinch-input
             key={`${props.i}email`}
             value={agentdetails[props.i].email}
+            style={{ width: '100%' }}
             onChange={(value) => {
               const ob = agentdetails
 
@@ -142,9 +146,6 @@ export const PageStepFour: FC = () => {
 
   return (
     <div className={styles.pageWhatsapp}>
-      <div className={styles.steps}>
-        <PageSteps/>
-      </div>
       <div className={styles.mainBodyWhatsapp}>
         <div className={styles.whatsappHeading}>
           <div className={styles.whatsappMatter}>
@@ -154,7 +155,7 @@ export const PageStepFour: FC = () => {
               customers
             </p>
           </div>
-
+        <div className={styles.botpageSteps}><PageSteps/></div>
           <div className={styles.chatlayerLogo}>
             <div className="empty"/>
             <div className="actualLogo">
@@ -167,20 +168,35 @@ export const PageStepFour: FC = () => {
           <div className={styles.messagesParent}>
             <div className={styles.humanMessages}>
               { [...Array(questionCounter)].map((_, i) => <WhatsappQuestion key={i} i={i}/>) }
-              <div>
+              <div className={styles.humanButton}>
                 <sinch-button
-                  style={{ width: '100%' }}
-                  type="primary"
+                  style={{ width: '90%' }}
+                  type="cta"
                   onClick={buttonCounter}
                   text={questionCounter < 5 ? `Add more Agents (Up to ${5 - questionCounter} )` : 'Add more Agents (Up to 0)'}
                 />
               </div>
-
+            </div>
+            <img className={styles.humanLine} src={verticalLine}/>
+            <div className={styles.humanHandover}>
+                  <sinch-textarea // eslint-disable-line
+                    value={greetingmsg}
+                    label="Human Handover Message"
+                    placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
+                    optionalText={undefined}
+                    invalidText={undefined}
+                    style={{ width: '100%' }}
+                    additionalText={undefined}
+                    disabled={undefined}
+                    onChange={()=>{}}
+                    onFocus={() => {}}
+                    onBlur={() => {}}
+                  />
             </div>
             <div className={styles.preview}>
               <img
                 className={styles.mobilegif}
-                src="https://i2.wp.com/chatlayer.ai/wp-content/uploads/2021/11/CL_21_HERO.gif?fit=472%2C1000&ssl=1"
+                src={humanMobile}
               />
             </div>
           </div>
@@ -188,7 +204,7 @@ export const PageStepFour: FC = () => {
 
         <div className={styles.buttons}>
           <div className={styles.backBut}>
-            <sinch-button type="destructive" text="Cancel" onClick={prevPage}/>
+            <sinch-button type="destructive" text="Back" onClick={prevPage}/>
           </div>
           <div className={styles.saveBut}>
             { <Congratsbox open={open} handleClickOpen={handleClickOpen} handleClose={handleClose}/> }
@@ -199,3 +215,4 @@ export const PageStepFour: FC = () => {
     </div>
   )
 }
+

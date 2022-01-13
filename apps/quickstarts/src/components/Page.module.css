@@ -87,6 +87,10 @@ margin-bottom: 10%;
   flex-direction: column;
 }
 
+.signupLogin{
+  margin-top: 3%;
+}
+
 .signIn {
   display: flex;
   margin-left: 15%;
@@ -265,7 +269,6 @@ margin-bottom: 10%;
 }
 
 .previewtext {
-  margin-left: 10%;
   font-weight: bold;
   font: var(--sinch-font-extra-small-text);
   color: #e5e5e5;
@@ -280,13 +283,16 @@ margin-bottom: 10%;
   margin-left: 4%;
 }
 
+.humanButton{
+  margin: 2%;
+}
+
 .humanMessages {
   display: flex;
   flex-direction: column;
-  flex: 7;
+  flex: 4;
   margin: 2%;
   margin-left: 6%;
-  align-items: center;
 }
 
 .botstartingSpace{
@@ -295,7 +301,7 @@ margin-bottom: 10%;
 
 .bothumanMessages {
   display: flex;
-  flex: 5;
+  flex: 7;
   margin: 1%;
   margin-left: 6%;
   margin-right: 10%;
@@ -310,7 +316,7 @@ margin-bottom: 10%;
 
 .messagesInput {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .botmessagesInput {
   display: flex;
@@ -320,8 +326,17 @@ margin-bottom: 10%;
 }
 
 .humanHandover{
-  margin-left: 2%;
-  margin-top: 3%;
+  display: flex;
+  flex: 3;
+  margin-top: 27px;
+  margin-left: 3%;
+  margin-right: 5%;
+}
+
+.humanLine{
+  height: 55%;
+  margin-left: 30px;
+  margin-right: 10px;
 }
 
 .Input {
@@ -375,10 +390,6 @@ margin-bottom: 10%;
 }
 
 .mobilegif {
-  border-style: solid;
-  border-radius: 5%;
-  border-width: 3px;
-  border-color: black;
   height: 520px;
   width: 275px;
   margin-top: 8%;
@@ -387,10 +398,6 @@ margin-bottom: 10%;
 }
 
 .botmobilegif {
-  border-style: solid;
-  border-radius: 8%;
-  border-width: 3px;
-  border-color: black;
   height: 520px;
   width: 275px;
   margin-top: 8%;
