@@ -128,17 +128,19 @@ export const PageStepThree: FC = () => {
               <div className={styles.botquestions}>
                 <div className={styles.botGreet}>
                   <sinch-textarea // eslint-disable-line
-                    invalidText={undefined}
-                    additionalText={undefined}
-                    style={{ width: '300px' }}
                     value={greetingmsg}
+                    label="Greeting"
+                    placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
                     optionalText={undefined}
+                    invalidText={undefined}
+                    style={{ width: '100%' }}
+                    additionalText={undefined}
                     disabled={undefined}
                     onChange={(value) => {
                       setGreetingmsg(value)
                     }}
-                    label="Greeting"
-                    placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
+                    onFocus={() => {}}
+                    onBlur={() => {}}
                   />
                   <hr style={{ border: '1px solid #e5e5e5' }}/>
                   <p className={styles.whatsappDescription}>
