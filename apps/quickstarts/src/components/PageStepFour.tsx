@@ -155,7 +155,7 @@ export const PageStepFour: FC = () => {
               customers
             </p>
           </div>
-        <div className={styles.botpageSteps}><PageSteps/></div>
+          <div className={styles.botpageSteps}><PageSteps/></div>
           <div className={styles.chatlayerLogo}>
             <div className="empty"/>
             <div className="actualLogo">
@@ -188,7 +188,7 @@ export const PageStepFour: FC = () => {
                     style={{ width: '100%' }}
                     additionalText={undefined}
                     disabled={undefined}
-                    onChange={()=>{}}
+                    onChange={() => {}}
                     onFocus={() => {}}
                     onBlur={() => {}}
                   />
