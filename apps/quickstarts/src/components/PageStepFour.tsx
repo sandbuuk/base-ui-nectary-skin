@@ -199,4 +199,3 @@ export const PageStepFour: FC = () => {
     </div>
   )
 }
-
