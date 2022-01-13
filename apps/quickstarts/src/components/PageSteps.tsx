@@ -107,6 +107,7 @@
 
 //import { makeStyles } from '@material-ui/core'
 //import { Box, Step, StepLabel, Stepper } from '@mui/material'
+// @ts-ignore
 import Stepper from 'react-stepper-horizontal'
 import { useStepperControl } from './StepperContext'
 import type { FC } from 'react'

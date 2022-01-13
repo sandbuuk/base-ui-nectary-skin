@@ -127,12 +127,13 @@ export const PageStepThree: FC = () => {
             <div className={styles.bothumanMessages}>
               <div className={styles.botquestions}>
                 <div className={styles.botGreet}>
-                  <sinch-textarea
+                  <sinch-textarea // @ts-ignore
                     invalidText={undefined}
                     additionalText={undefined}
                     style={{ width: '300px' }}
                     value={greetingmsg}
                     optionalText={undefined}
+                    disabled={undefined}
                     onChange={(value) => {
                       setGreetingmsg(value)
                     }}
