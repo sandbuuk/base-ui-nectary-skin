@@ -127,7 +127,7 @@ export const PageStepThree: FC = () => {
             <div className={styles.bothumanMessages}>
               <div className={styles.botquestions}>
                 <div className={styles.botGreet}>
-                  <sinch-textarea // @ts-ignore
+                  <sinch-textarea // eslint-disable-line
                     invalidText={undefined}
                     additionalText={undefined}
                     style={{ width: '300px' }}
