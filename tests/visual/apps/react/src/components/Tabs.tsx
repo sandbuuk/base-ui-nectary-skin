@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react'
 import type { FC } from 'react'
 
-type TRadio = {
+type TTabs = {
   search: URLSearchParams
 }
 
-export const Radio: FC<TRadio> = ({ search }) => {
+export const Tabs: FC<TTabs> = ({ search }) => {
   const [value, setValue] = useState('')
   const onChange = useMemo(() => search.get('uncontrolled') === null ? setValue : () => {}, [search, setValue])
   const options = useMemo(() => {
@@ -19,11 +19,13 @@ export const Radio: FC<TRadio> = ({ search }) => {
       const options = JSON.parse(decodeURI(data))
 
       return options.map((opt: any) => (
-        <sinch-radio-option
+        <sinch-tabs-option
           key={opt.value}
           value={opt.value}
           text={opt.text}
-          disabled={opt.disabled}/>
+          disabled={opt.disabled}>
+          {opt.icon != null && <sinch-icon-share></sinch-icon-share>}
+        </sinch-tabs-option>
       ))
     } catch {
       return null
@@ -31,8 +33,8 @@ export const Radio: FC<TRadio> = ({ search }) => {
   }, [search])
 
   return (
-    <sinch-radio value={value} onChange={onChange}>
+    <sinch-tabs value={value} onChange={onChange}>
       {options}
-    </sinch-radio>
+    </sinch-tabs>
   )
 }
