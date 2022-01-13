@@ -237,7 +237,7 @@ export const PageStepOne: FC = () => {
               onClick={sendData}
               text="Create Account"
             />
-            <div className={styles.loginButton}>
+            <div className={styles.signupLogin}>
               <sinch-button
                 style={{ width: '75%' }}
                 type="secondary"
