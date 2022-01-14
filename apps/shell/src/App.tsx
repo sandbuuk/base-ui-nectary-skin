@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { HashRouter, Routes, Route, Link } from 'react-router-dom'
 import styles from './App.module.css'
-import { Quickstarts } from './components/Qiuckstarts'
+import { Quickstarts } from './components/Quickstarts'
 import type { FC } from 'react'
 import '@nectary/components/theme.css'
 
