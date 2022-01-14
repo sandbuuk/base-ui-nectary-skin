@@ -11,6 +11,7 @@ import { TextareaComponent } from '../components/Textarea/Textarea.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { SpinnerComponent } from '../components/Spinner/Spinner.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
+import { TabsComponent } from '../components/Tabs/Tabs.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -26,6 +27,7 @@ import { AppComponent } from './app.component'
     ToggleComponent,
     TooltipComponent,
     SpinnerComponent,
+    TabsComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

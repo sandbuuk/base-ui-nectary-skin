@@ -5,6 +5,7 @@ import { Checkbox } from './components/Checkbox'
 import { Input } from './components/Input'
 import { Radio } from './components/Radio'
 import { Select } from './components/Select'
+import { Tabs } from './components/Tabs'
 import { Textarea } from './components/Textarea'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
@@ -46,6 +47,12 @@ const mapElement = (url: URL) => {
     case '/select': {
       return (
         <Select search={url.searchParams}/>
+      )
+    }
+
+    case '/tabs': {
+      return (
+        <Tabs search={url.searchParams}/>
       )
     }
 
