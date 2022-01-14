@@ -1,3 +1,8 @@
+## v0.5.0
+
+* ➕ add `sinch-tabs` component
+* 🐞 fix `sinch-spinner` error message
+
 ## v0.4.0
 
 * ➕ add `sinch-alert` component
