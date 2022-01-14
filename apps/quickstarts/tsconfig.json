@@ -8,8 +8,7 @@
     "jsx": "react-jsx",
     "target": "esnext",
     "module": "esnext",
-    "moduleResolution": "node",
-    "noUnusedLocals": true
+    "moduleResolution": "node"
   },
-  "include": ["./src", "./modules.d.ts", "./custom.d.ts"]
+  "include": ["./src", "./modules.d.ts", "./custom.d.ts"],
 }

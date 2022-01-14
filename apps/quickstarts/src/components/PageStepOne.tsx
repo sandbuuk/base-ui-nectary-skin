@@ -1,5 +1,5 @@
 //import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
 import { usePageOneControl } from './PageStepOneContext'
@@ -18,13 +18,33 @@ export const PageStepOne: FC = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [role, setRole] = useState('')
+  const [phoneNumber, setphoneNumber] = useState('')
   const [emailInvalidtext, setEmailInvalidtext] = useState('')
   const [firstnameInvalidtext, setfirstnameInvalidtext] = useState('')
   const [lastnameInvalidtext, setlastnameInvalidtext] = useState('')
   const [roleInvalidtext, setroleInvalidtext] = useState('')
+  const [phoneInvalidtext, setphoneInvalidtext] = useState('')
+  const [disabled, setDisabled] = useState(false)
   const { accountId, setAccountId } = usePageOneControl()
 
-  async function getUsers() {
+  async function sendData() {
+    const res = await fetch('https://quickstart.default.labengage.sinch.com/account', {
+      method: 'POST',
+      body: JSON.stringify({ email, firstName, lastName, role }),
+    })
+    const k = await res.json()
+
+    if (k.data.firstName === firstName) {
+      console.log('Creation of user sucessful')
+      console.log(typeof (k.data.ID))
+      console.log(k.data.ID)
+      setAccountId(k.data.ID)
+      console.log(accountId)
+      next()
+    }
+  }
+
+  function getUsers() {
     try {
       const body = new FormData()
       let flag = true
@@ -33,11 +53,13 @@ export const PageStepOne: FC = () => {
       setfirstnameInvalidtext('')
       setlastnameInvalidtext('')
       setroleInvalidtext('')
+      setphoneInvalidtext('')
 
       body.append('email', email)
       body.append('firstName', firstName)
       body.append('lastName', lastName)
       body.append('role', role)
+      body.append('phoneNumber', phoneNumber)
 
       const validateNames = (name: string) => {
         return /\d/.test(name)
@@ -48,6 +70,11 @@ export const PageStepOne: FC = () => {
           .match(
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           )
+      }
+
+      const validatePhone = (phone: String) => {
+        return String(phone)
+          .match(/^[0-9\b]+$/)
       }
 
       if (!(email.length > 0)) {
@@ -82,6 +109,14 @@ export const PageStepOne: FC = () => {
         }
       }
 
+      if (!(phoneNumber.length > 0)) {
+        setphoneInvalidtext('Phone Number should not be empty')
+
+        if (flag) {
+          flag = false
+        }
+      }
+
       if (firstName.length > 0) {
         if (validateNames(firstName)) {
           setfirstnameInvalidtext('Last name should not contain numbers')
@@ -102,25 +137,21 @@ export const PageStepOne: FC = () => {
         }
       }
 
+      if (phoneNumber.length > 0) {
+        if (validatePhone(phoneNumber) == null) {
+          setphoneInvalidtext('Phone Number should contain only numbers')
+
+          if (flag) {
+            flag = false
+          }
+        }
+      }
+
       if (email.length > 0) {
         if (validateEmail(email) != null) {
           if (flag) {
             console.log('Valid Mail')
-
-            const res = await fetch('https://quickstart.default.labengage.sinch.com/account', {
-              method: 'POST',
-              body: JSON.stringify({ email, firstName, lastName, role }),
-            })
-            const k = await res.json()
-
-            if (k.data.firstName === firstName) {
-              console.log('Creation of user sucessful')
-              console.log(typeof (k.data.ID))
-              console.log(k.data.ID)
-              setAccountId(String(k.data.ID))
-              console.log(accountId)
-              next()
-            }
+            setDisabled(true)
           }
         } else {
           setEmailInvalidtext('Email entered is not valid')
@@ -135,6 +166,22 @@ export const PageStepOne: FC = () => {
     }
   }
 
+  useEffect(() => {
+    getUsers()
+  }, [firstName])
+  useEffect(() => {
+    getUsers()
+  }, [lastName])
+  useEffect(() => {
+    getUsers()
+  }, [email])
+  useEffect(() => {
+    getUsers()
+  }, [role])
+  useEffect(() => {
+    getUsers()
+  }, [phoneNumber])
+
   // async function getPostsData() {
   //   const response = await axios.get('/account')
 
@@ -145,7 +192,7 @@ export const PageStepOne: FC = () => {
     <div className={styles.page}>
       <div className={styles.parent}>
         <div className={styles.signUp}>
-          <h2 className={styles.fontName}> Sign up to Sinch </h2>
+          <h2 className={styles.fontNameTitle}> Sign up to Sinch </h2>
           <form className={styles.form}>
             <sinch-input
               className={styles.sinchInput}
@@ -183,6 +230,15 @@ export const PageStepOne: FC = () => {
               label="Last Name"
               placeholder="Doe"
             />
+            <sinch-input
+              value={phoneNumber}
+              onChange={(value) => {
+                setphoneNumber(value)
+              }}
+              invalidText={phoneInvalidtext.length > 0 ? phoneInvalidtext : undefined}
+              label="Phone Number"
+              placeholder="0123456789"
+            />
             <sinch-select
               value={role}
               onChange={(value) => {
@@ -216,9 +272,18 @@ export const PageStepOne: FC = () => {
               className={styles.createAcc}
               style={{ width: '75%' }}
               type="cta"
-              onClick={getUsers}
+              disabled={disabled ? undefined : false}
+              onClick={sendData}
               text="Create Account"
             />
+            <div className={styles.signupLogin}>
+              <sinch-button
+                style={{ width: '75%' }}
+                type="secondary"
+                onClick={() => {}}
+                text="Login"
+              />
+            </div>
             <div className={styles.signupFG}>
               <sinch-button
                 style={{ width: '75%' }}
@@ -244,10 +309,10 @@ export const PageStepOne: FC = () => {
       </div>
       <div className={styles.rightSide}>
         <div className={styles.nameAlogo}>
-          <h1>Welcome to Sinch! </h1>
+          <h1 className={styles.fontName}>Welcome to Sinch! </h1>
           <img src={sinchlogo} className={styles.sinchlogo}/>
         </div>
-        <div className={styles.description}>
+        <div className={styles.signupDescription}>
           <h3>
             We help you deliver outstanding conversational customer experiences
           </h3>

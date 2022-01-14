@@ -7,6 +7,7 @@ import '@nectary/components/textarea'
 import { useEffect, useRef } from 'react'
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import styles from './App.module.css'
+import { OnBoarding } from './OnBoarding'
 import { PageLayout } from './PageLayout'
 import { PageNotFound } from './PageNotFound'
 import { PageStepFour } from './PageStepFour'
@@ -48,6 +49,7 @@ export const App: FC<TApp> = ({ baseUrl }) => {
             {/* <Route path="step-2" element={<PageStepTwo/>}/> */}
             <Route path="step-2" element={<PageStepThree/>}/>
             <Route path="step-3" element={<PageStepFour/>}/>
+            <Route path="onboarding" element={<OnBoarding/>}/>
             <Route path="*" element={<PageNotFound/>}/>
           </Route>
         </Routes>
