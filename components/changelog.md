@@ -1,3 +1,8 @@
+## v0.5.1
+
+* 🐞 fix `sinch-tabs` accessing closed shadowRoot
+* 🐞 fix `sinch-radio` accessing closed shadowRoot
+
 ## v0.5.0
 
 * ➕ add `sinch-tabs` component
