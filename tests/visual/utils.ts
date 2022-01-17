@@ -74,6 +74,9 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
       const locator = page.locator(elementSelector)
 
       for await (const { name, include = [], includeRects = [] } of updateState({ page, $: locator, $eval: makeEval<T>(locator) })) {
+        // Adding timeout after updateState just to verify the source of flackiness
+        await page.waitForTimeout(100)
+
         const rects = await getRects([locator, ...include])
         const clip = mergeBoundingBox(rects.concat(includeRects))
 
