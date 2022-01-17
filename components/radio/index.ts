@@ -81,20 +81,11 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.addEventListener('keydown', this.onOptionKeyDown)
+    shadowRoot.addEventListener('change', this.onOptionChange)
 
     this.$slot = shadowRoot.querySelector('slot')!
-  }
-
-  connectedCallback() {
-    this.shadowRoot!.addEventListener('keydown', this.onOptionKeyDown)
-    this.shadowRoot!.addEventListener('change', this.onOptionChange)
     this.$slot.addEventListener('slotchange', this.onSlotChange)
-  }
-
-  disconnectedCallback() {
-    this.shadowRoot!.removeEventListener('keydown', this.onOptionKeyDown)
-    this.shadowRoot!.removeEventListener('change', this.onOptionChange)
-    this.$slot.removeEventListener('slotchange', this.onSlotChange)
   }
 
   static get observedAttributes() {
