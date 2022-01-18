@@ -3,7 +3,7 @@ import type { FC } from 'react'
 
 type TPageThreeContext = {
   botquestion: string[],
-  setBotquestion: (arg0: string[]) => void,
+  setBotquestion: (arg0: any) => void,
   greetingmsg: string,
   setGreetingmsg: (arg0: string) => void,
   humanhandover: string,
@@ -20,7 +20,7 @@ const s = (humanhandover: string) => {
   console.log(humanhandover)
 }
 const Context = createContext<TPageThreeContext>({
-  botquestion: [''],
+  botquestion: [],
   setBotquestion: k,
   greetingmsg: '',
   setGreetingmsg: p,
@@ -33,7 +33,7 @@ export const usePageThreeControl = () => {
 }
 
 export const PageStepThreeContext: FC<{}> = ({ children }) => {
-  const [botquestion, setBotquestion] = useState([''])
+  const [botquestion, setBotquestion] = useState([])
   const [greetingmsg, setGreetingmsg] = useState('')
   const [humanhandover, setHumanhandover] = useState('')
 

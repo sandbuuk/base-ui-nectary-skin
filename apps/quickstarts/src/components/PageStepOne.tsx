@@ -24,47 +24,12 @@ export const PageStepOne: FC = () => {
   const [lastnameInvalidtext, setlastnameInvalidtext] = useState('')
   const [roleInvalidtext, setroleInvalidtext] = useState('')
   const [phoneInvalidtext, setphoneInvalidtext] = useState('')
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(true)
   const { accountId, setAccountId } = usePageOneControl()
 
   async function sendData() {
-    const res = await fetch('https://quickstart.default.labengage.sinch.com/account', {
-      method: 'POST',
-      body: JSON.stringify({ email, firstName, lastName, role }),
-    })
-    const k = await res.json()
-
-    if (k.data.firstName === firstName) {
-      console.log('Creation of user sucessful')
-      console.log(typeof (k.data.ID))
-      console.log(k.data.ID)
-      setAccountId(k.data.ID)
-      console.log(accountId)
-      next()
-    }
-  }
-
-  function getUsers() {
-    try {
-      const body = new FormData()
+    function validateInputs() {
       let flag = true
-
-      setEmailInvalidtext('')
-      setfirstnameInvalidtext('')
-      setlastnameInvalidtext('')
-      setroleInvalidtext('')
-      setphoneInvalidtext('')
-
-      body.append('email', email)
-      body.append('firstName', firstName)
-      body.append('lastName', lastName)
-      body.append('role', role)
-      body.append('phoneNumber', phoneNumber)
-
-      const validateNames = (name: string) => {
-        return /\d/.test(name)
-      }
-
       const validateEmail = (email: String) => {
         return String(email)
           .match(
@@ -77,44 +42,8 @@ export const PageStepOne: FC = () => {
           .match(/^[0-9\b]+$/)
       }
 
-      if (!(email.length > 0)) {
-        setEmailInvalidtext('Email should not be empty')
-
-        if (flag) {
-          flag = false
-        }
-      }
-
-      if (!(firstName.length > 0)) {
-        setfirstnameInvalidtext('First name should not be empty')
-
-        if (flag) {
-          flag = false
-        }
-      }
-
-      if (!(lastName.length > 0)) {
-        setlastnameInvalidtext('Last name should not be empty')
-
-        if (flag) {
-          flag = false
-        }
-      }
-
-      if (!(role.length > 0)) {
-        setroleInvalidtext('Role should not be empty')
-
-        if (flag) {
-          flag = false
-        }
-      }
-
-      if (!(phoneNumber.length > 0)) {
-        setphoneInvalidtext('Phone Number should not be empty')
-
-        if (flag) {
-          flag = false
-        }
+      const validateNames = (name: string) => {
+        return /\d/.test(name)
       }
 
       if (firstName.length > 0) {
@@ -151,7 +80,6 @@ export const PageStepOne: FC = () => {
         if (validateEmail(email) != null) {
           if (flag) {
             console.log('Valid Mail')
-            setDisabled(true)
           }
         } else {
           setEmailInvalidtext('Email entered is not valid')
@@ -160,6 +88,88 @@ export const PageStepOne: FC = () => {
             flag = false
           }
         }
+      }
+
+      return flag
+    }
+
+    if (validateInputs()) {
+      const res = await fetch('https://quickstart.default.labengage.sinch.com/account', {
+        method: 'POST',
+        body: JSON.stringify({ email, firstName, lastName, role }),
+      })
+      const k = await res.json()
+
+      if (k.data.firstName === firstName) {
+        console.log('Creation of user sucessful')
+        console.log(typeof (k.data.ID))
+        console.log(k.data.ID)
+        setAccountId(k.data.ID)
+        console.log(accountId)
+        next()
+      }
+    }
+  }
+
+  function getUsers() {
+    try {
+      const body = new FormData()
+
+      setEmailInvalidtext('')
+      setfirstnameInvalidtext('')
+      setlastnameInvalidtext('')
+      setroleInvalidtext('')
+      setphoneInvalidtext('')
+
+      body.append('email', email)
+      body.append('firstName', firstName)
+      body.append('lastName', lastName)
+      body.append('role', role)
+      body.append('phoneNumber', phoneNumber)
+
+      if (email.length > 0 && firstName.length > 0 && lastName.length > 0 && role.length > 0 && phoneNumber.length > 0) {
+        // if (!(email.length > 0)) {
+        //   setEmailInvalidtext('Email should not be empty')
+
+        //   if (flag) {
+        //     flag = false
+        //   }
+        // }
+
+        // if (!(firstName.length > 0)) {
+        //   setfirstnameInvalidtext('First name should not be empty')
+
+        //   if (flag) {
+        //     flag = false
+        //   }
+        // }
+
+        // if (!(lastName.length > 0)) {
+        //   setlastnameInvalidtext('Last name should not be empty')
+
+        //   if (flag) {
+        //     flag = false
+        //   }
+        // }
+
+        // if (!(role.length > 0)) {
+        //   setroleInvalidtext('Role should not be empty')
+
+        //   if (flag) {
+        //     flag = false
+        //   }
+        // }
+
+        // if (!(phoneNumber.length > 0)) {
+        //   setphoneInvalidtext('Phone Number should not be empty')
+
+        //   if (flag) {
+        //     flag = false
+        //   }
+        // }
+        setDisabled(false)
+      } else {
+        setDisabled(true)
       }
     } catch (error) {
       console.log(error)
@@ -188,6 +198,8 @@ export const PageStepOne: FC = () => {
   //   console.log(response)
   // }
 
+  console.log(disabled)
+
   return (
     <div className={styles.page}>
       <div className={styles.parent}>
@@ -196,7 +208,7 @@ export const PageStepOne: FC = () => {
           <form className={styles.form}>
             <sinch-input
               className={styles.sinchInput}
-              value=""
+              value={email}
               onChange={(value) => {
                 setEmail(value)
               }}
@@ -230,16 +242,8 @@ export const PageStepOne: FC = () => {
               label="Last Name"
               placeholder="Doe"
             />
-            <sinch-input
-              value={phoneNumber}
-              onChange={(value) => {
-                setphoneNumber(value)
-              }}
-              invalidText={phoneInvalidtext.length > 0 ? phoneInvalidtext : undefined}
-              label="Phone Number"
-              placeholder="0123456789"
-            />
             <sinch-select
+              placeholder="Select"
               value={role}
               onChange={(value) => {
                 setRole(value)
@@ -268,25 +272,32 @@ export const PageStepOne: FC = () => {
                 slot="select"
               />
             </sinch-select>
+            <sinch-input
+              value={phoneNumber}
+              optionalText="ex: +55(11)91234-5678"
+              onChange={(value) => {
+                setphoneNumber(value)
+              }}
+              invalidText={phoneInvalidtext.length > 0 ? phoneInvalidtext : undefined}
+              label="Phone Number"
+              placeholder="0123456789"
+            />
             <sinch-button
               className={styles.createAcc}
-              style={{ width: '75%' }}
               type="cta"
-              disabled={disabled ? undefined : false}
+              disabled={disabled ? disabled : undefined} //{disabled ? undefined : false}
               onClick={sendData}
               text="Create Account"
             />
-            <div className={styles.signupLogin}>
-              <sinch-button
-                style={{ width: '75%' }}
-                type="secondary"
-                onClick={() => {}}
-                text="Login"
-              />
-            </div>
+            <sinch-button
+              type="secondary"
+              style={{ marginTop: '3%' }}
+              onClick={() => {}}
+              text="Login"
+            />
             <div className={styles.signupFG}>
               <sinch-button
-                style={{ width: '75%' }}
+                style={{ width: '100%' }}
                 type="secondary"
                 onClick={() => {}}
                 text="Signup with Google"
@@ -295,7 +306,7 @@ export const PageStepOne: FC = () => {
               </sinch-button>
               <div className={styles.facebookSignup}>
                 <sinch-button
-                  style={{ width: '75%' }}
+                  style={{ width: '100%' }}
                   type="secondary"
                   onClick={() => {}}
                   text="Signup with Facebook"
@@ -313,7 +324,7 @@ export const PageStepOne: FC = () => {
           <img src={sinchlogo} className={styles.sinchlogo}/>
         </div>
         <div className={styles.signupDescription}>
-          <h3>
+          <h3 className={styles.signupDescriptionText}>
             We help you deliver outstanding conversational customer experiences
           </h3>
         </div>

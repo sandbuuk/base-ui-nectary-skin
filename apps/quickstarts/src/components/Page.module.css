@@ -1,6 +1,7 @@
 /* stylelint-disable selector-class-pattern */
 * {
   box-sizing: border-box;
+  color: #0A273D
 }
 
 h2 {
@@ -34,7 +35,11 @@ margin-bottom: 10%;
 .form {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 85%;
+}
+
+.sinchInput{
+  width: 80%;
 }
 
 .rightSide {
@@ -62,6 +67,7 @@ margin-bottom: 10%;
   display: flex;
   justify-content: center;
   margin: 30px;
+  margin-top:15px;
   background-color: #ffffff;
   flex: 4;
 }
@@ -115,24 +121,32 @@ margin-bottom: 10%;
 }
 
 .fontName {
-  font: var(--sinch-font-title-1)
+  font: var(--sinch-font-title-1);
+  margin-bottom: 0%;
+  font-size: 64px;
+  font-weight: 200;
+  color: #0A273D
 }
 
 .fontNameTitle{
   font: var(--sinch-font-title-2);
+  font-size: 40px;
+  margin-top:15px;
   margin-bottom:50px;
+  color: #0A273D;
 }
 
 .sinchlogo {
-  height: 30px;
-  width: 60px;
+  height: auto;
+  width: 80px;
   margin: 2%;
-  margin-top:35px;
+  margin-top:45px;
 }
 
 .nameAlogo {
   display: flex;
   flex-direction: row;
+  margin-top:10px;
   justify-content: center;
 }
 
@@ -142,9 +156,13 @@ margin-bottom: 10%;
 }
 
 .signupDescription{
-  font: var(--sinch-font-body);
   display: flex;
   justify-content: center;
+}
+.signupDescriptionText{
+  font: var(--sinch-font-body);
+  font-weight: 200;
+  font-size: 24px;
 }
 
 .image {
@@ -160,7 +178,7 @@ margin-bottom: 10%;
 
 .signupImage {
   width: 430px;
-  height: 630px;
+  height: auto;
 }
 
 .createAccdiv {

@@ -12,19 +12,68 @@ import humanMobile from './images/humanMobile.png'
 import verticalLine from './images/verticalLine.png'
 import type { FC } from 'react'
 
+type WhatsappquestionProps={
+  i: number,
+  questionCounter: number,
+  agentdetails: any[],
+  setAgentdetails: (value: any) => void,
+
+}
+
+const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
+  const { agentdetails, questionCounter, setAgentdetails } = props
+
+  console.log(agentdetails, questionCounter)
+
+  return (
+    <div className={styles.messagesInput}>
+      <div className={styles.Input}>
+        <sinch-input
+          key={`${props.i}name`}
+          className={styles.agentName}
+          value={agentdetails[props.i].name}
+          style={{ width: '100%' }}
+          onChange={(value) => {
+            setAgentdetails((datas: string[]) => ({
+              ...datas,
+              [props.i]: { name: value, email: '' },
+            }))
+          }}
+          label="Agent name"
+          placeholder="What is your name?"
+        />
+      </div>
+      <div className={styles.Input}>
+        <sinch-input
+          key={`${props.i}email`}
+          value={agentdetails[props.i].email}
+          style={{ width: '100%' }}
+          onChange={(value) => {
+            setAgentdetails((datas: string[]) => ({
+              ...datas,
+              [props.i]: { name: agentdetails[props.i].name, email: value },
+            }))
+          }}
+          label="Agent e-mail"
+          placeholder="What is your email?"
+        />
+      </div>
+    </div>
+  )
+}
+
 export const PageStepFour: FC = () => {
   //const { next } = usePageControl()
 
   const [agentdetails, setAgentdetails] = useState([{ name: '', email: '' }])
-  type WhatsappquestionProps={
-    i: number,
-  }
+
+  console.log(agentdetails)
 
   const { accountId } = usePageOneControl()
 
   console.log(accountId)
 
-  const { botquestion, greetingmsg, humanhandover } = usePageThreeControl()
+  const { botquestion, humanhandover, setHumanhandover } = usePageThreeControl()
 
   const { handleBack } = useStepperControl()
   //handleNext(1);
@@ -43,6 +92,10 @@ export const PageStepFour: FC = () => {
   const buttonCounter = () => {
     console.log(questionCounter)
 
+    const length = Object.keys(agentdetails).length
+
+    agentdetails[length] = { name: '', email: '' }
+
     if (questionCounter < 5) {
       setCounter((prevCounter) => prevCounter + 1)
     }
@@ -51,7 +104,7 @@ export const PageStepFour: FC = () => {
   async function nextPage() {
     const questions = []
 
-    questions.push({ questionText: greetingmsg })
+    questions.push({ questionText: humanhandover })
 
     const botquestions = botquestion.map((val, index) => {
       console.log(index)
@@ -96,54 +149,6 @@ export const PageStepFour: FC = () => {
     handleBack()
   }
 
-  const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
-    console.log(props.i)
-    console.log(agentdetails)
-
-    if (questionCounter > 1) {
-      const ob = agentdetails
-
-      ob.push({ name: '', email: '' })
-      setAgentdetails(ob)
-    }
-
-    return (
-      <div className={styles.messagesInput}>
-        <div className={styles.Input}>
-          <sinch-input
-            key={`${props.i}name`}
-            className={styles.agentName}
-            value={agentdetails[props.i].name}
-            style={{ width: '100%' }}
-            onChange={(value) => {
-              const ob = agentdetails
-
-              ob[props.i].name = value
-              setAgentdetails(ob)
-            }}
-            label="Agent name"
-            placeholder="What is your name?"
-          />
-        </div>
-        <div className={styles.Input}>
-          <sinch-input
-            key={`${props.i}email`}
-            value={agentdetails[props.i].email}
-            style={{ width: '100%' }}
-            onChange={(value) => {
-              const ob = agentdetails
-
-              ob[props.i].email = value
-              setAgentdetails(ob)
-            }}
-            label="Agent e-mail"
-            placeholder="What is your email?"
-          />
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className={styles.pageWhatsapp}>
       <div className={styles.mainBodyWhatsapp}>
@@ -167,7 +172,7 @@ export const PageStepFour: FC = () => {
         <div className={styles.whatsappBody}>
           <div className={styles.messagesParent}>
             <div className={styles.humanMessages}>
-              { [...Array(questionCounter)].map((_, i) => <WhatsappQuestion key={i} i={i}/>) }
+              { [...Array(questionCounter)].map((_, i) => <WhatsappQuestion questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={i} i={i}/>) }
               <div className={styles.humanButton}>
                 <sinch-button
                   style={{ width: '90%' }}
@@ -180,7 +185,7 @@ export const PageStepFour: FC = () => {
             <img className={styles.humanLine} src={verticalLine}/>
             <div className={styles.humanHandover}>
                   <sinch-textarea // eslint-disable-line
-                    value={greetingmsg}
+                    value={humanhandover}
                     label="Human Handover Message"
                     placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
                     optionalText={undefined}
@@ -188,7 +193,9 @@ export const PageStepFour: FC = () => {
                     style={{ width: '100%' }}
                     additionalText={undefined}
                     disabled={undefined}
-                    onChange={() => {}}
+                    onChange={(value) => {
+                      setHumanhandover(value)
+                    }}
                     onFocus={() => {}}
                     onBlur={() => {}}
                   />
