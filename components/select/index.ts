@@ -184,12 +184,12 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return getAttribute(this, 'value', '')
   }
 
-  set placeholder(value: string | undefined) {
+  set placeholder(value: string | null) {
     updateAttribute(this, 'placeholder', value)
   }
 
   get placeholder() {
-    return getAttribute(this, 'placeholder')
+    return getAttribute(this, 'placeholder', null)
   }
 
   set label(value: string) {
@@ -200,28 +200,28 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return getAttribute(this, 'label', '')
   }
 
-  set optionalText(value: string | undefined) {
+  set optionalText(value: string | null) {
     updateAttribute(this, 'optionaltext', value)
   }
 
   get optionalText() {
-    return getAttribute(this, 'optionaltext')
+    return getAttribute(this, 'optionaltext', null)
   }
 
-  set additionalText(value: string | undefined) {
+  set additionalText(value: string | null) {
     updateAttribute(this, 'additionaltext', value)
   }
 
   get additionalText() {
-    return getAttribute(this, 'additionaltext')
+    return getAttribute(this, 'additionaltext', null)
   }
 
-  set invalidText(value: string | undefined) {
+  set invalidText(value: string | null) {
     updateAttribute(this, 'invalidtext', value)
   }
 
   get invalidText() {
-    return getAttribute(this, 'placeholder')
+    return getAttribute(this, 'placeholder', null)
   }
 
   set disabled(isDisabled: boolean) {
@@ -232,12 +232,12 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set maxVisibleItems(value: number | undefined) {
+  set maxVisibleItems(value: number | null) {
     updateIntegerAttribute(this, 'maxvisibleitems', value)
   }
 
   get maxVisibleItems() {
-    return getIntegerAttribute(this, 'maxvisibleitems', 0)!
+    return getIntegerAttribute(this, 'maxvisibleitems', null)
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -444,12 +444,12 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 type TSinchSelectElement = HTMLElement & {
   value: string,
   label: string,
-  placeholder?: string,
-  optionalText?: string,
-  invalidText?: string,
-  additionalText?: string,
+  placeholder: string | null,
+  optionalText: string | null,
+  invalidText: string | null,
+  additionalText: string | null,
   disabled: boolean,
-  maxVisibleItems: number,
+  maxVisibleItems: number | null,
   focus(): void,
   blur(): void,
 }
