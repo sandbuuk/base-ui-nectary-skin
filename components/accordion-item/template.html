@@ -1,0 +1,113 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+  min-height: 48px;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-bottom: 1px solid var(--sinch-color-stormy-200);
+}
+
+#button {
+  all: initial;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 48px;
+  padding: 12px 8px;
+  font: var(--sinch-font-title-4);
+  color: var(--sinch-color-text-default);
+  fill: var(--sinch-color-stormy-500);
+}
+
+#button > * {
+  pointer-events: none;
+}
+
+#button:disabled {
+  cursor: initial;
+  color: var(--sinch-color-stormy-100);
+  fill: var(--sinch-color-stormy-100);
+}
+
+#button::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 8px;
+}
+
+:host([status="success"]) #button::before {
+  content: "";
+  background-color: var(--sinch-color-success-500);
+}
+
+:host([status="warn"]) #button::before {
+  content: "";
+  background-color: var(--sinch-color-warning-500);
+}
+
+:host([status="error"]) #button::before {
+  content: "";
+  background-color: var(--sinch-color-error-500);
+}
+
+:host([status="info"]) #button::before {
+  content: "";
+  background-color: var(--sinch-color-informative-500);
+}
+
+#content {
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#box {
+  display: none;
+  overflow-y: auto;
+  flex-shrink: 1;
+  min-height: 0;
+  padding: 0 8px 18px;
+  font: var(--sinch-font-body);
+}
+
+#button[aria-expanded="true"] > #dropdown-icon {
+  transform: rotate(180deg);
+}
+
+#button[aria-expanded="true"] + #box {
+  display: block;
+}
+</style>
+
+<div id="wrapper">
+  <button
+    id="button"
+    aria-haspopup="box"
+    aria-expanded="false"
+    aria-labelledby="button"
+  >
+    <slot name="icon"></slot>
+    <span id="content"></span>
+    <svg id="dropdown-icon" width="12" height="8">
+      <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
+    </svg>
+  </button>
+  <div id="box">
+    <slot></slot>
+  </div>
+</div>

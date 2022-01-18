@@ -51,7 +51,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<JSX.IntrinsicElements['sinch-input']> = ({ onChange }) => {
+const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-input']> => ({ onChange }) => {
   const [{
     value,
     label,
@@ -66,7 +66,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-input']> = ({ onChange }) => 
   if (inputRef.current == null) {
     const $input = document.createElement('sinch-input')
 
-    $input.innerHTML = '<sinch-input-tooltip text="Tooltip text long"></sinch-input-tooltip>'
+    $input.innerHTML = innerHTML
 
     $input.addEventListener('change', (e: any) => {
       onChange(e.detail)
@@ -91,7 +91,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-input']> = ({ onChange }) => 
   return $input
 }
 
-export const Input = Template.bind({})
+export const Input = Template('<sinch-input-tooltip text="Tooltip text long"></sinch-input-tooltip>')
 
 Input.args = {
   value: 'hi',
