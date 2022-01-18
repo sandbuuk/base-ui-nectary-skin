@@ -3,13 +3,29 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { SelectComponent } from '../components/Select/Select.component'
 import { RadioComponent } from '../components/Radio/Radio.component'
+import { InputComponent } from '../components/Input/Input.component'
+import { AlertComponent } from '../components/Alert/Alert.component'
+import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
+import { ButtonComponent } from '../components/Button/Button.component'
+import { TextareaComponent } from '../components/Textarea/Textarea.component'
+import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
+import { SpinnerComponent } from '../components/Spinner/Spinner.component'
+import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     SelectComponent,
     RadioComponent,
+    InputComponent,
+    CheckboxComponent,
+    ButtonComponent,
+    TextareaComponent,
+    ToggleComponent,
+    TooltipComponent,
+    SpinnerComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
@@ -20,8 +36,6 @@ import { AppComponent } from './app.component'
   ],
   exports: [
     AppComponent,
-    SelectComponent,
-    RadioComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

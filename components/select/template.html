@@ -1,26 +1,27 @@
 <style>
 :host {
   display: inline-block;
-  position: relative;
-  height: 96px;
-  max-width: 300px;
   outline: none;
+}
+
+#wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #button {
   all: initial;
   display: flex;
   align-items: center;
+  gap: 8px;
   border: 1px solid var(--sinch-color-stormy-200);
-  box-sizing: border-box;
   border-radius: 2px;
+  box-sizing: border-box;
   width: 100%;
   height: 48px;
   margin: 2px 0;
   padding: 8px 12px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
   fill: var(--sinch-color-stormy-500);
@@ -30,6 +31,7 @@
   pointer-events: none;
 }
 
+/* Placeholder */
 #button[data-unselected] {
   color: var(--sinch-color-text-muted);
 }
@@ -44,12 +46,8 @@
   border-color: var(--sinch-color-stormy-300);
 }
 
-:host([invalidtext]) #button:not(:disabled) {
+:host([invalidtext]:not([invalidtext=""])) #button:not(:disabled) {
   border-color: var(--sinch-color-text-invalid);
-}
-
-#button > :not(:first-child) {
-  margin-left: 8px;
 }
 
 #content {
@@ -66,11 +64,11 @@
 }
 
 #top {
-  line-height: 24px;
+  height: 24px;
 }
 
 #bottom {
-  line-height: 20px;
+  height: 20px;
 }
 
 #label,
@@ -95,7 +93,8 @@
 }
 
 #additional {
-  margin-left: auto;
+  flex: 1;
+  text-align: right;
   font: var(--sinch-font-extra-small-text);
   color: var(--sinch-color-text-muted);
 }
@@ -110,6 +109,14 @@
   margin: 0 8px;
 }
 
+:host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
+  color: var(--sinch-color-stormy-100);
+}
+
+:host([disabled]:not([disabled="false"])) ::slotted(sinch-input-tooltip) {
+  fill: var(--sinch-color-stormy-100);
+}
+
 #listbox {
   position: absolute;
   left: 0;
@@ -121,25 +128,17 @@
   outline: none;
 }
 
-#listbox > div {
-  width: 100%;
+#listbox > * {
   font: var(--sinch-font-body);
   background-color: var(--sinch-color-snow-100);
   border: 1px solid var(--sinch-color-stormy-500);
   border-top-width: 0;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
+  width: 100%;
   box-sizing: border-box;
   box-shadow: 1px 2px 4px rgb(0 0 0 / 15%);
-}
-
-:host([disabled]) #label,
-:host([disabled]) #additional,
-:host([disabled]) #optional,
-:host([disabled]) #invalid,
-:host([disabled]) ::slotted(sinch-input-tooltip) {
-  color: var(--sinch-color-stormy-100);
-  fill: var(--sinch-color-stormy-100);
+  overflow-y: auto;
 }
 
 #button[aria-expanded="true"] {
@@ -152,28 +151,30 @@
 }
 </style>
 
-<div id="top">
-  <label id="label" for="button"></label>
-  <slot name="tooltip"></slot>
-  <span id="optional"></span>
-</div>
-<button
-  id="button"
-  aria-haspopup="listbox"
-  aria-expanded="false"
-  aria-labelledby="label button"
->
-  <span id="content"></span>
-  <svg id="dropdown-icon" width="12" height="8">
-    <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
-  </svg>
-</button>
-<div id="bottom">
-  <span id="invalid"></span>
-  <span id="additional"></span>
-</div>
-<div id="listbox" tabindex="-1">
-  <div>
-    <slot name="select"></slot>
+<div id="wrapper">
+  <div id="top">
+    <label id="label" for="button"></label>
+    <slot name="tooltip"></slot>
+    <span id="optional"></span>
+  </div>
+  <button
+    id="button"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-labelledby="label button"
+  >
+    <span id="content"></span>
+    <svg id="dropdown-icon" width="12" height="8">
+      <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
+    </svg>
+  </button>
+  <div id="bottom">
+    <span id="invalid"></span>
+    <span id="additional"></span>
+  </div>
+  <div id="listbox" tabindex="-1">
+    <div>
+      <slot name="select"></slot>
+    </div>
   </div>
 </div>

@@ -22,6 +22,7 @@ defineCustomElement('sinch-radio-option', class extends HTMLElement {
 
     const shadowRoot = this.attachShadow({
       mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      delegatesFocus: true,
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
@@ -104,6 +105,7 @@ defineCustomElement('sinch-radio-option', class extends HTMLElement {
   }
 
   onInput = () => {
+    this.$input.checked = false
     this.dispatchEvent(
       new CustomEvent('change', { bubbles: true, detail: this.value })
     )

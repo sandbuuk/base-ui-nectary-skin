@@ -21,26 +21,33 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-button', class extends HTMLElement {
   $button: HTMLButtonElement
   $text: HTMLSpanElement
+  $slot: HTMLSlotElement
 
   constructor() {
     super()
 
     const shadowRoot = this.attachShadow({
       mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      delegatesFocus: true,
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.$button = shadowRoot.querySelector('button')!
     this.$text = shadowRoot.querySelector('#text')!
+    this.$slot = shadowRoot.querySelector('slot')!
   }
 
   connectedCallback() {
     this.$button.addEventListener('click', this.onButtonClick)
+    this.$button.addEventListener('focus', this.onButtonFocus)
+    this.$button.addEventListener('blur', this.onButtonBlur)
   }
 
   disconnectedCallback() {
     this.$button.removeEventListener('click', this.onButtonClick)
+    this.$button.removeEventListener('focus', this.onButtonFocus)
+    this.$button.removeEventListener('blur', this.onButtonBlur)
   }
 
   static get observedAttributes() {
@@ -103,6 +110,22 @@ defineCustomElement('sinch-button', class extends HTMLElement {
       new CustomEvent('click')
     )
   }
+
+  focus() {
+    this.$button.focus()
+  }
+
+  blur() {
+    this.$button.blur()
+  }
+
+  onButtonFocus = () => {
+    getEventHandler(this, 'onFocus')?.()
+  }
+
+  onButtonBlur = () => {
+    getEventHandler(this, 'onBlur')?.()
+  }
 })
 
 type TSinchButtonType = typeof buttonTypes[number]
@@ -112,6 +135,8 @@ type TSinchButtonElement = HTMLElement & {
   text: string,
   disabled: boolean,
   small: boolean,
+  focus(): void,
+  blur(): void,
 }
 
 type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
@@ -120,6 +145,8 @@ type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   disabled?: boolean,
   small?: boolean,
   onClick: () => void,
+  onFocus?: () => void,
+  onBlur?: () => {},
 }
 
 declare global {

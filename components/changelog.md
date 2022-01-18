@@ -1,3 +1,11 @@
+## v0.4.0
+
+* ➕ add `sinch-alert` component
+* ➕ add `sinch-spinner` component
+* ➕ add `maxVisibleItems` property to `sinch-select`
+* 🐞 fix `sinch-input` controlled value
+* 🐞 fix `sinch-radio` controlled value
+
 ## v0.3.0
 
 * ➕ add `sinch-radio` component
@@ -14,8 +22,8 @@
 ## v0.1.1
 
 * 🐞 Button: fixed `onClick` handler in React
-* 🛠 Fixed JSX/DOM Element types
+* 🛠 fixed JSX/DOM Element types
 
 ## v0.1.0
 
-* 🐣 Initial release
+* 🐣 initial release

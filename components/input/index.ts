@@ -1,4 +1,12 @@
-import { defineCustomElement, getAttribute, getBooleanAttribute, getEventHandler, isAttrTrue, updateAttribute, updateBooleanAttribute } from '../utils'
+import {
+  defineCustomElement,
+  getAttribute,
+  getBooleanAttribute,
+  getEventHandler,
+  isAttrTrue,
+  updateAttribute,
+  updateBooleanAttribute,
+} from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
@@ -19,6 +27,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
     const shadowRoot = this.attachShadow({
       mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      delegatesFocus: true,
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
@@ -165,6 +174,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   onInput = (e: Event) => {
+    e.stopPropagation()
     getEventHandler(this, 'onChange')?.(this.$input.value)
 
     this.dispatchEvent(
@@ -173,27 +183,25 @@ defineCustomElement('sinch-input', class extends HTMLElement {
       })
     )
 
-    e.stopPropagation()
+    this.$input.value = this.value
   }
 
   onInputFocus = (e: Event) => {
+    e.stopPropagation()
     getEventHandler(this, 'onFocus')?.()
 
     this.dispatchEvent(
       new CustomEvent('focus')
     )
-
-    e.stopPropagation()
   }
 
   onInputBlur = (e: Event) => {
+    e.stopPropagation()
     getEventHandler(this, 'onBlur')?.()
 
     this.dispatchEvent(
       new CustomEvent('blur')
     )
-
-    e.stopPropagation()
   }
 })
 

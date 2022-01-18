@@ -65,7 +65,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.$input.textContent = newVal
+        this.$input.value = newVal ?? ''
 
         break
       }
@@ -173,35 +173,37 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   }
 
   onInput = (e: Event) => {
-    getEventHandler(this, 'onChange')?.(this.$input.value)
+    e.stopPropagation()
+
+    const value = this.$input.value
+
+    getEventHandler(this, 'onChange')?.(value)
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: this.$input.value,
+        detail: value,
       })
     )
 
-    e.stopPropagation()
+    this.$input.value = this.value
   }
 
   onInputFocus = (e: Event) => {
+    e.stopPropagation()
     getEventHandler(this, 'onFocus')?.()
 
     this.dispatchEvent(
       new CustomEvent('focus')
     )
-
-    e.stopPropagation()
   }
 
   onInputBlur = (e: Event) => {
+    e.stopPropagation()
     getEventHandler(this, 'onBlur')?.()
 
     this.dispatchEvent(
       new CustomEvent('blur')
     )
-
-    e.stopPropagation()
   }
 })
 
@@ -226,8 +228,8 @@ type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   additionalText?: string,
   disabled?: boolean,
   onChange: (value: string) => void,
-  onFocus: () => void,
-  onBlur: () => void,
+  onFocus?: () => void,
+  onBlur?: () => void,
 }
 
 declare global {

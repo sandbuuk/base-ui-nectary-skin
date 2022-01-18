@@ -2,6 +2,16 @@
 :host {
   display: inline-block;
 }
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+}
 </style>
 
-<slot></slot>
+<div id="wrapper">
+  <slot></slot>
+</div>
