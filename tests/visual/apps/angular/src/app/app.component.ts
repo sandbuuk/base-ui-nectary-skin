@@ -8,20 +8,27 @@ import { Component } from '@angular/core'
 
 export class AppComponent {
   pathname: string
-  style: object
+  style: Partial<CSSStyleDeclaration>
 
   constructor() {
     const url = new URL(location.href)
-    const width = Number(url.searchParams.get('width') ?? '0')
-
     this.pathname = url.pathname
-    this.style = width > 0 ? {
-      display: 'flex' as const,
-      flexDirection: 'column' as const,
-      width: width + 'px',
-      padding: '100px'
-    } : {
-      padding: '100px'
-    }
+
+    const width = Number(url.searchParams.get('width') ?? '0')
+  const height = Number(url.searchParams.get('height') ?? '0')
+
+  this.style = {
+    display: 'flex',
+    padding: '100px'
+  }
+
+  if (height > 0) {
+    this.style.height = height + 'px'
+  }
+
+  if (width > 0) {
+    this.style.flexDirection = 'column',
+    this.style.width = width + 'px'
+  }
   }
 }

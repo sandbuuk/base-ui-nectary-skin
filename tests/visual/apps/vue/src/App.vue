@@ -1,5 +1,6 @@
 <template>
   <div :style="style">
+    <Accordion v-if="url.pathname === '/accordion'" :search="url.searchParams"/>
     <Alert v-if="url.pathname === '/alert'" :search="url.searchParams"/>
     <Button v-if="url.pathname === '/button'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
@@ -16,6 +17,7 @@
 
 <script>
 import '@nectary/components'
+import Accordion from './components/Accordion.vue'
 import Alert from './components/Alert.vue'
 import Button from './components/Button.vue'
 import Checkbox from './components/Checkbox.vue'
@@ -37,19 +39,27 @@ export default {
   computed: {
     style () {
       const width = Number(this.url.searchParams.get('width') ?? '0')
-      const style = width > 0 ? {
+      const height = Number(this.url.searchParams.get('height') ?? '0')
+
+      const style = {
         display: 'flex',
-        flexDirection: 'column',
-        width: width + 'px',
         padding: '100px'
-      } : {
-        padding: '100px'
+      }
+
+      if (height > 0) {
+        style.height = height + 'px'
+      }
+
+      if (width > 0) {
+        style.flexDirection = 'column',
+        style.width = width + 'px'
       }
 
       return style;
     }
   },
   components: {
+    Accordion,
     Alert,
     Button,
     Checkbox,

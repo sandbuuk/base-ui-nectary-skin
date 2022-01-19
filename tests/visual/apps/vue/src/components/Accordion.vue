@@ -1,12 +1,15 @@
 <template>
-  <sinch-radio :value="value" @change="onChange">
-    <sinch-radio-option v-for="opt in options"
+  <sinch-accordion :value="value" @change="onChange" :multiple="isMultiple">
+    <sinch-accordion-item v-for="opt in options"
       :key="opt.value"
       :value="opt.value"
-      :text="opt.text"
-      :disabled="opt.disabled">
-    </sinch-radio-option>
-  </sinch-radio>
+      :label="opt.label"
+      :disabled="opt.disabled"
+      :status="opt.status">
+      <span v-if="opt.content != null">{{opt.content}}</span>
+      <sinch-icon-share v-if="opt.icon === true" slot="icon"></sinch-icon-share>
+    </sinch-accordion-item>
+  </sinch-accordion>
 </template>
 
 <script>
@@ -17,6 +20,9 @@ export default {
   computed: {
     isControlled() {
       return this.search.get('uncontrolled') === null
+    },
+    isMultiple() {
+      return this.search.get('multiple') !== null
     },
     options() {
       const data = this.search.get('options')
