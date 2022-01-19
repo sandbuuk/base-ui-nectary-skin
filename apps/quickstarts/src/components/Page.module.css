@@ -162,7 +162,8 @@ margin-bottom: 10%;
 .signupDescriptionText{
   font: var(--sinch-font-body);
   font-weight: 200;
-  font-size: 24px;
+  margin-left:25px;
+  font-size: 22px;
 }
 
 .image {
@@ -382,6 +383,12 @@ margin-bottom: 10%;
   font: var(--sinch-font-extra-small-text);
   margin-top: 0%;
 }
+
+.whatsappMatterHeading{
+  font:var(--sinch-font-title-2);
+  font-size: 30px;
+}
+
 .botwhatsappMatterBody {
   font: var(--sinch-font-extra-small-text);
 }
@@ -785,4 +792,73 @@ margin-bottom: 10%;
 
 .botwhatsappMatterHeading{
   font:var(--sinch-font-title-2);
+  font-size: 30px;
+}
+
+.humanDetails{
+  margin-top: 20%;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+.humanName{
+  margin-right: 3%;
+  flex: 4;
+  flex-wrap: wrap;
+}
+.humanEmail{
+  margin-right: 3%;
+  flex: 4;
+  flex-wrap: wrap;
+}
+.humanAction{
+  margin-right: 3%;
+  flex: 4;
+}
+.humanDetailsbuttons{
+  display: flex;
+  flex-direction: row;
+}
+.messagesMobile{
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+.messagesBody{
+  display: flex;
+  flex-direction: row;
+}
+.agentDetails{
+  margin-left: 15%;
+}
+.human{
+  display: flex;
+  flex-direction: row;
+}
+.humanhidden{
+  display: none;
+}
+.humanValues{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+.horizontaLine{
+  width: 100%;
+  border: '1px solid #999999'
+}
+.horizontaLinehidden{
+  width: 0%;
+}
+
+.parentHuman{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 200px;
+}
+
+td{
+  max-width: 100px;
+  overflow-wrap: break-word;
 }

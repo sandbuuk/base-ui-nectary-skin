@@ -17,7 +17,10 @@ type WhatsappquestionProps={
   questionCounter: number,
   agentdetails: any[],
   setAgentdetails: (value: any) => void,
+}
 
+type AgentInformationProps={
+  agentdetails: { name: string, email: string }[],
 }
 
 const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
@@ -62,6 +65,31 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
   )
 }
 
+const AgentInformation: FC<AgentInformationProps> = (props) => {
+  const { agentdetails } = props
+
+  return (
+    <>
+      { [...Array(Object.keys(agentdetails).length - 1)].map((_, i) => (
+        <tr key={i} className={styles.humanValues}>
+          <td className={styles.humanName}>
+            <p>{agentdetails[i].name}</p>
+          </td>
+          <td className={styles.humanEmail}>
+            <p>{agentdetails[i].email}</p>
+          </td>
+          <td className={styles.humanAction}>
+            <div className={styles.humanDetailsbuttons}>
+              <sinch-button type="primary" text="Edit" onClick={() => {}}/>
+              <sinch-button type="destructive" text="Delete" onClick={() => {}}/>
+            </div>
+          </td>
+        </tr>
+      )) }
+    </>
+  )
+}
+
 export const PageStepFour: FC = () => {
   //const { next } = usePageControl()
 
@@ -81,6 +109,8 @@ export const PageStepFour: FC = () => {
 
   const [open, setOpen] = useState(false)
 
+  const [count, setCount] = useState(0)
+
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -92,12 +122,14 @@ export const PageStepFour: FC = () => {
   const buttonCounter = () => {
     console.log(questionCounter)
 
-    const length = Object.keys(agentdetails).length
-
-    agentdetails[length] = { name: '', email: '' }
-
-    if (questionCounter < 5) {
+    if (questionCounter < 6) {
       setCounter((prevCounter) => prevCounter + 1)
+
+      const length = Object.keys(agentdetails).length
+
+      agentdetails[length] = { name: '', email: '' }
+
+      setCount((count) => count + 1)
     }
   }
 
@@ -172,14 +204,30 @@ export const PageStepFour: FC = () => {
         <div className={styles.whatsappBody}>
           <div className={styles.messagesParent}>
             <div className={styles.humanMessages}>
-              { [...Array(questionCounter)].map((_, i) => <WhatsappQuestion questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={i} i={i}/>) }
+              { <WhatsappQuestion questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={count} i={count}/>}
               <div className={styles.humanButton}>
                 <sinch-button
-                  style={{ width: '90%' }}
+                  style={{ width: '100%' }}
                   type="cta"
+                  disabled={questionCounter > 5 || agentdetails[Object.keys(agentdetails).length - 1].name.length <= 0 || agentdetails[Object.keys(agentdetails).length - 1].email.length <= 0 ? true : undefined}
                   onClick={buttonCounter}
-                  text={questionCounter < 5 ? `Add more Agents (Up to ${5 - questionCounter} )` : 'Add more Agents (Up to 0)'}
+                  text="Add more Agents (Up to 5)"
                 />
+              </div>
+              <div className={styles.humanDetails}>
+                <th className={count > 0 ? styles.human : styles.humanhidden}>
+                  <td className={styles.humanName}>
+                    Name
+                  </td>
+                  <td className={styles.humanEmail}>
+                    E-mail
+                  </td>
+                  <td className={styles.humanAction}>
+                    Action
+                  </td>
+                </th>
+                <hr className={count > 0 ? styles.horizontaLine : styles.horizontaLinehidden}/>
+                <AgentInformation agentdetails={agentdetails}/>
               </div>
             </div>
             <img className={styles.humanLine} src={verticalLine}/>
