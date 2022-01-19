@@ -153,12 +153,10 @@ test('label attribute', withEmpty(async function* ({ $eval }) {
 }))
 
 test('fill', withEmpty(async function* ({ $ }) {
-  const $input = $.locator('textarea')
-
-  await $input.focus()
+  await $.focus()
   yield { name: 'focus' }
 
-  await $input.fill('Filled text')
+  await $.type('Filled text')
   yield { name: 'filled' }
 }))
 

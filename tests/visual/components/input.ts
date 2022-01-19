@@ -158,8 +158,7 @@ test('fill', withPlaceholder(async function* ({ $, $eval }) {
 
   await expect($eval((el) => el === document.activeElement)).resolves.toBe(true)
 
-  // More prefered "$.fill()" works on Ch and FF, not on Wk
-  await $.locator('input').fill('Filled text')
+  await $.type('Filled text')
   yield { name: 'filled' }
 
   await expect($eval((el) => el.value)).resolves.toBe('Filled text')
