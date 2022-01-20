@@ -37,14 +37,14 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-tabs']>
 }
 
 export const Tabs = Template(`
-<sinch-tabs-option value="1" text="Option 1"></sinch-tabs-option>
+<sinch-tabs-option value="1" text="Tab 1 label"></sinch-tabs-option>
 <sinch-tabs-option value="2" text="Lorem Ipsum Ipsum.">
   <sinch-icon-share></sinch-icon-share>
 </sinch-tabs-option>
-<sinch-tabs-option value="3" text="Option 3" disabled>
+<sinch-tabs-option value="3" text="Tab disabled" disabled>
   <sinch-icon-tooltip></sinch-icon-tooltip>
 </sinch-tabs-option>
-<sinch-tabs-option value="4" text="Option 4"></sinch-tabs-option>
+<sinch-tabs-option value="4" text="Tab 4 label"></sinch-tabs-option>
 `)
 
 Tabs.args = {
@@ -56,14 +56,14 @@ Tabs.parameters = {
     source: {
       code: `
 <sinch-tabs value={value} onChange={setValue}>
-  <sinch-tabs-option value="1" text="Option 1"></sinch-tabs-option>
+  <sinch-tabs-option value="1" text="Tab 1 label"></sinch-tabs-option>
   <sinch-tabs-option value="2" text="Lorem Ipsum Ipsum.">
     <sinch-icon-share></sinch-icon-share>
   </sinch-tabs-option>
-  <sinch-tabs-option value="3" text="Option 3" disabled>
+  <sinch-tabs-option value="3" text="Tab disabled" disabled>
     <sinch-icon-tooltip></sinch-icon-tooltip>
   </sinch-tabs-option>
-  <sinch-tabs-option value="4" text="Option 4"></sinch-tabs-option>
+  <sinch-tabs-option value="4" text="Tab 4 label"></sinch-tabs-option>
 </sinch-tabs>`,
     },
   },
