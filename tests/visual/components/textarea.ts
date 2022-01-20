@@ -152,7 +152,7 @@ test('label attribute', withEmpty(async function* ({ $eval }) {
   yield { name: 'empty' }
 }))
 
-test('fill', withEmpty(async function* ({ $ }) {
+test('fill', withPlaceholder(async function* ({ $ }) {
   await $.focus()
   yield { name: 'focus' }
 
