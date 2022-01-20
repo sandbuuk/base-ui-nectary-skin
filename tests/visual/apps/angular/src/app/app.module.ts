@@ -12,11 +12,13 @@ import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { SpinnerComponent } from '../components/Spinner/Spinner.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TabsComponent } from '../components/Tabs/Tabs.component'
+import { AccordionComponent } from '../components/Accordion/Accordion.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
   declarations: [
     AppComponent,
+    AccordionComponent,
     AlertComponent,
     SelectComponent,
     RadioComponent,

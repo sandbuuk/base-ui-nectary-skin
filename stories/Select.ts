@@ -64,7 +64,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
+const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-select']> => ({
   onChange,
   onFocus,
   onBlur,
@@ -86,17 +86,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
   if (inputRef.current === null) {
     const $input = document.createElement('sinch-select')
 
-    $input.innerHTML = `
-      <sinch-input-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-input-tooltip>
-      <sinch-select-option value="1" text="Option 1 value" slot="select">
-        <sinch-icon-share></sinch-icon-share>
-      </sinch-select-option>
-      <sinch-select-option value="2" text="Option 2 value" slot="select" disabled>
-        <sinch-icon-share></sinch-icon-share>
-      </sinch-select-option>
-      <sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
-      <sinch-select-option value="4" text="Option 4 value" slot="select"></sinch-select-option>
-    `
+    $input.innerHTML = innerHTML
 
     $input.addEventListener('change', (e: any) => {
       onChange(e.detail)
@@ -131,7 +121,17 @@ const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
   return $wrapper
 }
 
-export const Select = Template.bind({})
+export const Select = Template(`
+<sinch-input-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-input-tooltip>
+<sinch-select-option value="1" text="Option 1 value" slot="select">
+  <sinch-icon-share></sinch-icon-share>
+</sinch-select-option>
+<sinch-select-option value="2" text="Option 2 value" slot="select" disabled>
+  <sinch-icon-share></sinch-icon-share>
+</sinch-select-option>
+<sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
+<sinch-select-option value="4" text="Option 4 value" slot="select"></sinch-select-option>
+`)
 
 Select.args = {
   value: '2',

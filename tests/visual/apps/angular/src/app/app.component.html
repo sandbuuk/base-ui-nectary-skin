@@ -1,4 +1,5 @@
 <div [ngStyle]="style" [ngSwitch]="pathname">
+  <accordion-component *ngSwitchCase="'/accordion'"></accordion-component>
   <alert-component *ngSwitchCase="'/alert'"></alert-component>
   <button-component *ngSwitchCase="'/button'"></button-component>
   <checkbox-component *ngSwitchCase="'/checkbox'"></checkbox-component>

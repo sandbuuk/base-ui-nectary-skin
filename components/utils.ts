@@ -43,8 +43,9 @@ export const updateAttribute = ($element: HTMLElement, attrName: string, attrVal
 }
 
 export function getAttribute($element: HTMLElement, attrName: string): string | undefined
+export function getAttribute($element: HTMLElement, attrName: string, defaultValue: null): string | null
 export function getAttribute($element: HTMLElement, attrName: string, defaultValue: string): string
-export function getAttribute($element: HTMLElement, attrName: string, defaultValue?: string) {
+export function getAttribute($element: HTMLElement, attrName: string, defaultValue?: string | null) {
   return $element.getAttribute(attrName) ?? defaultValue
 }
 
@@ -53,12 +54,7 @@ export const isLiteralValue = <T extends readonly string[]>(literals: T, value: 
 }
 
 export const updateLiteralAttribute = <T extends readonly string[]>($element: HTMLElement, literals: T, attrName: string, attrValue: T[number] | null | undefined) => {
-  if (!isLiteralValue(literals, attrValue)) {
-    // Silently ignore incorrect value
-    return
-  }
-
-  if (attrValue != null) {
+  if (isLiteralValue(literals, attrValue)) {
     $element.setAttribute(attrName, attrValue)
   } else {
     $element.removeAttribute(attrName)
@@ -66,8 +62,9 @@ export const updateLiteralAttribute = <T extends readonly string[]>($element: HT
 }
 
 export function getLiteralAttribute<T extends readonly string[]>($element: HTMLElement, literals: T, attrName: string): T[number] | undefined
+export function getLiteralAttribute<T extends readonly string[]>($element: HTMLElement, literals: T, attrName: string, defaultValue: null): T[number] | null
 export function getLiteralAttribute<T extends readonly string[]>($element: HTMLElement, literals: T, attrName: string, defaultValue: T[number]): T[number]
-export function getLiteralAttribute($element: HTMLElement, literals: string[], attrName: string, defaultValue?: string) {
+export function getLiteralAttribute($element: HTMLElement, literals: string[], attrName: string, defaultValue?: string | null) {
   const attrValue = $element.getAttribute(attrName)
 
   return isLiteralValue(literals, attrValue) ? attrValue : defaultValue
@@ -133,7 +130,33 @@ export const updateIntegerAttribute = ($element: HTMLElement | SVGElement, attrN
 }
 
 export function getIntegerAttribute($element: HTMLElement, attrName: string): number | undefined
+export function getIntegerAttribute($element: HTMLElement, attrName: string, defaultValue: null): number | null
 export function getIntegerAttribute($element: HTMLElement, attrName: string, defaultValue: number): number
-export function getIntegerAttribute($element: HTMLElement, attrName: string, defaultValue?: number) {
+export function getIntegerAttribute($element: HTMLElement, attrName: string, defaultValue?: number | null) {
   return attrValueToInteger($element.getAttribute(attrName)) ?? defaultValue
+}
+
+export const updateCSV = (acc: string, value: string, setActive: boolean): string => {
+  const values = acc === '' ? [] : acc.split(',')
+  const i = values.indexOf(value)
+
+  if (setActive) {
+    i === -1 && values.push(value)
+  } else {
+    i >= 0 && values.splice(i, 1)
+  }
+
+  return values.join(',')
+}
+
+export const getCSVSet = (acc: string): Set<string> => {
+  if (acc === '') {
+    return new Set()
+  }
+
+  return new Set(acc.split(','))
+}
+
+export const getFirstCSValue = (acc: string): string => {
+  return acc.split(',')[0]
 }

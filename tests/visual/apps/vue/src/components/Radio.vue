@@ -1,6 +1,11 @@
 <template>
   <sinch-radio :value="value" @change="onChange">
-    <sinch-radio-option v-for="opt in options" :key="opt.value" :value="opt.value" :text="opt.text" :disabled="opt.disabled"></sinch-radio-option>
+    <sinch-radio-option v-for="opt in options"
+      :key="opt.value"
+      :value="opt.value"
+      :text="opt.text"
+      :disabled="opt.disabled">
+    </sinch-radio-option>
   </sinch-radio>
 </template>
 

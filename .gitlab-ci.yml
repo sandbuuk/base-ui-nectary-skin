@@ -40,6 +40,8 @@ visual-tests:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
     - yarn --cwd=tests/visual test:ci
+  after_script:
+    - find ./tests/visual/test-results -type d -empty -delete
   artifacts:
     when: on_failure
     paths:

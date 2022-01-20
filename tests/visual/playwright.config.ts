@@ -79,6 +79,7 @@ const config: PlaywrightTestConfig = {
     max: 0,
     threshold: 60000,
   },
+  workers: 3,
   // expect: {
   //   toMatchSnapshot: {
   //     threshold: 1,

@@ -47,7 +47,7 @@ test('value attribute', withPlaceholder(async function* ({ $eval }) {
 }))
 
 test('click button', shot(async function* ({ $, page }) {
-  await $.locator('button').click()
+  await $.click()
   yield {
     name: 'open',
     include: [$.locator('#listbox')],
@@ -75,7 +75,6 @@ test('tooltip', withTooltip(async function* ({ $ }) {
 }))
 
 test('focus press-space', withPlaceholder(async function* ({ $ }) {
-  await $.focus()
   await $.press('Space')
   yield {
     name: 'open',
@@ -87,7 +86,6 @@ test('focus press-space', withPlaceholder(async function* ({ $ }) {
 }))
 
 test('focus press-enter', withPlaceholder(async function* ({ $ }) {
-  await $.focus()
   await $.press('Enter')
   yield {
     name: 'open',
@@ -99,7 +97,7 @@ test('focus press-enter', withPlaceholder(async function* ({ $ }) {
 }))
 
 test('keyboard', withPlaceholder(async function* ({ $ }) {
-  await $.locator('button').click()
+  await $.click()
   yield {
     name: 'open',
     include: [$.locator('#listbox')],

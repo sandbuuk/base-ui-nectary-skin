@@ -1,4 +1,6 @@
 import './theme.css'
+import './accordion'
+import './accordion-item'
 import './alert'
 import './button'
 import './checkbox'

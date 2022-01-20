@@ -47,10 +47,10 @@ defineCustomElement('sinch-tooltip', class extends HTMLElement {
   }
 
   get width() {
-    return getIntegerAttribute(this, 'width', 0)
+    return getIntegerAttribute(this, 'width', null)
   }
 
-  set width(value: number | undefined) {
+  set width(value: number | null) {
     // Parsing is handled in attributeChangedCallback
     updateAttribute(this, 'width', value)
   }
@@ -59,15 +59,15 @@ defineCustomElement('sinch-tooltip', class extends HTMLElement {
     return getBooleanAttribute(this, 'inverted')
   }
 
-  set inverted(isInverted: boolean | undefined) {
+  set inverted(isInverted: boolean) {
     updateBooleanAttribute(this, 'inverted', isInverted)
   }
 
   get orientation() {
-    return getLiteralAttribute(this, orientationValues, 'orientation')
+    return getLiteralAttribute(this, orientationValues, 'orientation', 'top')
   }
 
-  set orientation(value: TSinchTooltipOrientation | undefined) {
+  set orientation(value: TSinchTooltipOrientation) {
     updateLiteralAttribute(this, orientationValues, 'orientation', value)
   }
 
@@ -92,9 +92,9 @@ type TSinchTooltipOrientation = typeof orientationValues[number]
 
 type TSinchTooltipElement = HTMLElement & {
   text: string,
-  width?: number,
-  inverted?: boolean,
-  orientation?: TSinchTooltipOrientation,
+  width: number | null,
+  inverted: boolean,
+  orientation: TSinchTooltipOrientation,
 }
 
 type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {

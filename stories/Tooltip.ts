@@ -37,7 +37,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<JSX.IntrinsicElements['sinch-tooltip']> = () => {
+const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-tooltip']> => () => {
   const [{
     text,
     width,
@@ -50,7 +50,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-tooltip']> = () => {
   if (tooltipef.current === null) {
     const $input = document.createElement('sinch-tooltip')
 
-    $input.innerHTML = '<sinch-icon-share size=24></sinch-icon-share>'
+    $input.innerHTML = innerHTML
 
     $wrapper.appendChild($input)
     tooltipef.current = $input
@@ -66,7 +66,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-tooltip']> = () => {
   return $wrapper
 }
 
-export const Tooltip = Template.bind({})
+export const Tooltip = Template('<sinch-icon-share size=24></sinch-icon-share>')
 
 Tooltip.args = {
   text: 'Tooltip text long',
@@ -76,7 +76,7 @@ Tooltip.parameters = {
   docs: {
     source: {
       code: `
-<sinch-tooltip text={text} width={width}>
+<sinch-tooltip text={text}>
   <sinch-icon-share size="24"></sinch-icon-share>
 </sinch-tooltip>
 `,
