@@ -6,7 +6,7 @@ const getRects = (locators: Locator[]): Promise<(TRect | null)[]> => {
   return Promise.all(locators.map((l) => l.boundingBox()))
 }
 
-const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect => {
+const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect | null => {
   return rects.reduce((a, b) => {
     if (a == null) {
       return b
@@ -22,7 +22,7 @@ const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect => {
     const height = Math.max(a.y + a.height, b.y + b.height) - y
 
     return { x, y, width, height }
-  }) ?? { x: 0, y: 0, width: 0, height: 0 }
+  })
 }
 
 const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInfo['snapshotPath'] =>
@@ -74,19 +74,21 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
       const locator = page.locator(elementSelector)
 
       for await (const { name, include = [], includeRects = [] } of updateState({ page, $: locator, $eval: makeEval<T>(locator) })) {
-        // Adding timeout after updateState just to verify the source of flackiness
-        await page.waitForTimeout(100)
-
         const rects = await getRects([locator, ...include])
         const clip = mergeBoundingBox(rects.concat(includeRects))
+        const screenshotName = `${info.title}-${name}.png`
 
         if (clip == null) {
           throw new Error('Cannot get locator bounding box')
         }
 
-        const screenshot = await page.screenshot({ clip })
+        const matchScreenshot = () => page.screenshot({ clip }).then((sc) => expect(sc).toMatchSnapshot(screenshotName))
 
-        expect(screenshot).toMatchSnapshot(`${info.title}-${name}.png`)
+        try {
+          await matchScreenshot()
+        } catch {
+          await matchScreenshot()
+        }
       }
     }
 
