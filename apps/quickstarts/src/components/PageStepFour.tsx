@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { Congratsbox } from './CongratsBox'
+import { useOnBoardingControl } from './OnBoardingcontext'
 import styles from './Page.module.css'
-//import { usePageControl } from './PageContext'
+import { usePageControl } from './PageContext'
 import { usePageOneControl } from './PageStepOneContext'
 import { usePageThreeControl } from './PageStepThreeContext'
 import { PageSteps } from './PageSteps'
@@ -21,10 +22,18 @@ type WhatsappquestionProps={
 
 type AgentInformationProps={
   agentdetails: { name: string, email: string }[],
+  setAgentdetails: (value: any) => void,
 }
 
 const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
   const { agentdetails, questionCounter, setAgentdetails } = props
+
+  const validateEmail = (email: String) => {
+    return String(email)
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+  }
 
   console.log(agentdetails, questionCounter)
 
@@ -39,7 +48,7 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
           onChange={(value) => {
             setAgentdetails((datas: string[]) => ({
               ...datas,
-              [props.i]: { name: value, email: '' },
+              [props.i]: { name: value, email: agentdetails[props.i].email },
             }))
           }}
           label="Agent name"
@@ -51,6 +60,7 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
           key={`${props.i}email`}
           value={agentdetails[props.i].email}
           style={{ width: '100%' }}
+          invalidText={agentdetails[props.i].email.length > 0 && validateEmail(agentdetails[props.i].email) == null ? 'Email is not Valid' : undefined}
           onChange={(value) => {
             setAgentdetails((datas: string[]) => ({
               ...datas,
@@ -65,27 +75,44 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
   )
 }
 
-const AgentInformation: FC<AgentInformationProps> = (props) => {
-  const { agentdetails } = props
+const AgentInformation = (props: AgentInformationProps) => {
+  const { agentdetails, setAgentdetails } = props
 
   return (
     <>
       { [...Array(Object.keys(agentdetails).length - 1)].map((_, i) => (
-        <tr key={i} className={styles.humanValues}>
-          <td className={styles.humanName}>
-            <p>{agentdetails[i].name}</p>
-          </td>
-          <td className={styles.humanEmail}>
-            <p>{agentdetails[i].email}</p>
-          </td>
-          <td className={styles.humanAction}>
-            <div className={styles.humanDetailsbuttons}>
-              <sinch-button type="primary" text="Edit" onClick={() => {}}/>
-              <sinch-button type="destructive" text="Delete" onClick={() => {}}/>
-            </div>
-          </td>
-        </tr>
-      )) }
+        agentdetails[i].name.length > 0 ? (
+          <>
+            <hr className={styles.horizontaLine}/>
+            <tr key={i} className={styles.humanValues}>
+              {/* <div className={styles.humanhorzontalline}>
+      <hr className={styles.horizontaLine}/>
+    </div> */}
+              <td className={styles.humanName}>
+                <p>{agentdetails[i].name}</p>
+              </td>
+              <td className={styles.humanEmail}>
+                <p>{agentdetails[i].email}</p>
+              </td>
+              <td className={styles.humanAction}>
+                <div className={styles.humanDetailsbuttons}>
+                  <sinch-button
+                    type="destructive"
+                    text="Delete"
+                    onClick={() => {
+                      setAgentdetails((datas: string[]) => ({
+                        ...datas,
+                        [i]: { name: '', email: '' },
+                      }))
+                    }}
+                  />
+                </div>
+              </td>
+            </tr>
+          </>
+        ) : undefined
+      ))
+    }
     </>
   )
 }
@@ -101,8 +128,9 @@ export const PageStepFour: FC = () => {
 
   console.log(accountId)
 
-  const { botquestion, humanhandover, setHumanhandover } = usePageThreeControl()
-
+  const { botquestion, humanhandover, greetingmsg, setHumanhandover } = usePageThreeControl()
+  const { username } = useOnBoardingControl()
+  const { prev } = usePageControl()
   const { handleBack } = useStepperControl()
   //handleNext(1);
   const [questionCounter, setCounter] = useState(1)
@@ -136,25 +164,34 @@ export const PageStepFour: FC = () => {
   async function nextPage() {
     const questions = []
 
-    questions.push({ questionText: humanhandover })
+    questions.push({ questionText: greetingmsg })
 
-    const botquestions = botquestion.map((val, index) => {
-      console.log(index)
-
-      questions.push({ questionText: val })
+    const botquestions = Object.keys(botquestion).map((i: any) => {
+      console.log(`i=${i})`)
+      questions.push({ questionText: botquestion[i] })
     })
 
     console.log(botquestions)
+    console.log(questions)
+
     questions.push({ questionText: humanhandover })
 
     let agents: { name: string, email: string }[] = []
-    const agentsDetails = agentdetails.map((val, index) => {
-      console.log(index)
-
-      if (val.name.length > 0 && val.email.length > 0) {
-        agents.push({ name: val.name, email: val.email })
+    const agentDetails = Object.keys(agentdetails).map((index: any) => {
+      if (agentdetails[index].name.length > 0 && agentdetails[index].email.length > 0) {
+        agents.push({ name: agentdetails[index].name, email: agentdetails[index].email })
       }
     })
+
+    console.log(agentDetails)
+
+    // const agentsDetails = agentdetails.map((val, index) => {
+    //   console.log(index)
+
+    //   if (val.name.length > 0 && val.email.length > 0) {
+    //     agents.push({ name: val.name, email: val.email })
+    //   }
+    // })
 
     agents = agents.filter((val) => {
       if (val != null) {
@@ -162,29 +199,53 @@ export const PageStepFour: FC = () => {
       }
     })
 
-    console.log(agentsDetails)
-
     const content = JSON.stringify({
       accountId,
+      name: username,
       questions,
       agents,
     })
     const url = 'https://quickstart.default.labengage.sinch.com/configuration'
     const config = { headers: { 'Content-Type': 'application/json' } }
-    const response = await axios.put(url, content, config)
 
-    console.log(response)
-    handleClickOpen()
+    if (accountId.length > 0) {
+      const response = await axios.put(url, content, config)
+
+      console.log(response)
+      handleClickOpen()
+    } else {
+      console.log('SignIn first')
+    }
   }
 
   const prevPage = () => {
+    prev()
     handleBack()
   }
 
   return (
     <div className={styles.pageWhatsapp}>
       <div className={styles.mainBodyWhatsapp}>
-        <div className={styles.whatsappHeading}>
+        <div className={styles.botwhatsappHeading}>
+          <div className={styles.botwhatsappMatter}>
+            <h2 className={styles.botwhatsappMatterHeading}>
+              Human Handover
+            </h2>
+            <p className={styles.botwhatsappMatterBody}>
+              Configure the messages that are displayed on the conversation
+            </p>
+          </div>
+          <div className={styles.botpageSteps}><PageSteps/></div>
+
+          <div className={styles.chatlayerLogo}>
+            <div className="empty"/>
+            <div className="actualLogo">
+              <p className={styles.poweredBy}>Powered By:</p>
+              <img className={styles.chatLayer} src={contactlogo}/>
+            </div>
+          </div>
+        </div>
+        {/* <div className={styles.whatsappHeading}>
           <div className={styles.whatsappMatter}>
             <h2 className={styles.whatsappMatterHeading}>Human Handover</h2>
             <p className={styles.whatsappMatterBody}>
@@ -200,8 +261,8 @@ export const PageStepFour: FC = () => {
               <img className={styles.chatLayer} src={contactlogo}/>
             </div>
           </div>
-        </div>
-        <div className={styles.whatsappBody}>
+        </div> */}
+        <div className={styles.botwhatsappBody}>
           <div className={styles.messagesParent}>
             <div className={styles.humanMessages}>
               { <WhatsappQuestion questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={count} i={count}/>}
@@ -226,8 +287,7 @@ export const PageStepFour: FC = () => {
                     Action
                   </td>
                 </th>
-                <hr className={count > 0 ? styles.horizontaLine : styles.horizontaLinehidden}/>
-                <AgentInformation agentdetails={agentdetails}/>
+                <AgentInformation agentdetails={agentdetails} setAgentdetails={setAgentdetails}/>
               </div>
             </div>
             <img className={styles.humanLine} src={verticalLine}/>
@@ -270,4 +330,3 @@ export const PageStepFour: FC = () => {
     </div>
   )
 }
-

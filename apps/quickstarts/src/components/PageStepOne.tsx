@@ -96,7 +96,7 @@ export const PageStepOne: FC = () => {
     if (validateInputs()) {
       const res = await fetch('https://quickstart.default.labengage.sinch.com/account', {
         method: 'POST',
-        body: JSON.stringify({ email, firstName, lastName, role }),
+        body: JSON.stringify({ email, firstName, phoneNumber, lastName, role }),
       })
       const k = await res.json()
 

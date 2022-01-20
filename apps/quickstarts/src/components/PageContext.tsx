@@ -16,14 +16,26 @@ const getNextPath = (value: string): TKnownPath => {
   return paths[i]
 }
 
+const getPrevPath = (value: string): TKnownPath => {
+  const i = (paths as readonly string[]).indexOf(value)
+
+  if (i <= paths.length - 1 && i > 0) {
+    return paths[i - 1]
+  }
+
+  return paths[i]
+}
+
 type TPageContext = {
   next: () => void,
   reset: () => void,
+  prev: () => void,
 }
 
 const Context = createContext<TPageContext>({
   next: () => {},
   reset: () => {},
+  prev: () => {},
 })
 
 export const usePageControl = () => {
@@ -36,6 +48,9 @@ export const PageContext: FC<{}> = ({ children }) => {
   const next = useCallback(() => {
     navigate(getNextPath(pathname))
   }, [navigate, pathname])
+  const prev = useCallback(() => {
+    navigate(getPrevPath(pathname))
+  }, [navigate, pathname])
   const reset = useCallback(() => {
     navigate(paths[0])
   }, [navigate])
@@ -43,6 +58,7 @@ export const PageContext: FC<{}> = ({ children }) => {
   const state: TPageContext = {
     next,
     reset,
+    prev,
   }
 
   return <Context.Provider value={state}>{children}</Context.Provider>

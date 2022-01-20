@@ -23,23 +23,21 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
 
   return (
     <div className={styles.botmessagesInput}>
-      <div className={styles.botInput}>
-        <sinch-input
-          key={k}
-          value={botquestion[k - 1]}
-          style={{ width: '100%' }}
-          onChange={(value) => {
-            setBotquestion((datas: string[]) => ({
-              ...datas,
-              [k - 1]: value,
-            }))
-            //setBotquestion(botquestion)
-          }}
-          label={`Question ${k}`}
-          placeholder="What is your name?"
-        />
-      </div>
-      <div className={styles.botInput}>
+      <sinch-input
+        key={k}
+        value={botquestion[k - 1]}
+        style={{ width: '100%' }}
+        onChange={(value) => {
+          setBotquestion((datas: string[]) => ({
+            ...datas,
+            [k - 1]: value,
+          }))
+          //setBotquestion(botquestion)
+        }}
+        label={`Question ${k}`}
+        placeholder="What is your name?"
+      />
+      {/* <div className={styles.botInput}>
         <sinch-select
           value="select"
           onChange={() => {}}
@@ -75,7 +73,7 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
           label="Save as"
           placeholder="name"
         />
-      </div>
+      </div> */}
 
     </div>
   )
@@ -87,7 +85,8 @@ export const PageStepThree: FC = () => {
   const { handleNext } = useStepperControl()
 
   //handleNext(0);
-
+  const { prev } = usePageControl()
+  const { handleBack } = useStepperControl()
   const [flowCounter, setCounter] = useState(1)
 
   const buttonCounter = () => {
@@ -102,6 +101,11 @@ export const PageStepThree: FC = () => {
   const nextPage = () => {
     next()
     handleNext()
+  }
+
+  const prevPage = () => {
+    prev()
+    handleBack()
   }
 
   return (
@@ -187,7 +191,7 @@ export const PageStepThree: FC = () => {
 
         <div className={styles.botbuttons}>
           <div className={styles.botbackBut}>
-            <sinch-button type="destructive" text="back" onClick={nextPage}/>
+            <sinch-button type="destructive" text="Back" onClick={prevPage}/>
           </div>
           <div className={styles.botsaveBut}>
             <sinch-button type="primary" text="Next" onClick={nextPage}/>

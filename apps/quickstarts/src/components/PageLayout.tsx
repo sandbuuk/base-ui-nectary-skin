@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom'
+import { OnBoardingContex } from './OnBoardingcontext'
 import { PageContext } from './PageContext'
 import { PageStepOneContext } from './PageStepOneContext'
 import { PageStepThreeContext } from './PageStepThreeContext'
@@ -10,9 +11,11 @@ export const PageLayout: FC = () => {
     <PageContext>
       <PageStepThreeContext>
         <PageStepOneContext>
-          <StepperContext>
-            <Outlet/>
-          </StepperContext>
+          <OnBoardingContex>
+            <StepperContext>
+              <Outlet/>
+            </StepperContext>
+          </OnBoardingContex>
         </PageStepOneContext>
       </PageStepThreeContext>
     </PageContext>

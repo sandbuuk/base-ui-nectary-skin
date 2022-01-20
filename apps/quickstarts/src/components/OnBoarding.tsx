@@ -1,3 +1,4 @@
+import { useOnBoardingControl } from './OnBoardingcontext'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
 import capturing from './images/capturing.png'
@@ -16,12 +17,13 @@ import type { FC } from 'react'
 
 export const OnBoarding: FC = () => {
   const { next } = usePageControl()
+  const { username, setUsername } = useOnBoardingControl()
 
   return (
     <div className={styles.onboardingPage}>
       <div className={styles.onboardingHeader}>
         <div className={styles.onboardingHeading}>
-          Quick Bot + Human Handover
+          <h2 className={styles.onboardingMatterHeading}> Quick Bot + Human Handover </h2>
           <p className={styles.OnboardingCaption}>Redirect customers to a Whatsapp Chatbot with Human Handover through Click to Whatsapp Adbutton</p>
         </div>
         <div className={styles.onbaordingLogodiv}>
@@ -122,7 +124,15 @@ export const OnBoarding: FC = () => {
 
           <div className={styles.onboardingBottom}>
             <div className={styles.onboardingStartname}>
-              <sinch-input class={styles.startnameInput} label="Quick Start Name" placeholder="My first Quick start" onChange={() => {}} value=""/>
+              <sinch-input
+                class={styles.startnameInput}
+                label="Quick Start Name"
+                placeholder="My first Quick start"
+                onChange={(value) => {
+                  setUsername(value)
+                }}
+                value={username}
+              />
             </div>
             <div>
               <sinch-button class={styles.startnameButton} type="cta" text="start" onClick={next}/>
