@@ -712,6 +712,8 @@ margin-bottom: 10%;
 
 .onbaordingLogodiv{
   margin-right: 1%;
+  height: auto;
+  width: 30px;
 }
 
 .stepperHeading{
@@ -725,13 +727,16 @@ margin-bottom: 10%;
 }
 
 .stepperDiv{
+  display: flex;
+  flex-direction: column;
 }
 
 .stepperoneText{
-  margin-bottom:20px;
+  margin-bottom: 40px;
 }
 
 .steppertwoText{
+  margin-bottom: 40px;
 }
 
 .stepperBottom{

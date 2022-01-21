@@ -126,6 +126,13 @@ export const PageStepFour: FC = () => {
 
   const { accountId } = usePageOneControl()
 
+  const validateEmail = (email: String) => {
+    return String(email)
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+  }
+
   console.log(accountId)
 
   const { botquestion, humanhandover, greetingmsg, setHumanhandover } = usePageThreeControl()
@@ -270,7 +277,7 @@ export const PageStepFour: FC = () => {
                 <sinch-button
                   style={{ width: '100%' }}
                   type="cta"
-                  disabled={questionCounter > 5 || agentdetails[Object.keys(agentdetails).length - 1].name.length <= 0 || agentdetails[Object.keys(agentdetails).length - 1].email.length <= 0 ? true : undefined}
+                  disabled={questionCounter > 5 || agentdetails[Object.keys(agentdetails).length - 1].name.length <= 0 || agentdetails[Object.keys(agentdetails).length - 1].email.length <= 0 || validateEmail(agentdetails[Object.keys(agentdetails).length - 1].email) == null ? true : undefined}
                   onClick={buttonCounter}
                   text="Add more Agents (Up to 5)"
                 />
@@ -323,7 +330,7 @@ export const PageStepFour: FC = () => {
           </div>
           <div className={styles.saveBut}>
             { <Congratsbox open={open} handleClickOpen={handleClickOpen} handleClose={handleClose}/> }
-            <sinch-button type="primary" text="Next" onClick={nextPage}/>
+            <sinch-button type="primary" text="Next" onClick={nextPage} disabled={Object.keys(agentdetails).length > 1 ? undefined : true}/>
           </div>
         </div>
       </div>
