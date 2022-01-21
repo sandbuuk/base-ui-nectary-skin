@@ -11,81 +11,87 @@ import type { FC } from 'react'
 
 type Props = {
   name: number,
+  botquestion: string[],
+  setBotquestion: (value: any) => void,
+}
+
+const WhatsappDetails: FC<Props> = (props): JSX.Element => {
+  const { name, botquestion, setBotquestion } = props
+  const k = name
+
+  console.log(botquestion)
+
+  return (
+    <div className={styles.botmessagesInput}>
+      <sinch-input
+        key={k}
+        value={botquestion[k - 1]}
+        style={{ width: '100%' }}
+        onChange={(value) => {
+          setBotquestion((datas: string[]) => ({
+            ...datas,
+            [k - 1]: value,
+          }))
+          //setBotquestion(botquestion)
+        }}
+        label={`Question ${k}`}
+        placeholder="What is your name?"
+      />
+      {/* <div className={styles.botInput}>
+        <sinch-select
+          value="select"
+          onChange={() => {}}
+          label="Type"
+          placeholder="Name"
+        >
+          <sinch-select-option
+            value="1"
+            text="Software Engineer"
+            slot="select"
+          />
+          <sinch-select-option
+            value="2"
+            text="Data Analyst"
+            slot="select"
+          />
+          <sinch-select-option
+            value="3"
+            text="Product Manager"
+            slot="select"
+          />
+          <sinch-select-option
+            value="4"
+            text="Software Architect"
+            slot="select"
+          />
+        </sinch-select>
+      </div>
+      <div className={styles.botInput}>
+        <sinch-input
+          value=""
+          onChange={() => {}}
+          label="Save as"
+          placeholder="name"
+        />
+      </div> */}
+
+    </div>
+  )
 }
 
 export const PageStepThree: FC = () => {
+  const { botquestion, setBotquestion, greetingmsg, setGreetingmsg } = usePageThreeControl()
   const { next } = usePageControl()
   const { handleNext } = useStepperControl()
-  const { botquestion, setBotquestion, greetingmsg, setGreetingmsg } = usePageThreeControl()
+
   //handleNext(0);
-
+  const { prev } = usePageControl()
+  const { handleBack } = useStepperControl()
   const [flowCounter, setCounter] = useState(1)
-  const WhatsappDetails: FC<Props> = (props): JSX.Element => {
-    const k = props.name
-
-    console.log(botquestion)
-
-    return (
-      <div className={styles.botmessagesInput}>
-        <div className={styles.botInput}>
-          <sinch-input
-            key={k}
-            value={botquestion[k - 1]}
-            style={{ width: '100%' }}
-            onChange={(value) => {
-              const ob = botquestion
-
-              ob[k - 1] = value
-              setBotquestion(botquestion)
-            }}
-            label={`Question ${k}`}
-            placeholder="What is your name?"
-          />
-        </div>
-        <div className={styles.botInput}>
-          <sinch-select
-            value="select"
-            onChange={() => {}}
-            label="Type"
-            placeholder="Name"
-          >
-            <sinch-select-option
-              value="1"
-              text="Software Engineer"
-              slot="select"
-            />
-            <sinch-select-option
-              value="2"
-              text="Data Analyst"
-              slot="select"
-            />
-            <sinch-select-option
-              value="3"
-              text="Product Manager"
-              slot="select"
-            />
-            <sinch-select-option
-              value="4"
-              text="Software Architect"
-              slot="select"
-            />
-          </sinch-select>
-        </div>
-        <div className={styles.botInput}>
-          <sinch-input
-            value=""
-            onChange={() => {}}
-            label="Save as"
-            placeholder="name"
-          />
-        </div>
-
-      </div>
-    )
-  }
 
   const buttonCounter = () => {
     console.log(flowCounter)
+    //botquestion.push('')
 
     if (flowCounter < 5) {
       setCounter((prevCounter) => prevCounter + 1)
@@ -95,6 +101,11 @@ export const PageStepThree: FC = () => {
   const nextPage = () => {
     next()
     handleNext()
+  }
+
+  const prevPage = () => {
+    prev()
+    handleBack()
   }
 
   return (
@@ -139,6 +150,8 @@ export const PageStepThree: FC = () => {
                     disabled={undefined}
                     onChange={(value) => {
                       setGreetingmsg(value)
+                      console.log(greetingmsg)
+                      console.log(botquestion)
                     }}
                     onFocus={() => {}}
                     onBlur={() => {}}
@@ -155,7 +168,7 @@ export const PageStepThree: FC = () => {
                     <p className={styles.infoBody}>You will have all the answers once...</p>
                   </div> */}
                 </div>
-                { [...Array(flowCounter)].map((_, i) => <WhatsappDetails name={i + 1} key={i}/>)}
+                { [...Array(flowCounter)].map((_, i) => <WhatsappDetails botquestion={botquestion} setBotquestion={setBotquestion} name={i + 1} key={i}/>)}
                 <div className={styles.questionBtn}>
                   <sinch-button
                     style={{ width: '100%' }}
@@ -178,7 +191,7 @@ export const PageStepThree: FC = () => {
 
         <div className={styles.botbuttons}>
           <div className={styles.botbackBut}>
-            <sinch-button type="destructive" text="back" onClick={nextPage}/>
+            <sinch-button type="destructive" text="Back" onClick={prevPage}/>
           </div>
           <div className={styles.botsaveBut}>
             <sinch-button type="primary" text="Next" onClick={nextPage}/>
