@@ -1,6 +1,6 @@
 {
   "name": "engage-quickstarts",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "dependencies": {
     "@emotion/cache": "^11.7.1",
