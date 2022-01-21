@@ -1,3 +1,9 @@
+## v0.6.0
+
+* ➕ add `sinch-accordion` component
+* 🐞 delegate focus enabled for `sinch-textarea`
+* 💥 element properties use `null` instead of `undefined`
+
 ## v0.5.1
 
 * 🐞 fix `sinch-tabs` accessing closed shadowRoot
