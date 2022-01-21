@@ -5,6 +5,7 @@
   "dependencies": {
     "@nectary/components": "*",
     "broadcastchannel-polyfill": "^1.0.1",
+    "keycloak-js": "^16.1.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^6.0.0"

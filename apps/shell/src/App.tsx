@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { HashRouter, Routes, Route, Link } from 'react-router-dom'
 import styles from './App.module.css'
+import { Login } from './Login'
 import { Quickstarts } from './components/Quickstarts'
 import type { FC } from 'react'
 import '@nectary/components/theme.css'
@@ -29,6 +30,7 @@ export const App: FC<{}> = () => {
       <div className={styles.app}>
         <header className={styles.header}>
           <h1>Header</h1>
+          <Login/>
         </header>
         <aside className={styles.aside}>
           <h3>Menu</h3>
