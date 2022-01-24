@@ -82,7 +82,6 @@ build-shell:
     policy: pull
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
-    REMOTE_QUICKSTARTS: dn0wuruy8r35q.cloudfront.net
   before_script:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:

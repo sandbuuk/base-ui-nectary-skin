@@ -1,0 +1,62 @@
+{
+  "@nectary/components/theme.css": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/accordion": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/accordion-item": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/alert": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/button": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/checkbox": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon/share": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon/tooltip": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/input": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/input-tooltip": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/radio": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/radio-option": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/select": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/select-option": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/spinner": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/tabs": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/tabs-option": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/textarea": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/toggle": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/tooltip": {
+    "requiredVersion": "*"
+  }
+}
