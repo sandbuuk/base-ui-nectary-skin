@@ -1,0 +1,18 @@
+import { defineCustomElement } from '../../utils'
+import { createIconClass } from '../create-icon-class'
+import templateHTML from './template.html'
+import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '../create-icon-class'
+
+defineCustomElement('sinch-icon-barchart-up', createIconClass(templateHTML))
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-barchart-up': TSinchIconBrandedReact,
+    }
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-icon-barchart-up': TSinchIconBrandedElement,
+  }
+}
