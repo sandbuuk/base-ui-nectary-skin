@@ -88,6 +88,10 @@ module.exports = {
     host: 'localhost',
     port: PORT,
     historyApiFallback: true,
+    static: {
+      directory: path.resolve(__dirname, 'public'),
+      publicPath: '/',
+    },
   },
   watch: false,
   plugins: [

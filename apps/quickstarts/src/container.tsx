@@ -60,3 +60,19 @@ class SinchReactApp extends HTMLElement {
 }
 
 global.customElements.define(appName, SinchReactApp)
+
+type TSinchQuickstartsApp = {
+  token: string,
+}
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [appName]: TSinchQuickstartsApp,
+    }
+  }
+
+  interface HTMLElementTagNameMap {
+    [appName]: TSinchQuickstartsApp,
+  }
+}
