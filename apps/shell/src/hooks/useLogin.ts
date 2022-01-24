@@ -10,7 +10,11 @@
 
 import EventEmitter from 'events' // TODO: This is a node module. Should we use something else?
 import Keycloak from 'keycloak-js'
-import React from 'react'
+import {
+  useReducer,
+  useEffect,
+  useMemo,
+} from 'react'
 import type { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js'
 
 // Min validity should preferably be smaller than refresh interval.
@@ -90,9 +94,9 @@ const getLoggedInState = () => keycloak.authenticated
  * Returns a boolean with the current login state or undefined if not yet known.
  */
 export const useIsLoggedIn = () => {
-  const [isLoggedIn, dispatch] = React.useReducer(getLoggedInState, undefined, getLoggedInState)
+  const [isLoggedIn, dispatch] = useReducer(getLoggedInState, undefined, getLoggedInState)
 
-  React.useEffect(() => {
+  useEffect(() => {
     // logged in
     emitter.on('onAuthSuccess', dispatch)
     emitter.on('onAuthRefreshSuccess', dispatch)
@@ -118,7 +122,7 @@ export const useIsLoggedIn = () => {
  * @returns Object with self explanatory functions, login, logout.
  */
 export const useLogin = () =>
-  React.useMemo(() => ({
+  useMemo(() => ({
     login: keycloak.login.bind(keycloak),
     logout: keycloak.logout.bind(keycloak),
   }), [])
