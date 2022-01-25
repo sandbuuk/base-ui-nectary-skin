@@ -5,3 +5,4 @@ dist/
 !types.d.ts
 *.js
 !babel.config.js
+!update-shared.js

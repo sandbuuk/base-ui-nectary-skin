@@ -17,22 +17,10 @@
   "@nectary/components/checkbox": {
     "requiredVersion": "*"
   },
-  "@nectary/components/icon/share": {
-    "requiredVersion": "*"
-  },
-  "@nectary/components/icon/tooltip": {
-    "requiredVersion": "*"
-  },
   "@nectary/components/input": {
     "requiredVersion": "*"
   },
   "@nectary/components/input-tooltip": {
-    "requiredVersion": "*"
-  },
-  "@nectary/components/radio": {
-    "requiredVersion": "*"
-  },
-  "@nectary/components/radio-option": {
     "requiredVersion": "*"
   },
   "@nectary/components/select": {
@@ -41,13 +29,13 @@
   "@nectary/components/select-option": {
     "requiredVersion": "*"
   },
-  "@nectary/components/spinner": {
+  "@nectary/components/radio": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/radio-option": {
     "requiredVersion": "*"
   },
   "@nectary/components/tabs": {
-    "requiredVersion": "*"
-  },
-  "@nectary/components/tabs-option": {
     "requiredVersion": "*"
   },
   "@nectary/components/textarea": {
@@ -57,6 +45,54 @@
     "requiredVersion": "*"
   },
   "@nectary/components/tooltip": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon/share": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon/tooltip": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/spinner": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/logo/sinch-icon": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/logo/sinch-icon-wordmark": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/barchart-down": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/barchart-up": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/campaigns": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/chat-bot": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/contact": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/home": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/multiple-channels": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/rocket": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/settings": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/user": {
+    "requiredVersion": "*"
+  },
+  "@nectary/components/icon-branded/users": {
     "requiredVersion": "*"
   }
 }
