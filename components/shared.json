@@ -71,7 +71,7 @@
   "@nectary/components/icon-branded/campaigns": {
     "requiredVersion": "*"
   },
-  "@nectary/components/icon-branded/chat-bot": {
+  "@nectary/components/icon-branded/chatbot": {
     "requiredVersion": "*"
   },
   "@nectary/components/icon-branded/contact": {

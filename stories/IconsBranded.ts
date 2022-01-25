@@ -5,7 +5,7 @@ import '@nectary/components/theme.css'
 import '@nectary/components/icon-branded/rocket'
 import '@nectary/components/icon-branded/home'
 import '@nectary/components/icon-branded/contact'
-import '@nectary/components/icon-branded/chat-bot'
+import '@nectary/components/icon-branded/chatbot'
 import '@nectary/components/icon-branded/campaigns'
 import '@nectary/components/icon-branded/barchart-up'
 import '@nectary/components/icon-branded/barchart-down'
@@ -89,7 +89,7 @@ Contact.parameters = {
   },
 }
 
-export const ChatBot = Template('sinch-icon-chat-bot')
+export const ChatBot = Template('sinch-icon-chatbot')
 
 ChatBot.args = {
   size: 48,
@@ -99,7 +99,7 @@ ChatBot.args = {
 ChatBot.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-chat-bot size="48"></sinch-icon-chat-bot>',
+      code: '<sinch-icon-chatbot size="48"></sinch-icon-chatbot>',
     },
   },
 }

@@ -8,11 +8,11 @@ defineCustomElement('sinch-logo-sinch-icon-wordmark', createLogoClass(templateHT
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-logo-sinch-icon-wordmark': TSinchLogoElement,
+      'sinch-logo-sinch-icon-wordmark': TSinchLogoReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-logo-sinch-icon-wordmark': TSinchLogoReact,
+    'sinch-logo-sinch-icon-wordmark': TSinchLogoElement,
   }
 }

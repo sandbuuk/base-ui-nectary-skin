@@ -3,16 +3,16 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '../create-icon-class'
 
-defineCustomElement('sinch-icon-chat-bot', createIconClass(templateHTML))
+defineCustomElement('sinch-icon-chatbot', createIconClass(templateHTML))
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-icon-chat-bot': TSinchIconBrandedReact,
+      'sinch-icon-chatbot': TSinchIconBrandedReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-icon-chat-bot': TSinchIconBrandedElement,
+    'sinch-icon-chatbot': TSinchIconBrandedElement,
   }
 }
