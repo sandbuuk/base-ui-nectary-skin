@@ -1,0 +1,19 @@
+/* stylelint-disable selector-class-pattern */
+.loginButton {
+  all: initial;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 46px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.loginButton span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: var(--sinch-font-extra-small-text);
+  font-size: 12px;
+  line-height: 14px;
+}

@@ -17,7 +17,7 @@
   justify-content: space-between;
   height: 64px;
   box-sizing: border-box;
-  padding: 20px 17px;
+  padding: 0 17px;
   border-bottom: 1px solid var(--sinch-color-snow-600);
 }
 
