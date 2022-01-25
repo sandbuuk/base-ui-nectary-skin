@@ -67,7 +67,12 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: PORT,
-    // open: true
+    allowedHosts: ['.sinch.com', 'localhost'],
+    // open: true,
+    static: {
+      directory: path.resolve(__dirname, 'public'),
+      publicPath: '/',
+    },
     historyApiFallback: true,
   },
   watch: false,

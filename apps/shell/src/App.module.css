@@ -16,6 +16,9 @@
   border: 2px gray dashed;
   padding: 20px;
   font: var(--sinch-font-title-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .footer {
