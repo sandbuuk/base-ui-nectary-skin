@@ -1,10 +1,23 @@
 import { useEffect, useRef } from 'react'
-import { HashRouter, Routes, Route, Link } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import styles from './App.module.css'
 import { Login } from './Login'
+import { NotFound } from './components/NotFound'
 import { Quickstarts } from './components/Quickstarts'
+import { SidebarButton } from './components/SidebarButton'
 import type { FC } from 'react'
 import '@nectary/components/theme.css'
+import '@nectary/components/tooltip'
+import '@nectary/components/logo/sinch-icon'
+import '@nectary/components/icon-branded/home'
+import '@nectary/components/icon-branded/rocket'
+import '@nectary/components/icon-branded/contact'
+import '@nectary/components/icon-branded/chatbot'
+import '@nectary/components/icon-branded/campaigns'
+import '@nectary/components/icon-branded/barchart-down'
+import '@nectary/components/icon-branded/users'
+import '@nectary/components/icon-branded/multiple-channels'
+import '@nectary/components/icon-branded/settings'
 
 export const App: FC<{}> = () => {
   const bus = useRef<BroadcastChannel>()
@@ -29,25 +42,35 @@ export const App: FC<{}> = () => {
     <HashRouter basename="/">
       <div className={styles.app}>
         <header className={styles.header}>
-          <h1>Header</h1>
+          <sinch-logo-sinch-icon size={48}/>
           <Login/>
         </header>
         <aside className={styles.aside}>
-          <h3>Menu</h3>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/quickstarts">Quickstarts</Link></li>
-          </ul>
+          <SidebarButton to="/" text="Home" tooltip="Home" icon="sinch-icon-home"/>
+          <SidebarButton to="/quickstarts" text="Quick Starts" tooltip="Quick Starts" icon="sinch-icon-rocket"/>
+          <div className={styles.space}/>
+          <SidebarButton to="/conversations" text="Conversations" tooltip="Conversations" icon="sinch-icon-contact"/>
+          <SidebarButton to="/chatbot" text="Chatbot" tooltip="Chatbot" icon="sinch-icon-chatbot"/>
+          <SidebarButton to="/campaign" text="Campaign" tooltip="Campaign" icon="sinch-icon-campaigns"/>
+          <div className={styles.space}/>
+          <SidebarButton to="/analytics" text="Analytics" tooltip="Analytics" icon="sinch-icon-barchart-down"/>
+          <SidebarButton to="/audience" text="Audience" tooltip="Audience" icon="sinch-icon-users"/>
+          <SidebarButton to="/channels" text="Channels" tooltip="Channels" icon="sinch-icon-multiple-channels"/>
+          <SidebarButton to="/settings" text="Settings" tooltip="Settings" icon="sinch-icon-settings"/>
         </aside>
         <main className={styles.main}>
           <Routes>
-            <Route path="/" element={<h3>Home</h3>}/>
+            <Route path="/" element={<NotFound title="Home"/>}/>
             <Route path="/quickstarts/*" element={<Quickstarts/>}/>
+            <Route path="/conversations/*" element={<NotFound title="Conversations"/>}/>
+            <Route path="/chatbot/*" element={<NotFound title="Chatbot"/>}/>
+            <Route path="/campaign/*" element={<NotFound title="Campaign"/>}/>
+            <Route path="/analytics/*" element={<NotFound title="Analytics"/>}/>
+            <Route path="/audience/*" element={<NotFound title="Audience"/>}/>
+            <Route path="/channels/*" element={<NotFound title="Channels"/>}/>
+            <Route path="/settings/*" element={<NotFound title="Settings"/>}/>
           </Routes>
         </main>
-        <footer className={styles.footer}>
-          <h2>Footer</h2>
-        </footer>
       </div>
     </HashRouter>
   )

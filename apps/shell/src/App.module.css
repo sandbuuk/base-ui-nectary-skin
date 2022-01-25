@@ -1,11 +1,10 @@
 .app {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: auto 1fr auto;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas:
     "header header"
-    "aside main"
-    "footer footer";
+    "aside main";
   height: 100%;
   box-sizing: border-box;
   font: var(--sinch-font-body);
@@ -13,29 +12,33 @@
 
 .header {
   grid-area: header;
-  border: 2px gray dashed;
-  padding: 20px;
-  font: var(--sinch-font-title-2);
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.footer {
-  grid-area: footer;
-  border: 2px gray dashed;
-  padding: 20px;
-  font: var(--sinch-font-title-3);
+  height: 64px;
+  box-sizing: border-box;
+  padding: 20px 17px;
+  border-bottom: 1px solid var(--sinch-color-snow-600);
 }
 
 .aside {
   grid-area: aside;
-  border: 2px gray dashed;
-  padding: 20px;
+  border-right: 1px solid var(--sinch-color-snow-600);
+  padding: 24px 0;
+  width: 88px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.aside > .space {
+  flex: 1;
 }
 
 .main {
   grid-area: main;
-  border: 2px gray dashed;
-  padding: 20px;
+  box-shadow: 0 0 8px 0 rgb(0 0 0 / 20%) inset;
+  overflow: auto;
 }

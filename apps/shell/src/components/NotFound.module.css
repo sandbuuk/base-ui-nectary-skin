@@ -1,0 +1,5 @@
+/* stylelint-disable selector-class-pattern */
+.notFound {
+  padding: 20px;
+  font: var(--sinch-font-title-2);
+}

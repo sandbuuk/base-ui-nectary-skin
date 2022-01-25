@@ -60,11 +60,11 @@ keycloak.onAuthLogout = handleEvent('onAuthLogout')
 keycloak.onTokenExpired = handleEvent('onTokenExpired')
 
 // Not happy wih this super imperative code.. any ideas? Are we allowed to use some FRP lib? :)
-let interval: number | null = null
+let intervalId: number | null = null
 
 emitter.on('onAuthSuccess', () => {
-  if (interval === null) {
-    interval = window.setInterval(() => {
+  if (intervalId === null) {
+    intervalId = window.setInterval(() => {
       keycloak
         .updateToken(minValidityTimeS)
         .then((refreshed) => {
@@ -82,9 +82,9 @@ emitter.on('onAuthSuccess', () => {
 })
 
 emitter.on('onAuthLogout', () => {
-  if (interval !== null) {
-    window.clearInterval(interval)
-    interval = null
+  if (intervalId !== null) {
+    window.clearInterval(intervalId)
+    intervalId = null
   }
 })
 
