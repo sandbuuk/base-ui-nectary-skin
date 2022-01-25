@@ -1,11 +1,14 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
+  "eslint.run": "onSave",
+  "javascript.format.enable": false,
   "stylelint.validate": [
     "css",
     "html"
   ],
+  "typescript.format.enable": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
