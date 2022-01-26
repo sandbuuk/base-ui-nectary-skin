@@ -37,7 +37,7 @@ export default {
     },
     maxVisibleItems: {
       description: 'Number of visible items in the list',
-      control: 'number',
+      control: { type: 'range', min: 1, max: 5, step: 1 },
     },
     onChange: {
       description: 'Handler to sync input value with the state',

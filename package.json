@@ -14,7 +14,7 @@
     "storybook:build": "build-storybook --output-dir public --quiet",
     "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html' 'components/theme.css'",
     "start:quickstarts": "webpack serve --config apps/quickstarts/webpack.dev.js",
-    "start:shell": "wait-on http://localhost:3001 && REMOTE_QUICKSTARTS=localhost:3001 webpack serve --config apps/shell/webpack.dev.js",
+    "start:shell": "wait-on http://localhost:3001 && webpack serve --config apps/shell/webpack.dev.js",
     "start": "concurrently --raw npm:start:quickstarts npm:start:shell",
     "build:quickstarts": "webpack build --config apps/quickstarts/webpack.prod.js --output-path apps/quickstarts/dist",
     "build:shell": "webpack build --config apps/shell/webpack.prod.js --output-path apps/shell/dist",

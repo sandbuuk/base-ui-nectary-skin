@@ -1,5 +1,5 @@
+import { useLogin, useIsLoggedIn } from '../hooks/useLogin'
 import styles from './Login.module.css'
-import { useLogin, useIsLoggedIn } from './hooks/useLogin'
 
 export const Login = () => {
   const isLoggedIn = useIsLoggedIn()
@@ -7,14 +7,15 @@ export const Login = () => {
 
   return (
     <button
-      className={styles.login}
+      className={styles.loginButton}
       onClick={() => {
-        isLoggedIn ?? false
+        isLoggedIn === true
           ? void logout()
           : void login({ redirectUri: location.href })
       }}
     >
-      {isLoggedIn ?? false ? 'Logout' : 'Login'}
+      <sinch-icon-user size={28}/>
+      <span>{isLoggedIn === true ? 'Logout' : 'Login'}</span>
     </button>
   )
 }

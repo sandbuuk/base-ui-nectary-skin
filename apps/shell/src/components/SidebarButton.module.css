@@ -1,0 +1,32 @@
+/* stylelint-disable selector-class-pattern */
+.sidebarButton {
+  all: initial;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.sidebarButton .iconWrapper {
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background-color: var(--sinch-color-snow-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarButton.active .iconWrapper {
+  background-color: var(--sinch-color-stormy-500);
+}
+
+.sidebarButton span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: var(--sinch-font-extra-small-text);
+}
