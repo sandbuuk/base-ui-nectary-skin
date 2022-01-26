@@ -9,8 +9,7 @@
     "utils.d.ts",
     "index.js",
     "index.d.ts",
-    "types.d.ts",
-    "shared.json"
+    "types.d.ts"
   ],
   "publishConfig": {
     "registry": "https://nexus.int.clxnetworks.net/repository/sinch_npm/"

@@ -1,6 +1,5 @@
 const path = require('path')
 const { MFLiveReloadPlugin } = require('@module-federation/fmr')
-const sharedNectaryModules = require('@nectary/components/shared.json')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 
@@ -103,7 +102,9 @@ module.exports = {
         './Container': require.resolve('./src/container.tsx'),
       },
       shared: {
-        ...sharedNectaryModules,
+        '@nectary/components/theme.css': {
+          requiredVersion: '*',
+        },
         react: {
           requiredVersion: '^17.0.0',
           singleton: true,
