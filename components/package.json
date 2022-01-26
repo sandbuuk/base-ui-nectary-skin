@@ -18,8 +18,7 @@
   "scripts": {
     "prebuild": "rimraf utils.{js,d.ts} index.{js,d.ts} */*.{js,d.ts} */**/*.{js,d.ts}",
     "build": "NODE_ENV=production babel . --extensions '.ts' --ignore '*.d.ts' --out-dir .",
-    "postbuild": "tsc",
-    "update-shared": "node update-shared.js"
+    "postbuild": "tsc"
   },
   "dependencies": {
     "@babel/runtime": "^7.16.0"

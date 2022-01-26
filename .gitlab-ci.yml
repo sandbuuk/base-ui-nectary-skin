@@ -161,6 +161,7 @@ publish-components:
   before_script:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
+    - node scripts/update-shared-components.js
     - yarn --cwd components/ build
     - echo "//nexus.int.clxnetworks.net/repository/sinch_npm/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish components/

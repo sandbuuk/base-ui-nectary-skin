@@ -1,11 +1,11 @@
 /* eslint-disable node/no-sync */
 const fs = require('fs')
 
-const indexContent = fs.readFileSync('index.ts', 'utf8').split('\n')
+const indexContent = fs.readFileSync('components/index.ts', 'utf8').split('\n')
 const result = {}
 
 for (const line of indexContent) {
-  const match = line.match(/import '\.\/(.+)'/)
+  const match = line.match(/^import '\.\/(.+)'$/)
 
   if (match === null) {
     continue
@@ -16,4 +16,4 @@ for (const line of indexContent) {
   }
 }
 
-fs.writeFileSync('shared.json', JSON.stringify(result, null, 2))
+fs.writeFileSync('components/shared.json', `${JSON.stringify(result, null, 2)}\n`)
