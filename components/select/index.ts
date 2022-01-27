@@ -412,7 +412,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       this.$buttonContent.textContent = $option.text
 
       // Try adding icon
-      const $icon = $option.shadowRoot!.querySelector('slot')?.assignedElements()[0]?.cloneNode(true)
+      const $icon = $option.icon()?.cloneNode(true)
 
       if ($icon != null) {
         this.$button.prepend($icon)
