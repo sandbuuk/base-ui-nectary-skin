@@ -48,6 +48,7 @@ margin-bottom: 10%;
   font-family: "Gilroy-Regular", sans-serif;
   flex: 8;
   background-color: white;
+  position: relative;
 }
 
 .page {
@@ -335,6 +336,57 @@ margin-bottom: 10%;
   flex: 5;
 }
 
+.botImage{
+  flex: 10;
+  display: flex;
+  position: relative;
+  z-index: 6;
+  background-size: cover;
+  width: auto;
+  height: 603px;
+  width: 400px;
+  background-repeat: no-repeat;
+}
+
+.messagesBot{
+  display: flex;
+  overflow-y: scroll;
+  width: 300px;
+  margin-top:50px;
+  height: 500px;
+  flex-direction: column;
+}
+
+.botMessage{
+  margin:20px;
+  border-radius: 10px;
+  padding: 10px;
+  max-width:50%;
+  min-width:50px;
+  background-color: #F1F3F4;
+  text-align: left;
+}
+
+.userMessage{
+  padding: 10px;
+  margin-left: auto;
+  margin-right: 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #CCE3E3;
+  max-width:50%;
+  min-width:50px;
+  z-index: -999999;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+  text-align: right;
+}
+
+.emptyDiv{
+  flex: 3;
+}
+
 .messagesInput {
   display: flex;
   flex-direction: column;
@@ -427,7 +479,8 @@ margin-bottom: 10%;
 }
 
 .botmobilegif {
-  height: 450px;
+  display: none;
+  height: auto;
   width: 250px;
   margin-top: 8%;
 }
@@ -876,4 +929,18 @@ flex: 4;
 td{
   max-width: 100px;
   overflow-wrap: break-word;
+}
+
+.errorAlert{
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.hiddenerrorAlert{
+  display: none;
+}
+
+.hide{
+  display: none;
 }

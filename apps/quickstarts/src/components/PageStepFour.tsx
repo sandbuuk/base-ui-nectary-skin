@@ -9,7 +9,7 @@ import { usePageThreeControl } from './PageStepThreeContext'
 import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
 import contactlogo from './images/contactlogo.jpg'
-import humanMobile from './images/humanMobile.png'
+import mobile from './images/mobile.png'
 import verticalLine from './images/verticalLine.png'
 import type { FC } from 'react'
 
@@ -18,6 +18,7 @@ type WhatsappquestionProps={
   questionCounter: number,
   agentdetails: any[],
   setAgentdetails: (value: any) => void,
+  setDisplay: (value: any) => void,
 }
 
 type AgentInformationProps={
@@ -26,7 +27,7 @@ type AgentInformationProps={
 }
 
 const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
-  const { agentdetails, questionCounter, setAgentdetails } = props
+  const { agentdetails, questionCounter, setAgentdetails, setDisplay } = props
 
   const validateEmail = (email: String) => {
     return String(email)
@@ -51,6 +52,9 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
               [props.i]: { name: value, email: agentdetails[props.i].email },
             }))
           }}
+          onFocus={() => {
+            setDisplay(true)
+          }}
           label="Agent name"
           placeholder="What is your name?"
         />
@@ -66,6 +70,9 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
               ...datas,
               [props.i]: { name: agentdetails[props.i].name, email: value },
             }))
+          }}
+          onFocus={() => {
+            setDisplay(true)
           }}
           label="Agent e-mail"
           placeholder="What is your email?"
@@ -122,9 +129,13 @@ export const PageStepFour: FC = () => {
 
   const [agentdetails, setAgentdetails] = useState([{ name: '', email: '' }])
 
+  const [display, setDisplay] = useState(true)
+
   console.log(agentdetails)
 
   const { accountId } = usePageOneControl()
+
+  const { token } = usePageOneControl()
 
   const validateEmail = (email: String) => {
     return String(email)
@@ -218,6 +229,12 @@ export const PageStepFour: FC = () => {
     if (accountId.length > 0) {
       const response = await axios.put(url, content, config)
 
+      if (typeof (response.data.info) != 'undefined') {
+        console.log('error while saving trail configuration')
+
+        return
+      }
+
       console.log(response)
       handleClickOpen()
     } else {
@@ -230,110 +247,145 @@ export const PageStepFour: FC = () => {
     handleBack()
   }
 
-  return (
-    <div className={styles.pageWhatsapp}>
-      <div className={styles.mainBodyWhatsapp}>
-        <div className={styles.botwhatsappHeading}>
-          <div className={styles.botwhatsappMatter}>
-            <h2 className={styles.botwhatsappMatterHeading}>
-              Human Handover
-            </h2>
-            <p className={styles.botwhatsappMatterBody}>
-              Configure the messages that are displayed on the conversation
-            </p>
-          </div>
-          <div className={styles.botpageSteps}><PageSteps/></div>
+  if (token.length == 0) {
+    return (
+      <div className={styles.pageWhatsapp}>
+        <div className={styles.mainBodyWhatsapp}>
+          <div className={styles.botwhatsappHeading}>
+            <div className={styles.botwhatsappMatter}>
+              <h2 className={styles.botwhatsappMatterHeading}>
+                Human Handover
+              </h2>
+              <p className={styles.botwhatsappMatterBody}>
+                Configure the messages that are displayed on the conversation
+              </p>
+            </div>
+            <div className={styles.botpageSteps}><PageSteps/></div>
 
-          <div className={styles.chatlayerLogo}>
-            <div className="empty"/>
-            <div className="actualLogo">
-              <p className={styles.poweredBy}>Powered By:</p>
-              <img className={styles.chatLayer} src={contactlogo}/>
-            </div>
-          </div>
-        </div>
-        {/* <div className={styles.whatsappHeading}>
-          <div className={styles.whatsappMatter}>
-            <h2 className={styles.whatsappMatterHeading}>Human Handover</h2>
-            <p className={styles.whatsappMatterBody}>
-              Configure the agents that will be responsible for contacting the
-              customers
-            </p>
-          </div>
-          <div className={styles.botpageSteps}><PageSteps/></div>
-          <div className={styles.chatlayerLogo}>
-            <div className="empty"/>
-            <div className="actualLogo">
-              <p className={styles.poweredBy}>Powered By:</p>
-              <img className={styles.chatLayer} src={contactlogo}/>
-            </div>
-          </div>
-        </div> */}
-        <div className={styles.botwhatsappBody}>
-          <div className={styles.messagesParent}>
-            <div className={styles.humanMessages}>
-              { <WhatsappQuestion questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={count} i={count}/>}
-              <div className={styles.humanButton}>
-                <sinch-button
-                  style={{ width: '100%' }}
-                  type="cta"
-                  disabled={questionCounter > 5 || agentdetails[Object.keys(agentdetails).length - 1].name.length <= 0 || agentdetails[Object.keys(agentdetails).length - 1].email.length <= 0 || validateEmail(agentdetails[Object.keys(agentdetails).length - 1].email) == null ? true : undefined}
-                  onClick={buttonCounter}
-                  text="Add more Agents (Up to 5)"
-                />
-              </div>
-              <div className={styles.humanDetails}>
-                <th className={count > 0 ? styles.human : styles.humanhidden}>
-                  <td className={styles.humanName}>
-                    Name
-                  </td>
-                  <td className={styles.humanEmail}>
-                    E-mail
-                  </td>
-                  <td className={styles.humanAction}>
-                    Action
-                  </td>
-                </th>
-                <AgentInformation agentdetails={agentdetails} setAgentdetails={setAgentdetails}/>
+            <div className={styles.chatlayerLogo}>
+              <div className="empty"/>
+              <div className="actualLogo">
+                <p className={styles.poweredBy}>Powered By:</p>
+                <img className={styles.chatLayer} src={contactlogo}/>
               </div>
             </div>
-            <img className={styles.humanLine} src={verticalLine}/>
-            <div className={styles.humanHandover}>
-                  <sinch-textarea // eslint-disable-line
-                    value={humanhandover}
-                    label="Human Handover Message"
-                    placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
-                    optionalText={undefined}
-                    invalidText={undefined}
+          </div>
+          {/* <div className={styles.whatsappHeading}>
+            <div className={styles.whatsappMatter}>
+              <h2 className={styles.whatsappMatterHeading}>Human Handover</h2>
+              <p className={styles.whatsappMatterBody}>
+                Configure the agents that will be responsible for contacting the
+                customers
+              </p>
+            </div>
+            <div className={styles.botpageSteps}><PageSteps/></div>
+            <div className={styles.chatlayerLogo}>
+              <div className="empty"/>
+              <div className="actualLogo">
+                <p className={styles.poweredBy}>Powered By:</p>
+                <img className={styles.chatLayer} src={contactlogo}/>
+              </div>
+            </div>
+          </div> */}
+          <div className={styles.botwhatsappBody}>
+            <div className={styles.messagesParent}>
+              <div className={styles.humanMessages}>
+                { <WhatsappQuestion setDisplay={setDisplay} questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={count} i={count}/>}
+                <div className={styles.humanButton}>
+                  <sinch-button
                     style={{ width: '100%' }}
-                    additionalText={undefined}
-                    disabled={undefined}
-                    onChange={(value) => {
-                      setHumanhandover(value)
-                    }}
-                    onFocus={() => {}}
-                    onBlur={() => {}}
+                    type="cta"
+                    disabled={questionCounter > 5 || agentdetails[Object.keys(agentdetails).length - 1].name.length <= 0 || agentdetails[Object.keys(agentdetails).length - 1].email.length <= 0 || validateEmail(agentdetails[Object.keys(agentdetails).length - 1].email) == null ? true : undefined}
+                    onClick={buttonCounter}
+                    text="Add more Agents (Up to 5)"
                   />
-            </div>
-            <div className={styles.preview}>
-              <img
-                className={styles.mobilegif}
-                src={humanMobile}
-              />
-            </div>
-          </div>
-        </div>
+                </div>
+                <div className={styles.humanDetails}>
+                  <th className={count > 0 ? styles.human : styles.humanhidden}>
+                    <td className={styles.humanName}>
+                      Name
+                    </td>
+                    <td className={styles.humanEmail}>
+                      E-mail
+                    </td>
+                    <td className={styles.humanAction}>
+                      Action
+                    </td>
+                  </th>
+                  <AgentInformation agentdetails={agentdetails} setAgentdetails={setAgentdetails}/>
+                </div>
+              </div>
+              <img className={styles.humanLine} src={verticalLine}/>
+              <div className={styles.humanHandover}>
+                    <sinch-textarea // eslint-disable-line
+                      value={humanhandover}
+                      label="Human Handover Message"
+                      placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
+                      optionalText={undefined}
+                      invalidText={undefined}
+                      style={{ width: '100%' }}
+                      additionalText={undefined}
+                      disabled={undefined}
+                      onChange={(value) => {
+                        setHumanhandover(value)
+                      }}
+                      onFocus={() => {
+                        setDisplay(false)
+                      }}
+                      onBlur={() => {}}
+                    />
+              </div>
+              <div className={styles.botpreview}>
+                <div style={{ backgroundImage: `url(${mobile})` }} className={styles.botImage}>
+                  <div className={styles.messagesBot}>
+                    <div className={greetingmsg.length > 0 ? styles.botMessage : styles.hide}>
+                      {greetingmsg}
+                    </div>
+                    <div className={styles.userMessage}>
+                      User greeting
+                    </div>
+                    {[...Array(Object.keys(botquestion).length)].map((_, i) => {
+                      return (
+                        <>
+                          <div
+                            key={`${i}bot`}
+                            className={styles.botMessage}
+                          >
+                            {botquestion[i]}
+                          </div>
+                          <div key={`${i}user`} className={styles.userMessage}>
+                            User Answer
+                          </div>
+                        </>
+                      )
+                    })}
+                    <div key={'humanhandovermessage'} className={humanhandover.length > 0 && display ? styles.botMessage : styles.hide}>
+                      {humanhandover}
+                    </div>
 
-        <div className={styles.buttons}>
-          <div className={styles.backBut}>
-            <sinch-button type="destructive" text="Back" onClick={prevPage}/>
+                  </div>
+
+                </div>
+                <div className={styles.emptyDiv}/>
+              </div>
+            </div>
           </div>
-          <div className={styles.saveBut}>
-            { <Congratsbox open={open} handleClickOpen={handleClickOpen} handleClose={handleClose}/> }
-            <sinch-button type="primary" text="Next" onClick={nextPage} disabled={Object.keys(agentdetails).length > 1 ? undefined : true}/>
+
+          <div className={styles.buttons}>
+            <div className={styles.backBut}>
+              <sinch-button type="destructive" text="Back" onClick={prevPage}/>
+            </div>
+            <div className={styles.saveBut}>
+              { <Congratsbox open={open} handleClickOpen={handleClickOpen} handleClose={handleClose}/> }
+              <sinch-button type="primary" text="Next" onClick={nextPage} disabled={Object.keys(agentdetails).length > 1 ? undefined : true}/>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    )
+  }
+
+  return (
+    <div>Sign in First</div>
   )
 }

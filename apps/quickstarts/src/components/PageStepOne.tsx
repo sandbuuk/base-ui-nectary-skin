@@ -24,8 +24,9 @@ export const PageStepOne: FC = () => {
   const [lastnameInvalidtext, setlastnameInvalidtext] = useState('')
   const [roleInvalidtext, setroleInvalidtext] = useState('')
   const [phoneInvalidtext, setphoneInvalidtext] = useState('')
+  const [iserror, setIserror] = useState(false)
   const [disabled, setDisabled] = useState(true)
-  const { accountId, setAccountId } = usePageOneControl()
+  const { accountId, setAccountId, setToken } = usePageOneControl()
 
   async function sendData() {
     function validateInputs() {
@@ -100,10 +101,13 @@ export const PageStepOne: FC = () => {
       })
       const k = await res.json()
 
-      if (k.data.firstName === firstName) {
+      if (typeof k.data == 'undefined') {
+        setIserror(true)
+      } else if (k.data.firstName === firstName) {
         console.log('Creation of user sucessful')
         console.log(typeof (k.data.ID))
         console.log(k.data.ID)
+        setToken(k.data.MPToken)
         setAccountId(k.data.ID)
         console.log(accountId)
         next()
@@ -330,6 +334,12 @@ export const PageStepOne: FC = () => {
         </div>
         <div className={styles.image}>
           <img src={signupimage} className={styles.signupImage}/>
+        </div>
+        <div className={iserror ? styles.errorAlert : styles.hiddenerrorAlert}>
+          <sinch-alert
+            type="error"
+            text="Email already exists"
+          />
         </div>
       </div>
     </div>
