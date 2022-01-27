@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { isAccordionItemElement } from '@nectary/components/accordion-item'
+import { isAccordionItemElement } from '../accordion-item'
 import {
   defineCustomElement,
   getAttribute,

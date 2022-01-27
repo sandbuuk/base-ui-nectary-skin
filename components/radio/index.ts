@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { isRadioOptionElement } from '@nectary/components/radio-option'
+import { isRadioOptionElement } from '../radio-option'
 import {
   defineCustomElement,
   getAttribute,

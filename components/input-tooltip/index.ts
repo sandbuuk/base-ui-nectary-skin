@@ -1,7 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import '@nectary/components/tooltip'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import '@nectary/components/icon/tooltip'
+import '../tooltip'
 import {
   defineCustomElement,
   getAttribute,

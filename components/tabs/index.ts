@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { isTabsOptionElement } from '@nectary/components/tabs-option'
+import { isTabsOptionElement } from '../tabs-option'
 import {
   defineCustomElement,
   getAttribute,

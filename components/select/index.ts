@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { isSelectOptionElement } from '@nectary/components/select-option'
+import { isSelectOptionElement } from '../select-option'
 import {
   attrValueToPixels,
   defineCustomElement,
