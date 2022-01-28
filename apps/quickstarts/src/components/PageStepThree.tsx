@@ -116,7 +116,7 @@ export const PageStepThree: FC = () => {
     handleBack()
   }
 
-  if (token.length == 0) {
+  if (token.length >= 0) {
     return (
       <div className={styles.botpageWhatsapp}>
         {/* <div className={styles.botsteps}>

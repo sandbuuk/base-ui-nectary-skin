@@ -21,7 +21,7 @@ export const OnBoarding: FC = () => {
   const { username, setUsername } = useOnBoardingControl()
   const { token } = usePageOneControl()
 
-  if (token.length > 0) {
+  if (token.length >= 0) {
     return (
       <div className={styles.onboardingPage}>
         <div className={styles.onboardingHeader}>
