@@ -10,8 +10,11 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import '../select-option'
 import type { TSinchElementReact } from '../types'
+
+export const isAccordionItemElement = (element: EventTarget | Element | null): element is TSinchAccordionItemElement => {
+  return element instanceof Element && element.tagName === 'SINCH-ACCORDION-ITEM'
+}
 
 const statusValues = ['info', 'success', 'warn', 'error'] as const
 

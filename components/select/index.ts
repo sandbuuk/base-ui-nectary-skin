@@ -1,3 +1,4 @@
+import { isSelectOptionElement } from '../select-option'
 import {
   attrValueToPixels,
   defineCustomElement,
@@ -11,26 +12,21 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import '../select-option'
 import type { TSinchElementReact } from '../types'
 
 type TSinchSelectOption = HTMLElementTagNameMap['sinch-select-option']
 
 const ITEM_HEIGHT = 36
 
-const isOptionElement = (element: EventTarget | Element | null): element is TSinchSelectOption => {
-  return element instanceof Element && element.tagName === 'SINCH-SELECT-OPTION'
-}
-
 const getEnabledOptionElements = ($slot: HTMLSlotElement): TSinchSelectOption[] => {
-  return $slot.assignedElements().filter((opt) => isOptionElement(opt) && opt.disabled !== true) as TSinchSelectOption[]
+  return $slot.assignedElements().filter((opt) => isSelectOptionElement(opt) && opt.disabled !== true) as TSinchSelectOption[]
 }
 const findSelectedOption = (elements: readonly TSinchSelectOption[]) => {
   return elements.find((el) => el.selected) ?? null
 }
 const getOptionWithValue = ($slot: HTMLSlotElement, value: string): TSinchSelectOption | null => {
   for (const $option of $slot.assignedElements()) {
-    if (isOptionElement($option) && $option.disabled !== true && $option.value === value) {
+    if (isSelectOptionElement($option) && $option.disabled !== true && $option.value === value) {
       return $option
     }
   }
@@ -40,7 +36,7 @@ const getOptionWithValue = ($slot: HTMLSlotElement, value: string): TSinchSelect
 
 const getFirstOption = ($slot: HTMLSlotElement) => {
   for (const $option of $slot.assignedElements()) {
-    if (isOptionElement($option) && $option.disabled !== true) {
+    if (isSelectOptionElement($option) && $option.disabled !== true) {
       return $option
     }
   }
@@ -50,7 +46,7 @@ const getFirstOption = ($slot: HTMLSlotElement) => {
 
 const getLastOption = ($slot: HTMLSlotElement) => {
   for (const $option of $slot.assignedElements().reverse()) {
-    if (isOptionElement($option) && $option.disabled !== true) {
+    if (isSelectOptionElement($option) && $option.disabled !== true) {
       return $option
     }
   }
@@ -84,7 +80,7 @@ const getPrevOption = ($slot: HTMLSlotElement) => {
 
 const selectOption = ($slot: HTMLSlotElement, $option: TSinchSelectOption | null) => {
   for (const $op of $slot.assignedElements()) {
-    if (isOptionElement($op)) {
+    if (isSelectOptionElement($op)) {
       const isSelected = $op === $option
 
       // Select / Unselect
@@ -312,7 +308,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
     const $elem = e.target
 
-    if ($elem !== this.$listbox && isOptionElement($elem) && $elem.disabled !== true) {
+    if ($elem !== this.$listbox && isSelectOptionElement($elem) && $elem.disabled !== true) {
       dispatchChangeEvent(this, $elem)
     }
 
@@ -384,7 +380,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     let $checkedOption: TSinchSelectOption | null = null
 
     for (const $option of this.$selectSlot.assignedElements()) {
-      if (isOptionElement($option)) {
+      if (isSelectOptionElement($option)) {
         const isChecked = $checkedOption === null && $option.disabled !== true && $option.value === value
 
         // Check / Uncheck options
@@ -415,7 +411,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       this.$buttonContent.textContent = $option.text
 
       // Try adding icon
-      const $icon = $option.shadowRoot!.querySelector('slot')?.assignedElements()[0]?.cloneNode(true)
+      const $icon = $option.icon()?.cloneNode(true)
 
       if ($icon != null) {
         this.$button.prepend($icon)

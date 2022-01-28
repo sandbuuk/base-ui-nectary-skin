@@ -9,6 +9,10 @@ import {
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
+export const isRadioOptionElement = (element: EventTarget | Element | null): element is TSinchRadioOptionElement => {
+  return element instanceof Element && element.tagName === 'SINCH-RADIO-OPTION'
+}
+
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML

@@ -1,3 +1,4 @@
+import '../icon/tooltip'
 import {
   attrValueToPixels,
   defineCustomElement,
@@ -10,7 +11,6 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import '../icon/tooltip'
 import type { TSinchElementReact } from '../types'
 
 const orientationValues = ['top', 'bottom', 'left', 'right', 'top-left', 'top-right', 'bottom-left', 'bottom-right'] as const

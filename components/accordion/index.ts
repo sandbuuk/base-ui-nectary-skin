@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import '@nectary/components/accordion-item'
+import { isAccordionItemElement } from '../accordion-item'
 import {
   defineCustomElement,
   getAttribute,
@@ -13,12 +12,6 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-
-type TSinchAccordionItem = HTMLElementTagNameMap['sinch-accordion-item']
-
-const isAccordionItem = (element: EventTarget | Element | null): element is TSinchAccordionItem => {
-  return element instanceof Element && element.tagName === 'SINCH-ACCORDION-ITEM'
-}
 
 const template = document.createElement('template')
 
@@ -79,7 +72,7 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
   onOptionChange = (e: Event) => {
     e.stopPropagation()
 
-    if (!isAccordionItem(e.target)) {
+    if (!isAccordionItemElement(e.target)) {
       return
     }
 
@@ -102,7 +95,7 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
       const values = getCSVSet(csv)
 
       for (const $option of this.$slot.assignedElements()) {
-        if (isAccordionItem($option)) {
+        if (isAccordionItemElement($option)) {
           $option.checked = $option.disabled !== true && values.has($option.value)
         }
       }
@@ -110,7 +103,7 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
       const value = getFirstCSValue(csv)
 
       for (const $option of this.$slot.assignedElements()) {
-        if (isAccordionItem($option)) {
+        if (isAccordionItemElement($option)) {
           $option.checked = $option.disabled !== true && $option.value === value
         }
       }

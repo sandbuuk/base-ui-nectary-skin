@@ -2,6 +2,10 @@ import { defineCustomElement, getAttribute, getBooleanAttribute, updateAttribute
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
+export const isSelectOptionElement = (element: EventTarget | Element | null): element is TSinchSelectOptionElement => {
+  return element instanceof Element && element.tagName === 'SINCH-SELECT-OPTION'
+}
+
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
@@ -84,6 +88,10 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
   get selected() {
     return getBooleanAttribute(this, 'selected')
   }
+
+  icon(): Element | null {
+    return this.$iconSlot.assignedElements()[0] ?? null
+  }
 })
 
 type TSinchSelectOptionElement = HTMLElement & {
@@ -92,6 +100,7 @@ type TSinchSelectOptionElement = HTMLElement & {
   checked: boolean,
   selected: boolean,
   disabled: boolean,
+  icon(): Element | null,
 }
 
 type TSinchSelectOptionReact = TSinchElementReact<TSinchSelectOptionElement> & {

@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import '@nectary/components/tabs-option'
+import { isTabsOptionElement } from '../tabs-option'
 import {
   defineCustomElement,
   getAttribute,
@@ -9,21 +8,18 @@ import {
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
-type TSinchRadioOption = HTMLElementTagNameMap['sinch-tabs-option']
+type TSinchTabOptionElement = HTMLElementTagNameMap['sinch-tabs-option']
 
-const isRadioElement = (element: EventTarget | Element | null): element is TSinchRadioOption => {
-  return element instanceof Element && element.tagName === 'SINCH-TABS-OPTION'
+const getEnabledRadioElements = ($slot: HTMLSlotElement): TSinchTabOptionElement[] => {
+  return $slot.assignedElements().filter((opt) => isTabsOptionElement(opt) && opt.disabled !== true) as TSinchTabOptionElement[]
 }
-const getEnabledRadioElements = ($slot: HTMLSlotElement): TSinchRadioOption[] => {
-  return $slot.assignedElements().filter((opt) => isRadioElement(opt) && opt.disabled !== true) as TSinchRadioOption[]
-}
-const findSelectedOption = (elements: readonly TSinchRadioOption[]) => {
+const findSelectedOption = (elements: readonly TSinchTabOptionElement[]) => {
   return elements.find((el) => el.checked) ?? null
 }
 
 const getFirstOption = ($slot: HTMLSlotElement) => {
   for (const $option of $slot.assignedElements()) {
-    if (isRadioElement($option) && $option.disabled !== true) {
+    if (isTabsOptionElement($option) && $option.disabled !== true) {
       return $option
     }
   }
@@ -33,7 +29,7 @@ const getFirstOption = ($slot: HTMLSlotElement) => {
 
 const getLastOption = ($slot: HTMLSlotElement) => {
   for (const $option of $slot.assignedElements().reverse()) {
-    if (isRadioElement($option) && $option.disabled !== true) {
+    if (isTabsOptionElement($option) && $option.disabled !== true) {
       return $option
     }
   }
@@ -153,7 +149,7 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
 
   onValueChange(value: string) {
     for (const $option of this.$slot.assignedElements()) {
-      if (isRadioElement($option)) {
+      if (isTabsOptionElement($option)) {
         $option.checked = $option.disabled !== true && $option.value === value
       }
     }
