@@ -1,3 +1,7 @@
+## v0.6.1
+
+* 🐞 fix `sinch-select` accessing closed shadowRoot
+
 ## v0.6.0
 
 * ➕ add `sinch-accordion` component
