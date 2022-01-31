@@ -128,6 +128,8 @@ export const PageStepFour: FC = () => {
 
   const [display, setDisplay] = useState(true)
 
+  const [iserror, setIserror] = useState(false)
+
   console.log(agentdetails)
 
   const { accountId } = usePageOneControl()
@@ -227,13 +229,11 @@ export const PageStepFour: FC = () => {
       const response = await axios.put(url, content, config)
 
       if (typeof (response.data.info) != 'undefined') {
-        console.log('error while saving trail configuration')
-
-        return
+        setIserror(true)
+      } else {
+        console.log(response)
+        handleClickOpen()
       }
-
-      console.log(response)
-      handleClickOpen()
     } else {
       console.log('SignIn first')
     }
@@ -262,6 +262,12 @@ export const PageStepFour: FC = () => {
             <div className={styles.chatlayerLogo}>
               <div className="empty"/>
               <div className="actualLogo">
+                <div className={iserror ? styles.errorAlert : styles.hiddenerrorAlert}>
+                  <sinch-alert
+                    type="error"
+                    text="Error in saving trail configuration"
+                  />
+                </div>
                 <p className={styles.poweredBy}>Powered By:</p>
                 <img className={styles.chatLayer} src={contactlogo}/>
               </div>
