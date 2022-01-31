@@ -87,36 +87,33 @@ const AgentInformation = (props: AgentInformationProps) => {
 
   return (
     <>
-      { [...Array(Object.keys(agentdetails).length - 1)].map((_, i) => (
-        agentdetails[i].name.length > 0 ? (
-          <>
-            <hr className={styles.horizontaLine}/>
-            <tr key={i} className={styles.humanValues}>
-              {/* <div className={styles.humanhorzontalline}>
+      { [...Array(Object.keys(agentdetails).length - 1)].map((_, index) => (
+        agentdetails[index].name.length > 0 ? (
+          <tr style={{ borderTop: '1px solid #999999' }} key={index} className={styles.humanValues}>
+            {/* <div className={styles.humanhorzontalline}>
       <hr className={styles.horizontaLine}/>
     </div> */}
-              <td className={styles.humanName}>
-                <p>{agentdetails[i].name}</p>
-              </td>
-              <td className={styles.humanEmail}>
-                <p>{agentdetails[i].email}</p>
-              </td>
-              <td className={styles.humanAction}>
-                <div className={styles.humanDetailsbuttons}>
-                  <sinch-button
-                    type="destructive"
-                    text="Delete"
-                    onClick={() => {
-                      setAgentdetails((datas: string[]) => ({
-                        ...datas,
-                        [i]: { name: '', email: '' },
-                      }))
-                    }}
-                  />
-                </div>
-              </td>
-            </tr>
-          </>
+            <td className={styles.humanName}>
+              <p>{agentdetails[index].name}</p>
+            </td>
+            <td className={styles.humanEmail}>
+              <p>{agentdetails[index].email}</p>
+            </td>
+            <td className={styles.humanAction}>
+              <div className={styles.humanDetailsbuttons}>
+                <sinch-button
+                  type="destructive"
+                  text="Delete"
+                  onClick={() => {
+                    setAgentdetails((datas: string[]) => ({
+                      ...datas,
+                      [index]: { name: '', email: '' },
+                    }))
+                  }}
+                />
+              </div>
+            </td>
+          </tr>
         ) : undefined
       ))
     }
@@ -300,20 +297,24 @@ export const PageStepFour: FC = () => {
                     text="Add more Agents (Up to 5)"
                   />
                 </div>
-                <div className={styles.humanDetails}>
-                  <th className={count > 0 ? styles.human : styles.humanhidden}>
-                    <td className={styles.humanName}>
-                      Name
-                    </td>
-                    <td className={styles.humanEmail}>
-                      E-mail
-                    </td>
-                    <td className={styles.humanAction}>
-                      Action
-                    </td>
-                  </th>
-                  <AgentInformation agentdetails={agentdetails} setAgentdetails={setAgentdetails}/>
-                </div>
+                <table className={styles.humanDetails}>
+                  <thead>
+                    <tr className={count > 0 ? styles.human : styles.humanhidden}>
+                      <th className={styles.humanName}>
+                        Name
+                      </th>
+                      <th className={styles.humanEmail}>
+                        E-mail
+                      </th>
+                      <th className={styles.humanAction}>
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <AgentInformation key={Math.random()} agentdetails={agentdetails} setAgentdetails={setAgentdetails}/>
+                  </tbody>
+                </table>
               </div>
               <img className={styles.humanLine} src={verticalLine}/>
               <div className={styles.humanHandover}>
