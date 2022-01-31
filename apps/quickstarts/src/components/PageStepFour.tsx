@@ -244,7 +244,7 @@ export const PageStepFour: FC = () => {
     handleBack()
   }
 
-  if (token.length == 0) {
+  if (token.length >= 0) {
     return (
       <div className={styles.pageWhatsapp}>
         <div className={styles.mainBodyWhatsapp}>
