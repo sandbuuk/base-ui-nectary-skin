@@ -12,6 +12,7 @@ import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { SpinnerComponent } from '../components/Spinner/Spinner.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TabsComponent } from '../components/Tabs/Tabs.component'
+import { TagComponent } from '../components/Tag/Tag.component'
 import { AccordionComponent } from '../components/Accordion/Accordion.component'
 import { AppComponent } from './app.component'
 
@@ -30,6 +31,7 @@ import { AppComponent } from './app.component'
     TooltipComponent,
     SpinnerComponent,
     TabsComponent,
+    TagComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
