@@ -1,0 +1,41 @@
+<style>
+:host {
+  display: inline-block;
+}
+
+#wrapper {
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+:host([small]:not([small="false"])) #wrapper {
+  width: 12px;
+  height: 12px;
+}
+
+#close {
+  all: initial;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  cursor: pointer;
+}
+
+#close > * {
+  pointer-events: none;
+}
+</style>
+
+<div id="wrapper">
+  <button id="close">
+    <sinch-icon-cancel></sinch-icon-cancel>
+  </button>
+</div>

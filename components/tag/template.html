@@ -1,0 +1,87 @@
+<style>
+:host {
+  display: inline-block;
+  outline: none;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  padding: 2px 9px;
+  border-radius: 12px;
+  font: var(--sinch-font-extra-small-text);
+  color: var(--sinch-color-text-default);
+  background-color: var(--sinch-color-snow-600);
+  width: 100%;
+  height: 24px;
+  box-sizing: border-box;
+
+  --sinch-color-icon: var(--sinch-color-stormy-400);
+}
+
+:host([category="candy"]) > #wrapper {
+  background-color: var(--sinch-color-candy-200);
+}
+
+:host([category="bolt"]) > #wrapper {
+  background-color: var(--sinch-color-bolt-200);
+}
+
+:host([category="aqua"]) > #wrapper {
+  background-color: var(--sinch-color-aqua-200);
+}
+
+:host([category="grass"]) > #wrapper {
+  background-color: var(--sinch-color-grass-200);
+}
+
+:host([category="berry"]) > #wrapper {
+  background-color: var(--sinch-color-berry-200);
+}
+
+:host([category="orange"]) > #wrapper {
+  background-color: var(--sinch-color-orange-200);
+}
+
+:host([category="night"]) > #wrapper {
+  background-color: var(--sinch-color-night-200);
+}
+
+:host([category="mud"]) > #wrapper {
+  background-color: var(--sinch-color-mud-200);
+}
+
+:host([category="dirt"]) > #wrapper {
+  background-color: var(--sinch-color-dirt-200);
+}
+
+:host([inverted]:not([inverted="false"])) > #wrapper {
+  background-color: var(--sinch-color-stormy-500);
+  color: var(--sinch-color-snow-100);
+
+  --sinch-color-icon: var(--sinch-color-snow-100);
+}
+
+:host([small]:not([small="false"])) #wrapper {
+  height: 20px;
+  border-radius: 10px;
+  padding: 0 8px;
+}
+
+#text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: auto;
+  flex: 1;
+}
+
+</style>
+
+<div id="wrapper">
+  <slot name="icon"></slot>
+  <span id="text"></span>
+  <slot name="close"></slot>
+</div>
