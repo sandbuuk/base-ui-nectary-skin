@@ -7,6 +7,7 @@ import { Input } from './components/Input'
 import { Radio } from './components/Radio'
 import { Select } from './components/Select'
 import { Tabs } from './components/Tabs'
+import { Tag } from './components/Tag'
 import { Textarea } from './components/Textarea'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
@@ -60,6 +61,12 @@ const mapElement = (url: URL) => {
     case '/tabs': {
       return (
         <Tabs search={url.searchParams}/>
+      )
+    }
+
+    case '/tag': {
+      return (
+        <Tag search={url.searchParams}/>
       )
     }
 

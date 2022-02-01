@@ -40,12 +40,10 @@ export const createIconClass = (templateHTML: string) => {
     }
 
     connectedCallback() {
-      if (!this.$svg.hasAttribute('preserveAspectRatio')) {
-        this.$svg.setAttribute('preserveAspectRatio', 'xMinYMin meet')
-      }
+      updateAttribute(this.$svg, 'preserveAspectRatio', 'xMinYMin meet')
 
       if (!this.hasAttribute('size')) {
-        this.size = DEFAULT_SIZE
+        updateAttribute(this, 'size', DEFAULT_SIZE)
       }
     }
 
