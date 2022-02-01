@@ -2,6 +2,7 @@ import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { App } from './components/App'
+import type { EmotionCache } from '@emotion/cache'
 
 const appName = 'sinch-quickstarts-app'
 const template = document.createElement('template')
@@ -21,6 +22,7 @@ template.innerHTML = `
 
 class SinchReactApp extends HTMLElement {
   appElement: HTMLElement
+  cache: EmotionCache
 
   constructor() {
     super()
@@ -37,21 +39,29 @@ class SinchReactApp extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.appElement = shadowRoot.getElementById(appName)!
-  }
 
-  connectedCallback() {
-    const cache = createCache({
+    this.cache = createCache({
       key: 'css',
       prepend: true,
-      container: this.shadowRoot as any as HTMLElement,
+      container: shadowRoot as any as HTMLElement,
     })
+  }
+
+  render() {
+    if (!this.isConnected) {
+      return
+    }
 
     render(
-      <CacheProvider value={cache}>
+      <CacheProvider value={this.cache}>
         <App baseUrl="/quickstarts"/>
       </CacheProvider>,
       this.appElement
     )
+  }
+
+  connectedCallback() {
+    this.render()
   }
 
   disconnectedCallback() {
