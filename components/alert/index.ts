@@ -6,7 +6,6 @@ import {
   updateBooleanAttribute,
   updateAttribute,
   updateLiteralAttribute,
-  getEventHandler,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -20,8 +19,6 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-alert', class extends HTMLElement {
   $text: HTMLParagraphElement
   $title: HTMLParagraphElement
-  $action: HTMLButtonElement
-  $dismiss: HTMLButtonElement
   constructor() {
     super()
 
@@ -33,18 +30,6 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
 
     this.$text = shadowRoot.querySelector('#text')!
     this.$title = shadowRoot.querySelector('#title')!
-    this.$action = shadowRoot.querySelector('#action')!
-    this.$dismiss = shadowRoot.querySelector('#dismiss')!
-  }
-
-  connectedCallback() {
-    this.$action.addEventListener('click', this.onActionClick)
-    this.$dismiss.addEventListener('click', this.onDismissClick)
-  }
-
-  disconnectedCallback() {
-    this.$action.removeEventListener('click', this.onActionClick)
-    this.$dismiss.removeEventListener('click', this.onDismissClick)
   }
 
   get type() {
@@ -71,22 +56,6 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
     updateAttribute(this, 'title', value)
   }
 
-  get actionText() {
-    return getAttribute(this, 'actiontext', '')
-  }
-
-  set actionText(value: string) {
-    updateAttribute(this, 'actiontext', value)
-  }
-
-  get dismissable() {
-    return getBooleanAttribute(this, 'dismissable')
-  }
-
-  set dismissable(isDismissable: boolean | undefined) {
-    updateBooleanAttribute(this, 'dismissable', isDismissable)
-  }
-
   get multiline() {
     return getBooleanAttribute(this, 'multiline')
   }
@@ -96,7 +65,7 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'title', 'actiontext']
+    return ['text', 'title']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -111,32 +80,7 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
 
         break
       }
-      case 'actiontext': {
-        this.$action.textContent = newVal
-
-        break
-      }
     }
-  }
-
-  onActionClick = (e: Event) => {
-    e.stopPropagation()
-
-    getEventHandler(this, 'onAction')?.()
-
-    this.dispatchEvent(
-      new CustomEvent('action')
-    )
-  }
-
-  onDismissClick = (e: Event) => {
-    e.stopPropagation()
-
-    getEventHandler(this, 'onDismiss')?.()
-
-    this.dispatchEvent(
-      new CustomEvent('dismiss')
-    )
   }
 })
 
@@ -146,8 +90,6 @@ type TSinchAlertElement = HTMLElement & {
   type: TSinchAlertType,
   text: string,
   title: string,
-  actionText: string,
-  dismissable: boolean,
   multiline: boolean,
 }
 
@@ -155,11 +97,7 @@ type TSinchAlertReact = TSinchElementReact<TSinchAlertElement> & {
   type: TSinchAlertType,
   text: string,
   title?: string,
-  actionText?: string,
-  dismissable?: boolean,
   multiline?: boolean,
-  onDismiss?: () => void,
-  onAction?: () => void,
 }
 
 declare global {

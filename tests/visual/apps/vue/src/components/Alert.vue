@@ -3,10 +3,11 @@
     v-bind:type="type"
     v-bind:text="text"
     v-bind:title="title"
-    v-bind:actiontext="actionText"
-    v-bind:dismissable="isDismissable"
     v-bind:multiline="isMultiline"
-></sinch-alert>
+>
+  <sinch-alert-close v-if="isDismissable" slot="close"></sinch-alert-close>
+  <sinch-alert-button v-if="actionText != null" slot="button" v-bind:text="actionText"></sinch-alert-button>
+</sinch-alert>
 </template>
 
 <script>

@@ -17,9 +17,9 @@ export const Alert: FC<TAlert> = ({ search }) => {
       type={type}
       text={text}
       title={title}
-      actionText={actionText}
-      dismissable={isDismissable}
-      multiline={isMultiline}
-    ></sinch-alert>
+      multiline={isMultiline}>
+      {isDismissable && <sinch-alert-close slot="close"/>}
+      {actionText != null && <sinch-alert-button slot="button" text={actionText}/>}
+    </sinch-alert>
   )
 }

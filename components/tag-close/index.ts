@@ -63,11 +63,11 @@ defineCustomElement('sinch-tag-close', class extends HTMLElement {
   }
 })
 
-type TSinchTagDismissElement = HTMLElement & {
+type TSinchTagCloseElement = HTMLElement & {
   small: boolean,
 }
 
-type TSinchTagDismissReact = TSinchElementReact<TSinchTagDismissElement> & {
+type TSinchTagCloseReact = TSinchElementReact<TSinchTagCloseElement> & {
   small?: boolean,
   onClick?: () => void,
 }
@@ -75,11 +75,11 @@ type TSinchTagDismissReact = TSinchElementReact<TSinchTagDismissElement> & {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tag-close': TSinchTagDismissReact,
+      'sinch-tag-close': TSinchTagCloseReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-tag-close': TSinchTagDismissElement,
+    'sinch-tag-close': TSinchTagCloseElement,
   }
 }
