@@ -1,10 +1,8 @@
-import '../icon/cancel'
 import {
   defineCustomElement,
-  getBooleanAttribute,
+  getAttribute,
   updateAttribute,
   getEventHandler,
-  isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -13,9 +11,8 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-tag-close', class extends HTMLElement {
-  $dismissIcon: HTMLElementTagNameMap['sinch-icon-cancel']
-
+defineCustomElement('sinch-alert-button', class extends HTMLElement {
+  $action: HTMLButtonElement
   constructor() {
     super()
 
@@ -25,34 +22,40 @@ defineCustomElement('sinch-tag-close', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$dismissIcon = shadowRoot.querySelector('sinch-icon-cancel')!
-
-    shadowRoot.querySelector('#close')!.addEventListener('click', this.onClick)
+    this.$action = shadowRoot.querySelector('#action')!
   }
 
-  get small() {
-    return getBooleanAttribute(this, 'small')
+  connectedCallback() {
+    this.$action.addEventListener('click', this.onButtonClick)
   }
 
-  set small(isSmall: boolean | undefined) {
-    updateAttribute(this, 'small', isSmall)
+  disconnectedCallback() {
+    this.$action.removeEventListener('click', this.onButtonClick)
+  }
+
+  get text() {
+    return getAttribute(this, 'text', '')
+  }
+
+  set text(value: string) {
+    updateAttribute(this, 'text', value)
   }
 
   static get observedAttributes() {
-    return ['small']
+    return ['text']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
-      case 'small': {
-        updateAttribute(this.$dismissIcon, 'size', isAttrTrue(newVal) ? 12 : 14)
+      case 'text': {
+        this.$action.textContent = newVal
 
         break
       }
     }
   }
 
-  onClick = (e: Event) => {
+  onButtonClick = (e: Event) => {
     e.stopPropagation()
 
     getEventHandler(this, 'onClick')?.()
@@ -63,23 +66,23 @@ defineCustomElement('sinch-tag-close', class extends HTMLElement {
   }
 })
 
-type TSinchTagCloseElement = HTMLElement & {
-  small: boolean,
+type TSinchAlertButtonElement = HTMLElement & {
+  text: string,
 }
 
-type TSinchTagCloseReact = TSinchElementReact<TSinchTagCloseElement> & {
-  small?: boolean,
+type TSinchAlertButtonReact = TSinchElementReact<TSinchAlertButtonElement> & {
+  text: string,
   onClick?: () => void,
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tag-close': TSinchTagCloseReact,
+      'sinch-alert-button': TSinchAlertButtonReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-tag-close': TSinchTagCloseElement,
+    'sinch-alert-button': TSinchAlertButtonElement,
   }
 }
