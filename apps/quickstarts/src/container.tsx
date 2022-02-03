@@ -98,11 +98,11 @@ type TSinchQuickstartsApp = {}
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [appName]: TSinchQuickstartsApp,
+      ['sinch-quickstarts-app']: TSinchQuickstartsApp,
     }
   }
 
   interface HTMLElementTagNameMap {
-    [appName]: TSinchQuickstartsApp,
+    ['sinch-quickstarts-app']: TSinchQuickstartsApp,
   }
 }
