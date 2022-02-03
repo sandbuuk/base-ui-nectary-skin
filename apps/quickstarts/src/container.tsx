@@ -61,6 +61,7 @@ class SinchReactApp extends HTMLElement {
       // Could this rule actually be so dumb to not allow type narrowing?
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       this.token = isData(message) ? message.payload : null
+      this.render()
     }))
 
     sendMessageOnBus(tokenRequestMessage())
