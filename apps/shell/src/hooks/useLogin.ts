@@ -1,94 +1,9 @@
-/**
- * This file handles the keycloak login state and exports three hooks to manage it.
- * * useIsLoggedIn()
- *   Exposes a boolean
- * * useLogin()
- *   Exposes `login` and `logout` functions.
- * * useLoginToken()
- *   Exposes the token when logged in, otherwise `null`.
- */
-
-import EventEmitter from 'events' // TODO: This is a node module. Should we use something else?
-import Keycloak from 'keycloak-js'
 import {
   useReducer,
   useEffect,
   useMemo,
 } from 'react'
-import type { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js'
-
-// Min validity should preferably be smaller than refresh interval.
-// Otherwise the token might expire while we are waiting to check.
-const refreshIntervalS = 10
-const minValidityTimeS = 15
-
-const kcConfig: KeycloakConfig = {
-  url: `https://auth.dev.chatlayer.ai/auth`,
-  realm: 'Chatlayer',
-  clientId: 'sinch-engage',
-}
-
-const kcInitOptions: KeycloakInitOptions = {
-  onLoad: 'check-sso',
-  pkceMethod: 'S256',
-  silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
-}
-
-// This should be a singleton as far as I can tell. Initializing outside of the hook.
-const keycloak = Keycloak(kcConfig)
-
-keycloak.init(kcInitOptions).catch(() => console.error('init failed'))
-
-// Need to have some sort of event dispatching since the keycloak sdk only
-// allows you to set one function for each event, but you might want to use the hook in multiple places.
-const emitter = new EventEmitter()
-
-const handleEvent =
-  (type: string) =>
-    (...data: any[]) => {
-      emitter.emit(type, ...data)
-      console.log('keycloak:', type, ...data) // TODO: Remove
-    }
-
-// Setup the emitter, from now on, use the emitter to access these events.
-keycloak.onActionUpdate = handleEvent('onActionUpdate')
-keycloak.onAuthSuccess = handleEvent('onAuthSuccess')
-keycloak.onAuthError = handleEvent('onAuthError')
-keycloak.onAuthRefreshSuccess = handleEvent('onAuthRefreshSuccess')
-keycloak.onAuthRefreshError = handleEvent('onAuthRefreshError')
-keycloak.onAuthLogout = handleEvent('onAuthLogout')
-keycloak.onTokenExpired = handleEvent('onTokenExpired')
-
-// Not happy wih this super imperative code.. any ideas? Are we allowed to use some FRP lib? :)
-let intervalId: number | null = null
-
-emitter.on('onAuthSuccess', () => {
-  if (intervalId === null) {
-    intervalId = window.setInterval(() => {
-      keycloak
-        .updateToken(minValidityTimeS)
-        .then((refreshed) => {
-          console.log(
-            refreshed
-              ? 'successsfully refreshed token'
-              : 'no need to refresh token'
-          )
-        })
-        .catch(() => {
-          console.log('failed to refresh token')
-        })
-    }, refreshIntervalS * 1000)
-  }
-})
-
-emitter.on('onAuthLogout', () => {
-  if (intervalId !== null) {
-    window.clearInterval(intervalId)
-    intervalId = null
-  }
-})
-
-const getLoggedInState = () => keycloak.authenticated
+import { getLoggedInState, getToken, eventSource, login, logout } from '../keycloak'
 
 /**
  * Returns a boolean with the current login state or undefined if not yet known.
@@ -98,21 +13,21 @@ export const useIsLoggedIn = () => {
 
   useEffect(() => {
     // logged in
-    emitter.on('onAuthSuccess', dispatch)
-    emitter.on('onAuthRefreshSuccess', dispatch)
+    eventSource.on('onAuthSuccess', dispatch)
+    eventSource.on('onAuthRefreshSuccess', dispatch)
     // logged out
-    emitter.on('onAuthError', dispatch)
-    emitter.on('onAuthRefreshError', dispatch)
-    emitter.on('onAuthLogout', dispatch)
-    emitter.on('onTokenExpired', dispatch)
+    eventSource.on('onAuthError', dispatch)
+    eventSource.on('onAuthRefreshError', dispatch)
+    eventSource.on('onAuthLogout', dispatch)
+    eventSource.on('onTokenExpired', dispatch)
 
     return () => {
-      emitter.off('onAuthSuccess', dispatch)
-      emitter.off('onAuthRefreshSuccess', dispatch)
-      emitter.off('onAuthError', dispatch)
-      emitter.off('onAuthRefreshError', dispatch)
-      emitter.off('onAuthLogout', dispatch)
-      emitter.off('onTokenExpired', dispatch)
+      eventSource.off('onAuthSuccess', dispatch)
+      eventSource.off('onAuthRefreshSuccess', dispatch)
+      eventSource.off('onAuthError', dispatch)
+      eventSource.off('onAuthRefreshError', dispatch)
+      eventSource.off('onAuthLogout', dispatch)
+      eventSource.off('onTokenExpired', dispatch)
     }
   }, [])
 
@@ -121,21 +36,42 @@ export const useIsLoggedIn = () => {
 /**
  * @returns Object with self explanatory functions, login, logout.
  */
-export const useLogin = () =>
-  useMemo(() => ({
-    login: keycloak.login.bind(keycloak),
-    logout: keycloak.logout.bind(keycloak),
-  }), [])
+export const useLogin = () => ({ login, logout })
 
 /**
  * @returns The base64 encoded token if logged in, otherwise `null`.
  */
 export const useLoginToken = () => {
-  const isLoggedIn = useIsLoggedIn()
+  const [token, dispatch] = useReducer(getToken, undefined, getToken)
+  const memoToken = useMemo(() => token, [token?.token])
 
-  if (!(isLoggedIn ?? false)) {
-    return null
-  }
+  useEffect(() => {
+    // logged in
+    eventSource.on('onAuthSuccess', dispatch)
+    eventSource.on('onAuthRefreshSuccess', dispatch)
+    // logged out
+    eventSource.on('onAuthError', dispatch)
+    eventSource.on('onAuthRefreshError', dispatch)
+    eventSource.on('onAuthLogout', dispatch)
+    eventSource.on('onTokenExpired', dispatch)
 
-  return keycloak.token
+    return () => {
+      eventSource.off('onAuthSuccess', dispatch)
+      eventSource.off('onAuthRefreshSuccess', dispatch)
+      eventSource.off('onAuthError', dispatch)
+      eventSource.off('onAuthRefreshError', dispatch)
+      eventSource.off('onAuthLogout', dispatch)
+      eventSource.off('onTokenExpired', dispatch)
+    }
+  }, [])
+
+  return memoToken
+}
+
+export const useOnTokenChange = (callback: (token: ReturnType<typeof useLoginToken>) => void) => {
+  const token = useLoginToken()
+
+  useEffect(() => {
+    callback(token)
+  }, [token]) // `token` is memoized so should not cause unneccessary rerenders.
 }

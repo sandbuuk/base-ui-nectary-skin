@@ -7,7 +7,5 @@ export const Quickstarts: FC = () => {
     import('Quickstarts/Container').catch(console.error)
   }, [])
 
-  return (
-    <sinch-quickstarts-app/>
-  )
+  return <sinch-quickstarts-app/>
 }

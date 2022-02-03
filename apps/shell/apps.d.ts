@@ -1,9 +1,9 @@
-import type { HTMLAttributes } from 'react'
+type TMicroFrontendAttributes = {}
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-quickstarts-app': HTMLAttributes<HTMLElement>,
+      'sinch-quickstarts-app': TMicroFrontendAttributes,
     }
   }
 }
