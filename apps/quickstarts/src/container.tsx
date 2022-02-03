@@ -1,9 +1,9 @@
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import { filterMessage, isData, isTokenMessage, listenToBus, tokenRequestMessage, sendMessageOnBus } from '@sinch/bus'
-import { createContext } from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { App } from './components/App'
+import { TokenContext } from './contexts'
 import type { EmotionCache } from '@emotion/cache'
 import type { TOKEN_PAYLOAD } from '@sinch/bus'
 
@@ -23,8 +23,6 @@ template.innerHTML = `
 <div id="${appName}"></div>
 `
 
-// These helpers/types should probably be imported from some common lib.
-const TokenContext = createContext<TOKEN_PAYLOAD>(null)
 const tokenOnly = (filterMessage(isTokenMessage))
 
 class SinchReactApp extends HTMLElement {
@@ -56,7 +54,6 @@ class SinchReactApp extends HTMLElement {
     })
 
     this.unsubscribeTokenBus = listenToBus(tokenOnly((message) => {
-      console.log('got token message in MFE!', message)
       // TODO: This seems way too strict? Not even sure what is going on here, isData does return a bool.
       // Could this rule actually be so dumb to not allow type narrowing?
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -76,6 +73,23 @@ class SinchReactApp extends HTMLElement {
       <CacheProvider value={this.cache}>
         <TokenContext.Provider value={this.token}>
           <App baseUrl="/quickstarts"/>
+          <TokenContext.Consumer>{
+            (data) => {
+              if (data !== null) {
+                // data.token is what one would send for example in the `Authentication:` header when doing backend calls.
+                console.log('Here is the a small piece of the latest token inside the MFE!', data.token.substr(-10))
+                // @ts-ignore
+                console.log('Here is the username from the parsed token:', data.parsedToken.preferred_username)
+
+                return null
+              }
+
+              console.log('Currently we have no token. Are you logged in?')
+
+              return null
+            }
+          }
+          </TokenContext.Consumer>
         </TokenContext.Provider>
       </CacheProvider>,
       this.appElement
