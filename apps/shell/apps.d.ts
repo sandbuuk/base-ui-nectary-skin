@@ -1,6 +1,4 @@
-type TMicroFrontendAttributes = {
-  token: string,
-}
+type TMicroFrontendAttributes = {}
 
 declare global {
   namespace JSX {
