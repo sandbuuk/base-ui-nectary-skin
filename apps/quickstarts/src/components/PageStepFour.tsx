@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { Congratsbox } from './CongratsBox'
+//import { Congratsbox } from './CongratsBox'
 import { useOnBoardingControl } from './OnBoardingcontext'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
@@ -8,6 +8,7 @@ import { usePageOneControl } from './PageStepOneContext'
 import { usePageThreeControl } from './PageStepThreeContext'
 import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
+import congratsimage from './images/congratsimage.jpg'
 import contactlogo from './images/contactlogo.jpg'
 import mobile from './images/mobile.png'
 import verticalLine from './images/verticalLine.png'
@@ -24,6 +25,72 @@ type WhatsappquestionProps={
 type AgentInformationProps={
   agentdetails: { name: string, email: string }[],
   setAgentdetails: (value: any) => void,
+}
+type Props = {
+  isOpen: boolean,
+  setIsOpen: (value: any) => void,
+}
+
+export const Dialog: FC<Props> = (props): JSX.Element => {
+  const { isOpen, setIsOpen } = props
+  let dialog = (
+    <div style={{
+      width: '700px',
+      maxWidth: '100%',
+      margin: '0 auto',
+      position: 'fixed',
+      left: '50%',
+      top: '50%',
+      transform: 'translate(-50%,-50%)',
+      zIndex: '999',
+      backgroundColor: '#ffffff',
+      boxShadow: '0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .3)',
+      padding: '10px',
+      borderRadius: '15px',
+      display: 'flex',
+      flexDirection: 'column',
+    }}
+    >
+      <button
+        style={{
+          marginBottom: '15px',
+          padding: '3px 8px',
+          cursor: 'pointer',
+          borderRadius: '50%',
+          border: 'none',
+          width: '30px',
+          height: '30px',
+          fontWeight: 'bold',
+          alignSelf: 'flex-end',
+        }}
+        onClick={() => {
+          console.log('Heyyyy')
+          setIsOpen((isOpen: boolean) => {
+            return !isOpen
+          })
+        }}
+      >x
+      </button>
+
+      <div className={styles.Congrats}>
+        <div className={styles.congratsText}>
+          <h2 className={styles.congratsTitle}>Congratulations! You've finished your Quick Start!</h2>
+        </div>
+        <img src={congratsimage} className={styles.congratsimage}/>
+        <sinch-button style={{ width: '35%', marginBottom: '2%' }} type="cta" text="Try it out!" onClick={() => {}}/>
+      </div>
+    </div>
+  )
+
+  if (isOpen == false) {
+    dialog = null as any
+  }
+
+  return (
+    <div>
+      {dialog}
+    </div>
+  )
 }
 
 const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
@@ -126,6 +193,8 @@ export const PageStepFour: FC = () => {
 
   const [agentdetails, setAgentdetails] = useState([{ name: '', email: '' }])
 
+  const [isOpen, setIsOpen] = useState(false)
+
   const [display, setDisplay] = useState(true)
 
   const [iserror, setIserror] = useState(false)
@@ -152,16 +221,10 @@ export const PageStepFour: FC = () => {
   //handleNext(1);
   const [questionCounter, setCounter] = useState(1)
 
-  const [open, setOpen] = useState(false)
-
   const [count, setCount] = useState(0)
 
   const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
+    setIsOpen(true)
   }
 
   const buttonCounter = () => {
@@ -383,11 +446,11 @@ export const PageStepFour: FC = () => {
               <sinch-button type="destructive" text="Back" onClick={prevPage}/>
             </div>
             <div className={styles.saveBut}>
-              { <Congratsbox open={open} handleClickOpen={handleClickOpen} handleClose={handleClose}/> }
               <sinch-button type="primary" text="Next" onClick={nextPage} disabled={Object.keys(agentdetails).length > 1 ? undefined : true}/>
             </div>
           </div>
         </div>
+        <Dialog isOpen={isOpen} setIsOpen={setIsOpen}/>
       </div>
     )
   }

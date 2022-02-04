@@ -11,27 +11,25 @@ h2 {
 
 .congratsTitle{
    font: var(--sinch-font-title-2);
+   margin-top: 0%;
+   margin-bottom: 2%;
 }
+
 .Congrats{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
-.congratsText{
-  display: flex;
-  justify-content: center;
-  width:800px;
-  margin-top: 0%;
-}
+
 .congratsimage{
-  width:120%;
-height: 120%;
-margin-bottom: 10%;
+  width:60%;
+  height: 60%;
+  margin-bottom: 5%;
 }
+
 .form {
   display: flex;
   flex-direction: column;
@@ -333,6 +331,7 @@ margin-bottom: 10%;
 .botpreview {
   display: flex;
   margin-right: 10%;
+  height: 100%;
   flex: 5;
 }
 
@@ -342,10 +341,13 @@ margin-bottom: 10%;
   position: relative;
   z-index: 6;
   background-size: cover;
-  width: auto;
-  height: 603px;
-  width: 400px;
-  background-repeat: no-repeat;
+  height: 600px;
+  width:300px;
+  object-position: 100% 0;
+  background-repeat: no-repeat center center fixed;
+  -moz-background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
 }
 
 .messagesBot{
