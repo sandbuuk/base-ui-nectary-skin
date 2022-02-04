@@ -15,6 +15,26 @@ h2 {
    margin-bottom: 2%;
 }
 
+.errorTitle{
+   font: var(--sinch-font-title-2);
+   margin-top: 0%;
+   margin-bottom: 2%;
+}
+
+.congratsBody{
+   font: var(--sinch-font-title-2);
+   margin-top: 0%;
+   margin-left: 4%;
+   margin-bottom: 2%;
+}
+
+.errorBody{
+   font: var(--sinch-font-title-2);
+   margin-top: 0%;
+   margin-left: 4%;
+   margin-bottom: 2%;
+}
+
 .Congrats{
   display: flex;
   flex-direction: column;
@@ -24,10 +44,27 @@ h2 {
   margin-right: 10px;
 }
 
+.Error{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .congratsimage{
   width:60%;
   height: 60%;
   margin-bottom: 5%;
+}
+
+.errorimage{
+  width:20%;
+  height: auto;
+  margin: 5%;
+  margin-bottom: 7%;
 }
 
 .form {
@@ -335,6 +372,13 @@ h2 {
   flex: 5;
 }
 
+.botpreviewHuman {
+  display: flex;
+  margin-right: 10%;
+  height: 100%;
+  flex: 4;
+}
+
 .botImage{
   flex: 10;
   display: flex;
@@ -527,10 +571,19 @@ h2 {
   margin: 4%;
   margin-top: 0%;
 }
+.backButhum{
+  margin: 4%;
+  margin-top: 2%;
+}
 
 .saveBut {
   margin: 4%;
   margin-top: 0%;
+}
+
+.saveButhum{
+  margin: 4%;
+  margin-top: 2%;
 }
 
 .botbackBut {

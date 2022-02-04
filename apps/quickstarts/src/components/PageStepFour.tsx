@@ -10,6 +10,7 @@ import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
 import congratsimage from './images/congratsimage.jpg'
 import contactlogo from './images/contactlogo.jpg'
+import errorimage from './images/erroDialogImage.png'
 import mobile from './images/mobile.png'
 import verticalLine from './images/verticalLine.png'
 import type { FC } from 'react'
@@ -29,6 +30,10 @@ type AgentInformationProps={
 type Props = {
   isOpen: boolean,
   setIsOpen: (value: any) => void,
+}
+type Propsed = {
+  iserror: boolean,
+  setIserror: (value: any) => void,
 }
 
 export const Dialog: FC<Props> = (props): JSX.Element => {
@@ -83,6 +88,59 @@ export const Dialog: FC<Props> = (props): JSX.Element => {
   )
 
   if (isOpen == false) {
+    dialog = null as any
+  }
+
+  return (
+    <div>
+      {dialog}
+    </div>
+  )
+}
+
+export const ErrorDialog: FC<Propsed> = (props): JSX.Element => {
+  const { iserror, setIserror } = props
+  let dialog = (
+    <div style={{
+      width: '700px',
+      maxWidth: '100%',
+      margin: '0 auto',
+      position: 'fixed',
+      left: '50%',
+      top: '50%',
+      transform: 'translate(-50%,-50%)',
+      zIndex: '999',
+      backgroundColor: '#ffffff',
+      boxShadow: '0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .3)',
+      padding: '10px',
+      borderRadius: '15px',
+      display: 'flex',
+      flexDirection: 'column',
+    }}
+    >
+
+      <div className={styles.Error}>
+        <div className={styles.errorText}>
+          <h2 className={styles.errorTitle}>The configuration could not be saved.</h2>
+          <h2 className={styles.errorBody}>Please try again in a few moments.</h2>
+        </div>
+        <img src={errorimage} className={styles.errorimage}/>
+        <sinch-button
+          style={{ width: '20%', marginBottom: '2%' }}
+          type="cta"
+          text="Try again"
+          onClick={() => {
+            console.log('Heyyyy')
+            setIserror((isOpen: boolean) => {
+              return !isOpen
+            })
+          }}
+        />
+      </div>
+    </div>
+  )
+
+  if (iserror == false) {
     dialog = null as any
   }
 
@@ -325,12 +383,6 @@ export const PageStepFour: FC = () => {
             <div className={styles.chatlayerLogo}>
               <div className="empty"/>
               <div className="actualLogo">
-                <div className={iserror ? styles.errorAlert : styles.hiddenerrorAlert}>
-                  <sinch-alert
-                    type="error"
-                    text="Error in saving trail configuration"
-                  />
-                </div>
                 <p className={styles.poweredBy}>Powered By:</p>
                 <img className={styles.chatLayer} src={contactlogo}/>
               </div>
@@ -405,7 +457,7 @@ export const PageStepFour: FC = () => {
                       onBlur={() => {}}
                     />
               </div>
-              <div className={styles.botpreview}>
+              <div className={styles.botpreviewHuman}>
                 <div style={{ backgroundImage: `url(${mobile})` }} className={styles.botImage}>
                   <div className={styles.messagesBot}>
                     <div className={greetingmsg.length > 0 ? styles.botMessage : styles.hide}>
@@ -442,15 +494,16 @@ export const PageStepFour: FC = () => {
           </div>
 
           <div className={styles.buttons}>
-            <div className={styles.backBut}>
+            <div className={styles.backButhum}>
               <sinch-button type="destructive" text="Back" onClick={prevPage}/>
             </div>
-            <div className={styles.saveBut}>
+            <div className={styles.saveButhum}>
               <sinch-button type="primary" text="Next" onClick={nextPage} disabled={Object.keys(agentdetails).length > 1 ? undefined : true}/>
             </div>
           </div>
         </div>
         <Dialog isOpen={isOpen} setIsOpen={setIsOpen}/>
+        <ErrorDialog iserror={iserror} setIserror={setIserror}/>
       </div>
     )
   }
