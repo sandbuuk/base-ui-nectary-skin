@@ -1,11 +1,11 @@
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
-import { filterMessage, isData, isTokenMessage, listenToBus, tokenRequestMessage, sendMessageOnBus } from '@sinch/bus'
+import { filterMessage, isData, isTokenMessage, listenToBus, tokenRequestMessage, sendMessageOnBus } from '@saas/bus'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { App } from './components/App'
 import { TokenContext } from './contexts'
 import type { EmotionCache } from '@emotion/cache'
-import type { TOKEN_PAYLOAD } from '@sinch/bus'
+import type { TOKEN_PAYLOAD } from '@saas/bus'
 
 const appName = 'sinch-quickstarts-app'
 const template = document.createElement('template')

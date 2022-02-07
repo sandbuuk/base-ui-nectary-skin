@@ -1,4 +1,4 @@
-import { listenToBus, sendMessageOnBus, tokenMessage, isTokenRequestMessage, filterMessage } from '@sinch/bus'
+import { listenToBus, sendMessageOnBus, tokenMessage, isTokenRequestMessage, filterMessage } from '@saas/bus'
 import * as keycloak from './keycloak'
 
 // Respond with most current token on Token Requests™.
