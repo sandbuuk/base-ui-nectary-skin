@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@nectary/components": "*",
-    "@sinch/bus": "*",
+    "@saas/bus": "*",
     "broadcastchannel-polyfill": "^1.0.1",
     "keycloak-js": "^16.1.0",
     "react": "^17.0.0",
