@@ -13,10 +13,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
-  },
-  "include": [
-    "./src",
-    "./modules.d.ts",
-    "./apps.d.ts"
-  ]
+    "declaration": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true
+  }
 }
