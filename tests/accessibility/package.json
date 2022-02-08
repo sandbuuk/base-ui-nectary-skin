@@ -10,12 +10,12 @@
     "test": "docker run -it --rm --ipc=host --network host -v $PWD/../..:/app:delegated -v $PWD/../../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.17.1 ./tests/accessibility/entrypoint.sh"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
+    "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-typescript": "^7.16.0",
     "@nectary/components": "*",
     "@playwright/test": "1.17.1",
-    "@types/node": "^14.0.0",
+    "@types/node": "^17.0.14",
     "axe-core": "^4.3.5",
     "babel-loader": "^8.2.3",
     "concurrently": "^6.3.0",

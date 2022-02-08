@@ -20,15 +20,15 @@
     "postbuild": "tsc"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.0"
+    "@babel/runtime": "^7.17.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.0",
-    "@babel/core": "^7.16.0",
-    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-typescript": "^7.16.0",
-    "@types/node": "^16.11.10",
+    "@types/node": "^17.0.14",
     "@types/react": "^17.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "rimraf": "^3.0.2",
