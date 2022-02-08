@@ -18,7 +18,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tag', class extends HTMLElement {
-  $text: HTMLParagraphElement
+  #$text: HTMLParagraphElement
 
   constructor() {
     super()
@@ -29,7 +29,7 @@ defineCustomElement('sinch-tag', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$text = shadowRoot.querySelector('#text')!
+    this.#$text = shadowRoot.querySelector('#text')!
   }
 
   get category() {
@@ -71,7 +71,7 @@ defineCustomElement('sinch-tag', class extends HTMLElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.$text.textContent = newVal
+        this.#$text.textContent = newVal
 
         break
       }
