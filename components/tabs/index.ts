@@ -2,11 +2,11 @@ import { isTabsOptionElement } from '../tabs-option'
 import {
   defineCustomElement,
   getAttribute,
-  getEventHandler,
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
+import type { SyntheticEvent } from 'react'
 
 type TSinchTabOptionElement = HTMLElementTagNameMap['sinch-tabs-option']
 
@@ -66,7 +66,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tabs', class extends HTMLElement {
-  $slot: HTMLSlotElement
+  #$slot: HTMLSlotElement
 
   constructor() {
     super()
@@ -77,15 +77,19 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    shadowRoot.addEventListener('keydown', this.onOptionKeyDown)
-    shadowRoot.addEventListener('change', this.onOptionChange)
+    shadowRoot.addEventListener('keydown', this.#onOptionKeyDown)
+    shadowRoot.addEventListener('change', this.#onOptionChange)
 
-    this.$slot = shadowRoot.querySelector('slot')!
-    this.$slot.addEventListener('slotchange', this.onSlotChange)
+    this.#$slot = shadowRoot.querySelector('slot')!
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   static get observedAttributes() {
     return ['value']
+  }
+
+  get nodeName() {
+    return 'select'
   }
 
   set value(value: string) {
@@ -106,13 +110,13 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
     }
   }
 
-  onOptionKeyDown = (e: Event) => {
+  #onOptionKeyDown = (e: Event) => {
     switch ((e as KeyboardEvent).code) {
       case 'ArrowUp':
       case 'ArrowLeft': {
         e.preventDefault()
 
-        const $option = getPrevOption(this.$slot)
+        const $option = getPrevOption(this.#$slot)
 
         if ($option !== null) {
           $option.focus()
@@ -125,7 +129,7 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
       case 'ArrowRight': {
         e.preventDefault()
 
-        const $option = getNextOption(this.$slot)
+        const $option = getNextOption(this.#$slot)
 
         if ($option !== null) {
           $option.focus()
@@ -137,18 +141,18 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
     }
   }
 
-  onSlotChange = () => {
+  #onSlotChange = () => {
     this.onValueChange(this.value)
   }
 
-  onOptionChange = (e: Event) => {
+  #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
     this.dispatchChangeEvent((e as CustomEvent).detail)
   }
 
   onValueChange(value: string) {
-    for (const $option of this.$slot.assignedElements()) {
+    for (const $option of this.#$slot.assignedElements()) {
       if (isTabsOptionElement($option)) {
         $option.checked = $option.disabled !== true && $option.value === value
       }
@@ -156,9 +160,8 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
   }
 
   dispatchChangeEvent(value: string) {
-    getEventHandler(this, 'onChange')?.(value)
     this.dispatchEvent(
-      new CustomEvent('change', { detail: value })
+      new CustomEvent('change', { detail: value, bubbles: true })
     )
   }
 })
@@ -169,7 +172,7 @@ type TSinchTabsElement = HTMLElement & {
 
 type TSinchTabsReact = TSinchElementReact<TSinchTabsElement> & {
   value: string,
-  onChange: (value: string) => void,
+  onChange: (event: SyntheticEvent<TSinchTabsElement, CustomEvent<string>>) => void,
 }
 
 declare global {
