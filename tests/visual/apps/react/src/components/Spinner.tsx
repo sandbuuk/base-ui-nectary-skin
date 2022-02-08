@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 
 type TSpinner = {
-  search: URLSearchParams
+  search: URLSearchParams,
 }
 
 export const Spinner: FC<TSpinner> = ({ search }) => {
@@ -11,6 +11,6 @@ export const Spinner: FC<TSpinner> = ({ search }) => {
     <sinch-spinner
       type={type}
       static
-    ></sinch-spinner>
+    />
   )
 }

@@ -5,7 +5,9 @@
     v-bind:small="isSmall"
     v-bind:labeled="isLabeled"
     v-bind:checked="checked"
-    @change="onChange">
+    @change="onChange"
+    @focusin="onFocus"
+    @focusout="onBlur">
   </sinch-toggle>
 </template>
 
@@ -15,7 +17,14 @@ export default {
     onChange(e) {
       if (this.isControlled) {
         this.checked = e.detail
+        window.dispatchEvent(new CustomEvent('sinch-toggle-change', {detail: e.detail}))
       }
+    },
+    onFocus() {
+      window.dispatchEvent(new CustomEvent('sinch-toggle-focus'))
+    },
+    onBlur() {
+      window.dispatchEvent(new CustomEvent('sinch-toggle-blur'))
     }
   },
   props: {

@@ -25,4 +25,14 @@ export class TagComponent {
     this.isInverted = url.searchParams.get('inverted') != null
     this.hasIcon = url.searchParams.get('icon') != null
   }
+
+  onCloseClick() {
+    window.dispatchEvent(new CustomEvent('sinch-tag-close-click'))
+  }
+  onCloseFocus() {
+    window.dispatchEvent(new CustomEvent('sinch-tag-close-focus'))
+  }
+  onCloseBlur() {
+    window.dispatchEvent(new CustomEvent('sinch-tag-close-blur'))
+  }
 }

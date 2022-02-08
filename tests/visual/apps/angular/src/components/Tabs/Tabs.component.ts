@@ -37,6 +37,7 @@ export class TabsComponent {
   onChange(e: Event) {
     if (this.isControlled) {
       this.value = (e as CustomEvent).detail
+      window.dispatchEvent(new CustomEvent('sinch-tabs-change', {detail: (e as CustomEvent).detail}))
     }
   }
 }

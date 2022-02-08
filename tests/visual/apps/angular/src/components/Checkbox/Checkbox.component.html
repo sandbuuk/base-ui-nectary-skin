@@ -3,5 +3,7 @@
   [attr.disabled]="isDisabled"
   [attr.indeterminate]="isIndeterminate"
   [attr.checked]="isChecked"
+  (focusin)="onFocus()"
+  (focusout)="onBlur()"
   (change)="onChange($event)">
 </sinch-checkbox>

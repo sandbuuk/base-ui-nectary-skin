@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
 
 const withEmpty = makeScreenshotTests('/textarea?width=200&label=Label', 'sinch-textarea')
 const withValue = makeScreenshotTests('/textarea?width=200&label=Label&value=Input%20value', 'sinch-textarea')
@@ -186,4 +186,36 @@ test('disabled attribute', withEverything(async function* ({ $, $eval }) {
   })
   yield { name: 'enabled' }
   await expect($.locator('textarea').isDisabled()).resolves.toBe(false)
+}))
+
+test('custom events', withValue(async function* ({ $, page }) {
+  const testInput = testCustomEvent(page, $)
+
+  await testInput('change', 'sinch-textarea-change', 'X')
+  await testInput('focusin', 'sinch-textarea-focus')
+  await testInput('focusout', 'sinch-textarea-blur')
+}))
+
+test('native events', withValue(async function* ({ $, page }) {
+  await subscribeToEvents(page, 'sinch-textarea-focus', 'sinch-textarea-blur', 'sinch-textarea-change')
+  await $.focus()
+  await page.keyboard.press('Tab')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-textarea-focus', detail: null },
+    { type: 'sinch-textarea-blur', detail: null },
+  ])
+
+  // Necessary to normalize "type" behaviour
+  await $.click()
+  await $.type('X')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-textarea-focus', detail: null },
+    { type: 'sinch-textarea-change', detail: 'Input valueX' },
+  ])
 }))

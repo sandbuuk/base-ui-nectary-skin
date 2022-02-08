@@ -6,7 +6,7 @@
       :label="opt.label"
       :disabled="opt.disabled"
       :status="opt.status">
-      <span v-if="opt.content != null">{{opt.content}}</span>
+      <span v-if="opt.content != null" slot="content">{{opt.content}}</span>
       <sinch-icon-share v-if="opt.icon === true" slot="icon"></sinch-icon-share>
     </sinch-accordion-item>
   </sinch-accordion>
@@ -16,6 +16,14 @@
 export default {
   props: {
     search: URLSearchParams
+  },
+  methods: {
+    onChange(e) {
+      if (this.isControlled) {
+        this.value = e.detail
+        window.dispatchEvent(new CustomEvent('sinch-accordion-change', {detail: e.detail}))
+      }
+    }
   },
   computed: {
     isControlled() {
@@ -35,13 +43,6 @@ export default {
         return JSON.parse(decodeURI(data))
       } catch {
         return []
-      }
-    }
-  },
-  methods: {
-    onChange(e) {
-      if (this.isControlled) {
-        this.value = e.detail
       }
     }
   },

@@ -6,7 +6,7 @@
       :value="opt.value"
       :text="opt.text"
       :disabled="opt.disabled">
-      <sinch-icon-share v-if="opt.icon != null"></sinch-icon-share>
+      <sinch-icon-share v-if="opt.icon != null" slot="icon"></sinch-icon-share>
     </sinch-tabs-option>
   </sinch-tabs>
 </template>
@@ -15,6 +15,14 @@
 export default {
   props: {
     search: URLSearchParams
+  },
+  methods: {
+    onChange(e) {
+      if (this.isControlled) {
+        this.value = e.detail
+        window.dispatchEvent(new CustomEvent('sinch-tabs-change', {detail: e.detail}))
+      }
+    }
   },
   computed: {
     isControlled() {
@@ -31,13 +39,6 @@ export default {
         return JSON.parse(decodeURI(data))
       } catch {
         return []
-      }
-    }
-  },
-  methods: {
-    onChange(e) {
-      if (this.isControlled) {
-        this.value = e.detail
       }
     }
   },

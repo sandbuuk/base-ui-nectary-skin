@@ -27,5 +27,12 @@ export class CheckboxComponent {
     if (this.isControlled) {
       this.isChecked = (e as CustomEvent).detail
     }
+    window.dispatchEvent(new CustomEvent('sinch-checkbox-change', {detail: (e as CustomEvent).detail}))
+  }
+  onFocus() {
+    window.dispatchEvent(new CustomEvent('sinch-checkbox-focus'))
+  }
+  onBlur() {
+    window.dispatchEvent(new CustomEvent('sinch-checkbox-blur'))
   }
 }

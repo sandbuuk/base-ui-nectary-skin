@@ -2,8 +2,18 @@
   [attr.category]="category"
   [attr.text]="text"
   [attr.inverted]="isInverted"
-  [attr.small]="isSmall"
->
-  <sinch-icon-share *ngIf="hasIcon" size="12" slot="icon"></sinch-icon-share>
-  <sinch-tag-close *ngIf="isDismissable" [attr.small]="isSmall" slot="close"></sinch-tag-close>
+  [attr.small]="isSmall">
+  <sinch-icon-share
+    *ngIf="hasIcon"
+    slot="icon"
+    size="12">
+  </sinch-icon-share>
+    <sinch-tag-close
+    *ngIf="isDismissable"
+    slot="close"
+    [attr.small]="isSmall"
+    (focusin)="onCloseFocus()"
+    (focusout)="onCloseBlur()"
+    (click)="onCloseClick()">
+  </sinch-tag-close>
 </sinch-tag>

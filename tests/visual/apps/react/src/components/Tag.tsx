@@ -1,7 +1,8 @@
-import { FC } from 'react'
+import { useCallback } from 'react'
+import type { FC } from 'react'
 
 type TTag = {
-  search: URLSearchParams
+  search: URLSearchParams,
 }
 
 export const Tag: FC<TTag> = ({ search }) => {
@@ -11,6 +12,9 @@ export const Tag: FC<TTag> = ({ search }) => {
   const isSmall = search.get('small') != null
   const isInverted = search.get('inverted') != null
   const hasIcon = search.get('icon') != null
+  const onClick = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-tag-close-click')), [])
+  const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-tag-close-focus')), [])
+  const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-tag-close-blur')), [])
 
   return (
     <sinch-tag
@@ -19,8 +23,16 @@ export const Tag: FC<TTag> = ({ search }) => {
       small={isSmall}
       inverted={isInverted}
     >
-      {hasIcon && <sinch-icon-share size={12} slot="icon"></sinch-icon-share>}
-      {isDismissable && <sinch-tag-close small={isSmall} slot="close"></sinch-tag-close>}
+      {hasIcon && <sinch-icon-share size={12} slot="icon"/>}
+      {isDismissable && (
+        <sinch-tag-close
+          slot="close"
+          small={isSmall}
+          onClick={onClick}
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
+      )}
     </sinch-tag>
   )
 }

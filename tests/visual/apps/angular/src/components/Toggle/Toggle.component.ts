@@ -28,6 +28,13 @@ export class ToggleComponent {
   onChange(e: Event) {
     if (this.isControlled) {
       this.isChecked = (e as CustomEvent).detail
+      window.dispatchEvent(new CustomEvent('sinch-toggle-change', {detail: (e as CustomEvent).detail}))
     }
+  }
+  onFocus() {
+    window.dispatchEvent(new CustomEvent('sinch-toggle-focus'))
+  }
+  onBlur() {
+    window.dispatchEvent(new CustomEvent('sinch-toggle-blur'))
   }
 }

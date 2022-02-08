@@ -1,5 +1,5 @@
-import { test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { expect, test } from '@playwright/test'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
 
 const shot = makeScreenshotTests('/tag?text=Label%20text', 'sinch-tag')
 const withIcon = makeScreenshotTests('/tag?text=Label%20text&icon=true', 'sinch-tag')
@@ -87,4 +87,41 @@ test('dismissable', withDismiss(async function* () {
 
 test('dismissable small', withSmallDismiss(async function* () {
   yield { name: 'shot' }
+}))
+
+test('custom events', withDismiss(async function* ({ $, page }) {
+  const testClose = testCustomEvent(page, $.locator('sinch-tag-close'))
+
+  await testClose('click', 'sinch-tag-close-click')
+  await testClose('focusin', 'sinch-tag-close-focus')
+  await testClose('focusout', 'sinch-tag-close-blur')
+}))
+
+test('native events', withDismiss(async function* ({ $, page }) {
+  const $close = $.locator('sinch-tag-close')
+
+  await subscribeToEvents(
+    page,
+    'sinch-tag-close-focus',
+    'sinch-tag-close-blur',
+    'sinch-tag-close-click'
+  )
+
+  await $close.focus()
+  await page.keyboard.press('Tab')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-tag-close-focus', detail: null },
+    { type: 'sinch-tag-close-blur', detail: null },
+  ])
+
+  await $close.click()
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-tag-close-focus', detail: null },
+    { type: 'sinch-tag-close-click', detail: null },
+  ])
 }))

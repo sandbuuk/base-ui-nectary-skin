@@ -1,5 +1,5 @@
-import { test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { expect, test } from '@playwright/test'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
 
 const items = encodeURI(JSON.stringify([{
   value: 1,
@@ -177,4 +177,32 @@ test('status attribute', withSingleItem(async function* ({ $ }) {
 
   await $item.evaluate((el) => el.setAttribute('status', 'error'))
   yield { name: 'error' }
+}))
+
+test('custom events', withItems(async function* ({ $, page }) {
+  const testInput = testCustomEvent(page, $)
+
+  await testInput('change', 'sinch-accordion-change', '2')
+}))
+
+test('native events', withItems(async function* ({ $, page }) {
+  await subscribeToEvents(page, 'sinch-accordion-change')
+
+  // Click first item
+  await $.locator('sinch-accordion-item').nth(0).click()
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-accordion-change', detail: '1' },
+  ])
+
+  // Click second item
+  await $.locator('sinch-accordion-item').nth(1).click()
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-accordion-change', detail: '2' },
+  ])
 }))

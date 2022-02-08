@@ -3,8 +3,9 @@
     v-bind:orientation="orientation"
     v-bind:text="text"
     v-bind:inverted="isInverted"
-    v-bind:width="width"
-  ><button>Some content</button></sinch-tooltip>
+    v-bind:width="width">
+    <button>Some content</button>
+  </sinch-tooltip>
 </template>
 
 <script>
