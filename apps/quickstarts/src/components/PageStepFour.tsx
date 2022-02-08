@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 //import { Congratsbox } from './CongratsBox'
 import { useOnBoardingControl } from './OnBoardingcontext'
 import styles from './Page.module.css'
@@ -19,6 +19,8 @@ type WhatsappquestionProps={
   i: number,
   questionCounter: number,
   agentdetails: any[],
+  activeelement: string,
+  setActiveelement: (value: string) => void,
   setAgentdetails: (value: any) => void,
   setDisplay: (value: any) => void,
 }
@@ -152,7 +154,16 @@ export const ErrorDialog: FC<Propsed> = (props): JSX.Element => {
 }
 
 const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
-  const { agentdetails, questionCounter, setAgentdetails, setDisplay } = props
+  const { agentdetails, questionCounter, setAgentdetails, setDisplay, setActiveelement } = props
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveelement(document.activeElement != null ? document.activeElement.className : '')
+      console.log('This will run every second!')
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   const validateEmail = (email: String) => {
     return String(email)
@@ -255,7 +266,11 @@ export const PageStepFour: FC = () => {
 
   const [display, setDisplay] = useState(true)
 
+  console.log(display)
+
   const [iserror, setIserror] = useState(false)
+
+  const [activeelement, setActiveelement] = useState('')
 
   console.log(agentdetails)
 
@@ -408,7 +423,7 @@ export const PageStepFour: FC = () => {
           <div className={styles.botwhatsappBody}>
             <div className={styles.messagesParent}>
               <div className={styles.humanMessages}>
-                { <WhatsappQuestion setDisplay={setDisplay} questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={count} i={count}/>}
+                { <WhatsappQuestion setActiveelement={setActiveelement} activeelement={activeelement} setDisplay={setDisplay} questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={count} i={count}/>}
                 <div className={styles.humanButton}>
                   <sinch-button
                     style={{ width: '100%' }}
@@ -446,6 +461,7 @@ export const PageStepFour: FC = () => {
                       optionalText={undefined}
                       invalidText={undefined}
                       style={{ width: '100%' }}
+                      class="humanhandover"
                       additionalText={undefined}
                       disabled={undefined}
                       onChange={(value) => {
@@ -463,7 +479,7 @@ export const PageStepFour: FC = () => {
                     <div className={greetingmsg.length > 0 ? styles.botMessage : styles.hide}>
                       {greetingmsg}
                     </div>
-                    <div className={styles.userMessage}>
+                    <div className={greetingmsg.length > 0 ? styles.userMessage : styles.hide}>
                       User greeting
                     </div>
                     {[...Array(Object.keys(botquestion).length)].map((_, i) => {
@@ -481,7 +497,7 @@ export const PageStepFour: FC = () => {
                         </>
                       )
                     })}
-                    <div key={'humanhandovermessage'} className={humanhandover.length > 0 && display ? styles.botMessage : styles.hide}>
+                    <div key={'humanhandovermessage'} className={humanhandover.length > 0 && activeelement != 'humanhandover' ? styles.botMessage : styles.hide}>
                       {humanhandover}
                     </div>
 

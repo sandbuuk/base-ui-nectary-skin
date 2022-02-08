@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
 import { usePageOneControl } from './PageStepOneContext'
@@ -14,15 +14,26 @@ import type { FC } from 'react'
 type Props = {
   name: number,
   botquestion: string[],
+  activeelement: string,
+  setActiveelement: (value: string) => void,
   setDisplay: (value: any) => void,
   setBotquestion: (value: any) => void,
 }
 
 const WhatsappDetails: FC<Props> = (props): JSX.Element => {
-  const { name, botquestion, setBotquestion, setDisplay } = props
+  const { name, botquestion, setBotquestion, setDisplay, setActiveelement } = props
   const k = name
 
   console.log(botquestion)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveelement(document.activeElement != null ? document.activeElement.className : '')
+      console.log('This will run every second!')
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className={styles.botmessagesInput}>
@@ -30,6 +41,7 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
         key={k}
         value={botquestion[k - 1]}
         style={{ width: '100%' }}
+        class={`${k}`}
         onChange={(value) => {
           setBotquestion((datas: string[]) => ({
             ...datas,
@@ -96,6 +108,27 @@ export const PageStepThree: FC = () => {
   const { handleBack } = useStepperControl()
   const [flowCounter, setCounter] = useState(Object.keys(botquestion).length == 0 ? 1 : Object.keys(botquestion).length)
   const [display, setDisplay] = useState(true)
+  const [activeelement, setActiveelement] = useState('')
+
+  // const setactive = () => {
+  //   const ki = document.activeElement == null ? '' : document.activeElement.className == undefined ? '' : document.activeElement.className
+
+  //   setActiveelement(ki)
+  //   console.log('Hellooo')
+  //   console.log(`Hello ${ki}`)
+  // }
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     () => {
+  //       console.log('Heyyyyy')
+  //     }
+  //   }, 100)
+  // }, [])
+
+  // const myTimeout = setInterval(() => {
+  //   setactive
+  // }, 1000)
 
   const buttonCounter = () => {
     console.log(flowCounter)
@@ -179,7 +212,7 @@ export const PageStepThree: FC = () => {
                     <p className={styles.infoBody}>You will have all the answers once...</p>
                   </div> */}
                   </div>
-                  { [...Array(flowCounter)].map((_, i) => <WhatsappDetails setDisplay={setDisplay} botquestion={botquestion} setBotquestion={setBotquestion} name={i + 1} key={i}/>)}
+                  { [...Array(flowCounter)].map((_, i) => <WhatsappDetails activeelement={activeelement} setActiveelement={setActiveelement} setDisplay={setDisplay} botquestion={botquestion} setBotquestion={setBotquestion} name={i + 1} key={i}/>)}
                   <div className={styles.questionBtn}>
                     <sinch-button
                       style={{ width: '100%' }}
@@ -197,19 +230,19 @@ export const PageStepThree: FC = () => {
                     <div className={(greetingmsg.length > 0 && display == true) ? styles.botMessage : styles.hide}>
                       {greetingmsg}
                     </div>
-                    <div className={(greetingmsg.length > 0 && display == true) ? styles.userMessage : styles.hide}>
+                    {/* <div className={(greetingmsg.length > 0 && display == true) ? styles.userMessage : styles.hide}>
                       User greeting
-                    </div>
-                    {[...Array(flowCounter - 1)].map((_, i) => {
+                    </div> */}
+                    {[...Array(flowCounter)].map((_, i) => {
                       return (
                         <>
                           <div
                             key={`${i}bot`}
-                            className={styles.botMessage}
+                            className={(botquestion[i] != undefined && activeelement != `${i + 1}`) ? styles.botMessage : styles.hide}
                           >
                             {botquestion[i]}
                           </div>
-                          <div key={`${i}user`} className={styles.userMessage}>
+                          <div key={`${i}user`} className={(botquestion[i] != undefined && activeelement != `${i + 1}`) ? styles.userMessage : styles.hide}>
                             User Answer
                           </div>
                         </>
