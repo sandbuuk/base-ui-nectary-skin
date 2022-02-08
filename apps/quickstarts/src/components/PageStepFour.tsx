@@ -159,7 +159,6 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveelement(document.activeElement != null ? document.activeElement.className : '')
-      console.log('This will run every second!')
     }, 1000)
 
     return () => clearInterval(interval)

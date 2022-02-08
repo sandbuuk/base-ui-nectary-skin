@@ -29,7 +29,6 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveelement(document.activeElement != null ? document.activeElement.className : '')
-      console.log('This will run every second!')
     }, 1000)
 
     return () => clearInterval(interval)
