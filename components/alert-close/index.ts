@@ -1,42 +1,46 @@
 import '../icon/close'
-import {
-  defineCustomElement,
-  getEventHandler,
-} from '../utils'
+import { defineCustomElement } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
+import type { FocusEvent, MouseEvent } from 'react'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-alert-close', class extends HTMLElement {
+  #$button: HTMLButtonElement
+
   constructor() {
     super()
 
     const shadowRoot = this.attachShadow({
       mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      delegatesFocus: true,
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    shadowRoot.querySelector('#close')!.addEventListener('click', this.onClick)
+    this.#$button = shadowRoot.querySelector('button')!
   }
 
-  onClick = (e: Event) => {
-    e.stopPropagation()
+  focus() {
+    this.#$button.focus()
+  }
 
-    getEventHandler(this, 'onClick')?.()
-
-    this.dispatchEvent(
-      new CustomEvent('click')
-    )
+  blur() {
+    this.#$button.blur()
   }
 })
 
-type TSinchAlertCloseElement = HTMLElement
+type TSinchAlertCloseElement = HTMLElement & {
+  focus(): void,
+  blur(): void,
+}
 
 type TSinchAlertCloseReact = TSinchElementReact<TSinchAlertCloseElement> & {
-  onClick?: () => void,
+  onClick?: (e: MouseEvent<TSinchAlertCloseElement>) => void,
+  onFocus?: (e: FocusEvent<TSinchAlertCloseElement>) => void,
+  onBlur?: (e: FocusEvent<TSinchAlertCloseElement>) => void,
 }
 
 declare global {
