@@ -8,6 +8,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
+import type { FocusEvent } from 'react'
 
 export const isTabsOptionElement = (element: EventTarget | Element | null): element is TSinchTabsOptionElement => {
   return element instanceof Element && element.tagName === 'SINCH-TABS-OPTION'
@@ -36,11 +37,11 @@ defineCustomElement('sinch-tabs-option', class extends HTMLElement {
   }
 
   connectedCallback() {
-    this.$input.addEventListener('change', this.onInput)
+    this.$input.addEventListener('input', this.#onInput)
   }
 
   disconnectedCallback() {
-    this.$input.removeEventListener('change', this.onInput)
+    this.$input.removeEventListener('input', this.#onInput)
   }
 
   static get observedAttributes() {
@@ -114,7 +115,13 @@ defineCustomElement('sinch-tabs-option', class extends HTMLElement {
     this.$input.focus()
   }
 
-  onInput = () => {
+  blur() {
+    this.$input.blur()
+  }
+
+  #onInput = (e: Event) => {
+    e.stopPropagation()
+
     this.$input.checked = false
     this.dispatchEvent(
       new CustomEvent('change', { bubbles: true, detail: this.value })
@@ -128,12 +135,15 @@ type TSinchTabsOptionElement = HTMLElement & {
   checked: boolean,
   text: string,
   focus(): void,
+  blur(): void,
 }
 
 type TSinchTabsOptionReact = TSinchElementReact<TSinchTabsOptionElement> & {
   value: string,
   disabled?: boolean,
   text: string,
+  onFocus?: (e: FocusEvent<TSinchTabsOptionElement>) => void,
+  onBlur?: (e: FocusEvent<TSinchTabsOptionElement>) => void,
 }
 
 declare global {
