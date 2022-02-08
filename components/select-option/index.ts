@@ -89,8 +89,8 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
     return getBooleanAttribute(this, 'selected')
   }
 
-  icon(): Element | null {
-    return this.$iconSlot.assignedElements()[0] ?? null
+  get icon(): Element | null {
+    return this.#$iconSlot.assignedElements()[0] ?? null
   }
 })
 
@@ -100,7 +100,7 @@ type TSinchSelectOptionElement = HTMLElement & {
   checked: boolean,
   selected: boolean,
   disabled: boolean,
-  icon(): Element | null,
+  readonly icon: Element | null,
 }
 
 type TSinchSelectOptionReact = TSinchElementReact<TSinchSelectOptionElement> & {
