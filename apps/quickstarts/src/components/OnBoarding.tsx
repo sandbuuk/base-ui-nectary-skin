@@ -128,7 +128,9 @@ export const OnBoarding: FC = () => {
                 class={styles.startnameInput}
                 label="Quick Start Name"
                 placeholder="My first Quick start"
-                onChange={(value) => {
+                onChange={(e) => {
+                  const value = e.nativeEvent.detail
+
                   setUsername(value)
                 }}
                 value={username}

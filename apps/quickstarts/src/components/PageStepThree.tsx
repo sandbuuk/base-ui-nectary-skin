@@ -27,7 +27,9 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
         key={k}
         value={botquestion[k - 1]}
         style={{ width: '100%' }}
-        onChange={(value) => {
+        onChange={(e) => {
+          const value = e.nativeEvent.detail
+
           setBotquestion((datas: string[]) => ({
             ...datas,
             [k - 1]: value,
@@ -148,7 +150,9 @@ export const PageStepThree: FC = () => {
                     style={{ width: '100%' }}
                     additionalText={undefined}
                     disabled={undefined}
-                    onChange={(value) => {
+                    onChange={(e) => {
+                      const value = e.nativeEvent.detail
+
                       setGreetingmsg(value)
                       console.log(greetingmsg)
                       console.log(botquestion)
