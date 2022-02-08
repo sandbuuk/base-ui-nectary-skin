@@ -2,7 +2,6 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getEventHandler,
   getLiteralAttribute,
   isAttrTrue,
   updateAttribute,
@@ -11,6 +10,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
+import type { FocusEvent } from 'react'
 
 export const isAccordionItemElement = (element: EventTarget | Element | null): element is TSinchAccordionItemElement => {
   return element instanceof Element && element.tagName === 'SINCH-ACCORDION-ITEM'
@@ -23,8 +23,8 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-accordion-item', class extends HTMLElement {
-  $button: HTMLButtonElement
-  $labelContent: HTMLSpanElement
+  #$button: HTMLButtonElement
+  #$labelContent: HTMLSpanElement
 
   constructor() {
     super()
@@ -36,20 +36,16 @@ defineCustomElement('sinch-accordion-item', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$button = shadowRoot.querySelector('#button')!
-    this.$labelContent = shadowRoot.querySelector('#content')!
+    this.#$button = shadowRoot.querySelector('#button')!
+    this.#$labelContent = shadowRoot.querySelector('#content')!
   }
 
   connectedCallback() {
-    this.$button.addEventListener('click', this.onButtonClick)
-    this.addEventListener('focus', this.onButtonFocus)
-    this.addEventListener('blur', this.onButtonBlur)
+    this.#$button.addEventListener('click', this.#onButtonClick)
   }
 
   disconnectedCallback() {
-    this.$button.removeEventListener('click', this.onButtonClick)
-    this.removeEventListener('focus', this.onButtonFocus)
-    this.removeEventListener('blur', this.onButtonBlur)
+    this.#$button.removeEventListener('click', this.#onButtonClick)
   }
 
   static get observedAttributes() {
@@ -99,45 +95,42 @@ defineCustomElement('sinch-accordion-item', class extends HTMLElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'label': {
-        this.$labelContent.textContent = newVal
+        this.#$labelContent.textContent = newVal
 
         break
       }
 
       case 'disabled': {
-        this.$button.disabled = isAttrTrue(newVal)
+        this.#$button.disabled = isAttrTrue(newVal)
 
         break
       }
 
       case 'checked': {
-        updateAttribute(this.$button, 'aria-expanded', isAttrTrue(newVal))
+        updateAttribute(this.#$button, 'aria-expanded', isAttrTrue(newVal))
 
         break
       }
     }
   }
 
-  onButtonClick = () => {
+  #onButtonClick = (e: Event) => {
+    e.stopPropagation()
+
     this.dispatchEvent(
-      new CustomEvent('change', { bubbles: true, detail: { value: this.value, isChecked: !this.checked } })
+      new CustomEvent('change', {
+        bubbles: true,
+        detail: { value: this.value, isChecked: !this.checked },
+      })
     )
   }
 
   focus() {
-    this.$button.focus()
+    this.#$button.focus()
   }
 
   blur() {
-    this.$button.blur()
-  }
-
-  onButtonFocus = () => {
-    getEventHandler(this, 'onFocus')?.()
-  }
-
-  onButtonBlur = () => {
-    getEventHandler(this, 'onBlur')?.()
+    this.#$button.blur()
   }
 })
 
@@ -158,8 +151,8 @@ type TSinchAccordionItemReact = TSinchElementReact<TSinchAccordionItemElement> &
   label: string,
   disabled?: boolean,
   status?: TSinchAccordionStatusType,
-  onFocus?: () => void,
-  onBlur?: () => void,
+  onFocus?: (e: FocusEvent<TSinchAccordionItemElement>) => void,
+  onBlur?: (e: FocusEvent<TSinchAccordionItemElement>) => void,
 }
 
 declare global {
