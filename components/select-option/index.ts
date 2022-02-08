@@ -11,8 +11,8 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-select-option', class extends HTMLElement {
-  $iconSlot: HTMLSlotElement
-  $content: HTMLSpanElement
+  #$iconSlot: HTMLSlotElement
+  #$content: HTMLSpanElement
 
   constructor() {
     super()
@@ -23,8 +23,8 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$iconSlot = shadowRoot.querySelector('slot')!
-    this.$content = shadowRoot.querySelector('span')!
+    this.#$iconSlot = shadowRoot.querySelector('slot')!
+    this.#$content = shadowRoot.querySelector('span')!
   }
 
   connectedCallback() {
@@ -42,7 +42,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
 
     switch (name) {
       case 'text': {
-        this.$content.textContent = newVal
+        this.#$content.textContent = newVal
 
         break
       }
