@@ -156,9 +156,30 @@ export const ErrorDialog: FC<Propsed> = (props): JSX.Element => {
 const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
   const { agentdetails, questionCounter, setAgentdetails, setDisplay, setActiveelement } = props
 
+  function getActiveElement(root: Document | ShadowRoot = document): Element | null {
+    const activeEl = root.activeElement
+
+    if (activeEl == null) {
+      return null
+    }
+
+    console.log(`reyyy idi element ${activeEl.tagName}`)
+
+    if (activeEl.shadowRoot != null) {
+      if (activeEl.tagName == 'SINCH-INPUT' || activeEl.tagName == 'SINCH-TEXTAREA') {
+        return activeEl
+      }
+
+      return getActiveElement(activeEl.shadowRoot)
+    }
+
+    return activeEl
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveelement(document.activeElement != null ? document.activeElement.className : '')
+      console.log(`Active elkement entante ${getActiveElement()?.className}`)
+      setActiveelement(getActiveElement() == null ? '' : getActiveElement()!.className)
     }, 1000)
 
     return () => clearInterval(interval)
