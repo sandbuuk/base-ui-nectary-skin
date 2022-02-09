@@ -1,3 +1,7 @@
+## v0.7.1
+
+* 🐞 fix Jest accessing `scrollIntoView`, missing in jsdom
+
 ## v0.7.0
 
 * 💥 extract `sinch-alert-close` and `sinch-alert-button`
