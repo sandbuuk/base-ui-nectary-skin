@@ -87,7 +87,7 @@ const selectOption = ($slot: HTMLSlotElement, $option: TSinchSelectOption | null
       $op.selected = isSelected
 
       if (isSelected) {
-        $op.scrollIntoView({ block: 'nearest' })
+        $op.scrollIntoView?.({ block: 'nearest' })
       }
     }
   }

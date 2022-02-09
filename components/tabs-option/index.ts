@@ -93,7 +93,7 @@ defineCustomElement('sinch-tabs-option', class extends HTMLElement {
         this.$input.checked = isChecked
 
         if (isChecked) {
-          this.scrollIntoView({ block: 'nearest' })
+          this.scrollIntoView?.({ block: 'nearest' })
         }
 
         break
