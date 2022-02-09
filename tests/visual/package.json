@@ -16,11 +16,11 @@
     "remove-empty-dirs": "find ./test-results -type d -empty -delete"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
+    "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.0",
     "@nectary/components": "*",
     "@playwright/test": "1.17.1",
-    "@types/node": "^14.0.0",
+    "@types/node": "^17.0.14",
     "babel-loader": "^8.2.3",
     "concurrently": "^6.3.0",
     "css-loader": "^6.5.1",

@@ -1,13 +1,24 @@
-import { useMemo, useState } from 'react'
-import type { FC } from 'react'
+import { useCallback, useMemo, useState } from 'react'
+import type { FC, SyntheticEvent } from 'react'
 
 type TInput = {
-  search: URLSearchParams
+  search: URLSearchParams,
 }
 
 export const Input: FC<TInput> = ({ search }) => {
   const [value, setValue] = useState(search.get('value') ?? '')
-  const onChange = useMemo(() => search.get('uncontrolled') === null ? setValue : () => {}, [search, setValue])
+  const onChange = useMemo(() =>
+    (search.get('uncontrolled') === null
+      ? (e: SyntheticEvent<Element, CustomEvent>) => {
+        const value = e.nativeEvent.detail
+
+        window.dispatchEvent(new CustomEvent('sinch-input-change', { detail: value }))
+        setValue(value)
+      }
+      : () => {}),
+  [search, setValue])
+  const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-input-focus')), [])
+  const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-input-blur')), [])
   const labelText = useMemo(() => search.get('label') ?? '', [search])
   const optionalText = useMemo(() => search.get('optional') ?? undefined, [search])
   const additionalText = useMemo(() => search.get('additional') ?? undefined, [search])
@@ -16,7 +27,7 @@ export const Input: FC<TInput> = ({ search }) => {
   const isDisabled = useMemo(() => search.get('disabled') != null, [search])
   const tooltip = useMemo(
     () => search.get('tooltip') != null && (
-      <sinch-input-tooltip text={search.get('tooltip')!}></sinch-input-tooltip>
+      <sinch-input-tooltip text={search.get('tooltip')!}/>
     ),
     [search]
   )
@@ -30,7 +41,10 @@ export const Input: FC<TInput> = ({ search }) => {
       placeholder={placeholderText}
       disabled={isDisabled}
       value={value}
-      onChange={onChange}>
+      onChange={onChange}
+      onFocus={onFocus}
+      onBlur={onBlur}
+    >
       {tooltip}
     </sinch-input>
   )

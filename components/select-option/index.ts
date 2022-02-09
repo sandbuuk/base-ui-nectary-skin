@@ -11,8 +11,8 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-select-option', class extends HTMLElement {
-  $iconSlot: HTMLSlotElement
-  $content: HTMLSpanElement
+  #$iconSlot: HTMLSlotElement
+  #$content: HTMLSpanElement
 
   constructor() {
     super()
@@ -23,8 +23,8 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$iconSlot = shadowRoot.querySelector('slot')!
-    this.$content = shadowRoot.querySelector('span')!
+    this.#$iconSlot = shadowRoot.querySelector('slot')!
+    this.#$content = shadowRoot.querySelector('span')!
   }
 
   connectedCallback() {
@@ -42,7 +42,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
 
     switch (name) {
       case 'text': {
-        this.$content.textContent = newVal
+        this.#$content.textContent = newVal
 
         break
       }
@@ -89,8 +89,8 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
     return getBooleanAttribute(this, 'selected')
   }
 
-  icon(): Element | null {
-    return this.$iconSlot.assignedElements()[0] ?? null
+  get icon(): Element | null {
+    return this.#$iconSlot.assignedElements()[0] ?? null
   }
 })
 
@@ -100,7 +100,7 @@ type TSinchSelectOptionElement = HTMLElement & {
   checked: boolean,
   selected: boolean,
   disabled: boolean,
-  icon(): Element | null,
+  readonly icon: Element | null,
 }
 
 type TSinchSelectOptionReact = TSinchElementReact<TSinchSelectOptionElement> & {

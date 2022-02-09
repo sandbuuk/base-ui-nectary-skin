@@ -64,11 +64,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-select']> => ({
-  onChange,
-  onFocus,
-  onBlur,
-}) => {
+const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-select']> => ({ onChange }) => {
   const [{
     value,
     label,
@@ -92,15 +88,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-select'
       onChange(e.detail)
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
-      setImmediate((el) => el?.focus(), document.activeElement)
-    })
-
-    $input.addEventListener('focus', () => {
-      onFocus?.()
-    })
-
-    $input.addEventListener('blur', () => {
-      onBlur?.()
+      setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
     $wrapper.appendChild($input)

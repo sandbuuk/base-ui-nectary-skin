@@ -17,8 +17,9 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-alert', class extends HTMLElement {
-  $text: HTMLParagraphElement
-  $title: HTMLParagraphElement
+  #$text: HTMLParagraphElement
+  #$title: HTMLParagraphElement
+
   constructor() {
     super()
 
@@ -28,8 +29,8 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$text = shadowRoot.querySelector('#text')!
-    this.$title = shadowRoot.querySelector('#title')!
+    this.#$text = shadowRoot.querySelector('#text')!
+    this.#$title = shadowRoot.querySelector('#title')!
   }
 
   get type() {
@@ -71,12 +72,12 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.$text.textContent = newVal
+        this.#$text.textContent = newVal
 
         break
       }
       case 'title': {
-        this.$title.textContent = newVal
+        this.#$title.textContent = newVal
 
         break
       }

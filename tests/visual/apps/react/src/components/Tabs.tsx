@@ -1,13 +1,22 @@
 import { useMemo, useState } from 'react'
-import type { FC } from 'react'
+import type { FC, SyntheticEvent } from 'react'
 
 type TTabs = {
-  search: URLSearchParams
+  search: URLSearchParams,
 }
 
 export const Tabs: FC<TTabs> = ({ search }) => {
   const [value, setValue] = useState('')
-  const onChange = useMemo(() => search.get('uncontrolled') === null ? setValue : () => {}, [search, setValue])
+  const onChange = useMemo(() =>
+    (search.get('uncontrolled') === null
+      ? (e: SyntheticEvent<Element, CustomEvent>) => {
+        const value = e.nativeEvent.detail
+
+        window.dispatchEvent(new CustomEvent('sinch-tabs-change', { detail: value }))
+        setValue(value)
+      }
+      : () => {}),
+  [search, setValue])
   const options = useMemo(() => {
     const data = search.get('options')
 
@@ -23,8 +32,9 @@ export const Tabs: FC<TTabs> = ({ search }) => {
           key={opt.value}
           value={opt.value}
           text={opt.text}
-          disabled={opt.disabled}>
-          {opt.icon != null && <sinch-icon-share></sinch-icon-share>}
+          disabled={opt.disabled}
+        >
+          {opt.icon != null && <sinch-icon-share slot="icon"/>}
         </sinch-tabs-option>
       ))
     } catch {

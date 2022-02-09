@@ -3,6 +3,19 @@
   [attr.text]="text"
   [attr.title]="title"
   [attr.multiline]="isMultiline || null">
-  <sinch-alert-close *ngIf="isDismissable" slot="close"></sinch-alert-close>
-  <sinch-alert-button *ngIf="actionText != null" slot="button" [attr.text]="actionText"></sinch-alert-button>
+  <sinch-alert-close
+    *ngIf="isDismissable"
+    slot="close"
+    (click)="onCloseClick()"
+    (focusin)="onCloseFocus()"
+    (focusout)="onCloseBlur()"
+  ></sinch-alert-close>
+  <sinch-alert-button
+    *ngIf="actionText != null"
+    slot="button"
+    [attr.text]="actionText"
+    (click)="onButtonClick()"
+    (focusin)="onButtonFocus()"
+    (focusout)="onButtonBlur()"
+  ></sinch-alert-button>
 </sinch-alert>

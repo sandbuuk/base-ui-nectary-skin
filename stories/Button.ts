@@ -18,7 +18,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-button']> => ({ onClick, onFocus, onBlur }) => {
+const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-button']> => () => {
   const [{ type, text, disabled, small }] = useArgs()
   const buttonRef = useRef<HTMLElementTagNameMap['sinch-button'] | null>(null)
 
@@ -26,16 +26,6 @@ const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-bu
     const $button = document.createElement('sinch-button')
 
     $button.innerHTML = innerHTML
-
-    $button.addEventListener('click', () => {
-      onClick()
-    })
-    $button.addEventListener('focus', () => {
-      onFocus?.()
-    })
-    $button.addEventListener('blur', () => {
-      onBlur?.()
-    })
 
     buttonRef.current = $button
   }

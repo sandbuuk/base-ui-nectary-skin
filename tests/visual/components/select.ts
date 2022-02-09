@@ -1,5 +1,5 @@
-import { test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { expect, test } from '@playwright/test'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
 
 const shot = makeScreenshotTests('/select?width=200&label=Label', 'sinch-select')
 const withPlaceholder = makeScreenshotTests('/select?width=200&label=Label&placeholder=Placeholder', 'sinch-select')
@@ -122,4 +122,46 @@ test('keyboard', withPlaceholder(async function* ({ $ }) {
     name: 'up-left',
     include: [$.locator('#listbox')],
   }
+}))
+
+test('custom events', shot(async function* ({ $, page }) {
+  const testInput = testCustomEvent(page, $)
+
+  await testInput('change', 'sinch-select-change', 'X')
+  await testInput('focusin', 'sinch-select-focus')
+  await testInput('focusout', 'sinch-select-blur')
+}))
+
+test('native events', shot(async function* ({ $, page }) {
+  await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
+
+  await $.focus()
+  await page.keyboard.press('Tab')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-select-focus', detail: null },
+    { type: 'sinch-select-blur', detail: null },
+  ])
+
+  await $.click()
+  await page.keyboard.press('Enter')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-select-focus', detail: null },
+    { type: 'sinch-select-change', detail: '1' },
+  ])
+
+  await $.click()
+  await page.keyboard.press('ArrowDown')
+  await page.keyboard.press('Enter')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-select-change', detail: '3' },
+  ])
 }))

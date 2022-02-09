@@ -4,7 +4,6 @@ import {
   getAttribute,
   getBooleanAttribute,
   getCSVSet,
-  getEventHandler,
   getFirstCSValue,
   updateAttribute,
   updateBooleanAttribute,
@@ -12,13 +11,14 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
+import type { SyntheticEvent } from 'react'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-accordion', class extends HTMLElement {
-  $slot: HTMLSlotElement
+  #$slot: HTMLSlotElement
 
   constructor() {
     super()
@@ -29,14 +29,18 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    shadowRoot.addEventListener('change', this.onOptionChange)
+    shadowRoot.addEventListener('change', this.#onOptionChange)
 
-    this.$slot = shadowRoot.querySelector('slot')!
-    this.$slot.addEventListener('slotchange', this.onSlotChange)
+    this.#$slot = shadowRoot.querySelector('slot')!
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   static get observedAttributes() {
     return ['value']
+  }
+
+  get nodeName() {
+    return 'select'
   }
 
   set value(value: string) {
@@ -65,11 +69,11 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
     }
   }
 
-  onSlotChange = () => {
+  #onSlotChange = () => {
     this.onValueChange(this.value)
   }
 
-  onOptionChange = (e: Event) => {
+  #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
     if (!isAccordionItemElement(e.target)) {
@@ -85,16 +89,15 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
     )
 
     this.dispatchEvent(
-      new CustomEvent('change', { detail: csv })
+      new CustomEvent('change', { detail: csv, bubbles: true })
     )
-    getEventHandler(this, 'onChange')?.(csv)
   }
 
   onValueChange(csv: string) {
     if (this.multiple) {
       const values = getCSVSet(csv)
 
-      for (const $option of this.$slot.assignedElements()) {
+      for (const $option of this.#$slot.assignedElements()) {
         if (isAccordionItemElement($option)) {
           $option.checked = $option.disabled !== true && values.has($option.value)
         }
@@ -102,7 +105,7 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
     } else {
       const value = getFirstCSValue(csv)
 
-      for (const $option of this.$slot.assignedElements()) {
+      for (const $option of this.#$slot.assignedElements()) {
         if (isAccordionItemElement($option)) {
           $option.checked = $option.disabled !== true && $option.value === value
         }
@@ -119,7 +122,7 @@ type TSinchAccordionElement = HTMLElement & {
 type TSinchAccordionReact = TSinchElementReact<TSinchAccordionElement> & {
   multiple?: boolean,
   value: string,
-  onChange: (value: string) => void,
+  onChange: (e: SyntheticEvent<TSinchAccordionElement, CustomEvent<string>>) => void,
 }
 
 declare global {

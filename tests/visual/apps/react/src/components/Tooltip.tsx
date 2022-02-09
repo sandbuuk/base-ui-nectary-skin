@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 
 type TTooltip = {
-  search: URLSearchParams
+  search: URLSearchParams,
 }
 
 export const Tooltip: FC<TTooltip> = ({ search }) => {

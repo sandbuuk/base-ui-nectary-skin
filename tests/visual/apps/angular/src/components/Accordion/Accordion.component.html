@@ -4,7 +4,7 @@
     [attr.label]="opt.label"
     [attr.disabled]="opt.disabled"
     [attr.status]="opt.status">
-    <span *ngIf="opt.content != null">{{opt.content}}</span>
+    <span *ngIf="opt.content != null" slot="content">{{opt.content}}</span>
     <sinch-icon-share *ngIf="opt.icon === true" slot="icon"></sinch-icon-share>
   </sinch-accordion-item>
 </sinch-accordion>

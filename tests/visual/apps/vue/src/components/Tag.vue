@@ -6,7 +6,14 @@
     v-bind:inverted="isInverted"
   >
     <sinch-icon-share v-if="hasIcon" size="12" slot="icon"></sinch-icon-share>
-    <sinch-tag-close v-if="isDismissable" v-bind:small="isSmall" slot="close"></sinch-tag-close>
+    <sinch-tag-close
+      v-if="isDismissable"
+      slot="close"
+      v-bind:small="isSmall"
+      @click="onClick"
+      @focusin="onFocus"
+      @focusout="onBlur"
+    ></sinch-tag-close>
   </sinch-tag>
 </template>
 
@@ -14,6 +21,17 @@
 export default {
   props: {
     search: URLSearchParams
+  },
+  methods: {
+    onClick() {
+      window.dispatchEvent(new CustomEvent('sinch-tag-close-click'))
+    },
+    onFocus() {
+      window.dispatchEvent(new CustomEvent('sinch-tag-close-focus'))
+    },
+    onBlur() {
+      window.dispatchEvent(new CustomEvent('sinch-tag-close-blur'))
+    }
   },
   computed: {
     text() {

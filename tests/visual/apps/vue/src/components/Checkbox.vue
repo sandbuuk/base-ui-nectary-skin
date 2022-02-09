@@ -4,7 +4,9 @@
     v-bind:disabled="isDisabled"
     v-bind:indeterminate="isIndeterminate"
     v-bind:checked="checked"
-    @change="onChange">
+    @change="onChange"
+    @focusin="onFocus"
+    @focusout="onBlur">
   </sinch-checkbox>
 </template>
 
@@ -14,7 +16,14 @@ export default {
     onChange(e) {
       if (this.isControlled) {
         this.checked = e.detail
+        window.dispatchEvent(new CustomEvent('sinch-checkbox-change', {detail: e.detail}))
       }
+    },
+    onFocus() {
+      window.dispatchEvent(new CustomEvent('sinch-checkbox-focus'))
+    },
+    onBlur() {
+      window.dispatchEvent(new CustomEvent('sinch-checkbox-blur'))
     }
   },
   props: {

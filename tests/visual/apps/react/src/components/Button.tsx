@@ -1,7 +1,8 @@
+import { useCallback } from 'react'
 import type { FC } from 'react'
 
 type TButton = {
-  search: URLSearchParams
+  search: URLSearchParams,
 }
 
 export const Button: FC<TButton> = ({ search }) => {
@@ -11,6 +12,9 @@ export const Button: FC<TButton> = ({ search }) => {
   const hasSpinner = search.get('spinner') != null
   const text: any = search.get('text') ?? undefined
   const type: any = search.get('type') ?? undefined
+  const onClick = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-button-click')), [])
+  const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-button-focus')), [])
+  const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-button-blur')), [])
 
   return (
     <sinch-button
@@ -18,10 +22,12 @@ export const Button: FC<TButton> = ({ search }) => {
       text={text}
       disabled={isDisabled}
       small={isSmall}
-      onClick={() => {}}
+      onClick={onClick}
+      onFocus={onFocus}
+      onBlur={onBlur}
     >
-      {hasIcon && <sinch-icon-share size={isSmall ? 12 : 18}></sinch-icon-share>}
-      {hasSpinner && <sinch-spinner static type={isSmall ? 'small' : 'medium'}></sinch-spinner>}
+      {hasIcon && <sinch-icon-share size={isSmall ? 12 : 18} slot="icon"/>}
+      {hasSpinner && <sinch-spinner static type={isSmall ? 'small' : 'medium'} slot="icon"/>}
     </sinch-button>
   )
 }

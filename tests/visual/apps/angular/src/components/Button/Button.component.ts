@@ -24,4 +24,16 @@ export class ButtonComponent {
     this.hasIcon = url.searchParams.get('icon') !== null
     this.hasSpinner = url.searchParams.get('spinner') !== null
   }
+
+  onClick() {
+    window.dispatchEvent(new CustomEvent('sinch-button-click'))
+  }
+
+  onFocus(){
+    window.dispatchEvent(new CustomEvent('sinch-button-focus'))
+  }
+
+  onBlur(){
+    window.dispatchEvent(new CustomEvent('sinch-button-blur'))
+  }
 }

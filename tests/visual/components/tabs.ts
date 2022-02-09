@@ -1,5 +1,5 @@
-import { test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { expect, test } from '@playwright/test'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
 
 const options = encodeURI(JSON.stringify([{
   value: 1,
@@ -113,4 +113,32 @@ test('keyboard', withOptions(async function* ({ $ }) {
   await $.press('ArrowUp')
   await $.press('ArrowLeft')
   yield { name: '4-up-left' }
+}))
+
+test('custom events', withOptions(async function* ({ $, page }) {
+  const testInput = testCustomEvent(page, $)
+
+  await testInput('change', 'sinch-tabs-change', '2')
+}))
+
+test('native events', withOptions(async function* ({ $, page }) {
+  await subscribeToEvents(page, 'sinch-tabs-change')
+
+  // Click first item
+  await $.locator('sinch-tabs-option').nth(0).click()
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-tabs-change', detail: '1' },
+  ])
+
+  // Click second item
+  await $.locator('sinch-tabs-option').nth(2).click()
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-tabs-change', detail: '3' },
+  ])
 }))

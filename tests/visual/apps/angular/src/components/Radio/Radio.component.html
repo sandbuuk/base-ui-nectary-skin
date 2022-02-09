@@ -1,3 +1,8 @@
 <sinch-radio [value]="value" (change)="onChange($event)">
-  <sinch-radio-option *ngFor="let opt of options" [value]="opt.value" [text]="opt.text" [disabled]="opt.disabled"></sinch-radio-option>
+  <sinch-radio-option
+    *ngFor="let opt of options"
+    [value]="opt.value"
+    [text]="opt.text"
+    [disabled]="opt.disabled">
+  </sinch-radio-option>
 </sinch-radio>

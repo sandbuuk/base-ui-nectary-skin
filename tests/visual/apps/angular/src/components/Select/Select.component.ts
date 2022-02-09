@@ -40,6 +40,13 @@ export class SelectComponent {
   onChange(e: Event) {
     if (this.isControlled) {
       this.value = (e as CustomEvent).detail
+      window.dispatchEvent(new CustomEvent('sinch-select-change', {detail: (e as CustomEvent).detail}))
     }
+  }
+  onFocus() {
+    window.dispatchEvent(new CustomEvent('sinch-select-focus'))
+  }
+  onBlur() {
+    window.dispatchEvent(new CustomEvent('sinch-select-blur'))
   }
 }

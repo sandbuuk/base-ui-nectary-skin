@@ -23,7 +23,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-radio']
       onChange(e.detail)
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
-      setImmediate((el) => el?.focus(), document.activeElement)
+      setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
     radioRef.current = $radio

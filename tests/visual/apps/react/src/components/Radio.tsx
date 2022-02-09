@@ -2,12 +2,21 @@ import { useMemo, useState } from 'react'
 import type { FC } from 'react'
 
 type TRadio = {
-  search: URLSearchParams
+  search: URLSearchParams,
 }
 
 export const Radio: FC<TRadio> = ({ search }) => {
   const [value, setValue] = useState('')
-  const onChange = useMemo(() => search.get('uncontrolled') === null ? setValue : () => {}, [search, setValue])
+  const onChange = useMemo(() =>
+    (search.get('uncontrolled') === null
+      ? (e: any) => {
+        const value = e.nativeEvent.detail
+
+        window.dispatchEvent(new CustomEvent('sinch-radio-change', { detail: value }))
+        setValue(value)
+      }
+      : () => {}),
+  [search, setValue])
   const options = useMemo(() => {
     const data = search.get('options')
 
@@ -23,7 +32,8 @@ export const Radio: FC<TRadio> = ({ search }) => {
           key={opt.value}
           value={opt.value}
           text={opt.text}
-          disabled={opt.disabled}/>
+          disabled={opt.disabled}
+        />
       ))
     } catch {
       return null
@@ -31,7 +41,10 @@ export const Radio: FC<TRadio> = ({ search }) => {
   }, [search])
 
   return (
-    <sinch-radio value={value} onChange={onChange}>
+    <sinch-radio
+      value={value}
+      onChange={onChange}
+    >
       {options}
     </sinch-radio>
   )

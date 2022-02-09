@@ -2,25 +2,24 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getEventHandler,
   isAttrTrue,
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
+import type { FocusEvent, SyntheticEvent } from 'react'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-textarea', class extends HTMLElement {
-  $input: HTMLTextAreaElement
-  $label: HTMLLabelElement
-  $optionalText: HTMLSpanElement
-  $additionalText: HTMLSpanElement
-  $invalidText: HTMLSpanElement
-  onChange!: (e: any) => void
+  #$input: HTMLTextAreaElement
+  #$label: HTMLLabelElement
+  #$optionalText: HTMLSpanElement
+  #$additionalText: HTMLSpanElement
+  #$invalidText: HTMLSpanElement
 
   constructor() {
     super()
@@ -32,23 +31,19 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$input = shadowRoot.querySelector('#input')!
-    this.$label = shadowRoot.querySelector('#label')!
-    this.$optionalText = shadowRoot.querySelector('#optional')!
-    this.$additionalText = shadowRoot.querySelector('#additional')!
-    this.$invalidText = shadowRoot.querySelector('#invalid')!
+    this.#$input = shadowRoot.querySelector('#input')!
+    this.#$label = shadowRoot.querySelector('#label')!
+    this.#$optionalText = shadowRoot.querySelector('#optional')!
+    this.#$additionalText = shadowRoot.querySelector('#additional')!
+    this.#$invalidText = shadowRoot.querySelector('#invalid')!
   }
 
   connectedCallback() {
-    this.$input.addEventListener('input', this.onInput)
-    this.$input.addEventListener('focus', this.onInputFocus)
-    this.$input.addEventListener('blur', this.onInputBlur)
+    this.#$input.addEventListener('input', this.#onInput)
   }
 
   disconnectedCallback() {
-    this.$input.removeEventListener('input', this.onInput)
-    this.$input.removeEventListener('focus', this.onInputFocus)
-    this.$input.removeEventListener('blur', this.onInputBlur)
+    this.#$input.removeEventListener('input', this.#onInput)
   }
 
   static get observedAttributes() {
@@ -66,47 +61,51 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.$input.value = newVal ?? ''
+        this.#$input.value = newVal ?? ''
 
         break
       }
 
       case 'label': {
-        this.$label.textContent = newVal
+        this.#$label.textContent = newVal
 
         break
       }
 
       case 'placeholder': {
-        this.$input.placeholder = newVal ?? ''
+        this.#$input.placeholder = newVal ?? ''
 
         break
       }
 
       case 'optionaltext': {
-        this.$optionalText.textContent = newVal
+        this.#$optionalText.textContent = newVal
 
         break
       }
 
       case 'additionaltext': {
-        this.$additionalText.textContent = newVal
+        this.#$additionalText.textContent = newVal
 
         break
       }
 
       case 'invalidtext': {
-        this.$invalidText.textContent = newVal
+        this.#$invalidText.textContent = newVal
 
         break
       }
 
       case 'disabled': {
-        this.$input.disabled = isAttrTrue(newVal)
+        this.#$input.disabled = isAttrTrue(newVal)
 
         break
       }
     }
+  }
+
+  get nodeName() {
+    return 'textarea'
   }
 
   set value(value: string) {
@@ -166,44 +165,25 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   }
 
   focus() {
-    this.$input.focus()
+    this.#$input.focus()
   }
 
   blur() {
-    this.$input.blur()
+    this.#$input.blur()
   }
 
-  onInput = (e: Event) => {
+  #onInput = (e: Event) => {
     e.stopPropagation()
 
-    const value = this.$input.value
+    const value = this.#$input.value
 
-    getEventHandler(this, 'onChange')?.(value)
+    this.#$input.value = this.value
 
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: value,
+        bubbles: true,
       })
-    )
-
-    this.$input.value = this.value
-  }
-
-  onInputFocus = (e: Event) => {
-    e.stopPropagation()
-    getEventHandler(this, 'onFocus')?.()
-
-    this.dispatchEvent(
-      new CustomEvent('focus')
-    )
-  }
-
-  onInputBlur = (e: Event) => {
-    e.stopPropagation()
-    getEventHandler(this, 'onBlur')?.()
-
-    this.dispatchEvent(
-      new CustomEvent('blur')
     )
   }
 })
@@ -228,9 +208,9 @@ type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   invalidText?: string,
   additionalText?: string,
   disabled?: boolean,
-  onChange: (value: string) => void,
-  onFocus?: () => void,
-  onBlur?: () => void,
+  onChange: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
+  onFocus?: (e: FocusEvent<TSinchTextareaElement>) => void,
+  onBlur?: (e: FocusEvent<TSinchTextareaElement>) => void,
 }
 
 declare global {

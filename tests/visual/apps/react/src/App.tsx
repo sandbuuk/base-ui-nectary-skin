@@ -6,12 +6,12 @@ import { Checkbox } from './components/Checkbox'
 import { Input } from './components/Input'
 import { Radio } from './components/Radio'
 import { Select } from './components/Select'
+import { Spinner } from './components/Spinner'
 import { Tabs } from './components/Tabs'
 import { Tag } from './components/Tag'
 import { Textarea } from './components/Textarea'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
-import { Spinner } from './components/Spinner'
 import type { CSSProperties, FC } from 'react'
 
 const mapElement = (url: URL) => {
@@ -105,16 +105,16 @@ export const App: FC<{}> = () => {
 
   const style: CSSProperties = {
     display: 'flex',
-    padding: '100px'
+    padding: '100px',
   }
 
   if (height > 0) {
-    style.height = height + 'px'
+    style.height = `${height}px`
   }
 
   if (width > 0) {
-    style.flexDirection = 'column',
-    style.width = width + 'px'
+    style.flexDirection = 'column'
+    style.width = `${width}px`
   }
 
   return (

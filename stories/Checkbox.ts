@@ -24,7 +24,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-checkbox']> = ({ onChange }) 
       onChange(e.detail)
       updateArgs({ checked: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
-      setImmediate(() => $checkbox.focus())
+      setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
     checkboxRef.current = $checkbox

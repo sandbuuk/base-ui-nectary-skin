@@ -2,12 +2,21 @@ import { useMemo, useState } from 'react'
 import type { FC } from 'react'
 
 type TAccordion = {
-  search: URLSearchParams
+  search: URLSearchParams,
 }
 
 export const Accordion: FC<TAccordion> = ({ search }) => {
   const [value, setValue] = useState(search.get('value') ?? '')
-  const onChange = useMemo(() => search.get('uncontrolled') === null ? setValue : () => {}, [search, setValue])
+  const onChange = useMemo(() =>
+    (search.get('uncontrolled') === null
+      ? (e: any) => {
+        const value = e.nativeEvent.detail
+
+        window.dispatchEvent(new CustomEvent('sinch-accordion-change', { detail: value }))
+        setValue(value)
+      }
+      : () => {}),
+  [search, setValue])
   const isMultiple = search.get('multiple') !== null
   const options = useMemo(() => {
     const data = search.get('options')
@@ -25,9 +34,10 @@ export const Accordion: FC<TAccordion> = ({ search }) => {
           value={opt.value}
           label={opt.label}
           status={opt.status}
-          disabled={opt.disabled}>
-          {opt.content != null && <span>{opt.content}</span>}
-          {opt.icon === true && <sinch-icon-share slot="icon"></sinch-icon-share>}
+          disabled={opt.disabled}
+        >
+          {opt.content != null && <span slot="content">{opt.content}</span>}
+          {opt.icon === true && <sinch-icon-share slot="icon"/>}
         </sinch-accordion-item>
       ))
     } catch {

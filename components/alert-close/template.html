@@ -1,9 +1,10 @@
 <style>
 :host {
   display: inline-block;
+  outline: none;
 }
 
-#close {
+button {
   all: initial;
   display: flex;
   align-items: center;
@@ -14,11 +15,11 @@
   cursor: pointer;
 }
 
-#close > * {
+button > * {
   pointer-events: none;
 }
 </style>
 
-<button id="close">
+<button>
   <sinch-icon-close size="14"></sinch-icon-close>
 </button>

@@ -14,6 +14,14 @@ export default {
   props: {
     search: URLSearchParams
   },
+  methods: {
+    onChange(e) {
+      if (this.isControlled) {
+        this.value = e.detail
+        window.dispatchEvent(new CustomEvent('sinch-radio-change', {detail: e.detail}))
+      }
+    },
+  },
   computed: {
     isControlled() {
       return this.search.get('uncontrolled') === null
@@ -29,13 +37,6 @@ export default {
         return JSON.parse(decodeURI(data))
       } catch {
         return []
-      }
-    }
-  },
-  methods: {
-    onChange(e) {
-      if (this.isControlled) {
-        this.value = e.detail
       }
     }
   },

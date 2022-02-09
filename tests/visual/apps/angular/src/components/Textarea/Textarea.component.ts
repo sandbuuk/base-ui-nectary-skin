@@ -35,6 +35,13 @@ export class TextareaComponent {
   onChange(e: Event) {
     if (this.isControlled) {
       this.value = (e as CustomEvent).detail
+      window.dispatchEvent(new CustomEvent('sinch-textarea-change', {detail: (e as CustomEvent).detail}))
     }
+  }
+  onFocus() {
+    window.dispatchEvent(new CustomEvent('sinch-textarea-focus'))
+  }
+  onBlur() {
+    window.dispatchEvent(new CustomEvent('sinch-textarea-blur'))
   }
 }

@@ -6,6 +6,8 @@
   [attr.placeholder]="placeholderText"
   [attr.disabled]="isDisabled"
   [value]="value"
+  (focusin)="onFocus()"
+  (focusout)="onBlur()"
   (change)="onChange($event)">
   <sinch-input-tooltip *ngIf="tooltipText != null" [text]="tooltipText"></sinch-input-tooltip>
 </sinch-input>

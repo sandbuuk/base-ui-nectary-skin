@@ -3,31 +3,32 @@ import {
   defineCustomElement,
   getBooleanAttribute,
   updateAttribute,
-  getEventHandler,
   isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
+import type { FocusEvent, MouseEvent } from 'react'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tag-close', class extends HTMLElement {
-  $dismissIcon: HTMLElementTagNameMap['sinch-icon-cancel']
+  #$icon: HTMLElementTagNameMap['sinch-icon-cancel']
+  #$button: HTMLButtonElement
 
   constructor() {
     super()
 
     const shadowRoot = this.attachShadow({
       mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      delegatesFocus: true,
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$dismissIcon = shadowRoot.querySelector('sinch-icon-cancel')!
-
-    shadowRoot.querySelector('#close')!.addEventListener('click', this.onClick)
+    this.#$icon = shadowRoot.querySelector('sinch-icon-cancel')!
+    this.#$button = shadowRoot.querySelector('button')!
   }
 
   get small() {
@@ -45,31 +46,33 @@ defineCustomElement('sinch-tag-close', class extends HTMLElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'small': {
-        updateAttribute(this.$dismissIcon, 'size', isAttrTrue(newVal) ? 12 : 14)
+        updateAttribute(this.#$icon, 'size', isAttrTrue(newVal) ? 12 : 14)
 
         break
       }
     }
   }
 
-  onClick = (e: Event) => {
-    e.stopPropagation()
+  focus() {
+    this.#$button.focus()
+  }
 
-    getEventHandler(this, 'onClick')?.()
-
-    this.dispatchEvent(
-      new CustomEvent('click')
-    )
+  blur() {
+    this.#$button.blur()
   }
 })
 
 type TSinchTagCloseElement = HTMLElement & {
   small: boolean,
+  focus(): void,
+  blur(): void,
 }
 
 type TSinchTagCloseReact = TSinchElementReact<TSinchTagCloseElement> & {
   small?: boolean,
-  onClick?: () => void,
+  onClick?: (e: MouseEvent<TSinchTagCloseElement>) => void,
+  onFocus?: (e: FocusEvent<TSinchTagCloseElement>) => void,
+  onBlur?: (e: FocusEvent<TSinchTagCloseElement>) => void,
 }
 
 declare global {
