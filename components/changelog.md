@@ -1,3 +1,14 @@
+## v0.7.0
+
+* 💥 extract `sinch-alert-close` and `sinch-alert-button`
+* 💥 change default slot name to `icon` in `sinch-tabs-option`, `sinch-select-option`, `sinch-button`
+* 💥 change default slot name to `content` in `sinch-accordion-item`
+* 💥 pass events instead of values to React `onChange` handlers in `sinch-toggle`, `sinch-textarea`, `sinch-tabs`, `sinch-select`, `sinch-radio`, `sinch-input`, `sinch-checkbox`, `sinch-accordion`
+* ➕ pass events to React `onFocus`, `onBlur`, `onClick` handlers in `sinch-button`, `sinch-accordion-item`, `sinch-tabs-option`, `sinch-radio-option`, `sinch-textarea`, `sinch-input`, `sinch-checkbox`
+* ➕ add `sinch-tag` and `sinch-tag-close` components
+* ➕ add complementary colors to theme
+* 🐞 add `id` to components react types
+
 ## v0.6.1
 
 * 🐞 fix `sinch-select` accessing closed shadowRoot
