@@ -1,10 +1,13 @@
 <div [ngStyle]="style" [ngSwitch]="pathname">
+  <accordion-component *ngSwitchCase="'/accordion'"></accordion-component>
   <alert-component *ngSwitchCase="'/alert'"></alert-component>
   <button-component *ngSwitchCase="'/button'"></button-component>
   <checkbox-component *ngSwitchCase="'/checkbox'"></checkbox-component>
   <input-component *ngSwitchCase="'/input'"></input-component>
   <radio-component *ngSwitchCase="'/radio'"></radio-component>
   <select-component *ngSwitchCase="'/select'"></select-component>
+  <tabs-component *ngSwitchCase="'/tabs'"></tabs-component>
+  <tag-component *ngSwitchCase="'/tag'"></tag-component>
   <textarea-component *ngSwitchCase="'/textarea'"></textarea-component>
   <toggle-component *ngSwitchCase="'/toggle'"></toggle-component>
   <tooltip-component *ngSwitchCase="'/tooltip'"></tooltip-component>

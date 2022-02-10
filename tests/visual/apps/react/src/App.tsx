@@ -1,18 +1,27 @@
 import '@nectary/components'
+import { Accordion } from './components/Accordion'
 import { Alert } from './components/Alert'
 import { Button } from './components/Button'
 import { Checkbox } from './components/Checkbox'
 import { Input } from './components/Input'
 import { Radio } from './components/Radio'
 import { Select } from './components/Select'
+import { Spinner } from './components/Spinner'
+import { Tabs } from './components/Tabs'
+import { Tag } from './components/Tag'
 import { Textarea } from './components/Textarea'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
-import { Spinner } from './components/Spinner'
-import type { FC } from 'react'
+import type { CSSProperties, FC } from 'react'
 
 const mapElement = (url: URL) => {
   switch (url.pathname) {
+    case '/accordion': {
+      return (
+        <Accordion search={url.searchParams}/>
+      )
+    }
+
     case '/alert': {
       return (
         <Alert search={url.searchParams}/>
@@ -49,6 +58,18 @@ const mapElement = (url: URL) => {
       )
     }
 
+    case '/tabs': {
+      return (
+        <Tabs search={url.searchParams}/>
+      )
+    }
+
+    case '/tag': {
+      return (
+        <Tag search={url.searchParams}/>
+      )
+    }
+
     case '/textarea': {
       return (
         <Textarea search={url.searchParams}/>
@@ -80,14 +101,21 @@ const mapElement = (url: URL) => {
 export const App: FC<{}> = () => {
   const url = new URL(window.location.href)
   const width = Number(url.searchParams.get('width') ?? '0')
-  const style = width > 0 ? {
-      display: 'flex' as const,
-      flexDirection: 'column' as const,
-      width: width + 'px',
-      padding: '100px'
-    } : {
-      padding: '100px'
-    }
+  const height = Number(url.searchParams.get('height') ?? '0')
+
+  const style: CSSProperties = {
+    display: 'flex',
+    padding: '100px',
+  }
+
+  if (height > 0) {
+    style.height = `${height}px`
+  }
+
+  if (width > 0) {
+    style.flexDirection = 'column'
+    style.width = `${width}px`
+  }
 
   return (
     <div style={style}>

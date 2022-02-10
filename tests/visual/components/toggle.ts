@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
 
 const contentWidth = makeScreenshotTests('/toggle?text=Label', 'sinch-toggle')
 const narrowWidth = makeScreenshotTests('/toggle?width=150&text=Label%20long%20long%20long%20long', 'sinch-toggle')
@@ -140,4 +140,37 @@ test('disabled colors', disabled(async function* ({ $eval }) {
 
 test('narrow', narrowWidth(async function* () {
   yield { name: 'clip' }
+}))
+
+test('custom events', contentWidth(async function* ({ $, page }) {
+  const testCheckbox = testCustomEvent(page, $)
+
+  await testCheckbox('change', 'sinch-toggle-change', true)
+  await testCheckbox('focusin', 'sinch-toggle-focus')
+  await testCheckbox('focusout', 'sinch-toggle-blur')
+}))
+
+test('native events', contentWidth(async function* ({ $, page }) {
+  await subscribeToEvents(page, 'sinch-toggle-change', 'sinch-toggle-focus', 'sinch-toggle-blur')
+
+  await $.focus()
+  await page.keyboard.press('Tab')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-toggle-focus', detail: null },
+    { type: 'sinch-toggle-blur', detail: null },
+  ])
+
+  await $.click()
+  await $.click()
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-toggle-focus', detail: null },
+    { type: 'sinch-toggle-change', detail: true },
+    { type: 'sinch-toggle-change', detail: false },
+  ])
 }))

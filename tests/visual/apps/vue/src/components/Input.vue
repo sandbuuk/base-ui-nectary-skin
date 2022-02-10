@@ -7,7 +7,9 @@
     v-bind:invalidtext="invalidText"
     v-bind:disabled="isDisabled"
     :value="value"
-    @change="onChange">
+    @change="onChange"
+    @focusin="onFocus"
+    @focusout="onBlur">
     <sinch-input-tooltip v-if="tooltipText != null" v-bind:text="tooltipText"></sinch-input-tooltip>
   </sinch-input>
 </template>
@@ -18,7 +20,14 @@ export default {
     onChange(e) {
       if (this.isControlled) {
         this.value = e.detail
+        window.dispatchEvent(new CustomEvent('sinch-input-change', {detail: e.detail}))
       }
+    },
+    onFocus() {
+      window.dispatchEvent(new CustomEvent('sinch-input-focus'))
+    },
+    onBlur() {
+      window.dispatchEvent(new CustomEvent('sinch-input-blur'))
     }
   },
   props: {

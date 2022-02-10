@@ -40,6 +40,8 @@ visual-tests:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
     - yarn --cwd=tests/visual test:ci
+  after_script:
+    - find ./tests/visual/test-results -type d -empty -delete
   artifacts:
     when: on_failure
     paths:
@@ -80,7 +82,6 @@ build-shell:
     policy: pull
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
-    REMOTE_QUICKSTARTS: dn0wuruy8r35q.cloudfront.net
   before_script:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
@@ -164,6 +165,29 @@ publish-components:
     - echo "//nexus.int.clxnetworks.net/repository/sinch_npm/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish components/
     - node ./scripts/slack-changelog.js
+
+publish-bus:
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^bus@/
+  image: node:16
+  cache:
+    key:
+      files:
+        - yarn.lock
+      prefix: cache
+    paths:
+      - .yarn/
+    policy: pull
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+  before_script:
+    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+  script:
+    - yarn --cwd libs/bus/ build
+    - node scripts/prepare-package-json.js libs/bus/package.json
+    - echo "//nexus.int.clxnetworks.net/repository/sinch_npm/:_authToken=${NPM_TOKEN}" > .npmrc
+    - npm publish libs/bus/
 
 pages:
   stage: deploy

@@ -1,6 +1,11 @@
 <template>
   <sinch-radio :value="value" @change="onChange">
-    <sinch-radio-option v-for="opt in options" :key="opt.value" :value="opt.value" :text="opt.text" :disabled="opt.disabled"></sinch-radio-option>
+    <sinch-radio-option v-for="opt in options"
+      :key="opt.value"
+      :value="opt.value"
+      :text="opt.text"
+      :disabled="opt.disabled">
+    </sinch-radio-option>
   </sinch-radio>
 </template>
 
@@ -8,6 +13,14 @@
 export default {
   props: {
     search: URLSearchParams
+  },
+  methods: {
+    onChange(e) {
+      if (this.isControlled) {
+        this.value = e.detail
+        window.dispatchEvent(new CustomEvent('sinch-radio-change', {detail: e.detail}))
+      }
+    },
   },
   computed: {
     isControlled() {
@@ -24,13 +37,6 @@ export default {
         return JSON.parse(decodeURI(data))
       } catch {
         return []
-      }
-    }
-  },
-  methods: {
-    onChange(e) {
-      if (this.isControlled) {
-        this.value = e.detail
       }
     }
   },

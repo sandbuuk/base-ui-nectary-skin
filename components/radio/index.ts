@@ -1,21 +1,17 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import '@nectary/components/radio-option'
+import { isRadioOptionElement } from '../radio-option'
 import {
   defineCustomElement,
   getAttribute,
-  getEventHandler,
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
+import type { SyntheticEvent } from 'react'
 
 type TSinchRadioOption = HTMLElementTagNameMap['sinch-radio-option']
 
-const isRadioElement = (element: EventTarget | Element | null): element is TSinchRadioOption => {
-  return element instanceof Element && element.tagName === 'SINCH-RADIO-OPTION'
-}
 const getEnabledRadioElements = ($slot: HTMLSlotElement): TSinchRadioOption[] => {
-  return $slot.assignedElements().filter((opt) => isRadioElement(opt) && opt.disabled !== true) as TSinchRadioOption[]
+  return $slot.assignedElements().filter((opt) => isRadioOptionElement(opt) && opt.disabled !== true) as TSinchRadioOption[]
 }
 const findSelectedOption = (elements: readonly TSinchRadioOption[]) => {
   return elements.find((el) => el.checked) ?? null
@@ -23,7 +19,7 @@ const findSelectedOption = (elements: readonly TSinchRadioOption[]) => {
 
 const getFirstOption = ($slot: HTMLSlotElement) => {
   for (const $option of $slot.assignedElements()) {
-    if (isRadioElement($option) && $option.disabled !== true) {
+    if (isRadioOptionElement($option) && $option.disabled !== true) {
       return $option
     }
   }
@@ -33,7 +29,7 @@ const getFirstOption = ($slot: HTMLSlotElement) => {
 
 const getLastOption = ($slot: HTMLSlotElement) => {
   for (const $option of $slot.assignedElements().reverse()) {
-    if (isRadioElement($option) && $option.disabled !== true) {
+    if (isRadioOptionElement($option) && $option.disabled !== true) {
       return $option
     }
   }
@@ -70,7 +66,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-radio', class extends HTMLElement {
-  $slot: HTMLSlotElement
+  #$slot: HTMLSlotElement
 
   constructor() {
     super()
@@ -81,24 +77,23 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.addEventListener('keydown', this.#onOptionKeyDown)
+    shadowRoot.addEventListener('change', this.#onOptionChange)
 
-    this.$slot = shadowRoot.querySelector('slot')!
-  }
-
-  connectedCallback() {
-    this.shadowRoot!.addEventListener('keydown', this.onOptionKeyDown)
-    this.shadowRoot!.addEventListener('change', this.onOptionChange)
-    this.$slot.addEventListener('slotchange', this.onSlotChange)
-  }
-
-  disconnectedCallback() {
-    this.shadowRoot!.removeEventListener('keydown', this.onOptionKeyDown)
-    this.shadowRoot!.removeEventListener('change', this.onOptionChange)
-    this.$slot.removeEventListener('slotchange', this.onSlotChange)
+    this.#$slot = shadowRoot.querySelector('slot')!
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   static get observedAttributes() {
     return ['value']
+  }
+
+  get type() {
+    return 'text'
+  }
+
+  get nodeName() {
+    return 'input'
   }
 
   set value(value: string) {
@@ -119,13 +114,13 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
     }
   }
 
-  onOptionKeyDown = (e: Event) => {
+  #onOptionKeyDown = (e: Event) => {
     switch ((e as KeyboardEvent).code) {
       case 'ArrowUp':
       case 'ArrowLeft': {
         e.preventDefault()
 
-        const $option = getPrevOption(this.$slot)
+        const $option = getPrevOption(this.#$slot)
 
         if ($option !== null) {
           $option.focus()
@@ -138,7 +133,7 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
       case 'ArrowRight': {
         e.preventDefault()
 
-        const $option = getNextOption(this.$slot)
+        const $option = getNextOption(this.#$slot)
 
         if ($option !== null) {
           $option.focus()
@@ -150,28 +145,27 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
     }
   }
 
-  onSlotChange = () => {
+  #onSlotChange = () => {
     this.onValueChange(this.value)
   }
 
-  onOptionChange = (e: Event) => {
+  #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
     this.dispatchChangeEvent((e as CustomEvent).detail)
   }
 
   onValueChange(value: string) {
-    for (const $option of this.$slot.assignedElements()) {
-      if (isRadioElement($option)) {
+    for (const $option of this.#$slot.assignedElements()) {
+      if (isRadioOptionElement($option)) {
         $option.checked = $option.disabled !== true && $option.value === value
       }
     }
   }
 
   dispatchChangeEvent(value: string) {
-    getEventHandler(this, 'onChange')?.(value)
     this.dispatchEvent(
-      new CustomEvent('change', { detail: value })
+      new CustomEvent('change', { detail: value, bubbles: true })
     )
   }
 })
@@ -182,7 +176,7 @@ type TSinchRadioElement = HTMLElement & {
 
 type TSinchRadioReact = TSinchElementReact<TSinchRadioElement> & {
   value: string,
-  onChange: (value: string) => void,
+  onChange: (event: SyntheticEvent<TSinchRadioElement, CustomEvent<boolean>>) => void,
 }
 
 declare global {

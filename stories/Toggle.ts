@@ -36,7 +36,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-toggle']> = ({ onChange }) =>
       }, 150)
 
       // https://github.com/storybookjs/storybook/issues/11657
-      setImmediate((el) => el.focus(), document.activeElement)
+      setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
     checkboxRef.current = $checkbox

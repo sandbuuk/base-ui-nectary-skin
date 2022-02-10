@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
 
 const shot = makeScreenshotTests('/input?width=200&label=Label', 'sinch-input')
 const withValue = makeScreenshotTests('/input?width=200&label=Label&value=Input%20value', 'sinch-input')
@@ -158,8 +158,7 @@ test('fill', withPlaceholder(async function* ({ $, $eval }) {
 
   await expect($eval((el) => el === document.activeElement)).resolves.toBe(true)
 
-  // More prefered "$.fill()" works on Ch and FF, not on Wk
-  await $.locator('input').fill('Filled text')
+  await $.type('Filled text')
   yield { name: 'filled' }
 
   await expect($eval((el) => el.value)).resolves.toBe('Filled text')
@@ -191,4 +190,36 @@ test('disabled attribute', withEverything(async function* ({ $, $eval }) {
   })
   yield { name: 'enabled' }
   await expect($.locator('input').isDisabled()).resolves.toBe(false)
+}))
+
+test('custom events', withValue(async function* ({ $, page }) {
+  const testInput = testCustomEvent(page, $)
+
+  await testInput('change', 'sinch-input-change', 'X')
+  await testInput('focusin', 'sinch-input-focus')
+  await testInput('focusout', 'sinch-input-blur')
+}))
+
+test('native events', withValue(async function* ({ $, page }) {
+  await subscribeToEvents(page, 'sinch-input-focus', 'sinch-input-blur', 'sinch-input-change')
+  await $.focus()
+  await page.keyboard.press('Tab')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-input-focus', detail: null },
+    { type: 'sinch-input-blur', detail: null },
+  ])
+
+  // Necessary to normalize "type" behaviour
+  await $.click()
+  await $.type('X')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-input-focus', detail: null },
+    { type: 'sinch-input-change', detail: 'Input valueX' },
+  ])
 }))

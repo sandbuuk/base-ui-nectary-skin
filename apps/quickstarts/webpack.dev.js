@@ -88,6 +88,10 @@ module.exports = {
     host: 'localhost',
     port: PORT,
     historyApiFallback: true,
+    static: {
+      directory: path.resolve(__dirname, 'public'),
+      publicPath: '/',
+    },
   },
   watch: false,
   plugins: [
@@ -103,24 +107,6 @@ module.exports = {
       },
       shared: {
         '@nectary/components/theme.css': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/button': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/input': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/input-tooltip': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/select': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/select-option': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/textarea': {
           requiredVersion: '*',
         },
         react: {

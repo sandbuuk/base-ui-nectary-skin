@@ -213,7 +213,9 @@ export const PageStepOne: FC = () => {
             <sinch-input
               className={styles.sinchInput}
               value={email}
-              onChange={(value) => {
+              onChange={(e) => {
+                const value = e.nativeEvent.detail
+
                 setEmail(value)
               }}
               invalidText={emailInvalidtext.length > 0 ? emailInvalidtext : undefined}
@@ -230,7 +232,9 @@ export const PageStepOne: FC = () => {
             /> */}
             <sinch-input
               value={firstName}
-              onChange={(value) => {
+              onChange={(e) => {
+                const value = e.nativeEvent.detail
+
                 setFirstName(value)
               }}
               label="First Name"
@@ -239,7 +243,9 @@ export const PageStepOne: FC = () => {
             />
             <sinch-input
               value={lastName}
-              onChange={(value) => {
+              onChange={(e) => {
+                const value = e.nativeEvent.detail
+
                 setLastName(value)
               }}
               invalidText={lastnameInvalidtext.length > 0 ? lastnameInvalidtext : undefined}
@@ -249,7 +255,9 @@ export const PageStepOne: FC = () => {
             <sinch-select
               placeholder="Select"
               value={role}
-              onChange={(value) => {
+              onChange={(e) => {
+                const value = e.nativeEvent.detail
+
                 setRole(value)
               }}
               invalidText={roleInvalidtext.length > 0 ? roleInvalidtext : undefined}
@@ -279,7 +287,9 @@ export const PageStepOne: FC = () => {
             <sinch-input
               value={phoneNumber}
               optionalText="ex: +55(11)91234-5678"
-              onChange={(value) => {
+              onChange={(e) => {
+                const value = e.nativeEvent.detail
+
                 setphoneNumber(value)
               }}
               invalidText={phoneInvalidtext.length > 0 ? phoneInvalidtext : undefined}

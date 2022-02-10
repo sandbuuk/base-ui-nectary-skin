@@ -2,21 +2,21 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getEventHandler,
   isAttrTrue,
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
+import type { FocusEvent, SyntheticEvent } from 'react'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-checkbox', class extends HTMLElement {
-  $input: HTMLInputElement
-  $label: HTMLLabelElement
+  #$input: HTMLInputElement
+  #$label: HTMLLabelElement
 
   constructor() {
     super()
@@ -28,24 +28,28 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$input = shadowRoot.querySelector('input')!
-    this.$label = shadowRoot.querySelector('label')!
+    this.#$input = shadowRoot.querySelector('input')!
+    this.#$label = shadowRoot.querySelector('label')!
   }
 
   connectedCallback() {
-    this.$input.addEventListener('input', this.onInput)
-    this.$input.addEventListener('focus', this.onInputFocus)
-    this.$input.addEventListener('blur', this.onInputBlur)
+    this.#$input.addEventListener('input', this.onCheckboxInput)
   }
 
   disconnectedCallback() {
-    this.$input.removeEventListener('input', this.onInput)
-    this.$input.removeEventListener('focus', this.onInputFocus)
-    this.$input.removeEventListener('blur', this.onInputBlur)
+    this.#$input.removeEventListener('input', this.onCheckboxInput)
   }
 
   static get observedAttributes() {
     return ['checked', 'disabled', 'text']
+  }
+
+  get type() {
+    return 'text'
+  }
+
+  get nodeName() {
+    return 'input'
   }
 
   set checked(isChecked: boolean) {
@@ -83,17 +87,17 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.$label.textContent = newVal
+        this.#$label.textContent = newVal
 
         break
       }
       case 'checked': {
-        this.$input.checked = isAttrTrue(newVal)
+        this.#$input.checked = isAttrTrue(newVal)
 
         break
       }
       case 'disabled': {
-        this.$input.disabled = isAttrTrue(newVal)
+        this.#$input.disabled = isAttrTrue(newVal)
 
         break
       }
@@ -101,44 +105,29 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 
   focus() {
-    this.$input.focus()
+    this.#$input.focus()
   }
 
   blur() {
-    this.$input.blur()
+    this.#$input.blur()
   }
 
-  onInput = (e: Event) => {
+  onCheckboxInput = (e: Event) => {
     e.stopPropagation()
 
-    const isChecked = this.$input.checked
+    const isChecked = this.#$input.checked
 
-    this.$input.checked = !isChecked
-    getEventHandler(this, 'onChange')?.(isChecked)
-
-    this.dispatchEvent(
-      new CustomEvent('change', { detail: isChecked })
-    )
-  }
-
-  onInputFocus = (e: Event) => {
-    getEventHandler(this, 'onFocus')?.()
+    this.#$input.checked = this.checked
 
     this.dispatchEvent(
-      new CustomEvent('focus')
+      new CustomEvent(
+        'change',
+        {
+          detail: isChecked,
+          bubbles: true,
+        }
+      )
     )
-
-    e.stopPropagation()
-  }
-
-  onInputBlur = (e: Event) => {
-    getEventHandler(this, 'onBlur')?.()
-
-    this.dispatchEvent(
-      new CustomEvent('blur')
-    )
-
-    e.stopPropagation()
   }
 })
 
@@ -156,9 +145,9 @@ type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
   indeterminate?: boolean,
   disabled?: boolean,
   text: string,
-  onChange: (isChecked: boolean) => void,
-  onFocus?: () => void,
-  onBlur?: () => void,
+  onChange: (event: SyntheticEvent<TSinchCheckboxElement, CustomEvent<boolean>>) => void,
+  onFocus?: (e: FocusEvent<TSinchCheckboxElement>) => void,
+  onBlur?: (e: FocusEvent<TSinchCheckboxElement>) => void,
 }
 
 declare global {

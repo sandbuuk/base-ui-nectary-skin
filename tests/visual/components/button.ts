@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
 
 const withWideWidth = makeScreenshotTests('/button?width=200&type=primary&text=Button&icon=true', 'sinch-button')
 const withFitWidth = makeScreenshotTests('/button?type=primary&text=Button&icon=true', 'sinch-button')
@@ -212,4 +212,34 @@ test('spinner disabled', withSpinnerDisabled(async function* ({ $eval }) {
 
 test('spinner small', withSpinnerSmall(async function* () {
   yield { name: 'shot' }
+}))
+
+test('custom events', withFitWidth(async function* ({ $, page }) {
+  const testButton = testCustomEvent(page, $)
+
+  await testButton('click', 'sinch-button-click')
+  await testButton('focusin', 'sinch-button-focus')
+  await testButton('focusout', 'sinch-button-blur')
+}))
+
+test('native events', withFitWidth(async function* ({ $, page }) {
+  await subscribeToEvents(page, 'sinch-button-focus', 'sinch-button-blur', 'sinch-button-click')
+  await $.focus()
+  await page.keyboard.press('Tab')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-button-focus', detail: null },
+    { type: 'sinch-button-blur', detail: null },
+  ])
+
+  await $.click()
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-button-focus', detail: null },
+    { type: 'sinch-button-click', detail: null },
+  ])
 }))

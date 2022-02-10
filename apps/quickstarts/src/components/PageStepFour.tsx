@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-//import { Congratsbox } from './CongratsBox'
 import { useOnBoardingControl } from './OnBoardingcontext'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
@@ -163,8 +162,6 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
       return null
     }
 
-    console.log(`reyyy idi element ${activeEl.tagName}`)
-
     if (activeEl.shadowRoot != null) {
       if (activeEl.tagName == 'SINCH-INPUT' || activeEl.tagName == 'SINCH-TEXTAREA') {
         return activeEl
@@ -202,7 +199,9 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
           className={styles.agentName}
           value={agentdetails[props.i].name}
           style={{ width: '100%' }}
-          onChange={(value) => {
+          onChange={(e) => {
+            const value = e.nativeEvent.detail
+
             setAgentdetails((datas: string[]) => ({
               ...datas,
               [props.i]: { name: value, email: agentdetails[props.i].email },
@@ -221,7 +220,9 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
           value={agentdetails[props.i].email}
           style={{ width: '100%' }}
           invalidText={agentdetails[props.i].email.length > 0 && validateEmail(agentdetails[props.i].email) == null ? 'Email is not Valid' : undefined}
-          onChange={(value) => {
+          onChange={(e) => {
+            const value = e.nativeEvent.detail
+
             setAgentdetails((datas: string[]) => ({
               ...datas,
               [props.i]: { name: agentdetails[props.i].name, email: value },
@@ -482,9 +483,10 @@ export const PageStepFour: FC = () => {
                       invalidText={undefined}
                       style={{ width: '100%' }}
                       class="humanhandover"
-                      additionalText={undefined}
                       disabled={undefined}
-                      onChange={(value) => {
+                      onChange={(e) => {
+                        const value = e.nativeEvent.detail
+
                         setHumanhandover(value)
                       }}
                       onFocus={() => {

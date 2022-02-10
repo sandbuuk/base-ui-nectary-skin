@@ -1,24 +1,12 @@
 export type TEventHandler = (arg?: any) => void
 
-export const getEventHandler = ($element: HTMLElement, handlerName: string): TEventHandler | null => {
-  // https://github.com/facebook/react/issues/7901
-  for (const key in $element) {
-    if (key.startsWith('__reactProps$')) {
-      // @ts-ignore
-      return $element[key][handlerName]
-    }
-  }
-
-  return null
-}
-
 export const defineCustomElement = (name: string, constructor: CustomElementConstructor): void => {
   if (customElements.get(name) == null) {
     customElements.define(name, constructor)
   }
 }
 
-export const updateBooleanAttribute = ($element: HTMLElement, attrName: string, attrValue: boolean | null | undefined) => {
+export const updateBooleanAttribute = ($element: Element, attrName: string, attrValue: boolean | null | undefined) => {
   if (attrValue === true) {
     $element.setAttribute(attrName, '')
   } else {
@@ -30,11 +18,11 @@ export const isAttrTrue = (attrValue: string | null): boolean => {
   return attrValue === '' || (attrValue !== 'false' && attrValue !== null)
 }
 
-export const getBooleanAttribute = ($element: HTMLElement, attrName: string) => {
+export const getBooleanAttribute = ($element: Element, attrName: string) => {
   return isAttrTrue($element.getAttribute(attrName))
 }
 
-export const updateAttribute = ($element: HTMLElement, attrName: string, attrValue: string | number | boolean | null | undefined) => {
+export const updateAttribute = ($element: Element, attrName: string, attrValue: string | number | boolean | null | undefined) => {
   if (attrValue != null) {
     $element.setAttribute(attrName, String(attrValue))
   } else {
@@ -42,9 +30,10 @@ export const updateAttribute = ($element: HTMLElement, attrName: string, attrVal
   }
 }
 
-export function getAttribute($element: HTMLElement, attrName: string): string | undefined
-export function getAttribute($element: HTMLElement, attrName: string, defaultValue: string): string
-export function getAttribute($element: HTMLElement, attrName: string, defaultValue?: string) {
+export function getAttribute($element: Element, attrName: string): string | undefined
+export function getAttribute($element: Element, attrName: string, defaultValue: null): string | null
+export function getAttribute($element: Element, attrName: string, defaultValue: string): string
+export function getAttribute($element: Element, attrName: string, defaultValue?: string | null) {
   return $element.getAttribute(attrName) ?? defaultValue
 }
 
@@ -52,22 +41,18 @@ export const isLiteralValue = <T extends readonly string[]>(literals: T, value: 
   return value != null && literals.includes(value)
 }
 
-export const updateLiteralAttribute = <T extends readonly string[]>($element: HTMLElement, literals: T, attrName: string, attrValue: T[number] | null | undefined) => {
-  if (!isLiteralValue(literals, attrValue)) {
-    // Silently ignore incorrect value
-    return
-  }
-
-  if (attrValue != null) {
+export const updateLiteralAttribute = <T extends readonly string[]>($element: Element, literals: T, attrName: string, attrValue: T[number] | null | undefined) => {
+  if (isLiteralValue(literals, attrValue)) {
     $element.setAttribute(attrName, attrValue)
   } else {
     $element.removeAttribute(attrName)
   }
 }
 
-export function getLiteralAttribute<T extends readonly string[]>($element: HTMLElement, literals: T, attrName: string): T[number] | undefined
-export function getLiteralAttribute<T extends readonly string[]>($element: HTMLElement, literals: T, attrName: string, defaultValue: T[number]): T[number]
-export function getLiteralAttribute($element: HTMLElement, literals: string[], attrName: string, defaultValue?: string) {
+export function getLiteralAttribute<T extends readonly string[]>($element: Element, literals: T, attrName: string): T[number] | undefined
+export function getLiteralAttribute<T extends readonly string[]>($element: Element, literals: T, attrName: string, defaultValue: null): T[number] | null
+export function getLiteralAttribute<T extends readonly string[]>($element: Element, literals: T, attrName: string, defaultValue: T[number]): T[number]
+export function getLiteralAttribute($element: Element, literals: string[], attrName: string, defaultValue?: string | null) {
   const attrValue = $element.getAttribute(attrName)
 
   return isLiteralValue(literals, attrValue) ? attrValue : defaultValue
@@ -113,7 +98,7 @@ export const attrValueToPixels = (value: string | null, options: TRange & {multi
   return int === null ? 'unset' : `${int * (options.multiplier ?? 1)}px`
 }
 
-export const updateIntegerAttribute = ($element: HTMLElement | SVGElement, attrName: string, attrValue: string | number | null | undefined, range: TRange = {}) => {
+export const updateIntegerAttribute = ($element: Element, attrName: string, attrValue: string | number | null | undefined, range: TRange = {}) => {
   if (attrValue == null) {
     $element.removeAttribute(attrName)
 
@@ -132,8 +117,34 @@ export const updateIntegerAttribute = ($element: HTMLElement | SVGElement, attrN
   $element.setAttribute(attrName, intValue.toFixed(0))
 }
 
-export function getIntegerAttribute($element: HTMLElement, attrName: string): number | undefined
-export function getIntegerAttribute($element: HTMLElement, attrName: string, defaultValue: number): number
-export function getIntegerAttribute($element: HTMLElement, attrName: string, defaultValue?: number) {
+export function getIntegerAttribute($element: Element, attrName: string): number | undefined
+export function getIntegerAttribute($element: Element, attrName: string, defaultValue: null): number | null
+export function getIntegerAttribute($element: Element, attrName: string, defaultValue: number): number
+export function getIntegerAttribute($element: Element, attrName: string, defaultValue?: number | null) {
   return attrValueToInteger($element.getAttribute(attrName)) ?? defaultValue
+}
+
+export const updateCSV = (acc: string, value: string, setActive: boolean): string => {
+  const values = acc === '' ? [] : acc.split(',')
+  const i = values.indexOf(value)
+
+  if (setActive) {
+    i === -1 && values.push(value)
+  } else {
+    i >= 0 && values.splice(i, 1)
+  }
+
+  return values.join(',')
+}
+
+export const getCSVSet = (acc: string): Set<string> => {
+  if (acc === '') {
+    return new Set()
+  }
+
+  return new Set(acc.split(','))
+}
+
+export const getFirstCSValue = (acc: string): string => {
+  return acc.split(',')[0]
 }

@@ -6,7 +6,7 @@ const getRects = (locators: Locator[]): Promise<(TRect | null)[]> => {
   return Promise.all(locators.map((l) => l.boundingBox()))
 }
 
-const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect => {
+const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect | null => {
   return rects.reduce((a, b) => {
     if (a == null) {
       return b
@@ -22,7 +22,7 @@ const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect => {
     const height = Math.max(a.y + a.height, b.y + b.height) - y
 
     return { x, y, width, height }
-  }) ?? { x: 0, y: 0, width: 0, height: 0 }
+  })
 }
 
 const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInfo['snapshotPath'] =>
@@ -71,19 +71,28 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
 
       await page.goto(pageUrl, { waitUntil: 'networkidle' })
 
+      // Optionally subscribe to page console output
+      // page.on('console', (msg) => console.log(msg.text()))
+      // page.on('pageerror', (e) => console.log(e))
+
       const locator = page.locator(elementSelector)
 
       for await (const { name, include = [], includeRects = [] } of updateState({ page, $: locator, $eval: makeEval<T>(locator) })) {
         const rects = await getRects([locator, ...include])
         const clip = mergeBoundingBox(rects.concat(includeRects))
+        const screenshotName = `${info.title}-${name}.png`
 
         if (clip == null) {
           throw new Error('Cannot get locator bounding box')
         }
 
-        const screenshot = await page.screenshot({ clip })
+        const matchScreenshot = () => page.screenshot({ clip }).then((sc) => expect(sc).toMatchSnapshot(screenshotName))
 
-        expect(screenshot).toMatchSnapshot(`${info.title}-${name}.png`)
+        try {
+          await matchScreenshot()
+        } catch {
+          await matchScreenshot()
+        }
       }
     }
 
@@ -111,30 +120,44 @@ export const moveCursorTo = async (page: Page, position: TPosition) => {
   }, position)
 }
 
-export const getLastEvent = async (page: Page, eventName: string) => {
-  const data = await page.evaluate((eventName) => {
-    return JSON.stringify((window as any).__events__[eventName] ?? {})
-  }, eventName)
+export const getAllEvents = (page: Page) => {
+  return page.evaluate(() => {
+    const result = (window as any).__events__;
 
-  return JSON.parse(data)
+    (window as any).__events__ = []
+
+    return result
+  })
 }
 
-export const subscribeToEvent = (page: Page, eventName: string) =>
-  page.evaluate((eventName) => {
-    (window as any).__events__ = (window as any).__events__ ?? {}
-    document.body.addEventListener(eventName, (e: any) => {
-      (window as any).__events__[eventName] = {
-        type: e.type,
-        detail: e.detail ?? null,
-        clientX: e.clientX ?? null,
-        clientY: e.clientY ?? null,
-        isTrusted: e.isTrusted ?? null,
-        path: e.path
-          .filter((p: HTMLElement) => p.tagName != null)
-          .map((p: HTMLElement) => (p.tagName.toLowerCase() + (p.hasAttribute('id') ? `#${p.id}` : ''))),
-      }
-    })
-  }, eventName)
+export const subscribeToEvents = (page: Page, ...eventNames: string[]) =>
+  page.evaluate((eventNames) => {
+    (window as any).__events__ ??= []
+
+    for (const eventName of eventNames) {
+      window.addEventListener(eventName, (e: any) => {
+        (window as any).__events__.push({
+          type: e.type,
+          detail: e.detail,
+          // path: e.path
+          //   ?.filter((p: HTMLElement) => p.tagName != null)
+          //   .map((p: HTMLElement) => (p.tagName.toLowerCase() + (p.hasAttribute('id') ? `#${p.id}` : ''))),
+        })
+      })
+    }
+  }, eventNames)
+
+export const testCustomEvent = (page: Page, $element: Locator) => async (sendEventType: string, receiveEventType: string, eventDetail: any = null) => {
+  await subscribeToEvents(page, receiveEventType)
+
+  await $element.evaluate((el, { type, detail }) => {
+    el.dispatchEvent(new CustomEvent<any>(type, { detail, bubbles: true }))
+  }, { type: sendEventType, detail: eventDetail })
+
+  const events = await getAllEvents(page)
+
+  expect(events).toEqual([{ type: receiveEventType, detail: eventDetail }])
+}
 
 export const getRandomPointInsideElem = ({ x, y, width, height }: TRect): TPosition => {
   return {

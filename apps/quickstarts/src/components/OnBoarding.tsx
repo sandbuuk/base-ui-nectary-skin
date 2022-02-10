@@ -21,7 +21,7 @@ export const OnBoarding: FC = () => {
   const { username, setUsername } = useOnBoardingControl()
   const { token } = usePageOneControl()
 
-  if (token.length >= 0) {
+  if (token.length > 0) {
     return (
       <div className={styles.onboardingPage}>
         <div className={styles.onboardingHeader}>
@@ -131,7 +131,9 @@ export const OnBoarding: FC = () => {
                   class={styles.startnameInput}
                   label="Quick Start Name"
                   placeholder="My first Quick start"
-                  onChange={(value) => {
+                  onChange={(e) => {
+                    const value = e.nativeEvent.detail
+
                     setUsername(value)
                   }}
                   value={username}
@@ -141,7 +143,6 @@ export const OnBoarding: FC = () => {
                 <sinch-button class={styles.startnameButton} type="cta" text="Start" disabled={username.length <= 0 ? true : undefined} onClick={next}/>
               </div>
             </div>
-
           </div>
         </div>
       </div>

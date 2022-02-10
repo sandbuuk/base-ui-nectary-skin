@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const apps = require('./apps.prod.json')
 
 const CONTAINER = 'Shell'
 const PORT = 3000
@@ -75,29 +76,9 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       name: CONTAINER,
-      remotes: {
-        Quickstarts: `Quickstarts@//${process.env.REMOTE_QUICKSTARTS}/remoteEntry.js`,
-      },
+      remotes: apps,
       shared: {
         '@nectary/components/theme.css': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/button': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/input': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/input-tooltip': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/select': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/select-option': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/textarea': {
           requiredVersion: '*',
         },
         react: {

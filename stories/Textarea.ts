@@ -74,7 +74,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-textarea']> = ({ onChange }) 
       onChange(e.detail)
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
-      setImmediate(() => $input.focus())
+      setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
     $wrapper.appendChild($input)

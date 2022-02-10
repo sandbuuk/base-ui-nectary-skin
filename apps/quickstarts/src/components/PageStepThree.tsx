@@ -16,12 +16,11 @@ type Props = {
   botquestion: string[],
   activeelement: string,
   setActiveelement: (value: string) => void,
-  setDisplay: (value: any) => void,
   setBotquestion: (value: any) => void,
 }
 
 const WhatsappDetails: FC<Props> = (props): JSX.Element => {
-  const { name, botquestion, setBotquestion, setDisplay, setActiveelement } = props
+  const { name, botquestion, setBotquestion, setActiveelement } = props
   const k = name
 
   console.log(botquestion)
@@ -32,8 +31,6 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
     if (activeEl == null) {
       return null
     }
-
-    console.log(`reyyy idi element ${activeEl.tagName}`)
 
     if (activeEl.shadowRoot != null) {
       if (activeEl.tagName == 'SINCH-INPUT' || activeEl.tagName == 'SINCH-TEXTAREA') {
@@ -48,7 +45,6 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(`Active elkement entante ${getActiveElement()?.className}`)
       setActiveelement(getActiveElement() == null ? '' : getActiveElement()!.className)
     }, 1000)
 
@@ -59,10 +55,12 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
     <div className={styles.botmessagesInput}>
       <sinch-input
         key={k}
+        class={`${k}`}
         value={botquestion[k - 1]}
         style={{ width: '100%' }}
-        class={`${k}`}
-        onChange={(value) => {
+        onChange={(e) => {
+          const value = e.nativeEvent.detail
+
           setBotquestion((datas: string[]) => ({
             ...datas,
             [k - 1]: value,
@@ -70,7 +68,7 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
           //setBotquestion(botquestion)
         }}
         onFocus={() => {
-          setDisplay(true)
+          //setDisplay(true)
         }}
         label={`Question ${k}`}
         placeholder="What is your name?"
@@ -127,28 +125,8 @@ export const PageStepThree: FC = () => {
   const { prev } = usePageControl()
   const { handleBack } = useStepperControl()
   const [flowCounter, setCounter] = useState(Object.keys(botquestion).length == 0 ? 1 : Object.keys(botquestion).length)
-  const [display, setDisplay] = useState(true)
+  // const [display, setDisplay] = useState(true)
   const [activeelement, setActiveelement] = useState('')
-
-  // const setactive = () => {
-  //   const ki = document.activeElement == null ? '' : document.activeElement.className == undefined ? '' : document.activeElement.className
-
-  //   setActiveelement(ki)
-  //   console.log('Hellooo')
-  //   console.log(`Hello ${ki}`)
-  // }
-
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     () => {
-  //       console.log('Heyyyyy')
-  //     }
-  //   }, 100)
-  // }, [])
-
-  // const myTimeout = setInterval(() => {
-  //   setactive
-  // }, 1000)
 
   const buttonCounter = () => {
     console.log(flowCounter)
@@ -169,7 +147,7 @@ export const PageStepThree: FC = () => {
     handleBack()
   }
 
-  if (token.length >= 0) {
+  if (token.length == 0) {
     return (
       <div className={styles.botpageWhatsapp}>
         {/* <div className={styles.botsteps}>
@@ -203,6 +181,7 @@ export const PageStepThree: FC = () => {
                   <div className={styles.botGreet}>
                   <sinch-textarea // eslint-disable-line
                     value={greetingmsg}
+                    class="greetingmessage"
                     label="Greeting"
                     placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
                     optionalText={undefined}
@@ -210,13 +189,15 @@ export const PageStepThree: FC = () => {
                     style={{ width: '100%' }}
                     additionalText={undefined}
                     disabled={undefined}
-                    onChange={(value) => {
+                    onChange={(e) => {
+                      const value = e.nativeEvent.detail
+
                       setGreetingmsg(value)
                       console.log(greetingmsg)
                       console.log(botquestion)
                     }}
                     onFocus={() => {
-                      setDisplay(false)
+                      //setDisplay(false)
                     }}
                     onBlur={() => {}}
                   />
@@ -232,7 +213,7 @@ export const PageStepThree: FC = () => {
                     <p className={styles.infoBody}>You will have all the answers once...</p>
                   </div> */}
                   </div>
-                  { [...Array(flowCounter)].map((_, i) => <WhatsappDetails activeelement={activeelement} setActiveelement={setActiveelement} setDisplay={setDisplay} botquestion={botquestion} setBotquestion={setBotquestion} name={i + 1} key={i}/>)}
+                  { [...Array(flowCounter)].map((_, i) => <WhatsappDetails activeelement={activeelement} setActiveelement={setActiveelement} botquestion={botquestion} setBotquestion={setBotquestion} name={i + 1} key={i}/>)}
                   <div className={styles.questionBtn}>
                     <sinch-button
                       style={{ width: '100%' }}
@@ -247,7 +228,7 @@ export const PageStepThree: FC = () => {
               <div className={styles.botpreview}>
                 <div style={{ backgroundImage: `url(${mobile})` }} className={styles.botImage}>
                   <div className={styles.messagesBot}>
-                    <div className={(greetingmsg.length > 0 && display == true) ? styles.botMessage : styles.hide}>
+                    <div className={(greetingmsg.length > 0 && activeelement != 'greetingmessage') ? styles.botMessage : styles.hide}>
                       {greetingmsg}
                     </div>
                     {/* <div className={(greetingmsg.length > 0 && display == true) ? styles.userMessage : styles.hide}>

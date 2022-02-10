@@ -35,6 +35,13 @@ export class InputComponent {
   onChange(e: Event) {
     if (this.isControlled) {
       this.value = (e as CustomEvent).detail
+      window.dispatchEvent(new CustomEvent('sinch-input-change', {detail: (e as CustomEvent).detail}))
     }
+  }
+  onFocus() {
+    window.dispatchEvent(new CustomEvent('sinch-input-focus'))
+  }
+  onBlur() {
+    window.dispatchEvent(new CustomEvent('sinch-input-blur'))
   }
 }

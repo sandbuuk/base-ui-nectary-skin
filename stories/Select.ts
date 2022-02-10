@@ -37,7 +37,7 @@ export default {
     },
     maxVisibleItems: {
       description: 'Number of visible items in the list',
-      control: 'number',
+      control: { type: 'range', min: 1, max: 5, step: 1 },
     },
     onChange: {
       description: 'Handler to sync input value with the state',
@@ -64,11 +64,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
-  onChange,
-  onFocus,
-  onBlur,
-}) => {
+const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-select']> => ({ onChange }) => {
   const [{
     value,
     label,
@@ -86,31 +82,13 @@ const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
   if (inputRef.current === null) {
     const $input = document.createElement('sinch-select')
 
-    $input.innerHTML = `
-      <sinch-input-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-input-tooltip>
-      <sinch-select-option value="1" text="Option 1 value" slot="select">
-        <sinch-icon-share></sinch-icon-share>
-      </sinch-select-option>
-      <sinch-select-option value="2" text="Option 2 value" slot="select" disabled>
-        <sinch-icon-share></sinch-icon-share>
-      </sinch-select-option>
-      <sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
-      <sinch-select-option value="4" text="Option 4 value" slot="select"></sinch-select-option>
-    `
+    $input.innerHTML = innerHTML
 
     $input.addEventListener('change', (e: any) => {
       onChange(e.detail)
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
-      setImmediate((el) => el.focus(), document.activeElement)
-    })
-
-    $input.addEventListener('focus', () => {
-      onFocus?.()
-    })
-
-    $input.addEventListener('blur', () => {
-      onBlur?.()
+      setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
     $wrapper.appendChild($input)
@@ -131,7 +109,17 @@ const Template: Story<JSX.IntrinsicElements['sinch-select']> = ({
   return $wrapper
 }
 
-export const Select = Template.bind({})
+export const Select = Template(`
+<sinch-input-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-input-tooltip>
+<sinch-select-option value="1" text="Option 1 value" slot="select">
+  <sinch-icon-share></sinch-icon-share>
+</sinch-select-option>
+<sinch-select-option value="2" text="Option 2 value" slot="select" disabled>
+  <sinch-icon-share></sinch-icon-share>
+</sinch-select-option>
+<sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
+<sinch-select-option value="4" text="Option 4 value" slot="select"></sinch-select-option>
+`)
 
 Select.args = {
   value: '2',

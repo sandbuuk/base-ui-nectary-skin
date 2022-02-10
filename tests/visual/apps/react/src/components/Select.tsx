@@ -1,13 +1,24 @@
-import { useMemo, useState } from 'react'
-import type { FC } from 'react'
+import { useCallback, useMemo, useState } from 'react'
+import type { FC, SyntheticEvent } from 'react'
 
 type TSelect = {
-  search: URLSearchParams
+  search: URLSearchParams,
 }
 
 export const Select: FC<TSelect> = ({ search }) => {
   const [value, setValue] = useState(search.get('value') ?? '')
-  const onChange = useMemo(() => search.get('uncontrolled') === null ? setValue : () => {}, [search, setValue])
+  const onChange = useMemo(() =>
+    (search.get('uncontrolled') === null
+      ? (e: SyntheticEvent<Element, CustomEvent<string>>) => {
+        const value = e.nativeEvent.detail
+
+        window.dispatchEvent(new CustomEvent('sinch-select-change', { detail: value }))
+        setValue(value)
+      }
+      : () => {}),
+  [search, setValue])
+  const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-select-focus')), [])
+  const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-select-blur')), [])
   const labelText = useMemo(() => search.get('label') ?? '', [search])
   const optionalText = useMemo(() => search.get('optional') ?? undefined, [search])
   const additionalText = useMemo(() => search.get('additional') ?? undefined, [search])
@@ -16,11 +27,12 @@ export const Select: FC<TSelect> = ({ search }) => {
   const isDisabled = useMemo(() => search.get('disabled') != null, [search])
   const maxVisibleItems = useMemo(() => {
     const val = search.get('maxvisibleitems')
+
     return val !== null ? parseInt(val) : undefined
   }, [search])
   const tooltip = useMemo(
     () => search.get('tooltip') != null && (
-      <sinch-input-tooltip text={search.get('tooltip')!} slot="tooltip"></sinch-input-tooltip>
+      <sinch-input-tooltip text={search.get('tooltip')!} slot="tooltip"/>
     ),
     [search]
   )
@@ -35,13 +47,16 @@ export const Select: FC<TSelect> = ({ search }) => {
       disabled={isDisabled}
       value={value}
       maxVisibleItems={maxVisibleItems}
-      onChange={onChange}>
+      onChange={onChange}
+      onFocus={onFocus}
+      onBlur={onBlur}
+    >
       {tooltip}
       <sinch-select-option value="1" text="Option 1 value" slot="select">
-        <sinch-icon-share/>
+        <sinch-icon-share slot="icon"/>
       </sinch-select-option>
       <sinch-select-option value="2" text="Option 2 value" slot="select" disabled>
-        <sinch-icon-share/>
+        <sinch-icon-share slot="icon"/>
       </sinch-select-option>
       <sinch-select-option value="3" text="Option 3 value" slot="select" disabled={false}/>
       <sinch-select-option value="4" text="Option 4 value" slot="select"/>

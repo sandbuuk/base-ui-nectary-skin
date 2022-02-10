@@ -9,8 +9,6 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-spinner', class extends HTMLElement {
-  $svg: SVGElement
-
   constructor() {
     super()
 
@@ -19,8 +17,6 @@ defineCustomElement('sinch-spinner', class extends HTMLElement {
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-
-    this.$svg = shadowRoot.querySelector('svg')!
   }
 
   set type(value: TSinchSpinnerType) {
@@ -29,12 +25,6 @@ defineCustomElement('sinch-spinner', class extends HTMLElement {
 
   get type(): TSinchSpinnerType {
     return getLiteralAttribute(this, spinnerTypes, 'type', 'medium')
-  }
-
-  connectedCallback() {
-    if (!this.$svg.hasAttribute('preserveAspectRatio')) {
-      this.$svg.setAttribute('preserveAspectRatio', 'xMinYMin meet')
-    }
   }
 })
 

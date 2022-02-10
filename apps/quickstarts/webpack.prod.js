@@ -74,24 +74,6 @@ module.exports = {
         '@nectary/components/theme.css': {
           requiredVersion: '*',
         },
-        '@nectary/components/button': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/input': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/input-tooltip': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/select': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/select-option': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/textarea': {
-          requiredVersion: '*',
-        },
         react: {
           requiredVersion: '^17.0.0',
           singleton: true,

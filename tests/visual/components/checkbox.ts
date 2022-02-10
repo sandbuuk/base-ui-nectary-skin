@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
 
 const shot = makeScreenshotTests('/checkbox?width=100&text=Label', 'sinch-checkbox')
 const contentWidth = makeScreenshotTests('/checkbox?text=Label', 'sinch-checkbox')
@@ -134,3 +134,35 @@ test('mouse interaction', shot(async function* ({ $, page }) {
   yield { name: 'active_checked' }
 }))
 
+test('custom events', shot(async function* ({ $, page }) {
+  const testCheckbox = testCustomEvent(page, $)
+
+  await testCheckbox('change', 'sinch-checkbox-change', true)
+  await testCheckbox('focusin', 'sinch-checkbox-focus')
+  await testCheckbox('focusout', 'sinch-checkbox-blur')
+}))
+
+test('native events', shot(async function* ({ $, page }) {
+  await subscribeToEvents(page, 'sinch-checkbox-change', 'sinch-checkbox-focus', 'sinch-checkbox-blur')
+
+  await $.focus()
+  await page.keyboard.press('Tab')
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-checkbox-focus', detail: null },
+    { type: 'sinch-checkbox-blur', detail: null },
+  ])
+
+  await $.click()
+  await $.click()
+
+  expect(
+    await getAllEvents(page)
+  ).toEqual([
+    { type: 'sinch-checkbox-focus', detail: null },
+    { type: 'sinch-checkbox-change', detail: true },
+    { type: 'sinch-checkbox-change', detail: false },
+  ])
+}))

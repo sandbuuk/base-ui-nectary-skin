@@ -8,13 +8,15 @@
     v-bind:disabled="isDisabled"
     v-bind:maxvisibleitems="maxVisibleItems"
     :value="value"
-    @change="onChange">
+    @change="onChange"
+    @focusin="onFocus"
+    @focusout="onBlur">
     <sinch-input-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-input-tooltip>
     <sinch-select-option value="1" text="Option 1 value" slot="select">
-      <sinch-icon-share/>
+      <sinch-icon-share slot="icon"/>
     </sinch-select-option>
     <sinch-select-option value="2" text="Option 2 value" slot="select" disabled>
-      <sinch-icon-share/>
+      <sinch-icon-share slot="icon"/>
     </sinch-select-option>
     <sinch-select-option value="3" text="Option 3 value" slot="select"/>
     <sinch-select-option value="4" text="Option 4 value" slot="select"/>
@@ -27,7 +29,14 @@ export default {
     onChange(e) {
       if (this.isControlled) {
         this.value = e.detail
+        window.dispatchEvent(new CustomEvent('sinch-select-change', {detail: e.detail}))
       }
+    },
+    onFocus() {
+      window.dispatchEvent(new CustomEvent('sinch-select-focus'))
+    },
+    onBlur() {
+      window.dispatchEvent(new CustomEvent('sinch-select-blur'))
     }
   },
   props: {

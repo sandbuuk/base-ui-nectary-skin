@@ -3,9 +3,12 @@
     v-bind:type="type"
     v-bind:text="text"
     v-bind:disabled="isDisabled"
-    v-bind:small="isSmall">
-    <sinch-icon-share v-if="hasIcon" v-bind:size="isSmall ? 12 : 18"></sinch-icon-share>
-    <sinch-spinner v-if="hasSpinner" static v-bind:type="isSmall ? 'small' : 'medium'"></sinch-spinner>
+    v-bind:small="isSmall"
+    @click="onClick"
+    @focusin="onFocus"
+    @focusout="onBlur">
+    <sinch-icon-share v-if="hasIcon" v-bind:size="isSmall ? 12 : 18" slot="icon"></sinch-icon-share>
+    <sinch-spinner v-if="hasSpinner" static v-bind:type="isSmall ? 'small' : 'medium'" slot="icon"></sinch-spinner>
   </sinch-button>
 </template>
 
@@ -13,6 +16,17 @@
 export default {
   props: {
     search: URLSearchParams
+  },
+  methods: {
+    onClick() {
+      window.dispatchEvent(new CustomEvent('sinch-button-click'))
+    },
+    onFocus() {
+      window.dispatchEvent(new CustomEvent('sinch-button-focus'))
+    },
+    onBlur() {
+      window.dispatchEvent(new CustomEvent('sinch-button-blur'))
+    }
   },
   computed: {
     type() {

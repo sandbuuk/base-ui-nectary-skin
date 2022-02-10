@@ -3,16 +3,49 @@
     v-bind:type="type"
     v-bind:text="text"
     v-bind:title="title"
-    v-bind:actiontext="actionText"
-    v-bind:dismissable="isDismissable"
-    v-bind:multiline="isMultiline"
-></sinch-alert>
+    v-bind:multiline="isMultiline">
+  <sinch-alert-close
+    slot="close"
+    v-if="isDismissable"
+    @click="onCloseClick"
+    @focusin="onCloseFocus"
+    @focusout="onCloseBlur">
+  </sinch-alert-close>
+  <sinch-alert-button
+    slot="button"
+    v-if="actionText != null"
+    v-bind:text="actionText"
+    @click="onButtonClick"
+    @focusin="onButtonFocus"
+    @focusout="onButtonBlur">
+  </sinch-alert-button>
+</sinch-alert>
 </template>
 
 <script>
 export default {
   props: {
     search: URLSearchParams
+  },
+  methods: {
+    onCloseClick() {
+      window.dispatchEvent(new CustomEvent('sinch-alert-close-click'))
+    },
+    onCloseFocus() {
+      window.dispatchEvent(new CustomEvent('sinch-alert-close-focus'))
+    },
+    onCloseBlur() {
+      window.dispatchEvent(new CustomEvent('sinch-alert-close-blur'))
+    },
+    onButtonClick() {
+      window.dispatchEvent(new CustomEvent('sinch-alert-button-click'))
+    },
+    onButtonFocus() {
+      window.dispatchEvent(new CustomEvent('sinch-alert-button-focus'))
+    },
+    onButtonBlur() {
+      window.dispatchEvent(new CustomEvent('sinch-alert-button-blur'))
+    }
   },
   computed: {
     text() {

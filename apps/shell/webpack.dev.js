@@ -2,6 +2,7 @@ const path = require('path')
 const { MFLiveReloadPlugin } = require('@module-federation/fmr')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const apps = require('./apps.dev.json')
 
 const CONTAINER = 'Shell'
 const PORT = 3000
@@ -67,7 +68,12 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: PORT,
-    // open: true
+    allowedHosts: ['.sinch.com', 'localhost'],
+    // open: true,
+    static: {
+      directory: path.resolve(__dirname, 'public'),
+      publicPath: '/',
+    },
     historyApiFallback: true,
   },
   watch: false,
@@ -78,29 +84,9 @@ module.exports = {
     }),
     new ModuleFederationPlugin({
       name: CONTAINER,
-      remotes: {
-        Quickstarts: `Quickstarts@//${process.env.REMOTE_QUICKSTARTS}/remoteEntry.js`,
-      },
+      remotes: apps,
       shared: {
         '@nectary/components/theme.css': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/button': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/input': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/input-tooltip': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/select': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/select-option': {
-          requiredVersion: '*',
-        },
-        '@nectary/components/textarea': {
           requiredVersion: '*',
         },
         react: {

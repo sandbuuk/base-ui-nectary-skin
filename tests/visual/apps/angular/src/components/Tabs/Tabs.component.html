@@ -1,0 +1,9 @@
+<sinch-tabs [value]="value" (change)="onChange($event)">
+  <sinch-tabs-option
+    *ngFor="let opt of options"
+    [value]="opt.value"
+    [text]="opt.text"
+    [disabled]="opt.disabled">
+    <sinch-icon-share *ngIf="opt.icon != null" slot="icon"></sinch-icon-share>
+  </sinch-tabs-option>
+</sinch-tabs>

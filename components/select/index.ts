@@ -1,9 +1,9 @@
+import { isSelectOptionElement } from '../select-option'
 import {
   attrValueToPixels,
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getEventHandler,
   getIntegerAttribute,
   isAttrTrue,
   updateAttribute,
@@ -11,26 +11,22 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import '../select-option'
 import type { TSinchElementReact } from '../types'
+import type { FocusEvent, SyntheticEvent } from 'react'
 
 type TSinchSelectOption = HTMLElementTagNameMap['sinch-select-option']
 
 const ITEM_HEIGHT = 36
 
-const isOptionElement = (element: EventTarget | Element | null): element is TSinchSelectOption => {
-  return element instanceof Element && element.tagName === 'SINCH-SELECT-OPTION'
-}
-
 const getEnabledOptionElements = ($slot: HTMLSlotElement): TSinchSelectOption[] => {
-  return $slot.assignedElements().filter((opt) => isOptionElement(opt) && opt.disabled !== true) as TSinchSelectOption[]
+  return $slot.assignedElements().filter((opt) => isSelectOptionElement(opt) && opt.disabled !== true) as TSinchSelectOption[]
 }
 const findSelectedOption = (elements: readonly TSinchSelectOption[]) => {
   return elements.find((el) => el.selected) ?? null
 }
 const getOptionWithValue = ($slot: HTMLSlotElement, value: string): TSinchSelectOption | null => {
   for (const $option of $slot.assignedElements()) {
-    if (isOptionElement($option) && $option.disabled !== true && $option.value === value) {
+    if (isSelectOptionElement($option) && $option.disabled !== true && $option.value === value) {
       return $option
     }
   }
@@ -40,7 +36,7 @@ const getOptionWithValue = ($slot: HTMLSlotElement, value: string): TSinchSelect
 
 const getFirstOption = ($slot: HTMLSlotElement) => {
   for (const $option of $slot.assignedElements()) {
-    if (isOptionElement($option) && $option.disabled !== true) {
+    if (isSelectOptionElement($option) && $option.disabled !== true) {
       return $option
     }
   }
@@ -50,7 +46,7 @@ const getFirstOption = ($slot: HTMLSlotElement) => {
 
 const getLastOption = ($slot: HTMLSlotElement) => {
   for (const $option of $slot.assignedElements().reverse()) {
-    if (isOptionElement($option) && $option.disabled !== true) {
+    if (isSelectOptionElement($option) && $option.disabled !== true) {
       return $option
     }
   }
@@ -84,24 +80,23 @@ const getPrevOption = ($slot: HTMLSlotElement) => {
 
 const selectOption = ($slot: HTMLSlotElement, $option: TSinchSelectOption | null) => {
   for (const $op of $slot.assignedElements()) {
-    if (isOptionElement($op)) {
+    if (isSelectOptionElement($op)) {
       const isSelected = $op === $option
 
       // Select / Unselect
       $op.selected = isSelected
 
       if (isSelected) {
-        $op.scrollIntoView({ block: 'nearest' })
+        $op.scrollIntoView?.({ block: 'nearest' })
       }
     }
   }
 }
 
-const dispatchChangeEvent = ($root: HTMLElement, $opt: TSinchSelectOption | null) => {
-  if ($opt != null) {
-    getEventHandler($root, 'onChange')?.($opt.value)
+const dispatchChangeEvent = ($root: TSinchSelectElement, $opt: TSinchSelectOption | null) => {
+  if ($opt != null && $root.value !== $opt.value) {
     $root.dispatchEvent(
-      new CustomEvent('change', { detail: $opt.value })
+      new CustomEvent('change', { detail: $opt.value, bubbles: true })
     )
   }
 }
@@ -111,14 +106,14 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-select', class extends HTMLElement {
-  $button: HTMLButtonElement
-  $buttonContent: HTMLSpanElement
-  $label: HTMLLabelElement
-  $optionalText: HTMLSpanElement
-  $additionalText: HTMLSpanElement
-  $invalidText: HTMLSpanElement
-  $selectSlot: HTMLSlotElement
-  $listbox: HTMLUListElement
+  #$button: HTMLButtonElement
+  #$buttonContent: HTMLSpanElement
+  #$label: HTMLLabelElement
+  #$optionalText: HTMLSpanElement
+  #$additionalText: HTMLSpanElement
+  #$invalidText: HTMLSpanElement
+  #$selectSlot: HTMLSlotElement
+  #$listbox: HTMLUListElement
 
   constructor() {
     super()
@@ -130,38 +125,34 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$button = shadowRoot.querySelector('#button')!
-    this.$buttonContent = shadowRoot.querySelector('#content')!
-    this.$listbox = shadowRoot.querySelector('#listbox')!
-    this.$label = shadowRoot.querySelector('#label')!
-    this.$optionalText = shadowRoot.querySelector('#optional')!
-    this.$additionalText = shadowRoot.querySelector('#additional')!
-    this.$invalidText = shadowRoot.querySelector('#invalid')!
-    this.$selectSlot = shadowRoot.querySelector('slot[name="select"]')!
+    this.#$button = shadowRoot.querySelector('#button')!
+    this.#$buttonContent = shadowRoot.querySelector('#content')!
+    this.#$listbox = shadowRoot.querySelector('#listbox')!
+    this.#$label = shadowRoot.querySelector('#label')!
+    this.#$optionalText = shadowRoot.querySelector('#optional')!
+    this.#$additionalText = shadowRoot.querySelector('#additional')!
+    this.#$invalidText = shadowRoot.querySelector('#invalid')!
+    this.#$selectSlot = shadowRoot.querySelector('slot[name="select"]')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'listbox')
 
-    this.$button.addEventListener('click', this.onButtonClick)
-    this.addEventListener('focus', this.onInputFocus)
-    this.addEventListener('blur', this.onInputBlur)
-    this.$listbox.addEventListener('blur', this.onListboxBlur)
-    this.$listbox.addEventListener('click', this.onListboxClick)
-    this.$listbox.addEventListener('keydown', this.onListboxKeyDown)
-    this.$listbox.addEventListener('keypress', this.onListboxKeyUp)
-    this.$selectSlot.addEventListener('slotchange', this.onSlotChange)
+    this.#$button.addEventListener('click', this.#onButtonClick)
+    this.#$listbox.addEventListener('blur', this.#onListboxBlur)
+    this.#$listbox.addEventListener('click', this.#onListboxClick)
+    this.#$listbox.addEventListener('keydown', this.#onListboxKeyDown)
+    this.#$listbox.addEventListener('keypress', this.#onListboxKeyUp)
+    this.#$selectSlot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   disconnectedCallback() {
-    this.$button.removeEventListener('click', this.onButtonClick)
-    this.removeEventListener('focus', this.onInputFocus)
-    this.removeEventListener('blur', this.onInputBlur)
-    this.$listbox.removeEventListener('blur', this.onListboxBlur)
-    this.$listbox.removeEventListener('click', this.onListboxClick)
-    this.$listbox.removeEventListener('keydown', this.onListboxKeyDown)
-    this.$listbox.removeEventListener('keypress', this.onListboxKeyUp)
-    this.$selectSlot.removeEventListener('slotchange', this.onSlotChange)
+    this.#$button.removeEventListener('click', this.#onButtonClick)
+    this.#$listbox.removeEventListener('blur', this.#onListboxBlur)
+    this.#$listbox.removeEventListener('click', this.#onListboxClick)
+    this.#$listbox.removeEventListener('keydown', this.#onListboxKeyDown)
+    this.#$listbox.removeEventListener('keypress', this.#onListboxKeyUp)
+    this.#$selectSlot.removeEventListener('slotchange', this.#onSlotChange)
   }
 
   static get observedAttributes() {
@@ -176,6 +167,10 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     ]
   }
 
+  get nodeName() {
+    return 'select'
+  }
+
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }
@@ -184,12 +179,12 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return getAttribute(this, 'value', '')
   }
 
-  set placeholder(value: string | undefined) {
+  set placeholder(value: string | null) {
     updateAttribute(this, 'placeholder', value)
   }
 
   get placeholder() {
-    return getAttribute(this, 'placeholder')
+    return getAttribute(this, 'placeholder', null)
   }
 
   set label(value: string) {
@@ -200,28 +195,28 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return getAttribute(this, 'label', '')
   }
 
-  set optionalText(value: string | undefined) {
+  set optionalText(value: string | null) {
     updateAttribute(this, 'optionaltext', value)
   }
 
   get optionalText() {
-    return getAttribute(this, 'optionaltext')
+    return getAttribute(this, 'optionaltext', null)
   }
 
-  set additionalText(value: string | undefined) {
+  set additionalText(value: string | null) {
     updateAttribute(this, 'additionaltext', value)
   }
 
   get additionalText() {
-    return getAttribute(this, 'additionaltext')
+    return getAttribute(this, 'additionaltext', null)
   }
 
-  set invalidText(value: string | undefined) {
+  set invalidText(value: string | null) {
     updateAttribute(this, 'invalidtext', value)
   }
 
   get invalidText() {
-    return getAttribute(this, 'placeholder')
+    return getAttribute(this, 'placeholder', null)
   }
 
   set disabled(isDisabled: boolean) {
@@ -232,12 +227,12 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set maxVisibleItems(value: number | undefined) {
+  set maxVisibleItems(value: number | null) {
     updateIntegerAttribute(this, 'maxvisibleitems', value)
   }
 
   get maxVisibleItems() {
-    return getIntegerAttribute(this, 'maxvisibleitems', 0)!
+    return getIntegerAttribute(this, 'maxvisibleitems', null)
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -255,34 +250,34 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       }
 
       case 'label': {
-        this.$label.textContent = newVal
+        this.#$label.textContent = newVal
         updateAttribute(this, 'aria-label', newVal ?? '')
 
         break
       }
 
       case 'optionaltext': {
-        this.$optionalText.textContent = newVal
+        this.#$optionalText.textContent = newVal
 
         break
       }
 
       case 'additionaltext': {
-        this.$additionalText.textContent = newVal
+        this.#$additionalText.textContent = newVal
 
         break
       }
 
       case 'invalidtext': {
-        this.$invalidText.textContent = newVal
+        this.#$invalidText.textContent = newVal
 
         break
       }
 
       case 'disabled': {
-        this.$button.disabled = isAttrTrue(newVal)
+        this.#$button.disabled = isAttrTrue(newVal)
 
-        if (this.$button.disabled) {
+        if (this.#$button.disabled) {
           this.onCollapse()
         }
 
@@ -290,7 +285,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       }
 
       case 'maxvisibleitems': {
-        const $list = (this.$listbox.firstElementChild as HTMLElement)
+        const $list = (this.#$listbox.firstElementChild as HTMLElement)
 
         $list.style.maxHeight = attrValueToPixels(newVal, { min: 2, multiplier: ITEM_HEIGHT })
 
@@ -299,92 +294,92 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     }
   }
 
-  onButtonClick = (e: Event) => {
+  #onButtonClick = (e: Event) => {
     e.stopPropagation()
 
-    if (this.$button.getAttribute('aria-expanded') !== 'true') {
+    if (this.#$button.getAttribute('aria-expanded') !== 'true') {
       this.onExpand()
     }
   }
 
-  onListboxClick = (e: Event) => {
+  #onListboxClick = (e: Event) => {
     e.stopPropagation()
 
     const $elem = e.target
 
-    if ($elem !== this.$listbox && isOptionElement($elem) && $elem.disabled !== true) {
+    if ($elem !== this.#$listbox && isSelectOptionElement($elem) && $elem.disabled !== true) {
       dispatchChangeEvent(this, $elem)
     }
 
     this.onCollapse()
-    this.$button.focus()
+    this.#$button.focus()
   }
 
-  onListboxKeyUp = (e: KeyboardEvent) => {
+  #onListboxKeyUp = (e: KeyboardEvent) => {
     switch (e.code) {
       case 'Space':
       case 'Enter': {
         e.preventDefault()
-        dispatchChangeEvent(this, findSelectedOption(getEnabledOptionElements(this.$selectSlot)))
+        dispatchChangeEvent(this, findSelectedOption(getEnabledOptionElements(this.#$selectSlot)))
         this.onCollapse()
-        this.$button.focus()
+        this.#$button.focus()
 
         break
       }
     }
   }
 
-  onListboxKeyDown = (e: KeyboardEvent) => {
+  #onListboxKeyDown = (e: KeyboardEvent) => {
     switch (e.code) {
       case 'ArrowUp':
       case 'ArrowLeft': {
         e.preventDefault()
-        selectOption(this.$selectSlot, getPrevOption(this.$selectSlot))
+        selectOption(this.#$selectSlot, getPrevOption(this.#$selectSlot))
 
         break
       }
       case 'ArrowDown':
       case 'ArrowRight': {
         e.preventDefault()
-        selectOption(this.$selectSlot, getNextOption(this.$selectSlot))
+        selectOption(this.#$selectSlot, getNextOption(this.#$selectSlot))
 
         break
       }
       case 'Escape': {
         e.preventDefault()
         this.onCollapse()
-        this.$button.focus()
+        this.#$button.focus()
 
         break
       }
     }
   }
 
-  onSlotChange = () => {
+  #onSlotChange = () => {
     this.onCollapse()
     this.onValueChange(this.value)
   }
 
-  onListboxBlur = (e: Event) => {
+  #onListboxBlur = (e: Event) => {
     e.stopPropagation()
     this.onCollapse()
   }
 
   onExpand() {
-    this.$button.setAttribute('aria-expanded', 'true')
-    this.$listbox.focus()
-    selectOption(this.$selectSlot, getOptionWithValue(this.$selectSlot, this.value) ?? getFirstOption(this.$selectSlot))
+    this.#$button.setAttribute('aria-expanded', 'true')
+    this.#$listbox.focus()
+    selectOption(this.#$selectSlot, getOptionWithValue(this.#$selectSlot, this.value) ?? getFirstOption(this.#$selectSlot))
   }
 
   onCollapse() {
-    this.$button.setAttribute('aria-expanded', 'false')
+    this.#$button.setAttribute('aria-expanded', 'false')
   }
 
   onValueChange(value: string) {
     let $checkedOption: TSinchSelectOption | null = null
 
-    for (const $option of this.$selectSlot.assignedElements()) {
-      if (isOptionElement($option)) {
+    for (const $option of this.#$selectSlot.assignedElements()) {
+      if (isSelectOptionElement($option)) {
         const isChecked = $checkedOption === null && $option.disabled !== true && $option.value === value
 
         // Check / Uncheck options
@@ -392,7 +387,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
         if (isChecked) {
           $checkedOption = $option
-          this.$listbox.setAttribute('aria-activedescendant', $option.id)
+          this.#$listbox.setAttribute('aria-activedescendant', $option.id)
         }
       }
     }
@@ -403,53 +398,45 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
   updateButtonContent($option: TSinchSelectOption | null) {
     // Remove icon element
-    if (this.$button.firstElementChild !== this.$buttonContent) {
-      this.$button.removeChild(this.$button.firstElementChild!)
+    if (this.#$button.firstElementChild !== this.#$buttonContent) {
+      this.#$button.removeChild(this.#$button.firstElementChild!)
     }
 
     if ($option === null) {
-      this.$button.setAttribute('data-unselected', '')
-      this.$buttonContent.textContent = this.placeholder ?? ''
+      this.#$button.setAttribute('data-unselected', '')
+      this.#$buttonContent.textContent = this.placeholder ?? ''
     } else {
-      this.$button.removeAttribute('data-unselected')
-      this.$buttonContent.textContent = $option.text
+      this.#$button.removeAttribute('data-unselected')
+      this.#$buttonContent.textContent = $option.text
 
       // Try adding icon
-      const $icon = $option.shadowRoot!.querySelector('slot')?.assignedElements()[0]?.cloneNode(true)
+      const $icon = $option.icon?.cloneNode(true)
 
       if ($icon != null) {
-        this.$button.prepend($icon)
+        this.#$button.prepend($icon)
       }
     }
   }
 
   focus() {
-    this.$button.focus()
+    this.#$button.focus()
   }
 
   blur() {
-    this.$button.blur()
-    this.$listbox.blur()
-  }
-
-  onInputFocus = () => {
-    getEventHandler(this, 'onFocus')?.()
-  }
-
-  onInputBlur = () => {
-    getEventHandler(this, 'onBlur')?.()
+    this.#$button.blur()
+    this.#$listbox.blur()
   }
 })
 
 type TSinchSelectElement = HTMLElement & {
   value: string,
   label: string,
-  placeholder?: string,
-  optionalText?: string,
-  invalidText?: string,
-  additionalText?: string,
+  placeholder: string | null,
+  optionalText: string | null,
+  invalidText: string | null,
+  additionalText: string | null,
   disabled: boolean,
-  maxVisibleItems: number,
+  maxVisibleItems: number | null,
   focus(): void,
   blur(): void,
 }
@@ -463,9 +450,9 @@ type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
   additionalText?: string,
   disabled?: boolean,
   maxVisibleItems?: number,
-  onChange: (value: string) => void,
-  onFocus?: () => void,
-  onBlur?: () => void,
+  onChange: (e: SyntheticEvent<TSinchSelectElement, CustomEvent<string>>) => void,
+  onFocus?: (e: FocusEvent<TSinchSelectElement>) => void,
+  onBlur?: (e: FocusEvent<TSinchSelectElement>) => void,
 }
 
 declare global {
