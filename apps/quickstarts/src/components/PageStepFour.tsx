@@ -297,7 +297,7 @@ export const PageStepFour: FC = () => {
 
   const { accountId } = usePageOneControl()
 
-  const { token } = usePageOneControl()
+  //const { token } = usePageOneControl()
 
   const validateEmail = (email: String) => {
     return String(email)
@@ -383,9 +383,9 @@ export const PageStepFour: FC = () => {
     const config = { headers: { 'Content-Type': 'application/json' } }
 
     if (accountId.length > 0) {
-      const response = await axios.put(url, content, config)
+      const response = await axios.post(url, content, config)
 
-      if (typeof (response.data.info) != 'undefined') {
+      if (typeof (response.data.message) != 'undefined') {
         setIserror(true)
       } else {
         console.log(response)
@@ -401,30 +401,29 @@ export const PageStepFour: FC = () => {
     handleBack()
   }
 
-  if (token.length >= 0) {
-    return (
-      <div className={styles.pageWhatsapp}>
-        <div className={styles.mainBodyWhatsapp}>
-          <div className={styles.botwhatsappHeading}>
-            <div className={styles.botwhatsappMatter}>
-              <h2 className={styles.botwhatsappMatterHeading}>
-                Human Handover
-              </h2>
-              <p className={styles.botwhatsappMatterBody}>
-                Configure the messages that are displayed on the conversation
-              </p>
-            </div>
-            <div className={styles.botpageSteps}><PageSteps/></div>
+  return (
+    <div className={styles.pageWhatsapp}>
+      <div className={styles.mainBodyWhatsapp}>
+        <div className={styles.botwhatsappHeading}>
+          <div className={styles.botwhatsappMatter}>
+            <h2 className={styles.botwhatsappMatterHeading}>
+              Human Handover
+            </h2>
+            <p className={styles.botwhatsappMatterBody}>
+              Configure the messages that are displayed on the conversation
+            </p>
+          </div>
+          <div className={styles.botpageSteps}><PageSteps/></div>
 
-            <div className={styles.chatlayerLogo}>
-              <div className="empty"/>
-              <div className="actualLogo">
-                <p className={styles.poweredBy}>Powered By:</p>
-                <img className={styles.chatLayer} src={contactlogo}/>
-              </div>
+          <div className={styles.chatlayerLogo}>
+            <div className="empty"/>
+            <div className="actualLogo">
+              <p className={styles.poweredBy}>Powered By:</p>
+              <img className={styles.chatLayer} src={contactlogo}/>
             </div>
           </div>
-          {/* <div className={styles.whatsappHeading}>
+        </div>
+        {/* <div className={styles.whatsappHeading}>
             <div className={styles.whatsappMatter}>
               <h2 className={styles.whatsappMatterHeading}>Human Handover</h2>
               <p className={styles.whatsappMatterBody}>
@@ -441,40 +440,40 @@ export const PageStepFour: FC = () => {
               </div>
             </div>
           </div> */}
-          <div className={styles.botwhatsappBody}>
-            <div className={styles.messagesParent}>
-              <div className={styles.humanMessages}>
-                { <WhatsappQuestion setActiveelement={setActiveelement} activeelement={activeelement} setDisplay={setDisplay} questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={count} i={count}/>}
-                <div className={styles.humanButton}>
-                  <sinch-button
-                    style={{ width: '100%' }}
-                    type="cta"
-                    disabled={questionCounter > 5 || agentdetails[Object.keys(agentdetails).length - 1].name.length <= 0 || agentdetails[Object.keys(agentdetails).length - 1].email.length <= 0 || validateEmail(agentdetails[Object.keys(agentdetails).length - 1].email) == null ? true : undefined}
-                    onClick={buttonCounter}
-                    text={questionCounter <= 5 ? `Add more Agents (Up to ${6 - questionCounter} )` : 'Add more Agents (Up to 0)'}
-                  />
-                </div>
-                <table className={styles.humanDetails}>
-                  <thead>
-                    <tr className={count > 0 ? styles.human : styles.humanhidden}>
-                      <th className={styles.humanName}>
-                        Name
-                      </th>
-                      <th className={styles.humanEmail}>
-                        E-mail
-                      </th>
-                      <th className={styles.humanAction}>
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <AgentInformation key={Math.random()} agentdetails={agentdetails} setAgentdetails={setAgentdetails}/>
-                  </tbody>
-                </table>
+        <div className={styles.botwhatsappBody}>
+          <div className={styles.messagesParent}>
+            <div className={styles.humanMessages}>
+              { <WhatsappQuestion setActiveelement={setActiveelement} activeelement={activeelement} setDisplay={setDisplay} questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={count} i={count}/>}
+              <div className={styles.humanButton}>
+                <sinch-button
+                  style={{ width: '100%' }}
+                  type="cta"
+                  disabled={questionCounter > 5 || agentdetails[Object.keys(agentdetails).length - 1].name.length <= 0 || agentdetails[Object.keys(agentdetails).length - 1].email.length <= 0 || validateEmail(agentdetails[Object.keys(agentdetails).length - 1].email) == null ? true : undefined}
+                  onClick={buttonCounter}
+                  text={questionCounter <= 5 ? `Add more Agents (Up to ${6 - questionCounter} )` : 'Add more Agents (Up to 0)'}
+                />
               </div>
-              <img className={styles.humanLine} src={verticalLine}/>
-              <div className={styles.humanHandover}>
+              <table className={styles.humanDetails}>
+                <thead>
+                  <tr className={count > 0 ? styles.human : styles.humanhidden}>
+                    <th className={styles.humanName}>
+                      Name
+                    </th>
+                    <th className={styles.humanEmail}>
+                      E-mail
+                    </th>
+                    <th className={styles.humanAction}>
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <AgentInformation key={Math.random()} agentdetails={agentdetails} setAgentdetails={setAgentdetails}/>
+                </tbody>
+              </table>
+            </div>
+            <img className={styles.humanLine} src={verticalLine}/>
+            <div className={styles.humanHandover}>
                     <sinch-textarea // eslint-disable-line
                       value={humanhandover}
                       label="Human Handover Message"
@@ -494,59 +493,54 @@ export const PageStepFour: FC = () => {
                       }}
                       onBlur={() => {}}
                     />
-              </div>
-              <div className={styles.botpreviewHuman}>
-                <div style={{ backgroundImage: `url(${mobile})` }} className={styles.botImage}>
-                  <div className={styles.messagesBot}>
-                    <div className={greetingmsg.length > 0 ? styles.botMessage : styles.hide}>
-                      {greetingmsg}
-                    </div>
-                    <div className={greetingmsg.length > 0 ? styles.userMessage : styles.hide}>
-                      User greeting
-                    </div>
-                    {[...Array(Object.keys(botquestion).length)].map((_, i) => {
-                      return (
-                        <>
-                          <div
-                            key={`${i}bot`}
-                            className={styles.botMessage}
-                          >
-                            {botquestion[i]}
-                          </div>
-                          <div key={`${i}user`} className={styles.userMessage}>
-                            User Answer
-                          </div>
-                        </>
-                      )
-                    })}
-                    <div key={'humanhandovermessage'} className={humanhandover.length > 0 && activeelement != 'humanhandover' ? styles.botMessage : styles.hide}>
-                      {humanhandover}
-                    </div>
-
+            </div>
+            <div className={styles.botpreviewHuman}>
+              <div style={{ backgroundImage: `url(${mobile})` }} className={styles.botImage}>
+                <div className={styles.messagesBot}>
+                  <div className={greetingmsg.length > 0 ? styles.botMessage : styles.hide}>
+                    {greetingmsg}
+                  </div>
+                  <div className={greetingmsg.length > 0 ? styles.userMessage : styles.hide}>
+                    User greeting
+                  </div>
+                  {[...Array(Object.keys(botquestion).length)].map((_, i) => {
+                    return (
+                      <>
+                        <div
+                          key={`${i}bot`}
+                          className={styles.botMessage}
+                        >
+                          {botquestion[i]}
+                        </div>
+                        <div key={`${i}user`} className={styles.userMessage}>
+                          User Answer
+                        </div>
+                      </>
+                    )
+                  })}
+                  <div key={'humanhandovermessage'} className={humanhandover.length > 0 && activeelement != 'humanhandover' ? styles.botMessage : styles.hide}>
+                    {humanhandover}
                   </div>
 
                 </div>
-                <div className={styles.emptyDiv}/>
-              </div>
-            </div>
-          </div>
 
-          <div className={styles.buttons}>
-            <div className={styles.backButhum}>
-              <sinch-button type="destructive" text="Back" onClick={prevPage}/>
-            </div>
-            <div className={styles.saveButhum}>
-              <sinch-button type="primary" text="Next" onClick={nextPage} disabled={Object.keys(agentdetails).length > 1 ? undefined : true}/>
+              </div>
+              <div className={styles.emptyDiv}/>
             </div>
           </div>
         </div>
-        <Dialog isOpen={isOpen} setIsOpen={setIsOpen}/>
-        <ErrorDialog iserror={iserror} setIserror={setIserror}/>
-      </div>
-    )
-  }
 
-  return (
-    <div>Sign in First</div>
+        <div className={styles.buttons}>
+          <div className={styles.backButhum}>
+            <sinch-button type="destructive" text="Back" onClick={prevPage}/>
+          </div>
+          <div className={styles.saveButhum}>
+            <sinch-button type="primary" text="Next" onClick={nextPage} disabled={Object.keys(agentdetails).length > 1 ? undefined : true}/>
+          </div>
+        </div>
+      </div>
+      <Dialog isOpen={isOpen} setIsOpen={setIsOpen}/>
+      <ErrorDialog iserror={iserror} setIserror={setIserror}/>
+    </div>
   )
 }
