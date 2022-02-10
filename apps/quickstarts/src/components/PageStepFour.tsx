@@ -175,6 +175,7 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      console.log(`Active elkement entante ${getActiveElement()?.className}`)
       setActiveelement(getActiveElement() == null ? '' : getActiveElement()!.className)
     }, 1000)
 
@@ -482,7 +483,6 @@ export const PageStepFour: FC = () => {
                       invalidText={undefined}
                       style={{ width: '100%' }}
                       class="humanhandover"
-                      additionalText={undefined}
                       disabled={undefined}
                       onChange={(e) => {
                         const value = e.nativeEvent.detail
