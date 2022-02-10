@@ -11,27 +11,62 @@ h2 {
 
 .congratsTitle{
    font: var(--sinch-font-title-2);
+   margin-top: 0%;
+   margin-bottom: 2%;
 }
+
+.errorTitle{
+   font: var(--sinch-font-title-2);
+   margin-top: 0%;
+   margin-bottom: 2%;
+}
+
+.congratsBody{
+   font: var(--sinch-font-title-2);
+   margin-top: 0%;
+   margin-left: 4%;
+   margin-bottom: 2%;
+}
+
+.errorBody{
+   font: var(--sinch-font-title-2);
+   margin-top: 0%;
+   margin-left: 4%;
+   margin-bottom: 2%;
+}
+
 .Congrats{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
-.congratsText{
+
+.Error{
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  width:800px;
-  margin-top: 0%;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
+
 .congratsimage{
-  width:120%;
-height: 120%;
-margin-bottom: 10%;
+  width:60%;
+  height: 60%;
+  margin-bottom: 5%;
 }
+
+.errorimage{
+  width:20%;
+  height: auto;
+  margin: 5%;
+  margin-bottom: 7%;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -48,6 +83,7 @@ margin-bottom: 10%;
   font-family: "Gilroy-Regular", sans-serif;
   flex: 8;
   background-color: white;
+  position: relative;
 }
 
 .page {
@@ -332,7 +368,68 @@ margin-bottom: 10%;
 .botpreview {
   display: flex;
   margin-right: 10%;
+  height: 100%;
   flex: 5;
+}
+
+.botpreviewHuman {
+  display: flex;
+  margin-right: 10%;
+  height: 100%;
+  flex: 4;
+}
+
+.botImage{
+  flex: 10;
+  display: flex;
+  position: relative;
+  z-index: 6;
+  background-size: cover;
+  height: 600px;
+  width:300px;
+  object-position: 100% 0;
+  background-repeat: no-repeat center center fixed;
+  -moz-background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+
+.messagesBot{
+  display: flex;
+  overflow-y: scroll;
+  width: 300px;
+  margin-top:50px;
+  height: 500px;
+  flex-direction: column;
+}
+
+.botMessage{
+  margin:20px;
+  border-radius: 10px;
+  padding: 10px;
+  max-width:70%;
+  min-width:50px;
+  background-color: #F1F3F4;
+  text-align: left;
+}
+
+.userMessage{
+  padding: 10px;
+  margin-left: auto;
+  margin-right: 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #CCE3E3;
+  max-width:70%;
+  min-width:50px;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+  text-align: right;
+}
+
+.emptyDiv{
+  flex: 3;
 }
 
 .messagesInput {
@@ -427,7 +524,8 @@ margin-bottom: 10%;
 }
 
 .botmobilegif {
-  height: 450px;
+  display: none;
+  height: auto;
   width: 250px;
   margin-top: 8%;
 }
@@ -473,10 +571,19 @@ margin-bottom: 10%;
   margin: 4%;
   margin-top: 0%;
 }
+.backButhum{
+  margin: 4%;
+  margin-top: 2%;
+}
 
 .saveBut {
   margin: 4%;
   margin-top: 0%;
+}
+
+.saveButhum{
+  margin: 4%;
+  margin-top: 2%;
 }
 
 .botbackBut {
@@ -830,6 +937,7 @@ flex: 4;
   flex: 4;
 }
 .humanDetailsbuttons{
+  margin:2%;
   display: flex;
   flex-direction: row;
 }
@@ -876,4 +984,18 @@ flex: 4;
 td{
   max-width: 100px;
   overflow-wrap: break-word;
+}
+
+.errorAlert{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.hiddenerrorAlert{
+  display: none;
+}
+
+.hide{
+  display: none;
 }
