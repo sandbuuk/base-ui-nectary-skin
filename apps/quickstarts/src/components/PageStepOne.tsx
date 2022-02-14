@@ -1,5 +1,6 @@
 //import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { TokenContext } from '../contexts'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
 import { usePageOneControl } from './PageStepOneContext'
@@ -205,24 +206,33 @@ export const PageStepOne: FC = () => {
   console.log(disabled)
 
   return (
-    <div className={styles.page}>
-      <div className={styles.parent}>
-        <div className={styles.signUp}>
-          <h2 className={styles.fontNameTitle}> Sign up to Sinch </h2>
-          <form className={styles.form}>
-            <sinch-input
-              className={styles.sinchInput}
-              value={email}
-              onChange={(e) => {
-                const value = e.nativeEvent.detail
+    <TokenContext.Consumer>{
+      (data) => {
+        if (data !== null) {
+          // data.token is what one would send for example in the `Authentication:` header when doing backend calls.
+          console.log('Here is the a small piece of the latest token inside the MFE!', data.token.substr(-10))
+          // @ts-ignore
+          console.log('Here is the username from the parsed token:', data.parsedToken.preferred_username)
 
-                setEmail(value)
-              }}
-              invalidText={emailInvalidtext.length > 0 ? emailInvalidtext : undefined}
-              label="E-mail"
-              placeholder="john.doe@gmail.com"
-            />
-            {/* <sinch-input
+          return (
+            <div className={styles.page}>
+              <div className={styles.parent}>
+                <div className={styles.signUp}>
+                  <h2 className={styles.fontNameTitle}> Sign up to Sinch </h2>
+                  <form className={styles.form}>
+                    <sinch-input
+                      className={styles.sinchInput}
+                      value={email}
+                      onChange={(e) => {
+                        const value = e.nativeEvent.detail
+
+                        setEmail(value)
+                      }}
+                      invalidText={emailInvalidtext.length > 0 ? emailInvalidtext : undefined}
+                      label="E-mail"
+                      placeholder="john.doe@gmail.com"
+                    />
+                    {/* <sinch-input
               value=""
               onChange={() => {
               }}
@@ -230,128 +240,138 @@ export const PageStepOne: FC = () => {
               placeholder="Placeholder"
               optionalText="8+ characters"
             /> */}
-            <sinch-input
-              value={firstName}
-              onChange={(e) => {
-                const value = e.nativeEvent.detail
+                    <sinch-input
+                      value={firstName}
+                      onChange={(e) => {
+                        const value = e.nativeEvent.detail
 
-                setFirstName(value)
-              }}
-              label="First Name"
-              invalidText={firstnameInvalidtext.length > 0 ? firstnameInvalidtext : undefined}
-              placeholder="John"
-            />
-            <sinch-input
-              value={lastName}
-              onChange={(e) => {
-                const value = e.nativeEvent.detail
+                        setFirstName(value)
+                      }}
+                      label="First Name"
+                      invalidText={firstnameInvalidtext.length > 0 ? firstnameInvalidtext : undefined}
+                      placeholder="John"
+                    />
+                    <sinch-input
+                      value={lastName}
+                      onChange={(e) => {
+                        const value = e.nativeEvent.detail
 
-                setLastName(value)
-              }}
-              invalidText={lastnameInvalidtext.length > 0 ? lastnameInvalidtext : undefined}
-              label="Last Name"
-              placeholder="Doe"
-            />
-            <sinch-select
-              placeholder="Select"
-              value={role}
-              onChange={(e) => {
-                const value = e.nativeEvent.detail
+                        setLastName(value)
+                      }}
+                      invalidText={lastnameInvalidtext.length > 0 ? lastnameInvalidtext : undefined}
+                      label="Last Name"
+                      placeholder="Doe"
+                    />
+                    <sinch-select
+                      placeholder="Select"
+                      value={role}
+                      onChange={(e) => {
+                        const value = e.nativeEvent.detail
 
-                setRole(value)
-              }}
-              invalidText={roleInvalidtext.length > 0 ? roleInvalidtext : undefined}
-              label="Your role"
-            >
-              <sinch-select-option
-                value="Software Engineer"
-                text="Software Engineer"
-                slot="select"
-              />
-              <sinch-select-option
-                value="Data Analyst"
-                text="Data Analyst"
-                slot="select"
-              />
-              <sinch-select-option
-                value="Product Manager"
-                text="Product Manager"
-                slot="select"
-              />
-              <sinch-select-option
-                value="Software Architect"
-                text="Software Architect"
-                slot="select"
-              />
-            </sinch-select>
-            <sinch-input
-              value={phoneNumber}
-              optionalText="ex: +55(11)91234-5678"
-              onChange={(e) => {
-                const value = e.nativeEvent.detail
+                        setRole(value)
+                      }}
+                      invalidText={roleInvalidtext.length > 0 ? roleInvalidtext : undefined}
+                      label="Your role"
+                    >
+                      <sinch-select-option
+                        value="Software Engineer"
+                        text="Software Engineer"
+                        slot="select"
+                      />
+                      <sinch-select-option
+                        value="Data Analyst"
+                        text="Data Analyst"
+                        slot="select"
+                      />
+                      <sinch-select-option
+                        value="Product Manager"
+                        text="Product Manager"
+                        slot="select"
+                      />
+                      <sinch-select-option
+                        value="Software Architect"
+                        text="Software Architect"
+                        slot="select"
+                      />
+                    </sinch-select>
+                    <sinch-input
+                      value={phoneNumber}
+                      optionalText="ex: +55(11)91234-5678"
+                      onChange={(e) => {
+                        const value = e.nativeEvent.detail
 
-                setphoneNumber(value)
-              }}
-              invalidText={phoneInvalidtext.length > 0 ? phoneInvalidtext : undefined}
-              label="Phone Number"
-              placeholder="0123456789"
-            />
-            <sinch-button
-              className={styles.createAcc}
-              type="cta"
-              disabled={disabled ? disabled : undefined} //{disabled ? undefined : false}
-              onClick={sendData}
-              text="Create Account"
-            />
-            <sinch-button
-              type="secondary"
-              style={{ marginTop: '3%' }}
-              onClick={() => {}}
-              text="Login"
-            />
-            <div className={styles.signupFG}>
-              <sinch-button
-                style={{ width: '100%' }}
-                type="secondary"
-                onClick={() => {}}
-                text="Signup with Google"
-              >
-                <img className={styles.googleImg} src={google}/>
-              </sinch-button>
-              <div className={styles.facebookSignup}>
-                <sinch-button
-                  style={{ width: '100%' }}
-                  type="secondary"
-                  onClick={() => {}}
-                  text="Signup with Facebook"
-                >
-                  <img className={styles.googleImg} src={facebook}/>
-                </sinch-button>
+                        setphoneNumber(value)
+                      }}
+                      invalidText={phoneInvalidtext.length > 0 ? phoneInvalidtext : undefined}
+                      label="Phone Number"
+                      placeholder="0123456789"
+                    />
+                    <sinch-button
+                      className={styles.createAcc}
+                      type="cta"
+                      disabled={disabled ? disabled : undefined} //{disabled ? undefined : false}
+                      onClick={sendData}
+                      text="Create Account"
+                    />
+                    <sinch-button
+                      type="secondary"
+                      style={{ marginTop: '3%' }}
+                      onClick={() => {}}
+                      text="Login"
+                    />
+                    <div className={styles.signupFG}>
+                      <sinch-button
+                        style={{ width: '100%' }}
+                        type="secondary"
+                        onClick={() => {}}
+                        text="Signup with Google"
+                      >
+                        <img className={styles.googleImg} src={google}/>
+                      </sinch-button>
+                      <div className={styles.facebookSignup}>
+                        <sinch-button
+                          style={{ width: '100%' }}
+                          type="secondary"
+                          onClick={() => {}}
+                          text="Signup with Facebook"
+                        >
+                          <img className={styles.googleImg} src={facebook}/>
+                        </sinch-button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div className={styles.rightSide}>
+                <div className={styles.nameAlogo}>
+                  <h1 className={styles.fontName}>Welcome to Sinch! </h1>
+                  <img src={sinchlogo} className={styles.sinchlogo}/>
+                </div>
+                <div className={styles.signupDescription}>
+                  <h3 className={styles.signupDescriptionText}>
+                    We help you deliver outstanding conversational customer experiences
+                  </h3>
+                </div>
+                <div className={styles.image}>
+                  <img src={signupimage} className={styles.signupImage}/>
+                </div>
+                <div className={iserror ? styles.errorAlert : styles.hiddenerrorAlert}>
+                  <sinch-alert
+                    type="error"
+                    text="Email already exists"
+                  />
+                </div>
               </div>
             </div>
-          </form>
-        </div>
-      </div>
-      <div className={styles.rightSide}>
-        <div className={styles.nameAlogo}>
-          <h1 className={styles.fontName}>Welcome to Sinch! </h1>
-          <img src={sinchlogo} className={styles.sinchlogo}/>
-        </div>
-        <div className={styles.signupDescription}>
-          <h3 className={styles.signupDescriptionText}>
-            We help you deliver outstanding conversational customer experiences
-          </h3>
-        </div>
-        <div className={styles.image}>
-          <img src={signupimage} className={styles.signupImage}/>
-        </div>
-        <div className={iserror ? styles.errorAlert : styles.hiddenerrorAlert}>
-          <sinch-alert
-            type="error"
-            text="Email already exists"
-          />
-        </div>
-      </div>
-    </div>
+          )
+        }
+
+        console.log('Currently we have no token. Are you logged in?')
+
+        return <div>Login First</div>
+      }
+    }
+    </TokenContext.Consumer>
+
   )
 }
