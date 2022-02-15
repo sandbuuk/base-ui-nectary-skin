@@ -1,10 +1,37 @@
-export type TEventHandler = (arg?: any) => void
+const nectaryDefinitions = new Map<string, CustomElementConstructor>()
+let nectaryRegistry: CustomElementRegistry | null = null
 
 export const defineCustomElement = (name: string, constructor: CustomElementConstructor): void => {
+  if (nectaryRegistry !== null) {
+    if (nectaryRegistry.get(name) == null) {
+      nectaryRegistry.define(name, constructor)
+    }
+
+    return
+  }
+
+  nectaryDefinitions.set(name, constructor)
+
   if (customElements.get(name) == null) {
     customElements.define(name, constructor)
   }
 }
+
+export const defineNectaryElements = (registry: CustomElementRegistry) => {
+  if (nectaryRegistry !== null) {
+    throw new Error('Nectary elements already registered')
+  }
+
+  nectaryRegistry = registry
+
+  for (const [name, ctor] of nectaryDefinitions.entries()) {
+    if (nectaryRegistry.get(name) == null) {
+      nectaryRegistry.define(name, ctor)
+    }
+  }
+}
+
+export type TEventHandler = (arg?: any) => void
 
 export const updateBooleanAttribute = ($element: Element, attrName: string, attrValue: boolean | null | undefined) => {
   if (attrValue === true) {

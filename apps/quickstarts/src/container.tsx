@@ -1,5 +1,6 @@
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
+import { defineNectaryElements } from '@nectary/components/utils'
 import { filterMessage, isData, isTokenMessage, listenToBus, tokenRequestMessage, sendMessageOnBus } from '@saas/bus'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { App } from './components/App'
@@ -23,7 +24,10 @@ template.innerHTML = `
 <div id="${appName}"></div>
 `
 
-const tokenOnly = (filterMessage(isTokenMessage))
+const tokenOnly = filterMessage(isTokenMessage)
+const customRegistry = new CustomElementRegistry()
+
+defineNectaryElements(customRegistry)
 
 class SinchReactApp extends HTMLElement {
   appElement: HTMLElement
@@ -34,7 +38,11 @@ class SinchReactApp extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'open' })
+    const shadowRoot = this.attachShadow({
+      mode: 'open',
+      // @ts-ignore
+      customElements: customRegistry,
+    })
 
     // StyleLoader style inject
     const stylesFrag = (document.head as any)[appName]
@@ -46,6 +54,7 @@ class SinchReactApp extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.appElement = shadowRoot.getElementById(appName)!
+    Object.defineProperty(this.appElement, 'ownerDocument', { value: shadowRoot })
 
     this.cache = createCache({
       key: 'css',
@@ -106,7 +115,7 @@ class SinchReactApp extends HTMLElement {
   }
 }
 
-global.customElements.define(appName, SinchReactApp)
+customElements.define(appName, SinchReactApp)
 
 type TSinchQuickstartsApp = {}
 
