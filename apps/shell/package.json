@@ -5,6 +5,7 @@
   "dependencies": {
     "@nectary/components": "*",
     "@saas/bus": "*",
+    "@webcomponents/scoped-custom-element-registry": "^0.0.4",
     "broadcastchannel-polyfill": "^1.0.1",
     "keycloak-js": "^16.1.0",
     "react": "^17.0.0",
@@ -23,5 +24,9 @@
     "mini-css-extract-plugin": "^2.4.5",
     "style-loader": "^3.3.1",
     "webpack": "^5.64.0"
+  },
+  "scripts": {
+    "start": "webpack serve --config webpack.dev.js",
+    "build": "webpack build --config webpack.prod.js --output-path dist"
   }
 }

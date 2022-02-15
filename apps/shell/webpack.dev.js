@@ -11,6 +11,7 @@ module.exports = {
   mode: 'development',
   entry: [
     require.resolve('broadcastchannel-polyfill'),
+    require.resolve('@webcomponents/scoped-custom-element-registry'),
     require.resolve('./src/index.ts'),
   ],
   output: {
@@ -29,6 +30,7 @@ module.exports = {
       },
       {
         test: /\.[jt]sx?$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
           babelrc: false,

@@ -31,6 +31,7 @@ module.exports = {
       },
       {
         test: /\.[jt]sx?$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
           babelrc: false,
