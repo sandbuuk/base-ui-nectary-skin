@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { TokenContext } from '../contexts'
 import { useOnBoardingControl } from './OnBoardingcontext'
 import styles from './Page.module.css'
@@ -281,6 +281,7 @@ const AgentInformation = (props: AgentInformationProps) => {
 
 export const PageStepFour: FC = () => {
   //const { next } = usePageControl()
+  const token = useContext(TokenContext)
 
   const [agentdetails, setAgentdetails] = useState([{ name: '', email: '' }])
 
@@ -381,7 +382,7 @@ export const PageStepFour: FC = () => {
       agents,
     })
     const url = 'https://quickstart.default.labengage.sinch.com/configuration'
-    const config = { headers: { 'Content-Type': 'application/json' } }
+    const config = { headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token?.token}` } }
 
     if (accountId.length > 0) {
       const response = await axios.post(url, content, config)

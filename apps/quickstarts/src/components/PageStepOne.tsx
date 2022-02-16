@@ -1,5 +1,5 @@
 //import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { TokenContext } from '../contexts'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
@@ -14,6 +14,7 @@ import '@nectary/components/select'
 
 export const PageStepOne: FC = () => {
   const { next } = usePageControl()
+  const token = useContext(TokenContext)
 
   const [email, setEmail] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -98,6 +99,11 @@ export const PageStepOne: FC = () => {
     if (validateInputs()) {
       const res = await fetch('https://quickstart.default.labengage.sinch.com/account', {
         method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token?.token}`,
+        },
         body: JSON.stringify({ email, firstName, phoneNumber, lastName, role }),
       })
       const k = await res.json()
