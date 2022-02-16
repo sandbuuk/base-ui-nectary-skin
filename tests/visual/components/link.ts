@@ -6,7 +6,7 @@ const withNarrowWidth = makeScreenshotTests('/link?width=110&text=Anchor%20text%
 const withExternalDisabled = makeScreenshotTests('/link?text=Anchor%20text&href=url&disabled=true&external=true', 'sinch-link')
 const withExternal = makeScreenshotTests('/link?text=Anchor%20text&href=url&external=true', 'sinch-link')
 
-test.only('external property', shot(async function* ({ $eval, page }) {
+test('external property', shot(async function* ({ $eval, page }) {
   await $eval((el) => {
     el.external = true
   })
@@ -17,14 +17,14 @@ test.only('external property', shot(async function* ({ $eval, page }) {
   yield { name: 'off', include: [page.locator('#link-wrapper')] }
 }))
 
-test.only('external attribute', shot(async function* ({ $eval, page }) {
+test('external attribute', shot(async function* ({ $eval, page }) {
   await $eval((el) => el.setAttribute('external', ''))
   yield { name: 'on', include: [page.locator('#link-wrapper')] }
   await $eval((el) => el.removeAttribute('external'))
   yield { name: 'off', include: [page.locator('#link-wrapper')] }
 }))
 
-test.only('disabled property', shot(async function* ({ $eval, page }) {
+test('disabled property', shot(async function* ({ $eval, page }) {
   await $eval((el) => {
     el.disabled = true
   })
@@ -35,18 +35,18 @@ test.only('disabled property', shot(async function* ({ $eval, page }) {
   yield { name: 'off', include: [page.locator('#link-wrapper')] }
 }))
 
-test.only('disabled attribute', shot(async function* ({ $eval, page }) {
+test('disabled attribute', shot(async function* ({ $eval, page }) {
   await $eval((el) => el.setAttribute('disabled', ''))
   yield { name: 'on', include: [page.locator('#link-wrapper')] }
   await $eval((el) => el.removeAttribute('disabled'))
   yield { name: 'off', include: [page.locator('#link-wrapper')] }
 }))
 
-test.only('external disabled', withExternalDisabled(async function* ({ page }) {
+test('external disabled', withExternalDisabled(async function* ({ page }) {
   yield { name: 'shot', include: [page.locator('#link-wrapper')] }
 }))
 
-test.only('text attribute', withExternal(async function* ({ $eval, page }) {
+test('text attribute', withExternal(async function* ({ $eval, page }) {
   await $eval((el) => el.setAttribute('text', 'Updated Anchor'))
   yield { name: 'updated', include: [page.locator('#link-wrapper')] }
 
@@ -54,7 +54,7 @@ test.only('text attribute', withExternal(async function* ({ $eval, page }) {
   yield { name: 'empty', include: [page.locator('#link-wrapper')] }
 }))
 
-test.only('text property', withExternal(async function* ({ $eval, page }) {
+test('text property', withExternal(async function* ({ $eval, page }) {
   await $eval((el) => {
     el.text = 'Updated Anchor'
   })
@@ -66,25 +66,25 @@ test.only('text property', withExternal(async function* ({ $eval, page }) {
   yield { name: 'empty', include: [page.locator('#link-wrapper')] }
 }))
 
-test.only('narrow', withNarrowWidth(async function* ({ page }) {
+test('narrow', withNarrowWidth(async function* ({ page }) {
   yield { name: 'shot', include: [page.locator('#link-wrapper')] }
 }))
 
-test.only('hover disabled', withExternalDisabled(async function* ({ $, page }) {
+test('hover disabled', withExternalDisabled(async function* ({ $, page }) {
   const rect = (await $.boundingBox())!
 
   await page.mouse.move(rect.x + 5, rect.y + 15)
   yield { name: 'shot', include: [page.locator('#link-wrapper')] }
 }))
 
-test.only('hover', withExternal(async function* ({ $, page }) {
+test('hover', withExternal(async function* ({ $, page }) {
   const rect = (await $.boundingBox())!
 
   await page.mouse.move(rect.x + 5, rect.y + 15)
   yield { name: 'shot', include: [page.locator('#link-wrapper')] }
 }))
 
-test.only('custom events', shot(async function* ({ $, page }) {
+test('custom events', shot(async function* ({ $, page }) {
   const testAnchor = testCustomEvent(page, $)
 
   await testAnchor('click', 'sinch-link-click')
@@ -92,7 +92,7 @@ test.only('custom events', shot(async function* ({ $, page }) {
   await testAnchor('focusout', 'sinch-link-blur')
 }))
 
-test.only('native events', shot(async function* ({ $, page }) {
+test('native events', shot(async function* ({ $, page }) {
   await subscribeToEvents(page, 'sinch-link-focus', 'sinch-link-blur', 'sinch-link-click')
   await $.focus()
   await page.keyboard.press('Tab')
