@@ -31,7 +31,7 @@ const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInf
     const platform = /(chromium|firefox|webkit)/.exec(result)![0]
 
     return result
-      .replace(/(-linux|-react|-vue|-angular|-chromium|-firefox|-webkit)/g, '')
+      .replace(/(-linux|-darwin|-react|-vue|-angular|-chromium|-firefox|-webkit)/g, '')
       .replace('.ts-snapshots', `-screenshots/${platform}`)
   }
 
