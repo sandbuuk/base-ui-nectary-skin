@@ -4,6 +4,7 @@ import { Alert } from './components/Alert'
 import { Button } from './components/Button'
 import { Checkbox } from './components/Checkbox'
 import { Input } from './components/Input'
+import { Link } from './components/Link'
 import { Radio } from './components/Radio'
 import { Select } from './components/Select'
 import { Spinner } from './components/Spinner'
@@ -43,6 +44,12 @@ const mapElement = (url: URL) => {
     case '/input': {
       return (
         <Input search={url.searchParams}/>
+      )
+    }
+
+    case '/link': {
+      return (
+        <Link search={url.searchParams}/>
       )
     }
 

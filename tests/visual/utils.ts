@@ -31,7 +31,7 @@ const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInf
     const platform = /(chromium|firefox|webkit)/.exec(result)![0]
 
     return result
-      .replace(/(-linux|-react|-vue|-angular|-chromium|-firefox|-webkit)/g, '')
+      .replace(/(-linux|-darwin|-react|-vue|-angular|-chromium|-firefox|-webkit)/g, '')
       .replace('.ts-snapshots', `-screenshots/${platform}`)
   }
 
@@ -86,13 +86,9 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
           throw new Error('Cannot get locator bounding box')
         }
 
-        const matchScreenshot = () => page.screenshot({ clip }).then((sc) => expect(sc).toMatchSnapshot(screenshotName))
+        const sc = await page.screenshot({ clip })
 
-        try {
-          await matchScreenshot()
-        } catch {
-          await matchScreenshot()
-        }
+        expect(sc).toMatchSnapshot(screenshotName)
       }
     }
 

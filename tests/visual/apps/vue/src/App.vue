@@ -5,6 +5,7 @@
     <Button v-if="url.pathname === '/button'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
+    <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
     <Select v-if="url.pathname === '/select'" :search="url.searchParams"/>
     <Tabs v-if="url.pathname === '/tabs'" :search="url.searchParams"/>
@@ -23,6 +24,7 @@ import Alert from './components/Alert.vue'
 import Button from './components/Button.vue'
 import Checkbox from './components/Checkbox.vue'
 import Input from './components/Input.vue'
+import Link from './components/Link.vue'
 import Radio from './components/Radio.vue'
 import Select from './components/Select.vue'
 import Tabs from './components/Tabs.vue'
@@ -66,6 +68,7 @@ export default {
     Button,
     Checkbox,
     Input,
+    Link,
     Radio,
     Select,
     Tabs,

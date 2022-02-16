@@ -18,7 +18,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tag', class extends HTMLElement {
-  #$text: HTMLParagraphElement
+  #$text: HTMLSpanElement
 
   constructor() {
     super()
