@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useLogin } from '../../../shell/src/hooks/useLogin'
 import { TokenContext } from '../contexts'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
@@ -117,6 +118,7 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
 }
 
 export const PageStepThree: FC = () => {
+  const { login } = useLogin()
   const { botquestion, setBotquestion, greetingmsg, setGreetingmsg } = usePageThreeControl()
   const { next } = usePageControl()
   const { handleNext } = useStepperControl()
@@ -282,7 +284,7 @@ export const PageStepThree: FC = () => {
 
         console.log('Currently we have no token. Are you logged in?')
 
-        return <div>Login First</div>
+        return void login({ redirectUri: location.href })
       }
     }
     </TokenContext.Consumer>

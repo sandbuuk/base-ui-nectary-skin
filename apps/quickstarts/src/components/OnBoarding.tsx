@@ -1,3 +1,4 @@
+import { useLogin } from '../../../shell/src/hooks/useLogin'
 import { TokenContext } from '../contexts'
 import { useOnBoardingControl } from './OnBoardingcontext'
 import styles from './Page.module.css'
@@ -19,6 +20,7 @@ import type { FC } from 'react'
 
 export const OnBoarding: FC = () => {
   const { next } = usePageControl()
+  const { login } = useLogin()
   const { username, setUsername } = useOnBoardingControl()
   // const { token } = usePageOneControl()
 
@@ -161,7 +163,7 @@ export const OnBoarding: FC = () => {
 
         console.log('Currently we have no token. Are you logged in?')
 
-        return <div>Login First</div>
+        return void login({ redirectUri: location.href })
       }
     }
     </TokenContext.Consumer>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
+import { useLogin } from '../../../shell/src/hooks/useLogin'
 import { TokenContext } from '../contexts'
 import { useOnBoardingControl } from './OnBoardingcontext'
 import styles from './Page.module.css'
@@ -282,6 +283,7 @@ const AgentInformation = (props: AgentInformationProps) => {
 export const PageStepFour: FC = () => {
   //const { next } = usePageControl()
   const token = useContext(TokenContext)
+  const { login } = useLogin()
 
   const [agentdetails, setAgentdetails] = useState([{ name: '', email: '' }])
 
@@ -558,7 +560,7 @@ export const PageStepFour: FC = () => {
 
         console.log('Currently we have no token. Are you logged in?')
 
-        return <div>Login First</div>
+        return void login({ redirectUri: location.href })
       }
     }
     </TokenContext.Consumer>
