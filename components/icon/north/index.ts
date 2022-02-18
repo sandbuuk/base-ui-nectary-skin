@@ -3,16 +3,16 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../create-icon-class'
 
-defineCustomElement('sinch-icon-navigation-south', createIconClass(templateHTML))
+defineCustomElement('sinch-icon-north', createIconClass(templateHTML))
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-icon-navigation-south': TSinchIconReact,
+      'sinch-icon-north': TSinchIconReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-icon-navigation-south': TSinchIconElement,
+    'sinch-icon-north': TSinchIconElement,
   }
 }

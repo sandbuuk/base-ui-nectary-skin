@@ -9,7 +9,7 @@ export const Table: FC<TTable> = ({ search }) => {
   const [isAsc, setAsc] = useState(false)
 
   return (
-    <div style={{ width: '100%', overflow: 'auto', height: '100px' }}>
+    <div style={{ width: '100%' }}>
       <sinch-table style={{ width: '100%' }}>
         <sinch-table-head>
           <sinch-table-row sticky>
@@ -54,7 +54,7 @@ export const Table: FC<TTable> = ({ search }) => {
             <sinch-table-cell>
               Cell content
               <sinch-button type="secondary" text="Button" small>
-                <sinch-icon-share slot="icon"/>
+                <sinch-icon-open-in-new slot="icon" size={16}/>
               </sinch-button>
             </sinch-table-cell>
             <sinch-table-cell>
@@ -71,7 +71,7 @@ export const Table: FC<TTable> = ({ search }) => {
             <sinch-table-cell>
               Cell content
               <sinch-button type="secondary" text="Button" small>
-                <sinch-icon-share slot="icon"/>
+                <sinch-icon-open-in-new slot="icon" size={16}/>
               </sinch-button>
             </sinch-table-cell>
             <sinch-table-cell>
@@ -88,7 +88,7 @@ export const Table: FC<TTable> = ({ search }) => {
             <sinch-table-cell>
               Cell content
               <sinch-button type="secondary" text="Button" small>
-                <sinch-icon-share slot="icon"/>
+                <sinch-icon-open-in-new slot="icon" size={16}/>
               </sinch-button>
             </sinch-table-cell>
             <sinch-table-cell>
@@ -105,13 +105,16 @@ export const Table: FC<TTable> = ({ search }) => {
             <sinch-table-cell>
               Cell content
               <sinch-button type="secondary" text="Button" small>
-                <sinch-icon-share slot="icon"/>
+                <sinch-icon-open-in-new slot="icon" size={16}/>
               </sinch-button>
             </sinch-table-cell>
             <sinch-table-cell>
               Cell
               <sinch-link text="link" external href=""/>
               content
+              <sinch-icon-more-vert/>
+              <sinch-icon-east/>
+              <sinch-icon-west/>
             </sinch-table-cell>
           </sinch-table-row>
         </sinch-table-body>

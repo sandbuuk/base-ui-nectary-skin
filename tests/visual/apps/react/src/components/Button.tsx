@@ -26,7 +26,7 @@ export const Button: FC<TButton> = ({ search }) => {
       onFocus={onFocus}
       onBlur={onBlur}
     >
-      {hasIcon && <sinch-icon-share size={isSmall ? 12 : 18} slot="icon"/>}
+      {hasIcon && <sinch-icon-open-in-new size={isSmall ? 12 : 18} slot="icon"/>}
       {hasSpinner && <sinch-spinner static type={isSmall ? 'small' : 'medium'} slot="icon"/>}
     </sinch-button>
   )

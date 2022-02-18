@@ -34,7 +34,7 @@ export const Tabs: FC<TTabs> = ({ search }) => {
           text={opt.text}
           disabled={opt.disabled}
         >
-          {opt.icon != null && <sinch-icon-share slot="icon"/>}
+          {opt.icon != null && <sinch-icon-open-in-new slot="icon"/>}
         </sinch-tabs-option>
       ))
     } catch {

@@ -1,5 +1,5 @@
-import '../icon/navigation-north'
-import '../icon/navigation-south'
+import '../icon/north'
+import '../icon/south'
 import {
   defineCustomElement, getBooleanAttribute, isAttrTrue, updateBooleanAttribute,
 } from '../utils'
