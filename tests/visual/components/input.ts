@@ -48,11 +48,11 @@ test('placeholder property', shot(async function* ({ $eval }) {
 }))
 
 test('tooltip', withTooltip(async function* ({ $ }) {
-  await $.locator('sinch-input-tooltip').hover()
+  await $.locator('sinch-help-tooltip').hover()
 
   yield {
     name: 'show',
-    include: [$.locator('sinch-input-tooltip #text')],
+    include: [$.locator('sinch-help-tooltip #text')],
   }
 }))
 

@@ -10,7 +10,7 @@
   (focusout)="onBlur()"
   [value]="value"
   (change)="onChange($event)">
-  <sinch-input-tooltip *ngIf="tooltipText != null" [text]="tooltipText" slot="tooltip"></sinch-input-tooltip>
+  <sinch-help-tooltip *ngIf="tooltipText != null" [text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
   <sinch-select-option value="1" text="Option 1 value" slot="select">
     <sinch-icon-share slot="icon"></sinch-icon-share>
   </sinch-select-option>

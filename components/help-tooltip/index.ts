@@ -1,4 +1,5 @@
 import '../tooltip'
+import '../icon/help'
 import {
   defineCustomElement,
   getAttribute,
@@ -14,7 +15,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
+defineCustomElement('sinch-help-tooltip', class extends HTMLElement {
   $tooltip: HTMLElementTagNameMap['sinch-tooltip']
 
   constructor() {
@@ -95,11 +96,11 @@ defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-input-tooltip': IntrinsicElements['sinch-tooltip'],
+      'sinch-help-tooltip': IntrinsicElements['sinch-tooltip'],
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-input-tooltip': HTMLElementTagNameMap['sinch-tooltip'],
+    'sinch-help-tooltip': HTMLElementTagNameMap['sinch-tooltip'],
   }
 }

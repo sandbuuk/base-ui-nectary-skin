@@ -11,7 +11,7 @@
     @change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
-    <sinch-input-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-input-tooltip>
+    <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-help-tooltip>
     <sinch-select-option value="1" text="Option 1 value" slot="select">
       <sinch-icon-share slot="icon"/>
     </sinch-select-option>

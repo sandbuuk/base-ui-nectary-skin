@@ -27,7 +27,7 @@ export const Textarea: FC<TTextarea> = ({ search }) => {
   const isDisabled = useMemo(() => search.get('disabled') != null, [search])
   const tooltip = useMemo(() =>
     search.get('tooltip') != null && (
-      <sinch-input-tooltip text={search.get('tooltip')!}/>
+      <sinch-help-tooltip text={search.get('tooltip')!}/>
     ),
   [search])
 

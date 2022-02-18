@@ -32,7 +32,7 @@ export const Select: FC<TSelect> = ({ search }) => {
   }, [search])
   const tooltip = useMemo(
     () => search.get('tooltip') != null && (
-      <sinch-input-tooltip text={search.get('tooltip')!} slot="tooltip"/>
+      <sinch-help-tooltip text={search.get('tooltip')!} slot="tooltip"/>
     ),
     [search]
   )

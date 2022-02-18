@@ -110,7 +110,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-select'
 }
 
 export const Select = Template(`
-<sinch-input-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-input-tooltip>
+<sinch-help-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-help-tooltip>
 <sinch-select-option value="1" text="Option 1 value" slot="select">
   <sinch-icon-share></sinch-icon-share>
 </sinch-select-option>
@@ -133,7 +133,7 @@ Select.parameters = {
     source: {
       code: `
 <sinch-select value={value} onChange={setValue}>
-  <sinch-input-tooltip text="Tooltip text long" slot="tooltip"></sinch-input-tooltip>
+  <sinch-help-tooltip text="Tooltip text long" slot="tooltip"></sinch-help-tooltip>
   <sinch-select-option value="1" text="Option 1 value" slot="select">
     <sinch-icon-share></sinch-icon-share>
   </sinch-select-option>

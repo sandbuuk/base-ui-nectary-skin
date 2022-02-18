@@ -1,4 +1,3 @@
-import '../icon/tooltip'
 import {
   attrValueToPixels,
   defineCustomElement,
