@@ -84,12 +84,12 @@ defineCustomElement('sinch-toggle', class extends HTMLElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set text(value: string) {
+  set text(value: string | null) {
     updateAttribute(this, 'text', value)
   }
 
   get text() {
-    return getAttribute(this, 'text', '')
+    return getAttribute(this, 'text', null)
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -138,7 +138,7 @@ type TSinchToggleElement = HTMLElement & {
   small: boolean,
   labeled: boolean,
   disabled: boolean,
-  text: string,
+  text: string | null,
   focus(): void,
   blur(): void,
 }
@@ -148,7 +148,7 @@ type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
   small?: boolean,
   labeled?: boolean,
   disabled?: boolean,
-  text: string,
+  text?: string,
   onChange: (e: SyntheticEvent<TSinchToggleElement, CustomEvent<boolean>>) => void,
   onFocus?: (e: FocusEvent<TSinchToggleElement>) => void,
   onBlur?: (e: FocusEvent<TSinchToggleElement>) => void,
