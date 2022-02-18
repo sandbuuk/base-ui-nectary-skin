@@ -122,7 +122,7 @@ type TSinchLinkReact = TSinchElementReact<TSinchLinkElement> & {
   href: string,
   disabled?: boolean,
   external?: boolean,
-  onClick: (e: MouseEvent<TSinchLinkElement>) => void,
+  onClick?: (e: MouseEvent<TSinchLinkElement>) => void,
   onFocus?: (e: FocusEvent<TSinchLinkElement>) => void,
   onBlur?: (e: FocusEvent<TSinchLinkElement>) => void,
 }
