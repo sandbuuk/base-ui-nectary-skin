@@ -58,7 +58,7 @@ export const createIconClass = (templateHTML: string) => {
     attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
       switch (name) {
         case 'size': {
-          updateIntegerAttribute(this.$svg, 'width', newVal, { min: MIN_SIZE, max: MAX_SIZE })
+          updateIntegerAttribute(this.$svg, 'height', newVal, { min: MIN_SIZE, max: MAX_SIZE })
 
           break
         }
