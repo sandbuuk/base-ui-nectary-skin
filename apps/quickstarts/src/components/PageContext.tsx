@@ -61,7 +61,7 @@ export const PageContext: FC<{}> = ({ children }) => {
 
   const isLoggedIn = useIsLoggedIn()
 
-  if (pathname.length > 7 && isLoggedIn == true) {
+  if (pathname.length > 11 && isLoggedIn == true) {
     reset()
   }
 
