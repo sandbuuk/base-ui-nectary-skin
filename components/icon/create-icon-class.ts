@@ -2,7 +2,7 @@ import { getIntegerAttribute, updateAttribute, updateIntegerAttribute } from '..
 import iconStylesHtml from './icon-styles.html'
 import type { TSinchElementReact } from '../types'
 
-const DEFAULT_SIZE = 16
+const DEFAULT_SIZE = 24
 const MIN_SIZE = 4
 const MAX_SIZE = 256
 
