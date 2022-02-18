@@ -68,7 +68,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-textarea']> = ({ onChange }) 
   if (inputRef.current === null) {
     const $input = document.createElement('sinch-textarea')
 
-    $input.innerHTML = '<sinch-help-tooltip text="Tooltip text long"></sinch-help-tooltip>'
+    $input.innerHTML = '<sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>'
 
     $input.addEventListener('change', (e: any) => {
       onChange(e.detail)
@@ -109,7 +109,7 @@ Textarea.args = {
 Textarea.parameters = {
   docs: {
     source: {
-      code: '<sinch-textarea value={value} onChange={setValue}>\n  <sinch-help-tooltip text="Tooltip text long"></sinch-help-tooltip>\n</sinch-textarea>',
+      code: '<sinch-textarea value={value} onChange={setValue}>\n  <sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>\n</sinch-textarea>',
     },
   },
 }

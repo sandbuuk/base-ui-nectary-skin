@@ -91,7 +91,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-input']
   return $input
 }
 
-export const Input = Template('<sinch-help-tooltip text="Tooltip text long"></sinch-help-tooltip>')
+export const Input = Template('<sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>')
 
 Input.args = {
   value: 'hi',
@@ -105,7 +105,7 @@ Input.args = {
 Input.parameters = {
   docs: {
     source: {
-      code: '<sinch-input value={value} onChange={setValue}>\n  <sinch-help-tooltip text="Tooltip text long"></sinch-help-tooltip>\n</sinch-input>',
+      code: '<sinch-input value={value} onChange={setValue}>\n  <sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>\n</sinch-input>',
     },
   },
 }

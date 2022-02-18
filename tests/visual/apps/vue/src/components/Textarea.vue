@@ -10,7 +10,7 @@
     @change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
-    <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText"></sinch-help-tooltip>
+    <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-help-tooltip>
   </sinch-textarea>
 </template>
 
