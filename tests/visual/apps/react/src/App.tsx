@@ -8,6 +8,7 @@ import { Link } from './components/Link'
 import { Radio } from './components/Radio'
 import { Select } from './components/Select'
 import { Spinner } from './components/Spinner'
+import { Table } from './components/Table'
 import { Tabs } from './components/Tabs'
 import { Tag } from './components/Tag'
 import { Textarea } from './components/Textarea'
@@ -62,6 +63,12 @@ const mapElement = (url: URL) => {
     case '/select': {
       return (
         <Select search={url.searchParams}/>
+      )
+    }
+
+    case '/table': {
+      return (
+        <Table search={url.searchParams}/>
       )
     }
 

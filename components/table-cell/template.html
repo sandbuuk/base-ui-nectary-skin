@@ -1,0 +1,32 @@
+<style>
+:host {
+  display: table-cell;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--sinch-color-snow-600);
+  height: 47px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:host(:first-child) {
+  padding-left: 8px;
+}
+
+:host(:last-child) {
+  padding-right: 8px;
+}
+
+:host([align="end"]) {
+  text-align: end;
+}
+
+:host([align="center"]) {
+  text-align: center;
+}
+
+::slotted(sinch-checkbox) {
+  display: block;
+}
+</style>
+
+<slot></slot>

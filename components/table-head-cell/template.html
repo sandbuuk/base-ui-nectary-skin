@@ -1,0 +1,69 @@
+<style>
+:host {
+  display: table-cell;
+  border-bottom: 1px solid var(--sinch-color-stormy-200);
+  height: 47px;
+  vertical-align: middle;
+  padding-left: 4px;
+  padding-right: 4px;
+
+  --sinch-color-icon: var(--sinch-color-stormy-200);
+}
+
+:host(:first-child) {
+  padding-left: 8px;
+}
+
+:host(:last-child) {
+  padding-right: 8px;
+}
+
+#wrapper {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font: var(--sinch-font-title-4);
+  color: var(--sinch-color-stormy-200);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+#text {
+  flex-shrink: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:host([align="center"]) > #wrapper {
+  justify-content: center;
+}
+
+:host([align="end"]) #text {
+  margin-left: auto;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+:host(:is([text=""], :not([text]))) > #wrapper {
+  display: none;
+}
+
+::slotted(sinch-help-tooltip) {
+  position: relative;
+  z-index: 1;
+}
+
+::slotted(sinch-checkbox) {
+  display: block;
+}
+</style>
+
+<slot name="checkbox"></slot>
+<div id="wrapper">
+  <span id="text"></span>
+  <slot name="tooltip"></slot>
+  <slot name="sort"></slot>
+</div>
