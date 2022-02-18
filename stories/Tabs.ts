@@ -42,7 +42,7 @@ export const Tabs = Template(`
   <sinch-icon-share></sinch-icon-share>
 </sinch-tabs-option>
 <sinch-tabs-option value="3" text="Tab disabled" disabled>
-  <sinch-icon-help></sinch-icon-help>
+  <sinch-icon-action-help-outline></sinch-icon-action-help-outline>
 </sinch-tabs-option>
 <sinch-tabs-option value="4" text="Tab 4 label"></sinch-tabs-option>
 `)
@@ -61,7 +61,7 @@ Tabs.parameters = {
     <sinch-icon-share></sinch-icon-share>
   </sinch-tabs-option>
   <sinch-tabs-option value="3" text="Tab disabled" disabled>
-    <sinch-icon-help></sinch-icon-help>
+    <sinch-icon-action-help-outline></sinch-icon-action-help-outline>
   </sinch-tabs-option>
   <sinch-tabs-option value="4" text="Tab 4 label"></sinch-tabs-option>
 </sinch-tabs>`,

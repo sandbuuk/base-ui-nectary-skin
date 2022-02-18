@@ -3,16 +3,16 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../create-icon-class'
 
-defineCustomElement('sinch-icon-help', createIconClass(templateHTML))
+defineCustomElement('sinch-icon-action-help-outline', createIconClass(templateHTML))
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-icon-help': TSinchIconReact,
+      'sinch-icon-action-help-outline': TSinchIconReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-icon-help': TSinchIconElement,
+    'sinch-icon-action-help-outline': TSinchIconElement,
   }
 }

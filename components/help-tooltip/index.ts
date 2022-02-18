@@ -1,5 +1,5 @@
 import '../tooltip'
-import '../icon/help'
+import '../icon/action-help-outline'
 import {
   defineCustomElement,
   getAttribute,
