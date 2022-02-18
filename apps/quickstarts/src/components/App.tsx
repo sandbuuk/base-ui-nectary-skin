@@ -12,7 +12,8 @@ import { OnBoarding } from './OnBoarding'
 import { PageLayout } from './PageLayout'
 import { PageNotFound } from './PageNotFound'
 import { PageStepFour } from './PageStepFour'
-import { PageStepOne } from './PageStepOne'
+import { Home } from './Home'
+//import { PageStepOne } from './PageStepOne'
 import { PageStepThree } from './PageStepThree'
 // import { PageStepTwo } from './PageStepTwo'
 import type { FC } from 'react'
@@ -46,7 +47,7 @@ export const App: FC<TApp> = ({ baseUrl }) => {
         <Routes>
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Navigate to="step-1"/>}/>
-            <Route path="step-1" element={<PageStepOne/>}/>
+            <Route path="step-1" element={<Home/>}/>
             {/* <Route path="step-2" element={<PageStepTwo/>}/> */}
             <Route path="step-2" element={<PageStepThree/>}/>
             <Route path="step-3" element={<PageStepFour/>}/>
