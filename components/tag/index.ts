@@ -33,10 +33,10 @@ defineCustomElement('sinch-tag', class extends HTMLElement {
   }
 
   get category() {
-    return getLiteralAttribute(this, categoryValues, 'category')
+    return getLiteralAttribute(this, categoryValues, 'category', null)
   }
 
-  set category(value: TSinchTagCategory | undefined) {
+  set category(value: TSinchTagCategory | null) {
     updateLiteralAttribute(this, categoryValues, 'category', value)
   }
 
@@ -52,7 +52,7 @@ defineCustomElement('sinch-tag', class extends HTMLElement {
     return getBooleanAttribute(this, 'inverted')
   }
 
-  set inverted(isInverted: boolean | undefined) {
+  set inverted(isInverted: boolean) {
     updateBooleanAttribute(this, 'inverted', isInverted)
   }
 
@@ -60,7 +60,7 @@ defineCustomElement('sinch-tag', class extends HTMLElement {
     return getBooleanAttribute(this, 'small')
   }
 
-  set small(isSmall: boolean | undefined) {
+  set small(isSmall: boolean) {
     updateBooleanAttribute(this, 'small', isSmall)
   }
 
@@ -82,14 +82,14 @@ defineCustomElement('sinch-tag', class extends HTMLElement {
 type TSinchTagCategory = typeof categoryValues[number]
 
 type TSinchTagElement = HTMLElement & {
-  category: TSinchTagCategory,
+  category: TSinchTagCategory | null,
   text: string,
   inverted: boolean,
   small: boolean,
 }
 
 type TSinchTagReact = TSinchElementReact<TSinchTagElement> & {
-  category: TSinchTagCategory,
+  category?: TSinchTagCategory,
   text: string,
   inverted?: boolean,
   small?: boolean,
