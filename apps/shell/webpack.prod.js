@@ -70,6 +70,7 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: PORT,
+    historyApiFallback: true,
   },
   watch: false,
   optimization: {
