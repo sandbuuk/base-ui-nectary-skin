@@ -24,9 +24,9 @@ defineCustomElement('sinch-table-head', class extends HTMLElement {
   }
 })
 
-type TSinchTableHeadElement = HTMLElement
+export type TSinchTableHeadElement = HTMLElement
 
-type TSinchTableHeadReact = TSinchElementReact<TSinchTableHeadElement>
+export type TSinchTableHeadReact = TSinchElementReact<TSinchTableHeadElement>
 
 declare global {
   namespace JSX {

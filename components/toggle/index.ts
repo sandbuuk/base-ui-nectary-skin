@@ -133,7 +133,7 @@ defineCustomElement('sinch-toggle', class extends HTMLElement {
   }
 })
 
-type TSinchToggleElement = HTMLElement & {
+export type TSinchToggleElement = HTMLElement & {
   checked: boolean,
   small: boolean,
   labeled: boolean,
@@ -143,7 +143,7 @@ type TSinchToggleElement = HTMLElement & {
   blur(): void,
 }
 
-type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
+export type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
   checked?: boolean,
   small?: boolean,
   labeled?: boolean,

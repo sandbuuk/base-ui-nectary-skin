@@ -85,16 +85,16 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
   }
 })
 
-type TSinchAlertType = typeof typeValues[number]
+export type TSinchAlertType = typeof typeValues[number]
 
-type TSinchAlertElement = HTMLElement & {
+export type TSinchAlertElement = HTMLElement & {
   type: TSinchAlertType,
   text: string,
   title: string,
   multiline: boolean,
 }
 
-type TSinchAlertReact = TSinchElementReact<TSinchAlertElement> & {
+export type TSinchAlertReact = TSinchElementReact<TSinchAlertElement> & {
   type: TSinchAlertType,
   text: string,
   title?: string,

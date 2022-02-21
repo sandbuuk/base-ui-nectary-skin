@@ -91,13 +91,13 @@ defineCustomElement('sinch-table-head-sort', class extends HTMLElement {
   }
 })
 
-type TSinchTableHeaderSortElement = HTMLElement & {
+export type TSinchTableHeaderSortElement = HTMLElement & {
   value: boolean,
   focus(): void,
   blur(): void,
 }
 
-type TSinchTableHeaderSortReact = TSinchElementReact<TSinchTableHeaderSortElement> & {
+export type TSinchTableHeaderSortReact = TSinchElementReact<TSinchTableHeaderSortElement> & {
   value: boolean,
   onChange: (e: SyntheticEvent<TSinchTableHeaderSortElement, CustomEvent<boolean>>) => void,
   onFocus?: (e: FocusEvent<TSinchTableHeaderSortElement>) => void,

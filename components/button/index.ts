@@ -96,9 +96,9 @@ defineCustomElement('sinch-button', class extends HTMLElement {
   }
 })
 
-type TSinchButtonType = typeof buttonTypes[number]
+export type TSinchButtonType = typeof buttonTypes[number]
 
-type TSinchButtonElement = HTMLElement & {
+export type TSinchButtonElement = HTMLElement & {
   type: TSinchButtonType,
   text: string,
   disabled: boolean,
@@ -107,7 +107,7 @@ type TSinchButtonElement = HTMLElement & {
   blur(): void,
 }
 
-type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
+export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   type: TSinchButtonType,
   text: string,
   disabled?: boolean,

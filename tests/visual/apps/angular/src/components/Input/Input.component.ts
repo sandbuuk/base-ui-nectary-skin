@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import '@nectary/components/input'
-import '@nectary/components/input-tooltip'
+import '@nectary/components/help-tooltip'
 
 @Component({
   selector: 'input-component',

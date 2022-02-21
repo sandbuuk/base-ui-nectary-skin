@@ -192,7 +192,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 })
 
-type TSinchInputElement = HTMLElement & {
+export type TSinchInputElement = HTMLElement & {
   value: string,
   label: string,
   placeholder: string | null,
@@ -204,7 +204,7 @@ type TSinchInputElement = HTMLElement & {
   blur(): void,
 }
 
-type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
+export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   value: string,
   label: string,
   placeholder?: string,

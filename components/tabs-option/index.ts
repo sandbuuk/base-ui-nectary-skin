@@ -129,7 +129,7 @@ defineCustomElement('sinch-tabs-option', class extends HTMLElement {
   }
 })
 
-type TSinchTabsOptionElement = HTMLElement & {
+export type TSinchTabsOptionElement = HTMLElement & {
   value: string,
   disabled: boolean,
   checked: boolean,
@@ -138,7 +138,7 @@ type TSinchTabsOptionElement = HTMLElement & {
   blur(): void,
 }
 
-type TSinchTabsOptionReact = TSinchElementReact<TSinchTabsOptionElement> & {
+export type TSinchTabsOptionReact = TSinchElementReact<TSinchTabsOptionElement> & {
   value: string,
   disabled?: boolean,
   text: string,

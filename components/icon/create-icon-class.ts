@@ -1,6 +1,5 @@
 import { getIntegerAttribute, updateAttribute, updateIntegerAttribute } from '../utils'
 import iconStylesHtml from './icon-styles.html'
-import type { TSinchElementReact } from '../types'
 
 const DEFAULT_SIZE = 24
 const MIN_SIZE = 4
@@ -57,11 +56,4 @@ export const createIconClass = (templateHTML: string) => {
       }
     }
   }
-}
-
-export type TSinchIconElement = HTMLElement & {
-  size: number,
-}
-export type TSinchIconReact = TSinchElementReact<TSinchIconElement> & {
-  size?: number,
 }

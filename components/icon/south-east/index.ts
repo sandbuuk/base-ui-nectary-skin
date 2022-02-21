@@ -1,7 +1,7 @@
 import { defineCustomElement } from '../../utils'
 import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
-import type { TSinchIconElement, TSinchIconReact } from '../create-icon-class'
+import type { TSinchIconElement, TSinchIconReact } from '../types'
 
 defineCustomElement('sinch-icon-south-east', createIconClass(templateHTML))
 

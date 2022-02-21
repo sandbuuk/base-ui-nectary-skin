@@ -24,9 +24,9 @@ defineCustomElement('sinch-table-body', class extends HTMLElement {
   }
 })
 
-type TSinchTableBodyElement = HTMLElement
+export type TSinchTableBodyElement = HTMLElement
 
-type TSinchTableBodyReact = TSinchElementReact<TSinchTableBodyElement>
+export type TSinchTableBodyReact = TSinchElementReact<TSinchTableBodyElement>
 
 declare global {
   namespace JSX {

@@ -62,13 +62,13 @@ defineCustomElement('sinch-tag-close', class extends HTMLElement {
   }
 })
 
-type TSinchTagCloseElement = HTMLElement & {
+export type TSinchTagCloseElement = HTMLElement & {
   small: boolean,
   focus(): void,
   blur(): void,
 }
 
-type TSinchTagCloseReact = TSinchElementReact<TSinchTagCloseElement> & {
+export type TSinchTagCloseReact = TSinchElementReact<TSinchTagCloseElement> & {
   small?: boolean,
   onClick?: (e: MouseEvent<TSinchTagCloseElement>) => void,
   onFocus?: (e: FocusEvent<TSinchTagCloseElement>) => void,

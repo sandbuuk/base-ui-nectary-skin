@@ -1,7 +1,7 @@
 import { defineCustomElement } from '../../utils'
 import { createLogoClass } from '../create-logo-class'
 import templateHTML from './template.html'
-import type { TSinchLogoElement, TSinchLogoReact } from '../create-logo-class'
+import type { TSinchLogoElement, TSinchLogoReact } from '../types'
 
 defineCustomElement('sinch-logo-sinch-icon', createLogoClass(templateHTML))
 

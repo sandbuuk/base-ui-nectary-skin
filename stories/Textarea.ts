@@ -1,7 +1,7 @@
 import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
-import '@nectary/components/input-tooltip'
+import '@nectary/components/help-tooltip'
 import '@nectary/components/textarea'
 
 export default {

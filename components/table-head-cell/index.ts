@@ -64,14 +64,14 @@ defineCustomElement('sinch-table-head-cell', class extends HTMLElement {
   }
 })
 
-type TAlignType = typeof alignValues[number]
+export type TAlignType = typeof alignValues[number]
 
-type TSinchTableHeaderCellElement = HTMLElement & {
+export type TSinchTableHeaderCellElement = HTMLElement & {
   text: string | null,
   align: TAlignType,
 }
 
-type TSinchTableHeaderCellReact = TSinchElementReact<TSinchTableHeaderCellElement> & {
+export type TSinchTableHeaderCellReact = TSinchElementReact<TSinchTableHeaderCellElement> & {
   text?: string,
   align?: TAlignType,
 }

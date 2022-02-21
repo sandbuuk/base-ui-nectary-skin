@@ -34,13 +34,13 @@ defineCustomElement('sinch-table-cell', class extends HTMLElement {
   }
 })
 
-type TAlignType = typeof alignValues[number]
+export type TAlignType = typeof alignValues[number]
 
-type TSinchTableCellElement = HTMLElement & {
+export type TSinchTableCellElement = HTMLElement & {
   align: TAlignType,
 }
 
-type TSinchTableCellReact = TSinchElementReact<TSinchTableCellElement> & {
+export type TSinchTableCellReact = TSinchElementReact<TSinchTableCellElement> & {
   align?: TAlignType,
 }
 

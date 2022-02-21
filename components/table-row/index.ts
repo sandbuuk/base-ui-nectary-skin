@@ -32,11 +32,11 @@ defineCustomElement('sinch-table-row', class extends HTMLElement {
   }
 })
 
-type TSinchTableRowElement = HTMLElement & {
+export type TSinchTableRowElement = HTMLElement & {
   sticky: boolean,
 }
 
-type TSinchTableRowReact = TSinchElementReact<TSinchTableRowElement> & {
+export type TSinchTableRowReact = TSinchElementReact<TSinchTableRowElement> & {
   sticky?: boolean,
 }
 

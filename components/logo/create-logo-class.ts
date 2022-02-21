@@ -1,6 +1,5 @@
 import { getBooleanAttribute, getIntegerAttribute, updateAttribute, updateBooleanAttribute, updateIntegerAttribute } from '../utils'
 import logoStylesHtml from './logo-styles.html'
-import type { TSinchElementReact } from '../types'
 
 const DEFAULT_SIZE = 16
 const MIN_SIZE = 4
@@ -67,13 +66,4 @@ export const createLogoClass = (templateHTML: string) => {
       }
     }
   }
-}
-
-export type TSinchLogoElement = HTMLElement & {
-  size: number,
-  inverted: boolean,
-}
-export type TSinchLogoReact = TSinchElementReact<TSinchLogoElement> & {
-  size?: number,
-  inverted?: boolean,
 }

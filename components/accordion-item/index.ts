@@ -134,9 +134,9 @@ defineCustomElement('sinch-accordion-item', class extends HTMLElement {
   }
 })
 
-type TSinchAccordionStatusType = typeof statusValues[number]
+export type TSinchAccordionStatusType = typeof statusValues[number]
 
-type TSinchAccordionItemElement = HTMLElement & {
+export type TSinchAccordionItemElement = HTMLElement & {
   value: string,
   label: string,
   disabled: boolean,
@@ -146,7 +146,7 @@ type TSinchAccordionItemElement = HTMLElement & {
   blur(): void,
 }
 
-type TSinchAccordionItemReact = TSinchElementReact<TSinchAccordionItemElement> & {
+export type TSinchAccordionItemReact = TSinchElementReact<TSinchAccordionItemElement> & {
   value: string,
   label: string,
   disabled?: boolean,

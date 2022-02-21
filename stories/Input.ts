@@ -1,6 +1,6 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
-import '@nectary/components/input-tooltip'
+import '@nectary/components/help-tooltip'
 import '@nectary/components/input'
 
 export default {

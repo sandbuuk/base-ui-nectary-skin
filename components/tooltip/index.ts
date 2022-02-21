@@ -87,16 +87,16 @@ defineCustomElement('sinch-tooltip', class extends HTMLElement {
   }
 })
 
-type TSinchTooltipOrientation = typeof orientationValues[number]
+export type TSinchTooltipOrientation = typeof orientationValues[number]
 
-type TSinchTooltipElement = HTMLElement & {
+export type TSinchTooltipElement = HTMLElement & {
   text: string,
   width: number | null,
   inverted: boolean,
   orientation: TSinchTooltipOrientation,
 }
 
-type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
+export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
   text: string,
   width?: number,
   inverted?: boolean,

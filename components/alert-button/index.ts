@@ -58,13 +58,13 @@ defineCustomElement('sinch-alert-button', class extends HTMLElement {
   }
 })
 
-type TSinchAlertButtonElement = HTMLElement & {
+export type TSinchAlertButtonElement = HTMLElement & {
   text: string,
   focus(): void,
   blur(): void,
 }
 
-type TSinchAlertButtonReact = TSinchElementReact<TSinchAlertButtonElement> & {
+export type TSinchAlertButtonReact = TSinchElementReact<TSinchAlertButtonElement> & {
   text: string,
   onClick?: (e: MouseEvent<TSinchAlertButtonElement>) => void,
   onFocus?: (e: FocusEvent<TSinchAlertButtonElement>) => void,

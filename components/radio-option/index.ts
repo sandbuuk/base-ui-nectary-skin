@@ -123,7 +123,7 @@ defineCustomElement('sinch-radio-option', class extends HTMLElement {
   }
 })
 
-type TSinchRadioOptionElement = HTMLElement & {
+export type TSinchRadioOptionElement = HTMLElement & {
   value: string,
   checked: boolean,
   disabled: boolean,
@@ -132,7 +132,7 @@ type TSinchRadioOptionElement = HTMLElement & {
   blur(): void,
 }
 
-type TSinchRadioOptionReact = TSinchElementReact<TSinchRadioOptionElement> & {
+export type TSinchRadioOptionReact = TSinchElementReact<TSinchRadioOptionElement> & {
   value: string,
   disabled?: boolean,
   text: string,

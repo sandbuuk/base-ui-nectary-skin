@@ -108,7 +108,7 @@ defineCustomElement('sinch-link', class extends HTMLElement {
   }
 })
 
-type TSinchLinkElement = HTMLElement & {
+export type TSinchLinkElement = HTMLElement & {
   text: string,
   href: string,
   disabled: boolean,
@@ -117,7 +117,7 @@ type TSinchLinkElement = HTMLElement & {
   blur(): void,
 }
 
-type TSinchLinkReact = TSinchElementReact<TSinchLinkElement> & {
+export type TSinchLinkReact = TSinchElementReact<TSinchLinkElement> & {
   text: string,
   href: string,
   disabled?: boolean,

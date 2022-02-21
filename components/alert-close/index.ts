@@ -32,12 +32,12 @@ defineCustomElement('sinch-alert-close', class extends HTMLElement {
   }
 })
 
-type TSinchAlertCloseElement = HTMLElement & {
+export type TSinchAlertCloseElement = HTMLElement & {
   focus(): void,
   blur(): void,
 }
 
-type TSinchAlertCloseReact = TSinchElementReact<TSinchAlertCloseElement> & {
+export type TSinchAlertCloseReact = TSinchElementReact<TSinchAlertCloseElement> & {
   onClick?: (e: MouseEvent<TSinchAlertCloseElement>) => void,
   onFocus?: (e: FocusEvent<TSinchAlertCloseElement>) => void,
   onBlur?: (e: FocusEvent<TSinchAlertCloseElement>) => void,

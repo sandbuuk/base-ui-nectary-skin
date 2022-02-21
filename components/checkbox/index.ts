@@ -131,7 +131,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 })
 
-type TSinchCheckboxElement = HTMLElement & {
+export type TSinchCheckboxElement = HTMLElement & {
   checked: boolean,
   indeterminate: boolean,
   disabled: boolean,
@@ -140,7 +140,7 @@ type TSinchCheckboxElement = HTMLElement & {
   blur(): void,
 }
 
-type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
+export type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
   checked?: boolean,
   indeterminate?: boolean,
   disabled?: boolean,

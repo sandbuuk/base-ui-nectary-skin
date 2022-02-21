@@ -79,16 +79,16 @@ defineCustomElement('sinch-tag', class extends HTMLElement {
   }
 })
 
-type TSinchTagCategory = typeof categoryValues[number]
+export type TSinchTagCategory = typeof categoryValues[number]
 
-type TSinchTagElement = HTMLElement & {
+export type TSinchTagElement = HTMLElement & {
   category: TSinchTagCategory | null,
   text: string,
   inverted: boolean,
   small: boolean,
 }
 
-type TSinchTagReact = TSinchElementReact<TSinchTagElement> & {
+export type TSinchTagReact = TSinchElementReact<TSinchTagElement> & {
   category?: TSinchTagCategory,
   text: string,
   inverted?: boolean,

@@ -2,7 +2,7 @@ import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
 import '@nectary/components/theme.css'
 import '@nectary/components/button'
-import '@nectary/components/icon/share'
+import '@nectary/components/icon/open-in-new'
 import '@nectary/components/spinner'
 
 export default {
