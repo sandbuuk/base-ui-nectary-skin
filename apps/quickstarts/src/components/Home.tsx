@@ -5,10 +5,10 @@ import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
 import card1 from './images/card1.png'
 import card3 from './images/card3.png'
-import homeicon1 from './images/homeicon1.png'
-import homeicon2 from './images/homeicon2.png'
-import homeicon3 from './images/homeicon3.png'
-import homeimage from './images/homeimage.png'
+// import homeicon1 from './images/homeicon1.png'
+// import homeicon2 from './images/homeicon2.png'
+// import homeicon3 from './images/homeicon3.png'
+// import homeimage from './images/homeimage.png'
 import homeimage2 from './images/homeimage2.png'
 import offering from './images/offering.png'
 import type { FC } from 'react'
@@ -19,6 +19,9 @@ export const Home: FC = () => {
   const { next } = usePageControl()
   const { login } = useLogin()
   const [value, setValue] = useState('1')
+
+  console.log(value)
+  console.log(setValue)
 
   return (
     <TokenContext.Consumer>{
@@ -131,7 +134,7 @@ export const Home: FC = () => {
                         <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                       </div>
                       <div className={styles.Card1Button}>
-                        <sinch-button type="cta" text="Click to see more" onClick={()=>{}}/>
+                        <sinch-button type="cta" text="Click to see more" onClick={() => {}}/>
                       </div>
                     </div>
                     <div className={styles.HomeContainer1}>
@@ -148,11 +151,11 @@ export const Home: FC = () => {
                         <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                       </div>
                       <div className={styles.Card1Button}>
-                        <sinch-button type="cta" text="Click to see more" onClick={()=>{}}/>
+                        <sinch-button type="cta" text="Click to see more" onClick={() => {}}/>
                       </div>
                     </div>
                   </div>
-                   <div className={styles.HomeCardsdiv}>
+                  <div className={styles.HomeCardsdiv}>
                     <div className={styles.HomeContainer1}>
                       <div className={styles.HomeCard2}>
                         <div className={styles.cardimage2}>
@@ -167,7 +170,7 @@ export const Home: FC = () => {
                         <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                       </div>
                       <div className={styles.Card1Button}>
-                        <sinch-button type="cta" text="Click to see more" onClick={()=>{}}/>
+                        <sinch-button type="cta" text="Click to see more" onClick={() => {}}/>
                       </div>
                     </div>
                     <div className={styles.HomeContainer1}>
@@ -184,10 +187,10 @@ export const Home: FC = () => {
                         <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                       </div>
                       <div className={styles.Card1Button}>
-                        <sinch-button type="cta" text="Click to see more" onClick={()=>{}}/>
+                        <sinch-button type="cta" text="Click to see more" onClick={() => {}}/>
                       </div>
                     </div>
-                      <div className={styles.HomeContainer1}>
+                    <div className={styles.HomeContainer1}>
                       <div className={styles.HomeCard1}>
                         <div className={styles.cardimage1}>
                           <img className={styles.card1} src={card1}/>
