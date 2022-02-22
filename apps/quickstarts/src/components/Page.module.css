@@ -1026,6 +1026,7 @@ td{
   padding-top: 0%;
   padding-left: 10px;
   flex: 10;
+  margin: 2%;
 }
 
 .HomeLeftPageTitle{
@@ -1059,6 +1060,7 @@ td{
   flex-direction: row;
   background-color: #FFFFFF;
   margin-right: 1%;
+  border-radius: 1%;
 }
 
 .HomeLeftPageMiddleHeading{
@@ -1077,22 +1079,24 @@ td{
   flex: 4;
   flex-direction: row-reverse;
   margin: 2%;
-  margin-top: 3%;
+  margin-top: 2%;
   margin-right: 4%;
   margin-bottom: 1%;
 }
 
 .HomeRightPageImage{
-  height: 75%;
+  height: auto;
   width: 50%;
 }
 
 .HomeRightPageCapabilities{
-  margin-top: 5%;
+  margin-top: 3%;
+  margin-bottom: 3%;
 }
 
 .HomeRightPageCapabilitiesTitle{
-  font: var(--sinch-font-title-3)
+  font: var(--sinch-font-title-3);
+  margin-left: 3%;
 }
 
 .HomeRightPageCapabilitiesBody{  
@@ -1157,18 +1161,19 @@ td{
     display: flex;
     flex-direction: row;
     flex: 1;
-    background-color: #FFFFFF;
 }
 
 .HomeContainer1{
-  margin: 3%;
   margin-right: 2%;
   margin-top: 3%;
+  margin-left: 3%;
+  margin-right: 3%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   border-radius: 10px;;
-  height: 50%;
-  width: 25%;
+  height: 40%;
+  width: 22%;
+  background-color: #FFFFFF;
 }
 
 .HomeContainer1:hover {
@@ -1198,17 +1203,17 @@ td{
 
 .card1{
   height: auto;
-  width: 50%;
+  width: 48%;
 }
 
 .card2{
   height: auto;
-  width: 50%;
+  width: 48%;
 }
 
 .card3{
   height: auto;
-  width: 60%;
+  width: 55%;
 }
 
 .cardimage1{

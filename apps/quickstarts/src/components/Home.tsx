@@ -9,6 +9,7 @@ import homeicon1 from './images/homeicon1.png'
 import homeicon2 from './images/homeicon2.png'
 import homeicon3 from './images/homeicon3.png'
 import homeimage from './images/homeimage.png'
+import homeimage2 from './images/homeimage2.png'
 import offering from './images/offering.png'
 import type { FC } from 'react'
 import '@nectary/components/tabs'
@@ -30,7 +31,7 @@ export const Home: FC = () => {
 
           return (
             <div className={styles.HomePage}>
-              <div className={styles.HomeLeftPage}>
+              {/* <div className={styles.HomeLeftPage}>
                 <div className={styles.HomeLeftPageTitle}>Quick Starts</div>
                 <p className={styles.HomeLeftPageTitleMatter}>Get up and running fast</p>
                 <div className={styles.Homesubmenu}>
@@ -42,7 +43,7 @@ export const Home: FC = () => {
                     <p className={styles.HomeLeftPageContentMatter}>Integrations</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className={styles.HomeRightPage}>
                 <div className={styles.HomeRightPageHeading}>
                   <h2 className={styles.HomeRightPageHeadingMatter}>Quick Starts</h2>
@@ -56,10 +57,10 @@ export const Home: FC = () => {
                     <p className={styles.HomeRightPageMiddleBody}>Quick Starts are customizable ready-to-go solutions that can be deployed within minutes. </p>
                   </div>
                   <div className={styles.HomeImage}>
-                    <img className={styles.HomeRightPageImage} src={homeimage}/>
+                    <img className={styles.HomeRightPageImage} src={homeimage2}/>
                   </div>
                 </div>
-                <div className={styles.HomeRightPageCapabilities}>
+                {/* <div className={styles.HomeRightPageCapabilities}>
                   <div className={styles.HomeRightPageCapabilitiesTitle}>What can Quick Starts do for you?</div>
                   <div className={styles.HomeRightPageCapabilitiesBody}>
                     <div className={styles.HomeIconDivRow}>
@@ -79,10 +80,10 @@ export const Home: FC = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className={styles.HomeRightPageTemplate}>
                   <div className={styles.HomeRightPageCapabilitiesTitle}>Quick Starts Templates</div>
-                  <div className={styles.Hometabs}>
+                  {/* <div className={styles.Hometabs}>
                     <sinch-tabs
                       value={value}
                       onChange={(e) => {
@@ -97,7 +98,7 @@ export const Home: FC = () => {
                         <sinch-icon-tooltip/>
                       </sinch-tabs-option>
                     </sinch-tabs>
-                  </div>
+                  </div> */}
                   <div className={styles.HomeCardsdiv}>
                     <div className={styles.HomeContainer1}>
                       <div className={styles.HomeCard1}>
@@ -130,7 +131,7 @@ export const Home: FC = () => {
                         <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                       </div>
                       <div className={styles.Card1Button}>
-                        <sinch-button type="cta" text="Click to see more" onClick={next}/>
+                        <sinch-button type="cta" text="Click to see more" onClick={()=>{}}/>
                       </div>
                     </div>
                     <div className={styles.HomeContainer1}>
@@ -141,6 +142,59 @@ export const Home: FC = () => {
                         <sinch-tag style={{ marginLeft: '5%' }} text="Coming Soon" category="aqua"/>
                         <p className={styles.HomeCard3Title}>Quick FAQ Chatbot</p>
                         <p className={styles.HomeCard3Body}> Increase customer satisfaction by offering a 24/7 Chatbot.</p>
+                      </div>
+                      <div className={styles.Homecard1Matter}>
+                        <p className={styles.Homecard1MatterContent}>Conect and qualify leads via WhatsApp and lorem ipsum lorem ipsum lorem ipsum.</p>
+                        <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
+                      </div>
+                      <div className={styles.Card1Button}>
+                        <sinch-button type="cta" text="Click to see more" onClick={()=>{}}/>
+                      </div>
+                    </div>
+                  </div>
+                   <div className={styles.HomeCardsdiv}>
+                    <div className={styles.HomeContainer1}>
+                      <div className={styles.HomeCard2}>
+                        <div className={styles.cardimage2}>
+                          <img className={styles.card2} src={offering}/>
+                        </div>
+                        <sinch-tag style={{ marginLeft: '5%' }} text="Coming Soon" category="aqua"/>
+                        <p className={styles.HomeCard2Title}> Quick Customer Support </p>
+                        <p className={styles.HomeCard2Body}> Offer 24/7 Customer Support across various channels.</p>
+                      </div>
+                      <div className={styles.Homecard1Matter}>
+                        <p className={styles.Homecard1MatterContent}>Conect and qualify leads via WhatsApp and lorem ipsum lorem ipsum lorem ipsum.</p>
+                        <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
+                      </div>
+                      <div className={styles.Card1Button}>
+                        <sinch-button type="cta" text="Click to see more" onClick={()=>{}}/>
+                      </div>
+                    </div>
+                    <div className={styles.HomeContainer1}>
+                      <div className={styles.HomeCard3}>
+                        <div className={styles.cardimage3}>
+                          <img className={styles.card3} src={card3}/>
+                        </div>
+                        <sinch-tag style={{ marginLeft: '5%' }} text="Coming Soon" category="aqua"/>
+                        <p className={styles.HomeCard3Title}>Quick FAQ Chatbot</p>
+                        <p className={styles.HomeCard3Body}> Increase customer satisfaction by offering a 24/7 Chatbot.</p>
+                      </div>
+                      <div className={styles.Homecard1Matter}>
+                        <p className={styles.Homecard1MatterContent}>Conect and qualify leads via WhatsApp and lorem ipsum lorem ipsum lorem ipsum.</p>
+                        <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
+                      </div>
+                      <div className={styles.Card1Button}>
+                        <sinch-button type="cta" text="Click to see more" onClick={()=>{}}/>
+                      </div>
+                    </div>
+                      <div className={styles.HomeContainer1}>
+                      <div className={styles.HomeCard1}>
+                        <div className={styles.cardimage1}>
+                          <img className={styles.card1} src={card1}/>
+                        </div>
+                        <sinch-tag style={{ marginLeft: '5%' }} text="New" category="grass"/>
+                        <p className={styles.HomeCard1Title}> Quick Leads Converter </p>
+                        <p className={styles.HomeCard1Body}> Generate potential leads via WhatsApp.</p>
                       </div>
                       <div className={styles.Homecard1Matter}>
                         <p className={styles.Homecard1MatterContent}>Conect and qualify leads via WhatsApp and lorem ipsum lorem ipsum lorem ipsum.</p>
