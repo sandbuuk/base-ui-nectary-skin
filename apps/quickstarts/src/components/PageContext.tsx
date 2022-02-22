@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useIsLoggedIn } from '../../../shell/src/hooks/useLogin'
 import type { FC } from 'react'
 
-const paths = ['/step-1', '/onboarding', '/step-2', '/step-3', '/step-4'] as const
+const paths = ['/step-1', '/step-2', '/step-3', '/step-4'] as const
 type TKnownPath = typeof paths[number]
 
 // const isKnownPath = (value: string): value is TKnownPath => (paths as readonly string[]).includes(value)
