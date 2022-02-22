@@ -6,7 +6,7 @@ import '@nectary/components/select'
 import '@nectary/components/textarea'
 import '@nectary/components/alert'
 import { useEffect, useRef } from 'react'
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import styles from './App.module.css'
 import { OnBoarding } from './OnBoarding'
 import { PageLayout } from './PageLayout'
@@ -42,7 +42,7 @@ export const App: FC<TApp> = ({ baseUrl }) => {
 
   return (
     <div className={styles.app}>
-      <HashRouter basename={baseUrl}>
+      <Router basename={baseUrl}>
         <Routes>
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Navigate to="step-1"/>}/>
@@ -54,7 +54,7 @@ export const App: FC<TApp> = ({ baseUrl }) => {
             <Route path="*" element={<PageNotFound/>}/>
           </Route>
         </Routes>
-      </HashRouter>
+      </Router>
     </div>
   )
 }

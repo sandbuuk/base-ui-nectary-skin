@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styles from './App.module.css'
 import { Login } from './components/Login'
 import { NotFound } from './components/NotFound'
@@ -40,7 +40,7 @@ export const App: FC<{}> = () => {
   }, [])
 
   return (
-    <HashRouter basename="/">
+    <Router basename="/">
       <div className={styles.app}>
         <header className={styles.header}>
           <sinch-logo-sinch-icon size={48}/>
@@ -73,6 +73,6 @@ export const App: FC<{}> = () => {
           </Routes>
         </main>
       </div>
-    </HashRouter>
+    </Router>
   )
 }
