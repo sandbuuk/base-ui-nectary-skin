@@ -1,8 +1,10 @@
 import {
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   getLiteralAttribute,
   updateAttribute,
+  updateBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -62,6 +64,14 @@ defineCustomElement('sinch-table-head-cell', class extends HTMLElement {
   get align(): TAlignType {
     return getLiteralAttribute(this, alignValues, 'align', 'start')
   }
+
+  set fit(isFit: boolean) {
+    updateBooleanAttribute(this, 'fit', isFit)
+  }
+
+  get fit() {
+    return getBooleanAttribute(this, 'fit')
+  }
 })
 
 export type TAlignType = typeof alignValues[number]
@@ -69,10 +79,12 @@ export type TAlignType = typeof alignValues[number]
 export type TSinchTableHeaderCellElement = HTMLElement & {
   text: string | null,
   align: TAlignType,
+  fit: boolean,
 }
 
 export type TSinchTableHeaderCellReact = TSinchElementReact<TSinchTableHeaderCellElement> & {
   text?: string,
+  fit?: boolean,
   align?: TAlignType,
 }
 

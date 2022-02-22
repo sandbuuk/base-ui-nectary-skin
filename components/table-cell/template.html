@@ -1,32 +1,38 @@
 <style>
 :host {
   display: table-cell;
-  vertical-align: middle;
+  vertical-align: top;
   border-bottom: 1px solid var(--sinch-color-snow-600);
-  height: 47px;
-  padding-left: 4px;
-  padding-right: 4px;
 }
 
-:host(:first-child) {
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 48px;
+  box-sizing: border-box;
+  padding: 8px 4px;
+}
+
+:host(:first-child) #wrapper {
   padding-left: 8px;
 }
 
-:host(:last-child) {
+:host(:last-child) #wrapper {
   padding-right: 8px;
 }
 
-:host([align="end"]) {
+:host([align="end"]) #wrapper {
   text-align: end;
+  align-items: flex-end;
 }
 
-:host([align="center"]) {
+:host([align="center"]) #wrapper {
   text-align: center;
-}
-
-::slotted(sinch-checkbox) {
-  display: block;
+  align-items: center;
 }
 </style>
 
-<slot></slot>
+<div id="wrapper">
+  <slot></slot>
+</div>
