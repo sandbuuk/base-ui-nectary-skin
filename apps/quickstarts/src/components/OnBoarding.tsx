@@ -1,7 +1,9 @@
+import { useContext } from 'react'
+import { TokenContext } from '../contexts'
 import { useOnBoardingControl } from './OnBoardingcontext'
-import styles from './Page.module.css'
+import styles from './Onboarding.module.css'
 import { usePageControl } from './PageContext'
-import { usePageOneControl } from './PageStepOneContext'
+// import { usePageOneControl } from './PageStepOneContext'
 import capturing from './images/capturing.png'
 import correct from './images/correct.png'
 import decision from './images/decision.png'
@@ -19,9 +21,9 @@ import type { FC } from 'react'
 export const OnBoarding: FC = () => {
   const { next } = usePageControl()
   const { username, setUsername } = useOnBoardingControl()
-  const { token } = usePageOneControl()
+  const token = useContext(TokenContext)
 
-  if (token.length > 0) {
+  if (token !== null) {
     return (
       <div className={styles.onboardingPage}>
         <div className={styles.onboardingHeader}>
@@ -149,8 +151,10 @@ export const OnBoarding: FC = () => {
     )
   }
 
-  return (
-    <div style={{ textAlign: 'center' }}>Sign In First</div>
-  )
+  return <div>Login First</div>
 }
+
+// return (
+//   <div style={{ textAlign: 'center' }}>Sign In First</div>
+// )
 

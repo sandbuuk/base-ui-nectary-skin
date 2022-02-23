@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { TokenContext } from '../contexts'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
-import { usePageOneControl } from './PageStepOneContext'
 import { usePageThreeControl } from './PageStepThreeContext'
 import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
-//import botMobile from './images/botMobile.png'
 import chatlayerlogo from './images/chatlayerlogo.jpg'
 import mobile from './images/mobile.png'
-//import info from './images/info.png'
 import type { FC } from 'react'
 
 type Props = {
@@ -22,8 +20,6 @@ type Props = {
 const WhatsappDetails: FC<Props> = (props): JSX.Element => {
   const { name, botquestion, setBotquestion, setActiveelement } = props
   const k = name
-
-  console.log(botquestion)
 
   function getActiveElement(root: Document | ShadowRoot = document): Element | null {
     const activeEl = root.activeElement
@@ -117,9 +113,10 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
 
 export const PageStepThree: FC = () => {
   const { botquestion, setBotquestion, greetingmsg, setGreetingmsg } = usePageThreeControl()
+  const token = useContext(TokenContext)
   const { next } = usePageControl()
   const { handleNext } = useStepperControl()
-  const { token } = usePageOneControl()
+  //const { token } = usePageOneControl()
 
   //handleNext(0);
   const { prev } = usePageControl()
@@ -147,7 +144,7 @@ export const PageStepThree: FC = () => {
     handleBack()
   }
 
-  if (token.length == 0) {
+  if (token !== null) {
     return (
       <div className={styles.botpageWhatsapp}>
         {/* <div className={styles.botsteps}>
@@ -193,8 +190,6 @@ export const PageStepThree: FC = () => {
                       const value = e.nativeEvent.detail
 
                       setGreetingmsg(value)
-                      console.log(greetingmsg)
-                      console.log(botquestion)
                     }}
                     onFocus={() => {
                       //setDisplay(false)
@@ -270,7 +265,5 @@ export const PageStepThree: FC = () => {
     )
   }
 
-  return (
-    <div style={{ textAlign: 'center' }}>Sign In First</div>
-  )
+  return <div>Login First</div>
 }

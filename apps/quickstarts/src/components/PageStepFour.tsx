@@ -1,9 +1,10 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { useOnBoardingControl } from './OnBoardingcontext'
+import { useContext, useEffect, useState } from 'react'
+import { TokenContext } from '../contexts'
+// import { useOnBoardingControl } from './OnBoardingcontext'
 import styles from './Page.module.css'
 import { usePageControl } from './PageContext'
-import { usePageOneControl } from './PageStepOneContext'
+// import { usePageOneControl } from './PageStepOneContext'
 import { usePageThreeControl } from './PageStepThreeContext'
 import { PageSteps } from './PageSteps'
 import { useStepperControl } from './StepperContext'
@@ -11,7 +12,6 @@ import congratsimage from './images/congratsimage.jpg'
 import contactlogo from './images/contactlogo.jpg'
 import errorimage from './images/erroDialogImage.png'
 import mobile from './images/mobile.png'
-import verticalLine from './images/verticalLine.png'
 import type { FC } from 'react'
 
 type WhatsappquestionProps={
@@ -35,6 +35,50 @@ type Props = {
 type Propsed = {
   iserror: boolean,
   setIserror: (value: any) => void,
+}
+
+async function SendData(data: any) {
+  const questions = []
+
+  const { token, greetingmsg, botquestion, humanhandover, agentdetails } = data
+
+  questions.push({ questionText: greetingmsg })
+
+  Object.keys(botquestion).map((i: any) => {
+    console.log(`i=${i})`)
+    questions.push({ questionText: botquestion[i] })
+  })
+
+  questions.push({ questionText: humanhandover })
+
+  let agents: { name: string, email: string }[] = []
+
+  Object.keys(agentdetails).map((index: any) => {
+    if (agentdetails[index].name.length > 0 && agentdetails[index].email.length > 0) {
+      agents.push({ name: agentdetails[index].name, email: agentdetails[index].email })
+    }
+  })
+
+  agents = agents.filter((val) => {
+    if (val != null) {
+      return val
+    }
+  })
+
+  const content = JSON.stringify({
+    questions,
+    agents,
+  })
+  const url = 'https://quickstart.default.labengage.sinch.com/configuration'
+  const config = { headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token?.token}` } }
+
+  try {
+    const response = await axios.post(url, content, config)
+
+    return response
+  } catch (err) {
+    return null
+  }
 }
 
 export const Dialog: FC<Props> = (props): JSX.Element => {
@@ -70,7 +114,6 @@ export const Dialog: FC<Props> = (props): JSX.Element => {
           alignSelf: 'flex-end',
         }}
         onClick={() => {
-          console.log('Heyyyy')
           setIsOpen((isOpen: boolean) => {
             return !isOpen
           })
@@ -131,7 +174,6 @@ export const ErrorDialog: FC<Propsed> = (props): JSX.Element => {
           type="cta"
           text="Try again"
           onClick={() => {
-            console.log('Heyyyy')
             setIserror((isOpen: boolean) => {
               return !isOpen
             })
@@ -152,42 +194,41 @@ export const ErrorDialog: FC<Propsed> = (props): JSX.Element => {
   )
 }
 
+function getActiveElement(root: Document | ShadowRoot = document): Element | null {
+  const activeEl = root.activeElement
+
+  if (activeEl == null) {
+    return null
+  }
+
+  if (activeEl.shadowRoot != null) {
+    if (activeEl.tagName == 'SINCH-INPUT' || activeEl.tagName == 'SINCH-TEXTAREA') {
+      return activeEl
+    }
+
+    return getActiveElement(activeEl.shadowRoot)
+  }
+
+  return activeEl
+}
+
+const validateEmail = (email: String) => {
+  return String(email)
+    .match(
+      /^(.+)@(.+)$/
+    )
+}
+
 const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
   const { agentdetails, questionCounter, setAgentdetails, setDisplay, setActiveelement } = props
 
-  function getActiveElement(root: Document | ShadowRoot = document): Element | null {
-    const activeEl = root.activeElement
-
-    if (activeEl == null) {
-      return null
-    }
-
-    if (activeEl.shadowRoot != null) {
-      if (activeEl.tagName == 'SINCH-INPUT' || activeEl.tagName == 'SINCH-TEXTAREA') {
-        return activeEl
-      }
-
-      return getActiveElement(activeEl.shadowRoot)
-    }
-
-    return activeEl
-  }
-
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(`Active elkement entante ${getActiveElement()?.className}`)
       setActiveelement(getActiveElement() == null ? '' : getActiveElement()!.className)
     }, 1000)
 
     return () => clearInterval(interval)
   }, [])
-
-  const validateEmail = (email: String) => {
-    return String(email)
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
-  }
 
   console.log(agentdetails, questionCounter)
 
@@ -280,6 +321,7 @@ const AgentInformation = (props: AgentInformationProps) => {
 
 export const PageStepFour: FC = () => {
   //const { next } = usePageControl()
+  const token = useContext(TokenContext)
 
   const [agentdetails, setAgentdetails] = useState([{ name: '', email: '' }])
 
@@ -295,9 +337,9 @@ export const PageStepFour: FC = () => {
 
   console.log(agentdetails)
 
-  const { accountId } = usePageOneControl()
+  //const { accountId } = usePageOneControl()
 
-  const { token } = usePageOneControl()
+  //const { token } = usePageOneControl()
 
   const validateEmail = (email: String) => {
     return String(email)
@@ -306,24 +348,23 @@ export const PageStepFour: FC = () => {
       )
   }
 
-  console.log(accountId)
-
   const { botquestion, humanhandover, greetingmsg, setHumanhandover } = usePageThreeControl()
-  const { username } = useOnBoardingControl()
+  // const { username } = useOnBoardingControl()
+
+  // console.log(username)
+
   const { prev } = usePageControl()
   const { handleBack } = useStepperControl()
   //handleNext(1);
   const [questionCounter, setCounter] = useState(1)
 
-  const [count, setCount] = useState(0)
+  const [agentcount, setAgentcount] = useState(0)
 
   const handleClickOpen = () => {
     setIsOpen(true)
   }
 
   const buttonCounter = () => {
-    console.log(questionCounter)
-
     if (questionCounter < 6) {
       setCounter((prevCounter) => prevCounter + 1)
 
@@ -331,68 +372,24 @@ export const PageStepFour: FC = () => {
 
       agentdetails[length] = { name: '', email: '' }
 
-      setCount((count) => count + 1)
+      setAgentcount((count) => count + 1)
     }
   }
 
   async function nextPage() {
-    const questions = []
+    const data = {
+      token,
+      greetingmsg,
+      botquestion,
+      agentdetails,
+      humanhandover,
+    }
+    const response = await SendData(data)
 
-    questions.push({ questionText: greetingmsg })
-
-    const botquestions = Object.keys(botquestion).map((i: any) => {
-      console.log(`i=${i})`)
-      questions.push({ questionText: botquestion[i] })
-    })
-
-    console.log(botquestions)
-    console.log(questions)
-
-    questions.push({ questionText: humanhandover })
-
-    let agents: { name: string, email: string }[] = []
-    const agentDetails = Object.keys(agentdetails).map((index: any) => {
-      if (agentdetails[index].name.length > 0 && agentdetails[index].email.length > 0) {
-        agents.push({ name: agentdetails[index].name, email: agentdetails[index].email })
-      }
-    })
-
-    console.log(agentDetails)
-
-    // const agentsDetails = agentdetails.map((val, index) => {
-    //   console.log(index)
-
-    //   if (val.name.length > 0 && val.email.length > 0) {
-    //     agents.push({ name: val.name, email: val.email })
-    //   }
-    // })
-
-    agents = agents.filter((val) => {
-      if (val != null) {
-        return val
-      }
-    })
-
-    const content = JSON.stringify({
-      accountId,
-      name: username,
-      questions,
-      agents,
-    })
-    const url = 'https://quickstart.default.labengage.sinch.com/configuration'
-    const config = { headers: { 'Content-Type': 'application/json' } }
-
-    if (accountId.length > 0) {
-      const response = await axios.put(url, content, config)
-
-      if (typeof (response.data.info) != 'undefined') {
-        setIserror(true)
-      } else {
-        console.log(response)
-        handleClickOpen()
-      }
+    if (response === null) {
+      setIserror(true)
     } else {
-      console.log('SignIn first')
+      handleClickOpen()
     }
   }
 
@@ -401,7 +398,7 @@ export const PageStepFour: FC = () => {
     handleBack()
   }
 
-  if (token.length >= 0) {
+  if (token !== null) {
     return (
       <div className={styles.pageWhatsapp}>
         <div className={styles.mainBodyWhatsapp}>
@@ -444,7 +441,7 @@ export const PageStepFour: FC = () => {
           <div className={styles.botwhatsappBody}>
             <div className={styles.messagesParent}>
               <div className={styles.humanMessages}>
-                { <WhatsappQuestion setActiveelement={setActiveelement} activeelement={activeelement} setDisplay={setDisplay} questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={count} i={count}/>}
+                { <WhatsappQuestion setActiveelement={setActiveelement} activeelement={activeelement} setDisplay={setDisplay} questionCounter={questionCounter} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={agentcount} i={agentcount}/>}
                 <div className={styles.humanButton}>
                   <sinch-button
                     style={{ width: '100%' }}
@@ -456,7 +453,7 @@ export const PageStepFour: FC = () => {
                 </div>
                 <table className={styles.humanDetails}>
                   <thead>
-                    <tr className={count > 0 ? styles.human : styles.humanhidden}>
+                    <tr className={agentcount > 0 ? styles.human : styles.humanhidden}>
                       <th className={styles.humanName}>
                         Name
                       </th>
@@ -473,7 +470,8 @@ export const PageStepFour: FC = () => {
                   </tbody>
                 </table>
               </div>
-              <img className={styles.humanLine} src={verticalLine}/>
+              <hr style={{ border: '1px solid #DDE0E2', height: '350px' }}/>
+              {/* <img className={styles.humanLine} src={verticalLine}/> */}
               <div className={styles.humanHandover}>
                     <sinch-textarea // eslint-disable-line
                       value={humanhandover}
@@ -519,7 +517,7 @@ export const PageStepFour: FC = () => {
                         </>
                       )
                     })}
-                    <div key={'humanhandovermessage'} className={humanhandover.length > 0 && activeelement != 'humanhandover' ? styles.botMessage : styles.hide}>
+                    <div key="humanhandovermessage" className={humanhandover.length > 0 && activeelement != 'humanhandover' ? styles.botMessage : styles.hide}>
                       {humanhandover}
                     </div>
 
@@ -536,7 +534,7 @@ export const PageStepFour: FC = () => {
               <sinch-button type="destructive" text="Back" onClick={prevPage}/>
             </div>
             <div className={styles.saveButhum}>
-              <sinch-button type="primary" text="Next" onClick={nextPage} disabled={Object.keys(agentdetails).length > 1 ? undefined : true}/>
+              <sinch-button type="primary" text="Save" onClick={nextPage} disabled={Object.keys(agentdetails).length > 1 ? undefined : true}/>
             </div>
           </div>
         </div>
@@ -546,7 +544,5 @@ export const PageStepFour: FC = () => {
     )
   }
 
-  return (
-    <div>Sign in First</div>
-  )
+  return <div>Login First</div>
 }
