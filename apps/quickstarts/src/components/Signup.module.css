@@ -1,0 +1,203 @@
+
+h2 {
+  font: var(--sinch-font-title-1);
+  margin-bottom: 0%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+
+.sinchInput{
+  width: 80%;
+}
+
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  font-family: "Gilroy-Regular", sans-serif;
+  flex: 8;
+  background-color: white;
+  position: relative;
+}
+
+.page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+  background-color: #e5e5e5;
+}
+
+.buttonWrapper {
+  margin-block-start: auto;
+  text-align: end;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+  margin-top:15px;
+  background-color: #ffffff;
+  flex: 4;
+}
+
+.parentLogin {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  background-color: #ffffff;
+  flex: 4;
+}
+
+.buttonLarge {
+  width: 300px;
+}
+.signUp {
+  display: flex;
+  margin-left: 15%;
+  flex: 1;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+.signupLogin{
+  margin-top: 3%;
+}
+
+.signIn {
+  display: flex;
+  margin-left: 15%;
+  flex: 12;
+  justify-content: stretch;
+  flex-direction: column;
+}
+
+.creatrAcc {
+  height: 50px;
+  width: 300px;
+  background-color: chartreuse !important;
+}
+
+.loginButton{
+  margin-top: 10px;
+  width: 100% !important;
+  height: 50px !important;
+}
+.picture {
+  background-color: lightblue;
+}
+
+.fontName {
+  font: var(--sinch-font-title-1);
+  margin-bottom: 0%;
+  font-size: 64px;
+  font-weight: 200;
+  color: #0A273D
+}
+
+.fontNameTitle{
+  font: var(--sinch-font-title-2);
+  font-size: 40px;
+  margin-top:15px;
+  margin-bottom:50px;
+  color: #0A273D;
+}
+
+.sinchlogo {
+  height: auto;
+  width: 80px;
+  margin: 2%;
+  margin-top:45px;
+}
+
+.nameAlogo {
+  display: flex;
+  flex-direction: row;
+  margin-top:10px;
+  justify-content: center;
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+}
+
+.signupDescription{
+  display: flex;
+  justify-content: center;
+}
+.signupDescriptionText{
+  font: var(--sinch-font-body);
+  font-weight: 200;
+  margin-left:25px;
+  font-size: 22px;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+}
+
+.simage {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.signupImage {
+  width: 430px;
+  height: auto;
+}
+
+.createAccdiv {
+  display: flex;
+  justify-content: stretch;
+}
+
+.createAcc {
+  width: 100% !important;
+  height: 50px !important;
+  background-color: beige !important;
+}
+
+.signupFG {
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.signinFG {
+  margin-top: 30%;
+  margin-bottom: 20%;
+}
+
+.facebookSignup {
+  display: flex;
+  flex: 0 1 1000px;
+  margin-top: 4%;
+}
+
+.googleImg {
+  height: 30px;
+  width: 30px;
+}
+
+.signinImage {
+  height: 350px;
+  width: 630px;
+}
+
+.errorAlert{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.hiddenerrorAlert{
+  display: none;
+}

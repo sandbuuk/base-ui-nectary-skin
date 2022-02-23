@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useIsLoggedIn } from '../../../shell/src/hooks/useLogin'
 import type { FC } from 'react'
 
 const paths = ['/step-1', '/step-2', '/step-3', '/step-4'] as const
@@ -58,12 +57,6 @@ export const PageContext: FC<{}> = ({ children }) => {
   }, [navigate])
 
   console.log(pathname)
-
-  const isLoggedIn = useIsLoggedIn()
-
-  if (pathname.length > 11 && isLoggedIn == true) {
-    reset()
-  }
 
   const state: TPageContext = {
     next,
