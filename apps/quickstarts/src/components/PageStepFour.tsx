@@ -12,7 +12,6 @@ import congratsimage from './images/congratsimage.jpg'
 import contactlogo from './images/contactlogo.jpg'
 import errorimage from './images/erroDialogImage.png'
 import mobile from './images/mobile.png'
-import verticalLine from './images/verticalLine.png'
 import type { FC } from 'react'
 
 type WhatsappquestionProps={
@@ -471,7 +470,8 @@ export const PageStepFour: FC = () => {
                   </tbody>
                 </table>
               </div>
-              <img className={styles.humanLine} src={verticalLine}/>
+              <hr style={{ border: '1px solid #DDE0E2', height: '350px' }}/>
+              {/* <img className={styles.humanLine} src={verticalLine}/> */}
               <div className={styles.humanHandover}>
                     <sinch-textarea // eslint-disable-line
                       value={humanhandover}
