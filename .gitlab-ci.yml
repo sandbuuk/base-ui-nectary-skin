@@ -85,7 +85,7 @@ build-shell:
   before_script:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
-    - yarn build:shell --output-path dist/
+    - yarn build:shell --output-path ../../dist/
   artifacts:
     paths:
       - dist/
@@ -108,7 +108,7 @@ build-quickstarts:
   before_script:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
-    - yarn build:quickstarts --output-path dist/
+    - yarn build:quickstarts --output-path ../../dist/
   artifacts:
     paths:
       - dist/
