@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@nectary/components/accordion'
+import '@sinch-engage/nectary/accordion'
 
 @Component({
   selector: 'accordion-component',

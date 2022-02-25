@@ -1,4 +1,4 @@
-import '@nectary/components'
+import '@sinch-engage/nectary'
 import { Accordion } from './components/Accordion'
 import { Alert } from './components/Alert'
 import { Button } from './components/Button'

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@nectary/components/button'
+import '@sinch-engage/nectary/button'
 
 @Component({
   selector: 'button-component',

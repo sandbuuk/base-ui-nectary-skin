@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
-import '@nectary/components/icon/open-in-new'
-import '@nectary/components/help-tooltip'
-import '@nectary/components/select'
+import '@sinch-engage/nectary/icon/open-in-new'
+import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/select'
 
 @Component({
   selector: 'select-component',

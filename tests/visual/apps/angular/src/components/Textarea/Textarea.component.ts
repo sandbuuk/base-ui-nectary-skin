@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@nectary/components/textarea'
-import '@nectary/components/help-tooltip'
+import '@sinch-engage/nectary/textarea'
+import '@sinch-engage/nectary/help-tooltip'
 
 @Component({
   selector: 'textarea-component',

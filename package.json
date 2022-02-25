@@ -25,7 +25,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
-    "@nectary/components": "*",
+    "@sinch-engage/nectary": "*",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addons": "^6.3.12",
     "@storybook/client-api": "^6.3.12",

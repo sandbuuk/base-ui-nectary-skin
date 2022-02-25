@@ -7,8 +7,8 @@ import card3 from './images/card3.png'
 import homeimage2 from './images/homeimage2.png'
 import offering from './images/offering.png'
 import type { FC } from 'react'
-import '@nectary/components/tabs'
-import '@nectary/components/tag'
+import '@sinch-engage/nectary/tabs'
+import '@sinch-engage/nectary/tag'
 
 export const Home: FC = () => {
   const { next } = usePageControl()

@@ -1,7 +1,7 @@
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
-import { defineNectaryElements } from '@nectary/components/utils'
 import { filterMessage, isData, isTokenMessage, listenToBus, tokenRequestMessage, sendMessageOnBus } from '@saas/bus'
+import { defineNectaryElements } from '@sinch-engage/nectary/utils'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { App } from './components/App'
 import { TokenContext } from './contexts'

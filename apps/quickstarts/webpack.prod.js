@@ -72,7 +72,7 @@ module.exports = {
         './Container': require.resolve('./src/container.tsx'),
       },
       shared: {
-        '@nectary/components/theme.css': {
+        '@sinch-engage/nectary/theme.css': {
           requiredVersion: '*',
         },
         react: {

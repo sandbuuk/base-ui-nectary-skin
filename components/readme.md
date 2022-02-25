@@ -11,15 +11,15 @@ Design System's framework-agnostic Component Library implementation.
 Add the following line to `.npmrc` in the project root:
 
 ```
-@nectary:registry=https://nexus.int.clxnetworks.net/repository/sinch_npm/
+//registry.npmjs.org/:_authToken=REDACTED
 ```
 
 Add the component library dependency to `package.json`:
 
 ```
-npm install @nectary/components
+npm install @sinch-engage/nectary
 # or
-yarn add @nectary/components
+yarn add @sinch-engage/nectary
 ```
 
 ⚠️ VPN is required.
@@ -31,7 +31,7 @@ yarn add @nectary/components
 Import CSS file with [custom properties](./theme.css) (variables):
 
 ```js
-import '@nectary/components/theme.css'
+import '@sinch-engage/nectary/theme.css'
 ```
 
 Use color palette or custom font face:
@@ -51,7 +51,7 @@ h2 {
 Import component:
 
 ```js
-import '@nectary/components/button'
+import '@sinch-engage/nectary/button'
 ```
 
 Use it in React/Vue/Angular/etc, for example:
@@ -115,7 +115,7 @@ Then add this part to your jest.config.js file:
 It lets Jest know how to mock the css imports in your codebase, like for example when you import the theme:
 
 ```js
-import '@nectary/components/theme.css'
+import '@sinch-engage/nectary/theme.css'
 ```
 
 This import should not throw an error now.
@@ -151,7 +151,7 @@ module.exports = {presets: ['@babel/preset-env']}
 If you import any component:
 
 ```js
-import '@nectary/components/input'
+import '@sinch-engage/nectary/input'
 ```
 
 It should not throw the error: 

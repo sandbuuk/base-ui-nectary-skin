@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@nectary/components/spinner'
+import '@sinch-engage/nectary/spinner'
 
 @Component({
   selector: 'spinner-component',

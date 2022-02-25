@@ -162,7 +162,7 @@ publish-components:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
     - yarn --cwd components/ build
-    - echo "//nexus.int.clxnetworks.net/repository/sinch_npm/:_authToken=${NPM_TOKEN}" > .npmrc
+    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish components/
     - node ./scripts/slack-changelog.js
 

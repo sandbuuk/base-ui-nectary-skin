@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@nectary/components/tabs'
+import '@sinch-engage/nectary/tabs'
 
 @Component({
   selector: 'tabs-component',

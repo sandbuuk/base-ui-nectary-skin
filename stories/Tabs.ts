@@ -1,6 +1,6 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
-import '@nectary/components/tabs'
+import '@sinch-engage/nectary/tabs'
 
 export default {
   title: 'Components/Tabs',

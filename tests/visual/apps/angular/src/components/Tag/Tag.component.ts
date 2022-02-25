@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@nectary/components/tag'
-import '@nectary/components/tag-close'
+import '@sinch-engage/nectary/tag'
+import '@sinch-engage/nectary/tag-close'
 
 @Component({
   selector: 'tag-component',

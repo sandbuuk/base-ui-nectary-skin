@@ -1,7 +1,7 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
-import '@nectary/components/help-tooltip'
-import '@nectary/components/input'
+import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/input'
 
 export default {
   title: 'Components/Input',

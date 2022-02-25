@@ -1,6 +1,6 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
-import '@nectary/components/checkbox'
+import '@sinch-engage/nectary/checkbox'
 
 export default {
   title: 'Components/Checkbox',

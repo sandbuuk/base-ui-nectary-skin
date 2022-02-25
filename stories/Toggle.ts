@@ -1,6 +1,6 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
-import '@nectary/components/toggle'
+import '@sinch-engage/nectary/toggle'
 
 export default {
   title: 'Components/Toggle',

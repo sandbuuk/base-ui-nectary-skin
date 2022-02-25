@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@nectary/components/input'
-import '@nectary/components/help-tooltip'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/help-tooltip'
 
 @Component({
   selector: 'input-component',
