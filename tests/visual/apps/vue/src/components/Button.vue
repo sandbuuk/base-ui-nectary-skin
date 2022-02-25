@@ -7,7 +7,7 @@
     @click="onClick"
     @focusin="onFocus"
     @focusout="onBlur">
-    <sinch-icon-open-in-new v-if="hasIcon" v-bind:size="isSmall ? 16 : 24" slot="icon"></sinch-icon-open-in-new>
+    <sinch-icon-open-in-new v-if="hasIcon" v-bind:size="isSmall ? '16' : '24'" slot="icon"></sinch-icon-open-in-new>
     <sinch-spinner v-if="hasSpinner" static v-bind:type="isSmall ? 'small' : 'medium'" slot="icon"></sinch-spinner>
   </sinch-button>
 </template>
