@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@nectary/components/link'
+import '@sinch-engage/nectary/link'
 
 @Component({
   selector: 'link-component',

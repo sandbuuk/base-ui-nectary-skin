@@ -1,3 +1,3 @@
 /* eslint-disable no-eval */
-import '@nectary/components'
+import '@sinch-engage/nectary'
 import 'axe-core'

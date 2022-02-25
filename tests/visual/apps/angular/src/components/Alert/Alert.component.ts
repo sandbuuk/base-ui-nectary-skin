@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
-import '@nectary/components/alert'
-import '@nectary/components/alert-close'
-import '@nectary/components/alert-button'
+import '@sinch-engage/nectary/alert'
+import '@sinch-engage/nectary/alert-close'
+import '@sinch-engage/nectary/alert-button'
 
 @Component({
   selector: 'alert-component',

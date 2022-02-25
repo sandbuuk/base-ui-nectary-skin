@@ -88,7 +88,7 @@ module.exports = {
       name: CONTAINER,
       remotes: apps,
       shared: {
-        '@nectary/components/theme.css': {
+        '@sinch-engage/nectary/theme.css': {
           requiredVersion: '*',
         },
         react: {

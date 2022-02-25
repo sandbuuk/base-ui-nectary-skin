@@ -9,8 +9,8 @@ import google from './images/googlebg.jpg'
 import signupimage from './images/signup.jpg'
 import sinchlogo from './images/sinchlogo.jpg'
 import type { FC } from 'react'
-import '@nectary/components/input'
-import '@nectary/components/select'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/select'
 
 export const PageStepOne: FC = () => {
   const { next } = usePageControl()

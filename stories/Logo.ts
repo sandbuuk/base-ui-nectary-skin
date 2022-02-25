@@ -1,9 +1,9 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchLogoElement, TSinchLogoReact } from '@nectary/components/logo/types'
+import type { TSinchLogoElement, TSinchLogoReact } from '@sinch-engage/nectary/logo/types'
 import type { Story, Meta } from '@storybook/html'
-import '@nectary/components/theme.css'
-import '@nectary/components/logo/sinch-icon'
-import '@nectary/components/logo/sinch-icon-wordmark'
+import '@sinch-engage/nectary/theme.css'
+import '@sinch-engage/nectary/logo/sinch-icon'
+import '@sinch-engage/nectary/logo/sinch-icon-wordmark'
 
 export default {
   title: 'Components/Logo',

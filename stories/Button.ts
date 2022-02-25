@@ -1,9 +1,9 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
-import '@nectary/components/theme.css'
-import '@nectary/components/button'
-import '@nectary/components/icon/open-in-new'
-import '@nectary/components/spinner'
+import '@sinch-engage/nectary/theme.css'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icon/open-in-new'
+import '@sinch-engage/nectary/spinner'
 
 export default {
   title: 'Components/Button',

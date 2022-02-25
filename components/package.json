@@ -1,5 +1,5 @@
 {
-  "name": "@nectary/components",
+  "name": "@sinch-engage/nectary",
   "version": "0.7.1",
   "files": [
     "theme.css",
@@ -11,9 +11,7 @@
     "index.d.ts",
     "types.d.ts"
   ],
-  "publishConfig": {
-    "registry": "https://nexus.int.clxnetworks.net/repository/sinch_npm/"
-  },
+  "private": true,
   "scripts": {
     "prebuild": "rimraf utils.{js,d.ts} index.{js,d.ts} */*.{js,d.ts} */**/*.{js,d.ts}",
     "build": "NODE_ENV=production babel . --extensions '.ts' --ignore '*.d.ts' --out-dir .",

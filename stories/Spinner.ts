@@ -1,7 +1,7 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
-import '@nectary/components/theme.css'
-import '@nectary/components/spinner'
+import '@sinch-engage/nectary/theme.css'
+import '@sinch-engage/nectary/spinner'
 
 export default {
   title: 'Components/Spinner',

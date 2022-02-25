@@ -1,8 +1,8 @@
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
-import '@nectary/components/alert'
-import '@nectary/components/alert-close'
-import '@nectary/components/alert-button'
+import '@sinch-engage/nectary/alert'
+import '@sinch-engage/nectary/alert-close'
+import '@sinch-engage/nectary/alert-button'
 
 export default {
   title: 'Components/Alert',

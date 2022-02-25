@@ -1,7 +1,7 @@
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
-import '@nectary/components/tag'
-import '@nectary/components/tag-close'
+import '@sinch-engage/nectary/tag'
+import '@sinch-engage/nectary/tag-close'
 
 export default {
   title: 'Components/Tag',

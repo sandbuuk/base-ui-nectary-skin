@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import '@nectary/components'
+import '@sinch-engage/nectary'
 import Accordion from './components/Accordion.vue'
 import Alert from './components/Alert.vue'
 import Button from './components/Button.vue'

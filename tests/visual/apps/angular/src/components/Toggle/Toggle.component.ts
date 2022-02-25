@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@nectary/components/toggle'
+import '@sinch-engage/nectary/toggle'
 
 @Component({
   selector: 'toggle-component',

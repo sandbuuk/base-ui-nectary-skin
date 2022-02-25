@@ -6,19 +6,19 @@ import { NotFound } from './components/NotFound'
 import { Quickstarts } from './components/Quickstarts'
 import { SidebarButton } from './components/SidebarButton'
 import type { FC } from 'react'
-import '@nectary/components/theme.css'
-import '@nectary/components/tooltip'
-import '@nectary/components/logo/sinch-icon'
-import '@nectary/components/icon-branded/home'
-import '@nectary/components/icon-branded/rocket'
-import '@nectary/components/icon-branded/contact'
-import '@nectary/components/icon-branded/chatbot'
-import '@nectary/components/icon-branded/campaigns'
-import '@nectary/components/icon-branded/barchart-down'
-import '@nectary/components/icon-branded/user'
-import '@nectary/components/icon-branded/users'
-import '@nectary/components/icon-branded/multiple-channels'
-import '@nectary/components/icon-branded/settings'
+import '@sinch-engage/nectary/theme.css'
+import '@sinch-engage/nectary/tooltip'
+import '@sinch-engage/nectary/logo/sinch-icon'
+import '@sinch-engage/nectary/icon-branded/home'
+import '@sinch-engage/nectary/icon-branded/rocket'
+import '@sinch-engage/nectary/icon-branded/contact'
+import '@sinch-engage/nectary/icon-branded/chatbot'
+import '@sinch-engage/nectary/icon-branded/campaigns'
+import '@sinch-engage/nectary/icon-branded/barchart-down'
+import '@sinch-engage/nectary/icon-branded/user'
+import '@sinch-engage/nectary/icon-branded/users'
+import '@sinch-engage/nectary/icon-branded/multiple-channels'
+import '@sinch-engage/nectary/icon-branded/settings'
 
 export const App: FC<{}> = () => {
   const bus = useRef<BroadcastChannel>()
@@ -43,7 +43,7 @@ export const App: FC<{}> = () => {
     <Router basename="/">
       <div className={styles.app}>
         <header className={styles.header}>
-          <sinch-logo-sinch-icon size={48}/>
+          <sinch-logo-sinch-icon size={32}/>
           <Login/>
         </header>
         <aside className={styles.aside}>
