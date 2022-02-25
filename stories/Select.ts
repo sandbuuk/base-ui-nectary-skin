@@ -2,7 +2,7 @@ import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
 import '@nectary/components/select'
-import '@nectary/components/input-tooltip'
+import '@nectary/components/help-tooltip'
 
 export default {
   title: 'Components/Select',
@@ -110,12 +110,12 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-select'
 }
 
 export const Select = Template(`
-<sinch-input-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-input-tooltip>
+<sinch-help-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-help-tooltip>
 <sinch-select-option value="1" text="Option 1 value" slot="select">
-  <sinch-icon-share></sinch-icon-share>
+  <sinch-icon-open-in-new></sinch-icon-open-in-new>
 </sinch-select-option>
 <sinch-select-option value="2" text="Option 2 value" slot="select" disabled>
-  <sinch-icon-share></sinch-icon-share>
+  <sinch-icon-open-in-new></sinch-icon-open-in-new>
 </sinch-select-option>
 <sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
 <sinch-select-option value="4" text="Option 4 value" slot="select"></sinch-select-option>
@@ -133,12 +133,12 @@ Select.parameters = {
     source: {
       code: `
 <sinch-select value={value} onChange={setValue}>
-  <sinch-input-tooltip text="Tooltip text long" slot="tooltip"></sinch-input-tooltip>
+  <sinch-help-tooltip text="Tooltip text long" slot="tooltip"></sinch-help-tooltip>
   <sinch-select-option value="1" text="Option 1 value" slot="select">
-    <sinch-icon-share></sinch-icon-share>
+    <sinch-icon-open-in-new></sinch-icon-open-in-new>
   </sinch-select-option>
   <sinch-select-option value="2" text="Option 2 value" slot="select" disabled>
-    <sinch-icon-share></sinch-icon-share>
+    <sinch-icon-open-in-new></sinch-icon-open-in-new>
   </sinch-select-option>
   <sinch-select-option value="3" text="Option 3 value" slot="select"></sinch-select-option>
   <sinch-select-option value="4" text="Option 4 value" slot="select"></sinch-select-option>

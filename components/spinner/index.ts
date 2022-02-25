@@ -28,13 +28,13 @@ defineCustomElement('sinch-spinner', class extends HTMLElement {
   }
 })
 
-type TSinchSpinnerType = typeof spinnerTypes[number]
+export type TSinchSpinnerType = typeof spinnerTypes[number]
 
-type TSinchSpinnerElement = HTMLElement & {
+export type TSinchSpinnerElement = HTMLElement & {
   type: TSinchSpinnerType,
 }
 
-type TSinchSpinnerReact = TSinchElementReact<TSinchSpinnerElement> & {
+export type TSinchSpinnerReact = TSinchElementReact<TSinchSpinnerElement> & {
   type?: TSinchSpinnerType,
   static?: boolean,
 }

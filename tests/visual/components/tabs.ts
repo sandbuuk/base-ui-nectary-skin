@@ -22,8 +22,8 @@ const singleOption = encodeURI(JSON.stringify([{
   text: 'Option value 1',
   icon: true,
 }]))
-const withOptions = makeScreenshotTests(`/tabs?width=200&options=${options}`, 'sinch-tabs')
-const withSingleOption = makeScreenshotTests(`/tabs?width=200&options=${singleOption}`, 'sinch-tabs')
+const withOptions = makeScreenshotTests(`/tabs?width=300&options=${options}`, 'sinch-tabs')
+const withSingleOption = makeScreenshotTests(`/tabs?options=${singleOption}`, 'sinch-tabs')
 const narrowLabel = makeScreenshotTests(`/tabs?width=100&options=${singleOption}`, 'sinch-tabs')
 
 test('narrow', narrowLabel(async function* () {

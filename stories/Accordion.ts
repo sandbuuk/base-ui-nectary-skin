@@ -41,13 +41,13 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-accordi
 export const Accordion = Template(`
 <sinch-accordion-item value="1" label="Item 1">
   <span>Accordion content</span>
-  <sinch-icon-share slot="icon"></sinch-ison-share>
+  <sinch-icon-open-in-new slot="icon"></sinch-ison-share>
 </sinch-accordion-item>
 <sinch-accordion-item value="2" label="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.">
   <span>Accordion content</span>
 </sinch-accordion-item>
 <sinch-accordion-item value="3" label="Disabled Item" disabled>
-  <sinch-icon-share slot="icon"></sinch-ison-share>
+  <sinch-icon-open-in-new slot="icon"></sinch-ison-share>
 </sinch-accordion-item>
 <sinch-accordion-item value="4" label="Item 4">
   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
@@ -66,13 +66,13 @@ Accordion.parameters = {
 <sinch-accordion value={value} onChange={setValue}>
   <sinch-accordion-item value="1" label="Item 1">
     <span>Accordion content</span>
-    <sinch-icon-share slot="icon"></sinch-ison-share>
+    <sinch-icon-open-in-new slot="icon"></sinch-ison-share>
   </sinch-accordion-item>
   <sinch-accordion-item value="2" label="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.">
     <span>Accordion content</span>
   </sinch-accordion-item>
   <sinch-accordion-item value="3" label="Disabled Item" disabled>
-    <sinch-icon-share slot="icon"></sinch-ison-share>
+    <sinch-icon-open-in-new slot="icon"></sinch-ison-share>
   </sinch-accordion-item>
   <sinch-accordion-item value="4" label="Item 4">
     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.

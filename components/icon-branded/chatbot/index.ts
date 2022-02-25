@@ -1,7 +1,7 @@
 import { defineCustomElement } from '../../utils'
 import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
-import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '../create-icon-class'
+import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '../types'
 
 defineCustomElement('sinch-icon-chatbot', createIconClass(templateHTML))
 

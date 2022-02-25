@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@nectary/components/icon/share'
-import '@nectary/components/input-tooltip'
+import '@nectary/components/icon/open-in-new'
+import '@nectary/components/help-tooltip'
 import '@nectary/components/select'
 
 @Component({

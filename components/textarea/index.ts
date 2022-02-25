@@ -188,7 +188,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   }
 })
 
-type TSinchTextareaElement = HTMLElement & {
+export type TSinchTextareaElement = HTMLElement & {
   value: string,
   label: string,
   placeholder: string | null,
@@ -200,7 +200,7 @@ type TSinchTextareaElement = HTMLElement & {
   blur(): void,
 }
 
-type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
+export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   value: string,
   label: string,
   placeholder?: string,

@@ -9,5 +9,5 @@
   (focusin)="onFocus()"
   (focusout)="onBlur()"
   (change)="onChange($event)">
-  <sinch-input-tooltip *ngIf="tooltipText != null" [text]="tooltipText"></sinch-input-tooltip>
+  <sinch-help-tooltip *ngIf="tooltipText != null" [text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
 </sinch-input>

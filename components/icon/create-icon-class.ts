@@ -1,8 +1,7 @@
 import { getIntegerAttribute, updateAttribute, updateIntegerAttribute } from '../utils'
 import iconStylesHtml from './icon-styles.html'
-import type { TSinchElementReact } from '../types'
 
-const DEFAULT_SIZE = 16
+const DEFAULT_SIZE = 24
 const MIN_SIZE = 4
 const MAX_SIZE = 256
 
@@ -50,18 +49,11 @@ export const createIconClass = (templateHTML: string) => {
     attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
       switch (name) {
         case 'size': {
-          updateIntegerAttribute(this.$svg, 'width', newVal, { min: MIN_SIZE, max: MAX_SIZE })
+          updateIntegerAttribute(this.$svg, 'height', newVal, { min: MIN_SIZE, max: MAX_SIZE })
 
           break
         }
       }
     }
   }
-}
-
-export type TSinchIconElement = HTMLElement & {
-  size: number,
-}
-export type TSinchIconReact = TSinchElementReact<TSinchIconElement> & {
-  size?: number,
 }

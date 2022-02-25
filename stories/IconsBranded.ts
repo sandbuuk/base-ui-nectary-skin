@@ -1,5 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '@nectary/components/icon-branded/create-icon-class'
+import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '@nectary/components/icon-branded/types'
 import type { Story, Meta } from '@storybook/html'
 import '@nectary/components/theme.css'
 import '@nectary/components/icon-branded/rocket'

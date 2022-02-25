@@ -33,6 +33,7 @@
     --sinch-color-checkbox-border-disabled-checked: var(--sinch-color-stormy-100);
 
     display: inline-block;
+    vertical-align: middle;
     outline: none;
   }
 
@@ -120,12 +121,17 @@
   }
 
   #label {
+    display: none;
     flex: 1;
     align-self: center;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     padding-left: 6px;
+  }
+
+  :host([text]:not([text=""])) #label {
+    display: block;
   }
 
   :host([disabled]:not([disabled="false"])) #label {

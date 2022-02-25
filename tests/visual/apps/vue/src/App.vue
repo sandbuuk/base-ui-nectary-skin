@@ -9,6 +9,7 @@
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
     <Select v-if="url.pathname === '/select'" :search="url.searchParams"/>
     <Tabs v-if="url.pathname === '/tabs'" :search="url.searchParams"/>
+    <Table v-if="url.pathname === '/table'" :search="url.searchParams"/>
     <Tag v-if="url.pathname === '/tag'" :search="url.searchParams"/>
     <Textarea v-if="url.pathname === '/textarea'" :search="url.searchParams"/>
     <Toggle v-if="url.pathname === '/toggle'" :search="url.searchParams"/>
@@ -28,6 +29,7 @@ import Link from './components/Link.vue'
 import Radio from './components/Radio.vue'
 import Select from './components/Select.vue'
 import Tabs from './components/Tabs.vue'
+import Table from './components/Table.vue'
 import Tag from './components/Tag.vue'
 import Textarea from './components/Textarea.vue'
 import Toggle from './components/Toggle.vue'
@@ -72,6 +74,7 @@ export default {
     Radio,
     Select,
     Tabs,
+    Table,
     Tag,
     Textarea,
     Toggle,

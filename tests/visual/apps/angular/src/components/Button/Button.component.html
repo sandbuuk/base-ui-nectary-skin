@@ -6,6 +6,6 @@
   (focusin)="onFocus()"
   (focusout)="onBlur()"
   (click)="onClick()">
-  <sinch-icon-share *ngIf="hasIcon" [attr.size]="isSmall ? 12 : 18" slot="icon"></sinch-icon-share>
+  <sinch-icon-open-in-new *ngIf="hasIcon" [attr.size]="isSmall ? '16' : '24'" slot="icon"></sinch-icon-open-in-new>
   <sinch-spinner *ngIf="hasSpinner" static [attr.type]="isSmall ? 'small' : 'medium'" slot="icon"></sinch-spinner>
 </sinch-button>

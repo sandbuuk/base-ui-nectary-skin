@@ -1,0 +1,31 @@
+<sinch-table>
+  <sinch-table-head>
+    <sinch-table-row>
+      <sinch-table-head-cell *ngFor="let cell of state.head" [text]="cell.text" [align]="cell.align" [fit]="cell.isFit">
+        <sinch-checkbox *ngIf="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
+        <sinch-table-head-sort
+          *ngIf="cell.isSortable"
+          slot="sort"
+          [value]="isAsc"
+          (change)="onSortChange($event)"
+          (focus)="onSortFocus()"
+          (blur)="onSortBlur()"
+        ></sinch-table-head-sort>
+        <sinch-help-tooltip *ngIf="cell.tooltip != null" slot="tooltip" [text]="cell.tooltip"></sinch-help-tooltip>
+      </sinch-table-head-cell>
+    </sinch-table-row>
+  </sinch-table-head>
+  <sinch-table-body>
+    <sinch-table-row *ngFor="let row of state.body">
+      <sinch-table-cell *ngFor="let cell of row" [align]="cell.align">
+        <sinch-checkbox *ngIf="cell.isCheckbox"></sinch-checkbox>
+        <sinch-button *ngIf="cell.isButton" type="secondary" [text]="cell.text"></sinch-button>
+        <sinch-toggle *ngIf="cell.isToggle"></sinch-toggle>
+        <sinch-link *ngIf="cell.isLink" [text]="cell.text" href="#"></sinch-link>
+        <sinch-icon-open-in-new *ngIf="cell.isIcon && cell.iconType === 'open-in-new'" size="24"></sinch-icon-open-in-new>
+        <sinch-icon-more-vert *ngIf="cell.isIcon && cell.iconType === 'more-vert'" size="24"></sinch-icon-more-vert>
+        <span *ngIf="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon">{{cell.text}}</span>
+      </sinch-table-cell>
+    </sinch-table-row>
+  </sinch-table-body>
+</sinch-table>

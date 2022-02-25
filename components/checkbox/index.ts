@@ -76,12 +76,12 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set text(value: string) {
+  set text(value: string | null) {
     updateAttribute(this, 'text', value)
   }
 
   get text() {
-    return getAttribute(this, 'text', '')
+    return getAttribute(this, 'text', null)
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -131,20 +131,20 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 })
 
-type TSinchCheckboxElement = HTMLElement & {
+export type TSinchCheckboxElement = HTMLElement & {
   checked: boolean,
   indeterminate: boolean,
   disabled: boolean,
-  text: string,
+  text: string | null,
   focus(): void,
   blur(): void,
 }
 
-type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
+export type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
   checked?: boolean,
   indeterminate?: boolean,
   disabled?: boolean,
-  text: string,
+  text?: string,
   onChange: (event: SyntheticEvent<TSinchCheckboxElement, CustomEvent<boolean>>) => void,
   onFocus?: (e: FocusEvent<TSinchCheckboxElement>) => void,
   onBlur?: (e: FocusEvent<TSinchCheckboxElement>) => void,

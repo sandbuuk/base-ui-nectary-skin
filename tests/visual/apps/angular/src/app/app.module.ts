@@ -11,6 +11,7 @@ import { TextareaComponent } from '../components/Textarea/Textarea.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { SpinnerComponent } from '../components/Spinner/Spinner.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
+import { TableComponent } from '../components/Table/Table.component'
 import { TabsComponent } from '../components/Tabs/Tabs.component'
 import { TagComponent } from '../components/Tag/Tag.component'
 import { AccordionComponent } from '../components/Accordion/Accordion.component'
@@ -32,6 +33,7 @@ import { AppComponent } from './app.component'
     ToggleComponent,
     TooltipComponent,
     SpinnerComponent,
+    TableComponent,
     TabsComponent,
     TagComponent,
   ],

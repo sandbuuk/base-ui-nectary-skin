@@ -1,7 +1,6 @@
 import '@nectary/components/theme.css'
 import '@nectary/components/button'
 import '@nectary/components/input'
-import '@nectary/components/input-tooltip'
 import '@nectary/components/select'
 import '@nectary/components/textarea'
 import '@nectary/components/alert'

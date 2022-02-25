@@ -23,7 +23,7 @@ export const Tag: FC<TTag> = ({ search }) => {
       small={isSmall}
       inverted={isInverted}
     >
-      {hasIcon && <sinch-icon-share size={12} slot="icon"/>}
+      {hasIcon && <sinch-icon-open-in-new size={16} slot="icon"/>}
       {isDismissable && (
         <sinch-tag-close
           slot="close"

@@ -94,7 +94,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
   }
 })
 
-type TSinchSelectOptionElement = HTMLElement & {
+export type TSinchSelectOptionElement = HTMLElement & {
   value: string,
   text: string,
   checked: boolean,
@@ -103,7 +103,7 @@ type TSinchSelectOptionElement = HTMLElement & {
   readonly icon: Element | null,
 }
 
-type TSinchSelectOptionReact = TSinchElementReact<TSinchSelectOptionElement> & {
+export type TSinchSelectOptionReact = TSinchElementReact<TSinchSelectOptionElement> & {
   value: string,
   text: string,
   checked?: boolean,

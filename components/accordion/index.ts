@@ -114,12 +114,12 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
   }
 })
 
-type TSinchAccordionElement = HTMLElement & {
+export type TSinchAccordionElement = HTMLElement & {
   value: string,
   multiple: boolean,
 }
 
-type TSinchAccordionReact = TSinchElementReact<TSinchAccordionElement> & {
+export type TSinchAccordionReact = TSinchElementReact<TSinchAccordionElement> & {
   multiple?: boolean,
   value: string,
   onChange: (e: SyntheticEvent<TSinchAccordionElement, CustomEvent<string>>) => void,

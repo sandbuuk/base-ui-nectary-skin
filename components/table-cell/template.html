@@ -1,0 +1,38 @@
+<style>
+:host {
+  display: table-cell;
+  vertical-align: top;
+  border-bottom: 1px solid var(--sinch-color-snow-600);
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 48px;
+  box-sizing: border-box;
+  padding: 8px 4px;
+}
+
+:host(:first-child) #wrapper {
+  padding-left: 8px;
+}
+
+:host(:last-child) #wrapper {
+  padding-right: 8px;
+}
+
+:host([align="end"]) #wrapper {
+  text-align: end;
+  align-items: flex-end;
+}
+
+:host([align="center"]) #wrapper {
+  text-align: center;
+  align-items: center;
+}
+</style>
+
+<div id="wrapper">
+  <slot></slot>
+</div>

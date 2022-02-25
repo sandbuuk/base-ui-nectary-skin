@@ -7,7 +7,7 @@
       :disabled="opt.disabled"
       :status="opt.status">
       <span v-if="opt.content != null" slot="content">{{opt.content}}</span>
-      <sinch-icon-share v-if="opt.icon === true" slot="icon"></sinch-icon-share>
+      <sinch-icon-open-in-new v-if="opt.icon === true" slot="icon" size="16"></sinch-icon-open-in-new>
     </sinch-accordion-item>
   </sinch-accordion>
 </template>

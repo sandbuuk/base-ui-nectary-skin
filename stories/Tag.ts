@@ -83,7 +83,7 @@ Tag.parameters = {
   },
 }
 
-export const TagWithIcon = Template('<sinch-icon-share size="10" slot="icon"></sinch-icon-share>')
+export const TagWithIcon = Template('<sinch-icon-open-in-new size="10" slot="icon"></sinch-icon-open-in-new>')
 
 TagWithIcon.args = {
   text: 'Label',
@@ -94,12 +94,12 @@ TagWithIcon.args = {
 TagWithIcon.parameters = {
   docs: {
     source: {
-      code: '<sinch-tag text="Label">\n  <sinch-icon-share size="10" slot="icon"></sinch-icon-share>\n</sinch-tag>',
+      code: '<sinch-tag text="Label">\n  <sinch-icon-open-in-new size="10" slot="icon"></sinch-icon-open-in-new>\n</sinch-tag>',
     },
   },
 }
 
-export const TagWithClose = Template('<sinch-icon-share size="10" slot="icon"></sinch-icon-share><sinch-tag-close slot="close"></sinch-tag-close>')
+export const TagWithClose = Template('<sinch-icon-open-in-new size="10" slot="icon"></sinch-icon-open-in-new><sinch-tag-close slot="close"></sinch-tag-close>')
 
 TagWithClose.args = {
   text: 'Label',
@@ -110,12 +110,12 @@ TagWithClose.args = {
 TagWithClose.parameters = {
   docs: {
     source: {
-      code: '<sinch-tag text="Label">\n  <sinch-icon-share size="10" slot="icon"></sinch-icon-share>\n  <sinch-tag-close slot="close"></sinch-tag-close>\n</sinch-tag>',
+      code: '<sinch-tag text="Label">\n  <sinch-icon-open-in-new size="10" slot="icon"></sinch-icon-open-in-new>\n  <sinch-tag-close slot="close"></sinch-tag-close>\n</sinch-tag>',
     },
   },
 }
 
-export const Small = Template('<sinch-icon-share size="8" slot="icon"></sinch-icon-share><sinch-tag-close small slot="close"></sinch-tag-close>')
+export const Small = Template('<sinch-icon-open-in-new size="8" slot="icon"></sinch-icon-open-in-new><sinch-tag-close small slot="close"></sinch-tag-close>')
 
 Small.args = {
   text: 'Label',
@@ -126,7 +126,7 @@ Small.args = {
 Small.parameters = {
   docs: {
     source: {
-      code: '<sinch-tag small text="Label">\n  <sinch-icon-share size="8" slot="icon"></sinch-icon-share>\n  <sinch-tag-close small slot="close"></sinch-tag-close>\n</sinch-tag>',
+      code: '<sinch-tag small text="Label">\n  <sinch-icon-open-in-new size="8" slot="icon"></sinch-icon-open-in-new>\n  <sinch-tag-close small slot="close"></sinch-tag-close>\n</sinch-tag>',
     },
   },
 }

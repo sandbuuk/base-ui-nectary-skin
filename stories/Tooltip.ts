@@ -2,7 +2,7 @@ import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
 import '@nectary/components/tooltip'
-import '@nectary/components/icon/share'
+import '@nectary/components/icon/open-in-new'
 
 export default {
   title: 'Components/Tooltip',
@@ -66,7 +66,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-tooltip
   return $wrapper
 }
 
-export const Tooltip = Template('<sinch-icon-share size=24></sinch-icon-share>')
+export const Tooltip = Template('<sinch-icon-open-in-new size=24></sinch-icon-open-in-new>')
 
 Tooltip.args = {
   text: 'Tooltip text long',
@@ -77,7 +77,7 @@ Tooltip.parameters = {
     source: {
       code: `
 <sinch-tooltip text={text}>
-  <sinch-icon-share size="24"></sinch-icon-share>
+  <sinch-icon-open-in-new size="24"></sinch-icon-open-in-new>
 </sinch-tooltip>
 `,
     },

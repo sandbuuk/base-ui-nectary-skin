@@ -1,0 +1,34 @@
+<style>
+:host {
+  display: contents;
+}
+
+input {
+  all: initial;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#up {
+  display: none;
+}
+
+#down {
+  display: block;
+}
+
+:host([value]:not([value="false"])) #up {
+  display: block;
+}
+
+:host([value]:not([value="false"])) #down {
+  display: none;
+}
+</style>
+
+<sinch-icon-north id="up" size="16"></sinch-icon-north>
+<sinch-icon-south id="down" size="16"></sinch-icon-south>
+<input type="checkbox"/>

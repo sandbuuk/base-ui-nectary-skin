@@ -428,7 +428,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 })
 
-type TSinchSelectElement = HTMLElement & {
+export type TSinchSelectElement = HTMLElement & {
   value: string,
   label: string,
   placeholder: string | null,
@@ -441,7 +441,7 @@ type TSinchSelectElement = HTMLElement & {
   blur(): void,
 }
 
-type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
+export type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
   value: string,
   label: string,
   placeholder?: string,

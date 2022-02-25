@@ -10,6 +10,8 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: PORT,
+    liveReload: false,
+    hot: false
   },
   module: {
     rules: [

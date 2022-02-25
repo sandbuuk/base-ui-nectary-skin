@@ -1,4 +1,5 @@
 import '../tooltip'
+import '../icon/help-outline'
 import {
   defineCustomElement,
   getAttribute,
@@ -9,12 +10,13 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchTooltipElement, TSinchTooltipReact } from '../tooltip'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
+defineCustomElement('sinch-help-tooltip', class extends HTMLElement {
   $tooltip: HTMLElementTagNameMap['sinch-tooltip']
 
   constructor() {
@@ -92,14 +94,18 @@ defineCustomElement('sinch-input-tooltip', class extends HTMLElement {
   }
 })
 
+export type TSinchHelpTooltipElement = TSinchTooltipElement
+
+export type TSinchHelpTooltipReact = TSinchTooltipReact
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-input-tooltip': IntrinsicElements['sinch-tooltip'],
+      'sinch-help-tooltip': TSinchHelpTooltipReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-input-tooltip': HTMLElementTagNameMap['sinch-tooltip'],
+    'sinch-help-tooltip': TSinchHelpTooltipElement,
   }
 }

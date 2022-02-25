@@ -170,11 +170,11 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
   }
 })
 
-type TSinchRadioElement = HTMLElement & {
+export type TSinchRadioElement = HTMLElement & {
   value: string,
 }
 
-type TSinchRadioReact = TSinchElementReact<TSinchRadioElement> & {
+export type TSinchRadioReact = TSinchElementReact<TSinchRadioElement> & {
   value: string,
   onChange: (event: SyntheticEvent<TSinchRadioElement, CustomEvent<boolean>>) => void,
 }

@@ -1,5 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchLogoElement, TSinchLogoReact } from '@nectary/components/logo/create-logo-class'
+import type { TSinchLogoElement, TSinchLogoReact } from '@nectary/components/logo/types'
 import type { Story, Meta } from '@storybook/html'
 import '@nectary/components/theme.css'
 import '@nectary/components/logo/sinch-icon'

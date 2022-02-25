@@ -1,6 +1,5 @@
 import { getBooleanAttribute, getIntegerAttribute, updateAttribute, updateBooleanAttribute, updateIntegerAttribute } from '../utils'
 import iconStylesHtml from './icon-styles.html'
-import type { TSinchElementReact } from '../types'
 
 const DEFAULT_SIZE = 48
 const MIN_SIZE = 4
@@ -58,20 +57,11 @@ export const createIconClass = (templateHTML: string) => {
     attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
       switch (name) {
         case 'size': {
-          updateIntegerAttribute(this.$svg, 'width', newVal, { min: MIN_SIZE, max: MAX_SIZE })
+          updateIntegerAttribute(this.$svg, 'height', newVal, { min: MIN_SIZE, max: MAX_SIZE })
 
           break
         }
       }
     }
   }
-}
-
-export type TSinchIconBrandedElement = HTMLElement & {
-  size: number,
-  inverted: boolean,
-}
-export type TSinchIconBrandedReact = TSinchElementReact<TSinchIconBrandedElement> & {
-  size?: number,
-  inverted?: boolean,
 }

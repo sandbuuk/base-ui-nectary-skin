@@ -166,11 +166,11 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
   }
 })
 
-type TSinchTabsElement = HTMLElement & {
+export type TSinchTabsElement = HTMLElement & {
   value: string,
 }
 
-type TSinchTabsReact = TSinchElementReact<TSinchTabsElement> & {
+export type TSinchTabsReact = TSinchElementReact<TSinchTabsElement> & {
   value: string,
   onChange: (event: SyntheticEvent<TSinchTabsElement, CustomEvent<string>>) => void,
 }

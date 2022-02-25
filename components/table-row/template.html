@@ -1,0 +1,14 @@
+<style>
+:host {
+  display: table-row;
+}
+
+:host([sticky]) ::slotted(sinch-table-head-cell) {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--sinch-color-snow-100);
+}
+</style>
+
+<slot></slot>
