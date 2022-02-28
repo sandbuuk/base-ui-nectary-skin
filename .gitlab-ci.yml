@@ -161,13 +161,9 @@ publish-components:
   before_script:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
-    - pushd components
-    - yarn build
+    - yarn --cwd=components build
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
-    - echo "scope=sinch-engage" >> .npmrc
-    - echo "@sinch-engage:registry=https://registry.npmjs.org" >> .npmrc
-    - npm publish
-    - popd
+    - npm publish components/
     - node ./scripts/slack-changelog.js
 
 publish-bus:

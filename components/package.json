@@ -11,7 +11,9 @@
     "index.d.ts",
     "types.d.ts"
   ],
-  "private": true,
+  "publishConfig": {
+    "access": "restricted"
+  },
   "scripts": {
     "prebuild": "rimraf utils.{js,d.ts} index.{js,d.ts} */*.{js,d.ts} */**/*.{js,d.ts}",
     "build": "NODE_ENV=production babel . --extensions '.ts' --ignore '*.d.ts' --out-dir .",
