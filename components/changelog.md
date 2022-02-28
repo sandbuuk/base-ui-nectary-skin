@@ -1,3 +1,16 @@
+## v0.8.0
+
+* 💥 change package name to `@sinch-engage/nectary`, see readme
+* 💥 rename `sinch-input-tooltip` to `sinch-help-tooltip`
+* 💥 rename `sinch-icon-tooltip` to `sinch-icon-help-outline`
+* 💥 change default icon size to 24 instead of 16
+* ➕ add `sinch-table`
+* ➕ make `text` optional in `sinch-toggle`
+* ➕ make `text` optional in `sinch-checkbox`
+* ➕ make `category` optional in `sinch-tag`
+* ➕ export element types
+* 🐞 fix theme emphasized body font weight
+
 ## v0.7.1
 
 * 🐞 fix Jest accessing `scrollIntoView`, missing in jsdom
