@@ -163,6 +163,7 @@ publish-components:
   script:
     - yarn --cwd components/ build
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+    - echo "scope=sinch-engage" >> .npmrc
     - echo "@sinch-engage:registry=https://registry.npmjs.org" >> .npmrc
     - npm publish components/
     - node ./scripts/slack-changelog.js
