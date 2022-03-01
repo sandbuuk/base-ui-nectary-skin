@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@sinch-engage/nectary": "*",
+    "axe-core": "^4.3.5",
     "vue": "^3.0.0"
   },
   "devDependencies": {

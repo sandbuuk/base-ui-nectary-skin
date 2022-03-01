@@ -1,10 +1,16 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = makeScreenshotTests('/link?text=Anchor%20text&href=url', 'sinch-link')
 const withNarrowWidth = makeScreenshotTests('/link?width=110&text=Anchor%20text%20text%20long%20long%20long&href=url', 'sinch-link')
 const withExternalDisabled = makeScreenshotTests('/link?text=Anchor%20text&href=url&disabled=true&external=true', 'sinch-link')
 const withExternal = makeScreenshotTests('/link?text=Anchor%20text&href=url&external=true', 'sinch-link')
+const checkLink = makeAccessibilityTests('/link?text=Anchor%20text&href=url', 'sinch-link')
+
+test('accessibility', checkLink(async function* () {
+  yield
+}))
 
 test('external property', shot(async function* ({ $eval, page }) {
   await $eval((el) => {

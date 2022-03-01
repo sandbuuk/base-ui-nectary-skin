@@ -30,14 +30,11 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
 
     this.#$input = shadowRoot.querySelector('input')!
     this.#$label = shadowRoot.querySelector('label')!
+    this.#$input.addEventListener('input', this.#onCheckboxInput)
   }
 
   connectedCallback() {
-    this.#$input.addEventListener('input', this.onCheckboxInput)
-  }
-
-  disconnectedCallback() {
-    this.#$input.removeEventListener('input', this.onCheckboxInput)
+    this.setAttribute('aria-label', 'checkbox')
   }
 
   static get observedAttributes() {
@@ -120,7 +117,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     this.#$input.blur()
   }
 
-  onCheckboxInput = (e: Event) => {
+  #onCheckboxInput = (e: Event) => {
     e.stopPropagation()
 
     const isChecked = this.#$input.checked

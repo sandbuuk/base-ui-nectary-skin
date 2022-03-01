@@ -30,14 +30,11 @@ defineCustomElement('sinch-toggle', class extends HTMLElement {
 
     this.#$input = shadowRoot.querySelector('input')!
     this.#$label = shadowRoot.querySelector('label')!
-  }
-
-  connectedCallback() {
     this.#$input.addEventListener('input', this.#onInput)
   }
 
-  disconnectedCallback() {
-    this.#$input.removeEventListener('input', this.#onInput)
+  connectedCallback() {
+    this.setAttribute('aria-label', 'toggle')
   }
 
   static get observedAttributes() {

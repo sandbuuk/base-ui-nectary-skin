@@ -1,8 +1,14 @@
 import { test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { makeScreenshotTests } from '../screenshot-tests'
 
 const withFitWidth = makeScreenshotTests('/tooltip?text=Tooltip%20text', 'sinch-tooltip')
 const withNarrowWidth = makeScreenshotTests('/tooltip?width=100&text=Tooltip%20text%20long%20long%20long', 'sinch-tooltip')
+const checkTooltip = makeAccessibilityTests('/tooltip?text=Tooltip%20text', 'sinch-tooltip')
+
+test('accessibility', checkTooltip(async function* () {
+  yield
+}))
 
 test('orientation attribute', withFitWidth(async function* ({ $, $eval }) {
   const textLocator = $.locator('#text')

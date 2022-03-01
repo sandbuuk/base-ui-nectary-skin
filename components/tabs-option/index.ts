@@ -96,6 +96,8 @@ defineCustomElement('sinch-tabs-option', class extends HTMLElement {
           this.scrollIntoView?.({ block: 'nearest' })
         }
 
+        updateAttribute(this, 'aria-selected', String(isAttrTrue(newVal)))
+
         break
       }
       case 'disabled': {

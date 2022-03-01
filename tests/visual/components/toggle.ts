@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const contentWidth = makeScreenshotTests('/toggle?text=Label', 'sinch-toggle')
 const narrowWidth = makeScreenshotTests('/toggle?width=150&text=Label%20long%20long%20long%20long', 'sinch-toggle')
@@ -7,6 +8,15 @@ const checked = makeScreenshotTests('/toggle?text=Label&checked=true', 'sinch-to
 const disabled = makeScreenshotTests('/toggle?text=Label&disabled=true&checked=true', 'sinch-toggle')
 const disabledLabeled = makeScreenshotTests('/toggle?text=Label&disabled=true&checked=true&labeled=true', 'sinch-toggle')
 const disabledSmall = makeScreenshotTests('/toggle?text=Label&disabled=true&checked=true&small=true', 'sinch-toggle')
+const checkToggle = makeAccessibilityTests('/toggle?text=Label', 'sinch-toggle')
+
+test('accessibility', checkToggle(async function* ({ $eval }) {
+  yield
+  await $eval((el) => {
+    el.text = null
+  })
+  yield
+}))
 
 test('checked attribute', contentWidth(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('checked', ''))

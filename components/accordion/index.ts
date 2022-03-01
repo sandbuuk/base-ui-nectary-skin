@@ -39,6 +39,10 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
     return ['value']
   }
 
+  connectedCallback() {
+    this.setAttribute('aria-label', 'accordion')
+  }
+
   get nodeName() {
     return 'select'
   }

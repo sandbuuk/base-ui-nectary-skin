@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withFitWidth = makeScreenshotTests('/checkbox?text=Label', 'sinch-checkbox')
 const withInvalid = makeScreenshotTests('/checkbox?text=Label&invalid=true', 'sinch-checkbox')
@@ -9,6 +10,15 @@ const withDisabledChecked = makeScreenshotTests('/checkbox?width=100&text=Label&
 const withDisabledInvalidChecked = makeScreenshotTests('/checkbox?width=100&text=Label&disabled=true&checked=true&invalid=true', 'sinch-checkbox')
 const withDisabledIndeterminate = makeScreenshotTests('/checkbox?width=100&text=Label&disabled=true&checked=true&indeterminate=true', 'sinch-checkbox')
 const withDisabledInvalidIndeterminate = makeScreenshotTests('/checkbox?width=100&text=Label&disabled=true&checked=true&indeterminate=true&invalid=true', 'sinch-checkbox')
+const checkDisabledChecked = makeAccessibilityTests('/checkbox?width=100&text=Label&disabled=true&checked=true', 'sinch-checkbox')
+
+test('accessibility', checkDisabledChecked(async function* ({ $eval }) {
+  yield
+  await $eval((el) => {
+    el.text = null
+  })
+  yield
+}))
 
 test('checked attribute', withFitWidth(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('checked', ''))

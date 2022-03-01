@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const options = encodeURI(JSON.stringify([{
   value: 1,
@@ -22,6 +23,11 @@ const singleOption = encodeURI(JSON.stringify([{
 const withOptions = makeScreenshotTests(`/radio?width=200&options=${options}`, 'sinch-radio')
 const withSingleOption = makeScreenshotTests(`/radio?options=${singleOption}`, 'sinch-radio')
 const narrowLabel = makeScreenshotTests(`/radio?width=100&options=${singleOption}`, 'sinch-radio')
+const checkRadioOptions = makeAccessibilityTests(`/radio?width=200&options=${options}`, 'sinch-radio')
+
+test('accessibility', checkRadioOptions(async function* () {
+  yield
+}))
 
 test('narrow', narrowLabel(async function* () {
   yield { name: 'clip' }

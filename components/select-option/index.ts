@@ -32,7 +32,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['text']
+    return ['text', 'checked']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -45,6 +45,10 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
         this.#$content.textContent = newVal
 
         break
+      }
+
+      case 'checked': {
+        updateAttribute(this, 'aria-selected', newVal)
       }
     }
   }
@@ -106,8 +110,6 @@ export type TSinchSelectOptionElement = HTMLElement & {
 export type TSinchSelectOptionReact = TSinchElementReact<TSinchSelectOptionElement> & {
   value: string,
   text: string,
-  checked?: boolean,
-  selected?: boolean,
   disabled?: boolean,
 }
 

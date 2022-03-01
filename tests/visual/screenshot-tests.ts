@@ -47,6 +47,7 @@ type TPosition = {
   x: number,
   y: number,
 }
+
 type TRect = TPosition & {
   width: number,
   height: number,

@@ -1,11 +1,21 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = makeScreenshotTests('/input?width=200&label=Label', 'sinch-input')
 const withValue = makeScreenshotTests('/input?width=200&label=Label&value=Input%20value', 'sinch-input')
 const withPlaceholder = makeScreenshotTests('/input?width=200&label=Label&placeholder=Placeholder%20value', 'sinch-input')
 const withTooltip = makeScreenshotTests('/input?width=200&label=Label&tooltip=Tooltip%20text', 'sinch-input')
 const withEverything = makeScreenshotTests('/input?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=Input%20value', 'sinch-input')
+const checkValue = makeAccessibilityTests('/input?width=200&label=Label&value=Input%20value', 'sinch-input')
+
+test('accessibility', checkValue(async function* ({ $eval }) {
+  yield
+  await $eval((el) => {
+    el.label = ''
+  })
+  yield
+}))
 
 test('value attribute', withPlaceholder(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('value', 'Input Value'))

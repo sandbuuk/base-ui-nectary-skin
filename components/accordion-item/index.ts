@@ -24,7 +24,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-accordion-item', class extends HTMLElement {
   #$button: HTMLButtonElement
-  #$labelContent: HTMLSpanElement
+  #$buttonContent: HTMLSpanElement
 
   constructor() {
     super()
@@ -37,7 +37,7 @@ defineCustomElement('sinch-accordion-item', class extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$button = shadowRoot.querySelector('#button')!
-    this.#$labelContent = shadowRoot.querySelector('#content')!
+    this.#$buttonContent = shadowRoot.querySelector('#title')!
   }
 
   connectedCallback() {
@@ -95,7 +95,7 @@ defineCustomElement('sinch-accordion-item', class extends HTMLElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'label': {
-        this.#$labelContent.textContent = newVal
+        this.#$buttonContent.textContent = newVal
 
         break
       }

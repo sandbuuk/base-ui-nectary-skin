@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const items = ({ hasLongLine }: any = {}) => encodeURI(JSON.stringify({
   head: [
@@ -49,6 +50,11 @@ const sortItems = encodeURI(JSON.stringify({
 const withItems = makeScreenshotTests(`/table?width=1000&state=${items()}`, 'sinch-table')
 const withLongLine = makeScreenshotTests(`/table?width=1000&state=${items({ hasLongLine: true })}`, 'sinch-table')
 const withSortHeadCell = makeScreenshotTests(`/table?width=1000&state=${sortItems}`, 'sinch-table')
+const checkTableWithItems = makeAccessibilityTests(`/table?width=1000&state=${items()}`, 'sinch-table')
+
+test('accessibility', checkTableWithItems(async function* () {
+  yield
+}))
 
 test('items', withItems(async function* () {
   yield { name: 'shot' }

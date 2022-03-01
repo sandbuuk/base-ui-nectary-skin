@@ -1,20 +1,20 @@
 import { test } from '@playwright/test'
-import axeRules from './axe-rules.json'
 import type axeCore from 'axe-core'
 
-test('accessibility', async ({ page }) => {
+test.only('accessibility', async ({ page }) => {
   await page.goto('/')
 
-  const { violations } = await page.evaluate((axeRules: string[]) => {
+  const { violations, passes } = await page.evaluate(() => {
     return ((window as any).axe as typeof axeCore)
       .run(document.getElementById('root')!, {
-        reporter: 'no-passes',
         runOnly: {
-          type: 'rule',
-          values: axeRules,
+          type: 'tag',
+          values: ['wcag2a', 'wcag2aa'],
         },
       })
-  }, axeRules)
+  })
+
+  console.log(passes)
 
   if (violations.length > 0) {
     for (const v of violations) {

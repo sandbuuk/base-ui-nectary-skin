@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const items = encodeURI(JSON.stringify([{
   value: 1,
@@ -38,6 +39,11 @@ const withItemsMultiple = makeScreenshotTests(`/accordion?width=200&multiple=tru
 const withSingleItem = makeScreenshotTests(`/accordion?width=200&options=${singleItem}`, 'sinch-accordion')
 const withSingleItemDisabled = makeScreenshotTests(`/accordion?width=200&options=${singleItemDisabled}`, 'sinch-accordion')
 const withSingleItemUncontrolled = makeScreenshotTests(`/accordion?width=200&uncontrolled=true&options=${singleItem}`, 'sinch-accordion')
+const checkItems = makeAccessibilityTests(`/accordion?width=200&options=${items}`, 'sinch-accordion')
+
+test('accessibility', checkItems(async function* () {
+  yield
+}))
 
 test('value attribute', withItems(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('value', ''))

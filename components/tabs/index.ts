@@ -84,6 +84,10 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
     this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
+  connectedCallback() {
+    this.setAttribute('aria-label', 'tabs')
+  }
+
   static get observedAttributes() {
     return ['value']
   }
@@ -103,7 +107,7 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.onValueChange(newVal ?? '')
+        this.onValueChange(newVal)
 
         break
       }
@@ -151,7 +155,7 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
     this.dispatchChangeEvent((e as CustomEvent).detail)
   }
 
-  onValueChange(value: string) {
+  onValueChange(value: string | null) {
     for (const $option of this.#$slot.assignedElements()) {
       if (isTabsOptionElement($option)) {
         $option.checked = $option.disabled !== true && $option.value === value

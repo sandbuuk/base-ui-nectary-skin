@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withWideWidth = makeScreenshotTests('/button?width=200&type=primary&text=Button&icon=true', 'sinch-button')
 const withFitWidth = makeScreenshotTests('/button?type=primary&text=Button&icon=true', 'sinch-button')
@@ -9,6 +10,15 @@ const withSmall = makeScreenshotTests('/button?type=primary&text=Button&small=tr
 const withSpinner = makeScreenshotTests('/button?type=primary&text=Button&spinner=true', 'sinch-button')
 const withSpinnerDisabled = makeScreenshotTests('/button?type=primary&text=Button&spinner=true&disabled=true', 'sinch-button')
 const withSpinnerSmall = makeScreenshotTests('/button?type=primary&text=Button&spinner=true&small=true', 'sinch-button')
+const checkFitWidth = makeAccessibilityTests('/button?type=primary&text=Button&icon=true', 'sinch-button')
+
+test('accessibility', checkFitWidth(async function* ({ $eval }) {
+  yield
+  await $eval((el) => {
+    el.text = ''
+  })
+  yield
+}))
 
 test('type attribute', withFitWidth(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('type', 'primary'))

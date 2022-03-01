@@ -1,5 +1,5 @@
 import { test } from '@playwright/test'
-import { makeScreenshotTests } from '../utils'
+import { makeScreenshotTests } from '../screenshot-tests'
 
 const shot = makeScreenshotTests('/spinner', 'sinch-spinner')
 

@@ -48,8 +48,8 @@ module.exports = {
     host: 'localhost',
     port: PORT,
     historyApiFallback: true,
+    hot: false,
   },
-  watch: false,
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './public/index.html'),

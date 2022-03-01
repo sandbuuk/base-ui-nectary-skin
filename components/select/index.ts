@@ -387,7 +387,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
         if (isChecked) {
           $checkedOption = $option
-          this.#$listbox.setAttribute('aria-activedescendant', $option.id)
+          // this.#$listbox.setAttribute('aria-activedescendant', $option.id)
         }
       }
     }

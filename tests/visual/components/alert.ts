@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const longTitle = encodeURIComponent('It has survived not only five centuries, but also the leap into electronic typesetting')
 const longText = encodeURIComponent('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.')
@@ -14,6 +15,11 @@ const withTextAndTitle = makeScreenshotTests('/alert?text=Alert%20text&title=Ale
 const withMultilineTextAndTitleAndButton = makeScreenshotTests(`/alert?width=400&text=${longText}&title=${longTitle}&action=Button&multiline=true`, 'sinch-alert')
 const withMultilineTextAndTitleAndClose = makeScreenshotTests(`/alert?width=400&text=${longText}&title=${longTitle}&dismissable=true&multiline=true`, 'sinch-alert')
 const withMultilineTextAndTitleButtonClose = makeScreenshotTests(`/alert?width=400&text=${longText}&title=${longTitle}&dismissable=true&action=Button&multiline=true`, 'sinch-alert')
+const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&text=${longText}&title=${longTitle}&dismissable=true&action=Button&multiline=true`, 'sinch-alert')
+
+test('accessibility', checkMultilineTextTitleButtonClose(async function* () {
+  yield
+}))
 
 test('type property', withText(async function* ({ $eval }) {
   await $eval((el) => {

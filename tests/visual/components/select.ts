@@ -1,10 +1,20 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = makeScreenshotTests('/select?width=200&label=Label', 'sinch-select')
 const withPlaceholder = makeScreenshotTests('/select?width=200&label=Label&placeholder=Placeholder', 'sinch-select')
 const withTooltip = makeScreenshotTests('/select?width=200&label=Label&placeholder=Placeholder&tooltip=Tooltip%20text%20long%20long', 'sinch-select')
 const withEverything = makeScreenshotTests('/select?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=1', 'sinch-select')
+const checkSelectWithEverything = makeAccessibilityTests('/select?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=1', 'sinch-select')
+
+test('accessibility', checkSelectWithEverything(async function* ({ $eval }) {
+  yield
+  await $eval((el) => {
+    el.label = ''
+  })
+  yield
+}))
 
 test('disabled attribute', withEverything(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('disabled', ''))

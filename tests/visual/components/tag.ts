@@ -1,13 +1,18 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = makeScreenshotTests('/tag?text=Label%20text', 'sinch-tag')
 const withIcon = makeScreenshotTests('/tag?text=Label%20text&icon=true', 'sinch-tag')
 const withIconDismiss = makeScreenshotTests('/tag?text=Label%20text&dismissable=true&icon=true', 'sinch-tag')
 const withSmallDismiss = makeScreenshotTests('/tag?text=Label%20text&small=true&dismissable=true&icon=true', 'sinch-tag')
 const withDismiss = makeScreenshotTests('/tag?text=Label%20text&dismissable=true&icon=true', 'sinch-tag')
-
+const checkTagWithDismiss = makeAccessibilityTests('/tag?text=Label%20text&dismissable=true&icon=true', 'sinch-tag')
 const categoryValues = ['candy', 'bolt', 'aqua', 'grass', 'berry', 'orange', 'night', 'mud', 'dirt'] as const
+
+test('accessibility', checkTagWithDismiss(async function* () {
+  yield
+}))
 
 test('category property', withIcon(async function* ({ $eval }) {
   for (const val of categoryValues) {

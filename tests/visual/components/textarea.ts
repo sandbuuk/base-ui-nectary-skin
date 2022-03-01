@@ -1,11 +1,21 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { makeAccessibilityTests } from '../accessibility-tests'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withEmpty = makeScreenshotTests('/textarea?width=200&label=Label', 'sinch-textarea')
 const withValue = makeScreenshotTests('/textarea?width=200&label=Label&value=Input%20value', 'sinch-textarea')
 const withPlaceholder = makeScreenshotTests('/textarea?width=200&label=Label&placeholder=Placeholder%20value', 'sinch-textarea')
 const withTooltip = makeScreenshotTests('/textarea?width=200&label=Label&tooltip=Tooltip%20text', 'sinch-textarea')
 const withEverything = makeScreenshotTests('/textarea?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=Input%20value', 'sinch-textarea')
+const checkTextareaWithEverything = makeAccessibilityTests('/textarea?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=Input%20value', 'sinch-textarea')
+
+test('accessibility', checkTextareaWithEverything(async function* ({ $eval }) {
+  yield
+  await $eval((el) => {
+    el.label = ''
+  })
+  yield
+}))
 
 test('value attribute', withPlaceholder(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('value', 'Input Value'))
