@@ -10,55 +10,8 @@ import type { SyntheticEvent } from 'react'
 
 type TSinchRadioOption = HTMLElementTagNameMap['sinch-radio-option']
 
-const getEnabledRadioElements = ($slot: HTMLSlotElement): TSinchRadioOption[] => {
-  return $slot.assignedElements().filter((opt) => isRadioOptionElement(opt) && opt.disabled !== true) as TSinchRadioOption[]
-}
 const findSelectedOption = (elements: readonly TSinchRadioOption[]) => {
   return elements.find((el) => el.checked) ?? null
-}
-
-const getFirstOption = ($slot: HTMLSlotElement) => {
-  for (const $option of $slot.assignedElements()) {
-    if (isRadioOptionElement($option) && $option.disabled !== true) {
-      return $option
-    }
-  }
-
-  return null
-}
-
-const getLastOption = ($slot: HTMLSlotElement) => {
-  for (const $option of $slot.assignedElements().reverse()) {
-    if (isRadioOptionElement($option) && $option.disabled !== true) {
-      return $option
-    }
-  }
-
-  return null
-}
-
-const getNextOption = ($slot: HTMLSlotElement) => {
-  const $options = getEnabledRadioElements($slot)
-  const $selectedOption = findSelectedOption($options)
-  const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
-
-  if (currentIndex < 0) {
-    return getFirstOption($slot)
-  }
-
-  return $options[(currentIndex + 1) % $options.length]
-}
-
-const getPrevOption = ($slot: HTMLSlotElement) => {
-  const $options = getEnabledRadioElements($slot)
-  const $selectedOption = findSelectedOption($options)
-  const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
-
-  if (currentIndex < 0) {
-    return getLastOption($slot)
-  }
-
-  return $options[(currentIndex - 1 + $options.length) % $options.length]
 }
 
 const template = document.createElement('template')
@@ -107,7 +60,7 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.onValueChange(newVal ?? '')
+        this.#onValueChange(newVal ?? '')
 
         break
       }
@@ -120,11 +73,11 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
       case 'ArrowLeft': {
         e.preventDefault()
 
-        const $option = getPrevOption(this.#$slot)
+        const $option = this.#getPrevOption()
 
         if ($option !== null) {
           $option.focus()
-          this.dispatchChangeEvent($option.value)
+          this.#dispatchChangeEvent($option.value)
         }
 
         break
@@ -133,11 +86,11 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
       case 'ArrowRight': {
         e.preventDefault()
 
-        const $option = getNextOption(this.#$slot)
+        const $option = this.#getNextOption()
 
         if ($option !== null) {
           $option.focus()
-          this.dispatchChangeEvent($option.value)
+          this.#dispatchChangeEvent($option.value)
         }
 
         break
@@ -146,16 +99,16 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
   }
 
   #onSlotChange = () => {
-    this.onValueChange(this.value)
+    this.#onValueChange(this.value)
   }
 
   #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
-    this.dispatchChangeEvent((e as CustomEvent).detail)
+    this.#dispatchChangeEvent((e as CustomEvent).detail)
   }
 
-  onValueChange(value: string) {
+  #onValueChange(value: string) {
     for (const $option of this.#$slot.assignedElements()) {
       if (isRadioOptionElement($option)) {
         $option.checked = $option.disabled !== true && $option.value === value
@@ -163,10 +116,58 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
     }
   }
 
-  dispatchChangeEvent(value: string) {
+  #dispatchChangeEvent(value: string) {
     this.dispatchEvent(
       new CustomEvent('change', { detail: value, bubbles: true })
     )
+  }
+
+  #getFirstOption() {
+    for (const $option of this.#$slot.assignedElements()) {
+      if (isRadioOptionElement($option) && $option.disabled !== true) {
+        return $option
+      }
+    }
+
+    return null
+  }
+
+  #getLastOption() {
+    for (const $option of this.#$slot.assignedElements().reverse()) {
+      if (isRadioOptionElement($option) && $option.disabled !== true) {
+        return $option
+      }
+    }
+
+    return null
+  }
+
+  #getNextOption() {
+    const $options = this.#getEnabledRadioElements()
+    const $selectedOption = findSelectedOption($options)
+    const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
+
+    if (currentIndex < 0) {
+      return this.#getFirstOption()
+    }
+
+    return $options[(currentIndex + 1) % $options.length]
+  }
+
+  #getPrevOption() {
+    const $options = this.#getEnabledRadioElements()
+    const $selectedOption = findSelectedOption($options)
+    const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
+
+    if (currentIndex < 0) {
+      return this.#getLastOption()
+    }
+
+    return $options[(currentIndex - 1 + $options.length) % $options.length]
+  }
+
+  #getEnabledRadioElements(): TSinchRadioOption[] {
+    return this.#$slot.assignedElements().filter((opt) => isRadioOptionElement(opt) && opt.disabled !== true) as TSinchRadioOption[]
   }
 })
 
