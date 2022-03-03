@@ -84,16 +84,16 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
     this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
+  connectedCallback() {
+    this.setAttribute('aria-label', 'radio')
+  }
+
   static get observedAttributes() {
     return ['value']
   }
 
-  get type() {
-    return 'text'
-  }
-
   get nodeName() {
-    return 'input'
+    return 'select'
   }
 
   set value(value: string) {

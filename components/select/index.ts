@@ -137,6 +137,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
   connectedCallback() {
     this.setAttribute('role', 'listbox')
+    this.setAttribute('aria-label', 'select')
 
     this.#$button.addEventListener('click', this.#onButtonClick)
     this.#$listbox.addEventListener('blur', this.#onListboxBlur)
@@ -251,7 +252,6 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
       case 'label': {
         this.#$label.textContent = newVal
-        updateAttribute(this, 'aria-label', newVal ?? '')
 
         break
       }

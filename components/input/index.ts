@@ -40,6 +40,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
   connectedCallback() {
     this.#$input.addEventListener('input', this.#onInput)
+    this.setAttribute('aria-label', 'input')
   }
 
   disconnectedCallback() {
