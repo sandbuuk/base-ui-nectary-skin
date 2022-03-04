@@ -47,26 +47,6 @@ visual-tests:
     paths:
       - tests/visual/test-results
 
-accessibility-tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.17.1
-  except:
-    - tags
-  cache:
-    key:
-      files:
-        - yarn.lock
-      prefix: cache
-    paths:
-      - .yarn/
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
-  script:
-    - yarn --cwd=tests/accessibility test:ci
-
 build-shell:
   stage: build
   rules:
