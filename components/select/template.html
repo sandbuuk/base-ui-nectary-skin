@@ -25,6 +25,10 @@
   padding: 8px 12px;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
+  background-color: var(--sinch-color-snow-100);
+}
+
+#dropdown-icon {
   fill: var(--sinch-color-stormy-500);
 }
 
@@ -40,6 +44,9 @@
 #button:disabled {
   border-color: var(--sinch-color-snow-500);
   color: var(--sinch-color-stormy-100);
+}
+
+#button:disabled #dropdown-icon {
   fill: var(--sinch-color-stormy-100);
 }
 
@@ -114,8 +121,9 @@
   color: var(--sinch-color-stormy-100);
 }
 
-:host([disabled]:not([disabled="false"])) ::slotted(sinch-help-tooltip) {
-  fill: var(--sinch-color-stormy-100);
+/* stylelint-disable-next-line no-descending-specificity */
+:host([disabled]:not([disabled="false"])) {
+  --sinch-color-icon: var(--sinch-color-stormy-100);
 }
 
 #listbox {
@@ -127,10 +135,12 @@
   display: none;
   list-style: none;
   outline: none;
+  z-index: 1;
 }
 
 #listbox > * {
   font: var(--sinch-font-body);
+  color: var(--sinch-color-text-default);
   background-color: var(--sinch-color-snow-100);
   border: 1px solid var(--sinch-color-stormy-500);
   border-top-width: 0;

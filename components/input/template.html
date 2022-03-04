@@ -102,8 +102,9 @@
     color: var(--sinch-color-stormy-100);
   }
 
-  :host([disabled]:not([disabled="false"])) ::slotted(sinch-help-tooltip) {
-    fill: var(--sinch-color-stormy-100);
+  /* stylelint-disable-next-line no-descending-specificity */
+  :host([disabled]:not([disabled="false"])) {
+    --sinch-color-icon: var(--sinch-color-stormy-100);
   }
 </style>
 
