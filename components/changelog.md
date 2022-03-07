@@ -1,3 +1,8 @@
+## v0.8.1
+
+* 🐞 fix text colors in `sinch-checkbox`, `sinch-toggle`, `sinch-select`, `sinch-accordion`, `sinch-table`, `sinch-tabs`
+* 🐞 fix dropdown overlay in `sinch-select`
+
 ## v0.8.0
 
 * 💥 change package name to `@sinch-engage/nectary`, see readme
