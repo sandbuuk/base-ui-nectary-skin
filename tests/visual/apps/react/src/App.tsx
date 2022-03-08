@@ -5,6 +5,7 @@ import { Button } from './components/Button'
 import { Checkbox } from './components/Checkbox'
 import { Input } from './components/Input'
 import { Link } from './components/Link'
+import { Pagination } from './components/Pagination'
 import { Radio } from './components/Radio'
 import { Select } from './components/Select'
 import { Spinner } from './components/Spinner'
@@ -51,6 +52,12 @@ const mapElement = (url: URL) => {
     case '/link': {
       return (
         <Link search={url.searchParams}/>
+      )
+    }
+
+    case '/pagination': {
+      return (
+        <Pagination search={url.searchParams}/>
       )
     }
 

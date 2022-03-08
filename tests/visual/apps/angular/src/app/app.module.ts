@@ -16,6 +16,7 @@ import { TabsComponent } from '../components/Tabs/Tabs.component'
 import { TagComponent } from '../components/Tag/Tag.component'
 import { AccordionComponent } from '../components/Accordion/Accordion.component'
 import { LinkComponent } from '../components/Link/Link.component'
+import { PaginationComponent } from '../components/Pagination/Pagination.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -29,6 +30,7 @@ import { AppComponent } from './app.component'
     LinkComponent,
     CheckboxComponent,
     ButtonComponent,
+    PaginationComponent,
     TextareaComponent,
     ToggleComponent,
     TooltipComponent,
