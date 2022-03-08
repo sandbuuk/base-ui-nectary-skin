@@ -79,7 +79,7 @@ ButtonWithIcon.parameters = {
   },
 }
 
-export const ButtonWithSpinner = Template('<sinch-spinner></sinch-spinner>')
+export const ButtonWithSpinner = Template('<sinch-spinner slot="icon"></sinch-spinner>')
 
 ButtonWithSpinner.args = {
   type: 'primary',
@@ -89,12 +89,12 @@ ButtonWithSpinner.args = {
 ButtonWithSpinner.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner></sinch-spinner>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner slot="icon"></sinch-spinner>\n</sinch-button>',
     },
   },
 }
 
-export const SmallButtonWithIcon = Template('<sinch-icon-open-in-new size="12"></sinch-icon-open-in-new>')
+export const SmallButtonWithIcon = Template('<sinch-icon-open-in-new size="12" slot="icon"></sinch-icon-open-in-new>')
 
 SmallButtonWithIcon.args = {
   type: 'primary',
@@ -105,12 +105,12 @@ SmallButtonWithIcon.args = {
 SmallButtonWithIcon.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new size="12"></sinch-icon-open-in-new>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new size="12" slot="icon"></sinch-icon-open-in-new>\n</sinch-button>',
     },
   },
 }
 
-export const SmallButtonWithSpinner = Template('<sinch-spinner type="small"></sinch-spinner>')
+export const SmallButtonWithSpinner = Template('<sinch-spinner type="small" slot="icon"></sinch-spinner>')
 
 SmallButtonWithSpinner.args = {
   type: 'primary',
@@ -121,7 +121,7 @@ SmallButtonWithSpinner.args = {
 SmallButtonWithSpinner.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner type="small"></sinch-spinner>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner type="small" slot="icon"></sinch-spinner>\n</sinch-button>',
     },
   },
 }
