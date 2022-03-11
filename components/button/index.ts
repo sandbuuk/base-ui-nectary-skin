@@ -12,7 +12,7 @@ import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 import type { FocusEvent, MouseEvent } from 'react'
 
-const buttonTypes = ['primary', 'secondary', 'cta', 'destructive'] as const
+const buttonTypes = ['primary', 'secondary', 'cta-primary', 'cta-secondary', 'destructive'] as const
 
 const template = document.createElement('template')
 

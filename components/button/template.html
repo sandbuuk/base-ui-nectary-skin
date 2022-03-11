@@ -50,7 +50,7 @@
   --sinch-color-spinner-fg: var(--sinch-color-tropical-400);
 }
 
-:host([type="cta"]) {
+:host([type="cta-primary"]) {
   --sinch-color-button-background: var(--sinch-color-honey-500);
   --sinch-color-button-background-hover: var(--sinch-color-honey-400);
   --sinch-color-button-background-focus: var(--sinch-color-honey-500);
@@ -68,9 +68,33 @@
   --sinch-color-icon: var(--sinch-color-text-default);
 }
 
-:host([type="cta"]) button:disabled {
+:host([type="cta-primary"]) button:disabled {
   --sinch-color-spinner-bg: var(--sinch-color-snow-100);
   --sinch-color-spinner-fg: var(--sinch-color-stormy-300);
+}
+
+:host([type="cta-secondary"]) {
+  --sinch-color-button-background: var(--sinch-color-snow-100);
+  --sinch-color-button-background-hover: var(--sinch-color-snow-500);
+  --sinch-color-button-background-focus: var(--sinch-color-snow-100);
+  --sinch-color-button-background-active: var(--sinch-color-snow-500);
+  --sinch-color-button-background-disabled: var(--sinch-color-snow-100);
+  --sinch-color-button-text: var(--sinch-color-stormy-500);
+  --sinch-color-button-text-disabled: var(--sinch-color-stormy-200);
+  --sinch-color-button-border: var(--sinch-color-stormy-500);
+  --sinch-color-button-border-hover: var(--sinch-color-stormy-500);
+  --sinch-color-button-border-focus: var(--sinch-color-stormy-500);
+  --sinch-color-button-border-active: var(--sinch-color-stormy-500);
+  --sinch-color-button-border-disabled: var(--sinch-color-stormy-200);
+  --sinch-color-spinner-bg: var(--sinch-color-snow-800);
+  --sinch-color-spinner-fg: var(--sinch-color-stormy-600);
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+:host([type="cta-secondary"]) button:disabled {
+  --sinch-color-spinner-bg: var(--sinch-color-snow-600);
+  --sinch-color-spinner-fg: var(--sinch-color-stormy-200);
+  --sinch-color-icon: var(--sinch-color-stormy-200);
 }
 
 :host([type="destructive"]) {

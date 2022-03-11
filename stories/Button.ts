@@ -8,7 +8,7 @@ import '@sinch-engage/nectary/spinner'
 export default {
   title: 'Components/Button',
   argTypes: {
-    type: { control: 'select', options: ['primary', 'secondary', 'cta', 'destructive'], description: 'Button visual type' },
+    type: { control: 'select', options: ['primary', 'secondary', 'cta-primary', 'cta-secondary', 'destructive'], description: 'Button visual type' },
     text: { control: 'text', description: 'Button label text' },
     disabled: { control: 'boolean', description: 'Is button disabled' },
     small: { control: 'boolean', description: 'Button Small variant' },
@@ -55,16 +55,54 @@ Button.parameters = {
       code: '<sinch-button type="primary" text="Click me" onClick={onClick}></sinch-button>',
     },
   },
-  backgrounds: {
-    default: 'Light',
-    values: [
-      { name: 'Light', value: '#fff' },
-      { name: 'Dark', value: '#1c233f' },
-    ],
+}
+
+export const ButtonSecondary = Template()
+
+Button.args = {
+  type: 'secondary',
+  text: 'Click me',
+}
+
+Button.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-button type="secondary" text="Click me" onClick={onClick}></sinch-button>',
+    },
   },
 }
 
-export const ButtonWithIcon = Template('<sinch-icon-open-in-new size="18"></sinch-icon-open-in-new>')
+export const ButtonCtaPrimary = Template()
+
+Button.args = {
+  type: 'cta-primary',
+  text: 'Click me',
+}
+
+Button.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-button type="cta-primary" text="Click me" onClick={onClick}></sinch-button>',
+    },
+  },
+}
+
+export const ButtonCtaSecondary = Template()
+
+Button.args = {
+  type: 'cta-secondary',
+  text: 'Click me',
+}
+
+Button.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-button type="cta-secondary" text="Click me" onClick={onClick}></sinch-button>',
+    },
+  },
+}
+
+export const ButtonWithIcon = Template('<sinch-icon-open-in-new size="18" slot="icon"></sinch-icon-open-in-new>')
 
 ButtonWithIcon.args = {
   type: 'primary',
@@ -74,7 +112,7 @@ ButtonWithIcon.args = {
 ButtonWithIcon.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new size="18"></sinch-icon-open-in-new>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new size="18" slot="icon"></sinch-icon-open-in-new>\n</sinch-button>',
     },
   },
 }
@@ -94,7 +132,7 @@ ButtonWithSpinner.parameters = {
   },
 }
 
-export const SmallButtonWithIcon = Template('<sinch-icon-open-in-new size="12" slot="icon"></sinch-icon-open-in-new>')
+export const SmallButtonWithIcon = Template('<sinch-icon-open-in-new size="16" slot="icon"></sinch-icon-open-in-new>')
 
 SmallButtonWithIcon.args = {
   type: 'primary',
@@ -105,7 +143,7 @@ SmallButtonWithIcon.args = {
 SmallButtonWithIcon.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new size="12" slot="icon"></sinch-icon-open-in-new>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new size="16" slot="icon"></sinch-icon-open-in-new>\n</sinch-button>',
     },
   },
 }

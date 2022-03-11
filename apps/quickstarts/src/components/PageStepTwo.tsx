@@ -36,7 +36,7 @@ export const PageStepTwo: FC = () => {
               <sinch-button
                 className={styles.createAcc}
                 style={{ width: '75%' }}
-                type="cta"
+                type="cta-primary"
                 onClick={next}
                 text="Login"
               />

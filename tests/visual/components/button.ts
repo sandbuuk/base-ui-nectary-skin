@@ -15,8 +15,10 @@ test('type attribute', withFitWidth(async function* ({ $eval }) {
   yield { name: 'primary' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
   yield { name: 'secondary' }
-  await $eval((el) => el.setAttribute('type', 'cta'))
-  yield { name: 'cta' }
+  await $eval((el) => el.setAttribute('type', 'cta-primary'))
+  yield { name: 'cta-primary' }
+  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+  yield { name: 'cta-secondary' }
   await $eval((el) => el.setAttribute('type', 'destructive'))
   yield { name: 'destructive' }
 }))
@@ -33,9 +35,14 @@ test('type property', withFitWidth(async function* ({ $eval }) {
   yield { name: 'secondary' }
 
   await $eval((el) => {
-    el.type = 'cta'
+    el.type = 'cta-primary'
   })
-  yield { name: 'cta' }
+  yield { name: 'cta-primary' }
+
+  await $eval((el) => {
+    el.type = 'cta-secondary'
+  })
+  yield { name: 'cta-secondary' }
 
   await $eval((el) => {
     el.type = 'destructive'
@@ -48,8 +55,10 @@ test('small type', withSmall(async function* ({ $eval }) {
   yield { name: 'primary' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
   yield { name: 'secondary' }
-  await $eval((el) => el.setAttribute('type', 'cta'))
-  yield { name: 'cta' }
+  await $eval((el) => el.setAttribute('type', 'cta-primary'))
+  yield { name: 'cta-primary' }
+  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+  yield { name: 'cta-secondary' }
   await $eval((el) => el.setAttribute('type', 'destructive'))
   yield { name: 'destructive' }
 }))
@@ -59,8 +68,10 @@ test('disabled type', withDisabled(async function* ({ $eval }) {
   yield { name: 'primary' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
   yield { name: 'secondary' }
-  await $eval((el) => el.setAttribute('type', 'cta'))
-  yield { name: 'cta' }
+  await $eval((el) => el.setAttribute('type', 'cta-primary'))
+  yield { name: 'cta-primary' }
+  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+  yield { name: 'cta-secondary' }
   await $eval((el) => el.setAttribute('type', 'destructive'))
   yield { name: 'destructive' }
 }))
@@ -69,8 +80,10 @@ test('focus', withFitWidth(async function* ({ $, $eval }) {
   await $.focus()
   await $eval((el) => el.setAttribute('type', 'secondary'))
   yield { name: 'secondary' }
-  await $eval((el) => el.setAttribute('type', 'cta'))
-  yield { name: 'cta' }
+  await $eval((el) => el.setAttribute('type', 'cta-primary'))
+  yield { name: 'cta-primary' }
+  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+  yield { name: 'cta-secondary' }
   await $eval((el) => el.setAttribute('type', 'destructive'))
   yield { name: 'destructive' }
   await $eval((el) => el.setAttribute('type', 'primary'))
@@ -159,8 +172,10 @@ test('mouse interaction', withFitWidth(async function* ({ $, $eval, page }) {
   yield { name: 'primary-hover' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
   yield { name: 'secondary-hover' }
-  await $eval((el) => el.setAttribute('type', 'cta'))
-  yield { name: 'cta-hover' }
+  await $eval((el) => el.setAttribute('type', 'cta-primary'))
+  yield { name: 'cta-primary-hover' }
+  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+  yield { name: 'cta-secondary-hover' }
   await $eval((el) => el.setAttribute('type', 'destructive'))
   yield { name: 'destructive-hover' }
 
@@ -169,8 +184,10 @@ test('mouse interaction', withFitWidth(async function* ({ $, $eval, page }) {
   yield { name: 'primary-active' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
   yield { name: 'secondary-active' }
-  await $eval((el) => el.setAttribute('type', 'cta'))
-  yield { name: 'cta-active' }
+  await $eval((el) => el.setAttribute('type', 'cta-primary'))
+  yield { name: 'cta-primary-active' }
+  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+  yield { name: 'cta-secondary-active' }
   await $eval((el) => el.setAttribute('type', 'destructive'))
   yield { name: 'destructive-active' }
 }))
@@ -183,8 +200,10 @@ test('spinner', withSpinner(async function* ({ $, $eval, page }) {
   yield { name: 'primary-hover' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
   yield { name: 'secondary-hover' }
-  await $eval((el) => el.setAttribute('type', 'cta'))
-  yield { name: 'cta-hover' }
+  await $eval((el) => el.setAttribute('type', 'cta-primary'))
+  yield { name: 'cta-primary-hover' }
+  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+  yield { name: 'cta-secondary-hover' }
   await $eval((el) => el.setAttribute('type', 'destructive'))
   yield { name: 'destructive-hover' }
 
@@ -193,8 +212,10 @@ test('spinner', withSpinner(async function* ({ $, $eval, page }) {
   yield { name: 'primary-active' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
   yield { name: 'secondary-active' }
-  await $eval((el) => el.setAttribute('type', 'cta'))
-  yield { name: 'cta-active' }
+  await $eval((el) => el.setAttribute('type', 'cta-primary'))
+  yield { name: 'cta-primary-active' }
+  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+  yield { name: 'cta-secondary-active' }
   await $eval((el) => el.setAttribute('type', 'destructive'))
   yield { name: 'destructive-active' }
 }))
@@ -204,8 +225,10 @@ test('spinner disabled', withSpinnerDisabled(async function* ({ $eval }) {
   yield { name: 'primary' }
   await $eval((el) => el.setAttribute('type', 'secondary'))
   yield { name: 'secondary' }
-  await $eval((el) => el.setAttribute('type', 'cta'))
-  yield { name: 'cta' }
+  await $eval((el) => el.setAttribute('type', 'cta-primary'))
+  yield { name: 'cta-primary' }
+  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+  yield { name: 'cta-secondary' }
   await $eval((el) => el.setAttribute('type', 'destructive'))
   yield { name: 'destructive' }
 }))

@@ -22,7 +22,7 @@ function SimpleDialog(props: SimpleDialogProps) {
           <h2 className={styles.congratsTitle}>Congratulations! You've finished your Quick Start!</h2>
         </div>
         <img src={congratsimage} className={styles.congratsimage}/>
-        <sinch-button style={{ width: '35%' }} type="cta" text="Try it out!" onClick={() => {}}/>
+        <sinch-button style={{ width: '35%' }} type="cta-primary" text="Try it out!" onClick={() => {}}/>
       </div>
     </Dialog>
   )

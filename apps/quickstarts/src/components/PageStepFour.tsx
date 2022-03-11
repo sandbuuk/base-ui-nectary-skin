@@ -126,7 +126,7 @@ export const Dialog: FC<Props> = (props): JSX.Element => {
           <h2 className={styles.congratsTitle}>Congratulations! You've finished your Quick Start!</h2>
         </div>
         <img src={congratsimage} className={styles.congratsimage}/>
-        <sinch-button style={{ width: '35%', marginBottom: '2%' }} type="cta" text="Try it out!" onClick={() => {}}/>
+        <sinch-button style={{ width: '35%', marginBottom: '2%' }} type="cta-primary" text="Try it out!" onClick={() => {}}/>
       </div>
     </div>
   )
@@ -171,7 +171,7 @@ export const ErrorDialog: FC<Propsed> = (props): JSX.Element => {
         <img src={errorimage} className={styles.errorimage}/>
         <sinch-button
           style={{ width: '20%', marginBottom: '2%' }}
-          type="cta"
+          type="cta-primary"
           text="Try again"
           onClick={() => {
             setIserror((isOpen: boolean) => {
@@ -445,7 +445,7 @@ export const PageStepFour: FC = () => {
                 <div className={styles.humanButton}>
                   <sinch-button
                     style={{ width: '100%' }}
-                    type="cta"
+                    type="cta-primary"
                     disabled={questionCounter > 5 || agentdetails[Object.keys(agentdetails).length - 1].name.length <= 0 || agentdetails[Object.keys(agentdetails).length - 1].email.length <= 0 || validateEmail(agentdetails[Object.keys(agentdetails).length - 1].email) == null ? true : undefined}
                     onClick={buttonCounter}
                     text={questionCounter <= 5 ? `Add more Agents (Up to ${6 - questionCounter} )` : 'Add more Agents (Up to 0)'}
