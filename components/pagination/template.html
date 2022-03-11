@@ -1,0 +1,79 @@
+<style>
+/* stylelint-disable no-descending-specificity */
+:host {
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+}
+
+#wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  all: initial;
+  width: 28px;
+  height: 28px;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  contain: strict;
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+button:disabled {
+  --sinch-color-icon: var(--sinch-color-stormy-100);
+
+  cursor: initial;
+}
+
+button > * {
+  pointer-events: none;
+}
+
+.page {
+  border-radius: 50%;
+  font: var(--sinch-font-body);
+  color: var(--sinch-color-stormy-500);
+}
+
+.page.dots > span {
+  display: none;
+}
+
+.page.dots::after {
+  content: "...";
+}
+
+.page.active {
+  font: var(--sinch-font-emphasized-body);
+  background-color: var(--sinch-color-snow-600);
+  pointer-events: none;
+  cursor: initial;
+}
+
+.page.hidden {
+  display: none;
+}
+</style>
+
+<div id="wrapper">
+  <button id="left">
+    <sinch-icon-keyboard-arrow-left></sinch-icon-keyboard-arrow-left>
+  </button>
+  <button class="page"><span>1</span></button>
+  <button class="page active"><span>2</span></button>
+  <button class="page"><span>3</span></button>
+  <button class="page"><span>4</span></button>
+  <button class="page"><span>5</span></button>
+  <button class="page dots"><span>6</span></button>
+  <button class="page"><span>20</span></button>
+  <button id="right">
+    <sinch-icon-keyboard-arrow-right></sinch-icon-keyboard-arrow-right>
+  </button>
+</div>

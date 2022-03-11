@@ -38,21 +38,23 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-accordi
   return $acc
 }
 
-export const Accordion = Template(`
-<sinch-accordion-item value="1" label="Item 1">
-  <span>Accordion content</span>
-  <sinch-icon-open-in-new slot="icon"></sinch-ison-share>
-</sinch-accordion-item>
-<sinch-accordion-item value="2" label="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.">
-  <span>Accordion content</span>
-</sinch-accordion-item>
-<sinch-accordion-item value="3" label="Disabled Item" disabled>
-  <sinch-icon-open-in-new slot="icon"></sinch-ison-share>
-</sinch-accordion-item>
-<sinch-accordion-item value="4" label="Item 4">
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-</sinch-accordion-item>
-`)
+const accordionInnerHtml = `
+  <sinch-accordion-item value="1" label="Item 1">
+    <span slot="content">Accordion content</span>
+    <sinch-icon-open-in-new slot="icon"></sinch-ison-share>
+  </sinch-accordion-item>
+  <sinch-accordion-item value="2" label="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.">
+    <span slot="content">Accordion content</span>
+  </sinch-accordion-item>
+  <sinch-accordion-item value="3" label="Disabled Item" disabled>
+    <sinch-icon-open-in-new slot="icon"></sinch-ison-share>
+  </sinch-accordion-item>
+  <sinch-accordion-item value="4" label="Item 4">
+    <span slot="content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+  </sinch-accordion-item>
+`
+
+export const Accordion = Template(accordionInnerHtml)
 
 Accordion.args = {
   value: '',
@@ -63,39 +65,27 @@ Accordion.parameters = {
   docs: {
     source: {
       code: `
-<sinch-accordion value={value} onChange={setValue}>
-  <sinch-accordion-item value="1" label="Item 1">
-    <span>Accordion content</span>
-    <sinch-icon-open-in-new slot="icon"></sinch-ison-share>
-  </sinch-accordion-item>
-  <sinch-accordion-item value="2" label="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.">
-    <span>Accordion content</span>
-  </sinch-accordion-item>
-  <sinch-accordion-item value="3" label="Disabled Item" disabled>
-    <sinch-icon-open-in-new slot="icon"></sinch-ison-share>
-  </sinch-accordion-item>
-  <sinch-accordion-item value="4" label="Item 4">
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-  </sinch-accordion-item>
-</sinch-accordion>`,
+<sinch-accordion value={value} onChange={setValue}>${accordionInnerHtml}</sinch-accordion>`,
     },
   },
 }
 
-export const ItemStatuses = Template(`
-<sinch-accordion-item value="1" label="Item Success" status="success">
-  <span>Accordion content</span>
-</sinch-accordion-item>
-<sinch-accordion-item value="2" label="Item Info" status="info">
-  <span>Accordion content</span>
-</sinch-accordion-item>
-<sinch-accordion-item value="3" label="Item Warn" status="warn">
-  <span>Accordion content</span>
-</sinch-accordion-item>
-<sinch-accordion-item value="4" label="Item Error" status="error">
-  <span>Accordion content</span>
-</sinch-accordion-item>
-`)
+const itemStatusesInnerHtml = `
+  <sinch-accordion-item value="1" label="Item Success" status="success">
+    <span slot="content">Accordion content</span>
+  </sinch-accordion-item>
+  <sinch-accordion-item value="2" label="Item Info" status="info">
+    <span slot="content">Accordion content</span>
+  </sinch-accordion-item>
+  <sinch-accordion-item value="3" label="Item Warn" status="warn">
+    <span slot="content">Accordion content</span>
+  </sinch-accordion-item>
+  <sinch-accordion-item value="4" label="Item Error" status="error">
+    <span slot="content">Accordion content</span>
+  </sinch-accordion-item>
+`
+
+export const ItemStatuses = Template(itemStatusesInnerHtml)
 
 ItemStatuses.args = {
   value: '',
@@ -105,20 +95,7 @@ ItemStatuses.parameters = {
   docs: {
     source: {
       code: `
-<sinch-accordion value={value} onChange={setValue}>
-  <sinch-accordion-item value="1" label="Item Success" status="success">
-    <span>Accordion content</span>
-  </sinch-accordion-item>
-  <sinch-accordion-item value="2" label="Item Info" status="info">
-    <span>Accordion content</span>
-  </sinch-accordion-item>
-  <sinch-accordion-item value="3" label="Item Warn" status="warn">
-    <span>Accordion content</span>
-  </sinch-accordion-item>
-  <sinch-accordion-item value="4" label="Item Error" status="error">
-    <span>Accordion content</span>
-  </sinch-accordion-item>
-</sinch-accordion>`,
+<sinch-accordion value={value} onChange={setValue}>${itemStatusesInnerHtml}</sinch-accordion>`,
     },
   },
 }
