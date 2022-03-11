@@ -100,7 +100,7 @@ export const Home: FC = () => {
                   <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                 </div>
                 <div className={styles.Card1Button}>
-                  <sinch-button type="cta" text="Click to see more" onClick={next}/>
+                  <sinch-button type="cta-primary" text="Click to see more" onClick={next}/>
                 </div>
               </div>
               <div className={styles.HomeContainer1}>
@@ -117,7 +117,7 @@ export const Home: FC = () => {
                   <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                 </div>
                 <div className={styles.Card1Button}>
-                  <sinch-button type="cta" text="Click to see more" onClick={() => {}}/>
+                  <sinch-button type="cta-primary" text="Click to see more" onClick={() => {}}/>
                 </div>
               </div>
               <div className={styles.HomeContainer1}>
@@ -134,7 +134,7 @@ export const Home: FC = () => {
                   <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                 </div>
                 <div className={styles.Card1Button}>
-                  <sinch-button type="cta" text="Click to see more" onClick={() => {}}/>
+                  <sinch-button type="cta-primary" text="Click to see more" onClick={() => {}}/>
                 </div>
               </div>
             </div>
@@ -153,7 +153,7 @@ export const Home: FC = () => {
                   <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                 </div>
                 <div className={styles.Card1Button}>
-                  <sinch-button type="cta" text="Click to see more" onClick={() => {}}/>
+                  <sinch-button type="cta-primary" text="Click to see more" onClick={() => {}}/>
                 </div>
               </div>
               <div className={styles.HomeContainer1}>
@@ -170,7 +170,7 @@ export const Home: FC = () => {
                   <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                 </div>
                 <div className={styles.Card1Button}>
-                  <sinch-button type="cta" text="Click to see more" onClick={() => {}}/>
+                  <sinch-button type="cta-primary" text="Click to see more" onClick={() => {}}/>
                 </div>
               </div>
               <div className={styles.HomeContainer1}>
@@ -187,7 +187,7 @@ export const Home: FC = () => {
                   <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
                 </div>
                 <div className={styles.Card1Button}>
-                  <sinch-button type="cta" text="Click to see more" onClick={next}/>
+                  <sinch-button type="cta-primary" text="Click to see more" onClick={next}/>
                 </div>
               </div>
             </div>

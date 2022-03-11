@@ -306,7 +306,7 @@ export const PageStepOne: FC = () => {
               />
               <sinch-button
                 className={styles.createAcc}
-                type="cta"
+                type="cta-primary"
                 disabled={disabled ? disabled : undefined} //{disabled ? undefined : false}
                 onClick={sendData}
                 text="Create Account"
