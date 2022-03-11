@@ -1,3 +1,7 @@
+## v0.9.0
+
+* ➕ add `sinch-pagination` component
+
 ## v0.8.1
 
 * 🐞 fix text colors in `sinch-checkbox`, `sinch-toggle`, `sinch-select`, `sinch-accordion`, `sinch-table`, `sinch-tabs`
