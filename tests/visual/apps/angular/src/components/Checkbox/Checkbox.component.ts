@@ -13,6 +13,7 @@ export class CheckboxComponent {
   text: string | null
   isDisabled: boolean
   isIndeterminate: boolean
+  isInvalid: boolean
 
   constructor() {
     const url = new URL(location.href)
@@ -21,6 +22,7 @@ export class CheckboxComponent {
     this.text = url.searchParams.get('text')
     this.isDisabled = url.searchParams.get('disabled') !== null
     this.isIndeterminate = url.searchParams.get('indeterminate') !== null
+    this.isInvalid = url.searchParams.get('invalid') !== null
   }
 
   onChange(e: Event) {

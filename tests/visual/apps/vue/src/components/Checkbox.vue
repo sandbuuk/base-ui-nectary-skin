@@ -1,9 +1,10 @@
 <template>
   <sinch-checkbox
-    v-bind:text="text"
-    v-bind:disabled="isDisabled"
-    v-bind:indeterminate="isIndeterminate"
-    v-bind:checked="checked"
+    :text="text"
+    :disabled="isDisabled"
+    :indeterminate="isIndeterminate"
+    :invalid="isInvalid"
+    :checked="checked"
     @change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
@@ -38,6 +39,9 @@ export default {
     },
     isIndeterminate() {
       return this.search.get('indeterminate') !== null
+    },
+    isInvalid() {
+      return this.search.get('invalid') !== null
     },
     isControlled() {
       return this.search.get('uncontrolled') === null

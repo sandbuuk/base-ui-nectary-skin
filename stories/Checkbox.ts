@@ -8,13 +8,14 @@ export default {
     checked: { control: 'boolean' },
     indeterminate: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    invalid: { control: 'boolean' },
     text: { control: 'text' },
     onChange: { action: 'onChange' },
   },
 } as Meta
 
 const Template: Story<JSX.IntrinsicElements['sinch-checkbox']> = ({ onChange }) => {
-  const [{ checked, indeterminate, disabled, text }, updateArgs] = useArgs()
+  const [{ checked, indeterminate, disabled, invalid, text }, updateArgs] = useArgs()
   const checkboxRef = useRef<HTMLElementTagNameMap['sinch-checkbox'] | null>(null)
 
   if (checkboxRef.current === null) {
@@ -35,6 +36,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-checkbox']> = ({ onChange }) 
   $checkbox.checked = checked
   $checkbox.indeterminate = indeterminate
   $checkbox.disabled = disabled
+  $checkbox.invalid = invalid
   $checkbox.text = text
 
   return $checkbox
@@ -46,6 +48,7 @@ Checkbox.args = {
   checked: true,
   indeterminate: false,
   disabled: false,
+  invalid: false,
   text: 'Label',
 }
 
