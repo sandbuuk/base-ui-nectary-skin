@@ -1,6 +1,5 @@
 <style>
   :host {
-    --sinch-color-icon: var(--sinch-color-snow-100);
     --sinch-color-checkbox-circle: var(--sinch-color-transparent);
     --sinch-color-checkbox-background: var(--sinch-color-snow-100);
     --sinch-color-checkbox-border: var(--sinch-color-stormy-300);
@@ -31,10 +30,35 @@
     --sinch-color-checkbox-circle-disabled-checked: var(--sinch-color-transparent);
     --sinch-color-checkbox-background-disabled-checked: var(--sinch-color-stormy-100);
     --sinch-color-checkbox-border-disabled-checked: var(--sinch-color-stormy-100);
+    --sinch-color-checkbox-text: var(--sinch-color-text-default);
+    --sinch-color-checkbox-text-disabled: var(--sinch-color-stormy-200);
 
     display: inline-block;
     vertical-align: middle;
     outline: none;
+  }
+
+  :host([invalid]:not([invalid="false"])) {
+    --sinch-color-checkbox-border: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-background-checked: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-border-checked: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-border-hover: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-circle-hover-checked: var(--sinch-color-raspberry-100);
+    --sinch-color-checkbox-background-hover-checked: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-border-hover-checked: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-border-focus: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-circle-focus-checked: var(--sinch-color-raspberry-200);
+    --sinch-color-checkbox-background-focus-checked: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-border-focus-checked: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-border-active: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-circle-active-checked: var(--sinch-color-raspberry-300);
+    --sinch-color-checkbox-background-active-checked: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-border-active-checked: var(--sinch-color-raspberry-500);
+    --sinch-color-checkbox-border-disabled: var(--sinch-color-raspberry-200);
+    --sinch-color-checkbox-background-disabled-checked: var(--sinch-color-raspberry-200);
+    --sinch-color-checkbox-border-disabled-checked: var(--sinch-color-raspberry-200);
+    --sinch-color-checkbox-text: var(--sinch-color-text-invalid);
+    --sinch-color-checkbox-text-disabled: var(--sinch-color-raspberry-200);
   }
 
   #wrapper {
@@ -128,7 +152,7 @@
     text-overflow: ellipsis;
     padding-left: 6px;
     font: var(--sinch-font-body);
-    color: var(--sinch-color-text-default);
+    color: var(--sinch-color-checkbox-text);
   }
 
   :host([text]:not([text=""])) #label {
@@ -136,7 +160,7 @@
   }
 
   :host([disabled]:not([disabled="false"])) #label {
-    color: var(--sinch-color-stormy-200);
+    color: var(--sinch-color-checkbox-text-disabled);
   }
 
   /* stylelint-disable-next-line no-descending-specificity */
