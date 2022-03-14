@@ -1,0 +1,18 @@
+.botbuttons {
+    display: flex;
+    background-color: white;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0% 1%;
+    margin-bottom: 1%;
+}
+
+.botbackBut {
+    margin: 4%;
+    margin-top: 3%;
+}
+
+.botsaveBut {
+    margin: 4%;
+    margin-top: 3%;
+}

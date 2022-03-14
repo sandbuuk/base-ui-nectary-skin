@@ -45,13 +45,17 @@ export const App: FC<TApp> = ({ baseUrl }) => {
       <Router basename={baseUrl}>
         <Routes>
           <Route path="/" element={<PageLayout/>}>
+
             <Route index element={<Navigate to="step-1"/>}/>
             <Route path="step-1" element={<Home/>}/>
-            {/* <Route path="step-2" element={<PageStepTwo/>}/> */}
-            <Route path="step-2" element={<PageStepThree/>}/>
-            <Route path="step-3" element={<PageStepFour/>}/>
-            <Route path="onboarding" element={<OnBoarding/>}/>
-            <Route path="*" element={<PageNotFound/>}/>
+
+            <Route path="/whatsapp" element={<PageLayout/>}>
+              <Route path="step-1" element={<PageStepThree/>}/>
+              <Route path="step-2" element={<PageStepFour/>}/>
+              <Route path="onboarding" element={<OnBoarding/>}/>
+              <Route path="*" element={<PageNotFound/>}/>
+            </Route>
+
           </Route>
         </Routes>
       </Router>

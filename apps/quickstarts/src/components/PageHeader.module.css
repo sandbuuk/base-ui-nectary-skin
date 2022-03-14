@@ -1,0 +1,47 @@
+.botwhatsappHeading {
+    display: flex;
+    flex-direction: row;
+    padding: 1%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1%;
+    border-radius: 1%;
+    background-color: #ffffff;
+  }
+
+  .botwhatsappMatter{
+    flex:4
+}
+
+.botwhatsappMatterHeading{
+    font:var(--sinch-font-title-2);
+    font-size: 30px;
+}
+
+.botwhatsappMatterBody {
+    font: var(--sinch-font-extra-small-text);
+}
+
+.botpageSteps{
+    flex:4;
+    align-items: center;
+    justify-content: center;
+    font: var(--sinch-font-extra-small-text);
+}
+
+.poweredBy {
+    font: var(--sinch-font-extra-small-text);
+}
+
+.chatlayerLogo{
+    display: flex;
+    flex:4;
+    flex-direction: row-reverse;
+}
+
+.chatLayer {
+    height: auto;
+    width: 150px;
+    margin-bottom: 5%;
+}
+  

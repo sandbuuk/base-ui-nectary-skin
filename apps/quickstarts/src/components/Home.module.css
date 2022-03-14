@@ -60,6 +60,7 @@
     background-color: #FFFFFF;
     margin-right: 1%;
     border-radius: 1%;
+    margin-top: 2%;
   }
   
   .HomeLeftPageMiddleHeading{
@@ -84,8 +85,8 @@
   }
   
   .HomeRightPageImage{
-    height: auto;
-    width: 50%;
+    height: 92px;
+    width: 142px;
   }
   
   .HomeRightPageCapabilities{
@@ -95,7 +96,7 @@
   
   .HomeRightPageCapabilitiesTitle{
     font: var(--sinch-font-title-3);
-    margin-left: 3%;
+
   }
   
   .HomeRightPageCapabilitiesBody{  
@@ -146,6 +147,7 @@
   
   .HomeRightPageTemplate{
     margin-top: 5%;
+    margin-left: 0%;
   }
   
   .Hometabs{
@@ -161,135 +163,23 @@
       flex-direction: row;
       flex: 1;
   }
-  
-  .HomeContainer1{
-    margin-right: 2%;
-    margin-top: 3%;
-    margin-left: 3%;
-    margin-right: 3%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 10px;;
-    height: 40%;
-    width: 22%;
-    background-color: #FFFFFF;
+
+  @media screen and (max-width: 900px){
+    .HomeCardsdiv{
+      display: flex;
+      flex-direction: column;
+    }
   }
-  
-  .HomeContainer1:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-  .HomeCard1{
-    margin: 0%;
-    margin-top: 0%;
-    background-color: #007171;
-    padding-bottom: 10%;
-  }
-  
-  .HomeCard2{
-    margin: 0%;
-    margin-top: 0%;
-    background-color: #FFCC66;
-    padding-bottom: 10%;
-  }
-  
-  .HomeCard3{
-    margin: 0%;
-    margin-top: 0%;
-    background-color: #0A273D;
-    padding-bottom: 10%;
-  }
-  
-  .card1{
-    height: auto;
-    width: 48%;
-  }
-  
-  .card2{
-    height: auto;
-    width: 48%;
-  }
-  
-  .card3{
-    height: auto;
-    width: 55%;
-  }
-  
-  .cardimage1{
-    align-items: center;
-    margin-left: 30%;
-    padding-top: 10%;
-    margin-bottom: 9%;
-  }
-  
-  .cardimage2{
-    align-items: center;
-    margin-left: 30%;
-    padding-top: 10%;
-    margin-bottom: 5%;
-  }
-  
-  .cardimage3{
-    align-items: center;
-    margin-left: 27%;
-    padding-top: 10%;
-    margin-bottom: 3%;
-  }
-  
-  .HomeCard1Title{
-    color: white;
-    margin: 5%;
-    font: var(--sinch-font-title-3)
-  }
-  
-  .HomeCard1Body{
-    color: white;
-    margin: 5%;
-    margin-right: 15%;
-    font: var(--sinch-font-extra-small-text);
-  }
-  
-  .HomeCard2Title{
-    margin: 5%;
-    font: var(--sinch-font-title-3)
-  }
-  
-  .HomeCard2Body{
-    margin: 5%;
-    margin-right: 10%;
-    font: var(--sinch-font-extra-small-text);
-  }
-  
-  .HomeCard3Title{
-    color: white;
-    margin: 5%;
-    font: var(--sinch-font-title-3)
-  }
-  
-  .HomeCard3Body{
-    color: white;
-    margin: 5%;
-    margin-right: 13%;
-    font: var(--sinch-font-extra-small-text);
-  }
-  
-  .card1Tag{
-    margin-left: 50%;
-  }
-  .Homecard1Matter{
-    background-color: #ffffff;
-    margin: 10% 5%;
-  }
-  
-  .Homecard1MatterContent{
-    margin: 0%;
-  }
-  
-  .Card1Button{
-    margin: 15%;
-  }
-  
+
   .HomeLefttabs{
     display: flex;
     flex-direction: column;
   }
+
+  .quickLeadsConverter{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  

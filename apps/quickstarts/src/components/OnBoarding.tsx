@@ -142,7 +142,7 @@ export const OnBoarding: FC = () => {
                 />
               </div>
               <div>
-                <sinch-button class={styles.startnameButton} type="cta-primary" text="Start" disabled={username.length <= 0 ? true : undefined} onClick={next}/>
+                <sinch-button class={styles.startnameButton} type="cta" text="Start" disabled={username.length <= 0 ? true : undefined} onClick={next}/>
               </div>
             </div>
           </div>
