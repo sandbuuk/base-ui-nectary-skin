@@ -148,7 +148,7 @@ export const Dialog: FC<Props> = (props): JSX.Element => {
           <h2 className={iserror == true ? styles.errorBody : styles.hide}>Please try again in a few moments.</h2>
         </div>
         <img src={iserror == true ? errorimage : congratsimage} className={styles.congratsimage}/>
-        <sinch-button style={{ width: '35%', marginBottom: '2%' }} type="cta" text="Try it out!" onClick={() => {}}/>
+        <sinch-button style={{ width: '35%', marginBottom: '2%' }} type="cta-primary" text="Try it out!" onClick={() => {}}/>
       </div>
     </div>
   )
@@ -305,7 +305,7 @@ const PageBody = (props: PageBodyProps) => {
           <div className={styles.humanButton}>
             <sinch-button
               style={{ width: '100%' }}
-              type="cta"
+              type="cta-primary"
               disabled={questionCounter > 5 || agentdetails[Object.keys(agentdetails).length - 1].name.length <= 0 || agentdetails[Object.keys(agentdetails).length - 1].email.length <= 0 || validateEmail(agentdetails[Object.keys(agentdetails).length - 1].email) == null ? true : undefined}
               onClick={buttonCounter}
               text={questionCounter <= 5 ? `Add more Agents (Up to ${6 - questionCounter} )` : 'Add more Agents (Up to 0)'}

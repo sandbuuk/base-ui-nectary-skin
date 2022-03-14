@@ -98,7 +98,7 @@ const PageBody = (props: PageBodyProps) => {
             <div className={styles.questionBtn}>
               <sinch-button
                 style={{ width: '100%' }}
-                type="cta"
+                type="cta-primary"
                 onClick={buttonCounter}
                 text="Add new question"
               />
