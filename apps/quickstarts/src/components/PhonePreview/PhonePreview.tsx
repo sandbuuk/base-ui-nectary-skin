@@ -21,9 +21,6 @@ export const PhonePreview: FC<PhonePreviewProps> = (props): JSX.Element => {
 
     if (activeEl.shadowRoot != null) {
       if (activeEl.tagName == 'SINCH-INPUT' || activeEl.tagName == 'SINCH-TEXTAREA') {
-        console.log(`Active element = ${activeEl.className}`)
-        console.log(`iive props ${props.chats[0].msg}`)
-
         return activeEl
       }
 
@@ -48,7 +45,7 @@ export const PhonePreview: FC<PhonePreviewProps> = (props): JSX.Element => {
       <div style={{ backgroundImage: `url(${mobile})` }} className={styles.botImage}>
         <div className={styles.messagesBot}>
           {(chats).map((_, i) => {
-            if (i == chats.length - 1 && chats[i].sender == 'left' ? activeelement == 'humanhandover' : activeelement == `${Math.floor((i + 1) / 2)}` && chats[i].sender == 'left') {
+            if (i == chats.length - 1 && chats[i].sender == 'left' ? (activeelement == 'humanhandover' || activeelement == '0') : activeelement == `${Math.floor((i + 1) / 2)}` && chats[i].sender == 'left') {
               return (
                 <MessageTyping key={`${i + 1}`}/>
               )

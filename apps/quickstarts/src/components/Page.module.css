@@ -8,11 +8,7 @@ h2 {
   font: var(--sinch-font-title-1);
   margin-bottom: 0%;
 }
-.congratsTitle{
-   font: var(--sinch-font-title-2);
-   margin-top: 0%;
-   margin-bottom: 2%;
-}
+
 
 .errorTitle{
    font: var(--sinch-font-title-2);
@@ -27,21 +23,8 @@ h2 {
    margin-bottom: 2%;
 }
 
-.errorBody{
-   font: var(--sinch-font-title-2);
-   margin-top: 0%;
-   margin-left: 4%;
-   margin-bottom: 2%;
-}
 
-.Congrats{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: 10px;
-  margin-right: 10px;
-}
+
 
 .Error{
   display: flex;
@@ -53,11 +36,7 @@ h2 {
   margin-right: 10px;
 }
 
-.congratsimage{
-  width:300px;
-  height: 250px;
-  margin-bottom: 5%;
-}
+
 
 .errorimage{
   width:20%;
@@ -73,54 +52,20 @@ h2 {
   justify-content: center;
   align-items: center;
 }
-.botsteps {
-  display: flex;
-  flex: 2;
-  justify-content: center;
-  align-items: center;
-}
 
-.whatsappHeading {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 1%;
-  padding: 1%;
-  border-radius: 2%;
-  background-color: #ffffff;
-}
-
-.whatsappBody {
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  margin: 1%;
-  margin-bottom: 0%;
-  margin-top: 0%;
-}
-.botwhatsappBody {
+.Body {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   margin: 0% 1%;
 }
 
-.pageWhatsapp {
-  display: flex;
-  flex-direction: row;
-  background-color: #e5e5e5;
-}
 .botpageWhatsapp {
   display: flex;
   flex-direction: row;
   background-color: #e5e5e5;
 }
 
-.mainBodyWhatsapp {
-  flex: 10;
-  display: flex;
-  flex-direction: column;
-}
 .botmainBodyWhatsapp {
   flex: 10;
   display: flex;
@@ -142,23 +87,12 @@ h2 {
   margin-left: 4%;
 }
 
-.humanButton{
-  margin: 2%;
-}
 
-.humanMessages {
-  display: flex;
-  flex-direction: column;
-  flex: 4;
-  margin: 2%;
-  margin-left: 6%;
-}
-
-.botstartingSpace{
+.startingSpace{
   flex:3
 }
 
-.bothumanMessages {
+.Messages {
   display: flex;
   flex: 7;
   margin: 1%;
@@ -174,10 +108,6 @@ h2 {
   flex: 5;
 }
 
-.messagesInput {
-  display: flex;
-  flex-direction: column;
-}
 .botmessagesInput {
   display: flex;
   flex-direction: row;
@@ -185,13 +115,6 @@ h2 {
   margin-left: 1%;
 }
 
-.humanHandover{
-  display: flex;
-  flex: 3;
-  margin-top: 27px;
-  margin-left: 3%;
-  margin-right: 5%;
-}
 
 .humanLine{
   height: 55%;
@@ -199,22 +122,12 @@ h2 {
   margin-right: 10px;
 }
 
-.Input {
-  margin: 2%;
-}
-.agentName{
-  width: 100px;
-}
+
 .botInput {
   margin: 1%;
 }
-.messagesParent {
-  margin-top: 3%;
-  display: flex;
-  flex-direction: row;
 
-}
-.botmessagesParent {
+.messagesParent {
   margin-top: 3%;
   display: flex;
   flex-direction: row;
@@ -331,31 +244,8 @@ h2 {
   font: var(--sinch-font-extra-small-text)
 }
 
-.humanDetails{
-  margin-top: 20%;
-  margin-left: 5%;
-  display: flex;
-  flex-direction: column;
-}
-.humanName{
-  margin-right: 3%;
-  flex: 4;
-  flex-wrap: wrap;
-}
-.humanEmail{
-  margin-right: 3%;
-  flex: 4;
-  flex-wrap: wrap;
-}
-.humanAction{
-  margin-right: 3%;
-  flex: 4;
-}
-.humanDetailsbuttons{
-  margin:2%;
-  display: flex;
-  flex-direction: row;
-}
+
+
 .messagesMobile{
   display: flex;
   flex: 1;
@@ -368,18 +258,8 @@ h2 {
 .agentDetails{
   margin-left: 15%;
 }
-.human{
-  display: flex;
-  flex-direction: row;
-}
-.humanhidden{
-  display: none;
-}
-.humanValues{
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-}
+
+
 .horizontaLine{
   width: 100%;
   border: '1px solid #999999';
@@ -401,6 +281,3 @@ td{
   overflow-wrap: break-word;
 }
 
-.hide{
-  display: none;
-}

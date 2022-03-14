@@ -32,9 +32,17 @@ export const QuickstartCards: FC<QuickstartCardsProps> = (props): JSX.Element =>
         <p className={styles.Homecard1MatterContent}>{mainBody}</p>
       </div>
       <div className={styles.homeTags}>
-        <sinch-tag style={{ marginLeft: '5%' }} text={descriptionTags[0].text} category={categoryValues[descriptionTags[0].category]} small/>
-        <sinch-tag style={{ marginLeft: '3%' }} text={descriptionTags[1].text} category={categoryValues[descriptionTags[1].category]} small/>
-        <sinch-tag style={{ marginLeft: '3%' }} text={descriptionTags[2].text} category={categoryValues[descriptionTags[2].category]} small/>
+        { descriptionTags.map((tag, i) => {
+          return (
+            <sinch-tag
+              key={tag.text}
+              style={{ marginLeft: i === 0 ? '5%' : '3%' }}
+              text={tag.text}
+              category={categoryValues[tag.category]}
+              small
+            />
+          )
+        })}
       </div>
       <div className={styles.Card1Button}>
         <sinch-button style={{ marginTop: '20%' }} type="secondary" text="Try for free" onClick={clickFunction}/>

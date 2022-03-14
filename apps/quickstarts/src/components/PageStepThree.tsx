@@ -64,11 +64,11 @@ const PageBody = (props: PageBodyProps) => {
   })
 
   return (
-    <div className={styles.botwhatsappBody}>
-      <div className={styles.botmessagesParent}>
-        <div className={styles.botstartingSpace}/>
-        <div className={styles.bothumanMessages}>
-          <div className={styles.botquestions}>
+    <div className={styles.Body}>
+      <div className={styles.messagesParent}>
+        <div className={styles.startingSpace}/>
+        <div className={styles.Messages}>
+          <div className={styles.questions}>
             <div className={styles.botGreet}>
                 <sinch-textarea // eslint-disable-line
                   value={greetingmsg}

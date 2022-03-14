@@ -13,9 +13,8 @@ import homeimage2 from './images/homeimage2.png'
 import quickleadsconverter from './images/quickleadsconverter.png'
 import status from './images/status.png'
 import type { FC } from 'react'
-import '@nectary/components/tabs'
-import '@nectary/components/tag'
-import '@nectary/components'
+import '@sinch-engage/nectary/tag'
+import '@sinch-engage/nectary/tabs'
 
 export const Home: FC = () => {
   const [quickisOpen, quicksetIsOpen] = useState(false)

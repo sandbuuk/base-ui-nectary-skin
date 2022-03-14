@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 import { TokenContext } from '../contexts'
-import styles from './Page.module.css'
 import { PageBottom } from './PageBottom'
 import { usePageControl } from './PageContext'
 import { PageHeader } from './PageHeader'
 import { usePageThreeControl } from './PageStepThreeContext'
+import styles from './PageThree.module.css'
 import { PhonePreview } from './PhonePreview/PhonePreview'
 import congratsimage from './images/congratsimage.jpg'
 import contactlogo from './images/contactlogo.jpg'
@@ -254,18 +254,18 @@ const AgentInformation = (props: AgentInformationProps) => {
     <>
       { [...Array(Object.keys(agentdetails).length - 1)].map((_, index) => (
         agentdetails[index].name.length > 0 ? (
-          <tr style={{ borderTop: '1px solid #999999' }} key={index} className={styles.humanValues}>
+          <tr style={{ borderTop: '1px solid #999999' }} key={index} className={styles.Values}>
             {/* <div className={styles.humanhorzontalline}>
       <hr className={styles.horizontaLine}/>
     </div> */}
-            <td className={styles.humanName}>
+            <td className={styles.Name}>
               <p>{agentdetails[index].name}</p>
             </td>
-            <td className={styles.humanEmail}>
+            <td className={styles.Email}>
               <p>{agentdetails[index].email}</p>
             </td>
-            <td className={styles.humanAction}>
-              <div className={styles.humanDetailsbuttons}>
+            <td className={styles.Action}>
+              <div className={styles.Detailsbuttons}>
                 <sinch-button
                   type="destructive"
                   text="Delete"
@@ -298,11 +298,11 @@ const PageBody = (props: PageBodyProps) => {
   chats.push({ sender: 'left', msg: humanhandover })
 
   return (
-    <div className={styles.botwhatsappBody}>
+    <div className={styles.Body}>
       <div className={styles.messagesParent}>
-        <div className={styles.humanMessages}>
+        <div className={styles.Messages}>
           { <WhatsappQuestion setActiveelement={setActiveelement} activeelement={activeelement} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={agentcount} i={agentcount}/>}
-          <div className={styles.humanButton}>
+          <div className={styles.Button}>
             <sinch-button
               style={{ width: '100%' }}
               type="cta-primary"
@@ -311,16 +311,16 @@ const PageBody = (props: PageBodyProps) => {
               text={questionCounter <= 5 ? `Add more Agents (Up to ${6 - questionCounter} )` : 'Add more Agents (Up to 0)'}
             />
           </div>
-          <table className={styles.humanDetails}>
+          <table className={styles.Details}>
             <thead>
-              <tr className={agentcount > 0 ? styles.human : styles.humanhidden}>
-                <th className={styles.humanName}>
+              <tr className={agentcount > 0 ? styles.display : styles.hidden}>
+                <th className={styles.Name}>
                   Name
                 </th>
-                <th className={styles.humanEmail}>
+                <th className={styles.Email}>
                   E-mail
                 </th>
-                <th className={styles.humanAction}>
+                <th className={styles.Action}>
                   Action
                 </th>
               </tr>
@@ -331,7 +331,7 @@ const PageBody = (props: PageBodyProps) => {
           </table>
         </div>
         <hr style={{ border: '1px solid #DDE0E2', height: '350px' }}/>
-        <div className={styles.humanHandover}>
+        <div className={styles.Handover}>
                   <sinch-textarea // eslint-disable-line
                     value={humanhandover}
                     label="Human Handover Message"
@@ -416,8 +416,8 @@ export const PageStepFour: FC = () => {
   }
 
   return (
-    <div className={styles.pageWhatsapp}>
-      <div className={styles.mainBodyWhatsapp}>
+    <div className={styles.page}>
+      <div className={styles.mainBody}>
 
         {/* Page Header */}
 
