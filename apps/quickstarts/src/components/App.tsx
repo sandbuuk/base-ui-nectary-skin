@@ -5,10 +5,9 @@ import '@sinch-engage/nectary/select'
 import '@sinch-engage/nectary/textarea'
 import '@sinch-engage/nectary/alert'
 import { useEffect, useRef } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styles from './App.module.css'
 import { Home } from './Home'
-import { OnBoarding } from './OnBoarding'
 import { PageLayout } from './PageLayout'
 import { PageNotFound } from './PageNotFound'
 import { PageStepFour } from './PageStepFour'
@@ -45,13 +44,14 @@ export const App: FC<TApp> = ({ baseUrl }) => {
       <Router basename={baseUrl}>
         <Routes>
           <Route path="/" element={<PageLayout/>}>
-            <Route index element={<Navigate to="step-1"/>}/>
-            <Route path="step-1" element={<Home/>}/>
-            {/* <Route path="step-2" element={<PageStepTwo/>}/> */}
-            <Route path="step-2" element={<PageStepThree/>}/>
-            <Route path="step-3" element={<PageStepFour/>}/>
-            <Route path="onboarding" element={<OnBoarding/>}/>
-            <Route path="*" element={<PageNotFound/>}/>
+            <Route index element={<Home/>}/>
+
+            <Route path="/whatsapp" element={<PageLayout/>}>
+              <Route path="step-1" element={<PageStepThree/>}/>
+              <Route path="step-2" element={<PageStepFour/>}/>
+              <Route path="*" element={<PageNotFound/>}/>
+            </Route>
+
           </Route>
         </Routes>
       </Router>

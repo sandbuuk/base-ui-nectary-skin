@@ -1,0 +1,66 @@
+  .header{
+    height: 220px;
+    background-color:  #F1F3F4;
+  }
+
+  .image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: 20%;
+    margin-top: 0%;
+    margin-bottom: 5%;
+  }
+
+  .body{
+    flex: 8;
+    background-color: #ffffff;
+  }
+  .bodyHeading{
+    color: #677784;
+    font-size: 16px;
+    text-align: center;
+  }
+  .bodyHeadingContent{
+    font-size: 24px;
+    text-align: center;
+    font-weight: 600;
+  }
+  .bodyContent{
+    display: flex;
+    flex-direction: column;
+  }
+  .bodyContentPoints{
+    display: flex;
+    flex-direction: row;
+  }
+  .pointsImage{
+    margin: 3%;
+    margin-left: 5%;
+    margin-right: 2%;
+    height: 15px;
+    width: 15px;
+  }
+  .bodyContentPointsMatter{
+    font: var(--sinch-font-extra-small-text);
+    font-size: 14px;
+    margin-right: 15%;
+  }
+
+  .footer {
+  display: flex;
+  background-color: white;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0% 1%;
+  margin-bottom: 1%;
+}
+
+.footerCancel{
+  margin: 3%;
+}
+
+.footerContinue{
+  margin: 3%;
+}

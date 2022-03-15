@@ -1,203 +1,110 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { TokenContext } from '../contexts'
+import { CardDialog } from './CardDialog'
 import styles from './Home.module.css'
-import { usePageControl } from './PageContext'
+import { QuickstartCards } from './QuickstartCards'
+import abandonedcart from './images/abandonedcart.png'
 import card1 from './images/card1.png'
 import card3 from './images/card3.png'
+import offering from './images/customersupport.png'
+import customersupportdialog from './images/customersupportdialog.png'
+import feedback from './images/feedback.png'
 import homeimage2 from './images/homeimage2.png'
-import offering from './images/offering.png'
+import quickleadsconverter from './images/quickleadsconverter.png'
+import status from './images/status.png'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/tabs'
 import '@sinch-engage/nectary/tag'
+import '@sinch-engage/nectary/tabs'
 
 export const Home: FC = () => {
-  const { next } = usePageControl()
+  const [quickisOpen, quicksetIsOpen] = useState(false)
+  const [customerisOpen, customersetIsOpen] = useState(false)
+  const quickLeadshandleClickOpen = () => {
+    quicksetIsOpen(true)
+  }
+  const quickLeadsConverterPage = () => {
+    quickLeadshandleClickOpen()
+  }
+  const customerhandleClickOpen = () => {
+    customersetIsOpen(true)
+  }
+  const customerConverterPage = () => {
+    customerhandleClickOpen()
+  }
   const token = useContext(TokenContext)
 
-  if (token !== null) {
-    return (
-      <div className={styles.HomePage}>
-        {/* <div className={styles.HomeLeftPage}>
-                <div className={styles.HomeLeftPageTitle}>Quick Starts</div>
-                <p className={styles.HomeLeftPageTitleMatter}>Get up and running fast</p>
-                <div className={styles.Homesubmenu}>
-                  <hr style={{ border: '1px solid #e5e5e5', marginRight: '10px', marginLeft: '5px' }}/>
-                  <div className={styles.HomeLeftPageContent}>
-                    <p className={styles.HomeLeftPageContentMatter}>Overview</p>
-                    <p className={styles.HomeLeftPageContentMatter}>Dashboard</p>
-                    <p className={styles.HomeLeftPageContentMatter}>Active Quick Starts</p>
-                    <p className={styles.HomeLeftPageContentMatter}>Integrations</p>
-                  </div>
-                </div>
-              </div> */}
-        <div className={styles.HomeRightPage}>
-          <div className={styles.HomeRightPageHeading}>
-            <h2 className={styles.HomeRightPageHeadingMatter}>Quick Starts</h2>
-            <p className={styles.HomeRightPageContentMatter}>Get up and running fast</p>
-          </div>
-          <div className={styles.HomeRightPageMiddle}>
-            <div className={styles.HomeLeftPageMiddleHeading}>
-              <div className={styles.HomeRightPageMiddleMatter}>
-                We value your time. Accelerate solutions to your customers by customizing all set Quick Starts templates.
-              </div>
-              <p className={styles.HomeRightPageMiddleBody}>Quick Starts are customizable ready-to-go solutions that can be deployed within minutes. </p>
-            </div>
-            <div className={styles.HomeImage}>
-              <img className={styles.HomeRightPageImage} src={homeimage2}/>
-            </div>
-          </div>
-          {/* <div className={styles.HomeRightPageCapabilities}>
-                  <div className={styles.HomeRightPageCapabilitiesTitle}>What can Quick Starts do for you?</div>
-                  <div className={styles.HomeRightPageCapabilitiesBody}>
-                    <div className={styles.HomeIconDivRow}>
-                      <div className={styles.HomeIconDiv}>
-                        <img className={styles.homeIcon1} src={homeicon1}/>
-                        <p className={styles.HomeIconMatter}>Omnichannel customer support</p>
-                      </div>
-                      <hr style={{ border: '1px solid #e5e5e5' }}/>
-                      <div className={styles.HomeIconDiv2}>
-                        <img className={styles.homeIcon1} src={homeicon2}/>
-                        <p className={styles.HomeIconMatter}>Improve customer satisfaction</p>
-                      </div>
-                      <hr style={{ border: '1px solid #e5e5e5' }}/>
-                      <div className={styles.HomeIconDiv2}>
-                        <img className={styles.homeIcon1} src={homeicon3}/>
-                        <p className={styles.HomeIconMatter}>Grow sales via messaging</p>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
-          <div className={styles.HomeRightPageTemplate}>
-            <div className={styles.HomeRightPageCapabilitiesTitle}>Quick Starts Templates</div>
-            {/* <div className={styles.Hometabs}>
-                    <sinch-tabs
-                      value={value}
-                      onChange={(e) => {
-                        const value = e.nativeEvent.detail
-
-                        setValue(value)
-                      }}
-                    >
-                      <sinch-tabs-option style={{ marginTop: '20px', backgroundColor: '#FFFFFF', marginRight: '15px' }} value="1" text="All Quick Starts"/>
-                      <sinch-tabs-option style={{ marginTop: '20px', backgroundColor: '#F7F7F7', marginRight: '15px' }} value="2" text="Active Quick Starts" disabled/>
-                      <sinch-tabs-option style={{ marginTop: '20px', backgroundColor: '#F7F7F7', marginRight: '15px' }} value="3" text="Paused Quick Starts" disabled>
-                        <sinch-icon-tooltip/>
-                      </sinch-tabs-option>
-                    </sinch-tabs>
-                  </div> */}
-            <div className={styles.HomeCardsdiv}>
-              <div className={styles.HomeContainer1}>
-                <div className={styles.HomeCard1}>
-                  <div className={styles.cardimage1}>
-                    <img className={styles.card1} src={card1}/>
-                  </div>
-                  <sinch-tag style={{ marginLeft: '5%' }} text="New" category="grass"/>
-                  <p className={styles.HomeCard1Title}> Quick Leads Converter </p>
-                  <p className={styles.HomeCard1Body}> Generate potential leads via WhatsApp.</p>
-                </div>
-                <div className={styles.Homecard1Matter}>
-                  <p className={styles.Homecard1MatterContent}>Conect and qualify leads via WhatsApp and lorem ipsum lorem ipsum lorem ipsum.</p>
-                  <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
-                </div>
-                <div className={styles.Card1Button}>
-                  <sinch-button type="cta-primary" text="Click to see more" onClick={next}/>
-                </div>
-              </div>
-              <div className={styles.HomeContainer1}>
-                <div className={styles.HomeCard2}>
-                  <div className={styles.cardimage2}>
-                    <img className={styles.card2} src={offering}/>
-                  </div>
-                  <sinch-tag style={{ marginLeft: '5%' }} text="Coming Soon" category="aqua"/>
-                  <p className={styles.HomeCard2Title}> Quick Customer Support </p>
-                  <p className={styles.HomeCard2Body}> Offer 24/7 Customer Support across various channels.</p>
-                </div>
-                <div className={styles.Homecard1Matter}>
-                  <p className={styles.Homecard1MatterContent}>Conect and qualify leads via WhatsApp and lorem ipsum lorem ipsum lorem ipsum.</p>
-                  <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
-                </div>
-                <div className={styles.Card1Button}>
-                  <sinch-button type="cta-primary" text="Click to see more" onClick={() => {}}/>
-                </div>
-              </div>
-              <div className={styles.HomeContainer1}>
-                <div className={styles.HomeCard3}>
-                  <div className={styles.cardimage3}>
-                    <img className={styles.card3} src={card3}/>
-                  </div>
-                  <sinch-tag style={{ marginLeft: '5%' }} text="Coming Soon" category="aqua"/>
-                  <p className={styles.HomeCard3Title}>Quick FAQ Chatbot</p>
-                  <p className={styles.HomeCard3Body}> Increase customer satisfaction by offering a 24/7 Chatbot.</p>
-                </div>
-                <div className={styles.Homecard1Matter}>
-                  <p className={styles.Homecard1MatterContent}>Conect and qualify leads via WhatsApp and lorem ipsum lorem ipsum lorem ipsum.</p>
-                  <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
-                </div>
-                <div className={styles.Card1Button}>
-                  <sinch-button type="cta-primary" text="Click to see more" onClick={() => {}}/>
-                </div>
-              </div>
-            </div>
-            <div className={styles.HomeCardsdiv}>
-              <div className={styles.HomeContainer1}>
-                <div className={styles.HomeCard2}>
-                  <div className={styles.cardimage2}>
-                    <img className={styles.card2} src={offering}/>
-                  </div>
-                  <sinch-tag style={{ marginLeft: '5%' }} text="Coming Soon" category="aqua"/>
-                  <p className={styles.HomeCard2Title}> Quick Customer Support </p>
-                  <p className={styles.HomeCard2Body}> Offer 24/7 Customer Support across various channels.</p>
-                </div>
-                <div className={styles.Homecard1Matter}>
-                  <p className={styles.Homecard1MatterContent}>Conect and qualify leads via WhatsApp and lorem ipsum lorem ipsum lorem ipsum.</p>
-                  <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
-                </div>
-                <div className={styles.Card1Button}>
-                  <sinch-button type="cta-primary" text="Click to see more" onClick={() => {}}/>
-                </div>
-              </div>
-              <div className={styles.HomeContainer1}>
-                <div className={styles.HomeCard3}>
-                  <div className={styles.cardimage3}>
-                    <img className={styles.card3} src={card3}/>
-                  </div>
-                  <sinch-tag style={{ marginLeft: '5%' }} text="Coming Soon" category="aqua"/>
-                  <p className={styles.HomeCard3Title}>Quick FAQ Chatbot</p>
-                  <p className={styles.HomeCard3Body}> Increase customer satisfaction by offering a 24/7 Chatbot.</p>
-                </div>
-                <div className={styles.Homecard1Matter}>
-                  <p className={styles.Homecard1MatterContent}>Conect and qualify leads via WhatsApp and lorem ipsum lorem ipsum lorem ipsum.</p>
-                  <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
-                </div>
-                <div className={styles.Card1Button}>
-                  <sinch-button type="cta-primary" text="Click to see more" onClick={() => {}}/>
-                </div>
-              </div>
-              <div className={styles.HomeContainer1}>
-                <div className={styles.HomeCard1}>
-                  <div className={styles.cardimage1}>
-                    <img className={styles.card1} src={card1}/>
-                  </div>
-                  <sinch-tag style={{ marginLeft: '5%' }} text="New" category="grass"/>
-                  <p className={styles.HomeCard1Title}> Quick Leads Converter </p>
-                  <p className={styles.HomeCard1Body}> Generate potential leads via WhatsApp.</p>
-                </div>
-                <div className={styles.Homecard1Matter}>
-                  <p className={styles.Homecard1MatterContent}>Conect and qualify leads via WhatsApp and lorem ipsum lorem ipsum lorem ipsum.</p>
-                  <p className={styles.Homecard1MatterContentBody}>Lorem ipsum lorem ipsum Lorem</p>
-                </div>
-                <div className={styles.Card1Button}>
-                  <sinch-button type="cta-primary" text="Click to see more" onClick={next}/>
-                </div>
-              </div>
-            </div>
-
-            <div/>
-          </div>
-        </div>
-      </div>
-    )
+  if (token === null) {
+    return <div>Login First</div>
   }
 
-  return <div>Login First</div>
+  return (
+    <div className={styles.page}>
+      <div className={styles.rightPage}>
+        <div className={styles.rightPageHeading}>
+          <h2 className={styles.rightPageHeadingMatter}>Quick Starts</h2>
+        </div>
+        <div className={styles.rightPageMiddle}>
+          <div className={styles.leftPageMiddleHeading}>
+            <div className={styles.rightPageMiddleMatter}>
+              Pre-built solutions for your business
+            </div>
+            <p className={styles.rightPageMiddleBody}>Offer conversational experiences with ready-to-use solutions </p>
+          </div>
+          <div className={styles.image}>
+            <img className={styles.rightPageImage} src={homeimage2}/>
+          </div>
+        </div>
+        <div className={styles.rightPageTemplate}>
+          <div className={styles.rightPageCapabilitiesTitle}>Quick Starts</div>
+          <div className={styles.cardsdiv}>
+            <QuickstartCards clickFunction={quickLeadsConverterPage} bgColor="#007171" mainTag={{ text: 'New', category: 3 }} headerTitle="Quick Leads Converter" mainBody="Qualify leads by collecting name, e-mail, and other basic info from visitors." imageSource={card1} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'Marketing', category: 2 }]} headerColor="white"/>
+
+            <QuickstartCards clickFunction={customerConverterPage} bgColor="#FFCC66" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Customer Support" mainBody="Deliver a consistent Customer Support and solve issues at hand by making support interactive." imageSource={offering} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'Customer Support', category: 2 }]} headerColor="black"/>
+
+            <QuickstartCards clickFunction={() => {}} bgColor="#0A273D" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick FAQ Chatbot" mainBody="Build a chatbot to answer frequently asked questions." imageSource={card3} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Customer Support', category: 2 }]} headerColor="white"/>
+          </div>
+
+          <div className={styles.cardsdiv}>
+            <QuickstartCards clickFunction={() => {}} bgColor="#FFCC66" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Abandoned Cart Recovery" mainBody="Create a Chatbot that sends personalized reminders to users." imageSource={abandonedcart} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'E-commerce', category: 2 }]} headerColor="black"/>
+
+            <QuickstartCards clickFunction={() => {}} bgColor="#0A273D" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Product Feedback" mainBody="Create a Chatbot that compiles product feedback through personalized user conversations." imageSource={feedback} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Surveys', category: 2 }]} headerColor="white"/>
+
+            <QuickstartCards clickFunction={() => {}} bgColor="#007171" mainTag={{ text: 'New', category: 3 }} headerTitle="Quick Order Status & Package Tracking Update" mainBody="Build a Chatbot that allows users to check the status of their purchases and track their deliveries at any time." imageSource={status} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Marketing', category: 2 }]} headerColor="white"/>
+          </div>
+
+          <div/>
+        </div>
+      </div>
+      <CardDialog
+        isOpen={quickisOpen}
+        setIsOpen={quicksetIsOpen}
+        next={() => {}}
+        buttonbgcolor="#007171"
+        headerbgcolor="#007171"
+        imagesource={quickleadsconverter}
+        statusbgcolor="#007171"
+        statuscolor="#007171"
+        heading="Quick Leads Converter"
+        headingContent="Automate Leads Qualification via WhatsApp, customers preferred channel"
+        bodyContent={['Improve Leads Conversion through conversations.', 'Forget forms. Quickly gather customer’s information through a personalized conversation.', 'Two steps. Yup. That’s right. It only takes two steps to fully configure the Quick Leads Converter.', 'Easy configuration. Get your solution running with no code.']}
+        disabled={false}
+      />
+      <CardDialog
+        isOpen={customerisOpen}
+        setIsOpen={customersetIsOpen}
+        next={function(): void {
+          throw new Error('Function not implemented.')
+        }}
+        buttonbgcolor=" #F1F3F4"
+        headerbgcolor="#F1F3F4"
+        imagesource={customersupportdialog}
+        statusbgcolor="#FFBE3C"
+        statuscolor="black"
+        heading="Quick Customer Support"
+        headingContent="Save customers valuable time and effort by offering support across various channels"
+        bodyContent={['Give customers quick answers to their questions.', 'Automate customer support through various channels.', 'Speed up customer resolutions.', 'Customize your bot based on a specific audience.', 'Increase customer satisfaction by offering a personalized support.']}
+        disabled
+      />
+    </div>
+  )
 }

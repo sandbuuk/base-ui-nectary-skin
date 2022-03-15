@@ -8,6 +8,8 @@ type TPageThreeContext = {
   setGreetingmsg: (arg0: string) => void,
   humanhandover: string,
   setHumanhandover: (arg0: string) => void,
+  flowCounter: number,
+  setCounter: (arg0: any) => void,
 }
 
 const k = (botquestion: string[]) => {
@@ -19,6 +21,9 @@ const p = (greetingmsg: string) => {
 const s = (humanhandover: string) => {
   console.log(humanhandover)
 }
+const v = (counter: number) => {
+  console.log(counter)
+}
 const Context = createContext<TPageThreeContext>({
   botquestion: [],
   setBotquestion: k,
@@ -26,6 +31,8 @@ const Context = createContext<TPageThreeContext>({
   setGreetingmsg: p,
   humanhandover: '',
   setHumanhandover: s,
+  flowCounter: 0,
+  setCounter: v,
 })
 
 export const usePageThreeControl = () => {
@@ -36,6 +43,7 @@ export const PageStepThreeContext: FC<{}> = ({ children }) => {
   const [botquestion, setBotquestion] = useState([])
   const [greetingmsg, setGreetingmsg] = useState('')
   const [humanhandover, setHumanhandover] = useState('')
+  const [flowCounter, setCounter] = useState(0)
 
   const state: TPageThreeContext = {
     botquestion,
@@ -44,6 +52,8 @@ export const PageStepThreeContext: FC<{}> = ({ children }) => {
     setGreetingmsg,
     humanhandover,
     setHumanhandover,
+    flowCounter,
+    setCounter,
   }
 
   return <Context.Provider value={state}>{children}</Context.Provider>

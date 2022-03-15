@@ -1,0 +1,65 @@
+  .container{
+    margin-right: 2%;
+    margin-top: 3%;
+    margin-right: 7%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 200px fit-content;
+    width: 300px;
+    background-color: #FFFFFF;
+  }
+    
+  .container:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  .cardContainer{
+    margin: 0%;
+    margin-top: 0%;
+    height: 300px;
+    width: auto;
+    max-height: 350px fit-content;
+    max-width: 300px;
+  }
+    
+  .card{
+    height: auto;
+    width: 50%;
+  }
+  .cardImage{
+    align-items: center;
+    height: 150px;
+    margin-left: 30%;
+    padding-top: 10%;
+    margin-bottom: auto;
+  }
+   .cardTitle{
+    color: white;
+    margin: 5%;
+    font: var(--sinch-font-title-3)
+  }
+  
+  .cardBody{
+    color: white;
+    margin: 5%;
+    margin-right: 15%;
+    font: var(--sinch-font-extra-small-text);
+  }
+    
+  .cardMatter{
+    background-color: #ffffff;
+    height: 80px;
+    margin: 10% 5%;
+  }
+  
+  .cardMatterContent{
+    overflow-wrap: break-word;
+    margin: 0%;
+  }
+   
+  .cardButton{
+    display: flex;
+    align-self: flex-end;
+    margin: 5%;
+  }
