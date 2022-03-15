@@ -1,4 +1,4 @@
-.botwhatsappHeading {
+.heading {
     display: flex;
     flex-direction: row;
     padding: 1%;
@@ -9,20 +9,20 @@
     background-color: #ffffff;
   }
 
-  .botwhatsappMatter{
+  .matter{
     flex:4
 }
 
-.botwhatsappMatterHeading{
+.matterHeading{
     font:var(--sinch-font-title-2);
     font-size: 30px;
 }
 
-.botwhatsappMatterBody {
+.matterBody {
     font: var(--sinch-font-extra-small-text);
 }
 
-.botpageSteps{
+.pageSteps{
     flex:4;
     align-items: center;
     justify-content: center;

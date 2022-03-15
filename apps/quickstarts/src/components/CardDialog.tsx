@@ -39,7 +39,7 @@ export const CardDialog: FC<Props> = (props): JSX.Element => {
       flexDirection: 'column',
     }}
     >
-      <div className={styles.customerConverterHeader} style={{ backgroundColor: headerbgcolor }}>
+      <div className={styles.header} style={{ backgroundColor: headerbgcolor }}>
         <button
           style={{
             marginLeft: '95%',
@@ -61,37 +61,25 @@ export const CardDialog: FC<Props> = (props): JSX.Element => {
         >x
         </button>
         <p style={{ backgroundColor: statusbgcolor, marginRight: '90%', paddingLeft: '5px', marginBottom: '0%', color: statuscolor }}> Soon</p>
-        <img src={imagesource} className={styles.customerConverterImage}/>
+        <img src={imagesource} className={styles.image}/>
 
       </div>
-      <div className={styles.quickLeadsConverterBody}>
-        <h3 className={styles.quickLeadsConverterBodyHeading}>{heading}</h3>
-        <h3 className={styles.quickLeadsConverterBodyHeadingContent}>{headingContent}</h3>
-        <div className={styles.quickLeadsConverterBodyContent}>
-          <div className={styles.quickLeadsConverterBodyContentPoints}>
-            <img src={pointsimage} className={styles.pointsImage}/>
-            <p className={styles.quickLeadsConverterBodyContentPointsMatter}>{bodyContent[0]}</p>
-          </div>
-          <div className={styles.quickLeadsConverterBodyContentPoints}>
-            <img src={pointsimage} className={styles.pointsImage}/>
-            <p className={styles.quickLeadsConverterBodyContentPointsMatter}>{bodyContent[1]}</p>
-          </div>
-          <div className={styles.quickLeadsConverterBodyContentPoints}>
-            <img src={pointsimage} className={styles.pointsImage}/>
-            <p className={styles.quickLeadsConverterBodyContentPointsMatter}>{bodyContent[2]}</p>
-          </div>
-          <div className={styles.quickLeadsConverterBodyContentPoints}>
-            <img src={pointsimage} className={styles.pointsImage}/>
-            <p className={styles.quickLeadsConverterBodyContentPointsMatter}>{bodyContent[3]}</p>
-          </div>
-          <div className={styles.quickLeadsConverterBodyContentPoints}>
-            <img src={pointsimage} className={styles.pointsImage}/>
-            <p className={styles.quickLeadsConverterBodyContentPointsMatter}>{bodyContent[4]}</p>
-          </div>
+      <div className={styles.body}>
+        <h3 className={styles.bodyHeading}>{heading}</h3>
+        <h3 className={styles.bodyHeadingContent}>{headingContent}</h3>
+        <div className={styles.bodyContent}>
+          {bodyContent.map((content, i: number) => {
+            return (
+              <div key={`${i}`} className={styles.bodyContentPoints}>
+                <img src={pointsimage} className={styles.pointsImage}/>
+                <p className={styles.bodyContentPointsMatter}>{content}</p>
+              </div>
+            )
+          })}
         </div>
       </div>
-      <div className={styles.quickLeadsConverterFooter}>
-        <div className={styles.quickLeadsConverterFooterCancel}>
+      <div className={styles.footer}>
+        <div className={styles.footerCancel}>
           <sinch-button
             type="secondary"
             text="Cancel"
@@ -103,7 +91,7 @@ export const CardDialog: FC<Props> = (props): JSX.Element => {
             small
           />
         </div>
-        <div className={styles.quickLeadsConverterFooterContinue}>
+        <div className={styles.footerContinue}>
           <sinch-button type="primary" text="Continue" onClick={next} small disabled={disabled}/>
         </div>
       </div>

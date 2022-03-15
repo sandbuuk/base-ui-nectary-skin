@@ -5,8 +5,8 @@ import { PageBottom } from './PageBottom'
 import { usePageControl } from './PageContext'
 import { PageHeader } from './PageHeader'
 import { usePageThreeControl } from './PageStepThreeContext'
-import styles from './PageThree.module.css'
 import { PhonePreview } from './PhonePreview/PhonePreview'
+import styles from './StepFour.module.css'
 import congratsimage from './images/congratsimage.jpg'
 import contactlogo from './images/contactlogo.jpg'
 import errorimage from './images/erroDialogImage.png'
@@ -62,12 +62,12 @@ async function SendData(data: data) {
 
   questions.greetings = greetingmsg
 
-  Object.keys(botquestion).map((i: any) => {
+  Object.keys(botquestion).map((_, i: number) => {
     if (i == 0) {
       questions.questionListAfterOffloading.pop()
     }
 
-    questions.questionListAfterOffloading.push({ name: `Question ${(Number(i) + 1)}`, description: `${botquestion[i]}` })
+    questions.questionListAfterOffloading.push({ name: `Question ${(i + 1)}`, description: `${botquestion[i]}` })
   })
 
   questions.offloading = humanhandover
@@ -142,7 +142,7 @@ export const Dialog: FC<Props> = (props): JSX.Element => {
       >x
       </button>
 
-      <div className={styles.Congrats}>
+      <div className={styles.congrats}>
         <div className={styles.congratsText}>
           <h2 className={styles.congratsTitle}>{iserror == false ? 'Congratulations! You\'ve finished your Quick Start!' : 'The configuration could not be saved.'}</h2>
           <h2 className={iserror == true ? styles.errorBody : styles.hide}>Please try again in a few moments.</h2>
@@ -202,7 +202,7 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
 
   return (
     <div className={styles.messagesInput}>
-      <div className={styles.Input}>
+      <div className={styles.input}>
         <sinch-input
           key={`${props.i}name`}
           className={styles.agentName}
@@ -222,7 +222,7 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
           placeholder="What is your name?"
         />
       </div>
-      <div className={styles.Input}>
+      <div className={styles.input}>
         <sinch-input
           key={`${props.i}email`}
           value={agentdetails[props.i].email}
@@ -254,18 +254,18 @@ const AgentInformation = (props: AgentInformationProps) => {
     <>
       { [...Array(Object.keys(agentdetails).length - 1)].map((_, index) => (
         agentdetails[index].name.length > 0 ? (
-          <tr style={{ borderTop: '1px solid #999999' }} key={index} className={styles.Values}>
+          <tr style={{ borderTop: '1px solid #999999' }} key={index} className={styles.values}>
             {/* <div className={styles.humanhorzontalline}>
       <hr className={styles.horizontaLine}/>
     </div> */}
-            <td className={styles.Name}>
+            <td className={styles.name}>
               <p>{agentdetails[index].name}</p>
             </td>
-            <td className={styles.Email}>
+            <td className={styles.email}>
               <p>{agentdetails[index].email}</p>
             </td>
-            <td className={styles.Action}>
-              <div className={styles.Detailsbuttons}>
+            <td className={styles.action}>
+              <div className={styles.detailsButtons}>
                 <sinch-button
                   type="destructive"
                   text="Delete"
@@ -290,19 +290,19 @@ const PageBody = (props: PageBodyProps) => {
   const { setActiveelement, botquestion, setHumanhandover, greetingmsg, agentdetails, humanhandover, buttonCounter, questionCounter, agentcount, activeelement, setAgentdetails } = props
   const chats = []
 
-  chats.push({ sender: 'left', msg: greetingmsg })
-  Object.keys(botquestion).map((i: any) => {
-    chats.push({ sender: 'left', msg: botquestion[i] })
-    chats.push({ sender: 'right', msg: 'user message' })
+  chats.push({ sender: 'left', msg: greetingmsg, typing: activeelement == 'greetingMsg' })
+  Object.keys(botquestion).map((_, i: number) => {
+    chats.push({ sender: 'left', msg: botquestion[i], typing: activeelement == `${i + 1}` })
+    chats.push({ sender: 'right', msg: 'user message', typing: activeelement == `${i + 1}` })
   })
-  chats.push({ sender: 'left', msg: humanhandover })
+  chats.push({ sender: 'left', msg: humanhandover, typing: activeelement == 'humanhandover' })
 
   return (
-    <div className={styles.Body}>
+    <div className={styles.body}>
       <div className={styles.messagesParent}>
-        <div className={styles.Messages}>
+        <div className={styles.messages}>
           { <WhatsappQuestion setActiveelement={setActiveelement} activeelement={activeelement} agentdetails={agentdetails} setAgentdetails={setAgentdetails} key={agentcount} i={agentcount}/>}
-          <div className={styles.Button}>
+          <div className={styles.button}>
             <sinch-button
               style={{ width: '100%' }}
               type="cta-primary"
@@ -311,16 +311,16 @@ const PageBody = (props: PageBodyProps) => {
               text={questionCounter <= 5 ? `Add more Agents (Up to ${6 - questionCounter} )` : 'Add more Agents (Up to 0)'}
             />
           </div>
-          <table className={styles.Details}>
+          <table className={styles.details}>
             <thead>
               <tr className={agentcount > 0 ? styles.display : styles.hidden}>
-                <th className={styles.Name}>
+                <th className={styles.name}>
                   Name
                 </th>
-                <th className={styles.Email}>
+                <th className={styles.email}>
                   E-mail
                 </th>
-                <th className={styles.Action}>
+                <th className={styles.action}>
                   Action
                 </th>
               </tr>
@@ -331,7 +331,7 @@ const PageBody = (props: PageBodyProps) => {
           </table>
         </div>
         <hr style={{ border: '1px solid #DDE0E2', height: '350px' }}/>
-        <div className={styles.Handover}>
+        <div className={styles.handover}>
                   <sinch-textarea // eslint-disable-line
                     value={humanhandover}
                     label="Human Handover Message"

@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import type { FC } from 'react'
 
-const paths = ['/step-1', '/whatsapp/step-1', '/whatsapp/step-2', '/whatsapp/step-3', '/whatsapp/step-4'] as const
+const paths = ['/', '/whatsapp/step-1', '/whatsapp/step-2', '/whatsapp/step-3', '/whatsapp/step-4'] as const
 type TKnownPath = typeof paths[number]
 
 // const isKnownPath = (value: string): value is TKnownPath => (paths as readonly string[]).includes(value)

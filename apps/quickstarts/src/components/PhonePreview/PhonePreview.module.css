@@ -3,14 +3,14 @@
     color: #0A273D
 }
 
-.botpreviewHuman {
+.phonePreview {
     display: flex;
     margin-right: 10%;
     height: 100%;
-    flex: 4;
+    flex: 3;
 }
 
-.botImage{
+.phoneImage{
     flex: 10;
     display: flex;
     position: relative;
@@ -61,7 +61,7 @@
     100% { opacity: 1; }
   }
 
-.messagesBot{
+.phoneMessages{
     display: flex;
     overflow-y: scroll;
     width: 300px;
@@ -72,8 +72,4 @@
 
 .hide{
     display: none;
-}
-
-.emptyDiv{
-    flex: 3;
 }

@@ -1,9 +1,9 @@
-   .customerConverterHeader{
+  .header{
     height: 220px;
     background-color:  #F1F3F4;
   }
 
-  .customerConverterImage{
+  .image{
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -13,25 +13,25 @@
     margin-bottom: 5%;
   }
 
-  .quickLeadsConverterBody{
+  .body{
     flex: 8;
     background-color: #ffffff;
   }
-  .quickLeadsConverterBodyHeading{
+  .bodyHeading{
     color: #677784;
     font-size: 16px;
     text-align: center;
   }
-  .quickLeadsConverterBodyHeadingContent{
+  .bodyHeadingContent{
     font-size: 24px;
     text-align: center;
     font-weight: 600;
   }
-  .quickLeadsConverterBodyContent{
+  .bodyContent{
     display: flex;
     flex-direction: column;
   }
-  .quickLeadsConverterBodyContentPoints{
+  .bodyContentPoints{
     display: flex;
     flex-direction: row;
   }
@@ -42,12 +42,13 @@
     height: 15px;
     width: 15px;
   }
-  .quickLeadsConverterBodyContentPointsMatter{
+  .bodyContentPointsMatter{
     font: var(--sinch-font-extra-small-text);
     font-size: 14px;
     margin-right: 15%;
   }
-  .quickLeadsConverterFooter {
+
+  .footer {
   display: flex;
   background-color: white;
   flex-direction: row;
@@ -55,9 +56,11 @@
   margin: 0% 1%;
   margin-bottom: 1%;
 }
-.quickLeadsConverterFooterCancel{
+
+.footerCancel{
   margin: 3%;
 }
-.quickLeadsConverterFooterContinue{
+
+.footerContinue{
   margin: 3%;
 }

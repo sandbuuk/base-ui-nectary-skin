@@ -38,39 +38,38 @@ export const Home: FC = () => {
   }
 
   return (
-    <div className={styles.HomePage}>
-      <div className={styles.HomeRightPage}>
-        <div className={styles.HomeRightPageHeading}>
-          <h2 className={styles.HomeRightPageHeadingMatter}>Quick Starts</h2>
-          {/* <p className={styles.HomeRightPageContentMatter}>Redirect customers to a WhatsApp Chatbot with Human Handover through Click to WhatsApp Ad button</p> */}
+    <div className={styles.page}>
+      <div className={styles.rightPage}>
+        <div className={styles.rightPageHeading}>
+          <h2 className={styles.rightPageHeadingMatter}>Quick Starts</h2>
         </div>
-        <div className={styles.HomeRightPageMiddle}>
-          <div className={styles.HomeLeftPageMiddleHeading}>
-            <div className={styles.HomeRightPageMiddleMatter}>
+        <div className={styles.rightPageMiddle}>
+          <div className={styles.leftPageMiddleHeading}>
+            <div className={styles.rightPageMiddleMatter}>
               Pre-built solutions for your business
             </div>
-            <p className={styles.HomeRightPageMiddleBody}>Offer conversational experiences with ready-to-use solutions </p>
+            <p className={styles.rightPageMiddleBody}>Offer conversational experiences with ready-to-use solutions </p>
           </div>
-          <div className={styles.HomeImage}>
-            <img className={styles.HomeRightPageImage} src={homeimage2}/>
+          <div className={styles.image}>
+            <img className={styles.rightPageImage} src={homeimage2}/>
           </div>
         </div>
-        <div className={styles.HomeRightPageTemplate}>
-          <div className={styles.HomeRightPageCapabilitiesTitle}>Quick Starts</div>
-          <div className={styles.HomeCardsdiv}>
-            <QuickstartCards clickFunction={quickLeadsConverterPage} bgColor="#007171" mainTag={{ text: 'New', category: 3 }} headerTitle="Quick Leads Converter" headerBody="Automate Leads Qualification by gathering users information through a personalized  conversational experience." mainBody="Qualify leads by collecting name, e-mail, and other basic info from visitors." imageSource={card1} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'Marketing', category: 2 }]} headerColor="white"/>
+        <div className={styles.rightPageTemplate}>
+          <div className={styles.rightPageCapabilitiesTitle}>Quick Starts</div>
+          <div className={styles.cardsdiv}>
+            <QuickstartCards clickFunction={quickLeadsConverterPage} bgColor="#007171" mainTag={{ text: 'New', category: 3 }} headerTitle="Quick Leads Converter" mainBody="Qualify leads by collecting name, e-mail, and other basic info from visitors." imageSource={card1} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'Marketing', category: 2 }]} headerColor="white"/>
 
-            <QuickstartCards clickFunction={customerConverterPage} bgColor="#FFCC66" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Customer Support" headerBody="Save customers valuable time and effort by offering support across various channels." mainBody="Deliver a consistent Customer Support and solve issues at hand by making support interactive." imageSource={offering} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'Customer Support', category: 2 }]} headerColor="black"/>
+            <QuickstartCards clickFunction={customerConverterPage} bgColor="#FFCC66" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Customer Support" mainBody="Deliver a consistent Customer Support and solve issues at hand by making support interactive." imageSource={offering} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'Customer Support', category: 2 }]} headerColor="black"/>
 
-            <QuickstartCards clickFunction={() => {}} bgColor="#0A273D" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick FAQ Chatbot" headerBody="Engage customers by giving quick answers to their questions." mainBody="Build a chatbot to answer frequently asked questions." imageSource={card3} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Customer Support', category: 2 }]} headerColor="white"/>
+            <QuickstartCards clickFunction={() => {}} bgColor="#0A273D" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick FAQ Chatbot" mainBody="Build a chatbot to answer frequently asked questions." imageSource={card3} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Customer Support', category: 2 }]} headerColor="white"/>
           </div>
 
-          <div className={styles.HomeCardsdiv}>
-            <QuickstartCards clickFunction={() => {}} bgColor="#FFCC66" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Abandoned Cart Recovery" headerBody="Boost Shopping-Cart Conversions by re-engaging users." mainBody="Create a Chatbot that sends personalized reminders to users." imageSource={abandonedcart} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'E-commerce', category: 2 }]} headerColor="black"/>
+          <div className={styles.cardsdiv}>
+            <QuickstartCards clickFunction={() => {}} bgColor="#FFCC66" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Abandoned Cart Recovery" mainBody="Create a Chatbot that sends personalized reminders to users." imageSource={abandonedcart} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'E-commerce', category: 2 }]} headerColor="black"/>
 
-            <QuickstartCards clickFunction={() => {}} bgColor="#0A273D" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Product Feedback" headerBody="Collect feedback user feedback about products using a conversational experience." mainBody="Create a Chatbot that compiles product feedback through personalized user conversations." imageSource={feedback} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Surveys', category: 2 }]} headerColor="white"/>
+            <QuickstartCards clickFunction={() => {}} bgColor="#0A273D" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Product Feedback" mainBody="Create a Chatbot that compiles product feedback through personalized user conversations." imageSource={feedback} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Surveys', category: 2 }]} headerColor="white"/>
 
-            <QuickstartCards clickFunction={() => {}} bgColor="#007171" mainTag={{ text: 'New', category: 3 }} headerTitle="Quick Order Status & Package Tracking Update" headerBody="Automate order status and deliveries by offering a customized converstional experience." mainBody="Build a Chatbot that allows users to check the status of their purchases and track their deliveries at any time." imageSource={status} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Marketing', category: 2 }]} headerColor="white"/>
+            <QuickstartCards clickFunction={() => {}} bgColor="#007171" mainTag={{ text: 'New', category: 3 }} headerTitle="Quick Order Status & Package Tracking Update" mainBody="Build a Chatbot that allows users to check the status of their purchases and track their deliveries at any time." imageSource={status} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Marketing', category: 2 }]} headerColor="white"/>
           </div>
 
           <div/>
@@ -86,8 +85,8 @@ export const Home: FC = () => {
         statusbgcolor="#007171"
         statuscolor="#007171"
         heading="Quick Leads Converter"
-        headingContent="Generate qualified leads 24/7 via WhatsApp"
-        bodyContent={['Automate Leads Qualifaction by gathering users information through a personalized conversational experience.', 'Generate business opportunities.', 'Make decisions based on Marketing Campaigns data.', 'Have access to real time data.', 'Generate reports at any time.']}
+        headingContent="Automate Leads Qualification via WhatsApp, customers preferred channel"
+        bodyContent={['Improve Leads Conversion through conversations.', 'Forget forms. Quickly gather customer’s information through a personalized conversation.', 'Two steps. Yup. That’s right. It only takes two steps to fully configure the Quick Leads Converter.', 'Easy configuration. Get your solution running with no code.']}
         disabled={false}
       />
       <CardDialog

@@ -12,11 +12,11 @@ export const PageBottom: FC<PageBottomProps> = (props) => {
   const { backText, backFunction, nextText, nextFunction } = props
 
   return (
-    <div className={styles.botbuttons}>
-      <div className={styles.botbackBut}>
+    <div className={styles.buttons}>
+      <div className={styles.backBut}>
         <sinch-button type="destructive" text={backText} onClick={backFunction}/>
       </div>
-      <div className={styles.botsaveBut}>
+      <div className={styles.saveBut}>
         <sinch-button type="primary" text={nextText} onClick={nextFunction}/>
       </div>
     </div>

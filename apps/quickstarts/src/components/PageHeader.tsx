@@ -13,16 +13,16 @@ export const PageHeader: FC<PageHeaderProps> = (props) => {
   const { title, description, activeStep, imageSrc } = props
 
   return (
-    <div className={styles.botwhatsappHeading}>
-      <div className={styles.botwhatsappMatter}>
-        <h2 className={styles.botwhatsappMatterHeading}>
+    <div className={styles.heading}>
+      <div className={styles.matter}>
+        <h2 className={styles.matterHeading}>
           {title}
         </h2>
-        <p className={styles.botwhatsappMatterBody}>
+        <p className={styles.matterBody}>
           {description}
         </p>
       </div>
-      <div className={styles.botpageSteps}><PageSteps activeStep={activeStep}/></div>
+      <div className={styles.pageSteps}><PageSteps activeStep={activeStep}/></div>
 
       <div className={styles.chatlayerLogo}>
         <div className="empty"/>

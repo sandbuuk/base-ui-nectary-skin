@@ -1,4 +1,4 @@
-.botbuttons {
+.buttons {
     display: flex;
     background-color: white;
     flex-direction: row;
@@ -7,12 +7,12 @@
     margin-bottom: 1%;
 }
 
-.botbackBut {
+.backBut {
     margin: 4%;
     margin-top: 3%;
 }
 
-.botsaveBut {
+.saveBut {
     margin: 4%;
     margin-top: 3%;
 }

@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { TokenContext } from '../contexts'
-import styles from './Page.module.css'
 import { PageBottom } from './PageBottom'
 import { usePageControl } from './PageContext'
 import { PageHeader } from './PageHeader'
 import { usePageThreeControl } from './PageStepThreeContext'
 import { PhonePreview } from './PhonePreview/PhonePreview'
+import styles from './StepThree.module.css'
 import chatlayerlogo from './images/chatlayerlogo.jpg'
 import type { FC } from 'react'
 
@@ -30,7 +30,7 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
   const k = name
 
   return (
-    <div className={styles.botmessagesInput}>
+    <div className={styles.messagesInput}>
       <sinch-input
         key={k}
         class={`${k}`}
@@ -53,26 +53,54 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
   )
 }
 
+function getActiveElement(root: Document | ShadowRoot = document): Element | null {
+  const activeEl = root.activeElement
+
+  if (activeEl == null) {
+    return null
+  }
+
+  if (activeEl.shadowRoot != null) {
+    if (activeEl.tagName == 'SINCH-INPUT' || activeEl.tagName == 'SINCH-TEXTAREA') {
+      return activeEl
+    }
+
+    return getActiveElement(activeEl.shadowRoot)
+  }
+
+  return activeEl
+}
+
 const PageBody = (props: PageBodyProps) => {
   const { greetingmsg, buttonCounter, flowCounter, setGreetingmsg, botquestion, setBotquestion } = props
+  const [activeelement, setActiveelement] = useState('')
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveelement(getActiveElement() == null ? '' : getActiveElement()!.className)
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+
   const chats = []
 
-  chats.push({ sender: 'left', msg: greetingmsg })
-  Object.keys(botquestion).map((i: any) => {
-    chats.push({ sender: 'left', msg: botquestion[i] })
-    chats.push({ sender: 'right', msg: 'user message' })
+  chats.push({ sender: 'left', msg: greetingmsg, typing: activeelement == 'greetingMsg' })
+  Object.keys(botquestion).map((_, i: number) => {
+    chats.push({ sender: 'left', msg: botquestion[i], typing: activeelement == `${i + 1}` })
+    chats.push({ sender: 'right', msg: 'user message', typing: activeelement == `${i + 1}` })
   })
 
   return (
-    <div className={styles.Body}>
+    <div className={styles.body}>
       <div className={styles.messagesParent}>
         <div className={styles.startingSpace}/>
-        <div className={styles.Messages}>
+        <div className={styles.messages}>
           <div className={styles.questions}>
-            <div className={styles.botGreet}>
+            <div className={styles.greet}>
                 <sinch-textarea // eslint-disable-line
                   value={greetingmsg}
-                  class="0"
+                  class="greetingMsg"
                   label="Greeting"
                   placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
                   optionalText={undefined}
@@ -90,7 +118,7 @@ const PageBody = (props: PageBodyProps) => {
                   onBlur={() => {}}
                 />
               <hr style={{ border: '1px solid #e5e5e5' }}/>
-              <p className={styles.whatsappDescription}>
+              <p className={styles.description}>
                 You can add up to 5 questions before transfering your customer to your agent.
               </p>
             </div>
@@ -139,8 +167,8 @@ export const PageStepThree: FC = () => {
   }
 
   return (
-    <div className={styles.botpageWhatsapp}>
-      <div className={styles.botmainBodyWhatsapp}>
+    <div className={styles.page}>
+      <div className={styles.mainBody}>
 
         {/* Page Header */}
 

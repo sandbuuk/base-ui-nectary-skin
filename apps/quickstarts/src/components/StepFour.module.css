@@ -1,5 +1,5 @@
 
-.Congrats{
+.congrats{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,7 +36,7 @@
   flex-direction: column;
 }
 
-.Input {
+.input {
   margin: 2%;
 }
 
@@ -44,38 +44,39 @@
   width: 100px;
 }
 
-.Values{
+.values{
   display: flex;
   justify-content: space-around;
   flex-direction: row;
 }
 
-.Name{
+.name{
   margin-right: 3%;
   flex: 4;
   flex-wrap: wrap;
 }
 
-.Email{
+.email{
   margin-right: 3%;
   flex: 4;
   flex-wrap: wrap;
 }
 
-.Action{
+.action{
   margin-right: 3%;
   flex: 4;
 }
 
-.Detailsbuttons{
+.detailsButtons{
   margin:2%;
   display: flex;
   flex-direction: row;
 }
 
-.Body {
+.body {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   background-color: #ffffff;
   margin: 0% 1%;
 }
@@ -87,7 +88,7 @@
 
 }
 
-.Messages {
+.messages {
   display: flex;
   flex-direction: column;
   flex: 4;
@@ -95,18 +96,18 @@
   margin-left: 6%;
 }
 
-.Button{
+.button{
   margin: 2%;
 }
 
-.Details{
+.details{
   margin-top: 20%;
   margin-left: 5%;
   display: flex;
   flex-direction: column;
 }
 
-.Handover{
+.handover{
   display: flex;
   flex: 3;
   margin-top: 27px;

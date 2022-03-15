@@ -1,4 +1,4 @@
-  .HomeContainer1{
+  .container{
     margin-right: 2%;
     margin-top: 3%;
     margin-right: 7%;
@@ -11,52 +11,54 @@
     background-color: #FFFFFF;
   }
     
-  .HomeContainer1:hover {
+  .container:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
-  .HomeCard1{
+  .cardContainer{
     margin: 0%;
     margin-top: 0%;
-    background-color: #007171;
     height: 300px;
     width: auto;
-    max-height: 300px fit-content;
+    max-height: 350px fit-content;
     max-width: 300px;
   }
     
-  .card1{
+  .card{
     height: auto;
     width: 50%;
   }
-  .cardimage1{
+  .cardImage{
     align-items: center;
+    height: 150px;
     margin-left: 30%;
     padding-top: 10%;
     margin-bottom: auto;
   }
-   .HomeCard1Title{
+   .cardTitle{
     color: white;
     margin: 5%;
     font: var(--sinch-font-title-3)
   }
   
-  .HomeCard1Body{
+  .cardBody{
     color: white;
     margin: 5%;
     margin-right: 15%;
     font: var(--sinch-font-extra-small-text);
   }
     
-  .Homecard1Matter{
+  .cardMatter{
     background-color: #ffffff;
+    height: 80px;
     margin: 10% 5%;
   }
   
-  .Homecard1MatterContent{
+  .cardMatterContent{
+    overflow-wrap: break-word;
     margin: 0%;
   }
    
-  .Card1Button{
+  .cardButton{
     display: flex;
     align-self: flex-end;
     margin: 5%;
