@@ -37,6 +37,7 @@ defineCustomElement('sinch-tabs-option', class extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'tab')
     this.$input.addEventListener('input', this.#onInput)
   }
 
@@ -96,7 +97,7 @@ defineCustomElement('sinch-tabs-option', class extends HTMLElement {
           this.scrollIntoView?.({ block: 'nearest' })
         }
 
-        updateAttribute(this, 'aria-selected', String(isAttrTrue(newVal)))
+        updateAttribute(this, 'aria-selected', isAttrTrue(newVal))
 
         break
       }

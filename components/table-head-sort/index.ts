@@ -27,7 +27,7 @@ defineCustomElement('sinch-table-head-sort', class extends HTMLElement {
   }
 
   connectedCallback() {
-    this.setAttribute('aria-label', 'column sort toggle')
+    this.setAttribute('role', 'checkbox')
     this.#$input.addEventListener('input', this.onCheckboxInput)
   }
 

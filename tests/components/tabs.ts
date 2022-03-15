@@ -26,7 +26,7 @@ const singleOption = encodeURI(JSON.stringify([{
 const withOptions = makeScreenshotTests(`/tabs?width=300&options=${options}`, 'sinch-tabs')
 const withSingleOption = makeScreenshotTests(`/tabs?options=${singleOption}`, 'sinch-tabs')
 const narrowLabel = makeScreenshotTests(`/tabs?width=100&options=${singleOption}`, 'sinch-tabs')
-const checkTabsWithOptions = makeAccessibilityTests(`/tabs?width=300&options=${options}`, 'sinch-tabs')
+const checkTabsWithOptions = makeAccessibilityTests(`/tabs?options=${options}`, 'sinch-tabs')
 
 test('accessibility', checkTabsWithOptions(async function* () {
   yield

@@ -34,6 +34,7 @@ defineCustomElement('sinch-toggle', class extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'checkbox')
     this.setAttribute('aria-label', 'toggle')
   }
 

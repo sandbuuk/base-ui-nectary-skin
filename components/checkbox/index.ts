@@ -34,7 +34,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
   }
 
   connectedCallback() {
-    this.setAttribute('aria-label', 'checkbox')
+    this.setAttribute('role', 'checkbox')
   }
 
   static get observedAttributes() {
@@ -98,6 +98,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
       }
       case 'checked': {
         this.#$input.checked = isAttrTrue(newVal)
+        updateAttribute(this, 'aria-checked', isAttrTrue(newVal))
 
         break
       }

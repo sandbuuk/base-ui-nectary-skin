@@ -33,6 +33,7 @@ defineCustomElement('sinch-table-head-cell', class extends HTMLElement {
 
   connectedCallback() {
     this.setAttribute('role', 'columnheader')
+    this.setAttribute('scope', 'col')
   }
 
   static get observedAttributes() {

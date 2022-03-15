@@ -10,11 +10,7 @@ const withTooltip = makeScreenshotTests('/input?width=200&label=Label&tooltip=To
 const withEverything = makeScreenshotTests('/input?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=Input%20value', 'sinch-input')
 const checkValue = makeAccessibilityTests('/input?width=200&label=Label&value=Input%20value', 'sinch-input')
 
-test('accessibility', checkValue(async function* ({ $eval }) {
-  yield
-  await $eval((el) => {
-    el.label = ''
-  })
+test('accessibility', checkValue(async function* () {
   yield
 }))
 

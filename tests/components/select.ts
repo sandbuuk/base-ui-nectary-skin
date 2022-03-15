@@ -9,11 +9,9 @@ const withTooltip = makeScreenshotTests('/select?width=200&label=Label&placehold
 const withEverything = makeScreenshotTests('/select?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=1', 'sinch-select')
 const checkSelectWithEverything = makeAccessibilityTests('/select?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=1', 'sinch-select')
 
-test('accessibility', checkSelectWithEverything(async function* ({ $eval }) {
+test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
   yield
-  await $eval((el) => {
-    el.label = ''
-  })
+  await $.click()
   yield
 }))
 

@@ -1,4 +1,4 @@
-import { defineCustomElement, getAttribute, getBooleanAttribute, updateAttribute, updateBooleanAttribute } from '../utils'
+import { defineCustomElement, getAttribute, getBooleanAttribute, isAttrTrue, updateAttribute, updateBooleanAttribute } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
@@ -48,7 +48,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
       }
 
       case 'checked': {
-        updateAttribute(this, 'aria-selected', newVal)
+        updateAttribute(this, 'aria-selected', isAttrTrue(newVal))
       }
     }
   }
@@ -86,11 +86,11 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
   }
 
   set selected(isSelected: boolean) {
-    updateBooleanAttribute(this, 'selected', isSelected)
+    updateBooleanAttribute(this, 'data-selected', isSelected)
   }
 
   get selected() {
-    return getBooleanAttribute(this, 'selected')
+    return getBooleanAttribute(this, 'data-selected')
   }
 
   get icon(): Element | null {

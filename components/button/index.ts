@@ -36,6 +36,10 @@ defineCustomElement('sinch-button', class extends HTMLElement {
     this.#$text = shadowRoot.querySelector('#text')!
   }
 
+  connectedCallback() {
+    this.setAttribute('role', 'button')
+  }
+
   static get observedAttributes() {
     return ['text', 'disabled']
   }

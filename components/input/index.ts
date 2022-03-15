@@ -39,8 +39,8 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'textbox')
     this.#$input.addEventListener('input', this.#onInput)
-    this.setAttribute('aria-label', 'input')
   }
 
   disconnectedCallback() {
@@ -139,6 +139,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
       case 'placeholder': {
         this.#$input.placeholder = newVal ?? ''
+        updateAttribute(this, 'aria-placeholder', newVal)
 
         break
       }
@@ -157,6 +158,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
       case 'invalidtext': {
         this.#$invalidText.textContent = newVal
+        updateAttribute(this, 'aria-invalid', String(newVal !== null && newVal !== ''))
 
         break
       }

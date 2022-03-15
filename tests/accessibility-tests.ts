@@ -50,7 +50,11 @@ type UpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
 export const makeAccessibilityTests = <T extends keyof HTMLElementTagNameMap>(pageUrl: string, elementSelector: T) =>
   (updateState: (props: UpdateStateProps<T>) => AsyncIterable<void>) =>
     async ({ page }: PlaywrightTestArgs, info: TestInfo) => {
-      info.skip(info.project.name !== 'chromium-react')
+      if (info.project.name !== 'chromium-react') {
+        info.skip()
+
+        return
+      }
 
       await page.goto(pageUrl, { waitUntil: 'networkidle' })
 
@@ -64,7 +68,7 @@ export const makeAccessibilityTests = <T extends keyof HTMLElementTagNameMap>(pa
         const { violations } = await evaluateAccessibilityCheck(page)
 
         if (violations.length > 0) {
-          console.log(printAxeResults(violations))
+          process.stdout.write(printAxeResults(violations))
           info.fail()
 
           break

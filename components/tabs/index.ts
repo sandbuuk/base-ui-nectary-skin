@@ -38,7 +38,7 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
   }
 
   connectedCallback() {
-    this.setAttribute('aria-label', 'tabs')
+    this.setAttribute('role', 'tablist')
   }
 
   static get observedAttributes() {

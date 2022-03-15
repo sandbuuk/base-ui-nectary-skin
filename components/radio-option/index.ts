@@ -37,6 +37,7 @@ defineCustomElement('sinch-radio-option', class extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'radio')
     this.#$input.addEventListener('input', this.#onInput)
   }
 
@@ -89,6 +90,7 @@ defineCustomElement('sinch-radio-option', class extends HTMLElement {
       }
       case 'checked': {
         this.#$input.checked = isAttrTrue(newVal)
+        updateAttribute(this, 'aria-checked', isAttrTrue(newVal))
 
         break
       }

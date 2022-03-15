@@ -38,7 +38,7 @@ defineCustomElement('sinch-radio', class extends HTMLElement {
   }
 
   connectedCallback() {
-    this.setAttribute('aria-label', 'radio')
+    this.setAttribute('role', 'radiogroup')
   }
 
   static get observedAttributes() {
