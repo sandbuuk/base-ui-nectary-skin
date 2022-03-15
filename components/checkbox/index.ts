@@ -152,6 +152,7 @@ export type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
   disabled?: boolean,
   invalid?: boolean,
   text?: string,
+  'aria-label': string,
   onChange: (event: SyntheticEvent<TSinchCheckboxElement, CustomEvent<boolean>>) => void,
   onFocus?: (e: FocusEvent<TSinchCheckboxElement>) => void,
   onBlur?: (e: FocusEvent<TSinchCheckboxElement>) => void,

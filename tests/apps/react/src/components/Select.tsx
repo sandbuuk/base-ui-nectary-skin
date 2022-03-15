@@ -19,7 +19,7 @@ export const Select: FC<TSelect> = ({ search }) => {
   [search, setValue])
   const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-select-focus')), [])
   const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-select-blur')), [])
-  const labelText = useMemo(() => search.get('label') ?? '', [search])
+  const labelText = useMemo(() => search.get('label') as string, [search])
   const optionalText = useMemo(() => search.get('optional') ?? undefined, [search])
   const additionalText = useMemo(() => search.get('additional') ?? undefined, [search])
   const invalidText = useMemo(() => search.get('invalid') ?? undefined, [search])
@@ -50,16 +50,17 @@ export const Select: FC<TSelect> = ({ search }) => {
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
+      aria-label="Select"
     >
       {tooltip}
-      <sinch-select-option value="1" text="Option 1 value" slot="select">
+      <sinch-select-option value="1" text="Option 1 value" slot="select" aria-label="Option 1">
         <sinch-icon-open-in-new slot="icon" size={20}/>
       </sinch-select-option>
-      <sinch-select-option value="2" text="Option 2 value" slot="select" disabled>
+      <sinch-select-option value="2" text="Option 2 value" slot="select" disabled aria-label="Option 2">
         <sinch-icon-open-in-new slot="icon" size={20}/>
       </sinch-select-option>
-      <sinch-select-option value="3" text="Option 3 value" slot="select" disabled={false}/>
-      <sinch-select-option value="4" text="Option 4 value" slot="select"/>
+      <sinch-select-option value="3" text="Option 3 value" slot="select" disabled={false} aria-label="Option 3"/>
+      <sinch-select-option value="4" text="Option 4 value" slot="select" aria-label="Option 4"/>
     </sinch-select>
   )
 }

@@ -29,10 +29,11 @@ export const Table: FC<TTable> = ({ search }) => {
         <sinch-table-row>
           {state.head.map((cell, i) => (
             <sinch-table-head-cell key={i} text={cell.text} align={cell.align} fit={cell.isFit}>
-              {cell.isCheckbox && <sinch-checkbox slot="checkbox" onChange={noop}/>}
+              {cell.isCheckbox && <sinch-checkbox slot="checkbox" onChange={noop} aria-label="Checkbox"/>}
               {cell.isSortable && (
                 <sinch-table-head-sort
                   slot="sort"
+                  aria-label="Sort toggle"
                   value={isAsc}
                   onChange={onSortChange}
                   onFocus={onSortFocus}
@@ -49,9 +50,9 @@ export const Table: FC<TTable> = ({ search }) => {
           <sinch-table-row key={i}>
             {row.map((cell, i) => (
               <sinch-table-cell key={i} align={cell.align}>
-                {cell.isCheckbox && <sinch-checkbox onChange={noop}/>}
-                {cell.isButton && <sinch-button type="secondary" text={cell.text} onClick={noop}/>}
-                {cell.isToggle && <sinch-toggle onChange={noop}/>}
+                {cell.isCheckbox && <sinch-checkbox onChange={noop} aria-label="Checkbox"/>}
+                {cell.isButton && <sinch-button type="secondary" text={cell.text} onClick={noop} aria-label="Button"/>}
+                {cell.isToggle && <sinch-toggle onChange={noop} aria-label="Toggle"/>}
                 {cell.isLink && <sinch-link text={cell.text} href="#"/>}
                 {cell.isIcon && cell.iconType === 'open-in-new' && <sinch-icon-open-in-new size={24}/>}
                 {cell.isIcon && cell.iconType === 'more-vert' && <sinch-icon-more-vert size={24}/>}

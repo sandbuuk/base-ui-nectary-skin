@@ -213,6 +213,7 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   invalidText?: string,
   additionalText?: string,
   disabled?: boolean,
+  'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
   onFocus?: (e: FocusEvent<TSinchInputElement>) => void,
   onBlur?: (e: FocusEvent<TSinchInputElement>) => void,

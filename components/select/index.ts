@@ -452,6 +452,7 @@ export type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
   additionalText?: string,
   disabled?: boolean,
   maxVisibleItems?: number,
+  'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchSelectElement, CustomEvent<string>>) => void,
   onFocus?: (e: FocusEvent<TSinchSelectElement>) => void,
   onBlur?: (e: FocusEvent<TSinchSelectElement>) => void,

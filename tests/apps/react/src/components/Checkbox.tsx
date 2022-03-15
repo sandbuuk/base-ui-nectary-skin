@@ -34,6 +34,7 @@ export const Checkbox: FC<TCheckbox> = ({ search }) => {
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
+      aria-label="Checkbox"
     />
   )
 }

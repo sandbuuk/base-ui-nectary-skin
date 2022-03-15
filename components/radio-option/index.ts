@@ -136,6 +136,7 @@ export type TSinchRadioOptionReact = TSinchElementReact<TSinchRadioOptionElement
   value: string,
   disabled?: boolean,
   text: string,
+  'aria-label': string,
   onFocus?: (e: FocusEvent<TSinchRadioOptionElement>) => void,
   onBlur?: (e: FocusEvent<TSinchRadioOptionElement>) => void,
 }

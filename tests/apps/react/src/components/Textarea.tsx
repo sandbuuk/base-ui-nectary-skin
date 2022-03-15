@@ -43,6 +43,7 @@ export const Textarea: FC<TTextarea> = ({ search }) => {
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
+      aria-label="Textarea"
     >
       {tooltip}
     </sinch-textarea>

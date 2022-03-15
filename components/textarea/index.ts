@@ -208,6 +208,7 @@ export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   invalidText?: string,
   additionalText?: string,
   disabled?: boolean,
+  'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
   onFocus?: (e: FocusEvent<TSinchTextareaElement>) => void,
   onBlur?: (e: FocusEvent<TSinchTextareaElement>) => void,

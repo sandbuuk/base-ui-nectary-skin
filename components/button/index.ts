@@ -110,6 +110,7 @@ export type TSinchButtonElement = HTMLElement & {
 export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   type: TSinchButtonType,
   text: string,
+  'aria-label': string,
   disabled?: boolean,
   small?: boolean,
   onClick: (e: MouseEvent<TSinchButtonElement>) => void,

@@ -33,6 +33,7 @@ export const Radio: FC<TRadio> = ({ search }) => {
           value={opt.value}
           text={opt.text}
           disabled={opt.disabled}
+          aria-label={opt.text}
         />
       ))
     } catch {
@@ -44,6 +45,7 @@ export const Radio: FC<TRadio> = ({ search }) => {
     <sinch-radio
       value={value}
       onChange={onChange}
+      aria-label="Radio"
     >
       {options}
     </sinch-radio>

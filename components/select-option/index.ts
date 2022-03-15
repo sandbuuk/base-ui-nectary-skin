@@ -111,6 +111,7 @@ export type TSinchSelectOptionReact = TSinchElementReact<TSinchSelectOptionEleme
   value: string,
   text: string,
   disabled?: boolean,
+  'aria-label': string,
 }
 
 declare global {

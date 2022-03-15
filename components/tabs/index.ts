@@ -177,6 +177,7 @@ export type TSinchTabsElement = HTMLElement & {
 
 export type TSinchTabsReact = TSinchElementReact<TSinchTabsElement> & {
   value: string,
+  'aria-label': string,
   onChange: (event: SyntheticEvent<TSinchTabsElement, CustomEvent<string>>) => void,
 }
 

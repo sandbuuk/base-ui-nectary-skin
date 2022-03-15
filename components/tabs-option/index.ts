@@ -144,6 +144,7 @@ export type TSinchTabsOptionReact = TSinchElementReact<TSinchTabsOptionElement> 
   value: string,
   disabled?: boolean,
   text: string,
+  'aria-label': string,
   onFocus?: (e: FocusEvent<TSinchTabsOptionElement>) => void,
   onBlur?: (e: FocusEvent<TSinchTabsOptionElement>) => void,
 }

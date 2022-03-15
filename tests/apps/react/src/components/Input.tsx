@@ -44,6 +44,7 @@ export const Input: FC<TInput> = ({ search }) => {
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
+      aria-label="Input"
     >
       {tooltip}
     </sinch-input>

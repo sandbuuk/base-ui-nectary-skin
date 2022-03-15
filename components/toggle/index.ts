@@ -146,6 +146,7 @@ export type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
   labeled?: boolean,
   disabled?: boolean,
   text?: string,
+  'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchToggleElement, CustomEvent<boolean>>) => void,
   onFocus?: (e: FocusEvent<TSinchToggleElement>) => void,
   onBlur?: (e: FocusEvent<TSinchToggleElement>) => void,

@@ -33,6 +33,7 @@ export const Tabs: FC<TTabs> = ({ search }) => {
           value={opt.value}
           text={opt.text}
           disabled={opt.disabled}
+          aria-label={opt.text}
         >
           {opt.icon != null && <sinch-icon-open-in-new slot="icon" size={16}/>}
         </sinch-tabs-option>
@@ -43,7 +44,7 @@ export const Tabs: FC<TTabs> = ({ search }) => {
   }, [search])
 
   return (
-    <sinch-tabs value={value} onChange={onChange}>
+    <sinch-tabs value={value} onChange={onChange} aria-label="Tabs">
       {options}
     </sinch-tabs>
   )

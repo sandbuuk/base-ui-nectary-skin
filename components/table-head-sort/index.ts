@@ -100,6 +100,7 @@ export type TSinchTableHeaderSortElement = HTMLElement & {
 
 export type TSinchTableHeaderSortReact = TSinchElementReact<TSinchTableHeaderSortElement> & {
   value: boolean,
+  'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchTableHeaderSortElement, CustomEvent<boolean>>) => void,
   onFocus?: (e: FocusEvent<TSinchTableHeaderSortElement>) => void,
   onBlur?: (e: FocusEvent<TSinchTableHeaderSortElement>) => void,
