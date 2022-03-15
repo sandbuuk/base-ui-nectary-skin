@@ -16,6 +16,10 @@ const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect | null => {
       return a
     }
 
+    if (b.width === 0 && b.height === 0) {
+      return a
+    }
+
     const x = Math.min(a.x, b.x)
     const y = Math.min(a.y, b.y)
     const width = Math.max(a.x + a.width, b.x + b.width) - x

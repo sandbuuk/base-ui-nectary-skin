@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip'
 
 const shot = makeScreenshotTests('/select?width=200&label=Label', 'sinch-select')
 const withPlaceholder = makeScreenshotTests('/select?width=200&label=Label&placeholder=Placeholder', 'sinch-select')
@@ -56,81 +57,100 @@ test('value attribute', withPlaceholder(async function* ({ $eval }) {
   yield { name: 'option-missing' }
 }))
 
-test('click button', shot(async function* ({ $, page }) {
+test('click button', shot(async function* ({ $, $eval, page }) {
   await $.click()
+
+  const dropdownRect = await $eval((el) => el.dropdownRect)
+
   yield {
     name: 'open',
-    include: [$.locator('#listbox')],
+    includeRects: [dropdownRect],
   }
 
   await page.click('body', { position: { x: 0, y: 0 } })
   yield { name: 'click-outside' }
 }))
 
-test('click label', shot(async function* ({ $ }) {
-  await $.locator('label').click()
+test('click label', shot(async function* ({ $, $eval }) {
+  // Click on label
+  await $.click({ position: { x: 10, y: 10 } })
+
+  const dropdownRect = await $eval((el) => el.dropdownRect)
 
   yield {
     name: 'open',
-    include: [$.locator('#listbox')],
+    includeRects: [dropdownRect],
   }
 }))
 
 test('tooltip', withTooltip(async function* ({ $ }) {
   await $.locator('sinch-help-tooltip').hover()
+
+  const tooltipRect = await $.locator('sinch-help-tooltip')
+    .evaluate((el) => (el as TSinchHelpTooltipElement).tooltipRect)
+
   yield {
     name: 'show',
-    include: [$.locator('sinch-help-tooltip #text')],
+    includeRects: [tooltipRect],
   }
 }))
 
-test('focus press-space', withPlaceholder(async function* ({ $ }) {
+test('focus press-space', withPlaceholder(async function* ({ $, $eval }) {
   await $.press('Space')
+
+  const dropdownRect = await $eval((el) => el.dropdownRect)
+
   yield {
     name: 'open',
-    include: [$.locator('#listbox')],
+    includeRects: [dropdownRect],
   }
 
   await $.press('Space')
   yield { name: 'close' }
 }))
 
-test('focus press-enter', withPlaceholder(async function* ({ $ }) {
+test('focus press-enter', withPlaceholder(async function* ({ $, $eval }) {
   await $.press('Enter')
+
+  const dropdownRect = await $eval((el) => el.dropdownRect)
+
   yield {
     name: 'open',
-    include: [$.locator('#listbox')],
+    includeRects: [dropdownRect],
   }
 
   await $.press('Enter')
   yield { name: 'close' }
 }))
 
-test('keyboard', withPlaceholder(async function* ({ $ }) {
+test('keyboard', withPlaceholder(async function* ({ $, $eval }) {
   await $.click()
+
+  const dropdownRect = await $eval((el) => el.dropdownRect)
+
   yield {
     name: 'open',
-    include: [$.locator('#listbox')],
+    includeRects: [dropdownRect],
   }
 
   await $.press('ArrowDown')
   yield {
     name: 'down',
-    include: [$.locator('#listbox')],
+    includeRects: [dropdownRect],
   }
 
   await $.press('ArrowDown')
   await $.press('ArrowRight')
   yield {
     name: 'down-right',
-    include: [$.locator('#listbox')],
+    includeRects: [dropdownRect],
   }
 
   await $.press('ArrowUp')
   await $.press('ArrowLeft')
   yield {
     name: 'up-left',
-    include: [$.locator('#listbox')],
+    includeRects: [dropdownRect],
   }
 }))
 

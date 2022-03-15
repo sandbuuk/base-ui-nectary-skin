@@ -5,13 +5,14 @@ import {
   getAttribute,
   getBooleanAttribute,
   getIntegerAttribute,
+  getRect,
   isAttrTrue,
   updateAttribute,
   updateBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
 type TSinchSelectOption = HTMLElementTagNameMap['sinch-select-option']
@@ -155,6 +156,10 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
   get maxVisibleItems() {
     return getIntegerAttribute(this, 'maxvisibleitems', null)
+  }
+
+  get dropdownRect() {
+    return getRect(this.#$listbox)
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -439,6 +444,7 @@ export type TSinchSelectElement = HTMLElement & {
   additionalText: string | null,
   disabled: boolean,
   maxVisibleItems: number | null,
+  readonly dropdownRect: TRect,
   focus(): void,
   blur(): void,
 }

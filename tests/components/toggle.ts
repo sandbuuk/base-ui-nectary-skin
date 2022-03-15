@@ -106,28 +106,24 @@ test('text property', contentWidth(async function* ({ $eval }) {
   yield { name: 'empty' }
 }))
 
-test('disabled property', contentWidth(async function* ({ $, $eval }) {
+test('disabled property', contentWidth(async function* ({ $eval }) {
   await $eval((el) => {
     el.disabled = true
   })
   yield { name: 'disabled' }
-  await expect($.locator('input').isDisabled()).resolves.toBe(true)
 
   await $eval((el) => {
     el.disabled = false
   })
   yield { name: 'enabled' }
-  await expect($.locator('input').isDisabled()).resolves.toBe(false)
 }))
 
-test('disabled attribute', contentWidth(async function* ({ $, $eval }) {
+test('disabled attribute', contentWidth(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('disabled', ''))
   yield { name: 'disabled' }
-  await expect($.locator('input').isDisabled()).resolves.toBe(true)
 
   await $eval((el) => el.removeAttribute('disabled'))
   yield { name: 'enabled' }
-  await expect($.locator('input').isDisabled()).resolves.toBe(false)
 }))
 
 test('disabled small', disabledSmall(async function* ({ $eval }) {

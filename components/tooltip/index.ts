@@ -8,9 +8,10 @@ import {
   updateBooleanAttribute,
   updateAttribute,
   updateLiteralAttribute,
+  getRect,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TRect, TSinchElementReact } from '../types'
 
 const orientationValues = ['top', 'bottom', 'left', 'right', 'top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
 
@@ -70,6 +71,10 @@ defineCustomElement('sinch-tooltip', class extends HTMLElement {
     updateLiteralAttribute(this, orientationValues, 'orientation', value)
   }
 
+  get tooltipRect() {
+    return getRect(this.$tooltipText)
+  }
+
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
@@ -94,6 +99,7 @@ export type TSinchTooltipElement = HTMLElement & {
   width: number | null,
   inverted: boolean,
   orientation: TSinchTooltipOrientation,
+  readonly tooltipRect: TRect,
 }
 
 export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {

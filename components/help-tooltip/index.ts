@@ -67,6 +67,10 @@ defineCustomElement('sinch-help-tooltip', class extends HTMLElement {
     updateAttribute(this, 'orientation', value)
   }
 
+  get tooltipRect() {
+    return this.$tooltip.tooltipRect
+  }
+
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {

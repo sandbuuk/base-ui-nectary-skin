@@ -11,111 +11,97 @@ test('accessibility', checkTooltip(async function* () {
 }))
 
 test('orientation attribute', withFitWidth(async function* ({ $, $eval }) {
-  const textLocator = $.locator('#text')
-
   await $.hover()
 
   await $eval((el) => el.setAttribute('orientation', 'left'))
-  yield { name: 'left', include: [textLocator] }
+  yield { name: 'left', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => el.setAttribute('orientation', 'right'))
-  yield { name: 'right', include: [textLocator] }
+  yield { name: 'right', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => el.setAttribute('orientation', 'top'))
-  yield { name: 'top', include: [textLocator] }
+  yield { name: 'top', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => el.setAttribute('orientation', 'bottom'))
-  yield { name: 'bottom', include: [textLocator] }
+  yield { name: 'bottom', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => el.setAttribute('orientation', 'top-left'))
-  yield { name: 'top-left', include: [textLocator] }
+  yield { name: 'top-left', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => el.setAttribute('orientation', 'top-right'))
-  yield { name: 'top-right', include: [textLocator] }
+  yield { name: 'top-right', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => el.setAttribute('orientation', 'bottom-left'))
-  yield { name: 'bottom-left', include: [textLocator] }
+  yield { name: 'bottom-left', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => el.setAttribute('orientation', 'bottom-right'))
-  yield { name: 'bottom-right', include: [textLocator] }
+  yield { name: 'bottom-right', includeRects: [await $eval((el) => el.tooltipRect)] }
 }))
 
 test('orientation property', withFitWidth(async function* ({ $, $eval }) {
-  const textLocator = $.locator('#text')
-
   await $.hover()
 
   await $eval((el) => {
     el.orientation = 'left'
   })
-  yield { name: 'left', include: [textLocator] }
+  yield { name: 'left', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => {
     el.orientation = 'right'
   })
-  yield { name: 'right', include: [textLocator] }
+  yield { name: 'right', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => {
     el.orientation = 'top'
   })
-  yield { name: 'top', include: [textLocator] }
+  yield { name: 'top', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => {
     el.orientation = 'bottom'
   })
-  yield { name: 'bottom', include: [textLocator] }
+  yield { name: 'bottom', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => {
     el.orientation = 'top-left'
   })
-  yield { name: 'top-left', include: [textLocator] }
+  yield { name: 'top-left', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => {
     el.orientation = 'top-right'
   })
-  yield { name: 'top-right', include: [textLocator] }
+  yield { name: 'top-right', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => {
     el.orientation = 'bottom-left'
   })
-  yield { name: 'bottom-left', include: [textLocator] }
+  yield { name: 'bottom-left', includeRects: [await $eval((el) => el.tooltipRect)] }
   await $eval((el) => {
     el.orientation = 'bottom-right'
   })
-  yield { name: 'bottom-right', include: [textLocator] }
+  yield { name: 'bottom-right', includeRects: [await $eval((el) => el.tooltipRect)] }
 }))
 
 test('text attribute', withFitWidth(async function* ({ $, $eval }) {
-  const textLocator = $.locator('#text')
-
   await $.hover()
 
   await $eval((el) => el.setAttribute('text', 'Updated tooltip text'))
-  yield { name: 'updated', include: [textLocator] }
+  yield { name: 'updated', includeRects: [await $eval((el) => el.tooltipRect)] }
 }))
 
 test('text property', withFitWidth(async function* ({ $, $eval }) {
-  const textLocator = $.locator('#text')
-
   await $.hover()
 
   await $eval((el) => {
     el.text = 'Updated tooltip text'
   })
-  yield { name: 'updated', include: [textLocator] }
+  yield { name: 'updated', includeRects: [await $eval((el) => el.tooltipRect)] }
 }))
 
-test('narrow', withNarrowWidth(async function* ({ $ }) {
-  const textLocator = $.locator('#text')
-
+test('narrow', withNarrowWidth(async function* ({ $, $eval }) {
   await $.hover()
 
-  yield { name: 'clip', include: [textLocator] }
+  yield { name: 'clip', includeRects: [await $eval((el) => el.tooltipRect)] }
 }))
 
 test('inverted property', withFitWidth(async function* ({ $, $eval }) {
-  const textLocator = $.locator('#text')
-
   await $.hover()
 
   await $eval((el) => {
     el.inverted = true
   })
-  yield { name: 'on', include: [textLocator] }
+  yield { name: 'on', includeRects: [await $eval((el) => el.tooltipRect)] }
 }))
 
 test('inverted attribute', withFitWidth(async function* ({ $, $eval }) {
-  const textLocator = $.locator('#text')
-
   await $.hover()
 
   await $eval((el) => el.setAttribute('inverted', ''))
-  yield { name: 'on', include: [textLocator] }
+  yield { name: 'on', includeRects: [await $eval((el) => el.tooltipRect)] }
 }))

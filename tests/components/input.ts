@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip'
 
 const shot = makeScreenshotTests('/input?width=200&label=Label', 'sinch-input')
 const withValue = makeScreenshotTests('/input?width=200&label=Label&value=Input%20value', 'sinch-input')
@@ -60,9 +61,12 @@ test('placeholder property', shot(async function* ({ $eval }) {
 test('tooltip', withTooltip(async function* ({ $ }) {
   await $.locator('sinch-help-tooltip').hover()
 
+  const tooltipRect = await $.locator('sinch-help-tooltip')
+    .evaluate((el) => (el as TSinchHelpTooltipElement).tooltipRect)
+
   yield {
     name: 'show',
-    include: [$.locator('sinch-help-tooltip #text')],
+    includeRects: [tooltipRect],
   }
 }))
 
@@ -174,32 +178,28 @@ test('fill', withPlaceholder(async function* ({ $, $eval }) {
   await expect($eval((el) => el.value)).resolves.toBe('Filled text')
 }))
 
-test('disabled property', withEverything(async function* ({ $, $eval }) {
+test('disabled property', withEverything(async function* ({ $eval }) {
   await $eval((el) => {
     el.disabled = true
   })
   yield { name: 'disabled' }
-  await expect($.locator('input').isDisabled()).resolves.toBe(true)
 
   await $eval((el) => {
     el.disabled = false
   })
   yield { name: 'enabled' }
-  await expect($.locator('input').isDisabled()).resolves.toBe(false)
 }))
 
-test('disabled attribute', withEverything(async function* ({ $, $eval }) {
+test('disabled attribute', withEverything(async function* ({ $eval }) {
   await $eval((el) => {
     el.setAttribute('disabled', '')
   })
   yield { name: 'disabled' }
-  await expect($.locator('input').isDisabled()).resolves.toBe(true)
 
   await $eval((el) => {
     el.removeAttribute('disabled')
   })
   yield { name: 'enabled' }
-  await expect($.locator('input').isDisabled()).resolves.toBe(false)
 }))
 
 test('custom events', withValue(async function* ({ $, page }) {
