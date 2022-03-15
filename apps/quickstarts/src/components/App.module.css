@@ -1,8 +1,0 @@
-.app {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  height: 100%;
-  box-sizing: border-box;
-  font: var(--sinch-font-body);
-}

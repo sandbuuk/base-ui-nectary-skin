@@ -1,0 +1,41 @@
+/* Not spending too much time on the styling here since we
+   will soon get a new design for these cards. */
+.root {
+  background-color: white;
+  margin: 0;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.root > header {
+  height: 309px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.root > header > img {
+  align-self: center;
+  justify-self: start;
+  height: 85px;
+}
+
+.root > header > h3 {
+  font-size: 23px;
+}
+
+.root > header > * {
+  flex: 0;
+  align-self: start;
+  justify-self: end;
+}
+
+.root > main {
+  background-color: white;
+  min-height: 268px;
+  height: fit-content;
+  padding: 25px 20px;
+}

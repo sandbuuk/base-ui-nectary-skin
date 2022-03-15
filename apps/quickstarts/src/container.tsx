@@ -2,8 +2,9 @@ import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import { filterMessage, isData, isTokenMessage, listenToBus, tokenRequestMessage, sendMessageOnBus } from '@saas/bus'
 import { defineNectaryElements } from '@sinch-engage/nectary/utils'
+import { Fragment } from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
-import { App } from './components/App'
+import { App } from './App'
 import { TokenContext } from './contexts'
 import type { EmotionCache } from '@emotion/cache'
 import type { TOKEN_PAYLOAD } from '@saas/bus'
@@ -28,6 +29,8 @@ const tokenOnly = filterMessage(isTokenMessage)
 const customRegistry = new CustomElementRegistry()
 
 defineNectaryElements(customRegistry)
+
+const StyleSheetManager = Fragment // Change to use StyledComponents
 
 class SinchReactApp extends HTMLElement {
   appElement: HTMLElement
@@ -79,28 +82,14 @@ class SinchReactApp extends HTMLElement {
     }
 
     render(
-      <CacheProvider value={this.cache}>
-        <TokenContext.Provider value={this.token}>
-          <App baseUrl="/quickstarts"/>
-          <TokenContext.Consumer>{
-            (data) => {
-              if (data !== null) {
-                // data.token is what one would send for example in the `Authentication:` header when doing backend calls.
-                console.log('Here is the a small piece of the latest token inside the MFE!', data.token.substr(-10))
-                // @ts-ignore
-                console.log('Here is the username from the parsed token:', data.parsedToken.preferred_username)
-
-                return null
-              }
-
-              console.log('Currently we have no token. Are you logged in?')
-
-              return null
-            }
-          }
-          </TokenContext.Consumer>
-        </TokenContext.Provider>
-      </CacheProvider>,
+      <StyleSheetManager target={this.shadowRoot}>
+        <CacheProvider value={this.cache}>
+          <TokenContext.Provider value={this.token}>
+            {/** TODO: This basename should really come from the shell. The shell decides where to mount it. */}
+            <App baseUrl="/quick-starts"/>
+          </TokenContext.Provider>
+        </CacheProvider>
+      </StyleSheetManager>,
       this.appElement
     )
   }

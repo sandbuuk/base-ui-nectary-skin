@@ -1,0 +1,10 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  min-height: 100%;
+  box-sizing: border-box;
+  font: var(--sinch-font-body);
+  background-color: var(--sinch-color-snow-500);
+  /*box-shadow: inset 1px 1px #fafafa;*/
+}

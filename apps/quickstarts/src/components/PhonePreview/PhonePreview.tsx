@@ -1,42 +1,34 @@
+import classnames from 'classnames'
 import { MessageTyping } from './MessageTyping'
 import styles from './PhonePreview.module.css'
-import mobile from './mobile.png'
 import type { FC } from 'react'
 
-type PhonePreviewProps = {
-  chats: { sender: string, msg: string, blur?: boolean, typing?: boolean }[],
+export type PhonePreviewProps = {
+  chats: {
+    sender: 'right' | 'left',
+    msg: string,
+    blur?: boolean,
+    typing?: boolean,
+  }[],
 }
 
-export const PhonePreview: FC<PhonePreviewProps> = (props): JSX.Element => {
-  const { chats } = props
-
-  return (
-    <div className={styles.phonePreview}>
-      <div style={{ backgroundImage: `url(${mobile})` }} className={styles.phoneImage}>
-        <div className={styles.phoneMessages}>
-          {(chats).map((_, i) => {
-            if (chats[i].typing == true) {
-              return (
-                <div key={`${i}typing`} className={chats[i].sender == 'right' ? styles.hide : ''}>
-                  <MessageTyping/>
-                </div>
-              )
-            }
-
-            return (
-              <div
-                key={`${i}`}
-                className={chats[i].msg.length > 0 ? chats[i].sender == 'left' ? styles.botMessage : styles.userMessage : styles.hide}
-              >
-                {chats[i].msg}
-              </div>
-            )
-          })}
-
-        </div>
-
-      </div>
+export const PhonePreview: FC<PhonePreviewProps> = ({ chats }): JSX.Element => (
+  <div className={styles.phonePreview}>
+    <div className={styles.phoneMessages}>
+      {chats.map(({ sender, msg, blur, typing }, i) => (msg.length === 0
+        // Rendering null instead of filtering out the empty message will make the indexes
+        // more stable and prevent unneccessary rerenders.
+        ? null
+        : (
+          (sender == 'left' && typing === true) ? <MessageTyping key={i}/> : (
+            <div
+              key={i}
+              className={classnames(styles.message, styles[sender], { [styles.blur]: blur })}
+            >
+              {msg}
+            </div>
+          )
+        )))}
     </div>
-  )
-}
-
+  </div>
+)

@@ -48,7 +48,7 @@ export const App: FC<{}> = () => {
         </header>
         <aside className={styles.aside}>
           <SidebarButton to="/" text="Home" tooltip="Home" icon="sinch-icon-home"/>
-          <SidebarButton to="/quickstarts" text="Quick Starts" tooltip="Quick Starts" icon="sinch-icon-rocket"/>
+          <SidebarButton to="/quick-starts" text="Quick Starts" tooltip="Quick Starts" icon="sinch-icon-rocket"/>
           <div className={styles.space}/>
           <SidebarButton to="/conversations" text="Conversations" tooltip="Conversations" icon="sinch-icon-contact"/>
           <SidebarButton to="/chatbot" text="Chatbot" tooltip="Chatbot" icon="sinch-icon-chatbot"/>
@@ -62,7 +62,7 @@ export const App: FC<{}> = () => {
         <main className={styles.main}>
           <Routes>
             <Route path="/" element={<NotFound title="Home"/>}/>
-            <Route path="/quickstarts/*" element={<Quickstarts/>}/>
+            <Route path="/quick-starts/*" element={<Quickstarts/>}/>
             <Route path="/conversations/*" element={<NotFound title="Conversations"/>}/>
             <Route path="/chatbot/*" element={<NotFound title="Chatbot"/>}/>
             <Route path="/campaign/*" element={<NotFound title="Campaign"/>}/>

@@ -3,7 +3,7 @@ import type { FC } from 'react'
 
 export const MessageTyping: FC = (): JSX.Element => {
   return (
-    <div className={styles.typing} style={{ display: 'flex' }}>
+    <div className={styles.typing}>
       <span/>
       <span/>
       <span/>

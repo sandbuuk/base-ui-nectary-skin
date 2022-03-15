@@ -61,13 +61,13 @@ export const Home: FC = () => {
 
             <QuickstartCards clickFunction={customerConverterPage} bgColor="#FFCC66" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Customer Support" mainBody="Deliver a consistent Customer Support and solve issues at hand by making support interactive." imageSource={offering} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'Customer Support', category: 2 }]} headerColor="black"/>
 
-            <QuickstartCards clickFunction={() => {}} bgColor="#0A273D" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick FAQ Chatbot" mainBody="Build a chatbot to answer frequently asked questions." imageSource={card3} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Customer Support', category: 2 }]} headerColor="white"/>
+            <QuickstartCards clickFunction={() => {}} bgColor="var(--sinch-color-text-default)" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick FAQ Chatbot" mainBody="Build a chatbot to answer frequently asked questions." imageSource={card3} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Customer Support', category: 2 }]} headerColor="white"/>
           </div>
 
           <div className={styles.cardsdiv}>
             <QuickstartCards clickFunction={() => {}} bgColor="#FFCC66" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Abandoned Cart Recovery" mainBody="Create a Chatbot that sends personalized reminders to users." imageSource={abandonedcart} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '2 minutes', category: 8 }, { text: 'E-commerce', category: 2 }]} headerColor="black"/>
 
-            <QuickstartCards clickFunction={() => {}} bgColor="#0A273D" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Product Feedback" mainBody="Create a Chatbot that compiles product feedback through personalized user conversations." imageSource={feedback} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Surveys', category: 2 }]} headerColor="white"/>
+            <QuickstartCards clickFunction={() => {}} bgColor="var(--sinch-color-text-default)" mainTag={{ text: 'Coming Soon', category: 2 }} headerTitle="Quick Product Feedback" mainBody="Create a Chatbot that compiles product feedback through personalized user conversations." imageSource={feedback} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Surveys', category: 2 }]} headerColor="white"/>
 
             <QuickstartCards clickFunction={() => {}} bgColor="#007171" mainTag={{ text: 'New', category: 3 }} headerTitle="Quick Order Status & Package Tracking Update" mainBody="Build a Chatbot that allows users to check the status of their purchases and track their deliveries at any time." imageSource={status} descriptionTags={[{ text: 'Easy', category: 3 }, { text: '3 minutes', category: 8 }, { text: 'Marketing', category: 2 }]} headerColor="white"/>
           </div>

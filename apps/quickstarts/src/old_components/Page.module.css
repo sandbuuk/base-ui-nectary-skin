@@ -1,7 +1,7 @@
 /* stylelint-disable selector-class-pattern */
 * {
   box-sizing: border-box;
-  color: #0A273D
+  color: var(--sinch-color-text-default);
 }
 
 h2 {

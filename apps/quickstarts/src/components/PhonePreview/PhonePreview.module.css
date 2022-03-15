@@ -1,75 +1,108 @@
-* {
-    box-sizing: border-box;
-    color: #0A273D
-}
-
 .phonePreview {
-    display: flex;
-    margin-right: 10%;
-    height: 100%;
-    flex: 3;
-}
+    --dots-height: 9px;
+    --dots-width-left: 9px;
+    --dots-width-right: 70px;
+    --dots-distance: 10px;
 
-.phoneImage{
-    flex: 10;
+    flex: 0;
     display: flex;
     position: relative;
-    z-index: 6;
     background-size: cover;
     height: 600px;
     width:300px;
-    object-position: 100% 0;
-    background-repeat: no-repeat center center fixed;
-    -moz-background-size: 100% 100%;
-    -webkit-background-size: 100% 100%;
-    background-size: 100% 100%;
-}
-
-.botMessage{
-    margin:20px;
-    border-radius: 10px;
-    padding: 10px;
-    max-width:70%;
-    min-width:50px;
-    background-color: #F1F3F4;
+    box-sizing: border-box;
+    overflow: hidden;
     text-align: left;
-    animation: slide 1s;
+
+    border: 4px var(--sinch-color-stormy-400) solid;
+    border-radius: 40px;
 }
 
-.userMessage{
-    padding: 10px;
-    margin-left: auto;
-    margin-right: 20px;
+.phonePreview * {
+    box-sizing: border-box;
+}
+
+.phonePreview::before {
+    content: "";
+    display: block;
+    width: var(--dots-height);
+    height: var(--dots-width-left);
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    margin-left: calc(0px - ( var(--dots-width-right) / 2 ) - var(--dots-distance) - var(--dots-width-left));
+    background-color: var(--sinch-color-snow-800);
+    border-radius: 9px;
+}
+
+.phonePreview::after {
+    content: "";
+    display: block;
+    width: var(--dots-width-right);
+    height: var(--dots-height);
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    /* negative margin to center in the parent */
+    margin-left: calc(0px - ( var(--dots-width-right) / 2 ));
+    background-color: var(--sinch-color-snow-800);
+    border-radius: 9px;
+}
+
+.phoneMessages {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    border-top: 33px solid transparent;
+    border-bottom: 32px solid transparent;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.message {
     border-radius: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: #CCE3E3;
+    margin:2px 20px;
+    padding: 10px;
+    width: fit-content;
     max-width:70%;
-    min-width:50px;
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
-    text-align: right;
-    position: relative;
-    float: right;
+ 
     animation: slide 1s;
+    position: relative;
+    word-break: break-word;
+}
+
+.blur {
+    filter: blur(4px);
+}
+
+.left {
+    border-top-left-radius: 0;
+    background-color: var(--sinch-color-snow-500);
+    color: var(--sinch-color-text-default);
+}
+
+.right {
+    margin-left: auto;
+    border-top-right-radius: 0;
+    background-color: var(--sinch-color-tropical-100);
+    color: var(--sinch-color-text-default);
+}
+
+/* Add extra margin when switching between left and right sender. */
+.left + .right,
+.right + .left {
+    margin-top: 20px;
 }
 
 @keyframes slide {
-    from {bottom: -20px}
-    to {bottom: 0px}
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
+    from {
+        top: 20px;
+        opacity: 0;
+    }
+    to {
+        top: 0px;
+        opacity: 1;
+    }
   }
-
-.phoneMessages{
-    display: flex;
-    overflow-y: scroll;
-    width: 300px;
-    margin-top:50px;
-    height: 500px;
-    flex-direction: column;
-  }
-
-.hide{
-    display: none;
-}
