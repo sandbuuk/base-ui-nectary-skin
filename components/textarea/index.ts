@@ -25,7 +25,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
       delegatesFocus: true,
     })
 

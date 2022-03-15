@@ -24,7 +24,7 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
