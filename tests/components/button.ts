@@ -7,6 +7,8 @@ const withFitWidth = makeScreenshotTests('/button?type=primary&text=Button&icon=
 const withNarrowWidth = makeScreenshotTests('/button?width=110&type=primary&icon=true&text=Button%text%20long%20long%20long', 'sinch-button')
 const withDisabled = makeScreenshotTests('/button?type=primary&text=Button&disabled=true&icon=true', 'sinch-button')
 const withSmall = makeScreenshotTests('/button?type=primary&text=Button&small=true&icon=true', 'sinch-button')
+const withIcon = makeScreenshotTests('/button?type=primary&icon=true', 'sinch-button')
+const withSmallIcon = makeScreenshotTests('/button?type=primary&small=true&icon=true', 'sinch-button')
 const withSpinner = makeScreenshotTests('/button?type=primary&text=Button&spinner=true', 'sinch-button')
 const withSpinnerDisabled = makeScreenshotTests('/button?type=primary&text=Button&spinner=true&disabled=true', 'sinch-button')
 const withSpinnerSmall = makeScreenshotTests('/button?type=primary&text=Button&spinner=true&small=true', 'sinch-button')
@@ -162,6 +164,14 @@ test('small attribute', withFitWidth(async function* ({ $eval }) {
 
   await $eval((el) => el.removeAttribute('small'))
   yield { name: 'off' }
+}))
+
+test('icon', withIcon(async function* () {
+  yield { name: 'shot' }
+}))
+
+test('icon small', withSmallIcon(async function* () {
+  yield { name: 'shot' }
 }))
 
 test('narrow', withNarrowWidth(async function* ({ $eval }) {
