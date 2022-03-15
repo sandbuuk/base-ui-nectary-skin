@@ -134,7 +134,7 @@ button {
   box-sizing: border-box;
   width: 100%;
   height: 48px;
-  padding: 12px 24px;
+  padding: 12px;
   border-radius: 4px;
   font: var(--sinch-font-title-4);
   color: var(--sinch-color-button-text);
@@ -177,18 +177,31 @@ button > * {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  display: none;
+}
+
+:host([text]:not([text=""])) #text {
+  display: initial;
+}
+
+:host([text]:not([text=""])) button {
+  padding: 12px 24px;
 }
 
 :host([small]:not([small="false"])) > button {
   height: 32px;
-  padding: 8px 16px;
+  padding: 8px;
   line-height: 16px;
   font-size: 14px;
   gap: 8px;
 }
+
+:host([text]:not([text=""])[small]:not([small="false"])) button {
+  padding: 8px 16px;
+}
 </style>
 
-<button title="button">
+<button>
   <slot name="icon"></slot>
   <span id="text"></span>
 </button>
