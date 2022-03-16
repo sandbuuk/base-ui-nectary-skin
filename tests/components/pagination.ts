@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../utils'
+import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withEmptyRange = makeScreenshotTests('/pagination?value=1', 'sinch-pagination')
 const withShortRange = makeScreenshotTests('/pagination?max=3', 'sinch-pagination')
