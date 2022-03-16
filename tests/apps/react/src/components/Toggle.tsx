@@ -27,6 +27,7 @@ export const Toggle: FC<TToggle> = ({ search }) => {
   return (
     <sinch-toggle
       text={text}
+      aria-label="Toggle"
       small={isSmall}
       disabled={isDisabled}
       labeled={isLabeled}

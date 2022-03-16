@@ -45,7 +45,13 @@ export const QuickstartCards: FC<QuickstartCardsProps> = (props): JSX.Element =>
         })}
       </div>
       <div className={styles.cardButton}>
-        <sinch-button style={{ marginTop: '20%' }} type="secondary" text="Try for free" onClick={clickFunction}/>
+        <sinch-button
+          style={{ marginTop: '20%' }}
+          type="secondary"
+          text="Try for free"
+          aria-label="Try for free"
+          onClick={clickFunction}
+        />
       </div>
     </div>
   )

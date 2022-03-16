@@ -148,7 +148,13 @@ export const Dialog: FC<Props> = (props): JSX.Element => {
           <h2 className={iserror == true ? styles.errorBody : styles.hide}>Please try again in a few moments.</h2>
         </div>
         <img src={iserror == true ? errorimage : congratsimage} className={styles.congratsimage}/>
-        <sinch-button style={{ width: '35%', marginBottom: '2%' }} type="cta-primary" text="Try it out!" onClick={() => {}}/>
+        <sinch-button
+          style={{ width: '35%', marginBottom: '2%' }}
+          type="cta-primary"
+          text="Try it out!"
+          aria-label="Try it out"
+          onClick={() => {}}
+        />
       </div>
     </div>
   )
@@ -216,10 +222,9 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
               [props.i]: { name: value, email: agentdetails[props.i].email },
             }))
           }}
-          onFocus={() => {
-          }}
           label="Agent name"
           placeholder="What is your name?"
+          aria-label="What is your name?"
         />
       </div>
       <div className={styles.input}>
@@ -236,11 +241,9 @@ const WhatsappQuestion: FC<WhatsappquestionProps> = (props) => {
               [props.i]: { name: agentdetails[props.i].name, email: value },
             }))
           }}
-          onFocus={() => {
-
-          }}
           label="Agent e-mail"
           placeholder="What is your email?"
+          aria-label="What is your email?"
         />
       </div>
     </div>
@@ -269,6 +272,7 @@ const AgentInformation = (props: AgentInformationProps) => {
                 <sinch-button
                   type="destructive"
                   text="Delete"
+                  aria-label="Delete"
                   onClick={() => {
                     setAgentdetails((datas: string[]) => ({
                       ...datas,
@@ -309,6 +313,7 @@ const PageBody = (props: PageBodyProps) => {
               disabled={questionCounter > 5 || agentdetails[Object.keys(agentdetails).length - 1].name.length <= 0 || agentdetails[Object.keys(agentdetails).length - 1].email.length <= 0 || validateEmail(agentdetails[Object.keys(agentdetails).length - 1].email) == null ? true : undefined}
               onClick={buttonCounter}
               text={questionCounter <= 5 ? `Add more Agents (Up to ${6 - questionCounter} )` : 'Add more Agents (Up to 0)'}
+              aria-label="Add more Agents"
             />
           </div>
           <table className={styles.details}>
@@ -335,6 +340,7 @@ const PageBody = (props: PageBodyProps) => {
                   <sinch-textarea // eslint-disable-line
                     value={humanhandover}
                     label="Human Handover Message"
+                    aria-label="Human Handover Message"
                     placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
                     optionalText={undefined}
                     invalidText={undefined}
@@ -346,9 +352,6 @@ const PageBody = (props: PageBodyProps) => {
 
                       setHumanhandover(value)
                     }}
-                    onFocus={() => {
-                    }}
-                    onBlur={() => {}}
                   />
         </div>
         <PhonePreview chats={chats as ({msg: string, sender: 'left' | 'right', blur?: boolean})[]}/>

@@ -83,6 +83,7 @@ export const CardDialog: FC<Props> = (props): JSX.Element => {
           <sinch-button
             type="secondary"
             text="Cancel"
+            aria-label="Cancel"
             onClick={() => {
               setIsOpen((isOpen: boolean) => {
                 return !isOpen
@@ -92,7 +93,14 @@ export const CardDialog: FC<Props> = (props): JSX.Element => {
           />
         </div>
         <div className={styles.footerContinue}>
-          <sinch-button type="primary" text="Continue" onClick={next} small disabled={disabled}/>
+          <sinch-button
+            type="primary"
+            text="Continue"
+            aria-label="Continue"
+            onClick={next}
+            small
+            disabled={disabled}
+          />
         </div>
       </div>
     </div>
