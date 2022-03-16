@@ -24,7 +24,7 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
       delegatesFocus: true,
     })
 
@@ -37,6 +37,10 @@ defineCustomElement('sinch-accordion', class extends HTMLElement {
 
   static get observedAttributes() {
     return ['value']
+  }
+
+  connectedCallback() {
+    this.setAttribute('aria-label', 'accordion')
   }
 
   get nodeName() {

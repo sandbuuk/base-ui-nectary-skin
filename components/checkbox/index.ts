@@ -22,7 +22,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
       delegatesFocus: true,
     })
 
@@ -30,14 +30,11 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
 
     this.#$input = shadowRoot.querySelector('input')!
     this.#$label = shadowRoot.querySelector('label')!
+    this.#$input.addEventListener('input', this.#onCheckboxInput)
   }
 
   connectedCallback() {
-    this.#$input.addEventListener('input', this.onCheckboxInput)
-  }
-
-  disconnectedCallback() {
-    this.#$input.removeEventListener('input', this.onCheckboxInput)
+    this.setAttribute('role', 'checkbox')
   }
 
   static get observedAttributes() {
@@ -101,6 +98,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
       }
       case 'checked': {
         this.#$input.checked = isAttrTrue(newVal)
+        updateAttribute(this, 'aria-checked', isAttrTrue(newVal))
 
         break
       }
@@ -120,7 +118,7 @@ defineCustomElement('sinch-checkbox', class extends HTMLElement {
     this.#$input.blur()
   }
 
-  onCheckboxInput = (e: Event) => {
+  #onCheckboxInput = (e: Event) => {
     e.stopPropagation()
 
     const isChecked = this.#$input.checked
@@ -155,6 +153,7 @@ export type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
   disabled?: boolean,
   invalid?: boolean,
   text?: string,
+  'aria-label': string,
   onChange: (event: SyntheticEvent<TSinchCheckboxElement, CustomEvent<boolean>>) => void,
   onFocus?: (e: FocusEvent<TSinchCheckboxElement>) => void,
   onBlur?: (e: FocusEvent<TSinchCheckboxElement>) => void,

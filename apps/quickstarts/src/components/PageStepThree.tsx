@@ -44,10 +44,9 @@ const WhatsappDetails: FC<Props> = (props): JSX.Element => {
             [k - 1]: value,
           }))
         }}
-        onFocus={() => {
-        }}
         label={`Question ${k}`}
         placeholder="What is your name?"
+        aria-label="What is your name?"
       />
     </div>
   )
@@ -102,6 +101,7 @@ const PageBody = (props: PageBodyProps) => {
                   value={greetingmsg}
                   class="greetingMsg"
                   label="Greeting"
+                  aria-label="Greeting"
                   placeholder="Hi, welcome to Sinch S.P Black Friday. Check out our 50% OFF in all products. "
                   optionalText={undefined}
                   invalidText={undefined}
@@ -113,9 +113,6 @@ const PageBody = (props: PageBodyProps) => {
 
                     setGreetingmsg(value)
                   }}
-                  onFocus={() => {
-                  }}
-                  onBlur={() => {}}
                 />
               <hr style={{ border: '1px solid #e5e5e5' }}/>
               <p className={styles.description}>
@@ -129,6 +126,7 @@ const PageBody = (props: PageBodyProps) => {
                 type="cta-primary"
                 onClick={buttonCounter}
                 text="Add new question"
+                aria-label="Add new question"
               />
             </div>
           </div>

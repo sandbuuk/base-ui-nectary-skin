@@ -26,7 +26,7 @@ defineCustomElement('sinch-tabs-option', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
       delegatesFocus: true,
     })
 
@@ -37,6 +37,7 @@ defineCustomElement('sinch-tabs-option', class extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'tab')
     this.$input.addEventListener('input', this.#onInput)
   }
 
@@ -96,6 +97,8 @@ defineCustomElement('sinch-tabs-option', class extends HTMLElement {
           this.scrollIntoView?.({ block: 'nearest' })
         }
 
+        updateAttribute(this, 'aria-selected', isAttrTrue(newVal))
+
         break
       }
       case 'disabled': {
@@ -142,6 +145,7 @@ export type TSinchTabsOptionReact = TSinchElementReact<TSinchTabsOptionElement> 
   value: string,
   disabled?: boolean,
   text: string,
+  'aria-label': string,
   onFocus?: (e: FocusEvent<TSinchTabsOptionElement>) => void,
   onBlur?: (e: FocusEvent<TSinchTabsOptionElement>) => void,
 }

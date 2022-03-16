@@ -18,7 +18,7 @@ defineCustomElement('sinch-table-head-sort', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
@@ -27,6 +27,7 @@ defineCustomElement('sinch-table-head-sort', class extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'checkbox')
     this.#$input.addEventListener('input', this.onCheckboxInput)
   }
 
@@ -99,6 +100,7 @@ export type TSinchTableHeaderSortElement = HTMLElement & {
 
 export type TSinchTableHeaderSortReact = TSinchElementReact<TSinchTableHeaderSortElement> & {
   value: boolean,
+  'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchTableHeaderSortElement, CustomEvent<boolean>>) => void,
   onFocus?: (e: FocusEvent<TSinchTableHeaderSortElement>) => void,
   onBlur?: (e: FocusEvent<TSinchTableHeaderSortElement>) => void,

@@ -69,14 +69,14 @@
   background-color: var(--sinch-color-informative-500);
 }
 
-#content {
+#title {
   flex: 1;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-#box {
+#content {
   display: none;
   overflow-y: auto;
   flex-shrink: 1;
@@ -90,25 +90,20 @@
   transform: rotate(180deg);
 }
 
-#button[aria-expanded="true"] + #box {
+#button[aria-expanded="true"] + #content {
   display: block;
 }
 </style>
 
 <div id="wrapper">
-  <button
-    id="button"
-    aria-haspopup="box"
-    aria-expanded="false"
-    aria-labelledby="button"
-  >
+  <button id="button" aria-controls="content" aria-expanded="false">
     <slot name="icon"></slot>
-    <span id="content"></span>
-    <svg id="dropdown-icon" width="12" height="8">
+    <span id="title"></span>
+    <svg id="dropdown-icon" width="12" height="8" aria-hidden="true">
       <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
     </svg>
   </button>
-  <div id="box">
+  <div id="content" role="region" aria-labelledby="button">
     <slot name="content"></slot>
   </div>
 </div>

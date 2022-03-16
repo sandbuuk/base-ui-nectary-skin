@@ -26,7 +26,7 @@ defineCustomElement('sinch-button', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
       delegatesFocus: true,
     })
 
@@ -34,6 +34,10 @@ defineCustomElement('sinch-button', class extends HTMLElement {
 
     this.#$button = shadowRoot.querySelector('button')!
     this.#$text = shadowRoot.querySelector('#text')!
+  }
+
+  connectedCallback() {
+    this.setAttribute('role', 'button')
   }
 
   static get observedAttributes() {
@@ -110,6 +114,7 @@ export type TSinchButtonElement = HTMLElement & {
 export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   type: TSinchButtonType,
   text: string,
+  'aria-label': string,
   disabled?: boolean,
   small?: boolean,
   onClick: (e: MouseEvent<TSinchButtonElement>) => void,

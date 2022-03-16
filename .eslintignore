@@ -1,5 +1,5 @@
 public/
-tests/visual/apps/angular/
-tests/visual/apps/vue/
+tests/apps/angular/
+tests/apps/vue/
 dist/
 lib/

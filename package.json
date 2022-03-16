@@ -5,9 +5,8 @@
     "configs/*",
     "libs/*",
     "apps/*",
-    "tests/visual",
-    "tests/visual/apps/*",
-    "tests/accessibility"
+    "tests/",
+    "tests/apps/*"
   ],
   "scripts": {
     "storybook": "start-storybook --port 4000",
@@ -18,9 +17,7 @@
     "start": "concurrently --raw npm:start:quickstarts npm:start:shell",
     "build:quickstarts": "yarn --cwd=apps/quickstarts build",
     "build:shell": "yarn --cwd=apps/shell build",
-    "test:visual": "yarn --cwd=tests/visual test",
-    "test:accessibility": "yarn --cwd=tests/accessibility test",
-    "test": "concurrently --raw npm:test:visual npm:test:accessibility"
+    "test": "yarn --cwd=tests test"
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",

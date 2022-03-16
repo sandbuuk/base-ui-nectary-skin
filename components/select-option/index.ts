@@ -1,4 +1,4 @@
-import { defineCustomElement, getAttribute, getBooleanAttribute, updateAttribute, updateBooleanAttribute } from '../utils'
+import { defineCustomElement, getAttribute, getBooleanAttribute, isAttrTrue, updateAttribute, updateBooleanAttribute } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
@@ -18,7 +18,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
@@ -32,7 +32,7 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['text']
+    return ['text', 'checked']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -45,6 +45,10 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
         this.#$content.textContent = newVal
 
         break
+      }
+
+      case 'checked': {
+        updateAttribute(this, 'aria-selected', isAttrTrue(newVal))
       }
     }
   }
@@ -82,11 +86,11 @@ defineCustomElement('sinch-select-option', class extends HTMLElement {
   }
 
   set selected(isSelected: boolean) {
-    updateBooleanAttribute(this, 'selected', isSelected)
+    updateBooleanAttribute(this, 'data-selected', isSelected)
   }
 
   get selected() {
-    return getBooleanAttribute(this, 'selected')
+    return getBooleanAttribute(this, 'data-selected')
   }
 
   get icon(): Element | null {
@@ -106,9 +110,8 @@ export type TSinchSelectOptionElement = HTMLElement & {
 export type TSinchSelectOptionReact = TSinchElementReact<TSinchSelectOptionElement> & {
   value: string,
   text: string,
-  checked?: boolean,
-  selected?: boolean,
   disabled?: boolean,
+  'aria-label': string,
 }
 
 declare global {

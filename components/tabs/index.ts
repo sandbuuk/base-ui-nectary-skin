@@ -10,55 +10,8 @@ import type { SyntheticEvent } from 'react'
 
 type TSinchTabOptionElement = HTMLElementTagNameMap['sinch-tabs-option']
 
-const getEnabledRadioElements = ($slot: HTMLSlotElement): TSinchTabOptionElement[] => {
-  return $slot.assignedElements().filter((opt) => isTabsOptionElement(opt) && opt.disabled !== true) as TSinchTabOptionElement[]
-}
 const findSelectedOption = (elements: readonly TSinchTabOptionElement[]) => {
   return elements.find((el) => el.checked) ?? null
-}
-
-const getFirstOption = ($slot: HTMLSlotElement) => {
-  for (const $option of $slot.assignedElements()) {
-    if (isTabsOptionElement($option) && $option.disabled !== true) {
-      return $option
-    }
-  }
-
-  return null
-}
-
-const getLastOption = ($slot: HTMLSlotElement) => {
-  for (const $option of $slot.assignedElements().reverse()) {
-    if (isTabsOptionElement($option) && $option.disabled !== true) {
-      return $option
-    }
-  }
-
-  return null
-}
-
-const getNextOption = ($slot: HTMLSlotElement) => {
-  const $options = getEnabledRadioElements($slot)
-  const $selectedOption = findSelectedOption($options)
-  const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
-
-  if (currentIndex < 0) {
-    return getFirstOption($slot)
-  }
-
-  return $options[(currentIndex + 1) % $options.length]
-}
-
-const getPrevOption = ($slot: HTMLSlotElement) => {
-  const $options = getEnabledRadioElements($slot)
-  const $selectedOption = findSelectedOption($options)
-  const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
-
-  if (currentIndex < 0) {
-    return getLastOption($slot)
-  }
-
-  return $options[(currentIndex - 1 + $options.length) % $options.length]
 }
 
 const template = document.createElement('template')
@@ -72,7 +25,7 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
       delegatesFocus: true,
     })
 
@@ -82,6 +35,10 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
 
     this.#$slot = shadowRoot.querySelector('slot')!
     this.#$slot.addEventListener('slotchange', this.#onSlotChange)
+  }
+
+  connectedCallback() {
+    this.setAttribute('role', 'tablist')
   }
 
   static get observedAttributes() {
@@ -103,7 +60,7 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.onValueChange(newVal ?? '')
+        this.#onValueChange(newVal)
 
         break
       }
@@ -116,11 +73,11 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
       case 'ArrowLeft': {
         e.preventDefault()
 
-        const $option = getPrevOption(this.#$slot)
+        const $option = this.#getPrevOption()
 
         if ($option !== null) {
           $option.focus()
-          this.dispatchChangeEvent($option.value)
+          this.#dispatchChangeEvent($option.value)
         }
 
         break
@@ -129,11 +86,11 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
       case 'ArrowRight': {
         e.preventDefault()
 
-        const $option = getNextOption(this.#$slot)
+        const $option = this.#getNextOption()
 
         if ($option !== null) {
           $option.focus()
-          this.dispatchChangeEvent($option.value)
+          this.#dispatchChangeEvent($option.value)
         }
 
         break
@@ -142,16 +99,16 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
   }
 
   #onSlotChange = () => {
-    this.onValueChange(this.value)
+    this.#onValueChange(this.value)
   }
 
   #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
-    this.dispatchChangeEvent((e as CustomEvent).detail)
+    this.#dispatchChangeEvent((e as CustomEvent).detail)
   }
 
-  onValueChange(value: string) {
+  #onValueChange(value: string | null) {
     for (const $option of this.#$slot.assignedElements()) {
       if (isTabsOptionElement($option)) {
         $option.checked = $option.disabled !== true && $option.value === value
@@ -159,10 +116,58 @@ defineCustomElement('sinch-tabs', class extends HTMLElement {
     }
   }
 
-  dispatchChangeEvent(value: string) {
+  #dispatchChangeEvent(value: string) {
     this.dispatchEvent(
       new CustomEvent('change', { detail: value, bubbles: true })
     )
+  }
+
+  #getFirstOption() {
+    for (const $option of this.#$slot.assignedElements()) {
+      if (isTabsOptionElement($option) && $option.disabled !== true) {
+        return $option
+      }
+    }
+
+    return null
+  }
+
+  #getLastOption() {
+    for (const $option of this.#$slot.assignedElements().reverse()) {
+      if (isTabsOptionElement($option) && $option.disabled !== true) {
+        return $option
+      }
+    }
+
+    return null
+  }
+
+  #getNextOption() {
+    const $options = this.#getEnabledRadioElements()
+    const $selectedOption = findSelectedOption($options)
+    const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
+
+    if (currentIndex < 0) {
+      return this.#getFirstOption()
+    }
+
+    return $options[(currentIndex + 1) % $options.length]
+  }
+
+  #getPrevOption() {
+    const $options = this.#getEnabledRadioElements()
+    const $selectedOption = findSelectedOption($options)
+    const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
+
+    if (currentIndex < 0) {
+      return this.#getLastOption()
+    }
+
+    return $options[(currentIndex - 1 + $options.length) % $options.length]
+  }
+
+  #getEnabledRadioElements(): TSinchTabOptionElement[] {
+    return this.#$slot.assignedElements().filter((opt) => isTabsOptionElement(opt) && opt.disabled !== true) as TSinchTabOptionElement[]
   }
 })
 
@@ -172,6 +177,7 @@ export type TSinchTabsElement = HTMLElement & {
 
 export type TSinchTabsReact = TSinchElementReact<TSinchTabsElement> & {
   value: string,
+  'aria-label': string,
   onChange: (event: SyntheticEvent<TSinchTabsElement, CustomEvent<string>>) => void,
 }
 

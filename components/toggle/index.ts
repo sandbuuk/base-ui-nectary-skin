@@ -22,7 +22,7 @@ defineCustomElement('sinch-toggle', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
       delegatesFocus: true,
     })
 
@@ -30,14 +30,12 @@ defineCustomElement('sinch-toggle', class extends HTMLElement {
 
     this.#$input = shadowRoot.querySelector('input')!
     this.#$label = shadowRoot.querySelector('label')!
-  }
-
-  connectedCallback() {
     this.#$input.addEventListener('input', this.#onInput)
   }
 
-  disconnectedCallback() {
-    this.#$input.removeEventListener('input', this.#onInput)
+  connectedCallback() {
+    this.setAttribute('role', 'checkbox')
+    this.setAttribute('aria-label', 'toggle')
   }
 
   static get observedAttributes() {
@@ -149,6 +147,7 @@ export type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
   labeled?: boolean,
   disabled?: boolean,
   text?: string,
+  'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchToggleElement, CustomEvent<boolean>>) => void,
   onFocus?: (e: FocusEvent<TSinchToggleElement>) => void,
   onBlur?: (e: FocusEvent<TSinchToggleElement>) => void,

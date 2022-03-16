@@ -39,33 +39,13 @@ visual-tests:
   before_script:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
-    - yarn --cwd=tests/visual test:ci
+    - yarn --cwd=tests test:ci
   after_script:
-    - find ./tests/visual/test-results -type d -empty -delete
+    - find ./tests/test-results -type d -empty -delete
   artifacts:
     when: on_failure
     paths:
-      - tests/visual/test-results
-
-accessibility-tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.17.1
-  except:
-    - tags
-  cache:
-    key:
-      files:
-        - yarn.lock
-      prefix: cache
-    paths:
-      - .yarn/
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
-  script:
-    - yarn --cwd=tests/accessibility test:ci
+      - tests/test-results
 
 build-shell:
   stage: build

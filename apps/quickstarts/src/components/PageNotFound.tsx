@@ -9,7 +9,7 @@ export const PageNotFound: FC = () => {
     <div className={styles.page}>
       <h3>Not found</h3>
       <div className={styles.buttonWrapper}>
-        <sinch-button type="primary" text="Reset" onClick={reset}/>
+        <sinch-button type="primary" text="Reset" aria-label="Reset" onClick={reset}/>
       </div>
     </div>
   )

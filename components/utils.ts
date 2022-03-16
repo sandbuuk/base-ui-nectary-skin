@@ -1,3 +1,5 @@
+import type { TRect } from './types'
+
 const nectaryDefinitions = new Map<string, CustomElementConstructor>()
 let nectaryRegistry: CustomElementRegistry | null = null
 
@@ -174,4 +176,10 @@ export const getCSVSet = (acc: string): Set<string> => {
 
 export const getFirstCSValue = (acc: string): string => {
   return acc.split(',')[0]
+}
+
+export const getRect = (el: HTMLElement): TRect => {
+  const { x, y, width, height } = el.getBoundingClientRect()
+
+  return { x, y, width, height }
 }

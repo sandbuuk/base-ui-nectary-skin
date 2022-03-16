@@ -25,7 +25,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
       delegatesFocus: true,
     })
 
@@ -39,6 +39,8 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'textbox')
+    this.setAttribute('aria-multiline', 'true')
     this.#$input.addEventListener('input', this.#onInput)
   }
 
@@ -74,6 +76,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
 
       case 'placeholder': {
         this.#$input.placeholder = newVal ?? ''
+        updateAttribute(this, 'aria-placeholder', newVal)
 
         break
       }
@@ -92,6 +95,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
 
       case 'invalidtext': {
         this.#$invalidText.textContent = newVal
+        updateAttribute(this, 'aria-invalid', String(newVal !== null && newVal !== ''))
 
         break
       }
@@ -208,6 +212,7 @@ export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   invalidText?: string,
   additionalText?: string,
   disabled?: boolean,
+  'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
   onFocus?: (e: FocusEvent<TSinchTextareaElement>) => void,
   onBlur?: (e: FocusEvent<TSinchTextareaElement>) => void,

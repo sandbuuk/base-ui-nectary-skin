@@ -25,7 +25,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
       delegatesFocus: true,
     })
 
@@ -39,6 +39,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'textbox')
     this.#$input.addEventListener('input', this.#onInput)
   }
 
@@ -138,6 +139,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
       case 'placeholder': {
         this.#$input.placeholder = newVal ?? ''
+        updateAttribute(this, 'aria-placeholder', newVal)
 
         break
       }
@@ -156,6 +158,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
       case 'invalidtext': {
         this.#$invalidText.textContent = newVal
+        updateAttribute(this, 'aria-invalid', String(newVal !== null && newVal !== ''))
 
         break
       }
@@ -212,6 +215,7 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   invalidText?: string,
   additionalText?: string,
   disabled?: boolean,
+  'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
   onFocus?: (e: FocusEvent<TSinchInputElement>) => void,
   onBlur?: (e: FocusEvent<TSinchInputElement>) => void,

@@ -23,7 +23,7 @@ defineCustomElement('sinch-help-tooltip', class extends HTMLElement {
     super()
 
     const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
+      mode: 'closed',
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
@@ -65,6 +65,10 @@ defineCustomElement('sinch-help-tooltip', class extends HTMLElement {
 
   set orientation(value: string | undefined) {
     updateAttribute(this, 'orientation', value)
+  }
+
+  get tooltipRect() {
+    return this.$tooltip.tooltipRect
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
