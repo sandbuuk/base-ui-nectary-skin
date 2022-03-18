@@ -1,8 +1,0 @@
-.root {
-  font: var(--sinch-font-title-1);
-  margin-bottom: 48px;
-}
-
-.root + p {
-  margin-top: -40px;
-}

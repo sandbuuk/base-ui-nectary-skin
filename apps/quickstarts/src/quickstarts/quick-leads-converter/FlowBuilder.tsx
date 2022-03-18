@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Ruler } from '../../components/Ruler'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/textarea'
@@ -45,6 +44,5 @@ export const FlowBuilder: FC<Props> = ({ greeting, setGreeting, questions, setQu
       </>
     ))}
     <sinch-button style={{ width: 'fit-content' }} type="cta-primary" text="Add new question" onClick={addQuestion}/>
-    <Link to="agent-handover">Human handover</Link>
   </section>
 )

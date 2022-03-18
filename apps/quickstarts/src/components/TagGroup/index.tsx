@@ -1,4 +1,9 @@
-import styles from './TagGroup.module.css'
-import type { FC } from 'react'
 
-export const TagGroup: FC = ({ children }) => <div className={styles.root}>{children}</div>
+import styled from 'styled-components'
+
+export const TagGroup = styled.div`
+  display: flex;
+  gap: 5px;
+  justify-content: start;
+  flex-wrap: wrap
+`

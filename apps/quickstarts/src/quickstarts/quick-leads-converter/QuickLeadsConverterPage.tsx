@@ -11,18 +11,16 @@ import type { QuickStartPage } from '../types'
 import type { Agent } from './types'
 import type { FC } from 'react'
 
-//
-// const tmpChats: PhonePreviewProps['chats'] = [
-// { sender: 'left', msg: 'Hello and welcome! Here are a few questions to get you started.' },
-// { sender: 'left', msg: 'What is your name?' },
-// { sender: 'right', msg: 'Sir Lancelot of Camelot', blur: true },
-// { sender: 'left', msg: 'What is your quest?' },
-// { sender: 'right', msg: 'To find the holy grail!', blur: true },
-// { sender: 'left', msg: 'What is your favorite color?' },
-// { sender: 'right', msg: 'Blue!', typing: true, blur: true },
-// { sender: 'left', msg: 'Ok, you may pass.', typing: true },
-// ]
-//
+const tmpChats: PhonePreviewProps['chats'] = [
+  { sender: 'left', msg: 'Hello and welcome! Here are a few questions to get you started.' },
+  { sender: 'left', msg: 'What is your name?' },
+  { sender: 'right', msg: 'Sir Lancelot of Camelot', blur: true },
+  { sender: 'left', msg: 'What is your quest?' },
+  { sender: 'right', msg: 'To find the holy grail!', blur: true },
+  { sender: 'left', msg: 'What is your favorite color?' },
+  { sender: 'right', msg: 'Blue!', typing: true, blur: true },
+  { sender: 'left', msg: 'Ok, you may pass.', typing: true },
+]
 
 type NavProps = {backText: string, backUrl: string, forwardText: string, forwardUrl: string}
 
@@ -52,7 +50,7 @@ const Wrapper: FC<{heading: string, subHeading: string, chats: PhonePreviewProps
       </div>
 
       <Routes>
-        <Route path="/">
+        <Route path="*">
           <Route index element={<Nav backText="Back" backUrl="./.." forwardText="Human handover" forwardUrl="./human-handover"/>}/>
           <Route path="human-handover" element={<Nav backText="Back" backUrl="./.." forwardText="Done" forwardUrl="./"/>}/>
         </Route>
@@ -70,7 +68,7 @@ export const QuickLeadsConverterPage: QuickStartPage = () => {
 
   // 2nd page: Human handover
   const [handoverMessage, setHandoverMessage] = useState('')
-  const [agents, setAgents] = useState<Agent[]>([])
+  const [agents, setAgents] = useState<Agent[]>([{ name: 'viktor', email: 'viktor@example.com' }, { name: 'viktor', email: 'viktor@example.com' }])
   const addAgent = (agent: Agent, index: number | null) => setAgents((agents) =>
     (index === null
       ? [...agents, agent]
@@ -86,7 +84,7 @@ export const QuickLeadsConverterPage: QuickStartPage = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Wrapper heading={'Flow Builder'} subHeading="Configure the messages that are displayed on the conversation." chats={chats}/>}>
+      <Route path="/" element={<Wrapper heading={'Flow Builder'} subHeading="Configure the messages that are displayed on the conversation." chats={tmpChats}/>}>
         <Route index element={<FlowBuilder greeting={greeting} setGreeting={setGreeting} questions={questions} setQuestion={setQuestion} addQuestion={addQuestion}/>}/>
         <Route path="human-handover" element={<HumanHandover handoverMessage={handoverMessage} setHandoverMessage={setHandoverMessage} agents={agents} addAgent={addAgent} removeAgent={removeAgent}/>}/>
       </Route>

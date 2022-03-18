@@ -70,8 +70,8 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: PORT,
-    allowedHosts: ['.sinch.com', 'localhost'],
-    // open: true,
+    hot: 'only',
+    allowedHosts: ['.sinch.com', 'localhost', 'localhost:3000', 'localhost:3001'],
     static: {
       directory: path.resolve(__dirname, 'public'),
       publicPath: '/',

@@ -6,7 +6,7 @@ import '@sinch-engage/nectary/textarea'
 import '@sinch-engage/nectary/alert'
 import { StrictMode } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import styles from './App.module.css'
+import styled from 'styled-components'
 import { Home } from './pages/Home'
 import { QuickStartsPages } from './quickstarts/QuickStartsPages'
 import type { FC } from 'react'
@@ -15,15 +15,25 @@ type TApp = {
   baseUrl: string,
 }
 
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  min-height: 100%;
+  box-sizing: border-box;
+  font: var(--sinch-font-body);
+  background-color: var(--sinch-color-snow-500);
+`
+
 export const App: FC<TApp> = ({ baseUrl }) => (
   <StrictMode>
-    <div className={styles.app}>
+    <AppContainer>
       <Router basename={baseUrl}>
         <Routes>
           <Route index element={<Home/>}/>
           <Route path=":id/*" element={<QuickStartsPages/>}/>
         </Routes>
       </Router>
-    </div>
+    </AppContainer>
   </StrictMode>
 )

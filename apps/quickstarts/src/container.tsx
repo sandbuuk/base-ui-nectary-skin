@@ -2,8 +2,8 @@ import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import { filterMessage, isData, isTokenMessage, listenToBus, tokenRequestMessage, sendMessageOnBus } from '@saas/bus'
 import { defineNectaryElements } from '@sinch-engage/nectary/utils'
-import { Fragment } from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
+import { StyleSheetManager } from 'styled-components'
 import { App } from './App'
 import { TokenContext } from './contexts'
 import type { EmotionCache } from '@emotion/cache'
@@ -29,8 +29,6 @@ const tokenOnly = filterMessage(isTokenMessage)
 const customRegistry = new CustomElementRegistry()
 
 defineNectaryElements(customRegistry)
-
-const StyleSheetManager = Fragment // Change to use StyledComponents
 
 class SinchReactApp extends HTMLElement {
   appElement: HTMLElement
@@ -82,6 +80,8 @@ class SinchReactApp extends HTMLElement {
     }
 
     render(
+      // Make sure styled-components insert the styles inside the Shadow DOM.
+      // @ts-expect-error Should be able to remove this line when types include Shadow DOM nodes.
       <StyleSheetManager target={this.shadowRoot}>
         <CacheProvider value={this.cache}>
           <TokenContext.Provider value={this.token}>

@@ -1,6 +1,6 @@
-import styles from './SubHeading.module.css'
-import type { FC } from 'react'
+import styled from 'styled-components'
 
-export const SubHeading: FC = ({ children }) => (
-  <p className={styles.root}>{children}</p>
-)
+export const SubHeading = styled.p`
+  font: var(--sinch-font-body);
+  margin-bottom: 40px;
+`

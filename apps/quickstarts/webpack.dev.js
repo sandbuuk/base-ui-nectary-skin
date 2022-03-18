@@ -89,6 +89,8 @@ module.exports = {
     host: 'localhost',
     port: PORT,
     historyApiFallback: true,
+    hot: 'only',
+    allowedHosts: ['.sinch.com', 'localhost', 'localhost:3000', 'localhost:3001'],
     static: {
       directory: path.resolve(__dirname, 'public'),
       publicPath: '/',

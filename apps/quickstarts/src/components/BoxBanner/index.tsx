@@ -1,7 +1,8 @@
-import classnames from 'classnames'
-import styles from './BoxBanner.module.css'
-import type { FC } from 'react'
+import styled from 'styled-components'
 
-export const BoxBanner: FC<JSX.IntrinsicElements['div']> = (props) => (
-  <div {...props} className={classnames(props.className, styles.root)}/>
-)
+export const BoxBanner = styled.div`
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 32px;
+`

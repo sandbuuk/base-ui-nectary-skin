@@ -1,6 +1,10 @@
-import styles from './MainHeading.module.css'
-import type { FC } from 'react'
+import styled from 'styled-components'
 
-export const MainHeading: FC = ({ children }) => (
-  <h2 className={styles.root}>{children}</h2>
-)
+export const MainHeading = styled.h2`
+  font: var(--sinch-font-title-1);
+  margin-bottom: 48px;
+
+  & + p {
+    margin-top: -40px;
+  }
+`

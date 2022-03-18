@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styled from 'styled-components'
 import { Ruler } from '../../components/Ruler'
 import type { Agent } from './types'
 import type { FC } from 'react'
@@ -6,7 +7,7 @@ import '@sinch-engage/nectary/textarea'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/button'
 
-type Props = {
+type HumanHandoverProps = {
   handoverMessage: string,
   setHandoverMessage: (s: string) => void,
   agents: Agent[],
@@ -14,9 +15,18 @@ type Props = {
   removeAgent: (i: number) => void,
 }
 
+const Table = styled.table`
+  border: 1px red solid;
+  border-collapse: collapse;
+  
+  tr {
+    border-top: 10px solid green;
+  }
+`
+
 const MAX_AGENTS = 5
 
-export const HumanHandover: FC<Props> = ({ handoverMessage, setHandoverMessage, agents, addAgent }) => {
+export const HumanHandover: FC<HumanHandoverProps> = ({ handoverMessage, setHandoverMessage, agents, addAgent, removeAgent }) => {
   const [agentName, setAgentName] = useState<string>('')
   const [agentEmail, setAgentEmail] = useState<string>('')
   const [invalidNameMessage, setInvalidNameMessage] = useState<string | undefined>(undefined)
@@ -25,19 +35,21 @@ export const HumanHandover: FC<Props> = ({ handoverMessage, setHandoverMessage, 
 
   const validInputs = (): boolean => {
     // Validate email.
-    if (agentName.length < 0) {
+    if (agentName.length == 0) {
       setInvalidNameMessage('You must give an agent name.')
+
+      return false
+    }
+
+    setInvalidNameMessage(undefined)
+
+    if (!/.@./.test(agentEmail)) {
+      setInvalidEmailMessage('You must give an agent name.')
 
       return false
     }
 
     setInvalidEmailMessage(undefined)
-
-    if (!/.@./.test(agentEmail)) {
-      setInvalidNameMessage('You must give an agent name.')
-
-      return false
-    }
 
     return true
   }
@@ -57,9 +69,9 @@ export const HumanHandover: FC<Props> = ({ handoverMessage, setHandoverMessage, 
     <section style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
       <sinch-textarea
         label="Human handover message"
-        invalidText={invalidNameMessage}
         additionalText={(400 - handoverMessage.length).toString()}
         value={handoverMessage}
+        placeholder={'I am transferring you to a human agent.'}
         onChange={(e) => setHandoverMessage(e.nativeEvent.detail)}
       />
 
@@ -67,30 +79,50 @@ export const HumanHandover: FC<Props> = ({ handoverMessage, setHandoverMessage, 
 
       <sinch-input
         label="Agent name"
-        invalidText={invalidEmailMessage}
         value={agentName}
+        invalidText={invalidNameMessage}
         disabled={agents.length === MAX_AGENTS && selectedAgent === null}
-        placeholder="John"
+        placeholder="Insert name"
         onChange={(e) => setAgentName(e.nativeEvent.detail)}
       />
 
       <sinch-input
         label="Agent e-mail"
         value={agentEmail}
+        invalidText={invalidEmailMessage}
         disabled={agents.length === MAX_AGENTS && selectedAgent === null}
-        placeholder="john@example.com"
+        placeholder="Insert e-mail"
         onChange={(e) => setAgentEmail(e.nativeEvent.detail)}
       />
 
       <sinch-button disabled={agents.length === MAX_AGENTS} style={{ width: 'fit-content' }} type="cta-primary" text={`Add more agents (Up to ${MAX_AGENTS - agents.length})`} onClick={onAddAgent}/>
 
-      {agents.map((agent, i) => (
-        <>
-          <div key={`${i}name`}>{agent.name}</div>
-          <div key={`${i}email`}>{agent.email}</div>
-          <Ruler horizontal/>
-        </>
-      ))}
+      {agents.length > 0 && (
+        <Table>
+          <thead><tr><th>Name</th><th>E-mail</th><th>Action</th></tr></thead>
+          <tbody>
+            {agents.map(({ name, email }, i) => (
+              <tr key={i}>
+                <td>{name}</td>
+                <td>{email}</td>
+                <td>
+                  <sinch-button
+                    text="Edit"
+                    type="primary"
+                    small
+                    onClick={() => {
+                      setAgentName(name)
+                      setAgentEmail(email)
+                      setSelectedAgent(i)
+                    }}
+                  />
+                  <sinch-button text="Delete" type="destructive" small onClick={() => removeAgent(i)}/>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
     </section>
   )
 }
