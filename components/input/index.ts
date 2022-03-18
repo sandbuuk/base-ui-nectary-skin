@@ -8,7 +8,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { DOMAttributes, FocusEvent, SyntheticEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -246,6 +246,7 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   disabled?: boolean,
   'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
+  onKeyPress?: DOMAttributes<TSinchInputElement>['onKeyPress'],
   onFocus?: (e: FocusEvent<TSinchInputElement>) => void,
   onBlur?: (e: FocusEvent<TSinchInputElement>) => void,
 }
