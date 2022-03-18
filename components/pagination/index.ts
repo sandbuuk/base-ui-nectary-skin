@@ -4,6 +4,7 @@ import {
   defineCustomElement,
   updateAttribute,
   getIntegerAttribute,
+  setClass,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -15,9 +16,6 @@ const FIRST_BTN_INDEX = 0
 const LAST_BTN_INDEX = NUM_BUTTONS - 1
 const DOTS_LEFT_INDEX = 1
 const DOTS_RIGHT_INDEX = LAST_BTN_INDEX - 1
-const setClass = (elem: Element, name: string, isSet: boolean) => {
-  isSet ? elem.classList.add(name) : elem.classList.remove(name)
-}
 
 const template = document.createElement('template')
 

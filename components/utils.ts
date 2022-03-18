@@ -183,3 +183,7 @@ export const getRect = (el: HTMLElement): TRect => {
 
   return { x, y, width, height }
 }
+
+export const setClass = (elem: Element, name: string, isSet: boolean) => {
+  isSet ? elem.classList.add(name) : elem.classList.remove(name)
+}
