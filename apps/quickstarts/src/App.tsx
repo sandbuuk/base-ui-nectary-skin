@@ -4,9 +4,10 @@ import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/select'
 import '@sinch-engage/nectary/textarea'
 import '@sinch-engage/nectary/alert'
-import { StrictMode } from 'react'
+import { StrictMode, useRef } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styled from 'styled-components'
+import { ModalContext } from './contexts'
 import { Home } from './pages/Home'
 import { QuickStartsPages } from './quickstarts/QuickStartsPages'
 import type { FC } from 'react'
@@ -25,15 +26,22 @@ const AppContainer = styled.div`
   background-color: var(--sinch-color-snow-500);
 `
 
-export const App: FC<TApp> = ({ baseUrl }) => (
-  <StrictMode>
-    <AppContainer>
-      <Router basename={baseUrl}>
-        <Routes>
-          <Route index element={<Home/>}/>
-          <Route path=":id/*" element={<QuickStartsPages/>}/>
-        </Routes>
-      </Router>
-    </AppContainer>
-  </StrictMode>
-)
+export const App: FC<TApp> = ({ baseUrl }) => {
+  const modalRef = useRef(null)
+
+  return (
+    <StrictMode>
+      <AppContainer>
+        <ModalContext.Provider value={modalRef}>
+          <Router basename={baseUrl}>
+            <Routes>
+              <Route index element={<Home/>}/>
+              <Route path=":id/*" element={<QuickStartsPages/>}/>
+            </Routes>
+          </Router>
+        </ModalContext.Provider>
+        <div ref={modalRef}/>
+      </AppContainer>
+    </StrictMode>
+  )
+}
