@@ -16,7 +16,7 @@ module.exports = {
   ],
   output: {
     chunkFilename: '[name].[chunkhash].js',
-    publicPath: '/',
+    publicPath: 'auto',
     pathinfo: true,
   },
   resolve: {
@@ -107,6 +107,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './public/index.html'),
+      publicPath: '/',
     }),
   ],
 }
