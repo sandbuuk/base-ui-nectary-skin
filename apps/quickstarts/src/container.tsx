@@ -1,12 +1,9 @@
-import createCache from '@emotion/cache'
-import { CacheProvider } from '@emotion/react'
 import { filterMessage, isData, isTokenMessage, listenToBus, tokenRequestMessage, sendMessageOnBus } from '@saas/bus'
 import { defineNectaryElements } from '@sinch-engage/nectary/utils'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { StyleSheetManager } from 'styled-components'
 import { App } from './App'
 import { TokenContext } from './contexts'
-import type { EmotionCache } from '@emotion/cache'
 import type { TOKEN_PAYLOAD } from '@saas/bus'
 
 const appName = 'sinch-quickstarts-app'
@@ -32,7 +29,6 @@ defineNectaryElements(customRegistry)
 
 class SinchReactApp extends HTMLElement {
   appElement: HTMLElement
-  cache: EmotionCache
   token: TOKEN_PAYLOAD = null
   unsubscribeTokenBus: () => void
 
@@ -57,12 +53,6 @@ class SinchReactApp extends HTMLElement {
     this.appElement = shadowRoot.getElementById(appName)!
     Object.defineProperty(this.appElement, 'ownerDocument', { value: shadowRoot })
 
-    this.cache = createCache({
-      key: 'css',
-      prepend: true,
-      container: shadowRoot as any as HTMLElement,
-    })
-
     this.unsubscribeTokenBus = listenToBus(tokenOnly((message) => {
       // TODO: This seems way too strict? Not even sure what is going on here, isData does return a bool.
       // Could this rule actually be so dumb to not allow type narrowing?
@@ -83,12 +73,10 @@ class SinchReactApp extends HTMLElement {
       // Make sure styled-components insert the styles inside the Shadow DOM.
       // @ts-expect-error Should be able to remove this line when types include Shadow DOM nodes.
       <StyleSheetManager target={this.shadowRoot}>
-        <CacheProvider value={this.cache}>
-          <TokenContext.Provider value={this.token}>
-            {/** TODO: This basename should really come from the shell. The shell decides where to mount it. */}
-            <App baseUrl="/quick-starts"/>
-          </TokenContext.Provider>
-        </CacheProvider>
+        <TokenContext.Provider value={this.token}>
+          {/** TODO: This basename should really come from the shell. The shell decides where to mount it. */}
+          <App baseUrl="/quick-starts"/>
+        </TokenContext.Provider>
       </StyleSheetManager>,
       this.appElement
     )
