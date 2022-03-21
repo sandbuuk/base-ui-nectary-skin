@@ -1,6 +1,6 @@
 import '@sinch-engage/nectary/tag'
 import styled from 'styled-components'
-import { TagGroup } from '../TagGroup'
+import { TagGroup } from './TagGroup'
 import type { FC } from 'react'
 
 type Tag = {
