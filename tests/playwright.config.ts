@@ -81,11 +81,11 @@ const config: PlaywrightTestConfig = {
   },
   workers: 3,
   retries: 1,
-  // expect: {
-  //   toMatchSnapshot: {
-  //     threshold: 1,
-  //   },
-  // },
+  expect: {
+    toMatchSnapshot: {
+      threshold: 0.02,
+    },
+  },
 }
 
 export default config
