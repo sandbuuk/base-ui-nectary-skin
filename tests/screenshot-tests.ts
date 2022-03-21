@@ -75,6 +75,8 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
       info.snapshotPath = overrideScreenshotPath(info.snapshotPath)
 
       await page.goto(pageUrl, { waitUntil: 'networkidle' })
+      await page.waitForSelector(elementSelector)
+      await page.evaluate(() => document.fonts.ready)
 
       // Optionally subscribe to page console output
       // page.on('console', (msg) => console.log(msg.text()))
