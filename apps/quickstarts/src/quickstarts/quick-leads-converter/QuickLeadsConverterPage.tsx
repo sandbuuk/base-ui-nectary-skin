@@ -6,20 +6,34 @@ import { PhonePreview } from '../../components/PhonePreview/PhonePreview'
 import { SubHeading } from '../../components/SubHeading'
 import { FlowBuilder } from './FlowBuilder'
 import { HumanHandover } from './HumanHandover'
-import type { PhonePreviewProps } from '../../components/PhonePreview/PhonePreview'
+import type { Message, PhonePreviewProps } from '../../components/PhonePreview/PhonePreview'
 import type { QuickStartPage } from '../types'
 import type { Agent } from './types'
 import type { FC } from 'react'
 
-const tmpChats: PhonePreviewProps['chats'] = [
-  { sender: 'left', msg: 'Hello and welcome! Here are a few questions to get you started.' },
-  { sender: 'left', msg: 'What is your name?' },
-  { sender: 'right', msg: 'Sir Lancelot of Camelot', blur: true },
-  { sender: 'left', msg: 'What is your quest?' },
-  { sender: 'right', msg: 'To find the holy grail!', blur: true },
-  { sender: 'left', msg: 'What is your favorite color?' },
-  { sender: 'right', msg: 'Blue!', typing: true, blur: true },
-  { sender: 'left', msg: 'Ok, you may pass.', typing: true },
+const questionAnswers = [
+  'Sir Lancelot of Camelot',
+  'To seek the Holy Grail',
+  'Blue',
+  'Sir Robin of Camelot',
+  'To seek the Holy Grail',
+  'Blue. No yellooow..',
+]
+  .map<Message>((x) => ({ msg: x, sender: 'right', blur: true }))
+
+const buildChats = (greeting: string, questions: string[], handoverMessage: string, agent: Agent | undefined): Message[] => [
+  { msg: 'Hello!', sender: 'right' },
+  // The first greeting.
+  { msg: greeting, sender: 'left' },
+  // The questions mixed in with the blurred answers.
+  ...(questions
+    .map<Message>((q) => ({ msg: q, sender: 'left' }))
+    .map((q, i) => (q.msg != '' ? [q, questionAnswers[i]] : [q]))
+    .reduce((acc, next) => acc.concat(next), [])),
+  // Human handover message.
+  { msg: handoverMessage, sender: 'left' },
+  // Agent answering.
+  ...((agent != null) ? [{ msg: `Hi! This is ${agent.name}`, sender: 'left' } as Message] : []),
 ]
 
 type NavProps = {backText: string, backUrl: string, forwardText: string, forwardUrl: string}
@@ -50,10 +64,8 @@ const Wrapper: FC<{heading: string, subHeading: string, chats: PhonePreviewProps
       </div>
 
       <Routes>
-        <Route path="*">
-          <Route index element={<Nav backText="Back" backUrl="./.." forwardText="Human handover" forwardUrl="./human-handover"/>}/>
-          <Route path="human-handover" element={<Nav backText="Back" backUrl="./.." forwardText="Done" forwardUrl="./"/>}/>
-        </Route>
+        <Route index element={<Nav backText="Back" backUrl="./.." forwardText="Human handover" forwardUrl="./human-handover"/>}/>
+        <Route path="human-handover" element={<Nav backText="Back" backUrl="./.." forwardText="Done" forwardUrl="../success"/>}/>
       </Routes>
     </BoxBanner>
   </div>
@@ -68,25 +80,24 @@ export const QuickLeadsConverterPage: QuickStartPage = () => {
 
   // 2nd page: Human handover
   const [handoverMessage, setHandoverMessage] = useState('')
-  const [agents, setAgents] = useState<Agent[]>([{ name: 'viktor', email: 'viktor@example.com' }, { name: 'viktor', email: 'viktor@example.com' }])
+  const [agents, setAgents] = useState<Agent[]>([])
   const addAgent = (agent: Agent, index: number | null) => setAgents((agents) =>
     (index === null
       ? [...agents, agent]
       : ([] as Agent[]).concat(agents.slice(0, index), agent, agents.slice(index + 1))))
   const removeAgent = (i: number) => setAgents((agents) => ([] as Agent[]).concat(agents.slice(0, i), agents.slice(i + 1)))
 
-  const chats: PhonePreviewProps['chats'] = [
-    greeting,
-    ...questions,
-    handoverMessage,
-    ...(agents.length > 0 ? [`Hi! This is ${agents[0].name}`] : []),
-  ].map((x) => ({ msg: x, sender: 'left' }))
+  const chats = buildChats(greeting, questions, handoverMessage, agents[0])
 
   return (
     <Routes>
-      <Route path="/" element={<Wrapper heading={'Flow Builder'} subHeading="Configure the messages that are displayed on the conversation." chats={tmpChats}/>}>
-        <Route index element={<FlowBuilder greeting={greeting} setGreeting={setGreeting} questions={questions} setQuestion={setQuestion} addQuestion={addQuestion}/>}/>
-        <Route path="human-handover" element={<HumanHandover handoverMessage={handoverMessage} setHandoverMessage={setHandoverMessage} agents={agents} addAgent={addAgent} removeAgent={removeAgent}/>}/>
+      <Route path="/">
+        <Route path="success" element={<div>Success</div>}/>
+        <Route path="failure" element={<div>failed..</div>}/>
+        <Route path="*" element={<Wrapper heading={'Flow Builder'} subHeading="Configure the messages that are displayed on the conversation." chats={chats}/>}>
+          <Route index element={<FlowBuilder greeting={greeting} setGreeting={setGreeting} questions={questions} setQuestion={setQuestion} addQuestion={addQuestion}/>}/>
+          <Route path="human-handover" element={<HumanHandover handoverMessage={handoverMessage} setHandoverMessage={setHandoverMessage} agents={agents} addAgent={addAgent} removeAgent={removeAgent}/>}/>
+        </Route>
       </Route>
     </Routes>
   )

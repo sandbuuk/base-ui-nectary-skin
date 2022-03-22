@@ -11,7 +11,8 @@ const Container = styled.div`
   & > * {
     min-width: 250px;
     max-width: 350px;
-  }`
+  }
+`
 
 export const QuickStartsCards = () => (
   <Container>

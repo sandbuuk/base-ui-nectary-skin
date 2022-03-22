@@ -34,8 +34,9 @@ We have typings for `QS Pages` and `QS Cards` in the `types.d.ts` file in this f
 ```ts
 import { lazy } from 'react'
 import { QuickLeadsConverterCard } from './QuickLeadsConverterCard'
+import type { QuickStart } from '../types'
 
-export const quickLeadsConverter = {
+export const quickLeadsConverter: QuickStart = {
   card: QuickLeadsConverterCard,
   page: lazy(() => import('./QuickLeadsConverterPage')
     .then(({ QuickLeadsConverterPage }) => ({ default: QuickLeadsConverterPage }))),

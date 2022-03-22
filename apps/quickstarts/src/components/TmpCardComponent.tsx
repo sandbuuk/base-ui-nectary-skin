@@ -31,6 +31,8 @@ const TmpCardSection = styled.section`
     min-height: 268px;
     height: fit-content;
     padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
   }
 `
 
@@ -53,8 +55,10 @@ const Header = styled.header`
 
   & > * {
     flex: 0;
-    align-self: start;
-    justify-self: end;
+  }
+
+  & > ${TagGroup} {
+    margin-top: auto;
   }
 `
 

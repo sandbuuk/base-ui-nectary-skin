@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { Ruler } from '../../components/Ruler'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/textarea'
@@ -28,10 +29,9 @@ export const FlowBuilder: FC<Props> = ({ greeting, setGreeting, questions, setQu
     <p>You can add up to 6 questions before transfering your customer to your agent.</p>
 
     {questions.map((question, i) => (
-      <>
+      <Fragment key={i}>
         <sinch-input
           style={{ width: 'auto' }}
-          key={`${i}input`}
           label={`Question ${i + 1}`}
           additionalText={(400 - question.length).toString()}
           value={question}
@@ -39,9 +39,8 @@ export const FlowBuilder: FC<Props> = ({ greeting, setGreeting, questions, setQu
             setQuestion(i, e.nativeEvent.detail)
           }}
         />
-
-        {(i + 1) != questions.length && <Ruler horizontal key={`${i}ruler`}/>}
-      </>
+        {(i + 1) != questions.length && <Ruler horizontal/>}
+      </Fragment>
     ))}
     <sinch-button style={{ width: 'fit-content' }} type="cta-primary" text="Add new question" onClick={addQuestion}/>
   </section>

@@ -16,11 +16,31 @@ type HumanHandoverProps = {
 }
 
 const Table = styled.table`
-  border: 1px red solid;
   border-collapse: collapse;
+  margin-top: 100px;
+  text-align: left;
   
-  tr {
-    border-top: 10px solid green;
+  tbody tr {
+    border-top: 1px solid #999999;
+  }
+
+  th {
+    padding: 5px 16px;
+  }
+
+  td {
+    padding: 24px 16px;
+  }
+
+  td:last-child {
+    white-space: nowrap;
+  }
+
+  sinch-button {
+    margin-right: 13px;
+  }
+  sinch-button:last-child {
+    margin-right: 0;
   }
 `
 
@@ -44,7 +64,7 @@ export const HumanHandover: FC<HumanHandoverProps> = ({ handoverMessage, setHand
     setInvalidNameMessage(undefined)
 
     if (!/.@./.test(agentEmail)) {
-      setInvalidEmailMessage('You must give an agent name.')
+      setInvalidEmailMessage('Enter a valid e-mail address.')
 
       return false
     }
@@ -95,7 +115,15 @@ export const HumanHandover: FC<HumanHandoverProps> = ({ handoverMessage, setHand
         onChange={(e) => setAgentEmail(e.nativeEvent.detail)}
       />
 
-      <sinch-button disabled={agents.length === MAX_AGENTS} style={{ width: 'fit-content' }} type="cta-primary" text={`Add more agents (Up to ${MAX_AGENTS - agents.length})`} onClick={onAddAgent}/>
+      <sinch-button
+        disabled={agents.length === MAX_AGENTS}
+        style={{ width: 'fit-content' }}
+        type="cta-primary"
+        text={selectedAgent != null
+          ? 'Save changes'
+          : `Add more agents (Up to ${MAX_AGENTS - agents.length})`}
+        onClick={onAddAgent}
+      />
 
       {agents.length > 0 && (
         <Table>
