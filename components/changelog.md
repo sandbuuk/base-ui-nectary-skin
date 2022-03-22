@@ -1,3 +1,18 @@
+## v0.10.0
+
+* 💥 split button type `cta` to `cta-primary` and `cta-secondary`
+* 💥 require `aria-label` React prop for interactive components
+* 💥 refactor `sinch-select` component using `sinch-dropdown`
+* 💥 change slot name `select` to `option` in `sinch-select` component
+* ➕ add `sinch-dropdown` component
+* ➕ add `invalid` property to `sinch-checkbox`
+* ➕ add icon only `sinch-button`
+* ➕ add `onKeyPress` handler to `sinch-input`, `sinch-textarea` React type
+* ➕ enable font-face `display: swap` in `theme.css`
+* 🐞 fix `sinch-input` and `sinch-textarea` cursor position when typing
+* 🐞 fix `sinch-input` and `sinch-textarea` icon colors
+* 🐞 improve accessibility attributes
+
 ## v0.9.0
 
 * ➕ add `sinch-pagination` component
