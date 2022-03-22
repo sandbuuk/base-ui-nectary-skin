@@ -3,12 +3,16 @@
   display: inline-block;
   vertical-align: middle;
   outline: none;
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
 }
 
 #wrapper {
   position: relative;
-  width: 100%;
-  box-sizing: border-box;
+}
+
+sinch-dropdown {
+  display: block;
 }
 
 #button {
@@ -26,6 +30,11 @@
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
   background-color: var(--sinch-color-snow-100);
+  cursor: pointer;
+}
+
+#button:focus {
+  border-color: var(--sinch-color-stormy-300);
 }
 
 #dropdown-icon {
@@ -44,14 +53,11 @@
 #button:disabled {
   border-color: var(--sinch-color-snow-500);
   color: var(--sinch-color-stormy-100);
+  cursor: initial;
 }
 
 #button:disabled #dropdown-icon {
   fill: var(--sinch-color-stormy-100);
-}
-
-#button:focus {
-  border-color: var(--sinch-color-stormy-300);
 }
 
 :host([invalidtext]:not([invalidtext=""])) #button:not(:disabled) {
@@ -152,11 +158,6 @@
   overflow-y: auto;
 }
 
-#button[aria-expanded="true"] {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
 #button[aria-expanded="true"] ~ #listbox {
   display: block;
 }
@@ -164,28 +165,21 @@
 
 <div id="wrapper">
   <div id="top">
-    <label id="label" for="button"></label>
+    <label id="label" for="dropdown"></label>
     <slot name="tooltip"></slot>
     <span id="optional"></span>
   </div>
-  <button
-    id="button"
-    aria-haspopup="listbox"
-    aria-expanded="false"
-    aria-labelledby="button"
-  >
-    <span id="content"></span>
-    <svg id="dropdown-icon" width="12" height="8" aria-hidden="true">
-      <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
-    </svg>
-  </button>
+  <sinch-dropdown id="dropdown">
+    <button slot="target" id="button">
+      <span id="content"></span>
+      <svg id="dropdown-icon" width="12" height="8" aria-hidden="true">
+        <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
+      </svg>
+    </button>
+    <slot name="option" slot="option"></slot>
+  </sinch-dropdown>
   <div id="bottom">
     <span id="invalid"></span>
     <span id="additional"></span>
-  </div>
-  <div id="listbox" tabindex="-1">
-    <div id="listbox-body">
-      <slot name="select"></slot>
-    </div>
   </div>
 </div>

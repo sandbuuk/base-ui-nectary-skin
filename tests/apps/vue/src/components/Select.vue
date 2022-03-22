@@ -12,14 +12,14 @@
     @focusin="onFocus"
     @focusout="onBlur">
     <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-help-tooltip>
-    <sinch-select-option value="1" text="Option 1 value" slot="select">
+    <sinch-select-option value="1" text="Option 1 value" slot="option">
       <sinch-icon-open-in-new slot="icon" size="20"/>
     </sinch-select-option>
-    <sinch-select-option value="2" text="Option 2 value" slot="select" disabled>
+    <sinch-select-option value="2" text="Option 2 value" slot="option" disabled>
       <sinch-icon-open-in-new slot="icon" size="20"/>
     </sinch-select-option>
-    <sinch-select-option value="3" text="Option 3 value" slot="select"/>
-    <sinch-select-option value="4" text="Option 4 value" slot="select"/>
+    <sinch-select-option value="3" text="Option 3 value" slot="option"/>
+    <sinch-select-option value="4" text="Option 4 value" slot="option"/>
   </sinch-select>
 </template>
 

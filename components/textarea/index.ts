@@ -8,7 +8,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { DOMAttributes, FocusEvent, SyntheticEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -20,6 +20,8 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   #$optionalText: HTMLSpanElement
   #$additionalText: HTMLSpanElement
   #$invalidText: HTMLSpanElement
+  #selectionStart: number | null = null
+  #selectionEnd: number | null = null
 
   constructor() {
     super()
@@ -63,7 +65,17 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.#$input.value = newVal ?? ''
+        const nextVal = newVal ?? ''
+
+        if (nextVal !== this.#$input.value) {
+          this.#$input.value = nextVal
+
+          const isNextCursorEnd = this.#selectionStart === this.#selectionEnd && (this.#selectionStart === null || this.#selectionStart === nextVal.length)
+
+          if (!isNextCursorEnd) {
+            this.#$input.setSelectionRange(this.#selectionStart, this.#selectionEnd)
+          }
+        }
 
         break
       }
@@ -179,16 +191,33 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   #onInput = (e: Event) => {
     e.stopPropagation()
 
-    const value = this.#$input.value
+    const nextValue = this.#$input.value
+    const prevValue = this.value
 
-    this.#$input.value = this.value
+    if (prevValue !== nextValue) {
+      const nextSelectionStart = this.#$input.selectionStart
+      const nextSelectionEnd = this.#$input.selectionEnd
+      const prevSelectionStart = this.#selectionStart
+      const prevSelectionEnd = this.#selectionEnd
+      const isPrevCursorEnd = prevSelectionStart === prevSelectionEnd && prevSelectionStart === prevValue.length
 
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: value,
-        bubbles: true,
-      })
-    )
+      // Reset input value to enforce controlled state
+      this.#$input.value = prevValue
+
+      if (!isPrevCursorEnd) {
+        this.#$input.setSelectionRange(prevSelectionStart, prevSelectionEnd)
+      }
+
+      this.#selectionStart = nextSelectionStart
+      this.#selectionEnd = nextSelectionEnd
+
+      this.dispatchEvent(
+        new CustomEvent('change', {
+          detail: nextValue,
+          bubbles: true,
+        })
+      )
+    }
   }
 })
 
@@ -214,6 +243,7 @@ export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   disabled?: boolean,
   'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
+  onKeyPress?: DOMAttributes<TSinchTextareaElement>['onKeyPress'],
   onFocus?: (e: FocusEvent<TSinchTextareaElement>) => void,
   onBlur?: (e: FocusEvent<TSinchTextareaElement>) => void,
 }

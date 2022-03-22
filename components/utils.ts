@@ -178,8 +178,12 @@ export const getFirstCSValue = (acc: string): string => {
   return acc.split(',')[0]
 }
 
-export const getRect = (el: HTMLElement): TRect => {
+export const getRect = (el: Element): TRect => {
   const { x, y, width, height } = el.getBoundingClientRect()
 
   return { x, y, width, height }
+}
+
+export const setClass = (elem: Element, name: string, isSet: boolean) => {
+  isSet ? elem.classList.add(name) : elem.classList.remove(name)
 }

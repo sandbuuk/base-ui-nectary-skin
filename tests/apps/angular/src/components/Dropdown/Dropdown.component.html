@@ -1,0 +1,23 @@
+<sinch-dropdown
+  [attr.disabled]="isDisabled"
+  [attr.maxvisibleitems]="maxVisibleItems"
+  [attr.orientation]="orientation"
+  (focusin)="onFocus()"
+  (focusout)="onBlur()"
+  [value]="value"
+  (change)="onChange($event)">
+  <sinch-button
+    slot="target"
+    type="cta-secondary"
+    text="Some content"
+    aria-label="Button">
+  </sinch-button>
+  <sinch-dropdown-option value="1" text="Option 1 value long long long" slot="option">
+    <sinch-icon-open-in-new slot="icon" size="20"></sinch-icon-open-in-new>
+  </sinch-dropdown-option>
+  <sinch-dropdown-option value="2" text="Option 2 value" slot="option" disabled>
+    <sinch-icon-open-in-new slot="icon" size="20"></sinch-icon-open-in-new>
+  </sinch-dropdown-option>
+  <sinch-dropdown-option value="3" text="Option 3 value" slot="option"></sinch-dropdown-option>
+  <sinch-dropdown-option value="4" text="Option 4 value" slot="option"></sinch-dropdown-option>
+</sinch-dropdown>

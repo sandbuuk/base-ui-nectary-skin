@@ -3,6 +3,7 @@ import { Accordion } from './components/Accordion'
 import { Alert } from './components/Alert'
 import { Button } from './components/Button'
 import { Checkbox } from './components/Checkbox'
+import { Dropdown } from './components/Dropdown'
 import { Input } from './components/Input'
 import { Link } from './components/Link'
 import { Pagination } from './components/Pagination'
@@ -40,6 +41,12 @@ const mapElement = (url: URL) => {
     case '/checkbox': {
       return (
         <Checkbox search={url.searchParams}/>
+      )
+    }
+
+    case '/dropdown': {
+      return (
+        <Dropdown search={url.searchParams}/>
       )
     }
 
