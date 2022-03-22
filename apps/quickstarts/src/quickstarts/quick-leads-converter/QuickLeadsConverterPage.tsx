@@ -1,15 +1,21 @@
-import { useState } from 'react'
-import { Route, Routes, Outlet, Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { createPortal } from 'react-dom'
+import { Route, Routes, Outlet, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import { BoxBanner } from '../../components/BoxBanner'
 import { MainHeading } from '../../components/MainHeading'
 import { PhonePreview } from '../../components/PhonePreview/PhonePreview'
 import { SubHeading } from '../../components/SubHeading'
+import { ModalContext, TokenContext } from '../../contexts'
 import { FlowBuilder } from './FlowBuilder'
 import { HumanHandover } from './HumanHandover'
+import congratsImage from './congratsimage.jpg'
+import errorImage from './erroDialogImage.png'
+import { postQuickLeadsConverter } from './postQuickLeadsConverter'
 import type { Message, PhonePreviewProps } from '../../components/PhonePreview/PhonePreview'
 import type { QuickStartPage } from '../types'
 import type { Agent } from './types'
-import type { FC } from 'react'
+import type { FC, ReactNode } from 'react'
 
 const questionAnswers = [
   'Sir Lancelot of Camelot',
@@ -38,38 +44,137 @@ const buildChats = (greeting: string, questions: string[], handoverMessage: stri
 
 type NavProps = {backText: string, backUrl: string, forwardText: string, forwardUrl: string}
 
-const Nav: FC<NavProps> = ({ backText, backUrl, forwardText, forwardUrl }) => (
-  <div>
-    <Link to={backUrl}>{backText}</Link>
-    <span> </span>
-    <Link to={forwardUrl}>{forwardText}</Link>
-  </div>
-)
+const NavContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 60px 0 0 0;
+`
 
-const Wrapper: FC<{heading: string, subHeading: string, chats: PhonePreviewProps['chats']}> = ({ heading, subHeading, chats }) => (
-  <div>
-    <MainHeading>{heading}</MainHeading>
-    <SubHeading>{subHeading}</SubHeading>
+const Wrapper: FC<{heading: string, subHeading: string, chats: PhonePreviewProps['chats'], save: () => void, dialog: ReactNode}> = ({ heading, subHeading, chats, save, dialog }) => {
+  const nav = useNavigate()
 
-    <BoxBanner>
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', position: 'relative', gap: '40px', alignItems: 'stretch' }}>
-        <div style={{ marginLeft: 'auto', width: '300px', flex: '1' }}/>
+  return (
+    <div>
+      <MainHeading>{heading}</MainHeading>
+      <SubHeading>{subHeading}</SubHeading>
 
-        <Outlet/>
+      <BoxBanner>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', position: 'relative', gap: '40px', alignItems: 'stretch' }}>
+          <div style={{ marginLeft: 'auto', width: '300px', flex: '1' }}/>
 
-        <section style={{ position: 'relative', marginRight: 'auto', flex: '1' }}>
-          <p style={{ margin: '0 26px 9px', color: 'var(--sinch-color-text-muted)', font: 'var(--sinch-font-small-text)' }}>User preview</p>
-          <PhonePreview chats={chats}/>
-        </section>
-      </div>
+          <Outlet/>
 
-      <Routes>
-        <Route index element={<Nav backText="Back" backUrl="./.." forwardText="Human handover" forwardUrl="./human-handover"/>}/>
-        <Route path="human-handover" element={<Nav backText="Back" backUrl="./.." forwardText="Done" forwardUrl="../success"/>}/>
-      </Routes>
-    </BoxBanner>
-  </div>
-)
+          <section style={{ position: 'relative', marginRight: 'auto', flex: '1' }}>
+            <p style={{ margin: '0 26px 9px', color: 'var(--sinch-color-text-muted)', font: 'var(--sinch-font-small-text)' }}>User preview</p>
+            <PhonePreview chats={chats}/>
+          </section>
+        </div>
+
+        <Routes>
+          <Route
+            index
+            element={(
+              <NavContainer>
+                <sinch-button onClick={() => nav('./..')} type="destructive" text="Discard"/>
+                <sinch-button onClick={() => nav('./human-handover')} type="primary" text="Human handover"/>
+              </NavContainer>
+)}
+          />
+          <Route
+            path="human-handover"
+            element={(
+              <NavContainer>
+                <sinch-button onClick={() => nav('./')} type="secondary" text="Back"/>
+                <sinch-button onClick={save} type="primary" text="Save"/>
+              </NavContainer>
+)}
+          />
+        </Routes>
+      </BoxBanner>
+      {dialog}
+    </div>
+  )
+}
+
+const DialogContainer = styled.div`
+  width: 700px;
+  max-width: 800px;
+  margin: 0 auto;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  /*z-index: 999 */
+  background-color: #ffffff;
+  box-shadow: 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .3);
+  padding: 10px;
+  border-radius: 15px;
+
+  text-align: center;
+
+  & > h2 {
+    font: var(--sinch-font-title-2);
+  }
+
+  & > p {
+    font: var(--sinch-font-title-2);
+  }
+
+  & > img {
+    width:300px;
+    height: 250px;
+    margin-bottom: 5%;
+  }
+`
+
+const DialogCloseButton = styled.button`
+  margin-bottom: 15px;
+  padding: 3px 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  align-self: flex-end;
+`
+
+const Dialog: FC<{close: () => void, success: boolean | null}> = ({ close, success }) => {
+  const modalContext = useContext(ModalContext)
+  const nav = useNavigate()
+
+  if (success == null) {
+    return null
+  }
+
+  return createPortal(success
+    ? (
+      <DialogContainer>
+        <h2>
+          Congratulations! You've finished your Quick Start!
+        </h2>
+        <img src={congratsImage}/>
+        <sinch-button type="cta-primary" text="Done" onClick={() => nav('../../../')}/>
+      </DialogContainer>
+    )
+    : (
+      <DialogContainer>
+        <DialogCloseButton onClick={close}>
+          x
+        </DialogCloseButton>
+        <h2>
+          The configuration could not be saved.
+        </h2>
+        <h2>
+          Please try again in a few moments.
+        </h2>
+        <img src={errorImage}/>
+        <sinch-button type="cta-primary" text="Close" onClick={close}/>
+      </DialogContainer>
+    ),
+  modalContext.current!)
+}
 
 export const QuickLeadsConverterPage: QuickStartPage = () => {
   // 1st page: Greeting and questions
@@ -87,14 +192,23 @@ export const QuickLeadsConverterPage: QuickStartPage = () => {
       : ([] as Agent[]).concat(agents.slice(0, index), agent, agents.slice(index + 1))))
   const removeAgent = (i: number) => setAgents((agents) => ([] as Agent[]).concat(agents.slice(0, i), agents.slice(i + 1)))
 
+  // Saving!
+  const [success, setSuccess] = useState<boolean | null>(null)
+  const token = useContext(TokenContext)?.token
+  const saveFunc = postQuickLeadsConverter(token)
+  const save = () => saveFunc(greeting, questions, handoverMessage, agents)
+    .then(() => setSuccess(true))
+    .catch(() => setSuccess(true))
+
+  // Dialog state
+  const dialog = <Dialog close={() => setSuccess(null)} success={success}/>
+
   const chats = buildChats(greeting, questions, handoverMessage, agents[0])
 
   return (
     <Routes>
       <Route path="/">
-        <Route path="success" element={<div>Success</div>}/>
-        <Route path="failure" element={<div>failed..</div>}/>
-        <Route path="*" element={<Wrapper heading={'Flow Builder'} subHeading="Configure the messages that are displayed on the conversation." chats={chats}/>}>
+        <Route path="*" element={<Wrapper heading={'Flow Builder'} subHeading="Configure the messages that are displayed on the conversation." chats={chats} save={save} dialog={dialog}/>}>
           <Route index element={<FlowBuilder greeting={greeting} setGreeting={setGreeting} questions={questions} setQuestion={setQuestion} addQuestion={addQuestion}/>}/>
           <Route path="human-handover" element={<HumanHandover handoverMessage={handoverMessage} setHandoverMessage={setHandoverMessage} agents={agents} addAgent={addAgent} removeAgent={removeAgent}/>}/>
         </Route>
