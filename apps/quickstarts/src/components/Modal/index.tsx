@@ -165,10 +165,18 @@ export const Modal: FC<Props> = ({ next, close, headerbgcolor, headerTextColor, 
           <sinch-button
             type="secondary"
             text="Cancel"
+            aria-label="Cancel"
             onClick={close}
             small
           />
-          <sinch-button type="primary" text="Continue" onClick={next} small disabled={comingSoon}/>
+          <sinch-button
+            type="primary"
+            text="Continue"
+            aria-label="Continue"
+            onClick={next}
+            small
+            disabled={comingSoon}
+          />
         </Footer>
       </ModalContainer>,
       modalElement.current as Element

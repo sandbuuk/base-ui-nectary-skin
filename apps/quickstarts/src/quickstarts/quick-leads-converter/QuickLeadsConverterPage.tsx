@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Route, Routes, Outlet, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -42,8 +42,6 @@ const buildChats = (greeting: string, questions: string[], handoverMessage: stri
   ...((agent != null) ? [{ msg: `Hi! This is ${agent.name}`, sender: 'left' } as Message] : []),
 ]
 
-type NavProps = {backText: string, backUrl: string, forwardText: string, forwardUrl: string}
-
 const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -76,8 +74,8 @@ const Wrapper: FC<{heading: string, subHeading: string, chats: PhonePreviewProps
             index
             element={(
               <NavContainer>
-                <sinch-button onClick={() => nav('./..')} type="destructive" text="Discard"/>
-                <sinch-button onClick={() => nav('./human-handover')} type="primary" text="Human handover"/>
+                <sinch-button onClick={() => nav('./..')} type="destructive" text="Discard" aria-label="Discard"/>
+                <sinch-button onClick={() => nav('./human-handover')} type="primary" text="Human handover" aria-label="Human handover"/>
               </NavContainer>
 )}
           />
@@ -85,8 +83,8 @@ const Wrapper: FC<{heading: string, subHeading: string, chats: PhonePreviewProps
             path="human-handover"
             element={(
               <NavContainer>
-                <sinch-button onClick={() => nav('./')} type="secondary" text="Back"/>
-                <sinch-button onClick={save} type="primary" text="Save"/>
+                <sinch-button onClick={() => nav('./')} type="secondary" text="Back" aria-label="Back"/>
+                <sinch-button onClick={save} type="primary" text="Save" aria-label="Save"/>
               </NavContainer>
 )}
           />
@@ -155,7 +153,7 @@ const Dialog: FC<{close: () => void, success: boolean | null}> = ({ close, succe
           Congratulations! You've finished your Quick Start!
         </h2>
         <img src={congratsImage}/>
-        <sinch-button type="cta-primary" text="Done" onClick={() => nav('../../../')}/>
+        <sinch-button type="cta-primary" onClick={() => nav('../../../')} text="Done" aria-label="Done"/>
       </DialogContainer>
     )
     : (
@@ -170,7 +168,7 @@ const Dialog: FC<{close: () => void, success: boolean | null}> = ({ close, succe
           Please try again in a few moments.
         </h2>
         <img src={errorImage}/>
-        <sinch-button type="cta-primary" text="Close" onClick={close}/>
+        <sinch-button type="cta-primary" onClick={close} text="Close" aria-label="Close"/>
       </DialogContainer>
     ),
   modalContext.current!)
@@ -194,11 +192,11 @@ export const QuickLeadsConverterPage: QuickStartPage = () => {
 
   // Saving!
   const [success, setSuccess] = useState<boolean | null>(null)
-  const token = useContext(TokenContext)?.token
+  const token = useContext(TokenContext)?.token!
   const saveFunc = postQuickLeadsConverter(token)
   const save = () => saveFunc(greeting, questions, handoverMessage, agents)
     .then(() => setSuccess(true))
-    .catch(() => setSuccess(true))
+    .catch(() => setSuccess(false))
 
   // Dialog state
   const dialog = <Dialog close={() => setSuccess(null)} success={success}/>

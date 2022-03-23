@@ -89,6 +89,7 @@ export const HumanHandover: FC<HumanHandoverProps> = ({ handoverMessage, setHand
     <section style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
       <sinch-textarea
         label="Human handover message"
+        aria-label="Human handover message"
         additionalText={(400 - handoverMessage.length).toString()}
         value={handoverMessage}
         placeholder={'I am transferring you to a human agent.'}
@@ -99,6 +100,7 @@ export const HumanHandover: FC<HumanHandoverProps> = ({ handoverMessage, setHand
 
       <sinch-input
         label="Agent name"
+        aria-label="Agent name"
         value={agentName}
         invalidText={invalidNameMessage}
         disabled={agents.length === MAX_AGENTS && selectedAgent === null}
@@ -108,6 +110,7 @@ export const HumanHandover: FC<HumanHandoverProps> = ({ handoverMessage, setHand
 
       <sinch-input
         label="Agent e-mail"
+        aria-label="Agent e-mail"
         value={agentEmail}
         invalidText={invalidEmailMessage}
         disabled={agents.length === MAX_AGENTS && selectedAgent === null}
@@ -120,6 +123,9 @@ export const HumanHandover: FC<HumanHandoverProps> = ({ handoverMessage, setHand
         style={{ width: 'fit-content' }}
         type="cta-primary"
         text={selectedAgent != null
+          ? 'Save changes'
+          : `Add more agents (Up to ${MAX_AGENTS - agents.length})`}
+        aria-label={selectedAgent != null
           ? 'Save changes'
           : `Add more agents (Up to ${MAX_AGENTS - agents.length})`}
         onClick={onAddAgent}
@@ -136,6 +142,7 @@ export const HumanHandover: FC<HumanHandoverProps> = ({ handoverMessage, setHand
                 <td>
                   <sinch-button
                     text="Edit"
+                    aria-label="Edit"
                     type="primary"
                     small
                     onClick={() => {
@@ -144,7 +151,13 @@ export const HumanHandover: FC<HumanHandoverProps> = ({ handoverMessage, setHand
                       setSelectedAgent(i)
                     }}
                   />
-                  <sinch-button text="Delete" type="destructive" small onClick={() => removeAgent(i)}/>
+                  <sinch-button
+                    text="Delete"
+                    aria-label="Delete"
+                    type="destructive"
+                    small
+                    onClick={() => removeAgent(i)}
+                  />
                 </td>
               </tr>
             ))}

@@ -17,11 +17,10 @@ export const FlowBuilder: FC<Props> = ({ greeting, setGreeting, questions, setQu
   <section style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
     <sinch-textarea
       label="Greeting"
+      aria-label="Greeting"
       additionalText={(400 - greeting.length).toString()}
       value={greeting}
-      onChange={(e) => {
-        setGreeting(e.nativeEvent.detail)
-      }}
+      onChange={(e) => setGreeting(e.nativeEvent.detail)}
     />
 
     <Ruler horizontal/>
@@ -33,15 +32,20 @@ export const FlowBuilder: FC<Props> = ({ greeting, setGreeting, questions, setQu
         <sinch-input
           style={{ width: 'auto' }}
           label={`Question ${i + 1}`}
+          aria-label={`Question ${i + 1}`}
           additionalText={(400 - question.length).toString()}
           value={question}
-          onChange={(e) => {
-            setQuestion(i, e.nativeEvent.detail)
-          }}
+          onChange={(e) => setQuestion(i, e.nativeEvent.detail)}
         />
         {(i + 1) != questions.length && <Ruler horizontal/>}
       </Fragment>
     ))}
-    <sinch-button style={{ width: 'fit-content' }} type="cta-primary" text="Add new question" onClick={addQuestion}/>
+    <sinch-button
+      style={{ width: 'fit-content' }}
+      type="cta-primary"
+      text="Add new question"
+      aria-label="Add new question"
+      onClick={addQuestion}
+    />
   </section>
 )

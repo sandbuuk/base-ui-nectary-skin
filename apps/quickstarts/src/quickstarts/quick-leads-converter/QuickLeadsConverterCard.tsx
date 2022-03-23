@@ -45,7 +45,13 @@ export const QuickLeadsConverterCard: QuickStartCard = ({ path }) => {
         <sinch-tag text="2 minutes"/>
         <sinch-tag category="aqua" text="Marketing"/>
       </TagGroup>
-      <sinch-button style={{ marginTop: 'auto', width: 'fit-content' }} onClick={() => setShowModal(true)} text="Try for free" type="secondary"/>
+      <sinch-button
+        style={{ marginTop: 'auto', width: 'fit-content' }}
+        onClick={() => setShowModal(true)}
+        text="Try for free"
+        aria-label="Try for free"
+        type="secondary"
+      />
       {modal}
     </TmpCardComponent>
   )
