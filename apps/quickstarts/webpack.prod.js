@@ -23,10 +23,10 @@ module.exports = {
         loader: 'raw-loader',
       },
       {
-        test: /\.(png|jpg|jpeg|gif)$/,
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: '[name]_[contenthash:6].[ext]',
         },
       },
       {
@@ -62,7 +62,7 @@ module.exports = {
   },
   watch: false,
   optimization: {
-    minimize: false,
+    minimize: true,
   },
   plugins: [
     new ModuleFederationPlugin({
@@ -91,6 +91,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './public/index.html'),
+      // Override here to make `auto` publicPath work for loading the scripts for the stand alone page.
+      publicPath: '/',
     }),
     new MiniCssExtractPlugin({
       insert: (linkElement) => {

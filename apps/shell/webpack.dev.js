@@ -16,7 +16,7 @@ module.exports = {
   ],
   output: {
     chunkFilename: '[name].[chunkhash].js',
-    publicPath: '/',
+    publicPath: 'auto',
     pathinfo: true,
   },
   resolve: {
@@ -70,8 +70,8 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: PORT,
-    allowedHosts: ['.sinch.com', 'localhost'],
-    // open: true,
+    hot: 'only',
+    allowedHosts: ['.sinch.com', 'localhost', 'localhost:3000', 'localhost:3001'],
     static: {
       directory: path.resolve(__dirname, 'public'),
       publicPath: '/',
@@ -107,6 +107,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './public/index.html'),
+      publicPath: '/',
     }),
   ],
 }
