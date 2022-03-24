@@ -79,6 +79,7 @@ const config: PlaywrightTestConfig = {
     max: 0,
     threshold: 60000,
   },
+  fullyParallel: true,
   workers: 3,
   retries: 1,
   expect: {

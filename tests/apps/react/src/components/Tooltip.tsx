@@ -17,7 +17,7 @@ export const Tooltip: FC<TTooltip> = ({ search }) => {
       width={width}
       inverted={isInverted}
     >
-      <button>Some content</button>
+      <span>Some content</span>
     </sinch-tooltip>
   )
 }

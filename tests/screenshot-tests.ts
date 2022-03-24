@@ -29,15 +29,19 @@ const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect | null => {
   })
 }
 
-const overrideScreenshotPath = (snapshotPath: TestInfo['snapshotPath']): TestInfo['snapshotPath'] =>
-  (snapshotName) => {
-    const result = snapshotPath(snapshotName)
+const overrideScreenshotPath = (testInfo: TestInfo): void => {
+  const snapshotPath = testInfo.snapshotPath
+
+  testInfo.snapshotPath = (snapshotName) => {
+    const result = snapshotPath.call(testInfo, snapshotName)
+
     const platform = /(chromium|firefox|webkit)/.exec(result)![0]
 
     return result
       .replace(/(-linux|-darwin|-react|-vue|-angular|-chromium|-firefox|-webkit)/g, '')
       .replace('.ts-snapshots', `-screenshots/${platform}`)
   }
+}
 
 type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
   <R, Arg>(cb: (el: HTMLElementTagNameMap[T], arg: Arg) => R, arg: Arg): Promise<R>,
@@ -72,7 +76,7 @@ type UpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
 export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageUrl: string, elementSelector: T) =>
   (updateState: (props: UpdateStateProps<T>) => AsyncIterable<UpdateStateResult>) =>
     async ({ page }: PlaywrightTestArgs, info: TestInfo) => {
-      info.snapshotPath = overrideScreenshotPath(info.snapshotPath)
+      overrideScreenshotPath(info)
 
       await page.goto(pageUrl, { waitUntil: 'networkidle' })
       await page.waitForSelector(elementSelector)
@@ -93,7 +97,7 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
           throw new Error('Cannot get locator bounding box')
         }
 
-        const sc = await page.screenshot({ clip })
+        const sc = await page.screenshot({ clip, animations: 'disabled' })
 
         expect(sc).toMatchSnapshot(screenshotName)
       }

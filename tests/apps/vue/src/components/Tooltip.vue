@@ -4,7 +4,7 @@
     v-bind:text="text"
     v-bind:inverted="isInverted"
     v-bind:width="width">
-    <button>Some content</button>
+    <span>Some content</span>
   </sinch-tooltip>
 </template>
 
