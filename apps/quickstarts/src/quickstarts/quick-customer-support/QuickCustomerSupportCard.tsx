@@ -16,7 +16,7 @@ export const QuickCustomerSupportCard: QuickStartCard = ({ path }) => {
 
   const modal = showModal && (
     <Modal
-      comingSoon={path == null}
+      isComingSoon={path == null}
       close={() => setShowModal(false)}
       bodyContent={[
         'Give customers quick answers to their questions.',

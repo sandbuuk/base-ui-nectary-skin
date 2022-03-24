@@ -118,7 +118,7 @@ const Footer = styled.footer`
 type Props = {
   bodyContent: string[],
   close: (value: any) => void,
-  comingSoon?: boolean,
+  isComingSoon?: boolean,
   headerbgcolor: string,
   headerTextColor: string,
   heading: string,
@@ -127,7 +127,7 @@ type Props = {
   next: (event: React.MouseEvent<HTMLElement>) => void,
 }
 
-export const Modal: FC<Props> = ({ next, close, headerbgcolor, headerTextColor, imagesource, comingSoon, heading, headingContent, bodyContent }) => {
+export const Modal: FC<Props> = ({ next, close, headerbgcolor, headerTextColor, imagesource, isComingSoon, heading, headingContent, bodyContent }) => {
   const modalElement = useContext(ModalContext)
 
   return modalElement == null
@@ -138,7 +138,7 @@ export const Modal: FC<Props> = ({ next, close, headerbgcolor, headerTextColor, 
           <HeaderCloseButton onClick={close} style={{ color: headerTextColor }}>
             X
           </HeaderCloseButton>
-          {comingSoon == true && (
+          {isComingSoon == true && (
             <HeaderFlag>
               Soon
             </HeaderFlag>
@@ -175,7 +175,7 @@ export const Modal: FC<Props> = ({ next, close, headerbgcolor, headerTextColor, 
             aria-label="Continue"
             onClick={next}
             small
-            disabled={comingSoon}
+            disabled={isComingSoon}
           />
         </Footer>
       </ModalContainer>,
