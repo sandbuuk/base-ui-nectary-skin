@@ -49,8 +49,8 @@ test('mouse interaction', withSingleOption(async function* ({ $, page }) {
   yield { name: 'active_checked' }
 }))
 
-test('focus', withSingleOption(async function* ({ $, $eval }) {
-  await $.focus()
+test('focus', withSingleOption(async function* ({ $eval, page }) {
+  await page.keyboard.press('Tab')
 
   await $eval((el) => {
     el.value = '1'
@@ -115,8 +115,8 @@ test('value property', withOptions(async function* ({ $eval }) {
   yield { name: 'option-missing' }
 }))
 
-test('keyboard', withOptions(async function* ({ $ }) {
-  await $.focus()
+test('keyboard', withOptions(async function* ({ $, page }) {
+  await page.keyboard.press('Tab')
   yield { name: '1-focus' }
 
   await $.press('ArrowDown')

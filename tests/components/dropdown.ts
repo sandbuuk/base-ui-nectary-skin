@@ -157,27 +157,29 @@ test('wide target', withWideContent(async function* ({ $, $eval }) {
   yield { name: 'shot', includeRects: [await $eval((el) => el.dropdownRect)] }
 }))
 
-test('focus press-space', shot(async function* ({ $, $eval }) {
-  await $.press('Space')
+test('focus press-space', shot(async function* ({ $eval, page }) {
+  await page.keyboard.press('Tab')
+  await page.keyboard.press('Space')
 
   yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  await $.press('Space')
+  await page.keyboard.press('Space')
   yield { name: 'close', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  await $.press('Space')
+  await page.keyboard.press('Space')
   yield { name: 'open-again', includeRects: [await $eval((el) => el.dropdownRect)] }
 }))
 
-test('focus press-enter', shot(async function* ({ $, $eval }) {
-  await $.press('Enter')
+test('focus press-enter', shot(async function* ({ $eval, page }) {
+  await page.keyboard.press('Tab')
+  await page.keyboard.press('Enter')
 
   yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  await $.press('Enter')
+  await page.keyboard.press('Enter')
   yield { name: 'close', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  await $.press('Enter')
+  await page.keyboard.press('Enter')
   yield { name: 'open-again', includeRects: [await $eval((el) => el.dropdownRect)] }
 }))
 
@@ -209,7 +211,7 @@ test('custom events', shot(async function* ({ $, page }) {
 test('native events', shot(async function* ({ $, page }) {
   await subscribeToEvents(page, 'sinch-dropdown-focus', 'sinch-dropdown-blur', 'sinch-dropdown-change')
 
-  await $.focus()
+  await page.keyboard.press('Tab')
   await page.keyboard.press('Tab')
 
   expect(
