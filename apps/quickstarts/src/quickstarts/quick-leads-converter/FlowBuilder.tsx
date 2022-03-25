@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const FlowBuilder: FC<Props> = ({ greeting, setGreeting, questions, setQuestion, addQuestion }) => (
-  <section style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
+  <section style={{ display: 'flex', flexDirection: 'column', position: 'relative', flex: 1, padding: '0 10% 0' }}>
     <sinch-textarea
       label="Greeting"
       aria-label="Greeting"

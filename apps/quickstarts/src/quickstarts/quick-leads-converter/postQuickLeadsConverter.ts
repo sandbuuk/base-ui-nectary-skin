@@ -1,7 +1,7 @@
 import type { Agent } from './types'
 
 // TODO: This should move out to some configuration file or similar.
-const baseUrl = 'https://quickstart.default.labengage.sinch.com/quick_leads_converter'
+const baseUrl = 'https://quickstart.engage.contour.stagingengage.sinch.com/quick_leads_converter'
 
 type RequestBody = {
   agents: {name: string, email: string}[],
