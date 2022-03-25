@@ -17,6 +17,7 @@
     <Toggle v-if="url.pathname === '/toggle'" :search="url.searchParams"/>
     <Tooltip v-if="url.pathname === '/tooltip'" :search="url.searchParams"/>
     <Spinner v-if="url.pathname === '/spinner'" :search="url.searchParams"/>
+    <Dialog v-if="url.pathname === '/dialog'" :search="url.searchParams"/>
   </div>
 </template>
 
@@ -27,6 +28,7 @@ import Alert from './components/Alert.vue'
 import Button from './components/Button.vue'
 import Checkbox from './components/Checkbox.vue'
 import Dropdown from './components/Dropdown.vue'
+import Dialog from './components/Dialog.vue'
 import Input from './components/Input.vue'
 import Link from './components/Link.vue'
 import Pagination from './components/Pagination.vue'
@@ -74,6 +76,7 @@ export default {
     Button,
     Checkbox,
     Dropdown,
+    Dialog,
     Input,
     Link,
     Pagination,

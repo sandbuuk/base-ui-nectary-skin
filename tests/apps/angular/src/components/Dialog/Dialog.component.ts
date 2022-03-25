@@ -1,0 +1,28 @@
+import { Component } from '@angular/core'
+import '@sinch-engage/nectary/dialog'
+import '@sinch-engage/nectary/button'
+
+@Component({
+  selector: 'dialog-component',
+  templateUrl: './Dialog.component.html',
+  styleUrls: ['./Dialog.component.css']
+})
+
+export class DialogComponent {
+  title: string
+  buttons: boolean
+  content: string | null
+
+  constructor() {
+    const url = new URL(location.href)
+    this.title = url.searchParams.get('title') ?? ''
+    this.buttons = url.searchParams.get('buttons') !== null
+    this.content = url.searchParams.get('content')
+  }
+
+  onClose() {
+    window.dispatchEvent(new CustomEvent('sinch-dialog-close'))
+  }
+}
+
+export default DialogComponent
