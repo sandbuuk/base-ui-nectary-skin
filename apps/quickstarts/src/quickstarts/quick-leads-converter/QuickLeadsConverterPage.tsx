@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Route, Routes, Outlet, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -49,22 +49,37 @@ const NavContainer = styled.div`
   margin: 60px 0 0 0;
 `
 
-const Wrapper: FC<{heading: string, subHeading: string, chats: PhonePreviewProps['chats'], save: () => void, dialog: ReactNode}> = ({ heading, subHeading, chats, save, dialog }) => {
+const Wrapper: FC<{heading: string, subHeading: string, chats: PhonePreviewProps['chats'], save: () => void, dialog: ReactNode}> = ({ chats, save, dialog }) => {
   const nav = useNavigate()
 
   return (
     <div>
-      <MainHeading>{heading}</MainHeading>
-      <SubHeading>{subHeading}</SubHeading>
-
+      <Routes>
+        <Route
+          index
+          element={(
+            <Fragment>
+              <MainHeading>Flow Builder</MainHeading>
+              <SubHeading>Configure the messages that are displayed on the conversation.</SubHeading>
+            </Fragment>
+        )}
+        />
+        <Route
+          path="human-handover"
+          element={(
+            <Fragment>
+              <MainHeading>Human Handover</MainHeading>
+              <SubHeading>Configure the agents that will be responsible for contacting the customers</SubHeading>
+            </Fragment>
+        )}
+        />
+      </Routes>
       <BoxBanner>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', position: 'relative', gap: '40px', alignItems: 'stretch' }}>
-          <div style={{ marginLeft: 'auto', width: '300px', flex: '1' }}/>
-
+          {/* <div style={{ marginLeft: 'auto', width: '300px', flex: '1' }}/> */}
           <Outlet/>
-
-          <section style={{ position: 'relative', marginRight: 'auto', flex: '1' }}>
-            <p style={{ margin: '0 26px 9px', color: 'var(--sinch-color-text-muted)', font: 'var(--sinch-font-small-text)' }}>User preview</p>
+          <section style={{ position: 'relative', flex: '1' }}>
+            <p style={{ margin: '0 auto 9px', width: '250px', color: 'var(--sinch-color-text-muted)', font: 'var(--sinch-font-small-text)' }}>Preview</p>
             <PhonePreview chats={chats}/>
           </section>
         </div>
@@ -74,8 +89,8 @@ const Wrapper: FC<{heading: string, subHeading: string, chats: PhonePreviewProps
             index
             element={(
               <NavContainer>
-                <sinch-button onClick={() => nav('./..')} type="destructive" text="Discard" aria-label="Discard"/>
-                <sinch-button onClick={() => nav('./human-handover')} type="primary" text="Human handover" aria-label="Human handover"/>
+                <sinch-button onClick={() => nav('./..')} type="secondary" text="Back" aria-label="Back"/>
+                <sinch-button onClick={() => nav('./human-handover')} type="primary" text="Next" aria-label="Human handover"/>
               </NavContainer>
 )}
           />
@@ -99,6 +114,9 @@ const DialogContainer = styled.div`
   width: 700px;
   max-width: 800px;
   margin: 0 auto;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -113,6 +131,7 @@ const DialogContainer = styled.div`
 
   & > h2 {
     font: var(--sinch-font-title-2);
+    margin: 0px 30px 20px 30px;
   }
 
   & > p {
@@ -150,7 +169,7 @@ const Dialog: FC<{close: () => void, success: boolean | null}> = ({ close, succe
     ? (
       <DialogContainer>
         <h2>
-          Congratulations! You've finished your Quick Start!
+          Congratulations! You will receive the link to share on your e-mail in x times.
         </h2>
         <img src={congratsImage}/>
         <sinch-button type="cta-primary" onClick={() => nav('../../../')} text="Done" aria-label="Done"/>
@@ -162,10 +181,7 @@ const Dialog: FC<{close: () => void, success: boolean | null}> = ({ close, succe
           x
         </DialogCloseButton>
         <h2>
-          The configuration could not be saved.
-        </h2>
-        <h2>
-          Please try again in a few moments.
+          Oops! It’s not you, it’s us. Sorry for the incovenience. We’re fixing the issue.Try again in a few minutes.
         </h2>
         <img src={errorImage}/>
         <sinch-button type="cta-primary" onClick={close} text="Close" aria-label="Close"/>

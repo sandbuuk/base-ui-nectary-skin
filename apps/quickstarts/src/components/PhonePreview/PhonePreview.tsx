@@ -22,13 +22,13 @@ const PhonePreviewRoot = styled.div`
   flex: 0;
   display: flex;
   position: relative;
-  background-size: cover;
   height: 600px;
   width:300px;
+  margin: 0px auto;
   box-sizing: border-box;
   overflow: hidden;
   text-align: left;
-
+  
   border: 4px var(--sinch-color-stormy-400) solid;
   border-radius: 40px;
 

@@ -30,6 +30,8 @@ const Table = styled.table`
 
   td {
     padding: 24px 16px;
+    max-width: 100px;
+    overflow-wrap: break-word;
   }
 
   td:last-child {
@@ -86,7 +88,7 @@ export const HumanHandover: FC<HumanHandoverProps> = ({ handoverMessage, setHand
   }
 
   return (
-    <section style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
+    <section style={{ display: 'flex', flexDirection: 'column', position: 'relative', flex: 1, padding: '0 10% 0' }}>
       <sinch-textarea
         label="Human handover message"
         aria-label="Human handover message"
