@@ -17,7 +17,7 @@ import type { FC } from 'react'
 const tokenOnly = filterMessage(isTokenMessage)
 
 type TApp = {
-  baseUrl: string,
+  basePath: string,
 }
 
 const AppContainer = styled.div`
@@ -30,7 +30,7 @@ const AppContainer = styled.div`
   background-color: var(--sinch-color-snow-500);
 `
 
-export const App: FC<TApp> = ({ baseUrl }) => {
+export const App: FC<TApp> = ({ basePath }) => {
   const modalRef = useRef(null)
   const [token, setToken] = useState<TOKEN_PAYLOAD>(null)
 
@@ -51,7 +51,7 @@ export const App: FC<TApp> = ({ baseUrl }) => {
     <TokenContext.Provider value={token}>
       <AppContainer>
         <ModalContext.Provider value={modalRef}>
-          <Router basename={baseUrl}>
+          <Router basename={basePath}>
             <Routes>
               <Route index element={<Home/>}/>
               <Route path=":id/*" element={<QuickStartsPages/>}/>

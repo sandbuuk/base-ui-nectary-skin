@@ -1,4 +1,5 @@
-:root {
+:root,
+:host {
   --sinch-theme: 1;
   --sinch-color-honey-700: #CC8800;
   --sinch-color-honey-600: #FFAA00;

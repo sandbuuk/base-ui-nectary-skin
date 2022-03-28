@@ -15,29 +15,36 @@ const createUnmounter = (element: HTMLElement | ShadowRoot) => () => {
   unmountComponentAtNode(element)
 }
 
-const mount = (element: HTMLElement | ShadowRoot) => {
+// TODO: This type should be in a common package provided by core team.
+type MFERenderFunc = (element: HTMLDivElement, x: {basePath: string, config?: unknown}) => undefined | (() => void)
+
+const mount: MFERenderFunc = (element: HTMLDivElement, { basePath }) => {
+  const shadow = element.attachShadow({
+    mode: 'open',
+    // @ts-ignore Set custom registry for the shadowroot.
+    customElements: customRegistry,
+  })
+
   // StyleLoader style inject
   const stylesFrag = (document.head as any)[appName]
-  const appElement = document.createElement('div')
 
   if (stylesFrag != null) {
-    element.appendChild(stylesFrag.cloneNode(true))
+    shadow.appendChild(stylesFrag.cloneNode(true))
   }
 
-  element.appendChild(appElement)
+  const appElement = shadow.appendChild(document.createElement('div'))
 
-  //Object.defineProperty(this.appElement, 'ownerDocument', { value: shadowRoot })
+  Object.defineProperty(appElement, 'ownerDocument', { value: shadow })
 
-  // TODO: This basename should really come from the shell.
-  // The shell decides where to mount it.
-  // Maybe take an extra argument to "render"?
   render(
-    <StrictMode>
-      {/* Make sure styled-components insert the styles inside the Shadow DOM. */}
-      <StyleSheetManager target={element as HTMLElement}>
-        <App baseUrl="/quick-starts"/>
-      </StyleSheetManager>
-    </StrictMode>,
+    // Make sure styled-components insert the styles inside the Shadow DOM.
+    // @ts-expect-error Mute error until StyleSheetManager allows ShadowRoot
+    // type for the target.
+    <StyleSheetManager target={shadow}>
+      <StrictMode>
+        <App basePath={basePath}/>
+      </StrictMode>
+    </StyleSheetManager>,
     appElement
   )
 

@@ -7,11 +7,22 @@ const CONTAINER = 'Quickstarts'
 
 module.exports = {
   mode: 'production',
-  entry: require.resolve('./src/index.ts'),
+  // These entries are only used for the standalone page.
+  // The Micro FrontEnd is exposed through the ModuleFederationPlugin.
+  entry: {
+    main: [
+      // Shell polyfills this scoped registry, we need to as well.
+      require.resolve('@webcomponents/scoped-custom-element-registry'),
+      require.resolve('./src/index.ts'),
+    ],
+    // We need a separate entry for theme.css so it is included in the standalone
+    // html page. This will emulate how the styles would when mounted in the
+    // shell application. (This is also needed for the fonts to work)
+    globalStyle: require.resolve('@sinch-engage/nectary/theme.css'),
+  },
   output: {
     chunkFilename: '[name].[chunkhash].js',
     publicPath: 'auto',
-    pathinfo: true,
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -44,19 +55,12 @@ module.exports = {
         },
       },
       {
-        test: /\.module\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: { modules: true },
-          },
-        ],
-      },
-      {
         test: /\.css$/,
-        exclude: /\.module\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          // Module support is automatic for filenames containing ".module."
+          { loader: 'css-loader' },
+        ],
       },
     ],
   },
@@ -95,36 +99,29 @@ module.exports = {
       publicPath: '/',
     }),
     new MiniCssExtractPlugin({
-      insert: (linkElement) => {
+      insert: (element) => {
         const getFilename = (path) => path.substr(path.lastIndexOf('/'))
+        const name = 'sinch-quickstarts-app'
+        const h = document.head
+        // Needed for webpack to know the module has loaded.
+        const dispatchLoad = (el) => el.dispatchEvent(new Event('load'))
 
         // Check if such css already exists in document.head
-        for (const child of document.head.children) {
+        // like a main entry would, and make sure we won't add it twice.
+        for (const child of h.children) {
           if (child.tagName !== 'LINK') {
             continue
           }
 
-          if (getFilename(child.href) === getFilename(linkElement.href)) {
-            linkElement.onload?.({ type: 'load' })
-
-            return
+          if (getFilename(child.href) === getFilename(element.href)) {
+            return void dispatchLoad(element)
           }
         }
 
-        const name = 'sinch-quickstarts-app'
-
-        if (document.getElementById(name) !== null) {
-          // Standalone app
-          document.head.appendChild(linkElement)
-        } else {
-          // Embedded app
-          if (document.head[name] == null) {
-            document.head[name] = document.createDocumentFragment()
-          }
-
-          document.head[name].appendChild(linkElement)
-          linkElement.onload?.({ type: 'load' })
-        }
+        // If it does not exist in the head, insert into the MFE style fragment.
+        h[name] = h[name] || document.createDocumentFragment()
+        h[name].appendChild(element)
+        dispatchLoad(element)
       },
     }),
   ],

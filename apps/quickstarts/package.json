@@ -5,6 +5,7 @@
   "dependencies": {
     "@saas/bus": "*",
     "@sinch-engage/nectary": "*",
+    "@webcomponents/scoped-custom-element-registry": "^0.0.4",
     "axios": "^0.24.0",
     "file-loader": "^6.2.0",
     "react": "^17.0.0",
