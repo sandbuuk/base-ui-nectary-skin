@@ -1,0 +1,11 @@
+<sinch-card
+  [attr.header]="header"
+  [attr.text]="text"
+  [attr.label]="label"
+  [attr.disabled]="isDisabled"
+>
+  <sinch-icon-chatbot *ngIf="hasIcon" [attr.size]="48" slot="icon"></sinch-icon-chatbot>
+  <sinch-illustration-phone-and-cat *ngIf="hasIllustration" [attr.size]="256" slot="illustration"></sinch-illustration-phone-and-cat>
+  <sinch-card-button *ngIf="buttonText !== null" slot="action" [attr.text]="buttonText"></sinch-card-button>
+  <sinch-card-link *ngIf="linkText !== null" slot="action" [attr.text]="linkText"></sinch-card-link>
+</sinch-card>
