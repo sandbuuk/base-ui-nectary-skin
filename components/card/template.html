@@ -1,0 +1,112 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+}
+
+#wrapper {
+  position: relative;
+}
+
+#card-body {
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--sinch-color-snow-100);
+  border-radius: 8px;
+  border: 1px solid var(--sinch-color-snow-700);
+}
+
+#illustration-wrapper {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  overflow: hidden;
+  background-color: var(--sinch-color-stormy-500);
+  max-height: 222px;
+}
+
+#illustration-wrapper.active {
+  display: flex;
+}
+
+#illustration-wrapper.active + #card-body {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+}
+
+#label {
+  margin: 0;
+  font: var(--sinch-font-title-5);
+  color: var(--sinch-color-stormy-300);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#label:empty {
+  display: none;
+}
+
+#header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+#title {
+  font: var(--sinch-font-title-3);
+  color: var(--sinch-color-stormy-500);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#description {
+  margin: 0;
+  font: var(--sinch-font-body);
+  color: var(--sinch-color-stormy-500);
+  flex: 1;
+  min-height: 0;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+#description:empty {
+  display: none;
+}
+
+:host([disabled]:not([disabled="false"])) :is(#illustration-wrapper, #description, #header, #label) {
+  opacity: 60%;
+}
+
+::slotted(sinch-card-button),
+::slotted(sinch-card-link) {
+  margin-top: 20px;
+  align-self: flex-start;
+  max-width: 100%;
+}
+</style>
+
+<div id="wrapper">
+  <div id="illustration-wrapper">
+    <slot name="illustration"></slot>
+  </div>
+  <div id="card-body">
+    <p id="label"></p>
+    <div id="header">
+      <slot name="icon"></slot>
+      <span id="title"></span>
+    </div>
+    <p id="description"></p>
+    <slot name="action"></slot>
+  </div>
+</div>
