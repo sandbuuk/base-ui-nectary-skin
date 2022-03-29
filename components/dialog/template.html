@@ -1,0 +1,87 @@
+<style>
+  #wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    color: var(--sinch-color-text-default);
+    font: var(--sinch-font-body);
+    z-index: 1;
+  }
+
+  #backdrop {
+    background-color: black;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 55%;
+    width: 100%;
+    height: 100%;
+  }
+
+  #main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 24px;
+    width: 100%;
+    max-width: 512px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--sinch-color-snow-100);
+  }
+
+  #header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    margin-bottom: 16px;
+  }
+
+  #title {
+    font: var(--sinch-font-title-3);
+    color: var(--sinch-color-text-default);
+  }
+
+  #content-wrapper {
+    max-height: 50vh;
+    overflow-y: auto;
+    margin-top: 16px;
+  }
+
+  #close {
+    all: initial;
+    cursor: pointer;
+  }
+
+  #buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 24px;
+  }
+</style>
+
+<div id="wrapper">
+  <div id="backdrop"></div>
+  <div id="main">
+    <div id="header">
+      <span id="title"></span>
+      <button id="close">
+        <sinch-icon-close size="24"></sinch-icon-close>
+      </button>
+    </div>
+    <div id="content-wrapper">
+      <slot name="content"></slot>
+    </div>
+    <div id="buttons">
+      <slot name="buttons"></slot>
+    </div>
+  </div>
+</div>

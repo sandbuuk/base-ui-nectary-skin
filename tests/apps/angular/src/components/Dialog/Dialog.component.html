@@ -1,0 +1,5 @@
+<sinch-dialog [title]="title" (close)="onClose()">
+  <section *ngIf="content !== null" slot="content">{{content}}</section>
+  <sinch-button *ngIf="buttons" text="Cancel" type="secondary" slot="buttons"></sinch-button>
+  <sinch-button *ngIf="buttons" text="Ok" type="primary" slot="buttons"></sinch-button>
+</sinch-dialog>

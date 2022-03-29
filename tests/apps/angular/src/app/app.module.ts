@@ -15,6 +15,7 @@ import { TableComponent } from '../components/Table/Table.component'
 import { TabsComponent } from '../components/Tabs/Tabs.component'
 import { TagComponent } from '../components/Tag/Tag.component'
 import { AccordionComponent } from '../components/Accordion/Accordion.component'
+import { DialogComponent } from '../components/Dialog/Dialog.component'
 import { LinkComponent } from '../components/Link/Link.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
 import { DropdownComponent } from '../components/Dropdown/Dropdown.component'
@@ -39,7 +40,8 @@ import { AppComponent } from './app.component'
     TableComponent,
     TabsComponent,
     TagComponent,
-    DropdownComponent
+    DropdownComponent,
+    DialogComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

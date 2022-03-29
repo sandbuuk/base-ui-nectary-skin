@@ -16,6 +16,10 @@ const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect | null => {
       return a
     }
 
+    if (a.width === 0 && a.height === 0) {
+      return b
+    }
+
     if (b.width === 0 && b.height === 0) {
       return a
     }
@@ -79,7 +83,7 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
       overrideScreenshotPath(info)
 
       await page.goto(pageUrl, { waitUntil: 'networkidle' })
-      await page.waitForSelector(elementSelector)
+      await page.waitForSelector(elementSelector, { state: 'attached' })
       await page.evaluate(() => document.fonts.ready)
 
       // Optionally subscribe to page console output
