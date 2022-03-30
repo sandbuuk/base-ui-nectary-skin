@@ -4,5 +4,7 @@ declare module '*.module.css' {
 }
 
 declare module 'Quickstarts/Container' {
-  export default {}
+  type MFERenderFunc = (element: HTMLDivElement, x: {basePath: string}) => undefined | (() => void)
+  const renderFunc: MFERenderFunc
+  export default renderFunc
 }

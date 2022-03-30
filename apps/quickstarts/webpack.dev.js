@@ -2,28 +2,15 @@ const path = require('path')
 const { MFLiveReloadPlugin } = require('@module-federation/fmr')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const { createTemplate } = require('./webpack/index-template')
 
 const CONTAINER = 'Quickstarts'
 const PORT = 3001
 
-const styleLoaderInsert = (styleElement) => {
-  const name = 'sinch-quickstarts-app'
-
-  if (document.getElementById(name) !== null) {
-    // Standalone app
-    document.head.appendChild(styleElement)
-  } else {
-    // Embedded app
-    if (document.head[name] == null) {
-      document.head[name] = document.createDocumentFragment()
-    }
-
-    document.head[name].appendChild(styleElement)
-  }
-}
-
 module.exports = {
   mode: 'development',
+  // These entries are only used for the standalone page.
+  // The Micro FrontEnd is exposed through the ModuleFederationPlugin.
   entry: require.resolve('./src/index.ts'),
   output: {
     chunkFilename: '[name].[chunkhash].js',
@@ -63,27 +50,42 @@ module.exports = {
         },
       },
       {
-        test: /\.module\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-            options: { insert: styleLoaderInsert },
-          },
-          {
-            loader: 'css-loader',
-            options: { modules: true },
-          },
-        ],
-      },
-      {
+        // Loader for MFE local styles.
         test: /\.css$/,
-        exclude: /\.module\.css$/,
+        resourceQuery: /^$/, // Only match empty resource query.
         use: [
           {
             loader: 'style-loader',
-            options: { insert: styleLoaderInsert },
+            options: {
+              // Insert into a fragment for later so MFE can insert into the ShadowRoot.
+              insert: (element) => {
+                const getFilename = (path) => path.substr(path.lastIndexOf('/'))
+                const name = 'sinch-quickstarts-app'
+                const h = document.head
+                // Needed for webpack to know the module has loaded.
+                const dispatchLoad = (el) => el.dispatchEvent(new Event('load'))
+
+                // Check if such css already exists in document.head
+                // like a main entry would, and make sure we won't add it twice.
+                for (const child of h.children) {
+                  if (child.tagName !== 'LINK') {
+                    continue
+                  }
+
+                  if (getFilename(child.href) === getFilename(element.href)) {
+                    return void dispatchLoad(element)
+                  }
+                }
+
+                // If it does not exist in the head, insert into the MFE style fragment.
+                h[name] = h[name] || document.createDocumentFragment()
+                h[name].appendChild(element)
+                dispatchLoad(element)
+              },
+            },
           },
-          'css-loader',
+          // Module support is automatic for filenames containing ".module."
+          { loader: 'css-loader' },
         ],
       },
     ],
@@ -130,9 +132,10 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, './public/index.html'),
+      templateContent: createTemplate(),
       // Override here to make `auto` publicPath work for loading the scripts for the stand alone page.
       publicPath: '/',
+      minify: false,
     }),
   ],
 }

@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styles from './App.module.css'
 import { Login } from './components/Login'
+import { MFERoute } from './components/MFERoute'
 import { NotFound } from './components/NotFound'
-import { Quickstarts } from './components/Quickstarts'
 import { SidebarButton } from './components/SidebarButton'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/theme.css'
@@ -62,7 +62,7 @@ export const App: FC<{}> = () => {
         <main className={styles.main}>
           <Routes>
             <Route path="/" element={<NotFound title="Home"/>}/>
-            <Route path="/quick-starts/*" element={<Quickstarts/>}/>
+            <Route path="/quick-starts/*" element={<MFERoute loadRender={() => import('Quickstarts/Container').then(({ default: x }) => x)}/>}/>
             <Route path="/conversations/*" element={<NotFound title="Conversations"/>}/>
             <Route path="/chatbot/*" element={<NotFound title="Chatbot"/>}/>
             <Route path="/campaign/*" element={<NotFound title="Campaign"/>}/>
