@@ -3,7 +3,9 @@ const { MFLiveReloadPlugin } = require('@module-federation/fmr')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 const apps = require('./apps.dev.json')
+const shellPackageJson = require('./package.json')
 
+const nectaryVersion = shellPackageJson.dependencies['@sinch-engage/nectary']
 const CONTAINER = 'Shell'
 const PORT = 3000
 
@@ -89,7 +91,7 @@ module.exports = {
       remotes: apps,
       shared: {
         '@sinch-engage/nectary/theme.css': {
-          requiredVersion: '*',
+          requiredVersion: nectaryVersion,
         },
         react: {
           requiredVersion: '^17.0.0',
