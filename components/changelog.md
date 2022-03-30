@@ -1,3 +1,11 @@
+## v0.11.0
+
+* ➕ add `sinch-dialog` component
+* ➕ add `sinch-card` component
+* ➕ add `sinch-illustration-phone-and-cat` component
+* ➕ add arrow icons
+* 🐞 fix theme title-5 `font-size`
+
 ## v0.10.0
 
 * 💥 split button type `cta` to `cta-primary` and `cta-secondary`
