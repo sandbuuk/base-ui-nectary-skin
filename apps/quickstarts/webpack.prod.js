@@ -1,6 +1,9 @@
+const path = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const { createTemplate } = require('./webpack/index-template')
 
 const CONTAINER = 'Quickstarts'
 
@@ -58,6 +61,11 @@ module.exports = {
     minimize: true,
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, 'public/') },
+      ],
+    }),
     new ModuleFederationPlugin({
       name: CONTAINER,
       filename: 'remoteEntry.js',
