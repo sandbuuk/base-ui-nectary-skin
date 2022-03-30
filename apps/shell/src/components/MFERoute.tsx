@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useState } from 'react'
 import { UNSAFE_RouteContext } from 'react-router-dom'
 import type { FC } from 'react'
 
-type MFERenderFunc = (element: HTMLDivElement, x: {basePath: string, config?: unknown}) => undefined | (() => void)
+type MFERenderFunc = (element: HTMLDivElement, x: {basePath: string}) => undefined | (() => void)
 type LazyMFE = () => Promise<MFERenderFunc>
 type Props = {
   config?: unknown,
@@ -13,7 +13,7 @@ type Props = {
 // Unfortunately 'react-router-dom' does not provide this feature natively.
 const usePathPattern = () => useContext(UNSAFE_RouteContext).matches[0].route.path!
 
-export const MFERoute: FC<Props> = ({ loadRender, config }) => {
+export const MFERoute: FC<Props> = ({ loadRender }) => {
   const pathPattern = usePathPattern()
   const [element, setElement] = useState<HTMLDivElement | null>(null)
   const [render, setRender] = useState<MFERenderFunc | null>(null)
@@ -31,7 +31,7 @@ export const MFERoute: FC<Props> = ({ loadRender, config }) => {
 
   useEffect(() => {
     if ((render != null) && (element != null)) {
-      return render(element, { basePath: pathPattern.slice(0, -2), config })
+      return render(element, { basePath: pathPattern.slice(0, -2) })
     }
   }, [render, element])
 

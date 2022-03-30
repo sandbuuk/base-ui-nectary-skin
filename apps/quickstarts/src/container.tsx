@@ -16,7 +16,7 @@ const createUnmounter = (element: HTMLElement | ShadowRoot) => () => {
 }
 
 // TODO: This type should be in a common package provided by core team.
-type MFERenderFunc = (element: HTMLDivElement, x: {basePath: string, config?: unknown}) => undefined | (() => void)
+type MFERenderFunc = (element: HTMLDivElement, x: {basePath: string}) => undefined | (() => void)
 
 const mount: MFERenderFunc = (element: HTMLDivElement, { basePath }) => {
   const shadow = element.attachShadow({

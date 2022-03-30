@@ -3,9 +3,8 @@ declare module '*.module.css' {
   export default classes
 }
 
-type MFERenderFunc = (element: ShadowRoot | HTMLElement) => undefined | (() => void)
-
 declare module 'Quickstarts/Container' {
+  type MFERenderFunc = (element: HTMLDivElement, x: {basePath: string}) => undefined | (() => void)
   const renderFunc: MFERenderFunc
   export default renderFunc
 }
