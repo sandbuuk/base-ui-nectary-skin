@@ -1,4 +1,3 @@
-const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
@@ -9,17 +8,7 @@ module.exports = {
   mode: 'production',
   // These entries are only used for the standalone page.
   // The Micro FrontEnd is exposed through the ModuleFederationPlugin.
-  entry: {
-    main: [
-      // Shell polyfills this scoped registry, we need to as well.
-      require.resolve('@webcomponents/scoped-custom-element-registry'),
-      require.resolve('./src/index.ts'),
-    ],
-    // We need a separate entry for theme.css so it is included in the standalone
-    // html page. This will emulate how the styles would when mounted in the
-    // shell application. (This is also needed for the fonts to work)
-    globalStyle: require.resolve('@sinch-engage/nectary/theme.css'),
-  },
+  entry: require.resolve('./src/index.ts'),
   output: {
     chunkFilename: '[name].[chunkhash].js',
     publicPath: 'auto',
@@ -94,9 +83,10 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, './public/index.html'),
+      templateContent: createTemplate(),
       // Override here to make `auto` publicPath work for loading the scripts for the stand alone page.
       publicPath: '/',
+      minify: false,
     }),
     new MiniCssExtractPlugin({
       insert: (element) => {
