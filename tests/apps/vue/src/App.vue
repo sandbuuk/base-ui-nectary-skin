@@ -3,6 +3,7 @@
     <Accordion v-if="url.pathname === '/accordion'" :search="url.searchParams"/>
     <Alert v-if="url.pathname === '/alert'" :search="url.searchParams"/>
     <Button v-if="url.pathname === '/button'" :search="url.searchParams"/>
+    <Card v-if="url.pathname === '/card'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
     <Dropdown v-if="url.pathname === '/dropdown'" :search="url.searchParams"/>
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
@@ -26,6 +27,7 @@ import '@sinch-engage/nectary'
 import Accordion from './components/Accordion.vue'
 import Alert from './components/Alert.vue'
 import Button from './components/Button.vue'
+import Card from './components/Card.vue'
 import Checkbox from './components/Checkbox.vue'
 import Dropdown from './components/Dropdown.vue'
 import Dialog from './components/Dialog.vue'
@@ -74,6 +76,7 @@ export default {
     Accordion,
     Alert,
     Button,
+    Card,
     Checkbox,
     Dropdown,
     Dialog,

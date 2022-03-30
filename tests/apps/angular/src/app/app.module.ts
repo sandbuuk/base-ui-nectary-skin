@@ -17,6 +17,7 @@ import { TagComponent } from '../components/Tag/Tag.component'
 import { AccordionComponent } from '../components/Accordion/Accordion.component'
 import { DialogComponent } from '../components/Dialog/Dialog.component'
 import { LinkComponent } from '../components/Link/Link.component'
+import { CardComponent } from '../components/Card/Card.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
 import { DropdownComponent } from '../components/Dropdown/Dropdown.component'
 import { AppComponent } from './app.component'
@@ -41,7 +42,8 @@ import { AppComponent } from './app.component'
     TabsComponent,
     TagComponent,
     DropdownComponent,
-    DialogComponent
+    DialogComponent,
+    CardComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

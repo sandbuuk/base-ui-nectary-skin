@@ -19,6 +19,10 @@ import '@sinch-engage/nectary/icon/north'
 import '@sinch-engage/nectary/icon/north-east'
 import '@sinch-engage/nectary/icon/north-west'
 import '@sinch-engage/nectary/icon/open-in-new'
+import '@sinch-engage/nectary/icon/arrow-downward'
+import '@sinch-engage/nectary/icon/arrow-upward'
+import '@sinch-engage/nectary/icon/arrow-back'
+import '@sinch-engage/nectary/icon/arrow-forward'
 import '@sinch-engage/nectary/icon/keyboard-arrow-down'
 import '@sinch-engage/nectary/icon/keyboard-arrow-left'
 import '@sinch-engage/nectary/icon/keyboard-arrow-right'
@@ -34,6 +38,10 @@ const iconNames = [
   'sinch-icon-help-outline',
   'sinch-icon-more-horiz',
   'sinch-icon-more-vert',
+  'sinch-icon-arrow-downward',
+  'sinch-icon-arrow-back',
+  'sinch-icon-arrow-forward',
+  'sinch-icon-arrow-upward',
   'sinch-icon-keyboard-arrow-down',
   'sinch-icon-keyboard-arrow-left',
   'sinch-icon-keyboard-arrow-right',

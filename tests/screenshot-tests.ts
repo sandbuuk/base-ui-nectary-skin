@@ -101,7 +101,7 @@ export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageU
           throw new Error('Cannot get locator bounding box')
         }
 
-        const sc = await page.screenshot({ clip, animations: 'disabled' })
+        const sc = await page.screenshot({ clip, animations: 'disabled', fullPage: true })
 
         expect(sc).toMatchSnapshot(screenshotName)
       }

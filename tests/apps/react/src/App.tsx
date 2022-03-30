@@ -2,6 +2,7 @@ import '@sinch-engage/nectary'
 import { Accordion } from './components/Accordion'
 import { Alert } from './components/Alert'
 import { Button } from './components/Button'
+import { Card } from './components/Card'
 import { Checkbox } from './components/Checkbox'
 import { Dialog } from './components/Dialog'
 import { Dropdown } from './components/Dropdown'
@@ -36,6 +37,12 @@ const mapElement = (url: URL) => {
     case '/button': {
       return (
         <Button search={url.searchParams}/>
+      )
+    }
+
+    case '/card': {
+      return (
+        <Card search={url.searchParams}/>
       )
     }
 

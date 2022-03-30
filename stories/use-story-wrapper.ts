@@ -16,3 +16,17 @@ export const useStoryWrapper = () => {
 
   return wrapperRef.current!
 }
+
+export const useWidthWrapper = (width: number) => {
+  const wrapperRef = useRef<(HTMLElement) | null>(null)
+
+  if (wrapperRef.current === null) {
+    const $wrapper = document.createElement('div')
+
+    $wrapper.style.width = `${width}px`
+
+    wrapperRef.current = $wrapper
+  }
+
+  return wrapperRef.current!
+}
