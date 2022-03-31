@@ -1,3 +1,7 @@
+## v0.11.1
+
+* 🐞 fix `sinch-dialog` z-index
+
 ## v0.11.0
 
 * ➕ add `sinch-dialog` component
