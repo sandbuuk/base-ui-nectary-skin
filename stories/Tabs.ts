@@ -1,6 +1,8 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/tabs'
+import '@sinch-engage/nectary/icon/open-in-new'
+import '@sinch-engage/nectary/icon/help-outline'
 
 export default {
   title: 'Components/Tabs',
@@ -36,16 +38,18 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-tabs']>
   return $tabs
 }
 
-export const Tabs = Template(`
-<sinch-tabs-option value="1" text="Tab 1 label"></sinch-tabs-option>
-<sinch-tabs-option value="2" text="Lorem Ipsum Ipsum.">
-  <sinch-icon-open-in-new></sinch-icon-open-in-new>
-</sinch-tabs-option>
-<sinch-tabs-option value="3" text="Tab disabled" disabled>
-  <sinch-icon-help-outline></sinch-icon-help-outline>
-</sinch-tabs-option>
-<sinch-tabs-option value="4" text="Tab 4 label"></sinch-tabs-option>
-`)
+const tabsInnerHTML = `
+  <sinch-tabs-option value="1" text="Tab 1 label"></sinch-tabs-option>
+  <sinch-tabs-option value="2" text="Lorem Ipsum Ipsum.">
+    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
+  </sinch-tabs-option>
+  <sinch-tabs-option value="3" text="Tab disabled" disabled>
+    <sinch-icon-help-outline slot="icon"></sinch-icon-help-outline>
+  </sinch-tabs-option>
+  <sinch-tabs-option value="4" text="Tab 4 label"></sinch-tabs-option>
+`
+
+export const Tabs = Template(tabsInnerHTML)
 
 Tabs.args = {
   value: '1',
@@ -54,17 +58,7 @@ Tabs.args = {
 Tabs.parameters = {
   docs: {
     source: {
-      code: `
-<sinch-tabs value={value} onChange={setValue}>
-  <sinch-tabs-option value="1" text="Tab 1 label"></sinch-tabs-option>
-  <sinch-tabs-option value="2" text="Lorem Ipsum Ipsum.">
-    <sinch-icon-open-in-new></sinch-icon-open-in-new>
-  </sinch-tabs-option>
-  <sinch-tabs-option value="3" text="Tab disabled" disabled>
-    <sinch-icon-help-outline></sinch-icon-help-outline>
-  </sinch-tabs-option>
-  <sinch-tabs-option value="4" text="Tab 4 label"></sinch-tabs-option>
-</sinch-tabs>`,
+      code: `<sinch-tabs value={value} onChange={setValue}>${tabsInnerHTML}</sinch-tabs>`,
     },
   },
 }

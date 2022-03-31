@@ -20,11 +20,13 @@
   padding: 8px 20px;
   box-sizing: border-box;
   box-shadow: 0 1px 0 0 var(--sinch-color-stormy-100);
-  font: var(--sinch-font-body);
-  color: var(--sinch-color-text-default);
+  color: var(--sinch-color-stormy-500);
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
 }
 
 #content {
+  font: var(--sinch-font-title-4);
   flex-shrink: 1;
   overflow: hidden;
   white-space: nowrap;
@@ -33,7 +35,6 @@
 
 :host([checked]) #wrapper {
   box-shadow: 0 2px 0 0 var(--sinch-color-stormy-500);
-  font: var(--sinch-font-emphasized-body);
 }
 
 input {
