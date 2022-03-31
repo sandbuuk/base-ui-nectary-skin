@@ -1,7 +1,6 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/dialog'
-import '@sinch-engage/nectary/dialog-close'
 import '@sinch-engage/nectary/button'
 
 export default {
