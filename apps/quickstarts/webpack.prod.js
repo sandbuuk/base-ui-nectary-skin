@@ -3,8 +3,10 @@ const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const quickstartsPackageJson = require('./package.json')
 const { createTemplate } = require('./webpack/index-template')
 
+const nectaryVersion = quickstartsPackageJson.dependencies['@sinch-engage/nectary']
 const CONTAINER = 'Quickstarts'
 
 module.exports = {
@@ -74,7 +76,7 @@ module.exports = {
       },
       shared: {
         '@sinch-engage/nectary/theme.css': {
-          requiredVersion: '*',
+          requiredVersion: nectaryVersion,
         },
         react: {
           requiredVersion: '^17.0.0',

@@ -2,8 +2,10 @@ const path = require('path')
 const { MFLiveReloadPlugin } = require('@module-federation/fmr')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const quickstartsPackageJson = require('./package.json')
 const { createTemplate } = require('./webpack/index-template')
 
+const nectaryVersion = quickstartsPackageJson.dependencies['@sinch-engage/nectary']
 const CONTAINER = 'Quickstarts'
 const PORT = 3001
 
@@ -115,7 +117,7 @@ module.exports = {
       },
       shared: {
         '@sinch-engage/nectary/theme.css': {
-          requiredVersion: '*',
+          requiredVersion: nectaryVersion,
         },
         react: {
           requiredVersion: '^17.0.0',
