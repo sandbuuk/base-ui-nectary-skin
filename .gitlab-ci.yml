@@ -47,29 +47,6 @@ visual-tests:
     paths:
       - tests/test-results
 
-build-shell:
-  stage: build
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^shell@/
-  image: node:16
-  cache:
-    key:
-      files:
-        - yarn.lock
-      prefix: cache
-    paths:
-      - .yarn/
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
-  script:
-    - yarn build:shell --output-path ../../dist/
-  artifacts:
-    paths:
-      - dist/
-
 build-quickstarts:
   stage: build
   rules:
@@ -92,21 +69,6 @@ build-quickstarts:
   artifacts:
     paths:
       - dist/
-
-deploy-shell:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^shell@/
-  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-  dependencies:
-    - build-shell
-  needs:
-    - build-shell
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  script:
-  - aws s3 cp ./dist/ s3://sinch-engage-shell-lab/ --recursive --include "*"
-  - aws cloudfront create-invalidation --distribution-id E1FUUKU2OB9PYS --paths "/*"
 
 deploy-quickstarts:
   stage: deploy
