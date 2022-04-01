@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import type { TOKEN_PAYLOAD } from '@saas/bus'
+import type { TOKEN_PAYLOAD } from '@sinch-engage/bus'
 import type { RefObject } from 'react'
 
 export const TokenContext = createContext<TOKEN_PAYLOAD>(null)

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@sinch-engage/nectary": "*",
-    "@saas/bus": "*",
+    "@sinch-engage/bus": "*",
     "@webcomponents/scoped-custom-element-registry": "^0.0.4",
     "broadcastchannel-polyfill": "^1.0.1",
     "keycloak-js": "^16.1.0",
