@@ -1,12 +1,12 @@
 {
-  "name": "@saas/bus",
+  "name": "@sinch-engage/bus",
   "version": "1.0.0",
   "main": "src/index.ts",
   "files": [
     "lib/"
   ],
   "publishConfig": {
-    "registry": "https://nexus.int.clxnetworks.net/repository/sinch_npm/"
+    "access": "restricted"
   },
   "scripts": {
     "prebuild": "rimraf lib/",

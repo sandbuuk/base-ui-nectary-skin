@@ -3,7 +3,7 @@
   "version": "0.0.7",
   "private": true,
   "dependencies": {
-    "@saas/bus": "*",
+    "@sinch-engage/bus": "*",
     "@sinch-engage/nectary": "*",
     "@webcomponents/scoped-custom-element-registry": "^0.0.4",
     "axios": "^0.24.0",
