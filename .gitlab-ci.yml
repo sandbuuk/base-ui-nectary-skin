@@ -128,7 +128,7 @@ publish-bus:
   script:
     - yarn --cwd libs/bus/ build
     - node scripts/prepare-package-json.js libs/bus/package.json
-    - echo "//nexus.int.clxnetworks.net/repository/sinch_npm/:_authToken=${NPM_TOKEN}" > .npmrc
+    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish libs/bus/
 
 pages:
