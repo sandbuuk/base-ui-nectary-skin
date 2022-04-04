@@ -23,8 +23,8 @@
           <sinch-button v-if="cell.isButton" type="secondary" :text="cell.text"></sinch-button>
           <sinch-toggle v-if="cell.isToggle"></sinch-toggle>
           <sinch-link v-if="cell.isLink" :text="cell.text" href="#"></sinch-link>
-          <sinch-icon-open-in-new v-if="cell.isIcon && cell.iconType === 'open-in-new'" size="24"></sinch-icon-open-in-new>
-          <sinch-icon-more-vert v-if="cell.isIcon && cell.iconType === 'more-vert'" size="24"></sinch-icon-more-vert>
+          <sinch-icon-open-in-new v-if="cell.isIcon && cell.iconType === 'open-in-new'"></sinch-icon-open-in-new>
+          <sinch-icon-more-vert v-if="cell.isIcon && cell.iconType === 'more-vert'"></sinch-icon-more-vert>
           <span v-if="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon">{{cell.text}}</span>
         </sinch-table-cell>
       </sinch-table-row>

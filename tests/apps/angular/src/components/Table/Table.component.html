@@ -22,8 +22,8 @@
         <sinch-button *ngIf="cell.isButton" type="secondary" [text]="cell.text"></sinch-button>
         <sinch-toggle *ngIf="cell.isToggle"></sinch-toggle>
         <sinch-link *ngIf="cell.isLink" [text]="cell.text" href="#"></sinch-link>
-        <sinch-icon-open-in-new *ngIf="cell.isIcon && cell.iconType === 'open-in-new'" size="24"></sinch-icon-open-in-new>
-        <sinch-icon-more-vert *ngIf="cell.isIcon && cell.iconType === 'more-vert'" size="24"></sinch-icon-more-vert>
+        <sinch-icon-open-in-new *ngIf="cell.isIcon && cell.iconType === 'open-in-new'"></sinch-icon-open-in-new>
+        <sinch-icon-more-vert *ngIf="cell.isIcon && cell.iconType === 'more-vert'"></sinch-icon-more-vert>
         <span *ngIf="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon">{{cell.text}}</span>
       </sinch-table-cell>
     </sinch-table-row>

@@ -4,7 +4,7 @@
     @click="onClick"
     @focusin="onFocus"
     @focusout="onBlur">
-    <sinch-icon-help-outline v-if="!hasSpinner" size="24" slot="icon"></sinch-icon-help-outline>
+    <sinch-icon-help-outline v-if="!hasSpinner" slot="icon"></sinch-icon-help-outline>
     <sinch-spinner v-if="hasSpinner" static type="medium" slot="icon"></sinch-spinner>
   </sinch-icon-button>
 </template>

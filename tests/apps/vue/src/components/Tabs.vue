@@ -6,7 +6,7 @@
       :value="opt.value"
       :text="opt.text"
       :disabled="opt.disabled">
-      <sinch-icon-open-in-new v-if="opt.icon != null" slot="icon" size="16"></sinch-icon-open-in-new>
+      <sinch-icon-open-in-new v-if="opt.icon != null" slot="icon"></sinch-icon-open-in-new>
     </sinch-tabs-option>
   </sinch-tabs>
 </template>

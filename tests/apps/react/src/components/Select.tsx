@@ -58,10 +58,10 @@ export const Select: FC<TSelect> = ({ search }) => {
     >
       {tooltip}
       <sinch-select-option value="1" text="Option 1 value" slot="option" aria-label="Option 1">
-        <sinch-icon-open-in-new slot="icon" size={20}/>
+        <sinch-icon-open-in-new slot="icon"/>
       </sinch-select-option>
       <sinch-select-option value="2" text="Option 2 value" slot="option" disabled aria-label="Option 2">
-        <sinch-icon-open-in-new slot="icon" size={20}/>
+        <sinch-icon-open-in-new slot="icon"/>
       </sinch-select-option>
       <sinch-select-option value="3" text="Option 3 value" slot="option" disabled={false} aria-label="Option 3"/>
       <sinch-select-option value="4" text="Option 4 value" slot="option" aria-label="Option 4"/>

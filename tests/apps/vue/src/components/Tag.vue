@@ -5,7 +5,7 @@
     v-bind:small="isSmall"
     v-bind:inverted="isInverted"
   >
-    <sinch-icon-open-in-new v-if="hasIcon" size="16" slot="icon"></sinch-icon-open-in-new>
+    <sinch-icon-open-in-new v-if="hasIcon" slot="icon"></sinch-icon-open-in-new>
     <sinch-tag-close
       v-if="isDismissable"
       slot="close"
