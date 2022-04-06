@@ -42,7 +42,7 @@ const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-ca
 }
 
 const cardInnerHTML = `
-  <sinch-illustration-phone-and-cat slot="illustration"></sinch-illustration-phone-and-cat>
+  <sinch-illustration-phone-and-cat slot="illustration" size="290"></sinch-illustration-phone-and-cat>
   <sinch-icon-chatbot slot="icon"></sinch-icon-chatbot>
   <sinch-card-link slot="action" href="" text="Click here link"></sinch-card-link>
 `
@@ -65,7 +65,7 @@ Card.parameters = {
 }
 
 const withButtonInnerHTML = `
-  <sinch-illustration-phone-and-cat slot="illustration"></sinch-illustration-phone-and-cat>
+  <sinch-illustration-phone-and-cat slot="illustration" size="290"></sinch-illustration-phone-and-cat>
   <sinch-icon-chatbot slot="icon"></sinch-icon-chatbot>
   <sinch-card-button slot="action" text="Click here link" onClick={noop}></sinch-card-button>
 `
