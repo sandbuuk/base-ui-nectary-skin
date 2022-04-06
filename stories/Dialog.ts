@@ -49,14 +49,14 @@ const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-di
 }
 
 const dialogInnerHTML = `
-<div slot="content">
-  <p>When you clik on "Accept" you will return to the campaigns list.
-    <br/>Your campaign is saved live, every update will be available when you come back.
-  </p>
-  <sinch-checkbox text="Do not display this message again"></sinch-checkbox>
-</div>
-<sinch-button small type="secondary" slot="buttons" text="Cancel"></sinch-button>
-<sinch-button small slot="buttons" text="Accept"></sinch-button>
+  <div slot="content">
+    <p>When you clik on "Accept" you will return to the campaigns list.
+      <br/>Your campaign is saved live, every update will be available when you come back.
+    </p>
+    <sinch-checkbox text="Do not display this message again"></sinch-checkbox>
+  </div>
+  <sinch-button small type="secondary" slot="buttons" text="Cancel"></sinch-button>
+  <sinch-button small slot="buttons" text="Accept"></sinch-button>
 `
 
 export const Dialog = Template(dialogInnerHTML)
