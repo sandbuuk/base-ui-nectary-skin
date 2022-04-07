@@ -1,3 +1,9 @@
+## v0.11.2
+
+* 🐞 update focused border color for `sinch-input`, `sinch-textarea`, `sinch-select`
+* 🐞 update border radius for `sinch-input`, `sinch-textarea`, `sinch-select`
+* 🐞 update `sinch-card` illustration size
+
 ## v0.11.1
 
 * 🐞 fix `sinch-dialog` z-index
