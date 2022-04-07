@@ -20,6 +20,7 @@ import { LinkComponent } from '../components/Link/Link.component'
 import { CardComponent } from '../components/Card/Card.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
 import { DropdownComponent } from '../components/Dropdown/Dropdown.component'
+import { GridComponent } from '../components/Grid/Grid.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AppComponent } from './app.component'
     TagComponent,
     DropdownComponent,
     DialogComponent,
-    CardComponent
+    CardComponent,
+    GridComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

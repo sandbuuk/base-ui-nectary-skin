@@ -1,4 +1,4 @@
-import '../icon/cancel'
+import '../icon/arrow-forward'
 import {
   defineCustomElement,
   getBooleanAttribute,
