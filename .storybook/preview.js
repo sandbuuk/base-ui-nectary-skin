@@ -45,6 +45,38 @@ export const parameters = {
       ],
     },
   },
+  viewport: {
+    viewports: {
+      xl: {
+        name: 'XL',
+        styles: {
+          width: '1440px',
+          height: '900px',
+        },
+      },
+      l: {
+        name: 'L',
+        styles: {
+          width: '1024px',
+          height: '768px',
+        },
+      },
+      m: {
+        name: 'M',
+        styles: {
+          width: '768px',
+          height: '1024px',
+        },
+      },
+      s: {
+        name: 'S',
+        styles: {
+          width: '480px',
+          height: '640px',
+        },
+      },
+    }
+  }
   // previewTabs: {
   //   canvas: {
   //     hidden: true,

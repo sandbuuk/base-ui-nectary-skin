@@ -1,5 +1,6 @@
 import { isDropdownOptionElement } from '../dropdown-option'
 import '../select-option'
+import '../dropdown'
 import {
   defineCustomElement,
   getAttribute,
