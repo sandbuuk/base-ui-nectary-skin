@@ -1,3 +1,10 @@
+## v0.12.0
+
+* ➕ add `sinch-grid` component
+* 🐞 disable pointer events for illustrations
+* 🐞 import `sinch-dropdown` in `sinch-select`
+* 🐞 update `sinch-tab` font style
+
 ## v0.11.2
 
 * 🐞 update focused border color for `sinch-input`, `sinch-textarea`, `sinch-select`
