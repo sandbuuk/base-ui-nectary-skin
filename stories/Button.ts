@@ -59,12 +59,12 @@ Button.parameters = {
 
 export const ButtonSecondary = Template()
 
-Button.args = {
+ButtonSecondary.args = {
   type: 'secondary',
   text: 'Click me',
 }
 
-Button.parameters = {
+ButtonSecondary.parameters = {
   docs: {
     source: {
       code: '<sinch-button type="secondary" text="Click me" onClick={onClick}></sinch-button>',
@@ -74,12 +74,12 @@ Button.parameters = {
 
 export const ButtonCtaPrimary = Template()
 
-Button.args = {
+ButtonCtaPrimary.args = {
   type: 'cta-primary',
   text: 'Click me',
 }
 
-Button.parameters = {
+ButtonCtaPrimary.parameters = {
   docs: {
     source: {
       code: '<sinch-button type="cta-primary" text="Click me" onClick={onClick}></sinch-button>',
@@ -89,12 +89,12 @@ Button.parameters = {
 
 export const ButtonCtaSecondary = Template()
 
-Button.args = {
+ButtonCtaSecondary.args = {
   type: 'cta-secondary',
   text: 'Click me',
 }
 
-Button.parameters = {
+ButtonCtaSecondary.parameters = {
   docs: {
     source: {
       code: '<sinch-button type="cta-secondary" text="Click me" onClick={onClick}></sinch-button>',
