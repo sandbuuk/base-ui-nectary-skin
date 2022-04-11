@@ -1,3 +1,10 @@
+## v0.13.0
+
+* 💥 remove `size` attribute in icons
+* 💥 remove `small` attribute in `sinch-tag-close`
+* ➕ add `sinch-icon-button` component
+* 🐞 import close icon in `sinch-dialog`
+
 ## v0.12.0
 
 * ➕ add `sinch-grid` component
