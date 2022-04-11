@@ -35,7 +35,7 @@ export const Tabs: FC<TTabs> = ({ search }) => {
           disabled={opt.disabled}
           aria-label={opt.text}
         >
-          {opt.icon != null && <sinch-icon-open-in-new slot="icon" size={16}/>}
+          {opt.icon != null && <sinch-icon-open-in-new slot="icon"/>}
         </sinch-tabs-option>
       ))
     } catch {

@@ -4,6 +4,7 @@ import {
   getRect,
   updateAttribute,
 } from '../utils'
+import '../icon/close'
 import templateHTML from './template.html'
 import type { TRect, TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'

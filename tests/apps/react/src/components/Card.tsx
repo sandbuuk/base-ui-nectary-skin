@@ -21,7 +21,7 @@ export const Card: FC<TCard> = ({ search }) => {
       label={label}
       disabled={isDisabled}
     >
-      {hasIcon && <sinch-icon-chatbot size={48} slot="icon"/>}
+      {hasIcon && <sinch-icon-chatbot slot="icon"/>}
       {hasIllustration && <sinch-illustration-phone-and-cat size={290} slot="illustration"/>}
       {buttonText !== null && <sinch-card-button slot="action" text={buttonText} aria-label="Button" onClick={() => {}}/>}
       {linkText !== null && <sinch-card-link slot="action" href="" text={linkText}/>}

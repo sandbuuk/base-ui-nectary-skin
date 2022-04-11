@@ -7,6 +7,7 @@ import { Checkbox } from './components/Checkbox'
 import { Dialog } from './components/Dialog'
 import { Dropdown } from './components/Dropdown'
 import { Grid } from './components/Grid'
+import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Link } from './components/Link'
 import { Pagination } from './components/Pagination'
@@ -68,6 +69,12 @@ const mapElement = (url: URL) => {
     case '/grid': {
       return (
         <Grid search={url.searchParams}/>
+      )
+    }
+
+    case '/icon-button': {
+      return (
+        <IconButton search={url.searchParams}/>
       )
     }
 

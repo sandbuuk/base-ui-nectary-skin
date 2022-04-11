@@ -67,14 +67,14 @@ export const Table = Template(`
         <sinch-link text="Link" href="#"></sinch-link>
       </sinch-table-cell>
       <sinch-table-cell align="center">
-        <sinch-icon-open-in-new size="24"></sinch-icon-open-in-new>
+        <sinch-icon-open-in-new></sinch-icon-open-in-new>
       </sinch-table-cell>
       <sinch-table-cell><span>Lorem Ipsum</span></sinch-table-cell>
       <sinch-table-cell align="center">
         <sinch-toggle></sinch-toggle>
       </sinch-table-cell>
       <sinch-table-cell align="center">
-        <sinch-icon-more-vert size="24"></sinch-icon-more-vert>
+        <sinch-icon-more-vert></sinch-icon-more-vert>
       </sinch-table-cell>
   </sinch-table-row>
   <sinch-table-row>
@@ -86,7 +86,7 @@ export const Table = Template(`
         <sinch-link text="Link" href="#"></sinch-link>
       </sinch-table-cell>
       <sinch-table-cell align="center">
-        <sinch-icon-open-in-new size="24"></sinch-icon-open-in-new>
+        <sinch-icon-open-in-new></sinch-icon-open-in-new>
       </sinch-table-cell>
       <sinch-table-cell>
         <span>Lorem Ipsum is simply dummy text</span>
@@ -95,7 +95,7 @@ export const Table = Template(`
         <sinch-toggle></sinch-toggle>
       </sinch-table-cell>
       <sinch-table-cell align="center">
-        <sinch-icon-more-vert size="24"></sinch-icon-more-vert>
+        <sinch-icon-more-vert></sinch-icon-more-vert>
       </sinch-table-cell>
   </sinch-table-row>
 </sinch-table-body>
@@ -138,14 +138,14 @@ Table.parameters = {
         <sinch-link text="Link" href="#"></sinch-link>
       </sinch-table-cell>
       <sinch-table-cell align="center">
-        <sinch-icon-open-in-new size="24"></sinch-icon-open-in-new>
+        <sinch-icon-open-in-new></sinch-icon-open-in-new>
       </sinch-table-cell>
       <sinch-table-cell><span>Lorem Ipsum</span></sinch-table-cell>
       <sinch-table-cell align="center">
         <sinch-toggle></sinch-toggle>
       </sinch-table-cell>
       <sinch-table-cell align="center">
-        <sinch-icon-more-vert size="24"></sinch-icon-more-vert>
+        <sinch-icon-more-vert></sinch-icon-more-vert>
       </sinch-table-cell>
     </sinch-table-row>
     <sinch-table-row>
@@ -157,7 +157,7 @@ Table.parameters = {
         <sinch-link text="Link" href="#"></sinch-link>
       </sinch-table-cell>
       <sinch-table-cell align="center">
-        <sinch-icon-open-in-new size="24"></sinch-icon-open-in-new>
+        <sinch-icon-open-in-new></sinch-icon-open-in-new>
       </sinch-table-cell>
       <sinch-table-cell>
         <span>Lorem Ipsum is simply dummy text</span>
@@ -166,7 +166,7 @@ Table.parameters = {
         <sinch-toggle></sinch-toggle>
       </sinch-table-cell>
       <sinch-table-cell align="center">
-        <sinch-icon-more-vert size="24"></sinch-icon-more-vert>
+        <sinch-icon-more-vert></sinch-icon-more-vert>
       </sinch-table-cell>
     </sinch-table-row>
   </sinch-table-body>

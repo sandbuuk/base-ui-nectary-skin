@@ -27,7 +27,7 @@ export const Button: FC<TButton> = ({ search }) => {
       onBlur={onBlur}
       aria-label={text ?? 'Button'}
     >
-      {hasIcon && <sinch-icon-open-in-new size={isSmall ? 16 : 24} slot="icon"/>}
+      {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
       {hasSpinner && <sinch-spinner static type={isSmall ? 'small' : 'medium'} slot="icon"/>}
     </sinch-button>
   )

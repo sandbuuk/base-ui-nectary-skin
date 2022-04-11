@@ -3,12 +3,8 @@
   [attr.text]="text"
   [attr.inverted]="isInverted"
   [attr.small]="isSmall">
-  <sinch-icon-open-in-new
-    *ngIf="hasIcon"
-    slot="icon"
-    size="16">
-  </sinch-icon-open-in-new>
-    <sinch-tag-close
+  <sinch-icon-open-in-new *ngIf="hasIcon" slot="icon"></sinch-icon-open-in-new>
+  <sinch-tag-close
     *ngIf="isDismissable"
     slot="close"
     [attr.small]="isSmall"

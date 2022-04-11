@@ -7,6 +7,7 @@
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
     <Dropdown v-if="url.pathname === '/dropdown'" :search="url.searchParams"/>
     <Grid v-if="url.pathname === '/grid'" :search="url.searchParams"/>
+    <IconButton v-if="url.pathname === '/icon-button'" :search="url.searchParams"/>
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
     <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
     <Pagination v-if="url.pathname === '/pagination'" :search="url.searchParams"/>
@@ -34,6 +35,7 @@ import Dropdown from './components/Dropdown.vue'
 import Dialog from './components/Dialog.vue'
 import Grid from './components/Grid.vue'
 import Input from './components/Input.vue'
+import IconButton from './components/IconButton.vue'
 import Link from './components/Link.vue'
 import Pagination from './components/Pagination.vue'
 import Radio from './components/Radio.vue'
@@ -83,6 +85,7 @@ export default {
     Dropdown,
     Dialog,
     Grid,
+    IconButton,
     Input,
     Link,
     Pagination,

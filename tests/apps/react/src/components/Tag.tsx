@@ -23,11 +23,10 @@ export const Tag: FC<TTag> = ({ search }) => {
       small={isSmall}
       inverted={isInverted}
     >
-      {hasIcon && <sinch-icon-open-in-new size={16} slot="icon"/>}
+      {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
       {isDismissable && (
         <sinch-tag-close
           slot="close"
-          small={isSmall}
           onClick={onClick}
           onFocus={onFocus}
           onBlur={onBlur}
