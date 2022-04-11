@@ -54,7 +54,7 @@ Home.args = {
 Home.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-home size="48"></sinch-icon-home>',
+      code: '<sinch-icon-home></sinch-icon-home>',
     },
   },
 }
@@ -69,7 +69,7 @@ Rocket.args = {
 Rocket.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-rocket size="48"></sinch-icon-rocket>',
+      code: '<sinch-icon-rocket></sinch-icon-rocket>',
     },
   },
 }
@@ -84,7 +84,7 @@ Contact.args = {
 Contact.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-contact size="48"></sinch-icon-contact>',
+      code: '<sinch-icon-contact></sinch-icon-contact>',
     },
   },
 }
@@ -99,7 +99,7 @@ ChatBot.args = {
 ChatBot.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-chatbot size="48"></sinch-icon-chatbot>',
+      code: '<sinch-icon-chatbot></sinch-icon-chatbot>',
     },
   },
 }
@@ -114,7 +114,7 @@ Campaigns.args = {
 Campaigns.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-campaigns size="48"></sinch-icon-campaigns>',
+      code: '<sinch-icon-campaigns></sinch-icon-campaigns>',
     },
   },
 }
@@ -129,7 +129,7 @@ BarchartUp.args = {
 BarchartUp.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-barchart-up size="48"></sinch-icon-barchart-up>',
+      code: '<sinch-icon-barchart-up></sinch-icon-barchart-up>',
     },
   },
 }
@@ -144,7 +144,7 @@ BarchartDown.args = {
 BarchartDown.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-barchart-down size="48"></sinch-icon-barchart-down>',
+      code: '<sinch-icon-barchart-down></sinch-icon-barchart-down>',
     },
   },
 }
@@ -159,7 +159,7 @@ User.args = {
 User.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-user size="48"></sinch-icon-user>',
+      code: '<sinch-icon-user></sinch-icon-user>',
     },
   },
 }
@@ -174,7 +174,7 @@ Users.args = {
 Users.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-users size="48"></sinch-icon-users>',
+      code: '<sinch-icon-users></sinch-icon-users>',
     },
   },
 }
@@ -189,7 +189,7 @@ MultipleChannels.args = {
 MultipleChannels.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-multiple-channels size="48"></sinch-icon-multiple-channels>',
+      code: '<sinch-icon-multiple-channels></sinch-icon-multiple-channels>',
     },
   },
 }
@@ -204,7 +204,7 @@ Settings.args = {
 Settings.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-settings size="48"></sinch-icon-settings>',
+      code: '<sinch-icon-settings></sinch-icon-settings>',
     },
   },
 }

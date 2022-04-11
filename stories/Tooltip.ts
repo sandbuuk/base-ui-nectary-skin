@@ -66,7 +66,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-tooltip
   return $wrapper
 }
 
-export const Tooltip = Template('<sinch-icon-open-in-new size=24></sinch-icon-open-in-new>')
+export const Tooltip = Template('<sinch-icon-open-in-new></sinch-icon-open-in-new>')
 
 Tooltip.args = {
   text: 'Tooltip text long',
@@ -77,7 +77,7 @@ Tooltip.parameters = {
     source: {
       code: `
 <sinch-tooltip text={text}>
-  <sinch-icon-open-in-new size="24"></sinch-icon-open-in-new>
+  <sinch-icon-open-in-new></sinch-icon-open-in-new>
 </sinch-tooltip>
 `,
     },

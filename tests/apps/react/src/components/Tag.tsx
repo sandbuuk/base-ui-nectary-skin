@@ -27,7 +27,6 @@ export const Tag: FC<TTag> = ({ search }) => {
       {isDismissable && (
         <sinch-tag-close
           slot="close"
-          small={isSmall}
           onClick={onClick}
           onFocus={onFocus}
           onBlur={onBlur}
