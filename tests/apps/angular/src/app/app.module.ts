@@ -21,6 +21,7 @@ import { CardComponent } from '../components/Card/Card.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
 import { DropdownComponent } from '../components/Dropdown/Dropdown.component'
 import { GridComponent } from '../components/Grid/Grid.component'
+import { IconButtonComponent } from '../components/IconButton/IconButton.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -45,7 +46,8 @@ import { AppComponent } from './app.component'
     DropdownComponent,
     DialogComponent,
     CardComponent,
-    GridComponent
+    GridComponent,
+    IconButtonComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

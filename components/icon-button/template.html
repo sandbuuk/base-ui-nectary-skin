@@ -1,0 +1,54 @@
+<style>
+/* stylelint-disable no-descending-specificity */
+:host {
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+}
+
+button {
+  all: initial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  background-color: transparent;
+  box-shadow: 0 0 0 1px transparent inset;
+  cursor: pointer;
+
+  --sinch-size-icon: 24px;
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+button:focus {
+  box-shadow: 0 0 0 1px var(--sinch-color-stormy-500) inset;
+}
+
+button:hover {
+  background-color: var(--sinch-color-snow-500);
+}
+
+button:active {
+  background-color: var(--sinch-color-snow-600);
+}
+
+button:disabled {
+  background-color: transparent;
+  cursor: initial;
+
+  --sinch-color-spinner-bg: var(--sinch-color-snow-200);
+  --sinch-color-spinner-fg: var(--sinch-color-stormy-200);
+  --sinch-color-icon: var(--sinch-color-stormy-100);
+}
+
+button > * {
+  pointer-events: none;
+}
+</style>
+
+<button>
+  <slot name="icon"></slot>
+</button>

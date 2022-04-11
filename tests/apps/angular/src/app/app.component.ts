@@ -14,20 +14,20 @@ export class AppComponent {
     this.pathname = url.pathname
 
     const width = Number(url.searchParams.get('width') ?? '0')
-  const height = Number(url.searchParams.get('height') ?? '0')
+    const height = Number(url.searchParams.get('height') ?? '0')
 
-  this.style = {
-    display: 'flex',
-    padding: '100px'
-  }
+    this.style = {
+      display: 'flex',
+      padding: '100px'
+    }
 
-  if (height > 0) {
-    this.style.height = height + 'px'
-  }
+    if (height > 0) {
+      this.style.height = height + 'px'
+    }
 
-  if (width > 0) {
-    this.style.flexDirection = 'column',
-    this.style.width = width + 'px'
-  }
+    if (width > 0) {
+      this.style.flexDirection = 'column',
+      this.style.width = width + 'px'
+    }
   }
 }
