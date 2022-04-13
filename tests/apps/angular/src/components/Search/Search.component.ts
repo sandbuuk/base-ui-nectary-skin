@@ -3,8 +3,8 @@ import '@sinch-engage/nectary/search'
 
 @Component({
   selector: 'search-component',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  templateUrl: './Search.component.html',
+  styleUrls: ['./Search.component.css']
 })
 
 export class SearchComponent {
