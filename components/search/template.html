@@ -1,0 +1,122 @@
+<style>
+:host {
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+}
+
+#wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+
+  --sinch-size-icon: 24px;
+}
+
+#label {
+  display: none;
+  font: var(--sinch-font-title-4);
+  color: var(--sinch-color-text-default);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  height: 24px;
+  margin-bottom: 2px;
+}
+
+#input {
+  all: initial;
+  display: block;
+  border: 1px solid var(--sinch-color-stormy-200);
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 100%;
+  height: 48px;
+  padding: 0 44px;
+  font: var(--sinch-font-body);
+  color: var(--sinch-color-text-default);
+  caret-color: var(--sinch-caret-color, auto);
+}
+
+#input::placeholder {
+  font: var(--sinch-font-body);
+  color: var(--sinch-color-text-muted);
+}
+
+#input:focus {
+  border-color: var(--sinch-color-stormy-600);
+}
+
+#icon-search {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  pointer-events: none;
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+#clear {
+  all: initial;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  --sinch-color-icon: var(--sinch-color-stormy-300);
+}
+
+#clear:focus {
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+:host([value=""]) #clear {
+  display: none;
+}
+
+:host([value=""]) #input {
+  padding-right: 12px;
+}
+
+#listbox {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: calc(100% + 8px);
+  width: 100%;
+  box-sizing: border-box;
+  font: var(--sinch-font-body);
+  color: var(--sinch-color-text-default);
+  background-color: var(--sinch-color-snow-100);
+  box-shadow: 1px 2px 4px rgb(0 0 0 / 15%);
+  overflow-y: auto;
+  contain: content;
+}
+
+:host([aria-expanded="true"]) #listbox {
+  display: block;
+}
+
+:host([label]:not([label=""])) #label {
+  display: block;
+}
+</style>
+
+<label id="label" for="input"></label>
+<div id="wrapper">
+  <input id="input" type="text"/>
+  <sinch-icon-search id="icon-search"></sinch-icon-search>
+  <button id="clear">
+    <sinch-icon-close id="icon-close"></sinch-icon-close>
+  </button>
+  <div id="listbox">
+    <slot name="option"></slot>
+  </div>
+</div>

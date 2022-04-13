@@ -12,6 +12,7 @@ import { Input } from './components/Input'
 import { Link } from './components/Link'
 import { Pagination } from './components/Pagination'
 import { Radio } from './components/Radio'
+import { Search } from './components/Search'
 import { Select } from './components/Select'
 import { Spinner } from './components/Spinner'
 import { Table } from './components/Table'
@@ -99,6 +100,12 @@ const mapElement = (url: URL) => {
     case '/radio': {
       return (
         <Radio search={url.searchParams}/>
+      )
+    }
+
+    case '/search': {
+      return (
+        <Search search={url.searchParams}/>
       )
     }
 

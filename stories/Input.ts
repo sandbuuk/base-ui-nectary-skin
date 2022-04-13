@@ -68,6 +68,11 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-input']
 
     $input.innerHTML = innerHTML
 
+    // Prevents Storybook hotkeys
+    $input.addEventListener('keydown', (e) => {
+      e.stopPropagation()
+    })
+
     $input.addEventListener('change', (e: any) => {
       onChange(e.detail)
       updateArgs({ value: e.detail })
@@ -91,7 +96,11 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-input']
   return $input
 }
 
-export const Input = Template('<sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>')
+const inputInnerHTML = `
+  <sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>
+`
+
+export const Input = Template(inputInnerHTML)
 
 Input.args = {
   value: 'hi',
@@ -105,7 +114,7 @@ Input.args = {
 Input.parameters = {
   docs: {
     source: {
-      code: '<sinch-input value={value} onChange={setValue}>\n  <sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>\n</sinch-input>',
+      code: `<sinch-input value={value} onChange={setValue}>${inputInnerHTML}</sinch-input>`,
     },
   },
 }

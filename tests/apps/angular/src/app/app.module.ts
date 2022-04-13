@@ -10,6 +10,7 @@ import { ButtonComponent } from '../components/Button/Button.component'
 import { TextareaComponent } from '../components/Textarea/Textarea.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { SpinnerComponent } from '../components/Spinner/Spinner.component'
+import { SearchComponent } from '../components/Search/Search.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TableComponent } from '../components/Table/Table.component'
 import { TabsComponent } from '../components/Tabs/Tabs.component'
@@ -39,6 +40,7 @@ import { AppComponent } from './app.component'
     TextareaComponent,
     ToggleComponent,
     TooltipComponent,
+    SearchComponent,
     SpinnerComponent,
     TableComponent,
     TabsComponent,

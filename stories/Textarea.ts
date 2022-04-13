@@ -52,7 +52,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<JSX.IntrinsicElements['sinch-textarea']> = ({ onChange }) => {
+const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-textarea']> => ({ onChange }) => {
   const [{
     value,
     label,
@@ -68,7 +68,12 @@ const Template: Story<JSX.IntrinsicElements['sinch-textarea']> = ({ onChange }) 
   if (inputRef.current === null) {
     const $input = document.createElement('sinch-textarea')
 
-    $input.innerHTML = '<sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>'
+    $input.innerHTML = innerHTML
+
+    // Prevents Storybook hotkeys
+    $input.addEventListener('keydown', (e) => {
+      e.stopPropagation()
+    })
 
     $input.addEventListener('change', (e: any) => {
       onChange(e.detail)
@@ -94,7 +99,11 @@ const Template: Story<JSX.IntrinsicElements['sinch-textarea']> = ({ onChange }) 
   return $wrapper
 }
 
-export const Textarea = Template.bind({})
+const textareaInnerHtml = `
+  <sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>
+`
+
+export const Textarea = Template(textareaInnerHtml)
 
 Textarea.args = {
   value: 'hi',
@@ -109,7 +118,7 @@ Textarea.args = {
 Textarea.parameters = {
   docs: {
     source: {
-      code: '<sinch-textarea value={value} onChange={setValue}>\n  <sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>\n</sinch-textarea>',
+      code: `<sinch-textarea value={value} onChange={setValue}>${textareaInnerHtml}</sinch-textarea>`,
     },
   },
 }
