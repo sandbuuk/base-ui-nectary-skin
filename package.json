@@ -4,7 +4,6 @@
     "components/",
     "configs/*",
     "libs/*",
-    "apps/*",
     "tests/",
     "tests/apps/*"
   ],
@@ -12,11 +11,6 @@
     "storybook": "start-storybook --port 4000",
     "storybook:build": "build-storybook --output-dir public --quiet",
     "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html' 'components/theme.css'",
-    "start:quickstarts": "yarn --cwd=apps/quickstarts start",
-    "start:shell": "wait-on http://localhost:3001 && yarn --cwd=apps/shell start",
-    "start": "concurrently --raw npm:start:quickstarts npm:start:shell",
-    "build:quickstarts": "yarn --cwd=apps/quickstarts build",
-    "build:shell": "yarn --cwd=apps/shell build",
     "test": "yarn --cwd=tests test"
   },
   "devDependencies": {

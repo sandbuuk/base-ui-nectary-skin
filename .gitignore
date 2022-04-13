@@ -1,6 +1,5 @@
 node_modules/
 public/
-dist/
 .browsers/
 .DS_Store
 *.log
