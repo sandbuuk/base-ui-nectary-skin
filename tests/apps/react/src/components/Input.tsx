@@ -19,12 +19,13 @@ export const Input: FC<TInput> = ({ search }) => {
   [search, setValue])
   const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-input-focus')), [])
   const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-input-blur')), [])
-  const labelText = useMemo(() => search.get('label') ?? '', [search])
-  const optionalText = useMemo(() => search.get('optional') ?? undefined, [search])
-  const additionalText = useMemo(() => search.get('additional') ?? undefined, [search])
-  const invalidText = useMemo(() => search.get('invalid') ?? undefined, [search])
-  const placeholderText = useMemo(() => search.get('placeholder') ?? undefined, [search])
-  const isDisabled = useMemo(() => search.get('disabled') != null, [search])
+  const type: any = search.get('type') ?? undefined
+  const labelText = search.get('label') ?? ''
+  const optionalText = search.get('optional') ?? undefined
+  const additionalText = search.get('additional') ?? undefined
+  const invalidText = search.get('invalid') ?? undefined
+  const placeholderText = search.get('placeholder') ?? undefined
+  const isDisabled = search.get('disabled') != null
   const tooltip = useMemo(
     () => search.get('tooltip') != null && (
       <sinch-help-tooltip text={search.get('tooltip')!} slot="tooltip"/>
@@ -34,6 +35,7 @@ export const Input: FC<TInput> = ({ search }) => {
 
   return (
     <sinch-input
+      type={type}
       label={labelText}
       optionalText={optionalText}
       additionalText={additionalText}

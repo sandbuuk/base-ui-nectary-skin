@@ -1,11 +1,12 @@
 <template>
   <sinch-input
-    v-bind:placeholder="placeholderText"
-    v-bind:label="labelText"
-    v-bind:optionaltext="optionalText"
-    v-bind:additionaltext="additionalText"
-    v-bind:invalidtext="invalidText"
-    v-bind:disabled="isDisabled"
+    :placeholder="placeholderText"
+    :label="labelText"
+    :optionaltext="optionalText"
+    :additionaltext="additionalText"
+    :invalidtext="invalidText"
+    :disabled="isDisabled"
+    :type="type"
     :value="value"
     @change="onChange"
     @focusin="onFocus"
@@ -54,6 +55,9 @@ export default {
     },
     isDisabled() {
       return this.search.get('disabled') !== null
+    },
+    type() {
+      return this.search.get('type')
     },
     isControlled() {
       return this.search.get('uncontrolled') === null
