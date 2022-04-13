@@ -1,3 +1,9 @@
+## v0.14.0
+
+* ➕ add `sinch-search` component
+* ➕ add `sinch-icon-search` component
+* ➕ add type `password` to `sinch-input`
+
 ## v0.13.0
 
 * 💥 remove `size` attribute in icons
