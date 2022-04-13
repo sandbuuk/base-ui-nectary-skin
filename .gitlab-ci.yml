@@ -47,44 +47,6 @@ visual-tests:
     paths:
       - tests/test-results
 
-build-quickstarts:
-  stage: build
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^quickstarts@/
-  image: node:16
-  cache:
-    key:
-      files:
-        - yarn.lock
-      prefix: cache
-    paths:
-      - .yarn/
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
-  script:
-    - yarn build:quickstarts --output-path ../../dist/
-  artifacts:
-    paths:
-      - dist/
-
-deploy-quickstarts:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^quickstarts@/
-  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-  dependencies:
-    - build-quickstarts
-  needs:
-    - build-quickstarts
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  script:
-  - aws s3 cp ./dist/ s3://sinch-engage-quickstarts-lab/ --recursive --include "*"
-  - aws cloudfront create-invalidation --distribution-id E2DT4M7D8AY1QW --paths "/*"
-
 publish-components:
   stage: deploy
   rules:
@@ -107,29 +69,6 @@ publish-components:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish components/
     - node ./scripts/slack-changelog.js
-
-publish-bus:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^bus@/
-  image: node:16
-  cache:
-    key:
-      files:
-        - yarn.lock
-      prefix: cache
-    paths:
-      - .yarn/
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
-  script:
-    - yarn --cwd libs/bus/ build
-    - node scripts/prepare-package-json.js libs/bus/package.json
-    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
-    - npm publish libs/bus/
 
 pages:
   stage: deploy
