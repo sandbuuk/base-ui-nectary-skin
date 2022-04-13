@@ -7,6 +7,7 @@ export const useStoryWrapper = () => {
     const $wrapper = document.createElement('div')
 
     $wrapper.style.height = '200px'
+    $wrapper.style.alignItems = 'flex-start'
     $wrapper.style.display = 'flex'
     $wrapper.style.paddingTop = '28px'
     $wrapper.style.paddingLeft = '28px'

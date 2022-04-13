@@ -12,6 +12,7 @@
     <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
     <Pagination v-if="url.pathname === '/pagination'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
+    <Search v-if="url.pathname === '/search'" :search="url.searchParams"/>
     <Select v-if="url.pathname === '/select'" :search="url.searchParams"/>
     <Tabs v-if="url.pathname === '/tabs'" :search="url.searchParams"/>
     <Table v-if="url.pathname === '/table'" :search="url.searchParams"/>
@@ -47,6 +48,7 @@ import Textarea from './components/Textarea.vue'
 import Toggle from './components/Toggle.vue'
 import Tooltip from './components/Tooltip.vue'
 import Spinner from './components/Spinner.vue'
+import Search from './components/Search.vue'
 
 export default {
   data() {
@@ -98,6 +100,7 @@ export default {
     Toggle,
     Tooltip,
     Spinner,
+    Search,
   }
 };
 </script>

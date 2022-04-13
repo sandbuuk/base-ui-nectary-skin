@@ -43,6 +43,10 @@ export const updateBooleanAttribute = ($element: Element, attrName: string, attr
   }
 }
 
+export const updateExplicitBooleanAttribute = ($element: Element, attrName: string, attrValue: boolean | null | undefined) => {
+  $element.setAttribute(attrName, attrValue === true ? 'true' : 'false')
+}
+
 export const isAttrTrue = (attrValue: string | null): boolean => {
   return attrValue === '' || (attrValue !== 'false' && attrValue !== null)
 }

@@ -1,0 +1,15 @@
+<sinch-search
+  [attr.label]="label"
+  [attr.placeholder]="placeholder"
+  [attr.maxvisibleitems]="maxVisibleItems"
+  (focusin)="onFocus()"
+  (focusout)="onBlur()"
+  [value]="value"
+  (change)="onChange($event)">
+  <ng-container *ngIf="value.length >= 5">
+    <sinch-search-option text="Option 1 value long long long" slot="option"></sinch-search-option>
+    <sinch-search-option text="Option 2 value" slot="option"></sinch-search-option>
+    <sinch-search-option text="Option 3 value" slot="option"></sinch-search-option>
+    <sinch-search-option text="Option 4 value" slot="option"></sinch-search-option>
+  </ng-container>
+</sinch-search>

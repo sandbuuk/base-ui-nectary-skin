@@ -20,6 +20,7 @@ import { LinkComponent } from '../components/Link/Link.component'
 import { CardComponent } from '../components/Card/Card.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
 import { DropdownComponent } from '../components/Dropdown/Dropdown.component'
+import { SearchComponent } from '../components/Search/Search.component'
 import { GridComponent } from '../components/Grid/Grid.component'
 import { IconButtonComponent } from '../components/IconButton/IconButton.component'
 import { AppComponent } from './app.component'
@@ -47,6 +48,7 @@ import { AppComponent } from './app.component'
     DialogComponent,
     CardComponent,
     GridComponent,
+    SearchComponent,
     IconButtonComponent
   ],
   schemas: [
