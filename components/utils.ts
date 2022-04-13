@@ -74,7 +74,7 @@ export const isLiteralValue = <T extends readonly string[]>(literals: T, value: 
   return value != null && literals.includes(value)
 }
 
-export const updateLiteralAttribute = <T extends readonly string[]>($element: Element, literals: T, attrName: string, attrValue: T[number] | null | undefined) => {
+export const updateLiteralAttribute = <T extends readonly string[]>($element: Element, literals: T, attrName: string, attrValue: string | null | undefined) => {
   if (isLiteralValue(literals, attrValue)) {
     $element.setAttribute(attrName, attrValue)
   } else {

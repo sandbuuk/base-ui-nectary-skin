@@ -2,13 +2,17 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getLiteralAttribute,
   isAttrTrue,
   updateAttribute,
   updateBooleanAttribute,
+  updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 import type { DOMAttributes, FocusEvent, SyntheticEvent } from 'react'
+
+const inputTypes = ['text', 'password'] as const
 
 const template = document.createElement('template')
 
@@ -51,6 +55,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
   static get observedAttributes() {
     return [
+      'type',
       'value',
       'placeholder',
       'label',
@@ -61,12 +66,16 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     ]
   }
 
-  get type() {
-    return 'text'
-  }
-
   get nodeName() {
     return 'input'
+  }
+
+  set type(value: TTextInputType) {
+    updateAttribute(this, 'type', value)
+  }
+
+  get type(): TTextInputType {
+    return getLiteralAttribute(this, inputTypes, 'type', 'text')
   }
 
   set value(value: string) {
@@ -127,6 +136,11 @@ defineCustomElement('sinch-input', class extends HTMLElement {
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
+      case 'type': {
+        updateLiteralAttribute(this.#$input, inputTypes, 'type', newVal)
+
+        break
+      }
       case 'value': {
         const nextVal = newVal ?? ''
 
@@ -224,7 +238,10 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 })
 
+export type TTextInputType = typeof inputTypes[number]
+
 export type TSinchInputElement = HTMLElement & {
+  type: TTextInputType,
   value: string,
   label: string,
   placeholder: string | null,
@@ -237,6 +254,7 @@ export type TSinchInputElement = HTMLElement & {
 }
 
 export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
+  type?: TTextInputType,
   value: string,
   label: string,
   placeholder?: string,

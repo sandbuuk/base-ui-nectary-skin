@@ -11,6 +11,7 @@ import '@sinch-engage/nectary/help-tooltip'
 export class InputComponent {
   value: string
   isControlled: boolean
+  type: string | null
   labelText: string | null
   optionalText: string | null
   additionalText: string | null
@@ -23,6 +24,7 @@ export class InputComponent {
     const url = new URL(location.href)
     this.value = url.searchParams.get('value') ?? ''
     this.isControlled = url.searchParams.get('uncontrolled') === null
+    this.type = url.searchParams.get('type')
     this.labelText = url.searchParams.get('label')
     this.optionalText = url.searchParams.get('optional')
     this.additionalText = url.searchParams.get('additional')

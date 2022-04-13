@@ -14,6 +14,42 @@ test('accessibility', checkValue(async function* () {
   yield
 }))
 
+test('type attribute', withValue(async function* ({ $eval }) {
+  await $eval((el) => el.setAttribute('type', 'password'))
+  yield { name: 'password' }
+
+  await $eval((el) => el.setAttribute('type', 'text'))
+  yield { name: 'text' }
+
+  await $eval((el) => el.setAttribute('type', ''))
+  yield { name: 'empty' }
+
+  await $eval((el) => el.setAttribute('type', 'invalid'))
+  yield { name: 'invalid' }
+}))
+
+test('type property', withValue(async function* ({ $eval }) {
+  await $eval((el) => {
+    el.type = 'password'
+  })
+  yield { name: 'password' }
+
+  await $eval((el) => {
+    el.type = 'text'
+  })
+  yield { name: 'text' }
+
+  await $eval((el) => {
+    el.type = '' as any
+  })
+  yield { name: 'empty' }
+
+  await $eval((el) => {
+    el.type = 'invalid' as any
+  })
+  yield { name: 'invalid' }
+}))
+
 test('value attribute', withPlaceholder(async function* ({ $eval }) {
   await $eval((el) => el.setAttribute('value', 'Input Value'))
   yield { name: 'updated' }
