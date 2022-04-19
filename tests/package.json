@@ -16,11 +16,11 @@
   "devDependencies": {
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.0",
-    "@sinch-engage/nectary": "*",
     "@playwright/test": "1.20.1",
+    "@sinch-engage/nectary": "*",
     "@types/node": "^17.0.14",
     "babel-loader": "^8.2.3",
-    "concurrently": "^6.3.0",
+    "concurrently": "^7.1.0",
     "css-loader": "^6.5.1",
     "html-webpack-plugin": "^5.5.0",
     "postcss-html": "^1.2.0",
