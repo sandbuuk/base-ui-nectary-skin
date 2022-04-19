@@ -88,7 +88,7 @@
     height: 10px;
     border-radius: 50%;
     transition: opacity 0.1s linear;
-    opacity: 0%;
+    opacity: 0;
     background-color: var(--sinch-color-radio-border);
     pointer-events: none;
   }
@@ -126,7 +126,7 @@
   }
 
   #input:checked ~ #icon-knob {
-    opacity: 100%;
+    opacity: 1;
     background-color: var(--sinch-color-radio-border-checked);
   }
 
@@ -192,7 +192,7 @@
   }
 
   #input:focus:checked ~ #icon-knob {
-    opacity: 100%;
+    opacity: 1;
     background-color: var(--sinch-color-radio-border-focus-checked);
   }
 
@@ -206,7 +206,7 @@
   }
 
   #input:hover:checked ~ #icon-knob {
-    opacity: 100%;
+    opacity: 1;
     background-color: var(--sinch-color-radio-border-hover-checked);
   }
 
@@ -220,7 +220,7 @@
   }
 
   #input:active:checked ~ #icon-knob {
-    opacity: 100%;
+    opacity: 1;
     background-color: var(--sinch-color-radio-border-active-checked);
   }
 
@@ -234,7 +234,7 @@
   }
 
   #input:disabled:checked ~ #icon-knob {
-    opacity: 100%;
+    opacity: 1;
     background-color: var(--sinch-color-radio-border-disabled-checked);
   }
 </style>

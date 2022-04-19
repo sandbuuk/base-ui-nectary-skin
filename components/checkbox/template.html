@@ -121,7 +121,7 @@
     left: 9px;
     top: 10px;
     transition: opacity 0.1s linear;
-    opacity: 0%;
+    opacity: 0;
     pointer-events: none;
   }
 
@@ -130,7 +130,7 @@
     left: 10px;
     top: 15px;
     transition: opacity 0.1s linear;
-    opacity: 0%;
+    opacity: 0;
     pointer-events: none;
   }
 
@@ -165,11 +165,11 @@
 
   /* stylelint-disable-next-line no-descending-specificity */
   :host(:is(:not([indeterminate]), [indeterminate="false"])) #checkbox:checked ~ #icon-checkmark {
-    opacity: 100%;
+    opacity: 1;
   }
 
   :host([indeterminate]:not([indeterminate="false"])) #checkbox:checked ~ #icon-indeterminate {
-    opacity: 100%;
+    opacity: 1;
   }
 
   /* Colors Checked */
