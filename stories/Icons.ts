@@ -30,6 +30,13 @@ import '@sinch-engage/nectary/icon/keyboard-arrow-up'
 import '@sinch-engage/nectary/icon/south'
 import '@sinch-engage/nectary/icon/south-east'
 import '@sinch-engage/nectary/icon/south-west'
+import '@sinch-engage/nectary/icon/add-alert'
+import '@sinch-engage/nectary/icon/auto-delete'
+import '@sinch-engage/nectary/icon/error'
+import '@sinch-engage/nectary/icon/error-outline'
+import '@sinch-engage/nectary/icon/notification-important'
+import '@sinch-engage/nectary/icon/warning'
+import '@sinch-engage/nectary/icon/warning-amber'
 
 const iconNames = [
   'sinch-icon-cancel',
@@ -60,6 +67,14 @@ const iconNames = [
   'sinch-icon-south-west',
   'sinch-icon-west',
   'sinch-icon-north-west',
+  /* Alert */
+  'sinch-icon-add-alert',
+  'sinch-icon-auto-delete',
+  'sinch-icon-error',
+  'sinch-icon-error-outline',
+  'sinch-icon-notification-important',
+  'sinch-icon-warning',
+  'sinch-icon-warning-amber',
 ]
 
 export default {
