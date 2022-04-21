@@ -37,6 +37,27 @@ import '@sinch-engage/nectary/icon/error-outline'
 import '@sinch-engage/nectary/icon/notification-important'
 import '@sinch-engage/nectary/icon/warning'
 import '@sinch-engage/nectary/icon/warning-amber'
+import '@sinch-engage/nectary/icon/attach-email'
+import '@sinch-engage/nectary/icon/attachment'
+import '@sinch-engage/nectary/icon/cloud'
+import '@sinch-engage/nectary/icon/cloud-circle'
+import '@sinch-engage/nectary/icon/cloud-done'
+import '@sinch-engage/nectary/icon/cloud-download'
+import '@sinch-engage/nectary/icon/cloud-off'
+import '@sinch-engage/nectary/icon/cloud-queue'
+import '@sinch-engage/nectary/icon/cloud-upload'
+import '@sinch-engage/nectary/icon/create-new-folder'
+import '@sinch-engage/nectary/icon/download'
+import '@sinch-engage/nectary/icon/download-done'
+import '@sinch-engage/nectary/icon/folder'
+import '@sinch-engage/nectary/icon/folder-open'
+import '@sinch-engage/nectary/icon/folder-shared'
+import '@sinch-engage/nectary/icon/request-quote'
+import '@sinch-engage/nectary/icon/rule-folder'
+import '@sinch-engage/nectary/icon/snippet-folder'
+import '@sinch-engage/nectary/icon/text-snippet'
+import '@sinch-engage/nectary/icon/topic'
+import '@sinch-engage/nectary/icon/upload'
 
 const iconNames = [
   'sinch-icon-cancel',
@@ -75,6 +96,28 @@ const iconNames = [
   'sinch-icon-notification-important',
   'sinch-icon-warning',
   'sinch-icon-warning-amber',
+  /* File */
+  'sinch-icon-attach-email',
+  'sinch-icon-attachment',
+  'sinch-icon-cloud',
+  'sinch-icon-cloud-circle',
+  'sinch-icon-cloud-done',
+  'sinch-icon-cloud-download',
+  'sinch-icon-cloud-off',
+  'sinch-icon-cloud-queue',
+  'sinch-icon-cloud-upload',
+  'sinch-icon-create-new-folder',
+  'sinch-icon-download',
+  'sinch-icon-download-done',
+  'sinch-icon-folder',
+  'sinch-icon-folder-open',
+  'sinch-icon-folder-shared',
+  'sinch-icon-request-quote',
+  'sinch-icon-rule-folder',
+  'sinch-icon-snippet-folder',
+  'sinch-icon-text-snippet',
+  'sinch-icon-topic',
+  'sinch-icon-upload',
 ]
 
 export default {
