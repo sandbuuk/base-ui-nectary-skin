@@ -58,6 +58,32 @@ import '@sinch-engage/nectary/icon/snippet-folder'
 import '@sinch-engage/nectary/icon/text-snippet'
 import '@sinch-engage/nectary/icon/topic'
 import '@sinch-engage/nectary/icon/upload'
+import '@sinch-engage/nectary/icon/app-settings-alt'
+import '@sinch-engage/nectary/icon/apps'
+import '@sinch-engage/nectary/icon/arrow-drop-down'
+import '@sinch-engage/nectary/icon/arrow-drop-down-circle'
+import '@sinch-engage/nectary/icon/arrow-drop-up'
+import '@sinch-engage/nectary/icon/arrow-left'
+import '@sinch-engage/nectary/icon/arrow-right'
+import '@sinch-engage/nectary/icon/campaign'
+import '@sinch-engage/nectary/icon/check'
+import '@sinch-engage/nectary/icon/double-arrow'
+import '@sinch-engage/nectary/icon/first-page'
+import '@sinch-engage/nectary/icon/fullscreen'
+import '@sinch-engage/nectary/icon/fullscreen-exit'
+import '@sinch-engage/nectary/icon/home-work'
+import '@sinch-engage/nectary/icon/last-page'
+import '@sinch-engage/nectary/icon/legend-toggle'
+import '@sinch-engage/nectary/icon/menu'
+import '@sinch-engage/nectary/icon/menu-open'
+import '@sinch-engage/nectary/icon/payments'
+import '@sinch-engage/nectary/icon/refresh'
+import '@sinch-engage/nectary/icon/subdirectory-arrow-left'
+import '@sinch-engage/nectary/icon/subdirectory-arrow-right'
+import '@sinch-engage/nectary/icon/switch-left'
+import '@sinch-engage/nectary/icon/switch-right'
+import '@sinch-engage/nectary/icon/unfold-less'
+import '@sinch-engage/nectary/icon/unfold-more'
 
 const iconNames = [
   'sinch-icon-cancel',
@@ -118,6 +144,33 @@ const iconNames = [
   'sinch-icon-text-snippet',
   'sinch-icon-topic',
   'sinch-icon-upload',
+  /* Navigation */
+  'sinch-icon-app-settings-alt',
+  'sinch-icon-apps',
+  'sinch-icon-arrow-drop-down',
+  'sinch-icon-arrow-drop-down-circle',
+  'sinch-icon-arrow-drop-up',
+  'sinch-icon-arrow-left',
+  'sinch-icon-arrow-right',
+  'sinch-icon-campaign',
+  'sinch-icon-check',
+  'sinch-icon-double-arrow',
+  'sinch-icon-first-page',
+  'sinch-icon-fullscreen',
+  'sinch-icon-fullscreen-exit',
+  'sinch-icon-home-work',
+  'sinch-icon-last-page',
+  'sinch-icon-legend-toggle',
+  'sinch-icon-menu',
+  'sinch-icon-menu-open',
+  'sinch-icon-payments',
+  'sinch-icon-refresh',
+  'sinch-icon-subdirectory-arrow-left',
+  'sinch-icon-subdirectory-arrow-right',
+  'sinch-icon-switch-left',
+  'sinch-icon-switch-right',
+  'sinch-icon-unfold-less',
+  'sinch-icon-unfold-more',
 ]
 
 export default {
