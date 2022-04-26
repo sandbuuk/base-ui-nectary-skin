@@ -1,3 +1,8 @@
+## v0.15.0
+
+* ➕ add 54 icons
+* 🐞 fix `sinch-dialog` content padding
+
 ## v0.14.0
 
 * ➕ add `sinch-search` component
