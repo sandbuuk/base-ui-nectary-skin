@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test:ci": "concurrently --success=first --kill-others --raw npm:test:playwright npm:test:app-all",
+    "test:ci": "npm run test:app-all && npm run test:playwright",
     "test:playwright": "wait-on http://localhost:3021 && wait-on http://localhost:3022 && wait-on http://localhost:3023 && playwright test",
+    "test:bash": "wait-on http://localhost:3021 && wait-on http://localhost:3022 && wait-on http://localhost:3023 && /bin/bash",
     "test:app-all": "concurrently --raw npm:test:app-react npm:test:app-vue npm:test:app-angular",
-    "test:app-react": "webpack serve --config apps/react/webpack.config.js",
-    "test:app-vue": "webpack serve --config apps/vue/webpack.config.js",
-    "test:app-angular": "yarn --cwd=apps/angular ng serve",
+    "test:app-react": "webpack serve --config apps/react/webpack.config.js &",
+    "test:app-vue": "webpack serve --config apps/vue/webpack.config.js &",
+    "test:app-angular": "cd ./apps/angular; ng serve &",
     "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.20.1 ./tests/entrypoint.dev.sh",
     "test": "docker run -it --rm --ipc=host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.20.1 ./tests/entrypoint.sh",
     "remove-empty-dirs": "find ./test-results -type d -empty -delete"
