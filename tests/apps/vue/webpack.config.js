@@ -56,7 +56,13 @@ module.exports = {
     port: PORT,
     historyApiFallback: true,
     liveReload: false,
-    hot: false
+    hot: false,
+    devMiddleware: {
+      stats: 'none',
+    }
+  },
+  infrastructureLogging: {
+    level: 'warn',
   },
   plugins: [
     new VueLoaderPlugin(),

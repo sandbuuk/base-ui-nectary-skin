@@ -1,4 +1,4 @@
 #!/bin/sh
 
 fc-cache -f
-yarn --cwd=tests concurrently --raw npm:test:app-all /bin/bash
+yarn --cwd=tests test:app-all && yarn --cwd=tests test:bash

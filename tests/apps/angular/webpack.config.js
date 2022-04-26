@@ -11,7 +11,13 @@ module.exports = {
     host: 'localhost',
     port: PORT,
     liveReload: false,
-    hot: false
+    hot: false,
+    devMiddleware: {
+      stats: false,
+    }
+  },
+  infrastructureLogging: {
+    level: 'warn',
   },
   module: {
     rules: [
