@@ -19,6 +19,11 @@ defineCustomElement('sinch-spinner', class extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
   }
 
+  connectedCallback() {
+    this.setAttribute('aria-live', 'polite')
+    this.setAttribute('aria-busy', 'true')
+  }
+
   set type(value: TSinchSpinnerType) {
     updateLiteralAttribute(this, spinnerTypes, 'type', value)
   }
