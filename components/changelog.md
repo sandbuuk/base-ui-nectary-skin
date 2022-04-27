@@ -1,6 +1,7 @@
 ## v0.15.0
 
 * ➕ add 54 icons
+* ➕ add `sinch-spinner` accessibility attributes
 * 🐞 fix `sinch-dialog` content padding
 
 ## v0.14.0
