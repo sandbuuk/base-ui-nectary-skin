@@ -11,7 +11,8 @@ export const Dialog: FC<TDialog> = ({ search }) => {
 
   return (
     <sinch-dialog
-      title={title}
+      open
+      caption={title}
       aria-label={title}
       onClose={() => {
         window.dispatchEvent(new CustomEvent('sinch-dialog-close'))
@@ -23,8 +24,7 @@ export const Dialog: FC<TDialog> = ({ search }) => {
           <sinch-button text="Cancel" aria-label="Cancel" type="secondary" slot="buttons" onClick={() => {}}/>
           <sinch-button text="Ok" aria-label="Ok" type="primary" slot="buttons" onClick={() => {}}/>
         </>
-      )
-        }
+      )}
     </sinch-dialog>
   )
 }

@@ -1,9 +1,13 @@
+import dialogPolyfill from 'dialog-polyfill'
 import {
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   getRect,
+  isAttrTrue,
   updateAttribute,
 } from '../utils'
+import '../icon-button'
 import '../icon/close'
 import templateHTML from './template.html'
 import type { TRect, TSinchElementReact } from '../types'
@@ -26,12 +30,11 @@ const getReactEventHandler = ($element: HTMLElement, handlerName: string): ((arg
 }
 
 defineCustomElement('sinch-dialog', class extends HTMLElement {
-  #$main: HTMLElement
+  #$dialog: HTMLElement
   #$closeButton: HTMLButtonElement
-  #$backDrop: HTMLElement
-  #$title: HTMLTitleElement
+  #$caption: HTMLElement
+  #isConected = false
 
-  #$prevActiveElement: HTMLElement | null = null
   constructor() {
     super()
 
@@ -41,83 +44,91 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
     })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    this.#$main = shadowRoot.querySelector('#main')!
+    this.#$dialog = shadowRoot.querySelector('dialog')!
     this.#$closeButton = shadowRoot.querySelector('#close')!
-    this.#$backDrop = shadowRoot.querySelector('#backdrop')!
-    this.#$title = shadowRoot.querySelector('#title')!
+    this.#$caption = shadowRoot.querySelector('#caption')!
+
+    dialogPolyfill.registerDialog(this.#$dialog)
   }
 
   static get observedAttributes() {
-    return ['title']
+    return ['caption', 'open']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
-      case 'title': {
-        this.#$title.textContent = newVal
+      case 'caption': {
+        this.#$caption.textContent = newVal
+
+        break
+      }
+      case 'open': {
+        if (this.#isConected) {
+          this.#setOpen(isAttrTrue(newVal))
+        }
 
         break
       }
     }
   }
 
-  set title(title: string) {
-    updateAttribute(this, 'title', title)
+  set caption(caption: string) {
+    updateAttribute(this, 'caption', caption)
   }
 
-  get title(): string {
-    return getAttribute(this, 'title', '')
+  get caption(): string {
+    return getAttribute(this, 'caption', '')
   }
 
   connectedCallback() {
     this.setAttribute('role', 'dialog')
-    this.#$prevActiveElement = document.activeElement as HTMLElement
-    this.#$closeButton.addEventListener('click', this.#onCloseByMouse)
-    this.#$backDrop.addEventListener('click', this.#onCloseByMouse)
-    this.addEventListener('keydown', this.#onCloseByEsc)
+    this.#$closeButton.addEventListener('click', this.#onCloseClick)
     this.addEventListener('close', this.#onCloseReactHandler)
-    document.addEventListener('focusin', this.#focusIn)
+    this.addEventListener('click', this.#onBackdropClick)
+    this.#$dialog.addEventListener('cancel', this.#onCancel)
+
+    this.#isConected = true
+
+    if (getBooleanAttribute(this, 'open')) {
+      this.#setOpen(true)
+    }
   }
 
   disconnectedCallback() {
-    this.#$prevActiveElement = null
-    this.#$closeButton.removeEventListener('click', this.#onCloseByMouse)
-    this.#$backDrop.removeEventListener('click', this.#onCloseByMouse)
-    this.removeEventListener('keydown', this.#onCloseByEsc)
+    this.#$closeButton.removeEventListener('click', this.#onCloseClick)
     this.removeEventListener('close', this.#onCloseReactHandler)
-    document.removeEventListener('focusin', this.#focusIn)
+    this.removeEventListener('click', this.#onBackdropClick)
+    this.#$dialog.removeEventListener('cancel', this.#onCancel)
+
+    this.#isConected = false
   }
 
-  #focusIn = (e: Event) => {
-    if (e.target === this) {
-      return
-    }
-
-    if (!this.contains(e.target as Node)) {
-      this.#$closeButton.focus()
-    }
+  #onCancel = (e: Event) => {
+    e.preventDefault()
+    this.#dispatchCloseEvent()
   }
 
-  #onCloseByMouse = (e: MouseEvent) => {
+  #onCloseClick = (e: MouseEvent) => {
     e.stopPropagation()
-    this.#onClose()
+    this.#dispatchCloseEvent()
   }
 
-  #onCloseByEsc = (e: KeyboardEvent) => {
-    switch (e.key) {
-      case 'Escape': {
-        e.preventDefault()
-        e.stopPropagation()
-        this.#onClose()
+  #onBackdropClick = (e: MouseEvent) => {
+    e.stopPropagation()
 
-        break
-      }
+    const rect = this.dialogRect
+    const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
+
+    if (!isInside) {
+      this.#dispatchCloseEvent()
     }
   }
 
-  #onClose = () => {
-    this.#$prevActiveElement?.focus()
+  #onCloseReactHandler = () => {
+    getReactEventHandler(this, 'onClose')?.()
+  }
 
+  #dispatchCloseEvent() {
     this.dispatchEvent(
       new CustomEvent(
         'close',
@@ -126,12 +137,16 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
     )
   }
 
-  #onCloseReactHandler = () => {
-    getReactEventHandler(this, 'onClose')?.()
+  #setOpen(isOpen: boolean) {
+    if (isOpen) {
+      (this.#$dialog as any).showModal()
+    } else {
+      (this.#$dialog as any).close()
+    }
   }
 
   get dialogRect() {
-    return getRect(this.#$main)
+    return getRect(this.#$dialog)
   }
 
   get closeButtonRect() {
@@ -140,13 +155,14 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
 })
 
 type TSinchDialogElement = HTMLElement & {
-  title: string,
+  caption: string,
   readonly dialogRect: TRect,
   readonly closeButtonRect: TRect,
 }
 
 type TSinchDialogReact = TSinchElementReact<TSinchDialogElement> & {
-  title: string,
+  open: boolean,
+  caption: string,
   'aria-label': string,
   onClose: (event: SyntheticEvent<TSinchDialogElement, CustomEvent<void>>) => void,
 }
