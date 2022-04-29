@@ -6,13 +6,13 @@ import '@sinch-engage/nectary/button'
 export default {
   title: 'Components/Dialog',
   argTypes: {
-    title: { control: 'text', defaultValue: 'New title', description: 'Dialog title' },
+    caption: { control: 'text', defaultValue: 'New title', description: 'Dialog title' },
     onClose: { action: 'onClose' },
   },
 } as Meta
 
 const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-dialog']> => ({ onClose }) => {
-  const [{ title }] = useArgs()
+  const [{ caption }] = useArgs()
   const dialogRef = useRef<HTMLElementTagNameMap['sinch-dialog'] | null>(null)
   const $wrapper = useRef<HTMLElementTagNameMap['div'] | null>(null)
 
@@ -23,13 +23,12 @@ const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-di
     const $openingButton = document.createElement('sinch-button')
 
     $openingButton.setAttribute('text', 'Open dialog')
-    $dialog.setAttribute('style', 'display: none')
 
     $wrapper.current.appendChild($openingButton)
     $wrapper.current.appendChild($dialog)
 
     $openingButton.addEventListener('click', () => {
-      $dialog.removeAttribute('style')
+      $dialog.setAttribute('open', '')
     })
 
     $dialog.innerHTML = innerHTML
@@ -37,13 +36,13 @@ const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-di
     dialogRef.current = $dialog
     $dialog.addEventListener('close', (e: any) => {
       onClose(e)
-      $dialog.setAttribute('style', 'display: none')
+      $dialog.removeAttribute('open')
     })
   }
 
   const $dialog = dialogRef.current!
 
-  $dialog.title = title
+  $dialog.caption = caption
 
   return $wrapper.current
 }

@@ -20,7 +20,8 @@
     "postbuild": "tsc"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.0"
+    "@babel/runtime": "^7.17.0",
+    "dialog-polyfill": "^0.5.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",

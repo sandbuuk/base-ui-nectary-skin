@@ -1,42 +1,55 @@
 <style>
-:host {
-  outline: none;
-}
-
-#wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  color: var(--sinch-color-text-default);
-  font: var(--sinch-font-body);
-  z-index: 2147483647;
-}
-
-#backdrop {
-  background-color: black;
+dialog {
   position: absolute;
   left: 0;
-  top: 0;
-  opacity: 0.55;
-  width: 100%;
-  height: 100%;
-}
-
-#main {
+  right: 0;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  position: relative;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
   padding: 24px;
   width: 100%;
   max-width: 512px;
   border-radius: 4px;
   box-sizing: border-box;
   background-color: var(--sinch-color-snow-100);
+  color: var(--sinch-color-text-default);
+  font: var(--sinch-font-body);
+  border: none;
+  box-shadow: 1px 2px 8px rgb(0 0 0 / 10%);
+}
+
+dialog:not([open]) {
+  display: none;
+}
+
+dialog + .backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.55;
+}
+
+dialog::backdrop {
+  background-color: black;
+  opacity: 0.55;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+._dialog_overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+dialog.fixed {
+  position: fixed;
+  top: 50%;
+  transform: translate(0, -50%);
 }
 
 #header {
@@ -47,7 +60,7 @@
   margin-bottom: 16px;
 }
 
-#title {
+#caption {
   font: var(--sinch-font-title-3);
   color: var(--sinch-color-text-default);
 }
@@ -73,20 +86,17 @@
 }
 </style>
 
-<div id="wrapper">
-  <div id="backdrop"></div>
-  <div id="main">
-    <div id="header">
-      <span id="title"></span>
-      <button id="close">
-        <sinch-icon-close></sinch-icon-close>
-      </button>
-    </div>
-    <div id="content-wrapper">
-      <slot name="content"></slot>
-    </div>
-    <div id="buttons">
-      <slot name="buttons"></slot>
-    </div>
+<dialog>
+  <div id="header">
+    <span id="caption"></span>
+    <button id="close">
+      <sinch-icon-close></sinch-icon-close>
+    </button>
   </div>
-</div>
+  <div id="content-wrapper">
+    <slot name="content"></slot>
+  </div>
+  <div id="buttons">
+    <slot name="buttons"></slot>
+  </div>
+</dialog>
