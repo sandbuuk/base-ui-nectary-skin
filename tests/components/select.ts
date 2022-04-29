@@ -137,18 +137,16 @@ test('keyboard', withPlaceholder(async function* ({ $, $eval }) {
 }))
 
 test('maxvisibleitems attribute', shot(async function* ({ $, $eval }) {
-  await $.click()
-
   await $eval((el) => el.setAttribute('maxvisibleitems', '2'))
+  await $.click()
   yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
 }))
 
 test('maxvisibleitems property', shot(async function* ({ $, $eval }) {
-  await $.click()
-
   await $eval((el) => {
     el.maxVisibleItems = 2
   })
+  await $.click()
   yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
 }))
 
