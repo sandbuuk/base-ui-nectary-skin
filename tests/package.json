@@ -10,14 +10,14 @@
     "test:app-react": "webpack serve --config apps/react/webpack.config.js",
     "test:app-vue": "webpack serve --config apps/vue/webpack.config.js",
     "test:app-angular": "cd ./apps/angular; ./node_modules/.bin/ng serve",
-    "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.20.1 ./tests/entrypoint.dev.sh",
-    "test": "docker run -it --rm --ipc=host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.20.1 ./tests/entrypoint.sh",
+    "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.21.1 ./tests/entrypoint.dev.sh",
+    "test": "docker run -it --rm --ipc=host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.21.1 ./tests/entrypoint.sh",
     "remove-empty-dirs": "find ./test-results -type d -empty -delete"
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.0",
-    "@playwright/test": "1.20.1",
+    "@playwright/test": "1.21.1",
     "@sinch-engage/nectary": "*",
     "@types/node": "^17.0.14",
     "babel-loader": "^8.2.3",
