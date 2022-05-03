@@ -83,7 +83,7 @@ module.exports = {
         "^.+\\.(js|jsx)$": "babel-jest"
     },
     transformIgnorePatterns: [
-        "node_modules/(?!@nectary)"
+        "node_modules/(?!@sinch-engage)"
     ]
 }
 ```
@@ -138,7 +138,7 @@ Then add this lines to your jest.config.js file:
         "^.+\\.(js|jsx)$": "babel-jest"
     },
     transformIgnorePatterns: [
-        "node_modules/(?!@nectary)"
+        "node_modules/(?!@sinch-engage)"
     ]
 ```
 
