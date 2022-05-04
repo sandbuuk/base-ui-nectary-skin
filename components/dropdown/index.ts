@@ -19,7 +19,7 @@ import type { FocusEvent, SyntheticEvent } from 'react'
 
 const orientationValues = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
 
-const ITEM_HEIGHT = 36
+const ITEM_HEIGHT = 40
 
 const findSelectedOption = (elements: readonly TSinchDropdownOptionElement[]) => {
   for (const el of elements) {
@@ -39,8 +39,6 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
   #$button: HTMLButtonElement
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
-  #$targetElement: HTMLElement | null = null
-  #$targetSlot: HTMLSlotElement
 
   constructor() {
     super()
@@ -55,31 +53,24 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
     this.#$button = shadowRoot.querySelector('#button')!
     this.#$listbox = shadowRoot.querySelector('#listbox')!
     this.#$optionSlot = shadowRoot.querySelector('slot[name="option"]')!
-    this.#$targetSlot = shadowRoot.querySelector('slot[name="target"]')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'listbox')
 
     this.#$button.addEventListener('click', this.#onButtonClick)
-    this.#$button.addEventListener('focusin', this.#onTargetFocusin)
-    this.#$listbox.addEventListener('blur', this.#onListboxBlur)
     this.#$listbox.addEventListener('click', this.#onListboxClick)
     this.#$listbox.addEventListener('keydown', this.#onListboxKeyDown)
     this.#$listbox.addEventListener('keypress', this.#onListboxKeyPress)
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange)
-    this.#$targetSlot.addEventListener('slotchange', this.#onTargetSlotChange)
   }
 
   disconnectedCallback() {
     this.#$button.removeEventListener('click', this.#onButtonClick)
-    this.#$button.removeEventListener('focusin', this.#onTargetFocusin)
-    this.#$listbox.removeEventListener('blur', this.#onListboxBlur)
     this.#$listbox.removeEventListener('click', this.#onListboxClick)
     this.#$listbox.removeEventListener('keydown', this.#onListboxKeyDown)
     this.#$listbox.removeEventListener('keypress', this.#onListboxKeyPress)
     this.#$optionSlot.removeEventListener('slotchange', this.#onOptionSlotChange)
-    this.#$targetSlot.removeEventListener('slotchange', this.#onTargetSlotChange)
   }
 
   static get observedAttributes() {
@@ -126,7 +117,7 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
   }
 
   get dropdownRect() {
-    return getRect(this.#$listbox.firstElementChild!)
+    return getRect(this.#$listbox)
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -138,17 +129,17 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
       }
 
       case 'maxvisibleitems': {
-        const $list = (this.#$listbox.firstElementChild as HTMLElement)
+        const $list = this.#$listbox
 
-        $list.style.maxHeight = attrValueToPixels(newVal, { min: 2, multiplier: ITEM_HEIGHT })
+        if (newVal === '0') {
+          $list.style.maxHeight = 'unset'
+        } else {
+          $list.style.maxHeight = attrValueToPixels(newVal, { min: 2, multiplier: ITEM_HEIGHT })
+        }
 
         break
       }
     }
-  }
-
-  #onTargetFocusin = (e: Event) => {
-    this.#$targetElement = e.target as HTMLElement
   }
 
   #onButtonClick = (e: Event) => {
@@ -173,7 +164,6 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
     }
 
     this.#onCollapse()
-    this.#focusTargetElement()
   }
 
   #onListboxKeyPress = (e: KeyboardEvent) => {
@@ -183,7 +173,6 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
         e.preventDefault()
         this.#dispatchChangeEvent(findSelectedOption(this.#getEnabledOptionElements()))
         this.#onCollapse()
-        this.#focusTargetElement()
 
         break
       }
@@ -209,7 +198,6 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
       case 'Escape': {
         e.preventDefault()
         this.#onCollapse()
-        this.#focusTargetElement()
 
         break
       }
@@ -221,24 +209,54 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
     this.#onValueChange(this.value)
   }
 
-  #onTargetSlotChange = () => {
-    // Forget previous target element
-    this.#$targetElement = null
-  }
-
-  #onListboxBlur = (e: Event) => {
-    e.stopPropagation()
-    this.#onCollapse()
+  #setOpen(isOpen: boolean) {
+    if (isOpen) {
+      (this.#$listbox as any).showModal()
+    } else {
+      (this.#$listbox as any).close()
+    }
   }
 
   #onExpand() {
     this.#$button.setAttribute('aria-expanded', 'true')
-    this.#$listbox.focus()
+    this.#setOpen(true)
+
+    const buttonRect = this.#$button.getBoundingClientRect()
+    const modalRect = this.#$listbox.getBoundingClientRect()
+    const width = Math.max(modalRect.width, buttonRect.width)
+    const widthDiff = Math.max(buttonRect.width - modalRect.width, 0)
+    let leftOffset = 0
+    let topOffset = 0
+
+    const orient = this.orientation
+
+    if (orient === 'bottom-right' || orient === 'top-right') {
+      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, buttonRect.x - modalRect.x + widthDiff * 0.5))
+    }
+
+    if (orient === 'bottom-left' || orient === 'top-left') {
+      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, buttonRect.x + buttonRect.width - modalRect.x - modalRect.width - widthDiff * 0.5))
+    }
+
+    if (orient === 'bottom-left' || orient === 'bottom-right') {
+      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, buttonRect.y + buttonRect.height - modalRect.y + 8))
+    }
+
+    if (orient === 'top-left' || orient === 'top-right') {
+      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, buttonRect.y - modalRect.y - modalRect.height - 8))
+    }
+
+    this.#$listbox.style.transform = `translateX(${leftOffset}px) translateY(${topOffset}px)`
+    this.#$listbox.style.width = `${width}px`
+
     this.#selectOption(this.#getOptionWithValue(this.value) ?? this.#getFirstOption())
   }
 
   #onCollapse() {
     this.#$button.setAttribute('aria-expanded', 'false')
+    this.#setOpen(false)
+    this.#$listbox.style.transform = `initial`
+    this.#$listbox.style.width = `max-content`
   }
 
   #onValueChange(value: string) {
@@ -333,22 +351,9 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
     }
   }
 
-  #focusTargetElement() {
-    const el = this.#$targetElement
+  focus() {}
 
-    // Forget target element before focus
-    this.#$targetElement = null
-    el?.focus()
-  }
-
-  focus() {
-    this.#focusTargetElement()
-  }
-
-  blur() {
-    this.#$button.blur()
-    this.#$listbox.blur()
-  }
+  blur() {}
 })
 
 export type TSinchDropdownOrientation = typeof orientationValues[number]

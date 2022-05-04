@@ -18,7 +18,7 @@ export class AppComponent {
 
     this.style = {
       display: 'flex',
-      padding: '100px'
+      padding: '120px'
     }
 
     if (height > 0) {
