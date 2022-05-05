@@ -1,3 +1,11 @@
+## v0.16.0
+
+* 💥 rename `title` to `caption` in `sinch-dialog`
+* ➕ add pointer cursor to `sinch-select` and `sinch-dropdown`
+* 🐞 fix `sinch-dialog` popover clip
+* 🐞 fix `sinch-dropdown` popover clip
+* 🐞 fix `sinch-select` popover clip
+
 ## v0.15.0
 
 * ➕ add 54 icons
