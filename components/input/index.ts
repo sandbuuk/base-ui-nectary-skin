@@ -26,6 +26,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   #$invalidText: HTMLSpanElement
   #selectionStart: number | null = null
   #selectionEnd: number | null = null
+  #isPendingDk = false
 
   constructor() {
     super()
@@ -47,10 +48,12 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   connectedCallback() {
     this.setAttribute('role', 'textbox')
     this.#$input.addEventListener('input', this.#onInput)
+    this.#$input.addEventListener('keydown', this.#onKeydown)
   }
 
   disconnectedCallback() {
     this.#$input.removeEventListener('input', this.#onInput)
+    this.#$input.removeEventListener('keydown', this.#onKeydown)
   }
 
   static get observedAttributes() {
@@ -205,6 +208,12 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     this.#$input.blur()
   }
 
+  #onKeydown = (e: KeyboardEvent) => {
+    if (e.key === 'Dead') {
+      this.#isPendingDk = true
+    }
+  }
+
   #onInput = (e: Event) => {
     e.stopPropagation()
 
@@ -218,8 +227,12 @@ defineCustomElement('sinch-input', class extends HTMLElement {
       const prevSelectionEnd = this.#selectionEnd
       const isPrevCursorEnd = prevSelectionStart === prevSelectionEnd && prevSelectionStart === prevValue.length
 
-      // Reset input value to enforce controlled state
-      this.#$input.value = prevValue
+      if (!this.#isPendingDk) {
+        // Reset input value to enforce controlled state
+        this.#$input.value = prevValue
+      }
+
+      this.#isPendingDk = false
 
       if (!isPrevCursorEnd) {
         this.#$input.setSelectionRange(prevSelectionStart, prevSelectionEnd)
