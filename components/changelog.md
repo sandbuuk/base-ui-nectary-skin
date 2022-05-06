@@ -1,3 +1,7 @@
+## v0.16.1
+
+* 🐞 fix dead keys in `sinch-input` and `sinch-textarea`
+
 ## v0.16.0
 
 * 💥 rename `title` to `caption` in `sinch-dialog`
