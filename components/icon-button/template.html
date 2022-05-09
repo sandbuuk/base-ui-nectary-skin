@@ -44,6 +44,11 @@ button:disabled {
   --sinch-color-icon: var(--sinch-color-stormy-100);
 }
 
+:host([small]:not([small="false"])) > button {
+  width: 32px;
+  height: 32px;
+}
+
 button > * {
   pointer-events: none;
 }

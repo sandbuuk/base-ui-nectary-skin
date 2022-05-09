@@ -36,6 +36,26 @@ test('disabled attribute', shot(async function* ({ $eval }) {
   yield { name: 'enabled' }
 }))
 
+test('small property', shot(async function* ({ $eval }) {
+  await $eval((el) => {
+    el.small = true
+  })
+  yield { name: 'true' }
+
+  await $eval((el) => {
+    el.small = false
+  })
+  yield { name: 'false' }
+}))
+
+test('small attribute', shot(async function* ({ $eval }) {
+  await $eval((el) => el.setAttribute('small', ''))
+  yield { name: 'true' }
+
+  await $eval((el) => el.removeAttribute('small'))
+  yield { name: 'false' }
+}))
+
 test('mouse interaction', shot(async function* ({ $, page }) {
   const rect = (await $.boundingBox())!
 
