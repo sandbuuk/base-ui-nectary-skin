@@ -13,6 +13,7 @@ import { Link } from './components/Link'
 import { Pagination } from './components/Pagination'
 import { Radio } from './components/Radio'
 import { Search } from './components/Search'
+import { Segment } from './components/Segment'
 import { Select } from './components/Select'
 import { Spinner } from './components/Spinner'
 import { Table } from './components/Table'
@@ -106,6 +107,12 @@ const mapElement = (url: URL) => {
     case '/search': {
       return (
         <Search search={url.searchParams}/>
+      )
+    }
+
+    case '/segment': {
+      return (
+        <Segment search={url.searchParams}/>
       )
     }
 

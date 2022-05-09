@@ -1,0 +1,44 @@
+<style>
+:host {
+  display: contents;
+
+  --sinch-size-icon: 32px;
+}
+
+input {
+  all: initial;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+input:focus ~ sinch-icon-expand-less,
+input:focus ~ sinch-icon-expand-more {
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px var(--sinch-color-stormy-500) inset;
+}
+
+#up {
+  display: block;
+}
+
+#down {
+  display: none;
+}
+
+:host([value]:not([value="false"])) #up {
+  display: none;
+}
+
+:host([value]:not([value="false"])) #down {
+  display: block;
+}
+</style>
+
+<input type="checkbox"/>
+<sinch-icon-expand-less id="up"></sinch-icon-expand-less>
+<sinch-icon-expand-more id="down"></sinch-icon-expand-more>

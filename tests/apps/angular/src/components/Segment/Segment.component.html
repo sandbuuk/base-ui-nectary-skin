@@ -1,0 +1,16 @@
+<sinch-segment [caption]="caption" [attr.collapsed]="isCollapsed">
+  <sinch-segment-collapse *ngIf="hasCollapse" slot="collapse" [value]="isCollapsed" (change)="onCollapse($event)" (focus)="onCollapseFocus()" (blur)="onCollapseBlur()"></sinch-segment-collapse>
+  <div *ngIf="hasContent" slot="content" style="display: flex; flex-direction: column;">
+    <section style="margin-bottom: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
+    <sinch-input label="Label" value=""></sinch-input>
+    <sinch-input label="Label" value=""></sinch-input>
+  </div>
+  <sinch-icon-chatbot *ngIf="hasIcon" size="32" slot="icon"></sinch-icon-chatbot>
+  <sinch-tag *ngIf="hasInfo" text="Label" slot="info"></sinch-tag>
+  <sinch-icon-button *ngIf="hasInfo" small slot="info">
+    <sinch-icon-apps slot="icon"></sinch-icon-apps>
+  </sinch-icon-button>
+  <sinch-checkbox *ngIf="hasAction" text="Checkbox" slot="action"></sinch-checkbox>
+  <sinch-button *ngIf="hasAction" text="Cancel" type="secondary" slot="action" small></sinch-button>
+  <sinch-button *ngIf="hasAction" text="Ok" type="primary" slot="action" small></sinch-button>
+</sinch-segment>
