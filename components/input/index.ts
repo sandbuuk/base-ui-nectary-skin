@@ -209,7 +209,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   }
 
   #onKeydown = (e: KeyboardEvent) => {
-    if (e.keyCode === 229) {
+    if (e.key === 'Dead') {
       this.#isPendingDk = true
     }
   }
