@@ -54,6 +54,14 @@ defineCustomElement('sinch-icon-button', class extends HTMLElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
+  set small(isSmall: boolean) {
+    updateBooleanAttribute(this, 'small', isSmall)
+  }
+
+  get small() {
+    return getBooleanAttribute(this, 'small')
+  }
+
   focus() {
     this.#$button.focus()
   }
@@ -65,6 +73,7 @@ defineCustomElement('sinch-icon-button', class extends HTMLElement {
 
 export type TSinchIconButtonElement = HTMLElement & {
   disabled: boolean,
+  small: boolean,
   focus(): void,
   blur(): void,
 }
@@ -72,6 +81,7 @@ export type TSinchIconButtonElement = HTMLElement & {
 export type TSinchIconButtonReact = TSinchElementReact<TSinchIconButtonElement> & {
   'aria-label': string,
   disabled?: boolean,
+  small?: boolean,
   onClick: (e: MouseEvent<TSinchIconButtonElement>) => void,
   onFocus?: (e: FocusEvent<TSinchIconButtonElement>) => void,
   onBlur?: (e: FocusEvent<TSinchIconButtonElement>) => void,

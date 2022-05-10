@@ -21,6 +21,7 @@
     <Toggle v-if="url.pathname === '/toggle'" :search="url.searchParams"/>
     <Tooltip v-if="url.pathname === '/tooltip'" :search="url.searchParams"/>
     <Spinner v-if="url.pathname === '/spinner'" :search="url.searchParams"/>
+    <Segment v-if="url.pathname === '/segment'" :search="url.searchParams"/>
     <Dialog v-if="url.pathname === '/dialog'" :search="url.searchParams"/>
   </div>
 </template>
@@ -49,6 +50,7 @@ import Toggle from './components/Toggle.vue'
 import Tooltip from './components/Tooltip.vue'
 import Spinner from './components/Spinner.vue'
 import Search from './components/Search.vue'
+import Segment from './components/Segment.vue'
 
 export default {
   data() {
@@ -101,6 +103,7 @@ export default {
     Tooltip,
     Spinner,
     Search,
+    Segment,
   }
 };
 </script>

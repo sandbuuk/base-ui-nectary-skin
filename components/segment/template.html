@@ -1,0 +1,85 @@
+<style>
+:host {
+  display: block;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: var(--sinch-color-snow-100);
+  color: var(--sinch-color-text-default);
+  font: var(--sinch-font-body);
+  border: none;
+  box-shadow: 1px 2px 8px rgb(0 0 0 / 10%);
+}
+
+#header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  height: 32px;
+  padding: 24px 32px 16px;
+
+  --sinch-size-icon: 32px;
+}
+
+#caption {
+  font: var(--sinch-font-title-2);
+  color: var(--sinch-color-text-default);
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#content-wrapper {
+  padding: 0 32px;
+}
+
+#action {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 16px 32px 24px;
+}
+
+#info {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  z-index: 1;
+}
+
+:host([collapsed]:not([collapsed="false"])) :is(#content-wrapper, #action) {
+  display: none;
+}
+
+:host([collapsed]:not([collapsed="false"])) #header {
+  padding-bottom: 24px;
+}
+</style>
+
+<div id="wrapper">
+  <div id="header">
+    <slot name="icon"></slot>
+    <span id="caption"></span>
+    <div id="info">
+      <slot name="info"></slot>
+    </div>
+    <slot name="collapse"></slot>
+  </div>
+  <div id="content-wrapper">
+    <slot name="content"></slot>
+  </div>
+  <div id="action">
+    <slot name="action"></slot>
+  </div>
+</div>
