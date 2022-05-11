@@ -45,12 +45,12 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
     this.setAttribute('role', 'textbox')
     this.setAttribute('aria-multiline', 'true')
     this.#$input.addEventListener('input', this.#onInput)
-    this.#$input.addEventListener('keydown', this.#onKeydown)
+    this.#$input.addEventListener('compositionstart', this.#onCompositionStart)
   }
 
   disconnectedCallback() {
     this.#$input.removeEventListener('input', this.#onInput)
-    this.#$input.removeEventListener('keydown', this.#onKeydown)
+    this.#$input.removeEventListener('compositionstart', this.#onCompositionStart)
   }
 
   static get observedAttributes() {
@@ -191,10 +191,8 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
     this.#$input.blur()
   }
 
-  #onKeydown = (e: KeyboardEvent) => {
-    if (e.key === 'Dead') {
-      this.#isPendingDk = true
-    }
+  #onCompositionStart = () => {
+    this.#isPendingDk = true
   }
 
   #onInput = (e: Event) => {
