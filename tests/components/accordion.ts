@@ -8,16 +8,19 @@ const items = encodeURI(JSON.stringify([{
   icon: true,
   status: 'success',
   content: 'Accordion content',
+  optional: 'Required',
 }, {
   value: 2,
   label: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s',
   status: 'info',
   content: 'Accordion content',
+  optional: 'Optional',
 }, {
   value: 3,
   label: 'Option value 3',
   disabled: true,
   icon: true,
+  optional: 'Disabled',
 }, {
   value: 4,
   label: 'Option value 4',
@@ -34,8 +37,8 @@ const singleItemDisabled = encodeURI(JSON.stringify([{
   icon: true,
   disabled: true,
 }]))
-const withItems = makeScreenshotTests(`/accordion?width=200&options=${items}`, 'sinch-accordion')
-const withItemsMultiple = makeScreenshotTests(`/accordion?width=200&multiple=true&options=${items}`, 'sinch-accordion')
+const withItems = makeScreenshotTests(`/accordion?width=300&options=${items}`, 'sinch-accordion')
+const withItemsMultiple = makeScreenshotTests(`/accordion?width=300&multiple=true&options=${items}`, 'sinch-accordion')
 const withSingleItem = makeScreenshotTests(`/accordion?width=200&options=${singleItem}`, 'sinch-accordion')
 const withSingleItemDisabled = makeScreenshotTests(`/accordion?width=200&options=${singleItemDisabled}`, 'sinch-accordion')
 const withSingleItemUncontrolled = makeScreenshotTests(`/accordion?width=200&uncontrolled=true&options=${singleItem}`, 'sinch-accordion')

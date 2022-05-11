@@ -35,6 +35,7 @@ export const Accordion: FC<TAccordion> = ({ search }) => {
           label={opt.label}
           status={opt.status}
           disabled={opt.disabled}
+          optionalText={opt.optional}
         >
           {opt.content != null && <span slot="content">{opt.content}</span>}
           {opt.icon === true && <sinch-icon-open-in-new slot="icon"/>}

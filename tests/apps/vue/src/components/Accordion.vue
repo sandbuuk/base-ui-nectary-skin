@@ -5,7 +5,8 @@
       :value="opt.value"
       :label="opt.label"
       :disabled="opt.disabled"
-      :status="opt.status">
+      :status="opt.status"
+      :optionaltext="opt.optional">
       <span v-if="opt.content != null" slot="content">{{opt.content}}</span>
       <sinch-icon-open-in-new v-if="opt.icon === true" slot="icon"></sinch-icon-open-in-new>
     </sinch-accordion-item>

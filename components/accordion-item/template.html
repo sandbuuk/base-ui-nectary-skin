@@ -88,6 +88,10 @@
   color: var(--sinch-color-text-default);
 }
 
+#dropdown-icon {
+  --sinch-size-icon: 24px;
+}
+
 #button[aria-expanded="true"] > #dropdown-icon {
   transform: rotate(180deg);
 }
@@ -95,15 +99,19 @@
 #button[aria-expanded="true"] + #content {
   display: block;
 }
+
+#optional {
+  font: var(--sinch-font-small-text);
+  color: var(--sinch-color-stormy-300);
+}
 </style>
 
 <div id="wrapper">
   <button id="button" aria-controls="content" aria-expanded="false">
     <slot name="icon"></slot>
     <span id="title"></span>
-    <svg id="dropdown-icon" width="12" height="8" aria-hidden="true">
-      <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
-    </svg>
+    <span id="optional"></span>
+    <sinch-icon-keyboard-arrow-down id="dropdown-icon"></sinch-icon-keyboard-arrow-down>
   </button>
   <div id="content" role="region" aria-labelledby="button">
     <slot name="content"></slot>
