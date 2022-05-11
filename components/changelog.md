@@ -1,3 +1,9 @@
+## v0.17.0
+
+* ➕ add `sinch-segment` component
+* ➕ add `small` attribute to `sinch-icon-button`
+* 🐞 fix dead keys in `sinch-input` and `sinch-textarea` for Linux layouts
+
 ## v0.16.1
 
 * 🐞 fix dead keys in `sinch-input` and `sinch-textarea`
