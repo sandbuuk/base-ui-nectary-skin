@@ -9,6 +9,7 @@ export default {
   title: 'Components/IconButton',
   argTypes: {
     disabled: { control: 'boolean', description: 'Is button disabled' },
+    small: { control: 'boolean', description: 'Is button small' },
     onClick: { action: 'onClick', description: 'Click handler' },
     onFocus: { action: 'onFocus', description: 'Focus handler (optional)' },
     onBlur: { action: 'onBlur', description: 'Blur handler (optional)' },
@@ -16,7 +17,7 @@ export default {
 } as Meta
 
 const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-icon-button']> => () => {
-  const [{ disabled }] = useArgs()
+  const [{ disabled, small }] = useArgs()
   const buttonRef = useRef<HTMLElementTagNameMap['sinch-icon-button'] | null>(null)
 
   if (buttonRef.current === null) {
@@ -30,6 +31,7 @@ const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-ic
   const $button = buttonRef.current!
 
   $button.disabled = disabled
+  $button.small = small
 
   return $button
 }

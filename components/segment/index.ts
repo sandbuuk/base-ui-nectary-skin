@@ -1,7 +1,9 @@
 import {
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   updateAttribute,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -47,10 +49,12 @@ defineCustomElement('sinch-segment', class extends HTMLElement {
     return getAttribute(this, 'caption', '')
   }
 
-  connectedCallback() {
+  set collapsed(isChecked: boolean) {
+    updateBooleanAttribute(this, 'collapsed', isChecked)
   }
 
-  disconnectedCallback() {
+  get collapsed() {
+    return getBooleanAttribute(this, 'collapsed')
   }
 })
 
