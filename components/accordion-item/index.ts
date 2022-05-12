@@ -1,3 +1,4 @@
+import '../icon/keyboard-arrow-down'
 import {
   defineCustomElement,
   getAttribute,
@@ -25,6 +26,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-accordion-item', class extends HTMLElement {
   #$button: HTMLButtonElement
   #$buttonContent: HTMLSpanElement
+  #$optionalText: HTMLSpanElement
 
   constructor() {
     super()
@@ -38,6 +40,7 @@ defineCustomElement('sinch-accordion-item', class extends HTMLElement {
 
     this.#$button = shadowRoot.querySelector('#button')!
     this.#$buttonContent = shadowRoot.querySelector('#title')!
+    this.#$optionalText = shadowRoot.querySelector('#optional')!
   }
 
   connectedCallback() {
@@ -49,7 +52,7 @@ defineCustomElement('sinch-accordion-item', class extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['label', 'disabled', 'checked']
+    return ['label', 'disabled', 'checked', 'optionaltext']
   }
 
   set value(value: string) {
@@ -92,6 +95,14 @@ defineCustomElement('sinch-accordion-item', class extends HTMLElement {
     updateLiteralAttribute(this, statusValues, 'status', value)
   }
 
+  set optionalText(value: string | null) {
+    updateAttribute(this, 'optionaltext', value)
+  }
+
+  get optionalText() {
+    return getAttribute(this, 'optionaltext', null)
+  }
+
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'label': {
@@ -108,6 +119,12 @@ defineCustomElement('sinch-accordion-item', class extends HTMLElement {
 
       case 'checked': {
         updateAttribute(this.#$button, 'aria-expanded', isAttrTrue(newVal))
+
+        break
+      }
+
+      case 'optionaltext': {
+        this.#$optionalText.textContent = newVal
 
         break
       }
@@ -139,6 +156,7 @@ export type TSinchAccordionStatusType = typeof statusValues[number]
 export type TSinchAccordionItemElement = HTMLElement & {
   value: string,
   label: string,
+  optionalText: string | null,
   disabled: boolean,
   checked: boolean,
   status: TSinchAccordionStatusType | null,
@@ -149,6 +167,7 @@ export type TSinchAccordionItemElement = HTMLElement & {
 export type TSinchAccordionItemReact = TSinchElementReact<TSinchAccordionItemElement> & {
   value: string,
   label: string,
+  optionalText?: string,
   disabled?: boolean,
   status?: TSinchAccordionStatusType,
   onFocus?: (e: FocusEvent<TSinchAccordionItemElement>) => void,
