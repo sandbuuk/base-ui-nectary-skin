@@ -1,0 +1,68 @@
+<style>
+:host {
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+}
+
+#wrapper {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  font: var(--sinch-font-title-5);
+  line-height: 30px;
+  color: var(--sinch-color-text-default);
+  background-color: var(--sinch-color-snow-700);
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid var(--sinch-color-snow-100);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+:host([background="blue"]) #wrapper {
+  background-color: var(--sinch-color-stormy-500);
+  color: var(--sinch-color-snow-100);
+}
+
+:host([background="yellow"]) #wrapper {
+  background-color: var(--sinch-color-honey-500);
+}
+
+:host([size="l"]) #wrapper {
+  width: 40px;
+  height: 40px;
+  font: var(--sinch-font-title-4);
+  line-height: 38px;
+}
+
+:host([size="s"]) #wrapper {
+  width: 24px;
+  height: 24px;
+  font: var(--sinch-font-extra-small-text);
+  line-height: 22px;
+}
+
+#text {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#image {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+:host([src]:not([src=""])) #image {
+  display: block;
+}
+</style>
+
+<div id="wrapper"><span id="text"></span><img id="image" alt=""/></div>

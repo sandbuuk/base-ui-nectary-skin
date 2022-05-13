@@ -24,6 +24,7 @@ import { DropdownComponent } from '../components/Dropdown/Dropdown.component'
 import { GridComponent } from '../components/Grid/Grid.component'
 import { IconButtonComponent } from '../components/IconButton/IconButton.component'
 import { SegmentComponent } from '../components/Segment/Segment.component'
+import { AvatarComponent } from '../components/Avatar/Avatar.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -52,6 +53,7 @@ import { AppComponent } from './app.component'
     GridComponent,
     IconButtonComponent,
     SegmentComponent,
+    AvatarComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
