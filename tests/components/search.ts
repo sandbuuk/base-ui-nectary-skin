@@ -117,7 +117,7 @@ test('dropdown', withValue(async function* ({ $, $eval, page }) {
 
   yield { name: 'input-focus', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  await page.keyboard.press('Tab')
+  await page.keyboard.press('Shift+Tab')
 
   yield { name: 'input-blur', includeRects: [await $eval((el) => el.dropdownRect)] }
 }))
