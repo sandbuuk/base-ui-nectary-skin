@@ -2,6 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getIntegerAttribute,
   isAttrTrue,
   updateAttribute,
   updateBooleanAttribute,
@@ -62,6 +63,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
       'additionaltext',
       'invalidtext',
       'disabled',
+      'rows',
     ]
   }
 
@@ -117,6 +119,12 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
 
       case 'disabled': {
         this.#$input.disabled = isAttrTrue(newVal)
+
+        break
+      }
+
+      case 'rows': {
+        updateAttribute(this.#$input, 'rows', newVal)
 
         break
       }
@@ -181,6 +189,22 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
 
   get disabled() {
     return getBooleanAttribute(this, 'disabled')
+  }
+
+  set resizable(isResizable: boolean) {
+    updateBooleanAttribute(this, 'resizable', isResizable)
+  }
+
+  get resizable() {
+    return getBooleanAttribute(this, 'resizable')
+  }
+
+  set rows(value: HTMLTextAreaElement['rows']) {
+    updateAttribute(this, 'rows', value)
+  }
+
+  get rows(): HTMLTextAreaElement['rows'] {
+    return getIntegerAttribute(this, 'rows', 0)
   }
 
   get selectionStart(): HTMLTextAreaElement['selectionStart'] {
@@ -267,6 +291,8 @@ export type TSinchTextareaElement = HTMLElement & {
   selectionStart: HTMLTextAreaElement['selectionStart'],
   selectionEnd: HTMLTextAreaElement['selectionEnd'],
   selectionDirection: HTMLTextAreaElement['selectionDirection'],
+  rows: HTMLTextAreaElement['rows'],
+  resizable: boolean,
   focus(): void,
   blur(): void,
 }
@@ -280,6 +306,8 @@ export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   additionalText?: string,
   disabled?: boolean,
   'aria-label': string,
+  rows?: number,
+  resizable?: boolean,
   onChange: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
   onKeyPress?: DOMAttributes<TSinchTextareaElement>['onKeyPress'],
   onFocus?: (e: FocusEvent<TSinchTextareaElement>) => void,
