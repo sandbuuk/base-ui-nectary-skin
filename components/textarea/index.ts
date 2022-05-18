@@ -183,6 +183,30 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
+  get selectionStart(): HTMLTextAreaElement['selectionStart'] {
+    return this.#$input.selectionStart
+  }
+
+  set selectionStart(value: HTMLTextAreaElement['selectionStart']) {
+    this.#$input.selectionStart = value
+  }
+
+  get selectionEnd(): HTMLTextAreaElement['selectionEnd'] {
+    return this.#$input.selectionEnd
+  }
+
+  set selectionEnd(value: HTMLTextAreaElement['selectionEnd']) {
+    this.#$input.selectionEnd = value
+  }
+
+  get selectionDirection(): HTMLTextAreaElement['selectionDirection'] {
+    return this.#$input.selectionDirection
+  }
+
+  set selectionDirection(value: HTMLTextAreaElement['selectionDirection']) {
+    this.#$input.selectionDirection = value
+  }
+
   focus() {
     this.#$input.focus()
   }
@@ -240,6 +264,9 @@ export type TSinchTextareaElement = HTMLElement & {
   invalidText: string | null,
   additionalText: string | null,
   disabled: boolean,
+  selectionStart: HTMLTextAreaElement['selectionStart'],
+  selectionEnd: HTMLTextAreaElement['selectionEnd'],
+  selectionDirection: HTMLTextAreaElement['selectionDirection'],
   focus(): void,
   blur(): void,
 }
