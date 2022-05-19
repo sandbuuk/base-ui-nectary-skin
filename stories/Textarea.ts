@@ -35,6 +35,14 @@ export default {
       description: 'Invalid',
       control: 'text',
     },
+    resizable: {
+      description: 'Is textarea resizable',
+      control: 'boolean',
+    },
+    rows: {
+      description: 'Number of textarea rows',
+      control: 'number',
+    },
     onChange: {
       description: 'Handler to sync input value with the state',
       action: 'onChange',
@@ -61,6 +69,8 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-textare
     optionalText,
     invalidText,
     disabled,
+    resizable,
+    rows,
   }, updateArgs] = useArgs()
   const $wrapper = useStoryWrapper()
   const inputRef = useRef<HTMLElementTagNameMap['sinch-textarea'] | null>(null)
@@ -95,6 +105,8 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-textare
   $input.optionalText = optionalText
   $input.invalidText = invalidText
   $input.disabled = disabled
+  $input.resizable = resizable
+  $input.rows = rows
 
   return $wrapper
 }
@@ -113,6 +125,8 @@ Textarea.args = {
   invalidText: 'Invalid',
   placeholder: 'Placeholder',
   disabled: false,
+  resizable: false,
+  rows: 3,
 }
 
 Textarea.parameters = {

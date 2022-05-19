@@ -1,3 +1,12 @@
+## v0.18.0
+
+* ➕ add `sinch-avatar` component
+* ➕ add selection api to `sinch-input` and `sinch-textarea`
+* ➕ add `rows` and `resizable` attributes to `sinch-textarea`
+* ➕ add `optionaltext` attribute to `sinch-accordion-item`
+* ➕ add `colors.json` file with theme colors
+* 🐞 hide clear button when missing `value` attribute in `sinch-search`
+
 ## v0.17.0
 
 * ➕ add `sinch-segment` component
