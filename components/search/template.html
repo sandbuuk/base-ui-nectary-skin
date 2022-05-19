@@ -34,6 +34,7 @@
   width: 100%;
   height: 48px;
   padding: 0 44px;
+  padding-right: 12px;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
   caret-color: var(--sinch-caret-color, auto);
@@ -58,30 +59,24 @@
 }
 
 #clear {
-  all: initial;
   position: absolute;
   right: 8px;
   top: 8px;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  display: none;
 
-  --sinch-color-icon: var(--sinch-color-stormy-300);
+  --sinch-color-icon: red;
 }
 
 #clear:focus {
   --sinch-color-icon: var(--sinch-color-stormy-500);
 }
 
-:host([value=""]) #clear {
-  display: none;
+:host([value]:not([value=""])) #clear {
+  display: flex;
 }
 
-:host([value=""]) #input {
-  padding-right: 12px;
+:host([value]:not([value=""])) #input {
+  padding-right: 44px;
 }
 
 #listbox {
@@ -113,9 +108,9 @@
 <div id="wrapper">
   <input id="input" type="text"/>
   <sinch-icon-search id="icon-search"></sinch-icon-search>
-  <button id="clear">
-    <sinch-icon-close id="icon-close"></sinch-icon-close>
-  </button>
+  <sinch-icon-button id="clear" small>
+    <sinch-icon-close id="icon-close" slot="icon"></sinch-icon-close>
+  </sinch-icon-button>
   <div id="listbox">
     <slot name="option"></slot>
   </div>

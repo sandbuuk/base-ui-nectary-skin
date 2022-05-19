@@ -198,6 +198,30 @@ test('disabled attribute', withEverything(async function* ({ $eval }) {
   yield { name: 'enabled' }
 }))
 
+test('resizable attribute', withPlaceholder(async function* ({ $eval }) {
+  await $eval((el) => el.setAttribute('resizable', ''))
+  yield { name: 'enabled' }
+}))
+
+test('resizable property', withPlaceholder(async function* ({ $eval }) {
+  await $eval((el) => {
+    el.resizable = true
+  })
+  yield { name: 'enabled' }
+}))
+
+test('rows attribute', withPlaceholder(async function* ({ $eval }) {
+  await $eval((el) => el.setAttribute('rows', '1'))
+  yield { name: 'updated' }
+}))
+
+test('rows property', withPlaceholder(async function* ({ $eval }) {
+  await $eval((el) => {
+    el.rows = 1
+  })
+  yield { name: 'updated' }
+}))
+
 test('custom events', withValue(async function* ({ $, page }) {
   const testInput = testCustomEvent(page, $)
 

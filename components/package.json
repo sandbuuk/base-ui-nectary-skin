@@ -9,7 +9,8 @@
     "utils.d.ts",
     "index.js",
     "index.d.ts",
-    "types.d.ts"
+    "types.d.ts",
+    "colors.json"
   ],
   "publishConfig": {
     "access": "restricted"

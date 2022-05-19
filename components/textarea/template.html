@@ -18,13 +18,12 @@
     box-sizing: border-box;
     border-radius: 4px;
     width: 100%;
-    min-height: 86px;
     margin: 2px 0;
     padding: 8px 12px;
     font: var(--sinch-font-body);
     color: var(--sinch-color-text-default);
     caret-color: var(--sinch-caret-color, auto);
-    resize: vertical;
+    resize: none;
   }
 
   #input::placeholder {
@@ -43,6 +42,10 @@
 
   #input:focus {
     border-color: var(--sinch-color-stormy-600);
+  }
+
+  :host([resizable]:not([resizable="false"])) #input {
+    resize: vertical;
   }
 
   :host([invalidtext]:not([invalidtext=""])) #input:not(:disabled) {
@@ -117,7 +120,7 @@
     <slot name="tooltip"></slot>
     <span id="optional"></span>
   </div>
-  <textarea id="input" rows="3"></textarea>
+  <textarea id="input"></textarea>
   <div id="bottom">
     <span id="invalid"></span>
     <span id="additional"></span>

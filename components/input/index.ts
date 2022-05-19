@@ -137,6 +137,30 @@ defineCustomElement('sinch-input', class extends HTMLElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
+  get selectionStart(): HTMLInputElement['selectionStart'] {
+    return this.#$input.selectionStart
+  }
+
+  set selectionStart(value: HTMLInputElement['selectionStart']) {
+    this.#$input.selectionStart = value
+  }
+
+  get selectionEnd(): HTMLInputElement['selectionEnd'] {
+    return this.#$input.selectionEnd
+  }
+
+  set selectionEnd(value: HTMLInputElement['selectionEnd']) {
+    this.#$input.selectionEnd = value
+  }
+
+  get selectionDirection(): HTMLInputElement['selectionDirection'] {
+    return this.#$input.selectionDirection
+  }
+
+  set selectionDirection(value: HTMLInputElement['selectionDirection']) {
+    this.#$input.selectionDirection = value
+  }
+
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'type': {
@@ -260,6 +284,9 @@ export type TSinchInputElement = HTMLElement & {
   invalidText: string | null,
   additionalText: string | null,
   disabled: boolean,
+  selectionStart: HTMLInputElement['selectionStart'],
+  selectionEnd: HTMLInputElement['selectionEnd'],
+  selectionDirection: HTMLInputElement['selectionDirection'],
   focus(): void,
   blur(): void,
 }

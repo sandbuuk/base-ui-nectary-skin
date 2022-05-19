@@ -1,12 +1,14 @@
 <template>
   <sinch-textarea
-    v-bind:placeholder="placeholderText"
-    v-bind:label="labelText"
-    v-bind:optionaltext="optionalText"
-    v-bind:additionaltext="additionalText"
-    v-bind:invalidtext="invalidText"
-    v-bind:disabled="isDisabled"
+    :placeholder="placeholderText"
+    :label="labelText"
+    :optionaltext="optionalText"
+    :additionaltext="additionalText"
+    :invalidtext="invalidText"
+    :disabled="isDisabled"
     :value="value"
+    :rows="rows"
+    :resizable="resizable"
     @change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
@@ -58,6 +60,12 @@ export default {
     isControlled() {
       return this.search.get('uncontrolled') === null
     },
+    rows() {
+      return this.search.get('rows')
+    },
+    resizable() {
+      return this.search.get('resizable')
+    }
   },
   data() {
     return {

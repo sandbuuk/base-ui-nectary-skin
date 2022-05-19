@@ -19,12 +19,18 @@ export const Textarea: FC<TTextarea> = ({ search }) => {
   [search, setValue])
   const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-textarea-focus')), [])
   const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-textarea-blur')), [])
-  const labelText = useMemo(() => search.get('label') ?? '', [search])
-  const optionalText = useMemo(() => search.get('optional') ?? undefined, [search])
-  const additionalText = useMemo(() => search.get('additional') ?? undefined, [search])
-  const invalidText = useMemo(() => search.get('invalid') ?? undefined, [search])
-  const placeholderText = useMemo(() => search.get('placeholder') ?? undefined, [search])
-  const isDisabled = useMemo(() => search.get('disabled') != null, [search])
+  const labelText = search.get('label') ?? ''
+  const optionalText = search.get('optional') ?? undefined
+  const additionalText = search.get('additional') ?? undefined
+  const invalidText = search.get('invalid') ?? undefined
+  const placeholderText = search.get('placeholder') ?? undefined
+  const isDisabled = search.get('disabled') != null
+  const rows = useMemo(() => {
+    const val = search.get('rows')
+
+    return val !== null ? parseInt(val) : undefined
+  }, [search])
+  const isResizable = search.get('resizable') === 'true'
   const tooltip = useMemo(() =>
     search.get('tooltip') != null && (
       <sinch-help-tooltip text={search.get('tooltip')!} slot="tooltip"/>
@@ -40,6 +46,8 @@ export const Textarea: FC<TTextarea> = ({ search }) => {
       placeholder={placeholderText}
       disabled={isDisabled}
       value={value}
+      rows={rows}
+      resizable={isResizable}
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}

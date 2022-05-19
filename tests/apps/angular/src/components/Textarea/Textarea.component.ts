@@ -18,6 +18,8 @@ export class TextareaComponent {
   placeholderText: string | null
   tooltipText: string | null
   isDisabled: boolean
+  isResizable: boolean
+  rows: string | null
 
   constructor() {
     const url = new URL(location.href)
@@ -30,6 +32,8 @@ export class TextareaComponent {
     this.placeholderText = url.searchParams.get('placeholder')
     this.tooltipText = url.searchParams.get('tooltip')
     this.isDisabled = url.searchParams.get('disabled') != null
+    this.isResizable = url.searchParams.get('resizable') != null
+    this.rows = url.searchParams.get('rows') ?? null
   }
 
   onChange(e: Event) {

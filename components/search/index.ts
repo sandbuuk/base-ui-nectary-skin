@@ -11,6 +11,7 @@ import {
 import templateHTML from './template.html'
 import '../icon/search'
 import '../icon/close'
+import '../icon-button'
 import type { TSinchSearchOptionElement } from '../search-option'
 import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
