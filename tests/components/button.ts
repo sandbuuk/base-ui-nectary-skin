@@ -1,17 +1,17 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const withWideWidth = makeScreenshotTests('/button?width=200&type=primary&text=Button&icon=true', 'sinch-button')
-const withFitWidth = makeScreenshotTests('/button?type=primary&text=Button&icon=true', 'sinch-button')
-const withNarrowWidth = makeScreenshotTests('/button?width=110&type=primary&icon=true&text=Button%text%20long%20long%20long', 'sinch-button')
-const withDisabled = makeScreenshotTests('/button?type=primary&text=Button&disabled=true&icon=true', 'sinch-button')
-const withSmall = makeScreenshotTests('/button?type=primary&text=Button&small=true&icon=true', 'sinch-button')
-const withIcon = makeScreenshotTests('/button?type=primary&icon=true', 'sinch-button')
-const withSmallIcon = makeScreenshotTests('/button?type=primary&small=true&icon=true', 'sinch-button')
-const withSpinner = makeScreenshotTests('/button?type=primary&text=Button&spinner=true', 'sinch-button')
-const withSpinnerDisabled = makeScreenshotTests('/button?type=primary&text=Button&spinner=true&disabled=true', 'sinch-button')
-const withSpinnerSmall = makeScreenshotTests('/button?type=primary&text=Button&spinner=true&small=true', 'sinch-button')
+const withWideWidth = '/button?width=200&type=primary&text=Button&icon=true'
+const withFitWidth = '/button?type=primary&text=Button&icon=true'
+const withNarrowWidth = '/button?width=110&type=primary&icon=true&text=Button%text%20long%20long%20long'
+const withDisabled = '/button?type=primary&text=Button&disabled=true&icon=true'
+const withSmall = '/button?type=primary&text=Button&small=true&icon=true'
+const withIcon = '/button?type=primary&icon=true'
+const withSmallIcon = '/button?type=primary&small=true&icon=true'
+const withSpinner = '/button?type=primary&text=Button&spinner=true'
+const withSpinnerDisabled = '/button?type=primary&text=Button&spinner=true&disabled=true'
+const withSpinnerSmall = '/button?type=primary&text=Button&spinner=true&small=true'
 const checkFitWidth = makeAccessibilityTests('/button?type=primary&text=Button&icon=true', 'sinch-button')
 
 test('accessibility', checkFitWidth(async function* ({ $eval }) {
@@ -22,263 +22,329 @@ test('accessibility', checkFitWidth(async function* ({ $eval }) {
   yield
 }))
 
-test('type attribute', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('type', 'primary'))
-  yield { name: 'primary' }
-  await $eval((el) => el.setAttribute('type', 'secondary'))
-  yield { name: 'secondary' }
-  await $eval((el) => el.setAttribute('type', 'cta-primary'))
-  yield { name: 'cta-primary' }
-  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
-  yield { name: 'cta-secondary' }
-  await $eval((el) => el.setAttribute('type', 'destructive'))
-  yield { name: 'destructive' }
-}))
+test('button screenshots', runScreenshotTests('sinch-button', [
+  {
+    name: 'type attribute',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('type', 'primary'))
+      yield { name: 'primary' }
+      await $eval((el) => el.setAttribute('type', 'secondary'))
+      yield { name: 'secondary' }
+      await $eval((el) => el.setAttribute('type', 'cta-primary'))
+      yield { name: 'cta-primary' }
+      await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+      yield { name: 'cta-secondary' }
+      await $eval((el) => el.setAttribute('type', 'destructive'))
+      yield { name: 'destructive' }
+    },
+  },
+  {
+    name: 'type property',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.type = 'primary'
+      })
+      yield { name: 'primary' }
 
-test('type property', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.type = 'primary'
-  })
-  yield { name: 'primary' }
+      await $eval((el) => {
+        el.type = 'secondary'
+      })
+      yield { name: 'secondary' }
 
-  await $eval((el) => {
-    el.type = 'secondary'
-  })
-  yield { name: 'secondary' }
+      await $eval((el) => {
+        el.type = 'cta-primary'
+      })
+      yield { name: 'cta-primary' }
 
-  await $eval((el) => {
-    el.type = 'cta-primary'
-  })
-  yield { name: 'cta-primary' }
+      await $eval((el) => {
+        el.type = 'cta-secondary'
+      })
+      yield { name: 'cta-secondary' }
 
-  await $eval((el) => {
-    el.type = 'cta-secondary'
-  })
-  yield { name: 'cta-secondary' }
+      await $eval((el) => {
+        el.type = 'destructive'
+      })
+      yield { name: 'destructive' }
+    },
+  },
+  {
+    name: 'small type',
+    url: withSmall,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('type', 'primary'))
+      yield { name: 'primary' }
+      await $eval((el) => el.setAttribute('type', 'secondary'))
+      yield { name: 'secondary' }
+      await $eval((el) => el.setAttribute('type', 'cta-primary'))
+      yield { name: 'cta-primary' }
+      await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+      yield { name: 'cta-secondary' }
+      await $eval((el) => el.setAttribute('type', 'destructive'))
+      yield { name: 'destructive' }
+    },
+  },
+  {
+    name: 'disabled type',
+    url: withDisabled,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('type', 'primary'))
+      yield { name: 'primary' }
+      await $eval((el) => el.setAttribute('type', 'secondary'))
+      yield { name: 'secondary' }
+      await $eval((el) => el.setAttribute('type', 'cta-primary'))
+      yield { name: 'cta-primary' }
+      await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+      yield { name: 'cta-secondary' }
+      await $eval((el) => el.setAttribute('type', 'destructive'))
+      yield { name: 'destructive' }
+    },
+  },
+  {
+    name: 'focus',
+    url: withFitWidth,
+    async *fn({ $, $eval }) {
+      await $.focus()
+      await $eval((el) => el.setAttribute('type', 'secondary'))
+      yield { name: 'secondary' }
+      await $eval((el) => el.setAttribute('type', 'cta-primary'))
+      yield { name: 'cta-primary' }
+      await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+      yield { name: 'cta-secondary' }
+      await $eval((el) => el.setAttribute('type', 'destructive'))
+      yield { name: 'destructive' }
+      await $eval((el) => el.setAttribute('type', 'primary'))
+      yield { name: 'primary' }
+    },
+  },
+  {
+    name: 'text attribute',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('text', 'Updated Button'))
+      yield { name: 'updated' }
 
-  await $eval((el) => {
-    el.type = 'destructive'
-  })
-  yield { name: 'destructive' }
-}))
+      await $eval((el) => el.setAttribute('text', ''))
+      yield { name: 'empty' }
+    },
+  },
+  {
+    name: 'text property',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.text = 'Updated Button'
+      })
+      yield { name: 'updated' }
 
-test('small type', withSmall(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('type', 'primary'))
-  yield { name: 'primary' }
-  await $eval((el) => el.setAttribute('type', 'secondary'))
-  yield { name: 'secondary' }
-  await $eval((el) => el.setAttribute('type', 'cta-primary'))
-  yield { name: 'cta-primary' }
-  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
-  yield { name: 'cta-secondary' }
-  await $eval((el) => el.setAttribute('type', 'destructive'))
-  yield { name: 'destructive' }
-}))
+      await $eval((el) => {
+        el.text = ''
+      })
+      yield { name: 'empty' }
+    },
+  },
+  {
+    name: 'disabled property',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.disabled = true
+      })
+      yield { name: 'disabled' }
 
-test('disabled type', withDisabled(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('type', 'primary'))
-  yield { name: 'primary' }
-  await $eval((el) => el.setAttribute('type', 'secondary'))
-  yield { name: 'secondary' }
-  await $eval((el) => el.setAttribute('type', 'cta-primary'))
-  yield { name: 'cta-primary' }
-  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
-  yield { name: 'cta-secondary' }
-  await $eval((el) => el.setAttribute('type', 'destructive'))
-  yield { name: 'destructive' }
-}))
+      await $eval((el) => {
+        el.disabled = false
+      })
+      yield { name: 'enabled' }
+    },
+  },
+  {
+    name: 'disabled attribute',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('disabled', ''))
+      yield { name: 'disabled' }
 
-test('focus', withFitWidth(async function* ({ $, $eval }) {
-  await $.focus()
-  await $eval((el) => el.setAttribute('type', 'secondary'))
-  yield { name: 'secondary' }
-  await $eval((el) => el.setAttribute('type', 'cta-primary'))
-  yield { name: 'cta-primary' }
-  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
-  yield { name: 'cta-secondary' }
-  await $eval((el) => el.setAttribute('type', 'destructive'))
-  yield { name: 'destructive' }
-  await $eval((el) => el.setAttribute('type', 'primary'))
-  yield { name: 'primary' }
-}))
+      await $eval((el) => el.removeAttribute('disabled'))
+      yield { name: 'enabled' }
+    },
+  },
+  {
+    name: 'small property',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.small = true
+      })
+      yield { name: 'on' }
 
-test('text attribute', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('text', 'Updated Button'))
-  yield { name: 'updated' }
+      await $eval((el) => {
+        el.small = false
+      })
+      yield { name: 'off' }
+    },
+  },
+  {
+    name: 'small attribute',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('small', ''))
+      yield { name: 'on' }
 
-  await $eval((el) => el.setAttribute('text', ''))
-  yield { name: 'empty' }
-}))
+      await $eval((el) => el.removeAttribute('small'))
+      yield { name: 'off' }
+    },
+  },
+  {
+    name: 'icon',
+    url: withIcon,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'icon small',
+    url: withSmallIcon,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'narrow',
+    url: withNarrowWidth,
+    async *fn({ $eval }) {
+      yield { name: 'normal' }
+      await $eval((el) => el.setAttribute('small', ''))
+      yield { name: 'small' }
+    },
+  },
+  {
+    name: 'wide',
+    url: withWideWidth,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'mouse interaction',
+    url: withFitWidth,
+    async *fn({ $, $eval, page }) {
+      const rect = (await $.boundingBox())!
 
-test('text property', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.text = 'Updated Button'
-  })
-  yield { name: 'updated' }
+      await page.mouse.move(rect.x + 5, rect.y + 15)
+      await $eval((el) => el.setAttribute('type', 'primary'))
+      yield { name: 'primary-hover' }
+      await $eval((el) => el.setAttribute('type', 'secondary'))
+      yield { name: 'secondary-hover' }
+      await $eval((el) => el.setAttribute('type', 'cta-primary'))
+      yield { name: 'cta-primary-hover' }
+      await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+      yield { name: 'cta-secondary-hover' }
+      await $eval((el) => el.setAttribute('type', 'destructive'))
+      yield { name: 'destructive-hover' }
 
-  await $eval((el) => {
-    el.text = ''
-  })
-  yield { name: 'empty' }
-}))
+      await page.mouse.down()
+      await $eval((el) => el.setAttribute('type', 'primary'))
+      yield { name: 'primary-active' }
+      await $eval((el) => el.setAttribute('type', 'secondary'))
+      yield { name: 'secondary-active' }
+      await $eval((el) => el.setAttribute('type', 'cta-primary'))
+      yield { name: 'cta-primary-active' }
+      await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+      yield { name: 'cta-secondary-active' }
+      await $eval((el) => el.setAttribute('type', 'destructive'))
+      yield { name: 'destructive-active' }
+    },
+  },
+  {
+    name: 'spinner',
+    url: withSpinner,
+    async *fn({ $, $eval, page }) {
+      const rect = (await $.boundingBox())!
 
-test('disabled property', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.disabled = true
-  })
-  yield { name: 'disabled' }
+      await page.mouse.move(rect.x + 5, rect.y + 15)
+      await $eval((el) => el.setAttribute('type', 'primary'))
+      yield { name: 'primary-hover' }
+      await $eval((el) => el.setAttribute('type', 'secondary'))
+      yield { name: 'secondary-hover' }
+      await $eval((el) => el.setAttribute('type', 'cta-primary'))
+      yield { name: 'cta-primary-hover' }
+      await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+      yield { name: 'cta-secondary-hover' }
+      await $eval((el) => el.setAttribute('type', 'destructive'))
+      yield { name: 'destructive-hover' }
 
-  await $eval((el) => {
-    el.disabled = false
-  })
-  yield { name: 'enabled' }
-}))
+      await page.mouse.down()
+      await $eval((el) => el.setAttribute('type', 'primary'))
+      yield { name: 'primary-active' }
+      await $eval((el) => el.setAttribute('type', 'secondary'))
+      yield { name: 'secondary-active' }
+      await $eval((el) => el.setAttribute('type', 'cta-primary'))
+      yield { name: 'cta-primary-active' }
+      await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+      yield { name: 'cta-secondary-active' }
+      await $eval((el) => el.setAttribute('type', 'destructive'))
+      yield { name: 'destructive-active' }
+    },
+  },
+  {
+    name: 'spinner disabled',
+    url: withSpinnerDisabled,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('type', 'primary'))
+      yield { name: 'primary' }
+      await $eval((el) => el.setAttribute('type', 'secondary'))
+      yield { name: 'secondary' }
+      await $eval((el) => el.setAttribute('type', 'cta-primary'))
+      yield { name: 'cta-primary' }
+      await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+      yield { name: 'cta-secondary' }
+      await $eval((el) => el.setAttribute('type', 'destructive'))
+      yield { name: 'destructive' }
+    },
+  },
+  {
+    name: 'spinner small',
+    url: withSpinnerSmall,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'custom events',
+    url: withFitWidth,
+    async *fn({ page, $ }) {
+      const testButton = testCustomEvent(page, $)
 
-test('disabled attribute', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('disabled', ''))
-  yield { name: 'disabled' }
+      await testButton('click', 'sinch-button-click')
+      await testButton('focusin', 'sinch-button-focus')
+      await testButton('focusout', 'sinch-button-blur')
+    },
+  },
+  {
+    name: 'native events',
+    url: withFitWidth,
+    async *fn({ page, $ }) {
+      await subscribeToEvents(page, 'sinch-button-focus', 'sinch-button-blur', 'sinch-button-click')
+      await $.focus()
+      await page.keyboard.press('Tab')
 
-  await $eval((el) => el.removeAttribute('disabled'))
-  yield { name: 'enabled' }
-}))
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-button-focus', detail: null },
+        { type: 'sinch-button-blur', detail: null },
+      ])
 
-test('small property', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.small = true
-  })
-  yield { name: 'on' }
+      await $.click()
 
-  await $eval((el) => {
-    el.small = false
-  })
-  yield { name: 'off' }
-}))
-
-test('small attribute', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('small', ''))
-  yield { name: 'on' }
-
-  await $eval((el) => el.removeAttribute('small'))
-  yield { name: 'off' }
-}))
-
-test('icon', withIcon(async function* () {
-  yield { name: 'shot' }
-}))
-
-test('icon small', withSmallIcon(async function* () {
-  yield { name: 'shot' }
-}))
-
-test('narrow', withNarrowWidth(async function* ({ $eval }) {
-  yield { name: 'normal' }
-  await $eval((el) => el.setAttribute('small', ''))
-  yield { name: 'small' }
-}))
-
-test('wide', withWideWidth(async function* () {
-  yield { name: 'shot' }
-}))
-
-test('mouse interaction', withFitWidth(async function* ({ $, $eval, page }) {
-  const rect = (await $.boundingBox())!
-
-  await page.mouse.move(rect.x + 5, rect.y + 15)
-  await $eval((el) => el.setAttribute('type', 'primary'))
-  yield { name: 'primary-hover' }
-  await $eval((el) => el.setAttribute('type', 'secondary'))
-  yield { name: 'secondary-hover' }
-  await $eval((el) => el.setAttribute('type', 'cta-primary'))
-  yield { name: 'cta-primary-hover' }
-  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
-  yield { name: 'cta-secondary-hover' }
-  await $eval((el) => el.setAttribute('type', 'destructive'))
-  yield { name: 'destructive-hover' }
-
-  await page.mouse.down()
-  await $eval((el) => el.setAttribute('type', 'primary'))
-  yield { name: 'primary-active' }
-  await $eval((el) => el.setAttribute('type', 'secondary'))
-  yield { name: 'secondary-active' }
-  await $eval((el) => el.setAttribute('type', 'cta-primary'))
-  yield { name: 'cta-primary-active' }
-  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
-  yield { name: 'cta-secondary-active' }
-  await $eval((el) => el.setAttribute('type', 'destructive'))
-  yield { name: 'destructive-active' }
-}))
-
-test('spinner', withSpinner(async function* ({ $, $eval, page }) {
-  const rect = (await $.boundingBox())!
-
-  await page.mouse.move(rect.x + 5, rect.y + 15)
-  await $eval((el) => el.setAttribute('type', 'primary'))
-  yield { name: 'primary-hover' }
-  await $eval((el) => el.setAttribute('type', 'secondary'))
-  yield { name: 'secondary-hover' }
-  await $eval((el) => el.setAttribute('type', 'cta-primary'))
-  yield { name: 'cta-primary-hover' }
-  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
-  yield { name: 'cta-secondary-hover' }
-  await $eval((el) => el.setAttribute('type', 'destructive'))
-  yield { name: 'destructive-hover' }
-
-  await page.mouse.down()
-  await $eval((el) => el.setAttribute('type', 'primary'))
-  yield { name: 'primary-active' }
-  await $eval((el) => el.setAttribute('type', 'secondary'))
-  yield { name: 'secondary-active' }
-  await $eval((el) => el.setAttribute('type', 'cta-primary'))
-  yield { name: 'cta-primary-active' }
-  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
-  yield { name: 'cta-secondary-active' }
-  await $eval((el) => el.setAttribute('type', 'destructive'))
-  yield { name: 'destructive-active' }
-}))
-
-test('spinner disabled', withSpinnerDisabled(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('type', 'primary'))
-  yield { name: 'primary' }
-  await $eval((el) => el.setAttribute('type', 'secondary'))
-  yield { name: 'secondary' }
-  await $eval((el) => el.setAttribute('type', 'cta-primary'))
-  yield { name: 'cta-primary' }
-  await $eval((el) => el.setAttribute('type', 'cta-secondary'))
-  yield { name: 'cta-secondary' }
-  await $eval((el) => el.setAttribute('type', 'destructive'))
-  yield { name: 'destructive' }
-}))
-
-test('spinner small', withSpinnerSmall(async function* () {
-  yield { name: 'shot' }
-}))
-
-test('custom events', withFitWidth(async function* ({ $, page }) {
-  const testButton = testCustomEvent(page, $)
-
-  await testButton('click', 'sinch-button-click')
-  await testButton('focusin', 'sinch-button-focus')
-  await testButton('focusout', 'sinch-button-blur')
-}))
-
-test('native events', withFitWidth(async function* ({ $, page }) {
-  await subscribeToEvents(page, 'sinch-button-focus', 'sinch-button-blur', 'sinch-button-click')
-  await $.focus()
-  await page.keyboard.press('Tab')
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-button-focus', detail: null },
-    { type: 'sinch-button-blur', detail: null },
-  ])
-
-  await $.click()
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-button-focus', detail: null },
-    { type: 'sinch-button-click', detail: null },
-  ])
-}))
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-button-focus', detail: null },
+        { type: 'sinch-button-click', detail: null },
+      ])
+    },
+  },
+]))

@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test'
+import { piAll } from 'piall'
 import type { PlaywrightTestArgs, TestInfo } from '@playwright/test'
 import type { Locator, Page } from 'playwright-core'
 
@@ -76,6 +77,69 @@ type UpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
   $: Locator,
   $eval: EvalFunc<T>,
 }
+
+type TScreenshotTest<T extends keyof HTMLElementTagNameMap> = {
+  name: string,
+  url: string,
+  fn (props: UpdateStateProps<T>): AsyncIterable<UpdateStateResult>,
+}
+
+export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elementSelector: T, tests: TScreenshotTest<T>[]) =>
+  async ({ page, context }: PlaywrightTestArgs, info: TestInfo) => {
+    overrideScreenshotPath(info)
+
+    const pages = [
+      page,
+      await context.newPage(),
+      await context.newPage(),
+      await context.newPage(),
+    ]
+
+    const it = piAll(tests.map((t) => async () => {
+      let numRetries = 0
+
+      while (true) {
+        const page = pages.shift()!
+
+        try {
+          await page.goto(t.url, { waitUntil: 'networkidle' })
+          await page.waitForSelector(elementSelector, { state: 'attached' })
+          await page.evaluate(() => document.fonts.ready)
+
+          // Optionally subscribe to page console output
+          // page.on('console', (msg) => console.log(msg.text()))
+          // page.on('pageerror', (e) => console.log(e))
+
+          const locator = page.locator(elementSelector)
+
+          for await (const { name, include = [], includeRects = [] } of t.fn({ page, $: locator, $eval: makeEval<T>(locator) })) {
+            const rects = await getRects([locator, ...include])
+            const clip = mergeBoundingBox(rects.concat(includeRects))
+            const screenshotName = `${t.name}-${name}.png`
+
+            if (clip == null) {
+              throw new Error('Cannot get locator bounding box')
+            }
+
+            const sc = await page.screenshot({ clip, animations: 'disabled', fullPage: true })
+
+            expect(sc, name).toMatchSnapshot(screenshotName)
+          }
+
+          break
+        } catch (e) {
+          if (++numRetries > 1) {
+            throw (e)
+          }
+        } finally {
+          pages.push(page)
+        }
+      }
+    }), pages.length)
+
+    // eslint-disable-next-line no-empty
+    for await (const _ of it) {}
+  }
 
 export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageUrl: string, elementSelector: T) =>
   (updateState: (props: UpdateStateProps<T>) => AsyncIterable<UpdateStateResult>) =>
