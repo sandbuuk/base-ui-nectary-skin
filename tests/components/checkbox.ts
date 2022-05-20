@@ -1,15 +1,15 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const withFitWidth = makeScreenshotTests('/checkbox?text=Label', 'sinch-checkbox')
-const withInvalid = makeScreenshotTests('/checkbox?text=Label&invalid=true', 'sinch-checkbox')
-const withNarrowLabel = makeScreenshotTests('/checkbox?width=150&text=Label%20long%20long%20long%20long', 'sinch-checkbox')
-const withChecked = makeScreenshotTests('/checkbox?width=100&text=Label&checked=true', 'sinch-checkbox')
-const withDisabledChecked = makeScreenshotTests('/checkbox?width=100&text=Label&disabled=true&checked=true', 'sinch-checkbox')
-const withDisabledInvalidChecked = makeScreenshotTests('/checkbox?width=100&text=Label&disabled=true&checked=true&invalid=true', 'sinch-checkbox')
-const withDisabledIndeterminate = makeScreenshotTests('/checkbox?width=100&text=Label&disabled=true&checked=true&indeterminate=true', 'sinch-checkbox')
-const withDisabledInvalidIndeterminate = makeScreenshotTests('/checkbox?width=100&text=Label&disabled=true&checked=true&indeterminate=true&invalid=true', 'sinch-checkbox')
+const withFitWidth = '/checkbox?text=Label'
+const withInvalid = '/checkbox?text=Label&invalid=true'
+const withNarrowLabel = '/checkbox?width=150&text=Label%20long%20long%20long%20long'
+const withChecked = '/checkbox?width=100&text=Label&checked=true'
+const withDisabledChecked = '/checkbox?width=100&text=Label&disabled=true&checked=true'
+const withDisabledInvalidChecked = '/checkbox?width=100&text=Label&disabled=true&checked=true&invalid=true'
+const withDisabledIndeterminate = '/checkbox?width=100&text=Label&disabled=true&checked=true&indeterminate=true'
+const withDisabledInvalidIndeterminate = '/checkbox?width=100&text=Label&disabled=true&checked=true&indeterminate=true&invalid=true'
 const checkDisabledChecked = makeAccessibilityTests('/checkbox?width=100&text=Label&disabled=true&checked=true', 'sinch-checkbox')
 
 test('accessibility', checkDisabledChecked(async function* ({ $eval }) {
@@ -20,213 +20,276 @@ test('accessibility', checkDisabledChecked(async function* ({ $eval }) {
   yield
 }))
 
-test('checked attribute', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('checked', ''))
-  yield { name: 'checked' }
+test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
+  {
+    name: 'checked attribute',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('checked', ''))
+      yield { name: 'checked' }
 
-  await $eval((el) => el.removeAttribute('checked'))
-  yield { name: 'unchecked' }
-}))
+      await $eval((el) => el.removeAttribute('checked'))
+      yield { name: 'unchecked' }
+    },
+  },
+  {
+    name: 'checked property',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.checked = true
+      })
+      yield { name: 'checked' }
 
-test('checked property', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.checked = true
-  })
-  yield { name: 'checked' }
+      await $eval((el) => {
+        el.checked = false
+      })
+      yield { name: 'unchecked' }
+    },
+  },
+  {
+    name: 'checked invalid',
+    url: withInvalid,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.checked = true
+      })
+      yield { name: 'checked' }
 
-  await $eval((el) => {
-    el.checked = false
-  })
-  yield { name: 'unchecked' }
-}))
+      await $eval((el) => {
+        el.checked = false
+      })
+      yield { name: 'unchecked' }
 
-test('checked invalid', withInvalid(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.checked = true
-  })
-  yield { name: 'checked' }
+      await $eval((el) => {
+        el.checked = true
+        el.indeterminate = true
+      })
+      yield { name: 'indeterminate' }
+    },
+  },
+  {
+    name: 'focus',
+    url: withFitWidth,
+    async *fn({ $, $eval }) {
+      await $.focus()
 
-  await $eval((el) => {
-    el.checked = false
-  })
-  yield { name: 'unchecked' }
+      await $eval((el) => {
+        el.checked = true
+      })
+      yield { name: 'checked' }
 
-  await $eval((el) => {
-    el.checked = true
-    el.indeterminate = true
-  })
-  yield { name: 'indeterminate' }
-}))
+      await $eval((el) => {
+        el.checked = false
+      })
+      yield { name: 'unchecked' }
+    },
+  },
+  {
+    name: 'focus invalid',
+    url: withInvalid,
+    async *fn({ $, $eval }) {
+      await $.focus()
 
-test('focus', withFitWidth(async function* ({ $, $eval }) {
-  await $.focus()
+      await $eval((el) => {
+        el.checked = true
+      })
+      yield { name: 'checked' }
 
-  await $eval((el) => {
-    el.checked = true
-  })
-  yield { name: 'checked' }
+      await $eval((el) => {
+        el.checked = false
+      })
+      yield { name: 'unchecked' }
+    },
+  },
+  {
+    name: 'indeterminate attribute',
+    url: withChecked,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('indeterminate', ''))
+      yield { name: 'line' }
 
-  await $eval((el) => {
-    el.checked = false
-  })
-  yield { name: 'unchecked' }
-}))
+      await $eval((el) => el.removeAttribute('indeterminate'))
+      yield { name: 'checkmark' }
+    },
+  },
+  {
+    name: 'indeterminate property',
+    url: withChecked,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.indeterminate = true
+      })
+      yield { name: 'line' }
 
-test('focus invalid', withInvalid(async function* ({ $, $eval }) {
-  await $.focus()
+      await $eval((el) => {
+        el.indeterminate = false
+      })
+      yield { name: 'checkmark' }
+    },
+  },
+  {
+    name: 'text attribute',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('text', 'Updated label'))
+      yield { name: 'updated' }
 
-  await $eval((el) => {
-    el.checked = true
-  })
-  yield { name: 'checked' }
+      await $eval((el) => el.setAttribute('text', ''))
+      yield { name: 'empty' }
+    },
+  },
+  {
+    name: 'text property',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.text = 'Updated label'
+      })
+      yield { name: 'updated' }
 
-  await $eval((el) => {
-    el.checked = false
-  })
-  yield { name: 'unchecked' }
-}))
+      await $eval((el) => {
+        el.text = ''
+      })
+      yield { name: 'empty' }
+    },
+  },
+  {
+    name: 'disabled property',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.disabled = true
+      })
+      yield { name: 'disabled' }
 
-test('indeterminate attribute', withChecked(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('indeterminate', ''))
-  yield { name: 'line' }
+      await $eval((el) => {
+        el.disabled = false
+      })
+      yield { name: 'enabled' }
+    },
+  },
+  {
+    name: 'disabled attribute',
+    url: withFitWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('disabled', ''))
+      yield { name: 'disabled' }
 
-  await $eval((el) => el.removeAttribute('indeterminate'))
-  yield { name: 'checkmark' }
-}))
+      await $eval((el) => el.removeAttribute('disabled'))
+      yield { name: 'enabled' }
+    },
+  },
+  {
+    name: 'disabled checkmark',
+    url: withDisabledChecked,
+    async *fn() {
+      yield { name: 'checked' }
+    },
+  },
+  {
+    name: 'disabled invalid checkmark',
+    url: withDisabledInvalidChecked,
+    async *fn() {
+      yield { name: 'checked' }
+    },
+  },
+  {
+    name: 'disabled indeterminate',
+    url: withDisabledIndeterminate,
+    async *fn() {
+      yield { name: 'checked' }
+    },
+  },
+  {
+    name: 'disabled invalid indeterminate',
+    url: withDisabledInvalidIndeterminate,
+    async *fn() {
+      yield { name: 'checked' }
+    },
+  },
+  {
+    name: 'narrow',
+    url: withNarrowLabel,
+    async *fn() {
+      yield { name: 'clip' }
+    },
+  },
+  {
+    name: 'mouse interaction',
+    url: withFitWidth,
+    async *fn({ $, page }) {
+      const rect = (await $.boundingBox())!
 
-test('indeterminate property', withChecked(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.indeterminate = true
-  })
-  yield { name: 'line' }
+      await page.mouse.move(rect.x + 5, rect.y + 15)
+      yield { name: 'hover' }
 
-  await $eval((el) => {
-    el.indeterminate = false
-  })
-  yield { name: 'checkmark' }
-}))
+      await page.mouse.down()
+      yield { name: 'active' }
 
-test('text attribute', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('text', 'Updated label'))
-  yield { name: 'updated' }
+      await page.mouse.up()
+      yield { name: 'hover_checked' }
 
-  await $eval((el) => el.setAttribute('text', ''))
-  yield { name: 'empty' }
-}))
+      await page.mouse.down()
+      yield { name: 'active_checked' }
+    },
+  },
+  {
+    name: 'invalid mouse interaction',
+    url: withInvalid,
+    async *fn({ $, page }) {
+      const rect = (await $.boundingBox())!
 
-test('text property', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.text = 'Updated label'
-  })
-  yield { name: 'updated' }
+      await page.mouse.move(rect.x + 5, rect.y + 15)
+      yield { name: 'hover' }
 
-  await $eval((el) => {
-    el.text = ''
-  })
-  yield { name: 'empty' }
-}))
+      await page.mouse.down()
+      yield { name: 'active' }
 
-test('disabled property', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.disabled = true
-  })
-  yield { name: 'disabled' }
+      await page.mouse.up()
+      yield { name: 'hover_checked' }
 
-  await $eval((el) => {
-    el.disabled = false
-  })
-  yield { name: 'enabled' }
-}))
+      await page.mouse.down()
+      yield { name: 'active_checked' }
+    },
+  },
+  {
+    name: 'custom events',
+    url: withFitWidth,
+    async *fn({ $, page }) {
+      const testCheckbox = testCustomEvent(page, $)
 
-test('disabled attribute', withFitWidth(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('disabled', ''))
-  yield { name: 'disabled' }
+      await testCheckbox('change', 'sinch-checkbox-change', true)
+      await testCheckbox('focusin', 'sinch-checkbox-focus')
+      await testCheckbox('focusout', 'sinch-checkbox-blur')
+    },
+  },
+  {
+    name: 'native events',
+    url: withFitWidth,
+    async *fn({ $, page }) {
+      await subscribeToEvents(page, 'sinch-checkbox-change', 'sinch-checkbox-focus', 'sinch-checkbox-blur')
 
-  await $eval((el) => el.removeAttribute('disabled'))
-  yield { name: 'enabled' }
-}))
+      await $.focus()
+      await page.keyboard.press('Tab')
 
-test('disabled checkmark', withDisabledChecked(async function* () {
-  yield { name: 'checked' }
-}))
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-checkbox-focus', detail: null },
+        { type: 'sinch-checkbox-blur', detail: null },
+      ])
 
-test('disabled invalid checkmark', withDisabledInvalidChecked(async function* () {
-  yield { name: 'checked' }
-}))
+      await $.click()
+      await $.click()
 
-test('disabled indeterminate', withDisabledIndeterminate(async function* () {
-  yield { name: 'checked' }
-}))
-
-test('disabled invalid indeterminate', withDisabledInvalidIndeterminate(async function* () {
-  yield { name: 'checked' }
-}))
-
-test('narrow', withNarrowLabel(async function* () {
-  yield { name: 'clip' }
-}))
-
-test('mouse interaction', withFitWidth(async function* ({ $, page }) {
-  const rect = (await $.boundingBox())!
-
-  await page.mouse.move(rect.x + 5, rect.y + 15)
-  yield { name: 'hover' }
-
-  await page.mouse.down()
-  yield { name: 'active' }
-
-  await page.mouse.up()
-  yield { name: 'hover_checked' }
-
-  await page.mouse.down()
-  yield { name: 'active_checked' }
-}))
-
-test('invalid mouse interaction', withInvalid(async function* ({ $, page }) {
-  const rect = (await $.boundingBox())!
-
-  await page.mouse.move(rect.x + 5, rect.y + 15)
-  yield { name: 'hover' }
-
-  await page.mouse.down()
-  yield { name: 'active' }
-
-  await page.mouse.up()
-  yield { name: 'hover_checked' }
-
-  await page.mouse.down()
-  yield { name: 'active_checked' }
-}))
-
-test('custom events', withFitWidth(async function* ({ $, page }) {
-  const testCheckbox = testCustomEvent(page, $)
-
-  await testCheckbox('change', 'sinch-checkbox-change', true)
-  await testCheckbox('focusin', 'sinch-checkbox-focus')
-  await testCheckbox('focusout', 'sinch-checkbox-blur')
-}))
-
-test('native events', withFitWidth(async function* ({ $, page }) {
-  await subscribeToEvents(page, 'sinch-checkbox-change', 'sinch-checkbox-focus', 'sinch-checkbox-blur')
-
-  await $.focus()
-  await page.keyboard.press('Tab')
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-checkbox-focus', detail: null },
-    { type: 'sinch-checkbox-blur', detail: null },
-  ])
-
-  await $.click()
-  await $.click()
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-checkbox-focus', detail: null },
-    { type: 'sinch-checkbox-change', detail: true },
-    { type: 'sinch-checkbox-change', detail: false },
-  ])
-}))
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-checkbox-focus', detail: null },
+        { type: 'sinch-checkbox-change', detail: true },
+        { type: 'sinch-checkbox-change', detail: false },
+      ])
+    },
+  },
+]))
