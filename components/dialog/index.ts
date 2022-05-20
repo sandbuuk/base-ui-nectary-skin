@@ -139,7 +139,9 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
 
   #setOpen(isOpen: boolean) {
     if (isOpen) {
-      (this.#$dialog as any).showModal()
+      if (!getBooleanAttribute(this.#$dialog, 'open')) {
+        (this.#$dialog as any).showModal()
+      }
     } else {
       (this.#$dialog as any).close()
     }
