@@ -211,7 +211,9 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
 
   #setOpen(isOpen: boolean) {
     if (isOpen) {
-      (this.#$listbox as any).showModal()
+      if (!getBooleanAttribute(this.#$listbox, 'open')) {
+        (this.#$listbox as any).showModal()
+      }
     } else {
       (this.#$listbox as any).close()
     }
