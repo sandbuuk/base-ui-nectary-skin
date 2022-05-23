@@ -5,6 +5,7 @@
     <Avatar v-if="url.pathname === '/avatar'" :search="url.searchParams"/>
     <Button v-if="url.pathname === '/button'" :search="url.searchParams"/>
     <Card v-if="url.pathname === '/card'" :search="url.searchParams"/>
+    <Chat v-if="url.pathname === '/chat'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
     <Dropdown v-if="url.pathname === '/dropdown'" :search="url.searchParams"/>
     <Grid v-if="url.pathname === '/grid'" :search="url.searchParams"/>
@@ -34,6 +35,7 @@ import Alert from './components/Alert.vue'
 import Avatar from './components/Avatar.vue'
 import Button from './components/Button.vue'
 import Card from './components/Card.vue'
+import Chat from './components/Chat.vue'
 import Checkbox from './components/Checkbox.vue'
 import Dropdown from './components/Dropdown.vue'
 import Dialog from './components/Dialog.vue'
@@ -88,6 +90,7 @@ export default {
     Avatar,
     Button,
     Card,
+    Chat,
     Checkbox,
     Dropdown,
     Dialog,

@@ -1,0 +1,33 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+}
+
+#text {
+  padding: 12px 16px;
+  border-radius: 16px;
+  font: var(--sinch-font-body);
+  color: var(--sinch-color-stormy-500);
+  margin: 0;
+  max-width: 595px;
+  box-sizing: border-box;
+}
+
+:host([data-type="customer"]) > #text {
+  background-color: var(--sinch-color-snow-500);
+  border-top-left-radius: 0;
+}
+
+:host([data-type="agent-prev"]) > #text {
+  background-color: var(--sinch-color-snow-700);
+  border-top-right-radius: 0;
+}
+
+:host([data-type="agent"]) > #text {
+  background-color: var(--sinch-color-honey-200);
+  border-top-right-radius: 0;
+}
+</style>
+
+<p id="text"></p>

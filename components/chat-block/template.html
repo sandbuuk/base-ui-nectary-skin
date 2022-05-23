@@ -1,0 +1,48 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+}
+
+#wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+  padding-left: 56px;
+}
+
+#stamp {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  font: var(--sinch-font-extra-small-text);
+  color: var(--sinch-color-stormy-400);
+}
+
+#avatar {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 24px;
+}
+
+:host([type="customer"]) > #wrapper {
+  align-items: flex-start;
+}
+
+:host([type="customer"]) #avatar {
+  display: block;
+}
+</style>
+
+<div id="wrapper">
+  <div id="avatar">
+    <slot name="avatar"></slot>
+  </div>
+  <p id="stamp">
+    <span id="firstname"></span><span id="lastname"></span>&bull;<span id="time"></span>
+  </p>
+  <slot name="bubble"></slot>
+</div>
