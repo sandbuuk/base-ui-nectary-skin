@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const items = ({ hasLongLine }: any = {}) => encodeURI(JSON.stringify({
   head: [
@@ -47,50 +47,65 @@ const sortItems = encodeURI(JSON.stringify({
   ],
 }))
 
-const withItems = makeScreenshotTests(`/table?width=1000&state=${items()}`, 'sinch-table')
-const withLongLine = makeScreenshotTests(`/table?width=1000&state=${items({ hasLongLine: true })}`, 'sinch-table')
-const withSortHeadCell = makeScreenshotTests(`/table?width=1000&state=${sortItems}`, 'sinch-table')
+const withItems = `/table?width=1000&state=${items()}`
+const withLongLine = `/table?width=1000&state=${items({ hasLongLine: true })}`
+const withSortHeadCell = `/table?width=1000&state=${sortItems}`
 const checkTableWithItems = makeAccessibilityTests(`/table?width=1000&state=${items()}`, 'sinch-table')
 
 test('accessibility', checkTableWithItems(async function* () {
   yield
 }))
 
-test('items', withItems(async function* () {
-  yield { name: 'shot' }
-}))
+test('yable screenshots', runScreenshotTests('sinch-table', [
+  {
+    name: 'items',
+    url: withItems,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'items long',
+    url: withLongLine,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'custom events',
+    url: withSortHeadCell,
+    async *fn({ $, page }) {
+      const testSort = testCustomEvent(page, $.locator('sinch-table-head-sort').first())
 
-test('items long', withLongLine(async function* () {
-  yield { name: 'shot' }
-}))
+      await testSort('change', 'sinch-table-sort-change', true)
+    },
+  },
+  {
+    name: 'native events',
+    url: withSortHeadCell,
+    async *fn({ $, page }) {
+      await subscribeToEvents(page, 'sinch-table-sort-focus', 'sinch-table-sort-blur', 'sinch-table-sort-change')
 
-test('custom events', withSortHeadCell(async function* ({ $, page }) {
-  const testSort = testCustomEvent(page, $.locator('sinch-table-head-sort').first())
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Tab')
 
-  await testSort('change', 'sinch-table-sort-change', true)
-}))
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-table-sort-focus', detail: null },
+        { type: 'sinch-table-sort-blur', detail: null },
+      ])
 
-test('native events', withSortHeadCell(async function* ({ $, page }) {
-  await subscribeToEvents(page, 'sinch-table-sort-focus', 'sinch-table-sort-blur', 'sinch-table-sort-change')
+      await $.click({ position: { x: 10, y: 10 } })
+      await page.keyboard.press('Space')
 
-  await page.keyboard.press('Tab')
-  await page.keyboard.press('Tab')
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-table-sort-focus', detail: null },
-    { type: 'sinch-table-sort-blur', detail: null },
-  ])
-
-  await $.click({ position: { x: 10, y: 10 } })
-  await page.keyboard.press('Space')
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-table-sort-focus', detail: null },
-    { type: 'sinch-table-sort-change', detail: true },
-    { type: 'sinch-table-sort-change', detail: false },
-  ])
-}))
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-table-sort-focus', detail: null },
+        { type: 'sinch-table-sort-change', detail: true },
+        { type: 'sinch-table-sort-change', detail: false },
+      ])
+    },
+  },
+]))
