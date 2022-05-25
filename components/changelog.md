@@ -1,3 +1,9 @@
+## v0.19.0
+
+* ➕ add `sinch-chat`, `sinch-chat-block`, `sinch-chat-bubble`, `sinch-chat-avatar`
+* 🐞 prevent opening `sinch-dialog` and `sinch-dropdown` if already open
+* 🐞 fix `sinch-dialog` not propagating click events
+
 ## v0.18.0
 
 * ➕ add `sinch-avatar` component
