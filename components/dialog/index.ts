@@ -114,8 +114,6 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
   }
 
   #onBackdropClick = (e: MouseEvent) => {
-    e.stopPropagation()
-
     const rect = this.dialogRect
     const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
