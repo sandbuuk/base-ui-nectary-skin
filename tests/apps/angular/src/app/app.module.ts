@@ -25,6 +25,7 @@ import { GridComponent } from '../components/Grid/Grid.component'
 import { IconButtonComponent } from '../components/IconButton/IconButton.component'
 import { SegmentComponent } from '../components/Segment/Segment.component'
 import { AvatarComponent } from '../components/Avatar/Avatar.component'
+import { ChatComponent } from '../components/Chat/Chat.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -54,6 +55,7 @@ import { AppComponent } from './app.component'
     IconButtonComponent,
     SegmentComponent,
     AvatarComponent,
+    ChatComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

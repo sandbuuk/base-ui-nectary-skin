@@ -1,0 +1,42 @@
+<template>
+  <sinch-chat-block v-if="isBubble" :type="type" firstName="Chat" lastName="Chatman" timestamp="3:27am">
+    <sinch-chat-avatar slot="avatar" alt="CC"></sinch-chat-avatar>
+    <sinch-chat-bubble slot="bubble" text="Hello, I'm Chat..."></sinch-chat-bubble>
+  </sinch-chat-block>
+  <sinch-chat v-else>
+    <sinch-chat-block type="customer" firstName="Chat" lastName="Chatman" timestamp="5:42pm">
+      <sinch-chat-avatar slot="avatar" alt="CC"></sinch-chat-avatar>
+      <sinch-chat-bubble slot="bubble" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."></sinch-chat-bubble>
+      <sinch-chat-bubble slot="bubble" text="Lorem ipsum dolor sit amet..."></sinch-chat-bubble>
+    </sinch-chat-block>
+    <sinch-chat-block type="agent-prev" firstName="Chat" lastName="Chatman" timestamp="5:42pm">
+      <sinch-chat-bubble slot="bubble" text="Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></sinch-chat-bubble>
+    </sinch-chat-block>
+    <sinch-chat-block type="customer" firstName="Chat" lastName="Chatman" timestamp="5:42pm">
+      <sinch-chat-avatar slot="avatar" alt="CC"></sinch-chat-avatar>
+      <sinch-chat-bubble slot="bubble" text="Ut enim ad minim veniam"></sinch-chat-bubble>
+    </sinch-chat-block>
+    <sinch-chat-block type="agent" firstName="Chat" lastName="Chatman" timestamp="5:42pm">
+      <sinch-chat-bubble slot="bubble" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></sinch-chat-bubble>
+      <sinch-chat-bubble slot="bubble" text="Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></sinch-chat-bubble>
+      <sinch-chat-bubble slot="bubble" text="Lorem ipsum dolor sit amet..."></sinch-chat-bubble>
+    </sinch-chat-block>
+  </sinch-chat>
+</template>
+
+<script>
+export default {
+  props: {
+    search: URLSearchParams
+  },
+  computed: {
+    isBubble() {
+      return this.search.get('example') === 'bubble'
+    },
+    type() {
+      return this.search.get('type')
+    }
+  }
+}
+</script>
+
