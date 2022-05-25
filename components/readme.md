@@ -42,7 +42,7 @@ span {
 }
 
 h2 {
-  font: var(--sinch-font-title-2);
+  font: var(--sinch-font-title-l);
 }
 ```
 
