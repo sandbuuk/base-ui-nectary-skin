@@ -22,6 +22,7 @@ import { Table } from './components/Table'
 import { Tabs } from './components/Tabs'
 import { Tag } from './components/Tag'
 import { Textarea } from './components/Textarea'
+import { Title } from './components/Title'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import type { CSSProperties, FC } from 'react'
@@ -157,6 +158,12 @@ const mapElement = (url: URL) => {
     case '/textarea': {
       return (
         <Textarea search={url.searchParams}/>
+      )
+    }
+
+    case '/title': {
+      return (
+        <Title search={url.searchParams}/>
       )
     }
 

@@ -82,13 +82,21 @@ export const updateLiteralAttribute = <T extends readonly string[]>($element: El
   }
 }
 
-export function getLiteralAttribute<T extends readonly string[]>($element: Element, literals: T, attrName: string): T[number] | undefined
+export function getLiteralAttribute<T extends readonly string[]>($element: Element, literals: T, attrName: string): T[number]
 export function getLiteralAttribute<T extends readonly string[]>($element: Element, literals: T, attrName: string, defaultValue: null): T[number] | null
 export function getLiteralAttribute<T extends readonly string[]>($element: Element, literals: T, attrName: string, defaultValue: T[number]): T[number]
 export function getLiteralAttribute($element: Element, literals: string[], attrName: string, defaultValue?: string | null) {
   const attrValue = $element.getAttribute(attrName)
 
-  return isLiteralValue(literals, attrValue) ? attrValue : defaultValue
+  if (isLiteralValue(literals, attrValue)) {
+    return attrValue
+  }
+
+  if (typeof defaultValue === 'undefined') {
+    throw new Error(`Invalid attribute value: ${attrName} = ${attrValue}`)
+  }
+
+  return defaultValue
 }
 
 type TRange = {
