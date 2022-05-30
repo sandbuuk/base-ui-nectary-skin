@@ -5,17 +5,17 @@ import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } 
 const longTitle = encodeURIComponent('It has survived not only five centuries, but also the leap into electronic typesetting')
 const longText = encodeURIComponent('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.')
 
-const withText = '/alert?text=Alert%20text'
-const withTextAndClose = '/alert?text=Alert%20text&dismissable=true'
-const withTextAndButton = '/alert?text=Alert%20text&action=Button'
-const withTextAndButtonAndClose = '/alert?text=Alert%20text&action=Button&dismissable=true'
-const withTextAndButtonAndCloseExpanded = '/alert?width=300&text=Alert%20text&action=Button&dismissable=true'
-const withTextAndButtonAndCloseNarrow = '/alert?width=300&text=Alert%20text%20longer%20title&action=Button&dismissable=true'
-const withTextAndTitle = '/alert?text=Alert%20text&title=Alert%20title'
-const withMultilineTextAndTitleAndButton = `/alert?width=400&text=${longText}&title=${longTitle}&action=Button&multiline=true`
-const withMultilineTextAndTitleAndClose = `/alert?width=400&text=${longText}&title=${longTitle}&dismissable=true&multiline=true`
-const withMultilineTextAndTitleButtonClose = `/alert?width=400&text=${longText}&title=${longTitle}&dismissable=true&action=Button&multiline=true`
-const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&text=${longText}&title=${longTitle}&dismissable=true&action=Button&multiline=true`, 'sinch-alert')
+const withText = '/alert?type=info&text=Alert%20text'
+const withTextAndClose = '/alert?type=info&text=Alert%20text&dismissable=true'
+const withTextAndButton = '/alert?type=info&text=Alert%20text&action=Button'
+const withTextAndButtonAndClose = '/alert?type=info&text=Alert%20text&action=Button&dismissable=true'
+const withTextAndButtonAndCloseExpanded = '/alert?width=300&type=info&text=Alert%20text&action=Button&dismissable=true'
+const withTextAndButtonAndCloseNarrow = '/alert?width=300&type=info&text=Alert%20text%20longer%20title&action=Button&dismissable=true'
+const withTextAndTitle = '/alert?type=info&text=Alert%20text&title=Alert%20title'
+const withMultilineTextAndTitleAndButton = `/alert?width=400&type=info&text=${longText}&title=${longTitle}&action=Button&multiline=true`
+const withMultilineTextAndTitleAndClose = `/alert?width=400&type=info&text=${longText}&title=${longTitle}&dismissable=true&multiline=true`
+const withMultilineTextAndTitleButtonClose = `/alert?width=400&type=info&text=${longText}&title=${longTitle}&dismissable=true&action=Button&multiline=true`
+const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&type=info&text=${longText}&title=${longTitle}&dismissable=true&action=Button&multiline=true`, 'sinch-alert')
 
 test('accessibility', checkMultilineTextTitleButtonClose(async function* () {
   yield
