@@ -1,175 +1,217 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const shot = makeScreenshotTests('/search?width=200', 'sinch-search')
-const withValue = makeScreenshotTests('/search?width=200&label=Label&value=Input%20value', 'sinch-search')
-const withPlaceholder = makeScreenshotTests('/search?width=200&label=Label&placeholder=Placeholder%20value', 'sinch-search')
+const shot = '/search?width=200'
+const withValue = '/search?width=200&label=Label&value=Input%20value'
+const withPlaceholder = '/search?width=200&label=Label&placeholder=Placeholder%20value'
 const checkValue = makeAccessibilityTests('/search?width=200&label=Label&value=Input%20value', 'sinch-search')
 
 test('accessibility', checkValue(async function* () {
   yield
 }))
 
-test('value attribute', withPlaceholder(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('value', 'Input Value'))
-  yield { name: 'updated' }
+test('search screenshots', runScreenshotTests('sinch-search', [
+  {
+    name: 'value attribute',
+    url: withPlaceholder,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('value', 'Input Value'))
+      yield { name: 'updated' }
 
-  await $eval((el) => el.setAttribute('value', ''))
-  yield { name: 'empty' }
-}))
+      await $eval((el) => el.setAttribute('value', ''))
+      yield { name: 'empty' }
+    },
+  },
+  {
+    name: 'value property',
+    url: withPlaceholder,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.value = 'Input Value'
+      })
+      yield { name: 'updated' }
 
-test('value property', withPlaceholder(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.value = 'Input Value'
-  })
-  yield { name: 'updated' }
+      await $eval((el) => {
+        el.value = ''
+      })
+      yield { name: 'empty' }
+    },
+  },
+  {
+    name: 'placeholder attribute',
+    url: shot,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('placeholder', 'Placeholder Value'))
+      yield { name: 'updated' }
 
-  await $eval((el) => {
-    el.value = ''
-  })
-  yield { name: 'empty' }
-}))
+      await $eval((el) => el.setAttribute('placeholder', ''))
+      yield { name: 'empty' }
+    },
+  },
+  {
+    name: 'placeholder property',
+    url: shot,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.placeholder = 'Placeholder Value'
+      })
+      yield { name: 'updated' }
 
-test('placeholder attribute', shot(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('placeholder', 'Placeholder Value'))
-  yield { name: 'updated' }
+      await $eval((el) => {
+        el.placeholder = ''
+      })
+      yield { name: 'empty' }
+    },
+  },
+  {
+    name: 'label property',
+    url: shot,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.label = 'Label text'
+      })
+      yield { name: 'updated' }
 
-  await $eval((el) => el.setAttribute('placeholder', ''))
-  yield { name: 'empty' }
-}))
+      await $eval((el) => {
+        el.label = ''
+      })
+      yield { name: 'empty' }
+    },
+  },
+  {
+    name: 'label attribute',
+    url: shot,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.setAttribute('label', 'Label text')
+      })
+      yield { name: 'updated' }
 
-test('placeholder property', shot(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.placeholder = 'Placeholder Value'
-  })
-  yield { name: 'updated' }
+      await $eval((el) => {
+        el.removeAttribute('label')
+      })
+      yield { name: 'empty' }
+    },
+  },
+  {
+    name: 'fill',
+    url: withPlaceholder,
+    async *fn({ $, $eval }) {
+      await $.focus()
+      yield { name: 'focus' }
 
-  await $eval((el) => {
-    el.placeholder = ''
-  })
-  yield { name: 'empty' }
-}))
+      await expect($eval((el) => el === document.activeElement)).resolves.toBe(true)
 
-test('label property', shot(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.label = 'Label text'
-  })
-  yield { name: 'updated' }
+      await $.type('Fill')
+      yield { name: 'filled' }
 
-  await $eval((el) => {
-    el.label = ''
-  })
-  yield { name: 'empty' }
-}))
+      await expect($eval((el) => el.value)).resolves.toBe('Fill')
+    },
+  },
+  {
+    name: 'clear',
+    url: withValue,
+    async *fn({ $, page }) {
+      await $.focus()
 
-test('label attribute', shot(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.setAttribute('label', 'Label text')
-  })
-  yield { name: 'updated' }
+      yield { name: 'initial' }
 
-  await $eval((el) => {
-    el.removeAttribute('label')
-  })
-  yield { name: 'empty' }
-}))
+      await page.keyboard.press('Tab')
 
-test('fill', withPlaceholder(async function* ({ $, $eval }) {
-  await $.focus()
-  yield { name: 'focus' }
+      yield { name: 'focused' }
 
-  await expect($eval((el) => el === document.activeElement)).resolves.toBe(true)
+      await page.keyboard.press('Enter')
 
-  await $.type('Fill')
-  yield { name: 'filled' }
+      yield { name: 'cleared' }
+    },
+  },
+  {
+    name: 'maxvisibleitems attribute',
+    url: withValue,
+    async *fn({ $, $eval }) {
+      await $eval((el) => el.setAttribute('maxvisibleitems', '2'))
+      await $.focus()
 
-  await expect($eval((el) => el.value)).resolves.toBe('Fill')
-}))
+      yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-test('clear', withValue(async function* ({ $, page }) {
-  await $.focus()
+      await $eval((el) => el.setAttribute('maxvisibleitems', ''))
 
-  yield { name: 'initial' }
+      yield { name: 'empty', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'dropdown',
+    url: withValue,
+    async *fn({ $, $eval, page }) {
+      await $.focus()
 
-  await page.keyboard.press('Tab')
+      yield { name: 'input-focus', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  yield { name: 'focused' }
+      await page.keyboard.press('Shift+Tab')
 
-  await page.keyboard.press('Enter')
+      yield { name: 'input-blur', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'keyboard',
+    url: withValue,
+    async *fn({ $, $eval }) {
+      await $.focus()
 
-  yield { name: 'cleared' }
-}))
+      yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-test('maxvisibleitems attribute', withValue(async function* ({ $, $eval }) {
-  await $eval((el) => el.setAttribute('maxvisibleitems', '2'))
-  await $.focus()
+      await $.press('ArrowDown')
+      yield { name: 'down', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
+      await $.press('ArrowDown')
+      await $.press('ArrowDown')
+      await $.press('ArrowDown')
+      yield { name: 'down-down', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  await $eval((el) => el.setAttribute('maxvisibleitems', ''))
+      await $.press('ArrowUp')
+      await $.press('ArrowUp')
+      yield { name: 'up-up', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'custom events',
+    url: withValue,
+    async *fn({ $, page }) {
+      const testInput = testCustomEvent(page, $)
 
-  yield { name: 'empty', includeRects: [await $eval((el) => el.dropdownRect)] }
-}))
+      await testInput('change', 'sinch-search-change', 'X')
+      await testInput('focusin', 'sinch-search-focus')
+      await testInput('focusout', 'sinch-search-blur')
+    },
+  },
+  {
+    name: 'native events',
+    url: withValue,
+    async *fn({ $, page }) {
+      await subscribeToEvents(page, 'sinch-search-focus', 'sinch-search-blur', 'sinch-search-change')
+      await $.focus()
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Tab')
 
-test('dropdown', withValue(async function* ({ $, $eval, page }) {
-  await $.focus()
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-search-focus', detail: null },
+        { type: 'sinch-search-blur', detail: null },
+      ])
 
-  yield { name: 'input-focus', includeRects: [await $eval((el) => el.dropdownRect)] }
+      // Necessary to normalize "type" behaviour
+      await $.click()
+      await page.keyboard.press('End')
+      await $.type('X')
 
-  await page.keyboard.press('Shift+Tab')
-
-  yield { name: 'input-blur', includeRects: [await $eval((el) => el.dropdownRect)] }
-}))
-
-test('keyboard', withValue(async function* ({ $, $eval }) {
-  await $.focus()
-
-  yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
-
-  await $.press('ArrowDown')
-  yield { name: 'down', includeRects: [await $eval((el) => el.dropdownRect)] }
-
-  await $.press('ArrowDown')
-  await $.press('ArrowDown')
-  await $.press('ArrowDown')
-  yield { name: 'down-down', includeRects: [await $eval((el) => el.dropdownRect)] }
-
-  await $.press('ArrowUp')
-  await $.press('ArrowUp')
-  yield { name: 'up-up', includeRects: [await $eval((el) => el.dropdownRect)] }
-}))
-
-test('custom events', withValue(async function* ({ $, page }) {
-  const testInput = testCustomEvent(page, $)
-
-  await testInput('change', 'sinch-search-change', 'X')
-  await testInput('focusin', 'sinch-search-focus')
-  await testInput('focusout', 'sinch-search-blur')
-}))
-
-test('native events', withValue(async function* ({ $, page }) {
-  await subscribeToEvents(page, 'sinch-search-focus', 'sinch-search-blur', 'sinch-search-change')
-  await $.focus()
-  await page.keyboard.press('Tab')
-  await page.keyboard.press('Tab')
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-search-focus', detail: null },
-    { type: 'sinch-search-blur', detail: null },
-  ])
-
-  // Necessary to normalize "type" behaviour
-  await $.click()
-  await page.keyboard.press('End')
-  await $.type('X')
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-search-focus', detail: null },
-    { type: 'sinch-search-change', detail: 'Input valueX' },
-  ])
-}))
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-search-focus', detail: null },
+        { type: 'sinch-search-change', detail: 'Input valueX' },
+      ])
+    },
+  },
+]))

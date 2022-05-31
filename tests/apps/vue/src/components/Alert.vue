@@ -1,9 +1,9 @@
 <template>
   <sinch-alert
-    v-bind:type="type"
-    v-bind:text="text"
-    v-bind:title="title"
-    v-bind:multiline="isMultiline">
+    :type="type"
+    :text="text"
+    :title="title"
+    :multiline="isMultiline">
   <sinch-alert-close
     slot="close"
     v-if="isDismissable"

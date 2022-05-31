@@ -70,11 +70,11 @@
   --sinch-color-bolt-200: #FFE6B3;
   --sinch-color-transparent: transparent;
   --sinch-font-hero: 700 56px/72px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-title-1: 600 40px/48px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-title-2: 600 24px/32px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-title-3: 600 20px/24px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-title-4: 600 16px/24px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-title-5: 700 14px/22px "Gilroy", "Arial", "sans-serif";
+  --sinch-font-title-xl: 600 40px/48px "Gilroy", "Arial", "sans-serif";
+  --sinch-font-title-l: 600 24px/32px "Gilroy", "Arial", "sans-serif";
+  --sinch-font-title-m: 600 20px/24px "Gilroy", "Arial", "sans-serif";
+  --sinch-font-title-s: 600 16px/24px "Gilroy", "Arial", "sans-serif";
+  --sinch-font-title-xs: 600 14px/22px "Gilroy", "Arial", "sans-serif";
   --sinch-font-body: 400 16px/24px "Gilroy", "Arial", "sans-serif";
   --sinch-font-emphasized-body: 600 16px/24px "Gilroy", "Arial", "sans-serif";
   --sinch-font-small-text: 400 14px/22px "Gilroy", "Arial", "sans-serif";

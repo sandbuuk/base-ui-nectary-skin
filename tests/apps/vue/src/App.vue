@@ -20,6 +20,7 @@
     <Table v-if="url.pathname === '/table'" :search="url.searchParams"/>
     <Tag v-if="url.pathname === '/tag'" :search="url.searchParams"/>
     <Textarea v-if="url.pathname === '/textarea'" :search="url.searchParams"/>
+    <Title v-if="url.pathname === '/title'" :search="url.searchParams"/>
     <Toggle v-if="url.pathname === '/toggle'" :search="url.searchParams"/>
     <Tooltip v-if="url.pathname === '/tooltip'" :search="url.searchParams"/>
     <Spinner v-if="url.pathname === '/spinner'" :search="url.searchParams"/>
@@ -50,6 +51,7 @@ import Tabs from './components/Tabs.vue'
 import Table from './components/Table.vue'
 import Tag from './components/Tag.vue'
 import Textarea from './components/Textarea.vue'
+import Title from './components/Title.vue'
 import Toggle from './components/Toggle.vue'
 import Tooltip from './components/Tooltip.vue'
 import Spinner from './components/Spinner.vue'
@@ -105,6 +107,7 @@ export default {
     Table,
     Tag,
     Textarea,
+    Title,
     Toggle,
     Tooltip,
     Spinner,

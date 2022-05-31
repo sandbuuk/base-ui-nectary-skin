@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const options = encodeURI(JSON.stringify([{
   value: 1,
@@ -20,142 +20,169 @@ const singleOption = encodeURI(JSON.stringify([{
   value: 1,
   text: 'Option value 1',
 }]))
-const withOptions = makeScreenshotTests(`/radio?width=200&options=${options}`, 'sinch-radio')
-const withSingleOption = makeScreenshotTests(`/radio?options=${singleOption}`, 'sinch-radio')
-const narrowLabel = makeScreenshotTests(`/radio?width=100&options=${singleOption}`, 'sinch-radio')
+const withOptions = `/radio?width=200&options=${options}`
+const withSingleOption = `/radio?options=${singleOption}`
+const narrowLabel = `/radio?width=100&options=${singleOption}`
 const checkRadioOptions = makeAccessibilityTests(`/radio?width=200&options=${options}`, 'sinch-radio')
 
 test('accessibility', checkRadioOptions(async function* () {
   yield
 }))
 
-test('narrow', narrowLabel(async function* () {
-  yield { name: 'clip' }
-}))
+test('radio screenshots', runScreenshotTests('sinch-radio', [
+  {
+    name: 'narrow',
+    url: narrowLabel,
+    async *fn() {
+      yield { name: 'clip' }
+    },
+  },
+  {
+    name: 'mouse interaction',
+    url: withSingleOption,
+    async *fn({ $, page }) {
+      const rect = (await $.boundingBox())!
 
-test('mouse interaction', withSingleOption(async function* ({ $, page }) {
-  const rect = (await $.boundingBox())!
+      await page.mouse.move(rect.x + 5, rect.y + 15)
+      yield { name: 'hover' }
 
-  await page.mouse.move(rect.x + 5, rect.y + 15)
-  yield { name: 'hover' }
+      await page.mouse.down()
+      yield { name: 'active' }
 
-  await page.mouse.down()
-  yield { name: 'active' }
+      await page.mouse.up()
+      yield { name: 'hover_checked' }
 
-  await page.mouse.up()
-  yield { name: 'hover_checked' }
+      await page.mouse.down()
+      yield { name: 'active_checked' }
+    },
+  },
+  {
+    name: 'focus',
+    url: withSingleOption,
+    async *fn({ $eval, page }) {
+      await page.keyboard.press('Tab')
 
-  await page.mouse.down()
-  yield { name: 'active_checked' }
-}))
+      await $eval((el) => {
+        el.value = '1'
+      })
+      yield { name: 'checked' }
 
-test('focus', withSingleOption(async function* ({ $eval, page }) {
-  await page.keyboard.press('Tab')
+      await $eval((el) => {
+        el.value = ''
+      })
+      yield { name: 'unchecked' }
+    },
+  },
+  {
+    name: 'value attribute',
+    url: withOptions,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('value', ''))
+      yield { name: 'option-empty' }
 
-  await $eval((el) => {
-    el.value = '1'
-  })
-  yield { name: 'checked' }
+      await $eval((el) => el.setAttribute('value', '4'))
+      yield { name: 'option-4' }
 
-  await $eval((el) => {
-    el.value = ''
-  })
-  yield { name: 'unchecked' }
-}))
+      await $eval((el) => el.setAttribute('value', '3'))
+      yield { name: 'option-3' }
 
-test('value attribute', withOptions(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('value', ''))
-  yield { name: 'option-empty' }
+      await $eval((el) => el.setAttribute('value', '2'))
+      yield { name: 'option-disabled' }
 
-  await $eval((el) => el.setAttribute('value', '4'))
-  yield { name: 'option-4' }
+      await $eval((el) => el.setAttribute('value', '1'))
+      yield { name: 'option-1' }
 
-  await $eval((el) => el.setAttribute('value', '3'))
-  yield { name: 'option-3' }
+      await $eval((el) => el.setAttribute('value', 'missing'))
+      yield { name: 'option-missing' }
+    },
+  },
+  {
+    name: 'value property',
+    url: withOptions,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.value = ''
+      })
+      yield { name: 'option-empty' }
 
-  await $eval((el) => el.setAttribute('value', '2'))
-  yield { name: 'option-disabled' }
+      await $eval((el) => {
+        el.value = '4'
+      })
+      yield { name: 'option-4' }
 
-  await $eval((el) => el.setAttribute('value', '1'))
-  yield { name: 'option-1' }
+      await $eval((el) => {
+        el.value = '3'
+      })
+      yield { name: 'option-3' }
 
-  await $eval((el) => el.setAttribute('value', 'missing'))
-  yield { name: 'option-missing' }
-}))
+      await $eval((el) => {
+        el.value = '2'
+      })
+      yield { name: 'option-disabled' }
 
-test('value property', withOptions(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.value = ''
-  })
-  yield { name: 'option-empty' }
+      await $eval((el) => {
+        el.value = '1'
+      })
+      yield { name: 'option-1' }
 
-  await $eval((el) => {
-    el.value = '4'
-  })
-  yield { name: 'option-4' }
+      await $eval((el) => {
+        el.value = 'missing'
+      })
+      yield { name: 'option-missing' }
+    },
+  },
+  {
+    name: 'keyboard',
+    url: withOptions,
+    async *fn({ $, page }) {
+      await page.keyboard.press('Tab')
+      yield { name: '1-focus' }
 
-  await $eval((el) => {
-    el.value = '3'
-  })
-  yield { name: 'option-3' }
+      await $.press('ArrowDown')
+      await $.press('ArrowDown')
+      yield { name: '2-down-down' }
 
-  await $eval((el) => {
-    el.value = '2'
-  })
-  yield { name: 'option-disabled' }
+      await $.press('ArrowRight')
+      await $.press('ArrowRight')
+      yield { name: '3-right-right' }
 
-  await $eval((el) => {
-    el.value = '1'
-  })
-  yield { name: 'option-1' }
+      await $.press('ArrowUp')
+      await $.press('ArrowLeft')
+      yield { name: '4-up-left' }
+    },
+  },
+  {
+    name: 'custom events',
+    url: withOptions,
+    async *fn({ $, page }) {
+      const testInput = testCustomEvent(page, $)
 
-  await $eval((el) => {
-    el.value = 'missing'
-  })
-  yield { name: 'option-missing' }
-}))
+      await testInput('change', 'sinch-radio-change', '2')
+    },
+  },
+  {
+    name: 'custom events',
+    url: withOptions,
+    async *fn({ $, page }) {
+      await subscribeToEvents(page, 'sinch-radio-change')
 
-test('keyboard', withOptions(async function* ({ $, page }) {
-  await page.keyboard.press('Tab')
-  yield { name: '1-focus' }
+      // Click first option
+      await $.locator('sinch-radio-option').nth(0).click()
 
-  await $.press('ArrowDown')
-  await $.press('ArrowDown')
-  yield { name: '2-down-down' }
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-radio-change', detail: '1' },
+      ])
 
-  await $.press('ArrowRight')
-  await $.press('ArrowRight')
-  yield { name: '3-right-right' }
+      // Click third option
+      await $.locator('sinch-radio-option').nth(2).click()
 
-  await $.press('ArrowUp')
-  await $.press('ArrowLeft')
-  yield { name: '4-up-left' }
-}))
-
-test('custom events', withOptions(async function* ({ $, page }) {
-  const testInput = testCustomEvent(page, $)
-
-  await testInput('change', 'sinch-radio-change', '2')
-}))
-
-test('native events', withOptions(async function* ({ $, page }) {
-  await subscribeToEvents(page, 'sinch-radio-change')
-
-  // Click first option
-  await $.locator('sinch-radio-option').nth(0).click()
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-radio-change', detail: '1' },
-  ])
-
-  // Click third option
-  await $.locator('sinch-radio-option').nth(2).click()
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-radio-change', detail: '3' },
-  ])
-}))
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-radio-change', detail: '3' },
+      ])
+    },
+  },
+]))

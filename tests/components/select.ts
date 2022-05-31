@@ -1,13 +1,13 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip'
 
-const shot = makeScreenshotTests('/select?width=200&label=Label', 'sinch-select')
-const withPlaceholder = makeScreenshotTests('/select?width=200&label=Label&placeholder=Placeholder', 'sinch-select')
-const withTooltip = makeScreenshotTests('/select?width=200&label=Label&placeholder=Placeholder&tooltip=Tooltip%20text%20long%20long', 'sinch-select')
-const withMaxItems = makeScreenshotTests('/select?width=200&label=Label&maxvisibleitems=2', 'sinch-select')
-const withEverything = makeScreenshotTests('/select?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=1', 'sinch-select')
+const shot = '/select?width=200&label=Label'
+const withPlaceholder = '/select?width=200&label=Label&placeholder=Placeholder'
+const withTooltip = '/select?width=200&label=Label&placeholder=Placeholder&tooltip=Tooltip%20text%20long%20long'
+const withMaxItems = '/select?width=200&label=Label&maxvisibleitems=2'
+const withEverything = '/select?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=1'
 const checkSelectWithEverything = makeAccessibilityTests('/select?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=1', 'sinch-select')
 
 test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
@@ -16,184 +16,230 @@ test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
   yield
 }))
 
-test('disabled attribute', withEverything(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('disabled', ''))
-  yield { name: 'disabled' }
+test('select screenshots', runScreenshotTests('sinch-select', [
+  {
+    name: 'disabled attribute',
+    url: withEverything,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('disabled', ''))
+      yield { name: 'disabled' }
 
-  await $eval((el) => el.removeAttribute('disabled'))
-  yield { name: 'enabled' }
-}))
+      await $eval((el) => el.removeAttribute('disabled'))
+      yield { name: 'enabled' }
+    },
+  },
+  {
+    name: 'disabled property',
+    url: withEverything,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.disabled = true
+      })
+      yield { name: 'disabled' }
 
-test('disabled property', withEverything(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.disabled = true
-  })
-  yield { name: 'disabled' }
+      await $eval((el) => {
+        el.disabled = false
+      })
+      yield { name: 'enabled' }
+    },
+  },
+  {
+    name: 'value attribute',
+    url: withPlaceholder,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('value', ''))
+      yield { name: 'option-empty' }
 
-  await $eval((el) => {
-    el.disabled = false
-  })
-  yield { name: 'enabled' }
-}))
+      await $eval((el) => el.setAttribute('value', '4'))
+      yield { name: 'option-4' }
 
-test('value attribute', withPlaceholder(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('value', ''))
-  yield { name: 'option-empty' }
+      await $eval((el) => el.setAttribute('value', '3'))
+      yield { name: 'option-3' }
 
-  await $eval((el) => el.setAttribute('value', '4'))
-  yield { name: 'option-4' }
+      await $eval((el) => el.setAttribute('value', '2'))
+      yield { name: 'option-disabled' }
 
-  await $eval((el) => el.setAttribute('value', '3'))
-  yield { name: 'option-3' }
+      await $eval((el) => el.setAttribute('value', '1'))
+      yield { name: 'option-1' }
 
-  await $eval((el) => el.setAttribute('value', '2'))
-  yield { name: 'option-disabled' }
+      await $eval((el) => el.setAttribute('value', 'missing'))
+      yield { name: 'option-missing' }
+    },
+  },
+  {
+    name: 'click button',
+    url: shot,
+    async *fn({ $, $eval, page }) {
+      await $.click()
+      yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  await $eval((el) => el.setAttribute('value', '1'))
-  yield { name: 'option-1' }
+      await page.mouse.click(0, 0)
+      yield { name: 'click-outside', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'click label',
+    url: shot,
+    async *fn({ $, $eval }) {
+      // Click on label
+      await $.click({ position: { x: 10, y: 10 } })
 
-  await $eval((el) => el.setAttribute('value', 'missing'))
-  yield { name: 'option-missing' }
-}))
+      yield { name: 'focus', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'tooltip',
+    url: withTooltip,
+    async *fn({ $ }) {
+      await $.locator('sinch-help-tooltip').hover()
 
-test('click button', shot(async function* ({ $, $eval, page }) {
-  await $.click()
-  yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
+      const tooltipRect = await $.locator('sinch-help-tooltip')
+        .evaluate((el) => (el as TSinchHelpTooltipElement).tooltipRect)
 
-  await page.mouse.click(0, 0)
-  yield { name: 'click-outside', includeRects: [await $eval((el) => el.dropdownRect)] }
-}))
+      yield {
+        name: 'show',
+        includeRects: [tooltipRect],
+      }
+    },
+  },
+  {
+    name: 'focus press-space',
+    url: withPlaceholder,
+    async *fn({ $, $eval }) {
+      await $.press('Space')
+      yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-test('click label', shot(async function* ({ $, $eval }) {
-  // Click on label
-  await $.click({ position: { x: 10, y: 10 } })
+      await $.press('Space')
+      yield { name: 'close', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  yield { name: 'focus', includeRects: [await $eval((el) => el.dropdownRect)] }
-}))
+      await $.press('Space')
+      yield { name: 'open-again', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'focus press-enter',
+    url: withPlaceholder,
+    async *fn({ $, $eval }) {
+      await $.press('Enter')
+      yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-test('tooltip', withTooltip(async function* ({ $ }) {
-  await $.locator('sinch-help-tooltip').hover()
+      await $.press('Enter')
+      yield { name: 'close', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-  const tooltipRect = await $.locator('sinch-help-tooltip')
-    .evaluate((el) => (el as TSinchHelpTooltipElement).tooltipRect)
+      await $.press('Enter')
+      yield { name: 'open-again', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'keyboard',
+    url: withPlaceholder,
+    async *fn({ $, $eval }) {
+      await $.click()
 
-  yield {
-    name: 'show',
-    includeRects: [tooltipRect],
-  }
-}))
+      const dropdownRect = await $eval((el) => el.dropdownRect)
 
-test('focus press-space', withPlaceholder(async function* ({ $, $eval }) {
-  await $.press('Space')
-  yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield {
+        name: 'open',
+        includeRects: [dropdownRect],
+      }
 
-  await $.press('Space')
-  yield { name: 'close', includeRects: [await $eval((el) => el.dropdownRect)] }
+      await $.press('ArrowDown')
+      yield {
+        name: 'down',
+        includeRects: [dropdownRect],
+      }
 
-  await $.press('Space')
-  yield { name: 'open-again', includeRects: [await $eval((el) => el.dropdownRect)] }
-}))
+      await $.press('ArrowDown')
+      await $.press('ArrowRight')
+      yield {
+        name: 'down-right',
+        includeRects: [dropdownRect],
+      }
 
-test('focus press-enter', withPlaceholder(async function* ({ $, $eval }) {
-  await $.press('Enter')
-  yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
+      await $.press('ArrowUp')
+      await $.press('ArrowLeft')
+      yield {
+        name: 'up-left',
+        includeRects: [dropdownRect],
+      }
+    },
+  },
+  {
+    name: 'maxvisibleitems attribute',
+    url: shot,
+    async *fn({ $, $eval }) {
+      await $eval((el) => el.setAttribute('maxvisibleitems', '2'))
+      await $.click()
+      yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'maxvisibleitems property',
+    url: shot,
+    async *fn({ $, $eval }) {
+      await $eval((el) => {
+        el.maxVisibleItems = 2
+      })
+      await $.click()
+      yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'maxvisibleitems scroll',
+    url: withMaxItems,
+    async *fn({ $, $eval }) {
+      await $eval((el) => el.setAttribute('value', '3'))
+      await $.click()
+      yield { name: 'scroll to 3', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'custom events',
+    url: shot,
+    async *fn({ $, page }) {
+      const testInput = testCustomEvent(page, $)
 
-  await $.press('Enter')
-  yield { name: 'close', includeRects: [await $eval((el) => el.dropdownRect)] }
+      await testInput('change', 'sinch-select-change', 'X')
+      await testInput('focusin', 'sinch-select-focus')
+      await testInput('focusout', 'sinch-select-blur')
+    },
+  },
+  {
+    name: 'native events',
+    url: shot,
+    async *fn({ $, page }) {
+      await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
 
-  await $.press('Enter')
-  yield { name: 'open-again', includeRects: [await $eval((el) => el.dropdownRect)] }
-}))
+      await $.focus()
+      await page.keyboard.press('Tab')
 
-test('keyboard', withPlaceholder(async function* ({ $, $eval }) {
-  await $.click()
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-select-focus', detail: null },
+        { type: 'sinch-select-blur', detail: null },
+      ])
 
-  const dropdownRect = await $eval((el) => el.dropdownRect)
+      await $.click()
+      await page.keyboard.press('Enter')
 
-  yield {
-    name: 'open',
-    includeRects: [dropdownRect],
-  }
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-select-focus', detail: null },
+        { type: 'sinch-select-change', detail: '1' },
+      ])
 
-  await $.press('ArrowDown')
-  yield {
-    name: 'down',
-    includeRects: [dropdownRect],
-  }
+      await $.click()
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('Enter')
 
-  await $.press('ArrowDown')
-  await $.press('ArrowRight')
-  yield {
-    name: 'down-right',
-    includeRects: [dropdownRect],
-  }
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-select-change', detail: '3' },
+      ])
+    },
+  },
+]))
 
-  await $.press('ArrowUp')
-  await $.press('ArrowLeft')
-  yield {
-    name: 'up-left',
-    includeRects: [dropdownRect],
-  }
-}))
-
-test('maxvisibleitems attribute', shot(async function* ({ $, $eval }) {
-  await $eval((el) => el.setAttribute('maxvisibleitems', '2'))
-  await $.click()
-  yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
-}))
-
-test('maxvisibleitems property', shot(async function* ({ $, $eval }) {
-  await $eval((el) => {
-    el.maxVisibleItems = 2
-  })
-  await $.click()
-  yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
-}))
-
-test('maxvisibleitems scroll', withMaxItems(async function* ({ $, $eval }) {
-  await $eval((el) => el.setAttribute('value', '3'))
-  await $.click()
-  yield { name: 'scroll to 3', includeRects: [await $eval((el) => el.dropdownRect)] }
-}))
-
-test('custom events', shot(async function* ({ $, page }) {
-  const testInput = testCustomEvent(page, $)
-
-  await testInput('change', 'sinch-select-change', 'X')
-  await testInput('focusin', 'sinch-select-focus')
-  await testInput('focusout', 'sinch-select-blur')
-}))
-
-test('native events', shot(async function* ({ $, page }) {
-  await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
-
-  await $.focus()
-  await page.keyboard.press('Tab')
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-select-focus', detail: null },
-    { type: 'sinch-select-blur', detail: null },
-  ])
-
-  await $.click()
-  await page.keyboard.press('Enter')
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-select-focus', detail: null },
-    { type: 'sinch-select-change', detail: '1' },
-  ])
-
-  await $.click()
-  await page.keyboard.press('ArrowDown')
-  await page.keyboard.press('Enter')
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-select-change', detail: '3' },
-  ])
-}))

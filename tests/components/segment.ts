@@ -1,57 +1,81 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, makeScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const withEverything = makeScreenshotTests('/segment?width=400&caption=Title&action=true&content=true&icon=true&info=true', 'sinch-segment')
-const withCaption = makeScreenshotTests('/segment?width=400&caption=Title&action=true&info=true&icon=true', 'sinch-segment')
-const withNarrowCaption = makeScreenshotTests('/segment?width=300&caption=Title%20long%20long%20long&info=true&icon=true', 'sinch-segment')
-const withCollapse = makeScreenshotTests('/segment?width=400&caption=Title&collapse=true', 'sinch-segment')
-const withEverythingCollapse = makeScreenshotTests('/segment?width=400&caption=Title&action=true&content=true&icon=true&info=true&collapse=true', 'sinch-segment')
+const withEverything = '/segment?width=400&caption=Title&action=true&content=true&icon=true&info=true'
+const withCaption = '/segment?width=400&caption=Title&action=true&info=true&icon=true'
+const withNarrowCaption = '/segment?width=300&caption=Title%20long%20long%20long&info=true&icon=true'
+const withCollapse = '/segment?width=400&caption=Title&collapse=true'
+const withEverythingCollapse = '/segment?width=400&caption=Title&action=true&content=true&icon=true&info=true&collapse=true'
 
-test('caption attribute', withCaption(async function* ({ $eval }) {
-  await $eval((el) => el.setAttribute('caption', 'Updated title'))
-  yield { name: 'updated' }
-}))
+test('segment screenshots', runScreenshotTests('sinch-segment', [
+  {
+    name: 'caption attribute',
+    url: withCaption,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('caption', 'Updated title'))
+      yield { name: 'updated' }
+    },
+  },
+  {
+    name: 'caption prop',
+    url: withCaption,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.caption = 'Updated title'
+      })
+      yield { name: 'updated' }
+    },
+  },
+  {
+    name: 'caption narrow',
+    url: withNarrowCaption,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'everything',
+    url: withEverything,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'collapse',
+    url: withEverythingCollapse,
+    async *fn({ $ }) {
+      await $.click({ position: { x: 10, y: 10 } })
+      yield { name: 'collapsed' }
+      await $.click({ position: { x: 10, y: 10 } })
+      yield { name: 'expanded' }
+    },
+  },
+  {
+    name: 'custom events',
+    url: withCollapse,
+    async *fn({ $, page }) {
+      const testSegment = testCustomEvent(page, $.locator('sinch-segment-collapse'))
 
-test('caption prop', withCaption(async function* ({ $eval }) {
-  await $eval((el) => {
-    el.caption = 'Updated title'
-  })
-  yield { name: 'updated' }
-}))
+      await testSegment('change', 'sinch-segment-collapse-change', true)
+    },
+  },
+  {
+    name: 'native events',
+    url: withCollapse,
+    async *fn({ page }) {
+      await subscribeToEvents(page, 'sinch-segment-collapse-focus', 'sinch-segment-collapse-blur', 'sinch-segment-collapse-change')
 
-test('caption narrow', withNarrowCaption(async function* () {
-  yield { name: 'shot' }
-}))
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Space')
+      await page.keyboard.press('Tab')
 
-test('everything', withEverything(async function* () {
-  yield { name: 'shot' }
-}))
-
-test('collapse', withEverythingCollapse(async function* ({ $ }) {
-  await $.click({ position: { x: 10, y: 10 } })
-  yield { name: 'collapsed' }
-  await $.click({ position: { x: 10, y: 10 } })
-  yield { name: 'expanded' }
-}))
-
-test('custom events', withCollapse(async function* ({ page, $ }) {
-  const testSegment = testCustomEvent(page, $.locator('sinch-segment-collapse'))
-
-  await testSegment('change', 'sinch-segment-collapse-change', true)
-}))
-
-test('native events', withCollapse(async function* ({ page }) {
-  await subscribeToEvents(page, 'sinch-segment-collapse-focus', 'sinch-segment-collapse-blur', 'sinch-segment-collapse-change')
-
-  await page.keyboard.press('Tab')
-  await page.keyboard.press('Space')
-  await page.keyboard.press('Tab')
-
-  expect(
-    await getAllEvents(page)
-  ).toEqual([
-    { type: 'sinch-segment-collapse-focus', detail: null },
-    { type: 'sinch-segment-collapse-change', detail: true },
-    { type: 'sinch-segment-collapse-blur', detail: null },
-  ])
-}))
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-segment-collapse-focus', detail: null },
+        { type: 'sinch-segment-collapse-change', detail: true },
+        { type: 'sinch-segment-collapse-blur', detail: null },
+      ])
+    },
+  },
+]))

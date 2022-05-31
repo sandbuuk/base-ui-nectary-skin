@@ -37,7 +37,7 @@ defineCustomElement('sinch-alert', class extends HTMLElement {
     return getLiteralAttribute(this, typeValues, 'type')
   }
 
-  set type(value: TSinchAlertType | undefined) {
+  set type(value: TSinchAlertType) {
     updateLiteralAttribute(this, typeValues, 'type', value)
   }
 
