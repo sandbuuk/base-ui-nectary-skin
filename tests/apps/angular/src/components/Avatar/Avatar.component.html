@@ -3,4 +3,7 @@
   [attr.alt]="alt"
   [attr.size]="size"
   [attr.background]="background"
-></sinch-avatar>
+>
+  <sinch-avatar-badge *ngIf="badgeText != null" slot="badge" [attr.text]="badgeText"></sinch-avatar-badge>
+  <sinch-avatar-status *ngIf="statusColor != null" slot="status" [attr.color]="statusColor"></sinch-avatar-status>
+</sinch-avatar>
