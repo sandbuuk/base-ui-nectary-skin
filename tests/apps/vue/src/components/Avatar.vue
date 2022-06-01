@@ -4,7 +4,10 @@
     :alt="alt"
     :size="size"
     :background="background"
-  />
+  >
+    <sinch-avatar-badge v-if="badgeText != null" slot="badge" :text="badgeText"></sinch-avatar-badge>
+    <sinch-avatar-status v-if="statusColor != null" slot="status" :color="statusColor"></sinch-avatar-status>
+  </sinch-avatar>
 </template>
 
 <script>
@@ -23,7 +26,13 @@ export default {
       return this.search.get('size') ?? undefined
     },
     background() {
-      return this.search.get('background') ?? undefined
+      return this.search.get('bg') ?? undefined
+    },
+    badgeText() {
+      return this.search.get('badge')
+    },
+    statusColor() {
+      return this.search.get('status')
     }
   },
 }

@@ -17,7 +17,6 @@
   border-radius: 50%;
   border: 1px solid var(--sinch-color-snow-100);
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 :host([background="blue"]) #wrapper {
@@ -58,11 +57,29 @@
   position: absolute;
   left: 0;
   top: 0;
+  border-radius: 50%;
 }
 
 :host([src]:not([src=""])) #image {
   display: block;
 }
+
+::slotted(sinch-avatar-badge) {
+  position: absolute;
+  top: -1px;
+  left: calc(100% - 9px);
+}
+
+::slotted(sinch-avatar-status) {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+}
 </style>
 
-<div id="wrapper"><span id="text"></span><img id="image" alt=""/></div>
+<div id="wrapper">
+  <span id="text"></span>
+  <img id="image" alt=""/>
+  <slot name="badge"></slot>
+  <slot name="status"></slot>
+</div>
