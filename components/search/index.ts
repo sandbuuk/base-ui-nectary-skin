@@ -40,6 +40,7 @@ defineCustomElement('sinch-search', class extends HTMLElement {
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
   #$clear: HTMLButtonElement
+  #isPendingDk = false
 
   constructor() {
     super()
@@ -64,6 +65,7 @@ defineCustomElement('sinch-search', class extends HTMLElement {
     this.setAttribute('aria-expanded', 'false')
 
     this.#$input.addEventListener('input', this.#onInput)
+    this.#$input.addEventListener('compositionstart', this.#onCompositionStart)
     this.#$input.addEventListener('focus', this.#onInputFocus)
     this.#$input.addEventListener('blur', this.#onInputBlur)
     this.#$input.addEventListener('keydown', this.#onListboxKeyDown)
@@ -76,6 +78,7 @@ defineCustomElement('sinch-search', class extends HTMLElement {
 
   disconnectedCallback() {
     this.#$input.removeEventListener('input', this.#onInput)
+    this.#$input.removeEventListener('compositionstart', this.#onCompositionStart)
     this.#$input.removeEventListener('focus', this.#onInputFocus)
     this.#$input.removeEventListener('blur', this.#onInputBlur)
     this.#$input.removeEventListener('keydown', this.#onListboxKeyDown)
@@ -183,6 +186,10 @@ defineCustomElement('sinch-search', class extends HTMLElement {
     }
   }
 
+  #onCompositionStart = () => {
+    this.#isPendingDk = true
+  }
+
   #onInput = (e: Event) => {
     e.stopPropagation()
 
@@ -199,8 +206,12 @@ defineCustomElement('sinch-search', class extends HTMLElement {
       const prevSelectionEnd = this.#selectionEnd
       const isPrevCursorEnd = prevSelectionStart === prevSelectionEnd && prevSelectionStart === prevValue.length
 
-      // Reset input value to enforce controlled state
-      this.#$input.value = prevValue
+      if (!this.#isPendingDk) {
+        // Reset input value to enforce controlled state
+        this.#$input.value = prevValue
+      }
+
+      this.#isPendingDk = false
 
       if (!isPrevCursorEnd) {
         this.#$input.setSelectionRange(prevSelectionStart, prevSelectionEnd)
