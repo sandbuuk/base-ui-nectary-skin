@@ -1,3 +1,13 @@
+## v0.20.0
+
+* 💥 rename `theme.css` title variables
+* ➕ add `sinch-title` component
+* ➕ add `sinch-avatar-status`
+* ➕ add `sinch-avatar-badge`
+* ➕ add selection api to `sinch-search`
+* 🐞 fix dead letters in `sinch-search`
+* 🐞 update `sinch-avatar` sizes
+
 ## v0.19.0
 
 * ➕ add `sinch-chat`, `sinch-chat-block`, `sinch-chat-bubble`, `sinch-chat-avatar`
