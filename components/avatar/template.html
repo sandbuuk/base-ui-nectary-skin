@@ -7,16 +7,20 @@
 
 #wrapper {
   position: relative;
-  width: 32px;
-  height: 32px;
-  font: var(--sinch-font-title-xs);
-  line-height: 30px;
+  width: 40px;
+  height: 40px;
+  font: var(--sinch-font-title-s);
+  line-height: 38px;
   color: var(--sinch-color-text-default);
   background-color: var(--sinch-color-snow-700);
   text-align: center;
   border-radius: 50%;
   border: 1px solid var(--sinch-color-snow-100);
   box-sizing: border-box;
+  text-transform: uppercase;
+
+  --sinch-avatar-badge-size: 16px;
+  --sinch-avatar-badge-font: 700 12px/14px "Gilroy", "Arial", "sans-serif";
 }
 
 :host([background="blue"]) #wrapper {
@@ -29,10 +33,13 @@
 }
 
 :host([size="l"]) #wrapper {
-  width: 40px;
-  height: 40px;
-  font: var(--sinch-font-title-s);
-  line-height: 38px;
+  width: 56px;
+  height: 56px;
+  font: var(--sinch-font-title-m);
+  line-height: 54px;
+
+  --sinch-avatar-badge-size: 20px;
+  --sinch-avatar-badge-font: 700 12px/18px "Gilroy", "Arial", "sans-serif";
 }
 
 :host([size="s"]) #wrapper {
@@ -40,6 +47,9 @@
   height: 24px;
   font: var(--sinch-font-extra-small-text);
   line-height: 22px;
+
+  --sinch-avatar-badge-size: 11px;
+  --sinch-avatar-badge-font: 500 8px/9px "Gilroy", "Arial", "sans-serif";
 }
 
 #text {
@@ -66,14 +76,27 @@
 
 ::slotted(sinch-avatar-badge) {
   position: absolute;
-  top: -1px;
+  top: -2px;
+  left: calc(100% - 15px);
+}
+
+:host([size="l"]) ::slotted(sinch-avatar-badge) {
+  left: calc(100% - 19px);
+}
+
+:host([size="s"]) ::slotted(sinch-avatar-badge) {
   left: calc(100% - 9px);
 }
 
 ::slotted(sinch-avatar-status) {
   position: absolute;
-  bottom: -1px;
-  right: -1px;
+  bottom: -2px;
+  right: -2px;
+}
+
+:host([size="l"]) ::slotted(sinch-avatar-status) {
+  bottom: 2px;
+  right: 2px;
 }
 </style>
 

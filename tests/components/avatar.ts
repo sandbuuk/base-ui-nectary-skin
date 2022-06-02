@@ -177,12 +177,17 @@ test('avatar screenshots', runScreenshotTests('sinch-avatar', [
     },
   },
   {
-    name: 'badge long',
+    name: 'size badge long',
     url: withLongBadge,
-    async *fn({ $ }) {
+    async *fn({ $, $eval }) {
       const badge = $.locator('sinch-avatar-badge')
 
-      yield { name: 'shot', include: [badge] }
+      for (const val of sizeValues) {
+        await $eval((el, val) => {
+          el.setAttribute('size', val)
+        }, val)
+        yield { name: val, include: [badge] }
+      }
     },
   },
 ]))

@@ -1,21 +1,19 @@
 <style>
 #text {
-  width: 16px;
-  height: 16px;
+  width: var(--sinch-avatar-badge-size);
+  height: var(--sinch-avatar-badge-size);
   border: 1px solid var(--sinch-color-snow-100);
-  border-radius: 8px;
+  border-radius: calc(var(--sinch-avatar-badge-size) / 2);
   text-align: center;
   box-sizing: border-box;
   color: var(--sinch-color-snow-100);
-  font: var(--sinch-font-extra-small-text);
-  line-height: 14px;
-  font-weight: 700;
+  font: var(--sinch-avatar-badge-font);
   background-color: var(--sinch-color-raspberry-500);
 }
 
 #text.long {
   width: fit-content;
-  padding: 0 6px;
+  padding: 0 calc(var(--sinch-avatar-badge-size) / 4);
 }
 </style>
 
