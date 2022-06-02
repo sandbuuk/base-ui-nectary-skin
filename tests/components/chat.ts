@@ -10,8 +10,10 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'customer',
     url: withCustomerBubble,
-    async *fn() {
-      yield { name: 'shot' }
+    async *fn({ $ }) {
+      const avatar = $.locator('sinch-chat-avatar')
+
+      yield { name: 'shot', include: [avatar] }
     },
   },
   {
@@ -31,81 +33,97 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'type property',
     url: withCustomerBubble,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
+      const avatar = $.locator('sinch-chat-avatar')
+
       await $eval((el) => {
         el.type = 'agent'
       })
-      yield { name: 'updated' }
+      yield { name: 'updated', include: [avatar] }
     },
   },
   {
     name: 'type attribute',
     url: withCustomerBubble,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
+      const avatar = $.locator('sinch-chat-avatar')
+
       await $eval((el) => {
         el.setAttribute('type', 'agent')
       })
-      yield { name: 'updated' }
+      yield { name: 'updated', include: [avatar] }
     },
   },
   {
     name: 'firstName property',
     url: withCustomerBubble,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
+      const avatar = $.locator('sinch-chat-avatar')
+
       await $eval((el) => {
         el.firstName = 'Sven'
       })
-      yield { name: 'updated' }
+      yield { name: 'updated', include: [avatar] }
     },
   },
   {
     name: 'firstName attribute',
     url: withCustomerBubble,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
+      const avatar = $.locator('sinch-chat-avatar')
+
       await $eval((el) => {
         el.setAttribute('firstname', 'Sven')
       })
-      yield { name: 'updated' }
+      yield { name: 'updated', include: [avatar] }
     },
   },
   {
     name: 'lastName property',
     url: withCustomerBubble,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
+      const avatar = $.locator('sinch-chat-avatar')
+
       await $eval((el) => {
         el.lastName = 'Svensson'
       })
-      yield { name: 'updated' }
+      yield { name: 'updated', include: [avatar] }
     },
   },
   {
     name: 'lastName attribute',
     url: withCustomerBubble,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
+      const avatar = $.locator('sinch-chat-avatar')
+
       await $eval((el) => {
         el.setAttribute('lastname', 'Svensson')
       })
-      yield { name: 'updated' }
+      yield { name: 'updated', include: [avatar] }
     },
   },
   {
     name: 'timestamp property',
     url: withCustomerBubble,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
+      const avatar = $.locator('sinch-chat-avatar')
+
       await $eval((el) => {
         el.timestamp = '3:00pm'
       })
-      yield { name: 'updated' }
+      yield { name: 'updated', include: [avatar] }
     },
   },
   {
     name: 'timestamp attribute',
     url: withCustomerBubble,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
+      const avatar = $.locator('sinch-chat-avatar')
+
       await $eval((el) => {
         el.setAttribute('timestamp', '3:00pm')
       })
-      yield { name: 'updated' }
+      yield { name: 'updated', include: [avatar] }
     },
   },
 ]))
