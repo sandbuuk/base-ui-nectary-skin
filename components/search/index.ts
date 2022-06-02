@@ -143,6 +143,30 @@ defineCustomElement('sinch-search', class extends HTMLElement {
     return getRect(this.#$listbox)
   }
 
+  get selectionStart(): HTMLInputElement['selectionStart'] {
+    return this.#$input.selectionStart
+  }
+
+  set selectionStart(value: HTMLInputElement['selectionStart']) {
+    this.#$input.selectionStart = value
+  }
+
+  get selectionEnd(): HTMLInputElement['selectionEnd'] {
+    return this.#$input.selectionEnd
+  }
+
+  set selectionEnd(value: HTMLInputElement['selectionEnd']) {
+    this.#$input.selectionEnd = value
+  }
+
+  get selectionDirection(): HTMLInputElement['selectionDirection'] {
+    return this.#$input.selectionDirection
+  }
+
+  set selectionDirection(value: HTMLInputElement['selectionDirection']) {
+    this.#$input.selectionDirection = value
+  }
+
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
@@ -385,6 +409,9 @@ export type TSinchSearchElement = HTMLElement & {
   label: string | null,
   placeholder: string | null,
   maxVisibleItems: number | null,
+  selectionStart: HTMLInputElement['selectionStart'],
+  selectionEnd: HTMLInputElement['selectionEnd'],
+  selectionDirection: HTMLInputElement['selectionDirection'],
   readonly dropdownRect: TRect,
   focus(): void,
   blur(): void,
