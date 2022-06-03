@@ -19,6 +19,7 @@ import { AccordionComponent } from '../components/Accordion/Accordion.component'
 import { DialogComponent } from '../components/Dialog/Dialog.component'
 import { LinkComponent } from '../components/Link/Link.component'
 import { CardComponent } from '../components/Card/Card.component'
+import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
 import { DropdownComponent } from '../components/Dropdown/Dropdown.component'
 import { GridComponent } from '../components/Grid/Grid.component'
@@ -52,6 +53,7 @@ import { AppComponent } from './app.component'
     DropdownComponent,
     DialogComponent,
     CardComponent,
+    CardContainerComponent,
     GridComponent,
     IconButtonComponent,
     SegmentComponent,
