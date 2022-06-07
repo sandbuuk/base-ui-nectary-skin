@@ -120,23 +120,20 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
   {
     name: 'keyboard',
     url: withOptions,
-    async *fn({ $, page }) {
+    async *fn({ $ }) {
       await $.focus()
       yield { name: '1-focus' }
 
-      await $.press('ArrowDown')
-      await $.press('ArrowDown')
-      await page.waitForTimeout(100)
+      await $.press('ArrowDown', { delay: 100 })
+      await $.press('ArrowDown', { delay: 100 })
       yield { name: '2-down-down' }
 
-      await $.press('ArrowRight')
-      await $.press('ArrowRight')
-      await page.waitForTimeout(100)
+      await $.press('ArrowRight', { delay: 100 })
+      await $.press('ArrowRight', { delay: 100 })
       yield { name: '3-right-right' }
 
-      await $.press('ArrowUp')
-      await $.press('ArrowLeft')
-      await page.waitForTimeout(100)
+      await $.press('ArrowUp', { delay: 100 })
+      await $.press('ArrowLeft', { delay: 100 })
       yield { name: '4-up-left' }
     },
   },
