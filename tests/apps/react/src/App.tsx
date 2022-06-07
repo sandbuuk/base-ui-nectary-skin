@@ -4,6 +4,7 @@ import { Alert } from './components/Alert'
 import { Avatar } from './components/Avatar'
 import { Button } from './components/Button'
 import { Card } from './components/Card'
+import { CardContainer } from './components/CardContainer'
 import { Chat } from './components/Chat'
 import { Checkbox } from './components/Checkbox'
 import { Dialog } from './components/Dialog'
@@ -56,6 +57,12 @@ const mapElement = (url: URL) => {
     case '/card': {
       return (
         <Card search={url.searchParams}/>
+      )
+    }
+
+    case '/card-container': {
+      return (
+        <CardContainer search={url.searchParams}/>
       )
     }
 

@@ -1,0 +1,13 @@
+:host {
+  display: contents;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  background-color: #F1F3F4;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  font-family: Gilroy, Arial, Helvetica, sans-serif;
+}
