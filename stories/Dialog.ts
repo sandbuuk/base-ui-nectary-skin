@@ -35,7 +35,7 @@ const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-di
 
     dialogRef.current = $dialog
     $dialog.addEventListener('close', (e: any) => {
-      onClose(e)
+      onClose?.(e)
       $dialog.removeAttribute('open')
     })
   }
