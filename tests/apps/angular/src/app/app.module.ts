@@ -28,6 +28,7 @@ import { SegmentComponent } from '../components/Segment/Segment.component'
 import { AvatarComponent } from '../components/Avatar/Avatar.component'
 import { ChatComponent } from '../components/Chat/Chat.component'
 import { TitleComponent } from '../components/Title/Title.component'
+import { PopoverComponent } from '../components/Popover/Popover.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -60,6 +61,7 @@ import { AppComponent } from './app.component'
     AvatarComponent,
     ChatComponent,
     TitleComponent,
+    PopoverComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

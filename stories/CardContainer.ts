@@ -32,7 +32,12 @@ export const CardContainer = Template(cardInnerHTML)
 CardContainer.parameters = {
   docs: {
     source: {
-      code: `<sinch-card-container>${cardInnerHTML}</sinch-card-container>`,
+      code: `<sinch-card-container>
+  <div>
+    <span>Replace me!</span>
+    <span>Im a template component</span>
+  </div>
+</sinch-card-container>`,
     },
   },
 }

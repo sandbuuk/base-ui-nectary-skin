@@ -7,22 +7,24 @@
 
 #wrapper {
   position: relative;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 dialog {
   outline: none;
-  border: none;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
   background-color: var(--sinch-color-snow-100);
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--sinch-color-snow-500);
+  border-radius: 4px;
   overflow-y: auto;
   contain: content;
-  padding: 0;
-  border-radius: 4px;
-  cursor: pointer;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+dialog:not([open]) {
+  display: none;
 }
 
 dialog::backdrop {
@@ -55,17 +57,13 @@ dialog.fixed {
   bottom: 0;
   left: 0;
 }
-
-::slotted(*) {
-  display: block;
-}
 </style>
 
 <div id="wrapper">
-  <div id="button" aria-haspopup="listbox" aria-expanded="false">
+  <div id="target" aria-haspopup="dialog" aria-expanded="false">
     <slot name="target"></slot>
   </div>
-  <dialog id="listbox" tabindex="-1">
-    <slot name="option"></slot>
+  <dialog id="dialog" tabindex="-1">
+    <slot name="content"></slot>
   </dialog>
 </div>

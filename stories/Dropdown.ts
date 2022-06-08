@@ -13,7 +13,7 @@ export default {
       control: 'boolean',
     },
     value: {
-      description: 'Input value',
+      description: 'Dropdown value',
       control: 'text',
     },
     orientation: {
@@ -26,7 +26,7 @@ export default {
       control: { type: 'range', min: 1, max: 5, step: 1 },
     },
     onChange: {
-      description: 'Handler to sync input value with the state',
+      description: 'Handler to sync dropdown value with the state',
       action: 'onChange',
     },
     onFocus: {
@@ -41,7 +41,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'Input component',
+        component: 'Popover component',
       },
       source: {
         type: 'code',
@@ -59,25 +59,25 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdow
   }, updateArgs] = useArgs()
 
   const $wrapper = useStoryWrapper()
-  const inputRef = useRef<HTMLElementTagNameMap['sinch-dropdown'] | null>(null)
+  const dropdownRef = useRef<HTMLElementTagNameMap['sinch-dropdown'] | null>(null)
 
-  if (inputRef.current === null) {
-    const $input = document.createElement('sinch-dropdown')
+  if (dropdownRef.current === null) {
+    const $dropdown = document.createElement('sinch-dropdown')
 
-    $input.innerHTML = innerHTML
+    $dropdown.innerHTML = innerHTML
 
-    $input.addEventListener('change', (e: any) => {
+    $dropdown.addEventListener('change', (e: any) => {
       onChange(e.detail)
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
-    $wrapper.appendChild($input)
-    inputRef.current = $input
+    $wrapper.appendChild($dropdown)
+    dropdownRef.current = $dropdown
   }
 
-  const $input = inputRef.current!
+  const $input = dropdownRef.current!
 
   $input.value = value
   $input.maxVisibleItems = maxVisibleItems

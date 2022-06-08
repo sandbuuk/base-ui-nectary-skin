@@ -6,6 +6,7 @@ import {
   getRect,
   isAttrTrue,
   updateAttribute,
+  getReactEventHandler,
 } from '../utils'
 import '../icon-button'
 import '../icon/close'
@@ -17,23 +18,11 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-const getReactEventHandler = ($element: HTMLElement, handlerName: string): ((arg?: any) => void) | null => {
-  // https://github.com/facebook/react/issues/7901
-  for (const key in $element) {
-    if (key.startsWith('__reactProps$')) {
-      // @ts-ignore
-      return $element[key][handlerName]
-    }
-  }
-
-  return null
-}
-
 defineCustomElement('sinch-dialog', class extends HTMLElement {
   #$dialog: HTMLElement
   #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
-  #isConected = false
+  #isConnected = false
 
   constructor() {
     super()
@@ -63,7 +52,7 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
         break
       }
       case 'open': {
-        if (this.#isConected) {
+        if (this.#isConnected) {
           this.#setOpen(isAttrTrue(newVal))
         }
 
@@ -86,8 +75,7 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
     this.addEventListener('close', this.#onCloseReactHandler)
     this.addEventListener('click', this.#onBackdropClick)
     this.#$dialog.addEventListener('cancel', this.#onCancel)
-
-    this.#isConected = true
+    this.#isConnected = true
 
     if (getBooleanAttribute(this, 'open')) {
       this.#setOpen(true)
@@ -99,8 +87,7 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
     this.removeEventListener('close', this.#onCloseReactHandler)
     this.removeEventListener('click', this.#onBackdropClick)
     this.#$dialog.removeEventListener('cancel', this.#onCancel)
-
-    this.#isConected = false
+    this.#isConnected = false
   }
 
   #onCancel = (e: Event) => {
@@ -141,7 +128,7 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
         (this.#$dialog as any).showModal()
       }
     } else {
-      (this.#$dialog as any).close()
+      (this.#$dialog as any).close?.()
     }
   }
 

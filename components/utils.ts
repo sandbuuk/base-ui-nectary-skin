@@ -3,6 +3,18 @@ import type { TRect } from './types'
 const nectaryDefinitions = new Map<string, CustomElementConstructor>()
 let nectaryRegistry: CustomElementRegistry | null = null
 
+export const getReactEventHandler = ($element: HTMLElement, handlerName: string): ((arg?: any) => void) | null => {
+  // https://github.com/facebook/react/issues/7901
+  for (const key in $element) {
+    if (key.startsWith('__reactProps$')) {
+      // @ts-ignore
+      return $element[key][handlerName]
+    }
+  }
+
+  return null
+}
+
 export const defineCustomElement = (name: string, constructor: CustomElementConstructor): void => {
   if (nectaryRegistry !== null) {
     if (nectaryRegistry.get(name) == null) {
