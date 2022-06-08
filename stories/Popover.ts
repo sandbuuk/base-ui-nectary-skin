@@ -1,4 +1,3 @@
-import { updateAttribute } from '@sinch-engage/nectary/utils'
 import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
@@ -63,10 +62,8 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-popover
 
   const $popover = popoverRef.current!
 
-  console.log('open', open)
-
   $popover.orientation = orientation
-  updateAttribute($popover, 'open', open)
+  $popover.open = open
 
   return $wrapper
 }

@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   border-radius: 4px;
   box-sizing: border-box;
   background-color: var(--sinch-color-snow-100);
@@ -39,6 +40,9 @@
 
 #content-wrapper {
   padding: 0 32px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
 }
 
 #action {

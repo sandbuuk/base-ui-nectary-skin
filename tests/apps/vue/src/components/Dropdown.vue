@@ -1,9 +1,10 @@
 <template>
   <sinch-dropdown
+    :open="isOpen"
     :orientation="orientation"
-    :disabled="isDisabled"
     :maxvisibleitems="maxVisibleItems"
     :value="value"
+    @close="onClose"
     @change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
@@ -11,8 +12,9 @@
       slot="target"
       type="cta-secondary"
       text="Some content"
-      aria-label="Button">
-    </sinch-button>
+      aria-label="Button"
+      @click="onOpen"
+    ></sinch-button>
     <sinch-dropdown-option value="1" text="Option 1 value long long long" slot="option">
       <sinch-icon-open-in-new slot="icon"/>
     </sinch-dropdown-option>
@@ -32,6 +34,14 @@ export default {
         this.value = e.detail
       }
       window.dispatchEvent(new CustomEvent('sinch-dropdown-change', {detail: e.detail}))
+      this.isOpen = false
+    },
+    onClose() {
+      window.dispatchEvent(new CustomEvent('sinch-dropdown-close'))
+      this.isOpen = false
+    },
+    onOpen() {
+      this.isOpen = true
     },
     onFocus() {
       window.dispatchEvent(new CustomEvent('sinch-dropdown-focus'))
@@ -51,16 +61,15 @@ export default {
       const val = this.search.get('maxvisibleitems')
       return val !== null ? parseInt(val) : null
     },
-    isDisabled() {
-      return this.search.get('disabled') !== null
-    },
     isControlled() {
       return this.search.get('uncontrolled') === null
     },
   },
   data() {
+    console.log('DATA')
     return {
-      value: this.search.get('value') ?? ''
+      value: this.search.get('value') ?? '',
+      isOpen: this.search.get('open') !== null
     }
   }
 }

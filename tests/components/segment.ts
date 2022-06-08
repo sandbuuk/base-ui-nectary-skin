@@ -4,6 +4,7 @@ import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } 
 const withEverything = '/segment?width=400&caption=Title&action=true&content=true&icon=true&info=true'
 const withCaption = '/segment?width=400&caption=Title&action=true&info=true&icon=true'
 const withNarrowCaption = '/segment?width=300&caption=Title%20long%20long%20long&info=true&icon=true'
+const withSmallHeight = '/segment?width=400&height=250&caption=Title&action=true&content=true&icon=true&info=true'
 const withCollapse = '/segment?width=400&caption=Title&collapse=true'
 const withEverythingCollapse = '/segment?width=400&caption=Title&action=true&content=true&icon=true&info=true&collapse=true'
 
@@ -29,6 +30,13 @@ test('segment screenshots', runScreenshotTests('sinch-segment', [
   {
     name: 'caption narrow',
     url: withNarrowCaption,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'small height',
+    url: withSmallHeight,
     async *fn() {
       yield { name: 'shot' }
     },

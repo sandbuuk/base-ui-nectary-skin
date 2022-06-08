@@ -1,17 +1,19 @@
 <sinch-dropdown
-  [attr.disabled]="isDisabled"
+  [attr.open]="isOpen"
   [attr.maxvisibleitems]="maxVisibleItems"
   [attr.orientation]="orientation"
   (focusin)="onFocus()"
   (focusout)="onBlur()"
   [value]="value"
+  (close)="onClose()"
   (change)="onChange($event)">
   <sinch-button
     slot="target"
     type="cta-secondary"
     text="Some content"
-    aria-label="Button">
-  </sinch-button>
+    aria-label="Button"
+    (click)="onOpen()"
+  ></sinch-button>
   <sinch-dropdown-option value="1" text="Option 1 value long long long" slot="option">
     <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
   </sinch-dropdown-option>
