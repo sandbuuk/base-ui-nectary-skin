@@ -209,19 +209,12 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
     this.#onValueChange(this.value)
   }
 
-  #setOpen(isOpen: boolean) {
-    if (isOpen) {
-      if (!getBooleanAttribute(this.#$listbox, 'open')) {
-        (this.#$listbox as any).showModal()
-      }
-    } else {
-      (this.#$listbox as any).close()
-    }
-  }
-
   #onExpand() {
     this.#$button.setAttribute('aria-expanded', 'true')
-    this.#setOpen(true)
+
+    if (!getBooleanAttribute(this.#$listbox, 'open')) {
+      (this.#$listbox as any).showModal()
+    }
 
     const buttonRect = this.#$button.getBoundingClientRect()
     const modalRect = this.#$listbox.getBoundingClientRect()
@@ -256,7 +249,7 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
 
   #onCollapse() {
     this.#$button.setAttribute('aria-expanded', 'false')
-    this.#setOpen(false)
+    ;(this.#$listbox as any).close?.()
     this.#$listbox.style.transform = `initial`
     this.#$listbox.style.width = `max-content`
   }

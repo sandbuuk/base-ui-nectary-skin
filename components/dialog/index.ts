@@ -128,7 +128,7 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
         (this.#$dialog as any).showModal()
       }
     } else {
-      (this.#$dialog as any).close()
+      (this.#$dialog as any).close?.()
     }
   }
 
