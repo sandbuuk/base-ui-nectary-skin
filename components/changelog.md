@@ -1,3 +1,10 @@
+## v0.21.0
+
+* 💥 add `open` attribute and `close` event to `sinch-dropdown`
+* ➕ add `sinch-popover` component
+* 🐞 fix segment content overflow
+* 🐞 handle dialog `close` function missing in JsDom
+
 ## v0.20.0
 
 * 💥 rename `theme.css` title variables

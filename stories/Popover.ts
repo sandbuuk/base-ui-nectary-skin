@@ -83,7 +83,7 @@ Popover.args = {
 Popover.parameters = {
   docs: {
     source: {
-      code: `<sinch-popover open onClose={onClose}>${popoverInnerHTML}</sinch-input>`,
+      code: `<sinch-popover open={isOpen} onClose={onClose}>${popoverInnerHTML}</sinch-input>`,
     },
   },
 }

@@ -124,7 +124,7 @@ Dropdown.args = {
 Dropdown.parameters = {
   docs: {
     source: {
-      code: `<sinch-dropdown value={value} onChange={setValue}>${dropdownInnerHTML}</sinch-input>`,
+      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${dropdownInnerHTML}</sinch-input>`,
     },
   },
 }
