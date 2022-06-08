@@ -14,6 +14,7 @@ import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Link } from './components/Link'
 import { Pagination } from './components/Pagination'
+import { Popover } from './components/Popover'
 import { Radio } from './components/Radio'
 import { Search } from './components/Search'
 import { Segment } from './components/Segment'
@@ -117,6 +118,12 @@ const mapElement = (url: URL) => {
     case '/pagination': {
       return (
         <Pagination search={url.searchParams}/>
+      )
+    }
+
+    case '/popover': {
+      return (
+        <Popover search={url.searchParams}/>
       )
     }
 

@@ -14,6 +14,7 @@
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
     <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
     <Pagination v-if="url.pathname === '/pagination'" :search="url.searchParams"/>
+    <Popover v-if="url.pathname === '/popover'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
     <Search v-if="url.pathname === '/search'" :search="url.searchParams"/>
     <Select v-if="url.pathname === '/select'" :search="url.searchParams"/>
@@ -47,6 +48,7 @@ import Input from './components/Input.vue'
 import IconButton from './components/IconButton.vue'
 import Link from './components/Link.vue'
 import Pagination from './components/Pagination.vue'
+import Popover from './components/Popover.vue'
 import Radio from './components/Radio.vue'
 import Select from './components/Select.vue'
 import Tabs from './components/Tabs.vue'
@@ -104,6 +106,7 @@ export default {
     Input,
     Link,
     Pagination,
+    Popover,
     Radio,
     Select,
     Tabs,
