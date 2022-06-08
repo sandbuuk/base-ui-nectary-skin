@@ -24,6 +24,7 @@ export const Segment: FC<TSegment> = ({ search }) => {
 
   return (
     <sinch-segment
+      style={{ flex: 1, minHeight: 0 }}
       caption={caption}
       collapsed={isCollapsed}
     >

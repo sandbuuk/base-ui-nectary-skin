@@ -1,5 +1,5 @@
 <template>
-  <sinch-segment :caption="caption" :collapsed="isCollapsed">
+  <sinch-segment :caption="caption" :collapsed="isCollapsed" style="flex: 1;min-height: 0;">
     <sinch-segment-collapse v-if="hasCollapse" slot="collapse" :value="isCollapsed" @change="onCollapse" @focus="onCollapseFocus" @blur="onCollapseBlur"></sinch-segment-collapse>
     <div v-if="hasContent" slot="content" style="display: flex; flex-direction: column;">
       <section style="margin-bottom: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
