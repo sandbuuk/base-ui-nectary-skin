@@ -55,11 +55,15 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     this.setAttribute('role', 'listbox')
 
     this.#$dropdown.addEventListener('change', this.#onValueChange)
+    this.#$dropdown.addEventListener('close', this.#onDropdownClose)
+    this.#$button.addEventListener('click', this.#onDropdownClick)
     this.#$label.addEventListener('click', this.#onLabelClick)
   }
 
   disconnectedCallback() {
     this.#$dropdown.removeEventListener('change', this.#onValueChange)
+    this.#$dropdown.removeEventListener('close', this.#onDropdownClose)
+    this.#$button.removeEventListener('click', this.#onDropdownClick)
     this.#$label.removeEventListener('click', this.#onLabelClick)
   }
 
@@ -229,6 +233,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   }
 
   #onValueChange = (e: Event) => {
+    this.#$dropdown.open = false
     this.dispatchEvent(new CustomEvent('change', {
       detail: (e as CustomEvent).detail,
       bubbles: true,
@@ -247,6 +252,14 @@ defineCustomElement('sinch-select', class extends HTMLElement {
 
   #onLabelClick = () => {
     this.focus()
+  }
+
+  #onDropdownClick = () => {
+    this.#$dropdown.open = true
+  }
+
+  #onDropdownClose = () => {
+    this.#$dropdown.open = false
   }
 
   focus() {
