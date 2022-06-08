@@ -1,4 +1,3 @@
-import { isAttrTrue } from '@sinch-engage/nectary/utils'
 import { useCallback, useMemo, useState } from 'react'
 import type { TSinchDropdownOrientation } from '@sinch-engage/nectary/dropdown'
 import type { FC, SyntheticEvent } from 'react'
@@ -8,6 +7,7 @@ type TDropdown = {
 }
 
 export const Dropdown: FC<TDropdown> = ({ search }) => {
+  const [isOpen, setOpen] = useState(search.get('open') !== null)
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = useMemo(() =>
     (search.get('uncontrolled') === null
@@ -16,6 +16,7 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
 
         window.dispatchEvent(new CustomEvent('sinch-dropdown-change', { detail: value }))
         setValue(value)
+        setOpen(false)
       }
       : () => {}),
   [search, setValue])
@@ -25,22 +26,26 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
   const onBlur = useCallback(() => {
     window.dispatchEvent(new CustomEvent('sinch-dropdown-blur'))
   }, [])
+  const onClose = useCallback(() => {
+    window.dispatchEvent(new CustomEvent('sinch-dropdown-close'))
+    setOpen(false)
+  }, [])
   const maxVisibleItems = useMemo(() => {
     const val = search.get('maxvisibleitems')
 
     return val !== null ? parseInt(val) : undefined
   }, [search])
-  const isDisabled = isAttrTrue(search.get('disabled'))
 
   const orientation = search.get('orientation') as TSinchDropdownOrientation ?? undefined
 
   return (
     <sinch-dropdown
+      open={isOpen}
       maxVisibleItems={maxVisibleItems}
-      disabled={isDisabled}
       value={value}
       orientation={orientation}
       onChange={onChange}
+      onClose={onClose}
       onFocus={onFocus}
       onBlur={onBlur}
       aria-label="Dropdown"
@@ -50,7 +55,9 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
         type="cta-secondary"
         text="Some content"
         aria-label="Button"
-        onClick={() => {}}
+        onClick={() => {
+          setOpen(true)
+        }}
       />
       <sinch-dropdown-option value="1" text="Option 1 value long long long" slot="option" aria-label="Option 1">
         <sinch-icon-open-in-new slot="icon"/>

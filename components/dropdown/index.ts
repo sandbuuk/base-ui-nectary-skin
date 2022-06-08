@@ -1,3 +1,4 @@
+import dialogPolyfill from 'dialog-polyfill'
 import { isDropdownOptionElement } from '../dropdown-option'
 import {
   attrValueToPixels,
@@ -6,7 +7,9 @@ import {
   getBooleanAttribute,
   getIntegerAttribute,
   getLiteralAttribute,
+  getReactEventHandler,
   getRect,
+  isAttrTrue,
   updateAttribute,
   updateBooleanAttribute,
   updateIntegerAttribute,
@@ -36,9 +39,10 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-dropdown', class extends HTMLElement {
-  #$button: HTMLButtonElement
+  #$target: HTMLElement
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
+  #isConnected = false
 
   constructor() {
     super()
@@ -50,34 +54,43 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$button = shadowRoot.querySelector('#button')!
+    this.#$target = shadowRoot.querySelector('#target')!
     this.#$listbox = shadowRoot.querySelector('#listbox')!
     this.#$optionSlot = shadowRoot.querySelector('slot[name="option"]')!
+
+    dialogPolyfill.registerDialog(this.#$listbox)
   }
 
   connectedCallback() {
+    this.#isConnected = true
     this.setAttribute('role', 'listbox')
 
-    this.#$button.addEventListener('click', this.#onButtonClick)
+    this.#$listbox.addEventListener('cancel', this.#onCancel)
     this.#$listbox.addEventListener('click', this.#onListboxClick)
     this.#$listbox.addEventListener('keydown', this.#onListboxKeyDown)
     this.#$listbox.addEventListener('keypress', this.#onListboxKeyPress)
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange)
+    this.addEventListener('close', this.#onCloseReactHandler)
+
+    if (getBooleanAttribute(this, 'open')) {
+      this.#onExpand()
+    } else {
+      this.#onCollapse()
+    }
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onButtonClick)
+    this.#isConnected = false
+    this.#$listbox.removeEventListener('cancel', this.#onCancel)
     this.#$listbox.removeEventListener('click', this.#onListboxClick)
     this.#$listbox.removeEventListener('keydown', this.#onListboxKeyDown)
     this.#$listbox.removeEventListener('keypress', this.#onListboxKeyPress)
     this.#$optionSlot.removeEventListener('slotchange', this.#onOptionSlotChange)
+    this.removeEventListener('close', this.#onCloseReactHandler)
   }
 
   static get observedAttributes() {
-    return [
-      'value',
-      'maxvisibleitems',
-    ]
+    return ['value', 'maxvisibleitems', 'open', 'orientation']
   }
 
   get nodeName() {
@@ -108,12 +121,12 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
     updateLiteralAttribute(this, orientationValues, 'orientation', value)
   }
 
-  set disabled(isDisabled: boolean) {
-    updateBooleanAttribute(this, 'disabled', isDisabled)
+  set open(isOpen: boolean) {
+    updateBooleanAttribute(this, 'open', isOpen)
   }
 
-  get disabled(): boolean {
-    return getBooleanAttribute(this, 'disabled')
+  get open(): boolean {
+    return getBooleanAttribute(this, 'open')
   }
 
   get dropdownRect() {
@@ -122,6 +135,26 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
+      case 'open': {
+        if (this.#isConnected) {
+          if (isAttrTrue(newVal)) {
+            this.#onExpand()
+          } else {
+            this.#onCollapse()
+          }
+        }
+
+        break
+      }
+
+      case 'orientation': {
+        if (this.#isOpen()) {
+          this.#updateOrientation()
+        }
+
+        break
+      }
+
       case 'value': {
         this.#onValueChange(newVal ?? '')
 
@@ -142,28 +175,22 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
     }
   }
 
-  #onButtonClick = (e: Event) => {
-    e.stopPropagation()
+  #onListboxClick = (e: MouseEvent) => {
+    const rect = this.dropdownRect
+    const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
-    if (this.disabled) {
+    if (!isInside) {
+      this.#dispatchCloseEvent()
+
       return
     }
 
-    if (this.#$button.getAttribute('aria-expanded') !== 'true') {
-      this.#onExpand()
-    }
-  }
-
-  #onListboxClick = (e: Event) => {
-    e.stopPropagation()
-
     const $elem = e.target
 
-    if ($elem !== this.#$listbox && isDropdownOptionElement($elem) && $elem.disabled !== true) {
+    if ($elem !== this.#$listbox && isDropdownOptionElement($elem)) {
+      e.stopPropagation()
       this.#dispatchChangeEvent($elem)
     }
-
-    this.#onCollapse()
   }
 
   #onListboxKeyPress = (e: KeyboardEvent) => {
@@ -172,7 +199,6 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
       case 'Enter': {
         e.preventDefault()
         this.#dispatchChangeEvent(findSelectedOption(this.#getEnabledOptionElements()))
-        this.#onCollapse()
 
         break
       }
@@ -195,28 +221,41 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
 
         break
       }
-      case 'Escape': {
-        e.preventDefault()
-        this.#onCollapse()
-
-        break
-      }
     }
   }
 
   #onOptionSlotChange = () => {
-    this.#onCollapse()
     this.#onValueChange(this.value)
   }
 
   #onExpand() {
-    this.#$button.setAttribute('aria-expanded', 'true')
+    this.#$target.setAttribute('aria-expanded', 'true')
 
-    if (!getBooleanAttribute(this.#$listbox, 'open')) {
+    if (!this.#isOpen()) {
       (this.#$listbox as any).showModal()
     }
 
-    const buttonRect = this.#$button.getBoundingClientRect()
+    this.#updateOrientation()
+    this.#selectOption(this.#getOptionWithValue(this.value) ?? this.#getFirstOption())
+  }
+
+  #onCollapse() {
+    this.#$target.setAttribute('aria-expanded', 'false')
+
+    if (this.#isOpen()) {
+      (this.#$listbox as any).close?.()
+    }
+  }
+
+  #isOpen() {
+    return this.#isConnected && getBooleanAttribute(this.#$listbox, 'open')
+  }
+
+  #updateOrientation() {
+    this.#$listbox.style.transform = `initial`
+    this.#$listbox.style.width = `max-content`
+
+    const buttonRect = this.#$target.getBoundingClientRect()
     const modalRect = this.#$listbox.getBoundingClientRect()
     const width = Math.max(modalRect.width, buttonRect.width)
     const widthDiff = Math.max(buttonRect.width - modalRect.width, 0)
@@ -243,15 +282,6 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
 
     this.#$listbox.style.transform = `translateX(${leftOffset}px) translateY(${topOffset}px)`
     this.#$listbox.style.width = `${width}px`
-
-    this.#selectOption(this.#getOptionWithValue(this.value) ?? this.#getFirstOption())
-  }
-
-  #onCollapse() {
-    this.#$button.setAttribute('aria-expanded', 'false')
-    ;(this.#$listbox as any).close?.()
-    this.#$listbox.style.transform = `initial`
-    this.#$listbox.style.width = `max-content`
   }
 
   #onValueChange(value: string) {
@@ -346,6 +376,21 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
     }
   }
 
+  #dispatchCloseEvent() {
+    this.dispatchEvent(
+      new CustomEvent('close', { bubbles: true })
+    )
+  }
+
+  #onCancel = (e: Event) => {
+    e.preventDefault()
+    this.#dispatchCloseEvent()
+  }
+
+  #onCloseReactHandler = () => {
+    getReactEventHandler(this, 'onClose')?.()
+  }
+
   focus() {}
 
   blur() {}
@@ -354,9 +399,9 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
 export type TSinchDropdownOrientation = typeof orientationValues[number]
 
 export type TSinchDropdownElement = HTMLElement & {
+  open: boolean,
   orientation: TSinchDropdownOrientation,
   value: string,
-  disabled: boolean,
   maxVisibleItems: number | null,
   readonly dropdownRect: TRect,
   focus(): void,
@@ -364,11 +409,12 @@ export type TSinchDropdownElement = HTMLElement & {
 }
 
 export type TSinchDropdownReact = TSinchElementReact<TSinchDropdownElement> & {
+  open: boolean,
   orientation?: TSinchDropdownOrientation,
   value: string,
-  disabled?: boolean,
   maxVisibleItems?: number,
   'aria-label': string,
+  onClose: (event: SyntheticEvent<TSinchDropdownElement, CustomEvent<void>>) => void,
   onChange: (e: SyntheticEvent<TSinchDropdownElement, CustomEvent<string>>) => void,
   onFocus?: (e: FocusEvent<TSinchDropdownElement>) => void,
   onBlur?: (e: FocusEvent<TSinchDropdownElement>) => void,

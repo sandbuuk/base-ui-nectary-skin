@@ -5,7 +5,7 @@ import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } 
 const shot = '/dropdown'
 const withWideContent = '/dropdown?width=400'
 const withMaxItems = '/dropdown?maxvisibleitems=2'
-const check = makeAccessibilityTests('/dropdown?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=1', 'sinch-dropdown')
+const check = makeAccessibilityTests('/dropdown', 'sinch-dropdown')
 
 test('accessibility', check(async function* ({ $ }) {
   yield
@@ -15,58 +15,56 @@ test('accessibility', check(async function* ({ $ }) {
 
 test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   {
+    name: 'open attribute',
+    url: shot,
+    async *fn({ $eval }) {
+      await $eval((el) => el.removeAttribute('open'))
+      yield { name: 'unset', includeRects: [await $eval((el) => el.dropdownRect)] }
+      await $eval((el) => el.setAttribute('open', ''))
+      yield { name: 'set', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
     name: 'orientation attribute',
     url: shot,
-    async *fn({ $, $eval, page }) {
-      await $eval((el) => el.setAttribute('orientation', 'top-left'))
+    async *fn({ $, $eval }) {
       await $.click()
+      await $eval((el) => el.setAttribute('orientation', 'top-left'))
       yield { name: 'top-left', includeRects: [await $eval((el) => el.dropdownRect)] }
-      await page.mouse.click(0, 0)
 
       await $eval((el) => el.setAttribute('orientation', 'top-right'))
-      await $.click()
       yield { name: 'top-right', includeRects: [await $eval((el) => el.dropdownRect)] }
-      await page.mouse.click(0, 0)
 
       await $eval((el) => el.setAttribute('orientation', 'bottom-left'))
-      await $.click()
       yield { name: 'bottom-left', includeRects: [await $eval((el) => el.dropdownRect)] }
-      await page.mouse.click(0, 0)
 
       await $eval((el) => el.setAttribute('orientation', 'bottom-right'))
-      await $.click()
       yield { name: 'bottom-right', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
     name: 'orientation property',
     url: shot,
-    async *fn({ $, $eval, page }) {
+    async *fn({ $, $eval }) {
+      await $.click()
       await $eval((el) => {
         el.orientation = 'top-left'
       })
-      await $.click()
       yield { name: 'top-left', includeRects: [await $eval((el) => el.dropdownRect)] }
-      await page.mouse.click(0, 0)
 
       await $eval((el) => {
         el.orientation = 'top-right'
       })
-      await $.click()
       yield { name: 'top-right', includeRects: [await $eval((el) => el.dropdownRect)] }
-      await page.mouse.click(0, 0)
 
       await $eval((el) => {
         el.orientation = 'bottom-left'
       })
-      await $.click()
       yield { name: 'bottom-left', includeRects: [await $eval((el) => el.dropdownRect)] }
-      await page.mouse.click(0, 0)
 
       await $eval((el) => {
         el.orientation = 'bottom-right'
       })
-      await $.click()
       yield { name: 'bottom-right', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
@@ -93,40 +91,10 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   {
     name: 'maxvisibleitems scroll',
     url: withMaxItems,
-    async *fn({ $, $eval }) {
+    async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', '3'))
-      await $.click()
+      await $eval((el) => el.setAttribute('open', ''))
       yield { name: 'scroll to 3', includeRects: [await $eval((el) => el.dropdownRect)] }
-    },
-  },
-  {
-    name: 'disabled attribute',
-    url: shot,
-    async *fn({ $, $eval }) {
-      await $eval((el) => el.setAttribute('disabled', ''))
-      await $.click()
-      yield { name: 'click disabled', includeRects: [await $eval((el) => el.dropdownRect)] }
-
-      await $eval((el) => el.removeAttribute('disabled'))
-      await $.click()
-      yield { name: 'click enabled', includeRects: [await $eval((el) => el.dropdownRect)] }
-    },
-  },
-  {
-    name: 'disabled property',
-    url: shot,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.disabled = true
-      })
-      await $.click()
-      yield { name: 'click disabled', includeRects: [await $eval((el) => el.dropdownRect)] }
-
-      await $eval((el) => {
-        el.disabled = false
-      })
-      await $.click()
-      yield { name: 'click enabled', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
@@ -264,6 +232,7 @@ test('dropdown events', runScreenshotTests('sinch-dropdown', [
       const testInput = testCustomEvent(page, $)
 
       await testInput('change', 'sinch-dropdown-change', 'X')
+      await testInput('close', 'sinch-dropdown-close')
       await testInput('focusin', 'sinch-dropdown-focus')
       await testInput('focusout', 'sinch-dropdown-blur')
     },
@@ -272,7 +241,7 @@ test('dropdown events', runScreenshotTests('sinch-dropdown', [
     name: 'custom evants',
     url: shot,
     async *fn({ page }) {
-      await subscribeToEvents(page, 'sinch-dropdown-focus', 'sinch-dropdown-blur', 'sinch-dropdown-change')
+      await subscribeToEvents(page, 'sinch-dropdown-focus', 'sinch-dropdown-blur', 'sinch-dropdown-change', 'sinch-dropdown-close')
 
       await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')

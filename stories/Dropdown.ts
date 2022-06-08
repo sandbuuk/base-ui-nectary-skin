@@ -8,8 +8,8 @@ import '@sinch-engage/nectary/icon/open-in-new'
 export default {
   title: 'Components/Dropdown',
   argTypes: {
-    disabled: {
-      description: 'Is disabled',
+    open: {
+      description: 'Is dropdown open',
       control: 'boolean',
     },
     value: {
@@ -29,6 +29,10 @@ export default {
       description: 'Handler to sync dropdown value with the state',
       action: 'onChange',
     },
+    onClose: {
+      description: 'Close event handler',
+      action: 'onClose',
+    },
     onFocus: {
       description: 'Focus handler',
       action: 'onFocus',
@@ -41,7 +45,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'Popover component',
+        component: 'Dropdown component',
       },
       source: {
         type: 'code',
@@ -52,9 +56,9 @@ export default {
 
 const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdown']> => ({ onChange }) => {
   const [{
+    open,
     value,
     maxVisibleItems,
-    disabled,
     orientation,
   }, updateArgs] = useArgs()
 
@@ -66,9 +70,19 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdow
 
     $dropdown.innerHTML = innerHTML
 
+    $dropdown.querySelector('sinch-button')?.addEventListener('click', () => {
+      updateArgs({ open: true })
+    })
+
     $dropdown.addEventListener('change', (e: any) => {
       onChange(e.detail)
-      updateArgs({ value: e.detail })
+      updateArgs({ value: e.detail, open: false })
+      // https://github.com/storybookjs/storybook/issues/11657
+      setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
+    })
+
+    $dropdown.addEventListener('close', () => {
+      updateArgs({ open: false })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
@@ -77,12 +91,12 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdow
     dropdownRef.current = $dropdown
   }
 
-  const $input = dropdownRef.current!
+  const $dropdown = dropdownRef.current!
 
-  $input.value = value
-  $input.maxVisibleItems = maxVisibleItems
-  $input.disabled = disabled
-  $input.orientation = orientation
+  $dropdown.open = open
+  $dropdown.value = value
+  $dropdown.orientation = orientation
+  $dropdown.maxVisibleItems = maxVisibleItems
 
   return $wrapper
 }
@@ -102,8 +116,8 @@ const dropdownInnerHTML = `
 export const Dropdown = Template(dropdownInnerHTML)
 
 Dropdown.args = {
+  open: false,
   value: '2',
-  disabled: false,
   orientation: 'bottom-right',
 }
 
