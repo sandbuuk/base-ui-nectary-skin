@@ -6,6 +6,7 @@ import {
   getRect,
   isAttrTrue,
   updateAttribute,
+  getReactEventHandler,
 } from '../utils'
 import '../icon-button'
 import '../icon/close'
@@ -16,18 +17,6 @@ import type { SyntheticEvent } from 'react'
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
-
-const getReactEventHandler = ($element: HTMLElement, handlerName: string): ((arg?: any) => void) | null => {
-  // https://github.com/facebook/react/issues/7901
-  for (const key in $element) {
-    if (key.startsWith('__reactProps$')) {
-      // @ts-ignore
-      return $element[key][handlerName]
-    }
-  }
-
-  return null
-}
 
 defineCustomElement('sinch-dialog', class extends HTMLElement {
   #$dialog: HTMLElement
