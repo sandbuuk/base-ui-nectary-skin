@@ -22,8 +22,6 @@ npm install @sinch-engage/nectary
 yarn add @sinch-engage/nectary
 ```
 
-⚠️ VPN is required.
-
 ## Usage
 
 ### Theme
