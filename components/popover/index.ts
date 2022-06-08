@@ -7,6 +7,7 @@ import {
   isAttrTrue,
   updateLiteralAttribute,
   getReactEventHandler,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TRect, TSinchElementReact } from '../types'
@@ -64,6 +65,14 @@ defineCustomElement('sinch-popover', class extends HTMLElement {
     return ['open', 'orientation']
   }
 
+  set open(isOpen: boolean) {
+    updateBooleanAttribute(this, 'open', isOpen)
+  }
+
+  get open(): boolean {
+    return getBooleanAttribute(this, 'open')
+  }
+
   get orientation() {
     return getLiteralAttribute(this, orientationValues, 'orientation', 'bottom-right')
   }
@@ -94,6 +103,8 @@ defineCustomElement('sinch-popover', class extends HTMLElement {
         if (this.#isOpen()) {
           this.#updateOrientation()
         }
+
+        break
       }
     }
   }
@@ -184,6 +195,7 @@ defineCustomElement('sinch-popover', class extends HTMLElement {
 export type TSinchPopoverOrientation = typeof orientationValues[number]
 
 export type TSinchPopoverElement = HTMLElement & {
+  open: boolean,
   orientation: TSinchPopoverOrientation,
   readonly popoverRect: TRect,
 }
