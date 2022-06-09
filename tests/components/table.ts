@@ -1,13 +1,13 @@
-import { expect, test } from '@playwright/test'
+import { test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { runScreenshotTests } from '../screenshot-tests'
 
 const items = ({ hasLongLine }: any = {}) => encodeURI(JSON.stringify({
   head: [
     { isCheckbox: true, isFit: true },
     { text: 'ID', isSortable: true, align: 'end' },
     { text: 'Ticket' },
-    { text: 'Channel', align: 'center', tooltip: 'Tooltip text', isSortable: true },
+    { text: 'Channel', align: 'center', tooltip: 'Tooltip text', isSortable: true, isFilterable: true },
     { text: 'Comment' },
     { text: 'Active', align: 'center' },
     { text: 'Actions', isFit: true, tooltip: 'Tooltip text' },
@@ -44,7 +44,7 @@ test('accessibility', checkTableWithItems(async function* () {
   yield
 }))
 
-test('yable screenshots', runScreenshotTests('sinch-table', [
+test('table screenshots', runScreenshotTests('sinch-table', [
   {
     name: 'items',
     url: withItems,

@@ -10,6 +10,10 @@ import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/link'
 import '@sinch-engage/nectary/icon/open-in-new'
 import '@sinch-engage/nectary/icon/more-vert'
+import '@sinch-engage/nectary/icon/south'
+import '@sinch-engage/nectary/icon/north'
+import '@sinch-engage/nectary/icon/filter-list'
+import '@sinch-engage/nectary/icon-button'
 
 export default {
   title: 'Components/Table',
@@ -24,6 +28,16 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-table']
     const $table = document.createElement('sinch-table')
 
     $table.innerHTML = innerHTML
+
+    const $popover = $table.querySelector('sinch-popover')!
+
+    $popover.querySelector('sinch-icon-button')!.addEventListener('click', () => {
+      $popover.open = true
+    })
+
+    $popover.addEventListener('close', () => {
+      $popover.open = false
+    })
 
     $table.style.width = '100%'
 
@@ -42,9 +56,21 @@ const tableInnerHtml = `
           <sinch-checkbox slot="checkbox"></sinch-checkbox>
         </sinch-table-head-cell>
         <sinch-table-head-cell text="ID" align="end">
+          <sinch-icon-button slot="right" small>
+            <sinch-icon-south slot="icon"></sinch-icon-south>
+          </sinch-icon-button>
         </sinch-table-head-cell>
         <sinch-table-head-cell text="Ticket"></sinch-table-head-cell>
         <sinch-table-head-cell text="Channel" align="center">
+          <sinch-popover slot="left">
+            <sinch-icon-button slot="target" small>
+              <sinch-icon-filter-list slot="icon"></sinch-icon-filter-list>
+            </sinch-icon-button>
+            <div slot="content">Content</div>
+          </sinch-popover>
+          <sinch-icon-button slot="right" small>
+            <sinch-icon-north slot="icon"></sinch-icon-north>
+          </sinch-icon-button>
           <sinch-help-tooltip slot="tooltip" text="Tooltip text"></sinch-help-tooltip>
         </sinch-table-head-cell>
         <sinch-table-head-cell text="Comment"></sinch-table-head-cell>
