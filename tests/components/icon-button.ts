@@ -107,6 +107,20 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
       yield { name: 'shot' }
     },
   },
+  {
+    name: 'css color variables',
+    url: shot,
+    async *fn({ page }) {
+      await page.evaluate(() => {
+        const style = document.createElement('style')
+
+        style.innerHTML = ':root { --sinch-icon-button-color: red; }'
+
+        document.body.prepend(style)
+      })
+      yield { name: 'shot' }
+    },
+  },
 ]))
 
 test('icon-button events', runScreenshotTests('sinch-icon-button', [
