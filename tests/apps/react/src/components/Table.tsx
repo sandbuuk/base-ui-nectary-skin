@@ -47,7 +47,7 @@ export const Table: FC<TTable> = ({ search }) => {
       </sinch-table-head>
       <sinch-table-body>
         {state.body.map((row, i) => (
-          <sinch-table-row key={i}>
+          <sinch-table-row key={i} selected={i === 0}>
             {row.map((cell, i) => (
               <sinch-table-cell key={i} align={cell.align}>
                 {cell.isCheckbox && <sinch-checkbox onChange={noop} aria-label="Checkbox"/>}

@@ -30,14 +30,24 @@ defineCustomElement('sinch-table-row', class extends HTMLElement {
   get sticky() {
     return getBooleanAttribute(this, 'sticky')
   }
+
+  set selected(isSelected: boolean) {
+    updateBooleanAttribute(this, 'selected', isSelected)
+  }
+
+  get selected() {
+    return getBooleanAttribute(this, 'selected')
+  }
 })
 
 export type TSinchTableRowElement = HTMLElement & {
   sticky: boolean,
+  selected: boolean,
 }
 
 export type TSinchTableRowReact = TSinchElementReact<TSinchTableRowElement> & {
   sticky?: boolean,
+  selected?: boolean,
 }
 
 declare global {

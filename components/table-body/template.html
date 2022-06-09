@@ -2,6 +2,14 @@
 :host {
   display: table-row-group;
 }
+
+::slotted(sinch-table-row:hover) {
+  background-color: var(--sinch-color-tropical-50);
+}
+
+::slotted(sinch-table-row[selected]:not([selected="false"])) {
+  background-color: var(--sinch-color-tropical-100);
+}
 </style>
 
 <slot></slot>
