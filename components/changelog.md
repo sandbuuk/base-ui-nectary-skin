@@ -1,3 +1,14 @@
+## v0.22.0
+
+* 💥 remove `sinch-table-head-sort` component
+* ➕ handle `--sinch-icon-button-color` variable in `sinch-icon-button`
+* ➕ add `--sinch-color-tropical-50` and `--sinch-color-raspberry-50` colors
+* ➕ add `left` and `right` slots to `sinch-table-head-cell`
+* ➕ add `selected` attr and hover state to `sinch-table-row`
+* ➕ add `sinch-icon-filter-list` component
+* ➕ add `sinch-card-container` component
+* 🐞 fix default background in form components
+
 ## v0.21.0
 
 * 💥 add `open` attribute and `close` event to `sinch-dropdown`
