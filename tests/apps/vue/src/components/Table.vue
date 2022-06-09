@@ -15,7 +15,7 @@
       </sinch-table-row>
     </sinch-table-head>
     <sinch-table-body>
-      <sinch-table-row v-for="(row, index) in state.body" :key="index">
+      <sinch-table-row v-for="(row, index) in state.body" :key="index" :selected="index === 0">
         <sinch-table-cell v-for="(cell, index) in row" :align="cell.align" :key="index">
           <sinch-checkbox v-if="cell.isCheckbox"></sinch-checkbox>
           <sinch-button v-if="cell.isButton" type="secondary" :text="cell.text"></sinch-button>

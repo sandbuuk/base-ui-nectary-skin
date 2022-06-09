@@ -14,7 +14,7 @@
     </sinch-table-row>
   </sinch-table-head>
   <sinch-table-body>
-    <sinch-table-row *ngFor="let row of state.body">
+    <sinch-table-row *ngFor="let row of state.body; index as i" [attr.selected]="i == 0">
       <sinch-table-cell *ngFor="let cell of row" [align]="cell.align">
         <sinch-checkbox *ngIf="cell.isCheckbox"></sinch-checkbox>
         <sinch-button *ngIf="cell.isButton" type="secondary" [text]="cell.text"></sinch-button>
