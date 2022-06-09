@@ -3,14 +3,6 @@
     <sinch-table-row>
       <sinch-table-head-cell *ngFor="let cell of state.head" [text]="cell.text" [align]="cell.align" [fit]="cell.isFit">
         <sinch-checkbox *ngIf="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
-        <sinch-table-head-sort
-          *ngIf="cell.isSortable"
-          slot="sort"
-          [value]="isAsc"
-          (change)="onSortChange($event)"
-          (focus)="onSortFocus()"
-          (blur)="onSortBlur()"
-        ></sinch-table-head-sort>
         <sinch-help-tooltip *ngIf="cell.tooltip != null" slot="tooltip" [text]="cell.tooltip"></sinch-help-tooltip>
       </sinch-table-head-cell>
     </sinch-table-row>

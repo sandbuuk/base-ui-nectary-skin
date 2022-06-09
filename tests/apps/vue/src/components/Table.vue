@@ -4,14 +4,6 @@
       <sinch-table-row>
         <sinch-table-head-cell v-for="(cell, index) in state.head" :key="index" :text="cell.text" :align="cell.align" :fit="cell.isFit">
           <sinch-checkbox v-if="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
-          <sinch-table-head-sort
-            slot="sort"
-            v-if="cell.isSortable"
-            :value="isAsc"
-            @focusin="onSortFocus"
-            @focusout="onSortBlur"
-            @change="onSortChange"
-          ></sinch-table-head-sort>
           <sinch-help-tooltip v-if="cell.tooltip != null" slot="tooltip" :text="cell.tooltip"></sinch-help-tooltip>
         </sinch-table-head-cell>
       </sinch-table-row>

@@ -5,7 +5,6 @@ import '@sinch-engage/nectary/table'
 import '@sinch-engage/nectary/table-cell'
 import '@sinch-engage/nectary/table-head'
 import '@sinch-engage/nectary/table-head-cell'
-import '@sinch-engage/nectary/table-head-sort'
 import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/link'
@@ -43,11 +42,9 @@ const tableInnerHtml = `
           <sinch-checkbox slot="checkbox"></sinch-checkbox>
         </sinch-table-head-cell>
         <sinch-table-head-cell text="ID" align="end">
-          <sinch-table-head-sort slot="sort" value="false"></sinch-table-head-sort>
         </sinch-table-head-cell>
         <sinch-table-head-cell text="Ticket"></sinch-table-head-cell>
         <sinch-table-head-cell text="Channel" align="center">
-          <sinch-table-head-sort slot="sort" value="false"></sinch-table-head-sort>
           <sinch-help-tooltip slot="tooltip" text="Tooltip text"></sinch-help-tooltip>
         </sinch-table-head-cell>
         <sinch-table-head-cell text="Comment"></sinch-table-head-cell>

@@ -10,18 +10,7 @@ const noop = () => {}
 type TTableItems = {head: any[], body: any[][]}
 
 export const Table: FC<TTable> = ({ search }) => {
-  const [isAsc, setAsc] = useState(false)
   const state: TTableItems = useMemo(() => JSON.parse(decodeURI(search.get('state')!)), [search])
-  const onSortChange = useCallback((e: SyntheticEvent<Element, CustomEvent>) => {
-    setAsc(e.nativeEvent.detail)
-    window.dispatchEvent(new CustomEvent('sinch-table-sort-change', { detail: e.nativeEvent.detail }))
-  }, [search])
-  const onSortFocus = useCallback(() => {
-    window.dispatchEvent(new CustomEvent('sinch-table-sort-focus'))
-  }, [search])
-  const onSortBlur = useCallback(() => {
-    window.dispatchEvent(new CustomEvent('sinch-table-sort-blur'))
-  }, [search])
 
   return (
     <sinch-table>
@@ -31,14 +20,6 @@ export const Table: FC<TTable> = ({ search }) => {
             <sinch-table-head-cell key={i} text={cell.text} align={cell.align} fit={cell.isFit}>
               {cell.isCheckbox && <sinch-checkbox slot="checkbox" onChange={noop} aria-label="Checkbox"/>}
               {cell.isSortable && (
-                <sinch-table-head-sort
-                  slot="sort"
-                  aria-label="Sort toggle"
-                  value={isAsc}
-                  onChange={onSortChange}
-                  onFocus={onSortFocus}
-                  onBlur={onSortBlur}
-                />
               )}
               {cell.tooltip != null && <sinch-help-tooltip slot="tooltip" text={cell.tooltip}/>}
             </sinch-table-head-cell>
