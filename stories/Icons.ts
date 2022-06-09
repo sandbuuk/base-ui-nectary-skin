@@ -84,6 +84,7 @@ import '@sinch-engage/nectary/icon/switch-left'
 import '@sinch-engage/nectary/icon/switch-right'
 import '@sinch-engage/nectary/icon/unfold-less'
 import '@sinch-engage/nectary/icon/unfold-more'
+import '@sinch-engage/nectary/icon/filter-list'
 
 const iconNames = [
   'sinch-icon-cancel',
@@ -171,6 +172,8 @@ const iconNames = [
   'sinch-icon-switch-right',
   'sinch-icon-unfold-less',
   'sinch-icon-unfold-more',
+  /* Content */
+  'sinch-icon-filter-list',
 ]
 
 export default {

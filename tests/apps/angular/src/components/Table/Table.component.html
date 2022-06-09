@@ -3,20 +3,18 @@
     <sinch-table-row>
       <sinch-table-head-cell *ngFor="let cell of state.head" [text]="cell.text" [align]="cell.align" [fit]="cell.isFit">
         <sinch-checkbox *ngIf="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
-        <sinch-table-head-sort
-          *ngIf="cell.isSortable"
-          slot="sort"
-          [value]="isAsc"
-          (change)="onSortChange($event)"
-          (focus)="onSortFocus()"
-          (blur)="onSortBlur()"
-        ></sinch-table-head-sort>
+        <sinch-icon-button *ngIf="cell.isSortable" small slot="right">
+          <sinch-icon-north slot="icon"></sinch-icon-north>
+        </sinch-icon-button>
+        <sinch-icon-button *ngIf="cell.isFilterable" small slot="left">
+          <sinch-icon-filter-list slot="icon"></sinch-icon-filter-list>
+        </sinch-icon-button>
         <sinch-help-tooltip *ngIf="cell.tooltip != null" slot="tooltip" [text]="cell.tooltip"></sinch-help-tooltip>
       </sinch-table-head-cell>
     </sinch-table-row>
   </sinch-table-head>
   <sinch-table-body>
-    <sinch-table-row *ngFor="let row of state.body">
+    <sinch-table-row *ngFor="let row of state.body; index as i" [attr.selected]="i == 0">
       <sinch-table-cell *ngFor="let cell of row" [align]="cell.align">
         <sinch-checkbox *ngIf="cell.isCheckbox"></sinch-checkbox>
         <sinch-button *ngIf="cell.isButton" type="secondary" [text]="cell.text"></sinch-button>
