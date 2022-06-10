@@ -4,7 +4,7 @@
     :text="text"
     :label="label"
     :disabled="isDisabled">
-    <sinch-icon-chatbot v-if="hasIcon" slot="icon"></sinch-icon-chatbot>
+    <sinch-icon-branded-chatbot v-if="hasIcon" slot="icon"></sinch-icon-branded-chatbot>
     <sinch-illustration-phone-and-cat v-if="hasIllustration" size="290" slot="illustration"></sinch-illustration-phone-and-cat>
     <sinch-card-button v-if="buttonText !== null" :text="buttonText" slot="action"></sinch-card-button>
     <sinch-card-link v-if="linkText !== null" :text="linkText" slot="action"></sinch-card-link>
