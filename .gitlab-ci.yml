@@ -25,7 +25,7 @@ lint:
 
 visual-tests:
   stage: test
-  image: mcr.microsoft.com/playwright:v1.22.2
+  image: mcr.microsoft.com/playwright:v1.21.1
   except:
     - tags
   cache:
