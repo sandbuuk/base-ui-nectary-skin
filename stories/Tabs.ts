@@ -1,8 +1,8 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/tabs'
-import '@sinch-engage/nectary/icon/open-in-new'
-import '@sinch-engage/nectary/icon/help-outline'
+import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary/icons/help-outline'
 
 export default {
   title: 'Components/Tabs',

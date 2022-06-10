@@ -68,7 +68,7 @@ const processIcon = async (filepath: string) => {
   const indexPath = './components/index.ts'
   let indexData = await readFile(indexPath, 'utf-8')
 
-  indexData = indexData.replace('// {{icon import}}', `$&\nimport './icon/${filename}'`)
+  indexData = indexData.replace('// {{icon import}}', `$&\nimport './icons/${filename}'`)
 
   await writeFile(indexPath, indexData)
 
@@ -76,7 +76,7 @@ const processIcon = async (filepath: string) => {
   let storyData = await readFile(storyPath, 'utf-8')
 
   storyData = storyData
-    .replace('// {{icon import}}', `$&\nimport '@sinch-engage/nectary/icon/${filename}'`)
+    .replace('// {{icon import}}', `$&\nimport '@sinch-engage/nectary/icons/${filename}'`)
     .replace('// {{icon name}}', `$&\n  'sinch-icon-${filename}',`)
 
   await writeFile(storyPath, storyData)
