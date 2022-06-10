@@ -66,8 +66,9 @@ dialog.fixed {
 }
 
 #content-wrapper {
-  max-height: 50vh;
-  overflow-y: auto;
+  min-height: 0;
+  overflow: auto;
+  max-height: var(--sinch-dialog-max-height, 50vh);
 }
 
 #close {
