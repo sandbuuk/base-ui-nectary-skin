@@ -1,5 +1,5 @@
-import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchIconElement, TSinchIconReact } from '@sinch-engage/nectary/icon/types'
+import { useRef } from '@storybook/addons'
+import type { TSinchIconElement, TSinchIconReact } from '@sinch-engage/nectary/icons/types'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/theme.css'
 import '@sinch-engage/nectary/icon/arrow-back-ios'
