@@ -45,7 +45,7 @@ export const Segment: FC<TSegment> = ({ search }) => {
           <sinch-input aria-label="Input" label="Label" value="" onChange={() => {}} slot="content"/>
         </div>
       )}
-      {hasIcon && <sinch-icon-chatbot size={32} slot="icon"/>}
+      {hasIcon && <sinch-icon-branded-chatbot size={32} slot="icon"/>}
       {hasInfo && <sinch-tag text="Label" slot="info"/>}
       {hasInfo && (
         <sinch-icon-button

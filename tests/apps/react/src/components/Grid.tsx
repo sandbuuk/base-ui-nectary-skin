@@ -18,7 +18,7 @@ export const Grid: FC<TGrid> = () => {
         </sinch-grid-item>
         <sinch-grid-item slot="item" xl={3} l={4} m={4} s={4}>
           <sinch-card slot="content" header="Card" text={text}>
-            <sinch-icon-chatbot slot="icon"/>
+            <sinch-icon-branded-chatbot slot="icon"/>
           </sinch-card>
         </sinch-grid-item>
         <sinch-grid-item slot="item" xl={3} l={4} m={4} s={2}>
