@@ -85,6 +85,42 @@ import '@sinch-engage/nectary/icon/switch-right'
 import '@sinch-engage/nectary/icon/unfold-less'
 import '@sinch-engage/nectary/icon/unfold-more'
 import '@sinch-engage/nectary/icon/filter-list'
+import '@sinch-engage/nectary/icon/assignment'
+import '@sinch-engage/nectary/icon/access-time'
+import '@sinch-engage/nectary/icon/notes'
+import '@sinch-engage/nectary/icon/alt-route'
+import '@sinch-engage/nectary/icon/play-circle-outline'
+import '@sinch-engage/nectary/icon/pause-circle-outline'
+import '@sinch-engage/nectary/icon/check-circle-outline'
+import '@sinch-engage/nectary/icon/send'
+import '@sinch-engage/nectary/icon/add-comment'
+import '@sinch-engage/nectary/icon/star-outline'
+import '@sinch-engage/nectary/icon/undo'
+import '@sinch-engage/nectary/icon/mark-chat-unread'
+import '@sinch-engage/nectary/icon/comment'
+// {{icon import}}
+import '@sinch-engage/nectary/icon/volume-up'
+import '@sinch-engage/nectary/icon/volume-off'
+import '@sinch-engage/nectary/icon/update'
+import '@sinch-engage/nectary/icon/swap-vert'
+import '@sinch-engage/nectary/icon/stop'
+import '@sinch-engage/nectary/icon/settings'
+import '@sinch-engage/nectary/icon/search'
+import '@sinch-engage/nectary/icon/notifications-none'
+import '@sinch-engage/nectary/icon/more-time'
+import '@sinch-engage/nectary/icon/mic-none'
+import '@sinch-engage/nectary/icon/mark-chat-read'
+import '@sinch-engage/nectary/icon/insert-emoticon'
+import '@sinch-engage/nectary/icon/done-all'
+import '@sinch-engage/nectary/icon/create'
+import '@sinch-engage/nectary/icon/chat'
+import '@sinch-engage/nectary/icon/reply'
+import '@sinch-engage/nectary/icon/local-offer'
+import '@sinch-engage/nectary/icon/info-outline'
+import '@sinch-engage/nectary/icon/history'
+import '@sinch-engage/nectary/icon/forum'
+import '@sinch-engage/nectary/icon/chat-bubble-outline'
+import '@sinch-engage/nectary/icon/star'
 
 const iconNames = [
   'sinch-icon-cancel',
@@ -174,41 +210,83 @@ const iconNames = [
   'sinch-icon-unfold-more',
   /* Content */
   'sinch-icon-filter-list',
+  'sinch-icon-send',
+  'sinch-icon-undo',
+  /* Action */
+  'sinch-icon-assignment',
+  'sinch-icon-check-circle-outline',
+  /* Device */
+  'sinch-icon-access-time',
+  /* Editor */
+  'sinch-icon-notes',
+  'sinch-icon-add-comment',
+  /* Maps */
+  'sinch-icon-alt-route',
+  /* Audio & Video */
+  'sinch-icon-play-circle-outline',
+  'sinch-icon-pause-circle-outline',
+  'sinch-icon-volume-up',
+  'sinch-icon-volume-off',
+  'sinch-icon-stop',
+  /* Toggle */
+  'sinch-icon-star-outline',
+  'sinch-icon-star',
+  /* Communication */
+  'sinch-icon-mark-chat-unread',
+  'sinch-icon-comment',
+  'sinch-icon-chat',
+  // {{icon name}}
+  'sinch-icon-update',
+  'sinch-icon-swap-vert',
+  'sinch-icon-settings',
+  'sinch-icon-search',
+  'sinch-icon-notifications-none',
+  'sinch-icon-more-time',
+  'sinch-icon-mic-none',
+  'sinch-icon-mark-chat-read',
+  'sinch-icon-insert-emoticon',
+  'sinch-icon-done-all',
+  'sinch-icon-create',
+  'sinch-icon-reply',
+  'sinch-icon-local-offer',
+  'sinch-icon-info-outline',
+  'sinch-icon-history',
+  'sinch-icon-forum',
+  'sinch-icon-chat-bubble-outline',
 ]
 
 export default {
   title: 'Components/Icons',
-  argTypes: {
-    size: {
-      control: { type: 'range', min: 12, max: 64, step: 4 },
-    },
-  },
+  argTypes: {},
 } as Meta
 
 const Template = (): Story<TSinchIconReact> => () => {
-  const [{ size }] = useArgs()
   const wrapperRef = useRef<Element | null>(null)
-  const iconsRef = useRef<TSinchIconElement[] | null>(null)
 
   if (wrapperRef.current === null) {
     wrapperRef.current = document.createElement('div')
-    iconsRef.current = iconNames.map((name) => document.createElement(name) as TSinchIconElement)
 
-    iconsRef.current.forEach((icon) => wrapperRef.current!.appendChild(icon))
+    const $wrapper = wrapperRef.current as HTMLElement
+
+    $wrapper.style.display = 'flex'
+    $wrapper.style.flexWrap = 'wrap'
+    $wrapper.style.gap = '16px'
+
+    const $icons = iconNames.map((name) => {
+      const $icon = document.createElement(name) as TSinchIconElement
+
+      $icon.setAttribute('title', name)
+
+      return $icon
+    })
+
+    $wrapper.append(...$icons)
   }
-
-  iconsRef.current!.forEach((icon) => {
-    icon.size = size
-  })
 
   return wrapperRef.current
 }
 
 export const Icons = Template()
-
-Icons.args = {
-  size: 16,
-}
 
 Icons.parameters = {
   docs: {
