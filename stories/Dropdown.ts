@@ -3,7 +3,7 @@ import { useStoryWrapper } from './use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/dropdown'
-import '@sinch-engage/nectary/icon/open-in-new'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 export default {
   title: 'Components/Dropdown',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/icon/open-in-new'
+import '@sinch-engage/nectary/icons/open-in-new'
 import '@sinch-engage/nectary/dropdown'
 
 @Component({

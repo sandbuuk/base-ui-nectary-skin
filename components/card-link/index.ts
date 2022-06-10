@@ -1,4 +1,4 @@
-import '../icon/arrow-forward'
+import '../icons/arrow-forward'
 import {
   defineCustomElement,
   getBooleanAttribute,

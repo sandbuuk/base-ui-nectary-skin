@@ -6,7 +6,7 @@
       <sinch-input label="Label" value=""></sinch-input>
       <sinch-input label="Label" value=""></sinch-input>
     </div>
-    <sinch-icon-chatbot v-if="hasIcon" size="32" slot="icon"></sinch-icon-chatbot>
+    <sinch-icon-branded-chatbot v-if="hasIcon" size="32" slot="icon"></sinch-icon-branded-chatbot>
     <sinch-tag v-if="hasInfo" text="Label" slot="info"></sinch-tag>
     <sinch-icon-button v-if="hasInfo" small slot="info">
       <sinch-icon-apps slot="icon"></sinch-icon-apps>

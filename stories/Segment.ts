@@ -54,7 +54,7 @@ const segmentInnerHTML = `
     <sinch-input label="Label" value=""></sinch-input>
     <sinch-input label="Label" value=""></sinch-input>
   </div>
-  <sinch-icon-chatbot slot="icon" size="32"></sinch-icon-chatbot>
+  <sinch-icon-branded-chatbot slot="icon" size="32"></sinch-icon-branded-chatbot>
   <sinch-tag slot="info" text="Label"></sinch-tag>
   <sinch-icon-button slot="info" small>
     <sinch-icon-apps slot="icon"></sinch-icon-apps>
@@ -81,7 +81,7 @@ Segment.parameters = {
 
 const segmentNoCollapseInnerHTML = `
   <section slot="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
-  <sinch-icon-chatbot slot="icon" size="32"></sinch-icon-chatbot>
+  <sinch-icon-branded-chatbot slot="icon" size="32"></sinch-icon-branded-chatbot>
   <sinch-tag slot="info" text="Label"></sinch-tag>
   <sinch-icon-button slot="info" small>
     <sinch-icon-apps slot="icon"></sinch-icon-apps>

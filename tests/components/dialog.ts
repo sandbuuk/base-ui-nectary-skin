@@ -1,6 +1,9 @@
 import { expect, test } from '@playwright/test'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
+const longText = encodeURIComponent('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.')
+
+const withLongContent = `/dialog?title=Title&buttons=Ok|Cancel&content=${longText}`
 const withTitleContentButtons = '/dialog?title=Title&buttons=Ok|Cancel&content=Content'
 const withTitleButtons = '/dialog?title=Title&buttons=Ok|Cancel'
 const withTitleLargeContent = '/dialog?title=Title&content=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
@@ -43,6 +46,20 @@ test('dialog screenshots', runScreenshotTests('sinch-dialog', [
     name: 'caption content buttons',
     url: withTitleContentButtons,
     async *fn({ $eval }) {
+      yield { name: 'shot', includeRects: [await $eval((el) => el.dialogRect)] }
+    },
+  },
+  {
+    name: 'css max-height variable',
+    url: withLongContent,
+    async *fn({ page, $eval }) {
+      await page.evaluate(() => {
+        const style = document.createElement('style')
+
+        style.innerHTML = ':root, :host { --sinch-dialog-max-height: 55px; }'
+
+        document.head.append(style)
+      })
       yield { name: 'shot', includeRects: [await $eval((el) => el.dialogRect)] }
     },
   },

@@ -1,21 +1,37 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '@sinch-engage/nectary/icon-branded/types'
+import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '@sinch-engage/nectary/icons-branded/types'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/theme.css'
-import '@sinch-engage/nectary/icon-branded/rocket'
-import '@sinch-engage/nectary/icon-branded/home'
-import '@sinch-engage/nectary/icon-branded/contact'
-import '@sinch-engage/nectary/icon-branded/chatbot'
-import '@sinch-engage/nectary/icon-branded/campaigns'
-import '@sinch-engage/nectary/icon-branded/barchart-up'
-import '@sinch-engage/nectary/icon-branded/barchart-down'
-import '@sinch-engage/nectary/icon-branded/user'
-import '@sinch-engage/nectary/icon-branded/users'
-import '@sinch-engage/nectary/icon-branded/multiple-channels'
-import '@sinch-engage/nectary/icon-branded/settings'
+import '@sinch-engage/nectary/icons-branded/bell'
+import '@sinch-engage/nectary/icons-branded/home'
+import '@sinch-engage/nectary/icons-branded/contact'
+import '@sinch-engage/nectary/icons-branded/chatbot'
+import '@sinch-engage/nectary/icons-branded/campaigns'
+import '@sinch-engage/nectary/icons-branded/barchart-up'
+import '@sinch-engage/nectary/icons-branded/barchart-down'
+import '@sinch-engage/nectary/icons-branded/user'
+import '@sinch-engage/nectary/icons-branded/users'
+import '@sinch-engage/nectary/icons-branded/multiple-channels'
+import '@sinch-engage/nectary/icons-branded/rocket'
+import '@sinch-engage/nectary/icons-branded/settings'
+
+const iconNames = [
+  'sinch-icon-branded-bell',
+  'sinch-icon-branded-home',
+  'sinch-icon-branded-contact',
+  'sinch-icon-branded-chatbot',
+  'sinch-icon-branded-campaigns',
+  'sinch-icon-branded-barchart-up',
+  'sinch-icon-branded-barchart-down',
+  'sinch-icon-branded-user',
+  'sinch-icon-branded-users',
+  'sinch-icon-branded-multiple-channels',
+  'sinch-icon-branded-rocket',
+  'sinch-icon-branded-settings',
+]
 
 export default {
-  title: 'Components/IconsBranded',
+  title: 'Components/Icons Branded',
   argTypes: {
     inverted: {
       control: { type: 'boolean' },
@@ -26,185 +42,52 @@ export default {
   },
 } as Meta
 
-const Template = (iconTagName: string): Story<TSinchIconBrandedReact> => () => {
+const Template = (): Story<TSinchIconBrandedReact> => () => {
   const [{ size, inverted }] = useArgs()
-  const iconRef = useRef<TSinchIconBrandedElement | null>(null)
+  const wrapperRef = useRef<HTMLElement | null>(null)
 
-  if (iconRef.current === null) {
-    const $icon = document.createElement(iconTagName) as TSinchIconBrandedElement
+  if (wrapperRef.current === null) {
+    wrapperRef.current = document.createElement('div')
 
-    iconRef.current = $icon
+    const $wrapper = wrapperRef.current as HTMLElement
+
+    $wrapper.style.display = 'flex'
+    $wrapper.style.flexWrap = 'wrap'
+    $wrapper.style.gap = '16px'
+
+    const $icons = iconNames.map((name) => {
+      const $icon = document.createElement(name) as TSinchIconBrandedElement
+
+      $icon.setAttribute('title', name)
+
+      return $icon
+    })
+
+    $wrapper.append(...$icons)
   }
 
-  const $icon = iconRef.current!
+  wrapperRef.current.style.backgroundColor = inverted as boolean ? 'black' : 'white'
 
-  $icon.size = size
-  $icon.inverted = inverted
+  // eslint-disable-next-line sort-vars
+  for (let i = 0, ch = wrapperRef.current.children; i < ch.length; i++) {
+    ch[i].setAttribute('size', size)
+    inverted as boolean ? ch[i].setAttribute('inverted', '') : ch[i].removeAttribute('inverted')
+  }
 
-  return $icon
+  return wrapperRef.current
 }
 
-export const Home = Template('sinch-icon-home')
+export const IconsBranded = Template()
 
-Home.args = {
+IconsBranded.args = {
   size: 48,
   inverted: false,
 }
 
-Home.parameters = {
+IconsBranded.parameters = {
   docs: {
     source: {
-      code: '<sinch-icon-home size="48"></sinch-icon-home>',
-    },
-  },
-}
-
-export const Rocket = Template('sinch-icon-rocket')
-
-Rocket.args = {
-  size: 48,
-  inverted: false,
-}
-
-Rocket.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-icon-rocket size="48"></sinch-icon-rocket>',
-    },
-  },
-}
-
-export const Contact = Template('sinch-icon-contact')
-
-Contact.args = {
-  size: 48,
-  inverted: false,
-}
-
-Contact.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-icon-contact size="48"></sinch-icon-contact>',
-    },
-  },
-}
-
-export const ChatBot = Template('sinch-icon-chatbot')
-
-ChatBot.args = {
-  size: 48,
-  inverted: false,
-}
-
-ChatBot.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-icon-chatbot size="48"></sinch-icon-chatbot>',
-    },
-  },
-}
-
-export const Campaigns = Template('sinch-icon-campaigns')
-
-Campaigns.args = {
-  size: 48,
-  inverted: false,
-}
-
-Campaigns.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-icon-campaigns size="48"></sinch-icon-campaigns>',
-    },
-  },
-}
-
-export const BarchartUp = Template('sinch-icon-barchart-up')
-
-BarchartUp.args = {
-  size: 48,
-  inverted: false,
-}
-
-BarchartUp.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-icon-barchart-up size="48"></sinch-icon-barchart-up>',
-    },
-  },
-}
-
-export const BarchartDown = Template('sinch-icon-barchart-down')
-
-BarchartDown.args = {
-  size: 48,
-  inverted: false,
-}
-
-BarchartDown.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-icon-barchart-down size="48"></sinch-icon-barchart-down>',
-    },
-  },
-}
-
-export const User = Template('sinch-icon-user')
-
-User.args = {
-  size: 48,
-  inverted: false,
-}
-
-User.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-icon-user size="48"></sinch-icon-user>',
-    },
-  },
-}
-
-export const Users = Template('sinch-icon-users')
-
-Users.args = {
-  size: 48,
-  inverted: false,
-}
-
-Users.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-icon-users size="48"></sinch-icon-users>',
-    },
-  },
-}
-
-export const MultipleChannels = Template('sinch-icon-multiple-channels')
-
-MultipleChannels.args = {
-  size: 48,
-  inverted: false,
-}
-
-MultipleChannels.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-icon-multiple-channels size="48"></sinch-icon-multiple-channels>',
-    },
-  },
-}
-
-export const Settings = Template('sinch-icon-settings')
-
-Settings.args = {
-  size: 48,
-  inverted: false,
-}
-
-Settings.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-icon-settings size="48"></sinch-icon-settings>',
+      code: `<>\n${iconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
     },
   },
 }

@@ -1,4 +1,4 @@
-import '../icon/close'
+import '../icons/close'
 import { defineCustomElement } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
