@@ -1,4 +1,4 @@
-import '../icon/keyboard-arrow-down'
+import '../icons/keyboard-arrow-down'
 import {
   defineCustomElement,
   getAttribute,

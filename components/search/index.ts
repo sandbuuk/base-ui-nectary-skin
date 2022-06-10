@@ -9,8 +9,8 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import '../icon/search'
-import '../icon/close'
+import '../icons/search'
+import '../icons/close'
 import '../icon-button'
 import type { TSinchSearchOptionElement } from '../search-option'
 import type { TRect, TSinchElementReact } from '../types'

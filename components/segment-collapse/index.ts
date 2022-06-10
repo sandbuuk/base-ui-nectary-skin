@@ -1,5 +1,5 @@
-import '../icon/expand-less'
-import '../icon/expand-more'
+import '../icons/expand-less'
+import '../icons/expand-more'
 import {
   defineCustomElement, getBooleanAttribute, isAttrTrue, updateBooleanAttribute,
 } from '../utils'

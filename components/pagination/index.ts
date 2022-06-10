@@ -1,5 +1,5 @@
-import '../icon/keyboard-arrow-left'
-import '../icon/keyboard-arrow-right'
+import '../icons/keyboard-arrow-left'
+import '../icons/keyboard-arrow-right'
 import {
   defineCustomElement,
   updateAttribute,
