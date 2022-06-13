@@ -1,3 +1,12 @@
+## v0.23.0
+
+* 💥 move branded icons from `/icon-branded/` to `/icons-branded/` and prefix component names with `-branded-`
+* 💥 move icons from `/icon/` to `/icons/`
+* ➕ handle `--sinch-dialog-max-height` variable in `sinch-dialog`
+* ➕ add `sinch-icon-branded-bell` component
+* ➕ add channel icons
+* ➕ add more Material icons
+
 ## v0.22.0
 
 * 💥 remove `sinch-table-head-sort` component
