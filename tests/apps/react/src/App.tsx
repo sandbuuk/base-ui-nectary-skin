@@ -27,6 +27,7 @@ import { Textarea } from './components/Textarea'
 import { Title } from './components/Title'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
+import { SegmentedControl } from './components/SegmentedControl'
 import type { CSSProperties, FC } from 'react'
 
 const mapElement = (url: URL) => {
@@ -142,6 +143,12 @@ const mapElement = (url: URL) => {
     case '/segment': {
       return (
         <Segment search={url.searchParams}/>
+      )
+    }
+
+    case '/segmented-control': {
+      return (
+        <SegmentedControl search={url.searchParams}/>
       )
     }
 

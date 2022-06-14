@@ -7,6 +7,15 @@ const getRects = (locators: Locator[]): Promise<(TRect | null)[]> => {
   return Promise.all(locators.map((l) => l.boundingBox()))
 }
 
+export const expandRect = (rect: TRect, offset: number): TRect => {
+  return {
+    x: rect.x - offset,
+    y: rect.y - offset,
+    width: rect.width + offset * 2,
+    height: rect.height + offset * 2,
+  }
+}
+
 const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect | null => {
   return rects.reduce((a, b) => {
     if (a == null) {
@@ -246,11 +255,4 @@ export const offsetRect = (rect: TRect, pos: TPosition): TRect => ({
   y: rect.y + pos.y,
   width: rect.width,
   height: rect.height,
-})
-
-export const expandRect = (rect: TRect, expandBy: {left?: number, top?: number, right?: number, bottom?: number}): TRect => ({
-  x: rect.x - (expandBy.left ?? 0),
-  y: rect.y - (expandBy.top ?? 0),
-  width: rect.width + (expandBy.right ?? 0),
-  height: rect.height + (expandBy.bottom ?? 0),
 })

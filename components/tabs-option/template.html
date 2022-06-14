@@ -34,7 +34,7 @@
   text-overflow: ellipsis;
 }
 
-:host([checked]) #wrapper {
+:host([checked]:not([checked="false"])) #wrapper {
   box-shadow: 0 2px 0 0 var(--sinch-color-stormy-500);
 }
 

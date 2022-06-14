@@ -1,0 +1,124 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+}
+
+#wrapper {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 42px;
+  padding: 8px 20px;
+  box-sizing: border-box;
+  border: 1px solid var(--sinch-color-stormy-100);
+  border-left-width: 0;
+  border-right-width: 0;
+  color: var(--sinch-color-stormy-500);
+  background-color: var(--sinch-color-snow-100);
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+  --sinch-size-icon: 16px;
+}
+
+#wrapper:hover {
+  background-color: var(--sinch-color-snow-500);
+}
+
+:host(:first-child) #wrapper {
+  border-left-width: 1px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+:host(:last-child) #wrapper {
+  border-right-width: 1px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+#content {
+  font: var(--sinch-font-title-s);
+  flex-shrink: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+:host([checked]:not([checked="false"])) #wrapper {
+  border-color: var(--sinch-color-stormy-500);
+}
+
+:host([checked]:not([checked="false"]):not(:first-child)) #wrapper::before {
+  content: "";
+  width: 1px;
+  height: 100%;
+  background-color: var(--sinch-color-stormy-500);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+:host([checked]:not([checked="false"]):not(:last-child)) #wrapper::after {
+  content: "";
+  width: 1px;
+  height: 100%;
+  background-color: var(--sinch-color-stormy-500);
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#button {
+  all: initial;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+#button:focus::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  top: -4px;
+  bottom: -4px;
+  border: 2px solid var(--sinch-color-aqua-400);
+}
+
+#button:disabled {
+  cursor: unset;
+}
+
+:host(:first-child) #button:focus::before {
+  left: -4px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+:host(:last-child) #button:focus::before {
+  right: -4px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+:host([disabled]:not([disabled="false"])) #wrapper {
+  color: var(--sinch-color-stormy-100);
+
+  --sinch-color-icon: var(--sinch-color-stormy-100);
+}
+</style>
+
+<div id="wrapper">
+  <slot name="icon"></slot>
+  <label for="button" id="content"></label>
+  <button id="button"></button>
+</div>
