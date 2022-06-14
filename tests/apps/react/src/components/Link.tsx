@@ -20,6 +20,7 @@ export const Link: FC<TLink> = ({ search }) => {
   return (
     <div id="link-wrapper">
       <span>Line with</span>
+      {' '}
       <sinch-link
         text={text}
         href={href}
@@ -29,6 +30,7 @@ export const Link: FC<TLink> = ({ search }) => {
         onFocus={onFocus}
         onBlur={onBlur}
       />
+      {' '}
       <span>navigation</span>
     </div>
   )
