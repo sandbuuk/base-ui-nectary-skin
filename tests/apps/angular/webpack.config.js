@@ -23,8 +23,9 @@ module.exports = {
     rules: [
       {
         test: /\.html$/,
-        loader: 'raw-loader',
-      }
+        exclude: /node_modules/,
+        use: ['raw-loader', '@saas/html-minify-loader'],
+      },
     ],
   },
 }

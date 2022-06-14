@@ -18,10 +18,12 @@ module.exports = {
     rules: [
       {
         test: /\.html$/,
-        loader: 'raw-loader',
+        exclude: /node_modules/,
+        use: ['raw-loader', '@saas/html-minify-loader'],
       },
       {
         test: /\.[jt]sx?$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
           babelrc: false,
@@ -41,6 +43,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: ['style-loader', 'css-loader'],
       },
     ],

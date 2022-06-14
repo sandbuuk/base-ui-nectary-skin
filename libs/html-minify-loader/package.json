@@ -1,0 +1,19 @@
+{
+  "name": "@saas/html-minify-loader",
+  "version": "0.0.0",
+  "main": "src/index.js",
+  "files": [
+    "lib/"
+  ],
+  "publishConfig": {
+    "registry": "https://nexus.int.clxnetworks.net/repository/sinch_npm/"
+  },
+  "scripts": {
+    "prebuild": "rimraf lib/",
+    "build": "NODE_ENV=production babel src/ --extensions '.ts' --out-dir lib/",
+    "postbuild": "tsc --outDir lib/"
+  },
+  "dependencies": {
+    "html-minifier-terser": "^6.0.0"
+  }
+}
