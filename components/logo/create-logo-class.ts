@@ -1,4 +1,11 @@
-import { getBooleanAttribute, getIntegerAttribute, updateAttribute, updateBooleanAttribute, updateIntegerAttribute } from '../utils'
+import {
+  getBooleanAttribute,
+  getIntegerAttribute,
+  NectaryElement,
+  updateAttribute,
+  updateBooleanAttribute,
+  updateIntegerAttribute,
+} from '../utils'
 import logoStylesHtml from './logo-styles.html'
 
 const DEFAULT_SIZE = 16
@@ -10,15 +17,13 @@ export const createLogoClass = (templateHTML: string) => {
 
   template.innerHTML = logoStylesHtml + templateHTML
 
-  return class extends HTMLElement {
+  return class extends NectaryElement {
     $svg: SVGElement
 
     constructor() {
       super()
 
-      const shadowRoot = this.attachShadow({
-        mode: 'closed',
-      })
+      const shadowRoot = this.attachShadow()
 
       shadowRoot.appendChild(template.content.cloneNode(true))
 

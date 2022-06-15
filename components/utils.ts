@@ -3,18 +3,6 @@ import type { TRect } from './types'
 const nectaryDefinitions = new Map<string, CustomElementConstructor>()
 let nectaryRegistry: CustomElementRegistry | null = null
 
-export const getReactEventHandler = ($element: HTMLElement, handlerName: string): ((arg?: any) => void) | null => {
-  // https://github.com/facebook/react/issues/7901
-  for (const key in $element) {
-    if (key.startsWith('__reactProps$')) {
-      // @ts-ignore
-      return $element[key][handlerName]
-    }
-  }
-
-  return null
-}
-
 export const defineCustomElement = (name: string, constructor: CustomElementConstructor): void => {
   if (nectaryRegistry !== null) {
     if (nectaryRegistry.get(name) == null) {
@@ -25,13 +13,9 @@ export const defineCustomElement = (name: string, constructor: CustomElementCons
   }
 
   nectaryDefinitions.set(name, constructor)
-
-  if (customElements.get(name) == null) {
-    customElements.define(name, constructor)
-  }
 }
 
-export const defineNectaryElements = (registry: CustomElementRegistry) => {
+export const setNectaryRegistry = (registry: CustomElementRegistry): void => {
   if (nectaryRegistry !== null) {
     throw new Error('Nectary elements already registered')
   }
@@ -43,9 +27,37 @@ export const defineNectaryElements = (registry: CustomElementRegistry) => {
       nectaryRegistry.define(name, ctor)
     }
   }
+
+  nectaryDefinitions.clear()
 }
 
-export type TEventHandler = (arg?: any) => void
+declare global {
+  interface ShadowRootInit {
+    customElements?: CustomElementRegistry,
+  }
+}
+
+export class NectaryElement extends HTMLElement {
+  attachShadow(): ShadowRoot {
+    return super.attachShadow({
+      mode: 'closed',
+      delegatesFocus: true,
+      customElements: nectaryRegistry!,
+    })
+  }
+}
+
+export const getReactEventHandler = ($element: HTMLElement, handlerName: string): ((arg?: any) => void) | null => {
+  // https://github.com/facebook/react/issues/7901
+  for (const key in $element) {
+    if (key.startsWith('__reactProps$')) {
+      // @ts-ignore
+      return $element[key][handlerName]
+    }
+  }
+
+  return null
+}
 
 export const updateBooleanAttribute = ($element: Element, attrName: string, attrValue: boolean | null | undefined) => {
   if (attrValue === true) {

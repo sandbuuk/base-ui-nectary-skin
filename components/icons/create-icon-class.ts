@@ -1,4 +1,4 @@
-import { updateAttribute } from '../utils'
+import { NectaryElement, updateAttribute } from '../utils'
 import iconStylesHtml from './icon-styles.html'
 
 export const createIconClass = (templateHTML: string) => {
@@ -6,15 +6,13 @@ export const createIconClass = (templateHTML: string) => {
 
   template.innerHTML = iconStylesHtml + templateHTML
 
-  return class extends HTMLElement {
+  return class extends NectaryElement {
     $svg: SVGElement
 
     constructor() {
       super()
 
-      const shadowRoot = this.attachShadow({
-        mode: 'closed',
-      })
+      const shadowRoot = this.attachShadow()
 
       shadowRoot.appendChild(template.content.cloneNode(true))
 

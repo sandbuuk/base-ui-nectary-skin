@@ -4,6 +4,7 @@ import {
   getBooleanAttribute,
   getLiteralAttribute,
   isAttrTrue,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
   updateLiteralAttribute,
@@ -18,7 +19,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-input', class extends HTMLElement {
+defineCustomElement('sinch-input', class extends NectaryElement {
   #$input: HTMLInputElement
   #$label: HTMLLabelElement
   #$optionalText: HTMLSpanElement
@@ -31,10 +32,7 @@ defineCustomElement('sinch-input', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

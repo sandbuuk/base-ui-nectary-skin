@@ -7,6 +7,7 @@ import {
   getBooleanAttribute,
   getIntegerAttribute,
   isAttrTrue,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
   updateIntegerAttribute,
@@ -21,7 +22,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-select', class extends HTMLElement {
+defineCustomElement('sinch-select', class extends NectaryElement {
   #$button: HTMLButtonElement
   #$buttonContent: HTMLSpanElement
   #$label: HTMLLabelElement
@@ -30,17 +31,16 @@ defineCustomElement('sinch-select', class extends HTMLElement {
   #$invalidText: HTMLSpanElement
   #$dropdown: TSinchDropdownElement
   #$optionSlot: HTMLSlotElement
+  #$sh: ShadowRoot
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#$sh = shadowRoot
     this.#$button = shadowRoot.querySelector('#button')!
     this.#$buttonContent = shadowRoot.querySelector('#content')!
     this.#$label = shadowRoot.querySelector('#label')!
@@ -208,6 +208,15 @@ defineCustomElement('sinch-select', class extends HTMLElement {
     }
   }
 
+  #createElement(name: string): HTMLElement {
+    if (Reflect.has(this.#$sh, 'createElement')) {
+      // @ts-expect-error
+      return this.#$sh.createElement(name)
+    }
+
+    return document.createElement(name)
+  }
+
   #updateButtonContent() {
     // Remove icon element
     if (this.#$button.firstElementChild !== this.#$buttonContent) {
@@ -227,7 +236,7 @@ defineCustomElement('sinch-select', class extends HTMLElement {
       const $icon = $option.icon
 
       if ($icon != null) {
-        this.#$button.prepend($icon.cloneNode(true))
+        this.#$button.prepend(this.#createElement($icon.tagName.toLowerCase()))
       }
     }
   }

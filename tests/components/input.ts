@@ -251,8 +251,6 @@ test('input screenshots', runScreenshotTests('sinch-input', [
       await $.focus()
       yield { name: 'focus' }
 
-      await expect($eval((el) => el === document.activeElement)).resolves.toBe(true)
-
       await $.type('Filled text')
       yield { name: 'filled' }
 
@@ -316,7 +314,9 @@ test('input screenshots', runScreenshotTests('sinch-input', [
       ])
 
       // Necessary to normalize "type" behaviour
-      await $.click()
+      const bb = (await $.boundingBox())!
+
+      await page.mouse.click(bb.x + bb.width / 2, bb.y + bb.height / 2)
       await $.type('X')
 
       expect(

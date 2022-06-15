@@ -9,6 +9,7 @@ import {
   updateAttribute,
   updateLiteralAttribute,
   getRect,
+  NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TRect, TSinchElementReact } from '../types'
@@ -19,15 +20,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-tooltip', class extends HTMLElement {
+defineCustomElement('sinch-tooltip', class extends NectaryElement {
   $tooltipText: HTMLDivElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

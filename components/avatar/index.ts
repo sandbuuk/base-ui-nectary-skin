@@ -3,6 +3,7 @@ import {
   defineCustomElement,
   getAttribute,
   getLiteralAttribute,
+  NectaryElement,
   updateAttribute,
   updateLiteralAttribute,
 } from '../utils'
@@ -16,16 +17,14 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-avatar', class extends HTMLElement {
+defineCustomElement('sinch-avatar', class extends NectaryElement {
   #$text: HTMLSpanElement
   #$image: HTMLImageElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

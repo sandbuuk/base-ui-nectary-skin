@@ -3,6 +3,7 @@ import {
   defineCustomElement,
   getAttribute,
   getLiteralAttribute,
+  NectaryElement,
   updateAttribute,
   updateLiteralAttribute,
 } from '../utils'
@@ -14,7 +15,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-chat-block', class extends HTMLElement {
+defineCustomElement('sinch-chat-block', class extends NectaryElement {
   #$firstName: HTMLElement
   #$lastName: HTMLElement
   #$timeStamp: HTMLElement
@@ -23,10 +24,7 @@ defineCustomElement('sinch-chat-block', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

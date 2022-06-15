@@ -3,6 +3,7 @@ import {
   getBooleanAttribute,
   getAttribute,
   updateAttribute,
+  NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchButtonElement } from '../button'
@@ -17,16 +18,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-card-button', class extends HTMLElement {
+defineCustomElement('sinch-card-button', class extends NectaryElement {
   #$button: TSinchButtonElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

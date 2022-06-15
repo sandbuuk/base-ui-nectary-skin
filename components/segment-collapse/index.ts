@@ -1,7 +1,11 @@
 import '../icons/expand-less'
 import '../icons/expand-more'
 import {
-  defineCustomElement, getBooleanAttribute, isAttrTrue, updateBooleanAttribute,
+  defineCustomElement,
+  getBooleanAttribute,
+  isAttrTrue,
+  NectaryElement,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -11,15 +15,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-segment-collapse', class extends HTMLElement {
+defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
   #$input: HTMLInputElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

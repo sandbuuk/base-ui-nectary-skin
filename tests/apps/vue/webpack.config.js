@@ -19,6 +19,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
+        exclude: /node_modules/,
         loader: 'vue-loader',
         options: {
           compilerOptions: {
@@ -28,10 +29,12 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        loader: 'raw-loader',
+        exclude: /node_modules/,
+        use: ['raw-loader', '@saas/html-minify-loader'],
       },
       {
         test: /\.(js|ts)$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
           babelrc: false,
@@ -47,6 +50,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: ['style-loader', 'css-loader'],
       },
     ],

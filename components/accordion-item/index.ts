@@ -5,6 +5,7 @@ import {
   getBooleanAttribute,
   getLiteralAttribute,
   isAttrTrue,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
   updateLiteralAttribute,
@@ -23,7 +24,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-accordion-item', class extends HTMLElement {
+defineCustomElement('sinch-accordion-item', class extends NectaryElement {
   #$button: HTMLButtonElement
   #$buttonContent: HTMLSpanElement
   #$optionalText: HTMLSpanElement
@@ -31,10 +32,7 @@ defineCustomElement('sinch-accordion-item', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

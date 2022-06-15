@@ -2,6 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
@@ -13,15 +14,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-class SearchOption extends HTMLElement {
+class SearchOption extends NectaryElement {
   #$content: HTMLSpanElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

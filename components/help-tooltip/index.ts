@@ -5,6 +5,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getIntegerAttribute,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
   updateIntegerAttribute,
@@ -16,15 +17,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-help-tooltip', class extends HTMLElement {
+defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
   $tooltip: HTMLElementTagNameMap['sinch-tooltip']
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

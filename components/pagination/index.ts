@@ -5,9 +5,11 @@ import {
   updateAttribute,
   getIntegerAttribute,
   setClass,
+  NectaryElement,
+  getRect,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
 const NUM_BUTTONS = 7
@@ -21,7 +23,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-pagination', class extends HTMLElement {
+defineCustomElement('sinch-pagination', class extends NectaryElement {
   #$left: HTMLButtonElement
   #$right: HTMLButtonElement
   #$buttons: NodeListOf<HTMLButtonElement>
@@ -30,10 +32,7 @@ defineCustomElement('sinch-pagination', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: process.env.NODE_ENV === 'development' ? 'open' : 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -189,6 +188,20 @@ defineCustomElement('sinch-pagination', class extends HTMLElement {
     this.#$right.blur()
     this.#$buttons.forEach(($b) => $b.blur())
   }
+
+  get prevButtonRect() {
+    return getRect(this.#$left)
+  }
+
+  get nextButtonRect() {
+    return getRect(this.#$right)
+  }
+
+  nthButtonRect(index: number): TRect | null {
+    const btn = this.#$buttons[index]
+
+    return btn == null ? null : getRect(btn)
+  }
 })
 
 export type TSinchPaginationElement = HTMLElement & {
@@ -196,6 +209,9 @@ export type TSinchPaginationElement = HTMLElement & {
   max: number,
   focus(): void,
   blur(): void,
+  readonly prevButtonRect: TRect,
+  readonly nextButtonRect: TRect,
+  nthButtonRect(index: number): TRect | null,
 }
 
 export type TSinchPaginationReact = TSinchElementReact<TSinchPaginationElement> & {

@@ -78,81 +78,78 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
   {
     name: 'left click',
     url: withMidRange,
-    async *fn({ $ }) {
-      const $left = $.locator('#left')
+    async *fn({ $eval, page }) {
+      const { x, y } = await $eval((el) => el.prevButtonRect)
 
       yield { name: 'begin' }
 
-      await $left.click()
+      await page.mouse.click(x, y)
       yield { name: 'left-1' }
 
-      await $left.click()
+      await page.mouse.click(x, y)
       yield { name: 'left-2' }
 
-      await $left.click()
-      await $left.click()
+      await page.mouse.click(x, y)
+      await page.mouse.click(x, y)
       yield { name: 'left-4' }
     },
   },
   {
     name: 'right click',
     url: withMidRange,
-    async *fn({ $ }) {
-      const $right = $.locator('#right')
+    async *fn({ $eval, page }) {
+      const { x, y } = await $eval((el) => el.nextButtonRect)
 
       yield { name: 'begin' }
 
-      await $right.click()
+      await page.mouse.click(x, y)
       yield { name: 'right-1' }
 
-      await $right.click()
+      await page.mouse.click(x, y)
       yield { name: 'right-2' }
 
-      await $right.click()
-      await $right.click()
+      await page.mouse.click(x, y)
+      await page.mouse.click(x, y)
       yield { name: 'right-4' }
     },
   },
   {
     name: 'first last click',
     url: withLargeRange,
-    async *fn({ $ }) {
-      const $left = $.locator('button').nth(1)
-      const $right = $.locator('button').nth(7)
+    async *fn({ $eval, page }) {
+      const [firstRect, lastRect] = await $eval((el) => [el.nthButtonRect(0), el.nthButtonRect(6)])
 
-      await $left.click()
+      await page.mouse.click(firstRect!.x + firstRect!.width / 2, firstRect!.y + firstRect!.height / 2)
       yield { name: 'first' }
 
-      await $right.click()
+      await page.mouse.click(lastRect!.x + lastRect!.width / 2, lastRect!.y + lastRect!.height / 2)
       yield { name: 'last' }
     },
   },
   {
     name: 'middle click',
     url: withLargeRange,
-    async *fn({ $ }) {
-      const $left = $.locator('button').nth(3)
-      const $right = $.locator('button').nth(5)
+    async *fn({ $eval, page }) {
+      const [firstRect, lastRect] = await $eval((el) => [el.nthButtonRect(2), el.nthButtonRect(4)])
 
-      await $left.click()
+      await page.mouse.click(firstRect!.x + firstRect!.width / 2, firstRect!.y + firstRect!.height / 2)
       yield { name: 'left' }
 
-      await $right.click()
-      await $right.click()
+      await page.mouse.click(lastRect!.x + lastRect!.width / 2, lastRect!.y + lastRect!.height / 2)
+      await page.mouse.click(lastRect!.x + lastRect!.width / 2, lastRect!.y + lastRect!.height / 2)
       yield { name: 'right' }
     },
   },
   {
     name: 'dots click',
     url: withMidRange,
-    async *fn({ $ }) {
-      const $left = $.locator('button').nth(2)
-      const $right = $.locator('button').nth(6)
+    async *fn({ $eval, page }) {
+      const [firstRect, lastRect] = await $eval((el) => [el.nthButtonRect(1), el.nthButtonRect(5)])
 
-      await $left.click()
+      await page.mouse.click(firstRect!.x + firstRect!.width / 2, firstRect!.y + firstRect!.height / 2)
       yield { name: 'left' }
 
-      await $right.click()
+      await page.mouse.click(lastRect!.x + lastRect!.width / 2, lastRect!.y + lastRect!.height / 2)
       yield { name: 'right' }
     },
   },
@@ -177,11 +174,11 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
   {
     name: 'native events',
     url: withUncontrolled,
-    async *fn({ $, page }) {
+    async *fn({ $, $eval, page }) {
       await subscribeToEvents(page, 'sinch-pagination-focus', 'sinch-pagination-blur', 'sinch-pagination-change')
 
       await $.focus()
-      await page.mouse.click(0, 0)
+      await page.keyboard.press('Shift+Tab')
 
       expect(
         await getAllEvents(page)
@@ -190,7 +187,9 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
         { type: 'sinch-pagination-blur', detail: null },
       ])
 
-      await $.locator('#left').click()
+      const [prevRect, nextRect] = await $eval((el) => [el.prevButtonRect, el.nextButtonRect])
+
+      await page.mouse.click(prevRect.x, prevRect.y)
 
       expect(
         await getAllEvents(page)
@@ -199,7 +198,7 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
         { type: 'sinch-pagination-change', detail: 9 },
       ])
 
-      await $.locator('#right').click()
+      await page.mouse.click(nextRect.x, nextRect.y)
 
       expect(
         await getAllEvents(page)

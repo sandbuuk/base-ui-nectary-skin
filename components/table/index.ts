@@ -1,5 +1,5 @@
 import {
-  defineCustomElement,
+  defineCustomElement, NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -8,13 +8,11 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-table', class extends HTMLElement {
+defineCustomElement('sinch-table', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
   }

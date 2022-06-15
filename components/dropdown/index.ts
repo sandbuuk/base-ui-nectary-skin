@@ -10,6 +10,7 @@ import {
   getReactEventHandler,
   getRect,
   isAttrTrue,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
   updateIntegerAttribute,
@@ -38,7 +39,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-dropdown', class extends HTMLElement {
+defineCustomElement('sinch-dropdown', class extends NectaryElement {
   #$target: HTMLElement
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
@@ -47,10 +48,7 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -369,7 +367,7 @@ defineCustomElement('sinch-dropdown', class extends HTMLElement {
   }
 
   #dispatchChangeEvent($opt: TSinchDropdownOptionElement | null) {
-    if ($opt != null && this.value !== $opt.value) {
+    if ($opt != null) {
       this.dispatchEvent(
         new CustomEvent('change', { detail: $opt.value, bubbles: true })
       )

@@ -1,6 +1,7 @@
 import {
   defineCustomElement,
   getAttribute,
+  NectaryElement,
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -11,16 +12,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-alert-button', class extends HTMLElement {
+defineCustomElement('sinch-alert-button', class extends NectaryElement {
   #$button: HTMLButtonElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

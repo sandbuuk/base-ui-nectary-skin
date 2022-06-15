@@ -1,6 +1,6 @@
 <template>
   <div id="link-wrapper">
-    <span>Line with</span>
+    <span>Line with </span>
     <sinch-link
       :href="href"
       :text="text"
@@ -10,7 +10,7 @@
       @focusin="onFocus"
       @focusout="onBlur"
     ></sinch-link>
-    <span>navigation</span>
+    <span> navigation</span>
   </div>
 </template>
 

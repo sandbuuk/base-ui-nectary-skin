@@ -7,6 +7,7 @@ import {
   updateBooleanAttribute,
   updateAttribute,
   setClass,
+  NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -15,7 +16,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-card', class extends HTMLElement {
+defineCustomElement('sinch-card', class extends NectaryElement {
   #$text: HTMLElement
   #$label: HTMLElement
   #$title: HTMLElement
@@ -26,10 +27,7 @@ defineCustomElement('sinch-card', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

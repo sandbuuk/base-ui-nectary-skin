@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getLiteralAttribute,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
   updateLiteralAttribute,
@@ -16,15 +17,13 @@ template.innerHTML = templateHTML
 
 const alignValues = ['start', 'center', 'end'] as const
 
-defineCustomElement('sinch-table-head-cell', class extends HTMLElement {
+defineCustomElement('sinch-table-head-cell', class extends NectaryElement {
   #$text: HTMLSpanElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

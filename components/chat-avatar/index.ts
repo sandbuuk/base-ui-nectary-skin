@@ -2,6 +2,7 @@ import '../avatar'
 import {
   defineCustomElement,
   getAttribute,
+  NectaryElement,
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -12,16 +13,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-chat-avatar', class extends HTMLElement {
+defineCustomElement('sinch-chat-avatar', class extends NectaryElement {
   #$avatar: TSinchAvatarElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

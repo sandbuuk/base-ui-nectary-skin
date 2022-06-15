@@ -1,5 +1,5 @@
 import '../icons/close'
-import { defineCustomElement } from '../utils'
+import { defineCustomElement, NectaryElement } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 import type { FocusEvent, MouseEvent } from 'react'
@@ -8,16 +8,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-alert-close', class extends HTMLElement {
+defineCustomElement('sinch-alert-close', class extends NectaryElement {
   #$button: HTMLButtonElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
     this.#$button = shadowRoot.querySelector('button')!

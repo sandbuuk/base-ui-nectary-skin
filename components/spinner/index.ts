@@ -1,4 +1,4 @@
-import { defineCustomElement, getLiteralAttribute, updateLiteralAttribute } from '../utils'
+import { defineCustomElement, getLiteralAttribute, NectaryElement, updateLiteralAttribute } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
@@ -8,13 +8,11 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-spinner', class extends HTMLElement {
+defineCustomElement('sinch-spinner', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
   }

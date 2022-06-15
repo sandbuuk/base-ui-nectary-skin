@@ -1,6 +1,7 @@
 import '../icons/cancel'
 import {
   defineCustomElement,
+  NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -10,16 +11,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-tag-close', class extends HTMLElement {
+defineCustomElement('sinch-tag-close', class extends NectaryElement {
   #$button: HTMLButtonElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
