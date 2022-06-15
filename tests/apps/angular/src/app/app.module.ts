@@ -29,6 +29,7 @@ import { AvatarComponent } from '../components/Avatar/Avatar.component'
 import { ChatComponent } from '../components/Chat/Chat.component'
 import { TitleComponent } from '../components/Title/Title.component'
 import { PopoverComponent } from '../components/Popover/Popover.component'
+import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -62,6 +63,7 @@ import { AppComponent } from './app.component'
     ChatComponent,
     TitleComponent,
     PopoverComponent,
+    SegmentedControlComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

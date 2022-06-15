@@ -18,6 +18,7 @@ import { Popover } from './components/Popover'
 import { Radio } from './components/Radio'
 import { Search } from './components/Search'
 import { Segment } from './components/Segment'
+import { SegmentedControl } from './components/SegmentedControl'
 import { Select } from './components/Select'
 import { Spinner } from './components/Spinner'
 import { Table } from './components/Table'
@@ -142,6 +143,12 @@ const mapElement = (url: URL) => {
     case '/segment': {
       return (
         <Segment search={url.searchParams}/>
+      )
+    }
+
+    case '/segmented-control': {
+      return (
+        <SegmentedControl search={url.searchParams}/>
       )
     }
 

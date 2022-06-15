@@ -1,7 +1,6 @@
 <style>
 :host {
-  display: inline-block;
-  vertical-align: middle;
+  display: block;
   outline: none;
 }
 
@@ -21,6 +20,7 @@
   box-sizing: border-box;
   box-shadow: 0 1px 0 0 var(--sinch-color-stormy-100);
   color: var(--sinch-color-stormy-500);
+  background-color: var(--sinch-color-snow-100);
 
   --sinch-color-icon: var(--sinch-color-stormy-500);
   --sinch-size-icon: 16px;
@@ -34,11 +34,11 @@
   text-overflow: ellipsis;
 }
 
-:host([checked]) #wrapper {
+:host([checked]:not([checked="false"])) #wrapper {
   box-shadow: 0 2px 0 0 var(--sinch-color-stormy-500);
 }
 
-input {
+#button {
   all: initial;
   position: absolute;
   left: 0;
@@ -49,19 +49,20 @@ input {
   cursor: pointer;
 }
 
+#button:disabled {
+  cursor: unset;
+}
+
 :host([disabled]:not([disabled="false"])) #wrapper {
   color: var(--sinch-color-stormy-100);
 
   --sinch-color-icon: var(--sinch-color-stormy-100);
 }
 
-input:disabled {
-  cursor: unset;
-}
 </style>
 
 <div id="wrapper">
   <slot name="icon"></slot>
-  <label for="input" id="content" aria-hidden="true"></label>
-  <input id="input" type="radio" aria-hidden="true"/>
+  <label for="input" id="content"></label>
+  <button id="button" type="radio"/>
 </div>

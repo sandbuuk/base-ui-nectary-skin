@@ -23,7 +23,7 @@ const singleOption = encodeURI(JSON.stringify([{
   text: 'Option value 1',
   icon: true,
 }]))
-const withOptions = `/tabs?width=300&options=${options}`
+const withOptions = `/tabs?options=${options}`
 const withSingleOption = `/tabs?options=${singleOption}`
 const narrowLabel = `/tabs?width=100&options=${singleOption}`
 const checkTabsWithOptions = makeAccessibilityTests(`/tabs?options=${options}`, 'sinch-tabs')

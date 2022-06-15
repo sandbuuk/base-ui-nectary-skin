@@ -1,0 +1,9 @@
+<sinch-segmented-control [value]="value" (change)="onChange($event)">
+  <sinch-segmented-control-option
+    *ngFor="let opt of options"
+    [value]="opt.value"
+    [text]="opt.text"
+    [disabled]="opt.disabled">
+    <sinch-icon-open-in-new *ngIf="opt.icon != null" slot="icon"></sinch-icon-open-in-new>
+  </sinch-segmented-control-option>
+</sinch-segmented-control>

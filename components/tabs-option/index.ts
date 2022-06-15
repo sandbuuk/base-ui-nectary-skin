@@ -20,7 +20,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tabs-option', class extends NectaryElement {
-  $input: HTMLInputElement
+  $button: HTMLInputElement
   $label: HTMLElement
 
   constructor() {
@@ -30,17 +30,17 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$input = shadowRoot.querySelector('input')!
+    this.$button = shadowRoot.querySelector('#button')!
     this.$label = shadowRoot.querySelector('#content')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'tab')
-    this.$input.addEventListener('input', this.#onInput)
+    this.$button.addEventListener('click', this.#onClick)
   }
 
   disconnectedCallback() {
-    this.$input.removeEventListener('input', this.#onInput)
+    this.$button.removeEventListener('click', this.#onClick)
   }
 
   static get observedAttributes() {
@@ -87,25 +87,12 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
         break
       }
       case 'checked': {
-        const isChecked = isAttrTrue(newVal)
-
-        this.$input.checked = isChecked
-
-        if (isChecked) {
-          this.scrollIntoView?.({ block: 'nearest' })
-        }
-
         updateAttribute(this, 'aria-selected', isAttrTrue(newVal))
 
         break
       }
       case 'disabled': {
-        this.$input.disabled = isAttrTrue(newVal)
-
-        break
-      }
-      case 'value': {
-        this.$input.value = newVal ?? ''
+        this.$button.disabled = isAttrTrue(newVal)
 
         break
       }
@@ -113,17 +100,16 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
   }
 
   focus() {
-    this.$input.focus()
+    this.$button.focus()
   }
 
   blur() {
-    this.$input.blur()
+    this.$button.blur()
   }
 
-  #onInput = (e: Event) => {
+  #onClick = (e: Event) => {
     e.stopPropagation()
 
-    this.$input.checked = false
     this.dispatchEvent(
       new CustomEvent('change', { bubbles: true, detail: this.value })
     )
