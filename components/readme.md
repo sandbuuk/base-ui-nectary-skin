@@ -24,6 +24,30 @@ yarn add @sinch-engage/nectary
 
 ## Usage
 
+### Registry
+
+Nectary needs a custom elements registry to work with, even if it's a global default one:
+
+```js
+import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+
+setNectaryRegistry(customElements)
+
+// App
+```
+
+Or a custom one for the Shell/MFE use case, see [mfe-helper-react](https://gitlab.com/sinch/sinch-projects/applications/teams/core/core-npm-packages/-/tree/main/packages/mfe-helper-react) as an example for more details:
+
+```js
+import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+
+const customRegistry = new CustomElementRegistry();
+
+setNectaryRegistry(customRegistry)
+
+// ShadowRoot wrapper
+```
+
 ### Theme
 
 Import CSS file with [custom properties](./theme.css) (variables):
