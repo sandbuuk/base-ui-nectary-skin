@@ -7,6 +7,7 @@ import {
   isAttrTrue,
   updateAttribute,
   getReactEventHandler,
+  NectaryElement,
 } from '../utils'
 import '../icon-button'
 import '../icons/close'
@@ -18,7 +19,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-dialog', class extends HTMLElement {
+defineCustomElement('sinch-dialog', class extends NectaryElement {
   #$dialog: HTMLElement
   #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
@@ -27,10 +28,7 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
     this.#$dialog = shadowRoot.querySelector('dialog')!
@@ -141,13 +139,13 @@ defineCustomElement('sinch-dialog', class extends HTMLElement {
   }
 })
 
-type TSinchDialogElement = HTMLElement & {
+export type TSinchDialogElement = HTMLElement & {
   caption: string,
   readonly dialogRect: TRect,
   readonly closeButtonRect: TRect,
 }
 
-type TSinchDialogReact = TSinchElementReact<TSinchDialogElement> & {
+export type TSinchDialogReact = TSinchElementReact<TSinchDialogElement> & {
   open: boolean,
   caption: string,
   'aria-label': string,

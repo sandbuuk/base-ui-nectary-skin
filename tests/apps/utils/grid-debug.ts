@@ -1,3 +1,4 @@
+import { defineCustomElement, NectaryElement } from '@sinch-engage/nectary/utils'
 import type { TSinchElementReact } from '@sinch-engage/nectary/types'
 
 const template = document.createElement('template')
@@ -97,17 +98,17 @@ template.innerHTML = `
 <div class="l"></div>
 `
 
-class GridDebug extends HTMLElement {
+class GridDebug extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ mode: 'closed' })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
   }
 }
 
-customElements.define('sinch-grid-debug', GridDebug)
+defineCustomElement('sinch-grid-debug', GridDebug)
 
 type TSinchGridDebugElement = HTMLElement
 

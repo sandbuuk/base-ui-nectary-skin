@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   isAttrTrue,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
@@ -18,17 +19,14 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-tabs-option', class extends HTMLElement {
+defineCustomElement('sinch-tabs-option', class extends NectaryElement {
   $input: HTMLInputElement
   $label: HTMLElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

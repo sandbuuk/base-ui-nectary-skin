@@ -2,6 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
@@ -12,16 +13,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-segment', class extends HTMLElement {
+defineCustomElement('sinch-segment', class extends NectaryElement {
   #$caption: HTMLElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
     this.#$caption = shadowRoot.querySelector('#caption')!

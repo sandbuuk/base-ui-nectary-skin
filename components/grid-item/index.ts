@@ -1,4 +1,4 @@
-import { defineCustomElement, getIntegerAttribute, updateIntegerAttribute } from '../utils'
+import { defineCustomElement, getIntegerAttribute, NectaryElement, updateIntegerAttribute } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
@@ -6,13 +6,11 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-grid-item', class extends HTMLElement {
+defineCustomElement('sinch-grid-item', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
   }

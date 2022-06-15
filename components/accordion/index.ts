@@ -5,6 +5,7 @@ import {
   getBooleanAttribute,
   getCSVSet,
   getFirstCSValue,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
   updateCSV,
@@ -17,16 +18,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-accordion', class extends HTMLElement {
+defineCustomElement('sinch-accordion', class extends NectaryElement {
   #$slot: HTMLSlotElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
     shadowRoot.addEventListener('change', this.#onOptionChange)

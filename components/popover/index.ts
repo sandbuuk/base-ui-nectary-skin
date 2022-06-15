@@ -8,6 +8,7 @@ import {
   updateLiteralAttribute,
   getReactEventHandler,
   updateBooleanAttribute,
+  NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TRect, TSinchElementReact } from '../types'
@@ -19,7 +20,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-popover', class extends HTMLElement {
+defineCustomElement('sinch-popover', class extends NectaryElement {
   #$target: HTMLButtonElement
   #$dialog: HTMLElement
   #isConnected = false
@@ -27,10 +28,7 @@ defineCustomElement('sinch-popover', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

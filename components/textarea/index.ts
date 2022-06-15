@@ -4,6 +4,7 @@ import {
   getBooleanAttribute,
   getIntegerAttribute,
   isAttrTrue,
+  NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
@@ -15,7 +16,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-textarea', class extends HTMLElement {
+defineCustomElement('sinch-textarea', class extends NectaryElement {
   #$input: HTMLTextAreaElement
   #$label: HTMLLabelElement
   #$optionalText: HTMLSpanElement
@@ -28,10 +29,7 @@ defineCustomElement('sinch-textarea', class extends HTMLElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

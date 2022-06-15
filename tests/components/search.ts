@@ -101,8 +101,6 @@ test('search screenshots', runScreenshotTests('sinch-search', [
       await $.focus()
       yield { name: 'focus' }
 
-      await expect($eval((el) => el === document.activeElement)).resolves.toBe(true)
-
       await $.type('Fill')
       yield { name: 'filled' }
 

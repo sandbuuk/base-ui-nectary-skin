@@ -2,6 +2,7 @@ import { isRadioOptionElement } from '../radio-option'
 import {
   defineCustomElement,
   getAttribute,
+  NectaryElement,
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -18,16 +19,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-radio', class extends HTMLElement {
+defineCustomElement('sinch-radio', class extends NectaryElement {
   #$slot: HTMLSlotElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
     shadowRoot.addEventListener('keydown', this.#onOptionKeyDown)

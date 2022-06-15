@@ -1,4 +1,4 @@
-import { getIntegerAttribute, updateAttribute, updateIntegerAttribute } from '../utils'
+import { getIntegerAttribute, NectaryElement, updateAttribute, updateIntegerAttribute } from '../utils'
 import illustrationStylesHtml from './illustration-styles.html'
 
 const DEFAULT_SIZE = 256
@@ -10,15 +10,13 @@ export const createIllustrationClass = (templateHTML: string) => {
 
   template.innerHTML = illustrationStylesHtml + templateHTML
 
-  return class extends HTMLElement {
+  return class extends NectaryElement {
     $svg: SVGElement
 
     constructor() {
       super()
 
-      const shadowRoot = this.attachShadow({
-        mode: 'closed',
-      })
+      const shadowRoot = this.attachShadow()
 
       shadowRoot.appendChild(template.content.cloneNode(true))
 

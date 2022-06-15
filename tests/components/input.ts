@@ -251,8 +251,6 @@ test('input screenshots', runScreenshotTests('sinch-input', [
       await $.focus()
       yield { name: 'focus' }
 
-      await expect($eval((el) => el === document.activeElement)).resolves.toBe(true)
-
       await $.type('Filled text')
       yield { name: 'filled' }
 

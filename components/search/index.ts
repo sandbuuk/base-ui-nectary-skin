@@ -5,6 +5,7 @@ import {
   getAttribute,
   getIntegerAttribute,
   getRect,
+  NectaryElement,
   updateAttribute,
   updateIntegerAttribute,
 } from '../utils'
@@ -32,7 +33,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-search', class extends HTMLElement {
+defineCustomElement('sinch-search', class extends NectaryElement {
   #$label: HTMLLabelElement
   #$input: HTMLInputElement
   #selectionStart: number | null = null
@@ -41,17 +42,16 @@ defineCustomElement('sinch-search', class extends HTMLElement {
   #$listbox: HTMLElement
   #$clear: HTMLButtonElement
   #isPendingDk = false
+  #$sh: ShadowRoot
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#$sh = shadowRoot
     this.#$input = shadowRoot.querySelector('#input')!
     this.#$label = shadowRoot.querySelector('#label')!
     this.#$listbox = shadowRoot.querySelector('#listbox')!
@@ -332,7 +332,7 @@ defineCustomElement('sinch-search', class extends HTMLElement {
   #onExpand() {
     const elems = this.#getOptionElements()
 
-    if (elems.length === 0 || document.activeElement !== this) {
+    if (elems.length === 0 || (this.getRootNode() as Document).activeElement !== this) {
       this.#onCollapse()
 
       return

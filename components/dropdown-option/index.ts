@@ -1,4 +1,12 @@
-import { defineCustomElement, getAttribute, getBooleanAttribute, isAttrTrue, updateAttribute, updateBooleanAttribute } from '../utils'
+import {
+  defineCustomElement,
+  getAttribute,
+  getBooleanAttribute,
+  isAttrTrue,
+  NectaryElement,
+  updateAttribute,
+  updateBooleanAttribute,
+} from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
@@ -6,16 +14,14 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-export class DropdownOption extends HTMLElement {
+export class DropdownOption extends NectaryElement {
   #$iconSlot: HTMLSlotElement
   #$content: HTMLSpanElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 

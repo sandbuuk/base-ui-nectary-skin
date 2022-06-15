@@ -5,6 +5,7 @@ import {
   getAttribute,
   updateBooleanAttribute,
   updateAttribute,
+  NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -14,30 +15,19 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-link', class extends HTMLElement {
+defineCustomElement('sinch-link', class extends NectaryElement {
   #$anchor: HTMLAnchorElement
   #$text: HTMLSpanElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-      delegatesFocus: true,
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$anchor = shadowRoot.querySelector('a')!
     this.#$text = shadowRoot.querySelector('span')!
-  }
-
-  connectedCallback() {
-    this.#$anchor.addEventListener('click', this.#onClick)
-  }
-
-  disconnectedCallback() {
-    this.#$anchor.removeEventListener('click', this.#onClick)
   }
 
   get text() {
@@ -89,13 +79,6 @@ defineCustomElement('sinch-link', class extends HTMLElement {
 
         break
       }
-    }
-  }
-
-  #onClick = (e: Event) => {
-    if (this.disabled) {
-      e.preventDefault()
-      e.stopPropagation()
     }
   }
 

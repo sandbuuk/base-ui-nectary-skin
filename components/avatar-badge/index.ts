@@ -2,6 +2,7 @@ import '../icons/cancel'
 import {
   defineCustomElement,
   getAttribute,
+  NectaryElement,
   setClass,
   updateAttribute,
 } from '../utils'
@@ -12,15 +13,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-avatar-badge', class extends HTMLElement {
+defineCustomElement('sinch-avatar-badge', class extends NectaryElement {
   #$text: HTMLSpanElement
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({
-      mode: 'closed',
-    })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
