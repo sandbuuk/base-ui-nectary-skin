@@ -314,7 +314,9 @@ test('input screenshots', runScreenshotTests('sinch-input', [
       ])
 
       // Necessary to normalize "type" behaviour
-      await $.click()
+      const bb = (await $.boundingBox())!
+
+      await page.mouse.click(bb.x + bb.width / 2, bb.y + bb.height / 2)
       await $.type('X')
 
       expect(

@@ -42,7 +42,6 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   #$listbox: HTMLElement
   #$clear: HTMLButtonElement
   #isPendingDk = false
-  #$sh: ShadowRoot
 
   constructor() {
     super()
@@ -51,7 +50,6 @@ defineCustomElement('sinch-search', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$sh = shadowRoot
     this.#$input = shadowRoot.querySelector('#input')!
     this.#$label = shadowRoot.querySelector('#label')!
     this.#$listbox = shadowRoot.querySelector('#listbox')!
