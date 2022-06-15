@@ -1,3 +1,8 @@
+## v0.24.0
+
+* 💥 add `setNectaryRegistry` mandatory call to define registry for Nectary components
+* 🐞 fix components to work inside of ShadowRoot
+
 ## v0.23.0
 
 * 💥 move branded icons from `/icon-branded/` to `/icons-branded/` and prefix component names with `-branded-`
