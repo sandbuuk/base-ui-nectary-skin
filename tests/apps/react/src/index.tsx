@@ -1,5 +1,5 @@
 import '@webcomponents/scoped-custom-element-registry'
-import { getNectaryCustomRegistry } from '@sinch-engage/nectary/utils'
+import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
 import { render } from 'react-dom'
 import { App } from './App'
 import 'axe-core'
@@ -23,7 +23,10 @@ const createShadowRoot = (element: HTMLElement, registry: CustomElementRegistry)
   return appElement
 }
 
-const appElement = createShadowRoot(document.getElementById('app')!, getNectaryCustomRegistry())
+const registry = new CustomElementRegistry()
+const appElement = createShadowRoot(document.getElementById('app')!, registry)
+
+setNectaryRegistry(registry)
 
 render(
   <App/>,

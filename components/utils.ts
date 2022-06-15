@@ -25,13 +25,9 @@ export const defineCustomElement = (name: string, constructor: CustomElementCons
   }
 
   nectaryDefinitions.set(name, constructor)
-
-  if (customElements.get(name) == null) {
-    customElements.define(name, constructor)
-  }
 }
 
-export const defineNectaryElements = (registry: CustomElementRegistry) => {
+export const setNectaryRegistry = (registry: CustomElementRegistry): void => {
   if (nectaryRegistry !== null) {
     throw new Error('Nectary elements already registered')
   }
@@ -43,6 +39,10 @@ export const defineNectaryElements = (registry: CustomElementRegistry) => {
       nectaryRegistry.define(name, ctor)
     }
   }
+
+  nectaryDefinitions.clear()
+}
+
 }
 
 export type TEventHandler = (arg?: any) => void
