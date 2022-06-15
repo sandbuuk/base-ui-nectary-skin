@@ -31,7 +31,7 @@ Nectary needs a custom elements registry to work with, even if it's a global def
 ```js
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
 
-setNectaryRegistry(customElements)
+setNectaryRegistry(window.customElements)
 
 // App
 ```
