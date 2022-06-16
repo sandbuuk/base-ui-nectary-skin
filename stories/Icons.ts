@@ -1,7 +1,6 @@
 import { useRef } from '@storybook/addons'
 import type { TSinchIconElement, TSinchIconReact } from '@sinch-engage/nectary/icons/types'
 import type { Story, Meta } from '@storybook/html'
-import '@sinch-engage/nectary/theme.css'
 import '@sinch-engage/nectary/icons/arrow-back-ios'
 import '@sinch-engage/nectary/icons/arrow-forward-ios'
 import '@sinch-engage/nectary/icons/cancel'

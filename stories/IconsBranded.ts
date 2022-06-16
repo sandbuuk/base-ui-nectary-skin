@@ -1,7 +1,6 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '@sinch-engage/nectary/icons-branded/types'
 import type { Story, Meta } from '@storybook/html'
-import '@sinch-engage/nectary/theme.css'
 import '@sinch-engage/nectary/icons-branded/bell'
 import '@sinch-engage/nectary/icons-branded/home'
 import '@sinch-engage/nectary/icons-branded/contact'
