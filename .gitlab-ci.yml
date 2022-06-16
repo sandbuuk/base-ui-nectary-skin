@@ -24,7 +24,7 @@ lint:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - corepack enable
+    - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install
   script:
@@ -44,7 +44,7 @@ visual-tests-chromium:
       - .pnpm-store
     policy: pull
   before_script:
-    - corepack enable
+    - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install
   script:
@@ -70,7 +70,7 @@ visual-tests-firefox:
       - .pnpm-store
     policy: pull
   before_script:
-    - corepack enable
+    - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install
   script:
@@ -96,7 +96,7 @@ visual-tests-webkit:
       - .pnpm-store
     policy: pull
   before_script:
-    - corepack enable
+    - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
   script:
@@ -124,7 +124,7 @@ publish-components:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - corepack enable
+    - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
   script:
@@ -150,7 +150,7 @@ pages:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - corepack enable
+    - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
     - rm -rf .git/hooks/
