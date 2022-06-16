@@ -55,21 +55,21 @@
 :host([checked]:not([checked="false"]):not(:first-child)) #wrapper::before {
   content: "";
   width: 1px;
-  height: 100%;
   background-color: var(--sinch-color-stormy-500);
   position: absolute;
   left: 0;
-  top: 0;
+  top: -1px;
+  bottom: -1px;
 }
 
 :host([checked]:not([checked="false"]):not(:last-child)) #wrapper::after {
   content: "";
   width: 1px;
-  height: 100%;
   background-color: var(--sinch-color-stormy-500);
   position: absolute;
   right: 0;
-  top: 0;
+  top: -1px;
+  bottom: -1px;
 }
 
 #button {
@@ -111,6 +111,7 @@
 }
 
 :host([disabled]:not([disabled="false"])) #wrapper {
+  background-color: var(--sinch-color-snow-100);
   color: var(--sinch-color-stormy-100);
 
   --sinch-color-icon: var(--sinch-color-stormy-100);
