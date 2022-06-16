@@ -51,8 +51,6 @@ visual-tests-chromium:
     - pnpm install --frozen-lockfile --reporter append-only
   script:
     - pnpm --dir tests test:ci-chromium
-  after_script:
-    - find ./tests/test-results -type d -empty -delete
   artifacts:
     when: on_failure
     paths:
@@ -78,8 +76,6 @@ visual-tests-firefox:
     - pnpm install --frozen-lockfile --reporter append-only
   script:
     - pnpm --dir tests test:ci-firefox
-  after_script:
-    - find ./tests/test-results -type d -empty -delete
   artifacts:
     when: on_failure
     paths:
@@ -105,8 +101,6 @@ visual-tests-webkit:
     - pnpm install --frozen-lockfile --reporter append-only
   script:
     - pnpm --dir tests test:ci-webkit
-  after_script:
-    - find ./tests/test-results -type d -empty -delete
   artifacts:
     when: on_failure
     paths:
