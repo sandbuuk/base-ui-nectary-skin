@@ -1,6 +1,7 @@
 default:
   tags:
-    - staging
+    - application
+    - saas
 
 stages:
   - lint
@@ -16,16 +17,18 @@ lint:
   cache:
     key:
       files:
-        - yarn.lock
+        - pnpm-lock.yaml
       prefix: cache
     paths:
-      - .yarn/
+      - .pnpm-store
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install
   script:
-    - yarn lint
+    - pnpm lint
 
 visual-tests-chromium:
   stage: test
@@ -35,15 +38,17 @@ visual-tests-chromium:
   cache:
     key:
       files:
-        - yarn.lock
+        - pnpm-lock.yaml
       prefix: cache
     paths:
-      - .yarn/
+      - .pnpm-store
     policy: pull
   before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install
   script:
-    - yarn --cwd=tests test:ci-chromium
+    - pnpm --dir tests test:ci-chromium
   after_script:
     - find ./tests/test-results -type d -empty -delete
   artifacts:
@@ -59,15 +64,17 @@ visual-tests-firefox:
   cache:
     key:
       files:
-        - yarn.lock
+        - pnpm-lock.yaml
       prefix: cache
     paths:
-      - .yarn/
+      - .pnpm-store
     policy: pull
   before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install
   script:
-    - yarn --cwd=tests test:ci-firefox
+    - pnpm --dir tests test:ci-firefox
   after_script:
     - find ./tests/test-results -type d -empty -delete
   artifacts:
@@ -83,15 +90,17 @@ visual-tests-webkit:
   cache:
     key:
       files:
-        - yarn.lock
+        - pnpm-lock.yaml
       prefix: cache
     paths:
-      - .yarn/
+      - .pnpm-store
     policy: pull
   before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
   script:
-    - yarn --cwd=tests test:ci-webkit
+    - pnpm --dir tests test:ci-webkit
   after_script:
     - find ./tests/test-results -type d -empty -delete
   artifacts:
@@ -107,17 +116,19 @@ publish-components:
   cache:
     key:
       files:
-        - yarn.lock
+        - pnpm-lock.yaml
       prefix: cache
     paths:
-      - .yarn/
+      - .pnpm-store
     policy: pull
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
   script:
-    - yarn --cwd=components build
+    - pnpm --dir components build
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish components/
     - node ./scripts/slack-changelog.js
@@ -131,18 +142,20 @@ pages:
   cache:
     key:
       files:
-        - yarn.lock
+        - pnpm-lock.yaml
       prefix: cache
     paths:
-      - .yarn/
+      - .pnpm-store
     policy: pull
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
     - rm -rf .git/hooks/
   script:
-    - yarn storybook:build
+    - pnpm storybook:build
     - git config --global user.email ci@sinch.com
     - git config --global user.name Bot
     - git checkout --orphan storybook
