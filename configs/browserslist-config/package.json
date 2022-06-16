@@ -1,8 +1,0 @@
-{
-  "name": "@saas/browserslist-config",
-  "version": "1.0.0",
-  "main": "index.js",
-  "publishConfig": {
-    "registry": "https://nexus.int.clxnetworks.net/repository/sinch_npm/"
-  }
-}
