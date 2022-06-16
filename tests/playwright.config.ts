@@ -80,7 +80,7 @@ const config: PlaywrightTestConfig = {
     threshold: 60000,
   },
   fullyParallel: true,
-  workers: process.env.CI != null ? 2 : 0,
+  workers: process.env.CI != null ? 1 : 0,
   // retries: 1,
   maxFailures: process.env.CI != null ? 1 : 0,
   expect: {
