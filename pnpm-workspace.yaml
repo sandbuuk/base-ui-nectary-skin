@@ -1,0 +1,6 @@
+packages:
+  - "components/"
+  - "configs/*"
+  - "libs/*"
+  - "tests/"
+  - "tests/apps/*"
