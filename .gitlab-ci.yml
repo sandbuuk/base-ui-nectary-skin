@@ -24,6 +24,7 @@ lint:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
+    - free -h
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
