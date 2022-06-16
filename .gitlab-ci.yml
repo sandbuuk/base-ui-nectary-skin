@@ -9,54 +9,54 @@ stages:
   - build
   - deploy
 
-lint:
-  image: node:16
-  stage: lint
-  except:
-    - tags
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - free -h
-    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --reporter silent
-  script:
-    - pnpm lint
+# lint:
+#   image: node:16
+#   stage: lint
+#   except:
+#     - tags
+#   cache:
+#     key:
+#       files:
+#         - pnpm-lock.yaml
+#       prefix: cache
+#     paths:
+#       - .pnpm-store
+#   variables:
+#     GIT_LFS_SKIP_SMUDGE: 1
+#   before_script:
+#     - free -h
+#     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+#     - npm install --no-audit --no-fund --global pnpm
+#     - pnpm config set store-dir .pnpm-store
+#     - pnpm install --reporter silent
+#   script:
+#     - pnpm lint
 
-visual-tests-chromium:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.22.2
-  except:
-    - tags
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  before_script:
-    - free -h
-    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter silent
-  script:
-    - pnpm --dir tests test:ci-chromium
-  artifacts:
-    when: on_failure
-    paths:
-      - tests/test-results
+# visual-tests-chromium:
+#   stage: test
+#   image: mcr.microsoft.com/playwright:v1.22.2
+#   except:
+#     - tags
+#   cache:
+#     key:
+#       files:
+#         - pnpm-lock.yaml
+#       prefix: cache
+#     paths:
+#       - .pnpm-store
+#     policy: pull
+#   before_script:
+#     - free -h
+#     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+#     - npm install --no-audit --no-fund --global pnpm
+#     - pnpm config set store-dir .pnpm-store
+#     - pnpm install --frozen-lockfile --reporter silent
+#   script:
+#     - pnpm --dir tests test:ci-chromium
+#   artifacts:
+#     when: on_failure
+#     paths:
+#       - tests/test-results
 
 visual-tests-firefox:
   stage: test
@@ -84,31 +84,31 @@ visual-tests-firefox:
     paths:
       - tests/test-results
 
-visual-tests-webkit:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.22.2
-  except:
-    - tags
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  before_script:
-    - free -h
-    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter silent
-  script:
-    - pnpm --dir tests test:ci-webkit
-  artifacts:
-    when: on_failure
-    paths:
-      - tests/test-results
+# visual-tests-webkit:
+#   stage: test
+#   image: mcr.microsoft.com/playwright:v1.22.2
+#   except:
+#     - tags
+#   cache:
+#     key:
+#       files:
+#         - pnpm-lock.yaml
+#       prefix: cache
+#     paths:
+#       - .pnpm-store
+#     policy: pull
+#   before_script:
+#     - free -h
+#     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+#     - npm install --no-audit --no-fund --global pnpm
+#     - pnpm config set store-dir .pnpm-store
+#     - pnpm install --frozen-lockfile --reporter silent
+#   script:
+#     - pnpm --dir tests test:ci-webkit
+#   artifacts:
+#     when: on_failure
+#     paths:
+#       - tests/test-results
 
 publish-components:
   stage: deploy
