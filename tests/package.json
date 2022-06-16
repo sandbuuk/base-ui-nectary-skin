@@ -24,7 +24,7 @@
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.0",
     "@playwright/test": "1.22.2",
-    "@sinch-engage/nectary": "*",
+    "@sinch-engage/nectary": "workspace:@sinch-engage/nectary@*",
     "@types/node": "^17.0.14",
     "axe-core": "^4.3.5",
     "babel-loader": "^8.2.3",
