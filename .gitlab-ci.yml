@@ -24,6 +24,7 @@ lint:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
+    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install
@@ -44,6 +45,7 @@ visual-tests-chromium:
       - .pnpm-store
     policy: pull
   before_script:
+    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install
@@ -70,6 +72,7 @@ visual-tests-firefox:
       - .pnpm-store
     policy: pull
   before_script:
+    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install
@@ -96,6 +99,7 @@ visual-tests-webkit:
       - .pnpm-store
     policy: pull
   before_script:
+    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
@@ -124,6 +128,7 @@ publish-components:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
+    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
@@ -150,6 +155,7 @@ pages:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
+    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
