@@ -10,7 +10,6 @@
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@saas/browserslist-config": "workspace:@saas/browserslist-config@*",
-    "@saas/typescript-config": "workspace:@saas/typescript-config@*",
     "@sinch-engage/nectary": "*",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addons": "^6.3.12",
