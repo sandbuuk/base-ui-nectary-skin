@@ -27,7 +27,7 @@ lint:
   script:
     - yarn lint
 
-visual-tests:
+visual-tests-chromium:
   stage: test
   image: mcr.microsoft.com/playwright:v1.22.2
   except:
@@ -43,7 +43,55 @@ visual-tests:
   before_script:
     - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
   script:
-    - yarn --cwd=tests test:ci
+    - yarn --cwd=tests test:ci-chromium
+  after_script:
+    - find ./tests/test-results -type d -empty -delete
+  artifacts:
+    when: on_failure
+    paths:
+      - tests/test-results
+
+visual-tests-firefox:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.22.2
+  except:
+    - tags
+  cache:
+    key:
+      files:
+        - yarn.lock
+      prefix: cache
+    paths:
+      - .yarn/
+    policy: pull
+  before_script:
+    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+  script:
+    - yarn --cwd=tests test:ci-firefox
+  after_script:
+    - find ./tests/test-results -type d -empty -delete
+  artifacts:
+    when: on_failure
+    paths:
+      - tests/test-results
+
+visual-tests-webkit:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.22.2
+  except:
+    - tags
+  cache:
+    key:
+      files:
+        - yarn.lock
+      prefix: cache
+    paths:
+      - .yarn/
+    policy: pull
+  before_script:
+    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+  script:
+    - yarn --cwd=tests test:ci-webkit
   after_script:
     - find ./tests/test-results -type d -empty -delete
   artifacts:
