@@ -88,6 +88,7 @@ const config: PlaywrightTestConfig = {
       threshold: 0.02,
     },
   },
+  reporter: 'list',
 }
 
 export default config
