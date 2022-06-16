@@ -28,7 +28,7 @@ lint:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --reporter append-only
+    - pnpm install --reporter silent
   script:
     - pnpm lint
 
@@ -46,10 +46,11 @@ visual-tests-chromium:
       - .pnpm-store
     policy: pull
   before_script:
+    - free -h
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter append-only
+    - pnpm install --frozen-lockfile --reporter silent
   script:
     - pnpm --dir tests test:ci-chromium
   artifacts:
@@ -71,10 +72,11 @@ visual-tests-firefox:
       - .pnpm-store
     policy: pull
   before_script:
+    - free -h
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter append-only
+    - pnpm install --frozen-lockfile --reporter silent
   script:
     - pnpm --dir tests test:ci-firefox
   artifacts:
@@ -96,10 +98,11 @@ visual-tests-webkit:
       - .pnpm-store
     policy: pull
   before_script:
+    - free -h
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter append-only
+    - pnpm install --frozen-lockfile --reporter silent
   script:
     - pnpm --dir tests test:ci-webkit
   artifacts:
@@ -126,7 +129,7 @@ publish-components:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter append-only
+    - pnpm install --frozen-lockfile --reporter silent
   script:
     - pnpm --dir components build
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
@@ -153,7 +156,7 @@ pages:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter append-only
+    - pnpm install --frozen-lockfile --reporter silent
     - rm -rf .git/hooks/
   script:
     - pnpm storybook:build
