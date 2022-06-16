@@ -26,7 +26,7 @@ lint:
   before_script:
     - free -h
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-    - npm install --global pnpm
+    - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --reporter silent
   script:
@@ -48,7 +48,7 @@ visual-tests-chromium:
   before_script:
     - free -h
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-    - npm install --global pnpm
+    - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --reporter silent
   script:
@@ -74,7 +74,7 @@ visual-tests-firefox:
   before_script:
     - free -h
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-    - npm install --global pnpm
+    - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --reporter silent
   script:
@@ -100,7 +100,7 @@ visual-tests-webkit:
   before_script:
     - free -h
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-    - npm install --global pnpm
+    - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --reporter silent
   script:
@@ -127,7 +127,7 @@ publish-components:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-    - npm install --global pnpm
+    - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --reporter silent
   script:
@@ -154,7 +154,7 @@ pages:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-    - npm install --global pnpm
+    - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --reporter silent
     - rm -rf .git/hooks/
