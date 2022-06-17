@@ -1,7 +1,8 @@
 default:
   tags:
-    - application
-    - saas
+    - staging
+#    - application
+#    - saas
 
 stages:
   - lint
@@ -60,7 +61,7 @@ visual-tests:
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
   script:
-    - DEBUG=pw:api pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
+    - pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
   artifacts:
     when: on_failure
     paths:
