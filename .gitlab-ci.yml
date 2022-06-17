@@ -25,7 +25,7 @@ lint:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+#    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install
@@ -59,7 +59,7 @@ visual-tests:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile
+    - pnpm install --frozen-lockfile --offline
   script:
     - pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
   artifacts:
