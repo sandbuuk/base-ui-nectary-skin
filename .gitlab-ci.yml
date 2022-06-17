@@ -52,15 +52,15 @@ visual-tests:
           # - webkit
         FRAMEWORK:
           - react
-          # - vue
-          # - angular
+          - vue
+          - angular
   before_script:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
   script:
-    - DEBUG=pw:api pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
+    - pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
   artifacts:
     when: on_failure
     paths:
