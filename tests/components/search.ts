@@ -154,22 +154,30 @@ test('search screenshots', runScreenshotTests('sinch-search', [
   {
     name: 'keyboard',
     url: withValue,
-    async *fn({ $, $eval }) {
+    async *fn({ $, $eval, page }) {
       await $.focus()
 
-      yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
+      const rect = await $eval((el) => el.dropdownRect)
+
+      yield { name: 'open', includeRects: [rect] }
 
       await $.press('ArrowDown')
-      yield { name: 'down', includeRects: [await $eval((el) => el.dropdownRect)] }
+      await page.waitForTimeout(50)
+      yield { name: 'down', includeRects: [rect] }
 
       await $.press('ArrowDown')
+      await page.waitForTimeout(50)
       await $.press('ArrowDown')
+      await page.waitForTimeout(50)
       await $.press('ArrowDown')
-      yield { name: 'down-down', includeRects: [await $eval((el) => el.dropdownRect)] }
+      await page.waitForTimeout(50)
+      yield { name: 'down-down', includeRects: [rect] }
 
       await $.press('ArrowUp')
+      await page.waitForTimeout(50)
       await $.press('ArrowUp')
-      yield { name: 'up-up', includeRects: [await $eval((el) => el.dropdownRect)] }
+      await page.waitForTimeout(50)
+      yield { name: 'up-up', includeRects: [rect] }
     },
   },
   {

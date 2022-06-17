@@ -5,7 +5,7 @@
   --sinch-size-icon: 32px;
 }
 
-input {
+button {
   all: initial;
   position: absolute;
   left: 0;
@@ -16,8 +16,8 @@ input {
   cursor: pointer;
 }
 
-input:focus ~ sinch-icon-expand-less,
-input:focus ~ sinch-icon-expand-more {
+button:focus ~ sinch-icon-expand-less,
+button:focus ~ sinch-icon-expand-more {
   border-radius: 4px;
   box-shadow: 0 0 0 1px var(--sinch-color-stormy-500) inset;
 }
@@ -39,6 +39,6 @@ input:focus ~ sinch-icon-expand-more {
 }
 </style>
 
-<input type="checkbox"/>
+<button></button>
 <sinch-icon-expand-less id="up"></sinch-icon-expand-less>
 <sinch-icon-expand-more id="down"></sinch-icon-expand-more>

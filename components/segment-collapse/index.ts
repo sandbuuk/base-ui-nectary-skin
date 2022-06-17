@@ -3,7 +3,6 @@ import '../icons/expand-more'
 import {
   defineCustomElement,
   getBooleanAttribute,
-  isAttrTrue,
   NectaryElement,
   updateBooleanAttribute,
 } from '../utils'
@@ -16,7 +15,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
-  #$input: HTMLInputElement
+  #$button: HTMLElement
 
   constructor() {
     super()
@@ -25,16 +24,16 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$input = shadowRoot.querySelector('input')!
+    this.#$button = shadowRoot.querySelector('button')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
-    this.#$input.addEventListener('input', this.onCheckboxInput)
+    this.#$button.addEventListener('click', this.onClick)
   }
 
   disconnectedCallback() {
-    this.#$input.removeEventListener('input', this.onCheckboxInput)
+    this.#$button.removeEventListener('click', this.onClick)
   }
 
   get type() {
@@ -43,20 +42,6 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
 
   get nodeName() {
     return 'input'
-  }
-
-  static get observedAttributes() {
-    return ['value']
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'value': {
-        this.#$input.checked = isAttrTrue(newVal)
-
-        break
-      }
-    }
   }
 
   set value(isChecked: boolean) {
@@ -68,25 +53,21 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
   }
 
   focus() {
-    this.#$input.focus()
+    this.#$button.focus()
   }
 
   blur() {
-    this.#$input.blur()
+    this.#$button.blur()
   }
 
-  onCheckboxInput = (e: Event) => {
+  onClick = (e: Event) => {
     e.stopPropagation()
-
-    const isChecked = this.#$input.checked
-
-    this.#$input.checked = this.value
 
     this.dispatchEvent(
       new CustomEvent(
         'change',
         {
-          detail: isChecked,
+          detail: !this.value,
           bubbles: true,
         }
       )
