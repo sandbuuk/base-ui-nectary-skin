@@ -42,7 +42,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-dropdown', class extends NectaryElement {
   #$target: HTMLElement
   #$optionSlot: HTMLSlotElement
-  #$listbox: HTMLElement
+  #$listbox: HTMLDialogElement
   #isConnected = false
 
   constructor() {

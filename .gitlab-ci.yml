@@ -1,123 +1,93 @@
 default:
   tags:
-    - staging
+    - application
+    - saas
 
 stages:
   - lint
-  - test
+  # - test
   - build
   - deploy
 
 lint:
   image: node:16
   stage: lint
-  except:
-    - tags
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   cache:
     key:
       files:
-        - yarn.lock
+        - pnpm-lock.yaml
       prefix: cache
     paths:
-      - .yarn/
+      - .pnpm-store
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    - npm install --no-audit --no-fund --global pnpm
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install
   script:
-    - yarn lint
+    - pnpm lint
 
-visual-tests-chromium:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.22.2
-  except:
-    - tags
-  cache:
-    key:
-      files:
-        - yarn.lock
-      prefix: cache
-    paths:
-      - .yarn/
-    policy: pull
-  before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
-  script:
-    - yarn --cwd=tests test:ci-chromium
-  after_script:
-    - find ./tests/test-results -type d -empty -delete
-  artifacts:
-    when: on_failure
-    paths:
-      - tests/test-results
-
-visual-tests-firefox:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.22.2
-  except:
-    - tags
-  cache:
-    key:
-      files:
-        - yarn.lock
-      prefix: cache
-    paths:
-      - .yarn/
-    policy: pull
-  before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
-  script:
-    - yarn --cwd=tests test:ci-firefox
-  after_script:
-    - find ./tests/test-results -type d -empty -delete
-  artifacts:
-    when: on_failure
-    paths:
-      - tests/test-results
-
-visual-tests-webkit:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.22.2
-  except:
-    - tags
-  cache:
-    key:
-      files:
-        - yarn.lock
-      prefix: cache
-    paths:
-      - .yarn/
-    policy: pull
-  before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
-  script:
-    - yarn --cwd=tests test:ci-webkit
-  after_script:
-    - find ./tests/test-results -type d -empty -delete
-  artifacts:
-    when: on_failure
-    paths:
-      - tests/test-results
+# visual-tests:
+#   stage: test
+#   image: mcr.microsoft.com/playwright:v1.22.2
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+#   cache:
+#     key:
+#       files:
+#         - pnpm-lock.yaml
+#       prefix: cache
+#     paths:
+#       - .pnpm-store
+#     policy: pull
+#   parallel:
+#     matrix:
+#       - BROWSER:
+#           - chromium
+#           - firefox
+#           - webkit
+#         FRAMEWORK:
+#           - react
+#           - vue
+#           - angular
+#   before_script:
+#     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+#     - npm install --no-audit --no-fund --global pnpm
+#     - pnpm config set store-dir .pnpm-store
+#     - pnpm install --frozen-lockfile
+#   script:
+#     - DEBUG=pw:api pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
+#   artifacts:
+#     when: on_failure
+#     paths:
+#       - tests/test-results
 
 publish-components:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_TAG =~ /^components@/
+    - if: $CI_COMMIT_TAG =~ /^components@/ && $CI_COMMIT_BRANCH == "main"
   image: node:16
   cache:
     key:
       files:
-        - yarn.lock
+        - pnpm-lock.yaml
       prefix: cache
     paths:
-      - .yarn/
+      - .pnpm-store
     policy: pull
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    - npm install --no-audit --no-fund --global pnpm
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
   script:
-    - yarn --cwd=components build
+    - pnpm --dir components build
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish components/
     - node ./scripts/slack-changelog.js
@@ -126,23 +96,26 @@ pages:
   stage: deploy
   image: node:16
   rules:
-    - if: $CI_COMMIT_TAG =~ /^components@/
-    - if: $CI_COMMIT_TAG =~ /^storybook$/
+    - if: $CI_COMMIT_TAG =~ /^components@/ && $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_TAG == "storybook" && $CI_COMMIT_BRANCH == "main"
   cache:
     key:
       files:
-        - yarn.lock
+        - pnpm-lock.yaml
       prefix: cache
     paths:
-      - .yarn/
+      - .pnpm-store
     policy: pull
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - yarn install --cache-folder $PWD/.yarn --frozen-lockfile
+    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    - npm install --no-audit --no-fund --global pnpm
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
     - rm -rf .git/hooks/
   script:
-    - yarn storybook:build
+    - pnpm storybook:build
     - git config --global user.email ci@sinch.com
     - git config --global user.name Bot
     - git checkout --orphan storybook

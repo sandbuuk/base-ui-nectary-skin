@@ -3,17 +3,27 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@sinch-engage/nectary": "*",
+    "@sinch-engage/nectary": "workspace:@sinch-engage/nectary@*",
     "@webcomponents/scoped-custom-element-registry": "^0.0.5",
     "axe-core": "^4.3.5",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@saas/html-minify-loader": "workspace:@saas/html-minify-loader@*",
     "@types/react-dom": "^17.0.0",
     "@types/react": "^17.0.0",
-    "@saas/html-minify-loader": "^0.0.0",
-    "html-webpack-plugin": "^5.5.0"
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "raw-loader": "^4.0.2",
+    "style-loader": "^3.3.1",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0",
+    "webpack": "^5.20.0"
   }
 }

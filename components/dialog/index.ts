@@ -20,7 +20,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-dialog', class extends NectaryElement {
-  #$dialog: HTMLElement
+  #$dialog: HTMLDialogElement
   #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
   #isConnected = false

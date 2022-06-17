@@ -105,44 +105,34 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
     ]
 
     const it = piAll(tests.map((t) => async () => {
-      let numRetries = 0
+      const page = pages.shift()!
 
-      while (true) {
-        const page = pages.shift()!
+      try {
+        await page.goto(t.url, { waitUntil: 'networkidle' })
+        await page.waitForSelector(elementSelector, { state: 'attached' })
+        await page.evaluate(() => document.fonts.ready)
 
-        try {
-          await page.goto(t.url, { waitUntil: 'networkidle' })
-          await page.waitForSelector(elementSelector, { state: 'attached' })
-          await page.evaluate(() => document.fonts.ready)
+        // Optionally subscribe to page console output
+        // page.on('console', (msg) => console.log(msg.text()))
+        // page.on('pageerror', (e) => console.log(e))
 
-          // Optionally subscribe to page console output
-          // page.on('console', (msg) => console.log(msg.text()))
-          // page.on('pageerror', (e) => console.log(e))
+        const locator = page.locator(elementSelector)
 
-          const locator = page.locator(elementSelector)
+        for await (const { name, include = [], includeRects = [] } of t.fn({ page, $: locator, $eval: makeEval<T>(locator) })) {
+          const rects = await getRects([locator, ...include])
+          const clip = mergeBoundingBox(rects.concat(includeRects))
+          const screenshotName = `${t.name}-${name}.png`
 
-          for await (const { name, include = [], includeRects = [] } of t.fn({ page, $: locator, $eval: makeEval<T>(locator) })) {
-            const rects = await getRects([locator, ...include])
-            const clip = mergeBoundingBox(rects.concat(includeRects))
-            const screenshotName = `${t.name}-${name}.png`
-
-            if (clip == null) {
-              throw new Error('Cannot get locator bounding box')
-            }
-
-            const sc = await page.screenshot({ clip, animations: 'disabled', fullPage: true })
-
-            expect(sc, name).toMatchSnapshot(screenshotName)
+          if (clip == null) {
+            throw new Error('Cannot get locator bounding box')
           }
 
-          break
-        } catch (e) {
-          if (++numRetries > 1) {
-            throw (e)
-          }
-        } finally {
-          pages.push(page)
+          const sc = await page.screenshot({ clip, animations: 'disabled', fullPage: true })
+
+          expect(sc, name).toMatchSnapshot(screenshotName)
         }
+      } finally {
+        pages.push(page)
       }
     }), pages.length)
 

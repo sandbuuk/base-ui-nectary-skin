@@ -80,14 +80,15 @@ const config: PlaywrightTestConfig = {
     threshold: 60000,
   },
   fullyParallel: true,
-  workers: process.env.CI != null ? 2 : 0,
-  // retries: 1,
+  workers: process.env.CI != null ? 1 : 3,
+  retries: 1,
   maxFailures: process.env.CI != null ? 1 : 0,
   expect: {
     toMatchSnapshot: {
       threshold: 0.02,
     },
   },
+  reporter: 'list',
 }
 
 export default config

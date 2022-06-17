@@ -22,7 +22,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-popover', class extends NectaryElement {
   #$target: HTMLButtonElement
-  #$dialog: HTMLElement
+  #$dialog: HTMLDialogElement
   #isConnected = false
 
   constructor() {

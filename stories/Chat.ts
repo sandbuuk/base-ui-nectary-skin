@@ -1,6 +1,5 @@
 import { useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
-import '@sinch-engage/nectary/theme.css'
 import '@sinch-engage/nectary/chat'
 import '@sinch-engage/nectary/chat-block'
 import '@sinch-engage/nectary/chat-bubble'

@@ -1,4 +1,3 @@
-// https://eslint.org/docs/rules/
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -9,6 +8,37 @@ module.exports = {
     es2021: true,
     browser: true,
     node: true,
+  },
+  plugins: [
+    'import',
+    'node',
+  ],
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': [
+        '.ts',
+        '.tsx',
+        '.js',
+        '.jsx',
+      ],
+    },
+    'import/extensions': [
+      '.ts',
+      '.tsx',
+      '.js',
+      '.jsx',
+    ],
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+      node: {
+        extensions: [
+          '.js',
+          '.jsx',
+        ],
+      },
+    },
   },
   rules: {
     'getter-return': 2,
@@ -329,5 +359,168 @@ module.exports = {
       SwitchCase: 1,
       flatTernaryExpressions: true,
     }],
+    'import/no-unresolved': 2,
+    'import/no-absolute-path': 2,
+    'import/no-useless-path-segments': 2,
+    'import/export': 2,
+    'import/no-extraneous-dependencies': 2,
+    'import/first': 2,
+    'import/no-duplicates': 2,
+    'import/order': [2, {
+      alphabetize: {
+        order: 'asc',
+        caseInsensitive: false,
+      },
+      groups: ['builtin', 'external', 'parent', 'sibling', 'index', 'type'],
+    }],
+    'node/handle-callback-err': 2,
+    'node/no-deprecated-api': [2, {
+      version: '>=14',
+    }],
+    'node/no-extraneous-require': 2,
+    'node/no-path-concat': 2,
+    'node/no-sync': 2,
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+      plugins: [
+        '@typescript-eslint',
+      ],
+      rules: {
+        '@typescript-eslint/adjacent-overload-signatures': 2,
+        '@typescript-eslint/array-type': [2, {
+          default: 'array',
+          readonly: 'array',
+        }],
+        indent: 0,
+        '@typescript-eslint/indent': [2, 2, {
+          ignoredNodes: ['JSXElement', 'JSXElement > *', 'JSXAttribute', 'JSXIdentifier', 'JSXNamespacedName', 'JSXMemberExpression', 'JSXSpreadAttribute', 'JSXExpressionContainer', 'JSXOpeningElement', 'JSXClosingElement', 'JSXText', 'JSXEmptyExpression', 'JSXSpreadChild', 'TSIntersectionType'],
+          SwitchCase: 1,
+          flatTernaryExpressions: true,
+        }],
+        '@typescript-eslint/member-delimiter-style': [2, {
+          multiline: {
+            delimiter: 'comma',
+            requireLast: true,
+          },
+          singleline: {
+            delimiter: 'comma',
+            requireLast: false,
+          },
+        }],
+        '@typescript-eslint/type-annotation-spacing': [2, {
+          before: false,
+          after: true,
+          overrides: {
+            arrow: {
+              before: true,
+              after: true,
+            },
+          },
+        }],
+        // '@typescript-eslint/consistent-type-definitions': [2, 'type'],
+        '@typescript-eslint/await-thenable': 2,
+        '@typescript-eslint/no-floating-promises': 2,
+        '@typescript-eslint/consistent-type-imports': [2, { prefer: 'type-imports' }],
+        'no-redeclare': 0,
+        '@typescript-eslint/no-redeclare': 2,
+        'no-unused-vars': 0,
+        '@typescript-eslint/no-unused-vars': [2, {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        }],
+        'no-use-before-define': 0,
+        '@typescript-eslint/no-use-before-define': 2,
+        semi: 'off',
+        '@typescript-eslint/semi': [2, 'never'],
+        '@typescript-eslint/strict-boolean-expressions': [2, {
+          allowString: false,
+          allowNumber: false,
+          allowNullableObject: false,
+          allowNullableBoolean: false,
+          allowNullableString: false,
+          allowNullableNumber: false,
+          allowAny: false,
+        }],
+        'import/no-unresolved': 0,
+      },
+    },
+    {
+      files: ['*.tsx', '*.jsx'],
+      parserOptions: {
+        useJSXTextNode: true,
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      settings: {
+        react: {
+          version: '17',
+        },
+      },
+      plugins: [
+        'react',
+      ],
+      rules: {
+        'jsx-quotes': [2, 'prefer-double'],
+        'react/boolean-prop-naming': [2, {
+          rule: '^(is|has|should)[A-Z]([A-Za-z0-9]?)+',
+        }],
+        'react/forbid-component-props': [2, { forbid: ['className'] }],
+        'react/forbid-dom-props': 2,
+        'react/no-children-prop': 2,
+        'react/no-danger': 2,
+        'react/no-danger-with-children': 2,
+        'react/no-deprecated': 2,
+        'react/no-direct-mutation-state': 2,
+        'react/no-find-dom-node': 2,
+        'react/no-string-refs': 2,
+        'react/no-this-in-sfc': 2,
+        'react/no-unknown-property': 2,
+        'react/no-unsafe': 2,
+        'react/no-unused-state': 2,
+        'react/self-closing-comp': 2,
+        'react/style-prop-object': 2,
+        'react/void-dom-elements-no-children': 2,
+        'react/jsx-boolean-value': 2,
+        'react/jsx-child-element-spacing': 2,
+        'react/jsx-closing-bracket-location': 2,
+        'react/jsx-closing-tag-location': 2,
+        'react/jsx-curly-spacing': 2,
+        'react/jsx-equals-spacing': 2,
+        'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.tsx'] }],
+        'react/jsx-first-prop-new-line': [2, 'multiline-multiprop'],
+        'react/jsx-indent': [2, 2, {
+          indentLogicalExpressions: true,
+        }],
+        'react/jsx-indent-props': [2, 2],
+        'react/jsx-key': 2,
+        'react/jsx-max-props-per-line': [2, { maximum: 1, when: 'multiline' }],
+        'react/jsx-no-comment-textnodes': 2,
+        'react/jsx-no-duplicate-props': 2,
+        'react/jsx-no-undef': 2,
+        'react/jsx-props-no-multi-spaces': 2,
+        'react/jsx-tag-spacing': [2, {
+          closingSlash: 'never',
+          beforeSelfClosing: 'never',
+          afterOpening: 'never',
+          beforeClosing: 'never',
+        }],
+        'react/jsx-uses-vars': 2,
+        'react/jsx-wrap-multilines': [2, {
+          declaration: 'parens-new-line',
+          assignment: 'parens-new-line',
+          return: 'parens-new-line',
+          arrow: 'parens-new-line',
+          condition: 'parens-new-line',
+          logical: 'parens-new-line',
+          prop: 'parens-new-line',
+        }],
+      },
+    },
+  ],
 }

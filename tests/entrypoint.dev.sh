@@ -1,4 +1,5 @@
 #!/bin/sh
 
 fc-cache -f
-yarn --cwd=tests test:app-all && yarn --cwd=tests test:bash
+npm install --global pnpm
+(pnpm --dir tests test:app-all &) && pnpm --dir tests test:bash

@@ -1,6 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
-import '@sinch-engage/nectary/theme.css'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/help-outline'
 import '@sinch-engage/nectary/spinner'
