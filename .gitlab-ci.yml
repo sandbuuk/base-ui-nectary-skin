@@ -28,7 +28,7 @@ stages:
 #     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
 #     - npm install --no-audit --no-fund --global pnpm
 #     - pnpm config set store-dir .pnpm-store
-#     - pnpm install --reporter silent
+#     - pnpm install
 #   script:
 #     - pnpm lint
 
@@ -50,7 +50,7 @@ stages:
 #     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
 #     - npm install --no-audit --no-fund --global pnpm
 #     - pnpm config set store-dir .pnpm-store
-#     - pnpm install --frozen-lockfile --reporter silent
+#     - pnpm install --frozen-lockfile
 #   script:
 #     - pnpm --dir tests test:ci-chromium
 #   artifacts:
@@ -86,7 +86,7 @@ visual-tests:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter silent
+    - pnpm install --frozen-lockfile
   script:
     - pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
   artifacts:
@@ -112,7 +112,7 @@ visual-tests:
 #     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
 #     - npm install --no-audit --no-fund --global pnpm
 #     - pnpm config set store-dir .pnpm-store
-#     - pnpm install --frozen-lockfile --reporter silent
+#     - pnpm install --frozen-lockfile
 #   script:
 #     - pnpm --dir tests test:ci-webkit
 #   artifacts:
@@ -139,7 +139,7 @@ publish-components:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter silent
+    - pnpm install --frozen-lockfile
   script:
     - pnpm --dir components build
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
@@ -166,7 +166,7 @@ pages:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter silent
+    - pnpm install --frozen-lockfile
     - rm -rf .git/hooks/
   script:
     - pnpm storybook:build
