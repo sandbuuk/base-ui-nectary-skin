@@ -60,7 +60,7 @@ visual-tests:
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
   script:
-    - pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
+    - DEBUG=pw:api pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
   artifacts:
     when: on_failure
     paths:
