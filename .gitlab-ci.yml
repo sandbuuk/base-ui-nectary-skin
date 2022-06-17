@@ -14,8 +14,6 @@ lint:
   stage: lint
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  except:
-    - tags
   cache:
     key:
       files:
@@ -38,8 +36,6 @@ lint:
 #   image: mcr.microsoft.com/playwright:v1.22.2
 #   rules:
 #     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-#   except:
-#     - tags
 #   cache:
 #     key:
 #       files:
