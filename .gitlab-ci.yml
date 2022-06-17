@@ -58,7 +58,7 @@ stages:
 #     paths:
 #       - tests/test-results
 
-visual-tests-firefox:
+visual-tests:
   stage: test
   image: mcr.microsoft.com/playwright:v1.22.2
   except:
@@ -71,6 +71,16 @@ visual-tests-firefox:
     paths:
       - .pnpm-store
     policy: pull
+  parallel:
+    matrix:
+      - BROWSER:
+          - chromium
+          - firefox
+          - webkit
+        FRAMEWORK:
+          - react
+          - vue
+          - angular
   before_script:
     - free -h
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
@@ -78,7 +88,7 @@ visual-tests-firefox:
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --reporter silent
   script:
-    - pnpm --dir tests test:ci-firefox
+    - pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
   artifacts:
     when: on_failure
     paths:
