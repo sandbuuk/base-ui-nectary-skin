@@ -2,6 +2,7 @@
 
 * 🎉 move to the new GitLab
 * ➕ add `sinch-segmented-control` component
+* 🐞 add missing colors to `colors.json`
 
 ## v0.24.0
 
