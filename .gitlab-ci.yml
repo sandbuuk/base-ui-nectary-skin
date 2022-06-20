@@ -87,7 +87,7 @@ publish-components:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile
+    - pnpm install --frozen-lockfile --offline --reporter silent
   script:
     - pnpm --dir components build
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
@@ -114,7 +114,7 @@ pages:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile
+    - pnpm install --frozen-lockfile --offline --reporter silent
     - rm -rf .git/hooks/
   script:
     - pnpm storybook:build
