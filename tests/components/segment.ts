@@ -73,9 +73,9 @@ test('segment screenshots', runScreenshotTests('sinch-segment', [
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-segment-collapse-focus', 'sinch-segment-collapse-blur', 'sinch-segment-collapse-change')
 
-      await page.keyboard.press('Tab')
-      await page.keyboard.press('Space')
-      await page.keyboard.press('Tab')
+      await page.keyboard.press('Tab', { delay: 100 })
+      await page.keyboard.press('Space', { delay: 100 })
+      await page.keyboard.press('Tab', { delay: 100 })
 
       expect(
         await getAllEvents(page)

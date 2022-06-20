@@ -1,11 +1,15 @@
+variables:
+  GIT_DEPTH: 1
+
 default:
   tags:
-    - application
-    - saas
+    - staging
+#    - application
+#    - saas
 
 stages:
   - lint
-  # - test
+  - test
   - build
   - deploy
 
@@ -24,47 +28,45 @@ lint:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install
   script:
     - pnpm lint
 
-# visual-tests:
-#   stage: test
-#   image: mcr.microsoft.com/playwright:v1.22.2
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-#   cache:
-#     key:
-#       files:
-#         - pnpm-lock.yaml
-#       prefix: cache
-#     paths:
-#       - .pnpm-store
-#     policy: pull
-#   parallel:
-#     matrix:
-#       - BROWSER:
-#           - chromium
-#           - firefox
-#           - webkit
-#         FRAMEWORK:
-#           - react
-#           - vue
-#           - angular
-#   before_script:
-#     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-#     - npm install --no-audit --no-fund --global pnpm
-#     - pnpm config set store-dir .pnpm-store
-#     - pnpm install --frozen-lockfile
-#   script:
-#     - DEBUG=pw:api pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
-#   artifacts:
-#     when: on_failure
-#     paths:
-#       - tests/test-results
+visual-tests:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.22.2
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+      prefix: cache
+    paths:
+      - .pnpm-store
+    policy: pull
+  parallel:
+    matrix:
+      - BROWSER:
+          - chromium
+          - firefox
+          - webkit
+        FRAMEWORK:
+          - react
+          - vue
+          - angular
+  before_script:
+    - npm install --no-audit --no-fund --global pnpm
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile --offline --reporter silent
+  script:
+    - pnpm --dir tests test:ci-$BROWSER-$FRAMEWORK
+  artifacts:
+    when: on_failure
+    paths:
+      - tests/test-results
 
 publish-components:
   stage: deploy

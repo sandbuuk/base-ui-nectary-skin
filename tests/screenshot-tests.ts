@@ -108,7 +108,7 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
       const page = pages.shift()!
 
       try {
-        await page.goto(t.url, { waitUntil: 'networkidle' })
+        await page.goto(t.url)
         await page.waitForSelector(elementSelector, { state: 'attached' })
         await page.evaluate(() => document.fonts.ready)
 

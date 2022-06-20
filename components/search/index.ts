@@ -67,8 +67,8 @@ defineCustomElement('sinch-search', class extends NectaryElement {
     this.#$input.addEventListener('focus', this.#onInputFocus)
     this.#$input.addEventListener('blur', this.#onInputBlur)
     this.#$input.addEventListener('keydown', this.#onListboxKeyDown)
-    this.#$input.addEventListener('keypress', this.#onListboxKeyPress)
-    this.#$listbox.addEventListener('click', this.#onListboxClick)
+    this.#$input.addEventListener('keyup', this.#onListboxKeyUp)
+    this.#$listbox.addEventListener('mousedown', this.#onListboxClick)
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange)
     this.#$clear.addEventListener('mousedown', this.#onClearMouseDown)
     this.#$clear.addEventListener('click', this.#onClear)
@@ -80,8 +80,8 @@ defineCustomElement('sinch-search', class extends NectaryElement {
     this.#$input.removeEventListener('focus', this.#onInputFocus)
     this.#$input.removeEventListener('blur', this.#onInputBlur)
     this.#$input.removeEventListener('keydown', this.#onListboxKeyDown)
-    this.#$input.removeEventListener('keypress', this.#onListboxKeyPress)
-    this.#$listbox.removeEventListener('click', this.#onListboxClick)
+    this.#$input.removeEventListener('keyup', this.#onListboxKeyUp)
+    this.#$listbox.removeEventListener('mousedown', this.#onListboxClick)
     this.#$optionSlot.removeEventListener('slotchange', this.#onOptionSlotChange)
     this.#$clear.removeEventListener('mousedown', this.#onClearMouseDown)
     this.#$clear.removeEventListener('click', this.#onClear)
@@ -282,7 +282,7 @@ defineCustomElement('sinch-search', class extends NectaryElement {
     this.#onCollapse()
   }
 
-  #onListboxKeyPress = (e: KeyboardEvent) => {
+  #onListboxKeyUp = (e: KeyboardEvent) => {
     switch (e.code) {
       case 'Enter': {
         e.preventDefault()
