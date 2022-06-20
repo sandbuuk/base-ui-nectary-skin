@@ -3,6 +3,7 @@ import {
   attrValueToPixels,
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   getIntegerAttribute,
   getRect,
   NectaryElement,
@@ -42,6 +43,7 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   #$listbox: HTMLElement
   #$clear: HTMLButtonElement
   #isPendingDk = false
+  #sh: ShadowRoot
 
   constructor() {
     super()
@@ -50,6 +52,7 @@ defineCustomElement('sinch-search', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#sh = shadowRoot
     this.#$input = shadowRoot.querySelector('#input')!
     this.#$label = shadowRoot.querySelector('#label')!
     this.#$listbox = shadowRoot.querySelector('#listbox')!
@@ -303,13 +306,11 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   #onListboxKeyDown = (e: KeyboardEvent) => {
     switch (e.code) {
       case 'ArrowUp': {
-        e.preventDefault()
         this.#selectOption(this.#getPrevOption())
 
         break
       }
       case 'ArrowDown': {
-        e.preventDefault()
         this.#selectOption(this.#getNextOption())
 
         break
@@ -324,24 +325,32 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   }
 
   #onOptionSlotChange = () => {
+    const elems = this.#getOptionElements()
+
+    if (elems.length === 0) {
+      return this.#onCollapse()
+    }
+
     this.#onExpand()
   }
 
   #onExpand() {
-    const elems = this.#getOptionElements()
-
-    if (elems.length === 0 || (this.getRootNode() as Document).activeElement !== this) {
-      this.#onCollapse()
-
-      return
+    if (!this.#isOpen() && this.#sh.activeElement === this.#$input) {
+      this.#selectOption(this.#getFirstOption())
+      this.#setOpen(true)
     }
-
-    this.setAttribute('aria-expanded', 'true')
-    this.#selectOption(elems[0])
   }
 
   #onCollapse() {
-    this.setAttribute('aria-expanded', 'false')
+    this.#setOpen(false)
+  }
+
+  #setOpen(isOpen: boolean) {
+    this.setAttribute('aria-expanded', String(isOpen))
+  }
+
+  #isOpen() {
+    return getBooleanAttribute(this, 'aria-expanded')
   }
 
   #getFirstOption() {
