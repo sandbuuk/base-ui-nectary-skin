@@ -32,4 +32,8 @@ module.exports = {
   },
   compact: false,
   comments: false,
+  ignore: [
+    '*.d.ts',
+    /node_modules/,
+  ],
 }
