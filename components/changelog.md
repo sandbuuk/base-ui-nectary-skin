@@ -1,3 +1,8 @@
+## v0.25.0
+
+* 🎉 move to the new GitLab
+* ➕ add `sinch-segmented-control` component
+
 ## v0.24.0
 
 * 💥 add `setNectaryRegistry` mandatory call to define registry for Nectary components
