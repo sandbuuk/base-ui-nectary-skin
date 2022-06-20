@@ -71,7 +71,7 @@ visual-tests:
 publish-components:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_TAG =~ /^components@/ && $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_TAG =~ /^components@/
   image: node:16
   cache:
     key:
@@ -98,8 +98,8 @@ pages:
   stage: deploy
   image: node:16
   rules:
-    - if: $CI_COMMIT_TAG =~ /^components@/ && $CI_COMMIT_BRANCH == "main"
-    - if: $CI_COMMIT_TAG == "storybook" && $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_TAG =~ /^components@/
+    - if: $CI_COMMIT_TAG == "storybook"
   cache:
     key:
       files:
