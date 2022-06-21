@@ -1,8 +1,10 @@
 import '../icons/expand-less'
 import '../icons/expand-more'
+import '../icon-button'
 import {
   defineCustomElement,
   getBooleanAttribute,
+  isAttrTrue,
   NectaryElement,
   updateBooleanAttribute,
 } from '../utils'
@@ -24,16 +26,31 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$button = shadowRoot.querySelector('button')!
+    this.#$button = shadowRoot.querySelector('#button')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
+    this.setAttribute('aria-checked', String(getBooleanAttribute(this, 'value')))
     this.#$button.addEventListener('click', this.onClick)
   }
 
   disconnectedCallback() {
     this.#$button.removeEventListener('click', this.onClick)
+  }
+
+  static get observedAttributes() {
+    return ['value']
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    switch (name) {
+      case 'value': {
+        this.setAttribute('aria-checked', String(isAttrTrue(newVal)))
+
+        break
+      }
+    }
   }
 
   get type() {

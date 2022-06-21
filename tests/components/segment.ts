@@ -51,10 +51,12 @@ test('segment screenshots', runScreenshotTests('sinch-segment', [
   {
     name: 'collapse',
     url: withEverythingCollapse,
-    async *fn({ $ }) {
-      await $.click({ position: { x: 10, y: 10 } })
+    async *fn({ page, $eval }) {
+      const rect = (await $eval((el) => el.collapseButtonRect))!
+
+      await page.mouse.click(rect.x + rect.width / 2, rect.y + rect.height / 2)
       yield { name: 'collapsed' }
-      await $.click({ position: { x: 10, y: 10 } })
+      await page.mouse.click(rect.x + rect.width / 2, rect.y + rect.height / 2)
       yield { name: 'expanded' }
     },
   },

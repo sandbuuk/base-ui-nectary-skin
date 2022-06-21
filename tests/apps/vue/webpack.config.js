@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const { DefinePlugin } = require('webpack')
 
 const PORT = 3022
 
@@ -72,6 +73,10 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './public/index.html'),
+    }),
+    new DefinePlugin({
+      __VUE_OPTIONS_API__: 'true',
+      __VUE_PROD_DEVTOOLS__: 'false'
     }),
   ],
 }

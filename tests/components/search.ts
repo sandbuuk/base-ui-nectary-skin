@@ -162,21 +162,15 @@ test('search screenshots', runScreenshotTests('sinch-search', [
       yield { name: 'open', includeRects: [rect] }
 
       await page.keyboard.press('ArrowDown')
-      await page.waitForTimeout(50)
       yield { name: 'down', includeRects: [rect] }
 
       await page.keyboard.press('ArrowDown')
-      await page.waitForTimeout(50)
       await page.keyboard.press('ArrowDown')
-      await page.waitForTimeout(50)
       await page.keyboard.press('ArrowDown')
-      await page.waitForTimeout(50)
       yield { name: 'down-down', includeRects: [rect] }
 
       await page.keyboard.press('ArrowUp')
-      await page.waitForTimeout(50)
       await page.keyboard.press('ArrowUp')
-      await page.waitForTimeout(50)
       yield { name: 'up-up', includeRects: [rect] }
     },
   },

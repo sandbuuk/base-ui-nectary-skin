@@ -1,4 +1,4 @@
-import { isSearchOptionElement } from '../search-option'
+import { isSinchSearchOptionElement } from '../search-option'
 import {
   attrValueToPixels,
   defineCustomElement,
@@ -19,16 +19,6 @@ import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
 const ITEM_HEIGHT = 40
-
-const findSelectedOption = (elements: readonly TSinchSearchOptionElement[]) => {
-  for (const el of elements) {
-    if (el.selected) {
-      return el
-    }
-  }
-
-  return null
-}
 
 const template = document.createElement('template')
 
@@ -278,7 +268,7 @@ defineCustomElement('sinch-search', class extends NectaryElement {
 
     const $elem = e.target
 
-    if (isSearchOptionElement($elem)) {
+    if (isSinchSearchOptionElement($elem)) {
       this.#onValueChange($elem.text)
     }
 
@@ -290,10 +280,10 @@ defineCustomElement('sinch-search', class extends NectaryElement {
       case 'Enter': {
         e.preventDefault()
 
-        const $elem = findSelectedOption(this.#getOptionElements())
+        const $opt = this.#findSelectedOption()
 
-        if ($elem != null) {
-          this.#onValueChange($elem.text)
+        if ($opt != null) {
+          this.#onValueChange($opt.text)
         }
 
         this.#onCollapse()
@@ -306,11 +296,15 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   #onListboxKeyDown = (e: KeyboardEvent) => {
     switch (e.code) {
       case 'ArrowUp': {
+        e.preventDefault()
+        e.stopPropagation()
         this.#selectOption(this.#getPrevOption())
 
         break
       }
       case 'ArrowDown': {
+        e.preventDefault()
+        e.stopPropagation()
         this.#selectOption(this.#getNextOption())
 
         break
@@ -325,9 +319,9 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   }
 
   #onOptionSlotChange = () => {
-    const elems = this.#getOptionElements()
+    const $opts = this.#$optionSlot.assignedElements()
 
-    if (elems.length === 0) {
+    if ($opts.length === 0) {
       return this.#onCollapse()
     }
 
@@ -335,35 +329,32 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   }
 
   #onExpand() {
-    if (!this.#isOpen() && this.#sh.activeElement === this.#$input) {
-      this.#selectOption(this.#getFirstOption())
-      this.#setOpen(true)
+    const isOpen = getBooleanAttribute(this, 'aria-expanded')
+    const $opts = this.#$optionSlot.assignedElements()
+
+    if (!isOpen && $opts.length > 0 && this.#sh.activeElement === this.#$input) {
+      const opt = this.#getFirstOption()
+
+      this.#selectOption(opt)
+      this.setAttribute('aria-expanded', 'true')
     }
   }
 
   #onCollapse() {
-    this.#setOpen(false)
+    this.setAttribute('aria-expanded', 'false')
   }
 
-  #setOpen(isOpen: boolean) {
-    this.setAttribute('aria-expanded', String(isOpen))
+  #getFirstOption(): TSinchSearchOptionElement | null {
+    return this.#$optionSlot.assignedElements().filter(isSinchSearchOptionElement)[0] ?? null
   }
 
-  #isOpen() {
-    return getBooleanAttribute(this, 'aria-expanded')
+  #getLastOption(): TSinchSearchOptionElement | null {
+    return this.#$optionSlot.assignedElements().filter(isSinchSearchOptionElement).reverse()[0] ?? null
   }
 
-  #getFirstOption() {
-    return this.#getOptionElements()[0] ?? null
-  }
-
-  #getLastOption() {
-    return this.#getOptionElements().reverse()[0] ?? null
-  }
-
-  #getNextOption() {
-    const $options = this.#getOptionElements()
-    const $selectedOption = findSelectedOption($options)
+  #getNextOption(): TSinchSearchOptionElement | null {
+    const $options = this.#$optionSlot.assignedElements().filter(isSinchSearchOptionElement)
+    const $selectedOption = this.#findSelectedOption()
     const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
 
     if (currentIndex < 0) {
@@ -373,9 +364,9 @@ defineCustomElement('sinch-search', class extends NectaryElement {
     return $options[(currentIndex + 1) % $options.length]
   }
 
-  #getPrevOption() {
-    const $options = this.#getOptionElements()
-    const $selectedOption = findSelectedOption($options)
+  #getPrevOption(): TSinchSearchOptionElement | null {
+    const $options = this.#$optionSlot.assignedElements().filter(isSinchSearchOptionElement)
+    const $selectedOption = this.#findSelectedOption()
     const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
 
     if (currentIndex < 0) {
@@ -386,11 +377,11 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   }
 
   #selectOption($option: TSinchSearchOptionElement | null) {
-    for (const $op of this.#getOptionElements()) {
+    for (const $op of this.#$optionSlot.assignedElements()) {
       const isSelected = $op === $option
 
       // Select / Unselect
-      $op.selected = isSelected
+      ;($op as TSinchSearchOptionElement).selected = isSelected
 
       if (isSelected) {
         $op.scrollIntoView?.({ block: 'nearest' })
@@ -398,8 +389,14 @@ defineCustomElement('sinch-search', class extends NectaryElement {
     }
   }
 
-  #getOptionElements(): TSinchSearchOptionElement[] {
-    return this.#$optionSlot.assignedElements().filter(isSearchOptionElement)
+  #findSelectedOption(): TSinchSearchOptionElement | null {
+    for (const el of this.#$optionSlot.assignedElements()) {
+      if (isSinchSearchOptionElement(el) && el.selected) {
+        return el
+      }
+    }
+
+    return null
   }
 
   focus() {

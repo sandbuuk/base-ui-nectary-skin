@@ -28,10 +28,11 @@ const svgAttributes = 'viewBox="0 0 24 24" aria-hidden="true"'
 const dirPath = process.argv[2]
 
 const processIcon = async (filepath: string) => {
+  // Filename without the extension
   const filename = path.basename(filepath, path.extname(filepath)).replaceAll('_', '-')
   const svgString = await readFile(path.join(dirPath, filepath), 'utf-8')
 
-  const result = optimize(svgString, {
+  const svgoResult = optimize(svgString, {
     multipass: true,
     js2svg: {
       pretty: true,
@@ -40,11 +41,11 @@ const processIcon = async (filepath: string) => {
     },
   })
 
-  if (result.error != null) {
-    throw new Error(result.error)
+  if (svgoResult.error != null) {
+    throw new Error(svgoResult.error)
   }
 
-  let { data: dataHtml } = result
+  let { data: dataHtml } = svgoResult
 
   const dataTs = iconTemplate.replaceAll('{{name}}', filename)
 
@@ -52,7 +53,7 @@ const processIcon = async (filepath: string) => {
     .replace('width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"', svgAttributes)
     .replace(/ fill=".*?"/, '')
 
-  const outDir = path.join('./components/icon', filename)
+  const outDir = path.join('./components/icons', filename)
   const outPathTs = path.join(outDir, 'index.ts')
   const outPathHtml = path.join(outDir, 'template.html')
 

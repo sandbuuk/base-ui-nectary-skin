@@ -1,25 +1,8 @@
 <style>
 :host {
-  display: contents;
+  display: block;
 
   --sinch-size-icon: 32px;
-}
-
-button {
-  all: initial;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
-button:focus ~ sinch-icon-expand-less,
-button:focus ~ sinch-icon-expand-more {
-  border-radius: 4px;
-  box-shadow: 0 0 0 1px var(--sinch-color-stormy-500) inset;
 }
 
 #up {
@@ -39,6 +22,7 @@ button:focus ~ sinch-icon-expand-more {
 }
 </style>
 
-<button></button>
-<sinch-icon-expand-less id="up"></sinch-icon-expand-less>
-<sinch-icon-expand-more id="down"></sinch-icon-expand-more>
+<sinch-icon-button id="button" small>
+  <sinch-icon-expand-less id="up" slot="icon"></sinch-icon-expand-less>
+  <sinch-icon-expand-more id="down" slot="icon"></sinch-icon-expand-more>
+</sinch-icon-button>
