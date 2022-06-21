@@ -14,7 +14,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-class SearchOption extends NectaryElement {
+class SinchSearchOption extends NectaryElement {
   #$content: HTMLSpanElement
 
   constructor() {
@@ -67,10 +67,10 @@ class SearchOption extends NectaryElement {
   }
 }
 
-defineCustomElement('sinch-search-option', SearchOption)
+defineCustomElement('sinch-search-option', SinchSearchOption)
 
-export const isSearchOptionElement = (element: EventTarget | Element | null): element is TSinchSearchOptionElement => {
-  return element instanceof SearchOption
+export const isSinchSearchOptionElement = (element: EventTarget | Element | null): element is TSinchSearchOptionElement => {
+  return element instanceof SinchSearchOption
 }
 
 export type TSinchSearchOptionElement = HTMLElement & {

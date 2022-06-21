@@ -97,12 +97,18 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
   async ({ page, context }: PlaywrightTestArgs, info: TestInfo) => {
     overrideScreenshotPath(info)
 
-    const pages = [
-      page,
-      await context.newPage(),
-      await context.newPage(),
-      await context.newPage(),
-    ]
+    // Firefox multiple tabs has focus issue
+    // https://github.com/microsoft/playwright/issues/3476
+    const isFirefox = info.project.name.startsWith('firefox-')
+    const pages = [page]
+
+    if (!isFirefox) {
+      pages.push(
+        await context.newPage(),
+        await context.newPage(),
+        await context.newPage()
+      )
+    }
 
     const it = piAll(tests.map((t) => async () => {
       const page = pages.shift()!
