@@ -2,12 +2,13 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getRect,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TRect, TSinchElementReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -15,6 +16,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segment', class extends NectaryElement {
   #$caption: HTMLElement
+  #$collapseSlot: HTMLSlotElement
 
   constructor() {
     super()
@@ -23,6 +25,7 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
     this.#$caption = shadowRoot.querySelector('#caption')!
+    this.#$collapseSlot = shadowRoot.querySelector('slot[name="collapse"]')!
   }
 
   static get observedAttributes() {
@@ -54,11 +57,18 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
   get collapsed() {
     return getBooleanAttribute(this, 'collapsed')
   }
+
+  get collapseButtonRect(): TRect | null {
+    const $collapseButton = this.#$collapseSlot.assignedElements()[0]
+
+    return $collapseButton != null ? getRect($collapseButton) : null
+  }
 })
 
 type TSinchSegmentElement = HTMLElement & {
   caption: string,
   collapsed: boolean,
+  readonly collapseButtonRect: TRect | null,
 }
 
 type TSinchSegmentReact = TSinchElementReact<TSinchSegmentElement> & {
