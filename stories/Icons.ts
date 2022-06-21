@@ -97,7 +97,7 @@ import '@sinch-engage/nectary/icons/star-outline'
 import '@sinch-engage/nectary/icons/undo'
 import '@sinch-engage/nectary/icons/mark-chat-unread'
 import '@sinch-engage/nectary/icons/comment'
-// {{icon import}}
+import '@sinch-engage/nectary/icons/smart-toy'
 import '@sinch-engage/nectary/icons/volume-up'
 import '@sinch-engage/nectary/icons/volume-off'
 import '@sinch-engage/nectary/icons/update'
@@ -120,6 +120,7 @@ import '@sinch-engage/nectary/icons/history'
 import '@sinch-engage/nectary/icons/forum'
 import '@sinch-engage/nectary/icons/chat-bubble-outline'
 import '@sinch-engage/nectary/icons/star'
+// {{icon import}}
 
 const iconNames = [
   'sinch-icon-cancel',
@@ -216,6 +217,8 @@ const iconNames = [
   'sinch-icon-check-circle-outline',
   /* Device */
   'sinch-icon-access-time',
+  /* Hardware */
+  'sinch-icon-smart-toy',
   /* Editor */
   'sinch-icon-notes',
   'sinch-icon-add-comment',
