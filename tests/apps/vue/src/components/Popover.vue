@@ -9,7 +9,7 @@
       text="Some content"
       aria-label="Button">
     </sinch-button>
-    <section slot="content" style="width: 240px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</section>
+    <section slot="content" style="width: 240px; padding: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</section>
   </sinch-popover>
 </template>
 
