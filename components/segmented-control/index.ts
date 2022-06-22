@@ -168,24 +168,24 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
   }
 })
 
-export type TSinchTabsElement = HTMLElement & {
+export type TSinchSegmentedControlElement = HTMLElement & {
   value: string,
 }
 
-export type TSinchTabsReact = TSinchElementReact<TSinchTabsElement> & {
+export type TSinchSegmentedControlReact = TSinchElementReact<TSinchSegmentedControlElement> & {
   value: string,
   'aria-label': string,
-  onChange: (event: SyntheticEvent<TSinchTabsElement, CustomEvent<string>>) => void,
+  onChange: (event: SyntheticEvent<TSinchSegmentedControlElement, CustomEvent<string>>) => void,
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-segmented-control': TSinchTabsReact,
+      'sinch-segmented-control': TSinchSegmentedControlReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-segmented-control': TSinchTabsElement,
+    'sinch-segmented-control': TSinchSegmentedControlElement,
   }
 }
