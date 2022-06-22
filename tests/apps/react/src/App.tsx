@@ -19,6 +19,7 @@ import { Radio } from './components/Radio'
 import { Search } from './components/Search'
 import { Segment } from './components/Segment'
 import { SegmentedControl } from './components/SegmentedControl'
+import { SegmentedIconControl } from './components/SegmentedIconControl'
 import { Select } from './components/Select'
 import { Spinner } from './components/Spinner'
 import { Table } from './components/Table'
@@ -149,6 +150,12 @@ const mapElement = (url: URL) => {
     case '/segmented-control': {
       return (
         <SegmentedControl search={url.searchParams}/>
+      )
+    }
+
+    case '/segmented-icon-control': {
+      return (
+        <SegmentedIconControl search={url.searchParams}/>
       )
     }
 

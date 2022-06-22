@@ -30,6 +30,7 @@ import { ChatComponent } from '../components/Chat/Chat.component'
 import { TitleComponent } from '../components/Title/Title.component'
 import { PopoverComponent } from '../components/Popover/Popover.component'
 import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
+import { SegmentedIconControlComponent } from '../components/SegmentedIconControl/SegmentedIconControl.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -64,6 +65,7 @@ import { AppComponent } from './app.component'
     TitleComponent,
     PopoverComponent,
     SegmentedControlComponent,
+    SegmentedIconControlComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
