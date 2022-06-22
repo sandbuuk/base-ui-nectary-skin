@@ -7,7 +7,6 @@ dialog {
   display: flex;
   flex-direction: column;
   padding: 24px;
-  width: 100%;
   max-width: 512px;
   border-radius: 4px;
   box-sizing: border-box;
@@ -56,26 +55,22 @@ dialog.fixed {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-content: center;
+  align-items: flex-start;
   margin-bottom: 16px;
 }
 
 #caption {
   font: var(--sinch-font-title-m);
   color: var(--sinch-color-text-default);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 #content-wrapper {
   min-height: 0;
   overflow: auto;
   max-height: var(--sinch-dialog-max-height, 50vh);
-}
-
-#close {
-  all: initial;
-  cursor: pointer;
-
-  --sinch-size-icon: 24px;
 }
 
 #buttons {
@@ -85,14 +80,18 @@ dialog.fixed {
   gap: 16px;
   margin-top: 24px;
 }
+
+sinch-icon-button {
+  transform: translate(4px, -4px);
+}
 </style>
 
 <dialog>
   <div id="header">
     <span id="caption"></span>
-    <button id="close">
-      <sinch-icon-close></sinch-icon-close>
-    </button>
+    <sinch-icon-button id="close" small tabindex="0">
+      <sinch-icon-close slot="icon"></sinch-icon-close>
+    </sinch-icon-button>
   </div>
   <div id="content-wrapper">
     <slot name="content"></slot>

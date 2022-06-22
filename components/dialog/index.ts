@@ -1,4 +1,6 @@
 import dialogPolyfill from 'dialog-polyfill'
+import '../icon-button'
+import '../icons/close'
 import {
   defineCustomElement,
   getAttribute,
@@ -9,8 +11,6 @@ import {
   getReactEventHandler,
   NectaryElement,
 } from '../utils'
-import '../icon-button'
-import '../icons/close'
 import templateHTML from './template.html'
 import type { TRect, TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
