@@ -1,3 +1,15 @@
+## v0.26.0
+
+* ➕ add `sinch-segmented-icon-control` component
+* ➕ add editor icons
+* ➕ add content icons
+* ➕ add `sinch-icon-smart-toy` icon
+* 🐞 fix `sinch-dialog` width
+* 🐞 fix `sinch-segmented-control` border color
+* 🐞 fix `sinch-segment` clickable area to expand/collapse
+* 🐞 fix `sinch-popover` border style
+* 🐞 fix `sinch-popover` default padding
+
 ## v0.25.0
 
 * 🎉 move to the new GitLab
