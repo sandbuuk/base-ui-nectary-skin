@@ -27,6 +27,7 @@
     <Tooltip v-if="url.pathname === '/tooltip'" :search="url.searchParams"/>
     <Segment v-if="url.pathname === '/segment'" :search="url.searchParams"/>
     <SegmentedControl v-if="url.pathname === '/segmented-control'" :search="url.searchParams"/>
+    <SegmentedIconControl v-if="url.pathname === '/segmented-icon-control'" :search="url.searchParams"/>
     <Spinner v-if="url.pathname === '/spinner'" :search="url.searchParams"/>
     <Dialog v-if="url.pathname === '/dialog'" :search="url.searchParams"/>
   </div>
@@ -62,6 +63,7 @@ import Tooltip from './components/Tooltip.vue'
 import Search from './components/Search.vue'
 import Segment from './components/Segment.vue'
 import SegmentedControl from './components/SegmentedControl.vue'
+import SegmentedIconControl from './components/SegmentedIconControl.vue'
 import Spinner from './components/Spinner.vue'
 
 export default {
@@ -121,6 +123,7 @@ export default {
     Search,
     Segment,
     SegmentedControl,
+    SegmentedIconControl,
     Spinner,
   }
 };

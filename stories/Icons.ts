@@ -120,7 +120,141 @@ import '@sinch-engage/nectary/icons/history'
 import '@sinch-engage/nectary/icons/forum'
 import '@sinch-engage/nectary/icons/chat-bubble-outline'
 import '@sinch-engage/nectary/icons/star'
+import '@sinch-engage/nectary/icons/wrap-text'
+import '@sinch-engage/nectary/icons/vertical-align-top'
+import '@sinch-engage/nectary/icons/vertical-align-center'
+import '@sinch-engage/nectary/icons/vertical-align-bottom'
+import '@sinch-engage/nectary/icons/title'
+import '@sinch-engage/nectary/icons/text-fields'
+import '@sinch-engage/nectary/icons/table-rows'
+import '@sinch-engage/nectary/icons/table-chart'
+import '@sinch-engage/nectary/icons/superscript'
+import '@sinch-engage/nectary/icons/subscript'
+import '@sinch-engage/nectary/icons/strikethrough-s'
+import '@sinch-engage/nectary/icons/stacked-line-chart'
+import '@sinch-engage/nectary/icons/space-bar'
+import '@sinch-engage/nectary/icons/show-chart'
+import '@sinch-engage/nectary/icons/short-text'
+import '@sinch-engage/nectary/icons/score'
+import '@sinch-engage/nectary/icons/scatter-plot'
+import '@sinch-engage/nectary/icons/publish'
+import '@sinch-engage/nectary/icons/post-add'
+import '@sinch-engage/nectary/icons/pie-chart-outline'
+import '@sinch-engage/nectary/icons/pie-chart'
+import '@sinch-engage/nectary/icons/multiline-chart'
+import '@sinch-engage/nectary/icons/money-off-csred'
+import '@sinch-engage/nectary/icons/money-off'
+import '@sinch-engage/nectary/icons/monetization-on'
+import '@sinch-engage/nectary/icons/mode-comment'
+import '@sinch-engage/nectary/icons/mode'
+import '@sinch-engage/nectary/icons/merge-type'
+import '@sinch-engage/nectary/icons/linear-scale'
+import '@sinch-engage/nectary/icons/insert-photo'
+import '@sinch-engage/nectary/icons/insert-link'
+import '@sinch-engage/nectary/icons/insert-invitation'
+import '@sinch-engage/nectary/icons/insert-drive-file'
+import '@sinch-engage/nectary/icons/insert-comment'
+import '@sinch-engage/nectary/icons/insert-chart-outlined'
+import '@sinch-engage/nectary/icons/insert-chart'
+import '@sinch-engage/nectary/icons/horizontal-rule'
+import '@sinch-engage/nectary/icons/highlight'
+import '@sinch-engage/nectary/icons/height'
+import '@sinch-engage/nectary/icons/functions'
+import '@sinch-engage/nectary/icons/format-underlined'
+import '@sinch-engage/nectary/icons/format-textdirection-r-to-l'
+import '@sinch-engage/nectary/icons/format-textdirection-l-to-r'
+import '@sinch-engage/nectary/icons/format-strikethrough'
+import '@sinch-engage/nectary/icons/format-size'
+import '@sinch-engage/nectary/icons/format-shapes'
+import '@sinch-engage/nectary/icons/format-quote'
+import '@sinch-engage/nectary/icons/format-paint'
+import '@sinch-engage/nectary/icons/format-list-numbered-rtl'
+import '@sinch-engage/nectary/icons/format-list-numbered'
+import '@sinch-engage/nectary/icons/format-list-bulleted'
+import '@sinch-engage/nectary/icons/format-line-spacing'
+import '@sinch-engage/nectary/icons/format-italic'
+import '@sinch-engage/nectary/icons/format-indent-increase'
+import '@sinch-engage/nectary/icons/format-indent-decrease'
+import '@sinch-engage/nectary/icons/format-color-reset'
+import '@sinch-engage/nectary/icons/format-clear'
+import '@sinch-engage/nectary/icons/format-bold'
+import '@sinch-engage/nectary/icons/format-align-right'
+import '@sinch-engage/nectary/icons/format-align-left'
+import '@sinch-engage/nectary/icons/format-align-justify'
+import '@sinch-engage/nectary/icons/format-align-center'
+import '@sinch-engage/nectary/icons/drag-handle'
+import '@sinch-engage/nectary/icons/bubble-chart'
+import '@sinch-engage/nectary/icons/border-vertical'
+import '@sinch-engage/nectary/icons/border-top'
+import '@sinch-engage/nectary/icons/border-style'
+import '@sinch-engage/nectary/icons/border-right'
+import '@sinch-engage/nectary/icons/border-outer'
+import '@sinch-engage/nectary/icons/border-left'
+import '@sinch-engage/nectary/icons/border-inner'
+import '@sinch-engage/nectary/icons/border-horizontal'
+import '@sinch-engage/nectary/icons/border-clear'
+import '@sinch-engage/nectary/icons/border-bottom'
+import '@sinch-engage/nectary/icons/border-all'
+import '@sinch-engage/nectary/icons/bar-chart'
+import '@sinch-engage/nectary/icons/attach-money'
+import '@sinch-engage/nectary/icons/attach-file'
 // {{icon import}}
+import '@sinch-engage/nectary/icons/where-to-vote'
+import '@sinch-engage/nectary/icons/weekend'
+import '@sinch-engage/nectary/icons/waves'
+import '@sinch-engage/nectary/icons/unarchive'
+import '@sinch-engage/nectary/icons/text-format'
+import '@sinch-engage/nectary/icons/square-foot'
+import '@sinch-engage/nectary/icons/sort'
+import '@sinch-engage/nectary/icons/select-all'
+import '@sinch-engage/nectary/icons/save-alt'
+import '@sinch-engage/nectary/icons/save'
+import '@sinch-engage/nectary/icons/report-off'
+import '@sinch-engage/nectary/icons/report-outline'
+import '@sinch-engage/nectary/icons/report'
+import '@sinch-engage/nectary/icons/reply-all'
+import '@sinch-engage/nectary/icons/remove-circle-outline'
+import '@sinch-engage/nectary/icons/remove-circle'
+import '@sinch-engage/nectary/icons/remove'
+import '@sinch-engage/nectary/icons/redo'
+import '@sinch-engage/nectary/icons/push-pin'
+import '@sinch-engage/nectary/icons/policy'
+import '@sinch-engage/nectary/icons/outlined-flag'
+import '@sinch-engage/nectary/icons/next-week'
+import '@sinch-engage/nectary/icons/move-to-inbox'
+import '@sinch-engage/nectary/icons/markunread'
+import '@sinch-engage/nectary/icons/mail'
+import '@sinch-engage/nectary/icons/low-priority'
+import '@sinch-engage/nectary/icons/link-off'
+import '@sinch-engage/nectary/icons/link'
+import '@sinch-engage/nectary/icons/insights'
+import '@sinch-engage/nectary/icons/inbox'
+import '@sinch-engage/nectary/icons/how-to-vote'
+import '@sinch-engage/nectary/icons/how-to-reg'
+import '@sinch-engage/nectary/icons/gesture'
+import '@sinch-engage/nectary/icons/forward'
+import '@sinch-engage/nectary/icons/font-download'
+import '@sinch-engage/nectary/icons/flag'
+import '@sinch-engage/nectary/icons/file-copy'
+import '@sinch-engage/nectary/icons/dynamic-feed'
+import '@sinch-engage/nectary/icons/drafts'
+import '@sinch-engage/nectary/icons/delete-sweep'
+import '@sinch-engage/nectary/icons/content-paste'
+import '@sinch-engage/nectary/icons/content-cut'
+import '@sinch-engage/nectary/icons/content-copy'
+import '@sinch-engage/nectary/icons/clear'
+import '@sinch-engage/nectary/icons/calculate'
+import '@sinch-engage/nectary/icons/block'
+import '@sinch-engage/nectary/icons/biotech'
+import '@sinch-engage/nectary/icons/ballot'
+import '@sinch-engage/nectary/icons/backspace'
+import '@sinch-engage/nectary/icons/attribution'
+import '@sinch-engage/nectary/icons/archive'
+import '@sinch-engage/nectary/icons/amp-stories'
+import '@sinch-engage/nectary/icons/add-circle-outline'
+import '@sinch-engage/nectary/icons/add-circle'
+import '@sinch-engage/nectary/icons/add-box'
+import '@sinch-engage/nectary/icons/add'
 
 const iconNames = [
   'sinch-icon-cancel',
@@ -181,37 +315,6 @@ const iconNames = [
   'sinch-icon-text-snippet',
   'sinch-icon-topic',
   'sinch-icon-upload',
-  /* Navigation */
-  'sinch-icon-app-settings-alt',
-  'sinch-icon-apps',
-  'sinch-icon-arrow-drop-down',
-  'sinch-icon-arrow-drop-down-circle',
-  'sinch-icon-arrow-drop-up',
-  'sinch-icon-arrow-left',
-  'sinch-icon-arrow-right',
-  'sinch-icon-campaign',
-  'sinch-icon-check',
-  'sinch-icon-double-arrow',
-  'sinch-icon-first-page',
-  'sinch-icon-fullscreen',
-  'sinch-icon-fullscreen-exit',
-  'sinch-icon-home-work',
-  'sinch-icon-last-page',
-  'sinch-icon-legend-toggle',
-  'sinch-icon-menu',
-  'sinch-icon-menu-open',
-  'sinch-icon-payments',
-  'sinch-icon-refresh',
-  'sinch-icon-subdirectory-arrow-left',
-  'sinch-icon-subdirectory-arrow-right',
-  'sinch-icon-switch-left',
-  'sinch-icon-switch-right',
-  'sinch-icon-unfold-less',
-  'sinch-icon-unfold-more',
-  /* Content */
-  'sinch-icon-filter-list',
-  'sinch-icon-send',
-  'sinch-icon-undo',
   /* Action */
   'sinch-icon-assignment',
   'sinch-icon-check-circle-outline',
@@ -219,9 +322,6 @@ const iconNames = [
   'sinch-icon-access-time',
   /* Hardware */
   'sinch-icon-smart-toy',
-  /* Editor */
-  'sinch-icon-notes',
-  'sinch-icon-add-comment',
   /* Maps */
   'sinch-icon-alt-route',
   /* Audio & Video */
@@ -238,23 +338,6 @@ const iconNames = [
   'sinch-icon-comment',
   'sinch-icon-chat',
   // {{icon name}}
-  'sinch-icon-update',
-  'sinch-icon-swap-vert',
-  'sinch-icon-settings',
-  'sinch-icon-search',
-  'sinch-icon-notifications-none',
-  'sinch-icon-more-time',
-  'sinch-icon-mic-none',
-  'sinch-icon-mark-chat-read',
-  'sinch-icon-insert-emoticon',
-  'sinch-icon-done-all',
-  'sinch-icon-create',
-  'sinch-icon-reply',
-  'sinch-icon-local-offer',
-  'sinch-icon-info-outline',
-  'sinch-icon-history',
-  'sinch-icon-forum',
-  'sinch-icon-chat-bubble-outline',
 ]
 
 export default {
@@ -262,7 +345,7 @@ export default {
   argTypes: {},
 } as Meta
 
-const Template = (): Story<TSinchIconReact> => () => {
+const Template = (iconNames: string[]): Story<TSinchIconReact> => () => {
   const wrapperRef = useRef<Element | null>(null)
 
   if (wrapperRef.current === null) {
@@ -288,7 +371,7 @@ const Template = (): Story<TSinchIconReact> => () => {
   return wrapperRef.current
 }
 
-export const Icons = Template()
+export const Icons = Template(iconNames)
 
 Icons.parameters = {
   docs: {
@@ -298,3 +381,226 @@ Icons.parameters = {
   },
 }
 
+const editorIconNames = [
+  /* Editor */
+  'sinch-icon-add-comment',
+  'sinch-icon-attach-file',
+  'sinch-icon-attach-money',
+  'sinch-icon-bar-chart',
+  'sinch-icon-border-all',
+  'sinch-icon-border-bottom',
+  'sinch-icon-border-clear',
+  'sinch-icon-border-horizontal',
+  'sinch-icon-border-inner',
+  'sinch-icon-border-left',
+  'sinch-icon-border-outer',
+  'sinch-icon-border-right',
+  'sinch-icon-border-style',
+  'sinch-icon-border-top',
+  'sinch-icon-border-vertical',
+  'sinch-icon-bubble-chart',
+  'sinch-icon-chat-bubble-outline',
+  'sinch-icon-done-all',
+  'sinch-icon-drag-handle',
+  'sinch-icon-format-align-center',
+  'sinch-icon-format-align-justify',
+  'sinch-icon-format-align-left',
+  'sinch-icon-format-align-right',
+  'sinch-icon-format-bold',
+  'sinch-icon-format-clear',
+  'sinch-icon-format-color-reset',
+  'sinch-icon-format-indent-decrease',
+  'sinch-icon-format-indent-increase',
+  'sinch-icon-format-italic',
+  'sinch-icon-format-line-spacing',
+  'sinch-icon-format-list-bulleted',
+  'sinch-icon-format-list-numbered-rtl',
+  'sinch-icon-format-list-numbered',
+  'sinch-icon-format-paint',
+  'sinch-icon-format-quote',
+  'sinch-icon-format-shapes',
+  'sinch-icon-format-size',
+  'sinch-icon-format-strikethrough',
+  'sinch-icon-format-textdirection-l-to-r',
+  'sinch-icon-format-textdirection-r-to-l',
+  'sinch-icon-format-underlined',
+  'sinch-icon-forum',
+  'sinch-icon-functions',
+  'sinch-icon-height',
+  'sinch-icon-highlight',
+  'sinch-icon-history',
+  'sinch-icon-horizontal-rule',
+  'sinch-icon-info-outline',
+  'sinch-icon-insert-chart-outlined',
+  'sinch-icon-insert-chart',
+  'sinch-icon-insert-comment',
+  'sinch-icon-insert-drive-file',
+  'sinch-icon-insert-emoticon',
+  'sinch-icon-insert-invitation',
+  'sinch-icon-insert-link',
+  'sinch-icon-insert-photo',
+  'sinch-icon-linear-scale',
+  'sinch-icon-local-offer',
+  'sinch-icon-mark-chat-read',
+  'sinch-icon-merge-type',
+  'sinch-icon-mic-none',
+  'sinch-icon-mode-comment',
+  'sinch-icon-mode',
+  'sinch-icon-monetization-on',
+  'sinch-icon-money-off-csred',
+  'sinch-icon-money-off',
+  'sinch-icon-more-time',
+  'sinch-icon-multiline-chart',
+  'sinch-icon-notes',
+  'sinch-icon-notifications-none',
+  'sinch-icon-pie-chart-outline',
+  'sinch-icon-pie-chart',
+  'sinch-icon-post-add',
+  'sinch-icon-publish',
+  'sinch-icon-scatter-plot',
+  'sinch-icon-score',
+  'sinch-icon-search',
+  'sinch-icon-settings',
+  'sinch-icon-short-text',
+  'sinch-icon-show-chart',
+  'sinch-icon-space-bar',
+  'sinch-icon-stacked-line-chart',
+  'sinch-icon-strikethrough-s',
+  'sinch-icon-subscript',
+  'sinch-icon-superscript',
+  'sinch-icon-swap-vert',
+  'sinch-icon-table-chart',
+  'sinch-icon-table-rows',
+  'sinch-icon-text-fields',
+  'sinch-icon-title',
+  'sinch-icon-update',
+  'sinch-icon-vertical-align-bottom',
+  'sinch-icon-vertical-align-center',
+  'sinch-icon-vertical-align-top',
+  'sinch-icon-wrap-text',
+]
+
+export const EditorIcons = Template(editorIconNames)
+
+EditorIcons.parameters = {
+  docs: {
+    source: {
+      code: `<>\n${editorIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
+    },
+  },
+}
+
+const contentIconNames = [
+  /* Content */
+  'sinch-icon-add-box',
+  'sinch-icon-add-circle-outline',
+  'sinch-icon-add-circle',
+  'sinch-icon-add',
+  'sinch-icon-amp-stories',
+  'sinch-icon-archive',
+  'sinch-icon-attribution',
+  'sinch-icon-backspace',
+  'sinch-icon-ballot',
+  'sinch-icon-biotech',
+  'sinch-icon-block',
+  'sinch-icon-calculate',
+  'sinch-icon-clear',
+  'sinch-icon-content-copy',
+  'sinch-icon-content-cut',
+  'sinch-icon-content-paste',
+  'sinch-icon-create',
+  'sinch-icon-delete-sweep',
+  'sinch-icon-drafts',
+  'sinch-icon-dynamic-feed',
+  'sinch-icon-file-copy',
+  'sinch-icon-filter-list',
+  'sinch-icon-flag',
+  'sinch-icon-font-download',
+  'sinch-icon-forward',
+  'sinch-icon-gesture',
+  'sinch-icon-how-to-reg',
+  'sinch-icon-how-to-vote',
+  'sinch-icon-inbox',
+  'sinch-icon-insights',
+  'sinch-icon-link-off',
+  'sinch-icon-link',
+  'sinch-icon-low-priority',
+  'sinch-icon-mail',
+  'sinch-icon-markunread',
+  'sinch-icon-move-to-inbox',
+  'sinch-icon-next-week',
+  'sinch-icon-outlined-flag',
+  'sinch-icon-policy',
+  'sinch-icon-push-pin',
+  'sinch-icon-redo',
+  'sinch-icon-remove-circle-outline',
+  'sinch-icon-remove-circle',
+  'sinch-icon-remove',
+  'sinch-icon-reply-all',
+  'sinch-icon-reply',
+  'sinch-icon-report-off',
+  'sinch-icon-report-outline',
+  'sinch-icon-report',
+  'sinch-icon-save-alt',
+  'sinch-icon-save',
+  'sinch-icon-select-all',
+  'sinch-icon-send',
+  'sinch-icon-sort',
+  'sinch-icon-square-foot',
+  'sinch-icon-text-format',
+  'sinch-icon-unarchive',
+  'sinch-icon-undo',
+  'sinch-icon-waves',
+  'sinch-icon-weekend',
+  'sinch-icon-where-to-vote',
+]
+
+export const ContentIcons = Template(contentIconNames)
+
+ContentIcons.parameters = {
+  docs: {
+    source: {
+      code: `<>\n${contentIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
+    },
+  },
+}
+
+const navigationIconNames = [
+  /* Navigation */
+  'sinch-icon-app-settings-alt',
+  'sinch-icon-apps',
+  'sinch-icon-arrow-drop-down-circle',
+  'sinch-icon-arrow-drop-down',
+  'sinch-icon-arrow-drop-up',
+  'sinch-icon-arrow-left',
+  'sinch-icon-arrow-right',
+  'sinch-icon-campaign',
+  'sinch-icon-check',
+  'sinch-icon-double-arrow',
+  'sinch-icon-first-page',
+  'sinch-icon-fullscreen-exit',
+  'sinch-icon-fullscreen',
+  'sinch-icon-home-work',
+  'sinch-icon-last-page',
+  'sinch-icon-legend-toggle',
+  'sinch-icon-menu-open',
+  'sinch-icon-menu',
+  'sinch-icon-payments',
+  'sinch-icon-refresh',
+  'sinch-icon-subdirectory-arrow-left',
+  'sinch-icon-subdirectory-arrow-right',
+  'sinch-icon-switch-left',
+  'sinch-icon-switch-right',
+  'sinch-icon-unfold-less',
+  'sinch-icon-unfold-more',
+]
+
+export const NavigationIcons = Template(navigationIconNames)
+
+NavigationIcons.parameters = {
+  docs: {
+    source: {
+      code: `<>\n${navigationIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
+    },
+  },
+}

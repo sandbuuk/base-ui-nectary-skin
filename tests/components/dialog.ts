@@ -64,6 +64,24 @@ test('dialog screenshots', runScreenshotTests('sinch-dialog', [
     },
   },
   {
+    name: 'keyboard focus',
+    url: withTitleContentButtons,
+    async *fn({ page, $eval }) {
+      const rect = await $eval((el) => el.dialogRect)
+
+      yield { name: 'initial', includeRects: [rect] }
+
+      await page.keyboard.press('Tab')
+      yield { name: 'tab-1', includeRects: [rect] }
+
+      await page.keyboard.press('Tab')
+      yield { name: 'tab-2', includeRects: [rect] }
+
+      await page.keyboard.press('Tab')
+      yield { name: 'tab-3', includeRects: [rect] }
+    },
+  },
+  {
     name: 'custom events',
     url: withTitle,
     async *fn({ $, page }) {
