@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { expandRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/dropdown'
 const withWideContent = '/dropdown?width=400'
@@ -18,215 +18,239 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'open attribute',
     url: shot,
     async *fn({ $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       await $eval((el) => el.removeAttribute('open'))
-      yield { name: 'unset', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'unset', includeRects: [await getRect()] }
       await $eval((el) => el.setAttribute('open', ''))
-      yield { name: 'set', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'set', includeRects: [await getRect()] }
     },
   },
   {
     name: 'orientation attribute',
     url: shot,
     async *fn({ $, $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       await $.click()
       await $eval((el) => el.setAttribute('orientation', 'top-left'))
-      yield { name: 'top-left', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'top-left', includeRects: [await getRect()] }
 
       await $eval((el) => el.setAttribute('orientation', 'top-right'))
-      yield { name: 'top-right', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'top-right', includeRects: [await getRect()] }
 
       await $eval((el) => el.setAttribute('orientation', 'bottom-left'))
-      yield { name: 'bottom-left', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'bottom-left', includeRects: [await getRect()] }
 
       await $eval((el) => el.setAttribute('orientation', 'bottom-right'))
-      yield { name: 'bottom-right', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'bottom-right', includeRects: [await getRect()] }
     },
   },
   {
     name: 'orientation property',
     url: shot,
     async *fn({ $, $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       await $.click()
       await $eval((el) => {
         el.orientation = 'top-left'
       })
-      yield { name: 'top-left', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'top-left', includeRects: [await getRect()] }
 
       await $eval((el) => {
         el.orientation = 'top-right'
       })
-      yield { name: 'top-right', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'top-right', includeRects: [await getRect()] }
 
       await $eval((el) => {
         el.orientation = 'bottom-left'
       })
-      yield { name: 'bottom-left', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'bottom-left', includeRects: [await getRect()] }
 
       await $eval((el) => {
         el.orientation = 'bottom-right'
       })
-      yield { name: 'bottom-right', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'bottom-right', includeRects: [await getRect()] }
     },
   },
   {
     name: 'maxvisibleitems attribute',
     url: shot,
     async *fn({ $, $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       await $eval((el) => el.setAttribute('maxvisibleitems', '2'))
       await $.click()
-      yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'items 2', includeRects: [await getRect()] }
     },
   },
   {
     name: 'maxvisibleitems property',
     url: shot,
     async *fn({ $, $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       await $eval((el) => {
         el.maxVisibleItems = 2
       })
       await $.click()
-      yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'items 2', includeRects: [await getRect()] }
     },
   },
   {
     name: 'maxvisibleitems scroll',
     url: withMaxItems,
     async *fn({ $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       await $eval((el) => el.setAttribute('value', '3'))
       await $eval((el) => el.setAttribute('open', ''))
-      yield { name: 'scroll to 3', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'scroll to 3', includeRects: [await getRect()] }
     },
   },
   {
     name: 'value attribute',
     url: shot,
     async *fn({ $, $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       // Open dropdown once
       await $.click()
 
       await $eval((el) => el.setAttribute('value', ''))
-      yield { name: 'option-empty', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-empty', includeRects: [await getRect()] }
 
       await $eval((el) => el.setAttribute('value', '4'))
-      yield { name: 'option-4', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-4', includeRects: [await getRect()] }
 
       await $eval((el) => el.setAttribute('value', '3'))
-      yield { name: 'option-3', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-3', includeRects: [await getRect()] }
 
       await $eval((el) => el.setAttribute('value', '2'))
-      yield { name: 'option-disabled', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-disabled', includeRects: [await getRect()] }
 
       await $eval((el) => el.setAttribute('value', '1'))
-      yield { name: 'option-1', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-1', includeRects: [await getRect()] }
 
       await $eval((el) => el.setAttribute('value', 'missing'))
-      yield { name: 'option-missing', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-missing', includeRects: [await getRect()] }
     },
   },
   {
     name: 'value property',
     url: shot,
     async *fn({ $, $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       // Open dropdown once
       await $.click()
 
       await $eval((el) => {
         el.value = ''
       })
-      yield { name: 'option-empty', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-empty', includeRects: [await getRect()] }
 
       await $eval((el) => {
         el.value = '4'
       })
-      yield { name: 'option-4', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-4', includeRects: [await getRect()] }
 
       await $eval((el) => {
         el.value = '3'
       })
-      yield { name: 'option-3', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-3', includeRects: [await getRect()] }
 
       await $eval((el) => {
         el.value = '2'
       })
-      yield { name: 'option-disabled', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-disabled', includeRects: [await getRect()] }
 
       await $eval((el) => {
         el.value = '1'
       })
-      yield { name: 'option-1', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-1', includeRects: [await getRect()] }
 
       await $eval((el) => {
         el.value = 'missing'
       })
-      yield { name: 'option-missing', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'option-missing', includeRects: [await getRect()] }
     },
   },
   {
     name: 'wide target',
     url: withWideContent,
     async *fn({ $, $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       await $.click()
 
-      yield { name: 'shot', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'shot', includeRects: [await getRect()] }
     },
   },
   {
     name: 'focus press-space',
     url: shot,
     async *fn({ $eval, page }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       await page.keyboard.press('Tab')
       await page.keyboard.press('Space')
 
-      yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'open', includeRects: [await getRect()] }
 
       await page.keyboard.press('Space')
-      yield { name: 'close', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'close', includeRects: [await getRect()] }
 
       await page.keyboard.press('Space')
-      yield { name: 'open-again', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'open-again', includeRects: [await getRect()] }
     },
   },
   {
     name: 'focus press-enter',
     url: shot,
     async *fn({ $eval, page }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       await page.keyboard.press('Tab')
       await page.keyboard.press('Enter')
 
-      yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'open', includeRects: [await getRect()] }
 
       await page.keyboard.press('Enter')
-      yield { name: 'close', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'close', includeRects: [await getRect()] }
 
       await page.keyboard.press('Enter')
-      yield { name: 'open-again', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'open-again', includeRects: [await getRect()] }
     },
   },
   {
     name: 'keyboard',
     url: shot,
     async *fn({ $, $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
       await $.click()
 
-      yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'open', includeRects: [await getRect()] }
 
       await $.press('ArrowDown')
-      yield { name: 'down', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'down', includeRects: [await getRect()] }
 
       await $.press('ArrowDown')
       await $.press('ArrowRight')
-      yield { name: 'down-right', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'down-right', includeRects: [await getRect()] }
 
       await $.press('ArrowUp')
       await $.press('ArrowLeft')
-      yield { name: 'up-left', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'up-left', includeRects: [await getRect()] }
     },
   },
 ]))
 
 test('dropdown events', runScreenshotTests('sinch-dropdown', [
   {
-    name: 'custom evants',
+    name: 'custom events',
     url: shot,
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
@@ -238,9 +262,9 @@ test('dropdown events', runScreenshotTests('sinch-dropdown', [
     },
   },
   {
-    name: 'custom evants',
+    name: 'custom events',
     url: shot,
-    async *fn({ page }) {
+    async *fn({ page, $ }) {
       await subscribeToEvents(page, 'sinch-dropdown-focus', 'sinch-dropdown-blur', 'sinch-dropdown-change', 'sinch-dropdown-close')
 
       await page.keyboard.press('Tab')
@@ -253,24 +277,15 @@ test('dropdown events', runScreenshotTests('sinch-dropdown', [
         { type: 'sinch-dropdown-blur', detail: null },
       ])
 
-      // await $.click()
-      // await page.keyboard.press('Enter')
+      await $.click()
+      await page.keyboard.press('Enter')
 
-      // expect(
-      //   await getAllEvents(page)
-      // ).toEqual([
-      //   // button focus
-      //   { type: 'sinch-dropdown-focus', detail: null },
-      //   // button blur
-      //   { type: 'sinch-dropdown-blur', detail: null },
-      //   // listbox focus
-      //   { type: 'sinch-dropdown-focus', detail: null },
-      //   { type: 'sinch-dropdown-change', detail: '1' },
-      //   // listbox blur
-      //   { type: 'sinch-dropdown-blur', detail: null },
-      //   // button focus
-      //   { type: 'sinch-dropdown-focus', detail: null },
-      // ])
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-dropdown-focus', detail: null },
+        { type: 'sinch-dropdown-change', detail: '1' },
+      ])
     },
   },
 ]))

@@ -1,4 +1,3 @@
-import dialogPolyfill from 'dialog-polyfill'
 import { isDropdownOptionElement } from '../dropdown-option'
 import {
   attrValueToPixels,
@@ -8,7 +7,6 @@ import {
   getIntegerAttribute,
   getLiteralAttribute,
   getReactEventHandler,
-  getRect,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -18,6 +16,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDropdownOptionElement } from '../dropdown-option'
+import type { TSinchPopoverElement } from '../popover'
 import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
@@ -40,10 +39,9 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-dropdown', class extends NectaryElement {
-  #$target: HTMLElement
   #$optionSlot: HTMLSlotElement
-  #$listbox: HTMLDialogElement
-  #isConnected = false
+  #$listbox: HTMLElement
+  #$popover: TSinchPopoverElement
 
   constructor() {
     super()
@@ -52,43 +50,25 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$target = shadowRoot.querySelector('#target')!
-    this.#$listbox = shadowRoot.querySelector('#listbox')!
     this.#$optionSlot = shadowRoot.querySelector('slot[name="option"]')!
-
-    dialogPolyfill.registerDialog(this.#$listbox)
+    this.#$listbox = shadowRoot.querySelector('#listbox')!
+    this.#$popover = shadowRoot.querySelector('sinch-popover')!
   }
 
   connectedCallback() {
-    this.#isConnected = true
     this.setAttribute('role', 'listbox')
 
-    this.#$listbox.addEventListener('cancel', this.#onCancel)
-    this.#$listbox.addEventListener('click', this.#onListboxClick)
-    this.#$listbox.addEventListener('keydown', this.#onListboxKeyDown)
-    this.#$listbox.addEventListener('keypress', this.#onListboxKeyPress)
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange)
-    this.addEventListener('close', this.#onCloseReactHandler)
-
-    if (getBooleanAttribute(this, 'open')) {
-      this.#onExpand()
-    } else {
-      this.#onCollapse()
-    }
+    this.addEventListener('close', this.#onReactClose)
   }
 
   disconnectedCallback() {
-    this.#isConnected = false
-    this.#$listbox.removeEventListener('cancel', this.#onCancel)
-    this.#$listbox.removeEventListener('click', this.#onListboxClick)
-    this.#$listbox.removeEventListener('keydown', this.#onListboxKeyDown)
-    this.#$listbox.removeEventListener('keypress', this.#onListboxKeyPress)
     this.#$optionSlot.removeEventListener('slotchange', this.#onOptionSlotChange)
-    this.removeEventListener('close', this.#onCloseReactHandler)
+    this.removeEventListener('close', this.#onReactClose)
   }
 
   static get observedAttributes() {
-    return ['value', 'maxvisibleitems', 'open', 'orientation']
+    return ['open', 'value', 'orientation', 'maxvisibleitems']
   }
 
   get nodeName() {
@@ -128,27 +108,30 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
   }
 
   get dropdownRect() {
-    return getRect(this.#$listbox)
+    return this.#$popover.popoverRect
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'open': {
-        if (this.#isConnected) {
-          if (isAttrTrue(newVal)) {
-            this.#onExpand()
-          } else {
-            this.#onCollapse()
-          }
+        updateAttribute(this.#$popover, 'open', newVal)
+
+        if (isAttrTrue(newVal)) {
+          this.#onOpen()
+          this.#$popover.addEventListener('keydown', this.#onListboxKeyDown)
+          this.#$popover.addEventListener('click', this.#onListboxClick)
+          this.#$popover.addEventListener('close', this.#onClose)
+        } else {
+          this.#$popover.removeEventListener('keydown', this.#onListboxKeyDown)
+          this.#$popover.removeEventListener('click', this.#onListboxClick)
+          this.#$popover.removeEventListener('close', this.#onClose)
         }
 
         break
       }
 
       case 'orientation': {
-        if (this.#isOpen()) {
-          this.#updateOrientation()
-        }
+        updateAttribute(this.#$popover, 'orientation', newVal)
 
         break
       }
@@ -174,24 +157,15 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
   }
 
   #onListboxClick = (e: MouseEvent) => {
-    const rect = this.dropdownRect
-    const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
-
-    if (!isInside) {
-      this.#dispatchCloseEvent()
-
-      return
-    }
-
     const $elem = e.target
 
-    if ($elem !== this.#$listbox && isDropdownOptionElement($elem)) {
+    if (isDropdownOptionElement($elem) && !$elem.disabled) {
       e.stopPropagation()
       this.#dispatchChangeEvent($elem)
     }
   }
 
-  #onListboxKeyPress = (e: KeyboardEvent) => {
+  #onListboxKeyDown = (e: KeyboardEvent) => {
     switch (e.code) {
       case 'Space':
       case 'Enter': {
@@ -200,11 +174,6 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
 
         break
       }
-    }
-  }
-
-  #onListboxKeyDown = (e: KeyboardEvent) => {
-    switch (e.code) {
       case 'ArrowUp':
       case 'ArrowLeft': {
         e.preventDefault()
@@ -224,62 +193,6 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
 
   #onOptionSlotChange = () => {
     this.#onValueChange(this.value)
-  }
-
-  #onExpand() {
-    this.#$target.setAttribute('aria-expanded', 'true')
-
-    if (!this.#isOpen()) {
-      (this.#$listbox as any).showModal()
-    }
-
-    this.#updateOrientation()
-    this.#selectOption(this.#getOptionWithValue(this.value) ?? this.#getFirstOption())
-  }
-
-  #onCollapse() {
-    this.#$target.setAttribute('aria-expanded', 'false')
-
-    if (this.#isOpen()) {
-      (this.#$listbox as any).close?.()
-    }
-  }
-
-  #isOpen() {
-    return this.#isConnected && getBooleanAttribute(this.#$listbox, 'open')
-  }
-
-  #updateOrientation() {
-    this.#$listbox.style.transform = `initial`
-    this.#$listbox.style.width = `max-content`
-
-    const buttonRect = this.#$target.getBoundingClientRect()
-    const modalRect = this.#$listbox.getBoundingClientRect()
-    const width = Math.max(modalRect.width, buttonRect.width)
-    const widthDiff = Math.max(buttonRect.width - modalRect.width, 0)
-    let leftOffset = 0
-    let topOffset = 0
-
-    const orient = this.orientation
-
-    if (orient === 'bottom-right' || orient === 'top-right') {
-      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, buttonRect.x - modalRect.x + widthDiff * 0.5))
-    }
-
-    if (orient === 'bottom-left' || orient === 'top-left') {
-      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, buttonRect.x + buttonRect.width - modalRect.x - modalRect.width - widthDiff * 0.5))
-    }
-
-    if (orient === 'bottom-left' || orient === 'bottom-right') {
-      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, buttonRect.y + buttonRect.height - modalRect.y + 8))
-    }
-
-    if (orient === 'top-left' || orient === 'top-right') {
-      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, buttonRect.y - modalRect.y - modalRect.height - 8))
-    }
-
-    this.#$listbox.style.transform = `translateX(${leftOffset}px) translateY(${topOffset}px)`
-    this.#$listbox.style.width = `${width}px`
   }
 
   #onValueChange(value: string) {
@@ -374,24 +287,26 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     }
   }
 
-  #dispatchCloseEvent() {
+  #onOpen() {
+    const $opt = this.#getOptionWithValue(this.value)
+
+    if ($opt !== null) {
+      this.#selectOption($opt)
+      $opt.scrollIntoView?.({ block: 'nearest' })
+    } else {
+      this.#selectOption(this.#getFirstOption())
+    }
+  }
+
+  #onClose = () => {
     this.dispatchEvent(
       new CustomEvent('close', { bubbles: true })
     )
   }
 
-  #onCancel = (e: Event) => {
-    e.preventDefault()
-    this.#dispatchCloseEvent()
-  }
-
-  #onCloseReactHandler = () => {
+  #onReactClose = () => {
     getReactEventHandler(this, 'onClose')?.()
   }
-
-  focus() {}
-
-  blur() {}
 })
 
 export type TSinchDropdownOrientation = typeof orientationValues[number]

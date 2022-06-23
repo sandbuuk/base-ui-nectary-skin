@@ -20,6 +20,8 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
+const POPOVER_VERTICAL_OFFSET = 4
+
 defineCustomElement('sinch-popover', class extends NectaryElement {
   #$target: HTMLButtonElement
   #$dialog: HTMLDialogElement
@@ -111,7 +113,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$target.setAttribute('aria-expanded', 'true')
 
     if (!this.#isOpen()) {
-      (this.#$dialog as any).showModal()
+      this.#$dialog.showModal()
     }
 
     this.#updateOrientation()
@@ -121,7 +123,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$target.setAttribute('aria-expanded', 'false')
 
     if (this.#isOpen()) {
-      (this.#$dialog as any).close?.()
+      this.#$dialog.close?.()
     }
   }
 
@@ -133,33 +135,31 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$dialog.style.transform = `initial`
     this.#$dialog.style.width = `max-content`
 
-    const buttonRect = this.#$target.getBoundingClientRect()
+    const targetRect = this.#$target.getBoundingClientRect()
     const modalRect = this.#$dialog.getBoundingClientRect()
-    const width = Math.max(modalRect.width, buttonRect.width)
-    const widthDiff = Math.max(buttonRect.width - modalRect.width, 0)
     let leftOffset = 0
     let topOffset = 0
 
     const orient = this.orientation
 
     if (orient === 'bottom-right' || orient === 'top-right') {
-      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, buttonRect.x - modalRect.x + widthDiff * 0.5))
+      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, targetRect.x - modalRect.x))
     }
 
     if (orient === 'bottom-left' || orient === 'top-left') {
-      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, buttonRect.x + buttonRect.width - modalRect.x - modalRect.width - widthDiff * 0.5))
+      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, targetRect.x + targetRect.width - modalRect.x - modalRect.width))
     }
 
     if (orient === 'bottom-left' || orient === 'bottom-right') {
-      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, buttonRect.y + buttonRect.height - modalRect.y + 8))
+      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, targetRect.y + targetRect.height - modalRect.y + POPOVER_VERTICAL_OFFSET))
     }
 
     if (orient === 'top-left' || orient === 'top-right') {
-      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, buttonRect.y - modalRect.y - modalRect.height - 8))
+      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, targetRect.y - modalRect.y - modalRect.height - POPOVER_VERTICAL_OFFSET))
     }
 
     this.#$dialog.style.transform = `translateX(${leftOffset}px) translateY(${topOffset}px)`
-    this.#$dialog.style.width = `${width}px`
+    this.#$dialog.style.width = `${modalRect.width}px`
   }
 
   #onBackdropClick = (e: MouseEvent) => {

@@ -5,67 +5,14 @@
   outline: none;
 }
 
-#wrapper {
-  position: relative;
+sinch-popover {
   width: 100%;
-  box-sizing: border-box;
-}
-
-dialog {
-  outline: none;
-  border: none;
-  font: var(--sinch-font-body);
-  color: var(--sinch-color-text-default);
-  background-color: var(--sinch-color-snow-100);
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
-  overflow-y: auto;
-  contain: content;
-  padding: 0;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-dialog::backdrop {
-  background-color: transparent;
-}
-
-/* Dialog Polyfill */
-dialog + .backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: transparent;
-}
-
-/* Dialog Polyfill */
-dialog.fixed {
-  position: fixed;
-  top: 50%;
-  transform: translate(0, -50%);
-}
-
-/* Dialog Polyfill */
-/* stylelint-disable-next-line selector-class-pattern */
-._dialog_overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-::slotted(*) {
-  display: block;
 }
 </style>
 
-<div id="wrapper">
-  <div id="target" aria-haspopup="listbox" aria-expanded="false">
-    <slot name="target"></slot>
-  </div>
-  <dialog id="listbox" tabindex="-1">
+<sinch-popover>
+  <slot name="target" slot="target"></slot>
+  <div id="listbox" slot="content">
     <slot name="option"></slot>
-  </dialog>
-</div>
+  </div>
+</sinch-popover>

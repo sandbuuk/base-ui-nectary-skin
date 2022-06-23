@@ -8,6 +8,10 @@ const getRects = (locators: Locator[]): Promise<(TRect | null)[]> => {
 }
 
 export const expandRect = (rect: TRect, offset: number): TRect => {
+  if (rect.width === 0 || rect.height === 0) {
+    return rect
+  }
+
   return {
     x: rect.x - offset,
     y: rect.y - offset,

@@ -16,7 +16,7 @@ template.innerHTML = templateHTML
 
 export class DropdownOption extends NectaryElement {
   #$iconSlot: HTMLSlotElement
-  #$content: HTMLSpanElement
+  #$content: HTMLElement
 
   constructor() {
     super()
@@ -26,7 +26,7 @@ export class DropdownOption extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$iconSlot = shadowRoot.querySelector('slot')!
-    this.#$content = shadowRoot.querySelector('span')!
+    this.#$content = shadowRoot.querySelector('#content')!
   }
 
   connectedCallback() {
