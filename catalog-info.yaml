@@ -33,7 +33,7 @@ metadata:
   name: nectary-library # nectary is a reserved name across Sinch
   description: The Nectary library implements the Nectary design system
   annotations:
-    - gitlab.com/project-id: 36072357
+    gitlab.com/project-id: 36072357
   links:
     - url: https://www.figma.com/file/1jOZ4kiqo1BNWGsmEjsWrR/🐝-Nectary-–-Global-Library?node-id=116%3A2660
       title: Figma
