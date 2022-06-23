@@ -23,9 +23,9 @@ declare global {
 }
 `.trimStart()
 
-const svgAttributes = 'viewBox="0 0 24 24" aria-hidden="true"'
-
 const dirPath = process.argv[2]
+const svgAttributes = 'viewBox="0 0 24 24" aria-hidden="true" focusable="false"'
+const overwriteNames: string[] = []
 
 const processIcon = async (filepath: string) => {
   // Filename without the extension
@@ -60,7 +60,7 @@ const processIcon = async (filepath: string) => {
   try {
     await mkdir(outDir)
   } catch {
-    console.log(`overwriting ${filename}`)
+    overwriteNames.push(filename)
   }
 
   await writeFile(outPathTs, dataTs)
@@ -73,6 +73,7 @@ const processIcon = async (filepath: string) => {
 
   await writeFile(indexPath, indexData)
 
+  /* Storybook */
   const storyPath = './stories/Icons.ts'
   let storyData = await readFile(storyPath, 'utf-8')
 
@@ -93,4 +94,9 @@ for (const filename of files) {
   await processIcon(filename)
 
   console.log(filename)
+}
+
+if (overwriteNames.length > 0) {
+  console.log('-----overwritten files-----')
+  console.log(overwriteNames.join('\n'))
 }
