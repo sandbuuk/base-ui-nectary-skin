@@ -1,5 +1,6 @@
 import { test } from '@playwright/test'
 import { runScreenshotTests } from '../screenshot-tests'
+import type { TSinchChatBubbleElement } from '@sinch-engage/nectary/chat-bubble'
 
 const withCustomerBubble = '/chat?example=bubble&type=customer'
 const withAgentBubble = '/chat?example=bubble&type=agent'
@@ -124,6 +125,61 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
         el.setAttribute('timestamp', '3:00pm')
       })
       yield { name: 'updated', include: [avatar] }
+    },
+  },
+  {
+    name: 'status attribute',
+    url: withAgentBubble,
+    async *fn({ $ }) {
+      const bubble = $.locator('sinch-chat-bubble')
+
+      await bubble.evaluate((el) => el.setAttribute('status', 'sending'))
+      yield { name: 'sending' }
+
+      await bubble.evaluate((el) => el.setAttribute('status', 'sent'))
+      yield { name: 'sent' }
+
+      await bubble.evaluate((el) => el.setAttribute('status', 'received'))
+      yield { name: 'received' }
+
+      await bubble.evaluate((el) => el.setAttribute('status', 'seen'))
+      yield { name: 'seen' }
+
+      await bubble.evaluate((el) => el.setAttribute('status', 'error'))
+      yield { name: 'error' }
+    },
+  },
+
+  {
+    name: 'status property',
+    url: withAgentBubble,
+    async *fn({ $ }) {
+      const bubble = $.locator('sinch-chat-bubble')
+
+      await bubble.evaluate((el: TSinchChatBubbleElement) => {
+        el.status = 'sending'
+      })
+      yield { name: 'sending' }
+
+      await bubble.evaluate((el: TSinchChatBubbleElement) => {
+        el.status = 'sent'
+      })
+      yield { name: 'sent' }
+
+      await bubble.evaluate((el: TSinchChatBubbleElement) => {
+        el.status = 'received'
+      })
+      yield { name: 'received' }
+
+      await bubble.evaluate((el: TSinchChatBubbleElement) => {
+        el.status = 'seen'
+      })
+      yield { name: 'seen' }
+
+      await bubble.evaluate((el: TSinchChatBubbleElement) => {
+        el.status = 'error'
+      })
+      yield { name: 'error' }
     },
   },
 ]))

@@ -1,14 +1,20 @@
+import '../icons/query-builder'
+import '../icons/check'
+import '../icons/done-all'
+import '../icons/error-outline'
 import {
   defineCustomElement,
   getAttribute,
   getLiteralAttribute,
   NectaryElement,
   updateAttribute,
+  updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 
 export const typeValues = ['customer', 'agent', 'agent-prev'] as const
+const statusValues = ['sending', 'sent', 'received', 'seen', 'error'] as const
 
 const template = document.createElement('template')
 
@@ -52,17 +58,29 @@ defineCustomElement('sinch-chat-bubble', class extends NectaryElement {
   get type(): TSinchChatBubbleType | null {
     return getLiteralAttribute(this, typeValues, 'data-type', null)
   }
+
+  set status(value: TSinchChatBubbleStatus | null) {
+    updateLiteralAttribute(this, statusValues, 'status', value)
+  }
+
+  get status(): TSinchChatBubbleStatus | null {
+    return getLiteralAttribute(this, statusValues, 'status', null)
+  }
 })
 
 export type TSinchChatBubbleType = typeof typeValues[number]
 
+export type TSinchChatBubbleStatus = typeof statusValues[number]
+
 export type TSinchChatBubbleElement = HTMLElement & {
   readonly type: TSinchChatBubbleType | null,
   text: string,
+  status: TSinchChatBubbleStatus | null,
 }
 
 export type TSinchChatBubbleReact = TSinchElementReact<TSinchChatBubbleElement> & {
   text: string,
+  status?: TSinchChatBubbleStatus,
 }
 
 declare global {

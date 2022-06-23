@@ -1,0 +1,18 @@
+import { defineCustomElement } from '../../utils'
+import { createIconClass } from '../create-icon-class'
+import templateHTML from './template.html'
+import type { TSinchIconElement, TSinchIconReact } from '../types'
+
+defineCustomElement('sinch-icon-pending-actions', createIconClass(templateHTML))
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-pending-actions': TSinchIconReact,
+    }
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-icon-pending-actions': TSinchIconElement,
+  }
+}
