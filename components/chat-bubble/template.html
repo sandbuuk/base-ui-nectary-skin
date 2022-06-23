@@ -4,30 +4,80 @@
   outline: none;
 }
 
-#text {
+#wrapper {
+  position: relative;
   padding: 12px 16px;
   border-radius: 16px;
-  font: var(--sinch-font-body);
-  color: var(--sinch-color-stormy-500);
-  margin: 0;
   max-width: 595px;
   box-sizing: border-box;
 }
 
-:host([data-type="customer"]) > #text {
+:host([data-type="customer"]) > #wrapper {
   background-color: var(--sinch-color-snow-500);
   border-top-left-radius: 0;
 }
 
-:host([data-type="agent-prev"]) > #text {
+:host([data-type="agent-prev"]) > #wrapper {
   background-color: var(--sinch-color-snow-700);
   border-top-right-radius: 0;
 }
 
-:host([data-type="agent"]) > #text {
+:host([data-type="agent"]) > #wrapper {
   background-color: var(--sinch-color-honey-200);
   border-top-right-radius: 0;
 }
+
+#text {
+  font: var(--sinch-font-body);
+  color: var(--sinch-color-stormy-500);
+}
+
+sinch-icon-query-builder,
+sinch-icon-check,
+sinch-icon-done-all,
+sinch-icon-error-outline {
+  display: none;
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+
+  --sinch-size-icon: 16px;
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+:host([status="sending"]) sinch-icon-query-builder {
+  display: block;
+}
+
+:host([status="sent"]) sinch-icon-check {
+  display: block;
+}
+
+:host([status="received"]) sinch-icon-done-all {
+  display: block;
+}
+
+:host([status="seen"]) sinch-icon-done-all {
+  display: block;
+
+  --sinch-color-icon: var(--sinch-color-success-500);
+}
+
+:host([status="error"]) sinch-icon-error-outline {
+  display: block;
+
+  --sinch-color-icon: var(--sinch-color-error-500);
+}
+
+:host([status]:not([status=""])) #wrapper {
+  padding-right: 42px;
+}
 </style>
 
-<p id="text"></p>
+<div id="wrapper">
+  <span id="text"></span>
+  <sinch-icon-query-builder></sinch-icon-query-builder>
+  <sinch-icon-check></sinch-icon-check>
+  <sinch-icon-done-all></sinch-icon-done-all>
+  <sinch-icon-error-outline></sinch-icon-error-outline>
+</div>
