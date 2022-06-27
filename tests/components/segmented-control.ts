@@ -117,29 +117,6 @@ test('segmented-control screenshots', runScreenshotTests('sinch-segmented-contro
     },
   },
   {
-    name: 'keyboard',
-    url: withOptions,
-    async *fn({ $, page }) {
-      const rect = (await $.boundingBox())!
-      const shotRect = expandRect(rect, 3)
-
-      await page.keyboard.press('Tab')
-      yield { name: '1-focus', includeRects: [shotRect] }
-
-      await $.press('ArrowDown', { delay: 100 })
-      await $.press('ArrowDown', { delay: 100 })
-      yield { name: '2-down-down', includeRects: [shotRect] }
-
-      await $.press('ArrowRight', { delay: 100 })
-      await $.press('ArrowRight', { delay: 100 })
-      yield { name: '3-right-right', includeRects: [shotRect] }
-
-      await $.press('ArrowUp', { delay: 100 })
-      await $.press('ArrowLeft', { delay: 100 })
-      yield { name: '4-up-left', includeRects: [shotRect] }
-    },
-  },
-  {
     name: 'custom events',
     url: withOptions,
     async *fn({ $, page }) {
