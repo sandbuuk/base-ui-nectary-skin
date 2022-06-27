@@ -13,6 +13,7 @@ import '@sinch-engage/nectary/icons-branded/users'
 import '@sinch-engage/nectary/icons-branded/multiple-channels'
 import '@sinch-engage/nectary/icons-branded/rocket'
 import '@sinch-engage/nectary/icons-branded/settings'
+import '@sinch-engage/nectary/icons-branded/global-settings'
 
 const iconNames = [
   'sinch-icon-branded-bell',
@@ -27,6 +28,7 @@ const iconNames = [
   'sinch-icon-branded-multiple-channels',
   'sinch-icon-branded-rocket',
   'sinch-icon-branded-settings',
+  'sinch-icon-branded-global-settings',
 ]
 
 export default {
