@@ -10,6 +10,8 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
   const isCheckbox = search.get('checkbox') !== null
   const isRadio = search.get('radio') !== null
   const isSelect = !isCheckbox && !isRadio
+  const isMultiple = search.get('multiple') !== null
+  const orientation = search.get('orientation') as TSinchDropdownOrientation ?? undefined
   const [isOpen, setOpen] = useState(search.get('open') !== null)
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = useMemo(() =>
@@ -19,7 +21,10 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
 
         window.dispatchEvent(new CustomEvent('sinch-dropdown-change', { detail: value }))
         setValue(value)
-        setOpen(false)
+
+        if (!isMultiple) {
+          setOpen(false)
+        }
       }
       : () => {}),
   [search, setValue])
@@ -39,11 +44,10 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
     return val !== null ? parseInt(val) : undefined
   }, [search])
 
-  const orientation = search.get('orientation') as TSinchDropdownOrientation ?? undefined
-
   return (
     <sinch-dropdown
       open={isOpen}
+      multiple={isMultiple}
       maxVisibleItems={maxVisibleItems}
       value={value}
       orientation={orientation}

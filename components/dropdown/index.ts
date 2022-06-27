@@ -6,6 +6,8 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getCSVSet,
+  getFirstCSValue,
   getIntegerAttribute,
   getLiteralAttribute,
   getReactEventHandler,
@@ -13,6 +15,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateCSV,
   updateIntegerAttribute,
   updateLiteralAttribute,
 } from '../utils'
@@ -105,6 +108,14 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     return getBooleanAttribute(this, 'open')
   }
 
+  set multiple(isMultiple: boolean) {
+    updateBooleanAttribute(this, 'multiple', isMultiple)
+  }
+
+  get multiple() {
+    return getBooleanAttribute(this, 'multiple')
+  }
+
   get dropdownRect() {
     return this.#$popover.popoverRect
   }
@@ -193,17 +204,18 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     this.#onValueChange(this.value)
   }
 
-  #onValueChange(value: string) {
-    let $checkedOption: TSinchDropdownOptionElement | null = null
+  #onValueChange(csv: string) {
+    if (this.multiple) {
+      const values = getCSVSet(csv)
 
-    for (const $option of this.#getOptionElements()) {
-      const isChecked = $checkedOption === null && $option.disabled !== true && $option.value === value
+      for (const $option of this.#getOptionElements()) {
+        $option.checked = $option.disabled !== true && values.has($option.value)
+      }
+    } else {
+      const value = getFirstCSValue(csv)
 
-      // Check / Uncheck options
-      $option.checked = isChecked
-
-      if (isChecked) {
-        $checkedOption = $option
+      for (const $option of this.#getOptionElements()) {
+        $option.checked = $option.disabled !== true && $option.value === value
       }
     }
   }
@@ -287,16 +299,23 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     return this.#getOptionElements().filter((opt) => opt.disabled !== true)
   }
 
-    if ($opt != null) {
-      this.dispatchEvent(
-        new CustomEvent('change', { detail: $opt.value, bubbles: true })
-      )
-    }
   #dispatchChangeEvent($opt: TDropdownOption | null) {
+    if ($opt === null) {
+      return
+    }
+
+    const value = $opt.value
+    const result = this.multiple
+      ? updateCSV(this.value, value, !$opt.checked)
+      : value
+
+    this.dispatchEvent(
+      new CustomEvent('change', { detail: result, bubbles: true })
+    )
   }
 
   #onOpen() {
-    const $opt = this.#getOptionWithValue(this.value)
+    const $opt = this.#getOptionWithValue(getFirstCSValue(this.value))
 
     if ($opt !== null) {
       this.#selectOption($opt)
@@ -321,6 +340,7 @@ export type TSinchDropdownOrientation = typeof orientationValues[number]
 
 export type TSinchDropdownElement = HTMLElement & {
   open: boolean,
+  multiple: boolean,
   orientation: TSinchDropdownOrientation,
   value: string,
   maxVisibleItems: number | null,
@@ -331,6 +351,7 @@ export type TSinchDropdownElement = HTMLElement & {
 
 export type TSinchDropdownReact = TSinchElementReact<TSinchDropdownElement> & {
   open: boolean,
+  multiple?: boolean,
   orientation?: TSinchDropdownOrientation,
   value: string,
   maxVisibleItems?: number,
