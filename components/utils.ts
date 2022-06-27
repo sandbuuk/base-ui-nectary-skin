@@ -189,29 +189,32 @@ export function getIntegerAttribute($element: Element, attrName: string, default
   return attrValueToInteger($element.getAttribute(attrName)) ?? defaultValue
 }
 
-export const updateCSV = (acc: string, value: string, setActive: boolean): string => {
-  const values = acc === '' ? [] : acc.split(',')
-  const i = values.indexOf(value)
+const unpackCSV = (csv: string): string[] => {
+  return csv === '' ? [] : csv.split(',')
+}
 
-  if (setActive) {
-    i === -1 && values.push(value)
-  } else {
-    i >= 0 && values.splice(i, 1)
-  }
-
-  return values.join(',')
+const packCSV = (values: Set<string>): string => {
+  return Array.from(values).join(',')
 }
 
 export const getCSVSet = (acc: string): Set<string> => {
-  if (acc === '') {
-    return new Set()
+  return new Set(unpackCSV(acc))
+}
+
+export const updateCSV = (acc: string, value: string, setActive: boolean): string => {
+  const values = getCSVSet(acc)
+
+  if (setActive) {
+    values.add(value)
+  } else {
+    values.delete(value)
   }
 
-  return new Set(acc.split(','))
+  return packCSV(values)
 }
 
 export const getFirstCSValue = (acc: string): string => {
-  return acc.split(',')[0]
+  return acc === '' ? '' : unpackCSV(acc)[0]
 }
 
 export const getRect = (el: Element): TRect => {

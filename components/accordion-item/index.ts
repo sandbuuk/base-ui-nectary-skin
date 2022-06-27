@@ -135,7 +135,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('change', {
         bubbles: true,
-        detail: { value: this.value, isChecked: !this.checked },
+        detail: this.value,
       })
     )
   }

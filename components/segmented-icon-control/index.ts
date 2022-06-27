@@ -78,14 +78,15 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
   #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
-    if (!isSegmentedIconControlOptionElement(e.target)) {
+    const $elem = e.target
+
+    if (!isSegmentedIconControlOptionElement($elem)) {
       return
     }
 
-    const { value, isChecked } = (e as CustomEvent).detail
-
+    const value = (e as CustomEvent).detail
     const result = this.multiple
-      ? updateCSV(this.value, value, isChecked)
+      ? updateCSV(this.value, value, !$elem.checked)
       : value
 
     this.dispatchEvent(

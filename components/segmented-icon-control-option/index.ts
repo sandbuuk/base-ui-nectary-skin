@@ -94,7 +94,7 @@ class SinchSegmentedIconControlOption extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('change', {
         bubbles: true,
-        detail: { value: this.value, isChecked: !this.checked },
+        detail: this.value,
       })
     )
   }

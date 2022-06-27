@@ -78,20 +78,19 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
   #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
-    if (!isAccordionItemElement(e.target)) {
+    const $elem = e.target
+
+    if (!isAccordionItemElement($elem)) {
       return
     }
 
-    const { value, isChecked } = (e as CustomEvent).detail
-
-    const csv = updateCSV(
-      this.multiple ? this.value : value,
-      value,
-      isChecked
-    )
+    const value = (e as CustomEvent).detail
+    const result = this.multiple
+      ? updateCSV(this.value, value, !$elem.checked)
+      : value
 
     this.dispatchEvent(
-      new CustomEvent('change', { detail: csv, bubbles: true })
+      new CustomEvent('change', { detail: result, bubbles: true })
     )
   }
 
