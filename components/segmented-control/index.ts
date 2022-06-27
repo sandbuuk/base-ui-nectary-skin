@@ -15,6 +15,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-control', class extends NectaryElement {
   #$slot: HTMLSlotElement
+  #$sh: ShadowRoot
 
   constructor() {
     super()
@@ -22,14 +23,20 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
     const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    shadowRoot.addEventListener('change', this.#onOptionChange)
 
+    this.#$sh = shadowRoot
     this.#$slot = shadowRoot.querySelector('slot')!
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   connectedCallback() {
     this.setAttribute('role', 'tablist')
+    this.#$sh.addEventListener('change', this.#onOptionChange)
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
+  }
+
+  disconnectedCallback() {
+    this.#$sh.removeEventListener('change', this.#onOptionChange)
+    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
   }
 
   static get observedAttributes() {
