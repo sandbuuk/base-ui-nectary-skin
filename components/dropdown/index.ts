@@ -1,4 +1,6 @@
+import { isDropdownCheckboxOptionElement } from '../dropdown-checkbox-option'
 import { isDropdownOptionElement } from '../dropdown-option'
+import { isDropdownRadioOptionElement } from '../dropdown-radio-option'
 import {
   attrValueToPixels,
   defineCustomElement,
@@ -15,25 +17,21 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchDropdownCheckboxOptionElement } from '../dropdown-checkbox-option'
 import type { TSinchDropdownOptionElement } from '../dropdown-option'
+import type { TSinchDropdownRadioOptionElement } from '../dropdown-radio-option'
 import type { TSinchPopoverElement } from '../popover'
 import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
-const orientationValues = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
+type TDropdownOption = TSinchDropdownOptionElement | TSinchDropdownCheckboxOptionElement | TSinchDropdownRadioOptionElement
 
-const ITEM_HEIGHT = 40
-
-const findSelectedOption = (elements: readonly TSinchDropdownOptionElement[]) => {
-  for (const el of elements) {
-    if (el.selected) {
-      return el
-    }
-  }
-
-  return null
+const isDropdownOption = (el: Element | EventTarget | null): el is TDropdownOption => {
+  return isDropdownOptionElement(el) || isDropdownCheckboxOptionElement(el) || isDropdownRadioOptionElement(el)
 }
 
+const orientationValues = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
+const ITEM_HEIGHT = 40
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
@@ -159,7 +157,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
   #onListboxClick = (e: MouseEvent) => {
     const $elem = e.target
 
-    if (isDropdownOptionElement($elem) && !$elem.disabled) {
+    if (isDropdownOption($elem) && !$elem.disabled) {
       e.stopPropagation()
       this.#dispatchChangeEvent($elem)
     }
@@ -170,7 +168,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
       case 'Space':
       case 'Enter': {
         e.preventDefault()
-        this.#dispatchChangeEvent(findSelectedOption(this.#getEnabledOptionElements()))
+        this.#dispatchChangeEvent(this.#findSelectedOption(this.#getEnabledOptionElements()))
 
         break
       }
@@ -220,7 +218,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
 
   #getNextOption() {
     const $options = this.#getEnabledOptionElements()
-    const $selectedOption = findSelectedOption($options)
+    const $selectedOption = this.#findSelectedOption($options)
     const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
 
     if (currentIndex < 0) {
@@ -232,7 +230,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
 
   #getPrevOption() {
     const $options = this.#getEnabledOptionElements()
-    const $selectedOption = findSelectedOption($options)
+    const $selectedOption = this.#findSelectedOption($options)
     const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
 
     if (currentIndex < 0) {
@@ -242,7 +240,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     return $options[(currentIndex - 1 + $options.length) % $options.length]
   }
 
-  #selectOption($option: TSinchDropdownOptionElement | null) {
+  #selectOption($option: TDropdownOption | null) {
     for (const $op of this.#getOptionElements()) {
       const isSelected = $op === $option
 
@@ -255,7 +253,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     }
   }
 
-  #getOptionWithValue(value: string): TSinchDropdownOptionElement | null {
+  #getOptionWithValue(value: string): TDropdownOption | null {
     for (const $option of this.#getOptionElements()) {
       if ($option.disabled !== true && $option.value === value) {
         return $option
@@ -265,26 +263,36 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     return null
   }
 
-  #getOptionElements(): TSinchDropdownOptionElement[] {
+  #getOptionElements(): TDropdownOption[] {
     let $elements = this.#$optionSlot.assignedElements()
 
     if ($elements.length === 1 && $elements[0].tagName === 'SLOT') {
       $elements = ($elements[0] as HTMLSlotElement).assignedElements()
     }
 
-    return $elements.filter(isDropdownOptionElement)
+    return $elements.filter(isDropdownOption)
   }
 
-  #getEnabledOptionElements(): TSinchDropdownOptionElement[] {
+  #findSelectedOption(elements: readonly TDropdownOption[]): TDropdownOption | null {
+    for (const el of elements) {
+      if (el.selected) {
+        return el
+      }
+    }
+
+    return null
+  }
+
+  #getEnabledOptionElements(): TDropdownOption[] {
     return this.#getOptionElements().filter((opt) => opt.disabled !== true)
   }
 
-  #dispatchChangeEvent($opt: TSinchDropdownOptionElement | null) {
     if ($opt != null) {
       this.dispatchEvent(
         new CustomEvent('change', { detail: $opt.value, bubbles: true })
       )
     }
+  #dispatchChangeEvent($opt: TDropdownOption | null) {
   }
 
   #onOpen() {

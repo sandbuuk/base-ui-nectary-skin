@@ -10,14 +10,22 @@ import '@sinch-engage/nectary/dropdown'
 
 export class DropdownComponent {
   isOpen: boolean
+  isMultiple: boolean
   value: string
   isControlled: boolean
   maxVisibleItems: number | null
   orientation: string | null
+  isCheckbox: boolean
+  isRadio: boolean
+  isSelect: boolean
 
   constructor() {
     const url = new URL(location.href)
     this.isOpen = url.searchParams.get('open') !== null
+    this.isMultiple = url.searchParams.get('multiple') !== null
+    this.isCheckbox = url.searchParams.get('checkbox') !== null
+    this.isRadio = url.searchParams.get('radio') !== null
+    this.isSelect = !this.isCheckbox && !this.isRadio
     this.value = url.searchParams.get('value') ?? ''
     this.isControlled = url.searchParams.get('uncontrolled') === null
     this.orientation = url.searchParams.get('orientation')
