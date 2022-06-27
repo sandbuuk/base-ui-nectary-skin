@@ -1,13 +1,15 @@
 <template>
   <sinch-segmented-control :value="value" @change="onChange">
-    <sinch-segmented-control-option
-      v-for="opt in options"
-      :key="opt.value"
-      :value="opt.value"
-      :text="opt.text"
-      :disabled="opt.disabled">
-      <sinch-icon-open-in-new v-if="opt.icon != null" slot="icon"></sinch-icon-open-in-new>
+    <sinch-segmented-control-option value="1" text="Option value 1">
+      <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
     </sinch-segmented-control-option>
+    <template v-if="!isSingleOption">
+      <sinch-segmented-control-option value="2" text="Option value 2" disabled>
+        <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
+      </sinch-segmented-control-option>
+      <sinch-segmented-control-option value="3" text="Option value 3"></sinch-segmented-control-option>
+      <sinch-segmented-control-option value="4" text="Option value 4"></sinch-segmented-control-option>
+    </template>
   </sinch-segmented-control>
 </template>
 
@@ -28,18 +30,8 @@ export default {
     isControlled() {
       return this.search.get('uncontrolled') === null
     },
-    options() {
-      const data = this.search.get('options')
-
-      if (data === null) {
-        return []
-      }
-
-      try {
-        return JSON.parse(decodeURI(data))
-      } catch {
-        return []
-      }
+    isSingleOption() {
+      return this.search.get('single-option') !== null
     }
   },
   data() {
