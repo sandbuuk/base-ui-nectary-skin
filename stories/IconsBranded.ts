@@ -15,6 +15,7 @@ import '@sinch-engage/nectary/icons-branded/rocket'
 import '@sinch-engage/nectary/icons-branded/settings'
 import '@sinch-engage/nectary/icons-branded/global-settings'
 import '@sinch-engage/nectary/icons-branded/credit-card'
+import '@sinch-engage/nectary/icons-branded/help'
 
 const iconNames = [
   'sinch-icon-branded-bell',
@@ -31,6 +32,7 @@ const iconNames = [
   'sinch-icon-branded-settings',
   'sinch-icon-branded-global-settings',
   'sinch-icon-branded-credit-card',
+  'sinch-icon-branded-help',
 ]
 
 export default {
