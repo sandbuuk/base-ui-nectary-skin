@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import '@sinch-engage/nectary/icons/open-in-new'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/select'
+import '@sinch-engage/nectary/select-option'
 
 @Component({
   selector: 'select-component',

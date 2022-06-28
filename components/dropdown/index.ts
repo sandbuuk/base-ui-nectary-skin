@@ -1,13 +1,10 @@
-import { isDropdownCheckboxOptionElement } from '../dropdown-checkbox-option/utils'
-import { isDropdownRadioOptionElement } from '../dropdown-radio-option/utils'
-import { isDropdownTextOptionElement } from '../dropdown-text-option/utils'
 import {
   attrValueToPixels,
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getCSVSet,
-  getFirstCSValue,
+  getCsvSet,
+  getFirstCsvValue,
   getIntegerAttribute,
   getLiteralAttribute,
   getReactEventHandler,
@@ -15,7 +12,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
-  updateCSV,
+  updateCsv,
   updateIntegerAttribute,
   updateLiteralAttribute,
 } from '../utils'
@@ -28,10 +25,6 @@ import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
 type TDropdownOption = TSinchDropdownTextOptionElement | TSinchDropdownCheckboxOptionElement | TSinchDropdownRadioOptionElement
-
-const isDropdownOption = (el: Element | EventTarget | null): el is TDropdownOption => {
-  return isDropdownTextOptionElement(el) || isDropdownCheckboxOptionElement(el) || isDropdownRadioOptionElement(el)
-}
 
 const orientationValues = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
 const ITEM_HEIGHT = 40
@@ -128,11 +121,11 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
         if (isAttrTrue(newVal)) {
           this.#onOpen()
           this.#$popover.addEventListener('keydown', this.#onListboxKeyDown)
-          this.#$popover.addEventListener('click', this.#onListboxClick)
+          this.#$listbox.addEventListener('click', this.#onListboxClick)
           this.#$popover.addEventListener('close', this.#onClose)
         } else {
           this.#$popover.removeEventListener('keydown', this.#onListboxKeyDown)
-          this.#$popover.removeEventListener('click', this.#onListboxClick)
+          this.#$listbox.removeEventListener('click', this.#onListboxClick)
           this.#$popover.removeEventListener('close', this.#onClose)
         }
 
@@ -165,10 +158,10 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     }
   }
 
-  #onListboxClick = (e: MouseEvent) => {
-    const $elem = e.target
+  #onListboxClick = (e: Event) => {
+    const $elem = (e.target) as TDropdownOption
 
-    if (isDropdownOption($elem) && !$elem.disabled) {
+    if (!$elem.disabled) {
       e.stopPropagation()
       this.#dispatchChangeEvent($elem)
     }
@@ -206,13 +199,13 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
 
   #onValueChange(csv: string) {
     if (this.multiple) {
-      const values = getCSVSet(csv)
+      const values = getCsvSet(csv)
 
       for (const $option of this.#getOptionElements()) {
         $option.checked = $option.disabled !== true && values.has($option.value)
       }
     } else {
-      const value = getFirstCSValue(csv)
+      const value = getFirstCsvValue(csv)
 
       for (const $option of this.#getOptionElements()) {
         $option.checked = $option.disabled !== true && $option.value === value
@@ -282,7 +275,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
       $elements = ($elements[0] as HTMLSlotElement).assignedElements()
     }
 
-    return $elements.filter(isDropdownOption)
+    return $elements as TDropdownOption[]
   }
 
   #findSelectedOption(elements: readonly TDropdownOption[]): TDropdownOption | null {
@@ -306,7 +299,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
 
     const value = $opt.value
     const result = this.multiple
-      ? updateCSV(this.value, value, !$opt.checked)
+      ? updateCsv(this.value, value, !$opt.checked)
       : value
 
     this.dispatchEvent(
@@ -315,7 +308,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
   }
 
   #onOpen() {
-    const $opt = this.#getOptionWithValue(getFirstCSValue(this.value))
+    const $opt = this.#getOptionWithValue(getFirstCsvValue(this.value))
 
     if ($opt !== null) {
       this.#selectOption($opt)

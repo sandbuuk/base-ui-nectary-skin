@@ -1,4 +1,3 @@
-import { isSinchSearchOptionElement } from '../search-option'
 import {
   attrValueToPixels,
   defineCustomElement,
@@ -266,12 +265,9 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   #onListboxClick = (e: Event) => {
     e.stopPropagation()
 
-    const $elem = e.target
+    const $elem = e.target as TSinchSearchOptionElement
 
-    if (isSinchSearchOptionElement($elem)) {
-      this.#onValueChange($elem.text)
-    }
-
+    this.#onValueChange($elem.text)
     this.#onCollapse()
   }
 
@@ -345,15 +341,15 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   }
 
   #getFirstOption(): TSinchSearchOptionElement | null {
-    return this.#$optionSlot.assignedElements().filter(isSinchSearchOptionElement)[0] ?? null
+    return (this.#$optionSlot.assignedElements() as TSinchSearchOptionElement[])[0] ?? null
   }
 
   #getLastOption(): TSinchSearchOptionElement | null {
-    return this.#$optionSlot.assignedElements().filter(isSinchSearchOptionElement).reverse()[0] ?? null
+    return (this.#$optionSlot.assignedElements() as TSinchSearchOptionElement[]).reverse()[0] ?? null
   }
 
   #getNextOption(): TSinchSearchOptionElement | null {
-    const $options = this.#$optionSlot.assignedElements().filter(isSinchSearchOptionElement)
+    const $options = this.#$optionSlot.assignedElements() as TSinchSearchOptionElement[]
     const $selectedOption = this.#findSelectedOption()
     const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
 
@@ -365,7 +361,7 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   }
 
   #getPrevOption(): TSinchSearchOptionElement | null {
-    const $options = this.#$optionSlot.assignedElements().filter(isSinchSearchOptionElement)
+    const $options = this.#$optionSlot.assignedElements() as TSinchSearchOptionElement[]
     const $selectedOption = this.#findSelectedOption()
     const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
 
@@ -390,9 +386,9 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   }
 
   #findSelectedOption(): TSinchSearchOptionElement | null {
-    for (const el of this.#$optionSlot.assignedElements()) {
-      if (isSinchSearchOptionElement(el) && el.selected) {
-        return el
+    for (const $option of this.#$optionSlot.assignedElements() as TSinchSearchOptionElement[]) {
+      if ($option.selected) {
+        return $option
       }
     }
 

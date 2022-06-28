@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/radio'
+import '@sinch-engage/nectary/radio-option'
 
 @Component({
   selector: 'radio-component',

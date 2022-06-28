@@ -1,5 +1,3 @@
-import { isSinchCardButtonElement } from '../card-button/utils'
-import { isSinchCardLinkElement } from '../card-link/utils'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -118,11 +116,9 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   }
 
   #updateDisabledAttributeInChildren = () => {
-    this.#$actionSlot.assignedElements().forEach((el) => {
-      if (isSinchCardButtonElement(el) || isSinchCardLinkElement(el)) {
-        updateAttribute(el, 'disabled', this.getAttribute('disabled'))
-      }
-    })
+    for (const $el of this.#$actionSlot.assignedElements()) {
+      updateAttribute($el, 'disabled', this.getAttribute('disabled'))
+    }
   }
 })
 

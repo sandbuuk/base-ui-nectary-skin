@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/search'
+import '@sinch-engage/nectary/search-option'
 
 @Component({
   selector: 'search-component',

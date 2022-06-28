@@ -1,16 +1,16 @@
-import { isSegmentedIconControlOptionElement } from '../segmented-icon-control-option/utils'
 import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getCSVSet,
-  getFirstCSValue,
+  getCsvSet,
+  getFirstCsvValue,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
-  updateCSV,
+  updateCsv,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchSegmentedIconControlOptionElement } from '../segmented-icon-control-option'
 import type { TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
 
@@ -78,15 +78,10 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
   #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
-    const $elem = e.target
-
-    if (!isSegmentedIconControlOptionElement($elem)) {
-      return
-    }
-
+    const $elem = (e.target) as TSinchSegmentedIconControlOptionElement
     const value = (e as CustomEvent).detail
     const result = this.multiple
-      ? updateCSV(this.value, value, !$elem.checked)
+      ? updateCsv(this.value, value, !$elem.checked)
       : value
 
     this.dispatchEvent(
@@ -96,20 +91,20 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
 
   #onValueChange(csv: string) {
     if (this.multiple) {
-      const values = getCSVSet(csv)
+      const values = getCsvSet(csv)
 
-      for (const $option of this.#$slot.assignedElements()) {
-        if (isSegmentedIconControlOptionElement($option)) {
-          $option.checked = $option.disabled !== true && values.has($option.value)
-        }
+      for (const $el of this.#$slot.assignedElements()) {
+        const $option = $el as TSinchSegmentedIconControlOptionElement
+
+        $option.checked = $option.disabled !== true && values.has($option.value)
       }
     } else {
-      const value = getFirstCSValue(csv)
+      const value = getFirstCsvValue(csv)
 
-      for (const $option of this.#$slot.assignedElements()) {
-        if (isSegmentedIconControlOptionElement($option)) {
-          $option.checked = $option.disabled !== true && $option.value === value
-        }
+      for (const $el of this.#$slot.assignedElements()) {
+        const $option = $el as TSinchSegmentedIconControlOptionElement
+
+        $option.checked = $option.disabled !== true && $option.value === value
       }
     }
   }
