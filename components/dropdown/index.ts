@@ -1,6 +1,6 @@
-import { isDropdownCheckboxOptionElement } from '../dropdown-checkbox-option'
-import { isDropdownOptionElement } from '../dropdown-option'
-import { isDropdownRadioOptionElement } from '../dropdown-radio-option'
+import { isDropdownCheckboxOptionElement } from '../dropdown-checkbox-option/utils'
+import { isDropdownRadioOptionElement } from '../dropdown-radio-option/utils'
+import { isDropdownTextOptionElement } from '../dropdown-text-option/utils'
 import {
   attrValueToPixels,
   defineCustomElement,
@@ -21,16 +21,16 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDropdownCheckboxOptionElement } from '../dropdown-checkbox-option'
-import type { TSinchDropdownOptionElement } from '../dropdown-option'
 import type { TSinchDropdownRadioOptionElement } from '../dropdown-radio-option'
+import type { TSinchDropdownTextOptionElement } from '../dropdown-text-option'
 import type { TSinchPopoverElement } from '../popover'
 import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
-type TDropdownOption = TSinchDropdownOptionElement | TSinchDropdownCheckboxOptionElement | TSinchDropdownRadioOptionElement
+type TDropdownOption = TSinchDropdownTextOptionElement | TSinchDropdownCheckboxOptionElement | TSinchDropdownRadioOptionElement
 
 const isDropdownOption = (el: Element | EventTarget | null): el is TDropdownOption => {
-  return isDropdownOptionElement(el) || isDropdownCheckboxOptionElement(el) || isDropdownRadioOptionElement(el)
+  return isDropdownTextOptionElement(el) || isDropdownCheckboxOptionElement(el) || isDropdownRadioOptionElement(el)
 }
 
 const orientationValues = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const

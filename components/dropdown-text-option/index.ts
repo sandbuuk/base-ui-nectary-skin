@@ -14,7 +14,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-export class DropdownOption extends NectaryElement {
+export class DropdownTextOption extends NectaryElement {
   #$iconSlot: HTMLSlotElement
   #$content: HTMLElement
 
@@ -100,13 +100,9 @@ export class DropdownOption extends NectaryElement {
   }
 }
 
-defineCustomElement('sinch-dropdown-option', DropdownOption)
+defineCustomElement('sinch-dropdown-text-option', DropdownTextOption)
 
-export const isDropdownOptionElement = (element: EventTarget | Element | null): element is TSinchDropdownOptionElement => {
-  return element instanceof DropdownOption
-}
-
-export type TSinchDropdownOptionElement = HTMLElement & {
+export type TSinchDropdownTextOptionElement = HTMLElement & {
   value: string,
   text: string,
   checked: boolean,
@@ -115,7 +111,7 @@ export type TSinchDropdownOptionElement = HTMLElement & {
   readonly icon: Element | null,
 }
 
-export type TSinchDropdownOptionReact = TSinchElementReact<TSinchDropdownOptionElement> & {
+export type TSinchDropdownTextOptionReact = TSinchElementReact<TSinchDropdownTextOptionElement> & {
   value: string,
   text: string,
   disabled?: boolean,
@@ -125,11 +121,11 @@ export type TSinchDropdownOptionReact = TSinchElementReact<TSinchDropdownOptionE
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-dropdown-option': TSinchDropdownOptionReact,
+      'sinch-dropdown-text-option': TSinchDropdownTextOptionReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-dropdown-option': TSinchDropdownOptionElement,
+    'sinch-dropdown-text-option': TSinchDropdownTextOptionElement,
   }
 }
