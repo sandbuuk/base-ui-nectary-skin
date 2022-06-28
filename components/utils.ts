@@ -226,3 +226,9 @@ export const getRect = (el: Element): TRect => {
 export const setClass = (elem: Element, name: string, isSet: boolean) => {
   isSet ? elem.classList.add(name) : elem.classList.remove(name)
 }
+
+export const getCssVar = (element: Element, variableName: string): string | null => {
+  const result = getComputedStyle(element).getPropertyValue(variableName)
+
+  return result === '' ? null : result
+}

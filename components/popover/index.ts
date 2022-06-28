@@ -9,6 +9,7 @@ import {
   getReactEventHandler,
   updateBooleanAttribute,
   NectaryElement,
+  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TRect, TSinchElementReact } from '../types'
@@ -137,17 +138,24 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     const targetRect = this.#$target.getBoundingClientRect()
     const modalRect = this.#$dialog.getBoundingClientRect()
+
     let leftOffset = 0
     let topOffset = 0
 
     const orient = this.orientation
+    const shouldExpandWidthToTarget = getCssVar(this, '--sinch-popover-expand-width') !== null
+    const largestWidth = Math.max(modalRect.width, targetRect.width)
+    const widthDiff = shouldExpandWidthToTarget
+      ? Math.max(largestWidth - modalRect.width, 0) * 0.5
+      : 0
+    const resultWidth = shouldExpandWidthToTarget ? largestWidth : modalRect.width
 
     if (orient === 'bottom-right' || orient === 'top-right') {
-      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, targetRect.x - modalRect.x))
+      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, targetRect.x - modalRect.x) + widthDiff)
     }
 
     if (orient === 'bottom-left' || orient === 'top-left') {
-      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, targetRect.x + targetRect.width - modalRect.x - modalRect.width))
+      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, targetRect.x + targetRect.width - modalRect.x - modalRect.width) - widthDiff)
     }
 
     if (orient === 'bottom-left' || orient === 'bottom-right') {
@@ -159,7 +167,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     }
 
     this.#$dialog.style.transform = `translateX(${leftOffset}px) translateY(${topOffset}px)`
-    this.#$dialog.style.width = `${modalRect.width}px`
+    this.#$dialog.style.width = `${resultWidth}px`
   }
 
   #onBackdropClick = (e: MouseEvent) => {
