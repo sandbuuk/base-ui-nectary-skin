@@ -11,9 +11,9 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import { typeValues } from './utils'
 import type { TSinchElementReact } from '../types'
 
-export const typeValues = ['customer', 'agent', 'agent-prev'] as const
 const statusValues = ['sending', 'sent', 'received', 'seen', 'error'] as const
 
 const template = document.createElement('template')

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/segmented-control'
+import '@sinch-engage/nectary/segmented-control-option'
 
 @Component({
   selector: 'segmented-control-component',

@@ -1,4 +1,4 @@
-import { isSegmentedIconControlOptionElement } from '../segmented-icon-control-option'
+import { isSegmentedIconControlOptionElement } from '../segmented-icon-control-option/utils'
 import {
   defineCustomElement,
   getAttribute,

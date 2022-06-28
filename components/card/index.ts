@@ -1,5 +1,5 @@
-import { isSinchCardButtonElement } from '../card-button'
-import { isSinchCardLinkElement } from '../card-link'
+import { isSinchCardButtonElement } from '../card-button/utils'
+import { isSinchCardLinkElement } from '../card-link/utils'
 import {
   defineCustomElement,
   getBooleanAttribute,

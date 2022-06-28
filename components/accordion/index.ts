@@ -1,4 +1,4 @@
-import { isAccordionItemElement } from '../accordion-item'
+import { isAccordionItemElement } from '../accordion-item/utils'
 import {
   defineCustomElement,
   getAttribute,

@@ -14,7 +14,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-class DropdownCheckboxOption extends NectaryElement {
+defineCustomElement('sinch-dropdown-checkbox-option', class extends NectaryElement {
   #$text: HTMLElement
 
   constructor() {
@@ -92,13 +92,7 @@ class DropdownCheckboxOption extends NectaryElement {
   get selected() {
     return getBooleanAttribute(this, 'data-selected')
   }
-}
-
-defineCustomElement('sinch-dropdown-checkbox-option', DropdownCheckboxOption)
-
-export const isDropdownCheckboxOptionElement = (element: EventTarget | Element | null): element is TSinchDropdownCheckboxOptionElement => {
-  return element instanceof DropdownCheckboxOption
-}
+})
 
 export type TSinchDropdownCheckboxOptionElement = HTMLElement & {
   value: string,

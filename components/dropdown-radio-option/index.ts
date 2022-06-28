@@ -14,7 +14,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-class DropdownRadioOption extends NectaryElement {
+defineCustomElement('sinch-dropdown-radio-option', class extends NectaryElement {
   #$text: HTMLElement
 
   constructor() {
@@ -92,13 +92,7 @@ class DropdownRadioOption extends NectaryElement {
   get selected() {
     return getBooleanAttribute(this, 'data-selected')
   }
-}
-
-defineCustomElement('sinch-dropdown-radio-option', DropdownRadioOption)
-
-export const isDropdownRadioOptionElement = (element: EventTarget | Element | null): element is TSinchDropdownRadioOptionElement => {
-  return element instanceof DropdownRadioOption
-}
+})
 
 export type TSinchDropdownRadioOptionElement = HTMLElement & {
   value: string,

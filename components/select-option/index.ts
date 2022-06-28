@@ -1,16 +1,16 @@
-import { DropdownOption } from '../dropdown-option'
+import { DropdownTextOption } from '../dropdown-text-option'
 import { defineCustomElement } from '../utils'
-import type { TSinchDropdownOptionElement, TSinchDropdownOptionReact } from '../dropdown-option'
+import type { TSinchDropdownTextOptionElement, TSinchDropdownTextOptionReact } from '../dropdown-text-option'
 
-defineCustomElement('sinch-select-option', class extends DropdownOption {
+defineCustomElement('sinch-select-option', class extends DropdownTextOption {
   constructor() {
     super()
   }
 })
 
-export type TSinchSelectOptionElement = TSinchDropdownOptionElement
+export type TSinchSelectOptionElement = TSinchDropdownTextOptionElement
 
-export type TSinchSelectOptionReact = TSinchDropdownOptionReact
+export type TSinchSelectOptionReact = TSinchDropdownTextOptionReact
 
 declare global {
   namespace JSX {

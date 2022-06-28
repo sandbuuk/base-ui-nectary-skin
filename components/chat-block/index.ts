@@ -1,4 +1,4 @@
-import { typeValues } from '../chat-bubble'
+import { typeValues } from '../chat-bubble/utils'
 import {
   defineCustomElement,
   getAttribute,

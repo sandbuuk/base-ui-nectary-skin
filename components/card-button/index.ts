@@ -10,10 +10,6 @@ import type { TSinchButtonElement } from '../button'
 import type { TSinchElementReact } from '../types'
 import type { FocusEvent, MouseEvent } from 'react'
 
-export const isSinchCardButtonElement = (el: Element): el is TSinchCardButtonElement => {
-  return el.tagName === 'SINCH-CARD-BUTTON'
-}
-
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML

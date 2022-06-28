@@ -1,4 +1,4 @@
-import { isDropdownOptionElement } from '../dropdown-option'
+import { isSelectOptionElement } from '../select-option/utils'
 import '../select-option'
 import '../dropdown'
 import {
@@ -14,7 +14,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDropdownElement } from '../dropdown'
-import type { TSinchDropdownOptionElement } from '../dropdown-option'
+import type { TSinchDropdownTextOptionElement } from '../dropdown-text-option'
 import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
@@ -249,9 +249,9 @@ defineCustomElement('sinch-select', class extends NectaryElement {
     }))
   }
 
-  #getOptionWithValue(value: string): TSinchDropdownOptionElement | null {
+  #getOptionWithValue(value: string): TSinchDropdownTextOptionElement | null {
     for (const $option of this.#$optionSlot.assignedElements()) {
-      if (isDropdownOptionElement($option) && $option.disabled !== true && $option.value === value) {
+      if (isSelectOptionElement($option) && $option.disabled !== true && $option.value === value) {
         return $option
       }
     }

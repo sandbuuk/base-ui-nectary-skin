@@ -11,10 +11,6 @@ import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 import type { FocusEvent, MouseEvent } from 'react'
 
-export const isSinchCardLinkElement = (el: Element): el is TSinchCardLinkElement => {
-  return el.tagName === 'SINCH-CARD-LINK'
-}
-
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML

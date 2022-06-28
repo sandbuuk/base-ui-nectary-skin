@@ -1,4 +1,4 @@
-import { isSegmentedControlOptionElement } from '../segmented-control-option'
+import { isSegmentedControlOptionElement } from '../segmented-control-option/utils'
 import {
   defineCustomElement,
   getAttribute,
