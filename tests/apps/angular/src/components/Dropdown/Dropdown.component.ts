@@ -1,6 +1,9 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/icons/open-in-new'
 import '@sinch-engage/nectary/dropdown'
+import '@sinch-engage/nectary/dropdown-text-option'
+import '@sinch-engage/nectary/dropdown-checkbox-option'
+import '@sinch-engage/nectary/dropdown-radio-option'
 
 @Component({
   selector: 'dropdown-component',
@@ -38,7 +41,9 @@ export class DropdownComponent {
     if (this.isControlled) {
       this.value = (e as CustomEvent).detail
       window.dispatchEvent(new CustomEvent('sinch-dropdown-change', {detail: (e as CustomEvent).detail}))
-      this.isOpen = false
+      if (!this.isMultiple) {
+        this.isOpen = false
+      }
     }
   }
   onClose() {

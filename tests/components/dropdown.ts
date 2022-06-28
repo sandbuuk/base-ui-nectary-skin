@@ -2,7 +2,10 @@ import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { expandRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const shot = '/dropdown'
+const withSelect = '/dropdown'
+const withMultiple = '/dropdown?multiple=true'
+const withCheckbox = '/dropdown?checkbox=true'
+const withRadio = '/dropdown?radio=true'
 const withWideContent = '/dropdown?width=400'
 const withMaxItems = '/dropdown?maxvisibleitems=2'
 const check = makeAccessibilityTests('/dropdown', 'sinch-dropdown')
@@ -15,8 +18,91 @@ test('accessibility', check(async function* ({ $ }) {
 
 test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   {
+    name: 'checkbox option',
+    url: withCheckbox,
+    async *fn({ $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
+      await $eval((el) => {
+        el.setAttribute('open', '')
+        el.setAttribute('value', '1')
+      })
+      yield { name: 'shot', includeRects: [await getRect()] }
+    },
+  },
+  {
+    name: 'radio option',
+    url: withRadio,
+    async *fn({ $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
+      await $eval((el) => {
+        el.setAttribute('open', '')
+        el.setAttribute('value', '1')
+      })
+      yield { name: 'shot', includeRects: [await getRect()] }
+    },
+  },
+  {
+    name: 'multiple attribute',
+    url: withCheckbox,
+    async *fn({ $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
+      await $eval((el) => {
+        el.setAttribute('multiple', '')
+        el.setAttribute('open', '')
+        el.setAttribute('value', '1,2,3')
+      })
+      yield { name: 'set', includeRects: [await getRect()] }
+      await $eval((el) => {
+        el.removeAttribute('multiple')
+        el.setAttribute('open', '')
+        el.setAttribute('value', '1,2,3')
+      })
+      yield { name: 'unset', includeRects: [await getRect()] }
+    },
+  },
+  {
+    name: 'multiple property',
+    url: withCheckbox,
+    async *fn({ $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
+      await $eval((el) => {
+        el.multiple = true
+        el.setAttribute('open', '')
+        el.setAttribute('value', '1,2,3')
+      })
+      yield { name: 'set', includeRects: [await getRect()] }
+      await $eval((el) => {
+        el.multiple = false
+        el.setAttribute('open', '')
+        el.setAttribute('value', '1,2,3')
+      })
+      yield { name: 'unset', includeRects: [await getRect()] }
+    },
+  },
+  {
+    name: 'multiple clicks',
+    url: withMultiple,
+    async *fn({ $, $eval }) {
+      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+
+      await $.click()
+      await $.locator('sinch-dropdown-text-option').nth(0).click()
+      await $.locator('sinch-dropdown-text-option').nth(2).click()
+
+      yield { name: 'check', includeRects: [await getRect()] }
+
+      await $.locator('sinch-dropdown-text-option').nth(2).click()
+
+      yield { name: 'uncheck', includeRects: [await getRect()] }
+    },
+  },
+  {
     name: 'open attribute',
-    url: shot,
+    url: withSelect,
     async *fn({ $eval }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -28,7 +114,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'orientation attribute',
-    url: shot,
+    url: withSelect,
     async *fn({ $, $eval }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -48,7 +134,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'orientation property',
-    url: shot,
+    url: withSelect,
     async *fn({ $, $eval }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -76,7 +162,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'maxvisibleitems attribute',
-    url: shot,
+    url: withSelect,
     async *fn({ $, $eval }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -87,7 +173,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'maxvisibleitems property',
-    url: shot,
+    url: withSelect,
     async *fn({ $, $eval }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -111,7 +197,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'value attribute',
-    url: shot,
+    url: withSelect,
     async *fn({ $, $eval }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -139,7 +225,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'value property',
-    url: shot,
+    url: withSelect,
     async *fn({ $, $eval }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -190,7 +276,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'focus press-space',
-    url: shot,
+    url: withSelect,
     async *fn({ $eval, page }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -208,7 +294,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'focus press-enter',
-    url: shot,
+    url: withSelect,
     async *fn({ $eval, page }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -226,7 +312,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'keyboard',
-    url: shot,
+    url: withSelect,
     async *fn({ $, $eval }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -251,7 +337,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
 test('dropdown events', runScreenshotTests('sinch-dropdown', [
   {
     name: 'custom events',
-    url: shot,
+    url: withSelect,
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
@@ -263,7 +349,7 @@ test('dropdown events', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'custom events',
-    url: shot,
+    url: withSelect,
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-dropdown-focus', 'sinch-dropdown-blur', 'sinch-dropdown-change', 'sinch-dropdown-close')
 
