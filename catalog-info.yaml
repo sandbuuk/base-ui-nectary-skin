@@ -17,6 +17,7 @@ spec:
     displayName: Nectary
   parent: applications-common
   members: [] # TODO: Add this when we know usernames
+  children: []
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
