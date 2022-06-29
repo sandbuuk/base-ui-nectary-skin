@@ -44,4 +44,5 @@ spec:
   type: library
   lifecycle: production
   owner: applications-nectary
+  system: nectary
 ---
