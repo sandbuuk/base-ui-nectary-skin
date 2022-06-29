@@ -1,3 +1,17 @@
+## v0.27.0
+
+* 💥 remove keyboard arrows control in `sinch-segmented-control`
+* 💥 rename `sinch-dropdown-option` to `sinch-dropdown-text-option`
+* ➕ add `sinch-dropdown-checkbox-option` component
+* ➕ add `sinch-dropdown-radio-option` component
+* ➕ add `multiple` attribute to `sinch-dropdown`
+* ➕ add chat bubble statuses
+* ➕ add branded icons
+* ➕ add action icons
+* 🐞 fix `sinch-popover` position
+* 🐞 improve focus behaviour in `sinch-segmented-control`
+* 🐞 improve focus behaviour in `sinch-segmented-icon-control`
+
 ## v0.26.0
 
 * ➕ add `sinch-segmented-icon-control` component
