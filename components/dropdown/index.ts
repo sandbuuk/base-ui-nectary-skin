@@ -256,7 +256,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
       // Select / Unselect
       $op.selected = isSelected
 
-      if (isSelected) {
+      if (isSelected && this.maxVisibleItems !== null) {
         $op.scrollIntoView?.({ block: 'nearest' })
       }
     }
