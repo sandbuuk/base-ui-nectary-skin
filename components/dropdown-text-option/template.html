@@ -3,19 +3,16 @@
   display: block;
 }
 
-:host() > * {
-  pointer-events: none;
-}
-
 #wrapper {
   display: flex;
   position: relative;
   box-sizing: border-box;
   height: 40px;
   padding: 6px 12px;
-  width: 100%;
   align-items: center;
   gap: 12px;
+  user-select: none;
+  cursor: pointer;
 
   --sinch-size-icon: 24px;
 }
@@ -50,6 +47,7 @@
 
 :host([disabled]:not([disabled="false"])) > #wrapper {
   color: var(--sinch-color-stormy-100);
+  cursor: initial;
 
   --sinch-color-icon: var(--sinch-color-stormy-100);
 }

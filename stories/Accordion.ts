@@ -1,6 +1,7 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/accordion'
+import '@sinch-engage/nectary/accordion-item'
 
 export default {
   title: 'Components/Accordion',

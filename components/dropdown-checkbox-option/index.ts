@@ -14,9 +14,8 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-export class DropdownOption extends NectaryElement {
-  #$iconSlot: HTMLSlotElement
-  #$content: HTMLSpanElement
+defineCustomElement('sinch-dropdown-checkbox-option', class extends NectaryElement {
+  #$text: HTMLElement
 
   constructor() {
     super()
@@ -25,8 +24,7 @@ export class DropdownOption extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$iconSlot = shadowRoot.querySelector('slot')!
-    this.#$content = shadowRoot.querySelector('span')!
+    this.#$text = shadowRoot.querySelector('#text')!
   }
 
   connectedCallback() {
@@ -44,7 +42,7 @@ export class DropdownOption extends NectaryElement {
 
     switch (name) {
       case 'text': {
-        this.#$content.textContent = newVal
+        this.#$text.textContent = newVal
 
         break
       }
@@ -94,28 +92,17 @@ export class DropdownOption extends NectaryElement {
   get selected() {
     return getBooleanAttribute(this, 'data-selected')
   }
+})
 
-  get icon(): Element | null {
-    return this.#$iconSlot.assignedElements()[0] ?? null
-  }
-}
-
-defineCustomElement('sinch-dropdown-option', DropdownOption)
-
-export const isDropdownOptionElement = (element: EventTarget | Element | null): element is TSinchDropdownOptionElement => {
-  return element instanceof DropdownOption
-}
-
-export type TSinchDropdownOptionElement = HTMLElement & {
+export type TSinchDropdownCheckboxOptionElement = HTMLElement & {
   value: string,
   text: string,
   checked: boolean,
   selected: boolean,
   disabled: boolean,
-  readonly icon: Element | null,
 }
 
-export type TSinchDropdownOptionReact = TSinchElementReact<TSinchDropdownOptionElement> & {
+export type TSinchDropdownCheckboxOptionReact = TSinchElementReact<TSinchDropdownCheckboxOptionElement> & {
   value: string,
   text: string,
   disabled?: boolean,
@@ -125,11 +112,11 @@ export type TSinchDropdownOptionReact = TSinchElementReact<TSinchDropdownOptionE
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-dropdown-option': TSinchDropdownOptionReact,
+      'sinch-dropdown-checkbox-option': TSinchDropdownCheckboxOptionReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-dropdown-option': TSinchDropdownOptionElement,
+    'sinch-dropdown-checkbox-option': TSinchDropdownCheckboxOptionElement,
   }
 }

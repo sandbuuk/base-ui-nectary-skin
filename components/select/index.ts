@@ -1,5 +1,3 @@
-import { isDropdownOptionElement } from '../dropdown-option'
-import '../select-option'
 import '../dropdown'
 import {
   defineCustomElement,
@@ -14,7 +12,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDropdownElement } from '../dropdown'
-import type { TSinchDropdownOptionElement } from '../dropdown-option'
+import type { TSinchSelectOptionElement } from '../select-option'
 import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
@@ -230,7 +228,7 @@ defineCustomElement('sinch-select', class extends NectaryElement {
       this.#$buttonContent.textContent = this.placeholder ?? ''
     } else {
       this.#$button.removeAttribute('data-unselected')
-      this.#$buttonContent.textContent = $option.text
+      this.#$buttonContent.textContent = getAttribute($option, 'text', null)
 
       // Try adding icon
       const $icon = $option.icon
@@ -249,9 +247,9 @@ defineCustomElement('sinch-select', class extends NectaryElement {
     }))
   }
 
-  #getOptionWithValue(value: string): TSinchDropdownOptionElement | null {
-    for (const $option of this.#$optionSlot.assignedElements()) {
-      if (isDropdownOptionElement($option) && $option.disabled !== true && $option.value === value) {
+  #getOptionWithValue(value: string): TSinchSelectOptionElement | null {
+    for (const $option of this.#$optionSlot.assignedElements() as TSinchSelectOptionElement[]) {
+      if ($option.disabled !== true && $option.value === value) {
         return $option
       }
     }

@@ -2,30 +2,9 @@ import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { expandRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const options = encodeURI(JSON.stringify([{
-  value: 1,
-  text: 'Option value 1',
-  icon: true,
-}, {
-  value: 2,
-  text: 'Option value 2',
-  disabled: true,
-  icon: true,
-}, {
-  value: 3,
-  text: 'Option value 3',
-}, {
-  value: 4,
-  text: 'Option value 4',
-}]))
-const singleOption = encodeURI(JSON.stringify([{
-  value: 1,
-  text: 'Option value 1',
-  icon: true,
-}]))
-const withOptions = `/segmented-control?options=${options}`
-const withSingleOption = `/segmented-control?options=${singleOption}`
-const check = makeAccessibilityTests(`/segmented-control?options=${options}`, 'sinch-segmented-control')
+const withOptions = `/segmented-control`
+const withSingleOption = `/segmented-control?single-option=true`
+const check = makeAccessibilityTests(`/segmented-control`, 'sinch-segmented-control')
 
 test('accessibility', check(async function* () {
   yield
@@ -46,10 +25,10 @@ test('segmented-control screenshots', runScreenshotTests('sinch-segmented-contro
       yield { name: 'active', includeRects: [shotRect] }
 
       await page.mouse.up()
-      yield { name: 'hover_checked', includeRects: [shotRect] }
+      yield { name: 'hover-checked', includeRects: [shotRect] }
 
       await page.mouse.down()
-      yield { name: 'active_checked', includeRects: [shotRect] }
+      yield { name: 'active-checked', includeRects: [shotRect] }
     },
   },
   {
@@ -117,26 +96,40 @@ test('segmented-control screenshots', runScreenshotTests('sinch-segmented-contro
     },
   },
   {
-    name: 'keyboard',
+    name: 'keyboard focus',
     url: withOptions,
     async *fn({ $, page }) {
       const rect = (await $.boundingBox())!
       const shotRect = expandRect(rect, 3)
 
       await page.keyboard.press('Tab')
-      yield { name: '1-focus', includeRects: [shotRect] }
+      yield { name: '1', includeRects: [shotRect] }
 
-      await $.press('ArrowDown', { delay: 100 })
-      await $.press('ArrowDown', { delay: 100 })
-      yield { name: '2-down-down', includeRects: [shotRect] }
+      await page.keyboard.press('Tab')
+      yield { name: '2', includeRects: [shotRect] }
 
-      await $.press('ArrowRight', { delay: 100 })
-      await $.press('ArrowRight', { delay: 100 })
-      yield { name: '3-right-right', includeRects: [shotRect] }
+      await page.keyboard.press('Tab')
+      yield { name: '4', includeRects: [shotRect] }
+    },
+  },
+  {
+    name: 'click',
+    url: withOptions,
+    async *fn({ $ }) {
+      const rect = (await $.boundingBox())!
+      const shotRect = expandRect(rect, 3)
 
-      await $.press('ArrowUp', { delay: 100 })
-      await $.press('ArrowLeft', { delay: 100 })
-      yield { name: '4-up-left', includeRects: [shotRect] }
+      await $.locator('sinch-segmented-control-option').nth(0).click()
+      yield { name: 'option-0', includeRects: [shotRect] }
+
+      await $.locator('sinch-segmented-control-option').nth(1).click()
+      yield { name: 'option-1', includeRects: [shotRect] }
+
+      await $.locator('sinch-segmented-control-option').nth(2).click()
+      yield { name: 'option-2', includeRects: [shotRect] }
+
+      await $.locator('sinch-segmented-control-option').nth(3).click()
+      yield { name: 'option-3', includeRects: [shotRect] }
     },
   },
   {

@@ -1,11 +1,13 @@
-import { isTabsOptionElement } from '../tabs-option'
 import {
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   NectaryElement,
   updateAttribute,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchTabsOptionElement } from '../tabs-option'
 import type { TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
 
@@ -108,9 +110,9 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
 
   #onValueChange(value: string | null) {
     for (const $option of this.#$slot.assignedElements()) {
-      if (isTabsOptionElement($option)) {
-        $option.checked = $option.disabled !== true && $option.value === value
-      }
+      const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
+
+      updateBooleanAttribute($option, 'checked', isChecked)
     }
   }
 
@@ -121,8 +123,8 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
   }
 
   #getFirstOption() {
-    for (const $option of this.#$slot.assignedElements()) {
-      if (isTabsOptionElement($option) && $option.disabled !== true) {
+    for (const $option of this.#$slot.assignedElements() as TSinchTabsOptionElement[]) {
+      if ($option.disabled !== true) {
         return $option
       }
     }
@@ -131,8 +133,8 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
   }
 
   #getLastOption() {
-    for (const $option of this.#$slot.assignedElements().reverse()) {
-      if (isTabsOptionElement($option) && $option.disabled !== true) {
+    for (const $option of (this.#$slot.assignedElements() as TSinchTabsOptionElement[]).reverse()) {
+      if ($option.disabled !== true) {
         return $option
       }
     }
@@ -165,7 +167,7 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
   }
 
   #getEnabledRadioElements(): TSinchTabOptionElement[] {
-    return this.#$slot.assignedElements().filter((opt) => isTabsOptionElement(opt) && opt.disabled !== true) as TSinchTabOptionElement[]
+    return (this.#$slot.assignedElements()as TSinchTabOptionElement[]).filter((opt) => opt.disabled !== true)
   }
 })
 

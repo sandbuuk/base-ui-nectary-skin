@@ -1,18 +1,14 @@
-import { isSegmentedControlOptionElement } from '../segmented-control-option'
 import {
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   NectaryElement,
   updateAttribute,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchSegmentedControlOptionElement } from '../segmented-control-option'
 import type { TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
-
-const findSelectedOption = (elements: readonly TSinchSegmentedControlOptionElement[]) => {
-  return elements.find((el) => el.checked) ?? null
-}
 
 const template = document.createElement('template')
 
@@ -20,6 +16,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-control', class extends NectaryElement {
   #$slot: HTMLSlotElement
+  #$sh: ShadowRoot
 
   constructor() {
     super()
@@ -27,15 +24,20 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
     const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    shadowRoot.addEventListener('keydown', this.#onOptionKeyDown)
-    shadowRoot.addEventListener('change', this.#onOptionChange)
 
+    this.#$sh = shadowRoot
     this.#$slot = shadowRoot.querySelector('slot')!
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   connectedCallback() {
     this.setAttribute('role', 'tablist')
+    this.#$sh.addEventListener('change', this.#onOptionChange)
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
+  }
+
+  disconnectedCallback() {
+    this.#$sh.removeEventListener('change', this.#onOptionChange)
+    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
   }
 
   static get observedAttributes() {
@@ -64,37 +66,6 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
     }
   }
 
-  #onOptionKeyDown = (e: Event) => {
-    switch ((e as KeyboardEvent).code) {
-      case 'ArrowUp':
-      case 'ArrowLeft': {
-        e.preventDefault()
-
-        const $option = this.#getPrevOption()
-
-        if ($option !== null) {
-          $option.focus()
-          this.#dispatchChangeEvent($option.value)
-        }
-
-        break
-      }
-      case 'ArrowDown':
-      case 'ArrowRight': {
-        e.preventDefault()
-
-        const $option = this.#getNextOption()
-
-        if ($option !== null) {
-          $option.focus()
-          this.#dispatchChangeEvent($option.value)
-        }
-
-        break
-      }
-    }
-  }
-
   #onSlotChange = () => {
     this.#onValueChange(this.value)
   }
@@ -107,9 +78,9 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
 
   #onValueChange(value: string | null) {
     for (const $option of this.#$slot.assignedElements()) {
-      if (isSegmentedControlOptionElement($option)) {
-        $option.checked = $option.disabled !== true && $option.value === value
-      }
+      const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
+
+      updateBooleanAttribute($option, 'checked', isChecked)
     }
   }
 
@@ -117,54 +88,6 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('change', { detail: value, bubbles: true })
     )
-  }
-
-  #getFirstOption() {
-    for (const $option of this.#$slot.assignedElements()) {
-      if (isSegmentedControlOptionElement($option) && $option.disabled !== true) {
-        return $option
-      }
-    }
-
-    return null
-  }
-
-  #getLastOption() {
-    for (const $option of this.#$slot.assignedElements().reverse()) {
-      if (isSegmentedControlOptionElement($option) && $option.disabled !== true) {
-        return $option
-      }
-    }
-
-    return null
-  }
-
-  #getNextOption() {
-    const $options = this.#getEnabledRadioElements()
-    const $selectedOption = findSelectedOption($options)
-    const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
-
-    if (currentIndex < 0) {
-      return this.#getFirstOption()
-    }
-
-    return $options[(currentIndex + 1) % $options.length]
-  }
-
-  #getPrevOption() {
-    const $options = this.#getEnabledRadioElements()
-    const $selectedOption = findSelectedOption($options)
-    const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
-
-    if (currentIndex < 0) {
-      return this.#getLastOption()
-    }
-
-    return $options[(currentIndex - 1 + $options.length) % $options.length]
-  }
-
-  #getEnabledRadioElements(): TSinchSegmentedControlOptionElement[] {
-    return this.#$slot.assignedElements().filter((opt) => isSegmentedControlOptionElement(opt) && opt.disabled !== true) as TSinchSegmentedControlOptionElement[]
   }
 })
 

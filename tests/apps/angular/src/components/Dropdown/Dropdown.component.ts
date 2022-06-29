@@ -1,6 +1,9 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/icons/open-in-new'
 import '@sinch-engage/nectary/dropdown'
+import '@sinch-engage/nectary/dropdown-text-option'
+import '@sinch-engage/nectary/dropdown-checkbox-option'
+import '@sinch-engage/nectary/dropdown-radio-option'
 
 @Component({
   selector: 'dropdown-component',
@@ -10,14 +13,22 @@ import '@sinch-engage/nectary/dropdown'
 
 export class DropdownComponent {
   isOpen: boolean
+  isMultiple: boolean
   value: string
   isControlled: boolean
   maxVisibleItems: number | null
   orientation: string | null
+  isCheckbox: boolean
+  isRadio: boolean
+  isSelect: boolean
 
   constructor() {
     const url = new URL(location.href)
     this.isOpen = url.searchParams.get('open') !== null
+    this.isMultiple = url.searchParams.get('multiple') !== null
+    this.isCheckbox = url.searchParams.get('checkbox') !== null
+    this.isRadio = url.searchParams.get('radio') !== null
+    this.isSelect = !this.isCheckbox && !this.isRadio
     this.value = url.searchParams.get('value') ?? ''
     this.isControlled = url.searchParams.get('uncontrolled') === null
     this.orientation = url.searchParams.get('orientation')
@@ -30,7 +41,9 @@ export class DropdownComponent {
     if (this.isControlled) {
       this.value = (e as CustomEvent).detail
       window.dispatchEvent(new CustomEvent('sinch-dropdown-change', {detail: (e as CustomEvent).detail}))
-      this.isOpen = false
+      if (!this.isMultiple) {
+        this.isOpen = false
+      }
     }
   }
   onClose() {

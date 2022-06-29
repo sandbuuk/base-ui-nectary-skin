@@ -1,14 +1,13 @@
-import { isSegmentedIconControlOptionElement } from '../segmented-icon-control-option'
 import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getCSVSet,
-  getFirstCSValue,
+  getCsvSet,
+  getFirstCsvValue,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
-  updateCSV,
+  updateCsv,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -20,6 +19,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement {
   #$slot: HTMLSlotElement
+  #$sh: ShadowRoot
 
   constructor() {
     super()
@@ -27,14 +27,20 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
     const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    shadowRoot.addEventListener('change', this.#onOptionChange)
 
+    this.#$sh = shadowRoot
     this.#$slot = shadowRoot.querySelector('slot')!
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   connectedCallback() {
     this.setAttribute('role', 'tablist')
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
+    this.#$sh.addEventListener('change', this.#onOptionChange)
+  }
+
+  disconnectedCallback() {
+    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
+    this.#$sh.removeEventListener('change', this.#onOptionChange)
   }
 
   static get observedAttributes() {
@@ -78,14 +84,10 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
   #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
-    if (!isSegmentedIconControlOptionElement(e.target)) {
-      return
-    }
-
-    const { value, isChecked } = (e as CustomEvent).detail
-
+    const $elem = (e.target) as Element
+    const value = (e as CustomEvent).detail
     const result = this.multiple
-      ? updateCSV(this.value, value, isChecked)
+      ? updateCsv(this.value, value, !getBooleanAttribute($elem, 'checked'))
       : value
 
     this.dispatchEvent(
@@ -95,20 +97,20 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
 
   #onValueChange(csv: string) {
     if (this.multiple) {
-      const values = getCSVSet(csv)
+      const values = getCsvSet(csv)
 
       for (const $option of this.#$slot.assignedElements()) {
-        if (isSegmentedIconControlOptionElement($option)) {
-          $option.checked = $option.disabled !== true && values.has($option.value)
-        }
+        const isChecked = !getBooleanAttribute($option, 'disabled') && values.has(getAttribute($option, 'value', ''))
+
+        updateBooleanAttribute($option, 'checked', isChecked)
       }
     } else {
-      const value = getFirstCSValue(csv)
+      const value = getFirstCsvValue(csv)
 
       for (const $option of this.#$slot.assignedElements()) {
-        if (isSegmentedIconControlOptionElement($option)) {
-          $option.checked = $option.disabled !== true && $option.value === value
-        }
+        const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
+
+        updateBooleanAttribute($option, 'checked', isChecked)
       }
     }
   }

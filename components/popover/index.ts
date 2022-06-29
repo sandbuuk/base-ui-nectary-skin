@@ -9,6 +9,7 @@ import {
   getReactEventHandler,
   updateBooleanAttribute,
   NectaryElement,
+  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TRect, TSinchElementReact } from '../types'
@@ -19,6 +20,8 @@ const orientationValues = ['top-left', 'top-right', 'bottom-left', 'bottom-right
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
+
+const POPOVER_VERTICAL_OFFSET = 4
 
 defineCustomElement('sinch-popover', class extends NectaryElement {
   #$target: HTMLButtonElement
@@ -108,21 +111,26 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   #onExpand() {
-    this.#$target.setAttribute('aria-expanded', 'true')
-
-    if (!this.#isOpen()) {
-      (this.#$dialog as any).showModal()
+    if (this.#isOpen()) {
+      return
     }
 
+    this.#$target.setAttribute('aria-expanded', 'true')
+    this.#$dialog.showModal()
     this.#updateOrientation()
+
+    document.body.style.overflow = 'hidden'
   }
 
   #onCollapse() {
-    this.#$target.setAttribute('aria-expanded', 'false')
-
-    if (this.#isOpen()) {
-      (this.#$dialog as any).close?.()
+    if (!this.#isOpen()) {
+      return
     }
+
+    this.#$target.setAttribute('aria-expanded', 'false')
+    this.#$dialog.close?.()
+
+    document.body.style.overflow = ''
   }
 
   #isOpen() {
@@ -130,36 +138,41 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   #updateOrientation() {
-    this.#$dialog.style.transform = `initial`
-    this.#$dialog.style.width = `max-content`
+    this.#$dialog.style.transform = 'initial'
+    this.#$dialog.style.width = 'fit-content'
 
-    const buttonRect = this.#$target.getBoundingClientRect()
+    const targetRect = this.#$target.getBoundingClientRect()
     const modalRect = this.#$dialog.getBoundingClientRect()
-    const width = Math.max(modalRect.width, buttonRect.width)
-    const widthDiff = Math.max(buttonRect.width - modalRect.width, 0)
+
     let leftOffset = 0
     let topOffset = 0
 
     const orient = this.orientation
+    const shouldExpandWidthToTarget = getCssVar(this, '--sinch-popover-expand-width') !== null
+    const largestWidth = Math.max(modalRect.width, targetRect.width)
+    const widthDiff = shouldExpandWidthToTarget
+      ? Math.max(largestWidth - modalRect.width, 0) * 0.5
+      : 0
+    const resultWidth = shouldExpandWidthToTarget ? largestWidth : modalRect.width
 
     if (orient === 'bottom-right' || orient === 'top-right') {
-      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, buttonRect.x - modalRect.x + widthDiff * 0.5))
+      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, targetRect.x - modalRect.x) + widthDiff)
     }
 
     if (orient === 'bottom-left' || orient === 'top-left') {
-      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, buttonRect.x + buttonRect.width - modalRect.x - modalRect.width - widthDiff * 0.5))
+      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, targetRect.x + targetRect.width - modalRect.x - modalRect.width) - widthDiff)
     }
 
     if (orient === 'bottom-left' || orient === 'bottom-right') {
-      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, buttonRect.y + buttonRect.height - modalRect.y + 8))
+      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, targetRect.y + targetRect.height - modalRect.y + POPOVER_VERTICAL_OFFSET))
     }
 
     if (orient === 'top-left' || orient === 'top-right') {
-      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, buttonRect.y - modalRect.y - modalRect.height - 8))
+      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, targetRect.y - modalRect.y - modalRect.height - POPOVER_VERTICAL_OFFSET))
     }
 
-    this.#$dialog.style.transform = `translateX(${leftOffset}px) translateY(${topOffset}px)`
-    this.#$dialog.style.width = `${width}px`
+    this.#$dialog.style.transform = `translate(${leftOffset}px, ${topOffset}px)`
+    this.#$dialog.style.width = `${resultWidth}px`
   }
 
   #onBackdropClick = (e: MouseEvent) => {

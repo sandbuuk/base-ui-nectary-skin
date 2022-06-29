@@ -120,6 +120,23 @@ test('segmented-icon-control screenshots', runScreenshotTests('sinch-segmented-i
     },
   },
   {
+    name: 'keyboard focus',
+    url: withOptions,
+    async *fn({ $, page }) {
+      const rect = (await $.boundingBox())!
+      const shotRect = expandRect(rect, 3)
+
+      await page.keyboard.press('Tab')
+      yield { name: '1', includeRects: [shotRect] }
+
+      await page.keyboard.press('Tab')
+      yield { name: '2', includeRects: [shotRect] }
+
+      await page.keyboard.press('Tab')
+      yield { name: '4', includeRects: [shotRect] }
+    },
+  },
+  {
     name: 'click',
     url: withOptions,
     async *fn({ $ }) {

@@ -72,6 +72,10 @@
   z-index: 1;
 }
 
+#button:disabled {
+  cursor: unset;
+}
+
 #button:focus::before {
   content: "";
   position: absolute;
@@ -79,11 +83,13 @@
   right: -3px;
   top: -4px;
   bottom: -4px;
-  border: 2px solid var(--sinch-color-aqua-400);
+  border-style: solid;
+  border-color: var(--sinch-color-aqua-400);
+  border-width: 0;
 }
 
-#button:disabled {
-  cursor: unset;
+#button:focus-visible::before {
+  border-width: 2px;
 }
 
 :host(:first-child) #button:focus::before {
@@ -96,6 +102,12 @@
   right: -4px;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
+}
+
+@supports not selector(:focus-visible) {
+  #button:focus::before {
+    border-width: 2px;
+  }
 }
 
 :host([disabled]:not([disabled="false"])) #wrapper {

@@ -17,35 +17,39 @@ export const SegmentedControl: FC<TSegmentedControl> = ({ search }) => {
       }
       : () => {}),
   [search, setValue])
-  const options = useMemo(() => {
-    const data = search.get('options')
-
-    if (data === null) {
-      return null
-    }
-
-    try {
-      const options = JSON.parse(decodeURI(data))
-
-      return options.map((opt: any) => (
-        <sinch-segmented-control-option
-          key={opt.value}
-          value={opt.value}
-          text={opt.text}
-          disabled={opt.disabled}
-          aria-label={opt.text}
-        >
-          {opt.icon != null && <sinch-icon-open-in-new slot="icon"/>}
-        </sinch-segmented-control-option>
-      ))
-    } catch {
-      return null
-    }
-  }, [search])
+  const isSingleOption = search.get('single-option') !== null
 
   return (
     <sinch-segmented-control value={value} onChange={onChange} aria-label="segmented control">
-      {options}
+      <sinch-segmented-control-option
+        value="1"
+        text="Option value 1"
+        aria-label="1"
+      >
+        <sinch-icon-open-in-new slot="icon"/>
+      </sinch-segmented-control-option>
+      {!isSingleOption && (
+        <>
+          <sinch-segmented-control-option
+            value="2"
+            text="Option value 2"
+            aria-label="2"
+            disabled
+          >
+            <sinch-icon-open-in-new slot="icon"/>
+          </sinch-segmented-control-option>
+          <sinch-segmented-control-option
+            value="3"
+            text="Option value 3"
+            aria-label="3"
+          />
+          <sinch-segmented-control-option
+            value="4"
+            text="Option value 4"
+            aria-label="4"
+          />
+        </>
+      )}
     </sinch-segmented-control>
   )
 }

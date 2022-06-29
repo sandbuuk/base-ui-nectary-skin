@@ -11,10 +11,6 @@ import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 import type { FocusEvent } from 'react'
 
-export const isSegmentedControlOptionElement = (element: EventTarget | Element | null): element is TSinchSegmentedControlOptionElement => {
-  return element instanceof Element && element.tagName === 'SINCH-SEGMENTED-CONTROL-OPTION'
-}
-
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML

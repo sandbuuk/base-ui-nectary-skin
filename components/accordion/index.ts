@@ -1,16 +1,16 @@
-import { isAccordionItemElement } from '../accordion-item'
 import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getCSVSet,
-  getFirstCSValue,
+  getCsvSet,
+  getFirstCsvValue,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
-  updateCSV,
+  updateCsv,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchAccordionItemElement } from '../accordion-item'
 import type { TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
 
@@ -64,7 +64,7 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.onValueChange(newVal ?? '')
+        this.#onValueChange(newVal ?? '')
 
         break
       }
@@ -72,45 +72,39 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
   }
 
   #onSlotChange = () => {
-    this.onValueChange(this.value)
+    this.#onValueChange(this.value)
   }
 
   #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
-    if (!isAccordionItemElement(e.target)) {
-      return
-    }
-
-    const { value, isChecked } = (e as CustomEvent).detail
-
-    const csv = updateCSV(
-      this.multiple ? this.value : value,
-      value,
-      isChecked
-    )
+    const $elem = e.target as TSinchAccordionItemElement
+    const value = (e as CustomEvent).detail
+    const result = this.multiple
+      ? updateCsv(this.value, value, !$elem.checked)
+      : $elem.checked ? '' : value
 
     this.dispatchEvent(
-      new CustomEvent('change', { detail: csv, bubbles: true })
+      new CustomEvent('change', { detail: result, bubbles: true })
     )
   }
 
-  onValueChange(csv: string) {
+  #onValueChange(csv: string) {
     if (this.multiple) {
-      const values = getCSVSet(csv)
+      const values = getCsvSet(csv)
 
       for (const $option of this.#$slot.assignedElements()) {
-        if (isAccordionItemElement($option)) {
-          $option.checked = $option.disabled !== true && values.has($option.value)
-        }
+        const isChecked = !getBooleanAttribute($option, 'disabled') && values.has(getAttribute($option, 'value', ''))
+
+        updateBooleanAttribute($option, 'checked', isChecked)
       }
     } else {
-      const value = getFirstCSValue(csv)
+      const value = getFirstCsvValue(csv)
 
       for (const $option of this.#$slot.assignedElements()) {
-        if (isAccordionItemElement($option)) {
-          $option.checked = $option.disabled !== true && $option.value === value
-        }
+        const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
+
+        updateBooleanAttribute($option, 'checked', isChecked)
       }
     }
   }

@@ -15,7 +15,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-class SinchSegmentedIconControlOption extends NectaryElement {
+defineCustomElement('sinch-segmented-icon-control-option', class extends NectaryElement {
   $button: HTMLButtonElement
 
   constructor() {
@@ -94,17 +94,11 @@ class SinchSegmentedIconControlOption extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('change', {
         bubbles: true,
-        detail: { value: this.value, isChecked: !this.checked },
+        detail: this.value,
       })
     )
   }
-}
-
-defineCustomElement('sinch-segmented-icon-control-option', SinchSegmentedIconControlOption)
-
-export const isSegmentedIconControlOptionElement = (element: EventTarget | Element | null): element is TSinchSegmentedIconControlOptionElement => {
-  return element instanceof SinchSegmentedIconControlOption
-}
+})
 
 export type TSinchSegmentedIconControlOptionElement = HTMLElement & {
   value: string,

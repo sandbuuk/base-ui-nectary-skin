@@ -10,14 +10,17 @@
 }
 
 dialog {
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: auto;
   outline: none;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
   background-color: var(--sinch-color-snow-100);
   box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
-  border: none;
+  border: 1px solid var(--sinch-color-snow-500);
   border-radius: 4px;
-  overflow-y: auto;
   contain: content;
   padding: 0;
   box-sizing: border-box;
@@ -56,6 +59,11 @@ dialog.fixed {
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+#target {
+  display: flex;
+  flex-direction: column;
 }
 </style>
 

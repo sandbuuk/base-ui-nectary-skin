@@ -14,10 +14,6 @@ import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
 import type { FocusEvent } from 'react'
 
-export const isAccordionItemElement = (element: EventTarget | Element | null): element is TSinchAccordionItemElement => {
-  return element instanceof Element && element.tagName === 'SINCH-ACCORDION-ITEM'
-}
-
 const statusValues = ['info', 'success', 'warn', 'error'] as const
 
 const template = document.createElement('template')
@@ -135,7 +131,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('change', {
         bubbles: true,
-        detail: { value: this.value, isChecked: !this.checked },
+        detail: this.value,
       })
     )
   }

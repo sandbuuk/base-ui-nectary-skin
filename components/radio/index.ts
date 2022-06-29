@@ -1,19 +1,15 @@
-import { isRadioOptionElement } from '../radio-option'
 import {
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   NectaryElement,
   updateAttribute,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchRadioOptionElement } from '../radio-option'
 import type { TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
-
-type TSinchRadioOption = HTMLElementTagNameMap['sinch-radio-option']
-
-const findSelectedOption = (elements: readonly TSinchRadioOption[]) => {
-  return elements.find((el) => el.checked) ?? null
-}
 
 const template = document.createElement('template')
 
@@ -108,9 +104,9 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
 
   #onValueChange(value: string) {
     for (const $option of this.#$slot.assignedElements()) {
-      if (isRadioOptionElement($option)) {
-        $option.checked = $option.disabled !== true && $option.value === value
-      }
+      const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
+
+      updateBooleanAttribute($option, 'checked', isChecked)
     }
   }
 
@@ -120,9 +116,9 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     )
   }
 
-  #getFirstOption() {
-    for (const $option of this.#$slot.assignedElements()) {
-      if (isRadioOptionElement($option) && $option.disabled !== true) {
+  #getFirstOption(): TSinchRadioOptionElement | null {
+    for (const $option of this.#$slot.assignedElements() as TSinchRadioOptionElement[]) {
+      if ($option.disabled !== true) {
         return $option
       }
     }
@@ -130,9 +126,9 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     return null
   }
 
-  #getLastOption() {
-    for (const $option of this.#$slot.assignedElements().reverse()) {
-      if (isRadioOptionElement($option) && $option.disabled !== true) {
+  #getLastOption(): TSinchRadioOptionElement | null {
+    for (const $option of (this.#$slot.assignedElements() as TSinchRadioOptionElement[]).reverse()) {
+      if ($option.disabled !== true) {
         return $option
       }
     }
@@ -140,9 +136,9 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     return null
   }
 
-  #getNextOption() {
+  #getNextOption(): TSinchRadioOptionElement | null {
     const $options = this.#getEnabledRadioElements()
-    const $selectedOption = findSelectedOption($options)
+    const $selectedOption = this.#findSelectedOption($options)
     const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
 
     if (currentIndex < 0) {
@@ -152,9 +148,9 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     return $options[(currentIndex + 1) % $options.length]
   }
 
-  #getPrevOption() {
+  #getPrevOption(): TSinchRadioOptionElement | null {
     const $options = this.#getEnabledRadioElements()
-    const $selectedOption = findSelectedOption($options)
+    const $selectedOption = this.#findSelectedOption($options)
     const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
 
     if (currentIndex < 0) {
@@ -164,8 +160,12 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     return $options[(currentIndex - 1 + $options.length) % $options.length]
   }
 
-  #getEnabledRadioElements(): TSinchRadioOption[] {
-    return this.#$slot.assignedElements().filter((opt) => isRadioOptionElement(opt) && opt.disabled !== true) as TSinchRadioOption[]
+  #getEnabledRadioElements(): TSinchRadioOptionElement[] {
+    return (this.#$slot.assignedElements() as TSinchRadioOptionElement[]).filter((el) => el.disabled !== true)
+  }
+
+  #findSelectedOption(elements: readonly TSinchRadioOptionElement[]) {
+    return elements.find((el) => el.checked) ?? null
   }
 })
 

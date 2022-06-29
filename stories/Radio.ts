@@ -1,6 +1,7 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/radio'
+import '@sinch-engage/nectary/radio-option'
 
 export default {
   title: 'Components/Radio',
