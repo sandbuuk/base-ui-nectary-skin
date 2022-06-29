@@ -111,21 +111,26 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   #onExpand() {
-    this.#$target.setAttribute('aria-expanded', 'true')
-
-    if (!this.#isOpen()) {
-      this.#$dialog.showModal()
+    if (this.#isOpen()) {
+      return
     }
 
+    this.#$target.setAttribute('aria-expanded', 'true')
+    this.#$dialog.showModal()
     this.#updateOrientation()
+
+    document.body.style.overflow = 'hidden'
   }
 
   #onCollapse() {
-    this.#$target.setAttribute('aria-expanded', 'false')
-
-    if (this.#isOpen()) {
-      this.#$dialog.close?.()
+    if (!this.#isOpen()) {
+      return
     }
+
+    this.#$target.setAttribute('aria-expanded', 'false')
+    this.#$dialog.close?.()
+
+    document.body.style.overflow = ''
   }
 
   #isOpen() {
@@ -133,8 +138,8 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   #updateOrientation() {
-    this.#$dialog.style.transform = `initial`
-    this.#$dialog.style.width = `max-content`
+    this.#$dialog.style.transform = 'initial'
+    this.#$dialog.style.width = 'fit-content'
 
     const targetRect = this.#$target.getBoundingClientRect()
     const modalRect = this.#$dialog.getBoundingClientRect()
@@ -166,7 +171,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, targetRect.y - modalRect.y - modalRect.height - POPOVER_VERTICAL_OFFSET))
     }
 
-    this.#$dialog.style.transform = `translateX(${leftOffset}px) translateY(${topOffset}px)`
+    this.#$dialog.style.transform = `translate(${leftOffset}px, ${topOffset}px)`
     this.#$dialog.style.width = `${resultWidth}px`
   }
 
