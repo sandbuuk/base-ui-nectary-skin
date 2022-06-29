@@ -93,14 +93,18 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
     if (this.multiple) {
       const values = getCsvSet(csv)
 
-      for (const $option of this.#$slot.assignedElements() as TSinchAccordionItemElement[]) {
-        $option.checked = $option.disabled !== true && values.has($option.value)
+      for (const $option of this.#$slot.assignedElements()) {
+        const isChecked = !getBooleanAttribute($option, 'disabled') && values.has(getAttribute($option, 'value', ''))
+
+        updateBooleanAttribute($option, 'checked', isChecked)
       }
     } else {
       const value = getFirstCsvValue(csv)
 
-      for (const $option of this.#$slot.assignedElements() as TSinchAccordionItemElement[]) {
-        $option.checked = $option.disabled !== true && $option.value === value
+      for (const $option of this.#$slot.assignedElements()) {
+        const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
+
+        updateBooleanAttribute($option, 'checked', isChecked)
       }
     }
   }

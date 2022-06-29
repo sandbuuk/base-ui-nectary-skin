@@ -202,13 +202,17 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
       const values = getCsvSet(csv)
 
       for (const $option of this.#getOptionElements()) {
-        $option.checked = $option.disabled !== true && values.has($option.value)
+        const isChecked = !getBooleanAttribute($option, 'disabled') && values.has(getAttribute($option, 'value', ''))
+
+        updateBooleanAttribute($option, 'checked', isChecked)
       }
     } else {
       const value = getFirstCsvValue(csv)
 
       for (const $option of this.#getOptionElements()) {
-        $option.checked = $option.disabled !== true && $option.value === value
+        const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
+
+        updateBooleanAttribute($option, 'checked', isChecked)
       }
     }
   }
@@ -258,7 +262,11 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     }
   }
 
-  #getOptionWithValue(value: string): TDropdownOption | null {
+  #getOptionWithValue(value: string | null): TDropdownOption | null {
+    if (value === null) {
+      return null
+    }
+
     for (const $option of this.#getOptionElements()) {
       if ($option.disabled !== true && $option.value === value) {
         return $option

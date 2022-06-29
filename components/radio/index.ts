@@ -1,8 +1,10 @@
 import {
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   NectaryElement,
   updateAttribute,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchRadioOptionElement } from '../radio-option'
@@ -101,8 +103,10 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
   }
 
   #onValueChange(value: string) {
-    for (const $option of this.#$slot.assignedElements() as TSinchRadioOptionElement[]) {
-      $option.checked = $option.disabled !== true && $option.value === value
+    for (const $option of this.#$slot.assignedElements()) {
+      const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
+
+      updateBooleanAttribute($option, 'checked', isChecked)
     }
   }
 
@@ -113,7 +117,7 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
   }
 
   #getFirstOption(): TSinchRadioOptionElement | null {
-    for (const $option of this.#$slot.assignedElements()as TSinchRadioOptionElement[]) {
+    for (const $option of this.#$slot.assignedElements() as TSinchRadioOptionElement[]) {
       if ($option.disabled !== true) {
         return $option
       }

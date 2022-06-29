@@ -10,7 +10,6 @@ import {
   updateCsv,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchSegmentedIconControlOptionElement } from '../segmented-icon-control-option'
 import type { TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
 
@@ -20,6 +19,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement {
   #$slot: HTMLSlotElement
+  #$sh: ShadowRoot
 
   constructor() {
     super()
@@ -27,14 +27,20 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
     const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    shadowRoot.addEventListener('change', this.#onOptionChange)
 
+    this.#$sh = shadowRoot
     this.#$slot = shadowRoot.querySelector('slot')!
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   connectedCallback() {
     this.setAttribute('role', 'tablist')
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
+    this.#$sh.addEventListener('change', this.#onOptionChange)
+  }
+
+  disconnectedCallback() {
+    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
+    this.#$sh.removeEventListener('change', this.#onOptionChange)
   }
 
   static get observedAttributes() {
@@ -78,10 +84,10 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
   #onOptionChange = (e: Event) => {
     e.stopPropagation()
 
-    const $elem = (e.target) as TSinchSegmentedIconControlOptionElement
+    const $elem = (e.target) as Element
     const value = (e as CustomEvent).detail
     const result = this.multiple
-      ? updateCsv(this.value, value, !$elem.checked)
+      ? updateCsv(this.value, value, !getBooleanAttribute($elem, 'checked'))
       : value
 
     this.dispatchEvent(
@@ -93,18 +99,18 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
     if (this.multiple) {
       const values = getCsvSet(csv)
 
-      for (const $el of this.#$slot.assignedElements()) {
-        const $option = $el as TSinchSegmentedIconControlOptionElement
+      for (const $option of this.#$slot.assignedElements()) {
+        const isChecked = !getBooleanAttribute($option, 'disabled') && values.has(getAttribute($option, 'value', ''))
 
-        $option.checked = $option.disabled !== true && values.has($option.value)
+        updateBooleanAttribute($option, 'checked', isChecked)
       }
     } else {
       const value = getFirstCsvValue(csv)
 
-      for (const $el of this.#$slot.assignedElements()) {
-        const $option = $el as TSinchSegmentedIconControlOptionElement
+      for (const $option of this.#$slot.assignedElements()) {
+        const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
 
-        $option.checked = $option.disabled !== true && $option.value === value
+        updateBooleanAttribute($option, 'checked', isChecked)
       }
     }
   }

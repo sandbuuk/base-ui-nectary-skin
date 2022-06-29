@@ -228,7 +228,7 @@ defineCustomElement('sinch-select', class extends NectaryElement {
       this.#$buttonContent.textContent = this.placeholder ?? ''
     } else {
       this.#$button.removeAttribute('data-unselected')
-      this.#$buttonContent.textContent = $option.text
+      this.#$buttonContent.textContent = getAttribute($option, 'text', null)
 
       // Try adding icon
       const $icon = $option.icon

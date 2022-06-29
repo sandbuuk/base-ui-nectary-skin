@@ -1,11 +1,12 @@
 import {
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   NectaryElement,
   updateAttribute,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchSegmentedControlOptionElement } from '../segmented-control-option'
 import type { TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
 
@@ -76,10 +77,10 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
   }
 
   #onValueChange(value: string | null) {
-    for (const $el of this.#$slot.assignedElements()) {
-      const $option = $el as TSinchSegmentedControlOptionElement
+    for (const $option of this.#$slot.assignedElements()) {
+      const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
 
-      $option.checked = $option.disabled !== true && $option.value === value
+      updateBooleanAttribute($option, 'checked', isChecked)
     }
   }
 

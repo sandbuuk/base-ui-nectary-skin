@@ -1,8 +1,10 @@
 import {
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   NectaryElement,
   updateAttribute,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchTabsOptionElement } from '../tabs-option'
@@ -107,8 +109,10 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
   }
 
   #onValueChange(value: string | null) {
-    for (const $option of this.#$slot.assignedElements() as TSinchTabsOptionElement[]) {
-      $option.checked = $option.disabled !== true && $option.value === value
+    for (const $option of this.#$slot.assignedElements()) {
+      const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
+
+      updateBooleanAttribute($option, 'checked', isChecked)
     }
   }
 

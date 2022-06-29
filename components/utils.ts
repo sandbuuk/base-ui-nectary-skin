@@ -213,8 +213,8 @@ export const updateCsv = (acc: string, value: string, setActive: boolean): strin
   return packCsv(values)
 }
 
-export const getFirstCsvValue = (acc: string): string => {
-  return acc === '' ? '' : unpackCsv(acc)[0]
+export const getFirstCsvValue = (acc: string): string | null => {
+  return acc === '' ? null : unpackCsv(acc)[0]
 }
 
 export const getRect = (el: Element): TRect => {
