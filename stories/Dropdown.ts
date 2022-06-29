@@ -3,6 +3,9 @@ import { useStoryWrapper } from './use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/dropdown'
+import '@sinch-engage/nectary/dropdown-text-option'
+import '@sinch-engage/nectary/dropdown-checkbox-option'
+import '@sinch-engage/nectary/dropdown-radio-option'
 import '@sinch-engage/nectary/icons/open-in-new'
 
 export default {
@@ -10,6 +13,10 @@ export default {
   argTypes: {
     open: {
       description: 'Is dropdown open',
+      control: 'boolean',
+    },
+    multiple: {
+      description: 'Is dropdown multi selectable',
       control: 'boolean',
     },
     value: {
@@ -57,6 +64,7 @@ export default {
 const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdown']> => ({ onChange }) => {
   const [{
     open,
+    multiple,
     value,
     maxVisibleItems,
     orientation,
@@ -94,6 +102,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdow
   const $dropdown = dropdownRef.current!
 
   $dropdown.open = open
+  $dropdown.multiple = multiple
   $dropdown.value = value
   $dropdown.orientation = orientation
   $dropdown.maxVisibleItems = maxVisibleItems
@@ -101,30 +110,78 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdow
   return $wrapper
 }
 
-const dropdownInnerHTML = `
+const textDropdownInnerHTML = `
   <sinch-button text="Button" type="cta-secondary" slot="target"></sinch-button>
-  <sinch-dropdown-option value="1" text="Option 1 value long" slot="option">
+  <sinch-dropdown-text-option value="1" text="Option 1 value long" slot="option">
     <sinch-icon-open-in-new></sinch-icon-open-in-new>
-  </sinch-dropdown-option>
-  <sinch-dropdown-option value="2" text="Option 2 value" slot="option" disabled>
+  </sinch-dropdown-text-option>
+  <sinch-dropdown-text-option value="2" text="Option 2 value" slot="option" disabled>
     <sinch-icon-open-in-new></sinch-icon-open-in-new>
-  </sinch-dropdown-option>
-  <sinch-dropdown-option value="3" text="Option 3 value" slot="option"></sinch-dropdown-option>
-  <sinch-dropdown-option value="4" text="Option 4 value" slot="option"></sinch-dropdown-option>
+  </sinch-dropdown-text-option>
+  <sinch-dropdown-text-option value="3" text="Option 3 value" slot="option"></sinch-dropdown-text-option>
+  <sinch-dropdown-text-option value="4" text="Option 4 value" slot="option"></sinch-dropdown-text-option>
 `
 
-export const Dropdown = Template(dropdownInnerHTML)
+export const DropdownWithText = Template(textDropdownInnerHTML)
 
-Dropdown.args = {
+DropdownWithText.args = {
   open: false,
   value: '2',
   orientation: 'bottom-right',
 }
 
-Dropdown.parameters = {
+DropdownWithText.parameters = {
   docs: {
     source: {
-      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${dropdownInnerHTML}</sinch-input>`,
+      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${textDropdownInnerHTML}</sinch-input>`,
+    },
+  },
+}
+
+const checkboxDropdownInnerHTML = `
+  <sinch-button text="Button" type="cta-secondary" slot="target"></sinch-button>
+  <sinch-dropdown-checkbox-option value="1" text="Option 1 value long" slot="option"></sinch-dropdown-checkbox-option>
+  <sinch-dropdown-checkbox-option value="2" text="Option 2 value" slot="option" disabled></sinch-dropdown-checkbox-option>
+  <sinch-dropdown-checkbox-option value="3" text="Option 3 value" slot="option"></sinch-dropdown-checkbox-option>
+  <sinch-dropdown-checkbox-option value="4" text="Option 4 value" slot="option"></sinch-dropdown-checkbox-option>
+`
+
+export const DropdownWithCheckbox = Template(checkboxDropdownInnerHTML)
+
+DropdownWithCheckbox.args = {
+  open: false,
+  value: '2',
+  orientation: 'bottom-right',
+}
+
+DropdownWithCheckbox.parameters = {
+  docs: {
+    source: {
+      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${checkboxDropdownInnerHTML}</sinch-input>`,
+    },
+  },
+}
+
+const radioDropdownInnerHTML = `
+  <sinch-button text="Button" type="cta-secondary" slot="target"></sinch-button>
+  <sinch-dropdown-radio-option value="1" text="Option 1 value long" slot="option"></sinch-dropdown-radio-option>
+  <sinch-dropdown-radio-option value="2" text="Option 2 value" slot="option" disabled></sinch-dropdown-radio-option>
+  <sinch-dropdown-radio-option value="3" text="Option 3 value" slot="option"></sinch-dropdown-radio-option>
+  <sinch-dropdown-radio-option value="4" text="Option 4 value" slot="option"></sinch-dropdown-radio-option>
+`
+
+export const DropdownWithRadio = Template(radioDropdownInnerHTML)
+
+DropdownWithRadio.args = {
+  open: false,
+  value: '2',
+  orientation: 'bottom-right',
+}
+
+DropdownWithRadio.parameters = {
+  docs: {
+    source: {
+      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${radioDropdownInnerHTML}</sinch-input>`,
     },
   },
 }
