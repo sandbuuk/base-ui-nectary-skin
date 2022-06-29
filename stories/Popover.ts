@@ -70,7 +70,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-popover
 
 const popoverInnerHTML = `
   <sinch-button text="Button" type="cta-secondary" slot="target"></sinch-button>
-  <section slot="content" style="width: 240px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</section>
+  <section slot="content" style="width: 240px;padding: 10px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</section>
 `
 
 export const Popover = Template(popoverInnerHTML)

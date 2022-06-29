@@ -2,6 +2,7 @@ import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/search'
+import '@sinch-engage/nectary/search-option'
 
 export default {
   title: 'Components/Search',

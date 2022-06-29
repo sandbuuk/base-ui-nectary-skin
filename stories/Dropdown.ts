@@ -79,7 +79,8 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdow
     $dropdown.innerHTML = innerHTML
 
     $dropdown.querySelector('sinch-button')?.addEventListener('click', () => {
-      updateArgs({ open: true })
+      // updateArgs({ open: true })
+      $dropdown.setAttribute('open', '')
     })
 
     $dropdown.addEventListener('change', (e: any) => {

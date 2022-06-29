@@ -1,6 +1,7 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/segmented-control'
+import '@sinch-engage/nectary/segmented-control-option'
 import '@sinch-engage/nectary/icons/open-in-new'
 import '@sinch-engage/nectary/icons/help-outline'
 

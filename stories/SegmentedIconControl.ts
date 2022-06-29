@@ -1,6 +1,7 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/segmented-icon-control'
+import '@sinch-engage/nectary/segmented-icon-control-option'
 import '@sinch-engage/nectary/icons/format-align-left'
 import '@sinch-engage/nectary/icons/format-align-right'
 import '@sinch-engage/nectary/icons/format-align-center'
