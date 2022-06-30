@@ -2,17 +2,17 @@ import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const withWideWidth = '/button?width=200&type=primary&text=Button&icon=true'
-const withFitWidth = '/button?type=primary&text=Button&icon=true'
-const withNarrowWidth = '/button?width=110&type=primary&icon=true&text=Button%text%20long%20long%20long'
-const withDisabled = '/button?type=primary&text=Button&disabled=true&icon=true'
-const withSmall = '/button?type=primary&text=Button&small=true&icon=true'
-const withIcon = '/button?type=primary&icon=true'
-const withSmallIcon = '/button?type=primary&small=true&icon=true'
+const withWideWidth = '/button?width=200&type=primary&text=Button&icon-left=true'
+const withFitWidth = '/button?type=primary&text=Button&icon-left=true'
+const withFitWidthIconRight = '/button?type=primary&text=Button&icon-right=true'
+const withNarrowWidth = '/button?width=110&type=primary&icon-left=true&text=Button%text%20long%20long%20long'
+const withDisabled = '/button?type=primary&text=Button&disabled=true&icon-left=true'
+const withSmall = '/button?type=primary&text=Button&small=true&icon-left=true'
+const withSmallIconRight = '/button?type=primary&text=Button&small=true&icon-right=true'
 const withSpinner = '/button?type=primary&text=Button&spinner=true'
 const withSpinnerDisabled = '/button?type=primary&text=Button&spinner=true&disabled=true'
 const withSpinnerSmall = '/button?type=primary&text=Button&spinner=true&small=true'
-const checkFitWidth = makeAccessibilityTests('/button?type=primary&text=Button&icon=true', 'sinch-button')
+const checkFitWidth = makeAccessibilityTests('/button?type=primary&text=Button&icon-left=true', 'sinch-button')
 
 test('accessibility', checkFitWidth(async function* ({ $eval }) {
   yield
@@ -197,20 +197,6 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     },
   },
   {
-    name: 'icon',
-    url: withIcon,
-    async *fn() {
-      yield { name: 'shot' }
-    },
-  },
-  {
-    name: 'icon small',
-    url: withSmallIcon,
-    async *fn() {
-      yield { name: 'shot' }
-    },
-  },
-  {
     name: 'narrow',
     url: withNarrowWidth,
     async *fn({ $eval }) {
@@ -222,6 +208,20 @@ test('button screenshots', runScreenshotTests('sinch-button', [
   {
     name: 'wide',
     url: withWideWidth,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'right icon',
+    url: withFitWidthIconRight,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'small right icon',
+    url: withSmallIconRight,
     async *fn() {
       yield { name: 'shot' }
     },

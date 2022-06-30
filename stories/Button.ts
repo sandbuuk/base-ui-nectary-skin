@@ -2,6 +2,7 @@ import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary/icons/expand-more'
 import '@sinch-engage/nectary/spinner'
 
 export default {
@@ -101,22 +102,37 @@ ButtonCtaSecondary.parameters = {
   },
 }
 
-export const ButtonWithIcon = Template('<sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>')
+export const ButtonWithIconOnTheLeft = Template('<sinch-icon-open-in-new slot="left-icon"></sinch-icon-open-in-new>')
 
-ButtonWithIcon.args = {
+ButtonWithIconOnTheLeft.args = {
   type: 'primary',
   text: 'Click me',
 }
 
-ButtonWithIcon.parameters = {
+ButtonWithIconOnTheLeft.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new slot="left-icon"></sinch-icon-open-in-new>\n</sinch-button>',
     },
   },
 }
 
-export const ButtonWithSpinner = Template('<sinch-spinner slot="icon"></sinch-spinner>')
+export const ButtonWithIconOnTheRight = Template('<sinch-icon-expand-more slot="right-icon"></sinch-icon-expand-more>')
+
+ButtonWithIconOnTheRight.args = {
+  type: 'primary',
+  text: 'Click me',
+}
+
+ButtonWithIconOnTheRight.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new slot="right-icon"></sinch-icon-open-in-new>\n</sinch-button>',
+    },
+  },
+}
+
+export const ButtonWithSpinner = Template('<sinch-spinner slot="left-icon"></sinch-spinner>')
 
 ButtonWithSpinner.args = {
   type: 'primary',
@@ -126,28 +142,44 @@ ButtonWithSpinner.args = {
 ButtonWithSpinner.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner slot="icon"></sinch-spinner>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner slot="left-icon"></sinch-spinner>\n</sinch-button>',
     },
   },
 }
 
-export const SmallButtonWithIcon = Template('<sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>')
+export const SmallButtonWithIconOnTheLeft = Template('<sinch-icon-open-in-new slot="left-icon"></sinch-icon-open-in-new>')
 
-SmallButtonWithIcon.args = {
+SmallButtonWithIconOnTheLeft.args = {
   type: 'primary',
   text: 'Click me',
   small: true,
 }
 
-SmallButtonWithIcon.parameters = {
+SmallButtonWithIconOnTheLeft.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new slot="left-icon"></sinch-icon-open-in-new>\n</sinch-button>',
     },
   },
 }
 
-export const SmallButtonWithSpinner = Template('<sinch-spinner type="small" slot="icon"></sinch-spinner>')
+export const SmallButtonWithIconOnTheRight = Template('<sinch-icon-expand-more slot="right-icon"></sinch-icon-expand-more>')
+
+SmallButtonWithIconOnTheRight.args = {
+  type: 'primary',
+  text: 'Click me',
+  small: true,
+}
+
+SmallButtonWithIconOnTheRight.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-button small type="primary" text="Click me" onClick={onClick}>\n  <sinch-icon-open-in-new slot="right-icon"></sinch-icon-open-in-new>\n</sinch-button>',
+    },
+  },
+}
+
+export const SmallButtonWithSpinner = Template('<sinch-spinner type="small" slot="left-icon"></sinch-spinner>')
 
 SmallButtonWithSpinner.args = {
   type: 'primary',
@@ -158,21 +190,7 @@ SmallButtonWithSpinner.args = {
 SmallButtonWithSpinner.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner type="small" slot="icon"></sinch-spinner>\n</sinch-button>',
-    },
-  },
-}
-
-export const IconOnlyButton = Template('<sinch-spinner slot="icon"></sinch-spinner>')
-
-IconOnlyButton.args = {
-  type: 'primary',
-}
-
-IconOnlyButton.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-button type="primary" onClick={onClick}>\n  <sinch-spinner slot="icon"></sinch-spinner>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner type="small" slot="left-icon"></sinch-spinner>\n</sinch-button>',
     },
   },
 }
