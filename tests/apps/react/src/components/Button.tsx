@@ -8,7 +8,8 @@ type TButton = {
 export const Button: FC<TButton> = ({ search }) => {
   const isDisabled = search.get('disabled') != null
   const isSmall = search.get('small') != null
-  const hasIcon = search.get('icon') != null
+  const hasLeftIcon = search.get('icon-left') != null
+  const hasRightIcon = search.get('icon-right') != null
   const hasSpinner = search.get('spinner') != null
   const text: any = search.get('text')
   const type: any = search.get('type')
@@ -27,8 +28,9 @@ export const Button: FC<TButton> = ({ search }) => {
       onBlur={onBlur}
       aria-label={text ?? 'Button'}
     >
-      {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
-      {hasSpinner && <sinch-spinner static type={isSmall ? 'small' : 'medium'} slot="icon"/>}
+      {hasLeftIcon && <sinch-icon-open-in-new slot="left-icon"/>}
+      {hasRightIcon && <sinch-icon-expand-more slot="right-icon"/>}
+      {hasSpinner && <sinch-spinner static type={isSmall ? 'small' : 'medium'} slot="left-icon"/>}
     </sinch-button>
   )
 }

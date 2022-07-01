@@ -1,5 +1,7 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary/icons/expand-more'
 
 @Component({
   selector: 'button-component',
@@ -12,7 +14,8 @@ export class ButtonComponent {
   text: string | null
   isDisabled: boolean
   isSmall: boolean
-  hasIcon: boolean
+  hasLeftIcon: boolean
+  hasRightIcon: boolean
   hasSpinner: boolean
 
   constructor() {
@@ -21,7 +24,8 @@ export class ButtonComponent {
     this.text = url.searchParams.get('text')
     this.isDisabled = url.searchParams.get('disabled') !== null
     this.isSmall = url.searchParams.get('small') !== null
-    this.hasIcon = url.searchParams.get('icon') !== null
+    this.hasLeftIcon = url.searchParams.get('icon-left') !== null
+    this.hasRightIcon = url.searchParams.get('icon-right') !== null
     this.hasSpinner = url.searchParams.get('spinner') !== null
   }
 
@@ -29,11 +33,11 @@ export class ButtonComponent {
     window.dispatchEvent(new CustomEvent('sinch-button-click'))
   }
 
-  onFocus(){
+  onFocus() {
     window.dispatchEvent(new CustomEvent('sinch-button-focus'))
   }
 
-  onBlur(){
+  onBlur() {
     window.dispatchEvent(new CustomEvent('sinch-button-blur'))
   }
 }
