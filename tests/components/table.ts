@@ -8,7 +8,7 @@ const items = ({ hasLongLine }: any = {}) => encodeURI(JSON.stringify({
     { text: 'ID', isSortable: true, align: 'end' },
     { text: 'Ticket' },
     { text: 'Channel', align: 'center', tooltip: 'Tooltip text', isSortable: true, isFilterable: true },
-    { text: 'Comment' },
+    { text: 'Comment long long' },
     { text: 'Active', align: 'center' },
     { text: 'Actions', isFit: true, tooltip: 'Tooltip text' },
   ],
@@ -38,6 +38,7 @@ const items = ({ hasLongLine }: any = {}) => encodeURI(JSON.stringify({
 
 const withItems = `/table?width=1000&state=${items()}`
 const withLongLine = `/table?width=1000&state=${items({ hasLongLine: true })}`
+const withNarrow = `/table?width=300&state=${items()}`
 const checkTableWithItems = makeAccessibilityTests(`/table?width=1000&state=${items()}`, 'sinch-table')
 
 test('accessibility', checkTableWithItems(async function* () {
@@ -48,6 +49,13 @@ test('table screenshots', runScreenshotTests('sinch-table', [
   {
     name: 'items',
     url: withItems,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'items narrow',
+    url: withNarrow,
     async *fn() {
       yield { name: 'shot' }
     },
