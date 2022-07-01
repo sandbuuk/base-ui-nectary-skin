@@ -8,8 +8,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent, MouseEvent } from 'react'
+import type { TSinchActionMenuOptionElement, TSinchActionMenuOptionReact } from './types'
 
 const template = document.createElement('template')
 
@@ -88,23 +87,6 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
     this.#$button.blur()
   }
 })
-
-export type TSinchActionMenuOptionElement = HTMLElement & {
-  text: string,
-  selected: boolean,
-  disabled: boolean,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchActionMenuOptionReact = TSinchElementReact<TSinchActionMenuOptionElement> & {
-  text: string,
-  disabled?: boolean,
-  'aria-label': string,
-  onClick: (e: MouseEvent<TSinchActionMenuOptionElement>) => void,
-  onFocus?: (e: FocusEvent<TSinchActionMenuOptionElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchActionMenuOptionElement>) => void,
-}
 
 declare global {
   namespace JSX {

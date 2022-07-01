@@ -14,6 +14,10 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/accordion'
+import '@sinch-engage/nectary/accordion-item'
+import '@sinch-engage/nectary/icons/open-in-new'
+
 export default {
   props: {
     search: URLSearchParams

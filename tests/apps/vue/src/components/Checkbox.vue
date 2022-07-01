@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/checkbox'
+
 export default {
   methods: {
     onChange(e) {

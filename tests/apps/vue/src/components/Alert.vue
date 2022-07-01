@@ -23,6 +23,10 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/alert'
+import '@sinch-engage/nectary/alert-close'
+import '@sinch-engage/nectary/alert-button'
+
 export default {
   props: {
     search: URLSearchParams

@@ -10,6 +10,9 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/radio'
+import '@sinch-engage/nectary/radio-option'
+
 export default {
   props: {
     search: URLSearchParams

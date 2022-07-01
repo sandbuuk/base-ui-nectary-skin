@@ -24,6 +24,9 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/select'
+import '@sinch-engage/nectary/select-option'
+
 export default {
   methods: {
     onChange(e) {

@@ -8,7 +8,7 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchChatBubbleType } from '../chat-bubble'
+import type { TSinchChatBubbleType } from '../chat-bubble/types'
 import type { TSinchElementReact } from '../types'
 
 const template = document.createElement('template')

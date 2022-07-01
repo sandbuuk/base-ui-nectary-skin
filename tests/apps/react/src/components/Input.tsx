@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { FC, SyntheticEvent } from 'react'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/help-tooltip'
 
 type TInput = {
   search: URLSearchParams,

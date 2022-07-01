@@ -11,6 +11,10 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/avatar'
+import '@sinch-engage/nectary/avatar-badge'
+import '@sinch-engage/nectary/avatar-status'
+
 export default {
   props: {
     search: URLSearchParams

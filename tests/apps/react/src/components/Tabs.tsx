@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { FC, SyntheticEvent } from 'react'
+import '@sinch-engage/nectary/tabs'
+import '@sinch-engage/nectary/tabs-option'
 
 type TTabs = {
   search: URLSearchParams,

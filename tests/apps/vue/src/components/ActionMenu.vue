@@ -23,6 +23,10 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/action-menu'
+import '@sinch-engage/nectary/action-menu-option'
+
 export default {
   methods: {
     onClick(e) {

@@ -8,7 +8,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchDropdownTextOptionElement, TSinchDropdownTextOptionReact } from './types'
 
 const template = document.createElement('template')
 
@@ -101,22 +101,6 @@ export class DropdownTextOption extends NectaryElement {
 }
 
 defineCustomElement('sinch-dropdown-text-option', DropdownTextOption)
-
-export type TSinchDropdownTextOptionElement = HTMLElement & {
-  value: string,
-  text: string,
-  checked: boolean,
-  selected: boolean,
-  disabled: boolean,
-  readonly icon: Element | null,
-}
-
-export type TSinchDropdownTextOptionReact = TSinchElementReact<TSinchDropdownTextOptionElement> & {
-  value: string,
-  text: string,
-  disabled?: boolean,
-  'aria-label': string,
-}
 
 declare global {
   namespace JSX {

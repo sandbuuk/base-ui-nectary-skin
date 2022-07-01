@@ -10,7 +10,7 @@ import {
   updateCsv,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchAccordionItemElement } from '../accordion-item'
+import type { TSinchAccordionItemElement } from '../accordion-item/types'
 import type { TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
 

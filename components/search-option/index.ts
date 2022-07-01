@@ -8,13 +8,13 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchSearchOptionElement, TSinchSearchOptionReact } from './types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-class SinchSearchOption extends NectaryElement {
+defineCustomElement('sinch-search-option', class extends NectaryElement {
   #$content: HTMLSpanElement
 
   constructor() {
@@ -65,23 +65,7 @@ class SinchSearchOption extends NectaryElement {
   get selected() {
     return getBooleanAttribute(this, 'data-selected')
   }
-}
-
-defineCustomElement('sinch-search-option', SinchSearchOption)
-
-export const isSinchSearchOptionElement = (element: EventTarget | Element | null): element is TSinchSearchOptionElement => {
-  return element instanceof SinchSearchOption
-}
-
-export type TSinchSearchOptionElement = HTMLElement & {
-  text: string,
-  selected: boolean,
-}
-
-export type TSinchSearchOptionReact = TSinchElementReact<TSinchSearchOptionElement> & {
-  text: string,
-  'aria-label': string,
-}
+})
 
 declare global {
   namespace JSX {

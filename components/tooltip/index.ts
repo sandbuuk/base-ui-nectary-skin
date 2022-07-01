@@ -12,9 +12,8 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TRect, TSinchElementReact } from '../types'
-
-const orientationValues = ['top', 'bottom', 'left', 'right', 'top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
+import { orientationValues } from './utils'
+import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact } from './types'
 
 const template = document.createElement('template')
 
@@ -90,23 +89,6 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     }
   }
 })
-
-export type TSinchTooltipOrientation = typeof orientationValues[number]
-
-export type TSinchTooltipElement = HTMLElement & {
-  text: string,
-  width: number | null,
-  inverted: boolean,
-  orientation: TSinchTooltipOrientation,
-  readonly tooltipRect: TRect,
-}
-
-export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
-  text: string,
-  width?: number,
-  inverted?: boolean,
-  orientation?: TSinchTooltipOrientation,
-}
 
 declare global {
   namespace JSX {

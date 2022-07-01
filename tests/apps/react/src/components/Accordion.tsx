@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/accordion'
+import '@sinch-engage/nectary/accordion-item'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 type TAccordion = {
   search: URLSearchParams,

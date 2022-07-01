@@ -17,6 +17,9 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/search'
+import '@sinch-engage/nectary/search-option'
+
 export default {
   methods: {
     onChange(e) {

@@ -11,7 +11,7 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTooltipElement, TSinchTooltipReact } from '../tooltip'
+import type { TSinchTooltipElement, TSinchTooltipReact } from '../tooltip/types'
 
 const template = document.createElement('template')
 

@@ -8,12 +8,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent } from 'react'
-
-export const isTabsOptionElement = (element: EventTarget | Element | null): element is TSinchTabsOptionElement => {
-  return element instanceof Element && element.tagName === 'SINCH-TABS-OPTION'
-}
+import type { TSinchTabsOptionElement, TSinchTabsOptionReact } from './types'
 
 const template = document.createElement('template')
 
@@ -115,24 +110,6 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
     )
   }
 })
-
-export type TSinchTabsOptionElement = HTMLElement & {
-  value: string,
-  disabled: boolean,
-  checked: boolean,
-  text: string,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchTabsOptionReact = TSinchElementReact<TSinchTabsOptionElement> & {
-  value: string,
-  disabled?: boolean,
-  text: string,
-  'aria-label': string,
-  onFocus?: (e: FocusEvent<TSinchTabsOptionElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchTabsOptionElement>) => void,
-}
 
 declare global {
   namespace JSX {

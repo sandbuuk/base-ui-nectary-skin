@@ -1,7 +1,6 @@
 import { defineCustomElement, NectaryElement } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import '../grid-item'
 
 const template = document.createElement('template')
 

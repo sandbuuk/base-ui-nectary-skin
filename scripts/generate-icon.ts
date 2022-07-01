@@ -66,13 +66,6 @@ const processIcon = async (filepath: string) => {
   await writeFile(outPathTs, dataTs)
   await writeFile(outPathHtml, dataHtml)
 
-  const indexPath = './components/index.ts'
-  let indexData = await readFile(indexPath, 'utf-8')
-
-  indexData = indexData.replace('// {{icon import}}', `$&\nimport './icons/${filename}'`)
-
-  await writeFile(indexPath, indexData)
-
   /* Storybook */
   const storyPath = './stories/Icons.ts'
   let storyData = await readFile(storyPath, 'utf-8')

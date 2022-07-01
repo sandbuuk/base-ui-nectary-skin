@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/card-container'
+
 export default {
   props: {
     search: URLSearchParams

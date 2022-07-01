@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import '@sinch-engage/nectary/title'
 
 type TTitle = {
   search: URLSearchParams,

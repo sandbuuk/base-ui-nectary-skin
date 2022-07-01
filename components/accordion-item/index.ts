@@ -11,10 +11,8 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent } from 'react'
-
-const statusValues = ['info', 'success', 'warn', 'error'] as const
+import { statusValues } from './utils'
+import type { TSinchAccordionItemElement, TSinchAccordionItemReact, TSinchAccordionStatusType } from './types'
 
 const template = document.createElement('template')
 
@@ -144,29 +142,6 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
     this.#$button.blur()
   }
 })
-
-export type TSinchAccordionStatusType = typeof statusValues[number]
-
-export type TSinchAccordionItemElement = HTMLElement & {
-  value: string,
-  label: string,
-  optionalText: string | null,
-  disabled: boolean,
-  checked: boolean,
-  status: TSinchAccordionStatusType | null,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchAccordionItemReact = TSinchElementReact<TSinchAccordionItemElement> & {
-  value: string,
-  label: string,
-  optionalText?: string,
-  disabled?: boolean,
-  status?: TSinchAccordionStatusType,
-  onFocus?: (e: FocusEvent<TSinchAccordionItemElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchAccordionItemElement>) => void,
-}
 
 declare global {
   namespace JSX {

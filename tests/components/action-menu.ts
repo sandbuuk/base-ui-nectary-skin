@@ -13,7 +13,7 @@ test('accessibility', check(async function* ({ $ }) {
   yield
 }))
 
-test('dropdown screenshots', runScreenshotTests('sinch-action-menu', [
+test('action menu screenshots', runScreenshotTests('sinch-action-menu', [
   {
     name: 'open attribute',
     url: withSelect,
@@ -183,7 +183,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-action-menu', [
   },
 ]))
 
-test('dropdown events', runScreenshotTests('sinch-action-menu', [
+test('action menu events', runScreenshotTests('sinch-action-menu', [
   {
     name: 'custom events',
     url: withSelect,

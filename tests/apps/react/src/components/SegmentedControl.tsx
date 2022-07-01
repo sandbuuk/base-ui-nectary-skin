@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react'
 import type { FC, SyntheticEvent } from 'react'
+import '@sinch-engage/nectary/segmented-control'
+import '@sinch-engage/nectary/segmented-control-option'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 type TSegmentedControl = {
   search: URLSearchParams,

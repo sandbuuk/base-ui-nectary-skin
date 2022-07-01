@@ -14,6 +14,9 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/popover'
+import '@sinch-engage/nectary/button'
+
 export default {
   methods: {
     onClose() {

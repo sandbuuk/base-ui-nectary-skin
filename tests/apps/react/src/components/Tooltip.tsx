@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import '@sinch-engage/nectary/tooltip'
 
 type TTooltip = {
   search: URLSearchParams,
