@@ -175,6 +175,10 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   #onBackdropClick = (e: MouseEvent) => {
+    if (e.target !== this.#$dialog) {
+      return
+    }
+
     const rect = this.popoverRect
     const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 

@@ -114,10 +114,10 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdow
 const textDropdownInnerHTML = `
   <sinch-button text="Button" type="cta-secondary" slot="target"></sinch-button>
   <sinch-dropdown-text-option value="1" text="Option 1 value long" slot="option">
-    <sinch-icon-open-in-new></sinch-icon-open-in-new>
+    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
   </sinch-dropdown-text-option>
   <sinch-dropdown-text-option value="2" text="Option 2 value" slot="option" disabled>
-    <sinch-icon-open-in-new></sinch-icon-open-in-new>
+    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
   </sinch-dropdown-text-option>
   <sinch-dropdown-text-option value="3" text="Option 3 value" slot="option"></sinch-dropdown-text-option>
   <sinch-dropdown-text-option value="4" text="Option 4 value" slot="option"></sinch-dropdown-text-option>
@@ -134,7 +134,7 @@ DropdownWithText.args = {
 DropdownWithText.parameters = {
   docs: {
     source: {
-      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${textDropdownInnerHTML}</sinch-input>`,
+      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${textDropdownInnerHTML}</sinch-dropdown>`,
     },
   },
 }
@@ -158,7 +158,7 @@ DropdownWithCheckbox.args = {
 DropdownWithCheckbox.parameters = {
   docs: {
     source: {
-      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${checkboxDropdownInnerHTML}</sinch-input>`,
+      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${checkboxDropdownInnerHTML}</sinch-dropdown>`,
     },
   },
 }
@@ -182,7 +182,7 @@ DropdownWithRadio.args = {
 DropdownWithRadio.parameters = {
   docs: {
     source: {
-      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${radioDropdownInnerHTML}</sinch-input>`,
+      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${radioDropdownInnerHTML}</sinch-dropdown>`,
     },
   },
 }
