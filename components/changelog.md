@@ -1,3 +1,11 @@
+## v0.28.0
+
+* 💥 remove index file
+* 💥 rename `icon` slot to `left-icon` and add `right-icon` slot to `sinch-button`
+* ➕ add `sinch-action-menu` component
+* ➕ allow multiline text in `sinch-table-head-cell`
+* ➕ add more icons
+
 ## v0.27.0
 
 * 💥 remove keyboard arrows control in `sinch-segmented-control`
