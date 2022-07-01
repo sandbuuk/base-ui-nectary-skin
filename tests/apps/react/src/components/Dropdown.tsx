@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import type { TSinchDropdownOrientation } from '@sinch-engage/nectary/dropdown'
+import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover'
 import type { FC, SyntheticEvent } from 'react'
 
 type TDropdown = {
@@ -11,7 +11,7 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
   const isRadio = search.get('radio') !== null
   const isSelect = !isCheckbox && !isRadio
   const isMultiple = search.get('multiple') !== null
-  const orientation = search.get('orientation') as TSinchDropdownOrientation ?? undefined
+  const orientation = search.get('orientation') as TSinchPopoverOrientation ?? undefined
   const [isOpen, setOpen] = useState(search.get('open') !== null)
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = useMemo(() =>
