@@ -12,10 +12,9 @@ import {
   getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
+import { orientationValues } from './utils'
 import type { TRect, TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
-
-const orientationValues = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
 
 const template = document.createElement('template')
 
