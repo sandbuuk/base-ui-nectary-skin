@@ -51,7 +51,7 @@ const processIcon = async (filepath: string) => {
 
   dataHtml = dataHtml
     .replace('width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"', svgAttributes)
-    .replace(/ fill=".*?"/, '')
+    .replaceAll(/ fill=".*?"/, '')
 
   const outDir = path.join('./components/icons', filename)
   const outPathTs = path.join(outDir, 'index.ts')

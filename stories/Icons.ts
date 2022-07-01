@@ -561,61 +561,141 @@ import '@sinch-engage/nectary/icons/accessible'
 import '@sinch-engage/nectary/icons/accessibility-new'
 import '@sinch-engage/nectary/icons/accessibility'
 import '@sinch-engage/nectary/icons/3d-rotation'
+import '@sinch-engage/nectary/icons/wifi-calling'
+import '@sinch-engage/nectary/icons/vpn-key'
+import '@sinch-engage/nectary/icons/voicemail'
+import '@sinch-engage/nectary/icons/unsubscribe'
+import '@sinch-engage/nectary/icons/textsms'
+import '@sinch-engage/nectary/icons/swap-calls'
+import '@sinch-engage/nectary/icons/stop-screen-share'
+import '@sinch-engage/nectary/icons/stay-primary-portrait'
+import '@sinch-engage/nectary/icons/stay-primary-landscape'
+import '@sinch-engage/nectary/icons/stay-current-portrait'
+import '@sinch-engage/nectary/icons/stay-current-landscape'
+import '@sinch-engage/nectary/icons/speaker-phone'
+import '@sinch-engage/nectary/icons/sentiment-satisfied-alt'
+import '@sinch-engage/nectary/icons/screen-share'
+import '@sinch-engage/nectary/icons/rss-feed'
+import '@sinch-engage/nectary/icons/ring-volume'
+import '@sinch-engage/nectary/icons/read-more'
+import '@sinch-engage/nectary/icons/qr-code-scanner'
+import '@sinch-engage/nectary/icons/qr-code'
+import '@sinch-engage/nectary/icons/print-disabled'
+import '@sinch-engage/nectary/icons/present-to-all'
+import '@sinch-engage/nectary/icons/portable-wifi-off'
+import '@sinch-engage/nectary/icons/phonelink-setup'
+import '@sinch-engage/nectary/icons/phonelink-ring'
+import '@sinch-engage/nectary/icons/phonelink-lock'
+import '@sinch-engage/nectary/icons/phonelink-erase'
+import '@sinch-engage/nectary/icons/phone-enabled'
+import '@sinch-engage/nectary/icons/phone-disabled'
+import '@sinch-engage/nectary/icons/phone'
+import '@sinch-engage/nectary/icons/person-search'
+import '@sinch-engage/nectary/icons/person-add-disabled'
+import '@sinch-engage/nectary/icons/pause-presentation'
+import '@sinch-engage/nectary/icons/no-sim'
+import '@sinch-engage/nectary/icons/nat'
+import '@sinch-engage/nectary/icons/mobile-screen-share'
+import '@sinch-engage/nectary/icons/message'
+import '@sinch-engage/nectary/icons/mark-email-unread'
+import '@sinch-engage/nectary/icons/mark-email-read'
+import '@sinch-engage/nectary/icons/mail-outline'
+import '@sinch-engage/nectary/icons/location-on'
+import '@sinch-engage/nectary/icons/location-off'
+import '@sinch-engage/nectary/icons/live-help'
+import '@sinch-engage/nectary/icons/list-alt'
+import '@sinch-engage/nectary/icons/invert-colors-off'
+import '@sinch-engage/nectary/icons/import-export'
+import '@sinch-engage/nectary/icons/import-contacts'
+import '@sinch-engage/nectary/icons/hourglass-top'
+import '@sinch-engage/nectary/icons/hourglass-bottom'
+import '@sinch-engage/nectary/icons/forward-to-inbox'
+import '@sinch-engage/nectary/icons/email'
+import '@sinch-engage/nectary/icons/duo'
+import '@sinch-engage/nectary/icons/domain-verification'
+import '@sinch-engage/nectary/icons/domain-disabled'
+import '@sinch-engage/nectary/icons/dialpad'
+import '@sinch-engage/nectary/icons/dialer-sip'
+import '@sinch-engage/nectary/icons/desktop-access-disabled'
+import '@sinch-engage/nectary/icons/contacts'
+import '@sinch-engage/nectary/icons/contact-phone'
+import '@sinch-engage/nectary/icons/contact-mail'
+import '@sinch-engage/nectary/icons/clear-all'
+import '@sinch-engage/nectary/icons/chat-bubble'
+import '@sinch-engage/nectary/icons/cancel-presentation'
+import '@sinch-engage/nectary/icons/call-split'
+import '@sinch-engage/nectary/icons/call-received'
+import '@sinch-engage/nectary/icons/call-missed-outgoing'
+import '@sinch-engage/nectary/icons/call-missed'
+import '@sinch-engage/nectary/icons/call-merge'
+import '@sinch-engage/nectary/icons/call-made'
+import '@sinch-engage/nectary/icons/call-end'
+import '@sinch-engage/nectary/icons/call'
+import '@sinch-engage/nectary/icons/business'
+import '@sinch-engage/nectary/icons/alternate-email'
+import '@sinch-engage/nectary/icons/add-ic-call'
 // {{icon import}}
+import '@sinch-engage/nectary/icons/wifi-tethering'
+import '@sinch-engage/nectary/icons/wifi-lock'
+import '@sinch-engage/nectary/icons/widgets'
+import '@sinch-engage/nectary/icons/wallpaper'
+import '@sinch-engage/nectary/icons/usb'
+import '@sinch-engage/nectary/icons/thermostat'
+import '@sinch-engage/nectary/icons/storage'
+import '@sinch-engage/nectary/icons/signal-wifi-off'
+import '@sinch-engage/nectary/icons/signal-wifi-4-bar-lock'
+import '@sinch-engage/nectary/icons/signal-wifi-4-bar'
+import '@sinch-engage/nectary/icons/signal-cellular-off'
+import '@sinch-engage/nectary/icons/signal-cellular-null'
+import '@sinch-engage/nectary/icons/signal-cellular-no-sim'
+import '@sinch-engage/nectary/icons/signal-cellular-connected-no-internet-4-bar'
+import '@sinch-engage/nectary/icons/signal-cellular-alt'
+import '@sinch-engage/nectary/icons/signal-cellular-4-bar'
+import '@sinch-engage/nectary/icons/settings-system-daydream'
+import '@sinch-engage/nectary/icons/sd-storage'
+import '@sinch-engage/nectary/icons/screen-rotation'
+import '@sinch-engage/nectary/icons/screen-lock-rotation'
+import '@sinch-engage/nectary/icons/screen-lock-portrait'
+import '@sinch-engage/nectary/icons/screen-lock-landscape'
+import '@sinch-engage/nectary/icons/nfc'
+import '@sinch-engage/nectary/icons/mobile-off'
+import '@sinch-engage/nectary/icons/mobile-friendly'
+import '@sinch-engage/nectary/icons/location-searching'
+import '@sinch-engage/nectary/icons/location-disabled'
+import '@sinch-engage/nectary/icons/graphic-eq'
+import '@sinch-engage/nectary/icons/gps-off'
+import '@sinch-engage/nectary/icons/gps-not-fixed'
+import '@sinch-engage/nectary/icons/gps-fixed'
+import '@sinch-engage/nectary/icons/dvr'
+import '@sinch-engage/nectary/icons/devices'
+import '@sinch-engage/nectary/icons/developer-mode'
+import '@sinch-engage/nectary/icons/data-usage'
+import '@sinch-engage/nectary/icons/brightness-medium'
+import '@sinch-engage/nectary/icons/brightness-low'
+import '@sinch-engage/nectary/icons/brightness-high'
+import '@sinch-engage/nectary/icons/brightness-auto'
+import '@sinch-engage/nectary/icons/bluetooth-searching'
+import '@sinch-engage/nectary/icons/bluetooth-disabled'
+import '@sinch-engage/nectary/icons/bluetooth-connected'
+import '@sinch-engage/nectary/icons/bluetooth'
+import '@sinch-engage/nectary/icons/battery-unknown'
+import '@sinch-engage/nectary/icons/battery-std'
+import '@sinch-engage/nectary/icons/battery-full'
+import '@sinch-engage/nectary/icons/battery-charging-full'
+import '@sinch-engage/nectary/icons/battery-alert'
+import '@sinch-engage/nectary/icons/airplanemode-inactive'
+import '@sinch-engage/nectary/icons/airplanemode-active'
+import '@sinch-engage/nectary/icons/add-to-home-screen'
+import '@sinch-engage/nectary/icons/add-alarm'
+import '@sinch-engage/nectary/icons/ad-units'
+import '@sinch-engage/nectary/icons/access-alarms'
+import '@sinch-engage/nectary/icons/access-alarm'
 
 const iconNames = [
-  'sinch-icon-cancel',
-  'sinch-icon-close',
-  'sinch-icon-open-in-new',
-  'sinch-icon-help-outline',
-  'sinch-icon-more-horiz',
-  'sinch-icon-more-vert',
-  'sinch-icon-arrow-downward',
-  'sinch-icon-arrow-back',
-  'sinch-icon-arrow-forward',
-  'sinch-icon-arrow-upward',
   'sinch-icon-keyboard-arrow-down',
   'sinch-icon-keyboard-arrow-left',
   'sinch-icon-keyboard-arrow-right',
   'sinch-icon-keyboard-arrow-up',
-  'sinch-icon-arrow-back-ios',
-  'sinch-icon-arrow-forward-ios',
-  'sinch-icon-chevron-left',
-  'sinch-icon-chevron-right',
-  'sinch-icon-expand-less',
-  'sinch-icon-expand-more',
-  'sinch-icon-north',
-  'sinch-icon-north-east',
-  'sinch-icon-east',
-  'sinch-icon-south-east',
-  'sinch-icon-south',
-  'sinch-icon-south-west',
-  'sinch-icon-west',
-  'sinch-icon-north-west',
-  /* File */
-  'sinch-icon-attach-email',
-  'sinch-icon-attachment',
-  'sinch-icon-cloud',
-  'sinch-icon-cloud-circle',
-  'sinch-icon-cloud-done',
-  'sinch-icon-cloud-download',
-  'sinch-icon-cloud-off',
-  'sinch-icon-cloud-queue',
-  'sinch-icon-cloud-upload',
-  'sinch-icon-create-new-folder',
-  'sinch-icon-download',
-  'sinch-icon-download-done',
-  'sinch-icon-folder',
-  'sinch-icon-folder-open',
-  'sinch-icon-folder-shared',
-  'sinch-icon-request-quote',
-  'sinch-icon-rule-folder',
-  'sinch-icon-snippet-folder',
-  'sinch-icon-text-snippet',
-  'sinch-icon-topic',
-  'sinch-icon-upload',
-  /* Device */
-  'sinch-icon-access-time',
   /* Hardware */
   'sinch-icon-smart-toy',
   /* Maps */
@@ -629,10 +709,6 @@ const iconNames = [
   /* Toggle */
   'sinch-icon-star-outline',
   'sinch-icon-star',
-  /* Communication */
-  'sinch-icon-mark-chat-unread',
-  'sinch-icon-comment',
-  'sinch-icon-chat',
   // {{icon name}}
 ]
 
@@ -865,14 +941,27 @@ const navigationIconNames = [
   /* Navigation */
   'sinch-icon-app-settings-alt',
   'sinch-icon-apps',
+  'sinch-icon-arrow-back-ios',
+  'sinch-icon-arrow-back',
+  'sinch-icon-arrow-downward',
   'sinch-icon-arrow-drop-down-circle',
   'sinch-icon-arrow-drop-down',
   'sinch-icon-arrow-drop-up',
+  'sinch-icon-arrow-forward-ios',
+  'sinch-icon-arrow-forward',
   'sinch-icon-arrow-left',
   'sinch-icon-arrow-right',
+  'sinch-icon-arrow-upward',
   'sinch-icon-campaign',
+  'sinch-icon-cancel',
   'sinch-icon-check',
+  'sinch-icon-chevron-left',
+  'sinch-icon-chevron-right',
+  'sinch-icon-close',
   'sinch-icon-double-arrow',
+  'sinch-icon-east',
+  'sinch-icon-expand-less',
+  'sinch-icon-expand-more',
   'sinch-icon-first-page',
   'sinch-icon-fullscreen-exit',
   'sinch-icon-fullscreen',
@@ -881,14 +970,23 @@ const navigationIconNames = [
   'sinch-icon-legend-toggle',
   'sinch-icon-menu-open',
   'sinch-icon-menu',
+  'sinch-icon-more-horiz',
+  'sinch-icon-more-vert',
+  'sinch-icon-north-east',
+  'sinch-icon-north-west',
+  'sinch-icon-north',
   'sinch-icon-payments',
   'sinch-icon-refresh',
+  'sinch-icon-south-east',
+  'sinch-icon-south-west',
+  'sinch-icon-south',
   'sinch-icon-subdirectory-arrow-left',
   'sinch-icon-subdirectory-arrow-right',
   'sinch-icon-switch-left',
   'sinch-icon-switch-right',
   'sinch-icon-unfold-less',
   'sinch-icon-unfold-more',
+  'sinch-icon-west',
 ]
 
 export const NavigationIcons = Template(navigationIconNames)
@@ -1250,6 +1348,204 @@ ActionIcons.parameters = {
   docs: {
     source: {
       code: `<>\n${actionIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
+    },
+  },
+}
+
+const fileIconsNames = [
+  /* File */
+  'sinch-icon-attach-email',
+  'sinch-icon-attachment',
+  'sinch-icon-cloud',
+  'sinch-icon-cloud-circle',
+  'sinch-icon-cloud-done',
+  'sinch-icon-cloud-download',
+  'sinch-icon-cloud-off',
+  'sinch-icon-cloud-queue',
+  'sinch-icon-cloud-upload',
+  'sinch-icon-create-new-folder',
+  'sinch-icon-download',
+  'sinch-icon-download-done',
+  'sinch-icon-folder',
+  'sinch-icon-folder-open',
+  'sinch-icon-folder-shared',
+  'sinch-icon-request-quote',
+  'sinch-icon-rule-folder',
+  'sinch-icon-snippet-folder',
+  'sinch-icon-text-snippet',
+  'sinch-icon-topic',
+  'sinch-icon-upload',
+]
+
+export const FileIcons = Template(fileIconsNames)
+
+FileIcons.parameters = {
+  docs: {
+    source: {
+      code: `<>\n${fileIconsNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
+    },
+  },
+}
+
+const communicationIconsNames = [
+  /* Communication */
+  'sinch-icon-add-ic-call',
+  'sinch-icon-alternate-email',
+  'sinch-icon-business',
+  'sinch-icon-call-end',
+  'sinch-icon-call-made',
+  'sinch-icon-call-merge',
+  'sinch-icon-call-missed-outgoing',
+  'sinch-icon-call-missed',
+  'sinch-icon-call-received',
+  'sinch-icon-call-split',
+  'sinch-icon-call',
+  'sinch-icon-cancel-presentation',
+  'sinch-icon-chat-bubble-outline',
+  'sinch-icon-chat-bubble',
+  'sinch-icon-chat',
+  'sinch-icon-clear-all',
+  'sinch-icon-comment',
+  'sinch-icon-contact-mail',
+  'sinch-icon-contact-phone',
+  'sinch-icon-contacts',
+  'sinch-icon-desktop-access-disabled',
+  'sinch-icon-dialer-sip',
+  'sinch-icon-dialpad',
+  'sinch-icon-domain-disabled',
+  'sinch-icon-domain-verification',
+  'sinch-icon-duo',
+  'sinch-icon-email',
+  'sinch-icon-forum',
+  'sinch-icon-forward-to-inbox',
+  'sinch-icon-hourglass-bottom',
+  'sinch-icon-hourglass-top',
+  'sinch-icon-import-contacts',
+  'sinch-icon-import-export',
+  'sinch-icon-invert-colors-off',
+  'sinch-icon-list-alt',
+  'sinch-icon-live-help',
+  'sinch-icon-location-off',
+  'sinch-icon-location-on',
+  'sinch-icon-mail-outline',
+  'sinch-icon-mark-chat-read',
+  'sinch-icon-mark-chat-unread',
+  'sinch-icon-mark-email-read',
+  'sinch-icon-mark-email-unread',
+  'sinch-icon-message',
+  'sinch-icon-mobile-screen-share',
+  'sinch-icon-more-time',
+  'sinch-icon-nat',
+  'sinch-icon-no-sim',
+  'sinch-icon-pause-presentation',
+  'sinch-icon-person-add-disabled',
+  'sinch-icon-person-search',
+  'sinch-icon-phone-disabled',
+  'sinch-icon-phone-enabled',
+  'sinch-icon-phone',
+  'sinch-icon-phonelink-erase',
+  'sinch-icon-phonelink-lock',
+  'sinch-icon-phonelink-ring',
+  'sinch-icon-phonelink-setup',
+  'sinch-icon-portable-wifi-off',
+  'sinch-icon-present-to-all',
+  'sinch-icon-print-disabled',
+  'sinch-icon-qr-code-scanner',
+  'sinch-icon-qr-code',
+  'sinch-icon-read-more',
+  'sinch-icon-ring-volume',
+  'sinch-icon-rss-feed',
+  'sinch-icon-screen-share',
+  'sinch-icon-sentiment-satisfied-alt',
+  'sinch-icon-speaker-phone',
+  'sinch-icon-stay-current-landscape',
+  'sinch-icon-stay-current-portrait',
+  'sinch-icon-stay-primary-landscape',
+  'sinch-icon-stay-primary-portrait',
+  'sinch-icon-stop-screen-share',
+  'sinch-icon-swap-calls',
+  'sinch-icon-textsms',
+  'sinch-icon-unsubscribe',
+  'sinch-icon-voicemail',
+  'sinch-icon-vpn-key',
+  'sinch-icon-wifi-calling',
+]
+
+export const CommunicationIcons = Template(communicationIconsNames)
+
+CommunicationIcons.parameters = {
+  docs: {
+    source: {
+      code: `<>\n${communicationIconsNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
+    },
+  },
+}
+
+const deviceIconNames = [
+  'sinch-icon-wifi-tethering',
+  'sinch-icon-wifi-lock',
+  'sinch-icon-widgets',
+  'sinch-icon-wallpaper',
+  'sinch-icon-usb',
+  'sinch-icon-thermostat',
+  'sinch-icon-storage',
+  'sinch-icon-signal-wifi-off',
+  'sinch-icon-signal-wifi-4-bar-lock',
+  'sinch-icon-signal-wifi-4-bar',
+  'sinch-icon-signal-cellular-off',
+  'sinch-icon-signal-cellular-null',
+  'sinch-icon-signal-cellular-no-sim',
+  'sinch-icon-signal-cellular-connected-no-internet-4-bar',
+  'sinch-icon-signal-cellular-alt',
+  'sinch-icon-signal-cellular-4-bar',
+  'sinch-icon-settings-system-daydream',
+  'sinch-icon-sd-storage',
+  'sinch-icon-screen-rotation',
+  'sinch-icon-screen-lock-rotation',
+  'sinch-icon-screen-lock-portrait',
+  'sinch-icon-screen-lock-landscape',
+  'sinch-icon-nfc',
+  'sinch-icon-mobile-off',
+  'sinch-icon-mobile-friendly',
+  'sinch-icon-location-searching',
+  'sinch-icon-location-disabled',
+  'sinch-icon-graphic-eq',
+  'sinch-icon-gps-off',
+  'sinch-icon-gps-not-fixed',
+  'sinch-icon-gps-fixed',
+  'sinch-icon-dvr',
+  'sinch-icon-devices',
+  'sinch-icon-developer-mode',
+  'sinch-icon-data-usage',
+  'sinch-icon-brightness-medium',
+  'sinch-icon-brightness-low',
+  'sinch-icon-brightness-high',
+  'sinch-icon-brightness-auto',
+  'sinch-icon-bluetooth-searching',
+  'sinch-icon-bluetooth-disabled',
+  'sinch-icon-bluetooth-connected',
+  'sinch-icon-bluetooth',
+  'sinch-icon-battery-unknown',
+  'sinch-icon-battery-std',
+  'sinch-icon-battery-full',
+  'sinch-icon-battery-charging-full',
+  'sinch-icon-battery-alert',
+  'sinch-icon-airplanemode-inactive',
+  'sinch-icon-airplanemode-active',
+  'sinch-icon-add-to-home-screen',
+  'sinch-icon-add-alarm',
+  'sinch-icon-ad-units',
+  'sinch-icon-access-time',
+  'sinch-icon-access-alarms',
+  'sinch-icon-access-alarm',
+]
+
+export const DeviceIcons = Template(deviceIconNames)
+
+DeviceIcons.parameters = {
+  docs: {
+    source: {
+      code: `<>\n${deviceIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
     },
   },
 }
