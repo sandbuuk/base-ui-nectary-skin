@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary'
+import '@sinch-engage/nectary/theme.css'
 import Accordion from './components/Accordion.vue'
 import ActionMenu from './components/ActionMenu.vue'
 import Alert from './components/Alert.vue'

@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/textarea'
+
 export default {
   methods: {
     onChange(e) {

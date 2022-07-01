@@ -1,6 +1,6 @@
 import { test } from '@playwright/test'
 import { runScreenshotTests } from '../screenshot-tests'
-import type { TSinchChatBubbleElement } from '@sinch-engage/nectary/chat-bubble'
+import type { TSinchChatBubbleElement } from '@sinch-engage/nectary/chat-bubble/types'
 
 const withCustomerBubble = '/chat?example=bubble&type=customer'
 const withAgentBubble = '/chat?example=bubble&type=agent'

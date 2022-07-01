@@ -16,47 +16,58 @@
     <sinch-button v-if="hasAction" text="Ok" type="primary" slot="action" small></sinch-button>
   </sinch-segment>
 </template>
+
 <script>
-  export default {
-    props: {
-      search: URLSearchParams
+import '@sinch-engage/nectary/segment'
+import '@sinch-engage/nectary/segment-collapse'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/tag'
+import '@sinch-engage/nectary/icons/apps'
+import '@sinch-engage/nectary/icons-branded/chatbot'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/checkbox'
+
+export default {
+  props: {
+    search: URLSearchParams
+  },
+  computed: {
+    caption() {
+      return this.search.get('caption') ?? ''
     },
-    computed: {
-      caption() {
-        return this.search.get('caption') ?? ''
-      },
-      hasContent() {
-        return this.search.get('content') !== null
-      },
-      hasIcon() {
-        return this.search.get('icon') !== null
-      },
-      hasCollapse() {
-        return this.search.get('collapse') !== null
-      },
-      hasAction() {
-        return this.search.get('action') !== null
-      },
-      hasInfo() {
-        return this.search.get('info') !== null
-      }
+    hasContent() {
+      return this.search.get('content') !== null
     },
-    methods: {
-      onCollapse(e) {
-        this.isCollapsed = e.detail
-        window.dispatchEvent(new CustomEvent('sinch-segment-collapse-change', {detail: e.detail}))
-      },
-      onCollapseFocus() {
-        window.dispatchEvent(new CustomEvent('sinch-segment-collapse-focus'))
-      },
-      onCollapseBlur() {
-        window.dispatchEvent(new CustomEvent('sinch-segment-collapse-blur'))
-      }
+    hasIcon() {
+      return this.search.get('icon') !== null
     },
-    data() {
-      return {
-        isCollapsed: false
-      }
+    hasCollapse() {
+      return this.search.get('collapse') !== null
+    },
+    hasAction() {
+      return this.search.get('action') !== null
+    },
+    hasInfo() {
+      return this.search.get('info') !== null
+    }
+  },
+  methods: {
+    onCollapse(e) {
+      this.isCollapsed = e.detail
+      window.dispatchEvent(new CustomEvent('sinch-segment-collapse-change', {detail: e.detail}))
+    },
+    onCollapseFocus() {
+      window.dispatchEvent(new CustomEvent('sinch-segment-collapse-focus'))
+    },
+    onCollapseBlur() {
+      window.dispatchEvent(new CustomEvent('sinch-segment-collapse-blur'))
+    }
+  },
+  data() {
+    return {
+      isCollapsed: false
     }
   }
+}
 </script>

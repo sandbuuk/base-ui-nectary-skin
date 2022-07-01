@@ -1,4 +1,3 @@
-import '@sinch-engage/nectary'
 import { Accordion } from './components/Accordion'
 import { ActionMenu } from './components/ActionMenu'
 import { Alert } from './components/Alert'

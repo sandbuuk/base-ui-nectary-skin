@@ -1,6 +1,6 @@
 import { defineCustomElement, getIntegerAttribute, NectaryElement, updateIntegerAttribute } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchGridItemElement, TSinchGridItemReact } from './types'
 
 const template = document.createElement('template')
 
@@ -48,28 +48,14 @@ defineCustomElement('sinch-grid-item', class extends NectaryElement {
   }
 })
 
-export type TSinchGridElement = HTMLElement & {
-  xl: number | null,
-  l: number | null,
-  m: number | null,
-  s: number | null,
-}
-
-export type TSinchGridReact = TSinchElementReact<TSinchGridElement> & {
-  xl?: number,
-  l?: number,
-  m?: number,
-  s?: number,
-}
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-grid-item': TSinchGridReact,
+      'sinch-grid-item': TSinchGridItemReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-grid-item': TSinchGridElement,
+    'sinch-grid-item': TSinchGridItemElement,
   }
 }

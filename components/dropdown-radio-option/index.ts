@@ -8,7 +8,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchDropdownRadioOptionElement, TSinchDropdownRadioOptionReact } from './types'
 
 const template = document.createElement('template')
 
@@ -93,21 +93,6 @@ defineCustomElement('sinch-dropdown-radio-option', class extends NectaryElement 
     return getBooleanAttribute(this, 'data-selected')
   }
 })
-
-export type TSinchDropdownRadioOptionElement = HTMLElement & {
-  value: string,
-  text: string,
-  checked: boolean,
-  selected: boolean,
-  disabled: boolean,
-}
-
-export type TSinchDropdownRadioOptionReact = TSinchElementReact<TSinchDropdownRadioOptionElement> & {
-  value: string,
-  text: string,
-  disabled?: boolean,
-  'aria-label': string,
-}
 
 declare global {
   namespace JSX {

@@ -11,10 +11,8 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import { typeValues } from './utils'
-import type { TSinchElementReact } from '../types'
-
-const statusValues = ['sending', 'sent', 'received', 'seen', 'error'] as const
+import { statusValues, typeValues } from './utils'
+import type { TSinchChatBubbleElement, TSinchChatBubbleReact, TSinchChatBubbleStatus, TSinchChatBubbleType } from './types'
 
 const template = document.createElement('template')
 
@@ -67,21 +65,6 @@ defineCustomElement('sinch-chat-bubble', class extends NectaryElement {
     return getLiteralAttribute(this, statusValues, 'status', null)
   }
 })
-
-export type TSinchChatBubbleType = typeof typeValues[number]
-
-export type TSinchChatBubbleStatus = typeof statusValues[number]
-
-export type TSinchChatBubbleElement = HTMLElement & {
-  readonly type: TSinchChatBubbleType | null,
-  text: string,
-  status: TSinchChatBubbleStatus | null,
-}
-
-export type TSinchChatBubbleReact = TSinchElementReact<TSinchChatBubbleElement> & {
-  text: string,
-  status?: TSinchChatBubbleStatus,
-}
 
 declare global {
   namespace JSX {

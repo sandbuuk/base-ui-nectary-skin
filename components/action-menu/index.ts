@@ -15,14 +15,10 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchDropdownCheckboxOptionElement } from '../dropdown-checkbox-option'
-import type { TSinchDropdownRadioOptionElement } from '../dropdown-radio-option'
-import type { TSinchDropdownTextOptionElement } from '../dropdown-text-option'
+import type { TSinchActionMenuOptionElement } from '../action-menu-option/types'
 import type { TSinchPopoverElement, TSinchPopoverOrientation } from '../popover'
 import type { TRect, TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
-
-type TDropdownOption = TSinchDropdownTextOptionElement | TSinchDropdownCheckboxOptionElement | TSinchDropdownRadioOptionElement
 
 const ITEM_HEIGHT = 40
 const template = document.createElement('template')
@@ -177,7 +173,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     return $options[(currentIndex - 1 + $options.length) % $options.length]
   }
 
-  #selectOption($option: TDropdownOption | null) {
+  #selectOption($option: TSinchActionMenuOptionElement | null) {
     for (const $op of this.#getOptionElements()) {
       const isSelected = $op === $option
 
@@ -189,17 +185,17 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     }
   }
 
-  #getOptionElements(): TDropdownOption[] {
+  #getOptionElements(): TSinchActionMenuOptionElement[] {
     let $elements = this.#$optionSlot.assignedElements()
 
     if ($elements.length === 1 && $elements[0].tagName === 'SLOT') {
       $elements = ($elements[0] as HTMLSlotElement).assignedElements()
     }
 
-    return $elements as TDropdownOption[]
+    return $elements as TSinchActionMenuOptionElement[]
   }
 
-  #findSelectedOption(elements: readonly TDropdownOption[]): TDropdownOption | null {
+  #findSelectedOption(elements: readonly TSinchActionMenuOptionElement[]): TSinchActionMenuOptionElement | null {
     for (const el of elements) {
       if (el.selected) {
         return el
@@ -209,7 +205,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     return null
   }
 
-  #getEnabledOptionElements(): TDropdownOption[] {
+  #getEnabledOptionElements(): TSinchActionMenuOptionElement[] {
     return this.#getOptionElements().filter((opt) => opt.disabled !== true)
   }
 
@@ -228,7 +224,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
   }
 })
 
-export type TSinchDropdownElement = HTMLElement & {
+export type TSinchActionMenuElement = HTMLElement & {
   open: boolean,
   orientation: TSinchPopoverOrientation,
   maxVisibleItems: number | null,
@@ -237,22 +233,22 @@ export type TSinchDropdownElement = HTMLElement & {
   blur(): void,
 }
 
-export type TSinchDropdownReact = TSinchElementReact<TSinchDropdownElement> & {
+export type TSinchActionMenuReact = TSinchElementReact<TSinchActionMenuElement> & {
   open: boolean,
   orientation?: TSinchPopoverOrientation,
   maxVisibleItems?: number,
   'aria-label': string,
-  onClose: (event: SyntheticEvent<TSinchDropdownElement, CustomEvent<void>>) => void,
+  onClose: (event: SyntheticEvent<TSinchActionMenuElement, CustomEvent<void>>) => void,
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-action-menu': TSinchDropdownReact,
+      'sinch-action-menu': TSinchActionMenuReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-action-menu': TSinchDropdownElement,
+    'sinch-action-menu': TSinchActionMenuElement,
   }
 }

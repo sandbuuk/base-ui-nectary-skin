@@ -6,25 +6,28 @@
   </sinch-dialog>
 </template>
 <script>
-  export default {
-    props: {
-      search: URLSearchParams
+import '@sinch-engage/nectary/dialog'
+import '@sinch-engage/nectary/button'
+
+export default {
+  props: {
+    search: URLSearchParams
+  },
+  computed: {
+    content() {
+      return this.search.get('content')
     },
-    computed: {
-      content() {
-        return this.search.get('content')
-      },
-      title() {
-        return this.search.get('title') ?? ''
-      },
-      buttons() {
-        return this.search.get('buttons') !== null
-      }
+    title() {
+      return this.search.get('title') ?? ''
     },
-    methods: {
-      onClose() {
-        window.dispatchEvent(new CustomEvent('sinch-dialog-close'))
-      }
+    buttons() {
+      return this.search.get('buttons') !== null
+    }
+  },
+  methods: {
+    onClose() {
+      window.dispatchEvent(new CustomEvent('sinch-dialog-close'))
     }
   }
+}
 </script>

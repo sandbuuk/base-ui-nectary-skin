@@ -18,6 +18,9 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/tag'
+import '@sinch-engage/nectary/tag-close'
+
 export default {
   props: {
     search: URLSearchParams

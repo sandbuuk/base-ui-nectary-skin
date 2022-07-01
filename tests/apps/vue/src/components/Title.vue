@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/title'
+
 export default {
   props: {
     search: URLSearchParams

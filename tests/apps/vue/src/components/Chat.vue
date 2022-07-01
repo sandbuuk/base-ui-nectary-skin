@@ -25,6 +25,11 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/chat'
+import '@sinch-engage/nectary/chat-block'
+import '@sinch-engage/nectary/chat-avatar'
+import '@sinch-engage/nectary/chat-bubble'
+
 export default {
   props: {
     search: URLSearchParams

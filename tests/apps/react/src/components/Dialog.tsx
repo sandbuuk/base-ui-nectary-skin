@@ -1,4 +1,6 @@
 import type { FC } from 'react'
+import '@sinch-engage/nectary/dialog'
+import '@sinch-engage/nectary/button'
 
 type TDialog = {
   search: URLSearchParams,

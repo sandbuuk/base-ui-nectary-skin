@@ -1,5 +1,8 @@
 import { useCallback } from 'react'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/help-outline'
+import '@sinch-engage/nectary/spinner'
 
 type TIconButton = {
   search: URLSearchParams,

@@ -16,6 +16,9 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/help-tooltip'
+
 export default {
   methods: {
     onChange(e) {

@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/spinner'
+
 export default {
   props: {
     search: URLSearchParams

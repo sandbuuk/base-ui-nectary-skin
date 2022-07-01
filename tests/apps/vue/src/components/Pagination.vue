@@ -10,6 +10,7 @@
 
 <script>
 import { attrValueToInteger } from '@sinch-engage/nectary/utils'
+import '@sinch-engage/nectary/pagination'
 
 export default {
   props: {

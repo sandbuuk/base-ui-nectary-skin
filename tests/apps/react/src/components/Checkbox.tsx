@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { FC, SyntheticEvent } from 'react'
+import '@sinch-engage/nectary/checkbox'
 
 type TCheckbox = {
   search: URLSearchParams,

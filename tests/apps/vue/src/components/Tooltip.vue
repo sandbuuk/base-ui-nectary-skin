@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/tooltip'
+
 export default {
   props: {
     search: URLSearchParams

@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/radio'
+import '@sinch-engage/nectary/radio-option'
 
 type TRadio = {
   search: URLSearchParams,

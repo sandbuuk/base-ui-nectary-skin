@@ -1,6 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover'
 import type { FC, SyntheticEvent } from 'react'
+import '@sinch-engage/nectary/dropdown'
+import '@sinch-engage/nectary/dropdown-text-option'
+import '@sinch-engage/nectary/dropdown-checkbox-option'
+import '@sinch-engage/nectary/dropdown-radio-option'
 
 type TDropdown = {
   search: URLSearchParams,

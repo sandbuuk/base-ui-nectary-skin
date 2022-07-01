@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { FC, SyntheticEvent } from 'react'
+import '@sinch-engage/nectary/search'
+import '@sinch-engage/nectary/search-option'
 
 type TSearch = {
   search: URLSearchParams,

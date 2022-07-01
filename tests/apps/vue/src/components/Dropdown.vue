@@ -42,6 +42,11 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/dropdown'
+import '@sinch-engage/nectary/dropdown-text-option'
+import '@sinch-engage/nectary/dropdown-checkbox-option'
+import '@sinch-engage/nectary/dropdown-radio-option'
+
 export default {
   methods: {
     onChange(e) {

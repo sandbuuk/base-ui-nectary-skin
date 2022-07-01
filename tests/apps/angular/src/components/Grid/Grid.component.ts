@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/grid'
+import '@sinch-engage/nectary/grid-item'
 import '@sinch-engage/nectary/card'
 import '@sinch-engage/nectary/card-link'
 import '@sinch-engage/nectary/card-button'

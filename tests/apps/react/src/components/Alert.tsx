@@ -1,5 +1,8 @@
 import { useCallback } from 'react'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/alert'
+import '@sinch-engage/nectary/alert-close'
+import '@sinch-engage/nectary/alert-button'
 
 type TAlert = {
   search: URLSearchParams,

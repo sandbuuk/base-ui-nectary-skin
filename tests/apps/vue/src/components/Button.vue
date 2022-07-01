@@ -14,6 +14,11 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary/icons/expand-more'
+import '@sinch-engage/nectary/spinner'
+
 export default {
   props: {
     search: URLSearchParams

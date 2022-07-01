@@ -1,6 +1,7 @@
 import { attrValueToInteger } from '@sinch-engage/nectary/utils'
 import { useCallback, useState } from 'react'
 import type { FC, SyntheticEvent } from 'react'
+import '@sinch-engage/nectary/pagination'
 
 type TPagination = {
   search: URLSearchParams,

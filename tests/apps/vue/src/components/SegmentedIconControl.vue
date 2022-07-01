@@ -18,6 +18,13 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/segmented-icon-control'
+import '@sinch-engage/nectary/segmented-icon-control-option'
+import '@sinch-engage/nectary/icons/format-align-center'
+import '@sinch-engage/nectary/icons/format-align-justify'
+import '@sinch-engage/nectary/icons/format-align-right'
+import '@sinch-engage/nectary/icons/format-align-left'
+
 export default {
   props: {
     search: URLSearchParams

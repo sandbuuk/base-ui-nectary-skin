@@ -31,6 +31,23 @@
 </template>
 
 <script>
+import '@sinch-engage/nectary/table'
+import '@sinch-engage/nectary/table-row'
+import '@sinch-engage/nectary/table-head'
+import '@sinch-engage/nectary/table-head-cell'
+import '@sinch-engage/nectary/table-body'
+import '@sinch-engage/nectary/table-cell'
+import '@sinch-engage/nectary/toggle'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/north'
+import '@sinch-engage/nectary/icons/filter-list'
+import '@sinch-engage/nectary/icons/more-vert'
+import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/checkbox'
+import '@sinch-engage/nectary/link'
+
 export default {
   props: {
     search: URLSearchParams

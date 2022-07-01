@@ -7,13 +7,11 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTabsOptionElement } from '../tabs-option'
+import type { TSinchTabsOptionElement } from '../tabs-option/types'
 import type { TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
 
-type TSinchTabOptionElement = HTMLElementTagNameMap['sinch-tabs-option']
-
-const findSelectedOption = (elements: readonly TSinchTabOptionElement[]) => {
+const findSelectedOption = (elements: readonly TSinchTabsOptionElement[]) => {
   return elements.find((el) => el.checked) ?? null
 }
 
@@ -166,8 +164,8 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
     return $options[(currentIndex - 1 + $options.length) % $options.length]
   }
 
-  #getEnabledRadioElements(): TSinchTabOptionElement[] {
-    return (this.#$slot.assignedElements()as TSinchTabOptionElement[]).filter((opt) => opt.disabled !== true)
+  #getEnabledRadioElements(): TSinchTabsOptionElement[] {
+    return (this.#$slot.assignedElements()as TSinchTabsOptionElement[]).filter((opt) => opt.disabled !== true)
   }
 })
 

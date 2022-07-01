@@ -11,8 +11,8 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchDropdownElement } from '../dropdown'
-import type { TSinchSelectOptionElement } from '../select-option'
+import type { TSinchDropdownElement } from '../dropdown/types'
+import type { TSinchSelectOptionElement } from '../select-option/types'
 import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 

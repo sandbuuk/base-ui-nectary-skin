@@ -7,7 +7,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchRadioOptionElement } from '../radio-option'
+import type { TSinchRadioOptionElement } from '../radio-option/types'
 import type { TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
 

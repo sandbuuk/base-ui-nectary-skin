@@ -8,12 +8,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent } from 'react'
-
-export const isRadioOptionElement = (element: EventTarget | Element | null): element is TSinchRadioOptionElement => {
-  return element instanceof Element && element.tagName === 'SINCH-RADIO-OPTION'
-}
+import type { TSinchRadioOptionElement, TSinchRadioOptionReact } from './types'
 
 const template = document.createElement('template')
 
@@ -122,24 +117,6 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
     )
   }
 })
-
-export type TSinchRadioOptionElement = HTMLElement & {
-  value: string,
-  checked: boolean,
-  disabled: boolean,
-  text: string,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchRadioOptionReact = TSinchElementReact<TSinchRadioOptionElement> & {
-  value: string,
-  disabled?: boolean,
-  text: string,
-  'aria-label': string,
-  onFocus?: (e: FocusEvent<TSinchRadioOptionElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchRadioOptionElement>) => void,
-}
 
 declare global {
   namespace JSX {

@@ -1,4 +1,9 @@
 import type { FC } from 'react'
+import '@sinch-engage/nectary/card'
+import '@sinch-engage/nectary/icons-branded/chatbot'
+import '@sinch-engage/nectary/illustration/phone-and-cat'
+import '@sinch-engage/nectary/card-button'
+import '@sinch-engage/nectary/card-link'
 
 type TCard = {
   search: URLSearchParams,

@@ -1,5 +1,7 @@
 import { useCallback } from 'react'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/tag'
+import '@sinch-engage/nectary/tag-close'
 
 type TTag = {
   search: URLSearchParams,
