@@ -81,7 +81,7 @@ const config: PlaywrightTestConfig = {
   },
   fullyParallel: true,
   workers: process.env.CI != null ? 1 : 3,
-  retries: 1,
+  retries: process.env.CI != null ? 1 : 0,
   maxFailures: process.env.CI != null ? 1 : 0,
   expect: {
     toMatchSnapshot: {
