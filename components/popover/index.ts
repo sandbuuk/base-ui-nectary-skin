@@ -12,10 +12,9 @@ import {
   getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
+import { orientationValues } from './utils'
 import type { TRect, TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
-
-const orientationValues = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
 
 const template = document.createElement('template')
 
@@ -176,6 +175,10 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   #onBackdropClick = (e: MouseEvent) => {
+    if (e.target !== this.#$dialog) {
+      return
+    }
+
     const rect = this.popoverRect
     const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 

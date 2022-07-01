@@ -1,5 +1,6 @@
 import '@sinch-engage/nectary'
 import { Accordion } from './components/Accordion'
+import { ActionMenu } from './components/ActionMenu'
 import { Alert } from './components/Alert'
 import { Avatar } from './components/Avatar'
 import { Button } from './components/Button'
@@ -36,6 +37,12 @@ const mapElement = (url: URL) => {
     case '/accordion': {
       return (
         <Accordion search={url.searchParams}/>
+      )
+    }
+
+    case '/action-menu': {
+      return (
+        <ActionMenu search={url.searchParams}/>
       )
     }
 

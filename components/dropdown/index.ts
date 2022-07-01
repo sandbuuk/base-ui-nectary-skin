@@ -1,3 +1,5 @@
+import { orientationValues } from '../popover/utils'
+import '../popover'
 import {
   attrValueToPixels,
   defineCustomElement,
@@ -20,13 +22,12 @@ import templateHTML from './template.html'
 import type { TSinchDropdownCheckboxOptionElement } from '../dropdown-checkbox-option'
 import type { TSinchDropdownRadioOptionElement } from '../dropdown-radio-option'
 import type { TSinchDropdownTextOptionElement } from '../dropdown-text-option'
-import type { TSinchPopoverElement } from '../popover'
+import type { TSinchPopoverElement, TSinchPopoverOrientation } from '../popover'
 import type { TRect, TSinchElementReact } from '../types'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
 type TDropdownOption = TSinchDropdownTextOptionElement | TSinchDropdownCheckboxOptionElement | TSinchDropdownRadioOptionElement
 
-const orientationValues = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
 const ITEM_HEIGHT = 40
 const template = document.createElement('template')
 
@@ -89,7 +90,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     return getLiteralAttribute(this, orientationValues, 'orientation', 'bottom-right')
   }
 
-  set orientation(value: TSinchDropdownOrientation) {
+  set orientation(value: TSinchPopoverOrientation) {
     updateLiteralAttribute(this, orientationValues, 'orientation', value)
   }
 
@@ -337,12 +338,10 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
   }
 })
 
-export type TSinchDropdownOrientation = typeof orientationValues[number]
-
 export type TSinchDropdownElement = HTMLElement & {
   open: boolean,
   multiple: boolean,
-  orientation: TSinchDropdownOrientation,
+  orientation: TSinchPopoverOrientation,
   value: string,
   maxVisibleItems: number | null,
   readonly dropdownRect: TRect,
@@ -353,7 +352,7 @@ export type TSinchDropdownElement = HTMLElement & {
 export type TSinchDropdownReact = TSinchElementReact<TSinchDropdownElement> & {
   open: boolean,
   multiple?: boolean,
-  orientation?: TSinchDropdownOrientation,
+  orientation?: TSinchPopoverOrientation,
   value: string,
   maxVisibleItems?: number,
   'aria-label': string,

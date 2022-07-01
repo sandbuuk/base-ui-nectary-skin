@@ -31,6 +31,7 @@ import { TitleComponent } from '../components/Title/Title.component'
 import { PopoverComponent } from '../components/Popover/Popover.component'
 import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
 import { SegmentedIconControlComponent } from '../components/SegmentedIconControl/SegmentedIconControl.component'
+import { ActionMenuComponent } from '../components/ActionMenu/ActionMenu.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -66,6 +67,7 @@ import { AppComponent } from './app.component'
     PopoverComponent,
     SegmentedControlComponent,
     SegmentedIconControlComponent,
+    ActionMenuComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

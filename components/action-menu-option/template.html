@@ -1,0 +1,47 @@
+<style>
+:host {
+  display: block;
+}
+
+#wrapper {
+  all: initial;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  height: 40px;
+  width: 100%;
+  padding: 6px 12px;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+
+  --sinch-size-icon: 24px;
+}
+
+#content {
+  flex-shrink: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+:host(:hover) > #wrapper,
+#wrapper:focus {
+  background-color: var(--sinch-color-snow-500);
+}
+
+:host([disabled]:not([disabled="false"])) > #wrapper {
+  color: var(--sinch-color-stormy-100);
+  cursor: initial;
+
+  --sinch-color-icon: var(--sinch-color-stormy-100);
+}
+</style>
+
+<button id="wrapper">
+  <slot name="icon"></slot>
+  <span id="content"></span>
+</button>
