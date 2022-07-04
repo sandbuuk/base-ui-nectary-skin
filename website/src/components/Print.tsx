@@ -4,15 +4,14 @@ import type { FC } from 'react'
 
 export type TPrint = {
   code: string,
+  title: string,
 }
 
-export const Print: FC<TPrint> = ({ code }) => {
-  return (
-    <details>
-      <summary>Code</summary>
-      <SyntaxHighlighter language="javascript" style={dracula}>
-        {code}
-      </SyntaxHighlighter>
-    </details>
-  )
-}
+export const Print: FC<TPrint> = ({ code, title }) => (
+  <details>
+    <summary>{title}</summary>
+    <SyntaxHighlighter language="typescript" style={dracula}>
+      {code}
+    </SyntaxHighlighter>
+  </details>
+)

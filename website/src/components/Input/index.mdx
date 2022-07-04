@@ -1,13 +1,33 @@
-import { Input } from './Input.tsx'
 import { Print } from '../Print'
-import InputString from '!!raw-loader!./Input.tsx'
+import InputTypes from '!!raw-loader!@sinch-engage/nectary/input/types.ts'
+import { Simple } from './Simple.tsx'
+import SimpleString from '!!raw-loader!./Simple.tsx'
+import { OptionalAttributes } from './OptionalAttributes.tsx'
+import OptionalAttributesString from '!!raw-loader!./OptionalAttributes.tsx'
+import { Disabled } from './Disabled.tsx'
+import DisabledString from '!!raw-loader!./Disabled.tsx'
 
-# Hello
+# Input
 
-<Input/>
-<Print code={InputString}/>
+Input is the basic and most common text field.
 
-```jsx
-<button attr="true">adsasdda</button>
-console.log('aaaa')
-```
+It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled-components) component.
+
+<Print code={InputTypes} title="Types"/>
+
+## Examples
+
+### Simple
+
+<Simple/>
+<Print code={SimpleString} title="Code"/>
+
+### Optional attributes
+
+<OptionalAttributes/>
+<Print code={OptionalAttributesString} title="Code"/>
+
+### Disabled
+
+<Disabled/>
+<Print code={DisabledString} title="Code"/>
