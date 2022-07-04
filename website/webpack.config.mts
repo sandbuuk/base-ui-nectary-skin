@@ -71,6 +71,7 @@ const config: Configuration = {
             loader: '@mdx-js/loader',
             options: {
               rehypePlugins: [rehypePrism],
+              providerImportSource: '@mdx-js/react',
             },
           },
         ],
