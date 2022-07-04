@@ -1,0 +1,12 @@
+#app {
+  display: flex;
+}
+
+.app-sidebar {
+  width: 200px;
+}
+
+.app-content {
+  flex: 1;
+  padding: 10px;
+}

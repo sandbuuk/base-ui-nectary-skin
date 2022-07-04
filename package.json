@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "web": "cd website; npm start",
     "storybook": "start-storybook --port 4000",
     "storybook:build": "build-storybook --output-dir public --quiet",
     "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html' 'components/theme.css'",
@@ -22,6 +23,7 @@
     "css-loader": "^6.5.1",
     "eslint-import-resolver-typescript": "^2.7.0",
     "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-mdx": "^2.0.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint": "^8.13.0",
