@@ -2,16 +2,16 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import type { FC } from 'react'
 
-export type TPrint = {
-  code: string,
+export type TCode = {
+  src: string,
   title: string,
 }
 
-export const Print: FC<TPrint> = ({ code, title }) => (
+export const Code: FC<TCode> = ({ src, title }) => (
   <details>
     <summary>{title}</summary>
     <SyntaxHighlighter language="typescript" style={dracula}>
-      {code}
+      {src}
     </SyntaxHighlighter>
   </details>
 )

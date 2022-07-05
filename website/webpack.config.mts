@@ -12,7 +12,7 @@ const config: Configuration = {
   entry: path.resolve('./src/index.tsx'),
   output: {
     chunkFilename: '[name].js',
-    publicPath: 'auto',
+    publicPath: '/',
     pathinfo: true,
   },
   resolve: {
@@ -91,6 +91,7 @@ const config: Configuration = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('./public/index.html'),
+      favicon: path.resolve('./public/favicon.png'),
     }),
     new webpack.DefinePlugin({
       __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
