@@ -14,6 +14,7 @@
     <IconButton v-if="url.pathname === '/icon-button'" :search="url.searchParams"/>
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
     <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
+    <List v-if="url.pathname === '/list'" :search="url.searchParams"/>
     <Pagination v-if="url.pathname === '/pagination'" :search="url.searchParams"/>
     <Popover v-if="url.pathname === '/popover'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
@@ -51,6 +52,7 @@ import Grid from './components/Grid.vue'
 import Input from './components/Input.vue'
 import IconButton from './components/IconButton.vue'
 import Link from './components/Link.vue'
+import List from './components/List.vue'
 import Pagination from './components/Pagination.vue'
 import Popover from './components/Popover.vue'
 import Radio from './components/Radio.vue'
@@ -112,6 +114,7 @@ export default {
     IconButton,
     Input,
     Link,
+    List,
     Pagination,
     Popover,
     Radio,

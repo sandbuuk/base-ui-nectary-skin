@@ -13,6 +13,7 @@ import { Grid } from './components/Grid'
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Link } from './components/Link'
+import { List } from './components/List'
 import { Pagination } from './components/Pagination'
 import { Popover } from './components/Popover'
 import { Radio } from './components/Radio'
@@ -120,6 +121,12 @@ const mapElement = (url: URL) => {
     case '/link': {
       return (
         <Link search={url.searchParams}/>
+      )
+    }
+
+    case '/list': {
+      return (
+        <List search={url.searchParams}/>
       )
     }
 
