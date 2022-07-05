@@ -6,6 +6,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchTabsOptionElement, TSinchTabsOptionReact } from './types'
@@ -15,8 +16,8 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tabs-option', class extends NectaryElement {
-  $button: HTMLInputElement
-  $label: HTMLElement
+  #$button: HTMLInputElement
+  #$label: HTMLElement
 
   constructor() {
     super()
@@ -25,17 +26,17 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$button = shadowRoot.querySelector('#button')!
-    this.$label = shadowRoot.querySelector('#content')!
+    this.#$button = shadowRoot.querySelector('#button')!
+    this.#$label = shadowRoot.querySelector('#content')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'tab')
-    this.$button.addEventListener('click', this.#onClick)
+    this.#$button.addEventListener('click', this.#onClick)
   }
 
   disconnectedCallback() {
-    this.$button.removeEventListener('click', this.#onClick)
+    this.#$button.removeEventListener('click', this.#onClick)
   }
 
   static get observedAttributes() {
@@ -77,17 +78,20 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.$label.textContent = newVal
+        this.#$label.textContent = newVal
 
         break
       }
       case 'checked': {
-        updateAttribute(this, 'aria-selected', isAttrTrue(newVal))
+        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
 
         break
       }
       case 'disabled': {
-        this.$button.disabled = isAttrTrue(newVal)
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$button.disabled = isDisabled
+        updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
       }
@@ -95,11 +99,11 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
   }
 
   focus() {
-    this.$button.focus()
+    this.#$button.focus()
   }
 
   blur() {
-    this.$button.blur()
+    this.#$button.blur()
   }
 
   #onClick = (e: Event) => {

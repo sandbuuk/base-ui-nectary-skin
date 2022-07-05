@@ -6,6 +6,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -16,8 +17,8 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-control-option', class extends NectaryElement {
-  $button: HTMLButtonElement
-  $label: HTMLElement
+  #$button: HTMLButtonElement
+  #$label: HTMLElement
 
   constructor() {
     super()
@@ -26,17 +27,17 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$button = shadowRoot.querySelector('#button')!
-    this.$label = shadowRoot.querySelector('#content')!
+    this.#$button = shadowRoot.querySelector('#button')!
+    this.#$label = shadowRoot.querySelector('#content')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'tab')
-    this.$button.addEventListener('click', this.#onClick)
+    this.#$button.addEventListener('click', this.#onClick)
   }
 
   disconnectedCallback() {
-    this.$button.removeEventListener('click', this.#onClick)
+    this.#$button.removeEventListener('click', this.#onClick)
   }
 
   static get observedAttributes() {
@@ -78,17 +79,17 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.$label.textContent = newVal
+        this.#$label.textContent = newVal
 
         break
       }
       case 'checked': {
-        updateAttribute(this, 'aria-selected', isAttrTrue(newVal))
+        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
 
         break
       }
       case 'disabled': {
-        this.$button.disabled = isAttrTrue(newVal)
+        this.#$button.disabled = isAttrTrue(newVal)
 
         break
       }
@@ -96,11 +97,11 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
   }
 
   focus() {
-    this.$button.focus()
+    this.#$button.focus()
   }
 
   blur() {
-    this.$button.blur()
+    this.#$button.blur()
   }
 
   #onClick = (e: Event) => {

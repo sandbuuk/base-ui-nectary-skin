@@ -37,7 +37,10 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'disabled': {
-        this.#$button.disabled = isAttrTrue(newVal)
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$button.disabled = isDisabled
+        updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
       }

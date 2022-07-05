@@ -8,6 +8,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -110,7 +111,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
       }
 
       case 'checked': {
-        updateAttribute(this.#$button, 'aria-expanded', isAttrTrue(newVal))
+        updateExplicitBooleanAttribute(this.#$button, 'aria-expanded', isAttrTrue(newVal))
 
         break
       }

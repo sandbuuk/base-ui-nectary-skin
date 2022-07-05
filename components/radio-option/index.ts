@@ -88,7 +88,10 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
         break
       }
       case 'disabled': {
-        this.#$input.disabled = isAttrTrue(newVal)
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$input.disabled = isDisabled
+        updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
       }
