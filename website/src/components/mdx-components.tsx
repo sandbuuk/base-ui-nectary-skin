@@ -14,7 +14,13 @@ export const mdxComponents: MDXComponents = {
     <sinch-title type="m" aria-level="3" text={children as string}/>
   ),
   code: ({ children, className }) => {
-    const language = className!.replace('language-', '')
+    if (className == null) {
+      return (
+        <code>{children}</code>
+      )
+    }
+
+    const language = className.replace('language-', '')
 
     return (
       <SyntaxHighlighter language={language} style={dracula}>
