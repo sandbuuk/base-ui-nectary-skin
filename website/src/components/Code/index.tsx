@@ -10,7 +10,7 @@ export type TCode = {
 export const Code: FC<TCode> = ({ src, title }) => (
   <details>
     <summary>{title}</summary>
-    <SyntaxHighlighter language="typescript" style={dracula}>
+    <SyntaxHighlighter language="ts" style={dracula}>
       {src}
     </SyntaxHighlighter>
   </details>

@@ -1,4 +1,6 @@
 import '@sinch-engage/nectary/title'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import type { MDXComponents } from 'mdx/types'
 
 export const mdxComponents: MDXComponents = {
@@ -11,4 +13,13 @@ export const mdxComponents: MDXComponents = {
   h3: ({ children }) => (
     <sinch-title type="m" aria-level="3" text={children as string}/>
   ),
+  code: ({ children, className }) => {
+    const language = className!.replace('language-', '')
+
+    return (
+      <SyntaxHighlighter language={language} style={dracula}>
+        {children as string}
+      </SyntaxHighlighter>
+    )
+  },
 }

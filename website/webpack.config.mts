@@ -1,6 +1,4 @@
 import path from 'path'
-// @ts-ignore
-import rehypePrism from '@mapbox/rehype-prism'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import webpack from 'webpack'
 import type { Configuration } from 'webpack'
@@ -70,7 +68,6 @@ const config: Configuration = {
           {
             loader: '@mdx-js/loader',
             options: {
-              rehypePlugins: [rehypePrism],
               providerImportSource: '@mdx-js/react',
             },
           },

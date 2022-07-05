@@ -7,7 +7,6 @@ import { NotFoundPage } from '../../pages/NotFound'
 import { mdxComponents } from '../mdx-components'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/theme.css'
-import 'dracula-prism/dist/css/dracula-prism.css'
 import './styles.css'
 
 const req = require.context('../../pages/Components/', true, /^\.\/.*\/index\.mdx$/, 'lazy')
