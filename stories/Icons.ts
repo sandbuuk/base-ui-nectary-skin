@@ -779,6 +779,15 @@ import '@sinch-engage/nectary/icons/add-alarm'
 import '@sinch-engage/nectary/icons/ad-units'
 import '@sinch-engage/nectary/icons/access-alarms'
 import '@sinch-engage/nectary/icons/access-alarm'
+import '@sinch-engage/nectary/icons/toggle-on'
+import '@sinch-engage/nectary/icons/toggle-off'
+import '@sinch-engage/nectary/icons/star-half'
+import '@sinch-engage/nectary/icons/star-border'
+import '@sinch-engage/nectary/icons/radio-button-unchecked'
+import '@sinch-engage/nectary/icons/radio-button-checked'
+import '@sinch-engage/nectary/icons/indeterminate-check-box'
+import '@sinch-engage/nectary/icons/check-box-outline-blank'
+import '@sinch-engage/nectary/icons/check-box'
 // {{icon import}}
 
 const iconNames = [
@@ -796,9 +805,6 @@ const iconNames = [
   'sinch-icon-volume-up',
   'sinch-icon-volume-off',
   'sinch-icon-stop',
-  /* Toggle */
-  'sinch-icon-star-outline',
-  'sinch-icon-star',
   // {{icon name}}
 ]
 
@@ -1739,7 +1745,31 @@ export const SocialIcons = Template(socialIconNames)
 SocialIcons.parameters = {
   docs: {
     source: {
-      code: `<>\n${deviceIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
+      code: `<>\n${socialIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
+    },
+  },
+}
+
+const toggleIconNames = [
+  'sinch-icon-check-box-outline-blank',
+  'sinch-icon-check-box',
+  'sinch-icon-indeterminate-check-box',
+  'sinch-icon-radio-button-checked',
+  'sinch-icon-radio-button-unchecked',
+  'sinch-icon-star-border',
+  'sinch-icon-star-half',
+  'sinch-icon-star-outline',
+  'sinch-icon-star',
+  'sinch-icon-toggle-off',
+  'sinch-icon-toggle-on',
+]
+
+export const ToggleIcons = Template(toggleIconNames)
+
+ToggleIcons.parameters = {
+  docs: {
+    source: {
+      code: `<>\n${toggleIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
     },
   },
 }
