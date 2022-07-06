@@ -6,6 +6,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -96,12 +97,18 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
         break
       }
       case 'checked': {
-        this.#$input.checked = isAttrTrue(newVal)
+        const isChecked = isAttrTrue(newVal)
+
+        this.#$input.checked = isChecked
+        updateExplicitBooleanAttribute(this, 'aria-checked', isChecked)
 
         break
       }
       case 'disabled': {
-        this.#$input.disabled = isAttrTrue(newVal)
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$input.disabled = isDisabled
+        updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
       }

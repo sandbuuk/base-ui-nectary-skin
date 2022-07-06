@@ -8,6 +8,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -51,6 +52,7 @@ defineCustomElement('sinch-select', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'listbox')
+    this.setAttribute('aria-haspopup', 'listbox')
 
     this.#$dropdown.addEventListener('change', this.#onValueChange)
     this.#$dropdown.addEventListener('close', this.#onDropdownClose)
@@ -185,15 +187,20 @@ defineCustomElement('sinch-select', class extends NectaryElement {
       }
 
       case 'invalidtext': {
+        const isInvalid = newVal !== null && newVal !== ''
+
         this.#$invalidText.textContent = newVal
-        updateAttribute(this, 'aria-invalid', String(newVal !== null && newVal !== ''))
+        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
 
         break
       }
 
       case 'disabled': {
-        updateAttribute(this.#$dropdown, 'disabled', newVal)
-        this.#$button.disabled = isAttrTrue(newVal)
+        const isDisabled = isAttrTrue(newVal)
+
+        updateBooleanAttribute(this.#$dropdown, 'disabled', isDisabled)
+        updateBooleanAttribute(this, 'disabled', isDisabled)
+        this.#$button.disabled = isDisabled
 
         break
       }

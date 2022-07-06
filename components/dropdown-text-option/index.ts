@@ -6,6 +6,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDropdownTextOptionElement, TSinchDropdownTextOptionReact } from './types'
@@ -50,7 +51,7 @@ export class DropdownTextOption extends NectaryElement {
       }
 
       case 'checked': {
-        updateAttribute(this, 'aria-selected', isAttrTrue(newVal))
+        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
       }
     }
   }

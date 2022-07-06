@@ -6,6 +6,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDropdownRadioOptionElement, TSinchDropdownRadioOptionReact } from './types'
@@ -48,7 +49,7 @@ defineCustomElement('sinch-dropdown-radio-option', class extends NectaryElement 
       }
 
       case 'checked': {
-        updateAttribute(this, 'aria-selected', isAttrTrue(newVal))
+        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
       }
     }
   }

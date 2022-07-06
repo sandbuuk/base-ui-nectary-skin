@@ -7,6 +7,7 @@ import {
   isAttrTrue,
   NectaryElement,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
@@ -31,7 +32,6 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
-    this.setAttribute('aria-checked', String(getBooleanAttribute(this, 'value')))
     this.#$button.addEventListener('click', this.onClick)
   }
 
@@ -46,7 +46,7 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.setAttribute('aria-checked', String(isAttrTrue(newVal)))
+        updateExplicitBooleanAttribute(this, 'aria-checked', isAttrTrue(newVal))
 
         break
       }
