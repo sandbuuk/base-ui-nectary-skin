@@ -634,7 +634,96 @@ import '@sinch-engage/nectary/icons/call'
 import '@sinch-engage/nectary/icons/business'
 import '@sinch-engage/nectary/icons/alternate-email'
 import '@sinch-engage/nectary/icons/add-ic-call'
-// {{icon import}}
+import '@sinch-engage/nectary/icons/whatshot'
+import '@sinch-engage/nectary/icons/thumb-up-alt'
+import '@sinch-engage/nectary/icons/thumb-down-alt'
+import '@sinch-engage/nectary/icons/sports-volleyball'
+import '@sinch-engage/nectary/icons/sports-tennis'
+import '@sinch-engage/nectary/icons/sports-soccer'
+import '@sinch-engage/nectary/icons/sports-rugby'
+import '@sinch-engage/nectary/icons/sports-motorsports'
+import '@sinch-engage/nectary/icons/sports-mma'
+import '@sinch-engage/nectary/icons/sports-kabaddi'
+import '@sinch-engage/nectary/icons/sports-hockey'
+import '@sinch-engage/nectary/icons/sports-handball'
+import '@sinch-engage/nectary/icons/sports-golf'
+import '@sinch-engage/nectary/icons/sports-football'
+import '@sinch-engage/nectary/icons/sports-esports'
+import '@sinch-engage/nectary/icons/sports-cricket'
+import '@sinch-engage/nectary/icons/sports-basketball'
+import '@sinch-engage/nectary/icons/sports-baseball'
+import '@sinch-engage/nectary/icons/sports'
+import '@sinch-engage/nectary/icons/single-bed'
+import '@sinch-engage/nectary/icons/sick'
+import '@sinch-engage/nectary/icons/share'
+import '@sinch-engage/nectary/icons/sentiment-very-satisfied'
+import '@sinch-engage/nectary/icons/sentiment-very-dissatisfied'
+import '@sinch-engage/nectary/icons/sentiment-satisfied'
+import '@sinch-engage/nectary/icons/sentiment-neutral'
+import '@sinch-engage/nectary/icons/sentiment-dissatisfied'
+import '@sinch-engage/nectary/icons/self-improvement'
+import '@sinch-engage/nectary/icons/science'
+import '@sinch-engage/nectary/icons/school'
+import '@sinch-engage/nectary/icons/sanitizer'
+import '@sinch-engage/nectary/icons/reduce-capacity'
+import '@sinch-engage/nectary/icons/public-off'
+import '@sinch-engage/nectary/icons/public'
+import '@sinch-engage/nectary/icons/psychology'
+import '@sinch-engage/nectary/icons/precision-manufacturing'
+import '@sinch-engage/nectary/icons/poll'
+import '@sinch-engage/nectary/icons/plus-one'
+import '@sinch-engage/nectary/icons/person-remove-alt-1'
+import '@sinch-engage/nectary/icons/person-remove'
+import '@sinch-engage/nectary/icons/person-outline'
+import '@sinch-engage/nectary/icons/person-add-alt-1'
+import '@sinch-engage/nectary/icons/person-add'
+import '@sinch-engage/nectary/icons/person'
+import '@sinch-engage/nectary/icons/people-outline'
+import '@sinch-engage/nectary/icons/people-alt'
+import '@sinch-engage/nectary/icons/people'
+import '@sinch-engage/nectary/icons/party-mode'
+import '@sinch-engage/nectary/icons/pages'
+import '@sinch-engage/nectary/icons/outdoor-grill'
+import '@sinch-engage/nectary/icons/notifications-paused'
+import '@sinch-engage/nectary/icons/notifications-off'
+import '@sinch-engage/nectary/icons/notifications-active'
+import '@sinch-engage/nectary/icons/notifications'
+import '@sinch-engage/nectary/icons/no-luggage'
+import '@sinch-engage/nectary/icons/nights-stay'
+import '@sinch-engage/nectary/icons/mood-bad'
+import '@sinch-engage/nectary/icons/mood'
+import '@sinch-engage/nectary/icons/military-tech'
+import '@sinch-engage/nectary/icons/masks'
+import '@sinch-engage/nectary/icons/luggage'
+import '@sinch-engage/nectary/icons/location-city'
+import '@sinch-engage/nectary/icons/king-bed'
+import '@sinch-engage/nectary/icons/history-edu'
+import '@sinch-engage/nectary/icons/groups'
+import '@sinch-engage/nectary/icons/group-add'
+import '@sinch-engage/nectary/icons/group'
+import '@sinch-engage/nectary/icons/follow-the-signs'
+import '@sinch-engage/nectary/icons/fireplace'
+import '@sinch-engage/nectary/icons/facebook'
+import '@sinch-engage/nectary/icons/engineering'
+import '@sinch-engage/nectary/icons/emoji-transportation'
+import '@sinch-engage/nectary/icons/emoji-symbols'
+import '@sinch-engage/nectary/icons/emoji-people'
+import '@sinch-engage/nectary/icons/emoji-objects'
+import '@sinch-engage/nectary/icons/emoji-nature'
+import '@sinch-engage/nectary/icons/emoji-food-beverage'
+import '@sinch-engage/nectary/icons/emoji-flags'
+import '@sinch-engage/nectary/icons/emoji-events'
+import '@sinch-engage/nectary/icons/emoji-emotions'
+import '@sinch-engage/nectary/icons/elderly'
+import '@sinch-engage/nectary/icons/domain'
+import '@sinch-engage/nectary/icons/deck'
+import '@sinch-engage/nectary/icons/coronavirus'
+import '@sinch-engage/nectary/icons/construction'
+import '@sinch-engage/nectary/icons/connect-without-contact'
+import '@sinch-engage/nectary/icons/clean-hands'
+import '@sinch-engage/nectary/icons/cake'
+import '@sinch-engage/nectary/icons/architecture'
+import '@sinch-engage/nectary/icons/6-ft-apart'
 import '@sinch-engage/nectary/icons/wifi-tethering'
 import '@sinch-engage/nectary/icons/wifi-lock'
 import '@sinch-engage/nectary/icons/widgets'
@@ -690,6 +779,7 @@ import '@sinch-engage/nectary/icons/add-alarm'
 import '@sinch-engage/nectary/icons/ad-units'
 import '@sinch-engage/nectary/icons/access-alarms'
 import '@sinch-engage/nectary/icons/access-alarm'
+// {{icon import}}
 
 const iconNames = [
   'sinch-icon-keyboard-arrow-down',
@@ -1543,6 +1633,110 @@ const deviceIconNames = [
 export const DeviceIcons = Template(deviceIconNames)
 
 DeviceIcons.parameters = {
+  docs: {
+    source: {
+      code: `<>\n${deviceIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
+    },
+  },
+}
+
+const socialIconNames = [
+  'sinch-icon-6-ft-apart',
+  'sinch-icon-architecture',
+  'sinch-icon-cake',
+  'sinch-icon-clean-hands',
+  'sinch-icon-connect-without-contact',
+  'sinch-icon-construction',
+  'sinch-icon-coronavirus',
+  'sinch-icon-deck',
+  'sinch-icon-domain',
+  'sinch-icon-elderly',
+  'sinch-icon-emoji-emotions',
+  'sinch-icon-emoji-events',
+  'sinch-icon-emoji-flags',
+  'sinch-icon-emoji-food-beverage',
+  'sinch-icon-emoji-nature',
+  'sinch-icon-emoji-objects',
+  'sinch-icon-emoji-people',
+  'sinch-icon-emoji-symbols',
+  'sinch-icon-emoji-transportation',
+  'sinch-icon-engineering',
+  'sinch-icon-facebook',
+  'sinch-icon-fireplace',
+  'sinch-icon-follow-the-signs',
+  'sinch-icon-group-add',
+  'sinch-icon-group',
+  'sinch-icon-groups',
+  'sinch-icon-history-edu',
+  'sinch-icon-king-bed',
+  'sinch-icon-location-city',
+  'sinch-icon-luggage',
+  'sinch-icon-masks',
+  'sinch-icon-military-tech',
+  'sinch-icon-mood-bad',
+  'sinch-icon-mood',
+  'sinch-icon-nights-stay',
+  'sinch-icon-no-luggage',
+  'sinch-icon-notifications-active',
+  'sinch-icon-notifications-none',
+  'sinch-icon-notifications-off',
+  'sinch-icon-notifications-paused',
+  'sinch-icon-notifications',
+  'sinch-icon-outdoor-grill',
+  'sinch-icon-pages',
+  'sinch-icon-party-mode',
+  'sinch-icon-people-alt',
+  'sinch-icon-people-outline',
+  'sinch-icon-people',
+  'sinch-icon-person-add-alt-1',
+  'sinch-icon-person-add',
+  'sinch-icon-person-outline',
+  'sinch-icon-person-remove-alt-1',
+  'sinch-icon-person-remove',
+  'sinch-icon-person',
+  'sinch-icon-plus-one',
+  'sinch-icon-poll',
+  'sinch-icon-precision-manufacturing',
+  'sinch-icon-psychology',
+  'sinch-icon-public-off',
+  'sinch-icon-public',
+  'sinch-icon-reduce-capacity',
+  'sinch-icon-sanitizer',
+  'sinch-icon-school',
+  'sinch-icon-science',
+  'sinch-icon-self-improvement',
+  'sinch-icon-sentiment-dissatisfied',
+  'sinch-icon-sentiment-neutral',
+  'sinch-icon-sentiment-satisfied',
+  'sinch-icon-sentiment-very-dissatisfied',
+  'sinch-icon-sentiment-very-satisfied',
+  'sinch-icon-share',
+  'sinch-icon-sick',
+  'sinch-icon-single-bed',
+  'sinch-icon-sports-baseball',
+  'sinch-icon-sports-basketball',
+  'sinch-icon-sports-cricket',
+  'sinch-icon-sports-esports',
+  'sinch-icon-sports-football',
+  'sinch-icon-sports-golf',
+  'sinch-icon-sports-handball',
+  'sinch-icon-sports-hockey',
+  'sinch-icon-sports-kabaddi',
+  'sinch-icon-sports-mma',
+  'sinch-icon-sports-motorsports',
+  'sinch-icon-sports-rugby',
+  'sinch-icon-sports-soccer',
+  'sinch-icon-sports-tennis',
+  'sinch-icon-sports-volleyball',
+  'sinch-icon-sports',
+  'sinch-icon-thumb-down-alt',
+  'sinch-icon-thumb-up-alt',
+  'sinch-icon-whatshot',
+]
+
+export const SocialIcons = Template(socialIconNames)
+
+SocialIcons.parameters = {
   docs: {
     source: {
       code: `<>\n${deviceIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
