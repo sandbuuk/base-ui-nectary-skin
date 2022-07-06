@@ -1,5 +1,4 @@
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, MouseEvent } from 'react'
 
 export type TSinchActionMenuOptionElement = HTMLElement & {
   text: string,
@@ -13,7 +12,4 @@ export type TSinchActionMenuOptionReact = TSinchElementReact<TSinchActionMenuOpt
   text: string,
   disabled?: boolean,
   'aria-label': string,
-  onClick: (e: MouseEvent<TSinchActionMenuOptionElement>) => void,
-  onFocus?: (e: FocusEvent<TSinchActionMenuOptionElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchActionMenuOptionElement>) => void,
 }

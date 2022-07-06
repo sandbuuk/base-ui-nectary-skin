@@ -9,7 +9,6 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, MouseEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -118,9 +117,6 @@ export type TSinchCardLinkReact = TSinchElementReact<TSinchCardLinkElement> & {
   text: string,
   href: string,
   disabled?: boolean,
-  onClick?: (e: MouseEvent<TSinchCardLinkElement>) => void,
-  onFocus?: (e: FocusEvent<TSinchCardLinkElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchCardLinkElement>) => void,
 }
 
 declare global {

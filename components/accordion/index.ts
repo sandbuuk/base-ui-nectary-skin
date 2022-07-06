@@ -113,6 +113,7 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
 export type TSinchAccordionElement = HTMLElement & {
   value: string,
   multiple: boolean,
+  addEventListener(type: 'change', listener: (this: TSinchAccordionElement, e: CustomEvent<string>) => void): void,
 }
 
 export type TSinchAccordionReact = TSinchElementReact<TSinchAccordionElement> & {

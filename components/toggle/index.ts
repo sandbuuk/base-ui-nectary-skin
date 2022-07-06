@@ -10,7 +10,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -144,6 +144,7 @@ export type TSinchToggleElement = HTMLElement & {
   text: string | null,
   focus(): void,
   blur(): void,
+  addEventListener(type: 'change', listener: (this: TSinchToggleElement, e: CustomEvent<boolean>) => void): void,
 }
 
 export type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
@@ -154,8 +155,6 @@ export type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
   text?: string,
   'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchToggleElement, CustomEvent<boolean>>) => void,
-  onFocus?: (e: FocusEvent<TSinchToggleElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchToggleElement>) => void,
 }
 
 declare global {

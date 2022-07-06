@@ -171,6 +171,7 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
 
 export type TSinchRadioElement = HTMLElement & {
   value: string,
+  addEventListener(type: 'change', listener: (this: TSinchRadioElement, e: CustomEvent<boolean>) => void): void,
 }
 
 export type TSinchRadioReact = TSinchElementReact<TSinchRadioElement> & {

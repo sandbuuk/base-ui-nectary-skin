@@ -33,7 +33,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-popover']> => ({ onClose }) => {
+const Template = (innerHTML: string): Story => ({ onClose }) => {
   const [{
     open,
     orientation,
@@ -51,8 +51,8 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-popover
       updateArgs({ open: true })
     })
 
-    $popover.addEventListener('close', (e: any) => {
-      onClose?.(e)
+    $popover.addEventListener('close', () => {
+      onClose?.()
       updateArgs({ open: false })
     })
 

@@ -11,7 +11,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { DOMAttributes, FocusEvent, SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -299,6 +299,7 @@ export type TSinchTextareaElement = HTMLElement & {
   resizable: boolean,
   focus(): void,
   blur(): void,
+  addEventListener(type: 'change', listener: (this: TSinchTextareaElement, e: CustomEvent<string>) => void): void,
 }
 
 export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
@@ -313,9 +314,6 @@ export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   rows?: number,
   resizable?: boolean,
   onChange: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
-  onKeyPress?: DOMAttributes<TSinchTextareaElement>['onKeyPress'],
-  onFocus?: (e: FocusEvent<TSinchTextareaElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchTextareaElement>) => void,
 }
 
 declare global {

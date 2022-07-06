@@ -11,7 +11,7 @@ export default {
   title: 'Components/Grid',
 } as Meta
 
-const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-grid']> => () => {
+const Template = (innerHTML: string = ''): Story => () => {
   const gridRef = useRef<HTMLElementTagNameMap['sinch-grid'] | null>(null)
 
   if (gridRef.current === null) {

@@ -171,6 +171,7 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
 
 export type TSinchTabsElement = HTMLElement & {
   value: string,
+  addEventListener(type: 'change', listener: (this: TSinchTabsElement, e: CustomEvent<string>) => void): void,
 }
 
 export type TSinchTabsReact = TSinchElementReact<TSinchTabsElement> & {

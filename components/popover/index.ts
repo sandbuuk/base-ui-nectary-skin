@@ -212,6 +212,7 @@ export type TSinchPopoverElement = HTMLElement & {
   open: boolean,
   orientation: TSinchPopoverOrientation,
   readonly popoverRect: TRect,
+  addEventListener(type: 'close', listener: (this: TSinchPopoverElement, e: CustomEvent<void>) => void): void,
 }
 
 export type TSinchPopoverReact = TSinchElementReact<TSinchPopoverElement> & {

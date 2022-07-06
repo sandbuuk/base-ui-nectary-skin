@@ -119,6 +119,7 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
 export type TSinchSegmentedIconControlElement = HTMLElement & {
   value: string,
   multiple: boolean,
+  addEventListener(type: 'change', listener: (this: TSinchSegmentedIconControlElement, e: CustomEvent<string>) => void): void,
 }
 
 export type TSinchSegmentedIconControlReact = TSinchElementReact<TSinchSegmentedIconControlElement> & {

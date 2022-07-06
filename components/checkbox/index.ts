@@ -10,7 +10,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -149,6 +149,7 @@ export type TSinchCheckboxElement = HTMLElement & {
   text: string | null,
   focus(): void,
   blur(): void,
+  addEventListener(type: 'change', listener: (this: TSinchCheckboxElement, e: CustomEvent<boolean>) => void): void,
 }
 
 export type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
@@ -159,8 +160,6 @@ export type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
   text?: string,
   'aria-label': string,
   onChange: (event: SyntheticEvent<TSinchCheckboxElement, CustomEvent<boolean>>) => void,
-  onFocus?: (e: FocusEvent<TSinchCheckboxElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchCheckboxElement>) => void,
 }
 
 declare global {

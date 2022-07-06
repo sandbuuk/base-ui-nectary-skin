@@ -12,7 +12,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { DOMAttributes, FocusEvent, SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 const inputTypes = ['text', 'password'] as const
 
@@ -293,6 +293,7 @@ export type TSinchInputElement = HTMLElement & {
   selectionDirection: HTMLInputElement['selectionDirection'],
   focus(): void,
   blur(): void,
+  addEventListener(type: 'change', listener: (this: TSinchInputElement, e: CustomEvent<string>) => void): void,
 }
 
 export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
@@ -306,9 +307,6 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   disabled?: boolean,
   'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
-  onKeyPress?: DOMAttributes<TSinchInputElement>['onKeyPress'],
-  onFocus?: (e: FocusEvent<TSinchInputElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchInputElement>) => void,
 }
 
 declare global {

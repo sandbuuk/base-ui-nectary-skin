@@ -93,6 +93,7 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
 
 export type TSinchSegmentedControlElement = HTMLElement & {
   value: string,
+  addEventListener(type: 'change', listener: (this: TSinchSegmentedControlElement, e: CustomEvent<string>) => void): void,
 }
 
 export type TSinchSegmentedControlReact = TSinchElementReact<TSinchSegmentedControlElement> & {

@@ -16,7 +16,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-segmented-icon-control']> => ({ onChange }) => {
+const Template = (innerHTML: string): Story => ({ onChange }) => {
   const [{ value, multiple }, updateArgs] = useArgs()
   const controlRef = useRef<HTMLElementTagNameMap['sinch-segmented-icon-control'] | null>(null)
 
@@ -25,7 +25,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-segment
 
     $tabs.innerHTML = innerHTML
 
-    $tabs.addEventListener('change', (e: any) => {
+    $tabs.addEventListener('change', (e) => {
       onChange(e.detail)
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657

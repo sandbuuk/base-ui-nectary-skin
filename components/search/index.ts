@@ -15,7 +15,7 @@ import '../icons/close'
 import '../icon-button'
 import type { TSinchSearchOptionElement } from '../search-option/types'
 import type { TRect, TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 const ITEM_HEIGHT = 40
 
@@ -415,6 +415,7 @@ export type TSinchSearchElement = HTMLElement & {
   readonly dropdownRect: TRect,
   focus(): void,
   blur(): void,
+  addEventListener(type: 'change', listener: (this: TSinchSearchElement, e: CustomEvent<string>) => void): void,
 }
 
 export type TSinchSearchReact = TSinchElementReact<TSinchSearchElement> & {
@@ -425,8 +426,6 @@ export type TSinchSearchReact = TSinchElementReact<TSinchSearchElement> & {
   'aria-label': string,
   'clear-aria-label': string,
   onChange: (e: SyntheticEvent<TSinchSearchElement, CustomEvent<string>>) => void,
-  onFocus?: (e: FocusEvent<TSinchSearchElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchSearchElement>) => void,
 }
 
 declare global {

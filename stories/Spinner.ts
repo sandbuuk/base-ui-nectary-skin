@@ -9,7 +9,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<JSX.IntrinsicElements['sinch-spinner']> = () => {
+const Template: Story = () => {
   const [{ type }] = useArgs()
   const spinnerRef = useRef<HTMLElementTagNameMap['sinch-spinner'] | null>(null)
 

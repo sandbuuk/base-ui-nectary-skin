@@ -11,7 +11,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -96,14 +96,13 @@ export type TSinchSegmentExpandElement = HTMLElement & {
   value: boolean,
   focus(): void,
   blur(): void,
+  addEventListener(type: 'change', listener: (this: TSinchSegmentExpandElement, e: CustomEvent<boolean>) => void): void,
 }
 
 export type TSinchSegmentExpandReact = TSinchElementReact<TSinchSegmentExpandElement> & {
   value: boolean,
   'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchSegmentExpandElement, CustomEvent<boolean>>) => void,
-  onFocus?: (e: FocusEvent<TSinchSegmentExpandElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchSegmentExpandElement>) => void,
 }
 
 declare global {

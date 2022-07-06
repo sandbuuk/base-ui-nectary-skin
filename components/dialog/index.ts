@@ -143,6 +143,7 @@ export type TSinchDialogElement = HTMLElement & {
   caption: string,
   readonly dialogRect: TRect,
   readonly closeButtonRect: TRect,
+  addEventListener(type: 'close', listener: (this: TSinchDialogElement, e: CustomEvent<void>) => void): void,
 }
 
 export type TSinchDialogReact = TSinchElementReact<TSinchDialogElement> & {

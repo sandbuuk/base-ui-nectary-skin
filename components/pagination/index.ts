@@ -10,7 +10,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TRect, TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 const NUM_BUTTONS = 7
 const MIDDLE_BTN_INDEX = Math.floor(NUM_BUTTONS / 2)
@@ -212,14 +212,13 @@ export type TSinchPaginationElement = HTMLElement & {
   readonly prevButtonRect: TRect,
   readonly nextButtonRect: TRect,
   nthButtonRect(index: number): TRect | null,
+  addEventListener(type: 'change', listener: (this: TSinchPaginationElement, e: CustomEvent<number>) => void): void,
 }
 
 export type TSinchPaginationReact = TSinchElementReact<TSinchPaginationElement> & {
   value: number,
   max: number,
   onChange: (event: SyntheticEvent<TSinchPaginationElement, CustomEvent<number>>) => void,
-  onFocus?: (e: FocusEvent<TSinchPaginationElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchPaginationElement>) => void,
 }
 
 declare global {

@@ -11,7 +11,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-dialog']> => ({ onClose }) => {
+const Template = (innerHTML: string = ''): Story => ({ onClose }) => {
   const [{ caption }] = useArgs()
   const dialogRef = useRef<HTMLElementTagNameMap['sinch-dialog'] | null>(null)
   const $wrapper = useRef<HTMLElementTagNameMap['div'] | null>(null)
@@ -34,7 +34,7 @@ const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-di
     $dialog.innerHTML = innerHTML
 
     dialogRef.current = $dialog
-    $dialog.addEventListener('close', (e: any) => {
+    $dialog.addEventListener('close', (e) => {
       onClose?.(e)
       $dialog.removeAttribute('open')
     })

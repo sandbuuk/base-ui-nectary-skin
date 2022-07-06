@@ -17,7 +17,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-card']> => () => {
+const Template = (innerHTML: string = ''): Story => () => {
   const [{ header, label, text, disabled }] = useArgs()
   const $wrapper = useWidthWrapper(350)
   const cardRef = useRef<HTMLElementTagNameMap['sinch-card'] | null>(null)

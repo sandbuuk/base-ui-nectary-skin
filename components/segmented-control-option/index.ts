@@ -10,7 +10,6 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -127,8 +126,6 @@ export type TSinchSegmentedControlOptionReact = TSinchElementReact<TSinchSegment
   disabled?: boolean,
   text: string,
   'aria-label': string,
-  onFocus?: (e: FocusEvent<TSinchSegmentedControlOptionElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchSegmentedControlOptionElement>) => void,
 }
 
 declare global {

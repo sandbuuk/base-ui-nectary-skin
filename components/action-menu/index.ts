@@ -229,8 +229,7 @@ export type TSinchActionMenuElement = HTMLElement & {
   orientation: TSinchPopoverOrientation,
   maxVisibleItems: number | null,
   readonly dropdownRect: TRect,
-  focus(): void,
-  blur(): void,
+  addEventListener(type: 'close', listener: (this: TSinchActionMenuElement, e: CustomEvent<void>) => void): void,
 }
 
 export type TSinchActionMenuReact = TSinchElementReact<TSinchActionMenuElement> & {

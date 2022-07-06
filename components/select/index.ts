@@ -15,7 +15,7 @@ import templateHTML from './template.html'
 import type { TSinchDropdownElement } from '../dropdown/types'
 import type { TSinchSelectOptionElement } from '../select-option/types'
 import type { TRect, TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -297,6 +297,7 @@ export type TSinchSelectElement = HTMLElement & {
   readonly dropdownRect: TRect,
   focus(): void,
   blur(): void,
+  addEventListener(type: 'change', listener: (this: TSinchSelectElement, e: CustomEvent<string>) => void): void,
 }
 
 export type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
@@ -310,8 +311,6 @@ export type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
   maxVisibleItems?: number,
   'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchSelectElement, CustomEvent<string>>) => void,
-  onFocus?: (e: FocusEvent<TSinchSelectElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchSelectElement>) => void,
 }
 
 declare global {

@@ -6,7 +6,6 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, MouseEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -64,9 +63,6 @@ export type TSinchAlertButtonElement = HTMLElement & {
 
 export type TSinchAlertButtonReact = TSinchElementReact<TSinchAlertButtonElement> & {
   text: string,
-  onClick?: (e: MouseEvent<TSinchAlertButtonElement>) => void,
-  onFocus?: (e: FocusEvent<TSinchAlertButtonElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchAlertButtonElement>) => void,
 }
 
 declare global {

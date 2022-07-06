@@ -30,7 +30,7 @@ export default {
   },
 } as Meta
 
-const Template = (): Story<JSX.IntrinsicElements['sinch-pagination']> => ({ onChange }) => {
+const Template = (): Story => ({ onChange }) => {
   const [{
     value,
     max,
@@ -40,7 +40,7 @@ const Template = (): Story<JSX.IntrinsicElements['sinch-pagination']> => ({ onCh
   if (pageRef.current == null) {
     const $pagination = document.createElement('sinch-pagination')
 
-    $pagination.addEventListener('change', (e: any) => {
+    $pagination.addEventListener('change', (e) => {
       console.log('E', e.detail)
       onChange(e.detail)
       updateArgs({ value: e.detail })

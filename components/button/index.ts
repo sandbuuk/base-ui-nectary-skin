@@ -11,7 +11,6 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, MouseEvent } from 'react'
 
 const buttonTypes = ['primary', 'secondary', 'cta-primary', 'cta-secondary', 'destructive'] as const
 
@@ -118,9 +117,6 @@ export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   'aria-label': string,
   disabled?: boolean,
   small?: boolean,
-  onClick: (e: MouseEvent<TSinchButtonElement>) => void,
-  onFocus?: (e: FocusEvent<TSinchButtonElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchButtonElement>) => void,
 }
 
 declare global {

@@ -11,7 +11,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-segment']> => () => {
+const Template = (innerHTML: string = ''): Story => () => {
   const [{ caption, collapsed }, updateArgs] = useArgs()
   const segmentRef = useRef<HTMLElementTagNameMap['sinch-segment'] | null>(null)
   const segmentCollapseRef = useRef<HTMLElementTagNameMap['sinch-segment-collapse'] | null>(null)
@@ -24,8 +24,8 @@ const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-se
     segmentCollapseRef.current = $segment.querySelector('sinch-segment-collapse')
 
     if (segmentCollapseRef.current !== null) {
-      segmentCollapseRef.current.addEventListener('change', (e: Event) => {
-        updateArgs({ collapsed: (e as CustomEvent).detail })
+      segmentCollapseRef.current.addEventListener('change', (e) => {
+        updateArgs({ collapsed: e.detail })
       })
     }
 

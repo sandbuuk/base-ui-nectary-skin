@@ -8,7 +8,6 @@ import {
 import templateHTML from './template.html'
 import type { TSinchButtonElement } from '../button'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, MouseEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -86,9 +85,6 @@ export type TSinchCardButtonReact = TSinchElementReact<TSinchCardButtonElement> 
   text: string,
   'aria-label': string,
   disabled?: boolean,
-  onClick: (e: MouseEvent<TSinchCardButtonElement>) => void,
-  onFocus?: (e: FocusEvent<TSinchCardButtonElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchCardButtonElement>) => void,
 }
 
 declare global {

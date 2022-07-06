@@ -36,7 +36,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML?: string): Story<JSX.IntrinsicElements['sinch-tag']> => () => {
+const Template = (innerHTML?: string): Story => () => {
   const [{
     category,
     text,
@@ -53,7 +53,7 @@ const Template = (innerHTML?: string): Story<JSX.IntrinsicElements['sinch-tag']>
     }
 
     // tagRef.current.addEventListener('close', () => {
-    //   onclose?.()
+    //   onClose?.()
     // })
   }
 

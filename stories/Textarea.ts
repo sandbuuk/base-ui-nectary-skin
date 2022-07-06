@@ -60,7 +60,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-textarea']> => ({ onChange }) => {
+const Template = (innerHTML: string): Story => ({ onChange }) => {
   const [{
     value,
     label,
@@ -85,7 +85,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-textare
       e.stopPropagation()
     })
 
-    $input.addEventListener('change', (e: any) => {
+    $input.addEventListener('change', (e) => {
       onChange(e.detail)
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
