@@ -153,7 +153,7 @@ module.exports = {
     'linebreak-style': 2,
     'lines-between-class-members': [2, 'always', { exceptAfterSingleLine: true }],
     'max-params': [2, 4],
-    'multiline-comment-style': [2, 'separate-lines'],
+    // 'multiline-comment-style': [2, 'separate-lines'],
     'new-parens': 2,
     'no-array-constructor': 2,
     'no-lonely-if': 2,
