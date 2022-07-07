@@ -1,6 +1,8 @@
 :root,
 :host {
   --sinch-theme: 1;
+
+  /* Colors */
   --sinch-color-honey-700: #CC8800;
   --sinch-color-honey-600: #FFAA00;
   --sinch-color-honey-500: #FFBE3C;
@@ -71,16 +73,26 @@
   --sinch-color-bolt-400: #FFBE3C;
   --sinch-color-bolt-200: #FFE6B3;
   --sinch-color-transparent: transparent;
-  --sinch-font-hero: 700 56px/72px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-title-xl: 600 40px/48px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-title-l: 600 24px/32px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-title-m: 600 20px/24px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-title-s: 600 16px/24px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-title-xs: 600 14px/22px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-body: 400 16px/24px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-emphasized-body: 600 16px/24px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-small-text: 400 14px/22px "Gilroy", "Arial", "sans-serif";
-  --sinch-font-extra-small-text: 400 12px/20px "Gilroy", "Arial", "sans-serif";
+
+  /* Typography */
+  --sinch-font-family: "Gilroy", "Arial", "sans-serif";
+  --sinch-font-weight-emphasized: 600;
+  --sinch-font-title-xl: 600 40px/48px var(--sinch-font-family);
+  --sinch-font-title-l: 600 24px/32px var(--sinch-font-family);
+  --sinch-font-title-m: 600 20px/24px var(--sinch-font-family);
+  --sinch-font-title-s: 600 16px/24px var(--sinch-font-family);
+  --sinch-font-title-xs: 600 14px/22px var(--sinch-font-family);
+  --sinch-font-text-m: 400 16px/24px var(--sinch-font-family);
+  --sinch-font-text-s: 400 14px/22px var(--sinch-font-family);
+  --sinch-font-text-xs: 400 12px/20px var(--sinch-font-family);
+  --sinch-font-text-xxs: 400 10px/16px var(--sinch-font-family);
+
+  /* Deprecated */
+  --sinch-font-hero: 700 56px/72px var(--sinch-font-family);
+  --sinch-font-body: 400 16px/24px var(--sinch-font-family);
+  --sinch-font-emphasized-body: 600 16px/24px var(--sinch-font-family);
+  --sinch-font-small-text: 400 14px/22px var(--sinch-font-family);
+  --sinch-font-extra-small-text: 400 12px/20px var(--sinch-font-family);
   --sinch-font-monospace: 400 16px/24px "monospace";
 }
 

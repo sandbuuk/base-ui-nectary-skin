@@ -26,6 +26,7 @@ import { Spinner } from './components/Spinner'
 import { Table } from './components/Table'
 import { Tabs } from './components/Tabs'
 import { Tag } from './components/Tag'
+import { Text } from './components/Text'
 import { Textarea } from './components/Textarea'
 import { Title } from './components/Title'
 import { Toggle } from './components/Toggle'
@@ -199,6 +200,12 @@ const mapElement = (url: URL) => {
     case '/textarea': {
       return (
         <Textarea search={url.searchParams}/>
+      )
+    }
+
+    case '/text': {
+      return (
+        <Text search={url.searchParams}/>
       )
     }
 

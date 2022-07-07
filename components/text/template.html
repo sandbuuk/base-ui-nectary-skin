@@ -1,0 +1,31 @@
+<style>
+:host {
+  display: block;
+}
+
+:host([inline]:not([inline="false"])) {
+  display: inline;
+}
+
+#text {
+  font: var(--sinch-font-text-m);
+}
+
+:host([emphasized]:not([emphasized="false"])) > #text {
+  font-weight: var(--sinch-font-weight-emphasized);
+}
+
+:host([type="s"]) > #text {
+  font: var(--sinch-font-text-s);
+}
+
+:host([type="xs"]) > #text {
+  font: var(--sinch-font-text-xs);
+}
+
+:host([type="xxs"]) > #text {
+  font: var(--sinch-font-text-xxs);
+}
+</style>
+
+<span id="text"></span>
