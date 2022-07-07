@@ -14,5 +14,5 @@
     "resolveJsonModule": true,
     "declaration": true,
     "emitDeclarationOnly": true
-  },
+  }
 }

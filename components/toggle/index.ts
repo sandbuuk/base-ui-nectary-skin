@@ -9,8 +9,7 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { TSinchToggleElement, TSinchToggleReact } from './types'
 
 const template = document.createElement('template')
 
@@ -135,28 +134,6 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
     )
   }
 })
-
-export type TSinchToggleElement = HTMLElement & {
-  checked: boolean,
-  small: boolean,
-  labeled: boolean,
-  disabled: boolean,
-  text: string | null,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
-  checked?: boolean,
-  small?: boolean,
-  labeled?: boolean,
-  disabled?: boolean,
-  text?: string,
-  'aria-label': string,
-  onChange: (e: SyntheticEvent<TSinchToggleElement, CustomEvent<boolean>>) => void,
-  onFocus?: (e: FocusEvent<TSinchToggleElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchToggleElement>) => void,
-}
 
 declare global {
   namespace JSX {

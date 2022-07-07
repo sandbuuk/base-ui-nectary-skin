@@ -7,10 +7,8 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-
-const backgroundValues = ['grey', 'yellow', 'blue'] as const
-const sizeValues = ['l', 'm', 's'] as const
+import { backgroundValues, sizeValues } from './utils'
+import type { TSinchAvatarBackground, TSinchAvatarElement, TSinchAvatarReact, TSinchAvatarSize } from './types'
 
 const template = document.createElement('template')
 
@@ -84,23 +82,6 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
     }
   }
 })
-
-export type TSinchAvatarBackground = typeof backgroundValues[number]
-export type TSinchAvatarSize = typeof sizeValues[number]
-
-export type TSinchAvatarElement = HTMLElement & {
-  alt: string,
-  src: string | null,
-  background: TSinchAvatarBackground,
-  size: TSinchAvatarSize,
-}
-
-export type TSinchAvatarReact = TSinchElementReact<TSinchAvatarElement> & {
-  alt: string,
-  src?: string,
-  background?: TSinchAvatarBackground,
-  size?: TSinchAvatarSize,
-}
 
 declare global {
   namespace JSX {

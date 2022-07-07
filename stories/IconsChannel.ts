@@ -1,5 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchIconChannelElement, TSinchIconChannelReact } from '@sinch-engage/nectary/icons-channel/types'
+import type { TSinchIconChannelElement } from '@sinch-engage/nectary/icons-channel/types'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/icons-channel/telegram'
 import '@sinch-engage/nectary/icons-channel/apple-business-chat'
@@ -34,7 +34,7 @@ export default {
   },
 } as Meta
 
-const Template = (): Story<TSinchIconChannelReact> => () => {
+const Template = (): Story => () => {
   const [{ size }] = useArgs()
   const wrapperRef = useRef<Element | null>(null)
 

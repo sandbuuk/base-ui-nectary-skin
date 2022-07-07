@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { TSinchActionMenuOptionElement } from '@sinch-engage/nectary/action-menu-option/types'
-import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover'
+import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover/types'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'

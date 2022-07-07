@@ -9,8 +9,8 @@ import {
   getRect,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TRect, TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { TRect } from '../types'
+import type { TSinchPaginationElement, TSinchPaginationReact } from './types'
 
 const NUM_BUTTONS = 7
 const MIDDLE_BTN_INDEX = Math.floor(NUM_BUTTONS / 2)
@@ -203,24 +203,6 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     return btn == null ? null : getRect(btn)
   }
 })
-
-export type TSinchPaginationElement = HTMLElement & {
-  value: number,
-  max: number,
-  focus(): void,
-  blur(): void,
-  readonly prevButtonRect: TRect,
-  readonly nextButtonRect: TRect,
-  nthButtonRect(index: number): TRect | null,
-}
-
-export type TSinchPaginationReact = TSinchElementReact<TSinchPaginationElement> & {
-  value: number,
-  max: number,
-  onChange: (event: SyntheticEvent<TSinchPaginationElement, CustomEvent<number>>) => void,
-  onFocus?: (e: FocusEvent<TSinchPaginationElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchPaginationElement>) => void,
-}
 
 declare global {
   namespace JSX {

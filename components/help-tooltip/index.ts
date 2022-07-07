@@ -11,7 +11,7 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTooltipElement, TSinchTooltipReact } from '../tooltip/types'
+import type { TSinchHelpTooltipElement, TSinchHelpTooltipReact } from './types'
 
 const template = document.createElement('template')
 
@@ -96,10 +96,6 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
     }
   }
 })
-
-export type TSinchHelpTooltipElement = TSinchTooltipElement
-
-export type TSinchHelpTooltipReact = TSinchTooltipReact
 
 declare global {
   namespace JSX {

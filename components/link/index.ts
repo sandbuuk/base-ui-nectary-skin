@@ -9,7 +9,6 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent, MouseEvent } from 'react'
 
 const template = document.createElement('template')
 
@@ -105,9 +104,6 @@ export type TSinchLinkReact = TSinchElementReact<TSinchLinkElement> & {
   href: string,
   disabled?: boolean,
   external?: boolean,
-  onClick?: (e: MouseEvent<TSinchLinkElement>) => void,
-  onFocus?: (e: FocusEvent<TSinchLinkElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchLinkElement>) => void,
 }
 
 declare global {

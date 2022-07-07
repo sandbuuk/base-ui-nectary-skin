@@ -8,7 +8,8 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TRect, TSinchElementReact } from '../types'
+import type { TRect } from '../types'
+import type { TSinchSegmentElement, TSinchSegmentReact } from './types'
 
 const template = document.createElement('template')
 
@@ -64,17 +65,6 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
     return $collapseButton != null ? getRect($collapseButton) : null
   }
 })
-
-type TSinchSegmentElement = HTMLElement & {
-  caption: string,
-  collapsed: boolean,
-  readonly collapseButtonRect: TRect | null,
-}
-
-type TSinchSegmentReact = TSinchElementReact<TSinchSegmentElement> & {
-  caption: string,
-  collapsed?: boolean,
-}
 
 declare global {
   namespace JSX {

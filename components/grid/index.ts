@@ -1,6 +1,6 @@
 import { defineCustomElement, NectaryElement } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchGridElement, TSinchGridReact } from './types'
 
 const template = document.createElement('template')
 
@@ -15,10 +15,6 @@ defineCustomElement('sinch-grid', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
   }
 })
-
-export type TSinchGridElement = HTMLElement
-
-export type TSinchGridReact = TSinchElementReact<TSinchGridElement>
 
 declare global {
   namespace JSX {

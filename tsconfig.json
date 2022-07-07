@@ -14,5 +14,5 @@
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "exclude": ["tests/apps/angular/", "tests/apps/vue/"],
+  "exclude": ["tests/apps/angular/", "tests/apps/vue/"]
 }

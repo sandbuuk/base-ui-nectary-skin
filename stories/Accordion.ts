@@ -13,7 +13,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-accordion']> => ({ onChange }) => {
+const Template = (innerHTML: string): Story => ({ onChange }) => {
   const [{ value, multiple }, updateArgs] = useArgs()
   const accRef = useRef<HTMLElementTagNameMap['sinch-accordion'] | null>(null)
 
@@ -22,7 +22,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-accordi
 
     $acc.innerHTML = innerHTML
 
-    $acc.addEventListener('change', (e: any) => {
+    $acc.addEventListener('change', (e) => {
       onChange(e.detail)
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657

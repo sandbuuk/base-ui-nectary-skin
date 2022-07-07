@@ -7,8 +7,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchSegmentedControlElement, TSinchSegmentedControlReact } from './types'
 
 const template = document.createElement('template')
 
@@ -90,16 +89,6 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
     )
   }
 })
-
-export type TSinchSegmentedControlElement = HTMLElement & {
-  value: string,
-}
-
-export type TSinchSegmentedControlReact = TSinchElementReact<TSinchSegmentedControlElement> & {
-  value: string,
-  'aria-label': string,
-  onChange: (event: SyntheticEvent<TSinchSegmentedControlElement, CustomEvent<string>>) => void,
-}
 
 declare global {
   namespace JSX {

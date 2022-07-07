@@ -10,8 +10,7 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { TSinchSegmentExpandElement, TSinchSegmentExpandReact } from './types'
 
 const template = document.createElement('template')
 
@@ -91,20 +90,6 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
     )
   }
 })
-
-export type TSinchSegmentExpandElement = HTMLElement & {
-  value: boolean,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchSegmentExpandReact = TSinchElementReact<TSinchSegmentExpandElement> & {
-  value: boolean,
-  'aria-label': string,
-  onChange: (e: SyntheticEvent<TSinchSegmentExpandElement, CustomEvent<boolean>>) => void,
-  onFocus?: (e: FocusEvent<TSinchSegmentExpandElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchSegmentExpandElement>) => void,
-}
 
 declare global {
   namespace JSX {

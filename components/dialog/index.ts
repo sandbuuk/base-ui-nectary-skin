@@ -12,8 +12,7 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TRect, TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchDialogElement, TSinchDialogReact } from './types'
 
 const template = document.createElement('template')
 
@@ -138,19 +137,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     return getRect(this.#$closeButton)
   }
 })
-
-export type TSinchDialogElement = HTMLElement & {
-  caption: string,
-  readonly dialogRect: TRect,
-  readonly closeButtonRect: TRect,
-}
-
-export type TSinchDialogReact = TSinchElementReact<TSinchDialogElement> & {
-  open: boolean,
-  caption: string,
-  'aria-label': string,
-  onClose: (event: SyntheticEvent<TSinchDialogElement, CustomEvent<void>>) => void,
-}
 
 declare global {
   namespace JSX {

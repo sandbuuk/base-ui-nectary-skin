@@ -11,14 +11,14 @@ export default {
   title: 'Components/Card',
   argTypes: {
     label: { control: 'text', description: 'Card label text' },
-    header: { control: 'text', description: 'Card header text' },
+    caption: { control: 'text', description: 'Card caption text' },
     text: { control: 'text', description: 'Card description text' },
     disabled: { control: 'boolean', description: 'Is card disabled' },
   },
 } as Meta
 
-const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-card']> => () => {
-  const [{ header, label, text, disabled }] = useArgs()
+const Template = (innerHTML: string = ''): Story => () => {
+  const [{ caption, label, text, disabled }] = useArgs()
   const $wrapper = useWidthWrapper(350)
   const cardRef = useRef<HTMLElementTagNameMap['sinch-card'] | null>(null)
 
@@ -32,7 +32,7 @@ const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-ca
 
   const $card = cardRef.current!
 
-  $card.header = header
+  $card.caption = caption
   $card.text = text
   $card.label = label
   $card.disabled = disabled
@@ -50,7 +50,7 @@ export const Card = Template(cardInnerHTML)
 
 Card.args = {
   label: 'Report',
-  header: 'Card Title',
+  caption: 'Card Title',
   text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...',
   disabled: false,
 }
@@ -58,7 +58,7 @@ Card.args = {
 Card.parameters = {
   docs: {
     source: {
-      code: `<sinch-card header="Card Title" text="Lorem..." label="Report">${cardInnerHTML}</sinch-card>`,
+      code: `<sinch-card caption="Card Title" text="Lorem..." label="Report">${cardInnerHTML}</sinch-card>`,
     },
   },
 }
@@ -73,7 +73,7 @@ export const CardWithButton = Template(withButtonInnerHTML)
 
 CardWithButton.args = {
   label: 'Report',
-  header: 'Card Title',
+  caption: 'Card Title',
   text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...',
   disabled: false,
 }
@@ -81,7 +81,7 @@ CardWithButton.args = {
 CardWithButton.parameters = {
   docs: {
     source: {
-      code: `<sinch-card header="Card Title" text="Lorem..." label="Report">${withButtonInnerHTML}</sinch-card>`,
+      code: `<sinch-card caption="Card Title" text="Lorem..." label="Report">${withButtonInnerHTML}</sinch-card>`,
     },
   },
 }
@@ -94,7 +94,7 @@ const cardIconInnerHTML = `
 export const IconCard = Template(cardIconInnerHTML)
 
 IconCard.args = {
-  header: 'Card Title',
+  caption: 'Card Title',
   text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...',
   disabled: false,
 }
@@ -102,7 +102,7 @@ IconCard.args = {
 IconCard.parameters = {
   docs: {
     source: {
-      code: `<sinch-card header="Card Title" text="Lorem..." label="Report">${cardIconInnerHTML}</sinch-card>`,
+      code: `<sinch-card caption="Card Title" text="Lorem..." label="Report">${cardIconInnerHTML}</sinch-card>`,
     },
   },
 }

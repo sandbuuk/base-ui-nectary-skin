@@ -6,6 +6,10 @@ export type TSinchDropdownRadioOptionElement = HTMLElement & {
   checked: boolean,
   selected: boolean,
   disabled: boolean,
+  setAttribute(name: 'value', value: string): void,
+  setAttribute(name: 'text', value: string): void,
+  setAttribute(name: 'checked', value: ''): void,
+  setAttribute(name: 'disabled', value: ''): void,
 }
 
 export type TSinchDropdownRadioOptionReact = TSinchElementReact<TSinchDropdownRadioOptionElement> & {

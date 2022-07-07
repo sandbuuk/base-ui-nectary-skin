@@ -1,6 +1,6 @@
 <template>
   <sinch-card
-    :header="header"
+    :caption="header"
     :text="text"
     :label="label"
     :disabled="isDisabled">

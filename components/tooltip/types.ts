@@ -9,6 +9,10 @@ export type TSinchTooltipElement = HTMLElement & {
   inverted: boolean,
   orientation: TSinchTooltipOrientation,
   readonly tooltipRect: TRect,
+  setAttribute(name: 'text', value: string): void,
+  setAttribute(name: 'width', value: string): void,
+  setAttribute(name: 'inverted', value: ''): void,
+  setAttribute(name: 'orientation', value: TSinchTooltipOrientation): void,
 }
 
 export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {

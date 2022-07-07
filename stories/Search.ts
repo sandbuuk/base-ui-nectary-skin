@@ -40,7 +40,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-search']> => ({ onChange }) => {
+const Template = (innerHTML: string): Story => ({ onChange }) => {
   const [{
     value,
     label,
@@ -60,7 +60,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-search'
       e.stopPropagation()
     })
 
-    $input.addEventListener('change', (e: any) => {
+    $input.addEventListener('change', (e) => {
       e.stopPropagation()
       onChange(e.detail)
       updateArgs({ value: e.detail })

@@ -5,13 +5,12 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import { alignValues } from './utils'
+import type { TAlignType, TSinchTableCellElement, TSinchTableCellReact } from './types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
-
-const alignValues = ['start', 'center', 'end'] as const
 
 defineCustomElement('sinch-table-cell', class extends NectaryElement {
   constructor() {
@@ -34,16 +33,6 @@ defineCustomElement('sinch-table-cell', class extends NectaryElement {
     return getLiteralAttribute(this, alignValues, 'align', 'start')
   }
 })
-
-export type TAlignType = typeof alignValues[number]
-
-export type TSinchTableCellElement = HTMLElement & {
-  align: TAlignType,
-}
-
-export type TSinchTableCellReact = TSinchElementReact<TSinchTableCellElement> & {
-  align?: TAlignType,
-}
 
 declare global {
   namespace JSX {

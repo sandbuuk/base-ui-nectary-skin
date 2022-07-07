@@ -1,6 +1,5 @@
 import type { TSinchElementReact } from '../types'
 import type { statusValues } from './utils'
-import type { FocusEvent } from 'react'
 
 export type TSinchAccordionStatusType = typeof statusValues[number]
 
@@ -9,10 +8,14 @@ export type TSinchAccordionItemElement = HTMLElement & {
   label: string,
   optionalText: string | null,
   disabled: boolean,
-  checked: boolean,
   status: TSinchAccordionStatusType | null,
   focus(): void,
   blur(): void,
+  setAttribute(name: 'value', value: string): void,
+  setAttribute(name: 'label', value: string): void,
+  setAttribute(name: 'optionaltext', value: string): void,
+  setAttribute(name: 'disabled', value: ''): void,
+  setAttribute(name: 'status', value: TSinchAccordionStatusType): void,
 }
 
 export type TSinchAccordionItemReact = TSinchElementReact<TSinchAccordionItemElement> & {
@@ -21,6 +24,4 @@ export type TSinchAccordionItemReact = TSinchElementReact<TSinchAccordionItemEle
   optionalText?: string,
   disabled?: boolean,
   status?: TSinchAccordionStatusType,
-  onFocus?: (e: FocusEvent<TSinchAccordionItemElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchAccordionItemElement>) => void,
 }

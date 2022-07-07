@@ -5,6 +5,10 @@ export type TSinchGridItemElement = HTMLElement & {
   l: number | null,
   m: number | null,
   s: number | null,
+  setAttribute(name: 'xl', value: string): void,
+  setAttribute(name: 'l', value: string): void,
+  setAttribute(name: 'm', value: string): void,
+  setAttribute(name: 's', value: string): void,
 }
 
 export type TSinchGridItemReact = TSinchElementReact<TSinchGridItemElement> & {

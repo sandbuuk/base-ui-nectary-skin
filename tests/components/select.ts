@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
-import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip'
+import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip/types'
 
 const shot = '/select?width=200&label=Label'
 const withPlaceholder = '/select?width=200&label=Label&placeholder=Placeholder'

@@ -6,7 +6,7 @@ import {
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchAvatarBadgeElement, TSinchAvatarBadgeReact } from './types'
 
 const template = document.createElement('template')
 
@@ -48,14 +48,6 @@ defineCustomElement('sinch-avatar-badge', class extends NectaryElement {
     }
   }
 })
-
-export type TSinchAvatarBadgeElement = HTMLElement & {
-  text: string,
-}
-
-export type TSinchAvatarBadgeReact = TSinchElementReact<TSinchAvatarBadgeElement> & {
-  text: string,
-}
 
 declare global {
   namespace JSX {

@@ -64,14 +64,6 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
     return getAttribute(this, 'label', '')
   }
 
-  set checked(isChecked: boolean) {
-    updateBooleanAttribute(this, 'checked', isChecked)
-  }
-
-  get checked() {
-    return getBooleanAttribute(this, 'checked')
-  }
-
   set disabled(isDisabled: boolean) {
     updateBooleanAttribute(this, 'disabled', isDisabled)
   }

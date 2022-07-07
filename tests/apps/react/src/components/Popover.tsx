@@ -1,4 +1,4 @@
-import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover'
+import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover/types'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/button'

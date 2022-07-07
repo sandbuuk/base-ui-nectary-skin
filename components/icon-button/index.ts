@@ -6,8 +6,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent, MouseEvent } from 'react'
+import type { TSinchIconButtonElement, TSinchIconButtonReact } from './types'
 
 const template = document.createElement('template')
 
@@ -71,22 +70,6 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
     this.#$button.blur()
   }
 })
-
-export type TSinchIconButtonElement = HTMLElement & {
-  disabled: boolean,
-  small: boolean,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchIconButtonReact = TSinchElementReact<TSinchIconButtonElement> & {
-  'aria-label': string,
-  disabled?: boolean,
-  small?: boolean,
-  onClick: (e: MouseEvent<TSinchIconButtonElement>) => void,
-  onFocus?: (e: FocusEvent<TSinchIconButtonElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchIconButtonElement>) => void,
-}
 
 declare global {
   namespace JSX {

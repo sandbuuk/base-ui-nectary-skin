@@ -1,5 +1,5 @@
 import { useRef } from '@storybook/addons'
-import type { TSinchIconElement, TSinchIconReact } from '@sinch-engage/nectary/icons/types'
+import type { TSinchIconElement } from '@sinch-engage/nectary/icons/types'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/icons/arrow-back-ios'
 import '@sinch-engage/nectary/icons/arrow-forward-ios'
@@ -1312,7 +1312,7 @@ export default {
   argTypes: {},
 } as Meta
 
-const Template = (iconNames: string[]): Story<TSinchIconReact> => () => {
+const Template = (iconNames: string[]): Story => () => {
   const wrapperRef = useRef<Element | null>(null)
 
   if (wrapperRef.current === null) {

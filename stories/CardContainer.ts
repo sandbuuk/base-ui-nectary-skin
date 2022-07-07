@@ -7,7 +7,7 @@ export default {
   argTypes: {},
 } as Meta
 
-const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-card-container']> => () => {
+const Template = (innerHTML: string = ''): Story => () => {
   const cardRef = useRef<HTMLElementTagNameMap['sinch-card-container'] | null>(null)
 
   if (cardRef.current === null) {

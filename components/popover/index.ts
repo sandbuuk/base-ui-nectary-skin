@@ -13,8 +13,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { orientationValues } from './utils'
-import type { TRect, TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchPopoverElement, TSinchPopoverOrientation, TSinchPopoverReact } from './types'
 
 const template = document.createElement('template')
 
@@ -205,21 +204,6 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     )
   }
 })
-
-export type TSinchPopoverOrientation = typeof orientationValues[number]
-
-export type TSinchPopoverElement = HTMLElement & {
-  open: boolean,
-  orientation: TSinchPopoverOrientation,
-  readonly popoverRect: TRect,
-}
-
-export type TSinchPopoverReact = TSinchElementReact<TSinchPopoverElement> & {
-  open: boolean,
-  orientation?: TSinchPopoverOrientation,
-  'aria-label': string,
-  onClose: (event: SyntheticEvent<TSinchPopoverElement, CustomEvent<void>>) => void,
-}
 
 declare global {
   namespace JSX {

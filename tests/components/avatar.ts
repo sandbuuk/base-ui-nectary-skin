@@ -1,8 +1,10 @@
 import { test } from '@playwright/test'
+import { colorValues } from '@sinch-engage/nectary/avatar-status/utils'
+import { backgroundValues, sizeValues } from '@sinch-engage/nectary/avatar/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
-import type { TSinchAvatarBadgeElement } from '@sinch-engage/nectary/avatar-badge'
-import type { TSinchAvatarStatusElement } from '@sinch-engage/nectary/avatar-status'
+import type { TSinchAvatarBadgeElement } from '@sinch-engage/nectary/avatar-badge/types'
+import type { TSinchAvatarStatusElement } from '@sinch-engage/nectary/avatar-status/types'
 
 const imageData = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2ODApLCBxdWFsaXR5ID0gODAK/9sAQwAGBAUGBQQGBgUGBwcGCAoQCgoJCQoUDg8MEBcUGBgXFBYWGh0lHxobIxwWFiAsICMmJykqKRkfLTAtKDAlKCko/9sAQwEHBwcKCAoTCgoTKBoWGigoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgo/8AAEQgAIAAgAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A808EaqltrEaXBLJOhjBXkqevH16Vs30iLqbrbq0jyzEoi/ek5rgdAEt1qtlFb5P70Mxxjgcnj6D+Vdn4f+w32v6n/aW0izVPKAbA3Hk9O+cflXDSpxoV54mPxWS/P/I63B1+Wk9jsvDl8BO+nX9tLb3LL8sb4IkHp/n1rltctjbz3VoowElZR9M8fpW1bWtreeN9KfTyzXV0zSSbWDBVBBycfQVieLr8S6xqE8Z4Nw4A9skCscZVc0pS3OuhRVOThHY858N3SR61lYs5XaChA2jPJ6HPHFTvLex67LeWBKb5SvIBzxzx0xx+lW20R9O1GeLTyd8tukwU8lAcgqD9abpmm39xN9m8mWPJw0h6KP8APpXc4X+Fas5YS5W3N2senfDa7jsI57x2jn1eYgbyufLTnoMYH09D0rpLn4c2nim1a50aQWV82SYmJMUjZPryvQ+o9hXJ6TBFpFkUTcNoySe9eheCtY8jULJPMXYI8gbhjHU/5/MHrU18NGMeWWrHTrupNyjoj//Z'
 
@@ -12,9 +14,6 @@ const withBadge = '/avatar?size=l&bg=blue&alt=NS&badge=0'
 const withLongBadge = '/avatar?size=l&bg=blue&alt=NS&badge=444%2b'
 const withBadgeStatus = '/avatar?size=l&bg=blue&alt=NS&badge=4&status=green'
 const check = makeAccessibilityTests('/avatar?alt=NS', 'sinch-avatar')
-const sizeValues = ['l', 'm', 's'] as const
-const backgroundValues = ['blue', 'yellow', 'grey'] as const
-const statusColors = ['green', 'red', 'yellow', 'grey'] as const
 
 test('accessibility', check(async function* () {
   yield
@@ -115,7 +114,7 @@ test('avatar screenshots', runScreenshotTests('sinch-avatar', [
     async *fn({ $ }) {
       const status = $.locator('sinch-avatar-status')
 
-      for (const val of statusColors) {
+      for (const val of colorValues) {
         await status.evaluate((el, val) => {
           el.setAttribute('color', val)
         }, val)
@@ -129,7 +128,7 @@ test('avatar screenshots', runScreenshotTests('sinch-avatar', [
     async *fn({ $ }) {
       const status = $.locator('sinch-avatar-status')
 
-      for (const val of statusColors) {
+      for (const val of colorValues) {
         await status.evaluate((el, val) => {
           (el as TSinchAvatarStatusElement).color = val
         }, val)

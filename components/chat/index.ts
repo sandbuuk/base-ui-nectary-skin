@@ -2,7 +2,7 @@ import {
   defineCustomElement, NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchChatElement, TSinchChatReact } from './types'
 
 const template = document.createElement('template')
 
@@ -17,12 +17,6 @@ defineCustomElement('sinch-chat', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
   }
 })
-
-export type TSinchChatElement = HTMLElement & {
-}
-
-export type TSinchChatReact = TSinchElementReact<TSinchChatElement> & {
-}
 
 declare global {
   namespace JSX {

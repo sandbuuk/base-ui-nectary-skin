@@ -9,6 +9,8 @@ export type TSinchChatBubbleElement = HTMLElement & {
   readonly type: TSinchChatBubbleType | null,
   text: string,
   status: TSinchChatBubbleStatus | null,
+  setAttribute(name: 'text', value: string): void,
+  setAttribute(name: 'status', value: TSinchChatBubbleStatus): void,
 }
 
 export type TSinchChatBubbleReact = TSinchElementReact<TSinchChatBubbleElement> & {

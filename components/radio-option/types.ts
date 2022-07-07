@@ -1,5 +1,4 @@
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent } from 'react'
 
 export type TSinchRadioOptionElement = HTMLElement & {
   value: string,
@@ -8,6 +7,10 @@ export type TSinchRadioOptionElement = HTMLElement & {
   text: string,
   focus(): void,
   blur(): void,
+  setAttribute(name: 'value', value: string): void,
+  setAttribute(name: 'checked', value: ''): void,
+  setAttribute(name: 'disabled', value: ''): void,
+  setAttribute(name: 'text', value: string): void,
 }
 
 export type TSinchRadioOptionReact = TSinchElementReact<TSinchRadioOptionElement> & {
@@ -15,6 +18,4 @@ export type TSinchRadioOptionReact = TSinchElementReact<TSinchRadioOptionElement
   disabled?: boolean,
   text: string,
   'aria-label': string,
-  onFocus?: (e: FocusEvent<TSinchRadioOptionElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchRadioOptionElement>) => void,
 }

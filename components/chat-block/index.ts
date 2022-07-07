@@ -9,7 +9,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchChatBubbleType } from '../chat-bubble/types'
-import type { TSinchElementReact } from '../types'
+import type { TSinchChatBlockElement, TSinchChatBlockReact } from './types'
 
 const template = document.createElement('template')
 
@@ -118,20 +118,6 @@ defineCustomElement('sinch-chat-block', class extends NectaryElement {
     })
   }
 })
-
-export type TSinchChatBlockElement = HTMLElement & {
-  type: TSinchChatBubbleType | null,
-  firstName: string | null,
-  lastName: string | null,
-  timestamp: string | null,
-}
-
-export type TSinchChatBlockReact = TSinchElementReact<TSinchChatBlockElement> & {
-  type: TSinchChatBubbleType,
-  firstName?: string,
-  lastName?: string,
-  timestamp?: string,
-}
 
 declare global {
   namespace JSX {

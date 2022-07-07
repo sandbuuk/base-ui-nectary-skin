@@ -14,14 +14,14 @@ export default {
   },
 } as Meta
 
-const Template: Story<JSX.IntrinsicElements['sinch-checkbox']> = ({ onChange }) => {
+const Template: Story = ({ onChange }) => {
   const [{ checked, indeterminate, disabled, invalid, text }, updateArgs] = useArgs()
   const checkboxRef = useRef<HTMLElementTagNameMap['sinch-checkbox'] | null>(null)
 
   if (checkboxRef.current === null) {
     const $checkbox = document.createElement('sinch-checkbox')
 
-    $checkbox.addEventListener('change', (e: any) => {
+    $checkbox.addEventListener('change', (e) => {
       onChange(e.detail)
       updateArgs({ checked: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657

@@ -3,7 +3,7 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchListElement, TSinchListReact } from './types'
 
 const template = document.createElement('template')
 
@@ -22,10 +22,6 @@ defineCustomElement('sinch-list', class extends NectaryElement {
     this.setAttribute('role', 'list')
   }
 })
-
-export type TSinchListElement = HTMLElement
-
-export type TSinchListReact = TSinchElementReact<TSinchListElement>
 
 declare global {
   namespace JSX {

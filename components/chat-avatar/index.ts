@@ -6,8 +6,8 @@ import {
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchAvatarElement, TSinchAvatarReact } from '../avatar'
-import type { TSinchElementReact } from '../types'
+import type { TSinchAvatarElement } from '../avatar/types'
+import type { TSinchChatAvatarElement, TSinchChatAvatarReact } from './types'
 
 const template = document.createElement('template')
 
@@ -62,16 +62,6 @@ defineCustomElement('sinch-chat-avatar', class extends NectaryElement {
     updateAttribute(this, 'alt', value)
   }
 })
-
-export type TSinchChatAvatarElement = HTMLElement & {
-  alt: TSinchAvatarElement['alt'],
-  src: TSinchAvatarElement['src'],
-}
-
-export type TSinchChatAvatarReact = TSinchElementReact<TSinchChatAvatarElement> & {
-  alt: TSinchAvatarReact['alt'],
-  src?: TSinchAvatarReact['src'],
-}
 
 declare global {
   namespace JSX {

@@ -22,7 +22,7 @@ import templateHTML from './template.html'
 import type { TSinchDropdownCheckboxOptionElement } from '../dropdown-checkbox-option/types'
 import type { TSinchDropdownRadioOptionElement } from '../dropdown-radio-option/types'
 import type { TSinchDropdownTextOptionElement } from '../dropdown-text-option/types'
-import type { TSinchPopoverElement, TSinchPopoverOrientation } from '../popover'
+import type { TSinchPopoverElement, TSinchPopoverOrientation } from '../popover/types'
 import type { TSinchDropdownElement, TSinchDropdownReact } from './types'
 
 type TDropdownOption = TSinchDropdownTextOptionElement | TSinchDropdownCheckboxOptionElement | TSinchDropdownRadioOptionElement

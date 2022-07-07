@@ -9,8 +9,7 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent } from 'react'
+import type { TSinchSegmentedIconControlOptionElement, TSinchSegmentedIconControlOptionReact } from './types'
 
 const template = document.createElement('template')
 
@@ -40,14 +39,6 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
 
   static get observedAttributes() {
     return ['checked', 'disabled', 'value']
-  }
-
-  set checked(isChecked: boolean) {
-    updateBooleanAttribute(this, 'checked', isChecked)
-  }
-
-  get checked() {
-    return getBooleanAttribute(this, 'checked')
   }
 
   set value(value: string) {
@@ -100,22 +91,6 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
     )
   }
 })
-
-export type TSinchSegmentedIconControlOptionElement = HTMLElement & {
-  value: string,
-  disabled: boolean,
-  checked: boolean,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchSegmentedIconControlOptionReact = TSinchElementReact<TSinchSegmentedIconControlOptionElement> & {
-  value: string,
-  disabled?: boolean,
-  'aria-label': string,
-  onFocus?: (e: FocusEvent<TSinchSegmentedIconControlOptionElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchSegmentedIconControlOptionElement>) => void,
-}
 
 declare global {
   namespace JSX {
