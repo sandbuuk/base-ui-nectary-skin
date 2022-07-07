@@ -2,9 +2,7 @@ import '../icons/cancel'
 import {
   defineCustomElement,
   getBooleanAttribute,
-  getAttribute,
   updateBooleanAttribute,
-  updateAttribute,
   NectaryElement,
   getLiteralAttribute,
   updateLiteralAttribute,
@@ -19,29 +17,17 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-text', class extends NectaryElement {
-  #$text: HTMLSpanElement
-
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: false })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-
-    this.#$text = shadowRoot.querySelector('#text')!
   }
 
   connectedCallback() {
     this.setAttribute('role', getBooleanAttribute(this, 'inline') ? 'text' : 'paragraph')
     assertType(this.getAttribute('type'))
-  }
-
-  get text() {
-    return getAttribute(this, 'text', '')
-  }
-
-  set text(value: string) {
-    updateAttribute(this, 'text', value)
   }
 
   get type() {
@@ -69,17 +55,11 @@ defineCustomElement('sinch-text', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'type', 'inline']
+    return ['type', 'inline']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
-      case 'text': {
-        this.#$text.textContent = newVal
-
-        break
-      }
-
       case 'type': {
         assertType(newVal)
 

@@ -2,6 +2,7 @@ import { test } from '@playwright/test'
 import { typeValues } from '@sinch-engage/nectary/text/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
+import type { TSinchTextElement } from '@sinch-engage/nectary/text/types'
 
 const shot = '/text?text=Paragpaph%20text&type=m'
 const withInline = '/text?text=Paragpaph%20text&type=m&inline=true'
@@ -16,98 +17,94 @@ test('accessibility', checkText(async function* () {
 
 test('text screenshots', runScreenshotTests('sinch-text', [
   {
-    name: 'text attribute',
-    url: shot,
-    async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('text', 'Updated Text'))
-      yield { name: 'updated' }
-    },
-  },
-  {
-    name: 'text property',
-    url: shot,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.text = 'Updated Text'
-      })
-      yield { name: 'updated' }
-    },
-  },
-  {
     name: 'type attriute',
     url: withInline,
-    async *fn({ $eval, page }) {
+    async *fn({ $ }) {
+      const text = $.locator('sinch-text')
+
       for (const value of typeValues) {
-        await $eval((el, value) => el.setAttribute('type', value), value)
-        yield { name: value, include: [page.locator('#wrapper')] }
+        await text.evaluate((el, value) => el.setAttribute('type', value), value)
+        yield { name: value }
       }
     },
   },
   {
     name: 'type property',
     url: withInline,
-    async *fn({ $eval, page }) {
+    async *fn({ $ }) {
+      const text = $.locator('sinch-text')
+
       for (const value of typeValues) {
-        await $eval((el, value) => {
+        await text.evaluate((el: TSinchTextElement, value) => {
           el.type = value
         }, value)
-        yield { name: value, include: [page.locator('#wrapper')] }
+        yield { name: value }
       }
     },
   },
   {
     name: 'emphasized type',
     url: withInlineEmphasized,
-    async *fn({ $eval, page }) {
+    async *fn({ $ }) {
+      const text = $.locator('sinch-text')
+
       for (const value of typeValues) {
-        await $eval((el, value) => el.setAttribute('type', value), value)
-        yield { name: value, include: [page.locator('#wrapper')] }
+        await text.evaluate((el, value) => el.setAttribute('type', value), value)
+        yield { name: value }
       }
     },
   },
   {
     name: 'inline attribute',
     url: shot,
-    async *fn({ $eval, page }) {
-      await $eval((el) => el.setAttribute('inline', ''))
-      yield { name: 'set', include: [page.locator('#wrapper')] }
-      await $eval((el) => el.removeAttribute('inline'))
-      yield { name: 'unset', include: [page.locator('#wrapper')] }
+    async *fn({ $ }) {
+      const text = $.locator('sinch-text')
+
+      await text.evaluate((el) => el.setAttribute('inline', ''))
+      yield { name: 'set' }
+      await text.evaluate((el) => el.removeAttribute('inline'))
+      yield { name: 'unset' }
     },
   },
   {
     name: 'inline property',
     url: shot,
-    async *fn({ $eval, page }) {
-      await $eval((el) => {
+    async *fn({ $ }) {
+      const text = $.locator('sinch-text')
+
+      await text.evaluate((el: TSinchTextElement) => {
         el.inline = true
       })
-      yield { name: 'set', include: [page.locator('#wrapper')] }
-      await $eval((el) => {
+      yield { name: 'set' }
+      await text.evaluate((el: TSinchTextElement) => {
         el.inline = false
       })
-      yield { name: 'unset', include: [page.locator('#wrapper')] }
+      yield { name: 'unset' }
     },
   },
   {
     name: 'emphasized attribute',
     url: withEmphasized,
-    async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('emphasized', ''))
+    async *fn({ $ }) {
+      const text = $.locator('sinch-text')
+
+      await text.evaluate((el) => el.setAttribute('emphasized', ''))
       yield { name: 'set' }
-      await $eval((el) => el.removeAttribute('emphasized'))
+      await text.evaluate((el) => el.removeAttribute('emphasized'))
       yield { name: 'unset' }
     },
   },
   {
     name: 'emphasized property',
     url: shot,
-    async *fn({ $eval }) {
-      await $eval((el) => {
+    async *fn({ $ }) {
+      const text = $.locator('sinch-text')
+
+      await text.evaluate((el: TSinchTextElement) => {
         el.emphasized = true
       })
       yield { name: 'set' }
-      await $eval((el) => {
+      await text.evaluate((el: TSinchTextElement) => {
         el.emphasized = false
       })
       yield { name: 'unset' }
@@ -116,8 +113,8 @@ test('text screenshots', runScreenshotTests('sinch-text', [
   {
     name: 'narrow',
     url: withNarrowWidth,
-    async *fn({ page }) {
-      yield { name: 'shot', include: [page.locator('#wrapper')] }
+    async *fn() {
+      yield { name: 'shot' }
     },
   },
 ]))

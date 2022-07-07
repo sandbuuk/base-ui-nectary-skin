@@ -2,11 +2,11 @@ import { typeValues } from '@sinch-engage/nectary/text/utils'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/text'
+import '@sinch-engage/nectary/link'
 
 export default {
   title: 'Components/Text',
   argTypes: {
-    text: { control: 'text', description: 'Text content' },
     type: { control: 'select', options: typeValues, description: 'Text type' },
     inline: { control: 'boolean', description: 'Inline or paragraph' },
     emphasized: { control: 'boolean', description: 'Emphasized or normal' },
@@ -23,31 +23,25 @@ export default {
   },
 } as Meta
 
-const Template = (): Story => () => {
+const Template = (innerHtml: string): Story => () => {
   const [args] = useArgs()
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
-  const titleRef = useRef<HTMLElementTagNameMap['sinch-text'] | null>(null)
+  const wrapperRef = useRef<HTMLElementTagNameMap['sinch-text'] | null>(null)
+  const textRef = useRef<HTMLElementTagNameMap['sinch-text'] | null>(null)
 
-  if (titleRef.current === null) {
-    titleRef.current = document.createElement('sinch-text')
-    titleRef.current.type = 'm'
+  if (textRef.current === null) {
+    const $el = document.createElement('sinch-text')
 
-    const $wrapper = document.createElement('div')
-    const $prefix = document.createElement('span')
-    const $postfix = document.createElement('span')
+    $el.type = 'm'
+    $el.innerHTML = innerHtml
 
-    $prefix.textContent = 'other text '
-    $postfix.textContent = ' other text'
+    const $text = $el.querySelector('sinch-text')
 
-    $wrapper.appendChild($prefix)
-    $wrapper.appendChild(titleRef.current)
-    $wrapper.appendChild($postfix)
-    wrapperRef.current = $wrapper
+    textRef.current = $text
+    wrapperRef.current = $el
   }
 
-  const $title = titleRef.current!
+  const $title = textRef.current!
 
-  $title.text = args.text
   $title.type = args.type
   $title.inline = args.inline
   $title.emphasized = args.emphasized
@@ -55,10 +49,22 @@ const Template = (): Story => () => {
   return wrapperRef.current!
 }
 
-export const Text = Template()
+const textInnerHtml = `
+  <span>prefix </span>
+  <sinch-text
+    type={type}
+    inline={isInline}
+    emphasized={isEmphasized}
+  >
+    Paragraph text
+    <sinch-link href="#" text="Link"></sinch-link>
+  </sinch-text>
+  <span> postfix</span>
+`
+
+export const Text = Template(textInnerHtml)
 
 Text.args = {
-  text: 'Paragraph text',
   type: 'm',
   inline: false,
   emphasized: false,
@@ -67,7 +73,19 @@ Text.args = {
 Text.parameters = {
   docs: {
     source: {
-      code: '<sinch-text type="m" text="Paragraph text"></sinch-text>',
+      code: `
+<sinch-text type="m">
+  <span>prefix </span>
+  <sinch-text
+    type={type}
+    inline={isInline}
+    emphasized={isEmphasized}
+  >
+    Paragraph text
+    <sinch-link href="#" text="Link"></sinch-link>
+  </sinch-text>
+  <span> postfix</span>
+</sinch-text>`,
     },
   },
 }
