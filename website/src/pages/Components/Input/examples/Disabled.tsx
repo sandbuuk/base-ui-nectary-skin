@@ -1,7 +1,8 @@
 import '@sinch-engage/nectary/input'
 import { useState } from 'react'
+import type { FC } from 'react'
 
-export const OptionalAttributes = () => {
+export const DisabledExample: FC = () => {
   const [state, setState] = useState('')
 
   return (
@@ -9,9 +10,7 @@ export const OptionalAttributes = () => {
       label="Input"
       aria-label="Input"
       placeholder="Placeholder"
-      additionalText="Additional text"
-      optionalText="Optional text"
-      invalidText="Invalid text"
+      disabled
       value={state}
       onChange={(e) => setState(e.nativeEvent.detail)}
     />

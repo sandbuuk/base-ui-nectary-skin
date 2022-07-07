@@ -17,6 +17,7 @@
     "@babel/preset-typescript": "^7.16.0",
     "@mdx-js/loader": "^2.1.2",
     "@mdx-js/react": "^2.1.2",
+    "@saas/example-code-loader": "workspace:@saas/example-code-loader@*",
     "@saas/html-minify-loader": "workspace:@saas/html-minify-loader@*",
     "@types/mdx": "^2.0.2",
     "@types/node": "^18.0.1",

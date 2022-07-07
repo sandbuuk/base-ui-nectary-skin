@@ -1,11 +1,9 @@
 import { Code } from '../../../components/Code'
-import InputTypes from '!!raw-loader!@sinch-engage/nectary/input/types.ts'
-import { Simple } from './Simple.tsx'
-import SimpleString from '!!raw-loader!./Simple.tsx'
-import { OptionalAttributes } from './OptionalAttributes.tsx'
-import OptionalAttributesString from '!!raw-loader!./OptionalAttributes.tsx'
-import { Disabled } from './Disabled.tsx'
-import DisabledString from '!!raw-loader!./Disabled.tsx'
+import { Example } from '../../../components/Example'
+import InputTypesString from '!!raw-loader!@sinch-engage/nectary/input/types.ts'
+import { SimpleExample } from './examples/Simple.tsx'
+import { OptionalAttributesExample } from './examples/OptionalAttributes.tsx'
+import { DisabledExample } from './examples/Disabled.tsx'
 
 # Input
 
@@ -13,22 +11,19 @@ Input is the basic and most common text field.
 
 It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled-components) component.
 
-<Code src={InputTypes} title="Types"/>
+<Code src={InputTypesString} title="Types"/>
 
 ## Examples
 
 ### Simple
 
-<Simple/>
-<Code src={SimpleString} title="Code"/>
+<Example Component={SimpleExample}/>
 
 ### Optional attributes
 
-<OptionalAttributes/>
-<Code src={OptionalAttributesString} title="Code"/>
+<Example Component={OptionalAttributesExample}/>
 
 ### Disabled
 
-<Disabled/>
-<Code src={DisabledString} title="Code"/>
+<Example Component={DisabledExample}/>
 

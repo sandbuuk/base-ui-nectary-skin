@@ -44,6 +44,11 @@ const config: Configuration = {
         },
       },
       {
+        test: /\/pages\/Components\/.+?\/examples\/.+?\.tsx$/,
+        exclude: /node_modules/,
+        loader: '@saas/example-code-loader',
+      },
+      {
         test: /\.mdx?$/,
         exclude: /node_modules/,
         use: [
