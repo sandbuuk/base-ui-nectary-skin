@@ -1,3 +1,4 @@
+import { backgroundValues, sizeValues } from '@sinch-engage/nectary/avatar/utils'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/avatar'
@@ -10,12 +11,12 @@ export default {
     size: {
       description: 'Avatar category',
       control: 'select',
-      options: ['l', 'm', 's'],
+      options: sizeValues,
     },
     background: {
       description: 'Avatar background color',
       control: 'select',
-      options: ['blue', 'yellow', 'grey'],
+      options: backgroundValues,
     },
     alt: {
       description: 'Avatar text initials',

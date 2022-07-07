@@ -1,3 +1,4 @@
+import { buttonTypes } from '@sinch-engage/nectary/button/utils'
 import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/button'
@@ -8,7 +9,7 @@ import '@sinch-engage/nectary/spinner'
 export default {
   title: 'Components/Button',
   argTypes: {
-    type: { control: 'select', options: ['primary', 'secondary', 'cta-primary', 'cta-secondary', 'destructive'], description: 'Button visual type' },
+    type: { control: 'select', options: buttonTypes, description: 'Button visual type' },
     text: { control: 'text', description: 'Button label text' },
     disabled: { control: 'boolean', description: 'Is button disabled' },
     small: { control: 'boolean', description: 'Button Small variant' },

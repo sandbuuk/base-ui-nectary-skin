@@ -8,7 +8,7 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchLinkElement, TSinchLinkReact } from './types'
 
 const template = document.createElement('template')
 
@@ -89,22 +89,6 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     this.#$anchor.blur()
   }
 })
-
-export type TSinchLinkElement = HTMLElement & {
-  text: string,
-  href: string,
-  disabled: boolean,
-  external: boolean,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchLinkReact = TSinchElementReact<TSinchLinkElement> & {
-  text: string,
-  href: string,
-  disabled?: boolean,
-  external?: boolean,
-}
 
 declare global {
   namespace JSX {

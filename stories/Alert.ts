@@ -1,3 +1,4 @@
+import { typeValues } from '@sinch-engage/nectary/alert/utils'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/alert'
@@ -10,7 +11,7 @@ export default {
     type: {
       description: 'Alert type',
       control: 'select',
-      options: ['info', 'success', 'warn', 'error'],
+      options: typeValues,
     },
     multiline: {
       description: 'Multiline Alert with Title and Button',

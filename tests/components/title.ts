@@ -1,4 +1,5 @@
 import { test } from '@playwright/test'
+import { typeValues } from '@sinch-engage/nectary/title/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
@@ -33,42 +34,22 @@ test('title screenshots', runScreenshotTests('sinch-title', [
     name: 'type attriute',
     url: shot,
     async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('type', 'xl'))
-      yield { name: 'xl' }
-      await $eval((el) => el.setAttribute('type', 'l'))
-      yield { name: 'l' }
-      await $eval((el) => el.setAttribute('type', 'm'))
-      yield { name: 'm' }
-      await $eval((el) => el.setAttribute('type', 's'))
-      yield { name: 's' }
-      await $eval((el) => el.setAttribute('type', 'xs'))
-      yield { name: 'xs' }
+      for (const value of typeValues) {
+        await $eval((el, value) => el.setAttribute('type', value), value)
+        yield { name: value }
+      }
     },
   },
   {
     name: 'type property',
     url: shot,
     async *fn({ $eval }) {
-      await $eval((el) => {
-        el.type = 'xl'
-      })
-      yield { name: 'xl' }
-      await $eval((el) => {
-        el.type = 'l'
-      })
-      yield { name: 'l' }
-      await $eval((el) => {
-        el.type = 'm'
-      })
-      yield { name: 'm' }
-      await $eval((el) => {
-        el.type = 's'
-      })
-      yield { name: 's' }
-      await $eval((el) => {
-        el.type = 'xs'
-      })
-      yield { name: 'xs' }
+      for (const value of typeValues) {
+        await $eval((el, value) => {
+          el.type = value
+        }, value)
+        yield { name: value }
+      }
     },
   },
   {

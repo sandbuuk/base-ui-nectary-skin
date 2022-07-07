@@ -30,7 +30,7 @@ defineCustomElement('sinch-title', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'heading')
-    assertLevel(this.getAttribute('aria-level'))
+    assertLevel(this.getAttribute('level'))
     assertType(this.getAttribute('type'))
   }
 
@@ -51,7 +51,7 @@ defineCustomElement('sinch-title', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'type', 'aria-level']
+    return ['text', 'type', 'level']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -62,8 +62,9 @@ defineCustomElement('sinch-title', class extends NectaryElement {
         break
       }
 
-      case 'aria-level': {
+      case 'level': {
         assertLevel(newVal)
+        updateAttribute(this, 'aria-level', newVal)
 
         break
       }

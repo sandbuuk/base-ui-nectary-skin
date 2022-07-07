@@ -14,7 +14,7 @@ export const Title: FC<TTitle> = ({ search }) => {
     <sinch-title
       text={text}
       type={type}
-      aria-level={level}
+      level={level}
     />
   )
 }

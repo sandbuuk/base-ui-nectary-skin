@@ -1,3 +1,4 @@
+import { categoryValues } from '@sinch-engage/nectary/tag/utils'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/tag'
@@ -9,7 +10,7 @@ export default {
     category: {
       description: 'Tag category',
       control: 'select',
-      options: ['candy', 'bolt', 'aqua', 'grass', 'berry', 'orange', 'night', 'mud', 'dirt'],
+      options: categoryValues,
     },
     text: {
       description: 'Tag text',
