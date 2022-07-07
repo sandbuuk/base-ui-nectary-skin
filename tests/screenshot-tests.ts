@@ -126,7 +126,7 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
         // page.on('console', (msg) => console.log(msg.text()))
         // page.on('pageerror', (e) => console.log(e))
 
-        const locator = page.locator(elementSelector)
+        const locator = page.locator(elementSelector).nth(0)
 
         for await (const { name, include = [], includeRects = [] } of t.fn({ page, $: locator, $eval: makeEval<T>(locator) })) {
           const rects = await getRects([locator, ...include])
@@ -149,36 +149,6 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
     // eslint-disable-next-line no-empty
     for await (const _ of it) {}
   }
-
-export const makeScreenshotTests = <T extends keyof HTMLElementTagNameMap>(pageUrl: string, elementSelector: T) =>
-  (updateState: (props: UpdateStateProps<T>) => AsyncIterable<UpdateStateResult>) =>
-    async ({ page }: PlaywrightTestArgs, info: TestInfo) => {
-      overrideScreenshotPath(info)
-
-      await page.goto(pageUrl, { waitUntil: 'networkidle' })
-      await page.waitForSelector(elementSelector, { state: 'attached' })
-      await page.evaluate(() => document.fonts.ready)
-
-      // Optionally subscribe to page console output
-      // page.on('console', (msg) => console.log(msg.text()))
-      // page.on('pageerror', (e) => console.log(e))
-
-      const locator = page.locator(elementSelector)
-
-      for await (const { name, include = [], includeRects = [] } of updateState({ page, $: locator, $eval: makeEval<T>(locator) })) {
-        const rects = await getRects([locator, ...include])
-        const clip = mergeBoundingBox(rects.concat(includeRects))
-        const screenshotName = `${info.title}-${name}.png`
-
-        if (clip == null) {
-          throw new Error('Cannot get locator bounding box')
-        }
-
-        const sc = await page.screenshot({ clip, animations: 'disabled', fullPage: true })
-
-        expect(sc).toMatchSnapshot(screenshotName)
-      }
-    }
 
 export const moveCursorTo = async (page: Page, position: TPosition) => {
   await page.mouse.move(position.x, position.y)

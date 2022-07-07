@@ -1,10 +1,12 @@
-<div id="wrapper">
-  <span>prefix</span>
+<sinch-text type="m">
+  <span>prefix </span>
   <sinch-text
-    [attr.text]="text"
     [attr.type]="type"
     [attr.inline]="isInline"
     [attr.emphasized]="isEmphasized"
-  ></sinch-text>
-  <span>postfix</span>
-</div>
+  >
+    {{text}}
+    <sinch-link href="#" text="Link"></sinch-link>
+  </sinch-text>
+  <span> postfix</span>
+</sinch-text>
