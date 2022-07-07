@@ -1,18 +1,21 @@
 <template>
-  <div id="wrapper">
-    <span>prefix</span>
+  <sinch-text type="m">
+    <span>prefix </span>
     <sinch-text
-      :text="text"
       :type="type"
       :inline="isInline"
       :emphasized="isEmphasized"
-    ></sinch-text>
-    <span>postfix</span>
-  </div>
+    >
+      {{text}}
+      <sinch-link href="#" text="Link"></sinch-link>
+    </sinch-text>
+    <span> postfix</span>
+  </sinch-text>
 </template>
 
 <script>
 import '@sinch-engage/nectary/text'
+import '@sinch-engage/nectary/link'
 
 export default {
   props: {

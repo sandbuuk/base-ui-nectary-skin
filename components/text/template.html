@@ -1,31 +1,28 @@
 <style>
 :host {
   display: block;
+  font: var(--sinch-font-text-m);
 }
 
 :host([inline]:not([inline="false"])) {
   display: inline;
 }
 
-#text {
-  font: var(--sinch-font-text-m);
-}
-
-:host([emphasized]:not([emphasized="false"])) > #text {
+:host([emphasized]:not([emphasized="false"])) {
   font-weight: var(--sinch-font-weight-emphasized);
 }
 
-:host([type="s"]) > #text {
+:host([type="s"]) {
   font: var(--sinch-font-text-s);
 }
 
-:host([type="xs"]) > #text {
+:host([type="xs"]) {
   font: var(--sinch-font-text-xs);
 }
 
-:host([type="xxs"]) > #text {
+:host([type="xxs"]) {
   font: var(--sinch-font-text-xxs);
 }
 </style>
 
-<span id="text"></span>
+<slot></slot>

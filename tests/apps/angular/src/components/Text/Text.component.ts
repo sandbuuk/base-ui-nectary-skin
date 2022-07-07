@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/text'
+import '@sinch-engage/nectary/link'
 
 @Component({
   selector: 'text-component',

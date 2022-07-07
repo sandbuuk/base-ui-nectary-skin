@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import '@sinch-engage/nectary/text'
+import '@sinch-engage/nectary/link'
 
 type TText = {
   search: URLSearchParams,
@@ -12,15 +13,18 @@ export const Text: FC<TText> = ({ search }) => {
   const isEmphasized = search.get('emphasized') !== null
 
   return (
-    <div id="wrapper">
-      <span>prefix</span>
+    <sinch-text type="m">
+      <span>prefix </span>
       <sinch-text
-        text={text}
         type={type}
         inline={isInline}
         emphasized={isEmphasized}
-      />
-      <span>postfix</span>
-    </div>
+      >
+        {text}
+        {' '}
+        <sinch-link href="#" text="Link"/>
+      </sinch-text>
+      <span> postfix</span>
+    </sinch-text>
   )
 }
