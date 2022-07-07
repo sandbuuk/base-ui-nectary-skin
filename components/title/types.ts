@@ -7,12 +7,14 @@ export type TSinchTitleLevel = typeof levelValues[number]
 export type TSinchTitleElement = HTMLElement & {
   text: string,
   type: TSinchTitleType,
+  level: TSinchTitleLevel,
   setAttribute(name: 'text', value: string): void,
   setAttribute(name: 'type', value: TSinchTitleType): void,
+  setAttribute(name: 'level', value: TSinchTitleLevel): void,
 }
 
 export type TSinchTitleReact = TSinchElementReact<TSinchTitleElement> & {
   text: string,
   type: TSinchTitleType,
-  'aria-level': TSinchTitleLevel,
+  level: TSinchTitleLevel,
 }

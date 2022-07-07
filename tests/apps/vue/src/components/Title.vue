@@ -2,7 +2,7 @@
   <sinch-title
     :text="text"
     :type="type"
-    :aria-level="level"
+    :level="level"
   ></sinch-title>
 </template>
 

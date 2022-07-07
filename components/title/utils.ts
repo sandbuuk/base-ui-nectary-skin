@@ -8,7 +8,7 @@ type TAssertType = (value: string | null) => asserts value is TSinchTitleType
 
 export const assertLevel: TAssertLevel = (value) => {
   if (value === null || !levelValues.includes(value as any)) {
-    throw new Error(`sinch-title: invalid aria-level attribute: ${value}`)
+    throw new Error(`sinch-title: invalid level attribute: ${value}`)
   }
 }
 
