@@ -8,8 +8,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchRadioOptionElement } from '../radio-option/types'
-import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchRadioElement, TSinchRadioReact } from './types'
 
 const template = document.createElement('template')
 
@@ -168,17 +167,6 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     return elements.find((el) => el.checked) ?? null
   }
 })
-
-export type TSinchRadioElement = HTMLElement & {
-  value: string,
-  addEventListener(type: 'change', listener: (this: TSinchRadioElement, e: CustomEvent<boolean>) => void): void,
-}
-
-export type TSinchRadioReact = TSinchElementReact<TSinchRadioElement> & {
-  value: string,
-  'aria-label': string,
-  onChange: (event: SyntheticEvent<TSinchRadioElement, CustomEvent<boolean>>) => void,
-}
 
 declare global {
   namespace JSX {

@@ -1,7 +1,7 @@
 import '../icons/close'
 import { defineCustomElement, NectaryElement } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchAlertCloseElement, TSinchAlertCloseReact } from './types'
 
 const template = document.createElement('template')
 
@@ -27,13 +27,6 @@ defineCustomElement('sinch-alert-close', class extends NectaryElement {
     this.#$button.blur()
   }
 })
-
-export type TSinchAlertCloseElement = HTMLElement & {
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchAlertCloseReact = TSinchElementReact<TSinchAlertCloseElement>
 
 declare global {
   namespace JSX {

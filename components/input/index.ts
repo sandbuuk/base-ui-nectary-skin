@@ -11,10 +11,8 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
-
-const inputTypes = ['text', 'password'] as const
+import { inputTypes } from './utils'
+import type { TSinchInputElement, TSinchInputReact, TTextInputType } from './types'
 
 const template = document.createElement('template')
 
@@ -276,38 +274,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     }
   }
 })
-
-export type TTextInputType = typeof inputTypes[number]
-
-export type TSinchInputElement = HTMLElement & {
-  type: TTextInputType,
-  value: string,
-  label: string,
-  placeholder: string | null,
-  optionalText: string | null,
-  invalidText: string | null,
-  additionalText: string | null,
-  disabled: boolean,
-  selectionStart: HTMLInputElement['selectionStart'],
-  selectionEnd: HTMLInputElement['selectionEnd'],
-  selectionDirection: HTMLInputElement['selectionDirection'],
-  focus(): void,
-  blur(): void,
-  addEventListener(type: 'change', listener: (this: TSinchInputElement, e: CustomEvent<string>) => void): void,
-}
-
-export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
-  type?: TTextInputType,
-  value: string,
-  label: string,
-  placeholder?: string,
-  optionalText?: string,
-  invalidText?: string,
-  additionalText?: string,
-  disabled?: boolean,
-  'aria-label': string,
-  onChange: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
-}
 
 declare global {
   namespace JSX {

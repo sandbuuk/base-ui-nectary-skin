@@ -11,8 +11,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchAccordionItemElement } from '../accordion-item/types'
-import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchAccordionElement, TSinchAccordionReact } from './types'
 
 const template = document.createElement('template')
 
@@ -81,8 +80,8 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
     const $elem = e.target as TSinchAccordionItemElement
     const value = (e as CustomEvent).detail
     const result = this.multiple
-      ? updateCsv(this.value, value, !$elem.checked)
-      : $elem.checked ? '' : value
+      ? updateCsv(this.value, value, !getBooleanAttribute($elem, 'checked'))
+      : getBooleanAttribute($elem, 'checked') ? '' : value
 
     this.dispatchEvent(
       new CustomEvent('change', { detail: result, bubbles: true })
@@ -109,18 +108,6 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
     }
   }
 })
-
-export type TSinchAccordionElement = HTMLElement & {
-  value: string,
-  multiple: boolean,
-  addEventListener(type: 'change', listener: (this: TSinchAccordionElement, e: CustomEvent<string>) => void): void,
-}
-
-export type TSinchAccordionReact = TSinchElementReact<TSinchAccordionElement> & {
-  multiple?: boolean,
-  value: string,
-  onChange: (e: SyntheticEvent<TSinchAccordionElement, CustomEvent<string>>) => void,
-}
 
 declare global {
   namespace JSX {

@@ -2,7 +2,7 @@
   <sinch-alert
     :type="type"
     :text="text"
-    :title="title"
+    :caption="title"
     :multiline="isMultiline">
   <sinch-alert-close
     slot="close"

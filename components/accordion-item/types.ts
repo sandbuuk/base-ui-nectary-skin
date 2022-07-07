@@ -8,10 +8,14 @@ export type TSinchAccordionItemElement = HTMLElement & {
   label: string,
   optionalText: string | null,
   disabled: boolean,
-  checked: boolean,
   status: TSinchAccordionStatusType | null,
   focus(): void,
   blur(): void,
+  setAttribute(name: 'value', value: string): void,
+  setAttribute(name: 'label', value: string): void,
+  setAttribute(name: 'optionaltext', value: string): void,
+  setAttribute(name: 'disabled', value: ''): void,
+  setAttribute(name: 'status', value: TSinchAccordionStatusType): void,
 }
 
 export type TSinchAccordionItemReact = TSinchElementReact<TSinchAccordionItemElement> & {

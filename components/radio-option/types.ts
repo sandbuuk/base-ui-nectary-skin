@@ -7,6 +7,10 @@ export type TSinchRadioOptionElement = HTMLElement & {
   text: string,
   focus(): void,
   blur(): void,
+  setAttribute(name: 'value', value: string): void,
+  setAttribute(name: 'checked', value: ''): void,
+  setAttribute(name: 'disabled', value: ''): void,
+  setAttribute(name: 'text', value: string): void,
 }
 
 export type TSinchRadioOptionReact = TSinchElementReact<TSinchRadioOptionElement> & {

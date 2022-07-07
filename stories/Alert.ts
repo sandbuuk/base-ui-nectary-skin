@@ -20,7 +20,7 @@ export default {
       description: 'Body text',
       control: 'text',
     },
-    title: {
+    caption: {
       description: 'Multiline Title text',
       control: 'text',
     },
@@ -41,7 +41,7 @@ const Template = (innerHTML: string): Story => () => {
   const [{
     type,
     text,
-    title,
+    caption,
     multiline,
   }] = useArgs()
   const alertRef = useRef<HTMLElementTagNameMap['sinch-alert'] | null>(null)
@@ -55,7 +55,7 @@ const Template = (innerHTML: string): Story => () => {
   const $alert = alertRef.current!
 
   $alert.text = text
-  $alert.title = title ?? ''
+  $alert.caption = caption ?? ''
   $alert.type = type
   $alert.multiline = Boolean(multiline)
 
@@ -150,7 +150,7 @@ export const AlertMultiline = Template('')
 AlertMultiline.args = {
   type: 'success',
   text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-  title: 'It has survived not only five centuries, but also the leap into electronic typesetting',
+  caption: 'It has survived not only five centuries, but also the leap into electronic typesetting',
   multiline: true,
 }
 
@@ -161,7 +161,7 @@ AlertMultiline.parameters = {
 <sinch-alert
   type="success"
   text="Now proceed with your next task"
-  title="Job Done"
+  caption="Job Done"
   multiline
 ></sinch-alert>
 `,
@@ -174,7 +174,7 @@ export const AlertMultilineWithButtonAndClose = Template('<sinch-alert-close slo
 AlertMultilineWithButtonAndClose.args = {
   type: 'success',
   text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-  title: 'It has survived not only five centuries, but also the leap into electronic typesetting',
+  caption: 'It has survived not only five centuries, but also the leap into electronic typesetting',
   multiline: true,
 }
 
@@ -185,7 +185,7 @@ AlertMultilineWithButtonAndClose.parameters = {
 <sinch-alert
   type="success"
   text="Now proceed with your next task"
-  title="Job Done"
+  caption="Job Done"
   multiline
 >
   <sinch-alert-close

@@ -21,7 +21,7 @@ export const Card: FC<TCard> = ({ search }) => {
 
   return (
     <sinch-card
-      header={header}
+      caption={header}
       text={text}
       label={label}
       disabled={isDisabled}

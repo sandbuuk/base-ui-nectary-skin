@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { orientationValues } from '@sinch-engage/nectary/popover/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { expandRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
@@ -119,17 +120,11 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
       await $.click()
-      await $eval((el) => el.setAttribute('orientation', 'top-left'))
-      yield { name: 'top-left', includeRects: [await getRect()] }
 
-      await $eval((el) => el.setAttribute('orientation', 'top-right'))
-      yield { name: 'top-right', includeRects: [await getRect()] }
-
-      await $eval((el) => el.setAttribute('orientation', 'bottom-left'))
-      yield { name: 'bottom-left', includeRects: [await getRect()] }
-
-      await $eval((el) => el.setAttribute('orientation', 'bottom-right'))
-      yield { name: 'bottom-right', includeRects: [await getRect()] }
+      for (const value of orientationValues) {
+        await $eval((el, value) => el.setAttribute('orientation', value), value)
+        yield { name: value, includeRects: [await getRect()] }
+      }
     },
   },
   {
@@ -139,25 +134,13 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
       await $.click()
-      await $eval((el) => {
-        el.orientation = 'top-left'
-      })
-      yield { name: 'top-left', includeRects: [await getRect()] }
 
-      await $eval((el) => {
-        el.orientation = 'top-right'
-      })
-      yield { name: 'top-right', includeRects: [await getRect()] }
-
-      await $eval((el) => {
-        el.orientation = 'bottom-left'
-      })
-      yield { name: 'bottom-left', includeRects: [await getRect()] }
-
-      await $eval((el) => {
-        el.orientation = 'bottom-right'
-      })
-      yield { name: 'bottom-right', includeRects: [await getRect()] }
+      for (const value of orientationValues) {
+        await $eval((el, value) => {
+          el.orientation = value
+        }, value)
+        yield { name: value, includeRects: [await getRect()] }
+      }
     },
   },
   {

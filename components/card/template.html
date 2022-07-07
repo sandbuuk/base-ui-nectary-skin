@@ -53,7 +53,7 @@
   display: none;
 }
 
-#caption {
+#header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -62,7 +62,7 @@
   --sinch-size-icon: 48px;
 }
 
-#title {
+#caption {
   font: var(--sinch-font-title-m);
   color: var(--sinch-color-stormy-500);
   flex: 1;
@@ -86,7 +86,7 @@
   display: none;
 }
 
-:host([disabled]:not([disabled="false"])) :is(#illustration-wrapper, #description, #caption, #label) {
+:host([disabled]:not([disabled="false"])) :is(#illustration-wrapper, #description, #header, #label) {
   opacity: 0.6;
 }
 
@@ -104,9 +104,9 @@
   </div>
   <div id="card-body">
     <p id="label"></p>
-    <div id="caption">
+    <div id="header">
       <slot name="icon"></slot>
-      <span id="title"></span>
+      <span id="caption"></span>
     </div>
     <p id="description"></p>
     <slot name="action"></slot>

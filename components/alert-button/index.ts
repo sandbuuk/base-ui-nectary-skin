@@ -5,7 +5,7 @@ import {
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchAlertButtonElement, TSinchAlertButtonReact } from './types'
 
 const template = document.createElement('template')
 
@@ -54,16 +54,6 @@ defineCustomElement('sinch-alert-button', class extends NectaryElement {
     this.#$button.blur()
   }
 })
-
-export type TSinchAlertButtonElement = HTMLElement & {
-  text: string,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchAlertButtonReact = TSinchElementReact<TSinchAlertButtonElement> & {
-  text: string,
-}
 
 declare global {
   namespace JSX {

@@ -9,7 +9,7 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchSegmentedControlOptionElement, TSinchSegmentedControlOptionReact } from './types'
 
 const template = document.createElement('template')
 
@@ -41,14 +41,6 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
 
   static get observedAttributes() {
     return ['checked', 'disabled', 'text', 'value']
-  }
-
-  set checked(isChecked: boolean) {
-    updateBooleanAttribute(this, 'checked', isChecked)
-  }
-
-  get checked() {
-    return getBooleanAttribute(this, 'checked')
   }
 
   set value(value: string) {
@@ -111,22 +103,6 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
     )
   }
 })
-
-export type TSinchSegmentedControlOptionElement = HTMLElement & {
-  value: string,
-  disabled: boolean,
-  checked: boolean,
-  text: string,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchSegmentedControlOptionReact = TSinchElementReact<TSinchSegmentedControlOptionElement> & {
-  value: string,
-  disabled?: boolean,
-  text: string,
-  'aria-label': string,
-}
 
 declare global {
   namespace JSX {

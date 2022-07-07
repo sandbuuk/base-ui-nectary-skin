@@ -39,7 +39,7 @@ export const Alert: FC<TAlert> = ({ search }) => {
     <sinch-alert
       type={type}
       text={text}
-      title={title}
+      caption={title}
       multiline={isMultiline}
     >
       {isDismissable && (

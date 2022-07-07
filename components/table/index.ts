@@ -2,7 +2,7 @@ import {
   defineCustomElement, NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchTableElement, TSinchTableReact } from './types'
 
 const template = document.createElement('template')
 
@@ -21,10 +21,6 @@ defineCustomElement('sinch-table', class extends NectaryElement {
     this.setAttribute('role', 'table')
   }
 })
-
-export type TSinchTableElement = HTMLElement
-
-export type TSinchTableReact = TSinchElementReact<TSinchTableElement>
 
 declare global {
   namespace JSX {

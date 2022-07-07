@@ -16,9 +16,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchActionMenuOptionElement } from '../action-menu-option/types'
-import type { TSinchPopoverElement, TSinchPopoverOrientation } from '../popover'
-import type { TRect, TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchPopoverElement, TSinchPopoverOrientation } from '../popover/types'
+import type { TSinchActionMenuElement, TSinchActionMenuReact } from './types'
 
 const ITEM_HEIGHT = 40
 const template = document.createElement('template')
@@ -177,7 +176,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     for (const $op of this.#getOptionElements()) {
       const isSelected = $op === $option
 
-      $op.selected = isSelected
+      updateBooleanAttribute($op, 'selected', isSelected)
 
       if (isSelected) {
         $op.focus()
@@ -197,7 +196,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
   #findSelectedOption(elements: readonly TSinchActionMenuOptionElement[]): TSinchActionMenuOptionElement | null {
     for (const el of elements) {
-      if (el.selected) {
+      if (getBooleanAttribute(el, 'selected')) {
         return el
       }
     }
@@ -223,22 +222,6 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     getReactEventHandler(this, 'onClose')?.()
   }
 })
-
-export type TSinchActionMenuElement = HTMLElement & {
-  open: boolean,
-  orientation: TSinchPopoverOrientation,
-  maxVisibleItems: number | null,
-  readonly dropdownRect: TRect,
-  addEventListener(type: 'close', listener: (this: TSinchActionMenuElement, e: CustomEvent<void>) => void): void,
-}
-
-export type TSinchActionMenuReact = TSinchElementReact<TSinchActionMenuElement> & {
-  open: boolean,
-  orientation?: TSinchPopoverOrientation,
-  maxVisibleItems?: number,
-  'aria-label': string,
-  onClose: (event: SyntheticEvent<TSinchActionMenuElement, CustomEvent<void>>) => void,
-}
 
 declare global {
   namespace JSX {

@@ -14,8 +14,7 @@ import '../icons/search'
 import '../icons/close'
 import '../icon-button'
 import type { TSinchSearchOptionElement } from '../search-option/types'
-import type { TRect, TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchSearchElement, TSinchSearchReact } from './types'
 
 const ITEM_HEIGHT = 40
 
@@ -403,30 +402,6 @@ defineCustomElement('sinch-search', class extends NectaryElement {
     this.#$input.blur()
   }
 })
-
-export type TSinchSearchElement = HTMLElement & {
-  value: string,
-  label: string | null,
-  placeholder: string | null,
-  maxVisibleItems: number | null,
-  selectionStart: HTMLInputElement['selectionStart'],
-  selectionEnd: HTMLInputElement['selectionEnd'],
-  selectionDirection: HTMLInputElement['selectionDirection'],
-  readonly dropdownRect: TRect,
-  focus(): void,
-  blur(): void,
-  addEventListener(type: 'change', listener: (this: TSinchSearchElement, e: CustomEvent<string>) => void): void,
-}
-
-export type TSinchSearchReact = TSinchElementReact<TSinchSearchElement> & {
-  value: string,
-  label?: string,
-  placeholder?: string,
-  maxVisibleItems?: number,
-  'aria-label': string,
-  'clear-aria-label': string,
-  onChange: (e: SyntheticEvent<TSinchSearchElement, CustomEvent<string>>) => void,
-}
 
 declare global {
   namespace JSX {

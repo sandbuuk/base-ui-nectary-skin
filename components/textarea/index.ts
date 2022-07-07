@@ -10,8 +10,7 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchTextareaElement, TSinchTextareaReact } from './types'
 
 const template = document.createElement('template')
 
@@ -283,38 +282,6 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     }
   }
 })
-
-export type TSinchTextareaElement = HTMLElement & {
-  value: string,
-  label: string,
-  placeholder: string | null,
-  optionalText: string | null,
-  invalidText: string | null,
-  additionalText: string | null,
-  disabled: boolean,
-  selectionStart: HTMLTextAreaElement['selectionStart'],
-  selectionEnd: HTMLTextAreaElement['selectionEnd'],
-  selectionDirection: HTMLTextAreaElement['selectionDirection'],
-  rows: HTMLTextAreaElement['rows'],
-  resizable: boolean,
-  focus(): void,
-  blur(): void,
-  addEventListener(type: 'change', listener: (this: TSinchTextareaElement, e: CustomEvent<string>) => void): void,
-}
-
-export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
-  value: string,
-  label: string,
-  placeholder?: string,
-  optionalText?: string,
-  invalidText?: string,
-  additionalText?: string,
-  disabled?: boolean,
-  'aria-label': string,
-  rows?: number,
-  resizable?: boolean,
-  onChange: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
-}
 
 declare global {
   namespace JSX {

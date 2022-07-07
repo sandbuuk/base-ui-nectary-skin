@@ -10,9 +10,8 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-
-const buttonTypes = ['primary', 'secondary', 'cta-primary', 'cta-secondary', 'destructive'] as const
+import { buttonTypes } from './utils'
+import type { TSinchButtonElement, TSinchButtonReact, TSinchButtonType } from './types'
 
 const template = document.createElement('template')
 
@@ -99,25 +98,6 @@ defineCustomElement('sinch-button', class extends NectaryElement {
     this.#$button.blur()
   }
 })
-
-export type TSinchButtonType = typeof buttonTypes[number]
-
-export type TSinchButtonElement = HTMLElement & {
-  type: TSinchButtonType,
-  text: string,
-  disabled: boolean,
-  small: boolean,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
-  type: TSinchButtonType,
-  text: string,
-  'aria-label': string,
-  disabled?: boolean,
-  small?: boolean,
-}
 
 declare global {
   namespace JSX {

@@ -4,7 +4,7 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchTagCloseElement, TSinchTagCloseReact } from './types'
 
 const template = document.createElement('template')
 
@@ -31,13 +31,6 @@ defineCustomElement('sinch-tag-close', class extends NectaryElement {
     this.#$button.blur()
   }
 })
-
-export type TSinchTagCloseElement = HTMLElement & {
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchTagCloseReact = TSinchElementReact<TSinchTagCloseElement>
 
 declare global {
   namespace JSX {

@@ -1,4 +1,5 @@
 import { test } from '@playwright/test'
+import { orientationValues } from '@sinch-engage/nectary/tooltip/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
@@ -17,22 +18,10 @@ test('tooltip screenshots', runScreenshotTests('sinch-tooltip', [
     async *fn({ $, $eval }) {
       await $.hover()
 
-      await $eval((el) => el.setAttribute('orientation', 'left'))
-      yield { name: 'left', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => el.setAttribute('orientation', 'right'))
-      yield { name: 'right', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => el.setAttribute('orientation', 'top'))
-      yield { name: 'top', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => el.setAttribute('orientation', 'bottom'))
-      yield { name: 'bottom', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => el.setAttribute('orientation', 'top-left'))
-      yield { name: 'top-left', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => el.setAttribute('orientation', 'top-right'))
-      yield { name: 'top-right', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => el.setAttribute('orientation', 'bottom-left'))
-      yield { name: 'bottom-left', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => el.setAttribute('orientation', 'bottom-right'))
-      yield { name: 'bottom-right', includeRects: [await $eval((el) => el.tooltipRect)] }
+      for (const value of orientationValues) {
+        await $eval((el, value) => el.setAttribute('orientation', value), value)
+        yield { name: value, includeRects: [await $eval((el) => el.tooltipRect)] }
+      }
     },
   },
   {
@@ -41,38 +30,12 @@ test('tooltip screenshots', runScreenshotTests('sinch-tooltip', [
     async *fn({ $, $eval }) {
       await $.hover()
 
-      await $eval((el) => {
-        el.orientation = 'left'
-      })
-      yield { name: 'left', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => {
-        el.orientation = 'right'
-      })
-      yield { name: 'right', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => {
-        el.orientation = 'top'
-      })
-      yield { name: 'top', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => {
-        el.orientation = 'bottom'
-      })
-      yield { name: 'bottom', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => {
-        el.orientation = 'top-left'
-      })
-      yield { name: 'top-left', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => {
-        el.orientation = 'top-right'
-      })
-      yield { name: 'top-right', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => {
-        el.orientation = 'bottom-left'
-      })
-      yield { name: 'bottom-left', includeRects: [await $eval((el) => el.tooltipRect)] }
-      await $eval((el) => {
-        el.orientation = 'bottom-right'
-      })
-      yield { name: 'bottom-right', includeRects: [await $eval((el) => el.tooltipRect)] }
+      for (const value of orientationValues) {
+        await $eval((el, value) => {
+          el.orientation = value
+        }, value)
+        yield { name: value, includeRects: [await $eval((el) => el.tooltipRect)] }
+      }
     },
   },
   {

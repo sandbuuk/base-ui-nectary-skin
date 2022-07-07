@@ -39,8 +39,6 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   }
 
   connectedCallback() {
-    // this.setAttribute('role', 'button')
-
     this.#$illustrationSlot.addEventListener('slotchange', this.#onIllustrationSlotChange)
     this.#$actionSlot.addEventListener('slotchange', this.#updateDisabledAttributeInChildren)
   }

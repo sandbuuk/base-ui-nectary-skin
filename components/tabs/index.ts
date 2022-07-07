@@ -8,8 +8,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchTabsOptionElement } from '../tabs-option/types'
-import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchTabsElement, TSinchTabsReact } from './types'
 
 const findSelectedOption = (elements: readonly TSinchTabsOptionElement[]) => {
   return elements.find((el) => el.checked) ?? null
@@ -168,17 +167,6 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
     return (this.#$slot.assignedElements()as TSinchTabsOptionElement[]).filter((opt) => opt.disabled !== true)
   }
 })
-
-export type TSinchTabsElement = HTMLElement & {
-  value: string,
-  addEventListener(type: 'change', listener: (this: TSinchTabsElement, e: CustomEvent<string>) => void): void,
-}
-
-export type TSinchTabsReact = TSinchElementReact<TSinchTabsElement> & {
-  value: string,
-  'aria-label': string,
-  onChange: (event: SyntheticEvent<TSinchTabsElement, CustomEvent<string>>) => void,
-}
 
 declare global {
   namespace JSX {

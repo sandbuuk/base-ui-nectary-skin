@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
-import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip'
+import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip/types'
 
 const withEmpty = '/textarea?width=200&label=Label'
 const withValue = '/textarea?width=200&label=Label&value=Input%20value'

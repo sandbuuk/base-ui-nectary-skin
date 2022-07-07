@@ -9,8 +9,7 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchCheckboxElement, TSinchCheckboxReact } from './types'
 
 const template = document.createElement('template')
 
@@ -140,27 +139,6 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
     )
   }
 })
-
-export type TSinchCheckboxElement = HTMLElement & {
-  checked: boolean,
-  indeterminate: boolean,
-  disabled: boolean,
-  invalid: boolean,
-  text: string | null,
-  focus(): void,
-  blur(): void,
-  addEventListener(type: 'change', listener: (this: TSinchCheckboxElement, e: CustomEvent<boolean>) => void): void,
-}
-
-export type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
-  checked?: boolean,
-  indeterminate?: boolean,
-  disabled?: boolean,
-  invalid?: boolean,
-  text?: string,
-  'aria-label': string,
-  onChange: (event: SyntheticEvent<TSinchCheckboxElement, CustomEvent<boolean>>) => void,
-}
 
 declare global {
   namespace JSX {
