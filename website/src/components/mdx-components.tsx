@@ -26,13 +26,13 @@ export const mdxComponents: MDXComponents = {
     <sinch-title type="m" level="6" text={children as string}/>
   ),
   p: ({ children }) => (
-    <p>
+    <sinch-text type="m">
       {Children.map(children, (child) => (
         typeof child === 'string'
-          ? <sinch-text inline type="m" text={child}/>
+          ? <sinch-text inline type="m">{child}</sinch-text>
           : child
       ))}
-    </p>
+    </sinch-text>
   ),
   a: ({ href = '#', children }) => {
     const isExternal = href.startsWith('http')
