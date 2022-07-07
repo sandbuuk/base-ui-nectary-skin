@@ -4,8 +4,7 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent, MouseEvent } from 'react'
+import type { TSinchTagCloseElement, TSinchTagCloseReact } from './types'
 
 const template = document.createElement('template')
 
@@ -32,17 +31,6 @@ defineCustomElement('sinch-tag-close', class extends NectaryElement {
     this.#$button.blur()
   }
 })
-
-export type TSinchTagCloseElement = HTMLElement & {
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchTagCloseReact = TSinchElementReact<TSinchTagCloseElement> & {
-  onClick?: (e: MouseEvent<TSinchTagCloseElement>) => void,
-  onFocus?: (e: FocusEvent<TSinchTagCloseElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchTagCloseElement>) => void,
-}
 
 declare global {
   namespace JSX {

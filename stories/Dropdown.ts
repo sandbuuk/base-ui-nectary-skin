@@ -61,13 +61,14 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdown']> => ({ onChange }) => {
+const Template = (innerHTML: string): Story => () => {
   const [{
     open,
     multiple,
     value,
     maxVisibleItems,
     orientation,
+    onChange,
   }, updateArgs] = useArgs()
 
   const $wrapper = useStoryWrapper()
@@ -83,7 +84,7 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-dropdow
       $dropdown.setAttribute('open', '')
     })
 
-    $dropdown.addEventListener('change', (e: any) => {
+    $dropdown.addEventListener('change', (e) => {
       onChange(e.detail)
       updateArgs({ value: e.detail, open: false })
       // https://github.com/storybookjs/storybook/issues/11657

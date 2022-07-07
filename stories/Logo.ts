@@ -1,5 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchLogoElement, TSinchLogoReact } from '@sinch-engage/nectary/logo/types'
+import type { TSinchLogoElement } from '@sinch-engage/nectary/logo/types'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/logo/sinch-icon'
 import '@sinch-engage/nectary/logo/sinch-icon-wordmark'
@@ -16,7 +16,7 @@ export default {
   },
 } as Meta
 
-const Template = (iconTagName: string): Story<TSinchLogoReact> => () => {
+const Template = (iconTagName: string): Story => () => {
   const [{ size, inverted }] = useArgs()
   const iconRef = useRef<TSinchLogoElement | null>(null)
 

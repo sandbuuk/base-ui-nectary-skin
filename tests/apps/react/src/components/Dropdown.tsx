@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover'
+import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover/types'
 import type { FC, SyntheticEvent } from 'react'
 import '@sinch-engage/nectary/dropdown'
 import '@sinch-engage/nectary/dropdown-text-option'

@@ -1,6 +1,6 @@
-import type { TSinchPopoverOrientation } from '../popover'
+import type { TSinchPopoverOrientation } from '../popover/types'
 import type { TRect, TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 export type TSinchDropdownElement = HTMLElement & {
   open: boolean,
@@ -11,6 +11,13 @@ export type TSinchDropdownElement = HTMLElement & {
   readonly dropdownRect: TRect,
   focus(): void,
   blur(): void,
+  addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
+  addEventListener(type: 'close', listener: (e: CustomEvent<void>) => void): void,
+  setAttribute(name: 'open', value: ''): void,
+  setAttribute(name: 'multiple', value: ''): void,
+  setAttribute(name: 'orientation', value: TSinchPopoverOrientation): void,
+  setAttribute(name: 'value', value: string): void,
+  setAttribute(name: 'maxvisibleitems', value: string): void,
 }
 
 export type TSinchDropdownReact = TSinchElementReact<TSinchDropdownElement> & {
@@ -22,6 +29,4 @@ export type TSinchDropdownReact = TSinchElementReact<TSinchDropdownElement> & {
   'aria-label': string,
   onClose: (event: SyntheticEvent<TSinchDropdownElement, CustomEvent<void>>) => void,
   onChange: (e: SyntheticEvent<TSinchDropdownElement, CustomEvent<string>>) => void,
-  onFocus?: (e: FocusEvent<TSinchDropdownElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchDropdownElement>) => void,
 }

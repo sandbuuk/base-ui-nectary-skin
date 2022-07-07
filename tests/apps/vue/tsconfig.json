@@ -14,5 +14,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
+    "paths": {
+      "react": ["./empty.d.ts"]
+    }
   },
 }

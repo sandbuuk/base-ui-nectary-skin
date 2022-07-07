@@ -38,7 +38,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHtml?: string): Story<JSX.IntrinsicElements['sinch-avatar']> => () => {
+const Template = (innerHtml?: string): Story => () => {
   const [{
     size,
     background,

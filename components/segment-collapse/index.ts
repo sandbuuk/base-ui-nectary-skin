@@ -7,10 +7,10 @@ import {
   isAttrTrue,
   NectaryElement,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { TSinchSegmentExpandElement, TSinchSegmentExpandReact } from './types'
 
 const template = document.createElement('template')
 
@@ -31,7 +31,6 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
-    this.setAttribute('aria-checked', String(getBooleanAttribute(this, 'value')))
     this.#$button.addEventListener('click', this.onClick)
   }
 
@@ -46,7 +45,7 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.setAttribute('aria-checked', String(isAttrTrue(newVal)))
+        updateExplicitBooleanAttribute(this, 'aria-checked', isAttrTrue(newVal))
 
         break
       }
@@ -91,20 +90,6 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
     )
   }
 })
-
-export type TSinchSegmentExpandElement = HTMLElement & {
-  value: boolean,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchSegmentExpandReact = TSinchElementReact<TSinchSegmentExpandElement> & {
-  value: boolean,
-  'aria-label': string,
-  onChange: (e: SyntheticEvent<TSinchSegmentExpandElement, CustomEvent<boolean>>) => void,
-  onFocus?: (e: FocusEvent<TSinchSegmentExpandElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchSegmentExpandElement>) => void,
-}
 
 declare global {
   namespace JSX {

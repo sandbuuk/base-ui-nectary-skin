@@ -5,17 +5,8 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-
-const colorValues = ['red', 'yellow', 'green', 'grey'] as const
-
-type TAssertColor = (value: string | null) => asserts value is TSinchAvatarStatusColor
-
-const assertColor: TAssertColor = (value) => {
-  if (value === null || !colorValues.includes(value as any)) {
-    throw new Error(`sinch-avatar-status: invalid color attribute: ${value}`)
-  }
-}
+import { assertColor, colorValues } from './utils'
+import type { TSinchAvatarStatusElement, TSinchAvatarStatusReact } from './types'
 
 const template = document.createElement('template')
 
@@ -56,16 +47,6 @@ defineCustomElement('sinch-avatar-status', class extends NectaryElement {
     updateLiteralAttribute(this, colorValues, 'color', value)
   }
 })
-
-export type TSinchAvatarStatusColor = typeof colorValues[number]
-
-export type TSinchAvatarStatusElement = HTMLElement & {
-  color: TSinchAvatarStatusColor,
-}
-
-export type TSinchAvatarStatusReact = TSinchElementReact<TSinchAvatarStatusElement> & {
-  color: TSinchAvatarStatusColor,
-}
 
 declare global {
   namespace JSX {

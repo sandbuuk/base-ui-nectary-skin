@@ -39,7 +39,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-action-menu']> => () => {
+const Template = (innerHTML: string): Story => () => {
   const [{
     open,
     maxVisibleItems,

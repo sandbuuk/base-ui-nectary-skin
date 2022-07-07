@@ -15,7 +15,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-icon-button']> => () => {
+const Template = (innerHTML: string): Story => () => {
   const [{ disabled, small }] = useArgs()
   const buttonRef = useRef<HTMLElementTagNameMap['sinch-icon-button'] | null>(null)
 

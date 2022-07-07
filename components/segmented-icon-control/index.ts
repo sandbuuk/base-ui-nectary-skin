@@ -10,8 +10,7 @@ import {
   updateCsv,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
+import type { TSinchSegmentedIconControlElement, TSinchSegmentedIconControlReact } from './types'
 
 const template = document.createElement('template')
 
@@ -115,18 +114,6 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
     }
   }
 })
-
-export type TSinchSegmentedIconControlElement = HTMLElement & {
-  value: string,
-  multiple: boolean,
-}
-
-export type TSinchSegmentedIconControlReact = TSinchElementReact<TSinchSegmentedIconControlElement> & {
-  value: string,
-  multiple?: boolean,
-  'aria-label': string,
-  onChange: (event: SyntheticEvent<TSinchSegmentedIconControlElement, CustomEvent<string>>) => void,
-}
 
 declare global {
   namespace JSX {

@@ -1,6 +1,6 @@
 import type { TSinchElementReact } from '../types'
 import type { inputTypes } from './utils'
-import type { DOMAttributes, FocusEvent, SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 export type TTextInputType = typeof inputTypes[number]
 
@@ -18,11 +18,19 @@ export type TSinchInputElement = HTMLElement & {
   selectionDirection: HTMLInputElement['selectionDirection'],
   focus(): void,
   blur(): void,
+  addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
+  setAttribute(name: 'type', value: TTextInputType): void,
+  setAttribute(name: 'value', value: string): void,
+  setAttribute(name: 'label', value: string): void,
+  setAttribute(name: 'placeholder', value: string): void,
+  setAttribute(name: 'optionaltext', value: string): void,
+  setAttribute(name: 'invalidtext', value: string): void,
+  setAttribute(name: 'additionaltext', value: string): void,
+  setAttribute(name: 'disabled', value: ''): void,
 }
 
 export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   type?: TTextInputType,
-  /** Sets the text inside of an input field */
   value: string,
   label: string,
   placeholder?: string,
@@ -32,7 +40,4 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   disabled?: boolean,
   'aria-label': string,
   onChange: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
-  onKeyPress?: DOMAttributes<TSinchInputElement>['onKeyPress'],
-  onFocus?: (e: FocusEvent<TSinchInputElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchInputElement>) => void,
 }

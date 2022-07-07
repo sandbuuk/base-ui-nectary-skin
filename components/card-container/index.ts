@@ -1,6 +1,6 @@
 import { defineCustomElement, NectaryElement } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchCardContainerElement, TSinchCardContainerReact } from './types'
 
 const template = document.createElement('template')
 
@@ -15,12 +15,6 @@ defineCustomElement('sinch-card-container', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
   }
 })
-
-export type TSinchCardContainerElement = HTMLElement & {
-}
-
-export type TSinchCardContainerReact = TSinchElementReact<TSinchCardContainerElement> & {
-}
 
 declare global {
   namespace JSX {

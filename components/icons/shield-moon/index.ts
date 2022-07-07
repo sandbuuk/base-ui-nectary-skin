@@ -1,0 +1,18 @@
+import { defineCustomElement } from '../../utils'
+import { createIconClass } from '../create-icon-class'
+import templateHTML from './template.html'
+import type { TSinchIconElement, TSinchIconReact } from '../types'
+
+defineCustomElement('sinch-icon-shield-moon', createIconClass(templateHTML))
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-shield-moon': TSinchIconReact,
+    }
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-icon-shield-moon': TSinchIconElement,
+  }
+}

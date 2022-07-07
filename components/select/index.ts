@@ -8,13 +8,13 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDropdownElement } from '../dropdown/types'
 import type { TSinchSelectOptionElement } from '../select-option/types'
-import type { TRect, TSinchElementReact } from '../types'
-import type { FocusEvent, SyntheticEvent } from 'react'
+import type { TSinchSelectElement, TSinchSelectReact } from './types'
 
 const template = document.createElement('template')
 
@@ -51,6 +51,7 @@ defineCustomElement('sinch-select', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'listbox')
+    this.setAttribute('aria-haspopup', 'listbox')
 
     this.#$dropdown.addEventListener('change', this.#onValueChange)
     this.#$dropdown.addEventListener('close', this.#onDropdownClose)
@@ -185,15 +186,20 @@ defineCustomElement('sinch-select', class extends NectaryElement {
       }
 
       case 'invalidtext': {
+        const isInvalid = newVal !== null && newVal !== ''
+
         this.#$invalidText.textContent = newVal
-        updateAttribute(this, 'aria-invalid', String(newVal !== null && newVal !== ''))
+        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
 
         break
       }
 
       case 'disabled': {
-        updateAttribute(this.#$dropdown, 'disabled', newVal)
-        this.#$button.disabled = isAttrTrue(newVal)
+        const isDisabled = isAttrTrue(newVal)
+
+        updateBooleanAttribute(this.#$dropdown, 'disabled', isDisabled)
+        updateBooleanAttribute(this, 'disabled', isDisabled)
+        this.#$button.disabled = isDisabled
 
         break
       }
@@ -277,35 +283,6 @@ defineCustomElement('sinch-select', class extends NectaryElement {
     this.#$dropdown.blur()
   }
 })
-
-export type TSinchSelectElement = HTMLElement & {
-  value: string,
-  label: string,
-  placeholder: string | null,
-  optionalText: string | null,
-  invalidText: string | null,
-  additionalText: string | null,
-  disabled: boolean,
-  maxVisibleItems: number | null,
-  readonly dropdownRect: TRect,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
-  value: string,
-  label: string,
-  placeholder?: string,
-  optionalText?: string,
-  invalidText?: string,
-  additionalText?: string,
-  disabled?: boolean,
-  maxVisibleItems?: number,
-  'aria-label': string,
-  onChange: (e: SyntheticEvent<TSinchSelectElement, CustomEvent<string>>) => void,
-  onFocus?: (e: FocusEvent<TSinchSelectElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchSelectElement>) => void,
-}
 
 declare global {
   namespace JSX {

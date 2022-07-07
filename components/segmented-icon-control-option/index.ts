@@ -6,17 +6,17 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent } from 'react'
+import type { TSinchSegmentedIconControlOptionElement, TSinchSegmentedIconControlOptionReact } from './types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-icon-control-option', class extends NectaryElement {
-  $button: HTMLButtonElement
+  #$button: HTMLButtonElement
 
   constructor() {
     super()
@@ -25,28 +25,20 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$button = shadowRoot.querySelector('#button')!
+    this.#$button = shadowRoot.querySelector('#button')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'tab')
-    this.$button.addEventListener('click', this.#onClick)
+    this.#$button.addEventListener('click', this.#onClick)
   }
 
   disconnectedCallback() {
-    this.$button.removeEventListener('click', this.#onClick)
+    this.#$button.removeEventListener('click', this.#onClick)
   }
 
   static get observedAttributes() {
     return ['checked', 'disabled', 'value']
-  }
-
-  set checked(isChecked: boolean) {
-    updateBooleanAttribute(this, 'checked', isChecked)
-  }
-
-  get checked() {
-    return getBooleanAttribute(this, 'checked')
   }
 
   set value(value: string) {
@@ -68,12 +60,12 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'checked': {
-        updateAttribute(this, 'aria-selected', isAttrTrue(newVal))
+        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
 
         break
       }
       case 'disabled': {
-        this.$button.disabled = isAttrTrue(newVal)
+        this.#$button.disabled = isAttrTrue(newVal)
 
         break
       }
@@ -81,11 +73,11 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
   }
 
   focus() {
-    this.$button.focus()
+    this.#$button.focus()
   }
 
   blur() {
-    this.$button.blur()
+    this.#$button.blur()
   }
 
   #onClick = (e: Event) => {
@@ -99,22 +91,6 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
     )
   }
 })
-
-export type TSinchSegmentedIconControlOptionElement = HTMLElement & {
-  value: string,
-  disabled: boolean,
-  checked: boolean,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchSegmentedIconControlOptionReact = TSinchElementReact<TSinchSegmentedIconControlOptionElement> & {
-  value: string,
-  disabled?: boolean,
-  'aria-label': string,
-  onFocus?: (e: FocusEvent<TSinchSegmentedIconControlOptionElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchSegmentedIconControlOptionElement>) => void,
-}
 
 declare global {
   namespace JSX {

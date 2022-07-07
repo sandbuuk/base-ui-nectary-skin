@@ -8,6 +8,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -63,14 +64,6 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
     return getAttribute(this, 'label', '')
   }
 
-  set checked(isChecked: boolean) {
-    updateBooleanAttribute(this, 'checked', isChecked)
-  }
-
-  get checked() {
-    return getBooleanAttribute(this, 'checked')
-  }
-
   set disabled(isDisabled: boolean) {
     updateBooleanAttribute(this, 'disabled', isDisabled)
   }
@@ -110,7 +103,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
       }
 
       case 'checked': {
-        updateAttribute(this.#$button, 'aria-expanded', isAttrTrue(newVal))
+        updateExplicitBooleanAttribute(this.#$button, 'aria-expanded', isAttrTrue(newVal))
 
         break
       }

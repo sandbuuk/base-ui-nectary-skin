@@ -10,10 +10,8 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-import type { FocusEvent, MouseEvent } from 'react'
-
-const buttonTypes = ['primary', 'secondary', 'cta-primary', 'cta-secondary', 'destructive'] as const
+import { buttonTypes } from './utils'
+import type { TSinchButtonElement, TSinchButtonReact, TSinchButtonType } from './types'
 
 const template = document.createElement('template')
 
@@ -50,7 +48,10 @@ defineCustomElement('sinch-button', class extends NectaryElement {
         break
       }
       case 'disabled': {
-        this.#$button.disabled = isAttrTrue(newVal)
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$button.disabled = isDisabled
+        updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
       }
@@ -97,28 +98,6 @@ defineCustomElement('sinch-button', class extends NectaryElement {
     this.#$button.blur()
   }
 })
-
-export type TSinchButtonType = typeof buttonTypes[number]
-
-export type TSinchButtonElement = HTMLElement & {
-  type: TSinchButtonType,
-  text: string,
-  disabled: boolean,
-  small: boolean,
-  focus(): void,
-  blur(): void,
-}
-
-export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
-  type: TSinchButtonType,
-  text: string,
-  'aria-label': string,
-  disabled?: boolean,
-  small?: boolean,
-  onClick: (e: MouseEvent<TSinchButtonElement>) => void,
-  onFocus?: (e: FocusEvent<TSinchButtonElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchButtonElement>) => void,
-}
 
 declare global {
   namespace JSX {

@@ -14,7 +14,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<JSX.IntrinsicElements['sinch-toggle']> = ({ onChange }) => {
+const Template: Story = ({ onChange }) => {
   const [{ checked, small, labeled, disabled, text }, updateArgs] = useArgs()
   const checkboxRef = useRef<HTMLElementTagNameMap['sinch-toggle'] | null>(null)
 
@@ -23,7 +23,7 @@ const Template: Story<JSX.IntrinsicElements['sinch-toggle']> = ({ onChange }) =>
 
     let timeId: any
 
-    $checkbox.addEventListener('change', (e: any) => {
+    $checkbox.addEventListener('change', (e) => {
       onChange(e.detail)
 
       // optimistic update

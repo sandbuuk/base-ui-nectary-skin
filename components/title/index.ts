@@ -8,25 +8,8 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-
-const typeValues = ['xl', 'l', 'm', 's', 'xs'] as const
-const levelValues = ['1', '2', '3', '4', '5', '6'] as const
-
-type TAssertLevel = (value: string | null) => asserts value is TSinchTitleLevel
-type TAssertType = (value: string | null) => asserts value is TSinchTitleType
-
-const assertLevel: TAssertLevel = (value) => {
-  if (value === null || !levelValues.includes(value as any)) {
-    throw new Error(`sinch-title: invalid aria-level attribute: ${value}`)
-  }
-}
-
-const assertType: TAssertType = (value) => {
-  if (value === null || !typeValues.includes(value as any)) {
-    throw new Error(`sinch-title: invalid type attribute: ${value}`)
-  }
-}
+import { assertLevel, assertType, typeValues } from './utils'
+import type { TSinchTitleElement, TSinchTitleReact, TSinchTitleType } from './types'
 
 const template = document.createElement('template')
 
@@ -93,20 +76,6 @@ defineCustomElement('sinch-title', class extends NectaryElement {
     }
   }
 })
-
-export type TSinchTitleType = typeof typeValues[number]
-export type TSinchTitleLevel = typeof levelValues[number]
-
-export type TSinchTitleElement = HTMLElement & {
-  text: string,
-  type: TSinchTitleType,
-}
-
-export type TSinchTitleReact = TSinchElementReact<TSinchTitleElement> & {
-  text: string,
-  type: TSinchTitleType,
-  'aria-level': TSinchTitleLevel,
-}
 
 declare global {
   namespace JSX {

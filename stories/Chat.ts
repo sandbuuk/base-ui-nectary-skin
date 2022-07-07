@@ -10,7 +10,7 @@ export default {
   argTypes: {},
 } as Meta
 
-const Template = (innerHTML: string = ''): Story<JSX.IntrinsicElements['sinch-chat']> => () => {
+const Template = (innerHTML: string = ''): Story => () => {
   // const [{ header, label, text, disabled }] = useArgs()
   const chatRef = useRef<HTMLElementTagNameMap['sinch-chat'] | null>(null)
 

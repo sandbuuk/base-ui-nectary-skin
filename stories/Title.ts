@@ -21,7 +21,7 @@ export default {
   },
 } as Meta
 
-const Template = (): Story<JSX.IntrinsicElements['sinch-title']> => () => {
+const Template = (): Story => () => {
   const [args] = useArgs()
   const titleRef = useRef<HTMLElementTagNameMap['sinch-title'] | null>(null)
 

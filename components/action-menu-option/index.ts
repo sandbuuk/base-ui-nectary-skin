@@ -71,14 +71,6 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set selected(isSelected: boolean) {
-    updateBooleanAttribute(this, 'data-selected', isSelected)
-  }
-
-  get selected() {
-    return getBooleanAttribute(this, 'data-selected')
-  }
-
   focus() {
     this.#$button.focus()
   }

@@ -7,6 +7,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -206,14 +207,19 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       }
 
       case 'invalidtext': {
+        const isInvalid = newVal !== null && newVal !== ''
+
         this.#$invalidText.textContent = newVal
-        updateAttribute(this, 'aria-invalid', String(newVal !== null && newVal !== ''))
+        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
 
         break
       }
 
       case 'disabled': {
-        this.#$input.disabled = isAttrTrue(newVal)
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$input.disabled = isDisabled
+        updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
       }

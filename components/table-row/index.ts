@@ -5,7 +5,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchTableRowElement, TSinchTableRowReact } from './types'
 
 const template = document.createElement('template')
 
@@ -40,16 +40,6 @@ defineCustomElement('sinch-table-row', class extends NectaryElement {
     return getBooleanAttribute(this, 'selected')
   }
 })
-
-export type TSinchTableRowElement = HTMLElement & {
-  sticky: boolean,
-  selected: boolean,
-}
-
-export type TSinchTableRowReact = TSinchElementReact<TSinchTableRowElement> & {
-  sticky?: boolean,
-  selected?: boolean,
-}
 
 declare global {
   namespace JSX {

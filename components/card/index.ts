@@ -8,7 +8,7 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchCardElement, TSinchCardReact } from './types'
 
 const template = document.createElement('template')
 
@@ -17,7 +17,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-card', class extends NectaryElement {
   #$text: HTMLElement
   #$label: HTMLElement
-  #$title: HTMLElement
+  #$caption: HTMLElement
   #$illustrationSlot: HTMLSlotElement
   #$actionSlot: HTMLSlotElement
   #$illustrationSlotWrapper: HTMLElement
@@ -31,7 +31,7 @@ defineCustomElement('sinch-card', class extends NectaryElement {
 
     this.#$text = shadowRoot.querySelector('#description')!
     this.#$label = shadowRoot.querySelector('#label')!
-    this.#$title = shadowRoot.querySelector('#title')!
+    this.#$caption = shadowRoot.querySelector('#caption')!
 
     this.#$illustrationSlot = shadowRoot.querySelector('slot[name="illustration"]')!
     this.#$actionSlot = shadowRoot.querySelector('slot[name="action"]')!
@@ -39,8 +39,6 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   }
 
   connectedCallback() {
-    // this.setAttribute('role', 'button')
-
     this.#$illustrationSlot.addEventListener('slotchange', this.#onIllustrationSlotChange)
     this.#$actionSlot.addEventListener('slotchange', this.#updateDisabledAttributeInChildren)
   }
@@ -51,7 +49,7 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'label', 'header', 'disabled']
+    return ['text', 'label', 'caption', 'disabled']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -66,8 +64,8 @@ defineCustomElement('sinch-card', class extends NectaryElement {
 
         break
       }
-      case 'header': {
-        this.#$title.textContent = newVal
+      case 'caption': {
+        this.#$caption.textContent = newVal
 
         break
       }
@@ -87,12 +85,12 @@ defineCustomElement('sinch-card', class extends NectaryElement {
     return getAttribute(this, 'text', '')
   }
 
-  set header(value: string) {
-    updateAttribute(this, 'header', value)
+  set caption(value: string) {
+    updateAttribute(this, 'caption', value)
   }
 
-  get header(): string {
-    return getAttribute(this, 'header', '')
+  get caption(): string {
+    return getAttribute(this, 'caption', '')
   }
 
   set label(value: string) {
@@ -121,20 +119,6 @@ defineCustomElement('sinch-card', class extends NectaryElement {
     }
   }
 })
-
-export type TSinchCardElement = HTMLElement & {
-  text: string,
-  label: string,
-  header: string,
-  disabled: boolean,
-}
-
-export type TSinchCardReact = TSinchElementReact<TSinchCardElement> & {
-  text: string,
-  label?: string,
-  header: string,
-  disabled?: boolean,
-}
 
 declare global {
   namespace JSX {

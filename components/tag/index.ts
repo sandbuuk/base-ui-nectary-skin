@@ -10,9 +10,8 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-
-const categoryValues = ['candy', 'bolt', 'aqua', 'grass', 'berry', 'orange', 'night', 'mud', 'dirt'] as const
+import { categoryValues } from './utils'
+import type { TSinchTagCategory, TSinchTagElement, TSinchTagReact } from './types'
 
 const template = document.createElement('template')
 
@@ -77,22 +76,6 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
     }
   }
 })
-
-export type TSinchTagCategory = typeof categoryValues[number]
-
-export type TSinchTagElement = HTMLElement & {
-  category: TSinchTagCategory | null,
-  text: string,
-  inverted: boolean,
-  small: boolean,
-}
-
-export type TSinchTagReact = TSinchElementReact<TSinchTagElement> & {
-  category?: TSinchTagCategory,
-  text: string,
-  inverted?: boolean,
-  small?: boolean,
-}
 
 declare global {
   namespace JSX {

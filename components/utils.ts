@@ -59,14 +59,6 @@ export const getReactEventHandler = ($element: HTMLElement, handlerName: string)
   return null
 }
 
-export const updateBooleanAttribute = ($element: Element, attrName: string, attrValue: boolean | null | undefined) => {
-  if (attrValue === true) {
-    $element.setAttribute(attrName, '')
-  } else {
-    $element.removeAttribute(attrName)
-  }
-}
-
 export const updateExplicitBooleanAttribute = ($element: Element, attrName: string, attrValue: boolean | null | undefined) => {
   $element.setAttribute(attrName, attrValue === true ? 'true' : 'false')
 }
@@ -77,6 +69,18 @@ export const isAttrTrue = (attrValue: string | null): boolean => {
 
 export const getBooleanAttribute = ($element: Element, attrName: string) => {
   return isAttrTrue($element.getAttribute(attrName))
+}
+
+export const updateBooleanAttribute = ($element: Element, attrName: string, attrValue: boolean | null | undefined) => {
+  const isCurrentValueTrue = getBooleanAttribute($element, attrName)
+
+  if (attrValue === true) {
+    if (!isCurrentValueTrue) {
+      $element.setAttribute(attrName, '')
+    }
+  } else if (isCurrentValueTrue) {
+    $element.removeAttribute(attrName)
+  }
 }
 
 export const updateAttribute = ($element: Element, attrName: string, attrValue: string | number | boolean | null | undefined) => {

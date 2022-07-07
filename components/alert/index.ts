@@ -9,9 +9,8 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-
-const typeValues = ['info', 'success', 'warn', 'error'] as const
+import { typeValues } from './utils'
+import type { TSinchAlertElement, TSinchAlertReact, TSinchAlertType } from './types'
 
 const template = document.createElement('template')
 
@@ -19,7 +18,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-alert', class extends NectaryElement {
   #$text: HTMLParagraphElement
-  #$title: HTMLParagraphElement
+  #$caption: HTMLParagraphElement
 
   constructor() {
     super()
@@ -29,7 +28,7 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$text = shadowRoot.querySelector('#text')!
-    this.#$title = shadowRoot.querySelector('#title')!
+    this.#$caption = shadowRoot.querySelector('#caption')!
   }
 
   get type() {
@@ -48,12 +47,12 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
     updateAttribute(this, 'text', value)
   }
 
-  get title() {
-    return getAttribute(this, 'title', '')
+  get caption() {
+    return getAttribute(this, 'caption', '')
   }
 
-  set title(value: string) {
-    updateAttribute(this, 'title', value)
+  set caption(value: string) {
+    updateAttribute(this, 'caption', value)
   }
 
   get multiline() {
@@ -65,7 +64,7 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'title']
+    return ['text', 'caption']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -75,30 +74,14 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
 
         break
       }
-      case 'title': {
-        this.#$title.textContent = newVal
+      case 'caption': {
+        this.#$caption.textContent = newVal
 
         break
       }
     }
   }
 })
-
-export type TSinchAlertType = typeof typeValues[number]
-
-export type TSinchAlertElement = HTMLElement & {
-  type: TSinchAlertType,
-  text: string,
-  title: string,
-  multiline: boolean,
-}
-
-export type TSinchAlertReact = TSinchElementReact<TSinchAlertElement> & {
-  type: TSinchAlertType,
-  text: string,
-  title?: string,
-  multiline?: boolean,
-}
 
 declare global {
   namespace JSX {

@@ -1,5 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '@sinch-engage/nectary/icons-branded/types'
+import type { TSinchIconBrandedElement } from '@sinch-engage/nectary/icons-branded/types'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/icons-branded/bell'
 import '@sinch-engage/nectary/icons-branded/home'
@@ -51,7 +51,7 @@ export default {
   },
 } as Meta
 
-const Template = (): Story<TSinchIconBrandedReact> => () => {
+const Template = (): Story => () => {
   const [{ size, inverted }] = useArgs()
   const wrapperRef = useRef<HTMLElement | null>(null)
 

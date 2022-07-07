@@ -1,5 +1,4 @@
 import type { TSinchElementReact } from '../types'
-import type { FocusEvent } from 'react'
 
 export type TSinchTabsOptionElement = HTMLElement & {
   value: string,
@@ -8,6 +7,10 @@ export type TSinchTabsOptionElement = HTMLElement & {
   text: string,
   focus(): void,
   blur(): void,
+  setAttribute(name: 'value', value: string): void,
+  setAttribute(name: 'disabled', value: ''): void,
+  setAttribute(name: 'checked', value: ''): void,
+  setAttribute(name: 'text', value: string): void,
 }
 
 export type TSinchTabsOptionReact = TSinchElementReact<TSinchTabsOptionElement> & {
@@ -15,6 +18,4 @@ export type TSinchTabsOptionReact = TSinchElementReact<TSinchTabsOptionElement> 
   disabled?: boolean,
   text: string,
   'aria-label': string,
-  onFocus?: (e: FocusEvent<TSinchTabsOptionElement>) => void,
-  onBlur?: (e: FocusEvent<TSinchTabsOptionElement>) => void,
 }

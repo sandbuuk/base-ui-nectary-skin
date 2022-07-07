@@ -1,8 +1,7 @@
 import { defineCustomElement, getLiteralAttribute, NectaryElement, updateLiteralAttribute } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
-
-const spinnerTypes = ['large', 'medium', 'small'] as const
+import { spinnerTypes } from './utils'
+import type { TSinchSpinnerElement, TSinchSpinnerReact, TSinchSpinnerType } from './types'
 
 const template = document.createElement('template')
 
@@ -30,17 +29,6 @@ defineCustomElement('sinch-spinner', class extends NectaryElement {
     return getLiteralAttribute(this, spinnerTypes, 'type', 'medium')
   }
 })
-
-export type TSinchSpinnerType = typeof spinnerTypes[number]
-
-export type TSinchSpinnerElement = HTMLElement & {
-  type: TSinchSpinnerType,
-}
-
-export type TSinchSpinnerReact = TSinchElementReact<TSinchSpinnerElement> & {
-  type?: TSinchSpinnerType,
-  static?: boolean,
-}
 
 declare global {
   namespace JSX {

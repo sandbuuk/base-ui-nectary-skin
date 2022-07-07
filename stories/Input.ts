@@ -51,7 +51,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-input']> => ({ onChange }) => {
+const Template = (innerHTML: string): Story => ({ onChange }) => {
   const [{
     value,
     label,
@@ -73,8 +73,8 @@ const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-input']
       e.stopPropagation()
     })
 
-    $input.addEventListener('change', (e: any) => {
-      onChange(e.detail)
+    $input.addEventListener('change', (e) => {
+      onChange?.(e.detail)
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)

@@ -21,7 +21,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story<JSX.IntrinsicElements['sinch-table']> => () => {
+const Template = (innerHTML: string): Story => () => {
   const tableRef = useRef<HTMLElementTagNameMap['sinch-table'] | null>(null)
 
   if (tableRef.current === null) {

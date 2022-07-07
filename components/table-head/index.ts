@@ -3,7 +3,7 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchElementReact } from '../types'
+import type { TSinchTableHeadElement, TSinchTableHeadReact } from './types'
 
 const template = document.createElement('template')
 
@@ -22,10 +22,6 @@ defineCustomElement('sinch-table-head', class extends NectaryElement {
     this.setAttribute('role', 'rowgroup')
   }
 })
-
-export type TSinchTableHeadElement = HTMLElement
-
-export type TSinchTableHeadReact = TSinchElementReact<TSinchTableHeadElement>
 
 declare global {
   namespace JSX {
