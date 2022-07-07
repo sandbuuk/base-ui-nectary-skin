@@ -28,6 +28,7 @@ import { SegmentComponent } from '../components/Segment/Segment.component'
 import { AvatarComponent } from '../components/Avatar/Avatar.component'
 import { ChatComponent } from '../components/Chat/Chat.component'
 import { TitleComponent } from '../components/Title/Title.component'
+import { TextComponent } from '../components/Text/Text.component'
 import { PopoverComponent } from '../components/Popover/Popover.component'
 import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
 import { SegmentedIconControlComponent } from '../components/SegmentedIconControl/SegmentedIconControl.component'
@@ -65,6 +66,7 @@ import { AppComponent } from './app.component'
     AvatarComponent,
     ChatComponent,
     TitleComponent,
+    TextComponent,
     PopoverComponent,
     SegmentedControlComponent,
     SegmentedIconControlComponent,
