@@ -1,3 +1,13 @@
+## v0.29.0
+
+* 💥 rename `title` to `caption` in `sinch-alert`
+* 💥 rename `header` to `caption` in `sinch-card`
+* 💥 rename `aria-level` to `level` property in `sinch-title`
+* ➕ add `sinch-list` component
+* ➕ add `sinch-text` component
+* ➕ add `--sinch-font-text-*` variables to `theme.css`
+* ➕ add all MUI icons
+
 ## v0.28.0
 
 * 💥 remove index file
