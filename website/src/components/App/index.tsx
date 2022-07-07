@@ -1,15 +1,15 @@
 import { MDXProvider } from '@mdx-js/react'
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Link, Outlet, Route, Routes } from 'react-router-dom'
-import { ComponentsPage } from '../../pages/Components'
-import { IntroPage } from '../../pages/Intro'
-import { NotFoundPage } from '../../pages/NotFound'
 import { mdxComponents } from '../mdx-components'
 import type { FC } from 'react'
+import { ComponentsPage } from '~/pages/Components'
+import { IntroPage } from '~/pages/Intro'
+import { NotFoundPage } from '~/pages/NotFound'
 import '@sinch-engage/nectary/theme.css'
 import './styles.css'
 
-const req = require.context('../../pages/Components/', true, /^\.\/.*\/index\.mdx$/, 'lazy')
+const req = require.context('~/pages/Components/', true, /^\.\/.*\/index\.mdx$/, 'lazy')
 const nameRegexp = /^\.\/(.+?)\/.+$/
 
 export const App: FC<{}> = () => (

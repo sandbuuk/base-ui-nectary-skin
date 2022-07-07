@@ -15,6 +15,9 @@ const config: Configuration = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
+    alias: {
+      '~': path.resolve('./src/'),
+    },
   },
   module: {
     rules: [

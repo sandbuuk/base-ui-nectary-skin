@@ -14,5 +14,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ]
+    },
   },
 }
