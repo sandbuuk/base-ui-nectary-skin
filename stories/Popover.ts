@@ -1,3 +1,4 @@
+import { orientationValues } from '@sinch-engage/nectary/popover/utils'
 import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from './use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
@@ -14,7 +15,7 @@ export default {
     orientation: {
       description: 'Popover Orientation',
       control: 'select',
-      options: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+      options: orientationValues,
     },
     onClose: {
       description: 'Close event handler',
