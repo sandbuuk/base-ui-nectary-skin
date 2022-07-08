@@ -15,15 +15,7 @@ export const Example: FC<TExample> = ({ Component }) => {
       mode: 'closed',
     })
 
-    render(
-      (
-        <>
-          <Component/>
-          <Code src={Component.toString()} title="Code"/>
-        </>
-      ),
-      shadowRoot
-    )
+    render(<Component/>, shadowRoot)
 
     return () => {
       unmountComponentAtNode(shadowRoot)
@@ -31,6 +23,9 @@ export const Example: FC<TExample> = ({ Component }) => {
   }, [])
 
   return (
-    <section className="example" ref={ref}/>
+    <div className="example">
+      <section className="example-container" ref={ref}/>
+      <Code src={Component.toString()} title="Code"/>
+    </div>
   )
 }

@@ -10,3 +10,28 @@
   flex: 1;
   padding: 10px;
 }
+
+sinch-title + sinch-text {
+  margin-block-start: 16px;
+}
+
+sinch-title + sinch-title {
+  margin-block-start: 8px;
+}
+
+sinch-text + .example-code {
+  margin-block-start: 16px;
+}
+
+.example {
+  margin-block-start: 16px;
+}
+
+.example + sinch-title,
+.example-code + sinch-title {
+  margin-block-start: 16px;
+}
+
+.example-container + .example-code {
+  margin-block-start: 16px;
+}
