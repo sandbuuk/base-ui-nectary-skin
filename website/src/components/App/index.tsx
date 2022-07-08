@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
-import { Suspense } from 'react'
+import { Suspense, StrictMode } from 'react'
 import { BrowserRouter, Link, Outlet, Route, Routes } from 'react-router-dom'
+import { Loading } from '../Loading'
 import { mdxComponents } from '../mdx-components'
 import type { FC } from 'react'
 import { ComponentsPage } from '~/pages/Components'
@@ -14,53 +15,55 @@ const req = require.context('~/pages/Components/', true, /^\.\/.*\/index\.mdx$/,
 const nameRegexp = /^\.\/(.+?)\/.+$/
 
 export const App: FC = () => (
-  <MDXProvider components={mdxComponents}>
-    <BrowserRouter>
-      <div id="app-sidebar">
-        <ul>
-          <li>
-            <Link to="/">👋 Intro</Link>
-          </li>
-          <li>
-            <Link to="/components">🍱 Components</Link>
-            <ul>
-              {req.keys().map((key) => {
-                const name = key.replace(nameRegexp, '$1')
-                const route = `/components/${name.toLowerCase()}`
+  <StrictMode>
+    <MDXProvider components={mdxComponents}>
+      <BrowserRouter>
+        <div id="app-sidebar">
+          <ul>
+            <li>
+              <Link to="/">👋 Intro</Link>
+            </li>
+            <li>
+              <Link to="/components">🍱 Components</Link>
+              <ul>
+                {req.keys().map((key) => {
+                  const name = key.replace(nameRegexp, '$1')
+                  const route = `/components/${name.toLowerCase()}`
 
-                return (
-                  <li key={key}>
-                    <Link to={route}>{name}</Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div id="app-content">
-        <Suspense fallback={<>Loading...</>}>
-          <Routes>
-            <Route path="/" element={<IntroPage/>}/>
-            <Route path="/components" element={<Outlet/>}>
-              <Route index element={<ComponentsPage/>}/>
-              {req.keys().map((key) => {
-                const name = key.replace(nameRegexp, '$1')
-                const Component = lazyScrollIntoView(() => req(key))
+                  return (
+                    <li key={key}>
+                      <Link to={route}>{name}</Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div id="app-content">
+          <Suspense fallback={<Loading/>}>
+            <Routes>
+              <Route path="/" element={<IntroPage/>}/>
+              <Route path="/components" element={<Outlet/>}>
+                <Route index element={<ComponentsPage/>}/>
+                {req.keys().map((key) => {
+                  const name = key.replace(nameRegexp, '$1')
+                  const Component = lazyScrollIntoView(() => req(key))
 
-                return (
-                  <Route
-                    key={key}
-                    path={name.toLowerCase()}
-                    element={<Component/>}
-                  />
-                )
-              })}
-            </Route>
-            <Route path="*" element={<NotFoundPage/>}/>
-          </Routes>
-        </Suspense>
-      </div>
-    </BrowserRouter>
-  </MDXProvider>
+                  return (
+                    <Route
+                      key={key}
+                      path={name.toLowerCase()}
+                      element={<Component/>}
+                    />
+                  )
+                })}
+              </Route>
+              <Route path="*" element={<NotFoundPage/>}/>
+            </Routes>
+          </Suspense>
+        </div>
+      </BrowserRouter>
+    </MDXProvider>
+  </StrictMode>
 )
