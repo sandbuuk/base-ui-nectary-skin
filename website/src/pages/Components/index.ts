@@ -1,3 +1,4 @@
-import { lazyScroll } from '~/utils/lazy-scroll'
+import type { FC } from 'react'
+import { lazyScrollIntoView } from '~/utils/lazy-scroll-into-view'
 
-export const ComponentsPage = lazyScroll(() => import('./index.mdx'))
+export const ComponentsPage: FC = lazyScrollIntoView(() => import('./index.mdx'))

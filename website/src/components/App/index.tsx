@@ -6,17 +6,17 @@ import type { FC } from 'react'
 import { ComponentsPage } from '~/pages/Components'
 import { IntroPage } from '~/pages/Intro'
 import { NotFoundPage } from '~/pages/NotFound'
-import { lazyScroll } from '~/utils/lazy-scroll'
+import { lazyScrollIntoView } from '~/utils/lazy-scroll-into-view'
 import '@sinch-engage/nectary/theme.css'
 import './styles.css'
 
 const req = require.context('~/pages/Components/', true, /^\.\/.*\/index\.mdx$/, 'lazy')
 const nameRegexp = /^\.\/(.+?)\/.+$/
 
-export const App: FC<{}> = () => (
+export const App: FC = () => (
   <MDXProvider components={mdxComponents}>
     <BrowserRouter>
-      <div className="app-sidebar">
+      <div id="app-sidebar">
         <ul>
           <li>
             <Link to="/">👋 Intro</Link>
@@ -26,10 +26,11 @@ export const App: FC<{}> = () => (
             <ul>
               {req.keys().map((key) => {
                 const name = key.replace(nameRegexp, '$1')
+                const route = `/components/${name.toLowerCase()}`
 
                 return (
                   <li key={key}>
-                    <Link to={`/components/${name.toLowerCase()}`}>{name}</Link>
+                    <Link to={route}>{name}</Link>
                   </li>
                 )
               })}
@@ -37,7 +38,7 @@ export const App: FC<{}> = () => (
           </li>
         </ul>
       </div>
-      <div className="app-content">
+      <div id="app-content">
         <Suspense fallback={<>Loading...</>}>
           <Routes>
             <Route path="/" element={<IntroPage/>}/>
@@ -45,13 +46,13 @@ export const App: FC<{}> = () => (
               <Route index element={<ComponentsPage/>}/>
               {req.keys().map((key) => {
                 const name = key.replace(nameRegexp, '$1')
-                const Comp = lazyScroll(() => req(key))
+                const Component = lazyScrollIntoView(() => req(key))
 
                 return (
                   <Route
                     key={key}
                     path={name.toLowerCase()}
-                    element={<Comp/>}
+                    element={<Component/>}
                   />
                 )
               })}

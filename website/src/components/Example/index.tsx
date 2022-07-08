@@ -4,7 +4,7 @@ import { Code } from '../Code'
 import type { FC } from 'react'
 
 export type TExample = {
-  Component: FC<{}>,
+  Component: FC,
 }
 
 export const Example: FC<TExample> = ({ Component }) => {
