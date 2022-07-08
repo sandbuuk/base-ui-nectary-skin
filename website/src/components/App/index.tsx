@@ -1,11 +1,12 @@
 import { MDXProvider } from '@mdx-js/react'
-import { lazy, Suspense } from 'react'
+import { Suspense } from 'react'
 import { BrowserRouter, Link, Outlet, Route, Routes } from 'react-router-dom'
 import { mdxComponents } from '../mdx-components'
 import type { FC } from 'react'
 import { ComponentsPage } from '~/pages/Components'
 import { IntroPage } from '~/pages/Intro'
 import { NotFoundPage } from '~/pages/NotFound'
+import { lazyScroll } from '~/utils/lazy-scroll'
 import '@sinch-engage/nectary/theme.css'
 import './styles.css'
 
@@ -44,7 +45,7 @@ export const App: FC<{}> = () => (
               <Route index element={<ComponentsPage/>}/>
               {req.keys().map((key) => {
                 const name = key.replace(nameRegexp, '$1')
-                const Comp = lazy(() => req(key))
+                const Comp = lazyScroll(() => req(key))
 
                 return (
                   <Route

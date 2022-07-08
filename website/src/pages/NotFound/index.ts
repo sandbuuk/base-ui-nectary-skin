@@ -1,3 +1,3 @@
-import { lazy } from 'react'
+import { lazyScroll } from '~/utils/lazy-scroll'
 
-export const NotFoundPage = lazy(() => import('./index.mdx'))
+export const NotFoundPage = lazyScroll(() => import('./index.mdx'))

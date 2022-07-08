@@ -1,3 +1,3 @@
-import { lazy } from 'react'
+import { lazyScroll } from '~/utils/lazy-scroll'
 
-export const ComponentsPage = lazy(() => import('./index.mdx'))
+export const ComponentsPage = lazyScroll(() => import('./index.mdx'))
