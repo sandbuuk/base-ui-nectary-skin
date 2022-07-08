@@ -73,7 +73,7 @@ export const mdxComponents: MDXComponents = {
     )
   },
   p: ({ children }) => (
-    <sinch-text type="m">
+    <sinch-text class="paragraph" type="m">
       {Children.map(children, (child) => (
         typeof child === 'string'
           ? <sinch-text inline type="m">{child}</sinch-text>

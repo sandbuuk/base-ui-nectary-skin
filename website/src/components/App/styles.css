@@ -11,24 +11,44 @@
   padding: 10px;
 }
 
-sinch-title + sinch-text {
+.title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-inline-start: -20px;
+}
+
+.title-anchor {
+  font: var(--sinch-font-text-m);
+  color: var(--sinch-color-text-default);
+  text-decoration: none;
+  width: 20px;
+  text-align: center;
+  visibility: hidden;
+}
+
+.title:hover > .title-anchor {
+  visibility: visible;
+}
+
+.title + sinch-text {
   margin-block-start: 16px;
 }
 
-sinch-title + sinch-title {
+.title + .title {
   margin-block-start: 8px;
 }
 
-sinch-text + .example-code {
+.paragraph + .example-code {
   margin-block-start: 16px;
 }
 
-.example {
+.title + .example {
   margin-block-start: 16px;
 }
 
-.example + sinch-title,
-.example-code + sinch-title {
+.example + .title,
+.example-code + .title {
   margin-block-start: 16px;
 }
 
