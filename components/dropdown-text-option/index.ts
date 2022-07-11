@@ -1,3 +1,4 @@
+import '../icons/check'
 import {
   defineCustomElement,
   getAttribute,
@@ -86,14 +87,6 @@ export class DropdownTextOption extends NectaryElement {
 
   get checked() {
     return getBooleanAttribute(this, 'checked')
-  }
-
-  set selected(isSelected: boolean) {
-    updateBooleanAttribute(this, 'data-selected', isSelected)
-  }
-
-  get selected() {
-    return getBooleanAttribute(this, 'data-selected')
   }
 
   get icon(): Element | null {

@@ -1,6 +1,6 @@
 <template>
-  <sinch-card-container>
-    <div style="display: flex;flex-direction: column;background-color: #F1F3F4;align-items: center;justify-content: center;height: 150px;font-family: Gilroy;">
+  <sinch-card-container style="flex: 1;">
+    <div style="display: flex;flex-direction: column;background-color: #F1F3F4;align-items: center;justify-content: center;min-height: 150px;height: 100%;">
       <span style="font-size: 24px">Replace me!</span>
       <span style="font-size: 16px">Im a template component</span>
     </div>
@@ -16,4 +16,3 @@ export default {
   },
 }
 </script>
-

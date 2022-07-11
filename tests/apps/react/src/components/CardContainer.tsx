@@ -7,7 +7,9 @@ type TCardContainer = {
 
 export const CardContainer: FC<TCardContainer> = () => {
   return (
-    <sinch-card-container>
+    <sinch-card-container
+      style={{ flex: 1, minHeight: 0 }}
+    >
       <div
         style={{
           display: 'flex',
@@ -15,8 +17,8 @@ export const CardContainer: FC<TCardContainer> = () => {
           backgroundColor: '#F1F3F4',
           alignItems: 'center',
           justifyContent: 'center',
-          height: '150px',
-          fontFamily: 'Gilroy',
+          minHeight: '150px',
+          height: '100%',
         }}
       >
         <span style={{ fontSize: '24px' }}>Replace me!</span>

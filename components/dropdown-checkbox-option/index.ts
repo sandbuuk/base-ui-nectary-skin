@@ -85,14 +85,6 @@ defineCustomElement('sinch-dropdown-checkbox-option', class extends NectaryEleme
   get checked() {
     return getBooleanAttribute(this, 'checked')
   }
-
-  set selected(isSelected: boolean) {
-    updateBooleanAttribute(this, 'data-selected', isSelected)
-  }
-
-  get selected() {
-    return getBooleanAttribute(this, 'data-selected')
-  }
 })
 
 declare global {

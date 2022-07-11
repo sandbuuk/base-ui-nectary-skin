@@ -10,9 +10,9 @@
   box-sizing: border-box;
   height: 40px;
   width: 100%;
-  padding: 6px 12px;
+  padding: 8px 16px;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   user-select: none;
   cursor: pointer;
   font: inherit;
@@ -38,6 +38,10 @@
   cursor: initial;
 
   --sinch-color-icon: var(--sinch-color-stormy-100);
+}
+
+::slotted(*) {
+  margin-left: -6px;
 }
 </style>
 
