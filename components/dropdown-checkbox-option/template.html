@@ -8,7 +8,7 @@
   position: relative;
   box-sizing: border-box;
   height: 40px;
-  padding: 4px 12px 4px 6px;
+  padding: 4px 10px 4px 6px;
   align-items: center;
   gap: 6px;
   user-select: none;
@@ -39,8 +39,9 @@
   border-radius: 2px;
   pointer-events: none;
   background-color: var(--sinch-color-snow-100);
-  box-shadow: 0 0 0 2px var(--sinch-color-stormy-300) inset;
+  border: 2px solid var(--sinch-color-stormy-300);
   transition: background-color 0.1s linear;
+  box-sizing: border-box;
 }
 
 #icon-checkmark {
@@ -55,7 +56,7 @@
 
 :host([checked]:not([checked="false"])) #icon-container::before {
   background-color: var(--sinch-color-tropical-500);
-  box-shadow: 0 0 0 2px var(--sinch-color-tropical-500) inset;
+  border-color: var(--sinch-color-tropical-500);
 }
 
 :host([checked]:not([checked="false"])) #icon-checkmark {
@@ -73,7 +74,7 @@
 }
 
 :host([disabled]:not([disabled="false"])) #icon-container::before {
-  box-shadow: 0 0 0 2px var(--sinch-color-stormy-100) inset;
+  border-color: var(--sinch-color-stormy-100);
 }
 
 @media (prefers-reduced-motion) {

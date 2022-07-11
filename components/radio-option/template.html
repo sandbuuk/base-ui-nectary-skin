@@ -76,8 +76,9 @@
     border-radius: 50%;
     pointer-events: none;
     background-color: var(--sinch-color-radio-background);
-    box-shadow: 0 0 0 2px var(--sinch-color-radio-border) inset;
+    border: 2px solid var(--sinch-color-radio-border);
     transition: background-color 0.1s linear;
+    box-sizing: border-box;
   }
 
   #icon-knob {
@@ -122,7 +123,7 @@
   }
 
   #input:checked::after {
-    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-checked) inset;
+    border-color: var(--sinch-color-radio-border-checked);
   }
 
   #input:checked ~ #icon-knob {
@@ -136,7 +137,7 @@
   }
 
   #input:focus::after {
-    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-focus) inset;
+    border-color: var(--sinch-color-radio-border-focus);
   }
 
   #input:focus ~ #icon-knob {
@@ -149,7 +150,7 @@
   }
 
   #input:hover::after {
-    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-hover) inset;
+    border-color: var(--sinch-color-radio-border-hover);
   }
 
   #input:hover ~ #icon-knob {
@@ -162,7 +163,7 @@
   }
 
   #input:active::after {
-    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-active) inset;
+    border-color: var(--sinch-color-radio-border-active);
   }
 
   #input:active ~ #icon-knob {
@@ -175,7 +176,7 @@
   }
 
   #input:disabled::after {
-    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-disabled) inset;
+    border-color: var(--sinch-color-radio-border-disabled);
   }
 
   #input:disabled ~ #icon-knob {
@@ -188,7 +189,7 @@
   }
 
   #input:focus:checked::after {
-    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-focus-checked) inset;
+    border-color: var(--sinch-color-radio-border-focus-checked);
   }
 
   #input:focus:checked ~ #icon-knob {
@@ -202,7 +203,7 @@
   }
 
   #input:hover:checked::after {
-    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-hover-checked) inset;
+    border-color: var(--sinch-color-radio-border-hover-checked);
   }
 
   #input:hover:checked ~ #icon-knob {
@@ -216,7 +217,7 @@
   }
 
   #input:active:checked::after {
-    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-active-checked) inset;
+    border-color: var(--sinch-color-radio-border-active-checked);
   }
 
   #input:active:checked ~ #icon-knob {
@@ -230,7 +231,7 @@
   }
 
   #input:disabled:checked::after {
-    box-shadow: 0 0 0 2px var(--sinch-color-radio-border-disabled-checked) inset;
+    border-color: var(--sinch-color-radio-border-disabled-checked);
   }
 
   #input:disabled:checked ~ #icon-knob {

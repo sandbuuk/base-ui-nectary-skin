@@ -7,6 +7,7 @@ import {
   getRect,
   NectaryElement,
   updateAttribute,
+  updateBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -372,11 +373,11 @@ defineCustomElement('sinch-search', class extends NectaryElement {
   }
 
   #selectOption($option: TSinchSearchOptionElement | null) {
-    for (const $op of this.#$optionSlot.assignedElements()) {
+    for (const $op of this.#$optionSlot.assignedElements() as TSinchSearchOptionElement[]) {
       const isSelected = $op === $option
 
       // Select / Unselect
-      ;($op as TSinchSearchOptionElement).selected = isSelected
+      updateBooleanAttribute($op, 'data-selected', isSelected)
 
       if (isSelected) {
         $op.scrollIntoView?.({ block: 'nearest' })
@@ -386,7 +387,7 @@ defineCustomElement('sinch-search', class extends NectaryElement {
 
   #findSelectedOption(): TSinchSearchOptionElement | null {
     for (const $option of this.#$optionSlot.assignedElements() as TSinchSearchOptionElement[]) {
-      if ($option.selected) {
+      if (getBooleanAttribute($option, 'data-selected')) {
         return $option
       }
     }

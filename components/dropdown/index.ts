@@ -254,7 +254,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
       const isSelected = $op === $option
 
       // Select / Unselect
-      $op.selected = isSelected
+      updateBooleanAttribute($op, 'data-selected', isSelected)
 
       if (isSelected && this.maxVisibleItems !== null) {
         $op.scrollIntoView?.({ block: 'nearest' })
@@ -279,6 +279,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
   #getOptionElements(): TDropdownOption[] {
     let $elements = this.#$optionSlot.assignedElements()
 
+    // Expand slot recursively
     if ($elements.length === 1 && $elements[0].tagName === 'SLOT') {
       $elements = ($elements[0] as HTMLSlotElement).assignedElements()
     }
@@ -288,7 +289,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
 
   #findSelectedOption(elements: readonly TDropdownOption[]): TDropdownOption | null {
     for (const el of elements) {
-      if (el.selected) {
+      if (getBooleanAttribute(el, 'data-selected')) {
         return el
       }
     }

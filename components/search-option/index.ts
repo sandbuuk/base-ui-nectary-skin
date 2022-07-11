@@ -1,11 +1,8 @@
 import {
   defineCustomElement,
   getAttribute,
-  getBooleanAttribute,
   NectaryElement,
   updateAttribute,
-  updateBooleanAttribute,
-  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchSearchOptionElement, TSinchSearchOptionReact } from './types'
@@ -36,10 +33,6 @@ defineCustomElement('sinch-search-option', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'text': {
         this.#$content.textContent = newVal
@@ -55,15 +48,6 @@ defineCustomElement('sinch-search-option', class extends NectaryElement {
 
   get text(): string {
     return getAttribute(this, 'text', '')
-  }
-
-  set selected(isSelected: boolean) {
-    updateBooleanAttribute(this, 'data-selected', isSelected)
-    updateExplicitBooleanAttribute(this, 'aria-selected', isSelected)
-  }
-
-  get selected() {
-    return getBooleanAttribute(this, 'data-selected')
   }
 })
 
