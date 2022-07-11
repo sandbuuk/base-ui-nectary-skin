@@ -17,6 +17,7 @@ const config: Configuration = {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
     alias: {
       '~': path.resolve('./src/'),
+      '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react'),
     },
   },
   module: {

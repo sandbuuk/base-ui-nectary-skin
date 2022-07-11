@@ -24,6 +24,9 @@ export const App: FC = () => (
               <Link to="/">👋 Intro</Link>
             </li>
             <li>
+              <Link to="/changelog">📝 Changelog</Link>
+            </li>
+            <li>
               <Link to="/components">🍱 Components</Link>
               <ul>
                 {req.keys().map((key) => {
@@ -44,7 +47,7 @@ export const App: FC = () => (
           <Suspense fallback={<Loading/>}>
             <Routes>
               <Route path="/" element={<IntroPage/>}/>
-              <Route path="/components" element={<Outlet/>}>
+              <Route path="/changelog" element={<ChangelogPage/>}/>
                 <Route index element={<ComponentsPage/>}/>
                 {req.keys().map((key) => {
                   const name = key.replace(nameRegexp, '$1')
