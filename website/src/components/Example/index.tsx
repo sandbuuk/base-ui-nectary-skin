@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { Code } from '../Code'
 import type { FC } from 'react'
+import './styles.css'
 
 export type TExample = {
   Component: FC,

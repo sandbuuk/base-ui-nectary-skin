@@ -25,7 +25,7 @@ export const App: FC = () => (
               <Link to="/">👋 Intro</Link>
             </li>
             <li>
-              <Link to="/changelog">📝 Changelog</Link>
+              <Link to="/changelog">📦 Changelog</Link>
             </li>
             <li>
               <Link to="/components">🍱 Components</Link>

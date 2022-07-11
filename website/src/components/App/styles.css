@@ -34,11 +34,16 @@
   visibility: visible;
 }
 
-.title + sinch-text {
+.paragraph + .title,
+.title + .paragraph {
   margin-block-start: 16px;
 }
 
 .title + .title {
+  margin-block-start: 8px;
+}
+
+.paragraph + .paragraph {
   margin-block-start: 8px;
 }
 
