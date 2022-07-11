@@ -112,8 +112,9 @@
     border-radius: 2px;
     pointer-events: none;
     background-color: var(--sinch-color-checkbox-background);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border) inset;
+    border: 2px solid var(--sinch-color-checkbox-border);
     transition: background-color 0.1s linear;
+    box-sizing: border-box;
   }
 
   #icon-checkmark {
@@ -179,7 +180,7 @@
 
   #checkbox:checked::after {
     background-color: var(--sinch-color-checkbox-background-checked);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-checked) inset;
+    border-color: var(--sinch-color-checkbox-border-checked);
   }
 
   /* Colors Focus */
@@ -189,7 +190,7 @@
 
   #checkbox:focus::after {
     background-color: var(--sinch-color-checkbox-background-focus);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-focus) inset;
+    border-color: var(--sinch-color-checkbox-border-focus);
   }
 
   /* Colors Hover */
@@ -199,7 +200,7 @@
 
   #checkbox:hover::after {
     background-color: var(--sinch-color-checkbox-background-hover);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-hover) inset;
+    border-color: var(--sinch-color-checkbox-border-hover);
   }
 
   /* Colors Active */
@@ -209,7 +210,7 @@
 
   #checkbox:active::after {
     background-color: var(--sinch-color-checkbox-background-active);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-active) inset;
+    border-color: var(--sinch-color-checkbox-border-active);
   }
 
   /* Colors Disabled */
@@ -219,7 +220,7 @@
 
   #checkbox:disabled::after {
     background-color: var(--sinch-color-checkbox-background-disabled);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-disabled) inset;
+    border-color: var(--sinch-color-checkbox-border-disabled);
   }
 
   /* Colors Focus Checked */
@@ -229,7 +230,7 @@
 
   #checkbox:focus:checked::after {
     background-color: var(--sinch-color-checkbox-background-focus-checked);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-focus-checked) inset;
+    border-color: var(--sinch-color-checkbox-border-focus-checked);
   }
 
   /* Colors Hover Checked */
@@ -239,7 +240,7 @@
 
   #checkbox:hover:checked::after {
     background-color: var(--sinch-color-checkbox-background-hover-checked);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-hover-checked) inset;
+    border-color: var(--sinch-color-checkbox-border-hover-checked);
   }
 
   /* Colors Active Checked */
@@ -249,7 +250,7 @@
 
   #checkbox:active:checked::after {
     background-color: var(--sinch-color-checkbox-background-active-checked);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-active-checked) inset;
+    border-color: var(--sinch-color-checkbox-border-active-checked);
   }
 
   /* Colors Disabled Checked */
@@ -259,7 +260,7 @@
 
   #checkbox:disabled:checked::after {
     background-color: var(--sinch-color-checkbox-background-disabled-checked);
-    box-shadow: 0 0 0 2px var(--sinch-color-checkbox-border-disabled-checked) inset;
+    border-color: var(--sinch-color-checkbox-border-disabled-checked);
   }
 </style>
 
