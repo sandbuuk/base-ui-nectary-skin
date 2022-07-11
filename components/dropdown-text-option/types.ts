@@ -4,7 +4,6 @@ export type TSinchDropdownTextOptionElement = HTMLElement & {
   value: string,
   text: string,
   checked: boolean,
-  selected: boolean,
   disabled: boolean,
   readonly icon: Element | null,
   setAttribute(name: 'value', value: string): void,
