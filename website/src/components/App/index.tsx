@@ -1,10 +1,11 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Suspense, StrictMode } from 'react'
-import { BrowserRouter, Link, Outlet, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import { Loading } from '../Loading'
 import { mdxComponents } from '../mdx-components'
 import type { FC } from 'react'
-import { ComponentsPage } from '~/pages/Components'
+import { ChangelogPage } from '~/pages/Changelog'
+import { ComponentsOutlet, ComponentsPage } from '~/pages/Components'
 import { IntroPage } from '~/pages/Intro'
 import { NotFoundPage } from '~/pages/NotFound'
 import { lazyScrollIntoView } from '~/utils/lazy-scroll-into-view'
@@ -48,6 +49,7 @@ export const App: FC = () => (
             <Routes>
               <Route path="/" element={<IntroPage/>}/>
               <Route path="/changelog" element={<ChangelogPage/>}/>
+              <Route path="/components" element={<ComponentsOutlet/>}>
                 <Route index element={<ComponentsPage/>}/>
                 {req.keys().map((key) => {
                   const name = key.replace(nameRegexp, '$1')

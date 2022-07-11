@@ -88,6 +88,20 @@ export const mdxComponents: MDXComponents = {
       <sinch-link href={href} text={children as string} external={isExternal}/>
     )
   },
+  ul: ({ children }) => {
+    return (
+      <ul className="list">
+        {children}
+      </ul>
+    )
+  },
+  li: ({ children }) => {
+    return (
+      <li className="list-item">
+        {children}
+      </li>
+    )
+  },
   code: ({ className, children }) => {
     if (className == null) {
       return (

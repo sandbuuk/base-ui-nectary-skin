@@ -58,3 +58,13 @@
 .example-container + .example-code {
   margin-block-start: 16px;
 }
+
+.list {
+  font: var(--sinch-font-text-m);
+  color: var(--sinch-color-text-default);
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 16px;
+  margin-block-start: 16px;
+  margin-block-end: 16px;
+}
