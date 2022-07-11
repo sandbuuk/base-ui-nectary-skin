@@ -1,3 +1,9 @@
+## v0.29.1
+
+* 🐞 fix border glitch in various components
+* 🐞 fix paddings in `sinch-action-menu` and `sinch-dropdown`
+* 🐞 expand height in `sinch-card-container`
+
 ## v0.29.0
 
 * 💥 rename `title` to `caption` in `sinch-alert`
