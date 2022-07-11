@@ -1,5 +1,6 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import remarkGfm from 'remark-gfm'
 import webpack from 'webpack'
 import type { Configuration } from 'webpack'
 
@@ -17,7 +18,7 @@ const config: Configuration = {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
     alias: {
       '~': path.resolve('./src/'),
-      '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react'),
+      '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
     },
   },
   module: {
@@ -78,6 +79,7 @@ const config: Configuration = {
             loader: '@mdx-js/loader',
             options: {
               providerImportSource: '@mdx-js/react',
+              remarkPlugins: [remarkGfm],
             },
           },
         ],
