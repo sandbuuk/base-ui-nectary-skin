@@ -1,10 +1,15 @@
 import '@sinch-engage/nectary/title'
 import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/table'
+import '@sinch-engage/nectary/table-head'
+import '@sinch-engage/nectary/table-head-cell'
+import '@sinch-engage/nectary/table-body'
+import '@sinch-engage/nectary/table-row'
+import '@sinch-engage/nectary/table-cell'
 import { Children } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
-// @ts-expect-error
 import { convert as slugify } from 'url-slug'
 import type { MDXComponents } from 'mdx/types'
 
@@ -115,6 +120,40 @@ export const mdxComponents: MDXComponents = {
       <SyntaxHighlighter language={language} style={dracula}>
         {children as string}
       </SyntaxHighlighter>
+    )
+  },
+  table: ({ children }) => {
+    return (
+      <sinch-table class="table">{children}</sinch-table>
+    )
+  },
+  thead: ({ children }) => {
+    return (
+      <sinch-table-head>{children}</sinch-table-head>
+    )
+  },
+  tbody: ({ children }) => {
+    return (
+      <sinch-table-body>{children}</sinch-table-body>
+    )
+  },
+  tr: ({ children }) => {
+    return (
+      <sinch-table-row>{children}</sinch-table-row>
+    )
+  },
+  th: ({ children, align }) => {
+    return (
+      <sinch-table-head-cell fit={align === 'center'} text={children as string}/>
+    )
+  },
+  td: ({ children }) => {
+    return (
+      <sinch-table-cell>
+        <div>
+          {children}
+        </div>
+      </sinch-table-cell>
     )
   },
 }

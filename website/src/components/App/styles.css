@@ -73,3 +73,7 @@
   margin-block-start: 16px;
   margin-block-end: 16px;
 }
+
+.table {
+  width: 100%;
+}
