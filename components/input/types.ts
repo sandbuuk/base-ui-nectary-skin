@@ -1,11 +1,10 @@
 import type { TSinchElementReact } from '../types'
-import type { inputTypes } from './utils'
 import type { SyntheticEvent } from 'react'
 
-export type TTextInputType = typeof inputTypes[number]
+export type TSinchInputType = 'text' | 'password'
 
 export type TSinchInputElement = HTMLElement & {
-  type: TTextInputType,
+  type: TSinchInputType,
   value: string,
   label: string,
   placeholder: string | null,
@@ -19,7 +18,7 @@ export type TSinchInputElement = HTMLElement & {
   focus(): void,
   blur(): void,
   addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
-  setAttribute(name: 'type', value: TTextInputType): void,
+  setAttribute(name: 'type', value: TSinchInputType): void,
   setAttribute(name: 'value', value: string): void,
   setAttribute(name: 'label', value: string): void,
   setAttribute(name: 'placeholder', value: string): void,
@@ -30,7 +29,7 @@ export type TSinchInputElement = HTMLElement & {
 }
 
 export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
-  type?: TTextInputType,
+  type?: TSinchInputType,
   value: string,
   label: string,
   placeholder?: string,

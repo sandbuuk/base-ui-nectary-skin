@@ -1,2 +1,4 @@
-export const backgroundValues = ['grey', 'yellow', 'blue'] as const
-export const sizeValues = ['l', 'm', 's'] as const
+import type { TSinchAvatarBackground, TSinchAvatarSize } from './types'
+
+export const backgroundValues: readonly TSinchAvatarBackground[] = ['grey', 'yellow', 'blue']
+export const sizeValues: readonly TSinchAvatarSize[] = ['l', 'm', 's']

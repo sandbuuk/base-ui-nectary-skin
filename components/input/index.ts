@@ -12,7 +12,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { inputTypes } from './utils'
-import type { TSinchInputElement, TSinchInputReact, TTextInputType } from './types'
+import type { TSinchInputElement, TSinchInputReact, TSinchInputType } from './types'
 
 const template = document.createElement('template')
 
@@ -70,11 +70,11 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     return 'input'
   }
 
-  set type(value: TTextInputType) {
+  set type(value: TSinchInputType) {
     updateAttribute(this, 'type', value)
   }
 
-  get type(): TTextInputType {
+  get type(): TSinchInputType {
     return getLiteralAttribute(this, inputTypes, 'type', 'text')
   }
 

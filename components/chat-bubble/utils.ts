@@ -1,2 +1,4 @@
-export const typeValues = ['customer', 'agent', 'agent-prev'] as const
-export const statusValues = ['sending', 'sent', 'received', 'seen', 'error'] as const
+import type { TSinchChatBubbleStatus, TSinchChatBubbleType } from './types'
+
+export const typeValues: readonly TSinchChatBubbleType[] = ['customer', 'agent', 'agent-prev']
+export const statusValues: readonly TSinchChatBubbleStatus[] = ['sending', 'sent', 'received', 'seen', 'error'] as const

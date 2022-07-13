@@ -1,7 +1,6 @@
 import type { TSinchElementReact } from '../types'
-import type { typeValues } from './utils'
 
-export type TSinchTextType = typeof typeValues[number]
+export type TSinchTextType = 'm' | 's' | 'xs' | 'xxs'
 
 export type TSinchTextElement = HTMLElement & {
   type: TSinchTextType,

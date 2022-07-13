@@ -1,7 +1,6 @@
 import type { TRect, TSinchElementReact } from '../types'
-import type { orientationValues } from './utils'
 
-export type TSinchTooltipOrientation = typeof orientationValues[number]
+export type TSinchTooltipOrientation = 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 
 export type TSinchTooltipElement = HTMLElement & {
   text: string,

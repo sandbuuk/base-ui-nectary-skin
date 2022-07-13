@@ -1,13 +1,12 @@
 import type { TSinchElementReact } from '../types'
-import type { alignValues } from './utils'
 
-export type TAlignType = typeof alignValues[number]
+export type TSinchTableAlignType = 'start' | 'center' | 'end'
 
 export type TSinchTableCellElement = HTMLElement & {
-  align: TAlignType,
-  setAttribute(name: 'align', value: TAlignType): void,
+  align: TSinchTableAlignType,
+  setAttribute(name: 'align', value: TSinchTableAlignType): void,
 }
 
 export type TSinchTableCellReact = TSinchElementReact<TSinchTableCellElement> & {
-  align?: TAlignType,
+  align?: TSinchTableAlignType,
 }

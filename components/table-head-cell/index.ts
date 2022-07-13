@@ -10,7 +10,7 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TAlignType } from '../table-cell/types'
+import type { TSinchTableAlignType } from '../table-cell/types'
 import type { TSinchTableHeaderCellElement, TSinchTableHeaderCellReact } from './types'
 
 const template = document.createElement('template')
@@ -57,11 +57,11 @@ defineCustomElement('sinch-table-head-cell', class extends NectaryElement {
     return getAttribute(this, 'text', null)
   }
 
-  set align(value: TAlignType) {
+  set align(value: TSinchTableAlignType) {
     updateLiteralAttribute(this, alignValues, 'align', value)
   }
 
-  get align(): TAlignType {
+  get align(): TSinchTableAlignType {
     return getLiteralAttribute(this, alignValues, 'align', 'start')
   }
 

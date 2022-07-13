@@ -1,1 +1,3 @@
-export const buttonTypes = ['primary', 'secondary', 'cta-primary', 'cta-secondary', 'destructive'] as const
+import type { TSinchButtonType } from './types'
+
+export const buttonTypes: readonly TSinchButtonType[] = ['primary', 'secondary', 'cta-primary', 'cta-secondary', 'destructive']

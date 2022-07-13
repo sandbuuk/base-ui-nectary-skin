@@ -1,1 +1,3 @@
-export const statusValues = ['info', 'success', 'warn', 'error'] as const
+import type { TSinchAccordionStatusType } from './types'
+
+export const statusValues: readonly TSinchAccordionStatusType[] = ['info', 'success', 'warn', 'error']

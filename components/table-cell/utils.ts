@@ -1,1 +1,3 @@
-export const alignValues = ['start', 'center', 'end'] as const
+import type { TSinchTableAlignType } from './types'
+
+export const alignValues: readonly TSinchTableAlignType[] = ['start', 'center', 'end']
