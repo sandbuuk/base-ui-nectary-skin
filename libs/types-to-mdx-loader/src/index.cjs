@@ -1,6 +1,3 @@
 module.exports = function(code) {
-  const callback = this.async()
-
-  import('./loader.js').then((module) =>
-    module.loader.call(this, code, callback))
+  return import('./loader.js').then(({ loader }) => loader(code))
 }

@@ -40,7 +40,7 @@ const getComment = (prop) => {
 
 const typeRefs = new Map()
 
-export function loader(src, callback) {
+export async function loader(src) {
   const ast = parse(src, {
     sourceType: 'module',
     plugins: [
@@ -300,14 +300,10 @@ export function loader(src, callback) {
     }
   }
 
-  compile(output, {
+  const result = await compile(output, {
     providerImportSource: '@mdx-js/react',
     remarkPlugins: [remarkGfm],
   })
-    .then((result) => {
-      callback(null, result.value)
-    })
-    .catch((err) => {
-      callback(err)
-    })
+
+  return result.value
 }
