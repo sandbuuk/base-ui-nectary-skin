@@ -1,6 +1,7 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import remarkGfm from 'remark-gfm'
+import remarkToc from 'remark-toc'
 import webpack from 'webpack'
 import type { Configuration } from 'webpack'
 
@@ -79,7 +80,7 @@ const config: Configuration = {
             loader: '@mdx-js/loader',
             options: {
               providerImportSource: '@mdx-js/react',
-              remarkPlugins: [remarkGfm],
+              remarkPlugins: [remarkGfm, remarkToc],
             },
           },
         ],

@@ -12,6 +12,7 @@ import {
   isTSTypeAliasDeclaration,
   isTSTypeAnnotation,
   isTSTypeLiteral,
+  isTSTypeParameterInstantiation,
   isTSTypeReference,
 } from '@babel/types'
 import { compile } from '@mdx-js/mdx'
@@ -36,6 +37,22 @@ const getComment = (prop) => {
   }
 
   return null
+}
+
+const generateTable = async (entries, exportedName) => {
+  let result = '| Name | Type | Description |\n| :-: | :-: | --- |'
+
+  for (const entry of entries) {
+    result += `\n| \`${entry.name + (entry.isOptional ? '?' : '')}\` | \`${entry.value.replaceAll('|', '\\|')}\` | ${entry.comment?.replaceAll('\n', '<br/>') ?? ''} |`
+  }
+
+  const compiled = await compile(result, {
+    providerImportSource: '@mdx-js/react',
+    remarkPlugins: [remarkGfm],
+    outputFormat: 'function-body',
+  })
+
+  return `export const ${exportedName} = (function() {\n${compiled.value}})({ jsx, jsxs, useMDXComponents }).default\n\n`
 }
 
 const typeRefs = new Map()
@@ -117,9 +134,15 @@ export async function loader(src) {
                     if (isTSFunctionType(member.typeAnnotation.typeAnnotation)) {
                       const param = member.typeAnnotation.typeAnnotation.parameters[0]
 
-                      if (isIdentifier(param) && isTSTypeAnnotation(param.typeAnnotation)) {
+                      if (
+                        isIdentifier(param) &&
+                        isTSTypeAnnotation(param.typeAnnotation) &&
+                        isTSTypeReference(param.typeAnnotation.typeAnnotation) &&
+                        isTSTypeParameterInstantiation(param.typeAnnotation.typeAnnotation.typeParameters) &&
+                        param.typeAnnotation.typeAnnotation.typeParameters.params.length === 2
+                      ) {
                         isReactHandler = true
-                        value = generate(param.typeAnnotation.typeAnnotation).code
+                        value = generate(param.typeAnnotation.typeAnnotation.typeParameters.params[1]).code
                       }
                     } else if (
                       isTSTypeReference(member.typeAnnotation.typeAnnotation) &&
@@ -252,59 +275,29 @@ export async function loader(src) {
     },
   })
 
-  const getRow = (entry) => {
-    return `\n| \`${entry.name + (entry.isOptional ? '?' : '')}\` | \`${entry.value.replaceAll('|', '\\|')}\` | ${entry.comment?.replaceAll('\n', '<br/>') ?? ''} |`
-  }
-  const HEADER = '| Name | Type | Description |\n| :-: | :-: | --- |'
+  let output = 'import { jsx, jsxs } from \'react/jsx-runtime.js\'\n'
 
-  let output = '### React'
+  output += 'import { useMDXComponents } from \'@mdx-js/react\'\n'
 
   if (reactData.props.length > 0) {
-    output += `\n\n#### Props\n\n${HEADER}`
-
-    for (const entry of reactData.props) {
-      output += getRow(entry)
-    }
+    output += await generateTable(reactData.props, 'ReactPropsTable')
   }
 
   if (reactData.handlers.length > 0) {
-    output += `\n\n#### Handlers\n\n${HEADER}`
-
-    for (const entry of reactData.handlers) {
-      output += getRow(entry)
-    }
+    output += await generateTable(reactData.handlers, 'ReactHandlersTable')
   }
 
-  output += '\n\n### Element'
-
   if (elementData.props.length > 0) {
-    output += `\n\n#### Properties\n\n${HEADER}`
-
-    for (const entry of elementData.props) {
-      output += getRow(entry)
-    }
+    output += await generateTable(elementData.props, 'ElementPropertiesTable')
   }
 
   if (elementData.attrs.length > 0) {
-    output += `\n\n#### Attributes\n\n${HEADER}`
-
-    for (const entry of elementData.attrs) {
-      output += getRow(entry)
-    }
+    output += await generateTable(elementData.attrs, 'ElementAttributesTable')
   }
 
   if (elementData.events.length > 0) {
-    output += `\n\n#### Events\n\n${HEADER}`
-
-    for (const entry of elementData.events) {
-      output += getRow(entry)
-    }
+    output += await generateTable(elementData.events, 'ElementEventsTable')
   }
 
-  const result = await compile(output, {
-    providerImportSource: '@mdx-js/react',
-    remarkPlugins: [remarkGfm],
-  })
-
-  return result.value
+  return output
 }

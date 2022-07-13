@@ -110,7 +110,7 @@ export const mdxComponents: MDXComponents = {
   code: ({ className, children }) => {
     if (className == null) {
       return (
-        <code>{children}</code>
+        <code className="code-inline">{children}</code>
       )
     }
 

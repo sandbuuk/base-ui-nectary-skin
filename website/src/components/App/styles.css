@@ -69,14 +69,27 @@
 .list {
   font: var(--sinch-font-text-m);
   color: var(--sinch-color-text-default);
-  margin: 0;
   padding: 0;
   padding-inline-start: 16px;
   margin-block-start: 16px;
   margin-block-end: 16px;
 }
 
+.list .list {
+  margin: 0;
+}
+
 .table {
+  font: var(--sinch-font-text-s);
   width: 100%;
   margin-block: 16px;
+}
+
+.code-inline {
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  background-color: #EFF6F6;
+  border: 1px solid var(--sinch-color-tropical-500);
+  border-radius: 2px;
+  padding-inline: 4px;
+  white-space: nowrap;
 }
