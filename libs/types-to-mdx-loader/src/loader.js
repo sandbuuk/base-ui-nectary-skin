@@ -78,8 +78,8 @@ export async function loader(src) {
 
           for (const member of literal.members) {
             if (isTSPropertySignature(member)) {
-              if (isIdentifier(member.key)) {
-                const name = member.key.name
+              if (isIdentifier(member.key) || isStringLiteral(member.key)) {
+                const name = member.key.name ?? member.key.value
                 let value = ''
                 const comment = getComment(member)
                 const isReadonly = member.readonly === true
@@ -154,15 +154,16 @@ export async function loader(src) {
             }
 
             if (isTSMethodSignature(member)) {
-              if (isIdentifier(member.key)) {
+              if (isIdentifier(member.key) || isStringLiteral(member.key)) {
                 let name = ''
                 let value = ''
                 const comment = getComment(member)
                 const isOptional = member.optional === true
 
                 if (isElementType) {
-                  const isAttribute = member.key.name === 'setAttribute'
-                  const isEvent = member.key.name === 'addEventListener'
+                  const keyName = member.key.name ?? member.key.value
+                  const isAttribute = keyName === 'setAttribute'
+                  const isEvent = keyName === 'addEventListener'
 
                   if (isAttribute) {
                     const nameParam = member.parameters[0]
@@ -252,7 +253,7 @@ export async function loader(src) {
   })
 
   const getRow = (entry) => {
-    return `\n| ${entry.name + (entry.isOptional ? '?' : '')} | \`${entry.value.replaceAll('|', '\\|')}\` | ${entry.comment?.replaceAll('\n', '<br/>') ?? ''} |`
+    return `\n| \`${entry.name + (entry.isOptional ? '?' : '')}\` | \`${entry.value.replaceAll('|', '\\|')}\` | ${entry.comment?.replaceAll('\n', '<br/>') ?? ''} |`
   }
   const HEADER = '| Name | Type | Description |\n| :-: | :-: | --- |'
 
