@@ -5,7 +5,7 @@ const DEFAULT_SIZE = 256
 const MIN_SIZE = 16
 const MAX_SIZE = 2048
 
-export const createIllustrationClass = (templateHTML: string) => {
+export const createIllustrationClass = (templateHTML: string): CustomElementConstructor => {
   const template = document.createElement('template')
 
   template.innerHTML = illustrationStylesHtml + templateHTML
