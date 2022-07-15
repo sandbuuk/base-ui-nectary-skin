@@ -1,6 +1,6 @@
 import type { TSinchTextType } from './types'
 
-export const typeValues = ['m', 's', 'xs', 'xxs'] as const
+export const typeValues: readonly TSinchTextType[] = ['m', 's', 'xs', 'xxs']
 
 type TAssertType = (value: string | null) => asserts value is TSinchTextType
 

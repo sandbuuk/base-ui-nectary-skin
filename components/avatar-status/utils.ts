@@ -1,6 +1,6 @@
 import type { TSinchAvatarStatusColor } from './types'
 
-export const colorValues = ['red', 'yellow', 'green', 'grey'] as const
+export const colorValues: readonly TSinchAvatarStatusColor[] = ['red', 'yellow', 'green', 'grey']
 
 type TAssertColor = (value: string | null) => asserts value is TSinchAvatarStatusColor
 

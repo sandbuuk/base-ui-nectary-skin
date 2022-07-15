@@ -1,7 +1,7 @@
 import { NectaryElement, updateAttribute } from '../utils'
 import iconStylesHtml from './icon-styles.html'
 
-export const createIconClass = (templateHTML: string) => {
+export const createIconClass = (templateHTML: string): CustomElementConstructor => {
   const template = document.createElement('template')
 
   template.innerHTML = iconStylesHtml + templateHTML

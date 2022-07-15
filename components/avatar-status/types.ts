@@ -1,7 +1,6 @@
 import type { TSinchElementReact } from '../types'
-import type { colorValues } from './utils'
 
-export type TSinchAvatarStatusColor = typeof colorValues[number]
+export type TSinchAvatarStatusColor = 'red' | 'yellow' | 'green' | 'grey'
 
 export type TSinchAvatarStatusElement = HTMLElement & {
   color: TSinchAvatarStatusColor,

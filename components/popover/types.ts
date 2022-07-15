@@ -1,8 +1,7 @@
 import type { TRect, TSinchElementReact } from '../types'
-import type { orientationValues } from './utils'
 import type { SyntheticEvent } from 'react'
 
-export type TSinchPopoverOrientation = typeof orientationValues[number]
+export type TSinchPopoverOrientation = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 
 export type TSinchPopoverElement = HTMLElement & {
   open: boolean,

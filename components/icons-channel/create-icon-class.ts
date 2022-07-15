@@ -5,7 +5,7 @@ const DEFAULT_SIZE = 48
 const MIN_SIZE = 4
 const MAX_SIZE = 256
 
-export const createIconClass = (templateHTML: string) => {
+export const createIconClass = (templateHTML: string): CustomElementConstructor => {
   const template = document.createElement('template')
 
   template.innerHTML = iconStylesHtml + templateHTML

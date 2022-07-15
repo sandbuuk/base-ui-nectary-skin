@@ -1,8 +1,7 @@
 import type { TSinchElementReact } from '../types'
-import type { levelValues, typeValues } from './utils'
 
-export type TSinchTitleType = typeof typeValues[number]
-export type TSinchTitleLevel = typeof levelValues[number]
+export type TSinchTitleType = 'xl' | 'l' | 'm' | 's' | 'xs'
+export type TSinchTitleLevel = '1' | '2' | '3' | '4' | '5' | '6'
 
 export type TSinchTitleElement = HTMLElement & {
   text: string,

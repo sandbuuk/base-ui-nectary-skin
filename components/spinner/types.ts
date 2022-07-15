@@ -1,7 +1,6 @@
 import type { TSinchElementReact } from '../types'
-import type { spinnerTypes } from './utils'
 
-export type TSinchSpinnerType = typeof spinnerTypes[number]
+export type TSinchSpinnerType = 'large' | 'medium' | 'small'
 
 export type TSinchSpinnerElement = HTMLElement & {
   type: TSinchSpinnerType,

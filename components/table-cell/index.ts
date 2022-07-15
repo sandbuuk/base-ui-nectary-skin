@@ -6,7 +6,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { alignValues } from './utils'
-import type { TAlignType, TSinchTableCellElement, TSinchTableCellReact } from './types'
+import type { TSinchTableAlignType, TSinchTableCellElement, TSinchTableCellReact } from './types'
 
 const template = document.createElement('template')
 
@@ -25,11 +25,11 @@ defineCustomElement('sinch-table-cell', class extends NectaryElement {
     this.setAttribute('role', 'cell')
   }
 
-  set align(value: TAlignType) {
+  set align(value: TSinchTableAlignType) {
     updateLiteralAttribute(this, alignValues, 'align', value)
   }
 
-  get align(): TAlignType {
+  get align(): TSinchTableAlignType {
     return getLiteralAttribute(this, alignValues, 'align', 'start')
   }
 })

@@ -1,8 +1,7 @@
 import type { TSinchElementReact } from '../types'
-import type { backgroundValues, sizeValues } from './utils'
 
-export type TSinchAvatarBackground = typeof backgroundValues[number]
-export type TSinchAvatarSize = typeof sizeValues[number]
+export type TSinchAvatarBackground = 'grey' | 'yellow' | 'blue'
+export type TSinchAvatarSize = 'l' | 'm' | 's'
 
 export type TSinchAvatarElement = HTMLElement & {
   alt: string,

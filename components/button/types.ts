@@ -1,7 +1,6 @@
 import type { TSinchElementReact } from '../types'
-import type { buttonTypes } from './utils'
 
-export type TSinchButtonType = typeof buttonTypes[number]
+export type TSinchButtonType = 'primary' | 'secondary' | 'cta-primary' | 'cta-secondary' | 'destructive'
 
 export type TSinchButtonElement = HTMLElement & {
   type: TSinchButtonType,
