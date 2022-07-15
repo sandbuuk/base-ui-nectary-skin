@@ -11,9 +11,9 @@
 
 dialog {
   position: fixed;
+  top: 0;
   left: 0;
-  right: 0;
-  margin: auto;
+  margin: 0;
   outline: none;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
@@ -24,6 +24,8 @@ dialog {
   contain: content;
   padding: 0;
   box-sizing: border-box;
+  max-width: unset;
+  max-height: unset;
 }
 
 dialog:not([open]) {

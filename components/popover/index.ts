@@ -10,6 +10,7 @@ import {
   updateBooleanAttribute,
   NectaryElement,
   getCssVar,
+  throttleAnimationFrame,
 } from '../utils'
 import templateHTML from './template.html'
 import { orientationValues } from './utils'
@@ -19,12 +20,13 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-const POPOVER_VERTICAL_OFFSET = 4
+const POPOVER_OFFSET = 4
 
 defineCustomElement('sinch-popover', class extends NectaryElement {
   #$target: HTMLButtonElement
   #$dialog: HTMLDialogElement
-  #isConnected = false
+  #isConnected: boolean
+  #resizeThrottle
 
   constructor() {
     super()
@@ -35,6 +37,8 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     this.#$target = shadowRoot.querySelector('#target')!
     this.#$dialog = shadowRoot.querySelector('#dialog')!
+    this.#isConnected = false
+    this.#resizeThrottle = throttleAnimationFrame(this.#updateOrientation)
 
     dialogPolyfill.registerDialog(this.#$dialog)
   }
@@ -118,6 +122,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#updateOrientation()
 
     document.body.style.overflow = 'hidden'
+    window.addEventListener('resize', this.#onResize)
   }
 
   #onCollapse() {
@@ -129,47 +134,49 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$dialog.close?.()
 
     document.body.style.overflow = ''
+    window.removeEventListener('resize', this.#onResize)
+    this.#resizeThrottle.cancel()
   }
 
   #isOpen() {
     return this.#isConnected && getBooleanAttribute(this.#$dialog, 'open')
   }
 
-  #updateOrientation() {
-    this.#$dialog.style.transform = 'initial'
+  #onResize = () => {
+    this.#resizeThrottle.fn()
+  }
+
+  #updateOrientation = () => {
     this.#$dialog.style.width = 'fit-content'
 
     const targetRect = this.#$target.getBoundingClientRect()
     const modalRect = this.#$dialog.getBoundingClientRect()
-
-    let leftOffset = 0
-    let topOffset = 0
+    let leftPos = 0
+    let topPos = 0
 
     const orient = this.orientation
     const shouldExpandWidthToTarget = getCssVar(this, '--sinch-popover-expand-width') !== null
     const largestWidth = Math.max(modalRect.width, targetRect.width)
-    const widthDiff = shouldExpandWidthToTarget
-      ? Math.max(largestWidth - modalRect.width, 0) * 0.5
-      : 0
     const resultWidth = shouldExpandWidthToTarget ? largestWidth : modalRect.width
 
     if (orient === 'bottom-right' || orient === 'top-right') {
-      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, targetRect.x - modalRect.x) + widthDiff)
+      leftPos = Math.max(POPOVER_OFFSET, Math.min(targetRect.x, window.innerWidth - resultWidth - POPOVER_OFFSET))
     }
 
     if (orient === 'bottom-left' || orient === 'top-left') {
-      leftOffset = Math.min(modalRect.x, Math.max(-modalRect.x, targetRect.x + targetRect.width - modalRect.x - modalRect.width) - widthDiff)
+      leftPos = Math.max(POPOVER_OFFSET, targetRect.right - resultWidth)
     }
 
     if (orient === 'bottom-left' || orient === 'bottom-right') {
-      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, targetRect.y + targetRect.height - modalRect.y + POPOVER_VERTICAL_OFFSET))
+      topPos = Math.max(POPOVER_OFFSET, Math.min(targetRect.bottom + POPOVER_OFFSET, window.innerHeight - modalRect.height - POPOVER_OFFSET))
     }
 
     if (orient === 'top-left' || orient === 'top-right') {
-      topOffset = Math.min(modalRect.y, Math.max(-modalRect.y, targetRect.y - modalRect.y - modalRect.height - POPOVER_VERTICAL_OFFSET))
+      topPos = Math.max(POPOVER_OFFSET, targetRect.top - POPOVER_OFFSET - modalRect.height)
     }
 
-    this.#$dialog.style.transform = `translate(${leftOffset}px, ${topOffset}px)`
+    this.#$dialog.style.left = `${leftPos}px`
+    this.#$dialog.style.top = `${topPos}px`
     this.#$dialog.style.width = `${resultWidth}px`
   }
 
