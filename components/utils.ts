@@ -73,13 +73,13 @@ export const getBooleanAttribute = ($element: Element, attrName: string) => {
 }
 
 export const updateBooleanAttribute = ($element: Element, attrName: string, attrValue: boolean | null | undefined) => {
-  const isCurrentValueTrue = getBooleanAttribute($element, attrName)
+  const currentAttrValue = $element.getAttribute(attrName)
 
   if (attrValue === true) {
-    if (!isCurrentValueTrue) {
+    if (!isAttrTrue(currentAttrValue)) {
       $element.setAttribute(attrName, '')
     }
-  } else if (isCurrentValueTrue) {
+  } else if (currentAttrValue !== null) {
     $element.removeAttribute(attrName)
   }
 }

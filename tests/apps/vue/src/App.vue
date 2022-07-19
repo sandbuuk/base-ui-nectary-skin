@@ -9,6 +9,7 @@
     <CardContainer v-if="url.pathname === '/card-container'" :search="url.searchParams"/>
     <Chat v-if="url.pathname === '/chat'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
+    <DatePicker v-if="url.pathname === '/date-picker'" :search="url.searchParams"/>
     <Dropdown v-if="url.pathname === '/dropdown'" :search="url.searchParams"/>
     <Grid v-if="url.pathname === '/grid'" :search="url.searchParams"/>
     <IconButton v-if="url.pathname === '/icon-button'" :search="url.searchParams"/>
@@ -47,6 +48,7 @@ import Card from './components/Card.vue'
 import CardContainer from './components/CardContainer.vue'
 import Chat from './components/Chat.vue'
 import Checkbox from './components/Checkbox.vue'
+import DatePicker from './components/DatePicker.vue'
 import Dropdown from './components/Dropdown.vue'
 import Dialog from './components/Dialog.vue'
 import Grid from './components/Grid.vue'
@@ -110,6 +112,7 @@ export default {
     CardContainer,
     Chat,
     Checkbox,
+    DatePicker,
     Dropdown,
     Dialog,
     Grid,
