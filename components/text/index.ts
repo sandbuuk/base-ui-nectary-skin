@@ -27,7 +27,9 @@ defineCustomElement('sinch-text', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', getBooleanAttribute(this, 'inline') ? 'text' : 'paragraph')
-    assertType(this.getAttribute('type'))
+
+    // Dont assert here
+    // Angular sets attributes after connect
   }
 
   get type() {
