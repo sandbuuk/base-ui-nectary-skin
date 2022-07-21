@@ -5,7 +5,10 @@
 }
 
 #wrapper {
-  position: relative;
+  border-radius: 8px;
+  border: 1px solid var(--sinch-color-snow-700);
+  background-color: var(--sinch-color-snow-100);
+  overflow: hidden;
 }
 
 #card-body {
@@ -14,30 +17,16 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background-color: var(--sinch-color-snow-100);
-  border-radius: 8px;
-  border: 1px solid var(--sinch-color-snow-700);
 }
 
 #illustration-wrapper {
   display: none;
-  flex-direction: column;
-  align-items: center;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
   overflow: hidden;
-  background-color: var(--sinch-color-stormy-500);
   height: 240px;
 }
 
 #illustration-wrapper.active {
-  display: flex;
-}
-
-#illustration-wrapper.active + #card-body {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-top: none;
+  display: block;
 }
 
 #label {

@@ -1,11 +1,47 @@
 <style>
-  :host {
-    display: inline-block;
-    vertical-align: middle;
-  }
+svg {
+  display: block;
+  pointer-events: none;
+}
 
-  svg {
-    display: block;
-    pointer-events: none;
-  }
+#wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#wrapper > * {
+  flex-shrink: 0;
+}
+
+:host([valign="top"]) #wrapper {
+  align-items: flex-start;
+}
+
+:host([valign="bottom"]) #wrapper {
+  align-items: flex-end;
+}
+
+:host([background="yellow"]) #wrapper {
+  background-color: var(--sinch-color-background-yellow);
+}
+
+:host([background="green"]) #wrapper {
+  background-color: var(--sinch-color-background-green);
+}
+
+:host([background="blue"]) #wrapper {
+  background-color: var(--sinch-color-background-blue);
+}
+
+:host([background="grey"]) #wrapper {
+  background-color: var(--sinch-color-background-grey);
+}
+
+:host([background="white"]) #wrapper {
+  background-color: var(--sinch-color-background-white);
+}
 </style>
