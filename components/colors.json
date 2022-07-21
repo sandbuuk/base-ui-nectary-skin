@@ -67,5 +67,10 @@
   "colorOrange400": "#FF8C34",
   "colorOrange200": "#FFD4B3",
   "colorBolt400": "#FFBE3C",
-  "colorBolt200": "#FFE6B3"
+  "colorBolt200": "#FFE6B3",
+  "colorBackgroundGrey": "#FAFAFA",
+  "colorBackgroundGreen": "#DCEDE1",
+  "colorBackgroundBlue": "#DEF2FF",
+  "colorBackgroundYellow": "#FCECCB",
+  "colorBackgroundWhite": "#FFFFFF"
 }

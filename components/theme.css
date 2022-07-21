@@ -72,6 +72,11 @@
   --sinch-color-orange-200: #FFD4B3;
   --sinch-color-bolt-400: #FFBE3C;
   --sinch-color-bolt-200: #FFE6B3;
+  --sinch-color-background-grey: #FAFAFA;
+  --sinch-color-background-green: #DCEDE1;
+  --sinch-color-background-blue: #DEF2FF;
+  --sinch-color-background-yellow: #FCECCB;
+  --sinch-color-background-white: #FFFFFF;
   --sinch-color-transparent: transparent;
 
   /* Typography */
