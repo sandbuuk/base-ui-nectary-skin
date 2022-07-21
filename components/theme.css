@@ -92,6 +92,12 @@
   --sinch-font-text-xs: 400 12px/20px var(--sinch-font-family);
   --sinch-font-text-xxs: 400 10px/16px var(--sinch-font-family);
 
+  /* Shapes */
+  --sinch-shape-radius-xs: 2px;
+  --sinch-shape-radius-s: 4px;
+  --sinch-shape-radius-m: 8px;
+  --sinch-shape-radius-l: 12px;
+
   /* Deprecated */
   --sinch-font-hero: 700 56px/72px var(--sinch-font-family);
   --sinch-font-body: 400 16px/24px var(--sinch-font-family);
