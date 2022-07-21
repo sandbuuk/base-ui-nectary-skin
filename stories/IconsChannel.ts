@@ -11,19 +11,16 @@ import '@sinch-engage/nectary/icons-channel/twitter'
 import '@sinch-engage/nectary/icons-channel/viber'
 import '@sinch-engage/nectary/icons-channel/wechat'
 import '@sinch-engage/nectary/icons-channel/whatsapp'
-
-const iconNames = [
-  'sinch-icon-channel-telegram',
-  'sinch-icon-channel-apple-business-chat',
-  'sinch-icon-channel-facebook-messenger',
-  'sinch-icon-channel-instagram',
-  'sinch-icon-channel-line',
-  'sinch-icon-channel-talk',
-  'sinch-icon-channel-twitter',
-  'sinch-icon-channel-viber',
-  'sinch-icon-channel-wechat',
-  'sinch-icon-channel-whatsapp',
-]
+import '@sinch-engage/nectary/icons-channel/telegram-square'
+import '@sinch-engage/nectary/icons-channel/apple-business-chat-square'
+import '@sinch-engage/nectary/icons-channel/facebook-messenger-square'
+import '@sinch-engage/nectary/icons-channel/instagram-square'
+import '@sinch-engage/nectary/icons-channel/line-square'
+import '@sinch-engage/nectary/icons-channel/talk-square'
+import '@sinch-engage/nectary/icons-channel/twitter-square'
+import '@sinch-engage/nectary/icons-channel/viber-square'
+import '@sinch-engage/nectary/icons-channel/wechat-square'
+import '@sinch-engage/nectary/icons-channel/whatsapp-square'
 
 export default {
   title: 'Components/Icons Channel',
@@ -34,7 +31,7 @@ export default {
   },
 } as Meta
 
-const Template = (): Story => () => {
+const Template = (iconNames: string[]): Story => () => {
   const [{ size }] = useArgs()
   const wrapperRef = useRef<Element | null>(null)
 
@@ -66,7 +63,20 @@ const Template = (): Story => () => {
   return wrapperRef.current
 }
 
-export const IconsChannel = Template()
+const iconNames = [
+  'sinch-icon-channel-telegram',
+  'sinch-icon-channel-apple-business-chat',
+  'sinch-icon-channel-facebook-messenger',
+  'sinch-icon-channel-instagram',
+  'sinch-icon-channel-line',
+  'sinch-icon-channel-talk',
+  'sinch-icon-channel-twitter',
+  'sinch-icon-channel-viber',
+  'sinch-icon-channel-wechat',
+  'sinch-icon-channel-whatsapp',
+]
+
+export const IconsChannel = Template(iconNames)
 
 IconsChannel.args = {
   size: 48,
@@ -76,6 +86,33 @@ IconsChannel.parameters = {
   docs: {
     source: {
       code: `<>\n${iconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
+    },
+  },
+}
+
+const squareIconNames = [
+  'sinch-icon-channel-telegram-square',
+  'sinch-icon-channel-apple-business-chat-square',
+  'sinch-icon-channel-facebook-messenger-square',
+  'sinch-icon-channel-instagram-square',
+  'sinch-icon-channel-line-square',
+  'sinch-icon-channel-talk-square',
+  'sinch-icon-channel-twitter-square',
+  'sinch-icon-channel-viber-square',
+  'sinch-icon-channel-wechat-square',
+  'sinch-icon-channel-whatsapp-square',
+]
+
+export const SquareIconsChannel = Template(squareIconNames)
+
+SquareIconsChannel.args = {
+  size: 48,
+}
+
+SquareIconsChannel.parameters = {
+  docs: {
+    source: {
+      code: `<>\n${squareIconNames.map((ic) => `  <${ic}></${ic}>`).join('\n')}\n</>`,
     },
   },
 }
