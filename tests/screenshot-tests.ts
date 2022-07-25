@@ -7,7 +7,13 @@ const getRects = (locators: Locator[]): Promise<(TRect | null)[]> => {
   return Promise.all(locators.map((l) => l.boundingBox()))
 }
 
-export const expandRect = (rect: TRect, offset: number): TRect => {
+export function expandRect(rect: TRect, offset: number): TRect
+export function expandRect(rect: TRect | null, offset: number): TRect | null
+export function expandRect(rect: TRect | null, offset: number): TRect | null {
+  if (rect === null) {
+    return null
+  }
+
   if (rect.width === 0 || rect.height === 0) {
     return rect
   }
@@ -83,6 +89,7 @@ type UpdateStateResult = {
   name: string,
   include?: Locator[],
   includeRects?: TRect[],
+  expand?: number,
 }
 
 type UpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
@@ -128,9 +135,9 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
 
         const locator = page.locator(elementSelector).nth(0)
 
-        for await (const { name, include = [], includeRects = [] } of t.fn({ page, $: locator, $eval: makeEval<T>(locator) })) {
+        for await (const { name, include = [], includeRects = [], expand = 12 } of t.fn({ page, $: locator, $eval: makeEval<T>(locator) })) {
           const rects = await getRects([locator, ...include])
-          const clip = mergeBoundingBox(rects.concat(includeRects))
+          const clip = expandRect(mergeBoundingBox(rects.concat(includeRects)), expand)
           const screenshotName = `${t.name}-${name}.png`
 
           if (clip == null) {
