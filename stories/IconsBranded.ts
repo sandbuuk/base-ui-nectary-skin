@@ -18,6 +18,11 @@ import '@sinch-engage/nectary/icons-branded/credit-card'
 import '@sinch-engage/nectary/icons-branded/help'
 import '@sinch-engage/nectary/icons-branded/finance'
 import '@sinch-engage/nectary/icons-branded/verified-phone'
+import '@sinch-engage/nectary/icons-branded/chat'
+import '@sinch-engage/nectary/icons-branded/mms'
+import '@sinch-engage/nectary/icons-branded/push'
+import '@sinch-engage/nectary/icons-branded/rcs'
+import '@sinch-engage/nectary/icons-branded/sms'
 
 const iconNames = [
   'sinch-icon-branded-bell',
@@ -37,6 +42,11 @@ const iconNames = [
   'sinch-icon-branded-help',
   'sinch-icon-branded-finance',
   'sinch-icon-branded-verified-phone',
+  'sinch-icon-branded-chat',
+  'sinch-icon-branded-push',
+  'sinch-icon-branded-sms',
+  'sinch-icon-branded-mms',
+  'sinch-icon-branded-rcs',
 ]
 
 export default {
