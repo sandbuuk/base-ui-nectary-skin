@@ -23,6 +23,7 @@ export class SegmentComponent {
   hasCollapse: boolean
   isCollapsed: boolean = false
   hasAction: boolean
+  hasPreview: boolean
 
   constructor() {
     const url = new URL(location.href)
@@ -32,6 +33,7 @@ export class SegmentComponent {
     this.hasInfo = url.searchParams.get('info') !== null
     this.hasCollapse = url.searchParams.get('collapse') !== null
     this.hasAction = url.searchParams.get('action') !== null
+    this.hasPreview = url.searchParams.get('preview') !== null
   }
 
   onCollapse(e: Event) {
