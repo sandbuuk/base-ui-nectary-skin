@@ -41,7 +41,6 @@ const Template = (): Story => ({ onChange }) => {
     const $pagination = document.createElement('sinch-pagination')
 
     $pagination.addEventListener('change', (e) => {
-      console.log('E', e.detail)
       onChange(e.detail)
       updateArgs({ value: e.detail })
     })

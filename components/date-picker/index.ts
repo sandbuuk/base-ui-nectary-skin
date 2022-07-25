@@ -116,7 +116,11 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     return ['value', 'min', 'max', 'locale']
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, prevValue: string | null, newVal: string | null) {
+    if (newVal === prevValue) {
+      return
+    }
+
     switch (name) {
       case 'value': {
         assertValue(newVal)
