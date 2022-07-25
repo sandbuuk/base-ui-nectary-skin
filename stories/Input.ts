@@ -2,6 +2,8 @@ import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/calendar-today'
 
 export default {
   title: 'Components/Input',
@@ -115,6 +117,32 @@ Input.parameters = {
   docs: {
     source: {
       code: `<sinch-input value={value} onChange={setValue}>${inputInnerHTML}</sinch-input>`,
+    },
+  },
+}
+
+const inputWithIconButtonInnerHTML = `
+  <sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>
+  <sinch-icon-button small slot="right">
+    <sinch-icon-calendar-today slot="icon"></sinch-icon-calendar-today>
+  </sinch-icon-button>
+`
+
+export const InputWithIconButton = Template(inputWithIconButtonInnerHTML)
+
+InputWithIconButton.args = {
+  value: 'hi',
+  label: 'Label',
+  optionalText: 'Optional',
+  additionalText: 'Additional',
+  placeholder: 'Placeholder',
+  disabled: false,
+}
+
+InputWithIconButton.parameters = {
+  docs: {
+    source: {
+      code: `<sinch-input value={value} onChange={setValue}>${inputWithIconButtonInnerHTML}</sinch-input>`,
     },
   },
 }

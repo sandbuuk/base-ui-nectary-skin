@@ -2,6 +2,8 @@ import { useCallback, useMemo, useState } from 'react'
 import type { FC, SyntheticEvent } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/calendar-today'
 
 type TInput = {
   search: URLSearchParams,
@@ -28,12 +30,8 @@ export const Input: FC<TInput> = ({ search }) => {
   const invalidText = search.get('invalid') ?? undefined
   const placeholderText = search.get('placeholder') ?? undefined
   const isDisabled = search.get('disabled') != null
-  const tooltip = useMemo(
-    () => search.get('tooltip') != null && (
-      <sinch-help-tooltip text={search.get('tooltip')!} slot="tooltip"/>
-    ),
-    [search]
-  )
+  const tooltipText = search.get('tooltip')
+  const hasRightButton = search.get('right') != null
 
   return (
     <sinch-input
@@ -50,7 +48,14 @@ export const Input: FC<TInput> = ({ search }) => {
       onBlur={onBlur}
       aria-label="Input"
     >
-      {tooltip}
+      {tooltipText !== null && (
+        <sinch-help-tooltip text={tooltipText} slot="tooltip"/>
+      )}
+      {hasRightButton && (
+        <sinch-icon-button slot="right" small aria-label="Button" onClick={() => {}}>
+          <sinch-icon-calendar-today slot="icon"/>
+        </sinch-icon-button>
+      )}
     </sinch-input>
   )
 }
