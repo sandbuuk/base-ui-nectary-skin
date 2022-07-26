@@ -1,6 +1,6 @@
 <style>
 dialog {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   margin: auto;
@@ -8,8 +8,10 @@ dialog {
   flex-direction: column;
   padding: 24px;
   max-width: var(--sinch-dialog-max-width, 512px);
+  max-height: unset;
   border-radius: var(--sinch-shape-radius-l);
   box-sizing: border-box;
+  contain: content;
   background-color: var(--sinch-color-snow-100);
   color: var(--sinch-color-text-default);
   font: var(--sinch-font-body);

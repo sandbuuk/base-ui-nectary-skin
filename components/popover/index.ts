@@ -27,6 +27,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   #$dialog: HTMLDialogElement
   #isConnected: boolean
   #resizeThrottle
+  #prevOverflowValue: string = ''
 
   constructor() {
     super()
@@ -121,6 +122,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$dialog.showModal()
     this.#updateOrientation()
 
+    this.#prevOverflowValue = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     window.addEventListener('resize', this.#onResize)
   }
@@ -133,7 +135,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$target.setAttribute('aria-expanded', 'false')
     this.#$dialog.close?.()
 
-    document.body.style.overflow = ''
+    document.body.style.overflow = this.#prevOverflowValue
     window.removeEventListener('resize', this.#onResize)
     this.#resizeThrottle.cancel()
   }
