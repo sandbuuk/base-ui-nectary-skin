@@ -1,7 +1,6 @@
 import type { TSinchElementReact } from '../types'
-import type { categoryValues } from './utils'
 
-export type TSinchTagCategory = typeof categoryValues[number]
+export type TSinchTagCategory = 'candy' | 'bolt' | 'aqua' | 'grass' | 'berry' | 'orange' | 'night' | 'mud' | 'dirt'
 
 export type TSinchTagElement = HTMLElement & {
   category: TSinchTagCategory | null,

@@ -1,3 +1,3 @@
 import type { TSinchInputType } from './types'
 
-export const inputTypes: TSinchInputType[] = ['text', 'password']
+export const inputTypes: readonly TSinchInputType[] = ['text', 'password']

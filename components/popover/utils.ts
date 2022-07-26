@@ -1,1 +1,3 @@
-export const orientationValues = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
+import type { TSinchPopoverOrientation } from './types'
+
+export const orientationValues: readonly TSinchPopoverOrientation[] = ['top-left', 'top-right', 'bottom-left', 'bottom-right']

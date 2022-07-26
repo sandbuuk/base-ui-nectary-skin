@@ -12,7 +12,7 @@ const DEFAULT_SIZE = 16
 const MIN_SIZE = 4
 const MAX_SIZE = 256
 
-export const createLogoClass = (templateHTML: string) => {
+export const createLogoClass = (templateHTML: string): CustomElementConstructor => {
   const template = document.createElement('template')
 
   template.innerHTML = logoStylesHtml + templateHTML

@@ -1,7 +1,6 @@
 import type { TSinchElementReact } from '../types'
-import type { statusValues } from './utils'
 
-export type TSinchAccordionStatusType = typeof statusValues[number]
+export type TSinchAccordionStatusType = 'info' | 'success' | 'warn' | 'error'
 
 export type TSinchAccordionItemElement = HTMLElement & {
   value: string,

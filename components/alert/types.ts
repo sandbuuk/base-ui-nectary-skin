@@ -1,7 +1,6 @@
 import type { TSinchElementReact } from '../types'
-import type { typeValues } from './utils'
 
-export type TSinchAlertType = typeof typeValues[number]
+export type TSinchAlertType = 'info' | 'success' | 'warn' | 'error'
 
 export type TSinchAlertElement = HTMLElement & {
   type: TSinchAlertType,
