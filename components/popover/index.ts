@@ -189,6 +189,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
     if (!isInside) {
+      e.stopPropagation()
       this.#dispatchCloseEvent()
     }
   }
