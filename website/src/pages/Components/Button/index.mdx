@@ -1,5 +1,10 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
+import {
+  ReactPropsTable,
+  ElementPropertiesTable,
+  ElementAttributesTable,
+} from '!!@saas/types-to-mdx-loader!@sinch-engage/nectary/button/types.ts'
 import { TypePrimaryExample } from './examples/TypePrimary.tsx'
 import { TypeSecondaryExample } from './examples/TypeSecondary.tsx'
 import { TypeCtaPrimaryExample } from './examples/TypeCtaPrimary.tsx'
@@ -16,23 +21,25 @@ The different button components and varaints is ment to be used for different si
 
 ## Examples
 
-### Primary
+### Type
+
+#### Primary
 
 <Example Component={TypePrimaryExample}/>
 
-### Secondary
+#### Secondary
 
 <Example Component={TypeSecondaryExample}/>
 
-### CTA Primary
+#### CTA Primary
 
 <Example Component={TypeCtaPrimaryExample}/>
 
-### CTA Secondary
+#### CTA Secondary
 
 <Example Component={TypeCtaSecondaryExample}/>
 
-### Destructive
+#### Destructive
 
 <Example Component={TypeDestructiveExample}/>
 
@@ -43,3 +50,21 @@ The different button components and varaints is ment to be used for different si
 ### Small
 
 <Example Component={SmallExample}/>
+
+## API
+
+### React
+
+#### Props
+
+<ReactPropsTable/>
+
+### Element
+
+#### Properties
+
+<ElementPropertiesTable/>
+
+#### Attributes
+
+<ElementAttributesTable/>
