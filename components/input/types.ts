@@ -20,9 +20,9 @@ export type TSinchInputElement = HTMLElement & {
   invalidText: string | null,
   /** Disabled */
   disabled: boolean,
-  selectionStart: HTMLInputElement['selectionStart'],
-  selectionEnd: HTMLInputElement['selectionEnd'],
-  selectionDirection: HTMLInputElement['selectionDirection'],
+  selectionStart: number | null,
+  selectionEnd: number | null,
+  selectionDirection: 'forward' | 'backward' | 'none' | null,
   focus(): void,
   blur(): void,
   /** Change value event */
