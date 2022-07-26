@@ -4,7 +4,7 @@ import type { SyntheticEvent } from 'react'
 export type TSinchInputType = 'text' | 'password'
 
 export type TSinchInputElement = HTMLElement & {
-  /** Text field type, similar to a native HTML input types */
+  /** Text field type, `text` by default */
   type: TSinchInputType,
   /** Value */
   value: string,
@@ -12,23 +12,36 @@ export type TSinchInputElement = HTMLElement & {
   label: string,
   /** Text that appears in the text field when it has no value set */
   placeholder: string | null,
+  /** Optional text */
   optionalText: string | null,
-  invalidText: string | null,
+  /** Additional text */
   additionalText: string | null,
+  /** Invalid text, controls the overall invalid state of the text field */
+  invalidText: string | null,
+  /** Disabled */
   disabled: boolean,
   selectionStart: HTMLInputElement['selectionStart'],
   selectionEnd: HTMLInputElement['selectionEnd'],
   selectionDirection: HTMLInputElement['selectionDirection'],
   focus(): void,
   blur(): void,
+  /** Change value event */
   addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
+  /** Text field type, `text` by default */
   setAttribute(name: 'type', value: TSinchInputType): void,
+  /** Value */
   setAttribute(name: 'value', value: string): void,
+  /** Label */
   setAttribute(name: 'label', value: string): void,
+  /** Text that appears in the text field when it has no value set */
   setAttribute(name: 'placeholder', value: string): void,
+  /** Optional text */
   setAttribute(name: 'optionaltext', value: string): void,
-  setAttribute(name: 'invalidtext', value: string): void,
+  /** Additional text */
   setAttribute(name: 'additionaltext', value: string): void,
+  /** Invalid text, controls the overall invalid state of the text field */
+  setAttribute(name: 'invalidtext', value: string): void,
+  /** Disabled */
   setAttribute(name: 'disabled', value: ''): void,
 }
 
@@ -47,7 +60,7 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   optionalText?: string,
   /** Additional text */
   additionalText?: string,
-  /** Invalid text */
+  /** Invalid text, controls the overall invalid state of the text field */
   invalidText?: string,
   /** Disabled */
   disabled?: boolean,
