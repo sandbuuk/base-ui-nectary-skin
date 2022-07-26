@@ -5,8 +5,6 @@ export type TSinchLinkElement = HTMLElement & {
   href: string,
   disabled: boolean,
   external: boolean,
-  focus(): void,
-  blur(): void,
   setAttribute(name: 'text', value: string): void,
   setAttribute(name: 'href', value: string): void,
   setAttribute(name: 'disabled', value: ''): void,
