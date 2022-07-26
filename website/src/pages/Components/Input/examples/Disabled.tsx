@@ -1,6 +1,6 @@
-import '@sinch-engage/nectary/input'
 import { useState } from 'react'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/input'
 
 export const DisabledExample: FC = () => {
   const [state, setState] = useState('')

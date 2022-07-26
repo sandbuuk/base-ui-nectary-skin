@@ -1,15 +1,11 @@
-import '@sinch-engage/nectary/button'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/button'
 
-export const TypeCtaPrimaryExample: FC = () => {
-  const onClick = () => console.log('click')
-
-  return (
-    <sinch-button
-      text="Click"
-      aria-label="Click"
-      type="cta-primary"
-      onClick={onClick}
-    />
-  )
-}
+export const TypeCtaPrimaryExample: FC = () => (
+  <sinch-button
+    text="Click"
+    aria-label="Click"
+    type="cta-primary"
+    onClick={() => console.log('click')}
+  />
+)

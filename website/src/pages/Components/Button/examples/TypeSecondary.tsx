@@ -1,15 +1,11 @@
-import '@sinch-engage/nectary/button'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/button'
 
-export const TypeSecondaryExample: FC = () => {
-  const onClick = () => console.log('click')
-
-  return (
-    <sinch-button
-      text="Click"
-      aria-label="Click"
-      type="secondary"
-      onClick={onClick}
-    />
-  )
-}
+export const TypeSecondaryExample: FC = () => (
+  <sinch-button
+    text="Click"
+    aria-label="Click"
+    type="secondary"
+    onClick={() => console.log('click')}
+  />
+)
