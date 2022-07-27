@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "web": "cd website; npm start",
+    "start": "cd docs; npm start",
     "storybook": "start-storybook --port 4000",
     "storybook:build": "build-storybook --output-dir public --quiet",
     "lint": "eslint . '*/**/*.{js,ts,tsx,mts}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html' 'components/theme.css'",
