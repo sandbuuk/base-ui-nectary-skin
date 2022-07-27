@@ -4,7 +4,7 @@
     "web": "cd website; npm start",
     "storybook": "start-storybook --port 4000",
     "storybook:build": "build-storybook --output-dir public --quiet",
-    "lint": "eslint . '*/**/*.{js,ts,tsx}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html' 'components/theme.css'",
+    "lint": "eslint . '*/**/*.{js,ts,tsx,mts}' && tsc --noEmit --declaration false && stylelint 'components/**/*.html' 'components/theme.css'",
     "test": "yarn --cwd=tests test"
   },
   "devDependencies": {
