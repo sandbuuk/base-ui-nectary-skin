@@ -1,0 +1,16 @@
+.navigation-item {
+  display: block;
+}
+
+.navigation-link {
+  display: block;
+  color: var(--sinch-color-stormy-500);
+  line-height: 32px;
+  text-decoration: none;
+  padding: 0 16px;
+  user-select: none;
+}
+
+.navigation-link:hover {
+  background-color: var(--sinch-color-snow-500);
+}

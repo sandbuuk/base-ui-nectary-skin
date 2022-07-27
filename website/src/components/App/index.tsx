@@ -1,7 +1,9 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Suspense, StrictMode } from 'react'
-import { Link, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { Loading } from '../Loading'
+import { NavigationItem } from '../Navigation/Item'
+import { NavigationList } from '../Navigation/List'
 import { mdxComponents } from '../mdx-components'
 import type { FC } from 'react'
 import { ChangelogPage } from '~/pages/Changelog'
@@ -9,9 +11,9 @@ import { ComponentsOutlet, ComponentsPage } from '~/pages/Components'
 import { IntroPage } from '~/pages/Intro'
 import { NotFoundPage } from '~/pages/NotFound'
 import { lazyScrollIntoView } from '~/utils/lazy-scroll-into-view'
+import { QueryRouter } from '~/utils/query-router'
 import '@sinch-engage/nectary/theme.css'
 import './styles.css'
-import { QueryRouter } from '~/utils/query-router'
 
 const req = import.meta.webpackContext!('~/pages/Components/', {
   regExp: /^\.\/.*\/index\.mdx$/,
@@ -26,29 +28,22 @@ export const App: FC = () => (
     <MDXProvider components={mdxComponents}>
       <QueryRouter>
         <div id="app-sidebar">
-          <ul>
-            <li>
-              <Link to="/?path=/">👋 Intro</Link>
-            </li>
-            <li>
-              <Link to="/?path=/changelog">📦 Changelog</Link>
-            </li>
-            <li>
-              <Link to="/?path=/components">🍱 Components</Link>
-              <ul>
+          <NavigationList>
+            <NavigationItem path="/" text="👋 Intro"/>
+            <NavigationItem path="/changelog" text="📦 Changelog"/>
+            <NavigationItem path="/components" text="🍱 Components">
+              <NavigationList>
                 {req.keys().map((key) => {
                   const name = key.replace(nameRegexp, '$1')
-                  const route = `/?path=/components/${name.toLowerCase()}`
+                  const route = `/components/${name.toLowerCase()}`
 
                   return (
-                    <li key={key}>
-                      <Link to={route}>{name}</Link>
-                    </li>
+                    <NavigationItem path={route} text={`◦ ${name}`} key={key}/>
                   )
                 })}
-              </ul>
-            </li>
-          </ul>
+              </NavigationList>
+            </NavigationItem>
+          </NavigationList>
         </div>
         <div id="app-content">
           <Suspense fallback={<Loading/>}>

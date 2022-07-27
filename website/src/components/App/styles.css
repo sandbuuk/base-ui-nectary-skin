@@ -5,13 +5,16 @@
 
 #app-sidebar {
   width: 200px;
+  box-sizing: border-box;
+  padding: 12px 0;
+  border-right: 1px solid var(--sinch-color-snow-600);
 }
 
 #app-content {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 10px;
+  padding: 10px 24px;
   max-width: 800px;
   box-sizing: border-box;
 }
