@@ -7,6 +7,8 @@ import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
 import { Chat } from './components/Chat'
 import { Checkbox } from './components/Checkbox'
+import { DateInput } from './components/DateInput'
+import { DatePicker } from './components/DatePicker'
 import { Dialog } from './components/Dialog'
 import { Dropdown } from './components/Dropdown'
 import { Grid } from './components/Grid'
@@ -86,6 +88,18 @@ const mapElement = (url: URL) => {
     case '/checkbox': {
       return (
         <Checkbox search={url.searchParams}/>
+      )
+    }
+
+    case '/date-input': {
+      return (
+        <DateInput search={url.searchParams}/>
+      )
+    }
+
+    case '/date-picker': {
+      return (
+        <DatePicker search={url.searchParams}/>
       )
     }
 

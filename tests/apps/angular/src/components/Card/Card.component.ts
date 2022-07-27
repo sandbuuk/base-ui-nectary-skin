@@ -21,6 +21,7 @@ export class CardComponent {
   hasIcon: boolean
   linkText: string | null
   buttonText: string | null
+  background: string | null
 
   constructor() {
     const url = new URL(location.href)
@@ -32,5 +33,6 @@ export class CardComponent {
     this.hasIcon = url.searchParams.get('icon') !== null
     this.linkText = url.searchParams.get('link')
     this.buttonText = url.searchParams.get('button')
+    this.background = url.searchParams.get('bg')
   }
 }

@@ -1,20 +1,22 @@
 <style>
 dialog {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   margin: auto;
   display: flex;
   flex-direction: column;
   padding: 24px;
-  max-width: 512px;
-  border-radius: 4px;
+  max-width: var(--sinch-dialog-max-width, 512px);
+  max-height: unset;
+  border-radius: var(--sinch-shape-radius-l);
   box-sizing: border-box;
+  contain: content;
   background-color: var(--sinch-color-snow-100);
   color: var(--sinch-color-text-default);
   font: var(--sinch-font-body);
   border: none;
-  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--sinch-elevation-level-3);
 }
 
 dialog:not([open]) {

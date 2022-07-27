@@ -72,6 +72,11 @@
   --sinch-color-orange-200: #FFD4B3;
   --sinch-color-bolt-400: #FFBE3C;
   --sinch-color-bolt-200: #FFE6B3;
+  --sinch-color-background-grey: #FAFAFA;
+  --sinch-color-background-green: #DCEDE1;
+  --sinch-color-background-blue: #DEF2FF;
+  --sinch-color-background-yellow: #FCECCB;
+  --sinch-color-background-white: #FFFFFF;
   --sinch-color-transparent: transparent;
 
   /* Typography */
@@ -86,6 +91,18 @@
   --sinch-font-text-s: 400 14px/22px var(--sinch-font-family);
   --sinch-font-text-xs: 400 12px/20px var(--sinch-font-family);
   --sinch-font-text-xxs: 400 10px/16px var(--sinch-font-family);
+
+  /* Shapes */
+  --sinch-shape-radius-xs: 2px;
+  --sinch-shape-radius-s: 4px;
+  --sinch-shape-radius-m: 8px;
+  --sinch-shape-radius-l: 12px;
+
+  /* Elevation */
+  --sinch-elevation-level-0: 0 0 0 0 rgba(10, 39, 61, 0.1);
+  --sinch-elevation-level-1: 1px 2px 6px rgba(10, 39, 61, 0.1);
+  --sinch-elevation-level-2: 1px 4px 8px rgba(10, 39, 61, 0.1);
+  --sinch-elevation-level-3: 1px 6px 12px rgba(10, 39, 61, 0.15);
 
   /* Deprecated */
   --sinch-font-hero: 700 56px/72px var(--sinch-font-family);

@@ -20,6 +20,7 @@ export const Segment: FC<TSegment> = ({ search }) => {
   const hasAction = search.get('action') !== null
   const hasIcon = search.get('icon') !== null
   const hasInfo = search.get('info') !== null
+  const hasPreview = search.get('preview') !== null
   const hasCollapse = search.get('collapse') !== null
   const [isCollapsed, setCollapsed] = useState(false)
   const onCollapse = useCallback((e: SyntheticEvent<Element, CustomEvent>) => {
@@ -65,6 +66,22 @@ export const Segment: FC<TSegment> = ({ search }) => {
         >
           <sinch-icon-apps slot="icon"/>
         </sinch-icon-button>
+      )}
+      {hasPreview && (
+        <div
+          slot="preview"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            backgroundColor: '#F1F3F4',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
+          }}
+        >
+          <span style={{ fontSize: '18px' }}>Replace me!</span>
+          <span style={{ fontSize: '12px' }}>Im a template component</span>
+        </div>
       )}
       {hasAction && (
         <>

@@ -5,7 +5,7 @@
   [attr.disabled]="isDisabled"
 >
   <sinch-icon-branded-chatbot *ngIf="hasIcon" slot="icon"></sinch-icon-branded-chatbot>
-  <sinch-illustration-phone-and-cat *ngIf="hasIllustration" [attr.size]="290" slot="illustration"></sinch-illustration-phone-and-cat>
+  <sinch-illustration-phone-and-cat *ngIf="hasIllustration" [attr.size]="290" [attr.background]="background" valign="top" slot="illustration"></sinch-illustration-phone-and-cat>
   <sinch-card-button *ngIf="buttonText !== null" slot="action" [attr.text]="buttonText"></sinch-card-button>
   <sinch-card-link *ngIf="linkText !== null" slot="action" [attr.text]="linkText"></sinch-card-link>
 </sinch-card>

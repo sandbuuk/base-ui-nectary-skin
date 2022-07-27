@@ -26,6 +26,8 @@ import '@sinch-engage/nectary/icons/keyboard-arrow-down'
 import '@sinch-engage/nectary/icons/keyboard-arrow-left'
 import '@sinch-engage/nectary/icons/keyboard-arrow-right'
 import '@sinch-engage/nectary/icons/keyboard-arrow-up'
+import '@sinch-engage/nectary/icons/keyboard-double-arrow-left'
+import '@sinch-engage/nectary/icons/keyboard-double-arrow-right'
 import '@sinch-engage/nectary/icons/south'
 import '@sinch-engage/nectary/icons/south-east'
 import '@sinch-engage/nectary/icons/south-west'
@@ -2557,6 +2559,8 @@ const hardwareIconNames = [
   'sinch-icon-keyboard-arrow-left',
   'sinch-icon-keyboard-arrow-right',
   'sinch-icon-keyboard-arrow-up',
+  'sinch-icon-keyboard-double-arrow-left',
+  'sinch-icon-keyboard-double-arrow-right',
   'sinch-icon-keyboard-backspace',
   'sinch-icon-keyboard-capslock',
   'sinch-icon-keyboard-hide',

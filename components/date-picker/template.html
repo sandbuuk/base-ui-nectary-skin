@@ -1,0 +1,200 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+}
+
+#content {
+  width: fit-content;
+  box-sizing: border-box;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#month {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.week {
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+}
+
+.week.empty {
+  display: none;
+}
+
+.day {
+  all: initial;
+  font: var(--sinch-font-text-xs);
+  color: var(--sinch-color-text-default);
+  text-align: center;
+  border-radius: var(--sinch-shape-radius-m);
+  width: 24px;
+  height: 24px;
+  line-height: 22px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background-color: transparent;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.day.today {
+  border: 1px solid var(--sinch-color-stormy-500);
+}
+
+.day:disabled {
+  cursor: initial;
+  color: var(--sinch-color-snow-700);
+}
+
+.day:focus-visible {
+  outline: 1px solid var(--sinch-color-aqua-400);
+  outline-offset: 1px;
+}
+
+@supports not selector(:focus-visible) {
+  .day:focus {
+    outline: 1px solid var(--sinch-color-aqua-400);
+    outline-offset: 1px;
+  }
+}
+
+.day.selected {
+  background-color: var(--sinch-color-stormy-500);
+  color: var(--sinch-color-snow-100);
+}
+
+.day:hover:not(:disabled):not(.selected) {
+  background-color: var(--sinch-color-snow-600);
+}
+
+#week-day-names {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  height: 24px;
+}
+
+.week-day-name {
+  font: var(--sinch-font-text-xs);
+  font-weight: var(--sinch-font-weight-emphasized);
+  color: var(--sinch-color-text-default);
+  text-align: center;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  user-select: none;
+  text-transform: uppercase;
+}
+
+#content-header {
+  display: flex;
+  flex-direction: row;
+  height: 32px;
+  align-items: center;
+}
+
+#date {
+  flex: 1;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+#prev-year {
+  margin-left: -4px;
+}
+
+#next-year {
+  margin-right: -4px;
+}
+</style>
+
+<div id="content" slot="content">
+  <div id="content-header">
+    <sinch-icon-button small id="prev-year">
+      <sinch-icon-keyboard-double-arrow-left slot="icon"></sinch-icon-keyboard-double-arrow-left>
+    </sinch-icon-button>
+    <sinch-icon-button small id="prev-month">
+      <sinch-icon-keyboard-arrow-left slot="icon"></sinch-icon-keyboard-arrow-left>
+    </sinch-icon-button>
+    <sinch-text type="m" emphasized id="date"></sinch-text>
+    <sinch-icon-button small id="next-month">
+      <sinch-icon-keyboard-arrow-right slot="icon"></sinch-icon-keyboard-arrow-right>
+    </sinch-icon-button>
+    <sinch-icon-button small id="next-year">
+      <sinch-icon-keyboard-double-arrow-right slot="icon"></sinch-icon-keyboard-double-arrow-right>
+    </sinch-icon-button>
+  </div>
+  <div id="week-day-names">
+    <div class="week-day-name"></div>
+    <div class="week-day-name"></div>
+    <div class="week-day-name"></div>
+    <div class="week-day-name"></div>
+    <div class="week-day-name"></div>
+    <div class="week-day-name"></div>
+    <div class="week-day-name"></div>
+  </div>
+  <div id="month">
+    <div class="week">
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+    </div>
+    <div class="week">
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+    </div>
+    <div class="week">
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+    </div>
+    <div class="week">
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+    </div>
+    <div class="week">
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+    </div>
+    <div class="week">
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+      <button class="day"></button>
+    </div>
+  </div>
+</div>

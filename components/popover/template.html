@@ -11,19 +11,21 @@
 
 dialog {
   position: fixed;
+  top: 0;
   left: 0;
-  right: 0;
-  margin: auto;
+  margin: 0;
   outline: none;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
   background-color: var(--sinch-color-snow-100);
-  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--sinch-elevation-level-2);
   border: 1px solid var(--sinch-color-snow-500);
-  border-radius: 4px;
+  border-radius: var(--sinch-shape-radius-s);
   contain: content;
   padding: 0;
   box-sizing: border-box;
+  max-width: unset;
+  max-height: unset;
 }
 
 dialog:not([open]) {

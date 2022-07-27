@@ -8,6 +8,7 @@ const withValue = '/input?width=200&label=Label&value=Input%20value'
 const withPlaceholder = '/input?width=200&label=Label&placeholder=Placeholder%20value'
 const withTooltip = '/input?width=200&label=Label&tooltip=Tooltip%20text'
 const withEverything = '/input?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=Input%20value'
+const withRightButton = '/input?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&value=Input%20value%20long%20long&right=true'
 const checkValue = makeAccessibilityTests('/input?width=200&label=Label&value=Input%20value', 'sinch-input')
 
 test('accessibility', checkValue(async function* () {
@@ -285,6 +286,13 @@ test('input screenshots', runScreenshotTests('sinch-input', [
         el.removeAttribute('disabled')
       })
       yield { name: 'enabled' }
+    },
+  },
+  {
+    name: 'right slot',
+    url: withRightButton,
+    async *fn() {
+      yield { name: 'shot' }
     },
   },
   {

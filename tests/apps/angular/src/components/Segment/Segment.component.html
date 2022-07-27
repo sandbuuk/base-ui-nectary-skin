@@ -10,6 +10,10 @@
   <sinch-icon-button *ngIf="hasInfo" small slot="info">
     <sinch-icon-apps slot="icon"></sinch-icon-apps>
   </sinch-icon-button>
+  <div *ngIf="hasPreview" slot="preview" class="preview-content">
+    <span style="font-size: 18px;">Replace me!</span>
+    <span style="font-size: 12px;">Im a template component</span>
+  </div>
   <sinch-checkbox *ngIf="hasAction" text="Checkbox" slot="action"></sinch-checkbox>
   <sinch-button *ngIf="hasAction" text="Cancel" type="secondary" slot="action" small></sinch-button>
   <sinch-button *ngIf="hasAction" text="Ok" type="primary" slot="action" small></sinch-button>
