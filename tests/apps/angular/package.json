@@ -15,6 +15,7 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@angular-devkit/architect": "*",
     "@saas/html-minify-loader": "workspace:@saas/html-minify-loader@*",
     "@sinch-engage/nectary": "workspace:@sinch-engage/nectary@*",
     "axe-core": "^4.3.5",
