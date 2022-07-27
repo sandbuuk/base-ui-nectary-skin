@@ -65,13 +65,17 @@
   display: none;
 }
 
-#preview:not(.empty) + #info:not(.empty),
-#preview:not(.empty) + #info.empty + #collapse:not(.empty) {
-  margin-left: 24px;
+#info.empty + #collapse {
+  margin-left: auto;
 }
 
 #collapse.empty {
   display: none;
+}
+
+#preview:not(.empty) + #info:not(.empty),
+#preview:not(.empty) + #info.empty + #collapse:not(.empty) {
+  margin-left: 24px;
 }
 
 #content-wrapper {
