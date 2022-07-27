@@ -8,4 +8,4 @@ export const ComponentsOutlet: FC = () => (
   </div>
 )
 
-export const ComponentsPage: FC = lazyScrollIntoView(() => import('./index.mdx'))
+export const ComponentsPage: FC = lazyScrollIntoView(() => import(/* webpackChunkName: "Components" */'./index.mdx'))

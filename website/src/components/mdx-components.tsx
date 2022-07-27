@@ -74,7 +74,10 @@ export const mdxComponents: MDXComponents = {
     const id = slugify(text)
 
     return (
-      <sinch-title id={id} type="xs" level="6" text={text}/>
+      <div className="title" id={id}>
+        <a className="title-anchor" href={`#${id}`}>#</a>
+        <sinch-title id={id} type="xs" level="6" text={text}/>
+      </div>
     )
   },
   p: ({ children }) => (

@@ -1,6 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Suspense, StrictMode } from 'react'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
 import { Loading } from '../Loading'
 import { mdxComponents } from '../mdx-components'
 import type { FC } from 'react'
@@ -11,28 +11,34 @@ import { NotFoundPage } from '~/pages/NotFound'
 import { lazyScrollIntoView } from '~/utils/lazy-scroll-into-view'
 import '@sinch-engage/nectary/theme.css'
 import './styles.css'
+import { QueryRouter } from '~/utils/query-router'
 
-const req = require.context('~/pages/Components/', true, /^\.\/.*\/index\.mdx$/, 'lazy')
+const req = import.meta.webpackContext!('~/pages/Components/', {
+  regExp: /^\.\/.*\/index\.mdx$/,
+  recursive: true,
+  mode: 'lazy',
+  chunkName: 'Components-[request]',
+})
 const nameRegexp = /^\.\/(.+?)\/.+$/
 
 export const App: FC = () => (
   <StrictMode>
     <MDXProvider components={mdxComponents}>
-      <BrowserRouter>
+      <QueryRouter>
         <div id="app-sidebar">
           <ul>
             <li>
-              <Link to="/">👋 Intro</Link>
+              <Link to="/?path=/">👋 Intro</Link>
             </li>
             <li>
-              <Link to="/changelog">📦 Changelog</Link>
+              <Link to="/?path=/changelog">📦 Changelog</Link>
             </li>
             <li>
-              <Link to="/components">🍱 Components</Link>
+              <Link to="/?path=/components">🍱 Components</Link>
               <ul>
                 {req.keys().map((key) => {
                   const name = key.replace(nameRegexp, '$1')
-                  const route = `/components/${name.toLowerCase()}`
+                  const route = `/?path=/components/${name.toLowerCase()}`
 
                   return (
                     <li key={key}>
@@ -68,7 +74,7 @@ export const App: FC = () => (
             </Routes>
           </Suspense>
         </div>
-      </BrowserRouter>
+      </QueryRouter>
     </MDXProvider>
   </StrictMode>
 )

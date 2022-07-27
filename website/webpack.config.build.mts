@@ -1,19 +1,22 @@
 import path from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
+import HtmlPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import remarkGfm from 'remark-gfm'
 import remarkToc from 'remark-toc'
+import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
 import type { Configuration } from 'webpack'
 
-const PORT = 4000
+const NODE_MODULES_REGEXP = /[\\/]node_modules[\\/]/
 
 const config: Configuration = {
-  mode: 'development',
+  mode: 'production',
   entry: path.resolve('./src/index.tsx'),
   output: {
-    chunkFilename: '[name].js',
-    publicPath: '/',
-    pathinfo: true,
+    path: path.resolve('./build/'),
+    filename: 'js/[name].[chunkhash].js',
+    chunkFilename: 'js/[name].[chunkhash].js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
@@ -23,15 +26,20 @@ const config: Configuration = {
     },
   },
   module: {
+    parser: {
+      javascript: {
+        importMetaContext: true,
+      },
+    },
     rules: [
       {
         test: /\.html$/,
-        exclude: /node_modules/,
+        exclude: NODE_MODULES_REGEXP,
         use: ['raw-loader', '@saas/html-minify-loader'],
       },
       {
         test: /\.[jt]sx?$/,
-        exclude: /node_modules/,
+        exclude: NODE_MODULES_REGEXP,
         loader: 'babel-loader',
         options: {
           babelrc: false,
@@ -51,12 +59,12 @@ const config: Configuration = {
       },
       {
         test: /\/pages\/Components\/.+?\/examples\/.+?\.tsx$/,
-        exclude: /node_modules/,
+        exclude: NODE_MODULES_REGEXP,
         loader: '@saas/example-code-loader',
       },
       {
         test: /\.mdx?$/,
-        exclude: /node_modules/,
+        exclude: NODE_MODULES_REGEXP,
         use: [
           {
             loader: 'babel-loader',
@@ -74,6 +82,7 @@ const config: Configuration = {
                   { runtime: 'automatic' },
                 ],
               ],
+              shouldPrintComment: (val: string) => val.startsWith(' webpackChunkName'),
             },
           },
           {
@@ -87,23 +96,57 @@ const config: Configuration = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
   },
-  // @ts-ignore
-  devServer: {
-    host: 'localhost',
-    port: PORT,
-    historyApiFallback: true,
+  performance: {
+    hints: false,
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        extractComments: true,
+        terserOptions: {
+          ecma: 2020,
+          output: {
+            comments: false,
+            beautify: false,
+          },
+        },
+      }),
+      new CssMinimizerPlugin(),
+    ],
+    runtimeChunk: {
+      name: 'runtime',
+    },
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        vendor: {
+          name: 'vendor',
+          test: NODE_MODULES_REGEXP,
+          priority: 10,
+          enforce: true,
+          chunks: 'all',
+        },
+      },
+    },
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve('./public/index.html'),
-      favicon: path.resolve('./public/favicon.png'),
-    }),
+    new webpack.CleanPlugin(),
     new webpack.DefinePlugin({
       __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash].css',
+      chunkFilename: 'css/[name].[contenthash].css',
+    }),
+    new HtmlPlugin({
+      template: path.resolve('./public/index.html'),
+      favicon: path.resolve('./public/favicon.png'),
     }),
   ],
 }
