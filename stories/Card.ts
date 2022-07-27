@@ -4,7 +4,7 @@ import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/card'
 import '@sinch-engage/nectary/card-button'
 import '@sinch-engage/nectary/card-link'
-import '@sinch-engage/nectary/illustration/phone-and-cat'
+import '@sinch-engage/nectary/illustrations/phone-and-cat'
 import '@sinch-engage/nectary/icons-branded/chatbot'
 
 export default {

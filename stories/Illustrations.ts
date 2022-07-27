@@ -1,11 +1,16 @@
-import { backgroundValues, valignValues } from '@sinch-engage/nectary/illustration/utils'
+import { backgroundValues, valignValues } from '@sinch-engage/nectary/illustrations/utils'
 import { useArgs, useRef } from '@storybook/addons'
-import type { TSinchIllustrationElement } from '@sinch-engage/nectary/illustration/types'
+import type { TSinchIllustrationElement } from '@sinch-engage/nectary/illustrations/types'
 import type { Story, Meta } from '@storybook/html'
-import '@sinch-engage/nectary/illustration/phone-and-cat'
+import '@sinch-engage/nectary/illustrations/phone-and-cat'
+
+// {{illustration import}}
 
 const illustrationNames = [
+
   'sinch-illustration-phone-and-cat',
+  
+  // {{illustration name}}
 ]
 
 export default {
