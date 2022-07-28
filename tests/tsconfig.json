@@ -16,5 +16,9 @@
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-  }
+  },
+  "exclude": [
+    "apps/angular/",
+    "apps/vue/",
+  ]
 }

@@ -1,5 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
-import { useWidthWrapper } from './use-story-wrapper'
+import { useWidthWrapper } from '../use-story-wrapper'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/card'
 import '@sinch-engage/nectary/card-button'

@@ -1,5 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
-import { useStoryWrapper } from './use-story-wrapper'
+import { useStoryWrapper } from '../use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/select'
 import '@sinch-engage/nectary/select-option'

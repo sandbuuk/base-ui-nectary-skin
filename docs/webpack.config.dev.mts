@@ -5,7 +5,7 @@ import remarkToc from 'remark-toc'
 import webpack from 'webpack'
 import type { Configuration } from 'webpack'
 
-const PORT = 4000
+const PORT = 5000
 
 const config: Configuration = {
   mode: 'development',

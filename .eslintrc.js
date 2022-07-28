@@ -385,6 +385,7 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       parserOptions: {
+        tsconfigRootDir: __dirname,
         project: './tsconfig.json',
       },
       plugins: [
