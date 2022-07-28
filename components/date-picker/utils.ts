@@ -6,6 +6,10 @@ type TCalendarOptions = {
 
 type TMaybeDate = Date | null
 
+const pad = (value: number): string => {
+  return value.toString().padStart(2, '0')
+}
+
 export const getCalendarMonth = (date: Date, options?: TCalendarOptions): TMaybeDate[][] => {
   const { firstDayOfWeek } = {
     firstDayOfWeek: 1,
@@ -44,7 +48,7 @@ const getTimeZoneOffset = (): string => {
   const offset = new Date().getTimezoneOffset()
   const o = Math.abs(offset)
 
-  return `${(offset < 0 ? '+' : '-') + Math.floor(o / 60).toString().padStart(2, '0')}:${(o % 60).toString().padStart(2, '0')}`
+  return `${(offset < 0 ? '+' : '-') + pad(Math.floor(o / 60))}:${pad(o % 60)}`
 }
 
 export const today = (): Date => {
@@ -52,7 +56,7 @@ export const today = (): Date => {
 }
 
 export const dateToIso = (date: Date): string => {
-  return new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().substring(0, 10)
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
 }
 
 export const isoToDate = (value: string): Date => {
