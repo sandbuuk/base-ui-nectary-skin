@@ -1,0 +1,24 @@
+.code {
+  font: var(--sinch-font-text-s);
+}
+
+.code-title {
+  cursor: pointer;
+  user-select: none;
+}
+
+.code-content {
+  position: relative;
+}
+
+.code-copy {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  --sinch-icon-button-color: var(--sinch-color-snow-100);
+}
+
+.code-copy:hover {
+  --sinch-icon-button-color: var(--sinch-color-stormy-500);
+}

@@ -385,6 +385,7 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       parserOptions: {
+        tsconfigRootDir: __dirname,
         project: './tsconfig.json',
       },
       plugins: [
@@ -470,7 +471,6 @@ module.exports = {
         'react/boolean-prop-naming': [2, {
           rule: '^(is|has|should)[A-Z]([A-Za-z0-9]?)+',
         }],
-        'react/forbid-component-props': [2, { forbid: ['className'] }],
         'react/forbid-dom-props': 2,
         'react/no-children-prop': 2,
         'react/no-danger': 2,

@@ -2,3 +2,4 @@ public/
 tests/apps/angular/
 tests/apps/vue/
 lib/
+build/

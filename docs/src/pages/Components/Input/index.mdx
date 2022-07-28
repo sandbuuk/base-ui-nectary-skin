@@ -1,0 +1,65 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import {
+  ReactPropsTable,
+  ReactHandlersTable,
+  ElementPropertiesTable,
+  ElementAttributesTable,
+  ElementEventsTable
+} from '!!@saas/types-to-mdx-loader!@sinch-engage/nectary/input/types.ts'
+import { SimpleExample } from './examples/Simple.tsx'
+import { OptionalAttributesExample } from './examples/OptionalAttributes.tsx'
+import { DisabledExample } from './examples/Disabled.tsx'
+import { TooltipExample } from './examples/Tooltip.tsx'
+
+# Input
+
+Input is the basic and most common text field.
+
+It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled-components) component.
+
+## Table of contents
+
+## Examples
+
+### Simple
+
+<Example Component={SimpleExample}/>
+
+### Optional attributes
+
+<Example Component={OptionalAttributesExample}/>
+
+### Disabled
+
+<Example Component={DisabledExample}/>
+
+### Tooltip
+
+<Example Component={TooltipExample}/>
+
+## API
+
+### React
+
+#### Props
+
+<ReactPropsTable/>
+
+#### Handlers
+
+<ReactHandlersTable/>
+
+### Element
+
+#### Properties
+
+<ElementPropertiesTable/>
+
+#### Attributes
+
+<ElementAttributesTable/>
+
+#### Events
+
+<ElementEventsTable/>
