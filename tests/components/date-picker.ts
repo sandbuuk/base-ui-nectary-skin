@@ -69,10 +69,18 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
     },
   },
   {
-    name: 'value attribute',
+    name: 'value attribute summer',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', '2022-07-07'))
+      yield { name: 'updated' }
+    },
+  },
+  {
+    name: 'value attribute winter',
+    url: shot,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('value', '2022-03-03'))
       yield { name: 'updated' }
     },
   },

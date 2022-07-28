@@ -51,6 +51,7 @@ const config: PlaywrightTestConfig = {
       use: {
         browserName: 'chromium',
         baseURL: 'http://localhost:3023',
+        timezoneId: 'Europe/Stockholm',
       },
     },
     {

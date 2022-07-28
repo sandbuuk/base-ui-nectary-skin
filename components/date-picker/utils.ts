@@ -44,13 +44,6 @@ export const getCalendarMonth = (date: Date, options?: TCalendarOptions): TMaybe
   return month
 }
 
-const getTimeZoneOffset = (): string => {
-  const offset = new Date().getTimezoneOffset()
-  const o = Math.abs(offset)
-
-  return `${(offset < 0 ? '+' : '-') + pad(Math.floor(o / 60))}:${pad(o % 60)}`
-}
-
 export const today = (): Date => {
   return new Date()
 }
@@ -60,7 +53,7 @@ export const dateToIso = (date: Date): string => {
 }
 
 export const isoToDate = (value: string): Date => {
-  return new Date(`${value.substring(0, 10)}T00:00:00${getTimeZoneOffset()}`)
+  return new Date(`${value.substring(0, 10)}T00:00:00`)
 }
 
 export const getDayNames = (locale: string): string[] => {
