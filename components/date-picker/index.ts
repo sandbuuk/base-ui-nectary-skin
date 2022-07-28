@@ -39,6 +39,7 @@ import {
   isDateBetween,
   isoToDate,
   isValidDate,
+  today,
 } from './utils'
 import type { TSinchIconButtonElement } from '../icon-button/types'
 import type { TSinchTextElement } from '../text/types'
@@ -124,10 +125,10 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     switch (name) {
       case 'value': {
         assertValue(newVal)
-        this.#date = newVal.length > 0 ? isoToDate(newVal) : new Date()
+        this.#date = newVal.length > 0 ? isoToDate(newVal) : today()
 
         if (!isValidDate(this.#date)) {
-          this.#date = new Date()
+          this.#date = today()
         }
 
         // Dont show panel below min date

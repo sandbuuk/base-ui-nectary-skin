@@ -40,12 +40,23 @@ export const getCalendarMonth = (date: Date, options?: TCalendarOptions): TMaybe
   return month
 }
 
+const getTimeZoneOffset = (): string => {
+  const offset = new Date().getTimezoneOffset()
+  const o = Math.abs(offset)
+
+  return `${(offset < 0 ? '+' : '-') + Math.floor(o / 60).toString().padStart(2, '0')}:${(o % 60).toString().padStart(2, '0')}`
+}
+
+export const today = (): Date => {
+  return new Date()
+}
+
 export const dateToIso = (date: Date): string => {
-  return date.toISOString().substring(0, 10)
+  return new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().substring(0, 10)
 }
 
 export const isoToDate = (value: string): Date => {
-  return new Date(`${value.substring(0, 10)}T00:00:00Z`)
+  return new Date(`${value.substring(0, 10)}T00:00:00${getTimeZoneOffset()}`)
 }
 
 export const getDayNames = (locale: string): string[] => {
@@ -106,14 +117,6 @@ export const assertDate: TAssertDate = (value, attrName, attrValue) => {
 
 const compareDates = (a: Date, b: Date): number => {
   return a.getTime() - b.getTime()
-}
-
-export const cloneDate = (date: Date): Date => {
-  const result = new Date(date)
-
-  result.setHours(0, 0, 0, 0)
-
-  return result
 }
 
 export const clampMinDate = (date: Date, min: Date): void => {
