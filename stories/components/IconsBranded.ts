@@ -18,6 +18,12 @@ import '@sinch-engage/nectary/icons-branded/credit-card'
 import '@sinch-engage/nectary/icons-branded/help'
 import '@sinch-engage/nectary/icons-branded/finance'
 import '@sinch-engage/nectary/icons-branded/verified-phone'
+import '@sinch-engage/nectary/icons-branded/ai'
+import '@sinch-engage/nectary/icons-branded/custom-message'
+import '@sinch-engage/nectary/icons-branded/time'
+import '@sinch-engage/nectary/icons-branded/integration'
+import '@sinch-engage/nectary/icons-branded/line-chart-up'
+import '@sinch-engage/nectary/icons-branded/line-chart-down'
 import '@sinch-engage/nectary/icons-branded/chat'
 import '@sinch-engage/nectary/icons-branded/mms'
 import '@sinch-engage/nectary/icons-branded/push'
@@ -42,6 +48,12 @@ const iconNames = [
   'sinch-icon-branded-help',
   'sinch-icon-branded-finance',
   'sinch-icon-branded-verified-phone',
+  'sinch-icon-branded-ai',
+  'sinch-icon-branded-custom-message',
+  'sinch-icon-branded-time',
+  'sinch-icon-branded-integration',
+  'sinch-icon-branded-line-chart-up',
+  'sinch-icon-branded-line-chart-down',
   'sinch-icon-branded-chat',
   'sinch-icon-branded-push',
   'sinch-icon-branded-sms',

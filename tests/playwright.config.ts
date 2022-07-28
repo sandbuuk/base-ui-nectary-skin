@@ -7,6 +7,7 @@ const config: PlaywrightTestConfig = {
       use: {
         browserName: 'chromium',
         baseURL: 'http://localhost:3021',
+        timezoneId: 'Pacific/Honolulu',
       },
     },
     {
@@ -28,6 +29,7 @@ const config: PlaywrightTestConfig = {
       use: {
         browserName: 'chromium',
         baseURL: 'http://localhost:3022',
+        timezoneId: 'Australia/Sydney',
       },
     },
     {
