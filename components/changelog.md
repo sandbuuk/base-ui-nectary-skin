@@ -1,3 +1,12 @@
+## v0.31.0
+
+* 💥 move illustrations from `illustration/` to `illustrations/`
+* ➕ add a lot of illustrations
+* ➕ add more branded icons
+* 🐞 fix timezones in `sinch-date-picker`
+* 🐞 fix collapse button position in `sinch-segment`
+* 🐞 fix content overflow in `sinch-segment`
+
 ## v0.30.0
 
 * ➕ add `sinch-date-picker` component
