@@ -5,7 +5,7 @@
     :label="label"
     :disabled="isDisabled">
     <sinch-icon-branded-chatbot v-if="hasIcon" slot="icon"></sinch-icon-branded-chatbot>
-    <sinch-illustration-phone-and-cat v-if="hasIllustration" size="290" slot="illustration"></sinch-illustration-phone-and-cat>
+    <sinch-illustration-phone-and-cat v-if="hasIllustration" size="290" :background="background" valign="top" slot="illustration"></sinch-illustration-phone-and-cat>
     <sinch-card-button v-if="buttonText !== null" :text="buttonText" slot="action"></sinch-card-button>
     <sinch-card-link v-if="linkText !== null" :text="linkText" slot="action"></sinch-card-link>
   </sinch-card>
@@ -46,6 +46,9 @@ export default {
     },
     linkText() {
       return this.search.get('link')
+    },
+    background() {
+      return this.search.get('bg')
     },
   }
 }

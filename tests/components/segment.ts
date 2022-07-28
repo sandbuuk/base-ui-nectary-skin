@@ -1,12 +1,14 @@
 import { expect, test } from '@playwright/test'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const withEverything = '/segment?width=400&caption=Title&action=true&content=true&icon=true&info=true'
+const withEverything = '/segment?width=600&caption=Title&action=true&content=true&icon=true&info=true&preview=true'
+const withPreview = '/segment?width=400&caption=Title&preview=true'
+const withPreviewCollapse = '/segment?width=400&caption=Title&preview=true&collapse=true'
 const withCaption = '/segment?width=400&caption=Title&action=true&info=true&icon=true'
-const withNarrowCaption = '/segment?width=300&caption=Title%20long%20long%20long&info=true&icon=true'
+const withNarrowCaption = '/segment?width=400&caption=Title%20long%20long%20long&info=true&preview=true&icon=true'
 const withSmallHeight = '/segment?width=400&height=250&caption=Title&action=true&content=true&icon=true&info=true'
 const withCollapse = '/segment?width=400&caption=Title&collapse=true'
-const withEverythingCollapse = '/segment?width=400&caption=Title&action=true&content=true&icon=true&info=true&collapse=true'
+const withEverythingCollapse = '/segment?width=600&caption=Title&action=true&content=true&icon=true&info=true&preview=true&collapse=true'
 
 test('segment screenshots', runScreenshotTests('sinch-segment', [
   {
@@ -35,6 +37,36 @@ test('segment screenshots', runScreenshotTests('sinch-segment', [
     },
   },
   {
+    name: 'size attribute',
+    url: withCaption,
+    async *fn({ $eval }) {
+      await $eval((el) => el.setAttribute('size', 'l'))
+      yield { name: 'l' }
+      await $eval((el) => el.setAttribute('size', 'm'))
+      yield { name: 'm' }
+      await $eval((el) => el.setAttribute('size', 's'))
+      yield { name: 's' }
+    },
+  },
+  {
+    name: 'size property',
+    url: withCaption,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.size = 'l'
+      })
+      yield { name: 'l' }
+      await $eval((el) => {
+        el.size = 'm'
+      })
+      yield { name: 'm' }
+      await $eval((el) => {
+        el.size = 's'
+      })
+      yield { name: 's' }
+    },
+  },
+  {
     name: 'small height',
     url: withSmallHeight,
     async *fn() {
@@ -44,6 +76,20 @@ test('segment screenshots', runScreenshotTests('sinch-segment', [
   {
     name: 'everything',
     url: withEverything,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'preview',
+    url: withPreview,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'preview collapse',
+    url: withPreviewCollapse,
     async *fn() {
       yield { name: 'shot' }
     },

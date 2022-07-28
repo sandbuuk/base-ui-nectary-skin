@@ -34,6 +34,7 @@ import { SegmentedControlComponent } from '../components/SegmentedControl/Segmen
 import { SegmentedIconControlComponent } from '../components/SegmentedIconControl/SegmentedIconControl.component'
 import { ActionMenuComponent } from '../components/ActionMenu/ActionMenu.component'
 import { ListComponent } from '../components/List/List.component'
+import { DatePickerComponent } from '../components/DatePicker/DatePicker.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -72,6 +73,7 @@ import { AppComponent } from './app.component'
     SegmentedIconControlComponent,
     ActionMenuComponent,
     ListComponent,
+    DatePickerComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

@@ -6,6 +6,7 @@ import {
   updateBooleanAttribute,
   updateAttribute,
   NectaryElement,
+  isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchLinkElement, TSinchLinkReact } from './types'
@@ -16,7 +17,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-link', class extends NectaryElement {
   #$anchor: HTMLAnchorElement
-  #$text: HTMLSpanElement
+  #$text: HTMLElement
 
   constructor() {
     super()
@@ -26,7 +27,7 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$anchor = shadowRoot.querySelector('a')!
-    this.#$text = shadowRoot.querySelector('span')!
+    this.#$text = shadowRoot.querySelector('#content')!
   }
 
   get text() {
@@ -62,7 +63,7 @@ defineCustomElement('sinch-link', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'href']
+    return ['text', 'href', 'external', 'disabled']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -73,8 +74,23 @@ defineCustomElement('sinch-link', class extends NectaryElement {
         break
       }
 
+      case 'disabled': {
+        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+
+        break
+      }
+
       case 'href': {
         updateAttribute(this.#$anchor, 'href', newVal)
+
+        break
+      }
+
+      case 'external': {
+        const isExternal = isAttrTrue(newVal)
+
+        updateAttribute(this.#$anchor, 'target', isExternal ? '_blank' : null)
+        updateBooleanAttribute(this, 'external', isExternal)
 
         break
       }

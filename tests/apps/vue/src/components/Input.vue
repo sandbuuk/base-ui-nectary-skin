@@ -12,12 +12,17 @@
     @focusin="onFocus"
     @focusout="onBlur">
     <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-help-tooltip>
+    <sinch-icon-button v-if="hasRightButton" slot="right" small>
+      <sinch-icon-calendar-today slot="icon"></sinch-icon-calendar-today>
+    </sinch-icon-button>
   </sinch-input>
 </template>
 
 <script>
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/calendar-today'
 
 export default {
   methods: {
@@ -65,6 +70,9 @@ export default {
     isControlled() {
       return this.search.get('uncontrolled') === null
     },
+    hasRightButton() {
+      return this.search.get('right') !== null
+    }
   },
   data() {
     return {

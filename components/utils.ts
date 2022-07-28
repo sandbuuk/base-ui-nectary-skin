@@ -73,13 +73,13 @@ export const getBooleanAttribute = ($element: Element, attrName: string) => {
 }
 
 export const updateBooleanAttribute = ($element: Element, attrName: string, attrValue: boolean | null | undefined) => {
-  const isCurrentValueTrue = getBooleanAttribute($element, attrName)
+  const currentAttrValue = $element.getAttribute(attrName)
 
   if (attrValue === true) {
-    if (!isCurrentValueTrue) {
+    if (!isAttrTrue(currentAttrValue)) {
       $element.setAttribute(attrName, '')
     }
-  } else if (isCurrentValueTrue) {
+  } else if (currentAttrValue !== null) {
     $element.removeAttribute(attrName)
   }
 }
@@ -237,3 +237,32 @@ export const getCssVar = (element: Element, variableName: string): string | null
 
   return result === '' ? null : result
 }
+
+const throttle = (delayFn: (cb: (...args: any[]) => void) => any, cancelFn: (id: any) => void) =>
+  (cb: (...args: any[]) => void) => {
+    let id: any = null
+    let fnArgs: any[]
+
+    const delayCallback = () => {
+      id = null
+
+      cb(fnArgs)
+    }
+
+    return {
+      fn: (...args: any[]) => {
+        fnArgs = args
+
+        if (id === null) {
+          id = delayFn(delayCallback)
+        }
+      },
+      cancel: () => {
+        if (id !== null) {
+          cancelFn(id)
+        }
+      },
+    }
+  }
+
+export const throttleAnimationFrame = throttle(global.requestAnimationFrame, global.cancelAnimationFrame)

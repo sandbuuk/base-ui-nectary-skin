@@ -23,6 +23,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
   #isConnected = false
+  #prevOverflowValue: string = ''
 
   constructor() {
     super()
@@ -70,7 +71,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.setAttribute('role', 'dialog')
     this.#$closeButton.addEventListener('click', this.#onCloseClick)
     this.addEventListener('close', this.#onCloseReactHandler)
-    this.addEventListener('click', this.#onBackdropClick)
+    this.#$dialog.addEventListener('click', this.#onBackdropClick)
     this.#$dialog.addEventListener('cancel', this.#onCancel)
     this.#isConnected = true
 
@@ -82,7 +83,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   disconnectedCallback() {
     this.#$closeButton.removeEventListener('click', this.#onCloseClick)
     this.removeEventListener('close', this.#onCloseReactHandler)
-    this.removeEventListener('click', this.#onBackdropClick)
+    this.#$dialog.removeEventListener('click', this.#onBackdropClick)
     this.#$dialog.removeEventListener('cancel', this.#onCancel)
     this.#isConnected = false
   }
@@ -98,10 +99,15 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   #onBackdropClick = (e: MouseEvent) => {
+    if (e.target !== this.#$dialog) {
+      return
+    }
+
     const rect = this.dialogRect
     const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
     if (!isInside) {
+      e.stopPropagation()
       this.#dispatchCloseEvent()
     }
   }
@@ -123,9 +129,12 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     if (isOpen) {
       if (!getBooleanAttribute(this.#$dialog, 'open')) {
         (this.#$dialog as any).showModal()
+        this.#prevOverflowValue = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
       }
     } else {
       (this.#$dialog as any).close?.()
+      document.body.style.overflow = this.#prevOverflowValue
     }
   }
 

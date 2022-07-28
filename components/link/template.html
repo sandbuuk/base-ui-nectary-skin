@@ -10,14 +10,14 @@ a {
   line-height: inherit;
   color: var(--sinch-color-text-link);
   fill: var(--sinch-color-text-link);
+
+  --sinch-size-icon: 1em;
 }
 
-svg {
+#icon {
   display: none;
-  transform: translateY(0.15em);
-  margin-left: 0.4em;
-  width: 0.8em;
-  pointer-events: none;
+  margin-left: 0.2em;
+  vertical-align: -0.25em;
 }
 
 a:hover {
@@ -32,14 +32,12 @@ a:hover {
   fill: var(--sinch-color-tropical-200);
 }
 
-:host([external]:not([external="false"])) svg {
+:host([external]:not([external="false"])) #icon {
   display: inline-block;
 }
 </style>
 
 <a>
-  <span></span>
-  <svg viewBox="0 0 16 16" aria-hidden="true">
-    <path d="M14.222 14.222H1.778V1.778H8V0H1.778C.79 0 0 .8 0 1.778v12.444C0 15.2.791 16 1.778 16h12.444C15.2 16 16 15.2 16 14.222V8h-1.778v6.222ZM9.778 0v1.778h3.19l-8.737 8.738 1.253 1.253 8.738-8.738v3.191H16V0H9.778Z"/>
-  </svg>
+  <span id="content"></span>
+  <sinch-icon-open-in-new id="icon"></sinch-icon-open-in-new>
 </a>

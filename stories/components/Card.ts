@@ -41,7 +41,7 @@ const Template = (innerHTML: string = ''): Story => () => {
 }
 
 const cardInnerHTML = `
-  <sinch-illustration-phone-and-cat slot="illustration" size="290"></sinch-illustration-phone-and-cat>
+  <sinch-illustration-phone-and-cat slot="illustration" size="290" background="green"></sinch-illustration-phone-and-cat>
   <sinch-icon-branded-chatbot slot="icon"></sinch-icon-branded-chatbot>
   <sinch-card-link slot="action" href="" text="Click here link"></sinch-card-link>
 `

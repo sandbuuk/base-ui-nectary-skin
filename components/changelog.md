@@ -1,3 +1,23 @@
+## v0.30.0
+
+* ➕ add `sinch-date-picker` component
+* ➕ add `right` slot to `sinch-input`
+* ➕ add `preview` slot and `size` attribute to `sinch-segment`
+* ➕ add `background` attribute to illustrations
+* ➕ add `target="_blank"` to external `sinch-link`
+* ➕ handle `--sinch-dialog-max-width` variable in `sinch-dialog`
+* ➕ add `sinch-elevation-level-*` theme variables
+* ➕ add `sinch-shape-radius-*` theme variables
+* ➕ add `background` colors to theme
+* ➕ add square channel icons
+* ➕ add channel branded icons
+* ➕ add `keyboard-double-arrow-*` icons
+* 🐞 fix popover position during resize
+* 🐞 fix document scroll in `sinch-dialog` and `sinch-popover`
+* 🐞 prevent closing multiple dialogs with single click
+* 🐞 fix text overflow in `sinch-tooltip`
+* 🐞 fix angular crash in `sinch-text`, `sinch-title`, `sinch-avatar-status`
+
 ## v0.29.1
 
 * 🐞 fix border glitch in various components

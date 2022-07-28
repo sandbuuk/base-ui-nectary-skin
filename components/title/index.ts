@@ -30,8 +30,9 @@ defineCustomElement('sinch-title', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'heading')
-    assertLevel(this.getAttribute('level'))
-    assertType(this.getAttribute('type'))
+
+    // Dont assert here
+    // Angular sets attributes after connect
   }
 
   get text() {

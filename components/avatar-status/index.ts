@@ -22,7 +22,8 @@ defineCustomElement('sinch-avatar-status', class extends NectaryElement {
   }
 
   connectedCallback() {
-    assertColor(this.getAttribute('color'))
+    // Dont assert here
+    // Angular sets attributes after connect
   }
 
   static get observedAttributes() {

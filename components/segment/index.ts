@@ -1,23 +1,36 @@
+import '../title'
+import { getTitleLevelFromType } from '../title/utils'
 import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getLiteralAttribute,
   getRect,
+  isAttrTrue,
   NectaryElement,
+  setClass,
   updateAttribute,
   updateBooleanAttribute,
+  updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import { assertSize, sizeValues } from './utils'
+import type { TSinchTitleElement } from '../title/types'
 import type { TRect } from '../types'
-import type { TSinchSegmentElement, TSinchSegmentReact } from './types'
+import type { TSinchSegmentElement, TSinchSegmentReact, TSinchSegmentSize } from './types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segment', class extends NectaryElement {
-  #$caption: HTMLElement
+  #$caption: TSinchTitleElement
+  #$previewSlot: HTMLSlotElement
+  #$previewWrapper: HTMLElement
+  #$infoSlot: HTMLSlotElement
+  #$infoWrapper: HTMLElement
   #$collapseSlot: HTMLSlotElement
+  #$collapseWrapper: HTMLElement
 
   constructor() {
     super()
@@ -26,17 +39,52 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
     this.#$caption = shadowRoot.querySelector('#caption')!
+    this.#$previewSlot = shadowRoot.querySelector('slot[name="preview"]')!
+    this.#$infoSlot = shadowRoot.querySelector('slot[name="info"]')!
     this.#$collapseSlot = shadowRoot.querySelector('slot[name="collapse"]')!
+    this.#$previewWrapper = shadowRoot.querySelector('#preview')!
+    this.#$infoWrapper = shadowRoot.querySelector('#info')!
+    this.#$collapseWrapper = shadowRoot.querySelector('#collapse')!
+  }
+
+  connectedCallback() {
+    this.#$previewSlot.addEventListener('slotchange', this.#onPreviewSlotChange)
+    this.#$infoSlot.addEventListener('slotchange', this.#onInfoSlotChange)
+    this.#$collapseSlot.addEventListener('slotchange', this.#onCollapseSlotChange)
+
+    this.#onPreviewSlotChange()
+    this.#onInfoSlotChange()
+    this.#onCollapseSlotChange()
+  }
+
+  disconnectedCallback() {
+    this.#$previewSlot.removeEventListener('slotchange', this.#onPreviewSlotChange)
+    this.#$infoSlot.removeEventListener('slotchange', this.#onInfoSlotChange)
+    this.#$collapseSlot.removeEventListener('slotchange', this.#onCollapseSlotChange)
   }
 
   static get observedAttributes() {
-    return ['caption']
+    return ['caption', 'collapsed', 'size']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'caption': {
-        this.#$caption.textContent = newVal
+        updateAttribute(this.#$caption, 'text', newVal)
+
+        break
+      }
+
+      case 'collapsed': {
+        updateBooleanAttribute(this, 'collapsed', isAttrTrue(newVal))
+
+        break
+      }
+
+      case 'size': {
+        assertSize(newVal)
+        updateAttribute(this.#$caption, 'type', newVal)
+        updateAttribute(this.#$caption, 'level', getTitleLevelFromType(newVal))
 
         break
       }
@@ -59,10 +107,30 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
     return getBooleanAttribute(this, 'collapsed')
   }
 
+  get size() {
+    return getLiteralAttribute(this, sizeValues, 'size', 'm')
+  }
+
+  set size(value: TSinchSegmentSize) {
+    updateLiteralAttribute(this, sizeValues, 'size', value)
+  }
+
   get collapseButtonRect(): TRect | null {
     const $collapseButton = this.#$collapseSlot.assignedElements()[0]
 
     return $collapseButton != null ? getRect($collapseButton) : null
+  }
+
+  #onPreviewSlotChange = () => {
+    setClass(this.#$previewWrapper, 'empty', this.#$previewSlot.assignedElements().length === 0)
+  }
+
+  #onInfoSlotChange = () => {
+    setClass(this.#$infoWrapper, 'empty', this.#$infoSlot.assignedElements().length === 0)
+  }
+
+  #onCollapseSlotChange = () => {
+    setClass(this.#$collapseWrapper, 'empty', this.#$collapseSlot.assignedElements().length === 0)
   }
 })
 

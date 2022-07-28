@@ -17,6 +17,7 @@ const withNarrowWidthButton = `/card?width=200&label=${cardLabelLong}&header=${c
 const withNarrowWidthLink = `/card?width=200&label=${cardLabelLong}&header=${cardHeaderLong}&text=${cardLongText}&icon=true&illustration=true&link=${cardLinkTextLong}`
 const withIllustrationButton = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&button=${cardButtonText}`
 const withIllustrationLink = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&link=${cardLinkText}`
+const withIllustrationBg = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&bg=blue`
 const withDisabledButton = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&button=${cardButtonText}`
 const withDisabledLink = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&link=${cardLinkText}`
 const checkWithButton = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&illustration=true&button=${cardButtonText}`, 'sinch-card')
@@ -100,6 +101,24 @@ test('card screenshots', runScreenshotTests('sinch-card', [
     url: withNarrowWidthButton,
     async *fn() {
       yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'illustration bg',
+    url: withIllustrationBg,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'mouse interaction',
+    url: withWideWidth,
+    async *fn({ $, page }) {
+      const bb = (await $.boundingBox())!
+
+      await page.mouse.move(bb.x + 1, bb.y + 1)
+
+      yield { name: 'hover' }
     },
   },
   {
