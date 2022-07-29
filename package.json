@@ -2,8 +2,9 @@
   "private": true,
   "scripts": {
     "start": "cd docs; npm start",
+    "docs:build": "cd docs; npm run build",
     "storybook": "start-storybook --port 4000",
-    "storybook:build": "build-storybook --output-dir public --quiet",
+    "storybook:build": "build-storybook --output-dir public/storybook --quiet",
     "lint": "eslint . '*/**/*.{js,ts,tsx,mts}' && tsc --noEmit -p components/ -p tests/ -p docs/ -p stories/ && stylelint 'components/**/*.html' 'components/theme.css' 'docs/**/*.css'",
     "test": "yarn --cwd=tests test"
   },

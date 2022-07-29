@@ -1,18 +1,18 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/content-copy'
 import './styles.css'
 
 const style: Record<string, CSSProperties> = {
-  ...dracula,
+  ...ghcolors,
   'code[class*="language-"]': {
-    ...dracula['"code[class*="language-"]"'],
+    ...ghcolors['"code[class*="language-"]"'],
     fontFamily: 'monospace',
   },
   'pre[class*="language-"]': {
-    ...dracula['pre[class*="language-"]'],
+    ...ghcolors['pre[class*="language-"]'],
     fontFamily: 'monospace',
   },
 }
