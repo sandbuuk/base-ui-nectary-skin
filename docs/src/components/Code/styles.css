@@ -5,6 +5,7 @@
 .code-title {
   cursor: pointer;
   user-select: none;
+  outline: none;
 }
 
 .code-content {
@@ -15,10 +16,4 @@
   position: absolute;
   top: 16px;
   right: 16px;
-
-  --sinch-icon-button-color: var(--sinch-color-snow-100);
-}
-
-.code-copy:hover {
-  --sinch-icon-button-color: var(--sinch-color-stormy-500);
 }
