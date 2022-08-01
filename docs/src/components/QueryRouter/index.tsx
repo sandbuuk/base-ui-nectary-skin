@@ -19,14 +19,14 @@ export const QueryRouter: FC<BrowserRouterProps> = ({ basename, children, window
   const history = historyRef.current
   const [state, setState] = useState(() => ({
     action: history.action,
-    location: getSearchPath(history.location),
+    location: basename + getSearchPath(history.location),
   }))
 
   useLayoutEffect(() => {
     return history.listen((update) => {
       setState({
         action: update.action,
-        location: getSearchPath(update.location),
+        location: basename + getSearchPath(update.location),
       })
     })
   }, [history])
