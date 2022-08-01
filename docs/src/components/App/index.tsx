@@ -6,12 +6,12 @@ import { NavigationItem } from '../Navigation/Item'
 import { NavigationList } from '../Navigation/List'
 import { mdxComponents } from '../mdx-components'
 import type { FC } from 'react'
+import { QueryRouter } from '~/components/QueryRouter'
 import { ChangelogPage } from '~/pages/Changelog'
 import { ComponentsOutlet, ComponentsPage } from '~/pages/Components'
 import { IntroPage } from '~/pages/Intro'
 import { NotFoundPage } from '~/pages/NotFound'
 import { lazyScrollIntoView } from '~/utils/lazy-scroll-into-view'
-import { QueryRouter } from '~/utils/query-router'
 import '@sinch-engage/nectary/theme.css'
 import './styles.css'
 
@@ -22,11 +22,12 @@ const req = import.meta.webpackContext!('~/pages/Components/', {
   chunkName: 'Components-[request]',
 })
 const nameRegexp = /^\.\/(.+?)\/.+$/
+const basename = location.pathname.replace(/\/$/, '')
 
 export const App: FC = () => (
   <StrictMode>
     <MDXProvider components={mdxComponents}>
-      <QueryRouter>
+      <QueryRouter basename={basename}>
         <div id="app-sidebar">
           <NavigationList>
             <NavigationItem path="/" text="👋 Intro"/>
