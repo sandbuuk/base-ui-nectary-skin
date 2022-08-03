@@ -156,4 +156,11 @@ export const mdxComponents: MDXComponents = {
       </sinch-table-cell>
     )
   },
+  blockquote: ({ children }) => {
+    return (
+      <blockquote className="blockquote">
+        {children}
+      </blockquote>
+    )
+  },
 }

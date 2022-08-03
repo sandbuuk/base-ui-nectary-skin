@@ -104,3 +104,15 @@ sinch-table-head-cell:nth-child(2) {
   border-radius: 2px;
   padding-inline: 4px;
 }
+
+.blockquote {
+  margin: 0;
+  padding-left: 8px;
+  border-left: 4px solid var(--sinch-color-snow-600);
+}
+
+.blockquote + .blockquote,
+.blockquote + .title,
+.paragraph + .blockquote {
+  margin-block-start: 16px;
+}
