@@ -1,7 +1,3 @@
-.code {
-  font: var(--sinch-font-text-s);
-}
-
 .code-title {
   cursor: pointer;
   user-select: none;

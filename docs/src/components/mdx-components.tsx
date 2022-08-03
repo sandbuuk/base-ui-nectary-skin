@@ -8,9 +8,8 @@ import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/table-cell'
 import { Children } from 'react'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { convert as slugify } from 'url-slug'
+import { SyntaxHighlighter } from './SyntaxHighlighter'
 import type { MDXComponents } from 'mdx/types'
 
 export const mdxComponents: MDXComponents = {
@@ -120,9 +119,7 @@ export const mdxComponents: MDXComponents = {
     const language = className.replace('language-', '')
 
     return (
-      <SyntaxHighlighter language={language} style={dracula}>
-        {children as string}
-      </SyntaxHighlighter>
+      <SyntaxHighlighter language={language} src={children as string}/>
     )
   },
   table: ({ children }) => {
@@ -157,6 +154,13 @@ export const mdxComponents: MDXComponents = {
           {children}
         </div>
       </sinch-table-cell>
+    )
+  },
+  blockquote: ({ children }) => {
+    return (
+      <blockquote className="blockquote">
+        {children}
+      </blockquote>
     )
   },
 }

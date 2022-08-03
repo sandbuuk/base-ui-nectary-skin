@@ -52,7 +52,8 @@
   margin-block-start: 8px;
 }
 
-.paragraph + .code {
+.paragraph + .code,
+.paragraph + .example {
   margin-block-start: 16px;
 }
 
@@ -102,4 +103,16 @@ sinch-table-head-cell:nth-child(2) {
   outline: 1px solid var(--sinch-color-tropical-500);
   border-radius: 2px;
   padding-inline: 4px;
+}
+
+.blockquote {
+  margin: 0;
+  padding-left: 8px;
+  border-left: 4px solid var(--sinch-color-snow-600);
+}
+
+.blockquote + .blockquote,
+.blockquote + .title,
+.paragraph + .blockquote {
+  margin-block-start: 16px;
 }
