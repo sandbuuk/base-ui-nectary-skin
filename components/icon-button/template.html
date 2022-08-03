@@ -8,6 +8,7 @@
 
 button {
   all: initial;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,8 +24,32 @@ button {
   --sinch-color-icon: var(--sinch-icon-button-color, var(--sinch-color-stormy-500));
 }
 
-button:focus {
-  border-color: var(--sinch-color-stormy-500);
+button:focus-visible::before {
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+  border: 1px solid var(--sinch-color-aqua-400);
+  border-radius: calc(var(--sinch-shape-radius-s) + 2px);
+}
+
+@supports not selector(:focus-visible) {
+  button:focus::before {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    border: 1px solid var(--sinch-color-aqua-400);
+    border-radius: calc(var(--sinch-shape-radius-s) + 2px);
+  }
 }
 
 button:hover {
