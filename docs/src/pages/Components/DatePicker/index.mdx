@@ -1,0 +1,52 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { InputCompositionExample } from './examples/InputComposition.tsx'
+import {
+  ReactPropsTable,
+  ReactHandlersTable,
+  ElementPropertiesTable,
+  ElementAttributesTable,
+  ElementEventsTable
+} from '!!@saas/types-to-mdx-loader!@sinch-engage/nectary/date-picker/types.ts'
+
+# DatePicker
+
+DatePicker communicates using an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) (e.g. `YYYY-MM-DD`) date format. Working with timezones is not a part of the component functionality and all internal date manipulations go through consumer's local timezone reported by browser.
+
+## Table of contents
+
+## Examples
+
+### Input composition
+
+The component does *not* provide an input field and does *not* do any input masking. It's a modular *picker* and requires you to compose an input + popover + picker on your own, maintaining all the states.
+
+We'll implement a generic masking functionality for the input field  (like `pattern` attribute) later and then maybe wrap it all into `DateInput` complete molecule.
+
+<Example Component={InputCompositionExample}/>
+
+## API
+
+### React
+
+#### Props
+
+<ReactPropsTable/>
+
+#### Handlers
+
+<ReactHandlersTable/>
+
+### Element
+
+#### Properties
+
+<ElementPropertiesTable/>
+
+#### Attributes
+
+<ElementAttributesTable/>
+
+#### Events
+
+<ElementEventsTable/>
