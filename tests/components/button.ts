@@ -104,8 +104,8 @@ test('button screenshots', runScreenshotTests('sinch-button', [
   {
     name: 'focus',
     url: withFitWidth,
-    async *fn({ $, $eval }) {
-      await $.focus()
+    async *fn({ page, $eval }) {
+      await page.keyboard.press('Tab')
       await $eval((el) => el.setAttribute('type', 'secondary'))
       yield { name: 'secondary' }
       await $eval((el) => el.setAttribute('type', 'cta-primary'))
@@ -325,9 +325,9 @@ test('button screenshots', runScreenshotTests('sinch-button', [
   {
     name: 'native events',
     url: withFitWidth,
-    async *fn({ page, $ }) {
+    async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-button-focus', 'sinch-button-blur', 'sinch-button-click')
-      await $.focus()
+      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 
       expect(
@@ -338,11 +338,13 @@ test('button screenshots', runScreenshotTests('sinch-button', [
       ])
 
       await $.click()
+      await $.click()
 
       expect(
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-button-focus', detail: null },
+        { type: 'sinch-button-click', detail: null },
         { type: 'sinch-button-click', detail: null },
       ])
     },

@@ -174,10 +174,10 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
   {
     name: 'native events',
     url: withUncontrolled,
-    async *fn({ $, $eval, page }) {
+    async *fn({ $eval, page }) {
       await subscribeToEvents(page, 'sinch-pagination-focus', 'sinch-pagination-blur', 'sinch-pagination-change')
 
-      await $.focus()
+      await page.keyboard.press('Tab')
       await page.keyboard.press('Shift+Tab')
 
       expect(

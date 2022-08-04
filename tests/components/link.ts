@@ -137,7 +137,7 @@ test('link screenshots', runScreenshotTests('sinch-link', [
     url: shot,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-link-focus', 'sinch-link-blur', 'sinch-link-click')
-      await $.focus()
+      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 
       expect(

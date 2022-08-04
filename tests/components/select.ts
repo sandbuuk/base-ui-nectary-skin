@@ -74,7 +74,7 @@ test('select screenshots', runScreenshotTests('sinch-select', [
       yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
       await page.mouse.click(0, 0)
-      yield { name: 'click-outside', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'click outside', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
@@ -84,7 +84,7 @@ test('select screenshots', runScreenshotTests('sinch-select', [
       // Click on label
       await $.click({ position: { x: 10, y: 10 } })
 
-      yield { name: 'focus', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
@@ -105,36 +105,39 @@ test('select screenshots', runScreenshotTests('sinch-select', [
   {
     name: 'focus press-space',
     url: withPlaceholder,
-    async *fn({ $, $eval }) {
-      await $.press('Space')
+    async *fn({ page, $eval }) {
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Space')
       yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-      await $.press('Space')
+      await page.keyboard.press('Space')
       yield { name: 'close', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-      await $.press('Space')
+      await page.keyboard.press('Space')
       yield { name: 'open-again', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
     name: 'focus press-enter',
     url: withPlaceholder,
-    async *fn({ $, $eval }) {
-      await $.press('Enter')
+    async *fn({ page, $eval }) {
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Enter')
       yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-      await $.press('Enter')
+      await page.keyboard.press('Enter')
       yield { name: 'close', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-      await $.press('Enter')
+      await page.keyboard.press('Enter')
       yield { name: 'open-again', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
     name: 'keyboard',
     url: withPlaceholder,
-    async *fn({ $, $eval }) {
-      await $.click()
+    async *fn({ page, $eval }) {
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Enter')
 
       const dropdownRect = await $eval((el) => el.dropdownRect)
 
@@ -143,21 +146,21 @@ test('select screenshots', runScreenshotTests('sinch-select', [
         includeRects: [dropdownRect],
       }
 
-      await $.press('ArrowDown')
+      await page.keyboard.press('ArrowDown')
       yield {
         name: 'down',
         includeRects: [dropdownRect],
       }
 
-      await $.press('ArrowDown')
-      await $.press('ArrowRight')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('ArrowRight')
       yield {
         name: 'down-right',
         includeRects: [dropdownRect],
       }
 
-      await $.press('ArrowUp')
-      await $.press('ArrowLeft')
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowLeft')
       yield {
         name: 'up-left',
         includeRects: [dropdownRect],
@@ -207,11 +210,11 @@ test('select screenshots', runScreenshotTests('sinch-select', [
   {
     name: 'native events',
     url: shot,
-    async *fn({ $, page }) {
+    async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
 
-      await $.focus()
       await page.keyboard.press('Tab')
+      await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)
@@ -220,7 +223,8 @@ test('select screenshots', runScreenshotTests('sinch-select', [
         { type: 'sinch-select-blur', detail: null },
       ])
 
-      await $.click()
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Enter')
       await page.keyboard.press('Enter')
 
       expect(
@@ -230,7 +234,7 @@ test('select screenshots', runScreenshotTests('sinch-select', [
         { type: 'sinch-select-change', detail: '1' },
       ])
 
-      await $.click()
+      await page.keyboard.press('Enter')
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
 

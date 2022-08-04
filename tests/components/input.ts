@@ -248,8 +248,8 @@ test('input screenshots', runScreenshotTests('sinch-input', [
   {
     name: 'fill',
     url: withPlaceholder,
-    async *fn({ $, $eval }) {
-      await $.focus()
+    async *fn({ $, $eval, page }) {
+      await page.keyboard.press('Tab')
       yield { name: 'focus' }
 
       await $.type('Filled text')
@@ -311,7 +311,7 @@ test('input screenshots', runScreenshotTests('sinch-input', [
     url: withValue,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-input-focus', 'sinch-input-blur', 'sinch-input-change')
-      await $.focus()
+      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 
       expect(

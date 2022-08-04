@@ -71,8 +71,8 @@ test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
   {
     name: 'focus',
     url: withFitWidth,
-    async *fn({ $, $eval }) {
-      await $.focus()
+    async *fn({ page, $eval }) {
+      await page.keyboard.press('Tab')
 
       await $eval((el) => {
         el.checked = true
@@ -88,8 +88,8 @@ test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
   {
     name: 'focus invalid',
     url: withInvalid,
-    async *fn({ $, $eval }) {
-      await $.focus()
+    async *fn({ page, $eval }) {
+      await page.keyboard.press('Tab')
 
       await $eval((el) => {
         el.checked = true
@@ -270,7 +270,7 @@ test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-checkbox-change', 'sinch-checkbox-focus', 'sinch-checkbox-blur')
 
-      await $.focus()
+      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 
       expect(
@@ -280,8 +280,10 @@ test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
         { type: 'sinch-checkbox-blur', detail: null },
       ])
 
-      await $.click()
-      await $.click()
+      const bb = (await $.boundingBox())!
+
+      await page.mouse.click(bb.x + 5, bb.y + 5)
+      await page.mouse.click(bb.x + 5, bb.y + 5)
 
       expect(
         await getAllEvents(page)
