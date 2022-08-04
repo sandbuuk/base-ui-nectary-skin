@@ -220,10 +220,10 @@ export const testCustomEvent = (page: Page, $element: Locator) => async (sendEve
   expect(events).toEqual([{ type: receiveEventType, detail: eventDetail }])
 }
 
-export const getRandomPointInsideElem = ({ x, y, width, height }: TRect): TPosition => {
+export const getRandomPointInsideElem = (rect: TRect): TPosition => {
   return {
-    x: x + Math.random() * width,
-    y: y + Math.random() * height,
+    x: rect.x + Math.random() * rect.width,
+    y: rect.y + Math.random() * rect.height,
   }
 }
 
@@ -233,3 +233,14 @@ export const offsetRect = (rect: TRect, pos: TPosition): TRect => ({
   width: rect.width,
   height: rect.height,
 })
+
+export const centerRect = (rect: TRect | null): TPosition => {
+  if (rect === null) {
+    throw new Error('Invalid rect value: null')
+  }
+
+  return {
+    x: rect.x + rect.width / 2,
+    y: rect.y + rect.height / 2,
+  }
+}
