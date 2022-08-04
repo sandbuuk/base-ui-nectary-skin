@@ -28,14 +28,14 @@ export const AMPMExample: FC = () => {
     <sinch-popover
       open={isOpen}
       orientation="bottom-left"
-      aria-label="Date input"
+      aria-label="Time input"
       onClose={onClose}
     >
       <sinch-input
         slot="target"
-        label="Date picker"
-        aria-label="Pick date"
-        placeholder="YYYY-MM-DD"
+        label="Time picker"
+        aria-label="Pick time"
+        placeholder="hh:mm:ss"
         additionalText="Additional text"
         value={value}
         onChange={onChange}
@@ -52,8 +52,8 @@ export const AMPMExample: FC = () => {
       <sinch-time-picker
         slot="content"
         ampm
-        aria-label="Date Picker"
-        submit-aria-label="Submin time"
+        aria-label="Time Picker"
+        submit-aria-label="Submit time"
         value={isoValue}
         onChange={onIsoChange}
       />
