@@ -124,6 +124,7 @@ pages:
     - mv docs/build public/docs
     - git config --global user.email ci@sinch.com
     - git config --global user.name Bot
+    - git branch -D storybook || true
     - git checkout --orphan storybook
     - git reset
     - git add -f public
