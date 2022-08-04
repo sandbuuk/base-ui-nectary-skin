@@ -1,3 +1,13 @@
+## v0.32.0 (2022-08-04)
+
+* ➕ add `sinch-time-picker` component
+* ➕ update focused style in `sinch-icon-button`
+* 🐞 fix label to open dropdown in `sinch-select`
+* 🐞 hide empty action slot in `sinch-segment`
+* 🐞 fix unexpected closing of `sinch-dialog`
+* 🐞 fix `sinch-segmented-control` height
+* 🐞 fix icon import in `sinch-link`
+
 ## v0.31.0 (2022-07-28)
 
 * 💥 move illustrations from `illustration/` to `illustrations/`
