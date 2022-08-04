@@ -47,7 +47,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   connectedCallback() {
     this.setAttribute('role', 'dialog')
     this.#$dialog.addEventListener('cancel', this.#onCancel)
-    this.#$dialog.addEventListener('click', this.#onBackdropClick)
+    this.#$dialog.addEventListener('mousedown', this.#onBackdropClick)
     this.addEventListener('close', this.#onCloseReactHandler)
     this.#isConnected = true
 
@@ -60,7 +60,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
   disconnectedCallback() {
     this.#$dialog.removeEventListener('cancel', this.#onCancel)
-    this.#$dialog.removeEventListener('click', this.#onBackdropClick)
+    this.#$dialog.removeEventListener('mousedown', this.#onBackdropClick)
     this.removeEventListener('close', this.#onCloseReactHandler)
     this.#isConnected = false
   }
