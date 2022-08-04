@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/icon-button'
 const withSpinner = '/icon-button?spinner=true'
@@ -15,8 +15,8 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
   {
     name: 'focus',
     url: shot,
-    async *fn({ $ }) {
-      await $.focus()
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
       yield { name: 'shot' }
     },
   },
@@ -76,9 +76,9 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
     name: 'mouse interaction',
     url: shot,
     async *fn({ $, page }) {
-      const rect = (await $.boundingBox())!
+      const rect = centerRect(await $.boundingBox())
 
-      await page.mouse.move(rect.x + 5, rect.y + 15)
+      await page.mouse.move(rect.x, rect.y)
       yield { name: 'hover' }
 
       await page.mouse.down()
@@ -140,7 +140,7 @@ test('icon-button events', runScreenshotTests('sinch-icon-button', [
     url: shot,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-icon-button-focus', 'sinch-icon-button-blur', 'sinch-icon-button-click')
-      await $.focus()
+      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 
       expect(
