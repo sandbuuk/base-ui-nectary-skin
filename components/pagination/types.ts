@@ -4,8 +4,6 @@ import type { SyntheticEvent } from 'react'
 export type TSinchPaginationElement = HTMLElement & {
   value: number,
   max: number,
-  focus(): void,
-  blur(): void,
   readonly prevButtonRect: TRect,
   readonly nextButtonRect: TRect,
   nthButtonRect(index: number): TRect | null,

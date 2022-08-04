@@ -9,8 +9,6 @@ export type TSinchDropdownElement = HTMLElement & {
   value: string,
   maxVisibleItems: number | null,
   readonly dropdownRect: TRect,
-  focus(): void,
-  blur(): void,
   addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
   addEventListener(type: 'close', listener: (e: CustomEvent<void>) => void): void,
   setAttribute(name: 'open', value: ''): void,

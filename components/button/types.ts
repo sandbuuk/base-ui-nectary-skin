@@ -11,8 +11,6 @@ export type TSinchButtonElement = HTMLElement & {
   disabled: boolean,
   /** Small */
   small: boolean,
-  focus(): void,
-  blur(): void,
   /** Type */
   setAttribute(attr: 'type', value: TSinchButtonType): void,
   /** Text content */

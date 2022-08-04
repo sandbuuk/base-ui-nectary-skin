@@ -7,8 +7,6 @@ export type TSinchCheckboxElement = HTMLElement & {
   disabled: boolean,
   invalid: boolean,
   text: string | null,
-  focus(): void,
-  blur(): void,
   addEventListener(type: 'change', listener: (e: CustomEvent<boolean>) => void): void,
   setAttribute(name: 'checked', value: ''): void,
   setAttribute(name: 'indeterminate', value: ''): void,

@@ -11,8 +11,6 @@ export type TSinchSelectElement = HTMLElement & {
   maxVisibleItems: number | null,
   disabled: boolean,
   readonly dropdownRect: TRect,
-  focus(): void,
-  blur(): void,
   addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
   setAttribute(name: 'value', value: string): void,
   setAttribute(name: 'label', value: string): void,
