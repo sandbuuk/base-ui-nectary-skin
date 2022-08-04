@@ -41,7 +41,7 @@ export class NectaryElement extends HTMLElement {
   attachShadow(options?: Partial<ShadowRootInit>): ShadowRoot {
     return super.attachShadow({
       mode: 'closed',
-      delegatesFocus: true,
+      delegatesFocus: false,
       customElements: nectaryRegistry!,
       ...options,
     })
