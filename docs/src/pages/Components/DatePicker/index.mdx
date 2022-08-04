@@ -1,6 +1,7 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
 import { InputCompositionExample } from './examples/InputComposition.tsx'
+import { LocaleExample } from './examples/Locale.tsx'
 import {
   ReactPropsTable,
   ReactHandlersTable,
@@ -24,6 +25,14 @@ The component does *not* provide an input field and does *not* do any input mask
 We'll implement a generic masking functionality for the input field  (like `pattern` attribute) later and then maybe wrap it all into `DateInput` complete molecule.
 
 <Example Component={InputCompositionExample}/>
+
+### Locale
+
+`locale` is a special property/attribute that we use to get month and week day short names automatically.
+
+It uses [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat) native API under the hood which works with [IETF BCP 47 language tag](https://www.rfc-editor.org/rfc/rfc5646.txt) (e.g. `en-US` or `sv-SE`).
+
+<Example Component={LocaleExample}/>
 
 ## API
 
