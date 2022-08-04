@@ -149,7 +149,7 @@ test('tag-screenshots', runScreenshotTests('sinch-tag', [
         'sinch-tag-close-click'
       )
 
-      await $close.focus()
+      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 
       expect(
@@ -160,10 +160,12 @@ test('tag-screenshots', runScreenshotTests('sinch-tag', [
       ])
 
       await $close.click()
+      await $close.click()
       expect(
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-tag-close-focus', detail: null },
+        { type: 'sinch-tag-close-click', detail: null },
         { type: 'sinch-tag-close-click', detail: null },
       ])
     },

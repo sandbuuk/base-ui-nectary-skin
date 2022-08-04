@@ -14,8 +14,6 @@ export type TSinchTextareaElement = HTMLElement & {
   selectionDirection: HTMLTextAreaElement['selectionDirection'],
   rows: HTMLTextAreaElement['rows'],
   resizable: boolean,
-  focus(): void,
-  blur(): void,
   addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
   setAttribute(name: 'value', value: string): void,
   setAttribute(name: 'label', value: string): void,

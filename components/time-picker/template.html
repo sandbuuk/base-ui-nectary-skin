@@ -1,0 +1,293 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 248px;
+  padding: 16px;
+  box-sizing: border-box;
+  gap: 16px;
+}
+
+#header {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  font: var(--sinch-font-title-xl);
+  line-height: 48px;
+}
+
+#footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 32px;
+}
+
+#picker {
+  position: relative;
+  width: 216px;
+  height: 216px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 1px solid var(--sinch-color-stormy-500);
+}
+
+#picker-hours,
+#digit-minutes {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.digit-hour-12,
+.digit-hour-24,
+.digit-minute {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  font: var(--sinch-font-text-s);
+  line-height: 28px;
+  text-align: center;
+  color: var(--sinch-color-text-default);
+  top: calc(50% - 14px);
+  left: calc(50% - 14px);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.digit-hour-24 {
+  font: var(--sinch-font-text-xs);
+  line-height: 28px;
+  color: var(--sinch-color-text-muted);
+}
+
+.digit-minute {
+  font: var(--sinch-font-text-xs);
+  line-height: 28px;
+  color: var(--sinch-color-text-muted);
+}
+
+.digit-hour-12:hover,
+.digit-hour-24:hover,
+.digit-minute:hover {
+  color: var(--sinch-color-tropical-500);
+}
+
+.digit-hour-12.selected,
+.digit-hour-24.selected,
+.digit-minute.selected {
+  color: var(--sinch-color-tropical-500);
+}
+
+.digit-hour-12.selected {
+  font-size: 16px;
+}
+
+.digit-hour-24.selected {
+  font-size: 16px;
+}
+
+.digit-minute.selected {
+  font-size: 16px;
+}
+
+#picker-touch {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+#needle-hour,
+#needle-minute,
+#picker-touch::after {
+  background-color: var(--sinch-color-stormy-500);
+}
+
+#needle-hour,
+#needle-minute {
+  position: absolute;
+  transform-origin: bottom center;
+  transform: rotate(0deg);
+  bottom: 50%;
+  height: 50px;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in-out;
+  transition-property: transform height;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion) {
+  #needle-hour,
+  #needle-minute {
+    transition: none;
+  }
+}
+
+#needle-hour {
+  width: 4px;
+  left: calc(50% - 2px);
+  border-radius: 2px;
+}
+
+#needle-minute {
+  width: 2px;
+  left: calc(50% - 1px);
+  border-radius: 1px;
+}
+
+#needle-minute:not(.selected)::after {
+  content: "";
+  position: absolute;
+  transform: translateX(-50%);
+  left: 0;
+  top: -16px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--sinch-color-tropical-500);
+}
+
+#picker-touch::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#header-hours,
+#header-minutes {
+  position: absolute;
+  padding: 0 4px;
+  width: 50px;
+  outline: none;
+
+  --sinch-icon-size: 24px;
+}
+
+#header-hours {
+  right: calc(50% + 8px);
+  text-align: right;
+}
+
+#header-minutes {
+  left: calc(50% + 8px);
+}
+
+#header-hours::before,
+#header-minutes::before {
+  content: "";
+  display: none;
+  position: absolute;
+  border-radius: 12px;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  padding: 1px;
+  border: 1px solid var(--sinch-color-aqua-400);
+}
+
+#header-hours-up,
+#header-hours-down,
+#header-minutes-up,
+#header-minutes-down {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#header-hours-up,
+#header-minutes-up {
+  top: -18px;
+}
+
+#header-hours-down,
+#header-minutes-down {
+  bottom: -18px;
+}
+
+#header-hours:focus #header-hours-up,
+#header-hours:focus #header-hours-down,
+#header-hours:focus::before {
+  display: block;
+}
+
+#header-minutes:focus #header-minutes-up,
+#header-minutes:focus #header-minutes-down,
+#header-minutes:focus::before {
+  display: block;
+}
+
+#header-colon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#submit {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+:host([ampm]) .digit-hour-24 {
+  display: none;
+}
+
+:host(:not([ampm])) #footer {
+  display: none;
+}
+</style>
+
+<div id="wrapper">
+  <div id="header">
+    <div id="header-hours" tabindex="0" role="meter" aria-valuemin="0" aria-valuemax="23" aria-valuenow="0" aria-valuetext="0">
+      <span>00</span>
+      <sinch-icon-arrow-drop-up id="header-hours-up"></sinch-icon-arrow-drop-up>
+      <sinch-icon-arrow-drop-down id="header-hours-down"></sinch-icon-arrow-drop-down>
+    </div>
+    <div id="header-colon">&colon;</div>
+    <div id="header-minutes" tabindex="0" role="meter" aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="0">
+      <span>00</span>
+      <sinch-icon-arrow-drop-up id="header-minutes-up"></sinch-icon-arrow-drop-up>
+      <sinch-icon-arrow-drop-down id="header-minutes-down"></sinch-icon-arrow-drop-down>
+    </div>
+    <sinch-icon-button id="submit" small aria-label="Submit">
+      <sinch-icon-done slot="icon"></sinch-icon-done>
+    </sinch-icon-button>
+  </div>
+  <div id="picker" aria-hidden="true">
+    <div id="picker-hours"></div>
+    <div id="picker-minutes"></div>
+    <div id="picker-touch">
+      <div id="needle-hour"></div>
+      <div id="needle-minute"></div>
+    </div>
+  </div>
+  <div id="footer">
+    <sinch-segmented-control id="ampm">
+      <sinch-segmented-control-option value="am" text="AM" aria-label="AM"></sinch-segmented-control-option>
+      <sinch-segmented-control-option value="pm" text="PM" aria-label="PM"></sinch-segmented-control-option>
+    </sinch-segmented-control>
+  </div>
+</div>

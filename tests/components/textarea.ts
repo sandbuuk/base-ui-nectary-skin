@@ -208,8 +208,8 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
   {
     name: 'fill',
     url: withPlaceholder,
-    async *fn({ $ }) {
-      await $.focus()
+    async *fn({ $, page }) {
+      await page.keyboard.press('Tab')
       yield { name: 'focus' }
 
       await $.type('Filled text')
@@ -298,7 +298,7 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
     url: withValue,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-textarea-focus', 'sinch-textarea-blur', 'sinch-textarea-change')
-      await $.focus()
+      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 
       expect(

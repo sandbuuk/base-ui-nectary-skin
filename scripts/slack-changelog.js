@@ -4,7 +4,7 @@ const slackifyMarkdown = require('slackify-markdown')
 
 // eslint-disable-next-line node/no-sync
 const changelogMd = fs.readFileSync('components/changelog.md', 'utf-8')
-const md = slackifyMarkdown(changelogMd.split('\n\n##')[0].replace('##', '## Components'))
+const md = slackifyMarkdown(changelogMd.split('\n\n##')[0].replace(/## (v.+?) \(.+?\)/, '## Components $1'))
 
 const dataString = encodeURI(
   `payload=${JSON.stringify({

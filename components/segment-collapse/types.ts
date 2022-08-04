@@ -3,8 +3,6 @@ import type { SyntheticEvent } from 'react'
 
 export type TSinchSegmentExpandElement = HTMLElement & {
   value: boolean,
-  focus(): void,
-  blur(): void,
   addEventListener(type: 'change', listener: (e: CustomEvent<boolean>) => void): void,
   setAttribute(name: 'value', value: string): void,
 }

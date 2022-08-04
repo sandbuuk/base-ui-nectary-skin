@@ -71,7 +71,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.setAttribute('role', 'dialog')
     this.#$closeButton.addEventListener('click', this.#onCloseClick)
     this.addEventListener('close', this.#onCloseReactHandler)
-    this.#$dialog.addEventListener('click', this.#onBackdropClick)
+    this.#$dialog.addEventListener('mousedown', this.#onBackdropClick)
     this.#$dialog.addEventListener('cancel', this.#onCancel)
     this.#isConnected = true
 
@@ -83,7 +83,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   disconnectedCallback() {
     this.#$closeButton.removeEventListener('click', this.#onCloseClick)
     this.removeEventListener('close', this.#onCloseReactHandler)
-    this.#$dialog.removeEventListener('click', this.#onBackdropClick)
+    this.#$dialog.removeEventListener('mousedown', this.#onBackdropClick)
     this.#$dialog.removeEventListener('cancel', this.#onCancel)
     this.#isConnected = false
   }

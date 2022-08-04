@@ -23,8 +23,6 @@ export type TSinchInputElement = HTMLElement & {
   selectionStart: number | null,
   selectionEnd: number | null,
   selectionDirection: 'forward' | 'backward' | 'none' | null,
-  focus(): void,
-  blur(): void,
   /** Change value event */
   addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
   /** Text field type, `text` by default */

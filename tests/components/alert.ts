@@ -197,32 +197,28 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
         'sinch-alert-close-click'
       )
 
-      await $button.focus()
-      await page.mouse.click(0, 0)
+      await page.keyboard.press('Tab')
 
       expect(
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-alert-button-focus', detail: null },
-        { type: 'sinch-alert-button-blur', detail: null },
       ])
 
       await $button.click()
-      await page.mouse.click(0, 0)
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-alert-button-focus', detail: null },
         { type: 'sinch-alert-button-click', detail: null },
-        { type: 'sinch-alert-button-blur', detail: null },
       ])
 
-      await $close.focus()
+      await page.keyboard.press('Tab')
       await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-alert-button-blur', detail: null },
         { type: 'sinch-alert-close-focus', detail: null },
         { type: 'sinch-alert-close-blur', detail: null },
       ])

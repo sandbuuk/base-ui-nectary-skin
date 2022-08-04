@@ -31,6 +31,8 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
   #$infoWrapper: HTMLElement
   #$collapseSlot: HTMLSlotElement
   #$collapseWrapper: HTMLElement
+  #$actionSlot: HTMLSlotElement
+  #$actionWrapper: HTMLElement
 
   constructor() {
     super()
@@ -42,25 +44,30 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
     this.#$previewSlot = shadowRoot.querySelector('slot[name="preview"]')!
     this.#$infoSlot = shadowRoot.querySelector('slot[name="info"]')!
     this.#$collapseSlot = shadowRoot.querySelector('slot[name="collapse"]')!
+    this.#$actionSlot = shadowRoot.querySelector('slot[name="action"]')!
     this.#$previewWrapper = shadowRoot.querySelector('#preview')!
     this.#$infoWrapper = shadowRoot.querySelector('#info')!
     this.#$collapseWrapper = shadowRoot.querySelector('#collapse')!
+    this.#$actionWrapper = shadowRoot.querySelector('#action')!
   }
 
   connectedCallback() {
     this.#$previewSlot.addEventListener('slotchange', this.#onPreviewSlotChange)
     this.#$infoSlot.addEventListener('slotchange', this.#onInfoSlotChange)
     this.#$collapseSlot.addEventListener('slotchange', this.#onCollapseSlotChange)
+    this.#$actionSlot.addEventListener('slotchange', this.#onActionSlotChange)
 
     this.#onPreviewSlotChange()
     this.#onInfoSlotChange()
     this.#onCollapseSlotChange()
+    this.#onActionSlotChange()
   }
 
   disconnectedCallback() {
     this.#$previewSlot.removeEventListener('slotchange', this.#onPreviewSlotChange)
     this.#$infoSlot.removeEventListener('slotchange', this.#onInfoSlotChange)
     this.#$collapseSlot.removeEventListener('slotchange', this.#onCollapseSlotChange)
+    this.#$actionSlot.removeEventListener('slotchange', this.#onActionSlotChange)
   }
 
   static get observedAttributes() {
@@ -131,6 +138,10 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
 
   #onCollapseSlotChange = () => {
     setClass(this.#$collapseWrapper, 'empty', this.#$collapseSlot.assignedElements().length === 0)
+  }
+
+  #onActionSlotChange = () => {
+    setClass(this.#$actionWrapper, 'empty', this.#$actionSlot.assignedElements().length === 0)
   }
 })
 

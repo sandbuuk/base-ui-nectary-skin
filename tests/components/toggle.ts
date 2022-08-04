@@ -208,7 +208,7 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-toggle-change', 'sinch-toggle-focus', 'sinch-toggle-blur')
 
-      await $.focus()
+      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 
       expect(
@@ -218,8 +218,10 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
         { type: 'sinch-toggle-blur', detail: null },
       ])
 
-      await $.click()
-      await $.click()
+      const bb = (await $.boundingBox())!
+
+      await page.mouse.click(bb.x + 5, bb.y + bb.height / 2)
+      await page.mouse.click(bb.x + 5, bb.y + bb.height / 2)
 
       expect(
         await getAllEvents(page)

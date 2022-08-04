@@ -8,8 +8,8 @@ import '@sinch-engage/nectary/icons/calendar-today'
 
 export const InputCompositionExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
-  const [value, setValue] = useState('')
-  const [isoValue, setIsoValue] = useState('')
+  const [value, setValue] = useState('2022-07-19')
+  const [isoValue, setIsoValue] = useState('2022-07-19')
 
   const onChange = (e: SyntheticEvent<Element, CustomEvent>) => {
     setValue(e.nativeEvent.detail)
@@ -54,9 +54,9 @@ export const InputCompositionExample: FC = () => {
         min="2021-12-25"
         max="2025-07-19"
         locale="en-US"
+        aria-label="Date Picker"
         value={isoValue}
         onChange={onIsoChange}
-        aria-label="Date Picker"
       />
     </sinch-popover>
   )

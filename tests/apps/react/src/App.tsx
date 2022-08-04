@@ -30,6 +30,8 @@ import { Tabs } from './components/Tabs'
 import { Tag } from './components/Tag'
 import { Text } from './components/Text'
 import { Textarea } from './components/Textarea'
+import { TimeInput } from './components/TimeInput'
+import { TimePicker } from './components/TimePicker'
 import { Title } from './components/Title'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
@@ -220,6 +222,18 @@ const mapElement = (url: URL) => {
     case '/text': {
       return (
         <Text search={url.searchParams}/>
+      )
+    }
+
+    case '/time-input': {
+      return (
+        <TimeInput search={url.searchParams}/>
+      )
+    }
+
+    case '/time-picker': {
+      return (
+        <TimePicker search={url.searchParams}/>
       )
     }
 

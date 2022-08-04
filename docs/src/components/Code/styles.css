@@ -1,3 +1,7 @@
+.code {
+  font: var(--sinch-font-text-m);
+}
+
 .code-title {
   cursor: pointer;
   user-select: none;

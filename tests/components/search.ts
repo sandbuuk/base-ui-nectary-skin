@@ -97,8 +97,8 @@ test('search screenshots', runScreenshotTests('sinch-search', [
   {
     name: 'fill',
     url: withPlaceholder,
-    async *fn({ $, $eval }) {
-      await $.focus()
+    async *fn({ $, $eval, page }) {
+      await page.keyboard.press('Tab')
       yield { name: 'focus' }
 
       await $.type('Fill')
@@ -110,8 +110,8 @@ test('search screenshots', runScreenshotTests('sinch-search', [
   {
     name: 'clear',
     url: withValue,
-    async *fn({ $, page }) {
-      await $.focus()
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
 
       yield { name: 'initial' }
 
@@ -127,9 +127,9 @@ test('search screenshots', runScreenshotTests('sinch-search', [
   {
     name: 'maxvisibleitems attribute',
     url: withValue,
-    async *fn({ $, $eval }) {
+    async *fn({ page, $eval }) {
       await $eval((el) => el.setAttribute('maxvisibleitems', '2'))
-      await $.focus()
+      await page.keyboard.press('Tab')
 
       yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
 
@@ -141,8 +141,8 @@ test('search screenshots', runScreenshotTests('sinch-search', [
   {
     name: 'dropdown',
     url: withValue,
-    async *fn({ $, $eval, page }) {
-      await $.focus()
+    async *fn({ $eval, page }) {
+      await page.keyboard.press('Tab')
 
       yield { name: 'input-focus', includeRects: [await $eval((el) => el.dropdownRect)] }
 
@@ -154,8 +154,8 @@ test('search screenshots', runScreenshotTests('sinch-search', [
   {
     name: 'keyboard',
     url: withValue,
-    async *fn({ $, $eval, page }) {
-      await $.focus()
+    async *fn({ $eval, page }) {
+      await page.keyboard.press('Tab')
 
       const rect = await $eval((el) => el.dropdownRect)
 
@@ -190,7 +190,7 @@ test('search screenshots', runScreenshotTests('sinch-search', [
     url: withValue,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-search-focus', 'sinch-search-blur', 'sinch-search-change')
-      await $.focus()
+      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 

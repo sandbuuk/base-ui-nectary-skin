@@ -1,4 +1,4 @@
-import '../icons/cancel'
+import '../icons/open-in-new'
 import {
   defineCustomElement,
   getBooleanAttribute,
