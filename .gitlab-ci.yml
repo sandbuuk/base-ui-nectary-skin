@@ -3,9 +3,7 @@ variables:
 
 default:
   tags:
-    - staging
-#    - application
-#    - saas
+    - saas-default-role
 
 stages:
   - lint
