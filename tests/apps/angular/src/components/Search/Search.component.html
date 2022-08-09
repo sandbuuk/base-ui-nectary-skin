@@ -1,15 +1,37 @@
-<sinch-search
-  [attr.label]="label"
-  [attr.placeholder]="placeholder"
-  [attr.maxvisibleitems]="maxVisibleItems"
-  (focusin)="onFocus()"
-  (focusout)="onBlur()"
-  [value]="value"
-  (change)="onChange($event)">
-  <ng-container *ngIf="value.length >= 5">
-    <sinch-search-option text="Option 1 value long long long" slot="option"></sinch-search-option>
-    <sinch-search-option text="Option 2 value" slot="option"></sinch-search-option>
-    <sinch-search-option text="Option 3 value" slot="option"></sinch-search-option>
-    <sinch-search-option text="Option 4 value" slot="option"></sinch-search-option>
-  </ng-container>
-</sinch-search>
+<sinch-action-menu
+  orientation="bottom"
+  [attr.open]="isOpen"
+  [attr.maxVisibleItems]="maxVisibleItems"
+  aria-label="Search"
+  (close)="onClose()">
+  <sinch-input
+    slot="target"
+    aria-label="Search Input"
+    [attr.placeholder]="placeholderText"
+    [attr.label]="labelText"
+    [attr.optionaltext]="optionalText"
+    [attr.additionaltext]="additionalText"
+    [attr.invalidtext]="invalidText"
+    [attr.disabled]="isDisabled"
+    [value]="value"
+    (change)="onChange($event)"
+    (focusin)="onFocus()"
+    (focusout)="onBlur()">
+    <sinch-icon-search slot="icon"></sinch-icon-search>
+    <sinch-icon-button
+      slot="right"
+      small
+      aria-label="Clear search"
+      (click)="onClear()">
+      <sinch-icon-close slot="icon"></sinch-icon-close>
+    </sinch-icon-button>
+    <sinch-help-tooltip *ngIf="tooltipText != null" [attr.text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
+  </sinch-input>
+  <sinch-action-menu-option
+    *ngFor="let text of options"
+    slot="option"
+    [attr.text]="text"
+    [attr.aria-label]="text"
+    (click)="onOptionClick(text)"
+  ></sinch-action-menu-option>
+</sinch-action-menu>
