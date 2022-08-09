@@ -29,13 +29,14 @@
 }
 
 :host(:hover) > #wrapper,
-#wrapper:focus {
+:host([data-selected]) > #wrapper {
   background-color: var(--sinch-color-snow-500);
 }
 
 :host([disabled]:not([disabled="false"])) > #wrapper {
   color: var(--sinch-color-stormy-100);
   cursor: initial;
+  pointer-events: none;
 
   --sinch-color-icon: var(--sinch-color-stormy-100);
 }
@@ -45,7 +46,7 @@
 }
 </style>
 
-<button id="wrapper">
+<div id="wrapper">
   <slot name="icon"></slot>
   <span id="content"></span>
-</button>
+</div>
