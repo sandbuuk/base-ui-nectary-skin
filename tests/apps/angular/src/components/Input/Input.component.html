@@ -10,8 +10,9 @@
   (focusin)="onFocus()"
   (focusout)="onBlur()"
   (change)="onChange($event)">
-  <sinch-help-tooltip *ngIf="tooltipText != null" [text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
+  <sinch-icon-search *ngIf="hasIcon"></sinch-icon-search>
+  <sinch-help-tooltip *ngIf="tooltipText != null" [attr.text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
   <sinch-icon-button *ngIf="hasRightButton" slot="right" small>
-    <sinch-icon-calendar-today slot="icon"></sinch-icon-calendar-today>
+    <sinch-icon-close slot="icon"></sinch-icon-close>
   </sinch-icon-button>
 </sinch-input>

@@ -2,7 +2,8 @@ import { Component } from '@angular/core'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/calendar-today'
+import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary/icons/search'
 
 @Component({
   selector: 'input-component',
@@ -22,6 +23,7 @@ export class InputComponent {
   tooltipText: string | null
   isDisabled: boolean
   hasRightButton: boolean
+  hasIcon: boolean
 
   constructor() {
     const url = new URL(location.href)
@@ -36,6 +38,7 @@ export class InputComponent {
     this.tooltipText = url.searchParams.get('tooltip')
     this.isDisabled = url.searchParams.get('disabled') != null
     this.hasRightButton = url.searchParams.get('right') != null
+    this.hasIcon = url.searchParams.get('icon') != null
   }
 
   onChange(e: Event) {

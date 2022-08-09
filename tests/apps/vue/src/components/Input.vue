@@ -11,9 +11,10 @@
     @change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
-    <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-help-tooltip>
+    <sinch-icon-search v-if="hasIcon"></sinch-icon-search>
+    <sinch-help-tooltip v-if="tooltipText != null" :text="tooltipText" slot="tooltip"></sinch-help-tooltip>
     <sinch-icon-button v-if="hasRightButton" slot="right" small>
-      <sinch-icon-calendar-today slot="icon"></sinch-icon-calendar-today>
+      <sinch-icon-close slot="icon"></sinch-icon-close>
     </sinch-icon-button>
   </sinch-input>
 </template>
@@ -22,7 +23,8 @@
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/calendar-today'
+import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary/icons/search'
 
 export default {
   methods: {
@@ -72,6 +74,9 @@ export default {
     },
     hasRightButton() {
       return this.search.get('right') !== null
+    },
+    hasIcon() {
+      return this.search.get('icon') !== null
     }
   },
   data() {

@@ -5,6 +5,7 @@ import {
   getLiteralAttribute,
   isAttrTrue,
   NectaryElement,
+  setClass,
   updateAttribute,
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
@@ -24,6 +25,8 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #$optionalText: HTMLSpanElement
   #$additionalText: HTMLSpanElement
   #$invalidText: HTMLSpanElement
+  #$iconSlot: HTMLSlotElement
+  #$iconWrapper: HTMLElement
   #$rightSlot: HTMLSlotElement
   #$rightWrapper: HTMLElement
   #selectionStart: number | null = null
@@ -42,6 +45,8 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$optionalText = shadowRoot.querySelector('#optional')!
     this.#$additionalText = shadowRoot.querySelector('#additional')!
     this.#$invalidText = shadowRoot.querySelector('#invalid')!
+    this.#$iconSlot = shadowRoot.querySelector('slot[name="icon"]')!
+    this.#$iconWrapper = shadowRoot.querySelector('#icon')!
     this.#$rightSlot = shadowRoot.querySelector('slot[name="right"]')!
     this.#$rightWrapper = shadowRoot.querySelector('#right')!
   }
@@ -50,18 +55,22 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.setAttribute('role', 'textbox')
     this.#$input.addEventListener('input', this.#onInput)
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart)
+    this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange)
     this.#$rightSlot.addEventListener('slotchange', this.#onRightSlotChange)
 
     this.#$rightSlot.addEventListener('input', this.#onEventFilter)
     this.#$rightSlot.addEventListener('change', this.#onEventFilter)
     this.#$rightSlot.addEventListener('focusin', this.#onEventFilter)
     this.#$rightSlot.addEventListener('focusout', this.#onEventFilter)
+
+    this.#onIconSlotChange()
     this.#onRightSlotChange()
   }
 
   disconnectedCallback() {
     this.#$input.removeEventListener('input', this.#onInput)
     this.#$input.removeEventListener('compositionstart', this.#onCompositionStart)
+    this.#$iconSlot.removeEventListener('slotchange', this.#onIconSlotChange)
     this.#$rightSlot.removeEventListener('slotchange', this.#onRightSlotChange)
 
     this.#$rightSlot.removeEventListener('input', this.#onEventFilter)
@@ -289,6 +298,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         })
       )
     }
+  }
+
+  #onIconSlotChange = () => {
+    setClass(this.#$iconWrapper, 'empty', this.#$iconSlot.assignedElements().length === 0)
   }
 
   #onRightSlotChange = () => {
