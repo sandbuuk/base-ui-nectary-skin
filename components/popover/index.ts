@@ -9,7 +9,6 @@ import {
   getReactEventHandler,
   updateBooleanAttribute,
   NectaryElement,
-  getCssVar,
   throttleAnimationFrame,
 } from '../utils'
 import templateHTML from './template.html'
@@ -157,11 +156,11 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     let topPos = 0
 
     const orient = this.orientation
-    const shouldExpandWidthToTarget = getCssVar(this, '--sinch-popover-expand-width') !== null
+    const shouldExpandWidthToTarget = orient === 'top' || orient === 'bottom'
     const largestWidth = Math.max(modalRect.width, targetRect.width)
     const resultWidth = shouldExpandWidthToTarget ? largestWidth : modalRect.width
 
-    if (orient === 'bottom-right' || orient === 'top-right') {
+    if (orient === 'bottom-right' || orient === 'top-right' || orient === 'top' || orient === 'bottom') {
       leftPos = Math.max(POPOVER_OFFSET, Math.min(targetRect.x, window.innerWidth - resultWidth - POPOVER_OFFSET))
     }
 
@@ -169,11 +168,11 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       leftPos = Math.max(POPOVER_OFFSET, targetRect.right - resultWidth)
     }
 
-    if (orient === 'bottom-left' || orient === 'bottom-right') {
+    if (orient === 'bottom-left' || orient === 'bottom-right' || orient === 'bottom') {
       topPos = Math.max(POPOVER_OFFSET, Math.min(targetRect.bottom + POPOVER_OFFSET, window.innerHeight - modalRect.height - POPOVER_OFFSET))
     }
 
-    if (orient === 'top-left' || orient === 'top-right') {
+    if (orient === 'top-left' || orient === 'top-right' || orient === 'top') {
       topPos = Math.max(POPOVER_OFFSET, targetRect.top - POPOVER_OFFSET - modalRect.height)
     }
 
