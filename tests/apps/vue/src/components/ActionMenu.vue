@@ -1,6 +1,7 @@
 <template>
   <sinch-action-menu
     :open="isOpen"
+    :modal="isModal"
     :orientation="orientation"
     :maxvisibleitems="maxVisibleItems"
     @close="onClose">
@@ -51,6 +52,9 @@ export default {
     maxVisibleItems() {
       const val = this.search.get('maxvisibleitems')
       return val !== null ? parseInt(val) : null
+    },
+    isModal() {
+      return this.search.get('modal')
     },
   },
   data() {

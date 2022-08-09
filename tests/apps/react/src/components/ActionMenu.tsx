@@ -14,12 +14,10 @@ export const ActionMenu: FC<TActionMenu> = ({ search }) => {
   const orientation = search.get('orientation') as TSinchPopoverOrientation ?? undefined
   const [isOpen, setOpen] = useState(search.get('open') !== null)
   const onClose = useCallback(() => {
-    console.log('close')
     window.dispatchEvent(new CustomEvent('sinch-action-menu-close'))
     setOpen(false)
   }, [])
   const onClick = useCallback((e: MouseEvent<TSinchActionMenuOptionElement>) => {
-    console.log('click')
     window.dispatchEvent(new CustomEvent('sinch-action-menu-click', { detail: e.currentTarget.text }))
     setOpen(false)
   }, [])
@@ -28,6 +26,7 @@ export const ActionMenu: FC<TActionMenu> = ({ search }) => {
 
     return val !== null ? parseInt(val) : undefined
   }, [search])
+  const isModal = search.get('modal') !== null
 
   return (
     <sinch-action-menu
@@ -36,6 +35,7 @@ export const ActionMenu: FC<TActionMenu> = ({ search }) => {
       orientation={orientation}
       onClose={onClose}
       aria-label="Dropdown"
+      modal={isModal}
     >
       <sinch-button
         slot="target"

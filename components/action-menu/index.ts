@@ -51,7 +51,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['open', 'orientation', 'maxvisibleitems']
+    return ['open', 'orientation', 'maxvisibleitems', 'modal']
   }
 
   get nodeName() {
@@ -80,6 +80,14 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
   get open(): boolean {
     return getBooleanAttribute(this, 'open')
+  }
+
+  set modal(isModal: boolean) {
+    updateBooleanAttribute(this, 'modal', isModal)
+  }
+
+  get modal(): boolean {
+    return getBooleanAttribute(this, 'modal')
   }
 
   get dropdownRect() {
@@ -115,6 +123,12 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
         } else {
           this.#$listbox.style.maxHeight = attrValueToPixels(newVal, { min: 2, multiplier: ITEM_HEIGHT })
         }
+
+        break
+      }
+
+      case 'modal': {
+        updateBooleanAttribute(this.#$popover, 'modal', isAttrTrue(newVal))
 
         break
       }
