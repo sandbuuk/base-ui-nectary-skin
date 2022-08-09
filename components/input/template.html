@@ -112,6 +112,19 @@
   color: var(--sinch-color-text-invalid);
 }
 
+#right {
+  display: flex;
+  flex-direction: row;
+  align-self: stretch;
+  align-items: center;
+  gap: 4px;
+  padding-right: 8px;
+}
+
+#right.empty {
+  display: none;
+}
+
 ::slotted(sinch-help-tooltip) {
   align-self: center;
   margin: 0 8px;
@@ -135,7 +148,9 @@
   </div>
   <div id="input-wrapper">
     <input id="input" type="text"/>
-    <slot name="right"></slot>
+    <div id="right">
+      <slot name="right"></slot>
+    </div>
   </div>
   <div id="bottom">
     <span id="invalid"></span>

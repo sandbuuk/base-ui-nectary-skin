@@ -24,6 +24,8 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #$optionalText: HTMLSpanElement
   #$additionalText: HTMLSpanElement
   #$invalidText: HTMLSpanElement
+  #$rightSlot: HTMLSlotElement
+  #$rightWrapper: HTMLElement
   #selectionStart: number | null = null
   #selectionEnd: number | null = null
   #isPendingDk = false
@@ -40,17 +42,32 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$optionalText = shadowRoot.querySelector('#optional')!
     this.#$additionalText = shadowRoot.querySelector('#additional')!
     this.#$invalidText = shadowRoot.querySelector('#invalid')!
+    this.#$rightSlot = shadowRoot.querySelector('slot[name="right"]')!
+    this.#$rightWrapper = shadowRoot.querySelector('#right')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'textbox')
     this.#$input.addEventListener('input', this.#onInput)
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart)
+    this.#$rightSlot.addEventListener('slotchange', this.#onRightSlotChange)
+
+    this.#$rightSlot.addEventListener('input', this.#onEventFilter)
+    this.#$rightSlot.addEventListener('change', this.#onEventFilter)
+    this.#$rightSlot.addEventListener('focusin', this.#onEventFilter)
+    this.#$rightSlot.addEventListener('focusout', this.#onEventFilter)
+    this.#onRightSlotChange()
   }
 
   disconnectedCallback() {
     this.#$input.removeEventListener('input', this.#onInput)
     this.#$input.removeEventListener('compositionstart', this.#onCompositionStart)
+    this.#$rightSlot.removeEventListener('slotchange', this.#onRightSlotChange)
+
+    this.#$rightSlot.removeEventListener('input', this.#onEventFilter)
+    this.#$rightSlot.removeEventListener('change', this.#onEventFilter)
+    this.#$rightSlot.removeEventListener('focusin', this.#onEventFilter)
+    this.#$rightSlot.removeEventListener('focusout', this.#onEventFilter)
   }
 
   static get observedAttributes() {
@@ -272,6 +289,14 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         })
       )
     }
+  }
+
+  #onRightSlotChange = () => {
+    setClass(this.#$rightWrapper, 'empty', this.#$rightSlot.assignedElements().length === 0)
+  }
+
+  #onEventFilter = (e: Event) => {
+    e.stopPropagation()
   }
 })
 
