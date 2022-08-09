@@ -43,8 +43,22 @@
   color: var(--sinch-color-text-muted);
 }
 
+#border {
+  position: absolute;
+  border: 1px solid var(--sinch-color-stormy-200);
+  border-radius: var(--sinch-shape-radius-s);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+:host([invalidtext]:not([invalidtext=""]):not([disabled])) #border {
+  border-color: var(--sinch-color-text-invalid);
+}
+
 #input:disabled {
-  border-color: var(--sinch-color-snow-500);
   color: var(--sinch-color-stormy-100);
 }
 
@@ -52,17 +66,17 @@
   color: var(--sinch-color-snow-500);
 }
 
-#input:focus {
+#input:disabled + #border {
+  border-color: var(--sinch-color-snow-500);
+}
+
+#input:focus + #border {
   border-color: var(--sinch-color-stormy-600);
 }
 
 #input[type="password"] {
   font-size: 1.5em;
   letter-spacing: 0.1em;
-}
-
-:host([invalidtext]:not([invalidtext=""]):not([disabled])) #input-wrapper {
-  border-color: var(--sinch-color-text-invalid);
 }
 
 #top,
@@ -148,6 +162,7 @@
   </div>
   <div id="input-wrapper">
     <input id="input" type="text"/>
+    <div id="border"></div>
     <div id="right">
       <slot name="right"></slot>
     </div>
