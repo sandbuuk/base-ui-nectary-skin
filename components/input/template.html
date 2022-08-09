@@ -21,7 +21,6 @@
   border-radius: var(--sinch-shape-radius-s);
   width: 100%;
   height: 48px;
-  margin: 2px 0;
   background-color: var(--sinch-color-snow-100);
 }
 
@@ -85,10 +84,7 @@
 
 #top {
   height: 24px;
-}
-
-#bottom {
-  height: 20px;
+  margin-bottom: 2px;
 }
 
 #label,
@@ -117,11 +113,23 @@
   text-align: right;
   font: var(--sinch-font-extra-small-text);
   color: var(--sinch-color-text-muted);
+  line-height: 20px;
+  margin-top: 2px;
+}
+
+#additional:empty {
+  display: none;
 }
 
 #invalid {
   font: var(--sinch-font-extra-small-text);
   color: var(--sinch-color-text-invalid);
+  line-height: 20px;
+  margin-top: 2px;
+}
+
+#invalid:empty {
+  display: none;
 }
 
 #icon {
@@ -186,7 +194,7 @@
     </div>
   </div>
   <div id="bottom">
-    <span id="invalid"></span>
-    <span id="additional"></span>
+    <div id="invalid"></div>
+    <div id="additional"></div>
   </div>
 </div>
