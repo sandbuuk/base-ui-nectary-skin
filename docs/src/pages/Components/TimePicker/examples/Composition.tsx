@@ -6,7 +6,7 @@ import '@sinch-engage/nectary/time-picker'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/schedule'
 
-export const InputCompositionExample: FC = () => {
+export const CompositionExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState('22:30:00')
   const [isoValue, setIsoValue] = useState('22:30:00')

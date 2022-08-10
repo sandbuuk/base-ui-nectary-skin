@@ -6,7 +6,7 @@ import '@sinch-engage/nectary/date-picker'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/calendar-today'
 
-export const InputCompositionExample: FC = () => {
+export const CompositionExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState('2022-07-19')
   const [isoValue, setIsoValue] = useState('2022-07-19')
