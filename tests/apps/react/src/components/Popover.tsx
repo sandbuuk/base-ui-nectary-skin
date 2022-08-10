@@ -8,7 +8,7 @@ type TPopover = {
 }
 
 export const Popover: FC<TPopover> = ({ search }) => {
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(search.get('open') !== null)
   const orientation: any = search.get('orientation')
   const isModal = search.get('modal') !== null
 
@@ -33,7 +33,7 @@ export const Popover: FC<TPopover> = ({ search }) => {
           setOpen(true)
         }}
       />
-      <section slot="content" style={{ width: '240px', padding: '12px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</section>
+      <section slot="content" style={{ maxWidth: '240px', padding: '12px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</section>
     </sinch-popover>
   )
 }

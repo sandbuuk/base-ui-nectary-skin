@@ -7,7 +7,7 @@ const withSelect = '/dropdown'
 const withMultiple = '/dropdown?multiple=true'
 const withCheckbox = '/dropdown?checkbox=true'
 const withRadio = '/dropdown?radio=true'
-const withWideContent = '/dropdown?width=400'
+const withWideContent = '/dropdown?width=300'
 const withMaxItems = '/dropdown?maxvisibleitems=2'
 const check = makeAccessibilityTests('/dropdown', 'sinch-dropdown')
 
@@ -115,7 +115,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'orientation attribute',
-    url: withSelect,
+    url: withWideContent,
     async *fn({ $, $eval }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -129,7 +129,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   },
   {
     name: 'orientation property',
-    url: withSelect,
+    url: withWideContent,
     async *fn({ $, $eval }) {
       const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
 
@@ -244,17 +244,6 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
         el.value = 'missing'
       })
       yield { name: 'option-missing', includeRects: [await getRect()] }
-    },
-  },
-  {
-    name: 'wide target',
-    url: withWideContent,
-    async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
-
-      await $.click()
-
-      yield { name: 'shot', includeRects: [await getRect()] }
     },
   },
   {

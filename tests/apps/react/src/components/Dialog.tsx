@@ -16,6 +16,7 @@ export const Dialog: FC<TDialog> = ({ search }) => {
       open
       caption={title}
       aria-label={title}
+      close-aria-label="Close dialog"
       onClose={() => {
         window.dispatchEvent(new CustomEvent('sinch-dialog-close'))
       }}

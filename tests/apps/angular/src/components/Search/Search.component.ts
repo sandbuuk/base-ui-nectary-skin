@@ -51,8 +51,6 @@ export class SearchComponent {
     if (this.value.length >= 5) {
       this.isOpen = true
     }
-
-    window.dispatchEvent(new CustomEvent('sinch-search-change', {detail: (e as CustomEvent).detail}))
   }
   onFocus() {
     window.dispatchEvent(new CustomEvent('sinch-search-focus'))

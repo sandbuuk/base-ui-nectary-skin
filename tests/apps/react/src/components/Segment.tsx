@@ -49,8 +49,8 @@ export const Segment: FC<TSegment> = ({ search }) => {
         />
       )}
       {hasContent && (
-        <div slot="content" style={{ display: 'flex', flexDirection: 'column' }}>
-          <section style={{ marginBottom: '16px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
+        <div slot="content" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
           <sinch-input aria-label="Input" label="Label" value="" onChange={() => {}} slot="content"/>
           <sinch-input aria-label="Input" label="Label" value="" onChange={() => {}} slot="content"/>
         </div>

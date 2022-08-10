@@ -54,7 +54,7 @@ export default {
       return val !== null ? parseInt(val) : null
     },
     isModal() {
-      return this.search.get('modal')
+      return this.search.get('modal') !== null
     },
   },
   data() {

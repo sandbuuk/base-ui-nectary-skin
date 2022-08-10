@@ -17,7 +17,7 @@ export const ActionMenu: FC<TActionMenu> = ({ search }) => {
     window.dispatchEvent(new CustomEvent('sinch-action-menu-close'))
     setOpen(false)
   }, [])
-  const onClick = useCallback((e: MouseEvent<TSinchActionMenuOptionElement>) => {
+  const onOptionClick = useCallback((e: MouseEvent<TSinchActionMenuOptionElement>) => {
     window.dispatchEvent(new CustomEvent('sinch-action-menu-click', { detail: e.currentTarget.text }))
     setOpen(false)
   }, [])
@@ -46,14 +46,14 @@ export const ActionMenu: FC<TActionMenu> = ({ search }) => {
           setOpen(true)
         }}
       />
-      <sinch-action-menu-option text="Option 1 value long long long" slot="option" aria-label="Option 1" onClick={onClick}>
+      <sinch-action-menu-option text="Option 1 value long long long" slot="option" aria-label="Option 1" onClick={onOptionClick}>
         <sinch-icon-open-in-new slot="icon"/>
       </sinch-action-menu-option>
-      <sinch-action-menu-option text="Option 2 value" slot="option" disabled aria-label="Option 2" onClick={onClick}>
+      <sinch-action-menu-option text="Option 2 value" slot="option" disabled aria-label="Option 2" onClick={onOptionClick}>
         <sinch-icon-open-in-new slot="icon"/>
       </sinch-action-menu-option>
-      <sinch-action-menu-option text="Option 3 value" slot="option" disabled={false} aria-label="Option 3" onClick={onClick}/>
-      <sinch-action-menu-option text="Option 4 value" slot="option" aria-label="Option 4" onClick={onClick}/>
+      <sinch-action-menu-option text="Option 3 value" slot="option" disabled={false} aria-label="Option 3" onClick={onOptionClick}/>
+      <sinch-action-menu-option text="Option 4 value" slot="option" aria-label="Option 4" onClick={onOptionClick}/>
     </sinch-action-menu>
   )
 }
