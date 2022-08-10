@@ -5,8 +5,10 @@
   outline: none;
 }
 
-sinch-popover {
+#wrapper {
   width: 100%;
+
+  --sinch-popover-shape-radius: var(--sinch-shape-radius-s);
 }
 
 #listbox {
@@ -14,7 +16,7 @@ sinch-popover {
 }
 </style>
 
-<sinch-popover modal>
+<sinch-popover id="wrapper" modal>
   <slot name="target" slot="target"></slot>
   <div id="listbox" slot="content">
     <slot name="option"></slot>
