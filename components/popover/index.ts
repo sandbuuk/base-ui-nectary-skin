@@ -49,12 +49,22 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$dialog.addEventListener('mousedown', this.#onBackdropClick)
     this.addEventListener('close', this.#onCloseReactHandler)
     this.#isConnected = true
+
+    // React updates attributes BEFORE connecting to the DOM
+    // Angular updates attributes AFTER connecting to the DOM
+    if (getBooleanAttribute(this, 'open')) {
+      this.#onExpand()
+    } else {
+      this.#onCollapse()
+    }
   }
 
   disconnectedCallback() {
     this.#$dialog.removeEventListener('cancel', this.#onCancel)
     this.#$dialog.removeEventListener('mousedown', this.#onBackdropClick)
     this.removeEventListener('close', this.#onCloseReactHandler)
+
+    this.#onCollapse()
     this.#isConnected = false
   }
 
@@ -91,15 +101,19 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'open': {
-        if (this.#isConnected) {
-          if (isAttrTrue(newVal)) {
-            this.#onExpand()
-          } else {
-            this.#onCollapse()
-          }
+        if (isAttrTrue(newVal)) {
+          this.#onExpand()
+        } else {
+          this.#onCollapse()
         }
+
+        updateBooleanAttribute(this, 'open', isAttrTrue(newVal))
 
         break
       }
@@ -115,7 +129,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   #onExpand() {
-    if (this.#isOpen()) {
+    if (!this.#isConnected || this.#isOpen()) {
       return
     }
 
@@ -128,7 +142,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       document.body.style.overflow = 'hidden'
       window.addEventListener('resize', this.#onResize)
     } else {
-      this.#$target.addEventListener('keydown', this.#onTargetKeydown)
+      this.addEventListener('keydown', this.#onTargetKeydown)
       this.#$dialog.style.position = 'absolute'
       this.#$dialog.setAttribute('open', '')
       this.#updateOrientation()
@@ -142,7 +156,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     }
 
     if (this.modal) {
-      this.#$dialog.close()
+      this.#$dialog.close?.()
     } else {
       this.#$dialog.removeAttribute('open')
     }
@@ -151,11 +165,11 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     document.body.style.overflow = this.#prevOverflowValue
     this.#resizeThrottle.cancel()
     window.removeEventListener('resize', this.#onResize)
-    this.#$target.removeEventListener('keydown', this.#onTargetKeydown)
+    this.removeEventListener('keydown', this.#onTargetKeydown)
   }
 
   #isOpen() {
-    return this.#isConnected && getBooleanAttribute(this.#$dialog, 'open')
+    return getBooleanAttribute(this.#$dialog, 'open')
   }
 
   #onResize = () => {

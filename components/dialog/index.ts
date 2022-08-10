@@ -10,6 +10,7 @@ import {
   updateAttribute,
   getReactEventHandler,
   NectaryElement,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDialogElement, TSinchDialogReact } from './types'
@@ -38,6 +39,29 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     dialogPolyfill.registerDialog(this.#$dialog)
   }
 
+  connectedCallback() {
+    this.setAttribute('role', 'dialog')
+    this.#$closeButton.addEventListener('click', this.#onCloseClick)
+    this.#$dialog.addEventListener('mousedown', this.#onBackdropClick)
+    this.#$dialog.addEventListener('cancel', this.#onCancel)
+    this.addEventListener('close', this.#onCloseReactHandler)
+    this.#isConnected = true
+
+    // React updates attributes BEFORE connecting to the DOM
+    // Angular updates attributes AFTER connecting to the DOM
+    this.#setOpen(getBooleanAttribute(this, 'open'))
+  }
+
+  disconnectedCallback() {
+    this.#$closeButton.removeEventListener('click', this.#onCloseClick)
+    this.#$dialog.removeEventListener('mousedown', this.#onBackdropClick)
+    this.#$dialog.removeEventListener('cancel', this.#onCancel)
+    this.removeEventListener('close', this.#onCloseReactHandler)
+
+    this.#setOpen(false)
+    this.#isConnected = false
+  }
+
   static get observedAttributes() {
     return ['caption', 'open', 'close-aria-label']
   }
@@ -50,9 +74,12 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
         break
       }
       case 'open': {
-        if (this.#isConnected) {
-          this.#setOpen(isAttrTrue(newVal))
-        }
+        const shouldOpen = isAttrTrue(newVal)
+
+        this.#setOpen(shouldOpen)
+
+        updateBooleanAttribute(this, 'open', shouldOpen)
+
         break
       }
       case 'close-aria-label': {
@@ -69,27 +96,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
   get caption(): string {
     return getAttribute(this, 'caption', '')
-  }
-
-  connectedCallback() {
-    this.setAttribute('role', 'dialog')
-    this.#$closeButton.addEventListener('click', this.#onCloseClick)
-    this.addEventListener('close', this.#onCloseReactHandler)
-    this.#$dialog.addEventListener('mousedown', this.#onBackdropClick)
-    this.#$dialog.addEventListener('cancel', this.#onCancel)
-    this.#isConnected = true
-
-    if (getBooleanAttribute(this, 'open')) {
-      this.#setOpen(true)
-    }
-  }
-
-  disconnectedCallback() {
-    this.#$closeButton.removeEventListener('click', this.#onCloseClick)
-    this.removeEventListener('close', this.#onCloseReactHandler)
-    this.#$dialog.removeEventListener('mousedown', this.#onBackdropClick)
-    this.#$dialog.removeEventListener('cancel', this.#onCancel)
-    this.#isConnected = false
   }
 
   #onCancel = (e: Event) => {
@@ -129,15 +135,15 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     )
   }
 
-  #setOpen(isOpen: boolean) {
-    if (isOpen) {
-      if (!getBooleanAttribute(this.#$dialog, 'open')) {
-        (this.#$dialog as any).showModal()
+  #setOpen(shouldOpen: boolean) {
+    if (shouldOpen) {
+      if (this.#isConnected && !getBooleanAttribute(this.#$dialog, 'open')) {
         this.#prevOverflowValue = document.body.style.overflow
         document.body.style.overflow = 'hidden'
+        this.#$dialog.showModal()
       }
     } else {
-      (this.#$dialog as any).close?.()
+      this.#$dialog.close?.()
       document.body.style.overflow = this.#prevOverflowValue
     }
   }
