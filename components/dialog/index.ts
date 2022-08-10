@@ -39,7 +39,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['caption', 'open']
+    return ['caption', 'open', 'close-aria-label']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -53,6 +53,10 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
         if (this.#isConnected) {
           this.#setOpen(isAttrTrue(newVal))
         }
+        break
+      }
+      case 'close-aria-label': {
+        updateAttribute(this.#$closeButton, 'aria-label', newVal)
 
         break
       }
