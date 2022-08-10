@@ -1,0 +1,96 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { NonModalExample } from './examples/NonModal.tsx'
+import { ModalExample } from './examples/Modal.tsx'
+import { OrientationExample } from './examples/Orientation.tsx'
+import {
+  ReactPropsTable,
+  ReactHandlersTable,
+  ElementPropertiesTable,
+  ElementAttributesTable,
+  ElementEventsTable
+} from '!!@saas/types-to-mdx-loader!@sinch-engage/nectary/popover/types.ts'
+
+# Popover
+
+Popover is a low-level building block that we use to implement other components such as Dialog, Dropdown, Action Menu and Select.
+
+It's stateless, as well as all Nectary components, and therefore it's up to a consumer to decide when and how to open/close it.
+
+## Table of contents
+
+## Examples
+
+### Non-modal
+
+Non-modal popover *DOES NOT*:
+
+* steal focus even from a text field when opened
+* have backdrop
+* prevent interaction with the rest of the page
+* prevent page scrolling
+* automatically close on click outside
+* always handle `Escape` key with optional `onClose` handler
+
+Think of it as a rich tooltip or a text field autocomplete functionality.
+
+<Example Component={NonModalExample}/>
+
+### Modal
+
+Modal popover *DOES*:
+
+* steal focus
+* have backdrop
+* prevent interaction with the rest of the page
+* prevent page scrolling
+* automatically close on click outside with optional `onClose` handler
+* always handle `Escape` key with optional `onClose` handler
+
+Think of it as a dialog that *requires* an interaction.
+
+<Example Component={ModalExample}/>
+
+### Orientation
+
+Orientation of Popover, where it *points to* from origin.
+
+See API section for all the possible values.
+
+<Example Component={OrientationExample}/>
+
+## API
+
+### Slots
+
+#### target
+
+`target` slot helps Popover to determine its position.
+
+#### content
+
+`content` slot contains Popover inner content.
+
+### React
+
+#### Props
+
+<ReactPropsTable/>
+
+#### Handlers
+
+<ReactHandlersTable/>
+
+### Element
+
+#### Properties
+
+<ElementPropertiesTable/>
+
+#### Attributes
+
+<ElementAttributesTable/>
+
+#### Events
+
+<ElementEventsTable/>
