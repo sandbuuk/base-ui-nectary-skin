@@ -137,15 +137,13 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
   #onListboxKeyDown = (e: KeyboardEvent) => {
     switch (e.code) {
-      case 'ArrowUp':
-      case 'ArrowLeft': {
+      case 'ArrowUp': {
         e.preventDefault()
         this.#selectOption(this.#getPrevOption())
 
         break
       }
-      case 'ArrowDown':
-      case 'ArrowRight': {
+      case 'ArrowDown': {
         e.preventDefault()
         this.#selectOption(this.#getNextOption())
 
