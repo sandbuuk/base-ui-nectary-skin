@@ -89,7 +89,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   get orientation() {
-    return getLiteralAttribute(this, orientationValues, 'orientation', 'bottom-right')
+    return getLiteralAttribute(this, orientationValues, 'orientation', 'bottom')
   }
 
   set orientation(value: TSinchPopoverOrientation) {
@@ -177,7 +177,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   #updateOrientation = () => {
-    this.#$dialog.style.width = 'fit-content'
+    this.#$dialog.style.width = 'max-content'
 
     const targetRect = this.#$target.getBoundingClientRect()
     const modalRect = this.#$dialog.getBoundingClientRect()
@@ -186,8 +186,9 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     const orient = this.orientation
     const shouldExpandWidthToTarget = orient === 'top' || orient === 'bottom'
-    const largestWidth = Math.max(modalRect.width, targetRect.width)
-    const resultWidth = shouldExpandWidthToTarget ? largestWidth : modalRect.width
+    const resultWidth = shouldExpandWidthToTarget
+      ? Math.max(modalRect.width, targetRect.width)
+      : modalRect.width
 
     if (orient === 'bottom-left' || orient === 'top-left') {
       leftPos = targetRect.width - resultWidth
@@ -207,7 +208,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   #updateOrientationModal = () => {
-    this.#$dialog.style.width = 'fit-content'
+    this.#$dialog.style.width = 'max-content'
 
     const targetRect = this.#$target.getBoundingClientRect()
     const modalRect = this.#$dialog.getBoundingClientRect()
@@ -216,8 +217,9 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     const orient = this.orientation
     const shouldExpandWidthToTarget = orient === 'top' || orient === 'bottom'
-    const largestWidth = Math.max(modalRect.width, targetRect.width)
-    const resultWidth = shouldExpandWidthToTarget ? largestWidth : modalRect.width
+    const resultWidth = shouldExpandWidthToTarget
+      ? Math.max(modalRect.width, targetRect.width)
+      : modalRect.width
 
     if (orient === 'bottom-right' || orient === 'top-right' || orient === 'top' || orient === 'bottom') {
       leftPos = Math.max(POPOVER_OFFSET, Math.min(targetRect.x, window.innerWidth - resultWidth - POPOVER_OFFSET))
