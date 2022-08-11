@@ -69,15 +69,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['open', 'orientation']
-  }
-
-  set open(isOpen: boolean) {
-    updateBooleanAttribute(this, 'open', isOpen)
-  }
-
-  get open(): boolean {
-    return getBooleanAttribute(this, 'open')
+    return ['modal', 'orientation', 'open']
   }
 
   set modal(isModal: boolean) {
@@ -86,6 +78,14 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
   get modal(): boolean {
     return getBooleanAttribute(this, 'modal')
+  }
+
+  set open(isOpen: boolean) {
+    updateBooleanAttribute(this, 'open', isOpen)
+  }
+
+  get open(): boolean {
+    return getBooleanAttribute(this, 'open')
   }
 
   get orientation() {
@@ -120,10 +120,21 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
       case 'orientation': {
         if (this.#isOpen()) {
-          this.#updateOrientationModal()
+          if (this.modal) {
+            this.#updateOrientationModal()
+          } else {
+            this.#updateOrientation()
+          }
         }
 
         break
+      }
+
+      case 'modal': {
+        if (this.#isOpen()) {
+          this.#onCollapse()
+          this.#onExpand()
+        }
       }
     }
   }
