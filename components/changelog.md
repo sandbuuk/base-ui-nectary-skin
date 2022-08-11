@@ -1,3 +1,14 @@
+## v0.33.0 (2022-08-11)
+
+* 💥 add `modal` attribute to `sinch-popover`, `sinch-action-menu`
+* ➕ add `top` and `bottom` orientation values to `sinch-popover`
+* ➕ add `icon` slot to `sinch-input`
+* 🐞 fix border style in `sinch-input`
+* 🐞 fix `maxvisibleitems` scroll in `sinch-dropdown` and `sinch-action-menu`
+* 🐞 fix cursor position in `sinch-input` and `sinch-textarea`
+* 🐞 hide bottom row when empty in `sinch-input`, `sinch-textarea`, `sinch-select`
+* 🐞 propagate `close-aria-label` attribute to close button in `sinch-dialog`
+
 ## v0.32.0 (2022-08-04)
 
 * ➕ add `sinch-time-picker` component

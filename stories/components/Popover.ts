@@ -17,6 +17,10 @@ export default {
       control: 'select',
       options: orientationValues,
     },
+    modal: {
+      description: 'Popover Modal mode',
+      control: 'boolean',
+    },
     onClose: {
       description: 'Close event handler',
       action: 'onClose',
@@ -37,6 +41,7 @@ export default {
 const Template = (innerHTML: string): Story => ({ onClose }) => {
   const [{
     open,
+    modal,
     orientation,
   }, updateArgs] = useArgs()
 
@@ -63,6 +68,7 @@ const Template = (innerHTML: string): Story => ({ onClose }) => {
 
   const $popover = popoverRef.current!
 
+  $popover.modal = modal
   $popover.orientation = orientation
   $popover.open = open
 
@@ -78,13 +84,14 @@ export const Popover = Template(popoverInnerHTML)
 
 Popover.args = {
   open: false,
+  modal: true,
   orientation: 'bottom-right',
 }
 
 Popover.parameters = {
   docs: {
     source: {
-      code: `<sinch-popover open={isOpen} onClose={onClose}>${popoverInnerHTML}</sinch-input>`,
+      code: `<sinch-popover modal open={isOpen} onClose={onClose}>${popoverInnerHTML}</sinch-input>`,
     },
   },
 }

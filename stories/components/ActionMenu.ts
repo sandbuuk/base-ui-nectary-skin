@@ -14,6 +14,10 @@ export default {
       description: 'Is action-menu open',
       control: 'boolean',
     },
+    modal: {
+      description: 'Action Menu modal mode',
+      control: 'boolean',
+    },
     orientation: {
       description: 'Dropdown Orientation',
       control: 'select',
@@ -45,6 +49,7 @@ const Template = (innerHTML: string): Story => () => {
     open,
     maxVisibleItems,
     orientation,
+    modal,
   }, updateArgs] = useArgs()
 
   const $wrapper = useStoryWrapper()
@@ -77,6 +82,7 @@ const Template = (innerHTML: string): Story => () => {
 
   const $actionmenu = actionmenuRef.current!
 
+  $actionmenu.modal = modal
   $actionmenu.open = open
   $actionmenu.orientation = orientation
   $actionmenu.maxVisibleItems = maxVisibleItems
@@ -100,13 +106,14 @@ export const ActionMenu = Template(actionMenuInnerHTML)
 
 ActionMenu.args = {
   open: false,
+  modal: true,
   orientation: 'bottom-right',
 }
 
 ActionMenu.parameters = {
   docs: {
     source: {
-      code: `<sinch-action-menu open={isOpen} onClose={onClose}>
+      code: `<sinch-action-menu modal open={isOpen} onClose={onClose}>
   <sinch-button text="Button" type="cta-secondary" slot="target"></sinch-button>
   <sinch-action-menu-option onClick={onClick} text="Option 1 value long" slot="option">
     <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
