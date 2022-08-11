@@ -1,0 +1,82 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx'
+import { OptionalAttributesExample } from './examples/OptionalAttributes.tsx'
+import { MaxVisibleItemsExample } from './examples/MaxVisibleItems.tsx'
+import { DisabledExample } from './examples/Disabled.tsx'
+import { TooltipExample } from './examples/Tooltip.tsx'
+import {
+  ReactPropsTable,
+  ReactHandlersTable,
+  ElementPropertiesTable,
+  ElementAttributesTable,
+  ElementEventsTable
+} from '!!@saas/types-to-mdx-loader!@sinch-engage/nectary/select/types.ts'
+
+# Select
+
+Select component is similar to navite HTML select/option but provides additional features like icon inside of an option.
+
+It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled-components) component.
+
+## Table of contents
+
+## Examples
+
+### Simple
+
+<Example Component={SimpleExample}/>
+
+### Optional attributes
+
+<Example Component={OptionalAttributesExample}/>
+
+### Max visible items
+
+Controls number of visible at the same time options in the list and makes it scrollable.
+
+<Example Component={MaxVisibleItemsExample}/>
+
+### Disabled
+
+<Example Component={DisabledExample}/>
+
+### Tooltip
+
+<Example Component={TooltipExample}/>
+
+## API
+
+### Slots
+
+#### tooltip
+
+`tooltip` slot puts a tooltip into its predefined place, see example above.
+
+#### option
+
+`option` slot renders `sinch-select-option`.
+
+### React
+
+#### Props
+
+<ReactPropsTable/>
+
+#### Handlers
+
+<ReactHandlersTable/>
+
+### Element
+
+#### Properties
+
+<ElementPropertiesTable/>
+
+#### Attributes
+
+<ElementAttributesTable/>
+
+#### Events
+
+<ElementEventsTable/>
