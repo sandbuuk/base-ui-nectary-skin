@@ -128,6 +128,10 @@ export function getLiteralAttribute($element: Element, literals: string[], attrN
   return defaultValue
 }
 
+export const clampNumber = (value: number, min: number, max: number): number => {
+  return Math.min(max, Math.max(min, value))
+}
+
 type TRange = {
   min?: number,
   max?: number,

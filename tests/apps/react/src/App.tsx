@@ -12,6 +12,7 @@ import { DatePicker } from './components/DatePicker'
 import { Dialog } from './components/Dialog'
 import { Dropdown } from './components/Dropdown'
 import { Grid } from './components/Grid'
+import { HorizontalStepper } from './components/HorizontalStepper'
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Link } from './components/Link'
@@ -258,6 +259,12 @@ const mapElement = (url: URL) => {
     case '/spinner': {
       return (
         <Spinner search={url.searchParams}/>
+      )
+    }
+
+    case '/horizontal-stepper': {
+      return (
+        <HorizontalStepper search={url.searchParams}/>
       )
     }
   }

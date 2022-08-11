@@ -1,0 +1,39 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+}
+
+#wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  width: fit-content;
+}
+
+#progress {
+  position: absolute;
+  height: 1px;
+  background-color: var(--sinch-color-snow-700);
+  left: 72px;
+  right: 72px;
+  top: 16px;
+  transform: translateY(-50%);
+}
+
+#bar {
+  position: absolute;
+  height: 1px;
+  background-color: var(--sinch-color-stormy-400);
+  left: 0;
+  top: 0;
+}
+</style>
+
+<div id="wrapper">
+  <div id="progress">
+    <div id="bar"></div>
+  </div>
+  <slot></slot>
+</div>

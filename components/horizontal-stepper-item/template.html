@@ -1,0 +1,93 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+}
+
+#wrapper {
+  width: 144px;
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+#circle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 32px;
+  height: 32px;
+  background-color: var(--sinch-color-snow-700);
+  font: var(--sinch-font-title-s);
+  line-height: 32px;
+  text-align: center;
+  color: var(--sinch-color-stormy-500);
+  border: 1px solid transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+
+  --sinch-icon-size: 20px;
+}
+
+#label {
+  font: var(--sinch-font-title-s);
+  color: var(--sinch-color-stormy-500);
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 8px;
+}
+
+#description {
+  font: var(--sinch-font-text-xs);
+  color: var(--sinch-color-stormy-300);
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#icon-error,
+#icon-success {
+  display: none;
+}
+
+:host([data-progress="active"]) #circle {
+  color: var(--sinch-color-snow-100);
+  background-color: var(--sinch-color-stormy-400);
+}
+
+:host([data-progress="done"]) #circle {
+  border-color: var(--sinch-color-stormy-400);
+}
+
+:host([data-progress="done"]:not([status])) #icon-success {
+  display: block;
+}
+
+:host([data-progress="done"][status="error"]) #circle {
+  background-color: var(--sinch-color-error-200);
+  border-color: var(--sinch-color-stormy-400);
+}
+
+:host([data-progress="done"][status="error"]) #icon-error {
+  display: block;
+}
+
+:host([data-progress="done"]:not([status="skip"])) #circle-text {
+  display: none;
+}
+</style>
+
+<div id="wrapper">
+  <div id="circle" aria-hidden="true">
+    <sinch-icon-check id="icon-success"></sinch-icon-check>
+    <sinch-icon-exclamation id="icon-error"></sinch-icon-exclamation>
+    <span id="circle-text"></span>
+  </div>
+  <span id="label"></span>
+  <span id="description"></span>
+</div>
