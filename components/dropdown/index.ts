@@ -171,8 +171,12 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     switch (e.code) {
       case 'Space':
       case 'Enter': {
-        e.preventDefault()
-        this.#dispatchChangeEvent(this.#findSelectedOption(this.#getEnabledOptionElements()))
+        const $option = this.#findSelectedOption(this.#getEnabledOptionElements())
+
+        if ($option !== null) {
+          e.preventDefault()
+          this.#dispatchChangeEvent($option)
+        }
 
         break
       }
@@ -250,13 +254,15 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
   }
 
   #selectOption($option: TDropdownOption | null) {
+    const hasMaxVisibleItems = this.hasAttribute('maxvisibleitems')
+
     for (const $op of this.#getOptionElements()) {
       const isSelected = $op === $option
 
       // Select / Unselect
       updateBooleanAttribute($op, 'data-selected', isSelected)
 
-      if (isSelected && this.maxVisibleItems !== null) {
+      if (isSelected && hasMaxVisibleItems) {
         $op.scrollIntoView?.({ block: 'nearest' })
       }
     }
@@ -319,12 +325,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
   #onOpen() {
     const $opt = this.#getOptionWithValue(getFirstCsvValue(this.value))
 
-    if ($opt !== null) {
-      this.#selectOption($opt)
-      $opt.scrollIntoView?.({ block: 'nearest' })
-    } else {
-      this.#selectOption(this.#getFirstOption())
-    }
+    this.#selectOption($opt ?? this.#getFirstOption())
   }
 
   #onClose = () => {

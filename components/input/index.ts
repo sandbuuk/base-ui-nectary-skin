@@ -5,6 +5,7 @@ import {
   getLiteralAttribute,
   isAttrTrue,
   NectaryElement,
+  setClass,
   updateAttribute,
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
@@ -24,8 +25,11 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #$optionalText: HTMLSpanElement
   #$additionalText: HTMLSpanElement
   #$invalidText: HTMLSpanElement
-  #selectionStart: number | null = null
-  #selectionEnd: number | null = null
+  #$iconSlot: HTMLSlotElement
+  #$iconWrapper: HTMLElement
+  #$rightSlot: HTMLSlotElement
+  #$rightWrapper: HTMLElement
+  #cursorPos: number | null = null
   #isPendingDk = false
 
   constructor() {
@@ -40,17 +44,42 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$optionalText = shadowRoot.querySelector('#optional')!
     this.#$additionalText = shadowRoot.querySelector('#additional')!
     this.#$invalidText = shadowRoot.querySelector('#invalid')!
+    this.#$iconSlot = shadowRoot.querySelector('slot[name="icon"]')!
+    this.#$iconWrapper = shadowRoot.querySelector('#icon')!
+    this.#$rightSlot = shadowRoot.querySelector('slot[name="right"]')!
+    this.#$rightWrapper = shadowRoot.querySelector('#right')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'textbox')
     this.#$input.addEventListener('input', this.#onInput)
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart)
+    this.#$input.addEventListener('mousedown', this.#onSelectionChange)
+    this.#$input.addEventListener('keydown', this.#onSelectionChange)
+    this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange)
+    this.#$rightSlot.addEventListener('slotchange', this.#onRightSlotChange)
+
+    this.#$rightSlot.addEventListener('input', this.#onEventFilter)
+    this.#$rightSlot.addEventListener('change', this.#onEventFilter)
+    this.#$rightSlot.addEventListener('focusin', this.#onEventFilter)
+    this.#$rightSlot.addEventListener('focusout', this.#onEventFilter)
+
+    this.#onIconSlotChange()
+    this.#onRightSlotChange()
   }
 
   disconnectedCallback() {
     this.#$input.removeEventListener('input', this.#onInput)
     this.#$input.removeEventListener('compositionstart', this.#onCompositionStart)
+    this.#$input.removeEventListener('mousedown', this.#onSelectionChange)
+    this.#$input.removeEventListener('keydown', this.#onSelectionChange)
+    this.#$iconSlot.removeEventListener('slotchange', this.#onIconSlotChange)
+    this.#$rightSlot.removeEventListener('slotchange', this.#onRightSlotChange)
+
+    this.#$rightSlot.removeEventListener('input', this.#onEventFilter)
+    this.#$rightSlot.removeEventListener('change', this.#onEventFilter)
+    this.#$rightSlot.removeEventListener('focusin', this.#onEventFilter)
+    this.#$rightSlot.removeEventListener('focusout', this.#onEventFilter)
   }
 
   static get observedAttributes() {
@@ -167,14 +196,16 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       }
       case 'value': {
         const nextVal = newVal ?? ''
+        const prevVal = this.#$input.value
 
-        if (nextVal !== this.#$input.value) {
+        if (nextVal !== prevVal) {
+          const prevCursorPos = this.#$input.selectionEnd
+          const isPrevCursorEnd = prevCursorPos === prevVal.length
+
           this.#$input.value = nextVal
 
-          const isNextCursorEnd = this.#selectionStart === this.#selectionEnd && (this.#selectionStart === null || this.#selectionStart === nextVal.length)
-
-          if (!isNextCursorEnd) {
-            this.#$input.setSelectionRange(this.#selectionStart, this.#selectionEnd)
+          if (!isPrevCursorEnd) {
+            this.#$input.setSelectionRange(this.#cursorPos, this.#cursorPos)
           }
         }
 
@@ -238,6 +269,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#isPendingDk = true
   }
 
+  #onSelectionChange = () => {
+    this.#cursorPos = this.#$input.selectionEnd
+  }
+
   #onInput = (e: Event) => {
     e.stopPropagation()
 
@@ -245,25 +280,22 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     const prevValue = this.value
 
     if (prevValue !== nextValue) {
-      const nextSelectionStart = this.#$input.selectionStart
-      const nextSelectionEnd = this.#$input.selectionEnd
-      const prevSelectionStart = this.#selectionStart
-      const prevSelectionEnd = this.#selectionEnd
-      const isPrevCursorEnd = prevSelectionStart === prevSelectionEnd && prevSelectionStart === prevValue.length
+      const nextCursorPos = this.#$input.selectionEnd
 
       if (!this.#isPendingDk) {
         // Reset input value to enforce controlled state
         this.#$input.value = prevValue
+
+        const prevCursorPos = this.#cursorPos
+        const isPrevCursorEnd = prevCursorPos === null || prevCursorPos === prevValue.length
+
+        if (!isPrevCursorEnd) {
+          this.#$input.setSelectionRange(prevCursorPos, prevCursorPos)
+        }
       }
 
       this.#isPendingDk = false
-
-      if (!isPrevCursorEnd) {
-        this.#$input.setSelectionRange(prevSelectionStart, prevSelectionEnd)
-      }
-
-      this.#selectionStart = nextSelectionStart
-      this.#selectionEnd = nextSelectionEnd
+      this.#cursorPos = nextCursorPos
 
       this.dispatchEvent(
         new CustomEvent('change', {
@@ -272,6 +304,18 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         })
       )
     }
+  }
+
+  #onIconSlotChange = () => {
+    setClass(this.#$iconWrapper, 'empty', this.#$iconSlot.assignedElements().length === 0)
+  }
+
+  #onRightSlotChange = () => {
+    setClass(this.#$rightWrapper, 'empty', this.#$rightSlot.assignedElements().length === 0)
+  }
+
+  #onEventFilter = (e: Event) => {
+    e.stopPropagation()
   }
 })
 

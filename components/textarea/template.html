@@ -18,7 +18,6 @@
     box-sizing: border-box;
     border-radius: var(--sinch-shape-radius-s);
     width: 100%;
-    margin: 2px 0;
     padding: 8px 12px;
     font: var(--sinch-font-body);
     color: var(--sinch-color-text-default);
@@ -61,10 +60,7 @@
 
   #top {
     height: 24px;
-  }
-
-  #bottom {
-    height: 20px;
+    margin-bottom: 2px;
   }
 
   #label,
@@ -93,11 +89,23 @@
     text-align: right;
     font: var(--sinch-font-extra-small-text);
     color: var(--sinch-color-text-muted);
+    line-height: 20px;
+    margin-top: 2px;
+  }
+
+  #additional:empty {
+    display: none;
   }
 
   #invalid {
     font: var(--sinch-font-extra-small-text);
     color: var(--sinch-color-text-invalid);
+    line-height: 20px;
+    margin-top: 2px;
+  }
+
+  #invalid:empty {
+    display: none;
   }
 
   ::slotted(sinch-help-tooltip) {

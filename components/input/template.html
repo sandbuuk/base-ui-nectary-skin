@@ -13,17 +13,14 @@
 }
 
 #input-wrapper {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 4px;
-  border: 1px solid var(--sinch-color-stormy-200);
   box-sizing: border-box;
   border-radius: var(--sinch-shape-radius-s);
   width: 100%;
   height: 48px;
-  margin: 2px 0;
-  padding: 0 8px;
   background-color: var(--sinch-color-snow-100);
 }
 
@@ -32,7 +29,7 @@
   flex: 1;
   min-width: 0;
   height: 48px;
-  padding: 0 4px;
+  padding: 0 12px 0 44px;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
   caret-color: var(--sinch-caret-color, auto);
@@ -43,8 +40,22 @@
   color: var(--sinch-color-text-muted);
 }
 
+#border {
+  position: absolute;
+  border: 1px solid var(--sinch-color-stormy-200);
+  border-radius: var(--sinch-shape-radius-s);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+:host([invalidtext]:not([invalidtext=""]):not([disabled])) #border {
+  border-color: var(--sinch-color-text-invalid);
+}
+
 #input:disabled {
-  border-color: var(--sinch-color-snow-500);
   color: var(--sinch-color-stormy-100);
 }
 
@@ -52,17 +63,17 @@
   color: var(--sinch-color-snow-500);
 }
 
-#input:focus {
+#input:disabled + #border {
+  border-color: var(--sinch-color-snow-500);
+}
+
+#input:focus + #border {
   border-color: var(--sinch-color-stormy-600);
 }
 
 #input[type="password"] {
   font-size: 1.5em;
   letter-spacing: 0.1em;
-}
-
-:host([invalidtext]:not([invalidtext=""]):not([disabled])) #input-wrapper {
-  border-color: var(--sinch-color-text-invalid);
 }
 
 #top,
@@ -73,10 +84,7 @@
 
 #top {
   height: 24px;
-}
-
-#bottom {
-  height: 20px;
+  margin-bottom: 2px;
 }
 
 #label,
@@ -105,11 +113,53 @@
   text-align: right;
   font: var(--sinch-font-extra-small-text);
   color: var(--sinch-color-text-muted);
+  line-height: 20px;
+  margin-top: 2px;
+}
+
+#additional:empty {
+  display: none;
 }
 
 #invalid {
   font: var(--sinch-font-extra-small-text);
   color: var(--sinch-color-text-invalid);
+  line-height: 20px;
+  margin-top: 2px;
+}
+
+#invalid:empty {
+  display: none;
+}
+
+#icon {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  pointer-events: none;
+
+  --sinch-icon-size: 24px;
+}
+
+#icon.empty {
+  display: none;
+}
+
+#icon.empty ~ #input {
+  padding-left: 12px;
+}
+
+#right {
+  display: flex;
+  flex-direction: row;
+  align-self: stretch;
+  align-items: center;
+  gap: 4px;
+  padding-right: 8px;
+}
+
+#right.empty {
+  display: none;
 }
 
 ::slotted(sinch-help-tooltip) {
@@ -134,11 +184,17 @@
     <span id="optional"></span>
   </div>
   <div id="input-wrapper">
+    <div id="icon">
+      <slot name="icon"></slot>
+    </div>
     <input id="input" type="text"/>
-    <slot name="right"></slot>
+    <div id="border"></div>
+    <div id="right">
+      <slot name="right"></slot>
+    </div>
   </div>
   <div id="bottom">
-    <span id="invalid"></span>
-    <span id="additional"></span>
+    <div id="invalid"></div>
+    <div id="additional"></div>
   </div>
 </div>

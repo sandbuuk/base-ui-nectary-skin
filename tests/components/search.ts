@@ -1,188 +1,49 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
+import type { Page } from '@playwright/test'
+import type { TSinchActionMenuElement } from '@sinch-engage/nectary/action-menu/types'
 
-const shot = '/search?width=200'
 const withValue = '/search?width=200&label=Label&value=Input%20value'
-const withPlaceholder = '/search?width=200&label=Label&placeholder=Placeholder%20value'
-const checkValue = makeAccessibilityTests('/search?width=200&label=Label&value=Input%20value', 'sinch-search')
+const checkValue = makeAccessibilityTests('/search?width=200&label=Label&value=Input%20value', 'sinch-input')
+const getDropdownRect = (page: Page) => page.locator('sinch-action-menu').evaluate((el: TSinchActionMenuElement) => el.dropdownRect)
 
 test('accessibility', checkValue(async function* () {
   yield
 }))
 
-test('search screenshots', runScreenshotTests('sinch-search', [
-  {
-    name: 'value attribute',
-    url: withPlaceholder,
-    async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('value', 'Input Value'))
-      yield { name: 'updated' }
-
-      await $eval((el) => el.setAttribute('value', ''))
-      yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'value property',
-    url: withPlaceholder,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.value = 'Input Value'
-      })
-      yield { name: 'updated' }
-
-      await $eval((el) => {
-        el.value = ''
-      })
-      yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'placeholder attribute',
-    url: shot,
-    async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('placeholder', 'Placeholder Value'))
-      yield { name: 'updated' }
-
-      await $eval((el) => el.setAttribute('placeholder', ''))
-      yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'placeholder property',
-    url: shot,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.placeholder = 'Placeholder Value'
-      })
-      yield { name: 'updated' }
-
-      await $eval((el) => {
-        el.placeholder = ''
-      })
-      yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'label property',
-    url: shot,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.label = 'Label text'
-      })
-      yield { name: 'updated' }
-
-      await $eval((el) => {
-        el.label = ''
-      })
-      yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'label attribute',
-    url: shot,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.setAttribute('label', 'Label text')
-      })
-      yield { name: 'updated' }
-
-      await $eval((el) => {
-        el.removeAttribute('label')
-      })
-      yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'fill',
-    url: withPlaceholder,
-    async *fn({ $, $eval, page }) {
-      await page.keyboard.press('Tab')
-      yield { name: 'focus' }
-
-      await $.type('Fill')
-      yield { name: 'filled' }
-
-      await expect($eval((el) => el.value)).resolves.toBe('Fill')
-    },
-  },
+test('search screenshots', runScreenshotTests('sinch-input', [
   {
     name: 'clear',
     url: withValue,
     async *fn({ page }) {
       await page.keyboard.press('Tab')
-
-      yield { name: 'initial' }
+      yield { name: '1-focus-input', includeRects: [await getDropdownRect(page)] }
 
       await page.keyboard.press('Tab')
-
-      yield { name: 'focused' }
+      yield { name: '2-focus-button', includeRects: [await getDropdownRect(page)] }
 
       await page.keyboard.press('Enter')
-
-      yield { name: 'cleared' }
-    },
-  },
-  {
-    name: 'maxvisibleitems attribute',
-    url: withValue,
-    async *fn({ page, $eval }) {
-      await $eval((el) => el.setAttribute('maxvisibleitems', '2'))
-      await page.keyboard.press('Tab')
-
-      yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
-
-      await $eval((el) => el.setAttribute('maxvisibleitems', ''))
-
-      yield { name: 'empty', includeRects: [await $eval((el) => el.dropdownRect)] }
-    },
-  },
-  {
-    name: 'dropdown',
-    url: withValue,
-    async *fn({ $eval, page }) {
-      await page.keyboard.press('Tab')
-
-      yield { name: 'input-focus', includeRects: [await $eval((el) => el.dropdownRect)] }
-
-      await page.keyboard.press('Shift+Tab')
-
-      yield { name: 'input-blur', includeRects: [await $eval((el) => el.dropdownRect)] }
+      yield { name: '3-click', includeRects: [await getDropdownRect(page)] }
     },
   },
   {
     name: 'keyboard',
     url: withValue,
-    async *fn({ $eval, page }) {
-      await page.keyboard.press('Tab')
-
-      const rect = await $eval((el) => el.dropdownRect)
-
-      yield { name: 'open', includeRects: [rect] }
-
-      await page.keyboard.press('ArrowDown')
-      yield { name: 'down', includeRects: [rect] }
-
-      await page.keyboard.press('ArrowDown')
-      await page.keyboard.press('ArrowDown')
-      await page.keyboard.press('ArrowDown')
-      yield { name: 'down-down', includeRects: [rect] }
-
-      await page.keyboard.press('ArrowUp')
-      await page.keyboard.press('ArrowUp')
-      yield { name: 'up-up', includeRects: [rect] }
-    },
-  },
-  {
-    name: 'custom events',
-    url: withValue,
     async *fn({ $, page }) {
-      const testInput = testCustomEvent(page, $)
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('End')
+      await $.type('X')
+      yield { name: '1-open', includeRects: [await getDropdownRect(page)] }
 
-      await testInput('change', 'sinch-search-change', 'X')
-      await testInput('focusin', 'sinch-search-focus')
-      await testInput('focusout', 'sinch-search-blur')
+      await page.keyboard.press('ArrowDown')
+      yield { name: '2-down', includeRects: [await getDropdownRect(page)] }
+
+      await $.type(' Y')
+      yield { name: '3-type', includeRects: [await getDropdownRect(page)] }
+
+      await page.keyboard.press('Enter')
+      yield { name: '4-submit', includeRects: [await getDropdownRect(page)] }
     },
   },
   {
@@ -202,15 +63,20 @@ test('search screenshots', runScreenshotTests('sinch-search', [
       ])
 
       // Necessary to normalize "type" behaviour
-      await $.click()
+      const bb = centerRect(await $.boundingBox())
+
+      await page.mouse.click(bb.x, bb.y)
       await page.keyboard.press('End')
       await $.type('X')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('Enter')
 
       expect(
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-search-focus', detail: null },
-        { type: 'sinch-search-change', detail: 'Input valueX' },
+        { type: 'sinch-search-change', detail: 'Option 2' },
       ])
     },
   },

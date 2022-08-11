@@ -22,8 +22,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
   #$optionalText: HTMLSpanElement
   #$additionalText: HTMLSpanElement
   #$invalidText: HTMLSpanElement
-  #selectionStart: number | null = null
-  #selectionEnd: number | null = null
+  #cursorPos: number | null = null
   #isPendingDk = false
 
   constructor() {
@@ -45,11 +44,15 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.setAttribute('aria-multiline', 'true')
     this.#$input.addEventListener('input', this.#onInput)
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart)
+    this.#$input.addEventListener('mousedown', this.#onSelectionChange)
+    this.#$input.addEventListener('keydown', this.#onSelectionChange)
   }
 
   disconnectedCallback() {
     this.#$input.removeEventListener('input', this.#onInput)
     this.#$input.removeEventListener('compositionstart', this.#onCompositionStart)
+    this.#$input.removeEventListener('mousedown', this.#onSelectionChange)
+    this.#$input.removeEventListener('keydown', this.#onSelectionChange)
   }
 
   static get observedAttributes() {
@@ -69,14 +72,16 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     switch (name) {
       case 'value': {
         const nextVal = newVal ?? ''
+        const prevVal = this.#$input.value
 
-        if (nextVal !== this.#$input.value) {
+        if (nextVal !== prevVal) {
+          const prevCursorPos = this.#$input.selectionEnd
+          const isPrevCursorEnd = prevCursorPos === prevVal.length
+
           this.#$input.value = nextVal
 
-          const isNextCursorEnd = this.#selectionStart === this.#selectionEnd && (this.#selectionStart === null || this.#selectionStart === nextVal.length)
-
-          if (!isNextCursorEnd) {
-            this.#$input.setSelectionRange(this.#selectionStart, this.#selectionEnd)
+          if (!isPrevCursorEnd) {
+            this.#$input.setSelectionRange(this.#cursorPos, this.#cursorPos)
           }
         }
 
@@ -246,6 +251,10 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#isPendingDk = true
   }
 
+  #onSelectionChange = () => {
+    this.#cursorPos = this.#$input.selectionEnd
+  }
+
   #onInput = (e: Event) => {
     e.stopPropagation()
 
@@ -253,25 +262,22 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     const prevValue = this.value
 
     if (prevValue !== nextValue) {
-      const nextSelectionStart = this.#$input.selectionStart
-      const nextSelectionEnd = this.#$input.selectionEnd
-      const prevSelectionStart = this.#selectionStart
-      const prevSelectionEnd = this.#selectionEnd
-      const isPrevCursorEnd = prevSelectionStart === prevSelectionEnd && prevSelectionStart === prevValue.length
+      const nextCursorPos = this.#$input.selectionEnd
 
       if (!this.#isPendingDk) {
         // Reset input value to enforce controlled state
         this.#$input.value = prevValue
+
+        const prevCursorPos = this.#cursorPos
+        const isPrevCursorEnd = prevCursorPos === null || prevCursorPos === prevValue.length
+
+        if (!isPrevCursorEnd) {
+          this.#$input.setSelectionRange(prevCursorPos, prevCursorPos)
+        }
       }
 
       this.#isPendingDk = false
-
-      if (!isPrevCursorEnd) {
-        this.#$input.setSelectionRange(prevSelectionStart, prevSelectionEnd)
-      }
-
-      this.#selectionStart = nextSelectionStart
-      this.#selectionEnd = nextSelectionEnd
+      this.#cursorPos = nextCursorPos
 
       this.dispatchEvent(
         new CustomEvent('change', {

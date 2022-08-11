@@ -1,11 +1,13 @@
 import { expect, test } from '@playwright/test'
+import { orientationValues } from '@sinch-engage/nectary/popover/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { expandRect, getAllEvents, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
+import { getAllEvents, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 
-const withSelect = '/action-menu'
-const withWideContent = '/action-menu?width=400'
-const withMaxItems = '/action-menu?maxvisibleitems=2'
-const check = makeAccessibilityTests('/action-menu', 'sinch-action-menu')
+const withModal = '/action-menu?modal=true'
+const withWideModal = '/action-menu?width=300&modal=true'
+const withWideModalOpen = '/action-menu?width=300&modal=true&open=true'
+const withMaxItems = '/action-menu?modal=true&maxvisibleitems=2'
+const check = makeAccessibilityTests('/action-menu?modal=true', 'sinch-action-menu')
 
 test('accessibility', check(async function* ({ $ }) {
   yield
@@ -16,169 +18,122 @@ test('accessibility', check(async function* ({ $ }) {
 test('action menu screenshots', runScreenshotTests('sinch-action-menu', [
   {
     name: 'open attribute',
-    url: withSelect,
+    url: withModal,
     async *fn({ $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      await $eval((el) => el.setAttribute('open', ''))
+      yield { name: 'set', includeRects: [await $eval((el) => el.dropdownRect)] }
 
       await $eval((el) => el.removeAttribute('open'))
-      yield { name: 'unset', includeRects: [await getRect()] }
-      await $eval((el) => el.setAttribute('open', ''))
-      yield { name: 'set', includeRects: [await getRect()] }
+      yield { name: 'unset', includeRects: [await $eval((el) => el.dropdownRect)] }
+    },
+  },
+  {
+    name: 'open property',
+    url: withModal,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.open = true
+      })
+      yield { name: 'set', includeRects: [await $eval((el) => el.dropdownRect)] }
+
+      await $eval((el) => {
+        el.open = false
+      })
+      yield { name: 'unset', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
     name: 'orientation attribute',
-    url: withSelect,
-    async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
-
-      await $.click()
-      await $eval((el) => el.setAttribute('orientation', 'top-left'))
-      yield { name: 'top-left', includeRects: [await getRect()] }
-
-      await $eval((el) => el.setAttribute('orientation', 'top-right'))
-      yield { name: 'top-right', includeRects: [await getRect()] }
-
-      await $eval((el) => el.setAttribute('orientation', 'bottom-left'))
-      yield { name: 'bottom-left', includeRects: [await getRect()] }
-
-      await $eval((el) => el.setAttribute('orientation', 'bottom-right'))
-      yield { name: 'bottom-right', includeRects: [await getRect()] }
+    url: withWideModalOpen,
+    async *fn({ $eval }) {
+      for (const value of orientationValues) {
+        await $eval((el, value) => el.setAttribute('orientation', value), value)
+        yield { name: value, includeRects: [await $eval((el) => el.dropdownRect)] }
+      }
     },
   },
   {
     name: 'orientation property',
-    url: withSelect,
-    async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
-
-      await $.click()
-      await $eval((el) => {
-        el.orientation = 'top-left'
-      })
-      yield { name: 'top-left', includeRects: [await getRect()] }
-
-      await $eval((el) => {
-        el.orientation = 'top-right'
-      })
-      yield { name: 'top-right', includeRects: [await getRect()] }
-
-      await $eval((el) => {
-        el.orientation = 'bottom-left'
-      })
-      yield { name: 'bottom-left', includeRects: [await getRect()] }
-
-      await $eval((el) => {
-        el.orientation = 'bottom-right'
-      })
-      yield { name: 'bottom-right', includeRects: [await getRect()] }
+    url: withWideModalOpen,
+    async *fn({ $eval }) {
+      for (const value of orientationValues) {
+        await $eval((el, value) => {
+          el.orientation = value
+        }, value)
+        yield { name: value, includeRects: [await $eval((el) => el.dropdownRect)] }
+      }
     },
   },
   {
     name: 'maxvisibleitems attribute',
-    url: withSelect,
+    url: withModal,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
-
       await $eval((el) => el.setAttribute('maxvisibleitems', '2'))
       await $.click()
-      yield { name: 'items 2', includeRects: [await getRect()] }
+      yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
     name: 'maxvisibleitems property',
-    url: withSelect,
+    url: withModal,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
-
       await $eval((el) => {
         el.maxVisibleItems = 2
       })
       await $.click()
-      yield { name: 'items 2', includeRects: [await getRect()] }
+      yield { name: 'items 2', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
     name: 'maxvisibleitems scroll',
     url: withMaxItems,
-    async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+    async *fn({ page, $eval }) {
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Enter')
 
-      await $.click()
-      await $.press('ArrowDown')
-      yield { name: 'scroll to 3', includeRects: [await getRect()] }
+      // Scroll to 3
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('ArrowDown')
+      yield { name: 'scroll to 3', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
     name: 'wide target',
-    url: withWideContent,
+    url: withWideModal,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
-
       await $.click()
 
-      yield { name: 'shot', includeRects: [await getRect()] }
-    },
-  },
-  {
-    name: 'focus press-space',
-    url: withSelect,
-    async *fn({ $eval, page }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
-
-      await page.keyboard.press('Tab')
-      await page.keyboard.press('Space')
-
-      yield { name: 'open', includeRects: [await getRect()] }
-
-      await page.keyboard.press('Space')
-      yield { name: 'close', includeRects: [await getRect()] }
-
-      await page.keyboard.press('Space')
-      yield { name: 'open-again', includeRects: [await getRect()] }
-    },
-  },
-  {
-    name: 'focus press-enter',
-    url: withSelect,
-    async *fn({ $eval, page }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
-
-      await page.keyboard.press('Tab')
-      await page.keyboard.press('Enter')
-
-      yield { name: 'open', includeRects: [await getRect()] }
-
-      await page.keyboard.press('Enter')
-      yield { name: 'close', includeRects: [await getRect()] }
-
-      await page.keyboard.press('Enter')
-      yield { name: 'open-again', includeRects: [await getRect()] }
+      yield { name: 'shot', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
   {
     name: 'keyboard',
-    url: withSelect,
-    async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+    url: withModal,
+    async *fn({ page, $eval }) {
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Enter')
 
-      await $.click()
+      yield { name: '1-open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-      yield { name: 'open', includeRects: [await getRect()] }
+      await page.keyboard.press('ArrowDown')
+      yield { name: '2-down', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-      await $.press('ArrowDown')
-      yield { name: 'down', includeRects: [await getRect()] }
+      await page.keyboard.press('Enter')
+      yield { name: '3-submit', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-      await $.press('ArrowDown')
-      await $.press('ArrowRight')
-      yield { name: 'down-right', includeRects: [await getRect()] }
+      await page.keyboard.press('Enter')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('ArrowDown')
+      yield { name: '4-open-down-around', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-      await $.press('ArrowUp')
-      await $.press('ArrowLeft')
-      yield { name: 'up-left', includeRects: [await getRect()] }
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowUp')
+      yield { name: '5-up-around', includeRects: [await $eval((el) => el.dropdownRect)] }
 
-      await $.press('Escape')
-      yield { name: 'escape', includeRects: [await getRect()] }
+      await page.keyboard.press('Escape')
+      yield { name: '6-escape', includeRects: [await $eval((el) => el.dropdownRect)] }
     },
   },
 ]))
@@ -186,7 +141,7 @@ test('action menu screenshots', runScreenshotTests('sinch-action-menu', [
 test('action menu events', runScreenshotTests('sinch-action-menu', [
   {
     name: 'custom events',
-    url: withSelect,
+    url: withModal,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-action-menu-click', 'sinch-action-menu-close')
 
@@ -208,13 +163,21 @@ test('action menu events', runScreenshotTests('sinch-action-menu', [
   },
   {
     name: 'custom events',
-    url: withSelect,
-    async *fn({ $, page }) {
+    url: withModal,
+    async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-action-menu-click', 'sinch-action-menu-close')
 
-      await $.click()
+      // Focus button
+      await page.keyboard.press('Tab')
+      // Press button
       await page.keyboard.press('Enter')
+      // Select Item
+      await page.keyboard.press('ArrowDown')
+      // Submit
       await page.keyboard.press('Enter')
+      // Open menu again
+      await page.keyboard.press('Enter')
+      // Close menu
       await page.keyboard.press('Escape')
 
       expect(

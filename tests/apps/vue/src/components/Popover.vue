@@ -1,13 +1,15 @@
 <template>
   <sinch-popover
-    open
+    :open="isOpen"
+    :modal="isModal"
     :orientation="orientation"
     @close="onClose">
     <sinch-button
       slot="target"
       type="cta-secondary"
       text="Some content"
-      aria-label="Button">
+      aria-label="Button"
+      @click="onOpen">
     </sinch-button>
     <section slot="content" style="width: 240px; padding: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</section>
   </sinch-popover>
@@ -21,6 +23,11 @@ export default {
   methods: {
     onClose() {
       window.dispatchEvent(new CustomEvent('sinch-popover-close'))
+      this.isOpen = false
+    },
+    onOpen() {
+      window.dispatchEvent(new CustomEvent('sinch-popover-open'))
+      this.isOpen = true
     }
   },
   props: {
@@ -30,7 +37,14 @@ export default {
     orientation() {
       return this.search.get('orientation')
     },
-
+    isModal() {
+      return this.search.get('modal') !== null
+    }
+  },
+  data() {
+    return {
+      isOpen: this.search.get('open') !== null
+    }
   }
 }
 </script>

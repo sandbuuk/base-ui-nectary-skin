@@ -1,61 +1,123 @@
 <template>
-  <sinch-search
-    :label="label"
-    :placeholder="placeholder"
-    :maxvisibleitems="maxVisibleItems"
-    :value="value"
-    @change="onChange"
-    @focusin="onFocus"
-    @focusout="onBlur">
-    <template v-if="value.length >= 5">
-      <sinch-search-option text="Option 1 value long long long" slot="option"></sinch-search-option>
-      <sinch-search-option text="Option 2 value" slot="option"></sinch-search-option>
-      <sinch-search-option text="Option 3 value" slot="option"></sinch-search-option>
-      <sinch-search-option text="Option 4 value" slot="option"></sinch-search-option>
-    </template>
-  </sinch-search>
+  <sinch-action-menu
+    orientation="bottom"
+    :open="isOpen"
+    :maxVisibleItems="maxVisibleItems"
+    aria-label="Search"
+    @close="onClose">
+    <sinch-input
+      slot="target"
+      aria-label="Search Input"
+      :placeholder="placeholderText"
+      :label="labelText"
+      :optionaltext="optionalText"
+      :additionaltext="additionalText"
+      :invalidtext="invalidText"
+      :disabled="isDisabled"
+      :value="value"
+      @change="onChange"
+      @focusin="onFocus"
+      @focusout="onBlur">
+      <sinch-icon-search slot="icon"></sinch-icon-search>
+      <sinch-icon-button
+        slot="right"
+        small
+        aria-label="Clear search"
+        @click="onClear">
+        <sinch-icon-close slot="icon"></sinch-icon-close>
+      </sinch-icon-button>
+      <sinch-help-tooltip v-if="tooltipText != null" :text="tooltipText" slot="tooltip"></sinch-help-tooltip>
+    </sinch-input>
+    <sinch-action-menu-option
+      v-for="text in options"
+      slot="option"
+      :key="text"
+      :text="text"
+      :aria-label="text"
+      @click="onOptionClick(text)"
+    ></sinch-action-menu-option>
+  </sinch-action-menu>
 </template>
 
 <script>
-import '@sinch-engage/nectary/search'
-import '@sinch-engage/nectary/search-option'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/action-menu'
+import '@sinch-engage/nectary/action-menu-option'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/search'
+import '@sinch-engage/nectary/icons/close'
 
 export default {
   methods: {
     onChange(e) {
-      if (this.isControlled) {
-        this.value = e.detail
+      this.value = e.detail
+
+      if (e.detail.length >= 5) {
+        this.isOpen = true
       }
-      window.dispatchEvent(new CustomEvent('sinch-search-change', {detail: e.detail}))
     },
     onFocus() {
       window.dispatchEvent(new CustomEvent('sinch-search-focus'))
     },
     onBlur() {
       window.dispatchEvent(new CustomEvent('sinch-search-blur'))
+      this.isOpen = false
+    },
+    onClear() {
+      this.value = ''
+      this.isOpen = false
+    },
+    onClose() {
+      this.isOpen = false
+    },
+    onOptionClick(text) {
+      window.dispatchEvent(new CustomEvent('sinch-search-change', { detail: text }))
+
+      this.value = text
+      this.isOpen = false
     }
   },
   props: {
     search: URLSearchParams
   },
   computed: {
-    label() {
+    placeholderText() {
+      return this.search.get('placeholder')
+    },
+    tooltipText() {
+      return this.search.get('tooltip')
+    },
+    labelText() {
       return this.search.get('label')
     },
-    placeholder() {
-      return this.search.get('placeholder')
+    optionalText() {
+      return this.search.get('optional')
+    },
+    additionalText() {
+      return this.search.get('additional')
+    },
+    invalidText() {
+      return this.search.get('invalid')
+    },
+    isDisabled() {
+      return this.search.get('disabled') !== null
     },
     maxVisibleItems() {
       const val = this.search.get('maxvisibleitems')
       return val !== null ? parseInt(val) : null
     },
-    isControlled() {
-      return this.search.get('uncontrolled') === null
-    },
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.search.get('value') ?? '',
+      isOpen: false,
+      options: [
+        'Option 1 value long long long',
+        'Option 2',
+        'Option 3',
+        'Option 4',
+      ]
     }
   }
 }

@@ -20,12 +20,13 @@ dialog {
   background-color: var(--sinch-color-snow-100);
   box-shadow: var(--sinch-elevation-level-2);
   border: 1px solid var(--sinch-color-snow-500);
-  border-radius: var(--sinch-shape-radius-s);
+  border-radius: var(--sinch-popover-shape-radius, var(--sinch-shape-radius-l));
   contain: content;
   padding: 0;
   box-sizing: border-box;
   max-width: unset;
   max-height: unset;
+  z-index: 1;
 }
 
 dialog:not([open]) {

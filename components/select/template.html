@@ -9,8 +9,6 @@
 
 #wrapper {
   position: relative;
-
-  --sinch-popover-expand-width: 1;
 }
 
 sinch-dropdown {
@@ -27,7 +25,6 @@ sinch-dropdown {
   box-sizing: border-box;
   width: 100%;
   height: 48px;
-  margin: 2px 0;
   padding: 8px 12px;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
@@ -81,10 +78,7 @@ sinch-dropdown {
 
 #top {
   height: 24px;
-}
-
-#bottom {
-  height: 20px;
+  margin-bottom: 2px;
 }
 
 #label,
@@ -113,11 +107,23 @@ sinch-dropdown {
   text-align: right;
   font: var(--sinch-font-extra-small-text);
   color: var(--sinch-color-text-muted);
+  line-height: 20px;
+  margin-top: 2px;
+}
+
+#additional:empty {
+  display: none;
 }
 
 #invalid {
   font: var(--sinch-font-extra-small-text);
   color: var(--sinch-color-text-invalid);
+  line-height: 20px;
+  margin-top: 2px;
+}
+
+#invalid:empty {
+  display: none;
 }
 
 ::slotted(sinch-help-tooltip) {
@@ -141,7 +147,7 @@ sinch-dropdown {
     <slot name="tooltip"></slot>
     <span id="optional"></span>
   </div>
-  <sinch-dropdown id="dropdown">
+  <sinch-dropdown id="dropdown" modal orientation="bottom">
     <button slot="target" id="button">
       <span id="content"></span>
       <svg id="dropdown-icon" width="12" height="8" aria-hidden="true">

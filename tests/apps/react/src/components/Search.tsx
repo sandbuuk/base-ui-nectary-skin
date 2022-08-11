@@ -1,62 +1,115 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { FC, SyntheticEvent } from 'react'
-import '@sinch-engage/nectary/search'
-import '@sinch-engage/nectary/search-option'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/action-menu'
+import '@sinch-engage/nectary/action-menu-option'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/search'
+import '@sinch-engage/nectary/icons/close'
 
 type TSearch = {
   search: URLSearchParams,
 }
 
-export const Search: FC<TSearch> = ({ search }) => {
-  const [value, setValue] = useState(search.get('value') ?? '')
-  const onChange = useMemo(() =>
-    (search.get('uncontrolled') === null
-      ? (e: SyntheticEvent<Element, CustomEvent<string>>) => {
-        const value = e.nativeEvent.detail
+const options: string[] = [
+  'Option 1 value long long long',
+  'Option 2',
+  'Option 3',
+  'Option 4',
+]
 
-        window.dispatchEvent(new CustomEvent('sinch-search-change', { detail: value }))
-        setValue(value)
-      }
-      : () => {}),
-  [search, setValue])
+export const Search: FC<TSearch> = ({ search }) => {
+  const [isOpen, setOpen] = useState(false)
+  const [value, setValue] = useState(search.get('value') ?? '')
+  const onChange = (e: SyntheticEvent<Element, CustomEvent<string>>) => {
+    const value = e.nativeEvent.detail
+
+    setValue(value)
+
+    if (value.length >= 5) {
+      setOpen(true)
+    }
+  }
+  const onOptionClick = (text: string) => {
+    window.dispatchEvent(new CustomEvent('sinch-search-change', { detail: text }))
+
+    setValue(text)
+    setOpen(false)
+  }
+  const onClose = () => {
+    setOpen(false)
+  }
+  const onClear = () => {
+    setValue('')
+    setOpen(false)
+  }
   const onFocus = useCallback(() => {
     window.dispatchEvent(new CustomEvent('sinch-search-focus'))
   }, [])
   const onBlur = useCallback(() => {
     window.dispatchEvent(new CustomEvent('sinch-search-blur'))
+    setOpen(false)
   }, [])
   const maxVisibleItems = useMemo(() => {
     const val = search.get('maxvisibleitems')
 
     return val !== null ? parseInt(val) : undefined
   }, [search])
-  const label = search.get('label') ?? ''
-  const placeholder = search.get('placeholder') ?? undefined
-
-  const options = value.length < 5 ? (
-    null
-  ) : (
-    <>
-      <sinch-search-option text="Option 1 value long long long" slot="option" aria-label="Option 1"/>
-      <sinch-search-option text="Option 2 value" slot="option" aria-label="Option 2"/>
-      <sinch-search-option text="Option 3 value" slot="option" aria-label="Option 3"/>
-      <sinch-search-option text="Option 4 value" slot="option" aria-label="Option 4"/>
-    </>
-  )
+  const labelText = search.get('label') ?? ''
+  const optionalText = search.get('optional') ?? undefined
+  const additionalText = search.get('additional') ?? undefined
+  const invalidText = search.get('invalid') ?? undefined
+  const placeholderText = search.get('placeholder') ?? undefined
+  const isDisabled = search.get('disabled') != null
+  const tooltipText = search.get('tooltip')
 
   return (
-    <sinch-search
-      label={label}
-      placeholder={placeholder}
+    <sinch-action-menu
+      orientation="bottom"
+      open={isOpen}
       maxVisibleItems={maxVisibleItems}
-      value={value}
-      onChange={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
       aria-label="Search"
-      clear-aria-label="Clear"
+      onClose={onClose}
     >
-      {options}
-    </sinch-search>
+      <sinch-input
+        slot="target"
+        aria-label="Search Input"
+        value={value}
+        onChange={onChange}
+        label={labelText}
+        optionalText={optionalText}
+        additionalText={additionalText}
+        invalidText={invalidText}
+        placeholder={placeholderText}
+        disabled={isDisabled}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      >
+        <sinch-icon-search slot="icon"/>
+        <sinch-icon-button
+          slot="right"
+          small
+          aria-label="Clear search"
+          onClick={onClear}
+        >
+          <sinch-icon-close slot="icon"/>
+        </sinch-icon-button>
+        {tooltipText !== null && (
+          <sinch-help-tooltip text={tooltipText} slot="tooltip"/>
+        )}
+      </sinch-input>
+      {
+        options.map((text) => (
+          <sinch-action-menu-option
+            key={text}
+            text={text}
+            slot="option"
+            aria-label={text}
+            onClick={() => onOptionClick(text)}
+          />
+        ))
+      }
+    </sinch-action-menu>
   )
 }

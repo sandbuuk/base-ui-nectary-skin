@@ -1,6 +1,6 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
-import { InputCompositionExample } from './examples/InputComposition.tsx'
+import { CompositionExample } from './examples/Composition.tsx'
 import { LocaleExample } from './examples/Locale.tsx'
 import {
   ReactPropsTable,
@@ -18,13 +18,13 @@ DatePicker communicates using an [ISO 8601](https://en.wikipedia.org/wiki/ISO_86
 
 ## Examples
 
-### Input composition
+### Composition
 
 The component does *not* provide an input field and does *not* do any input masking. It's a modular *picker* and requires you to compose an input + popover + picker on your own, maintaining all the states and masking/formatting the displayed value.
 
 We'll implement a generic masking functionality for the input field  (like `pattern` attribute) later and then maybe wrap it all into `DateInput` complete molecule.
 
-<Example Component={InputCompositionExample}/>
+<Example Component={CompositionExample}/>
 
 ### Locale
 

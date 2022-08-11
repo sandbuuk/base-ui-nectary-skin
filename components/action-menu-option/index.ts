@@ -15,7 +15,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends NectaryElement {
-  #$button: HTMLButtonElement
+  #$wrapper: HTMLButtonElement
   #$content: HTMLElement
 
   constructor() {
@@ -25,12 +25,17 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$button = shadowRoot.querySelector('#wrapper')!
+    this.#$wrapper = shadowRoot.querySelector('#wrapper')!
     this.#$content = shadowRoot.querySelector('#content')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'option')
+    this.#$wrapper.addEventListener('mousedown', this.#onMouseDown)
+  }
+
+  disconnectedCallback() {
+    this.#$wrapper.removeEventListener('mousedown', this.#onMouseDown)
   }
 
   static get observedAttributes() {
@@ -50,7 +55,9 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
       }
 
       case 'disabled': {
-        this.#$button.disabled = isAttrTrue(newVal)
+        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+
+        break
       }
     }
   }
@@ -71,12 +78,11 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
     return getBooleanAttribute(this, 'disabled')
   }
 
-  focus() {
-    this.#$button.focus()
-  }
+  #onMouseDown = (e: MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
 
-  blur() {
-    this.#$button.blur()
+    this.click()
   }
 })
 

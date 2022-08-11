@@ -51,7 +51,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['open', 'orientation', 'maxvisibleitems']
+    return ['open', 'orientation', 'maxvisibleitems', 'modal']
   }
 
   get nodeName() {
@@ -82,6 +82,14 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     return getBooleanAttribute(this, 'open')
   }
 
+  set modal(isModal: boolean) {
+    updateBooleanAttribute(this, 'modal', isModal)
+  }
+
+  get modal(): boolean {
+    return getBooleanAttribute(this, 'modal')
+  }
+
   get dropdownRect() {
     return this.#$popover.popoverRect
   }
@@ -92,12 +100,12 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
         updateAttribute(this.#$popover, 'open', newVal)
 
         if (isAttrTrue(newVal)) {
-          this.#onOpen()
           this.#$popover.addEventListener('keydown', this.#onListboxKeyDown)
           this.#$popover.addEventListener('close', this.#onClose)
         } else {
           this.#$popover.removeEventListener('keydown', this.#onListboxKeyDown)
           this.#$popover.removeEventListener('close', this.#onClose)
+          this.#selectOption(null)
         }
 
         break
@@ -118,20 +126,34 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
         break
       }
+
+      case 'modal': {
+        updateBooleanAttribute(this.#$popover, 'modal', isAttrTrue(newVal))
+
+        break
+      }
     }
   }
 
   #onListboxKeyDown = (e: KeyboardEvent) => {
     switch (e.code) {
-      case 'ArrowUp':
-      case 'ArrowLeft': {
+      case 'Enter': {
+        const $opt = this.#findSelectedOption(this.#getEnabledOptionElements())
+
+        if ($opt !== null) {
+          e.preventDefault()
+          $opt.click()
+        }
+
+        break
+      }
+      case 'ArrowUp': {
         e.preventDefault()
         this.#selectOption(this.#getPrevOption())
 
         break
       }
-      case 'ArrowDown':
-      case 'ArrowRight': {
+      case 'ArrowDown': {
         e.preventDefault()
         this.#selectOption(this.#getNextOption())
 
@@ -173,13 +195,15 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
   }
 
   #selectOption($option: TSinchActionMenuOptionElement | null) {
+    const hasMaxVisibleItems = this.hasAttribute('maxvisibleitems')
+
     for (const $op of this.#getOptionElements()) {
       const isSelected = $op === $option
 
-      updateBooleanAttribute($op, 'selected', isSelected)
+      updateBooleanAttribute($op, 'data-selected', isSelected)
 
-      if (isSelected) {
-        $op.focus()
+      if (isSelected && hasMaxVisibleItems) {
+        $op.scrollIntoView?.({ block: 'nearest' })
       }
     }
   }
@@ -196,7 +220,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
   #findSelectedOption(elements: readonly TSinchActionMenuOptionElement[]): TSinchActionMenuOptionElement | null {
     for (const el of elements) {
-      if (getBooleanAttribute(el, 'selected')) {
+      if (getBooleanAttribute(el, 'data-selected')) {
         return el
       }
     }
@@ -206,10 +230,6 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
   #getEnabledOptionElements(): TSinchActionMenuOptionElement[] {
     return this.#getOptionElements().filter((opt) => opt.disabled !== true)
-  }
-
-  #onOpen() {
-    this.#selectOption(this.#getFirstOption())
   }
 
   #onClose = () => {

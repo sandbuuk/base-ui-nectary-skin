@@ -9,7 +9,6 @@ import {
   getReactEventHandler,
   updateBooleanAttribute,
   NectaryElement,
-  getCssVar,
   throttleAnimationFrame,
 } from '../utils'
 import templateHTML from './template.html'
@@ -23,7 +22,7 @@ template.innerHTML = templateHTML
 const POPOVER_OFFSET = 4
 
 defineCustomElement('sinch-popover', class extends NectaryElement {
-  #$target: HTMLButtonElement
+  #$target: HTMLElement
   #$dialog: HTMLDialogElement
   #isConnected: boolean
   #resizeThrottle
@@ -39,7 +38,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$target = shadowRoot.querySelector('#target')!
     this.#$dialog = shadowRoot.querySelector('#dialog')!
     this.#isConnected = false
-    this.#resizeThrottle = throttleAnimationFrame(this.#updateOrientation)
+    this.#resizeThrottle = throttleAnimationFrame(this.#updateOrientationModal)
 
     dialogPolyfill.registerDialog(this.#$dialog)
   }
@@ -51,6 +50,8 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.addEventListener('close', this.#onCloseReactHandler)
     this.#isConnected = true
 
+    // React updates attributes BEFORE connecting to the DOM
+    // Angular updates attributes AFTER connecting to the DOM
     if (getBooleanAttribute(this, 'open')) {
       this.#onExpand()
     } else {
@@ -62,11 +63,21 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$dialog.removeEventListener('cancel', this.#onCancel)
     this.#$dialog.removeEventListener('mousedown', this.#onBackdropClick)
     this.removeEventListener('close', this.#onCloseReactHandler)
+
+    this.#onCollapse()
     this.#isConnected = false
   }
 
   static get observedAttributes() {
-    return ['open', 'orientation']
+    return ['modal', 'orientation', 'open']
+  }
+
+  set modal(isModal: boolean) {
+    updateBooleanAttribute(this, 'modal', isModal)
+  }
+
+  get modal(): boolean {
+    return getBooleanAttribute(this, 'modal')
   }
 
   set open(isOpen: boolean) {
@@ -78,7 +89,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   get orientation() {
-    return getLiteralAttribute(this, orientationValues, 'orientation', 'bottom-right')
+    return getLiteralAttribute(this, orientationValues, 'orientation', 'bottom')
   }
 
   set orientation(value: TSinchPopoverOrientation) {
@@ -90,41 +101,64 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'open': {
-        if (this.#isConnected) {
-          if (isAttrTrue(newVal)) {
-            this.#onExpand()
-          } else {
-            this.#onCollapse()
-          }
+        if (isAttrTrue(newVal)) {
+          this.#onExpand()
+        } else {
+          this.#onCollapse()
         }
+
+        updateBooleanAttribute(this, 'open', isAttrTrue(newVal))
 
         break
       }
 
       case 'orientation': {
         if (this.#isOpen()) {
-          this.#updateOrientation()
+          if (this.modal) {
+            this.#updateOrientationModal()
+          } else {
+            this.#updateOrientation()
+          }
         }
 
         break
+      }
+
+      case 'modal': {
+        if (this.#isOpen()) {
+          this.#onCollapse()
+          this.#onExpand()
+        }
       }
     }
   }
 
   #onExpand() {
-    if (this.#isOpen()) {
+    if (!this.#isConnected || this.#isOpen()) {
       return
     }
 
-    this.#$target.setAttribute('aria-expanded', 'true')
-    this.#$dialog.showModal()
-    this.#updateOrientation()
-
-    this.#prevOverflowValue = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    window.addEventListener('resize', this.#onResize)
+    if (this.modal) {
+      this.#$dialog.style.position = 'fixed'
+      this.#$dialog.showModal()
+      this.#updateOrientationModal()
+      this.#$target.setAttribute('aria-expanded', 'true')
+      this.#prevOverflowValue = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+      window.addEventListener('resize', this.#onResize)
+    } else {
+      this.addEventListener('keydown', this.#onTargetKeydown)
+      this.#$dialog.style.position = 'absolute'
+      this.#$dialog.setAttribute('open', '')
+      this.#updateOrientation()
+      this.#$target.setAttribute('aria-expanded', 'true')
+    }
   }
 
   #onCollapse() {
@@ -132,16 +166,21 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       return
     }
 
-    this.#$target.setAttribute('aria-expanded', 'false')
-    this.#$dialog.close?.()
+    if (this.modal) {
+      this.#$dialog.close?.()
+    } else {
+      this.#$dialog.removeAttribute('open')
+    }
 
+    this.#$target.setAttribute('aria-expanded', 'false')
     document.body.style.overflow = this.#prevOverflowValue
-    window.removeEventListener('resize', this.#onResize)
     this.#resizeThrottle.cancel()
+    window.removeEventListener('resize', this.#onResize)
+    this.removeEventListener('keydown', this.#onTargetKeydown)
   }
 
   #isOpen() {
-    return this.#isConnected && getBooleanAttribute(this.#$dialog, 'open')
+    return getBooleanAttribute(this.#$dialog, 'open')
   }
 
   #onResize = () => {
@@ -149,7 +188,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   #updateOrientation = () => {
-    this.#$dialog.style.width = 'fit-content'
+    this.#$dialog.style.width = 'max-content'
 
     const targetRect = this.#$target.getBoundingClientRect()
     const modalRect = this.#$dialog.getBoundingClientRect()
@@ -157,11 +196,43 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     let topPos = 0
 
     const orient = this.orientation
-    const shouldExpandWidthToTarget = getCssVar(this, '--sinch-popover-expand-width') !== null
-    const largestWidth = Math.max(modalRect.width, targetRect.width)
-    const resultWidth = shouldExpandWidthToTarget ? largestWidth : modalRect.width
+    const shouldExpandWidthToTarget = orient === 'top' || orient === 'bottom'
+    const resultWidth = shouldExpandWidthToTarget
+      ? Math.max(modalRect.width, targetRect.width)
+      : modalRect.width
 
-    if (orient === 'bottom-right' || orient === 'top-right') {
+    if (orient === 'bottom-left' || orient === 'top-left') {
+      leftPos = targetRect.width - resultWidth
+    }
+
+    if (orient === 'bottom-left' || orient === 'bottom-right' || orient === 'bottom') {
+      topPos = targetRect.height + POPOVER_OFFSET
+    }
+
+    if (orient === 'top-left' || orient === 'top-right' || orient === 'top') {
+      topPos = -(modalRect.height + POPOVER_OFFSET)
+    }
+
+    this.#$dialog.style.left = `${leftPos}px`
+    this.#$dialog.style.top = `${topPos}px`
+    this.#$dialog.style.width = `${resultWidth}px`
+  }
+
+  #updateOrientationModal = () => {
+    this.#$dialog.style.width = 'max-content'
+
+    const targetRect = this.#$target.getBoundingClientRect()
+    const modalRect = this.#$dialog.getBoundingClientRect()
+    let leftPos = 0
+    let topPos = 0
+
+    const orient = this.orientation
+    const shouldExpandWidthToTarget = orient === 'top' || orient === 'bottom'
+    const resultWidth = shouldExpandWidthToTarget
+      ? Math.max(modalRect.width, targetRect.width)
+      : modalRect.width
+
+    if (orient === 'bottom-right' || orient === 'top-right' || orient === 'top' || orient === 'bottom') {
       leftPos = Math.max(POPOVER_OFFSET, Math.min(targetRect.x, window.innerWidth - resultWidth - POPOVER_OFFSET))
     }
 
@@ -169,11 +240,11 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       leftPos = Math.max(POPOVER_OFFSET, targetRect.right - resultWidth)
     }
 
-    if (orient === 'bottom-left' || orient === 'bottom-right') {
+    if (orient === 'bottom-left' || orient === 'bottom-right' || orient === 'bottom') {
       topPos = Math.max(POPOVER_OFFSET, Math.min(targetRect.bottom + POPOVER_OFFSET, window.innerHeight - modalRect.height - POPOVER_OFFSET))
     }
 
-    if (orient === 'top-left' || orient === 'top-right') {
+    if (orient === 'top-left' || orient === 'top-right' || orient === 'top') {
       topPos = Math.max(POPOVER_OFFSET, targetRect.top - POPOVER_OFFSET - modalRect.height)
     }
 
@@ -203,6 +274,17 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
   #onCloseReactHandler = () => {
     getReactEventHandler(this, 'onClose')?.()
+  }
+
+  #onTargetKeydown = (e: KeyboardEvent) => {
+    switch (e.key) {
+      case 'Escape': {
+        e.preventDefault()
+        this.#dispatchCloseEvent()
+
+        break
+      }
+    }
   }
 
   #dispatchCloseEvent() {

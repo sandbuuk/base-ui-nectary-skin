@@ -1,9 +1,10 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip/types'
 
 const shot = '/input?width=200&label=Label'
+const withIcon = '/input?width=200&label=Label&value=Input%20value&icon=true'
 const withValue = '/input?width=200&label=Label&value=Input%20value'
 const withPlaceholder = '/input?width=200&label=Label&placeholder=Placeholder%20value'
 const withTooltip = '/input?width=200&label=Label&tooltip=Tooltip%20text'
@@ -296,6 +297,13 @@ test('input screenshots', runScreenshotTests('sinch-input', [
     },
   },
   {
+    name: 'icon slot',
+    url: withIcon,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
     name: 'custom events',
     url: withValue,
     async *fn({ $, page }) {
@@ -321,10 +329,10 @@ test('input screenshots', runScreenshotTests('sinch-input', [
         { type: 'sinch-input-blur', detail: null },
       ])
 
-      // Necessary to normalize "type" behaviour
-      const bb = (await $.boundingBox())!
+      const bb = centerRect(await $.boundingBox())
 
-      await page.mouse.click(bb.x + bb.width / 2, bb.y + bb.height / 2)
+      await page.mouse.click(bb.x, bb.y)
+      await page.keyboard.press('End')
       await $.type('X')
 
       expect(

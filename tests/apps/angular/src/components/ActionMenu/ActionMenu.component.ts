@@ -11,12 +11,14 @@ import '@sinch-engage/nectary/action-menu-option'
 
 export class ActionMenuComponent {
   isOpen: boolean
+  isModal: boolean
   maxVisibleItems: number | null
   orientation: string | null
 
   constructor() {
     const url = new URL(location.href)
     this.isOpen = url.searchParams.get('open') !== null
+    this.isModal = url.searchParams.get('modal') !== null
     this.orientation = url.searchParams.get('orientation')
 
     const numVisibleValue = url.searchParams.get('maxvisibleitems')

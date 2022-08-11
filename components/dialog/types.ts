@@ -7,11 +7,13 @@ export type TSinchDialogElement = HTMLElement & {
   readonly closeButtonRect: TRect,
   addEventListener(type: 'close', listener: (e: CustomEvent<void>) => void): void,
   setAttribute(name: 'caption', value: string): void,
+  setAttribute(name: 'close-aria-label', value: string): void,
 }
 
 export type TSinchDialogReact = TSinchElementReact<TSinchDialogElement> & {
   open: boolean,
   caption: string,
   'aria-label': string,
+  'close-aria-label': string,
   onClose: (event: SyntheticEvent<TSinchDialogElement, CustomEvent<void>>) => void,
 }
