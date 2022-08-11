@@ -14,7 +14,7 @@ export const TooltipExample: FC = () => {
       value={state}
       onChange={(e) => setState(e.nativeEvent.detail)}
     >
-      <sinch-help-tooltip slot="tooltip" text="Tooltip text long"/>
+      <sinch-help-tooltip slot="tooltip" text="Tooltip text"/>
     </sinch-input>
   )
 }
