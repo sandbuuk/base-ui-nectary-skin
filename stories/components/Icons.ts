@@ -1301,6 +1301,7 @@ import '@sinch-engage/nectary/icons/broadcast-on-home'
 import '@sinch-engage/nectary/icons/blinds-closed'
 import '@sinch-engage/nectary/icons/blinds'
 import '@sinch-engage/nectary/icons/auto-mode'
+import '@sinch-engage/nectary/icons/exclamation'
 // {{icon import}}
 
 /**
@@ -1635,6 +1636,7 @@ const alertIconNames = [
   'sinch-icon-notification-important',
   'sinch-icon-warning',
   'sinch-icon-warning-amber',
+  'sinch-icon-exclamation',
 ]
 
 export const AlertIcons = Template(alertIconNames)
