@@ -4,6 +4,7 @@ import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/select'
 import '@sinch-engage/nectary/select-option'
 import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 export default {
   title: 'Components/Select',
@@ -113,10 +114,10 @@ const Template = (innerHTML: string): Story => ({ onChange }) => {
 export const Select = Template(`
 <sinch-help-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-help-tooltip>
 <sinch-select-option value="1" text="Option 1 value" slot="option">
-  <sinch-icon-open-in-new></sinch-icon-open-in-new>
+  <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
 </sinch-select-option>
 <sinch-select-option value="2" text="Option 2 value" slot="option" disabled>
-  <sinch-icon-open-in-new></sinch-icon-open-in-new>
+  <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
 </sinch-select-option>
 <sinch-select-option value="3" text="Option 3 value" slot="option"></sinch-select-option>
 <sinch-select-option value="4" text="Option 4 value" slot="option"></sinch-select-option>
@@ -136,14 +137,14 @@ Select.parameters = {
 <sinch-select value={value} onChange={setValue}>
   <sinch-help-tooltip text="Tooltip text long" slot="tooltip"></sinch-help-tooltip>
   <sinch-select-option value="1" text="Option 1 value" slot="option">
-    <sinch-icon-open-in-new></sinch-icon-open-in-new>
+    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
   </sinch-select-option>
   <sinch-select-option value="2" text="Option 2 value" slot="option" disabled>
-    <sinch-icon-open-in-new></sinch-icon-open-in-new>
+    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
   </sinch-select-option>
   <sinch-select-option value="3" text="Option 3 value" slot="option"></sinch-select-option>
   <sinch-select-option value="4" text="Option 4 value" slot="option"></sinch-select-option>
-</sinch-input>
+</sinch-select>
 `,
     },
   },
