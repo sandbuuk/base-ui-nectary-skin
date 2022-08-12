@@ -10,8 +10,10 @@
     <Chat v-if="url.pathname === '/chat'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
     <DatePicker v-if="url.pathname === '/date-picker'" :search="url.searchParams"/>
+    <Dialog v-if="url.pathname === '/dialog'" :search="url.searchParams"/>
     <Dropdown v-if="url.pathname === '/dropdown'" :search="url.searchParams"/>
     <Grid v-if="url.pathname === '/grid'" :search="url.searchParams"/>
+    <HorizontalStepper v-if="url.pathname === '/horizontal-stepper'" :search="url.searchParams"/>
     <IconButton v-if="url.pathname === '/icon-button'" :search="url.searchParams"/>
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
     <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
@@ -20,21 +22,20 @@
     <Popover v-if="url.pathname === '/popover'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
     <Search v-if="url.pathname === '/search'" :search="url.searchParams"/>
+    <Segment v-if="url.pathname === '/segment'" :search="url.searchParams"/>
+    <SegmentedControl v-if="url.pathname === '/segmented-control'" :search="url.searchParams"/>
+    <SegmentedIconControl v-if="url.pathname === '/segmented-icon-control'" :search="url.searchParams"/>
     <Select v-if="url.pathname === '/select'" :search="url.searchParams"/>
-    <Tabs v-if="url.pathname === '/tabs'" :search="url.searchParams"/>
+    <Spinner v-if="url.pathname === '/spinner'" :search="url.searchParams"/>
     <Table v-if="url.pathname === '/table'" :search="url.searchParams"/>
+    <Tabs v-if="url.pathname === '/tabs'" :search="url.searchParams"/>
     <Tag v-if="url.pathname === '/tag'" :search="url.searchParams"/>
-    <Textarea v-if="url.pathname === '/textarea'" :search="url.searchParams"/>
     <Text v-if="url.pathname === '/text'" :search="url.searchParams"/>
+    <Textarea v-if="url.pathname === '/textarea'" :search="url.searchParams"/>
     <TimePicker v-if="url.pathname === '/time-picker'" :search="url.searchParams"/>
     <Title v-if="url.pathname === '/title'" :search="url.searchParams"/>
     <Toggle v-if="url.pathname === '/toggle'" :search="url.searchParams"/>
     <Tooltip v-if="url.pathname === '/tooltip'" :search="url.searchParams"/>
-    <Segment v-if="url.pathname === '/segment'" :search="url.searchParams"/>
-    <SegmentedControl v-if="url.pathname === '/segmented-control'" :search="url.searchParams"/>
-    <SegmentedIconControl v-if="url.pathname === '/segmented-icon-control'" :search="url.searchParams"/>
-    <Spinner v-if="url.pathname === '/spinner'" :search="url.searchParams"/>
-    <Dialog v-if="url.pathname === '/dialog'" :search="url.searchParams"/>
   </div>
 </template>
 
@@ -50,31 +51,32 @@ import CardContainer from './components/CardContainer.vue'
 import Chat from './components/Chat.vue'
 import Checkbox from './components/Checkbox.vue'
 import DatePicker from './components/DatePicker.vue'
-import Dropdown from './components/Dropdown.vue'
 import Dialog from './components/Dialog.vue'
+import Dropdown from './components/Dropdown.vue'
 import Grid from './components/Grid.vue'
-import Input from './components/Input.vue'
+import HorizontalStepper from './components/HorizontalStepper.vue'
 import IconButton from './components/IconButton.vue'
+import Input from './components/Input.vue'
 import Link from './components/Link.vue'
 import List from './components/List.vue'
 import Pagination from './components/Pagination.vue'
 import Popover from './components/Popover.vue'
 import Radio from './components/Radio.vue'
-import Select from './components/Select.vue'
-import Tabs from './components/Tabs.vue'
-import Table from './components/Table.vue'
-import Tag from './components/Tag.vue'
-import Textarea from './components/Textarea.vue'
-import Text from './components/Text.vue'
-import TimePicker from './components/TimePicker.vue'
-import Title from './components/Title.vue'
-import Toggle from './components/Toggle.vue'
-import Tooltip from './components/Tooltip.vue'
 import Search from './components/Search.vue'
 import Segment from './components/Segment.vue'
 import SegmentedControl from './components/SegmentedControl.vue'
 import SegmentedIconControl from './components/SegmentedIconControl.vue'
+import Select from './components/Select.vue'
 import Spinner from './components/Spinner.vue'
+import Table from './components/Table.vue'
+import Tabs from './components/Tabs.vue'
+import Tag from './components/Tag.vue'
+import Text from './components/Text.vue'
+import Textarea from './components/Textarea.vue'
+import TimePicker from './components/TimePicker.vue'
+import Title from './components/Title.vue'
+import Toggle from './components/Toggle.vue'
+import Tooltip from './components/Tooltip.vue'
 
 export default {
   data() {
@@ -115,9 +117,10 @@ export default {
     Chat,
     Checkbox,
     DatePicker,
-    Dropdown,
     Dialog,
+    Dropdown,
     Grid,
+    HorizontalStepper,
     IconButton,
     Input,
     Link,
@@ -125,21 +128,21 @@ export default {
     Pagination,
     Popover,
     Radio,
-    Select,
-    Tabs,
-    Table,
-    Tag,
-    Textarea,
-    Text,
-    TimePicker,
-    Title,
-    Toggle,
-    Tooltip,
     Search,
     Segment,
     SegmentedControl,
     SegmentedIconControl,
+    Select,
     Spinner,
+    Table,
+    Tabs,
+    Tag,
+    Text,
+    Textarea,
+    TimePicker,
+    Title,
+    Toggle,
+    Tooltip,
   }
 };
 </script>
