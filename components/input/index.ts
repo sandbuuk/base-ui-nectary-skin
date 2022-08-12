@@ -1,3 +1,4 @@
+import '../stop-events'
 import {
   defineCustomElement,
   getAttribute,
@@ -59,11 +60,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange)
     this.#$rightSlot.addEventListener('slotchange', this.#onRightSlotChange)
 
-    this.#$rightSlot.addEventListener('input', this.#onEventFilter)
-    this.#$rightSlot.addEventListener('change', this.#onEventFilter)
-    this.#$rightSlot.addEventListener('focusin', this.#onEventFilter)
-    this.#$rightSlot.addEventListener('focusout', this.#onEventFilter)
-
     this.#onIconSlotChange()
     this.#onRightSlotChange()
   }
@@ -75,11 +71,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$input.removeEventListener('keydown', this.#onSelectionChange)
     this.#$iconSlot.removeEventListener('slotchange', this.#onIconSlotChange)
     this.#$rightSlot.removeEventListener('slotchange', this.#onRightSlotChange)
-
-    this.#$rightSlot.removeEventListener('input', this.#onEventFilter)
-    this.#$rightSlot.removeEventListener('change', this.#onEventFilter)
-    this.#$rightSlot.removeEventListener('focusin', this.#onEventFilter)
-    this.#$rightSlot.removeEventListener('focusout', this.#onEventFilter)
   }
 
   static get observedAttributes() {
@@ -312,10 +303,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   #onRightSlotChange = () => {
     setClass(this.#$rightWrapper, 'empty', this.#$rightSlot.assignedElements().length === 0)
-  }
-
-  #onEventFilter = (e: Event) => {
-    e.stopPropagation()
   }
 })
 

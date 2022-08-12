@@ -46,7 +46,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   connectedCallback() {
     this.setAttribute('role', 'dialog')
     this.#$dialog.addEventListener('cancel', this.#onCancel)
-    this.#$dialog.addEventListener('mousedown', this.#onBackdropClick)
+    this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown)
     this.addEventListener('close', this.#onCloseReactHandler)
     this.#isConnected = true
 
@@ -61,7 +61,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
   disconnectedCallback() {
     this.#$dialog.removeEventListener('cancel', this.#onCancel)
-    this.#$dialog.removeEventListener('mousedown', this.#onBackdropClick)
+    this.#$dialog.removeEventListener('mousedown', this.#onBackdropMouseDown)
     this.removeEventListener('close', this.#onCloseReactHandler)
 
     this.#onCollapse()
@@ -253,7 +253,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$dialog.style.width = `${resultWidth}px`
   }
 
-  #onBackdropClick = (e: MouseEvent) => {
+  #onBackdropMouseDown = (e: MouseEvent) => {
     if (e.target !== this.#$dialog) {
       return
     }
@@ -262,7 +262,6 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
     if (!isInside) {
-      e.stopPropagation()
       this.#dispatchCloseEvent()
     }
   }

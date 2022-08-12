@@ -69,7 +69,7 @@ dialog.fixed {
   overflow: hidden;
 }
 
-#content-wrapper {
+#content {
   min-height: 0;
   overflow: auto;
   max-height: var(--sinch-dialog-max-height, 50vh);
@@ -95,10 +95,14 @@ sinch-icon-button {
       <sinch-icon-close slot="icon"></sinch-icon-close>
     </sinch-icon-button>
   </div>
-  <div id="content-wrapper">
-    <slot name="content"></slot>
+  <div id="content">
+    <sinch-stop-events events="close">
+      <slot name="content"></slot>
+    </sinch-stop-events>
   </div>
   <div id="buttons">
-    <slot name="buttons"></slot>
+    <sinch-stop-events events="close">
+      <slot name="buttons"></slot>
+    </sinch-stop-events>
   </div>
 </dialog>
