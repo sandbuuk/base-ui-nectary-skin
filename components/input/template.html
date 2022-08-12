@@ -190,7 +190,9 @@
     <input id="input" type="text"/>
     <div id="border"></div>
     <div id="right">
-      <slot name="right"></slot>
+      <sinch-stop-events events="input,change,focusin,focusout">
+        <slot name="right"></slot>
+      </sinch-stop-events>
     </div>
   </div>
   <div id="bottom">

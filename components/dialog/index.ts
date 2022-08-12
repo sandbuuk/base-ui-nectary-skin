@@ -1,6 +1,7 @@
 import dialogPolyfill from 'dialog-polyfill'
 import '../icon-button'
 import '../icons/close'
+import '../stop-events'
 import {
   defineCustomElement,
   getAttribute,
@@ -103,8 +104,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.#dispatchCloseEvent()
   }
 
-  #onCloseClick = (e: MouseEvent) => {
-    e.stopPropagation()
+  #onCloseClick = () => {
     this.#dispatchCloseEvent()
   }
 
@@ -117,7 +117,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
     if (!isInside) {
-      e.stopPropagation()
       this.#dispatchCloseEvent()
     }
   }
