@@ -1,3 +1,9 @@
+## v0.34.0 (2022-08-12)
+
+* ➕ add `sinch-horizontal-stepper` component
+* ➕ add `sinch-icon-exclamation` component
+* 🐞 fix close event propagation in `sinch-dialog`
+
 ## v0.33.0 (2022-08-11)
 
 * 💥 add `modal` attribute to `sinch-popover`, `sinch-action-menu`

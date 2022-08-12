@@ -10,6 +10,7 @@ import { Checkbox } from './components/Checkbox'
 import { DateInput } from './components/DateInput'
 import { DatePicker } from './components/DatePicker'
 import { Dialog } from './components/Dialog'
+import { DialogExample } from './components/DialogExample'
 import { Dropdown } from './components/Dropdown'
 import { Grid } from './components/Grid'
 import { HorizontalStepper } from './components/HorizontalStepper'
@@ -109,6 +110,12 @@ const mapElement = (url: URL) => {
     case '/dialog': {
       return (
         <Dialog search={url.searchParams}/>
+      )
+    }
+
+    case '/dialog-example': {
+      return (
+        <DialogExample search={url.searchParams}/>
       )
     }
 
