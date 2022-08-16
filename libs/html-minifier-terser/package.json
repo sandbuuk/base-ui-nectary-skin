@@ -1,0 +1,18 @@
+{
+  "name": "html-minifier-terser",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "src/htmlminifier.js",
+  "engines": {
+    "node": ">=12"
+  },
+  "private": true,
+  "dependencies": {
+    "camel-case": "^4.1.2",
+    "clean-css": "^5.2.2",
+    "commander": "^8.3.0",
+    "he": "^1.2.0",
+    "param-case": "^3.0.4",
+    "relateurl": "^0.2.7"
+  }
+}

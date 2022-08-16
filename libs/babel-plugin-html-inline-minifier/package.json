@@ -6,6 +6,6 @@
     "registry": "https://nexus.int.clxnetworks.net/repository/sinch_npm/"
   },
   "dependencies": {
-    "html-minifier-terser": "^6.1.0"
+    "html-minifier-terser": "workspace:html-minifier-terser@*"
   }
 }
