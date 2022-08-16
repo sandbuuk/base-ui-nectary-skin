@@ -4,7 +4,7 @@
     :open="isOpen"
     :maxVisibleItems="maxVisibleItems"
     aria-label="Search"
-    @close="onClose">
+    @--close="onClose">
     <sinch-input
       slot="target"
       aria-label="Search Input"
@@ -15,9 +15,9 @@
       :invalidtext="invalidText"
       :disabled="isDisabled"
       :value="value"
-      @change="onChange"
-      @focusin="onFocus"
-      @focusout="onBlur">
+      @--change="onChange"
+      @focus="onFocus"
+      @blur="onBlur">
       <sinch-icon-search slot="icon"></sinch-icon-search>
       <sinch-icon-button
         slot="right"

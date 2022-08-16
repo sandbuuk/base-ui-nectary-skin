@@ -41,9 +41,8 @@ export default {
       description: 'Number of visible items in the list',
       control: { type: 'range', min: 1, max: 5, step: 1 },
     },
-    onChange: {
+    'on-change': {
       description: 'Handler to sync input value with the state',
-      action: 'onChange',
     },
     onFocus: {
       description: 'Focus handler',
@@ -66,7 +65,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story => ({ onChange }) => {
+const Template = (innerHTML: string): Story => () => {
   const [{
     value,
     label,
@@ -86,8 +85,7 @@ const Template = (innerHTML: string): Story => ({ onChange }) => {
 
     $input.innerHTML = innerHTML
 
-    $input.addEventListener('change', (e) => {
-      onChange(e.detail)
+    $input.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
@@ -134,7 +132,7 @@ Select.parameters = {
   docs: {
     source: {
       code: `
-<sinch-select value={value} onChange={setValue}>
+<sinch-select value={value} on-change={setValue}>
   <sinch-help-tooltip text="Tooltip text long" slot="tooltip"></sinch-help-tooltip>
   <sinch-select-option value="1" text="Option 1 value" slot="option">
     <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>

@@ -313,8 +313,8 @@ test('dropdown events', runScreenshotTests('sinch-dropdown', [
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-dropdown-change', 'X')
-      await testInput('close', 'sinch-dropdown-close')
+      await testInput('-change', 'sinch-dropdown-change', 'X')
+      await testInput('-close', 'sinch-dropdown-close')
       await testInput('focusin', 'sinch-dropdown-focus')
       await testInput('focusout', 'sinch-dropdown-blur')
     },

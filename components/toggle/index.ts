@@ -2,6 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -28,12 +29,18 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
 
     this.#$input = shadowRoot.querySelector('input')!
     this.#$label = shadowRoot.querySelector('label')!
-    this.#$input.addEventListener('input', this.#onInput)
   }
 
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
     this.setAttribute('aria-label', 'toggle')
+    this.#$input.addEventListener('input', this.#onInput)
+    this.addEventListener('-change', this.#onChangeReactHandler)
+  }
+
+  disconnectedCallback() {
+    this.#$input.removeEventListener('input', this.#onInput)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -132,6 +139,13 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('change', { detail: isChecked, bubbles: true })
     )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: isChecked })
+    )
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

@@ -143,7 +143,7 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-tabs-change', '2')
+      await testInput('-change', 'sinch-tabs-change', '2')
     },
   },
   {

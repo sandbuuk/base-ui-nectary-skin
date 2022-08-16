@@ -84,10 +84,7 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
     e.stopPropagation()
 
     this.dispatchEvent(
-      new CustomEvent('change', {
-        bubbles: true,
-        detail: this.value,
-      })
+      new CustomEvent('option-change', { detail: this.value, bubbles: true })
     )
   }
 })

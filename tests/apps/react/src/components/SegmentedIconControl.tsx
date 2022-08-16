@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import { useState } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/segmented-icon-control'
 import '@sinch-engage/nectary/segmented-icon-control-option'
 import '@sinch-engage/nectary/icons/format-align-center'
@@ -13,17 +13,13 @@ type TSegmentedIconControl = {
 
 export const SegmentedIconControl: FC<TSegmentedIconControl> = ({ search }) => {
   const [value, setValue] = useState('')
-  const onChange = useMemo(() =>
-    (search.get('uncontrolled') === null
-      ? (e: SyntheticEvent<Element, CustomEvent>) => {
-        const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
-        window.dispatchEvent(new CustomEvent('sinch-segmented-icon-control-change', { detail: value }))
+    window.dispatchEvent(new CustomEvent('sinch-segmented-icon-control-change', { detail: value }))
 
-        setValue(value)
-      }
-      : () => {}),
-  [search, setValue])
+    setValue(value)
+  }
   const isMultiple = search.get('multiple') !== null
   const isSingleOption = search.get('single-option') !== null
 
@@ -31,7 +27,7 @@ export const SegmentedIconControl: FC<TSegmentedIconControl> = ({ search }) => {
     <sinch-segmented-icon-control
       multiple={isMultiple}
       value={value}
-      onChange={onChange}
+      on-change={onChange}
       aria-label="segmented icon control"
     >
       <sinch-segmented-icon-control-option value="1" aria-label="1">

@@ -4,7 +4,7 @@
     :modal="isModal"
     :orientation="orientation"
     :maxvisibleitems="maxVisibleItems"
-    @close="onClose">
+    @--close="onClose">
     <sinch-button
       slot="target"
       type="cta-secondary"

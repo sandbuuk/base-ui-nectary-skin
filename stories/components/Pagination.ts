@@ -13,9 +13,8 @@ export default {
       description: 'Number of pages',
       control: 'number',
     },
-    onChange: {
+    'on-change': {
       description: 'Handler to sync page index with the state',
-      action: 'onChange',
     },
   },
   parameters: {
@@ -30,7 +29,7 @@ export default {
   },
 } as Meta
 
-const Template = (): Story => ({ onChange }) => {
+const Template = (): Story => () => {
   const [{
     value,
     max,
@@ -40,8 +39,7 @@ const Template = (): Story => ({ onChange }) => {
   if (pageRef.current == null) {
     const $pagination = document.createElement('sinch-pagination')
 
-    $pagination.addEventListener('change', (e) => {
-      onChange(e.detail)
+    $pagination.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail })
     })
 
@@ -66,7 +64,7 @@ Pagination.args = {
 Pagination.parameters = {
   docs: {
     source: {
-      code: '<sinch-pagination max={20} value={value} onChange={onChangeHandler}></sinch-pagination>',
+      code: '<sinch-pagination max={20} value={value} on-change={onChange}></sinch-pagination>',
     },
   },
 }

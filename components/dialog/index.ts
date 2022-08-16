@@ -45,7 +45,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.#$closeButton.addEventListener('click', this.#onCloseClick)
     this.#$dialog.addEventListener('mousedown', this.#onBackdropClick)
     this.#$dialog.addEventListener('cancel', this.#onCancel)
-    this.addEventListener('close', this.#onCloseReactHandler)
+    this.addEventListener('-close', this.#onCloseReactHandler)
     this.#isConnected = true
 
     // React updates attributes BEFORE connecting to the DOM
@@ -57,7 +57,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.#$closeButton.removeEventListener('click', this.#onCloseClick)
     this.#$dialog.removeEventListener('mousedown', this.#onBackdropClick)
     this.#$dialog.removeEventListener('cancel', this.#onCancel)
-    this.removeEventListener('close', this.#onCloseReactHandler)
+    this.removeEventListener('-close', this.#onCloseReactHandler)
 
     this.#setOpen(false)
     this.#isConnected = false
@@ -121,16 +121,14 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     }
   }
 
-  #onCloseReactHandler = () => {
+  #onCloseReactHandler = (e: Event) => {
     getReactEventHandler(this, 'onClose')?.()
+    getReactEventHandler(this, 'on-close')?.(e)
   }
 
   #dispatchCloseEvent() {
     this.dispatchEvent(
-      new CustomEvent(
-        'close',
-        { bubbles: true }
-      )
+      new CustomEvent('-close')
     )
   }
 

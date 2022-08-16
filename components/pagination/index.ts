@@ -7,6 +7,7 @@ import {
   setClass,
   NectaryElement,
   getRect,
+  getReactEventHandler,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TRect } from '../types'
@@ -45,10 +46,12 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
   connectedCallback() {
     this.#onValueChange()
     this.#$wrapper.addEventListener('click', this.#onButtonClick)
+    this.addEventListener('-change', this.#onChangeReactHandler)
   }
 
   disconnectedCallback() {
     this.#$wrapper.removeEventListener('click', this.#onButtonClick)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -169,14 +172,25 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     }
   }
 
-  #clamp(value: number, max: number): number {
-    return Math.max(0, Math.min(max - 1, value))
+  #clamp(value: number): number {
+    const max = getIntegerAttribute(this, 'max', 0)
+
+    return Math.max(0, Math.min(max - 1, value)) + 1
   }
 
   #dispatchChangeEvent(value: number) {
-    const max = getIntegerAttribute(this, 'max', 0)
+    const detail = this.#clamp(value)
 
-    this.dispatchEvent(new CustomEvent('change', { detail: this.#clamp(value, max) + 1, bubbles: true }))
+    this.dispatchEvent(
+      new CustomEvent('change', { detail, bubbles: true })
+    )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail })
+    )
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 
   focus() {

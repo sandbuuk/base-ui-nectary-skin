@@ -3,11 +3,9 @@ import type { TSinchElementReact } from '../types'
 export type TSinchDropdownCheckboxOptionElement = HTMLElement & {
   value: string,
   text: string,
-  checked: boolean,
   disabled: boolean,
   setAttribute(name: 'value', value: string): void,
   setAttribute(name: 'text', value: string): void,
-  setAttribute(name: 'checked', value: ''): void,
   setAttribute(name: 'disabled', value: ''): void,
 }
 

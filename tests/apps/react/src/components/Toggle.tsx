@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import { useState } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/toggle'
 
 type TToggle = {
@@ -8,21 +8,17 @@ type TToggle = {
 
 export const Toggle: FC<TToggle> = ({ search }) => {
   const [value, setValue] = useState(search.get('checked') !== null)
-  const onChange = useMemo(() =>
-    (search.get('uncontrolled') === null
-      ? (e: SyntheticEvent<Element, CustomEvent<boolean>>) => {
-        const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<boolean>) => {
+    const value = e.detail
 
-        window.dispatchEvent(new CustomEvent('sinch-toggle-change', { detail: value }))
-        setValue(value)
-      }
-      : () => {}),
-  [search, setValue])
-  const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-toggle-focus')), [])
-  const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-toggle-blur')), [])
-  const isDisabled = useMemo(() => search.get('disabled') != null, [search])
-  const isSmall = useMemo(() => search.get('small') != null, [search])
-  const isLabeled = useMemo(() => search.get('labeled') != null, [search])
+    window.dispatchEvent(new CustomEvent('sinch-toggle-change', { detail: value }))
+    setValue(value)
+  }
+  const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-toggle-focus'))
+  const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-toggle-blur'))
+  const isDisabled = search.get('disabled') != null
+  const isSmall = search.get('small') != null
+  const isLabeled = search.get('labeled') != null
   const text: any = search.get('text') ?? undefined
 
   return (
@@ -33,7 +29,7 @@ export const Toggle: FC<TToggle> = ({ search }) => {
       disabled={isDisabled}
       labeled={isLabeled}
       checked={value}
-      onChange={onChange}
+      on-change={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
     />

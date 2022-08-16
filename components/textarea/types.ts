@@ -15,6 +15,7 @@ export type TSinchTextareaElement = HTMLElement & {
   rows: HTMLTextAreaElement['rows'],
   resizable: boolean,
   addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
+  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   setAttribute(name: 'value', value: string): void,
   setAttribute(name: 'label', value: string): void,
   setAttribute(name: 'placeholder', value: string): void,
@@ -37,5 +38,6 @@ export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   'aria-label': string,
   rows?: number,
   resizable?: boolean,
-  onChange: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
+  onChange?: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
+  'on-change'?: (e: CustomEvent<string>) => void,
 }

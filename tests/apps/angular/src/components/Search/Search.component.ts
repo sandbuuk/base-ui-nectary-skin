@@ -72,4 +72,7 @@ export class SearchComponent {
     this.value = text
     this.isOpen = false
   }
+  onStopEvent(e: Event) {
+    e.stopPropagation()
+  }
 }

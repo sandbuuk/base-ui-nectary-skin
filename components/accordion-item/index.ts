@@ -45,7 +45,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['label', 'disabled', 'checked', 'optionaltext']
+    return ['label', 'disabled', 'data-checked', 'optionaltext']
   }
 
   set value(value: string) {
@@ -89,6 +89,10 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'label': {
         this.#$buttonContent.textContent = newVal
@@ -102,7 +106,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
         break
       }
 
-      case 'checked': {
+      case 'data-checked': {
         updateExplicitBooleanAttribute(this.#$button, 'aria-expanded', isAttrTrue(newVal))
 
         break
@@ -120,7 +124,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
     e.stopPropagation()
 
     this.dispatchEvent(
-      new CustomEvent('change', {
+      new CustomEvent('option-change', {
         bubbles: true,
         detail: this.value,
       })

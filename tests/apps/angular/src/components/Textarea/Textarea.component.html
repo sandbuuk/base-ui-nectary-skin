@@ -10,6 +10,6 @@
   (focusin)="onFocus()"
   (focusout)="onBlur()"
   [value]="value"
-  (change)="onChange($event)">
+  (-change)="onChange($event)">
   <sinch-help-tooltip *ngIf="tooltipText != null" [text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
 </sinch-textarea>

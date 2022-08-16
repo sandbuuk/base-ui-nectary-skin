@@ -22,9 +22,8 @@ export default {
     locale: {
       description: 'BCP 47 language tag (e.g. en-US), which changes day and month display names in the calendar',
     },
-    onChange: {
+    'on-change': {
       description: 'Handler to sync date state',
-      action: 'onChange',
     },
   },
   parameters: {
@@ -68,7 +67,7 @@ const Template = (): Story => () => {
     $input.setAttribute('slot', 'target')
     $input.setAttribute('label', 'Date input')
     $input.appendChild($iconButton)
-    $input.addEventListener('change', (e) => {
+    $input.addEventListener('-change', (e) => {
       inputRef.current!.value = e.detail
     })
 
@@ -76,7 +75,7 @@ const Template = (): Story => () => {
     $datePicker.setAttribute('min', min)
     $datePicker.setAttribute('max', max)
     $datePicker.setAttribute('locale', locale)
-    $datePicker.addEventListener('change', (e) => {
+    $datePicker.addEventListener('-change', (e) => {
       const value = e.detail
 
       popoverRef.current!.removeAttribute('open')
@@ -86,7 +85,7 @@ const Template = (): Story => () => {
 
     $popover.appendChild($input)
     $popover.appendChild($datePicker)
-    $popover.addEventListener('close', () => {
+    $popover.addEventListener('-close', () => {
       popoverRef.current!.removeAttribute('open')
     })
 
@@ -116,14 +115,14 @@ DatePicker.parameters = {
   open={isOpen}
   orientation="bottom-left"
   aria-label="Date input"
-  onClose={onClose}
+  on-close={onClose}
 >
   <sinch-input
     slot="target"
     label="Date input"
     aria-label="Date input"
     value={value}
-    onChange={onChange}
+    on-change={onChange}
   >
     <sinch-icon-button
       slot="right"
@@ -141,7 +140,7 @@ DatePicker.parameters = {
     locale="en-US"
     aria-label="Date Picker"
     value={isoValue}
-    onChange={onIsoChange}
+    on-change={onIsoChange}
   />
 </sinch-popover>`,
     },

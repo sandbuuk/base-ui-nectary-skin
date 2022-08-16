@@ -1,5 +1,5 @@
-import { useCallback, useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import { useState } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/segment'
 import '@sinch-engage/nectary/segment-collapse'
 import '@sinch-engage/nectary/input'
@@ -23,14 +23,14 @@ export const Segment: FC<TSegment> = ({ search }) => {
   const hasPreview = search.get('preview') !== null
   const hasCollapse = search.get('collapse') !== null
   const [isCollapsed, setCollapsed] = useState(false)
-  const onCollapse = useCallback((e: SyntheticEvent<Element, CustomEvent>) => {
-    const value = e.nativeEvent.detail
+  const onCollapse = (e: CustomEvent<boolean>) => {
+    const value = e.detail
 
     setCollapsed(value)
     window.dispatchEvent(new CustomEvent('sinch-segment-collapse-change', { detail: value }))
-  }, [])
-  const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-segment-collapse-focus')), [])
-  const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-segment-collapse-blur')), [])
+  }
+  const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-segment-collapse-focus'))
+  const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-segment-collapse-blur'))
 
   return (
     <sinch-segment
@@ -43,7 +43,7 @@ export const Segment: FC<TSegment> = ({ search }) => {
           slot="collapse"
           aria-label="Collapse"
           value={isCollapsed}
-          onChange={onCollapse}
+          on-change={onCollapse}
           onFocus={onFocus}
           onBlur={onBlur}
         />

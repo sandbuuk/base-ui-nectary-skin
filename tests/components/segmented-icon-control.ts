@@ -188,7 +188,7 @@ test('segmented-icon-control screenshots', runScreenshotTests('sinch-segmented-i
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-segmented-icon-control-change', '2')
+      await testInput('-change', 'sinch-segmented-icon-control-change', '2')
     },
   },
   {

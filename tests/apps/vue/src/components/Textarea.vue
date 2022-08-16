@@ -9,7 +9,7 @@
     :value="value"
     :rows="rows"
     :resizable="resizable"
-    @change="onChange"
+    @--change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
     <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-help-tooltip>

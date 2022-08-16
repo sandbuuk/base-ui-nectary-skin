@@ -7,7 +7,7 @@ export default {
   title: 'Components/Dialog',
   argTypes: {
     caption: { control: 'text', defaultValue: 'New title', description: 'Dialog title' },
-    onClose: { action: 'onClose' },
+    'on-close': { action: 'on-close' },
   },
 } as Meta
 
@@ -34,7 +34,7 @@ const Template = (innerHTML: string = ''): Story => ({ onClose }) => {
     $dialog.innerHTML = innerHTML
 
     dialogRef.current = $dialog
-    $dialog.addEventListener('close', (e) => {
+    $dialog.addEventListener('-close', (e) => {
       onClose?.(e)
       $dialog.removeAttribute('open')
     })
@@ -63,7 +63,7 @@ export const Dialog = Template(dialogInnerHTML)
 Dialog.parameters = {
   docs: {
     source: {
-      code: `<sinch-dialog open={isOpen} title={title} onClose={closeModal}>${dialogInnerHTML}</sinch-dialog>`,
+      code: `<sinch-dialog open={isOpen} title={title} on-close={closeModal}>${dialogInnerHTML}</sinch-dialog>`,
     },
   },
 }

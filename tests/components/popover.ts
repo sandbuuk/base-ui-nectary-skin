@@ -155,7 +155,7 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
     async *fn({ $, page }) {
       const testPopover = testCustomEvent(page, $)
 
-      await testPopover('close', 'sinch-popover-close')
+      await testPopover('-close', 'sinch-popover-close')
     },
   },
   {

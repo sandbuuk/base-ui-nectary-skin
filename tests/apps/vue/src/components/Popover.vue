@@ -3,7 +3,7 @@
     :open="isOpen"
     :modal="isModal"
     :orientation="orientation"
-    @close="onClose">
+    @--close="onClose">
     <sinch-button
       slot="target"
       type="cta-secondary"

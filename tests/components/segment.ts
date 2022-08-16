@@ -112,7 +112,7 @@ test('segment screenshots', runScreenshotTests('sinch-segment', [
     async *fn({ $, page }) {
       const testSegment = testCustomEvent(page, $.locator('sinch-segment-collapse'))
 
-      await testSegment('change', 'sinch-segment-collapse-change', true)
+      await testSegment('-change', 'sinch-segment-collapse-change', true)
     },
   },
   {

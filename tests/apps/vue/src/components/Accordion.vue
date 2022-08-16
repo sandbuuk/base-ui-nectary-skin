@@ -1,5 +1,5 @@
 <template>
-  <sinch-accordion :value="value" @change="onChange" :multiple="isMultiple">
+  <sinch-accordion :value="value" @--change="onChange" :multiple="isMultiple">
     <sinch-accordion-item v-for="opt in options"
       :key="opt.value"
       :value="opt.value"

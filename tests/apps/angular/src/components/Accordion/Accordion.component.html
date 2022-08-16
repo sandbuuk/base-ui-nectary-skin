@@ -1,4 +1,4 @@
-<sinch-accordion [value]="value" (change)="onChange($event)" [attr.multiple]="isMultiple">
+<sinch-accordion [value]="value" (-change)="onChange($event)" [attr.multiple]="isMultiple">
   <sinch-accordion-item *ngFor="let opt of options"
     [attr.value]="opt.value"
     [attr.label]="opt.label"

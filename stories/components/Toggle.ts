@@ -10,11 +10,11 @@ export default {
     labeled: { control: 'boolean' },
     disabled: { control: 'boolean' },
     text: { control: 'text' },
-    onChange: { action: 'onChange' },
+    'on-change': { description: '' },
   },
 } as Meta
 
-const Template: Story = ({ onChange }) => {
+const Template: Story = () => {
   const [{ checked, small, labeled, disabled, text }, updateArgs] = useArgs()
   const checkboxRef = useRef<HTMLElementTagNameMap['sinch-toggle'] | null>(null)
 
@@ -23,9 +23,7 @@ const Template: Story = ({ onChange }) => {
 
     let timeId: any
 
-    $checkbox.addEventListener('change', (e) => {
-      onChange(e.detail)
-
+    $checkbox.addEventListener('-change', (e) => {
       // optimistic update
       $checkbox.checked = e.detail
 
@@ -66,7 +64,7 @@ Toggle.args = {
 Toggle.parameters = {
   docs: {
     source: {
-      code: '<sinch-toggle checked={isChecked} onChange={setIsChecked}></sinch-toggle>',
+      code: '<sinch-toggle checked={isChecked} on-change={setIsChecked}></sinch-toggle>',
     },
   },
 }

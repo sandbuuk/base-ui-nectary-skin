@@ -5,7 +5,7 @@
     v-bind:small="isSmall"
     v-bind:labeled="isLabeled"
     v-bind:checked="checked"
-    @change="onChange"
+    @--change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
   </sinch-toggle>

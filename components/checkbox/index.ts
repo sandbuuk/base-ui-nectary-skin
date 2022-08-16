@@ -2,6 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -28,11 +29,17 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
 
     this.#$input = shadowRoot.querySelector('input')!
     this.#$label = shadowRoot.querySelector('label')!
-    this.#$input.addEventListener('input', this.#onCheckboxInput)
   }
 
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
+    this.#$input.addEventListener('input', this.#onCheckboxInput)
+    this.addEventListener('-change', this.#onChangeReactHandler)
+  }
+
+  disconnectedCallback() {
+    this.#$input.removeEventListener('input', this.#onCheckboxInput)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -129,14 +136,15 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
     this.#$input.checked = this.checked
 
     this.dispatchEvent(
-      new CustomEvent(
-        'change',
-        {
-          detail: isChecked,
-          bubbles: true,
-        }
-      )
+      new CustomEvent('change', { detail: isChecked, bubbles: true })
     )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: isChecked })
+    )
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

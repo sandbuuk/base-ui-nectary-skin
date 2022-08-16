@@ -202,7 +202,7 @@ test('select screenshots', runScreenshotTests('sinch-select', [
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-select-change', 'X')
+      await testInput('-change', 'sinch-select-change', 'X')
       await testInput('focusin', 'sinch-select-focus')
       await testInput('focusout', 'sinch-select-blur')
     },

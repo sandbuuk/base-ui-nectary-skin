@@ -157,7 +157,7 @@ test('radio screenshots', runScreenshotTests('sinch-radio', [
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-radio-change', '2')
+      await testInput('-change', 'sinch-radio-change', '2')
     },
   },
   {

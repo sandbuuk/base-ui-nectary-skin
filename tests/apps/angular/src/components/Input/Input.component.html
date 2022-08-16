@@ -9,7 +9,7 @@
   [value]="value"
   (focusin)="onFocus()"
   (focusout)="onBlur()"
-  (change)="onChange($event)">
+  (-change)="onChange($event)">
   <sinch-icon-search *ngIf="hasIcon" slot="icon"></sinch-icon-search>
   <sinch-help-tooltip *ngIf="tooltipText != null" [attr.text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
   <sinch-tag *ngIf="hasRight" slot="right" text="text"></sinch-tag>

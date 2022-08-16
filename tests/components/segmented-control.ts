@@ -138,7 +138,7 @@ test('segmented-control screenshots', runScreenshotTests('sinch-segmented-contro
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-segmented-control-change', '2')
+      await testInput('-change', 'sinch-segmented-control-change', '2')
     },
   },
   {

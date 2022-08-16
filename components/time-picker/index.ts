@@ -8,6 +8,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getReactEventHandler,
   getRect,
   isAttrTrue,
   NectaryElement,
@@ -139,6 +140,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
     this.#$submitButton.addEventListener('click', this.#onSubmitButtonClick)
     this.#$headerHours.addEventListener('keydown', this.#onHoursKeydown)
     this.#$headerMinutes.addEventListener('keydown', this.#onMinutesKeydown)
+    this.addEventListener('-change', this.#onChangeReactHandler)
   }
 
   disconnectedCallback() {
@@ -147,6 +149,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
     this.#$submitButton.removeEventListener('click', this.#onSubmitButtonClick)
     this.#$headerHours.removeEventListener('keydown', this.#onHoursKeydown)
     this.#$headerMinutes.removeEventListener('keydown', this.#onMinutesKeydown)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -394,6 +397,11 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
         detail: value,
       })
     )
+    this.dispatchEvent(
+      new CustomEvent('-change', {
+        detail: value,
+      })
+    )
   }
 
   #onHoursKeydown = (e: KeyboardEvent) => {
@@ -434,6 +442,10 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
         break
       }
     }
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

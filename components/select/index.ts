@@ -4,6 +4,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getIntegerAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -53,17 +54,19 @@ defineCustomElement('sinch-select', class extends NectaryElement {
     this.setAttribute('role', 'listbox')
     this.setAttribute('aria-haspopup', 'listbox')
 
-    this.#$dropdown.addEventListener('change', this.#onValueChange)
-    this.#$dropdown.addEventListener('close', this.#onDropdownClose)
+    this.#$dropdown.addEventListener('-change', this.#onValueChange)
+    this.#$dropdown.addEventListener('-close', this.#onDropdownClose)
     this.#$button.addEventListener('click', this.#onDropdownClick)
     this.#$label.addEventListener('click', this.#onLabelClick)
+    this.addEventListener('-change', this.#onChangeReactHandler)
   }
 
   disconnectedCallback() {
-    this.#$dropdown.removeEventListener('change', this.#onValueChange)
-    this.#$dropdown.removeEventListener('close', this.#onDropdownClose)
+    this.#$dropdown.removeEventListener('-change', this.#onValueChange)
+    this.#$dropdown.removeEventListener('-close', this.#onDropdownClose)
     this.#$button.removeEventListener('click', this.#onDropdownClick)
     this.#$label.removeEventListener('click', this.#onLabelClick)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -152,6 +155,10 @@ defineCustomElement('sinch-select', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (newVal === oldVal) {
+      return
+    }
+
     switch (name) {
       case 'value': {
         updateAttribute(this.#$dropdown, 'value', newVal)
@@ -246,11 +253,11 @@ defineCustomElement('sinch-select', class extends NectaryElement {
   }
 
   #onValueChange = (e: Event) => {
+    const detail = (e as CustomEvent).detail
+
     this.#$dropdown.open = false
-    this.dispatchEvent(new CustomEvent('change', {
-      detail: (e as CustomEvent).detail,
-      bubbles: true,
-    }))
+    this.dispatchEvent(new CustomEvent('change', { detail, bubbles: true }))
+    this.dispatchEvent(new CustomEvent('-change', { detail }))
   }
 
   #getOptionWithValue(value: string): TSinchSelectOptionElement | null {
@@ -273,6 +280,10 @@ defineCustomElement('sinch-select', class extends NectaryElement {
 
   #onDropdownClose = () => {
     this.#$dropdown.open = false
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 
   focus() {

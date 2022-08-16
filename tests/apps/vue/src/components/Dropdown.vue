@@ -5,8 +5,8 @@
     :orientation="orientation"
     :maxvisibleitems="maxVisibleItems"
     :value="value"
-    @close="onClose"
-    @change="onChange"
+    @--close="onClose"
+    @--change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
     <sinch-button

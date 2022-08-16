@@ -53,16 +53,18 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
     this.setAttribute('role', 'listbox')
 
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange)
-    this.addEventListener('close', this.#onReactClose)
+    this.addEventListener('-close', this.#onCloseReactHandler)
+    this.addEventListener('-change', this.#onChangeReactHandler)
   }
 
   disconnectedCallback() {
     this.#$optionSlot.removeEventListener('slotchange', this.#onOptionSlotChange)
-    this.removeEventListener('close', this.#onReactClose)
+    this.removeEventListener('-close', this.#onCloseReactHandler)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
-    return ['open', 'value', 'orientation', 'maxvisibleitems']
+    return ['open', 'value', 'orientation', 'maxvisibleitems', 'multiple']
   }
 
   get nodeName() {
@@ -114,20 +116,30 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'open': {
         updateAttribute(this.#$popover, 'open', newVal)
 
         if (isAttrTrue(newVal)) {
-          this.#onOpen()
+          this.#selectOption(this.#getOptionWithValue(getFirstCsvValue(this.value)) ?? this.#getFirstOption())
           this.#$popover.addEventListener('keydown', this.#onListboxKeyDown)
           this.#$listbox.addEventListener('click', this.#onListboxClick)
-          this.#$popover.addEventListener('close', this.#onClose)
+          this.#$popover.addEventListener('-close', this.#onClose)
         } else {
           this.#$popover.removeEventListener('keydown', this.#onListboxKeyDown)
           this.#$listbox.removeEventListener('click', this.#onListboxClick)
-          this.#$popover.removeEventListener('close', this.#onClose)
+          this.#$popover.removeEventListener('-close', this.#onClose)
         }
+
+        break
+      }
+
+      case 'multiple': {
+        this.#onValueChange(this.value)
 
         break
       }
@@ -161,10 +173,12 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
   #onListboxClick = (e: Event) => {
     const $elem = (e.target) as TDropdownOption
 
-    if (!$elem.disabled) {
-      e.stopPropagation()
-      this.#dispatchChangeEvent($elem)
+    if (getBooleanAttribute($elem, 'disabled')) {
+      return
     }
+
+    e.stopPropagation()
+    this.#dispatchChangeEvent($elem)
   }
 
   #onListboxKeyDown = (e: KeyboardEvent) => {
@@ -208,7 +222,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
       for (const $option of this.#getOptionElements()) {
         const isChecked = !getBooleanAttribute($option, 'disabled') && values.has(getAttribute($option, 'value', ''))
 
-        updateBooleanAttribute($option, 'checked', isChecked)
+        updateBooleanAttribute($option, 'data-checked', isChecked)
       }
     } else {
       const value = getFirstCsvValue(csv)
@@ -216,7 +230,7 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
       for (const $option of this.#getOptionElements()) {
         const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
 
-        updateBooleanAttribute($option, 'checked', isChecked)
+        updateBooleanAttribute($option, 'data-checked', isChecked)
       }
     }
   }
@@ -314,28 +328,31 @@ defineCustomElement('sinch-dropdown', class extends NectaryElement {
 
     const value = $opt.value
     const result = this.multiple
-      ? updateCsv(this.value, value, !$opt.checked)
+      ? updateCsv(this.value, value, !getBooleanAttribute($opt, 'data-checked'))
       : value
 
     this.dispatchEvent(
       new CustomEvent('change', { detail: result, bubbles: true })
     )
-  }
 
-  #onOpen() {
-    const $opt = this.#getOptionWithValue(getFirstCsvValue(this.value))
-
-    this.#selectOption($opt ?? this.#getFirstOption())
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: result })
+    )
   }
 
   #onClose = () => {
     this.dispatchEvent(
-      new CustomEvent('close', { bubbles: true })
+      new CustomEvent('-close')
     )
   }
 
-  #onReactClose = () => {
+  #onCloseReactHandler = (e: Event) => {
     getReactEventHandler(this, 'onClose')?.()
+    getReactEventHandler(this, 'on-close')?.(e)
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

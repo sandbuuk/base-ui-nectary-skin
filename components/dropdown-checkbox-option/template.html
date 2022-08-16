@@ -54,12 +54,12 @@
   fill: var(--sinch-color-snow-100);
 }
 
-:host([checked]:not([checked="false"])) #icon-container::before {
+:host([data-checked]) #icon-container::before {
   background-color: var(--sinch-color-tropical-500);
   border-color: var(--sinch-color-tropical-500);
 }
 
-:host([checked]:not([checked="false"])) #icon-checkmark {
+:host([data-checked]) #icon-checkmark {
   opacity: 1;
 }
 

@@ -9,16 +9,12 @@ type TRadio = {
 
 export const Radio: FC<TRadio> = ({ search }) => {
   const [value, setValue] = useState('')
-  const onChange = useMemo(() =>
-    (search.get('uncontrolled') === null
-      ? (e: any) => {
-        const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
-        window.dispatchEvent(new CustomEvent('sinch-radio-change', { detail: value }))
-        setValue(value)
-      }
-      : () => {}),
-  [search, setValue])
+    window.dispatchEvent(new CustomEvent('sinch-radio-change', { detail: value }))
+    setValue(value)
+  }
   const options = useMemo(() => {
     const data = search.get('options')
 
@@ -46,7 +42,7 @@ export const Radio: FC<TRadio> = ({ search }) => {
   return (
     <sinch-radio
       value={value}
-      onChange={onChange}
+      on-change={onChange}
       aria-label="Radio"
     >
       {options}

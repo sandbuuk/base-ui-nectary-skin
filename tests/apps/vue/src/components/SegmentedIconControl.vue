@@ -1,5 +1,5 @@
 <template>
-  <sinch-segmented-icon-control :multiple="isMultiple" :value="value" @change="onChange">
+  <sinch-segmented-icon-control :multiple="isMultiple" :value="value" @--change="onChange">
     <sinch-segmented-icon-control-option value="1">
       <sinch-icon-format-align-right slot="icon"></sinch-icon-format-align-right>
     </sinch-segmented-icon-control-option>

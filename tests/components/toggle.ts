@@ -197,7 +197,7 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
     async *fn({ $, page }) {
       const testCheckbox = testCustomEvent(page, $)
 
-      await testCheckbox('change', 'sinch-toggle-change', true)
+      await testCheckbox('-change', 'sinch-toggle-change', true)
       await testCheckbox('focusin', 'sinch-toggle-focus')
       await testCheckbox('focusout', 'sinch-toggle-blur')
     },

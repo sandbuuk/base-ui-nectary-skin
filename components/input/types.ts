@@ -25,6 +25,8 @@ export type TSinchInputElement = HTMLElement & {
   selectionDirection: 'forward' | 'backward' | 'none' | null,
   /** Change value event */
   addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
+  /** Change value event */
+  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   /** Text field type, `text` by default */
   setAttribute(name: 'type', value: TSinchInputType): void,
   /** Value */
@@ -63,5 +65,7 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   /** Disabled */
   disabled?: boolean,
   /** Change value handler */
-  onChange: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
+  onChange?: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
+  /** Change value handler */
+  'on-change'?: (e: CustomEvent<string>) => void,
 }

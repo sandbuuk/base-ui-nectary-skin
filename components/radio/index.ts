@@ -2,6 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getReactEventHandler,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
@@ -23,15 +24,23 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    shadowRoot.addEventListener('keydown', this.#onOptionKeyDown)
-    shadowRoot.addEventListener('change', this.#onOptionChange)
 
     this.#$slot = shadowRoot.querySelector('slot')!
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   connectedCallback() {
     this.setAttribute('role', 'radiogroup')
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
+    this.#$slot.addEventListener('keydown', this.#onOptionKeyDown)
+    this.#$slot.addEventListener('option-change', this.#onOptionChange)
+    this.addEventListener('-change', this.#onChangeReactHandler)
+  }
+
+  disconnectedCallback() {
+    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
+    this.#$slot.removeEventListener('keydown', this.#onOptionKeyDown)
+    this.#$slot.removeEventListener('option-change', this.#onOptionChange)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -51,6 +60,10 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'value': {
         this.#onValueChange(newVal ?? '')
@@ -113,6 +126,9 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('change', { detail: value, bubbles: true })
     )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: value })
+    )
   }
 
   #getFirstOption(): TSinchRadioOptionElement | null {
@@ -165,6 +181,10 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
 
   #findSelectedOption(elements: readonly TSinchRadioOptionElement[]) {
     return elements.find((el) => el.checked) ?? null
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

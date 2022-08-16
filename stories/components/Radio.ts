@@ -7,11 +7,11 @@ export default {
   title: 'Components/Radio',
   argTypes: {
     value: { control: 'text' },
-    onChange: { action: 'onChange' },
+    'on-change': { description: '' },
   },
 } as Meta
 
-const Template = (innerHTML: string): Story => ({ onChange }) => {
+const Template = (innerHTML: string): Story => () => {
   const [{ value }, updateArgs] = useArgs()
   const radioRef = useRef<HTMLElementTagNameMap['sinch-radio'] | null>(null)
 
@@ -20,8 +20,7 @@ const Template = (innerHTML: string): Story => ({ onChange }) => {
 
     $radio.innerHTML = innerHTML
 
-    $radio.addEventListener('change', (e) => {
-      onChange(e.detail)
+    $radio.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
@@ -52,7 +51,7 @@ Radio.parameters = {
   docs: {
     source: {
       code: `
-<sinch-radio value={value} onChange={setValue}>
+<sinch-radio value={value} on-change={setValue}>
   <sinch-radio-option value="1" text="Option 1"></sinch-radio-option>
   <sinch-radio-option value="2" text="Option 2"></sinch-radio-option>
   <sinch-radio-option value="3" text="Option 3"></sinch-radio-option>

@@ -1,9 +1,9 @@
-import '../stop-events'
 import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
   getLiteralAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   setClass,
@@ -59,6 +59,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$input.addEventListener('keydown', this.#onSelectionChange)
     this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange)
     this.#$rightSlot.addEventListener('slotchange', this.#onRightSlotChange)
+    this.addEventListener('-change', this.#onChangeReactHandler)
 
     this.#onIconSlotChange()
     this.#onRightSlotChange()
@@ -71,6 +72,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$input.removeEventListener('keydown', this.#onSelectionChange)
     this.#$iconSlot.removeEventListener('slotchange', this.#onIconSlotChange)
     this.#$rightSlot.removeEventListener('slotchange', this.#onRightSlotChange)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -294,6 +296,12 @@ defineCustomElement('sinch-input', class extends NectaryElement {
           bubbles: true,
         })
       )
+
+      this.dispatchEvent(
+        new CustomEvent('-change', {
+          detail: nextValue,
+        })
+      )
     }
   }
 
@@ -303,6 +311,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   #onRightSlotChange = () => {
     setClass(this.#$rightWrapper, 'empty', this.#$rightSlot.assignedElements().length === 0)
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

@@ -5,11 +5,13 @@ export type TSinchSegmentedIconControlElement = HTMLElement & {
   value: string,
   multiple: boolean,
   addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
+  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
 }
 
 export type TSinchSegmentedIconControlReact = TSinchElementReact<TSinchSegmentedIconControlElement> & {
   value: string,
   multiple?: boolean,
   'aria-label': string,
-  onChange: (event: SyntheticEvent<TSinchSegmentedIconControlElement, CustomEvent<string>>) => void,
+  onChange?: (event: SyntheticEvent<TSinchSegmentedIconControlElement, CustomEvent<string>>) => void,
+  'on-change'?: (e: CustomEvent<string>) => void,
 }

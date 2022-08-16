@@ -178,7 +178,7 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-date-picker-change', 'X')
+      await testInput('-change', 'sinch-date-picker-change', 'X')
     },
   },
   {

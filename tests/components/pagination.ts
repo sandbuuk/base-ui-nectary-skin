@@ -166,7 +166,7 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-pagination-change', 10)
+      await testInput('-change', 'sinch-pagination-change', 10)
       await testInput('focusin', 'sinch-pagination-focus')
       await testInput('focusout', 'sinch-pagination-blur')
     },

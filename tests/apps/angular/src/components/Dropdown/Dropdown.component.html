@@ -28,8 +28,8 @@
   (focusin)="onFocus()"
   (focusout)="onBlur()"
   [value]="value"
-  (close)="onClose()"
-  (change)="onChange($event)">
+  (-close)="onClose()"
+  (-change)="onChange($event)">
   <sinch-button
     slot="target"
     type="cta-secondary"

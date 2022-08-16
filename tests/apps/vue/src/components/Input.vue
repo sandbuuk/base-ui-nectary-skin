@@ -8,7 +8,7 @@
     :disabled="isDisabled"
     :type="type"
     :value="value"
-    @change="onChange"
+    @--change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
     <sinch-icon-search v-if="hasIcon" slot="icon"></sinch-icon-search>

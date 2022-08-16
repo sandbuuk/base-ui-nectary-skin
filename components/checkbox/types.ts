@@ -8,6 +8,7 @@ export type TSinchCheckboxElement = HTMLElement & {
   invalid: boolean,
   text: string | null,
   addEventListener(type: 'change', listener: (e: CustomEvent<boolean>) => void): void,
+  addEventListener(type: '-change', listener: (e: CustomEvent<boolean>) => void): void,
   setAttribute(name: 'checked', value: ''): void,
   setAttribute(name: 'indeterminate', value: ''): void,
   setAttribute(name: 'disabled', value: ''): void,
@@ -22,5 +23,6 @@ export type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
   invalid?: boolean,
   text?: string,
   'aria-label': string,
-  onChange: (event: SyntheticEvent<TSinchCheckboxElement, CustomEvent<boolean>>) => void,
+  onChange?: (event: SyntheticEvent<TSinchCheckboxElement, CustomEvent<boolean>>) => void,
+  'on-change'?: (e: CustomEvent<boolean>) => void,
 }

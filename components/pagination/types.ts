@@ -8,6 +8,7 @@ export type TSinchPaginationElement = HTMLElement & {
   readonly nextButtonRect: TRect,
   nthButtonRect(index: number): TRect | null,
   addEventListener(type: 'change', listener: (e: CustomEvent<number>) => void): void,
+  addEventListener(type: '-change', listener: (e: CustomEvent<number>) => void): void,
   setAttribute(name: 'value', value: string): void,
   setAttribute(name: 'max', value: string): void,
 }
@@ -15,5 +16,6 @@ export type TSinchPaginationElement = HTMLElement & {
 export type TSinchPaginationReact = TSinchElementReact<TSinchPaginationElement> & {
   value: number,
   max: number,
-  onChange: (event: SyntheticEvent<TSinchPaginationElement, CustomEvent<number>>) => void,
+  onChange?: (event: SyntheticEvent<TSinchPaginationElement, CustomEvent<number>>) => void,
+  'on-change': (e: CustomEvent<number>) => void,
 }

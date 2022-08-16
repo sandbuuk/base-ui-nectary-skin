@@ -9,6 +9,7 @@ import '../text'
 import {
   defineCustomElement,
   getAttribute,
+  getReactEventHandler,
   getRect,
   NectaryElement,
   setClass,
@@ -100,6 +101,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     this.#$prevYear.addEventListener('click', this.#onPrevYearClick)
     this.#$nextYear.addEventListener('click', this.#onNextYearClick)
     this.#$month.addEventListener('click', this.#onDateClick)
+    this.addEventListener('-change', this.#onChangeReactHandler)
 
     // Dont assert here
     // Angular sets attributes after connect
@@ -111,6 +113,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     this.#$prevYear.removeEventListener('click', this.#onPrevYearClick)
     this.#$nextYear.removeEventListener('click', this.#onNextYearClick)
     this.#$month.removeEventListener('click', this.#onDateClick)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -268,40 +271,44 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     return getRect($el)
   }
 
-  #onPrevMonthClick = () => {
+  #onPrevMonthClick = (e: Event) => {
+    e.stopPropagation()
     decMonth(this.#date!, this.#minDate!)
 
     this.#render()
   }
 
-  #onNextMonthClick = () => {
+  #onNextMonthClick = (e: Event) => {
+    e.stopPropagation()
     incMonth(this.#date!, this.#maxDate!)
 
     this.#render()
   }
 
-  #onPrevYearClick = () => {
+  #onPrevYearClick = (e: Event) => {
+    e.stopPropagation()
     decYear(this.#date!, this.#minDate!)
 
     this.#render()
   }
 
-  #onNextYearClick = () => {
+  #onNextYearClick = (e: Event) => {
+    e.stopPropagation()
     incYear(this.#date!, this.#maxDate!)
 
     this.#render()
   }
 
   #onDateClick = (e: Event) => {
+    e.stopPropagation()
+
     const dateIso = (e.target as HTMLElement).getAttribute('data-date')
 
     if (dateIso === null || dateIso.length === 0) {
       return
     }
 
-    this.dispatchEvent(
-      new CustomEvent('change', { detail: dateIso, bubbles: true })
-    )
+    this.#dispatchChangeEvent(dateIso)
   }
 
   #render() {
@@ -362,6 +369,19 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
       setClass(this.#$weeks[wi], 'empty', isEmptyWeek)
     })
+  }
+
+  #dispatchChangeEvent(value: string) {
+    this.dispatchEvent(
+      new CustomEvent('change', { detail: value, bubbles: true })
+    )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: value })
+    )
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

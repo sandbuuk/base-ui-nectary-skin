@@ -9,7 +9,7 @@
   (focusin)="onFocus()"
   (focusout)="onBlur()"
   [value]="value"
-  (change)="onChange($event)">
+  (-change)="onChange($event)">
   <sinch-help-tooltip *ngIf="tooltipText != null" [text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
   <sinch-select-option value="1" text="Option 1 value" slot="option">
     <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>

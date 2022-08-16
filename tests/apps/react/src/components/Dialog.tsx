@@ -10,6 +10,9 @@ export const Dialog: FC<TDialog> = ({ search }) => {
   const title: string = search.get('title') ?? ''
   const content = search.get('content')
   const buttons = search.get('buttons') !== null
+  const onClose = () => {
+    window.dispatchEvent(new CustomEvent('sinch-dialog-close'))
+  }
 
   return (
     <sinch-dialog
@@ -17,9 +20,7 @@ export const Dialog: FC<TDialog> = ({ search }) => {
       caption={title}
       aria-label={title}
       close-aria-label="Close dialog"
-      onClose={() => {
-        window.dispatchEvent(new CustomEvent('sinch-dialog-close'))
-      }}
+      on-close={onClose}
     >
       {content !== null && <section slot="content">{content}</section>}
       {buttons && (

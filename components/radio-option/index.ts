@@ -116,7 +116,7 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
 
     this.#$input.checked = false
     this.dispatchEvent(
-      new CustomEvent('change', { bubbles: true, detail: this.value })
+      new CustomEvent('option-change', { bubbles: true, detail: this.value })
     )
   }
 })

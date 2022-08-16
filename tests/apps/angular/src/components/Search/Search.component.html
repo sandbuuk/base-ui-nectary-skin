@@ -3,7 +3,7 @@
   [attr.open]="isOpen"
   [attr.maxVisibleItems]="maxVisibleItems"
   aria-label="Search"
-  (close)="onClose()">
+  (-close)="onClose()">
   <sinch-input
     slot="target"
     aria-label="Search Input"
@@ -14,9 +14,9 @@
     [attr.invalidtext]="invalidText"
     [attr.disabled]="isDisabled"
     [value]="value"
-    (change)="onChange($event)"
-    (focusin)="onFocus()"
-    (focusout)="onBlur()">
+    (-change)="onChange($event)"
+    (focus)="onFocus()"
+    (blur)="onBlur()">
     <sinch-icon-search slot="icon"></sinch-icon-search>
     <sinch-icon-button
       slot="right"

@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getIntegerAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -46,6 +47,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart)
     this.#$input.addEventListener('mousedown', this.#onSelectionChange)
     this.#$input.addEventListener('keydown', this.#onSelectionChange)
+    this.addEventListener('-change', this.#onChangeReactHandler)
   }
 
   disconnectedCallback() {
@@ -53,6 +55,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#$input.removeEventListener('compositionstart', this.#onCompositionStart)
     this.#$input.removeEventListener('mousedown', this.#onSelectionChange)
     this.#$input.removeEventListener('keydown', this.#onSelectionChange)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -285,7 +288,16 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
           bubbles: true,
         })
       )
+      this.dispatchEvent(
+        new CustomEvent('-change', {
+          detail: nextValue,
+        })
+      )
     }
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

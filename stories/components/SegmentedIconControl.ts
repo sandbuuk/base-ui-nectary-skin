@@ -12,11 +12,11 @@ export default {
   argTypes: {
     value: { control: 'text' },
     multiple: { control: 'boolean' },
-    onChange: { action: 'onChange' },
+    'on-change': { description: '' },
   },
 } as Meta
 
-const Template = (innerHTML: string): Story => ({ onChange }) => {
+const Template = (innerHTML: string): Story => () => {
   const [{ value, multiple }, updateArgs] = useArgs()
   const controlRef = useRef<HTMLElementTagNameMap['sinch-segmented-icon-control'] | null>(null)
 
@@ -25,8 +25,7 @@ const Template = (innerHTML: string): Story => ({ onChange }) => {
 
     $tabs.innerHTML = innerHTML
 
-    $tabs.addEventListener('change', (e) => {
-      onChange(e.detail)
+    $tabs.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
@@ -68,7 +67,7 @@ SegmentedIconControl.args = {
 SegmentedIconControl.parameters = {
   docs: {
     source: {
-      code: `<sinch-segmented-icon-control multiple value={value} onChange={setValue}>${itemsInnerHTML}</sinch-segmented-icon-control>`,
+      code: `<sinch-segmented-icon-control multiple value={value} on-change={setValue}>${itemsInnerHTML}</sinch-segmented-icon-control>`,
     },
   },
 }

@@ -150,7 +150,7 @@ test('action menu events', runScreenshotTests('sinch-action-menu', [
       })
 
       await $.evaluate((el) => {
-        el.dispatchEvent(new CustomEvent('close', { bubbles: true }))
+        el.dispatchEvent(new CustomEvent('-close'))
       })
 
       const events = await getAllEvents(page)
@@ -162,7 +162,7 @@ test('action menu events', runScreenshotTests('sinch-action-menu', [
     },
   },
   {
-    name: 'custom events',
+    name: 'native events',
     url: withModal,
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-action-menu-click', 'sinch-action-menu-close')

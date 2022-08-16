@@ -41,7 +41,6 @@ const withItems = `/accordion?width=300&options=${items}`
 const withItemsMultiple = `/accordion?width=300&multiple=true&options=${items}`
 const withSingleItem = `/accordion?width=200&options=${singleItem}`
 const withSingleItemDisabled = `/accordion?width=200&options=${singleItemDisabled}`
-const withSingleItemUncontrolled = `/accordion?width=200&uncontrolled=true&options=${singleItem}`
 const checkItems = makeAccessibilityTests(`/accordion?width=200&options=${items}`, 'sinch-accordion')
 
 test('accessibility', checkItems(async function* () {
@@ -136,14 +135,6 @@ test('accordion screenshots', runScreenshotTests('sinch-accordion', [
     },
   },
   {
-    name: 'uncontrolled click',
-    url: withSingleItemUncontrolled,
-    async *fn({ $ }) {
-      await $.locator('sinch-accordion-item').nth(0).click()
-      yield { name: 'open' }
-    },
-  },
-  {
     name: 'disabled click',
     url: withSingleItemDisabled,
     async *fn({ $ }) {
@@ -225,7 +216,7 @@ test('accordion screenshots', runScreenshotTests('sinch-accordion', [
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-accordion-change', '2')
+      await testInput('-change', 'sinch-accordion-change', '2')
     },
   },
   {

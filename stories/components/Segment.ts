@@ -26,7 +26,7 @@ const Template = (innerHTML: string = ''): Story => () => {
     segmentCollapseRef.current = $segment.querySelector('sinch-segment-collapse')
 
     if (segmentCollapseRef.current !== null) {
-      segmentCollapseRef.current.addEventListener('change', (e) => {
+      segmentCollapseRef.current.addEventListener('-change', (e) => {
         updateArgs({ collapsed: e.detail })
       })
     }
@@ -80,7 +80,7 @@ Segment.parameters = {
   <sinch-segment-collapse
     slot="collapse"
     value={isCollapsed}
-    onChange={setCollapsedState}
+    on-change={setCollapsedState}
   ></sinch-segment-collapse>${segmentInnerHTML}</sinch-segment>`,
     },
   },

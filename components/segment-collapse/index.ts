@@ -4,6 +4,7 @@ import '../icon-button'
 import {
   defineCustomElement,
   getBooleanAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   updateBooleanAttribute,
@@ -31,11 +32,13 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
-    this.#$button.addEventListener('click', this.onClick)
+    this.#$button.addEventListener('click', this.#onClick)
+    this.addEventListener('-change', this.#onChangeReactHandler)
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.onClick)
+    this.#$button.removeEventListener('click', this.#onClick)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -76,18 +79,19 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
     this.#$button.blur()
   }
 
-  onClick = (e: Event) => {
-    e.stopPropagation()
+  #onClick = () => {
+    const detail = !this.value
 
     this.dispatchEvent(
-      new CustomEvent(
-        'change',
-        {
-          detail: !this.value,
-          bubbles: true,
-        }
-      )
+      new CustomEvent('change', { detail, bubbles: true })
     )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail })
+    )
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

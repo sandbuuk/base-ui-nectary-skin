@@ -4,6 +4,7 @@ import {
   getBooleanAttribute,
   getCsvSet,
   getFirstCsvValue,
+  getReactEventHandler,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
@@ -18,7 +19,6 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement {
   #$slot: HTMLSlotElement
-  #$sh: ShadowRoot
 
   constructor() {
     super()
@@ -27,19 +27,20 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$sh = shadowRoot
     this.#$slot = shadowRoot.querySelector('slot')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'tablist')
     this.#$slot.addEventListener('slotchange', this.#onSlotChange)
-    this.#$sh.addEventListener('change', this.#onOptionChange)
+    this.#$slot.addEventListener('option-change', this.#onOptionChange)
+    this.addEventListener('-change', this.#onChangeReactHandler)
   }
 
   disconnectedCallback() {
     this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
-    this.#$sh.removeEventListener('change', this.#onOptionChange)
+    this.#$slot.removeEventListener('option-change', this.#onOptionChange)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -67,6 +68,10 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'value': {
         this.#onValueChange(newVal ?? '')
@@ -85,12 +90,15 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
 
     const $elem = (e.target) as Element
     const value = (e as CustomEvent).detail
-    const result = this.multiple
+    const detail = this.multiple
       ? updateCsv(this.value, value, !getBooleanAttribute($elem, 'checked'))
       : value
 
     this.dispatchEvent(
-      new CustomEvent('change', { detail: result, bubbles: true })
+      new CustomEvent('change', { detail, bubbles: true })
+    )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail })
     )
   }
 
@@ -112,6 +120,10 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
         updateBooleanAttribute($option, 'checked', isChecked)
       }
     }
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

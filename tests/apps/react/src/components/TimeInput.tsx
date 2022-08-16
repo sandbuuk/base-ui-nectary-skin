@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/time-picker'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/popover'
@@ -14,13 +14,13 @@ export const TimeInput: FC<TTimeInput> = ({ search }) => {
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')
   const [isoValue, setIsoValue] = useState(search.get('isovalue') ?? '')
-  const onChange = (e: SyntheticEvent<Element, CustomEvent>) => {
-    const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
     setValue(value)
   }
-  const onIsoChange = (e: SyntheticEvent<Element, CustomEvent>) => {
-    const value = e.nativeEvent.detail
+  const onIsoChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
     setValue(value)
     setOpen(false)
@@ -55,7 +55,7 @@ export const TimeInput: FC<TTimeInput> = ({ search }) => {
         disabled={isDisabled}
         aria-label="Input"
         value={value}
-        onChange={onChange}
+        on-change={onChange}
       >
         <sinch-icon-button
           slot="right"
@@ -72,7 +72,7 @@ export const TimeInput: FC<TTimeInput> = ({ search }) => {
         submit-aria-label="submit time"
         ampm={isAmpm}
         value={isoValue}
-        onChange={onIsoChange}
+        on-change={onIsoChange}
       />
     </sinch-popover>
   )

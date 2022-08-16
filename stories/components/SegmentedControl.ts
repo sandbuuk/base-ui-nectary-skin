@@ -9,11 +9,11 @@ export default {
   title: 'Components/SegmentedControl',
   argTypes: {
     value: { control: 'text' },
-    onChange: { action: 'onChange' },
+    'on-change': { description: '' },
   },
 } as Meta
 
-const Template = (innerHTML: string): Story => ({ onChange }) => {
+const Template = (innerHTML: string): Story => () => {
   const [{ value }, updateArgs] = useArgs()
   const radioRef = useRef<HTMLElementTagNameMap['sinch-segmented-control'] | null>(null)
 
@@ -22,8 +22,7 @@ const Template = (innerHTML: string): Story => ({ onChange }) => {
 
     $tabs.innerHTML = innerHTML
 
-    $tabs.addEventListener('change', (e) => {
-      onChange(e.detail)
+    $tabs.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
@@ -59,7 +58,7 @@ SegmentedControl.args = {
 SegmentedControl.parameters = {
   docs: {
     source: {
-      code: `<sinch-segmented-control value={value} onChange={setValue}>${tabsInnerHTML}</sinch-segmented-control>`,
+      code: `<sinch-segmented-control value={value} on-change={setValue}>${tabsInnerHTML}</sinch-segmented-control>`,
     },
   },
 }

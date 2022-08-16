@@ -8,6 +8,7 @@ export type TSinchToggleElement = HTMLElement & {
   disabled: boolean,
   text: string | null,
   addEventListener(type: 'change', listener: (e: CustomEvent<boolean>) => void): void,
+  addEventListener(type: '-change', listener: (e: CustomEvent<boolean>) => void): void,
   setAttribute(name: 'checked', value: ''): void,
   setAttribute(name: 'small', value: ''): void,
   setAttribute(name: 'labeled', value: ''): void,
@@ -22,5 +23,6 @@ export type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
   disabled?: boolean,
   text?: string,
   'aria-label': string,
-  onChange: (e: SyntheticEvent<TSinchToggleElement, CustomEvent<boolean>>) => void,
+  onChange?: (e: SyntheticEvent<TSinchToggleElement, CustomEvent<boolean>>) => void,
+  'on-change'?: (e: CustomEvent<boolean>) => void,
 }

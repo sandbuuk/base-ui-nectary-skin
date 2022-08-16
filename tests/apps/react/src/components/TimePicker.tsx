@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/time-picker'
 
 type TTimePicker = {
@@ -8,13 +8,11 @@ type TTimePicker = {
 
 export const TimePicker: FC<TTimePicker> = ({ search }) => {
   const [value, setValue] = useState(search.get('value') ?? '')
-  const onChange = (e: SyntheticEvent<Element, CustomEvent>) => {
-    const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
     window.dispatchEvent(new CustomEvent('sinch-time-picker-change', { detail: value }))
     setValue(value)
-
-    console.log(value)
   }
 
   const isAmpm = search.get('ampm') !== null
@@ -25,7 +23,7 @@ export const TimePicker: FC<TTimePicker> = ({ search }) => {
       submit-aria-label="submit time"
       ampm={isAmpm}
       value={value}
-      onChange={onChange}
+      on-change={onChange}
     />
   )
 }

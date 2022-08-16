@@ -13,6 +13,6 @@
   <sinch-segmented-control-option value="3" text="Option value 3"></sinch-segmented-control-option>
   <sinch-segmented-control-option value="4" text="Option value 4"></sinch-segmented-control-option>
 </ng-template>
-<sinch-segmented-control [value]="value" (change)="onChange($event)">
+<sinch-segmented-control [value]="value" (-change)="onChange($event)">
   <ng-container *ngIf="isSingleOption; then singleTemplate; else multipleTemplate"></ng-container>
 </sinch-segmented-control>
