@@ -32,5 +32,5 @@ export type TSinchPopoverReact = TSinchElementReact<TSinchPopoverElement> & {
   /** Close event handler */
   onClose?: () => void,
   /** Close event handler */
-  'on-close'?: () => void,
+  'on-close'?: (e: CustomEvent<void>) => void,
 }

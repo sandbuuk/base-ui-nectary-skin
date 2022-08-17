@@ -15,5 +15,5 @@ export type TSinchDialogReact = TSinchElementReact<TSinchDialogElement> & {
   'aria-label': string,
   'close-aria-label': string,
   onClose?: () => void,
-  'on-close'?: (event: CustomEvent<void>) => void,
+  'on-close'?: (e: CustomEvent<void>) => void,
 }
