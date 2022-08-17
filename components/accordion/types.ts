@@ -4,7 +4,6 @@ import type { SyntheticEvent } from 'react'
 export type TSinchAccordionElement = HTMLElement & {
   value: string,
   multiple: boolean,
-  addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   setAttribute(name: 'value', value: string): void,
   setAttribute(name: 'multiple', value: ''): void,

@@ -7,8 +7,8 @@
   [attr.disabled]="isDisabled"
   [attr.type]="type"
   [value]="value"
-  (focusin)="onFocus()"
-  (focusout)="onBlur()"
+  (-focus)="onFocus()"
+  (-blur)="onBlur()"
   (-change)="onChange($event)">
   <sinch-icon-search *ngIf="hasIcon" slot="icon"></sinch-icon-search>
   <sinch-help-tooltip *ngIf="tooltipText != null" [attr.text]="tooltipText" slot="tooltip"></sinch-help-tooltip>

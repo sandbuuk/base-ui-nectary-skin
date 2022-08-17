@@ -12,8 +12,6 @@ export type TSinchTimePickerElement = HTMLElement & {
   hourDigitRect(hour: number): TRect | null,
   minuteDigitRect(minute: number): TRect | null,
   /** Change value handler, return time in ISO 8601 format */
-  addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
-  /** Change value handler, return time in ISO 8601 format */
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   /** Time value in ISO 8601 format */
   setAttribute(name: 'value', value: string): void,

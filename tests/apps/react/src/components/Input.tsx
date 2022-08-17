@@ -42,8 +42,8 @@ export const Input: FC<TInput> = ({ search }) => {
       disabled={isDisabled}
       value={value}
       on-change={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-focus={onFocus}
+      on-blur={onBlur}
       aria-label="Input"
     >
       {hasIcon && (

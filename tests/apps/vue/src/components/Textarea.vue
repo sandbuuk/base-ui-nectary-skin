@@ -10,8 +10,8 @@
     :rows="rows"
     :resizable="resizable"
     @--change="onChange"
-    @focusin="onFocus"
-    @focusout="onBlur">
+    @--focus="onFocus"
+    @--blur="onBlur">
     <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-help-tooltip>
   </sinch-textarea>
 </template>

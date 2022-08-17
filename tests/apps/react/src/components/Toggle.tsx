@@ -30,8 +30,8 @@ export const Toggle: FC<TToggle> = ({ search }) => {
       labeled={isLabeled}
       checked={value}
       on-change={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-focus={onFocus}
+      on-blur={onBlur}
     />
   )
 }

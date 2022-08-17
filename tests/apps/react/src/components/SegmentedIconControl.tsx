@@ -20,6 +20,8 @@ export const SegmentedIconControl: FC<TSegmentedIconControl> = ({ search }) => {
 
     setValue(value)
   }
+  const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-segmented-icon-control-focus'))
+  const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-segmented-icon-control-focus'))
   const isMultiple = search.get('multiple') !== null
   const isSingleOption = search.get('single-option') !== null
 
@@ -30,7 +32,12 @@ export const SegmentedIconControl: FC<TSegmentedIconControl> = ({ search }) => {
       on-change={onChange}
       aria-label="segmented icon control"
     >
-      <sinch-segmented-icon-control-option value="1" aria-label="1">
+      <sinch-segmented-icon-control-option
+        value="1"
+        aria-label="1"
+        on-focus={onFocus}
+        on-blur={onBlur}
+      >
         <sinch-icon-format-align-right slot="icon"/>
       </sinch-segmented-icon-control-option>
       {!isSingleOption && (

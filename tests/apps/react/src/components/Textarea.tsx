@@ -44,8 +44,8 @@ export const Textarea: FC<TTextarea> = ({ search }) => {
       rows={rows}
       resizable={isResizable}
       on-change={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-focus={onFocus}
+      on-blur={onBlur}
       aria-label="Textarea"
     >
       {tooltip}

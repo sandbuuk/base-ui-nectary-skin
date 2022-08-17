@@ -318,8 +318,8 @@ test('button screenshots', runScreenshotTests('sinch-button', [
       const testButton = testCustomEvent(page, $)
 
       await testButton('click', 'sinch-button-click')
-      await testButton('focusin', 'sinch-button-focus')
-      await testButton('focusout', 'sinch-button-blur')
+      await testButton('-focus', 'sinch-button-focus')
+      await testButton('-blur', 'sinch-button-blur')
     },
   },
   {

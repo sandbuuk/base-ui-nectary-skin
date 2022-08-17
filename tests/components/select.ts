@@ -203,8 +203,8 @@ test('select screenshots', runScreenshotTests('sinch-select', [
       const testInput = testCustomEvent(page, $)
 
       await testInput('-change', 'sinch-select-change', 'X')
-      await testInput('focusin', 'sinch-select-focus')
-      await testInput('focusout', 'sinch-select-blur')
+      await testInput('-focus', 'sinch-select-focus')
+      await testInput('-blur', 'sinch-select-blur')
     },
   },
   {
@@ -231,6 +231,8 @@ test('select screenshots', runScreenshotTests('sinch-select', [
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-select-focus', detail: null },
+        { type: 'sinch-select-blur', detail: null },
+        { type: 'sinch-select-focus', detail: null },
         { type: 'sinch-select-change', detail: '1' },
       ])
 
@@ -241,6 +243,8 @@ test('select screenshots', runScreenshotTests('sinch-select', [
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-select-blur', detail: null },
+        { type: 'sinch-select-focus', detail: null },
         { type: 'sinch-select-change', detail: '3' },
       ])
     },

@@ -10,7 +10,6 @@ export type TSinchSearchElement = HTMLElement & {
   selectionEnd: HTMLInputElement['selectionEnd'],
   selectionDirection: HTMLInputElement['selectionDirection'],
   readonly dropdownRect: TRect,
-  addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
   setAttribute(name: 'value', value: string): void,
   setAttribute(name: 'label', value: string): void,
   setAttribute(name: 'placeholder', value: string): void,

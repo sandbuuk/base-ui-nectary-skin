@@ -11,6 +11,8 @@ export type TSinchButtonElement = HTMLElement & {
   disabled: boolean,
   /** Small */
   small: boolean,
+  addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
+  addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
   /** Type */
   setAttribute(attr: 'type', value: TSinchButtonType): void,
   /** Text content */
@@ -32,4 +34,6 @@ export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   disabled?: boolean,
   /** Small */
   small?: boolean,
+  'on-focus'?: (e: CustomEvent<void>) => void,
+  'on-blur'?: (e: CustomEvent<void>) => void,
 }

@@ -6,15 +6,15 @@
     :maxvisibleitems="maxVisibleItems"
     :value="value"
     @--close="onClose"
-    @--change="onChange"
-    @focusin="onFocus"
-    @focusout="onBlur">
+    @--change="onChange">
     <sinch-button
       slot="target"
       type="cta-secondary"
       text="Some content"
       aria-label="Button"
       @click="onOpen"
+      @--focus="onFocus"
+      @--blur="onBlur"
     ></sinch-button>
     <template v-if="isCheckbox">
       <sinch-dropdown-checkbox-option value="1" text="Option 1 value long long long" slot="option" aria-label="Option 1"></sinch-dropdown-checkbox-option>

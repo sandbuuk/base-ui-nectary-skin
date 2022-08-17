@@ -16,6 +16,8 @@ export const SegmentedControl: FC<TSegmentedControl> = ({ search }) => {
     window.dispatchEvent(new CustomEvent('sinch-segmented-control-change', { detail: value }))
     setValue(value)
   }
+  const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-segmented-control-focus'))
+  const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-segmented-control-focus'))
   const isSingleOption = search.get('single-option') !== null
 
   return (
@@ -28,6 +30,8 @@ export const SegmentedControl: FC<TSegmentedControl> = ({ search }) => {
         value="1"
         text="Option value 1"
         aria-label="1"
+        on-focus={onFocus}
+        on-blur={onBlur}
       >
         <sinch-icon-open-in-new slot="icon"/>
       </sinch-segmented-control-option>

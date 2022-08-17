@@ -34,12 +34,20 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
     this.#$input.addEventListener('input', this.#onCheckboxInput)
+    this.#$input.addEventListener('focus', this.#onCheckboxFocus)
+    this.#$input.addEventListener('blur', this.#onCheckboxBlur)
     this.addEventListener('-change', this.#onChangeReactHandler)
+    this.addEventListener('-focus', this.#onFocusReactHandler)
+    this.addEventListener('-blur', this.#onBlurReactHandler)
   }
 
   disconnectedCallback() {
     this.#$input.removeEventListener('input', this.#onCheckboxInput)
+    this.#$input.removeEventListener('focus', this.#onCheckboxFocus)
+    this.#$input.removeEventListener('blur', this.#onCheckboxBlur)
     this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.removeEventListener('-focus', this.#onFocusReactHandler)
+    this.removeEventListener('-blur', this.#onBlurReactHandler)
   }
 
   static get observedAttributes() {
@@ -143,8 +151,28 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
     )
   }
 
+  #onCheckboxFocus = () => {
+    this.dispatchEvent(
+      new CustomEvent('-focus')
+    )
+  }
+
+  #onCheckboxBlur = () => {
+    this.dispatchEvent(
+      new CustomEvent('-blur')
+    )
+  }
+
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
+  }
+
+  #onFocusReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-focus')?.(e)
+  }
+
+  #onBlurReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-blur')?.(e)
   }
 })
 

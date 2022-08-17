@@ -289,8 +289,8 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
       const testInput = testCustomEvent(page, $)
 
       await testInput('-change', 'sinch-textarea-change', 'X')
-      await testInput('focusin', 'sinch-textarea-focus')
-      await testInput('focusout', 'sinch-textarea-blur')
+      await testInput('-focus', 'sinch-textarea-focus')
+      await testInput('-blur', 'sinch-textarea-blur')
     },
   },
   {

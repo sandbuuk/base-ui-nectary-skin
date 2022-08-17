@@ -8,6 +8,7 @@ import {
   updateAttribute,
   updateLiteralAttribute,
   NectaryElement,
+  getReactEventHandler,
 } from '../utils'
 import templateHTML from './template.html'
 import { buttonTypes } from './utils'
@@ -34,6 +35,17 @@ defineCustomElement('sinch-button', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'button')
+    this.#$button.addEventListener('focus', this.#onButtonFocus)
+    this.#$button.addEventListener('blur', this.#onButtonBlur)
+    this.addEventListener('-focus', this.#onFocusReactHandler)
+    this.addEventListener('-blur', this.#onBlurReactHandler)
+  }
+
+  disconnectedCallback() {
+    this.#$button.removeEventListener('focus', this.#onButtonFocus)
+    this.#$button.removeEventListener('blur', this.#onButtonBlur)
+    this.removeEventListener('-focus', this.#onFocusReactHandler)
+    this.removeEventListener('-blur', this.#onBlurReactHandler)
   }
 
   static get observedAttributes() {
@@ -96,6 +108,22 @@ defineCustomElement('sinch-button', class extends NectaryElement {
 
   blur() {
     this.#$button.blur()
+  }
+
+  #onButtonFocus = () => {
+    this.dispatchEvent(new CustomEvent('-focus'))
+  }
+
+  #onButtonBlur = () => {
+    this.dispatchEvent(new CustomEvent('-blur'))
+  }
+
+  #onFocusReactHandler = () => {
+    getReactEventHandler(this, 'on-focus')?.()
+  }
+
+  #onBlurReactHandler = () => {
+    getReactEventHandler(this, 'on-blur')?.()
   }
 })
 

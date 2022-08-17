@@ -3,8 +3,8 @@
   [attr.text]="text"
   [attr.disabled]="isDisabled"
   [attr.small]="isSmall"
-  (focusin)="onFocus()"
-  (focusout)="onBlur()"
+  (-focus)="onFocus()"
+  (-blur)="onBlur()"
   (click)="onClick()">
   <sinch-icon-open-in-new *ngIf="hasLeftIcon" slot="left-icon"></sinch-icon-open-in-new>
   <sinch-icon-expand-more *ngIf="hasRightIcon" slot="right-icon"></sinch-icon-expand-more>

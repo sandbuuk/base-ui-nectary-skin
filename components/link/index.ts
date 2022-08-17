@@ -7,6 +7,7 @@ import {
   updateAttribute,
   NectaryElement,
   isAttrTrue,
+  getReactEventHandler,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchLinkElement, TSinchLinkReact } from './types'
@@ -28,6 +29,20 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
     this.#$anchor = shadowRoot.querySelector('a')!
     this.#$text = shadowRoot.querySelector('#content')!
+  }
+
+  connectedCallback() {
+    this.#$anchor.addEventListener('focus', this.#onAnchorFocus)
+    this.#$anchor.addEventListener('blur', this.#onAnchorBlur)
+    this.addEventListener('-focus', this.#onFocusReactHandler)
+    this.addEventListener('-blur', this.#onBlurReactHandler)
+  }
+
+  disconnectedCallback() {
+    this.#$anchor.removeEventListener('focus', this.#onAnchorFocus)
+    this.#$anchor.removeEventListener('blur', this.#onAnchorBlur)
+    this.removeEventListener('-focus', this.#onFocusReactHandler)
+    this.removeEventListener('-blur', this.#onBlurReactHandler)
   }
 
   get text() {
@@ -103,6 +118,22 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
   blur() {
     this.#$anchor.blur()
+  }
+
+  #onAnchorFocus = () => {
+    this.dispatchEvent(new CustomEvent('-focus'))
+  }
+
+  #onAnchorBlur = () => {
+    this.dispatchEvent(new CustomEvent('-blur'))
+  }
+
+  #onFocusReactHandler = () => {
+    getReactEventHandler(this, 'on-focus')?.()
+  }
+
+  #onBlurReactHandler = () => {
+    getReactEventHandler(this, 'on-blur')?.()
   }
 })
 

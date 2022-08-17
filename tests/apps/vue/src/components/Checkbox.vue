@@ -6,8 +6,8 @@
     :invalid="isInvalid"
     :checked="checked"
     @--change="onChange"
-    @focusin="onFocus"
-    @focusout="onBlur">
+    @--focus="onFocus"
+    @--blur="onBlur">
   </sinch-checkbox>
 </template>
 

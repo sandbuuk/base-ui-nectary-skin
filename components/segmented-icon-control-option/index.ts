@@ -2,6 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -31,10 +32,18 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
   connectedCallback() {
     this.setAttribute('role', 'tab')
     this.#$button.addEventListener('click', this.#onClick)
+    this.#$button.addEventListener('focus', this.#onButtonFocus)
+    this.#$button.addEventListener('blur', this.#onButtonBlur)
+    this.addEventListener('-focus', this.#onFocusReactHandler)
+    this.addEventListener('-blur', this.#onBlurReactHandler)
   }
 
   disconnectedCallback() {
     this.#$button.removeEventListener('click', this.#onClick)
+    this.#$button.removeEventListener('focus', this.#onButtonFocus)
+    this.#$button.removeEventListener('blur', this.#onButtonBlur)
+    this.removeEventListener('-focus', this.#onFocusReactHandler)
+    this.removeEventListener('-blur', this.#onBlurReactHandler)
   }
 
   static get observedAttributes() {
@@ -86,6 +95,22 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
     this.dispatchEvent(
       new CustomEvent('option-change', { detail: this.value, bubbles: true })
     )
+  }
+
+  #onButtonFocus = () => {
+    this.dispatchEvent(new CustomEvent('-focus'))
+  }
+
+  #onButtonBlur = () => {
+    this.dispatchEvent(new CustomEvent('-blur'))
+  }
+
+  #onFocusReactHandler = () => {
+    getReactEventHandler(this, 'on-focus')?.()
+  }
+
+  #onBlurReactHandler = () => {
+    getReactEventHandler(this, 'on-blur')?.()
   }
 })
 

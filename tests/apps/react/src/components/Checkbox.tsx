@@ -29,8 +29,8 @@ export const Checkbox: FC<TCheckbox> = ({ search }) => {
       invalid={isInvalid}
       checked={value}
       on-change={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-focus={onFocus}
+      on-blur={onBlur}
       aria-label="Checkbox"
     />
   )

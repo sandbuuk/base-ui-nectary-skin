@@ -48,8 +48,8 @@ export const Select: FC<TSelect> = ({ search }) => {
       value={value}
       maxVisibleItems={maxVisibleItems}
       on-change={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-focus={onFocus}
+      on-blur={onBlur}
       aria-label="Select"
     >
       {tooltip}

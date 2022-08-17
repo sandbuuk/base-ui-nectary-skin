@@ -28,8 +28,8 @@ export const Button: FC<TButton> = ({ search }) => {
       disabled={isDisabled}
       small={isSmall}
       onClick={onClick}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-focus={onFocus}
+      on-blur={onBlur}
       aria-label={text ?? 'Button'}
     >
       {hasLeftIcon && <sinch-icon-open-in-new slot="left-icon"/>}

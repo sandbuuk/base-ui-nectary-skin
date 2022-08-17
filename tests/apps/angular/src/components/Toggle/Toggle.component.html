@@ -4,7 +4,7 @@
   [attr.small]="isSmall"
   [attr.labeled]="isLabeled"
   [attr.checked]="isChecked"
-  (focusin)="onFocus()"
-  (focusout)="onBlur()"
+  (-focus)="onFocus()"
+  (-blur)="onBlur()"
   (-change)="onChange($event)">
 </sinch-toggle>

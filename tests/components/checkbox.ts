@@ -260,8 +260,8 @@ test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
       const testCheckbox = testCustomEvent(page, $)
 
       await testCheckbox('-change', 'sinch-checkbox-change', true)
-      await testCheckbox('focusin', 'sinch-checkbox-focus')
-      await testCheckbox('focusout', 'sinch-checkbox-blur')
+      await testCheckbox('-focus', 'sinch-checkbox-focus')
+      await testCheckbox('-blur', 'sinch-checkbox-blur')
     },
   },
   {

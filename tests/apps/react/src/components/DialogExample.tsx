@@ -13,6 +13,18 @@ export const DialogExample: FC<TDialog> = () => {
   const [isDialogOpen, setDialogOpen] = useState(false)
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [value, setValue] = useState('')
+  const onInputFocus = () => {
+    console.log('INPUT FOCUS')
+  }
+  const onInputBlur = () => {
+    console.log('INPUT BLUR')
+  }
+  const onButtonFocus = () => {
+    console.log('BUTTON FOCUS')
+  }
+  const onButtonBlur = () => {
+    console.log('BUTTON BLUR')
+  }
 
   return (
     <>
@@ -42,6 +54,8 @@ export const DialogExample: FC<TDialog> = () => {
           on-change={(e) => {
             setValue(e.detail)
           }}
+          on-focus={onInputFocus}
+          on-blur={onInputBlur}
         >
           <sinch-dropdown
             slot="right"
@@ -65,6 +79,8 @@ export const DialogExample: FC<TDialog> = () => {
               onClick={() => {
                 setDropdownOpen(true)
               }}
+              on-focus={onButtonFocus}
+              on-blur={onButtonBlur}
             />
             <sinch-dropdown-text-option slot="option" text="AAAAAAAAAAAAAAAAA" value="0" aria-label="Select"/>
             <sinch-dropdown-text-option slot="option" text="BBB" value="1" aria-label="Select"/>

@@ -28,8 +28,8 @@ export const Link: FC<TLink> = ({ search }) => {
         disabled={isDisabled}
         external={isExternal}
         onClick={onClick}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        on-focus={onFocus}
+        on-blur={onBlur}
       />
       {' '}
       <span>navigation</span>

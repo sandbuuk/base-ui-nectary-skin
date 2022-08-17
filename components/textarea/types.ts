@@ -14,8 +14,9 @@ export type TSinchTextareaElement = HTMLElement & {
   selectionDirection: HTMLTextAreaElement['selectionDirection'],
   rows: HTMLTextAreaElement['rows'],
   resizable: boolean,
-  addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
+  addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
+  addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
   setAttribute(name: 'value', value: string): void,
   setAttribute(name: 'label', value: string): void,
   setAttribute(name: 'placeholder', value: string): void,
@@ -40,4 +41,6 @@ export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   resizable?: boolean,
   onChange?: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
   'on-change'?: (e: CustomEvent<string>) => void,
+  'on-focus'?: (e: CustomEvent<void>) => void,
+  'on-blur'?: (e: CustomEvent<void>) => void,
 }

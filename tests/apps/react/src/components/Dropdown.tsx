@@ -53,8 +53,6 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
       orientation={orientation}
       on-change={onChange}
       on-close={onClose}
-      onFocus={onFocus}
-      onBlur={onBlur}
       aria-label="Dropdown"
     >
       <sinch-button
@@ -65,6 +63,8 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
         onClick={() => {
           setOpen(true)
         }}
+        on-focus={onFocus}
+        on-blur={onBlur}
       />
       {isCheckbox && (
         <>

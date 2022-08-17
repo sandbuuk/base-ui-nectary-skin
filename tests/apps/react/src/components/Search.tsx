@@ -83,8 +83,8 @@ export const Search: FC<TSearch> = ({ search }) => {
         invalidText={invalidText}
         placeholder={placeholderText}
         disabled={isDisabled}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        on-focus={onFocus}
+        on-blur={onBlur}
       >
         <sinch-icon-search slot="icon"/>
         <sinch-icon-button
@@ -92,12 +92,6 @@ export const Search: FC<TSearch> = ({ search }) => {
           small
           aria-label="Clear search"
           onClick={onClear}
-          onFocus={(e) => {
-            e.stopPropagation()
-          }}
-          onBlur={(e) => {
-            e.stopPropagation()
-          }}
         >
           <sinch-icon-close slot="icon"/>
         </sinch-icon-button>

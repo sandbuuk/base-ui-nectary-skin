@@ -16,8 +16,6 @@ export type TSinchDatePickerElement = HTMLElement & {
   readonly nextMonthButtonRect: TRect,
   nthButtonRect(index: number): TRect | null,
   /** Change value handler, return date in ISO 8601 format */
-  addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
-  /** Change value handler, return date in ISO 8601 format */
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   /** Date value in ISO 8601 format */
   setAttribute(name: 'value', value: string): void,

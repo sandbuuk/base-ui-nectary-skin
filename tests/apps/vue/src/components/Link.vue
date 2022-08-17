@@ -7,8 +7,8 @@
       :disabled="isDisabled"
       :external="isExternal"
       @click="onClick"
-      @focusin="onFocus"
-      @focusout="onBlur"
+      @--focus="onFocus"
+      @--blur="onBlur"
     ></sinch-link>
     <span> navigation</span>
   </div>

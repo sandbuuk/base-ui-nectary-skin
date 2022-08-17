@@ -310,8 +310,8 @@ test('input screenshots', runScreenshotTests('sinch-input', [
       const testInput = testCustomEvent(page, $)
 
       await testInput('-change', 'sinch-input-change', 'X')
-      await testInput('focusin', 'sinch-input-focus')
-      await testInput('focusout', 'sinch-input-blur')
+      await testInput('-focus', 'sinch-input-focus')
+      await testInput('-blur', 'sinch-input-blur')
     },
   },
   {
