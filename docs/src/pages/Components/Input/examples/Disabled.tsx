@@ -12,7 +12,7 @@ export const DisabledExample: FC = () => {
       placeholder="Placeholder"
       disabled
       value={state}
-      onChange={(e) => setState(e.nativeEvent.detail)}
+      on-change={(e) => setState(e.detail)}
     />
   )
 }

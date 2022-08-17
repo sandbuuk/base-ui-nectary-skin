@@ -23,14 +23,14 @@ export const OrientationExample: FC = () => {
       orientation="top-right"
       modal
       open={isOpen}
-      onClose={() => setOpen(false)}
+      on-close={() => setOpen(false)}
     >
       <sinch-button
         slot="target"
         text="Open popover"
         aria-label="Open popover"
         type="cta-secondary"
-        onClick={() => setOpen(true)}
+        on-click={() => setOpen(true)}
       />
       <div slot="content" style={contentStyles}>
         <sinch-title text="Hi!" type="s" level="3"/>
@@ -40,7 +40,7 @@ export const OrientationExample: FC = () => {
           aria-label="Close popover"
           type="cta-secondary"
           small
-          onClick={() => setOpen(false)}
+          on-click={() => setOpen(false)}
         />
       </div>
     </sinch-popover>

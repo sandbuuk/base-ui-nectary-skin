@@ -6,6 +6,6 @@ export const TypeCtaPrimaryExample: FC = () => (
     text="Click"
     aria-label="Click"
     type="cta-primary"
-    onClick={() => console.log('click')}
+    on-click={() => console.log('click')}
   />
 )

@@ -6,6 +6,6 @@ export const TypeSecondaryExample: FC = () => (
     text="Click"
     aria-label="Click"
     type="secondary"
-    onClick={() => console.log('click')}
+    on-click={() => console.log('click')}
   />
 )

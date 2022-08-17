@@ -6,6 +6,6 @@ export const TypeDestructiveExample: FC = () => (
     text="Click"
     aria-label="Click"
     type="destructive"
-    onClick={() => console.log('click')}
+    on-click={() => console.log('click')}
   />
 )

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/date-picker'
@@ -11,11 +11,11 @@ export const CompositionExample: FC = () => {
   const [value, setValue] = useState('2022-07-19')
   const [isoValue, setIsoValue] = useState('2022-07-19')
 
-  const onChange = (e: SyntheticEvent<Element, CustomEvent>) => {
-    setValue(e.nativeEvent.detail)
+  const onChange = (e: CustomEvent<string>) => {
+    setValue(e.detail)
   }
-  const onIsoChange = (e: SyntheticEvent<Element, CustomEvent>) => {
-    setValue(e.nativeEvent.detail)
+  const onIsoChange = (e: CustomEvent<string>) => {
+    setValue(e.detail)
     setOpen(false)
   }
   const onOpen = () => {
@@ -29,7 +29,7 @@ export const CompositionExample: FC = () => {
       open={isOpen}
       orientation="bottom-left"
       aria-label="Date input"
-      onClose={onClose}
+      on-close={onClose}
     >
       <sinch-input
         slot="target"
@@ -38,13 +38,13 @@ export const CompositionExample: FC = () => {
         placeholder="YYYY-MM-DD"
         additionalText="Additional text"
         value={value}
-        onChange={onChange}
+        on-change={onChange}
       >
         <sinch-icon-button
           slot="right"
           small
           aria-label="Open Date Picker"
-          onClick={onOpen}
+          on-click={onOpen}
         >
           <sinch-icon-calendar-today slot="icon"/>
         </sinch-icon-button>
@@ -56,7 +56,7 @@ export const CompositionExample: FC = () => {
         locale="en-US"
         aria-label="Date Picker"
         value={isoValue}
-        onChange={onIsoChange}
+        on-change={onIsoChange}
       />
     </sinch-popover>
   )
