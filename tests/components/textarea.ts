@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip/types'
 
 const withEmpty = '/textarea?width=200&label=Label'
@@ -308,8 +308,10 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
         { type: 'sinch-textarea-blur', detail: null },
       ])
 
-      // Necessary to normalize "type" behaviour
-      await $.click()
+      const bb = centerRect(await $.boundingBox())
+
+      await page.mouse.click(bb.x, bb.y)
+      await page.keyboard.press('End')
       await $.type('X')
 
       expect(
