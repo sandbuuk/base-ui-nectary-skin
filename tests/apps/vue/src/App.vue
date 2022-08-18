@@ -32,6 +32,7 @@
     <Tag v-if="url.pathname === '/tag'" :search="url.searchParams"/>
     <Text v-if="url.pathname === '/text'" :search="url.searchParams"/>
     <Textarea v-if="url.pathname === '/textarea'" :search="url.searchParams"/>
+    <TileControl v-if="url.pathname === '/tile-control'" :search="url.searchParams"/>
     <TimePicker v-if="url.pathname === '/time-picker'" :search="url.searchParams"/>
     <Title v-if="url.pathname === '/title'" :search="url.searchParams"/>
     <Toggle v-if="url.pathname === '/toggle'" :search="url.searchParams"/>
@@ -73,6 +74,7 @@ import Tabs from './components/Tabs.vue'
 import Tag from './components/Tag.vue'
 import Text from './components/Text.vue'
 import Textarea from './components/Textarea.vue'
+import TileControl from './components/TileControl.vue'
 import TimePicker from './components/TimePicker.vue'
 import Title from './components/Title.vue'
 import Toggle from './components/Toggle.vue'
@@ -139,6 +141,7 @@ export default {
     Tag,
     Text,
     Textarea,
+    TileControl,
     TimePicker,
     Title,
     Toggle,

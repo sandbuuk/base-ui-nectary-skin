@@ -33,6 +33,7 @@ import { TabsComponent } from '../components/Tabs/Tabs.component'
 import { TagComponent } from '../components/Tag/Tag.component'
 import { TextareaComponent } from '../components/Textarea/Textarea.component'
 import { TextComponent } from '../components/Text/Text.component'
+import { TileControlComponent } from '../components/TileControl/TileControl.component'
 import { TimePickerComponent } from '../components/TimePicker/TimePicker.component'
 import { TitleComponent } from '../components/Title/Title.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
@@ -74,6 +75,7 @@ import { AppComponent } from './app.component'
     TagComponent,
     TextareaComponent,
     TextComponent,
+    TileControlComponent,
     TimePickerComponent,
     TitleComponent,
     ToggleComponent,

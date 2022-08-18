@@ -32,6 +32,7 @@ import { Tabs } from './components/Tabs'
 import { Tag } from './components/Tag'
 import { Text } from './components/Text'
 import { Textarea } from './components/Textarea'
+import { TileControl } from './components/TileControl'
 import { TimeInput } from './components/TimeInput'
 import { TimePicker } from './components/TimePicker'
 import { Title } from './components/Title'
@@ -230,6 +231,12 @@ const mapElement = (url: URL) => {
     case '/text': {
       return (
         <Text search={url.searchParams}/>
+      )
+    }
+
+    case '/tile-control': {
+      return (
+        <TileControl search={url.searchParams}/>
       )
     }
 
