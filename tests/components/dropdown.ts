@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { orientationValues } from '@sinch-engage/nectary/popover/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { expandRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withDropdown = '/dropdown'
 const withMultiple = '/dropdown?multiple=true'
@@ -22,7 +22,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'checkbox option',
     url: withCheckbox,
     async *fn({ $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $eval((el) => {
         el.setAttribute('open', '')
@@ -35,7 +35,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'radio option',
     url: withRadio,
     async *fn({ $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $eval((el) => {
         el.setAttribute('open', '')
@@ -48,7 +48,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'multiple attribute',
     url: withCheckbox,
     async *fn({ $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $eval((el) => {
         el.setAttribute('multiple', '')
@@ -68,7 +68,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'multiple property',
     url: withCheckbox,
     async *fn({ $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $eval((el) => {
         el.multiple = true
@@ -88,7 +88,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'multiple clicks',
     url: withMultiple,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $.click()
       await $.locator('sinch-dropdown-text-option').nth(0).click()
@@ -105,7 +105,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'open attribute',
     url: withDropdown,
     async *fn({ $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $eval((el) => el.removeAttribute('open'))
       yield { name: 'unset', includeRects: [await getRect()] }
@@ -117,7 +117,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'orientation attribute',
     url: withWideContent,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $.click()
 
@@ -131,7 +131,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'orientation property',
     url: withWideContent,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $.click()
 
@@ -147,7 +147,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'maxvisibleitems attribute',
     url: withDropdown,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $eval((el) => el.setAttribute('maxvisibleitems', '2'))
       await $.click()
@@ -158,7 +158,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'maxvisibleitems property',
     url: withDropdown,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $eval((el) => {
         el.maxVisibleItems = 2
@@ -171,7 +171,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'maxvisibleitems scroll',
     url: withMaxItems,
     async *fn({ $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $eval((el) => el.setAttribute('value', '3'))
       await $eval((el) => el.setAttribute('open', ''))
@@ -182,7 +182,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'value attribute',
     url: withDropdown,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       // Open dropdown once
       await $.click()
@@ -210,7 +210,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'value property',
     url: withDropdown,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       // Open dropdown once
       await $.click()
@@ -250,7 +250,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'focus press-space',
     url: withDropdown,
     async *fn({ $eval, page }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await page.keyboard.press('Tab')
       await page.keyboard.press('Space')
@@ -268,7 +268,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'focus press-enter',
     url: withDropdown,
     async *fn({ $eval, page }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await page.keyboard.press('Tab')
       await page.keyboard.press('Enter')
@@ -286,7 +286,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
     name: 'keyboard',
     url: withDropdown,
     async *fn({ $, $eval }) {
-      const getRect = async () => expandRect(await $eval((el) => el.dropdownRect), 6)
+      const getRect = () => $eval((el) => el.dropdownRect)
 
       await $.click()
 
