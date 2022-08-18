@@ -3,9 +3,26 @@ import HtmlPlugin from 'html-webpack-plugin'
 import remarkGfm from 'remark-gfm'
 import remarkToc from 'remark-toc'
 import webpack from 'webpack'
+import type { TransformOptions as TBabelOptions } from '@babel/core'
 import type { Configuration } from 'webpack'
 
 const PORT = 5000
+
+const BabelOptions: TBabelOptions = {
+  babelrc: false,
+  compact: false,
+  presets: [
+    [
+      '@babel/preset-env',
+      { modules: false },
+    ],
+    '@babel/preset-typescript',
+    [
+      '@babel/preset-react',
+      { runtime: 'automatic' },
+    ],
+  ],
+}
 
 const config: Configuration = {
   mode: 'development',
@@ -30,34 +47,22 @@ const config: Configuration = {
     },
     rules: [
       {
-        test: /\.html$/,
-        exclude: /node_modules/,
-        use: ['raw-loader', '@saas/html-minify-loader'],
-      },
-      {
-        test: /\.[jt]sx?$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: {
-          babelrc: false,
-          compact: false,
-          presets: [
-            [
-              '@babel/preset-env',
-              { modules: false },
-            ],
-            '@babel/preset-typescript',
-            [
-              '@babel/preset-react',
-              { runtime: 'automatic' },
-            ],
-          ],
-        },
+        options: BabelOptions,
       },
       {
-        test: /\/pages\/Components\/.+?\/examples\/.+?\.tsx$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
+        resourceQuery: '?example',
         loader: '@saas/example-code-loader',
+      },
+      {
+        test: /\/types\.ts$/,
+        exclude: /node_modules/,
+        resourceQuery: '?api',
+        loader: '@saas/types-to-mdx-loader',
       },
       {
         test: /\.mdx?$/,
@@ -65,21 +70,7 @@ const config: Configuration = {
         use: [
           {
             loader: 'babel-loader',
-            options: {
-              babelrc: false,
-              compact: false,
-              presets: [
-                [
-                  '@babel/preset-env',
-                  { modules: false },
-                ],
-                '@babel/preset-typescript',
-                [
-                  '@babel/preset-react',
-                  { runtime: 'automatic' },
-                ],
-              ],
-            },
+            options: BabelOptions,
           },
           {
             loader: '@mdx-js/loader',
@@ -89,6 +80,15 @@ const config: Configuration = {
             },
           },
         ],
+      },
+      {
+        test: /\.(gif|jpg|png)$/,
+        loader: 'file-loader',
+      },
+      {
+        test: /\.html$/,
+        exclude: /node_modules/,
+        use: ['raw-loader', '@saas/html-minify-loader'],
       },
       {
         test: /\.css$/,
