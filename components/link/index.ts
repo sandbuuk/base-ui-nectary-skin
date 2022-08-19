@@ -77,6 +77,14 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     return getBooleanAttribute(this, 'external')
   }
 
+  set preventDefault(isPrevented: boolean) {
+    updateBooleanAttribute(this, 'preventdefault', isPrevented)
+  }
+
+  get preventDefault() {
+    return getBooleanAttribute(this, 'preventdefault')
+  }
+
   static get observedAttributes() {
     return ['text', 'href', 'external', 'disabled']
   }
@@ -119,6 +127,10 @@ defineCustomElement('sinch-link', class extends NectaryElement {
   blur() {
     this.#$anchor.blur()
   }
+
+    if (this.preventDefault) {
+      e.preventDefault()
+    }
 
   #onAnchorFocus = () => {
     this.dispatchEvent(new CustomEvent('-focus'))
