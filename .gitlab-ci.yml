@@ -28,7 +28,7 @@ lint:
   before_script:
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install
+    - pnpm install --frozen-lockfile
   script:
     - pnpm lint
 
