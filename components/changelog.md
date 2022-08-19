@@ -1,3 +1,11 @@
+## v0.35.0 (2022-08-19)
+
+* ➕ add `sinch-tile-control` component
+* ➕ add `preventDefault` attribute to `sinch-link`
+* ➕ emit `-change`, `-close`, `-focus`, `-blur` and `-click` events
+* ➕ deprecate `size` attribute in branded and channel icons in favor of `--sinch-size-icon` CSS var
+* 🐞 fix margins in `sinch-textarea`
+
 ## v0.34.0 (2022-08-12)
 
 * ➕ add `sinch-horizontal-stepper` component
