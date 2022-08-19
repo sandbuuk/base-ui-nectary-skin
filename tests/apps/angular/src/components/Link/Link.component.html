@@ -1,13 +1,14 @@
 <div id="link-wrapper">
   <span>Line with </span>
   <sinch-link
+    preventdefault
     [attr.href]="href"
     [attr.text]="text"
     [attr.disabled]="isDisabled"
     [attr.external]="isExternal"
-    (focusin)="onFocus()"
-    (focusout)="onBlur()"
-    (click)="onClick($event)"
+    (-focus)="onFocus()"
+    (-blur)="onBlur()"
+    (-click)="onClick($event)"
   ></sinch-link>
   <span> navigation</span>
 </div>

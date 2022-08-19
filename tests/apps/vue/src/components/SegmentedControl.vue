@@ -1,5 +1,5 @@
 <template>
-  <sinch-segmented-control :value="value" @change="onChange">
+  <sinch-segmented-control :value="value" @--change="onChange">
     <sinch-segmented-control-option value="1" text="Option value 1">
       <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
     </sinch-segmented-control-option>

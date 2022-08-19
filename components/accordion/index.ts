@@ -4,6 +4,7 @@ import {
   getBooleanAttribute,
   getCsvSet,
   getFirstCsvValue,
+  getReactEventHandler,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
@@ -26,10 +27,8 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
     const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    shadowRoot.addEventListener('change', this.#onOptionChange)
 
     this.#$slot = shadowRoot.querySelector('slot')!
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   static get observedAttributes() {
@@ -38,6 +37,15 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('aria-label', 'accordion')
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
+    this.#$slot.addEventListener('option-change', this.#onOptionChange)
+    this.addEventListener('-change', this.#onChangeReactHandler)
+  }
+
+  disconnectedCallback() {
+    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
+    this.#$slot.removeEventListener('option-change', this.#onOptionChange)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   get nodeName() {
@@ -61,6 +69,10 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'value': {
         this.#onValueChange(newVal ?? '')
@@ -80,11 +92,14 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
     const $elem = e.target as TSinchAccordionItemElement
     const value = (e as CustomEvent).detail
     const result = this.multiple
-      ? updateCsv(this.value, value, !getBooleanAttribute($elem, 'checked'))
-      : getBooleanAttribute($elem, 'checked') ? '' : value
+      ? updateCsv(this.value, value, !getBooleanAttribute($elem, 'data-checked'))
+      : getBooleanAttribute($elem, 'data-checked') ? '' : value
 
     this.dispatchEvent(
       new CustomEvent('change', { detail: result, bubbles: true })
+    )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: result })
     )
   }
 
@@ -95,7 +110,7 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
       for (const $option of this.#$slot.assignedElements()) {
         const isChecked = !getBooleanAttribute($option, 'disabled') && values.has(getAttribute($option, 'value', ''))
 
-        updateBooleanAttribute($option, 'checked', isChecked)
+        updateBooleanAttribute($option, 'data-checked', isChecked)
       }
     } else {
       const value = getFirstCsvValue(csv)
@@ -103,9 +118,13 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
       for (const $option of this.#$slot.assignedElements()) {
         const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
 
-        updateBooleanAttribute($option, 'checked', isChecked)
+        updateBooleanAttribute($option, 'data-checked', isChecked)
       }
     }
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

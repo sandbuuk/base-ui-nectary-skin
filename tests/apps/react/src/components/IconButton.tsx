@@ -18,9 +18,9 @@ export const IconButton: FC<TIconButton> = ({ search }) => {
   return (
     <sinch-icon-button
       disabled={isDisabled}
-      onClick={onClick}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-click={onClick}
+      on-focus={onFocus}
+      on-blur={onBlur}
       aria-label="Button"
     >
       {!hasSpinner && <sinch-icon-help-outline slot="icon"/>}

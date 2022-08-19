@@ -6,6 +6,6 @@ export const TypeCtaSecondaryExample: FC = () => (
     text="Click"
     aria-label="Click"
     type="cta-secondary"
-    onClick={() => console.log('click')}
+    on-click={() => console.log('click')}
   />
 )

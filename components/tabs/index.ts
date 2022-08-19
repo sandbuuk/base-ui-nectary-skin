@@ -2,6 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getReactEventHandler,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
@@ -27,15 +28,23 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
     const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    shadowRoot.addEventListener('keydown', this.#onOptionKeyDown)
-    shadowRoot.addEventListener('change', this.#onOptionChange)
 
     this.#$slot = shadowRoot.querySelector('slot')!
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
   }
 
   connectedCallback() {
     this.setAttribute('role', 'tablist')
+    this.#$slot.addEventListener('keydown', this.#onOptionKeyDown)
+    this.#$slot.addEventListener('option-change', this.#onOptionChange)
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
+    this.addEventListener('-change', this.#onChangeReactHandler)
+  }
+
+  disconnectedCallback() {
+    this.#$slot.removeEventListener('keydown', this.#onOptionKeyDown)
+    this.#$slot.removeEventListener('option-change', this.#onOptionChange)
+    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
   static get observedAttributes() {
@@ -117,6 +126,9 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('change', { detail: value, bubbles: true })
     )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: value })
+    )
   }
 
   #getFirstOption() {
@@ -165,6 +177,10 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
 
   #getEnabledRadioElements(): TSinchTabsOptionElement[] {
     return (this.#$slot.assignedElements()as TSinchTabsOptionElement[]).filter((opt) => opt.disabled !== true)
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
   }
 })
 

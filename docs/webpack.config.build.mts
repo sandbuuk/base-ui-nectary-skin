@@ -6,11 +6,29 @@ import remarkGfm from 'remark-gfm'
 import remarkToc from 'remark-toc'
 import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
-import type { Configuration } from 'webpack'
+import type { TransformOptions as TBabelOptions } from '@babel/core'
+import type { Configuration as TWebpackConfig } from 'webpack'
 
 const NODE_MODULES_REGEXP = /[\\/]node_modules[\\/]/
 
-const config: Configuration = {
+const BabelOptions: TBabelOptions = {
+  babelrc: false,
+  compact: false,
+  presets: [
+    [
+      '@babel/preset-env',
+      { modules: false },
+    ],
+    '@babel/preset-typescript',
+    [
+      '@babel/preset-react',
+      { runtime: 'automatic' },
+    ],
+  ],
+  shouldPrintComment: (val: string) => val.startsWith(' webpackChunkName'),
+}
+
+const config: TWebpackConfig = {
   mode: 'production',
   entry: path.resolve('./src/index.tsx'),
   output: {
@@ -33,34 +51,22 @@ const config: Configuration = {
     },
     rules: [
       {
-        test: /\.html$/,
-        exclude: NODE_MODULES_REGEXP,
-        use: ['raw-loader', '@saas/html-minify-loader'],
-      },
-      {
-        test: /\.[jt]sx?$/,
+        test: /\.tsx?$/,
         exclude: NODE_MODULES_REGEXP,
         loader: 'babel-loader',
-        options: {
-          babelrc: false,
-          compact: false,
-          presets: [
-            [
-              '@babel/preset-env',
-              { modules: false },
-            ],
-            '@babel/preset-typescript',
-            [
-              '@babel/preset-react',
-              { runtime: 'automatic' },
-            ],
-          ],
-        },
+        options: BabelOptions,
       },
       {
-        test: /\/pages\/Components\/.+?\/examples\/.+?\.tsx$/,
-        exclude: NODE_MODULES_REGEXP,
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        resourceQuery: '?example',
         loader: '@saas/example-code-loader',
+      },
+      {
+        test: /\/types\.ts$/,
+        exclude: /node_modules/,
+        resourceQuery: '?api',
+        loader: '@saas/types-to-mdx-loader',
       },
       {
         test: /\.mdx?$/,
@@ -68,22 +74,7 @@ const config: Configuration = {
         use: [
           {
             loader: 'babel-loader',
-            options: {
-              babelrc: false,
-              compact: false,
-              presets: [
-                [
-                  '@babel/preset-env',
-                  { modules: false },
-                ],
-                '@babel/preset-typescript',
-                [
-                  '@babel/preset-react',
-                  { runtime: 'automatic' },
-                ],
-              ],
-              shouldPrintComment: (val: string) => val.startsWith(' webpackChunkName'),
-            },
+            options: BabelOptions,
           },
           {
             loader: '@mdx-js/loader',
@@ -93,6 +84,19 @@ const config: Configuration = {
             },
           },
         ],
+      },
+      {
+        test: /\.(gif|jpg|png)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[hash].[ext]',
+          outputPath: 'images',
+        },
+      },
+      {
+        test: /\.html$/,
+        exclude: NODE_MODULES_REGEXP,
+        use: ['raw-loader', '@saas/html-minify-loader'],
       },
       {
         test: /\.css$/,

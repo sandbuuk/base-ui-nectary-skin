@@ -4,6 +4,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getIntegerAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -53,17 +54,27 @@ defineCustomElement('sinch-select', class extends NectaryElement {
     this.setAttribute('role', 'listbox')
     this.setAttribute('aria-haspopup', 'listbox')
 
-    this.#$dropdown.addEventListener('change', this.#onValueChange)
-    this.#$dropdown.addEventListener('close', this.#onDropdownClose)
+    this.#$dropdown.addEventListener('-change', this.#onValueChange)
+    this.#$dropdown.addEventListener('-close', this.#onDropdownClose)
     this.#$button.addEventListener('click', this.#onDropdownClick)
+    this.#$button.addEventListener('focus', this.#onButtonFocus)
+    this.#$button.addEventListener('blur', this.#onButtonBlur)
     this.#$label.addEventListener('click', this.#onLabelClick)
+    this.addEventListener('-change', this.#onChangeReactHandler)
+    this.addEventListener('-focus', this.#onFocusReactHandler)
+    this.addEventListener('-blur', this.#onBlurReactHandler)
   }
 
   disconnectedCallback() {
-    this.#$dropdown.removeEventListener('change', this.#onValueChange)
-    this.#$dropdown.removeEventListener('close', this.#onDropdownClose)
+    this.#$dropdown.removeEventListener('-change', this.#onValueChange)
+    this.#$dropdown.removeEventListener('-close', this.#onDropdownClose)
     this.#$button.removeEventListener('click', this.#onDropdownClick)
+    this.#$button.removeEventListener('focus', this.#onButtonFocus)
+    this.#$button.removeEventListener('blur', this.#onButtonBlur)
     this.#$label.removeEventListener('click', this.#onLabelClick)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.removeEventListener('-focus', this.#onFocusReactHandler)
+    this.removeEventListener('-blur', this.#onBlurReactHandler)
   }
 
   static get observedAttributes() {
@@ -152,6 +163,10 @@ defineCustomElement('sinch-select', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (newVal === oldVal) {
+      return
+    }
+
     switch (name) {
       case 'value': {
         updateAttribute(this.#$dropdown, 'value', newVal)
@@ -246,11 +261,11 @@ defineCustomElement('sinch-select', class extends NectaryElement {
   }
 
   #onValueChange = (e: Event) => {
+    const detail = (e as CustomEvent).detail
+
     this.#$dropdown.open = false
-    this.dispatchEvent(new CustomEvent('change', {
-      detail: (e as CustomEvent).detail,
-      bubbles: true,
-    }))
+    this.dispatchEvent(new CustomEvent('change', { detail, bubbles: true }))
+    this.dispatchEvent(new CustomEvent('-change', { detail }))
   }
 
   #getOptionWithValue(value: string): TSinchSelectOptionElement | null {
@@ -273,6 +288,26 @@ defineCustomElement('sinch-select', class extends NectaryElement {
 
   #onDropdownClose = () => {
     this.#$dropdown.open = false
+  }
+
+  #onButtonFocus = () => {
+    this.dispatchEvent(new CustomEvent('-focus'))
+  }
+
+  #onButtonBlur = () => {
+    this.dispatchEvent(new CustomEvent('-blur'))
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
+  }
+
+  #onFocusReactHandler = () => {
+    getReactEventHandler(this, 'on-focus')?.()
+  }
+
+  #onBlurReactHandler = () => {
+    getReactEventHandler(this, 'on-blur')?.()
   }
 
   focus() {

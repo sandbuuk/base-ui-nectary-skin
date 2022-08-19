@@ -110,7 +110,7 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
     e.stopPropagation()
 
     this.dispatchEvent(
-      new CustomEvent('change', { bubbles: true, detail: this.value })
+      new CustomEvent('option-change', { bubbles: true, detail: this.value })
     )
   }
 })

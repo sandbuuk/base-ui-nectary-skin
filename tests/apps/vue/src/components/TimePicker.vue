@@ -2,7 +2,7 @@
   <sinch-time-picker
     :ampm="ampm"
     :value="value"
-    @change="onChange"
+    @--change="onChange"
     @focusin="onFocus"
     @focusout="onBlur"
   ></sinch-time-picker>

@@ -130,9 +130,9 @@ test('icon-button events', runScreenshotTests('sinch-icon-button', [
     async *fn({ $, page }) {
       const testButton = testCustomEvent(page, $)
 
-      await testButton('click', 'sinch-icon-button-click')
-      await testButton('focusin', 'sinch-icon-button-focus')
-      await testButton('focusout', 'sinch-icon-button-blur')
+      await testButton('-click', 'sinch-icon-button-click')
+      await testButton('-focus', 'sinch-icon-button-focus')
+      await testButton('-blur', 'sinch-icon-button-blur')
     },
   },
   {

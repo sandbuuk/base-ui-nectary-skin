@@ -6,10 +6,10 @@
   [attr.placeholder]="placeholderText"
   [attr.disabled]="isDisabled"
   [attr.maxvisibleitems]="maxVisibleItems"
-  (focusin)="onFocus()"
-  (focusout)="onBlur()"
+  (-focus)="onFocus()"
+  (-blur)="onBlur()"
   [value]="value"
-  (change)="onChange($event)">
+  (-change)="onChange($event)">
   <sinch-help-tooltip *ngIf="tooltipText != null" [text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
   <sinch-select-option value="1" text="Option 1 value" slot="option">
     <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>

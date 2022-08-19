@@ -101,7 +101,7 @@ test('dialog screenshots', runScreenshotTests('sinch-dialog', [
     async *fn({ $, page }) {
       const testDialog = testCustomEvent(page, $)
 
-      await testDialog('close', 'sinch-dialog-close')
+      await testDialog('-close', 'sinch-dialog-close')
     },
   },
   {

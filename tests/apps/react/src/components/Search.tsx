@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/action-menu'
@@ -22,8 +22,8 @@ const options: string[] = [
 export const Search: FC<TSearch> = ({ search }) => {
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')
-  const onChange = (e: SyntheticEvent<Element, CustomEvent<string>>) => {
-    const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
     setValue(value)
 
@@ -76,15 +76,15 @@ export const Search: FC<TSearch> = ({ search }) => {
         slot="target"
         aria-label="Search Input"
         value={value}
-        onChange={onChange}
+        on-change={onChange}
         label={labelText}
         optionalText={optionalText}
         additionalText={additionalText}
         invalidText={invalidText}
         placeholder={placeholderText}
         disabled={isDisabled}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        on-focus={onFocus}
+        on-blur={onBlur}
       >
         <sinch-icon-search slot="icon"/>
         <sinch-icon-button

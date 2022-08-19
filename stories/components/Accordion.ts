@@ -9,11 +9,11 @@ export default {
     value: { control: 'text', description: 'State of opened items' },
     optionalText: { control: 'text', description: 'Optional text' },
     multiple: { control: 'boolean', description: 'Allow to open multiple items' },
-    onChange: { action: 'onChange', description: 'Handler to sync value with the state' },
+    'on-change': { action: 'on-change', description: 'Handler to sync value with the state' },
   },
 } as Meta
 
-const Template = (innerHTML: string): Story => ({ onChange }) => {
+const Template = (innerHTML: string): Story => () => {
   const [{ value, multiple }, updateArgs] = useArgs()
   const accRef = useRef<HTMLElementTagNameMap['sinch-accordion'] | null>(null)
 
@@ -22,8 +22,7 @@ const Template = (innerHTML: string): Story => ({ onChange }) => {
 
     $acc.innerHTML = innerHTML
 
-    $acc.addEventListener('change', (e) => {
-      onChange(e.detail)
+    $acc.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
@@ -67,7 +66,7 @@ Accordion.parameters = {
   docs: {
     source: {
       code: `
-<sinch-accordion value={value} onChange={setValue}>${accordionInnerHtml}</sinch-accordion>`,
+<sinch-accordion value={value} on-change={setValue}>${accordionInnerHtml}</sinch-accordion>`,
     },
   },
 }
@@ -97,7 +96,7 @@ ItemStatuses.parameters = {
   docs: {
     source: {
       code: `
-<sinch-accordion value={value} onChange={setValue}>${itemStatusesInnerHtml}</sinch-accordion>`,
+<sinch-accordion value={value} on-change={setValue}>${itemStatusesInnerHtml}</sinch-accordion>`,
     },
   },
 }

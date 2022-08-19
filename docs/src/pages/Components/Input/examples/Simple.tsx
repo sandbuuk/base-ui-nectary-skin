@@ -11,7 +11,7 @@ export const SimpleExample: FC = () => {
       aria-label="Input"
       placeholder="Placeholder"
       value={state}
-      onChange={(e) => setState(e.nativeEvent.detail)}
+      on-change={(e) => setState(e.detail)}
     />
   )
 }

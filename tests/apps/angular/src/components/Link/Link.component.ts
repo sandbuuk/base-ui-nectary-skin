@@ -22,7 +22,6 @@ export class LinkComponent {
   }
 
   onClick(e: Event) {
-    e.preventDefault()
     window.dispatchEvent(new CustomEvent('sinch-link-click'))
   }
   onFocus() {

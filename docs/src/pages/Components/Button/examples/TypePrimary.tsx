@@ -6,6 +6,6 @@ export const TypePrimaryExample: FC = () => (
     text="Click"
     aria-label="Click"
     type="primary"
-    onClick={() => console.log('click')}
+    on-click={() => console.log('click')}
   />
 )

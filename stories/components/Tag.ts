@@ -52,10 +52,6 @@ const Template = (innerHTML?: string): Story => () => {
     if (innerHTML != null) {
       tagRef.current.innerHTML = innerHTML
     }
-
-    // tagRef.current.addEventListener('close', () => {
-    //   onClose?.()
-    // })
   }
 
   const $tag = tagRef.current!

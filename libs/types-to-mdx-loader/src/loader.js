@@ -134,15 +134,25 @@ export async function loader(src) {
                     if (isTSFunctionType(member.typeAnnotation.typeAnnotation)) {
                       const param = member.typeAnnotation.typeAnnotation.parameters[0]
 
+                      isReactHandler = true
+
                       if (
+                        name.startsWith('on-') &&
+                        isIdentifier(param) &&
+                        isTSTypeAnnotation(param.typeAnnotation) &&
+                        isTSTypeReference(param.typeAnnotation.typeAnnotation)
+                      ) {
+                        value = generate(param.typeAnnotation.typeAnnotation).code
+                      } else if (
                         isIdentifier(param) &&
                         isTSTypeAnnotation(param.typeAnnotation) &&
                         isTSTypeReference(param.typeAnnotation.typeAnnotation) &&
                         isTSTypeParameterInstantiation(param.typeAnnotation.typeAnnotation.typeParameters) &&
                         param.typeAnnotation.typeAnnotation.typeParameters.params.length === 2
                       ) {
-                        isReactHandler = true
                         value = generate(param.typeAnnotation.typeAnnotation.typeParameters.params[1]).code
+                      } else {
+                        value = 'void'
                       }
                     } else if (
                       isTSTypeReference(member.typeAnnotation.typeAnnotation) &&

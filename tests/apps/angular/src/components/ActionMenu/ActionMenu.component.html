@@ -3,7 +3,7 @@
   [attr.modal]="isModal"
   [attr.maxvisibleitems]="maxVisibleItems"
   [attr.orientation]="orientation"
-  (close)="onClose()">
+  (-close)="onClose()">
   <sinch-button
     slot="target"
     type="cta-secondary"
@@ -11,12 +11,12 @@
     aria-label="Button"
     (click)="onOpen()"
   ></sinch-button>
-  <sinch-action-menu-option (click)="onClick($event)" text="Option 1 value long long long" slot="option">
+  <sinch-action-menu-option (-click)="onClick('Option 1 value long long long')" text="Option 1 value long long long" slot="option">
     <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
   </sinch-action-menu-option>
-  <sinch-action-menu-option (click)="onClick($event)" text="Option 2 value" slot="option" disabled>
+  <sinch-action-menu-option (-click)="onClick('Option 2 value')" text="Option 2 value" slot="option" disabled>
     <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
   </sinch-action-menu-option>
-  <sinch-action-menu-option (click)="onClick($event)" text="Option 3 value" slot="option"></sinch-action-menu-option>
-  <sinch-action-menu-option (click)="onClick($event)" text="Option 4 value" slot="option"></sinch-action-menu-option>
+  <sinch-action-menu-option (-click)="onClick('Option 3 value')" text="Option 3 value" slot="option"></sinch-action-menu-option>
+  <sinch-action-menu-option (-click)="onClick('Option 4 value')" text="Option 4 value" slot="option"></sinch-action-menu-option>
 </sinch-action-menu>

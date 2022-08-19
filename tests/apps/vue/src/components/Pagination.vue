@@ -2,7 +2,7 @@
   <sinch-pagination
     v-bind:max="max"
     :value="value"
-    @change="onChange"
+    @--change="onChange"
     @focusin="onFocus"
     @focusout="onBlur">
   </sinch-pagination>

@@ -1,11 +1,10 @@
 import type { TRect, TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
 
 export type TSinchDialogElement = HTMLElement & {
   caption: string,
   readonly dialogRect: TRect,
   readonly closeButtonRect: TRect,
-  addEventListener(type: 'close', listener: (e: CustomEvent<void>) => void): void,
+  addEventListener(type: '-close', listener: (e: CustomEvent<void>) => void): void,
   setAttribute(name: 'caption', value: string): void,
   setAttribute(name: 'close-aria-label', value: string): void,
 }
@@ -15,5 +14,6 @@ export type TSinchDialogReact = TSinchElementReact<TSinchDialogElement> & {
   caption: string,
   'aria-label': string,
   'close-aria-label': string,
-  onClose: (event: SyntheticEvent<TSinchDialogElement, CustomEvent<void>>) => void,
+  onClose?: () => void,
+  'on-close'?: (e: CustomEvent<void>) => void,
 }

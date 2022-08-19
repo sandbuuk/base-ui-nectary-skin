@@ -202,15 +202,15 @@ test('select screenshots', runScreenshotTests('sinch-select', [
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-select-change', 'X')
-      await testInput('focusin', 'sinch-select-focus')
-      await testInput('focusout', 'sinch-select-blur')
+      await testInput('-change', 'sinch-select-change', 'X')
+      await testInput('-focus', 'sinch-select-focus')
+      await testInput('-blur', 'sinch-select-blur')
     },
   },
   {
     name: 'native events',
     url: shot,
-    async *fn({ page }) {
+    async *fn({ page, isFirefox }) {
       await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
 
       await page.keyboard.press('Tab')
@@ -227,22 +227,45 @@ test('select screenshots', runScreenshotTests('sinch-select', [
       await page.keyboard.press('Enter')
       await page.keyboard.press('Enter')
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-select-focus', detail: null },
-        { type: 'sinch-select-change', detail: '1' },
-      ])
+      if (isFirefox) {
+        expect(
+          await getAllEvents(page)
+        ).toEqual([
+          { type: 'sinch-select-focus', detail: null },
+          { type: 'sinch-select-focus', detail: null },
+          { type: 'sinch-select-change', detail: '1' },
+        ])
+      } else {
+        expect(
+          await getAllEvents(page)
+        ).toEqual([
+          { type: 'sinch-select-focus', detail: null },
+          { type: 'sinch-select-blur', detail: null },
+          { type: 'sinch-select-focus', detail: null },
+          { type: 'sinch-select-change', detail: '1' },
+        ])
+      }
 
       await page.keyboard.press('Enter')
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-select-change', detail: '3' },
-      ])
+      if (isFirefox) {
+        expect(
+          await getAllEvents(page)
+        ).toEqual([
+          { type: 'sinch-select-focus', detail: null },
+          { type: 'sinch-select-change', detail: '3' },
+        ])
+      } else {
+        expect(
+          await getAllEvents(page)
+        ).toEqual([
+          { type: 'sinch-select-blur', detail: null },
+          { type: 'sinch-select-focus', detail: null },
+          { type: 'sinch-select-change', detail: '3' },
+        ])
+      }
     },
   },
 ]))

@@ -1,5 +1,5 @@
 <template>
-  <sinch-radio :value="value" @change="onChange">
+  <sinch-radio :value="value" @--change="onChange">
     <sinch-radio-option v-for="opt in options"
       :key="opt.value"
       :value="opt.value"

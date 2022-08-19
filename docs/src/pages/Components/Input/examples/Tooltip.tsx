@@ -12,7 +12,7 @@ export const TooltipExample: FC = () => {
       aria-label="Input"
       placeholder="Placeholder"
       value={state}
-      onChange={(e) => setState(e.nativeEvent.detail)}
+      on-change={(e) => setState(e.detail)}
     >
       <sinch-help-tooltip slot="tooltip" text="Tooltip text"/>
     </sinch-input>

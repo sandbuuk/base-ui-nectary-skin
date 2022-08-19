@@ -4,7 +4,7 @@
     :open="isOpen"
     :maxVisibleItems="maxVisibleItems"
     aria-label="Search"
-    @close="onClose">
+    @--close="onClose">
     <sinch-input
       slot="target"
       aria-label="Search Input"
@@ -15,15 +15,15 @@
       :invalidtext="invalidText"
       :disabled="isDisabled"
       :value="value"
-      @change="onChange"
-      @focusin="onFocus"
-      @focusout="onBlur">
+      @--change="onChange"
+      @--focus="onFocus"
+      @--blur="onBlur">
       <sinch-icon-search slot="icon"></sinch-icon-search>
       <sinch-icon-button
         slot="right"
         small
         aria-label="Clear search"
-        @click="onClear">
+        @--click="onClear">
         <sinch-icon-close slot="icon"></sinch-icon-close>
       </sinch-icon-button>
       <sinch-help-tooltip v-if="tooltipText != null" :text="tooltipText" slot="tooltip"></sinch-help-tooltip>
@@ -34,7 +34,7 @@
       :key="text"
       :text="text"
       :aria-label="text"
-      @click="onOptionClick(text)"
+      @--click="onOptionClick(text)"
     ></sinch-action-menu-option>
   </sinch-action-menu>
 </template>

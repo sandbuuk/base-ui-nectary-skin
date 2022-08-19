@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import { useState } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/icon-button'
@@ -12,18 +12,14 @@ type TInput = {
 
 export const Input: FC<TInput> = ({ search }) => {
   const [value, setValue] = useState(search.get('value') ?? '')
-  const onChange = useMemo(() =>
-    (search.get('uncontrolled') === null
-      ? (e: SyntheticEvent<Element, CustomEvent>) => {
-        const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
-        window.dispatchEvent(new CustomEvent('sinch-input-change', { detail: value }))
-        setValue(value)
-      }
-      : () => {}),
-  [search, setValue])
-  const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-input-focus')), [])
-  const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-input-blur')), [])
+    window.dispatchEvent(new CustomEvent('sinch-input-change', { detail: value }))
+    setValue(value)
+  }
+  const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-input-focus'))
+  const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-input-blur'))
   const type: any = search.get('type') ?? undefined
   const labelText = search.get('label') ?? ''
   const optionalText = search.get('optional') ?? undefined
@@ -45,9 +41,9 @@ export const Input: FC<TInput> = ({ search }) => {
       placeholder={placeholderText}
       disabled={isDisabled}
       value={value}
-      onChange={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-change={onChange}
+      on-focus={onFocus}
+      on-blur={onBlur}
       aria-label="Input"
     >
       {hasIcon && (

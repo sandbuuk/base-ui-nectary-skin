@@ -127,9 +127,9 @@ test('link screenshots', runScreenshotTests('sinch-link', [
     async *fn({ $, page }) {
       const testAnchor = testCustomEvent(page, $)
 
-      await testAnchor('click', 'sinch-link-click')
-      await testAnchor('focusin', 'sinch-link-focus')
-      await testAnchor('focusout', 'sinch-link-blur')
+      await testAnchor('-click', 'sinch-link-click')
+      await testAnchor('-focus', 'sinch-link-focus')
+      await testAnchor('-blur', 'sinch-link-blur')
     },
   },
   {

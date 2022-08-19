@@ -8,9 +8,9 @@
     v-bind:disabled="isDisabled"
     v-bind:maxvisibleitems="maxVisibleItems"
     :value="value"
-    @change="onChange"
-    @focusin="onFocus"
-    @focusout="onBlur">
+    @--change="onChange"
+    @--focus="onFocus"
+    @--blur="onBlur">
     <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-help-tooltip>
     <sinch-select-option value="1" text="Option 1 value" slot="option">
       <sinch-icon-open-in-new slot="icon"/>

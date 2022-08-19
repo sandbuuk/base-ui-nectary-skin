@@ -18,7 +18,7 @@ export const SimpleExample: FC = () => {
       placeholder="Placeholder"
       style={selectStyle}
       value={value}
-      onChange={(e) => setValue(e.nativeEvent.detail)}
+      on-change={(e) => setValue(e.detail)}
     >
       <sinch-select-option slot="option" value="1" text="Option 1 value" aria-label="Option 1">
         <sinch-icon-open-in-new slot="icon"/>

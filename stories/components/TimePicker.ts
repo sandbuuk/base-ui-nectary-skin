@@ -17,9 +17,8 @@ export default {
       description: 'AM/PM 12-hour clock system',
       control: 'boolean',
     },
-    onChange: {
+    'on-change': {
       description: 'Handler to sync date state',
-      action: 'onChange',
     },
   },
   parameters: {
@@ -63,13 +62,13 @@ const Template = (): Story => () => {
     $input.setAttribute('slot', 'target')
     $input.setAttribute('label', 'Date input')
     $input.appendChild($iconButton)
-    $input.addEventListener('change', (e) => {
+    $input.addEventListener('-change', (e) => {
       inputRef.current!.value = e.detail
     })
 
     $timePicker.setAttribute('slot', 'content')
     $timePicker.setAttribute('ampm', ampm)
-    $timePicker.addEventListener('change', (e) => {
+    $timePicker.addEventListener('-change', (e) => {
       const value = e.detail
 
       popoverRef.current!.removeAttribute('open')
@@ -79,7 +78,7 @@ const Template = (): Story => () => {
 
     $popover.appendChild($input)
     $popover.appendChild($timePicker)
-    $popover.addEventListener('close', () => {
+    $popover.addEventListener('-close', () => {
       popoverRef.current!.removeAttribute('open')
     })
 
@@ -109,14 +108,14 @@ TimePicker.parameters = {
   open={isOpen}
   orientation="bottom-left"
   aria-label="Time input"
-  onClose={onClose}
+  on-close={onClose}
 >
   <sinch-input
     slot="target"
     label="Time input"
     aria-label="Time input"
     value={value}
-    onChange={onChange}
+    on-change={onChange}
   >
     <sinch-icon-button
       slot="right"
@@ -133,7 +132,7 @@ TimePicker.parameters = {
     aria-label="Time Picker"
     submit-aria-label="Submit time"
     value={isoValue}
-    onChange={onIsoChange}
+    on-change={onIsoChange}
   />
 </sinch-popover>`,
     },

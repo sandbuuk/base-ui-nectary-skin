@@ -25,17 +25,17 @@
   [attr.multiple]="isMultiple"
   [attr.maxvisibleitems]="maxVisibleItems"
   [attr.orientation]="orientation"
-  (focusin)="onFocus()"
-  (focusout)="onBlur()"
   [value]="value"
-  (close)="onClose()"
-  (change)="onChange($event)">
+  (-close)="onClose()"
+  (-change)="onChange($event)">
   <sinch-button
     slot="target"
     type="cta-secondary"
     text="Some content"
     aria-label="Button"
     (click)="onOpen()"
+    (-focus)="onFocus()"
+    (-blur)="onBlur()"
   ></sinch-button>
   <ng-container *ngIf="isCheckbox; then checkboxTemplate"></ng-container>
   <ng-container *ngIf="isRadio; then radioTemplate"></ng-container>

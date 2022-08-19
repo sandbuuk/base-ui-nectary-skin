@@ -1,8 +1,8 @@
 <sinch-icon-button
   [attr.disabled]="isDisabled"
-  (focusin)="onFocus()"
-  (focusout)="onBlur()"
-  (click)="onClick()">
+  (-focus)="onFocus()"
+  (-blur)="onBlur()"
+  (-click)="onClick()">
   <sinch-icon-help-outline *ngIf="!hasSpinner" slot="icon"></sinch-icon-help-outline>
   <sinch-spinner *ngIf="hasSpinner" static type="medium" slot="icon"></sinch-spinner>
 </sinch-icon-button>

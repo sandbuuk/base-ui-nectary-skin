@@ -4,7 +4,7 @@
     :min="min"
     :max="max"
     :value="value"
-    @change="onChange"
+    @--change="onChange"
     @focusin="onFocus"
     @focusout="onBlur"
   ></sinch-date-picker>

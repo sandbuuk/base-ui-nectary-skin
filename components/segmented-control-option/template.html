@@ -48,11 +48,11 @@
   text-overflow: ellipsis;
 }
 
-:host([checked]:not([checked="false"])) #wrapper {
+:host([data-checked]) #wrapper {
   border-color: var(--sinch-color-stormy-500);
 }
 
-:host([checked]:not([checked="false"]):not(:first-child)) #wrapper::before {
+:host([data-checked]:not(:first-child)) #wrapper::before {
   content: "";
   width: 1px;
   background-color: var(--sinch-color-stormy-500);
@@ -62,7 +62,7 @@
   bottom: -1px;
 }
 
-:host([checked]:not([checked="false"]):not(:last-child)) #wrapper::after {
+:host([data-checked]:not(:last-child)) #wrapper::after {
   content: "";
   width: 1px;
   background-color: var(--sinch-color-stormy-500);

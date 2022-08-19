@@ -1,0 +1,152 @@
+<style>
+/* stylelint-disable no-descending-specificity */
+:host {
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+}
+
+button {
+  all: initial;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 88px;
+  height: 88px;
+  padding: 16px 8px 8px;
+  border-radius: var(--sinch-shape-radius-l);
+  background-color: var(--sinch-color-snow-100);
+  box-shadow: var(--sinch-elevation-leve-1);
+  cursor: pointer;
+}
+
+:host([data-small]) > button {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--sinch-shape-radius-m);
+  padding: 12px 4px 4px;
+}
+
+/* Border */
+button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  border: 1px solid var(--sinch-color-snow-700);
+  border-radius: var(--sinch-shape-radius-l);
+  pointer-events: none;
+}
+
+:host([data-small]) > button::before {
+  border-radius: var(--sinch-shape-radius-m);
+}
+
+/* Focus border */
+button:focus-visible::after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+  border: 2px solid var(--sinch-color-aqua-400);
+  border-radius: calc(var(--sinch-shape-radius-l) + 4px);
+  pointer-events: none;
+}
+
+:host([data-small]) > button:focus-visible::after {
+  border-radius: calc(var(--sinch-shape-radius-m) + 4px);
+}
+
+@supports not selector(:focus-visible) {
+  button:focus::after {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    border: 2px solid var(--sinch-color-aqua-400);
+    border-radius: calc(var(--sinch-shape-radius-l) + 4px);
+  }
+
+  :host([data-small]) > button:focus::after {
+    border-radius: calc(var(--sinch-shape-radius-m) + 4px);
+  }
+}
+
+button:enabled:hover {
+  background-color: var(--sinch-color-tropical-100);
+}
+
+button:enabled:hover::before {
+  border-color: var(--sinch-color-tropical-100);
+}
+
+:host([data-checked]) > button:enabled,
+button:enabled:active {
+  box-shadow: var(--sinch-elevation-level-0);
+}
+
+:host([data-checked]) > button:enabled::before,
+button:enabled:active::before {
+  border-width: 2px;
+  border-color: var(--sinch-color-stormy-500);
+}
+
+button:disabled {
+  cursor: initial;
+}
+
+button:disabled > #icon,
+button:disabled > #text {
+  opacity: 0.5;
+}
+
+#text {
+  display: inline-block;
+  min-height: 20px;
+  text-align: center;
+  font: var(--sinch-font-text-xs);
+  color: var(--sinch-color-stormy-500);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#icon {
+  width: 32px;
+  height: 32px;
+  align-self: center;
+
+  --sinch-size-icon: 32px;
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+:host([data-small]) #icon {
+  width: 24px;
+  height: 24px;
+
+  --sinch-size-icon: 24px;
+}
+
+button > * {
+  pointer-events: none;
+}
+</style>
+
+<button>
+  <div id="icon">
+    <slot name="icon"></slot>
+  </div>
+  <span id="text"></span>
+</button>

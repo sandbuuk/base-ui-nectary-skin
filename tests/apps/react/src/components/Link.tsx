@@ -11,8 +11,7 @@ export const Link: FC<TLink> = ({ search }) => {
   const href: any = search.get('href')
   const isDisabled = search.get('disabled') != null
   const isExternal = search.get('external') != null
-  const onClick = useCallback((e) => {
-    e.nativeEvent.preventDefault()
+  const onClick = useCallback(() => {
     window.dispatchEvent(new CustomEvent('sinch-link-click'))
   }, [])
   const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-link-focus')), [])
@@ -27,9 +26,10 @@ export const Link: FC<TLink> = ({ search }) => {
         href={href}
         disabled={isDisabled}
         external={isExternal}
-        onClick={onClick}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        preventDefault
+        on-click={onClick}
+        on-focus={onFocus}
+        on-blur={onBlur}
       />
       {' '}
       <span>navigation</span>

@@ -3,12 +3,10 @@ import type { TSinchElementReact } from '../types'
 export type TSinchDropdownTextOptionElement = HTMLElement & {
   value: string,
   text: string,
-  checked: boolean,
   disabled: boolean,
   readonly icon: Element | null,
   setAttribute(name: 'value', value: string): void,
   setAttribute(name: 'text', value: string): void,
-  setAttribute(name: 'checked', value: ''): void,
   setAttribute(name: 'disabled', value: ''): void,
 }
 

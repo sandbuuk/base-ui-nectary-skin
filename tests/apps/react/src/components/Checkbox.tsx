@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import { useState } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/checkbox'
 
 type TCheckbox = {
@@ -8,21 +8,17 @@ type TCheckbox = {
 
 export const Checkbox: FC<TCheckbox> = ({ search }) => {
   const [value, setValue] = useState(search.get('checked') !== null)
-  const onChange = useMemo(() =>
-    (search.get('uncontrolled') === null
-      ? (e: SyntheticEvent<Element, CustomEvent<boolean>>) => {
-        const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<boolean>) => {
+    const value = e.detail
 
-        window.dispatchEvent(new CustomEvent('sinch-checkbox-change', { detail: value }))
-        setValue(value)
-      }
-      : () => {}),
-  [search, setValue])
-  const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-checkbox-focus')), [])
-  const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-checkbox-blur')), [])
-  const isDisabled = useMemo(() => search.get('disabled') != null, [search])
-  const isIndeterminate = useMemo(() => search.get('indeterminate') != null, [search])
-  const isInvalid = useMemo(() => search.get('invalid') != null, [search])
+    window.dispatchEvent(new CustomEvent('sinch-checkbox-change', { detail: value }))
+    setValue(value)
+  }
+  const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-checkbox-focus'))
+  const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-checkbox-blur'))
+  const isDisabled = search.get('disabled') != null
+  const isIndeterminate = search.get('indeterminate') != null
+  const isInvalid = search.get('invalid') != null
   const text: any = search.get('text') ?? undefined
 
   return (
@@ -32,9 +28,9 @@ export const Checkbox: FC<TCheckbox> = ({ search }) => {
       indeterminate={isIndeterminate}
       invalid={isInvalid}
       checked={value}
-      onChange={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-change={onChange}
+      on-focus={onFocus}
+      on-blur={onBlur}
       aria-label="Checkbox"
     />
   )

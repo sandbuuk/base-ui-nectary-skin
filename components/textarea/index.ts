@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getIntegerAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -46,6 +47,11 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart)
     this.#$input.addEventListener('mousedown', this.#onSelectionChange)
     this.#$input.addEventListener('keydown', this.#onSelectionChange)
+    this.#$input.addEventListener('focus', this.#onInputFocus)
+    this.#$input.addEventListener('blur', this.#onInputBlur)
+    this.addEventListener('-change', this.#onChangeReactHandler)
+    this.addEventListener('-focus', this.#onFocusReactHandler)
+    this.addEventListener('-blur', this.#onBlurReactHandler)
   }
 
   disconnectedCallback() {
@@ -53,6 +59,11 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#$input.removeEventListener('compositionstart', this.#onCompositionStart)
     this.#$input.removeEventListener('mousedown', this.#onSelectionChange)
     this.#$input.removeEventListener('keydown', this.#onSelectionChange)
+    this.#$input.removeEventListener('focus', this.#onInputFocus)
+    this.#$input.removeEventListener('blur', this.#onInputBlur)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.removeEventListener('-focus', this.#onFocusReactHandler)
+    this.removeEventListener('-blur', this.#onBlurReactHandler)
   }
 
   static get observedAttributes() {
@@ -285,7 +296,32 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
           bubbles: true,
         })
       )
+      this.dispatchEvent(
+        new CustomEvent('-change', {
+          detail: nextValue,
+        })
+      )
     }
+  }
+
+  #onInputFocus = () => {
+    this.dispatchEvent(new CustomEvent('-focus'))
+  }
+
+  #onInputBlur = () => {
+    this.dispatchEvent(new CustomEvent('-blur'))
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
+  }
+
+  #onFocusReactHandler = () => {
+    getReactEventHandler(this, 'on-focus')?.()
+  }
+
+  #onBlurReactHandler = () => {
+    getReactEventHandler(this, 'on-blur')?.()
   }
 })
 

@@ -10,16 +10,12 @@ type TAccordion = {
 
 export const Accordion: FC<TAccordion> = ({ search }) => {
   const [value, setValue] = useState(search.get('value') ?? '')
-  const onChange = useMemo(() =>
-    (search.get('uncontrolled') === null
-      ? (e: any) => {
-        const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
-        window.dispatchEvent(new CustomEvent('sinch-accordion-change', { detail: value }))
-        setValue(value)
-      }
-      : () => {}),
-  [search, setValue])
+    window.dispatchEvent(new CustomEvent('sinch-accordion-change', { detail: value }))
+    setValue(value)
+  }
   const isMultiple = search.get('multiple') !== null
   const options = useMemo(() => {
     const data = search.get('options')
@@ -50,7 +46,11 @@ export const Accordion: FC<TAccordion> = ({ search }) => {
   }, [search])
 
   return (
-    <sinch-accordion value={value} onChange={onChange} multiple={isMultiple}>
+    <sinch-accordion
+      value={value}
+      on-change={onChange}
+      multiple={isMultiple}
+    >
       {options}
     </sinch-accordion>
   )

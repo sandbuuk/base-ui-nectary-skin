@@ -2,6 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -32,15 +33,23 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
 
   connectedCallback() {
     this.setAttribute('role', 'tab')
-    this.#$button.addEventListener('click', this.#onClick)
+    this.#$button.addEventListener('click', this.#onButtonClick)
+    this.#$button.addEventListener('focus', this.#onButtonFocus)
+    this.#$button.addEventListener('blur', this.#onButtonBlur)
+    this.addEventListener('-focus', this.#onFocusReactHandler)
+    this.addEventListener('-blur', this.#onBlurReactHandler)
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onClick)
+    this.#$button.removeEventListener('click', this.#onButtonClick)
+    this.#$button.removeEventListener('focus', this.#onButtonFocus)
+    this.#$button.removeEventListener('blur', this.#onButtonBlur)
+    this.removeEventListener('-focus', this.#onFocusReactHandler)
+    this.removeEventListener('-blur', this.#onBlurReactHandler)
   }
 
   static get observedAttributes() {
-    return ['checked', 'disabled', 'text', 'value']
+    return ['data-checked', 'disabled', 'text']
   }
 
   set value(value: string) {
@@ -67,14 +76,18 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
     return getAttribute(this, 'text', '')
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'text': {
         this.#$label.textContent = newVal
 
         break
       }
-      case 'checked': {
+      case 'data-checked': {
         updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
 
         break
@@ -95,12 +108,28 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
     this.#$button.blur()
   }
 
-  #onClick = (e: Event) => {
+  #onButtonClick = (e: Event) => {
     e.stopPropagation()
 
     this.dispatchEvent(
-      new CustomEvent('change', { bubbles: true, detail: this.value })
+      new CustomEvent('option-change', { detail: this.value, bubbles: true })
     )
+  }
+
+  #onButtonFocus = () => {
+    this.dispatchEvent(new CustomEvent('-focus'))
+  }
+
+  #onButtonBlur = () => {
+    this.dispatchEvent(new CustomEvent('-blur'))
+  }
+
+  #onFocusReactHandler = () => {
+    getReactEventHandler(this, 'on-focus')?.()
+  }
+
+  #onBlurReactHandler = () => {
+    getReactEventHandler(this, 'on-blur')?.()
   }
 })
 

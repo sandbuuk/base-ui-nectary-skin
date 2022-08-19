@@ -12,27 +12,26 @@ export default {
   argTypes: {
     value: { control: 'text' },
     multiple: { control: 'boolean' },
-    onChange: { action: 'onChange' },
+    'on-change': { description: '' },
   },
 } as Meta
 
-const Template = (innerHTML: string): Story => ({ onChange }) => {
+const Template = (innerHTML: string): Story => () => {
   const [{ value, multiple }, updateArgs] = useArgs()
   const controlRef = useRef<HTMLElementTagNameMap['sinch-segmented-icon-control'] | null>(null)
 
   if (controlRef.current === null) {
-    const $tabs = document.createElement('sinch-segmented-icon-control')
+    const $el = document.createElement('sinch-segmented-icon-control')
 
-    $tabs.innerHTML = innerHTML
+    $el.innerHTML = innerHTML
 
-    $tabs.addEventListener('change', (e) => {
-      onChange(e.detail)
+    $el.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
-    controlRef.current = $tabs
+    controlRef.current = $el
   }
 
   const $el = controlRef.current!
@@ -68,7 +67,7 @@ SegmentedIconControl.args = {
 SegmentedIconControl.parameters = {
   docs: {
     source: {
-      code: `<sinch-segmented-icon-control multiple value={value} onChange={setValue}>${itemsInnerHTML}</sinch-segmented-icon-control>`,
+      code: `<sinch-segmented-icon-control multiple value={value} on-change={setValue}>${itemsInnerHTML}</sinch-segmented-icon-control>`,
     },
   },
 }

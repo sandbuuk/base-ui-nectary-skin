@@ -21,9 +21,9 @@ export default {
       description: 'Popover Modal mode',
       control: 'boolean',
     },
-    onClose: {
+    'on-close': {
       description: 'Close event handler',
-      action: 'onClose',
+      action: 'on-close',
     },
   },
   parameters: {
@@ -38,7 +38,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story => ({ onClose }) => {
+const Template = (innerHTML: string): Story => () => {
   const [{
     open,
     modal,
@@ -57,8 +57,7 @@ const Template = (innerHTML: string): Story => ({ onClose }) => {
       updateArgs({ open: true })
     })
 
-    $popover.addEventListener('close', () => {
-      onClose?.()
+    $popover.addEventListener('-close', () => {
       updateArgs({ open: false })
     })
 
@@ -91,7 +90,7 @@ Popover.args = {
 Popover.parameters = {
   docs: {
     source: {
-      code: `<sinch-popover modal open={isOpen} onClose={onClose}>${popoverInnerHTML}</sinch-input>`,
+      code: `<sinch-popover modal open={isOpen} on-close={onClose}>${popoverInnerHTML}</sinch-input>`,
     },
   },
 }

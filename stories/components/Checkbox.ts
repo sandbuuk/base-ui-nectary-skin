@@ -10,19 +10,18 @@ export default {
     disabled: { control: 'boolean' },
     invalid: { control: 'boolean' },
     text: { control: 'text' },
-    onChange: { action: 'onChange' },
+    'on-change': { action: 'on-change' },
   },
 } as Meta
 
-const Template: Story = ({ onChange }) => {
+const Template: Story = () => {
   const [{ checked, indeterminate, disabled, invalid, text }, updateArgs] = useArgs()
   const checkboxRef = useRef<HTMLElementTagNameMap['sinch-checkbox'] | null>(null)
 
   if (checkboxRef.current === null) {
     const $checkbox = document.createElement('sinch-checkbox')
 
-    $checkbox.addEventListener('change', (e) => {
-      onChange(e.detail)
+    $checkbox.addEventListener('-change', (e) => {
       updateArgs({ checked: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
@@ -55,7 +54,7 @@ Checkbox.args = {
 Checkbox.parameters = {
   docs: {
     source: {
-      code: '<sinch-checkbox checked={isChecked} onChange={setIsChecked}></sinch-checkbox>',
+      code: '<sinch-checkbox checked={isChecked} on-change={setIsChecked}></sinch-checkbox>',
     },
   },
 }

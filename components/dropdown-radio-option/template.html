@@ -57,11 +57,11 @@
   pointer-events: none;
 }
 
-:host([checked]:not([checked="false"])) #icon-container::before {
+:host([data-checked]) #icon-container::before {
   border-color: var(--sinch-color-tropical-500);
 }
 
-:host([checked]:not([checked="false"])) #icon-knob {
+:host([data-checked]) #icon-knob {
   opacity: 1;
 }
 

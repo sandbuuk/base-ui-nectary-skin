@@ -15,9 +15,8 @@ export default {
       description: 'Number of visible items in the list',
       control: { type: 'range', min: 1, max: 5, step: 1 },
     },
-    onChange: {
+    'on-change': {
       description: 'Handler to sync input value with the state',
-      action: 'onChange',
     },
     onFocus: {
       description: 'Focus handler',
@@ -40,7 +39,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story => ({ onChange }) => {
+const Template = (innerHTML: string): Story => () => {
   const [{
     value,
     label,
@@ -60,10 +59,9 @@ const Template = (innerHTML: string): Story => ({ onChange }) => {
       e.stopPropagation()
     })
 
-    $input.addEventListener('change', (e) => {
+    $input.addEventListener('change', (e: Event) => {
       e.stopPropagation()
-      onChange(e.detail)
-      updateArgs({ value: e.detail })
+      updateArgs({ value: (e as CustomEvent<string>).detail })
       // https://github.com/storybookjs/storybook/issues/11657
       // setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
@@ -101,7 +99,7 @@ Search.args = {
 Search.parameters = {
   docs: {
     source: {
-      code: `<sinch-search label="Search" placeholder="Placeholder" value={value} onChange={setValue}>${dropdownInnerHTML}</sinch-search>`,
+      code: `<sinch-search label="Search" placeholder="Placeholder" value={value} on-change={setValue}>${dropdownInnerHTML}</sinch-search>`,
     },
   },
 }

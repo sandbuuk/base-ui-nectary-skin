@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/tabs'
 import '@sinch-engage/nectary/tabs-option'
 
@@ -9,16 +9,12 @@ type TTabs = {
 
 export const Tabs: FC<TTabs> = ({ search }) => {
   const [value, setValue] = useState('')
-  const onChange = useMemo(() =>
-    (search.get('uncontrolled') === null
-      ? (e: SyntheticEvent<Element, CustomEvent>) => {
-        const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
-        window.dispatchEvent(new CustomEvent('sinch-tabs-change', { detail: value }))
-        setValue(value)
-      }
-      : () => {}),
-  [search, setValue])
+    window.dispatchEvent(new CustomEvent('sinch-tabs-change', { detail: value }))
+    setValue(value)
+  }
   const options = useMemo(() => {
     const data = search.get('options')
 
@@ -46,7 +42,7 @@ export const Tabs: FC<TTabs> = ({ search }) => {
   }, [search])
 
   return (
-    <sinch-tabs value={value} onChange={onChange} aria-label="Tabs">
+    <sinch-tabs value={value} on-change={onChange} aria-label="Tabs">
       {options}
     </sinch-tabs>
   )

@@ -1,6 +1,6 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useState } from 'react'
 import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover/types'
-import type { FC, SyntheticEvent } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/dropdown'
 import '@sinch-engage/nectary/dropdown-text-option'
 import '@sinch-engage/nectary/dropdown-checkbox-option'
@@ -18,35 +18,31 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
   const orientation = search.get('orientation') as TSinchPopoverOrientation ?? undefined
   const [isOpen, setOpen] = useState(search.get('open') !== null)
   const [value, setValue] = useState(search.get('value') ?? '')
-  const onChange = useMemo(() =>
-    (search.get('uncontrolled') === null
-      ? (e: SyntheticEvent<Element, CustomEvent<string>>) => {
-        const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
-        window.dispatchEvent(new CustomEvent('sinch-dropdown-change', { detail: value }))
-        setValue(value)
+    window.dispatchEvent(new CustomEvent('sinch-dropdown-change', { detail: value }))
+    setValue(value)
 
-        if (!isMultiple) {
-          setOpen(false)
-        }
-      }
-      : () => {}),
-  [search, setValue])
-  const onFocus = useCallback(() => {
+    if (!isMultiple) {
+      setOpen(false)
+    }
+  }
+  const onFocus = () => {
     window.dispatchEvent(new CustomEvent('sinch-dropdown-focus'))
-  }, [])
-  const onBlur = useCallback(() => {
+  }
+  const onBlur = () => {
     window.dispatchEvent(new CustomEvent('sinch-dropdown-blur'))
-  }, [])
-  const onClose = useCallback(() => {
+  }
+  const onClose = () => {
     window.dispatchEvent(new CustomEvent('sinch-dropdown-close'))
     setOpen(false)
-  }, [])
-  const maxVisibleItems = useMemo(() => {
+  }
+  const maxVisibleItems = (() => {
     const val = search.get('maxvisibleitems')
 
     return val !== null ? parseInt(val) : undefined
-  }, [search])
+  })()
 
   return (
     <sinch-dropdown
@@ -55,10 +51,8 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
       maxVisibleItems={maxVisibleItems}
       value={value}
       orientation={orientation}
-      onChange={onChange}
-      onClose={onClose}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-change={onChange}
+      on-close={onClose}
       aria-label="Dropdown"
     >
       <sinch-button
@@ -69,6 +63,8 @@ export const Dropdown: FC<TDropdown> = ({ search }) => {
         onClick={() => {
           setOpen(true)
         }}
+        on-focus={onFocus}
+        on-blur={onBlur}
       />
       {isCheckbox && (
         <>

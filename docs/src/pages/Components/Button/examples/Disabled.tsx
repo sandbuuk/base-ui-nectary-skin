@@ -7,6 +7,6 @@ export const DisabledExample: FC = () => (
     aria-label="Click"
     type="primary"
     disabled
-    onClick={() => console.log('click')}
+    on-click={() => console.log('click')}
   />
 )

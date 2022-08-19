@@ -24,7 +24,7 @@ export const NonModalExample: FC = () => {
         text="Open popover"
         aria-label="Open popover"
         type="cta-secondary"
-        onClick={() => setOpen(true)}
+        on-click={() => setOpen(true)}
       />
       <div slot="content" style={contentStyles}>
         <sinch-title text="Hi!" type="s" level="3"/>
@@ -34,7 +34,7 @@ export const NonModalExample: FC = () => {
           aria-label="Close popover"
           type="cta-secondary"
           small
-          onClick={() => setOpen(false)}
+          on-click={() => setOpen(false)}
         />
       </div>
     </sinch-popover>

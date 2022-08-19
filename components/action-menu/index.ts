@@ -43,11 +43,11 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'listbox')
-    this.addEventListener('close', this.#onReactClose)
+    this.addEventListener('-close', this.#onReactClose)
   }
 
   disconnectedCallback() {
-    this.removeEventListener('close', this.#onReactClose)
+    this.removeEventListener('-close', this.#onReactClose)
   }
 
   static get observedAttributes() {
@@ -101,10 +101,10 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
         if (isAttrTrue(newVal)) {
           this.#$popover.addEventListener('keydown', this.#onListboxKeyDown)
-          this.#$popover.addEventListener('close', this.#onClose)
+          this.#$popover.addEventListener('-close', this.#onClose)
         } else {
           this.#$popover.removeEventListener('keydown', this.#onListboxKeyDown)
-          this.#$popover.removeEventListener('close', this.#onClose)
+          this.#$popover.removeEventListener('-close', this.#onClose)
           this.#selectOption(null)
         }
 
@@ -234,12 +234,13 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
   #onClose = () => {
     this.dispatchEvent(
-      new CustomEvent('close', { bubbles: true })
+      new CustomEvent('-close')
     )
   }
 
-  #onReactClose = () => {
+  #onReactClose = (e: Event) => {
     getReactEventHandler(this, 'onClose')?.()
+    getReactEventHandler(this, 'on-close')?.(e)
   }
 })
 

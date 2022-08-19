@@ -7,6 +7,7 @@ import {
   updateAttribute,
   NectaryElement,
   isAttrTrue,
+  getReactEventHandler,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchLinkElement, TSinchLinkReact } from './types'
@@ -28,6 +29,24 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
     this.#$anchor = shadowRoot.querySelector('a')!
     this.#$text = shadowRoot.querySelector('#content')!
+  }
+
+  connectedCallback() {
+    this.#$anchor.addEventListener('click', this.#onAnchorClick)
+    this.#$anchor.addEventListener('focus', this.#onAnchorFocus)
+    this.#$anchor.addEventListener('blur', this.#onAnchorBlur)
+    this.addEventListener('-click', this.#onClickReactHandler)
+    this.addEventListener('-focus', this.#onFocusReactHandler)
+    this.addEventListener('-blur', this.#onBlurReactHandler)
+  }
+
+  disconnectedCallback() {
+    this.#$anchor.removeEventListener('click', this.#onAnchorClick)
+    this.#$anchor.removeEventListener('focus', this.#onAnchorFocus)
+    this.#$anchor.removeEventListener('blur', this.#onAnchorBlur)
+    this.removeEventListener('-click', this.#onClickReactHandler)
+    this.removeEventListener('-focus', this.#onFocusReactHandler)
+    this.removeEventListener('-blur', this.#onBlurReactHandler)
   }
 
   get text() {
@@ -60,6 +79,14 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
   get external() {
     return getBooleanAttribute(this, 'external')
+  }
+
+  set preventDefault(isPrevented: boolean) {
+    updateBooleanAttribute(this, 'preventdefault', isPrevented)
+  }
+
+  get preventDefault() {
+    return getBooleanAttribute(this, 'preventdefault')
   }
 
   static get observedAttributes() {
@@ -103,6 +130,36 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
   blur() {
     this.#$anchor.blur()
+  }
+
+  #onAnchorClick = (e: Event) => {
+    if (this.preventDefault) {
+      e.preventDefault()
+    }
+
+    this.dispatchEvent(
+      new CustomEvent('-click')
+    )
+  }
+
+  #onAnchorFocus = () => {
+    this.dispatchEvent(new CustomEvent('-focus'))
+  }
+
+  #onAnchorBlur = () => {
+    this.dispatchEvent(new CustomEvent('-blur'))
+  }
+
+  #onFocusReactHandler = () => {
+    getReactEventHandler(this, 'on-focus')?.()
+  }
+
+  #onBlurReactHandler = () => {
+    getReactEventHandler(this, 'on-blur')?.()
+  }
+
+  #onClickReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-click')?.(e)
   }
 })
 

@@ -17,7 +17,7 @@
     <sinch-icon-format-align-justify slot="icon"></sinch-icon-format-align-justify>
   </sinch-segmented-icon-control-option>
 </ng-template>
-<sinch-segmented-icon-control [attr.multiple]="isMultiple" [value]="value" (change)="onChange($event)">
+<sinch-segmented-icon-control [attr.multiple]="isMultiple" [value]="value" (-change)="onChange($event)">
   <ng-container *ngIf="isSingleOption; then singleTemplate; else multipleTemplate"></ng-container>
 </sinch-segmented-icon-control>
 

@@ -45,7 +45,7 @@
 }
 
 .title + .title {
-  margin-block-start: 8px;
+  margin-block-start: 16px;
 }
 
 .paragraph + .paragraph {
@@ -62,7 +62,8 @@
 }
 
 .example + .title,
-.example-code + .title {
+.example-code + .title,
+.example + .paragraph {
   margin-block-start: 16px;
 }
 
@@ -100,7 +101,8 @@ sinch-table-head-cell:nth-child(2) {
 .code-inline {
   font-family: monospace;
   background-color: #EFF6F6;
-  outline: 1px solid var(--sinch-color-tropical-500);
+
+  /* outline: 1px solid var(--sinch-color-tropical-500); */
   border-radius: 2px;
   padding-inline: 4px;
 }
@@ -115,5 +117,18 @@ sinch-table-head-cell:nth-child(2) {
 .blockquote + .title,
 .paragraph + .blockquote,
 .blockquote + .paragraph {
+  margin-block-start: 16px;
+}
+
+.image {
+  max-width: 752px;
+}
+
+.image + .paragraph,
+.image + .title {
+  margin-block-start: 16px;
+}
+
+.paragraph + .image {
   margin-block-start: 16px;
 }

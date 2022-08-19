@@ -146,11 +146,11 @@ test('action menu events', runScreenshotTests('sinch-action-menu', [
       await subscribeToEvents(page, 'sinch-action-menu-click', 'sinch-action-menu-close')
 
       await $.locator('sinch-action-menu-option').nth(0).evaluate((el) => {
-        el.dispatchEvent(new CustomEvent('click', { bubbles: true }))
+        el.dispatchEvent(new CustomEvent('-click', { bubbles: true }))
       })
 
       await $.evaluate((el) => {
-        el.dispatchEvent(new CustomEvent('close', { bubbles: true }))
+        el.dispatchEvent(new CustomEvent('-close'))
       })
 
       const events = await getAllEvents(page)
@@ -162,7 +162,7 @@ test('action menu events', runScreenshotTests('sinch-action-menu', [
     },
   },
   {
-    name: 'custom events',
+    name: 'native events',
     url: withModal,
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-action-menu-click', 'sinch-action-menu-close')

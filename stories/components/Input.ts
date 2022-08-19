@@ -36,9 +36,8 @@ export default {
       description: 'Invalid',
       control: 'text',
     },
-    onChange: {
+    'on-change': {
       description: 'Handler to sync input value with the state',
-      action: 'onChange',
     },
   },
   parameters: {
@@ -53,7 +52,7 @@ export default {
   },
 } as Meta
 
-const Template = (innerHTML: string): Story => ({ onChange }) => {
+const Template = (innerHTML: string): Story => () => {
   const [{
     value,
     label,
@@ -75,8 +74,7 @@ const Template = (innerHTML: string): Story => ({ onChange }) => {
       e.stopPropagation()
     })
 
-    $input.addEventListener('change', (e) => {
-      onChange?.(e.detail)
+    $input.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
@@ -116,7 +114,7 @@ Input.args = {
 Input.parameters = {
   docs: {
     source: {
-      code: `<sinch-input value={value} onChange={setValue}>${inputInnerHTML}</sinch-input>`,
+      code: `<sinch-input value={value} on-change={setValue}>${inputInnerHTML}</sinch-input>`,
     },
   },
 }
@@ -142,7 +140,7 @@ InputWithIconButton.args = {
 InputWithIconButton.parameters = {
   docs: {
     source: {
-      code: `<sinch-input value={value} onChange={setValue}>${inputWithIconButtonInnerHTML}</sinch-input>`,
+      code: `<sinch-input value={value} on-change={setValue}>${inputWithIconButtonInnerHTML}</sinch-input>`,
     },
   },
 }

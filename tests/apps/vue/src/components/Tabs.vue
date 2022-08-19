@@ -1,5 +1,5 @@
 <template>
-  <sinch-tabs :value="value" @change="onChange">
+  <sinch-tabs :value="value" @--change="onChange">
     <sinch-tabs-option
       v-for="opt in options"
       :key="opt.value"

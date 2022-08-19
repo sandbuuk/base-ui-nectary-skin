@@ -20,7 +20,9 @@ export type TSinchSelectElement = HTMLElement & {
   maxVisibleItems: number | null,
   readonly dropdownRect: TRect,
   /** Change value event */
-  addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
+  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
+  addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
+  addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
   /** Value that matches one of the options `value` */
   setAttribute(name: 'value', value: string): void,
   /** Label */
@@ -59,5 +61,9 @@ export type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
   /** Number of visible at the same time options in the list */
   maxVisibleItems?: number,
   /** Change value handler */
-  onChange: (e: SyntheticEvent<TSinchSelectElement, CustomEvent<string>>) => void,
+  onChange?: (e: SyntheticEvent<TSinchSelectElement, CustomEvent<string>>) => void,
+  /** Change value handler */
+  'on-change'?: (e: CustomEvent<string>) => void,
+  'on-focus'?: (e: CustomEvent<void>) => void,
+  'on-blur'?: (e: CustomEvent<void>) => void,
 }

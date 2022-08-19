@@ -1,4 +1,9 @@
-import { getIntegerAttribute, NectaryElement, updateAttribute, updateIntegerAttribute } from '../utils'
+import {
+  attrValueToPixels,
+  getIntegerAttribute,
+  NectaryElement,
+  updateAttribute,
+} from '../utils'
 import iconStylesHtml from './icon-styles.html'
 
 const DEFAULT_SIZE = 48
@@ -38,16 +43,12 @@ export const createIconClass = (templateHTML: string): CustomElementConstructor 
 
     connectedCallback() {
       updateAttribute(this.$svg, 'preserveAspectRatio', 'xMinYMin meet')
-
-      if (!this.hasAttribute('size')) {
-        updateAttribute(this, 'size', DEFAULT_SIZE)
-      }
     }
 
     attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
       switch (name) {
         case 'size': {
-          updateIntegerAttribute(this.$svg, 'height', newVal, { min: MIN_SIZE, max: MAX_SIZE })
+          this.$svg.style.height = attrValueToPixels(newVal, { min: MIN_SIZE, max: MAX_SIZE })
 
           break
         }

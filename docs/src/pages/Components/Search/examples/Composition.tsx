@@ -29,23 +29,23 @@ export const CompositionExample: FC = () => {
       maxVisibleItems={3}
       aria-label="Search autocomplete"
       open={isOpen}
-      onClose={() => setIsOpen(false)}
+      on-close={() => setIsOpen(false)}
     >
       <sinch-input
         slot="target"
         label="Search"
         aria-label="Search"
         value={value}
-        onFocus={() => setIsOpen(true)}
-        onBlur={() => setIsOpen(false)}
-        onChange={(e) => setValue(e.nativeEvent.detail)}
+        on-focus={() => setIsOpen(true)}
+        on-blur={() => setIsOpen(false)}
+        on-change={(e) => setValue(e.detail)}
       >
         <sinch-icon-search slot="icon"/>
         <sinch-icon-button
           slot="right"
           aria-label="Clear search"
           small
-          onClick={() => setValue('')}
+          on-click={() => setValue('')}
         >
           <sinch-icon-close slot="icon"/>
         </sinch-icon-button>
@@ -57,7 +57,7 @@ export const CompositionExample: FC = () => {
             text={text}
             slot="option"
             aria-label={text}
-            onClick={() => onOptionClick(text)}
+            on-click={() => onOptionClick(text)}
           />
         ))
       }

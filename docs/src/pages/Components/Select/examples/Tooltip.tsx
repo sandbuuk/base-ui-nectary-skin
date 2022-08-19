@@ -19,7 +19,7 @@ export const TooltipExample: FC = () => {
       placeholder="Placeholder"
       style={selectStyle}
       value={value}
-      onChange={(e) => setValue(e.nativeEvent.detail)}
+      on-change={(e) => setValue(e.detail)}
     >
       <sinch-help-tooltip slot="tooltip" text="Tooltip text"/>
       <sinch-select-option slot="option" value="1" text="Option 1 value" aria-label="Option 1">

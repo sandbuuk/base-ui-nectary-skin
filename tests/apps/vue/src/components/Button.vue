@@ -4,9 +4,9 @@
     v-bind:text="text"
     v-bind:disabled="isDisabled"
     v-bind:small="isSmall"
-    @click="onClick"
-    @focusin="onFocus"
-    @focusout="onBlur">
+    @--click="onClick"
+    @--focus="onFocus"
+    @--blur="onBlur">
     <sinch-icon-open-in-new v-if="hasLeftIcon" slot="left-icon"></sinch-icon-open-in-new>
     <sinch-icon-expand-more v-if="hasRightIcon" slot="right-icon"></sinch-icon-expand-more>
     <sinch-spinner v-if="hasSpinner" static v-bind:type="isSmall ? 'small' : 'medium'" slot="left-icon"></sinch-spinner>

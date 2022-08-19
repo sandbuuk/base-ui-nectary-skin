@@ -4,11 +4,13 @@ import type { SyntheticEvent } from 'react'
 export type TSinchSegmentExpandElement = HTMLElement & {
   value: boolean,
   addEventListener(type: 'change', listener: (e: CustomEvent<boolean>) => void): void,
+  addEventListener(type: '-change', listener: (e: CustomEvent<boolean>) => void): void,
   setAttribute(name: 'value', value: string): void,
 }
 
 export type TSinchSegmentExpandReact = TSinchElementReact<TSinchSegmentExpandElement> & {
   value: boolean,
   'aria-label': string,
-  onChange: (e: SyntheticEvent<TSinchSegmentExpandElement, CustomEvent<boolean>>) => void,
+  onChange?: (e: SyntheticEvent<TSinchSegmentExpandElement, CustomEvent<boolean>>) => void,
+  'on-change'?: (e: CustomEvent<boolean>) => void,
 }

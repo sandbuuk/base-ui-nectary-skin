@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/time-picker'
@@ -11,11 +11,11 @@ export const AMPMExample: FC = () => {
   const [value, setValue] = useState('22:30:00')
   const [isoValue, setIsoValue] = useState('22:30:00')
 
-  const onChange = (e: SyntheticEvent<Element, CustomEvent>) => {
-    setValue(e.nativeEvent.detail)
+  const onChange = (e: CustomEvent<string>) => {
+    setValue(e.detail)
   }
-  const onIsoChange = (e: SyntheticEvent<Element, CustomEvent>) => {
-    setValue(e.nativeEvent.detail)
+  const onIsoChange = (e: CustomEvent<string>) => {
+    setValue(e.detail)
     setOpen(false)
   }
   const onOpen = () => {
@@ -29,7 +29,7 @@ export const AMPMExample: FC = () => {
       open={isOpen}
       orientation="bottom-left"
       aria-label="Time input"
-      onClose={onClose}
+      on-close={onClose}
     >
       <sinch-input
         slot="target"
@@ -38,13 +38,13 @@ export const AMPMExample: FC = () => {
         placeholder="hh:mm:ss"
         additionalText="Additional text"
         value={value}
-        onChange={onChange}
+        on-change={onChange}
       >
         <sinch-icon-button
           slot="right"
           small
           aria-label="Open Time Picker"
-          onClick={onOpen}
+          on-click={onOpen}
         >
           <sinch-icon-schedule slot="icon"/>
         </sinch-icon-button>
@@ -55,7 +55,7 @@ export const AMPMExample: FC = () => {
         aria-label="Time Picker"
         submit-aria-label="Submit time"
         value={isoValue}
-        onChange={onIsoChange}
+        on-change={onIsoChange}
       />
     </sinch-popover>
   )

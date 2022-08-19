@@ -1,4 +1,4 @@
-<sinch-dialog open [attr.caption]="title" (close)="onClose()">
+<sinch-dialog open [attr.caption]="title" (-close)="onClose()">
   <section *ngIf="content !== null" slot="content">{{content}}</section>
   <ng-container *ngIf="buttons">
     <sinch-button text="Cancel" type="secondary" slot="buttons"></sinch-button>

@@ -47,7 +47,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.setAttribute('role', 'dialog')
     this.#$dialog.addEventListener('cancel', this.#onCancel)
     this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown)
-    this.addEventListener('close', this.#onCloseReactHandler)
+    this.addEventListener('-close', this.#onCloseReactHandler)
     this.#isConnected = true
 
     // React updates attributes BEFORE connecting to the DOM
@@ -62,7 +62,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   disconnectedCallback() {
     this.#$dialog.removeEventListener('cancel', this.#onCancel)
     this.#$dialog.removeEventListener('mousedown', this.#onBackdropMouseDown)
-    this.removeEventListener('close', this.#onCloseReactHandler)
+    this.removeEventListener('-close', this.#onCloseReactHandler)
 
     this.#onCollapse()
     this.#isConnected = false
@@ -271,8 +271,9 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#dispatchCloseEvent()
   }
 
-  #onCloseReactHandler = () => {
+  #onCloseReactHandler = (e: Event) => {
     getReactEventHandler(this, 'onClose')?.()
+    getReactEventHandler(this, 'on-close')?.(e)
   }
 
   #onTargetKeydown = (e: KeyboardEvent) => {
@@ -288,10 +289,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
   #dispatchCloseEvent() {
     this.dispatchEvent(
-      new CustomEvent(
-        'close',
-        { bubbles: true }
-      )
+      new CustomEvent('-close')
     )
   }
 })

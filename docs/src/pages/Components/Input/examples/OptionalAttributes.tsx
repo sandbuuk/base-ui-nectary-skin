@@ -14,7 +14,7 @@ export const OptionalAttributesExample: FC = () => {
       optionalText="Optional text"
       invalidText="Invalid text"
       value={state}
-      onChange={(e) => setState(e.nativeEvent.detail)}
+      on-change={(e) => setState(e.detail)}
     />
   )
 }

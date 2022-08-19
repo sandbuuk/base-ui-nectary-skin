@@ -27,9 +27,9 @@ export default {
       description: 'Number of visible items in the list',
       control: { type: 'range', min: 1, max: 5, step: 1 },
     },
-    onClose: {
+    'on-close': {
       description: 'Close event handler',
-      action: 'onClose',
+      action: 'on-close',
     },
   },
   parameters: {
@@ -70,7 +70,7 @@ const Template = (innerHTML: string): Story => () => {
       updateArgs({ open: false })
     })
 
-    $actionmenu.addEventListener('close', () => {
+    $actionmenu.addEventListener('-close', () => {
       updateArgs({ open: false })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
@@ -113,7 +113,7 @@ ActionMenu.args = {
 ActionMenu.parameters = {
   docs: {
     source: {
-      code: `<sinch-action-menu modal open={isOpen} onClose={onClose}>
+      code: `<sinch-action-menu modal open={isOpen} on-close={onClose}>
   <sinch-button text="Button" type="cta-secondary" slot="target"></sinch-button>
   <sinch-action-menu-option onClick={onClick} text="Option 1 value long" slot="option">
     <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>

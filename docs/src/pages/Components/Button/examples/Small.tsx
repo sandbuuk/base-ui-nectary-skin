@@ -7,6 +7,6 @@ export const SmallExample: FC = () => (
     aria-label="Click"
     type="primary"
     small
-    onClick={() => console.log('click')}
+    on-click={() => console.log('click')}
   />
 )

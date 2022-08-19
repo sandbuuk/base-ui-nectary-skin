@@ -174,7 +174,7 @@ test('time input screenshots', runScreenshotTests('sinch-time-picker', [
     async *fn({ $, page }) {
       const testInput = testCustomEvent(page, $)
 
-      await testInput('change', 'sinch-time-picker-change', 'X')
+      await testInput('-change', 'sinch-time-picker-change', 'X')
     },
   },
   {

@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from 'react'
-import type { FC, SyntheticEvent } from 'react'
+import { useState } from 'react'
+import type { FC } from 'react'
 import '@sinch-engage/nectary/select'
 import '@sinch-engage/nectary/select-option'
 
@@ -9,39 +9,33 @@ type TSelect = {
 
 export const Select: FC<TSelect> = ({ search }) => {
   const [value, setValue] = useState(search.get('value') ?? '')
-  const onChange = useMemo(() =>
-    (search.get('uncontrolled') === null
-      ? (e: SyntheticEvent<Element, CustomEvent<string>>) => {
-        const value = e.nativeEvent.detail
+  const onChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
-        window.dispatchEvent(new CustomEvent('sinch-select-change', { detail: value }))
-        setValue(value)
-      }
-      : () => {}),
-  [search, setValue])
-  const onFocus = useCallback(() => {
+    window.dispatchEvent(new CustomEvent('sinch-select-change', { detail: value }))
+    setValue(value)
+  }
+  const onFocus = () => {
     window.dispatchEvent(new CustomEvent('sinch-select-focus'))
-  }, [])
-  const onBlur = useCallback(() => {
+  }
+  const onBlur = () => {
     window.dispatchEvent(new CustomEvent('sinch-select-blur'))
-  }, [])
-  const labelText = useMemo(() => search.get('label') as string, [search])
-  const optionalText = useMemo(() => search.get('optional') ?? undefined, [search])
-  const additionalText = useMemo(() => search.get('additional') ?? undefined, [search])
-  const invalidText = useMemo(() => search.get('invalid') ?? undefined, [search])
-  const placeholderText = useMemo(() => search.get('placeholder') ?? undefined, [search])
-  const isDisabled = useMemo(() => search.get('disabled') != null, [search])
-  const maxVisibleItems = useMemo(() => {
+  }
+  const labelText = search.get('label') ?? ''
+  const optionalText = search.get('optional') ?? undefined
+  const additionalText = search.get('additional') ?? undefined
+  const invalidText = search.get('invalid') ?? undefined
+  const placeholderText = search.get('placeholder') ?? undefined
+  const isDisabled = search.get('disabled') != null
+  const maxVisibleItems = (() => {
     const val = search.get('maxvisibleitems')
 
     return val !== null ? parseInt(val) : undefined
-  }, [search])
-  const tooltip = useMemo(
-    () => search.get('tooltip') != null && (
+  })()
+  const tooltip =
+    search.get('tooltip') != null && (
       <sinch-help-tooltip text={search.get('tooltip')!} slot="tooltip"/>
-    ),
-    [search]
-  )
+    )
 
   return (
     <sinch-select
@@ -53,9 +47,9 @@ export const Select: FC<TSelect> = ({ search }) => {
       disabled={isDisabled}
       value={value}
       maxVisibleItems={maxVisibleItems}
-      onChange={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      on-change={onChange}
+      on-focus={onFocus}
+      on-blur={onBlur}
       aria-label="Select"
     >
       {tooltip}

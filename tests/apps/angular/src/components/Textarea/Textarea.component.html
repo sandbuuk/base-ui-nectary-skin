@@ -7,9 +7,9 @@
   [attr.disabled]="isDisabled"
   [attr.resizable]="isResizable"
   [attr.rows]="rows"
-  (focusin)="onFocus()"
-  (focusout)="onBlur()"
+  (-focus)="onFocus()"
+  (-blur)="onBlur()"
   [value]="value"
-  (change)="onChange($event)">
+  (-change)="onChange($event)">
   <sinch-help-tooltip *ngIf="tooltipText != null" [text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
 </sinch-textarea>

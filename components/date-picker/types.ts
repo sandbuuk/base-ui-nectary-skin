@@ -16,7 +16,7 @@ export type TSinchDatePickerElement = HTMLElement & {
   readonly nextMonthButtonRect: TRect,
   nthButtonRect(index: number): TRect | null,
   /** Change value handler, return date in ISO 8601 format */
-  addEventListener(type: 'change', listener: (e: CustomEvent<string>) => void): void,
+  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   /** Date value in ISO 8601 format */
   setAttribute(name: 'value', value: string): void,
   /** Date min limit in ISO 8601 format */
@@ -39,5 +39,7 @@ export type TSinchDatePickerReact = TSinchElementReact<TSinchDatePickerElement> 
   /** Label that is used for a11y */
   'aria-label': string,
   /** Change value handler, return date in ISO 8601 format */
-  onChange: (e: SyntheticEvent<TSinchDatePickerElement, CustomEvent<string>>) => void,
+  onChange?: (e: SyntheticEvent<TSinchDatePickerElement, CustomEvent<string>>) => void,
+  /** Change value handler, return date in ISO 8601 format */
+  'on-change'?: (e: CustomEvent<string>) => void,
 }

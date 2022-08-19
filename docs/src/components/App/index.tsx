@@ -9,6 +9,7 @@ import type { FC } from 'react'
 import { QueryRouter } from '~/components/QueryRouter'
 import { ChangelogPage } from '~/pages/Changelog'
 import { ComponentsOutlet, ComponentsPage } from '~/pages/Components'
+import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
 import { NotFoundPage } from '~/pages/NotFound'
 import { lazyScrollIntoView } from '~/utils/lazy-scroll-into-view'
@@ -31,6 +32,7 @@ export const App: FC = () => (
         <div id="app-sidebar">
           <NavigationList>
             <NavigationItem path="/" text="👋 Intro"/>
+            <NavigationItem path="/faq" text="❔ FAQ"/>
             <NavigationItem path="/changelog" text="📦 Changelog"/>
             <NavigationItem path="/components" text="🍱 Components">
               <NavigationList>
@@ -50,6 +52,7 @@ export const App: FC = () => (
           <Suspense fallback={<Loading/>}>
             <Routes>
               <Route path="/" element={<IntroPage/>}/>
+              <Route path="/faq" element={<FAQPage/>}/>
               <Route path="/changelog" element={<ChangelogPage/>}/>
               <Route path="/components" element={<ComponentsOutlet/>}>
                 <Route index element={<ComponentsPage/>}/>

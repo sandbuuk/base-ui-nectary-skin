@@ -2,6 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getReactEventHandler,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -28,12 +29,26 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
 
     this.#$input = shadowRoot.querySelector('input')!
     this.#$label = shadowRoot.querySelector('label')!
-    this.#$input.addEventListener('input', this.#onInput)
   }
 
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
     this.setAttribute('aria-label', 'toggle')
+    this.#$input.addEventListener('input', this.#onInput)
+    this.#$input.addEventListener('focus', this.#onCheckboxFocus)
+    this.#$input.addEventListener('blur', this.#onCheckboxBlur)
+    this.addEventListener('-change', this.#onChangeReactHandler)
+    this.addEventListener('-focus', this.#onFocusReactHandler)
+    this.addEventListener('-blur', this.#onBlurReactHandler)
+  }
+
+  disconnectedCallback() {
+    this.#$input.removeEventListener('input', this.#onInput)
+    this.#$input.removeEventListener('focus', this.#onCheckboxFocus)
+    this.#$input.removeEventListener('blur', this.#onCheckboxBlur)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.removeEventListener('-focus', this.#onFocusReactHandler)
+    this.removeEventListener('-blur', this.#onBlurReactHandler)
   }
 
   static get observedAttributes() {
@@ -132,6 +147,33 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('change', { detail: isChecked, bubbles: true })
     )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: isChecked })
+    )
+  }
+
+  #onCheckboxFocus = () => {
+    this.dispatchEvent(
+      new CustomEvent('-focus')
+    )
+  }
+
+  #onCheckboxBlur = () => {
+    this.dispatchEvent(
+      new CustomEvent('-blur')
+    )
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
+  }
+
+  #onFocusReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-focus')?.(e)
+  }
+
+  #onBlurReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-blur')?.(e)
   }
 })
 

@@ -8,9 +8,9 @@
     :disabled="isDisabled"
     :type="type"
     :value="value"
-    @change="onChange"
-    @focusin="onFocus"
-    @focusout="onBlur">
+    @--change="onChange"
+    @--focus="onFocus"
+    @--blur="onBlur">
     <sinch-icon-search v-if="hasIcon" slot="icon"></sinch-icon-search>
     <sinch-help-tooltip v-if="tooltipText != null" :text="tooltipText" slot="tooltip"></sinch-help-tooltip>
     <sinch-tag v-if="hasRight" slot="right" text="text"></sinch-tag>

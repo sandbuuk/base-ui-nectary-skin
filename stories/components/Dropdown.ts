@@ -33,13 +33,12 @@ export default {
       description: 'Number of visible items in the list',
       control: { type: 'range', min: 1, max: 5, step: 1 },
     },
-    onChange: {
+    'on-change': {
       description: 'Handler to sync dropdown value with the state',
-      action: 'onChange',
     },
-    onClose: {
+    'on-close': {
       description: 'Close event handler',
-      action: 'onClose',
+      action: 'on-close',
     },
     onFocus: {
       description: 'Focus handler',
@@ -69,7 +68,6 @@ const Template = (innerHTML: string): Story => () => {
     value,
     maxVisibleItems,
     orientation,
-    onChange,
   }, updateArgs] = useArgs()
 
   const $wrapper = useStoryWrapper()
@@ -85,14 +83,13 @@ const Template = (innerHTML: string): Story => () => {
       $dropdown.setAttribute('open', '')
     })
 
-    $dropdown.addEventListener('change', (e) => {
-      onChange(e.detail)
+    $dropdown.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail, open: false })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
-    $dropdown.addEventListener('close', () => {
+    $dropdown.addEventListener('-close', () => {
       updateArgs({ open: false })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
@@ -136,7 +133,7 @@ DropdownWithText.args = {
 DropdownWithText.parameters = {
   docs: {
     source: {
-      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${textDropdownInnerHTML}</sinch-dropdown>`,
+      code: `<sinch-dropdown open={isOpen} value={value} on-change={setValue} on-close={onClose}>${textDropdownInnerHTML}</sinch-dropdown>`,
     },
   },
 }
@@ -160,7 +157,7 @@ DropdownWithCheckbox.args = {
 DropdownWithCheckbox.parameters = {
   docs: {
     source: {
-      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${checkboxDropdownInnerHTML}</sinch-dropdown>`,
+      code: `<sinch-dropdown open={isOpen} value={value} on-change={setValue} on-close={onClose}>${checkboxDropdownInnerHTML}</sinch-dropdown>`,
     },
   },
 }
@@ -184,7 +181,7 @@ DropdownWithRadio.args = {
 DropdownWithRadio.parameters = {
   docs: {
     source: {
-      code: `<sinch-dropdown open={isOpen} value={value} onChange={setValue} onClose={onClose}>${radioDropdownInnerHTML}</sinch-dropdown>`,
+      code: `<sinch-dropdown open={isOpen} value={value} on-change={setValue} on-close={onClose}>${radioDropdownInnerHTML}</sinch-dropdown>`,
     },
   },
 }
