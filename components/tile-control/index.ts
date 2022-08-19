@@ -46,7 +46,7 @@ defineCustomElement('sinch-tile-control', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['value', 'small']
+    return ['value', 'small', 'multiple']
   }
 
   get nodeName() {
@@ -101,6 +101,10 @@ defineCustomElement('sinch-tile-control', class extends NectaryElement {
         this.#onSmallChange()
 
         break
+      }
+
+      case 'multiple': {
+        this.#onValueChange(this.value)
       }
     }
   }

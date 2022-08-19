@@ -8,8 +8,9 @@
 
 #wrapper {
   display: grid;
-  grid-template-columns: repeat(var(--sinch-grid-num-columns), minmax(0, 1fr));
+  grid-template-columns: repeat(var(--sinch-grid-num-columns), auto);
   gap: 16px;
+  width: fit-content;
 }
 
 :host([small]:not([small="false"])) #wrapper {
