@@ -15,27 +15,27 @@ export default {
 
 const Template = (innerHTML: string): Story => () => {
   const [{ value }, updateArgs] = useArgs()
-  const radioRef = useRef<HTMLElementTagNameMap['sinch-segmented-control'] | null>(null)
+  const segmentedRef = useRef<HTMLElementTagNameMap['sinch-segmented-control'] | null>(null)
 
-  if (radioRef.current === null) {
-    const $tabs = document.createElement('sinch-segmented-control')
+  if (segmentedRef.current === null) {
+    const $el = document.createElement('sinch-segmented-control')
 
-    $tabs.innerHTML = innerHTML
+    $el.innerHTML = innerHTML
 
-    $tabs.addEventListener('-change', (e) => {
+    $el.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
-    radioRef.current = $tabs
+    segmentedRef.current = $el
   }
 
-  const $tabs = radioRef.current!
+  const $el = segmentedRef.current!
 
-  $tabs.value = value
+  $el.value = value
 
-  return $tabs
+  return $el
 }
 
 const tabsInnerHTML = `

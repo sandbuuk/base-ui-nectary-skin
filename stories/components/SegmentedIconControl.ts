@@ -21,17 +21,17 @@ const Template = (innerHTML: string): Story => () => {
   const controlRef = useRef<HTMLElementTagNameMap['sinch-segmented-icon-control'] | null>(null)
 
   if (controlRef.current === null) {
-    const $tabs = document.createElement('sinch-segmented-icon-control')
+    const $el = document.createElement('sinch-segmented-icon-control')
 
-    $tabs.innerHTML = innerHTML
+    $el.innerHTML = innerHTML
 
-    $tabs.addEventListener('-change', (e) => {
+    $el.addEventListener('-change', (e) => {
       updateArgs({ value: e.detail })
       // https://github.com/storybookjs/storybook/issues/11657
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
-    controlRef.current = $tabs
+    controlRef.current = $el
   }
 
   const $el = controlRef.current!
