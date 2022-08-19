@@ -59,9 +59,9 @@ const Template = (innerHTML: string): Story => () => {
       e.stopPropagation()
     })
 
-    $input.addEventListener('change', (e) => {
+    $input.addEventListener('change', (e: Event) => {
       e.stopPropagation()
-      updateArgs({ value: e.detail })
+      updateArgs({ value: (e as CustomEvent<string>).detail })
       // https://github.com/storybookjs/storybook/issues/11657
       // setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
