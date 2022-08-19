@@ -91,7 +91,7 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
     for (const $option of this.#$slot.assignedElements()) {
       const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
 
-      updateBooleanAttribute($option, 'checked', isChecked)
+      updateBooleanAttribute($option, 'data-checked', isChecked)
     }
   }
 

@@ -20,7 +20,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-button', class extends NectaryElement {
   #$button: HTMLButtonElement
-  #$text: HTMLSpanElement
+  #$text: HTMLElement
 
   constructor() {
     super()

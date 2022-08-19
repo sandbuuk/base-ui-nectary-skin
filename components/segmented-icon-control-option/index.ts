@@ -31,7 +31,7 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
 
   connectedCallback() {
     this.setAttribute('role', 'tab')
-    this.#$button.addEventListener('click', this.#onClick)
+    this.#$button.addEventListener('click', this.#onButtonClick)
     this.#$button.addEventListener('focus', this.#onButtonFocus)
     this.#$button.addEventListener('blur', this.#onButtonBlur)
     this.addEventListener('-focus', this.#onFocusReactHandler)
@@ -39,7 +39,7 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onClick)
+    this.#$button.removeEventListener('click', this.#onButtonClick)
     this.#$button.removeEventListener('focus', this.#onButtonFocus)
     this.#$button.removeEventListener('blur', this.#onButtonBlur)
     this.removeEventListener('-focus', this.#onFocusReactHandler)
@@ -47,7 +47,7 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
   }
 
   static get observedAttributes() {
-    return ['checked', 'disabled', 'value']
+    return ['data-checked', 'disabled']
   }
 
   set value(value: string) {
@@ -68,7 +68,7 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
-      case 'checked': {
+      case 'data-checked': {
         updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
 
         break
@@ -89,7 +89,7 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
     this.#$button.blur()
   }
 
-  #onClick = (e: Event) => {
+  #onButtonClick = (e: Event) => {
     e.stopPropagation()
 
     this.dispatchEvent(

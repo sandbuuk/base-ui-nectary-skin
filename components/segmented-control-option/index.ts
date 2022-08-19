@@ -33,7 +33,7 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
 
   connectedCallback() {
     this.setAttribute('role', 'tab')
-    this.#$button.addEventListener('click', this.#onClick)
+    this.#$button.addEventListener('click', this.#onButtonClick)
     this.#$button.addEventListener('focus', this.#onButtonFocus)
     this.#$button.addEventListener('blur', this.#onButtonBlur)
     this.addEventListener('-focus', this.#onFocusReactHandler)
@@ -41,7 +41,7 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onClick)
+    this.#$button.removeEventListener('click', this.#onButtonClick)
     this.#$button.removeEventListener('focus', this.#onButtonFocus)
     this.#$button.removeEventListener('blur', this.#onButtonBlur)
     this.removeEventListener('-focus', this.#onFocusReactHandler)
@@ -49,7 +49,7 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
   }
 
   static get observedAttributes() {
-    return ['checked', 'disabled', 'text', 'value']
+    return ['data-checked', 'disabled', 'text']
   }
 
   set value(value: string) {
@@ -76,14 +76,18 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
     return getAttribute(this, 'text', '')
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'text': {
         this.#$label.textContent = newVal
 
         break
       }
-      case 'checked': {
+      case 'data-checked': {
         updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
 
         break
@@ -104,7 +108,7 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
     this.#$button.blur()
   }
 
-  #onClick = (e: Event) => {
+  #onButtonClick = (e: Event) => {
     e.stopPropagation()
 
     this.dispatchEvent(

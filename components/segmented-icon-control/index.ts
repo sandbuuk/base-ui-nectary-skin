@@ -91,7 +91,7 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
     const $elem = (e.target) as Element
     const value = (e as CustomEvent).detail
     const detail = this.multiple
-      ? updateCsv(this.value, value, !getBooleanAttribute($elem, 'checked'))
+      ? updateCsv(this.value, value, !getBooleanAttribute($elem, 'data-checked'))
       : value
 
     this.dispatchEvent(
@@ -109,7 +109,7 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
       for (const $option of this.#$slot.assignedElements()) {
         const isChecked = !getBooleanAttribute($option, 'disabled') && values.has(getAttribute($option, 'value', ''))
 
-        updateBooleanAttribute($option, 'checked', isChecked)
+        updateBooleanAttribute($option, 'data-checked', isChecked)
       }
     } else {
       const value = getFirstCsvValue(csv)
@@ -117,7 +117,7 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
       for (const $option of this.#$slot.assignedElements()) {
         const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
 
-        updateBooleanAttribute($option, 'checked', isChecked)
+        updateBooleanAttribute($option, 'data-checked', isChecked)
       }
     }
   }
