@@ -1,6 +1,7 @@
 import type { TSinchElementReact } from '../types'
 
 export type TSinchTileControlOptionElement = HTMLElement & {
+  /** Value */
   value: string,
   /** Text content */
   text: string,
@@ -8,8 +9,11 @@ export type TSinchTileControlOptionElement = HTMLElement & {
   disabled: boolean,
   /** Small */
   small: boolean,
+  /** Focus event */
   addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
+  /** Blur event */
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
+  /** Value */
   setAttribute(name: 'value', value: string): void,
   /** Text content */
   setAttribute(attr: 'text', value: string): void,
@@ -20,13 +24,16 @@ export type TSinchTileControlOptionElement = HTMLElement & {
 }
 
 export type TSinchTileControlOptionReact = TSinchElementReact<TSinchTileControlOptionElement> & {
+  /** Value */
   value: string,
   /** Text content */
   text: string,
-  /** Label that is used for a11y – might be different from `label` */
+  /** Label that is used for a11y */
   'aria-label': string,
   /** Disabled */
   disabled?: boolean,
+  /** Focus handler */
   'on-focus'?: (e: CustomEvent<void>) => void,
+  /** Blur handler */
   'on-blur'?: (e: CustomEvent<void>) => void,
 }
