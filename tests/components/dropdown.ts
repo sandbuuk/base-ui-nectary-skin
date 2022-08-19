@@ -317,11 +317,11 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   {
     name: 'custom events',
     url: withDropdown,
-    async *fn({ page }) {
+    async *fn({ page, isFirefox }) {
       await subscribeToEvents(page, 'sinch-dropdown-focus', 'sinch-dropdown-blur', 'sinch-dropdown-change', 'sinch-dropdown-close')
 
       await page.keyboard.press('Tab')
-      await page.mouse.click(0, 0)
+      await page.keyboard.press('Shift+Tab')
 
       expect(
         await getAllEvents(page)
@@ -334,14 +334,24 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
       await page.keyboard.press('Enter')
       await page.keyboard.press('Enter')
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-dropdown-focus', detail: null },
-        { type: 'sinch-dropdown-blur', detail: null },
-        { type: 'sinch-dropdown-change', detail: '1' },
-        { type: 'sinch-dropdown-focus', detail: null },
-      ])
+      if (isFirefox) {
+        expect(
+          await getAllEvents(page)
+        ).toEqual([
+          { type: 'sinch-dropdown-focus', detail: null },
+          { type: 'sinch-dropdown-change', detail: '1' },
+          { type: 'sinch-dropdown-focus', detail: null },
+        ])
+      } else {
+        expect(
+          await getAllEvents(page)
+        ).toEqual([
+          { type: 'sinch-dropdown-focus', detail: null },
+          { type: 'sinch-dropdown-blur', detail: null },
+          { type: 'sinch-dropdown-change', detail: '1' },
+          { type: 'sinch-dropdown-focus', detail: null },
+        ])
+      }
     },
   },
 ]))

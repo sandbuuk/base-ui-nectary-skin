@@ -34,11 +34,13 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
     this.setAttribute('role', 'option')
     this.#$wrapper.addEventListener('mousedown', this.#onMouseDown)
     this.addEventListener('-click', this.#onClickReactHandler)
+    this.addEventListener('click', this.#onClick)
   }
 
   disconnectedCallback() {
     this.#$wrapper.removeEventListener('mousedown', this.#onMouseDown)
     this.removeEventListener('-click', this.#onClickReactHandler)
+    this.removeEventListener('click', this.#onClick)
   }
 
   static get observedAttributes() {
@@ -81,7 +83,7 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
     return getBooleanAttribute(this, 'disabled')
   }
 
-  click() {
+  #onClick = () => {
     this.dispatchEvent(
       new CustomEvent('-click')
     )

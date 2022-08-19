@@ -70,7 +70,7 @@ export const Search: FC<TSearch> = ({ search }) => {
       open={isOpen}
       maxVisibleItems={maxVisibleItems}
       aria-label="Search"
-      on-close={onClose}
+      onClose={onClose}
     >
       <sinch-input
         slot="target"
