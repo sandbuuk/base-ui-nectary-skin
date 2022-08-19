@@ -1,10 +1,9 @@
 import { useCallback, useMemo, useState } from 'react'
-import type { TSinchActionMenuOptionElement } from '@sinch-engage/nectary/action-menu-option/types'
 import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover/types'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
-import type { FC, MouseEvent } from 'react'
+import type { FC } from 'react'
 
 type TActionMenu = {
   search: URLSearchParams,
@@ -17,8 +16,8 @@ export const ActionMenu: FC<TActionMenu> = ({ search }) => {
     window.dispatchEvent(new CustomEvent('sinch-action-menu-close'))
     setOpen(false)
   }, [])
-  const onOptionClick = useCallback((e: MouseEvent<TSinchActionMenuOptionElement>) => {
-    window.dispatchEvent(new CustomEvent('sinch-action-menu-click', { detail: e.currentTarget.text }))
+  const onOptionClick = useCallback((text: string) => {
+    window.dispatchEvent(new CustomEvent('sinch-action-menu-click', { detail: text }))
     setOpen(false)
   }, [])
   const maxVisibleItems = useMemo(() => {
@@ -33,7 +32,7 @@ export const ActionMenu: FC<TActionMenu> = ({ search }) => {
       open={isOpen}
       maxVisibleItems={maxVisibleItems}
       orientation={orientation}
-      onClose={onClose}
+      on-close={onClose}
       aria-label="Dropdown"
       modal={isModal}
     >
@@ -42,18 +41,18 @@ export const ActionMenu: FC<TActionMenu> = ({ search }) => {
         type="cta-secondary"
         text="Some content"
         aria-label="Button"
-        onClick={() => {
+        on-click={() => {
           setOpen(true)
         }}
       />
-      <sinch-action-menu-option text="Option 1 value long long long" slot="option" aria-label="Option 1" onClick={onOptionClick}>
+      <sinch-action-menu-option text="Option 1 value long long long" slot="option" aria-label="Option 1" on-click={() => onOptionClick('Option 1 value long long long')}>
         <sinch-icon-open-in-new slot="icon"/>
       </sinch-action-menu-option>
-      <sinch-action-menu-option text="Option 2 value" slot="option" disabled aria-label="Option 2" onClick={onOptionClick}>
+      <sinch-action-menu-option text="Option 2 value" slot="option" disabled aria-label="Option 2" on-click={() => onOptionClick('Option 2 value')}>
         <sinch-icon-open-in-new slot="icon"/>
       </sinch-action-menu-option>
-      <sinch-action-menu-option text="Option 3 value" slot="option" disabled={false} aria-label="Option 3" onClick={onOptionClick}/>
-      <sinch-action-menu-option text="Option 4 value" slot="option" aria-label="Option 4" onClick={onOptionClick}/>
+      <sinch-action-menu-option text="Option 3 value" slot="option" disabled={false} aria-label="Option 3" on-click={() => onOptionClick('Option 3 value')}/>
+      <sinch-action-menu-option text="Option 4 value" slot="option" aria-label="Option 4" on-click={() => onOptionClick('Option 4 value')}/>
     </sinch-action-menu>
   )
 }

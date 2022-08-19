@@ -64,7 +64,7 @@ export const DateInput: FC<TDateInput> = ({ search }) => {
           slot="right"
           small
           aria-label="Open Date Picker"
-          onClick={onOpen}
+          on-click={onOpen}
         >
           <sinch-icon-calendar-today slot="icon"/>
         </sinch-icon-button>

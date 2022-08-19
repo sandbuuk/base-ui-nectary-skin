@@ -4,7 +4,7 @@
     v-bind:text="text"
     v-bind:disabled="isDisabled"
     v-bind:small="isSmall"
-    @click="onClick"
+    @--click="onClick"
     @--focus="onFocus"
     @--blur="onBlur">
     <sinch-icon-open-in-new v-if="hasLeftIcon" slot="left-icon"></sinch-icon-open-in-new>

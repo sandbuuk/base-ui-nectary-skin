@@ -2,11 +2,12 @@
   <div id="link-wrapper">
     <span>Line with </span>
     <sinch-link
+      preventdefault
       :href="href"
       :text="text"
       :disabled="isDisabled"
       :external="isExternal"
-      @click="onClick"
+      @--click="onClick"
       @--focus="onFocus"
       @--blur="onBlur"
     ></sinch-link>
@@ -23,7 +24,6 @@ export default {
   },
   methods: {
     onClick(e) {
-      e.preventDefault()
       window.dispatchEvent(new CustomEvent('sinch-link-click'))
     },
     onFocus() {

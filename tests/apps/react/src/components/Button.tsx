@@ -27,7 +27,7 @@ export const Button: FC<TButton> = ({ search }) => {
       text={text}
       disabled={isDisabled}
       small={isSmall}
-      onClick={onClick}
+      on-click={onClick}
       on-focus={onFocus}
       on-blur={onBlur}
       aria-label={text ?? 'Button'}

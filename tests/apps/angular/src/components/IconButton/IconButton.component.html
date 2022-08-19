@@ -2,7 +2,7 @@
   [attr.disabled]="isDisabled"
   (-focus)="onFocus()"
   (-blur)="onBlur()"
-  (click)="onClick()">
+  (-click)="onClick()">
   <sinch-icon-help-outline *ngIf="!hasSpinner" slot="icon"></sinch-icon-help-outline>
   <sinch-spinner *ngIf="hasSpinner" static type="medium" slot="icon"></sinch-spinner>
 </sinch-icon-button>

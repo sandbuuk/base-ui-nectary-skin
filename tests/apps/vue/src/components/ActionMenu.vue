@@ -10,16 +10,16 @@
       type="cta-secondary"
       text="Some content"
       aria-label="Button"
-      @click="onOpen"
+      @--click="onOpen"
     ></sinch-button>
-    <sinch-action-menu-option @click="onClick" text="Option 1 value long long long" slot="option">
+    <sinch-action-menu-option @--click="() => {onClick('Option 1 value long long long')}" text="Option 1 value long long long" slot="option">
       <sinch-icon-open-in-new slot="icon"/>
     </sinch-action-menu-option>
-    <sinch-action-menu-option @click="onClick" text="Option 2 value" slot="option" disabled>
+    <sinch-action-menu-option @--click="() => {onClick('Option 2 value')}" text="Option 2 value" slot="option" disabled>
       <sinch-icon-open-in-new slot="icon"/>
     </sinch-action-menu-option>
-    <sinch-action-menu-option @click="onClick" text="Option 3 value" slot="option"></sinch-action-menu-option>
-    <sinch-action-menu-option @click="onClick" text="Option 4 value" slot="option"></sinch-action-menu-option>
+    <sinch-action-menu-option @--click="() => {onClick('Option 3 value')}" text="Option 3 value" slot="option"></sinch-action-menu-option>
+    <sinch-action-menu-option @--click="() => {onClick('Option 4 value')}" text="Option 4 value" slot="option"></sinch-action-menu-option>
   </sinch-action-menu>
 </template>
 
@@ -30,8 +30,8 @@ import '@sinch-engage/nectary/action-menu-option'
 
 export default {
   methods: {
-    onClick(e) {
-      window.dispatchEvent(new CustomEvent('sinch-action-menu-click', {detail: e.target.getAttribute('text')}))
+    onClick(text) {
+      window.dispatchEvent(new CustomEvent('sinch-action-menu-click', {detail: text}))
       this.isOpen = false
     },
     onClose() {

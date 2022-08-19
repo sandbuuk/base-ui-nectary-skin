@@ -32,15 +32,19 @@ defineCustomElement('sinch-link', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#$anchor.addEventListener('click', this.#onAnchorClick)
     this.#$anchor.addEventListener('focus', this.#onAnchorFocus)
     this.#$anchor.addEventListener('blur', this.#onAnchorBlur)
+    this.addEventListener('-click', this.#onClickReactHandler)
     this.addEventListener('-focus', this.#onFocusReactHandler)
     this.addEventListener('-blur', this.#onBlurReactHandler)
   }
 
   disconnectedCallback() {
+    this.#$anchor.removeEventListener('click', this.#onAnchorClick)
     this.#$anchor.removeEventListener('focus', this.#onAnchorFocus)
     this.#$anchor.removeEventListener('blur', this.#onAnchorBlur)
+    this.removeEventListener('-click', this.#onClickReactHandler)
     this.removeEventListener('-focus', this.#onFocusReactHandler)
     this.removeEventListener('-blur', this.#onBlurReactHandler)
   }
@@ -128,9 +132,15 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     this.#$anchor.blur()
   }
 
+  #onAnchorClick = (e: Event) => {
     if (this.preventDefault) {
       e.preventDefault()
     }
+
+    this.dispatchEvent(
+      new CustomEvent('-click')
+    )
+  }
 
   #onAnchorFocus = () => {
     this.dispatchEvent(new CustomEvent('-focus'))
@@ -146,6 +156,10 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
   #onBlurReactHandler = () => {
     getReactEventHandler(this, 'on-blur')?.()
+  }
+
+  #onClickReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-click')?.(e)
   }
 })
 

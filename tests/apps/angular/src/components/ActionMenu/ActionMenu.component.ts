@@ -25,8 +25,8 @@ export class ActionMenuComponent {
     this.maxVisibleItems = numVisibleValue !== null ? parseInt(numVisibleValue) : null
   }
 
-  onClick(e: Event) {
-      window.dispatchEvent(new CustomEvent('sinch-action-menu-click', {detail: (e.target as Element).getAttribute('text')}))
+  onClick(text: string) {
+      window.dispatchEvent(new CustomEvent('sinch-action-menu-click', {detail: text}))
       this.isOpen = false
   }
   onClose() {

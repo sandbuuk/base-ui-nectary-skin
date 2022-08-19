@@ -6,6 +6,7 @@ export type TSinchLinkElement = HTMLElement & {
   disabled: boolean,
   external: boolean,
   preventDefault: boolean,
+  addEventListener(type: '-click', listener: (e: CustomEvent<void>) => void): void,
   addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
   setAttribute(name: 'text', value: string): void,
@@ -21,6 +22,7 @@ export type TSinchLinkReact = TSinchElementReact<TSinchLinkElement> & {
   disabled?: boolean,
   external?: boolean,
   preventDefault?: boolean,
+  'on-click'?: (e: CustomEvent<void>) => void,
   'on-focus'?: (e: CustomEvent<void>) => void,
   'on-blur'?: (e: CustomEvent<void>) => void,
 }
