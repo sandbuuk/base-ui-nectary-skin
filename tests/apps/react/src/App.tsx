@@ -38,6 +38,7 @@ import { TimePicker } from './components/TimePicker'
 import { Title } from './components/Title'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
+import { VerticalStepper } from './components/VerticalStepper'
 import type { CSSProperties, FC } from 'react'
 
 const mapElement = (url: URL) => {
@@ -279,6 +280,12 @@ const mapElement = (url: URL) => {
     case '/horizontal-stepper': {
       return (
         <HorizontalStepper search={url.searchParams}/>
+      )
+    }
+
+    case '/vertical-stepper': {
+      return (
+        <VerticalStepper search={url.searchParams}/>
       )
     }
   }

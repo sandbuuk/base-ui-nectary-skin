@@ -38,6 +38,7 @@ import { TimePickerComponent } from '../components/TimePicker/TimePicker.compone
 import { TitleComponent } from '../components/Title/Title.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
+import { VerticalStepper } from '../components/VerticalStepper/VerticalStepper.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -80,6 +81,7 @@ import { AppComponent } from './app.component'
     TitleComponent,
     ToggleComponent,
     TooltipComponent,
+    VerticalStepper,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

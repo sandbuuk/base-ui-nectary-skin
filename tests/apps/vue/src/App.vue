@@ -37,6 +37,7 @@
     <Title v-if="url.pathname === '/title'" :search="url.searchParams"/>
     <Toggle v-if="url.pathname === '/toggle'" :search="url.searchParams"/>
     <Tooltip v-if="url.pathname === '/tooltip'" :search="url.searchParams"/>
+    <VerticalStepper v-if="url.pathname === '/vertical-stepper'" :search="url.searchParams"/>
   </div>
 </template>
 
@@ -79,6 +80,7 @@ import TimePicker from './components/TimePicker.vue'
 import Title from './components/Title.vue'
 import Toggle from './components/Toggle.vue'
 import Tooltip from './components/Tooltip.vue'
+import VerticalStepper from './components/VerticalStepper.vue'
 
 export default {
   data() {
@@ -146,6 +148,7 @@ export default {
     Title,
     Toggle,
     Tooltip,
+    VerticalStepper,
   }
 };
 </script>
