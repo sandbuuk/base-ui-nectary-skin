@@ -3,6 +3,7 @@ import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/icon-button'
+const withSmall = '/icon-button?small=true'
 const withSpinner = '/icon-button?spinner=true'
 const withSpinnerDisabled = '/icon-button?spinner=true&disabled=true'
 const checkShot = makeAccessibilityTests('/icon-button', 'sinch-icon-button')
@@ -13,11 +14,29 @@ test('accessibility', checkShot(async function* () {
 
 test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
   {
-    name: 'focus',
+    name: 'keyboard focus',
     url: shot,
-    async *fn({ page }) {
+    async *fn({ $, page }) {
       await page.keyboard.press('Tab')
       yield { name: 'shot' }
+
+      const ct = centerRect(await $.boundingBox())
+
+      await page.mouse.move(ct.x, ct.y)
+      yield { name: 'hover' }
+    },
+  },
+  {
+    name: 'small keyboard focus',
+    url: withSmall,
+    async *fn({ $, page }) {
+      await page.keyboard.press('Tab')
+      yield { name: 'shot' }
+
+      const ct = centerRect(await $.boundingBox())
+
+      await page.mouse.move(ct.x, ct.y)
+      yield { name: 'hover' }
     },
   },
   {
@@ -76,9 +95,22 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
     name: 'mouse interaction',
     url: shot,
     async *fn({ $, page }) {
-      const rect = centerRect(await $.boundingBox())
+      const ct = centerRect(await $.boundingBox())
 
-      await page.mouse.move(rect.x, rect.y)
+      await page.mouse.move(ct.x, ct.y)
+      yield { name: 'hover' }
+
+      await page.mouse.down()
+      yield { name: 'active' }
+    },
+  },
+  {
+    name: 'small mouse interaction',
+    url: withSmall,
+    async *fn({ $, page }) {
+      const ct = centerRect(await $.boundingBox())
+
+      await page.mouse.move(ct.x, ct.y)
       yield { name: 'hover' }
 
       await page.mouse.down()
@@ -89,11 +121,11 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
     name: 'spinner',
     url: withSpinner,
     async *fn({ $, page }) {
-      const rect = (await $.boundingBox())!
+      const ct = centerRect(await $.boundingBox())
 
       yield { name: 'shot' }
 
-      await page.mouse.move(rect.x + 5, rect.y + 15)
+      await page.mouse.move(ct.x, ct.y)
       yield { name: 'hover' }
 
       await page.mouse.down()
@@ -119,6 +151,23 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
         document.body.prepend(style)
       })
       yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'color background',
+    url: shot,
+    async *fn({ $, page }) {
+      await page.evaluate(() => {
+        document.body.style.backgroundColor = 'beige'
+      })
+
+      const ct = centerRect(await $.boundingBox())
+
+      await page.mouse.move(ct.x, ct.y)
+      yield { name: 'hover' }
+
+      await page.mouse.down()
+      yield { name: 'active' }
     },
   },
 ]))
@@ -150,7 +199,9 @@ test('icon-button events', runScreenshotTests('sinch-icon-button', [
         { type: 'sinch-icon-button-blur', detail: null },
       ])
 
-      await $.click()
+      const ct = centerRect(await $.boundingBox())
+
+      await page.mouse.click(ct.x, ct.y)
 
       expect(
         await getAllEvents(page)

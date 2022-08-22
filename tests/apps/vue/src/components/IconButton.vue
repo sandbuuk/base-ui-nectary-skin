@@ -1,5 +1,6 @@
 <template>
   <sinch-icon-button
+    :small="isSmall"
     :disabled="isDisabled"
     @--click="onClick"
     @--focus="onFocus"
@@ -32,6 +33,9 @@ export default {
   computed: {
     isDisabled() {
       return this.search.get('disabled') !== null
+    },
+    isSmall() {
+      return this.search.get('small') !== null
     },
     hasSpinner() {
       return this.search.get('spinner') !== null
