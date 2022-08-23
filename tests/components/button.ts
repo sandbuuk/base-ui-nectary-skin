@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const withWideWidth = '/button?width=200&type=primary&text=Button&icon-left=true'
+const withWideWidth = '/button?width=250&type=primary&text=Button&spinner=true&icon-right=true'
 const withFitWidth = '/button?type=primary&text=Button&icon-left=true'
 const withFitWidthIconRight = '/button?type=primary&text=Button&icon-right=true'
-const withNarrowWidth = '/button?width=110&type=primary&icon-left=true&text=Button%text%20long%20long%20long'
+const withNarrowWidth = '/button?width=150&type=primary&icon-left=true&icon-right=true&text=Button%text%20long%20long%20long'
 const withDisabled = '/button?type=primary&text=Button&disabled=true&icon-left=true'
 const withSmall = '/button?type=primary&text=Button&small=true&icon-left=true'
 const withSmallIconRight = '/button?type=primary&text=Button&small=true&icon-right=true'
@@ -104,6 +104,23 @@ test('button screenshots', runScreenshotTests('sinch-button', [
   {
     name: 'focus',
     url: withFitWidth,
+    async *fn({ page, $eval }) {
+      await page.keyboard.press('Tab')
+      await $eval((el) => el.setAttribute('type', 'secondary'))
+      yield { name: 'secondary' }
+      await $eval((el) => el.setAttribute('type', 'cta-primary'))
+      yield { name: 'cta-primary' }
+      await $eval((el) => el.setAttribute('type', 'cta-secondary'))
+      yield { name: 'cta-secondary' }
+      await $eval((el) => el.setAttribute('type', 'destructive'))
+      yield { name: 'destructive' }
+      await $eval((el) => el.setAttribute('type', 'primary'))
+      yield { name: 'primary' }
+    },
+  },
+  {
+    name: 'focus small',
+    url: withSmall,
     async *fn({ page, $eval }) {
       await page.keyboard.press('Tab')
       await $eval((el) => el.setAttribute('type', 'secondary'))
@@ -220,7 +237,7 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     },
   },
   {
-    name: 'small right icon',
+    name: 'right icon small',
     url: withSmallIconRight,
     async *fn() {
       yield { name: 'shot' }
@@ -230,9 +247,9 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     name: 'mouse interaction',
     url: withFitWidth,
     async *fn({ $, $eval, page }) {
-      const rect = (await $.boundingBox())!
+      const ct = centerRect(await $.boundingBox())
 
-      await page.mouse.move(rect.x + 5, rect.y + 15)
+      await page.mouse.move(ct.x, ct.y)
       await $eval((el) => el.setAttribute('type', 'primary'))
       yield { name: 'primary-hover' }
       await $eval((el) => el.setAttribute('type', 'secondary'))
@@ -261,9 +278,9 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     name: 'spinner',
     url: withSpinner,
     async *fn({ $, $eval, page }) {
-      const rect = (await $.boundingBox())!
+      const ct = centerRect(await $.boundingBox())
 
-      await page.mouse.move(rect.x + 5, rect.y + 15)
+      await page.mouse.move(ct.x, ct.y)
       await $eval((el) => el.setAttribute('type', 'primary'))
       yield { name: 'primary-hover' }
       await $eval((el) => el.setAttribute('type', 'secondary'))
@@ -309,6 +326,24 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     url: withSpinnerSmall,
     async *fn() {
       yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'color background',
+    url: withFitWidth,
+    async *fn({ $eval, $, page }) {
+      await $eval((el) => {
+        el.setAttribute('type', 'cta-secondary')
+        document.body.style.backgroundColor = 'beige'
+      })
+
+      const ct = centerRect(await $.boundingBox())
+
+      await page.mouse.move(ct.x, ct.y)
+      yield { name: 'hover' }
+
+      await page.mouse.down()
+      yield { name: 'active' }
     },
   },
   {

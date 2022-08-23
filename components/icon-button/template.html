@@ -48,6 +48,7 @@ button:focus-visible::after {
   padding: 2px;
   border: 2px solid var(--sinch-color-aqua-400);
   border-radius: calc(var(--sinch-icon-button-shape-radius) + 4px);
+  pointer-events: none;
 }
 
 @supports not selector(:focus-visible) {
@@ -62,6 +63,7 @@ button:focus-visible::after {
     padding: 2px;
     border: 2px solid var(--sinch-color-aqua-400);
     border-radius: calc(var(--sinch-icon-button-shape-radius) + 4px);
+    pointer-events: none;
   }
 }
 
