@@ -14,6 +14,7 @@ import {
   isTSTypeLiteral,
   isTSTypeParameterInstantiation,
   isTSTypeReference,
+  isTSUnionType,
 } from '@babel/types'
 import { compile } from '@mdx-js/mdx'
 import remarkGfm from 'remark-gfm'
@@ -111,6 +112,18 @@ export async function loader(src) {
                         typeRefs.has(member.typeAnnotation.typeAnnotation.typeName.name)
                       ) {
                         value = typeRefs.get(member.typeAnnotation.typeAnnotation.typeName.name)
+                      } else if (isTSUnionType(member.typeAnnotation.typeAnnotation)) {
+                        value = member.typeAnnotation.typeAnnotation.types.map((type) => {
+                          if (
+                            isTSTypeReference(type) &&
+                            isIdentifier(type.typeName) &&
+                            typeRefs.has(type.typeName.name)
+                          ) {
+                            return typeRefs.get(type.typeName.name)
+                          }
+
+                          return generate(type).code
+                        }).join(' | ')
                       } else {
                         value = generate(member.typeAnnotation.typeAnnotation).code
                       }
@@ -160,6 +173,18 @@ export async function loader(src) {
                       typeRefs.has(member.typeAnnotation.typeAnnotation.typeName.name)
                     ) {
                       value = typeRefs.get(member.typeAnnotation.typeAnnotation.typeName.name)
+                    } else if (isTSUnionType(member.typeAnnotation.typeAnnotation)) {
+                      value = member.typeAnnotation.typeAnnotation.types.map((type) => {
+                        if (
+                          isTSTypeReference(type) &&
+                          isIdentifier(type.typeName) &&
+                          typeRefs.has(type.typeName.name)
+                        ) {
+                          return typeRefs.get(type.typeName.name)
+                        }
+
+                        return generate(type).code
+                      }).join(' | ')
                     } else {
                       value = generate(member.typeAnnotation.typeAnnotation).code
                     }
@@ -221,6 +246,18 @@ export async function loader(src) {
                         typeRefs.has(valueParam.typeAnnotation.typeAnnotation.typeName.name)
                       ) {
                         value = typeRefs.get(valueParam.typeAnnotation.typeAnnotation.typeName.name)
+                      } else if (isTSUnionType(member.typeAnnotation.typeAnnotation)) {
+                        value = member.typeAnnotation.typeAnnotation.types.map((type) => {
+                          if (
+                            isTSTypeReference(type) &&
+                            isIdentifier(type.typeName) &&
+                            typeRefs.has(type.typeName.name)
+                          ) {
+                            return typeRefs.get(type.typeName.name)
+                          }
+
+                          return generate(type).code
+                        }).join(' | ')
                       } else {
                         value = generate(valueParam.typeAnnotation.typeAnnotation).code
                       }
