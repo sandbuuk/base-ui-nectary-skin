@@ -5,7 +5,7 @@ import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCu
 const withWideWidth = '/button?width=250&type=primary&text=Button&spinner=true&icon-right=true'
 const withFitWidth = '/button?type=primary&text=Button&icon-left=true'
 const withFitWidthIconRight = '/button?type=primary&text=Button&icon-right=true'
-const withNarrowWidth = '/button?width=150&type=primary&icon-left=true&icon-right=true&text=Button%text%20long%20long%20long'
+const withNarrowWidth = '/button?width=150&type=primary&icon-left=true&icon-right=true&text=Button%20text%20long%20long%20long'
 const withDisabled = '/button?type=primary&text=Button&disabled=true&icon-left=true'
 const withSmall = '/button?type=primary&text=Button&small=true&icon-left=true'
 const withSmallIconRight = '/button?type=primary&text=Button&small=true&icon-right=true'
