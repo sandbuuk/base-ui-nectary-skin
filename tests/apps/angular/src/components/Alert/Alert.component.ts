@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/alert'
-import '@sinch-engage/nectary/alert-close'
-import '@sinch-engage/nectary/alert-button'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/close'
 
 @Component({
   selector: 'alert-component',
@@ -11,20 +12,16 @@ import '@sinch-engage/nectary/alert-button'
 
 export class AlertComponent {
   type?: string
-  text?: string
-  title?: string
-  actionText?: string
-  isDismissable: boolean
-  isMultiline: boolean
+  text: string
+  hasClose: boolean
+  hasAction: boolean
 
   constructor() {
     const url = new URL(location.href)
     this.type = url.searchParams.get('type') ?? undefined
-    this.text = url.searchParams.get('text') ?? undefined
-    this.title = url.searchParams.get('title') ?? undefined
-    this.actionText = url.searchParams.get('action') ?? undefined
-    this.isDismissable = url.searchParams.get('dismissable') != null
-    this.isMultiline = url.searchParams.get('multiline') != null
+    this.text = url.searchParams.get('text') ?? ''
+    this.hasClose = url.searchParams.get('close') != null
+    this.hasAction = url.searchParams.get('action') != null
   }
 
   onCloseClick() {

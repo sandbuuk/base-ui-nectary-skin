@@ -6,16 +6,12 @@ const longTitle = encodeURIComponent('It has survived not only five centuries, b
 const longText = encodeURIComponent('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.')
 
 const withText = '/alert?type=info&text=Alert%20text'
-const withTextAndClose = '/alert?type=info&text=Alert%20text&dismissable=true'
-const withTextAndButton = '/alert?type=info&text=Alert%20text&action=Button'
-const withTextAndButtonAndClose = '/alert?type=info&text=Alert%20text&action=Button&dismissable=true'
-const withTextAndButtonAndCloseExpanded = '/alert?width=300&type=info&text=Alert%20text&action=Button&dismissable=true'
-const withTextAndButtonAndCloseNarrow = '/alert?width=300&type=info&text=Alert%20text%20longer%20title&action=Button&dismissable=true'
-const withTextAndTitle = '/alert?type=info&text=Alert%20text&title=Alert%20title'
-const withMultilineTextAndTitleAndButton = `/alert?width=400&type=info&text=${longText}&title=${longTitle}&action=Button&multiline=true`
-const withMultilineTextAndTitleAndClose = `/alert?width=400&type=info&text=${longText}&title=${longTitle}&dismissable=true&multiline=true`
-const withMultilineTextAndTitleButtonClose = `/alert?width=400&type=info&text=${longText}&title=${longTitle}&dismissable=true&action=Button&multiline=true`
-const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&type=info&text=${longText}&title=${longTitle}&dismissable=true&action=Button&multiline=true`, 'sinch-alert')
+const withTextAndClose = '/alert?type=info&text=Alert%20text&close=true'
+const withTextAndButton = '/alert?type=info&text=Alert%20text&action=true'
+const withTextAndButtonAndClose = '/alert?type=info&text=Alert%20text&action=true&close=true'
+const withTextAndButtonAndCloseExpanded = '/alert?width=500&type=info&text=Alert%20text&action=true&close=true'
+const withTextAndButtonAndCloseNarrow = '/alert?width=300&type=info&text=Alert%20text%20longer%20title&action=true&close=true'
+const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&type=info&text=${longText}&caption=${longTitle}&close=true&action=true&multiline=true`, 'sinch-alert')
 
 test('accessibility', checkMultilineTextTitleButtonClose(async function* () {
   yield
@@ -30,11 +26,6 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
         el.type = 'info'
       })
       yield { name: 'info' }
-
-      await $eval((el) => {
-        el.type = 'success'
-      })
-      yield { name: 'success' }
 
       await $eval((el) => {
         el.type = 'warn'
@@ -53,8 +44,6 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('type', 'info'))
       yield { name: 'info' }
-      await $eval((el) => el.setAttribute('type', 'success'))
-      yield { name: 'success' }
       await $eval((el) => el.setAttribute('type', 'warn'))
       yield { name: 'warn' }
       await $eval((el) => el.setAttribute('type', 'error'))
@@ -117,76 +106,26 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
     },
   },
   {
-    name: 'multiline title text button',
-    url: withMultilineTextAndTitleAndButton,
-    async *fn() {
-      yield { name: 'shot' }
-    },
-  },
-  {
-    name: 'multiline title text close',
-    url: withMultilineTextAndTitleAndClose,
-    async *fn() {
-      yield { name: 'shot' }
-    },
-  },
-  {
-    name: 'multiline title text button close',
-    url: withMultilineTextAndTitleButtonClose,
-    async *fn() {
-      yield { name: 'shot' }
-    },
-  },
-  {
-    name: 'multiline property',
-    url: withTextAndTitle,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.multiline = true
-      })
-      yield { name: 'enabled' }
-
-      await $eval((el) => {
-        el.multiline = false
-      })
-      yield { name: 'disabled' }
-    },
-  },
-  {
-    name: 'multiline attribute',
-    url: withTextAndTitle,
-    async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('multiline', ''))
-      yield { name: 'enabled' }
-
-      await $eval((el) => el.removeAttribute('multiline'))
-      yield { name: 'disabled' }
-    },
-  },
-  {
     name: 'custom events',
     url: withTextAndButtonAndClose,
     async *fn({ $, page }) {
-      const testButton = testCustomEvent(page, $.locator('sinch-alert-button'))
+      const testButton = testCustomEvent(page, $.locator('sinch-button'))
 
-      await testButton('click', 'sinch-alert-button-click')
-      await testButton('focusin', 'sinch-alert-button-focus')
-      await testButton('focusout', 'sinch-alert-button-blur')
+      await testButton('-click', 'sinch-alert-button-click')
+      await testButton('-focus', 'sinch-alert-button-focus')
+      await testButton('-blur', 'sinch-alert-button-blur')
 
-      const testClose = testCustomEvent(page, $.locator('sinch-alert-close'))
+      const testClose = testCustomEvent(page, $.locator('sinch-icon-button'))
 
-      await testClose('click', 'sinch-alert-close-click')
-      await testClose('focusin', 'sinch-alert-close-focus')
-      await testClose('focusout', 'sinch-alert-close-blur')
+      await testClose('-click', 'sinch-alert-close-click')
+      await testClose('-focus', 'sinch-alert-close-focus')
+      await testClose('-blur', 'sinch-alert-close-blur')
     },
   },
   {
     name: 'native events',
     url: withTextAndButtonAndClose,
-    async *fn({ $, page }) {
-      const $button = $.locator('sinch-alert-button')
-      const $close = $.locator('sinch-alert-close')
-
+    async *fn({ page }) {
       await subscribeToEvents(
         page,
         'sinch-alert-button-focus',
@@ -198,36 +137,17 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
       )
 
       await page.keyboard.press('Tab')
+      await page.keyboard.press('Enter')
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Enter')
+      await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-alert-button-focus', detail: null },
-      ])
-
-      await $button.click()
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
         { type: 'sinch-alert-button-click', detail: null },
-      ])
-
-      await page.keyboard.press('Tab')
-      await page.mouse.click(0, 0)
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
         { type: 'sinch-alert-button-blur', detail: null },
-        { type: 'sinch-alert-close-focus', detail: null },
-        { type: 'sinch-alert-close-blur', detail: null },
-      ])
-
-      await $close.click()
-      await page.mouse.click(0, 0)
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
         { type: 'sinch-alert-close-focus', detail: null },
         { type: 'sinch-alert-close-click', detail: null },
         { type: 'sinch-alert-close-blur', detail: null },

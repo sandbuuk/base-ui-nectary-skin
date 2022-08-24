@@ -29,7 +29,7 @@ defineCustomElement('sinch-button', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$button = shadowRoot.querySelector('button')!
+    this.#$button = shadowRoot.querySelector('#button')!
     this.#$text = shadowRoot.querySelector('#text')!
   }
 

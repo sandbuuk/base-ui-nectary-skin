@@ -16,6 +16,7 @@ import { DropdownComponent } from '../components/Dropdown/Dropdown.component'
 import { GridComponent } from '../components/Grid/Grid.component'
 import { HorizontalStepper } from '../components/HorizontalStepper/HorizontalStepper.component'
 import { IconButtonComponent } from '../components/IconButton/IconButton.component'
+import { InlineAlertComponent } from '../components/InlineAlert/InlineAlert.component'
 import { InputComponent } from '../components/Input/Input.component'
 import { LinkComponent } from '../components/Link/Link.component'
 import { ListComponent } from '../components/List/List.component'
@@ -38,6 +39,7 @@ import { TimePickerComponent } from '../components/TimePicker/TimePicker.compone
 import { TitleComponent } from '../components/Title/Title.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
+import { VerticalStepper } from '../components/VerticalStepper/VerticalStepper.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -58,6 +60,7 @@ import { AppComponent } from './app.component'
     GridComponent,
     HorizontalStepper,
     IconButtonComponent,
+    InlineAlertComponent,
     InputComponent,
     LinkComponent,
     ListComponent,
@@ -80,6 +83,7 @@ import { AppComponent } from './app.component'
     TitleComponent,
     ToggleComponent,
     TooltipComponent,
+    VerticalStepper,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

@@ -4,6 +4,7 @@ import {
   getReactEventHandler,
   isAttrTrue,
   NectaryElement,
+  updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -46,7 +47,7 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['disabled']
+    return ['disabled', 'aria-label']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -56,6 +57,11 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
         this.#$button.disabled = isDisabled
         updateBooleanAttribute(this, 'disabled', isDisabled)
+
+        break
+      }
+      case 'aria-label': {
+        updateAttribute(this, 'title', newVal)
 
         break
       }

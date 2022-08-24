@@ -11,12 +11,14 @@ type TIconButton = {
 export const IconButton: FC<TIconButton> = ({ search }) => {
   const isDisabled = search.get('disabled') != null
   const hasSpinner = search.get('spinner') != null
+  const isSmall = search.get('small') != null
   const onClick = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-icon-button-click')), [])
   const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-icon-button-focus')), [])
   const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-icon-button-blur')), [])
 
   return (
     <sinch-icon-button
+      small={isSmall}
       disabled={isDisabled}
       on-click={onClick}
       on-focus={onFocus}

@@ -1,31 +1,34 @@
 <template>
-  <sinch-alert
-    :type="type"
-    :text="text"
-    :caption="title"
-    :multiline="isMultiline">
-  <sinch-alert-close
+<sinch-alert
+  :type="type"
+  :text="text">
+  <sinch-icon-button
+    v-if="hasClose"
     slot="close"
-    v-if="isDismissable"
-    @click="onCloseClick"
-    @focusin="onCloseFocus"
-    @focusout="onCloseBlur">
-  </sinch-alert-close>
-  <sinch-alert-button
-    slot="button"
-    v-if="actionText != null"
-    v-bind:text="actionText"
-    @click="onButtonClick"
-    @focusin="onButtonFocus"
-    @focusout="onButtonBlur">
-  </sinch-alert-button>
+    small
+    @--click="onCloseClick"
+    @--focus="onCloseFocus"
+    @--blur="onCloseBlur">
+    <sinch-icon-close slot="icon"></sinch-icon-close>
+  </sinch-icon-button>
+  <sinch-button
+    v-if="hasAction"
+    slot="action"
+    type="cta-secondary"
+    small
+    text="This is a Button!"
+    @--click="onButtonClick"
+    @--focus="onButtonFocus"
+    @--blur="onButtonBlur">
+  </sinch-button>
 </sinch-alert>
 </template>
 
 <script>
 import '@sinch-engage/nectary/alert'
-import '@sinch-engage/nectary/alert-close'
-import '@sinch-engage/nectary/alert-button'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/close'
 
 export default {
   props: {
@@ -53,22 +56,16 @@ export default {
   },
   computed: {
     text() {
-      return this.search.get('text') ?? undefined
-    },
-    title() {
-      return this.search.get('title') ?? undefined
+      return this.search.get('text') ?? ''
     },
     type() {
-      return this.search.get('type') ?? undefined
+      return this.search.get('type')
     },
-    actionText() {
-      return this.search.get('action') ?? undefined
+    hasClose() {
+      return this.search.get('close') != null
     },
-    isDismissable() {
-      return this.search.get('dismissable') != null
-    },
-    isMultiline() {
-      return this.search.get('multiline') != null
+    hasAction() {
+      return this.search.get('action') != null
     },
   },
 }

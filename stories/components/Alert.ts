@@ -2,8 +2,9 @@ import { typeValues } from '@sinch-engage/nectary/alert/utils'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/alert'
-import '@sinch-engage/nectary/alert-close'
-import '@sinch-engage/nectary/alert-button'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/close'
 
 export default {
   title: 'Components/Alert',
@@ -13,16 +14,8 @@ export default {
       control: 'select',
       options: typeValues,
     },
-    multiline: {
-      description: 'Multiline Alert with Title and Button',
-      control: 'boolean',
-    },
     text: {
       description: 'Body text',
-      control: 'text',
-    },
-    caption: {
-      description: 'Multiline Title text',
       control: 'text',
     },
   },
@@ -42,8 +35,6 @@ const Template = (innerHTML: string): Story => () => {
   const [{
     type,
     text,
-    caption,
-    multiline,
   }] = useArgs()
   const alertRef = useRef<HTMLElementTagNameMap['sinch-alert'] | null>(null)
 
@@ -56,9 +47,7 @@ const Template = (innerHTML: string): Story => () => {
   const $alert = alertRef.current!
 
   $alert.text = text
-  $alert.caption = caption ?? ''
   $alert.type = type
-  $alert.multiline = Boolean(multiline)
 
   return $alert
 }
@@ -68,7 +57,6 @@ export const Alert = Template('')
 Alert.args = {
   type: 'info',
   text: 'Alert with some text',
-  multiline: false,
 }
 
 Alert.parameters = {
@@ -79,10 +67,14 @@ Alert.parameters = {
   },
 }
 
-export const AlertWithClose = Template('<sinch-alert-close slot="close"></sinch-alert-close>')
+export const AlertWithClose = Template(`
+<sinch-icon-button slot="close" small aria-label="Close">
+  <sinch-icon-close slot="icon"></sinch-icon-close>
+</sinch-icon-button>
+`)
 
 AlertWithClose.args = {
-  type: 'success',
+  type: 'info',
   text: 'Your data has been updated',
 }
 
@@ -91,17 +83,28 @@ AlertWithClose.parameters = {
     source: {
       code: `
 <sinch-alert
-  type="success"
+  type="info"
   text="Your data has been updated"
+  aria-label="Close"
 >
-  <sinch-alert-close slot="close" onClick={}></sinch-alert-close>
+  <sinch-icon-button slot="close" small>
+    <sinch-icon-close slot="icon"/>
+  </sinch-icon-button>
 </sinch-alert>
 `,
     },
   },
 }
 
-export const AlertWithButton = Template('<sinch-alert-button slot="button" text="Review"></sinch-alert-button>')
+export const AlertWithButton = Template(`
+<sinch-button
+  slot="action"
+  type="cta-secondary"
+  small
+  text="This is a Button!"
+  aria-label="Action"
+></sinch-button>
+`)
 
 AlertWithButton.args = {
   type: 'warn',
@@ -116,14 +119,31 @@ AlertWithButton.parameters = {
   type="warn"
   text="Your task is not complete"
 >
-  <sinch-alert-button slot="button" text="Review"></sinch-alert-button>
+  <sinch-button
+    slot="action"
+    type="cta-secondary"
+    small
+    text="This is a Button!"
+    aria-label="Action"
+  />
 </sinch-alert>
 `,
     },
   },
 }
 
-export const AlertWithButtonAndClose = Template('<sinch-alert-button slot="button" text="Review"></sinch-alert-button><sinch-alert-close slot="close"></sinch-alert-close>')
+export const AlertWithButtonAndClose = Template(`
+<sinch-button
+  slot="action"
+  type="cta-secondary"
+  small
+  text="This is a Button!"
+  aria-label="Action"
+></sinch-button>
+<sinch-icon-button slot="close" small>
+  <sinch-icon-close slot="icon"></sinch-icon-close>
+</sinch-icon-button>
+`)
 
 AlertWithButtonAndClose.args = {
   type: 'warn',
@@ -138,66 +158,16 @@ AlertWithButtonAndClose.parameters = {
   type="warn"
   text="Your task is not complete"
 >
-  <sinch-alert-button slot="button" text="Review"></sinch-alert-button>
-  <sinch-alert-close slot="close" onClick={}></sinch-alert-close>
-</sinch-alert>
-`,
-    },
-  },
-}
-
-export const AlertMultiline = Template('')
-
-AlertMultiline.args = {
-  type: 'success',
-  text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-  caption: 'It has survived not only five centuries, but also the leap into electronic typesetting',
-  multiline: true,
-}
-
-AlertMultiline.parameters = {
-  docs: {
-    source: {
-      code: `
-<sinch-alert
-  type="success"
-  text="Now proceed with your next task"
-  caption="Job Done"
-  multiline
-></sinch-alert>
-`,
-    },
-  },
-}
-
-export const AlertMultilineWithButtonAndClose = Template('<sinch-alert-close slot="close"></sinch-alert-close><sinch-alert-button slot="button" text="Close"></sinch-alert-button>')
-
-AlertMultilineWithButtonAndClose.args = {
-  type: 'success',
-  text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-  caption: 'It has survived not only five centuries, but also the leap into electronic typesetting',
-  multiline: true,
-}
-
-AlertMultilineWithButtonAndClose.parameters = {
-  docs: {
-    source: {
-      code: `
-<sinch-alert
-  type="success"
-  text="Now proceed with your next task"
-  caption="Job Done"
-  multiline
->
-  <sinch-alert-close
-    slot="close"
-    onClick={}
-  ></sinch-alert-close>
-  <sinch-alert-button
-    slot="button"
-    text="Close"
-    onClick={}
-  ></sinch-alert-button>
+  <sinch-button
+    slot="action"
+    type="cta-secondary"
+    small
+    text="This is a Button!"
+    aria-label="Action"
+  />
+  <sinch-icon-button slot="close" small>
+    <sinch-icon-close slot="icon"/>
+  </sinch-icon-button>
 </sinch-alert>
 `,
     },

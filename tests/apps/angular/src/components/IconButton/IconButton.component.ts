@@ -11,11 +11,13 @@ import '@sinch-engage/nectary/icons/help-outline'
 
 export class IconButtonComponent {
   isDisabled: boolean
+  isSmall: boolean
   hasSpinner: boolean
 
   constructor() {
     const url = new URL(location.href)
     this.isDisabled = url.searchParams.get('disabled') !== null
+    this.isSmall = url.searchParams.get('small') !== null
     this.hasSpinner = url.searchParams.get('spinner') !== null
   }
 

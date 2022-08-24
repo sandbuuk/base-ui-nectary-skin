@@ -1,21 +1,24 @@
 <sinch-alert
   [attr.type]="type"
-  [attr.text]="text"
-  [attr.caption]="title"
-  [attr.multiline]="isMultiline || null">
-  <sinch-alert-close
-    *ngIf="isDismissable"
+  [attr.text]="text">
+  <sinch-icon-button
+    *ngIf="hasClose"
     slot="close"
-    (click)="onCloseClick()"
-    (focusin)="onCloseFocus()"
-    (focusout)="onCloseBlur()"
-  ></sinch-alert-close>
-  <sinch-alert-button
-    *ngIf="actionText != null"
-    slot="button"
-    [attr.text]="actionText"
-    (click)="onButtonClick()"
-    (focusin)="onButtonFocus()"
-    (focusout)="onButtonBlur()"
-  ></sinch-alert-button>
+    small
+    (-click)="onCloseClick()"
+    (-focus)="onCloseFocus()"
+    (-blur)="onCloseBlur()"
+  >
+    <sinch-icon-close slot="icon"></sinch-icon-close>
+  </sinch-icon-button>
+  <sinch-button
+    *ngIf="hasAction"
+    slot="action"
+    type="cta-secondary"
+    small
+    text="This is a Button!"
+    (-click)="onButtonClick()"
+    (-focus)="onButtonFocus()"
+    (-blur)="onButtonBlur()"
+  ></sinch-button>
 </sinch-alert>
