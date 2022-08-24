@@ -1,3 +1,12 @@
+## v0.36.0 (2022-08-24)
+
+* 💥 split `sinch-alert` to `sinch-alert` and `sinch-inline-alert`
+* ➕ add `sinch-vertical-stepper` component
+* ➕ update `sinch-button` style
+* ➕ update `sinch-icon-button` style
+* ➕ propagate `aria-label` to `title` attribute in `sinch-icon-button`
+* 🐞 disable mouse selecting text on clock face in `sinch-time-picker`
+
 ## v0.35.0 (2022-08-19)
 
 * ➕ add `sinch-tile-control` component
