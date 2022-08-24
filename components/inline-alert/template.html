@@ -1,0 +1,112 @@
+<style>
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: var(--sinch-shape-radius-l);
+  background-color: var(--sinch-color-alert-info-background);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#body-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+#caption {
+  color: var(--sinch-color-stormy-500);
+}
+
+#text {
+  color: var(--sinch-color-stormy-500);
+  margin-top: 4px;
+}
+
+#icon-info,
+#icon-success,
+#icon-warn,
+#icon-error {
+  display: none;
+}
+
+:host([type="success"]) #wrapper {
+  background-color: var(--sinch-color-success-200);
+}
+
+:host([type="warn"]) #wrapper {
+  background-color: var(--sinch-color-warning-200);
+}
+
+:host([type="error"]) #wrapper {
+  background-color: var(--sinch-color-error-200);
+}
+
+:host([type="info"]) #wrapper {
+  background-color: var(--sinch-color-informative-200);
+}
+
+:host([type="success"]) #icon-success {
+  display: block;
+
+  --sinch-color-icon: var(--sinch-color-success-500);
+}
+
+:host([type="warn"]) #icon-warn {
+  display: block;
+
+  --sinch-color-icon: var(--sinch-color-warning-500);
+}
+
+:host([type="error"]) #icon-error {
+  display: block;
+
+  --sinch-color-icon: var(--sinch-color-error-500);
+}
+
+:host([type="info"]) #icon-info {
+  display: block;
+
+  --sinch-color-icon: var(--sinch-color-informative-500);
+}
+
+#action {
+  display: flex;
+  margin-top: 16px;
+  min-width: 0;
+}
+
+#action.empty {
+  display: none;
+}
+
+#close {
+  margin-left: 16px;
+}
+
+#close.empty {
+  display: none;
+}
+</style>
+
+<div id="wrapper">
+  <sinch-icon-info id="icon-info"></sinch-icon-info>
+  <sinch-icon-check-circle id="icon-success"></sinch-icon-check-circle>
+  <sinch-icon-report-problem id="icon-warn"></sinch-icon-report-problem>
+  <sinch-icon-report id="icon-error"></sinch-icon-report>
+  <div id="body-wrapper">
+    <sinch-title id="caption" level="3" type="s"></sinch-title>
+    <sinch-text id="text" type="m"></sinch-text>
+    <div id="action">
+      <slot name="action"></slot>
+    </div>
+  </div>
+  <div id="close">
+    <slot name="close"></slot>
+  </div>
+</div>

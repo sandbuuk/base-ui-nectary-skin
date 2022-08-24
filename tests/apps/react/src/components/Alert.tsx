@@ -1,8 +1,8 @@
-import { useCallback } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/alert'
-import '@sinch-engage/nectary/alert-close'
-import '@sinch-engage/nectary/alert-button'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/close'
 
 type TAlert = {
   search: URLSearchParams,
@@ -10,54 +10,57 @@ type TAlert = {
 
 export const Alert: FC<TAlert> = ({ search }) => {
   const type: any = search.get('type') ?? undefined
-  const text: any = search.get('text') ?? undefined
-  const title = search.get('title') ?? undefined
-  const actionText = search.get('action') ?? undefined
-  const isDismissable = search.get('dismissable') != null
-  const isMultiline = search.get('multiline') != null
+  const text = search.get('text') ?? ''
+  const hasAction = search.get('action') !== null
+  const hasClose = search.get('close') !== null
 
-  const onCloseFocus = useCallback(() => {
+  const onCloseFocus = () => {
     window.dispatchEvent(new CustomEvent('sinch-alert-close-focus'))
-  }, [])
-  const onCloseBlur = useCallback(() => {
+  }
+  const onCloseBlur = () => {
     window.dispatchEvent(new CustomEvent('sinch-alert-close-blur'))
-  }, [])
-  const onCloseClick = useCallback(() => {
+  }
+  const onCloseClick = () => {
     window.dispatchEvent(new CustomEvent('sinch-alert-close-click'))
-  }, [])
-  const onButtonFocus = useCallback(() => {
+  }
+  const onButtonFocus = () => {
     window.dispatchEvent(new CustomEvent('sinch-alert-button-focus'))
-  }, [])
-  const onButtonBlur = useCallback(() => {
+  }
+  const onButtonBlur = () => {
     window.dispatchEvent(new CustomEvent('sinch-alert-button-blur'))
-  }, [])
-  const onButtonClick = useCallback(() => {
+  }
+  const onButtonClick = () => {
     window.dispatchEvent(new CustomEvent('sinch-alert-button-click'))
-  }, [])
+  }
 
   return (
     <sinch-alert
       type={type}
       text={text}
-      caption={title}
-      multiline={isMultiline}
     >
-      {isDismissable && (
-        <sinch-alert-close
-          slot="close"
-          onFocus={onCloseFocus}
-          onBlur={onCloseBlur}
-          onClick={onCloseClick}
+      {hasAction && (
+        <sinch-button
+          slot="action"
+          type="cta-secondary"
+          small
+          text="This is a Button!"
+          aria-label="Action"
+          on-click={onButtonClick}
+          on-focus={onButtonFocus}
+          on-blur={onButtonBlur}
         />
       )}
-      {actionText != null && (
-        <sinch-alert-button
-          slot="button"
-          text={actionText}
-          onFocus={onButtonFocus}
-          onBlur={onButtonBlur}
-          onClick={onButtonClick}
-        />
+      {hasClose && (
+        <sinch-icon-button
+          slot="close"
+          small
+          aria-label="Close"
+          on-click={onCloseClick}
+          on-focus={onCloseFocus}
+          on-blur={onCloseBlur}
+        >
+          <sinch-icon-close slot="icon"/>
+        </sinch-icon-button>
       )}
     </sinch-alert>
   )

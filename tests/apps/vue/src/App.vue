@@ -15,6 +15,7 @@
     <Grid v-if="url.pathname === '/grid'" :search="url.searchParams"/>
     <HorizontalStepper v-if="url.pathname === '/horizontal-stepper'" :search="url.searchParams"/>
     <IconButton v-if="url.pathname === '/icon-button'" :search="url.searchParams"/>
+    <InlineAlert v-if="url.pathname === '/inline-alert'" :search="url.searchParams"/>
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
     <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
     <List v-if="url.pathname === '/list'" :search="url.searchParams"/>
@@ -58,6 +59,7 @@ import Dropdown from './components/Dropdown.vue'
 import Grid from './components/Grid.vue'
 import HorizontalStepper from './components/HorizontalStepper.vue'
 import IconButton from './components/IconButton.vue'
+import InlineAlert from './components/InlineAlert.vue'
 import Input from './components/Input.vue'
 import Link from './components/Link.vue'
 import List from './components/List.vue'
@@ -126,6 +128,7 @@ export default {
     Grid,
     HorizontalStepper,
     IconButton,
+    InlineAlert,
     Input,
     Link,
     List,

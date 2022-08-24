@@ -15,6 +15,7 @@ import { Dropdown } from './components/Dropdown'
 import { Grid } from './components/Grid'
 import { HorizontalStepper } from './components/HorizontalStepper'
 import { IconButton } from './components/IconButton'
+import { InlineAlert } from './components/InlineAlert'
 import { Input } from './components/Input'
 import { Link } from './components/Link'
 import { List } from './components/List'
@@ -58,6 +59,12 @@ const mapElement = (url: URL) => {
     case '/alert': {
       return (
         <Alert search={url.searchParams}/>
+      )
+    }
+
+    case '/inline-alert': {
+      return (
+        <InlineAlert search={url.searchParams}/>
       )
     }
 

@@ -1,18 +1,22 @@
-import { typeValues } from '@sinch-engage/nectary/alert/utils'
+import { typeValues } from '@sinch-engage/nectary/inline-alert/utils'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
-import '@sinch-engage/nectary/alert'
+import '@sinch-engage/nectary/inline-alert'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/close'
 
 export default {
-  title: 'Components/Alert',
+  title: 'Components/InlineAlert',
   argTypes: {
     type: {
-      description: 'Alert type',
+      description: 'Inline Alert type',
       control: 'select',
       options: typeValues,
+    },
+    caption: {
+      description: 'Alert Title',
+      control: 'text',
     },
     text: {
       description: 'Body text',
@@ -22,7 +26,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'Alert component',
+        component: 'Inline Alert component',
       },
       source: {
         type: 'code',
@@ -34,69 +38,74 @@ export default {
 const Template = (innerHTML: string): Story => () => {
   const [{
     type,
+    caption,
     text,
   }] = useArgs()
-  const alertRef = useRef<HTMLElementTagNameMap['sinch-alert'] | null>(null)
+  const alertRef = useRef<HTMLElementTagNameMap['sinch-inline-alert'] | null>(null)
 
   if (alertRef.current === null) {
-    alertRef.current = document.createElement('sinch-alert')
+    alertRef.current = document.createElement('sinch-inline-alert')
 
     alertRef.current.innerHTML = innerHTML
   }
 
   const $alert = alertRef.current!
 
+  $alert.caption = caption
   $alert.text = text
   $alert.type = type
 
   return $alert
 }
 
-export const Alert = Template('')
+export const InlineAlert = Template('')
 
-Alert.args = {
+InlineAlert.args = {
   type: 'info',
   text: 'Alert with some text',
+  caption: 'Title',
 }
 
-Alert.parameters = {
+InlineAlert.parameters = {
   docs: {
     source: {
-      code: '<sinch-alert type="info" text={text}></sinch-alert>',
+      code: '<sinch-inline-alert type="info" caption={title} text={text}></sinch-inline-alert>',
     },
   },
 }
 
-export const AlertWithClose = Template(`
+export const InlineAlertWithClose = Template(`
 <sinch-icon-button slot="close" small aria-label="Close">
   <sinch-icon-close slot="icon"></sinch-icon-close>
 </sinch-icon-button>
 `)
 
-AlertWithClose.args = {
+InlineAlertWithClose.args = {
   type: 'info',
+  caption: 'Title',
   text: 'Your data has been updated',
 }
 
-AlertWithClose.parameters = {
+InlineAlertWithClose.parameters = {
   docs: {
     source: {
       code: `
-<sinch-alert
+<sinch-inline-alert
   type="info"
+  caption="Title"
   text="Your data has been updated"
   aria-label="Close"
 >
   <sinch-icon-button slot="close" small>
     <sinch-icon-close slot="icon"/>
   </sinch-icon-button>
-</sinch-alert>
+</sinch-inline-alert>
 `,
     },
   },
 }
 
-export const AlertWithButton = Template(`
+export const InlineAlertWithButton = Template(`
 <sinch-button
   slot="action"
   type="cta-secondary"
@@ -106,17 +115,19 @@ export const AlertWithButton = Template(`
 ></sinch-button>
 `)
 
-AlertWithButton.args = {
+InlineAlertWithButton.args = {
   type: 'warn',
+  caption: 'Title',
   text: 'Your task is not complete',
 }
 
-AlertWithButton.parameters = {
+InlineAlertWithButton.parameters = {
   docs: {
     source: {
       code: `
-<sinch-alert
+<sinch-inline-alert
   type="warn"
+  caption="Title"
   text="Your task is not complete"
 >
   <sinch-button
@@ -126,13 +137,13 @@ AlertWithButton.parameters = {
     text="This is a Button!"
     aria-label="Action"
   />
-</sinch-alert>
+</sinch-inline-alert>
 `,
     },
   },
 }
 
-export const AlertWithButtonAndClose = Template(`
+export const InlineAlertWithButtonAndClose = Template(`
 <sinch-button
   slot="action"
   type="cta-secondary"
@@ -140,22 +151,24 @@ export const AlertWithButtonAndClose = Template(`
   text="This is a Button!"
   aria-label="Action"
 ></sinch-button>
-<sinch-icon-button slot="close" small>
+<sinch-icon-button slot="close" small aria-label="Close">
   <sinch-icon-close slot="icon"></sinch-icon-close>
 </sinch-icon-button>
 `)
 
-AlertWithButtonAndClose.args = {
+InlineAlertWithButtonAndClose.args = {
   type: 'warn',
+  caption: 'Title',
   text: 'Your task is not complete',
 }
 
-AlertWithButtonAndClose.parameters = {
+InlineAlertWithButtonAndClose.parameters = {
   docs: {
     source: {
       code: `
-<sinch-alert
+<sinch-inline-alert
   type="warn"
+  caption="Title"
   text="Your task is not complete"
 >
   <sinch-button
@@ -165,10 +178,10 @@ AlertWithButtonAndClose.parameters = {
     text="This is a Button!"
     aria-label="Action"
   />
-  <sinch-icon-button slot="close" small>
+  <sinch-icon-button slot="close" small aria-label="Close">
     <sinch-icon-close slot="icon"/>
   </sinch-icon-button>
-</sinch-alert>
+</sinch-inline-alert>
 `,
     },
   },

@@ -1,15 +1,17 @@
+import '../icons/report-problem'
+import '../icons/report'
+import '../icons/info'
+import '../text'
 import {
   defineCustomElement,
-  getBooleanAttribute,
   getAttribute,
   getLiteralAttribute,
-  updateBooleanAttribute,
   updateAttribute,
   updateLiteralAttribute,
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import { typeValues } from './utils'
+import { assertType, typeValues } from './utils'
 import type { TSinchAlertElement, TSinchAlertReact, TSinchAlertType } from './types'
 
 const template = document.createElement('template')
@@ -18,7 +20,6 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-alert', class extends NectaryElement {
   #$text: HTMLParagraphElement
-  #$caption: HTMLParagraphElement
 
   constructor() {
     super()
@@ -28,7 +29,10 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$text = shadowRoot.querySelector('#text')!
-    this.#$caption = shadowRoot.querySelector('#caption')!
+  }
+
+  connectedCallback() {
+    this.setAttribute('role', 'alert')
   }
 
   get type() {
@@ -47,35 +51,20 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
     updateAttribute(this, 'text', value)
   }
 
-  get caption() {
-    return getAttribute(this, 'caption', '')
-  }
-
-  set caption(value: string) {
-    updateAttribute(this, 'caption', value)
-  }
-
-  get multiline() {
-    return getBooleanAttribute(this, 'multiline')
-  }
-
-  set multiline(isMultiline: boolean | undefined) {
-    updateBooleanAttribute(this, 'multiline', isMultiline)
-  }
-
   static get observedAttributes() {
-    return ['text', 'caption']
+    return ['text', 'type']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
-      case 'text': {
-        this.#$text.textContent = newVal
+      case 'type': {
+        assertType(newVal)
 
         break
       }
-      case 'caption': {
-        this.#$caption.textContent = newVal
+
+      case 'text': {
+        this.#$text.textContent = newVal
 
         break
       }

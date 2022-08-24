@@ -1,6 +1,7 @@
 <template>
-<sinch-alert
+<sinch-inline-alert
   :type="type"
+  :caption="caption"
   :text="text">
   <sinch-icon-button
     v-if="hasClose"
@@ -21,11 +22,11 @@
     @--focus="onButtonFocus"
     @--blur="onButtonBlur">
   </sinch-button>
-</sinch-alert>
+</sinch-inline-alert>
 </template>
 
 <script>
-import '@sinch-engage/nectary/alert'
+import '@sinch-engage/nectary/inline-alert'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/close'
@@ -36,25 +37,28 @@ export default {
   },
   methods: {
     onCloseClick() {
-      window.dispatchEvent(new CustomEvent('sinch-alert-close-click'))
+      window.dispatchEvent(new CustomEvent('sinch-inline-alert-close-click'))
     },
     onCloseFocus() {
-      window.dispatchEvent(new CustomEvent('sinch-alert-close-focus'))
+      window.dispatchEvent(new CustomEvent('sinch-inline-alert-close-focus'))
     },
     onCloseBlur() {
-      window.dispatchEvent(new CustomEvent('sinch-alert-close-blur'))
+      window.dispatchEvent(new CustomEvent('sinch-inline-alert-close-blur'))
     },
     onButtonClick() {
-      window.dispatchEvent(new CustomEvent('sinch-alert-button-click'))
+      window.dispatchEvent(new CustomEvent('sinch-inline-alert-button-click'))
     },
     onButtonFocus() {
-      window.dispatchEvent(new CustomEvent('sinch-alert-button-focus'))
+      window.dispatchEvent(new CustomEvent('sinch-inline-alert-button-focus'))
     },
     onButtonBlur() {
-      window.dispatchEvent(new CustomEvent('sinch-alert-button-blur'))
+      window.dispatchEvent(new CustomEvent('sinch-inline-alert-button-blur'))
     }
   },
   computed: {
+    caption() {
+      return this.search.get('caption') ?? ''
+    },
     text() {
       return this.search.get('text') ?? ''
     },

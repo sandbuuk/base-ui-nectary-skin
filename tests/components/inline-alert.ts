@@ -5,19 +5,19 @@ import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } 
 const longTitle = encodeURIComponent('It has survived not only five centuries, but also the leap into electronic typesetting')
 const longText = encodeURIComponent('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.')
 
-const withText = '/alert?type=info&text=Alert%20text'
-const withTextAndClose = '/alert?type=info&text=Alert%20text&close=true'
-const withTextAndButton = '/alert?type=info&text=Alert%20text&action=true'
-const withTextAndButtonAndClose = '/alert?type=info&text=Alert%20text&action=true&close=true'
-const withTextAndButtonAndCloseExpanded = '/alert?width=500&type=info&text=Alert%20text&action=true&close=true'
-const withTextAndButtonAndCloseNarrow = '/alert?width=300&type=info&text=Alert%20text%20longer%20title&action=true&close=true'
-const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&type=info&text=${longText}&caption=${longTitle}&close=true&action=true&multiline=true`, 'sinch-alert')
+const withText = '/inline-alert?type=info&caption=Title&text=Alert%20text'
+const withTextAndClose = '/inline-alert?type=info&caption=Title&text=Alert%20text&close=true'
+const withTextAndButton = '/inline-alert?type=info&caption=Title&text=Alert%20text&action=true'
+const withTextAndButtonAndClose = '/inline-alert?type=info&caption=Title&text=Alert%20text&action=true&close=true'
+const withTextAndButtonAndCloseExpanded = '/inline-alert?width=400&type=info&caption=Title&text=Alert%20text&action=true&close=true'
+const withTextAndButtonAndCloseNarrow = '/inline-alert?width=300&type=info&caption=Title&text=Alert%20text%20longer%20title&action=true&close=true'
+const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/inline-alert?width=400&type=info&text=${longText}&caption=${longTitle}&close=true&action=true&multiline=true`, 'sinch-inline-alert')
 
 test('accessibility', checkMultilineTextTitleButtonClose(async function* () {
   yield
 }))
 
-test('alert screenshots', runScreenshotTests('sinch-alert', [
+test('alert screenshots', runScreenshotTests('sinch-inline-alert', [
   {
     name: 'type property',
     url: withText,
@@ -26,6 +26,11 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
         el.type = 'info'
       })
       yield { name: 'info' }
+
+      await $eval((el) => {
+        el.type = 'success'
+      })
+      yield { name: 'success' }
 
       await $eval((el) => {
         el.type = 'warn'
@@ -44,6 +49,8 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('type', 'info'))
       yield { name: 'info' }
+      await $eval((el) => el.setAttribute('type', 'success'))
+      yield { name: 'success' }
       await $eval((el) => el.setAttribute('type', 'warn'))
       yield { name: 'warn' }
       await $eval((el) => el.setAttribute('type', 'error'))
@@ -111,15 +118,15 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
     async *fn({ $, page }) {
       const testButton = testCustomEvent(page, $.locator('sinch-button'))
 
-      await testButton('-click', 'sinch-alert-button-click')
-      await testButton('-focus', 'sinch-alert-button-focus')
-      await testButton('-blur', 'sinch-alert-button-blur')
+      await testButton('-click', 'sinch-inline-alert-button-click')
+      await testButton('-focus', 'sinch-inline-alert-button-focus')
+      await testButton('-blur', 'sinch-inline-alert-button-blur')
 
-      const testClose = testCustomEvent(page, $.locator('sinch-icon-button'))
+      const testClose = testCustomEvent(page, $.locator('sinch-icon-close'))
 
-      await testClose('-click', 'sinch-alert-close-click')
-      await testClose('-focus', 'sinch-alert-close-focus')
-      await testClose('-blur', 'sinch-alert-close-blur')
+      await testClose('-click', 'sinch-inline-alert-close-click')
+      await testClose('-focus', 'sinch-inline-alert-close-focus')
+      await testClose('-blur', 'sinch-inline-alert-close-blur')
     },
   },
   {
@@ -128,12 +135,12 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
     async *fn({ page }) {
       await subscribeToEvents(
         page,
-        'sinch-alert-button-focus',
-        'sinch-alert-button-blur',
-        'sinch-alert-button-click',
-        'sinch-alert-close-focus',
-        'sinch-alert-close-blur',
-        'sinch-alert-close-click'
+        'sinch-inline-alert-button-focus',
+        'sinch-inline-alert-button-blur',
+        'sinch-inline-alert-button-click',
+        'sinch-inline-alert-close-focus',
+        'sinch-inline-alert-close-blur',
+        'sinch-inline-alert-close-click'
       )
 
       await page.keyboard.press('Tab')
@@ -145,12 +152,12 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-alert-button-focus', detail: null },
-        { type: 'sinch-alert-button-click', detail: null },
-        { type: 'sinch-alert-button-blur', detail: null },
-        { type: 'sinch-alert-close-focus', detail: null },
-        { type: 'sinch-alert-close-click', detail: null },
-        { type: 'sinch-alert-close-blur', detail: null },
+        { type: 'sinch-inline-alert-button-focus', detail: null },
+        { type: 'sinch-inline-alert-button-click', detail: null },
+        { type: 'sinch-inline-alert-button-blur', detail: null },
+        { type: 'sinch-inline-alert-close-focus', detail: null },
+        { type: 'sinch-inline-alert-close-click', detail: null },
+        { type: 'sinch-inline-alert-close-blur', detail: null },
       ])
     },
   },
