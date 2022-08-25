@@ -1,36 +1,16 @@
 apiVersion: backstage.io/v1alpha1
-kind: Domain
-metadata:
-  name: nectary-design-system # nectary is a reserved name across Sinch
-  description: Nectary
-spec:
-  owner: applications-nectary
----
-apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
-  name: applications-nectary
-  description: The Nectary team
-spec:
-  type: team
-  profile:
-    displayName: Nectary
-  parent: applications-common
-  members: [] # TODO: Add this when we know usernames
-  children: []
----
-apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
+  namespace: apps
   name: nectary # nectary is a reserved name across Sinch
   description: Nectary design system
 spec:
   owner: applications-nectary
-  domain: nectary-design-system
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
+  namespace: apps
   name: nectary-library # nectary is a reserved name across Sinch
   description: The Nectary library implements the Nectary design system
   annotations:
@@ -45,4 +25,3 @@ spec:
   lifecycle: production
   owner: applications-nectary
   system: nectary
----
