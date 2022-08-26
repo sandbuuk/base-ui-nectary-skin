@@ -49,7 +49,7 @@ test('search screenshots', runScreenshotTests('sinch-input', [
   {
     name: 'native events',
     url: withValue,
-    async *fn({ $, page }) {
+    async *fn({ $, page, isChromium }) {
       await subscribeToEvents(page, 'sinch-search-focus', 'sinch-search-blur', 'sinch-search-change')
       await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
@@ -72,12 +72,23 @@ test('search screenshots', runScreenshotTests('sinch-input', [
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-search-focus', detail: null },
-        { type: 'sinch-search-change', detail: 'Option 2' },
-      ])
+      if (isChromium) {
+        expect(
+          await getAllEvents(page)
+        ).toEqual([
+          { type: 'sinch-search-focus', detail: null },
+          { type: 'sinch-search-change', detail: 'Option 2' },
+        ])
+      } else {
+        expect(
+          await getAllEvents(page)
+        ).toEqual([
+          { type: 'sinch-search-focus', detail: null },
+          { type: 'sinch-search-blur', detail: null },
+          { type: 'sinch-search-focus', detail: null },
+          { type: 'sinch-search-change', detail: 'Option 2' },
+        ])
+      }
     },
   },
 ]))

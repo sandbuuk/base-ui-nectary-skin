@@ -5,13 +5,22 @@
     :orientation="orientation"
     :maxvisibleitems="maxVisibleItems"
     @--close="onClose">
-    <sinch-button
+    <sinch-input
       slot="target"
-      type="cta-secondary"
-      text="Some content"
-      aria-label="Button"
-      @--click="onOpen"
-    ></sinch-button>
+      label="Input"
+      aria-label="Input"
+      :value="value"
+      @--change="onValueChange"
+    >
+      <sinch-button
+        slot="right"
+        small
+        type="cta-secondary"
+        text="Open"
+        aria-label="Open"
+        @--click="onOpen"
+      ></sinch-button>
+    </sinch-input>
     <sinch-action-menu-option @--click="() => {onClick('Option 1 value long long long')}" text="Option 1 value long long long" slot="option">
       <sinch-icon-open-in-new slot="icon"/>
     </sinch-action-menu-option>
@@ -24,9 +33,10 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/button'
 
 export default {
   methods: {
@@ -39,7 +49,12 @@ export default {
       this.isOpen = false
     },
     onOpen() {
+      window.dispatchEvent(new CustomEvent('sinch-action-menu-open'))
       this.isOpen = true
+    },
+    onValueChange(e) {
+      window.dispatchEvent(new CustomEvent('sinch-input-change'))
+      this.value = e.detail
     }
   },
   props: {
@@ -59,6 +74,7 @@ export default {
   },
   data() {
     return {
+      value: '',
       isOpen: this.search.get('open') !== null
     }
   }

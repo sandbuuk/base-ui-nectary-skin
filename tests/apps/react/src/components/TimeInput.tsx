@@ -44,6 +44,7 @@ export const TimeInput: FC<TTimeInput> = ({ search }) => {
       orientation="bottom-left"
       aria-label="Time input"
       onClose={onClose}
+      modal
     >
       <sinch-input
         slot="target"

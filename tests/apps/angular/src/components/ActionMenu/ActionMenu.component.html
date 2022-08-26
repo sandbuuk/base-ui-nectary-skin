@@ -4,13 +4,22 @@
   [attr.maxvisibleitems]="maxVisibleItems"
   [attr.orientation]="orientation"
   (-close)="onClose()">
-  <sinch-button
+  <sinch-input
     slot="target"
-    type="cta-secondary"
-    text="Some content"
-    aria-label="Button"
-    (click)="onOpen()"
-  ></sinch-button>
+    label="Input"
+    aria-label="Input"
+    [value]="value"
+    (-change)="onValueChange($event)"
+  >
+    <sinch-button
+      slot="right"
+      small
+      type="cta-secondary"
+      text="Open"
+      aria-label="Open"
+      (-click)="onOpen()"
+    ></sinch-button>
+  </sinch-input>
   <sinch-action-menu-option (-click)="onClick('Option 1 value long long long')" text="Option 1 value long long long" slot="option">
     <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
   </sinch-action-menu-option>

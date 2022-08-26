@@ -21,6 +21,7 @@ export class PopoverComponent {
   }
 
   onOpen() {
+    window.dispatchEvent(new CustomEvent('sinch-popover-open'))
     this.isOpen = true
   }
 

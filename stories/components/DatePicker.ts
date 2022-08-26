@@ -51,6 +51,8 @@ const Template = (): Story => () => {
     const $iconCalendar = document.createElement('sinch-icon-calendar-today')
     const $datePicker = document.createElement('sinch-date-picker')
 
+    $popover.modal = true
+
     datePickerRef.current = $datePicker
     inputRef.current = $input
 

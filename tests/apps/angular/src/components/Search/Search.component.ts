@@ -48,7 +48,7 @@ export class SearchComponent {
   onChange(e: Event) {
     this.value = (e as CustomEvent).detail
 
-    if (this.value.length >= 5) {
+    if (this.value.length >= 3) {
       this.isOpen = true
     }
   }
@@ -57,7 +57,6 @@ export class SearchComponent {
   }
   onBlur() {
     window.dispatchEvent(new CustomEvent('sinch-search-blur'))
-    this.isOpen = false
   }
   onClear() {
     this.value = ''

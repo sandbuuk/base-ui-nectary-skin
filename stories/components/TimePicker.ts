@@ -46,6 +46,8 @@ const Template = (): Story => () => {
     const $iconSchedule = document.createElement('sinch-icon-schedule')
     const $timePicker = document.createElement('sinch-time-picker')
 
+    $popover.modal = true
+
     timePickerRef.current = $timePicker
     inputRef.current = $input
 

@@ -4,6 +4,7 @@ import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withModalOpen = '/popover?open=true&modal=true'
+const withModal = '/popover?modal=true'
 const withWideModalOpen = '/popover?width=300&open=true&modal=true'
 const withWideModal = '/popover?width=300&modal=true'
 const withWide = '/popover?width=300'
@@ -16,27 +17,27 @@ test('popover accessibility', check(async function* () {
 test('popover screenshots', runScreenshotTests('sinch-popover', [
   {
     name: 'open attribute',
-    url: withModalOpen,
+    url: withModal,
     async *fn({ $eval }) {
-      await $eval((el) => el.removeAttribute('open'))
-      yield { name: 'unset', includeRects: [await $eval((el) => el.popoverRect)] }
       await $eval((el) => el.setAttribute('open', ''))
       yield { name: 'set', includeRects: [await $eval((el) => el.popoverRect)] }
+      await $eval((el) => el.removeAttribute('open'))
+      yield { name: 'unset', includeRects: [await $eval((el) => el.popoverRect)] }
     },
   },
   {
     name: 'open property',
-    url: withModalOpen,
+    url: withModal,
     async *fn({ $eval }) {
-      await $eval((el) => {
-        el.open = false
-      })
-      yield { name: 'unset', includeRects: [await $eval((el) => el.popoverRect)] }
-
       await $eval((el) => {
         el.open = true
       })
       yield { name: 'set', includeRects: [await $eval((el) => el.popoverRect)] }
+
+      await $eval((el) => {
+        el.open = false
+      })
+      yield { name: 'unset', includeRects: [await $eval((el) => el.popoverRect)] }
     },
   },
   {
