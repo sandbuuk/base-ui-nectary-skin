@@ -104,6 +104,7 @@ type UpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
 type TScreenshotTest<T extends keyof HTMLElementTagNameMap> = {
   name: string,
   url: string,
+  only?: true,
   fn (props: UpdateStateProps<T>): AsyncIterable<UpdateStateResult>,
 }
 
@@ -126,7 +127,10 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
       )
     }
 
-    const it = piAll(tests.map((t) => async () => {
+    const onlyTests = tests.filter((t) => t.only)
+    const runTests = onlyTests.length > 0 ? onlyTests : tests
+
+    const it = piAll(runTests.map((t) => async () => {
       const page = pages.shift()!
 
       try {
