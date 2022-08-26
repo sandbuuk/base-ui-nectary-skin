@@ -29,6 +29,7 @@ export const CompositionExample: FC = () => {
       open={isOpen}
       orientation="bottom-left"
       aria-label="Time input"
+      modal
       on-close={onClose}
     >
       <sinch-input
