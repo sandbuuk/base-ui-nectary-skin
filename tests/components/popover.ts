@@ -144,9 +144,9 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
       // Open popover
       await page.keyboard.press('Enter')
 
-      // Cannot close by clicking outside
+      // Can close by clicking outside
       await page.mouse.click(0, 0)
-      await expect($eval((el) => el.open)).resolves.toBe(true)
+      await expect($eval((el) => el.open)).resolves.toBe(false)
     },
   },
   {
