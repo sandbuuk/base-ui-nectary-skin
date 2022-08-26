@@ -6,12 +6,17 @@ import { MaxVisibleItemsExample } from './examples/MaxVisibleItems.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
 import { TooltipExample } from './examples/Tooltip.tsx?example'
 import {
-  ReactPropsTable,
-  ReactHandlersTable,
-  ElementPropertiesTable,
-  ElementAttributesTable,
-  ElementEventsTable
+  ReactPropsTable as SelectReactPropsTable,
+  ReactHandlersTable as SelectReactHandlersTable,
+  ElementPropertiesTable as SelectElementPropertiesTable,
+  ElementAttributesTable as SelectElementAttributesTable,
+  ElementEventsTable as SelectElementEventsTable
 } from '@sinch-engage/nectary/select/types.ts?api'
+import {
+  ReactPropsTable as SelectOptionReactPropsTable,
+  ElementPropertiesTable as SelectOptionElementPropertiesTable,
+  ElementAttributesTable as SelectOptionElementAttributesTable,
+} from '@sinch-engage/nectary/select-option/types.ts?api'
 
 # Select
 
@@ -57,26 +62,46 @@ Controls number of visible at the same time options in the list and makes it scr
 
 `option` slot renders `sinch-select-option`.
 
-### React
+### Select
 
-#### Props
+#### React
 
-<ReactPropsTable/>
+##### Props
 
-#### Handlers
+<SelectReactPropsTable/>
 
-<ReactHandlersTable/>
+##### Handlers
 
-### Element
+<SelectReactHandlersTable/>
 
-#### Properties
+#### Element
 
-<ElementPropertiesTable/>
+##### Properties
 
-#### Attributes
+<SelectElementPropertiesTable/>
 
-<ElementAttributesTable/>
+##### Attributes
 
-#### Events
+<SelectElementAttributesTable/>
 
-<ElementEventsTable/>
+##### Events
+
+<SelectElementEventsTable/>
+
+### Select Option
+
+#### React
+
+##### Props
+
+<SelectOptionReactPropsTable/>
+
+#### Element
+
+##### Properties
+
+<SelectOptionElementPropertiesTable/>
+
+##### Attributes
+
+<SelectOptionElementAttributesTable/>
