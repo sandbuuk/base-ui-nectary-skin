@@ -407,6 +407,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   #onHoursKeydown = (e: KeyboardEvent) => {
     switch (e.key) {
       case 'ArrowUp': {
+        e.preventDefault()
         this.#hour = (this.#hour + 1) % 24
 
         this.#render()
@@ -415,6 +416,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
       }
 
       case 'ArrowDown': {
+        e.preventDefault()
         this.#hour = (this.#hour + 23) % 24
 
         this.#render()
@@ -427,6 +429,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   #onMinutesKeydown = (e: KeyboardEvent) => {
     switch (e.key) {
       case 'ArrowUp': {
+        e.preventDefault()
         this.#minute = (this.#minute + 1) % 60
 
         this.#render()
@@ -435,6 +438,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
       }
 
       case 'ArrowDown': {
+        e.preventDefault()
         this.#minute = (this.#minute + 59) % 60
 
         this.#render()
