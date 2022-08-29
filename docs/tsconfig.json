@@ -14,6 +14,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
+    "resolveJsonModule": true,
     "paths": {
       "~/*": [
         "./src/*"
