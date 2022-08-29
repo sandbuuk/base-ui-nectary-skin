@@ -1,3 +1,9 @@
+## v0.36.1 (2022-08-29)
+
+* 🐞 fix non-modal overflow in `sinch-popover`
+* 🐞 fix scroll in `sinch-tag`
+* 🐞 prevent arrow keys scrolling page in `sinch-time-picker`
+
 ## v0.36.0 (2022-08-24)
 
 * 💥 split `sinch-alert` to `sinch-alert` and `sinch-inline-alert`
