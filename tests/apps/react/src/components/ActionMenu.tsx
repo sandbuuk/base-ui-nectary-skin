@@ -1,8 +1,9 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useState } from 'react'
 import type { TSinchPopoverOrientation } from '@sinch-engage/nectary/popover/types'
-import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/button'
 import type { FC } from 'react'
 
 type TActionMenu = {
@@ -11,20 +12,29 @@ type TActionMenu = {
 
 export const ActionMenu: FC<TActionMenu> = ({ search }) => {
   const orientation = search.get('orientation') as TSinchPopoverOrientation ?? undefined
+  const [value, setValue] = useState('')
   const [isOpen, setOpen] = useState(search.get('open') !== null)
-  const onClose = useCallback(() => {
+  const onOpen = () => {
+    window.dispatchEvent(new CustomEvent('sinch-action-menu-open'))
+    setOpen(true)
+  }
+  const onClose = () => {
     window.dispatchEvent(new CustomEvent('sinch-action-menu-close'))
     setOpen(false)
-  }, [])
-  const onOptionClick = useCallback((text: string) => {
+  }
+  const onOptionClick = (text: string) => {
     window.dispatchEvent(new CustomEvent('sinch-action-menu-click', { detail: text }))
     setOpen(false)
-  }, [])
-  const maxVisibleItems = useMemo(() => {
+  }
+  const onValueChange = (e: CustomEvent) => {
+    window.dispatchEvent(new CustomEvent('sinch-input-change'))
+    setValue(e.detail)
+  }
+  const maxVisibleItems = (() => {
     const val = search.get('maxvisibleitems')
 
     return val !== null ? parseInt(val) : undefined
-  }, [search])
+  })()
   const isModal = search.get('modal') !== null
 
   return (
@@ -36,15 +46,22 @@ export const ActionMenu: FC<TActionMenu> = ({ search }) => {
       aria-label="Dropdown"
       modal={isModal}
     >
-      <sinch-button
+      <sinch-input
         slot="target"
-        type="cta-secondary"
-        text="Some content"
-        aria-label="Button"
-        on-click={() => {
-          setOpen(true)
-        }}
-      />
+        label="Input"
+        aria-label="Input"
+        value={value}
+        on-change={onValueChange}
+      >
+        <sinch-button
+          slot="right"
+          small
+          type="cta-secondary"
+          text="Open"
+          aria-label="Open"
+          on-click={onOpen}
+        />
+      </sinch-input>
       <sinch-action-menu-option text="Option 1 value long long long" slot="option" aria-label="Option 1" on-click={() => onOptionClick('Option 1 value long long long')}>
         <sinch-icon-open-in-new slot="icon"/>
       </sinch-action-menu-option>

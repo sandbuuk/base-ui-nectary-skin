@@ -27,7 +27,7 @@ export const Search: FC<TSearch> = ({ search }) => {
 
     setValue(value)
 
-    if (value.length >= 5) {
+    if (value.length >= 3) {
       setOpen(true)
     }
   }
@@ -49,7 +49,6 @@ export const Search: FC<TSearch> = ({ search }) => {
   }, [])
   const onBlur = useCallback(() => {
     window.dispatchEvent(new CustomEvent('sinch-search-blur'))
-    setOpen(false)
   }, [])
   const maxVisibleItems = useMemo(() => {
     const val = search.get('maxvisibleitems')

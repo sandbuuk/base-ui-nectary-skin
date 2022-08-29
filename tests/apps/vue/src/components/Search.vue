@@ -53,7 +53,7 @@ export default {
     onChange(e) {
       this.value = e.detail
 
-      if (e.detail.length >= 5) {
+      if (e.detail.length >= 3) {
         this.isOpen = true
       }
     },
@@ -62,7 +62,6 @@ export default {
     },
     onBlur() {
       window.dispatchEvent(new CustomEvent('sinch-search-blur'))
-      this.isOpen = false
     },
     onClear() {
       this.value = ''

@@ -14,12 +14,14 @@ export class ActionMenuComponent {
   isModal: boolean
   maxVisibleItems: number | null
   orientation: string | null
+  value: string
 
   constructor() {
     const url = new URL(location.href)
     this.isOpen = url.searchParams.get('open') !== null
     this.isModal = url.searchParams.get('modal') !== null
     this.orientation = url.searchParams.get('orientation')
+    this.value = ''
 
     const numVisibleValue = url.searchParams.get('maxvisibleitems')
     this.maxVisibleItems = numVisibleValue !== null ? parseInt(numVisibleValue) : null
@@ -34,6 +36,11 @@ export class ActionMenuComponent {
     this.isOpen = false
   }
   onOpen() {
+    window.dispatchEvent(new CustomEvent('sinch-action-menu-open'))
     this.isOpen = true
+  }
+  onValueChange(e: CustomEvent) {
+    window.dispatchEvent(new CustomEvent('sinch-input-change'))
+    this.value = e.detail
   }
 }
