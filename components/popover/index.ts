@@ -176,17 +176,15 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$target.setAttribute('aria-expanded', 'true')
 
     /* Firefox needs that, since loses focus */
-    this.#targetActiveElement?.focus()
-    this.#targetActiveElement = null
+    requestAnimationFrame(() => {
+      this.#targetActiveElement?.focus()
+      this.#targetActiveElement = null
+    })
 
     /* Prevent scroll */
     this.#originalOverflowValue = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     window.addEventListener('resize', this.#onResize)
-
-    /* Firefox needs that, since loses focus */
-    this.#$targetOpenSlot.removeEventListener('blur', this.#onTargetBlur, true)
-    this.#$targetOpenSlot.removeEventListener('focus', this.#onTargetFocus, true)
   }
 
   #onCollapse() {
@@ -293,10 +291,12 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   #onTargetBlur = (e: FocusEvent) => {
     e.stopPropagation()
     this.#targetActiveElement = e.target as HTMLElement
+    this.#$targetOpenSlot.removeEventListener('blur', this.#onTargetBlur, true)
   }
 
   #onTargetFocus = (e: Event) => {
     e.stopPropagation()
+    this.#$targetOpenSlot.removeEventListener('focus', this.#onTargetFocus, true)
   }
 })
 
