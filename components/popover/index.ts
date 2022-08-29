@@ -154,7 +154,8 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     if (!this.modal) {
       /* Try focusing transferred target element */
       /* Firefox needs that, since loses focus */
-      this.#$targetOpenSlot.addEventListener('focusout', this.#onTargetBlurAndRefocus)
+      this.#$targetOpenSlot.addEventListener('blur', this.#onTargetBlur, true)
+      this.#$targetOpenSlot.addEventListener('focus', this.#onTargetFocus, true)
 
       /* Transfer target */
       const targetRect = this.#$target.getBoundingClientRect()
@@ -184,7 +185,8 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     window.addEventListener('resize', this.#onResize)
 
     /* Firefox needs that, since loses focus */
-    this.#$targetOpenSlot.removeEventListener('focusout', this.#onTargetBlurAndRefocus)
+    this.#$targetOpenSlot.removeEventListener('blur', this.#onTargetBlur, true)
+    this.#$targetOpenSlot.removeEventListener('focus', this.#onTargetFocus, true)
   }
 
   #onCollapse() {
@@ -288,8 +290,13 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     )
   }
 
-  #onTargetBlurAndRefocus = (e: FocusEvent) => {
+  #onTargetBlur = (e: FocusEvent) => {
+    e.stopPropagation()
     this.#targetActiveElement = e.target as HTMLElement
+  }
+
+  #onTargetFocus = (e: Event) => {
+    e.stopPropagation()
   }
 })
 
