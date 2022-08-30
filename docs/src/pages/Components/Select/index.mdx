@@ -1,10 +1,9 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
 import { SimpleExample } from './examples/Simple.tsx?example'
-import { OptionalAttributesExample } from './examples/OptionalAttributes.tsx?example'
+import { FieldExample } from './examples/Field.tsx?example'
 import { MaxVisibleItemsExample } from './examples/MaxVisibleItems.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
-import { TooltipExample } from './examples/Tooltip.tsx?example'
 import {
   ReactPropsTable as SelectReactPropsTable,
   ReactHandlersTable as SelectReactHandlersTable,
@@ -32,9 +31,9 @@ It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled
 
 <Example Component={SimpleExample}/>
 
-### Optional attributes
+### Field
 
-<Example Component={OptionalAttributesExample}/>
+<Example Component={FieldExample}/>
 
 ### Max visible items
 
@@ -45,10 +44,6 @@ Controls number of visible at the same time options in the list and makes it scr
 ### Disabled
 
 <Example Component={DisabledExample}/>
-
-### Tooltip
-
-<Example Component={TooltipExample}/>
 
 ## API
 

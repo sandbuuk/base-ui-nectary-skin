@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
+import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/search'
@@ -31,25 +32,26 @@ export const CompositionExample: FC = () => {
       open={isOpen}
       on-close={() => setIsOpen(false)}
     >
-      <sinch-input
-        slot="target"
-        label="Search"
-        aria-label="Search"
-        value={value}
-        on-focus={() => setIsOpen(true)}
-        on-blur={() => setIsOpen(false)}
-        on-change={(e) => setValue(e.detail)}
-      >
-        <sinch-icon-search slot="icon"/>
-        <sinch-icon-button
-          slot="right"
-          aria-label="Clear search"
-          small
-          on-click={() => setValue('')}
+      <sinch-field slot="target" label="Search">
+        <sinch-input
+          slot="input"
+          aria-label="Search"
+          value={value}
+          on-focus={() => setIsOpen(true)}
+          on-blur={() => setIsOpen(false)}
+          on-change={(e) => setValue(e.detail)}
         >
-          <sinch-icon-close slot="icon"/>
-        </sinch-icon-button>
-      </sinch-input>
+          <sinch-icon-search slot="icon"/>
+          <sinch-icon-button
+            slot="right"
+            aria-label="Clear search"
+            small
+            on-click={() => setValue('')}
+          >
+            <sinch-icon-close slot="icon"/>
+          </sinch-icon-button>
+        </sinch-input>
+      </sinch-field>
       {
         options.map((text) => (
           <sinch-action-menu-option

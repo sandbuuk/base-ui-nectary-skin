@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/date-picker'
@@ -32,24 +33,28 @@ export const CompositionExample: FC = () => {
       modal
       on-close={onClose}
     >
-      <sinch-input
+      <sinch-field
         slot="target"
         label="Date picker"
-        aria-label="Pick date"
-        placeholder="YYYY-MM-DD"
         additionalText="Additional text"
-        value={value}
-        on-change={onChange}
       >
-        <sinch-icon-button
-          slot="right"
-          small
-          aria-label="Open Date Picker"
-          on-click={onOpen}
+        <sinch-input
+          slot="input"
+          aria-label="Pick date"
+          placeholder="YYYY-MM-DD"
+          value={value}
+          on-change={onChange}
         >
-          <sinch-icon-calendar-today slot="icon"/>
-        </sinch-icon-button>
-      </sinch-input>
+          <sinch-icon-button
+            slot="right"
+            small
+            aria-label="Open Date Picker"
+            on-click={onOpen}
+          >
+            <sinch-icon-calendar-today slot="icon"/>
+          </sinch-icon-button>
+        </sinch-input>
+      </sinch-field>
       <sinch-date-picker
         slot="content"
         min="2021-12-25"

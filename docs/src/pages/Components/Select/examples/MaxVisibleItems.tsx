@@ -13,7 +13,6 @@ export const MaxVisibleItemsExample: FC = () => {
 
   return (
     <sinch-select
-      label="Select"
       aria-label="Select value"
       placeholder="Placeholder"
       maxVisibleItems={2}

@@ -13,7 +13,6 @@ export const DisabledExample: FC = () => {
 
   return (
     <sinch-select
-      label="Select"
       aria-label="Select value"
       placeholder="Placeholder"
       disabled
