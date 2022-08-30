@@ -19,7 +19,9 @@ export type TSinchInputElement = HTMLElement & {
   selectionDirection: 'forward' | 'backward' | 'none' | null,
   /** Change value event */
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
+  /** Focus event */
   addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
+  /** Blur event */
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
   /** Text field type, `text` by default */
   setAttribute(name: 'type', value: TSinchInputType): void,
@@ -50,6 +52,8 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   onChange?: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
   /** Change value handler */
   'on-change'?: (e: CustomEvent<string>) => void,
+  /** Focus handler */
   'on-focus'?: (e: CustomEvent<void>) => void,
+  /** Blur handler */
   'on-blur'?: (e: CustomEvent<void>) => void,
 }
