@@ -1,3 +1,4 @@
+import pkg from './package.json'
 import type { TRect } from './types'
 
 const nectaryDefinitions = new Map<string, CustomElementConstructor>()
@@ -46,6 +47,8 @@ export class NectaryElement extends HTMLElement {
       ...options,
     })
   }
+
+  __version = pkg.version
 }
 
 export const getReactEventHandler = ($element: HTMLElement, handlerName: string): ((arg?: any) => void) | null => {
