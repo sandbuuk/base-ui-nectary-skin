@@ -1,46 +1,46 @@
 <style>
-  :host {
-    display: inline-block;
-    vertical-align: middle;
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
   }
 
-  @keyframes spinner {
-    0% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
   }
+}
 
-  div {
-    animation: 1.5s linear infinite spinner;
-    animation-play-state: running;
-    border: solid 3px var(--sinch-color-spinner-bg, #D4DADD);
-    border-bottom-color: var(--sinch-color-spinner-fg, #0A273D);
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-    box-sizing: border-box;
-    will-change: transform;
-  }
+div {
+  animation: 1.5s linear infinite spinner;
+  animation-play-state: running;
+  border: solid 3px var(--sinch-color-spinner-bg, #D4DADD);
+  border-bottom-color: var(--sinch-color-spinner-fg, #0A273D);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  box-sizing: border-box;
+  will-change: transform;
+}
 
-  :host([type="large"]) div {
-    height: 46px;
-    width: 46px;
-    border-width: 4px;
-  }
+:host([type="large"]) div {
+  height: 46px;
+  width: 46px;
+  border-width: 4px;
+}
 
-  :host([type="small"]) div {
-    height: 14px;
-    width: 14px;
-    border-width: 2px;
-  }
+:host([type="small"]) div {
+  height: 14px;
+  width: 14px;
+  border-width: 2px;
+}
 
-  :host([static]:not([static="false"])) div {
-    animation-play-state: paused;
-  }
+:host([static]:not([static="false"])) div {
+  animation-play-state: paused;
+}
 </style>
 
 <div></div>

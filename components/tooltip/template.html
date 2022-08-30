@@ -1,123 +1,123 @@
 <style>
-  :host {
-    display: inline-block;
-    vertical-align: middle;
-  }
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
 
-  #wrapper {
-    position: relative;
-    display: block;
-  }
+#wrapper {
+  position: relative;
+  display: block;
+}
 
+#tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s linear 0.2s;
+}
+
+@media (prefers-reduced-motion) {
   #tooltip {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s linear 0.2s;
+    transition: none;
   }
+}
 
-  @media (prefers-reduced-motion) {
-    #tooltip {
-      transition: none;
-    }
-  }
+:host(:hover) #tooltip {
+  opacity: 1;
+}
 
-  :host(:hover) #tooltip {
-    opacity: 1;
-  }
+#text {
+  position: absolute;
+  padding: 2px 6px;
+  font: var(--sinch-font-extra-small-text);
+  color: var(--sinch-color-text-default);
+  background-color: var(--sinch-color-snow-600);
+  width: max-content;
+  border-radius: var(--sinch-shape-radius-xs);
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  word-break: break-word;
+}
 
-  #text {
-    position: absolute;
-    padding: 2px 6px;
-    font: var(--sinch-font-extra-small-text);
-    color: var(--sinch-color-text-default);
-    background-color: var(--sinch-color-snow-600);
-    width: max-content;
-    border-radius: var(--sinch-shape-radius-xs);
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-100%);
-    word-break: break-word;
-  }
+#arrow {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  fill: var(--sinch-color-snow-600);
+}
 
-  #arrow {
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    fill: var(--sinch-color-snow-600);
-  }
+:host([orientation="top-left"]) #text {
+  transform: translateX(-80%) translateY(-100%);
+}
 
-  :host([orientation="top-left"]) #text {
-    transform: translateX(-80%) translateY(-100%);
-  }
+:host([orientation="top-right"]) #text {
+  transform: translateX(-20%) translateY(-100%);
+}
 
-  :host([orientation="top-right"]) #text {
-    transform: translateX(-20%) translateY(-100%);
-  }
+:host([orientation="bottom-right"]) #text {
+  top: calc(100% + 8px);
+  transform: translateX(-20%);
+}
 
-  :host([orientation="bottom-right"]) #text {
-    top: calc(100% + 8px);
-    transform: translateX(-20%);
-  }
+:host([orientation="bottom-left"]) #text {
+  top: calc(100% + 8px);
+  transform: translateX(-80%);
+}
 
-  :host([orientation="bottom-left"]) #text {
-    top: calc(100% + 8px);
-    transform: translateX(-80%);
-  }
+:host([orientation="bottom"]) #text {
+  top: calc(100% + 8px);
+  transform: translateX(-50%);
+}
 
-  :host([orientation="bottom"]) #text {
-    top: calc(100% + 8px);
-    transform: translateX(-50%);
-  }
+/* stylelint-disable-next-line no-descending-specificity */
+:host([orientation^="bottom"]) #arrow {
+  top: calc(100% + 4px);
+  transform: translateX(-50%) rotate(180deg);
+}
 
-  /* stylelint-disable-next-line no-descending-specificity */
-  :host([orientation^="bottom"]) #arrow {
-    top: calc(100% + 4px);
-    transform: translateX(-50%) rotate(180deg);
-  }
+:host([orientation="left"]) #text {
+  left: unset;
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-  :host([orientation="left"]) #text {
-    left: unset;
-    right: calc(100% + 8px);
-    top: 50%;
-    transform: translateY(-50%);
-  }
+:host([orientation="left"]) #arrow {
+  left: -11px;
+  top: 50%;
+  transform: translateY(-50%) rotate(270deg);
+}
 
-  :host([orientation="left"]) #arrow {
-    left: -11px;
-    top: 50%;
-    transform: translateY(-50%) rotate(270deg);
-  }
+:host([orientation="right"]) #text {
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-  :host([orientation="right"]) #text {
-    left: calc(100% + 8px);
-    top: 50%;
-    transform: translateY(-50%);
-  }
+:host([orientation="right"]) #arrow {
+  top: 50%;
+  left: calc(100% + 2px);
+  transform: translateY(-50%) rotate(90deg);
+}
 
-  :host([orientation="right"]) #arrow {
-    top: 50%;
-    left: calc(100% + 2px);
-    transform: translateY(-50%) rotate(90deg);
-  }
+:host([inverted]:not([inverted="false"])) #text {
+  color: var(--sinch-color-text-inverted);
+  background-color: var(--sinch-color-stormy-500);
+}
 
-  :host([inverted]:not([inverted="false"])) #text {
-    color: var(--sinch-color-text-inverted);
-    background-color: var(--sinch-color-stormy-500);
-  }
+:host([inverted]:not([inverted="false"])) #arrow {
+  fill: var(--sinch-color-stormy-500);
+}
 
-  :host([inverted]:not([inverted="false"])) #arrow {
-    fill: var(--sinch-color-stormy-500);
-  }
-
-  ::slotted(*) {
-    display: block;
-  }
+::slotted(*) {
+  display: block;
+}
 </style>
 
 <div id="wrapper">
