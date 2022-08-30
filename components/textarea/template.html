@@ -27,10 +27,6 @@
     resize: none;
   }
 
-  #input::placeholder {
-    font: var(--sinch-font-body);
-    color: var(--sinch-color-text-muted);
-  }
 
   #input:disabled {
     border-color: var(--sinch-color-snow-500);
@@ -122,6 +118,11 @@
   :host([disabled]:not([disabled="false"])) {
     --sinch-color-icon: var(--sinch-color-stormy-100);
   }
+#input::placeholder {
+  font: var(--sinch-font-body);
+  color: var(--sinch-color-text-muted);
+  opacity: 1;
+}
 </style>
 
 <div id="wrapper">
