@@ -5,22 +5,22 @@
     :orientation="orientation"
     :maxvisibleitems="maxVisibleItems"
     @--close="onClose">
-    <sinch-input
-      slot="target"
-      label="Input"
-      aria-label="Input"
-      :value="value"
-      @--change="onValueChange"
-    >
-      <sinch-button
-        slot="right"
-        small
-        type="cta-secondary"
-        text="Open"
-        aria-label="Open"
-        @--click="onOpen"
-      ></sinch-button>
-    </sinch-input>
+    <sinch-field slot="target" label="Input">
+      <sinch-input
+        slot="input"
+        aria-label="Input"
+        :value="value"
+        @--change="onValueChange">
+        <sinch-button
+          slot="right"
+          small
+          type="cta-secondary"
+          text="Open"
+          aria-label="Open"
+          @--click="onOpen"
+        ></sinch-button>
+      </sinch-input>
+    </sinch-field>
     <sinch-action-menu-option @--click="() => {onClick('Option 1 value long long long')}" text="Option 1 value long long long" slot="option">
       <sinch-icon-open-in-new slot="icon"/>
     </sinch-action-menu-option>
@@ -35,6 +35,7 @@
 <script>
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
+import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/button'
 

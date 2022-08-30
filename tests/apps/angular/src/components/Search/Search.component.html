@@ -4,29 +4,25 @@
   [attr.maxVisibleItems]="maxVisibleItems"
   aria-label="Search"
   (-close)="onClose()">
-  <sinch-input
-    slot="target"
-    aria-label="Search Input"
-    [attr.placeholder]="placeholderText"
-    [attr.label]="labelText"
-    [attr.optionaltext]="optionalText"
-    [attr.additionaltext]="additionalText"
-    [attr.invalidtext]="invalidText"
-    [attr.disabled]="isDisabled"
-    [value]="value"
-    (-change)="onChange($event)"
-    (-focus)="onFocus()"
-    (-blur)="onBlur()">
-    <sinch-icon-search slot="icon"></sinch-icon-search>
-    <sinch-icon-button
-      slot="right"
-      small
-      aria-label="Clear search"
-      (-click)="onClear()">
-      <sinch-icon-close slot="icon"></sinch-icon-close>
-    </sinch-icon-button>
-    <sinch-help-tooltip *ngIf="tooltipText != null" [attr.text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
-  </sinch-input>
+  <sinch-field slot="target" label="Label">
+    <sinch-input
+      slot="input"
+      aria-label="Search input"
+      placeholder="Search input"
+      [value]="value"
+      (-change)="onChange($event)"
+      (-focus)="onFocus()"
+      (-blur)="onBlur()">
+      <sinch-icon-search slot="icon"></sinch-icon-search>
+      <sinch-icon-button
+        slot="right"
+        small
+        aria-label="Clear search"
+        (-click)="onClear()">
+        <sinch-icon-close slot="icon"></sinch-icon-close>
+      </sinch-icon-button>
+    </sinch-input>
+  </sinch-field>
   <sinch-action-menu-option
     *ngFor="let text of options"
     slot="option"

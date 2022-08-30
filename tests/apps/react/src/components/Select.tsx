@@ -21,10 +21,7 @@ export const Select: FC<TSelect> = ({ search }) => {
   const onBlur = () => {
     window.dispatchEvent(new CustomEvent('sinch-select-blur'))
   }
-  const labelText = search.get('label') ?? ''
-  const optionalText = search.get('optional') ?? undefined
-  const additionalText = search.get('additional') ?? undefined
-  const invalidText = search.get('invalid') ?? undefined
+  const isInvalid = search.get('invalid') !== null
   const placeholderText = search.get('placeholder') ?? undefined
   const isDisabled = search.get('disabled') != null
   const maxVisibleItems = (() => {
@@ -32,17 +29,10 @@ export const Select: FC<TSelect> = ({ search }) => {
 
     return val !== null ? parseInt(val) : undefined
   })()
-  const tooltip =
-    search.get('tooltip') != null && (
-      <sinch-help-tooltip text={search.get('tooltip')!} slot="tooltip"/>
-    )
 
   return (
     <sinch-select
-      label={labelText}
-      optionalText={optionalText}
-      additionalText={additionalText}
-      invalidText={invalidText}
+      invalid={isInvalid}
       placeholder={placeholderText}
       disabled={isDisabled}
       value={value}
@@ -52,7 +42,6 @@ export const Select: FC<TSelect> = ({ search }) => {
       on-blur={onBlur}
       aria-label="Select"
     >
-      {tooltip}
       <sinch-select-option value="1" text="Option 1 value" slot="option" aria-label="Option 1">
         <sinch-icon-open-in-new slot="icon"/>
       </sinch-select-option>

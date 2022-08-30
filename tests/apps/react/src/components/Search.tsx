@@ -1,6 +1,7 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
@@ -50,54 +51,35 @@ export const Search: FC<TSearch> = ({ search }) => {
   const onBlur = useCallback(() => {
     window.dispatchEvent(new CustomEvent('sinch-search-blur'))
   }, [])
-  const maxVisibleItems = useMemo(() => {
-    const val = search.get('maxvisibleitems')
-
-    return val !== null ? parseInt(val) : undefined
-  }, [search])
-  const labelText = search.get('label') ?? ''
-  const optionalText = search.get('optional') ?? undefined
-  const additionalText = search.get('additional') ?? undefined
-  const invalidText = search.get('invalid') ?? undefined
-  const placeholderText = search.get('placeholder') ?? undefined
-  const isDisabled = search.get('disabled') != null
-  const tooltipText = search.get('tooltip')
 
   return (
     <sinch-action-menu
       orientation="bottom"
       open={isOpen}
-      maxVisibleItems={maxVisibleItems}
       aria-label="Search"
       onClose={onClose}
     >
-      <sinch-input
-        slot="target"
-        aria-label="Search Input"
-        value={value}
-        on-change={onChange}
-        label={labelText}
-        optionalText={optionalText}
-        additionalText={additionalText}
-        invalidText={invalidText}
-        placeholder={placeholderText}
-        disabled={isDisabled}
-        on-focus={onFocus}
-        on-blur={onBlur}
-      >
-        <sinch-icon-search slot="icon"/>
-        <sinch-icon-button
-          slot="right"
-          small
-          aria-label="Clear search"
-          onClick={onClear}
+      <sinch-field slot="target" label="Label">
+        <sinch-input
+          slot="input"
+          aria-label="Search input"
+          placeholder="Search input"
+          value={value}
+          on-change={onChange}
+          on-focus={onFocus}
+          on-blur={onBlur}
         >
-          <sinch-icon-close slot="icon"/>
-        </sinch-icon-button>
-        {tooltipText !== null && (
-          <sinch-help-tooltip text={tooltipText} slot="tooltip"/>
-        )}
-      </sinch-input>
+          <sinch-icon-search slot="icon"/>
+          <sinch-icon-button
+            slot="right"
+            small
+            aria-label="Clear search"
+            onClick={onClear}
+          >
+            <sinch-icon-close slot="icon"/>
+          </sinch-icon-button>
+        </sinch-input>
+      </sinch-field>
       {
         options.map((text) => (
           <sinch-action-menu-option

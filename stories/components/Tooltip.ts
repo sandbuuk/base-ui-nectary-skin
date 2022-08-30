@@ -3,7 +3,8 @@ import { useArgs, useRef } from '@storybook/addons'
 import { useStoryWrapper } from '../use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/tooltip'
-import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/close'
 
 export default {
   title: 'Components/Tooltip',
@@ -67,10 +68,11 @@ const Template = (innerHTML: string): Story => () => {
   return $wrapper
 }
 
-export const Tooltip = Template('<sinch-icon-open-in-new></sinch-icon-open-in-new>')
+export const Tooltip = Template('<sinch-icon-button><sinch-icon-close slot="icon"></sinch-icon-close></sinch-icon-button>')
 
 Tooltip.args = {
   text: 'Tooltip text long',
+  inverted: false,
 }
 
 Tooltip.parameters = {
@@ -78,7 +80,9 @@ Tooltip.parameters = {
     source: {
       code: `
 <sinch-tooltip text={text}>
-  <sinch-icon-open-in-new></sinch-icon-open-in-new>
+  <sinch-icon-button>
+    <sinch-icon-close slot="icon"></sinch-icon-close>
+  </sinch-icon-button>
 </sinch-tooltip>
 `,
     },

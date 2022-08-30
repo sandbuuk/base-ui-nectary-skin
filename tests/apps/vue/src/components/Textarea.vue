@@ -1,10 +1,7 @@
 <template>
   <sinch-textarea
     :placeholder="placeholderText"
-    :label="labelText"
-    :optionaltext="optionalText"
-    :additionaltext="additionalText"
-    :invalidtext="invalidText"
+    :invalid="isInvalid"
     :disabled="isDisabled"
     :value="value"
     :rows="rows"
@@ -12,7 +9,6 @@
     @--change="onChange"
     @--focus="onFocus"
     @--blur="onBlur">
-    <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-help-tooltip>
   </sinch-textarea>
 </template>
 
@@ -41,20 +37,8 @@ export default {
     placeholderText() {
       return this.search.get('placeholder')
     },
-    tooltipText() {
-      return this.search.get('tooltip')
-    },
-    labelText() {
-      return this.search.get('label')
-    },
-    optionalText() {
-      return this.search.get('optional')
-    },
-    additionalText() {
-      return this.search.get('additional')
-    },
-    invalidText() {
-      return this.search.get('invalid')
+    isInvalid() {
+      return this.search.get('invalid') !== null
     },
     isDisabled() {
       return this.search.get('disabled') !== null

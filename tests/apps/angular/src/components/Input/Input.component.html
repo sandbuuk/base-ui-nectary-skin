@@ -1,10 +1,8 @@
 <sinch-input
-  [attr.label]="labelText"
-  [attr.optionaltext]="optionalText"
-  [attr.additionaltext]="additionalText"
-  [attr.invalidtext]="invalidText"
+  aria-label="Input"
   [attr.placeholder]="placeholderText"
   [attr.disabled]="isDisabled"
+  [attr.invalid]="isInvalid"
   [attr.type]="type"
   [value]="value"
   (-focus)="onFocus()"

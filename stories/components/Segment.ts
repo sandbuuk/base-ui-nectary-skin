@@ -1,8 +1,16 @@
 import { sizeValues } from '@sinch-engage/nectary/segment/utils'
 import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
+import '@sinch-engage/nectary/field'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/checkbox'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/segment'
 import '@sinch-engage/nectary/segment-collapse'
+import '@sinch-engage/nectary/icons/apps'
+import '@sinch-engage/nectary/icons-branded/chatbot'
 
 export default {
   title: 'Components/Segment',
@@ -47,11 +55,8 @@ const Template = (innerHTML: string = ''): Story => () => {
   return segmentRef.current
 }
 
-const segmentCollapseHTML = `
-  <sinch-segment-collapse slot="collapse" value="false"></sinch-segment-collapse>
-`
-
 const segmentInnerHTML = `
+  <sinch-segment-collapse slot="collapse" value="false"></sinch-segment-collapse>
   <sinch-icon-branded-chatbot slot="icon" size="32"></sinch-icon-branded-chatbot>
   <div slot="preview" style="display: flex;flex-direction: column;background-color: #F1F3F4;align-items: center;justify-content: center;height: 100%;">
     <span style="font-size: 18px">Replace me!</span>
@@ -62,16 +67,20 @@ const segmentInnerHTML = `
     <sinch-icon-apps slot="icon"></sinch-icon-apps>
   </sinch-icon-button>
   <div slot="content" style="display: flex; flex-direction: column;">
-    <section style="margin-bottom: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
-    <sinch-input label="Label" value=""></sinch-input>
-    <sinch-input label="Label" value=""></sinch-input>
+    <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
+    <sinch-field label="Label">
+      <sinch-input slot="input" value=""></sinch-input>
+    </sinch-field>
+    <sinch-field label="Label">
+      <sinch-input slot="input" value=""></sinch-input>
+    </sinch-field>
   </div>
   <sinch-checkbox slot="action" text="Checkbox"></sinch-checkbox>
   <sinch-button slot="action" text="Cancel" type="secondary" small></sinch-button>
   <sinch-button slot="action" text="Ok" type="primary" small></sinch-button>
 `
 
-export const Segment = Template(segmentCollapseHTML + segmentInnerHTML)
+export const Segment = Template(segmentInnerHTML)
 
 Segment.parameters = {
   docs: {

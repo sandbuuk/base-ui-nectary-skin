@@ -12,7 +12,7 @@ test('accessibility', checkValue(async function* () {
   yield
 }))
 
-test('search screenshots', runScreenshotTests('sinch-input', [
+test('search screenshots', runScreenshotTests('sinch-action-menu', [
   {
     name: 'clear',
     url: withValue,

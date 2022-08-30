@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/dialog'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
@@ -55,30 +57,31 @@ export const DialogExample: FC<TDialog> = () => {
           }}
           aria-label="Select"
         >
-          <sinch-input
-            slot="target"
-            label="Label"
-            aria-label="Label"
-            value={value}
-            on-change={(e) => {
-              setValue(e.detail)
-            }}
-            on-focus={onInputFocus}
-            on-blur={onInputBlur}
-          >
-            <sinch-button
-              small
-              text="Ok"
-              aria-label="Ok"
-              type="primary"
-              slot="right"
-              onClick={() => {
-                setDropdownOpen(true)
+          <sinch-field slot="target" label="Label">
+            <sinch-input
+              slot="input"
+              aria-label="Label"
+              value={value}
+              on-change={(e) => {
+                setValue(e.detail)
               }}
-              on-focus={onButtonFocus}
-              on-blur={onButtonBlur}
-            />
-          </sinch-input>
+              on-focus={onInputFocus}
+              on-blur={onInputBlur}
+            >
+              <sinch-button
+                small
+                text="Ok"
+                aria-label="Ok"
+                type="primary"
+                slot="right"
+                onClick={() => {
+                  setDropdownOpen(true)
+                }}
+                on-focus={onButtonFocus}
+                on-blur={onButtonBlur}
+              />
+            </sinch-input>
+          </sinch-field>
           <sinch-action-menu-option slot="option" text="AAAAAAAAAAAAAAAAA" aria-label="Select"/>
           <sinch-action-menu-option slot="option" text="BBB" aria-label="Select"/>
           <sinch-action-menu-option slot="option" text="CCC" aria-label="Select"/>

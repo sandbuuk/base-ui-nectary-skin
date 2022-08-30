@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/close'
 import '@sinch-engage/nectary/icons/search'
@@ -21,25 +20,18 @@ export const Input: FC<TInput> = ({ search }) => {
   const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-input-focus'))
   const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-input-blur'))
   const type: any = search.get('type') ?? undefined
-  const labelText = search.get('label') ?? ''
-  const optionalText = search.get('optional') ?? undefined
-  const additionalText = search.get('additional') ?? undefined
-  const invalidText = search.get('invalid') ?? undefined
+  const isInvalid = search.get('invalid') !== null
   const placeholderText = search.get('placeholder') ?? undefined
   const isDisabled = search.get('disabled') != null
-  const tooltipText = search.get('tooltip')
   const hasRight = search.get('right') != null
   const hasIcon = search.get('icon') != null
 
   return (
     <sinch-input
       type={type}
-      label={labelText}
-      optionalText={optionalText}
-      additionalText={additionalText}
-      invalidText={invalidText}
       placeholder={placeholderText}
       disabled={isDisabled}
+      invalid={isInvalid}
       value={value}
       on-change={onChange}
       on-focus={onFocus}
@@ -48,9 +40,6 @@ export const Input: FC<TInput> = ({ search }) => {
     >
       {hasIcon && (
         <sinch-icon-search slot="icon"/>
-      )}
-      {tooltipText !== null && (
-        <sinch-help-tooltip text={tooltipText} slot="tooltip"/>
       )}
       {hasRight && (
         <>

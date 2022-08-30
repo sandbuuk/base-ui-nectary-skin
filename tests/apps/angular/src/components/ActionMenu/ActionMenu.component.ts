@@ -1,7 +1,10 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/icons/open-in-new'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
+import '@sinch-engage/nectary/field'
+import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 @Component({
   selector: 'action-menu-component',

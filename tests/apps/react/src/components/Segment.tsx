@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/segment'
 import '@sinch-engage/nectary/segment-collapse'
+import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/icons/apps'
@@ -51,8 +52,12 @@ export const Segment: FC<TSegment> = ({ search }) => {
       {hasContent && (
         <div slot="content" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
-          <sinch-input aria-label="Input" label="Label" value="" onChange={() => {}} slot="content"/>
-          <sinch-input aria-label="Input" label="Label" value="" onChange={() => {}} slot="content"/>
+          <sinch-field slot="content" label="Label">
+            <sinch-input slot="input" aria-label="Input" value=""/>
+          </sinch-field>
+          <sinch-field slot="content" label="Label">
+            <sinch-input slot="input" aria-label="Input" value=""/>
+          </sinch-field>
         </div>
       )}
       {hasIcon && <sinch-icon-branded-chatbot size={32} slot="icon"/>}

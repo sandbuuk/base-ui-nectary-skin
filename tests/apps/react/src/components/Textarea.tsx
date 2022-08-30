@@ -16,11 +16,8 @@ export const Textarea: FC<TTextarea> = ({ search }) => {
   }
   const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-textarea-focus'))
   const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-textarea-blur'))
-  const labelText = search.get('label') ?? ''
-  const optionalText = search.get('optional') ?? undefined
-  const additionalText = search.get('additional') ?? undefined
-  const invalidText = search.get('invalid') ?? undefined
   const placeholderText = search.get('placeholder') ?? undefined
+  const isInvalid = search.get('invalid') !== null
   const isDisabled = search.get('disabled') != null
   const rows = (() => {
     const val = search.get('rows')
@@ -28,16 +25,10 @@ export const Textarea: FC<TTextarea> = ({ search }) => {
     return val !== null ? parseInt(val) : undefined
   })()
   const isResizable = search.get('resizable') === 'true'
-  const tooltip = search.get('tooltip') != null && (
-    <sinch-help-tooltip text={search.get('tooltip')!} slot="tooltip"/>
-  )
 
   return (
     <sinch-textarea
-      label={labelText}
-      optionalText={optionalText}
-      additionalText={additionalText}
-      invalidText={invalidText}
+      invalid={isInvalid}
       placeholder={placeholderText}
       disabled={isDisabled}
       value={value}
@@ -47,8 +38,6 @@ export const Textarea: FC<TTextarea> = ({ search }) => {
       on-focus={onFocus}
       on-blur={onBlur}
       aria-label="Textarea"
-    >
-      {tooltip}
-    </sinch-textarea>
+    />
   )
 }

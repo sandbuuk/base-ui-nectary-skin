@@ -1,139 +1,50 @@
 <style>
-  :host {
-    display: inline-block;
-    vertical-align: middle;
-    outline: none;
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
 
-    --sinch-color-icon: var(--sinch-color-stormy-500);
-  }
+#input {
+  all: initial;
+  display: block;
+  border: 1px solid var(--sinch-color-stormy-200);
+  box-sizing: border-box;
+  border-radius: var(--sinch-shape-radius-s);
+  width: 100%;
+  padding: 8px 12px;
+  font: var(--sinch-font-body);
+  color: var(--sinch-color-text-default);
+  caret-color: var(--sinch-caret-color, auto);
+  background-color: var(--sinch-color-snow-100);
+  resize: none;
+}
 
-  #wrapper {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  #input {
-    all: initial;
-    display: block;
-    border: 1px solid var(--sinch-color-stormy-200);
-    box-sizing: border-box;
-    border-radius: var(--sinch-shape-radius-s);
-    width: 100%;
-    padding: 8px 12px;
-    font: var(--sinch-font-body);
-    color: var(--sinch-color-text-default);
-    caret-color: var(--sinch-caret-color, auto);
-    background-color: var(--sinch-color-snow-100);
-    resize: none;
-  }
-
-
-  #input:disabled {
-    border-color: var(--sinch-color-snow-500);
-    color: var(--sinch-color-stormy-100);
-  }
-
-  #input:disabled::placeholder {
-    color: var(--sinch-color-snow-500);
-  }
-
-  #input:focus {
-    border-color: var(--sinch-color-stormy-600);
-  }
-
-  :host([resizable]:not([resizable="false"])) #input {
-    resize: vertical;
-  }
-
-  :host([invalidtext]:not([invalidtext=""])) #input:not(:disabled) {
-    border-color: var(--sinch-color-text-invalid);
-  }
-
-  #top,
-  #bottom {
-    display: flex;
-    align-items: baseline;
-  }
-
-  #top {
-    height: 24px;
-    margin-bottom: 2px;
-  }
-
-  #label,
-  #optional,
-  #additional,
-  #invalid {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  #label {
-    font: var(--sinch-font-title-s);
-    color: var(--sinch-color-text-default);
-  }
-
-  #optional {
-    flex: 1;
-    text-align: right;
-    font: var(--sinch-font-small-text);
-    color: var(--sinch-color-text-muted);
-  }
-
-  #additional {
-    flex: 1;
-    text-align: right;
-    font: var(--sinch-font-extra-small-text);
-    color: var(--sinch-color-text-muted);
-    line-height: 20px;
-    margin-top: 2px;
-  }
-
-  #additional:empty {
-    display: none;
-  }
-
-  #invalid {
-    font: var(--sinch-font-extra-small-text);
-    color: var(--sinch-color-text-invalid);
-    line-height: 20px;
-    margin-top: 2px;
-  }
-
-  #invalid:empty {
-    display: none;
-  }
-
-  ::slotted(sinch-help-tooltip) {
-    align-self: center;
-    margin: 0 8px;
-  }
-
-  :host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
-    color: var(--sinch-color-stormy-100);
-  }
-
-  /* stylelint-disable-next-line no-descending-specificity */
-  :host([disabled]:not([disabled="false"])) {
-    --sinch-color-icon: var(--sinch-color-stormy-100);
-  }
 #input::placeholder {
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-muted);
   opacity: 1;
 }
+
+#input:disabled {
+  border-color: var(--sinch-color-snow-500);
+  color: var(--sinch-color-stormy-100);
+}
+
+#input:disabled::placeholder {
+  color: var(--sinch-color-snow-500);
+}
+
+#input:focus {
+  border-color: var(--sinch-color-stormy-600);
+}
+
+:host([resizable]:not([resizable="false"])) #input {
+  resize: vertical;
+}
+
+:host([invalid]:not([invalid="false"])) #input:enabled {
+  border-color: var(--sinch-color-text-invalid);
+}
 </style>
 
-<div id="wrapper">
-  <div id="top">
-    <label id="label" for="input"></label>
-    <slot name="tooltip"></slot>
-    <span id="optional"></span>
-  </div>
-  <textarea id="input"></textarea>
-  <div id="bottom">
-    <span id="invalid"></span>
-    <span id="additional"></span>
-  </div>
-</div>
+<textarea id="input"></textarea>

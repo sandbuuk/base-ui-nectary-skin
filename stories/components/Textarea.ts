@@ -1,7 +1,5 @@
 import { useArgs, useRef } from '@storybook/addons'
-import { useStoryWrapper } from '../use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
-import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/textarea'
 
 export default {
@@ -19,21 +17,9 @@ export default {
       description: 'Placeholder',
       control: 'text',
     },
-    label: {
-      description: 'Label',
-      control: 'text',
-    },
-    optionalText: {
-      description: 'Optional',
-      control: 'text',
-    },
-    additionalText: {
-      description: 'Additional',
-      control: 'text',
-    },
-    invalidText: {
-      description: 'Invalid',
-      control: 'text',
+    invalid: {
+      description: 'Invalid state',
+      control: 'boolean',
     },
     resizable: {
       description: 'Is textarea resizable',
@@ -62,16 +48,12 @@ export default {
 const Template = (innerHTML: string): Story => () => {
   const [{
     value,
-    label,
     placeholder,
-    additionalText,
-    optionalText,
-    invalidText,
     disabled,
+    invalid,
     resizable,
     rows,
   }, updateArgs] = useArgs()
-  const $wrapper = useStoryWrapper()
   const inputRef = useRef<HTMLElementTagNameMap['sinch-textarea'] | null>(null)
 
   if (inputRef.current === null) {
@@ -90,39 +72,28 @@ const Template = (innerHTML: string): Story => () => {
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
-    $wrapper.appendChild($input)
     inputRef.current = $input
   }
 
   const $input = inputRef.current!
 
   $input.value = value
-  $input.label = label
   $input.placeholder = placeholder
-  $input.additionalText = additionalText
-  $input.optionalText = optionalText
-  $input.invalidText = invalidText
   $input.disabled = disabled
+  $input.invalid = invalid
   $input.resizable = resizable
   $input.rows = rows
 
-  return $wrapper
+  return $input
 }
 
-const textareaInnerHtml = `
-  <sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>
-`
-
-export const Textarea = Template(textareaInnerHtml)
+export const Textarea = Template('')
 
 Textarea.args = {
   value: 'hi',
-  label: 'Label',
-  optionalText: 'Optional',
-  additionalText: 'Additional',
-  invalidText: '',
   placeholder: 'Placeholder',
   disabled: false,
+  invalid: false,
   resizable: false,
   rows: 3,
 }
@@ -130,7 +101,7 @@ Textarea.args = {
 Textarea.parameters = {
   docs: {
     source: {
-      code: `<sinch-textarea value={value} on-change={setValue}>${textareaInnerHtml}</sinch-textarea>`,
+      code: `<sinch-textarea value={value} on-change={setValue}></sinch-textarea>`,
     },
   },
 }

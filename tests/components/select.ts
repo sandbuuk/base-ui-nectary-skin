@@ -1,14 +1,12 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
-import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip/types'
 
-const shot = '/select?width=200&label=Label'
-const withPlaceholder = '/select?width=200&label=Label&placeholder=Placeholder'
-const withTooltip = '/select?width=200&label=Label&placeholder=Placeholder&tooltip=Tooltip%20text%20long%20long'
-const withMaxItems = '/select?width=200&label=Label&maxvisibleitems=2'
-const withEverything = '/select?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=1'
-const checkSelectWithEverything = makeAccessibilityTests('/select?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=1', 'sinch-select')
+const shot = '/select?width=200'
+const withPlaceholder = '/select?width=200&placeholder=Placeholder'
+const withMaxItems = '/select?width=200&maxvisibleitems=2'
+const withEverything = '/select?width=200&invalid=true&placeholder=Placeholder%20value&value=1'
+const checkSelectWithEverything = makeAccessibilityTests('/select?width=200&invalid=true&placeholder=Placeholder%20value&value=1', 'sinch-select')
 
 test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
   yield
@@ -75,31 +73,6 @@ test('select screenshots', runScreenshotTests('sinch-select', [
 
       await page.mouse.click(0, 0)
       yield { name: 'click outside', includeRects: [await $eval((el) => el.dropdownRect)] }
-    },
-  },
-  {
-    name: 'click label',
-    url: shot,
-    async *fn({ $, $eval }) {
-      // Click on label
-      await $.click({ position: { x: 10, y: 10 } })
-
-      yield { name: 'open', includeRects: [await $eval((el) => el.dropdownRect)] }
-    },
-  },
-  {
-    name: 'tooltip',
-    url: withTooltip,
-    async *fn({ $ }) {
-      await $.locator('sinch-help-tooltip').hover()
-
-      const tooltipRect = await $.locator('sinch-help-tooltip')
-        .evaluate((el) => (el as TSinchHelpTooltipElement).tooltipRect)
-
-      yield {
-        name: 'show',
-        includeRects: [tooltipRect],
-      }
     },
   },
   {
@@ -214,7 +187,7 @@ test('select screenshots', runScreenshotTests('sinch-select', [
       await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
 
       await page.keyboard.press('Tab')
-      await page.mouse.click(0, 0)
+      await page.keyboard.press('Shift+Tab')
 
       expect(
         await getAllEvents(page)

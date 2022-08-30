@@ -2,17 +2,11 @@
 :host {
   display: inline-block;
   vertical-align: middle;
-  outline: none;
-
-  --sinch-color-icon: var(--sinch-color-stormy-500);
 }
 
-#wrapper {
-  position: relative;
-}
-
-sinch-dropdown {
+#dropdown {
   display: block;
+  width: 100%;
 }
 
 #button {
@@ -25,11 +19,14 @@ sinch-dropdown {
   box-sizing: border-box;
   width: 100%;
   height: 48px;
-  padding: 8px 12px;
+  padding: 0 12px;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
   background-color: var(--sinch-color-snow-100);
   cursor: pointer;
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+  --sinch-size-icon: 24px;
 }
 
 #button:focus {
@@ -59,7 +56,7 @@ sinch-dropdown {
   fill: var(--sinch-color-stormy-100);
 }
 
-:host([invalidtext]:not([invalidtext=""])) #button:not(:disabled) {
+:host([invalid]:not([invalid="false"])) #button:enabled {
   border-color: var(--sinch-color-text-invalid);
 }
 
@@ -70,94 +67,16 @@ sinch-dropdown {
   overflow: hidden;
 }
 
-#top,
-#bottom {
-  display: flex;
-  align-items: baseline;
-}
-
-#top {
-  height: 24px;
-  margin-bottom: 2px;
-}
-
-#label,
-#optional,
-#additional,
-#invalid {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-#label {
-  font: var(--sinch-font-title-s);
-  color: var(--sinch-color-text-default);
-}
-
-#optional {
-  flex: 1;
-  text-align: right;
-  font: var(--sinch-font-small-text);
-  color: var(--sinch-color-text-muted);
-}
-
-#additional {
-  flex: 1;
-  text-align: right;
-  font: var(--sinch-font-extra-small-text);
-  color: var(--sinch-color-text-muted);
-  line-height: 20px;
-  margin-top: 2px;
-}
-
-#additional:empty {
-  display: none;
-}
-
-#invalid {
-  font: var(--sinch-font-extra-small-text);
-  color: var(--sinch-color-text-invalid);
-  line-height: 20px;
-  margin-top: 2px;
-}
-
-#invalid:empty {
-  display: none;
-}
-
-::slotted(sinch-help-tooltip) {
-  align-self: center;
-  margin: 0 8px;
-}
-
-:host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
-  color: var(--sinch-color-stormy-100);
-}
-
 /* stylelint-disable-next-line no-descending-specificity */
-:host([disabled]:not([disabled="false"])) {
+:host([disabled]:not([disabled="false"])) #button {
   --sinch-color-icon: var(--sinch-color-stormy-100);
 }
 </style>
 
-<div id="wrapper">
-  <div id="top">
-    <label id="label" for="button"></label>
-    <slot name="tooltip"></slot>
-    <span id="optional"></span>
-  </div>
-  <sinch-dropdown id="dropdown" orientation="bottom">
-    <button slot="target" id="button">
-      <span id="content"></span>
-      <svg id="dropdown-icon" width="12" height="8" aria-hidden="true">
-        <path d="M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2 1.41.59Z"/>
-      </svg>
-    </button>
-    <slot name="option" slot="option"></slot>
-  </sinch-dropdown>
-  <div id="bottom">
-    <span id="invalid"></span>
-    <span id="additional"></span>
-  </div>
-</div>
+<sinch-dropdown id="dropdown" orientation="bottom">
+  <button slot="target" id="button">
+    <span id="content"></span>
+    <sinch-icon-keyboard-arrow-down id="dropdown-icon"></sinch-icon-keyboard-arrow-down>
+  </button>
+  <slot name="option" slot="option"></slot>
+</sinch-dropdown>

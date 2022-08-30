@@ -1,9 +1,6 @@
 <sinch-textarea
-  [attr.label]="labelText"
-  [attr.optionaltext]="optionalText"
-  [attr.additionaltext]="additionalText"
-  [attr.invalidtext]="invalidText"
   [attr.placeholder]="placeholderText"
+  [attr.invalid]="isInvalid"
   [attr.disabled]="isDisabled"
   [attr.resizable]="isResizable"
   [attr.rows]="rows"
@@ -11,5 +8,4 @@
   (-blur)="onBlur()"
   [value]="value"
   (-change)="onChange($event)">
-  <sinch-help-tooltip *ngIf="tooltipText != null" [text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
 </sinch-textarea>
