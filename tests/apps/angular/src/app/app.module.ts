@@ -18,6 +18,7 @@ import { HorizontalStepper } from '../components/HorizontalStepper/HorizontalSte
 import { IconButtonComponent } from '../components/IconButton/IconButton.component'
 import { InlineAlertComponent } from '../components/InlineAlert/InlineAlert.component'
 import { InputComponent } from '../components/Input/Input.component'
+import { FieldComponent } from '../components/Field/Field.component'
 import { LinkComponent } from '../components/Link/Link.component'
 import { ListComponent } from '../components/List/List.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
@@ -62,6 +63,7 @@ import { AppComponent } from './app.component'
     IconButtonComponent,
     InlineAlertComponent,
     InputComponent,
+    FieldComponent,
     LinkComponent,
     ListComponent,
     PaginationComponent,

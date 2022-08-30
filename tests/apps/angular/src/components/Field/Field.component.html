@@ -1,0 +1,26 @@
+<sinch-field
+  [attr.label]="labelText"
+  [attr.optionaltext]="optionalText"
+  [attr.additionaltext]="additionalText"
+  [attr.invalidtext]="invalidText"
+  [attr.disabled]="isDisabled"
+>
+  <sinch-help-tooltip
+    *ngIf="tooltipText != null"
+    slot="tooltip"
+    [attr.text]="tooltipText"
+  ></sinch-help-tooltip>
+  <sinch-input
+    slot="input"
+    [attr.placeholder]="placeholderText"
+    [attr.disabled]="isDisabled"
+    [attr.invalid]="invalidText != null"
+    [value]="value"
+    (-change)="onChange($event)">
+    <sinch-icon-search slot="icon"></sinch-icon-search>
+    <sinch-tag slot="right" text="text"></sinch-tag>
+    <sinch-icon-button slot="right" small>
+      <sinch-icon-close slot="icon"></sinch-icon-close>
+    </sinch-icon-button>
+  </sinch-input>
+</sinch-field>

@@ -17,6 +17,7 @@ import { HorizontalStepper } from './components/HorizontalStepper'
 import { IconButton } from './components/IconButton'
 import { InlineAlert } from './components/InlineAlert'
 import { Input } from './components/Input'
+import { Field } from './components/Field'
 import { Link } from './components/Link'
 import { List } from './components/List'
 import { Pagination } from './components/Pagination'
@@ -149,6 +150,12 @@ const mapElement = (url: URL) => {
     case '/input': {
       return (
         <Input search={url.searchParams}/>
+      )
+    }
+
+    case '/field': {
+      return (
+        <Field search={url.searchParams}/>
       )
     }
 
