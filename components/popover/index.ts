@@ -151,13 +151,16 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       return
     }
 
-    if (!this.modal) {
-      /* Try focusing transferred target element */
-      /* Firefox needs that, since loses focus */
-      this.#$targetOpenSlot.addEventListener('blur', this.#onTargetBlur, true)
-      this.#$targetOpenSlot.addEventListener('focus', this.#onTargetFocus, true)
+    const isNonModal = !this.modal
 
-      /* Transfer target */
+    // Suppress blur event on target element, since Firefox does not emit it
+    this.#$targetSlot.addEventListener('blur', this.#stopPropagation, true)
+
+    if (isNonModal) {
+      // Capture active target element and supress unnecessary events
+      this.#$targetOpenSlot.addEventListener('blur', this.#captureActiveElement, true)
+
+      /* Measure target */
       const targetRect = this.#$target.getBoundingClientRect()
       const widthPx = `${targetRect.width}px`
       const heightPx = `${targetRect.height}px`
@@ -167,6 +170,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       this.#$targetOpenWrapper.style.width = widthPx
       this.#$targetOpenWrapper.style.height = heightPx
 
+      /* Transfer target */
       this.#$targetSlot.assignedElements()[0]?.setAttribute('slot', 'target-open')
     }
 
@@ -175,11 +179,24 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#updateOrientation()
     this.#$target.setAttribute('aria-expanded', 'true')
 
-    /* Firefox needs that, since loses focus */
-    requestAnimationFrame(() => {
-      this.#targetActiveElement?.focus()
-      this.#targetActiveElement = null
-    })
+    // Suppress blur event on target element, since Firefox does not emit it
+    this.#$targetSlot.removeEventListener('blur', this.#stopPropagation, true)
+
+    // Try focusing transferred target element. Firefox needs this
+    if (isNonModal) {
+      // Capture active target element and supress unnecessary events
+      this.#$targetOpenSlot.removeEventListener('blur', this.#captureActiveElement, true)
+
+      // We have to delay focus, in case we expand in onFocus handler
+      if (this.#targetActiveElement !== null) {
+        requestAnimationFrame(() => {
+          this.#$targetOpenSlot.addEventListener('focus', this.#stopPropagation, true)
+          // Try focusing transferred target element
+          this.#targetActiveElement?.focus()
+          this.#$targetOpenSlot.removeEventListener('focus', this.#stopPropagation, true)
+        })
+      }
+    }
 
     /* Prevent scroll */
     this.#originalOverflowValue = document.body.style.overflow
@@ -192,8 +209,19 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       return
     }
 
+    // Supress target focus event, to prevent refocus of target to reopen popover
+    this.#$targetSlot.addEventListener('focus', this.#stopPropagation, true)
+
+    // Refocus before-open active element. Webkit needs this
+    if (this.#targetActiveElement !== null) {
+      this.#$targetOpenSlot.addEventListener('focus', this.#stopPropagation, true)
+      this.#targetActiveElement.focus()
+      this.#targetActiveElement = null
+      this.#$targetOpenSlot.removeEventListener('focus', this.#stopPropagation, true)
+    }
+
     /* Restore target */
-    /* Restore whether modal or non-modal */
+    /* Restore whether modal or non-modal, since modal flag can change */
     this.#$targetOpenSlot.assignedElements()[0]?.setAttribute('slot', 'target')
     this.#$target.style.width = 'unset'
     this.#$target.style.height = 'unset'
@@ -201,6 +229,9 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     /* Close dialog */
     this.#$dialog.close()
     this.#$target.setAttribute('aria-expanded', 'false')
+
+    // Supress target focus event, to prevent refocus of target to reopen popover
+    this.#$targetSlot.removeEventListener('focus', this.#stopPropagation, true)
 
     /* Restore scroll */
     document.body.style.overflow = this.#originalOverflowValue
@@ -288,15 +319,13 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     )
   }
 
-  #onTargetBlur = (e: FocusEvent) => {
+  #captureActiveElement = (e: FocusEvent) => {
     e.stopPropagation()
     this.#targetActiveElement = e.target as HTMLElement
-    this.#$targetOpenSlot.removeEventListener('blur', this.#onTargetBlur, true)
   }
 
-  #onTargetFocus = (e: Event) => {
+  #stopPropagation = (e: Event) => {
     e.stopPropagation()
-    this.#$targetOpenSlot.removeEventListener('focus', this.#onTargetFocus, true)
   }
 })
 

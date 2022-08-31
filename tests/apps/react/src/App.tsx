@@ -135,6 +135,12 @@ const mapElement = (url: URL) => {
       )
     }
 
+    case '/field': {
+      return (
+        <Field search={url.searchParams}/>
+      )
+    }
+
     case '/grid': {
       return (
         <Grid search={url.searchParams}/>
@@ -150,12 +156,6 @@ const mapElement = (url: URL) => {
     case '/input': {
       return (
         <Input search={url.searchParams}/>
-      )
-    }
-
-    case '/field': {
-      return (
-        <Field search={url.searchParams}/>
       )
     }
 

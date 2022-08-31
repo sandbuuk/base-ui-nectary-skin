@@ -167,7 +167,7 @@ test('action menu screenshots', runScreenshotTests('sinch-action-menu', [
   {
     name: 'non-modal keyboard',
     url: withNonModal,
-    async *fn({ page, $eval, isWebkit }) {
+    async *fn({ page, $eval }) {
       // Focus input
       await page.keyboard.press('Tab')
       // Focus button
@@ -177,17 +177,12 @@ test('action menu screenshots', runScreenshotTests('sinch-action-menu', [
       yield { name: '1-open', includeRects: [await $eval((el) => el.dropdownRect)] }
 
       await page.keyboard.press('ArrowDown')
-      await page.keyboard.press('Shift+Tab')
+      await page.locator('sinch-input').evaluate((el) => el.focus())
       await page.keyboard.press('A')
       yield { name: '2-down-type', includeRects: [await $eval((el) => el.dropdownRect)] }
 
       await page.keyboard.press('Enter')
       yield { name: '3-submit', includeRects: [await $eval((el) => el.dropdownRect)] }
-
-      // Focus button again on Webkit
-      if (isWebkit) {
-        await page.keyboard.press('Tab')
-      }
 
       // Press button to open again
       await page.keyboard.press('Enter')
@@ -200,11 +195,6 @@ test('action menu screenshots', runScreenshotTests('sinch-action-menu', [
       await page.keyboard.press('ArrowUp')
       await page.keyboard.press('ArrowUp')
       yield { name: '5-up-around', includeRects: [await $eval((el) => el.dropdownRect)] }
-
-      // Focus button again on Webkit
-      if (isWebkit) {
-        await page.keyboard.press('Tab')
-      }
 
       await page.keyboard.press('Escape')
       yield { name: '6-escape', includeRects: [await $eval((el) => el.dropdownRect)] }
@@ -255,6 +245,7 @@ test('action menu events', runScreenshotTests('sinch-action-menu', [
       // Select Item
       await page.keyboard.press('ArrowDown')
       // Not Able to type
+      await page.locator('sinch-input').evaluate((el) => el.focus())
       await page.keyboard.press('A')
       // Submit
       await page.keyboard.press('Enter')
@@ -276,7 +267,7 @@ test('action menu events', runScreenshotTests('sinch-action-menu', [
   {
     name: 'non-modal native events',
     url: withNonModal,
-    async *fn({ page, isWebkit }) {
+    async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-action-menu-click', 'sinch-action-menu-open', 'sinch-action-menu-close', 'sinch-input-change')
 
       // Focus input
@@ -288,25 +279,13 @@ test('action menu events', runScreenshotTests('sinch-action-menu', [
       // Select Item
       await page.keyboard.press('ArrowDown')
       // Focus input
-      await page.keyboard.press('Shift+Tab')
+      await page.locator('sinch-input').evaluate((el) => el.focus())
       // Able to type
       await page.keyboard.press('A')
       // Submit
       await page.keyboard.press('Enter')
-
-      // Focus button again on Webkit
-      if (isWebkit) {
-        await page.keyboard.press('Tab')
-      }
-
       // Open menu again
       await page.keyboard.press('Space')
-
-      // Focus button again on Webkit
-      if (isWebkit) {
-        await page.keyboard.press('Tab')
-      }
-
       // Close menu
       await page.keyboard.press('Escape')
 

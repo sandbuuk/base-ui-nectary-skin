@@ -304,6 +304,9 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
       yield { name: 'up-left', includeRects: [await getRect()] }
     },
   },
+]))
+
+test('dropdown events', runScreenshotTests('sinch-dropdown', [
   {
     name: 'custom events',
     url: withDropdown,
@@ -317,7 +320,7 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
   {
     name: 'custom events',
     url: withDropdown,
-    async *fn({ page, isFirefox }) {
+    async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-dropdown-focus', 'sinch-dropdown-blur', 'sinch-dropdown-change', 'sinch-dropdown-close')
 
       await page.keyboard.press('Tab')
@@ -334,24 +337,16 @@ test('dropdown screenshots', runScreenshotTests('sinch-dropdown', [
       await page.keyboard.press('Enter')
       await page.keyboard.press('Enter')
 
-      if (isFirefox) {
-        expect(
-          await getAllEvents(page)
-        ).toEqual([
-          { type: 'sinch-dropdown-focus', detail: null },
-          { type: 'sinch-dropdown-change', detail: '1' },
-          { type: 'sinch-dropdown-focus', detail: null },
-        ])
-      } else {
-        expect(
-          await getAllEvents(page)
-        ).toEqual([
-          { type: 'sinch-dropdown-focus', detail: null },
-          { type: 'sinch-dropdown-blur', detail: null },
-          { type: 'sinch-dropdown-change', detail: '1' },
-          { type: 'sinch-dropdown-focus', detail: null },
-        ])
-      }
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-dropdown-focus', detail: null },
+        /* We suppress blur event on target when modal open to unify with Firefox */
+        // { type: 'sinch-dropdown-blur', detail: null },
+        { type: 'sinch-dropdown-change', detail: '1' },
+        /* We suppress focus event on target when focusing back after modal close */
+        // { type: 'sinch-dropdown-focus', detail: null },
+      ])
     },
   },
 ]))
