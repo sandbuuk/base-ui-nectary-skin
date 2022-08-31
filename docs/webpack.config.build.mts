@@ -33,8 +33,9 @@ const BabelOptions: TBabelOptions = {
     ],
   ],
   plugins: [
+    '@babel/plugin-transform-runtime',
     [
-      'babel-plugin-polyfill-corejs3',
+      'babel-plugin-polyfill-es-shims',
       { method: 'usage-global' },
     ],
   ],

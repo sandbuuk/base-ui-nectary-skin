@@ -28,6 +28,13 @@ const BabelOptions: TBabelOptions = {
       { runtime: 'automatic' },
     ],
   ],
+  plugins: [
+    '@babel/plugin-transform-runtime',
+    [
+      'babel-plugin-polyfill-es-shims',
+      { method: 'usage-global' },
+    ],
+  ],
 }
 
 const config: Configuration = {
