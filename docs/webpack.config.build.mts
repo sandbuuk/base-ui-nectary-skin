@@ -25,6 +25,12 @@ const BabelOptions: TBabelOptions = {
       { runtime: 'automatic' },
     ],
   ],
+  plugins: [
+    [
+      'babel-plugin-polyfill-corejs3',
+      { method: 'usage-global' },
+    ],
+  ],
   shouldPrintComment: (val: string) => val.startsWith(' webpackChunkName'),
 }
 
@@ -41,6 +47,7 @@ const config: TWebpackConfig = {
     alias: {
       '~': path.resolve('./src/'),
       '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
+      'core-js': path.resolve('./node_modules/core-js/'),
     },
   },
   module: {
