@@ -2,7 +2,6 @@
   <sinch-action-menu
     orientation="bottom"
     :open="isOpen"
-    :maxVisibleItems="maxVisibleItems"
     aria-label="Search"
     @--close="onClose">
     <sinch-field slot="target" label="Label">
@@ -22,7 +21,6 @@
           @--click="onClear">
           <sinch-icon-close slot="icon"></sinch-icon-close>
         </sinch-icon-button>
-        <sinch-help-tooltip v-if="tooltipText != null" :text="tooltipText" slot="tooltip"></sinch-help-tooltip>
       </sinch-input>
     </sinch-field>
     <sinch-action-menu-option
@@ -39,7 +37,6 @@
 <script>
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
 import '@sinch-engage/nectary/icon-button'
@@ -50,13 +47,10 @@ export default {
   methods: {
     onChange(e) {
       this.value = e.detail
-
-      if (e.detail.length >= 3) {
-        this.isOpen = true
-      }
     },
     onFocus() {
       window.dispatchEvent(new CustomEvent('sinch-search-focus'))
+      this.isOpen = true
     },
     onBlur() {
       window.dispatchEvent(new CustomEvent('sinch-search-blur'))

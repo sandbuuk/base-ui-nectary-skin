@@ -18,6 +18,7 @@ test('search screenshots', runScreenshotTests('sinch-action-menu', [
     url: withValue,
     async *fn({ page }) {
       await page.keyboard.press('Tab')
+      await page.keyboard.press('End')
       yield { name: '1-focus-input', includeRects: [await getDropdownRect(page)] }
 
       await page.keyboard.press('Tab')
@@ -33,13 +34,13 @@ test('search screenshots', runScreenshotTests('sinch-action-menu', [
     async *fn({ $, page }) {
       await page.keyboard.press('Tab')
       await page.keyboard.press('End')
-      await $.type('X')
       yield { name: '1-open', includeRects: [await getDropdownRect(page)] }
 
       await page.keyboard.press('ArrowDown')
       yield { name: '2-down', includeRects: [await getDropdownRect(page)] }
 
-      await $.type(' Y')
+      await page.keyboard.press('End')
+      await $.type('X')
       yield { name: '3-type', includeRects: [await getDropdownRect(page)] }
 
       await page.keyboard.press('Enter')
@@ -51,7 +52,6 @@ test('search screenshots', runScreenshotTests('sinch-action-menu', [
     url: withValue,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-search-focus', 'sinch-search-blur', 'sinch-search-change')
-      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 
