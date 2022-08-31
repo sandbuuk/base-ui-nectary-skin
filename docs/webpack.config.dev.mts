@@ -14,12 +14,25 @@ const BabelOptions: TBabelOptions = {
   presets: [
     [
       '@babel/preset-env',
-      { modules: false },
+      {
+        modules: false,
+        exclude: [
+          '@babel/plugin-transform-regenerator',
+          '@babel/plugin-transform-async-to-generator',
+        ],
+      },
     ],
     '@babel/preset-typescript',
     [
       '@babel/preset-react',
       { runtime: 'automatic' },
+    ],
+  ],
+  plugins: [
+    '@babel/plugin-transform-runtime',
+    [
+      'babel-plugin-polyfill-es-shims',
+      { method: 'usage-global' },
     ],
   ],
 }

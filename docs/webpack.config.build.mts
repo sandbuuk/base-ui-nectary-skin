@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import remarkToc from 'remark-toc'
 import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import type { TransformOptions as TBabelOptions } from '@babel/core'
 import type { Configuration as TWebpackConfig } from 'webpack'
 
@@ -17,12 +18,25 @@ const BabelOptions: TBabelOptions = {
   presets: [
     [
       '@babel/preset-env',
-      { modules: false },
+      {
+        modules: false,
+        exclude: [
+          '@babel/plugin-transform-regenerator',
+          '@babel/plugin-transform-async-to-generator',
+        ],
+      },
     ],
     '@babel/preset-typescript',
     [
       '@babel/preset-react',
       { runtime: 'automatic' },
+    ],
+  ],
+  plugins: [
+    '@babel/plugin-transform-runtime',
+    [
+      'babel-plugin-polyfill-es-shims',
+      { method: 'usage-global' },
     ],
   ],
   shouldPrintComment: (val: string) => val.startsWith(' webpackChunkName'),
@@ -41,6 +55,7 @@ const config: TWebpackConfig = {
     alias: {
       '~': path.resolve('./src/'),
       '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
+      'core-js': path.resolve('./node_modules/core-js/'),
     },
   },
   module: {
@@ -151,6 +166,11 @@ const config: TWebpackConfig = {
     new HtmlPlugin({
       template: path.resolve('./public/index.html'),
       favicon: path.resolve('./public/favicon.png'),
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false,
+      logLevel: 'silent',
     }),
   ],
 }
