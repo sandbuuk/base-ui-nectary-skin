@@ -34,10 +34,8 @@ export const AMPMExample: FC = () => {
     >
       <sinch-input
         slot="target"
-        label="Time picker"
         aria-label="Pick time"
         placeholder="hh:mm:ss"
-        additionalText="Additional text"
         value={value}
         on-change={onChange}
       >

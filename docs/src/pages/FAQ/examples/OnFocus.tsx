@@ -9,7 +9,6 @@ export const OnFocusExample: FC = () => {
 
   return (
     <sinch-input
-      label="Input"
       aria-label="Input"
       placeholder="Placeholder"
       value={state}
