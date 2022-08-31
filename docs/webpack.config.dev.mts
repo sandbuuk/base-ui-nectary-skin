@@ -14,7 +14,13 @@ const BabelOptions: TBabelOptions = {
   presets: [
     [
       '@babel/preset-env',
-      { modules: false },
+      {
+        modules: false,
+        exclude: [
+          '@babel/plugin-transform-regenerator',
+          '@babel/plugin-transform-async-to-generator',
+        ],
+      },
     ],
     '@babel/preset-typescript',
     [
