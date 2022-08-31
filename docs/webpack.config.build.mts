@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import remarkToc from 'remark-toc'
 import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import type { TransformOptions as TBabelOptions } from '@babel/core'
 import type { Configuration as TWebpackConfig } from 'webpack'
 
@@ -158,6 +159,11 @@ const config: TWebpackConfig = {
     new HtmlPlugin({
       template: path.resolve('./public/index.html'),
       favicon: path.resolve('./public/favicon.png'),
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false,
+      logLevel: 'silent',
     }),
   ],
 }
