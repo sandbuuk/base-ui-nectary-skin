@@ -50,6 +50,7 @@ const config: Configuration = {
     alias: {
       '~': path.resolve('./src/'),
       '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
+      'array-includes': path.resolve('./node_modules/array-includes/'),
     },
   },
   module: {

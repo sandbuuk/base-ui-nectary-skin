@@ -55,7 +55,7 @@ const config: TWebpackConfig = {
     alias: {
       '~': path.resolve('./src/'),
       '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
-      'core-js': path.resolve('./node_modules/core-js/'),
+      'array-includes': path.resolve('./node_modules/array-includes/'),
     },
   },
   module: {
