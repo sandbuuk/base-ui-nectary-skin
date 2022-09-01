@@ -2,4 +2,4 @@
 
 fc-cache -f
 npm install --global pnpm
-(pnpm --dir tests test:app-all &) && pnpm --dir tests test:bash
+(CI=1 pnpm --dir tests test:app-all &) && pnpm --dir tests test:bash
