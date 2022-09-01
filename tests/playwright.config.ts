@@ -11,17 +11,17 @@ const config: PlaywrightTestConfig = {
       },
     },
     {
-      name: 'firefox-react',
+      name: 'firefox-vue',
       use: {
         browserName: 'firefox',
-        baseURL: 'http://localhost:3021',
+        baseURL: 'http://localhost:3022',
       },
     },
     {
-      name: 'webkit-react',
+      name: 'webkit-angular',
       use: {
         browserName: 'webkit',
-        baseURL: 'http://localhost:3021',
+        baseURL: 'http://localhost:3023',
       },
     },
     {
@@ -33,17 +33,17 @@ const config: PlaywrightTestConfig = {
       },
     },
     {
-      name: 'firefox-vue',
+      name: 'firefox-angular',
       use: {
         browserName: 'firefox',
-        baseURL: 'http://localhost:3022',
+        baseURL: 'http://localhost:3023',
       },
     },
     {
-      name: 'webkit-vue',
+      name: 'webkit-react',
       use: {
         browserName: 'webkit',
-        baseURL: 'http://localhost:3022',
+        baseURL: 'http://localhost:3021',
       },
     },
     {
@@ -55,17 +55,17 @@ const config: PlaywrightTestConfig = {
       },
     },
     {
-      name: 'firefox-angular',
+      name: 'firefox-react',
       use: {
         browserName: 'firefox',
-        baseURL: 'http://localhost:3023',
+        baseURL: 'http://localhost:3021',
       },
     },
     {
-      name: 'webkit-angular',
+      name: 'webkit-vue',
       use: {
         browserName: 'webkit',
-        baseURL: 'http://localhost:3023',
+        baseURL: 'http://localhost:3022',
       },
     },
   ],
@@ -83,7 +83,7 @@ const config: PlaywrightTestConfig = {
     threshold: 60000,
   },
   fullyParallel: true,
-  workers: process.env.CI != null ? 1 : 3,
+  workers: process.env.CI != null ? 1 : 1,
   retries: process.env.CI != null ? 1 : 0,
   maxFailures: process.env.CI != null ? 1 : 0,
   expect: {

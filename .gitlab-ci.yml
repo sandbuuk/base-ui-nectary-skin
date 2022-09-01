@@ -34,7 +34,7 @@ lint:
 
 visual-tests:
   stage: test
-  image: mcr.microsoft.com/playwright:v1.22.2
+  image: mcr.microsoft.com/playwright:v1.25.1
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   cache:
