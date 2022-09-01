@@ -1,9 +1,9 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
 import { SimpleExample } from './examples/Simple.tsx?example'
-import { OptionalAttributesExample } from './examples/OptionalAttributes.tsx?example'
+import { ComplexExample } from './examples/Complex.tsx?example'
+import { FieldExample } from './examples/Field.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
-import { TooltipExample } from './examples/Tooltip.tsx?example'
 import {
   ReactPropsTable,
   ReactHandlersTable,
@@ -26,17 +26,17 @@ It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled
 
 <Example Component={SimpleExample}/>
 
-### Optional attributes
+### Complex
 
-<Example Component={OptionalAttributesExample}/>
+<Example Component={ComplexExample}/>
+
+### Field
+
+<Example Component={FieldExample}/>
 
 ### Disabled
 
 <Example Component={DisabledExample}/>
-
-### Tooltip
-
-<Example Component={TooltipExample}/>
 
 ## API
 

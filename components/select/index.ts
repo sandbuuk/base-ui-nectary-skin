@@ -1,4 +1,5 @@
 import '../dropdown'
+import '../icons/keyboard-arrow-down'
 import {
   defineCustomElement,
   getAttribute,
@@ -24,10 +25,6 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-select', class extends NectaryElement {
   #$button: HTMLButtonElement
   #$buttonContent: HTMLSpanElement
-  #$label: HTMLLabelElement
-  #$optionalText: HTMLSpanElement
-  #$additionalText: HTMLSpanElement
-  #$invalidText: HTMLSpanElement
   #$dropdown: TSinchDropdownElement
   #$optionSlot: HTMLSlotElement
   #$sh: ShadowRoot
@@ -42,11 +39,7 @@ defineCustomElement('sinch-select', class extends NectaryElement {
     this.#$sh = shadowRoot
     this.#$button = shadowRoot.querySelector('#button')!
     this.#$buttonContent = shadowRoot.querySelector('#content')!
-    this.#$label = shadowRoot.querySelector('#label')!
-    this.#$optionalText = shadowRoot.querySelector('#optional')!
-    this.#$additionalText = shadowRoot.querySelector('#additional')!
-    this.#$invalidText = shadowRoot.querySelector('#invalid')!
-    this.#$dropdown = shadowRoot.querySelector('sinch-dropdown')!
+    this.#$dropdown = shadowRoot.querySelector('#dropdown')!
     this.#$optionSlot = shadowRoot.querySelector('slot[name="option"]')!
   }
 
@@ -59,7 +52,6 @@ defineCustomElement('sinch-select', class extends NectaryElement {
     this.#$button.addEventListener('click', this.#onDropdownClick)
     this.#$button.addEventListener('focus', this.#onButtonFocus)
     this.#$button.addEventListener('blur', this.#onButtonBlur)
-    this.#$label.addEventListener('click', this.#onLabelClick)
     this.addEventListener('-change', this.#onChangeReactHandler)
     this.addEventListener('-focus', this.#onFocusReactHandler)
     this.addEventListener('-blur', this.#onBlurReactHandler)
@@ -71,7 +63,6 @@ defineCustomElement('sinch-select', class extends NectaryElement {
     this.#$button.removeEventListener('click', this.#onDropdownClick)
     this.#$button.removeEventListener('focus', this.#onButtonFocus)
     this.#$button.removeEventListener('blur', this.#onButtonBlur)
-    this.#$label.removeEventListener('click', this.#onLabelClick)
     this.removeEventListener('-change', this.#onChangeReactHandler)
     this.removeEventListener('-focus', this.#onFocusReactHandler)
     this.removeEventListener('-blur', this.#onBlurReactHandler)
@@ -80,11 +71,8 @@ defineCustomElement('sinch-select', class extends NectaryElement {
   static get observedAttributes() {
     return [
       'value',
-      'label',
       'placeholder',
-      'optionaltext',
-      'additionaltext',
-      'invalidtext',
+      'invalid',
       'disabled',
       'maxvisibleitems',
     ]
@@ -110,36 +98,12 @@ defineCustomElement('sinch-select', class extends NectaryElement {
     return getAttribute(this, 'placeholder', null)
   }
 
-  set label(value: string) {
-    updateAttribute(this, 'label', value)
+  set invalid(value: boolean) {
+    updateBooleanAttribute(this, 'invalid', value)
   }
 
-  get label() {
-    return getAttribute(this, 'label', '')
-  }
-
-  set optionalText(value: string | null) {
-    updateAttribute(this, 'optionaltext', value)
-  }
-
-  get optionalText() {
-    return getAttribute(this, 'optionaltext', null)
-  }
-
-  set additionalText(value: string | null) {
-    updateAttribute(this, 'additionaltext', value)
-  }
-
-  get additionalText() {
-    return getAttribute(this, 'additionaltext', null)
-  }
-
-  set invalidText(value: string | null) {
-    updateAttribute(this, 'invalidtext', value)
-  }
-
-  get invalidText() {
-    return getAttribute(this, 'placeholder', null)
+  get invalid() {
+    return getBooleanAttribute(this, 'invalid')
   }
 
   set disabled(isDisabled: boolean) {
@@ -182,29 +146,8 @@ defineCustomElement('sinch-select', class extends NectaryElement {
         break
       }
 
-      case 'label': {
-        this.#$label.textContent = newVal
-
-        break
-      }
-
-      case 'optionaltext': {
-        this.#$optionalText.textContent = newVal
-
-        break
-      }
-
-      case 'additionaltext': {
-        this.#$additionalText.textContent = newVal
-
-        break
-      }
-
-      case 'invalidtext': {
-        const isInvalid = newVal !== null && newVal !== ''
-
-        this.#$invalidText.textContent = newVal
-        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+      case 'invalid': {
+        updateExplicitBooleanAttribute(this, 'aria-invalid', isAttrTrue(newVal))
 
         break
       }
@@ -276,10 +219,6 @@ defineCustomElement('sinch-select', class extends NectaryElement {
     }
 
     return null
-  }
-
-  #onLabelClick = () => {
-    this.focus()
   }
 
   #onDropdownClick = () => {

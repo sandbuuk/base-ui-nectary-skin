@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/segment'
 import '@sinch-engage/nectary/segment-collapse'
+import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/checkbox'
 import '@sinch-engage/nectary/icons-branded/chatbot'

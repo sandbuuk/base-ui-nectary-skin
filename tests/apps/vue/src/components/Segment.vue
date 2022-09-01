@@ -3,8 +3,12 @@
     <sinch-segment-collapse v-if="hasCollapse" slot="collapse" :value="isCollapsed" @--change="onCollapse" @focus="onCollapseFocus" @blur="onCollapseBlur"></sinch-segment-collapse>
     <div v-if="hasContent" slot="content" style="display: flex; flex-direction: column; gap: 16px;">
       <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
-      <sinch-input label="Label" value=""></sinch-input>
-      <sinch-input label="Label" value=""></sinch-input>
+      <sinch-field slot="content" label="Label">
+        <sinch-input slot="input" aria-label="Input" value=""></sinch-input>
+      </sinch-field>
+      <sinch-field slot="content" label="Label">
+        <sinch-input slot="input" aria-label="Input" value=""></sinch-input>
+      </sinch-field>
     </div>
     <sinch-icon-branded-chatbot v-if="hasIcon" size="32" slot="icon"></sinch-icon-branded-chatbot>
     <sinch-tag v-if="hasInfo" text="Label" slot="info"></sinch-tag>

@@ -4,7 +4,10 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "pretty": true,
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "jsx": "react-jsx",
     "target": "esnext",
     "module": "esnext",
@@ -12,7 +15,5 @@
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "declaration": true,
-    "emitDeclarationOnly": true
   }
 }

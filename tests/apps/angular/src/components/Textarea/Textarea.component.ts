@@ -1,6 +1,5 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/textarea'
-import '@sinch-engage/nectary/help-tooltip'
 
 @Component({
   selector: 'textarea-component',
@@ -11,12 +10,8 @@ import '@sinch-engage/nectary/help-tooltip'
 export class TextareaComponent {
   value: string
   isControlled: boolean
-  labelText: string | null
-  optionalText: string | null
-  additionalText: string | null
-  invalidText: string | null
+  isInvalid: boolean
   placeholderText: string | null
-  tooltipText: string | null
   isDisabled: boolean
   isResizable: boolean
   rows: string | null
@@ -25,12 +20,8 @@ export class TextareaComponent {
     const url = new URL(location.href)
     this.value = url.searchParams.get('value') ?? ''
     this.isControlled = url.searchParams.get('uncontrolled') === null
-    this.labelText = url.searchParams.get('label')
-    this.optionalText = url.searchParams.get('optional')
-    this.additionalText = url.searchParams.get('additional')
-    this.invalidText = url.searchParams.get('invalid')
+    this.isInvalid = url.searchParams.get('invalid') !== null
     this.placeholderText = url.searchParams.get('placeholder')
-    this.tooltipText = url.searchParams.get('tooltip')
     this.isDisabled = url.searchParams.get('disabled') != null
     this.isResizable = url.searchParams.get('resizable') != null
     this.rows = url.searchParams.get('rows') ?? null

@@ -1,9 +1,7 @@
 import { useArgs, useRef } from '@storybook/addons'
-import { useStoryWrapper } from '../use-story-wrapper'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/select'
 import '@sinch-engage/nectary/select-option'
-import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/icons/open-in-new'
 
 export default {
@@ -21,21 +19,9 @@ export default {
       description: 'Placeholder value',
       control: 'text',
     },
-    label: {
-      description: 'Label',
-      control: 'text',
-    },
-    optionalText: {
-      description: 'Optional',
-      control: 'text',
-    },
-    additionalText: {
-      description: 'Additional',
-      control: 'text',
-    },
-    invalidText: {
-      description: 'Invalid',
-      control: 'text',
+    invalid: {
+      description: 'Invalid state',
+      control: 'boolean',
     },
     maxVisibleItems: {
       description: 'Number of visible items in the list',
@@ -44,19 +30,11 @@ export default {
     'on-change': {
       description: 'Handler to sync input value with the state',
     },
-    onFocus: {
-      description: 'Focus handler',
-      action: 'onFocus',
-    },
-    onBlur: {
-      description: 'Blur handler',
-      action: 'onBlur',
-    },
   },
   parameters: {
     docs: {
       description: {
-        component: 'Input component',
+        component: 'Select component',
       },
       source: {
         type: 'code',
@@ -68,16 +46,12 @@ export default {
 const Template = (innerHTML: string): Story => () => {
   const [{
     value,
-    label,
     placeholder,
-    additionalText,
-    optionalText,
-    invalidText,
     maxVisibleItems,
     disabled,
+    invalid,
   }, updateArgs] = useArgs()
 
-  const $wrapper = useStoryWrapper()
   const inputRef = useRef<HTMLElementTagNameMap['sinch-select'] | null>(null)
 
   if (inputRef.current === null) {
@@ -91,26 +65,21 @@ const Template = (innerHTML: string): Story => () => {
       setImmediate((el) => (el as HTMLElement)?.focus(), document.activeElement)
     })
 
-    $wrapper.appendChild($input)
     inputRef.current = $input
   }
 
   const $input = inputRef.current!
 
   $input.value = value
-  $input.label = label
   $input.placeholder = placeholder
-  $input.additionalText = additionalText
-  $input.optionalText = optionalText
-  $input.invalidText = invalidText
   $input.maxVisibleItems = maxVisibleItems
   $input.disabled = disabled
+  $input.invalid = invalid
 
-  return $wrapper
+  return $input
 }
 
 export const Select = Template(`
-<sinch-help-tooltip text="Tooltip text long long" width="200" slot="tooltip"></sinch-help-tooltip>
 <sinch-select-option value="1" text="Option 1 value" slot="option">
   <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
 </sinch-select-option>
@@ -123,9 +92,9 @@ export const Select = Template(`
 
 Select.args = {
   value: '2',
-  label: 'Label',
   placeholder: 'Placeholder',
   disabled: false,
+  invalid: false,
 }
 
 Select.parameters = {
@@ -133,7 +102,6 @@ Select.parameters = {
     source: {
       code: `
 <sinch-select value={value} on-change={setValue}>
-  <sinch-help-tooltip text="Tooltip text long" slot="tooltip"></sinch-help-tooltip>
   <sinch-select-option value="1" text="Option 1 value" slot="option">
     <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
   </sinch-select-option>

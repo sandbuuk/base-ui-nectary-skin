@@ -73,7 +73,7 @@ type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
 }
 
 const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator): EvalFunc<T> =>
-  (cb: any, arg?: any) => $.evaluate(cb, arg, { /* timeout: 1000 */ })
+  (cb: any, arg?: any) => $.evaluate(cb, arg)
 
 type TPosition = {
   x: number,
@@ -153,7 +153,14 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
             throw new Error('Cannot get locator bounding box')
           }
 
-          const sc = await page.screenshot({ clip, animations: 'disabled', fullPage: true })
+          await page.waitForTimeout(100)
+
+          const sc = await page.screenshot({
+            clip,
+            animations: 'disabled',
+            fullPage: true,
+            caret: 'hide',
+          })
 
           expect(sc, t.name).toMatchSnapshot(screenshotName)
         }

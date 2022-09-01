@@ -19,6 +19,6 @@
     "style-loader": "^3.3.1",
     "vue-loader": "^16.1.2",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^5.20.0"
+    "webpack": "^5.74.0"
   }
 }

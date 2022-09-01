@@ -1,17 +1,15 @@
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
-import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/tag'
+import '@sinch-engage/nectary/tag-close'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/calendar-today'
+import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary/icons/search'
 
 export default {
   title: 'Components/Input',
   argTypes: {
-    disabled: {
-      description: 'Is disabled',
-      control: 'boolean',
-    },
     value: {
       description: 'Input value',
       control: 'text',
@@ -20,21 +18,13 @@ export default {
       description: 'Placeholder',
       control: 'text',
     },
-    label: {
-      description: 'Label',
-      control: 'text',
+    disabled: {
+      description: 'Is disabled',
+      control: 'boolean',
     },
-    optionalText: {
-      description: 'Optional',
-      control: 'text',
-    },
-    additionalText: {
-      description: 'Additional',
-      control: 'text',
-    },
-    invalidText: {
-      description: 'Invalid',
-      control: 'text',
+    invalid: {
+      description: 'Invalid state',
+      control: 'boolean',
     },
     'on-change': {
       description: 'Handler to sync input value with the state',
@@ -55,11 +45,8 @@ export default {
 const Template = (innerHTML: string): Story => () => {
   const [{
     value,
-    label,
     placeholder,
-    additionalText,
-    optionalText,
-    invalidText,
+    invalid,
     disabled,
   }, updateArgs] = useArgs()
   const inputRef = useRef<HTMLElementTagNameMap['sinch-input'] | null>(null)
@@ -86,58 +73,50 @@ const Template = (innerHTML: string): Story => () => {
   const $input = inputRef.current!
 
   $input.value = value
-  $input.label = label
   $input.placeholder = placeholder
-  $input.additionalText = additionalText
-  $input.optionalText = optionalText
-  $input.invalidText = invalidText
+  $input.invalid = invalid
   $input.disabled = disabled
 
   return $input
 }
 
-const inputInnerHTML = `
-  <sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>
-`
-
-export const Input = Template(inputInnerHTML)
+export const Input = Template('')
 
 Input.args = {
-  value: 'hi',
-  label: 'Label',
-  optionalText: 'Optional',
-  additionalText: 'Additional',
+  value: '',
   placeholder: 'Placeholder',
   disabled: false,
+  invalid: false,
 }
 
 Input.parameters = {
   docs: {
     source: {
-      code: `<sinch-input value={value} on-change={setValue}>${inputInnerHTML}</sinch-input>`,
+      code: `<sinch-input value={value} on-change={setValue}></sinch-input>`,
     },
   },
 }
 
 const inputWithIconButtonInnerHTML = `
-  <sinch-help-tooltip slot="tooltip" text="Tooltip text long"></sinch-help-tooltip>
+  <sinch-icon-search slot="icon"></sinch-icon-search>
+  <sinch-tag slot="right" text="Tag">
+    <sinch-tag-close slot="close"></sinch-tag-close>
+  </sinch-tag>
   <sinch-icon-button small slot="right">
-    <sinch-icon-calendar-today slot="icon"></sinch-icon-calendar-today>
+    <sinch-icon-close slot="icon"></sinch-icon-close>
   </sinch-icon-button>
 `
 
-export const InputWithIconButton = Template(inputWithIconButtonInnerHTML)
+export const InputWithItems = Template(inputWithIconButtonInnerHTML)
 
-InputWithIconButton.args = {
-  value: 'hi',
-  label: 'Label',
-  optionalText: 'Optional',
-  additionalText: 'Additional',
+InputWithItems.args = {
+  value: '',
   placeholder: 'Placeholder',
   disabled: false,
+  invalid: false,
 }
 
-InputWithIconButton.parameters = {
+InputWithItems.parameters = {
   docs: {
     source: {
       code: `<sinch-input value={value} on-change={setValue}>${inputWithIconButtonInnerHTML}</sinch-input>`,

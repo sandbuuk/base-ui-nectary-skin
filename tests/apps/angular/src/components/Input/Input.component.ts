@@ -16,10 +16,7 @@ export class InputComponent {
   value: string
   isControlled: boolean
   type: string | null
-  labelText: string | null
-  optionalText: string | null
-  additionalText: string | null
-  invalidText: string | null
+  isInvalid: boolean
   placeholderText: string | null
   tooltipText: string | null
   isDisabled: boolean
@@ -31,10 +28,7 @@ export class InputComponent {
     this.value = url.searchParams.get('value') ?? ''
     this.isControlled = url.searchParams.get('uncontrolled') === null
     this.type = url.searchParams.get('type')
-    this.labelText = url.searchParams.get('label')
-    this.optionalText = url.searchParams.get('optional')
-    this.additionalText = url.searchParams.get('additional')
-    this.invalidText = url.searchParams.get('invalid')
+    this.isInvalid = url.searchParams.get('invalid') !== null
     this.placeholderText = url.searchParams.get('placeholder')
     this.tooltipText = url.searchParams.get('tooltip')
     this.isDisabled = url.searchParams.get('disabled') != null

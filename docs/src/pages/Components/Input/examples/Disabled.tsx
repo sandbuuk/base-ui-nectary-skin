@@ -7,7 +7,6 @@ export const DisabledExample: FC = () => {
 
   return (
     <sinch-input
-      label="Input"
       aria-label="Input"
       placeholder="Placeholder"
       disabled

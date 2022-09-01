@@ -12,12 +12,13 @@ test('accessibility', checkValue(async function* () {
   yield
 }))
 
-test('search screenshots', runScreenshotTests('sinch-input', [
+test('search screenshots', runScreenshotTests('sinch-action-menu', [
   {
     name: 'clear',
     url: withValue,
     async *fn({ page }) {
       await page.keyboard.press('Tab')
+      await page.keyboard.press('End')
       yield { name: '1-focus-input', includeRects: [await getDropdownRect(page)] }
 
       await page.keyboard.press('Tab')
@@ -33,13 +34,13 @@ test('search screenshots', runScreenshotTests('sinch-input', [
     async *fn({ $, page }) {
       await page.keyboard.press('Tab')
       await page.keyboard.press('End')
-      await $.type('X')
       yield { name: '1-open', includeRects: [await getDropdownRect(page)] }
 
       await page.keyboard.press('ArrowDown')
       yield { name: '2-down', includeRects: [await getDropdownRect(page)] }
 
-      await $.type(' Y')
+      await page.keyboard.press('End')
+      await $.type('X')
       yield { name: '3-type', includeRects: [await getDropdownRect(page)] }
 
       await page.keyboard.press('Enter')

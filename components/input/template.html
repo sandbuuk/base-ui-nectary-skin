@@ -2,14 +2,6 @@
 :host {
   display: inline-block;
   vertical-align: middle;
-  outline: none;
-
-  --sinch-color-icon: var(--sinch-color-stormy-500);
-}
-
-#wrapper {
-  width: 100%;
-  box-sizing: border-box;
 }
 
 #input-wrapper {
@@ -22,6 +14,8 @@
   width: 100%;
   height: 48px;
   background-color: var(--sinch-color-snow-100);
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
 }
 
 #input {
@@ -32,12 +26,12 @@
   padding: 0 12px 0 44px;
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
-  caret-color: var(--sinch-caret-color, auto);
 }
 
 #input::placeholder {
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-muted);
+  opacity: 1;
 }
 
 #border {
@@ -51,7 +45,7 @@
   pointer-events: none;
 }
 
-:host([invalidtext]:not([invalidtext=""]):not([disabled])) #border {
+:host([invalid]:not([invalid="false"]):not([disabled])) #border {
   border-color: var(--sinch-color-text-invalid);
 }
 
@@ -76,63 +70,8 @@
   letter-spacing: 0.1em;
 }
 
-#top,
-#bottom {
-  display: flex;
-  align-items: baseline;
-}
-
-#top {
-  height: 24px;
-  margin-bottom: 2px;
-}
-
-#label,
-#optional,
-#additional,
-#invalid {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-#label {
-  font: var(--sinch-font-title-s);
-  color: var(--sinch-color-text-default);
-}
-
-#optional {
-  flex: 1;
-  text-align: right;
-  font: var(--sinch-font-small-text);
-  color: var(--sinch-color-text-muted);
-}
-
-#additional {
-  flex: 1;
-  text-align: right;
-  font: var(--sinch-font-extra-small-text);
-  color: var(--sinch-color-text-muted);
-  line-height: 20px;
-  margin-top: 2px;
-}
-
-#additional:empty {
-  display: none;
-}
-
-#invalid {
-  font: var(--sinch-font-extra-small-text);
-  color: var(--sinch-color-text-invalid);
-  line-height: 20px;
-  margin-top: 2px;
-}
-
-#invalid:empty {
-  display: none;
-}
-
 #icon {
+  display: flex;
   position: absolute;
   left: 12px;
   top: 12px;
@@ -162,39 +101,19 @@
   display: none;
 }
 
-::slotted(sinch-help-tooltip) {
-  align-self: center;
-  margin: 0 8px;
-}
-
-:host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
-  color: var(--sinch-color-stormy-100);
-}
-
 /* stylelint-disable-next-line no-descending-specificity */
 :host([disabled]:not([disabled="false"])) {
   --sinch-color-icon: var(--sinch-color-stormy-100);
 }
 </style>
 
-<div id="wrapper">
-  <div id="top">
-    <label id="label" for="input"></label>
-    <slot name="tooltip"></slot>
-    <span id="optional"></span>
+<div id="input-wrapper">
+  <div id="icon">
+    <slot name="icon"></slot>
   </div>
-  <div id="input-wrapper">
-    <div id="icon">
-      <slot name="icon"></slot>
-    </div>
-    <input id="input" type="text"/>
-    <div id="border"></div>
-    <div id="right">
-      <slot name="right"></slot>
-    </div>
-  </div>
-  <div id="bottom">
-    <div id="invalid"></div>
-    <div id="additional"></div>
+  <input id="input" type="text"/>
+  <div id="border"></div>
+  <div id="right">
+    <slot name="right"></slot>
   </div>
 </div>

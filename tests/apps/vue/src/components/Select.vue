@@ -1,17 +1,13 @@
 <template>
   <sinch-select
-    v-bind:placeholder="placeholderText"
-    v-bind:label="labelText"
-    v-bind:optionaltext="optionalText"
-    v-bind:additionaltext="additionalText"
-    v-bind:invalidtext="invalidText"
-    v-bind:disabled="isDisabled"
-    v-bind:maxvisibleitems="maxVisibleItems"
+    :placeholder="placeholderText"
+    :invalid="isInvalid"
+    :disabled="isDisabled"
+    :maxvisibleitems="maxVisibleItems"
     :value="value"
     @--change="onChange"
     @--focus="onFocus"
     @--blur="onBlur">
-    <sinch-help-tooltip v-if="tooltipText != null" v-bind:text="tooltipText" slot="tooltip"></sinch-help-tooltip>
     <sinch-select-option value="1" text="Option 1 value" slot="option">
       <sinch-icon-open-in-new slot="icon"/>
     </sinch-select-option>
@@ -49,20 +45,8 @@ export default {
     placeholderText() {
       return this.search.get('placeholder')
     },
-    tooltipText() {
-      return this.search.get('tooltip')
-    },
-    labelText() {
-      return this.search.get('label')
-    },
-    optionalText() {
-      return this.search.get('optional')
-    },
-    additionalText() {
-      return this.search.get('additional')
-    },
-    invalidText() {
-      return this.search.get('invalid')
+    isInvalid() {
+      return this.search.get('invalid') !== null
     },
     maxVisibleItems() {
       const val = this.search.get('maxvisibleitems')

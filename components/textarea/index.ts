@@ -19,10 +19,6 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-textarea', class extends NectaryElement {
   #$input: HTMLTextAreaElement
-  #$label: HTMLLabelElement
-  #$optionalText: HTMLSpanElement
-  #$additionalText: HTMLSpanElement
-  #$invalidText: HTMLSpanElement
   #cursorPos: number | null = null
   #isPendingDk = false
 
@@ -34,10 +30,6 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$input = shadowRoot.querySelector('#input')!
-    this.#$label = shadowRoot.querySelector('#label')!
-    this.#$optionalText = shadowRoot.querySelector('#optional')!
-    this.#$additionalText = shadowRoot.querySelector('#additional')!
-    this.#$invalidText = shadowRoot.querySelector('#invalid')!
   }
 
   connectedCallback() {
@@ -70,16 +62,17 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     return [
       'value',
       'placeholder',
-      'label',
-      'optionaltext',
-      'additionaltext',
-      'invalidtext',
+      'invalid',
       'disabled',
       'rows',
     ]
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'value': {
         const nextVal = newVal ?? ''
@@ -99,12 +92,6 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
         break
       }
 
-      case 'label': {
-        this.#$label.textContent = newVal
-
-        break
-      }
-
       case 'placeholder': {
         this.#$input.placeholder = newVal ?? ''
         updateAttribute(this, 'aria-placeholder', newVal)
@@ -112,23 +99,8 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
         break
       }
 
-      case 'optionaltext': {
-        this.#$optionalText.textContent = newVal
-
-        break
-      }
-
-      case 'additionaltext': {
-        this.#$additionalText.textContent = newVal
-
-        break
-      }
-
-      case 'invalidtext': {
-        const isInvalid = newVal !== null && newVal !== ''
-
-        this.#$invalidText.textContent = newVal
-        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+      case 'invalid': {
+        updateExplicitBooleanAttribute(this, 'aria-invalid', isAttrTrue(newVal))
 
         break
       }
@@ -170,36 +142,12 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     return getAttribute(this, 'placeholder', null)
   }
 
-  set label(value: string) {
-    updateAttribute(this, 'label', value)
+  set invalid(value: boolean) {
+    updateBooleanAttribute(this, 'invalid', value)
   }
 
-  get label() {
-    return getAttribute(this, 'label', '')
-  }
-
-  set optionalText(value: string | null) {
-    updateAttribute(this, 'optionaltext', value)
-  }
-
-  get optionalText() {
-    return getAttribute(this, 'optionaltext', null)
-  }
-
-  set additionalText(value: string | null) {
-    updateAttribute(this, 'additionaltext', value)
-  }
-
-  get additionalText() {
-    return getAttribute(this, 'additionaltext', null)
-  }
-
-  set invalidText(value: string | null) {
-    updateAttribute(this, 'invalidtext', value)
-  }
-
-  get invalidText() {
-    return getAttribute(this, 'invalidtext', null)
+  get invalid() {
+    return getBooleanAttribute(this, 'invalid')
   }
 
   set disabled(isDisabled: boolean) {

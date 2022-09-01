@@ -1,18 +1,14 @@
 <template>
   <sinch-input
     :placeholder="placeholderText"
-    :label="labelText"
-    :optionaltext="optionalText"
-    :additionaltext="additionalText"
-    :invalidtext="invalidText"
     :disabled="isDisabled"
+    :invalid="isInvalid"
     :type="type"
     :value="value"
     @--change="onChange"
     @--focus="onFocus"
     @--blur="onBlur">
     <sinch-icon-search v-if="hasIcon" slot="icon"></sinch-icon-search>
-    <sinch-help-tooltip v-if="tooltipText != null" :text="tooltipText" slot="tooltip"></sinch-help-tooltip>
     <sinch-tag v-if="hasRight" slot="right" text="text"></sinch-tag>
     <sinch-icon-button v-if="hasRight" slot="right" small>
       <sinch-icon-close slot="icon"></sinch-icon-close>
@@ -22,7 +18,6 @@
 
 <script>
 import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/icons/close'
@@ -50,20 +45,8 @@ export default {
     placeholderText() {
       return this.search.get('placeholder')
     },
-    tooltipText() {
-      return this.search.get('tooltip')
-    },
-    labelText() {
-      return this.search.get('label')
-    },
-    optionalText() {
-      return this.search.get('optional')
-    },
-    additionalText() {
-      return this.search.get('additional')
-    },
-    invalidText() {
-      return this.search.get('invalid')
+    isInvalid() {
+      return this.search.get('invalid') !== null
     },
     isDisabled() {
       return this.search.get('disabled') !== null

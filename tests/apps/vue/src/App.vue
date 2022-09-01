@@ -17,6 +17,7 @@
     <IconButton v-if="url.pathname === '/icon-button'" :search="url.searchParams"/>
     <InlineAlert v-if="url.pathname === '/inline-alert'" :search="url.searchParams"/>
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
+    <Field v-if="url.pathname === '/field'" :search="url.searchParams"/>
     <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
     <List v-if="url.pathname === '/list'" :search="url.searchParams"/>
     <Pagination v-if="url.pathname === '/pagination'" :search="url.searchParams"/>
@@ -61,6 +62,7 @@ import HorizontalStepper from './components/HorizontalStepper.vue'
 import IconButton from './components/IconButton.vue'
 import InlineAlert from './components/InlineAlert.vue'
 import Input from './components/Input.vue'
+import Field from './components/Field.vue'
 import Link from './components/Link.vue'
 import List from './components/List.vue'
 import Pagination from './components/Pagination.vue'
@@ -130,6 +132,7 @@ export default {
     IconButton,
     InlineAlert,
     Input,
+    Field,
     Link,
     List,
     Pagination,

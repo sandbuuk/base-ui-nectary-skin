@@ -13,10 +13,7 @@ import '@sinch-engage/nectary/select-option'
 export class SelectComponent {
   value: string
   isControlled: boolean
-  labelText: string | null
-  optionalText: string | null
-  additionalText: string | null
-  invalidText: string | null
+  isInvalid: boolean
   placeholderText: string | null
   tooltipText: string | null
   isDisabled: boolean
@@ -26,13 +23,10 @@ export class SelectComponent {
     const url = new URL(location.href)
     this.value = url.searchParams.get('value') ?? ''
     this.isControlled = url.searchParams.get('uncontrolled') === null
-    this.labelText = url.searchParams.get('label')
-    this.optionalText = url.searchParams.get('optional')
-    this.additionalText = url.searchParams.get('additional')
-    this.invalidText = url.searchParams.get('invalid')
     this.placeholderText = url.searchParams.get('placeholder')
     this.tooltipText = url.searchParams.get('tooltip')
     this.isDisabled = url.searchParams.get('disabled') != null
+    this.isInvalid = url.searchParams.get('invalid') != null
 
     const numVisibleValue = url.searchParams.get('maxvisibleitems')
     this.maxVisibleItems = numVisibleValue !== null ? parseInt(numVisibleValue) : null

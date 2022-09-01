@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/time-picker'
 import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/schedule'
@@ -30,12 +31,6 @@ export const TimeInput: FC<TTimeInput> = ({ search }) => {
     setOpen(true)
   }
   const onClose = useCallback(() => setOpen(false), [])
-  const labelText = search.get('label') ?? ''
-  const optionalText = search.get('optional') ?? undefined
-  const additionalText = search.get('additional') ?? undefined
-  const invalidText = search.get('invalid') ?? undefined
-  const placeholderText = search.get('placeholder') ?? undefined
-  const isDisabled = search.get('disabled') != null
   const isAmpm = search.get('ampm') !== null
 
   return (
@@ -46,27 +41,24 @@ export const TimeInput: FC<TTimeInput> = ({ search }) => {
       onClose={onClose}
       modal
     >
-      <sinch-input
-        slot="target"
-        label={labelText}
-        placeholder={placeholderText}
-        invalidText={invalidText}
-        optionalText={optionalText}
-        additionalText={additionalText}
-        disabled={isDisabled}
-        aria-label="Input"
-        value={value}
-        on-change={onChange}
-      >
-        <sinch-icon-button
-          slot="right"
-          small
-          aria-label="Open Time Picker"
-          onClick={onOpen}
+      <sinch-field slot="target" label="Time input">
+        <sinch-input
+          slot="input"
+          aria-label="Time input"
+          placeholder="Time input"
+          value={value}
+          on-change={onChange}
         >
-          <sinch-icon-schedule slot="icon"/>
-        </sinch-icon-button>
-      </sinch-input>
+          <sinch-icon-button
+            slot="right"
+            small
+            aria-label="Open Time Picker"
+            onClick={onOpen}
+          >
+            <sinch-icon-schedule slot="icon"/>
+          </sinch-icon-button>
+        </sinch-input>
+      </sinch-field>
       <sinch-time-picker
         slot="content"
         aria-label="time input"

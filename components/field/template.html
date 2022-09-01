@@ -1,0 +1,97 @@
+<style>
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#top,
+#bottom {
+  display: flex;
+  align-items: baseline;
+}
+
+#top {
+  height: 24px;
+  margin-bottom: 2px;
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+#label,
+#optional,
+#additional,
+#invalid {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#label {
+  font: var(--sinch-font-title-s);
+  color: var(--sinch-color-text-default);
+}
+
+#optional {
+  flex: 1;
+  text-align: right;
+  font: var(--sinch-font-small-text);
+  color: var(--sinch-color-text-muted);
+}
+
+#additional {
+  flex: 1;
+  text-align: right;
+  font: var(--sinch-font-extra-small-text);
+  color: var(--sinch-color-text-muted);
+  line-height: 20px;
+  margin-top: 2px;
+}
+
+#additional:empty {
+  display: none;
+}
+
+#invalid {
+  font: var(--sinch-font-extra-small-text);
+  color: var(--sinch-color-text-invalid);
+  line-height: 20px;
+  margin-top: 2px;
+}
+
+#invalid:empty {
+  display: none;
+}
+
+::slotted(sinch-help-tooltip) {
+  align-self: center;
+  margin: 0 8px;
+}
+
+:host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
+  color: var(--sinch-color-stormy-100);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+:host([disabled]:not([disabled="false"])) #top {
+  --sinch-color-icon: var(--sinch-color-stormy-100);
+}
+</style>
+
+<div id="wrapper">
+  <div id="top">
+    <label id="label" for="input"></label>
+    <slot name="tooltip"></slot>
+    <span id="optional"></span>
+  </div>
+  <slot name="input"></slot>
+  <div id="bottom">
+    <div id="invalid"></div>
+    <div id="additional"></div>
+  </div>
+</div>

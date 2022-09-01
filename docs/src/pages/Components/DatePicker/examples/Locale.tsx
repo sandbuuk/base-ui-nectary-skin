@@ -34,10 +34,8 @@ export const LocaleExample: FC = () => {
     >
       <sinch-input
         slot="target"
-        label="Date picker"
         aria-label="Pick date"
         placeholder="YYYY-MM-DD"
-        additionalText="Additional text"
         value={value}
         on-change={onChange}
       >
