@@ -155,7 +155,12 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
 
           await page.waitForTimeout(100)
 
-          const sc = await page.screenshot({ clip, animations: 'disabled', fullPage: true })
+          const sc = await page.screenshot({
+            clip,
+            animations: 'disabled',
+            fullPage: true,
+            caret: 'hide',
+          })
 
           expect(sc, t.name).toMatchSnapshot(screenshotName)
         }
