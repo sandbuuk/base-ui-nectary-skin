@@ -54,6 +54,7 @@ test('search screenshots', runScreenshotTests('sinch-action-menu', [
       await subscribeToEvents(page, 'sinch-search-focus', 'sinch-search-blur', 'sinch-search-change')
       await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
+      await page.keyboard.press('Tab')
 
       expect(
         await getAllEvents(page)
