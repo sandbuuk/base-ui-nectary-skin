@@ -17,8 +17,16 @@ export default {
       description: 'External link style',
       control: 'boolean',
     },
+    standalone: {
+      description: 'Standalone link style',
+      control: 'boolean',
+    },
     disabled: {
       description: 'Is link disabled',
+      control: 'boolean',
+    },
+    preventDefault: {
+      description: 'Whether link should prevent default behavour on click',
       control: 'boolean',
     },
   },
@@ -40,6 +48,8 @@ const Template = (innerHTML?: string): Story => () => {
     href,
     disabled,
     external,
+    standalone,
+    preventDefault,
   }] = useArgs()
   const linkRef = useRef<HTMLElementTagNameMap['sinch-link'] | null>(null)
 
@@ -57,6 +67,8 @@ const Template = (innerHTML?: string): Story => () => {
   $link.href = href
   $link.external = external
   $link.disabled = disabled
+  $link.standalone = standalone
+  $link.preventDefault = preventDefault
 
   return $link
 }
@@ -67,7 +79,9 @@ Link.args = {
   text: 'Navigate to internal page',
   href: '#',
   external: false,
+  standalone: false,
   disabled: false,
+  preventDefault: true,
 }
 
 Link.parameters = {
@@ -85,9 +99,29 @@ LinkExternal.args = {
   href: 'https://google.com',
   external: true,
   disabled: false,
+  preventDefault: true,
 }
 
 LinkExternal.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-link href="https://google.com" text="Goto Google" external></sinch-link>',
+    },
+  },
+}
+
+export const LinkStandalone = Template()
+
+LinkStandalone.args = {
+  text: 'Goto Google',
+  href: 'https://google.com',
+  external: false,
+  standalone: true,
+  disabled: false,
+  preventDefault: true,
+}
+
+LinkStandalone.parameters = {
   docs: {
     source: {
       code: '<sinch-link href="https://google.com" text="Goto Google" external></sinch-link>',

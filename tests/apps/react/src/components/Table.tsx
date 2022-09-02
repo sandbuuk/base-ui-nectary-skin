@@ -58,7 +58,7 @@ export const Table: FC<TTable> = ({ search }) => {
                 {cell.isCheckbox && <sinch-checkbox onChange={noop} aria-label="Checkbox"/>}
                 {cell.isButton && <sinch-button type="secondary" text={cell.text} onClick={noop} aria-label="Button"/>}
                 {cell.isToggle && <sinch-toggle onChange={noop} aria-label="Toggle"/>}
-                {cell.isLink && <sinch-link text={cell.text} href="#"/>}
+                {cell.isLink && <sinch-link text={cell.text} href="#" aria-label="Link"/>}
                 {cell.isIcon && cell.iconType === 'open-in-new' && <sinch-icon-open-in-new/>}
                 {cell.isIcon && cell.iconType === 'more-vert' && <sinch-icon-more-vert/>}
                 {!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon && <span>{cell.text}</span>}

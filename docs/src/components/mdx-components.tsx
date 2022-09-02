@@ -92,7 +92,7 @@ export const mdxComponents: MDXComponents = {
     const isExternal = href.startsWith('http')
 
     return (
-      <sinch-link href={href} text={children as string} external={isExternal}/>
+      <sinch-link href={href} text={children as string} aria-label={children as string} external={isExternal}/>
     )
   },
   ul: ({ children }) => {

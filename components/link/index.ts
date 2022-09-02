@@ -1,4 +1,5 @@
 import '../icons/open-in-new'
+import '../icons/arrow-forward'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -32,6 +33,7 @@ defineCustomElement('sinch-link', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.setAttribute('role', 'link')
     this.#$anchor.addEventListener('click', this.#onAnchorClick)
     this.#$anchor.addEventListener('focus', this.#onAnchorFocus)
     this.#$anchor.addEventListener('blur', this.#onAnchorBlur)
@@ -81,6 +83,14 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     return getBooleanAttribute(this, 'external')
   }
 
+  set standalone(isstandalone: boolean) {
+    updateBooleanAttribute(this, 'standalone', isstandalone)
+  }
+
+  get standalone() {
+    return getBooleanAttribute(this, 'standalone')
+  }
+
   set preventDefault(isPrevented: boolean) {
     updateBooleanAttribute(this, 'preventdefault', isPrevented)
   }
@@ -90,19 +100,17 @@ defineCustomElement('sinch-link', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'href', 'external', 'disabled']
+    return ['text', 'href', 'external']
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
-
-        break
-      }
-
-      case 'disabled': {
-        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
 
         break
       }
@@ -114,10 +122,7 @@ defineCustomElement('sinch-link', class extends NectaryElement {
       }
 
       case 'external': {
-        const isExternal = isAttrTrue(newVal)
-
-        updateAttribute(this.#$anchor, 'target', isExternal ? '_blank' : null)
-        updateBooleanAttribute(this, 'external', isExternal)
+        updateAttribute(this.#$anchor, 'target', isAttrTrue(newVal) ? '_blank' : null)
 
         break
       }

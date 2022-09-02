@@ -1,43 +1,88 @@
 <style>
 :host {
   display: inline;
-  outline: none;
 }
 
 a {
-  font: var(--sinch-font-body);
+  font: var(--sinch-font-text-m);
   font-size: inherit;
   line-height: inherit;
-  color: var(--sinch-color-text-link);
-  fill: var(--sinch-color-text-link);
+  color: var(--sinch-color-tropical-500);
+  border-radius: 0.5em;
 
   --sinch-size-icon: 1em;
-}
-
-#icon {
-  display: none;
-  margin-left: 0.2em;
-  vertical-align: -0.25em;
+  --sinch-color-icon: var(--sinch-color-tropical-500);
 }
 
 a:hover {
   color: var(--sinch-color-tropical-600);
-  fill: var(--sinch-color-tropical-600);
+
+  --sinch-color-icon: var(--sinch-color-tropical-600);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--sinch-color-aqua-400);
+  outline-offset: 2px;
+}
+
+@supports not selector(:focus-visible) {
+  a:focus {
+    outline: 2px solid var(--sinch-color-aqua-400);
+    outline-offset: 2px;
+  }
+}
+
+#external-icon {
+  display: none;
+  margin-right: 0.2em;
+  vertical-align: -0.2em;
+}
+
+#standalone-icon {
+  display: none;
+}
+
+:host([external]:not([external="false"])) #external-icon {
+  display: inline-block;
+}
+
+:host([standalone]:not([standalone="false"])) {
+  display: block;
+}
+
+:host([standalone]:not([standalone="false"])) a {
+  display: block;
+  font: var(--sinch-font-text-m);
+  font-weight: var(--sinch-font-weight-emphasized);
+  text-decoration: none;
+  border-radius: var(--sinch-shape-radius-m);
+  width: fit-content;
+
+  --sinch-size-icon: 24px;
+}
+
+:host([standalone]:not([standalone="false"])) #external-icon {
+  margin-right: 8px;
+  vertical-align: -7px;
+}
+
+:host([standalone]:not([standalone="false"]):is([external="false"], :not([external]))) #standalone-icon {
+  display: inline-block;
+  vertical-align: -7px;
+  margin-left: 8px;
 }
 
 :host([disabled]:not([disabled="false"])) a {
   color: var(--sinch-color-tropical-200);
   pointer-events: none;
   cursor: initial;
-  fill: var(--sinch-color-tropical-200);
-}
 
-:host([external]:not([external="false"])) #icon {
-  display: inline-block;
+  --sinch-color-icon: var(--sinch-color-tropical-200);
 }
 </style>
 
-<a>
+<a referrerpolicy="no-referer" aria-hidden="true">
+  <sinch-icon-open-in-new id="external-icon"></sinch-icon-open-in-new>
   <span id="content"></span>
-  <sinch-icon-open-in-new id="icon"></sinch-icon-open-in-new>
+  <sinch-icon-arrow-forward id="standalone-icon"></sinch-icon-arrow-forward>
 </a>

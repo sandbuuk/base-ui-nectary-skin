@@ -22,7 +22,7 @@ export const Text: FC<TText> = ({ search }) => {
       >
         {text}
         {' '}
-        <sinch-link href="#" text="Link"/>
+        <sinch-link href="#" text="Link" aria-label="Link"/>
       </sinch-text>
       <span> postfix</span>
     </sinch-text>

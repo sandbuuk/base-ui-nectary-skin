@@ -47,12 +47,14 @@ test('search screenshots', runScreenshotTests('sinch-action-menu', [
       yield { name: '4-submit', includeRects: [await getDropdownRect(page)] }
     },
   },
+]))
+
+test('search events', runScreenshotTests('sinch-action-menu', [
   {
     name: 'native events',
     url: withValue,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-search-focus', 'sinch-search-blur', 'sinch-search-change')
-      await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
       await page.keyboard.press('Tab')
 

@@ -18,6 +18,7 @@ defineCustomElement('sinch-field', class extends NectaryElement {
   #$optionalText: HTMLSpanElement
   #$additionalText: HTMLSpanElement
   #$invalidText: HTMLSpanElement
+  #$inputSlot: HTMLSlotElement
 
   constructor() {
     super()
@@ -30,6 +31,15 @@ defineCustomElement('sinch-field', class extends NectaryElement {
     this.#$optionalText = shadowRoot.querySelector('#optional')!
     this.#$additionalText = shadowRoot.querySelector('#additional')!
     this.#$invalidText = shadowRoot.querySelector('#invalid')!
+    this.#$inputSlot = shadowRoot.querySelector('slot[name="input"]')!
+  }
+
+  connectedCallback() {
+    this.#$label.addEventListener('click', this.#onLabelClick)
+  }
+
+  disconnectedCallback() {
+    this.#$label.removeEventListener('click', this.#onLabelClick)
   }
 
   static get observedAttributes() {
@@ -107,6 +117,10 @@ defineCustomElement('sinch-field', class extends NectaryElement {
         break
       }
     }
+  }
+
+  #onLabelClick = () => {
+    (this.#$inputSlot.assignedElements() as HTMLElement[])[0]?.focus?.()
   }
 })
 
