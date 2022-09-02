@@ -7,6 +7,7 @@
       :text="text"
       :disabled="isDisabled"
       :external="isExternal"
+      :standalone="isStandalone"
       @--click="onClick"
       @--focus="onFocus"
       @--blur="onBlur"
@@ -45,6 +46,9 @@ export default {
     },
     isExternal() {
       return this.search.get('external') != null
+    },
+    isStandalone() {
+      return this.search.get('standalone') != null
     },
   },
 }

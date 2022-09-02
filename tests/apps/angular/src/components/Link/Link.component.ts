@@ -12,6 +12,7 @@ export class LinkComponent {
   text: string | null
   isDisabled: boolean
   isExternal: boolean
+  isStandalone: boolean
 
   constructor() {
     const url = new URL(location.href)
@@ -19,6 +20,7 @@ export class LinkComponent {
     this.text = url.searchParams.get('text')
     this.isDisabled = url.searchParams.get('disabled') != null
     this.isExternal = url.searchParams.get('external') != null
+    this.isStandalone = url.searchParams.get('standalone') != null
   }
 
   onClick(e: Event) {

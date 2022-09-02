@@ -11,6 +11,7 @@ export const Link: FC<TLink> = ({ search }) => {
   const href: any = search.get('href')
   const isDisabled = search.get('disabled') != null
   const isExternal = search.get('external') != null
+  const isStandalone = search.get('standalone') != null
   const onClick = useCallback(() => {
     window.dispatchEvent(new CustomEvent('sinch-link-click'))
   }, [])
@@ -26,7 +27,9 @@ export const Link: FC<TLink> = ({ search }) => {
         href={href}
         disabled={isDisabled}
         external={isExternal}
+        standalone={isStandalone}
         preventDefault
+        aria-label="Link"
         on-click={onClick}
         on-focus={onFocus}
         on-blur={onBlur}

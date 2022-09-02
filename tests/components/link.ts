@@ -1,11 +1,17 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/link?text=Anchor%20text&href=url'
-const withNarrowWidth = '/link?width=110&text=Anchor%20text%20text%20long%20long%20long&href=url'
-const withExternalDisabled = '/link?text=Anchor%20text&href=url&disabled=true&external=true'
+const withNarrow = '/link?width=110&text=Anchor%20text%20text%20long%20long%20long&href=url'
+const withNarrowStandalone = '/link?width=110&text=Anchor%20text%20text%20long%20long%20long&href=url&standalone=true'
+const withNarrowStandaloneExternal = '/link?width=110&text=Anchor%20text%20text%20long%20long%20long&href=url&standalone=true&external=true'
 const withExternal = '/link?text=Anchor%20text&href=url&external=true'
+const withExternalDisabled = '/link?text=Anchor%20text&href=url&disabled=true&external=true'
+const withStandalone = '/link?text=Anchor%20text&href=url&standalone=true'
+const withStandaloneDisabled = '/link?text=Anchor%20text&href=url&standalone=true&disabled=true'
+const withStandaloneExternal = '/link?text=Anchor%20text&href=url&standalone=true&external=true'
+const withStandaloneExternalDisabled = '/link?text=Anchor%20text&href=url&standalone=true&external=true&disabled=true'
 const checkLink = makeAccessibilityTests('/link?text=Anchor%20text&href=url', 'sinch-link')
 
 test('accessibility', checkLink(async function* () {
@@ -13,6 +19,30 @@ test('accessibility', checkLink(async function* () {
 }))
 
 test('link screenshots', runScreenshotTests('sinch-link', [
+  {
+    name: 'standalone property',
+    url: shot,
+    async *fn({ $eval, page }) {
+      await $eval((el) => {
+        el.standalone = true
+      })
+      yield { name: 'set', include: [page.locator('#link-wrapper')] }
+      await $eval((el) => {
+        el.standalone = false
+      })
+      yield { name: 'unset', include: [page.locator('#link-wrapper')] }
+    },
+  },
+  {
+    name: 'standalone attribute',
+    url: shot,
+    async *fn({ $eval, page }) {
+      await $eval((el) => el.setAttribute('standalone', ''))
+      yield { name: 'set', include: [page.locator('#link-wrapper')] }
+      await $eval((el) => el.removeAttribute('standalone'))
+      yield { name: 'unset', include: [page.locator('#link-wrapper')] }
+    },
+  },
   {
     name: 'external property',
     url: shot,
@@ -62,13 +92,6 @@ test('link screenshots', runScreenshotTests('sinch-link', [
     },
   },
   {
-    name: 'external disabled',
-    url: withExternalDisabled,
-    async *fn({ page }) {
-      yield { name: 'shot', include: [page.locator('#link-wrapper')] }
-    },
-  },
-  {
     name: 'text attribute',
     url: withExternal,
     async *fn({ $eval, page }) {
@@ -95,8 +118,50 @@ test('link screenshots', runScreenshotTests('sinch-link', [
     },
   },
   {
+    name: 'external disabled',
+    url: withExternalDisabled,
+    async *fn({ page }) {
+      yield { name: 'shot', include: [page.locator('#link-wrapper')] }
+    },
+  },
+  {
+    name: 'standalone disabled',
+    url: withStandaloneDisabled,
+    async *fn({ page }) {
+      yield { name: 'shot', include: [page.locator('#link-wrapper')] }
+    },
+  },
+  {
+    name: 'standalone external',
+    url: withStandaloneExternal,
+    async *fn({ page }) {
+      yield { name: 'shot', include: [page.locator('#link-wrapper')] }
+    },
+  },
+  {
+    name: 'standalone external disabled',
+    url: withStandaloneExternalDisabled,
+    async *fn({ page }) {
+      yield { name: 'shot', include: [page.locator('#link-wrapper')] }
+    },
+  },
+  {
     name: 'narrow',
-    url: withNarrowWidth,
+    url: withNarrow,
+    async *fn({ page }) {
+      yield { name: 'shot', include: [page.locator('#link-wrapper')] }
+    },
+  },
+  {
+    name: 'narrow standalone',
+    url: withNarrowStandalone,
+    async *fn({ page }) {
+      yield { name: 'shot', include: [page.locator('#link-wrapper')] }
+    },
+  },
+  {
+    name: 'narrow standalone external',
+    url: withNarrowStandaloneExternal,
     async *fn({ page }) {
       yield { name: 'shot', include: [page.locator('#link-wrapper')] }
     },
@@ -105,9 +170,9 @@ test('link screenshots', runScreenshotTests('sinch-link', [
     name: 'hover disabled',
     url: withExternalDisabled,
     async *fn({ $, page }) {
-      const rect = (await $.boundingBox())!
+      const ct = centerRect(await $.boundingBox())
 
-      await page.mouse.move(rect.x + 5, rect.y + 15)
+      await page.mouse.move(ct.x, ct.y)
       yield { name: 'shot', include: [page.locator('#link-wrapper')] }
     },
   },
@@ -115,9 +180,25 @@ test('link screenshots', runScreenshotTests('sinch-link', [
     name: 'hover',
     url: withExternal,
     async *fn({ $, page }) {
-      const rect = (await $.boundingBox())!
+      const ct = centerRect(await $.boundingBox())
 
-      await page.mouse.move(rect.x + 5, rect.y + 15)
+      await page.mouse.move(ct.x, ct.y)
+      yield { name: 'shot', include: [page.locator('#link-wrapper')] }
+    },
+  },
+  {
+    name: 'focus',
+    url: withExternal,
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
+      yield { name: 'shot', include: [page.locator('#link-wrapper')] }
+    },
+  },
+  {
+    name: 'focus standalone',
+    url: withStandalone,
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
       yield { name: 'shot', include: [page.locator('#link-wrapper')] }
     },
   },
@@ -153,8 +234,6 @@ test('link screenshots', runScreenshotTests('sinch-link', [
         await getAllEvents(page)
       ).toEqual(
         expect.arrayContaining([
-          // Webkit does not focus anchor on click
-          // { type: 'sinch-link-focus', detail: null },
           { type: 'sinch-link-click', detail: null },
         ])
       )
