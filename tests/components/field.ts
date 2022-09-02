@@ -179,4 +179,14 @@ test('field screenshots', runScreenshotTests('sinch-field', [
       yield { name: 'enabled' }
     },
   },
+  {
+    name: 'label click',
+    url: withEverything,
+    async *fn({ $, page }) {
+      const rect = (await $.boundingBox())!
+
+      await page.mouse.click(rect.x + 10, rect.y + 10)
+      yield { name: 'shot' }
+    },
+  },
 ]))
