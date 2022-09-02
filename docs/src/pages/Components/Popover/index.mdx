@@ -23,31 +23,13 @@ It's stateless, as well as all Nectary components, and therefore it's up to a co
 
 ### Non-modal
 
-Non-modal popover *DOES NOT*:
-
-* steal focus even from a text field when opened
-* have backdrop
-* prevent interaction with the rest of the page
-* prevent page scrolling
-* automatically close on click outside
-* always handle `Escape` key with optional `onClose` handler
-
-Think of it as a rich tooltip or a text field autocomplete functionality.
+Non-modal popover doesn't steal focus from a target element when opened. Think of it as a rich tooltip or a text field autocomplete functionality.
 
 <Example Component={NonModalExample}/>
 
 ### Modal
 
-Modal popover *DOES*:
-
-* steal focus
-* have backdrop
-* prevent interaction with the rest of the page
-* prevent page scrolling
-* automatically close on click outside with optional `onClose` handler
-* always handle `Escape` key with optional `onClose` handler
-
-Think of it as a dialog that *requires* an interaction.
+Modal popover steals focus from a target element when opened. Think of it as a dialog that *requires* an interaction.
 
 <Example Component={ModalExample}/>
 

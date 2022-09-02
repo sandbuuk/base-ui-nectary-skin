@@ -18,7 +18,11 @@ export const NonModalExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
 
   return (
-    <sinch-popover aria-label="Popover" open={isOpen}>
+    <sinch-popover
+      aria-label="Popover"
+      open={isOpen}
+      on-close={() => setOpen(false)}
+    >
       <sinch-button
         slot="target"
         text="Open popover"
