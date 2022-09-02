@@ -31,7 +31,15 @@ module.exports = {
       {
         test: /\.html$/,
         exclude: /node_modules/,
-        use: ['raw-loader', '@saas/html-minify-loader'],
+        use: [
+          'raw-loader',
+          {
+            loader: '@saas/html-minify-loader',
+            options: {
+              injectTestStyles: true
+            }
+          }
+        ],
       },
       {
         test: /\.(js|ts)$/,

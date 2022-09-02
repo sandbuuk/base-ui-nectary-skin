@@ -1,7 +1,9 @@
 const { minify } = require('html-minifier-terser')
 
-module.exports = (src) => {
-  if (process.env.CI != null) {
+module.exports = function(src) {
+  const options = this.getOptions()
+
+  if (options.injectTestStyles === true) {
   // eslint-disable-next-line no-param-reassign
     src = `
       ${src}
