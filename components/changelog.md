@@ -1,3 +1,13 @@
+## v0.37.0 (2022-09-02)
+
+* 💥 extract wrapper into `sinch-field` in `sinch-input`, `sinch-textarea` and `sinch-select`
+* ➕ add `sinch-field` component
+* ➕ add `standalone` attribute to `sinch-link`
+* 🐞 unify focus behaviour between browsers when expanding popover
+* 🐞 fix icon alignment in `sinch-input` in Safari
+* 🐞 fix placeholder color in `sinch-input` and `sinch-textarea` in Firefox
+* 🐞 fix icon color in `sinch-dropdown-text-option`
+
 ## v0.36.1 (2022-08-29)
 
 * 🐞 fix non-modal overflow in `sinch-popover`
