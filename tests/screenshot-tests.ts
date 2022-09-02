@@ -67,6 +67,19 @@ const overrideScreenshotPath = (testInfo: TestInfo): void => {
   }
 }
 
+const overridePageKeyboard = (page: Page): void => {
+  if ((page.keyboard as any).__modified === true) {
+    return
+  }
+
+  const originalPress = page.keyboard.press
+
+  page.keyboard.press = (function(...args) {
+    return page.waitForTimeout(100).then(() => originalPress.apply(this, args))
+  })
+  ;(page.keyboard as any).__modified = true
+}
+
 type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
   <R, Arg>(cb: (el: HTMLElementTagNameMap[T], arg: Arg) => R, arg: Arg): Promise<R>,
   <R>(cb: (el: HTMLElementTagNameMap[T]) => R): Promise<R>,
@@ -126,6 +139,8 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
         await context.newPage()
       )
     }
+
+    pages.forEach(overridePageKeyboard)
 
     const onlyTests = tests.filter((t) => t.only)
     const runTests = onlyTests.length > 0 ? onlyTests : tests
