@@ -48,6 +48,14 @@ defineCustomElement('sinch-text', class extends NectaryElement {
     return getBooleanAttribute(this, 'inline')
   }
 
+  set ellipsis(isEllipsis: boolean) {
+    updateBooleanAttribute(this, 'ellipsis', isEllipsis)
+  }
+
+  get ellipsis() {
+    return getBooleanAttribute(this, 'ellipsis')
+  }
+
   set emphasized(isEmphasized: boolean) {
     updateBooleanAttribute(this, 'emphasized', isEmphasized)
   }
