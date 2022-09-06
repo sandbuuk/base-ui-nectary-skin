@@ -15,6 +15,7 @@ import { Dropdown } from './components/Dropdown'
 import { Field } from './components/Field'
 import { FileDrop } from './components/FileDrop'
 import { FilePicker } from './components/FilePicker'
+import { FileStatus } from './components/FileStatus'
 import { Grid } from './components/Grid'
 import { HorizontalStepper } from './components/HorizontalStepper'
 import { IconButton } from './components/IconButton'
@@ -152,6 +153,12 @@ const mapElement = (url: URL) => {
     case '/file-picker': {
       return (
         <FilePicker search={url.searchParams}/>
+      )
+    }
+
+    case '/file-status': {
+      return (
+        <FileStatus search={url.searchParams}/>
       )
     }
 

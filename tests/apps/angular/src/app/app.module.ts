@@ -21,6 +21,7 @@ import { InputComponent } from '../components/Input/Input.component'
 import { FieldComponent } from '../components/Field/Field.component'
 import { FileDropComponent } from '../components/FileDrop/FileDrop.component'
 import { FilePickerComponent } from '../components/FilePicker/FilePicker.component'
+import { FileStatusComponent } from '../components/FileStatus/FileStatus.component'
 import { LinkComponent } from '../components/Link/Link.component'
 import { ListComponent } from '../components/List/List.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
@@ -68,6 +69,7 @@ import { AppComponent } from './app.component'
     FieldComponent,
     FileDropComponent,
     FilePickerComponent,
+    FileStatusComponent,
     LinkComponent,
     ListComponent,
     PaginationComponent,
