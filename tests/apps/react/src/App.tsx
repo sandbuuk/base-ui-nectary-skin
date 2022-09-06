@@ -13,6 +13,7 @@ import { Dialog } from './components/Dialog'
 import { DialogExample } from './components/DialogExample'
 import { Dropdown } from './components/Dropdown'
 import { Field } from './components/Field'
+import { FileDrop } from './components/FileDrop'
 import { Grid } from './components/Grid'
 import { HorizontalStepper } from './components/HorizontalStepper'
 import { IconButton } from './components/IconButton'
@@ -138,6 +139,12 @@ const mapElement = (url: URL) => {
     case '/field': {
       return (
         <Field search={url.searchParams}/>
+      )
+    }
+
+    case '/file-drop': {
+      return (
+        <FileDrop search={url.searchParams}/>
       )
     }
 

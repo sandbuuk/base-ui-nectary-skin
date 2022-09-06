@@ -19,6 +19,7 @@ import { IconButtonComponent } from '../components/IconButton/IconButton.compone
 import { InlineAlertComponent } from '../components/InlineAlert/InlineAlert.component'
 import { InputComponent } from '../components/Input/Input.component'
 import { FieldComponent } from '../components/Field/Field.component'
+import { FileDropComponent } from '../components/FileDrop/FileDrop.component'
 import { LinkComponent } from '../components/Link/Link.component'
 import { ListComponent } from '../components/List/List.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
@@ -64,6 +65,7 @@ import { AppComponent } from './app.component'
     InlineAlertComponent,
     InputComponent,
     FieldComponent,
+    FileDropComponent,
     LinkComponent,
     ListComponent,
     PaginationComponent,

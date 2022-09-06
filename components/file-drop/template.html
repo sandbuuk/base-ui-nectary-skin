@@ -1,0 +1,80 @@
+<style>
+:host {
+  display: block;
+}
+
+#wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 8px;
+  height: 148px;
+  min-width: 148px;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: var(--sinch-shape-radius-m);
+  background-color: var(--sinch-color-background-grey);
+}
+
+#wrapper.drop.valid {
+  background-color: var(--sinch-color-background-blue);
+}
+
+#wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px dashed var(--sinch-color-stormy-100);
+  border-radius: var(--sinch-shape-radius-m);
+  pointer-events: none;
+}
+
+#placeholder {
+  align-self: center;
+  text-align: center;
+}
+
+:host([invalid]) #wrapper::after {
+  border-color: var(--sinch-color-text-invalid);
+  border-width: 1px;
+}
+
+#wrapper.drop::after {
+  pointer-events: all;
+}
+
+#wrapper.drop.valid::after {
+  border-color: var(--sinch-color-aqua-400);
+  border-width: 2px;
+}
+
+#wrapper.drop #placeholder {
+  color: var(--sinch-color-text-muted);
+}
+
+:host([disabled]) #wrapper #placeholder {
+  color: var(--sinch-color-stormy-100);
+}
+
+:host([disabled]) #wrapper {
+  background-color: var(--sinch-color-snow-100);
+}
+
+:host([disabled]) #wrapper::after {
+  border-color: var(--sinch-color-stormy-100);
+  border-width: 1px;
+}
+</style>
+
+<div id="wrapper">
+  <sinch-text id="placeholder" type="m" aria-hidden="true"></sinch-text>
+  <sinch-file-picker id="file-picker">
+    <slot></slot>
+  </sinch-file-picker>
+</div>

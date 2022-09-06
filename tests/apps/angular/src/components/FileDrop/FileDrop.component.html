@@ -1,0 +1,17 @@
+<sinch-file-drop
+  [attr.accept]="accept"
+  [attr.multiple]="isMultiple"
+  [attr.disabled]="isDisabled"
+  [attr.invalid]="isInvalid"
+  placeholder="Drag and drop to upload or"
+  (-change)="onChange($event)"
+  (-invalid)="onInvalid($event)"
+>
+  <sinch-button
+    type="cta-secondary"
+    small
+    text="Choose files"
+    aria-label="Choose files"
+    [attr.disabled]="isDisabled"
+  ></sinch-button>
+</sinch-file-drop>
