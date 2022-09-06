@@ -11,6 +11,7 @@ module.exports = function(src) {
       :host * {
         scrollbar-width: none !important;
         caret-color: transparent !important;
+        animation: none !important;
       }
       :host *::-webkit-scrollbar {
         display: none !important;
