@@ -185,7 +185,7 @@ test('icon-button events', runScreenshotTests('sinch-icon-button', [
     },
   },
   {
-    name: 'custom events',
+    name: 'native events',
     url: shot,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-icon-button-focus', 'sinch-icon-button-blur', 'sinch-icon-button-click')
