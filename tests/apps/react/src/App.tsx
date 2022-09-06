@@ -14,6 +14,7 @@ import { DialogExample } from './components/DialogExample'
 import { Dropdown } from './components/Dropdown'
 import { Field } from './components/Field'
 import { FileDrop } from './components/FileDrop'
+import { FilePicker } from './components/FilePicker'
 import { Grid } from './components/Grid'
 import { HorizontalStepper } from './components/HorizontalStepper'
 import { IconButton } from './components/IconButton'
@@ -145,6 +146,12 @@ const mapElement = (url: URL) => {
     case '/file-drop': {
       return (
         <FileDrop search={url.searchParams}/>
+      )
+    }
+
+    case '/file-picker': {
+      return (
+        <FilePicker search={url.searchParams}/>
       )
     }
 

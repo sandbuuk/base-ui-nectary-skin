@@ -19,6 +19,7 @@
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
     <Field v-if="url.pathname === '/field'" :search="url.searchParams"/>
     <FileDrop v-if="url.pathname === '/file-drop'" :search="url.searchParams"/>
+    <FilePicker v-if="url.pathname === '/file-picker'" :search="url.searchParams"/>
     <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
     <List v-if="url.pathname === '/list'" :search="url.searchParams"/>
     <Pagination v-if="url.pathname === '/pagination'" :search="url.searchParams"/>
@@ -65,6 +66,7 @@ import InlineAlert from './components/InlineAlert.vue'
 import Input from './components/Input.vue'
 import Field from './components/Field.vue'
 import FileDrop from './components/FileDrop.vue'
+import FilePicker from './components/FilePicker.vue'
 import Link from './components/Link.vue'
 import List from './components/List.vue'
 import Pagination from './components/Pagination.vue'
@@ -136,6 +138,7 @@ export default {
     Input,
     Field,
     FileDrop,
+    FilePicker,
     Link,
     List,
     Pagination,
