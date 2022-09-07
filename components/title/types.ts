@@ -7,13 +7,16 @@ export type TSinchTitleElement = HTMLElement & {
   text: string,
   type: TSinchTitleType,
   level: TSinchTitleLevel,
+  ellipsis: boolean,
   setAttribute(name: 'text', value: string): void,
   setAttribute(name: 'type', value: TSinchTitleType): void,
   setAttribute(name: 'level', value: TSinchTitleLevel): void,
+  setAttribute(name: 'ellipsis', value: ''): void,
 }
 
 export type TSinchTitleReact = TSinchElementReact<TSinchTitleElement> & {
   text: string,
   type: TSinchTitleType,
   level: TSinchTitleLevel,
+  ellipsis?: boolean,
 }
