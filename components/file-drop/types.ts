@@ -27,6 +27,8 @@ export type TSinchFileDropElement = HTMLElement & {
   setAttribute(name: 'placeholder', value: string): void,
   /** Invalid state */
   setAttribute(name: 'invalid', value: ''): void,
+  /** Disabled state */
+  setAttribute(name: 'disabled', value: ''): void,
 }
 
 export type TSinchFileDropReact = TSinchElementReact<TSinchFileDropElement> & {
