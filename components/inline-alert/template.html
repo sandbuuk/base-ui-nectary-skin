@@ -25,11 +25,17 @@
 
 #caption {
   color: var(--sinch-color-stormy-500);
+  align-self: stretch;
 }
 
 #text {
   color: var(--sinch-color-stormy-500);
   margin-top: 4px;
+  align-self: stretch;
+}
+
+#text:empty {
+  display: none;
 }
 
 #icon-info,
@@ -104,7 +110,7 @@
   <sinch-icon-report-problem id="icon-warn"></sinch-icon-report-problem>
   <sinch-icon-report id="icon-error"></sinch-icon-report>
   <div id="body-wrapper">
-    <sinch-title id="caption" level="3" type="s"></sinch-title>
+    <sinch-title id="caption" level="3" type="s" ellipsis></sinch-title>
     <sinch-text id="text" type="m"></sinch-text>
     <div id="action">
       <slot name="action"></slot>
