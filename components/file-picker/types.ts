@@ -3,7 +3,9 @@ import type { TSinchElementReact } from '../types'
 export type TSinchFilePickerInvalidType = 'size'
 
 export type TSinchFilePickerElement = HTMLElement & {
+  /** Allows to choose multiple files */
   multiple: boolean,
+  /** [A unique file type specifier](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers) */
   accept: string | null,
   size: number | null,
   /** Change value event */
@@ -18,7 +20,9 @@ export type TSinchFilePickerElement = HTMLElement & {
 }
 
 export type TSinchFilePickerReact = TSinchElementReact<TSinchFilePickerElement> & {
+  /** Allows to choose multiple files */
   multiple?: boolean,
+  /** [A unique file type specifier](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers) */
   accept?: string,
   size?: number,
   /** Change value handler */
