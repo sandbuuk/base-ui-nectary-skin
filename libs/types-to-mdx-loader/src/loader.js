@@ -155,7 +155,27 @@ export async function loader(src) {
                         isTSTypeAnnotation(param.typeAnnotation) &&
                         isTSTypeReference(param.typeAnnotation.typeAnnotation)
                       ) {
+                        const replaceNames = []
+
+                        if (
+                          isTSTypeParameterInstantiation(param.typeAnnotation.typeAnnotation.typeParameters)
+                        ) {
+                          param.typeAnnotation.typeAnnotation.typeParameters.params.forEach((param) => {
+                            if (
+                              isTSTypeReference(param) &&
+                              isIdentifier(param.typeName) &&
+                              typeRefs.has(param.typeName.name)
+                            ) {
+                              replaceNames.push(param.typeName.name)
+                            }
+                          })
+                        }
+
                         value = generate(param.typeAnnotation.typeAnnotation).code
+
+                        replaceNames.forEach((name) => {
+                          value = value.replace(name, typeRefs.get(name))
+                        })
                       } else if (
                         isIdentifier(param) &&
                         isTSTypeAnnotation(param.typeAnnotation) &&
@@ -283,7 +303,27 @@ export async function loader(src) {
                       const param = valueParam.typeAnnotation.typeAnnotation.parameters[0]
 
                       if (isIdentifier(param) && isTSTypeAnnotation(param.typeAnnotation)) {
+                        const replaceNames = []
+
+                        if (
+                          isTSTypeParameterInstantiation(param.typeAnnotation.typeAnnotation.typeParameters)
+                        ) {
+                          param.typeAnnotation.typeAnnotation.typeParameters.params.forEach((param) => {
+                            if (
+                              isTSTypeReference(param) &&
+                                isIdentifier(param.typeName) &&
+                                typeRefs.has(param.typeName.name)
+                            ) {
+                              replaceNames.push(param.typeName.name)
+                            }
+                          })
+                        }
+
                         value = generate(param.typeAnnotation.typeAnnotation).code
+
+                        replaceNames.forEach((name) => {
+                          value = value.replace(name, typeRefs.get(name))
+                        })
                       }
                     }
                   }
