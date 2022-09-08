@@ -8,6 +8,7 @@ import '@sinch-engage/nectary/button'
 const invalidErrors: Record<TSinchFileDropInvalidType, string> = {
   accept: 'File type is not accepted',
   multiple: 'Only single file is accepted',
+  size: 'The file is too large',
 }
 
 export const InvalidExample: FC = () => {
