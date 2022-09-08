@@ -1,0 +1,44 @@
+<style>
+:host {
+  display: block;
+}
+
+#wrapper {
+  display: flex;
+  align-items: center;
+  height: 24px;
+}
+
+#progress,
+#bar {
+  height: 8px;
+  border-radius: 4px;
+}
+
+#progress {
+  background-color: var(--sinch-color-tropical-100);
+  flex: 1;
+  min-width: 0;
+}
+
+#bar {
+  background-color: var(--sinch-color-tropical-500);
+  width: 0;
+}
+
+#text {
+  display: none;
+  width: 46px;
+}
+
+:host([detailed]:not([detailed="false"])) #text {
+  display: block;
+}
+</style>
+
+<div id="wrapper">
+  <sinch-text id="text" type="m"></sinch-text>
+  <div id="progress">
+    <div id="bar"></div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+import type { TSinchElementReact } from '../types'
+
+export type TSinchProgressElement = HTMLElement & {
+  value: number,
+  detailed: boolean,
+  setAttribute(name: 'value', value: string): void,
+  setAttribute(name: 'detailed', value: ''): void,
+}
+
+export type TSinchProgressReact = TSinchElementReact<TSinchProgressElement> & {
+  value: number,
+  detailed?: boolean,
+  'aria-label': string,
+}

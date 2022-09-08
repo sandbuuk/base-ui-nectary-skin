@@ -25,6 +25,7 @@ import { Link } from './components/Link'
 import { List } from './components/List'
 import { Pagination } from './components/Pagination'
 import { Popover } from './components/Popover'
+import { Progress } from './components/Progress'
 import { Radio } from './components/Radio'
 import { Search } from './components/Search'
 import { Segment } from './components/Segment'
@@ -201,6 +202,12 @@ const mapElement = (url: URL) => {
     case '/popover': {
       return (
         <Popover search={url.searchParams}/>
+      )
+    }
+
+    case '/progress': {
+      return (
+        <Progress search={url.searchParams}/>
       )
     }
 
