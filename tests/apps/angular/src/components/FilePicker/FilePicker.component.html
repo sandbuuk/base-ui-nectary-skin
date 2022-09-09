@@ -1,0 +1,14 @@
+<sinch-file-picker
+  [attr.multiple]="isMultiple"
+  [attr.accept]="accept"
+  (-change)="onChange($event)"
+  (-invalid)="onInvalid($event)"
+>
+  <sinch-button
+    text="Choose files"
+    type="secondary"
+    aria-label="Choose files"
+  >
+    <sinch-icon-upload slot="left-icon"></sinch-icon-upload>
+  </sinch-button>
+</sinch-file-picker>

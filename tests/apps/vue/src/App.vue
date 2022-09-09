@@ -18,10 +18,14 @@
     <InlineAlert v-if="url.pathname === '/inline-alert'" :search="url.searchParams"/>
     <Input v-if="url.pathname === '/input'" :search="url.searchParams"/>
     <Field v-if="url.pathname === '/field'" :search="url.searchParams"/>
+    <FileDrop v-if="url.pathname === '/file-drop'" :search="url.searchParams"/>
+    <FilePicker v-if="url.pathname === '/file-picker'" :search="url.searchParams"/>
+    <FileStatus v-if="url.pathname === '/file-status'" :search="url.searchParams"/>
     <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
     <List v-if="url.pathname === '/list'" :search="url.searchParams"/>
     <Pagination v-if="url.pathname === '/pagination'" :search="url.searchParams"/>
     <Popover v-if="url.pathname === '/popover'" :search="url.searchParams"/>
+    <Progress v-if="url.pathname === '/progress'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
     <Search v-if="url.pathname === '/search'" :search="url.searchParams"/>
     <Segment v-if="url.pathname === '/segment'" :search="url.searchParams"/>
@@ -63,10 +67,14 @@ import IconButton from './components/IconButton.vue'
 import InlineAlert from './components/InlineAlert.vue'
 import Input from './components/Input.vue'
 import Field from './components/Field.vue'
+import FileDrop from './components/FileDrop.vue'
+import FilePicker from './components/FilePicker.vue'
+import FileStatus from './components/FileStatus.vue'
 import Link from './components/Link.vue'
 import List from './components/List.vue'
 import Pagination from './components/Pagination.vue'
 import Popover from './components/Popover.vue'
+import Progress from './components/Progress.vue'
 import Radio from './components/Radio.vue'
 import Search from './components/Search.vue'
 import Segment from './components/Segment.vue'
@@ -133,10 +141,14 @@ export default {
     InlineAlert,
     Input,
     Field,
+    FileDrop,
+    FilePicker,
+    FileStatus,
     Link,
     List,
     Pagination,
     Popover,
+    Progress,
     Radio,
     Search,
     Segment,

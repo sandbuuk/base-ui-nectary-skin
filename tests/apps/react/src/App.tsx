@@ -13,6 +13,9 @@ import { Dialog } from './components/Dialog'
 import { DialogExample } from './components/DialogExample'
 import { Dropdown } from './components/Dropdown'
 import { Field } from './components/Field'
+import { FileDrop } from './components/FileDrop'
+import { FilePicker } from './components/FilePicker'
+import { FileStatus } from './components/FileStatus'
 import { Grid } from './components/Grid'
 import { HorizontalStepper } from './components/HorizontalStepper'
 import { IconButton } from './components/IconButton'
@@ -22,6 +25,7 @@ import { Link } from './components/Link'
 import { List } from './components/List'
 import { Pagination } from './components/Pagination'
 import { Popover } from './components/Popover'
+import { Progress } from './components/Progress'
 import { Radio } from './components/Radio'
 import { Search } from './components/Search'
 import { Segment } from './components/Segment'
@@ -141,6 +145,24 @@ const mapElement = (url: URL) => {
       )
     }
 
+    case '/file-drop': {
+      return (
+        <FileDrop search={url.searchParams}/>
+      )
+    }
+
+    case '/file-picker': {
+      return (
+        <FilePicker search={url.searchParams}/>
+      )
+    }
+
+    case '/file-status': {
+      return (
+        <FileStatus search={url.searchParams}/>
+      )
+    }
+
     case '/grid': {
       return (
         <Grid search={url.searchParams}/>
@@ -180,6 +202,12 @@ const mapElement = (url: URL) => {
     case '/popover': {
       return (
         <Popover search={url.searchParams}/>
+      )
+    }
+
+    case '/progress': {
+      return (
+        <Progress search={url.searchParams}/>
       )
     }
 

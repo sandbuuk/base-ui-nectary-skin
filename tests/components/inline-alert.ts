@@ -65,6 +65,10 @@ test('alert screenshots', runScreenshotTests('sinch-inline-alert', [
         el.text = 'Updated text'
       })
       yield { name: 'updated' }
+      await $eval((el) => {
+        el.text = null
+      })
+      yield { name: 'empty' }
     },
   },
   {
@@ -75,6 +79,10 @@ test('alert screenshots', runScreenshotTests('sinch-inline-alert', [
         el.setAttribute('text', 'Updated text')
       })
       yield { name: 'updated' }
+      await $eval((el) => {
+        el.removeAttribute('text')
+      })
+      yield { name: 'empty' }
     },
   },
   {

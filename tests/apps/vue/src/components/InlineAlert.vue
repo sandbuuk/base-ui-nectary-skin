@@ -60,7 +60,7 @@ export default {
       return this.search.get('caption') ?? ''
     },
     text() {
-      return this.search.get('text') ?? ''
+      return this.search.get('text')
     },
     type() {
       return this.search.get('type')

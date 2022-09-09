@@ -10,6 +10,7 @@ export default {
     type: { control: 'select', options: typeValues, description: 'Text type' },
     inline: { control: 'boolean', description: 'Inline or paragraph' },
     emphasized: { control: 'boolean', description: 'Emphasized or normal' },
+    ellipsis: { control: 'boolean', description: 'Prevent text wrap and show ellipsis' },
   },
   parameters: {
     docs: {
@@ -45,6 +46,7 @@ const Template = (innerHtml: string): Story => () => {
   $title.type = args.type
   $title.inline = args.inline
   $title.emphasized = args.emphasized
+  $title.ellipsis = args.ellipsis
 
   return wrapperRef.current!
 }
@@ -55,6 +57,7 @@ const textInnerHtml = `
     type={type}
     inline={isInline}
     emphasized={isEmphasized}
+    ellipsis={isEllipsis}
   >
     Paragraph text
     <sinch-link href="#" text="Link"></sinch-link>
@@ -68,6 +71,7 @@ Text.args = {
   type: 'm',
   inline: false,
   emphasized: false,
+  ellipsis: false,
 }
 
 Text.parameters = {
@@ -80,6 +84,7 @@ Text.parameters = {
     type={type}
     inline={isInline}
     emphasized={isEmphasized}
+    ellipsis={false}
   >
     Paragraph text
     <sinch-link href="#" text="Link"></sinch-link>

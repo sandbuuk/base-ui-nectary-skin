@@ -4,7 +4,7 @@ export type TSinchInlineAlertType = 'info' | 'success' | 'warn' | 'error'
 
 export type TSinchInlineAlertElement = HTMLElement & {
   type: TSinchInlineAlertType,
-  text: string,
+  text: string | null,
   caption: string,
   setAttribute(name: 'type', value: TSinchInlineAlertType): void,
   setAttribute(name: 'text', value: string): void,
@@ -13,6 +13,6 @@ export type TSinchInlineAlertElement = HTMLElement & {
 
 export type TSinchInlineAlertReact = TSinchElementReact<TSinchInlineAlertElement> & {
   type: TSinchInlineAlertType,
-  text: string,
+  text?: string,
   caption: string,
 }

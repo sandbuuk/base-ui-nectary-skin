@@ -9,6 +9,7 @@ export default {
     text: { control: 'text', description: 'Title label text' },
     type: { control: 'select', options: typeValues, description: 'Title type' },
     level: { control: 'select', options: levelValues, description: 'Title level' },
+    ellipsis: { control: 'boolean', description: 'Prevent text wrap and show ellipsis' },
   },
   parameters: {
     docs: {
@@ -38,6 +39,7 @@ const Template = (): Story => () => {
   $title.text = args.text
   $title.type = args.type
   $title.level = args.level
+  $title.ellipsis = args.ellipsis
 
   return $title
 }
@@ -48,12 +50,13 @@ Title.args = {
   text: 'Title',
   type: 'm',
   level: '3',
+  ellipsis: false,
 }
 
 Title.parameters = {
   docs: {
     source: {
-      code: '<sinch-title type="m" level="3" text="Title"></sinch-title>',
+      code: '<sinch-title type="m" level="3" text="Title" ellipsis={false}></sinch-title>',
     },
   },
 }

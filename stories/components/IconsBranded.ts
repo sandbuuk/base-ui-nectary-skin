@@ -24,6 +24,7 @@ import '@sinch-engage/nectary/icons-branded/time'
 import '@sinch-engage/nectary/icons-branded/integration'
 import '@sinch-engage/nectary/icons-branded/line-chart-up'
 import '@sinch-engage/nectary/icons-branded/line-chart-down'
+import '@sinch-engage/nectary/icons-branded/easytouse'
 import '@sinch-engage/nectary/icons-branded/chat'
 import '@sinch-engage/nectary/icons-branded/mms'
 import '@sinch-engage/nectary/icons-branded/push'
@@ -54,6 +55,7 @@ const iconNames = [
   'sinch-icon-branded-integration',
   'sinch-icon-branded-line-chart-up',
   'sinch-icon-branded-line-chart-down',
+  'sinch-icon-branded-easytouse',
   'sinch-icon-branded-chat',
   'sinch-icon-branded-push',
   'sinch-icon-branded-sms',

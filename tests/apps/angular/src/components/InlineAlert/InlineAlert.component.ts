@@ -12,7 +12,7 @@ import '@sinch-engage/nectary/icons/close'
 
 export class InlineAlertComponent {
   type?: string
-  text: string
+  text: string | null
   caption: string
   hasClose: boolean
   hasAction: boolean
@@ -20,7 +20,7 @@ export class InlineAlertComponent {
   constructor() {
     const url = new URL(location.href)
     this.type = url.searchParams.get('type') ?? undefined
-    this.text = url.searchParams.get('text') ?? ''
+    this.text = url.searchParams.get('text')
     this.caption = url.searchParams.get('caption') ?? ''
     this.hasClose = url.searchParams.get('close') != null
     this.hasAction = url.searchParams.get('action') != null

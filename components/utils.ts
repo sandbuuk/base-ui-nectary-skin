@@ -273,3 +273,21 @@ const throttle = (delayFn: (cb: (...args: any[]) => void) => any, cancelFn: (id:
   }
 
 export const throttleAnimationFrame = throttle(global.requestAnimationFrame, global.cancelAnimationFrame)
+
+export const getFirstSlotElement = (root: HTMLSlotElement): HTMLElement | null => {
+  let slot = root
+
+  while (true) {
+    const el = (slot.assignedElements() as HTMLElement[])[0]
+
+    if (el == null) {
+      return null
+    }
+
+    if (el.tagName !== 'SLOT') {
+      return el
+    }
+
+    slot = el as HTMLSlotElement
+  }
+}

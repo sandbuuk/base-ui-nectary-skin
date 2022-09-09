@@ -10,7 +10,7 @@ type TInlineAlert = {
 
 export const InlineAlert: FC<TInlineAlert> = ({ search }) => {
   const type: any = search.get('type') ?? undefined
-  const text = search.get('text') ?? ''
+  const text = search.get('text') ?? undefined
   const caption = search.get('caption') ?? ''
   const hasClose = search.get('close') != null
   const hasAction = search.get('action') != null

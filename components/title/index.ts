@@ -6,6 +6,8 @@ import {
   updateLiteralAttribute,
   getLiteralAttribute,
   NectaryElement,
+  updateBooleanAttribute,
+  getBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertLevel, assertType, typeValues } from './utils'
@@ -49,6 +51,14 @@ defineCustomElement('sinch-title', class extends NectaryElement {
 
   get type(): TSinchTitleType {
     return getLiteralAttribute(this, typeValues, 'type')
+  }
+
+  set ellipsis(isEllipsis: boolean) {
+    updateBooleanAttribute(this, 'ellipsis', isEllipsis)
+  }
+
+  get ellipsis() {
+    return getBooleanAttribute(this, 'ellipsis')
   }
 
   static get observedAttributes() {

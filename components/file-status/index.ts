@@ -1,0 +1,105 @@
+import '../spinner'
+import '../icons/check-circle'
+import '../icons/report'
+import '../icons/pending-actions'
+import '../icons/text-snippet'
+import '../text'
+import {
+  defineCustomElement,
+  getAttribute,
+  getLiteralAttribute,
+  updateAttribute,
+  updateLiteralAttribute,
+  NectaryElement,
+  updateBooleanAttribute,
+} from '../utils'
+import templateHTML from './template.html'
+import { assertType, typeValues } from './utils'
+import type { TSinchTextElement } from '../text/types'
+import type { TSinchFileStatusElement, TSinchFileStatusReact, TSinchFileStatusType } from './types'
+
+const template = document.createElement('template')
+
+template.innerHTML = templateHTML
+
+defineCustomElement('sinch-file-status', class extends NectaryElement {
+  #$filename: TSinchTextElement
+  #$contentSlot: HTMLSlotElement
+
+  constructor() {
+    super()
+
+    const shadowRoot = this.attachShadow()
+
+    shadowRoot.appendChild(template.content.cloneNode(true))
+
+    this.#$filename = shadowRoot.querySelector('#filename')!
+    this.#$contentSlot = shadowRoot.querySelector('slot[name="content"]')!
+  }
+
+  connectedCallback() {
+    this.#$contentSlot.addEventListener('slotchange', this.#onContentSlotChange)
+
+    this.#onContentSlotChange()
+  }
+
+  disconnectedCallback() {
+    this.#$contentSlot.removeEventListener('slotchange', this.#onContentSlotChange)
+  }
+
+  get type() {
+    return getLiteralAttribute(this, typeValues, 'type')
+  }
+
+  set type(value: TSinchFileStatusType) {
+    updateLiteralAttribute(this, typeValues, 'type', value)
+  }
+
+  get filename() {
+    return getAttribute(this, 'filename', '')
+  }
+
+  set filename(value: string) {
+    updateAttribute(this, 'filename', value)
+  }
+
+  static get observedAttributes() {
+    return ['filename', 'type']
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'type': {
+        assertType(newVal)
+
+        break
+      }
+
+      case 'filename': {
+        this.#$filename.textContent = newVal
+
+        break
+      }
+    }
+  }
+
+  #onContentSlotChange = () => {
+    updateBooleanAttribute(this.#$filename, 'emphasized', this.#$contentSlot.assignedElements().length > 0)
+  }
+})
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-file-status': TSinchFileStatusReact,
+    }
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-file-status': TSinchFileStatusElement,
+  }
+}

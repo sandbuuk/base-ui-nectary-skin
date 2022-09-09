@@ -116,7 +116,8 @@ sinch-table-head-cell:nth-child(2) {
 .blockquote + .blockquote,
 .blockquote + .title,
 .paragraph + .blockquote,
-.blockquote + .paragraph {
+.blockquote + .paragraph,
+.blockquote + .example {
   margin-block-start: 16px;
 }
 

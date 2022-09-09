@@ -23,6 +23,12 @@
 :host([emphasized]:not([emphasized="false"])) {
   font-weight: var(--sinch-font-weight-emphasized);
 }
+
+:host([ellipsis]:not([ellipsis="false"])) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 </style>
 
 <slot></slot>

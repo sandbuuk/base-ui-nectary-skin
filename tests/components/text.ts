@@ -17,6 +17,36 @@ test('accessibility', checkText(async function* () {
 
 test('text screenshots', runScreenshotTests('sinch-text', [
   {
+    name: 'ellipsis attribute',
+    url: withNarrowWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.setAttribute('ellipsis', '')
+      })
+      yield { name: 'set' }
+
+      await $eval((el) => {
+        el.removeAttribute('ellipsis')
+      })
+      yield { name: 'unset' }
+    },
+  },
+  {
+    name: 'ellipsis property',
+    url: withNarrowWidth,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.ellipsis = true
+      })
+      yield { name: 'set' }
+
+      await $eval((el) => {
+        el.ellipsis = false
+      })
+      yield { name: 'unset' }
+    },
+  },
+  {
     name: 'type attriute',
     url: withInline,
     async *fn({ $ }) {

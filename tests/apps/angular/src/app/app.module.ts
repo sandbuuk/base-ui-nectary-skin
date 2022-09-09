@@ -19,10 +19,14 @@ import { IconButtonComponent } from '../components/IconButton/IconButton.compone
 import { InlineAlertComponent } from '../components/InlineAlert/InlineAlert.component'
 import { InputComponent } from '../components/Input/Input.component'
 import { FieldComponent } from '../components/Field/Field.component'
+import { FileDropComponent } from '../components/FileDrop/FileDrop.component'
+import { FilePickerComponent } from '../components/FilePicker/FilePicker.component'
+import { FileStatusComponent } from '../components/FileStatus/FileStatus.component'
 import { LinkComponent } from '../components/Link/Link.component'
 import { ListComponent } from '../components/List/List.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
 import { PopoverComponent } from '../components/Popover/Popover.component'
+import { ProgressComponent } from '../components/Progress/Progress.component'
 import { RadioComponent } from '../components/Radio/Radio.component'
 import { SearchComponent } from '../components/Search/Search.component'
 import { SegmentComponent } from '../components/Segment/Segment.component'
@@ -64,10 +68,14 @@ import { AppComponent } from './app.component'
     InlineAlertComponent,
     InputComponent,
     FieldComponent,
+    FileDropComponent,
+    FilePickerComponent,
+    FileStatusComponent,
     LinkComponent,
     ListComponent,
     PaginationComponent,
     PopoverComponent,
+    ProgressComponent,
     RadioComponent,
     SearchComponent,
     SegmentComponent,

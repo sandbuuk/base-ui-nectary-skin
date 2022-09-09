@@ -3,24 +3,32 @@
   display: block;
 }
 
-:host([type="xl"]) > * {
+:host([type="xl"]) #text {
   font: var(--sinch-font-title-xl);
 }
 
-:host([type="l"]) > * {
+:host([type="l"]) #text {
   font: var(--sinch-font-title-l);
 }
 
-:host([type="m"]) > * {
+:host([type="m"]) #text {
   font: var(--sinch-font-title-m);
 }
 
-:host([type="s"]) > * {
+:host([type="s"]) #text {
   font: var(--sinch-font-title-s);
 }
 
-:host([type="xs"]) > * {
+:host([type="xs"]) #text {
   font: var(--sinch-font-title-xs);
+}
+
+:host([ellipsis]:not([ellipsis="false"])) #text {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>
 
