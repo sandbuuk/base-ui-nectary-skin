@@ -21,7 +21,6 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   #$label: HTMLElement
   #$caption: HTMLElement
   #$illustrationSlot: HTMLSlotElement
-  #$actionSlot: HTMLSlotElement
   #$illustrationSlotWrapper: HTMLElement
 
   constructor() {
@@ -36,18 +35,15 @@ defineCustomElement('sinch-card', class extends NectaryElement {
     this.#$caption = shadowRoot.querySelector('#caption')!
 
     this.#$illustrationSlot = shadowRoot.querySelector('slot[name="illustration"]')!
-    this.#$actionSlot = shadowRoot.querySelector('slot[name="action"]')!
     this.#$illustrationSlotWrapper = shadowRoot.querySelector('#illustration-wrapper')!
   }
 
   connectedCallback() {
     this.#$illustrationSlot.addEventListener('slotchange', this.#onIllustrationSlotChange)
-    this.#$actionSlot.addEventListener('slotchange', this.#updateDisabledAttributeInChildren)
   }
 
   disconnectedCallback() {
     this.#$illustrationSlot.removeEventListener('slotchange', this.#onIllustrationSlotChange)
-    this.#$actionSlot.removeEventListener('slotchange', this.#updateDisabledAttributeInChildren)
   }
 
   static get observedAttributes() {
@@ -68,11 +64,6 @@ defineCustomElement('sinch-card', class extends NectaryElement {
       }
       case 'caption': {
         updateAttribute(this.#$caption, 'text', newVal)
-
-        break
-      }
-      case 'disabled': {
-        this.#updateDisabledAttributeInChildren()
 
         break
       }
@@ -113,12 +104,6 @@ defineCustomElement('sinch-card', class extends NectaryElement {
 
   #onIllustrationSlotChange = () => {
     setClass(this.#$illustrationSlotWrapper, 'active', this.#$illustrationSlot.assignedElements().length > 0)
-  }
-
-  #updateDisabledAttributeInChildren = () => {
-    for (const $el of this.#$actionSlot.assignedElements()) {
-      updateAttribute($el, 'disabled', this.getAttribute('disabled'))
-    }
   }
 })
 
