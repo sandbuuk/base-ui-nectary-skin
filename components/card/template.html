@@ -84,8 +84,7 @@
   opacity: 0.6;
 }
 
-::slotted(sinch-card-button),
-::slotted(sinch-card-link) {
+slot[name="action"]::slotted(*) {
   margin-top: 20px;
   align-self: flex-start;
   max-width: 100%;

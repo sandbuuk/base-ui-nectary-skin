@@ -6,8 +6,8 @@
     :disabled="isDisabled">
     <sinch-icon-branded-chatbot v-if="hasIcon" slot="icon"></sinch-icon-branded-chatbot>
     <sinch-illustration-phone-and-cat v-if="hasIllustration" size="290" :background="background" valign="top" slot="illustration"></sinch-illustration-phone-and-cat>
-    <sinch-card-button v-if="buttonText !== null" :text="buttonText" slot="action"></sinch-card-button>
-    <sinch-card-link v-if="linkText !== null" :text="linkText" slot="action"></sinch-card-link>
+    <sinch-button v-if="buttonText !== null" :type="primary" :text="buttonText" slot="action"></sinch-button>
+    <sinch-link v-if="linkText !== null" :text="linkText" slot="action" preventdefault standalone></sinch-link>
   </sinch-card>
 </template>
 
@@ -15,8 +15,8 @@
 import '@sinch-engage/nectary/card'
 import '@sinch-engage/nectary/icons-branded/chatbot'
 import '@sinch-engage/nectary/illustrations/phone-and-cat'
-import '@sinch-engage/nectary/card-button'
-import '@sinch-engage/nectary/card-link'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/link'
 
 export default {
   props: {
