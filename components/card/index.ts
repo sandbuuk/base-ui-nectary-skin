@@ -1,3 +1,5 @@
+import '../title'
+import '../text'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -65,7 +67,7 @@ defineCustomElement('sinch-card', class extends NectaryElement {
         break
       }
       case 'caption': {
-        this.#$caption.textContent = newVal
+        updateAttribute(this.#$caption, 'text', newVal)
 
         break
       }
