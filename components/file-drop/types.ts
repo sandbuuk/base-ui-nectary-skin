@@ -7,6 +7,7 @@ export type TSinchFileDropElement = HTMLElement & {
   multiple: boolean,
   /** [A unique file type specifier](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers) */
   accept: string | null,
+  /** Max file size in bytes */
   size: number | null,
   /** Disabled state */
   disabled: boolean,
@@ -22,6 +23,7 @@ export type TSinchFileDropElement = HTMLElement & {
   setAttribute(name: 'multiple', value: ''): void,
   /** [A unique file type specifier](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers) */
   setAttribute(name: 'accept', value: string): void,
+  /** Max file size in bytes */
   setAttribute(name: 'size', value: string): void,
   /** Placeholder */
   setAttribute(name: 'placeholder', value: string): void,
@@ -36,6 +38,7 @@ export type TSinchFileDropReact = TSinchElementReact<TSinchFileDropElement> & {
   multiple?: boolean,
   /** [A unique file type specifier](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers) */
   accept?: string,
+  /** Max file size in bytes */
   size?: number,
   /** Disabled state */
   disabled?: boolean,

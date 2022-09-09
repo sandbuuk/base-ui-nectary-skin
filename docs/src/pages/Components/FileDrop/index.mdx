@@ -15,7 +15,7 @@ import {
 
 # File Drop
 
-File Drop encapsulates both file drop area and file picker button.
+File Drop encapsulates file drag and drop area and wraps a button with File Picker.
 
 ## Table of contents
 
@@ -49,9 +49,15 @@ Allows to choose multiple files.
 
 ### Invalid
 
-Unlike with the File Picker button it's possible to drag and drop arbitraty files (and even selected text) onto the droppable area. We provide a way to react and show an error message via `-invalid` event and mix of `invalid` and `invalidtext` attributes.
+Unlike with the File Picker button it's possible to drag and drop arbitraty files (and even selected text) onto the droppable area. There is a way to validate this and show an error message via `-invalid` event and mix of `invalid` and `invalidtext` attributes.
 
-Try to drag and drop non-`.jpg` file:
+Possible invalid things:
+
+* `size` – dropped file is too large
+* `multiple` – there must be only a single file dropped
+* `accept` – dropped file doesn't satisfy mime type or extension limitations
+
+Try to drag and drop a non-`.jpg` or larger than 1KB file:
 
 <Example Component={InvalidExample}/>
 

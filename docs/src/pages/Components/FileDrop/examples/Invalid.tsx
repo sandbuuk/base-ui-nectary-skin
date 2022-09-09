@@ -30,6 +30,7 @@ export const InvalidExample: FC = () => {
         slot="input"
         placeholder="Drag and drop to upload or"
         accept=".jpg"
+        size={1024}
         invalid={isInvalid}
         on-change={onChange}
         on-invalid={onInvalid}
