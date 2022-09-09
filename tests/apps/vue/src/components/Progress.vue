@@ -1,8 +1,8 @@
 <template>
   <sinch-progress
     :value="value"
-    :detailed="detailed"
-  ></sinch-file-status>
+    :detailed="isDetailed"
+  ></sinch-progress>
 </template>
 
 <script>

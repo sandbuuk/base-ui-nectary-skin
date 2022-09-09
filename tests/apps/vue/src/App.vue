@@ -25,6 +25,7 @@
     <List v-if="url.pathname === '/list'" :search="url.searchParams"/>
     <Pagination v-if="url.pathname === '/pagination'" :search="url.searchParams"/>
     <Popover v-if="url.pathname === '/popover'" :search="url.searchParams"/>
+    <Progress v-if="url.pathname === '/progress'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
     <Search v-if="url.pathname === '/search'" :search="url.searchParams"/>
     <Segment v-if="url.pathname === '/segment'" :search="url.searchParams"/>
@@ -73,6 +74,7 @@ import Link from './components/Link.vue'
 import List from './components/List.vue'
 import Pagination from './components/Pagination.vue'
 import Popover from './components/Popover.vue'
+import Progress from './components/Progress.vue'
 import Radio from './components/Radio.vue'
 import Search from './components/Search.vue'
 import Segment from './components/Segment.vue'
@@ -146,6 +148,7 @@ export default {
     List,
     Pagination,
     Popover,
+    Progress,
     Radio,
     Search,
     Segment,
