@@ -38,8 +38,13 @@
 }
 
 #action {
-  margin-top: -4px;
-  margin-bottom: -4px;
+  height: 24px;
+}
+
+#action ::slotted(*) {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 :host([type="pending"]) #icon-pending,
