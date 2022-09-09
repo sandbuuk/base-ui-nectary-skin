@@ -1,3 +1,16 @@
+## v0.38.0 (2022-09-09)
+
+* ➕ add `sinch-file-picker` component
+* ➕ add `sinch-file-drop` component
+* ➕ add `sinch-file-status` component
+* ➕ add `sinch-progress` component
+* ➕ add `ellipsis` attribute to `sinch-title`
+* ➕ add `ellipsis` attribute to `sinch-text`
+* ➕ add `sinch-icon-branded-easytouse` component
+* 🐞 fix `sinch-spinner` sizes
+* 🐞 make `text` optional in `sinch-inline-alert`
+* 🐞 allow multiline text in `sinch-alert`
+
 ## v0.37.0 (2022-09-02)
 
 * 💥 extract wrapper into `sinch-field` in `sinch-input`, `sinch-textarea` and `sinch-select`
