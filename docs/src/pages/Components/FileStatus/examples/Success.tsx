@@ -2,7 +2,6 @@ import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/file-status'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/delete-outline'
-import '@sinch-engage/nectary/spinner'
 
 const wrapperStyle: CSSProperties = {
   display: 'flex',
@@ -24,7 +23,15 @@ export const SuccessExample: FC = () => (
       </sinch-icon-button>
     </sinch-file-status>
     <sinch-file-status type="success" filename="image.png">
-      <sinch-spinner slot="action" type="medium"/>
+      <sinch-icon-button
+        slot="action"
+        aria-label="Delete file"
+        small
+        disabled
+        on-click={() => {}}
+      >
+        <sinch-icon-delete-outline slot="icon"/>
+      </sinch-icon-button>
     </sinch-file-status>
   </div>
 )
