@@ -32,7 +32,7 @@ export type TSinchTimePickerReact = TSinchElementReact<TSinchTimePickerElement> 
   'aria-label': string,
   /** Submit button label that is used for a11y */
   'submit-aria-label': string,
-  /** Change value handler, return time in ISO 8601 format */
+  /** @deprecated Change value handler, return time in ISO 8601 format */
   onChange?: (e: SyntheticEvent<TSinchTimePickerElement, CustomEvent<string>>) => void,
   /** Change value handler, return time in ISO 8601 format */
   'on-change'?: (e: CustomEvent<string>) => void,

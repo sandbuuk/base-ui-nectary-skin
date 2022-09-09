@@ -10,6 +10,7 @@ export type TSinchSegmentedControlElement = HTMLElement & {
 export type TSinchSegmentedControlReact = TSinchElementReact<TSinchSegmentedControlElement> & {
   value: string,
   'aria-label': string,
+  /** @deprecated */
   onChange?: (event: SyntheticEvent<TSinchSegmentedControlElement, CustomEvent<string>>) => void,
   'on-change'?: (e: CustomEvent<string>) => void,
 }

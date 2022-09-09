@@ -23,6 +23,7 @@ export type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
   disabled?: boolean,
   text?: string,
   'aria-label': string,
+  /** @deprecated */
   onChange?: (e: SyntheticEvent<TSinchToggleElement, CustomEvent<boolean>>) => void,
   'on-change'?: (e: CustomEvent<boolean>) => void,
 }

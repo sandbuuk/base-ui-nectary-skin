@@ -25,8 +25,10 @@ export type TSinchDropdownReact = TSinchElementReact<TSinchDropdownElement> & {
   value: string,
   maxVisibleItems?: number,
   'aria-label': string,
+  /** @deprecated */
   onClose?: () => void,
   'on-close'?: (e: CustomEvent<void>) => void,
+  /** @deprecated */
   onChange?: (e: SyntheticEvent<TSinchDropdownElement, CustomEvent<string>>) => void,
   'on-change'?: (e: CustomEvent<string>) => void,
 }

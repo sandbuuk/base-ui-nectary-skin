@@ -16,6 +16,7 @@ export type TSinchPaginationElement = HTMLElement & {
 export type TSinchPaginationReact = TSinchElementReact<TSinchPaginationElement> & {
   value: number,
   max: number,
+  /** @deprecated */
   onChange?: (event: SyntheticEvent<TSinchPaginationElement, CustomEvent<number>>) => void,
   'on-change': (e: CustomEvent<number>) => void,
 }
