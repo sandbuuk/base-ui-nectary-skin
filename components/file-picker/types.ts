@@ -7,6 +7,7 @@ export type TSinchFilePickerElement = HTMLElement & {
   multiple: boolean,
   /** [A unique file type specifier](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers) */
   accept: string | null,
+  /** Max file size in bytes */
   size: number | null,
   /** Change value event */
   addEventListener(type: '-change', listener: (e: CustomEvent<File[]>) => void): void,
@@ -16,6 +17,7 @@ export type TSinchFilePickerElement = HTMLElement & {
   setAttribute(name: 'multiple', value: ''): void,
   /** [A unique file type specifier](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers) */
   setAttribute(name: 'accept', value: string): void,
+  /** Max file size in bytes */
   setAttribute(name: 'size', value: string): void,
 }
 
@@ -24,6 +26,7 @@ export type TSinchFilePickerReact = TSinchElementReact<TSinchFilePickerElement> 
   multiple?: boolean,
   /** [A unique file type specifier](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers) */
   accept?: string,
+  /** Max file size in bytes */
   size?: number,
   /** Change value handler */
   'on-change': (e: CustomEvent<File[]>) => void,

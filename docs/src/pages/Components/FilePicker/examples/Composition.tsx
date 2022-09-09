@@ -4,6 +4,8 @@ import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/file-picker'
 import '@sinch-engage/nectary/file-status'
 import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icons/close'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -17,8 +19,6 @@ const statusStackStyles: CSSProperties = {
   flexDirection: 'column',
   gap: '8px',
 }
-
-const statusValues = ['progress', 'success', 'error'] as const
 
 export const CompositionExample: FC = () => {
   const [files, setFiles] = useState<File[]>([])
@@ -44,14 +44,21 @@ export const CompositionExample: FC = () => {
       </sinch-field>
       <div style={statusStackStyles}>
         {
-          files.map((file, i) => (
+          files.map((file) => (
             <sinch-file-status
               key={file.name}
               filename={file.name}
-              type={statusValues[i % 3]}
-              close-aria-label="Cancel"
-              on-click={() => {}}
-            />
+              type="loading"
+            >
+              <sinch-icon-button
+                slot="action"
+                aria-label="Close"
+                small
+                on-click={() => {}}
+              >
+                <sinch-icon-close slot="icon"/>
+              </sinch-icon-button>
+            </sinch-file-status>
           ))
         }
       </div>
