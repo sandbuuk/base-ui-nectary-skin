@@ -66,11 +66,7 @@ dialog.fixed {
 }
 
 #caption {
-  font: var(--sinch-font-title-m);
   color: var(--sinch-color-text-default);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }
 
 #content {
@@ -94,7 +90,7 @@ sinch-icon-button {
 
 <dialog>
   <div id="header">
-    <span id="caption"></span>
+    <sinch-title id="caption" type="m" level="3" ellipsis></sinch-title>
     <sinch-icon-button id="close" small tabindex="0">
       <sinch-icon-close slot="icon"></sinch-icon-close>
     </sinch-icon-button>

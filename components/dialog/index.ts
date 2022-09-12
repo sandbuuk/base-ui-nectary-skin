@@ -2,6 +2,7 @@ import dialogPolyfill from 'dialog-polyfill'
 import '../icon-button'
 import '../icons/close'
 import '../stop-events'
+import '../title'
 import {
   defineCustomElement,
   getAttribute,
@@ -70,7 +71,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'caption': {
-        this.#$caption.textContent = newVal
+        updateAttribute(this.#$caption, 'text', newVal)
 
         break
       }
