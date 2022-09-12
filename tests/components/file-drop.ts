@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
+import { centerRect, getFileChooser, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const shot = '/file-drop?width=300'
@@ -135,10 +135,7 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
 
       await subscribeToEvents(page, 'sinch-file-drop-change', 'sinch-file-drop-invalid')
 
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        page.mouse.click(buttonCenter.x, buttonCenter.y),
-      ])
+      const fileChooser = await getFileChooser(page, () => page.mouse.click(buttonCenter.x, buttonCenter.y))
 
       expect(fileChooser.isMultiple()).toBe(false)
 
@@ -173,10 +170,7 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
 
       await subscribeToEvents(page, 'sinch-file-drop-change', 'sinch-file-drop-invalid')
 
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        page.mouse.click(buttonCenter.x, buttonCenter.y),
-      ])
+      const fileChooser = await getFileChooser(page, () => page.mouse.click(buttonCenter.x, buttonCenter.y))
 
       expect(fileChooser.isMultiple()).toBe(true)
 
@@ -220,7 +214,7 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
 
       try {
         await Promise.all([
-          page.waitForEvent('filechooser', { timeout: 200 }),
+          page.waitForEvent('filechooser', { timeout: 1000 }),
           page.mouse.click(buttonCenter.x, buttonCenter.y),
         ])
       } catch {
@@ -241,10 +235,7 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
         el.size = 3
       })
 
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        page.mouse.click(buttonCenter.x, buttonCenter.y),
-      ])
+      const fileChooser = await getFileChooser(page, () => page.mouse.click(buttonCenter.x, buttonCenter.y))
 
       await fileChooser.setFiles([
         {
@@ -273,10 +264,7 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
         el.size = 10
       })
 
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        page.mouse.click(buttonCenter.x, buttonCenter.y),
-      ])
+      const fileChooser = await getFileChooser(page, () => page.mouse.click(buttonCenter.x, buttonCenter.y))
 
       await fileChooser.setFiles([
         {

@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test'
 import { piAll } from 'piall'
 import type { PlaywrightTestArgs, TestInfo } from '@playwright/test'
-import type { Locator, Page } from 'playwright-core'
+import type { FileChooser, Locator, Page } from 'playwright-core'
 
 const getRects = (locators: Locator[]): Promise<(TRect | null)[]> => {
   return Promise.all(locators.map((l) => l.boundingBox()))
@@ -274,4 +274,19 @@ export const centerRect = (rect: TRect | null): TPosition => {
     x: rect.x + rect.width / 2,
     y: rect.y + rect.height / 2,
   }
+}
+
+export const getFileChooser = async (page: Page, action: () => Promise<void>): Promise<FileChooser> => {
+  for (let i = 0; i < 5; i++) {
+    try {
+      const [fileChooser] = await Promise.all([
+        page.waitForEvent('filechooser', { timeout: 1000 }),
+        action(),
+      ])
+
+      return fileChooser
+    } catch {}
+  }
+
+  throw new Error('Should not get here')
 }

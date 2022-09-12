@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
+import { getFileChooser, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const shot = '/file-picker?width=300'
@@ -50,10 +50,7 @@ test('file-picker screenshots', runScreenshotTests('sinch-file-picker', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-file-picker-change')
 
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        $.click(),
-      ])
+      const fileChooser = await getFileChooser(page, () => $.click())
 
       expect(fileChooser.isMultiple()).toBe(false)
 
@@ -86,10 +83,7 @@ test('file-picker screenshots', runScreenshotTests('sinch-file-picker', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-file-picker-change')
 
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        $.click(),
-      ])
+      const fileChooser = await getFileChooser(page, () => $.click())
 
       expect(fileChooser.isMultiple()).toBe(true)
 
@@ -134,10 +128,7 @@ test('file-picker screenshots', runScreenshotTests('sinch-file-picker', [
         el.size = 3
       })
 
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        $.click(),
-      ])
+      const fileChooser = await getFileChooser(page, () => $.click())
 
       await fileChooser.setFiles([
         {
@@ -164,10 +155,7 @@ test('file-picker screenshots', runScreenshotTests('sinch-file-picker', [
         el.size = 10
       })
 
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        $.click(),
-      ])
+      const fileChooser = await getFileChooser(page, () => $.click())
 
       await fileChooser.setFiles([
         {
@@ -199,10 +187,7 @@ test('file-picker screenshots', runScreenshotTests('sinch-file-picker', [
         el.size = 0
       })
 
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        $.click(),
-      ])
+      const fileChooser = await getFileChooser(page, () => $.click())
 
       await fileChooser.setFiles([
         {
