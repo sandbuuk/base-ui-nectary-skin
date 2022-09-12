@@ -117,7 +117,16 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['value', 'min', 'max', 'locale']
+    return [
+      'value',
+      'min',
+      'max',
+      'locale',
+      'prev-year-aria-label',
+      'next-year-aria-label',
+      'prev-month-aria-label',
+      'next-month-aria-label',
+    ]
   }
 
   attributeChangedCallback(name: string, prevValue: string | null, newVal: string | null) {
@@ -193,6 +202,30 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
         break
       }
+
+      case 'prev-year-aria-label': {
+        updateAttribute(this.#$prevYear, 'aria-label', newVal)
+
+        break
+      }
+
+      case 'next-year-aria-label': {
+        updateAttribute(this.#$nextYear, 'aria-label', newVal)
+
+        break
+      }
+
+      case 'prev-month-aria-label': {
+        updateAttribute(this.#$prevMonth, 'aria-label', newVal)
+
+        break
+      }
+
+      case 'next-month-aria-label': {
+        updateAttribute(this.#$nextMonth, 'aria-label', newVal)
+
+        break
+      }
     }
   }
 
@@ -230,6 +263,22 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
   get max(): string {
     return getAttribute(this, 'max', '')
+  }
+
+  set prevMonthAriaLabel(value: string) {
+    updateAttribute(this, 'prev-month-aria-label', value)
+  }
+
+  get prevMonthAriaLabel(): string {
+    return getAttribute(this, 'prev-month-aria-label', '')
+  }
+
+  set nextMonthAriaLabel(value: string) {
+    updateAttribute(this, 'next-month-aria-label', value)
+  }
+
+  get nextMonthAriaLabel(): string {
+    return getAttribute(this, 'next-month-aria-label', '')
   }
 
   get prevYearButtonRect(): TRect {

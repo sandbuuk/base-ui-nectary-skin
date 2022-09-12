@@ -5,8 +5,6 @@
     :max="max"
     :value="value"
     @--change="onChange"
-    @focusin="onFocus"
-    @focusout="onBlur"
   ></sinch-date-picker>
 </template>
 
@@ -20,12 +18,6 @@ export default {
         this.value = e.detail
         window.dispatchEvent(new CustomEvent('sinch-date-picker-change', {detail: e.detail}))
       }
-    },
-    onFocus() {
-      window.dispatchEvent(new CustomEvent('sinch-date-picker-focus'))
-    },
-    onBlur() {
-      window.dispatchEvent(new CustomEvent('sinch-date-picker-blur'))
     }
   },
   props: {
