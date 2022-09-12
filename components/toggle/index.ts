@@ -27,13 +27,12 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$input = shadowRoot.querySelector('input')!
-    this.#$label = shadowRoot.querySelector('label')!
+    this.#$input = shadowRoot.querySelector('#input')!
+    this.#$label = shadowRoot.querySelector('#label')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
-    this.setAttribute('aria-label', 'toggle')
     this.#$input.addEventListener('input', this.#onInput)
     this.#$input.addEventListener('focus', this.#onCheckboxFocus)
     this.#$input.addEventListener('blur', this.#onCheckboxBlur)
