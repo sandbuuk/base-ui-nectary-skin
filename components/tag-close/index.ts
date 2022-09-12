@@ -23,6 +23,10 @@ defineCustomElement('sinch-tag-close', class extends NectaryElement {
     this.#$button = shadowRoot.querySelector('button')!
   }
 
+  connectedCallback() {
+    this.setAttribute('role', 'button')
+  }
+
   focus() {
     this.#$button.focus()
   }
