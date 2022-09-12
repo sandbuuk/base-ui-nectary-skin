@@ -11,7 +11,7 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import { categoryValues } from './utils'
+import { assertCategoryValue, categoryValues } from './utils'
 import type { TSinchTagCategory, TSinchTagElement, TSinchTagReact } from './types'
 
 const template = document.createElement('template')
@@ -64,11 +64,17 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text']
+    return ['text', 'category']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
+      case 'category': {
+        assertCategoryValue(newVal)
+
+        break
+      }
+
       case 'text': {
         this.#$text.textContent = newVal
 
