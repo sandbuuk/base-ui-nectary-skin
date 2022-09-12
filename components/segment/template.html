@@ -30,11 +30,7 @@
 }
 
 #caption {
-  font: var(--sinch-font-title-l);
   color: var(--sinch-color-text-default);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   min-width: 1em;
 }
 
@@ -110,7 +106,7 @@
 <div id="wrapper">
   <div id="header">
     <slot name="icon"></slot>
-    <sinch-title id="caption" level="3" type="m"></sinch-title>
+    <sinch-title id="caption" level="3" type="m" ellipsis></sinch-title>
     <div id="preview">
       <slot name="preview"></slot>
     </div>
