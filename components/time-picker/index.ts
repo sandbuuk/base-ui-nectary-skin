@@ -188,7 +188,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
       }
 
       case 'submit-aria-label': {
-        this.#$submitButton.ariaLabel = newVal
+        updateAttribute(this.#$submitButton, 'aria-label', newVal)
 
         break
       }
@@ -213,6 +213,14 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
 
   get ampm(): boolean {
     return getBooleanAttribute(this, 'ampm')
+  }
+
+  set submitAriaLabel(value: string) {
+    updateAttribute(this, 'submit-aria-label', value)
+  }
+
+  get submitAriaLabel(): string {
+    return getAttribute(this, 'submit-aria-label', '')
   }
 
   get submitButtonRect(): TRect {
