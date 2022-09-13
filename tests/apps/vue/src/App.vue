@@ -41,6 +41,7 @@
     <TileControl v-if="url.pathname === '/tile-control'" :search="url.searchParams"/>
     <TimePicker v-if="url.pathname === '/time-picker'" :search="url.searchParams"/>
     <Title v-if="url.pathname === '/title'" :search="url.searchParams"/>
+    <ToastManager v-if="url.pathname === '/toast-manager'" :search="url.searchParams"/>
     <Toggle v-if="url.pathname === '/toggle'" :search="url.searchParams"/>
     <Tooltip v-if="url.pathname === '/tooltip'" :search="url.searchParams"/>
     <VerticalStepper v-if="url.pathname === '/vertical-stepper'" :search="url.searchParams"/>
@@ -90,6 +91,7 @@ import Textarea from './components/Textarea.vue'
 import TileControl from './components/TileControl.vue'
 import TimePicker from './components/TimePicker.vue'
 import Title from './components/Title.vue'
+import ToastManager from './components/ToastManager.vue'
 import Toggle from './components/Toggle.vue'
 import Tooltip from './components/Tooltip.vue'
 import VerticalStepper from './components/VerticalStepper.vue'
@@ -164,6 +166,7 @@ export default {
     TileControl,
     TimePicker,
     Title,
+    ToastManager,
     Toggle,
     Tooltip,
     VerticalStepper,

@@ -1,0 +1,83 @@
+<style>
+:host {
+  display: block;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  width: 328px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  border-radius: var(--sinch-shape-radius-l);
+  box-shadow: var(--sinch-elevation-level-3);
+}
+
+#text {
+  color: var(--sinch-color-stormy-500);
+  padding: 4px 0 4px 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+#icon-info,
+#icon-success,
+#icon-warn,
+#icon-error {
+  display: none;
+  align-self: flex-start;
+  margin: 4px 0;
+}
+
+:host([type="success"]) #wrapper {
+  background-color: var(--sinch-color-success-200);
+}
+
+:host([type="warn"]) #wrapper {
+  background-color: var(--sinch-color-warning-200);
+}
+
+:host([type="error"]) #wrapper {
+  background-color: var(--sinch-color-error-200);
+}
+
+:host([type="info"]) #wrapper {
+  background-color: var(--sinch-color-informative-200);
+}
+
+:host([type="success"]) #icon-success {
+  display: block;
+
+  --sinch-color-icon: var(--sinch-color-success-500);
+}
+
+:host([type="warn"]) #icon-warn {
+  display: block;
+
+  --sinch-color-icon: var(--sinch-color-warning-500);
+}
+
+:host([type="error"]) #icon-error {
+  display: block;
+
+  --sinch-color-icon: var(--sinch-color-error-500);
+}
+
+:host([type="info"]) #icon-info {
+  display: block;
+
+  --sinch-color-icon: var(--sinch-color-informative-500);
+}
+</style>
+
+<div id="wrapper">
+  <sinch-icon-info id="icon-info"></sinch-icon-info>
+  <sinch-icon-check-circle id="icon-success"></sinch-icon-check-circle>
+  <sinch-icon-report-problem id="icon-warn"></sinch-icon-report-problem>
+  <sinch-icon-report id="icon-error"></sinch-icon-report>
+  <sinch-text id="text" type="m"></sinch-text>
+  <slot name="action"></slot>
+  <slot name="close"></slot>
+</div>
