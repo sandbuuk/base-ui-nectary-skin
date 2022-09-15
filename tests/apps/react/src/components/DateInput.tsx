@@ -69,6 +69,10 @@ export const DateInput: FC<TDateInput> = ({ search }) => {
         value={isoValue}
         on-change={onIsoChange}
         aria-label="Date Picker"
+        next-month-aria-label="Next month"
+        prev-month-aria-label="Prev month"
+        next-year-aria-label="Next year"
+        prev-year-aria-label="Prev year"
       />
     </sinch-popover>
   )

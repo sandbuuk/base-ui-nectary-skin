@@ -2,8 +2,8 @@ import type { FC } from 'react'
 import '@sinch-engage/nectary/card'
 import '@sinch-engage/nectary/icons-branded/chatbot'
 import '@sinch-engage/nectary/illustrations/phone-and-cat'
-import '@sinch-engage/nectary/card-button'
-import '@sinch-engage/nectary/card-link'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/link'
 
 type TCard = {
   search: URLSearchParams,
@@ -29,8 +29,25 @@ export const Card: FC<TCard> = ({ search }) => {
     >
       {hasIcon && <sinch-icon-branded-chatbot slot="icon"/>}
       {hasIllustration && <sinch-illustration-phone-and-cat size={290} valign="top" slot="illustration" background={background}/>}
-      {buttonText !== null && <sinch-card-button slot="action" text={buttonText} aria-label="Button" onClick={() => {}}/>}
-      {linkText !== null && <sinch-card-link slot="action" href="" text={linkText}/>}
+      {buttonText !== null && (
+        <sinch-button
+          slot="action"
+          type="primary"
+          text={buttonText}
+          aria-label="Button"
+          onClick={() => {}}
+        />
+      )}
+      {linkText !== null && (
+        <sinch-link
+          slot="action"
+          href="#"
+          standalone
+          preventDefault
+          text={linkText}
+          aria-label="Link"
+        />
+      )}
     </sinch-card>
   )
 }

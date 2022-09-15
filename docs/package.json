@@ -9,7 +9,9 @@
   "dependencies": {
     "@sinch-engage/nectary": "workspace:@sinch-engage/nectary@*",
     "array-includes": "^3.1.5",
+    "array.prototype.concat": "^1.0.2",
     "history": "^5.3.0",
+    "nanoid": "^4.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "url-slug": "^3.0.4"

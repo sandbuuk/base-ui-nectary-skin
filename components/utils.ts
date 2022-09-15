@@ -291,3 +291,27 @@ export const getFirstSlotElement = (root: HTMLSlotElement): HTMLElement | null =
     slot = el as HTMLSlotElement
   }
 }
+
+export const cloneNode = (el: Element, deep: boolean): Element => {
+  const root = el.getRootNode()
+
+  if (root !== document && Reflect.has(root, 'createElement')) {
+    const cloned = (root as Document).createElement(el.tagName.toLowerCase())
+
+    for (const attr of el.getAttributeNames()) {
+      cloned.setAttribute(attr, el.getAttribute(attr)!)
+    }
+
+    if (deep) {
+      for (let i = 0; i < el.children.length; i++) {
+        const clonedChild = cloneNode(el.children[i], deep)
+
+        cloned.appendChild(clonedChild)
+      }
+    }
+
+    return cloned
+  }
+
+  return el.cloneNode(deep) as Element
+}

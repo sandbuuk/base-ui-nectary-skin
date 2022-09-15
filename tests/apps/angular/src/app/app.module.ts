@@ -42,6 +42,7 @@ import { TextComponent } from '../components/Text/Text.component'
 import { TileControlComponent } from '../components/TileControl/TileControl.component'
 import { TimePickerComponent } from '../components/TimePicker/TimePicker.component'
 import { TitleComponent } from '../components/Title/Title.component'
+import { ToastManagerComponent } from '../components/ToastManager/ToastManager.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { VerticalStepper } from '../components/VerticalStepper/VerticalStepper.component'
@@ -91,6 +92,7 @@ import { AppComponent } from './app.component'
     TileControlComponent,
     TimePickerComponent,
     TitleComponent,
+    ToastManagerComponent,
     ToggleComponent,
     TooltipComponent,
     VerticalStepper,

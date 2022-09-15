@@ -35,12 +35,7 @@
 }
 
 #label {
-  margin: 0;
-  font: var(--sinch-font-title-xs);
   color: var(--sinch-color-stormy-300);
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 #label:empty {
@@ -57,18 +52,12 @@
 }
 
 #caption {
-  font: var(--sinch-font-title-m);
   color: var(--sinch-color-stormy-500);
   flex: 1;
   min-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 #description {
-  margin: 0;
-  font: var(--sinch-font-body);
   color: var(--sinch-color-stormy-500);
   flex: 1;
   min-height: 0;
@@ -84,8 +73,7 @@
   opacity: 0.6;
 }
 
-::slotted(sinch-card-button),
-::slotted(sinch-card-link) {
+slot[name="action"]::slotted(*) {
   margin-top: 20px;
   align-self: flex-start;
   max-width: 100%;
@@ -97,12 +85,12 @@
     <slot name="illustration"></slot>
   </div>
   <div id="card-body">
-    <p id="label"></p>
+    <sinch-text id="label" type="s" emphasized ellipsis></sinch-text>
     <div id="header">
       <slot name="icon"></slot>
-      <span id="caption"></span>
+      <sinch-title id="caption" type="m" level="3" ellipsis></sinch-title>
     </div>
-    <p id="description"></p>
+    <sinch-text id="description" type="m"></sinch-text>
     <slot name="action"></slot>
   </div>
 </div>

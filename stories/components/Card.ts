@@ -2,8 +2,8 @@ import { useArgs, useRef } from '@storybook/addons'
 import { useWidthWrapper } from '../use-story-wrapper'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/card'
-import '@sinch-engage/nectary/card-button'
-import '@sinch-engage/nectary/card-link'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/link'
 import '@sinch-engage/nectary/illustrations/phone-and-cat'
 import '@sinch-engage/nectary/icons-branded/chatbot'
 
@@ -41,9 +41,19 @@ const Template = (innerHTML: string = ''): Story => () => {
 }
 
 const cardInnerHTML = `
-  <sinch-illustration-phone-and-cat slot="illustration" size="290" background="green"></sinch-illustration-phone-and-cat>
   <sinch-icon-branded-chatbot slot="icon"></sinch-icon-branded-chatbot>
-  <sinch-card-link slot="action" href="" text="Click here link"></sinch-card-link>
+  <sinch-illustration-phone-and-cat
+    slot="illustration"
+    size="290"
+    background="green"
+  ></sinch-illustration-phone-and-cat>
+  <sinch-link
+    slot="action"
+    href=""
+    preventdefault
+    standalone
+    text="Click here link"
+  ></sinch-link>
 `
 
 export const Card = Template(cardInnerHTML)
@@ -64,9 +74,17 @@ Card.parameters = {
 }
 
 const withButtonInnerHTML = `
-  <sinch-illustration-phone-and-cat slot="illustration" size="290"></sinch-illustration-phone-and-cat>
+  <sinch-illustration-phone-and-cat
+    slot="illustration"
+    size="290"
+  ></sinch-illustration-phone-and-cat>
   <sinch-icon-branded-chatbot slot="icon"></sinch-icon-branded-chatbot>
-  <sinch-card-button slot="action" text="Click here link" onClick={noop}></sinch-card-button>
+  <sinch-button
+    slot="action"
+    type="primary"
+    text="Click here link"
+    onClick={noop}
+  ></sinch-button>
 `
 
 export const CardWithButton = Template(withButtonInnerHTML)
@@ -88,7 +106,7 @@ CardWithButton.parameters = {
 
 const cardIconInnerHTML = `
   <sinch-icon-branded-chatbot slot="icon"></sinch-icon-branded-chatbot>
-  <sinch-card-button slot="action" text="Click here link" onClick={noop}></sinch-card-button>
+  <sinch-button slot="action" type="primary" text="Click here link" onClick={noop}></sinch-button>
 `
 
 export const IconCard = Template(cardIconInnerHTML)

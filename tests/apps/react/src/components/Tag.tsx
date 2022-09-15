@@ -29,6 +29,7 @@ export const Tag: FC<TTag> = ({ search }) => {
       {isDismissable && (
         <sinch-tag-close
           slot="close"
+          aria-label="Close"
           onClick={onClick}
           onFocus={onFocus}
           onBlur={onBlur}

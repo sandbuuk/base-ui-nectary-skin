@@ -3,6 +3,7 @@ import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const contentWidth = '/toggle?text=Label'
+const contentWidthSmall = '/toggle?text=Label&small=true'
 const narrowWidth = '/toggle?width=150&text=Label%20long%20long%20long%20long'
 const checked = '/toggle?text=Label&checked=true'
 const disabled = '/toggle?text=Label&disabled=true&checked=true'
@@ -189,6 +190,22 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
     url: narrowWidth,
     async *fn() {
       yield { name: 'clip' }
+    },
+  },
+  {
+    name: 'keyboard focus',
+    url: contentWidth,
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'keyboard focus small',
+    url: contentWidthSmall,
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
+      yield { name: 'shot' }
     },
   },
   {

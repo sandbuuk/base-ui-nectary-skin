@@ -11,6 +11,7 @@ export type TSinchRadioElement = HTMLElement & {
 export type TSinchRadioReact = TSinchElementReact<TSinchRadioElement> & {
   value: string,
   'aria-label': string,
+  /** @deprecated */
   onChange?: (event: SyntheticEvent<TSinchRadioElement, CustomEvent<boolean>>) => void,
   'on-change'?: (e: CustomEvent<string>) => void,
 }

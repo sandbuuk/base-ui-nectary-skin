@@ -13,12 +13,12 @@
       </sinch-grid-item>
       <sinch-grid-item slot="item" xl="3" l="4" m="4" s="2">
         <sinch-card slot="content" caption="Card" :text="text">
-          <sinch-card-link href="#" text="Link" slot="action"></sinch-card-link>
+          <sinch-link href="#" text="Link" slot="action" preventdefault standalone></sinch-link>
         </sinch-card>
       </sinch-grid-item>
       <sinch-grid-item slot="item" xl="3" l="4" m="4" s="2">
         <sinch-card slot="content" caption="Card" :text="text">
-          <sinch-card-button text="Button" slot="action"></sinch-card-button>
+          <sinch-button type="primary" text="Button" slot="action"></sinch-button>
         </sinch-card>
       </sinch-grid-item>
     </sinch-grid>
@@ -33,8 +33,8 @@ import '@sinch-engage/nectary/grid-item'
 import '@sinch-engage/nectary/illustrations/phone-and-cat'
 import '@sinch-engage/nectary/icons-branded/chatbot'
 import '@sinch-engage/nectary/card'
-import '@sinch-engage/nectary/card-link'
-import '@sinch-engage/nectary/card-button'
+import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/button'
 
 export default {
   props: {

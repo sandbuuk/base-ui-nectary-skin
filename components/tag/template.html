@@ -76,15 +76,12 @@
 }
 
 #text {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   flex: 1;
 }
 </style>
 
 <div id="wrapper">
   <slot name="icon"></slot>
-  <span id="text"></span>
+  <sinch-text id="text" type="xs" ellipsis></sinch-text>
   <slot name="close"></slot>
 </div>

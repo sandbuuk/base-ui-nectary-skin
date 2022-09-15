@@ -1,5 +1,5 @@
-import '@webcomponents/scoped-custom-element-registry'
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+import '@webcomponents/scoped-custom-element-registry'
 import '@sinch-engage/nectary/theme.css'
 import { render } from 'react-dom'
 import { App } from './App'

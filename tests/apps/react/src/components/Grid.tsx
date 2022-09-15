@@ -5,8 +5,8 @@ import '@sinch-engage/nectary/grid-item'
 import '@sinch-engage/nectary/illustrations/phone-and-cat'
 import '@sinch-engage/nectary/icons-branded/chatbot'
 import '@sinch-engage/nectary/card'
-import '@sinch-engage/nectary/card-link'
-import '@sinch-engage/nectary/card-button'
+import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/button'
 
 type TGrid = {
   search: URLSearchParams,
@@ -30,12 +30,12 @@ export const Grid: FC<TGrid> = () => {
         </sinch-grid-item>
         <sinch-grid-item slot="item" xl={3} l={4} m={4} s={2}>
           <sinch-card slot="content" caption="Card" text={text}>
-            <sinch-card-link href="#" text="Link" slot="action"/>
+            <sinch-link href="#" text="Link" standalone preventDefault slot="action" aria-label="Link"/>
           </sinch-card>
         </sinch-grid-item>
         <sinch-grid-item slot="item" xl={3} l={4} m={4} s={2}>
           <sinch-card slot="content" caption="Card" text={text}>
-            <sinch-card-button aria-label="Button" onClick={() => {}} text="Button" slot="action"/>
+            <sinch-button type="primary" aria-label="Button" onClick={() => {}} text="Button" slot="action"/>
           </sinch-card>
         </sinch-grid-item>
       </sinch-grid>

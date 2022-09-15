@@ -10,6 +10,14 @@ export type TSinchDatePickerElement = HTMLElement & {
   max: string,
   /** BCP 47 language tag (e.g. en-US), which changes day and month display names in the calendar */
   locale: string,
+  /** Label that is used for a11y */
+  prevYearAriaLabel: string,
+  /** Label that is used for a11y */
+  nextYearAriaLabel: string,
+  /** Label that is used for a11y */
+  prevMonthAriaLabel: string,
+  /** Label that is used for a11y */
+  nextMonthAriaLabel: string,
   readonly prevYearButtonRect: TRect,
   readonly nextYearButtonRect: TRect,
   readonly prevMonthButtonRect: TRect,
@@ -25,6 +33,14 @@ export type TSinchDatePickerElement = HTMLElement & {
   setAttribute(name: 'max', value: string): void,
   /** BCP 47 language tag (e.g. en-US), which changes day and month display names in the calendar */
   setAttribute(name: 'locale', value: string): void,
+  /** Label that is used for a11y */
+  setAttribute(name: 'prev-year-aria-label', value: string): void,
+  /** Label that is used for a11y */
+  setAttribute(name: 'next-year-aria-label', value: string): void,
+  /** Label that is used for a11y */
+  setAttribute(name: 'prev-month-aria-label', value: string): void,
+  /** Label that is used for a11y */
+  setAttribute(name: 'next-month-aria-label', value: string): void,
 }
 
 export type TSinchDatePickerReact = TSinchElementReact<TSinchDatePickerElement> & {
@@ -38,7 +54,15 @@ export type TSinchDatePickerReact = TSinchElementReact<TSinchDatePickerElement> 
   locale: string,
   /** Label that is used for a11y */
   'aria-label': string,
-  /** Change value handler, return date in ISO 8601 format */
+  /** Label that is used for a11y */
+  'prev-year-aria-label': string,
+  /** Label that is used for a11y */
+  'next-year-aria-label': string,
+  /** Label that is used for a11y */
+  'prev-month-aria-label': string,
+  /** Label that is used for a11y */
+  'next-month-aria-label': string,
+  /** @deprecated Change value handler, return date in ISO 8601 format */
   onChange?: (e: SyntheticEvent<TSinchDatePickerElement, CustomEvent<string>>) => void,
   /** Change value handler, return date in ISO 8601 format */
   'on-change'?: (e: CustomEvent<string>) => void,

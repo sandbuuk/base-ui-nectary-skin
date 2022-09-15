@@ -11,6 +11,7 @@ export type TSinchSegmentExpandElement = HTMLElement & {
 export type TSinchSegmentExpandReact = TSinchElementReact<TSinchSegmentExpandElement> & {
   value: boolean,
   'aria-label': string,
+  /** @deprecated */
   onChange?: (e: SyntheticEvent<TSinchSegmentExpandElement, CustomEvent<boolean>>) => void,
   'on-change'?: (e: CustomEvent<boolean>) => void,
 }

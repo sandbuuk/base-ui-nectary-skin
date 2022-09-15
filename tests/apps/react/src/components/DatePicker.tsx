@@ -23,7 +23,11 @@ export const DatePicker: FC<TDatePicker> = ({ search }) => {
       min={min}
       max={max}
       locale={locale}
-      aria-label="Date input"
+      aria-label="Date picker"
+      prev-month-aria-label="Previous month"
+      next-month-aria-label="Next month"
+      prev-year-aria-label="Previous year"
+      next-year-aria-label="Next year"
       value={value}
       on-change={onChange}
     />

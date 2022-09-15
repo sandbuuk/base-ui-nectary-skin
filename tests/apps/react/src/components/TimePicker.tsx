@@ -19,8 +19,8 @@ export const TimePicker: FC<TTimePicker> = ({ search }) => {
 
   return (
     <sinch-time-picker
-      aria-label="time input"
-      submit-aria-label="submit time"
+      aria-label="Time input"
+      submit-aria-label="Submit time"
       ampm={isAmpm}
       value={value}
       on-change={onChange}

@@ -6,6 +6,8 @@ export type TSinchTimePickerElement = HTMLElement & {
   value: string,
   /** AM/PM 12-hour clock system, `false` by default */
   ampm: boolean,
+  /** Submit button label that is used for a11y */
+  submitAriaLabel: string,
   readonly submitButtonRect: TRect,
   readonly amButtonRect: TRect | null,
   readonly pmButtonRect: TRect | null,
@@ -17,6 +19,8 @@ export type TSinchTimePickerElement = HTMLElement & {
   setAttribute(name: 'value', value: string): void,
   /** AM/PM 12-hour clock system, `false` by default */
   setAttribute(name: 'ampm', value: boolean): void,
+  /** Submit button label that is used for a11y */
+  setAttribute(name: 'submit-aria-label', value: string): void,
 }
 
 export type TSinchTimePickerReact = TSinchElementReact<TSinchTimePickerElement> & {
@@ -28,7 +32,7 @@ export type TSinchTimePickerReact = TSinchElementReact<TSinchTimePickerElement> 
   'aria-label': string,
   /** Submit button label that is used for a11y */
   'submit-aria-label': string,
-  /** Change value handler, return time in ISO 8601 format */
+  /** @deprecated Change value handler, return time in ISO 8601 format */
   onChange?: (e: SyntheticEvent<TSinchTimePickerElement, CustomEvent<string>>) => void,
   /** Change value handler, return time in ISO 8601 format */
   'on-change'?: (e: CustomEvent<string>) => void,

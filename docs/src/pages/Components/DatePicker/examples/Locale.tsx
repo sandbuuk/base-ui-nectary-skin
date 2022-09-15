@@ -54,6 +54,10 @@ export const LocaleExample: FC = () => {
         max="2025-07-19"
         locale="sv-SE"
         aria-label="Date Picker"
+        next-month-aria-label="Next Month"
+        prev-month-aria-label="Next Month"
+        next-year-aria-label="Next Year"
+        prev-year-aria-label="Prev Year"
         value={isoValue}
         on-change={onIsoChange}
       />

@@ -13,6 +13,7 @@ export type TSinchSegmentedIconControlReact = TSinchElementReact<TSinchSegmented
   value: string,
   multiple?: boolean,
   'aria-label': string,
+  /** @deprecated */
   onChange?: (event: SyntheticEvent<TSinchSegmentedIconControlElement, CustomEvent<string>>) => void,
   'on-change'?: (e: CustomEvent<string>) => void,
 }

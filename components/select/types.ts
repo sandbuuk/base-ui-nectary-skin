@@ -44,7 +44,7 @@ export type TSinchSelectReact = TSinchElementReact<TSinchSelectElement> & {
   disabled?: boolean,
   /** Number of visible at the same time options in the list */
   maxVisibleItems?: number,
-  /** Change value handler */
+  /** @deprecated Change value handler */
   onChange?: (e: SyntheticEvent<TSinchSelectElement, CustomEvent<string>>) => void,
   /** Change value handler */
   'on-change'?: (e: CustomEvent<string>) => void,

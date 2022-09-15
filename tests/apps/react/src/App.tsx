@@ -42,6 +42,8 @@ import { TileControl } from './components/TileControl'
 import { TimeInput } from './components/TimeInput'
 import { TimePicker } from './components/TimePicker'
 import { Title } from './components/Title'
+import { Toast } from './components/Toast'
+import { ToastManager } from './components/ToastManager'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { VerticalStepper } from './components/VerticalStepper'
@@ -298,6 +300,18 @@ const mapElement = (url: URL) => {
     case '/title': {
       return (
         <Title search={url.searchParams}/>
+      )
+    }
+
+    case '/toast': {
+      return (
+        <Toast search={url.searchParams}/>
+      )
+    }
+
+    case '/toast-manager': {
+      return (
+        <ToastManager search={url.searchParams}/>
       )
     }
 

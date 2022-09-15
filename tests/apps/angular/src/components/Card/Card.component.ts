@@ -1,10 +1,9 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/card'
-import '@sinch-engage/nectary/card-link'
-import '@sinch-engage/nectary/card-button'
+import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/illustrations/phone-and-cat'
 import '@sinch-engage/nectary/icons-branded/chatbot'
-import '@sinch-engage/nectary/icons/arrow-forward'
 
 @Component({
   selector: 'card-component',

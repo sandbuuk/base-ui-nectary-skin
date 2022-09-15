@@ -12,6 +12,7 @@ export type TSinchAccordionElement = HTMLElement & {
 export type TSinchAccordionReact = TSinchElementReact<TSinchAccordionElement> & {
   multiple?: boolean,
   value: string,
+  /** @deprecated */
   onChange?: (e: SyntheticEvent<TSinchAccordionElement, CustomEvent<string>>) => void,
   'on-change'?: (e: CustomEvent<string>) => void,
 }
