@@ -2,8 +2,8 @@ import { useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/grid'
 import '@sinch-engage/nectary/card'
-import '@sinch-engage/nectary/card-button'
-import '@sinch-engage/nectary/card-link'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/link'
 import '@sinch-engage/nectary/illustrations/phone-and-cat'
 import '@sinch-engage/nectary/icons-branded/chatbot'
 
@@ -36,12 +36,12 @@ const gridInnerHTML = `
   </sinch-grid-item>
   <sinch-grid-item slot="item" xl="3" l="4" m="4" s="2">
     <sinch-card slot="content" header="Card" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
-      <sinch-card-link href="#" text="Link" slot="action"></sinch-card-link>
+      <sinch-link href="#" preventdefault standalone text="Link" slot="action"></sinch-link>
     </sinch-card>
   </sinch-grid-item>
   <sinch-grid-item slot="item" xl="3" l="4" m="4" s="2">
     <sinch-card slot="content" header="Card" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
-      <sinch-card-button text="Button" slot="action"></sinch-card-button>
+      <sinch-button slot="action" type="primary" text="Button"></sinch-button>
     </sinch-card>
   </sinch-grid-item>
 `

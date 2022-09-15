@@ -7,9 +7,9 @@ const shot = '/toast-manager'
 const checkValue = makeAccessibilityTests('/toast-manager', 'sinch-toast-manager')
 const getRect = (page: Page) => page.locator('sinch-toast-manager').evaluate((el) => (el as any).containerRect)
 
-// test('accessibility', checkValue(async function* () {
-//   yield
-// }))
+test('accessibility', checkValue(async function* () {
+  yield
+}))
 
 test('toast-manager screenshots', runScreenshotTests('sinch-toast-manager', [
   {

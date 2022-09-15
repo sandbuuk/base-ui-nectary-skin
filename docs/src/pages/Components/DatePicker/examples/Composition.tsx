@@ -61,6 +61,10 @@ export const CompositionExample: FC = () => {
         max="2025-07-19"
         locale="en-US"
         aria-label="Date Picker"
+        next-month-aria-label="Next Month"
+        prev-month-aria-label="Next Month"
+        next-year-aria-label="Next Year"
+        prev-year-aria-label="Prev Year"
         value={isoValue}
         on-change={onIsoChange}
       />
