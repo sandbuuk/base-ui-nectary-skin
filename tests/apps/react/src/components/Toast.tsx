@@ -10,7 +10,7 @@ type TToast = {
 
 export const Toast: FC<TToast> = ({ search }) => {
   const type: any = search.get('type') ?? undefined
-  const text = search.get('text') ?? undefined
+  const text = search.get('text') ?? ''
   const hasClose = search.get('close') != null
   const hasAction = search.get('action') != null
 
