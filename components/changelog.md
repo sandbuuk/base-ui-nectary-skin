@@ -1,3 +1,13 @@
+## v0.39.0 (2022-09-15)
+
+* 💥 require aria-label for each button in `sinch-date-picker`
+* 💥 require `aria-label` in `tag-close`
+* 💥 stop propagating `disabled` to slotted elements in `sinch-card`
+* 💥 remove `sinch-card-button` and `sinch-card-link` subcomponents
+* 💥 remove deprecated `sinch-search` and `sinch-search-option` components
+* ➕ add `sinch-toast-manager` and `sinch-toast` components
+* 🐞 fix styles in `sinch-toggle`
+
 ## v0.38.0 (2022-09-09)
 
 * ➕ add `sinch-file-picker` component
