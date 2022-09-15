@@ -142,6 +142,12 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
 
     pages.forEach(overridePageKeyboard)
 
+    // Optionally subscribe to page console output
+    // pages.forEach((page) => {
+    //   page.on('console', (msg) => console.log(msg.text()))
+    //   page.on('pageerror', (e) => console.log(e))
+    // })
+
     const onlyTests = tests.filter((t) => t.only)
     const runTests = onlyTests.length > 0 ? onlyTests : tests
 
@@ -152,10 +158,6 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
         await page.goto(t.url)
         await page.waitForSelector(elementSelector, { state: 'attached' })
         await page.evaluate(() => document.fonts.ready)
-
-        // Optionally subscribe to page console output
-        // page.on('console', (msg) => console.log(msg.text()))
-        // page.on('pageerror', (e) => console.log(e))
 
         const locator = page.locator(elementSelector).nth(0)
 
