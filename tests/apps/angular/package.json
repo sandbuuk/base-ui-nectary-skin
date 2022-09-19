@@ -6,7 +6,7 @@
     "start": "ng serve"
   },
   "dependencies": {
-    "@angular-devkit/architect": "*",
+    "@angular-devkit/architect": "^0.1402.3",
     "@angular/animations": "^14.2.0",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
