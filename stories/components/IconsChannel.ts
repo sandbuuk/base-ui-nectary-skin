@@ -11,6 +11,7 @@ import '@sinch-engage/nectary/icons-channel/twitter'
 import '@sinch-engage/nectary/icons-channel/viber'
 import '@sinch-engage/nectary/icons-channel/wechat'
 import '@sinch-engage/nectary/icons-channel/whatsapp'
+import '@sinch-engage/nectary/icons-channel/notify'
 import '@sinch-engage/nectary/icons-channel/telegram-square'
 import '@sinch-engage/nectary/icons-channel/apple-business-chat-square'
 import '@sinch-engage/nectary/icons-channel/facebook-messenger-square'
@@ -74,6 +75,7 @@ const iconNames = [
   'sinch-icon-channel-viber',
   'sinch-icon-channel-wechat',
   'sinch-icon-channel-whatsapp',
+  'sinch-icon-channel-notify',
 ]
 
 export const IconsChannel = Template(iconNames)
