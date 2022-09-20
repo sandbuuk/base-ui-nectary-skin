@@ -4,16 +4,22 @@
   vertical-align: middle;
 }
 
-#text {
-  width: var(--sinch-avatar-badge-size);
-  height: var(--sinch-avatar-badge-size);
-  border: 1px solid var(--sinch-color-snow-100);
+#wrapper {
+  width: fit-content;
+  background-color: var(--sinch-color-snow-100);
   border-radius: calc(var(--sinch-avatar-badge-size) / 2);
-  text-align: center;
+  padding: 1px;
   box-sizing: border-box;
-  color: var(--sinch-color-snow-100);
+}
+
+#text {
+  width: calc(var(--sinch-avatar-badge-size) - 2px);
+  height: calc(var(--sinch-avatar-badge-size) - 2px);
   font: var(--sinch-avatar-badge-font);
+  color: var(--sinch-color-snow-100);
+  text-align: center;
   background-color: var(--sinch-color-raspberry-500);
+  border-radius: calc(var(--sinch-avatar-badge-size) / 2 - 1px);
 }
 
 #text.long {
@@ -22,4 +28,6 @@
 }
 </style>
 
-<div id="text"></div>
+<div id="wrapper">
+  <div id="text"></div>
+</div>

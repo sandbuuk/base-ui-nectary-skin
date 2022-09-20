@@ -9,65 +9,80 @@
   position: relative;
   width: 40px;
   height: 40px;
-  font: var(--sinch-font-title-s);
-  line-height: 38px;
-  color: var(--sinch-color-text-default);
-  background-color: var(--sinch-color-snow-700);
-  text-align: center;
+  background-color: var(--sinch-color-snow-100);
   border-radius: 50%;
-  border: 1px solid var(--sinch-color-snow-100);
-  box-sizing: border-box;
-  text-transform: uppercase;
 
   --sinch-avatar-badge-size: 16px;
   --sinch-avatar-badge-font: 700 12px/14px "Gilroy", "Arial", "sans-serif";
 }
 
-:host([background="blue"]) #wrapper {
-  background-color: var(--sinch-color-stormy-500);
-  color: var(--sinch-color-snow-100);
-}
-
-:host([background="yellow"]) #wrapper {
-  background-color: var(--sinch-color-honey-500);
-}
-
-:host([size="l"]) #wrapper {
-  width: 56px;
-  height: 56px;
-  font: var(--sinch-font-title-m);
-  line-height: 54px;
-
-  --sinch-avatar-badge-size: 20px;
-  --sinch-avatar-badge-font: 700 12px/18px "Gilroy", "Arial", "sans-serif";
-}
-
-:host([size="s"]) #wrapper {
-  width: 24px;
-  height: 24px;
-  font: var(--sinch-font-extra-small-text);
-  line-height: 22px;
-
-  --sinch-avatar-badge-size: 11px;
-  --sinch-avatar-badge-font: 500 8px/9px "Gilroy", "Arial", "sans-serif";
+#circle {
+  position: relative;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  left: 1px;
+  top: 1px;
+  border-radius: 50%;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: linear-gradient(#fff, #000);
+  mask: linear-gradient(#fff, #000);
 }
 
 #text {
   display: block;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
+  font: var(--sinch-font-title-s);
+  line-height: 38px;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: var(--sinch-color-snow-700);
+  color: var(--sinch-color-text-default);
+}
+
+:host([background="blue"]) #text {
+  background-color: var(--sinch-color-stormy-500);
+  color: var(--sinch-color-snow-100);
+}
+
+:host([background="yellow"]) #text {
+  background-color: var(--sinch-color-honey-500);
+}
+
+:host([size="l"]) #wrapper {
+  width: 56px;
+  height: 56px;
+
+  --sinch-avatar-badge-size: 20px;
+  --sinch-avatar-badge-font: 700 12px/18px "Gilroy", "Arial", "sans-serif";
+}
+
+:host([size="l"]) #text {
+  font: var(--sinch-font-title-m);
+  line-height: 54px;
+}
+
+:host([size="s"]) #wrapper {
+  width: 24px;
+  height: 24px;
+
+  --sinch-avatar-badge-size: 11px;
+  --sinch-avatar-badge-font: 500 8px/9px "Gilroy", "Arial", "sans-serif";
+}
+
+:host([size="s"]) #text {
+  font: var(--sinch-font-extra-small-text);
+  line-height: 22px;
 }
 
 #image {
   display: none;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
   position: absolute;
   left: 0;
   top: 0;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 :host([src]:not([src=""])) #image {
@@ -76,33 +91,35 @@
 
 ::slotted(sinch-avatar-badge) {
   position: absolute;
-  top: -2px;
-  left: calc(100% - 15px);
+  top: -1px;
+  left: calc(100% - 16px);
 }
 
 :host([size="l"]) ::slotted(sinch-avatar-badge) {
-  left: calc(100% - 19px);
+  left: calc(100% - 20px);
 }
 
 :host([size="s"]) ::slotted(sinch-avatar-badge) {
-  left: calc(100% - 9px);
+  left: calc(100% - 10px);
 }
 
 ::slotted(sinch-avatar-status) {
   position: absolute;
-  bottom: -2px;
-  right: -2px;
+  bottom: -1px;
+  right: -1px;
 }
 
 :host([size="l"]) ::slotted(sinch-avatar-status) {
-  bottom: 2px;
-  right: 2px;
+  bottom: 3px;
+  right: 3px;
 }
 </style>
 
 <div id="wrapper">
-  <span id="text"></span>
-  <img id="image" alt=""/>
+  <div id="circle">
+    <span id="text"></span>
+    <img id="image" alt=""/>
+  </div>
   <slot name="badge"></slot>
   <slot name="status"></slot>
 </div>
