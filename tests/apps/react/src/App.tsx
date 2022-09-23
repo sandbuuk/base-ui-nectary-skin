@@ -8,6 +8,7 @@ import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
 import { Chat } from './components/Chat'
 import { Checkbox } from './components/Checkbox'
+import { ColorSwatch } from './components/ColorSwatch'
 import { DateInput } from './components/DateInput'
 import { DatePicker } from './components/DatePicker'
 import { Dialog } from './components/Dialog'
@@ -114,6 +115,12 @@ const mapElement = (url: URL) => {
     case '/checkbox': {
       return (
         <Checkbox search={url.searchParams}/>
+      )
+    }
+
+    case '/color-swatch': {
+      return (
+        <ColorSwatch search={url.searchParams}/>
       )
     }
 

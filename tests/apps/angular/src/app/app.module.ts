@@ -11,6 +11,7 @@ import { CardComponent } from '../components/Card/Card.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
 import { ChatComponent } from '../components/Chat/Chat.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
+import { ColorSwatchComponent } from '../components/ColorSwatch/ColorSwatch.component'
 import { DatePickerComponent } from '../components/DatePicker/DatePicker.component'
 import { DialogComponent } from '../components/Dialog/Dialog.component'
 import { GridComponent } from '../components/Grid/Grid.component'
@@ -62,6 +63,7 @@ import { AppComponent } from './app.component'
     CardContainerComponent,
     ChatComponent,
     CheckboxComponent,
+    ColorSwatchComponent,
     DatePickerComponent,
     DialogComponent,
     GridComponent,
