@@ -1,15 +1,6 @@
 <sinch-tag
-  [attr.category]="category"
+  [attr.color]="color"
   [attr.text]="text"
-  [attr.inverted]="isInverted"
   [attr.small]="isSmall">
-  <sinch-icon-open-in-new *ngIf="hasIcon" slot="icon"></sinch-icon-open-in-new>
-  <sinch-tag-close
-    *ngIf="isDismissable"
-    slot="close"
-    [attr.small]="isSmall"
-    (focusin)="onCloseFocus()"
-    (focusout)="onCloseBlur()"
-    (click)="onCloseClick()">
-  </sinch-tag-close>
+  <sinch-icon-mood-bad *ngIf="hasIcon" slot="icon"></sinch-icon-mood-bad>
 </sinch-tag>

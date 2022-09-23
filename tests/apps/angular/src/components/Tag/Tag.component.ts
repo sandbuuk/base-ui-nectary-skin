@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/tag-close'
+import '@sinch-engage/nectary/icons/mood-bad'
+import { NO_COLOR, TSinchColorName } from '@sinch-engage/nectary/utils/colors'
 
 @Component({
   selector: 'tag-component',
@@ -9,30 +10,16 @@ import '@sinch-engage/nectary/tag-close'
 })
 
 export class TagComponent {
-  category?: string
+  color: TSinchColorName
   text?: string
-  isDismissable: boolean
   isSmall: boolean
-  isInverted: boolean
   hasIcon: boolean
 
   constructor() {
     const url = new URL(location.href)
-    this.category = url.searchParams.get('category') ?? undefined
+    this.color = (url.searchParams.get('color') ?? NO_COLOR) as TSinchColorName
     this.text = url.searchParams.get('text') ?? ''
-    this.isDismissable = url.searchParams.get('dismissable') != null
     this.isSmall = url.searchParams.get('small') != null
-    this.isInverted = url.searchParams.get('inverted') != null
     this.hasIcon = url.searchParams.get('icon') != null
-  }
-
-  onCloseClick() {
-    window.dispatchEvent(new CustomEvent('sinch-tag-close-click'))
-  }
-  onCloseFocus() {
-    window.dispatchEvent(new CustomEvent('sinch-tag-close-focus'))
-  }
-  onCloseBlur() {
-    window.dispatchEvent(new CustomEvent('sinch-tag-close-blur'))
   }
 }

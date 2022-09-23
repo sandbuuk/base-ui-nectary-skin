@@ -1,56 +1,30 @@
 <template>
   <sinch-tag
-    v-bind:category="category"
+    v-bind:color="color"
     v-bind:text="text"
     v-bind:small="isSmall"
-    v-bind:inverted="isInverted"
   >
-    <sinch-icon-open-in-new v-if="hasIcon" slot="icon"></sinch-icon-open-in-new>
-    <sinch-tag-close
-      v-if="isDismissable"
-      slot="close"
-      v-bind:small="isSmall"
-      @click="onClick"
-      @focusin="onFocus"
-      @focusout="onBlur"
-    ></sinch-tag-close>
+    <sinch-icon-mood-bad v-if="hasIcon" slot="icon"></sinch-icon-mood-bad>
   </sinch-tag>
 </template>
 
 <script>
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/tag-close'
+import '@sinch-engage/nectary/icons/mood-bad'
 
 export default {
   props: {
     search: URLSearchParams
   },
-  methods: {
-    onClick() {
-      window.dispatchEvent(new CustomEvent('sinch-tag-close-click'))
-    },
-    onFocus() {
-      window.dispatchEvent(new CustomEvent('sinch-tag-close-focus'))
-    },
-    onBlur() {
-      window.dispatchEvent(new CustomEvent('sinch-tag-close-blur'))
-    }
-  },
   computed: {
     text() {
       return this.search.get('text') ?? ''
     },
-    category() {
-      return this.search.get('category') ?? undefined
-    },
-    isDismissable() {
-      return this.search.get('dismissable') != null
+    color() {
+      return this.search.get('color') ?? ''
     },
     isSmall() {
       return this.search.get('small') != null
-    },
-    isInverted() {
-      return this.search.get('inverted') != null
     },
     hasIcon() {
       return this.search.get('icon') != null

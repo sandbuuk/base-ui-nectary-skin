@@ -1,21 +1,17 @@
 import type { TSinchElementReact } from '../types'
-
-export type TSinchTagCategory = 'candy' | 'bolt' | 'aqua' | 'grass' | 'berry' | 'orange' | 'night' | 'mud' | 'dirt'
+import type { TSinchColorName } from '../utils/colors'
 
 export type TSinchTagElement = HTMLElement & {
-  category: TSinchTagCategory | null,
+  color: TSinchColorName | null,
   text: string,
-  inverted: boolean,
   small: boolean,
-  setAttribute(name: 'category', value: TSinchTagCategory): void,
+  setAttribute(name: 'color', value: TSinchColorName): void,
   setAttribute(name: 'text', value: string): void,
-  setAttribute(name: 'inverted', value: ''): void,
   setAttribute(name: 'small', value: ''): void,
 }
 
 export type TSinchTagReact = TSinchElementReact<TSinchTagElement> & {
-  category?: TSinchTagCategory,
+  color?: TSinchColorName,
   text: string,
-  inverted?: boolean,
   small?: boolean,
 }

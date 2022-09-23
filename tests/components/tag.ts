@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test'
+import { colorNameValues, NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { runScreenshotTests } from '../screenshot-tests'
 
-const shot = '/tag?text=Label%20text'
-const withIcon = '/tag?text=Label%20text&icon=true'
-const withIconDismiss = '/tag?text=Label%20text&dismissable=true&icon=true'
-const withSmallDismiss = '/tag?text=Label%20text&small=true&dismissable=true&icon=true'
-const withDismiss = '/tag?text=Label%20text&dismissable=true&icon=true'
-const checkTagWithDismiss = makeAccessibilityTests('/tag?text=Label%20text&dismissable=true&icon=true', 'sinch-tag')
-const categoryValues = ['candy', 'bolt', 'aqua', 'grass', 'berry', 'orange', 'night', 'mud', 'dirt'] as const
+const shot = '/tag?text=Label%20text&color=light-grey'
+const withWide = '/tag?width=150&icon=true&text=Label%20text&color=light-grey'
+const withNarrow = '/tag?width=80&icon=true&text=Label%20text%20text%20text%20text&color=light-grey'
+const withIcon = '/tag?text=Label%20text&color=light-grey&icon=true'
+const withIconSmall = '/tag?text=Label%20text&color=light-grey&small=true&icon=true'
+const checkTagWithDismiss = makeAccessibilityTests('/tag?text=Label%20text&color=light-grey&icon=true', 'sinch-tag')
 
 test('accessibility', checkTagWithDismiss(async function* () {
   yield
@@ -16,37 +16,30 @@ test('accessibility', checkTagWithDismiss(async function* () {
 
 test('tag-screenshots', runScreenshotTests('sinch-tag', [
   {
-    name: 'category property',
+    name: 'color attribute',
     url: withIcon,
     async *fn({ $eval }) {
-      for (const val of categoryValues) {
+      for (const colorName of colorNameValues) {
         await $eval((el, val) => {
-          el.category = val
-        }, val)
-        yield { name: val }
+          el.setAttribute('color', val)
+        }, colorName)
+        yield { name: colorName === NO_COLOR ? 'no-color' : colorName }
       }
     },
   },
   {
-    name: 'category attribute',
+    name: 'color property',
     url: withIcon,
     async *fn({ $eval }) {
-      for (const val of categoryValues) {
-        await $eval((el, val) => {
-          el.setAttribute('category', val)
-        }, val)
-        yield { name: val }
+      for (const colorName of colorNameValues) {
+        const result = await $eval((el, val) => {
+          el.color = val
+
+          return el.getAttribute('color')
+        }, colorName)
+
+        expect(result).toBe(colorName)
       }
-    },
-  },
-  {
-    name: 'text property',
-    url: shot,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.text = 'Updated text'
-      })
-      yield { name: 'updated' }
     },
   },
   {
@@ -60,114 +53,61 @@ test('tag-screenshots', runScreenshotTests('sinch-tag', [
     },
   },
   {
+    name: 'text property',
+    url: shot,
+    async *fn({ $, $eval }) {
+      await $eval((el) => {
+        el.text = 'Updated text'
+      })
+
+      expect(await $.getAttribute('text')).toBe('Updated text')
+    },
+  },
+  {
     name: 'small attribute',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('small', ''))
-      yield { name: 'enabled' }
+      yield { name: 'set' }
 
       await $eval((el) => el.removeAttribute('small'))
-      yield { name: 'disabled' }
+      yield { name: 'unset' }
     },
   },
   {
     name: 'small property',
     url: shot,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
       await $eval((el) => {
         el.small = true
       })
-      yield { name: 'enabled' }
+      expect(await $.getAttribute('small')).toBe('')
 
       await $eval((el) => {
         el.small = false
       })
-      yield { name: 'disabled' }
+      expect(await $.getAttribute('small')).toBe(null)
     },
   },
   {
-    name: 'inverted attribute',
-    url: withIconDismiss,
-    async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('inverted', ''))
-      yield { name: 'enabled' }
-
-      await $eval((el) => el.removeAttribute('inverted'))
-      yield { name: 'disabled' }
-    },
-  },
-  {
-    name: 'inverted property',
-    url: withIconDismiss,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.inverted = true
-      })
-      yield { name: 'enabled' }
-
-      await $eval((el) => {
-        el.inverted = false
-      })
-      yield { name: 'disabled' }
-    },
-  },
-  {
-    name: 'dismissable',
-    url: withDismiss,
+    name: 'small icon',
+    url: withIconSmall,
     async *fn() {
       yield { name: 'shot' }
     },
   },
   {
-    name: 'dismissable small',
-    url: withSmallDismiss,
+    name: 'wide',
+    url: withWide,
     async *fn() {
       yield { name: 'shot' }
     },
   },
   {
-    name: 'custom events',
-    url: withDismiss,
-    async *fn({ $, page }) {
-      const testClose = testCustomEvent(page, $.locator('sinch-tag-close'))
-
-      await testClose('click', 'sinch-tag-close-click')
-      await testClose('focusin', 'sinch-tag-close-focus')
-      await testClose('focusout', 'sinch-tag-close-blur')
-    },
-  },
-  {
-    name: 'native events',
-    url: withDismiss,
-    async *fn({ $, page }) {
-      const $close = $.locator('sinch-tag-close')
-
-      await subscribeToEvents(
-        page,
-        'sinch-tag-close-focus',
-        'sinch-tag-close-blur',
-        'sinch-tag-close-click'
-      )
-
-      await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-tag-close-focus', detail: null },
-        { type: 'sinch-tag-close-blur', detail: null },
-      ])
-
-      await $close.click()
-      await $close.click()
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-tag-close-focus', detail: null },
-        { type: 'sinch-tag-close-click', detail: null },
-        { type: 'sinch-tag-close-click', detail: null },
-      ])
+    name: 'narrow',
+    url: withNarrow,
+    async *fn() {
+      yield { name: 'shot' }
     },
   },
 ]))

@@ -6,82 +6,51 @@
 }
 
 #wrapper {
-  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 4px;
   width: 100%;
   height: 24px;
-  padding: 2px 8px;
+  padding: 0 12px;
   border-radius: 12px;
-  font: var(--sinch-font-extra-small-text);
   color: var(--sinch-color-text-default);
-  background-color: var(--sinch-color-snow-600);
   box-sizing: border-box;
 
-  --sinch-color-icon: var(--sinch-color-stormy-400);
+  --sinch-color-icon: var(--sinch-color-stormy-500);
   --sinch-size-icon: 16px;
 }
 
-:host([category="candy"]) > #wrapper {
-  background-color: var(--sinch-color-candy-200);
+#wrapper.no-color {
+  background-color: var(--sinch-color-snow-500);
 }
 
-:host([category="bolt"]) > #wrapper {
-  background-color: var(--sinch-color-bolt-200);
-}
-
-:host([category="aqua"]) > #wrapper {
-  background-color: var(--sinch-color-aqua-200);
-}
-
-:host([category="grass"]) > #wrapper {
-  background-color: var(--sinch-color-grass-200);
-}
-
-:host([category="berry"]) > #wrapper {
-  background-color: var(--sinch-color-berry-200);
-}
-
-:host([category="orange"]) > #wrapper {
-  background-color: var(--sinch-color-orange-200);
-}
-
-:host([category="night"]) > #wrapper {
-  background-color: var(--sinch-color-night-200);
-}
-
-:host([category="mud"]) > #wrapper {
-  background-color: var(--sinch-color-mud-200);
-}
-
-:host([category="dirt"]) > #wrapper {
-  background-color: var(--sinch-color-dirt-200);
-}
-
-:host([inverted]:not([inverted="false"])) > #wrapper {
-  background-color: var(--sinch-color-stormy-500);
-  color: var(--sinch-color-snow-100);
+#wrapper.inverted {
+  color: var(--sinch-color-text-inverted);
 
   --sinch-color-icon: var(--sinch-color-snow-100);
+}
+
+#text {
+  flex: 1;
 }
 
 :host([small]:not([small="false"])) #wrapper {
   height: 20px;
   border-radius: 10px;
   padding: 0 8px;
-
-  --sinch-size-icon: 14px;
 }
 
-#text {
-  flex: 1;
+::slotted(*) {
+  margin-left: -4px;
+}
+
+:host([small]:not([small="false"])) ::slotted(*) {
+  margin-left: -2px;
 }
 </style>
 
 <div id="wrapper">
   <slot name="icon"></slot>
   <sinch-text id="text" type="xs" ellipsis></sinch-text>
-  <slot name="close"></slot>
 </div>
