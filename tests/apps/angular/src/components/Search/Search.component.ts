@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/help-tooltip'

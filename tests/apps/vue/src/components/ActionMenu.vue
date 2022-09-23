@@ -6,7 +6,7 @@
       :value="key"
       :text="value.text"
       :disabled="value.isDisabled"
-      @--click="onClick(value.text)">
+      @--click="onClick(key)">
       <sinch-icon-open-in-new v-if="value.icon === '1'" slot="icon"></sinch-icon-open-in-new>
     </sinch-action-menu-option>
   </sinch-action-menu>

@@ -43,7 +43,7 @@ export const Input: FC<TInput> = ({ search }) => {
       )}
       {hasRight && (
         <>
-          <sinch-tag slot="right" text="text"/>
+          <sinch-tag slot="right" text="text" color="light-grey"/>
           <sinch-icon-button slot="right" small aria-label="Button" onClick={() => {}}>
             <sinch-icon-close slot="icon"/>
           </sinch-icon-button>

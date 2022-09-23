@@ -1,5 +1,4 @@
 import dialogPolyfill from 'dialog-polyfill'
-import '../context'
 import {
   defineCustomElement,
   getBooleanAttribute,

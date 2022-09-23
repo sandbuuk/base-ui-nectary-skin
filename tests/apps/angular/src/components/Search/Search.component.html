@@ -1,9 +1,8 @@
-<sinch-action-menu
+<sinch-popover
   orientation="bottom"
   [attr.open]="isOpen"
-  [attr.maxVisibleItems]="maxVisibleItems"
-  aria-label="Search"
-  (-close)="onClose()">
+  (-close)="onClose()"
+>
   <sinch-field slot="target" label="Label">
     <sinch-input
       slot="input"
@@ -23,11 +22,12 @@
       </sinch-icon-button>
     </sinch-input>
   </sinch-field>
-  <sinch-action-menu-option
-    *ngFor="let text of options"
-    slot="option"
-    [attr.text]="text"
-    [attr.aria-label]="text"
-    (-click)="onOptionClick(text)"
-  ></sinch-action-menu-option>
-</sinch-action-menu>
+  <sinch-action-menu slot="content" aria-label="Search autocomplete">
+    <sinch-action-menu-option
+      *ngFor="let text of options"
+      [attr.text]="text"
+      [attr.aria-label]="text"
+      (-click)="onOptionClick(text)"
+    ></sinch-action-menu-option>
+  </sinch-action-menu>
+</sinch-popover>

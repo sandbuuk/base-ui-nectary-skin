@@ -11,7 +11,7 @@
       </sinch-field>
     </div>
     <sinch-icon-branded-chatbot v-if="hasIcon" size="32" slot="icon"></sinch-icon-branded-chatbot>
-    <sinch-tag v-if="hasInfo" text="Label" slot="info"></sinch-tag>
+    <sinch-tag v-if="hasInfo" text="Label" slot="info" color="light-grey"></sinch-tag>
     <sinch-icon-button v-if="hasInfo" small slot="info">
       <sinch-icon-apps slot="icon"></sinch-icon-apps>
     </sinch-icon-button>

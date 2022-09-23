@@ -10,7 +10,7 @@
   (-change)="onChange($event)">
   <sinch-icon-search *ngIf="hasIcon" slot="icon"></sinch-icon-search>
   <sinch-help-tooltip *ngIf="tooltipText != null" [attr.text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
-  <sinch-tag *ngIf="hasRight" slot="right" text="text"></sinch-tag>
+  <sinch-tag *ngIf="hasRight" slot="right" text="text" color="light-grey"></sinch-tag>
   <sinch-icon-button *ngIf="hasRight" slot="right" small>
     <sinch-icon-close slot="icon"></sinch-icon-close>
   </sinch-icon-button>

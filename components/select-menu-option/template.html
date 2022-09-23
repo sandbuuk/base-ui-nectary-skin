@@ -13,6 +13,7 @@
   gap: 10px;
   user-select: none;
   cursor: pointer;
+  color: var(--sinch-color-text-default);
 
   --sinch-color-icon: var(--sinch-color-stormy-500);
   --sinch-size-icon: 24px;
@@ -24,7 +25,7 @@
 
 :host(:hover:not([disabled])) > #wrapper,
 :host([data-selected]) > #wrapper {
-  background-color: var(--sinch-color-snow-500);
+  background-color: var(--sinch-color-snow-400);
 }
 
 #check {
@@ -37,8 +38,8 @@
 }
 
 :host([disabled]) > #wrapper {
-  color: var(--sinch-color-stormy-100);
   cursor: initial;
+  color: var(--sinch-color-text-disabled);
 
   --sinch-color-icon: var(--sinch-color-stormy-100);
 }

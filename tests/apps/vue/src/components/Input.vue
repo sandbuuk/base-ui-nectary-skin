@@ -9,7 +9,7 @@
     @--focus="onFocus"
     @--blur="onBlur">
     <sinch-icon-search v-if="hasIcon" slot="icon"></sinch-icon-search>
-    <sinch-tag v-if="hasRight" slot="right" text="text"></sinch-tag>
+    <sinch-tag v-if="hasRight" slot="right" text="text" color="light-grey"></sinch-tag>
     <sinch-icon-button v-if="hasRight" slot="right" small>
       <sinch-icon-close slot="icon"></sinch-icon-close>
     </sinch-icon-button>
