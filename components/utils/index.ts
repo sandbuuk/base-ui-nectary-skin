@@ -1,5 +1,5 @@
-import pkg from './package.json'
-import type { TRect } from './types'
+import pkg from '../package.json'
+import type { TRect } from '../types'
 
 const nectaryDefinitions = new Map<string, CustomElementConstructor>()
 let nectaryRegistry: CustomElementRegistry | null = null
