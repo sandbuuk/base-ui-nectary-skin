@@ -101,7 +101,7 @@ type TRect = TPosition & {
 type UpdateStateResult = {
   name: string,
   include?: Locator[],
-  includeRects?: TRect[],
+  includeRects?: (TRect | null)[],
   expand?: number,
 }
 
