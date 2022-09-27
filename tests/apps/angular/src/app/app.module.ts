@@ -12,7 +12,6 @@ import { ChatComponent } from '../components/Chat/Chat.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
 import { DatePickerComponent } from '../components/DatePicker/DatePicker.component'
 import { DialogComponent } from '../components/Dialog/Dialog.component'
-import { DropdownComponent } from '../components/Dropdown/Dropdown.component'
 import { GridComponent } from '../components/Grid/Grid.component'
 import { HorizontalStepper } from '../components/HorizontalStepper/HorizontalStepper.component'
 import { IconButtonComponent } from '../components/IconButton/IconButton.component'
@@ -62,7 +61,6 @@ import { AppComponent } from './app.component'
     CheckboxComponent,
     DatePickerComponent,
     DialogComponent,
-    DropdownComponent,
     GridComponent,
     HorizontalStepper,
     IconButtonComponent,

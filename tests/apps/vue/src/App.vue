@@ -11,7 +11,6 @@
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
     <DatePicker v-if="url.pathname === '/date-picker'" :search="url.searchParams"/>
     <Dialog v-if="url.pathname === '/dialog'" :search="url.searchParams"/>
-    <Dropdown v-if="url.pathname === '/dropdown'" :search="url.searchParams"/>
     <Grid v-if="url.pathname === '/grid'" :search="url.searchParams"/>
     <HorizontalStepper v-if="url.pathname === '/horizontal-stepper'" :search="url.searchParams"/>
     <IconButton v-if="url.pathname === '/icon-button'" :search="url.searchParams"/>
@@ -61,7 +60,6 @@ import Chat from './components/Chat.vue'
 import Checkbox from './components/Checkbox.vue'
 import DatePicker from './components/DatePicker.vue'
 import Dialog from './components/Dialog.vue'
-import Dropdown from './components/Dropdown.vue'
 import Grid from './components/Grid.vue'
 import HorizontalStepper from './components/HorizontalStepper.vue'
 import IconButton from './components/IconButton.vue'
@@ -136,7 +134,6 @@ export default {
     Checkbox,
     DatePicker,
     Dialog,
-    Dropdown,
     Grid,
     HorizontalStepper,
     IconButton,

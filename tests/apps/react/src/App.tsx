@@ -11,7 +11,6 @@ import { DateInput } from './components/DateInput'
 import { DatePicker } from './components/DatePicker'
 import { Dialog } from './components/Dialog'
 import { DialogExample } from './components/DialogExample'
-import { Dropdown } from './components/Dropdown'
 import { Field } from './components/Field'
 import { FileDrop } from './components/FileDrop'
 import { FilePicker } from './components/FilePicker'
@@ -135,9 +134,7 @@ const mapElement = (url: URL) => {
       )
     }
 
-    case '/dropdown': {
       return (
-        <Dropdown search={url.searchParams}/>
       )
     }
 
