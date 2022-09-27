@@ -32,6 +32,7 @@ import { SegmentComponent } from '../components/Segment/Segment.component'
 import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
 import { SegmentedIconControlComponent } from '../components/SegmentedIconControl/SegmentedIconControl.component'
 import { SelectComponent } from '../components/Select/Select.component'
+import { SelectMenuComponent } from '../components/SelectMenu/SelectMenu.component'
 import { SpinnerComponent } from '../components/Spinner/Spinner.component'
 import { TableComponent } from '../components/Table/Table.component'
 import { TabsComponent } from '../components/Tabs/Tabs.component'
@@ -81,6 +82,7 @@ import { AppComponent } from './app.component'
     SegmentedControlComponent,
     SegmentedIconControlComponent,
     SelectComponent,
+    SelectMenuComponent,
     SpinnerComponent,
     TableComponent,
     TabsComponent,
