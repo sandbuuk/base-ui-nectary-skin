@@ -63,7 +63,7 @@ export const Dialog = Template(dialogInnerHTML)
 Dialog.parameters = {
   docs: {
     source: {
-      code: `<sinch-dialog open={isOpen} title={title} on-close={closeModal}>${dialogInnerHTML}</sinch-dialog>`,
+      code: `<sinch-dialog open={isOpen} caption={caption} on-close={closeModal}>${dialogInnerHTML}</sinch-dialog>`,
     },
   },
 }
