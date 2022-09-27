@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
+import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/icon-button'
@@ -25,11 +26,10 @@ export const CompositionExample: FC = () => {
   }
 
   return (
-    <sinch-action-menu
+    <sinch-popover
       orientation="bottom"
-      maxVisibleItems={3}
-      aria-label="Search autocomplete"
       open={isOpen}
+      aria-label="Search autocomplete"
       on-close={() => setIsOpen(false)}
     >
       <sinch-field slot="target" label="Search">
@@ -52,17 +52,22 @@ export const CompositionExample: FC = () => {
           </sinch-icon-button>
         </sinch-input>
       </sinch-field>
-      {
-        options.map((text) => (
-          <sinch-action-menu-option
-            key={text}
-            text={text}
-            slot="option"
-            aria-label={text}
-            on-click={() => onOptionClick(text)}
-          />
-        ))
+      <sinch-action-menu
+        slot="content"
+        rows={3}
+        aria-label="Search autocomplete"
+      >
+        {
+          options.map((text) => (
+            <sinch-action-menu-option
+              key={text}
+              text={text}
+              aria-label={text}
+              on-click={() => onOptionClick(text)}
+            />
+          ))
       }
-    </sinch-action-menu>
+      </sinch-action-menu>
+    </sinch-popover>
   )
 }

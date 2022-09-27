@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/help-tooltip'
@@ -48,11 +49,11 @@ export const Search: FC<TSearch> = ({ search }) => {
   }, [])
 
   return (
-    <sinch-action-menu
+    <sinch-popover
       orientation="bottom"
       open={isOpen}
-      aria-label="Search"
       onClose={onClose}
+      aria-label="Search"
     >
       <sinch-field slot="target" label="Label">
         <sinch-input
@@ -75,17 +76,18 @@ export const Search: FC<TSearch> = ({ search }) => {
           </sinch-icon-button>
         </sinch-input>
       </sinch-field>
-      {
-        options.map((text) => (
-          <sinch-action-menu-option
-            key={text}
-            text={text}
-            slot="option"
-            aria-label={text}
-            onClick={() => onOptionClick(text)}
-          />
-        ))
-      }
-    </sinch-action-menu>
+      <sinch-action-menu aria-label="Search autocomplete" slot="content">
+        {
+          options.map((text) => (
+            <sinch-action-menu-option
+              key={text}
+              text={text}
+              aria-label={text}
+              on-click={() => onOptionClick(text)}
+            />
+          ))
+        }
+      </sinch-action-menu>
+    </sinch-popover>
   )
 }

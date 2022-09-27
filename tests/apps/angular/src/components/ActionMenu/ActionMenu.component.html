@@ -1,32 +1,10 @@
-<sinch-action-menu
-  [attr.open]="isOpen"
-  [attr.modal]="isModal"
-  [attr.maxvisibleitems]="maxVisibleItems"
-  [attr.orientation]="orientation"
-  (-close)="onClose()">
-  <sinch-field slot="target" label="Input">
-    <sinch-input
-      slot="input"
-      aria-label="Input"
-      [value]="value"
-      (-change)="onValueChange($event)"
-    >
-      <sinch-button
-        slot="right"
-        small
-        type="cta-secondary"
-        text="Open"
-        aria-label="Open"
-        (-click)="onOpen()"
-      ></sinch-button>
-    </sinch-input>
-  </sinch-field>
-  <sinch-action-menu-option (-click)="onClick('Option 1 value long long long')" text="Option 1 value long long long" slot="option">
-    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
+<sinch-action-menu [attr.rows]="rows">
+  <sinch-action-menu-option
+    *ngFor="let opt of options | keyvalue"
+    [value]="opt.key"
+    [attr.text]="opt.value.text"
+    [attr.disabled]="opt.value.isDisabled"
+    (-click)="onClick(opt.key)">
+    <sinch-icon-open-in-new *ngIf="opt.value.icon === '1'" slot="icon"></sinch-icon-open-in-new>
   </sinch-action-menu-option>
-  <sinch-action-menu-option (-click)="onClick('Option 2 value')" text="Option 2 value" slot="option" disabled>
-    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
-  </sinch-action-menu-option>
-  <sinch-action-menu-option (-click)="onClick('Option 3 value')" text="Option 3 value" slot="option"></sinch-action-menu-option>
-  <sinch-action-menu-option (-click)="onClick('Option 4 value')" text="Option 4 value" slot="option"></sinch-action-menu-option>
 </sinch-action-menu>

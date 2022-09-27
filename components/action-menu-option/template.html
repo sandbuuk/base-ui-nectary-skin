@@ -28,12 +28,12 @@
   text-overflow: ellipsis;
 }
 
-:host(:hover) > #wrapper,
+:host(:hover:not([disabled])) > #wrapper,
 :host([data-selected]) > #wrapper {
   background-color: var(--sinch-color-snow-500);
 }
 
-:host([disabled]:not([disabled="false"])) > #wrapper {
+:host([disabled]) > #wrapper {
   color: var(--sinch-color-stormy-100);
   cursor: initial;
   pointer-events: none;
@@ -48,5 +48,5 @@
 
 <div id="wrapper">
   <slot name="icon"></slot>
-  <span id="content"></span>
+  <sinch-text id="content" type="m" ellipsis></sinch-text>
 </div>

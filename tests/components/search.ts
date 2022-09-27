@@ -2,17 +2,16 @@ import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
-import type { TSinchActionMenuElement } from '@sinch-engage/nectary/action-menu/types'
 
 const withValue = '/search?width=200&label=Label&value=Input%20value'
 const checkValue = makeAccessibilityTests('/search?width=200&label=Label&value=Input%20value', 'sinch-input')
-const getDropdownRect = (page: Page) => page.locator('sinch-action-menu').evaluate((el: TSinchActionMenuElement) => el.dropdownRect)
+const getDropdownRect = (page: Page) => page.locator('sinch-action-menu').boundingBox()
 
 test('accessibility', checkValue(async function* () {
   yield
 }))
 
-test('search screenshots', runScreenshotTests('sinch-action-menu', [
+test('search screenshots', runScreenshotTests('sinch-popover', [
   {
     name: 'clear',
     url: withValue,
@@ -49,7 +48,7 @@ test('search screenshots', runScreenshotTests('sinch-action-menu', [
   },
 ]))
 
-test('search events', runScreenshotTests('sinch-action-menu', [
+test('search events', runScreenshotTests('sinch-popover', [
   {
     name: 'native events',
     url: withValue,
@@ -70,7 +69,7 @@ test('search events', runScreenshotTests('sinch-action-menu', [
 
       await page.mouse.click(bb.x, bb.y)
       await page.keyboard.press('End')
-      await $.type('X')
+      await page.keyboard.press('X')
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')

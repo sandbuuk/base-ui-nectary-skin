@@ -1,82 +1,43 @@
 <template>
-  <sinch-action-menu
-    :open="isOpen"
-    :modal="isModal"
-    :orientation="orientation"
-    :maxvisibleitems="maxVisibleItems"
-    @--close="onClose">
-    <sinch-field slot="target" label="Input">
-      <sinch-input
-        slot="input"
-        aria-label="Input"
-        :value="value"
-        @--change="onValueChange">
-        <sinch-button
-          slot="right"
-          small
-          type="cta-secondary"
-          text="Open"
-          aria-label="Open"
-          @--click="onOpen"
-        ></sinch-button>
-      </sinch-input>
-    </sinch-field>
-    <sinch-action-menu-option @--click="() => {onClick('Option 1 value long long long')}" text="Option 1 value long long long" slot="option">
-      <sinch-icon-open-in-new slot="icon"/>
+  <sinch-action-menu :rows="rows">
+    <sinch-action-menu-option
+      v-for="(value, key) in options"
+      :key="key"
+      :value="key"
+      :text="value.text"
+      :disabled="value.isDisabled"
+      @--click="onClick(value.text)">
+      <sinch-icon-open-in-new v-if="value.icon === '1'" slot="icon"></sinch-icon-open-in-new>
     </sinch-action-menu-option>
-    <sinch-action-menu-option @--click="() => {onClick('Option 2 value')}" text="Option 2 value" slot="option" disabled>
-      <sinch-icon-open-in-new slot="icon"/>
-    </sinch-action-menu-option>
-    <sinch-action-menu-option @--click="() => {onClick('Option 3 value')}" text="Option 3 value" slot="option"></sinch-action-menu-option>
-    <sinch-action-menu-option @--click="() => {onClick('Option 4 value')}" text="Option 4 value" slot="option"></sinch-action-menu-option>
   </sinch-action-menu>
 </template>
 
 <script>
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 export default {
   methods: {
     onClick(text) {
       window.dispatchEvent(new CustomEvent('sinch-action-menu-click', {detail: text}))
-      this.isOpen = false
     },
-    onClose() {
-      window.dispatchEvent(new CustomEvent('sinch-action-menu-close'))
-      this.isOpen = false
-    },
-    onOpen() {
-      window.dispatchEvent(new CustomEvent('sinch-action-menu-open'))
-      this.isOpen = true
-    },
-    onValueChange(e) {
-      window.dispatchEvent(new CustomEvent('sinch-input-change'))
-      this.value = e.detail
-    }
   },
   props: {
     search: URLSearchParams
   },
   computed: {
-    orientation() {
-      return this.search.get('orientation')
-    },
-    maxVisibleItems() {
-      const val = this.search.get('maxvisibleitems')
+    rows() {
+      const val = this.search.get('rows')
       return val !== null ? parseInt(val) : null
     },
-    isModal() {
-      return this.search.get('modal') !== null
-    },
-  },
-  data() {
-    return {
-      value: '',
-      isOpen: this.search.get('open') !== null
+    options() {
+      return {
+        1: { text: 'Option 1 value long long long', icon: '1' },
+        2: { text: 'Option 2', icon: '1', isDisabled: true },
+        3: { text: 'Option 3', icon: null },
+        4: { text: 'Option 4', icon: null },
+      }
     }
   }
 }

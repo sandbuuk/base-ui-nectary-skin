@@ -1,10 +1,13 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/icons/open-in-new'
+
+type TMenuValue = {
+  text: string,
+  icon: string | null,
+  isDisabled?: boolean,
+}
 
 @Component({
   selector: 'action-menu-component',
@@ -13,37 +16,22 @@ import '@sinch-engage/nectary/icons/open-in-new'
 })
 
 export class ActionMenuComponent {
-  isOpen: boolean
-  isModal: boolean
-  maxVisibleItems: number | null
-  orientation: string | null
-  value: string
+  rows: number | null
+  options: Record<string, TMenuValue> = {
+    1: { text: 'Option 1 value long long long', icon: '1' },
+    2: { text: 'Option 2', icon: '1', isDisabled: true },
+    3: { text: 'Option 3', icon: null },
+    4: { text: 'Option 4', icon: null },
+  }
 
   constructor() {
     const url = new URL(location.href)
-    this.isOpen = url.searchParams.get('open') !== null
-    this.isModal = url.searchParams.get('modal') !== null
-    this.orientation = url.searchParams.get('orientation')
-    this.value = ''
 
-    const numVisibleValue = url.searchParams.get('maxvisibleitems')
-    this.maxVisibleItems = numVisibleValue !== null ? parseInt(numVisibleValue) : null
+    const numVisibleValue = url.searchParams.get('rows')
+    this.rows = numVisibleValue !== null ? parseInt(numVisibleValue) : null
   }
 
-  onClick(text: string) {
-      window.dispatchEvent(new CustomEvent('sinch-action-menu-click', {detail: text}))
-      this.isOpen = false
-  }
-  onClose() {
-    window.dispatchEvent(new CustomEvent('sinch-action-menu-close'))
-    this.isOpen = false
-  }
-  onOpen() {
-    window.dispatchEvent(new CustomEvent('sinch-action-menu-open'))
-    this.isOpen = true
-  }
-  onValueChange(e: CustomEvent) {
-    window.dispatchEvent(new CustomEvent('sinch-input-change'))
-    this.value = e.detail
+  onClick(value: string) {
+    window.dispatchEvent(new CustomEvent('sinch-action-menu-click', {detail: value}))
   }
 }

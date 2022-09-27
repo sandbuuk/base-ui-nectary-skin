@@ -1,3 +1,4 @@
+import '../text'
 import {
   defineCustomElement,
   getAttribute,
@@ -7,6 +8,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchActionMenuOptionElement, TSinchActionMenuOptionReact } from './types'
@@ -18,6 +20,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends NectaryElement {
   #$wrapper: HTMLButtonElement
   #$content: HTMLElement
+  #controller = new AbortController()
 
   constructor() {
     super()
@@ -31,20 +34,19 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
   }
 
   connectedCallback() {
+    const { signal } = this.#controller
+
     this.setAttribute('role', 'option')
-    this.#$wrapper.addEventListener('mousedown', this.#onMouseDown)
-    this.addEventListener('-click', this.#onClickReactHandler)
-    this.addEventListener('click', this.#onClick)
+    this.#$wrapper.addEventListener('mousedown', this.#onMouseDown, { signal })
+    this.addEventListener('-click', this.#onClickReactHandler, { signal })
   }
 
   disconnectedCallback() {
-    this.#$wrapper.removeEventListener('mousedown', this.#onMouseDown)
-    this.removeEventListener('-click', this.#onClickReactHandler)
-    this.removeEventListener('click', this.#onClick)
+    this.#controller.abort()
   }
 
   static get observedAttributes() {
-    return ['text', 'disabled']
+    return ['text', 'disabled', 'data-selected']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -61,6 +63,18 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
 
       case 'disabled': {
         updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+
+        break
+      }
+
+      case 'data-selected': {
+        const isDisabled = getBooleanAttribute(this, 'disabled')
+
+        if (isDisabled) {
+          updateBooleanAttribute(this, 'aria-selected', false)
+        } else {
+          updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
+        }
 
         break
       }
@@ -83,17 +97,18 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
     return getBooleanAttribute(this, 'disabled')
   }
 
-  #onClick = () => {
+  click() {
+    this.#dispatchClickEvent()
+  }
+
+  #onMouseDown = () => {
+    this.#dispatchClickEvent()
+  }
+
+  #dispatchClickEvent() {
     this.dispatchEvent(
       new CustomEvent('-click')
     )
-  }
-
-  #onMouseDown = (e: MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-
-    this.click()
   }
 
   #onClickReactHandler = (e: Event) => {

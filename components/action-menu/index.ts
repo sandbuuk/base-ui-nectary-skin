@@ -1,22 +1,16 @@
-import { orientationValues } from '../popover/utils'
-import '../popover'
+import { isSinchActionMenuOption } from '../action-menu-option/utils'
 import {
   attrValueToPixels,
   defineCustomElement,
   getBooleanAttribute,
   getIntegerAttribute,
-  getLiteralAttribute,
-  getReactEventHandler,
-  isAttrTrue,
   NectaryElement,
-  updateAttribute,
   updateBooleanAttribute,
   updateIntegerAttribute,
-  updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchActionMenuOptionElement } from '../action-menu-option/types'
-import type { TSinchPopoverElement, TSinchPopoverOrientation } from '../popover/types'
+import type { TContextKeyboard as TContextKeyboard, TContextVisibility } from '../types'
 import type { TSinchActionMenuElement, TSinchActionMenuReact } from './types'
 
 const ITEM_HEIGHT = 40
@@ -27,7 +21,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-action-menu', class extends NectaryElement {
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
-  #$popover: TSinchPopoverElement
+  #controller = new AbortController()
 
   constructor() {
     super()
@@ -36,109 +30,85 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$optionSlot = shadowRoot.querySelector('slot[name="option"]')!
+    this.#$optionSlot = shadowRoot.querySelector('slot')!
     this.#$listbox = shadowRoot.querySelector('#listbox')!
-    this.#$popover = shadowRoot.querySelector('sinch-popover')!
   }
 
   connectedCallback() {
+    const { signal } = this.#controller
+
     this.setAttribute('role', 'listbox')
-    this.addEventListener('-close', this.#onReactClose)
+    this.setAttribute('tabindex', '0')
+    this.addEventListener('-keydown', this.#onContextKeyDown as any, { signal })
+    this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
+    this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
+    this.addEventListener('blur', this.#onListboxBlur, { signal })
+    this.#$listbox.addEventListener('click', this.#onListboxClick, { signal })
+    this.dispatchEvent(new CustomEvent('-context-connect-keydown', { bubbles: true }))
+    this.dispatchEvent(new CustomEvent('-context-connect-visibility', { bubbles: true }))
   }
 
   disconnectedCallback() {
-    this.removeEventListener('-close', this.#onReactClose)
+    this.dispatchEvent(new CustomEvent('-context-disconnect-keydown', { bubbles: true }))
+    this.dispatchEvent(new CustomEvent('-context-disconnect-visibility', { bubbles: true }))
+    this.#controller.abort()
   }
 
   static get observedAttributes() {
-    return ['open', 'orientation', 'maxvisibleitems', 'modal']
+    return ['rows']
   }
 
-  get nodeName() {
-    return 'select'
+  set rows(value: number | null) {
+    updateIntegerAttribute(this, 'rows', value)
   }
 
-  set maxVisibleItems(value: number | null) {
-    updateIntegerAttribute(this, 'maxvisibleitems', value)
-  }
-
-  get maxVisibleItems() {
-    return getIntegerAttribute(this, 'maxvisibleitems', null)
-  }
-
-  get orientation() {
-    return getLiteralAttribute(this, orientationValues, 'orientation', 'bottom-right')
-  }
-
-  set orientation(value: TSinchPopoverOrientation) {
-    updateLiteralAttribute(this, orientationValues, 'orientation', value)
-  }
-
-  set open(isOpen: boolean) {
-    updateBooleanAttribute(this, 'open', isOpen)
-  }
-
-  get open(): boolean {
-    return getBooleanAttribute(this, 'open')
-  }
-
-  set modal(isModal: boolean) {
-    updateBooleanAttribute(this, 'modal', isModal)
-  }
-
-  get modal(): boolean {
-    return getBooleanAttribute(this, 'modal')
-  }
-
-  get dropdownRect() {
-    return this.#$popover.popoverRect
+  get rows() {
+    return getIntegerAttribute(this, 'rows', null)
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
-      case 'open': {
-        updateAttribute(this.#$popover, 'open', newVal)
-
-        if (isAttrTrue(newVal)) {
-          this.#$popover.addEventListener('keydown', this.#onListboxKeyDown)
-          this.#$popover.addEventListener('-close', this.#onClose)
-        } else {
-          this.#$popover.removeEventListener('keydown', this.#onListboxKeyDown)
-          this.#$popover.removeEventListener('-close', this.#onClose)
-          this.#selectOption(null)
-        }
-
-        break
-      }
-
-      case 'orientation': {
-        updateAttribute(this.#$popover, 'orientation', newVal)
-
-        break
-      }
-
-      case 'maxvisibleitems': {
-        if (newVal === '0') {
-          this.#$listbox.style.maxHeight = 'unset'
-        } else {
-          this.#$listbox.style.maxHeight = attrValueToPixels(newVal, { min: 2, multiplier: ITEM_HEIGHT })
-        }
-
-        break
-      }
-
-      case 'modal': {
-        updateBooleanAttribute(this.#$popover, 'modal', isAttrTrue(newVal))
+      case 'rows': {
+        this.#$listbox.style.maxHeight = attrValueToPixels(newVal, { min: 1, itemSizeMultiplier: ITEM_HEIGHT })
 
         break
       }
     }
   }
 
+  #onListboxBlur = () => {
+    this.#selectOption(null)
+  }
+
+  #onListboxClick = (e: Event) => {
+    if (isSinchActionMenuOption(e.target)) {
+      this.#selectOption(e.target)
+    }
+  }
+
   #onListboxKeyDown = (e: KeyboardEvent) => {
+    this.#handleKeydown(e)
+  }
+
+  #onContextKeyDown = (e: CustomEvent<TContextKeyboard>) => {
+    this.#handleKeydown(e.detail)
+  }
+
+  #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
+    if (!e.detail) {
+      this.#selectOption(null)
+      this.#$listbox.scrollTo({ top: 0, behavior: 'auto' })
+    }
+  }
+
+  #handleKeydown(e: TContextKeyboard) {
     switch (e.code) {
       case 'Enter': {
-        const $opt = this.#findSelectedOption(this.#getEnabledOptionElements())
+        const $opt = this.#findSelectedOption()
 
         if ($opt !== null) {
           e.preventDefault()
@@ -163,64 +133,12 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
   }
 
   #getFirstOption() {
-    return this.#getEnabledOptionElements()[0] ?? null
-  }
+    const $options = this.#getOptionElements()
 
-  #getLastOption() {
-    return this.#getEnabledOptionElements().reverse()[0] ?? null
-  }
+    for (let i = 0; i < $options.length; i++) {
+      const el = $options[i]
 
-  #getNextOption() {
-    const $options = this.#getEnabledOptionElements()
-    const $selectedOption = this.#findSelectedOption($options)
-    const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
-
-    if (currentIndex < 0) {
-      return this.#getFirstOption()
-    }
-
-    return $options[(currentIndex + 1) % $options.length]
-  }
-
-  #getPrevOption() {
-    const $options = this.#getEnabledOptionElements()
-    const $selectedOption = this.#findSelectedOption($options)
-    const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
-
-    if (currentIndex < 0) {
-      return this.#getLastOption()
-    }
-
-    return $options[(currentIndex - 1 + $options.length) % $options.length]
-  }
-
-  #selectOption($option: TSinchActionMenuOptionElement | null) {
-    const hasMaxVisibleItems = this.hasAttribute('maxvisibleitems')
-
-    for (const $op of this.#getOptionElements()) {
-      const isSelected = $op === $option
-
-      updateBooleanAttribute($op, 'data-selected', isSelected)
-
-      if (isSelected && hasMaxVisibleItems) {
-        $op.scrollIntoView?.({ block: 'nearest' })
-      }
-    }
-  }
-
-  #getOptionElements(): TSinchActionMenuOptionElement[] {
-    let $elements = this.#$optionSlot.assignedElements()
-
-    if ($elements.length === 1 && $elements[0].tagName === 'SLOT') {
-      $elements = ($elements[0] as HTMLSlotElement).assignedElements()
-    }
-
-    return $elements as TSinchActionMenuOptionElement[]
-  }
-
-  #findSelectedOption(elements: readonly TSinchActionMenuOptionElement[]): TSinchActionMenuOptionElement | null {
-    for (const el of elements) {
-      if (getBooleanAttribute(el, 'data-selected')) {
+      if (!getBooleanAttribute(el, 'disabled')) {
         return el
       }
     }
@@ -228,19 +146,99 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     return null
   }
 
-  #getEnabledOptionElements(): TSinchActionMenuOptionElement[] {
-    return this.#getOptionElements().filter((opt) => opt.disabled !== true)
+  #getLastOption() {
+    const $options = this.#getOptionElements()
+
+    for (let i = $options.length - 1; i >= 0 ; i--) {
+      const el = $options[i]
+
+      if (!getBooleanAttribute(el, 'disabled')) {
+        return el
+      }
+    }
+
+    return null
   }
 
-  #onClose = () => {
-    this.dispatchEvent(
-      new CustomEvent('-close')
-    )
+  #getNextOption() {
+    const index = this.#getSelectedOptionIndex()
+
+    if (index !== null) {
+      const $options = this.#getOptionElements()
+
+      for (let i = 1; i <= $options.length; i++) {
+        const el = $options[(i + index) % $options.length]
+
+        if (!getBooleanAttribute(el, 'disabled')) {
+          return el
+        }
+      }
+    }
+
+    return this.#getFirstOption()
   }
 
-  #onReactClose = (e: Event) => {
-    getReactEventHandler(this, 'onClose')?.()
-    getReactEventHandler(this, 'on-close')?.(e)
+  #getPrevOption() {
+    const index = this.#getSelectedOptionIndex()
+
+    if (index !== null) {
+      const $options = this.#getOptionElements()
+
+      for (let i = 1; i <= $options.length; i++) {
+        const el = $options[(index - i + $options.length) % $options.length]
+
+        if (!getBooleanAttribute(el, 'disabled')) {
+          return el
+        }
+      }
+    }
+
+    return this.#getLastOption()
+  }
+
+  #selectOption($option: TSinchActionMenuOptionElement | null) {
+    const hasRows = this.hasAttribute('rows')
+
+    for (const $op of this.#getOptionElements()) {
+      const isSelected = $op === $option
+
+      // Select / Unselect
+      updateBooleanAttribute($op, 'data-selected', isSelected)
+
+      if (isSelected && hasRows) {
+        $op.scrollIntoView?.({ block: 'nearest' })
+      }
+    }
+  }
+
+  #getOptionElements(): TSinchActionMenuOptionElement[] {
+    return this.#$optionSlot.assignedElements() as TSinchActionMenuOptionElement[]
+  }
+
+  #getSelectedOptionIndex(): number | null {
+    const elements = this.#getOptionElements()
+
+    for (let i = 0; i < elements.length; i++) {
+      const el = elements[i]
+
+      if (!getBooleanAttribute(el, 'disabled') && getBooleanAttribute(el, 'data-selected')) {
+        return i
+      }
+    }
+
+    return null
+  }
+
+  #findSelectedOption(): TSinchActionMenuOptionElement | null {
+    const elements = this.#getOptionElements()
+
+    for (const el of elements) {
+      if (getBooleanAttribute(el, 'data-selected')) {
+        return el
+      }
+    }
+
+    return null
   }
 })
 
