@@ -1,4 +1,5 @@
 import dialogPolyfill from 'dialog-polyfill'
+import '../context'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -10,9 +11,13 @@ import {
   updateBooleanAttribute,
   NectaryElement,
   throttleAnimationFrame,
+  Context,
+  getFirstSlotElement,
+  isElementFocused,
 } from '../utils'
 import templateHTML from './template.html'
 import { orientationValues } from './utils'
+import type { TContextKeyboard, TContextVisibility } from '../types'
 import type { TSinchPopoverElement, TSinchPopoverOrientation, TSinchPopoverReact } from './types'
 
 const template = document.createElement('template')
@@ -29,8 +34,12 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   #originalOverflowValue: string = ''
   #$targetSlot: HTMLSlotElement
   #$targetOpenSlot: HTMLSlotElement
+  #$contentSlot: HTMLSlotElement
   #$targetOpenWrapper: HTMLElement
   #targetActiveElement: HTMLElement | null = null
+  #controller = new AbortController()
+  #keydownContext: Context
+  #visibilityContext: Context
 
   constructor() {
     super()
@@ -43,9 +52,13 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$dialog = shadowRoot.querySelector('#dialog')!
     this.#$targetSlot = shadowRoot.querySelector('slot[name="target"]')!
     this.#$targetOpenSlot = shadowRoot.querySelector('slot[name="target-open"]')!
+    this.#$contentSlot = shadowRoot.querySelector('slot[name="content"]')!
     this.#$targetOpenWrapper = shadowRoot.querySelector('#target-open')!
     this.#isConnected = false
     this.#resizeThrottle = throttleAnimationFrame(this.#updateOrientation)
+
+    this.#keydownContext = new Context(this.#$contentSlot, 'keydown')
+    this.#visibilityContext = new Context(this.#$contentSlot, 'visibility')
 
     dialogPolyfill.registerDialog(this.#$dialog)
 
@@ -55,32 +68,33 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   connectedCallback() {
+    const { signal } = this.#controller
+
     this.setAttribute('role', 'dialog')
-    this.#$dialog.addEventListener('cancel', this.#onCancel)
-    this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown)
-    this.addEventListener('-close', this.#onCloseReactHandler)
+    this.#$dialog.addEventListener('cancel', this.#onCancel, { signal })
+    this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown, { signal })
+    this.addEventListener('-close', this.#onCloseReactHandler, { signal })
     this.#isConnected = true
 
-    // React updates attributes BEFORE connecting to the DOM
-    // Angular updates attributes AFTER connecting to the DOM
+    this.#keydownContext.subscribe()
+    this.#visibilityContext.subscribe()
+
     if (getBooleanAttribute(this, 'open')) {
       this.#onExpand()
-    } else {
-      this.#onCollapse()
     }
   }
 
   disconnectedCallback() {
-    this.#$dialog.removeEventListener('cancel', this.#onCancel)
-    this.#$dialog.removeEventListener('mousedown', this.#onBackdropMouseDown)
-    this.removeEventListener('-close', this.#onCloseReactHandler)
-
+    this.#controller.abort()
     this.#onCollapse()
     this.#isConnected = false
+
+    this.#keydownContext.unsubscribe()
+    this.#visibilityContext.unsubscribe()
   }
 
   static get observedAttributes() {
-    return ['modal', 'orientation', 'open']
+    return ['orientation', 'open']
   }
 
   set modal(isModal: boolean) {
@@ -100,7 +114,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   get orientation() {
-    return getLiteralAttribute(this, orientationValues, 'orientation', 'bottom')
+    return getLiteralAttribute(this, orientationValues, 'orientation', 'bottom-left')
   }
 
   set orientation(value: TSinchPopoverOrientation) {
@@ -119,7 +133,9 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     switch (name) {
       case 'open': {
         if (isAttrTrue(newVal)) {
-          this.#onExpand()
+          requestAnimationFrame(() => {
+            this.#onExpand()
+          })
         } else {
           this.#onCollapse()
         }
@@ -136,13 +152,6 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
         break
       }
-
-      case 'modal': {
-        if (this.#isOpen()) {
-          this.#onCollapse()
-          this.#onExpand()
-        }
-      }
     }
   }
 
@@ -154,11 +163,13 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     const isNonModal = !this.modal
 
     // Suppress blur event on target element, since Firefox does not emit it
-    this.#$targetSlot.addEventListener('blur', this.#stopPropagation, true)
+    this.#$targetSlot.addEventListener('blur', this.#captureActiveElement, true)
 
     if (isNonModal) {
       // Capture active target element and supress unnecessary events
       this.#$targetOpenSlot.addEventListener('blur', this.#captureActiveElement, true)
+      // Webkit emits additional focus event when transferring element
+      this.#$targetOpenSlot.addEventListener('focus', this.#stopPropagation, true)
 
       /* Measure target */
       const targetRect = this.#$target.getBoundingClientRect()
@@ -171,7 +182,10 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       this.#$targetOpenWrapper.style.height = heightPx
 
       /* Transfer target */
-      this.#$targetSlot.assignedElements()[0]?.setAttribute('slot', 'target-open')
+      getFirstSlotElement(this.#$targetSlot)?.setAttribute('slot', 'target-open')
+
+      // Route keyboard events to content
+      this.#$targetOpenSlot.addEventListener('keydown', this.#onTargetKeydown)
     }
 
     /* Open dialog */
@@ -180,21 +194,31 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$target.setAttribute('aria-expanded', 'true')
 
     // Suppress blur event on target element, since Firefox does not emit it
-    this.#$targetSlot.removeEventListener('blur', this.#stopPropagation, true)
+    this.#$targetSlot.removeEventListener('blur', this.#captureActiveElement, true)
 
     // Try focusing transferred target element. Firefox needs this
     if (isNonModal) {
       // Capture active target element and supress unnecessary events
       this.#$targetOpenSlot.removeEventListener('blur', this.#captureActiveElement, true)
+      this.#$targetOpenSlot.removeEventListener('focus', this.#stopPropagation, true)
 
       // We have to delay focus, in case we expand in onFocus handler
       if (this.#targetActiveElement !== null) {
-        requestAnimationFrame(() => {
-          this.#$targetOpenSlot.addEventListener('focus', this.#stopPropagation, true)
-          // Try focusing transferred target element
-          this.#targetActiveElement?.focus()
-          this.#$targetOpenSlot.removeEventListener('focus', this.#stopPropagation, true)
-        })
+        // Firefox loses focus on target when non-modal dialog opens
+        if (!isElementFocused(this.#targetActiveElement)) {
+          requestAnimationFrame(() => {
+            this.#$targetOpenSlot.addEventListener('focus', this.#stopPropagation, true)
+            this.#targetActiveElement?.focus()
+            this.#$targetOpenSlot.removeEventListener('focus', this.#stopPropagation, true)
+          })
+        }
+      }
+    } else {
+      // When opening dialog in modal mode Firefox does not set focus to the first focusable element
+      // Instead focus defaults to the body
+      // eslint-disable-next-line no-lonely-if
+      if (document.activeElement === document.body) {
+        getFirstSlotElement(this.#$contentSlot)?.focus()
       }
     }
 
@@ -202,6 +226,9 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#originalOverflowValue = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     window.addEventListener('resize', this.#onResize)
+
+    // Dispatch Visibility Context
+    this.#dispatchContentVisibility(true)
   }
 
   #onCollapse() {
@@ -209,20 +236,15 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       return
     }
 
+    /* Dispatch Visibility Context */
+    this.#dispatchContentVisibility(false)
+
     // Supress target focus event, to prevent refocus of target to reopen popover
     this.#$targetSlot.addEventListener('focus', this.#stopPropagation, true)
 
-    // Refocus before-open active element. Webkit needs this
-    if (this.#targetActiveElement !== null) {
-      this.#$targetOpenSlot.addEventListener('focus', this.#stopPropagation, true)
-      this.#targetActiveElement.focus()
-      this.#targetActiveElement = null
-      this.#$targetOpenSlot.removeEventListener('focus', this.#stopPropagation, true)
-    }
-
     /* Restore target */
     /* Restore whether modal or non-modal, since modal flag can change */
-    this.#$targetOpenSlot.assignedElements()[0]?.setAttribute('slot', 'target')
+    getFirstSlotElement(this.#$targetOpenSlot)?.setAttribute('slot', 'target')
     this.#$target.style.width = 'unset'
     this.#$target.style.height = 'unset'
 
@@ -230,8 +252,27 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$dialog.close()
     this.#$target.setAttribute('aria-expanded', 'false')
 
+    // Refocus before-open active element
+    if (this.#targetActiveElement !== null) {
+      // Webkit focuses back wrong "before-open" element when closing modal dialog
+      if (!isElementFocused(this.#targetActiveElement)) {
+        requestAnimationFrame(() => {
+          // Supress target focus event, to prevent refocus of target to reopen popover
+          this.#$targetSlot.addEventListener('focus', this.#stopPropagation, true)
+          this.#targetActiveElement!.focus()
+          this.#targetActiveElement = null
+          this.#$targetSlot.removeEventListener('focus', this.#stopPropagation, true)
+        })
+      } else {
+        this.#targetActiveElement = null
+      }
+    }
+
     // Supress target focus event, to prevent refocus of target to reopen popover
     this.#$targetSlot.removeEventListener('focus', this.#stopPropagation, true)
+
+    /* Route keyboard events to content */
+    this.#$targetOpenSlot.removeEventListener('keydown', this.#onTargetKeydown)
 
     /* Restore scroll */
     document.body.style.overflow = this.#originalOverflowValue
@@ -256,9 +297,9 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     let topPos = 0
 
     const orient = this.orientation
-    const shouldExpandWidthToTarget = orient === 'top' || orient === 'bottom'
-    const resultWidth = shouldExpandWidthToTarget
-      ? Math.max(modalRect.width, targetRect.width)
+    const shouldSetWidthToTarget = orient === 'top' || orient === 'bottom'
+    const resultWidth = shouldSetWidthToTarget
+      ? targetRect.width
       : modalRect.width
 
     if (orient === 'bottom-right' || orient === 'top-right' || orient === 'top' || orient === 'bottom') {
@@ -326,6 +367,35 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
   #stopPropagation = (e: Event) => {
     e.stopPropagation()
+  }
+
+  #dispatchContentVisibility(isVisible: boolean) {
+    for (const $el of this.#visibilityContext.elements) {
+      $el.dispatchEvent(
+        new CustomEvent<TContextVisibility>('-visibility', { detail: isVisible })
+      )
+    }
+  }
+
+  #onTargetKeydown = (e: KeyboardEvent) => {
+    for (const $el of this.#keydownContext.elements) {
+      let isPrevented = false
+
+      $el.dispatchEvent(
+        new CustomEvent<TContextKeyboard>('-keydown', {
+          detail: {
+            code: e.code,
+            preventDefault: () => {
+              isPrevented = true
+            },
+          },
+        })
+      )
+
+      if (isPrevented) {
+        e.preventDefault()
+      }
+    }
   }
 })
 

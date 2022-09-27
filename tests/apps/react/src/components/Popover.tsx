@@ -33,9 +33,14 @@ export const Popover: FC<TPopover> = ({ search }) => {
         type="cta-secondary"
         text="Some content"
         aria-label="Button"
-        onClick={onOpen}
+        on-click={onOpen}
       />
-      <section slot="content" style={{ maxWidth: '240px', padding: '12px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</section>
+      <section
+        slot="content"
+        style={{ maxWidth: '240px', padding: '12px' }}
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </section>
     </sinch-popover>
   )
 }
