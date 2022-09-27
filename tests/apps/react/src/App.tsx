@@ -8,6 +8,8 @@ import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
 import { Chat } from './components/Chat'
 import { Checkbox } from './components/Checkbox'
+import { ColorMenu } from './components/ColorMenu'
+import { ColorSelect } from './components/ColorSelect'
 import { ColorSwatch } from './components/ColorSwatch'
 import { DateInput } from './components/DateInput'
 import { DatePicker } from './components/DatePicker'
@@ -115,6 +117,17 @@ const mapElement = (url: URL) => {
     case '/checkbox': {
       return (
         <Checkbox search={url.searchParams}/>
+      )
+    }
+
+    case '/color-menu': {
+      return (
+        <ColorMenu search={url.searchParams}/>
+      )
+    }
+    case '/color-select': {
+      return (
+        <ColorSelect search={url.searchParams}/>
       )
     }
 

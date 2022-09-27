@@ -10,6 +10,8 @@
     <CardContainer v-if="url.pathname === '/card-container'" :search="url.searchParams"/>
     <Chat v-if="url.pathname === '/chat'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
+    <ColorMenu v-if="url.pathname === '/color-menu'" :search="url.searchParams"/>
+    <ColorSelect v-if="url.pathname === '/color-select'" :search="url.searchParams"/>
     <ColorSwatch v-if="url.pathname === '/color-swatch'" :search="url.searchParams"/>
     <DatePicker v-if="url.pathname === '/date-picker'" :search="url.searchParams"/>
     <Dialog v-if="url.pathname === '/dialog'" :search="url.searchParams"/>
@@ -62,6 +64,8 @@ import Card from './components/Card.vue'
 import CardContainer from './components/CardContainer.vue'
 import Chat from './components/Chat.vue'
 import Checkbox from './components/Checkbox.vue'
+import ColorMenu from './components/ColorMenu.vue'
+import ColorSelect from './components/ColorSelect.vue'
 import ColorSwatch from './components/ColorSwatch.vue'
 import DatePicker from './components/DatePicker.vue'
 import Dialog from './components/Dialog.vue'
@@ -139,6 +143,8 @@ export default {
     CardContainer,
     Chat,
     Checkbox,
+    ColorMenu,
+    ColorSelect,
     ColorSwatch,
     DatePicker,
     Dialog,
