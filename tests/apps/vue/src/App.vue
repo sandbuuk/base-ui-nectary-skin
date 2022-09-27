@@ -1,6 +1,7 @@
 <template>
   <div :style="style">
     <Accordion v-if="url.pathname === '/accordion'" :search="url.searchParams"/>
+    <ActionDropdown v-if="url.pathname === '/action-dropdown'" :search="url.searchParams"/>
     <ActionMenu v-if="url.pathname === '/action-menu'" :search="url.searchParams"/>
     <Alert v-if="url.pathname === '/alert'" :search="url.searchParams"/>
     <Avatar v-if="url.pathname === '/avatar'" :search="url.searchParams"/>
@@ -51,6 +52,7 @@
 <script>
 import '@sinch-engage/nectary/theme.css'
 import Accordion from './components/Accordion.vue'
+import ActionDropdown from './components/ActionDropdown.vue'
 import ActionMenu from './components/ActionMenu.vue'
 import Alert from './components/Alert.vue'
 import Avatar from './components/Avatar.vue'
@@ -126,6 +128,7 @@ export default {
   },
   components: {
     Accordion,
+    ActionDropdown,
     ActionMenu,
     Alert,
     Avatar,

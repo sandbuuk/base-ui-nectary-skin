@@ -1,4 +1,5 @@
 import { Accordion } from './components/Accordion'
+import { ActionDropdown } from './components/ActionDropdown'
 import { ActionMenu } from './components/ActionMenu'
 import { Alert } from './components/Alert'
 import { Avatar } from './components/Avatar'
@@ -60,6 +61,11 @@ const mapElement = (url: URL) => {
     case '/action-menu': {
       return (
         <ActionMenu search={url.searchParams}/>
+      )
+    }
+    case '/action-dropdown': {
+      return (
+        <ActionDropdown search={url.searchParams}/>
       )
     }
 

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { AccordionComponent } from '../components/Accordion/Accordion.component'
+import { ActionDropdownComponent } from '../components/ActionDropdown/ActionDropdown.component'
 import { ActionMenuComponent } from '../components/ActionMenu/ActionMenu.component'
 import { AlertComponent } from '../components/Alert/Alert.component'
 import { AvatarComponent } from '../components/Avatar/Avatar.component'
@@ -51,6 +52,7 @@ import { AppComponent } from './app.component'
 @NgModule({
   declarations: [
     AccordionComponent,
+    ActionDropdownComponent,
     ActionMenuComponent,
     AlertComponent,
     AppComponent,

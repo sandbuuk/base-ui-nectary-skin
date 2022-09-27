@@ -1,5 +1,6 @@
 <div [ngStyle]="style" [ngSwitch]="pathname">
   <accordion-component *ngSwitchCase="'/accordion'"></accordion-component>
+  <action-dropdown-component *ngSwitchCase="'/action-dropdown'"></action-dropdown-component>
   <action-menu-component *ngSwitchCase="'/action-menu'"></action-menu-component>
   <alert-component *ngSwitchCase="'/alert'"></alert-component>
   <avatar-component *ngSwitchCase="'/avatar'"></avatar-component>
