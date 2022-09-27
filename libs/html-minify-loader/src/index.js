@@ -1,9 +1,11 @@
+const { basename } = require('path')
 const { minify } = require('html-minifier-terser')
 
 module.exports = function(src) {
   const options = this.getOptions()
+  const isTemplateFile = basename(this.resourcePath) === 'template.html'
 
-  if (options.injectTestStyles === true) {
+  if (isTemplateFile && options.injectTestStyles === true) {
   // eslint-disable-next-line no-param-reassign
     src = `
       ${src}
