@@ -135,63 +135,78 @@ export const clampNumber = (value: number, min: number, max: number): number => 
   return Math.min(max, Math.max(min, value))
 }
 
-type TRange = {
+type IntegerOptions = {
   min?: number,
   max?: number,
+  defaultValue?: number | null,
+  itemSizeMultiplier?: number,
+  itemSpaceBetween?: number,
 }
 
-const applyRange = (value: number, range: TRange) => {
+const DEFAULT_INTEGER_OPTIONS: IntegerOptions = {
+  itemSizeMultiplier: 1,
+  itemSpaceBetween: 0,
+  defaultValue: null,
+}
+
+const applyRange = (value: number, { min, max }: IntegerOptions) => {
   let result = value
 
-  if (typeof range.min === 'number') {
-    result = Math.max(range.min, result)
+  if (min != null) {
+    result = Math.max(min, result)
   }
 
-  if (typeof range.max === 'number') {
-    result = Math.min(range.max, result)
+  if (max != null) {
+    result = Math.min(max, result)
   }
 
   return result
 }
 
-export const attrValueToInteger = (value: string | null, range: TRange = {}): number | null => {
-  if (value === null) {
-    return null
+export const attrValueToInteger = (value: string | null, options: IntegerOptions = DEFAULT_INTEGER_OPTIONS): number | null => {
+  const { defaultValue = null, itemSizeMultiplier = 1, itemSpaceBetween = 0 } = options
+
+  let intValue = defaultValue
+
+  if (value !== null) {
+    const int = parseInt(value)
+
+    if (Number.isInteger(int)) {
+      intValue = applyRange(int, options)
+    }
   }
 
-  const int = parseInt(value)
-
-  if (!Number.isInteger(int)) {
-    // Couldn't parse attribute value
-    return null
+  if (intValue !== null) {
+    return intValue * itemSizeMultiplier + Math.max(intValue - 1, 0) * itemSpaceBetween
   }
 
-  return applyRange(int, range)
+  return null
 }
 
-export const attrValueToPixels = (value: string | null, options: TRange & {multiplier?: number} = {}): string => {
-  const int = attrValueToInteger(value, { min: options.min ?? 0, max: options.max })
+export const attrValueToPixels = (value: string | null, options: IntegerOptions = DEFAULT_INTEGER_OPTIONS): string => {
+  const int = attrValueToInteger(value, options)
 
-  return int === null ? 'unset' : `${int * (options.multiplier ?? 1)}px`
+  return int === null ? 'unset' : `${int}px`
 }
 
-export const updateIntegerAttribute = ($element: Element, attrName: string, attrValue: string | number | null | undefined, range: TRange = {}) => {
-  if (attrValue == null) {
-    $element.removeAttribute(attrName)
+export const updateIntegerAttribute = ($element: Element, attrName: string, attrValue: string | number | null | undefined, options: IntegerOptions = DEFAULT_INTEGER_OPTIONS) => {
+  const { defaultValue = null, itemSizeMultiplier: multiplier = 1 } = options
 
-    return
+  let intValue: number | null = null
+
+  if (typeof attrValue === 'string') {
+    intValue = attrValueToInteger(attrValue, options)
+  } else if (typeof attrValue === 'number') {
+    intValue = applyRange(attrValue, options) * multiplier
+  } else {
+    intValue = defaultValue
   }
-
-  const intValue = typeof attrValue === 'string'
-    ? attrValueToInteger(attrValue, range)
-    : applyRange(attrValue, range)
 
   if (intValue === null) {
-    // Couldn't parse attribute value
-    return
+    $element.removeAttribute(attrName)
+  } else {
+    $element.setAttribute(attrName, intValue.toFixed(0))
   }
-
-  $element.setAttribute(attrName, intValue.toFixed(0))
 }
 
 export function getIntegerAttribute($element: Element, attrName: string): number | undefined
@@ -314,6 +329,10 @@ export const cloneNode = (el: Element, deep: boolean): Element => {
   }
 
   return el.cloneNode(deep) as Element
+}
+
+export const isElementFocused = ($el: Element | null): boolean => {
+  return $el !== null && $el === ($el.getRootNode() as Document).activeElement
 }
 
 export class Context {
