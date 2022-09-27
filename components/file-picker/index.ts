@@ -1,4 +1,3 @@
-import '../dropdown'
 import {
   defineCustomElement,
   getAttribute,
