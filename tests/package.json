@@ -25,12 +25,12 @@
   },
   "devDependencies": {
     "@playwright/test": "1.25.1",
-    "@sinch-engage/nectary": "workspace:@sinch-engage/nectary@*",
-    "@types/node": "^17.0.14",
-    "axe-core": "^4.3.5",
-    "concurrently": "^7.1.0",
+    "@sinch-engage/nectary": "workspace:^0.39.0",
+    "@types/node": "^17.0.45",
+    "axe-core": "^4.4.3",
+    "concurrently": "^7.4.0",
     "piall": "^0.2.1",
     "playwright-core": "1.25.1",
-    "wait-on": "^6.0.0"
+    "wait-on": "^6.0.1"
   }
 }
