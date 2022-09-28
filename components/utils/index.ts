@@ -95,10 +95,9 @@ export const updateAttribute = ($element: Element, attrName: string, attrValue: 
   }
 }
 
-export function getAttribute($element: Element, attrName: string): string | undefined
-export function getAttribute($element: Element, attrName: string, defaultValue: null): string | null
+export function getAttribute($element: Element, attrName: string): string | null
 export function getAttribute($element: Element, attrName: string, defaultValue: string): string
-export function getAttribute($element: Element, attrName: string, defaultValue?: string | null) {
+export function getAttribute($element: Element, attrName: string, defaultValue: string | null = null) {
   return $element.getAttribute(attrName) ?? defaultValue
 }
 

@@ -85,7 +85,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
   }
 
   get optionalText() {
-    return getAttribute(this, 'optionaltext', null)
+    return getAttribute(this, 'optionaltext')
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {

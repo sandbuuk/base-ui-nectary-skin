@@ -99,7 +99,7 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
   }
 
   get text() {
-    return getAttribute(this, 'text', null)
+    return getAttribute(this, 'text')
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {

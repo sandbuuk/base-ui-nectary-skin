@@ -130,7 +130,7 @@ defineCustomElement('sinch-file-drop', class extends NectaryElement {
   }
 
   get accept() {
-    return getAttribute(this, 'accept', null)
+    return getAttribute(this, 'accept')
   }
 
   get size() {

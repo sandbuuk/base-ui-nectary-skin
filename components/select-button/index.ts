@@ -72,7 +72,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   }
 
   get placeholder() {
-    return getAttribute(this, 'placeholder', null)
+    return getAttribute(this, 'placeholder')
   }
 
   set invalid(isInvalid: boolean) {

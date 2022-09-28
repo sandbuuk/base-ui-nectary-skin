@@ -47,7 +47,7 @@ defineCustomElement('sinch-chat-avatar', class extends NectaryElement {
   }
 
   get src() {
-    return getAttribute(this, 'src', null)
+    return getAttribute(this, 'src')
   }
 
   set src(value: string | null) {

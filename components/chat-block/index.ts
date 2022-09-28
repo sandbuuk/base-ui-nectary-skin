@@ -87,7 +87,7 @@ defineCustomElement('sinch-chat-block', class extends NectaryElement {
   }
 
   get firstName(): string | null {
-    return getAttribute(this, 'firstname', null)
+    return getAttribute(this, 'firstname')
   }
 
   set lastName(value: string | null) {
@@ -95,7 +95,7 @@ defineCustomElement('sinch-chat-block', class extends NectaryElement {
   }
 
   get lastName(): string | null {
-    return getAttribute(this, 'lastname', null)
+    return getAttribute(this, 'lastname')
   }
 
   set timestamp(value: string | null) {
@@ -103,7 +103,7 @@ defineCustomElement('sinch-chat-block', class extends NectaryElement {
   }
 
   get timestamp(): string | null {
-    return getAttribute(this, 'timestamp', null)
+    return getAttribute(this, 'timestamp')
   }
 
   #onBubbleSlotChange = () => {

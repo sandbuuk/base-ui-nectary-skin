@@ -59,10 +59,10 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
   }
 
   get orientation() {
-    return getAttribute(this, 'orientation')
+    return getAttribute(this, 'orientation', 'top')
   }
 
-  set orientation(value: string | undefined) {
+  set orientation(value: string) {
     updateAttribute(this, 'orientation', value)
   }
 
