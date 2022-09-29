@@ -1,0 +1,56 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import { IconExample } from './examples/Icon.tsx?example'
+import { SmallExample } from './examples/Small.tsx?example'
+import {
+  ReactPropsTable,
+  ElementPropertiesTable,
+  ElementAttributesTable,
+} from '@sinch-engage/nectary/tag/types.ts?api'
+
+# Tag
+
+Just a tag.
+
+Works with the same `color` value as [ColorMenu](?path=/components/colormenu).
+
+## Table of contents
+
+## Examples
+
+### Simple
+
+<Example Component={SimpleExample}/>
+
+### Icon
+
+<Example Component={IconExample}/>
+
+### Small
+
+<Example Component={SmallExample}/>
+
+## API
+
+#### Slots
+
+##### icon
+
+`icon` slot puts an icon to the left side.
+
+### React
+
+#### Props
+
+<ReactPropsTable/>
+
+### Element
+
+#### Properties
+
+<ElementPropertiesTable/>
+
+#### Attributes
+
+<ElementAttributesTable/>
