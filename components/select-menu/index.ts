@@ -70,10 +70,6 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     return ['value', 'rows', 'multiple']
   }
 
-  get nodeName() {
-    return 'select'
-  }
-
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }
@@ -346,10 +342,6 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     const result = this.multiple
       ? updateCsv(this.value, value, !getBooleanAttribute($opt, 'data-checked'))
       : value
-
-    this.dispatchEvent(
-      new CustomEvent('change', { detail: result, bubbles: true })
-    )
 
     this.dispatchEvent(
       new CustomEvent('-change', { detail: result })
