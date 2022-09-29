@@ -1,9 +1,9 @@
 import type { TSinchElementReact } from '../types'
 
 export type TSinchSelectButtonElement = HTMLElement & {
-  /** Value */
+  /** Text */
   text: string,
-  /** Text that appears in the text field when it has no value set */
+  /** Text that appears in the text field when it has no text set */
   placeholder: string,
   /** Invalid state */
   invalid: boolean,
@@ -15,7 +15,7 @@ export type TSinchSelectButtonElement = HTMLElement & {
   addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
   /** Blur event */
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
-  /** Value */
+  /** Text */
   setAttribute(name: 'text', value: string): void,
   /** Text that appears in the text field when it has no value set */
   setAttribute(name: 'placeholder', value: string): void,
@@ -26,11 +26,11 @@ export type TSinchSelectButtonElement = HTMLElement & {
 }
 
 export type TSinchSelectButtonReact = TSinchElementReact<TSinchSelectButtonElement> & {
-  /** Controlled value, doesn't change on its own and requres an onChange-value state loop */
+  /** Text */
   text: string,
-  /** Label that is used for a11y – might be different from `label` */
+  /** Label that is used for a11y` */
   'aria-label': string,
-  /** Text that appears in the text field when it has no value set */
+  /** Text that appears in the text field when it has no text set */
   placeholder: string,
   /** Invalid state */
   invalid?: boolean,
