@@ -1,102 +1,24 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
-import { SimpleExample } from './examples/Simple.tsx?example'
-import { FieldExample } from './examples/Field.tsx?example'
-import { MaxVisibleItemsExample } from './examples/MaxVisibleItems.tsx?example'
-import { DisabledExample } from './examples/Disabled.tsx?example'
-import {
-  ReactPropsTable as SelectReactPropsTable,
-  ReactHandlersTable as SelectReactHandlersTable,
-  ElementPropertiesTable as SelectElementPropertiesTable,
-  ElementAttributesTable as SelectElementAttributesTable,
-  ElementEventsTable as SelectElementEventsTable
-} from '@sinch-engage/nectary/select/types.ts?api'
-import {
-  ReactPropsTable as SelectOptionReactPropsTable,
-  ElementPropertiesTable as SelectOptionElementPropertiesTable,
-  ElementAttributesTable as SelectOptionElementAttributesTable,
-} from '@sinch-engage/nectary/select-option/types.ts?api'
+import { ButtonExample } from './examples/Button.tsx?example'
+import { MultipleExample } from './examples/Multiple.tsx?example'
 
 # Select
 
-Select component is similar to navite HTML select/option but provides additional features like icon inside of an option.
-
-It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled-components) component.
+Select is a composition of a target component, Popover and Select Menu.
 
 ## Table of contents
 
 ## Examples
 
-### Simple
+### Button
 
-<Example Component={SimpleExample}/>
+Use down/up arrow keys to navigate and space/enter to select with keyboard.
 
-### Field
+<Example Component={ButtonExample}/>
 
-<Example Component={FieldExample}/>
+### Multiple
 
-### Max visible items
+We currently don't have a well-defined UX/UI pattern of how to show multiple selection.
 
-Controls number of visible at the same time options in the list and makes it scrollable.
-
-<Example Component={MaxVisibleItemsExample}/>
-
-### Disabled
-
-<Example Component={DisabledExample}/>
-
-## API
-
-### Slots
-
-#### tooltip
-
-`tooltip` slot puts a tooltip into its predefined place, see example above.
-
-#### option
-
-`option` slot renders `sinch-select-option`.
-
-### Select
-
-#### React
-
-##### Props
-
-<SelectReactPropsTable/>
-
-##### Handlers
-
-<SelectReactHandlersTable/>
-
-#### Element
-
-##### Properties
-
-<SelectElementPropertiesTable/>
-
-##### Attributes
-
-<SelectElementAttributesTable/>
-
-##### Events
-
-<SelectElementEventsTable/>
-
-### Select Option
-
-#### React
-
-##### Props
-
-<SelectOptionReactPropsTable/>
-
-#### Element
-
-##### Properties
-
-<SelectOptionElementPropertiesTable/>
-
-##### Attributes
-
-<SelectOptionElementAttributesTable/>
+<Example Component={MultipleExample}/>
