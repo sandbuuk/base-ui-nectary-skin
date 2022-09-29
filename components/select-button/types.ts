@@ -4,7 +4,7 @@ export type TSinchSelectButtonElement = HTMLElement & {
   /** Value */
   text: string,
   /** Text that appears in the text field when it has no value set */
-  placeholder: string | null,
+  placeholder: string,
   /** Invalid state */
   invalid: boolean,
   /** Disabled */
@@ -31,7 +31,7 @@ export type TSinchSelectButtonReact = TSinchElementReact<TSinchSelectButtonEleme
   /** Label that is used for a11y – might be different from `label` */
   'aria-label': string,
   /** Text that appears in the text field when it has no value set */
-  placeholder?: string,
+  placeholder: string,
   /** Invalid state */
   invalid?: boolean,
   /** Disabled */
