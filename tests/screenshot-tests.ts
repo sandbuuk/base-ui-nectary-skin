@@ -164,7 +164,7 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
         for await (const { name, include = [], includeRects = [], expand = 12 } of t.fn({ page, $: locator, $eval: makeEval<T>(locator), isChromium, isFirefox, isWebkit })) {
           const rects = await getRects([locator, ...include])
           const clip = expandRect(mergeBoundingBox(rects.concat(includeRects)), expand)
-          const screenshotName = `${t.name}-${name}.png`
+          const screenshotName = `${t.name.toLowerCase()}-${name.toLowerCase()}.png`
 
           if (clip == null) {
             throw new Error('Cannot get locator bounding box')
