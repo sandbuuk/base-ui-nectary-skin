@@ -1,3 +1,20 @@
+## v0.40.0 (2022-09-30)
+
+* 💥 update color palette
+* 💥 remove `sinch-tag-close` component
+* 💥 rename `category` attribute to `color` in `sinch-tag`
+* 💥 remove `sinch-select` component
+* 💥 remove `sinch-dropdown` component
+* 💥 extract `sinch-popover` from `sinch-action-menu`
+* ➕ add `sinch-color-menu` component
+* ➕ add `sinch-color-swatch` component
+* ➕ add `sinch-select-menu` component
+* ➕ add `sinch-select-button` component
+* ➕ add `sinch-chip` component
+* ➕ add `sinch-icon-channel-notify` component
+* 🐞 fix overflow glitch in `sinch-avatar`
+* 🐞 fix icon size in `sinch-horizontal-stepper` and `sinch-vertical-stepper`
+
 ## v0.39.0 (2022-09-15)
 
 * 💥 require aria-label for each button in `sinch-date-picker`
