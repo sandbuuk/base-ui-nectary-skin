@@ -80,6 +80,19 @@ const overridePageKeyboard = (page: Page): void => {
   ;(page.keyboard as any).__modified = true
 }
 
+const overridePageMouse = (page: Page): void => {
+  if ((page.mouse as any).__modified === true) {
+    return
+  }
+
+  const originalClick = page.mouse.click
+
+  page.mouse.click = (function(...args) {
+    return page.waitForTimeout(100).then(() => originalClick.apply(this, args))
+  })
+  ;(page.mouse as any).__modified = true
+}
+
 type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
   <R, Arg>(cb: (el: HTMLElementTagNameMap[T], arg: Arg) => R, arg: Arg): Promise<R>,
   <R>(cb: (el: HTMLElementTagNameMap[T]) => R): Promise<R>,
@@ -141,6 +154,7 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
     }
 
     pages.forEach(overridePageKeyboard)
+    pages.forEach(overridePageMouse)
 
     // Optionally subscribe to page console output
     // pages.forEach((page) => {
