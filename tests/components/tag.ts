@@ -3,12 +3,12 @@ import { colorNameValues, NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
-const shot = '/tag?text=Label%20text&color=light-grey'
-const withWide = '/tag?width=150&icon=true&text=Label%20text&color=light-grey'
-const withNarrow = '/tag?width=80&icon=true&text=Label%20text%20text%20text%20text&color=light-grey'
-const withIcon = '/tag?text=Label%20text&color=light-grey&icon=true'
-const withIconSmall = '/tag?text=Label%20text&color=light-grey&small=true&icon=true'
-const checkTagWithDismiss = makeAccessibilityTests('/tag?text=Label%20text&color=light-grey&icon=true', 'sinch-tag')
+const shot = '/tag?text=Label%20text&color=Gray%2010'
+const withWide = '/tag?width=150&icon=true&text=Label%20text&color=Gray%2010'
+const withNarrow = '/tag?width=80&icon=true&text=Label%20text%20text%20text%20text&color=Gray%2010'
+const withIcon = '/tag?text=Label%20text&color=Gray%2010&icon=true'
+const withIconSmall = '/tag?text=Label%20text&color=Gray%2010&small=true&icon=true'
+const checkTagWithDismiss = makeAccessibilityTests('/tag?text=Label%20text&color=Gray%2010&icon=true', 'sinch-tag')
 
 test('accessibility', checkTagWithDismiss(async function* () {
   yield

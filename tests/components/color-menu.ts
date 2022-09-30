@@ -18,7 +18,7 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
       yield { name: 'empty' }
 
       await $eval((el) => el.setAttribute('value', 'Pink 10'))
-      yield { name: 'Pink 10' }
+      yield { name: 'pink 10' }
     },
   },
   {
@@ -104,13 +104,15 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
 
       await page.keyboard.press('ArrowRight')
       await page.keyboard.press('ArrowRight')
+      await page.keyboard.press('ArrowRight')
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('ArrowDown')
-      yield { name: '1-rrdd' }
+      yield { name: '1-rrrdd' }
 
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('ArrowDown')
-      yield { name: '2-dd' }
+      await page.keyboard.press('ArrowDown')
+      yield { name: '2-ddd' }
 
       await page.keyboard.press('ArrowDown')
       yield { name: '3-d' }
@@ -149,7 +151,7 @@ test('color-menu events', runScreenshotTests('sinch-color-menu', [
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-color-menu-change', detail: 'Blue 20' },
-        { type: 'sinch-color-menu-change', detail: 'Skin Tone 40' },
+        { type: 'sinch-color-menu-change', detail: 'Skin tone 40' },
       ])
     },
   },

@@ -19,7 +19,7 @@ test('color-swatch screenshots', runScreenshotTests('sinch-color-swatch', [
         await $eval((el, val) => {
           el.setAttribute('name', val)
         }, colorName)
-        yield { name: colorName === NO_COLOR ? 'no-color' : colorName.toLowerCase() }
+        yield { name: colorName === NO_COLOR ? 'no-color' : colorName }
       }
     },
   },

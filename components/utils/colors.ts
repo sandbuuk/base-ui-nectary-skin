@@ -23,12 +23,12 @@ export type TSinchColorName =
   | 'Gray 10'
   | 'Gray 20'
   | 'Red 10'
-  | 'Skin Tone 0'
-  | 'Skin Tone 10'
-  | 'Skin Tone 20'
-  | 'Skin Tone 30'
-  | 'Skin Tone 40'
-  | 'Skin Tone 50'
+  | 'Skin tone 0'
+  | 'Skin tone 10'
+  | 'Skin tone 20'
+  | 'Skin tone 30'
+  | 'Skin tone 40'
+  | 'Skin tone 50'
 
 export const colorNameValues: readonly TSinchColorName[] = [
   NO_COLOR,
@@ -53,12 +53,12 @@ export const colorNameValues: readonly TSinchColorName[] = [
   'Gray 20',
   'Coral 10',
   'Red 10',
-  'Skin Tone 0',
-  'Skin Tone 10',
-  'Skin Tone 20',
-  'Skin Tone 30',
-  'Skin Tone 40',
-  'Skin Tone 50',
+  'Skin tone 0',
+  'Skin tone 10',
+  'Skin tone 20',
+  'Skin tone 30',
+  'Skin tone 40',
+  'Skin tone 50',
 ]
 
 type TAssertColorName = (value: string | null) => asserts value is TSinchColorName
@@ -72,30 +72,30 @@ export const assertColorNameValue: TAssertColorName = (value) => {
 export const colorMap: Record<TSinchColorName, { value: string, isInverted: boolean }> = {
   [NO_COLOR]: { value: NO_COLOR, isInverted: false },
   'Blue 50': { value: 'night-400', isInverted: true },
-  'Blue 40': { value: 'aqua-400', isInverted: true },
+  'Blue 40': { value: 'aqua-400', isInverted: false },
   'Blue 30': { value: 'aqua-200', isInverted: false },
   'Blue 20': { value: 'night-200', isInverted: false },
   'Blue 10': { value: 'informative-200', isInverted: false },
-  'Green 30': { value: 'grass-400', isInverted: true },
+  'Green 30': { value: 'grass-400', isInverted: false },
   'Green 20': { value: 'grass-200', isInverted: false },
   'Green 10': { value: 'success-200', isInverted: false },
-  'Yellow 20': { value: 'bolt-400', isInverted: true },
+  'Yellow 20': { value: 'bolt-400', isInverted: false },
   'Yellow 10': { value: 'bolt-200', isInverted: false },
-  'Orange 30': { value: 'orange-400', isInverted: true },
+  'Orange 30': { value: 'orange-400', isInverted: false },
   'Orange 20': { value: 'orange-200', isInverted: false },
   'Orange 10': { value: 'warning-200', isInverted: false },
-  'Pink 20': { value: 'candy-400', isInverted: true },
+  'Pink 20': { value: 'candy-400', isInverted: false },
   'Pink 10': { value: 'candy-200', isInverted: false },
   'Brown 20': { value: 'mud-400', isInverted: true },
   'Brown 10': { value: 'mud-200', isInverted: false },
-  'Gray 20': { value: 'dirt-400', isInverted: true },
+  'Gray 20': { value: 'dirt-400', isInverted: false },
   'Gray 10': { value: 'dirt-200', isInverted: false },
   'Coral 10': { value: 'berry-200', isInverted: false },
   'Red 10': { value: 'error-200', isInverted: false },
-  'Skin Tone 0': { value: 'skin-tone-10', isInverted: false },
-  'Skin Tone 10': { value: 'skin-tone-20', isInverted: false },
-  'Skin Tone 20': { value: 'skin-tone-30', isInverted: false },
-  'Skin Tone 30': { value: 'skin-tone-40', isInverted: false },
-  'Skin Tone 40': { value: 'skin-tone-50', isInverted: false },
-  'Skin Tone 50': { value: 'skin-tone-60', isInverted: true },
+  'Skin tone 0': { value: 'skin-tone-10', isInverted: false },
+  'Skin tone 10': { value: 'skin-tone-20', isInverted: false },
+  'Skin tone 20': { value: 'skin-tone-30', isInverted: false },
+  'Skin tone 30': { value: 'skin-tone-40', isInverted: false },
+  'Skin tone 40': { value: 'skin-tone-50', isInverted: false },
+  'Skin tone 50': { value: 'skin-tone-60', isInverted: true },
 }
