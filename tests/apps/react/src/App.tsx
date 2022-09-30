@@ -8,6 +8,7 @@ import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
 import { Chat } from './components/Chat'
 import { Checkbox } from './components/Checkbox'
+import { Chip } from './components/Chip'
 import { ColorMenu } from './components/ColorMenu'
 import { ColorSelect } from './components/ColorSelect'
 import { ColorSwatch } from './components/ColorSwatch'
@@ -117,6 +118,12 @@ const mapElement = (url: URL) => {
     case '/checkbox': {
       return (
         <Checkbox search={url.searchParams}/>
+      )
+    }
+
+    case '/chip': {
+      return (
+        <Chip search={url.searchParams}/>
       )
     }
 

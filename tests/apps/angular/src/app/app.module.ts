@@ -11,6 +11,7 @@ import { CardComponent } from '../components/Card/Card.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
 import { ChatComponent } from '../components/Chat/Chat.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
+import { ChipComponent } from '../components/Chip/Chip.component'
 import { ColorMenuComponent } from '../components/ColorMenu/ColorMenu.component'
 import { ColorSelectComponent } from '../components/ColorSelect/ColorSelect.component'
 import { ColorSwatchComponent } from '../components/ColorSwatch/ColorSwatch.component'
@@ -65,6 +66,7 @@ import { AppComponent } from './app.component'
     CardContainerComponent,
     ChatComponent,
     CheckboxComponent,
+    ChipComponent,
     ColorMenuComponent,
     ColorSelectComponent,
     ColorSwatchComponent,
