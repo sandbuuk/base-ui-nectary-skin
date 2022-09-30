@@ -2,7 +2,6 @@ import { colorNameValues } from '@sinch-engage/nectary/utils/colors'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/tag-close'
 import '@sinch-engage/nectary/icons/mood'
 
 export default {

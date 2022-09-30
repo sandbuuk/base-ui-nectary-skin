@@ -2,7 +2,6 @@ import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/tag-close'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/close'
 import '@sinch-engage/nectary/icons/search'
@@ -99,9 +98,7 @@ Input.parameters = {
 
 const inputWithIconButtonInnerHTML = `
   <sinch-icon-search slot="icon"></sinch-icon-search>
-  <sinch-tag slot="right" text="Tag">
-    <sinch-tag-close slot="close"></sinch-tag-close>
-  </sinch-tag>
+  <sinch-tag slot="right" text="Tag"></sinch-tag>
   <sinch-icon-button small slot="right">
     <sinch-icon-close slot="icon"></sinch-icon-close>
   </sinch-icon-button>
