@@ -45,7 +45,7 @@ export const Field: FC<TField> = ({ search }) => {
         aria-label="Input"
       >
         <sinch-icon-search slot="icon"/>
-        <sinch-tag slot="right" text="text" color="light-grey"/>
+        <sinch-tag slot="right" text="text"/>
         <sinch-icon-button slot="right" small aria-label="Button" onClick={() => {}}>
           <sinch-icon-close slot="icon"/>
         </sinch-icon-button>

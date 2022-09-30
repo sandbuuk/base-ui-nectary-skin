@@ -1,24 +1,21 @@
-import { categoryValues } from '@sinch-engage/nectary/tag/utils'
+import { colorNameValues } from '@sinch-engage/nectary/utils/colors'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/tag-close'
+import '@sinch-engage/nectary/icons/mood'
 
 export default {
   title: 'Components/Tag',
   argTypes: {
-    category: {
-      description: 'Tag category',
+    color: {
+      description: 'Tag color',
       control: 'select',
-      options: categoryValues,
+      options: colorNameValues,
     },
     text: {
       description: 'Tag text',
       control: 'text',
-    },
-    inverted: {
-      description: 'Inverted color',
-      control: 'boolean',
     },
     small: {
       description: 'Smaller tag',
@@ -39,9 +36,8 @@ export default {
 
 const Template = (innerHTML?: string): Story => () => {
   const [{
-    category,
+    color,
     text,
-    inverted,
     small,
   }] = useArgs()
   const tagRef = useRef<HTMLElementTagNameMap['sinch-tag'] | null>(null)
@@ -57,8 +53,7 @@ const Template = (innerHTML?: string): Story => () => {
   const $tag = tagRef.current!
 
   $tag.text = text
-  $tag.category = category
-  $tag.inverted = Boolean(inverted)
+  $tag.color = color
   $tag.small = Boolean(small)
 
   return $tag
@@ -68,7 +63,6 @@ export const Tag = Template()
 
 Tag.args = {
   text: 'Label',
-  inverted: false,
   small: false,
 }
 
@@ -80,39 +74,22 @@ Tag.parameters = {
   },
 }
 
-export const TagWithIcon = Template('<sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>')
+export const TagWithIcon = Template('<sinch-icon-mood slot="icon"></sinch-icon-mood>')
 
 TagWithIcon.args = {
   text: 'Label',
-  inverted: false,
   small: false,
 }
 
 TagWithIcon.parameters = {
   docs: {
     source: {
-      code: '<sinch-tag text="Label">\n  <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>\n</sinch-tag>',
+      code: '<sinch-tag text="Label">\n  <sinch-icon-mood slot="icon"></sinch-icon-mood>\n</sinch-tag>',
     },
   },
 }
 
-export const TagWithClose = Template('<sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new><sinch-tag-close slot="close"></sinch-tag-close>')
-
-TagWithClose.args = {
-  text: 'Label',
-  inverted: false,
-  small: false,
-}
-
-TagWithClose.parameters = {
-  docs: {
-    source: {
-      code: '<sinch-tag text="Label">\n  <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>\n  <sinch-tag-close slot="close"></sinch-tag-close>\n</sinch-tag>',
-    },
-  },
-}
-
-export const Small = Template('<sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new><sinch-tag-close small slot="close"></sinch-tag-close>')
+export const Small = Template('<sinch-icon-mood slot="icon"></sinch-icon-mood>')
 
 Small.args = {
   text: 'Label',
@@ -123,7 +100,7 @@ Small.args = {
 Small.parameters = {
   docs: {
     source: {
-      code: '<sinch-tag small text="Label">\n  <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>\n  <sinch-tag-close small slot="close"></sinch-tag-close>\n</sinch-tag>',
+      code: '<sinch-tag small text="Label">\n  <sinch-icon-mood slot="icon"></sinch-icon-mood>\n</sinch-tag>',
     },
   },
 }
