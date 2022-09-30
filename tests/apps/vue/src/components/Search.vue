@@ -1,9 +1,9 @@
 <template>
-  <sinch-action-menu
+  <sinch-popover
     orientation="bottom"
     :open="isOpen"
-    aria-label="Search"
-    @--close="onClose">
+    @--close="onClose"
+    aria-label="Search">
     <sinch-field slot="target" label="Label">
       <sinch-input
         slot="input"
@@ -23,18 +23,20 @@
         </sinch-icon-button>
       </sinch-input>
     </sinch-field>
-    <sinch-action-menu-option
-      v-for="text in options"
-      slot="option"
-      :key="text"
-      :text="text"
-      :aria-label="text"
-      @--click="onOptionClick(text)"
-    ></sinch-action-menu-option>
-  </sinch-action-menu>
+    <sinch-action-menu slot="content" aria-label="Search autocomplete">
+      <sinch-action-menu-option
+        v-for="text in options"
+        :key="text"
+        :text="text"
+        :aria-label="text"
+        @--click="onOptionClick(text)"
+      ></sinch-action-menu-option>
+    </sinch-action-menu>
+  </sinch-popover>
 </template>
 
 <script>
+import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/action-menu'

@@ -1,0 +1,28 @@
+<style>
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#wrapper {
+  width: var(--sinch-size-icon, 32px);
+  height: var(--sinch-size-icon, 32px);
+  border-radius: 50%;
+}
+
+#wrapper.no-color {
+  background:
+    linear-gradient(
+      45deg,
+      var(--sinch-color-berry-200),
+      var(--sinch-color-orange-200),
+      var(--sinch-color-bolt-200),
+      var(--sinch-color-grass-200),
+      var(--sinch-color-aqua-200),
+      var(--sinch-color-night-200),
+      var(--sinch-color-violet-200)
+    );
+}
+</style>
+
+<div id="wrapper"></div>

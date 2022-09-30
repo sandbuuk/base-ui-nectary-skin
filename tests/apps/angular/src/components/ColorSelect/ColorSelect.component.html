@@ -1,0 +1,27 @@
+<sinch-popover
+  [attr.open]="isOpen"
+  (-close)="onClose()"
+  orientation="bottom-right"
+  modal
+>
+  <sinch-select-button
+    slot="target"
+    placeholder="Select color"
+    aria-label="Select color"
+    [attr.text]="value"
+    [attr.disabled]="isDisabled"
+    [attr.invalid]="isInvalid"
+    (-click)="onClick()"
+  >
+    <sinch-color-swatch slot="icon" [attr.name]="value"></sinch-color-swatch>
+  </sinch-select-button>
+  <sinch-color-menu
+    slot="content"
+    [attr.colors]="colors"
+    [attr.rows]="rows"
+    [attr.cols]="cols"
+    [attr.value]="value"
+    (-change)="onChange($event)"
+    aria-label="Menu"
+  ></sinch-color-menu>
+</sinch-popover>

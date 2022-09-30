@@ -1,25 +1,15 @@
-import type { TSinchPopoverOrientation } from '../popover/types'
-import type { TRect, TSinchElementReact } from '../types'
+import type { TSinchElementReact } from '../types'
 
 export type TSinchActionMenuElement = HTMLElement & {
-  open: boolean,
-  orientation: TSinchPopoverOrientation,
-  maxVisibleItems: number | null,
-  modal: boolean,
-  readonly dropdownRect: TRect,
-  addEventListener(type: '-close', listener: (e: CustomEvent<void>) => void): void,
-  setAttribute(name: 'open', value: ''): void,
-  setAttribute(name: 'orientation', value: TSinchPopoverOrientation): void,
-  setAttribute(name: 'maxvisibleitems', value: string): void,
-  setAttribute(name: 'modal', value: boolean): void,
+  /** How many rows to show and scroll the rest */
+  rows: number | null,
+  /** How many rows to show and scroll the rest */
+  setAttribute(name: 'rows', value: string): void,
 }
 
 export type TSinchActionMenuReact = TSinchElementReact<TSinchActionMenuElement> & {
-  open: boolean,
-  orientation?: TSinchPopoverOrientation,
-  maxVisibleItems?: number,
-  modal?: boolean,
+  /** How many rows to show and scroll the rest */
+  rows?: number,
+  /** Label that is used for a11y */
   'aria-label': string,
-  onClose?: () => void,
-  'on-close'?: (e: CustomEvent<void>) => void,
 }

@@ -15,9 +15,9 @@
   gap: 10px;
   user-select: none;
   cursor: pointer;
-  font: inherit;
-  color: inherit;
+  color: var(--sinch-color-text-default);
 
+  --sinch-color-icon: var(--sinch-color-stormy-500);
   --sinch-size-icon: 24px;
 }
 
@@ -28,15 +28,15 @@
   text-overflow: ellipsis;
 }
 
-:host(:hover) > #wrapper,
+:host(:hover:not([disabled])) > #wrapper,
 :host([data-selected]) > #wrapper {
-  background-color: var(--sinch-color-snow-500);
+  background-color: var(--sinch-color-snow-400);
 }
 
-:host([disabled]:not([disabled="false"])) > #wrapper {
-  color: var(--sinch-color-stormy-100);
+:host([disabled]) > #wrapper {
   cursor: initial;
   pointer-events: none;
+  color: var(--sinch-color-text-disabled);
 
   --sinch-color-icon: var(--sinch-color-stormy-100);
 }
@@ -48,5 +48,5 @@
 
 <div id="wrapper">
   <slot name="icon"></slot>
-  <span id="content"></span>
+  <sinch-text id="content" type="m" ellipsis></sinch-text>
 </div>

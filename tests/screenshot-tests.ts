@@ -75,9 +75,26 @@ const overridePageKeyboard = (page: Page): void => {
   const originalPress = page.keyboard.press
 
   page.keyboard.press = (function(...args) {
-    return page.waitForTimeout(100).then(() => originalPress.apply(this, args))
+    return page.waitForTimeout(100)
+      .then(() => originalPress.apply(this, args))
+      .then(() => page.waitForTimeout(100))
   })
   ;(page.keyboard as any).__modified = true
+}
+
+const overridePageMouse = (page: Page): void => {
+  if ((page.mouse as any).__modified === true) {
+    return
+  }
+
+  const originalClick = page.mouse.click
+
+  page.mouse.click = (function(...args) {
+    return page.waitForTimeout(100)
+      .then(() => originalClick.apply(this, args))
+      .then(() => page.waitForTimeout(100))
+  })
+  ;(page.mouse as any).__modified = true
 }
 
 type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
@@ -101,7 +118,7 @@ type TRect = TPosition & {
 type UpdateStateResult = {
   name: string,
   include?: Locator[],
-  includeRects?: TRect[],
+  includeRects?: (TRect | null)[],
   expand?: number,
 }
 
@@ -141,6 +158,7 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
     }
 
     pages.forEach(overridePageKeyboard)
+    pages.forEach(overridePageMouse)
 
     // Optionally subscribe to page console output
     // pages.forEach((page) => {
@@ -164,7 +182,7 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
         for await (const { name, include = [], includeRects = [], expand = 12 } of t.fn({ page, $: locator, $eval: makeEval<T>(locator), isChromium, isFirefox, isWebkit })) {
           const rects = await getRects([locator, ...include])
           const clip = expandRect(mergeBoundingBox(rects.concat(includeRects)), expand)
-          const screenshotName = `${t.name}-${name}.png`
+          const screenshotName = `${t.name.toLowerCase()}-${name.toLowerCase()}.png`
 
           if (clip == null) {
             throw new Error('Cannot get locator bounding box')

@@ -27,6 +27,18 @@ export const DialogExample: FC<TDialog> = () => {
   const onButtonBlur = () => {
     console.log('BUTTON BLUR')
   }
+  const onDialogOpen = () => {
+    setDialogOpen(true)
+  }
+  const onDialogClose = () => {
+    setDialogOpen(false)
+  }
+  const onDropdownOpen = () => {
+    setDropdownOpen(true)
+  }
+  const onDropdownClose = () => {
+    setDropdownOpen(false)
+  }
 
   return (
     <>
@@ -34,27 +46,21 @@ export const DialogExample: FC<TDialog> = () => {
         type="cta-primary"
         text="Open Dialog"
         aria-label="Open Dialog"
-        onClick={() => {
-          setDialogOpen(true)
-        }}
+        on-click={onDialogOpen}
       />
       <sinch-dialog
         open={isDialogOpen}
         caption="Dialog"
         aria-label="Dialog"
         close-aria-label="Close dialog"
-        on-close={() => {
-          setDialogOpen(false)
-        }}
+        on-close={onDialogClose}
       >
         <section slot="content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</section>
-        <sinch-action-menu
+        <sinch-popover
           slot="content"
           open={isDropdownOpen}
           orientation="bottom"
-          on-close={() => {
-            setDropdownOpen(false)
-          }}
+          on-close={onDropdownClose}
           aria-label="Select"
         >
           <sinch-field slot="target" label="Label">
@@ -74,19 +80,18 @@ export const DialogExample: FC<TDialog> = () => {
                 aria-label="Ok"
                 type="primary"
                 slot="right"
-                onClick={() => {
-                  setDropdownOpen(true)
-                }}
+                on-click={onDropdownOpen}
                 on-focus={onButtonFocus}
                 on-blur={onButtonBlur}
               />
             </sinch-input>
           </sinch-field>
-          <sinch-action-menu-option slot="option" text="AAAAAAAAAAAAAAAAA" aria-label="Select"/>
-          <sinch-action-menu-option slot="option" text="BBB" aria-label="Select"/>
-          <sinch-action-menu-option slot="option" text="CCC" aria-label="Select"/>
-        </sinch-action-menu>
-
+          <sinch-action-menu slot="content" aria-label="Action menu">
+            <sinch-action-menu-option slot="option" text="AAAAAAAAAAAAAAAAA" aria-label="Select"/>
+            <sinch-action-menu-option slot="option" text="BBB" aria-label="Select"/>
+            <sinch-action-menu-option slot="option" text="CCC" aria-label="Select"/>
+          </sinch-action-menu>
+        </sinch-popover>
         <sinch-button text="Cancel" aria-label="Cancel" type="secondary" slot="buttons" onClick={() => {}}/>
         <sinch-button text="Ok" aria-label="Ok" type="primary" slot="buttons" onClick={() => {}}/>
       </sinch-dialog>

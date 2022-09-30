@@ -1,0 +1,82 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import {
+  ReactPropsTable as MenuReactPropsTable,
+  ElementPropertiesTable as MenuElementPropertiesTable,
+  ElementAttributesTable as MenuElementAttributesTable,
+} from '@sinch-engage/nectary/action-menu/types.ts?api'
+
+import {
+  ReactPropsTable as MenuOptionReactPropsTable,
+  ReactHandlersTable as MenuOptionReactHandlersTable,
+  ElementPropertiesTable as MenuOptionElementPropertiesTable,
+  ElementAttributesTable as MenuOptionElementAttributesTable,
+  ElementEventsTable as MenuOptionElementEventsTable,
+} from '@sinch-engage/nectary/action-menu-option/types.ts?api'
+
+# Action Menu
+
+Action Menu is a building block for high-level compositions like [Dropdown](?path=/components/dropdown) or [Search](?path=/components/search) with autocomplete.
+
+## Table of contents
+
+## Examples
+
+### Simple
+
+Use down/up arrow keys to navigate and space/enter to select with keyboard.
+
+<Example Component={SimpleExample}/>
+
+## API
+
+### Action Menu
+
+#### React
+
+##### Props
+
+<MenuReactPropsTable/>
+
+#### Element
+
+##### Properties
+
+<MenuElementPropertiesTable/>
+
+##### Attributes
+
+<MenuElementAttributesTable/>
+
+### Action Menu Option
+
+#### Slots
+
+##### icon
+
+`icon` slot puts an icon to the left side.
+
+#### React
+
+##### Props
+
+<MenuOptionReactPropsTable/>
+
+##### Handlers
+
+<MenuOptionReactHandlersTable/>
+
+#### Element
+
+##### Properties
+
+<MenuOptionElementPropertiesTable/>
+
+##### Attributes
+
+<MenuOptionElementAttributesTable/>
+
+##### Events
+
+<MenuOptionElementEventsTable/>

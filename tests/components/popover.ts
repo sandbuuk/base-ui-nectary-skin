@@ -3,11 +3,11 @@ import { orientationValues } from '@sinch-engage/nectary/popover/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const withModalOpen = '/popover?open=true&modal=true'
-const withModal = '/popover?modal=true'
-const withWideModalOpen = '/popover?width=300&open=true&modal=true'
-const withWideModal = '/popover?width=300&modal=true'
-const withWide = '/popover?width=300'
+const withModalOpen = '/popover?open=true&modal=true&orientation=bottom-right'
+const withModal = '/popover?modal=true&orientation=bottom-right'
+const withWideModalOpen = '/popover?width=300&open=true&modal=true&orientation=bottom-right'
+const withWideModal = '/popover?width=300&modal=true&orientation=bottom-right'
+const withWide = '/popover?width=300&orientation=bottom-right'
 const check = makeAccessibilityTests('/popover?open=true&modal=true', 'sinch-popover')
 
 test('popover accessibility', check(async function* () {
@@ -63,55 +63,26 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
     },
   },
   {
-    name: 'modal attribute',
-    url: withWide,
-    async *fn({ page, $eval }) {
-      await page.keyboard.press('Tab')
-
-      await $eval((el) => {
-        el.removeAttribute('open')
-        el.removeAttribute('modal')
-        el.setAttribute('open', '')
-      })
-
-      yield { name: 'unset', includeRects: [await $eval((el) => el.popoverRect)] }
-
-      await $eval((el) => {
-        el.removeAttribute('open')
-        el.setAttribute('modal', '')
-        el.setAttribute('open', '')
-      })
-
-      yield { name: 'set', includeRects: [await $eval((el) => el.popoverRect)] }
-    },
-  },
-  {
     name: 'modal property',
     url: withWide,
-    async *fn({ page, $eval }) {
-      await page.keyboard.press('Tab')
-
+    async *fn({ $, $eval }) {
       await $eval((el) => {
-        el.open = false
         el.modal = false
-        el.open = true
       })
 
-      yield { name: 'unset', includeRects: [await $eval((el) => el.popoverRect)] }
+      expect(await $.getAttribute('modal')).toBe(null)
 
       await $eval((el) => {
-        el.open = false
         el.modal = true
-        el.open = true
       })
 
-      yield { name: 'set', includeRects: [await $eval((el) => el.popoverRect)] }
+      expect(await $.getAttribute('modal')).toBe('')
     },
   },
   {
     name: 'modal interactions',
     url: withWideModal,
-    async *fn({ page, $eval }) {
+    async *fn({ page, $ }) {
       // Focus button on page
       await page.keyboard.press('Tab')
       // Open popover
@@ -119,20 +90,20 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
 
       // Close by Escape key
       await page.keyboard.press('Escape')
-      await expect($eval((el) => el.open)).resolves.toBe(false)
+      await expect($.getAttribute('open')).resolves.toBe(null)
 
       // Open popover
       await page.keyboard.press('Enter')
 
       // Close by clicking outside
       await page.mouse.click(0, 0)
-      await expect($eval((el) => el.open)).resolves.toBe(false)
+      await expect($.getAttribute('open')).resolves.toBe(null)
     },
   },
   {
     name: 'non modal interactions',
     url: withWide,
-    async *fn({ page, $eval }) {
+    async *fn({ page, $ }) {
       // Focus button on page
       await page.keyboard.press('Tab')
       // Open popover
@@ -140,14 +111,14 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
 
       // Close by Escape key
       await page.keyboard.press('Escape')
-      await expect($eval((el) => el.open)).resolves.toBe(false)
+      await expect($.getAttribute('open')).resolves.toBe(null)
 
       // Open popover
       await page.keyboard.press('Enter')
 
       // Can close by clicking outside
       await page.mouse.click(0, 0)
-      await expect($eval((el) => el.open)).resolves.toBe(false)
+      await expect($.getAttribute('open')).resolves.toBe(null)
     },
   },
   {
@@ -160,7 +131,7 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
     },
   },
   {
-    name: 'custom events',
+    name: 'native events',
     url: withModalOpen,
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-popover-close')

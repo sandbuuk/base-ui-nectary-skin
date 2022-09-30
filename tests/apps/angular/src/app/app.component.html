@@ -1,5 +1,6 @@
 <div [ngStyle]="style" [ngSwitch]="pathname">
   <accordion-component *ngSwitchCase="'/accordion'"></accordion-component>
+  <action-dropdown-component *ngSwitchCase="'/action-dropdown'"></action-dropdown-component>
   <action-menu-component *ngSwitchCase="'/action-menu'"></action-menu-component>
   <alert-component *ngSwitchCase="'/alert'"></alert-component>
   <avatar-component *ngSwitchCase="'/avatar'"></avatar-component>
@@ -8,9 +9,12 @@
   <card-container-component *ngSwitchCase="'/card-container'"></card-container-component>
   <chat-component *ngSwitchCase="'/chat'"></chat-component>
   <checkbox-component *ngSwitchCase="'/checkbox'"></checkbox-component>
+  <chip-component *ngSwitchCase="'/chip'"></chip-component>
+  <color-menu-component *ngSwitchCase="'/color-menu'"></color-menu-component>
+  <color-select-component *ngSwitchCase="'/color-select'"></color-select-component>
+  <color-swatch-component *ngSwitchCase="'/color-swatch'"></color-swatch-component>
   <date-picker-component *ngSwitchCase="'/date-picker'"></date-picker-component>
   <dialog-component *ngSwitchCase="'/dialog'"></dialog-component>
-  <dropdown-component *ngSwitchCase="'/dropdown'"></dropdown-component>
   <grid-component *ngSwitchCase="'/grid'"></grid-component>
   <horizontal-stepper-component *ngSwitchCase="'/horizontal-stepper'"></horizontal-stepper-component>
   <icon-button-component *ngSwitchCase="'/icon-button'"></icon-button-component>
@@ -31,6 +35,7 @@
   <segmented-control-component *ngSwitchCase="'/segmented-control'"></segmented-control-component>
   <segmented-icon-control-component *ngSwitchCase="'/segmented-icon-control'"></segmented-icon-control-component>
   <select-component *ngSwitchCase="'/select'"></select-component>
+  <select-menu-component *ngSwitchCase="'/select-menu'"></select-menu-component>
   <spinner-component *ngSwitchCase="'/spinner'"></spinner-component>
   <table-component *ngSwitchCase="'/table'"></table-component>
   <tabs-component *ngSwitchCase="'/tabs'"></tabs-component>

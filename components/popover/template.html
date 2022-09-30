@@ -72,8 +72,9 @@ dialog.fixed {
   background-color: var(--sinch-color-snow-100);
   box-shadow: var(--sinch-elevation-level-2);
   border: 1px solid var(--sinch-color-snow-500);
-  border-radius: var(--sinch-popover-shape-radius, var(--sinch-shape-radius-l));
+  border-radius: var(--sinch-shape-radius-m);
   outline: none;
+  overflow: hidden;
 }
 
 #target-open {
@@ -93,7 +94,7 @@ dialog.fixed {
     <div id="target-open">
       <slot name="target-open"></slot>
     </div>
-    <div id="content" tabindex="-1">
+    <div id="content">
       <slot name="content"></slot>
     </div>
   </dialog>

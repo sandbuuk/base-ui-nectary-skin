@@ -1,4 +1,3 @@
-import '../icons/cancel'
 import '../text'
 import {
   defineCustomElement,
@@ -9,17 +8,20 @@ import {
   updateAttribute,
   updateLiteralAttribute,
   NectaryElement,
+  setClass,
 } from '../utils'
+import { assertColorNameValue, colorMap, colorNameValues, NO_COLOR } from '../utils/colors'
 import templateHTML from './template.html'
-import { assertCategoryValue, categoryValues } from './utils'
-import type { TSinchTagCategory, TSinchTagElement, TSinchTagReact } from './types'
+import type { TSinchColorName } from '../utils/colors'
+import type { TSinchTagElement, TSinchTagReact } from './types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tag', class extends NectaryElement {
-  #$text: HTMLSpanElement
+  #$text: HTMLElement
+  #$wrapper: HTMLElement
 
   constructor() {
     super()
@@ -28,15 +30,20 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#$wrapper = shadowRoot.querySelector('#wrapper')!
     this.#$text = shadowRoot.querySelector('#text')!
   }
 
-  get category() {
-    return getLiteralAttribute(this, categoryValues, 'category', null)
+  connectedCallback() {
+    this.#updateColor()
   }
 
-  set category(value: TSinchTagCategory | null) {
-    updateLiteralAttribute(this, categoryValues, 'category', value)
+  get color() {
+    return getLiteralAttribute(this, colorNameValues, 'color', null)
+  }
+
+  set color(value: TSinchColorName | null) {
+    updateLiteralAttribute(this, colorNameValues, 'color', value)
   }
 
   get text() {
@@ -45,14 +52,6 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
   set text(value: string) {
     updateAttribute(this, 'text', value)
-  }
-
-  get inverted() {
-    return getBooleanAttribute(this, 'inverted')
-  }
-
-  set inverted(isInverted: boolean) {
-    updateBooleanAttribute(this, 'inverted', isInverted)
   }
 
   get small() {
@@ -64,13 +63,14 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'category']
+    return ['text', 'color']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
-      case 'category': {
-        assertCategoryValue(newVal)
+      case 'color': {
+        assertColorNameValue(newVal)
+        this.#updateColor()
 
         break
       }
@@ -81,6 +81,18 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
         break
       }
     }
+  }
+
+  #updateColor() {
+    const colorName = this.color ?? NO_COLOR
+    const { value, isInverted } = colorMap[colorName]
+
+    if (value !== NO_COLOR) {
+      this.#$wrapper.style.backgroundColor = `var(--sinch-color-${value})`
+    }
+
+    setClass(this.#$wrapper, 'no-color', value === NO_COLOR)
+    setClass(this.#$wrapper, 'inverted', isInverted)
   }
 })
 

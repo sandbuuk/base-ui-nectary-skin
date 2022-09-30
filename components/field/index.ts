@@ -64,7 +64,7 @@ defineCustomElement('sinch-field', class extends NectaryElement {
   }
 
   get optionalText() {
-    return getAttribute(this, 'optionaltext', null)
+    return getAttribute(this, 'optionaltext')
   }
 
   set additionalText(value: string | null) {
@@ -72,7 +72,7 @@ defineCustomElement('sinch-field', class extends NectaryElement {
   }
 
   get additionalText() {
-    return getAttribute(this, 'additionaltext', null)
+    return getAttribute(this, 'additionaltext')
   }
 
   set invalidText(value: string | null) {
@@ -80,7 +80,7 @@ defineCustomElement('sinch-field', class extends NectaryElement {
   }
 
   get invalidText() {
-    return getAttribute(this, 'invalidtext', null)
+    return getAttribute(this, 'invalidtext')
   }
 
   set disabled(isDisabled: boolean) {

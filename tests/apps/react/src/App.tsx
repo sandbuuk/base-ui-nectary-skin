@@ -1,4 +1,5 @@
 import { Accordion } from './components/Accordion'
+import { ActionDropdown } from './components/ActionDropdown'
 import { ActionMenu } from './components/ActionMenu'
 import { Alert } from './components/Alert'
 import { Avatar } from './components/Avatar'
@@ -7,11 +8,14 @@ import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
 import { Chat } from './components/Chat'
 import { Checkbox } from './components/Checkbox'
+import { Chip } from './components/Chip'
+import { ColorMenu } from './components/ColorMenu'
+import { ColorSelect } from './components/ColorSelect'
+import { ColorSwatch } from './components/ColorSwatch'
 import { DateInput } from './components/DateInput'
 import { DatePicker } from './components/DatePicker'
 import { Dialog } from './components/Dialog'
 import { DialogExample } from './components/DialogExample'
-import { Dropdown } from './components/Dropdown'
 import { Field } from './components/Field'
 import { FileDrop } from './components/FileDrop'
 import { FilePicker } from './components/FilePicker'
@@ -32,6 +36,7 @@ import { Segment } from './components/Segment'
 import { SegmentedControl } from './components/SegmentedControl'
 import { SegmentedIconControl } from './components/SegmentedIconControl'
 import { Select } from './components/Select'
+import { SelectMenu } from './components/SelectMenu'
 import { Spinner } from './components/Spinner'
 import { Table } from './components/Table'
 import { Tabs } from './components/Tabs'
@@ -60,6 +65,11 @@ const mapElement = (url: URL) => {
     case '/action-menu': {
       return (
         <ActionMenu search={url.searchParams}/>
+      )
+    }
+    case '/action-dropdown': {
+      return (
+        <ActionDropdown search={url.searchParams}/>
       )
     }
 
@@ -111,6 +121,29 @@ const mapElement = (url: URL) => {
       )
     }
 
+    case '/chip': {
+      return (
+        <Chip search={url.searchParams}/>
+      )
+    }
+
+    case '/color-menu': {
+      return (
+        <ColorMenu search={url.searchParams}/>
+      )
+    }
+    case '/color-select': {
+      return (
+        <ColorSelect search={url.searchParams}/>
+      )
+    }
+
+    case '/color-swatch': {
+      return (
+        <ColorSwatch search={url.searchParams}/>
+      )
+    }
+
     case '/date-input': {
       return (
         <DateInput search={url.searchParams}/>
@@ -135,9 +168,9 @@ const mapElement = (url: URL) => {
       )
     }
 
-    case '/dropdown': {
+    case '/select-menu': {
       return (
-        <Dropdown search={url.searchParams}/>
+        <SelectMenu search={url.searchParams}/>
       )
     }
 

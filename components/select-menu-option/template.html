@@ -1,0 +1,56 @@
+<style>
+:host {
+  display: block;
+}
+
+#wrapper {
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 8px 16px;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  cursor: pointer;
+  color: var(--sinch-color-text-default);
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+  --sinch-size-icon: 24px;
+}
+
+#content {
+  flex: 1;
+}
+
+:host(:hover:not([disabled])) > #wrapper,
+:host([data-selected]) > #wrapper {
+  background-color: var(--sinch-color-snow-400);
+}
+
+#check {
+  display: none;
+  margin-right: -6px;
+}
+
+:host([data-checked]) #check {
+  display: block;
+}
+
+:host([disabled]) > #wrapper {
+  cursor: initial;
+  color: var(--sinch-color-text-disabled);
+
+  --sinch-color-icon: var(--sinch-color-stormy-100);
+}
+
+::slotted(*) {
+  margin-left: -6px;
+}
+</style>
+
+<div id="wrapper">
+  <slot name="icon"></slot>
+  <sinch-text id="content" type="m" ellipsis></sinch-text>
+  <sinch-icon-check id="check"></sinch-icon-check>
+</div>

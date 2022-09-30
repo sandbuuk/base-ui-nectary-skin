@@ -4,12 +4,19 @@
   vertical-align: middle;
 }
 
-#circle {
+#wrapper {
   width: 10px;
   height: 10px;
-  border: 1px solid var(--sinch-color-snow-100);
-  border-radius: 50%;
+  padding: 1px;
   box-sizing: border-box;
+  border-radius: 50%;
+  background-color: var(--sinch-color-snow-100);
+}
+
+#circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
 }
 
 :host([color="grey"]) #circle {
@@ -29,4 +36,6 @@
 }
 </style>
 
-<div id="circle"></div>
+<div id="wrapper">
+  <div id="circle"></div>
+</div>

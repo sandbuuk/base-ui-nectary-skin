@@ -1,0 +1,85 @@
+<style>
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 48px;
+  padding: 0 12px;
+  background-color: var(--sinch-color-snow-100);
+  border-radius: var(--sinch-shape-radius-s);
+
+  --sinch-size-icon: 24px;
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+#button {
+  all: initial;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border-radius: var(--sinch-shape-radius-s);
+  border: 1px solid var(--sinch-color-stormy-200);
+  box-sizing: border-box;
+}
+
+#text {
+  flex: 1;
+  min-width: 0;
+
+  /* Placeholder color */
+  color: var(--sinch-color-text-muted);
+}
+
+:host([text]:not([text=""])) #text {
+  /* Text color */
+  color: var(--sinch-color-text-default);
+}
+
+#button:disabled {
+  border-color: var(--sinch-color-snow-500);
+  cursor: initial;
+}
+
+#button:focus-visible {
+  border-color: var(--sinch-color-stormy-600);
+}
+
+@supports not selector(:focus-visible) {
+  #button:focus {
+    border-color: var(--sinch-color-stormy-600);
+  }
+}
+
+:host([invalid]) #button:enabled {
+  border-color: var(--sinch-color-text-invalid);
+}
+
+#button:disabled ~ #text {
+  color: var(--sinch-color-stormy-100);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+:host([disabled]) #wrapper {
+  --sinch-color-icon: var(--sinch-color-stormy-100);
+}
+</style>
+
+<div id="wrapper">
+  <button id="button"></button>
+  <slot name="icon"></slot>
+  <sinch-text id="text" type="m" ellipsis></sinch-text>
+  <sinch-icon-keyboard-arrow-down></sinch-icon-keyboard-arrow-down>
+</div>

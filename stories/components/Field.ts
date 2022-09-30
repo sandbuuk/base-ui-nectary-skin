@@ -4,8 +4,6 @@ import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/textarea'
-import '@sinch-engage/nectary/select'
-import '@sinch-engage/nectary/select-option'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/close'
@@ -149,50 +147,6 @@ FieldWithTextarea.parameters = {
 <sinch-field label="Label">
   <sinch-help-tooltip text="Tooltip text" width="200" slot="tooltip"></sinch-help-tooltip>
   <sinch-textarea slot="input"></sinch-textarea>
-</sinch-field>
-`,
-    },
-  },
-}
-
-export const FieldWithSelect = Template(`
-<sinch-help-tooltip text="Tooltip text" width="200" slot="tooltip"></sinch-help-tooltip>
-<sinch-select slot="input">
-  <sinch-select-option value="1" text="Option 1 value" slot="option">
-    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
-  </sinch-select-option>
-  <sinch-select-option value="2" text="Option 2 value" slot="option" disabled>
-    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
-  </sinch-select-option>
-  <sinch-select-option value="3" text="Option 3 value" slot="option"></sinch-select-option>
-  <sinch-select-option value="4" text="Option 4 value" slot="option"></sinch-select-option>
-</sinch-select>
-`)
-
-FieldWithSelect.args = {
-  label: 'Select field',
-  additionalText: 'additional',
-  optionalText: 'optional',
-  invalidText: '',
-  disabled: false,
-}
-
-FieldWithSelect.parameters = {
-  docs: {
-    source: {
-      code: `
-<sinch-field label="Label">
-  <sinch-help-tooltip text="Tooltip text" width="200" slot="tooltip"></sinch-help-tooltip>
-  <sinch-select slot="input">
-    <sinch-select-option value="1" text="Option 1 value" slot="option">
-      <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
-    </sinch-select-option>
-    <sinch-select-option value="2" text="Option 2 value" slot="option" disabled>
-      <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
-    </sinch-select-option>
-    <sinch-select-option value="3" text="Option 3 value" slot="option"></sinch-select-option>
-    <sinch-select-option value="4" text="Option 4 value" slot="option"></sinch-select-option>
-  </sinch-select>
 </sinch-field>
 `,
     },

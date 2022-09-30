@@ -1,40 +1,24 @@
-import { useCallback } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/tag-close'
+import '@sinch-engage/nectary/icons/mood-bad'
 
 type TTag = {
   search: URLSearchParams,
 }
 
 export const Tag: FC<TTag> = ({ search }) => {
-  const category: any = search.get('category') ?? undefined
+  const color: any = search.get('color') ?? undefined
   const text = search.get('text') ?? ''
-  const isDismissable = search.get('dismissable') != null
   const isSmall = search.get('small') != null
-  const isInverted = search.get('inverted') != null
   const hasIcon = search.get('icon') != null
-  const onClick = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-tag-close-click')), [])
-  const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-tag-close-focus')), [])
-  const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-tag-close-blur')), [])
 
   return (
     <sinch-tag
-      category={category}
+      color={color}
       text={text}
       small={isSmall}
-      inverted={isInverted}
     >
-      {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
-      {isDismissable && (
-        <sinch-tag-close
-          slot="close"
-          aria-label="Close"
-          onClick={onClick}
-          onFocus={onFocus}
-          onBlur={onBlur}
-        />
-      )}
+      {hasIcon && <sinch-icon-mood-bad slot="icon"/>}
     </sinch-tag>
   )
 }

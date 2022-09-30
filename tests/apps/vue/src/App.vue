@@ -1,6 +1,7 @@
 <template>
   <div :style="style">
     <Accordion v-if="url.pathname === '/accordion'" :search="url.searchParams"/>
+    <ActionDropdown v-if="url.pathname === '/action-dropdown'" :search="url.searchParams"/>
     <ActionMenu v-if="url.pathname === '/action-menu'" :search="url.searchParams"/>
     <Alert v-if="url.pathname === '/alert'" :search="url.searchParams"/>
     <Avatar v-if="url.pathname === '/avatar'" :search="url.searchParams"/>
@@ -9,9 +10,12 @@
     <CardContainer v-if="url.pathname === '/card-container'" :search="url.searchParams"/>
     <Chat v-if="url.pathname === '/chat'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
+    <Chip v-if="url.pathname === '/chip'" :search="url.searchParams"/>
+    <ColorMenu v-if="url.pathname === '/color-menu'" :search="url.searchParams"/>
+    <ColorSelect v-if="url.pathname === '/color-select'" :search="url.searchParams"/>
+    <ColorSwatch v-if="url.pathname === '/color-swatch'" :search="url.searchParams"/>
     <DatePicker v-if="url.pathname === '/date-picker'" :search="url.searchParams"/>
     <Dialog v-if="url.pathname === '/dialog'" :search="url.searchParams"/>
-    <Dropdown v-if="url.pathname === '/dropdown'" :search="url.searchParams"/>
     <Grid v-if="url.pathname === '/grid'" :search="url.searchParams"/>
     <HorizontalStepper v-if="url.pathname === '/horizontal-stepper'" :search="url.searchParams"/>
     <IconButton v-if="url.pathname === '/icon-button'" :search="url.searchParams"/>
@@ -32,6 +36,7 @@
     <SegmentedControl v-if="url.pathname === '/segmented-control'" :search="url.searchParams"/>
     <SegmentedIconControl v-if="url.pathname === '/segmented-icon-control'" :search="url.searchParams"/>
     <Select v-if="url.pathname === '/select'" :search="url.searchParams"/>
+    <SelectMenu v-if="url.pathname === '/select-menu'" :search="url.searchParams"/>
     <Spinner v-if="url.pathname === '/spinner'" :search="url.searchParams"/>
     <Table v-if="url.pathname === '/table'" :search="url.searchParams"/>
     <Tabs v-if="url.pathname === '/tabs'" :search="url.searchParams"/>
@@ -51,6 +56,7 @@
 <script>
 import '@sinch-engage/nectary/theme.css'
 import Accordion from './components/Accordion.vue'
+import ActionDropdown from './components/ActionDropdown.vue'
 import ActionMenu from './components/ActionMenu.vue'
 import Alert from './components/Alert.vue'
 import Avatar from './components/Avatar.vue'
@@ -59,9 +65,12 @@ import Card from './components/Card.vue'
 import CardContainer from './components/CardContainer.vue'
 import Chat from './components/Chat.vue'
 import Checkbox from './components/Checkbox.vue'
+import Chip from './components/Chip.vue'
+import ColorMenu from './components/ColorMenu.vue'
+import ColorSelect from './components/ColorSelect.vue'
+import ColorSwatch from './components/ColorSwatch.vue'
 import DatePicker from './components/DatePicker.vue'
 import Dialog from './components/Dialog.vue'
-import Dropdown from './components/Dropdown.vue'
 import Grid from './components/Grid.vue'
 import HorizontalStepper from './components/HorizontalStepper.vue'
 import IconButton from './components/IconButton.vue'
@@ -82,6 +91,7 @@ import Segment from './components/Segment.vue'
 import SegmentedControl from './components/SegmentedControl.vue'
 import SegmentedIconControl from './components/SegmentedIconControl.vue'
 import Select from './components/Select.vue'
+import SelectMenu from './components/SelectMenu.vue'
 import Spinner from './components/Spinner.vue'
 import Table from './components/Table.vue'
 import Tabs from './components/Tabs.vue'
@@ -126,6 +136,7 @@ export default {
   },
   components: {
     Accordion,
+    ActionDropdown,
     ActionMenu,
     Alert,
     Avatar,
@@ -134,9 +145,12 @@ export default {
     CardContainer,
     Chat,
     Checkbox,
+    Chip,
+    ColorMenu,
+    ColorSelect,
+    ColorSwatch,
     DatePicker,
     Dialog,
-    Dropdown,
     Grid,
     HorizontalStepper,
     IconButton,
@@ -157,6 +171,7 @@ export default {
     SegmentedControl,
     SegmentedIconControl,
     Select,
+    SelectMenu,
     Spinner,
     Table,
     Tabs,

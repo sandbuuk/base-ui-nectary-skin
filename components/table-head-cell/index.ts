@@ -54,7 +54,7 @@ defineCustomElement('sinch-table-head-cell', class extends NectaryElement {
   }
 
   get text(): string | null {
-    return getAttribute(this, 'text', null)
+    return getAttribute(this, 'text')
   }
 
   set align(value: TSinchTableAlignType) {

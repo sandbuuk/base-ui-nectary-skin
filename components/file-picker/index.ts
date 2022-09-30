@@ -1,4 +1,3 @@
-import '../dropdown'
 import {
   defineCustomElement,
   getAttribute,
@@ -71,7 +70,7 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
   }
 
   get accept() {
-    return getAttribute(this, 'accept', null)
+    return getAttribute(this, 'accept')
   }
 
   get size() {

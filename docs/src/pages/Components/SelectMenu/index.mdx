@@ -1,0 +1,77 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import {
+  ReactPropsTable as MenuReactPropsTable,
+  ReactHandlersTable as MenuReactHandlersTable,
+  ElementPropertiesTable as MenuElementPropertiesTable,
+  ElementAttributesTable as MenuElementAttributesTable,
+} from '@sinch-engage/nectary/select-menu/types.ts?api'
+
+import {
+  ReactPropsTable as MenuOptionReactPropsTable,
+  ElementPropertiesTable as MenuOptionElementPropertiesTable,
+  ElementAttributesTable as MenuOptionElementAttributesTable,
+} from '@sinch-engage/nectary/select-menu-option/types.ts?api'
+
+# Select Menu
+
+Select Menu is a building block for high-level compositions like [Select](?path=/components/select).
+
+## Table of contents
+
+## Examples
+
+### Simple
+
+Use down/up arrow keys to navigate and space/enter to select with keyboard.
+
+<Example Component={SimpleExample}/>
+
+## API
+
+### Select Menu
+
+#### React
+
+##### Props
+
+<MenuReactPropsTable/>
+
+##### Handlers
+
+<MenuReactHandlersTable/>
+
+#### Element
+
+##### Properties
+
+<MenuElementPropertiesTable/>
+
+##### Attributes
+
+<MenuElementAttributesTable/>
+
+### Select Menu Option
+
+#### Slots
+
+##### icon
+
+`icon` slot puts an icon to the left side.
+
+#### React
+
+##### Props
+
+<MenuOptionReactPropsTable/>
+
+#### Element
+
+##### Properties
+
+<MenuOptionElementPropertiesTable/>
+
+##### Attributes
+
+<MenuOptionElementAttributesTable/>

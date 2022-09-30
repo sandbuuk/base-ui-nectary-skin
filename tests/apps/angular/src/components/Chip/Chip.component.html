@@ -1,0 +1,10 @@
+<sinch-chip
+  [attr.color]="color"
+  [attr.text]="text"
+  [attr.small]="isSmall"
+  (-click)="onClick()"
+  (-focus)="onFocus()"
+  (-blur)="onBlur()"
+>
+  <sinch-icon-mood-bad *ngIf="hasIcon" slot="icon"></sinch-icon-mood-bad>
+</sinch-chip>
