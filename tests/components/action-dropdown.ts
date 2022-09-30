@@ -68,7 +68,7 @@ test('action-dropdown screenshots', runScreenshotTests('sinch-popover', [
   },
 ]))
 
-test('select events', runScreenshotTests('sinch-popover', [
+test('action-dropdown events', runScreenshotTests('sinch-popover', [
   {
     name: 'keyboard native events',
     url: shot,
