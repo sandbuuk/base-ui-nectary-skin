@@ -73,7 +73,7 @@ test('action-dropdown events', runScreenshotTests('sinch-popover', [
     name: 'keyboard native events',
     url: shot,
     async *fn({ page }) {
-      await subscribeToEvents(page, 'sinch-action-dropdown-focus', 'sinch-action-dropdown-blur', 'sinch-action-dropdown-click')
+      await subscribeToEvents(page, 'sinch-action-dropdown-click')
 
       await page.keyboard.press('Tab')
       await page.keyboard.press('Enter')
@@ -83,7 +83,6 @@ test('action-dropdown events', runScreenshotTests('sinch-popover', [
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-action-dropdown-focus', detail: null },
         { type: 'sinch-action-dropdown-click', detail: '1' },
       ])
 
@@ -103,7 +102,7 @@ test('action-dropdown events', runScreenshotTests('sinch-popover', [
     name: 'click native events',
     url: shot,
     async *fn({ page }) {
-      await subscribeToEvents(page, 'sinch-action-dropdown-focus', 'sinch-action-dropdown-blur', 'sinch-action-dropdown-click')
+      await subscribeToEvents(page, 'sinch-action-dropdown-click')
 
       const btnCt = centerRect(await page.locator('sinch-button').boundingBox())
 
@@ -116,23 +115,19 @@ test('action-dropdown events', runScreenshotTests('sinch-popover', [
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-action-dropdown-focus', detail: null },
         { type: 'sinch-action-dropdown-click', detail: '1' },
-        { type: 'sinch-action-dropdown-blur', detail: null },
       ])
 
-      // TODO Firefox-Vue on CI focuses button back after close
-      // await page.mouse.click(btnCt.x, btnCt.y)
-      // await page.keyboard.press('ArrowDown')
-      // await page.keyboard.press('ArrowDown')
-      // await page.keyboard.press('Enter')
+      await page.mouse.click(btnCt.x, btnCt.y)
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('Enter')
 
-      // expect(
-      //   await getAllEvents(page)
-      // ).toEqual([
-      //   { type: 'sinch-action-dropdown-focus', detail: null },
-      //   { type: 'sinch-action-dropdown-click', detail: '3' },
-      // ])
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-action-dropdown-click', detail: '3' },
+      ])
     },
   },
 ]))

@@ -203,8 +203,8 @@ test('select events', runScreenshotTests('sinch-popover', [
   {
     name: 'click native events',
     url: shot,
-    async *fn({ page, isWebkit }) {
-      await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
+    async *fn({ page }) {
+      await subscribeToEvents(page, 'sinch-select-change')
 
       const btnCt = centerRect(await page.locator('sinch-select-button').boundingBox())
 
@@ -214,43 +214,21 @@ test('select events', runScreenshotTests('sinch-popover', [
 
       await page.mouse.click(optCt.x, optCt.y)
 
-      if (isWebkit) {
-        expect(
-          await getAllEvents(page)
-        ).toEqual([
-          { type: 'sinch-select-focus', detail: null },
-          { type: 'sinch-select-change', detail: '1' },
-          // Webkit does not blur button
-        ])
-      } else {
-        expect(
-          await getAllEvents(page)
-        ).toEqual([
-          { type: 'sinch-select-focus', detail: null },
-          { type: 'sinch-select-change', detail: '1' },
-          { type: 'sinch-select-blur', detail: null },
-        ])
-      }
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-select-change', detail: '1' },
+      ])
 
       await page.mouse.click(btnCt.x, btnCt.y)
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
 
-      if (isWebkit) {
-        expect(
-          await getAllEvents(page)
-        ).toEqual([
-          // Webkit does not blur button, so there is no focus
-          { type: 'sinch-select-change', detail: '3' },
-        ])
-      } else {
-        expect(
-          await getAllEvents(page)
-        ).toEqual([
-          { type: 'sinch-select-focus', detail: null },
-          { type: 'sinch-select-change', detail: '3' },
-        ])
-      }
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-select-change', detail: '3' },
+      ])
     },
   },
 ]))

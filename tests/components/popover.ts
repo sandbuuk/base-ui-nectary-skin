@@ -131,7 +131,7 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
     },
   },
   {
-    name: 'custom events',
+    name: 'native events',
     url: withModalOpen,
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-popover-close')
