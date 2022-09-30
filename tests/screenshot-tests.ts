@@ -75,7 +75,9 @@ const overridePageKeyboard = (page: Page): void => {
   const originalPress = page.keyboard.press
 
   page.keyboard.press = (function(...args) {
-    return page.waitForTimeout(100).then(() => originalPress.apply(this, args))
+    return page.waitForTimeout(100)
+      .then(() => originalPress.apply(this, args))
+      .then(() => page.waitForTimeout(100))
   })
   ;(page.keyboard as any).__modified = true
 }
@@ -88,7 +90,9 @@ const overridePageMouse = (page: Page): void => {
   const originalClick = page.mouse.click
 
   page.mouse.click = (function(...args) {
-    return page.waitForTimeout(100).then(() => originalClick.apply(this, args))
+    return page.waitForTimeout(100)
+      .then(() => originalClick.apply(this, args))
+      .then(() => page.waitForTimeout(100))
   })
   ;(page.mouse as any).__modified = true
 }
