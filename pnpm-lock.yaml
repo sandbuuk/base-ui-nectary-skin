@@ -6,7 +6,7 @@ importers:
     specifiers:
       '@babel/core': ^7.19.3
       '@babel/preset-env': ^7.19.3
-      '@sinch-engage/nectary': workspace:^0.39.0
+      '@sinch-engage/nectary': workspace:*
       '@storybook/addon-essentials': ^6.5.12
       '@storybook/addons': ^6.5.12
       '@storybook/client-api': ^6.5.12
@@ -115,7 +115,7 @@ importers:
       '@saas/example-code-loader': workspace:^0.0.0
       '@saas/html-minify-loader': workspace:^0.0.0
       '@saas/types-to-mdx-loader': workspace:^0.0.0
-      '@sinch-engage/nectary': workspace:^0.39.0
+      '@sinch-engage/nectary': workspace:*
       '@types/babel__core': ^7.1.19
       '@types/mdx': ^2.0.2
       '@types/node': ^18.7.23
@@ -260,7 +260,7 @@ importers:
   tests:
     specifiers:
       '@playwright/test': 1.25.1
-      '@sinch-engage/nectary': workspace:^0.39.0
+      '@sinch-engage/nectary': workspace:*
       '@types/node': ^17.0.45
       axe-core: ^4.4.3
       concurrently: ^7.4.0
@@ -293,7 +293,7 @@ importers:
       '@angular/platform-browser-dynamic': ^14.2.3
       '@angular/router': ^14.2.3
       '@saas/html-minify-loader': workspace:^0.0.0
-      '@sinch-engage/nectary': workspace:^0.39.0
+      '@sinch-engage/nectary': workspace:*
       axe-core: ^4.4.3
       ngx-build-plus: ^14.0.0
       rxjs: ^7.5.7
@@ -331,7 +331,7 @@ importers:
       '@babel/preset-react': ^7.18.6
       '@babel/preset-typescript': ^7.18.6
       '@saas/html-minify-loader': workspace:^0.0.0
-      '@sinch-engage/nectary': workspace:^0.39.0
+      '@sinch-engage/nectary': workspace:*
       '@types/react': ^17.0.50
       '@types/react-dom': ^17.0.17
       '@webcomponents/scoped-custom-element-registry': ^0.0.5
@@ -375,7 +375,7 @@ importers:
       '@babel/preset-env': ^7.19.3
       '@babel/preset-typescript': ^7.18.6
       '@saas/html-minify-loader': workspace:^0.0.0
-      '@sinch-engage/nectary': workspace:^0.39.0
+      '@sinch-engage/nectary': workspace:*
       '@vue/compiler-sfc': ^3.2.40
       axe-core: ^4.4.3
       css-loader: ^6.7.1

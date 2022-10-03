@@ -11,7 +11,7 @@
   "devDependencies": {
     "@babel/core": "^7.19.3",
     "@babel/preset-env": "^7.19.3",
-    "@sinch-engage/nectary": "workspace:^0.39.0",
+    "@sinch-engage/nectary": "workspace:*",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addons": "^6.5.12",
     "@storybook/client-api": "^6.5.12",
