@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/select-menu?width=200'
 const withMultiple = '/select-menu?width=200&multiple=true'
@@ -206,7 +206,7 @@ test('select menu events', runScreenshotTests('sinch-select-menu', [
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-select-menu-change')
 
-      const ct = centerRect(await page.locator('sinch-select-menu-option').nth(0).boundingBox())
+      const ct = await centerBB(page.locator('sinch-select-menu-option').nth(0))
 
       await page.mouse.click(ct.x, ct.y)
 

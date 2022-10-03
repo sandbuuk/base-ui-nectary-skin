@@ -3,8 +3,34 @@ import { piAll } from 'piall'
 import type { PlaywrightTestArgs, TestInfo } from '@playwright/test'
 import type { FileChooser, Locator, Page } from 'playwright-core'
 
-const getRects = (locators: Locator[]): Promise<(TRect | null)[]> => {
-  return Promise.all(locators.map((l) => l.boundingBox()))
+const wait = (ms: number) => new Promise((resolve) => {
+  setTimeout(resolve, ms)
+})
+
+const NULL_RECT: TRect = {
+  x: 0,
+  y: 0,
+  width: 0,
+  height: 0,
+}
+
+export const getBB = async (locator: Locator): Promise<TRect> => {
+  // Retry getting bounding box several times
+  for (let i = 0; i < 3; i++) {
+    const rect = await locator.boundingBox()
+
+    if (rect !== null && rect.width > 0) {
+      return rect
+    }
+
+    await wait(100)
+  }
+
+  return NULL_RECT
+}
+
+const getRects = (locators: Locator[]): Promise<TRect[]> => {
+  return Promise.all(locators.map(getBB))
 }
 
 export function expandRect(rect: TRect, offset: number): TRect
@@ -26,16 +52,8 @@ export function expandRect(rect: TRect | null, offset: number): TRect | null {
   }
 }
 
-const mergeBoundingBox = (rects: readonly (TRect | null)[]): TRect | null => {
+const mergeBoundingBox = (rects: readonly TRect[]): TRect => {
   return rects.reduce((a, b) => {
-    if (a == null) {
-      return b
-    }
-
-    if (b == null) {
-      return a
-    }
-
     if (a.width === 0 && a.height === 0) {
       return b
     }
@@ -118,7 +136,7 @@ type TRect = TPosition & {
 type UpdateStateResult = {
   name: string,
   include?: Locator[],
-  includeRects?: (TRect | null)[],
+  includeRects?: TRect[],
   expand?: number,
 }
 
@@ -286,14 +304,18 @@ export const offsetRect = (rect: TRect, pos: TPosition): TRect => ({
 })
 
 export const centerRect = (rect: TRect | null): TPosition => {
-  if (rect === null) {
-    throw new Error('Invalid rect value: null')
+  if (rect === null || (rect.width === 0 && rect.height === 0)) {
+    throw new Error('Null rect received')
   }
 
   return {
     x: rect.x + rect.width / 2,
     y: rect.y + rect.height / 2,
   }
+}
+
+export const centerBB = async (locator: Locator): Promise<TPosition> => {
+  return centerRect(await getBB(locator))
 }
 
 export const getFileChooser = async (page: Page, action: () => Promise<void>): Promise<FileChooser> => {

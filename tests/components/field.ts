@@ -1,6 +1,6 @@
 import { test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { runScreenshotTests } from '../screenshot-tests'
+import { getBB, runScreenshotTests } from '../screenshot-tests'
 import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip/types'
 
 const shot = '/field?width=200&label=Label'
@@ -183,7 +183,7 @@ test('field screenshots', runScreenshotTests('sinch-field', [
     name: 'label click',
     url: withEverything,
     async *fn({ $, page }) {
-      const rect = (await $.boundingBox())!
+      const rect = await getBB($)
 
       await page.mouse.click(rect.x + 10, rect.y + 10)
       yield { name: 'shot' }

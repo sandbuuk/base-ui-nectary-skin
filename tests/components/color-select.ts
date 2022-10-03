@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
+import { centerBB, centerRect, getAllEvents, getBB, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const shot = '/color-select?width=200'
@@ -10,7 +10,7 @@ const withColors = '/color-select?width=200&colors=Pink%2010,Blue%2010&placehold
 const withMaxItems = '/color-select?width=200&value=Pink%2010&rows=2'
 const checkSelectWithEverything = makeAccessibilityTests('/color-select', 'sinch-popover')
 
-const menuRect = (page: Page) => page.locator('sinch-color-menu').boundingBox()
+const menuRect = (page: Page) => getBB(page.locator('sinch-color-menu'))
 
 test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
   await $.click()
@@ -22,7 +22,7 @@ test('color select screenshots', runScreenshotTests('sinch-popover', [
     name: 'click button',
     url: shot,
     async *fn({ $, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.click(ct.x, ct.y)
       yield { name: '1-open', includeRects: [await menuRect(page)] }
@@ -54,7 +54,7 @@ test('color select screenshots', runScreenshotTests('sinch-popover', [
     name: 'rows scroll',
     url: withMaxItems,
     async *fn({ $, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.click(ct.x, ct.y)
       yield { name: 'open', includeRects: [await menuRect(page)] }
@@ -113,7 +113,7 @@ test('color select events', runScreenshotTests('sinch-color-menu', [
     async *fn({ page, $eval }) {
       await subscribeToEvents(page, 'sinch-color-menu-change')
 
-      const btnCt = centerRect(await page.locator('sinch-select-button').boundingBox())
+      const btnCt = await centerBB((page.locator('sinch-select-button')))
 
       await page.mouse.click(btnCt.x, btnCt.y)
 

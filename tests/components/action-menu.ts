@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/action-menu?width=200'
 const withRows = '/action-menu?width=200&rows=2'
@@ -102,7 +102,7 @@ test('action menu events', runScreenshotTests('sinch-action-menu', [
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-action-menu-click')
 
-      const ct = centerRect(await page.locator('sinch-action-menu-option').nth(0).boundingBox())
+      const ct = await centerBB(page.locator('sinch-action-menu-option').nth(0))
 
       await page.mouse.click(ct.x, ct.y)
 

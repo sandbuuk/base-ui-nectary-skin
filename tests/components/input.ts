@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/input?width=200'
 const withIcon = '/input?width=200&value=Input%20value&icon=true'
@@ -222,7 +222,7 @@ test('input screenshots', runScreenshotTests('sinch-input', [
         { type: 'sinch-input-blur', detail: null },
       ])
 
-      const bb = centerRect(await $.boundingBox())
+      const bb = await centerBB($)
 
       await page.mouse.click(bb.x, bb.y)
       await page.keyboard.press('End')

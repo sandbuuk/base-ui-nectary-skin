@@ -1,12 +1,12 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
+import { centerBB, getAllEvents, getBB, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const shot = '/action-dropdown?width=200'
 const checkSelectWithEverything = makeAccessibilityTests('/action-dropdown?width=200&placeholder=Placeholder%20value&value=1', 'sinch-popover')
 
-const menuRect = (page: Page) => page.locator('sinch-action-menu').boundingBox()
+const menuRect = (page: Page) => getBB(page.locator('sinch-action-menu'))
 
 test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
   yield
@@ -19,7 +19,7 @@ test('action-dropdown screenshots', runScreenshotTests('sinch-popover', [
     name: 'click button',
     url: shot,
     async *fn({ $, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.click(ct.x, ct.y)
       yield { name: '1-open', includeRects: [await menuRect(page)] }
@@ -104,11 +104,11 @@ test('action-dropdown events', runScreenshotTests('sinch-popover', [
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-action-dropdown-click')
 
-      const btnCt = centerRect(await page.locator('sinch-button').boundingBox())
+      const btnCt = await centerBB(page.locator('sinch-button'))
 
       await page.mouse.click(btnCt.x, btnCt.y)
 
-      const optCt = centerRect(await page.locator('sinch-action-menu-option').nth(0).boundingBox())
+      const optCt = await centerBB(page.locator('sinch-action-menu-option').nth(0))
 
       await page.mouse.click(optCt.x, optCt.y)
 

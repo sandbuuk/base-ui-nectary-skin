@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const shot = '/select?width=200'
@@ -10,7 +10,7 @@ const withPlaceholder = '/select?width=200&placeholder=Placeholder'
 const withMaxItems = '/select?width=200&value=3&rows=2'
 const checkSelectWithEverything = makeAccessibilityTests('/select?width=200&placeholder=Placeholder%20value&value=1', 'sinch-popover')
 
-const menuRect = (page: Page) => page.locator('sinch-select-menu').boundingBox()
+const menuRect = (page: Page) => getBB(page.locator('sinch-select-menu'))
 
 test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
   yield
@@ -23,7 +23,7 @@ test('select screenshots', runScreenshotTests('sinch-popover', [
     name: 'click button',
     url: shot,
     async *fn({ $, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.click(ct.x, ct.y)
       yield { name: '1-open', includeRects: [await menuRect(page)] }
@@ -108,7 +108,7 @@ test('select screenshots', runScreenshotTests('sinch-popover', [
     name: 'rows scroll',
     url: withMaxItems,
     async *fn({ $, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.click(ct.x, ct.y)
       yield { name: 'open to 3', includeRects: [await menuRect(page)] }
@@ -206,11 +206,11 @@ test('select events', runScreenshotTests('sinch-popover', [
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-select-change')
 
-      const btnCt = centerRect(await page.locator('sinch-select-button').boundingBox())
+      const btnCt = await centerBB(page.locator('sinch-select-button'))
 
       await page.mouse.click(btnCt.x, btnCt.y)
 
-      const optCt = centerRect(await page.locator('sinch-select-menu-option').nth(0).boundingBox())
+      const optCt = await centerBB(page.locator('sinch-select-menu-option').nth(0))
 
       await page.mouse.click(optCt.x, optCt.y)
 

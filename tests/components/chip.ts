@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { colorNameValues, NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/chip?text=Label%20text&color=Gray%2010'
 const withWide = '/chip?width=150&icon=true&text=Label%20text&color=Gray%2010'
@@ -155,7 +155,7 @@ test('chip events', runScreenshotTests('sinch-chip', [
         { type: 'sinch-chip-blur', detail: null },
       ])
 
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.click(ct.x, ct.y)
 

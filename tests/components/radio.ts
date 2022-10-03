@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const options = encodeURI(JSON.stringify([{
   value: 1,
@@ -41,7 +41,7 @@ test('radio screenshots', runScreenshotTests('sinch-radio', [
     name: 'mouse interaction',
     url: withSingleOption,
     async *fn({ $, page }) {
-      const rect = (await $.boundingBox())!
+      const rect = await getBB($)
 
       await page.mouse.move(rect.x + 5, rect.y + 15)
       yield { name: 'hover' }

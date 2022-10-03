@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getFileChooser, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
+import { centerBB, getFileChooser, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const shot = '/file-drop?width=300'
@@ -131,7 +131,7 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
     name: 'pick single file',
     url: shot,
     async *fn({ $, page }) {
-      const buttonCenter = centerRect(await $.locator('sinch-button').boundingBox())
+      const buttonCenter = await centerBB($.locator('sinch-button'))
 
       await subscribeToEvents(page, 'sinch-file-drop-change', 'sinch-file-drop-invalid')
 
@@ -166,7 +166,7 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
     name: 'pick multiple files',
     url: withMultiple,
     async *fn({ $, page }) {
-      const buttonCenter = centerRect(await $.locator('sinch-button').boundingBox())
+      const buttonCenter = await centerBB($.locator('sinch-button'))
 
       await subscribeToEvents(page, 'sinch-file-drop-change', 'sinch-file-drop-invalid')
 
@@ -210,7 +210,7 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
     name: 'pick when disabled',
     url: withDisabled,
     async *fn({ $, page }) {
-      const buttonCenter = centerRect(await $.locator('sinch-button').boundingBox())
+      const buttonCenter = await centerBB($.locator('sinch-button'))
 
       try {
         await Promise.all([
@@ -228,7 +228,7 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
     name: 'pick invalid size',
     url: shot,
     async *fn({ $, $eval, page }) {
-      const buttonCenter = centerRect(await $.locator('sinch-button').boundingBox())
+      const buttonCenter = await centerBB($.locator('sinch-button'))
 
       await subscribeToEvents(page, 'sinch-file-drop-change', 'sinch-file-drop-invalid')
       await $eval((el) => {
@@ -257,7 +257,7 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
     name: 'pick valid size',
     url: shot,
     async *fn({ $, $eval, page }) {
-      const buttonCenter = centerRect(await $.locator('sinch-button').boundingBox())
+      const buttonCenter = await centerBB($.locator('sinch-button'))
 
       await subscribeToEvents(page, 'sinch-file-drop-change', 'sinch-file-drop-invalid')
       await $eval((el) => {

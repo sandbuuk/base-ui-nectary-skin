@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withWideWidth = '/button?width=250&type=primary&text=Button&spinner=true&icon-right=true'
 const withFitWidth = '/button?type=primary&text=Button&icon-left=true'
@@ -247,7 +247,7 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     name: 'mouse interaction',
     url: withFitWidth,
     async *fn({ $, $eval, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.move(ct.x, ct.y)
       await $eval((el) => el.setAttribute('type', 'primary'))
@@ -278,7 +278,7 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     name: 'spinner',
     url: withSpinner,
     async *fn({ $, $eval, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.move(ct.x, ct.y)
       await $eval((el) => el.setAttribute('type', 'primary'))
@@ -337,7 +337,7 @@ test('button screenshots', runScreenshotTests('sinch-button', [
         document.body.style.backgroundColor = 'beige'
       })
 
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.move(ct.x, ct.y)
       yield { name: 'hover' }
