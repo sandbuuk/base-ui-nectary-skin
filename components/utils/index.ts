@@ -373,3 +373,10 @@ export class Context {
     this.#listeners.delete(e.target as Element)
   }
 }
+
+export const rectOverlap = (targetRect: TRect, contentRect: TRect): boolean => {
+  return targetRect.x < (contentRect.x + contentRect.width) &&
+         (targetRect.x + targetRect.width) > contentRect.x &&
+         targetRect.y < (contentRect.y + contentRect.height) &&
+         (targetRect.y + targetRect.height) > contentRect.y
+}

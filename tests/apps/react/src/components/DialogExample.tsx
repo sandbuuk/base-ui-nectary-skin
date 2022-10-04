@@ -64,6 +64,7 @@ export const DialogExample: FC<TDialog> = () => {
           aria-label="Select"
         >
           <sinch-field slot="target" label="Label">
+            <sinch-help-tooltip slot="tooltip" text="Help"/>
             <sinch-input
               slot="input"
               aria-label="Label"
@@ -87,13 +88,15 @@ export const DialogExample: FC<TDialog> = () => {
             </sinch-input>
           </sinch-field>
           <sinch-action-menu slot="content" aria-label="Action menu">
-            <sinch-action-menu-option slot="option" text="AAAAAAAAAAAAAAAAA" aria-label="Select"/>
-            <sinch-action-menu-option slot="option" text="BBB" aria-label="Select"/>
-            <sinch-action-menu-option slot="option" text="CCC" aria-label="Select"/>
+            <sinch-action-menu-option text="AAAAAAAAAAAAAAAAA" aria-label="Select"/>
+            <sinch-action-menu-option text="BBB" aria-label="Select"/>
+            <sinch-action-menu-option text="CCC" aria-label="Select"/>
           </sinch-action-menu>
         </sinch-popover>
         <sinch-button text="Cancel" aria-label="Cancel" type="secondary" slot="buttons" onClick={() => {}}/>
-        <sinch-button text="Ok" aria-label="Ok" type="primary" slot="buttons" onClick={() => {}}/>
+        <sinch-tooltip slot="buttons" inverted text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.">
+          <sinch-button text="Ok" aria-label="Ok" type="primary" onClick={() => {}}/>
+        </sinch-tooltip>
       </sinch-dialog>
     </>
   )

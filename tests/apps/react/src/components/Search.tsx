@@ -26,6 +26,10 @@ export const Search: FC<TSearch> = ({ search }) => {
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     setValue(e.detail)
+
+    if (e.detail.length === 1) {
+      setOpen(true)
+    }
   }
   const onOptionClick = (text: string) => {
     window.dispatchEvent(new CustomEvent('sinch-search-change', { detail: text }))
@@ -42,7 +46,7 @@ export const Search: FC<TSearch> = ({ search }) => {
   }
   const onFocus = useCallback(() => {
     window.dispatchEvent(new CustomEvent('sinch-search-focus'))
-    setOpen(true)
+    // setOpen(true)
   }, [])
   const onBlur = useCallback(() => {
     window.dispatchEvent(new CustomEvent('sinch-search-blur'))

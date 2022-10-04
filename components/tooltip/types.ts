@@ -7,6 +7,7 @@ export type TSinchTooltipElement = HTMLElement & {
   width: number | null,
   inverted: boolean,
   orientation: TSinchTooltipOrientation,
+  readonly footprintRect: TRect,
   readonly tooltipRect: TRect,
   setAttribute(name: 'text', value: string): void,
   setAttribute(name: 'width', value: string): void,

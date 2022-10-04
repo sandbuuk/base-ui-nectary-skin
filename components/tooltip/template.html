@@ -1,129 +1,92 @@
 <style>
 :host {
-  display: inline-block;
-  vertical-align: middle;
+  display: contents;
 }
 
-#wrapper {
+#content-wrapper {
+  padding-bottom: 8px;
+}
+
+#content {
   position: relative;
   display: block;
-}
-
-#tooltip {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  max-width: 300px;
+  padding: 2px 6px;
+  box-sizing: border-box;
+  color: var(--sinch-color-text-default);
+  background-color: var(--sinch-color-snow-600);
+  border-radius: var(--sinch-shape-radius-xs);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s linear 0.2s;
 }
 
-@media (prefers-reduced-motion) {
-  #tooltip {
-    transition: none;
-  }
+:host([orientation="left"]) #content-wrapper {
+  padding-bottom: 0;
+  padding-right: 8px;
 }
 
-:host(:hover) #tooltip {
-  opacity: 1;
+:host([orientation="right"]) #content-wrapper {
+  padding-bottom: 0;
+  padding-left: 8px;
+}
+
+:host([orientation^="bottom"]) #content-wrapper {
+  padding-bottom: 0;
+  padding-top: 8px;
 }
 
 #text {
-  position: absolute;
-  padding: 2px 6px;
-  font: var(--sinch-font-extra-small-text);
-  color: var(--sinch-color-text-default);
-  background-color: var(--sinch-color-snow-600);
-  width: max-content;
-  border-radius: var(--sinch-shape-radius-xs);
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-100%);
   word-break: break-word;
+  pointer-events: none;
 }
 
-#arrow {
+#tip {
   position: absolute;
-  top: -8px;
   left: 50%;
-  transform: translateX(-50%);
+  top: 100%;
+  transform: translateX(-50%) rotate(0);
+  transform-origin: top center;
   fill: var(--sinch-color-snow-600);
+  pointer-events: none;
 }
 
-:host([orientation="top-left"]) #text {
-  transform: translateX(-80%) translateY(-100%);
+#tip.hidden {
+  display: none;
 }
 
-:host([orientation="top-right"]) #text {
-  transform: translateX(-20%) translateY(-100%);
+:host([orientation="left"]) #tip {
+  transform: translateX(-50%) rotate(270deg);
+  top: 50%;
+  left: 100%;
 }
 
-:host([orientation="bottom-right"]) #text {
-  top: calc(100% + 8px);
-  transform: translateX(-20%);
+:host([orientation="right"]) #tip {
+  transform: translateX(-50%) rotate(90deg);
+  top: 50%;
+  left: 0;
 }
 
-:host([orientation="bottom-left"]) #text {
-  top: calc(100% + 8px);
-  transform: translateX(-80%);
-}
-
-:host([orientation="bottom"]) #text {
-  top: calc(100% + 8px);
-  transform: translateX(-50%);
-}
-
-/* stylelint-disable-next-line no-descending-specificity */
-:host([orientation^="bottom"]) #arrow {
-  top: calc(100% + 4px);
+:host([orientation^="bottom"]) #tip {
   transform: translateX(-50%) rotate(180deg);
+  top: 0;
 }
 
-:host([orientation="left"]) #text {
-  left: unset;
-  right: calc(100% + 8px);
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-:host([orientation="left"]) #arrow {
-  left: -11px;
-  top: 50%;
-  transform: translateY(-50%) rotate(270deg);
-}
-
-:host([orientation="right"]) #text {
-  left: calc(100% + 8px);
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-:host([orientation="right"]) #arrow {
-  top: 50%;
-  left: calc(100% + 2px);
-  transform: translateY(-50%) rotate(90deg);
-}
-
-:host([inverted]:not([inverted="false"])) #text {
-  color: var(--sinch-color-text-inverted);
+:host([inverted]:not([inverted="false"])) #content {
   background-color: var(--sinch-color-stormy-500);
+  color: var(--sinch-color-text-inverted);
 }
 
-:host([inverted]:not([inverted="false"])) #arrow {
+:host([inverted]:not([inverted="false"])) #tip {
   fill: var(--sinch-color-stormy-500);
-}
-
-::slotted(*) {
-  display: block;
 }
 </style>
 
-<div id="wrapper">
-  <slot></slot>
-  <div id="tooltip">
-    <div id="text"></div>
-    <svg id="arrow" width="9" height="4" aria-hidden="true"><path d="m4.5 4 4-4h-8l4 4Z"/></svg>
+<sinch-pop id="pop">
+  <slot id="target" slot="target"></slot>
+  <div id="content-wrapper" slot="content">
+    <div id="content">
+      <sinch-text id="text" type="s"></sinch-text>
+      <svg id="tip" width="8" height="4" aria-hidden="true"><path d="m4 4 4-4h-8l4 4Z"/></svg>
+    </div>
   </div>
-</div>
+</sinch-pop>

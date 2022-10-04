@@ -18,10 +18,6 @@ export default {
       description: 'Text',
       control: 'text',
     },
-    width: {
-      description: 'Max Width',
-      control: 'number',
-    },
     inverted: {
       description: 'Is Inverted',
       control: 'boolean',
@@ -42,7 +38,6 @@ export default {
 const Template = (innerHTML: string): Story => () => {
   const [{
     text,
-    width,
     inverted,
     orientation,
   }] = useArgs()
@@ -61,7 +56,6 @@ const Template = (innerHTML: string): Story => () => {
   const tooltip = tooltipef.current!
 
   tooltip.text = text
-  tooltip.width = width
   tooltip.inverted = inverted
   tooltip.orientation = orientation
 
