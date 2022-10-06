@@ -30,7 +30,7 @@ export type TSinchColorName =
   | 'Skin tone 40'
   | 'Skin tone 50'
 
-export const colorNameValues: readonly TSinchColorName[] = [
+export const defaultColorNameValues: readonly TSinchColorName[] = [
   NO_COLOR,
   'Blue 10',
   'Blue 20',
@@ -53,21 +53,7 @@ export const colorNameValues: readonly TSinchColorName[] = [
   'Gray 20',
   'Coral 10',
   'Red 10',
-  'Skin tone 0',
-  'Skin tone 10',
-  'Skin tone 20',
-  'Skin tone 30',
-  'Skin tone 40',
-  'Skin tone 50',
 ]
-
-type TAssertColorName = (value: string | null) => asserts value is TSinchColorName
-
-export const assertColorNameValue: TAssertColorName = (value) => {
-  if (value === null || !colorNameValues.includes(value as TSinchColorName)) {
-    throw new Error(`Invalid color name: "${value}"`)
-  }
-}
 
 export const colorMap: Record<TSinchColorName, { value: string, isInverted: boolean }> = {
   [NO_COLOR]: { value: NO_COLOR, isInverted: false },
@@ -98,4 +84,14 @@ export const colorMap: Record<TSinchColorName, { value: string, isInverted: bool
   'Skin tone 30': { value: 'skin-tone-40', isInverted: false },
   'Skin tone 40': { value: 'skin-tone-50', isInverted: false },
   'Skin tone 50': { value: 'skin-tone-60', isInverted: true },
+}
+
+export const colorNameValues = Object.keys(colorMap) as TSinchColorName[]
+
+type TAssertColorName = (value: string | null) => asserts value is TSinchColorName
+
+export const assertColorNameValue: TAssertColorName = (value) => {
+  if (value === null || !colorNameValues.includes(value as TSinchColorName)) {
+    throw new Error(`Invalid color name: "${value}"`)
+  }
 }

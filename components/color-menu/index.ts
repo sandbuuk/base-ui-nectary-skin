@@ -18,7 +18,7 @@ import {
   updateIntegerAttribute,
   updateLiteralAttribute,
 } from '../utils'
-import { assertColorNameValue, colorMap, colorNameValues, NO_COLOR } from '../utils/colors'
+import { assertColorNameValue, colorMap, colorNameValues, defaultColorNameValues, NO_COLOR } from '../utils/colors'
 import optionTemplateHTML from './option-template.html'
 import templateHTML from './template.html'
 import type { TContextKeyboard, TContextVisibility, TRect } from '../types'
@@ -114,10 +114,6 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   }
 
   nthItemRect(index: number): TRect | null {
-    if (index < 0 || index >= colorNameValues.length) {
-      return null
-    }
-
     const $item = this.#$listbox.children[index]
 
     if ($item != null) {
@@ -177,7 +173,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
 
     const colorNames = colorsValue !== null
       ? getCsvSet(colorsValue)
-      : colorNameValues
+      : defaultColorNameValues
     const fragment = document.createDocumentFragment()
 
     for (const col of colorNames) {
