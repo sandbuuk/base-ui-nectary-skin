@@ -334,46 +334,6 @@ export const isElementFocused = ($el: Element | null): boolean => {
   return $el !== null && $el === ($el.getRootNode() as Document).activeElement
 }
 
-export class Context {
-  #$root: Element
-  #listeners = new Set<Element>()
-  #name: string
-  #isSubscribed = false
-  constructor($element: Element, name: string) {
-    this.#$root = $element
-    this.#name = name
-  }
-
-  get elements(): Iterable<Element> {
-    return this.#listeners
-  }
-
-  subscribe() {
-    if (this.#isSubscribed) {
-      return
-    }
-
-    this.#$root.addEventListener(`-context-connect-${this.#name}`, this.#onConnect)
-    this.#$root.addEventListener(`-context-disconnect-${this.#name}`, this.#onDisconnect)
-    this.#isSubscribed = true
-  }
-
-  unsubscribe() {
-    this.#listeners.clear()
-    this.#$root.removeEventListener(`-context-connect-${this.#name}`, this.#onConnect)
-    this.#$root.removeEventListener(`-context-disconnect-${this.#name}`, this.#onDisconnect)
-    this.#isSubscribed = false
-  }
-
-  #onConnect = (e: Event) => {
-    this.#listeners.add(e.target as Element)
-  }
-
-  #onDisconnect = (e: Event) => {
-    this.#listeners.delete(e.target as Element)
-  }
-}
-
 export const rectOverlap = (targetRect: TRect, contentRect: TRect): boolean => {
   return targetRect.x < (contentRect.x + contentRect.width) &&
          (targetRect.x + targetRect.width) > contentRect.x &&

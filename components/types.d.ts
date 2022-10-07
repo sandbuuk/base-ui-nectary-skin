@@ -12,10 +12,3 @@ export type TRect = {
   width: number,
   height: number,
 }
-
-export type TContextKeyboard = {
-  code: string,
-  preventDefault: () => void,
-}
-
-export type TContextVisibility = boolean
