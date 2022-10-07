@@ -1,4 +1,5 @@
 import '../color-swatch'
+import '../tooltip'
 import '../icons/check'
 import {
   attrValueToPixels,
@@ -22,6 +23,8 @@ import { assertColorNameValue, colorMap, colorNameValues, defaultColorNameValues
 import { dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import optionTemplateHTML from './option-template.html'
 import templateHTML from './template.html'
+import { getOptionValue } from './utils'
+import type { TRect } from '../types'
 import type { TSinchColorName } from '../utils/colors'
 import type { TContextKeyboard, TContextVisibility } from '../utils/context'
 import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
@@ -187,9 +190,10 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
       const optFrag = optionTemplate.content.cloneNode(true) as Element
       const $opt = optFrag.querySelector('.option')!
       const $swatch = optFrag.querySelector('sinch-color-swatch')!
+      const $tooltip = optFrag.querySelector('sinch-tooltip')!
 
       updateAttribute($opt, 'data-value', col)
-      updateAttribute($opt, 'title', col)
+      updateAttribute($tooltip, 'text', col)
       updateAttribute($swatch, 'name', col)
 
       fragment.appendChild(optFrag)
@@ -480,9 +484,13 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
       return
     }
 
-    this.dispatchEvent(
-      new CustomEvent('-change', { detail: getAttribute($opt, 'data-value') })
-    )
+    const value = getOptionValue($opt)
+
+    if (value !== null) {
+      this.dispatchEvent(
+        new CustomEvent('-change', { detail: value })
+      )
+    }
   }
 
   #onChangeReactHandler = (e: Event) => {
