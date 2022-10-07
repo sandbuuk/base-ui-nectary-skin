@@ -19,10 +19,11 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import { assertColorNameValue, colorMap, colorNameValues, defaultColorNameValues, NO_COLOR } from '../utils/colors'
+import { dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import optionTemplateHTML from './option-template.html'
 import templateHTML from './template.html'
-import type { TContextKeyboard, TContextVisibility, TRect } from '../types'
 import type { TSinchColorName } from '../utils/colors'
+import type { TContextKeyboard, TContextVisibility } from '../utils/context'
 import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
 
 const NUM_COLS_DEFAULT = 5
@@ -65,8 +66,8 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     this.#$listbox.addEventListener('click', this.#onListboxClick, { signal })
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
     this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
-    this.dispatchEvent(new CustomEvent('-context-connect-keydown', { bubbles: true }))
-    this.dispatchEvent(new CustomEvent('-context-connect-visibility', { bubbles: true }))
+    dispatchContextConnectEvent(this, 'visibility')
+    dispatchContextConnectEvent(this, 'keydown')
 
     requestAnimationFrame(this.#onMount)
   }
@@ -74,8 +75,8 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   disconnectedCallback() {
     this.#isConnected = false
     this.#prevColorsValue = null
-    this.dispatchEvent(new CustomEvent('-context-disconnect-keydown', { bubbles: true }))
-    this.dispatchEvent(new CustomEvent('-context-disconnect-visibility', { bubbles: true }))
+    dispatchContextDisconnectEvent(this, 'visibility')
+    dispatchContextDisconnectEvent(this, 'keydown')
     this.#controller!.abort()
   }
 

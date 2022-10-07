@@ -10,15 +10,15 @@ import {
   updateBooleanAttribute,
   NectaryElement,
   throttleAnimationFrame,
-  Context,
   isElementFocused,
   getFirstSlotElement,
   updateIntegerAttribute,
   getIntegerAttribute,
 } from '../utils'
+import { Context, dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import templateHTML from './template.html'
 import { assertOrientation, orientationValues } from './utils'
-import type { TContextKeyboard, TContextVisibility } from '../types'
+import type { TContextVisibility, TContextKeyboard } from '../utils/context'
 import type { TSinchPopElement, TSinchPopOrientation, TSinchPopReact } from './types'
 
 const template = document.createElement('template')
@@ -71,14 +71,15 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     const { signal } = this.#controller
 
+    this.#keydownContext.subscribe()
+    this.#visibilityContext.subscribe()
+
     this.setAttribute('role', 'dialog')
     this.#$dialog.addEventListener('cancel', this.#onCancel, { signal })
     this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown, { signal })
     this.addEventListener('-close', this.#onCloseReactHandler, { signal })
+    dispatchContextConnectEvent(this, 'visibility')
     this.#isConnected = true
-
-    this.#keydownContext.subscribe()
-    this.#visibilityContext.subscribe()
 
     if (getBooleanAttribute(this, 'open')) {
       this.#onExpand()
@@ -92,6 +93,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     this.#controller!.abort()
     this.#keydownContext.unsubscribe()
     this.#visibilityContext.unsubscribe()
+    dispatchContextDisconnectEvent(this, 'visibility')
   }
 
   static get observedAttributes() {

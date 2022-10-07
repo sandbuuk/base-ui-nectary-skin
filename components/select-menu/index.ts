@@ -15,6 +15,7 @@ import {
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
+import { dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import templateHTML from './template.html'
 import type { TSinchSelectMenuOptionElement } from '../select-menu-option/types'
 import type { TContextKeyboard, TContextVisibility } from '../utils/context'
@@ -58,13 +59,13 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange, { signal })
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
     this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
-    this.dispatchEvent(new CustomEvent('-context-connect-keydown', { bubbles: true }))
-    this.dispatchEvent(new CustomEvent('-context-connect-visibility', { bubbles: true }))
+    dispatchContextConnectEvent(this, 'keydown')
+    dispatchContextConnectEvent(this, 'visibility')
   }
 
   disconnectedCallback() {
-    this.dispatchEvent(new CustomEvent('-context-disconnect-keydown', { bubbles: true }))
-    this.dispatchEvent(new CustomEvent('-context-disconnect-visibility', { bubbles: true }))
+    dispatchContextDisconnectEvent(this, 'keydown')
+    dispatchContextDisconnectEvent(this, 'visibility')
     this.#controller!.abort()
   }
 

@@ -8,9 +8,10 @@ import {
   updateBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
+import { dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import templateHTML from './template.html'
 import type { TSinchActionMenuOptionElement } from '../action-menu-option/types'
-import type { TContextKeyboard as TContextKeyboard, TContextVisibility } from '../types'
+import type { TContextKeyboard, TContextVisibility } from '../utils/context'
 import type { TSinchActionMenuElement, TSinchActionMenuReact } from './types'
 
 const ITEM_HEIGHT = 40
@@ -46,13 +47,13 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
     this.addEventListener('blur', this.#onListboxBlur, { signal })
     this.#$listbox.addEventListener('click', this.#onListboxClick, { signal })
-    this.dispatchEvent(new CustomEvent('-context-connect-keydown', { bubbles: true }))
-    this.dispatchEvent(new CustomEvent('-context-connect-visibility', { bubbles: true }))
+    dispatchContextConnectEvent(this, 'keydown')
+    dispatchContextConnectEvent(this, 'visibility')
   }
 
   disconnectedCallback() {
-    this.dispatchEvent(new CustomEvent('-context-disconnect-keydown', { bubbles: true }))
-    this.dispatchEvent(new CustomEvent('-context-disconnect-visibility', { bubbles: true }))
+    dispatchContextDisconnectEvent(this, 'keydown')
+    dispatchContextDisconnectEvent(this, 'visibility')
     this.#controller!.abort()
   }
 
