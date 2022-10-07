@@ -16,6 +16,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-icon-button', class extends NectaryElement {
   #$button: HTMLButtonElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -28,22 +29,21 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
+    const options = { signal: this.#controller.signal }
+
     this.setAttribute('role', 'button')
-    this.#$button.addEventListener('click', this.#onButtonClick)
-    this.#$button.addEventListener('focus', this.#onButtonFocus)
-    this.#$button.addEventListener('blur', this.#onButtonBlur)
-    this.addEventListener('-click', this.#onClickReactHandler)
-    this.addEventListener('-focus', this.#onFocusReactHandler)
-    this.addEventListener('-blur', this.#onBlurReactHandler)
+    this.#$button.addEventListener('click', this.#onButtonClick, options)
+    this.#$button.addEventListener('focus', this.#onButtonFocus, options)
+    this.#$button.addEventListener('blur', this.#onButtonBlur, options)
+    this.addEventListener('-click', this.#onClickReactHandler, options)
+    this.addEventListener('-focus', this.#onFocusReactHandler, options)
+    this.addEventListener('-blur', this.#onBlurReactHandler, options)
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onButtonClick)
-    this.#$button.removeEventListener('focus', this.#onButtonFocus)
-    this.#$button.removeEventListener('blur', this.#onButtonBlur)
-    this.removeEventListener('-click', this.#onClickReactHandler)
-    this.removeEventListener('-focus', this.#onFocusReactHandler)
-    this.removeEventListener('-blur', this.#onBlurReactHandler)
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {

@@ -20,7 +20,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-popover', class extends NectaryElement {
   #$pop: TSinchPopElement
-  #controller = new AbortController()
+  #controller: AbortController | null = null
   constructor() {
     super()
 
@@ -32,6 +32,8 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
     const { signal } = this.#controller
 
     this.#$pop.addEventListener('-close', this.#onClose, { signal })
@@ -41,7 +43,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller.abort()
+    this.#controller!.abort()
   }
 
   #onClose = () => {

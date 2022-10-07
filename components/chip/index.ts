@@ -24,7 +24,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-chip', class extends NectaryElement {
   #$text: HTMLElement
   #$button: HTMLElement
-  #controller = new AbortController()
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -38,6 +38,8 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
     const { signal } = this.#controller
 
     this.setAttribute('role', 'button')
@@ -52,7 +54,7 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller.abort()
+    this.#controller!.abort()
   }
 
   get color() {

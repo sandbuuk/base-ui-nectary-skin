@@ -30,7 +30,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-select-menu', class extends NectaryElement {
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
-  #controller = new AbortController()
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -44,6 +44,8 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
     const { signal } = this.#controller
 
     this.setAttribute('role', 'listbox')
@@ -61,9 +63,9 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller.abort()
     this.dispatchEvent(new CustomEvent('-context-disconnect-keydown', { bubbles: true }))
     this.dispatchEvent(new CustomEvent('-context-disconnect-visibility', { bubbles: true }))
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {

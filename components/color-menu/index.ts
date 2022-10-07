@@ -37,7 +37,7 @@ optionTemplate.innerHTML = optionTemplateHTML
 defineCustomElement('sinch-color-menu', class extends NectaryElement {
   #$listbox: HTMLElement
   #$checkIcon: HTMLElement
-  #controller = new AbortController()
+  #controller: AbortController | null = null
   #prevColorsValue: string | null = ''
   #isConnected = false
 
@@ -53,6 +53,8 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
     const { signal } = this.#controller
 
     this.setAttribute('role', 'listbox')
@@ -72,9 +74,9 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   disconnectedCallback() {
     this.#isConnected = false
     this.#prevColorsValue = null
-    this.#controller.abort()
     this.dispatchEvent(new CustomEvent('-context-disconnect-keydown', { bubbles: true }))
     this.dispatchEvent(new CustomEvent('-context-disconnect-visibility', { bubbles: true }))
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {

@@ -35,7 +35,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   #$contentWrapper: HTMLElement
   #$tip: HTMLElement
   #$target: HTMLElement
-  #controller = new AbortController()
+  #controller: AbortController | null = null
   #tooltipState: TooltipState
   #animation: Animation | null = null
   #shouldReduceMotion = false
@@ -66,6 +66,8 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
     const { signal } = this.#controller
 
     this.#$pop.addEventListener('-close', this.#onPopClose, { signal })
@@ -79,7 +81,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller.abort()
+    this.#controller!.abort()
     this.#tooltipState.destroy()
   }
 

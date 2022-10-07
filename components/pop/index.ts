@@ -36,7 +36,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #$contentSlot: HTMLSlotElement
   #$targetOpenWrapper: HTMLElement
   #targetActiveElement: HTMLElement | null = null
-  #controller = new AbortController()
+  #controller: AbortController | null = null
   #keydownContext: Context
   #visibilityContext: Context
 
@@ -67,6 +67,8 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
     const { signal } = this.#controller
 
     this.setAttribute('role', 'dialog')
@@ -84,10 +86,10 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller.abort()
     this.#onCollapse()
     this.#isConnected = false
 
+    this.#controller!.abort()
     this.#keydownContext.unsubscribe()
     this.#visibilityContext.unsubscribe()
   }
