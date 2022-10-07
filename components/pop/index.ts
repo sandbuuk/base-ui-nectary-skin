@@ -78,6 +78,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     this.#$dialog.addEventListener('cancel', this.#onCancel, { signal })
     this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown, { signal })
     this.addEventListener('-close', this.#onCloseReactHandler, { signal })
+    this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
     dispatchContextConnectEvent(this, 'visibility')
     this.#isConnected = true
 
@@ -425,6 +426,12 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       if (isPrevented) {
         e.preventDefault()
       }
+    }
+  }
+
+  #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
+    if (!e.detail) {
+      this.#dispatchCloseEvent()
     }
   }
 })
