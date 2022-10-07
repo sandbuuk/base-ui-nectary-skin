@@ -1,3 +1,4 @@
+import '../tooltip'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -8,6 +9,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchTooltipElement } from '../tooltip/types'
 import type { TSinchIconButtonElement, TSinchIconButtonReact } from './types'
 
 const template = document.createElement('template')
@@ -16,6 +18,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-icon-button', class extends NectaryElement {
   #$button: HTMLButtonElement
+  #$tooltip: TSinchTooltipElement
   #controller: AbortController | null = null
 
   constructor() {
@@ -25,7 +28,8 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$button = shadowRoot.querySelector('button')!
+    this.#$button = shadowRoot.querySelector('#button')!
+    this.#$tooltip = shadowRoot.querySelector('#tooltip')!
   }
 
   connectedCallback() {
@@ -61,7 +65,7 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
         break
       }
       case 'aria-label': {
-        updateAttribute(this, 'title', newVal)
+        updateAttribute(this.#$tooltip, 'text', newVal)
 
         break
       }

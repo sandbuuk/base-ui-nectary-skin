@@ -84,7 +84,7 @@ button:disabled {
   --sinch-color-icon: var(--sinch-color-stormy-100);
 }
 
-:host([small]:not([small="false"])) > button {
+:host([small]:not([small="false"])) #button {
   width: 32px;
   height: 32px;
 
@@ -96,6 +96,8 @@ button > * {
 }
 </style>
 
-<button>
-  <slot name="icon"></slot>
-</button>
+<sinch-tooltip id="tooltip">
+  <button id="button">
+    <slot name="icon"></slot>
+  </button>
+</sinch-tooltip>

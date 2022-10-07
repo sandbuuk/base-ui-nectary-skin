@@ -170,6 +170,18 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
       yield { name: 'active' }
     },
   },
+  {
+    name: 'tooltip',
+    url: shot,
+    async *fn({ page, $, $eval }) {
+      const pt = await centerBB($)
+
+      await page.mouse.move(pt.x, pt.y)
+      await page.waitForTimeout(1200)
+
+      yield { name: 'shot', includeRects: [await $eval((el) => el.tooltipRect)] }
+    },
+  },
 ]))
 
 test('icon-button events', runScreenshotTests('sinch-icon-button', [
