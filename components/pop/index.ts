@@ -17,7 +17,7 @@ import {
 } from '../utils'
 import { Context, dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import templateHTML from './template.html'
-import { assertOrientation, orientationValues } from './utils'
+import { assertOrientation, disableScroll, enableScroll, orientationValues } from './utils'
 import type { TContextVisibility, TContextKeyboard } from '../utils/context'
 import type { TSinchPopElement, TSinchPopOrientation, TSinchPopReact } from './types'
 
@@ -30,7 +30,6 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #$dialog: HTMLDialogElement
   #isConnected: boolean
   #resizeThrottle
-  #originalOverflowValue: string = ''
   #$targetSlot: HTMLSlotElement
   #$targetOpenSlot: HTMLSlotElement
   #$contentSlot: HTMLSlotElement
@@ -236,8 +235,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     }
 
     /* Prevent scroll */
-    this.#originalOverflowValue = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    disableScroll()
     window.addEventListener('resize', this.#onResize)
 
     // Dispatch Visibility Context
@@ -288,7 +286,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     this.#$targetOpenSlot.removeEventListener('keydown', this.#onTargetKeydown)
 
     /* Restore scroll */
-    document.body.style.overflow = this.#originalOverflowValue
+    enableScroll()
     this.#resizeThrottle.cancel()
     window.removeEventListener('resize', this.#onResize)
   }

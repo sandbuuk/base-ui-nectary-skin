@@ -20,3 +20,21 @@ export const assertOrientation: TAssertOrientation = (value) => {
     throw new Error(`sinch-pop: invalid orientation attribute: ${value}`)
   }
 }
+
+const bodyEl = document.body as HTMLBodyElement & { __pop_counter__: number }
+
+export const disableScroll = () => {
+  bodyEl.style.overflow = 'hidden'
+  bodyEl.__pop_counter__ = (bodyEl.__pop_counter__ ?? 0) + 1
+  console.log('disable', bodyEl.__pop_counter__)
+}
+
+export const enableScroll = () => {
+  bodyEl.__pop_counter__ = Math.max(0, (bodyEl.__pop_counter__ ?? 0) - 1)
+
+  console.log('enable', bodyEl.__pop_counter__)
+
+  if (bodyEl.__pop_counter__ === 0) {
+    document.body.style.overflow = ''
+  }
+}
