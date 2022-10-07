@@ -87,13 +87,12 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#onCollapse()
-    this.#isConnected = false
-
     this.#controller!.abort()
     this.#keydownContext.unsubscribe()
     this.#visibilityContext.unsubscribe()
     dispatchContextDisconnectEvent(this, 'visibility')
+    this.#onCollapse()
+    this.#isConnected = false
   }
 
   static get observedAttributes() {
@@ -182,7 +181,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       // Capture active target element and supress unnecessary events
       this.#$targetOpenSlot.addEventListener('blur', this.#captureActiveElement, true)
       // Webkit emits additional focus event when transferring element
-      this.#$targetOpenSlot.addEventListener('focus', this.#stopPropagation, true)
+      this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
 
       /* Measure target */
       const targetRect = this.#$target.getBoundingClientRect()
@@ -213,16 +212,16 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     if (isNonModal) {
       // Capture active target element and supress unnecessary events
       this.#$targetOpenSlot.removeEventListener('blur', this.#captureActiveElement, true)
-      this.#$targetOpenSlot.removeEventListener('focus', this.#stopPropagation, true)
+      this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
 
       // We have to delay focus, in case we expand in onFocus handler
       if (this.#targetActiveElement !== null) {
         // Firefox loses focus on target when non-modal dialog opens
         if (!isElementFocused(this.#targetActiveElement)) {
           requestAnimationFrame(() => {
-            this.#$targetOpenSlot.addEventListener('focus', this.#stopPropagation, true)
+            this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
             this.#targetActiveElement?.focus()
-            this.#$targetOpenSlot.removeEventListener('focus', this.#stopPropagation, true)
+            this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
           })
         }
       }
@@ -253,7 +252,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     this.#dispatchContentVisibility(false)
 
     // Supress target focus event, to prevent refocus of target to reopen popover
-    this.#$targetSlot.addEventListener('focus', this.#stopPropagation, true)
+    this.#$targetSlot.addEventListener('focus', this.#stopEventPropagation, true)
 
     /* Restore target */
     /* Restore whether modal or non-modal, since modal flag can change */
@@ -271,10 +270,10 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       if (!isElementFocused(this.#targetActiveElement)) {
         requestAnimationFrame(() => {
           // Supress target focus event, to prevent refocus of target to reopen popover
-          this.#$targetSlot.addEventListener('focus', this.#stopPropagation, true)
+          this.#$targetSlot.addEventListener('focus', this.#stopEventPropagation, true)
           this.#targetActiveElement!.focus()
           this.#targetActiveElement = null
-          this.#$targetSlot.removeEventListener('focus', this.#stopPropagation, true)
+          this.#$targetSlot.removeEventListener('focus', this.#stopEventPropagation, true)
         })
       } else {
         this.#targetActiveElement = null
@@ -282,7 +281,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     }
 
     // Supress target focus event, to prevent refocus of target to reopen popover
-    this.#$targetSlot.removeEventListener('focus', this.#stopPropagation, true)
+    this.#$targetSlot.removeEventListener('focus', this.#stopEventPropagation, true)
 
     /* Route keyboard events to content */
     this.#$targetOpenSlot.removeEventListener('keydown', this.#onTargetKeydown)
@@ -396,7 +395,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     this.#targetActiveElement = e.target as HTMLElement
   }
 
-  #stopPropagation = (e: Event) => {
+  #stopEventPropagation = (e: Event) => {
     e.stopPropagation()
   }
 
