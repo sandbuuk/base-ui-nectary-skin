@@ -292,22 +292,50 @@ const throttle = (delayFn: (cb: (...args: any[]) => void) => any, cancelFn: (id:
 
 export const throttleAnimationFrame = throttle(global.requestAnimationFrame, global.cancelAnimationFrame)
 
-export const getFirstSlotElement = (root: HTMLSlotElement): HTMLElement | null => {
-  let slot = root
+const isSlotElement = (el: Element): el is HTMLSlotElement => {
+  return el.tagName === 'SLOT'
+}
 
-  while (true) {
-    const el = (slot.assignedElements() as HTMLElement[])[0]
+export const getFirstSlotElement = (root: HTMLSlotElement, isDeep = false): HTMLElement | null => {
+  const el = (root.assignedElements() as HTMLElement[])[0]
 
-    if (el == null) {
-      return null
-    }
-
-    if (el.tagName !== 'SLOT') {
-      return el
-    }
-
-    slot = el as HTMLSlotElement
+  if (el == null) {
+    return null
   }
+
+  if (isDeep && isSlotElement(el)) {
+    return getFirstSlotElement(el, isDeep)
+  }
+
+  return el
+}
+
+const getChildren = (root: Element): Element[] => {
+  if (isSlotElement(root)) {
+    return root.assignedElements()
+  }
+
+  return Array.from(root.children)
+}
+
+const isFocusable = (el: Element): el is NectaryElement => {
+  return (el as NectaryElement).focusable === true
+}
+
+export const getFirstFocusableElement = (root: Element): NectaryElement | null => {
+  for (const child of getChildren(root)) {
+    if (isFocusable(child)) {
+      return child
+    }
+
+    const resultEl = getFirstFocusableElement(child)
+
+    if (resultEl !== null) {
+      return resultEl
+    }
+  }
+
+  return null
 }
 
 export const cloneNode = (el: Element, deep: boolean): Element => {
