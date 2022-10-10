@@ -15,7 +15,6 @@
     :placeholder="placeholderText"
     :disabled="isDisabled"
     :invalid="invalidText != null"
-    :type="type"
     :value="value"
     @--change="onChange">
     <sinch-icon-search slot="icon"></sinch-icon-search>

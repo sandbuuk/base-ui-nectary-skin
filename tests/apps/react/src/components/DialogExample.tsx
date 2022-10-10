@@ -12,7 +12,7 @@ type TDialog = {
 }
 
 export const DialogExample: FC<TDialog> = () => {
-  const [isDialogOpen, setDialogOpen] = useState(false)
+  const [isDialogOpen, setDialogOpen] = useState(true)
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [value, setValue] = useState('')
   const onInputFocus = () => {

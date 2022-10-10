@@ -389,8 +389,7 @@ export const App: FC<{}> = () => {
 
   const style: CSSProperties = {
     display: 'flex',
-    paddingTop: '120px',
-    paddingLeft: '400px',
+    padding: '120px',
   }
 
   if (height > 0) {

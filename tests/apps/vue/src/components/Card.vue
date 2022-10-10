@@ -6,7 +6,7 @@
     :disabled="isDisabled">
     <sinch-icon-branded-chatbot v-if="hasIcon" slot="icon"></sinch-icon-branded-chatbot>
     <sinch-illustration-phone-and-cat v-if="hasIllustration" size="290" :background="background" valign="top" slot="illustration"></sinch-illustration-phone-and-cat>
-    <sinch-button v-if="buttonText !== null" :type="primary" :text="buttonText" slot="action"></sinch-button>
+    <sinch-button v-if="buttonText !== null" type="primary" :text="buttonText" slot="action"></sinch-button>
     <sinch-link v-if="linkText !== null" :text="linkText" slot="action" preventdefault standalone></sinch-link>
   </sinch-card>
 </template>

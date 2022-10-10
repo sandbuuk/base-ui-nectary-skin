@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getBB, runScreenshotTests } from '../screenshot-tests'
-import type { TSinchHelpTooltipElement } from '@sinch-engage/nectary/help-tooltip/types'
+import { centerBB, getBB, runScreenshotTests } from '../screenshot-tests'
+import type { TSinchTooltipElement } from '@sinch-engage/nectary/tooltip/types'
 
 const shot = '/field?width=200&label=Label'
 const withValue = '/field?width=200&label=Label&value=Input%20value'
@@ -17,11 +17,13 @@ test('field screenshots', runScreenshotTests('sinch-field', [
   {
     name: 'tooltip',
     url: withTooltip,
-    async *fn({ $ }) {
-      await $.locator('sinch-help-tooltip').hover()
+    async *fn({ page }) {
+      const hoverRect = await centerBB(page.locator('sinch-help-tooltip'))
 
-      const tooltipRect = await $.locator('sinch-help-tooltip')
-        .evaluate((el) => (el as TSinchHelpTooltipElement).tooltipRect)
+      await page.mouse.move(hoverRect.x, hoverRect.y)
+      await page.waitForTimeout(1200)
+
+      const tooltipRect = await page.locator('sinch-help-tooltip').evaluate((el: TSinchTooltipElement) => el.tooltipRect)
 
       yield {
         name: 'show',

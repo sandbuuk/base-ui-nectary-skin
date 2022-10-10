@@ -55,7 +55,7 @@ test('search events', runScreenshotTests('sinch-popover', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-search-focus', 'sinch-search-blur', 'sinch-search-change')
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
+      await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)
@@ -65,9 +65,9 @@ test('search events', runScreenshotTests('sinch-popover', [
       ])
 
       // Necessary to normalize "type" behaviour
-      const bb = await centerBB($)
+      const pt = await centerBB($)
 
-      await page.mouse.click(bb.x, bb.y)
+      await page.mouse.click(pt.x, pt.y)
       await page.keyboard.press('End')
       await page.keyboard.press('X')
       await page.keyboard.press('ArrowDown')

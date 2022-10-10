@@ -2,6 +2,7 @@
   <sinch-icon-button
     :small="isSmall"
     :disabled="isDisabled"
+    aria-label="Button"
     @--click="onClick"
     @--focus="onFocus"
     @--blur="onBlur">

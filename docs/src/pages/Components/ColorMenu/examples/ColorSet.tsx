@@ -1,12 +1,11 @@
 import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import { useState } from 'react'
-import type { TSinchColorName } from '@sinch-engage/nectary/utils/colors'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
 
 export const ColorSetExample: FC = () => {
-  const [value, setValue] = useState<TSinchColorName>(NO_COLOR)
-  const onChange = (e: CustomEvent<TSinchColorName>) => setValue(e.detail)
+  const [value, setValue] = useState<string>(NO_COLOR)
+  const onChange = (e: CustomEvent<string>) => setValue(e.detail)
 
   return (
     <sinch-color-menu
