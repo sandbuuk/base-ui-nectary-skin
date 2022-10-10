@@ -243,6 +243,10 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
     return null
   }
+
+  get focusable() {
+    return true
+  }
 })
 
 declare global {

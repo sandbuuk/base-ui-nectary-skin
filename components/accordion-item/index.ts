@@ -131,6 +131,10 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
     )
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$button.focus()
   }

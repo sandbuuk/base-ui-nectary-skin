@@ -88,6 +88,10 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
     return getBooleanAttribute(this, 'small')
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$button.focus()
   }

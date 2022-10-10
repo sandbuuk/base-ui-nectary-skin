@@ -98,6 +98,10 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
     }
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$button.focus()
   }

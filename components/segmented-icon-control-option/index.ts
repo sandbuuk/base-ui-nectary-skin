@@ -81,6 +81,10 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
     }
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$button.focus()
   }

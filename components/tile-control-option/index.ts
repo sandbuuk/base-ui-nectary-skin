@@ -100,6 +100,10 @@ defineCustomElement('sinch-tile-control-option', class extends NectaryElement {
     return getAttribute(this, 'text', '')
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$button.focus()
   }

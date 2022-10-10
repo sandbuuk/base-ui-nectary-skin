@@ -129,6 +129,10 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     }
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$anchor.focus()
   }

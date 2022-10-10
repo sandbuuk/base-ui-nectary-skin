@@ -119,6 +119,10 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     return getIntegerAttribute(this, 'cols', null)
   }
 
+  get focusable() {
+    return true
+  }
+
   nthItemRect(index: number): TRect | null {
     const $item = this.#$listbox.children[index]
 

@@ -114,6 +114,10 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
     setClass(this.#$button, 'inverted', isInverted)
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$button.focus()
   }

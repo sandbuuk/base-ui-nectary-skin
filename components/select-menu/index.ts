@@ -354,6 +354,10 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
   }
+
+  get focusable() {
+    return true
+  }
 })
 
 declare global {

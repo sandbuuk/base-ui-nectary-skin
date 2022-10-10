@@ -128,6 +128,10 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
     }
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$input.focus()
   }

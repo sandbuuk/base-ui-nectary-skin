@@ -49,6 +49,10 @@ export class NectaryElement extends HTMLElement {
   }
 
   version = pkg.version
+
+  get focusable() {
+    return false
+  }
 }
 
 export const getReactEventHandler = ($element: HTMLElement, handlerName: string): ((arg?: any) => void) | null => {

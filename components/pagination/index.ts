@@ -193,6 +193,10 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     getReactEventHandler(this, 'on-change')?.(e)
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$left.focus()
   }
