@@ -20,6 +20,7 @@ export type TSinchPopElement = HTMLElement & {
   /** Modal/non-modal mode */
   modal: boolean,
   inset: number,
+  readonly footprintRect: TRect,
   readonly popoverRect: TRect,
   /** Close event */
   addEventListener(type: '-close', listener: (e: CustomEvent<void>) => void): void,

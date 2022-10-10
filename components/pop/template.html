@@ -1,11 +1,6 @@
 <style>
 :host {
-  display: inline-block;
-  vertical-align: middle;
-  outline: none;
-}
-
-#wrapper {
+  display: contents;
   position: relative;
 }
 
@@ -60,11 +55,6 @@ dialog.fixed {
   left: 0;
 }
 
-#target {
-  display: flex;
-  flex-direction: column;
-}
-
 #content {
   position: relative;
   z-index: 1;
@@ -77,18 +67,22 @@ dialog.fixed {
   left: 0;
   top: 0;
 }
+
+#focus {
+  display: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
 </style>
 
-<div id="wrapper">
-  <div id="target" aria-haspopup="dialog" aria-expanded="false">
-    <slot name="target"></slot>
+<slot id="target" aria-haspopup="dialog" aria-expanded="false" name="target"></slot>
+<div id="focus" tabindex="-1"></div>
+<dialog id="dialog">
+  <div id="content">
+    <slot name="content"></slot>
   </div>
-  <dialog id="dialog">
-    <div id="content">
-      <slot name="content"></slot>
-    </div>
-    <div id="target-open">
-      <slot name="target-open"></slot>
-    </div>
-  </dialog>
-</div>
+  <div id="target-open">
+    <slot name="target-open"></slot>
+  </div>
+</dialog>
