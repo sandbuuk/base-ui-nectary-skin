@@ -48,7 +48,7 @@ export class NectaryElement extends HTMLElement {
     })
   }
 
-  __version = pkg.version
+  version = pkg.version
 }
 
 export const getReactEventHandler = ($element: HTMLElement, handlerName: string): ((arg?: any) => void) | null => {
