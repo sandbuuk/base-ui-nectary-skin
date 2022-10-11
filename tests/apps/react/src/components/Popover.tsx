@@ -11,6 +11,7 @@ export const Popover: FC<TPopover> = ({ search }) => {
   const [isOpen, setOpen] = useState(search.get('open') !== null)
   const orientation: any = search.get('orientation')
   const isModal = search.get('modal') !== null
+  const hasTip = search.get('tip') !== null
   const onClose = () => {
     window.dispatchEvent(new CustomEvent('sinch-popover-close'))
     setOpen(false)
@@ -24,6 +25,7 @@ export const Popover: FC<TPopover> = ({ search }) => {
     <sinch-popover
       open={isOpen}
       modal={isModal}
+      tip={hasTip}
       orientation={orientation}
       aria-label="Popover"
       on-close={onClose}

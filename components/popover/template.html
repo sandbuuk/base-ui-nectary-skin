@@ -4,6 +4,7 @@
 }
 
 #content-wrapper {
+  position: relative;
   padding-top: 4px;
 }
 
@@ -11,16 +12,53 @@
   font: var(--sinch-font-body);
   color: var(--sinch-color-text-default);
   background-color: var(--sinch-color-snow-100);
-  box-shadow: var(--sinch-elevation-level-2);
   border: 1px solid var(--sinch-color-snow-500);
   border-radius: var(--sinch-shape-radius-m);
+  box-shadow: var(--sinch-elevation-level-2);
   overflow: hidden;
+}
+
+#tip {
+  position: absolute;
+  left: 50%;
+  top: 13px;
+  transform: translateX(-50%) rotate(180deg);
+  transform-origin: top center;
+  fill: var(--sinch-color-snow-100);
+  stroke: var(--sinch-color-snow-500);
+  stroke-linecap: square;
+  pointer-events: none;
+  display: none;
+}
+
+:host([orientation^="top"]) #tip {
+  transform: translateX(-50%) rotate(0deg);
+  top: calc(100% - 13px);
+}
+
+:host([tip]) #tip:not(.hidden) {
+  display: block;
+}
+
+:host([tip]) #content {
+  box-shadow: none;
+}
+
+:host([tip]) #content-wrapper {
+  padding-top: 12px;
+  filter: drop-shadow(var(--sinch-elevation-level-2));
 }
 
 :host([orientation^="top"]) #content-wrapper {
   padding-top: 0;
   padding-bottom: 4px;
 }
+
+:host([orientation^="top"][tip]) #content-wrapper {
+  padding-top: 0;
+  padding-bottom: 12px;
+}
+
 </style>
 
 <sinch-pop id="pop" inset="4">
@@ -29,5 +67,8 @@
     <div id="content">
       <slot name="content"></slot>
     </div>
+    <svg id="tip" width="16" height="9" aria-hidden="true">
+      <path d="m0 0 8 8 8 -8"/>
+    </svg>
   </div>
 </sinch-pop>

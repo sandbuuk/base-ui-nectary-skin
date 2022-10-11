@@ -9,6 +9,9 @@ export type TSinchPopoverElement = HTMLElement & {
   orientation: TSinchPopoverOrientation,
   /** Modal/non-modal mode */
   modal: boolean,
+  /** Show tip */
+  tip: boolean,
+  readonly footprintRect: TRect,
   readonly popoverRect: TRect,
   /** Close event */
   addEventListener(type: '-close', listener: (e: CustomEvent<void>) => void): void,
@@ -17,7 +20,9 @@ export type TSinchPopoverElement = HTMLElement & {
   /** Orientation, where it *points to* from origin */
   setAttribute(name: 'orientation', value: TSinchPopoverOrientation): void,
   /** Modal/non-modal mode */
-  setAttribute(name: 'modal', value: boolean): void,
+  setAttribute(name: 'modal', value: ''): void,
+  /** Show tip */
+  setAttribute(name: 'tip', value: ''): void,
 }
 
 export type TSinchPopoverReact = TSinchElementReact<TSinchPopoverElement> & {
@@ -27,6 +32,8 @@ export type TSinchPopoverReact = TSinchElementReact<TSinchPopoverElement> & {
   orientation?: TSinchPopoverOrientation,
   /** Modal/non-modal mode */
   modal?: boolean,
+  /** Show tip */
+  tip?: boolean,
   /** Label that is used for a11y */
   'aria-label': string,
   /** Close event handler */
