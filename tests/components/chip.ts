@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { colorNameValues, NO_COLOR } from '@sinch-engage/nectary/utils/colors'
+import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
@@ -19,10 +19,11 @@ test('chip screenshots', runScreenshotTests('sinch-chip', [
     name: 'color attribute',
     url: withIcon,
     async *fn({ $eval }) {
-      for (const colorName of colorNameValues) {
+      for (const colorName of [NO_COLOR, 'light-blue']) {
         await $eval((el, val) => {
           el.setAttribute('color', val)
         }, colorName)
+
         yield { name: colorName === NO_COLOR ? 'no-color' : colorName }
       }
     },
@@ -30,16 +31,24 @@ test('chip screenshots', runScreenshotTests('sinch-chip', [
   {
     name: 'color property',
     url: withIcon,
-    async *fn({ $eval }) {
-      for (const colorName of colorNameValues) {
-        const result = await $eval((el, val) => {
-          el.color = val
+    async *fn({ $, $eval }) {
+      await $eval((el) => {
+        el.color = 'light-blue'
+      })
 
-          return el.getAttribute('color')
-        }, colorName)
+      expect(await $.getAttribute('color')).toBe('light-blue')
 
-        expect(result).toBe(colorName)
-      }
+      await $eval((el, NO_COLOR) => {
+        el.color = NO_COLOR
+      }, NO_COLOR)
+
+      expect(await $.getAttribute('color')).toBe(NO_COLOR)
+
+      await $eval((el) => {
+        el.color = null
+      })
+
+      expect(await $.getAttribute('color')).toBe(null)
     },
   },
   {

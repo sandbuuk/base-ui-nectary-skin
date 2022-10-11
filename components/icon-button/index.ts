@@ -10,6 +10,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchTooltipElement } from '../tooltip/types'
+import type { TRect } from '../types'
 import type { TSinchIconButtonElement, TSinchIconButtonReact } from './types'
 
 const template = document.createElement('template')
@@ -86,6 +87,10 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
   get small() {
     return getBooleanAttribute(this, 'small')
+  }
+
+  get tooltipRect(): TRect {
+    return this.#$tooltip.tooltipRect
   }
 
   get focusable() {

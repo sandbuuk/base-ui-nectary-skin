@@ -5,9 +5,8 @@ import type { Page } from '@playwright/test'
 
 const shot = '/color-select?width=200'
 const withPlaceholder = '/color-select?width=200&placeholder=Select%20color'
-const withDisabled = '/color-select?width=200&value=Pink%2010&placeholder=Placeholder&disabled=true'
-const withColors = '/color-select?width=200&colors=Pink%2010,Blue%2010&placeholder=Placeholder'
-const withMaxItems = '/color-select?width=200&value=Pink%2010&rows=2'
+const withDisabled = '/color-select?width=200&value=light-blue&placeholder=Placeholder&disabled=true'
+const withMaxItems = '/color-select?width=200&value=dark-blue&rows=2'
 const checkSelectWithEverything = makeAccessibilityTests('/color-select', 'sinch-popover')
 
 const menuRect = (page: Page) => getBB(page.locator('sinch-color-menu'))
@@ -67,15 +66,6 @@ test('color select screenshots', runScreenshotTests('sinch-popover', [
       yield { name: 'shot' }
     },
   },
-  {
-    name: 'custom colors',
-    url: withColors,
-    async *fn({ $, page }) {
-      await $.click()
-      yield { name: 'shot', includeRects: [await menuRect(page)] }
-    },
-  },
-
 ]))
 
 test('color select events', runScreenshotTests('sinch-color-menu', [
@@ -93,7 +83,7 @@ test('color select events', runScreenshotTests('sinch-color-menu', [
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-color-menu-change', detail: 'Blue 10' },
+        { type: 'sinch-color-menu-change', detail: 'light-violet' },
       ])
 
       await page.keyboard.press('Enter')
@@ -103,7 +93,7 @@ test('color select events', runScreenshotTests('sinch-color-menu', [
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-color-menu-change', detail: 'Green 10' },
+        { type: 'sinch-color-menu-change', detail: 'light-pink' },
       ])
     },
   },
@@ -124,7 +114,7 @@ test('color select events', runScreenshotTests('sinch-color-menu', [
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-color-menu-change', detail: 'Blue 10' },
+        { type: 'sinch-color-menu-change', detail: 'light-violet' },
       ])
     },
   },

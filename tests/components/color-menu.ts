@@ -1,8 +1,12 @@
 import { expect, test } from '@playwright/test'
+import { lightColorNames, vibrantColorNames } from '@sinch-engage/nectary/utils/colors'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
+const lightVibrantColors = encodeURIComponent(`${lightColorNames},${vibrantColorNames}`)
+
 const shot = '/color-menu'
+const withLightVibrant = `/color-menu?colors=${lightVibrantColors}`
 const checkSelectWithEverything = makeAccessibilityTests('/color-menu', 'sinch-color-menu')
 
 test('accessibility', checkSelectWithEverything(async function* () {
@@ -17,8 +21,8 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
       await $eval((el) => el.setAttribute('value', ''))
       yield { name: 'empty' }
 
-      await $eval((el) => el.setAttribute('value', 'Pink 10'))
-      yield { name: 'pink 10' }
+      await $eval((el) => el.setAttribute('value', 'light-blue'))
+      yield { name: 'light-blue' }
     },
   },
   {
@@ -31,16 +35,16 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
       expect(await $.getAttribute('value')).toBe('')
 
       await $eval((el) => {
-        el.value = 'Pink 10'
+        el.value = 'light-blue'
       })
-      expect(await $.getAttribute('value')).toBe('Pink 10')
+      expect(await $.getAttribute('value')).toBe('light-blue')
     },
   },
   {
     name: 'colors attribute',
     url: shot,
     async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('colors', 'Pink 10,Blue 10'))
+      await $eval((el) => el.setAttribute('colors', 'light-orange,light-blue'))
       yield { name: 'set' }
 
       await $eval((el) => el.removeAttribute('colors'))
@@ -51,11 +55,15 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
     name: 'colors property',
     url: shot,
     async *fn({ $, $eval }) {
-      await $eval((el) => el.setAttribute('colors', 'Pink 10,Blue 10'))
+      await $eval((el) => {
+        el.colors = 'Pink 10,Blue 10'
+      })
 
       expect(await $.getAttribute('colors')).toBe('Pink 10,Blue 10')
 
-      await $eval((el) => el.removeAttribute('colors'))
+      await $eval((el) => {
+        el.colors = null
+      })
 
       expect(await $.getAttribute('colors')).toBe(null)
     },
@@ -98,7 +106,7 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
   },
   {
     name: 'keyboard',
-    url: shot,
+    url: withLightVibrant,
     async *fn({ page }) {
       await page.keyboard.press('Tab')
 
@@ -110,15 +118,25 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
       yield { name: '1-rrrdd' }
 
       await page.keyboard.press('ArrowDown')
-      await page.keyboard.press('ArrowDown')
-      await page.keyboard.press('ArrowDown')
-      yield { name: '2-ddd' }
+      yield { name: '2-d' }
 
       await page.keyboard.press('ArrowDown')
       yield { name: '3-d' }
 
       await page.keyboard.press('ArrowUp')
       yield { name: '4-u' }
+    },
+  },
+  {
+    name: 'tooltip',
+    url: shot,
+    async *fn({ page, $eval }) {
+      const pt = centerRect(await $eval((el) => el.nthItemRect(7)))
+
+      await page.mouse.move(pt.x, pt.y)
+      await page.waitForTimeout(1200)
+
+      yield { name: 'shot' }
     },
   },
 ]))
@@ -150,8 +168,8 @@ test('color-menu events', runScreenshotTests('sinch-color-menu', [
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-color-menu-change', detail: 'Blue 20' },
-        { type: 'sinch-color-menu-change', detail: 'Skin tone 40' },
+        { type: 'sinch-color-menu-change', detail: 'light-blue' },
+        { type: 'sinch-color-menu-change', detail: 'dark-orange' },
       ])
     },
   },
@@ -171,8 +189,8 @@ test('color-menu events', runScreenshotTests('sinch-color-menu', [
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-color-menu-change', detail: 'Blue 10' },
-        { type: 'sinch-color-menu-change', detail: 'Green 20' },
+        { type: 'sinch-color-menu-change', detail: 'light-violet' },
+        { type: 'sinch-color-menu-change', detail: 'light-brown' },
       ])
     },
   },

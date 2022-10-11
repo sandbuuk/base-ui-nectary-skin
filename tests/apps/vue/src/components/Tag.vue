@@ -4,13 +4,13 @@
     v-bind:text="text"
     v-bind:small="isSmall"
   >
-    <sinch-icon-mood-bad v-if="hasIcon" slot="icon"></sinch-icon-mood-bad>
+    <sinch-icon-open-in-new v-if="hasIcon" slot="icon"></sinch-icon-open-in-new>
   </sinch-tag>
 </template>
 
 <script>
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/icons/mood-bad'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 export default {
   props: {

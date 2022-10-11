@@ -1,8 +1,9 @@
-import type { TSinchElementReact } from '../types'
+import type { TRect, TSinchElementReact } from '../types'
 
 export type TSinchIconButtonElement = HTMLElement & {
   disabled: boolean,
   small: boolean,
+  readonly tooltipRect: TRect,
   addEventListener(type: '-click', listener: (e: CustomEvent<void>) => void): void,
   addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,

@@ -7,13 +7,13 @@
     @--focus="onFocus"
     @--blur="onBlur"
   >
-    <sinch-icon-mood-bad v-if="hasIcon" slot="icon"></sinch-icon-mood-bad>
+    <sinch-icon-open-in-new v-if="hasIcon" slot="icon"></sinch-icon-open-in-new>
   </sinch-chip>
 </template>
 
 <script>
 import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary/icons/mood-bad'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 export default {
   props: {

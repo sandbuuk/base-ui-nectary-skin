@@ -1,4 +1,4 @@
-export const getOptionValue = ($element: Element): string | null => {
+export const getParentOption = ($element: Element): Element | null => {
   let $el = $element
 
   while (!$el.hasAttribute('data-value')) {
@@ -11,5 +11,5 @@ export const getOptionValue = ($element: Element): string | null => {
     $el = parent
   }
 
-  return $el.getAttribute('data-value')!
+  return $el
 }

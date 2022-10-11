@@ -1,4 +1,3 @@
-import { colorNameValues } from '@sinch-engage/nectary/utils/colors'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/tag'
@@ -10,7 +9,7 @@ export default {
     color: {
       description: 'Tag color',
       control: 'select',
-      options: colorNameValues,
+      options: ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange'],
     },
     text: {
       description: 'Tag text',
@@ -92,7 +91,6 @@ export const Small = Template('<sinch-icon-mood slot="icon"></sinch-icon-mood>')
 
 Small.args = {
   text: 'Label',
-  inverted: false,
   small: true,
 }
 

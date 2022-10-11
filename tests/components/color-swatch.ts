@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { colorNameValues, NO_COLOR } from '@sinch-engage/nectary/utils/colors'
+import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
@@ -15,7 +15,7 @@ test('color-swatch screenshots', runScreenshotTests('sinch-color-swatch', [
     name: 'name attribute',
     url: shot,
     async *fn({ $eval }) {
-      for (const colorName of colorNameValues) {
+      for (const colorName of [NO_COLOR, 'light-blue']) {
         await $eval((el, val) => {
           el.setAttribute('name', val)
         }, colorName)
@@ -26,16 +26,18 @@ test('color-swatch screenshots', runScreenshotTests('sinch-color-swatch', [
   {
     name: 'name property',
     url: shot,
-    async *fn({ $eval }) {
-      for (const colorName of colorNameValues) {
-        const result = await $eval((el, val) => {
-          el.name = val
+    async *fn({ $, $eval }) {
+      await $eval((el) => {
+        el.name = ''
+      })
 
-          return el.getAttribute('name')
-        }, colorName)
+      expect(await $.getAttribute('name')).toBe(NO_COLOR)
 
-        expect(result).toBe(colorName)
-      }
+      await $eval((el) => {
+        el.name = 'light-blue'
+      })
+
+      expect(await $.getAttribute('name')).toBe('light-blue')
     },
   },
 ]))

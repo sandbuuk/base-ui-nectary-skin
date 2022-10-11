@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary/icons/mood-bad'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 type TChip = {
   search: URLSearchParams,
@@ -25,7 +25,7 @@ export const Chip: FC<TChip> = ({ search }) => {
       on-focus={onFocus}
       on-blur={onBlur}
     >
-      {hasIcon && <sinch-icon-mood-bad slot="icon"/>}
+      {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
     </sinch-chip>
   )
 }

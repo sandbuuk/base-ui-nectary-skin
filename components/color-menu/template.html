@@ -16,46 +16,47 @@
   display: none;
 }
 
-#check {
-  position: absolute;
-  left: 10px;
-  top: 16px;
+.option {
+  padding: 12px 6px;
 
   --sinch-color-icon: var(--sinch-color-stormy-500);
-  --sinch-size-icon: 24px;
 }
 
-#check.inverted {
-  --sinch-color-icon: var(--sinch-color-snow-100);
-}
-
-.option {
+.swatch-wrapper {
   position: relative;
   cursor: pointer;
   width: 32px;
   height: 32px;
-  padding: 12px 6px;
 }
 
-.option::after {
+.swatch-wrapper::after {
   content: "";
   position: absolute;
   width: 34px;
   height: 34px;
-  inset: 9px 3px;
+  inset: -3px;
   border: 2px solid transparent;
   border-radius: 50%;
   pointer-events: none;
 }
 
-.option[data-selected]:not([data-checked])::after {
-  border-color: var(--sinch-color-aqua-400);
+.option[data-selected]:not([data-checked]) .swatch-wrapper::after {
+  border-color: var(--sinch-color-border-focus);
 }
 
-sinch-color-swatch {
+.check {
+  display: none;
+  position: absolute;
+  left: 4px;
+  top: 4px;
   pointer-events: none;
+
+  --sinch-size-icon: 24px;
+}
+
+.option[data-checked] .check {
+  display: block;
 }
 </style>
 
-<sinch-icon-check id="check"></sinch-icon-check>
 <div id="listbox" role="presentation"></div>

@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/icons/mood-bad'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 type TTag = {
   search: URLSearchParams,
@@ -18,7 +18,7 @@ export const Tag: FC<TTag> = ({ search }) => {
       text={text}
       small={isSmall}
     >
-      {hasIcon && <sinch-icon-mood-bad slot="icon"/>}
+      {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
     </sinch-tag>
   )
 }
