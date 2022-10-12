@@ -11,6 +11,7 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchTooltipElement } from '../tooltip/types'
 import type { TSinchHelpTooltipElement, TSinchHelpTooltipReact } from './types'
 
 const template = document.createElement('template')
@@ -18,7 +19,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
-  $tooltip: HTMLElementTagNameMap['sinch-tooltip']
+  #$tooltip: TSinchTooltipElement
 
   constructor() {
     super()
@@ -27,7 +28,7 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$tooltip = shadowRoot.querySelector('sinch-tooltip')!
+    this.#$tooltip = shadowRoot.querySelector('sinch-tooltip')!
   }
 
   static get observedAttributes() {
@@ -66,34 +67,16 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
     updateAttribute(this, 'orientation', value)
   }
 
+  get footprintRect() {
+    return this.#$tooltip.footprintRect
+  }
+
   get tooltipRect() {
-    return this.$tooltip.tooltipRect
+    return this.#$tooltip.tooltipRect
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'text': {
-        updateAttribute(this.$tooltip, 'text', newVal)
-
-        break
-      }
-
-      case 'width': {
-        updateAttribute(this.$tooltip, 'width', newVal)
-
-        break
-      }
-
-      case 'inverted': {
-        updateAttribute(this.$tooltip, 'inverted', newVal)
-
-        break
-      }
-
-      case 'orientation': {
-        updateAttribute(this.$tooltip, 'orientation', newVal)
-      }
-    }
+    updateAttribute(this.#$tooltip, name, newVal)
   }
 })
 
