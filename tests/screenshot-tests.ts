@@ -17,7 +17,13 @@ const NULL_RECT: TRect = {
 export const getBB = async (locator: Locator): Promise<TRect> => {
   // Retry getting bounding box several times
   for (let i = 0; i < 3; i++) {
-    const rect = await locator.boundingBox()
+    let rect = await locator.boundingBox()
+
+    if (rect !== null && rect.width > 0) {
+      return rect
+    }
+
+    rect = await locator.evaluate((el) => (el as any).footprintRect ?? null)
 
     if (rect !== null && rect.width > 0) {
       return rect
