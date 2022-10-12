@@ -1,16 +1,17 @@
-import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
+import { NO_COLOR, darkColorNames } from '@sinch-engage/nectary/utils/colors'
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
 
-export const ColorSetExample: FC = () => {
+export const DarkColorSetExample: FC = () => {
   const [value, setValue] = useState<string>(NO_COLOR)
   const onChange = (e: CustomEvent<string>) => setValue(e.detail)
 
   return (
     <sinch-color-menu
       value={value}
-      colors="blue,light-blue,sky-blue,light-sky-blue"
+      cols={4}
+      colors={darkColorNames}
       aria-label="Color menu"
       on-change={onChange}
     />

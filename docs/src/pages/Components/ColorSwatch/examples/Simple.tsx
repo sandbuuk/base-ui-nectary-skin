@@ -1,4 +1,9 @@
-import { colorNameValues } from '@sinch-engage/nectary/utils/colors'
+import {
+  lightColorNames,
+  darkColorNames,
+  vibrantColorNames,
+  skinToneColorNames,
+} from '@sinch-engage/nectary/utils/colors'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/table'
 import '@sinch-engage/nectary/table-head'
@@ -13,6 +18,13 @@ const tableStyles: CSSProperties = {
   width: 250,
 }
 
+const allColorNames: string[] = [
+  ...lightColorNames.split(','),
+  ...darkColorNames.split(','),
+  ...vibrantColorNames.split(','),
+  ...skinToneColorNames.split(','),
+]
+
 export const SimpleExample: FC = () => (
   <sinch-table style={tableStyles}>
     <sinch-table-head>
@@ -23,7 +35,7 @@ export const SimpleExample: FC = () => (
     </sinch-table-head>
     <sinch-table-body>
       {
-        colorNameValues.map((colorName) => (
+        allColorNames.map((colorName) => (
           <sinch-table-row key={colorName}>
             <sinch-table-cell align="center">
               <sinch-color-swatch name={colorName}/>
