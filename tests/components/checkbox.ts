@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withFitWidth = '/checkbox?text=Label'
 const withInvalid = '/checkbox?text=Label&invalid=true'
@@ -219,7 +219,7 @@ test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
     name: 'mouse interaction',
     url: withFitWidth,
     async *fn({ $, page }) {
-      const rect = (await $.boundingBox())!
+      const rect = await getBB($)
 
       await page.mouse.move(rect.x + 5, rect.y + 15)
       yield { name: 'hover' }
@@ -238,7 +238,7 @@ test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
     name: 'invalid mouse interaction',
     url: withInvalid,
     async *fn({ $, page }) {
-      const rect = (await $.boundingBox())!
+      const rect = await getBB($)
 
       await page.mouse.move(rect.x + 5, rect.y + 15)
       yield { name: 'hover' }
@@ -280,7 +280,7 @@ test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
         { type: 'sinch-checkbox-blur', detail: null },
       ])
 
-      const bb = (await $.boundingBox())!
+      const bb = await getBB($)
 
       await page.mouse.click(bb.x + 5, bb.y + 5)
       await page.mouse.click(bb.x + 5, bb.y + 5)

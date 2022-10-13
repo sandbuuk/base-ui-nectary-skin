@@ -20,7 +20,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends NectaryElement {
   #$wrapper: HTMLButtonElement
   #$content: HTMLElement
-  #controller = new AbortController()
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -34,6 +34,8 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
     const { signal } = this.#controller
 
     this.setAttribute('role', 'option')
@@ -42,7 +44,7 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
   }
 
   disconnectedCallback() {
-    this.#controller.abort()
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {

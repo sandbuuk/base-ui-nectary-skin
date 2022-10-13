@@ -68,9 +68,14 @@
   display: none;
 }
 
-::slotted(sinch-help-tooltip) {
+#tooltip {
   align-self: center;
   margin: 0 8px;
+  display: flex;
+}
+
+#tooltip.empty {
+  display: none;
 }
 
 :host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
@@ -86,7 +91,9 @@
 <div id="wrapper">
   <div id="top">
     <label id="label" for="input"></label>
-    <slot name="tooltip"></slot>
+    <div id="tooltip">
+      <slot name="tooltip"></slot>
+    </div>
     <span id="optional"></span>
   </div>
   <slot name="input"></slot>

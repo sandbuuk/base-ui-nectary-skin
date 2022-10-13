@@ -1,7 +1,11 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
 import { SimpleExample } from './examples/Simple.tsx?example'
-import { ColorSetExample } from './examples/ColorSet.tsx?example'
+import { LightColorSetExample } from './examples/LightColorSet.tsx?example'
+import { DarkColorSetExample } from './examples/DarkColorSet.tsx?example'
+import { VibrantColorSetExample } from './examples/VibrantColorSet.tsx?example'
+import { SkinToneColorSetExample } from './examples/SkinToneColorSet.tsx?example'
+import { CustomColorSetExample } from './examples/CustomColorSet.tsx?example'
 import {
   ReactPropsTable,
   ReactHandlersTable,
@@ -22,11 +26,31 @@ Color Menu is a building block for high-level compositions like [Color Select](?
 
 Use down/up/right/left arrow keys to navigate and space/enter to select with keyboard.
 
+All colors by default.
+
 <Example Component={SimpleExample}/>
 
 ### Color Set
 
-<Example Component={ColorSetExample}/>
+#### Light
+
+<Example Component={LightColorSetExample}/>
+
+#### Dark
+
+<Example Component={DarkColorSetExample}/>
+
+#### Vibrant
+
+<Example Component={VibrantColorSetExample}/>
+
+#### Skin Tone
+
+<Example Component={SkinToneColorSetExample}/>
+
+#### Custom
+
+<Example Component={CustomColorSetExample}/>
 
 ## API
 

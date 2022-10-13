@@ -1,0 +1,88 @@
+<style>
+:host {
+  display: contents;
+  position: relative;
+}
+
+dialog {
+  position: fixed;
+  left: 0;
+  top: 0;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+  max-width: unset;
+  max-height: unset;
+  z-index: 1;
+  background: none;
+  overflow: visible;
+}
+
+dialog:not([open]) {
+  display: none;
+}
+
+dialog::backdrop {
+  background-color: transparent;
+}
+
+/* Dialog Polyfill */
+dialog + .backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: transparent;
+}
+
+/* Dialog Polyfill */
+dialog.fixed {
+  position: fixed;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+/* Dialog Polyfill */
+/* stylelint-disable-next-line selector-class-pattern */
+._dialog_overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#content {
+  position: relative;
+  z-index: 1;
+}
+
+#target-open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#focus {
+  display: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+</style>
+
+<slot id="target" aria-haspopup="dialog" aria-expanded="false" name="target"></slot>
+<div id="focus" tabindex="-1"></div>
+<dialog id="dialog">
+  <div id="content">
+    <slot name="content"></slot>
+  </div>
+  <div id="target-open">
+    <slot name="target-open"></slot>
+  </div>
+</dialog>

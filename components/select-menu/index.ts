@@ -15,9 +15,10 @@ import {
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
+import { dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import templateHTML from './template.html'
 import type { TSinchSelectMenuOptionElement } from '../select-menu-option/types'
-import type { TContextKeyboard, TContextVisibility } from '../types'
+import type { TContextKeyboard, TContextVisibility } from '../utils/context'
 import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
 
 type TSelectMenuOption = TSinchSelectMenuOptionElement
@@ -30,7 +31,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-select-menu', class extends NectaryElement {
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
-  #controller = new AbortController()
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -44,6 +45,8 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
     const { signal } = this.#controller
 
     this.setAttribute('role', 'listbox')
@@ -56,14 +59,14 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange, { signal })
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
     this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
-    this.dispatchEvent(new CustomEvent('-context-connect-keydown', { bubbles: true }))
-    this.dispatchEvent(new CustomEvent('-context-connect-visibility', { bubbles: true }))
+    dispatchContextConnectEvent(this, 'keydown')
+    dispatchContextConnectEvent(this, 'visibility')
   }
 
   disconnectedCallback() {
-    this.#controller.abort()
-    this.dispatchEvent(new CustomEvent('-context-disconnect-keydown', { bubbles: true }))
-    this.dispatchEvent(new CustomEvent('-context-disconnect-visibility', { bubbles: true }))
+    dispatchContextDisconnectEvent(this, 'keydown')
+    dispatchContextDisconnectEvent(this, 'visibility')
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {
@@ -350,6 +353,10 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
+  }
+
+  get focusable() {
+    return true
   }
 })
 

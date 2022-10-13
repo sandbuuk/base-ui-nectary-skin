@@ -103,7 +103,7 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
 
   #onTargetSlotChange = () => {
     this.#$target?.removeEventListener('-click', this.#onTargetClick)
-    this.#$target = getFirstSlotElement(this.#$targetSlot)
+    this.#$target = getFirstSlotElement(this.#$targetSlot, true)
     this.#$target?.addEventListener('-click', this.#onTargetClick)
   }
 

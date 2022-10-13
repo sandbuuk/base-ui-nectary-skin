@@ -28,16 +28,16 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
   {
     name: 'open property',
     url: withModal,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
       await $eval((el) => {
         el.open = true
       })
-      yield { name: 'set', includeRects: [await $eval((el) => el.popoverRect)] }
+      expect(await $.getAttribute('open')).toBe('')
 
       await $eval((el) => {
         el.open = false
       })
-      yield { name: 'unset', includeRects: [await $eval((el) => el.popoverRect)] }
+      expect(await $.getAttribute('open')).toBe(null)
     },
   },
   {
@@ -53,12 +53,12 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
   {
     name: 'orientation property',
     url: withWideModalOpen,
-    async *fn({ $eval }) {
+    async *fn({ $eval, $ }) {
       for (const value of orientationValues) {
         await $eval((el, value) => {
           el.orientation = value
         }, value)
-        yield { name: value, includeRects: [await $eval((el) => el.popoverRect)] }
+        expect(await $.getAttribute('orientation')).toBe(value)
       }
     },
   },

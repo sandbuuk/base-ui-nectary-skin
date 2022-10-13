@@ -71,6 +71,10 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
     return getBooleanAttribute(this, 'value')
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$button.focus()
   }

@@ -100,6 +100,10 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
     }
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$button.focus()
   }

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/link?text=Anchor%20text&href=url'
 const withNarrow = '/link?width=110&text=Anchor%20text%20text%20long%20long%20long&href=url'
@@ -170,7 +170,7 @@ test('link screenshots', runScreenshotTests('sinch-link', [
     name: 'hover disabled',
     url: withExternalDisabled,
     async *fn({ $, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.move(ct.x, ct.y)
       yield { name: 'shot', include: [page.locator('#link-wrapper')] }
@@ -180,7 +180,7 @@ test('link screenshots', runScreenshotTests('sinch-link', [
     name: 'hover',
     url: withExternal,
     async *fn({ $, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.move(ct.x, ct.y)
       yield { name: 'shot', include: [page.locator('#link-wrapper')] }

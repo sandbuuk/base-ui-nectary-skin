@@ -2,8 +2,7 @@
   <sinch-tooltip
     v-bind:orientation="orientation"
     v-bind:text="text"
-    v-bind:inverted="isInverted"
-    v-bind:width="width">
+    v-bind:inverted="isInverted">
     <span>Some content</span>
   </sinch-tooltip>
 </template>
@@ -16,9 +15,6 @@ export default {
     search: URLSearchParams
   },
   computed: {
-    width() {
-      return this.search.get('width')
-    },
     text() {
       return this.search.get('text')
     },

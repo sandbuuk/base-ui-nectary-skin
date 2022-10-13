@@ -83,7 +83,7 @@ export async function loader(src) {
       if (isTSTypeAliasDeclaration(decl)) {
         const isElementType = decl.id.name.endsWith('Element')
         const isReactType = decl.id.name.endsWith('React')
-        const isRefType = decl.id.name.endsWith('Type')
+        const isRefType = !isElementType && !isReactType
 
         if (isRefType) {
           typeRefs.set(decl.id.name, generate(decl.typeAnnotation).code)

@@ -198,6 +198,10 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#$input.selectionDirection = value
   }
 
+  get focusable() {
+    return true
+  }
+
   focus() {
     this.#$input.focus()
   }

@@ -2,7 +2,9 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getFirstSlotElement,
   NectaryElement,
+  setClass,
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
@@ -19,6 +21,9 @@ defineCustomElement('sinch-field', class extends NectaryElement {
   #$additionalText: HTMLSpanElement
   #$invalidText: HTMLSpanElement
   #$inputSlot: HTMLSlotElement
+  #$tooltipWrapper: HTMLElement
+  #$tooltipSlot: HTMLSlotElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -32,14 +37,21 @@ defineCustomElement('sinch-field', class extends NectaryElement {
     this.#$additionalText = shadowRoot.querySelector('#additional')!
     this.#$invalidText = shadowRoot.querySelector('#invalid')!
     this.#$inputSlot = shadowRoot.querySelector('slot[name="input"]')!
+    this.#$tooltipSlot = shadowRoot.querySelector('slot[name="tooltip"]')!
+    this.#$tooltipWrapper = shadowRoot.querySelector('#tooltip')!
   }
 
   connectedCallback() {
-    this.#$label.addEventListener('click', this.#onLabelClick)
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+
+    this.#$label.addEventListener('click', this.#onLabelClick, { signal })
+    this.#$tooltipSlot.addEventListener('slotchange', this.#onTooltipSlotChange, { signal })
   }
 
   disconnectedCallback() {
-    this.#$label.removeEventListener('click', this.#onLabelClick)
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {
@@ -120,7 +132,11 @@ defineCustomElement('sinch-field', class extends NectaryElement {
   }
 
   #onLabelClick = () => {
-    (this.#$inputSlot.assignedElements() as HTMLElement[])[0]?.focus?.()
+    getFirstSlotElement(this.#$inputSlot)?.focus?.()
+  }
+
+  #onTooltipSlotChange = () => {
+    setClass(this.#$tooltipWrapper, 'empty', this.#$tooltipSlot.assignedElements().length === 0)
   }
 })
 

@@ -3,16 +3,12 @@ import {
   defineCustomElement,
   getBooleanAttribute,
   getAttribute,
-  getLiteralAttribute,
   updateBooleanAttribute,
   updateAttribute,
-  updateLiteralAttribute,
   NectaryElement,
-  setClass,
 } from '../utils'
-import { assertColorNameValue, colorMap, colorNameValues, NO_COLOR } from '../utils/colors'
+import { NO_COLOR } from '../utils/colors'
 import templateHTML from './template.html'
-import type { TSinchColorName } from '../utils/colors'
 import type { TSinchTagElement, TSinchTagReact } from './types'
 
 const template = document.createElement('template')
@@ -39,11 +35,11 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   }
 
   get color() {
-    return getLiteralAttribute(this, colorNameValues, 'color', null)
+    return getAttribute(this, 'color')
   }
 
-  set color(value: TSinchColorName | null) {
-    updateLiteralAttribute(this, colorNameValues, 'color', value)
+  set color(value: string | null) {
+    updateAttribute(this, 'color', value)
   }
 
   get text() {
@@ -69,7 +65,6 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'color': {
-        assertColorNameValue(newVal)
         this.#updateColor()
 
         break
@@ -85,14 +80,16 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
   #updateColor() {
     const colorName = this.color ?? NO_COLOR
-    const { value, isInverted } = colorMap[colorName]
 
-    if (value !== NO_COLOR) {
-      this.#$wrapper.style.backgroundColor = `var(--sinch-color-${value})`
+    if (colorName !== NO_COLOR) {
+      this.#$wrapper.style.setProperty('background-color', `var(--sinch-color-map-${colorName}-bg)`)
+      this.#$wrapper.style.setProperty('color', `var(--sinch-color-map-${colorName}-fg)`)
+      this.#$wrapper.style.setProperty('--sinch-color-icon', `var(--sinch-color-map-${colorName}-fg)`)
+    } else {
+      this.#$wrapper.style.removeProperty('background-color')
+      this.#$wrapper.style.removeProperty('color')
+      this.#$wrapper.style.removeProperty('--sinch-color-icon')
     }
-
-    setClass(this.#$wrapper, 'no-color', value === NO_COLOR)
-    setClass(this.#$wrapper, 'inverted', isInverted)
   }
 })
 

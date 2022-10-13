@@ -1,9 +1,8 @@
 import type { TRect, TSinchElementReact } from '../types'
-import type { TSinchColorName } from '../utils/colors'
 
 export type TSinchSelectMenuElement = HTMLElement & {
   /** Value */
-  value: TSinchColorName,
+  value: string,
   /** How many rows to show and scroll the rest */
   rows: number | null,
   /** How many cols to show and scroll the rest */
@@ -12,11 +11,11 @@ export type TSinchSelectMenuElement = HTMLElement & {
   colors: string | null,
   nthItemRect(index: number): TRect | null,
   /** Change event */
-  addEventListener(type: '-change', listener: (e: CustomEvent<TSinchColorName>) => void): void,
+  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   /** Comma-separated color names, all colors by default */
   setAttribute(name: 'colors', value: string): void,
   /** Value */
-  setAttribute(name: 'value', value: TSinchColorName): void,
+  setAttribute(name: 'value', value: string): void,
   /** How many rows to show and scroll the rest */
   setAttribute(name: 'rows', value: string): void,
   /** How many cols to show and scroll the rest */
@@ -25,7 +24,7 @@ export type TSinchSelectMenuElement = HTMLElement & {
 
 export type TSinchSelectMenuReact = TSinchElementReact<TSinchSelectMenuElement> & {
   /** Value */
-  value: TSinchColorName,
+  value: string,
   /** How many rows to show and scroll the rest */
   rows?: number,
   /** How many cols to show and scroll the rest */
@@ -35,5 +34,5 @@ export type TSinchSelectMenuReact = TSinchElementReact<TSinchSelectMenuElement> 
   /** Label that is used for a11y */
   'aria-label': string,
   /** Change event handler */
-  'on-change'?: (e: CustomEvent<TSinchColorName>) => void,
+  'on-change'?: (e: CustomEvent<string>) => void,
 }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary/icons/mood-bad'
-import { TSinchColorName } from '@sinch-engage/nectary/utils/colors'
+import '@sinch-engage/nectary/icons/open-in-new'
 
 @Component({
   selector: 'chip-component',
@@ -10,14 +9,14 @@ import { TSinchColorName } from '@sinch-engage/nectary/utils/colors'
 })
 
 export class ChipComponent {
-  color?: TSinchColorName
+  color?: string
   text?: string
   isSmall: boolean
   hasIcon: boolean
 
   constructor() {
     const url = new URL(location.href)
-    this.color = url.searchParams.get('color') as TSinchColorName ?? undefined
+    this.color = url.searchParams.get('color') as string ?? undefined
     this.text = url.searchParams.get('text') ?? ''
     this.isSmall = url.searchParams.get('small') != null
     this.hasIcon = url.searchParams.get('icon') != null

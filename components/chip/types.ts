@@ -1,11 +1,10 @@
 import type { TSinchElementReact } from '../types'
-import type { TSinchColorName } from '../utils/colors'
 
 export type TSinchChipElement = HTMLElement & {
   /** Text */
   text: string,
   /** Color, gray by default */
-  color: TSinchColorName | null,
+  color: string | null,
   /** Small */
   small: boolean,
   /** Click event */
@@ -17,7 +16,7 @@ export type TSinchChipElement = HTMLElement & {
   /** Text */
   setAttribute(name: 'text', value: string): void,
   /** Color, gray by default */
-  setAttribute(name: 'color', value: TSinchColorName): void,
+  setAttribute(name: 'color', value: string): void,
   /** Small */
   setAttribute(name: 'small', value: ''): void,
 }
@@ -26,7 +25,7 @@ export type TSinchChipReact = TSinchElementReact<TSinchChipElement> & {
   /** Text */
   text: string,
   /** Color, gray by default */
-  color?: TSinchColorName,
+  color?: string,
   /** Small */
   small?: boolean,
   /** Click event handler */

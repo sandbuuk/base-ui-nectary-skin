@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/icon-button'
 const withSmall = '/icon-button?small=true'
@@ -20,7 +20,7 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
       await page.keyboard.press('Tab')
       yield { name: 'shot' }
 
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.move(ct.x, ct.y)
       yield { name: 'hover' }
@@ -33,7 +33,7 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
       await page.keyboard.press('Tab')
       yield { name: 'shot' }
 
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.move(ct.x, ct.y)
       yield { name: 'hover' }
@@ -95,7 +95,7 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
     name: 'mouse interaction',
     url: shot,
     async *fn({ $, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.move(ct.x, ct.y)
       yield { name: 'hover' }
@@ -108,7 +108,7 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
     name: 'small mouse interaction',
     url: withSmall,
     async *fn({ $, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.move(ct.x, ct.y)
       yield { name: 'hover' }
@@ -121,7 +121,7 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
     name: 'spinner',
     url: withSpinner,
     async *fn({ $, page }) {
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       yield { name: 'shot' }
 
@@ -161,13 +161,25 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
         document.body.style.backgroundColor = 'beige'
       })
 
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.move(ct.x, ct.y)
       yield { name: 'hover' }
 
       await page.mouse.down()
       yield { name: 'active' }
+    },
+  },
+  {
+    name: 'tooltip',
+    url: shot,
+    async *fn({ page, $, $eval }) {
+      const pt = await centerBB($)
+
+      await page.mouse.move(pt.x, pt.y)
+      await page.waitForTimeout(1200)
+
+      yield { name: 'shot', includeRects: [await $eval((el) => el.tooltipRect)] }
     },
   },
 ]))
@@ -199,7 +211,7 @@ test('icon-button events', runScreenshotTests('sinch-icon-button', [
         { type: 'sinch-icon-button-blur', detail: null },
       ])
 
-      const ct = centerRect(await $.boundingBox())
+      const ct = await centerBB($)
 
       await page.mouse.click(ct.x, ct.y)
 

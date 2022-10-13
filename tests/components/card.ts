@@ -1,6 +1,6 @@
 import { test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { runScreenshotTests } from '../screenshot-tests'
+import { getBB, runScreenshotTests } from '../screenshot-tests'
 
 const cardLabel = 'Report'
 const cardLabelLong = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
@@ -114,7 +114,7 @@ test('card screenshots', runScreenshotTests('sinch-card', [
     name: 'mouse interaction',
     url: withWideWidth,
     async *fn({ $, page }) {
-      const bb = (await $.boundingBox())!
+      const bb = await getBB($)
 
       await page.mouse.move(bb.x + 1, bb.y + 1)
 

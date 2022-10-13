@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withOptions = `/tile-control`
 const with3ColOptions = `/tile-control?cols=3`
@@ -55,7 +55,7 @@ test('tile-control screenshots', runScreenshotTests('sinch-tile-control', [
     name: 'mouse interaction',
     url: withSingleOption,
     async *fn({ $, page }) {
-      const pos = centerRect(await $.boundingBox())
+      const pos = await centerBB($)
 
       await page.mouse.move(pos.x, pos.y)
       yield { name: 'hover' }
@@ -78,7 +78,7 @@ test('tile-control screenshots', runScreenshotTests('sinch-tile-control', [
     name: 'mouse toggle interaction',
     url: withToggleSingleOption,
     async *fn({ $, page }) {
-      const pos = centerRect(await $.boundingBox())
+      const pos = await centerBB($)
 
       await page.mouse.move(pos.x, pos.y)
       yield { name: 'hover' }

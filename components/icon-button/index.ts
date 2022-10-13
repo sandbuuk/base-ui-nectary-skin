@@ -1,3 +1,4 @@
+import '../tooltip'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -8,6 +9,8 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchTooltipElement } from '../tooltip/types'
+import type { TRect } from '../types'
 import type { TSinchIconButtonElement, TSinchIconButtonReact } from './types'
 
 const template = document.createElement('template')
@@ -16,6 +19,8 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-icon-button', class extends NectaryElement {
   #$button: HTMLButtonElement
+  #$tooltip: TSinchTooltipElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -24,26 +29,26 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$button = shadowRoot.querySelector('button')!
+    this.#$button = shadowRoot.querySelector('#button')!
+    this.#$tooltip = shadowRoot.querySelector('#tooltip')!
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
+    const options = { signal: this.#controller.signal }
+
     this.setAttribute('role', 'button')
-    this.#$button.addEventListener('click', this.#onButtonClick)
-    this.#$button.addEventListener('focus', this.#onButtonFocus)
-    this.#$button.addEventListener('blur', this.#onButtonBlur)
-    this.addEventListener('-click', this.#onClickReactHandler)
-    this.addEventListener('-focus', this.#onFocusReactHandler)
-    this.addEventListener('-blur', this.#onBlurReactHandler)
+    this.#$button.addEventListener('click', this.#onButtonClick, options)
+    this.#$button.addEventListener('focus', this.#onButtonFocus, options)
+    this.#$button.addEventListener('blur', this.#onButtonBlur, options)
+    this.addEventListener('-click', this.#onClickReactHandler, options)
+    this.addEventListener('-focus', this.#onFocusReactHandler, options)
+    this.addEventListener('-blur', this.#onBlurReactHandler, options)
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onButtonClick)
-    this.#$button.removeEventListener('focus', this.#onButtonFocus)
-    this.#$button.removeEventListener('blur', this.#onButtonBlur)
-    this.removeEventListener('-click', this.#onClickReactHandler)
-    this.removeEventListener('-focus', this.#onFocusReactHandler)
-    this.removeEventListener('-blur', this.#onBlurReactHandler)
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {
@@ -61,7 +66,7 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
         break
       }
       case 'aria-label': {
-        updateAttribute(this, 'title', newVal)
+        updateAttribute(this.#$tooltip, 'text', newVal)
 
         break
       }
@@ -82,6 +87,14 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
   get small() {
     return getBooleanAttribute(this, 'small')
+  }
+
+  get tooltipRect(): TRect {
+    return this.#$tooltip.tooltipRect
+  }
+
+  get focusable() {
+    return true
   }
 
   focus() {

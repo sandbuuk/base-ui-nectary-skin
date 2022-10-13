@@ -2,14 +2,13 @@ import '../icons/cancel'
 import '../text'
 import {
   defineCustomElement,
-  getLiteralAttribute,
-  updateLiteralAttribute,
   NectaryElement,
   setClass,
+  getAttribute,
+  updateAttribute,
 } from '../utils'
-import { assertColorNameValue, colorMap, colorNameValues, NO_COLOR } from '../utils/colors'
+import { NO_COLOR } from '../utils/colors'
 import templateHTML from './template.html'
-import type { TSinchColorName } from '../utils/colors'
 import type { TSinchColorSwatchElement, TSinchColorSwatchReact } from './types'
 
 const template = document.createElement('template')
@@ -32,11 +31,11 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
   }
 
   get name() {
-    return getLiteralAttribute(this, colorNameValues, 'name', NO_COLOR)
+    return getAttribute(this, 'name', NO_COLOR)
   }
 
-  set name(value: TSinchColorName) {
-    updateLiteralAttribute(this, colorNameValues, 'name', value)
+  set name(value: string) {
+    updateAttribute(this, 'name', value)
   }
 
   static get observedAttributes() {
@@ -50,8 +49,6 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
 
     switch (name) {
       case 'name': {
-        assertColorNameValue(newVal)
-
         this.#updateColor()
 
         break
@@ -63,7 +60,9 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
     const colorName = this.name
 
     if (colorName !== NO_COLOR) {
-      this.#$wrapper.style.backgroundColor = `var(--sinch-color-${colorMap[colorName].value})`
+      this.#$wrapper.style.setProperty('background-color', `var(--sinch-color-map-${colorName}-bg)`)
+    } else {
+      this.#$wrapper.style.removeProperty('background-color')
     }
 
     setClass(this.#$wrapper, 'no-color', colorName === NO_COLOR)

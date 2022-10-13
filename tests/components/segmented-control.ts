@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withOptions = `/segmented-control`
 const withSingleOption = `/segmented-control?single-option=true`
@@ -15,7 +15,7 @@ test('segmented-control screenshots', runScreenshotTests('sinch-segmented-contro
     name: 'mouse interaction',
     url: withSingleOption,
     async *fn({ $, page }) {
-      const rect = (await $.boundingBox())!
+      const rect = await getBB($)
 
       await page.mouse.move(rect.x + 5, rect.y + 15)
       yield { name: 'hover' }

@@ -48,7 +48,11 @@ export class NectaryElement extends HTMLElement {
     })
   }
 
-  __version = pkg.version
+  version = pkg.version
+
+  get focusable() {
+    return false
+  }
 }
 
 export const getReactEventHandler = ($element: HTMLElement, handlerName: string): ((arg?: any) => void) | null => {
@@ -288,22 +292,50 @@ const throttle = (delayFn: (cb: (...args: any[]) => void) => any, cancelFn: (id:
 
 export const throttleAnimationFrame = throttle(global.requestAnimationFrame, global.cancelAnimationFrame)
 
-export const getFirstSlotElement = (root: HTMLSlotElement): HTMLElement | null => {
-  let slot = root
+const isSlotElement = (el: Element): el is HTMLSlotElement => {
+  return el.tagName === 'SLOT'
+}
 
-  while (true) {
-    const el = (slot.assignedElements() as HTMLElement[])[0]
+export const getFirstSlotElement = (root: HTMLSlotElement, isDeep = false): HTMLElement | null => {
+  const el = (root.assignedElements() as HTMLElement[])[0]
 
-    if (el == null) {
-      return null
-    }
-
-    if (el.tagName !== 'SLOT') {
-      return el
-    }
-
-    slot = el as HTMLSlotElement
+  if (el == null) {
+    return null
   }
+
+  if (isDeep && isSlotElement(el)) {
+    return getFirstSlotElement(el, isDeep)
+  }
+
+  return el
+}
+
+const getChildren = (root: Element): Element[] => {
+  if (isSlotElement(root)) {
+    return root.assignedElements()
+  }
+
+  return Array.from(root.children)
+}
+
+const isFocusable = (el: Element): el is NectaryElement => {
+  return (el as NectaryElement).focusable === true
+}
+
+export const getFirstFocusableElement = (root: Element): NectaryElement | null => {
+  for (const child of getChildren(root)) {
+    if (isFocusable(child)) {
+      return child
+    }
+
+    const resultEl = getFirstFocusableElement(child)
+
+    if (resultEl !== null) {
+      return resultEl
+    }
+  }
+
+  return null
 }
 
 export const cloneNode = (el: Element, deep: boolean): Element => {
@@ -334,42 +366,9 @@ export const isElementFocused = ($el: Element | null): boolean => {
   return $el !== null && $el === ($el.getRootNode() as Document).activeElement
 }
 
-export class Context {
-  #$root: Element
-  #listeners = new Set<Element>()
-  #name: string
-  #isSubscribed = false
-  constructor($element: Element, name: string) {
-    this.#$root = $element
-    this.#name = name
-  }
-
-  get elements(): Iterable<Element> {
-    return this.#listeners
-  }
-
-  subscribe() {
-    if (this.#isSubscribed) {
-      return
-    }
-
-    this.#$root.addEventListener(`-context-connect-${this.#name}`, this.#onConnect)
-    this.#$root.addEventListener(`-context-disconnect-${this.#name}`, this.#onDisconnect)
-    this.#isSubscribed = true
-  }
-
-  unsubscribe() {
-    this.#listeners.clear()
-    this.#$root.removeEventListener(`-context-connect-${this.#name}`, this.#onConnect)
-    this.#$root.removeEventListener(`-context-disconnect-${this.#name}`, this.#onDisconnect)
-    this.#isSubscribed = false
-  }
-
-  #onConnect = (e: Event) => {
-    this.#listeners.add(e.target as Element)
-  }
-
-  #onDisconnect = (e: Event) => {
-    this.#listeners.delete(e.target as Element)
-  }
+export const rectOverlap = (targetRect: TRect, contentRect: TRect): boolean => {
+  return targetRect.x < (contentRect.x + contentRect.width) &&
+         (targetRect.x + targetRect.width) > contentRect.x &&
+         targetRect.y < (contentRect.y + contentRect.height) &&
+         (targetRect.y + targetRect.height) > contentRect.y
 }

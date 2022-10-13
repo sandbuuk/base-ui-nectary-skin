@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
+import { centerBB, getAllEvents, getBB, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const withValue = '/search?width=200&label=Label&value=Input%20value'
 const checkValue = makeAccessibilityTests('/search?width=200&label=Label&value=Input%20value', 'sinch-input')
-const getDropdownRect = (page: Page) => page.locator('sinch-action-menu').boundingBox()
+const getDropdownRect = (page: Page) => getBB(page.locator('sinch-action-menu'))
 
 test('accessibility', checkValue(async function* () {
   yield
@@ -55,7 +55,7 @@ test('search events', runScreenshotTests('sinch-popover', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-search-focus', 'sinch-search-blur', 'sinch-search-change')
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
+      await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)
@@ -65,9 +65,9 @@ test('search events', runScreenshotTests('sinch-popover', [
       ])
 
       // Necessary to normalize "type" behaviour
-      const bb = centerRect(await $.boundingBox())
+      const pt = await centerBB($)
 
-      await page.mouse.click(bb.x, bb.y)
+      await page.mouse.click(pt.x, pt.y)
       await page.keyboard.press('End')
       await page.keyboard.press('X')
       await page.keyboard.press('ArrowDown')

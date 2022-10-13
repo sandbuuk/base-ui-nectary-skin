@@ -1,4 +1,9 @@
-import { colorNameValues } from '@sinch-engage/nectary/utils/colors'
+import {
+  lightColorNames,
+  darkColorNames,
+  vibrantColorNames,
+  skinToneColorNames,
+} from '@sinch-engage/nectary/utils/colors'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/text'
@@ -11,10 +16,17 @@ const wrapperStyles: CSSProperties = {
   gap: 10,
 }
 
+const allColorNames: string[] = [
+  ...lightColorNames.split(','),
+  ...darkColorNames.split(','),
+  ...vibrantColorNames.split(','),
+  ...skinToneColorNames.split(','),
+]
+
 export const IconExample: FC = () => (
   <div style={wrapperStyles}>
     {
-      colorNameValues.map((colorName) => (
+      allColorNames.map((colorName) => (
         <sinch-tag
           key={colorName}
           color={colorName}

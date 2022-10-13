@@ -2,7 +2,6 @@
   <sinch-file-status
     :type="type"
     :filename="filename"
-    :description="description"
   >
     <sinch-text v-if="hasDescription" slot="content" type="m">The file is too large, try a file size less than 20 MB</sinch-text>
     <sinch-progress v-if="hasProgress" slot="content" value="73" detailed></sinch-progress>

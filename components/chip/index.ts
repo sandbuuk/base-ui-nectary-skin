@@ -4,17 +4,13 @@ import {
   defineCustomElement,
   getBooleanAttribute,
   getAttribute,
-  getLiteralAttribute,
   updateBooleanAttribute,
   updateAttribute,
-  updateLiteralAttribute,
   NectaryElement,
-  setClass,
   getReactEventHandler,
 } from '../utils'
-import { assertColorNameValue, colorMap, colorNameValues, NO_COLOR } from '../utils/colors'
+import { NO_COLOR } from '../utils/colors'
 import templateHTML from './template.html'
-import type { TSinchColorName } from '../utils/colors'
 import type { TSinchChipElement, TSinchChipReact } from './types'
 
 const template = document.createElement('template')
@@ -24,7 +20,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-chip', class extends NectaryElement {
   #$text: HTMLElement
   #$button: HTMLElement
-  #controller = new AbortController()
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -38,6 +34,8 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
     const { signal } = this.#controller
 
     this.setAttribute('role', 'button')
@@ -52,15 +50,15 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller.abort()
+    this.#controller!.abort()
   }
 
   get color() {
-    return getLiteralAttribute(this, colorNameValues, 'color', null)
+    return getAttribute(this, 'color')
   }
 
-  set color(value: TSinchColorName | null) {
-    updateLiteralAttribute(this, colorNameValues, 'color', value)
+  set color(value: string | null) {
+    updateAttribute(this, 'color', value)
   }
 
   get text() {
@@ -86,7 +84,6 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'color': {
-        assertColorNameValue(newVal)
         this.#updateColor()
 
         break
@@ -102,14 +99,20 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
 
   #updateColor() {
     const colorName = this.color ?? NO_COLOR
-    const { value, isInverted } = colorMap[colorName]
 
-    if (value !== NO_COLOR) {
-      this.#$button.style.backgroundColor = `var(--sinch-color-${value})`
+    if (colorName !== NO_COLOR) {
+      this.#$button.style.setProperty('background-color', `var(--sinch-color-map-${colorName}-bg)`)
+      this.#$button.style.setProperty('color', `var(--sinch-color-map-${colorName}-fg)`)
+      this.#$button.style.setProperty('--sinch-color-icon', `var(--sinch-color-map-${colorName}-fg)`)
+    } else {
+      this.#$button.style.removeProperty('background-color')
+      this.#$button.style.removeProperty('color')
+      this.#$button.style.removeProperty('--sinch-color-icon')
     }
+  }
 
-    setClass(this.#$button, 'no-color', value === NO_COLOR)
-    setClass(this.#$button, 'inverted', isInverted)
+  get focusable() {
+    return true
   }
 
   focus() {

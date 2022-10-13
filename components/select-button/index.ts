@@ -21,7 +21,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-select-button', class extends NectaryElement {
   #$button: HTMLButtonElement
   #$text: HTMLElement
-  #controller = new AbortController()
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -35,6 +35,8 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
     const { signal } = this.#controller
 
     this.setAttribute('role', 'button')
@@ -47,7 +49,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller.abort()
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {
@@ -133,6 +135,10 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
         break
       }
     }
+  }
+
+  get focusable() {
+    return true
   }
 
   focus() {
