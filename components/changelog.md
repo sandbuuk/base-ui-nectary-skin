@@ -1,3 +1,12 @@
+## v0.41.0 (2022-10-13)
+
+* ➕ add `tip` to `sinch-popover`
+* ➕ add tooltip to `sinch-icon-button`
+* ➕ add tooltip to `sinch-color-menu`
+* ➕ animate `sinch-tooltip`
+* 🐞 fix `sinch-tooltip` overflow
+* 🐞 align color map with Design Library
+
 ## v0.40.0 (2022-09-30)
 
 * 💥 update color palette
