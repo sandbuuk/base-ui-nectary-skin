@@ -413,7 +413,6 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #captureRelatedActiveElement = (e: FocusEvent) => {
     e.stopPropagation()
     this.#targetActiveElement = e.relatedTarget as HTMLElement
-    console.log('CAPTURE', this.#targetActiveElement)
   }
 
   #captureActiveElement = (e: FocusEvent) => {
