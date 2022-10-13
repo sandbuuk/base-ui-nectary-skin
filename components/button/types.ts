@@ -32,7 +32,7 @@ export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   type: TSinchButtonType,
   /** Text content */
   text: string,
-  /** Label that is used for a11y – might be different from `label` */
+  /** Label that is used for a11y */
   'aria-label': string,
   /** Disabled */
   disabled?: boolean,
