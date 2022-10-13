@@ -108,20 +108,9 @@ test('action-dropdown events', runScreenshotTests('sinch-popover', [
 
       await page.mouse.click(btnCt.x, btnCt.y)
 
-      const optCt = await centerBB(page.locator('sinch-action-menu-option').nth(0))
+      const optCt = await centerBB(page.locator('sinch-action-menu-option').nth(2))
 
       await page.mouse.click(optCt.x, optCt.y)
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-action-dropdown-click', detail: '1' },
-      ])
-
-      await page.mouse.click(btnCt.x, btnCt.y)
-      await page.keyboard.press('ArrowDown')
-      await page.keyboard.press('ArrowDown')
-      await page.keyboard.press('Enter')
 
       expect(
         await getAllEvents(page)
