@@ -1,0 +1,80 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { TypeInfoExample } from './examples/TypeInfo.tsx?example'
+import { TypeWarningExample } from './examples/TypeWarning.tsx?example'
+import { TypeErrorExample } from './examples/TypeError.tsx?example'
+import { CloseExample } from './examples/Close.tsx?example'
+import { ActionExample } from './examples/Action.tsx?example'
+import {
+  ReactPropsTable,
+  ElementPropertiesTable,
+  ElementAttributesTable,
+} from '@sinch-engage/nectary/alert/types.ts?api'
+
+# Alert
+
+Alert is a banner located at the top at the UI that presents pressing and high-singal messages. Their go is to communicate with users in a prominent way to drive their attention about a service disruption or critical information, that is or will impact the use of the product in a global way.
+
+## Table of contents
+
+## Examples
+
+### Type
+
+#### Informative
+
+Informative Alert convay non-critical information to the user.
+
+<Example Component={TypeInfoExample}/>
+
+#### Warning
+
+Warning Alert convay critical information to the user that may disrupt the user exeperience in a near future.
+
+<Example Component={TypeWarningExample}/>
+
+#### Error
+
+Error Alert convay information  that is disrupting the user experience at the moment to the user and that might require a immediate action to solve it.
+
+<Example Component={TypeErrorExample}/>
+
+### Close
+
+The close button dismiss the Alert.
+
+<Example Component={CloseExample}/>
+
+### Action
+
+Action button(s) trigger actions that should allow the user to solve the problem informed in the alert.
+
+<Example Component={ActionExample}/>
+
+## API
+
+### Slots
+
+#### close
+
+Close button.
+
+#### action
+
+Action button(s).
+
+### React
+
+#### Props
+
+<ReactPropsTable/>
+
+### Element
+
+#### Properties
+
+<ElementPropertiesTable/>
+
+#### Attributes
+
+<ElementAttributesTable/>
