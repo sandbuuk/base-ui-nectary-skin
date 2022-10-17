@@ -12,12 +12,14 @@ export class PopoverComponent {
   orientation: string | null
   isOpen: boolean
   isModal: boolean
+  hasOffset: boolean
 
   constructor() {
     const url = new URL(location.href)
     this.orientation = url.searchParams.get('orientation')
     this.isModal = url.searchParams.get('modal') !== null
     this.isOpen = url.searchParams.get('open') !== null
+    this.hasOffset = url.searchParams.get('offset') !== null
   }
 
   onOpen() {

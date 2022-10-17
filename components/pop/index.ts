@@ -41,6 +41,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #controller: AbortController | null = null
   #keydownContext: Context
   #visibilityContext: Context
+  #targetStyleValue: string | null = null
 
   constructor() {
     super()
@@ -176,7 +177,11 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #getTargetRect(): TRect {
-    const item = getFirstSlotElement(this.#$targetSlot, true)
+    let item = getFirstSlotElement(this.#$targetSlot, true)
+
+    if (item === null && this.#isOpen()) {
+      item = getFirstSlotElement(this.#$targetOpenSlot, true)
+    }
 
     if (item === null) {
       return getRect(this.#$target)
@@ -187,6 +192,16 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     }
 
     return getRect(item)
+  }
+
+  #getFirstTargetElement(slot: HTMLSlotElement): HTMLElement {
+    const item = getFirstSlotElement(slot, true)
+
+    if (item === null) {
+      return this.#$target
+    }
+
+    return item
   }
 
   #onExpand() {
@@ -219,15 +234,28 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       getFirstFocusableElement(this.#$contentSlot)?.focus()
     } else {
       /* Measure target */
+      const $targetEl = this.#getFirstTargetElement(this.#$targetSlot)
+      const targetElComputedStyle = getComputedStyle($targetEl)
+      const marginLeft = parseInt(targetElComputedStyle.marginLeft)
+      const marginRight = parseInt(targetElComputedStyle.marginRight)
+      const marginTop = parseInt(targetElComputedStyle.marginTop)
+      const marginBottom = parseInt(targetElComputedStyle.marginBottom)
       const targetRect = this.#getTargetRect()
-      const widthPx = `${targetRect.width}px`
-      const heightPx = `${targetRect.height}px`
 
       this.#$target.style.setProperty('display', 'block')
-      this.#$target.style.setProperty('width', widthPx)
-      this.#$target.style.setProperty('height', heightPx)
-      this.#$targetOpenWrapper.style.setProperty('width', widthPx)
-      this.#$targetOpenWrapper.style.setProperty('height', heightPx)
+      this.#$target.style.setProperty('width', `${targetRect.width + marginLeft + marginRight}px`)
+      this.#$target.style.setProperty('height', `${targetRect.height + marginTop + marginBottom}px`)
+      this.#$targetOpenWrapper.style.setProperty('width', `${targetRect.width}px`)
+      this.#$targetOpenWrapper.style.setProperty('height', `${targetRect.height}px`)
+      this.#targetStyleValue = $targetEl.getAttribute('style')
+      $targetEl.style.setProperty('margin', '0')
+      $targetEl.style.setProperty('position', 'static')
+
+      if (targetElComputedStyle.transform !== 'none') {
+        const matrix = new DOMMatrixReadOnly(targetElComputedStyle.transform)
+
+        $targetEl.style.setProperty('transform', matrix.translate(-matrix.e, -matrix.f).toString())
+      }
 
       /* Transfer target */
       getFirstSlotElement(this.#$targetSlot)?.setAttribute('slot', 'target-open')
@@ -289,6 +317,17 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     /* Restore target */
     /* Restore whether modal or non-modal, since modal flag can change */
+    const targetEl = this.#getFirstTargetElement(this.#$targetOpenSlot)
+
+    targetEl.style.removeProperty('margin')
+    targetEl.style.removeProperty('position')
+    targetEl.style.removeProperty('transform')
+
+    if (this.#targetStyleValue !== null) {
+      targetEl.setAttribute('style', this.#targetStyleValue)
+      this.#targetStyleValue = null
+    }
+
     getFirstSlotElement(this.#$targetOpenSlot)?.setAttribute('slot', 'target')
     this.#$target.style.removeProperty('display')
     this.#$target.style.removeProperty('width')

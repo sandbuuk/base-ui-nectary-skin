@@ -1,5 +1,22 @@
 <template>
+  <div v-if="hasOffset" style="display: flex;">
+    <div style="width: 50px; background-color: red;"></div>
+    <sinch-popover :open="isOpen" @--close="onClose">
+      <sinch-button
+        slot="target"
+        type="cta-secondary"
+        text="Some content"
+        aria-label="Button"
+        @--click="onOpen"
+        style="margin: 0 0 20px -20px; position: relative; left: 20px; transform: translate(0, 20px)"
+      ></sinch-button>
+      <section slot="content" style="max-width: 240px; padding: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</section>
+    </sinch-popover>
+    <div style="width: 50px; background-color: red;"></div>
+  </div>
+
   <sinch-popover
+    v-if="!hasOffset"
     :open="isOpen"
     :modal="isModal"
     :orientation="orientation"
@@ -39,6 +56,9 @@ export default {
     },
     isModal() {
       return this.search.get('modal') !== null
+    },
+    hasOffset() {
+      return this.search.get('offset') !== null
     }
   },
   data() {
