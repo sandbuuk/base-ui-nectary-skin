@@ -8,6 +8,7 @@ const withModal = '/popover?modal=true&orientation=bottom-right'
 const withWideModalOpen = '/popover?width=300&open=true&modal=true&orientation=bottom-right'
 const withWideModal = '/popover?width=300&modal=true&orientation=bottom-right'
 const withWide = '/popover?width=300&orientation=bottom-right'
+const withOffset = '/popover?width=300&offset=true'
 const check = makeAccessibilityTests('/popover?open=true&modal=true', 'sinch-popover')
 
 test('popover accessibility', check(async function* () {
@@ -119,6 +120,22 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
       // Can close by clicking outside
       await page.mouse.click(0, 0)
       await expect($.getAttribute('open')).resolves.toBe(null)
+    },
+  },
+  {
+    name: 'positioning',
+    url: withOffset,
+    async *fn({ page, $eval }) {
+      // Focus button on page
+      await page.keyboard.press('Tab')
+      // Open popover
+      await page.keyboard.press('Enter')
+
+      yield { name: '1-open', includeRects: [await $eval((el) => el.popoverRect)] }
+      // Can close by clicking outside
+      await page.keyboard.press('Escape')
+
+      yield { name: '2-close', includeRects: [await $eval((el) => el.popoverRect)] }
     },
   },
   {
