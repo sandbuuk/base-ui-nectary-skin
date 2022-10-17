@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import type { FC } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 import './styles.css'
 
-export type TNavigationItem = {
+export type TNavigationItem = PropsWithChildren & {
   path: string,
   text: string,
 }
