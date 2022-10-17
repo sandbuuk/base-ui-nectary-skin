@@ -3,6 +3,7 @@ import { ActionDropdown } from './components/ActionDropdown'
 import { ActionMenu } from './components/ActionMenu'
 import { Alert } from './components/Alert'
 import { Avatar } from './components/Avatar'
+import { Badge } from './components/Badge'
 import { Button } from './components/Button'
 import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
@@ -94,6 +95,12 @@ const mapElement = (url: URL) => {
     case '/button': {
       return (
         <Button search={url.searchParams}/>
+      )
+    }
+
+    case '/badge': {
+      return (
+        <Badge search={url.searchParams}/>
       )
     }
 

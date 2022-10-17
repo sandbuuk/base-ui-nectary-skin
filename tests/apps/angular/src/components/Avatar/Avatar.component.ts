@@ -14,7 +14,7 @@ export class AvatarComponent {
   src?: string
   background?: string
   size?: string
-  badgeText?: string
+  hasBadge: boolean
   statusColor: any
 
   constructor() {
@@ -23,7 +23,7 @@ export class AvatarComponent {
     this.src = url.searchParams.get('src') ?? undefined
     this.background = url.searchParams.get('bg') ?? undefined
     this.size = url.searchParams.get('size') ?? undefined
-    this.badgeText = url.searchParams.get('badge') ?? undefined
+    this.hasBadge = url.searchParams.get('badge') !== null
     this.statusColor = url.searchParams.get('status')
   }
 }

@@ -5,6 +5,7 @@
     <ActionMenu v-if="url.pathname === '/action-menu'" :search="url.searchParams"/>
     <Alert v-if="url.pathname === '/alert'" :search="url.searchParams"/>
     <Avatar v-if="url.pathname === '/avatar'" :search="url.searchParams"/>
+    <Badge v-if="url.pathname === '/badge'" :search="url.searchParams"/>
     <Button v-if="url.pathname === '/button'" :search="url.searchParams"/>
     <Card v-if="url.pathname === '/card'" :search="url.searchParams"/>
     <CardContainer v-if="url.pathname === '/card-container'" :search="url.searchParams"/>
@@ -61,6 +62,7 @@ import ActionMenu from './components/ActionMenu.vue'
 import Alert from './components/Alert.vue'
 import Avatar from './components/Avatar.vue'
 import Button from './components/Button.vue'
+import Badge from './components/Badge.vue'
 import Card from './components/Card.vue'
 import CardContainer from './components/CardContainer.vue'
 import Chat from './components/Chat.vue'
@@ -140,6 +142,7 @@ export default {
     ActionMenu,
     Alert,
     Avatar,
+    Badge,
     Button,
     Card,
     CardContainer,

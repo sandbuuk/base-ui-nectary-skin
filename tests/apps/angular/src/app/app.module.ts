@@ -6,6 +6,7 @@ import { ActionDropdownComponent } from '../components/ActionDropdown/ActionDrop
 import { ActionMenuComponent } from '../components/ActionMenu/ActionMenu.component'
 import { AlertComponent } from '../components/Alert/Alert.component'
 import { AvatarComponent } from '../components/Avatar/Avatar.component'
+import { BadgeComponent } from '../components/Badge/Badge.component'
 import { ButtonComponent } from '../components/Button/Button.component'
 import { CardComponent } from '../components/Card/Card.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
@@ -61,6 +62,7 @@ import { AppComponent } from './app.component'
     AlertComponent,
     AppComponent,
     AvatarComponent,
+    BadgeComponent,
     ButtonComponent,
     CardComponent,
     CardContainerComponent,
