@@ -188,6 +188,8 @@
   --sinch-font-text-s: 400 14px/22px var(--sinch-font-family);
   --sinch-font-text-xs: 400 12px/20px var(--sinch-font-family);
   --sinch-font-text-xxs: 400 10px/16px var(--sinch-font-family);
+  --sinch-font-mono-family: "DM Mono", "monospace";
+  --sinch-font-mono-text-s: 400 16px/24px var(--sinch-font-mono-family);
 
   /* Shapes */
   --sinch-shape-radius-xs: 2px;
@@ -241,4 +243,48 @@
     local("Gilroy-Bold"),
     url("https://d2vu40klajma73.cloudfront.net/Gilroy-Bold.woff2") format("woff2"),
     url("https://d2vu40klajma73.cloudfront.net/Gilroy-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("DMSans-Regular"),
+    url("https://d2vu40klajma73.cloudfront.net/DM-Sans-400.woff2") format("woff2"),
+    url("https://d2vu40klajma73.cloudfront.net/DM-Sans-400.woff") format("woff");
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("DMSans-Medium"),
+    url("https://d2vu40klajma73.cloudfront.net/DM-Sans-500.woff2") format("woff2"),
+    url("https://d2vu40klajma73.cloudfront.net/DM-Sans-500.woff") format("woff");
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("DMSans-Bold"),
+    url("https://d2vu40klajma73.cloudfront.net/DM-Sans-700.woff2") format("woff2"),
+    url("https://d2vu40klajma73.cloudfront.net/DM-Sans-700.woff") format("woff");
+}
+
+@font-face {
+  font-family: "DM Mono";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("DMMono-Regular"),
+    url("https://d2vu40klajma73.cloudfront.net/DM-Mono-400.woff2") format("woff2"),
+    url("https://d2vu40klajma73.cloudfront.net/DM-Mono-400.woff") format("woff");
 }
