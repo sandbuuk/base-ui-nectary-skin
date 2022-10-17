@@ -37,7 +37,7 @@ export const Popover: FC<TPopover> = ({ search }) => {
             text="Some content"
             aria-label="Button"
             on-click={onOpen}
-            style={hasOffset ? { margin: '0 0 20px -20px', position: 'relative', left: '20px', transform: 'translate(0, 20px)' } : undefined}
+            style={{ margin: '0 0 20px -20px', position: 'relative', left: '20px', transform: 'translate(0, 20px)' }}
           />
           <section
             slot="content"
