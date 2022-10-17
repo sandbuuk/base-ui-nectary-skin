@@ -1,3 +1,7 @@
+## v0.41.1 (2022-10-17)
+
+* 🐞 fix target element positioning in `sinch-popover` and `sinch-tooltip`
+
 ## v0.41.0 (2022-10-13)
 
 * ➕ add `tip` to `sinch-popover`
