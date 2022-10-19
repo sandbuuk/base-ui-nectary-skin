@@ -14,7 +14,7 @@ const contentStyles: CSSProperties = {
   gap: 16,
 }
 
-export const ModalExample: FC = () => {
+export const TipExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
   const onOpen = () => setOpen(true)
   const onClose = () => setOpen(false)
@@ -22,7 +22,9 @@ export const ModalExample: FC = () => {
   return (
     <sinch-popover
       aria-label="Popover"
+      orientation="bottom-right"
       modal
+      tip
       open={isOpen}
       on-close={onClose}
     >

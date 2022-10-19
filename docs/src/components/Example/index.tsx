@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Code } from '../Code'
 import type { FC } from 'react'
 import './styles.css'
@@ -9,18 +9,16 @@ export type TExample = {
 }
 
 export const Example: FC<TExample> = ({ Component }) => {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    const shadowRoot = ref.current!.attachShadow({
-      mode: 'closed',
-    })
+    try {
+      const shadowRoot = ref.current!.attachShadow({
+        mode: 'closed',
+      })
 
-    render(<Component/>, shadowRoot)
-
-    return () => {
-      unmountComponentAtNode(shadowRoot)
-    }
+      createRoot(shadowRoot).render(<Component/>)
+    } catch {}
   }, [])
 
   return (

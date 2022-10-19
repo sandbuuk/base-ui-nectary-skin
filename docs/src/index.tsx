@@ -1,7 +1,8 @@
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { App } from './components/App'
 
-setNectaryRegistry(window.customElements)
+const rootEl = document.querySelector('#app')!
 
-render(<App/>, document.querySelector('#app'))
+setNectaryRegistry(window.customElements)
+createRoot(rootEl).render(<App/>)

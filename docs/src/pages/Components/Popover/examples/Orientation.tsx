@@ -16,6 +16,8 @@ const contentStyles: CSSProperties = {
 
 export const OrientationExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
+  const onOpen = () => setOpen(true)
+  const onClose = () => setOpen(false)
 
   return (
     <sinch-popover
@@ -23,14 +25,14 @@ export const OrientationExample: FC = () => {
       orientation="top-right"
       modal
       open={isOpen}
-      on-close={() => setOpen(false)}
+      on-close={onClose}
     >
       <sinch-button
         slot="target"
         text="Open popover"
         aria-label="Open popover"
         type="cta-secondary"
-        on-click={() => setOpen(true)}
+        on-click={onOpen}
       />
       <div slot="content" style={contentStyles}>
         <sinch-title text="Hi!" type="s" level="3"/>
@@ -40,7 +42,7 @@ export const OrientationExample: FC = () => {
           aria-label="Close popover"
           type="cta-secondary"
           small
-          on-click={() => setOpen(false)}
+          on-click={onClose}
         />
       </div>
     </sinch-popover>
