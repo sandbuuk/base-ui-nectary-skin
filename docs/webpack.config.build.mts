@@ -11,6 +11,7 @@ import type { TransformOptions as TBabelOptions } from '@babel/core'
 import type { Configuration as TWebpackConfig } from 'webpack'
 
 const NODE_MODULES_REGEXP = /[\\/]node_modules[\\/]/
+const COMPONENTS_REGEXP = /[\\/]components[\\/]/
 
 const BabelOptions: TBabelOptions = {
   babelrc: false,
@@ -73,13 +74,13 @@ const config: TWebpackConfig = {
       },
       {
         test: /\.tsx?$/,
-        exclude: /node_modules/,
+        exclude: NODE_MODULES_REGEXP,
         resourceQuery: '?example',
         loader: '@saas/example-code-loader',
       },
       {
         test: /\/types\.ts$/,
-        exclude: /node_modules/,
+        exclude: NODE_MODULES_REGEXP,
         resourceQuery: '?api',
         loader: '@saas/types-to-mdx-loader',
       },
@@ -144,12 +145,19 @@ const config: TWebpackConfig = {
     splitChunks: {
       cacheGroups: {
         default: false,
+        common: {
+          name: 'common',
+          test: COMPONENTS_REGEXP,
+          chunks: 'async',
+          minChunks: 10,
+          minSize: 0,
+        },
         vendor: {
           name: 'vendor',
           test: NODE_MODULES_REGEXP,
+          chunks: 'all',
           priority: 10,
           enforce: true,
-          chunks: 'all',
         },
       },
     },
