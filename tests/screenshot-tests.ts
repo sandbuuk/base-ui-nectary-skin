@@ -60,11 +60,11 @@ export function expandRect(rect: TRect | null, offset: number): TRect | null {
 
 const mergeBoundingBox = (rects: readonly TRect[]): TRect => {
   return rects.reduce((a, b) => {
-    if (a.width === 0 && a.height === 0) {
+    if (a.width === 0 || a.height === 0) {
       return b
     }
 
-    if (b.width === 0 && b.height === 0) {
+    if (b.width === 0 || b.height === 0) {
       return a
     }
 
