@@ -264,10 +264,18 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       this.#$targetOpenSlot.addEventListener('keydown', this.#onTargetKeydown)
 
       if (this.#targetActiveElement !== null) {
+        this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
+        this.#targetActiveElement.focus()
+        this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
+
         // Safari requires to delay focus() call
-        requestAnimationFrame(this.#focusTargetElementOnExpandNonModal)
-        // Focus early for other browsers
-        this.#focusTargetElementOnExpandNonModal()
+        if (!isElementFocused(this.#targetActiveElement)) {
+          requestAnimationFrame(() => {
+            this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
+            this.#targetActiveElement!.focus()
+            this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
+          })
+        }
       }
     }
 
@@ -277,14 +285,6 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     // Dispatch Visibility Context
     this.#dispatchContentVisibility(true)
-  }
-
-  #focusTargetElementOnExpandNonModal = () => {
-    if (this.#targetActiveElement !== null) {
-      this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
-      this.#targetActiveElement.focus()
-      this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
-    }
   }
 
   #onCollapse() {
@@ -341,9 +341,20 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
         this.#$targetSlot.addEventListener('focus', this.#stopEventPropagation, true)
         this.#targetActiveElement.focus()
         this.#$targetSlot.removeEventListener('focus', this.#stopEventPropagation, true)
-      }
 
-      this.#targetActiveElement = null
+        // Safari sometimes does not focus element synchronously
+        if (!isElementFocused(this.#targetActiveElement)) {
+          const $targetEl = this.#targetActiveElement
+
+          requestAnimationFrame(() => {
+            this.#$targetSlot.addEventListener('focus', this.#stopEventPropagation, true)
+            $targetEl.focus()
+            this.#$targetSlot.removeEventListener('focus', this.#stopEventPropagation, true)
+          })
+        }
+
+        this.#targetActiveElement = null
+      }
     }
 
     /* Restore scroll */
