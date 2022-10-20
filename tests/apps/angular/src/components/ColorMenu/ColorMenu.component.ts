@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
+
 import '@sinch-engage/nectary/color-menu'
 
 @Component({
@@ -15,7 +15,7 @@ export class ColorMenuComponent {
   colors: string | null
   constructor() {
     const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? NO_COLOR
+    this.value = url.searchParams.get('value') ?? ''
     this.colors = url.searchParams.get('colors')
 
     let numVisibleValue = url.searchParams.get('rows')

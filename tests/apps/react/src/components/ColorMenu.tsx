@@ -1,4 +1,3 @@
-import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
@@ -8,7 +7,7 @@ type TSelectMenu = {
 }
 
 export const ColorMenu: FC<TSelectMenu> = ({ search }) => {
-  const [value, setValue] = useState(search.get('value') ?? NO_COLOR)
+  const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail
 

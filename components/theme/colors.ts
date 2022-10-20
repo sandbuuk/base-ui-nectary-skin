@@ -1,5 +1,3 @@
-export const NO_COLOR = '' as const
-
 export const lightColorNames = [
   'light-violet',
   'light-blue',

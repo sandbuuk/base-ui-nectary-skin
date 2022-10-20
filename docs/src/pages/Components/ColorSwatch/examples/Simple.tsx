@@ -3,7 +3,7 @@ import {
   darkColorNames,
   vibrantColorNames,
   skinToneColorNames,
-} from '@sinch-engage/nectary/utils/colors'
+} from '@sinch-engage/nectary/theme/colors'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/table'
 import '@sinch-engage/nectary/table-head'

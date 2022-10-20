@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import '@sinch-engage/nectary/color-menu'
 
 export default {
@@ -38,7 +37,7 @@ export default {
   },
   data() {
     return {
-      value: this.search.get('value') ?? NO_COLOR
+      value: this.search.get('value') ?? ''
     }
   }
 }

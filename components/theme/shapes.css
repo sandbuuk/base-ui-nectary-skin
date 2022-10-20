@@ -1,0 +1,7 @@
+:root,
+:host {
+  --sinch-shape-radius-xs: 2px;
+  --sinch-shape-radius-s: 4px;
+  --sinch-shape-radius-m: 8px;
+  --sinch-shape-radius-l: 12px;
+}
