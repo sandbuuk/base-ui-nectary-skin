@@ -1,20 +1,9 @@
-<sinch-badge text="8" [attr.size]="size" mode="circle">
+<sinch-badge text="8" mode="circle" [attr.hidden]="!hasBadge">
   <sinch-avatar
-    ngIf="hasBadge"
     [attr.src]="src"
     [attr.alt]="alt"
     [attr.size]="size"
-    [attr.background]="background"
-  >
-    <sinch-avatar-status *ngIf="statusColor != null" slot="status" [attr.color]="statusColor"></sinch-avatar-status>
-  </sinch-avatar>
+    [attr.color]="color"
+    [attr.status]="status"
+  ></sinch-avatar>
 </sinch-badge>
-<sinch-avatar
-  ngIf="!hasBadge"
-  [attr.src]="src"
-  [attr.alt]="alt"
-  [attr.size]="size"
-  [attr.background]="background"
->
-  <sinch-avatar-status *ngIf="statusColor != null" slot="status" [attr.color]="statusColor"></sinch-avatar-status>
-</sinch-avatar>

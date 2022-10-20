@@ -1,29 +1,18 @@
 <template>
-  <sinch-badge v-if="hasBadge" text="8" :size="size" mode="circle">
+  <sinch-badge :hidden="!hasBadge" text="8" mode="circle">
     <sinch-avatar
       :src="src"
       :alt="alt"
       :size="size"
-      :background="background"
-    >
-      <sinch-avatar-status v-if="statusColor != null" slot="status" :color="statusColor"></sinch-avatar-status>
-    </sinch-avatar>
+      :color="color"
+      :status="status"
+    ></sinch-avatar>
   </sinch-badge>
-  <sinch-avatar
-    v-if="!hasBadge"
-    :src="src"
-    :alt="alt"
-    :size="size"
-    :background="background"
-  >
-    <sinch-avatar-status v-if="statusColor != null" slot="status" :color="statusColor"></sinch-avatar-status>
-  </sinch-avatar>
 </template>
 
 <script>
 import '@sinch-engage/nectary/avatar'
 import '@sinch-engage/nectary/badge'
-import '@sinch-engage/nectary/avatar-status'
 
 export default {
   props: {
@@ -39,14 +28,14 @@ export default {
     size() {
       return this.search.get('size') ?? undefined
     },
-    background() {
-      return this.search.get('bg') ?? undefined
+    color() {
+      return this.search.get('color') ?? undefined
     },
     hasBadge() {
       return this.search.get('badge') !== null
     },
-    statusColor() {
-      return this.search.get('status')
+    status() {
+      return this.search.get('status') ?? undefined
     }
   },
 }

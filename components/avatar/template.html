@@ -26,6 +26,8 @@
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: linear-gradient(#fff, #000);
   mask: linear-gradient(#fff, #000);
+  background-color: var(--sinch-avatar-color-default-bg);
+  color: var(--sinch-avatar-color-default-fg);
 }
 
 #text {
@@ -36,17 +38,6 @@
   line-height: 38px;
   text-transform: uppercase;
   text-align: center;
-  background-color: var(--sinch-color-snow-700);
-  color: var(--sinch-color-text-default);
-}
-
-:host([background="blue"]) #text {
-  background-color: var(--sinch-color-stormy-500);
-  color: var(--sinch-color-snow-100);
-}
-
-:host([background="yellow"]) #text {
-  background-color: var(--sinch-color-honey-500);
 }
 
 :host([size="l"]) #wrapper {
@@ -89,29 +80,47 @@
   display: block;
 }
 
-::slotted(sinch-avatar-badge) {
+#status-wrapper {
   position: absolute;
-  top: -1px;
-  left: calc(100% - 16px);
+  left: calc(85% - 5px);
+  top: calc(85% - 5px);
+  width: 10px;
+  height: 10px;
+  padding: 1px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: var(--sinch-color-snow-100);
+  display: none;
+  pointer-events: none;
 }
 
-:host([size="l"]) ::slotted(sinch-avatar-badge) {
-  left: calc(100% - 20px);
+#status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
 }
 
-:host([size="s"]) ::slotted(sinch-avatar-badge) {
-  left: calc(100% - 10px);
+:host([status="online"]) #status-wrapper,
+:host([status="away"]) #status-wrapper,
+:host([status="busy"]) #status-wrapper,
+:host([status="offline"]) #status-wrapper {
+  display: block;
 }
 
-::slotted(sinch-avatar-status) {
-  position: absolute;
-  bottom: -1px;
-  right: -1px;
+:host([status="online"]) #status {
+  background-color: var(--sinch-avatar-status-color-online);
 }
 
-:host([size="l"]) ::slotted(sinch-avatar-status) {
-  bottom: 3px;
-  right: 3px;
+:host([status="away"]) #status {
+  background-color: var(--sinch-avatar-status-color-away);
+}
+
+:host([status="busy"]) #status {
+  background-color: var(--sinch-avatar-status-color-busy);
+}
+
+:host([status="offline"]) #status {
+  background-color: var(--sinch-avatar-status-color-offline);
 }
 </style>
 
@@ -120,6 +129,7 @@
     <span id="text"></span>
     <img id="image" alt=""/>
   </div>
-  <slot name="badge"></slot>
-  <slot name="status"></slot>
+  <div id="status-wrapper">
+    <div id="status"></div>
+  </div>
 </div>

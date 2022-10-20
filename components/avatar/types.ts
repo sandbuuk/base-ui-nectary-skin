@@ -1,7 +1,7 @@
 import type { TSinchElementReact } from '../types'
 
-export type TSinchAvatarBackground = 'grey' | 'yellow' | 'blue'
 export type TSinchAvatarSize = 'l' | 'm' | 's'
+export type TSinchAvatarStatus = 'online' | 'busy' | 'away' | 'offline'
 
 export type TSinchAvatarElement = HTMLElement & {
   /** Image source */
@@ -9,17 +9,21 @@ export type TSinchAvatarElement = HTMLElement & {
   /** Alt text */
   alt: string,
   /** Background color */
-  background: TSinchAvatarBackground | null,
+  color: string | null,
+  /** Status */
+  status: TSinchAvatarStatus | null,
   /** Size */
-  size: TSinchAvatarSize | null,
+  size: TSinchAvatarSize,
   /** Image source */
   setAttribute(name: 'src', value: string): void,
   /** Alt text */
   setAttribute(name: 'alt', value: string): void,
   /** Background color */
-  setAttribute(name: 'background', value: TSinchAvatarBackground): void,
+  setAttribute(name: 'color', value: string): void,
   /** Size */
   setAttribute(name: 'size', value: TSinchAvatarSize): void,
+  /** Status */
+  setAttribute(name: 'status', value: TSinchAvatarStatus): void,
 }
 
 export type TSinchAvatarReact = TSinchElementReact<TSinchAvatarElement> & {
@@ -28,7 +32,9 @@ export type TSinchAvatarReact = TSinchElementReact<TSinchAvatarElement> & {
   /** Alt text */
   alt: string,
   /** Background color */
-  background?: TSinchAvatarBackground,
+  color?: string,
   /** Size */
   size?: TSinchAvatarSize,
+  /** Status */
+  status?: TSinchAvatarStatus,
 }
