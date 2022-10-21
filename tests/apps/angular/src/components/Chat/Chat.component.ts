@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import '@sinch-engage/nectary/chat'
 import '@sinch-engage/nectary/chat-block'
 import '@sinch-engage/nectary/chat-bubble'
-import '@sinch-engage/nectary/chat-avatar'
+import '@sinch-engage/nectary/avatar'
 
 @Component({
   selector: 'chat-component',

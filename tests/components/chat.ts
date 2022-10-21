@@ -11,8 +11,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'customer',
     url: withCustomerBubble,
-    async *fn({ $ }) {
-      const avatar = $.locator('sinch-chat-avatar')
+    async *fn({ page }) {
+      const avatar = page.locator('sinch-avatar')
 
       yield { name: 'shot', include: [avatar] }
     },
@@ -34,8 +34,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'type property',
     url: withCustomerBubble,
-    async *fn({ $, $eval }) {
-      const avatar = $.locator('sinch-chat-avatar')
+    async *fn({ page, $eval }) {
+      const avatar = page.locator('sinch-avatar')
 
       await $eval((el) => {
         el.type = 'agent'
@@ -46,8 +46,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'type attribute',
     url: withCustomerBubble,
-    async *fn({ $, $eval }) {
-      const avatar = $.locator('sinch-chat-avatar')
+    async *fn({ page, $eval }) {
+      const avatar = page.locator('sinch-avatar')
 
       await $eval((el) => {
         el.setAttribute('type', 'agent')
@@ -58,8 +58,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'firstName property',
     url: withCustomerBubble,
-    async *fn({ $, $eval }) {
-      const avatar = $.locator('sinch-chat-avatar')
+    async *fn({ page, $eval }) {
+      const avatar = page.locator('sinch-avatar')
 
       await $eval((el) => {
         el.firstName = 'Sven'
@@ -70,8 +70,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'firstName attribute',
     url: withCustomerBubble,
-    async *fn({ $, $eval }) {
-      const avatar = $.locator('sinch-chat-avatar')
+    async *fn({ page, $eval }) {
+      const avatar = page.locator('sinch-avatar')
 
       await $eval((el) => {
         el.setAttribute('firstname', 'Sven')
@@ -82,8 +82,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'lastName property',
     url: withCustomerBubble,
-    async *fn({ $, $eval }) {
-      const avatar = $.locator('sinch-chat-avatar')
+    async *fn({ page, $eval }) {
+      const avatar = page.locator('sinch-avatar')
 
       await $eval((el) => {
         el.lastName = 'Svensson'
@@ -94,8 +94,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'lastName attribute',
     url: withCustomerBubble,
-    async *fn({ $, $eval }) {
-      const avatar = $.locator('sinch-chat-avatar')
+    async *fn({ page, $eval }) {
+      const avatar = page.locator('sinch-avatar')
 
       await $eval((el) => {
         el.setAttribute('lastname', 'Svensson')
@@ -106,8 +106,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'timestamp property',
     url: withCustomerBubble,
-    async *fn({ $, $eval }) {
-      const avatar = $.locator('sinch-chat-avatar')
+    async *fn({ page, $eval }) {
+      const avatar = page.locator('sinch-avatar')
 
       await $eval((el) => {
         el.timestamp = '3:00pm'
@@ -118,8 +118,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'timestamp attribute',
     url: withCustomerBubble,
-    async *fn({ $, $eval }) {
-      const avatar = $.locator('sinch-chat-avatar')
+    async *fn({ page, $eval }) {
+      const avatar = page.locator('sinch-avatar')
 
       await $eval((el) => {
         el.setAttribute('timestamp', '3:00pm')
@@ -130,8 +130,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'status attribute',
     url: withAgentBubble,
-    async *fn({ $ }) {
-      const bubble = $.locator('sinch-chat-bubble')
+    async *fn({ page }) {
+      const bubble = page.locator('sinch-chat-bubble')
 
       await bubble.evaluate((el) => el.setAttribute('status', 'sending'))
       yield { name: 'sending' }
@@ -153,8 +153,8 @@ test('chat bubble screenshots', runScreenshotTests('sinch-chat-block', [
   {
     name: 'status property',
     url: withAgentBubble,
-    async *fn({ $ }) {
-      const bubble = $.locator('sinch-chat-bubble')
+    async *fn({ page }) {
+      const bubble = page.locator('sinch-chat-bubble')
 
       await bubble.evaluate((el: TSinchChatBubbleElement) => {
         el.status = 'sending'
