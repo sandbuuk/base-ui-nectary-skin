@@ -102,7 +102,7 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'size', 'mode', 'color']
+    return ['text', 'size', 'mode', 'color', 'hidden']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -133,6 +133,12 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
 
         break
       }
+
+      case 'hidden': {
+        this.#updatePosition()
+
+        break
+      }
     }
   }
 
@@ -158,6 +164,10 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   }
 
   #updatePosition() {
+    if (this.hidden) {
+      return
+    }
+
     const mode = this.mode
 
     const targetRect = this.getBoundingClientRect()
