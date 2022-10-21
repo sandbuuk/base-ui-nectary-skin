@@ -1,20 +1,33 @@
-import type { TSinchChatBubbleType } from '../chat-bubble/types'
 import type { TSinchElementReact } from '../types'
 
+export type TSinchChatBlockType = 'customer' | 'agent' | 'agent-prev'
+
 export type TSinchChatBlockElement = HTMLElement & {
-  type: TSinchChatBubbleType | null,
+  /** Type */
+  type: TSinchChatBlockType | null,
+  /** First name */
   firstName: string | null,
+  /** Last name */
   lastName: string | null,
+  /** Timestamp */
   timestamp: string | null,
-  setAttribute(name: 'type', value: TSinchChatBubbleType): void,
+  /** Type */
+  setAttribute(name: 'type', value: TSinchChatBlockType): void,
+  /** First name */
   setAttribute(name: 'firstName', value: string): void,
+  /** Last name */
   setAttribute(name: 'lastName', value: string): void,
+  /** Timestamp */
   setAttribute(name: 'timestamp', value: string): void,
 }
 
 export type TSinchChatBlockReact = TSinchElementReact<TSinchChatBlockElement> & {
-  type: TSinchChatBubbleType,
+  /** Type */
+  type: TSinchChatBlockType,
+  /** First name */
   firstName?: string,
+  /** Last name */
   lastName?: string,
+  /** Timestamp */
   timestamp?: string,
 }
