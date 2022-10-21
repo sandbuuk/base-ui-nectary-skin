@@ -1,3 +1,14 @@
+## v0.42.0 (2022-10-21)
+
+* 💥 remove `sinch-avatar-badge`
+* 💥 remove `sinch-avatar-status`
+* 💥 remove `sinch-chat-avatar`
+* 💥 rename `background` to `color` in `sinch-avatar`
+* 💥 change `sinch-avatar` background color set
+* ➕ add `sinch-badge` component
+* ➕ add `status` to `sinch-avatar`
+* ➕ add `DM Sans` and `DM Mono` fonts
+
 ## v0.41.1 (2022-10-17)
 
 * 🐞 fix target element positioning in `sinch-popover` and `sinch-tooltip`
