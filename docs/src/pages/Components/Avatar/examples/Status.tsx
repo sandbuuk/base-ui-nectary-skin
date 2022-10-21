@@ -1,6 +1,5 @@
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/avatar'
-import '@sinch-engage/nectary/avatar-status'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -11,17 +10,9 @@ const wrapperStyles: CSSProperties = {
 
 export const StatusExample: FC = () => (
   <div style={wrapperStyles}>
-    <sinch-avatar src="https://i.pravatar.cc/300" alt="AB">
-      <sinch-avatar-status slot="status" color="green"/>
-    </sinch-avatar>
-    <sinch-avatar src="https://i.pravatar.cc/300" alt="AB">
-      <sinch-avatar-status slot="status" color="yellow"/>
-    </sinch-avatar>
-    <sinch-avatar src="https://i.pravatar.cc/300" alt="AB">
-      <sinch-avatar-status slot="status" color="red"/>
-    </sinch-avatar>
-    <sinch-avatar src="https://i.pravatar.cc/300" alt="AB">
-      <sinch-avatar-status slot="status" color="grey"/>
-    </sinch-avatar>
+    <sinch-avatar src="https://i.pravatar.cc/300" alt="AB" status="online"/>
+    <sinch-avatar src="https://i.pravatar.cc/300" alt="AB" status="away"/>
+    <sinch-avatar src="https://i.pravatar.cc/300" alt="AB" status="busy"/>
+    <sinch-avatar src="https://i.pravatar.cc/300" alt="AB" status="offline"/>
   </div>
 )

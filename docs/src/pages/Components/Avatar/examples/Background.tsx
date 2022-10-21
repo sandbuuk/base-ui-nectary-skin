@@ -10,8 +10,8 @@ const wrapperStyles: CSSProperties = {
 
 export const BackgroundExample: FC = () => (
   <div style={wrapperStyles}>
-    <sinch-avatar background="blue" alt="AB"/>
-    <sinch-avatar background="yellow" alt="AB"/>
-    <sinch-avatar background="grey" alt="AB"/>
+    <sinch-avatar color="light-blue" alt="AB"/>
+    <sinch-avatar color="light-yellow" alt="AB"/>
+    <sinch-avatar color="light-grey" alt="AB"/>
   </div>
 )

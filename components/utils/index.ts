@@ -373,12 +373,12 @@ export const rectOverlap = (targetRect: TRect, contentRect: TRect): boolean => {
          (targetRect.y + targetRect.height) > contentRect.y
 }
 
-const NULL_RECT: TRect = {
-  x: 0,
-  y: 0,
-  width: 0,
-  height: 0,
-}
+// const NULL_RECT: TRect = {
+//   x: 0,
+//   y: 0,
+//   width: 0,
+//   height: 0,
+// }
 
 export const getTargetRect = (slot: HTMLSlotElement): TRect | null => {
   const item = getFirstSlotElement(slot, true)

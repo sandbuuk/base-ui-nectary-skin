@@ -1,5 +1,5 @@
 <template>
-  <sinch-badge :hidden="!hasBadge" text="8" mode="circle">
+  <sinch-badge :hidden="!hasBadge" text="8" mode="circle" size="m">
     <sinch-avatar
       :src="src"
       :alt="alt"
