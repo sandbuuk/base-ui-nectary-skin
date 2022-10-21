@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { lightColorNames, vibrantColorNames } from '@sinch-engage/nectary/utils/colors'
+import { lightColorNames, vibrantColorNames } from '@sinch-engage/nectary/theme/colors'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 

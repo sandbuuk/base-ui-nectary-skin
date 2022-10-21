@@ -1,9 +1,8 @@
-import { backgroundValues, sizeValues } from '@sinch-engage/nectary/avatar/utils'
+import { sizeValues, statusValues } from '@sinch-engage/nectary/avatar/utils'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/avatar'
-import '@sinch-engage/nectary/avatar-status'
-import '@sinch-engage/nectary/avatar-badge'
+import '@sinch-engage/nectary/badge'
 
 export default {
   title: 'Components/Avatar',
@@ -13,10 +12,15 @@ export default {
       control: 'select',
       options: sizeValues,
     },
-    background: {
+    color: {
       description: 'Avatar background color',
       control: 'select',
-      options: backgroundValues,
+      options: ['', 'light-blue', 'light-pink', 'light-orange', 'light-green'],
+    },
+    status: {
+      description: 'Avatar status',
+      control: 'select',
+      options: statusValues,
     },
     alt: {
       description: 'Avatar text initials',
@@ -39,31 +43,43 @@ export default {
   },
 } as Meta
 
-const Template = (innerHtml?: string): Story => () => {
+const Template = (hasBadge = false): Story => () => {
   const [{
     size,
-    background,
+    color,
+    status,
     alt,
     src,
   }] = useArgs()
+  const badgeRef = useRef<HTMLElementTagNameMap['sinch-badge'] | null>(null)
   const avatarRef = useRef<HTMLElementTagNameMap['sinch-avatar'] | null>(null)
 
   if (avatarRef.current === null) {
     avatarRef.current = document.createElement('sinch-avatar')
   }
 
-  if (innerHtml != null) {
-    avatarRef.current.innerHTML = innerHtml
+  if (badgeRef.current === null) {
+    badgeRef.current = document.createElement('sinch-badge')
+    badgeRef.current.setAttribute('mode', 'circle')
+    badgeRef.current.setAttribute('text', '8')
+    badgeRef.current.setAttribute('size', 'l')
+
+    if (hasBadge === false) {
+      badgeRef.current.setAttribute('hidden', '')
+    }
+
+    badgeRef.current.appendChild(avatarRef.current)
   }
 
-  const $avatar = avatarRef.current!
+  const $avatar = avatarRef.current
 
   $avatar.size = size
-  $avatar.background = background
+  $avatar.status = status
+  $avatar.color = color
   $avatar.alt = alt
   $avatar.src = src
 
-  return $avatar
+  return badgeRef.current
 }
 
 export const Avatar = Template()
@@ -71,113 +87,65 @@ export const Avatar = Template()
 Avatar.args = {
   alt: 'NS',
   size: 'l',
-  background: 'yellow',
+  color: 'yellow',
 }
 
 Avatar.parameters = {
   docs: {
     source: {
-      code: '<sinch-avatar src={src} alt="NS" size="l" background="yellow"></sinch-avatar>',
+      code: '<sinch-avatar src={src} alt="NS" size="l" color="light-yellow"></sinch-avatar>',
     },
   },
 }
 
-const avatarWithBadgeInnerHtml = `
-  <sinch-avatar-badge slot="badge" text="4"></sinch-avatar-badge>
-`
-
-export const AvatarWithBadge = Template(avatarWithBadgeInnerHtml)
+export const AvatarWithBadge = Template(true)
 
 AvatarWithBadge.args = {
   alt: 'NS',
   size: 'l',
-  background: 'blue',
+  color: 'light-blue',
 }
 
 AvatarWithBadge.parameters = {
   docs: {
     source: {
-      code: `<sinch-avatar src={src} alt="NS" size="l" background="blue">${avatarWithBadgeInnerHtml}</sinch-avatar>`,
+      code: `<sinch-badge text="8" size="l" mode="circle">
+  <sinch-avatar src={src} alt="NS" size="l" color="light-blue"></sinch-avatar>
+</sinch-badge>`,
     },
   },
 }
 
-const avatarWithStatusGreenInnerHtml = `
-  <sinch-avatar-status slot="status" color="green"></sinch-avatar-status>
-`
+export const AvatarWithStatusOnline = Template()
 
-export const AvatarWithStatusGreen = Template(avatarWithStatusGreenInnerHtml)
-
-AvatarWithStatusGreen.args = {
+AvatarWithStatusOnline.args = {
   alt: 'NS',
   size: 'l',
-  background: 'blue',
+  color: 'light-blue',
+  status: 'online',
 }
 
-AvatarWithStatusGreen.parameters = {
+AvatarWithStatusOnline.parameters = {
   docs: {
     source: {
-      code: `<sinch-avatar src={src} alt="NS" size="l" background="blue">${avatarWithStatusGreenInnerHtml}</sinch-avatar>`,
+      code: `<sinch-avatar src={src} alt="NS" size="l" color="light-blue" status="online"></sinch-avatar>`,
     },
   },
 }
 
-const avatarWithStatusRedInnerHtml = `
-  <sinch-avatar-status slot="status" color="red"></sinch-avatar-status>
-`
+export const AvatarWithStatusBusy = Template()
 
-export const AvatarWithStatusRed = Template(avatarWithStatusRedInnerHtml)
-
-AvatarWithStatusRed.args = {
+AvatarWithStatusBusy.args = {
   alt: 'NS',
   size: 'l',
-  background: 'blue',
+  color: 'light-blue',
+  status: 'busy',
 }
 
-AvatarWithStatusRed.parameters = {
+AvatarWithStatusBusy.parameters = {
   docs: {
     source: {
-      code: `<sinch-avatar src={src} alt="NS" size="l" background="blue">${avatarWithStatusRedInnerHtml}</sinch-avatar>`,
-    },
-  },
-}
-
-const avatarWithStatusYellowInnerHtml = `
-  <sinch-avatar-status slot="status" color="yellow"></sinch-avatar-status>
-`
-
-export const AvatarWithStatusYellow = Template(avatarWithStatusYellowInnerHtml)
-
-AvatarWithStatusYellow.args = {
-  alt: 'NS',
-  size: 'l',
-  background: 'blue',
-}
-
-AvatarWithStatusYellow.parameters = {
-  docs: {
-    source: {
-      code: `<sinch-avatar src={src} alt="NS" size="l" background="blue">${avatarWithStatusYellowInnerHtml}</sinch-avatar>`,
-    },
-  },
-}
-
-const avatarWithStatusGreyInnerHtml = `
-  <sinch-avatar-status slot="status" color="grey"></sinch-avatar-status>
-`
-
-export const AvatarWithStatusGrey = Template(avatarWithStatusGreyInnerHtml)
-
-AvatarWithStatusGrey.args = {
-  alt: 'NS',
-  size: 'l',
-  background: 'blue',
-}
-
-AvatarWithStatusGrey.parameters = {
-  docs: {
-    source: {
-      code: `<sinch-avatar src={src} alt="NS" size="l" background="blue">${avatarWithStatusGreyInnerHtml}</sinch-avatar>`,
+      code: `<sinch-avatar src={src} alt="NS" size="l" color="light-blue" status="busy"></sinch-avatar>`,
     },
   },
 }

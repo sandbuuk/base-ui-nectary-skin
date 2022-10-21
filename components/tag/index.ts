@@ -7,8 +7,8 @@ import {
   updateAttribute,
   NectaryElement,
 } from '../utils'
-import { NO_COLOR } from '../utils/colors'
 import templateHTML from './template.html'
+import { assertTagColor, getTagColorBg, getTagColorFg } from './utils'
 import type { TSinchTagElement, TSinchTagReact } from './types'
 
 const template = document.createElement('template')
@@ -18,6 +18,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-tag', class extends NectaryElement {
   #$text: HTMLElement
   #$wrapper: HTMLElement
+  #isConnected = false
 
   constructor() {
     super()
@@ -31,7 +32,12 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#isConnected = true
     this.#updateColor()
+  }
+
+  disconnectedCallback() {
+    this.#isConnected = false
   }
 
   get color() {
@@ -79,12 +85,21 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   }
 
   #updateColor() {
-    const colorName = this.color ?? NO_COLOR
+    if (!this.#isConnected) {
+      return
+    }
 
-    if (colorName !== NO_COLOR) {
-      this.#$wrapper.style.setProperty('background-color', `var(--sinch-color-map-${colorName}-bg)`)
-      this.#$wrapper.style.setProperty('color', `var(--sinch-color-map-${colorName}-fg)`)
-      this.#$wrapper.style.setProperty('--sinch-color-icon', `var(--sinch-color-map-${colorName}-fg)`)
+    const colorName = this.color
+
+    if (colorName !== null && colorName.length > 0) {
+      assertTagColor(this, colorName)
+
+      const bg = getTagColorBg(colorName)
+      const fg = getTagColorFg(colorName)
+
+      this.#$wrapper.style.setProperty('background-color', bg)
+      this.#$wrapper.style.setProperty('color', fg)
+      this.#$wrapper.style.setProperty('--sinch-color-icon', fg)
     } else {
       this.#$wrapper.style.removeProperty('background-color')
       this.#$wrapper.style.removeProperty('color')

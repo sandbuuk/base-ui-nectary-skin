@@ -1,4 +1,3 @@
-import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/popover'
@@ -7,7 +6,7 @@ import '@sinch-engage/nectary/color-swatch'
 import '@sinch-engage/nectary/color-menu'
 
 export const IconButtonExample: FC = () => {
-  const [value, setValue] = useState<string>(NO_COLOR)
+  const [value, setValue] = useState<string>('')
   const [isOpen, setIsOpen] = useState(false)
   const onClose = () => setIsOpen(false)
   const onOpen = () => setIsOpen(true)

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
+
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/color-menu'
 import '@sinch-engage/nectary/color-swatch'
@@ -21,7 +21,7 @@ export class ColorSelectComponent {
   isInvalid: boolean
   constructor() {
     const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? NO_COLOR
+    this.value = url.searchParams.get('value') ?? ''
     this.colors = url.searchParams.get('colors')
     this.isDisabled = url.searchParams.get('disabled') !== null
     this.isInvalid = url.searchParams.get('invalid') !== null

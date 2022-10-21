@@ -7,16 +7,18 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import { backgroundValues, sizeValues } from './utils'
-import type { TSinchAvatarBackground, TSinchAvatarElement, TSinchAvatarReact, TSinchAvatarSize } from './types'
+import { assertAvatarColor, assertSize, assertStatus, getAvatarColorBg, getAvatarColorFg, sizeValues, statusValues } from './utils'
+import type { TSinchAvatarElement, TSinchAvatarReact, TSinchAvatarSize, TSinchAvatarStatus } from './types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-avatar', class extends NectaryElement {
-  #$text: HTMLSpanElement
+  #$circle: HTMLElement
+  #$text: HTMLElement
   #$image: HTMLImageElement
+  #isConnected = false
 
   constructor() {
     super()
@@ -25,8 +27,19 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#$circle = shadowRoot.querySelector('#circle')!
     this.#$text = shadowRoot.querySelector('#text')!
     this.#$image = shadowRoot.querySelector('#image')!
+  }
+
+  connectedCallback() {
+    this.#isConnected = true
+
+    this.#updateColor()
+  }
+
+  disconnectedCallback() {
+    this.#isConnected = false
   }
 
   get src() {
@@ -45,12 +58,12 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
     updateAttribute(this, 'alt', value)
   }
 
-  get background() {
-    return getLiteralAttribute(this, backgroundValues, 'background', 'grey')
+  get color() {
+    return getAttribute(this, 'color')
   }
 
-  set background(value: TSinchAvatarBackground) {
-    updateLiteralAttribute(this, backgroundValues, 'background', value)
+  set color(value: string | null) {
+    updateAttribute(this, 'color', value)
   }
 
   get size() {
@@ -61,8 +74,16 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
     updateLiteralAttribute(this, sizeValues, 'size', value)
   }
 
+  get status() {
+    return getLiteralAttribute(this, statusValues, 'status', null)
+  }
+
+  set status(value: TSinchAvatarStatus | null) {
+    updateLiteralAttribute(this, statusValues, 'status', value)
+  }
+
   static get observedAttributes() {
-    return ['alt', 'src']
+    return ['alt', 'src', 'status', 'size', 'color']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -79,6 +100,47 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
 
         break
       }
+
+      case 'size': {
+        if (newVal !== null) {
+          assertSize(newVal)
+        }
+
+        break
+      }
+
+      case 'status': {
+        if (newVal !== null) {
+          assertStatus(newVal)
+        }
+
+        break
+      }
+
+      case 'color': {
+        this.#updateColor()
+      }
+    }
+  }
+
+  #updateColor() {
+    if (!this.#isConnected) {
+      return
+    }
+
+    const colorName = this.color
+
+    if (colorName !== null && colorName.length > 0) {
+      assertAvatarColor(this, colorName)
+
+      const bg = getAvatarColorBg(colorName)
+      const fg = getAvatarColorFg(colorName)
+
+      this.#$circle.style.setProperty('background-color', bg)
+      this.#$circle.style.setProperty('color', fg)
+    } else {
+      this.#$circle.style.removeProperty('background-color')
+      this.#$circle.style.removeProperty('color')
     }
   }
 })

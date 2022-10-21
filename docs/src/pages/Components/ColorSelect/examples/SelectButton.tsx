@@ -1,4 +1,3 @@
-import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import { useState } from 'react'
 import type { FC, CSSProperties } from 'react'
 import '@sinch-engage/nectary/popover'
@@ -11,7 +10,7 @@ const buttonStyles: CSSProperties = {
 }
 
 export const SelectButtonExample: FC = () => {
-  const [value, setValue] = useState<string>(NO_COLOR)
+  const [value, setValue] = useState<string>('')
   const [isOpen, setIsOpen] = useState(false)
   const onClose = () => setIsOpen(false)
   const onOpen = () => setIsOpen(true)

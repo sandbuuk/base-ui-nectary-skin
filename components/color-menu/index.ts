@@ -1,6 +1,8 @@
 import '../color-swatch'
 import '../tooltip'
 import '../icons/check'
+import { getSwatchColorFg } from '../color-swatch/utils'
+import { lightColorNames, darkColorNames, vibrantColorNames } from '../theme/colors'
 import {
   attrValueToPixels,
   defineCustomElement,
@@ -16,7 +18,6 @@ import {
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
-import { lightColorNames, darkColorNames, vibrantColorNames, NO_COLOR } from '../utils/colors'
 import { dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import optionTemplateHTML from './option-template.html'
 import templateHTML from './template.html'
@@ -86,7 +87,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   }
 
   get value(): string {
-    return getAttribute(this, 'value', NO_COLOR)
+    return getAttribute(this, 'value', '')
   }
 
   set colors(value: string | null) {
@@ -178,7 +179,8 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     const fragment = document.createDocumentFragment()
 
     for (const color of colorNames) {
-      if (color === NO_COLOR) {
+      // Empty color name
+      if (color.length === 0) {
         continue
       }
 
@@ -191,7 +193,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
       updateAttribute($tooltip, 'text', color)
       updateAttribute($swatch, 'name', color)
 
-      $option.style.setProperty('--sinch-color-icon', `var(--sinch-color-map-${color}-fg)`)
+      $option.style.setProperty('--sinch-color-icon', getSwatchColorFg(color))
 
       fragment.appendChild(optFrag)
     }

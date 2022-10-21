@@ -9,8 +9,8 @@ import {
   NectaryElement,
   getReactEventHandler,
 } from '../utils'
-import { NO_COLOR } from '../utils/colors'
 import templateHTML from './template.html'
+import { assertChipColor, getChipColorBg, getChipColorFg } from './utils'
 import type { TSinchChipElement, TSinchChipReact } from './types'
 
 const template = document.createElement('template')
@@ -20,6 +20,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-chip', class extends NectaryElement {
   #$text: HTMLElement
   #$button: HTMLElement
+  #isConnected = false
   #controller: AbortController | null = null
 
   constructor() {
@@ -45,12 +46,13 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
     this.addEventListener('-click', this.#onClickReactHandler, { signal })
     this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
     this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
-
+    this.#isConnected = true
     this.#updateColor()
   }
 
   disconnectedCallback() {
     this.#controller!.abort()
+    this.#isConnected = false
   }
 
   get color() {
@@ -98,12 +100,21 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   }
 
   #updateColor() {
-    const colorName = this.color ?? NO_COLOR
+    if (!this.#isConnected) {
+      return
+    }
 
-    if (colorName !== NO_COLOR) {
-      this.#$button.style.setProperty('background-color', `var(--sinch-color-map-${colorName}-bg)`)
-      this.#$button.style.setProperty('color', `var(--sinch-color-map-${colorName}-fg)`)
-      this.#$button.style.setProperty('--sinch-color-icon', `var(--sinch-color-map-${colorName}-fg)`)
+    const colorName = this.color
+
+    if (colorName !== null && colorName.length > 0) {
+      assertChipColor(this, colorName)
+
+      const bg = getChipColorBg(colorName)
+      const fg = getChipColorFg(colorName)
+
+      this.#$button.style.setProperty('background-color', bg)
+      this.#$button.style.setProperty('color', fg)
+      this.#$button.style.setProperty('--sinch-color-icon', fg)
     } else {
       this.#$button.style.removeProperty('background-color')
       this.#$button.style.removeProperty('color')

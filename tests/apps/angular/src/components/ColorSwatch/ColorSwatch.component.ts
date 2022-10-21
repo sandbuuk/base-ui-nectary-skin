@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
+
 import '@sinch-engage/nectary/color-swatch'
 
 @Component({
@@ -13,6 +13,6 @@ export class ColorSwatchComponent {
 
   constructor() {
     const url = new URL(location.href)
-    this.name = url.searchParams.get('name') ?? NO_COLOR
+    this.name = url.searchParams.get('name') ?? ''
   }
 }

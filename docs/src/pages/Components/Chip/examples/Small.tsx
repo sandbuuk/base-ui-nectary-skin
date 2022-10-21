@@ -2,8 +2,7 @@ import {
   lightColorNames,
   darkColorNames,
   vibrantColorNames,
-  skinToneColorNames,
-} from '@sinch-engage/nectary/utils/colors'
+} from '@sinch-engage/nectary/theme/colors'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/chip'
 import '@sinch-engage/nectary/text'
@@ -19,7 +18,6 @@ const allColorNames: string[] = [
   ...lightColorNames.split(','),
   ...darkColorNames.split(','),
   ...vibrantColorNames.split(','),
-  ...skinToneColorNames.split(','),
 ]
 
 export const SmallExample: FC = () => (

@@ -1,7 +1,8 @@
 import { expect, test } from '@playwright/test'
-import { NO_COLOR } from '@sinch-engage/nectary/utils/colors'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+
+const colorValues = ['', 'light-blue']
 
 const shot = '/chip?text=Label%20text&color=Gray%2010'
 const withWide = '/chip?width=150&icon=true&text=Label%20text&color=Gray%2010'
@@ -19,12 +20,12 @@ test('chip screenshots', runScreenshotTests('sinch-chip', [
     name: 'color attribute',
     url: withIcon,
     async *fn({ $eval }) {
-      for (const colorName of [NO_COLOR, 'light-blue']) {
+      for (const colorName of colorValues) {
         await $eval((el, val) => {
           el.setAttribute('color', val)
         }, colorName)
 
-        yield { name: colorName === NO_COLOR ? 'no-color' : colorName }
+        yield { name: colorName === '' ? 'no-color' : colorName }
       }
     },
   },
@@ -38,11 +39,11 @@ test('chip screenshots', runScreenshotTests('sinch-chip', [
 
       expect(await $.getAttribute('color')).toBe('light-blue')
 
-      await $eval((el, NO_COLOR) => {
-        el.color = NO_COLOR
-      }, NO_COLOR)
+      await $eval((el) => {
+        el.color = ''
+      })
 
-      expect(await $.getAttribute('color')).toBe(NO_COLOR)
+      expect(await $.getAttribute('color')).toBe('')
 
       await $eval((el) => {
         el.color = null

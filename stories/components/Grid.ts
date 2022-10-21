@@ -1,6 +1,7 @@
 import { useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/grid'
+import '@sinch-engage/nectary/grid-item'
 import '@sinch-engage/nectary/card'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/link'

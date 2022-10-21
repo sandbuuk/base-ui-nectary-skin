@@ -7,8 +7,8 @@ import {
   getAttribute,
   updateAttribute,
 } from '../utils'
-import { NO_COLOR } from '../utils/colors'
 import templateHTML from './template.html'
+import { assertSwatchColor, getSwatchColorBg } from './utils'
 import type { TSinchColorSwatchElement, TSinchColorSwatchReact } from './types'
 
 const template = document.createElement('template')
@@ -17,6 +17,8 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-color-swatch', class extends NectaryElement {
   #$wrapper: HTMLElement
+  #isConnected = false
+
   constructor() {
     super()
 
@@ -27,14 +29,19 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#isConnected = true
     this.#updateColor()
   }
 
-  get name() {
-    return getAttribute(this, 'name', NO_COLOR)
+  disconnectedCallback() {
+    this.#isConnected = false
   }
 
-  set name(value: string) {
+  get name() {
+    return getAttribute(this, 'name')
+  }
+
+  set name(value: string | null) {
     updateAttribute(this, 'name', value)
   }
 
@@ -57,15 +64,23 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
   }
 
   #updateColor() {
-    const colorName = this.name
-
-    if (colorName !== NO_COLOR) {
-      this.#$wrapper.style.setProperty('background-color', `var(--sinch-color-map-${colorName}-bg)`)
-    } else {
-      this.#$wrapper.style.removeProperty('background-color')
+    if (!this.#isConnected) {
+      return
     }
 
-    setClass(this.#$wrapper, 'no-color', colorName === NO_COLOR)
+    const colorName = this.name
+
+    if (colorName !== null && colorName.length > 0) {
+      assertSwatchColor(this, colorName)
+
+      const bg = getSwatchColorBg(colorName)
+
+      this.#$wrapper.style.setProperty('background-color', bg)
+      setClass(this.#$wrapper, 'no-color', false)
+    } else {
+      this.#$wrapper.style.removeProperty('background-color')
+      setClass(this.#$wrapper, 'no-color', true)
+    }
   }
 })
 

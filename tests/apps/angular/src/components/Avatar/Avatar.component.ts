@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/avatar'
-import '@sinch-engage/nectary/avatar-badge'
-import '@sinch-engage/nectary/avatar-status'
+import '@sinch-engage/nectary/badge'
 
 @Component({
   selector: 'avatar-component',
@@ -12,18 +11,18 @@ import '@sinch-engage/nectary/avatar-status'
 export class AvatarComponent {
   alt: string
   src?: string
-  background?: string
+  color?: string
   size?: string
-  badgeText?: string
-  statusColor: any
+  hasBadge: boolean
+  status?: string
 
   constructor() {
     const url = new URL(location.href)
     this.alt = url.searchParams.get('alt') ?? ''
     this.src = url.searchParams.get('src') ?? undefined
-    this.background = url.searchParams.get('bg') ?? undefined
+    this.color = url.searchParams.get('color') ?? undefined
     this.size = url.searchParams.get('size') ?? undefined
-    this.badgeText = url.searchParams.get('badge') ?? undefined
-    this.statusColor = url.searchParams.get('status')
+    this.hasBadge = url.searchParams.get('badge') !== null
+    this.status = url.searchParams.get('status') ?? undefined
   }
 }
