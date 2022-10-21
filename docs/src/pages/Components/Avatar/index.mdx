@@ -4,22 +4,12 @@ import { SimpleExample } from './examples/Simple.tsx?example'
 import { SizeExample } from './examples/Size.tsx?example'
 import { StatusExample } from './examples/Status.tsx?example'
 import { BadgeExample } from './examples/Badge.tsx?example'
-import { BackgroundExample } from './examples/Background.tsx?example'
+import { ColorExample } from './examples/Color.tsx?example'
 import {
-  ReactPropsTable as AvatarReactPropsTable,
-  ElementPropertiesTable as AvatarElementPropertiesTable,
-  ElementAttributesTable as AvatarElementAttributes
+  ReactPropsTable,
+  ElementPropertiesTable,
+  ElementAttributesTable
 } from '@sinch-engage/nectary/avatar/types.ts?api'
-import {
-  ReactPropsTable as BadgeReactPropsTable,
-  ElementPropertiesTable as BadgeElementPropertiesTable,
-  ElementAttributesTable as BadgeElementAttributes
-} from '@sinch-engage/nectary/avatar-badge/types.ts?api'
-import {
-  ReactPropsTable as StatusReactPropsTable,
-  ElementPropertiesTable as StatusElementPropertiesTable,
-  ElementAttributesTable as StatusElementAttributes
-} from '@sinch-engage/nectary/avatar-status/types.ts?api'
 
 # Avatar
 
@@ -45,62 +35,24 @@ Avatar is used to represent a user entity. It supports images or letters.
 
 <Example Component={BadgeExample}/>
 
-### Background
+### Color
 
-<Example Component={BackgroundExample}/>
+<Example Component={ColorExample}/>
 
 ## API
 
-### Avatar
-
 #### React
 
 ##### Props
 
-<AvatarReactPropsTable/>
+<ReactPropsTable/>
 
 #### Element
 
 ##### Properties
 
-<AvatarElementPropertiesTable/>
+<ElementPropertiesTable/>
 
 ##### Attributes
 
-<AvatarElementAttributes/>
-
-### Avatar Badge
-
-#### React
-
-##### Props
-
-<BadgeReactPropsTable/>
-
-#### Element
-
-##### Properties
-
-<BadgeElementPropertiesTable/>
-
-##### Attributes
-
-<BadgeElementAttributes/>
-
-### Avatar Status
-
-#### React
-
-##### Props
-
-<StatusReactPropsTable/>
-
-#### Element
-
-##### Properties
-
-<StatusElementPropertiesTable/>
-
-##### Attributes
-
-<StatusElementAttributes/>
+<ElementAttributesTable/>

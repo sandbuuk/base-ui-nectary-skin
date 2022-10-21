@@ -11,13 +11,13 @@ const wrapperStyles: CSSProperties = {
 
 export const BadgeExample: FC = () => (
   <div style={wrapperStyles}>
-    <sinch-badge size="l" text="9" mode="circle">
+    <sinch-badge size="m" text="9" mode="circle">
       <sinch-avatar src="https://i.pravatar.cc/300" alt="AB"/>
     </sinch-badge>
-    <sinch-badge size="l" text="99" mode="circle">
+    <sinch-badge size="m" text="99" mode="circle">
       <sinch-avatar src="https://i.pravatar.cc/300" alt="AB"/>
     </sinch-badge>
-    <sinch-badge size="l" text="999+" mode="circle">
+    <sinch-badge size="m" text="999+" mode="circle">
       <sinch-avatar src="https://i.pravatar.cc/300" alt="AB"/>
     </sinch-badge>
   </div>

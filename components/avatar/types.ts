@@ -12,7 +12,7 @@ export type TSinchAvatarElement = HTMLElement & {
   color: string | null,
   /** Status */
   status: TSinchAvatarStatus | null,
-  /** Size */
+  /** Size, `m` by default */
   size: TSinchAvatarSize,
   /** Image source */
   setAttribute(name: 'src', value: string): void,
@@ -20,7 +20,7 @@ export type TSinchAvatarElement = HTMLElement & {
   setAttribute(name: 'alt', value: string): void,
   /** Background color */
   setAttribute(name: 'color', value: string): void,
-  /** Size */
+  /** Size, `m` by default */
   setAttribute(name: 'size', value: TSinchAvatarSize): void,
   /** Status */
   setAttribute(name: 'status', value: TSinchAvatarStatus): void,
@@ -33,7 +33,7 @@ export type TSinchAvatarReact = TSinchElementReact<TSinchAvatarElement> & {
   alt: string,
   /** Background color */
   color?: string,
-  /** Size */
+  /** Size, `m` by default */
   size?: TSinchAvatarSize,
   /** Status */
   status?: TSinchAvatarStatus,
