@@ -1,3 +1,7 @@
+## v0.42.1 (2022-10-25)
+
+* 🐞 fix missing CSS files
+
 ## v0.42.0 (2022-10-21)
 
 * 💥 remove `sinch-avatar-badge`
