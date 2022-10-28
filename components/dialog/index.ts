@@ -1,8 +1,8 @@
-import dialogPolyfill from 'dialog-polyfill'
 import '../icon-button'
 import '../icons/close'
 import '../stop-events'
 import '../title'
+import dialogPolyfill from 'dialog-polyfill'
 import {
   defineCustomElement,
   getAttribute,
