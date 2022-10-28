@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/tabs'
 import '@sinch-engage/nectary/tabs-option'
+import '@sinch-engage/nectary/tabs-icon-option'
 
 @Component({
   selector: 'tabs-component',
@@ -9,36 +10,20 @@ import '@sinch-engage/nectary/tabs-option'
 })
 
 export class TabsComponent {
-  value: string
-  isControlled: boolean
-  options: any[]
+  value = ''
+  isDisabled: boolean
+  example: string | null
 
   constructor() {
     const url = new URL(location.href)
     const search = url.searchParams
 
-    this.isControlled = search.get('uncontrolled') === null
-    this.value = search.get('value') ?? ''
-
-    this.options = (() => {
-      const data = search.get('options')
-
-      if (data === null) {
-        return []
-      }
-
-      try {
-        return JSON.parse(decodeURI(data))
-      } catch {
-        return []
-      }
-    })()
+    this.isDisabled = search.get('disabled') !== null
+    this.example = search.get('example')
   }
 
   onChange(e: Event) {
-    if (this.isControlled) {
-      this.value = (e as CustomEvent).detail
-      window.dispatchEvent(new CustomEvent('sinch-tabs-change', {detail: (e as CustomEvent).detail}))
-    }
+    this.value = (e as CustomEvent).detail
+    window.dispatchEvent(new CustomEvent('sinch-tabs-change', {detail: this.value}))
   }
 }

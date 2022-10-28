@@ -1,8 +1,10 @@
-import type { TSinchElementReact } from '../types'
+import type { TRect, TSinchElementReact } from '../types'
 import type { SyntheticEvent } from 'react'
 
 export type TSinchTabsElement = HTMLElement & {
   value: string,
+  nthOptionRect(index: number): TRect | null,
+  /** Change value event */
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   setAttribute(name: 'value', value: string): void,
 }

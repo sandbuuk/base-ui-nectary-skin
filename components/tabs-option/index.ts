@@ -1,3 +1,4 @@
+import '../text'
 import {
   defineCustomElement,
   getAttribute,
@@ -16,8 +17,8 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tabs-option', class extends NectaryElement {
-  #$button: HTMLInputElement
-  #$label: HTMLElement
+  #$button: HTMLButtonElement
+  #$text: HTMLElement
 
   constructor() {
     super()
@@ -27,7 +28,7 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$button = shadowRoot.querySelector('#button')!
-    this.#$label = shadowRoot.querySelector('#content')!
+    this.#$text = shadowRoot.querySelector('#text')!
   }
 
   connectedCallback() {
@@ -40,15 +41,7 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['checked', 'disabled', 'text', 'value']
-  }
-
-  set checked(isChecked: boolean) {
-    updateBooleanAttribute(this, 'checked', isChecked)
-  }
-
-  get checked() {
-    return getBooleanAttribute(this, 'checked')
+    return ['data-checked', 'disabled', 'text']
   }
 
   set value(value: string) {
@@ -78,20 +71,17 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.#$label.textContent = newVal
+        this.#$text.textContent = newVal
 
         break
       }
-      case 'checked': {
+      case 'data-checked': {
         updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
 
         break
       }
       case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
-
-        this.#$button.disabled = isDisabled
-        updateBooleanAttribute(this, 'disabled', isDisabled)
+        this.#$button.disabled = isAttrTrue(newVal)
 
         break
       }

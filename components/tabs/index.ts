@@ -3,17 +3,14 @@ import {
   getAttribute,
   getBooleanAttribute,
   getReactEventHandler,
+  getRect,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTabsOptionElement } from '../tabs-option/types'
+import type { TRect } from '../types'
 import type { TSinchTabsElement, TSinchTabsReact } from './types'
-
-const findSelectedOption = (elements: readonly TSinchTabsOptionElement[]) => {
-  return elements.find((el) => el.checked) ?? null
-}
 
 const template = document.createElement('template')
 
@@ -21,6 +18,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tabs', class extends NectaryElement {
   #$slot: HTMLSlotElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -33,18 +31,18 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+
     this.setAttribute('role', 'tablist')
-    this.#$slot.addEventListener('keydown', this.#onOptionKeyDown)
-    this.#$slot.addEventListener('option-change', this.#onOptionChange)
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
-    this.addEventListener('-change', this.#onChangeReactHandler)
+    this.#$slot.addEventListener('option-change', this.#onOptionChange, { signal })
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange, { signal })
+    this.addEventListener('-change', this.#onChangeReactHandler, { signal })
   }
 
   disconnectedCallback() {
-    this.#$slot.removeEventListener('keydown', this.#onOptionKeyDown)
-    this.#$slot.removeEventListener('option-change', this.#onOptionChange)
-    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {
@@ -73,35 +71,14 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
     }
   }
 
-  #onOptionKeyDown = (e: Event) => {
-    switch ((e as KeyboardEvent).code) {
-      case 'ArrowUp':
-      case 'ArrowLeft': {
-        e.preventDefault()
+  nthOptionRect(index: number): TRect | null {
+    const $el = this.#$slot.assignedElements()[index]
 
-        const $option = this.#getPrevOption()
-
-        if ($option !== null) {
-          $option.focus()
-          this.#dispatchChangeEvent($option.value)
-        }
-
-        break
-      }
-      case 'ArrowDown':
-      case 'ArrowRight': {
-        e.preventDefault()
-
-        const $option = this.#getNextOption()
-
-        if ($option !== null) {
-          $option.focus()
-          this.#dispatchChangeEvent($option.value)
-        }
-
-        break
-      }
+    if ($el != null) {
+      return getRect($el)
     }
+
+    return null
   }
 
   #onSlotChange = () => {
@@ -118,7 +95,7 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
     for (const $option of this.#$slot.assignedElements()) {
       const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
 
-      updateBooleanAttribute($option, 'checked', isChecked)
+      updateBooleanAttribute($option, 'data-checked', isChecked)
     }
   }
 
@@ -129,54 +106,6 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('-change', { detail: value })
     )
-  }
-
-  #getFirstOption() {
-    for (const $option of this.#$slot.assignedElements() as TSinchTabsOptionElement[]) {
-      if ($option.disabled !== true) {
-        return $option
-      }
-    }
-
-    return null
-  }
-
-  #getLastOption() {
-    for (const $option of (this.#$slot.assignedElements() as TSinchTabsOptionElement[]).reverse()) {
-      if ($option.disabled !== true) {
-        return $option
-      }
-    }
-
-    return null
-  }
-
-  #getNextOption() {
-    const $options = this.#getEnabledRadioElements()
-    const $selectedOption = findSelectedOption($options)
-    const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
-
-    if (currentIndex < 0) {
-      return this.#getFirstOption()
-    }
-
-    return $options[(currentIndex + 1) % $options.length]
-  }
-
-  #getPrevOption() {
-    const $options = this.#getEnabledRadioElements()
-    const $selectedOption = findSelectedOption($options)
-    const currentIndex = $selectedOption !== null ? $options.indexOf($selectedOption) : -1
-
-    if (currentIndex < 0) {
-      return this.#getLastOption()
-    }
-
-    return $options[(currentIndex - 1 + $options.length) % $options.length]
-  }
-
-  #getEnabledRadioElements(): TSinchTabsOptionElement[] {
-    return (this.#$slot.assignedElements()as TSinchTabsOptionElement[]).filter((opt) => opt.disabled !== true)
   }
 
   #onChangeReactHandler = (e: Event) => {
