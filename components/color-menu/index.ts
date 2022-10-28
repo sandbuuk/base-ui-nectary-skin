@@ -6,6 +6,8 @@ import { lightColorNames, darkColorNames, vibrantColorNames } from '../theme/col
 import {
   attrValueToPixels,
   defineCustomElement,
+  dispatchContextConnectEvent,
+  dispatchContextDisconnectEvent,
   getAttribute,
   getBooleanAttribute,
   getCsvSet,
@@ -18,13 +20,12 @@ import {
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
-import { dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import optionTemplateHTML from './option-template.html'
 import templateHTML from './template.html'
 import { getParentOption } from './utils'
 import type { TRect } from '../types'
-import type { TContextKeyboard, TContextVisibility } from '../utils/context'
-import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
+import type { TContextVisibility, TContextKeyboard } from '../utils'
+import type { TSinchColorMenuElement, TSinchColorMenuReact } from './types'
 
 const NUM_COLS_DEFAULT = 5
 const ITEM_WIDTH = 44
@@ -487,11 +488,11 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-color-menu': TSinchSelectMenuReact,
+      'sinch-color-menu': TSinchColorMenuReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-color-menu': TSinchSelectMenuElement,
+    'sinch-color-menu': TSinchColorMenuElement,
   }
 }
