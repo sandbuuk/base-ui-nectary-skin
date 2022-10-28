@@ -74,3 +74,12 @@
     url("https://d2vu40klajma73.cloudfront.net/DM-Mono-400.woff2") format("woff2"),
     url("https://d2vu40klajma73.cloudfront.net/DM-Mono-400.woff") format("woff");
 }
+
+@font-face {
+  font-family: "Material Icons Outlined";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url("https://fonts.gstatic.com/s/materialsymbolsoutlined/v63/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzazHD_dY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOejbd5zrDAt.woff2") format("woff2"),
+    url("https://fonts.gstatic.com/s/materialsymbolsoutlined/v63/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzazHD_dY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOelbd5zrDAt.woff") format("woff");
+}

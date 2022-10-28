@@ -1,0 +1,7 @@
+:root,
+:host {
+  --sinch-icon-font-family: "Material Icons Outlined";
+  --sinch-icon-font-variation-settings: "FILL" 1;
+  --sinch-icon-font-feature-settings: "liga";
+  --sinch-icon-font-weight: 400;
+}
