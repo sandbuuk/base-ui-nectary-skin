@@ -21,8 +21,8 @@ import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact
 
 const TIP_SIZE = 8
 const SHOW_DELAY = 1000
-const HIDE_DELAY = 100
-const ANIMATION_DURATION = 100
+const HIDE_DELAY = 0
+const ANIMATION_DURATION = 50
 
 const template = document.createElement('template')
 
@@ -59,9 +59,9 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
       showDelay: SHOW_DELAY,
       hideDelay: this.#shouldReduceMotion ? HIDE_DELAY + ANIMATION_DURATION : HIDE_DELAY,
       hideAnimationDuration: this.#shouldReduceMotion ? 0 : ANIMATION_DURATION,
-      onShow: this.#onShow,
-      onHideStart: this.#onHideStart,
-      onHideEnd: this.#onHideEnd,
+      onShow: this.#onStateShow,
+      onHideStart: this.#onStateHideStart,
+      onHideEnd: this.#onStateHideEnd,
     })
   }
 
@@ -145,23 +145,32 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
 
   #onMouseDown = () => {
     this.#tooltipState.interrupt()
+    this.#unsubscribeScroll()
   }
 
   #onPopClose = () => {
     this.#tooltipState.destroy()
+    this.#unsubscribeScroll()
   }
 
   #onMouseEnter = () => {
     this.#tooltipState.show()
+    this.#subscribeScroll()
   }
 
   #onMouseLeave = (e: MouseEvent) => {
     if (!this.#isOpen() || (e.relatedTarget !== this.#$contentWrapper && e.relatedTarget !== this.#$target)) {
       this.#tooltipState.hide()
+      this.#unsubscribeScroll()
     }
   }
 
-  #onShow = () => {
+  #onScroll = () => {
+    this.#tooltipState.destroy()
+    this.#unsubscribeScroll()
+  }
+
+  #onStateShow = () => {
     updateBooleanAttribute(this.#$pop, 'open', true)
     requestAnimationFrame(this.#updateTipOrientation)
 
@@ -179,12 +188,12 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     }
   }
 
-  #onHideStart = () => {
+  #onStateHideStart = () => {
     this.#animation!.updatePlaybackRate(-1)
     this.#animation!.play()
   }
 
-  #onHideEnd = () => {
+  #onStateHideEnd = () => {
     this.#animation!.finish()
     this.#resetTipOrientation()
     updateBooleanAttribute(this.#$pop, 'open', false)
@@ -221,6 +230,14 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     }
 
     setClass(this.#$tip, 'hidden', rectOverlap(targetRect, contentRect))
+  }
+
+  #subscribeScroll() {
+    window.addEventListener('wheel', this.#onScroll, true)
+  }
+
+  #unsubscribeScroll() {
+    window.removeEventListener('wheel', this.#onScroll, true)
   }
 
   #isOpen() {
