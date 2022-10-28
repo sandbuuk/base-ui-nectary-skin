@@ -1,0 +1,6 @@
+:root,
+:host {
+  --sinch-emoji-src-url: https://twemoji.maxcdn.com/v/latest/svg/%s.svg;
+
+  /* --sinch-emoji-src-url: "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/%s.svg"; */
+}
