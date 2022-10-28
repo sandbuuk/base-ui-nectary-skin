@@ -15,12 +15,14 @@ import {
   getIntegerAttribute,
   getFirstFocusableElement,
   getFirstSlotElement,
+  Context,
+  dispatchContextConnectEvent,
+  dispatchContextDisconnectEvent,
 } from '../utils'
-import { Context, dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import templateHTML from './template.html'
 import { assertOrientation, disableScroll, enableScroll, orientationValues } from './utils'
 import type { TRect } from '../types'
-import type { TContextVisibility, TContextKeyboard } from '../utils/context'
+import type { TContextVisibility, TContextKeyboard } from '../utils'
 import type { TSinchPopElement, TSinchPopOrientation, TSinchPopReact } from './types'
 
 const template = document.createElement('template')

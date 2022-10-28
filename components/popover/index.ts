@@ -11,12 +11,13 @@ import {
   isAttrTrue,
   setClass,
   rectOverlap,
+  dispatchContextConnectEvent,
+  dispatchContextDisconnectEvent,
 } from '../utils'
-import { dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import templateHTML from './template.html'
 import { assertOrientation, getPopOrientation, orientationValues } from './utils'
 import type { TSinchPopElement } from '../pop/types'
-import type { TContextVisibility } from '../utils/context'
+import type { TContextVisibility } from '../utils'
 import type { TSinchPopoverElement, TSinchPopoverOrientation, TSinchPopoverReact } from './types'
 
 const TIP_SIZE = 16
