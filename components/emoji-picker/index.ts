@@ -1,0 +1,428 @@
+import '../input'
+import '../icon-button'
+import '../color-swatch'
+import '../color-menu'
+import '../popover'
+import '../tabs'
+import '../tabs-icon-option'
+import '../emoji'
+import '../icons/search'
+import '../icons/sentiment-satisfied'
+import '../icons/emoji-people'
+import '../icons/emoji-nature'
+import '../icons/emoji-food-beverage'
+import '../icons/emoji-objects'
+import '../icons/emoji-transportation'
+import '../icons/emoji-events'
+import '../icons/emoji-symbols'
+import {
+  defineCustomElement,
+  dispatchContextConnectEvent,
+  dispatchContextDisconnectEvent,
+  getAttribute,
+  getBooleanAttribute,
+  NectaryElement,
+  updateAttribute,
+  updateBooleanAttribute,
+  getReactEventHandler,
+  getRect,
+} from '../utils'
+import dataJson from './data.json'
+import templateHTML from './template.html'
+import type { TSinchColorMenuElement } from '../color-menu/types'
+import type { TSinchColorSwatchElement } from '../color-swatch/types'
+import type { TSinchIconButtonElement } from '../icon-button/types'
+import type { TSinchInputElement } from '../input/types'
+import type { TSinchPopoverElement } from '../popover/types'
+import type { TSinchTabsElement } from '../tabs/types'
+import type { TRect } from '../types'
+import type {
+  TContextKeyboard,
+  TContextVisibility,
+} from '../utils'
+import type { TEmojiGroup, TEmoji, TSinchEmojiPickerElement, TSinchEmojiPickerReact } from './types'
+
+const groupIconTagNames = [
+  'sinch-icon-sentiment-satisfied',
+  'sinch-icon-emoji-people',
+  'sinch-icon-emoji-nature',
+  'sinch-icon-emoji-food-beverage',
+  'sinch-icon-emoji-transportation',
+  'sinch-icon-emoji-events',
+  'sinch-icon-emoji-objects',
+  'sinch-icon-emoji-symbols',
+]
+const groupLabels = [
+  'Emotions',
+  'People',
+  'Animals and nature',
+  'Food and drinks',
+  'Travel and places',
+  'Sports and activities',
+  'Objects',
+  'Symbols and flags',
+]
+
+const data = dataJson as TEmojiGroup[]
+const template = document.createElement('template')
+
+template.innerHTML = templateHTML
+
+defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
+  #$tabs: TSinchTabsElement
+  #$input: TSinchInputElement
+  #$skinPopover: TSinchPopoverElement
+  #$skinMenu: TSinchColorMenuElement
+  #$skinSwatch: TSinchColorSwatchElement
+  #$skinButton: TSinchIconButtonElement
+  #$list: HTMLElement
+  #controller: AbortController | null = null
+  #$sh: ShadowRoot
+  #currentSkinTone = 0
+
+  constructor() {
+    super()
+
+    const shadowRoot = this.attachShadow()
+
+    shadowRoot.appendChild(template.content.cloneNode(true))
+
+    this.#$sh = shadowRoot
+    this.#$tabs = shadowRoot.querySelector('#tabs')!
+    this.#$input = shadowRoot.querySelector('#input')!
+    this.#$skinPopover = shadowRoot.querySelector('#skin-popover')!
+    this.#$skinMenu = shadowRoot.querySelector('#skin-menu')!
+    this.#$skinSwatch = shadowRoot.querySelector('#skin-swatch')!
+    this.#$skinButton = shadowRoot.querySelector('#skin-button')!
+    this.#$list = shadowRoot.querySelector('#list')!
+  }
+
+  connectedCallback() {
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+
+    this.#$tabs.addEventListener('-change', this.#onTabsChange as any, { signal })
+    this.#$input.addEventListener('-change', this.#onSearchChange as any, { signal })
+    this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
+    this.addEventListener('-keydown', this.#onContexKeydown as any, { signal })
+    this.#$skinButton.addEventListener('-click', this.#onSkinButtonClick, { signal })
+    this.#$skinPopover.addEventListener('-close', this.#onSkinPopoverClose, { signal })
+    this.#$skinMenu.addEventListener('-change', this.#onSkinMenuChange as any, { signal })
+    this.#$list.addEventListener('click', this.#onListClick, { signal })
+    this.addEventListener('-change', this.#onChangeReactHandler, { signal })
+    this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
+    dispatchContextConnectEvent(this, 'keydown')
+    dispatchContextConnectEvent(this, 'visibility')
+
+    this.#updateTabs()
+    this.#updateEmojis()
+  }
+
+  disconnectedCallback() {
+    dispatchContextDisconnectEvent(this, 'keydown')
+    dispatchContextDisconnectEvent(this, 'visibility')
+    this.#controller!.abort()
+  }
+
+  get skinToneButtonRect(): TRect {
+    return getRect(this.#$skinButton)
+  }
+
+  get searchInputRect(): TRect {
+    return getRect(this.#$input)
+  }
+
+  nthSkinToneRect(index: number): TRect | null {
+    return this.#$skinMenu.nthItemRect(index)
+  }
+
+  nthTabRect(index: number): TRect | null {
+    return this.#$tabs.nthOptionRect(index)
+  }
+
+  nthEmojiRect(index: number): TRect | null {
+    const $el = this.#$list.children[index]
+
+    return $el != null ? getRect($el) : null
+  }
+
+  #onListClick = (e: Event) => {
+    const value = (e.target as Element).getAttribute('data-value')
+
+    if (value === null) {
+      return
+    }
+
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: value })
+    )
+  }
+
+  #onContexKeydown = (e: CustomEvent<TContextKeyboard>) => {
+    this.#handleKeydown(e.detail)
+  }
+
+  #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
+    if (e.detail) {
+      // Select element when becoming visible
+    } else {
+      // Deselect element when becoming invisible
+    }
+  }
+
+  #onListboxKeyDown = (e: KeyboardEvent) => {
+    this.#handleKeydown(e)
+  }
+
+  #handleKeydown(e: TContextKeyboard) {
+    switch (e.code) {
+      case 'Space':
+      case 'Enter': {
+        break
+      }
+      case 'ArrowUp': {
+        e.preventDefault()
+
+        break
+      }
+      case 'ArrowDown': {
+        e.preventDefault()
+
+        break
+      }
+    }
+  }
+
+  #onTabsChange = (e: CustomEvent<string>) => {
+    const value = e.detail
+
+    updateAttribute(this.#$tabs, 'value', value)
+    updateAttribute(this.#$input, 'value', '')
+    this.#updateEmojis()
+  }
+
+  #onSearchChange = (e: CustomEvent<string>) => {
+    const value = e.detail
+
+    this.#$input.value = value
+
+    if (value.length < 3) {
+      return
+    }
+
+    updateAttribute(this.#$tabs, 'value', '')
+    this.#updateSearchEmojis()
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
+  }
+
+  get focusable() {
+    return true
+  }
+
+  #getDocumentRoot(): Document {
+    return Reflect.has(this.#$sh, 'createElement')
+      ? this.#$sh as any as Document
+      : document
+  }
+
+  #updateTabs() {
+    const doc = this.#getDocumentRoot()
+    const tabsFragment = document.createDocumentFragment()
+    const activeTab = data[0].name
+
+    for (let i = 0; i < data.length;i++) {
+      const group = data[i]
+      const tabOption = doc.createElement('sinch-tabs-icon-option')
+      const icon = doc.createElement(groupIconTagNames[i])
+
+      icon.setAttribute('slot', 'icon')
+      tabOption.setAttribute('value', group.name)
+      tabOption.setAttribute('aria-label', groupLabels[i])
+      tabOption.appendChild(icon)
+
+      tabsFragment.appendChild(tabOption)
+    }
+
+    this.#$tabs.replaceChildren(tabsFragment)
+    updateAttribute(this.#$tabs, 'value', activeTab)
+  }
+
+  *#iterateSearchEmojis(searchValue: string, skinTone: number): IterableIterator<TEmoji> {
+    for (const group of data) {
+      for (const entry of group.emojis) {
+        if (entry.label.includes(searchValue)) {
+          const hasSkins = entry.skins != null
+
+          if (skinTone === 0 || !hasSkins) {
+            yield entry
+          } else if (hasSkins) {
+            for (const skin of entry.skins!) {
+              if (
+                skinTone === skin.tone ||
+                (Array.isArray(skin.tone) && skin.tone.includes(skinTone))
+              ) {
+                yield skin
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  *#iterateGroupEmojis(group: TEmojiGroup, skinTone: number): IterableIterator<TEmoji> {
+    for (const entry of group.emojis) {
+      const hasSkins = entry.skins != null
+
+      if (skinTone === 0 || !hasSkins) {
+        yield entry
+      } else if (hasSkins) {
+        for (const skin of entry.skins!) {
+          if (
+            skinTone === skin.tone ||
+            (Array.isArray(skin.tone) && skin.tone.includes(skinTone))
+          ) {
+            yield skin
+          }
+        }
+      }
+    }
+  }
+
+  #updateSearchEmojis() {
+    const searchValue = this.#$input.value
+
+    if (searchValue.length < 3) {
+      return
+    }
+
+    const doc = this.#getDocumentRoot()
+    const fragment = document.createDocumentFragment()
+
+    for (const entry of this.#iterateSearchEmojis(searchValue, this.#currentSkinTone)) {
+      const el = this.#createEmojiElement(doc, entry)
+
+      fragment.appendChild(el)
+    }
+
+    this.#$list.replaceChildren(fragment)
+    this.#$list.scrollTo(0, 0)
+  }
+
+  #updateEmojis() {
+    if (this.#isSearchMode()) {
+      return
+    }
+
+    const activeGroup = getAttribute(this.#$tabs, 'value')
+    const group = data.find((group) => group.name === activeGroup)
+
+    if (group == null) {
+      return
+    }
+
+    const doc = this.#getDocumentRoot()
+    const fragment = document.createDocumentFragment()
+
+    for (const entry of this.#iterateGroupEmojis(group, this.#currentSkinTone)) {
+      const el = this.#createEmojiElement(doc, entry)
+
+      fragment.appendChild(el)
+    }
+
+    this.#$list.replaceChildren(fragment)
+    this.#$list.scrollTo(0, 0)
+  }
+
+  #onSkinButtonClick = () => {
+    updateBooleanAttribute(this.#$skinPopover, 'open', !getBooleanAttribute(this.#$skinPopover, 'open'))
+  }
+
+  #onSkinPopoverClose = () => {
+    updateBooleanAttribute(this.#$skinPopover, 'open', false)
+  }
+
+  #onSkinMenuChange = (e: CustomEvent<string>) => {
+    this.#$skinSwatch.name = e.detail
+    this.#$skinMenu.value = e.detail
+
+    switch (e.detail) {
+      case 'skin-tone-0': {
+        this.#currentSkinTone = 0
+
+        break
+      }
+      case 'skin-tone-10': {
+        this.#currentSkinTone = 1
+
+        break
+      }
+      case 'skin-tone-20': {
+        this.#currentSkinTone = 2
+
+        break
+      }
+      case 'skin-tone-30': {
+        this.#currentSkinTone = 3
+
+        break
+      }
+      case 'skin-tone-40': {
+        this.#currentSkinTone = 4
+
+        break
+      }
+      case 'skin-tone-50': {
+        this.#currentSkinTone = 5
+
+        break
+      }
+    }
+
+    this.#onSkinPopoverClose()
+
+    if (this.#isSearchMode()) {
+      this.#updateSearchEmojis()
+    } else {
+      this.#updateEmojis()
+    }
+  }
+
+  #isSearchMode() {
+    const activeTab = getAttribute(this.#$tabs, 'value')
+
+    return activeTab === null || activeTab.length === 0
+  }
+
+  #createEmojiElement(doc: Document, emoji: TEmoji) {
+    const btn = doc.createElement('sinch-icon-button')
+    const el = doc.createElement('sinch-emoji')
+
+    el.setAttribute('slot', 'icon')
+    el.setAttribute('char', emoji.emoji)
+    el.setAttribute('label', emoji.label)
+
+    btn.setAttribute('aria-label', emoji.label)
+    btn.setAttribute('small', '')
+    btn.setAttribute('data-value', emoji.emoji)
+    btn.appendChild(el)
+
+    return btn
+  }
+})
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-emoji-picker': TSinchEmojiPickerReact,
+    }
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-emoji-picker': TSinchEmojiPickerElement,
+  }
+}

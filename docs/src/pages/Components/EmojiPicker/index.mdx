@@ -1,0 +1,52 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { CompositionExample } from './examples/Composition.tsx?example'
+import {
+  ReactPropsTable,
+  ReactHandlersTable,
+  ElementPropertiesTable,
+  ElementAttributesTable,
+  ElementEventsTable
+} from '@sinch-engage/nectary/time-picker/types.ts?api'
+
+# Emoji Picker
+
+Emoji Picker communicates using an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) (e.g. `hh:mm:ss`) emoji format. Working with emojizones is not a part of the component functionality and all internal emoji manipulations go through consumer's local emojizone reported by browser.
+
+## Table of contents
+
+## Examples
+
+### Composition
+
+The component does *not* provide an input field and does *not* do any input masking. It's a modular *picker* and requires you to compose an input + popover + picker on your own, maintaining all the states and masking/formatting the displayed value.
+
+We'll implement a generic masking functionality for the input field  (like `pattern` attribute) later and then maybe wrap it all into `EmojiInput` complete molecule.
+
+<Example Component={CompositionExample}/>
+
+## API
+
+### React
+
+#### Props
+
+<ReactPropsTable/>
+
+#### Handlers
+
+<ReactHandlersTable/>
+
+### Element
+
+#### Properties
+
+<ElementPropertiesTable/>
+
+#### Attributes
+
+<ElementAttributesTable/>
+
+#### Events
+
+<ElementEventsTable/>

@@ -1,9 +1,9 @@
 import type { FC } from 'react'
 import { lazyScrollIntoView } from '~/utils/lazy-scroll-into-view'
 
-export const NotFoundPage: FC = () => {
-  const Component = lazyScrollIntoView(() => import(/* webpackChunkName: "NotFound" */'./index.md'))
+const Component = lazyScrollIntoView(() => import(/* webpackChunkName: "NotFound" */'./index.md'))
 
+export const NotFoundPage: FC = () => {
   return (
     <div id="page-not-found">
       <Component/>

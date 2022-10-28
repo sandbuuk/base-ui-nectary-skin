@@ -18,6 +18,7 @@ import { ColorSelectComponent } from '../components/ColorSelect/ColorSelect.comp
 import { ColorSwatchComponent } from '../components/ColorSwatch/ColorSwatch.component'
 import { DatePickerComponent } from '../components/DatePicker/DatePicker.component'
 import { DialogComponent } from '../components/Dialog/Dialog.component'
+import { EmojiPickerComponent } from '../components/EmojiPicker/EmojiPicker.component'
 import { GridComponent } from '../components/Grid/Grid.component'
 import { HorizontalStepper } from '../components/HorizontalStepper/HorizontalStepper.component'
 import { IconButtonComponent } from '../components/IconButton/IconButton.component'
@@ -74,6 +75,7 @@ import { AppComponent } from './app.component'
     ColorSwatchComponent,
     DatePickerComponent,
     DialogComponent,
+    EmojiPickerComponent,
     GridComponent,
     HorizontalStepper,
     IconButtonComponent,

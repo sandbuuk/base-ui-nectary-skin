@@ -1,0 +1,66 @@
+<style>
+:host {
+  display: block;
+}
+
+#wrapper {
+  width: 384px;
+  max-height: 504px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0;
+}
+
+#toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+#input {
+  flex: 1;
+}
+
+#list-wrapper {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 384px;
+  box-sizing: border-box;
+  scrollbar-gutter: stable;
+}
+
+#list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 12px 0;
+  width: 384px;
+  box-sizing: border-box;
+}
+</style>
+
+<div id="wrapper">
+  <div id="toolbar">
+    <sinch-input id="input" aria-label="Search emojis">
+      <sinch-icon-search slot="icon"></sinch-icon-search>
+    </sinch-input>
+    <sinch-popover id="skin-popover" orientation="bottom-left" aria-label="Emoji skin tone select">
+      <sinch-icon-button id="skin-button" slot="target" aria-label="Select emoji skin tones">
+        <sinch-color-swatch id="skin-swatch" slot="icon" name="skin-tone-0"></sinch-color-swatch>
+      </sinch-icon-button>
+      <sinch-color-menu
+        id="skin-menu"
+        slot="content"
+        cols="1"
+        value="skin-tone-0"
+        colors="skin-tone-0,skin-tone-10,skin-tone-20,skin-tone-30,skin-tone-40,skin-tone-50"
+        aria-label="Emoji skin tone menu"
+      ></sinch-color-menu>
+    </sinch-popover>
+  </div>
+  <sinch-tabs id="tabs" aria-label="Emoji groups"></sinch-tabs>
+  <div id="list-wrapper">
+    <div id="list"></div>
+  </div>
+</div>

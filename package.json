@@ -22,6 +22,8 @@
     "@typescript-eslint/parser": "^5.38.1",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
+    "emojibase": "^6.1.0",
+    "emojibase-data": "^7.0.1",
     "eslint": "^8.24.0",
     "eslint-import-resolver-typescript": "^2.7.1",
     "eslint-plugin-import": "^2.26.0",
