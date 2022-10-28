@@ -12,8 +12,8 @@ import {
   setClass,
   rectOverlap,
 } from '../utils'
-import { TooltipState } from '../utils/animation'
 import templateHTML from './template.html'
+import { TooltipState } from './tooltip-state'
 import { assertOrientation, getPopOrientation, orientationValues } from './utils'
 import type { TSinchPopElement } from '../pop/types'
 import type { TRect } from '../types'
