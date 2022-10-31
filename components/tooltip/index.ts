@@ -39,6 +39,8 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   #tooltipState: TooltipState
   #animation: Animation | null = null
   #shouldReduceMotion = false
+  #isConnected = false
+  #isSubscribed = false
 
   constructor() {
     super()
@@ -66,18 +68,17 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#isConnected = true
     this.#controller = new AbortController()
 
-    const { signal } = this.#controller
+    const options: AddEventListenerOptions = {
+      signal: this.#controller.signal,
+    }
 
-    this.#$pop.addEventListener('-close', this.#onPopClose, { signal })
-    this.#$target.addEventListener('mousedown', this.#onMouseDown, { signal })
-    this.#$target.addEventListener('mouseenter', this.#onMouseEnter, { signal })
-    this.#$target.addEventListener('mouseleave', this.#onMouseLeave, { signal })
-    this.#$contentWrapper.addEventListener('mouseenter', this.#onMouseEnter, { signal })
-    this.#$contentWrapper.addEventListener('mouseleave', this.#onMouseLeave, { signal })
+    this.#$pop.addEventListener('-close', this.#onPopClose, options)
 
     updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
+    this.#updateText()
   }
 
   disconnectedCallback() {
@@ -124,7 +125,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.#$tooltipText.textContent = newVal
+        this.#updateText()
 
         break
       }
@@ -156,6 +157,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   #onMouseEnter = () => {
     this.#tooltipState.show()
     this.#subscribeScroll()
+    this.#subscribeMouseLeaveEvents()
   }
 
   #onMouseLeave = (e: MouseEvent) => {
@@ -197,6 +199,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     this.#animation!.finish()
     this.#resetTipOrientation()
     updateBooleanAttribute(this.#$pop, 'open', false)
+    this.#unsubscribeMouseLeaveEvents()
   }
 
   #resetTipOrientation() {
@@ -230,6 +233,61 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     }
 
     setClass(this.#$tip, 'hidden', rectOverlap(targetRect, contentRect))
+  }
+
+  #updateText() {
+    if (!this.#isConnected) {
+      return
+    }
+
+    const value = this.text
+
+    this.#$tooltipText.textContent = value
+
+    if (value.length === 0) {
+      if (this.#isSubscribed) {
+        this.#tooltipState.destroy()
+        this.#unsubscribeMouseEnterEvent()
+        this.#unsubscribeMouseLeaveEvents()
+      }
+
+      return
+    }
+
+    this.#subscribeMouseEnterEvent()
+  }
+
+  #subscribeMouseEnterEvent() {
+    if (!this.#isConnected || this.#isSubscribed) {
+      return
+    }
+
+    this.#$target.addEventListener('mouseenter', this.#onMouseEnter, {
+      signal: this.#controller!.signal,
+    })
+
+    this.#isSubscribed = true
+  }
+
+  #unsubscribeMouseEnterEvent() {
+    this.#$target.removeEventListener('mouseenter', this.#onMouseEnter)
+    this.#isSubscribed = false
+  }
+
+  #subscribeMouseLeaveEvents() {
+    const options: AddEventListenerOptions = { signal: this.#controller!.signal }
+
+    this.#$target.addEventListener('mousedown', this.#onMouseDown, options)
+    this.#$target.addEventListener('mouseleave', this.#onMouseLeave, options)
+    this.#$contentWrapper.addEventListener('mouseenter', this.#onMouseEnter, options)
+    this.#$contentWrapper.addEventListener('mouseleave', this.#onMouseLeave, options)
+  }
+
+  #unsubscribeMouseLeaveEvents() {
+    this.#$target.removeEventListener('mousedown', this.#onMouseDown)
+    this.#$target.removeEventListener('mouseleave', this.#onMouseLeave)
+    this.#$contentWrapper.removeEventListener('mouseenter', this.#onMouseEnter)
+    this.#$contentWrapper.removeEventListener('mouseleave', this.#onMouseLeave)
   }
 
   #subscribeScroll() {
