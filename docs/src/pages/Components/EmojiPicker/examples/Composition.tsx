@@ -7,7 +7,7 @@ import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/emoji-picker'
-import '@sinch-engage/nectary/icon'
+import '@sinch-engage/nectary/icons/sentiment-satisfied'
 
 export const CompositionExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
@@ -56,7 +56,7 @@ export const CompositionExample: FC = () => {
             aria-label="Open Time Picker"
             on-click={onOpen}
           >
-            <sinch-icon slot="icon" name="sentiment_satisfied"/>
+            <sinch-icon-sentiment-satisfied slot="icon"/>
           </sinch-icon-button>
         </sinch-input>
         {firstIsOpenRef.current && (
