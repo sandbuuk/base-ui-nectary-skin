@@ -121,12 +121,12 @@ const overridePageMouse = (page: Page): void => {
   ;(page.mouse as any).__modified = true
 }
 
-type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
+type TEvalFunc<T extends keyof HTMLElementTagNameMap> = {
   <R, Arg>(cb: (el: HTMLElementTagNameMap[T], arg: Arg) => R, arg: Arg): Promise<R>,
   <R>(cb: (el: HTMLElementTagNameMap[T]) => R): Promise<R>,
 }
 
-const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator): EvalFunc<T> =>
+const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator): TEvalFunc<T> =>
   (cb: any, arg?: any) => $.evaluate(cb, arg)
 
 type TPosition = {
@@ -139,27 +139,32 @@ type TRect = TPosition & {
   height: number,
 }
 
-type UpdateStateResult = {
+type TUpdateStateResult = {
   name: string,
   include?: Locator[],
   includeRects?: TRect[],
   expand?: number,
 }
 
-type UpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
+type TUpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
   page: Page,
   $: Locator,
-  $eval: EvalFunc<T>,
+  $eval: TEvalFunc<T>,
   isChromium: boolean,
   isFirefox: boolean,
   isWebkit: boolean,
+}
+
+type TBeforeProps = {
+  page: Page,
 }
 
 type TScreenshotTest<T extends keyof HTMLElementTagNameMap> = {
   name: string,
   url: string,
   only?: true,
-  fn (props: UpdateStateProps<T>): AsyncIterable<UpdateStateResult>,
+  before?(props: TBeforeProps): AsyncIterable<void>,
+  fn (props: TUpdateStateProps<T>): AsyncIterable<TUpdateStateResult>,
 }
 
 export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elementSelector: T, tests: TScreenshotTest<T>[]) =>
@@ -197,6 +202,11 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
       const page = pages.shift()!
 
       try {
+        if (t.before != null) {
+          // eslint-disable-next-line no-empty
+          for await (const _ of t.before({ page })) {}
+        }
+
         await page.goto(t.url)
         await page.waitForSelector(elementSelector, { state: 'attached' })
         await page.evaluate(() => document.fonts.ready)
