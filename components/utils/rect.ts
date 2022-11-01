@@ -1,11 +1,5 @@
 import { getFirstSlotElement } from './slot'
-
-export type TRect = {
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-}
+import type { TRect } from '../types'
 
 export const getRect = (el: Element): TRect => {
   const { x, y, width, height } = el.getBoundingClientRect()
