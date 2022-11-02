@@ -9,8 +9,8 @@ import '@sinch-engage/nectary/icons/smartphone'
 import '@sinch-engage/nectary/icons/tablet'
 import '@sinch-engage/nectary/icons/watch'
 
-export const SimpleExample: FC = () => {
-  const [value, setValue] = useState('Smartphone')
+export const MultipleExample: FC = () => {
+  const [value, setValue] = useState('Smartphone,Watch')
   const onChange = (e: CustomEvent<string>) => setValue(e.detail)
 
   return (
@@ -18,6 +18,7 @@ export const SimpleExample: FC = () => {
       slot="content"
       aria-label="Action menu"
       value={value}
+      multiple
       on-change={onChange}
     >
       <sinch-select-menu-option
