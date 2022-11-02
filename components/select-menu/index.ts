@@ -5,7 +5,7 @@ import {
   dispatchContextDisconnectEvent,
   getAttribute,
   getBooleanAttribute,
-  getCsvSet,
+  unpackCsv,
   getFirstCsvValue,
   getIntegerAttribute,
   getReactEventHandler,
@@ -197,10 +197,10 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
   #onValueChange(csv: string) {
     if (this.multiple) {
-      const values = getCsvSet(csv)
+      const values = unpackCsv(csv)
 
       for (const $option of this.#getOptionElements()) {
-        const isChecked = !getBooleanAttribute($option, 'disabled') && values.has(getAttribute($option, 'value', ''))
+        const isChecked = !getBooleanAttribute($option, 'disabled') && values.includes(getAttribute($option, 'value', ''))
 
         updateBooleanAttribute($option, 'data-checked', isChecked)
       }
