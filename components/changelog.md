@@ -1,3 +1,15 @@
+## v0.43.0 (2022-11-02)
+
+* ➕ add `sinch-emoji-picker` component
+* ➕ add `sinch-emoji` component
+* ➕ add `sinch-icon` component
+* ➕ add `sinch-tabs-icon-option` component
+* ➕ add `theme/fonts.json` file
+* 🐞 align styles for `sinch-tabs`
+* 🐞 fix overflow clip in `sinch-segment`, `sinch-dialog`, `sinch-card-container`
+* 🐞 fix types for `sinch-color-menu`
+* 🐞 improve `sinch-tooltip` hiding
+
 ## v0.42.1 (2022-10-25)
 
 * 🐞 fix missing CSS files
