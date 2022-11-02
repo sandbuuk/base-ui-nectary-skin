@@ -46,7 +46,7 @@
 }
 
 .day.today {
-  border: 1px solid var(--sinch-color-stormy-500);
+  border: 1px solid var(--sinch-color-tropical-500);
 }
 
 .day:disabled {
@@ -66,13 +66,17 @@
   }
 }
 
+.day.range {
+  background-color: var(--sinch-color-tropical-100);
+}
+
 .day.selected {
-  background-color: var(--sinch-color-stormy-500);
+  background-color: var(--sinch-color-tropical-500);
   color: var(--sinch-color-snow-100);
 }
 
-.day:hover:not(:disabled):not(.selected) {
-  background-color: var(--sinch-color-snow-600);
+.day:hover:enabled:not(.selected) {
+  background-color: var(--sinch-color-tropical-200);
 }
 
 #week-day-names {

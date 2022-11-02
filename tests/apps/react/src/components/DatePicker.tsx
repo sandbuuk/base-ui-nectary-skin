@@ -17,12 +17,14 @@ export const DatePicker: FC<TDatePicker> = ({ search }) => {
   const min = search.get('min') ?? ''
   const max = search.get('max') ?? ''
   const locale = search.get('locale') ?? ''
+  const isRange = search.get('range') != null
 
   return (
     <sinch-date-picker
       min={min}
       max={max}
       locale={locale}
+      range={isRange}
       aria-label="Date picker"
       prev-month-aria-label="Previous month"
       next-month-aria-label="Next month"

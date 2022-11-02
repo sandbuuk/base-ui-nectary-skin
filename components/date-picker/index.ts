@@ -9,10 +9,14 @@ import '../text'
 import {
   defineCustomElement,
   getAttribute,
+  getBooleanAttribute,
   getReactEventHandler,
   getRect,
+  isAttrTrue,
   NectaryElement,
+  packCsv,
   setClass,
+  unpackCsv,
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
@@ -29,6 +33,7 @@ import {
   canGoPrevYear,
   clampMaxDate,
   clampMinDate,
+  cloneDate,
   dateToIso,
   decMonth,
   decYear,
@@ -40,6 +45,7 @@ import {
   isDateBetween,
   isoToDate,
   isValidDate,
+  sortDates,
   today,
 } from './utils'
 import type { TSinchIconButtonElement } from '../icon-button/types'
@@ -56,7 +62,9 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   #$weeks: HTMLElement[]
   #$days: HTMLElement[][]
   #$weekDayNames: HTMLElement[]
-  #date: Date | null = null
+  #uiDate: Date | null = null
+  #date1: Date | null = null
+  #date2: Date | null = null
   #minDate: Date | null = null
   #maxDate: Date | null = null
   #$prevMonth: TSinchIconButtonElement
@@ -65,6 +73,8 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   #$nextYear: TSinchIconButtonElement
   #$date: TSinchTextElement
   #monthNames: string[]
+  #controller: AbortController | null = null
+  #isHoverSubscribed = false
 
   constructor() {
     super()
@@ -96,24 +106,23 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#$prevMonth.addEventListener('click', this.#onPrevMonthClick)
-    this.#$nextMonth.addEventListener('click', this.#onNextMonthClick)
-    this.#$prevYear.addEventListener('click', this.#onPrevYearClick)
-    this.#$nextYear.addEventListener('click', this.#onNextYearClick)
-    this.#$month.addEventListener('click', this.#onDateClick)
-    this.addEventListener('-change', this.#onChangeReactHandler)
+    this.#controller = new AbortController()
 
-    // Dont assert here
-    // Angular sets attributes after connect
+    const options: AddEventListenerOptions = {
+      signal: this.#controller.signal,
+    }
+
+    this.#$prevMonth.addEventListener('click', this.#onPrevMonthClick, options)
+    this.#$nextMonth.addEventListener('click', this.#onNextMonthClick, options)
+    this.#$prevYear.addEventListener('click', this.#onPrevYearClick, options)
+    this.#$nextYear.addEventListener('click', this.#onNextYearClick, options)
+    this.#$month.addEventListener('click', this.#onDateClick, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
   }
 
   disconnectedCallback() {
-    this.#$prevMonth.removeEventListener('click', this.#onPrevMonthClick)
-    this.#$nextMonth.removeEventListener('click', this.#onNextMonthClick)
-    this.#$prevYear.removeEventListener('click', this.#onPrevYearClick)
-    this.#$nextYear.removeEventListener('click', this.#onNextYearClick)
-    this.#$month.removeEventListener('click', this.#onDateClick)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.#controller!.abort()
+    this.#unsubscribeRangeHover()
   }
 
   static get observedAttributes() {
@@ -122,6 +131,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
       'min',
       'max',
       'locale',
+      'range',
       'prev-year-aria-label',
       'next-year-aria-label',
       'prev-month-aria-label',
@@ -137,23 +147,8 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     switch (name) {
       case 'value': {
         assertValue(newVal)
-        this.#date = newVal.length > 0 ? isoToDate(newVal) : today()
 
-        if (!isValidDate(this.#date)) {
-          this.#date = today()
-        }
-
-        // Dont show panel below min date
-        if (this.#minDate !== null) {
-          clampMinDate(this.#date, this.#minDate)
-        }
-
-        // Dont show panel above max date
-        if (this.#maxDate !== null) {
-          clampMaxDate(this.#date, this.#maxDate)
-        }
-
-        this.#render()
+        this.#onValueChange()
 
         break
       }
@@ -164,8 +159,8 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
         assertDate(this.#minDate, name, newVal)
 
         // Dont show panel below min date
-        if (this.#date !== null) {
-          clampMinDate(this.#date, this.#minDate)
+        if (this.#uiDate !== null) {
+          clampMinDate(this.#uiDate, this.#minDate)
         }
 
         this.#render()
@@ -179,8 +174,8 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
         assertDate(this.#maxDate, name, newVal)
 
         // Dont show panel above max date
-        if (this.#date !== null) {
-          clampMaxDate(this.#date, this.#maxDate)
+        if (this.#uiDate !== null) {
+          clampMaxDate(this.#uiDate, this.#maxDate)
         }
 
         this.#render()
@@ -199,6 +194,18 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
         this.#monthNames = getMonthNames(newVal)
         this.#render()
+
+        break
+      }
+
+      case 'range': {
+        const isRange = isAttrTrue(newVal)
+
+        if (isRange) {
+          this.#onValueChange()
+        } else {
+          this.#unsubscribeRangeHover()
+        }
 
         break
       }
@@ -238,7 +245,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   }
 
   get locale(): string {
-    return getAttribute(this, 'locale')!
+    return getAttribute(this, 'locale', '')
   }
 
   set value(value: string) {
@@ -263,6 +270,14 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
   get max(): string {
     return getAttribute(this, 'max', '')
+  }
+
+  set range(isRanged: boolean) {
+    updateBooleanAttribute(this, 'range', isRanged)
+  }
+
+  get range(): boolean {
+    return getBooleanAttribute(this, 'range')
   }
 
   set prevMonthAriaLabel(value: string) {
@@ -322,30 +337,55 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
   #onPrevMonthClick = (e: Event) => {
     e.stopPropagation()
-    decMonth(this.#date!, this.#minDate!)
+    decMonth(this.#uiDate!, this.#minDate!)
 
     this.#render()
   }
 
   #onNextMonthClick = (e: Event) => {
     e.stopPropagation()
-    incMonth(this.#date!, this.#maxDate!)
+    incMonth(this.#uiDate!, this.#maxDate!)
 
     this.#render()
   }
 
   #onPrevYearClick = (e: Event) => {
     e.stopPropagation()
-    decYear(this.#date!, this.#minDate!)
+    decYear(this.#uiDate!, this.#minDate!)
 
     this.#render()
   }
 
   #onNextYearClick = (e: Event) => {
     e.stopPropagation()
-    incYear(this.#date!, this.#maxDate!)
+    incYear(this.#uiDate!, this.#maxDate!)
 
     this.#render()
+  }
+
+  #onDateMouseEnter = (e: Event) => {
+    if (this.#date1 !== null && this.#date2 === null) {
+      const hoverDateIso = (e.target as HTMLElement).getAttribute('data-date')
+
+      if (hoverDateIso === null) {
+        return
+      }
+
+      const hoverDate = isoToDate(hoverDateIso)
+      const todayDate = today()
+
+      for (const week of this.#$days) {
+        for (const $day of week) {
+          if ($day.hasAttribute('disabled')) {
+            continue
+          }
+
+          const dayDate = isoToDate($day.getAttribute('data-date')!)
+
+          setClass($day, 'range', !areDatesEqual(todayDate, dayDate) && (isDateBetween(dayDate, this.#date1, hoverDate) || isDateBetween(dayDate, hoverDate, this.#date1)))
+        }
+      }
+    }
   }
 
   #onDateClick = (e: Event) => {
@@ -357,34 +397,134 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
       return
     }
 
-    this.#dispatchChangeEvent(dateIso)
+    if (this.range) {
+      if (this.#date1 !== null && this.#date2 === null) {
+        const date2 = isoToDate(dateIso)
+
+        if (areDatesEqual(this.#date1, date2)) {
+          return
+        }
+
+        const dateTuple = sortDates([this.#date1, date2])
+        const value = packCsv(dateTuple.map(dateToIso))
+
+        this.#date1 = dateTuple[0]
+        this.#date2 = dateTuple[1]
+
+        this.#unsubscribeRangeHover()
+        this.#render()
+
+        this.dispatchEvent(
+          new CustomEvent('change', { detail: value, bubbles: true })
+        )
+        this.dispatchEvent(
+          new CustomEvent('-change', { detail: value })
+        )
+
+        return
+      }
+
+      this.#date1 = isoToDate(dateIso)
+      this.#date2 = null
+
+      this.#subscribeRangeHover()
+      this.#render()
+
+      return
+    }
+
+    // Single value mode
+    this.dispatchEvent(
+      new CustomEvent('change', { detail: dateIso, bubbles: true })
+    )
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: dateIso })
+    )
+  }
+
+  #onValueChange() {
+    const value = this.value
+
+    this.#date1 = null
+    this.#date2 = null
+
+    if (this.range) {
+      const isoDates = unpackCsv(value)
+
+      if (isoDates.length === 2) {
+        const date1 = isoToDate(isoDates[0])
+        const date2 = isoToDate(isoDates[1])
+
+        if (isValidDate(date1) && isValidDate(date2)) {
+          this.#date1 = date1
+          this.#date2 = date2
+
+          // Dont switch calendar page, if already selected
+          if (this.#uiDate === null) {
+            this.#uiDate = cloneDate(this.#date2)
+          }
+        }
+      } else if (isoDates.length === 1) {
+        const date1 = isoToDate(isoDates[0])
+
+        if (isValidDate(date1)) {
+          this.#uiDate = date1
+        }
+      }
+    } else {
+      // Single select mode
+      const valueDate = isoToDate(value)
+
+      if (isValidDate(valueDate)) {
+        this.#date1 = valueDate
+        this.#uiDate = cloneDate(this.#date1)
+      }
+    }
+
+    if (this.#uiDate === null) {
+      this.#uiDate = today()
+    }
+
+    // Dont show panel below min date
+    if (this.#minDate !== null) {
+      clampMinDate(this.#uiDate, this.#minDate)
+    }
+
+    // Dont show panel above max date
+    if (this.#maxDate !== null) {
+      clampMaxDate(this.#uiDate, this.#maxDate)
+    }
+
+    this.#render()
   }
 
   #render() {
     // Wait for all attributes initialize before first render
-    if (this.#date === null || this.#minDate === null || this.#maxDate === null || this.locale === null) {
+    if (this.#uiDate === null || this.#minDate === null || this.#maxDate === null || this.locale === null) {
       return
     }
 
-    const valueDate = isoToDate(this.value)
-    const todayDate = new Date()
-    const month = getCalendarMonth(this.#date)
+    const todayDate = today()
+    const month = getCalendarMonth(this.#uiDate)
 
-    updateBooleanAttribute(this.#$prevMonth, 'disabled', canGoPrevMonth(this.#date, this.#minDate) === false)
-    updateBooleanAttribute(this.#$nextMonth, 'disabled', canGoNextMonth(this.#date, this.#maxDate) === false)
-    updateBooleanAttribute(this.#$prevYear, 'disabled', canGoPrevYear(this.#date, this.#minDate) === false)
-    updateBooleanAttribute(this.#$nextYear, 'disabled', canGoNextYear(this.#date, this.#maxDate) === false)
+    updateBooleanAttribute(this.#$prevMonth, 'disabled', canGoPrevMonth(this.#uiDate, this.#minDate) === false)
+    updateBooleanAttribute(this.#$nextMonth, 'disabled', canGoNextMonth(this.#uiDate, this.#maxDate) === false)
+    updateBooleanAttribute(this.#$prevYear, 'disabled', canGoPrevYear(this.#uiDate, this.#minDate) === false)
+    updateBooleanAttribute(this.#$nextYear, 'disabled', canGoNextYear(this.#uiDate, this.#maxDate) === false)
 
-    this.#$date.textContent = `${this.#monthNames[this.#date.getMonth()]} ${this.#date.getFullYear()}`
+    this.#$date.textContent = `${this.#monthNames[this.#uiDate.getMonth()]} ${this.#uiDate.getFullYear()}`
 
-    this.#$days.forEach(($week, wi) => {
+    for (let wi = 0; wi < this.#$days.length; wi++) {
+      const $week = this.#$days[wi]
       let isEmptyWeek = true
 
-      $week.forEach(($day, di) => {
+      for (let di = 0; di < $week.length; di++) {
+        const $day = $week[di]
         const week = month[wi]
         const day = week?.[di]
 
         $day.classList.remove('selected')
+        $day.classList.remove('range')
         $day.classList.remove('today')
 
         if (day == null) {
@@ -398,7 +538,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
           $day.textContent = day.getDate().toString()
           $day.setAttribute('data-date', dayIso)
 
-          if (isDateBetween(day, this.#minDate!, this.#maxDate!)) {
+          if (isDateBetween(day, this.#minDate, this.#maxDate)) {
             $day.removeAttribute('disabled')
             $day.removeAttribute('aria-hidden')
           } else {
@@ -406,27 +546,34 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
             $day.setAttribute('aria-hidden', 'true')
           }
 
-          if (areDatesEqual(day, valueDate)) {
+          if (areDatesEqual(day, this.#date1) || areDatesEqual(day, this.#date2)) {
             $day.classList.add('selected')
           } else if (areDatesEqual(day, todayDate)) {
             $day.classList.add('today')
+          } else if (isDateBetween(day, this.#date1, this.#date2)) {
+            $day.classList.add('range')
           }
 
           isEmptyWeek = false
         }
-      })
+      }
 
       setClass(this.#$weeks[wi], 'empty', isEmptyWeek)
-    })
+    }
   }
 
-  #dispatchChangeEvent(value: string) {
-    this.dispatchEvent(
-      new CustomEvent('change', { detail: value, bubbles: true })
-    )
-    this.dispatchEvent(
-      new CustomEvent('-change', { detail: value })
-    )
+  #subscribeRangeHover() {
+    if (!this.#isHoverSubscribed) {
+      this.#$month.addEventListener('mouseover', this.#onDateMouseEnter)
+      this.#isHoverSubscribed = true
+    }
+  }
+
+  #unsubscribeRangeHover() {
+    if (this.#isHoverSubscribed) {
+      this.#$month.removeEventListener('mouseover', this.#onDateMouseEnter)
+      this.#isHoverSubscribed = false
+    }
   }
 
   #onChangeReactHandler = (e: Event) => {

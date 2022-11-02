@@ -10,6 +10,8 @@ export type TSinchDatePickerElement = HTMLElement & {
   max: string,
   /** BCP 47 language tag (e.g. en-US), which changes day and month display names in the calendar */
   locale: string,
+  /** Date range mode */
+  range: boolean,
   /** Label that is used for a11y */
   prevYearAriaLabel: string,
   /** Label that is used for a11y */
@@ -33,6 +35,8 @@ export type TSinchDatePickerElement = HTMLElement & {
   setAttribute(name: 'max', value: string): void,
   /** BCP 47 language tag (e.g. en-US), which changes day and month display names in the calendar */
   setAttribute(name: 'locale', value: string): void,
+  /** Date range mode */
+  setAttribute(name: 'range', value: ''): void,
   /** Label that is used for a11y */
   setAttribute(name: 'prev-year-aria-label', value: string): void,
   /** Label that is used for a11y */
@@ -52,6 +56,8 @@ export type TSinchDatePickerReact = TSinchElementReact<TSinchDatePickerElement> 
   max: string,
   /** BCP 47 language tag (e.g. en-US), which changes day and month display names in the calendar */
   locale: string,
+  /** Date range mode */
+  range?: boolean,
   /** Label that is used for a11y */
   'aria-label': string,
   /** Label that is used for a11y */
