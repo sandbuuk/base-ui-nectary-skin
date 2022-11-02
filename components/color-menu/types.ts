@@ -1,6 +1,6 @@
 import type { TRect, TSinchElementReact } from '../types'
 
-export type TSinchSelectMenuElement = HTMLElement & {
+export type TSinchColorMenuElement = HTMLElement & {
   /** Value */
   value: string,
   /** How many rows to show and scroll the rest */
@@ -22,7 +22,7 @@ export type TSinchSelectMenuElement = HTMLElement & {
   setAttribute(name: 'cols', value: string): void,
 }
 
-export type TSinchSelectMenuReact = TSinchElementReact<TSinchSelectMenuElement> & {
+export type TSinchColorMenuReact = TSinchElementReact<TSinchColorMenuElement> & {
   /** Value */
   value: string,
   /** How many rows to show and scroll the rest */

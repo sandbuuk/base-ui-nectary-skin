@@ -17,6 +17,7 @@ import { DateInput } from './components/DateInput'
 import { DatePicker } from './components/DatePicker'
 import { Dialog } from './components/Dialog'
 import { DialogExample } from './components/DialogExample'
+import { EmojiPicker } from './components/EmojiPicker'
 import { Field } from './components/Field'
 import { FileDrop } from './components/FileDrop'
 import { FilePicker } from './components/FilePicker'
@@ -172,6 +173,12 @@ const mapElement = (url: URL) => {
     case '/dialog-example': {
       return (
         <DialogExample search={url.searchParams}/>
+      )
+    }
+
+    case '/emoji-picker': {
+      return (
+        <EmojiPicker search={url.searchParams}/>
       )
     }
 

@@ -1,64 +1,20 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const options = encodeURI(JSON.stringify([{
-  value: 1,
-  text: 'Option value 1',
-  icon: true,
-}, {
-  value: 2,
-  text: 'Option value 2',
-  disabled: true,
-  icon: true,
-}, {
-  value: 3,
-  text: 'Option value 3',
-}, {
-  value: 4,
-  text: 'Option value 4',
-}]))
-const singleOption = encodeURI(JSON.stringify([{
-  value: 1,
-  text: 'Option value 1',
-  icon: true,
-}]))
-const withOptions = `/tabs?options=${options}`
-const withSingleOption = `/tabs?options=${singleOption}`
-const narrowLabel = `/tabs?width=100&options=${singleOption}`
-const checkTabsWithOptions = makeAccessibilityTests(`/tabs?options=${options}`, 'sinch-tabs')
+const withOptions = '/tabs'
+const withSingleOption = '/tabs?example=single'
+const withIcons = '/tabs?example=icons'
+const withSingleIcon = '/tabs?example=single-icon'
+const withNarrow = '/tabs?width=100&example=single'
+const withWide = '/tabs?width=250&example=icons'
+const checkTabsWithOptions = makeAccessibilityTests('/tabs', 'sinch-tabs')
 
 test('accessibility', checkTabsWithOptions(async function* () {
   yield
 }))
 
 test('tabs screenshots', runScreenshotTests('sinch-tabs', [
-  {
-    name: 'narrow',
-    url: narrowLabel,
-    async *fn() {
-      yield { name: 'clip' }
-    },
-  },
-  {
-    name: 'mouse interaction',
-    url: withSingleOption,
-    async *fn({ $, page }) {
-      const rect = await getBB($)
-
-      await page.mouse.move(rect.x + 5, rect.y + 15)
-      yield { name: 'hover' }
-
-      await page.mouse.down()
-      yield { name: 'active' }
-
-      await page.mouse.up()
-      yield { name: 'hover_checked' }
-
-      await page.mouse.down()
-      yield { name: 'active_checked' }
-    },
-  },
   {
     name: 'value attribute',
     url: withOptions,
@@ -85,56 +41,141 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
   {
     name: 'value property',
     url: withOptions,
-    async *fn({ $eval }) {
+    async *fn({ $, $eval }) {
       await $eval((el) => {
         el.value = ''
       })
-      yield { name: 'option-empty' }
+      expect(await $.getAttribute('value')).toBe('')
 
       await $eval((el) => {
         el.value = '4'
       })
-      yield { name: 'option-4' }
+      expect(await $.getAttribute('value')).toBe('4')
 
       await $eval((el) => {
         el.value = '3'
       })
-      yield { name: 'option-3' }
+      expect(await $.getAttribute('value')).toBe('3')
 
       await $eval((el) => {
         el.value = '2'
       })
-      yield { name: 'option-disabled' }
+      expect(await $.getAttribute('value')).toBe('2')
 
       await $eval((el) => {
         el.value = '1'
       })
-      yield { name: 'option-1' }
+      expect(await $.getAttribute('value')).toBe('1')
 
       await $eval((el) => {
         el.value = 'missing'
       })
-      yield { name: 'option-missing' }
+      expect(await $.getAttribute('value')).toBe('missing')
+    },
+  },
+  {
+    name: 'mouse interaction',
+    url: withSingleOption,
+    async *fn({ $, page }) {
+      const rect = await centerBB($)
+
+      await page.mouse.move(rect.x, rect.y)
+      yield { name: 'hover' }
+
+      await page.mouse.click(rect.x, rect.y)
+      yield { name: 'active' }
+    },
+  },
+  {
+    name: 'focus mouse interaction',
+    url: withSingleOption,
+    async *fn({ $, page }) {
+      const rect = await centerBB($)
+
+      await page.keyboard.press('Tab')
+      await page.mouse.move(rect.x, rect.y)
+      yield { name: 'hover' }
+
+      await page.mouse.click(rect.x, rect.y)
+      yield { name: 'active' }
+    },
+  },
+  {
+    name: 'icon mouse interaction',
+    url: withSingleIcon,
+    async *fn({ $, page }) {
+      const rect = await centerBB($)
+
+      await page.mouse.move(rect.x, rect.y)
+      yield { name: 'hover' }
+
+      await page.mouse.click(rect.x, rect.y)
+      yield { name: 'active' }
+    },
+  },
+  {
+    name: 'icon focus mouse interaction',
+    url: withSingleIcon,
+    async *fn({ $, page }) {
+      const rect = await centerBB($)
+
+      await page.keyboard.press('Tab')
+      await page.mouse.move(rect.x, rect.y)
+      yield { name: 'hover' }
+
+      await page.mouse.click(rect.x, rect.y)
+      yield { name: 'active' }
     },
   },
   {
     name: 'keyboard',
-    url: withOptions,
+    url: withSingleOption,
     async *fn({ page }) {
       await page.keyboard.press('Tab')
       yield { name: '1-focus' }
 
-      await page.keyboard.press('ArrowDown', { delay: 100 })
-      await page.keyboard.press('ArrowDown', { delay: 100 })
-      yield { name: '2-down-down' }
+      await page.keyboard.press('Enter')
+      yield { name: '2-enter' }
+    },
+  },
+  {
+    name: 'icon keyboard',
+    url: withSingleIcon,
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
+      yield { name: '1-focus' }
 
-      await page.keyboard.press('ArrowRight', { delay: 100 })
-      await page.keyboard.press('ArrowRight', { delay: 100 })
-      yield { name: '3-right-right' }
+      await page.keyboard.press('Enter')
+      yield { name: '2-enter' }
+    },
+  },
+  {
+    name: 'multiple interactive',
+    url: withIcons,
+    async *fn({ page, $eval }) {
+      const pt = await centerBB(page.locator('sinch-tabs-icon-option').nth(3))
 
-      await page.keyboard.press('ArrowUp', { delay: 100 })
-      await page.keyboard.press('ArrowLeft', { delay: 100 })
-      yield { name: '4-up-left' }
+      await $eval((el) => {
+        el.value = '1'
+      })
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Tab')
+      await page.mouse.move(pt.x, pt.y)
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'narrow',
+    url: withNarrow,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'wide',
+    url: withWide,
+    async *fn() {
+      yield { name: 'shot' }
     },
   },
   {
@@ -163,6 +204,31 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
 
       // Click second item
       await $.locator('sinch-tabs-option').nth(2).click()
+
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-tabs-change', detail: '3' },
+      ])
+    },
+  },
+  {
+    name: 'icon native events',
+    url: withIcons,
+    async *fn({ $, page }) {
+      await subscribeToEvents(page, 'sinch-tabs-change')
+
+      // Click first item
+      await $.locator('sinch-tabs-icon-option').nth(0).click()
+
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-tabs-change', detail: '1' },
+      ])
+
+      // Click second item
+      await $.locator('sinch-tabs-icon-option').nth(2).click()
 
       expect(
         await getAllEvents(page)

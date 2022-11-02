@@ -2,16 +2,17 @@ import { isSinchActionMenuOption } from '../action-menu-option/utils'
 import {
   attrValueToPixels,
   defineCustomElement,
+  dispatchContextConnectEvent,
+  dispatchContextDisconnectEvent,
   getBooleanAttribute,
   getIntegerAttribute,
   NectaryElement,
   updateBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
-import { dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import templateHTML from './template.html'
 import type { TSinchActionMenuOptionElement } from '../action-menu-option/types'
-import type { TContextKeyboard, TContextVisibility } from '../utils/context'
+import type { TContextKeyboard, TContextVisibility } from '../utils'
 import type { TSinchActionMenuElement, TSinchActionMenuReact } from './types'
 
 const ITEM_HEIGHT = 40

@@ -1,0 +1,51 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { CompositionExample } from './examples/Composition.tsx?example'
+import {
+  ReactHandlersTable,
+  ElementEventsTable
+} from '@sinch-engage/nectary/emoji-picker/types.ts?api'
+
+# Emoji Picker
+
+Emoji Picker picks an emoji from a list generated using [Emojibase](https://emojibase.dev/) data.
+
+It's [Emoji v13.1](https://emojipedia.org/emoji-13.1/) compliant (for maximum compatibility) and renders [Twemoji](https://github.com/twitter/twemoji) (for cross-platform consistency) as a part of default Sinch theme.
+
+See [Emoji under the hood](https://tonsky.me/blog/emoji/) for more details.
+
+## Table of contents
+
+## Examples
+
+### Composition
+
+Emoji journey in, for example, an Agent chat can be described as:
+
+1. agent picks an emoji from an Emoji Picker, seeing it rendered in Twemoji style
+2. that emoji goes into Input value as *unicode character* (or [surrogate pairs](https://learn.microsoft.com/en-us/globalization/encoding/surrogate-pairs)) and renders there according to the agent's Operating System — Apple emojis, Microsoft emojis, ...
+3. that emoji goes to the consumer's end (again, as *unicode character*) and renders there according to the consumer's Operating System and/or Application — Apple emojis, WhatsApp emojis, Android emojis, Telegram emojis...
+
+This picker brings consistency only to the first step – all agents will see the same emojis regardless of their Operating Systes.
+
+Solving the second step is also possible, and we'll try to introduce that in future – all Nectary components should be able to render the same Twemoji in chats, paragraphs and input fields.
+
+Solving the (in)consistency issue during the third step is technically impossible.
+
+<Example Component={CompositionExample}/>
+
+## API
+
+### React
+
+#### Props
+
+#### Handlers
+
+<ReactHandlersTable/>
+
+### Element
+
+#### Events
+
+<ElementEventsTable/>

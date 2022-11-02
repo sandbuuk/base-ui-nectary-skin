@@ -12,8 +12,8 @@ import {
   setClass,
   rectOverlap,
 } from '../utils'
-import { TooltipState } from '../utils/animation'
 import templateHTML from './template.html'
+import { TooltipState } from './tooltip-state'
 import { assertOrientation, getPopOrientation, orientationValues } from './utils'
 import type { TSinchPopElement } from '../pop/types'
 import type { TRect } from '../types'
@@ -21,8 +21,8 @@ import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact
 
 const TIP_SIZE = 8
 const SHOW_DELAY = 1000
-const HIDE_DELAY = 100
-const ANIMATION_DURATION = 100
+const HIDE_DELAY = 0
+const ANIMATION_DURATION = 50
 
 const template = document.createElement('template')
 
@@ -39,6 +39,8 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   #tooltipState: TooltipState
   #animation: Animation | null = null
   #shouldReduceMotion = false
+  #isConnected = false
+  #isSubscribed = false
 
   constructor() {
     super()
@@ -59,25 +61,24 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
       showDelay: SHOW_DELAY,
       hideDelay: this.#shouldReduceMotion ? HIDE_DELAY + ANIMATION_DURATION : HIDE_DELAY,
       hideAnimationDuration: this.#shouldReduceMotion ? 0 : ANIMATION_DURATION,
-      onShow: this.#onShow,
-      onHideStart: this.#onHideStart,
-      onHideEnd: this.#onHideEnd,
+      onShow: this.#onStateShow,
+      onHideStart: this.#onStateHideStart,
+      onHideEnd: this.#onStateHideEnd,
     })
   }
 
   connectedCallback() {
+    this.#isConnected = true
     this.#controller = new AbortController()
 
-    const { signal } = this.#controller
+    const options: AddEventListenerOptions = {
+      signal: this.#controller.signal,
+    }
 
-    this.#$pop.addEventListener('-close', this.#onPopClose, { signal })
-    this.#$target.addEventListener('mousedown', this.#onMouseDown, { signal })
-    this.#$target.addEventListener('mouseenter', this.#onMouseEnter, { signal })
-    this.#$target.addEventListener('mouseleave', this.#onMouseLeave, { signal })
-    this.#$contentWrapper.addEventListener('mouseenter', this.#onMouseEnter, { signal })
-    this.#$contentWrapper.addEventListener('mouseleave', this.#onMouseLeave, { signal })
+    this.#$pop.addEventListener('-close', this.#onPopClose, options)
 
     updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
+    this.#updateText()
   }
 
   disconnectedCallback() {
@@ -124,7 +125,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.#$tooltipText.textContent = newVal
+        this.#updateText()
 
         break
       }
@@ -145,23 +146,33 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
 
   #onMouseDown = () => {
     this.#tooltipState.interrupt()
+    this.#unsubscribeScroll()
   }
 
   #onPopClose = () => {
     this.#tooltipState.destroy()
+    this.#unsubscribeScroll()
   }
 
   #onMouseEnter = () => {
     this.#tooltipState.show()
+    this.#subscribeScroll()
+    this.#subscribeMouseLeaveEvents()
   }
 
   #onMouseLeave = (e: MouseEvent) => {
     if (!this.#isOpen() || (e.relatedTarget !== this.#$contentWrapper && e.relatedTarget !== this.#$target)) {
       this.#tooltipState.hide()
+      this.#unsubscribeScroll()
     }
   }
 
-  #onShow = () => {
+  #onScroll = () => {
+    this.#tooltipState.destroy()
+    this.#unsubscribeScroll()
+  }
+
+  #onStateShow = () => {
     updateBooleanAttribute(this.#$pop, 'open', true)
     requestAnimationFrame(this.#updateTipOrientation)
 
@@ -179,15 +190,16 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     }
   }
 
-  #onHideStart = () => {
+  #onStateHideStart = () => {
     this.#animation!.updatePlaybackRate(-1)
     this.#animation!.play()
   }
 
-  #onHideEnd = () => {
+  #onStateHideEnd = () => {
     this.#animation!.finish()
     this.#resetTipOrientation()
     updateBooleanAttribute(this.#$pop, 'open', false)
+    this.#unsubscribeMouseLeaveEvents()
   }
 
   #resetTipOrientation() {
@@ -221,6 +233,69 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     }
 
     setClass(this.#$tip, 'hidden', rectOverlap(targetRect, contentRect))
+  }
+
+  #updateText() {
+    if (!this.#isConnected) {
+      return
+    }
+
+    const value = this.text
+
+    this.#$tooltipText.textContent = value
+
+    if (value.length === 0) {
+      if (this.#isSubscribed) {
+        this.#tooltipState.destroy()
+        this.#unsubscribeMouseEnterEvent()
+        this.#unsubscribeMouseLeaveEvents()
+      }
+
+      return
+    }
+
+    this.#subscribeMouseEnterEvent()
+  }
+
+  #subscribeMouseEnterEvent() {
+    if (!this.#isConnected || this.#isSubscribed) {
+      return
+    }
+
+    this.#$target.addEventListener('mouseenter', this.#onMouseEnter, {
+      signal: this.#controller!.signal,
+    })
+
+    this.#isSubscribed = true
+  }
+
+  #unsubscribeMouseEnterEvent() {
+    this.#$target.removeEventListener('mouseenter', this.#onMouseEnter)
+    this.#isSubscribed = false
+  }
+
+  #subscribeMouseLeaveEvents() {
+    const options: AddEventListenerOptions = { signal: this.#controller!.signal }
+
+    this.#$target.addEventListener('mousedown', this.#onMouseDown, options)
+    this.#$target.addEventListener('mouseleave', this.#onMouseLeave, options)
+    this.#$contentWrapper.addEventListener('mouseenter', this.#onMouseEnter, options)
+    this.#$contentWrapper.addEventListener('mouseleave', this.#onMouseLeave, options)
+  }
+
+  #unsubscribeMouseLeaveEvents() {
+    this.#$target.removeEventListener('mousedown', this.#onMouseDown)
+    this.#$target.removeEventListener('mouseleave', this.#onMouseLeave)
+    this.#$contentWrapper.removeEventListener('mouseenter', this.#onMouseEnter)
+    this.#$contentWrapper.removeEventListener('mouseleave', this.#onMouseLeave)
+  }
+
+  #subscribeScroll() {
+    window.addEventListener('wheel', this.#onScroll, true)
+  }
+
+  #unsubscribeScroll() {
+    window.removeEventListener('wheel', this.#onScroll, true)
   }
 
   #isOpen() {

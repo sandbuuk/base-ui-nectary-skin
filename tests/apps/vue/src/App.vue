@@ -17,6 +17,7 @@
     <ColorSwatch v-if="url.pathname === '/color-swatch'" :search="url.searchParams"/>
     <DatePicker v-if="url.pathname === '/date-picker'" :search="url.searchParams"/>
     <Dialog v-if="url.pathname === '/dialog'" :search="url.searchParams"/>
+    <EmojiPicker v-if="url.pathname === '/emoji-picker'" :search="url.searchParams"/>
     <Grid v-if="url.pathname === '/grid'" :search="url.searchParams"/>
     <HorizontalStepper v-if="url.pathname === '/horizontal-stepper'" :search="url.searchParams"/>
     <IconButton v-if="url.pathname === '/icon-button'" :search="url.searchParams"/>
@@ -73,6 +74,7 @@ import ColorSelect from './components/ColorSelect.vue'
 import ColorSwatch from './components/ColorSwatch.vue'
 import DatePicker from './components/DatePicker.vue'
 import Dialog from './components/Dialog.vue'
+import EmojiPicker from './components/EmojiPicker.vue'
 import Grid from './components/Grid.vue'
 import HorizontalStepper from './components/HorizontalStepper.vue'
 import IconButton from './components/IconButton.vue'
@@ -154,6 +156,7 @@ export default {
     ColorSwatch,
     DatePicker,
     Dialog,
+    EmojiPicker,
     Grid,
     HorizontalStepper,
     IconButton,

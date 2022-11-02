@@ -1,68 +1,79 @@
 <style>
 :host {
   display: block;
-  outline: none;
-}
-
-:host() > * {
-  pointer-events: none;
-}
-
-#wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
-  position: relative;
-  width: 100%;
-  height: 42px;
-  padding: 8px 20px;
-  box-sizing: border-box;
-  box-shadow: 0 1px 0 0 var(--sinch-color-stormy-100);
-  color: var(--sinch-color-stormy-500);
-  background-color: var(--sinch-color-snow-100);
-
-  --sinch-color-icon: var(--sinch-color-stormy-500);
-  --sinch-size-icon: 16px;
-}
-
-#content {
-  font: var(--sinch-font-title-s);
-  flex-shrink: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-:host([checked]:not([checked="false"])) #wrapper {
-  box-shadow: 0 2px 0 0 var(--sinch-color-stormy-500);
 }
 
 #button {
   all: initial;
-  position: absolute;
-  left: 0;
-  top: 0;
-  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
-  height: 100%;
+  padding: 12px 16px;
+  box-sizing: border-box;
   cursor: pointer;
+  border-top-left-radius: var(--sinch-shape-radius-l);
+  border-top-right-radius: var(--sinch-shape-radius-l);
+  height: 40px;
+  color: var(--sinch-color-stormy-300);
+
+  --sinch-color-icon: var(--sinch-color-stormy-300);
+  --sinch-size-icon: 16px;
+}
+
+#button:hover {
+  background-color: var(--sinch-color-tropical-100);
+}
+
+#button:focus-visible::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  bottom: -3px;
+  border: 2px solid var(--sinch-color-border-focus);
+  border-top-left-radius: var(--sinch-shape-radius-l);
+  border-top-right-radius: var(--sinch-shape-radius-l);
+  pointer-events: none;
+}
+
+:host([data-checked]) #button {
+  color: var(--sinch-color-tropical-500);
+
+  --sinch-color-icon: var(--sinch-color-tropical-500);
+}
+
+:host([data-checked]) #button::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: -1px;
+  pointer-events: none;
+  border-top: 2px solid var(--sinch-color-tropical-500);
 }
 
 #button:disabled {
   cursor: unset;
+  pointer-events: none;
+  color: var(--sinch-color-border-default);
+
+  --sinch-color-icon: var(--sinch-color-border-default);
 }
 
-:host([disabled]:not([disabled="false"])) #wrapper {
-  color: var(--sinch-color-stormy-100);
-
-  --sinch-color-icon: var(--sinch-color-stormy-100);
+#text {
+  flex-shrink: 1;
+  flex-basis: auto;
+  min-width: 0;
 }
 
+::slotted(*) {
+  display: block;
+}
 </style>
 
-<div id="wrapper">
+<button id="button">
   <slot name="icon"></slot>
-  <label for="input" id="content"></label>
-  <button id="button" type="radio"/>
-</div>
+  <sinch-text id="text" type="m" ellipsis></sinch-text>
+</button>

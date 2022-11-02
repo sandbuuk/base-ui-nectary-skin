@@ -1,0 +1,68 @@
+<style>
+:host {
+  display: block;
+  outline: none;
+}
+
+#button {
+  all: initial;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-top-left-radius: var(--sinch-shape-radius-l);
+  border-top-right-radius: var(--sinch-shape-radius-l);
+  height: 40px;
+
+  --sinch-color-icon: var(--sinch-color-stormy-300);
+  --sinch-size-icon: 16px;
+}
+
+#button:hover {
+  background-color: var(--sinch-color-tropical-100);
+}
+
+#button:focus-visible::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  bottom: -3px;
+  border: 2px solid var(--sinch-color-border-focus);
+  border-top-left-radius: var(--sinch-shape-radius-l);
+  border-top-right-radius: var(--sinch-shape-radius-l);
+  pointer-events: none;
+}
+
+:host([data-checked]) #button {
+  --sinch-color-icon: var(--sinch-color-tropical-500);
+}
+
+:host([data-checked]) #button::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: -1px;
+  pointer-events: none;
+  border-top: 2px solid var(--sinch-color-tropical-500);
+}
+
+#button:disabled {
+  cursor: unset;
+  pointer-events: none;
+
+  --sinch-color-icon: var(--sinch-color-border-default);
+}
+
+::slotted(*) {
+  display: block;
+}
+</style>
+
+<sinch-tooltip id="tooltip" inverted>
+  <button id="button">
+    <slot name="icon"></slot>
+  </button>
+</sinch-tooltip>

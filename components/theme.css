@@ -10,6 +10,8 @@
 @import "theme/chip.css";
 @import "theme/color-swatch.css";
 @import "theme/tag.css";
+@import "theme/emoji.css";
+@import "theme/icon.css";
 
 :root,
 :host {

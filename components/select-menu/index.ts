@@ -1,6 +1,8 @@
 import {
   attrValueToPixels,
   defineCustomElement,
+  dispatchContextConnectEvent,
+  dispatchContextDisconnectEvent,
   getAttribute,
   getBooleanAttribute,
   getCsvSet,
@@ -15,10 +17,9 @@ import {
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
-import { dispatchContextConnectEvent, dispatchContextDisconnectEvent } from '../utils/context'
 import templateHTML from './template.html'
 import type { TSinchSelectMenuOptionElement } from '../select-menu-option/types'
-import type { TContextKeyboard, TContextVisibility } from '../utils/context'
+import type { TContextKeyboard, TContextVisibility } from '../utils'
 import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
 
 type TSelectMenuOption = TSinchSelectMenuOptionElement

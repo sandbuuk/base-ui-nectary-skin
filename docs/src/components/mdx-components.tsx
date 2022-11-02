@@ -102,6 +102,13 @@ export const mdxComponents: MDXComponents = {
       </ul>
     )
   },
+  ol: ({ children }) => {
+    return (
+      <ol className="list">
+        {children}
+      </ol>
+    )
+  },
   li: ({ children }) => {
     return (
       <li className="list-item">
