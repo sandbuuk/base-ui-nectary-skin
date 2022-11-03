@@ -31,5 +31,5 @@ export type TSinchFilePickerReact = TSinchElementReact<TSinchFilePickerElement> 
   /** Change value handler */
   'on-change': (e: CustomEvent<File[]>) => void,
   /** Invalid handler */
-  'on-invalid'?: (e: CustomEvent<TSinchFilePickerInvalidType>) => void,
+  'on-invalid': (e: CustomEvent<TSinchFilePickerInvalidType>) => void,
 }

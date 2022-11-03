@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { TSinchFileDropInvalidType } from '@sinch-engage/nectary/file-drop/types'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/file-drop'
@@ -25,6 +26,9 @@ export const CompositionExample: FC = () => {
   const onChange = (e: CustomEvent<File[]>) => {
     setFiles(e.detail)
   }
+  const onInvalid = (e: CustomEvent<TSinchFileDropInvalidType>) => {
+    console.log(e.detail)
+  }
 
   return (
     <div style={wrapperStyles}>
@@ -38,6 +42,7 @@ export const CompositionExample: FC = () => {
           placeholder="Drag and drop to upload or"
           multiple
           on-change={onChange}
+          on-invalid={onInvalid}
         >
           <sinch-button
             type="cta-secondary"

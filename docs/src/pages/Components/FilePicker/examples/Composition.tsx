@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { TSinchFilePickerInvalidType } from '@sinch-engage/nectary/file-picker/types'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/file-picker'
@@ -25,6 +26,9 @@ export const CompositionExample: FC = () => {
   const onChange = (e: CustomEvent<File[]>) => {
     setFiles(e.detail)
   }
+  const onInvalid = (e: CustomEvent<TSinchFilePickerInvalidType>) => {
+    console.log(e.detail)
+  }
 
   return (
     <div style={wrapperStyles}>
@@ -33,7 +37,12 @@ export const CompositionExample: FC = () => {
         additionalText="Additonal text"
         optionalText="Optional text"
       >
-        <sinch-file-picker slot="input" multiple on-change={onChange}>
+        <sinch-file-picker
+          slot="input"
+          multiple
+          on-change={onChange}
+          on-invalid={onInvalid}
+        >
           <sinch-button
             type="cta-secondary"
             text="Choose files"
