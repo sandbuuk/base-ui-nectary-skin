@@ -1,3 +1,8 @@
+## v0.44.0 (2022-11-03)
+
+* ➕ add `range` attribute to `sinch-date-picker`
+* 🐞 require `on-invalid` handler in `sinch-file-drop` and `sinch-file-picker`
+
 ## v0.43.0 (2022-11-02)
 
 * ➕ add `sinch-emoji-picker` component
