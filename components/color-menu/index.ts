@@ -10,7 +10,7 @@ import {
   dispatchContextDisconnectEvent,
   getAttribute,
   getBooleanAttribute,
-  getCsvSet,
+  unpackCsv,
   getIntegerAttribute,
   getReactEventHandler,
   getRect,
@@ -176,7 +176,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
 
     this.#prevColorsValue = colorsValue
 
-    const colorNames = getCsvSet(colorsValue ?? `${lightColorNames},${vibrantColorNames},${darkColorNames}`)
+    const colorNames = unpackCsv(colorsValue ?? `${lightColorNames},${vibrantColorNames},${darkColorNames}`)
     const fragment = document.createDocumentFragment()
 
     for (const color of colorNames) {

@@ -47,7 +47,7 @@ export type TSinchFileDropReact = TSinchElementReact<TSinchFileDropElement> & {
   /** Placeholder */
   placeholder: string,
   /** Change value handler */
-  'on-change'?: (e: CustomEvent<File[]>) => void,
+  'on-change': (e: CustomEvent<File[]>) => void,
   /** Invalid handler */
-  'on-invalid'?: (e: CustomEvent<TSinchFileDropInvalidType>) => void,
+  'on-invalid': (e: CustomEvent<TSinchFileDropInvalidType>) => void,
 }

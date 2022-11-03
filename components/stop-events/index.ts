@@ -1,4 +1,4 @@
-import { defineCustomElement, getCsvSet } from '../utils'
+import { defineCustomElement, unpackCsv } from '../utils'
 
 defineCustomElement('sinch-stop-events', class extends HTMLElement {
   constructor() {
@@ -7,7 +7,7 @@ defineCustomElement('sinch-stop-events', class extends HTMLElement {
   }
 
   connectedCallback() {
-    const events = getCsvSet(this.getAttribute('events')!)
+    const events = unpackCsv(this.getAttribute('events')!)
 
     for (const event of events) {
       this.addEventListener(event, this.#stopEvent)
@@ -15,7 +15,7 @@ defineCustomElement('sinch-stop-events', class extends HTMLElement {
   }
 
   disconnectedCallback() {
-    const events = getCsvSet(this.getAttribute('events')!)
+    const events = unpackCsv(this.getAttribute('events')!)
 
     for (const event of events) {
       this.removeEventListener(event, this.#stopEvent)

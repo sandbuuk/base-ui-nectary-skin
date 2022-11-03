@@ -3,6 +3,7 @@
     :locale="locale"
     :min="min"
     :max="max"
+    :range="isRange"
     :value="value"
     @--change="onChange"
   ></sinch-date-picker>
@@ -14,10 +15,8 @@ import '@sinch-engage/nectary/date-picker'
 export default {
   methods: {
     onChange(e) {
-      if (this.isControlled) {
-        this.value = e.detail
-        window.dispatchEvent(new CustomEvent('sinch-date-picker-change', {detail: e.detail}))
-      }
+      this.value = e.detail
+      window.dispatchEvent(new CustomEvent('sinch-date-picker-change', {detail: e.detail}))
     }
   },
   props: {
@@ -33,9 +32,9 @@ export default {
     max() {
       return this.search.get('max')
     },
-    isControlled() {
-      return this.search.get('uncontrolled') === null
-    },
+    isRange() {
+      return this.search.get('range') !== null
+    }
   },
   data() {
     return {

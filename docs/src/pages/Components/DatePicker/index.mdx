@@ -1,6 +1,7 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
 import { CompositionExample } from './examples/Composition.tsx?example'
+import { RangeExample } from './examples/Range.tsx?example'
 import { LocaleExample } from './examples/Locale.tsx?example'
 import {
   ReactPropsTable,
@@ -25,6 +26,12 @@ The component does *not* provide an input field and does *not* do any input mask
 We'll implement a generic masking functionality for the input field  (like `pattern` attribute) later and then maybe wrap it all into `DateInput` complete molecule.
 
 <Example Component={CompositionExample}/>
+
+### Range
+
+Range of dates where formatting and parsing a visual representation is delegated to a consumer side — Date Picker works with an ISO pair of dates in CSV format.
+
+<Example Component={RangeExample}/>
 
 ### Locale
 

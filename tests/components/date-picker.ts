@@ -1,12 +1,13 @@
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const minMaxLocale = `locale=en&min=2021-05-05&max=2023-05-05`
 const valueMinMaxLocale = `value=2022-06-06&${minMaxLocale}`
 
 const shot = `/date-picker?${minMaxLocale}`
 const withValue = `/date-picker?${valueMinMaxLocale}`
+const withRange = `/date-picker?${valueMinMaxLocale}&range=true`
 const checkValue = makeAccessibilityTests(`/date-picker?${valueMinMaxLocale}`, 'sinch-date-picker')
 
 test('accessibility', checkValue(async function* () {
@@ -25,11 +26,11 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
   {
     name: 'min property',
     url: withValue,
-    async *fn({ $eval }) {
+    async *fn({ $eval, $ }) {
       await $eval((el) => {
         el.min = '2022-07-07'
       })
-      yield { name: 'clamp' }
+      expect(await $.getAttribute('min')).toBe('2022-07-07')
     },
   },
   {
@@ -43,11 +44,11 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
   {
     name: 'max property',
     url: withValue,
-    async *fn({ $eval }) {
+    async *fn({ $eval, $ }) {
       await $eval((el) => {
         el.max = '2022-05-05'
       })
-      yield { name: 'clamp' }
+      expect(await $.getAttribute('max')).toBe('2022-05-05')
     },
   },
   {
@@ -61,11 +62,11 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
   {
     name: 'locale property',
     url: withValue,
-    async *fn({ $eval }) {
+    async *fn({ $eval, $ }) {
       await $eval((el) => {
         el.locale = 'ru'
       })
-      yield { name: 'ru' }
+      expect(await $.getAttribute('locale')).toBe('ru')
     },
   },
   {
@@ -87,11 +88,25 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
   {
     name: 'value property',
     url: shot,
-    async *fn({ $eval }) {
+    async *fn({ $eval, $ }) {
       await $eval((el) => {
         el.value = '2022-07-07'
       })
-      yield { name: 'updated' }
+      expect(await $.getAttribute('value')).toBe('2022-07-07')
+    },
+  },
+  {
+    name: 'range property',
+    url: shot,
+    async *fn({ $eval, $ }) {
+      await $eval((el) => {
+        el.range = true
+      })
+      expect(await $.getAttribute('range')).toBe('')
+      await $eval((el) => {
+        el.range = false
+      })
+      expect(await $.getAttribute('range')).toBe(null)
     },
   },
   {
@@ -134,6 +149,43 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
 
       await page.mouse.down()
       yield { name: 'active checked' }
+    },
+  },
+  {
+    name: 'range mouse interaction',
+    url: withRange,
+    async *fn({ $eval, page }) {
+      let bb = centerRect(await $eval((el) => el.nthButtonRect(6)))
+
+      await page.mouse.click(bb.x, bb.y)
+      yield { name: '1-select-first-date' }
+
+      bb = centerRect(await $eval((el) => el.nextMonthButtonRect))
+      await page.mouse.click(bb.x, bb.y)
+
+      bb = centerRect(await $eval((el) => el.nthButtonRect(10)))
+      await page.mouse.move(bb.x, bb.y)
+      yield { name: '2-hover-second-date' }
+
+      bb = centerRect(await $eval((el) => el.nthButtonRect(20)))
+      await page.mouse.click(bb.x, bb.y)
+      yield { name: '3-select-second-date' }
+
+      bb = centerRect(await $eval((el) => el.prevMonthButtonRect))
+      await page.mouse.click(bb.x, bb.y)
+
+      yield { name: '4-switch-prev-month' }
+
+      bb = centerRect(await $eval((el) => el.nthButtonRect(10)))
+      await page.mouse.click(bb.x, bb.y)
+      yield { name: '5-select-first-date' }
+
+      bb = centerRect(await $eval((el) => el.prevMonthButtonRect))
+      await page.mouse.click(bb.x, bb.y)
+
+      bb = centerRect(await $eval((el) => el.nthButtonRect(10)))
+      await page.mouse.click(bb.x, bb.y)
+      yield { name: '6-select-second-date' }
     },
   },
   {

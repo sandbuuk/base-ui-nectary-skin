@@ -44,16 +44,16 @@ export const getCalendarMonth = (date: Date, options?: TCalendarOptions): TMaybe
   return month
 }
 
-export const today = (): Date => {
-  return new Date()
-}
-
 export const dateToIso = (date: Date): string => {
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
 }
 
 export const isoToDate = (value: string): Date => {
   return new Date(`${value.substring(0, 10)}T00:00:00`)
+}
+
+export const today = (): Date => {
+  return isoToDate(dateToIso(new Date()))
 }
 
 export const getDayNames = (locale: string): string[] => {
@@ -112,7 +112,7 @@ export const assertDate: TAssertDate = (value, attrName, attrValue) => {
   }
 }
 
-const compareDates = (a: Date, b: Date): number => {
+export const compareDates = (a: Date, b: Date): number => {
   return a.getTime() - b.getTime()
 }
 
@@ -174,10 +174,30 @@ export const canGoPrevYear = (date: Date, min: Date): boolean => {
   return compareDates(prevYear, min) >= 0
 }
 
-export const isDateBetween = (date: Date, min: Date, max: Date): boolean => {
+export const isDateBetween = (date: Date, min: Date | null, max: Date | null): boolean => {
+  if (min === null || max === null) {
+    return false
+  }
+
   return compareDates(date, min) >= 0 && compareDates(max, date) >= 0
 }
 
-export const areDatesEqual = (a: Date, b: Date): boolean => {
+export const areDatesEqual = (a: Date, b: Date | null): boolean => {
+  if (b === null) {
+    return false
+  }
+
   return compareDates(a, b) === 0
+}
+
+export const cloneDate = (date: Date): Date => {
+  return new Date(date.getTime())
+}
+
+export const sortDates = (dateTuple: [Date, Date]): [Date, Date] => {
+  if (compareDates(dateTuple[0], dateTuple[1]) > 0) {
+    return [dateTuple[1], dateTuple[0]]
+  }
+
+  return dateTuple
 }

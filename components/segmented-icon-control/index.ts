@@ -2,7 +2,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getCsvSet,
+  unpackCsv,
   getFirstCsvValue,
   getReactEventHandler,
   NectaryElement,
@@ -104,10 +104,10 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
 
   #onValueChange(csv: string) {
     if (this.multiple) {
-      const values = getCsvSet(csv)
+      const values = unpackCsv(csv)
 
       for (const $option of this.#$slot.assignedElements()) {
-        const isChecked = !getBooleanAttribute($option, 'disabled') && values.has(getAttribute($option, 'value', ''))
+        const isChecked = !getBooleanAttribute($option, 'disabled') && values.includes(getAttribute($option, 'value', ''))
 
         updateBooleanAttribute($option, 'data-checked', isChecked)
       }
