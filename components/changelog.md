@@ -1,3 +1,7 @@
+## v0.44.1 (2022-11-15)
+
+* 🐞 fix missing `data.json` in `sinch-emoji-picker`
+
 ## v0.44.0 (2022-11-03)
 
 * ➕ add `range` attribute to `sinch-date-picker`
