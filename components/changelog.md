@@ -1,3 +1,7 @@
+## v0.45.1 (2022-11-21)
+
+* 🐞 fix tip orientation in `sinch-popover`
+
 ## v0.45.0 (2022-11-21)
 
 * 💥 use new DM Sans and DM Mono fonts
