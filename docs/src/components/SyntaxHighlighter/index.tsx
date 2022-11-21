@@ -15,12 +15,13 @@ const style: Record<string, CSSProperties> = {
   ...ghcolors,
   'code[class*="language-"]': {
     ...ghcolors['"code[class*="language-"]"'],
-    fontFamily: 'monospace',
+    font: 'var(--sinch-font-mono-text-s)',
+    fontSize: 14,
+    lineHeight: '22px',
   },
   'pre[class*="language-"]': {
     ...ghcolors['pre[class*="language-"]'],
-    fontFamily: 'monospace',
-    fontSize: 14,
+    font: 'var(--sinch-font-mono-text-s)',
   },
 }
 

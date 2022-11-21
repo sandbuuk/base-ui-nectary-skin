@@ -9,7 +9,7 @@ export const OrientationExample: FC = () => {
         text="Hover me"
         aria-label="Hover me"
         type="cta-secondary"
-        small
+        size="s"
         on-click={() => {}}
       />
     </sinch-tooltip>

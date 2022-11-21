@@ -4,7 +4,7 @@
 }
 
 #app-sidebar {
-  width: 200px;
+  width: 220px;
   box-sizing: border-box;
   padding: 12px 0;
   border-right: 1px solid var(--sinch-color-snow-600);
@@ -85,7 +85,7 @@
 }
 
 .table {
-  font: var(--sinch-font-text-s);
+  font: var(--sinch-font-text-m);
   width: 100%;
   margin-block: 16px;
 }
@@ -99,7 +99,7 @@ sinch-table-head-cell:nth-child(2) {
 }
 
 .code-inline {
-  font-family: monospace;
+  font: var(--sinch-font-mono-text-s);
   background-color: #EFF6F6;
 
   /* outline: 1px solid var(--sinch-color-tropical-500); */

@@ -17,7 +17,7 @@ export const MultipleExample: FC = () => {
         type="cta-secondary"
         text="Choose files"
         aria-label="Choose files to upload"
-        small
+        size="s"
       />
     </sinch-file-picker>
   )

@@ -48,7 +48,7 @@ export const CompositionExample: FC = () => {
             type="cta-secondary"
             text="Choose files"
             aria-label="Choose files to upload"
-            small
+            size="s"
           />
         </sinch-file-drop>
       </sinch-field>
@@ -63,7 +63,7 @@ export const CompositionExample: FC = () => {
               <sinch-icon-button
                 slot="action"
                 aria-label="Close"
-                small
+                size="s"
                 on-click={() => {}}
               >
                 <sinch-icon-close slot="icon"/>

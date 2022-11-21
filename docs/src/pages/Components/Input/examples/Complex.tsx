@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import type { FC } from 'react'
+import type { FC, CSSProperties } from 'react'
 import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/icons/search'
-import '@sinch-engage/nectary/icons/close'
+
+const fieldStyles: CSSProperties = {
+  width: 300,
+}
 
 export const ComplexExample: FC = () => {
   const [state, setState] = useState('')
@@ -13,19 +15,13 @@ export const ComplexExample: FC = () => {
     <sinch-input
       aria-label="Input"
       placeholder="Placeholder"
+      style={fieldStyles}
       value={state}
       on-change={(e) => setState(e.detail)}
     >
       <sinch-icon-search slot="icon"/>
-      <sinch-tag slot="right" text="Tag"/>
-      <sinch-icon-button
-        slot="right"
-        aria-label="Clear search"
-        small
-        on-click={() => console.log('click')}
-      >
-        <sinch-icon-close slot="icon"/>
-      </sinch-icon-button>
+      <sinch-tag slot="right" text="Tag 1" color="light-orange"/>
+      <sinch-tag slot="right" text="Tag 2" color="light-green"/>
     </sinch-input>
   )
 }

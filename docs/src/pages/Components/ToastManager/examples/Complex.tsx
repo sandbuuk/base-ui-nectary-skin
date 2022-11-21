@@ -47,7 +47,7 @@ export const ComplexExample: FC = () => {
         type="cta-primary"
         text="Show"
         aria-label="Show toast"
-        small
+        size="s"
         on-click={onClick}
       />
       <sinch-toast-manager>
@@ -63,7 +63,7 @@ export const ComplexExample: FC = () => {
               <sinch-icon-button
                 slot="close"
                 aria-label="Close"
-                small
+                size="s"
                 on-click={onClose(id)}
               >
                 <sinch-icon-close slot="icon"/>

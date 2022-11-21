@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { FC } from 'react'
+import type { FC, CSSProperties } from 'react'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/select-menu'
@@ -9,6 +9,10 @@ import '@sinch-engage/nectary/icons/smartphone'
 import '@sinch-engage/nectary/icons/tablet'
 import '@sinch-engage/nectary/icons/watch'
 
+const menuStyles: CSSProperties = {
+  width: 250,
+}
+
 export const SimpleExample: FC = () => {
   const [value, setValue] = useState('Smartphone')
   const onChange = (e: CustomEvent<string>) => setValue(e.detail)
@@ -17,6 +21,7 @@ export const SimpleExample: FC = () => {
     <sinch-select-menu
       slot="content"
       aria-label="Action menu"
+      style={menuStyles}
       value={value}
       on-change={onChange}
     >

@@ -16,7 +16,7 @@ export const SuccessExample: FC = () => (
       <sinch-icon-button
         slot="action"
         aria-label="Delete file"
-        small
+        size="s"
         on-click={() => {}}
       >
         <sinch-icon-delete-outline slot="icon"/>
@@ -26,7 +26,7 @@ export const SuccessExample: FC = () => (
       <sinch-icon-button
         slot="action"
         aria-label="Delete file"
-        small
+        size="s"
         disabled
         on-click={() => {}}
       >

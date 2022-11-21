@@ -11,13 +11,13 @@ export const ActionExample: FC = () => (
       text="Action"
       type="cta-secondary"
       aria-label="Action button"
-      small
+      size="s"
       on-click={() => console.log('action')}
     />
     <sinch-icon-button
       slot="close"
       aria-label="Close"
-      small
+      size="s"
       on-click={() => console.log('close')}
     >
       <sinch-icon-close slot="icon"/>

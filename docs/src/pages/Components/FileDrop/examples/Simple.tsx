@@ -21,7 +21,7 @@ export const SimpleExample: FC = () => {
         type="cta-secondary"
         text="Choose files"
         aria-label="Choose files to upload"
-        small
+        size="s"
       />
     </sinch-file-drop>
   )

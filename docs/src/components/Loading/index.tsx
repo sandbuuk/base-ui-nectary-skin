@@ -4,6 +4,6 @@ import './styles.css'
 
 export const Loading: FC = () => (
   <div className="loading">
-    <sinch-spinner type="large"/>
+    <sinch-spinner size="l"/>
   </div>
 )

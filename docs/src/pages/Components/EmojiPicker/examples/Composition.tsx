@@ -52,7 +52,7 @@ export const CompositionExample: FC = () => {
         >
           <sinch-icon-button
             slot="right"
-            small
+            size="s"
             aria-label="Open Time Picker"
             on-click={onOpen}
           >

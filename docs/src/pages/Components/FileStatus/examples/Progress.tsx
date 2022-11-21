@@ -17,7 +17,7 @@ export const ProgressExample: FC = () => (
     <sinch-icon-button
       slot="action"
       aria-label="Cancel file uploading"
-      small
+      size="s"
       on-click={() => {}}
     >
       <sinch-icon-close slot="icon"/>

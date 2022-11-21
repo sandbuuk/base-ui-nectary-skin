@@ -21,7 +21,7 @@ export const HiddenExample: FC = () => {
         text="Toggle badge"
         aria-label="Toggle badge button"
         type="cta-secondary"
-        small
+        size="s"
         on-click={onToggle}
       />
       <sinch-badge

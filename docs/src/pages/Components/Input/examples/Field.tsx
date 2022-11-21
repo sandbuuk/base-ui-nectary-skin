@@ -1,8 +1,12 @@
 import { useState } from 'react'
-import type { FC } from 'react'
+import type { FC, CSSProperties } from 'react'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/input'
+
+const fieldStyles: CSSProperties = {
+  width: 300,
+}
 
 export const FieldExample: FC = () => {
   const [state, setState] = useState('')
@@ -13,6 +17,7 @@ export const FieldExample: FC = () => {
       additionalText="Additional text"
       optionalText="Optional text"
       invalidText="Invalid text"
+      style={fieldStyles}
     >
       <sinch-help-tooltip slot="tooltip" text="Tooltip text"/>
       <sinch-input

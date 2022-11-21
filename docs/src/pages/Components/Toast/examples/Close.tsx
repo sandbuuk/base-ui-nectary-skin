@@ -8,7 +8,7 @@ export const CloseExample: FC = () => (
     <sinch-icon-button
       slot="close"
       aria-label="Close"
-      small
+      size="s"
       on-click={() => console.log('close')}
     >
       <sinch-icon-close slot="icon"/>

@@ -11,6 +11,7 @@
   user-select: none;
 }
 
-.navigation-link:hover {
+.navigation-link:hover,
+.navigation-link.active {
   background-color: var(--sinch-color-snow-500);
 }
