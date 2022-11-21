@@ -1,18 +1,15 @@
-const throttle = (delayFn: (cb: (...args: any[]) => void) => any, cancelFn: (id: any) => void) =>
-  (cb: (...args: any[]) => void) => {
+const createThrottle = (delayFn: (cb: () => void) => any, cancelFn: (id: any) => void) =>
+  (cb: () => void) => {
     let id: any = null
-    let fnArgs: any[]
 
     const delayCallback = () => {
       id = null
 
-      cb(fnArgs)
+      cb()
     }
 
     return {
-      fn: (...args: any[]) => {
-        fnArgs = args
-
+      fn: () => {
         if (id === null) {
           id = delayFn(delayCallback)
         }
@@ -25,4 +22,4 @@ const throttle = (delayFn: (cb: (...args: any[]) => void) => any, cancelFn: (id:
     }
   }
 
-export const throttleAnimationFrame = throttle(global.requestAnimationFrame, global.cancelAnimationFrame)
+export const throttleAnimationFrame = createThrottle(global.requestAnimationFrame, global.cancelAnimationFrame)
