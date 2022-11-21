@@ -1,0 +1,9 @@
+:root,
+:host {
+  /* --sinch-sizes: "l-m-s-xs"; */
+  --sinch-size-l: 48px;
+  --sinch-size-m: 40px;
+  --sinch-size-s: 32px;
+  --sinch-size-xs: 24px;
+  --sinch-size: var(--sinch-size-m);
+}
