@@ -11,6 +11,7 @@
     "custom-property-no-missing-var-function": null,
     "declaration-block-no-redundant-longhand-properties": null,
     "color-function-notation": "legacy",
-    "alpha-value-notation": "number"
+    "alpha-value-notation": "number",
+    "block-no-empty": null
   }
 }
