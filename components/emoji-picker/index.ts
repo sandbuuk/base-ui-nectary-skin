@@ -407,7 +407,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     el.setAttribute('label', emoji.label)
 
     btn.setAttribute('aria-label', emoji.label)
-    btn.setAttribute('small', '')
+    btn.setAttribute('size', 's')
     btn.setAttribute('data-value', emoji.emoji)
     btn.appendChild(el)
 

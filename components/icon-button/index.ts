@@ -8,10 +8,13 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
+import { assertSizeEx, DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
 import type { TSinchTooltipElement } from '../tooltip/types'
 import type { TRect } from '../types'
 import type { TSinchIconButtonElement, TSinchIconButtonReact } from './types'
+import type { TContextSize } from '../utils'
+import type { TSinchSizeEx } from '../utils/size'
 
 const template = document.createElement('template')
 
@@ -21,6 +24,7 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   #$button: HTMLButtonElement
   #$tooltip: TSinchTooltipElement
   #controller: AbortController | null = null
+  #sizeContext: Context<'size'>
 
   constructor() {
     super()
@@ -31,6 +35,8 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
     this.#$button = shadowRoot.querySelector('#button')!
     this.#$tooltip = shadowRoot.querySelector('#tooltip')!
+
+    this.#sizeContext = new Context(this.#$button, 'size')
   }
 
   connectedCallback() {
@@ -47,6 +53,10 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
     this.addEventListener('-click', this.#onClickReactHandler, options)
     this.addEventListener('-focus', this.#onFocusReactHandler, options)
     this.addEventListener('-blur', this.#onBlurReactHandler, options)
+    subscribeContext(this, 'size', this.#onContextSize, this.#controller.signal)
+    this.#sizeContext.listen(this.#controller.signal)
+
+    this.#onSizeUpdate()
   }
 
   disconnectedCallback() {
@@ -73,6 +83,20 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
         break
       }
+      case 'size': {
+        updateAttribute(this, 'data-size', newVal)
+
+        break
+      }
+      case 'data-size': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertSizeEx(newVal, 'sinch-icon-button')
+        }
+
+        this.#onSizeUpdate()
+
+        break
+      }
     }
   }
 
@@ -84,12 +108,12 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set small(isSmall: boolean) {
-    updateBooleanAttribute(this, 'small', isSmall)
+  set size(size: TSinchSizeEx) {
+    updateLiteralAttribute(this, sizeExValues, 'size', size)
   }
 
-  get small() {
-    return getBooleanAttribute(this, 'small')
+  get size(): TSinchSizeEx {
+    return getLiteralAttribute(this, sizeExValues, 'size', DEFAULT_SIZE)
   }
 
   get tooltipRect(): TRect {
@@ -106,6 +130,38 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
   blur() {
     this.#$button.blur()
+  }
+
+  #onSizeUpdate() {
+    if (!this.isConnected) {
+      return
+    }
+
+    const size = getAttribute(this, 'data-size', DEFAULT_SIZE)
+
+    this.#sizeContext.dispatch(size)
+  }
+
+  #onContextSize = (e: CustomEvent<TContextSize>) => {
+    if (this.hasAttribute('size')) {
+      return
+    }
+
+    switch (e.detail) {
+      case 'l': {
+        this.setAttribute('data-size', 'm')
+
+        break
+      }
+      case 'm': {
+        this.setAttribute('data-size', 's')
+
+        break
+      }
+      default: {
+        this.setAttribute('data-size', 'xs')
+      }
+    }
   }
 
   #onButtonClick = () => {

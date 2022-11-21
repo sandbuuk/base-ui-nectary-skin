@@ -1,10 +1,12 @@
 import type { TRect, TSinchElementReact } from '../types'
+import type { TSinchSizeEx } from '../utils/size'
+
 
 export type TSinchIconButtonElement = HTMLElement & {
+  /** Size, `m` by default */
+  size: TSinchSizeEx,
   /** Disabled */
   disabled: boolean,
-  /** Small */
-  small: boolean,
   readonly tooltipRect: TRect,
   /** Click event */
   addEventListener(type: '-click', listener: (e: CustomEvent<void>) => void): void,
@@ -12,17 +14,17 @@ export type TSinchIconButtonElement = HTMLElement & {
   addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
   /** Blur event */
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
+  /** Size, `m` by default */
+  setAttribute(name: 'size', value: string): void,
   /** Disabled */
   setAttribute(name: 'disabled', value: ''): void,
-  /** Small */
-  setAttribute(name: 'small', value: ''): void,
 }
 
 export type TSinchIconButtonReact = TSinchElementReact<TSinchIconButtonElement> & {
+  /** Size, `m` by default */
+  size?: TSinchSizeEx,
   /** Disabled */
   disabled?: boolean,
-  /** Small */
-  small?: boolean,
   /** Label that is used for a11y */
   'aria-label': string,
   /** Click event handler */
