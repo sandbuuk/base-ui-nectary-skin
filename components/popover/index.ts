@@ -11,8 +11,7 @@ import {
   isAttrTrue,
   setClass,
   rectOverlap,
-  dispatchContextConnectEvent,
-  dispatchContextDisconnectEvent,
+  subscribeContext,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertOrientation, getPopOrientation, orientationValues } from './utils'
@@ -49,14 +48,12 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     this.addEventListener('-close', this.#onCloseReactHandler, { signal })
     this.#$pop.addEventListener('-close', this.#onPopClose, { signal })
-    this.#$content.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
 
-    dispatchContextConnectEvent(this.#$content, 'visibility')
+    subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
     updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
   }
 
   disconnectedCallback() {
-    dispatchContextDisconnectEvent(this.#$content, 'visibility')
     this.#controller!.abort()
   }
 
@@ -130,7 +127,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
           assertOrientation(newVal)
         }
 
-        updateAttribute(this.#$pop, 'orientation', getPopOrientation(newVal))
+        updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
 
         if (this.#isOpen()) {
           this.#updateTipOrientation()

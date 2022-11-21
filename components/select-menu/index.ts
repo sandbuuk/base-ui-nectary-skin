@@ -1,8 +1,6 @@
 import {
   attrValueToPixels,
   defineCustomElement,
-  dispatchContextConnectEvent,
-  dispatchContextDisconnectEvent,
   getAttribute,
   getBooleanAttribute,
   unpackCsv,
@@ -16,10 +14,11 @@ import {
   updateCsv,
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
+  subscribeContext,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchSelectMenuOptionElement } from '../select-menu-option/types'
-import type { TContextKeyboard, TContextVisibility } from '../utils'
+import type { TContextKeydown, TContextVisibility } from '../utils'
 import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
 
 type TSelectMenuOption = TSinchSelectMenuOptionElement
@@ -53,21 +52,19 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.setAttribute('role', 'listbox')
     this.setAttribute('tabindex', '0')
     this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
-    this.addEventListener('-keydown', this.#onContexKeydown as any, { signal })
     this.addEventListener('blur', this.#onListboxBlur, { signal })
     this.#$listbox.addEventListener('mousedown', this.#onListboxMousedown, { signal })
     this.#$listbox.addEventListener('click', this.#onListboxClick, { signal })
+    this.#$search.addEventListener('-change', this.#onSearchChange as any, { signal })
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange, { signal })
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
-    this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
-    dispatchContextConnectEvent(this, 'keydown')
-    dispatchContextConnectEvent(this, 'visibility')
+    subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
+    subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
   }
 
   disconnectedCallback() {
-    dispatchContextDisconnectEvent(this, 'keydown')
-    dispatchContextDisconnectEvent(this, 'visibility')
     this.#controller!.abort()
+    this.#searchDebounce.cancel()
   }
 
   static get observedAttributes() {
@@ -145,7 +142,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     }
   }
 
-  #onContexKeydown = (e: CustomEvent<TContextKeyboard>) => {
+  #onContextKeyDown = (e: CustomEvent<TContextKeydown>) => {
     this.#handleKeydown(e.detail)
   }
 
@@ -163,7 +160,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.#handleKeydown(e)
   }
 
-  #handleKeydown(e: TContextKeyboard) {
+  #handleKeydown(e: TContextKeydown) {
     switch (e.code) {
       case 'Space':
       case 'Enter': {

@@ -1,65 +1,105 @@
-export type TContextName = 'visibility' | 'keydown'
+export type TContextName = 'visibility' | 'keydown' | 'size'
 
-export type TContextKeyboard = {
+export type TContextKeydown = {
   code: string,
   preventDefault: () => void,
 }
 
 export type TContextVisibility = boolean
 
-export class Context {
+export type TContextSize = string
+
+type TContextDataType = {
+  visibility: TContextVisibility,
+  keydown: TContextKeydown,
+  size: TContextSize,
+}
+
+const contextNameToEventMap: Record<TContextName, string> = {
+  keydown: '-keydown',
+  visibility: '-visibility',
+  size: '-size',
+}
+
+const shouldPersistContextValue: Record<TContextName, boolean> = {
+  keydown: false,
+  visibility: true,
+  size: true,
+}
+
+export class Context<T extends TContextName> {
   #$root: Element
   #listeners = new Set<Element>()
-  #name: TContextName
-  #isSubscribed = false
-  constructor($element: Element, name: TContextName) {
+  #name: T
+  #isListening = false
+  #lastContextValue: TContextDataType[T] | null = null
+
+  constructor($element: Element, name: T) {
     this.#$root = $element
     this.#name = name
   }
 
-  get elements(): Iterable<Element> {
-    return this.#listeners
-  }
-
-  subscribe() {
-    if (this.#isSubscribed) {
+  listen(signal: AbortSignal) {
+    if (this.#isListening) {
       return
     }
 
-    this.#$root.addEventListener(`-context-connect-${this.#name}`, this.#onConnect as any)
-    this.#$root.addEventListener(`-context-disconnect-${this.#name}`, this.#onDisconnect as any)
-    this.#isSubscribed = true
+    this.#$root.addEventListener(`-context-connect-${this.#name}`, this.#onListenerConnect as any, { signal })
+    this.#$root.addEventListener(`-context-disconnect-${this.#name}`, this.#onListenerDisconnect as any, { signal })
+    this.#isListening = true
+
+    signal.addEventListener('abort', () => {
+      this.#listeners.clear()
+      this.#isListening = false
+      this.#lastContextValue = null
+    }, { once: true })
   }
 
-  unsubscribe() {
-    this.#listeners.clear()
-    this.#$root.removeEventListener(`-context-connect-${this.#name}`, this.#onConnect as any)
-    this.#$root.removeEventListener(`-context-disconnect-${this.#name}`, this.#onDisconnect as any)
-    this.#isSubscribed = false
+  dispatch(contextValue: TContextDataType[T]) {
+    for (const el of this.#listeners) {
+      el.dispatchEvent(
+        new CustomEvent(contextNameToEventMap[this.#name], { detail: contextValue })
+      )
+    }
+
+    if (shouldPersistContextValue[this.#name]) {
+      this.#lastContextValue = contextValue
+    }
   }
 
-  #onConnect = (e: CustomEvent<Element>) => {
+  #onListenerConnect = (e: CustomEvent<Element>) => {
     e.stopPropagation()
     this.#listeners.add(e.detail)
+
+    if (this.#lastContextValue !== null) {
+      e.detail.dispatchEvent(
+        new CustomEvent(contextNameToEventMap[this.#name], { detail: this.#lastContextValue })
+      )
+    }
   }
 
-  #onDisconnect = (e: CustomEvent<Element>) => {
+  #onListenerDisconnect = (e: CustomEvent<Element>) => {
     e.stopPropagation()
     this.#listeners.delete(e.detail)
   }
 }
 
-export const dispatchContextConnectEvent = (el: Element, name: TContextName) => {
+export const subscribeContext = <T extends TContextName>($el: Element, name: T, cb: (e: CustomEvent<TContextDataType[T]>) => void, signal: AbortSignal) => {
   // Safari calls connectedCallback for light-dom elements before elements embedded in shadow-dom
   requestAnimationFrame(() => {
-    el.dispatchEvent(
-      new CustomEvent(`-context-connect-${name}`, { bubbles: true, composed: true, detail: el })
+    // Connect listener
+    $el.dispatchEvent(
+      new CustomEvent(`-context-connect-${name}`, { bubbles: true, composed: true, detail: $el })
     )
   })
-}
 
-export const dispatchContextDisconnectEvent = (el: Element, name: TContextName) => {
-  el.dispatchEvent(
-    new CustomEvent(`-context-disconnect-${name}`, { bubbles: true, composed: true, detail: el })
-  )
+  // Listen to context events
+  $el.addEventListener(contextNameToEventMap[name], cb as any, { signal })
+
+  signal.addEventListener('abort', () => {
+    // Disconnect listener
+    $el.dispatchEvent(
+      new CustomEvent(`-context-disconnect-${name}`, { bubbles: true, composed: true, detail: $el })
+    )
+  }, { once: true })
 }

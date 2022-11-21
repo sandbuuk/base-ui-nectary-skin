@@ -6,8 +6,6 @@ import { lightColorNames, darkColorNames, vibrantColorNames } from '../theme/col
 import {
   attrValueToPixels,
   defineCustomElement,
-  dispatchContextConnectEvent,
-  dispatchContextDisconnectEvent,
   getAttribute,
   getBooleanAttribute,
   unpackCsv,
@@ -19,12 +17,13 @@ import {
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
+  subscribeContext,
 } from '../utils'
 import optionTemplateHTML from './option-template.html'
 import templateHTML from './template.html'
 import { getParentOption } from './utils'
 import type { TRect } from '../types'
-import type { TContextVisibility, TContextKeyboard } from '../utils'
+import type { TContextVisibility, TContextKeydown } from '../utils'
 import type { TSinchColorMenuElement, TSinchColorMenuReact } from './types'
 
 const NUM_COLS_DEFAULT = 5
@@ -61,13 +60,11 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     this.setAttribute('role', 'listbox')
     this.setAttribute('tabindex', '0')
     this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
-    this.addEventListener('-keydown', this.#onContexKeydown as any, { signal })
     this.addEventListener('blur', this.#onListboxBlur, { signal })
     this.#$listbox.addEventListener('click', this.#onListboxClick, { signal })
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
-    this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
-    dispatchContextConnectEvent(this, 'visibility')
-    dispatchContextConnectEvent(this, 'keydown')
+    subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
+    subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
 
     requestAnimationFrame(this.#onMount)
   }
@@ -76,8 +73,6 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     super.disconnectedCallback()
 
     this.#prevColorsValue = null
-    dispatchContextDisconnectEvent(this, 'visibility')
-    dispatchContextDisconnectEvent(this, 'keydown')
     this.#controller!.abort()
   }
 
@@ -268,7 +263,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     }
   }
 
-  #onContexKeydown = (e: CustomEvent<TContextKeyboard>) => {
+  #onContextKeyDown = (e: CustomEvent<TContextKeydown>) => {
     this.#handleKeydown(e.detail)
   }
 
@@ -276,7 +271,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     this.#handleKeydown(e)
   }
 
-  #handleKeydown(e: TContextKeyboard) {
+  #handleKeydown(e: TContextKeydown) {
     switch (e.code) {
       case 'Space':
       case 'Enter': {
