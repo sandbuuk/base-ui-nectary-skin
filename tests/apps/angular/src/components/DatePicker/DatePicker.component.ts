@@ -4,7 +4,7 @@ import '@sinch-engage/nectary/date-picker'
 @Component({
   selector: 'date-picker-component',
   templateUrl: './DatePicker.component.html',
-  styleUrls: ['./DatePicker.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class DatePickerComponent {

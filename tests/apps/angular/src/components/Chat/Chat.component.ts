@@ -7,7 +7,7 @@ import '@sinch-engage/nectary/avatar'
 @Component({
   selector: 'chat-component',
   templateUrl: './Chat.component.html',
-  styleUrls: ['./Chat.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ChatComponent {

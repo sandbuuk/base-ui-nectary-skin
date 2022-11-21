@@ -1,13 +1,13 @@
 import type { TRect, TSinchElementReact } from '../types'
+import type { TSinchSize } from '../utils/size'
 
-export type TSinchBadgeSize = 'l' | 'm' | 's'
 export type TSinchBadgeMode = 'square' | 'circle'
 
 export type TSinchBadgeElement = HTMLElement & {
   /** Text */
   text: string,
   /** Size */
-  size: TSinchBadgeSize,
+  size: TSinchSize,
   /** Mode, `square` by default */
   mode: TSinchBadgeMode,
   /** Color */
@@ -18,7 +18,7 @@ export type TSinchBadgeElement = HTMLElement & {
   /** Text */
   setAttribute(name: 'text', value: string): void,
   /** Size */
-  setAttribute(name: 'size', value: TSinchBadgeSize): void,
+  setAttribute(name: 'size', value: TSinchSize): void,
   /** Mode, `square` by default */
   setAttribute(name: 'mode', value: TSinchBadgeMode): void,
   /** Color */
@@ -31,7 +31,7 @@ export type TSinchBadgeReact = TSinchElementReact<TSinchBadgeElement> & {
   /** Text */
   text: string,
   /** Size */
-  size: TSinchBadgeSize,
+  size?: TSinchSize,
   /** Mode, `square` by default */
   mode?: TSinchBadgeMode,
   /** Color */

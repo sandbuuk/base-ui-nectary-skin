@@ -10,7 +10,7 @@
   >
     <sinch-button
       type="cta-secondary"
-      small
+      size="s"
       text="Choose files"
       aria-label="Choose files"
       :disabled="isDisabled"

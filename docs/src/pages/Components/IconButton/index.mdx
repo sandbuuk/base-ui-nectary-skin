@@ -1,7 +1,8 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
-import { SimpleExample } from './examples/Simple.tsx?example'
-import { SmallExample } from './examples/Small.tsx?example'
+import { TypePrimaryExample } from './examples/TypePrimary.tsx?example'
+import { TypeSecondaryExample } from './examples/TypeSecondary.tsx?example'
+import { TypeTertiaryExample } from './examples/TypeTertiary.tsx?example'
 import {
   ReactPropsTable,
   ReactHandlersTable,
@@ -18,13 +19,19 @@ Icon Button is a special button without text and with a built-in tooltip.
 
 ## Examples
 
-### Simple
+### Type
 
-<Example Component={SimpleExample}/>
+#### Primary
 
-### Small
+<Example Component={TypePrimaryExample}/>
 
-<Example Component={SmallExample}/>
+#### Secondary
+
+<Example Component={TypeSecondaryExample}/>
+
+#### Tertiary
+
+<Example Component={TypeTertiaryExample}/>
 
 ## API
 

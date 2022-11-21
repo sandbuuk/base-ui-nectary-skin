@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/badge'
 @Component({
   selector: 'avatar-component',
   templateUrl: './Avatar.component.html',
-  styleUrls: ['./Avatar.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class AvatarComponent {

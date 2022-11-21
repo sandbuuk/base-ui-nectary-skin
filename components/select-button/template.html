@@ -2,6 +2,29 @@
 :host {
   display: inline-block;
   vertical-align: middle;
+  outline: none;
+
+  --sinch-size: var(--sinch-size-m);
+  --sinch-size-icon: var(--sinch-select-button-icon-size-m);
+  --sinch-shape-radius: var(--sinch-shape-radius-m);
+}
+
+:host([data-size="l"]) {
+  --sinch-size: var(--sinch-size-l);
+  --sinch-size-icon: var(--sinch-select-button-icon-size-l);
+  --sinch-shape-radius: var(--sinch-shape-radius-l);
+}
+
+:host([data-size="m"]) {
+  --sinch-size: var(--sinch-size-m);
+  --sinch-size-icon: var(--sinch-select-button-icon-size-m);
+  --sinch-shape-radius: var(--sinch-shape-radius-m);
+}
+
+:host([data-size="s"]) {
+  --sinch-size: var(--sinch-size-s);
+  --sinch-size-icon: var(--sinch-select-button-icon-size-s);
+  --sinch-shape-radius: var(--sinch-shape-radius-s);
 }
 
 #wrapper {
@@ -12,13 +35,28 @@
   gap: 8px;
   box-sizing: border-box;
   width: 100%;
-  height: 48px;
-  padding: 0 12px;
-  background-color: var(--sinch-color-snow-100);
-  border-radius: var(--sinch-shape-radius-s);
+  height: var(--sinch-size);
+  padding: 0 8px 0 12px;
+  background-color: var(--sinch-color-bg-primary-light);
+  border-radius: var(--sinch-shape-radius);
 
-  --sinch-size-icon: 24px;
   --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+:host([disabled]:not([disabled="false"])) #wrapper {
+  --sinch-color-icon: var(--sinch-color-text-disabled);
+}
+
+:host([data-size="l"]) #wrapper {
+  padding: 0 12px;
+}
+
+:host([data-size="m"]) #wrapper {
+  padding: 0 8px 0 12px;
+}
+
+:host([data-size="s"]) #wrapper {
+  padding: 0 4px 0 12px;
 }
 
 #button {
@@ -30,9 +68,14 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  border-radius: var(--sinch-shape-radius-s);
-  border: 1px solid var(--sinch-color-stormy-200);
-  box-sizing: border-box;
+}
+
+#border {
+  position: absolute;
+  border: 1px solid var(--sinch-color-border-dark);
+  border-radius: var(--sinch-shape-radius);
+  inset: 0;
+  pointer-events: none;
 }
 
 #text {
@@ -49,37 +92,51 @@
 }
 
 #button:disabled {
-  border-color: var(--sinch-color-snow-500);
   cursor: initial;
 }
 
-#button:focus-visible {
-  border-color: var(--sinch-color-stormy-600);
+#button:disabled + #border {
+  border-color: var(--sinch-color-border-disabled);
 }
 
-@supports not selector(:focus-visible) {
-  #button:focus {
-    border-color: var(--sinch-color-stormy-600);
-  }
+#button:focus-visible + #border {
+  border-color: var(--sinch-color-border-focus);
+  border-width: 2px;
 }
 
-:host([invalid]) #button:enabled {
+:host([invalid]) #button:enabled + #border {
   border-color: var(--sinch-color-text-invalid);
 }
 
 #button:disabled ~ #text {
-  color: var(--sinch-color-stormy-100);
+  color: var(--sinch-color-text-disabled);
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-:host([disabled]) #wrapper {
-  --sinch-color-icon: var(--sinch-color-stormy-100);
+#left {
+  display: flex;
+  flex-direction: row;
+  align-self: stretch;
+  align-items: center;
+  gap: 4px;
+  margin-left: -4px;
+}
+
+#left.empty {
+  display: none;
+}
+
+#dropdown-icon {
+  margin-left: -4px;
 }
 </style>
 
 <div id="wrapper">
   <button id="button"></button>
+  <div id="border"></div>
+  <div id="left">
+    <slot name="left"></slot>
+  </div>
   <slot name="icon"></slot>
   <sinch-text id="text" type="m" ellipsis></sinch-text>
-  <sinch-icon-keyboard-arrow-down></sinch-icon-keyboard-arrow-down>
+  <sinch-icon-keyboard-arrow-down id="dropdown-icon"></sinch-icon-keyboard-arrow-down>
 </div>

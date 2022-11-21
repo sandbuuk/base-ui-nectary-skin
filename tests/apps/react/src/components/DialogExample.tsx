@@ -6,6 +6,7 @@ import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
+import '@sinch-engage/nectary/flag'
 
 type TDialog = {
   search: URLSearchParams,
@@ -75,8 +76,9 @@ export const DialogExample: FC<TDialog> = () => {
               on-focus={onInputFocus}
               on-blur={onInputBlur}
             >
+              <sinch-flag code="se" slot="icon"/>
               <sinch-button
-                small
+                size="s"
                 text="Ok"
                 aria-label="Ok"
                 type="primary"

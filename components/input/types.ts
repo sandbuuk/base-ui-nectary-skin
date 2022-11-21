@@ -1,4 +1,5 @@
 import type { TSinchElementReact } from '../types'
+import type { TSinchSize } from '../utils/size'
 import type { SyntheticEvent } from 'react'
 
 export type TSinchInputType = 'text' | 'password'
@@ -14,6 +15,8 @@ export type TSinchInputElement = HTMLElement & {
   invalid: boolean,
   /** Disabled */
   disabled: boolean,
+  /** Size, `m` by default */
+  size: TSinchSize,
   selectionStart: number | null,
   selectionEnd: number | null,
   selectionDirection: 'forward' | 'backward' | 'none' | null,
@@ -33,6 +36,8 @@ export type TSinchInputElement = HTMLElement & {
   setAttribute(name: 'invalid', value: ''): void,
   /** Disabled */
   setAttribute(name: 'disabled', value: ''): void,
+  /** Size, `m` by default */
+  setAttribute(name: 'size', value: TSinchSize): void,
 }
 
 export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
@@ -48,6 +53,8 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   invalid?: boolean,
   /** Disabled */
   disabled?: boolean,
+  /** Size, `m` by default */
+  size?: TSinchSize,
   /** @deprecated Change value handler */
   onChange?: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
   /** Change value handler */

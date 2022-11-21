@@ -10,10 +10,12 @@ import {
   updateBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
+import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertBadgeColor, assertMode, assertSize, getBadgeColorBg, getBadgeColorFg, modeValues, sizeValues } from './utils'
+import { assertBadgeColor, assertMode, getBadgeColorBg, getBadgeColorFg, modeValues } from './utils'
 import type { TRect } from '../types'
-import type { TSinchBadgeElement, TSinchBadgeMode, TSinchBadgeReact, TSinchBadgeSize } from './types'
+import type { TSinchSize } from '../utils/size'
+import type { TSinchBadgeElement, TSinchBadgeMode, TSinchBadgeReact } from './types'
 
 const template = document.createElement('template')
 
@@ -23,7 +25,7 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   #$badgeWrapper: HTMLElement
   #$badge: HTMLElement
   #$text: HTMLElement
-  #isConnected = false
+
   #observer: ResizeObserver
 
   constructor() {
@@ -41,14 +43,14 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#isConnected = true
+    super.connectedCallback()
     this.#updateColor()
     this.#observer.observe(this)
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.#observer.unobserve(this)
-    this.#isConnected = false
   }
 
   get text() {
@@ -60,10 +62,10 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   }
 
   get size() {
-    return getLiteralAttribute(this, sizeValues, 'size', 'm')
+    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
   }
 
-  set size(value: TSinchBadgeSize) {
+  set size(value: TSinchSize) {
     updateLiteralAttribute(this, sizeValues, 'size', value)
   }
 
@@ -115,7 +117,10 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
       }
 
       case 'size': {
-        assertSize(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertSize(newVal, 'sinch-badge')
+        }
+
         this.#updatePosition()
 
         break
@@ -143,7 +148,7 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   }
 
   #updateColor() {
-    if (!this.#isConnected) {
+    if (!this.isConnected) {
       return
     }
 

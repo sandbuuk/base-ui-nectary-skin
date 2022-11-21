@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { sizeValues, modeValues } from '@sinch-engage/nectary/badge/utils'
+import { modeValues } from '@sinch-engage/nectary/badge/utils'
+import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
@@ -12,13 +13,15 @@ const check = makeAccessibilityTests('/badge', 'sinch-badge')
 
 const getBadgeRect = (page: Page) => page.locator('sinch-badge').evaluate((el: TSinchBadgeElement) => el.badgeRect)
 
-test('accessibility', check(async function* () {
-  yield
+test('accessibility', check({
+  async *fn() {
+    yield
+  },
 }))
 
 test('badge screenshots', runScreenshotTests('sinch-badge', [
   {
-    name: 'size attribute',
+    name: 'size',
     url: shot,
     async *fn({ $eval, page }) {
       for (const val of sizeValues) {
@@ -27,22 +30,19 @@ test('badge screenshots', runScreenshotTests('sinch-badge', [
         }, val)
         yield { name: val, includeRects: [await getBadgeRect(page)] }
       }
+
+      /* Property */
+      const attrValue = await $eval((el) => {
+        el.size = 'l'
+
+        return el.getAttribute('size')
+      })
+
+      expect(attrValue).toBe('l')
     },
   },
   {
-    name: 'size property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      for (const val of sizeValues) {
-        await $eval((el, val) => {
-          el.size = val
-        }, val)
-        expect(await $.getAttribute('size')).toBe(val)
-      }
-    },
-  },
-  {
-    name: 'color attribute',
+    name: 'color',
     url: shot,
     async *fn({ $eval, page }) {
       for (const val of colorValues) {
@@ -51,23 +51,19 @@ test('badge screenshots', runScreenshotTests('sinch-badge', [
         }, val)
         yield { name: val === '' ? 'default' : val, includeRects: [await getBadgeRect(page)] }
       }
-    },
-  },
-  {
-    name: 'color property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      for (const val of colorValues) {
-        await $eval((el, val) => {
-          el.color = val
-        }, val)
 
-        expect(await $.getAttribute('color')).toBe(val)
-      }
+      /* Property */
+      const attrValue = await $eval((el) => {
+        el.color = 'yellow'
+
+        return el.getAttribute('color')
+      })
+
+      expect(attrValue).toBe('yellow')
     },
   },
   {
-    name: 'mode attribute',
+    name: 'mode',
     url: shot,
     async *fn({ $eval, page }) {
       for (const val of modeValues) {
@@ -76,28 +72,25 @@ test('badge screenshots', runScreenshotTests('sinch-badge', [
         }, val)
         yield { name: val, includeRects: [await getBadgeRect(page)] }
       }
+
+      /* Property */
+      const attrValue = await $eval((el) => {
+        el.mode = 'square'
+
+        return el.getAttribute('mode')
+      })
+
+      expect(attrValue).toBe('square')
     },
   },
   {
-    name: 'mode property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      for (const val of modeValues) {
-        await $eval((el, val) => {
-          el.mode = val
-        }, val)
-        expect(await $.getAttribute('mode')).toBe(val)
-      }
-    },
-  },
-  {
-    name: 'text attribute',
+    name: 'text',
     url: shot,
     async *fn({ $eval, page }) {
       await $eval((el) => {
         el.setAttribute('text', '0')
       })
-      yield { name: 'updated' }
+      yield { name: 'short' }
 
       await $eval((el) => {
         el.setAttribute('text', '444+')
@@ -106,41 +99,18 @@ test('badge screenshots', runScreenshotTests('sinch-badge', [
     },
   },
   {
-    name: 'text property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => {
-        el.text = '4'
-      })
-      expect(await $.getAttribute('text')).toBe('4')
-    },
-  },
-  {
-    name: 'hidden attribute',
+    name: 'hidden',
     url: shot,
     async *fn({ $eval, page }) {
       await $eval((el) => {
         el.setAttribute('hidden', '')
       })
       yield { name: 'set', includeRects: [await getBadgeRect(page)] }
+
       await $eval((el) => {
         el.removeAttribute('hidden')
       })
       yield { name: 'unset', includeRects: [await getBadgeRect(page)] }
-    },
-  },
-  {
-    name: 'hidden property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => {
-        el.hidden = true
-      })
-      expect(await $.getAttribute('hidden')).toBe('')
-      await $eval((el) => {
-        el.hidden = false
-      })
-      expect(await $.getAttribute('hidden')).toBe(null)
     },
   },
 ]))

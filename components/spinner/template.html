@@ -1,9 +1,4 @@
 <style>
-:host {
-  display: inline-block;
-  vertical-align: middle;
-}
-
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
@@ -14,35 +9,55 @@
   }
 }
 
-div {
+:host {
+  display: block;
+
+  --sinch-size-icon: var(--sinch-spinner-size-m);
+  --sinch-spinner-thickness: 3px;
+}
+
+:host([data-size="l"]) {
+  --sinch-size-icon: var(--sinch-spinner-size-l);
+  --sinch-spinner-thickness: 4px;
+}
+
+:host([data-size="m"]) {
+  --sinch-size-icon: var(--sinch-spinner-size-m);
+  --sinch-spinner-thickness: 3px;
+}
+
+:host([data-size="s"]) {
+  --sinch-size-icon: var(--sinch-spinner-size-s);
+  --sinch-spinner-thickness: 2px;
+}
+
+#wrapper {
+  position: relative;
+  height: var(--sinch-size-icon);
+  width: var(--sinch-size-icon);
+}
+
+#bg {
+  position: absolute;
+  inset: 1px;
+  border: solid var(--sinch-spinner-thickness) var(--sinch-color-icon);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+#fg {
+  position: absolute;
+  inset: 1px;
+  border: solid var(--sinch-spinner-thickness) transparent;
+  border-bottom-color: var(--sinch-color-icon);
+  border-radius: 50%;
+  will-change: transform;
   animation: 1.5s linear infinite spinner;
   animation-play-state: running;
-  border: solid 3px var(--sinch-color-spinner-bg, #D4DADD);
-  border-bottom-color: var(--sinch-color-spinner-fg, #0A273D);
-  border-radius: 50%;
-  height: 20px;
-  width: 20px;
-  box-sizing: border-box;
-  will-change: transform;
-  margin: 2px;
-}
-
-:host([type="large"]) div {
-  height: 48px;
-  width: 48px;
-  border-width: 4px;
-}
-
-:host([type="small"]) div {
-  height: 14px;
-  width: 14px;
-  border-width: 2px;
-  margin: 1px;
-}
-
-:host([static]:not([static="false"])) div {
-  animation-play-state: paused;
 }
 </style>
 
-<div></div>
+<div id="wrapper">
+  <div id="bg"></div>
+  <div id="fg"></div>
+</div>

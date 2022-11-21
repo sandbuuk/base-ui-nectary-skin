@@ -4,7 +4,7 @@ import '@sinch-engage/nectary/title'
 @Component({
   selector: 'title-component',
   templateUrl: './Title.component.html',
-  styleUrls: ['./Title.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class TitleComponent {

@@ -39,7 +39,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   #tooltipState: TooltipState
   #animation: Animation | null = null
   #shouldReduceMotion = false
-  #isConnected = false
+
   #isSubscribed = false
 
   constructor() {
@@ -68,7 +68,8 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#isConnected = true
+    super.connectedCallback()
+
     this.#controller = new AbortController()
 
     const options: AddEventListenerOptions = {
@@ -82,6 +83,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.#controller!.abort()
     this.#tooltipState.destroy()
   }
@@ -131,8 +133,11 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
       }
 
       case 'orientation': {
-        assertOrientation(newVal)
-        updateAttribute(this.#$pop, 'orientation', getPopOrientation(newVal))
+        if (process.env.NODE_ENV !== 'production') {
+          assertOrientation(newVal)
+        }
+
+        updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
 
         if (this.#isOpen()) {
           this.#resetTipOrientation()
@@ -236,7 +241,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   #updateText() {
-    if (!this.#isConnected) {
+    if (!this.isConnected) {
       return
     }
 
@@ -258,7 +263,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   #subscribeMouseEnterEvent() {
-    if (!this.#isConnected || this.#isSubscribed) {
+    if (!this.isConnected || this.#isSubscribed) {
       return
     }
 

@@ -7,6 +7,7 @@ export type TSinchSelectMenuOptionElement = HTMLElement & {
   text: string,
   /** Disabled state */
   disabled: boolean,
+  matchesSearch(value: string): boolean,
   /** Value */
   setAttribute(name: 'value', value: string): void,
   /** Display text */

@@ -1,15 +1,15 @@
 <template>
   <sinch-button
-    v-bind:type="type"
-    v-bind:text="text"
-    v-bind:disabled="isDisabled"
-    v-bind:small="isSmall"
+    :type="type"
+    :text="text"
+    :disabled="isDisabled"
+    :size="size"
     @--click="onClick"
     @--focus="onFocus"
     @--blur="onBlur">
+    <sinch-spinner v-if="hasSpinner" static :type="isSmall ? 'small' : 'medium'" slot="left-icon"></sinch-spinner>
     <sinch-icon-open-in-new v-if="hasLeftIcon" slot="left-icon"></sinch-icon-open-in-new>
     <sinch-icon-expand-more v-if="hasRightIcon" slot="right-icon"></sinch-icon-expand-more>
-    <sinch-spinner v-if="hasSpinner" static v-bind:type="isSmall ? 'small' : 'medium'" slot="left-icon"></sinch-spinner>
   </sinch-button>
 </template>
 
@@ -44,8 +44,8 @@ export default {
     isDisabled() {
       return this.search.get('disabled') !== null
     },
-    isSmall() {
-      return this.search.get('small') !== null
+    size() {
+      return this.search.get('size') !== null
     },
     hasLeftIcon() {
       return this.search.get('icon-left') !== null
@@ -59,4 +59,3 @@ export default {
   }
 }
 </script>
-

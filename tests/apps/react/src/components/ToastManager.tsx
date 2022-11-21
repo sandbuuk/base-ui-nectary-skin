@@ -52,7 +52,7 @@ export const ToastManager: FC<TToastManager> = () => {
           {(i + 1) % 3 !== 0 && (
             <sinch-icon-button
               slot="close"
-              small
+              size="s"
               aria-label="Close"
               on-click={onClose(t)}
             >
@@ -63,7 +63,7 @@ export const ToastManager: FC<TToastManager> = () => {
             <sinch-button
               slot="action"
               type="cta-secondary"
-              small
+              size="s"
               text="Undo"
               aria-label="Undo"
               on-click={onAction}

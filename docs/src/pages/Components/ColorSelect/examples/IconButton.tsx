@@ -26,7 +26,7 @@ export const IconButtonExample: FC = () => {
       <sinch-icon-button
         slot="target"
         aria-label="Open color select"
-        small
+        size="s"
         on-click={onOpen}
       >
         <sinch-color-swatch slot="icon" name={value}/>

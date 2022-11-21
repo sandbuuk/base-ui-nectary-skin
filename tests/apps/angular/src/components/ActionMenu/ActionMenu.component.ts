@@ -12,7 +12,7 @@ type TMenuValue = {
 @Component({
   selector: 'action-menu-component',
   templateUrl: './ActionMenu.component.html',
-  styleUrls: ['./ActionMenu.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ActionMenuComponent {

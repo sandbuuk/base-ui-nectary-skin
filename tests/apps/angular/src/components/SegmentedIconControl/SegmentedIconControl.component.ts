@@ -9,7 +9,7 @@ import '@sinch-engage/nectary/icons/format-align-justify'
 @Component({
   selector: 'segmented-icon-control-component',
   templateUrl: './SegmentedIconControl.component.html',
-  styleUrls: ['./SegmentedIconControl.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class SegmentedIconControlComponent {

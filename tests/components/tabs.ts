@@ -10,13 +10,15 @@ const withNarrow = '/tabs?width=100&example=single'
 const withWide = '/tabs?width=250&example=icons'
 const checkTabsWithOptions = makeAccessibilityTests('/tabs', 'sinch-tabs')
 
-test('accessibility', checkTabsWithOptions(async function* () {
-  yield
+test('accessibility', checkTabsWithOptions({
+  async *fn() {
+    yield
+  },
 }))
 
 test('tabs screenshots', runScreenshotTests('sinch-tabs', [
   {
-    name: 'value attribute',
+    name: 'value',
     url: withOptions,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', ''))
@@ -36,41 +38,6 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
 
       await $eval((el) => el.setAttribute('value', 'missing'))
       yield { name: 'option-missing' }
-    },
-  },
-  {
-    name: 'value property',
-    url: withOptions,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.value = ''
-      })
-      expect(await $.getAttribute('value')).toBe('')
-
-      await $eval((el) => {
-        el.value = '4'
-      })
-      expect(await $.getAttribute('value')).toBe('4')
-
-      await $eval((el) => {
-        el.value = '3'
-      })
-      expect(await $.getAttribute('value')).toBe('3')
-
-      await $eval((el) => {
-        el.value = '2'
-      })
-      expect(await $.getAttribute('value')).toBe('2')
-
-      await $eval((el) => {
-        el.value = '1'
-      })
-      expect(await $.getAttribute('value')).toBe('1')
-
-      await $eval((el) => {
-        el.value = 'missing'
-      })
-      expect(await $.getAttribute('value')).toBe('missing')
     },
   },
   {

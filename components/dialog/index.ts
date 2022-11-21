@@ -2,7 +2,6 @@ import '../icon-button'
 import '../icons/close'
 import '../stop-events'
 import '../title'
-import dialogPolyfill from 'dialog-polyfill'
 import {
   defineCustomElement,
   getAttribute,
@@ -25,7 +24,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   #$dialog: HTMLDialogElement
   #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
-  #isConnected = false
+
   #prevOverflowValue: string = ''
 
   constructor() {
@@ -37,17 +36,15 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.#$dialog = shadowRoot.querySelector('dialog')!
     this.#$closeButton = shadowRoot.querySelector('#close')!
     this.#$caption = shadowRoot.querySelector('#caption')!
-
-    dialogPolyfill.registerDialog(this.#$dialog)
   }
 
   connectedCallback() {
+    super.connectedCallback()
     this.setAttribute('role', 'dialog')
     this.#$closeButton.addEventListener('click', this.#onCloseClick)
     this.#$dialog.addEventListener('mousedown', this.#onBackdropClick)
     this.#$dialog.addEventListener('cancel', this.#onCancel)
     this.addEventListener('-close', this.#onCloseReactHandler)
-    this.#isConnected = true
 
     // React updates attributes BEFORE connecting to the DOM
     // Angular updates attributes AFTER connecting to the DOM
@@ -55,13 +52,13 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.#$closeButton.removeEventListener('click', this.#onCloseClick)
     this.#$dialog.removeEventListener('mousedown', this.#onBackdropClick)
     this.#$dialog.removeEventListener('cancel', this.#onCancel)
     this.removeEventListener('-close', this.#onCloseReactHandler)
 
     this.#setOpen(false)
-    this.#isConnected = false
   }
 
   static get observedAttributes() {
@@ -135,7 +132,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
   #setOpen(shouldOpen: boolean) {
     if (shouldOpen) {
-      if (this.#isConnected && !getBooleanAttribute(this.#$dialog, 'open')) {
+      if (this.isConnected && !getBooleanAttribute(this.#$dialog, 'open')) {
         this.#prevOverflowValue = document.body.style.overflow
         document.body.style.overflow = 'hidden'
         this.#$dialog.showModal()

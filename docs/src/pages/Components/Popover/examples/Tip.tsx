@@ -42,7 +42,7 @@ export const TipExample: FC = () => {
           text="Got it"
           aria-label="Close popover"
           type="cta-secondary"
-          small
+          size="s"
           on-click={onClose}
         />
       </div>

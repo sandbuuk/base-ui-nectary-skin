@@ -1,35 +1,39 @@
 <sinch-popover
-  [attr.open]="isOpen"
-  orientation="bottom"
   modal
+  orientation="bottom"
+  [attr.open]="isOpen"
+  aria-label="Popover"
   (-close)="onClose()"
 >
   <sinch-field
     slot="target"
     label="Select"
     [attr.disabled]="isDisabled"
-    [attr.invalidtext]="isInvalid ? 'Invalid option selected' : ''">
+    [attr.invalidtext]="isInvalid ? 'Invalid option selected' : ''"
+  >
     <sinch-select-button
       slot="input"
       placeholder="Select option"
+      [attr.size]="size"
       [attr.text]="options[value] != null ? options[value].text : ''"
       [attr.disabled]="isDisabled"
       [attr.invalid]="isInvalid"
       (-click)="onClick()"
       (-focus)="onFocus()"
       (-blur)="onBlur()">
+      <sinch-tag *ngIf="hasLeft" slot="left" text="tag"></sinch-tag>
+      <sinch-icon-search *ngIf="hasIcon" slot="icon"></sinch-icon-search>
       <sinch-icon-open-in-new *ngIf="options[value] != null && options[value].icon === '1'" slot="icon"></sinch-icon-open-in-new>
-      <sinch-icon-keyboard-arrow-down slot="right"></sinch-icon-keyboard-arrow-down>
     </sinch-select-button>
-    </sinch-field>
+  </sinch-field>
   <sinch-select-menu
     slot="content"
     [attr.rows]="rows"
-    [value]="value"
+    [attr.value]="value"
     (-change)="onChange($event)">
     <sinch-select-menu-option
       *ngFor="let opt of options | keyvalue"
-      [value]="opt.key"
+      [attr.value]="opt.key"
       [attr.text]="opt.value.text"
       [attr.disabled]="opt.value.isDisabled"
     >

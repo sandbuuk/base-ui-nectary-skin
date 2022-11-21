@@ -1,12 +1,12 @@
 :root,
 :host {
-  --sinch-font-family: "Gilroy", "Arial", "sans-serif";
-  --sinch-font-weight-emphasized: 600;
-  --sinch-font-title-xl: 600 40px/48px var(--sinch-font-family);
-  --sinch-font-title-l: 600 24px/32px var(--sinch-font-family);
-  --sinch-font-title-m: 600 20px/24px var(--sinch-font-family);
-  --sinch-font-title-s: 600 16px/24px var(--sinch-font-family);
-  --sinch-font-title-xs: 600 14px/22px var(--sinch-font-family);
+  --sinch-font-family: "DM Sans", "Arial", "sans-serif";
+  --sinch-font-weight-emphasized: 700;
+  --sinch-font-title-xl: 400 40px/48px var(--sinch-font-family);
+  --sinch-font-title-l: 500 24px/32px var(--sinch-font-family);
+  --sinch-font-title-m: 500 20px/24px var(--sinch-font-family);
+  --sinch-font-title-s: 500 16px/24px var(--sinch-font-family);
+  --sinch-font-title-xs: 500 14px/22px var(--sinch-font-family);
   --sinch-font-text-m: 400 16px/24px var(--sinch-font-family);
   --sinch-font-text-s: 400 14px/22px var(--sinch-font-family);
   --sinch-font-text-xs: 400 12px/20px var(--sinch-font-family);

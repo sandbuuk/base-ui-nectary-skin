@@ -30,7 +30,8 @@
   padding: 12px 8px;
   font: var(--sinch-font-title-s);
   color: var(--sinch-color-text-default);
-  fill: var(--sinch-color-stormy-500);
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
 }
 
 #button > * {
@@ -40,7 +41,8 @@
 #button:disabled {
   cursor: initial;
   color: var(--sinch-color-stormy-100);
-  fill: var(--sinch-color-stormy-100);
+
+  --sinch-color-icon: var(--sinch-color-stormy-100);
 }
 
 #button::before {
@@ -84,7 +86,7 @@
   flex-shrink: 1;
   min-height: 0;
   padding: 0 8px 18px;
-  font: var(--sinch-font-body);
+  font: var(--sinch-font-text-m);
   color: var(--sinch-color-text-default);
 }
 
@@ -101,7 +103,7 @@
 }
 
 #optional {
-  font: var(--sinch-font-small-text);
+  font: var(--sinch-font-text-s);
   color: var(--sinch-color-stormy-300);
 }
 </style>

@@ -41,7 +41,7 @@ export const Toast: FC<TToast> = ({ search }) => {
       {hasClose && (
         <sinch-icon-button
           slot="close"
-          small
+          size="s"
           aria-label="close"
           on-click={onCloseClick}
           on-focus={onCloseFocus}
@@ -54,7 +54,7 @@ export const Toast: FC<TToast> = ({ search }) => {
         <sinch-button
           slot="action"
           type="cta-secondary"
-          small
+          size="s"
           text="Retry"
           aria-label="Retry"
           on-click={onButtonClick}

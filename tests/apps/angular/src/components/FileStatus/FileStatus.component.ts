@@ -8,7 +8,7 @@ import '@sinch-engage/nectary/icons/close'
 @Component({
   selector: 'file-status-component',
   templateUrl: './FileStatus.component.html',
-  styleUrls: ['./FileStatus.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class FileStatusComponent {

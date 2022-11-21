@@ -1,38 +1,5 @@
 [
   {
-    "family": "Gilroy",
-    "weight": 400,
-    "style": "normal",
-    "display": "swap",
-    "src": {
-      "local": "Gilroy-Regular",
-      "woff2": "https://d2vu40klajma73.cloudfront.net/Gilroy-Regular.woff2",
-      "woff": "https://d2vu40klajma73.cloudfront.net/Gilroy-Regular.woff"
-    }
-  },
-  {
-    "family": "Gilroy",
-    "weight": 600,
-    "style": "normal",
-    "display": "swap",
-    "src": {
-      "local": "Gilroy-SemiBold",
-      "woff2": "https://d2vu40klajma73.cloudfront.net/Gilroy-SemiBold.woff2",
-      "woff": "https://d2vu40klajma73.cloudfront.net/Gilroy-SemiBold.woff"
-    }
-  },
-  {
-    "family": "Gilroy",
-    "weight": 700,
-    "style": "normal",
-    "display": "swap",
-    "src": {
-      "local": "Gilroy-Bold",
-      "woff2": "https://d2vu40klajma73.cloudfront.net/Gilroy-Bold.woff2",
-      "woff": "https://d2vu40klajma73.cloudfront.net/Gilroy-Bold.woff"
-    }
-  },
-  {
     "family": "DM Sans",
     "weight": 400,
     "style": "normal",

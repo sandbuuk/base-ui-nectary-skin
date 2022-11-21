@@ -88,7 +88,7 @@ const config: PlaywrightTestConfig = {
   maxFailures: process.env.CI != null ? 1 : 0,
   expect: {
     toMatchSnapshot: {
-      threshold: 0.02,
+      threshold: 0.05,
     },
   },
   reporter: 'list',

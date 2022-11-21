@@ -31,6 +31,7 @@ import { FileStatusComponent } from '../components/FileStatus/FileStatus.compone
 import { LinkComponent } from '../components/Link/Link.component'
 import { ListComponent } from '../components/List/List.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
+import { PhoneCodeMenuComponent } from '../components/PhoneCodeMenu/PhoneCodeMenu.component'
 import { PopoverComponent } from '../components/Popover/Popover.component'
 import { ProgressComponent } from '../components/Progress/Progress.component'
 import { RadioComponent } from '../components/Radio/Radio.component'
@@ -88,6 +89,7 @@ import { AppComponent } from './app.component'
     LinkComponent,
     ListComponent,
     PaginationComponent,
+    PhoneCodeMenuComponent,
     PopoverComponent,
     ProgressComponent,
     RadioComponent,

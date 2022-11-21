@@ -1,9 +1,10 @@
 <template>
   <sinch-popover
-    orientation="bottom"
     :open="isOpen"
+    orientation="bottom"
+    aria-label="Search"
     @--close="onClose"
-    aria-label="Search">
+  >
     <sinch-field slot="target" label="Label">
       <sinch-input
         slot="input"
@@ -14,13 +15,6 @@
         @--focus="onFocus"
         @--blur="onBlur">
         <sinch-icon-search slot="icon"></sinch-icon-search>
-        <sinch-icon-button
-          slot="right"
-          small
-          aria-label="Clear search"
-          @--click="onClear">
-          <sinch-icon-close slot="icon"></sinch-icon-close>
-        </sinch-icon-button>
       </sinch-input>
     </sinch-field>
     <sinch-action-menu slot="content" aria-label="Search autocomplete">
@@ -57,10 +51,6 @@ export default {
     onBlur() {
       window.dispatchEvent(new CustomEvent('sinch-search-blur'))
     },
-    onClear() {
-      this.value = ''
-      this.isOpen = false
-    },
     onClose() {
       this.isOpen = false
     },
@@ -88,4 +78,3 @@ export default {
   }
 }
 </script>
-

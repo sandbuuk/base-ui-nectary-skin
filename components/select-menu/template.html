@@ -7,8 +7,43 @@
 #listbox {
   overflow-y: auto;
 }
+
+#search {
+  display: none;
+  margin: 10px;
+}
+
+#search.active {
+  display: block;
+}
+
+#not-found {
+  display: none;
+  width: 100%;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  color: var(--sinch-color-text-muted);
+  pointer-events: none;
+  user-select: none;
+}
+
+#not-found.active {
+  display: flex;
+}
+
+::slotted(.hidden) {
+  display: none;
+}
 </style>
 
+<sinch-input id="search" size="s" placeholder="Search">
+  <sinch-icon-search slot="icon"></sinch-icon-search>
+</sinch-input>
+<div id="not-found">
+  <sinch-text type="m">No results</sinch-text>
+</div>
 <div id="listbox" role="presentation">
   <slot></slot>
 </div>

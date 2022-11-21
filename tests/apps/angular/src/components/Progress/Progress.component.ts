@@ -4,7 +4,7 @@ import '@sinch-engage/nectary/progress'
 @Component({
   selector: 'progress-component',
   templateUrl: './Progress.component.html',
-  styleUrls: ['./Progress.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ProgressComponent {

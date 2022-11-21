@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
@@ -12,13 +13,27 @@ const checkSelectWithEverything = makeAccessibilityTests('/select?width=200&plac
 
 const menuRect = (page: Page) => getBB(page.locator('sinch-select-menu'))
 
-test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
-  yield
-  await $.click()
-  yield
+test('accessibility', checkSelectWithEverything({
+  async *fn({ $ }) {
+    yield
+    await $.click()
+    yield
+  },
 }))
 
 test('select screenshots', runScreenshotTests('sinch-popover', [
+  {
+    name: 'size',
+    url: shot,
+    async *fn({ page }) {
+      for (const value of sizeValues) {
+        await page
+          .locator('sinch-select-button')
+          .evaluate((el, value) => el.setAttribute('size', value), value)
+        yield { name: value }
+      }
+    },
+  },
   {
     name: 'click button',
     url: shot,

@@ -7,7 +7,7 @@ import '@sinch-engage/nectary/icons/close'
 @Component({
   selector: 'inline-alert-component',
   templateUrl: './InlineAlert.component.html',
-  styleUrls: ['./InlineAlert.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class InlineAlertComponent {

@@ -19,9 +19,6 @@
     @--change="onChange">
     <sinch-icon-search slot="icon"></sinch-icon-search>
     <sinch-tag slot="right" text="text"></sinch-tag>
-    <sinch-icon-button slot="right" small>
-      <sinch-icon-close slot="icon"></sinch-icon-close>
-    </sinch-icon-button>
   </sinch-input>
 </sinch-field>
 </template>
@@ -30,9 +27,7 @@
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/help-tooltip'
-import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/icons/close'
 import '@sinch-engage/nectary/icons/search'
 
 export default {

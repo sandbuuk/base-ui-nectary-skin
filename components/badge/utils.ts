@@ -1,14 +1,4 @@
-import type { TSinchBadgeMode, TSinchBadgeSize } from './types'
-
-export const sizeValues: readonly TSinchBadgeSize[] = ['l', 'm', 's']
-
-type TAssertSize = (value: string | null) => asserts value is TSinchBadgeSize
-
-export const assertSize: TAssertSize = (value) => {
-  if (value === null || !sizeValues.includes(value as any)) {
-    throw new Error(`sinch-badge: invalid size attribute: ${value}`)
-  }
-}
+import type { TSinchBadgeMode } from './types'
 
 export const modeValues: readonly TSinchBadgeMode[] = ['square', 'circle']
 

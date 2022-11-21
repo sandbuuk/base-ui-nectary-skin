@@ -53,4 +53,18 @@ export class NectaryElement extends HTMLElement {
   get focusable() {
     return false
   }
+
+  #isConnected = false
+
+  connectedCallback() {
+    this.#isConnected = true
+  }
+
+  disconnectedCallback() {
+    this.#isConnected = false
+  }
+
+  get isConnected(): boolean {
+    return this.#isConnected
+  }
 }

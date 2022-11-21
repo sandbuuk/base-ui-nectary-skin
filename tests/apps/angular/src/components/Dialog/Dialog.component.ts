@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/button'
 @Component({
   selector: 'dialog-component',
   templateUrl: './Dialog.component.html',
-  styleUrls: ['./Dialog.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class DialogComponent {

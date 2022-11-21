@@ -4,7 +4,7 @@ import '@sinch-engage/nectary/textarea'
 @Component({
   selector: 'textarea-component',
   templateUrl: './Textarea.component.html',
-  styleUrls: ['./Textarea.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class TextareaComponent {

@@ -1,7 +1,4 @@
 node_modules/
 dist/
-*.d.ts
 *.js
-./!imports.d.ts
-./!types.d.ts
 ./!babel.config.js

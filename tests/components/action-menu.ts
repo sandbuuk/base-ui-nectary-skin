@@ -6,10 +6,12 @@ const shot = '/action-menu?width=200'
 const withRows = '/action-menu?width=200&rows=2'
 const checkSelectWithEverything = makeAccessibilityTests('/action-menu?width=200&placeholder=Placeholder%20value&value=1', 'sinch-action-menu')
 
-test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
-  yield
-  await $.click()
-  yield
+test('accessibility', checkSelectWithEverything({
+  async *fn({ $ }) {
+    yield
+    await $.click()
+    yield
+  },
 }))
 
 test('action screenshots', runScreenshotTests('sinch-action-menu', [
@@ -35,7 +37,7 @@ test('action screenshots', runScreenshotTests('sinch-action-menu', [
     },
   },
   {
-    name: 'rows keyboard',
+    name: 'keyboard rows',
     url: withRows,
     async *fn({ page }) {
       await page.keyboard.press('Tab')
@@ -51,19 +53,20 @@ test('action screenshots', runScreenshotTests('sinch-action-menu', [
     },
   },
   {
-    name: 'rows attribute',
+    name: 'rows',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('rows', '2'))
       yield { name: 'items 2' }
-    },
-  },
-  {
-    name: 'rows property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => el.setAttribute('rows', '2'))
-      expect(await $.getAttribute('rows')).toBe('2')
+
+      /* Property */
+      const attrValue = await $eval((el) => {
+        el.rows = 2
+
+        return el.getAttribute('rows')
+      })
+
+      expect(attrValue).toBe('2')
     },
   },
 ]))

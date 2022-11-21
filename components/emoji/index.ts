@@ -14,7 +14,6 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-emoji', class extends NectaryElement {
   #$img: HTMLImageElement
-  #isConnected = false
 
   constructor() {
     super()
@@ -27,12 +26,8 @@ defineCustomElement('sinch-emoji', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#isConnected = true
+    super.connectedCallback()
     this.#updateChar()
-  }
-
-  disconnectedCallback() {
-    this.#isConnected = false
   }
 
   static get observedAttributes() {
@@ -59,7 +54,7 @@ defineCustomElement('sinch-emoji', class extends NectaryElement {
   }
 
   #updateChar() {
-    if (!this.#isConnected) {
+    if (!this.isConnected) {
       return
     }
 

@@ -11,12 +11,12 @@ type TButton = {
 
 export const Button: FC<TButton> = ({ search }) => {
   const isDisabled = search.get('disabled') != null
-  const isSmall = search.get('small') != null
   const hasLeftIcon = search.get('icon-left') != null
   const hasRightIcon = search.get('icon-right') != null
   const hasSpinner = search.get('spinner') != null
-  const text: any = search.get('text')
-  const type: any = search.get('type')
+  const text: any = search.get('text') ?? undefined
+  const type: any = search.get('type') ?? undefined
+  const size: any = search.get('size') ?? undefined
   const onClick = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-button-click')), [])
   const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-button-focus')), [])
   const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-button-blur')), [])
@@ -25,16 +25,16 @@ export const Button: FC<TButton> = ({ search }) => {
     <sinch-button
       type={type}
       text={text}
+      size={size}
       disabled={isDisabled}
-      small={isSmall}
       on-click={onClick}
       on-focus={onFocus}
       on-blur={onBlur}
-      aria-label={text ?? 'Button'}
+      aria-label="Button"
     >
+      {hasSpinner && <sinch-spinner slot="left-icon"/>}
       {hasLeftIcon && <sinch-icon-open-in-new slot="left-icon"/>}
       {hasRightIcon && <sinch-icon-expand-more slot="right-icon"/>}
-      {hasSpinner && <sinch-spinner static type={isSmall ? 'small' : 'medium'} slot="left-icon"/>}
     </sinch-button>
   )
 }

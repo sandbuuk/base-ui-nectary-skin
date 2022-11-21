@@ -6,7 +6,7 @@ import '@sinch-engage/nectary/tabs-icon-option'
 @Component({
   selector: 'tabs-component',
   templateUrl: './Tabs.component.html',
-  styleUrls: ['./Tabs.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class TabsComponent {

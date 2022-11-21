@@ -42,7 +42,7 @@ export const Alert: FC<TAlert> = ({ search }) => {
         <sinch-button
           slot="action"
           type="cta-secondary"
-          small
+          size="s"
           text="This is a Button!"
           aria-label="Action"
           on-click={onButtonClick}
@@ -53,7 +53,7 @@ export const Alert: FC<TAlert> = ({ search }) => {
       {hasClose && (
         <sinch-icon-button
           slot="close"
-          small
+          size="s"
           aria-label="Close"
           on-click={onCloseClick}
           on-focus={onCloseFocus}

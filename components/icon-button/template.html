@@ -1,103 +1,174 @@
 <style>
-/* stylelint-disable no-descending-specificity */
 :host {
   display: inline-block;
   vertical-align: middle;
   outline: none;
+
+  --sinch-size: var(--sinch-size-m);
+  --sinch-size-icon: var(--sinch-icon-button-icon-size-m);
+  --sinch-shape-radius: var(--sinch-shape-radius-m);
 }
 
-button {
+#button {
   all: initial;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: var(--sinch-size);
+  height: var(--sinch-size);
   cursor: pointer;
   contain: size;
 
-  --sinch-size-icon: 24px;
-  --sinch-color-icon: var(--sinch-icon-button-color, var(--sinch-color-stormy-500));
-  --sinch-icon-button-shape-radius: var(--sinch-shape-radius-l);
+  --sinch-color-icon: var(--sinch-icon-button-color-icon);
 }
 
-button::before {
+:host([data-size="l"]) {
+  --sinch-size: var(--sinch-size-l);
+  --sinch-size-icon: var(--sinch-icon-button-icon-size-l);
+  --sinch-shape-radius: var(--sinch-shape-radius-l);
+}
+
+:host([data-size="m"]) {
+  --sinch-size: var(--sinch-size-m);
+  --sinch-size-icon: var(--sinch-icon-button-icon-size-m);
+  --sinch-shape-radius: var(--sinch-shape-radius-m);
+}
+
+:host([data-size="s"]) {
+  --sinch-size: var(--sinch-size-s);
+  --sinch-size-icon: var(--sinch-icon-button-icon-size-s);
+  --sinch-shape-radius: var(--sinch-shape-radius-s);
+}
+
+:host([data-size="xs"]) {
+  --sinch-size: var(--sinch-size-xs);
+  --sinch-size-icon: var(--sinch-icon-button-icon-size-xs);
+  --sinch-shape-radius: var(--sinch-shape-radius-xs);
+}
+
+:host([type="primary"]) {
+  --sinch-icon-button-color-background: var(--sinch-icon-button-primary-color-background);
+  --sinch-icon-button-color-background-hover: var(--sinch-icon-button-primary-color-background-hover);
+  --sinch-icon-button-color-background-active: var(--sinch-icon-button-primary-color-background-active);
+  --sinch-icon-button-color-background-disabled: var(--sinch-icon-button-primary-color-background-disabled);
+  --sinch-icon-button-color-border: var(--sinch-icon-button-primary-color-border);
+  --sinch-icon-button-color-border-hover: var(--sinch-icon-button-primary-color-border-hover);
+  --sinch-icon-button-color-border-active: var(--sinch-icon-button-primary-color-border-active);
+  --sinch-icon-button-color-border-disabled: var(--sinch-icon-button-primary-color-border-disabled);
+  --sinch-icon-button-color-icon: var(--sinch-icon-button-primary-color-icon);
+  --sinch-icon-button-color-icon-hover: var(--sinch-icon-button-primary-color-icon-hover);
+  --sinch-icon-button-color-icon-active: var(--sinch-icon-button-primary-color-icon-active);
+  --sinch-icon-button-color-icon-disabled: var(--sinch-icon-button-primary-color-icon-disabled);
+  --sinch-icon-button-mix-blend-mode: var(--sinch-icon-button-primary-mix-blend-mode);
+  --sinch-elevation-level: var(--sinch-elevation-level-1);
+}
+
+:host([type="secondary"]) {
+  --sinch-icon-button-color-background: var(--sinch-icon-button-secondary-color-background);
+  --sinch-icon-button-color-background-hover: var(--sinch-icon-button-secondary-color-background-hover);
+  --sinch-icon-button-color-background-active: var(--sinch-icon-button-secondary-color-background-active);
+  --sinch-icon-button-color-background-disabled: var(--sinch-icon-button-secondary-color-background-disabled);
+  --sinch-icon-button-color-border: var(--sinch-icon-button-secondary-color-border);
+  --sinch-icon-button-color-border-hover: var(--sinch-icon-button-secondary-color-border-hover);
+  --sinch-icon-button-color-border-active: var(--sinch-icon-button-secondary-color-border-active);
+  --sinch-icon-button-color-border-disabled: var(--sinch-icon-button-secondary-color-border-disabled);
+  --sinch-icon-button-color-icon: var(--sinch-icon-button-secondary-color-icon);
+  --sinch-icon-button-color-icon-hover: var(--sinch-icon-button-secondary-color-icon-hover);
+  --sinch-icon-button-color-icon-active: var(--sinch-icon-button-secondary-color-icon-active);
+  --sinch-icon-button-color-icon-disabled: var(--sinch-icon-button-secondary-color-icon-disabled);
+  --sinch-icon-button-mix-blend-mode: var(--sinch-icon-button-secondary-mix-blend-mode);
+  --sinch-elevation-level: var(--sinch-elevation-level-1);
+}
+
+:host([type="tertiary"]) {
+  --sinch-icon-button-color-background: var(--sinch-icon-button-tertiary-color-background);
+  --sinch-icon-button-color-background-hover: var(--sinch-icon-button-tertiary-color-background-hover);
+  --sinch-icon-button-color-background-active: var(--sinch-icon-button-tertiary-color-background-active);
+  --sinch-icon-button-color-background-disabled: var(--sinch-icon-button-tertiary-color-background-disabled);
+  --sinch-icon-button-color-border: var(--sinch-icon-button-tertiary-color-border);
+  --sinch-icon-button-color-border-hover: var(--sinch-icon-button-tertiary-color-border-hover);
+  --sinch-icon-button-color-border-active: var(--sinch-icon-button-tertiary-color-border-active);
+  --sinch-icon-button-color-border-disabled: var(--sinch-icon-button-tertiary-color-border-disabled);
+  --sinch-icon-button-color-icon: var(--sinch-icon-button-tertiary-color-icon);
+  --sinch-icon-button-color-icon-hover: var(--sinch-icon-button-tertiary-color-icon-hover);
+  --sinch-icon-button-color-icon-active: var(--sinch-icon-button-tertiary-color-icon-active);
+  --sinch-icon-button-color-icon-disabled: var(--sinch-icon-button-tertiary-color-icon-disabled);
+  --sinch-icon-button-mix-blend-mode: var(--sinch-icon-button-tertiary-mix-blend-mode);
+  --sinch-elevation-level: var(--sinch-elevation-level-0);
+}
+
+/* Border */
+#button::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: var(--sinch-icon-button-shape-radius);
+  inset: 0;
+  border-radius: var(--sinch-shape-radius);
+  border: 1px solid var(--sinch-icon-button-color-border);
+  background-color: var(--sinch-icon-button-color-background);
+  box-shadow: var(--sinch-elevation-level);
   pointer-events: none;
-  box-sizing: border-box;
-  border: 1px solid transparent;
-  background-color: transparent;
-  mix-blend-mode: multiply;
+  mix-blend-mode: var(--sinch-icon-button-mix-blend-mode);
 }
 
-button:focus-visible::after {
-  position: absolute;
+#button:focus-visible::after {
   content: "";
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  padding: 2px;
+  position: absolute;
+  inset: -3px;
   border: 2px solid var(--sinch-color-border-focus);
-  border-radius: calc(var(--sinch-icon-button-shape-radius) + 4px);
+  border-radius: calc(var(--sinch-shape-radius) + 3px);
   pointer-events: none;
 }
 
-@supports not selector(:focus-visible) {
-  button:focus::after {
-    position: absolute;
-    content: "";
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    padding: 2px;
-    border: 2px solid var(--sinch-color-border-focus);
-    border-radius: calc(var(--sinch-icon-button-shape-radius) + 4px);
-    pointer-events: none;
-  }
-}
-
-button:enabled:hover::before {
-  background-color: #F1F2F4;
-}
-
-button:enabled:active::before {
-  background-color: #E3E6E8;
-}
-
-button:disabled {
-  background-color: transparent;
+#button:disabled {
   cursor: initial;
 
-  --sinch-color-spinner-bg: var(--sinch-color-snow-200);
-  --sinch-color-spinner-fg: var(--sinch-color-stormy-200);
-  --sinch-color-icon: var(--sinch-color-stormy-100);
+  --sinch-color-icon: var(--sinch-icon-button-color-icon-disabled);
 }
 
-:host([small]:not([small="false"])) #button {
-  width: 32px;
-  height: 32px;
-
-  --sinch-icon-button-shape-radius: var(--sinch-shape-radius-m);
+#button:disabled::before {
+  background-color: var(--sinch-icon-button-color-background-disabled);
+  border-color: var(--sinch-icon-button-color-border-disabled);
+  box-shadow: var(--sinch-elevation-level-0);
 }
 
-button > * {
+#button:enabled:hover {
+  --sinch-color-icon: var(--sinch-icon-button-color-icon-hover);
+}
+
+#button:enabled:hover::before {
+  background-color: var(--sinch-icon-button-color-background-hover);
+  border-color: var(--sinch-icon-button-color-border-hover);
+}
+
+#button:enabled:active {
+  --sinch-color-icon: var(--sinch-icon-button-color-icon-active);
+}
+
+#button:enabled:active::before {
+  background-color: var(--sinch-icon-button-color-background-active);
+  border-color: var(--sinch-icon-button-color-border-active);
+  box-shadow: var(--sinch-elevation-level-0);
+}
+
+#content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+#button * {
   pointer-events: none;
 }
 </style>
 
 <sinch-tooltip id="tooltip" inverted>
   <button id="button">
-    <slot name="icon"></slot>
+    <div id="content">
+      <slot name="icon"></slot>
+    </div>
   </button>
 </sinch-tooltip>

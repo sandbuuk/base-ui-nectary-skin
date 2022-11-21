@@ -1,4 +1,8 @@
+import '../icon-button'
+import '../icons/close'
+import '../stop-events'
 import {
+  Context,
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
@@ -7,13 +11,18 @@ import {
   isAttrTrue,
   NectaryElement,
   setClass,
+  subscribeContext,
   updateAttribute,
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
+import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import { inputTypes } from './utils'
+import type { TSinchIconButtonElement } from '../icon-button/types'
+import type { TContextSize } from '../utils'
+import type { TSinchSize } from '../utils/size'
 import type { TSinchInputElement, TSinchInputReact, TSinchInputType } from './types'
 
 const template = document.createElement('template')
@@ -22,57 +31,76 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-input', class extends NectaryElement {
   #$input: HTMLInputElement
+  #$clear: TSinchIconButtonElement
   #$iconSlot: HTMLSlotElement
   #$iconWrapper: HTMLElement
   #$rightSlot: HTMLSlotElement
   #$rightWrapper: HTMLElement
+  #$leftSlot: HTMLSlotElement
+  #$leftWrapper: HTMLElement
+  #$wrapper: HTMLElement
   #cursorPos: number | null = null
   #isPendingDk = false
+  #controller: AbortController | null = null
+  #sizeContext: Context<'size'>
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: true })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$input = shadowRoot.querySelector('#input')!
     this.#$iconSlot = shadowRoot.querySelector('slot[name="icon"]')!
-    this.#$iconWrapper = shadowRoot.querySelector('#icon')!
+    this.#$iconWrapper = shadowRoot.querySelector('#icon-wrapper')!
     this.#$rightSlot = shadowRoot.querySelector('slot[name="right"]')!
     this.#$rightWrapper = shadowRoot.querySelector('#right')!
+    this.#$leftSlot = shadowRoot.querySelector('slot[name="left"]')!
+    this.#$leftWrapper = shadowRoot.querySelector('#left')!
+    this.#$clear = shadowRoot.querySelector('#clear')!
+    this.#$wrapper = shadowRoot.querySelector('#wrapper')!
+    this.#sizeContext = new Context(this.#$wrapper, 'size')
   }
 
   connectedCallback() {
+    super.connectedCallback()
+
     this.setAttribute('role', 'textbox')
-    this.#$input.addEventListener('input', this.#onInput)
-    this.#$input.addEventListener('compositionstart', this.#onCompositionStart)
-    this.#$input.addEventListener('mousedown', this.#onSelectionChange)
-    this.#$input.addEventListener('keydown', this.#onSelectionChange)
-    this.#$input.addEventListener('focus', this.#onInputFocus)
-    this.#$input.addEventListener('blur', this.#onInputBlur)
-    this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange)
-    this.#$rightSlot.addEventListener('slotchange', this.#onRightSlotChange)
-    this.addEventListener('-change', this.#onChangeReactHandler)
-    this.addEventListener('-focus', this.#onFocusReactHandler)
-    this.addEventListener('-blur', this.#onBlurReactHandler)
+
+    this.#controller = new AbortController()
+
+    const options: AddEventListenerOptions = {
+      signal: this.#controller.signal,
+    }
+
+    this.#$input.addEventListener('input', this.#onInput, options)
+    this.#$input.addEventListener('compositionstart', this.#onCompositionStart, options)
+    this.#$input.addEventListener('mousedown', this.#onSelectionChange, options)
+    this.#$input.addEventListener('keydown', this.#onSelectionChange, options)
+    this.#$input.addEventListener('focus', this.#onInputFocus, options)
+    this.#$input.addEventListener('blur', this.#onInputBlur, options)
+    this.#$clear.addEventListener('click', this.#onClear, options)
+    this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange, options)
+    this.#$leftSlot.addEventListener('slotchange', this.#onLeftSlotChange, options)
+    this.#$rightSlot.addEventListener('slotchange', this.#onRightSlotChange, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
+    this.addEventListener('-focus', this.#onFocusReactHandler, options)
+    this.addEventListener('-blur', this.#onBlurReactHandler, options)
+
+    this.#sizeContext.listen(this.#controller.signal)
+    subscribeContext(this, 'size', this.#onContextSize, this.#controller.signal)
 
     this.#onIconSlotChange()
+    this.#onLeftSlotChange()
     this.#onRightSlotChange()
+
+    this.#onSizeUpdate()
   }
 
   disconnectedCallback() {
-    this.#$input.removeEventListener('input', this.#onInput)
-    this.#$input.removeEventListener('compositionstart', this.#onCompositionStart)
-    this.#$input.removeEventListener('mousedown', this.#onSelectionChange)
-    this.#$input.removeEventListener('keydown', this.#onSelectionChange)
-    this.#$input.removeEventListener('focus', this.#onInputFocus)
-    this.#$input.removeEventListener('blur', this.#onInputBlur)
-    this.#$iconSlot.removeEventListener('slotchange', this.#onIconSlotChange)
-    this.#$rightSlot.removeEventListener('slotchange', this.#onRightSlotChange)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
-    this.removeEventListener('-focus', this.#onFocusReactHandler)
-    this.removeEventListener('-blur', this.#onBlurReactHandler)
+    super.disconnectedCallback()
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {
@@ -82,7 +110,77 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       'placeholder',
       'invalid',
       'disabled',
+      'size',
+      'data-size',
     ]
+  }
+
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+    switch (name) {
+      case 'type': {
+        updateLiteralAttribute(this.#$input, inputTypes, 'type', newVal)
+
+        break
+      }
+      case 'value': {
+        const nextVal = newVal ?? ''
+        const prevVal = this.#$input.value
+
+        if (nextVal !== prevVal) {
+          const prevCursorPos = this.#$input.selectionEnd
+          const isPrevCursorEnd = prevCursorPos === prevVal.length
+
+          this.#$input.value = nextVal
+
+          if (!isPrevCursorEnd) {
+            this.#$input.setSelectionRange(this.#cursorPos, this.#cursorPos)
+          }
+        }
+
+        setClass(this.#$clear, 'active', nextVal.length > 0)
+        this.#onRightSlotChange()
+
+        break
+      }
+
+      case 'placeholder': {
+        this.#$input.placeholder = newVal ?? ''
+        updateAttribute(this, 'aria-placeholder', newVal)
+
+        break
+      }
+
+      case 'invalid': {
+        updateExplicitBooleanAttribute(this, 'aria-invalid', isAttrTrue(newVal))
+
+        break
+      }
+
+      case 'disabled': {
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$input.disabled = isDisabled
+        updateBooleanAttribute(this, 'disabled', isDisabled)
+
+        break
+      }
+
+      case 'size': {
+        updateAttribute(this, 'data-size', newVal)
+
+        break
+      }
+
+      case 'data-size': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertSize(newVal, 'sinch-input')
+        }
+
+        this.#onSizeUpdate()
+
+        break
+      }
+    }
   }
 
   get nodeName() {
@@ -129,6 +227,14 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
+  set size(size: TSinchSize) {
+    updateLiteralAttribute(this, sizeValues, 'size', size)
+  }
+
+  get size(): TSinchSize {
+    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
+  }
+
   get selectionStart(): HTMLInputElement['selectionStart'] {
     return this.#$input.selectionStart
   }
@@ -151,55 +257,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   set selectionDirection(value: HTMLInputElement['selectionDirection']) {
     this.#$input.selectionDirection = value
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'type': {
-        updateLiteralAttribute(this.#$input, inputTypes, 'type', newVal)
-
-        break
-      }
-      case 'value': {
-        const nextVal = newVal ?? ''
-        const prevVal = this.#$input.value
-
-        if (nextVal !== prevVal) {
-          const prevCursorPos = this.#$input.selectionEnd
-          const isPrevCursorEnd = prevCursorPos === prevVal.length
-
-          this.#$input.value = nextVal
-
-          if (!isPrevCursorEnd) {
-            this.#$input.setSelectionRange(this.#cursorPos, this.#cursorPos)
-          }
-        }
-
-        break
-      }
-
-      case 'placeholder': {
-        this.#$input.placeholder = newVal ?? ''
-        updateAttribute(this, 'aria-placeholder', newVal)
-
-        break
-      }
-
-      case 'invalid': {
-        updateExplicitBooleanAttribute(this, 'aria-invalid', isAttrTrue(newVal))
-
-        break
-      }
-
-      case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
-
-        this.#$input.disabled = isDisabled
-        updateBooleanAttribute(this, 'disabled', isDisabled)
-
-        break
-      }
-    }
   }
 
   get focusable() {
@@ -225,6 +282,27 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #onInput = (e: Event) => {
     e.stopPropagation()
 
+    this.#handleInput()
+  }
+
+  #onContextSize = (e: CustomEvent<TContextSize>) => {
+    if (this.hasAttribute('size')) {
+      return
+    }
+
+    switch (e.detail) {
+      case 'l': {
+        this.setAttribute('data-size', 'm')
+
+        break
+      }
+      default: {
+        this.setAttribute('data-size', 's')
+      }
+    }
+  }
+
+  #handleInput() {
     const nextValue = this.#$input.value
     const prevValue = this.value
 
@@ -262,11 +340,21 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #onIconSlotChange = () => {
-    setClass(this.#$iconWrapper, 'empty', this.#$iconSlot.assignedElements().length === 0)
+    const isEmpty = this.#$iconSlot.assignedElements().length === 0
+
+    setClass(this.#$iconWrapper, 'empty', isEmpty)
+  }
+
+  #onLeftSlotChange = () => {
+    const isEmpty = this.#$leftSlot.assignedElements().length === 0
+
+    setClass(this.#$leftWrapper, 'empty', isEmpty)
   }
 
   #onRightSlotChange = () => {
-    setClass(this.#$rightWrapper, 'empty', this.#$rightSlot.assignedElements().length === 0)
+    const isEmpty = this.#$rightSlot.assignedElements().length === 0 && this.value.length === 0
+
+    setClass(this.#$rightWrapper, 'empty', isEmpty)
   }
 
   #onInputFocus = () => {
@@ -275,6 +363,23 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   #onInputBlur = () => {
     this.dispatchEvent(new CustomEvent('-blur'))
+  }
+
+  #onClear = () => {
+    this.#$input.value = ''
+    this.#$input.focus()
+
+    this.#handleInput()
+  }
+
+  #onSizeUpdate() {
+    if (!this.isConnected) {
+      return
+    }
+
+    const size = this.getAttribute('data-size') ?? DEFAULT_SIZE
+
+    this.#sizeContext.dispatch(size)
   }
 
   #onChangeReactHandler = (e: Event) => {

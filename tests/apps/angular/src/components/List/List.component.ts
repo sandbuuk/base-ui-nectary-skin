@@ -8,7 +8,7 @@ import '@sinch-engage/nectary/icons-branded/chatbot'
 @Component({
   selector: 'list-component',
   templateUrl: './List.component.html',
-  styleUrls: ['./List.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ListComponent {

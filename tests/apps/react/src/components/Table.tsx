@@ -36,12 +36,12 @@ export const Table: FC<TTable> = ({ search }) => {
             <sinch-table-head-cell key={i} text={cell.text} align={cell.align} fit={cell.isFit}>
               {cell.isCheckbox && <sinch-checkbox slot="checkbox" onChange={noop} aria-label="Checkbox"/>}
               {cell.isSortable && (
-                <sinch-icon-button aria-label="Sort" small slot="right" onClick={() => {}}>
+                <sinch-icon-button aria-label="Sort" size="s" slot="right" onClick={() => {}}>
                   <sinch-icon-north slot="icon"/>
                 </sinch-icon-button>
               )}
               {cell.isFilterable && (
-                <sinch-icon-button aria-label="Filter" small slot="left" onClick={() => {}}>
+                <sinch-icon-button aria-label="Filter" size="s" slot="left" onClick={() => {}}>
                   <sinch-icon-filter-list slot="icon"/>
                 </sinch-icon-button>
               )}

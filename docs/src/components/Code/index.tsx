@@ -16,7 +16,7 @@ export const Code: FC<TCode> = ({ src, title }) => (
       <sinch-icon-button
         aria-label="Copy"
         class="code-copy"
-        small
+        size="s"
         onClick={() => navigator.clipboard.writeText(src).catch(console.error)}
       >
         <sinch-icon-content-copy slot="icon"/>

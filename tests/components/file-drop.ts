@@ -38,8 +38,10 @@ const getAllEvents = (page: Page) => {
   })
 }
 
-test('accessibility', checkValue(async function* () {
-  yield
+test('accessibility', checkValue({
+  async *fn() {
+    yield
+  },
 }))
 
 test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [

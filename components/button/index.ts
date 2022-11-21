@@ -2,16 +2,21 @@ import {
   defineCustomElement,
   getBooleanAttribute,
   getAttribute,
-  getLiteralAttribute,
   isAttrTrue,
   updateBooleanAttribute,
   updateAttribute,
-  updateLiteralAttribute,
   NectaryElement,
   getReactEventHandler,
+  getLiteralAttribute,
+  updateLiteralAttribute,
+  Context,
+  subscribeContext,
 } from '../utils'
+import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { buttonTypes } from './utils'
+import { assertType, typeValues } from './utils'
+import type { TContextSize } from '../utils'
+import type { TSinchSize } from '../utils/size'
 import type { TSinchButtonElement, TSinchButtonReact, TSinchButtonType } from './types'
 
 const template = document.createElement('template')
@@ -21,39 +26,49 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-button', class extends NectaryElement {
   #$button: HTMLButtonElement
   #$text: HTMLElement
+  #controller: AbortController | null = null
+  #sizeContext: Context<'size'>
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: true })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$button = shadowRoot.querySelector('#button')!
     this.#$text = shadowRoot.querySelector('#text')!
+
+    this.#sizeContext = new Context(this.#$button, 'size')
   }
 
   connectedCallback() {
+    super.connectedCallback()
+
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+
     this.setAttribute('role', 'button')
-    this.#$button.addEventListener('click', this.#onButtonClick)
-    this.#$button.addEventListener('focus', this.#onButtonFocus)
-    this.#$button.addEventListener('blur', this.#onButtonBlur)
-    this.addEventListener('-click', this.#onClickReactHandler)
-    this.addEventListener('-focus', this.#onFocusReactHandler)
-    this.addEventListener('-blur', this.#onBlurReactHandler)
+    this.#$button.addEventListener('click', this.#onButtonClick, { signal })
+    this.#$button.addEventListener('focus', this.#onButtonFocus, { signal })
+    this.#$button.addEventListener('blur', this.#onButtonBlur, { signal })
+    this.addEventListener('-click', this.#onClickReactHandler, { signal })
+    this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
+    this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
+    subscribeContext(this, 'size', this.#onContextSize, signal)
+    this.#sizeContext.listen(signal)
+
+    this.#onSizeUpdate()
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onButtonClick)
-    this.#$button.removeEventListener('focus', this.#onButtonFocus)
-    this.#$button.removeEventListener('blur', this.#onButtonBlur)
-    this.removeEventListener('-click', this.#onClickReactHandler)
-    this.removeEventListener('-focus', this.#onFocusReactHandler)
-    this.removeEventListener('-blur', this.#onBlurReactHandler)
+    super.disconnectedCallback()
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {
-    return ['text', 'disabled']
+    return ['text', 'disabled', 'size', 'type', 'data-size']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -71,15 +86,36 @@ defineCustomElement('sinch-button', class extends NectaryElement {
 
         break
       }
+      case 'type': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
+
+        break
+      }
+      case 'size': {
+        updateAttribute(this, 'data-size', newVal)
+
+        break
+      }
+      case 'data-size': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertSize(newVal, 'sinch-button')
+        }
+
+        this.#onSizeUpdate()
+
+        break
+      }
     }
   }
 
   set type(value: TSinchButtonType) {
-    updateLiteralAttribute(this, buttonTypes, 'type', value)
+    updateLiteralAttribute(this, typeValues, 'type', value)
   }
 
   get type(): TSinchButtonType {
-    return getLiteralAttribute(this, buttonTypes, 'type', 'primary')
+    return getLiteralAttribute(this, typeValues, 'type', 'primary')
   }
 
   set text(value: string) {
@@ -98,12 +134,12 @@ defineCustomElement('sinch-button', class extends NectaryElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set small(isSmall: boolean) {
-    updateBooleanAttribute(this, 'small', isSmall)
+  set size(size: TSinchSize) {
+    updateLiteralAttribute(this, sizeValues, 'size', size)
   }
 
-  get small() {
-    return getBooleanAttribute(this, 'small')
+  get size(): TSinchSize {
+    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
   }
 
   get focusable() {
@@ -116,6 +152,33 @@ defineCustomElement('sinch-button', class extends NectaryElement {
 
   blur() {
     this.#$button.blur()
+  }
+
+  #onSizeUpdate() {
+    if (!this.isConnected) {
+      return
+    }
+
+    const size = getAttribute(this, 'data-size', DEFAULT_SIZE)
+
+    this.#sizeContext.dispatch(size)
+  }
+
+  #onContextSize = (e: CustomEvent<TContextSize>) => {
+    if (this.hasAttribute('size')) {
+      return
+    }
+
+    switch (e.detail) {
+      case 'l': {
+        this.setAttribute('data-size', 'm')
+
+        break
+      }
+      default: {
+        this.setAttribute('data-size', 's')
+      }
+    }
   }
 
   #onButtonClick = () => {

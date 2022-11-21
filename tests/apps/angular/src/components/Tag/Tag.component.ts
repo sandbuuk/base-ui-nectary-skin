@@ -6,7 +6,7 @@ import '@sinch-engage/nectary/icons/open-in-new'
 @Component({
   selector: 'tag-component',
   templateUrl: './Tag.component.html',
-  styleUrls: ['./Tag.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class TagComponent {

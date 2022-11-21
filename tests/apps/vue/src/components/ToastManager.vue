@@ -9,7 +9,7 @@
       <sinch-icon-button
         v-if="(i + 1) % 3 !== 0"
         slot="close"
-        small
+        size="s"
         @--click="onClose(i)">
         <sinch-icon-close slot="icon"></sinch-icon-close>
       </sinch-icon-button>
@@ -17,7 +17,7 @@
         v-if="(i + 1) % 2 === 0"
         slot="action"
         type="cta-secondary"
-        small
+        size="s"
         text="Undo"
         @--click="onAction">
       </sinch-button>

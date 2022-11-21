@@ -1,8 +1,11 @@
+import '../input'
+import '../icon-button'
+import '../icons/search'
+import '../icons/close'
+import '../text'
 import {
   attrValueToPixels,
   defineCustomElement,
-  dispatchContextConnectEvent,
-  dispatchContextDisconnectEvent,
   getAttribute,
   getBooleanAttribute,
   unpackCsv,
@@ -16,15 +19,20 @@ import {
   updateCsv,
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
+  debounceTimeout,
+  setClass,
+  subscribeContext,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchInputElement } from '../input/types'
 import type { TSinchSelectMenuOptionElement } from '../select-menu-option/types'
-import type { TContextKeyboard, TContextVisibility } from '../utils'
+import type { TContextKeydown, TContextVisibility } from '../utils'
 import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
 
 type TSelectMenuOption = TSinchSelectMenuOptionElement
 
 const ITEM_HEIGHT = 40
+const NUM_ITEMS_SEARCH = 20
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
@@ -32,7 +40,10 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-select-menu', class extends NectaryElement {
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
+  #$search: TSinchInputElement
+  #$notFound: HTMLElement
   #controller: AbortController | null = null
+  #searchDebounce
 
   constructor() {
     super()
@@ -43,6 +54,10 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
     this.#$optionSlot = shadowRoot.querySelector('slot')!
     this.#$listbox = shadowRoot.querySelector('#listbox')!
+    this.#$search = shadowRoot.querySelector('#search')!
+    this.#$notFound = shadowRoot.querySelector('#not-found')!
+
+    this.#searchDebounce = debounceTimeout(200)(this.#updateSearch)
   }
 
   connectedCallback() {
@@ -53,21 +68,19 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.setAttribute('role', 'listbox')
     this.setAttribute('tabindex', '0')
     this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
-    this.addEventListener('-keydown', this.#onContexKeydown as any, { signal })
     this.addEventListener('blur', this.#onListboxBlur, { signal })
     this.#$listbox.addEventListener('mousedown', this.#onListboxMousedown, { signal })
     this.#$listbox.addEventListener('click', this.#onListboxClick, { signal })
+    this.#$search.addEventListener('-change', this.#onSearchChange as any, { signal })
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange, { signal })
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
-    this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
-    dispatchContextConnectEvent(this, 'keydown')
-    dispatchContextConnectEvent(this, 'visibility')
+    subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
+    subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
   }
 
   disconnectedCallback() {
-    dispatchContextDisconnectEvent(this, 'keydown')
-    dispatchContextDisconnectEvent(this, 'visibility')
     this.#controller!.abort()
+    this.#searchDebounce.cancel()
   }
 
   static get observedAttributes() {
@@ -145,7 +158,29 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     }
   }
 
-  #onContexKeydown = (e: CustomEvent<TContextKeyboard>) => {
+  #onSearchChange = (e: CustomEvent<string>) => {
+    this.#$search.value = e.detail
+    this.#searchDebounce.fn()
+  }
+
+  #updateSearch = () => {
+    const searchValue = this.#$search.value.toLowerCase()
+    const $options = this.#getOptionElements()
+    let someFound = false
+
+    for (const $opt of $options) {
+      const isHidden = searchValue.length > 0 && !$opt.matchesSearch(searchValue)
+
+      someFound ||= !isHidden
+      setClass($opt, 'hidden', isHidden)
+    }
+
+    setClass(this.#$notFound, 'active', !someFound)
+
+    this.#selectOption(null)
+  }
+
+  #onContextKeyDown = (e: CustomEvent<TContextKeydown>) => {
     this.#handleKeydown(e.detail)
   }
 
@@ -163,7 +198,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.#handleKeydown(e)
   }
 
-  #handleKeydown(e: TContextKeyboard) {
+  #handleKeydown(e: TContextKeydown) {
     switch (e.code) {
       case 'Space':
       case 'Enter': {
@@ -192,6 +227,13 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   #onOptionSlotChange = () => {
+    const isSearchActive = this.#$optionSlot.assignedElements().length >= NUM_ITEMS_SEARCH
+
+    if (!isSearchActive) {
+      updateAttribute(this.#$search, 'value', null)
+    }
+
+    setClass(this.#$search, 'active', isSearchActive)
     this.#onValueChange(this.value)
   }
 
@@ -221,7 +263,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     for (let i = 0; i < $options.length; i++) {
       const el = $options[i]
 
-      if (!getBooleanAttribute(el, 'disabled')) {
+      if (!getBooleanAttribute(el, 'disabled') && !el.classList.contains('hidden')) {
         return el
       }
     }
@@ -235,7 +277,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     for (let i = $options.length - 1; i >= 0 ; i--) {
       const el = $options[i]
 
-      if (!getBooleanAttribute(el, 'disabled')) {
+      if (!getBooleanAttribute(el, 'disabled') && !el.classList.contains('hidden')) {
         return el
       }
     }
@@ -252,7 +294,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
       for (let i = 1; i <= $options.length; i++) {
         const el = $options[(i + index) % $options.length]
 
-        if (!getBooleanAttribute(el, 'disabled')) {
+        if (!getBooleanAttribute(el, 'disabled') && !el.classList.contains('hidden')) {
           return el
         }
       }
@@ -270,7 +312,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
       for (let i = 1; i <= $options.length; i++) {
         const el = $options[(index - i + $options.length) % $options.length]
 
-        if (!getBooleanAttribute(el, 'disabled')) {
+        if (!getBooleanAttribute(el, 'disabled') && !el.classList.contains('hidden')) {
           return el
         }
       }

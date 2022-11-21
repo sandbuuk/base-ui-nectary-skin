@@ -4,7 +4,7 @@ import '@sinch-engage/nectary/checkbox'
 @Component({
   selector: 'checkbox-component',
   templateUrl: './Checkbox.component.html',
-  styleUrls: ['./Checkbox.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class CheckboxComponent {

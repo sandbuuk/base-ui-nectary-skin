@@ -43,7 +43,7 @@ export const InlineAlert: FC<TInlineAlert> = ({ search }) => {
       {hasClose && (
         <sinch-icon-button
           slot="close"
-          small
+          size="s"
           aria-label="close"
           on-click={onCloseClick}
           on-focus={onCloseFocus}
@@ -56,7 +56,7 @@ export const InlineAlert: FC<TInlineAlert> = ({ search }) => {
         <sinch-button
           slot="action"
           type="cta-secondary"
-          small
+          size="s"
           text="This is a Button!"
           aria-label="Action"
           on-click={onButtonClick}

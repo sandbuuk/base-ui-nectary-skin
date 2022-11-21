@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/color-menu'
 @Component({
   selector: 'color-menu-component',
   templateUrl: './ColorMenu.component.html',
-  styleUrls: ['./ColorMenu.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ColorMenuComponent {

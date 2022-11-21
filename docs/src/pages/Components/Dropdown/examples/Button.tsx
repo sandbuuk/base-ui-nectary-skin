@@ -31,7 +31,7 @@ export const ButtonExample: FC = () => {
         type="cta-secondary"
         text="Open"
         aria-label="Open dropdown"
-        small
+        size="s"
         on-click={onOpen}
       />
       <sinch-action-menu slot="content" aria-label="Action menu">

@@ -3,6 +3,10 @@
   display: block;
 }
 
+#text {
+  letter-spacing: -2%;
+}
+
 :host([type="xl"]) #text {
   font: var(--sinch-font-title-xl);
 }
@@ -25,7 +29,6 @@
 
 :host([ellipsis]:not([ellipsis="false"])) #text {
   display: block;
-  width: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

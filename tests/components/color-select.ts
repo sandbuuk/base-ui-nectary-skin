@@ -11,9 +11,11 @@ const checkSelectWithEverything = makeAccessibilityTests('/color-select', 'sinch
 
 const menuRect = (page: Page) => getBB(page.locator('sinch-color-menu'))
 
-test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
-  await $.click()
-  yield
+test('accessibility', checkSelectWithEverything({
+  async *fn({ $ }) {
+    await $.click()
+    yield
+  },
 }))
 
 test('color select screenshots', runScreenshotTests('sinch-popover', [
@@ -103,7 +105,7 @@ test('color select events', runScreenshotTests('sinch-color-menu', [
     async *fn({ page, $eval }) {
       await subscribeToEvents(page, 'sinch-color-menu-change')
 
-      const btnCt = await centerBB((page.locator('sinch-select-button')))
+      const btnCt = await centerBB(page.locator('sinch-select-button'))
 
       await page.mouse.click(btnCt.x, btnCt.y)
 

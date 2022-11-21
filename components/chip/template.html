@@ -34,21 +34,6 @@
   pointer-events: none;
 }
 
-@supports not selector(:focus-visible) {
-  #button:focus::after {
-    content: "";
-    position: absolute;
-    inset: -4px;
-    border-radius: 16px;
-    border: 2px solid var(--sinch-color-border-focus);
-    pointer-events: none;
-  }
-
-  :host([small]:not([small="false"])) #button:focus::after {
-    border-radius: 14px;
-  }
-}
-
 #text {
   flex: 1;
 }

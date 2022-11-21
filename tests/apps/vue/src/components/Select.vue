@@ -9,20 +9,24 @@
       slot="target"
       label="Select"
       :disabled="isDisabled"
-      :invalidtext="isInvalid ? 'Invalid option selected' : ''">
+      :invalidtext="isInvalid ? 'Invalid option selected' : ''"
+    >
       <sinch-select-button
         slot="input"
         placeholder="Select option"
+        :size="size"
         :text="inputText"
         :disabled="isDisabled"
         :invalid="isInvalid"
         @--click="onClick"
         @--focus="onFocus"
-        @--blur="onBlur">
-        <sinch-icon-open-in-new v-if="options[value] != null && options[value].icon === '1'" slot="icon"></sinch-icon-open-in-new>
-        <sinch-icon-keyboard-arrow-down slot="right"></sinch-icon-keyboard-arrow-down>
+        @--blur="onBlur"
+      >
+        <sinch-tag v-if="hasLeft" slot="left" text="tag"></sinch-tag>
+        <sinch-icon-search v-if="hasIcon" slot="icon"></sinch-icon-search>
+        <sinch-icon-open-in-new v-if="options[value]?.icon === '1'" slot="icon"></sinch-icon-open-in-new>
       </sinch-select-button>
-      </sinch-field>
+    </sinch-field>
     <sinch-select-menu
       slot="content"
       :rows="rows"
@@ -48,8 +52,9 @@ import '@sinch-engage/nectary/select-button'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/select-menu'
 import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/icons/keyboard-arrow-down'
+import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary/icons/search'
 
 export default {
   methods: {
@@ -91,6 +96,15 @@ export default {
     inputText() {
       return this.options[this.value]?.text ?? ''
     },
+    size() {
+      return this.search.get('size')
+    },
+    hasLeft() {
+      return this.search.get('left') !== null
+    },
+    hasIcon() {
+      return this.search.get('icon') !== null
+    },
     isInvalid() {
       return this.search.get('invalid') !== null
     },
@@ -106,4 +120,3 @@ export default {
   }
 }
 </script>
-

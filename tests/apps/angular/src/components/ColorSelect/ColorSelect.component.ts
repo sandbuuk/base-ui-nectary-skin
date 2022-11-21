@@ -8,7 +8,7 @@ import '@sinch-engage/nectary/select-button'
 @Component({
   selector: 'color-select-component',
   templateUrl: './ColorSelect.component.html',
-  styleUrls: ['./ColorSelect.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ColorSelectComponent {

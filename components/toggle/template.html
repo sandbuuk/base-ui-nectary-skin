@@ -15,7 +15,7 @@
 }
 
 :host([small]:not([small="false"])) #wrapper {
-  font: var(--sinch-font-small-text);
+  font: var(--sinch-font-text-s);
 }
 
 #input {
@@ -54,24 +54,6 @@
 
 :host([small]:not([small="false"])) #input:focus-visible::after {
   border-radius: 14px;
-}
-
-@supports not selector(:focus-visible) {
-  #input:focus::after {
-    position: absolute;
-    content: "";
-    left: -4px;
-    top: -4px;
-    right: -4px;
-    bottom: -4px;
-    border: 2px solid var(--sinch-color-border-focus);
-    border-radius: 18px;
-    pointer-events: none;
-  }
-
-  :host([small]:not([small="false"])) #input:focus::after {
-    border-radius: 14px;
-  }
 }
 
 #knob-container {
@@ -124,7 +106,7 @@
 /* Knob on-off labels */
 #knob::before,
 #knob::after {
-  font: var(--sinch-font-body);
+  font: var(--sinch-font-text-m);
   color: var(--sinch-color-snow-100);
   text-transform: uppercase;
   font-size: 8px;
@@ -163,7 +145,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   padding-left: 8px;
-  font: var(--sinch-font-body);
+  font: var(--sinch-font-text-m);
   color: var(--sinch-color-text-default);
 }
 

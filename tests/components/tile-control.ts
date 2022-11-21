@@ -10,13 +10,15 @@ const withSingleOption = `/tile-control?single=true`
 const withToggleSingleOption = `/tile-control?single=true&multiple=true`
 const check = makeAccessibilityTests(`/tile-control`, 'sinch-tile-control')
 
-test('accessibility', check(async function* () {
-  yield
+test('accessibility', check({
+  async *fn() {
+    yield
+  },
 }))
 
 test('tile-control screenshots', runScreenshotTests('sinch-tile-control', [
   {
-    name: 'cols attribute',
+    name: 'cols',
     url: withOptions,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('cols', '3'))
@@ -31,24 +33,6 @@ test('tile-control screenshots', runScreenshotTests('sinch-tile-control', [
       yield { name: 'invalid' }
       await $eval((el) => el.removeAttribute('cols'))
       yield { name: 'unset' }
-    },
-  },
-  {
-    name: 'cols property',
-    url: withOptions,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.cols = 3
-      })
-      yield { name: '3' }
-      await $eval((el) => {
-        el.cols = 8
-      })
-      yield { name: '8' }
-      await $eval((el) => {
-        el.cols = 0
-      })
-      yield { name: '0' }
     },
   },
   {
@@ -98,7 +82,7 @@ test('tile-control screenshots', runScreenshotTests('sinch-tile-control', [
     },
   },
   {
-    name: 'value attribute',
+    name: 'value',
     url: with3ColOptions,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', ''))
@@ -118,31 +102,6 @@ test('tile-control screenshots', runScreenshotTests('sinch-tile-control', [
     },
   },
   {
-    name: 'value property',
-    url: with3ColOptions,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.value = ''
-      })
-      yield { name: 'option-empty' }
-
-      await $eval((el) => {
-        el.value = '1'
-      })
-      yield { name: 'option-1' }
-
-      await $eval((el) => {
-        el.value = '2'
-      })
-      yield { name: 'option-disabled' }
-
-      await $eval((el) => {
-        el.value = 'missing'
-      })
-      yield { name: 'option-missing' }
-    },
-  },
-  {
     name: 'multiple values',
     url: with3ColsMultiple,
     async *fn({ $eval }) {
@@ -154,28 +113,13 @@ test('tile-control screenshots', runScreenshotTests('sinch-tile-control', [
     },
   },
   {
-    name: 'small attribute',
+    name: 'small',
     url: with3ColOptions,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('small', ''))
       yield { name: 'set' }
 
       await $eval((el) => el.removeAttribute('small'))
-      yield { name: 'unset' }
-    },
-  },
-  {
-    name: 'small property',
-    url: with3ColOptions,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.small = true
-      })
-      yield { name: 'set' }
-
-      await $eval((el) => {
-        el.small = false
-      })
       yield { name: 'unset' }
     },
   },

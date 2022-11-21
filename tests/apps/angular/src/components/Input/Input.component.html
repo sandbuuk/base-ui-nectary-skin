@@ -4,14 +4,20 @@
   [attr.disabled]="isDisabled"
   [attr.invalid]="isInvalid"
   [attr.type]="type"
+  [attr.size]="size"
   [value]="value"
   (-focus)="onFocus()"
   (-blur)="onBlur()"
-  (-change)="onChange($event)">
+  (-change)="onChange($event)"
+>
+  <sinch-select-button
+    *ngIf="hasLeft"
+    slot="left"
+    text="+0"
+    placeholder=""
+    aria-label=""
+  ></sinch-select-button>
   <sinch-icon-search *ngIf="hasIcon" slot="icon"></sinch-icon-search>
-  <sinch-help-tooltip *ngIf="tooltipText != null" [attr.text]="tooltipText" slot="tooltip"></sinch-help-tooltip>
-  <sinch-tag *ngIf="hasRight" slot="right" text="text"></sinch-tag>
-  <sinch-icon-button *ngIf="hasRight" slot="right" small>
-    <sinch-icon-close slot="icon"></sinch-icon-close>
-  </sinch-icon-button>
+  <sinch-tag *ngIf="hasRight" slot="right" text="tag"></sinch-tag>
+  <sinch-chip *ngIf="hasRight" slot="right" text="chip"></sinch-chip>
 </sinch-input>

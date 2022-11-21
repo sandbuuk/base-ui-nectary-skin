@@ -30,6 +30,7 @@
     <Link v-if="url.pathname === '/link'" :search="url.searchParams"/>
     <List v-if="url.pathname === '/list'" :search="url.searchParams"/>
     <Pagination v-if="url.pathname === '/pagination'" :search="url.searchParams"/>
+    <PhoneCodeMenu v-if="url.pathname === '/phone-code-menu'" :search="url.searchParams"/>
     <Popover v-if="url.pathname === '/popover'" :search="url.searchParams"/>
     <Progress v-if="url.pathname === '/progress'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
@@ -56,7 +57,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/theme.css'
+import '@sinch-engage/nectary/theme'
 import Accordion from './components/Accordion.vue'
 import ActionDropdown from './components/ActionDropdown.vue'
 import ActionMenu from './components/ActionMenu.vue'
@@ -87,6 +88,7 @@ import FileStatus from './components/FileStatus.vue'
 import Link from './components/Link.vue'
 import List from './components/List.vue'
 import Pagination from './components/Pagination.vue'
+import PhoneCodeMenu from './components/PhoneCodeMenu.vue'
 import Popover from './components/Popover.vue'
 import Progress from './components/Progress.vue'
 import Radio from './components/Radio.vue'
@@ -169,6 +171,7 @@ export default {
     Link,
     List,
     Pagination,
+    PhoneCodeMenu,
     Popover,
     Progress,
     Radio,

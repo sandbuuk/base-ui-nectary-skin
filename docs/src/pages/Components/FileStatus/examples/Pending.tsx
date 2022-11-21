@@ -16,7 +16,7 @@ export const PendingExample: FC = () => (
     <sinch-icon-button
       slot="action"
       aria-label="Remove file"
-      small
+      size="s"
       on-click={() => {}}
     >
       <sinch-icon-close slot="icon"/>

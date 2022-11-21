@@ -6,8 +6,9 @@ import '@sinch-engage/nectary/select-button'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/select-menu'
 import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/icons/keyboard-arrow-down'
+import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary/icons/search'
 
 type TSelect = {
   search: URLSearchParams,
@@ -49,8 +50,11 @@ export const Select: FC<TSelect> = ({ search }) => {
   const onBlur = () => {
     window.dispatchEvent(new CustomEvent('sinch-select-blur'))
   }
+  const size: any = search.get('size') ?? undefined
   const isDisabled = search.get('disabled') != null
   const isInvalid = search.get('invalid') != null
+  const hasLeft = search.get('left') != null
+  const hasIcon = search.get('icon') != null
   const rows = (() => {
     const val = search.get('rows')
 
@@ -59,11 +63,11 @@ export const Select: FC<TSelect> = ({ search }) => {
 
   return (
     <sinch-popover
+      modal
+      orientation="bottom"
       open={isOpen}
       aria-label="Popover"
       on-close={onClose}
-      orientation="bottom"
-      modal
     >
       <sinch-field
         slot="target"
@@ -73,6 +77,7 @@ export const Select: FC<TSelect> = ({ search }) => {
       >
         <sinch-select-button
           slot="input"
+          size={size}
           text={options[value]?.text ?? ''}
           placeholder="Select option"
           invalid={isInvalid}
@@ -82,10 +87,17 @@ export const Select: FC<TSelect> = ({ search }) => {
           on-focus={onFocus}
           on-blur={onBlur}
         >
+          {hasLeft && (
+            <>
+              <sinch-tag slot="left" text="tag"/>
+            </>
+          )}
+          {hasIcon && (
+            <sinch-icon-search slot="icon"/>
+          )}
           {options[value]?.icon === '1' && (
             <sinch-icon-open-in-new slot="icon"/>
           )}
-          <sinch-icon-keyboard-arrow-down slot="right"/>
         </sinch-select-button>
       </sinch-field>
       <sinch-select-menu

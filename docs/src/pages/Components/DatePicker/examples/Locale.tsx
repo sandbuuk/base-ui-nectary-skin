@@ -41,7 +41,7 @@ export const LocaleExample: FC = () => {
       >
         <sinch-icon-button
           slot="right"
-          small
+          size="s"
           aria-label="Open Date Picker"
           on-click={onOpen}
         >

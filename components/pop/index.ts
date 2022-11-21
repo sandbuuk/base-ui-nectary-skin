@@ -1,4 +1,3 @@
-import dialogPolyfill from 'dialog-polyfill'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -16,13 +15,12 @@ import {
   getFirstFocusableElement,
   getFirstSlotElement,
   Context,
-  dispatchContextConnectEvent,
-  dispatchContextDisconnectEvent,
+  subscribeContext,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertOrientation, disableScroll, enableScroll, orientationValues } from './utils'
 import type { TRect } from '../types'
-import type { TContextVisibility, TContextKeyboard } from '../utils'
+import type { TContextVisibility } from '../utils'
 import type { TSinchPopElement, TSinchPopOrientation, TSinchPopReact } from './types'
 
 const template = document.createElement('template')
@@ -33,7 +31,6 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #$target: HTMLElement
   #$focus: HTMLElement
   #$dialog: HTMLDialogElement
-  #isConnected: boolean
   #resizeThrottle
   #$targetSlot: HTMLSlotElement
   #$targetOpenSlot: HTMLSlotElement
@@ -41,8 +38,8 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #$targetOpenWrapper: HTMLElement
   #targetActiveElement: HTMLElement | null = null
   #controller: AbortController | null = null
-  #keydownContext: Context
-  #visibilityContext: Context
+  #keydownContext: Context<'keydown'>
+  #visibilityContext: Context<'visibility'>
   #targetStyleValue: string | null = null
 
   constructor() {
@@ -59,34 +56,28 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     this.#$targetOpenSlot = shadowRoot.querySelector('slot[name="target-open"]')!
     this.#$contentSlot = shadowRoot.querySelector('slot[name="content"]')!
     this.#$targetOpenWrapper = shadowRoot.querySelector('#target-open')!
-    this.#isConnected = false
+
     this.#resizeThrottle = throttleAnimationFrame(this.#updateOrientation)
 
     this.#keydownContext = new Context(this.#$contentSlot, 'keydown')
     this.#visibilityContext = new Context(this.#$contentSlot, 'visibility')
-
-    dialogPolyfill.registerDialog(this.#$dialog)
-
-    /* Disable polyfill focus trap behavior */
-    // @ts-ignore
-    dialogPolyfill.dm.handleFocus_ = function() {}
   }
 
   connectedCallback() {
+    super.connectedCallback()
+
     this.#controller = new AbortController()
 
     const { signal } = this.#controller
 
-    this.#keydownContext.subscribe()
-    this.#visibilityContext.subscribe()
+    this.#keydownContext.listen(signal)
+    this.#visibilityContext.listen(signal)
 
     this.setAttribute('role', 'dialog')
     this.#$dialog.addEventListener('cancel', this.#onCancel, { signal })
     this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown, { signal })
     this.addEventListener('-close', this.#onCloseReactHandler, { signal })
-    this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
-    dispatchContextConnectEvent(this, 'visibility')
-    this.#isConnected = true
+    subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
 
     if (getBooleanAttribute(this, 'open')) {
       this.#onExpand()
@@ -94,12 +85,9 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.#controller!.abort()
-    this.#keydownContext.unsubscribe()
-    this.#visibilityContext.unsubscribe()
-    dispatchContextDisconnectEvent(this, 'visibility')
     this.#onCollapse()
-    this.#isConnected = false
   }
 
   static get observedAttributes() {
@@ -167,7 +155,9 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       }
 
       case 'orientation': {
-        assertOrientation(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertOrientation(newVal)
+        }
 
         if (this.#isOpen()) {
           this.#updateOrientation()
@@ -207,7 +197,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #onExpand() {
-    if (!this.#isConnected || this.#isOpen()) {
+    if (!this.isConnected || this.#isOpen()) {
       return
     }
 
@@ -477,32 +467,16 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #dispatchContentVisibility(isVisible: boolean) {
-    for (const $el of this.#visibilityContext.elements) {
-      $el.dispatchEvent(
-        new CustomEvent<TContextVisibility>('-visibility', { detail: isVisible })
-      )
-    }
+    this.#visibilityContext.dispatch(isVisible)
   }
 
   #onTargetKeydown = (e: KeyboardEvent) => {
-    for (const $el of this.#keydownContext.elements) {
-      let isPrevented = false
-
-      $el.dispatchEvent(
-        new CustomEvent<TContextKeyboard>('-keydown', {
-          detail: {
-            code: e.code,
-            preventDefault: () => {
-              isPrevented = true
-            },
-          },
-        })
-      )
-
-      if (isPrevented) {
+    this.#keydownContext.dispatch({
+      code: e.code,
+      preventDefault: () => {
         e.preventDefault()
-      }
-    }
+      },
+    })
   }
 
   #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {

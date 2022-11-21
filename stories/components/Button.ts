@@ -1,4 +1,5 @@
-import { buttonTypes } from '@sinch-engage/nectary/button/utils'
+import { typeValues } from '@sinch-engage/nectary/button/utils'
+import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/button'
@@ -9,10 +10,14 @@ import '@sinch-engage/nectary/spinner'
 export default {
   title: 'Components/Button',
   argTypes: {
-    type: { control: 'select', options: buttonTypes, description: 'Button visual type' },
+    type: { control: 'select', options: typeValues, description: 'Button visual type' },
     text: { control: 'text', description: 'Button label text' },
     disabled: { control: 'boolean', description: 'Is button disabled' },
-    small: { control: 'boolean', description: 'Button Small variant' },
+    size: {
+      description: 'Button size',
+      control: 'select',
+      options: sizeValues,
+    },
     onClick: { action: 'onClick', description: 'Click handler' },
     onFocus: { action: 'onFocus', description: 'Focus handler (optional)' },
     onBlur: { action: 'onBlur', description: 'Blur handler (optional)' },
@@ -20,7 +25,7 @@ export default {
 } as Meta
 
 const Template = (innerHTML: string = ''): Story => () => {
-  const [{ type, text, disabled, small }] = useArgs()
+  const [{ type, text, disabled, size }] = useArgs()
   const buttonRef = useRef<HTMLElementTagNameMap['sinch-button'] | null>(null)
 
   if (buttonRef.current === null) {
@@ -36,7 +41,7 @@ const Template = (innerHTML: string = ''): Story => () => {
   $button.type = type
   $button.text = text
   $button.disabled = disabled
-  $button.small = small
+  $button.size = size
 
   return $button
 }
@@ -180,7 +185,7 @@ SmallButtonWithIconOnTheRight.parameters = {
   },
 }
 
-export const SmallButtonWithSpinner = Template('<sinch-spinner type="small" slot="left-icon"></sinch-spinner>')
+export const SmallButtonWithSpinner = Template('<sinch-spinner size="s" slot="left-icon"></sinch-spinner>')
 
 SmallButtonWithSpinner.args = {
   type: 'primary',
@@ -191,7 +196,7 @@ SmallButtonWithSpinner.args = {
 SmallButtonWithSpinner.parameters = {
   docs: {
     source: {
-      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner type="small" slot="left-icon"></sinch-spinner>\n</sinch-button>',
+      code: '<sinch-button type="primary" text="Click me" onClick={onClick}>\n  <sinch-spinner slot="left-icon"></sinch-spinner>\n</sinch-button>',
     },
   },
 }

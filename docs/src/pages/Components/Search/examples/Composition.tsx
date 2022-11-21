@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import type { FC } from 'react'
+import type { FC, CSSProperties } from 'react'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/search'
-import '@sinch-engage/nectary/icons/close'
+
+const inputWidth: CSSProperties = {
+  width: 250,
+}
 
 const options: string[] = [
   'Option 1',
@@ -37,19 +39,12 @@ export const CompositionExample: FC = () => {
           slot="input"
           aria-label="Search"
           value={value}
+          style={inputWidth}
           on-focus={() => setIsOpen(true)}
           on-blur={() => setIsOpen(false)}
           on-change={(e) => setValue(e.detail)}
         >
           <sinch-icon-search slot="icon"/>
-          <sinch-icon-button
-            slot="right"
-            aria-label="Clear search"
-            small
-            on-click={() => setValue('')}
-          >
-            <sinch-icon-close slot="icon"/>
-          </sinch-icon-button>
         </sinch-input>
       </sinch-field>
       <sinch-action-menu

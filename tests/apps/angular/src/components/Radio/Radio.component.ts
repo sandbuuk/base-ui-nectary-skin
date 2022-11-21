@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/radio-option'
 @Component({
   selector: 'radio-component',
   templateUrl: './Radio.component.html',
-  styleUrls: ['./Radio.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class RadioComponent {

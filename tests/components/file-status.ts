@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { test } from '@playwright/test'
 import { typeValues } from '@sinch-engage/nectary/file-status/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
@@ -9,13 +9,15 @@ const withProgress = '/file-status?width=300&type=progress&filename=name.png&pro
 const withDescription = '/file-status?width=300&type=error&filename=name.png&description=true'
 const checkValue = makeAccessibilityTests('/file-status?width=300&type=success', 'sinch-file-status')
 
-test('accessibility', checkValue(async function* () {
-  yield
+test('accessibility', checkValue({
+  async *fn() {
+    yield
+  },
 }))
 
 test('file-status screenshots', runScreenshotTests('sinch-file-status', [
   {
-    name: 'type attribute',
+    name: 'type',
     url: shot,
     async *fn({ $eval }) {
       for (const type of typeValues) {
@@ -25,19 +27,7 @@ test('file-status screenshots', runScreenshotTests('sinch-file-status', [
     },
   },
   {
-    name: 'type property',
-    url: shot,
-    async *fn({ $, $eval }) {
-      for (const type of typeValues) {
-        await $eval((el, type) => {
-          el.type = type
-        }, type)
-        expect(await $.getAttribute('type')).toBe(type)
-      }
-    },
-  },
-  {
-    name: 'filename attribute',
+    name: 'filename',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => {
@@ -49,21 +39,6 @@ test('file-status screenshots', runScreenshotTests('sinch-file-status', [
         el.setAttribute('filename', '')
       })
       yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'filename property',
-    url: shot,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.filename = 'updated_filename.txt'
-      })
-      expect(await $.getAttribute('filename')).toBe('updated_filename.txt')
-
-      await $eval((el) => {
-        el.filename = ''
-      })
-      expect(await $.getAttribute('filename')).toBe('')
     },
   },
   {

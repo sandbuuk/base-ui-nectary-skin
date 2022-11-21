@@ -18,7 +18,7 @@ export const ErrorExample: FC = () => (
       <sinch-icon-button
         slot="action"
         aria-label="Remove file"
-        small
+        size="s"
         on-click={() => {}}
       >
         <sinch-icon-close slot="icon"/>
@@ -29,7 +29,7 @@ export const ErrorExample: FC = () => (
       <sinch-icon-button
         slot="action"
         aria-label="Try again"
-        small
+        size="s"
         on-click={() => {}}
       >
         <sinch-icon-refresh slot="icon"/>

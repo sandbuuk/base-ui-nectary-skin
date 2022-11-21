@@ -6,18 +6,18 @@ import '@sinch-engage/nectary/icons/help-outline'
 @Component({
   selector: 'icon-button-component',
   templateUrl: './IconButton.component.html',
-  styleUrls: ['./IconButton.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class IconButtonComponent {
   isDisabled: boolean
-  isSmall: boolean
+  size: string | null
   hasSpinner: boolean
 
   constructor() {
     const url = new URL(location.href)
     this.isDisabled = url.searchParams.get('disabled') !== null
-    this.isSmall = url.searchParams.get('small') !== null
+    this.size = url.searchParams.get('size')
     this.hasSpinner = url.searchParams.get('spinner') !== null
   }
 

@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/segmented-control-option'
 @Component({
   selector: 'segmented-control-component',
   templateUrl: './SegmentedControl.component.html',
-  styleUrls: ['./SegmentedControl.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class SegmentedControlComponent {

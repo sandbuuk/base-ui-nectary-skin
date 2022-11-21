@@ -41,9 +41,9 @@ export const Popover: FC<TPopover> = ({ search }) => {
           />
           <section
             slot="content"
-            style={{ maxWidth: '240px', padding: '12px' }}
+            style={{ maxWidth: '240px', padding: '12px', fontWeight: 'normal' }}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </section>
         </sinch-popover>
         <div style={{ width: '50px', backgroundColor: 'red' }}/>
@@ -71,7 +71,7 @@ export const Popover: FC<TPopover> = ({ search }) => {
         slot="content"
         style={{ maxWidth: '240px', padding: '12px' }}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit
       </section>
     </sinch-popover>
   )

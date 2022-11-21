@@ -27,8 +27,8 @@ const getSkinTone = (url: string): number => {
   return 0
 }
 
-const mockEmojiUrl = (page: Page) => {
-  return page.route('**/*.{svg}', (route) => {
+const mockEmojiUrl = async (page: Page) => {
+  await page.route('**/*.{svg}', (route) => {
     const url = route.request().url()
     const tone = getSkinTone(url)
 
@@ -73,29 +73,36 @@ const mockEmojiUrl = (page: Page) => {
       body,
     })
   })
+
+  return () => page.unroute('**/*.{svg}')
 }
 
 const shot = '/emoji-picker'
 const checkWithEverything = makeAccessibilityTests('/emoji-picker', 'sinch-emoji-picker')
 
-test('accessibility', checkWithEverything(async function* ({ $ }) {
-  yield
-  await $.click()
-  yield
+test('accessibility', checkWithEverything({
+  before({ page }) {
+    return mockEmojiUrl(page)
+  },
+  async *fn({ $ }) {
+    yield
+    await $.click()
+    yield
+  },
 }))
 
 test('emoji picker screenshots', runScreenshotTests('sinch-emoji-picker', [
   {
     name: 'emoji tooltip',
     url: shot,
-    async *before({ page }) {
-      await mockEmojiUrl(page)
+    before({ page }) {
+      return mockEmojiUrl(page)
     },
     async *fn({ page, $eval }) {
       const pt = centerRect(await $eval((el) => el.nthEmojiRect(4)))
 
       await page.mouse.move(pt.x, pt.y)
-      await page.waitForTimeout(1200)
+      await page.waitForTimeout(1500)
 
       yield { name: 'shot' }
     },
@@ -103,8 +110,8 @@ test('emoji picker screenshots', runScreenshotTests('sinch-emoji-picker', [
   {
     name: 'skin menu',
     url: shot,
-    async *before({ page }) {
-      await mockEmojiUrl(page)
+    before({ page }) {
+      return mockEmojiUrl(page)
     },
     async *fn({ page, $eval }) {
       const tabPt = centerRect(await $eval((el) => el.nthTabRect(1)))
@@ -132,8 +139,8 @@ test('emoji picker screenshots', runScreenshotTests('sinch-emoji-picker', [
   {
     name: 'search',
     url: shot,
-    async *before({ page }) {
-      await mockEmojiUrl(page)
+    before({ page }) {
+      return mockEmojiUrl(page)
     },
     async *fn({ page, $eval }) {
       const pt = centerRect(await $eval((el) => el.searchInputRect))
@@ -158,8 +165,8 @@ test('emoji picker screenshots', runScreenshotTests('sinch-emoji-picker', [
   {
     name: 'tabs',
     url: shot,
-    async *before({ page }) {
-      await mockEmojiUrl(page)
+    before({ page }) {
+      return mockEmojiUrl(page)
     },
     async *fn({ page, $eval }) {
       const pt = centerRect(await $eval((el) => el.nthTabRect(1)))
@@ -175,6 +182,9 @@ test('emoji picker events', runScreenshotTests('sinch-emoji-picker', [
   {
     name: 'custom events',
     url: shot,
+    before({ page }) {
+      return mockEmojiUrl(page)
+    },
     async *fn({ page }) {
       const picker = page.locator('sinch-emoji-picker')
       const testPicker = testCustomEvent(page, picker)
@@ -185,6 +195,9 @@ test('emoji picker events', runScreenshotTests('sinch-emoji-picker', [
   {
     name: 'native events',
     url: shot,
+    before({ page }) {
+      return mockEmojiUrl(page)
+    },
     async *fn({ page, $eval }) {
       await subscribeToEvents(page, 'sinch-emoji-picker-change')
 

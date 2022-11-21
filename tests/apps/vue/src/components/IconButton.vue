@@ -1,13 +1,13 @@
 <template>
   <sinch-icon-button
-    :small="isSmall"
+    :size="size"
     :disabled="isDisabled"
     aria-label="Button"
     @--click="onClick"
     @--focus="onFocus"
     @--blur="onBlur">
+    <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
     <sinch-icon-help-outline v-if="!hasSpinner" slot="icon"></sinch-icon-help-outline>
-    <sinch-spinner v-if="hasSpinner" static type="medium" slot="icon"></sinch-spinner>
   </sinch-icon-button>
 </template>
 
@@ -32,11 +32,11 @@ export default {
     }
   },
   computed: {
+    size() {
+      return this.search.get('size')
+    },
     isDisabled() {
       return this.search.get('disabled') !== null
-    },
-    isSmall() {
-      return this.search.get('small') !== null
     },
     hasSpinner() {
       return this.search.get('spinner') !== null
@@ -44,4 +44,3 @@ export default {
   }
 }
 </script>
-

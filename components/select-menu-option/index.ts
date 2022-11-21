@@ -87,6 +87,10 @@ export class SelectMenuOption extends NectaryElement {
   get disabled() {
     return getBooleanAttribute(this, 'disabled')
   }
+
+  matchesSearch(searchValue: string): boolean {
+    return this.text.toLowerCase().includes(searchValue)
+  }
 }
 
 defineCustomElement('sinch-select-menu-option', SelectMenuOption)

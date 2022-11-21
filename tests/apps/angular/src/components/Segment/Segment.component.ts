@@ -13,7 +13,19 @@ import '@sinch-engage/nectary/button'
 @Component({
   selector: 'segment-component',
   templateUrl: './Segment.component.html',
-  styleUrls: ['./Segment.component.css']
+  styles: [`
+  :host {
+    display: contents;
+  }
+  .preview-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #F1F3F4;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  `]
 })
 
 export class SegmentComponent {

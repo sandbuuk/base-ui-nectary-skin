@@ -18,7 +18,6 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-tag', class extends NectaryElement {
   #$text: HTMLElement
   #$wrapper: HTMLElement
-  #isConnected = false
 
   constructor() {
     super()
@@ -32,12 +31,9 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#isConnected = true
-    this.#updateColor()
-  }
+    super.connectedCallback()
 
-  disconnectedCallback() {
-    this.#isConnected = false
+    this.#updateColor()
   }
 
   get color() {
@@ -85,7 +81,7 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   }
 
   #updateColor() {
-    if (!this.#isConnected) {
+    if (!this.isConnected) {
       return
     }
 

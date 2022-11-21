@@ -41,14 +41,23 @@ type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
 const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator): EvalFunc<T> =>
   (cb: any, arg?: any) => $.evaluate(cb, arg, { /* timeout: 1000 */ })
 
+type TBeforeProps = {
+  page: Page,
+}
+
 type UpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
   page: Page,
   $: Locator,
   $eval: EvalFunc<T>,
 }
 
+type TTestProps<T extends keyof HTMLElementTagNameMap> = {
+  before?: (props: TBeforeProps) => Promise<void | (() => Promise<void>)>,
+  fn: (props: UpdateStateProps<T>) => AsyncIterable<void>,
+}
+
 export const makeAccessibilityTests = <T extends keyof HTMLElementTagNameMap>(pageUrl: string, elementSelector: T) =>
-  (updateState: (props: UpdateStateProps<T>) => AsyncIterable<void>) =>
+  (testProps: TTestProps<T>) =>
     async ({ page }: PlaywrightTestArgs, info: TestInfo) => {
       if (info.project.name !== 'chromium-react') {
         info.skip()
@@ -56,22 +65,34 @@ export const makeAccessibilityTests = <T extends keyof HTMLElementTagNameMap>(pa
         return
       }
 
-      await page.goto(pageUrl, { waitUntil: 'networkidle' })
+      let after: (() => Promise<void>) | void
 
-      // Optionally subscribe to page console output
-      // page.on('console', (msg) => console.log(msg.text()))
-      // page.on('pageerror', (e) => console.log(e))
+      try {
+        if (testProps.before != null) {
+          after = await testProps.before({ page })
+        }
 
-      const locator = page.locator(elementSelector)
+        await page.goto(pageUrl, { waitUntil: 'networkidle' })
 
-      for await (const _ of updateState({ page, $: locator, $eval: makeEval<T>(locator) })) {
-        const { violations } = await evaluateAccessibilityCheck(page)
+        // Optionally subscribe to page console output
+        // page.on('console', (msg) => console.log(msg.text()))
+        // page.on('pageerror', (e) => console.log(e))
 
-        if (violations.length > 0) {
-          process.stdout.write(printAxeResults(violations))
-          info.fail()
+        const locator = page.locator(elementSelector)
 
-          break
+        for await (const _ of testProps.fn({ page, $: locator, $eval: makeEval<T>(locator) })) {
+          const { violations } = await evaluateAccessibilityCheck(page)
+
+          if (violations.length > 0) {
+            process.stdout.write(printAxeResults(violations))
+            info.fail()
+
+            break
+          }
+        }
+      } finally {
+        if (after != null) {
+          await after()
         }
       }
     }

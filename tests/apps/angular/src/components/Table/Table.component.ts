@@ -18,7 +18,7 @@ import '@sinch-engage/nectary/link'
 @Component({
   selector: 'table-component',
   templateUrl: './Table.component.html',
-  styleUrls: ['./Table.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class TableComponent {

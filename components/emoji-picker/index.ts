@@ -17,8 +17,6 @@ import '../icons/emoji-events'
 import '../icons/emoji-symbols'
 import {
   defineCustomElement,
-  dispatchContextConnectEvent,
-  dispatchContextDisconnectEvent,
   getAttribute,
   getBooleanAttribute,
   NectaryElement,
@@ -26,6 +24,7 @@ import {
   updateBooleanAttribute,
   getReactEventHandler,
   getRect,
+  subscribeContext,
 } from '../utils'
 import dataJson from './data.json'
 import templateHTML from './template.html'
@@ -37,7 +36,7 @@ import type { TSinchPopoverElement } from '../popover/types'
 import type { TSinchTabsElement } from '../tabs/types'
 import type { TRect } from '../types'
 import type {
-  TContextKeyboard,
+  TContextKeydown,
   TContextVisibility,
 } from '../utils'
 import type { TEmojiGroup, TEmoji, TSinchEmojiPickerElement, TSinchEmojiPickerReact } from './types'
@@ -105,23 +104,19 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     this.#$tabs.addEventListener('-change', this.#onTabsChange as any, { signal })
     this.#$input.addEventListener('-change', this.#onSearchChange as any, { signal })
     this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
-    this.addEventListener('-keydown', this.#onContexKeydown as any, { signal })
     this.#$skinButton.addEventListener('-click', this.#onSkinButtonClick, { signal })
     this.#$skinPopover.addEventListener('-close', this.#onSkinPopoverClose, { signal })
     this.#$skinMenu.addEventListener('-change', this.#onSkinMenuChange as any, { signal })
     this.#$list.addEventListener('click', this.#onListClick, { signal })
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
-    this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
-    dispatchContextConnectEvent(this, 'keydown')
-    dispatchContextConnectEvent(this, 'visibility')
+    subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
+    subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
 
     this.#updateTabs()
     this.#updateEmojis()
   }
 
   disconnectedCallback() {
-    dispatchContextDisconnectEvent(this, 'keydown')
-    dispatchContextDisconnectEvent(this, 'visibility')
     this.#controller!.abort()
   }
 
@@ -159,7 +154,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     )
   }
 
-  #onContexKeydown = (e: CustomEvent<TContextKeyboard>) => {
+  #onContextKeyDown = (e: CustomEvent<TContextKeydown>) => {
     this.#handleKeydown(e.detail)
   }
 
@@ -175,7 +170,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     this.#handleKeydown(e)
   }
 
-  #handleKeydown(e: TContextKeyboard) {
+  #handleKeydown(e: TContextKeydown) {
     switch (e.code) {
       case 'Space':
       case 'Enter': {
@@ -407,7 +402,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     el.setAttribute('label', emoji.label)
 
     btn.setAttribute('aria-label', emoji.label)
-    btn.setAttribute('small', '')
+    btn.setAttribute('size', 's')
     btn.setAttribute('data-value', emoji.emoji)
     btn.appendChild(el)
 

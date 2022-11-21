@@ -11,20 +11,10 @@ const withTitle = '/dialog?title=Title'
 
 test('dialog screenshots', runScreenshotTests('sinch-dialog', [
   {
-    name: 'caption attribute',
+    name: 'caption',
     url: withTitle,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('caption', 'Updated title'))
-      yield { name: 'updated', includeRects: [await $eval((el) => el.dialogRect)] }
-    },
-  },
-  {
-    name: 'caption prop',
-    url: withTitle,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.caption = 'Updated title'
-      })
       yield { name: 'updated', includeRects: [await $eval((el) => el.dialogRect)] }
     },
   },

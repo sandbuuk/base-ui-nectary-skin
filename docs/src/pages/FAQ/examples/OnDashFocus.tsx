@@ -18,7 +18,7 @@ export const OnDashFocusExample: FC = () => {
       <sinch-icon-button
         slot="right"
         aria-label="Test"
-        small
+        size="s"
         on-focus={() => console.log('BUTTON FOCUS')}
       >
         <sinch-icon-calendar-today slot="icon"/>

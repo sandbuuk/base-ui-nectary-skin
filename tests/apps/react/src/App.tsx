@@ -27,9 +27,12 @@ import { HorizontalStepper } from './components/HorizontalStepper'
 import { IconButton } from './components/IconButton'
 import { InlineAlert } from './components/InlineAlert'
 import { Input } from './components/Input'
+import { InputSlots } from './components/InputSlots'
 import { Link } from './components/Link'
 import { List } from './components/List'
 import { Pagination } from './components/Pagination'
+import { PhoneCodeMenu } from './components/PhoneCodeMenu'
+import { PhoneCodeSelect } from './components/PhoneCodeSelect'
 import { Popover } from './components/Popover'
 import { Progress } from './components/Progress'
 import { Radio } from './components/Radio'
@@ -230,6 +233,12 @@ const mapElement = (url: URL) => {
       )
     }
 
+    case '/input-slots': {
+      return (
+        <InputSlots search={url.searchParams}/>
+      )
+    }
+
     case '/link': {
       return (
         <Link search={url.searchParams}/>
@@ -245,6 +254,18 @@ const mapElement = (url: URL) => {
     case '/pagination': {
       return (
         <Pagination search={url.searchParams}/>
+      )
+    }
+
+    case '/phone-code-menu': {
+      return (
+        <PhoneCodeMenu search={url.searchParams}/>
+      )
+    }
+
+    case '/phone-code-select': {
+      return (
+        <PhoneCodeSelect search={url.searchParams}/>
       )
     }
 

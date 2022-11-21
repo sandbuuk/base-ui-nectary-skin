@@ -41,8 +41,10 @@ const withLongLine = `/table?width=1000&state=${items({ hasLongLine: true })}`
 const withNarrow = `/table?width=300&state=${items()}`
 const checkTableWithItems = makeAccessibilityTests(`/table?width=1000&state=${items()}`, 'sinch-table')
 
-test('accessibility', checkTableWithItems(async function* () {
-  yield
+test('accessibility', checkTableWithItems({
+  async *fn() {
+    yield
+  },
 }))
 
 test('table screenshots', runScreenshotTests('sinch-table', [

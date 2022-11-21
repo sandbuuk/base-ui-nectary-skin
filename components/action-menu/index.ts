@@ -2,17 +2,16 @@ import { isSinchActionMenuOption } from '../action-menu-option/utils'
 import {
   attrValueToPixels,
   defineCustomElement,
-  dispatchContextConnectEvent,
-  dispatchContextDisconnectEvent,
   getBooleanAttribute,
   getIntegerAttribute,
   NectaryElement,
+  subscribeContext,
   updateBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchActionMenuOptionElement } from '../action-menu-option/types'
-import type { TContextKeyboard, TContextVisibility } from '../utils'
+import type { TContextKeydown, TContextVisibility } from '../utils'
 import type { TSinchActionMenuElement, TSinchActionMenuReact } from './types'
 
 const ITEM_HEIGHT = 40
@@ -43,18 +42,14 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
     this.setAttribute('role', 'listbox')
     this.setAttribute('tabindex', '0')
-    this.addEventListener('-keydown', this.#onContextKeyDown as any, { signal })
-    this.addEventListener('-visibility', this.#onContextVisibility as any, { signal })
     this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
     this.addEventListener('blur', this.#onListboxBlur, { signal })
     this.#$listbox.addEventListener('click', this.#onListboxClick, { signal })
-    dispatchContextConnectEvent(this, 'keydown')
-    dispatchContextConnectEvent(this, 'visibility')
+    subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
+    subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
   }
 
   disconnectedCallback() {
-    dispatchContextDisconnectEvent(this, 'keydown')
-    dispatchContextDisconnectEvent(this, 'visibility')
     this.#controller!.abort()
   }
 
@@ -98,7 +93,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     this.#handleKeydown(e)
   }
 
-  #onContextKeyDown = (e: CustomEvent<TContextKeyboard>) => {
+  #onContextKeyDown = (e: CustomEvent<TContextKeydown>) => {
     this.#handleKeydown(e.detail)
   }
 
@@ -109,7 +104,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     }
   }
 
-  #handleKeydown(e: TContextKeyboard) {
+  #handleKeydown(e: TContextKeydown) {
     switch (e.code) {
       case 'Enter': {
         const $opt = this.#findSelectedOption()

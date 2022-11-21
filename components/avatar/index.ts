@@ -6,9 +6,11 @@ import {
   updateAttribute,
   updateLiteralAttribute,
 } from '../utils'
+import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertAvatarColor, assertSize, assertStatus, getAvatarColorBg, getAvatarColorFg, sizeValues, statusValues } from './utils'
-import type { TSinchAvatarElement, TSinchAvatarReact, TSinchAvatarSize, TSinchAvatarStatus } from './types'
+import { assertAvatarColor, assertStatus, getAvatarColorBg, getAvatarColorFg, statusValues } from './utils'
+import type { TSinchSize } from '../utils/size'
+import type { TSinchAvatarElement, TSinchAvatarReact, TSinchAvatarStatus } from './types'
 
 const template = document.createElement('template')
 
@@ -18,7 +20,6 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
   #$circle: HTMLElement
   #$text: HTMLElement
   #$image: HTMLImageElement
-  #isConnected = false
 
   constructor() {
     super()
@@ -33,13 +34,9 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#isConnected = true
+    super.connectedCallback()
 
     this.#updateColor()
-  }
-
-  disconnectedCallback() {
-    this.#isConnected = false
   }
 
   get src() {
@@ -67,10 +64,10 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
   }
 
   get size() {
-    return getLiteralAttribute(this, sizeValues, 'size', 'm')
+    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
   }
 
-  set size(value: TSinchAvatarSize) {
+  set size(value: TSinchSize) {
     updateLiteralAttribute(this, sizeValues, 'size', value)
   }
 
@@ -102,15 +99,15 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
       }
 
       case 'size': {
-        if (newVal !== null) {
-          assertSize(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertSize(newVal, 'sinch-avatar')
         }
 
         break
       }
 
       case 'status': {
-        if (newVal !== null) {
+        if (process.env.NODE_ENV !== 'production') {
           assertStatus(newVal)
         }
 
@@ -124,14 +121,16 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
   }
 
   #updateColor() {
-    if (!this.#isConnected) {
+    if (!this.isConnected) {
       return
     }
 
     const colorName = this.color
 
     if (colorName !== null && colorName.length > 0) {
-      assertAvatarColor(this, colorName)
+      if (process.env.NODE_ENV !== 'production') {
+        assertAvatarColor(this, colorName)
+      }
 
       const bg = getAvatarColorBg(colorName)
       const fg = getAvatarColorFg(colorName)

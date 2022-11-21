@@ -4,10 +4,10 @@
       <sinch-table-row>
         <sinch-table-head-cell v-for="(cell, index) in state.head" :key="index" :text="cell.text" :align="cell.align" :fit="cell.isFit">
           <sinch-checkbox v-if="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
-            <sinch-icon-button v-if="cell.isSortable" aria-label="Sort" small slot="right">
+            <sinch-icon-button v-if="cell.isSortable" aria-label="Sort" size="s" slot="right">
               <sinch-icon-north slot="icon"></sinch-icon-north>
             </sinch-icon-button>
-            <sinch-icon-button v-if="cell.isFilterable" aria-label="Filter" small slot="left">
+            <sinch-icon-button v-if="cell.isFilterable" aria-label="Filter" size="s" slot="left">
               <sinch-icon-filter-list slot="icon"></sinch-icon-filter-list>
             </sinch-icon-button>
           <sinch-help-tooltip v-if="cell.tooltip != null" slot="tooltip" :text="cell.tooltip"></sinch-help-tooltip>

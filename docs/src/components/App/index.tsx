@@ -13,7 +13,6 @@ import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
 import { NotFoundPage } from '~/pages/NotFound'
 import { lazyScrollIntoView } from '~/utils/lazy-scroll-into-view'
-import '@sinch-engage/nectary/theme.css'
 import './styles.css'
 
 const req = import.meta.webpackContext!('~/pages/Components/', {

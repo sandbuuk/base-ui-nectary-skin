@@ -11,13 +11,15 @@ const withIcon = '/chip?text=Label%20text&color=Gray%2010&icon=true'
 const withIconSmall = '/chip?text=Label%20text&color=Gray%2010&small=true&icon=true'
 const checkTagWithDismiss = makeAccessibilityTests('/chip?text=Label%20text&color=Gray%2010&icon=true', 'sinch-chip')
 
-test('accessibility', checkTagWithDismiss(async function* () {
-  yield
+test('accessibility', checkTagWithDismiss({
+  async *fn() {
+    yield
+  },
 }))
 
 test('chip screenshots', runScreenshotTests('sinch-chip', [
   {
-    name: 'color attribute',
+    name: 'color',
     url: withIcon,
     async *fn({ $eval }) {
       for (const colorName of colorValues) {
@@ -30,30 +32,7 @@ test('chip screenshots', runScreenshotTests('sinch-chip', [
     },
   },
   {
-    name: 'color property',
-    url: withIcon,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.color = 'light-blue'
-      })
-
-      expect(await $.getAttribute('color')).toBe('light-blue')
-
-      await $eval((el) => {
-        el.color = ''
-      })
-
-      expect(await $.getAttribute('color')).toBe('')
-
-      await $eval((el) => {
-        el.color = null
-      })
-
-      expect(await $.getAttribute('color')).toBe(null)
-    },
-  },
-  {
-    name: 'text attribute',
+    name: 'text',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => {
@@ -63,18 +42,7 @@ test('chip screenshots', runScreenshotTests('sinch-chip', [
     },
   },
   {
-    name: 'text property',
-    url: shot,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.text = 'Updated text'
-      })
-
-      expect(await $.getAttribute('text')).toBe('Updated text')
-    },
-  },
-  {
-    name: 'small attribute',
+    name: 'small',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('small', ''))
@@ -82,21 +50,6 @@ test('chip screenshots', runScreenshotTests('sinch-chip', [
 
       await $eval((el) => el.removeAttribute('small'))
       yield { name: 'unset' }
-    },
-  },
-  {
-    name: 'small property',
-    url: shot,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.small = true
-      })
-      expect(await $.getAttribute('small')).toBe('')
-
-      await $eval((el) => {
-        el.small = false
-      })
-      expect(await $.getAttribute('small')).toBe(null)
     },
   },
   {

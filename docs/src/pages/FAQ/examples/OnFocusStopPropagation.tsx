@@ -18,7 +18,7 @@ export const OnFocusStopPropagationExample: FC = () => {
       <sinch-icon-button
         slot="right"
         aria-label="Test"
-        small
+        size="s"
         onFocus={(e) => {
           e.stopPropagation()
           console.log('BUTTON FOCUS')
