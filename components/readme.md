@@ -50,10 +50,8 @@ setNectaryRegistry(customRegistry)
 
 ### Theme
 
-Import CSS file with [custom properties](./theme.css) (variables):
-
 ```js
-import '@sinch-engage/nectary/theme.css'
+import '@sinch-engage/nectary/theme'
 ```
 
 Use color palette or custom font face:
@@ -137,7 +135,7 @@ Then add this part to your jest.config.js file:
 It lets Jest know how to mock the css imports in your codebase, like for example when you import the theme:
 
 ```js
-import '@sinch-engage/nectary/theme.css'
+import '@sinch-engage/nectary/theme'
 ```
 
 This import should not throw an error now.

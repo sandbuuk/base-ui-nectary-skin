@@ -1,5 +1,5 @@
 import React from 'react'
-import "@sinch-engage/nectary/theme.css"
+import "@sinch-engage/nectary/theme"
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
 
 setNectaryRegistry(window.customElements)
