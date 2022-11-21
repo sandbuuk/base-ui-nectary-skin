@@ -1,16 +1,17 @@
 import type { TSinchElementReact } from '../types'
+import type { TSinchSize } from '../utils/size'
 
 export type TSinchButtonType = 'primary' | 'secondary' | 'cta-primary' | 'cta-secondary' | 'destructive'
 
 export type TSinchButtonElement = HTMLElement & {
   /** Type */
   type: TSinchButtonType,
+  /** Size, `m` by default */
+  size: TSinchSize,
   /** Text content */
   text: string,
   /** Disabled */
   disabled: boolean,
-  /** Small */
-  small: boolean,
   /** Click event */
   addEventListener(type: '-click', listener: (e: CustomEvent<void>) => void): void,
   /** Focus event */
@@ -19,25 +20,25 @@ export type TSinchButtonElement = HTMLElement & {
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
   /** Type */
   setAttribute(attr: 'type', value: TSinchButtonType): void,
+  /** Size, `m` by default */
+  setAttribute(attr: 'size', value: TSinchSize): void,
   /** Text content */
   setAttribute(attr: 'text', value: string): void,
   /** Disabled */
   setAttribute(attr: 'disabled', value: ''): void,
-  /** Small */
-  setAttribute(attr: 'small', value: ''): void,
 }
 
 export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   /** Type */
   type: TSinchButtonType,
+  /** Size, `m` by default */
+  size?: TSinchSize,
   /** Text content */
   text: string,
   /** Label that is used for a11y */
   'aria-label': string,
   /** Disabled */
   disabled?: boolean,
-  /** Small */
-  small?: boolean,
   /** Click event handler */
   'on-click'?: (e: CustomEvent<void>) => void,
   /** Focus event handler */
