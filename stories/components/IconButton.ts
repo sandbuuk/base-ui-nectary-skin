@@ -1,3 +1,4 @@
+import { sizeExValues } from '@sinch-engage/nectary/utils/size'
 import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/icon-button'
@@ -8,7 +9,11 @@ export default {
   title: 'Components/IconButton',
   argTypes: {
     disabled: { control: 'boolean', description: 'Is button disabled' },
-    small: { control: 'boolean', description: 'Is button small' },
+    size: {
+      description: 'Button size',
+      control: 'select',
+      options: sizeExValues,
+    },
     onClick: { action: 'onClick', description: 'Click handler' },
     onFocus: { action: 'onFocus', description: 'Focus handler (optional)' },
     onBlur: { action: 'onBlur', description: 'Blur handler (optional)' },
@@ -16,7 +21,7 @@ export default {
 } as Meta
 
 const Template = (innerHTML: string): Story => () => {
-  const [{ disabled, small }] = useArgs()
+  const [{ disabled, size }] = useArgs()
   const buttonRef = useRef<HTMLElementTagNameMap['sinch-icon-button'] | null>(null)
 
   if (buttonRef.current === null) {
@@ -30,7 +35,7 @@ const Template = (innerHTML: string): Story => () => {
   const $button = buttonRef.current!
 
   $button.disabled = disabled
-  $button.small = small
+  $button.size = size
 
   return $button
 }

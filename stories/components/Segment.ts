@@ -1,4 +1,4 @@
-import { sizeValues } from '@sinch-engage/nectary/segment/utils'
+import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { useArgs, useRef } from '@storybook/addons'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/field'

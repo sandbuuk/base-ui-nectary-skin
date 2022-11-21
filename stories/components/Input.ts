@@ -1,3 +1,4 @@
+import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { useArgs, useRef } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/input'
@@ -16,6 +17,11 @@ export default {
     placeholder: {
       description: 'Placeholder',
       control: 'text',
+    },
+    size: {
+      description: 'Input size',
+      control: 'select',
+      options: sizeValues,
     },
     disabled: {
       description: 'Is disabled',
@@ -47,6 +53,7 @@ const Template = (innerHTML: string): Story => () => {
     placeholder,
     invalid,
     disabled,
+    size,
   }, updateArgs] = useArgs()
   const inputRef = useRef<HTMLElementTagNameMap['sinch-input'] | null>(null)
 
@@ -75,6 +82,7 @@ const Template = (innerHTML: string): Story => () => {
   $input.placeholder = placeholder
   $input.invalid = invalid
   $input.disabled = disabled
+  $input.size = size
 
   return $input
 }

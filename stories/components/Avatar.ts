@@ -1,4 +1,5 @@
-import { sizeValues, statusValues } from '@sinch-engage/nectary/avatar/utils'
+import { statusValues } from '@sinch-engage/nectary/avatar/utils'
+import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { useRef, useArgs } from '@storybook/addons'
 import type { Meta, Story } from '@storybook/html'
 import '@sinch-engage/nectary/avatar'
@@ -8,7 +9,7 @@ export default {
   title: 'Components/Avatar',
   argTypes: {
     size: {
-      description: 'Avatar category',
+      description: 'Avatar size',
       control: 'select',
       options: sizeValues,
     },
