@@ -49,7 +49,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.addEventListener('-close', this.#onCloseReactHandler, { signal })
     this.#$pop.addEventListener('-close', this.#onPopClose, { signal })
 
-    subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
+    subscribeContext(this.#$content, 'visibility', this.#onContextVisibility, signal)
     updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
   }
 
