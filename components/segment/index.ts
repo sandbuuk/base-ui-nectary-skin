@@ -13,11 +13,13 @@ import {
   updateBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
+import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertSize, sizeValues } from './utils'
+import { getTitleTypeFromSize } from './utils'
 import type { TSinchTitleElement } from '../title/types'
 import type { TRect } from '../types'
-import type { TSinchSegmentElement, TSinchSegmentReact, TSinchSegmentSize } from './types'
+import type { TSinchSize } from '../utils/size'
+import type { TSinchSegmentElement, TSinchSegmentReact } from './types'
 
 const template = document.createElement('template')
 
@@ -89,12 +91,14 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
       }
 
       case 'size': {
-        updateAttribute(this.#$caption, 'type', newVal)
-        updateAttribute(this.#$caption, 'level', getTitleLevelFromType(newVal))
         if (process.env.NODE_ENV !== 'production') {
           assertSize(newVal, 'sinch-segment')
         }
 
+        const titleType = getTitleTypeFromSize(this.size)
+
+        updateAttribute(this.#$caption, 'type', titleType)
+        updateAttribute(this.#$caption, 'level', getTitleLevelFromType(titleType))
 
         break
       }
@@ -118,10 +122,10 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
   }
 
   get size() {
-    return getLiteralAttribute(this, sizeValues, 'size', 'm')
+    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
   }
 
-  set size(value: TSinchSegmentSize) {
+  set size(value: TSinchSize) {
     updateLiteralAttribute(this, sizeValues, 'size', value)
   }
 

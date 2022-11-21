@@ -1,11 +1,16 @@
-import type { TSinchSegmentSize } from './types'
+import type { TSinchTitleType } from '../title/types'
+import type { TSinchSize } from '../utils/size'
 
-export const sizeValues: readonly TSinchSegmentSize[] = ['l', 'm', 's']
-
-type TAssertSize = (value: string | null) => asserts value is TSinchSegmentSize
-
-export const assertSize: TAssertSize = (value) => {
-  if (value === null || !sizeValues.includes(value as any)) {
-    throw new Error(`sinch-segment: invalid size attribute: ${value}`)
+export const getTitleTypeFromSize = (size: TSinchSize): TSinchTitleType => {
+  switch (size) {
+    case 'l': {
+      return 'l'
+    }
+    case 's': {
+      return 's'
+    }
+    default: {
+      return 'm'
+    }
   }
 }
