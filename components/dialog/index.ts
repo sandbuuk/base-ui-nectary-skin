@@ -2,7 +2,6 @@ import '../icon-button'
 import '../icons/close'
 import '../stop-events'
 import '../title'
-import dialogPolyfill from 'dialog-polyfill'
 import {
   defineCustomElement,
   getAttribute,
@@ -37,8 +36,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.#$dialog = shadowRoot.querySelector('dialog')!
     this.#$closeButton = shadowRoot.querySelector('#close')!
     this.#$caption = shadowRoot.querySelector('#caption')!
-
-    dialogPolyfill.registerDialog(this.#$dialog)
   }
 
   connectedCallback() {

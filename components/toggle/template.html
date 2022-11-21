@@ -56,24 +56,6 @@
   border-radius: 14px;
 }
 
-@supports not selector(:focus-visible) {
-  #input:focus::after {
-    position: absolute;
-    content: "";
-    left: -4px;
-    top: -4px;
-    right: -4px;
-    bottom: -4px;
-    border: 2px solid var(--sinch-color-border-focus);
-    border-radius: 18px;
-    pointer-events: none;
-  }
-
-  :host([small]:not([small="false"])) #input:focus::after {
-    border-radius: 14px;
-  }
-}
-
 #knob-container {
   position: relative;
   box-sizing: border-box;

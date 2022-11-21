@@ -1,4 +1,3 @@
-import dialogPolyfill from 'dialog-polyfill'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -64,12 +63,6 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     this.#keydownContext = new Context(this.#$contentSlot, 'keydown')
     this.#visibilityContext = new Context(this.#$contentSlot, 'visibility')
-
-    dialogPolyfill.registerDialog(this.#$dialog)
-
-    /* Disable polyfill focus trap behavior */
-    // @ts-ignore
-    dialogPolyfill.dm.handleFocus_ = function() {}
   }
 
   connectedCallback() {
