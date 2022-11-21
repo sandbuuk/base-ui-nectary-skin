@@ -35,6 +35,8 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   }
 
   connectedCallback() {
+    super.connectedCallback()
+
     this.#controller = new AbortController()
 
     const { signal } = this.#controller
@@ -49,6 +51,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.#controller!.abort()
   }
 

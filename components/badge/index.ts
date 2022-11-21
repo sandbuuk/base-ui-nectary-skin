@@ -23,7 +23,7 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   #$badgeWrapper: HTMLElement
   #$badge: HTMLElement
   #$text: HTMLElement
-  #isConnected = false
+
   #observer: ResizeObserver
 
   constructor() {
@@ -41,14 +41,14 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#isConnected = true
+    super.connectedCallback()
     this.#updateColor()
     this.#observer.observe(this)
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.#observer.unobserve(this)
-    this.#isConnected = false
   }
 
   get text() {
@@ -143,7 +143,7 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   }
 
   #updateColor() {
-    if (!this.#isConnected) {
+    if (!this.isConnected) {
       return
     }
 

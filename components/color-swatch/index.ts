@@ -17,7 +17,6 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-color-swatch', class extends NectaryElement {
   #$wrapper: HTMLElement
-  #isConnected = false
 
   constructor() {
     super()
@@ -29,12 +28,8 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#isConnected = true
+    super.connectedCallback()
     this.#updateColor()
-  }
-
-  disconnectedCallback() {
-    this.#isConnected = false
   }
 
   get name() {
@@ -64,7 +59,7 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
   }
 
   #updateColor() {
-    if (!this.#isConnected) {
+    if (!this.isConnected) {
       return
     }
 

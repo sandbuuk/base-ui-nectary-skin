@@ -40,7 +40,6 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   #$listbox: HTMLElement
   #controller: AbortController | null = null
   #prevColorsValue: string | null = ''
-  #isConnected = false
 
   constructor() {
     super()
@@ -53,6 +52,8 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   }
 
   connectedCallback() {
+    super.connectedCallback()
+
     this.#controller = new AbortController()
 
     const { signal } = this.#controller
@@ -72,7 +73,8 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#isConnected = false
+    super.disconnectedCallback()
+
     this.#prevColorsValue = null
     dispatchContextDisconnectEvent(this, 'visibility')
     dispatchContextDisconnectEvent(this, 'keydown')
@@ -136,7 +138,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
 
     switch (name) {
       case 'value': {
-        if (this.#isConnected) {
+        if (this.isConnected) {
           this.#onValueChange()
         }
 
@@ -144,7 +146,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
       }
 
       case 'colors': {
-        if (this.#isConnected) {
+        if (this.isConnected) {
           this.#updateColors()
         }
 
@@ -158,7 +160,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
       }
 
       case 'cols': {
-        if (this.#isConnected) {
+        if (this.isConnected) {
           this.#updateColumns()
         }
 
@@ -237,7 +239,6 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
 
   #onMount = () => {
     this.#updateColors()
-    this.#isConnected = true
   }
 
   #onListboxBlur = () => {

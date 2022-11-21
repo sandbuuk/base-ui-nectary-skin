@@ -32,7 +32,6 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #$target: HTMLElement
   #$focus: HTMLElement
   #$dialog: HTMLDialogElement
-  #isConnected: boolean
   #resizeThrottle
   #$targetSlot: HTMLSlotElement
   #$targetOpenSlot: HTMLSlotElement
@@ -58,7 +57,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     this.#$targetOpenSlot = shadowRoot.querySelector('slot[name="target-open"]')!
     this.#$contentSlot = shadowRoot.querySelector('slot[name="content"]')!
     this.#$targetOpenWrapper = shadowRoot.querySelector('#target-open')!
-    this.#isConnected = false
+
     this.#resizeThrottle = throttleAnimationFrame(this.#updateOrientation)
 
     this.#keydownContext = new Context(this.#$contentSlot, 'keydown')
@@ -66,6 +65,8 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   connectedCallback() {
+    super.connectedCallback()
+
     this.#controller = new AbortController()
 
     const { signal } = this.#controller
@@ -87,12 +88,12 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.#controller!.abort()
     this.#keydownContext.unsubscribe()
     this.#visibilityContext.unsubscribe()
     dispatchContextDisconnectEvent(this, 'visibility')
     this.#onCollapse()
-    this.#isConnected = false
   }
 
   static get observedAttributes() {
@@ -200,7 +201,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #onExpand() {
-    if (!this.#isConnected || this.#isOpen()) {
+    if (!this.isConnected || this.#isOpen()) {
       return
     }
 

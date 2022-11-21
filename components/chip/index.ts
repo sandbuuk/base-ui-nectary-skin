@@ -20,7 +20,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-chip', class extends NectaryElement {
   #$text: HTMLElement
   #$button: HTMLElement
-  #isConnected = false
+
   #controller: AbortController | null = null
 
   constructor() {
@@ -35,6 +35,8 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   }
 
   connectedCallback() {
+    super.connectedCallback()
+
     this.#controller = new AbortController()
 
     const { signal } = this.#controller
@@ -46,13 +48,13 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
     this.addEventListener('-click', this.#onClickReactHandler, { signal })
     this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
     this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
-    this.#isConnected = true
+
     this.#updateColor()
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.#controller!.abort()
-    this.#isConnected = false
   }
 
   get color() {
@@ -100,7 +102,7 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   }
 
   #updateColor() {
-    if (!this.#isConnected) {
+    if (!this.isConnected) {
       return
     }
 

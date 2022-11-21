@@ -18,7 +18,6 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
   #$circle: HTMLElement
   #$text: HTMLElement
   #$image: HTMLImageElement
-  #isConnected = false
 
   constructor() {
     super()
@@ -33,13 +32,9 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#isConnected = true
+    super.connectedCallback()
 
     this.#updateColor()
-  }
-
-  disconnectedCallback() {
-    this.#isConnected = false
   }
 
   get src() {
@@ -124,7 +119,7 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
   }
 
   #updateColor() {
-    if (!this.#isConnected) {
+    if (!this.isConnected) {
       return
     }
 
