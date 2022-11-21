@@ -17,7 +17,13 @@ module.exports = function({ types: t }) {
             const minHtml = minify(src, {
               collapseWhitespace: true,
               keepClosingSlash: true,
-              minifyCSS: true,
+              minifyCSS: {
+                level: {
+                  1: {
+                    removeEmpty: false,
+                  },
+                },
+              },
               removeComments: true,
               noNewlinesBeforeTagClose: true,
               collapseInlineTagWhitespace: true,

@@ -56,7 +56,10 @@ const generateTable = async (entries, exportedName) => {
   return `export const ${exportedName} = (function() {\n${compiled.value}})({ jsx, jsxs, useMDXComponents }).default\n\n`
 }
 
-const typeRefs = new Map()
+const typeRefs = new Map([
+  ['TSinchSize', '\'l\' | \'m\' | \'s\''],
+  ['TSinchSizeEx', '\'l\' | \'m\' | \'s\' | \'xs\''],
+])
 
 export async function loader(src) {
   const ast = parse(src, {
