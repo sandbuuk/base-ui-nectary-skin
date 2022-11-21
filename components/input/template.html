@@ -4,44 +4,61 @@
   vertical-align: middle;
 }
 
-#input-wrapper {
+:host([data-size="l"]) {
+  --sinch-size: var(--sinch-size-l);
+  --sinch-size-icon: var(--sinch-input-icon-size-l);
+  --sinch-shape-radius: var(--sinch-shape-radius-l);
+}
+
+:host([data-size="m"]) {
+  --sinch-size: var(--sinch-size-m);
+  --sinch-size-icon: var(--sinch-input-icon-size-m);
+  --sinch-shape-radius: var(--sinch-shape-radius-m);
+}
+
+:host([data-size="s"]) {
+  --sinch-size: var(--sinch-size-s);
+  --sinch-size-icon: var(--sinch-input-icon-size-s);
+  --sinch-shape-radius: var(--sinch-shape-radius-s);
+}
+
+#wrapper {
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   box-sizing: border-box;
-  border-radius: var(--sinch-shape-radius-s);
+  border-radius: var(--sinch-shape-radius);
   width: 100%;
-  height: 48px;
-  background-color: var(--sinch-color-snow-100);
-
-  --sinch-color-icon: var(--sinch-color-stormy-500);
+  height: var(--sinch-size);
+  background-color: var(--sinch-color-bg-primary-light);
 }
 
 #input {
   all: initial;
   flex: 1;
   min-width: 0;
-  height: 48px;
-  padding: 0 12px 0 44px;
+  height: 100%;
+  padding: 0 12px 0 40px;
   font: var(--sinch-font-text-m);
   color: var(--sinch-color-text-default);
 }
 
+:host([data-size="s"]) #input {
+  padding-left: 32px;
+}
+
 #input::placeholder {
-  font: var(--sinch-font-body);
+  font: var(--sinch-font-text-m);
   color: var(--sinch-color-text-muted);
   opacity: 1;
 }
 
 #border {
   position: absolute;
-  border: 1px solid var(--sinch-color-stormy-200);
-  border-radius: var(--sinch-shape-radius-s);
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  border: 1px solid var(--sinch-color-border-dark);
+  border-radius: var(--sinch-shape-radius);
+  inset: 0;
   pointer-events: none;
 }
 
@@ -50,19 +67,20 @@
 }
 
 #input:disabled {
-  color: var(--sinch-color-stormy-100);
+  color: var(--sinch-color-text-disabled);
 }
 
 #input:disabled::placeholder {
-  color: var(--sinch-color-snow-500);
+  color: var(--sinch-color-text-disabled);
 }
 
 #input:disabled + #border {
-  border-color: var(--sinch-color-snow-500);
+  border-color: var(--sinch-color-border-disabled);
 }
 
 #input:focus + #border {
-  border-color: var(--sinch-color-stormy-600);
+  border-color: var(--sinch-color-border-focus);
+  border-width: 2px;
 }
 
 #input[type="password"] {
@@ -70,22 +88,51 @@
   letter-spacing: 0.1em;
 }
 
-#icon {
-  display: flex;
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  pointer-events: none;
-
-  --sinch-size-icon: 24px;
+#icon-wrapper {
+  position: relative;
+  height: 100%;
 }
 
-#icon.empty {
+#icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
+
+:host([disabled]:not([disabled="false"])) #icon {
+  --sinch-color-icon: var(--sinch-color-border-disabled);
+}
+
+#icon-wrapper.empty {
   display: none;
 }
 
-#icon.empty ~ #input {
+#icon-wrapper.empty ~ #input {
   padding-left: 12px;
+}
+
+#clear {
+  display: none;
+
+  --sinch-icon-button-color-icon: var(--sinch-color-text-muted);
+}
+
+#clear.active {
+  display: block;
+}
+
+:host([disabled]:not([disabled="false"])) #clear {
+  display: none;
+}
+
+#wrapper:focus-within #clear {
+  --sinch-icon-button-color-icon: var(--sinch-color-stormy-500);
 }
 
 #right {
@@ -94,26 +141,44 @@
   align-self: stretch;
   align-items: center;
   gap: 4px;
-  padding-right: 8px;
+  padding-right: 4px;
 }
 
 #right.empty {
   display: none;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-:host([disabled]:not([disabled="false"])) {
-  --sinch-color-icon: var(--sinch-color-stormy-100);
+#left {
+  display: flex;
+  flex-direction: row;
+  align-self: stretch;
+  align-items: center;
+  gap: 4px;
+  padding-left: 4px;
+}
+
+#left.empty {
+  display: none;
 }
 </style>
 
-<div id="input-wrapper">
-  <div id="icon">
-    <slot name="icon"></slot>
+<div id="wrapper">
+  <div id="left">
+    <slot name="left"></slot>
+  </div>
+  <div id="icon-wrapper">
+    <div id="icon">
+      <slot name="icon"></slot>
+    </div>
   </div>
   <input id="input" type="text"/>
   <div id="border"></div>
   <div id="right">
+    <sinch-stop-events events="keydown">
+      <sinch-icon-button id="clear" aria-label="Clear input value">
+        <sinch-icon-close slot="icon"></sinch-icon-close>
+      </sinch-icon-button>
+    </sinch-stop-events>
     <slot name="right"></slot>
   </div>
 </div>
