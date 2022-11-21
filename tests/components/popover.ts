@@ -66,6 +66,19 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
     },
   },
   {
+    name: 'tip orientation',
+    url: withModalOpen,
+    async *fn({ $eval }) {
+      for (const value of orientationValues) {
+        await $eval((el, value) => {
+          el.setAttribute('tip', '')
+          el.setAttribute('orientation', value)
+        }, value)
+        yield { name: value, includeRects: [await $eval((el) => el.popoverRect)] }
+      }
+    },
+  },
+  {
     name: 'modal',
     url: withWideNonModal,
     async *fn({ $eval }) {
