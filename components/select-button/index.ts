@@ -26,7 +26,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: true })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
