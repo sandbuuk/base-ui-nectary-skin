@@ -2,19 +2,25 @@ import '../tooltip'
 import {
   defineCustomElement,
   getBooleanAttribute,
+  getLiteralAttribute,
   getReactEventHandler,
   isAttrTrue,
   NectaryElement,
+  subscribeContext,
   updateAttribute,
   updateBooleanAttribute,
+  updateLiteralAttribute,
+  Context,
+  getAttribute,
 } from '../utils'
 import { assertSizeEx, DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
+import { assertType, typeValues } from './utils'
 import type { TSinchTooltipElement } from '../tooltip/types'
 import type { TRect } from '../types'
-import type { TSinchIconButtonElement, TSinchIconButtonReact } from './types'
 import type { TContextSize } from '../utils'
 import type { TSinchSizeEx } from '../utils/size'
+import type { TSinchIconButtonElement, TSinchIconButtonReact, TSinchIconButtonType } from './types'
 
 const template = document.createElement('template')
 
@@ -29,7 +35,7 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: true })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -65,10 +71,20 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['disabled', 'aria-label']
+    return [
+      'type',
+      'size',
+      'disabled',
+      'aria-label',
+      'data-size',
+    ]
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'disabled': {
         const isDisabled = isAttrTrue(newVal)
@@ -80,6 +96,13 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
       }
       case 'aria-label': {
         updateAttribute(this.#$tooltip, 'text', newVal)
+
+        break
+      }
+      case 'type': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
 
         break
       }
@@ -98,6 +121,14 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
         break
       }
     }
+  }
+
+  set type(value: TSinchIconButtonType) {
+    updateLiteralAttribute(this, typeValues, 'type', value)
+  }
+
+  get type(): TSinchIconButtonType {
+    return getLiteralAttribute(this, typeValues, 'type', 'tertiary')
   }
 
   set disabled(isDisabled: boolean) {

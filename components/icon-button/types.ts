@@ -1,8 +1,11 @@
 import type { TRect, TSinchElementReact } from '../types'
 import type { TSinchSizeEx } from '../utils/size'
 
+export type TSinchIconButtonType = 'primary' | 'secondary' | 'tertiary'
 
 export type TSinchIconButtonElement = HTMLElement & {
+  /** Type, `tertiary` by default */
+  type: TSinchIconButtonType,
   /** Size, `m` by default */
   size: TSinchSizeEx,
   /** Disabled */
@@ -14,6 +17,8 @@ export type TSinchIconButtonElement = HTMLElement & {
   addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
   /** Blur event */
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
+  /** Type, `tertiary` by default */
+  setAttribute(name: 'type', value: string): void,
   /** Size, `m` by default */
   setAttribute(name: 'size', value: string): void,
   /** Disabled */
@@ -21,6 +26,8 @@ export type TSinchIconButtonElement = HTMLElement & {
 }
 
 export type TSinchIconButtonReact = TSinchElementReact<TSinchIconButtonElement> & {
+  /** Type, `tertiary` by default */
+  type?: TSinchIconButtonType,
   /** Size, `m` by default */
   size?: TSinchSizeEx,
   /** Disabled */
