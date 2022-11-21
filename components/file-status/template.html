@@ -25,6 +25,7 @@
   gap: 8px;
   flex: 1;
   min-width: 0;
+  min-height: 24px;
   margin-left: 16px;
   color: var(--sinch-color-stormy-500);
 }
@@ -35,16 +36,16 @@
 #icon-success,
 #icon-error {
   display: none;
+
+  --sinch-color-icon: var(--sinch-color-stormy-500);
 }
 
 #action {
-  height: 24px;
-}
-
-#action ::slotted(*) {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  display: flex;
+  gap: 4px;
+  height: 32px;
+  margin-top: -4px;
+  margin-bottom: -4px;
 }
 
 :host([type="pending"]) #icon-pending,
@@ -53,8 +54,6 @@
 :host([type="success"]) #icon-success,
 :host([type="error"]) #icon-error {
   display: block;
-
-  --sinch-color-icon: var(--sinch-color-stormy-500);
 }
 
 :host([type="success"]) #icon-success {
