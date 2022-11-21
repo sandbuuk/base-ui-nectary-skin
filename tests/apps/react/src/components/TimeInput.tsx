@@ -51,7 +51,7 @@ export const TimeInput: FC<TTimeInput> = ({ search }) => {
         >
           <sinch-icon-button
             slot="right"
-            small
+            size="s"
             aria-label="Open Time Picker"
             onClick={onOpen}
           >

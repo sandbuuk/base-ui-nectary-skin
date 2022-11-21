@@ -5,8 +5,9 @@ import '@sinch-engage/nectary/select-button'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/select-menu'
 import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/icons/keyboard-arrow-down'
+import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary/icons/search'
 
 type TMenuValue = {
   text: string,
@@ -17,14 +18,17 @@ type TMenuValue = {
 @Component({
   selector: 'select-component',
   templateUrl: './Select.component.html',
-  styleUrls: ['./Select.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class SelectComponent {
   value: string
+  size: string | null
   isOpen = false
   isInvalid: boolean
   isDisabled: boolean
+  hasLeft: boolean
+  hasIcon: boolean
   rows: number | null
   options: Record<string, TMenuValue> = {
     1: { text: 'Option 1 value long long long', icon: '1' },
@@ -36,8 +40,11 @@ export class SelectComponent {
   constructor() {
     const url = new URL(location.href)
     this.value = url.searchParams.get('value') ?? ''
+    this.size = url.searchParams.get('size')
     this.isDisabled = url.searchParams.get('disabled') != null
     this.isInvalid = url.searchParams.get('invalid') != null
+    this.hasLeft = url.searchParams.get('left') != null
+    this.hasIcon = url.searchParams.get('icon') != null
 
     const numVisibleValue = url.searchParams.get('rows')
     this.rows = numVisibleValue !== null ? parseInt(numVisibleValue) : null

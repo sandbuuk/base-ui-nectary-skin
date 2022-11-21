@@ -34,6 +34,11 @@ module.exports = {
           }
         ],
       },
+      {
+        test: /\.css$/,
+        include: /theme/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
 }

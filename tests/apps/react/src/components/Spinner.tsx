@@ -6,12 +6,11 @@ type TSpinner = {
 }
 
 export const Spinner: FC<TSpinner> = ({ search }) => {
-  const type: any = search.get('type')
+  const size: any = search.get('size')
 
   return (
     <sinch-spinner
-      type={type}
-      static
+      size={size}
     />
   )
 }

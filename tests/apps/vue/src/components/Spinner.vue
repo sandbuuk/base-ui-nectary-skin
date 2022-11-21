@@ -1,8 +1,5 @@
 <template>
-  <sinch-spinner
-    v-bind:type="type"
-    static
-  ></sinch-spinner>
+  <sinch-spinner :size="size"></sinch-spinner>
 </template>
 
 <script>
@@ -13,10 +10,9 @@ export default {
     search: URLSearchParams
   },
   computed: {
-    type() {
-      return this.search.get('type')
+    size() {
+      return this.search.get('size')
     },
   }
 }
 </script>
-

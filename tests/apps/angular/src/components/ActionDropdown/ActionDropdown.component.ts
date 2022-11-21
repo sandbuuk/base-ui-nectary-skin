@@ -14,7 +14,7 @@ type TMenuValue = {
 @Component({
   selector: 'action-dropdown-component',
   templateUrl: './ActionDropdown.component.html',
-  styleUrls: ['./ActionDropdown.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ActionDropdownComponent {

@@ -26,10 +26,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "scripts": [],
-            "styles": [
-              "../../../components/theme.css"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

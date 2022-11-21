@@ -6,14 +6,14 @@ import '@sinch-engage/nectary/icons/expand-more'
 @Component({
   selector: 'button-component',
   templateUrl: './Button.component.html',
-  styleUrls: ['./Button.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ButtonComponent {
   type: string | null
   text: string | null
+  size: string | null
   isDisabled: boolean
-  isSmall: boolean
   hasLeftIcon: boolean
   hasRightIcon: boolean
   hasSpinner: boolean
@@ -22,8 +22,8 @@ export class ButtonComponent {
     const url = new URL(location.href)
     this.type = url.searchParams.get('type')
     this.text = url.searchParams.get('text')
+    this.size = url.searchParams.get('size')
     this.isDisabled = url.searchParams.get('disabled') !== null
-    this.isSmall = url.searchParams.get('small') !== null
     this.hasLeftIcon = url.searchParams.get('icon-left') !== null
     this.hasRightIcon = url.searchParams.get('icon-right') !== null
     this.hasSpinner = url.searchParams.get('spinner') !== null

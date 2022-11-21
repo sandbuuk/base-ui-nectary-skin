@@ -26,7 +26,7 @@ export const FileStatus: FC<TFileStatus> = ({ search }) => {
       {hasProgress && (
         <sinch-progress slot="content" value={73} aria-label="Progress" detailed/>
       )}
-      <sinch-icon-button slot="action" aria-label="Close" small>
+      <sinch-icon-button slot="action" aria-label="Close" size="s">
         <sinch-icon-close slot="icon"/>
       </sinch-icon-button>
     </sinch-file-status>

@@ -15,6 +15,22 @@ const options: Record<string, TMenuValue> = {
   2: { text: 'Option 2', icon: '1', isDisabled: true },
   3: { text: 'Option 3', icon: null },
   4: { text: 'Option 4', icon: null },
+  5: { text: 'Option 1 value long long long', icon: '1' },
+  6: { text: 'Option 2', icon: '1', isDisabled: true },
+  7: { text: 'Option 3', icon: null },
+  8: { text: 'Option 4', icon: null },
+  9: { text: 'Option 1 value long long long', icon: '1' },
+  10: { text: 'Option 2', icon: '1', isDisabled: true },
+  11: { text: 'Option 3', icon: null },
+  12: { text: 'Option 4', icon: null },
+  13: { text: 'Option 1 value long long long', icon: '1' },
+  14: { text: 'Option 2', icon: '1', isDisabled: true },
+  15: { text: 'Option 3', icon: null },
+  16: { text: 'Option 4', icon: null },
+  17: { text: 'Option 1 value long long long', icon: '1' },
+  18: { text: 'Option 2', icon: '1', isDisabled: true },
+  19: { text: 'Option 3', icon: null },
+  20: { text: 'Option 4', icon: null },
 }
 
 type TSelectMenu = {
@@ -35,6 +51,11 @@ export const SelectMenu: FC<TSelectMenu> = ({ search }) => {
 
     return val !== null ? parseInt(val) : undefined
   })()
+  const isLotsItemsExample = search.get('example') === 'lots'
+
+  const items = isLotsItemsExample
+    ? Object.entries(options)
+    : Object.entries(options).slice(0, 4)
 
   return (
     <sinch-select-menu
@@ -45,7 +66,7 @@ export const SelectMenu: FC<TSelectMenu> = ({ search }) => {
       aria-label="Menu"
     >
       {
-        Object.entries(options).map(([key, { text, icon, isDisabled }]) => (
+        items.map(([key, { text, icon, isDisabled }]) => (
           <sinch-select-menu-option
             key={key}
             value={key}

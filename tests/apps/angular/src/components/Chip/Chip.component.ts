@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/icons/open-in-new'
 @Component({
   selector: 'chip-component',
   templateUrl: './Chip.component.html',
-  styleUrls: ['./Chip.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ChipComponent {

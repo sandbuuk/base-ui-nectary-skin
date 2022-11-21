@@ -4,14 +4,14 @@ import '@sinch-engage/nectary/spinner'
 @Component({
   selector: 'spinner-component',
   templateUrl: './Spinner.component.html',
-  styleUrls: ['./Spinner.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class SpinnerComponent {
-  type: string | null
+  size: string | null
 
   constructor() {
     const url = new URL(location.href)
-    this.type = url.searchParams.get('type')
+    this.size = url.searchParams.get('size')
   }
 }

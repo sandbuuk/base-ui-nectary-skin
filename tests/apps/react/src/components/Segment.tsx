@@ -64,7 +64,7 @@ export const Segment: FC<TSegment> = ({ search }) => {
       {hasInfo && <sinch-tag text="Label" slot="info"/>}
       {hasInfo && (
         <sinch-icon-button
-          small
+          size="s"
           aria-label="Icon Button"
           onClick={() => {}}
           slot="info"
@@ -91,8 +91,8 @@ export const Segment: FC<TSegment> = ({ search }) => {
       {hasAction && (
         <>
           <sinch-checkbox aria-label="Checkbox" checked={false} onChange={() => {}} text="Checkbox" slot="action"/>
-          <sinch-button small text="Cancel" aria-label="Cancel" type="secondary" slot="action" onClick={() => {}}/>
-          <sinch-button small text="Ok" aria-label="Ok" type="primary" slot="action" onClick={() => {}}/>
+          <sinch-button size="s" text="Cancel" aria-label="Cancel" type="secondary" slot="action" onClick={() => {}}/>
+          <sinch-button size="s" text="Ok" aria-label="Ok" type="primary" slot="action" onClick={() => {}}/>
         </>
       )}
     </sinch-segment>

@@ -28,7 +28,7 @@ template.innerHTML = `
 }
 
 :host::before {
-  font: var(--sinch-font-hero);
+  font: var(--sinch-font-title-xl);
   color: var(--sinch-color-text-default);
   position: absolute;
   left: 0;

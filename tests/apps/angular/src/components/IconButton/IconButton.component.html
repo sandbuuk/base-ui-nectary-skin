@@ -1,10 +1,10 @@
 <sinch-icon-button
-  [attr.small]="isSmall"
+  [attr.size]="size"
   [attr.disabled]="isDisabled"
   aria-label="Button"
   (-focus)="onFocus()"
   (-blur)="onBlur()"
   (-click)="onClick()">
   <sinch-icon-help-outline *ngIf="!hasSpinner" slot="icon"></sinch-icon-help-outline>
-  <sinch-spinner *ngIf="hasSpinner" static type="medium" slot="icon"></sinch-spinner>
+  <sinch-spinner *ngIf="hasSpinner" slot="icon"></sinch-spinner>
 </sinch-icon-button>

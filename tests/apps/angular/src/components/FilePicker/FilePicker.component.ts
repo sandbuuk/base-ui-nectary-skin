@@ -6,7 +6,7 @@ import '@sinch-engage/nectary/icons/upload'
 @Component({
   selector: 'file-picker-component',
   templateUrl: './FilePicker.component.html',
-  styleUrls: ['./FilePicker.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class FilePickerComponent {

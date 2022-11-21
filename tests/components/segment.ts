@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withEverything = '/segment?width=600&caption=Title&action=true&content=true&icon=true&info=true&preview=true'
@@ -12,20 +13,10 @@ const withEverythingCollapse = '/segment?width=600&caption=Title&action=true&con
 
 test('segment screenshots', runScreenshotTests('sinch-segment', [
   {
-    name: 'caption attribute',
+    name: 'caption',
     url: withCaption,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('caption', 'Updated title'))
-      yield { name: 'updated' }
-    },
-  },
-  {
-    name: 'caption prop',
-    url: withCaption,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.caption = 'Updated title'
-      })
       yield { name: 'updated' }
     },
   },
@@ -37,33 +28,13 @@ test('segment screenshots', runScreenshotTests('sinch-segment', [
     },
   },
   {
-    name: 'size attribute',
+    name: 'size',
     url: withCaption,
     async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('size', 'l'))
-      yield { name: 'l' }
-      await $eval((el) => el.setAttribute('size', 'm'))
-      yield { name: 'm' }
-      await $eval((el) => el.setAttribute('size', 's'))
-      yield { name: 's' }
-    },
-  },
-  {
-    name: 'size property',
-    url: withCaption,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.size = 'l'
-      })
-      yield { name: 'l' }
-      await $eval((el) => {
-        el.size = 'm'
-      })
-      yield { name: 'm' }
-      await $eval((el) => {
-        el.size = 's'
-      })
-      yield { name: 's' }
+      for (const value of sizeValues) {
+        await $eval((el, value) => el.setAttribute('size', value), value)
+        yield { name: value }
+      }
     },
   },
   {

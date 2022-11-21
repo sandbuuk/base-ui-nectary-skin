@@ -7,8 +7,10 @@ const withMultiple = `/segmented-icon-control?multiple=true`
 const withSingleOption = `/segmented-icon-control?single-option=true`
 const check = makeAccessibilityTests(`/segmented-icon-control`, 'sinch-segmented-icon-control')
 
-test('accessibility', check(async function* () {
-  yield
+test('accessibility', check({
+  async *fn() {
+    yield
+  },
 }))
 
 test('segmented-icon-control screenshots', runScreenshotTests('sinch-segmented-icon-control', [
@@ -32,7 +34,7 @@ test('segmented-icon-control screenshots', runScreenshotTests('sinch-segmented-i
     },
   },
   {
-    name: 'value attribute',
+    name: 'value',
     url: withOptions,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', ''))
@@ -51,41 +53,6 @@ test('segmented-icon-control screenshots', runScreenshotTests('sinch-segmented-i
       yield { name: 'option-1' }
 
       await $eval((el) => el.setAttribute('value', 'missing'))
-      yield { name: 'option-missing' }
-    },
-  },
-  {
-    name: 'value property',
-    url: withOptions,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.value = ''
-      })
-      yield { name: 'option-empty' }
-
-      await $eval((el) => {
-        el.value = '4'
-      })
-      yield { name: 'option-4' }
-
-      await $eval((el) => {
-        el.value = '3'
-      })
-      yield { name: 'option-3' }
-
-      await $eval((el) => {
-        el.value = '2'
-      })
-      yield { name: 'option-disabled' }
-
-      await $eval((el) => {
-        el.value = '1'
-      })
-      yield { name: 'option-1' }
-
-      await $eval((el) => {
-        el.value = 'missing'
-      })
       yield { name: 'option-missing' }
     },
   },

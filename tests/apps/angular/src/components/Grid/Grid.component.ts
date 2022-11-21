@@ -11,7 +11,7 @@ import '../../../../utils/grid-debug'
 @Component({
   selector: 'grid-component',
   templateUrl: './Grid.component.html',
-  styleUrls: ['./Grid.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class GridComponent {

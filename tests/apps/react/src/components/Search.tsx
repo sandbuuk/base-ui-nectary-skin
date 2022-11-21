@@ -6,7 +6,6 @@ import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/search'
 import '@sinch-engage/nectary/icons/close'
 
@@ -26,10 +25,6 @@ export const Search: FC<TSearch> = ({ search }) => {
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     setValue(e.detail)
-
-    // if (e.detail.length === 1) {
-    //   setOpen(true)
-    // }
   }
   const onOptionClick = (text: string) => {
     window.dispatchEvent(new CustomEvent('sinch-search-change', { detail: text }))
@@ -38,10 +33,6 @@ export const Search: FC<TSearch> = ({ search }) => {
     setOpen(false)
   }
   const onClose = () => {
-    setOpen(false)
-  }
-  const onClear = () => {
-    setValue('')
     setOpen(false)
   }
   const onFocus = useCallback(() => {
@@ -54,9 +45,9 @@ export const Search: FC<TSearch> = ({ search }) => {
 
   return (
     <sinch-popover
-      orientation="bottom"
       open={isOpen}
-      onClose={onClose}
+      orientation="bottom"
+      on-close={onClose}
       aria-label="Search"
     >
       <sinch-field slot="target" label="Label">
@@ -70,14 +61,6 @@ export const Search: FC<TSearch> = ({ search }) => {
           on-blur={onBlur}
         >
           <sinch-icon-search slot="icon"/>
-          <sinch-icon-button
-            slot="right"
-            small
-            aria-label="Clear search"
-            onClick={onClear}
-          >
-            <sinch-icon-close slot="icon"/>
-          </sinch-icon-button>
         </sinch-input>
       </sinch-field>
       <sinch-action-menu aria-label="Search autocomplete" slot="content">

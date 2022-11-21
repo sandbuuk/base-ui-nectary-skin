@@ -9,13 +9,15 @@ const shot12 = `/time-picker?ampm=true`
 const withValue = `/time-picker?${value}`
 const checkValue = makeAccessibilityTests(`/time-picker?${value}`, 'sinch-time-picker')
 
-test('accessibility', checkValue(async function* () {
-  yield
+test('accessibility', checkValue({
+  async *fn() {
+    yield
+  },
 }))
 
 test('time input screenshots', runScreenshotTests('sinch-time-picker', [
   {
-    name: 'ampm attribute',
+    name: 'ampm',
     url: withValue,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('ampm', ''))
@@ -25,34 +27,10 @@ test('time input screenshots', runScreenshotTests('sinch-time-picker', [
     },
   },
   {
-    name: 'ampm property',
-    url: withValue,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.ampm = true
-      })
-      yield { name: 'set' }
-      await $eval((el) => {
-        el.ampm = false
-      })
-      yield { name: 'unset' }
-    },
-  },
-  {
-    name: 'value attribute',
+    name: 'value',
     url: shot24,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', '08:23:00'))
-      yield { name: 'updated' }
-    },
-  },
-  {
-    name: 'value property',
-    url: shot24,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.value = '08:23:00'
-      })
       yield { name: 'updated' }
     },
   },

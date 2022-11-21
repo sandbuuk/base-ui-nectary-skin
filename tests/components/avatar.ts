@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { sizeValues, statusValues } from '@sinch-engage/nectary/avatar/utils'
+import { statusValues } from '@sinch-engage/nectary/avatar/utils'
+import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
@@ -10,13 +11,15 @@ const withAlt = '/avatar?alt=NS'
 const withBadgeStatus = '/avatar?size=l&bg=blue&alt=NS&badge=true&status=online'
 const check = makeAccessibilityTests('/avatar?alt=NS', 'sinch-avatar')
 
-test('accessibility', check(async function* () {
-  yield
+test('accessibility', check({
+  async *fn() {
+    yield
+  },
 }))
 
 test('avatar screenshots', runScreenshotTests('sinch-avatar', [
   {
-    name: 'size attribute',
+    name: 'size',
     url: withBadgeStatus,
     async *fn({ $eval }) {
       for (const val of sizeValues) {
@@ -25,22 +28,19 @@ test('avatar screenshots', runScreenshotTests('sinch-avatar', [
         }, val)
         yield { name: val }
       }
+
+      /* Property */
+      const attrValue = await $eval((el) => {
+        el.size = 'l'
+
+        return el.getAttribute('size')
+      })
+
+      expect(attrValue).toBe('l')
     },
   },
   {
-    name: 'size property',
-    url: withAlt,
-    async *fn({ $eval, $ }) {
-      for (const val of sizeValues) {
-        await $eval((el, val) => {
-          el.size = val
-        }, val)
-        expect(await $.getAttribute('size')).toBe(val)
-      }
-    },
-  },
-  {
-    name: 'color attribute',
+    name: 'color',
     url: withAlt,
     async *fn({ $eval }) {
       for (const val of colorValues) {
@@ -49,62 +49,57 @@ test('avatar screenshots', runScreenshotTests('sinch-avatar', [
         }, val)
         yield { name: val === '' ? 'default' : val }
       }
+
+      /* Property */
+      const attrValue = await $eval((el, val) => {
+        el.color = val
+
+        return el.getAttribute('color')
+      }, 'light-pink')
+
+      expect(attrValue).toBe('light-pink')
     },
   },
   {
-    name: 'color property',
-    url: withAlt,
-    async *fn({ $eval, $ }) {
-      for (const val of colorValues) {
-        await $eval((el, val) => {
-          el.color = val
-        }, val)
-        expect(await $.getAttribute('color')).toBe(val)
-      }
-    },
-  },
-  {
-    name: 'alt attribute',
+    name: 'alt',
     url: withAlt,
     async *fn({ $eval }) {
       await $eval((el) => {
         el.setAttribute('alt', 'XX')
       })
       yield { name: 'updated' }
-    },
-  },
-  {
-    name: 'alt property',
-    url: withAlt,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => {
-        el.alt = 'XX'
+
+      /* Property */
+      const attrValue = await $eval((el) => {
+        el.alt = 'AA'
+
+        return el.getAttribute('alt')
       })
-      expect(await $.getAttribute('alt')).toBe('XX')
+
+      expect(attrValue).toBe('AA')
     },
   },
   {
-    name: 'src attribute',
+    name: 'src',
     url: withAlt,
     async *fn({ $eval }) {
       await $eval((el, imageData) => {
         el.setAttribute('src', imageData)
       }, imageData)
       yield { name: 'set' }
-    },
-  },
-  {
-    name: 'src property',
-    url: withAlt,
-    async *fn({ $eval, $ }) {
-      await $eval((el, imageData) => {
+
+      /* Property */
+      const attrValue = await $eval((el, imageData) => {
         el.src = imageData
-      }, imageData)
-      expect(await $.getAttribute('src')).toBe(imageData)
+
+        return el.getAttribute('src')
+      }, 'aaa')
+
+      expect(attrValue).toBe('aaa')
     },
   },
   {
-    name: 'status attribute',
+    name: 'status',
     url: withAlt,
     async *fn({ $eval }) {
       for (const val of statusValues) {
@@ -113,18 +108,15 @@ test('avatar screenshots', runScreenshotTests('sinch-avatar', [
         }, val)
         yield { name: val }
       }
-    },
-  },
-  {
-    name: 'status property',
-    url: withAlt,
-    async *fn({ $eval, $ }) {
-      for (const val of statusValues) {
-        await $eval((el, val) => {
-          el.status = val
-        }, val)
-        expect(await $.getAttribute('status')).toBe(val)
-      }
+
+      /* Property */
+      const attrValue = await $eval((el) => {
+        el.status = 'busy'
+
+        return el.getAttribute('status')
+      })
+
+      expect(attrValue).toBe('busy')
     },
   },
 ]))

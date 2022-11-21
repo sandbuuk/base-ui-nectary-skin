@@ -11,17 +11,19 @@ const disabledLabeled = '/toggle?text=Label&disabled=true&checked=true&labeled=t
 const disabledSmall = '/toggle?text=Label&disabled=true&checked=true&small=true'
 const checkToggle = makeAccessibilityTests('/toggle?text=Label', 'sinch-toggle')
 
-test('accessibility', checkToggle(async function* ({ $eval }) {
-  yield
-  await $eval((el) => {
-    el.text = null
-  })
-  yield
+test('accessibility', checkToggle({
+  async *fn({ $eval }) {
+    yield
+    await $eval((el) => {
+      el.text = null
+    })
+    yield
+  },
 }))
 
 test('toggle screenshots', runScreenshotTests('sinch-toggle', [
   {
-    name: 'checked attribute',
+    name: 'checked',
     url: contentWidth,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('checked', ''))
@@ -32,22 +34,7 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
     },
   },
   {
-    name: 'checked property',
-    url: contentWidth,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.checked = true
-      })
-      yield { name: 'checked' }
-
-      await $eval((el) => {
-        el.checked = false
-      })
-      yield { name: 'unchecked' }
-    },
-  },
-  {
-    name: 'small attribute',
+    name: 'small',
     url: checked,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('small', ''))
@@ -58,22 +45,7 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
     },
   },
   {
-    name: 'small property',
-    url: checked,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.small = true
-      })
-      yield { name: 'true' }
-
-      await $eval((el) => {
-        el.small = false
-      })
-      yield { name: 'false' }
-    },
-  },
-  {
-    name: 'labeled attribute',
+    name: 'labeled',
     url: checked,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('labeled', ''))
@@ -88,26 +60,7 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
     },
   },
   {
-    name: 'labeled property',
-    url: checked,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.labeled = true
-      })
-      yield { name: 'on' }
-
-      // Uncheck toggle to show "off" label
-      await $eval((el) => el.removeAttribute('checked'))
-      yield { name: 'off' }
-
-      await $eval((el) => {
-        el.labeled = false
-      })
-      yield { name: 'no-labels' }
-    },
-  },
-  {
-    name: 'text attribute',
+    name: 'text',
     url: contentWidth,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('text', 'Updated label'))
@@ -118,44 +71,14 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
     },
   },
   {
-    name: 'text property',
-    url: contentWidth,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.text = 'Updated label'
-      })
-      yield { name: 'updated' }
-
-      await $eval((el) => {
-        el.text = ''
-      })
-      yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'disabled property',
-    url: contentWidth,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.disabled = true
-      })
-      yield { name: 'disabled' }
-
-      await $eval((el) => {
-        el.disabled = false
-      })
-      yield { name: 'enabled' }
-    },
-  },
-  {
-    name: 'disabled attribute',
+    name: 'disabled',
     url: contentWidth,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('disabled', ''))
-      yield { name: 'disabled' }
+      yield { name: 'set' }
 
       await $eval((el) => el.removeAttribute('disabled'))
-      yield { name: 'enabled' }
+      yield { name: 'unset' }
     },
   },
   {

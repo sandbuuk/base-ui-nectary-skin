@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary/select-button'
+import '@sinch-engage/nectary/tag'
+import '@sinch-engage/nectary/chip'
 import '@sinch-engage/nectary/icons/search'
 
 type TInput = {
@@ -20,15 +21,18 @@ export const Input: FC<TInput> = ({ search }) => {
   const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-input-focus'))
   const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-input-blur'))
   const type: any = search.get('type') ?? undefined
+  const size: any = search.get('size') ?? undefined
   const isInvalid = search.get('invalid') !== null
   const placeholderText = search.get('placeholder') ?? undefined
   const isDisabled = search.get('disabled') != null
+  const hasLeft = search.get('left') != null
   const hasRight = search.get('right') != null
   const hasIcon = search.get('icon') != null
 
   return (
     <sinch-input
       type={type}
+      size={size}
       placeholder={placeholderText}
       disabled={isDisabled}
       invalid={isInvalid}
@@ -41,12 +45,19 @@ export const Input: FC<TInput> = ({ search }) => {
       {hasIcon && (
         <sinch-icon-search slot="icon"/>
       )}
+      {hasLeft && (
+        <sinch-select-button
+          slot="left"
+          text="+0"
+          placeholder=""
+          aria-label=""
+          on-click={() => {}}
+        />
+      )}
       {hasRight && (
         <>
-          <sinch-tag slot="right" text="text"/>
-          <sinch-icon-button slot="right" small aria-label="Button" onClick={() => {}}>
-            <sinch-icon-close slot="icon"/>
-          </sinch-icon-button>
+          <sinch-tag slot="right" text="tag"/>
+          <sinch-chip slot="right" text="chip" aria-label=""/>
         </>
       )}
     </sinch-input>

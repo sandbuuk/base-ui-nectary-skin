@@ -10,7 +10,7 @@ const withUncontrolled = '/pagination?value=10&max=20&uncontrolled=true'
 
 test('pagination screenshots', runScreenshotTests('sinch-pagination', [
   {
-    name: 'value attribute',
+    name: 'value',
     url: withShortRange,
     async *fn({ $eval }) {
       yield { name: 'missing' }
@@ -23,27 +23,7 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
     },
   },
   {
-    name: 'value property',
-    url: withShortRange,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.value = 2
-      })
-      yield { name: 'updated' }
-
-      await $eval((el) => {
-        el.value = 1000
-      })
-      yield { name: 'over range' }
-
-      await $eval((el) => {
-        el.value = -1
-      })
-      yield { name: 'negative' }
-    },
-  },
-  {
-    name: 'max attribute',
+    name: 'max',
     url: withEmptyRange,
     async *fn({ $eval }) {
       yield { name: 'missing' }
@@ -53,26 +33,6 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
 
       await $eval((el) => el.setAttribute('max', ''))
       yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'max property',
-    url: withEmptyRange,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.max = 3
-      })
-      yield { name: 'short' }
-
-      await $eval((el) => {
-        el.max = 1000
-      })
-      yield { name: 'large' }
-
-      await $eval((el) => {
-        el.max = -1
-      })
-      yield { name: 'negative' }
     },
   },
   {

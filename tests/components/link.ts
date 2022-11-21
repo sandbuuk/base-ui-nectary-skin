@@ -14,106 +14,54 @@ const withStandaloneExternal = '/link?text=Anchor%20text&href=url&standalone=tru
 const withStandaloneExternalDisabled = '/link?text=Anchor%20text&href=url&standalone=true&external=true&disabled=true'
 const checkLink = makeAccessibilityTests('/link?text=Anchor%20text&href=url', 'sinch-link')
 
-test('accessibility', checkLink(async function* () {
-  yield
+test('accessibility', checkLink({
+  async *fn() {
+    yield
+  },
 }))
 
 test('link screenshots', runScreenshotTests('sinch-link', [
   {
-    name: 'standalone property',
-    url: shot,
-    async *fn({ $eval, page }) {
-      await $eval((el) => {
-        el.standalone = true
-      })
-      yield { name: 'set', include: [page.locator('#link-wrapper')] }
-      await $eval((el) => {
-        el.standalone = false
-      })
-      yield { name: 'unset', include: [page.locator('#link-wrapper')] }
-    },
-  },
-  {
-    name: 'standalone attribute',
+    name: 'standalone',
     url: shot,
     async *fn({ $eval, page }) {
       await $eval((el) => el.setAttribute('standalone', ''))
       yield { name: 'set', include: [page.locator('#link-wrapper')] }
+
       await $eval((el) => el.removeAttribute('standalone'))
       yield { name: 'unset', include: [page.locator('#link-wrapper')] }
     },
   },
   {
-    name: 'external property',
-    url: shot,
-    async *fn({ $eval, page }) {
-      await $eval((el) => {
-        el.external = true
-      })
-      yield { name: 'on', include: [page.locator('#link-wrapper')] }
-      await $eval((el) => {
-        el.external = false
-      })
-      yield { name: 'off', include: [page.locator('#link-wrapper')] }
-    },
-  },
-  {
-    name: 'external attribute',
+    name: 'external',
     url: shot,
     async *fn({ $eval, page }) {
       await $eval((el) => el.setAttribute('external', ''))
-      yield { name: 'on', include: [page.locator('#link-wrapper')] }
+      yield { name: 'set', include: [page.locator('#link-wrapper')] }
+
       await $eval((el) => el.removeAttribute('external'))
-      yield { name: 'off', include: [page.locator('#link-wrapper')] }
+      yield { name: 'unset', include: [page.locator('#link-wrapper')] }
     },
   },
   {
-    name: 'disabled property',
-    url: shot,
-    async *fn({ $eval, page }) {
-      await $eval((el) => {
-        el.disabled = true
-      })
-      yield { name: 'on', include: [page.locator('#link-wrapper')] }
-      await $eval((el) => {
-        el.disabled = false
-      })
-      yield { name: 'off', include: [page.locator('#link-wrapper')] }
-    },
-  },
-  {
-    name: 'disabled attribute',
+    name: 'disabled',
     url: shot,
     async *fn({ $eval, page }) {
       await $eval((el) => el.setAttribute('disabled', ''))
-      yield { name: 'on', include: [page.locator('#link-wrapper')] }
+      yield { name: 'set', include: [page.locator('#link-wrapper')] }
+
       await $eval((el) => el.removeAttribute('disabled'))
-      yield { name: 'off', include: [page.locator('#link-wrapper')] }
+      yield { name: 'unset', include: [page.locator('#link-wrapper')] }
     },
   },
   {
-    name: 'text attribute',
+    name: 'text',
     url: withExternal,
     async *fn({ $eval, page }) {
       await $eval((el) => el.setAttribute('text', 'Updated Anchor'))
       yield { name: 'updated', include: [page.locator('#link-wrapper')] }
 
       await $eval((el) => el.setAttribute('text', ''))
-      yield { name: 'empty', include: [page.locator('#link-wrapper')] }
-    },
-  },
-  {
-    name: 'text property',
-    url: withExternal,
-    async *fn({ $eval, page }) {
-      await $eval((el) => {
-        el.text = 'Updated Anchor'
-      })
-      yield { name: 'updated', include: [page.locator('#link-wrapper')] }
-
-      await $eval((el) => {
-        el.text = ''
-      })
       yield { name: 'empty', include: [page.locator('#link-wrapper')] }
     },
   },

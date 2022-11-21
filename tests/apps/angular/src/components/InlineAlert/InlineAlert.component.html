@@ -5,7 +5,7 @@
   <sinch-icon-button
     *ngIf="hasClose"
     slot="close"
-    small
+    size="s"
     (-click)="onCloseClick()"
     (-focus)="onCloseFocus()"
     (-blur)="onCloseBlur()"
@@ -16,7 +16,7 @@
     *ngIf="hasAction"
     slot="action"
     type="cta-secondary"
-    small
+    size="s"
     text="This is a Button!"
     (-click)="onButtonClick()"
     (-focus)="onButtonFocus()"

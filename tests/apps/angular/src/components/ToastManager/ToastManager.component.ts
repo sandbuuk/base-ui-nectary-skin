@@ -11,7 +11,7 @@ const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
 @Component({
   selector: 'toast-manager-component',
   templateUrl: './ToastManager.component.html',
-  styleUrls: ['./ToastManager.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ToastManagerComponent {

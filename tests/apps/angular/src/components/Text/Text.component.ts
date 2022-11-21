@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/link'
 @Component({
   selector: 'text-component',
   templateUrl: './Text.component.html',
-  styleUrls: ['./Text.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class TextComponent {

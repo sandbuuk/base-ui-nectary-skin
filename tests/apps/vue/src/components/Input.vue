@@ -1,35 +1,40 @@
 <template>
   <sinch-input
+    :type="type"
+    :size="size"
     :placeholder="placeholderText"
     :disabled="isDisabled"
     :invalid="isInvalid"
-    :type="type"
     :value="value"
     @--change="onChange"
     @--focus="onFocus"
     @--blur="onBlur">
     <sinch-icon-search v-if="hasIcon" slot="icon"></sinch-icon-search>
-    <sinch-tag v-if="hasRight" slot="right" text="text"></sinch-tag>
-    <sinch-icon-button v-if="hasRight" slot="right" small>
-      <sinch-icon-close slot="icon"></sinch-icon-close>
-    </sinch-icon-button>
+    <sinch-select-button
+      v-if="hasLeft"
+      slot="left"
+      text="+0"
+      placeholder=""
+      aria-label=""
+    >
+    </sinch-select-button>
+    <sinch-tag v-if="hasRight" slot="right" text="tag"></sinch-tag>
+    <sinch-chip v-if="hasRight" slot="right" text="chip" aria-label=""></sinch-chip>
   </sinch-input>
 </template>
 
 <script>
 import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/select-button'
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary/chip'
 import '@sinch-engage/nectary/icons/search'
 
 export default {
   methods: {
     onChange(e) {
-      if (this.isControlled) {
-        this.value = e.detail
-        window.dispatchEvent(new CustomEvent('sinch-input-change', {detail: e.detail}))
-      }
+      this.value = e.detail
+      window.dispatchEvent(new CustomEvent('sinch-input-change', {detail: e.detail}))
     },
     onFocus() {
       window.dispatchEvent(new CustomEvent('sinch-input-focus'))
@@ -54,8 +59,11 @@ export default {
     type() {
       return this.search.get('type')
     },
-    isControlled() {
-      return this.search.get('uncontrolled') === null
+    size() {
+      return this.search.get('size')
+    },
+    hasLeft() {
+      return this.search.get('left') !== null
     },
     hasRight() {
       return this.search.get('right') !== null
@@ -71,4 +79,3 @@ export default {
   }
 }
 </script>
-

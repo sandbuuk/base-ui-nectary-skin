@@ -4,17 +4,18 @@ import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCust
 
 const shot = '/select-menu?width=200'
 const withMultiple = '/select-menu?width=200&multiple=true'
+const withLots = '/select-menu?width=200&example=lots&rows=4'
 const checkSelectWithEverything = makeAccessibilityTests('/select-menu?width=200&placeholder=Placeholder%20value&value=1', 'sinch-select-menu')
 
-test('accessibility', checkSelectWithEverything(async function* ({ $ }) {
-  yield
-  await $.click()
-  yield
+test('accessibility', checkSelectWithEverything({
+  async *fn() {
+    yield
+  },
 }))
 
-test('select screenshots', runScreenshotTests('sinch-select-menu', [
+test('select menu screenshots', runScreenshotTests('sinch-select-menu', [
   {
-    name: 'value attribute',
+    name: 'value',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', ''))
@@ -34,41 +35,6 @@ test('select screenshots', runScreenshotTests('sinch-select-menu', [
 
       await $eval((el) => el.setAttribute('value', 'missing'))
       yield { name: 'option-missing' }
-    },
-  },
-  {
-    name: 'value property',
-    url: shot,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.value = ''
-      })
-      expect(await $.getAttribute('value')).toBe('')
-
-      await $eval((el) => {
-        el.value = '4'
-      })
-      expect(await $.getAttribute('value')).toBe('4')
-
-      await $eval((el) => {
-        el.value = '3'
-      })
-      expect(await $.getAttribute('value')).toBe('3')
-
-      await $eval((el) => {
-        el.value = '2'
-      })
-      expect(await $.getAttribute('value')).toBe('2')
-
-      await $eval((el) => {
-        el.value = '1'
-      })
-      expect(await $.getAttribute('value')).toBe('1')
-
-      await $eval((el) => {
-        el.value = 'missing'
-      })
-      expect(await $.getAttribute('value')).toBe('missing')
     },
   },
   {
@@ -125,7 +91,7 @@ test('select screenshots', runScreenshotTests('sinch-select-menu', [
     },
   },
   {
-    name: 'rows attribute',
+    name: 'rows',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('rows', '2'))
@@ -133,15 +99,7 @@ test('select screenshots', runScreenshotTests('sinch-select-menu', [
     },
   },
   {
-    name: 'rows property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => el.setAttribute('rows', '2'))
-      expect(await $.getAttribute('rows')).toBe('2')
-    },
-  },
-  {
-    name: 'multiple attribute',
+    name: 'multiple',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => {
@@ -157,17 +115,29 @@ test('select screenshots', runScreenshotTests('sinch-select-menu', [
     },
   },
   {
-    name: 'multiple property',
-    url: shot,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.multiple = true
-      })
-      expect(await $.getAttribute('multiple')).toBe('')
-      await $eval((el) => {
-        el.multiple = false
-      })
-      expect(await $.getAttribute('multiple')).toBe(null)
+    name: 'search',
+    url: withLots,
+    async *fn({ page }) {
+      yield { name: '1-begin' }
+
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('ArrowDown')
+      yield { name: '2-arrows' }
+
+      await page.keyboard.type('aaa')
+      await page.waitForTimeout(200)
+      yield { name: '3-type' }
+
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Enter')
+      await page.waitForTimeout(200)
+      yield { name: '4-clear' }
+
+      await page.keyboard.type('1')
+      await page.waitForTimeout(200)
+      yield { name: '5-filter' }
     },
   },
 ]))

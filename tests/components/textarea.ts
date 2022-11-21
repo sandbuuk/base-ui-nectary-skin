@@ -8,13 +8,15 @@ const withPlaceholder = '/textarea?width=200&placeholder=Placeholder%20value'
 const withEverything = '/textarea?width=200&tooltip=Tooltip%20text&invalid=true&placeholder=Placeholder%20value&value=Input%20value'
 const checkTextareaWithEverything = makeAccessibilityTests('/textarea?width=200&invalid=true&placeholder=Placeholder%20value&value=Input%20value', 'sinch-textarea')
 
-test('accessibility', checkTextareaWithEverything(async function* () {
-  yield
+test('accessibility', checkTextareaWithEverything({
+  async *fn() {
+    yield
+  },
 }))
 
 test('textarea screenshots', runScreenshotTests('sinch-textarea', [
   {
-    name: 'value attribute',
+    name: 'value',
     url: withPlaceholder,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', 'Input Value'))
@@ -24,22 +26,7 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
     },
   },
   {
-    name: 'value property',
-    url: withPlaceholder,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.value = 'Input Value'
-      })
-      yield { name: 'updated' }
-
-      await $eval((el) => {
-        el.value = ''
-      })
-      yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'placeholder attribute',
+    name: 'placeholder',
     url: withEmpty,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('placeholder', 'Placeholder Value'))
@@ -50,47 +37,13 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
     },
   },
   {
-    name: 'placeholder property',
-    url: withEmpty,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.placeholder = 'Placeholder Value'
-      })
-      yield { name: 'updated' }
-
-      await $eval((el) => {
-        el.placeholder = ''
-      })
-      yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'invalid property',
+    name: 'invalid',
     url: withValue,
     async *fn({ $eval }) {
-      await $eval((el) => {
-        el.invalid = true
-      })
+      await $eval((el) => el.setAttribute('invalid', ''))
       yield { name: 'set' }
 
-      await $eval((el) => {
-        el.invalid = false
-      })
-      yield { name: 'unset' }
-    },
-  },
-  {
-    name: 'invalid attribute',
-    url: withValue,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.setAttribute('invalid', '')
-      })
-      yield { name: 'set' }
-
-      await $eval((el) => {
-        el.removeAttribute('invalid')
-      })
+      await $eval((el) => el.removeAttribute('invalid'))
       yield { name: 'unset' }
     },
   },
@@ -106,37 +59,18 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
     },
   },
   {
-    name: 'disabled property',
+    name: 'disabled',
     url: withEverything,
     async *fn({ $eval }) {
-      await $eval((el) => {
-        el.disabled = true
-      })
-      yield { name: 'disabled' }
+      await $eval((el) => el.setAttribute('disabled', ''))
+      yield { name: 'set' }
 
-      await $eval((el) => {
-        el.disabled = false
-      })
-      yield { name: 'enabled' }
+      await $eval((el) => el.removeAttribute('disabled'))
+      yield { name: 'unset' }
     },
   },
   {
-    name: 'disabled attribute',
-    url: withEverything,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.setAttribute('disabled', '')
-      })
-      yield { name: 'disabled' }
-
-      await $eval((el) => {
-        el.removeAttribute('disabled')
-      })
-      yield { name: 'enabled' }
-    },
-  },
-  {
-    name: 'resizable attribute',
+    name: 'resizable',
     url: withPlaceholder,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('resizable', ''))
@@ -144,30 +78,10 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
     },
   },
   {
-    name: 'resizable property',
-    url: withPlaceholder,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.resizable = true
-      })
-      yield { name: 'enabled' }
-    },
-  },
-  {
-    name: 'rows attribute',
+    name: 'rows',
     url: withPlaceholder,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('rows', '1'))
-      yield { name: 'updated' }
-    },
-  },
-  {
-    name: 'rows property',
-    url: withPlaceholder,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.rows = 1
-      })
       yield { name: 'updated' }
     },
   },

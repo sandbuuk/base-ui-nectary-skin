@@ -1,0 +1,14 @@
+<sinch-select-menu
+  aria-label="Menu"
+  [attr.rows]="rows"
+  [attr.value]="value"
+  (-change)="onChange($event)">
+  <sinch-select-menu-option
+    *ngFor="let entry of countries | keyvalue"
+    [attr.value]="entry.key"
+    attr.text="({{entry.value.phoneCode}}) {{entry.value.name}}"
+    [attr.aria-label]="entry.value.name"
+  >
+    <sinch-flag slot="icon" [attr.code]="entry.key"></sinch-flag>
+  </sinch-select-menu-option>
+</sinch-select-menu>

@@ -4,7 +4,7 @@ import '@sinch-engage/nectary/tooltip'
 @Component({
   selector: 'tooltip-component',
   templateUrl: './Tooltip.component.html',
-  styleUrls: ['./Tooltip.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class TooltipComponent {

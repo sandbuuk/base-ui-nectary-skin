@@ -32,8 +32,10 @@ const getAllEvents = (page: Page) => {
   })
 }
 
-test('accessibility', checkValue(async function* () {
-  yield
+test('accessibility', checkValue({
+  async *fn() {
+    yield
+  },
 }))
 
 test('file-picker screenshots', runScreenshotTests('sinch-file-picker', [

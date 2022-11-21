@@ -4,7 +4,7 @@ import '@sinch-engage/nectary/toggle'
 @Component({
   selector: 'toggle-component',
   templateUrl: './Toggle.component.html',
-  styleUrls: ['./Toggle.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ToggleComponent {

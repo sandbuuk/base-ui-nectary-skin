@@ -4,7 +4,7 @@ import '@sinch-engage/nectary/link'
 @Component({
   selector: 'link-component',
   templateUrl: './Link.component.html',
-  styleUrls: ['./Link.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class LinkComponent {

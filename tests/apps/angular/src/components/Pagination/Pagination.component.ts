@@ -5,7 +5,7 @@ import { attrValueToInteger } from '@sinch-engage/nectary/utils'
 @Component({
   selector: 'pagination-component',
   templateUrl: './Pagination.component.html',
-  styleUrls: ['./Pagination.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class PaginationComponent {

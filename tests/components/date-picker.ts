@@ -10,13 +10,15 @@ const withValue = `/date-picker?${valueMinMaxLocale}`
 const withRange = `/date-picker?${valueMinMaxLocale}&range=true`
 const checkValue = makeAccessibilityTests(`/date-picker?${valueMinMaxLocale}`, 'sinch-date-picker')
 
-test('accessibility', checkValue(async function* () {
-  yield
+test('accessibility', checkValue({
+  async *fn() {
+    yield
+  },
 }))
 
 test('date input screenshots', runScreenshotTests('sinch-date-picker', [
   {
-    name: 'min attribute',
+    name: 'min',
     url: withValue,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('min', '2022-07-07'))
@@ -24,17 +26,7 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
     },
   },
   {
-    name: 'min property',
-    url: withValue,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => {
-        el.min = '2022-07-07'
-      })
-      expect(await $.getAttribute('min')).toBe('2022-07-07')
-    },
-  },
-  {
-    name: 'max attribute',
+    name: 'max',
     url: withValue,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('max', '2022-05-05'))
@@ -42,17 +34,7 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
     },
   },
   {
-    name: 'max property',
-    url: withValue,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => {
-        el.max = '2022-05-05'
-      })
-      expect(await $.getAttribute('max')).toBe('2022-05-05')
-    },
-  },
-  {
-    name: 'locale attribute',
+    name: 'locale',
     url: withValue,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('locale', 'ru'))
@@ -60,17 +42,7 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
     },
   },
   {
-    name: 'locale property',
-    url: withValue,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => {
-        el.locale = 'ru'
-      })
-      expect(await $.getAttribute('locale')).toBe('ru')
-    },
-  },
-  {
-    name: 'value attribute summer',
+    name: 'value summer',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', '2022-07-07'))
@@ -78,35 +50,11 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
     },
   },
   {
-    name: 'value attribute winter',
+    name: 'value winter',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', '2022-03-03'))
       yield { name: 'updated' }
-    },
-  },
-  {
-    name: 'value property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => {
-        el.value = '2022-07-07'
-      })
-      expect(await $.getAttribute('value')).toBe('2022-07-07')
-    },
-  },
-  {
-    name: 'range property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => {
-        el.range = true
-      })
-      expect(await $.getAttribute('range')).toBe('')
-      await $eval((el) => {
-        el.range = false
-      })
-      expect(await $.getAttribute('range')).toBe(null)
     },
   },
   {

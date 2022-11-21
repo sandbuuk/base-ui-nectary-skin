@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { typeValues } from '@sinch-engage/nectary/alert/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
@@ -13,51 +14,30 @@ const withTextAndButtonAndCloseExpanded = '/alert?width=500&type=info&text=Alert
 const withTextAndButtonAndCloseNarrow = '/alert?width=300&type=info&text=Alert%20text%20longer%20title&action=true&close=true'
 const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&type=info&text=${longText}&caption=${longTitle}&close=true&action=true&multiline=true`, 'sinch-alert')
 
-test('accessibility', checkMultilineTextTitleButtonClose(async function* () {
-  yield
+test('accessibility', checkMultilineTextTitleButtonClose({
+  async *fn() {
+    yield
+  },
 }))
 
 test('alert screenshots', runScreenshotTests('sinch-alert', [
   {
-    name: 'type property',
+    name: 'type',
     url: withText,
     async *fn({ $eval }) {
-      await $eval((el) => {
+      for (const type of typeValues) {
+        await $eval((el, value) => el.setAttribute('type', value), type)
+        yield { name: type }
+      }
+
+      /* Property */
+      const attrValues = await $eval((el) => {
         el.type = 'info'
-      })
-      yield { name: 'info' }
 
-      await $eval((el) => {
-        el.type = 'warn'
+        return el.getAttribute('type')
       })
-      yield { name: 'warn' }
 
-      await $eval((el) => {
-        el.type = 'error'
-      })
-      yield { name: 'error' }
-    },
-  },
-  {
-    name: 'type attribute',
-    url: withText,
-    async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('type', 'info'))
-      yield { name: 'info' }
-      await $eval((el) => el.setAttribute('type', 'warn'))
-      yield { name: 'warn' }
-      await $eval((el) => el.setAttribute('type', 'error'))
-      yield { name: 'error' }
-    },
-  },
-  {
-    name: 'text property',
-    url: withText,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.text = 'Updated text'
-      })
-      yield { name: 'updated' }
+      expect(attrValues).toBe('info')
     },
   },
   {
@@ -68,6 +48,15 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
         el.setAttribute('text', 'Updated text')
       })
       yield { name: 'updated' }
+
+      /* Property */
+      const attrValues = await $eval((el) => {
+        el.text = 'Updated text'
+
+        return el.getAttribute('text')
+      })
+
+      expect(attrValues).toBe('Updated text')
     },
   },
   {

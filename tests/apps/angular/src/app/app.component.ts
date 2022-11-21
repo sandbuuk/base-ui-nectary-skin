@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import '@sinch-engage/nectary/theme'
 
 @Component({
   selector: '#app',

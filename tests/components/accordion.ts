@@ -1,213 +1,119 @@
 import { expect, test } from '@playwright/test'
+import { statusValues } from '@sinch-engage/nectary/accordion-item/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const items = encodeURI(JSON.stringify([{
-  value: 1,
-  label: 'Option value 1',
-  icon: true,
-  status: 'success',
-  content: 'Accordion content',
-  optional: 'Required',
-}, {
-  value: 2,
-  label: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s',
-  status: 'info',
-  content: 'Accordion content',
-  optional: 'Optional',
-}, {
-  value: 3,
-  label: 'Option value 3',
-  disabled: true,
-  icon: true,
-  optional: 'Disabled',
-}, {
-  value: 4,
-  label: 'Option value 4',
-  content: 'Accordion content',
-}]))
-const singleItem = encodeURI(JSON.stringify([{
-  value: 1,
-  label: 'Option value 1',
-  icon: true,
-}]))
-const singleItemDisabled = encodeURI(JSON.stringify([{
-  value: 1,
-  label: 'Option value 1',
-  icon: true,
-  disabled: true,
-}]))
-const withItems = `/accordion?width=300&options=${items}`
-const withItemsMultiple = `/accordion?width=300&multiple=true&options=${items}`
-const withSingleItem = `/accordion?width=200&options=${singleItem}`
-const withSingleItemDisabled = `/accordion?width=200&options=${singleItemDisabled}`
-const checkItems = makeAccessibilityTests(`/accordion?width=200&options=${items}`, 'sinch-accordion')
+const withItems = `/accordion?width=300`
+const withItemsMultiple = `/accordion?width=300&multiple=true`
+const withSingleItem = `/accordion?width=200&example=single`
+const checkItems = makeAccessibilityTests(`/accordion?width=200`, 'sinch-accordion')
 
-test('accessibility', checkItems(async function* () {
-  yield
+test('accessibility', checkItems({
+  async *fn() {
+    yield
+  },
 }))
 
 test('accordion screenshots', runScreenshotTests('sinch-accordion', [
   {
-    name: 'value attribute',
+    name: 'value',
     url: withItems,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', ''))
-      yield { name: 'value-empty' }
+      yield { name: 'empty' }
 
       await $eval((el) => el.setAttribute('value', '4'))
-      yield { name: 'value-4' }
+      yield { name: '4' }
 
       await $eval((el) => el.setAttribute('value', '3'))
-      yield { name: 'value-disabled' }
+      yield { name: '3' }
 
       await $eval((el) => el.setAttribute('value', '2'))
-      yield { name: 'value-2' }
+      yield { name: '2' }
 
       await $eval((el) => el.setAttribute('value', '1'))
-      yield { name: 'value-1' }
+      yield { name: '1' }
 
       await $eval((el) => el.setAttribute('value', 'missing'))
-      yield { name: 'value-missing' }
-    },
-  },
-  {
-    name: 'value property',
-    url: withItems,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.value = ''
-      })
-      yield { name: 'value-empty' }
+      yield { name: 'missing' }
 
-      await $eval((el) => {
+      /* Property */
+      const attrValue = await $eval((el) => {
         el.value = '4'
-      })
-      yield { name: 'value-4' }
 
-      await $eval((el) => {
-        el.value = '3'
+        return el.getAttribute('value')
       })
-      yield { name: 'value-disabled' }
 
-      await $eval((el) => {
-        el.value = '2'
-      })
-      yield { name: 'value-2' }
-
-      await $eval((el) => {
-        el.value = '1'
-      })
-      yield { name: 'value-1' }
-
-      await $eval((el) => {
-        el.value = 'missing'
-      })
-      yield { name: 'value-missing' }
+      expect(attrValue).toBe('4')
     },
   },
   {
-    name: 'click',
+    name: 'normal mode',
     url: withItems,
     async *fn({ $ }) {
       await $.locator('sinch-accordion-item').nth(0).click()
-      yield { name: 'open-0' }
+      yield { name: '1-click-0' }
 
       await $.locator('sinch-accordion-item').nth(3).click()
-      yield { name: 'open-3' }
+      yield { name: '2-click-3' }
 
       await $.locator('sinch-accordion-item').nth(3).click()
-      yield { name: 'close-3' }
+      yield { name: '3-click-3' }
     },
   },
   {
-    name: 'multiple click',
+    name: 'multiple mode',
     url: withItemsMultiple,
     async *fn({ $ }) {
       await $.locator('sinch-accordion-item').nth(0).click()
-      yield { name: 'open-0' }
+      yield { name: '1-click-0' }
 
       await $.locator('sinch-accordion-item').nth(3).click()
-      yield { name: 'open-3' }
+      yield { name: '2-click-3' }
 
       await $.locator('sinch-accordion-item').nth(3).click()
-      yield { name: 'close-3' }
+      yield { name: '3-click-3' }
     },
   },
   {
-    name: 'disabled click',
-    url: withSingleItemDisabled,
-    async *fn({ $ }) {
-      await $.locator('sinch-accordion-item').nth(0).click()
-      yield { name: 'open' }
-    },
-  },
-  {
-    name: 'disabled property',
-    url: withSingleItem,
-    async *fn({ $ }) {
-      const $item = $.locator('sinch-accordion-item').first()
-
-      await $item.evaluate((el) => {
-        (el as any).disabled = true
-      })
-      yield { name: 'on' }
-    },
-  },
-  {
-    name: 'disabled attribute',
+    name: 'disabled',
     url: withSingleItem,
     async *fn({ $ }) {
       const $item = $.locator('sinch-accordion-item').first()
 
       await $item.evaluate((el) => el.setAttribute('disabled', ''))
-      yield { name: 'on' }
+      await $.locator('sinch-accordion-item').nth(0).click()
+      yield { name: 'click' }
+
+      /* Property */
+      const attrValue = await $item.evaluate((el) => {
+        (el as any).disabled = false
+
+        return el.getAttribute('disabled')
+      })
+
+      expect(attrValue).toBe(null)
     },
   },
   {
-    name: 'status property',
+    name: 'status',
     url: withSingleItem,
     async *fn({ $ }) {
       const $item = $.locator('sinch-accordion-item').first()
 
-      await $item.evaluate((el) => {
+      for (const value of statusValues) {
+        await $item.evaluate((el, value) => el.setAttribute('status', value), value)
+        yield { name: value }
+      }
+
+      /* Property */
+      const attrValue = await $item.evaluate((el) => {
         (el as any).status = 'info'
+
+        return el.getAttribute('status')
       })
-      yield { name: 'info' }
 
-      await $item.evaluate((el) => {
-        (el as any).status = 'success'
-      })
-      yield { name: 'success' }
-
-      await $item.evaluate((el) => {
-        (el as any).status = 'warn'
-      })
-      yield { name: 'warn' }
-
-      await $item.evaluate((el) => {
-        (el as any).status = 'error'
-      })
-      yield { name: 'error' }
-    },
-  },
-  {
-    name: 'status attribute',
-    url: withSingleItem,
-    async *fn({ $ }) {
-      const $item = $.locator('sinch-accordion-item').first()
-
-      await $item.evaluate((el) => el.setAttribute('status', 'info'))
-      yield { name: 'info' }
-
-      await $item.evaluate((el) => el.setAttribute('status', 'success'))
-      yield { name: 'success' }
-
-      await $item.evaluate((el) => el.setAttribute('status', 'warn'))
-      yield { name: 'warn' }
-
-      await $item.evaluate((el) => el.setAttribute('status', 'error'))
-      yield { name: 'error' }
+      expect(attrValue).toBe('info')
     },
   },
   {

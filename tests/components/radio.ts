@@ -25,8 +25,10 @@ const withSingleOption = `/radio?options=${singleOption}`
 const narrowLabel = `/radio?width=100&options=${singleOption}`
 const checkRadioOptions = makeAccessibilityTests(`/radio?width=200&options=${options}`, 'sinch-radio')
 
-test('accessibility', checkRadioOptions(async function* () {
-  yield
+test('accessibility', checkRadioOptions({
+  async *fn() {
+    yield
+  },
 }))
 
 test('radio screenshots', runScreenshotTests('sinch-radio', [
@@ -74,7 +76,7 @@ test('radio screenshots', runScreenshotTests('sinch-radio', [
     },
   },
   {
-    name: 'value attribute',
+    name: 'value',
     url: withOptions,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', ''))
@@ -93,41 +95,6 @@ test('radio screenshots', runScreenshotTests('sinch-radio', [
       yield { name: 'option-1' }
 
       await $eval((el) => el.setAttribute('value', 'missing'))
-      yield { name: 'option-missing' }
-    },
-  },
-  {
-    name: 'value property',
-    url: withOptions,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.value = ''
-      })
-      yield { name: 'option-empty' }
-
-      await $eval((el) => {
-        el.value = '4'
-      })
-      yield { name: 'option-4' }
-
-      await $eval((el) => {
-        el.value = '3'
-      })
-      yield { name: 'option-3' }
-
-      await $eval((el) => {
-        el.value = '2'
-      })
-      yield { name: 'option-disabled' }
-
-      await $eval((el) => {
-        el.value = '1'
-      })
-      yield { name: 'option-1' }
-
-      await $eval((el) => {
-        el.value = 'missing'
-      })
       yield { name: 'option-missing' }
     },
   },
@@ -161,7 +128,7 @@ test('radio screenshots', runScreenshotTests('sinch-radio', [
     },
   },
   {
-    name: 'custom events',
+    name: 'native events',
     url: withOptions,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-radio-change')

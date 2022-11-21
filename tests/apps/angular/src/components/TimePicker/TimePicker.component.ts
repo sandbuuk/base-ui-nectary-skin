@@ -4,7 +4,7 @@ import '@sinch-engage/nectary/time-picker'
 @Component({
   selector: 'time-picker-component',
   templateUrl: './TimePicker.component.html',
-  styleUrls: ['./TimePicker.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class TimePickerComponent {

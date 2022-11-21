@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/button'
 @Component({
   selector: 'popover-component',
   templateUrl: './Popover.component.html',
-  styleUrls: ['./Popover.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class PopoverComponent {

@@ -7,77 +7,84 @@ const withModalOpen = '/popover?open=true&modal=true&orientation=bottom-right'
 const withModal = '/popover?modal=true&orientation=bottom-right'
 const withWideModalOpen = '/popover?width=300&open=true&modal=true&orientation=bottom-right'
 const withWideModal = '/popover?width=300&modal=true&orientation=bottom-right'
-const withWide = '/popover?width=300&orientation=bottom-right'
-const withOffset = '/popover?width=300&offset=true'
+const withWideNonModal = '/popover?width=300&orientation=bottom-right'
+const withNonModalElementOffset = '/popover?width=300&offset=true'
 const check = makeAccessibilityTests('/popover?open=true&modal=true', 'sinch-popover')
 
-test('popover accessibility', check(async function* () {
-  yield
+test('popover accessibility', check({
+  async *fn() {
+    yield
+  },
 }))
 
 test('popover screenshots', runScreenshotTests('sinch-popover', [
   {
-    name: 'open attribute',
+    name: 'open',
     url: withModal,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('open', ''))
       yield { name: 'set', includeRects: [await $eval((el) => el.popoverRect)] }
+
       await $eval((el) => el.removeAttribute('open'))
       yield { name: 'unset', includeRects: [await $eval((el) => el.popoverRect)] }
-    },
-  },
-  {
-    name: 'open property',
-    url: withModal,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.open = true
-      })
-      expect(await $.getAttribute('open')).toBe('')
 
-      await $eval((el) => {
-        el.open = false
+      /* Property */
+      let attrValue
+
+      attrValue = await $eval((el) => {
+        el.open = true
+
+        return el.getAttribute('open')
       })
-      expect(await $.getAttribute('open')).toBe(null)
+      expect(attrValue).toBe('')
+
+      attrValue = await $eval((el) => {
+        el.open = false
+
+        return el.getAttribute('open')
+      })
+      expect(attrValue).toBe(null)
     },
   },
   {
-    name: 'orientation attribute',
+    name: 'orientation',
     url: withWideModalOpen,
     async *fn({ $eval }) {
       for (const value of orientationValues) {
         await $eval((el, value) => el.setAttribute('orientation', value), value)
         yield { name: value, includeRects: [await $eval((el) => el.popoverRect)] }
       }
+
+      /* Property */
+      const attrValue = await $eval((el) => {
+        el.orientation = 'top-left'
+
+        return el.getAttribute('orientation')
+      })
+
+      expect(attrValue).toBe('top-left')
     },
   },
   {
-    name: 'orientation property',
-    url: withWideModalOpen,
-    async *fn({ $eval, $ }) {
-      for (const value of orientationValues) {
-        await $eval((el, value) => {
-          el.orientation = value
-        }, value)
-        expect(await $.getAttribute('orientation')).toBe(value)
-      }
-    },
-  },
-  {
-    name: 'modal property',
-    url: withWide,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
+    name: 'modal',
+    url: withWideNonModal,
+    async *fn({ $eval }) {
+      /* Property */
+      let attrValue
+
+      attrValue = await $eval((el) => {
         el.modal = false
+
+        return el.getAttribute('modal')
       })
+      expect(attrValue).toBe(null)
 
-      expect(await $.getAttribute('modal')).toBe(null)
-
-      await $eval((el) => {
+      attrValue = await $eval((el) => {
         el.modal = true
-      })
 
-      expect(await $.getAttribute('modal')).toBe('')
+        return el.getAttribute('modal')
+      })
+      expect(attrValue).toBe('')
     },
   },
   {
@@ -103,7 +110,7 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
   },
   {
     name: 'non modal interactions',
-    url: withWide,
+    url: withWideNonModal,
     async *fn({ page, $ }) {
       // Focus button on page
       await page.keyboard.press('Tab')
@@ -124,7 +131,7 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
   },
   {
     name: 'positioning',
-    url: withOffset,
+    url: withNonModalElementOffset,
     async *fn({ page, $eval }) {
       // Focus button on page
       await page.keyboard.press('Tab')
@@ -132,7 +139,8 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
       await page.keyboard.press('Enter')
 
       yield { name: '1-open', includeRects: [await $eval((el) => el.popoverRect)] }
-      // Can close by clicking outside
+
+      // Can close
       await page.keyboard.press('Escape')
 
       yield { name: '2-close', includeRects: [await $eval((el) => el.popoverRect)] }

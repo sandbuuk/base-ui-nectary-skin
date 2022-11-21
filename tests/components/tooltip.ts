@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { test } from '@playwright/test'
 import { orientationValues } from '@sinch-engage/nectary/tooltip/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
@@ -19,13 +19,15 @@ const getTooltipRect = (page: Page) => {
   return page.locator('sinch-tooltip').evaluate((el: TSinchTooltipElement) => el.tooltipRect)
 }
 
-test('accessibility', checkTooltip(async function* () {
-  yield
+test('accessibility', checkTooltip({
+  async *fn() {
+    yield
+  },
 }))
 
 test('tooltip screenshots', runScreenshotTests('sinch-tooltip', [
   {
-    name: 'orientation attribute',
+    name: 'orientation',
     url: withFitWidth,
     async *fn({ $eval, page }) {
       await hoverTooltip(page)
@@ -37,36 +39,13 @@ test('tooltip screenshots', runScreenshotTests('sinch-tooltip', [
     },
   },
   {
-    name: 'orientation property',
-    url: withFitWidth,
-    async *fn({ $, $eval }) {
-      for (const value of orientationValues) {
-        await $eval((el, value) => {
-          el.orientation = value
-        }, value)
-
-        expect(await $.getAttribute('orientation')).toBe(value)
-      }
-    },
-  },
-  {
-    name: 'text attribute',
+    name: 'text',
     url: withFitWidth,
     async *fn({ $eval, page }) {
       await $eval((el) => el.setAttribute('text', 'Updated tooltip text'))
       await hoverTooltip(page)
 
       yield { name: 'updated', includeRects: [await getTooltipRect(page)] }
-    },
-  },
-  {
-    name: 'text property',
-    url: withFitWidth,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.text = 'Updated tooltip text'
-      })
-      expect(await $.getAttribute('text')).toBe('Updated tooltip text')
     },
   },
   {
@@ -79,23 +58,13 @@ test('tooltip screenshots', runScreenshotTests('sinch-tooltip', [
     },
   },
   {
-    name: 'inverted attribute',
+    name: 'inverted',
     url: withFitWidth,
     async *fn({ $eval, page }) {
       await hoverTooltip(page)
       await $eval((el) => el.setAttribute('inverted', ''))
 
       yield { name: 'on', includeRects: [await getTooltipRect(page)] }
-    },
-  },
-  {
-    name: 'inverted property',
-    url: withFitWidth,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.inverted = true
-      })
-      expect(await $.getAttribute('inverted')).toBe('')
     },
   },
 ]))

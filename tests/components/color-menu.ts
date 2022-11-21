@@ -9,13 +9,15 @@ const shot = '/color-menu'
 const withLightVibrant = `/color-menu?colors=${lightVibrantColors}`
 const checkSelectWithEverything = makeAccessibilityTests('/color-menu', 'sinch-color-menu')
 
-test('accessibility', checkSelectWithEverything(async function* () {
-  yield
+test('accessibility', checkSelectWithEverything({
+  async *fn() {
+    yield
+  },
 }))
 
 test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
   {
-    name: 'value attribute',
+    name: 'value',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', ''))
@@ -26,22 +28,7 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
     },
   },
   {
-    name: 'value property',
-    url: shot,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.value = ''
-      })
-      expect(await $.getAttribute('value')).toBe('')
-
-      await $eval((el) => {
-        el.value = 'light-blue'
-      })
-      expect(await $.getAttribute('value')).toBe('light-blue')
-    },
-  },
-  {
-    name: 'colors attribute',
+    name: 'colors',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('colors', 'light-orange,light-blue'))
@@ -52,56 +39,21 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
     },
   },
   {
-    name: 'colors property',
-    url: shot,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.colors = 'Pink 10,Blue 10'
-      })
-
-      expect(await $.getAttribute('colors')).toBe('Pink 10,Blue 10')
-
-      await $eval((el) => {
-        el.colors = null
-      })
-
-      expect(await $.getAttribute('colors')).toBe(null)
-    },
-  },
-  {
-    name: 'rows attribute',
+    name: 'rows',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('rows', '2'))
-      yield { name: 'set' }
-      await $eval((el) => el.removeAttribute('rows'))
-      yield { name: 'unset' }
+      yield { name: 'shot' }
     },
   },
   {
-    name: 'rows property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => el.setAttribute('rows', '2'))
-      expect(await $.getAttribute('rows')).toBe('2')
-    },
-  },
-  {
-    name: 'cols attribute',
+    name: 'cols',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('cols', '7'))
       yield { name: 'set' }
       await $eval((el) => el.removeAttribute('cols'))
       yield { name: 'unset' }
-    },
-  },
-  {
-    name: 'cols property',
-    url: shot,
-    async *fn({ $eval, $ }) {
-      await $eval((el) => el.setAttribute('cols', '7'))
-      expect(await $.getAttribute('cols')).toBe('7')
     },
   },
   {

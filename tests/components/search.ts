@@ -7,8 +7,10 @@ const withValue = '/search?width=200&label=Label&value=Input%20value'
 const checkValue = makeAccessibilityTests('/search?width=200&label=Label&value=Input%20value', 'sinch-input')
 const getDropdownRect = (page: Page) => getBB(page.locator('sinch-action-menu'))
 
-test('accessibility', checkValue(async function* () {
-  yield
+test('accessibility', checkValue({
+  async *fn() {
+    yield
+  },
 }))
 
 test('search screenshots', runScreenshotTests('sinch-popover', [

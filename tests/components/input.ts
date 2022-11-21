@@ -1,22 +1,34 @@
 import { expect, test } from '@playwright/test'
+import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/input?width=200'
-const withIcon = '/input?width=200&value=Input%20value&icon=true'
 const withValue = '/input?width=200&value=Input%20value'
 const withPlaceholder = '/input?width=200&placeholder=Placeholder%20value'
-const withEverything = '/input?width=200&invalid=true&placeholder=Placeholder%20value&value=Input%20value'
-const withRightButton = '/input?width=200&value=Input%20value%20long%20long&right=true'
+const withEverything = '/input?width=300&invalid=true&placeholder=Placeholder%20value&value=Input%20value&left=true&right=true&icon=true'
+const withEverythingInvalid = '/input?width=300&invalid=true&placeholder=Placeholder%20value&value=Input%20value&left=true&right=true&icon=true'
 const checkValue = makeAccessibilityTests('/input?width=200&value=Input%20value', 'sinch-input')
 
-test('accessibility', checkValue(async function* () {
-  yield
+test('accessibility', checkValue({
+  async *fn() {
+    yield
+  },
 }))
 
 test('input screenshots', runScreenshotTests('sinch-input', [
   {
-    name: 'type attribute',
+    name: 'size',
+    url: withEverything,
+    async *fn({ $eval }) {
+      for (const size of sizeValues) {
+        await $eval((el, value) => el.setAttribute('size', value), size)
+        yield { name: size }
+      }
+    },
+  },
+  {
+    name: 'type',
     url: withValue,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('type', 'password'))
@@ -24,41 +36,10 @@ test('input screenshots', runScreenshotTests('sinch-input', [
 
       await $eval((el) => el.setAttribute('type', 'text'))
       yield { name: 'text' }
-
-      await $eval((el) => el.setAttribute('type', ''))
-      yield { name: 'empty' }
-
-      await $eval((el) => el.setAttribute('type', 'invalid'))
-      yield { name: 'invalid' }
     },
   },
   {
-    name: 'type property',
-    url: withValue,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.type = 'password'
-      })
-      yield { name: 'password' }
-
-      await $eval((el) => {
-        el.type = 'text'
-      })
-      yield { name: 'text' }
-
-      await $eval((el) => {
-        el.type = '' as any
-      })
-      yield { name: 'empty' }
-
-      await $eval((el) => {
-        el.type = 'invalid' as any
-      })
-      yield { name: 'invalid' }
-    },
-  },
-  {
-    name: 'value attribute',
+    name: 'value',
     url: withPlaceholder,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('value', 'Input Value'))
@@ -69,22 +50,7 @@ test('input screenshots', runScreenshotTests('sinch-input', [
     },
   },
   {
-    name: 'value property',
-    url: withPlaceholder,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.value = 'Input Value'
-      })
-      yield { name: 'updated' }
-
-      await $eval((el) => {
-        el.value = ''
-      })
-      yield { name: 'empty' }
-    },
-  },
-  {
-    name: 'placeholder attribute',
+    name: 'placeholder',
     url: shot,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('placeholder', 'Placeholder Value'))
@@ -95,81 +61,50 @@ test('input screenshots', runScreenshotTests('sinch-input', [
     },
   },
   {
-    name: 'placeholder property',
-    url: shot,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.placeholder = 'Placeholder Value'
-      })
-      yield { name: 'updated' }
-
-      await $eval((el) => {
-        el.placeholder = ''
-      })
-      yield { name: 'empty' }
-    },
-  },
-  {
     name: 'fill',
     url: withPlaceholder,
     async *fn({ $, $eval, page }) {
       await page.keyboard.press('Tab')
-      yield { name: 'focus' }
-
       await $.type('Filled text')
-      yield { name: 'filled' }
 
       await expect($eval((el) => el.value)).resolves.toBe('Filled text')
     },
   },
   {
-    name: 'disabled property',
+    name: 'focus',
     url: withEverything,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.disabled = true
-      })
-      yield { name: 'disabled' }
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
+      yield { name: '1' }
 
-      await $eval((el) => {
-        el.disabled = false
-      })
-      yield { name: 'enabled' }
+      await page.keyboard.press('Tab')
+      yield { name: '2' }
+
+      await page.keyboard.press('Tab')
+      yield { name: '3' }
+
+      await page.keyboard.press('Tab')
+      yield { name: '4' }
     },
   },
   {
-    name: 'disabled attribute',
-    url: withEverything,
+    name: 'disabled',
+    url: withEverythingInvalid,
     async *fn({ $eval }) {
       await $eval((el) => {
         el.setAttribute('disabled', '')
       })
-      yield { name: 'disabled' }
-
-      await $eval((el) => {
-        el.removeAttribute('disabled')
-      })
-      yield { name: 'enabled' }
-    },
-  },
-  {
-    name: 'invalid property',
-    url: withValue,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.invalid = true
-      })
       yield { name: 'set' }
 
       await $eval((el) => {
-        el.invalid = false
+        el.removeAttribute('disabled')
       })
       yield { name: 'unset' }
     },
   },
   {
-    name: 'invalid attribute',
-    url: withValue,
+    name: 'invalid',
+    url: withEverything,
     async *fn({ $eval }) {
       await $eval((el) => {
         el.setAttribute('invalid', '')
@@ -183,15 +118,8 @@ test('input screenshots', runScreenshotTests('sinch-input', [
     },
   },
   {
-    name: 'right slot',
-    url: withRightButton,
-    async *fn() {
-      yield { name: 'shot' }
-    },
-  },
-  {
-    name: 'icon slot',
-    url: withIcon,
+    name: 'slots',
+    url: withEverything,
     async *fn() {
       yield { name: 'shot' }
     },

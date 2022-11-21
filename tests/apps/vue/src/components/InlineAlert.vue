@@ -6,7 +6,7 @@
   <sinch-icon-button
     v-if="hasClose"
     slot="close"
-    small
+    size="s"
     @--click="onCloseClick"
     @--focus="onCloseFocus"
     @--blur="onCloseBlur">
@@ -16,7 +16,7 @@
     v-if="hasAction"
     slot="action"
     type="cta-secondary"
-    small
+    size="s"
     text="This is a Button!"
     @--click="onButtonClick"
     @--focus="onButtonFocus"

@@ -163,7 +163,7 @@ type TScreenshotTest<T extends keyof HTMLElementTagNameMap> = {
   name: string,
   url: string,
   only?: true,
-  before?(props: TBeforeProps): AsyncIterable<void>,
+  before?(props: TBeforeProps): Promise<void | (() => Promise<void>)>,
   fn (props: TUpdateStateProps<T>): AsyncIterable<TUpdateStateResult>,
 }
 
@@ -201,10 +201,11 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
     const it = piAll(runTests.map((t) => async () => {
       const page = pages.shift()!
 
+      let after: (() => Promise<void>) | void
+
       try {
         if (t.before != null) {
-          // eslint-disable-next-line no-empty
-          for await (const _ of t.before({ page })) {}
+          after = await t.before({ page })
         }
 
         await page.goto(t.url)
@@ -234,6 +235,10 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
           expect(sc, t.name).toMatchSnapshot(screenshotName)
         }
       } finally {
+        if (after != null) {
+          await after()
+        }
+
         pages.push(page)
       }
     }), pages.length)
@@ -320,7 +325,7 @@ export const offsetRect = (rect: TRect, pos: TPosition): TRect => ({
 })
 
 export const centerRect = (rect: TRect | null): TPosition => {
-  if (rect === null || (rect.width === 0 && rect.height === 0)) {
+  if (rect === null || rect.width === 0 || rect.height === 0) {
     throw new Error('Null rect received')
   }
 

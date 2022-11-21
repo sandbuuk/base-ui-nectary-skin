@@ -23,17 +23,21 @@ const withDisabledLink = `/card?width=400&label=${cardLabel}&header=${cardHeader
 const checkWithButton = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&illustration=true&button=${cardButtonText}`, 'sinch-card')
 const checkWithLink = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&illustration=true&link=${cardLinkText}`, 'sinch-card')
 
-test('accessibility button', checkWithButton(async function* () {
-  yield
+test('accessibility button', checkWithButton({
+  async *fn() {
+    yield
+  },
 }))
 
-test('accessibility link', checkWithLink(async function* () {
-  yield
+test('accessibility link', checkWithLink({
+  async *fn() {
+    yield
+  },
 }))
 
 test('card screenshots', runScreenshotTests('sinch-card', [
   {
-    name: 'text attribute',
+    name: 'text',
     url: withWideWidth,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('text', 'Updated text'))
@@ -41,31 +45,11 @@ test('card screenshots', runScreenshotTests('sinch-card', [
     },
   },
   {
-    name: 'text property',
-    url: withWideWidth,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.text = 'Updated text'
-      })
-      yield { name: 'updated' }
-    },
-  },
-  {
-    name: 'disabled property',
-    url: withIllustrationButton,
-    async *fn({ $eval }) {
-      await $eval((el) => {
-        el.disabled = true
-      })
-      yield { name: 'disabled' }
-    },
-  },
-  {
-    name: 'disabled attribute',
+    name: 'disabled',
     url: withIllustrationButton,
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('disabled', ''))
-      yield { name: 'disabled' }
+      yield { name: 'set' }
     },
   },
   {

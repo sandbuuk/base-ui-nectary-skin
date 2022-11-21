@@ -5,7 +5,7 @@
   >
     <sinch-text v-if="hasDescription" slot="content" type="m">The file is too large, try a file size less than 20 MB</sinch-text>
     <sinch-progress v-if="hasProgress" slot="content" value="73" detailed></sinch-progress>
-    <sinch-icon-button slot="action" small>
+    <sinch-icon-button slot="action" size="s">
       <sinch-icon-close slot="icon"></sinch-icon-close>
     </sinch-icon-button>
   </sinch-file-status>

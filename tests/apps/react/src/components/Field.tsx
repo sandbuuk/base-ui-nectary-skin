@@ -3,8 +3,6 @@ import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/help-tooltip'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/close'
 import '@sinch-engage/nectary/icons/search'
 
 type TField = {
@@ -46,9 +44,6 @@ export const Field: FC<TField> = ({ search }) => {
       >
         <sinch-icon-search slot="icon"/>
         <sinch-tag slot="right" text="text"/>
-        <sinch-icon-button slot="right" small aria-label="Button" onClick={() => {}}>
-          <sinch-icon-close slot="icon"/>
-        </sinch-icon-button>
       </sinch-input>
     </sinch-field>
   )

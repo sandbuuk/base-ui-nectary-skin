@@ -1,15 +1,13 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/help-tooltip'
-import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/icons/close'
 import '@sinch-engage/nectary/icons/search'
 
 @Component({
   selector: 'field-component',
   templateUrl: './Field.component.html',
-  styleUrls: ['./Field.component.css'],
+  styles: [':host{ display: contents; }']
 })
 
 export class FieldComponent {

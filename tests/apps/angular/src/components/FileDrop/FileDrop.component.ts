@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/button'
 @Component({
   selector: 'file-drop-component',
   templateUrl: './FileDrop.component.html',
-  styleUrls: ['./FileDrop.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class FileDropComponent {

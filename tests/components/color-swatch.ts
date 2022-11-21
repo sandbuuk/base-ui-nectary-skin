@@ -1,17 +1,19 @@
-import { expect, test } from '@playwright/test'
+import { test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
 const shot = '/color-swatch'
 const check = makeAccessibilityTests('/color-swatch', 'sinch-color-swatch')
 
-test('accessibility', check(async function* () {
-  yield
+test('accessibility', check({
+  async *fn() {
+    yield
+  },
 }))
 
 test('color-swatch screenshots', runScreenshotTests('sinch-color-swatch', [
   {
-    name: 'name attribute',
+    name: 'name',
     url: shot,
     async *fn({ $eval }) {
       for (const colorName of ['', 'light-blue']) {
@@ -20,23 +22,6 @@ test('color-swatch screenshots', runScreenshotTests('sinch-color-swatch', [
         }, colorName)
         yield { name: colorName === '' ? 'no-color' : colorName }
       }
-    },
-  },
-  {
-    name: 'name property',
-    url: shot,
-    async *fn({ $, $eval }) {
-      await $eval((el) => {
-        el.name = ''
-      })
-
-      expect(await $.getAttribute('name')).toBe('')
-
-      await $eval((el) => {
-        el.name = 'light-blue'
-      })
-
-      expect(await $.getAttribute('name')).toBe('light-blue')
     },
   },
 ]))

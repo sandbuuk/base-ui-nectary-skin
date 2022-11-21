@@ -12,7 +12,7 @@
     </div>
     <sinch-icon-branded-chatbot v-if="hasIcon" size="32" slot="icon"></sinch-icon-branded-chatbot>
     <sinch-tag v-if="hasInfo" text="Label" slot="info"></sinch-tag>
-    <sinch-icon-button v-if="hasInfo" small slot="info">
+    <sinch-icon-button v-if="hasInfo" size="s" slot="info">
       <sinch-icon-apps slot="icon"></sinch-icon-apps>
     </sinch-icon-button>
     <div v-if="hasPreview" slot="preview" style="display: flex;flex-direction: column;background-color: #F1F3F4;align-items: center;justify-content: center;height: 100%;">
@@ -20,8 +20,8 @@
       <span style="font-size: 12px">Im a template component</span>
     </div>
     <sinch-checkbox v-if="hasAction" text="Checkbox" slot="action"></sinch-checkbox>
-    <sinch-button v-if="hasAction" text="Cancel" type="secondary" slot="action" small></sinch-button>
-    <sinch-button v-if="hasAction" text="Ok" type="primary" slot="action" small></sinch-button>
+    <sinch-button v-if="hasAction" text="Cancel" type="secondary" slot="action" size="s"></sinch-button>
+    <sinch-button v-if="hasAction" text="Ok" type="primary" slot="action" size="s"></sinch-button>
   </sinch-segment>
 </template>
 

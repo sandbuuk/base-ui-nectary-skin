@@ -2,17 +2,14 @@ import { Component } from '@angular/core'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/search'
-import '@sinch-engage/nectary/icons/close'
 
 @Component({
   selector: 'search-component',
   templateUrl: './Search.component.html',
-  styleUrls: ['./Search.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class SearchComponent {

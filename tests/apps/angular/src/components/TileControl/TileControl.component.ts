@@ -15,7 +15,7 @@ import '@sinch-engage/nectary/icons-channel/whatsapp'
 @Component({
   selector: 'tile-control-component',
   templateUrl: './TileControl.component.html',
-  styleUrls: ['./TileControl.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class TileControlComponent {

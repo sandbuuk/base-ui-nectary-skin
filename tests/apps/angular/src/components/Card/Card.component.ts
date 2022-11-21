@@ -8,7 +8,7 @@ import '@sinch-engage/nectary/icons-branded/chatbot'
 @Component({
   selector: 'card-component',
   templateUrl: './Card.component.html',
-  styleUrls: ['./Card.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class CardComponent {

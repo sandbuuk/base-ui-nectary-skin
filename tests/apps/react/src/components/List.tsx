@@ -22,7 +22,7 @@ export const List: FC<TList> = () => {
     >
       <sinch-icon-branded-chatbot/>
       <span style={{ flex: 1 }}>Replace me</span>
-      <sinch-icon-button aria-label="Add" small onClick={() => {}}>
+      <sinch-icon-button aria-label="Add" size="s" onClick={() => {}}>
         <sinch-icon-add slot="icon"/>
       </sinch-icon-button>
     </div>

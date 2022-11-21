@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/color-swatch'
 @Component({
   selector: 'color-swatch-component',
   templateUrl: './ColorSwatch.component.html',
-  styleUrls: ['./ColorSwatch.component.css']
+  styles: [':host{ display: contents; }']
 })
 
 export class ColorSwatchComponent {
