@@ -1,12 +1,11 @@
 {
   "name": "@sinch-engage/nectary",
-  "version": "0.44.1",
+  "version": "0.45.0",
   "files": [
     "**/*/*.css",
     "**/*/*.json",
     "**/*/*.js",
     "**/*/*.d.ts",
-    "theme.css",
     "types.d.ts",
     "colors.json"
   ],

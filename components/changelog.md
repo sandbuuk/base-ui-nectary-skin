@@ -1,3 +1,27 @@
+## v0.45.0 (2022-11-21)
+
+* 💥 use new DM Sans and DM Mono fonts
+* 💥 drop Safari <15.4 support
+* 💥 add `size` and remove `small` attr in `sinch-button`
+* 💥 add `size` and remove `small` attr in `sinch-icon-button`
+* 💥 add `size` and remove `type` attr in `sinch-spinner`
+* 💥 `import '@sinch-engage/nectary/theme'` instead of CSS
+* ➕ add autosize feature to sizeable components
+* ➕ add `sinch-flag` component
+* ➕ add built-in search feature to `sinch-select-menu`
+* ➕ add built-in clear feature to `sinch-input`
+* ➕ add `type` attr to `sinch-icon-button`
+* ➕ add `size` attr to `sinch-input`
+* ➕ add `size` attr to `sinch-select-button`
+* ➕ add `tertiary` type to `sinch-button`
+* 🐞 fix `sinch-checkbox` focus state
+* 🐞 fix buttons alignment in `sinch-pagination`
+* 🐞 fix `tabindex` attr in interactive components
+* 🐞 align `sinch-segment` styles
+* 🐞 align `sinch-button` styles
+* 🐞 align default icon color
+* 🐞 assert only in non-production env
+
 ## v0.44.1 (2022-11-15)
 
 * 🐞 fix missing `data.json` in `sinch-emoji-picker`
