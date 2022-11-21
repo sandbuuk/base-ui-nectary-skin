@@ -6,9 +6,11 @@ import {
   updateAttribute,
   updateLiteralAttribute,
 } from '../utils'
+import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertAvatarColor, assertSize, assertStatus, getAvatarColorBg, getAvatarColorFg, sizeValues, statusValues } from './utils'
-import type { TSinchAvatarElement, TSinchAvatarReact, TSinchAvatarSize, TSinchAvatarStatus } from './types'
+import { assertAvatarColor, assertStatus, getAvatarColorBg, getAvatarColorFg, statusValues } from './utils'
+import type { TSinchSize } from '../utils/size'
+import type { TSinchAvatarElement, TSinchAvatarReact, TSinchAvatarStatus } from './types'
 
 const template = document.createElement('template')
 
@@ -62,10 +64,10 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
   }
 
   get size() {
-    return getLiteralAttribute(this, sizeValues, 'size', 'm')
+    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
   }
 
-  set size(value: TSinchAvatarSize) {
+  set size(value: TSinchSize) {
     updateLiteralAttribute(this, sizeValues, 'size', value)
   }
 
