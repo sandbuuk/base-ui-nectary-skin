@@ -1,10 +1,10 @@
 import type { TSinchElementReact } from '../types'
 import type { TSinchSize } from '../utils/size'
 
-export type TSinchButtonType = 'primary' | 'secondary' | 'cta-primary' | 'cta-secondary' | 'destructive'
+export type TSinchButtonType = 'primary' | 'secondary' | 'tertiary' | 'cta-primary' | 'cta-secondary' | 'destructive'
 
 export type TSinchButtonElement = HTMLElement & {
-  /** Type */
+  /** Type, `primary` by default */
   type: TSinchButtonType,
   /** Size, `m` by default */
   size: TSinchSize,
@@ -18,7 +18,7 @@ export type TSinchButtonElement = HTMLElement & {
   addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
   /** Blur event */
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
-  /** Type */
+  /** Type, `primary` by default */
   setAttribute(attr: 'type', value: TSinchButtonType): void,
   /** Size, `m` by default */
   setAttribute(attr: 'size', value: TSinchSize): void,
@@ -29,8 +29,8 @@ export type TSinchButtonElement = HTMLElement & {
 }
 
 export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
-  /** Type */
-  type: TSinchButtonType,
+  /** Type, `primary` by default */
+  type?: TSinchButtonType,
   /** Size, `m` by default */
   size?: TSinchSize,
   /** Text content */

@@ -2,19 +2,19 @@ import {
   defineCustomElement,
   getBooleanAttribute,
   getAttribute,
-  getLiteralAttribute,
   isAttrTrue,
   updateBooleanAttribute,
   updateAttribute,
-  updateLiteralAttribute,
   NectaryElement,
   getReactEventHandler,
+  getLiteralAttribute,
+  updateLiteralAttribute,
   Context,
   subscribeContext,
 } from '../utils'
 import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { buttonTypes } from './utils'
+import { assertType, typeValues } from './utils'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
 import type { TSinchButtonElement, TSinchButtonReact, TSinchButtonType } from './types'
@@ -86,6 +86,13 @@ defineCustomElement('sinch-button', class extends NectaryElement {
 
         break
       }
+      case 'type': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
+
+        break
+      }
       case 'size': {
         updateAttribute(this, 'data-size', newVal)
 
@@ -104,11 +111,11 @@ defineCustomElement('sinch-button', class extends NectaryElement {
   }
 
   set type(value: TSinchButtonType) {
-    updateLiteralAttribute(this, buttonTypes, 'type', value)
+    updateLiteralAttribute(this, typeValues, 'type', value)
   }
 
   get type(): TSinchButtonType {
-    return getLiteralAttribute(this, buttonTypes, 'type', 'primary')
+    return getLiteralAttribute(this, typeValues, 'type', 'primary')
   }
 
   set text(value: string) {

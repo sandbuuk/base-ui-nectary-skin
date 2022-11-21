@@ -1,133 +1,159 @@
 <style>
-/* stylelint-disable no-descending-specificity */
-/* stylelint-disable no-duplicate-selectors */
 :host {
-  --sinch-button-color-background: var(--sinch-color-tropical-500);
-  --sinch-button-color-background-hover: var(--sinch-color-tropical-400);
-  --sinch-button-color-background-active: var(--sinch-color-tropical-600);
-  --sinch-button-color-background-disabled: var(--sinch-color-tropical-100);
-  --sinch-button-color-border: var(--sinch-color-transparent);
-  --sinch-button-color-border-disabled: var(--sinch-color-transparent);
-  --sinch-button-color-text: var(--sinch-color-snow-100);
-  --sinch-button-color-text-disabled: var(--sinch-color-snow-100);
-  --sinch-button-shape-radius: var(--sinch-shape-radius-l);
-
   display: inline-block;
   vertical-align: middle;
-  outline: none;
+
+  --sinch-size: var(--sinch-size-m);
+  --sinch-size-icon: var(--sinch-button-icon-size-m);
+  --sinch-shape-radius: var(--sinch-shape-radius-m);
+  --sinch-button-font: var(--sinch-button-font-m);
 }
 
-#button {
-  --sinch-color-icon: var(--sinch-button-color-text);
-  --sinch-color-spinner-bg: var(--sinch-color-tropical-300);
-  --sinch-color-spinner-fg: var(--sinch-color-snow-100);
+:host([data-size="l"]) {
+  --sinch-size: var(--sinch-size-l);
+  --sinch-size-icon: var(--sinch-button-icon-size-l);
+  --sinch-shape-radius: var(--sinch-shape-radius-l);
+  --sinch-button-font: var(--sinch-button-font-l);
 }
 
-#button:disabled {
-  --sinch-color-icon: var(--sinch-button-color-text-disabled);
-  --sinch-color-spinner-bg: var(--sinch-color-snow-100);
-  --sinch-color-spinner-fg: var(--sinch-color-tropical-200);
+:host([data-size="m"]) {
+  --sinch-size: var(--sinch-size-m);
+  --sinch-size-icon: var(--sinch-button-icon-size-m);
+  --sinch-shape-radius: var(--sinch-shape-radius-m);
+  --sinch-button-font: var(--sinch-button-font-m);
 }
 
-:host([small]:not([small="false"])) {
-  --sinch-button-shape-radius: var(--sinch-shape-radius-m);
+:host([data-size="s"]) {
+  --sinch-size: var(--sinch-size-s);
+  --sinch-size-icon: var(--sinch-button-icon-size-s);
+  --sinch-shape-radius: var(--sinch-shape-radius-s);
+  --sinch-button-font: var(--sinch-button-font-s);
+}
+
+:host([type="primary"]) {
+  --sinch-button-color-background: var(--sinch-button-primary-color-background);
+  --sinch-button-color-background-hover: var(--sinch-button-primary-color-background-hover);
+  --sinch-button-color-background-active: var(--sinch-button-primary-color-background-active);
+  --sinch-button-color-background-disabled: var(--sinch-button-primary-color-background-disabled);
+  --sinch-button-color-border: var(--sinch-button-primary-color-border);
+  --sinch-button-color-border-hover: var(--sinch-button-primary-color-border-hover);
+  --sinch-button-color-border-active: var(--sinch-button-primary-color-border-active);
+  --sinch-button-color-border-disabled: var(--sinch-button-primary-color-border-disabled);
+  --sinch-button-color-text: var(--sinch-button-primary-color-text);
+  --sinch-button-color-text-hover: var(--sinch-button-primary-color-text-hover);
+  --sinch-button-color-text-active: var(--sinch-button-primary-color-text-active);
+  --sinch-button-color-text-disabled: var(--sinch-button-primary-color-text-disabled);
+  --sinch-button-color-icon: var(--sinch-button-primary-color-icon);
+  --sinch-button-color-icon-hover: var(--sinch-button-primary-color-icon-hover);
+  --sinch-button-color-icon-active: var(--sinch-button-primary-color-icon-active);
+  --sinch-button-color-icon-disabled: var(--sinch-button-primary-color-icon-disabled);
+  --sinch-button-mix-blend-mode: var(--sinch-button-primary-mix-blend-mode);
+  --sinch-elevation-level: var(--sinch-elevation-level-1);
 }
 
 :host([type="secondary"]) {
-  --sinch-button-color-background: var(--sinch-color-snow-100);
-  --sinch-button-color-background-hover: var(--sinch-color-tropical-100);
-  --sinch-button-color-background-active: var(--sinch-color-tropical-100);
-  --sinch-button-color-background-disabled: var(--sinch-color-snow-100);
-  --sinch-button-color-border: var(--sinch-color-tropical-500);
-  --sinch-button-color-border-disabled: var(--sinch-color-tropical-200);
-  --sinch-button-color-text: var(--sinch-color-tropical-500);
-  --sinch-button-color-text-disabled: var(--sinch-color-tropical-200);
+  --sinch-button-color-background: var(--sinch-button-secondary-color-background);
+  --sinch-button-color-background-hover: var(--sinch-button-secondary-color-background-hover);
+  --sinch-button-color-background-active: var(--sinch-button-secondary-color-background-active);
+  --sinch-button-color-background-disabled: var(--sinch-button-secondary-color-background-disabled);
+  --sinch-button-color-border: var(--sinch-button-secondary-color-border);
+  --sinch-button-color-border-hover: var(--sinch-button-secondary-color-border-hover);
+  --sinch-button-color-border-active: var(--sinch-button-secondary-color-border-active);
+  --sinch-button-color-border-disabled: var(--sinch-button-secondary-color-border-disabled);
+  --sinch-button-color-text: var(--sinch-button-secondary-color-text);
+  --sinch-button-color-text-hover: var(--sinch-button-secondary-color-text-hover);
+  --sinch-button-color-text-active: var(--sinch-button-secondary-color-text-active);
+  --sinch-button-color-text-disabled: var(--sinch-button-secondary-color-text-disabled);
+  --sinch-button-color-icon: var(--sinch-button-secondary-color-icon);
+  --sinch-button-color-icon-hover: var(--sinch-button-secondary-color-icon-hover);
+  --sinch-button-color-icon-active: var(--sinch-button-secondary-color-icon-active);
+  --sinch-button-color-icon-disabled: var(--sinch-button-secondary-color-icon-disabled);
+  --sinch-button-mix-blend-mode: var(--sinch-button-secondary-mix-blend-mode);
+  --sinch-elevation-level: var(--sinch-elevation-level-1);
 }
 
-/* Secondary Spinner */
-:host([type="secondary"]) > #button {
-  --sinch-color-spinner-bg: var(--sinch-color-tropical-500);
-  --sinch-color-spinner-fg: var(--sinch-color-tropical-100);
-}
-
-:host([type="secondary"]) #button:enabled:hover,
-:host([type="secondary"]) #button:enabled:active {
-  --sinch-color-spinner-fg: var(--sinch-color-tropical-200);
-}
-
-:host([type="secondary"]) #button:disabled {
-  --sinch-color-spinner-bg: var(--sinch-color-tropical-200);
+:host([type="tertiary"]) {
+  --sinch-button-color-background: var(--sinch-button-tertiary-color-background);
+  --sinch-button-color-background-hover: var(--sinch-button-tertiary-color-background-hover);
+  --sinch-button-color-background-active: var(--sinch-button-tertiary-color-background-active);
+  --sinch-button-color-background-disabled: var(--sinch-button-tertiary-color-background-disabled);
+  --sinch-button-color-border: var(--sinch-button-tertiary-color-border);
+  --sinch-button-color-border-hover: var(--sinch-button-tertiary-color-border-hover);
+  --sinch-button-color-border-active: var(--sinch-button-tertiary-color-border-active);
+  --sinch-button-color-border-disabled: var(--sinch-button-tertiary-color-border-disabled);
+  --sinch-button-color-text: var(--sinch-button-tertiary-color-text);
+  --sinch-button-color-text-hover: var(--sinch-button-tertiary-color-text-hover);
+  --sinch-button-color-text-active: var(--sinch-button-tertiary-color-text-active);
+  --sinch-button-color-text-disabled: var(--sinch-button-tertiary-color-text-disabled);
+  --sinch-button-color-icon: var(--sinch-button-tertiary-color-icon);
+  --sinch-button-color-icon-hover: var(--sinch-button-tertiary-color-icon-hover);
+  --sinch-button-color-icon-active: var(--sinch-button-tertiary-color-icon-active);
+  --sinch-button-color-icon-disabled: var(--sinch-button-tertiary-color-icon-disabled);
+  --sinch-button-mix-blend-mode: var(--sinch-button-tertiary-mix-blend-mode);
+  --sinch-elevation-level: var(--sinch-elevation-level-0);
 }
 
 :host([type="cta-primary"]) {
-  --sinch-button-color-background: var(--sinch-color-honey-500);
-  --sinch-button-color-background-hover: var(--sinch-color-honey-400);
-  --sinch-button-color-background-active: var(--sinch-color-honey-600);
-  --sinch-button-color-background-disabled: var(--sinch-color-honey-200);
-  --sinch-button-color-text: var(--sinch-color-stormy-500);
-  --sinch-button-color-text-disabled: var(--sinch-color-stormy-300);
-}
-
-:host([type="cta-primary"]) > #button {
-  --sinch-color-spinner-bg: var(--sinch-color-honey-700);
-  --sinch-color-spinner-fg: var(--sinch-color-stormy-500);
-}
-
-:host([type="cta-primary"]) > #button:disabled {
-  --sinch-color-spinner-bg: var(--sinch-color-honey-100);
-  --sinch-color-spinner-fg: var(--sinch-color-stormy-300);
+  --sinch-button-color-background: var(--sinch-button-cta-primary-color-background);
+  --sinch-button-color-background-hover: var(--sinch-button-cta-primary-color-background-hover);
+  --sinch-button-color-background-active: var(--sinch-button-cta-primary-color-background-active);
+  --sinch-button-color-background-disabled: var(--sinch-button-cta-primary-color-background-disabled);
+  --sinch-button-color-border: var(--sinch-button-cta-primary-color-border);
+  --sinch-button-color-border-hover: var(--sinch-button-cta-primary-color-border-hover);
+  --sinch-button-color-border-active: var(--sinch-button-cta-primary-color-border-active);
+  --sinch-button-color-border-disabled: var(--sinch-button-cta-primary-color-border-disabled);
+  --sinch-button-color-text: var(--sinch-button-cta-primary-color-text);
+  --sinch-button-color-text-hover: var(--sinch-button-cta-primary-color-text-hover);
+  --sinch-button-color-text-active: var(--sinch-button-cta-primary-color-text-active);
+  --sinch-button-color-text-disabled: var(--sinch-button-cta-primary-color-text-disabled);
+  --sinch-button-color-icon: var(--sinch-button-cta-primary-color-icon);
+  --sinch-button-color-icon-hover: var(--sinch-button-cta-primary-color-icon-hover);
+  --sinch-button-color-icon-active: var(--sinch-button-cta-primary-color-icon-active);
+  --sinch-button-color-icon-disabled: var(--sinch-button-cta-primary-color-icon-disabled);
+  --sinch-button-mix-blend-mode: var(--sinch-button-cta-primary-mix-blend-mode);
+  --sinch-elevation-level: var(--sinch-elevation-level-1);
 }
 
 :host([type="cta-secondary"]) {
-  --sinch-button-color-background: transparent;
-  --sinch-button-color-background-hover: #F1F3F4;
-  --sinch-button-color-background-active: #E3E6E8;
-  --sinch-button-color-background-disabled: transparent;
-  --sinch-button-color-text: var(--sinch-color-stormy-500);
-  --sinch-button-color-text-disabled: var(--sinch-color-stormy-100);
-  --sinch-button-color-border: var(--sinch-color-stormy-500);
-  --sinch-button-color-border-disabled: var(--sinch-color-stormy-100);
-}
-
-:host([type="cta-secondary"]) > #button {
-  --sinch-color-spinner-bg: var(--sinch-color-snow-700);
-  --sinch-color-spinner-fg: var(--sinch-color-stormy-500);
-}
-
-:host([type="cta-secondary"]) > #button:disabled {
-  --sinch-color-spinner-bg: var(--sinch-color-snow-500);
-  --sinch-color-spinner-fg: var(--sinch-color-stormy-100);
-}
-
-:host([type="cta-secondary"]) > #button::before {
-  mix-blend-mode: multiply;
+  --sinch-button-color-background: var(--sinch-button-cta-secondary-color-background);
+  --sinch-button-color-background-hover: var(--sinch-button-cta-secondary-color-background-hover);
+  --sinch-button-color-background-active: var(--sinch-button-cta-secondary-color-background-active);
+  --sinch-button-color-background-disabled: var(--sinch-button-cta-secondary-color-background-disabled);
+  --sinch-button-color-border: var(--sinch-button-cta-secondary-color-border);
+  --sinch-button-color-border-hover: var(--sinch-button-cta-secondary-color-border-hover);
+  --sinch-button-color-border-active: var(--sinch-button-cta-secondary-color-border-active);
+  --sinch-button-color-border-disabled: var(--sinch-button-cta-secondary-color-border-disabled);
+  --sinch-button-color-text: var(--sinch-button-cta-secondary-color-text);
+  --sinch-button-color-text-hover: var(--sinch-button-cta-secondary-color-text-hover);
+  --sinch-button-color-text-active: var(--sinch-button-cta-secondary-color-text-active);
+  --sinch-button-color-text-disabled: var(--sinch-button-cta-secondary-color-text-disabled);
+  --sinch-button-color-icon: var(--sinch-button-cta-secondary-color-icon);
+  --sinch-button-color-icon-hover: var(--sinch-button-cta-secondary-color-icon-hover);
+  --sinch-button-color-icon-active: var(--sinch-button-cta-secondary-color-icon-active);
+  --sinch-button-color-icon-disabled: var(--sinch-button-cta-secondary-color-icon-disabled);
+  --sinch-button-mix-blend-mode: var(--sinch-button-cta-secondary-mix-blend-mode);
+  --sinch-elevation-level: var(--sinch-elevation-level-1);
 }
 
 :host([type="destructive"]) {
-  --sinch-button-color-background: var(--sinch-color-snow-100);
-  --sinch-button-color-background-hover: var(--sinch-color-raspberry-100);
-  --sinch-button-color-background-active: var(--sinch-color-raspberry-100);
-  --sinch-button-color-background-disabled: var(--sinch-color-snow-100);
-  --sinch-button-color-text: var(--sinch-color-raspberry-500);
-  --sinch-button-color-text-disabled: var(--sinch-color-raspberry-200);
-  --sinch-button-color-border: var(--sinch-color-raspberry-500);
-  --sinch-button-color-border-disabled: var(--sinch-color-raspberry-200);
-}
-
-:host([type="destructive"]) > #button {
-  --sinch-color-spinner-bg: var(--sinch-color-raspberry-100);
-  --sinch-color-spinner-fg: var(--sinch-color-raspberry-500);
-}
-
-:host([type="destructive"]) > #button:enabled:hover,
-:host([type="destructive"]) > #button:enabled:active {
-  --sinch-color-spinner-bg: var(--sinch-color-raspberry-200);
-  --sinch-color-spinner-fg: var(--sinch-color-raspberry-500);
-}
-
-:host([type="destructive"]) > #button:disabled {
-  --sinch-color-spinner-bg: var(--sinch-color-raspberry-100);
-  --sinch-color-spinner-fg: var(--sinch-color-raspberry-200);
+  --sinch-button-color-background: var(--sinch-button-destructive-color-background);
+  --sinch-button-color-background-hover: var(--sinch-button-destructive-color-background-hover);
+  --sinch-button-color-background-active: var(--sinch-button-destructive-color-background-active);
+  --sinch-button-color-background-disabled: var(--sinch-button-destructive-color-background-disabled);
+  --sinch-button-color-border: var(--sinch-button-destructive-color-border);
+  --sinch-button-color-border-hover: var(--sinch-button-destructive-color-border-hover);
+  --sinch-button-color-border-active: var(--sinch-button-destructive-color-border-active);
+  --sinch-button-color-border-disabled: var(--sinch-button-destructive-color-border-disabled);
+  --sinch-button-color-text: var(--sinch-button-destructive-color-text);
+  --sinch-button-color-text-hover: var(--sinch-button-destructive-color-text-hover);
+  --sinch-button-color-text-active: var(--sinch-button-destructive-color-text-active);
+  --sinch-button-color-text-disabled: var(--sinch-button-destructive-color-text-disabled);
+  --sinch-button-color-icon: var(--sinch-button-destructive-color-icon);
+  --sinch-button-color-icon-hover: var(--sinch-button-destructive-color-icon-hover);
+  --sinch-button-color-icon-active: var(--sinch-button-destructive-color-icon-active);
+  --sinch-button-color-icon-disabled: var(--sinch-button-destructive-color-icon-disabled);
+  --sinch-button-mix-blend-mode: var(--sinch-button-destructive-mix-blend-mode);
+  --sinch-elevation-level: var(--sinch-elevation-level-1);
 }
 
 #button {
@@ -135,78 +161,67 @@
   display: block;
   position: relative;
   width: 100%;
-  height: 48px;
-  font: var(--sinch-font-title-s);
+  height: var(--sinch-size);
+  font: var(--sinch-button-font);
   color: var(--sinch-button-color-text);
   cursor: pointer;
 
-  --sinch-size-icon: 24px;
+  --sinch-color-icon: var(--sinch-button-color-icon);
 }
 
 /* Border */
 #button::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  border: 1px solid var(--sinch-button-color-border);
-  border-radius: var(--sinch-button-shape-radius);
+  inset: 0;
   background-color: var(--sinch-button-color-background);
-  box-shadow: var(--sinch-elevation-level-1);
+  border: 1px solid var(--sinch-button-color-border);
+  border-radius: var(--sinch-shape-radius);
+  box-shadow: var(--sinch-elevation-level);
   pointer-events: none;
+  mix-blend-mode: var(--sinch-button-mix-blend-mode);
 }
 
 #button:focus-visible::after {
   position: absolute;
   content: "";
-  left: -4px;
-  top: -4px;
-  right: -4px;
-  bottom: -4px;
+  inset: -3px;
   border: 2px solid var(--sinch-color-border-focus);
-  border-radius: calc(var(--sinch-button-shape-radius) + 4px);
+  border-radius: calc(var(--sinch-shape-radius) + 3px);
   pointer-events: none;
-}
-
-@supports not selector(:focus-visible) {
-  #button:focus::after {
-    position: absolute;
-    content: "";
-    left: -4px;
-    top: -4px;
-    right: -4px;
-    bottom: -4px;
-    border: 2px solid var(--sinch-color-border-focus);
-    border-radius: calc(var(--sinch-button-shape-radius) + 4px);
-    pointer-events: none;
-  }
-}
-
-#button:enabled:hover::before {
-  background-color: var(--sinch-button-color-background-hover);
-}
-
-#button:enabled:active::before {
-  background-color: var(--sinch-button-color-background-active);
-  border-width: 2px;
-  box-shadow: var(--sinch-elevation-level-0);
 }
 
 #button:disabled {
   color: var(--sinch-button-color-text-disabled);
   cursor: initial;
+
+  --sinch-color-icon: var(--sinch-button-color-icon-disabled);
 }
 
 #button:disabled::before {
   background-color: var(--sinch-button-color-background-disabled);
   border-color: var(--sinch-button-color-border-disabled);
+  box-shadow: var(--sinch-elevation-level-0);
 }
 
-:host([type="primary"]) > #button::before,
-:host([type="cta-primary"]) > #button::before {
-  border-width: 0;
+#button:enabled:hover {
+  --sinch-color-icon: var(--sinch-button-color-icon-hover);
+}
+
+#button:enabled:hover::before {
+  background-color: var(--sinch-button-color-background-hover);
+  border-color: var(--sinch-button-color-border-hover);
+}
+
+#button:enabled:active {
+  --sinch-color-icon: var(--sinch-button-color-icon-active);
+}
+
+#button:enabled:active::before {
+  background-color: var(--sinch-button-color-background-active);
+  border-color: var(--sinch-button-color-border-active);
+  border-width: 2px;
+  box-shadow: var(--sinch-elevation-level-0);
 }
 
 #content {
@@ -214,24 +229,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 0.75em;
   width: 100%;
   height: 100%;
-  padding: 0 16px;
+  padding: 0 1em;
   box-sizing: border-box;
   pointer-events: none;
-}
-
-:host([small]:not([small="false"])) > #button {
-  font: var(--sinch-font-title-xs);
-  height: 32px;
-
-  --sinch-size-icon: 16px;
-}
-
-:host([small]:not([small="false"])) #content {
-  padding: 0 12px;
-  gap: 8px;
 }
 
 #text {
