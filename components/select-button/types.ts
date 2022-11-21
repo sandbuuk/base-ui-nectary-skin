@@ -1,4 +1,5 @@
 import type { TSinchElementReact } from '../types'
+import type { TSinchSize } from '../utils/size'
 
 export type TSinchSelectButtonElement = HTMLElement & {
   /** Text */
@@ -9,6 +10,8 @@ export type TSinchSelectButtonElement = HTMLElement & {
   invalid: boolean,
   /** Disabled */
   disabled: boolean,
+  /** Size, `m` by default */
+  size: TSinchSize,
   /** Click event */
   addEventListener(type: '-click', listener: (e: CustomEvent<void>) => void): void,
   /** Focus event */
@@ -23,6 +26,8 @@ export type TSinchSelectButtonElement = HTMLElement & {
   setAttribute(name: 'invalid', value: ''): void,
   /** Disabled */
   setAttribute(name: 'disabled', value: ''): void,
+  /** Size, `m` by default */
+  setAttribute(name: 'size', value: TSinchSize): void,
 }
 
 export type TSinchSelectButtonReact = TSinchElementReact<TSinchSelectButtonElement> & {
@@ -36,8 +41,10 @@ export type TSinchSelectButtonReact = TSinchElementReact<TSinchSelectButtonEleme
   invalid?: boolean,
   /** Disabled */
   disabled?: boolean,
+  /** Size, `m` by default */
+  size?: TSinchSize,
   /** Click handler */
-  'on-click'?: (e: CustomEvent<void>) => void,
+  'on-click': (e: CustomEvent<void>) => void,
   /** Focus handler */
   'on-focus'?: (e: CustomEvent<void>) => void,
   /** Blur handler */
