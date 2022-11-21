@@ -1,0 +1,28 @@
+:root,
+:host {
+  /* Contextual */
+  --sinch-color-bg-primary-light: var(--sinch-color-snow-100);
+  --sinch-color-bg-primary-contrast: var(--sinch-color-snow-200);
+  --sinch-color-bg-comp-green: var(--sinch-color-tropical-100);
+  --sinch-color-bg-comp-blue: var(--sinch-color-ocean-100);
+  --sinch-color-bg-comp-yellow: var(--sinch-color-honey-200);
+  --sinch-color-bg-comp-red: var(--sinch-color-raspberry-100);
+  --sinch-color-bg-hover: var(--sinch-color-snow-200);
+  --sinch-color-bg-active: var(--sinch-color-snow-400);
+  --sinch-color-text-default: var(--sinch-color-stormy-700);
+  --sinch-color-text-inverted: var(--sinch-color-snow-100);
+  --sinch-color-text-muted: var(--sinch-color-stormy-300);
+  --sinch-color-text-disabled: var(--sinch-color-stormy-100);
+  --sinch-color-text-link: var(--sinch-color-tropical-500);
+  --sinch-color-text-link-disabled: var(--sinch-color-tropical-100);
+  --sinch-color-text-invalid: var(--sinch-color-raspberry-600);
+  --sinch-color-text-invalid-disabled: var(--sinch-color-raspberry-100);
+  --sinch-color-border-default: var(--sinch-color-snow-700);
+  --sinch-color-border-light: var(--sinch-color-snow-500);
+  --sinch-color-border-dark: var(--sinch-color-stormy-100);
+  --sinch-color-border-active: var(--sinch-color-stormy-500);
+  --sinch-color-border-disabled: var(--sinch-color-snow-400);
+  --sinch-color-border-focus: var(--sinch-color-ocean-500);
+  --sinch-color-border-invalid: var(--sinch-color-raspberry-600);
+  --sinch-color-icon: var(--sinch-color-stormy-500);
+}
