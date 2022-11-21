@@ -133,8 +133,11 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
       }
 
       case 'orientation': {
-        assertOrientation(newVal)
-        updateAttribute(this.#$pop, 'orientation', getPopOrientation(newVal))
+        if (process.env.NODE_ENV !== 'production') {
+          assertOrientation(newVal)
+        }
+
+        updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
 
         if (this.#isOpen()) {
           this.#resetTipOrientation()

@@ -109,7 +109,9 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
     const colorName = this.color
 
     if (colorName !== null && colorName.length > 0) {
-      assertChipColor(this, colorName)
+      if (process.env.NODE_ENV !== 'production') {
+        assertChipColor(this, colorName)
+      }
 
       const bg = getChipColorBg(colorName)
       const fg = getChipColorFg(colorName)

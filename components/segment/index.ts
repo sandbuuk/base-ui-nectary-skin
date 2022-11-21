@@ -89,9 +89,12 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
       }
 
       case 'size': {
-        assertSize(newVal)
         updateAttribute(this.#$caption, 'type', newVal)
         updateAttribute(this.#$caption, 'level', getTitleLevelFromType(newVal))
+        if (process.env.NODE_ENV !== 'production') {
+          assertSize(newVal, 'sinch-segment')
+        }
+
 
         break
       }

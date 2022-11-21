@@ -161,7 +161,9 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       }
 
       case 'orientation': {
-        assertOrientation(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertOrientation(newVal)
+        }
 
         if (this.#isOpen()) {
           this.#updateOrientation()

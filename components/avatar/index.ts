@@ -97,15 +97,15 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
       }
 
       case 'size': {
-        if (newVal !== null) {
-          assertSize(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertSize(newVal, 'sinch-avatar')
         }
 
         break
       }
 
       case 'status': {
-        if (newVal !== null) {
+        if (process.env.NODE_ENV !== 'production') {
           assertStatus(newVal)
         }
 
@@ -126,7 +126,9 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
     const colorName = this.color
 
     if (colorName !== null && colorName.length > 0) {
-      assertAvatarColor(this, colorName)
+      if (process.env.NODE_ENV !== 'production') {
+        assertAvatarColor(this, colorName)
+      }
 
       const bg = getAvatarColorBg(colorName)
       const fg = getAvatarColorFg(colorName)

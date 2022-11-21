@@ -66,7 +66,9 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
     const colorName = this.name
 
     if (colorName !== null && colorName.length > 0) {
-      assertSwatchColor(this, colorName)
+      if (process.env.NODE_ENV !== 'production') {
+        assertSwatchColor(this, colorName)
+      }
 
       const bg = getSwatchColorBg(colorName)
 

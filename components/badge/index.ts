@@ -115,7 +115,10 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
       }
 
       case 'size': {
-        assertSize(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertSize(newVal, 'sinch-badge')
+        }
+
         this.#updatePosition()
 
         break

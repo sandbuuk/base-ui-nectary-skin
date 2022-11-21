@@ -71,7 +71,9 @@ defineCustomElement('sinch-text', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'type': {
-        assertType(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
 
         break
       }

@@ -126,7 +126,9 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     switch (name) {
       case 'orientation': {
-        assertOrientation(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertOrientation(newVal)
+        }
 
         updateAttribute(this.#$pop, 'orientation', getPopOrientation(newVal))
 

@@ -74,7 +74,9 @@ defineCustomElement('sinch-file-status', class extends NectaryElement {
 
     switch (name) {
       case 'type': {
-        assertType(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
 
         break
       }

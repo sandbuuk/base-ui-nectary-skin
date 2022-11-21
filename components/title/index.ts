@@ -74,14 +74,19 @@ defineCustomElement('sinch-title', class extends NectaryElement {
       }
 
       case 'level': {
-        assertLevel(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertLevel(newVal)
+        }
+
         updateAttribute(this, 'aria-level', newVal)
 
         break
       }
 
       case 'type': {
-        assertType(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
 
         break
       }
