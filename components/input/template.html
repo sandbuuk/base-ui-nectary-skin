@@ -117,22 +117,20 @@
   padding-left: 12px;
 }
 
+#clear-wrapper {
+  margin-left: -10px;
+  margin-right: 4px;
+}
+
 #clear {
   display: none;
 
-  --sinch-icon-button-color-icon: var(--sinch-color-text-muted);
-}
-
-#clear.active {
-  display: block;
-}
-
-:host([disabled]:not([disabled="false"])) #clear {
-  display: none;
-}
-
-#wrapper:focus-within #clear {
   --sinch-icon-button-color-icon: var(--sinch-color-stormy-500);
+}
+
+:host([value]:not([value=""])) #clear[data-tooltip],
+:host([value]:not([value=""])) #clear[data-focus] {
+  display: block;
 }
 
 #right {
@@ -173,12 +171,14 @@
   </div>
   <input id="input" type="text"/>
   <div id="border"></div>
-  <div id="right">
+  <div id="clear-wrapper">
     <sinch-stop-events events="keydown">
       <sinch-icon-button id="clear" aria-label="Clear input value">
         <sinch-icon-close slot="icon"></sinch-icon-close>
       </sinch-icon-button>
     </sinch-stop-events>
+  </div>
+  <div id="right">
     <slot name="right"></slot>
   </div>
 </div>
