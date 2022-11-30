@@ -38,6 +38,21 @@
   width: 384px;
   box-sizing: border-box;
 }
+
+#not-found {
+  display: none;
+  width: 100%;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  color: var(--sinch-color-text-muted);
+  pointer-events: none;
+  user-select: none;
+}
+
+#not-found.active {
+  display: flex;
+}
 </style>
 
 <div id="wrapper">
@@ -62,5 +77,8 @@
   <sinch-tabs id="tabs" aria-label="Emoji groups"></sinch-tabs>
   <div id="list-wrapper">
     <div id="list"></div>
+    <div id="not-found">
+      <sinch-text type="m">No results</sinch-text>
+    </div>
   </div>
 </div>

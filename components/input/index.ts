@@ -8,6 +8,7 @@ import {
   getBooleanAttribute,
   getLiteralAttribute,
   getReactEventHandler,
+  getRect,
   isAttrTrue,
   NectaryElement,
   setClass,
@@ -21,6 +22,7 @@ import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import { inputTypes } from './utils'
 import type { TSinchIconButtonElement } from '../icon-button/types'
+import type { TRect } from '../types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
 import type { TSinchInputElement, TSinchInputReact, TSinchInputType } from './types'
@@ -257,6 +259,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   set selectionDirection(value: HTMLInputElement['selectionDirection']) {
     this.#$input.selectionDirection = value
+  }
+
+  get clearButtonRect(): TRect {
+    return getRect(this.#$clear)
   }
 
   get focusable() {
