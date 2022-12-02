@@ -13,6 +13,10 @@ export type TSinchTooltipElement = HTMLElement & {
   orientation: TSinchTooltipOrientation,
   readonly footprintRect: TRect,
   readonly tooltipRect: TRect,
+  /** Show event */
+  addEventListener(type: '-show', listener: (e: CustomEvent<void>) => void): void,
+  /** Hide event */
+  addEventListener(type: '-hide', listener: (e: CustomEvent<void>) => void): void,
   /** Text */
   setAttribute(name: 'text', value: string): void,
   /** @deprecated */
@@ -32,4 +36,8 @@ export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
   inverted?: boolean,
   /** Orientation, where it *points to* from origin */
   orientation?: TSinchTooltipOrientation,
+  /** Show event handler */
+  'on-show'?: (e: CustomEvent<void>) => void,
+  /** Hide event handler */
+  'on-hide'?: (e: CustomEvent<void>) => void,
 }

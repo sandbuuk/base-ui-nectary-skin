@@ -40,4 +40,8 @@ export type TSinchIconButtonReact = TSinchElementReact<TSinchIconButtonElement> 
   'on-focus'?: (e: CustomEvent<void>) => void,
   /** Blur event handler */
   'on-blur'?: (e: CustomEvent<void>) => void,
+  /** Tooltip Show Event */
+  'on-tooltip-show'?: (e: CustomEvent<void>) => void,
+  /** Tooltip Hide Event */
+  'on-tooltip-hide'?: (e: CustomEvent<void>) => void,
 }

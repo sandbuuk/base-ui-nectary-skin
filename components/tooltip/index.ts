@@ -11,6 +11,7 @@ import {
   NectaryElement,
   setClass,
   rectOverlap,
+  getReactEventHandler,
 } from '../utils'
 import templateHTML from './template.html'
 import { TooltipState } from './tooltip-state'
@@ -77,6 +78,8 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     }
 
     this.#$pop.addEventListener('-close', this.#onPopClose, options)
+    this.addEventListener('-show', this.#onShowReactHandler, options)
+    this.addEventListener('-hide', this.#onHideReactHandler, options)
 
     updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
     this.#updateText()
@@ -178,6 +181,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   #onStateShow = () => {
+    this.#dispatchShowEvent()
     updateBooleanAttribute(this.#$pop, 'open', true)
     requestAnimationFrame(this.#updateTipOrientation)
 
@@ -204,6 +208,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     this.#animation!.finish()
     this.#resetTipOrientation()
     updateBooleanAttribute(this.#$pop, 'open', false)
+    this.#dispatchHideEvent()
     this.#unsubscribeMouseLeaveEvents()
   }
 
@@ -305,6 +310,22 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
 
   #isOpen() {
     return this.#$pop.hasAttribute('open')
+  }
+
+  #dispatchShowEvent() {
+    this.dispatchEvent(new CustomEvent('-show'))
+  }
+
+  #dispatchHideEvent() {
+    this.dispatchEvent(new CustomEvent('-hide'))
+  }
+
+  #onShowReactHandler = () => {
+    getReactEventHandler(this, 'on-show')?.()
+  }
+
+  #onHideReactHandler = () => {
+    getReactEventHandler(this, 'on-hide')?.()
   }
 })
 

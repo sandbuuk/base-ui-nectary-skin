@@ -59,6 +59,10 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
     this.addEventListener('-click', this.#onClickReactHandler, options)
     this.addEventListener('-focus', this.#onFocusReactHandler, options)
     this.addEventListener('-blur', this.#onBlurReactHandler, options)
+    this.#$tooltip.addEventListener('-show', this.#onTooltipShow, options)
+    this.#$tooltip.addEventListener('-hide', this.#onTooltipHide, options)
+    this.addEventListener('-tooltip-show', this.#onTooltipShowReactHandler, options)
+    this.addEventListener('-tooltip-hide', this.#onTooltipHideReactHandler, options)
     subscribeContext(this, 'size', this.#onContextSize, this.#controller.signal)
     this.#sizeContext.listen(this.#controller.signal)
 
@@ -209,6 +213,14 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
     this.dispatchEvent(new CustomEvent('-blur'))
   }
 
+  #onTooltipShow = () => {
+    this.dispatchEvent(new CustomEvent('-tooltip-show'))
+  }
+
+  #onTooltipHide = () => {
+    this.dispatchEvent(new CustomEvent('-tooltip-hide'))
+  }
+
   #onFocusReactHandler = () => {
     getReactEventHandler(this, 'on-focus')?.()
   }
@@ -219,6 +231,14 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
   #onClickReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-click')?.(e)
+  }
+
+  #onTooltipShowReactHandler = () => {
+    getReactEventHandler(this, 'on-tooltip-show')?.()
+  }
+
+  #onTooltipHideReactHandler = () => {
+    getReactEventHandler(this, 'on-tooltip-hide')?.()
   }
 })
 

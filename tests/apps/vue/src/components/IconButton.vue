@@ -5,7 +5,10 @@
     aria-label="Button"
     @--click="onClick"
     @--focus="onFocus"
-    @--blur="onBlur">
+    @--blur="onBlur"
+    @--tooltip-show="onTooltipShow"
+    @--tooltip-hide="onTooltipHide"
+  >
     <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
     <sinch-icon-help-outline v-if="!hasSpinner" slot="icon"></sinch-icon-help-outline>
   </sinch-icon-button>
@@ -29,6 +32,12 @@ export default {
     },
     onBlur() {
       window.dispatchEvent(new CustomEvent('sinch-icon-button-blur'))
+    },
+    onTooltipShow() {
+      window.dispatchEvent(new CustomEvent('sinch-icon-button-tooltip-show'))
+    },
+    onTooltipHide() {
+      window.dispatchEvent(new CustomEvent('sinch-icon-button-tooltip-hide'))
     }
   },
   computed: {

@@ -16,6 +16,8 @@ export const IconButton: FC<TIconButton> = ({ search }) => {
   const onClick = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-icon-button-click')), [])
   const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-icon-button-focus')), [])
   const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-icon-button-blur')), [])
+  const onTooltipShow = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-icon-button-tooltip-show')), [])
+  const onTooltipHide = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-icon-button-tooltip-hide')), [])
 
   return (
     <sinch-icon-button
@@ -26,6 +28,8 @@ export const IconButton: FC<TIconButton> = ({ search }) => {
       on-click={onClick}
       on-focus={onFocus}
       on-blur={onBlur}
+      on-tooltip-show={onTooltipShow}
+      on-tooltip-hide={onTooltipHide}
     >
       {
       hasSpinner

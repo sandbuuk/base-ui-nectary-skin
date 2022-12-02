@@ -139,6 +139,8 @@ test('icon-button events', runScreenshotTests('sinch-icon-button', [
       await testButton('-click', 'sinch-icon-button-click')
       await testButton('-focus', 'sinch-icon-button-focus')
       await testButton('-blur', 'sinch-icon-button-blur')
+      await testButton('-tooltip-show', 'sinch-icon-button-tooltip-show')
+      await testButton('-tooltip-hide', 'sinch-icon-button-tooltip-hide')
     },
   },
   {
@@ -162,6 +164,27 @@ test('icon-button events', runScreenshotTests('sinch-icon-button', [
         { type: 'sinch-icon-button-focus', detail: null },
         { type: 'sinch-icon-button-click', detail: null },
         { type: 'sinch-icon-button-click', detail: null },
+      ])
+    },
+  },
+  {
+    name: 'tooltip native events',
+    url: shot,
+    async *fn({ $, page }) {
+      await subscribeToEvents(page, 'sinch-icon-button-tooltip-show', 'sinch-icon-button-tooltip-hide')
+
+      const ct = await centerBB($)
+
+      await page.mouse.move(ct.x, ct.y)
+      await page.waitForTimeout(1200)
+      await page.mouse.move(0, 0)
+      await page.waitForTimeout(300)
+
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-icon-button-tooltip-show', detail: null },
+        { type: 'sinch-icon-button-tooltip-hide', detail: null },
       ])
     },
   },

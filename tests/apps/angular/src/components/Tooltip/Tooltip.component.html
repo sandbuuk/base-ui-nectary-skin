@@ -2,4 +2,8 @@
   [attr.orientation]="orientation"
   [attr.text]="text"
   [attr.isInverted]="isInverted"
-><span>Some content</span></sinch-tooltip>
+  (-show)="onTooltipShow()"
+  (-hide)="onTooltipHide()"
+>
+  <span id="content">Some content</span>
+</sinch-tooltip>

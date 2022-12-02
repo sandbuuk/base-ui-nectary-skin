@@ -4,6 +4,8 @@
   aria-label="Button"
   (-focus)="onFocus()"
   (-blur)="onBlur()"
+  (-tooltip-show)="onTooltipShow()"
+  (-tooltip-hide)="onTooltipHide()"
   (-click)="onClick()">
   <sinch-icon-help-outline *ngIf="!hasSpinner" slot="icon"></sinch-icon-help-outline>
   <sinch-spinner *ngIf="hasSpinner" slot="icon"></sinch-spinner>
