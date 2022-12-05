@@ -8,6 +8,7 @@ import {
   getBooleanAttribute,
   getLiteralAttribute,
   getReactEventHandler,
+  getRect,
   isAttrTrue,
   NectaryElement,
   setClass,
@@ -21,6 +22,7 @@ import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import { inputTypes } from './utils'
 import type { TSinchIconButtonElement } from '../icon-button/types'
+import type { TRect } from '../types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
 import type { TSinchInputElement, TSinchInputReact, TSinchInputType } from './types'
@@ -80,7 +82,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$input.addEventListener('keydown', this.#onSelectionChange, options)
     this.#$input.addEventListener('focus', this.#onInputFocus, options)
     this.#$input.addEventListener('blur', this.#onInputBlur, options)
-    this.#$clear.addEventListener('click', this.#onClear, options)
+    this.#$clear.addEventListener('click', this.#onClearButtonClick, options)
+    this.#$clear.addEventListener('blur', this.#onClearButtonBlur, options)
+    this.#$clear.addEventListener('-tooltip-show', this.#onClearButtonTooltipShow, options)
+    this.#$clear.addEventListener('-tooltip-hide', this.#onClearButtonTooltipHide, options)
     this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange, options)
     this.#$leftSlot.addEventListener('slotchange', this.#onLeftSlotChange, options)
     this.#$rightSlot.addEventListener('slotchange', this.#onRightSlotChange, options)
@@ -137,7 +142,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
           }
         }
 
-        setClass(this.#$clear, 'active', nextVal.length > 0)
         this.#onRightSlotChange()
 
         break
@@ -259,6 +263,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$input.selectionDirection = value
   }
 
+  get clearButtonRect(): TRect {
+    return getRect(this.#$clear)
+  }
+
   get focusable() {
     return true
   }
@@ -352,24 +360,22 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #onRightSlotChange = () => {
-    const isEmpty = this.#$rightSlot.assignedElements().length === 0 && this.value.length === 0
+    const isEmpty = this.#$rightSlot.assignedElements().length === 0
 
     setClass(this.#$rightWrapper, 'empty', isEmpty)
   }
 
   #onInputFocus = () => {
+    this.#$clear.setAttribute('data-focus', '')
     this.dispatchEvent(new CustomEvent('-focus'))
   }
 
-  #onInputBlur = () => {
+  #onInputBlur = (e: FocusEvent) => {
     this.dispatchEvent(new CustomEvent('-blur'))
-  }
 
-  #onClear = () => {
-    this.#$input.value = ''
-    this.#$input.focus()
-
-    this.#handleInput()
+    if (e.relatedTarget !== this.#$clear) {
+      this.#$clear.removeAttribute('data-focus')
+    }
   }
 
   #onSizeUpdate() {
@@ -380,6 +386,28 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     const size = this.getAttribute('data-size') ?? DEFAULT_SIZE
 
     this.#sizeContext.dispatch(size)
+  }
+
+  #onClearButtonClick = () => {
+    this.#$input.value = ''
+    this.#$input.focus()
+
+    this.#handleInput()
+  }
+
+  #onClearButtonBlur = (e: FocusEvent) => {
+    if (e.relatedTarget !== this.#$input) {
+      this.#$clear.removeAttribute('data-focus')
+    }
+  }
+
+  #onClearButtonTooltipShow = () => {
+    this.#$clear.setAttribute('data-tooltip', '')
+  }
+
+  #onClearButtonTooltipHide = () => {
+    this.#$input.focus()
+    this.#$clear.removeAttribute('data-tooltip')
   }
 
   #onChangeReactHandler = (e: Event) => {

@@ -1,7 +1,7 @@
-import { test } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 import { orientationValues } from '@sinch-engage/nectary/tooltip/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { runScreenshotTests } from '../screenshot-tests'
+import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 import type { TSinchTooltipElement } from '@sinch-engage/nectary/tooltip/types'
 
@@ -65,6 +65,40 @@ test('tooltip screenshots', runScreenshotTests('sinch-tooltip', [
       await $eval((el) => el.setAttribute('inverted', ''))
 
       yield { name: 'on', includeRects: [await getTooltipRect(page)] }
+    },
+  },
+]))
+
+test('tooltip events', runScreenshotTests('sinch-tooltip', [
+  {
+    name: 'custom events',
+    url: withFitWidth,
+    async *fn({ $, page }) {
+      const testTooltip = testCustomEvent(page, $)
+
+      await testTooltip('-show', 'sinch-tooltip-show')
+      await testTooltip('-hide', 'sinch-tooltip-hide')
+    },
+  },
+  {
+    name: 'native events',
+    url: withFitWidth,
+    async *fn({ page }) {
+      await subscribeToEvents(page, 'sinch-tooltip-show', 'sinch-tooltip-hide')
+
+      const ct = await centerBB(page.locator('#content'))
+
+      await page.mouse.move(ct.x, ct.y)
+      await page.waitForTimeout(1200)
+      await page.mouse.move(0, 0)
+      await page.waitForTimeout(300)
+
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-tooltip-show', detail: null },
+        { type: 'sinch-tooltip-hide', detail: null },
+      ])
     },
   },
 ]))

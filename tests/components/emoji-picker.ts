@@ -28,7 +28,9 @@ const getSkinTone = (url: string): number => {
 }
 
 const mockEmojiUrl = async (page: Page) => {
-  await page.route('**/*.{svg}', (route) => {
+  const url = '**/*.{svg}'
+
+  await page.route(url, (route) => {
     const url = route.request().url()
     const tone = getSkinTone(url)
 
@@ -74,7 +76,7 @@ const mockEmojiUrl = async (page: Page) => {
     })
   })
 
-  return () => page.unroute('**/*.{svg}')
+  return () => page.unroute(url)
 }
 
 const shot = '/emoji-picker'
@@ -143,14 +145,18 @@ test('emoji picker screenshots', runScreenshotTests('sinch-emoji-picker', [
       return mockEmojiUrl(page)
     },
     async *fn({ page, $eval }) {
-      const pt = centerRect(await $eval((el) => el.searchInputRect))
+      const tabPt = centerRect(await $eval((el) => el.nthTabRect(2)))
+      const searchPt = centerRect(await $eval((el) => el.searchInputRect))
+      const skinBtnPt = centerRect(await $eval((el) => el.skinToneButtonRect))
 
-      await page.mouse.click(pt.x, pt.y)
-      await page.keyboard.type('kiss')
-
+      await page.mouse.click(tabPt.x, tabPt.y)
       yield { name: '1-default' }
 
-      const skinBtnPt = centerRect(await $eval((el) => el.skinToneButtonRect))
+      await page.mouse.click(searchPt.x, searchPt.y)
+      await page.keyboard.type('kiss')
+      await page.waitForTimeout(1000)
+
+      yield { name: '2-search' }
 
       await page.mouse.click(skinBtnPt.x, skinBtnPt.y)
 
@@ -159,7 +165,18 @@ test('emoji picker screenshots', runScreenshotTests('sinch-emoji-picker', [
       await page.mouse.click(tonePt.x, tonePt.y)
       await page.mouse.move(0, 0)
 
-      yield { name: '2-skin-selected' }
+      yield { name: '3-skin-selected' }
+
+      // Focus search field to clear
+      await page.mouse.click(searchPt.x, searchPt.y)
+
+      // Get clear button rect while focusing search input
+      const clearPt = centerRect(await $eval((el) => el.searchClearButtonRect))
+
+      await page.mouse.click(clearPt.x, clearPt.y)
+      await page.waitForTimeout(400)
+
+      yield { name: '4-clear-search' }
     },
   },
   {

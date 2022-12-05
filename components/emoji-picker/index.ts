@@ -6,6 +6,7 @@ import '../popover'
 import '../tabs'
 import '../tabs-icon-option'
 import '../emoji'
+import '../text'
 import '../icons/search'
 import '../icons/sentiment-satisfied'
 import '../icons/emoji-people'
@@ -25,6 +26,8 @@ import {
   getReactEventHandler,
   getRect,
   subscribeContext,
+  debounceTimeout,
+  setClass,
 } from '../utils'
 import dataJson from './data.json'
 import templateHTML from './template.html'
@@ -64,6 +67,8 @@ const groupLabels = [
 
 const data = dataJson as TEmojiGroup[]
 const template = document.createElement('template')
+const MIN_SEARCH_LENGTH = 2
+const SEARCH_DEBOUNCE_TIMEOUT = 300
 
 template.innerHTML = templateHTML
 
@@ -75,9 +80,12 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   #$skinSwatch: TSinchColorSwatchElement
   #$skinButton: TSinchIconButtonElement
   #$list: HTMLElement
+  #$notFound: HTMLElement
   #controller: AbortController | null = null
   #$sh: ShadowRoot
+  #searchDebounce
   #currentSkinTone = 0
+  #prevTabsValue: string | null = null
 
   constructor() {
     super()
@@ -94,6 +102,8 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     this.#$skinSwatch = shadowRoot.querySelector('#skin-swatch')!
     this.#$skinButton = shadowRoot.querySelector('#skin-button')!
     this.#$list = shadowRoot.querySelector('#list')!
+    this.#$notFound = shadowRoot.querySelector('#not-found')!
+    this.#searchDebounce = debounceTimeout(SEARCH_DEBOUNCE_TIMEOUT)(this.#updateSearch)
   }
 
   connectedCallback() {
@@ -118,6 +128,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
 
   disconnectedCallback() {
     this.#controller!.abort()
+    this.#searchDebounce.cancel()
   }
 
   get skinToneButtonRect(): TRect {
@@ -126,6 +137,10 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
 
   get searchInputRect(): TRect {
     return getRect(this.#$input)
+  }
+
+  get searchClearButtonRect(): TRect {
+    return this.#$input.clearButtonRect
   }
 
   nthSkinToneRect(index: number): TRect | null {
@@ -198,16 +213,8 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   }
 
   #onSearchChange = (e: CustomEvent<string>) => {
-    const value = e.detail
-
-    this.#$input.value = value
-
-    if (value.length < 3) {
-      return
-    }
-
-    updateAttribute(this.#$tabs, 'value', '')
-    this.#updateSearchEmojis()
+    this.#$input.value = e.detail
+    this.#searchDebounce.fn()
   }
 
   #onChangeReactHandler = (e: Event) => {
@@ -222,6 +229,31 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     return Reflect.has(this.#$sh, 'createElement')
       ? this.#$sh as any as Document
       : document
+  }
+
+  #updateSearch = () => {
+    const value = this.#$input.value
+
+    if (value.length < MIN_SEARCH_LENGTH) {
+      if (this.#isSearchMode()) {
+        if (this.#prevTabsValue !== null) {
+          this.#$tabs.setAttribute('value', this.#prevTabsValue)
+        }
+
+        this.#updateEmojis()
+      }
+
+      return
+    }
+
+    const currentActiveTab = this.#$tabs.getAttribute('value')
+
+    if (currentActiveTab !== null) {
+      this.#prevTabsValue = currentActiveTab
+    }
+
+    this.#$tabs.removeAttribute('value')
+    this.#updateSearchEmojis()
   }
 
   #updateTabs() {
@@ -249,7 +281,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   *#iterateSearchEmojis(searchValue: string, skinTone: number): IterableIterator<TEmoji> {
     for (const group of data) {
       for (const entry of group.emojis) {
-        if (entry.label.includes(searchValue)) {
+        if (entry.label.toLowerCase().includes(searchValue)) {
           const hasSkins = entry.skins != null
 
           if (skinTone === 0 || !hasSkins) {
@@ -291,18 +323,22 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   #updateSearchEmojis() {
     const searchValue = this.#$input.value
 
-    if (searchValue.length < 3) {
+    if (searchValue.length < MIN_SEARCH_LENGTH) {
       return
     }
 
     const doc = this.#getDocumentRoot()
     const fragment = document.createDocumentFragment()
+    let someFound = false
 
     for (const entry of this.#iterateSearchEmojis(searchValue, this.#currentSkinTone)) {
       const el = this.#createEmojiElement(doc, entry)
 
+      someFound = true
       fragment.appendChild(el)
     }
+
+    setClass(this.#$notFound, 'active', !someFound)
 
     this.#$list.replaceChildren(fragment)
     this.#$list.scrollTo(0, 0)

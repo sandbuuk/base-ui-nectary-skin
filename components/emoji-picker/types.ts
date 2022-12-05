@@ -16,6 +16,7 @@ export type TEmojiGroup = {
 export type TSinchEmojiPickerElement = HTMLElement & {
   readonly skinToneButtonRect: TRect,
   readonly searchInputRect: TRect,
+  readonly searchClearButtonRect: TRect,
   nthSkinToneRect(index: number): TRect | null,
   nthTabRect(index: number): TRect | null,
   nthEmojiRect(index: number): TRect | null,

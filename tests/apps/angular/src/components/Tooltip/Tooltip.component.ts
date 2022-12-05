@@ -18,4 +18,11 @@ export class TooltipComponent {
     this.text = url.searchParams.get('text')
     this.isInverted = url.searchParams.get('inverted') !== null
   }
+
+  onTooltipShow() {
+    window.dispatchEvent(new CustomEvent('sinch-tooltip-show'))
+  }
+  onTooltipHide() {
+    window.dispatchEvent(new CustomEvent('sinch-tooltip-hide'))
+  }
 }

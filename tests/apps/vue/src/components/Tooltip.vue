@@ -1,9 +1,12 @@
 <template>
   <sinch-tooltip
-    v-bind:orientation="orientation"
-    v-bind:text="text"
-    v-bind:inverted="isInverted">
-    <span>Some content</span>
+    :orientation="orientation"
+    :text="text"
+    :inverted="isInverted"
+    @--show="onTooltipShow"
+    @--hide="onTooltipHide"
+  >
+    <span id="content">Some content</span>
   </sinch-tooltip>
 </template>
 
@@ -13,6 +16,14 @@ import '@sinch-engage/nectary/tooltip'
 export default {
   props: {
     search: URLSearchParams
+  },
+  methods: {
+    onTooltipShow() {
+      window.dispatchEvent(new CustomEvent('sinch-tooltip-show'))
+    },
+    onTooltipHide() {
+      window.dispatchEvent(new CustomEvent('sinch-tooltip-hide'))
+    }
   },
   computed: {
     text() {

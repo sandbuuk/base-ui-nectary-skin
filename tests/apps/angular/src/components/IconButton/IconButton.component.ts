@@ -32,4 +32,12 @@ export class IconButtonComponent {
   onBlur(){
     window.dispatchEvent(new CustomEvent('sinch-icon-button-blur'))
   }
+
+  onTooltipShow(){
+    window.dispatchEvent(new CustomEvent('sinch-icon-button-tooltip-show'))
+  }
+
+  onTooltipHide(){
+    window.dispatchEvent(new CustomEvent('sinch-icon-button-tooltip-hide'))
+  }
 }

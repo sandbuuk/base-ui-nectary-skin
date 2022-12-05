@@ -5,6 +5,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getIntegerAttribute,
+  getReactEventHandler,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
@@ -20,6 +21,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
   #$tooltip: TSinchTooltipElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -31,8 +33,30 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
     this.#$tooltip = shadowRoot.querySelector('sinch-tooltip')!
   }
 
+  connectedCallback() {
+    super.connectedCallback()
+
+    this.#controller = new AbortController()
+
+    const options = { signal: this.#controller.signal }
+
+    this.#$tooltip.addEventListener('-show', this.#onTooltipShow, options)
+    this.#$tooltip.addEventListener('-hide', this.#onTooltipHide, options)
+    this.addEventListener('-show', this.#onTooltipShowReactHandler, options)
+    this.addEventListener('-hide', this.#onTooltipHideReactHandler, options)
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    this.#controller!.abort()
+  }
+
   static get observedAttributes() {
     return ['text', 'width', 'orientation', 'inverted']
+  }
+
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+    updateAttribute(this.#$tooltip, name, newVal)
   }
 
   get text() {
@@ -75,8 +99,20 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
     return this.#$tooltip.tooltipRect
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    updateAttribute(this.#$tooltip, name, newVal)
+  #onTooltipShow = () => {
+    this.dispatchEvent(new CustomEvent('-show'))
+  }
+
+  #onTooltipHide = () => {
+    this.dispatchEvent(new CustomEvent('-hide'))
+  }
+
+  #onTooltipShowReactHandler = () => {
+    getReactEventHandler(this, 'on-show')?.()
+  }
+
+  #onTooltipHideReactHandler = () => {
+    getReactEventHandler(this, 'on-hide')?.()
   }
 })
 
