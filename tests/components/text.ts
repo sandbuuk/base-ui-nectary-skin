@@ -21,10 +21,16 @@ test('text screenshots', runScreenshotTests('sinch-text', [
     name: 'ellipsis',
     url: withNarrowWidth,
     async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('ellipsis', ''))
+      await $eval((el) => {
+        el.setAttribute('ellipsis', '')
+        el.querySelector('sinch-link')?.setAttribute('ellipsis', '')
+      })
       yield { name: 'set' }
 
-      await $eval((el) => el.removeAttribute('ellipsis'))
+      await $eval((el) => {
+        el.removeAttribute('ellipsis')
+        el.querySelector('sinch-link')?.removeAttribute('ellipsis')
+      })
       yield { name: 'unset' }
     },
   },

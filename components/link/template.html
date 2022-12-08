@@ -9,6 +9,7 @@ a {
   line-height: inherit;
   color: var(--sinch-color-tropical-500);
   border-radius: 0.5em;
+  white-space: nowrap;
 
   --sinch-size-icon: 1em;
   --sinch-color-icon: var(--sinch-color-tropical-500);
@@ -31,7 +32,8 @@ a:focus-visible {
   vertical-align: -0.2em;
 }
 
-#standalone-icon {
+#standalone-icon,
+#standalone-icon-prefix {
   display: none;
 }
 
@@ -59,10 +61,13 @@ a:focus-visible {
   vertical-align: -7px;
 }
 
+:host([standalone]:not([standalone="false"])) #standalone-icon-prefix {
+  display: inline;
+}
+
 :host([standalone]:not([standalone="false"]):is([external="false"], :not([external]))) #standalone-icon {
   display: inline-block;
   vertical-align: -7px;
-  margin-left: 8px;
 }
 
 :host([disabled]:not([disabled="false"])) a {
@@ -72,10 +77,15 @@ a:focus-visible {
 
   --sinch-color-icon: var(--sinch-color-tropical-200);
 }
+
+#content {
+  white-space: var(--sinch-text-white-space, normal);
+}
 </style>
 
 <a referrerpolicy="no-referer" aria-hidden="true">
   <sinch-icon-open-in-new id="external-icon"></sinch-icon-open-in-new>
   <span id="content"></span>
+  <span id="standalone-icon-prefix">&nbsp;</span>
   <sinch-icon-arrow-forward id="standalone-icon"></sinch-icon-arrow-forward>
 </a>
