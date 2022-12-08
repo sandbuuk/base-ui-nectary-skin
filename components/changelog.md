@@ -1,3 +1,10 @@
+## v0.45.2 (2022-12-08)
+
+* 🐞 fix search behaviour in `sinch-emoji-picker`
+* 🐞 fix multiline input in `sinch-textarea`
+* 🐞 align styles in `sinch-time-picker`
+* 🐞 align clear button behaviour in `sinch-input`
+
 ## v0.45.1 (2022-11-21)
 
 * 🐞 fix tip orientation in `sinch-popover`
