@@ -50,12 +50,12 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
   {
     name: 'fill',
     url: withPlaceholder,
-    async *fn({ $, page }) {
+    async *fn({ page }) {
       await page.keyboard.press('Tab')
-      yield { name: 'focus' }
-
-      await $.type('Filled text')
-      yield { name: 'filled' }
+      await page.keyboard.type('First line')
+      await page.keyboard.press('Enter')
+      await page.keyboard.type('Second line')
+      yield { name: 'shot' }
     },
   },
   {
