@@ -1,7 +1,5 @@
 import '../icon-button'
 import '../icons/done'
-import '../icons/arrow-drop-up'
-import '../icons/arrow-drop-down'
 import '../segmented-control'
 import '../segmented-control-option'
 import {
@@ -51,6 +49,8 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   #$submitButton: HTMLButtonElement
   #hour: number = 0
   #minute: number = 0
+  #controller: AbortController | null = null
+
   constructor() {
     super()
 
@@ -135,21 +135,22 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#$pickerTouch.addEventListener('click', this.#onPickerClick)
-    this.#$ampm.addEventListener('change', this.#onAmPmChange)
-    this.#$submitButton.addEventListener('click', this.#onSubmitButtonClick)
-    this.#$headerHours.addEventListener('keydown', this.#onHoursKeydown)
-    this.#$headerMinutes.addEventListener('keydown', this.#onMinutesKeydown)
-    this.addEventListener('-change', this.#onChangeReactHandler)
+    this.#controller = new AbortController()
+
+    const options = {
+      signal: this.#controller.signal,
+    }
+
+    this.#$pickerTouch.addEventListener('click', this.#onPickerClick, options)
+    this.#$ampm.addEventListener('change', this.#onAmPmChange, options)
+    this.#$submitButton.addEventListener('click', this.#onSubmitButtonClick, options)
+    this.#$needleHour.addEventListener('keydown', this.#onHoursKeydown, options)
+    this.#$needleMinute.addEventListener('keydown', this.#onMinutesKeydown, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
   }
 
   disconnectedCallback() {
-    this.#$pickerTouch.removeEventListener('click', this.#onPickerClick)
-    this.#$ampm.removeEventListener('change', this.#onAmPmChange)
-    this.#$submitButton.removeEventListener('click', this.#onSubmitButtonClick)
-    this.#$headerHours.removeEventListener('keydown', this.#onHoursKeydown)
-    this.#$headerMinutes.removeEventListener('keydown', this.#onMinutesKeydown)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {

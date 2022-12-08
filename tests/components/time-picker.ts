@@ -128,18 +128,24 @@ test('time input screenshots', runScreenshotTests('sinch-time-picker', [
     name: 'keyboard interaction',
     url: shot12,
     async *fn({ page }) {
+      // Focus Submit button
+      await page.keyboard.press('Tab')
+      yield { name: 'submit focus' }
+
+      // Focus Hour needle
       await page.keyboard.press('Tab')
       await page.keyboard.press('ArrowUp')
       await page.keyboard.press('ArrowUp')
       await page.keyboard.press('ArrowDown')
       yield { name: 'hour focus' }
+
+      // Focus minute needle
       await page.keyboard.press('Tab')
       await page.keyboard.press('ArrowUp')
       await page.keyboard.press('ArrowUp')
       await page.keyboard.press('ArrowDown')
       yield { name: 'minute focus' }
-      await page.keyboard.press('Tab')
-      yield { name: 'submit focus' }
+
       await page.keyboard.press('Tab')
       yield { name: 'am focus' }
       await page.keyboard.press('Tab')
@@ -183,11 +189,6 @@ test('time input screenshots', runScreenshotTests('sinch-time-picker', [
       await subscribeToEvents(page, 'sinch-time-picker-change')
 
       await page.keyboard.press('Tab')
-      await page.keyboard.press('ArrowUp')
-      await page.keyboard.press('ArrowUp')
-      await page.keyboard.press('ArrowUp')
-      await page.keyboard.press('ArrowDown')
-
       await page.keyboard.press('Tab')
       await page.keyboard.press('ArrowUp')
       await page.keyboard.press('ArrowUp')
@@ -195,6 +196,13 @@ test('time input screenshots', runScreenshotTests('sinch-time-picker', [
       await page.keyboard.press('ArrowDown')
 
       await page.keyboard.press('Tab')
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowDown')
+
+      await page.keyboard.press('Shift+Tab')
+      await page.keyboard.press('Shift+Tab')
       await page.keyboard.press('Enter')
 
       expect(
@@ -210,20 +218,22 @@ test('time input screenshots', runScreenshotTests('sinch-time-picker', [
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-time-picker-change')
 
-      await page.keyboard.press('Tab')
-      await page.keyboard.press('ArrowUp')
-      await page.keyboard.press('ArrowUp')
-      await page.keyboard.press('ArrowUp')
-      await page.keyboard.press('ArrowDown')
-
-      await page.keyboard.press('Tab')
-      await page.keyboard.press('ArrowUp')
-      await page.keyboard.press('ArrowUp')
-      await page.keyboard.press('ArrowUp')
-      await page.keyboard.press('ArrowDown')
-
       // To Submit
       await page.keyboard.press('Tab')
+      // To Hour
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowDown')
+
+      // To Minute
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowUp')
+      await page.keyboard.press('ArrowDown')
+
       // To Am
       await page.keyboard.press('Tab')
       // To Pm
@@ -231,6 +241,10 @@ test('time input screenshots', runScreenshotTests('sinch-time-picker', [
       await page.keyboard.press('Enter')
 
       // To Am
+      await page.keyboard.press('Shift+Tab')
+      // To Minute
+      await page.keyboard.press('Shift+Tab')
+      // To Hour
       await page.keyboard.press('Shift+Tab')
       // To Submit
       await page.keyboard.press('Shift+Tab')
