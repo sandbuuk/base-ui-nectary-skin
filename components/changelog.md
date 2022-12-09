@@ -1,7 +1,8 @@
-## v0.45.2 (2022-12-08)
+## v0.45.2 (2022-12-09)
 
 * 🐞 fix search behaviour in `sinch-emoji-picker`
 * 🐞 fix multiline input in `sinch-textarea`
+* 🐞 fix icon in multiline `sinch-link`
 * 🐞 align styles in `sinch-time-picker`
 * 🐞 align clear button behaviour in `sinch-input`
 
