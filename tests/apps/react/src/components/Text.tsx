@@ -11,9 +11,10 @@ export const Text: FC<TText> = ({ search }) => {
   const type: any = search.get('type')
   const isInline = search.get('inline') !== null
   const isEmphasized = search.get('emphasized') !== null
+  const isEllipsis = search.get('ellipsis') !== null
 
   return (
-    <sinch-text type="m">
+    <sinch-text type="m" ellipsis={isEllipsis}>
       <span>prefix </span>
       <sinch-text
         type={type}

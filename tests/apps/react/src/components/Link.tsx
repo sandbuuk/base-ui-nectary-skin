@@ -19,7 +19,7 @@ export const Link: FC<TLink> = ({ search }) => {
   const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-link-blur')), [])
 
   return (
-    <div id="link-wrapper">
+    <div id="link-wrapper" style={{ maxWidth: '100%' }}>
       <span>Line with</span>
       {' '}
       <sinch-link
