@@ -127,7 +127,10 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
       }
 
       case 'mode': {
-        assertMode(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertMode(newVal)
+        }
+
         this.#updatePosition()
 
         break
@@ -155,7 +158,9 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
     const colorName = this.color
 
     if (colorName !== null && colorName.length > 0) {
-      assertBadgeColor(this, colorName)
+      if (process.env.NODE_ENV !== 'production') {
+        assertBadgeColor(this, colorName)
+      }
 
       const bg = getBadgeColorBg(colorName)
       const fg = getBadgeColorFg(colorName)

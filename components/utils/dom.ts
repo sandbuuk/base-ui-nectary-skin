@@ -59,7 +59,9 @@ export function getLiteralAttribute($element: Element, literals: string[], attrN
   }
 
   if (typeof defaultValue === 'undefined') {
-    throw new Error(`Invalid attribute value: ${attrName} = ${attrValue}`)
+    if (process.env.NODE_ENV !== 'production') {
+      throw new Error(`Invalid attribute value: ${attrName} = ${attrValue}`)
+    }
   }
 
   return defaultValue
