@@ -146,7 +146,9 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
     switch (name) {
       case 'value': {
-        assertValue(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertValue(newVal)
+        }
 
         this.#onValueChange()
 
@@ -154,9 +156,15 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
       }
 
       case 'min': {
-        assertMinMax(newVal, name)
-        this.#minDate = isoToDate(newVal)
-        assertDate(this.#minDate, name, newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertMinMax(newVal, name)
+        }
+
+        this.#minDate = isoToDate(newVal!)
+
+        if (process.env.NODE_ENV !== 'production') {
+          assertDate(this.#minDate, name, newVal!)
+        }
 
         // Dont show panel below min date
         if (this.#uiDate !== null) {
@@ -169,9 +177,15 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
       }
 
       case 'max': {
-        assertMinMax(newVal, name)
-        this.#maxDate = isoToDate(newVal)
-        assertDate(this.#maxDate, name, newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertMinMax(newVal, name)
+        }
+
+        this.#maxDate = isoToDate(newVal!)
+
+        if (process.env.NODE_ENV !== 'production') {
+          assertDate(this.#maxDate, name, newVal!)
+        }
 
         // Dont show panel above max date
         if (this.#uiDate !== null) {
@@ -184,15 +198,17 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
       }
 
       case 'locale': {
-        assertLocale(newVal)
+        if (process.env.NODE_ENV !== 'production') {
+          assertLocale(newVal)
+        }
 
-        const names = getDayNames(newVal)
+        const names = getDayNames(newVal!)
 
         this.#$weekDayNames.forEach(($day, i) => {
           $day.textContent = names[i]
         })
 
-        this.#monthNames = getMonthNames(newVal)
+        this.#monthNames = getMonthNames(newVal!)
         this.#render()
 
         break

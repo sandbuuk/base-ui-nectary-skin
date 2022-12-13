@@ -88,7 +88,9 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
     const colorName = this.color
 
     if (colorName !== null && colorName.length > 0) {
-      assertTagColor(this, colorName)
+      if (process.env.NODE_ENV !== 'production') {
+        assertTagColor(this, colorName)
+      }
 
       const bg = getTagColorBg(colorName)
       const fg = getTagColorFg(colorName)
