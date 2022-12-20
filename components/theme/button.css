@@ -96,10 +96,10 @@
   --sinch-button-cta-secondary-mix-blend-mode: initial;
 
   /* Destructive */
-  --sinch-button-destructive-color-background: transparent;
+  --sinch-button-destructive-color-background: var(--sinch-color-snow-100);
   --sinch-button-destructive-color-background-hover: var(--sinch-color-raspberry-100);
   --sinch-button-destructive-color-background-active: var(--sinch-color-raspberry-100);
-  --sinch-button-destructive-color-background-disabled: transparent;
+  --sinch-button-destructive-color-background-disabled: var(--sinch-color-snow-100);
   --sinch-button-destructive-color-border: var(--sinch-color-raspberry-500);
   --sinch-button-destructive-color-border-hover: var(--sinch-color-raspberry-500);
   --sinch-button-destructive-color-border-active: var(--sinch-color-raspberry-500);
