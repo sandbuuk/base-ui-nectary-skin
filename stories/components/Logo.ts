@@ -3,6 +3,8 @@ import type { TSinchLogoElement } from '@sinch-engage/nectary/logo/types'
 import type { Story, Meta } from '@storybook/html'
 import '@sinch-engage/nectary/logo/sinch-icon'
 import '@sinch-engage/nectary/logo/sinch-icon-wordmark'
+import '@sinch-engage/nectary/logo/engage-icon'
+import '@sinch-engage/nectary/logo/engage-icon-wordmark'
 
 export default {
   title: 'Components/Logo',
@@ -52,14 +54,44 @@ SinchIcon.parameters = {
 export const SinchIconWordmark = Template('sinch-logo-sinch-icon-wordmark')
 
 SinchIconWordmark.args = {
-  size: 200,
+  size: 100,
   inverted: false,
 }
 
 SinchIconWordmark.parameters = {
   docs: {
     source: {
-      code: '<sinch-logo-sinch-icon-wordmark size="200"></sinch-logo-sinch-icon-wordmark>',
+      code: '<sinch-logo-sinch-icon-wordmark size="100"></sinch-logo-sinch-icon-wordmark>',
+    },
+  },
+}
+
+export const EngageIcon = Template('sinch-logo-engage-icon')
+
+EngageIcon.args = {
+  size: 100,
+  inverted: false,
+}
+
+EngageIcon.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-logo-engage-icon size="100"></sinch-logo-engage-icon>',
+    },
+  },
+}
+
+export const EngageIconWordmark = Template('sinch-logo-engage-icon-wordmark')
+
+EngageIconWordmark.args = {
+  size: 100,
+  inverted: false,
+}
+
+EngageIconWordmark.parameters = {
+  docs: {
+    source: {
+      code: '<sinch-logo-engage-icon-wordmark size="100"></sinch-logo-engage-icon-wordmark>',
     },
   },
 }
