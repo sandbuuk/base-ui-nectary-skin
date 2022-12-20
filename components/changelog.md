@@ -1,3 +1,8 @@
+## v0.46.0 (2022-12-20)
+
+* ➕ add `sinch-logo-engage-icon` and `sinch-logo-engage-icon-wordmark` components
+* 🐞 fix background color in `sinch-button`
+
 ## v0.45.2 (2022-12-09)
 
 * 🐞 fix search behaviour in `sinch-emoji-picker`
