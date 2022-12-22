@@ -12,6 +12,7 @@ import { ComponentsOutlet, ComponentsPage } from '~/pages/Components'
 import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
 import { NotFoundPage } from '~/pages/NotFound'
+import { PalettePage } from '~/pages/Palette'
 import { lazyScrollIntoView } from '~/utils/lazy-scroll-into-view'
 import './styles.css'
 
@@ -33,6 +34,7 @@ export const App: FC = () => (
             <NavigationItem path="/" text="👋 Intro"/>
             <NavigationItem path="/faq" text="❔ FAQ"/>
             <NavigationItem path="/changelog" text="📦 Changelog"/>
+            <NavigationItem path="/palette" text="🎨 Palette"/>
             <NavigationItem path="/components" text="🍱 Components">
               <NavigationList>
                 {req.keys().map((key) => {
@@ -68,6 +70,7 @@ export const App: FC = () => (
                   )
                 })}
               </Route>
+              <Route path="/palette" element={<PalettePage/>}/>
               <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
           </Suspense>
