@@ -33,8 +33,8 @@ export const App: FC = () => (
           <NavigationList>
             <NavigationItem path="/" text="👋 Intro"/>
             <NavigationItem path="/faq" text="❔ FAQ"/>
-            <NavigationItem path="/changelog" text="📦 Changelog"/>
             <NavigationItem path="/palette" text="🎨 Palette"/>
+            <NavigationItem path="/changelog" text="📦 Changelog"/>
             <NavigationItem path="/components" text="🍱 Components">
               <NavigationList>
                 {req.keys().map((key) => {
@@ -55,6 +55,7 @@ export const App: FC = () => (
               <Route path="/" element={<IntroPage/>}/>
               <Route path="/faq" element={<FAQPage/>}/>
               <Route path="/changelog" element={<ChangelogPage/>}/>
+              <Route path="/palette" element={<PalettePage/>}/>
               <Route path="/components" element={<ComponentsOutlet/>}>
                 <Route index element={<ComponentsPage/>}/>
                 {req.keys().map((key) => {
@@ -70,7 +71,6 @@ export const App: FC = () => (
                   )
                 })}
               </Route>
-              <Route path="/palette" element={<PalettePage/>}/>
               <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
           </Suspense>
