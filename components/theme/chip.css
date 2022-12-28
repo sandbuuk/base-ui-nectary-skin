@@ -50,4 +50,12 @@
   --sinch-chip-color-violet-fg: var(--sinch-color-stormy-500);
   --sinch-chip-color-yellow-bg: var(--sinch-color-bolt-400);
   --sinch-chip-color-yellow-fg: var(--sinch-color-stormy-500);
+  --sinch-chip-color-celtic-bg: var(--sinch-color-feedback-info-bg);
+  --sinch-chip-color-celtic-fg: var(--sinch-color-feedback-info-contrast);
+  --sinch-chip-color-olive-bg: var(--sinch-color-feedback-success-bg);
+  --sinch-chip-color-olive-fg: var(--sinch-color-feedback-success-contrast);
+  --sinch-chip-color-pumpkin-bg: var(--sinch-color-feedback-warning-bg);
+  --sinch-chip-color-pumpkin-fg: var(--sinch-color-feedback-warning-contrast);
+  --sinch-chip-color-jasper-bg: var(--sinch-color-feedback-invalid-bg);
+  --sinch-chip-color-jasper-fg: var(--sinch-color-feedback-invalid-contrast);
 }

@@ -1,8 +1,3 @@
-import {
-  lightColorNames,
-  darkColorNames,
-  vibrantColorNames,
-} from '@sinch-engage/nectary/theme/colors'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/chip'
 import '@sinch-engage/nectary/text'
@@ -14,20 +9,16 @@ const wrapperStyles: CSSProperties = {
   gap: 10,
 }
 
-const allColorNames: string[] = [
-  ...lightColorNames.split(','),
-  ...darkColorNames.split(','),
-  ...vibrantColorNames.split(','),
-]
+const systemColors = ['celtic', 'olive', 'pumpkin', 'jasper']
 
 export const SmallExample: FC = () => (
   <div style={wrapperStyles}>
     {
-      allColorNames.map((colorName) => (
+      systemColors.map((name) => (
         <sinch-chip
-          key={colorName}
-          color={colorName}
-          text={colorName.length > 0 ? colorName : 'default'}
+          key={name}
+          color={name}
+          text={name}
           aria-label="Chip"
           small
           on-click={() => console.log('click')}

@@ -1,33 +1,23 @@
-import {
-  lightColorNames,
-  darkColorNames,
-  vibrantColorNames,
-} from '@sinch-engage/nectary/theme/colors'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/text'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
-  flexDirection: 'row',
   flexWrap: 'wrap',
   gap: 10,
 }
 
-const allColorNames: string[] = [
-  ...lightColorNames.split(','),
-  ...darkColorNames.split(','),
-  ...vibrantColorNames.split(','),
-]
+const systemColors = ['celtic', 'olive', 'pumpkin', 'jasper']
 
 export const SmallExample: FC = () => (
   <div style={wrapperStyles}>
     {
-      allColorNames.map((colorName) => (
+      systemColors.map((colorName) => (
         <sinch-tag
           key={colorName}
           color={colorName}
-          text={colorName.length > 0 ? colorName : 'default'}
+          text={colorName}
           small
         />
       ))
