@@ -67,7 +67,7 @@ const processIcon = async (filepath: string) => {
   await writeFile(outPathHtml, dataHtml)
 
   /* Storybook */
-  const storyPath = './stories/Icons.ts'
+  const storyPath = './stories/components/Icons.ts'
   let storyData = await readFile(storyPath, 'utf-8')
 
   storyData = storyData
