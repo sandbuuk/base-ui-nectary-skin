@@ -6,30 +6,34 @@ const iconTemplate = `
 import { defineCustomElement } from '../../utils'
 import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
-import type { TSinchIconElement, TSinchIconReact } from '../types'
+import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '../types'
 
-defineCustomElement('sinch-icon-{{name}}', createIconClass(templateHTML))
+defineCustomElement('sinch-icon-branded-{{name}}', createIconClass(templateHTML))
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-icon-{{name}}': TSinchIconReact,
+      'sinch-icon-branded-{{name}}': TSinchIconBrandedReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-icon-{{name}}': TSinchIconElement,
+    'sinch-icon-branded-{{name}}': TSinchIconBrandedElement,
   }
 }
 `.trimStart()
 
 const dirPath = process.argv[2]
-const svgAttributes = 'viewBox="0 0 24 24" aria-hidden="true" focusable="false"'
+const svgAttributes = 'viewBox="0 0 48 48" aria-hidden="true"'
 const overwriteNames: string[] = []
 
 const processIcon = async (filepath: string) => {
-  // Filename without the extension
-  const filename = path.basename(filepath, path.extname(filepath)).replaceAll('_', '-')
+  const filename = /\[(.+)\]/.exec(filepath)?.[1]?.replaceAll(/[\s_]/g, '-').toLowerCase()
+
+  if (filename == null) {
+    throw new Error(`Could not process icon: ${filepath}`)
+  }
+
   const svgString = await readFile(path.join(dirPath, filepath), 'utf-8')
 
   const svgoResult = optimize(svgString, {
@@ -50,10 +54,12 @@ const processIcon = async (filepath: string) => {
   const dataTs = iconTemplate.replaceAll('{{name}}', filename)
 
   dataHtml = dataHtml
-    .replace('width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"', svgAttributes)
+    .replace('width="48" height="48"', '')
+    .replace(' xmlns="http://www.w3.org/2000/svg"', svgAttributes)
+    .replaceAll('fill="#007171"', 'class="accent"')
     .replaceAll(/ fill=".*?"/g, '')
 
-  const outDir = path.join('./components/icons', filename)
+  const outDir = path.join('./components/icons-branded', filename)
   const outPathTs = path.join(outDir, 'index.ts')
   const outPathHtml = path.join(outDir, 'template.html')
 
@@ -67,12 +73,12 @@ const processIcon = async (filepath: string) => {
   await writeFile(outPathHtml, dataHtml)
 
   /* Storybook */
-  const storyPath = './stories/components/Icons.ts'
+  const storyPath = './stories/components/IconsBranded.ts'
   let storyData = await readFile(storyPath, 'utf-8')
 
   storyData = storyData
-    .replace('// {{icon import}}', `$&\nimport '@sinch-engage/nectary/icons/${filename}'`)
-    .replace('// {{icon name}}', `$&\n  'sinch-icon-${filename}',`)
+    .replace('// {{icon import}}', `$&\nimport '@sinch-engage/nectary/icons-branded/${filename}'`)
+    .replace('// {{icon name}}', `$&\n  'sinch-icon-branded-${filename}',`)
 
   await writeFile(storyPath, storyData)
 }
