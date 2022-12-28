@@ -1,6 +1,6 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
-import { SimpleExample } from './examples/Simple.tsx?example'
+import { ColorsExample } from './examples/Colors.tsx?example'
 import { IconExample } from './examples/Icon.tsx?example'
 import { SmallExample } from './examples/Small.tsx?example'
 import {
@@ -19,15 +19,21 @@ Works with the same `color` value as [Color Menu](?path=/components/colormenu).
 
 ## Examples
 
-### Simple
+### Colors
 
-<Example Component={SimpleExample}/>
+Nectary ships different colors to be used in tags. Color is just a string passed to a `color` attribute
+
+<Example Component={ColorsExample}/>
 
 ### Icon
+
+Tags can have any icon inserted into `icon` slot
 
 <Example Component={IconExample}/>
 
 ### Small
+
+Tag can be made smaller
 
 <Example Component={SmallExample}/>
 
