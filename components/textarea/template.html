@@ -2,21 +2,33 @@
 :host {
   display: inline-block;
   vertical-align: middle;
+
+  --sinch-size: var(--sinch-size-m);
+  --sinch-size-icon: var(--sinch-input-icon-size-m);
+  --sinch-shape-radius: var(--sinch-shape-radius-m);
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--sinch-color-snow-100);
+  border-radius: var(--sinch-shape-radius);
+  padding-right: 2px;
+  padding-bottom: 2px;
+  overflow: hidden;
 }
 
 #input {
   all: initial;
   display: block;
-  border: 1px solid var(--sinch-color-stormy-200);
-  box-sizing: border-box;
-  border-radius: var(--sinch-shape-radius-s);
-  width: 100%;
-  padding: 8px 12px;
   font: var(--sinch-font-text-m);
   color: var(--sinch-color-text-default);
-  background-color: var(--sinch-color-snow-100);
   resize: none;
   white-space: pre-wrap;
+  padding: 8px 10px 8px 12px;
 }
 
 #input::placeholder {
@@ -26,7 +38,6 @@
 }
 
 #input:disabled {
-  border-color: var(--sinch-color-snow-500);
   color: var(--sinch-color-stormy-100);
 }
 
@@ -42,9 +53,44 @@
   resize: vertical;
 }
 
-:host([invalid]:not([invalid="false"])) #input:enabled {
+#border {
+  position: absolute;
+  border: 1px solid var(--sinch-color-border-dark);
+  border-radius: var(--sinch-shape-radius);
+  inset: 0;
+  pointer-events: none;
+}
+
+:host([invalid]:not([invalid="false"])) #border {
   border-color: var(--sinch-color-text-invalid);
+}
+
+#input:focus + #border {
+  border-color: var(--sinch-color-border-focus);
+  border-width: 2px;
+}
+
+#input:disabled + #border {
+  border-color: var(--sinch-color-snow-500);
+}
+
+#bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 10px 12px;
+}
+
+#bottom.empty {
+  display: none;
 }
 </style>
 
-<textarea id="input"></textarea>
+<div id="wrapper">
+  <textarea id="input"></textarea>
+  <div id="border"></div>
+  <div id="bottom">
+    <slot name="bottom"></slot>
+  </div>
+</div>
