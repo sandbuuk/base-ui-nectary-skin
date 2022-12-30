@@ -5,7 +5,8 @@ import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCust
 const withEmpty = '/textarea?width=200'
 const withValue = '/textarea?width=200&value=Input%20value'
 const withPlaceholder = '/textarea?width=200&placeholder=Placeholder%20value'
-const withEverything = '/textarea?width=200&tooltip=Tooltip%20text&invalid=true&placeholder=Placeholder%20value&value=Input%20value'
+const withEverything = '/textarea?width=200&invalid=true&placeholder=Placeholder%20value&value=Input%20value'
+const withBottom = '/textarea?width=400&rows=1&bottom=true&placeholder=Placeholder'
 const checkTextareaWithEverything = makeAccessibilityTests('/textarea?width=200&invalid=true&placeholder=Placeholder%20value&value=Input%20value', 'sinch-textarea')
 
 test('accessibility', checkTextareaWithEverything({
@@ -83,6 +84,13 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('rows', '1'))
       yield { name: 'updated' }
+    },
+  },
+  {
+    name: 'bottom slot',
+    url: withBottom,
+    async *fn() {
+      yield { name: 'shot' }
     },
   },
   {

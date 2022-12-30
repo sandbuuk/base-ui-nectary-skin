@@ -1,4 +1,5 @@
 import {
+  Context,
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
@@ -6,10 +7,12 @@ import {
   getReactEventHandler,
   isAttrTrue,
   NectaryElement,
+  setClass,
   updateAttribute,
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
 } from '../utils'
+import { DEFAULT_SIZE } from '../utils/size'
 import templateHTML from './template.html'
 import type { TSinchTextareaElement, TSinchTextareaReact } from './types'
 
@@ -19,8 +22,12 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-textarea', class extends NectaryElement {
   #$input: HTMLTextAreaElement
+  #$bottomSlot: HTMLSlotElement
+  #$bottomWrapper: HTMLElement
   #cursorPos: number | null = null
   #isPendingDk = false
+  #controller: AbortController | null = null
+  #sizeContext: Context<'size'>
 
   constructor() {
     super()
@@ -30,32 +37,42 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$input = shadowRoot.querySelector('#input')!
+    this.#$bottomSlot = shadowRoot.querySelector('slot[name="bottom"]')!
+    this.#$bottomWrapper = shadowRoot.querySelector('#bottom')!
+    this.#sizeContext = new Context(this.#$bottomWrapper, 'size')
   }
 
   connectedCallback() {
+    super.connectedCallback()
+    this.#controller = new AbortController()
+
+    const options: AddEventListenerOptions = {
+      signal: this.#controller.signal,
+    }
+
     this.setAttribute('role', 'textbox')
     this.setAttribute('aria-multiline', 'true')
-    this.#$input.addEventListener('input', this.#onInput)
-    this.#$input.addEventListener('compositionstart', this.#onCompositionStart)
-    this.#$input.addEventListener('mousedown', this.#onSelectionChange)
-    this.#$input.addEventListener('keydown', this.#onSelectionChange)
-    this.#$input.addEventListener('focus', this.#onInputFocus)
-    this.#$input.addEventListener('blur', this.#onInputBlur)
-    this.addEventListener('-change', this.#onChangeReactHandler)
-    this.addEventListener('-focus', this.#onFocusReactHandler)
-    this.addEventListener('-blur', this.#onBlurReactHandler)
+    this.#$input.addEventListener('input', this.#onInput, options)
+    this.#$input.addEventListener('compositionstart', this.#onCompositionStart, options)
+    this.#$input.addEventListener('mousedown', this.#onSelectionChange, options)
+    this.#$input.addEventListener('keydown', this.#onSelectionChange, options)
+    this.#$input.addEventListener('focus', this.#onInputFocus, options)
+    this.#$input.addEventListener('blur', this.#onInputBlur, options)
+    this.#$bottomSlot.addEventListener('slotchange', this.#onBottomSlotChange, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
+    this.addEventListener('-focus', this.#onFocusReactHandler, options)
+    this.addEventListener('-blur', this.#onBlurReactHandler, options)
+
+    this.#sizeContext.listen(this.#controller.signal)
+
+    this.#onBottomSlotChange()
+
+    this.#onSizeUpdate()
   }
 
   disconnectedCallback() {
-    this.#$input.removeEventListener('input', this.#onInput)
-    this.#$input.removeEventListener('compositionstart', this.#onCompositionStart)
-    this.#$input.removeEventListener('mousedown', this.#onSelectionChange)
-    this.#$input.removeEventListener('keydown', this.#onSelectionChange)
-    this.#$input.removeEventListener('focus', this.#onInputFocus)
-    this.#$input.removeEventListener('blur', this.#onInputBlur)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
-    this.removeEventListener('-focus', this.#onFocusReactHandler)
-    this.removeEventListener('-blur', this.#onBlurReactHandler)
+    super.disconnectedCallback()
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {
@@ -262,6 +279,22 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
 
   #onInputBlur = () => {
     this.dispatchEvent(new CustomEvent('-blur'))
+  }
+
+  #onBottomSlotChange = () => {
+    const isEmpty = this.#$bottomSlot.assignedElements().length === 0
+
+    setClass(this.#$bottomWrapper, 'empty', isEmpty)
+  }
+
+  #onSizeUpdate() {
+    if (!this.isConnected) {
+      return
+    }
+
+    const size = this.getAttribute('data-size') ?? DEFAULT_SIZE
+
+    this.#sizeContext.dispatch(size)
   }
 
   #onChangeReactHandler = (e: Event) => {

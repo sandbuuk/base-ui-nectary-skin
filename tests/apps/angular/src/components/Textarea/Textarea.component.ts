@@ -1,5 +1,14 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/textarea'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/tag'
+import '@sinch-engage/nectary/icons/attach-file'
+import '@sinch-engage/nectary/icons/send'
+import '@sinch-engage/nectary/icons/mood'
+import '@sinch-engage/nectary/icons/search'
+import '@sinch-engage/nectary/icons/add-comment'
+import '@sinch-engage/nectary/icons/more-horiz'
 
 @Component({
   selector: 'textarea-component',
@@ -15,6 +24,7 @@ export class TextareaComponent {
   isDisabled: boolean
   isResizable: boolean
   rows: string | null
+  hasBottom: boolean
 
   constructor() {
     const url = new URL(location.href)
@@ -24,7 +34,8 @@ export class TextareaComponent {
     this.placeholderText = url.searchParams.get('placeholder')
     this.isDisabled = url.searchParams.get('disabled') != null
     this.isResizable = url.searchParams.get('resizable') != null
-    this.rows = url.searchParams.get('rows') ?? null
+    this.rows = url.searchParams.get('rows')
+    this.hasBottom = url.searchParams.get('bottom') !== null
   }
 
   onChange(e: Event) {
