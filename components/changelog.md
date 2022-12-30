@@ -1,3 +1,10 @@
+## v0.47.0 (2022-12-30)
+
+* 💥 rename system colors in palette
+* ➕ add system colors to `sinch-tag` and `sinch-chip`
+* ➕ add `bottom` slot to `sinch-textarea`
+* ➕ add more branded icons
+
 ## v0.46.0 (2022-12-20)
 
 * ➕ add `sinch-logo-engage-icon` and `sinch-logo-engage-icon-wordmark` components
