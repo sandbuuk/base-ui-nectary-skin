@@ -118,6 +118,9 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
 
     const files = Array.from(this.#$input.files)
 
+    // Reset value to allow picking same files
+    this.#$input.value = ''
+
     if (!doFilesSatisfySize(files, this.size)) {
       this.dispatchEvent(
         new CustomEvent('-invalid', {
