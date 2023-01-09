@@ -1,3 +1,8 @@
+## v0.48.0 (2023-01-09)
+
+* ➕ add `sinch-icon-variables` component
+* 🐞 fix picking same files in `sinch-file-picker`
+
 ## v0.47.0 (2022-12-30)
 
 * 💥 rename system colors in palette
