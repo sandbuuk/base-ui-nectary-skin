@@ -1302,6 +1302,7 @@ import '@sinch-engage/nectary/icons/blinds-closed'
 import '@sinch-engage/nectary/icons/blinds'
 import '@sinch-engage/nectary/icons/auto-mode'
 import '@sinch-engage/nectary/icons/exclamation'
+import '@sinch-engage/nectary/icons/variables'
 // {{icon import}}
 
 /**
@@ -1942,6 +1943,7 @@ const actionIconNames = [
   'sinch-icon-unpublished',
   'sinch-icon-update',
   'sinch-icon-upgrade',
+  'sinch-icon-variables',
   'sinch-icon-verified-user',
   'sinch-icon-verified',
   'sinch-icon-vertical-split',
