@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/icons/mood'
-import '@sinch-engage/nectary/icons/search'
+import '@sinch-engage/nectary/icons/variables'
 import '@sinch-engage/nectary/icons/attach-file'
 import '@sinch-engage/nectary/icons/add-comment'
 import '@sinch-engage/nectary/icons/more-horiz'
@@ -29,7 +29,7 @@ export const BottomExample: FC = () => {
         <sinch-icon-mood slot="icon"/>
       </sinch-icon-button>
       <sinch-icon-button slot="bottom" aria-label="Variables">
-        <sinch-icon-search slot="icon"/>
+        <sinch-icon-variables slot="icon"/>
       </sinch-icon-button>
       <sinch-icon-button slot="bottom" aria-label="Comment">
         <sinch-icon-add-comment slot="icon"/>
