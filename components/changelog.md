@@ -1,3 +1,7 @@
+## v0.48.1 (2023-01-12)
+
+* 🐞 update CDN for `sinch-emoji`
+
 ## v0.48.0 (2023-01-09)
 
 * ➕ add `sinch-icon-variables` component
