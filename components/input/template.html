@@ -68,6 +68,7 @@
 
 #input:disabled {
   color: var(--sinch-color-text-disabled);
+  -webkit-text-fill-color: var(--sinch-color-text-disabled);
 }
 
 #input:disabled::placeholder {
@@ -106,7 +107,7 @@
 }
 
 :host([disabled]:not([disabled="false"])) #icon {
-  --sinch-color-icon: var(--sinch-color-border-disabled);
+  --sinch-color-icon: var(--sinch-color-text-disabled);
 }
 
 #icon-wrapper.empty {
