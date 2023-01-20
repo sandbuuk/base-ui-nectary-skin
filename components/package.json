@@ -16,7 +16,8 @@
     "build": "NODE_ENV=production babel . --extensions '.ts' --out-dir . && tsc --declaration --emitDeclarationOnly"
   },
   "dependencies": {
-    "@babel/runtime": "^7.19.0"
+    "@babel/runtime": "^7.19.0",
+    "xss": "^1.0.14"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
