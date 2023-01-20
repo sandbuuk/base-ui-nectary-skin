@@ -3,16 +3,14 @@ import { typeValues } from '@sinch-engage/nectary/alert/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const longTitle = encodeURIComponent('It has survived not only five centuries, but also the leap into electronic typesetting')
-const longText = encodeURIComponent('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.')
-
-const withText = '/alert?type=info&text=Alert%20text'
-const withTextAndClose = '/alert?type=info&text=Alert%20text&close=true'
-const withTextAndButton = '/alert?type=info&text=Alert%20text&action=true'
-const withTextAndButtonAndClose = '/alert?type=info&text=Alert%20text&action=true&close=true'
-const withTextAndButtonAndCloseExpanded = '/alert?width=500&type=info&text=Alert%20text&action=true&close=true'
-const withTextAndButtonAndCloseNarrow = '/alert?width=300&type=info&text=Alert%20text%20longer%20title&action=true&close=true'
-const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&type=info&text=${longText}&caption=${longTitle}&close=true&action=true&multiline=true`, 'sinch-alert')
+const withText = '/alert?type=info'
+const withTextAndClose = '/alert?type=info&close=true'
+const withTextAndButton = '/alert?type=info&action=true'
+const withTextAndButtonAndClose = '/alert?type=info&action=true&close=true'
+const withTextAndButtonAndCloseExpanded = '/alert?width=500&type=info&action=true&close=true'
+const withMarkdownAndButtonAndCloseExpanded = '/alert?width=500&example=md&type=info&action=true&close=true'
+const withTextAndButtonAndCloseNarrow = '/alert?width=300&type=info&action=true&close=true'
+const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&type=info&close=true&action=true&multiline=true`, 'sinch-alert')
 
 test('accessibility', checkMultilineTextTitleButtonClose({
   async *fn() {
@@ -90,6 +88,13 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
   {
     name: 'text button close narrow',
     url: withTextAndButtonAndCloseNarrow,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'md button close expanded',
+    url: withMarkdownAndButtonAndCloseExpanded,
     async *fn() {
       yield { name: 'shot' }
     },
