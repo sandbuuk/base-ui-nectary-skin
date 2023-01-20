@@ -3,16 +3,14 @@ import { typeValues } from '@sinch-engage/nectary/inline-alert/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const longTitle = encodeURIComponent('It has survived not only five centuries, but also the leap into electronic typesetting')
-const longText = encodeURIComponent('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.')
-
-const withText = '/inline-alert?type=info&caption=Title&text=Alert%20text'
-const withTextAndClose = '/inline-alert?type=info&caption=Title&text=Alert%20text&close=true'
-const withTextAndButton = '/inline-alert?type=info&caption=Title&text=Alert%20text&action=true'
-const withTextAndButtonAndClose = '/inline-alert?type=info&caption=Title&text=Alert%20text&action=true&close=true'
-const withTextAndButtonAndCloseExpanded = '/inline-alert?width=400&type=info&caption=Title&text=Alert%20text&action=true&close=true'
-const withTextAndButtonAndCloseNarrow = '/inline-alert?width=300&type=info&caption=Title&text=Alert%20text%20longer%20title&action=true&close=true'
-const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/inline-alert?width=400&type=info&text=${longText}&caption=${longTitle}&close=true&action=true&multiline=true`, 'sinch-inline-alert')
+const withText = '/inline-alert?type=info'
+const withTextAndClose = '/inline-alert?type=info&close=true'
+const withTextAndButton = '/inline-alert?type=info&action=true'
+const withTextAndButtonAndClose = '/inline-alert?type=info&action=true&close=true'
+const withTextAndButtonAndCloseExpanded = '/inline-alert?width=500&type=info&action=true&close=true'
+const withMarkdownAndButtonAndCloseExpanded = '/inline-alert?width=500&example=md&type=info&action=true&close=true'
+const withTextAndButtonAndCloseNarrow = '/inline-alert?width=300&type=info&action=true&close=true'
+const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/inline-alert?width=400&type=info&close=true&action=true&multiline=true`, 'sinch-inline-alert')
 
 test('accessibility', checkMultilineTextTitleButtonClose({
   async *fn() {
@@ -20,7 +18,7 @@ test('accessibility', checkMultilineTextTitleButtonClose({
   },
 }))
 
-test('alert screenshots', runScreenshotTests('sinch-inline-alert', [
+test('inline-alert screenshots', runScreenshotTests('sinch-inline-alert', [
   {
     name: 'type',
     url: withText,
@@ -90,6 +88,13 @@ test('alert screenshots', runScreenshotTests('sinch-inline-alert', [
   {
     name: 'text button close narrow',
     url: withTextAndButtonAndCloseNarrow,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'md button close expanded',
+    url: withMarkdownAndButtonAndCloseExpanded,
     async *fn() {
       yield { name: 'shot' }
     },

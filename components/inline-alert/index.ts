@@ -1,9 +1,10 @@
-import '../icons/report-problem'
-import '../icons/report'
 import '../icons/check-circle'
 import '../icons/info'
-import '../title'
+import '../icons/report-problem'
+import '../icons/report'
+import '../rich-text'
 import '../text'
+import '../title'
 import {
   defineCustomElement,
   getAttribute,
@@ -98,10 +99,11 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
       }
 
       case 'text': {
-        this.#$text.textContent = newVal
+        updateAttribute(this.#$text, 'text', newVal)
 
         break
       }
+
       case 'caption': {
         updateAttribute(this.#$caption, 'text', newVal)
 
