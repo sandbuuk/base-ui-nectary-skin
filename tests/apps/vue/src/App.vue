@@ -12,6 +12,7 @@
     <Chat v-if="url.pathname === '/chat'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
     <Chip v-if="url.pathname === '/chip'" :search="url.searchParams"/>
+    <CodeTag v-if="url.pathname === '/code-tag'" :search="url.searchParams"/>
     <ColorMenu v-if="url.pathname === '/color-menu'" :search="url.searchParams"/>
     <ColorSelect v-if="url.pathname === '/color-select'" :search="url.searchParams"/>
     <ColorSwatch v-if="url.pathname === '/color-swatch'" :search="url.searchParams"/>
@@ -70,6 +71,7 @@ import CardContainer from './components/CardContainer.vue'
 import Chat from './components/Chat.vue'
 import Checkbox from './components/Checkbox.vue'
 import Chip from './components/Chip.vue'
+import CodeTag from './components/CodeTag.vue'
 import ColorMenu from './components/ColorMenu.vue'
 import ColorSelect from './components/ColorSelect.vue'
 import ColorSwatch from './components/ColorSwatch.vue'
@@ -153,6 +155,7 @@ export default {
     Chat,
     Checkbox,
     Chip,
+    CodeTag,
     ColorMenu,
     ColorSelect,
     ColorSwatch,

@@ -13,6 +13,7 @@ import { CardContainerComponent } from '../components/CardContainer/CardContaine
 import { ChatComponent } from '../components/Chat/Chat.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
 import { ChipComponent } from '../components/Chip/Chip.component'
+import { CodeTagComponent } from '../components/CodeTag/CodeTag.component'
 import { ColorMenuComponent } from '../components/ColorMenu/ColorMenu.component'
 import { ColorSelectComponent } from '../components/ColorSelect/ColorSelect.component'
 import { ColorSwatchComponent } from '../components/ColorSwatch/ColorSwatch.component'
@@ -71,6 +72,7 @@ import { AppComponent } from './app.component'
     ChatComponent,
     CheckboxComponent,
     ChipComponent,
+    CodeTagComponent,
     ColorMenuComponent,
     ColorSelectComponent,
     ColorSwatchComponent,
