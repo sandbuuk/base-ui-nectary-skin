@@ -7,11 +7,11 @@ type TLink = {
 }
 
 export const Link: FC<TLink> = ({ search }) => {
-  const text: any = search.get('text')
-  const href: any = search.get('href')
-  const isDisabled = search.get('disabled') != null
-  const isExternal = search.get('external') != null
-  const isStandalone = search.get('standalone') != null
+  const text = search.get('text') ?? ''
+  const href = search.get('href') ?? ''
+  const isDisabled = search.get('disabled') !== null
+  const isExternal = search.get('external') !== null
+  const isStandalone = search.get('standalone') !== null
   const onClick = useCallback(() => {
     window.dispatchEvent(new CustomEvent('sinch-link-click'))
   }, [])
