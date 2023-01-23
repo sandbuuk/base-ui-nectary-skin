@@ -24,6 +24,7 @@ export const Input: FC<TInput> = ({ search }) => {
   const size: any = search.get('size') ?? undefined
   const isInvalid = search.get('invalid') !== null
   const placeholderText = search.get('placeholder') ?? undefined
+  const autocomplete = search.get('autocomplete') ?? undefined
   const isDisabled = search.get('disabled') != null
   const hasLeft = search.get('left') != null
   const hasRight = search.get('right') != null
@@ -36,6 +37,7 @@ export const Input: FC<TInput> = ({ search }) => {
       placeholder={placeholderText}
       disabled={isDisabled}
       invalid={isInvalid}
+      autocomplete={autocomplete}
       value={value}
       on-change={onChange}
       on-focus={onFocus}

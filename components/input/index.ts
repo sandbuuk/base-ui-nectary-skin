@@ -20,7 +20,7 @@ import {
 } from '../utils'
 import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { inputTypes } from './utils'
+import { assertType, inputTypes } from './utils'
 import type { TSinchIconButtonElement } from '../icon-button/types'
 import type { TRect } from '../types'
 import type { TContextSize } from '../utils'
@@ -116,6 +116,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       'invalid',
       'disabled',
       'size',
+      'autocomplete',
       'data-size',
     ]
   }
@@ -123,7 +124,12 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'type': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
+
         updateLiteralAttribute(this.#$input, inputTypes, 'type', newVal)
+        updateAttribute(this.#$input, 'spellcheck', newVal === 'password' ? 'false' : null)
 
         break
       }
@@ -184,6 +190,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
         break
       }
+
+      case 'autocomplete': {
+        updateAttribute(this.#$input, 'autocomplete', newVal)
+      }
     }
   }
 
@@ -237,6 +247,14 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   get size(): TSinchSize {
     return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
+  }
+
+  set autocomplete(value: string) {
+    updateAttribute(this, 'autocomplete', value)
+  }
+
+  get autocomplete(): string {
+    return getAttribute(this, 'autocomplete', '')
   }
 
   get selectionStart(): HTMLInputElement['selectionStart'] {

@@ -11,6 +11,8 @@ export type TSinchInputElement = HTMLElement & {
   value: string,
   /** Text that appears in the text field when it has no value set */
   placeholder: string | null,
+  /** The HTML autocomplete attribute */
+  autocomplete: string,
   /** Invalid state */
   invalid: boolean,
   /** Disabled */
@@ -33,6 +35,8 @@ export type TSinchInputElement = HTMLElement & {
   setAttribute(name: 'value', value: string): void,
   /** Text that appears in the text field when it has no value set */
   setAttribute(name: 'placeholder', value: string): void,
+  /** The HTML autocomplete attribute */
+  setAttribute(name: 'autocomplete', value: string): void,
   /** Invalid state */
   setAttribute(name: 'invalid', value: ''): void,
   /** Disabled */
@@ -48,6 +52,8 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   'aria-label': string,
   /** Text field type, `text` by default */
   type?: TSinchInputType,
+  /** The HTML autocomplete attribute */
+  autocomplete?: string,
   /** Text that appears in the text field when it has no value set */
   placeholder?: string,
   /** Invalid state */
