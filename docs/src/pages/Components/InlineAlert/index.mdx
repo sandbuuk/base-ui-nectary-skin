@@ -1,6 +1,7 @@
 import { Code } from '~/components/Code'
 import { Example } from '~/components/Example'
 import { TypeInfoExample } from './examples/TypeInfo.tsx?example'
+import { TypeSuccessExample } from './examples/TypeSuccess.tsx?example'
 import { TypeWarningExample } from './examples/TypeWarning.tsx?example'
 import { TypeErrorExample } from './examples/TypeError.tsx?example'
 import { CloseExample } from './examples/Close.tsx?example'
@@ -12,9 +13,9 @@ import {
   ElementAttributesTable,
 } from '@sinch-engage/nectary/alert/types.ts?api'
 
-# Alert
+# Inline Alert
 
-Alert is a banner located at the top at the UI that presents pressing and high-singal messages. Their go is to communicate with users in a prominent way to drive their attention about a service disruption or critical information, that is or will impact the use of the product in a global way.
+Inline Alert is a banner that presents pressing and high-singal messages. Their go is to communicate with users in a prominent way to drive their attention about a service disruption or critical information, that is or will impact the use of the product in a global way.
 
 ## Table of contents
 
@@ -24,9 +25,15 @@ Alert is a banner located at the top at the UI that presents pressing and high-s
 
 #### Informative
 
-Informative Alert convay non-critical information to the user.
+Informative Inline Alert convay non-critical information to the user.
 
 <Example Component={TypeInfoExample}/>
+
+#### Success
+
+Success Inline Alert convay successful information to the user.
+
+<Example Component={TypeSuccessExample}/>
 
 #### Warning
 
