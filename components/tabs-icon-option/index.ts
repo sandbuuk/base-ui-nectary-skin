@@ -9,8 +9,8 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTooltipElement } from '../tooltip/types'
 import type { TSinchTabsIconOptionElement, TSinchTabsIconOptionReact } from './types'
+import type { TSinchTooltipElement } from '../tooltip/types'
 
 const template = document.createElement('template')
 

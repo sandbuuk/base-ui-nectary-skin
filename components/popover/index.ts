@@ -15,9 +15,9 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { assertOrientation, getPopOrientation, orientationValues } from './utils'
+import type { TSinchPopoverElement, TSinchPopoverOrientation, TSinchPopoverReact } from './types'
 import type { TSinchPopElement } from '../pop/types'
 import type { TContextVisibility } from '../utils'
-import type { TSinchPopoverElement, TSinchPopoverOrientation, TSinchPopoverReact } from './types'
 
 const TIP_SIZE = 16
 const template = document.createElement('template')

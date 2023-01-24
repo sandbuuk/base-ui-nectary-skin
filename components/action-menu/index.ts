@@ -10,9 +10,9 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchActionMenuElement, TSinchActionMenuReact } from './types'
 import type { TSinchActionMenuOptionElement } from '../action-menu-option/types'
 import type { TContextKeydown, TContextVisibility } from '../utils'
-import type { TSinchActionMenuElement, TSinchActionMenuReact } from './types'
 
 const ITEM_HEIGHT = 40
 const template = document.createElement('template')

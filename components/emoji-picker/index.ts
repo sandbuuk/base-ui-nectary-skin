@@ -31,6 +31,7 @@ import {
 } from '../utils'
 import dataJson from './data.json'
 import templateHTML from './template.html'
+import type { TEmojiGroup, TEmoji, TSinchEmojiPickerElement, TSinchEmojiPickerReact } from './types'
 import type { TSinchColorMenuElement } from '../color-menu/types'
 import type { TSinchColorSwatchElement } from '../color-swatch/types'
 import type { TSinchIconButtonElement } from '../icon-button/types'
@@ -42,7 +43,6 @@ import type {
   TContextKeydown,
   TContextVisibility,
 } from '../utils'
-import type { TEmojiGroup, TEmoji, TSinchEmojiPickerElement, TSinchEmojiPickerReact } from './types'
 
 const groupIconTagNames = [
   'sinch-icon-sentiment-satisfied',

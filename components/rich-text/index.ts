@@ -10,8 +10,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { assertSize, sizeValues } from './utils'
-import type { TSinchTextType } from '../text/types'
 import type { TSinchRichTextElement, TSinchRichTextReact } from './types'
+import type { TSinchTextType } from '../text/types'
 
 const template = document.createElement('template')
 

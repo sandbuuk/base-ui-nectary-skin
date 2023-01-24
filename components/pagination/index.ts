@@ -10,8 +10,8 @@ import {
   getReactEventHandler,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TRect } from '../types'
 import type { TSinchPaginationElement, TSinchPaginationReact } from './types'
+import type { TRect } from '../types'
 
 const NUM_BUTTONS = 7
 const MIDDLE_BTN_INDEX = Math.floor(NUM_BUTTONS / 2)

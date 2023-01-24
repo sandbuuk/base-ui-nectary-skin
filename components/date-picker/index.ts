@@ -48,10 +48,10 @@ import {
   sortDates,
   today,
 } from './utils'
+import type { TSinchDatePickerElement, TSinchDatePickerReact } from './types'
 import type { TSinchIconButtonElement } from '../icon-button/types'
 import type { TSinchTextElement } from '../text/types'
 import type { TRect } from '../types'
-import type { TSinchDatePickerElement, TSinchDatePickerReact } from './types'
 
 const template = document.createElement('template')
 

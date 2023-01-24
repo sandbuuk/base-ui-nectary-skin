@@ -14,9 +14,9 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { areFilesAccepted, doFilesSatisfySize } from './utils'
+import type { TSinchFileDropElement, TSinchFileDropInvalidType, TSinchFileDropReact } from './types'
 import type { TSinchFilePickerElement, TSinchFilePickerInvalidType } from '../file-picker/types'
 import type { TSinchTextElement } from '../text/types'
-import type { TSinchFileDropElement, TSinchFileDropInvalidType, TSinchFileDropReact } from './types'
 
 const template = document.createElement('template')
 

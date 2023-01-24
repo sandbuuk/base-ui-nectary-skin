@@ -16,11 +16,11 @@ import {
 import { assertSizeEx, DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
 import { assertType, typeValues } from './utils'
+import type { TSinchIconButtonElement, TSinchIconButtonReact, TSinchIconButtonType } from './types'
 import type { TSinchTooltipElement } from '../tooltip/types'
 import type { TRect } from '../types'
 import type { TContextSize } from '../utils'
 import type { TSinchSizeEx } from '../utils/size'
-import type { TSinchIconButtonElement, TSinchIconButtonReact, TSinchIconButtonType } from './types'
 
 const template = document.createElement('template')
 

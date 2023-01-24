@@ -16,10 +16,10 @@ import {
 import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import { getTitleTypeFromSize } from './utils'
+import type { TSinchSegmentElement, TSinchSegmentReact } from './types'
 import type { TSinchTitleElement } from '../title/types'
 import type { TRect } from '../types'
 import type { TSinchSize } from '../utils/size'
-import type { TSinchSegmentElement, TSinchSegmentReact } from './types'
 
 const template = document.createElement('template')
 
