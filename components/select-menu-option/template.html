@@ -23,11 +23,6 @@
   flex: 1;
 }
 
-:host(:hover:not([disabled])) > #wrapper,
-:host([data-selected]) > #wrapper {
-  background-color: var(--sinch-color-snow-400);
-}
-
 #check {
   display: none;
   margin-right: -6px;
@@ -42,6 +37,11 @@
   color: var(--sinch-color-text-disabled);
 
   --sinch-color-icon: var(--sinch-color-stormy-100);
+}
+
+:host([data-selected]) > #wrapper,
+:host(:hover:not([disabled])) > #wrapper {
+  background-color: var(--sinch-color-snow-400);
 }
 
 ::slotted(*) {

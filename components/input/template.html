@@ -44,10 +44,6 @@
   color: var(--sinch-color-text-default);
 }
 
-:host([data-size="s"]) #input {
-  padding-left: 32px;
-}
-
 #input::placeholder {
   font: var(--sinch-font-text-m);
   color: var(--sinch-color-text-muted);
@@ -62,13 +58,17 @@
   pointer-events: none;
 }
 
-:host([invalid]:not([invalid="false"]):not([disabled])) #border {
-  border-color: var(--sinch-color-text-invalid);
-}
-
 #input:disabled {
   color: var(--sinch-color-text-disabled);
   -webkit-text-fill-color: var(--sinch-color-text-disabled);
+}
+
+:host([data-size="s"]) #input {
+  padding-left: 32px;
+}
+
+:host([invalid]:not([invalid="false"]):not([disabled])) #border {
+  border-color: var(--sinch-color-text-invalid);
 }
 
 #input:disabled::placeholder {
