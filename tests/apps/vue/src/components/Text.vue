@@ -8,6 +8,8 @@
     >
       {{text}}
       <sinch-link href="#" text="Link"></sinch-link>
+      {{' '}}
+      <sinch-code-tag text="Code"></sinch-code-tag>
     </sinch-text>
     <span> postfix</span>
   </sinch-text>
@@ -16,6 +18,7 @@
 <script>
 import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/code-tag'
 
 export default {
   props: {
