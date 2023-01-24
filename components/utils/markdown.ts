@@ -142,7 +142,7 @@ export const parseMarkdown = (md: string): string => {
       const text = groups.linktext.length > 0 ? groups.linktext : href
 
       // chunk = `<sinch-link external href="${encodeAttr(href)}" text="${encodeAttr(text)}"></sinch-link>`
-      chunk = `<a class="link" href="${encodeAttr(href)}">${encodeAttr(text)}</a>`
+      chunk = `<a class="link" target="_blank" href="${encodeAttr(href)}">${encodeAttr(text)}</a>`
       context.at(-1)!.out += prev + chunk
 
       continue
@@ -187,7 +187,7 @@ export const parseMarkdown = (md: string): string => {
       whiteList: {
         p: ['class'],
         span: ['class'],
-        a: ['href', 'class'],
+        a: ['href', 'class', 'target'],
         br: [],
       },
     }

@@ -1,0 +1,45 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { MarkdownExample } from './examples/Markdown.tsx?example'
+import { SizeExample } from './examples/Size.tsx?example'
+import {
+  ReactPropsTable,
+  ElementPropertiesTable,
+  ElementAttributesTable,
+} from '@sinch-engage/nectary/rich-text/types.ts?api'
+
+# Rich Text
+
+`sinch-rich-text` component parses and renders markdown subset, passed to a `text` attribute.
+
+## Table of contents
+
+## Examples
+
+### Markdown
+
+<Example Component={MarkdownExample}/>
+
+### Size
+
+Rich Text can have different font sizes
+
+<Example Component={SizeExample}/>
+
+## API
+
+### React
+
+#### Props
+
+<ReactPropsTable/>
+
+### Element
+
+#### Properties
+
+<ElementPropertiesTable/>
+
+#### Attributes
+
+<ElementAttributesTable/>

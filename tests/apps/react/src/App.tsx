@@ -37,6 +37,7 @@ import { PhoneCodeSelect } from './components/PhoneCodeSelect'
 import { Popover } from './components/Popover'
 import { Progress } from './components/Progress'
 import { Radio } from './components/Radio'
+import { RichText } from './components/RichText'
 import { Search } from './components/Search'
 import { Segment } from './components/Segment'
 import { SegmentedControl } from './components/SegmentedControl'
@@ -291,6 +292,12 @@ const mapElement = (url: URL) => {
     case '/radio': {
       return (
         <Radio search={url.searchParams}/>
+      )
+    }
+
+    case '/rich-text': {
+      return (
+        <RichText search={url.searchParams}/>
       )
     }
 

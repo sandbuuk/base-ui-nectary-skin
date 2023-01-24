@@ -35,6 +35,7 @@
     <Popover v-if="url.pathname === '/popover'" :search="url.searchParams"/>
     <Progress v-if="url.pathname === '/progress'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
+    <RichText v-if="url.pathname === '/rich-text'" :search="url.searchParams"/>
     <Search v-if="url.pathname === '/search'" :search="url.searchParams"/>
     <Segment v-if="url.pathname === '/segment'" :search="url.searchParams"/>
     <SegmentedControl v-if="url.pathname === '/segmented-control'" :search="url.searchParams"/>
@@ -94,6 +95,7 @@ import PhoneCodeMenu from './components/PhoneCodeMenu.vue'
 import Popover from './components/Popover.vue'
 import Progress from './components/Progress.vue'
 import Radio from './components/Radio.vue'
+import RichText from './components/RichText.vue'
 import Search from './components/Search.vue'
 import Segment from './components/Segment.vue'
 import SegmentedControl from './components/SegmentedControl.vue'
@@ -178,6 +180,7 @@ export default {
     Popover,
     Progress,
     Radio,
+    RichText,
     Search,
     Segment,
     SegmentedControl,
