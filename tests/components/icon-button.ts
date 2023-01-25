@@ -149,7 +149,7 @@ test('icon-button events', runScreenshotTests('sinch-icon-button', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-icon-button-focus', 'sinch-icon-button-blur', 'sinch-icon-button-click')
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
+      await page.mouse.click(0, 0)
 
       const ct = await centerBB($)
 

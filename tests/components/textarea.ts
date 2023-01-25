@@ -110,7 +110,7 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-textarea-focus', 'sinch-textarea-blur', 'sinch-textarea-change')
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
+      await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)

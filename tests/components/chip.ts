@@ -109,7 +109,7 @@ test('chip events', runScreenshotTests('sinch-chip', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-chip-focus', 'sinch-chip-blur', 'sinch-chip-click')
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
+      await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)

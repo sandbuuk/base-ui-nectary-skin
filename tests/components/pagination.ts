@@ -138,7 +138,7 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
       await subscribeToEvents(page, 'sinch-pagination-focus', 'sinch-pagination-blur', 'sinch-pagination-change')
 
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Shift+Tab')
+      await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)

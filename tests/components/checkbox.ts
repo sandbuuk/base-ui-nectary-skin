@@ -182,7 +182,7 @@ test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
       const ct = await getBB($)
 
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
+      await page.mouse.click(0, 0)
       await page.mouse.click(ct.x + 5, ct.y + 5)
       await page.mouse.click(ct.x + 5, ct.y + 5)
 

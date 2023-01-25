@@ -175,7 +175,7 @@ test('select events', runScreenshotTests('sinch-popover', [
       await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
 
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Shift+Tab')
+      await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)
