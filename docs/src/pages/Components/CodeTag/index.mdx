@@ -1,0 +1,45 @@
+import { Code } from '~/components/Code'
+import { Example } from '~/components/Example'
+import { CodeExample } from './examples/Code.tsx?example'
+import { SizeExample } from './examples/Size.tsx?example'
+import {
+  ReactPropsTable,
+  ElementPropertiesTable,
+  ElementAttributesTable,
+} from '@sinch-engage/nectary/rich-text/types.ts?api'
+
+# Code Tag
+
+`sinch-code-tag` component renders value provided to `text` attribute with Mono font and background
+
+## Table of contents
+
+## Examples
+
+### Code
+
+<Example Component={CodeExample}/>
+
+### Size
+
+The size of the font is inherited from the parent `sinch-text` element
+
+<Example Component={SizeExample}/>
+
+## API
+
+### React
+
+#### Props
+
+<ReactPropsTable/>
+
+### Element
+
+#### Properties
+
+<ElementPropertiesTable/>
+
+#### Attributes
+
+<ElementAttributesTable/>

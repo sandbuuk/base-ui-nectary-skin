@@ -1,3 +1,12 @@
+## v0.49.0 (2023-01-25)
+
+* ➕ add `sinch-code-tag` component
+* ➕ add `sinch-rich-text` component
+* ➕ add markdown support to `sinch-alert`
+* ➕ add markdown support to `sinch-inline-alert`
+* ➕ add italic DM Sans fonts
+* ➕ add `autocomplete` attribute to `sinch-input`
+
 ## v0.48.2 (2023-01-19)
 
 🐞 fix text color in disabled `sinch-input` and `sinch-textarea` on WebKit
