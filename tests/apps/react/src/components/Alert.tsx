@@ -4,15 +4,27 @@ import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icons/close'
 
+const mdText = `
+To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
+
+If ___you___ have *any questions*, contact your ~~parents~~ account __manager__.
+
+Context *italic __bold__ italic* text
+Context **bold _italic_ bold** text.
+`
+
+const longText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.'
+const shortText = 'Lorem Ipsum is dummy text'
+
 type TAlert = {
   search: URLSearchParams,
 }
 
 export const Alert: FC<TAlert> = ({ search }) => {
   const type: any = search.get('type') ?? undefined
-  const text = search.get('text') ?? ''
   const hasAction = search.get('action') !== null
   const hasClose = search.get('close') !== null
+  const example = search.get('example')
 
   const onCloseFocus = () => {
     window.dispatchEvent(new CustomEvent('sinch-alert-close-focus'))
@@ -31,6 +43,14 @@ export const Alert: FC<TAlert> = ({ search }) => {
   }
   const onButtonClick = () => {
     window.dispatchEvent(new CustomEvent('sinch-alert-button-click'))
+  }
+
+  let text = shortText
+
+  if (example === 'md') {
+    text = mdText
+  } else if (example === 'long') {
+    text = longText
   }
 
   return (

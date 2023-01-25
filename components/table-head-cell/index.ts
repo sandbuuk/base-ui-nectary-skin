@@ -10,8 +10,8 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTableAlignType } from '../table-cell/types'
 import type { TSinchTableHeaderCellElement, TSinchTableHeaderCellReact } from './types'
+import type { TSinchTableAlignType } from '../table-cell/types'
 
 const template = document.createElement('template')
 

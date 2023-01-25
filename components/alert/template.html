@@ -15,6 +15,9 @@
 }
 
 #text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   color: var(--sinch-color-stormy-500);
   flex: 1;
   min-width: 0;
@@ -61,7 +64,7 @@
   <sinch-icon-info id="icon-info"></sinch-icon-info>
   <sinch-icon-report-problem id="icon-warn"></sinch-icon-report-problem>
   <sinch-icon-report id="icon-error"></sinch-icon-report>
-  <sinch-text id="text" type="m"></sinch-text>
+  <sinch-rich-text id="text"></sinch-rich-text>
   <slot name="action"></slot>
   <slot name="close"></slot>
 </div>

@@ -11,8 +11,8 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TRect } from '../types'
 import type { TSinchToastManagerElement, TSinchToastManagerReact } from './types'
+import type { TRect } from '../types'
 
 const DURATION_ADD = 250
 const DURATION_REMOVE = 250

@@ -149,7 +149,7 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
       await subscribeToEvents(page, 'sinch-toggle-change', 'sinch-toggle-focus', 'sinch-toggle-blur')
 
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
+      await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)

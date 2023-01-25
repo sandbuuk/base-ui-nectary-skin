@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/code-tag'
 
 type TText = {
   search: URLSearchParams,
@@ -24,6 +25,8 @@ export const Text: FC<TText> = ({ search }) => {
         {text}
         {' '}
         <sinch-link href="#" text="Link" aria-label="Link"/>
+        {' '}
+        <sinch-code-tag text="Code"/>
       </sinch-text>
       <span> postfix</span>
     </sinch-text>

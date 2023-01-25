@@ -1,5 +1,5 @@
-import type { TSinchPopOrientation } from '../pop/types'
 import type { TSinchTooltipOrientation } from './types'
+import type { TSinchPopOrientation } from '../pop/types'
 
 export const orientationValues: readonly TSinchTooltipOrientation[] = [
   'top',

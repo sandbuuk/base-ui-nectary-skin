@@ -12,6 +12,7 @@
     <Chat v-if="url.pathname === '/chat'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
     <Chip v-if="url.pathname === '/chip'" :search="url.searchParams"/>
+    <CodeTag v-if="url.pathname === '/code-tag'" :search="url.searchParams"/>
     <ColorMenu v-if="url.pathname === '/color-menu'" :search="url.searchParams"/>
     <ColorSelect v-if="url.pathname === '/color-select'" :search="url.searchParams"/>
     <ColorSwatch v-if="url.pathname === '/color-swatch'" :search="url.searchParams"/>
@@ -34,6 +35,7 @@
     <Popover v-if="url.pathname === '/popover'" :search="url.searchParams"/>
     <Progress v-if="url.pathname === '/progress'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
+    <RichText v-if="url.pathname === '/rich-text'" :search="url.searchParams"/>
     <Search v-if="url.pathname === '/search'" :search="url.searchParams"/>
     <Segment v-if="url.pathname === '/segment'" :search="url.searchParams"/>
     <SegmentedControl v-if="url.pathname === '/segmented-control'" :search="url.searchParams"/>
@@ -70,6 +72,7 @@ import CardContainer from './components/CardContainer.vue'
 import Chat from './components/Chat.vue'
 import Checkbox from './components/Checkbox.vue'
 import Chip from './components/Chip.vue'
+import CodeTag from './components/CodeTag.vue'
 import ColorMenu from './components/ColorMenu.vue'
 import ColorSelect from './components/ColorSelect.vue'
 import ColorSwatch from './components/ColorSwatch.vue'
@@ -92,6 +95,7 @@ import PhoneCodeMenu from './components/PhoneCodeMenu.vue'
 import Popover from './components/Popover.vue'
 import Progress from './components/Progress.vue'
 import Radio from './components/Radio.vue'
+import RichText from './components/RichText.vue'
 import Search from './components/Search.vue'
 import Segment from './components/Segment.vue'
 import SegmentedControl from './components/SegmentedControl.vue'
@@ -153,6 +157,7 @@ export default {
     Chat,
     Checkbox,
     Chip,
+    CodeTag,
     ColorMenu,
     ColorSelect,
     ColorSwatch,
@@ -175,6 +180,7 @@ export default {
     Popover,
     Progress,
     Radio,
+    RichText,
     Search,
     Segment,
     SegmentedControl,

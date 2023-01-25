@@ -1,9 +1,9 @@
 import { defineCustomElement, getLiteralAttribute, NectaryElement, subscribeContext, updateAttribute, updateLiteralAttribute } from '../utils'
 import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
+import type { TSinchSpinnerElement, TSinchSpinnerReact } from './types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
-import type { TSinchSpinnerElement, TSinchSpinnerReact } from './types'
 
 const template = document.createElement('template')
 

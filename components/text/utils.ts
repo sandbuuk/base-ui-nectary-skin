@@ -6,6 +6,6 @@ type TAssertType = (value: string | null) => asserts value is TSinchTextType
 
 export const assertType: TAssertType = (value) => {
   if (value === null || !typeValues.includes(value as any)) {
-    throw new Error(`sinch-title: invalid type attribute: ${value}`)
+    throw new Error(`sinch-text: invalid "type" attribute: "${value}"`)
   }
 }

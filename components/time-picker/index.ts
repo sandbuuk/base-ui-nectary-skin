@@ -16,9 +16,9 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { getNeedleRotationDeg, getShortestCssDeg, hourToIndex, parseTime, stringifyHour, stringifyHourFace, stringifyMinute, stringifyTime } from './utils'
+import type { TSinchTimePickerElement, TSinchTimePickerReact } from './types'
 import type { TSinchSegmentedControlElement } from '../segmented-control/types'
 import type { TRect } from '../types'
-import type { TSinchTimePickerElement, TSinchTimePickerReact } from './types'
 
 const template = document.createElement('template')
 

@@ -35,3 +35,21 @@ export const getTitleLevelFromType = (type: TSinchTitleType): TSinchTitleLevel =
       throw new Error(`sinch-title: invalid type value: ${type}`)
   }
 }
+
+export const getTitleTypeFromLevel = (level: TSinchTitleLevel): TSinchTitleType => {
+  switch (level) {
+    case '1':
+      return 'xl'
+    case '2':
+      return 'l'
+    case '3':
+      return 'm'
+    case '4':
+      return 's'
+    case '5':
+    case '6':
+      return 'xs'
+    default:
+      throw new Error(`sinch-title: invalid level value: ${level}`)
+  }
+}

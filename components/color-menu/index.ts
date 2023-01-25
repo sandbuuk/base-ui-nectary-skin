@@ -22,9 +22,9 @@ import {
 import optionTemplateHTML from './option-template.html'
 import templateHTML from './template.html'
 import { getParentOption } from './utils'
+import type { TSinchColorMenuElement, TSinchColorMenuReact } from './types'
 import type { TRect } from '../types'
 import type { TContextVisibility, TContextKeydown } from '../utils'
-import type { TSinchColorMenuElement, TSinchColorMenuReact } from './types'
 
 const NUM_COLS_DEFAULT = 5
 const ITEM_WIDTH = 44

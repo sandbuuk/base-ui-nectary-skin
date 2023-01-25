@@ -24,10 +24,10 @@ import {
   subscribeContext,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
 import type { TSinchInputElement } from '../input/types'
 import type { TSinchSelectMenuOptionElement } from '../select-menu-option/types'
 import type { TContextKeydown, TContextVisibility } from '../utils'
-import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
 
 type TSelectMenuOption = TSinchSelectMenuOptionElement
 

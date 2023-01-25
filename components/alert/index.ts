@@ -1,6 +1,7 @@
+import '../icons/info'
 import '../icons/report-problem'
 import '../icons/report'
-import '../icons/info'
+import '../rich-text'
 import '../text'
 import {
   defineCustomElement,
@@ -66,7 +67,7 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
       }
 
       case 'text': {
-        this.#$text.textContent = newVal
+        updateAttribute(this.#$text, 'text', newVal)
 
         break
       }

@@ -35,6 +35,13 @@
   pointer-events: none;
 }
 
+#button:disabled {
+  cursor: unset;
+  pointer-events: none;
+
+  --sinch-color-icon: var(--sinch-color-border-default);
+}
+
 :host([data-checked]) #button {
   --sinch-color-icon: var(--sinch-color-tropical-500);
 }
@@ -47,13 +54,6 @@
   bottom: -1px;
   pointer-events: none;
   border-top: 2px solid var(--sinch-color-tropical-500);
-}
-
-#button:disabled {
-  cursor: unset;
-  pointer-events: none;
-
-  --sinch-color-icon: var(--sinch-color-border-default);
 }
 
 ::slotted(*) {

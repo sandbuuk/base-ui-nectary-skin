@@ -8,7 +8,7 @@ import type { Configuration } from 'webpack'
 
 const PORT = 5000
 
-const BabelOptions: TBabelOptions = {
+const babelOptions: TBabelOptions = {
   babelrc: false,
   compact: false,
   presets: [
@@ -31,7 +31,7 @@ const BabelOptions: TBabelOptions = {
   plugins: [
     '@babel/plugin-transform-runtime',
     [
-      'babel-plugin-polyfill-es-shims',
+      'babel-plugin-polyfill-corejs3',
       { method: 'usage-global' },
     ],
   ],
@@ -50,7 +50,7 @@ const config: Configuration = {
     alias: {
       '~': path.resolve('./src/'),
       '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
-      'array-includes': path.resolve('./node_modules/array-includes/'),
+      'core-js': path.resolve('./node_modules/core-js/'),
     },
   },
   module: {
@@ -64,7 +64,7 @@ const config: Configuration = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: BabelOptions,
+        options: babelOptions,
       },
       {
         test: /\.tsx?$/,
@@ -84,7 +84,7 @@ const config: Configuration = {
         use: [
           {
             loader: 'babel-loader',
-            options: BabelOptions,
+            options: babelOptions,
           },
           {
             loader: '@mdx-js/loader',

@@ -10,6 +10,7 @@ import { CardContainer } from './components/CardContainer'
 import { Chat } from './components/Chat'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
+import { CodeTag } from './components/CodeTag'
 import { ColorMenu } from './components/ColorMenu'
 import { ColorSelect } from './components/ColorSelect'
 import { ColorSwatch } from './components/ColorSwatch'
@@ -36,6 +37,7 @@ import { PhoneCodeSelect } from './components/PhoneCodeSelect'
 import { Popover } from './components/Popover'
 import { Progress } from './components/Progress'
 import { Radio } from './components/Radio'
+import { RichText } from './components/RichText'
 import { Search } from './components/Search'
 import { Segment } from './components/Segment'
 import { SegmentedControl } from './components/SegmentedControl'
@@ -135,6 +137,12 @@ const mapElement = (url: URL) => {
     case '/chip': {
       return (
         <Chip search={url.searchParams}/>
+      )
+    }
+
+    case '/code-tag': {
+      return (
+        <CodeTag search={url.searchParams}/>
       )
     }
 
@@ -284,6 +292,12 @@ const mapElement = (url: URL) => {
     case '/radio': {
       return (
         <Radio search={url.searchParams}/>
+      )
+    }
+
+    case '/rich-text': {
+      return (
+        <RichText search={url.searchParams}/>
       )
     }
 

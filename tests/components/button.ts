@@ -162,7 +162,7 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-button-focus', 'sinch-button-blur', 'sinch-button-click')
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
+      await page.mouse.click(0, 0)
       await $.click()
       await $.click()
 

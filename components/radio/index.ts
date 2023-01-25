@@ -8,8 +8,8 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchRadioOptionElement } from '../radio-option/types'
 import type { TSinchRadioElement, TSinchRadioReact } from './types'
+import type { TSinchRadioOptionElement } from '../radio-option/types'
 
 const template = document.createElement('template')
 

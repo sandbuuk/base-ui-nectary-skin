@@ -9,8 +9,8 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TRect } from '../types'
 import type { TSinchTabsElement, TSinchTabsReact } from './types'
+import type { TRect } from '../types'
 
 const template = document.createElement('template')
 

@@ -9,8 +9,8 @@ import {
 import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import { assertAvatarColor, assertStatus, getAvatarColorBg, getAvatarColorFg, statusValues } from './utils'
-import type { TSinchSize } from '../utils/size'
 import type { TSinchAvatarElement, TSinchAvatarReact, TSinchAvatarStatus } from './types'
+import type { TSinchSize } from '../utils/size'
 
 const template = document.createElement('template')
 

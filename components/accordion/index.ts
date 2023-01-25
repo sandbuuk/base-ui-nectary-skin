@@ -11,8 +11,8 @@ import {
   updateCsv,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchAccordionItemElement } from '../accordion-item/types'
 import type { TSinchAccordionElement, TSinchAccordionReact } from './types'
+import type { TSinchAccordionItemElement } from '../accordion-item/types'
 
 const template = document.createElement('template')
 

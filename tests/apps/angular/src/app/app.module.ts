@@ -13,6 +13,7 @@ import { CardContainerComponent } from '../components/CardContainer/CardContaine
 import { ChatComponent } from '../components/Chat/Chat.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
 import { ChipComponent } from '../components/Chip/Chip.component'
+import { CodeTagComponent } from '../components/CodeTag/CodeTag.component'
 import { ColorMenuComponent } from '../components/ColorMenu/ColorMenu.component'
 import { ColorSelectComponent } from '../components/ColorSelect/ColorSelect.component'
 import { ColorSwatchComponent } from '../components/ColorSwatch/ColorSwatch.component'
@@ -35,6 +36,7 @@ import { PhoneCodeMenuComponent } from '../components/PhoneCodeMenu/PhoneCodeMen
 import { PopoverComponent } from '../components/Popover/Popover.component'
 import { ProgressComponent } from '../components/Progress/Progress.component'
 import { RadioComponent } from '../components/Radio/Radio.component'
+import { RichTextComponent } from '../components/RichText/RichText.component'
 import { SearchComponent } from '../components/Search/Search.component'
 import { SegmentComponent } from '../components/Segment/Segment.component'
 import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
@@ -71,6 +73,7 @@ import { AppComponent } from './app.component'
     ChatComponent,
     CheckboxComponent,
     ChipComponent,
+    CodeTagComponent,
     ColorMenuComponent,
     ColorSelectComponent,
     ColorSwatchComponent,
@@ -93,6 +96,7 @@ import { AppComponent } from './app.component'
     PopoverComponent,
     ProgressComponent,
     RadioComponent,
+    RichTextComponent,
     SearchComponent,
     SegmentComponent,
     SegmentedControlComponent,

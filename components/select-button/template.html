@@ -43,10 +43,6 @@
   --sinch-color-icon: var(--sinch-color-stormy-500);
 }
 
-:host([disabled]:not([disabled="false"])) #wrapper {
-  --sinch-color-icon: var(--sinch-color-text-disabled);
-}
-
 :host([data-size="l"]) #wrapper {
   padding: 0 12px;
 }
@@ -57,6 +53,10 @@
 
 :host([data-size="s"]) #wrapper {
   padding: 0 4px 0 12px;
+}
+
+:host([disabled]:not([disabled="false"])) #wrapper {
+  --sinch-color-icon: var(--sinch-color-text-disabled);
 }
 
 #button {

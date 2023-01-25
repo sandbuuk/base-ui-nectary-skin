@@ -19,9 +19,9 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { assertOrientation, disableScroll, enableScroll, orientationValues } from './utils'
+import type { TSinchPopElement, TSinchPopOrientation, TSinchPopReact } from './types'
 import type { TRect } from '../types'
 import type { TContextVisibility } from '../utils'
-import type { TSinchPopElement, TSinchPopOrientation, TSinchPopReact } from './types'
 
 const template = document.createElement('template')
 

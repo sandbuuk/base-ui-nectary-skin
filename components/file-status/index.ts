@@ -15,8 +15,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { assertType, typeValues } from './utils'
-import type { TSinchTextElement } from '../text/types'
 import type { TSinchFileStatusElement, TSinchFileStatusReact, TSinchFileStatusType } from './types'
+import type { TSinchTextElement } from '../text/types'
 
 const template = document.createElement('template')
 

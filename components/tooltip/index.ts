@@ -16,9 +16,9 @@ import {
 import templateHTML from './template.html'
 import { TooltipState } from './tooltip-state'
 import { assertOrientation, getPopOrientation, orientationValues } from './utils'
+import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact } from './types'
 import type { TSinchPopElement } from '../pop/types'
 import type { TRect } from '../types'
-import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact } from './types'
 
 const TIP_SIZE = 8
 const SHOW_DELAY = 1000
