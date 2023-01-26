@@ -1,5 +1,3 @@
-import '../icons/check'
-import '../icons/error-outline'
 import {
   clampNumber,
   defineCustomElement,

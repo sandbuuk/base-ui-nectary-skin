@@ -1,11 +1,12 @@
 import '../icon-button'
-import '../icons/done'
+import '../icon'
 import '../segmented-control'
 import '../segmented-control-option'
 import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getCssVar,
   getReactEventHandler,
   getRect,
   isAttrTrue,
@@ -47,6 +48,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   #$headerMinutesText: HTMLElement
   #$ampm: TSinchSegmentedControlElement
   #$submitButton: HTMLButtonElement
+  #$iconSubmit: HTMLElement
   #hour: number = 0
   #minute: number = 0
   #controller: AbortController | null = null
@@ -69,6 +71,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
     this.#$headerMinutesText = shadowRoot.querySelector('#header-minutes > span')!
     this.#$ampm = shadowRoot.querySelector('#ampm')!
     this.#$submitButton = shadowRoot.querySelector('#submit')!
+    this.#$iconSubmit = shadowRoot.querySelector('#icon-submit')!
 
     this.#$needleMinute.style.height = `${NEEDLE_MINUTE_LENGTH}px`
     this.#$needleHour.style.height = `${NEEDLE_HOUR_12_LENGTH}px`
@@ -147,6 +150,8 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
     this.#$needleHour.addEventListener('keydown', this.#onHoursKeydown, options)
     this.#$needleMinute.addEventListener('keydown', this.#onMinutesKeydown, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
+
+    updateAttribute(this.#$iconSubmit, 'name', getCssVar(this, '--sinch-time-picker-icon-submit'))
   }
 
   disconnectedCallback() {

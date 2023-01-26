@@ -1,5 +1,4 @@
-import '../icons/open-in-new'
-import '../icons/arrow-forward'
+import '../icon'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -9,6 +8,7 @@ import {
   NectaryElement,
   isAttrTrue,
   getReactEventHandler,
+  getCssVars,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchLinkElement, TSinchLinkReact } from './types'
@@ -20,6 +20,8 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-link', class extends NectaryElement {
   #$anchor: HTMLAnchorElement
   #$text: HTMLElement
+  #$iconStandalone: HTMLElement
+  #$iconExternal: HTMLElement
 
   constructor() {
     super()
@@ -30,6 +32,8 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
     this.#$anchor = shadowRoot.querySelector('a')!
     this.#$text = shadowRoot.querySelector('#content')!
+    this.#$iconExternal = shadowRoot.querySelector('#external-icon')!
+    this.#$iconStandalone = shadowRoot.querySelector('#standalone-icon')!
   }
 
   connectedCallback() {
@@ -40,6 +44,8 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     this.addEventListener('-click', this.#onClickReactHandler)
     this.addEventListener('-focus', this.#onFocusReactHandler)
     this.addEventListener('-blur', this.#onBlurReactHandler)
+
+    this.#updateIcons()
   }
 
   disconnectedCallback() {
@@ -139,6 +145,16 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
   blur() {
     this.#$anchor.blur()
+  }
+
+  #updateIcons() {
+    const [externalName, standaloneName] = getCssVars(this, [
+      '--sinch-link-icon-external',
+      '--sinch-link-icon-standalone',
+    ])
+
+    updateAttribute(this.#$iconExternal, 'name', externalName)
+    updateAttribute(this.#$iconStandalone, 'name', standaloneName)
   }
 
   #onAnchorClick = (e: Event) => {

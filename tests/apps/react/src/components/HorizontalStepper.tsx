@@ -6,9 +6,11 @@ type THorizontalStepper = {
   search: URLSearchParams,
 }
 
-export const HorizontalStepper: FC<THorizontalStepper> = () => {
+export const HorizontalStepper: FC<THorizontalStepper> = ({ search }) => {
+  const index = search.get('index') ?? '0'
+
   return (
-    <sinch-horizontal-stepper index="0" aria-label="Stepper">
+    <sinch-horizontal-stepper index={index} aria-label="Stepper">
       <sinch-horizontal-stepper-item label="Step 1" description="Step description"/>
       <sinch-horizontal-stepper-item label="Step 2" description="Step description" status="error"/>
       <sinch-horizontal-stepper-item label="Step label long long long long long" description="Step description long long long long long" status="skip"/>

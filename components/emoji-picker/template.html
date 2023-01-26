@@ -10,6 +10,8 @@
   flex-direction: column;
   gap: 8px;
   padding: 12px 0;
+
+  --sinch-icon-font-variation-settings: var(--sinch-emoji-picker-icon-font-variation-settings);
 }
 
 #toolbar {
@@ -58,7 +60,7 @@
 <div id="wrapper">
   <div id="toolbar">
     <sinch-input id="input" size="l" aria-label="Search emojis">
-      <sinch-icon-search slot="icon"></sinch-icon-search>
+      <sinch-icon id="icon-search" slot="icon"></sinch-icon>
     </sinch-input>
     <sinch-popover id="skin-popover" orientation="bottom-left" aria-label="Emoji skin tone select">
       <sinch-icon-button id="skin-button" slot="target" size="l" aria-label="Select emoji skin tones">

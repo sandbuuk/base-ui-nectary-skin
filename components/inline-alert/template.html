@@ -36,13 +36,6 @@
   align-self: stretch;
 }
 
-#icon-info,
-#icon-success,
-#icon-warn,
-#icon-error {
-  display: none;
-}
-
 :host([type="success"]) #wrapper {
   background-color: var(--sinch-color-feedback-success-bg);
 }
@@ -59,27 +52,19 @@
   background-color: var(--sinch-color-feedback-info-bg);
 }
 
-:host([type="success"]) #icon-success {
-  display: block;
-
+:host([type="success"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-success-icon);
 }
 
-:host([type="warn"]) #icon-warn {
-  display: block;
-
+:host([type="warn"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-warning-icon);
 }
 
-:host([type="error"]) #icon-error {
-  display: block;
-
+:host([type="error"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-invalid-icon);
 }
 
-:host([type="info"]) #icon-info {
-  display: block;
-
+:host([type="info"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-info-icon);
 }
 
@@ -103,10 +88,7 @@
 </style>
 
 <div id="wrapper">
-  <sinch-icon-info id="icon-info"></sinch-icon-info>
-  <sinch-icon-check-circle id="icon-success"></sinch-icon-check-circle>
-  <sinch-icon-report-problem id="icon-warn"></sinch-icon-report-problem>
-  <sinch-icon-report id="icon-error"></sinch-icon-report>
+  <sinch-icon id="icon"></sinch-icon>
   <div id="body-wrapper">
     <sinch-title id="caption" level="3" type="s" ellipsis></sinch-title>
     <sinch-rich-text id="text"></sinch-rich-text>

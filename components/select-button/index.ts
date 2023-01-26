@@ -1,5 +1,5 @@
 import '../text'
-import '../icons/keyboard-arrow-down'
+import '../icon'
 import {
   defineCustomElement,
   getAttribute,
@@ -15,6 +15,7 @@ import {
   updateExplicitBooleanAttribute,
   updateLiteralAttribute,
   Context,
+  getCssVar,
 } from '../utils'
 import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
@@ -30,6 +31,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-select-button', class extends NectaryElement {
   #$button: HTMLButtonElement
+  #$icon: HTMLElement
   #$text: HTMLElement
   #$leftSlot: HTMLSlotElement
   #$leftWrapper: HTMLElement
@@ -45,6 +47,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$button = shadowRoot.querySelector('#button')!
+    this.#$icon = shadowRoot.querySelector('#dropdown-icon')!
     this.#$text = shadowRoot.querySelector('#text')!
     this.#$leftSlot = shadowRoot.querySelector('slot[name="left"]')!
     this.#$leftWrapper = shadowRoot.querySelector('#left')!
@@ -67,6 +70,8 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
     this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
     this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
     this.#$leftSlot.addEventListener('slotchange', this.#onLeftSlotChange, { signal })
+
+    updateAttribute(this.#$icon, 'name', getCssVar(this, '--sinch-select-button-icon-dropdown'))
 
     this.#sizeContext.listen(this.#controller.signal)
     subscribeContext(this, 'size', this.#onContextSize, signal)

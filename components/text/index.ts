@@ -1,4 +1,3 @@
-import '../icons/cancel'
 import {
   defineCustomElement,
   getBooleanAttribute,

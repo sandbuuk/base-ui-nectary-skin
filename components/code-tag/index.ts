@@ -1,5 +1,3 @@
-import '../icons/open-in-new'
-import '../icons/arrow-forward'
 import {
   defineCustomElement,
   getAttribute,

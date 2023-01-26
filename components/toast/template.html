@@ -22,11 +22,7 @@
   min-width: 0;
 }
 
-#icon-info,
-#icon-success,
-#icon-warn,
-#icon-error {
-  display: none;
+#icon {
   align-self: flex-start;
   margin: 4px 0;
 }
@@ -47,36 +43,25 @@
   background-color: var(--sinch-color-feedback-info-bg);
 }
 
-:host([type="success"]) #icon-success {
-  display: block;
-
+:host([type="success"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-success-icon);
 }
 
-:host([type="warn"]) #icon-warn {
-  display: block;
-
+:host([type="warn"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-warning-icon);
 }
 
-:host([type="error"]) #icon-error {
-  display: block;
-
+:host([type="error"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-invalid-icon);
 }
 
-:host([type="info"]) #icon-info {
-  display: block;
-
+:host([type="info"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-info-icon);
 }
 </style>
 
 <div id="wrapper">
-  <sinch-icon-info id="icon-info"></sinch-icon-info>
-  <sinch-icon-check-circle id="icon-success"></sinch-icon-check-circle>
-  <sinch-icon-report-problem id="icon-warn"></sinch-icon-report-problem>
-  <sinch-icon-report id="icon-error"></sinch-icon-report>
+  <sinch-icon id="icon"></sinch-icon>
   <sinch-text id="text" type="m"></sinch-text>
   <slot name="action"></slot>
   <slot name="close"></slot>

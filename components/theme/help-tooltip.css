@@ -1,0 +1,5 @@
+:root,
+:host {
+  --sinch-help-tooltip-icon-font-variation-settings: "FILL" 0;
+  --sinch-help-tooltip-icon-help: help;
+}

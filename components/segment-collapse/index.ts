@@ -1,12 +1,13 @@
-import '../icons/expand-less'
-import '../icons/expand-more'
+import '../icon'
 import '../icon-button'
 import {
   defineCustomElement,
   getBooleanAttribute,
+  getCssVar,
   getReactEventHandler,
   isAttrTrue,
   NectaryElement,
+  updateAttribute,
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
 } from '../utils'
@@ -19,6 +20,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
   #$button: HTMLElement
+  #$iconDropdown: HTMLElement
 
   constructor() {
     super()
@@ -28,12 +30,15 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$button = shadowRoot.querySelector('#button')!
+    this.#$iconDropdown = shadowRoot.querySelector('#icon-dropdown')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'checkbox')
     this.#$button.addEventListener('click', this.#onClick)
     this.addEventListener('-change', this.#onChangeReactHandler)
+
+    updateAttribute(this.#$iconDropdown, 'name', getCssVar(this, '--sinch-segment-icon-dropdown'))
   }
 
   disconnectedCallback() {

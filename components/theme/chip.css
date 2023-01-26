@@ -58,4 +58,5 @@
   --sinch-chip-color-pumpkin-fg: var(--sinch-color-feedback-warning-contrast);
   --sinch-chip-color-jasper-bg: var(--sinch-color-feedback-invalid-bg);
   --sinch-chip-color-jasper-fg: var(--sinch-color-feedback-invalid-contrast);
+  --sinch-chip-icon-close: cancel;
 }

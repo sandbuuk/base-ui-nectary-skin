@@ -30,11 +30,8 @@
   color: var(--sinch-color-stormy-500);
 }
 
-#icon-pending,
-#icon-loading,
-#icon-progress,
-#icon-success,
-#icon-error {
+#icon,
+#icon-loading {
   display: none;
 
   --sinch-color-icon: var(--sinch-color-stormy-500);
@@ -48,29 +45,26 @@
   margin-bottom: -4px;
 }
 
-:host([type="pending"]) #icon-pending,
 :host([type="loading"]) #icon-loading,
-:host([type="progress"]) #icon-progress,
-:host([type="success"]) #icon-success,
-:host([type="error"]) #icon-error {
+:host([type="pending"]) #icon,
+:host([type="progress"]) #icon,
+:host([type="success"]) #icon,
+:host([type="error"]) #icon {
   display: block;
 }
 
-:host([type="success"]) #icon-success {
+:host([type="success"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-success-icon);
 }
 
-:host([type="error"]) #icon-error {
+:host([type="error"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-invalid-icon);
 }
 </style>
 
 <div id="wrapper">
   <sinch-spinner id="icon-loading" size="m"></sinch-spinner>
-  <sinch-icon-check-circle id="icon-success"></sinch-icon-check-circle>
-  <sinch-icon-report id="icon-error"></sinch-icon-report>
-  <sinch-icon-pending-actions id="icon-pending"></sinch-icon-pending-actions>
-  <sinch-icon-text-snippet id="icon-progress"></sinch-icon-text-snippet>
+  <sinch-icon id="icon"></sinch-icon>
   <div id="content-wrapper">
     <sinch-text id="filename" type="m" ellipsis></sinch-text>
     <slot name="content"></slot>

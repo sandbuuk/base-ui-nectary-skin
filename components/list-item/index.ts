@@ -1,4 +1,3 @@
-import '../icons/keyboard-arrow-down'
 import {
   defineCustomElement,
   NectaryElement,

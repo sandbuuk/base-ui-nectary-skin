@@ -1,0 +1,9 @@
+:root,
+:host {
+  --sinch-chat-icon-font-variation-settings: "FILL" 0;
+  --sinch-chat-icon-sending: query_builder;
+  --sinch-chat-icon-sent: check;
+  --sinch-chat-icon-received: done_all;
+  --sinch-chat-icon-seen: done_all;
+  --sinch-chat-icon-error: error_outline;
+}

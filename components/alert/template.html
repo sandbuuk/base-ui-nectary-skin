@@ -23,12 +23,6 @@
   min-width: 0;
 }
 
-#icon-info,
-#icon-warn,
-#icon-error {
-  display: none;
-}
-
 :host([type="warn"]) #wrapper {
   background-color: var(--sinch-color-feedback-warning-bg);
 }
@@ -41,29 +35,21 @@
   background-color: var(--sinch-color-feedback-info-bg);
 }
 
-:host([type="warn"]) #icon-warn {
-  display: block;
-
+:host([type="warn"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-warning-icon);
 }
 
-:host([type="error"]) #icon-error {
-  display: block;
-
+:host([type="error"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-invalid-icon);
 }
 
-:host([type="info"]) #icon-info {
-  display: block;
-
+:host([type="info"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-info-icon);
 }
 </style>
 
 <div id="wrapper">
-  <sinch-icon-info id="icon-info"></sinch-icon-info>
-  <sinch-icon-report-problem id="icon-warn"></sinch-icon-report-problem>
-  <sinch-icon-report id="icon-error"></sinch-icon-report>
+  <sinch-icon id="icon"></sinch-icon>
   <sinch-rich-text id="text"></sinch-rich-text>
   <slot name="action"></slot>
   <slot name="close"></slot>
