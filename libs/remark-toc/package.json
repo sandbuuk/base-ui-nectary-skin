@@ -4,6 +4,6 @@
   "main": "src/index.js",
   "type": "module",
   "dependencies": {
-    "mdast-util-toc": "^6.1.0"
+    "mdast-util-toc": "^6.1.1"
   }
 }
