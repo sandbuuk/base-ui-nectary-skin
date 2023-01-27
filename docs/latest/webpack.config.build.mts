@@ -38,7 +38,7 @@ const BabelOptions: TBabelOptions = {
   plugins: [
     '@babel/plugin-transform-runtime',
     [
-      'babel-plugin-polyfill-es-shims',
+      'babel-plugin-polyfill-corejs3',
       { method: 'usage-global' },
     ],
   ],
@@ -58,7 +58,7 @@ const config: TWebpackConfig = {
     alias: {
       '~': path.resolve('./src/'),
       '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
-      'array-includes': path.resolve('./node_modules/array-includes/'),
+      'core-js': path.resolve('./node_modules/core-js/'),
       react: path.resolve('./node_modules/react/'),
       'react-dom': path.resolve('./node_modules/react-dom'),
     },

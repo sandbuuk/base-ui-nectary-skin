@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/action-menu-option'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/icons/search'
+import '@sinch-engage/nectary-assets/icons/search'
 
 const inputWidth: CSSProperties = {
   width: 250,

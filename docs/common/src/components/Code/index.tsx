@@ -2,8 +2,8 @@ import { SyntaxHighlighter } from 'docs-shared'
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/content-copy'
-import '@sinch-engage/nectary/icons/keyboard-arrow-down'
+import '@sinch-engage/nectary-assets/icons/content-copy'
+import '@sinch-engage/nectary-assets/icons/keyboard-arrow-down'
 import './styles.css'
 
 export type TCode = {

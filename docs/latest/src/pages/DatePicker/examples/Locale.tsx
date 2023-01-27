@@ -4,7 +4,7 @@ import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/date-picker'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/calendar-today'
+import '@sinch-engage/nectary-assets/icons/calendar-today'
 
 export const LocaleExample: FC = () => {
   const [isOpen, setOpen] = useState(false)

@@ -1,5 +1,6 @@
 import pkg from '@sinch-engage/nectary/package.json'
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
 import { DocumentProvider } from 'docs-common'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -12,6 +13,7 @@ declare let STYLE_INJECT_KEY: string
 const registry = new CustomElementRegistry()
 
 setNectaryRegistry(registry)
+setAssetsRegistry(registry)
 
 export const bootstrap = (el: HTMLElement) => {
   console.log('bootstrap', pkg.version)

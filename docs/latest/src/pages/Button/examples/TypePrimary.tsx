@@ -1,6 +1,6 @@
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

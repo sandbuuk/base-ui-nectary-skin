@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/segmented-control'
 import '@sinch-engage/nectary/segmented-control-option'
-import '@sinch-engage/nectary/icons/help-outline'
+import '@sinch-engage/nectary-assets/icons/help-outline'
 
 export const DisabledExample: FC = () => {
   const [value, setValue] = useState('')

@@ -8,8 +8,8 @@ import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/apps'
-import '@sinch-engage/nectary/icons-branded/chatbot'
+import '@sinch-engage/nectary-assets/icons/apps'
+import '@sinch-engage/nectary-assets/icons-branded/chatbot'
 
 const previewStyle: CSSProperties = {
   display: 'flex',

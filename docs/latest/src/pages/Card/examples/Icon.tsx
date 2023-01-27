@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import '@sinch-engage/nectary/card'
-import '@sinch-engage/nectary/icons-branded/chatbot'
+import '@sinch-engage/nectary-assets/icons-branded/chatbot'
 
 export const IconExample: FC = () => (
   <sinch-card

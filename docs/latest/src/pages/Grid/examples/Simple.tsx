@@ -3,8 +3,8 @@ import '@sinch-engage/nectary/grid'
 import '@sinch-engage/nectary/grid-item'
 import '@sinch-engage/nectary/card'
 import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/illustrations/phone-and-cat'
-import '@sinch-engage/nectary/icons-branded/chatbot'
+import '@sinch-engage/nectary-assets/illustrations/phone-and-cat'
+import '@sinch-engage/nectary-assets/icons-branded/chatbot'
 
 export const SimpleExample: FC = () => {
   return (

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { FC, PropsWithChildren } from 'react'
 import './styles.css'
 import '@sinch-engage/nectary/title'
-import '@sinch-engage/nectary/icons/keyboard-arrow-down'
+import '@sinch-engage/nectary-assets/icons/keyboard-arrow-down'
 
 export type TNavigationGroup = PropsWithChildren & {
   text: string,

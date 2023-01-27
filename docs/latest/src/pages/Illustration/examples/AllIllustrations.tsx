@@ -8,7 +8,7 @@ import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/table-cell'
 import '@sinch-engage/nectary/text'
 
-const req = import.meta.webpackContext!('@sinch-engage/nectary/illustrations', {
+const req = import.meta.webpackContext!('@sinch-engage/nectary-assets/illustrations', {
   regExp: /^.*\/index.ts$/,
   recursive: true,
   mode: 'sync',

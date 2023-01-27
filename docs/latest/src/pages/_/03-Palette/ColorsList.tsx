@@ -1,4 +1,7 @@
 import colors from '@sinch-engage/nectary/colors.json'
+import '@sinch-engage/nectary/table'
+import '@sinch-engage/nectary/table-head'
+import '@sinch-engage/nectary/table-head-cell'
 import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-cell'

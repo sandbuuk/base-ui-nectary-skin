@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/accordion'
 import '@sinch-engage/nectary/accordion-item'
-import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
 
 export const ComplexExample: FC = () => {
   const [value, setValue] = useState('')

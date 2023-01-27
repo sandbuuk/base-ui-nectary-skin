@@ -1,7 +1,7 @@
 import React from 'react'
 import type { CSSProperties, FC } from 'react'
 
-const req = import.meta.webpackContext!('@sinch-engage/nectary/icons', {
+const req = import.meta.webpackContext!('@sinch-engage/nectary-assets/icons', {
   regExp: /^.*\/index.ts$/,
   recursive: true,
   mode: 'sync',

@@ -1,10 +1,10 @@
 import type { FC } from 'react'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/icons/laptop'
-import '@sinch-engage/nectary/icons/smartphone'
-import '@sinch-engage/nectary/icons/tablet'
-import '@sinch-engage/nectary/icons/watch'
+import '@sinch-engage/nectary-assets/icons/laptop'
+import '@sinch-engage/nectary-assets/icons/smartphone'
+import '@sinch-engage/nectary-assets/icons/tablet'
+import '@sinch-engage/nectary-assets/icons/watch'
 
 export const SimpleExample: FC = () => {
   const onClick = () => console.log('click')

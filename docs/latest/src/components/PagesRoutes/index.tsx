@@ -7,7 +7,6 @@ export const PagesRoutes = memo(() => {
   console.log('RENDER MEMO PAGES')
 
   return (
-
     <Routes>
       <Route path="/components/_" element={<SimpleLayout/>}>
         {getPagesRoutes().map(({ key, route }) => {

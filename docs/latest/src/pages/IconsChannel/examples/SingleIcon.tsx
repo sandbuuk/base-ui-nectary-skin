@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/icons-channel/notify'
+import '@sinch-engage/nectary-assets/icons-channel/notify'
 
 export const SingleIconExample: FC = () => {
   return (

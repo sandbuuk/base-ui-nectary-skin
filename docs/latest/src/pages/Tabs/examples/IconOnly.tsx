@@ -3,10 +3,10 @@ import type { FC, CSSProperties } from 'react'
 import '@sinch-engage/nectary/tabs'
 import '@sinch-engage/nectary/tabs-icon-option'
 import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/icons/sentiment-dissatisfied'
-import '@sinch-engage/nectary/icons/sports-handball'
-import '@sinch-engage/nectary/icons/reduce-capacity'
-import '@sinch-engage/nectary/icons/emoji-people'
+import '@sinch-engage/nectary-assets/icons/sentiment-dissatisfied'
+import '@sinch-engage/nectary-assets/icons/sports-handball'
+import '@sinch-engage/nectary-assets/icons/reduce-capacity'
+import '@sinch-engage/nectary-assets/icons/emoji-people'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

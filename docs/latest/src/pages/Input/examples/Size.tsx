@@ -2,8 +2,8 @@ import { useState } from 'react'
 import type { FC, CSSProperties } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/sentiment-satisfied'
-import '@sinch-engage/nectary/icons/search'
+import '@sinch-engage/nectary-assets/icons/sentiment-satisfied'
+import '@sinch-engage/nectary-assets/icons/search'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

@@ -11,7 +11,7 @@ export const componentReq = import.meta.webpackContext!('./pages/', {
 })
 
 export const pagesReq = import.meta.webpackContext!('./pages/_/', {
-  regExp: /^\.\/.*\/.*\.tsx?$/,
+  regExp: /^\.\/.*\/index.tsx?$/,
   recursive: true,
   mode: 'lazy',
   chunkName: REQ_CHUNK_NAME,

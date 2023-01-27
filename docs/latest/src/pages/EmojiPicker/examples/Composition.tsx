@@ -7,7 +7,7 @@ import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/emoji-picker'
-import '@sinch-engage/nectary/icons/sentiment-satisfied'
+import '@sinch-engage/nectary-assets/icons/sentiment-satisfied'
 
 export const CompositionExample: FC = () => {
   const [isOpen, setOpen] = useState(false)

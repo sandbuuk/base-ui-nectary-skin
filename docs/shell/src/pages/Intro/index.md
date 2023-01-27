@@ -19,9 +19,9 @@ Add the following line to `.npmrc` in the project root:
 Add the component library dependency to `package.json`:
 
 ```shell
-npm install @sinch-engage/nectary
+npm install @sinch-engage/nectary @sinch-engage/nectary-assets
 # or
-yarn add @sinch-engage/nectary
+yarn add @sinch-engage/nectary @sinch-engage/nectary-assets
 ```
 
 ## Usage
@@ -32,8 +32,10 @@ Nectary needs a custom elements registry to work with, even if it's a global def
 
 ```js
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
 
 setNectaryRegistry(window.customElements)
+setAssetsRegistry(window.customElements)
 
 // App
 ```
@@ -42,10 +44,12 @@ Or a custom one for the Shell/MFE use case, see [mfe-helper-react](https://gitla
 
 ```js
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
 
 const customRegistry = new CustomElementRegistry();
 
 setNectaryRegistry(customRegistry)
+setAssetsRegistry(customRegistry)
 
 // ShadowRoot wrapper
 ```

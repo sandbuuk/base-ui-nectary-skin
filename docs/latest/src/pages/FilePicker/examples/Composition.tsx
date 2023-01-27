@@ -6,7 +6,7 @@ import '@sinch-engage/nectary/file-picker'
 import '@sinch-engage/nectary/file-status'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary-assets/icons/close'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
