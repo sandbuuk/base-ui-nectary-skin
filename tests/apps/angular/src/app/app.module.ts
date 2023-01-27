@@ -60,11 +60,11 @@ import { AppComponent } from './app.component'
 
 @NgModule({
   declarations: [
+    AppComponent,
     AccordionComponent,
     ActionDropdownComponent,
     ActionMenuComponent,
     AlertComponent,
-    AppComponent,
     AvatarComponent,
     BadgeComponent,
     ButtonComponent,

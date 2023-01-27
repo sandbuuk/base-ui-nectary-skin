@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/file-picker'
 import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icons/upload'
+import '@sinch-engage/nectary-assets/icons/upload'
 
 @Component({
   selector: 'file-picker-component',

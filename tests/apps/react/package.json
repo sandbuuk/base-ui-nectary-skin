@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@sinch-engage/nectary-assets": "workspace:*",
     "@sinch-engage/nectary": "workspace:*",
     "@webcomponents/scoped-custom-element-registry": "^0.0.7",
     "axe-core": "^4.6.3",

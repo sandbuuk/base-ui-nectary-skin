@@ -6,6 +6,8 @@
     "types": ["node"],
     "paths": {
       "@sinch-engage/nectary/*": ["../../../components/*"],
+      "@sinch-engage/nectary-assets/*": ["../../../assets/*"],
+      "@sinch-engage/nectary-utils/*": ["../../../utils/*"],
       "tslib": ["node_modules/tslib"]
     }
   },

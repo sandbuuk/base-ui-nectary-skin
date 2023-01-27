@@ -16,7 +16,7 @@ import '@sinch-engage/nectary/file-status'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/progress'
-import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary-assets/icons/close'
 
 export default {
   methods: {

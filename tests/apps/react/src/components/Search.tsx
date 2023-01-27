@@ -6,8 +6,8 @@ import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/icons/search'
-import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary-assets/icons/search'
+import '@sinch-engage/nectary-assets/icons/close'
 
 type TSearch = {
   search: URLSearchParams,

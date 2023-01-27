@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icons/open-in-new'
-import '@sinch-engage/nectary/icons/expand-more'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@sinch-engage/nectary-assets/icons/expand-more'
 
 @Component({
   selector: 'button-component',

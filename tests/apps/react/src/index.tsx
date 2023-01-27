@@ -1,4 +1,5 @@
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
 import '@webcomponents/scoped-custom-element-registry'
 import '@sinch-engage/nectary/theme'
 import { render } from 'react-dom'
@@ -28,6 +29,7 @@ const registry = new CustomElementRegistry()
 const appElement = createShadowRoot(document.getElementById('app')!, registry)
 
 setNectaryRegistry(registry)
+setAssetsRegistry(registry)
 
 render(
   <App/>,

@@ -31,7 +31,7 @@ import '@sinch-engage/nectary/toast-manager'
 import '@sinch-engage/nectary/toast'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary-assets/icons/close'
 
 const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
 

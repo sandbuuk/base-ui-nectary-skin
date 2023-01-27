@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/select-menu'
 import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
 
 type TMenuValue = {
   text: string,

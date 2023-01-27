@@ -16,7 +16,7 @@
 <script>
 import '@sinch-engage/nectary/segmented-control'
 import '@sinch-engage/nectary/segmented-control-option'
-import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
 
 export default {
   props: {

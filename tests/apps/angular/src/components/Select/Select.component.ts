@@ -6,8 +6,8 @@ import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/select-menu'
 import '@sinch-engage/nectary/select-menu-option'
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/icons/open-in-new'
-import '@sinch-engage/nectary/icons/search'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@sinch-engage/nectary-assets/icons/search'
 
 type TMenuValue = {
   text: string,
