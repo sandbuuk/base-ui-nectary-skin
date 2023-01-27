@@ -1,10 +1,5 @@
 import type { TSinchElementReact } from '../types'
 
-export type TSinchIconElement = HTMLElement & {
-  size: number,
-  setAttribute(name: 'size', value: string): void,
-}
+export type TSinchIconElement = HTMLElement & {}
 
-export type TSinchIconReact = TSinchElementReact<TSinchIconElement> & {
-  size?: number,
-}
+export type TSinchIconReact = TSinchElementReact<TSinchIconElement> & {}

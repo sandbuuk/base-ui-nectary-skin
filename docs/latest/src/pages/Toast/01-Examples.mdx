@@ -1,0 +1,45 @@
+import { Example } from '~/components/Example'
+import { TypeExample } from './examples/Type.tsx?example'
+import { CloseExample } from './examples/Close.tsx?example'
+import { ActionExample } from './examples/Action.tsx?example'
+
+# Toast
+
+## Examples
+
+The Nectary toast component is a lightweight notification element that can appear temporarily, or not on the screen to alert the user of a specific action or event.
+
+Toasts can be used to confirm the successful completion of an action, such as submitting a form or making a purchase. They can also be used to provide additional information, error or warning messages.
+
+To use the toast component, developers needs to implement together with the toast manager.
+
+### Type
+
+There are four types of toasts in Nectary:
+
+* Informative: An informative toast is used to provide additional information to the user. It has a neutral color scheme and does not indicate the success or failure of an action.
+* Warning: A warning toast is used to alert the user of a potential issue or to provide cautionary advice. It has a yellow color scheme and includes a warning icon to indicate the need for caution.
+* Error: An error toast is used to inform the user of a failed action or an issue that needs to be addressed. It has a red color scheme and includes an error icon to indicate the negative outcome.
+* Success: A success toast is used to confirm the successful completion of an action. It has a green color scheme and includes a checkmark icon to indicate the positive outcome.
+
+Each of these types of toast components can be displayed with or without a close button and/or an action button, depending on the specific use case.
+
+<Example Component={TypeExample}/>
+
+### Close
+
+You can add an optional close button to the Nectary toast component by passing a boolean argument to the function that displays the toast. If the close button is enabled, a small "x" icon will appear in the top right corner of the toast.
+
+The user can then click on the close button to dismiss the toast manually, rather than waiting for it to disappear automatically. This can be useful if the user wants to dismiss the toast before the set amount of time has elapsed.
+
+Optional `close` slot. Make sure you handle state loop on the developer side.
+
+<Example Component={CloseExample}/>
+
+### Action
+
+The action button can be used to provide the user with a way to take a specific action in response to the toast message. For example, if the toast is used to confirm the successful submission of a form, the action button could be used to navigate the user to a different page or trigger some other related action.
+
+An action button can be added to the Nectary toast component by passing a string argument to the function that displays the toast. The action button will appear as a secondary button within the toast, next to the main message.
+
+<Example Component={ActionExample}/>

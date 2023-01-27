@@ -1,0 +1,59 @@
+import { Example } from 'docs-common'
+import { OnFocusExample } from './examples/OnFocus.tsx?example'
+import { OnFocusStopPropagationExample } from './examples/OnFocusStopPropagation.tsx?example'
+import { OnDashFocusExample } from './examples/OnDashFocus.tsx?example'
+import reactEventListenersImage from './images/react-event-listeners.png'
+import eventPropagationImage from './images/event-propagation.gif'
+
+# ❔ Frequently asked question
+
+## Table of contents
+
+## Why it's on-change instead of onChange handler in React?
+
+### Pre-reading
+
+[A complete guide on shadow DOM and event propagation](https://pm.dartus.fr/blog/a-complete-guide-on-shadow-dom-and-event-propagation/).
+
+### The problem
+
+React pre-subscribes to (almost) all the events on the application root element and then manages handlers based on event target, similar to the old `delegate()` functionality from jQuery:
+
+<img className="image" width="640" src={reactEventListenersImage} alt="React event listeners"/>
+
+Therefore all the events *must bubble* to the very top in order for React to catch and handle it.
+
+Now let's put a nested interactive component within an interactive component, and use `onFocus` on both:
+
+<Example Component={OnFocusExample}/>
+
+We see "INPUT FOCUS" log too many times because it also catches focus events from the nested Icon Button. Why?
+
+`onFocus` actually listens for `focusin` event which *bubbles* and therefore propagates through Input to the top element.
+
+The most obvious solution would be to use `e.stopPropagation()` in the Icon Button focus handler, but that would require *you* to put it *everywhere* on your end even if you don't need to use it. For example:
+
+<Example Component={OnFocusStopPropagationExample}/>
+
+At the same time we can't make the event from the slot to stop propagating automatically and hide this from you because otherwise React won't be able to catch it on the application root element.
+
+<img className="image" src={eventPropagationImage} alt="Event propagation"/>
+
+### The solution
+
+The solution is to use non-bubbling custom events and dispatch them explicitly according to the component API. Like if there is a need for `focus` event then we make it, and not otherwise and automagically.
+
+It's as simple as it sounds in Angular/Vue/Svelte but quite difficult when it comes to React. When we write `onFocus` in React it's not really the same as `addEventListener('focus', ...)` — unlike other frameworks every single event handler (and even mapping between specific node name and its events) is hardcoded in React DOM library. This is why React has such a low score on [Custom Elements Everywhere](https://custom-elements-everywhere.com/): the hardcoded synthetic events model knows nothing about custom elements and how to handle their events [react/issues/7901](https://github.com/facebook/react/issues/7901).
+
+Hovewer [it's getting better](https://custom-elements-everywhere.com/libraries/react-experimental/results/results.html) – very interesting [react/pull/22184](https://github.com/facebook/react/pull/22184) has been merged into the main branch while ago and is available with `react-dom@experimental`. When React sees a custom element with a property that starts with `on` it will try to subscribe to whatever event is specified, like `onclick` would become `addEventListener('click')`, `onmy-event` – `addEventListener('my-event')` and so on.
+
+What if event name starts with dash symbol, like `-change`? The handler would be `on-change` which looks very neat and *feels native*.
+
+We have kinda polyfilled it on our end and from now on recommend to use `on-` event handlers in React:
+
+<Example Component={OnDashFocusExample}/>
+
+The old way still works but consider it to be unpredictable. At some point after that `react-dom@experimental` became stable we'll stop manually hacking React to invoke handlers.
+
+The corresponding code looks like `(-focus)="onFocus()"` in Angular and `@--focus="onFocus"` in Vue (due to the weird event name processing in Vue, but that's another story).
+

@@ -1,0 +1,32 @@
+import { Example } from '~/components/Example'
+import { CompositionExample } from './examples/Composition.tsx?example'
+import { AMPMExample } from './examples/AMPM.tsx?example'
+
+# Time Picker
+
+## Examples
+
+Time Picker communicates using an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) (e.g. `hh:mm:ss`) time format. Working with timezones is not a part of the component functionality and all internal time manipulations go through consumer's local timezone reported by browser.
+
+### Composition
+
+The component does *not* provide an input field and does *not* do any input masking. It's a modular *picker* and requires you to compose an input + popover + picker on your own, maintaining all the states and masking/formatting the displayed value.
+
+We'll implement a generic masking functionality for the input field  (like `pattern` attribute) later and then maybe wrap it all into `TimeInput` complete molecule.
+
+<Example Component={CompositionExample}/>
+
+### AM/PM
+
+We follow the "U.S. Government Publishing Office" way:
+
+* 12 p.m. is noon
+* 12 a.m. is midnight
+
+> The style manual of the United States Government Printing Office used 12 a.m. for noon and 12 p.m. for midnight until its 2008 edition, when it reversed these designations and then retained that change in its 2016 revision.
+
+See [12-hour clock](https://en.wikipedia.org/wiki/12-hour_clock) for more details.
+
+The input/output values are in ISO 8601 `hh:mm:ss` time format regardless of the AM/PM option.
+
+<Example Component={AMPMExample}/>

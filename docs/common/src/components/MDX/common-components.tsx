@@ -1,0 +1,111 @@
+import '@sinch-engage/nectary/text'
+import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/table'
+import '@sinch-engage/nectary/table-head'
+import '@sinch-engage/nectary/table-head-cell'
+import '@sinch-engage/nectary/table-body'
+import '@sinch-engage/nectary/table-row'
+import '@sinch-engage/nectary/table-cell'
+import { SyntaxHighlighter } from 'docs-shared'
+import { Children } from 'react'
+import './styles.css'
+import type { MDXComponents } from 'mdx/types'
+
+export const commonComponents: MDXComponents = {
+  p: ({ children }) => (
+    <sinch-text class="paragraph" type="m">
+      {Children.map(children, (child) => (
+        typeof child === 'string'
+          ? <sinch-text inline type="m">{child}</sinch-text>
+          : child
+      ))}
+    </sinch-text>
+  ),
+  a: ({ href = '#', children }) => {
+    const isExternal = href.startsWith('http')
+
+    return (
+      <sinch-link
+        href={href}
+        text={children as string}
+        aria-label={children as string}
+        external={isExternal}
+      />
+    )
+  },
+  ul: ({ children }) => {
+    return (
+      <ul className="list">
+        {children}
+      </ul>
+    )
+  },
+  ol: ({ children }) => {
+    return (
+      <ol className="list">
+        {children}
+      </ol>
+    )
+  },
+  li: ({ children }) => {
+    return (
+      <li className="list-item">
+        {children}
+      </li>
+    )
+  },
+  code: ({ className, children }) => {
+    if (className == null) {
+      return (
+        <code className="code-inline">{children}</code>
+      )
+    }
+
+    const language = className.replace('language-', '')
+
+    return (
+      <SyntaxHighlighter language={language} src={children as string}/>
+    )
+  },
+  table: ({ children }) => {
+    return (
+      <sinch-table class="table">{children}</sinch-table>
+    )
+  },
+  thead: ({ children }) => {
+    return (
+      <sinch-table-head>{children}</sinch-table-head>
+    )
+  },
+  tbody: ({ children }) => {
+    return (
+      <sinch-table-body>{children}</sinch-table-body>
+    )
+  },
+  tr: ({ children }) => {
+    return (
+      <sinch-table-row>{children}</sinch-table-row>
+    )
+  },
+  th: ({ children, align }) => {
+    return (
+      <sinch-table-head-cell fit={align === 'center'} text={children as string}/>
+    )
+  },
+  td: ({ children }) => {
+    return (
+      <sinch-table-cell>
+        <div>
+          {children}
+        </div>
+      </sinch-table-cell>
+    )
+  },
+  blockquote: ({ children }) => {
+    return (
+      <blockquote className="blockquote">
+        {children}
+      </blockquote>
+    )
+  },
+}

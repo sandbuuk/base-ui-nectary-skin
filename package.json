@@ -1,11 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "start": "cd docs; npm start",
-    "docs:build": "cd docs; npm run build",
-    "storybook": "start-storybook --port 4000",
-    "storybook:build": "build-storybook --output-dir public/storybook --quiet",
-    "lint": "eslint . '*/**/*.{js,ts,tsx,mts}' && tsc --noEmit -p components/ && tsc --noEmit -p tests/ && tsc --noEmit -p docs/ && tsc --noEmit -p stories/ && stylelint 'components/**/*.html' 'components/**/*.css' 'docs/**/*.css'",
+    "start": "concurrently --raw npm:docs:shell npm:docs:components",
+    "docs:components": "cd docs/latest; npm run start",
+    "docs:shell": "cd docs/shell; npm run start",
+    "docs:build:shell": "cd docs/shell; npm run build",
+    "docs:build:components": "cd docs/latest; npm run build",
+    "lint": "eslint . '*/**/*.{js,ts,tsx,mts}' && tsc --noEmit -p components/ && tsc --noEmit -p tests/ && tsc --noEmit -p docs/common && tsc --noEmit -p docs/shared && tsc --noEmit -p docs/latest && tsc --noEmit -p docs/shell && tsc --noEmit -p stories/ && stylelint 'components/**/*.html' 'components/**/*.css' 'docs/**/*.css'",
     "test": "yarn --cwd=tests test"
   },
   "devDependencies": {
@@ -32,9 +33,6 @@
     "eslint-plugin-react": "^7.32.1",
     "html-webpack-plugin": "^5.5.0",
     "postcss-html": "^1.5.0",
-    "raw-loader": "^4.0.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "slackify-markdown": "^4.3.1",
     "style-loader": "^3.3.1",
     "stylelint": "^14.16.1",

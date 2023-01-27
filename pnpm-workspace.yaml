@@ -4,4 +4,4 @@ packages:
   - 'libs/*'
   - 'tests/'
   - 'tests/apps/*'
-  - 'docs/'
+  - 'docs/*'

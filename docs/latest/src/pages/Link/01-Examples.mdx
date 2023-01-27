@@ -1,0 +1,46 @@
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import { ExternalExample } from './examples/External.tsx?example'
+import { ClickExample } from './examples/Click.tsx?example'
+import { StandaloneExample } from './examples/Standalone.tsx?example'
+import { StandaloneExternalExample } from './examples/StandaloneExternal.tsx?example'
+
+# Link
+
+## Examples
+
+The link component is a navigational element. They allow users to navigate in apps, pages or articles. They can be used on their own or inside paragraphs.
+
+This component is a wrapper around HTML anchor `<a>` element.
+
+### Simple
+
+This is a simple link being used embbeded in a text.
+
+<Example Component={SimpleExample}/>
+
+### External
+
+An external link is a user interface element that allows users to navigate to a different webpage by clicking on it. It is used to link to external websites, rather than to pages within the same website. When a user clicks on the external link, the destination webpage is opened in a new tab or window. It is usually represented as a hyperlink and it is visually distinct from other content on the page.
+
+<Example Component={ExternalExample}/>
+
+### Clicks
+
+Custom `on-click` handler + preventing default behaviour.
+
+<Example Component={ClickExample}/>
+
+### Standalone
+
+A standalone link is a type of user interface element that allows users to navigate to a different location within the same webpage or application. A standalone link should never be used embbeded in a text. It is similar to an external link component, which allows users to navigate to a different webpage, but a standalone link component only navigates within the current application or website.
+
+Standalone link has `display: block` and special arrow icon on the right side.
+
+<Example Component={StandaloneExample}/>
+
+### Standalone external
+
+A standalone link is a type of user interface element that allows users to a different webpage by clicking on it.  A standalone link should never be used embbeded in a text.
+
+<Example Component={StandaloneExternalExample}/>

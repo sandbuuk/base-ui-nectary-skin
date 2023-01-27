@@ -1,0 +1,46 @@
+.navigation-group {
+  display: block;
+}
+
+.navigation-group-head {
+  all: initial;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  width: 100%;
+  color: var(--sinch-color-stormy-500);
+  line-height: 32px;
+  text-decoration: none;
+  padding: 0 16px;
+  user-select: none;
+  border-radius: var(--sinch-shape-radius-l);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.navigation-group-head:hover {
+  background-color: var(--sinch-color-bg-hover);
+}
+
+.navigation-group-head:active {
+  background-color: var(--sinch-color-bg-active);
+}
+
+.navigation-group-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.navigation-group-dropdown-icon {
+  transform: rotate(0);
+  will-change: transform;
+  transition: transform 0.2s ease-in-out;
+}
+
+.navigation-group-head.open .navigation-group-dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.navigation-group > .hidden {
+  display: none;
+}

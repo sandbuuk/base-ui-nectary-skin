@@ -138,14 +138,15 @@ pages:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --reporter silent
+    - pnpm install --frozen-lockfile
     - rm -rf .git/hooks/
   script:
-    - pnpm storybook:build
-    - pnpm docs:build
-    - mv docs/build public/docs
     - git config --global user.email ci@sinch.com
     - git config --global user.name Bot
+    - git fetch origin storybook
+    - git branch storybook FETCH_HEAD
+    - git checkout storybook -- public
+    - ./scripts/generate-docs.sh
     - git branch -D storybook || true
     - git checkout --orphan storybook
     - git reset
