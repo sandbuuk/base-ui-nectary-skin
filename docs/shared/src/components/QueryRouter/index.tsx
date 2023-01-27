@@ -49,18 +49,23 @@ export const QueryRouter: FC<TQueryRouter> = ({ basename, children, window, onCh
   useLayoutEffect(() => {
     return history.listen((update) => {
       const { path, search } = getPathFromSearch(update.location)
-      const location: Location = {
-        pathname: basename + path,
+
+      onChange?.({
+        pathname: path,
         search,
         hash: update.location.hash,
         key: '',
         state: null,
-      }
-
-      onChange?.(location)
+      })
       setState({
         action: update.action,
-        location,
+        location: {
+          pathname: basename + path,
+          search,
+          hash: update.location.hash,
+          key: '',
+          state: null,
+        },
       })
     })
   }, [history])

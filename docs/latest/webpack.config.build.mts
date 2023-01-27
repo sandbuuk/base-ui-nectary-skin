@@ -3,7 +3,6 @@ import pkg from '@sinch-engage/nectary/package.json' assert { type: 'json' }
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import remarkGfm from 'remark-gfm'
-import remarkToc from 'remark-toc'
 import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
@@ -100,7 +99,7 @@ const config: TWebpackConfig = {
             loader: '@mdx-js/loader',
             options: {
               providerImportSource: '@mdx-js/react',
-              remarkPlugins: [remarkGfm, remarkToc],
+              remarkPlugins: [remarkGfm],
             },
           },
         ],
