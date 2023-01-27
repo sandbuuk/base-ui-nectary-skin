@@ -2,9 +2,28 @@ const fs = require('fs')
 const https = require('https')
 const slackifyMarkdown = require('slackify-markdown')
 
+const [packagePath] = process.argv.slice(2)
+let packageTitle = ''
+
+switch (packagePath) {
+  case 'assets': {
+    packageTitle = 'Assets'
+
+    break
+  }
+  case 'components': {
+    packageTitle = 'Components'
+
+    break
+  }
+  default: {
+    throw new Error(`Cannot determine title for the package path: ${packagePath}`)
+  }
+}
+
 // eslint-disable-next-line node/no-sync
-const changelogMd = fs.readFileSync('components/changelog.md', 'utf-8')
-const md = slackifyMarkdown(changelogMd.split('\n\n##')[0].replace(/## (v.+?) \(.+?\)/, '## Components $1'))
+const changelogMd = fs.readFileSync(`${packagePath}/changelog.md`, 'utf-8')
+const md = slackifyMarkdown(changelogMd.split('\n\n##')[0].replace(/## (v.+?) \(.+?\)/, `## ${packageTitle} $1`))
 
 const dataString = encodeURI(
   `payload=${JSON.stringify({
