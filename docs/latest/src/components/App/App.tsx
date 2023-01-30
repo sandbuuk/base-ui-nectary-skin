@@ -1,4 +1,4 @@
-import { QueryRouter } from 'docs-shared'
+import { QueryRouter } from 'docs-common'
 import { ComponentsRoutes } from '../ComponentsRoutes'
 import { PagesRoutes } from '../PagesRoutes'
 import type { FC } from 'react'

@@ -167,10 +167,6 @@ const config: Configuration = {
           requiredVersion: '*',
           singleton: true,
         },
-        'docs-shared': {
-          requiredVersion: '*',
-          singleton: true,
-        },
       },
     }),
     new webpack.DefinePlugin({

@@ -208,10 +208,6 @@ const config: TWebpackConfig = {
           requiredVersion: '*',
           singleton: true,
         },
-        'docs-shared': {
-          requiredVersion: '*',
-          singleton: true,
-        },
       },
     }),
     new ExternalTemplateRemotesPlugin(),

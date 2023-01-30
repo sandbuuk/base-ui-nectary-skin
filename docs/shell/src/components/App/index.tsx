@@ -1,5 +1,4 @@
-import { Loading } from 'docs-common'
-import { QueryRouter } from 'docs-shared'
+import { Loading, QueryRouter } from 'docs-common'
 import { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ComponentsList } from '../ComponentsList'

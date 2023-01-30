@@ -6,9 +6,9 @@ import '@sinch-engage/nectary/table-head-cell'
 import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/table-cell'
-import { SyntaxHighlighter } from 'docs-shared'
 import { Children } from 'react'
 import './styles.css'
+import { SyntaxHighlighter } from '../SyntaxHighlighter'
 import type { MDXComponents } from 'mdx/types'
 
 export const commonComponents: MDXComponents = {

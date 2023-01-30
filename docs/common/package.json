@@ -6,7 +6,6 @@
   "dependencies": {
     "@sinch-engage/nectary": "workspace:*",
     "@sinch-engage/nectary-assets": "workspace:*",
-    "docs-shared": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "url-slug": "^3.0.4"

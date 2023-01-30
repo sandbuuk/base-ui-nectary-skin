@@ -1,5 +1,5 @@
-import { SyntaxHighlighter } from 'docs-shared'
 import { useState } from 'react'
+import { SyntaxHighlighter } from '../SyntaxHighlighter'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary-assets/icons/content-copy'
