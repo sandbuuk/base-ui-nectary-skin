@@ -18,14 +18,14 @@ export const useNavigateVersion = (): TNavigateVersionResult => {
   locationRef.current = location
 
   const setVersionValue = useCallback((version: string) => {
-    const { search, pathname, hash } = locationRef.current
+    const { search, hash } = locationRef.current
     const params = new URLSearchParams(search)
 
     params.set(VERSION_KEY, version)
 
     navigate({
       pathname: '/',
-      search: composeSearchString(params, pathname),
+      search: composeSearchString(params, '/'),
       hash,
     })
   }, NO_DEPS)

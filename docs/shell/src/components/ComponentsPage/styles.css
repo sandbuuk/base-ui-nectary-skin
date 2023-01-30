@@ -1,3 +1,7 @@
 #app-components {
   height: 100%;
 }
+
+#app-components > .loading {
+  height: 100%;
+}

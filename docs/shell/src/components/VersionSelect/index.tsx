@@ -42,6 +42,10 @@ export const VersionSelect: FC<TVersionSelect> = () => {
           setOpen(false)
           setVersionValue(e.detail)
         }}
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+        }}
       >
         {versionKeys.map((version) => (
           <sinch-select-menu-option

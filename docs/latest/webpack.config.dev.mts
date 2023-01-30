@@ -143,7 +143,6 @@ const config: Configuration = {
       name: 'components',
       filename: 'remoteEntry.js',
       exposes: {
-        './entries': path.resolve('./src/entries.ts'),
         './bootstrap': path.resolve('./src/bootstrap.tsx'),
       },
       shared: {

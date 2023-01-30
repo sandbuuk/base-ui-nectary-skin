@@ -1,14 +1,14 @@
-import { useEffect, useRef } from 'react'
+import { Loading } from 'docs-common'
+import { useEffect, useRef, useState } from 'react'
 import { versions } from '../../utils'
 import type { FC } from 'react'
 import './styles.css'
 import { useNavigateVersion } from '~/hooks'
 
-type TComponentsPage = {}
-
-export const ComponentsPage: FC<TComponentsPage> = () => {
+export const ComponentsPage: FC = () => {
   const { versionValue } = useNavigateVersion()
   const ref = useRef<HTMLDivElement | null>(null)
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     if (versionValue.length === 0) {
@@ -24,9 +24,11 @@ export const ComponentsPage: FC<TComponentsPage> = () => {
 
         if (mounted) {
           unmount = bootstrap(ref.current!)
+          setLoading(false)
         }
       } catch (e) {
         console.error(e)
+        setLoading(false)
       }
     })()
 
@@ -37,6 +39,8 @@ export const ComponentsPage: FC<TComponentsPage> = () => {
   }, [versionValue])
 
   return (
-    <div id="app-components" ref={ref}/>
+    <div id="app-components" key={versionValue} ref={ref}>
+      {isLoading && <Loading/>}
+    </div>
   )
 }

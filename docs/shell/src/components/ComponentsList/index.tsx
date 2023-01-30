@@ -1,5 +1,5 @@
 import { createResource, Loading } from 'docs-common'
-import { Suspense, useMemo } from 'react'
+import { Suspense, useRef } from 'react'
 import { versions } from '../../utils'
 import { NavigationItem } from '../NavigationItem'
 import { NavigationList } from '../NavigationList'
@@ -43,22 +43,29 @@ const NavigationItems: FC<TNaigationItems> = ({ resource }) => {
 
 export const ComponentsList: FC = () => {
   const { versionValue } = useNavigateVersion()
-  const [componentsRes, pagesRes] = useMemo(() => {
-    console.log('ComponentsList', versionValue)
+  const versionValueRef = useRef('')
+  const componentsRef = useRef<TResource<TSidebarItem[]>>()
+  const pagesRef = useRef<TResource<TSidebarItem[]>>()
 
-    const promise = Reflect.get(versions, versionValue).entries()
+  if (versionValueRef.current !== versionValue) {
+    console.log('--- ComponentsList', versionValue)
+
+    const promise = Reflect.get(versions, versionValue).bootstrap()
     const components: Promise<TSidebarItem[]> = promise.then(({ getComponentsRoutes }: any) => getComponentsRoutes())
     const pages: Promise<TSidebarItem[]> = promise.then(({ getPagesRoutes }: any) => getPagesRoutes())
 
-    return [createResource(components), createResource(pages)]
-  }, [versionValue])
+    componentsRef.current = createResource(components)
+    pagesRef.current = createResource(pages)
+  }
+
+  versionValueRef.current = versionValue
 
   return (
     <Suspense fallback={<Loading/>}>
       <NavigationList>
-        <NavigationItems resource={pagesRes}/>
+        <NavigationItems resource={pagesRef.current!}/>
         <div className="divider"/>
-        <NavigationItems resource={componentsRes}/>
+        <NavigationItems resource={componentsRef.current!}/>
       </NavigationList>
     </Suspense>
   )

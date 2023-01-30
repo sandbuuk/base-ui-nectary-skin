@@ -170,10 +170,6 @@ const config: TWebpackConfig = {
       name: `components${key}`,
       filename: 'remoteEntry.js',
       exposes: {
-        './entries': {
-          import: path.resolve('./src/entries.ts'),
-          name: `components${key}-entries`,
-        },
         './bootstrap': {
           import: path.resolve('./src/bootstrap.tsx'),
           name: `components${key}-bootstrap`,

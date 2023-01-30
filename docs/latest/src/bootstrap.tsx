@@ -8,6 +8,8 @@ import { App } from './components/App/App'
 import { createShadowRoot } from './utils'
 import '@sinch-engage/nectary/theme'
 
+export * from './entries'
+
 declare let STYLE_INJECT_KEY: string
 
 const registry = new CustomElementRegistry()

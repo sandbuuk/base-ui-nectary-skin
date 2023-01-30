@@ -5,7 +5,7 @@ fs.readdir('./public/temp/versions/')
     const versionsImports = versions.map((ver) => {
       const key = ver.replaceAll('.', '')
 
-      return `'${ver}': { entries: () => import('components${key}/entries'), bootstrap: () => import('components${key}/bootstrap')}`
+      return `'${ver}': { bootstrap: () => import('components${key}/bootstrap')}`
     })
 
     return `export const versions = {${versionsImports.join(',\n')}}`
