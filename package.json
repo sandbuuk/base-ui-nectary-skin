@@ -6,7 +6,7 @@
     "docs:shell": "cd docs/shell; npm run start",
     "docs:build:shell": "cd docs/shell; npm run build",
     "docs:build:components": "cd docs/latest; npm run build",
-    "lint": "eslint . '*/**/*.{js,ts,tsx,mts}' && tsc --noEmit -p components/ && tsc --noEmit -p tests/ && tsc --noEmit -p docs/common && tsc --noEmit -p docs/shared && tsc --noEmit -p docs/latest && tsc --noEmit -p docs/shell && tsc --noEmit -p stories/ && stylelint 'components/**/*.html' 'components/**/*.css' 'docs/**/*.css'",
+    "lint": "eslint . '*/**/*.{js,ts,tsx,mts}' && tsc --noEmit -p components/ && tsc --noEmit -p tests/ && tsc --noEmit -p docs/common && tsc --noEmit -p docs/latest && tsc --noEmit -p docs/shell && stylelint 'components/**/*.html' 'components/**/*.css' 'docs/**/*.css'",
     "test": "yarn --cwd=tests test"
   },
   "devDependencies": {
