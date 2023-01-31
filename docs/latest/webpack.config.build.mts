@@ -149,14 +149,14 @@ const config: TWebpackConfig = {
       cacheGroups: {
         default: false,
         common: {
-          name: 'common',
+          name: `common${key}`,
           test: COMPONENTS_REGEXP,
           chunks: 'async',
           minChunks: 10,
           minSize: 0,
         },
         vendor: {
-          name: 'vendor',
+          name: `vendor${key}`,
           test: NODE_MODULES_REGEXP,
           chunks: 'all',
           priority: 10,
