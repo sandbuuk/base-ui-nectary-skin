@@ -143,9 +143,8 @@ pages:
   script:
     - git config --global user.email ci@sinch.com
     - git config --global user.name Bot
-    - git fetch origin storybook
-    - git branch storybook FETCH_HEAD
-    - git checkout storybook -- public
+    - git fetch origin refs/heads/storybook
+    - git checkout origin/storybook -- public
     - ./scripts/generate-docs.sh
     - git branch -D storybook || true
     - git checkout --orphan storybook
