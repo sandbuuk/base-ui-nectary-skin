@@ -1,16 +1,11 @@
 .sidebar-title {
-}
-
-.sidebar-title-link {
-  all: initial;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
   padding-top: 26px;
   box-sizing: border-box;
-  cursor: pointer;
-  text-decoration: none;
+  user-select: none;
 }
 
 .sidebar-title-version {
@@ -21,22 +16,6 @@
   padding: 0 8px 0 16px;
   color: var(--sinch-color-stormy-500);
   border-radius: var(--sinch-shape-radius-m);
-}
-
-.sidebar-title-version:hover {
-  background-color: var(--sinch-color-bg-hover);
-}
-
-.sidebar-title-version:active {
-  background-color: var(--sinch-color-bg-active);
-}
-
-.sidebar-title-version.selected {
-  background-color: var(--sinch-color-honey-200);
-}
-
-.sidebar-title-version.selected:hover {
-  background-color: var(--sinch-color-honey-300);
 }
 
 .sidebar-title-version-text {
