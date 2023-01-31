@@ -4,8 +4,6 @@ import { Route, Routes } from 'react-router-dom'
 import { componentReq, getComponentsRoutes, getRouteTabs } from '~/entries'
 
 export const ComponentsRoutes = memo(() => {
-  console.log('RENDER MEMO PAGES')
-
   return (
     <Routes>
       <Route path="/components" element={<TabsLayout getRouteTabs={getRouteTabs}/>}>

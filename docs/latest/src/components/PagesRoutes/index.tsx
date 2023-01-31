@@ -4,8 +4,6 @@ import { Route, Routes } from 'react-router-dom'
 import { pagesReq, getPagesRoutes } from '~/entries'
 
 export const PagesRoutes = memo(() => {
-  console.log('RENDER MEMO PAGES')
-
   return (
     <Routes>
       <Route path="/components/_" element={<SimpleLayout/>}>

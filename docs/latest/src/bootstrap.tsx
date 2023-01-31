@@ -23,8 +23,25 @@ export const bootstrap = (el: HTMLElement) => {
   const wrapper = el
   const { appElement, shadowRoot } = createShadowRoot(wrapper, registry)
 
+  let readyPromise: Promise<any> = Promise.resolve()
+
   if (Reflect.has(document.head, STYLE_INJECT_KEY)) {
-    shadowRoot.prepend(Reflect.get(document.head, STYLE_INJECT_KEY).cloneNode(true))
+    const fragment: HTMLElement = Reflect.get(document.head, STYLE_INJECT_KEY).cloneNode(true)
+
+    readyPromise = Promise.all(
+      Array.from(fragment.children).map((el) => new Promise<void>((resolve) => {
+        const abortCtr = new AbortController()
+        const onLoad = () => {
+          abortCtr.abort()
+          requestAnimationFrame(() => resolve())
+        }
+
+        el.addEventListener('load', onLoad, { signal: abortCtr.signal })
+        el.addEventListener('error', onLoad, { signal: abortCtr.signal })
+      }))
+    )
+
+    shadowRoot.prepend(fragment)
   }
 
   const reactRoot = createRoot(appElement)
@@ -37,11 +54,14 @@ export const bootstrap = (el: HTMLElement) => {
     </StrictMode>
   )
 
-  return () => {
-    console.log('unmount', pkg.version)
+  return {
+    ready: readyPromise,
+    unmount() {
+      console.log('unmount', pkg.version)
 
-    requestAnimationFrame(() => {
-      reactRoot.unmount()
-    })
+      requestAnimationFrame(() => {
+        reactRoot.unmount()
+      })
+    },
   }
 }

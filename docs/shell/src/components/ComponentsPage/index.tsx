@@ -23,8 +23,14 @@ export const ComponentsPage: FC = () => {
         const { bootstrap } = await Reflect.get(versions, versionValue).bootstrap()
 
         if (mounted) {
-          unmount = bootstrap(ref.current!)
-          setLoading(false)
+          const res = bootstrap(ref.current!)
+
+          unmount = res.unmount
+          res.ready.finally(() => {
+            if (mounted) {
+              setLoading(false)
+            }
+          })
         }
       } catch (e) {
         console.error(e)
@@ -39,8 +45,18 @@ export const ComponentsPage: FC = () => {
   }, [versionValue])
 
   return (
-    <div id="app-components" key={versionValue} ref={ref}>
-      {isLoading && <Loading/>}
-    </div>
+    <>
+      <div
+        id="app-components"
+        key={versionValue}
+        ref={ref}
+        className={isLoading ? 'loading' : ''}
+      />
+      {isLoading && (
+        <div id="app-components-loading">
+          <Loading/>
+        </div>
+      )}
+    </>
   )
 }

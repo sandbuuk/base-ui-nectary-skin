@@ -31,7 +31,7 @@ export const useBusNavigate = () => {
 
       const { pathname, hash, search } = msg.data.payload
 
-      console.log('EXTERNAL ROUTE CHANGED', `${locationRef.current.pathname}->${pathname}`, `${locationRef.current.hash}->${hash}`)
+      // console.log('EXTERNAL ROUTE CHANGED', `${locationRef.current.pathname}->${pathname}`, `${locationRef.current.hash}->${hash}`)
 
       // Test local pathname not matches message pathname
       if (locationRef.current.pathname !== pathname) {
