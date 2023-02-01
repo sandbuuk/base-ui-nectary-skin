@@ -65,16 +65,16 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
     async *fn({ $eval, $, page }) {
       const ct = await centerBB($)
 
-      await page.mouse.move(ct.x, ct.y)
-
       for (const type of typeValues) {
         await $eval((el, type) => el.setAttribute('type', type), type)
 
-        await page.mouse.up()
-        yield { name: `${type} hover` }
-
+        await page.mouse.move(ct.x, ct.y)
         await page.mouse.down()
         yield { name: `${type} active` }
+
+        await page.mouse.up()
+        yield { name: `${type} hover` }
+        await page.mouse.move(0, 0)
       }
     },
   },
@@ -87,12 +87,12 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
       yield { name: 'idle' }
 
       await page.mouse.move(ct.x, ct.y)
-      yield { name: 'hover' }
-
       await page.mouse.down()
       yield { name: 'active' }
 
       await page.mouse.up()
+      yield { name: 'hover' }
+
       await page.mouse.move(0, 0)
       await $eval((el) => el.setAttribute('disabled', ''))
       yield { name: 'disabled' }
@@ -113,6 +113,8 @@ test('icon-button screenshots', runScreenshotTests('sinch-icon-button', [
 
       await page.mouse.down()
       yield { name: 'active' }
+
+      await page.mouse.move(0, 0)
     },
   },
   {
