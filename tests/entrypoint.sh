@@ -1,4 +1,5 @@
 #!/bin/sh
 
 fc-cache -f
-yarn --cwd=tests test:ci
+npm install --global pnpm
+pnpm --dir tests test:ci
