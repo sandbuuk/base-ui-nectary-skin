@@ -1,5 +1,5 @@
 import '../icon-button'
-import '../icons/close'
+import '../icon'
 import '../stop-events'
 import '../title'
 import {
@@ -12,6 +12,7 @@ import {
   getReactEventHandler,
   NectaryElement,
   updateBooleanAttribute,
+  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDialogElement, TSinchDialogReact } from './types'
@@ -21,6 +22,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-dialog', class extends NectaryElement {
+  #$iconClose: HTMLElement
   #$dialog: HTMLDialogElement
   #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
@@ -36,6 +38,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.#$dialog = shadowRoot.querySelector('dialog')!
     this.#$closeButton = shadowRoot.querySelector('#close')!
     this.#$caption = shadowRoot.querySelector('#caption')!
+    this.#$iconClose = shadowRoot.querySelector('#icon-close')!
   }
 
   connectedCallback() {
@@ -45,6 +48,8 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.#$dialog.addEventListener('mousedown', this.#onBackdropClick)
     this.#$dialog.addEventListener('cancel', this.#onCancel)
     this.addEventListener('-close', this.#onCloseReactHandler)
+
+    updateAttribute(this.#$iconClose, 'name', getCssVar(this, '--sinch-dialog-icon-close'))
 
     // React updates attributes BEFORE connecting to the DOM
     // Angular updates attributes AFTER connecting to the DOM

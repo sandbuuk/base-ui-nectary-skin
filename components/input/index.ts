@@ -1,11 +1,12 @@
 import '../icon-button'
-import '../icons/close'
+import '../icon'
 import '../stop-events'
 import {
   Context,
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getCssVar,
   getLiteralAttribute,
   getReactEventHandler,
   getRect,
@@ -34,6 +35,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-input', class extends NectaryElement {
   #$input: HTMLInputElement
   #$clear: TSinchIconButtonElement
+  #$iconClear: HTMLElement
   #$iconSlot: HTMLSlotElement
   #$iconWrapper: HTMLElement
   #$rightSlot: HTMLSlotElement
@@ -61,6 +63,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$leftSlot = shadowRoot.querySelector('slot[name="left"]')!
     this.#$leftWrapper = shadowRoot.querySelector('#left')!
     this.#$clear = shadowRoot.querySelector('#clear')!
+    this.#$iconClear = shadowRoot.querySelector('#icon-clear')!
     this.#$wrapper = shadowRoot.querySelector('#wrapper')!
     this.#sizeContext = new Context(this.#$wrapper, 'size')
   }
@@ -92,6 +95,8 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.addEventListener('-change', this.#onChangeReactHandler, options)
     this.addEventListener('-focus', this.#onFocusReactHandler, options)
     this.addEventListener('-blur', this.#onBlurReactHandler, options)
+
+    updateAttribute(this.#$iconClear, 'name', getCssVar(this, '--sinch-input-icon-clear'))
 
     this.#sizeContext.listen(this.#controller.signal)
     subscribeContext(this, 'size', this.#onContextSize, this.#controller.signal)

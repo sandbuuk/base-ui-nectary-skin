@@ -1,7 +1,4 @@
-import '../icons/check-circle'
-import '../icons/info'
-import '../icons/report-problem'
-import '../icons/report'
+import '../icon'
 import '../rich-text'
 import '../text'
 import '../title'
@@ -13,6 +10,7 @@ import {
   updateLiteralAttribute,
   NectaryElement,
   setClass,
+  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertType, typeValues } from './utils'
@@ -23,6 +21,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-inline-alert', class extends NectaryElement {
+  #$icon: HTMLElement
   #$text: HTMLElement
   #$caption: HTMLElement
   #$closeWrapper: HTMLElement
@@ -37,6 +36,7 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#$icon = shadowRoot.querySelector('#icon')!
     this.#$text = shadowRoot.querySelector('#text')!
     this.#$caption = shadowRoot.querySelector('#caption')!
     this.#$closeWrapper = shadowRoot.querySelector('#close')!
@@ -46,6 +46,7 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
   }
 
   connectedCallback() {
+    super.connectedCallback()
     this.setAttribute('aria-atomic', 'true')
     this.setAttribute('aria-live', 'polite')
     this.#$closeSlot.addEventListener('slotchange', this.#onCloseSlotChange)
@@ -53,9 +54,11 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
 
     this.#onCloseSlotChange()
     this.#onActionSlotChange()
+    this.#updateIcon()
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.#$closeSlot.removeEventListener('slotchange', this.#onCloseSlotChange)
     this.#$actionSlot.removeEventListener('slotchange', this.#onActionSlotChange)
   }
@@ -95,6 +98,8 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
           assertType(newVal)
         }
 
+        this.#updateIcon()
+
         break
       }
 
@@ -110,6 +115,14 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
         break
       }
     }
+  }
+
+  #updateIcon() {
+    if (!this.isConnected) {
+      return
+    }
+
+    updateAttribute(this.#$icon, 'name', getCssVar(this, `--sinch-inline-alert-icon-${this.type}`))
   }
 
   #onCloseSlotChange = () => {

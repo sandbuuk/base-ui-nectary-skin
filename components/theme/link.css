@@ -1,0 +1,5 @@
+:root,
+:host {
+  --sinch-link-icon-standalone: arrow_forward;
+  --sinch-link-icon-external: open_in_new;
+}

@@ -5,7 +5,7 @@ import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/schedule'
+import '@sinch-engage/nectary-assets/icons/schedule'
 
 type TTimeInput = {
   search: URLSearchParams,

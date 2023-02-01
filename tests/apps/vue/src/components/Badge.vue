@@ -16,7 +16,7 @@
 <script>
 import '@sinch-engage/nectary/badge'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/notifications'
+import '@sinch-engage/nectary-assets/icons/notifications'
 
 export default {
   props: {

@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import '@sinch-engage/nectary/toast'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary-assets/icons/close'
 
 type TToast = {
   search: URLSearchParams,

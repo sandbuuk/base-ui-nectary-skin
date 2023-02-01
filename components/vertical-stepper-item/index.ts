@@ -1,8 +1,8 @@
-import '../icons/check'
-import '../icons/exclamation'
+import '../icon'
 import {
   defineCustomElement,
   getAttribute,
+  getCssVars,
   getLiteralAttribute,
   NectaryElement,
   updateAttribute,
@@ -20,6 +20,8 @@ defineCustomElement('sinch-vertical-stepper-item', class extends NectaryElement 
   #$label: HTMLElement
   #$description: HTMLElement
   #$circleText: HTMLElement
+  #$iconSuccess: HTMLElement
+  #$iconError: HTMLElement
 
   constructor() {
     super()
@@ -31,12 +33,18 @@ defineCustomElement('sinch-vertical-stepper-item', class extends NectaryElement 
     this.#$label = shadowRoot.querySelector('#label')!
     this.#$description = shadowRoot.querySelector('#description')!
     this.#$circleText = shadowRoot.querySelector('#circle-text')!
+    this.#$iconSuccess = shadowRoot.querySelector('#icon-success')!
+    this.#$iconError = shadowRoot.querySelector('#icon-error')!
   }
 
   connectedCallback() {
-  }
+    const [successName, errorName] = getCssVars(this, [
+      '--sinch-vertical-stepper-icon-success',
+      '--sinch-vertical-stepper-icon-error',
+    ])
 
-  disconnectedCallback() {
+    updateAttribute(this.#$iconSuccess, 'name', successName)
+    updateAttribute(this.#$iconError, 'name', errorName)
   }
 
   static get observedAttributes() {

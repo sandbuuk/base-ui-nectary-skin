@@ -1,0 +1,7 @@
+:root,
+:host {
+  --sinch-date-picker-icon-prev-month: keyboard_arrow_left;
+  --sinch-date-picker-icon-next-month: keyboard_arrow_right;
+  --sinch-date-picker-icon-prev-year: keyboard_double_arrow_left;
+  --sinch-date-picker-icon-next-year: keyboard_double_arrow_right;
+}

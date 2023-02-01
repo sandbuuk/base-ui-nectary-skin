@@ -1,0 +1,131 @@
+.title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-inline-start: -20px;
+}
+
+.title.no-anchor {
+  margin-inline-start: 0;
+}
+
+.title-anchor {
+  font: var(--sinch-font-text-m);
+  color: var(--sinch-color-text-default);
+  text-decoration: none;
+  width: 20px;
+  text-align: center;
+  visibility: hidden;
+}
+
+.title:hover > .title-anchor {
+  visibility: visible;
+}
+
+.title + .title {
+  margin-block-start: 32px;
+}
+
+.title + .paragraph {
+  margin-block-start: 16px;
+}
+
+.paragraph + .title {
+  margin-block-start: 32px;
+}
+
+.paragraph + .paragraph {
+  margin-block-start: 8px;
+}
+
+.paragraph + .code,
+.paragraph + .example {
+  margin-block-start: 16px;
+}
+
+.title + .example {
+  margin-block-start: 16px;
+}
+
+.example + .paragraph {
+  margin-block-start: 24px;
+}
+
+.example + .title {
+  margin-block-start: 32px;
+}
+
+.example-container + .code {
+  margin-block-start: 24px;
+}
+
+.example-code + .title, {
+  margin-block-start: 32px;
+}
+
+.list {
+  font: var(--sinch-font-text-m);
+  color: var(--sinch-color-text-default);
+  padding: 0;
+  padding-inline-start: 16px;
+  margin-block-start: 16px;
+  margin-block-end: 16px;
+}
+
+.list .list {
+  margin: 0;
+}
+
+.table {
+  font: var(--sinch-font-text-m);
+  width: 100%;
+  margin-block: 16px;
+}
+
+.table + .title {
+  padding-block-start: 32px;
+}
+
+sinch-table-head-cell:nth-child(1) {
+  width: 200px;
+}
+
+sinch-table-head-cell:nth-child(2) {
+  width: 250px;
+}
+
+.code-inline {
+  font: var(--sinch-font-mono-text-s);
+  background-color: #EFF6F6;
+
+  /* outline: 1px solid var(--sinch-color-tropical-500); */
+  border-radius: 2px;
+  padding-inline: 4px;
+}
+
+.blockquote {
+  margin: 0;
+  padding-left: 8px;
+  border-left: 4px solid var(--sinch-color-snow-600);
+}
+
+.blockquote + .blockquote,
+.blockquote + .title,
+.paragraph + .blockquote,
+.blockquote + .paragraph,
+.blockquote + .example {
+  margin-block-start: 16px;
+}
+
+.image {
+  max-width: 752px;
+}
+
+.image + .paragraph,
+.image + .title {
+  margin-block-start: 16px;
+}
+
+.paragraph + .image {
+  margin-block-start: 16px;
+}

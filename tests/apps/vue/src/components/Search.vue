@@ -36,8 +36,8 @@ import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/search'
-import '@sinch-engage/nectary/icons/close'
+import '@sinch-engage/nectary-assets/icons/search'
+import '@sinch-engage/nectary-assets/icons/close'
 
 export default {
   methods: {

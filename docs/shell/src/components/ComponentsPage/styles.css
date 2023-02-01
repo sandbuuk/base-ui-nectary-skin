@@ -1,0 +1,14 @@
+#app-components {
+  height: 100%;
+}
+
+#app-components.loading {
+  display: none;
+}
+
+#app-components-loading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

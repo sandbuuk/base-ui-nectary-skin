@@ -76,10 +76,11 @@
 }
 
 @font-face {
-  font-family: "Material Icons Outlined";
+  font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
+  font-display: block;
   src:
-    url("https://fonts.gstatic.com/s/materialsymbolsoutlined/v63/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzazHD_dY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOejbd5zrDAt.woff2") format("woff2"),
-    url("https://fonts.gstatic.com/s/materialsymbolsoutlined/v63/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzazHD_dY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOelbd5zrDAt.woff") format("woff");
+    local("MaterialSymbolsRounded24pt-Regular"),
+    url("https://fonts.gstatic.com/s/materialsymbolsrounded/v76/syl7-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvLgyidOK7BDB_Qb9vUdV6_gjDK-P3JuF_Zs-obHph2-jOcZTKPq8a9A5M.woff2") format("woff2");
 }

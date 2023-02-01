@@ -7,15 +7,7 @@ import '../tabs'
 import '../tabs-icon-option'
 import '../emoji'
 import '../text'
-import '../icons/search'
-import '../icons/sentiment-satisfied'
-import '../icons/emoji-people'
-import '../icons/emoji-nature'
-import '../icons/emoji-food-beverage'
-import '../icons/emoji-objects'
-import '../icons/emoji-transportation'
-import '../icons/emoji-events'
-import '../icons/emoji-symbols'
+import '../icon'
 import {
   defineCustomElement,
   getAttribute,
@@ -28,6 +20,8 @@ import {
   subscribeContext,
   debounceTimeout,
   setClass,
+  getCssVar,
+  getCssVars,
 } from '../utils'
 import dataJson from './data.json'
 import templateHTML from './template.html'
@@ -45,14 +39,14 @@ import type {
 } from '../utils'
 
 const groupIconTagNames = [
-  'sinch-icon-sentiment-satisfied',
-  'sinch-icon-emoji-people',
-  'sinch-icon-emoji-nature',
-  'sinch-icon-emoji-food-beverage',
-  'sinch-icon-emoji-transportation',
-  'sinch-icon-emoji-events',
-  'sinch-icon-emoji-objects',
-  'sinch-icon-emoji-symbols',
+  '--sinch-emoji-picker-icon-emoji-emotions',
+  '--sinch-emoji-picker-icon-emoji-people',
+  '--sinch-emoji-picker-icon-emoji-animals-nature',
+  '--sinch-emoji-picker-icon-emoji-food-drinks',
+  '--sinch-emoji-picker-icon-emoji-travel-places',
+  '--sinch-emoji-picker-icon-emoji-sports-activities',
+  '--sinch-emoji-picker-icon-emoji-objects',
+  '--sinch-emoji-picker-icon-emoji-symbols-flags',
 ]
 const groupLabels = [
   'Emotions',
@@ -81,6 +75,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   #$skinButton: TSinchIconButtonElement
   #$list: HTMLElement
   #$notFound: HTMLElement
+  #$iconSearch: HTMLElement
   #controller: AbortController | null = null
   #$sh: ShadowRoot
   #searchDebounce
@@ -103,6 +98,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     this.#$skinButton = shadowRoot.querySelector('#skin-button')!
     this.#$list = shadowRoot.querySelector('#list')!
     this.#$notFound = shadowRoot.querySelector('#not-found')!
+    this.#$iconSearch = shadowRoot.querySelector('#icon-search')!
     this.#searchDebounce = debounceTimeout(SEARCH_DEBOUNCE_TIMEOUT)(this.#updateSearch)
   }
 
@@ -119,6 +115,9 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     this.#$skinMenu.addEventListener('-change', this.#onSkinMenuChange as any, { signal })
     this.#$list.addEventListener('click', this.#onListClick, { signal })
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
+
+    updateAttribute(this.#$iconSearch, 'name', getCssVar(this, '--sinch-emoji-picker-icon-search'))
+
     subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
     subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
 
@@ -260,13 +259,15 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     const doc = this.#getDocumentRoot()
     const tabsFragment = document.createDocumentFragment()
     const activeTab = data[0].name
+    const iconNames = getCssVars(this, groupIconTagNames)
 
     for (let i = 0; i < data.length;i++) {
       const group = data[i]
       const tabOption = doc.createElement('sinch-tabs-icon-option')
-      const icon = doc.createElement(groupIconTagNames[i])
+      const icon = doc.createElement('sinch-icon')
 
       icon.setAttribute('slot', 'icon')
+      updateAttribute(icon, 'name', iconNames[i])
       tabOption.setAttribute('value', group.name)
       tabOption.setAttribute('aria-label', groupLabels[i])
       tabOption.appendChild(icon)

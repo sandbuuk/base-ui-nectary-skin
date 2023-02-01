@@ -1,4 +1,3 @@
-
 import pkg from '../package.json'
 
 const nectaryDefinitions = new Map<string, CustomElementConstructor>()
@@ -18,7 +17,7 @@ export const defineCustomElement = (name: string, constructor: CustomElementCons
 
 export const setNectaryRegistry = (registry: CustomElementRegistry): void => {
   if (nectaryRegistry !== null) {
-    throw new Error('Nectary elements already registered')
+    throw new Error('Nectary registry already set')
   }
 
   nectaryRegistry = registry

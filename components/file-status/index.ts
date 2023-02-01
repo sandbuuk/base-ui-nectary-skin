@@ -1,8 +1,5 @@
 import '../spinner'
-import '../icons/check-circle'
-import '../icons/report'
-import '../icons/pending-actions'
-import '../icons/text-snippet'
+import '../icon'
 import '../text'
 import {
   defineCustomElement,
@@ -12,6 +9,7 @@ import {
   updateLiteralAttribute,
   NectaryElement,
   updateBooleanAttribute,
+  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertType, typeValues } from './utils'
@@ -25,6 +23,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-file-status', class extends NectaryElement {
   #$filename: TSinchTextElement
   #$contentSlot: HTMLSlotElement
+  #$icon: HTMLElement
 
   constructor() {
     super()
@@ -35,15 +34,19 @@ defineCustomElement('sinch-file-status', class extends NectaryElement {
 
     this.#$filename = shadowRoot.querySelector('#filename')!
     this.#$contentSlot = shadowRoot.querySelector('slot[name="content"]')!
+    this.#$icon = shadowRoot.querySelector('#icon')!
   }
 
   connectedCallback() {
+    super.connectedCallback()
     this.#$contentSlot.addEventListener('slotchange', this.#onContentSlotChange)
 
     this.#onContentSlotChange()
+    this.#updateIcon()
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.#$contentSlot.removeEventListener('slotchange', this.#onContentSlotChange)
   }
 
@@ -78,6 +81,8 @@ defineCustomElement('sinch-file-status', class extends NectaryElement {
           assertType(newVal)
         }
 
+        this.#updateIcon()
+
         break
       }
 
@@ -87,6 +92,20 @@ defineCustomElement('sinch-file-status', class extends NectaryElement {
         break
       }
     }
+  }
+
+  #updateIcon() {
+    if (!this.isConnected) {
+      return
+    }
+
+    const type = this.type
+
+    if (type === 'loading') {
+      return
+    }
+
+    updateAttribute(this.#$icon, 'name', getCssVar(this, `--sinch-file-status-icon-${type}`))
   }
 
   #onContentSlotChange = () => {

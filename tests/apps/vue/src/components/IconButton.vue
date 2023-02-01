@@ -16,7 +16,7 @@
 
 <script>
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/help-outline'
+import '@sinch-engage/nectary-assets/icons/help-outline'
 import '@sinch-engage/nectary/spinner'
 
 export default {

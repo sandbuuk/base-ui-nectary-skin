@@ -23,12 +23,12 @@
   flex: 1;
 }
 
-#check {
+#icon-check {
   display: none;
   margin-right: -6px;
 }
 
-:host([data-checked]) #check {
+:host([data-checked]) #icon-check {
   display: block;
 }
 
@@ -52,5 +52,5 @@
 <div id="wrapper">
   <slot name="icon"></slot>
   <sinch-text id="content" type="m" ellipsis></sinch-text>
-  <sinch-icon-check id="check"></sinch-icon-check>
+  <sinch-icon id="icon-check"></sinch-icon>
 </div>

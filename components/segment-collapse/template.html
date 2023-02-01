@@ -5,24 +5,17 @@
   --sinch-size-icon: 32px;
 }
 
-#up {
+#icon-dropdown {
   display: block;
+  will-change: transform;
+  transform: rotate(180deg);
 }
 
-#down {
-  display: none;
-}
-
-:host([value]:not([value="false"])) #up {
-  display: none;
-}
-
-:host([value]:not([value="false"])) #down {
-  display: block;
+:host([value]:not([value="false"])) #icon-dropdown {
+  transform: rotate(0deg);
 }
 </style>
 
 <sinch-icon-button id="button" size="s">
-  <sinch-icon-expand-less id="up" slot="icon"></sinch-icon-expand-less>
-  <sinch-icon-expand-more id="down" slot="icon"></sinch-icon-expand-more>
+  <sinch-icon id="icon-dropdown" slot="icon"></sinch-icon>
 </sinch-icon-button>

@@ -1,0 +1,6 @@
+:root,
+:host {
+  --sinch-alert-icon-info: info;
+  --sinch-alert-icon-warn: report_problem;
+  --sinch-alert-icon-error: report;
+}

@@ -40,6 +40,8 @@ defineCustomElement('sinch-card', class extends NectaryElement {
 
   connectedCallback() {
     this.#$illustrationSlot.addEventListener('slotchange', this.#onIllustrationSlotChange)
+
+    this.#onIllustrationSlotChange()
   }
 
   disconnectedCallback() {

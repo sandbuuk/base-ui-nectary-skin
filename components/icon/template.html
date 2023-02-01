@@ -1,15 +1,15 @@
 <style>
 :host {
-  display: contents;
+  display: inline-block;
 }
 
 #icon {
-  display: inline-block;
+  display: block;
   font-family: var(--sinch-icon-font-family);
   font-weight: var(--sinch-icon-font-weight);
   font-size: var(--sinch-size-icon, 24px);
   font-feature-settings: var(--sinch-icon-font-feature-settings);
-  font-variation-settings: "FILL" 1;
+  font-variation-settings: var(--sinch-icon-font-variation-settings);
   -webkit-font-smoothing: antialiased;
   line-height: 1;
   white-space: nowrap;

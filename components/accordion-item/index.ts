@@ -1,8 +1,9 @@
-import '../icons/keyboard-arrow-down'
+import '../icon'
 import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  getCssVar,
   getLiteralAttribute,
   isAttrTrue,
   NectaryElement,
@@ -21,6 +22,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-accordion-item', class extends NectaryElement {
   #$button: HTMLButtonElement
+  #$icon: HTMLElement
   #$buttonContent: HTMLSpanElement
   #$optionalText: HTMLSpanElement
 
@@ -32,12 +34,15 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$button = shadowRoot.querySelector('#button')!
+    this.#$icon = shadowRoot.querySelector('#dropdown-icon')!
     this.#$buttonContent = shadowRoot.querySelector('#title')!
     this.#$optionalText = shadowRoot.querySelector('#optional')!
   }
 
   connectedCallback() {
     this.#$button.addEventListener('click', this.#onButtonClick)
+
+    updateAttribute(this.#$icon, 'name', getCssVar(this, '--sinch-accordion-item-icon-dropdown'))
   }
 
   disconnectedCallback() {

@@ -1,8 +1,3 @@
-import '../spinner'
-import '../icons/check-circle'
-import '../icons/report'
-import '../icons/pending-actions'
-import '../icons/text-snippet'
 import '../text'
 import {
   defineCustomElement,

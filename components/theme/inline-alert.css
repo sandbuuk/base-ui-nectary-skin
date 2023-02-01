@@ -1,0 +1,7 @@
+:root,
+:host {
+  --sinch-inline-alert-icon-info: info;
+  --sinch-inline-alert-icon-success: check_circle;
+  --sinch-inline-alert-icon-warn: report_problem;
+  --sinch-inline-alert-icon-error: report;
+}

@@ -1,4 +1,3 @@
-import '../icons/cancel'
 import '../text'
 import {
   defineCustomElement,

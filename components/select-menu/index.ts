@@ -1,7 +1,6 @@
 import '../input'
 import '../icon-button'
-import '../icons/search'
-import '../icons/close'
+import '../icon'
 import '../text'
 import {
   attrValueToPixels,
@@ -22,6 +21,7 @@ import {
   debounceTimeout,
   setClass,
   subscribeContext,
+  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
@@ -41,6 +41,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
   #$search: TSinchInputElement
+  #$iconSearch: HTMLElement
   #$notFound: HTMLElement
   #controller: AbortController | null = null
   #searchDebounce
@@ -55,6 +56,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.#$optionSlot = shadowRoot.querySelector('slot')!
     this.#$listbox = shadowRoot.querySelector('#listbox')!
     this.#$search = shadowRoot.querySelector('#search')!
+    this.#$iconSearch = shadowRoot.querySelector('#icon-search')!
     this.#$notFound = shadowRoot.querySelector('#not-found')!
 
     this.#searchDebounce = debounceTimeout(200)(this.#updateSearch)
@@ -76,6 +78,8 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
     subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
     subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
+
+    updateAttribute(this.#$iconSearch, 'name', getCssVar(this, '--sinch-select-menu-icon-search'))
   }
 
   disconnectedCallback() {

@@ -4,4 +4,7 @@
   --sinch-select-button-icon-size-l: 24px;
   --sinch-select-button-icon-size-m: 24px;
   --sinch-select-button-icon-size-s: 24px;
+
+  /* Icon name */
+  --sinch-select-button-icon-dropdown: keyboard_arrow_down;
 }

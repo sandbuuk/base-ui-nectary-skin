@@ -1,0 +1,49 @@
+import { Example } from '~/components/Example'
+import { PendingExample } from './examples/Pending.tsx?example'
+import { LoadingExample } from './examples/Loading.tsx?example'
+import { ProgressExample } from './examples/Progress.tsx?example'
+import { SuccessExample } from './examples/Success.tsx?example'
+import { ErrorExample } from './examples/Error.tsx?example'
+
+# File Status
+
+## Examples
+
+File Status represents a file state:
+
+* `pending`
+* `loading`
+* `progress`
+* `success`
+* `error`
+
+
+### Pending
+
+File has been picked. Action button should remove file from the list.
+
+<Example Component={PendingExample}/>
+
+### Loading
+
+File is uploading. Action button should cancel the uploading process.
+
+<Example Component={LoadingExample}/>
+
+### Progress
+
+File is uploading. Action button should cancel the uploading process.
+
+<Example Component={ProgressExample}/>
+
+### Success
+
+File has been uploaded. Action button should cancel the uploading process, but since it's an async operation there is a disabled variant.
+
+<Example Component={SuccessExample}/>
+
+### Error
+
+Something went wrong during file uploading. Action button should either remove file or re-try the failed operation.
+
+<Example Component={ErrorExample}/>

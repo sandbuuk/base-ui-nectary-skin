@@ -1,7 +1,4 @@
-import '../icons/report-problem'
-import '../icons/report'
-import '../icons/check-circle'
-import '../icons/info'
+import '../icon'
 import '../title'
 import '../text'
 import {
@@ -14,6 +11,7 @@ import {
   getReactEventHandler,
   getBooleanAttribute,
   updateBooleanAttribute,
+  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertType, typeValues } from './utils'
@@ -25,6 +23,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-toast', class extends NectaryElement {
+  #$icon: HTMLElement
   #$text: HTMLElement
   #tid: number | null = null
 
@@ -36,17 +35,21 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$text = shadowRoot.querySelector('#text')!
+    this.#$icon = shadowRoot.querySelector('#icon')!
   }
 
   connectedCallback() {
+    super.connectedCallback()
     this.setAttribute('aria-atomic', 'true')
     this.setAttribute('aria-live', 'polite')
     this.addEventListener('-timeout', this.#onTimeoutReactHandler)
 
     this.#updateTimeout()
+    this.#updateIcon()
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback()
     this.removeEventListener('-timeout', this.#onTimeoutReactHandler)
     this.#clearTimeout()
   }
@@ -90,6 +93,8 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
           assertType(newVal)
         }
 
+        this.#updateIcon()
+
         break
       }
 
@@ -117,6 +122,14 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
     if (this.#tid === null) {
       this.#tid = window.setTimeout(this.#onTimeout, TIMEOUT)
     }
+  }
+
+  #updateIcon() {
+    if (!this.isConnected) {
+      return
+    }
+
+    updateAttribute(this.#$icon, 'name', getCssVar(this, `--sinch-toast-icon-${this.type}`))
   }
 
   #onTimeout = () => {

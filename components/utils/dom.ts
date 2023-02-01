@@ -157,9 +157,19 @@ export const setClass = (elem: Element, name: string, isSet: boolean) => {
 }
 
 export const getCssVar = (element: Element, variableName: string): string | null => {
-  const result = getComputedStyle(element).getPropertyValue(variableName)
+  const result = getComputedStyle(element).getPropertyValue(variableName).trim()
 
   return result === '' ? null : result
+}
+
+export const getCssVars = (element: Element, variableNames: string[]): (string | null)[] => {
+  const style = getComputedStyle(element)
+
+  return variableNames.map((name) => {
+    const result = style.getPropertyValue(name).trim()
+
+    return result === '' ? null : result
+  })
 }
 
 export const cloneNode = (el: Element, deep: boolean): Element => {

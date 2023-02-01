@@ -1,7 +1,3 @@
-import '../icons/report-problem'
-import '../icons/report'
-import '../icons/check-circle'
-import '../icons/info'
 import '../title'
 import '../text'
 import {

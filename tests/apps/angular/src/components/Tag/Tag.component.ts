@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
 
 
 @Component({

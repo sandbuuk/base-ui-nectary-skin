@@ -1,6 +1,7 @@
 packages:
+  - 'assets/'
   - 'components/'
   - 'libs/*'
   - 'tests/'
   - 'tests/apps/*'
-  - 'docs/'
+  - 'docs/*'

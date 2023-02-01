@@ -1,5 +1,5 @@
 import '../text'
-import '../icons/cancel'
+import '../icon'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -8,6 +8,7 @@ import {
   updateAttribute,
   NectaryElement,
   getReactEventHandler,
+  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertChipColor, getChipColorBg, getChipColorFg } from './utils'
@@ -20,6 +21,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-chip', class extends NectaryElement {
   #$text: HTMLElement
   #$button: HTMLElement
+  #$iconClose: HTMLElement
 
   #controller: AbortController | null = null
 
@@ -32,6 +34,7 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
 
     this.#$button = shadowRoot.querySelector('#button')!
     this.#$text = shadowRoot.querySelector('#text')!
+    this.#$iconClose = shadowRoot.querySelector('#icon-close')!
   }
 
   connectedCallback() {
@@ -48,6 +51,8 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
     this.addEventListener('-click', this.#onClickReactHandler, { signal })
     this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
     this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
+
+    updateAttribute(this.#$iconClose, 'name', getCssVar(this, '--sinch-chip-icon-close'))
 
     this.#updateColor()
   }

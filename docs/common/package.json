@@ -1,0 +1,24 @@
+{
+  "name": "docs-common",
+  "version": "0.0.0",
+  "private": true,
+  "main": "src/index",
+  "dependencies": {
+    "@sinch-engage/nectary": "workspace:*",
+    "@sinch-engage/nectary-assets": "workspace:*",
+    "history": "^5.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "url-slug": "^3.0.4"
+  },
+  "devDependencies": {
+    "@mdx-js/react": "^2.2.1",
+    "@types/mdx": "^2.0.3",
+    "@types/node": "^18.11.17",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "@types/react-syntax-highlighter": "^15.5.5"
+  }
+}

@@ -4,4 +4,7 @@
   --sinch-input-icon-size-l: 24px;
   --sinch-input-icon-size-m: 24px;
   --sinch-input-icon-size-s: 16px;
+
+  /* Icon name */
+  --sinch-input-icon-clear: close;
 }

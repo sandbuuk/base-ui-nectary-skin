@@ -1,0 +1,18 @@
+import { useState } from 'react'
+import type { FC } from 'react'
+import '@sinch-engage/nectary/checkbox'
+
+export const DisabledExample: FC = () => {
+  const [isChecked, setChecked] = useState(false)
+  const onChange = (e: CustomEvent<boolean>) => setChecked(e.detail)
+
+  return (
+    <sinch-checkbox
+      text="Label"
+      aria-label="Checkbox"
+      disabled
+      checked={isChecked}
+      on-change={onChange}
+    />
+  )
+}

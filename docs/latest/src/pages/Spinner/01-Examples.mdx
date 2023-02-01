@@ -1,0 +1,25 @@
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import { EmbeddedExample } from './examples/Embedded.tsx?example'
+
+# Spinner
+
+## Examples
+
+Spinner components are often used to indicate that a webpage or application is loading, or that a request for data or information is being processed. They can also be used to indicate that a specific action, such as saving or deleting data, is in progress.
+
+In addition to providing visual feedback to the user, spinner components can also help to improve the overall user experience by reducing the perceived wait time for long-running operations. By showing a spinner while the operation is in progress, the user knows that something is happening and that they do not need to take any further action.
+
+### Standalone
+
+A spinner component in standalone mode is not tied to any specific element on the page. It is used to provide general feedback to the user about the overall state of the webpage or application.
+
+ The spinner comes in three different sizes.
+
+<Example Component={SimpleExample}/>
+
+### Embedded
+
+Spinners can be placed inside other components.
+
+<Example Component={EmbeddedExample}/>

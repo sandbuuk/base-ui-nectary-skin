@@ -2,8 +2,8 @@ import { Component } from '@angular/core'
 import '@sinch-engage/nectary/list'
 import '@sinch-engage/nectary/list-item'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icons/add'
-import '@sinch-engage/nectary/icons-branded/chatbot'
+import '@sinch-engage/nectary-assets/icons/add'
+import '@sinch-engage/nectary-assets/icons-branded/chatbot'
 
 @Component({
   selector: 'list-component',

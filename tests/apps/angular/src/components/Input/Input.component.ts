@@ -3,7 +3,7 @@ import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/select-button'
 import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary/icons/search'
+import '@sinch-engage/nectary-assets/icons/search'
 
 @Component({
   selector: 'input-component',

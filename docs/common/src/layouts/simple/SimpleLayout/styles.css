@@ -1,0 +1,13 @@
+#page-content-wrapper {
+  flex: 1;
+  min-width: 0;
+  padding: 24px 32px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+#page-content {
+  width: 660px;
+  margin: 0 auto;
+}

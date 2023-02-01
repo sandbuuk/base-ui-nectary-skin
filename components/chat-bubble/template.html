@@ -32,10 +32,7 @@
   color: var(--sinch-color-stormy-500);
 }
 
-sinch-icon-query-builder,
-sinch-icon-check,
-sinch-icon-done-all,
-sinch-icon-error-outline {
+#icon {
   display: none;
   position: absolute;
   right: 16px;
@@ -43,29 +40,22 @@ sinch-icon-error-outline {
 
   --sinch-size-icon: 16px;
   --sinch-color-icon: var(--sinch-color-stormy-500);
+  --sinch-icon-font-variation-settings: var(--sinch-chat-icon-font-variation-settings);
 }
 
-:host([status="sending"]) sinch-icon-query-builder {
+:host([status="sending"]) #icon,
+:host([status="sent"]) #icon,
+:host([status="received"]) #icon,
+:host([status="seen"]) #icon,
+:host([status="error"]) #icon {
   display: block;
 }
 
-:host([status="sent"]) sinch-icon-check {
-  display: block;
-}
-
-:host([status="received"]) sinch-icon-done-all {
-  display: block;
-}
-
-:host([status="seen"]) sinch-icon-done-all {
-  display: block;
-
+:host([status="seen"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-success-icon);
 }
 
-:host([status="error"]) sinch-icon-error-outline {
-  display: block;
-
+:host([status="error"]) #icon {
   --sinch-color-icon: var(--sinch-color-feedback-invalid-icon);
 }
 
@@ -76,8 +66,5 @@ sinch-icon-error-outline {
 
 <div id="wrapper">
   <span id="text"></span>
-  <sinch-icon-query-builder></sinch-icon-query-builder>
-  <sinch-icon-check></sinch-icon-check>
-  <sinch-icon-done-all></sinch-icon-done-all>
-  <sinch-icon-error-outline></sinch-icon-error-outline>
+  <sinch-icon id="icon"></sinch-icon>
 </div>

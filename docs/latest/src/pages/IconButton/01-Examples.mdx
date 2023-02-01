@@ -1,0 +1,34 @@
+import { Example } from '~/components/Example'
+import { TypePrimaryExample } from './examples/TypePrimary.tsx?example'
+import { TypeSecondaryExample } from './examples/TypeSecondary.tsx?example'
+import { TypeTertiaryExample } from './examples/TypeTertiary.tsx?example'
+
+# Icon Button
+
+## Examples
+
+An icon button is an UI element that allows a user to interact with a website or application by clicking on a small visual symbol. Icon buttons uses icons rather than text to represent the function or action they trigger. They are often used to provide a more intuitive and visually appealing interface, as well as to conserve space on the screen.
+
+Icon buttons can be designed in a variety of sizes and styles, and can be placed in different locations within the interface. They are often used in conjunction with other GUI elements, such as menus, dropdown lists, and text inputs, to provide a comprehensive and intuitive user experience.
+
+Every icon button contains a pre-built tooltips which provide additional information or context when the user hovers their cursor over the button.
+
+### Type
+
+#### Primary
+
+A primary icon button is a UI element that is used to indicate the main or most important action available to the user within a specific context. It is usually distinguished by its prominent placement and visual design, which is intended to draw the user's attention and encourage them to take action.
+
+<Example Component={TypePrimaryExample}/>
+
+#### Secondary
+
+Secondary icon buttons are often used to trigger actions that are less important or less frequently used than the primary action, such as cancelling a process, accessing settings, or returning to a previous screen. They may also be used to initiate simpler processes or to access less frequently used features or functions within an application.
+
+<Example Component={TypeSecondaryExample}/>
+
+#### Tertiary
+
+The transparent or "ghost" appearance of a tertiary icon button is intended to make the button less prominent and less visually dominant within the interface. It is typically used for actions that are less important or less frequently used than the primary action, such as accessing settings or returning to a previous screen. The tertiary icon button is the default style for the icon button.
+
+<Example Component={TypeTertiaryExample}/>

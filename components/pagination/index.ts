@@ -1,5 +1,4 @@
-import '../icons/keyboard-arrow-left'
-import '../icons/keyboard-arrow-right'
+import '../icon'
 import {
   defineCustomElement,
   updateAttribute,
@@ -8,6 +7,7 @@ import {
   NectaryElement,
   getRect,
   getReactEventHandler,
+  getCssVars,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchPaginationElement, TSinchPaginationReact } from './types'
@@ -26,7 +26,9 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-pagination', class extends NectaryElement {
   #$left: HTMLButtonElement
+  #$iconLeft: HTMLElement
   #$right: HTMLButtonElement
+  #$iconRight: HTMLElement
   #$buttons: NodeListOf<HTMLButtonElement>
   #$wrapper: Element
 
@@ -38,7 +40,9 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$left = shadowRoot.querySelector('#left')!
+    this.#$iconLeft = shadowRoot.querySelector('#icon-left')!
     this.#$right = shadowRoot.querySelector('#right')!
+    this.#$iconRight = shadowRoot.querySelector('#icon-right')!
     this.#$buttons = shadowRoot.querySelectorAll<HTMLButtonElement>('.page')
     this.#$wrapper = shadowRoot.querySelector('#wrapper')!
   }
@@ -47,6 +51,8 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     this.#onValueChange()
     this.#$wrapper.addEventListener('click', this.#onButtonClick)
     this.addEventListener('-change', this.#onChangeReactHandler)
+
+    this.#updateIcons()
   }
 
   disconnectedCallback() {
@@ -176,6 +182,16 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     const max = getIntegerAttribute(this, 'max', 0)
 
     return Math.max(0, Math.min(max - 1, value)) + 1
+  }
+
+  #updateIcons() {
+    const [leftName, rightName] = getCssVars(this, [
+      '--sinch-pagination-icon-prev',
+      '--sinch-pagination-icon-next',
+    ])
+
+    updateAttribute(this.#$iconLeft, 'name', leftName)
+    updateAttribute(this.#$iconRight, 'name', rightName)
   }
 
   #dispatchChangeEvent(value: number) {

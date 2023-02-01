@@ -1,0 +1,37 @@
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import { IndeterminateExample } from './examples/Indeterminate.tsx?example'
+import { DisabledExample } from './examples/Disabled.tsx?example'
+import { InvalidExample } from './examples/Invalid.tsx?example'
+
+# Checkbox
+
+## Examples
+
+Checkboxes are inputs that allows the users to select one or more options, these options are not mutually exclusive.
+
+### Simple
+
+A single checkbox is a user interface element that allows the user to make a binary choice, such as to enable or disable a feature, or to indicate agreement or disagreement with a statement. Single checkboxes are often used in settings or preferences screens, or in forms, to allow the user to make a simple choice. They are often used in combination with other interface elements, such as labels or instructions, to provide more context and information to the user.
+
+<Example Component={SimpleExample}/>
+
+### Indeterminate
+
+The indeterminate state of a checkbox component is a special state that indicates that the checkbox is in a mixed or uncertain state. It is typically used to indicate that some, but not all, of a group of related checkboxes have been selected.
+
+The indeterminate state of a checkbox component can be useful in situations where the user needs to select or deselect multiple items in a group, and where it is not clear whether all of the items are selected or not. It can help users better understand the state of the checkbox group and make more informed decisions about how to proceed.
+
+<Example Component={IndeterminateExample}/>
+
+### Disabled
+
+The disabled state of a checkbox component is a special state that indicates that the checkbox is not currently available for selection or interaction. When a checkbox is in the disabled state, it appears grayed out and cannot be checked or unchecked by the user.
+
+The disabled state of a checkbox component is often used to prevent users from interacting with the checkbox in certain situations. For example, a checkbox might be disabled if it is not relevant in the current context, or if it is not yet available for selection.
+
+<Example Component={DisabledExample}/>
+
+### Invalid
+
+<Example Component={InvalidExample}/>

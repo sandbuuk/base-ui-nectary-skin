@@ -3,7 +3,7 @@ import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/icons/open-in-new'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
 
 type TMenuValue = {
   text: string,
