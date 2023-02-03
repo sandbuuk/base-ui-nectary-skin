@@ -92,8 +92,6 @@ publish-components:
 
 publish-assets:
   stage: deploy
-  needs:
-    - pages
   rules:
     - if: $CI_COMMIT_TAG =~ /^assets@/
   image: node:16
@@ -123,7 +121,6 @@ pages:
   image: node:16
   rules:
     - if: $CI_COMMIT_TAG =~ /^components@/
-    - if: $CI_COMMIT_TAG =~ /^assets@/
     - if: $CI_COMMIT_TAG == "pages"
   cache:
     key:
