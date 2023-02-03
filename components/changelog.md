@@ -1,3 +1,8 @@
+## v1.0.0 (2023-02-03)
+
+* 💥 extract `@sinch-engage/nectary-assets` package
+* 🐞 fix word break in `sinch-textarea`
+
 ## v0.49.0 (2023-01-25)
 
 * ➕ add `sinch-code-tag` component
