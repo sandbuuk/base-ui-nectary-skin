@@ -1,6 +1,6 @@
 const fs = require('fs/promises')
 
-fs.readdir('./public/temp/versions/')
+fs.readdir('./public/docs/versions/')
   .then((versions) => {
     const versionsImports = versions.map((ver) => {
       const key = ver.replaceAll('.', '')

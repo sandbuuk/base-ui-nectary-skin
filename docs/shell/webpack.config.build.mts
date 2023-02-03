@@ -13,7 +13,7 @@ import type { TransformOptions as TBabelOptions } from '@babel/core'
 import type { Configuration as TWebpackConfig } from 'webpack'
 
 // eslint-disable-next-line node/no-sync
-const versions = fs.readdirSync('../../public/temp/versions/')
+const versions = fs.readdirSync('../../public/docs/versions/')
 
 const remotes = versions.reduce((acc, version) => {
   const key = version.replaceAll('.', '')

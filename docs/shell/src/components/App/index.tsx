@@ -28,8 +28,8 @@ const AppImpl: FC = () => {
             <NavigationList>
               <NavigationGroup text="About">
                 <NavigationList>
-                  <NavigationItem path="/intro" text="👋 Intro"/>
-                  <NavigationItem path="/faq" text="❔ FAQ"/>
+                  <NavigationItem path="/intro" text="Intro"/>
+                  <NavigationItem path="/faq" text="FAQ"/>
                 </NavigationList>
               </NavigationGroup>
               <NavigationGroup text="Components">

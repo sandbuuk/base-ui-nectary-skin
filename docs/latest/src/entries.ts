@@ -11,7 +11,7 @@ export const componentReq = import.meta.webpackContext!('./pages/', {
 })
 
 export const pagesReq = import.meta.webpackContext!('./pages/_/', {
-  regExp: /^\.\/.*\/index.tsx?$/,
+  regExp: /^\.\/\d{2}-.*\/index.tsx?$/,
   recursive: true,
   mode: 'lazy',
   chunkName: REQ_CHUNK_NAME,
@@ -31,7 +31,7 @@ const componentsRoutes = componentReq.keys().map((key) => {
 })
 
 const pagesRoutes = pagesReq.keys().map((key) => {
-  const name = key.replace(/^\.\/\d{2}-(.+?)\/.+$/, '$1')
+  const name = key.replace(/^\.\/\d{2}-(.+?)\/index.tsx?$/, '$1')
   const route = `/components/_/${name.toLowerCase()}`
 
   return {
