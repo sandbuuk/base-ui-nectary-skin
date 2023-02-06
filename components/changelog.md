@@ -14,7 +14,7 @@
 
 ## v0.48.2 (2023-01-19)
 
-🐞 fix text color in disabled `sinch-input` and `sinch-textarea` on WebKit
+* 🐞 fix text color in disabled `sinch-input` and `sinch-textarea` on WebKit
 
 ## v0.48.1 (2023-01-12)
 
