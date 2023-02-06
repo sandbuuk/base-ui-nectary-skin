@@ -5,15 +5,15 @@
 }
 
 #wrapper {
-  border-radius: var(--sinch-shape-radius-l);
-  border: 1px solid var(--sinch-color-snow-700);
-  background-color: var(--sinch-color-snow-100);
-  box-shadow: var(--sinch-elevation-level-0);
+  border-radius: var(--sinch-comp-card-shape-radius);
+  border: 1px solid var(--sinch-comp-card-color-main-default-border-initial);
+  background-color: var(--sinch-comp-card-color-main-default-background-initial);
+  box-shadow: var(--sinch-comp-card-shadow-initial);
   overflow: hidden;
 }
 
 :host(:hover) #wrapper {
-  box-shadow: var(--sinch-elevation-level-1);
+  box-shadow: var(--sinch-comp-card-shadow-hover);
 }
 
 #card-body {
@@ -35,7 +35,8 @@
 }
 
 #label {
-  color: var(--sinch-color-stormy-300);
+  --sinch-comp-text-font: var(--sinch-comp-card-font-label);
+  --sinch-global-color-text: var(--sinch-comp-card-color-main-default-text-title);
 }
 
 #label:empty {
@@ -48,29 +49,39 @@
   align-items: center;
   gap: 8px;
 
-  --sinch-size-icon: 48px;
+  --sinch-global-size-icon: var(--sinch-comp-card-size-icon);
 }
 
 #caption {
-  color: var(--sinch-color-stormy-500);
   flex: 1;
   min-width: 0;
+
+  --sinch-comp-title-font: var(--sinch-comp-card-font-title);
+  --sinch-global-color-text: var(--sinch-comp-card-color-main-default-text-title);
 }
 
 #description {
-  color: var(--sinch-color-stormy-500);
   flex: 1;
   min-height: 0;
   max-height: 120px;
   overflow-y: auto;
+
+  --sinch-comp-text-font: var(--sinch-comp-card-font-description);
+  --sinch-global-color-text: var(--sinch-comp-card-color-main-default-text-description);
 }
 
 #description:empty {
   display: none;
 }
 
-:host([disabled]:not([disabled="false"])) :is(#illustration-wrapper, #description, #header, #label) {
+:host([disabled]) #illustration-wrapper {
   opacity: 0.6;
+}
+
+:host([disabled]) #label,
+:host([disabled]) #caption,
+:host([disabled]) #description {
+  --sinch-global-color-text: var(--sinch-comp-card-color-main-disabled-text-initial);
 }
 
 slot[name="action"]::slotted(*) {

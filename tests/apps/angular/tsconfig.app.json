@@ -7,7 +7,7 @@
     "paths": {
       "@sinch-engage/nectary/*": ["../../../components/*"],
       "@sinch-engage/nectary-assets/*": ["../../../assets/*"],
-      "@sinch-engage/nectary-utils/*": ["../../../utils/*"],
+      "@sinch-engage/nectary-theme-base/*": ["../../../themes/base/*"],
       "tslib": ["node_modules/tslib"]
     }
   },

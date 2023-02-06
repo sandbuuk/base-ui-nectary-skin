@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import '@sinch-engage/nectary/logo/sinch-icon'
+import '@sinch-engage/nectary-assets/logo/sinch-icon'
 import '@sinch-engage/nectary/title'
 import { VersionSelect } from '../VersionSelect'
 import './styles.css'

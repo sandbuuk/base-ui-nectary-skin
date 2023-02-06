@@ -1,0 +1,9 @@
+:root,
+:host {
+  --sinch-comp-dialog-shape-radius: var(--sinch-sys-shape-radius-l);
+  --sinch-comp-dialog-color-default-background-initial: var(--sinch-sys-color-container-main-default);
+  --sinch-comp-dialog-color-default-title-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-dialog-color-default-icon-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-dialog-shadow: var(--sinch-ref-shadow-level-2);
+  --sinch-comp-dialog-font-title: var(--sinch-sys-font-desktop-title-m);
+}

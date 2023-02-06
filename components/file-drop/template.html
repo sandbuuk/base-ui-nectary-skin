@@ -15,14 +15,11 @@
   min-width: 148px;
   box-sizing: border-box;
   padding: 16px;
-  border-radius: var(--sinch-shape-radius-m);
-  background-color: var(--sinch-color-bg-primary-contrast);
+  border-radius: var(--sinch-comp-file-drop-shape-radius);
+  background-color: var(--sinch-comp-file-drop-color-default-background-initial);
 }
 
-#wrapper.drop.valid {
-  background-color: var(--sinch-color-bg-secondary-blue);
-}
-
+/* Border */
 #wrapper::after {
   content: "";
   position: absolute;
@@ -30,18 +27,25 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border: 1px dashed var(--sinch-color-stormy-100);
-  border-radius: var(--sinch-shape-radius-m);
+  border: 1px dashed var(--sinch-comp-file-drop-color-default-border-initial);
+  border-radius: var(--sinch-comp-file-drop-shape-radius);
   pointer-events: none;
 }
 
 #placeholder {
   align-self: center;
   text-align: center;
+
+  --sinch-global-color-text: var(--sinch-comp-file-drop-color-default-placeholder-initial);
+  --sinch-comp-text-font: var(--sinch-comp-file-drop-font-placeholder);
+}
+
+:host([invalid]) #wrapper {
+  background-color: var(--sinch-comp-file-drop-color-invalid-background-initial);
 }
 
 :host([invalid]) #wrapper::after {
-  border-color: var(--sinch-color-text-invalid);
+  border-color: var(--sinch-comp-file-drop-color-invalid-border-initial);
   border-width: 1px;
 }
 
@@ -49,25 +53,29 @@
   pointer-events: all;
 }
 
+#wrapper.drop.valid {
+  background-color: var(--sinch-comp-file-drop-color-default-background-active);
+}
+
 #wrapper.drop.valid::after {
-  border-color: var(--sinch-color-border-focus);
+  border-color: var(--sinch-comp-file-drop-color-default-border-active);
   border-width: 2px;
 }
 
-#wrapper.drop #placeholder {
-  color: var(--sinch-color-text-muted);
+#wrapper.drop.valid > #placeholder {
+  --sinch-global-color-text: var(--sinch-comp-file-drop-color-default-placeholder-active);
 }
 
-:host([disabled]) #wrapper #placeholder {
-  color: var(--sinch-color-stormy-100);
+:host([disabled]) > #wrapper > #placeholder {
+  --sinch-global-color-text: var(--sinch-comp-file-drop-color-disabled-placeholder-initial);
 }
 
-:host([disabled]) #wrapper {
-  background-color: var(--sinch-color-snow-100);
+:host([disabled]) > #wrapper {
+  background-color: var(--sinch-comp-file-drop-color-disabled-background-initial);
 }
 
-:host([disabled]) #wrapper::after {
-  border-color: var(--sinch-color-stormy-100);
+:host([disabled]) > #wrapper::after {
+  border-color: var(--sinch-comp-file-drop-color-disabled-border-initial);
   border-width: 1px;
 }
 </style>

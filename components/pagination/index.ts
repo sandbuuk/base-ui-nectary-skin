@@ -7,7 +7,6 @@ import {
   NectaryElement,
   getRect,
   getReactEventHandler,
-  getCssVars,
   isTargetEqual,
   getTargetIndexInParent,
 } from '../utils'
@@ -28,9 +27,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-pagination', class extends NectaryElement {
   #$left: HTMLButtonElement
-  #$iconLeft: HTMLElement
   #$right: HTMLButtonElement
-  #$iconRight: HTMLElement
   #$buttons: NodeListOf<HTMLButtonElement>
   #$wrapper: Element
 
@@ -42,9 +39,7 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$left = shadowRoot.querySelector('#left')!
-    this.#$iconLeft = shadowRoot.querySelector('#icon-left')!
     this.#$right = shadowRoot.querySelector('#right')!
-    this.#$iconRight = shadowRoot.querySelector('#icon-right')!
     this.#$buttons = shadowRoot.querySelectorAll<HTMLButtonElement>('.page')
     this.#$wrapper = shadowRoot.querySelector('#wrapper')!
   }
@@ -53,8 +48,6 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     this.#onValueChange()
     this.#$wrapper.addEventListener('click', this.#onButtonClick)
     this.addEventListener('-change', this.#onChangeReactHandler)
-
-    this.#updateIcons()
   }
 
   disconnectedCallback() {
@@ -139,30 +132,30 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
   #onButtonClick = (e: Event) => {
     e.stopPropagation()
 
-    const value = getIntegerAttribute(this, 'value', 0) - 1
+    const value = Math.max(getIntegerAttribute(this, 'value', 0) - 1)
     const max = Math.max(0, getIntegerAttribute(this, 'max', 0))
 
     // Left arrow button
     if (isTargetEqual(e, this.#$left)) {
-      return this.#dispatchChangeEvent(value - 1)
+      return this.#dispatchChangeEvent(Math.max(value - 1, 0))
     }
 
     // Right arrow button
     if (isTargetEqual(e, this.#$right)) {
-      return this.#dispatchChangeEvent(value + 1)
+      return this.#dispatchChangeEvent(Math.min(value + 1, max))
     }
 
     const btnIndex = getTargetIndexInParent(e, this.#$wrapper) - 1
 
-    if (btnIndex >= 0 && btnIndex < this.#$buttons.length) {
+    if (btnIndex >= FIRST_BTN_INDEX && btnIndex <= LAST_BTN_INDEX) {
       // First number button
       if (btnIndex === FIRST_BTN_INDEX) {
         return this.#dispatchChangeEvent(0)
       }
 
       // Last number button
-      if (btnIndex === this.#$buttons.length - 1) {
-        return this.#dispatchChangeEvent(max - 1)
+      if (btnIndex === LAST_BTN_INDEX) {
+        return this.#dispatchChangeEvent(max)
       }
 
       // Left dots button
@@ -184,16 +177,6 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     const max = getIntegerAttribute(this, 'max', 0)
 
     return Math.max(0, Math.min(max - 1, value)) + 1
-  }
-
-  #updateIcons() {
-    const [leftName, rightName] = getCssVars(this, [
-      '--sinch-pagination-icon-prev',
-      '--sinch-pagination-icon-next',
-    ])
-
-    updateAttribute(this.#$iconLeft, 'name', leftName)
-    updateAttribute(this.#$iconRight, 'name', rightName)
   }
 
   #dispatchChangeEvent(value: number) {

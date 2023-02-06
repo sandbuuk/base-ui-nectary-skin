@@ -18,19 +18,21 @@
 }
 
 #not-found {
-  display: none;
-  width: 100%;
-  height: 30px;
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 30px;
   margin-bottom: 10px;
-  color: var(--sinch-color-text-muted);
   pointer-events: none;
   user-select: none;
+
+  --sinch-comp-text-font: var(--sinch-comp-select-menu-font-not-found-text);
+  --sinch-global-color-text: var(--sinch-comp-select-menu-color-default-not-found-text-initial);
 }
 
-#not-found.active {
-  display: flex;
+#not-found:not(.active) {
+  display: none;
 }
 
 ::slotted(.hidden) {
@@ -39,7 +41,7 @@
 </style>
 
 <sinch-input id="search" size="s" placeholder="Search">
-  <sinch-icon id="icon-search" slot="icon"></sinch-icon>
+  <sinch-icon id="icon-search" slot="icon" name="search"></sinch-icon>
 </sinch-input>
 <div id="not-found">
   <sinch-text type="m">No results</sinch-text>

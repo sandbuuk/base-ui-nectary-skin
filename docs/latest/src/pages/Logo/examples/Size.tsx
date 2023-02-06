@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/logo/sinch-icon-wordmark'
+import '@sinch-engage/nectary-assets/logo/sinch-icon-wordmark'
 
 export const SizeExample: FC = () => {
   return (

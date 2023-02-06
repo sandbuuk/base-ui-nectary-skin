@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getFirstSlotElement,
+  isAttrTrue,
   NectaryElement,
   setClass,
   updateAttribute,
@@ -45,9 +46,10 @@ defineCustomElement('sinch-field', class extends NectaryElement {
     this.#controller = new AbortController()
 
     const { signal } = this.#controller
+    const options: AddEventListenerOptions = { signal }
 
-    this.#$label.addEventListener('click', this.#onLabelClick, { signal })
-    this.#$tooltipSlot.addEventListener('slotchange', this.#onTooltipSlotChange, { signal })
+    this.#$label.addEventListener('click', this.#onLabelClick, options)
+    this.#$tooltipSlot.addEventListener('slotchange', this.#onTooltipSlotChange, options)
   }
 
   disconnectedCallback() {
@@ -60,7 +62,46 @@ defineCustomElement('sinch-field', class extends NectaryElement {
       'optionaltext',
       'additionaltext',
       'invalidtext',
+      'disabled',
     ]
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'label': {
+        this.#$label.textContent = newVal
+
+        break
+      }
+
+      case 'optionaltext': {
+        this.#$optionalText.textContent = newVal
+
+        break
+      }
+
+      case 'additionaltext': {
+        this.#$additionalText.textContent = newVal
+
+        break
+      }
+
+      case 'invalidtext': {
+        this.#$invalidText.textContent = newVal
+
+        break
+      }
+
+      case 'disabled': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+    }
   }
 
   set label(value: string) {
@@ -101,34 +142,6 @@ defineCustomElement('sinch-field', class extends NectaryElement {
 
   get disabled() {
     return getBooleanAttribute(this, 'disabled')
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'label': {
-        this.#$label.textContent = newVal
-
-        break
-      }
-
-      case 'optionaltext': {
-        this.#$optionalText.textContent = newVal
-
-        break
-      }
-
-      case 'additionaltext': {
-        this.#$additionalText.textContent = newVal
-
-        break
-      }
-
-      case 'invalidtext': {
-        this.#$invalidText.textContent = newVal
-
-        break
-      }
-    }
   }
 
   #onLabelClick = () => {

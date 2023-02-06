@@ -6,12 +6,13 @@
     @--show="onTooltipShow"
     @--hide="onTooltipHide"
   >
-    <span id="content">Some content</span>
+    <sinch-text id="content" type="m">Some content</sinch-text>
   </sinch-tooltip>
 </template>
 
 <script>
 import '@sinch-engage/nectary/tooltip'
+import '@sinch-engage/nectary/text'
 
 export default {
   props: {

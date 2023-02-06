@@ -12,7 +12,7 @@ const withMarkdownAndButtonAndCloseExpanded = '/alert?width=500&example=md&type=
 const withTextAndButtonAndCloseNarrow = '/alert?width=300&type=info&action=true&close=true'
 const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&type=info&close=true&action=true&multiline=true`, 'sinch-alert')
 
-test('accessibility', checkMultilineTextTitleButtonClose({
+test('alert accessibility', checkMultilineTextTitleButtonClose({
   async *fn() {
     yield
   },
@@ -99,6 +99,9 @@ test('alert screenshots', runScreenshotTests('sinch-alert', [
       yield { name: 'shot' }
     },
   },
+]))
+
+test('alert events', runScreenshotTests('sinch-alert', [
   {
     name: 'custom events',
     url: withTextAndButtonAndClose,

@@ -11,53 +11,49 @@
 
 :host {
   display: block;
-
-  --sinch-size-icon: var(--sinch-spinner-size-m);
-  --sinch-spinner-thickness: 3px;
 }
 
-:host([data-size="l"]) {
-  --sinch-size-icon: var(--sinch-spinner-size-l);
-  --sinch-spinner-thickness: 4px;
-}
-
-:host([data-size="m"]) {
-  --sinch-size-icon: var(--sinch-spinner-size-m);
-  --sinch-spinner-thickness: 3px;
-}
-
-:host([data-size="s"]) {
-  --sinch-size-icon: var(--sinch-spinner-size-s);
-  --sinch-spinner-thickness: 2px;
-}
-
-#wrapper {
-  position: relative;
-  height: var(--sinch-size-icon);
-  width: var(--sinch-size-icon);
-}
-
-#bg {
-  position: absolute;
-  inset: 1px;
-  border: solid var(--sinch-spinner-thickness) var(--sinch-color-icon);
-  border-radius: 50%;
-  opacity: 0.3;
-}
-
-#fg {
-  position: absolute;
-  inset: 1px;
-  border: solid var(--sinch-spinner-thickness) transparent;
-  border-bottom-color: var(--sinch-color-icon);
-  border-radius: 50%;
+#spinner-size-l,
+#spinner-size-m,
+#spinner-size-s {
+  display: none;
   will-change: transform;
-  animation: 1.5s linear infinite spinner;
-  animation-play-state: running;
+}
+
+:host([data-size="l"]) > #spinner-size-l {
+  display: block;
+  animation: 1s linear infinite spinner;
+}
+
+:host([data-size="m"]) > #spinner-size-m {
+  display: block;
+  animation: 1s linear infinite spinner;
+}
+
+:host([data-size="s"]) > #spinner-size-s {
+  display: block;
+  animation: 1s linear infinite spinner;
+}
+
+.bg {
+  opacity: 0.3;
+  stroke: var(--sinch-global-color-icon, var(--sinch-sys-color-text-default));
+}
+
+.fg {
+  stroke: var(--sinch-global-color-icon, var(--sinch-sys-color-text-default));
 }
 </style>
 
-<div id="wrapper">
-  <div id="bg"></div>
-  <div id="fg"></div>
-</div>
+<svg id="spinner-size-l" width="50" height="50" fill="none">
+  <circle class="bg" cx="25" cy="25" r="22" stroke-width="6"/>
+  <path class="fg" d="M25 3a22 22 0 0 1 22 22" stroke-width="6" stroke-linecap="round"/>
+</svg>
+<svg id="spinner-size-m" width="24" height="24" fill="none">
+  <circle class="bg" cx="12" cy="12" r="9" stroke-width="4"/>
+  <path class="fg" d="M21 12a9 9 0 0 0-9-9" stroke-width="4" stroke-linecap="round"/>
+</svg>
+<svg id="spinner-size-s" width="16" height="16" fill="none">
+  <circle class="bg" cx="8" cy="8" r="6" stroke-width="2"/>
+  <path class="fg" d="M14 8a6 6 0 0 0-6-6" stroke-width="2" stroke-linecap="round"/>
+</svg>

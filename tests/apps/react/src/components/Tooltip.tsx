@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/tooltip'
 
 type TTooltip = {
@@ -21,7 +22,7 @@ export const Tooltip: FC<TTooltip> = ({ search }) => {
       on-show={onTooltipShow}
       on-hide={onTooltipHide}
     >
-      <span id="content">Some content</span>
+      <sinch-text id="content" type="m">Some content</sinch-text>
     </sinch-tooltip>
   )
 }

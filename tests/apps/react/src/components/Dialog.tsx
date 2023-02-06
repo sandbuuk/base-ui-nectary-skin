@@ -1,6 +1,7 @@
 import type { TSinchDialogCloseDetail } from '@sinch-engage/nectary/dialog/types'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/dialog'
+import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/button'
 
 type TDialog = {
@@ -23,7 +24,7 @@ export const Dialog: FC<TDialog> = ({ search }) => {
       close-aria-label="Close dialog"
       on-close={onClose}
     >
-      {content !== null && <section slot="content">{content}</section>}
+      {content !== null && <sinch-text slot="content" type="m">{content}</sinch-text>}
       {buttons && (
         <>
           <sinch-button text="Cancel" aria-label="Cancel" type="secondary" slot="buttons" onClick={() => {}}/>

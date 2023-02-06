@@ -1,0 +1,6 @@
+:root,
+:host {
+  --sinch-comp-progress-color-default-background-initial: var(--sinch-ref-color-main-tropical-100);
+  --sinch-comp-progress-color-default-bar-initial: var(--sinch-sys-color-primary-default);
+  --sinch-comp-progress-color-default-text-initial: var(--sinch-sys-color-text-default);
+}

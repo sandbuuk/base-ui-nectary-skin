@@ -168,7 +168,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
           assertOrientation(newVal)
         }
 
-        if (this.#isOpen()) {
+        if (this.#$dialog.open) {
           this.#updateOrientation()
         }
 
@@ -180,7 +180,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #getTargetRect(): TRect {
     let item = getFirstSlotElement(this.#$targetSlot, true)
 
-    if (item === null && this.#isOpen()) {
+    if (item === null && this.#$dialog.open) {
       item = getFirstSlotElement(this.#$targetOpenSlot, true)
     }
 
@@ -206,19 +206,23 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #onExpand() {
-    if (!this.isConnected || this.#isOpen()) {
+    if (!this.isConnected || this.#$dialog.open) {
       return
     }
 
     // When opening dialog in modal mode Firefox does not emit "blur" event on the active element
     // But focuses element back after closing modal, and emits "focus" event
     // Supress "blur" event on target element
-    this.#$targetSlot.addEventListener('blur', this.#captureActiveElement, true)
+    this.#$targetSlot.addEventListener('blur', this.#stopEventPropagation, true)
     this.#$focus.setAttribute('tabindex', '-1')
     this.#$focus.style.display = 'block'
+    // Capture using related target
+    // Tooltip can open dialog with outside focused element
+    this.#$focus.addEventListener('focus', this.#captureRelatedActiveElement)
     // Focus our target explicitly to capture previous active element
     this.#$focus.focus()
-    this.#$targetSlot.removeEventListener('blur', this.#captureActiveElement, true)
+    this.#$focus.removeEventListener('focus', this.#captureRelatedActiveElement)
+    this.#$targetSlot.removeEventListener('blur', this.#stopEventPropagation, true)
     // Remove tabindex, because Safari freezes the UI, after closing Pop
     //   when Pop is in target slot of another Pop
     this.#$focus.removeAttribute('tabindex')
@@ -272,7 +276,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
         // Safari requires to delay focus() call
         if (!isElementFocused(this.#targetActiveElement)) {
           requestAnimationFrame(() => {
-            if (this.isConnected && this.#isOpen()) {
+            if (this.isConnected && this.#$dialog.open) {
               this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
               this.#targetActiveElement!.focus()
               this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
@@ -288,7 +292,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     // Subscribe after delay to not get immediate callbacks
     requestAnimationFrame(() => {
-      if (this.isConnected && this.#isOpen()) {
+      if (this.isConnected && this.#$dialog.open) {
         this.#$contentSlot.addEventListener('slotchange', this.#onContentSlotChange)
       }
     })
@@ -298,7 +302,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #onCollapse() {
-    if (!this.#isOpen()) {
+    if (!this.#$dialog.open) {
       return
     }
 
@@ -357,7 +361,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
           const $targetEl = this.#targetActiveElement
 
           requestAnimationFrame(() => {
-            if (this.isConnected && !this.#isOpen()) {
+            if (this.isConnected && !this.#$dialog.open) {
               this.#$targetSlot.addEventListener('focus', this.#stopEventPropagation, true)
               $targetEl.focus()
               this.#$targetSlot.removeEventListener('focus', this.#stopEventPropagation, true)
@@ -374,10 +378,6 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     this.#resizeThrottle.cancel()
     window.removeEventListener('resize', this.#onResize)
     this.#$contentSlot.removeEventListener('slotchange', this.#onContentSlotChange)
-  }
-
-  #isOpen() {
-    return getBooleanAttribute(this.#$dialog, 'open')
   }
 
   #onResize = () => {
@@ -473,6 +473,11 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     )
   }
 
+  #captureRelatedActiveElement = (e: FocusEvent) => {
+    e.stopPropagation()
+    this.#targetActiveElement = e.relatedTarget as HTMLElement
+  }
+
   #captureActiveElement = (e: FocusEvent) => {
     e.stopPropagation()
     this.#targetActiveElement = e.target as HTMLElement
@@ -504,7 +509,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #onContentSlotChange = (e: Event) => {
     e.stopPropagation()
 
-    if (this.#isOpen()) {
+    if (this.#$dialog.open) {
       this.#updateOrientation()
     }
   }

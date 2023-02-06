@@ -6,8 +6,6 @@ import { runScreenshotTests } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 import type { TSinchBadgeElement } from '@sinch-engage/nectary/badge/types'
 
-const colorValues = ['', 'black', 'yellow', 'red', 'green', 'gray']
-
 const shot = '/badge?size=l&text=8'
 const check = makeAccessibilityTests('/badge', 'sinch-badge')
 
@@ -39,27 +37,6 @@ test('badge screenshots', runScreenshotTests('sinch-badge', [
       })
 
       expect(attrValue).toBe('l')
-    },
-  },
-  {
-    name: 'color',
-    url: shot,
-    async *fn({ $eval, page }) {
-      for (const val of colorValues) {
-        await $eval((el, val) => {
-          el.setAttribute('color', val)
-        }, val)
-        yield { name: val === '' ? 'default' : val, includeRects: [await getBadgeRect(page)] }
-      }
-
-      /* Property */
-      const attrValue = await $eval((el) => {
-        el.color = 'yellow'
-
-        return el.getAttribute('color')
-      })
-
-      expect(attrValue).toBe('yellow')
     },
   },
   {

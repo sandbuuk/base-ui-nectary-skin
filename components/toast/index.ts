@@ -11,7 +11,6 @@ import {
   getReactEventHandler,
   getBooleanAttribute,
   updateBooleanAttribute,
-  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertType, typeValues } from './utils'
@@ -23,7 +22,6 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-toast', class extends NectaryElement {
-  #$icon: HTMLElement
   #$text: HTMLElement
   #tid: number | null = null
 
@@ -35,7 +33,6 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$text = shadowRoot.querySelector('#text')!
-    this.#$icon = shadowRoot.querySelector('#icon')!
   }
 
   connectedCallback() {
@@ -45,13 +42,44 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
     this.addEventListener('-timeout', this.#onTimeoutReactHandler)
 
     this.#updateTimeout()
-    this.#updateIcon()
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
     this.removeEventListener('-timeout', this.#onTimeoutReactHandler)
     this.#clearTimeout()
+  }
+
+  static get observedAttributes() {
+    return ['text', 'type', 'persistent']
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'type': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
+
+        break
+      }
+
+      case 'text': {
+        this.#$text.textContent = newVal
+
+        break
+      }
+
+      case 'persistent': {
+        this.#updateTimeout()
+
+        break
+      }
+    }
   }
 
   get type() {
@@ -78,40 +106,6 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
     updateBooleanAttribute(this, 'persistent', isPersistent)
   }
 
-  static get observedAttributes() {
-    return ['text', 'type', 'persistent']
-  }
-
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
-    switch (name) {
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        this.#updateIcon()
-
-        break
-      }
-
-      case 'text': {
-        this.#$text.textContent = newVal
-
-        break
-      }
-
-      case 'persistent': {
-        this.#updateTimeout()
-
-        break
-      }
-    }
-  }
-
   #updateTimeout() {
     if (this.persistent) {
       this.#clearTimeout()
@@ -122,14 +116,6 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
     if (this.#tid === null) {
       this.#tid = window.setTimeout(this.#onTimeout, TIMEOUT)
     }
-  }
-
-  #updateIcon() {
-    if (!this.isConnected) {
-      return
-    }
-
-    updateAttribute(this.#$icon, 'name', getCssVar(this, `--sinch-toast-icon-${this.type}`))
   }
 
   #onTimeout = () => {

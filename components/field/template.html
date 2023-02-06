@@ -19,8 +19,6 @@
 #top {
   height: 24px;
   margin-bottom: 2px;
-
-  --sinch-color-icon: var(--sinch-color-stormy-500);
 }
 
 #label,
@@ -33,22 +31,22 @@
 }
 
 #label {
-  font: var(--sinch-font-title-s);
-  color: var(--sinch-color-text-default);
+  font: var(--sinch-comp-field-font-label);
+  color: var(--sinch-comp-field-color-default-label-initial);
 }
 
 #optional {
   flex: 1;
+  font: var(--sinch-comp-field-font-optional);
+  color: var(--sinch-comp-field-color-default-optional-initial);
   text-align: right;
-  font: var(--sinch-font-text-s);
-  color: var(--sinch-color-text-muted);
 }
 
 #additional {
   flex: 1;
   text-align: right;
-  font: var(--sinch-font-text-xs);
-  color: var(--sinch-color-text-muted);
+  font: var(--sinch-comp-field-font-additional);
+  color: var(--sinch-comp-field-color-default-additional-initial);
   line-height: 20px;
   margin-top: 2px;
 }
@@ -58,8 +56,8 @@
 }
 
 #invalid {
-  font: var(--sinch-font-text-xs);
-  color: var(--sinch-color-text-invalid);
+  font: var(--sinch-comp-field-font-invalid);
+  color: var(--sinch-comp-field-color-invalid-text-initial);
   line-height: 20px;
   margin-top: 2px;
 }
@@ -78,13 +76,16 @@
   display: none;
 }
 
-:host([disabled]:not([disabled="false"])) :is(#label, #additional, #optional, #invalid) {
-  color: var(--sinch-color-stormy-100);
+:host([disabled]) #label {
+  color: var(--sinch-comp-field-color-disabled-label-initial);
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-:host([disabled]:not([disabled="false"])) #top {
-  --sinch-color-icon: var(--sinch-color-stormy-100);
+:host([disabled]) #additional {
+  color: var(--sinch-comp-field-color-disabled-additional-initial);
+}
+
+:host([disabled]) #optional {
+  color: var(--sinch-comp-field-color-disabled-optional-initial);
 }
 </style>
 

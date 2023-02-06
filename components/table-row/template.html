@@ -1,13 +1,22 @@
 <style>
 :host {
   display: table-row;
+  background-color: var(--sinch-comp-table-color-row-default-background-initial);
+}
+
+:host([selected]) {
+  background-color: var(--sinch-comp-table-color-row-checked-background-initial);
+}
+
+:host(:hover) {
+  background-color: var(--sinch-comp-table-color-row-default-background-hover);
 }
 
 :host([sticky]) ::slotted(sinch-table-head-cell) {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: var(--sinch-color-snow-100);
+  background-color: var(--sinch-comp-table-color-row-default-background-sticky);
 }
 </style>
 

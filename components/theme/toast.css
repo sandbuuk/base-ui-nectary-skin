@@ -1,7 +1,0 @@
-:root,
-:host {
-  --sinch-toast-icon-info: info;
-  --sinch-toast-icon-success: check_circle;
-  --sinch-toast-icon-warn: report_problem;
-  --sinch-toast-icon-error: report;
-}

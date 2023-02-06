@@ -19,7 +19,7 @@
 .option {
   padding: 12px 6px;
 
-  --sinch-color-icon: var(--sinch-color-stormy-500);
+  --sinch-global-color-icon: var(--sinch-color-menu-color-icon);
 }
 
 .swatch-wrapper {
@@ -41,7 +41,7 @@
 }
 
 .option[data-selected]:not([data-checked]) .swatch-wrapper::after {
-  border-color: var(--sinch-color-border-focus);
+  border-color: var(--sinch-comp-color-swatch-color-outline-focus);
 }
 
 .check {
@@ -51,7 +51,7 @@
   top: 4px;
   pointer-events: none;
 
-  --sinch-size-icon: 24px;
+  --sinch-global-size-icon: 24px;
 }
 
 .option[data-checked] .check {

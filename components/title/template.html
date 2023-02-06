@@ -1,33 +1,37 @@
 <style>
 :host {
   display: block;
+
+  --sinch-comp-title-font: var(--sinch-sys-font-desktop-title-m);
+}
+
+:host([type="xl"]) {
+  --sinch-comp-title-font: var(--sinch-sys-font-desktop-title-xl);
+}
+
+:host([type="l"]) {
+  --sinch-comp-title-font: var(--sinch-sys-font-desktop-title-l);
+}
+
+:host([type="m"]) {
+  --sinch-comp-title-font: var(--sinch-sys-font-desktop-title-m);
+}
+
+:host([type="s"]) {
+  --sinch-comp-title-font: var(--sinch-sys-font-desktop-title-s);
+}
+
+:host([type="xs"]) {
+  --sinch-comp-title-font: var(--sinch-sys-font-desktop-title-xs);
 }
 
 #text {
   letter-spacing: -2%;
+  color: var(--sinch-global-color-text, var(--sinch-sys-color-text-default));
+  font: var(--sinch-comp-title-font);
 }
 
-:host([type="xl"]) #text {
-  font: var(--sinch-font-title-xl);
-}
-
-:host([type="l"]) #text {
-  font: var(--sinch-font-title-l);
-}
-
-:host([type="m"]) #text {
-  font: var(--sinch-font-title-m);
-}
-
-:host([type="s"]) #text {
-  font: var(--sinch-font-title-s);
-}
-
-:host([type="xs"]) #text {
-  font: var(--sinch-font-title-xs);
-}
-
-:host([ellipsis]:not([ellipsis="false"])) #text {
+:host([ellipsis]) #text {
   display: block;
   overflow: hidden;
   white-space: nowrap;

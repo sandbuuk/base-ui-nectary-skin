@@ -326,7 +326,7 @@ export const offsetRect = (rect: TRect, pos: TPosition): TRect => ({
 
 export const centerRect = (rect: TRect | null): TPosition => {
   if (rect === null || rect.width === 0 || rect.height === 0) {
-    throw new Error('Null rect received')
+    throw new Error('Received NULL rect')
   }
 
   return {

@@ -10,54 +10,66 @@
   height: 32px;
   padding: 3px 16px;
   box-sizing: border-box;
-  border: 1px solid var(--sinch-color-snow-600);
-  border-left-width: 0;
-  border-right-width: 0;
-  color: var(--sinch-color-stormy-500);
-  background-color: var(--sinch-color-snow-100);
+  background-color: var(--sinch-local-color-background);
 
-  --sinch-color-icon: var(--sinch-color-stormy-500);
-  --sinch-size-icon: 24px;
+  --sinch-global-color-icon: var(--sinch-comp-segmented-control-color-default-icon-initial);
+  --sinch-global-size-icon: var(--sinch-comp-segmented-control-size-icon);
+  --sinch-local-shape-radius: var(--sinch-comp-segmented-control-shape-radius);
+  --sinch-local-color-border: var(--sinch-comp-segmented-control-color-default-border-initial);
+  --sinch-local-color-background: var(--sinch-comp-segmented-control-color-default-background-initial);
 }
 
 #wrapper:hover {
-  background-color: var(--sinch-color-snow-400);
+  --sinch-local-color-background: var(--sinch-comp-segmented-control-color-default-background-hover);
 }
 
 :host(:first-child) #wrapper {
-  border-left-width: 1px;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: var(--sinch-local-shape-radius);
+  border-bottom-left-radius: var(--sinch-local-shape-radius);
 }
 
 :host(:last-child) #wrapper {
-  border-right-width: 1px;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: var(--sinch-local-shape-radius);
+  border-bottom-right-radius: var(--sinch-local-shape-radius);
 }
 
 :host([data-checked]) #wrapper {
-  border-color: var(--sinch-color-stormy-500);
+  --sinch-global-color-icon: var(--sinch-comp-segmented-control-color-checked-icon-initial);
+  --sinch-local-color-border: var(--sinch-comp-segmented-control-color-checked-border-initial);
+  --sinch-local-color-background: var(--sinch-comp-segmented-control-color-checked-background-initial);
 }
 
-:host([data-checked]:not(:first-child)) #wrapper::before {
-  content: "";
-  width: 1px;
-  background-color: var(--sinch-color-stormy-500);
+#border {
   position: absolute;
+  inset: 0;
+  border: 1px solid var(--sinch-local-color-border);
+  border-right-width: 0;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+:host(:first-child) #border {
+  border-top-left-radius: var(--sinch-local-shape-radius);
+  border-bottom-left-radius: var(--sinch-local-shape-radius);
+}
+
+:host(:last-child) #border {
+  border-right-width: 1px;
+  border-top-right-radius: var(--sinch-local-shape-radius);
+  border-bottom-right-radius: var(--sinch-local-shape-radius);
+}
+
+:host(:not(:first-child)) #border {
   left: -1px;
-  top: -1px;
-  bottom: -1px;
 }
 
-:host([data-checked]:not(:last-child)) #wrapper::after {
-  content: "";
-  width: 1px;
-  background-color: var(--sinch-color-stormy-500);
-  position: absolute;
-  right: 0;
-  top: -1px;
-  bottom: -1px;
+:host(:not(:last-child)) #border {
+  right: -1px;
+}
+
+:host([data-checked]) #border {
+  border-width: 2px;
+  z-index: 1;
 }
 
 #button {
@@ -76,39 +88,27 @@
   cursor: unset;
 }
 
-#button:focus::before {
+#button:focus-visible::before {
   content: "";
   position: absolute;
-  left: -4px;
-  right: -3px;
-  top: -4px;
-  bottom: -4px;
-  border-style: solid;
-  border-color: var(--sinch-color-border-focus);
-  border-width: 0;
+  inset: -4px;
+  border: 2px solid var(--sinch-comp-segmented-control-color-default-outline-focus);
 }
 
-#button:focus-visible::before {
-  border-width: 2px;
+:host(:first-child) #button:focus-visible::before {
+  border-top-left-radius: calc(var(--sinch-local-shape-radius) + 3px);
+  border-bottom-left-radius: calc(var(--sinch-local-shape-radius) + 3px);
 }
 
-:host(:first-child) #button:focus::before {
-  left: -4px;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
+:host(:last-child) #button:focus-visible::before {
+  border-top-right-radius: calc(var(--sinch-local-shape-radius) + 3px);
+  border-bottom-right-radius: calc(var(--sinch-local-shape-radius) + 3px);
 }
 
-:host(:last-child) #button:focus::before {
-  right: -4px;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-}
-
-:host([disabled]:not([disabled="false"])) #wrapper {
-  background-color: var(--sinch-color-snow-100);
-  color: var(--sinch-color-stormy-100);
-
-  --sinch-color-icon: var(--sinch-color-stormy-100);
+:host([disabled]) #wrapper {
+  --sinch-global-color-icon: var(--sinch-comp-segmented-control-color-disabled-icon-initial);
+  --sinch-local-color-border: var(--sinch-comp-segmented-control-color-disabled-border-initial);
+  --sinch-local-color-background: var(--sinch-comp-segmented-control-color-disabled-background-initial);
 }
 
 ::slotted(*) {
@@ -118,5 +118,6 @@
 
 <div id="wrapper">
   <slot name="icon"></slot>
+  <div id="border"></div>
   <button id="button"></button>
 </div>

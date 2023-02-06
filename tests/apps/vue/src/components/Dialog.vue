@@ -1,6 +1,6 @@
 <template>
   <sinch-dialog open :caption="title" @--close="onClose">
-    <section v-if="content !== null" slot="content">{{content}}</section>
+    <sinch-text v-if="content !== null" slot="content" type="m">{{content}}</sinch-text>
     <sinch-button v-if="buttons" text="Cancel" type="secondary" slot="buttons"></sinch-button>
     <sinch-button v-if="buttons" text="Ok" type="primary" slot="buttons"></sinch-button>
   </sinch-dialog>
@@ -8,6 +8,7 @@
 <script>
 import '@sinch-engage/nectary/dialog'
 import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/text'
 
 export default {
   props: {

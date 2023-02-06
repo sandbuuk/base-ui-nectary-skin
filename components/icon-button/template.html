@@ -1,154 +1,164 @@
 <style>
+/* stylelint-disable no-descending-specificity */
 :host {
   display: inline-block;
   vertical-align: middle;
   outline: none;
-
-  --sinch-size: var(--sinch-size-m);
-  --sinch-size-icon: var(--sinch-icon-button-icon-size-m);
-  --sinch-shape-radius: var(--sinch-shape-radius-m);
 }
 
 #button {
   all: initial;
+  display: block;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--sinch-size);
-  height: var(--sinch-size);
+  width: var(--sinch-local-size);
+  height: var(--sinch-local-size);
   cursor: pointer;
   contain: size;
 
-  --sinch-color-icon: var(--sinch-icon-button-color-icon);
-}
-
-:host([data-size="l"]) {
-  --sinch-size: var(--sinch-size-l);
-  --sinch-size-icon: var(--sinch-icon-button-icon-size-l);
-  --sinch-shape-radius: var(--sinch-shape-radius-l);
-}
-
-:host([data-size="m"]) {
-  --sinch-size: var(--sinch-size-m);
-  --sinch-size-icon: var(--sinch-icon-button-icon-size-m);
-  --sinch-shape-radius: var(--sinch-shape-radius-m);
-}
-
-:host([data-size="s"]) {
-  --sinch-size: var(--sinch-size-s);
-  --sinch-size-icon: var(--sinch-icon-button-icon-size-s);
-  --sinch-shape-radius: var(--sinch-shape-radius-s);
-}
-
-:host([data-size="xs"]) {
-  --sinch-size: var(--sinch-size-xs);
-  --sinch-size-icon: var(--sinch-icon-button-icon-size-xs);
-  --sinch-shape-radius: var(--sinch-shape-radius-xs);
-}
-
-:host([type="primary"]) {
-  --sinch-icon-button-color-background: var(--sinch-icon-button-primary-color-background);
-  --sinch-icon-button-color-background-hover: var(--sinch-icon-button-primary-color-background-hover);
-  --sinch-icon-button-color-background-active: var(--sinch-icon-button-primary-color-background-active);
-  --sinch-icon-button-color-background-disabled: var(--sinch-icon-button-primary-color-background-disabled);
-  --sinch-icon-button-color-border: var(--sinch-icon-button-primary-color-border);
-  --sinch-icon-button-color-border-hover: var(--sinch-icon-button-primary-color-border-hover);
-  --sinch-icon-button-color-border-active: var(--sinch-icon-button-primary-color-border-active);
-  --sinch-icon-button-color-border-disabled: var(--sinch-icon-button-primary-color-border-disabled);
-  --sinch-icon-button-color-icon: var(--sinch-icon-button-primary-color-icon);
-  --sinch-icon-button-color-icon-hover: var(--sinch-icon-button-primary-color-icon-hover);
-  --sinch-icon-button-color-icon-active: var(--sinch-icon-button-primary-color-icon-active);
-  --sinch-icon-button-color-icon-disabled: var(--sinch-icon-button-primary-color-icon-disabled);
-  --sinch-icon-button-mix-blend-mode: var(--sinch-icon-button-primary-mix-blend-mode);
-  --sinch-elevation-level: var(--sinch-elevation-level-1);
-}
-
-:host([type="secondary"]) {
-  --sinch-icon-button-color-background: var(--sinch-icon-button-secondary-color-background);
-  --sinch-icon-button-color-background-hover: var(--sinch-icon-button-secondary-color-background-hover);
-  --sinch-icon-button-color-background-active: var(--sinch-icon-button-secondary-color-background-active);
-  --sinch-icon-button-color-background-disabled: var(--sinch-icon-button-secondary-color-background-disabled);
-  --sinch-icon-button-color-border: var(--sinch-icon-button-secondary-color-border);
-  --sinch-icon-button-color-border-hover: var(--sinch-icon-button-secondary-color-border-hover);
-  --sinch-icon-button-color-border-active: var(--sinch-icon-button-secondary-color-border-active);
-  --sinch-icon-button-color-border-disabled: var(--sinch-icon-button-secondary-color-border-disabled);
-  --sinch-icon-button-color-icon: var(--sinch-icon-button-secondary-color-icon);
-  --sinch-icon-button-color-icon-hover: var(--sinch-icon-button-secondary-color-icon-hover);
-  --sinch-icon-button-color-icon-active: var(--sinch-icon-button-secondary-color-icon-active);
-  --sinch-icon-button-color-icon-disabled: var(--sinch-icon-button-secondary-color-icon-disabled);
-  --sinch-icon-button-mix-blend-mode: var(--sinch-icon-button-secondary-mix-blend-mode);
-  --sinch-elevation-level: var(--sinch-elevation-level-1);
-}
-
-:host([type="tertiary"]) {
-  --sinch-icon-button-color-background: var(--sinch-icon-button-tertiary-color-background);
-  --sinch-icon-button-color-background-hover: var(--sinch-icon-button-tertiary-color-background-hover);
-  --sinch-icon-button-color-background-active: var(--sinch-icon-button-tertiary-color-background-active);
-  --sinch-icon-button-color-background-disabled: var(--sinch-icon-button-tertiary-color-background-disabled);
-  --sinch-icon-button-color-border: var(--sinch-icon-button-tertiary-color-border);
-  --sinch-icon-button-color-border-hover: var(--sinch-icon-button-tertiary-color-border-hover);
-  --sinch-icon-button-color-border-active: var(--sinch-icon-button-tertiary-color-border-active);
-  --sinch-icon-button-color-border-disabled: var(--sinch-icon-button-tertiary-color-border-disabled);
-  --sinch-icon-button-color-icon: var(--sinch-icon-button-tertiary-color-icon);
-  --sinch-icon-button-color-icon-hover: var(--sinch-icon-button-tertiary-color-icon-hover);
-  --sinch-icon-button-color-icon-active: var(--sinch-icon-button-tertiary-color-icon-active);
-  --sinch-icon-button-color-icon-disabled: var(--sinch-icon-button-tertiary-color-icon-disabled);
-  --sinch-icon-button-mix-blend-mode: var(--sinch-icon-button-tertiary-mix-blend-mode);
-  --sinch-elevation-level: var(--sinch-elevation-level-0);
-}
-
-/* Border */
-#button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: var(--sinch-shape-radius);
-  border: 1px solid var(--sinch-icon-button-color-border);
-  background-color: var(--sinch-icon-button-color-background);
-  box-shadow: var(--sinch-elevation-level);
-  pointer-events: none;
-  mix-blend-mode: var(--sinch-icon-button-mix-blend-mode);
-}
-
-#button:focus-visible::after {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border: 2px solid var(--sinch-color-border-focus);
-  border-radius: calc(var(--sinch-shape-radius) + 3px);
-  pointer-events: none;
+  --sinch-global-color-icon: var(--sinch-local-color-icon);
 }
 
 #button:disabled {
   cursor: initial;
-
-  --sinch-color-icon: var(--sinch-icon-button-color-icon-disabled);
 }
 
-#button:disabled::before {
-  background-color: var(--sinch-icon-button-color-background-disabled);
-  border-color: var(--sinch-icon-button-color-border-disabled);
-  box-shadow: var(--sinch-elevation-level-0);
+:host([data-size="l"]) #button {
+  --sinch-local-size: var(--sinch-comp-icon-button-size-container-l);
+  --sinch-global-size-icon: var(--sinch-comp-icon-button-size-icon-l);
+  --sinch-local-shape-radius: var(--sinch-comp-icon-button-shape-radius-size-l);
 }
 
-#button:enabled:hover {
-  --sinch-color-icon: var(--sinch-icon-button-color-icon-hover);
+#button,
+:host([data-size="m"]) #button {
+  --sinch-local-size: var(--sinch-comp-icon-button-size-container-m);
+  --sinch-global-size-icon: var(--sinch-comp-icon-button-size-icon-m);
+  --sinch-local-shape-radius: var(--sinch-comp-icon-button-shape-radius-size-m);
 }
 
-#button:enabled:hover::before {
-  background-color: var(--sinch-icon-button-color-background-hover);
-  border-color: var(--sinch-icon-button-color-border-hover);
+:host([data-size="s"]) #button {
+  --sinch-local-size: var(--sinch-comp-icon-button-size-container-s);
+  --sinch-global-size-icon: var(--sinch-comp-icon-button-size-icon-s);
+  --sinch-local-shape-radius: var(--sinch-comp-icon-button-shape-radius-size-s);
 }
 
-#button:enabled:active {
-  --sinch-color-icon: var(--sinch-icon-button-color-icon-active);
+:host([data-size="xs"]) #button {
+  --sinch-local-size: var(--sinch-comp-icon-button-size-container-xs);
+  --sinch-global-size-icon: var(--sinch-comp-icon-button-size-icon-xs);
+  --sinch-local-shape-radius: var(--sinch-comp-icon-button-shape-radius-size-xs);
 }
 
-#button:enabled:active::before {
-  background-color: var(--sinch-icon-button-color-background-active);
-  border-color: var(--sinch-icon-button-color-border-active);
-  box-shadow: var(--sinch-elevation-level-0);
+:host([type="primary"]) #button {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-primary-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-icon-button-color-primary-default-border-initial);
+  --sinch-local-color-icon: var(--sinch-comp-icon-button-color-primary-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-primary-initial);
+  --sinch-local-color-outline: var(--sinch-comp-icon-button-color-primary-default-outline-focus);
+}
+
+:host([type="secondary"]) #button {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-secondary-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-icon-button-color-secondary-default-border-initial);
+  --sinch-local-color-icon: var(--sinch-comp-icon-button-color-secondary-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-secondary-initial);
+  --sinch-local-color-outline: var(--sinch-comp-icon-button-color-secondary-default-outline-focus);
+}
+
+#button,
+:host([type="tertiary"]) #button {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-tertiary-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-icon-button-color-tertiary-default-border-initial);
+  --sinch-local-color-icon: var(--sinch-comp-icon-button-color-tertiary-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-tertiary-initial);
+  --sinch-local-color-outline: var(--sinch-comp-icon-button-color-tertiary-default-outline-focus);
+}
+
+:host([type="primary"]) #button:disabled {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-primary-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-icon-button-color-primary-disabled-border-initial);
+  --sinch-local-color-icon: var(--sinch-comp-icon-button-color-primary-disabled-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-primary-disabled);
+}
+
+:host([type="secondary"]) #button:disabled {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-secondary-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-icon-button-color-secondary-disabled-border-initial);
+  --sinch-local-color-icon: var(--sinch-comp-icon-button-color-secondary-disabled-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-secondary-disabled);
+}
+
+#button:disabled,
+:host([type="tertiary"]) #button:disabled {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-tertiary-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-icon-button-color-tertiary-disabled-border-initial);
+  --sinch-local-color-icon: var(--sinch-comp-icon-button-color-tertiary-disabled-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-tertiary-disabled);
+}
+
+:host([type="primary"]) #button:focus {
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-primary-focus);
+}
+
+:host([type="secondary"]) #button:focus {
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-secondary-focus);
+}
+
+#button:focus,
+:host([type="tertiary"]) #button:focus {
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-tertiary-focus);
+}
+
+:host([type="primary"]) #button:enabled:hover {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-primary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-primary-hover);
+}
+
+:host([type="secondary"]) #button:enabled:hover {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-secondary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-secondary-hover);
+}
+
+#button:enabled:hover,
+:host([type="tertiary"]) #button:enabled:hover {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-tertiary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-tertiary-hover);
+}
+
+:host([type="primary"]) #button:enabled:active {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-primary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-primary-active);
+}
+
+:host([type="secondary"]) #button:enabled:active {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-secondary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-secondary-active);
+}
+
+#button:enabled:active,
+:host([type="tertiary"]) #button:enabled:active {
+  --sinch-local-color-background: var(--sinch-comp-icon-button-color-tertiary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-tertiary-active);
+}
+
+/* Border / Background */
+#button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--sinch-local-color-background);
+  border: 1px solid var(--sinch-local-color-border);
+  border-radius: var(--sinch-local-shape-radius);
+  box-shadow: var(--sinch-local-shadow);
+  pointer-events: none;
+}
+
+/* Outline */
+#button:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border: 2px solid var(--sinch-local-color-outline);
+  border-radius: calc(var(--sinch-local-shape-radius) + 3px);
+  pointer-events: none;
 }
 
 #content {
@@ -156,12 +166,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
-#button * {
-  pointer-events: none;
+  width: var(100%);
+  height: var(100%);
 }
 </style>
 

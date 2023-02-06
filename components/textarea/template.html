@@ -1,11 +1,8 @@
 <style>
 :host {
+  all: initial;
   display: inline-block;
   vertical-align: middle;
-
-  --sinch-size: var(--sinch-size-m);
-  --sinch-size-icon: var(--sinch-input-icon-size-m);
-  --sinch-shape-radius: var(--sinch-shape-radius-m);
 }
 
 #wrapper {
@@ -14,66 +11,60 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  background-color: var(--sinch-color-snow-100);
-  border-radius: var(--sinch-shape-radius);
+  background-color: var(--sinch-comp-textarea-color-default-background-initial);
+  border-radius: var(--sinch-local-shape-radius);
   padding-right: 2px;
   padding-bottom: 2px;
   overflow: hidden;
+
+  --sinch-local-shape-radius: var(--sinch-comp-textarea-shape-radius);
 }
 
 #input {
   all: initial;
   display: block;
-  font: var(--sinch-font-text-m);
-  color: var(--sinch-color-text-default);
+  font: var(--sinch-comp-textarea-font-input);
+  color: var(--sinch-comp-textarea-color-default-text-initial);
   resize: none;
   white-space: pre-wrap;
   overflow-wrap: break-word;
   padding: 8px 10px 8px 12px;
+  border: none;
 }
 
 #input::placeholder {
-  font: var(--sinch-font-text-m);
-  color: var(--sinch-color-text-muted);
+  color: var(--sinch-comp-textarea-color-default-text-placeholder);
   opacity: 1;
 }
 
 #input:disabled {
-  color: var(--sinch-color-text-disabled);
-  -webkit-text-fill-color: var(--sinch-color-text-disabled);
+  color: var(--sinch-comp-textarea-color-disabled-text-initial);
+  -webkit-text-fill-color: var(--sinch-comp-textarea-color-disabled-text-initial);
 }
 
-#input:disabled::placeholder {
-  color: var(--sinch-color-snow-500);
-}
-
-#input:focus {
-  border-color: var(--sinch-color-stormy-600);
-}
-
-:host([resizable]:not([resizable="false"])) #input {
+:host([resizable]) #input {
   resize: vertical;
 }
 
 #border {
   position: absolute;
-  border: 1px solid var(--sinch-color-border-dark);
-  border-radius: var(--sinch-shape-radius);
+  border: 1px solid var(--sinch-comp-textarea-color-default-border-initial);
+  border-radius: var(--sinch-local-shape-radius);
   inset: 0;
   pointer-events: none;
 }
 
-:host([invalid]:not([invalid="false"])) #border {
-  border-color: var(--sinch-color-text-invalid);
+:host([invalid]) #border {
+  border-color: var(--sinch-comp-textarea-color-invalid-border-initial);
 }
 
 #input:focus + #border {
-  border-color: var(--sinch-color-border-focus);
+  border-color: var(--sinch-comp-textarea-color-default-border-focus);
   border-width: 2px;
 }
 
 #input:disabled + #border {
-  border-color: var(--sinch-color-snow-500);
+  border-color: var(--sinch-comp-textarea-color-disabled-border-initial);
 }
 
 #bottom {

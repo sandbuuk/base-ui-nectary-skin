@@ -6,7 +6,6 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getCssVar,
   getLiteralAttribute,
   getReactEventHandler,
   getRect,
@@ -35,7 +34,6 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-input', class extends NectaryElement {
   #$input: HTMLInputElement
   #$clear: TSinchIconButtonElement
-  #$iconClear: HTMLElement
   #$iconSlot: HTMLSlotElement
   #$iconWrapper: HTMLElement
   #$rightSlot: HTMLSlotElement
@@ -63,7 +61,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$leftSlot = shadowRoot.querySelector('slot[name="left"]')!
     this.#$leftWrapper = shadowRoot.querySelector('#left')!
     this.#$clear = shadowRoot.querySelector('#clear')!
-    this.#$iconClear = shadowRoot.querySelector('#icon-clear')!
     this.#$wrapper = shadowRoot.querySelector('#wrapper')!
     this.#sizeContext = new Context(this.#$wrapper, 'size')
   }
@@ -96,8 +93,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.addEventListener('-focus', this.#onFocusReactHandler, options)
     this.addEventListener('-blur', this.#onBlurReactHandler, options)
 
-    updateAttribute(this.#$iconClear, 'name', getCssVar(this, '--sinch-input-icon-clear'))
-
     this.#sizeContext.listen(this.#controller.signal)
     subscribeContext(this, 'size', this.#onContextSize, this.#controller.signal)
 
@@ -126,7 +121,11 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     ]
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'type': {
         if (process.env.NODE_ENV !== 'production') {
@@ -166,7 +165,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       }
 
       case 'invalid': {
-        updateExplicitBooleanAttribute(this, 'aria-invalid', isAttrTrue(newVal))
+        const isInvalid = isAttrTrue(newVal)
+
+        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+        updateBooleanAttribute(this, name, isInvalid)
 
         break
       }
@@ -175,7 +177,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         const isDisabled = isAttrTrue(newVal)
 
         this.#$input.disabled = isDisabled
-        updateBooleanAttribute(this, 'disabled', isDisabled)
+        updateBooleanAttribute(this, name, isDisabled)
 
         break
       }
@@ -197,7 +199,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       }
 
       case 'autocomplete': {
-        updateAttribute(this.#$input, 'autocomplete', newVal)
+        updateAttribute(this.#$input, name, newVal)
       }
     }
   }

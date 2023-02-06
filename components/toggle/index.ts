@@ -51,7 +51,49 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['checked', 'disabled', 'text']
+    return [
+      'checked',
+      'disabled',
+      'text',
+      'labeled',
+      'small',
+    ]
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'text': {
+        this.#$label.textContent = newVal
+
+        break
+      }
+      case 'checked': {
+        const isChecked = isAttrTrue(newVal)
+
+        this.#$input.checked = isChecked
+        updateExplicitBooleanAttribute(this, 'aria-checked', isChecked)
+
+        break
+      }
+      case 'disabled': {
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$input.disabled = isDisabled
+        updateBooleanAttribute(this, name, isDisabled)
+
+        break
+      }
+      case 'small':
+      case 'labeled': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+    }
   }
 
   get type() {
@@ -100,32 +142,6 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
 
   get text() {
     return getAttribute(this, 'text')
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'text': {
-        this.#$label.textContent = newVal
-
-        break
-      }
-      case 'checked': {
-        const isChecked = isAttrTrue(newVal)
-
-        this.#$input.checked = isChecked
-        updateExplicitBooleanAttribute(this, 'aria-checked', isChecked)
-
-        break
-      }
-      case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
-
-        this.#$input.disabled = isDisabled
-        updateBooleanAttribute(this, 'disabled', isDisabled)
-
-        break
-      }
-    }
   }
 
   get focusable() {

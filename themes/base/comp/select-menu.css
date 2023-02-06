@@ -1,0 +1,15 @@
+:root,
+:host {
+  --sinch-comp-select-menu-font-option: var(--sinch-sys-font-body-m);
+  --sinch-comp-select-menu-font-not-found-text: var(--sinch-sys-font-body-m);
+  --sinch-comp-select-menu-color-default-background-initial: var(--sinch-sys-color-container-transparent-default);
+  --sinch-comp-select-menu-color-default-background-hover: var(--sinch-sys-color-container-transparent-hover);
+  --sinch-comp-select-menu-color-default-background-selected: var(--sinch-sys-color-container-transparent-hover);
+  --sinch-comp-select-menu-color-default-option-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-select-menu-color-default-icon-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-select-menu-color-default-not-found-text-initial: var(--sinch-sys-color-text-muted);
+  --sinch-comp-select-menu-color-disabled-option-initial: var(--sinch-sys-color-text-disabled);
+  --sinch-comp-select-menu-color-disabled-icon-initial: var(--sinch-sys-color-text-disabled);
+  --sinch-comp-select-menu-color-disabled-background-initial: var(--sinch-sys-color-container-transparent-disabled);
+  --sinch-comp-select-menu-size-icon: var(--sinch-sys-size-xs);
+}

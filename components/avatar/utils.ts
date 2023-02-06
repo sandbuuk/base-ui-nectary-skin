@@ -16,15 +16,15 @@ export const assertStatus: TAssertStatus = (value) => {
 }
 
 export const getAvatarColorBg = (id: string): string => {
-  return `var(--sinch-avatar-color-${id}-bg)`
+  return `var(--sinch-comp-avatar-container-color-${id}-background)`
 }
 
 export const getAvatarColorFg = (id: string): string => {
-  return `var(--sinch-avatar-color-${id}-fg)`
+  return `var(--sinch-comp-avatar-container-color-${id}-foreground)`
 }
 
 export const assertAvatarColor = (root: Element, id: string | null): void => {
-  if (id === null || window.getComputedStyle(root).getPropertyValue(`--sinch-avatar-color-${id}-bg`).length === 0) {
+  if (id === null || window.getComputedStyle(root).getPropertyValue(`--sinch-comp-avatar-container-color-${id}-background`).length === 0) {
     throw new Error(`Invalid sinch-avatar color name: ${id}`)
   }
 }

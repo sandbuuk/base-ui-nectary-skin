@@ -11,7 +11,7 @@
   gap: 8px;
   padding: 12px 0;
 
-  --sinch-icon-font-variation-settings: var(--sinch-emoji-picker-icon-font-variation-settings);
+  --sinch-comp-icon-font-variation-settings: "FILL" 0;
 }
 
 #toolbar {
@@ -47,9 +47,11 @@
   height: 48px;
   align-items: center;
   justify-content: center;
-  color: var(--sinch-color-text-muted);
   pointer-events: none;
   user-select: none;
+
+  --sinch-global-color-text: var(--sinch-comp-emoji-picker-color-default-text-not-found);
+  --sinch-comp-text-font: var(--sinch-comp-emoji-picker-font-not-found);
 }
 
 #not-found.active {
@@ -60,18 +62,18 @@
 <div id="wrapper">
   <div id="toolbar">
     <sinch-input id="input" size="l" aria-label="Search emojis">
-      <sinch-icon id="icon-search" slot="icon"></sinch-icon>
+      <sinch-icon id="icon-search" slot="icon" name="search"></sinch-icon>
     </sinch-input>
     <sinch-popover id="skin-popover" orientation="bottom-left" aria-label="Emoji skin tone select">
       <sinch-icon-button id="skin-button" slot="target" size="l" aria-label="Select emoji skin tones">
-        <sinch-color-swatch id="skin-swatch" slot="icon" name="skin-tone-0"></sinch-color-swatch>
+        <sinch-color-swatch id="skin-swatch" slot="icon" name="skintone-default"></sinch-color-swatch>
       </sinch-icon-button>
       <sinch-color-menu
         id="skin-menu"
         slot="content"
         cols="1"
-        value="skin-tone-0"
-        colors="skin-tone-0,skin-tone-10,skin-tone-20,skin-tone-30,skin-tone-40,skin-tone-50"
+        value="skintone-default"
+        colors="skintone-default,skintone-light,skintone-light-medium,skintone-medium,skintone-medium-dark,skintone-dark"
         aria-label="Emoji skin tone menu"
       ></sinch-color-menu>
     </sinch-popover>

@@ -11,26 +11,33 @@
   align-items: center;
   gap: 4px;
   width: 100%;
-  height: 24px;
+  height: var(--sinch-comp-tag-size-container-m);
   padding: 0 9px;
-  border-radius: 12px;
-  background-color: var(--sinch-tag-color-default-bg);
-  color: var(--sinch-tag-color-default-fg);
+  border-radius: var(--sinch-comp-tag-shape-radius);
+  background-color: var(--sinch-comp-tag-color-default-background);
   box-sizing: border-box;
   user-select: none;
 
-  --sinch-color-icon: var(--sinch-tag-color-default-fg);
-  --sinch-size-icon: 16px;
+  --sinch-global-color-text: var(--sinch-comp-tag-color-default-foreground);
+  --sinch-global-color-icon: var(--sinch-comp-tag-color-default-foreground);
+  --sinch-global-size-icon: var(--sinch-comp-tag-size-icon-m);
+}
+
+:host([small]) #wrapper {
+  height: var(--sinch-comp-tag-size-container-s);
+  padding: 0 8px;
+
+  --sinch-global-size-icon: var(--sinch-comp-tag-size-icon-s);
 }
 
 #text {
   flex: 1;
+
+  --sinch-comp-text-font: var(--sinch-comp-tag-font-size-m-label);
 }
 
-:host([small]:not([small="false"])) #wrapper {
-  height: 20px;
-  border-radius: 10px;
-  padding: 0 8px;
+:host([small]) #text {
+  --sinch-comp-text-font: var(--sinch-comp-tag-font-size-s-label);
 }
 
 ::slotted(*) {
@@ -40,5 +47,5 @@
 
 <div id="wrapper">
   <slot name="icon"></slot>
-  <sinch-text id="text" type="xs" ellipsis></sinch-text>
+  <sinch-text id="text" type="s" ellipsis></sinch-text>
 </div>

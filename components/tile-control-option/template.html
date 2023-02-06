@@ -13,115 +13,101 @@ button {
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
-  width: 88px;
-  height: 88px;
+  width: var(--sinch-local-size);
+  height: var(--sinch-local-size);
   padding: 16px 8px 8px;
-  border-radius: var(--sinch-shape-radius-l);
-  background-color: var(--sinch-color-snow-100);
-  box-shadow: var(--sinch-elevation-leve-1);
+  border-radius: var(--sinch-local-shape-radius);
+  background-color: var(--sinch-local-color-background);
+  box-shadow: var(--sinch-local-shadow);
   cursor: pointer;
-}
 
-:host([data-small]) > button {
-  width: 64px;
-  height: 64px;
-  border-radius: var(--sinch-shape-radius-m);
-  padding: 12px 4px 4px;
+  --sinch-local-color-background: var(--sinch-comp-tile-control-color-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-tile-control-color-default-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-tile-control-color-default-text-initial);
+  --sinch-local-color-icon: var(--sinch-comp-tile-control-color-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-tile-control-shadow-initial);
+  --sinch-local-shape-radius: var(--sinch-comp-tile-control-shape-radius-l);
+  --sinch-local-size: 88px;
+  --sinch-local-size-icon: var(--sinch-comp-tile-control-size-m-icon);
 }
 
 /* Border */
 button::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  border: 1px solid var(--sinch-color-snow-700);
-  border-radius: var(--sinch-shape-radius-l);
+  inset: 0;
+  border: 1px solid var(--sinch-local-color-border);
+  border-radius: var(--sinch-local-shape-radius);
   pointer-events: none;
 }
 
-:host([data-small]) > button::before {
-  border-radius: var(--sinch-shape-radius-m);
-}
-
-/* Focus border */
+/* Focus outline */
 button:focus-visible::after {
   position: absolute;
   content: "";
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
+  inset: -4px;
   padding: 2px;
-  border: 2px solid var(--sinch-color-border-focus);
-  border-radius: calc(var(--sinch-shape-radius-l) + 4px);
+  border: 2px solid var(--sinch-comp-tile-control-color-default-outline-focus);
+  border-radius: calc(var(--sinch-local-shape-radius) + 4px);
   pointer-events: none;
 }
 
-:host([data-small]) > button:focus-visible::after {
-  border-radius: calc(var(--sinch-shape-radius-m) + 4px);
+:host([data-small]) > button {
+  padding: 12px 4px 4px;
+
+  --sinch-local-shape-radius: var(--sinch-comp-tile-control-shape-radius-s);
+  --sinch-local-size: 64px;
+  --sinch-local-size-icon: var(--sinch-comp-tile-control-size-s-icon);
 }
 
 button:enabled:hover {
-  background-color: var(--sinch-color-tropical-100);
-}
-
-button:enabled:hover::before {
-  border-color: var(--sinch-color-tropical-100);
+  --sinch-local-color-background: var(--sinch-comp-tile-control-color-default-background-hover);
+  --sinch-local-color-border: var(--sinch-comp-tile-control-color-default-border-hover);
+  --sinch-local-shadow: var(--sinch-comp-tile-control-shadow-hover);
 }
 
 :host([data-checked]) > button:enabled,
 button:enabled:active {
-  box-shadow: var(--sinch-elevation-level-0);
+  --sinch-local-color-background: var(--sinch-comp-tile-control-color-checked-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-tile-control-color-checked-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-tile-control-color-checked-text-initial);
+  --sinch-local-color-icon: var(--sinch-comp-tile-control-color-checked-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-tile-control-shadow-active);
 }
 
 :host([data-checked]) > button:enabled::before,
 button:enabled:active::before {
   border-width: 2px;
-  border-color: var(--sinch-color-stormy-500);
 }
 
 button:disabled {
   cursor: initial;
-}
 
-button:disabled > #icon,
-button:disabled > #text {
-  opacity: 0.5;
+  --sinch-local-color-background: var(--sinch-comp-tile-control-color-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-tile-control-color-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-tile-control-color-disabled-text-initial);
+  --sinch-local-color-icon: var(--sinch-comp-tile-control-color-disabled-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-tile-control-shadow-disabled);
 }
 
 #text {
   display: inline-block;
   min-height: 20px;
   text-align: center;
-  font: var(--sinch-font-text-xs);
-  color: var(--sinch-color-stormy-500);
+  font: var(--sinch-comp-tile-control-font-label);
+  color: var(--sinch-local-color-text);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 #icon {
-  width: 32px;
-  height: 32px;
+  width: var(--sinch-local-size-icon);
+  height: var(--sinch-local-size-icon);
   align-self: center;
 
-  --sinch-size-icon: 32px;
-  --sinch-color-icon: var(--sinch-color-stormy-500);
-}
-
-:host([data-small]) #icon {
-  width: 24px;
-  height: 24px;
-
-  --sinch-size-icon: 24px;
-}
-
-button > * {
-  pointer-events: none;
+  --sinch-global-size-icon: var(--sinch-local-size-icon);
+  --sinch-global-color-icon: var(--sinch-local-color-icon);
 }
 </style>
 

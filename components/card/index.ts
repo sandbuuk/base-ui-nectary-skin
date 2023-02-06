@@ -74,11 +74,17 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'label', 'caption', 'disabled', 'draggable']
+    return [
+      'text',
+      'label',
+      'caption',
+      'disabled',
+      'draggable',
+    ]
   }
 
-  attributeChangedCallback(name: string, prevVal: string | null, newVal: string | null) {
-    if (prevVal === newVal) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
       return
     }
 
@@ -99,7 +105,7 @@ defineCustomElement('sinch-card', class extends NectaryElement {
         break
       }
       case 'disabled': {
-        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break
       }

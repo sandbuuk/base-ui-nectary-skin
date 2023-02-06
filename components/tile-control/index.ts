@@ -11,6 +11,7 @@ import {
   updateBooleanAttribute,
   updateCsv,
   updateIntegerAttribute,
+  isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchTileControlElement, TSinchTileControlReact } from './types'
@@ -49,6 +50,31 @@ defineCustomElement('sinch-tile-control', class extends NectaryElement {
     return ['value', 'small', 'multiple']
   }
 
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'value': {
+        this.#onValueChange(newVal ?? '')
+
+        break
+      }
+
+      case 'small': {
+        this.#onSmallChange()
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+
+      case 'multiple': {
+        this.#onValueChange(this.value)
+      }
+    }
+  }
+
   get nodeName() {
     return 'select'
   }
@@ -83,30 +109,6 @@ defineCustomElement('sinch-tile-control', class extends NectaryElement {
 
   get cols() {
     return getIntegerAttribute(this, 'cols', 1)
-  }
-
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
-    switch (name) {
-      case 'value': {
-        this.#onValueChange(newVal ?? '')
-
-        break
-      }
-
-      case 'small': {
-        this.#onSmallChange()
-
-        break
-      }
-
-      case 'multiple': {
-        this.#onValueChange(this.value)
-      }
-    }
   }
 
   #onSlotChange = () => {

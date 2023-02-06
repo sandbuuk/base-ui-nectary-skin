@@ -18,7 +18,6 @@ import {
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
   subscribeContext,
-  getCssVar,
 } from '../utils'
 import optionTemplateHTML from './option-template.html'
 import templateHTML from './template.html'
@@ -40,7 +39,6 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   #$listbox: HTMLElement
   #controller: AbortController | null = null
   #prevColorsValue: string | null = ''
-  #checkIconName: string | null = null
 
   constructor() {
     super()
@@ -67,8 +65,6 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
     subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
     subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
-
-    this.#checkIconName = getCssVar(this, '--sinch-color-menu-icon-check')
 
     requestAnimationFrame(this.#onMount)
   }
@@ -190,14 +186,12 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
       const $option = optFrag.querySelector('.option') as HTMLElement
       const $swatch = optFrag.querySelector('.swatch')!
       const $tooltip = optFrag.querySelector('.tooltip')!
-      const $checkIcon = optFrag.querySelector('.check')!
 
       updateAttribute($option, 'data-value', color)
       updateAttribute($tooltip, 'text', color)
       updateAttribute($swatch, 'name', color)
-      updateAttribute($checkIcon, 'name', this.#checkIconName)
 
-      $option.style.setProperty('--sinch-color-icon', getSwatchColorFg(color))
+      $option.style.setProperty('--sinch-global-color-icon', getSwatchColorFg(color))
 
       fragment.appendChild(optFrag)
     }

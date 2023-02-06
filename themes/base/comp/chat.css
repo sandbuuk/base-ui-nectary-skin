@@ -1,0 +1,4 @@
+:root,
+:host {
+  --sinch-comp-chat-shape-radius: var(--sinch-sys-shape-radius-l);
+}

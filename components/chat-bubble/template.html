@@ -13,50 +13,64 @@
 }
 
 :host([data-type="customer"]) > #wrapper {
-  background-color: var(--sinch-color-snow-500);
+  background-color: var(--sinch-sys-color-container-contrast-default);
   border-top-left-radius: 0;
 }
 
 :host([data-type="agent-prev"]) > #wrapper {
-  background-color: var(--sinch-color-snow-700);
+  background-color: var(--sinch-sys-color-container-contrast-active);
   border-top-right-radius: 0;
 }
 
 :host([data-type="agent"]) > #wrapper {
-  background-color: var(--sinch-color-honey-200);
+  background-color: var(--sinch-sys-color-container-complement-1-hover);
   border-top-right-radius: 0;
 }
 
 #text {
-  font: var(--sinch-font-text-m);
-  color: var(--sinch-color-stormy-500);
+  --sinch-global-color-text: var(--sinch-sys-color-text-default);
 }
 
-#icon {
+#icon-sending,
+#icon-sent,
+#icon-received,
+#icon-seen,
+#icon-error {
   display: none;
   position: absolute;
   right: 16px;
   bottom: 12px;
 
-  --sinch-size-icon: 16px;
-  --sinch-color-icon: var(--sinch-color-stormy-500);
-  --sinch-icon-font-variation-settings: var(--sinch-chat-icon-font-variation-settings);
+  --sinch-global-size-icon: 16px;
+  --sinch-comp-icon-font-variation-settings: "FILL" 0;
 }
 
-:host([status="sending"]) #icon,
-:host([status="sent"]) #icon,
-:host([status="received"]) #icon,
-:host([status="seen"]) #icon,
-:host([status="error"]) #icon {
+#icon-sending {
+  --sinch-global-color-icon: var(--sinch-sys-color-text-default);
+}
+
+#icon-sent {
+  --sinch-global-color-icon: var(--sinch-sys-color-text-default);
+}
+
+#icon-received {
+  --sinch-global-color-icon: var(--sinch-sys-color-text-default);
+}
+
+#icon-seen {
+  --sinch-global-color-icon: var(--sinch-sys-color-feedback-success-contrast);
+}
+
+#icon-error {
+  --sinch-global-color-icon: var(--sinch-sys-color-feedback-invalid-contrast);
+}
+
+:host([status="sending"]) #icon-sending,
+:host([status="sent"]) #icon-sent,
+:host([status="received"]) #icon-received,
+:host([status="seen"]) #icon-seen,
+:host([status="error"]) #icon-error {
   display: block;
-}
-
-:host([status="seen"]) #icon {
-  --sinch-color-icon: var(--sinch-color-feedback-success-icon);
-}
-
-:host([status="error"]) #icon {
-  --sinch-color-icon: var(--sinch-color-feedback-invalid-icon);
 }
 
 :host([status]:not([status=""])) #wrapper {
@@ -65,6 +79,10 @@
 </style>
 
 <div id="wrapper">
-  <span id="text"></span>
-  <sinch-icon id="icon"></sinch-icon>
+  <sinch-text id="text" type="m"></sinch-text>
+  <sinch-icon id="icon-sending" name="query_builder"></sinch-icon>
+  <sinch-icon id="icon-sent" name="check"></sinch-icon>
+  <sinch-icon id="icon-received" name="done_all"></sinch-icon>
+  <sinch-icon id="icon-seen" name="done_all"></sinch-icon>
+  <sinch-icon id="icon-error" name="error_outline"></sinch-icon>
 </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/tooltip'
+import '@sinch-engage/nectary/text'
 
 @Component({
   selector: 'tooltip-component',

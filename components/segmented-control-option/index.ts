@@ -52,6 +52,31 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
     return ['data-checked', 'disabled', 'text']
   }
 
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'text': {
+        this.#$label.textContent = newVal
+
+        break
+      }
+      case 'data-checked': {
+        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
+
+        break
+      }
+      case 'disabled': {
+        this.#$button.disabled = isAttrTrue(newVal)
+        updateBooleanAttribute(this, name, this.#$button.disabled)
+
+        break
+      }
+    }
+  }
+
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }
@@ -74,30 +99,6 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
 
   get text() {
     return getAttribute(this, 'text', '')
-  }
-
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
-    switch (name) {
-      case 'text': {
-        this.#$label.textContent = newVal
-
-        break
-      }
-      case 'data-checked': {
-        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
-
-        break
-      }
-      case 'disabled': {
-        this.#$button.disabled = isAttrTrue(newVal)
-
-        break
-      }
-    }
   }
 
   get focusable() {

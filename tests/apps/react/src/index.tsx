@@ -1,7 +1,7 @@
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
 import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
 import '@webcomponents/scoped-custom-element-registry'
-import '@sinch-engage/nectary/theme'
+import '@sinch-engage/nectary-theme-base/index'
 import { render } from 'react-dom'
 import { App } from './App'
 import 'axe-core'

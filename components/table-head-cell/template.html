@@ -1,10 +1,8 @@
 <style>
 :host {
   display: table-cell;
-  border-bottom: 1px solid var(--sinch-color-stormy-200);
+  border-bottom: 1px solid var(--sinch-comp-table-color-head-cell-default-border-initial);
   vertical-align: middle;
-
-  --sinch-color-icon: var(--sinch-color-stormy-200);
 }
 
 #wrapper {
@@ -16,17 +14,19 @@
   height: 100%;
   padding: 8px;
   box-sizing: border-box;
-  font: var(--sinch-font-title-s);
-  color: var(--sinch-color-stormy-300);
 
-  --sinch-icon-button-color: var(--sinch-color-stormy-100);
+  --sinch-global-color-icon: var(--sinch-comp-table-color-head-cell-default-icon-initial);
 }
 
 #text {
   flex-shrink: 1;
   min-width: 0;
-  font: var(--sinch-font-title-s);
-  color: var(--sinch-color-stormy-200);
+
+  --sinch-global-color-text: var(--sinch-comp-table-color-head-cell-default-text-initial);
+}
+
+#text:empty {
+  display: none;
 }
 
 :host([align="center"]) > #wrapper {
@@ -37,11 +37,7 @@
   justify-content: flex-end;
 }
 
-:host(:is([text=""], :not([text]))) #text {
-  display: none;
-}
-
-:host([fit]:not([fit="false"])) {
+:host([fit]) {
   /* 1px instead of 0, because of Safari */
   width: 1px;
 }
@@ -50,7 +46,7 @@
 <div id="wrapper">
   <slot name="checkbox"></slot>
   <slot name="left"></slot>
-  <span id="text"></span>
+  <sinch-text id="text" type="m"></sinch-text>
   <slot name="tooltip"></slot>
   <slot name="right"></slot>
 </div>

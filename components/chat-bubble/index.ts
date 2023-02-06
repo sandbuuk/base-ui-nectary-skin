@@ -2,7 +2,6 @@ import '../icon'
 import {
   defineCustomElement,
   getAttribute,
-  getCssVar,
   getLiteralAttribute,
   NectaryElement,
   updateAttribute,
@@ -18,7 +17,6 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-chat-bubble', class extends NectaryElement {
   #$text: HTMLElement
-  #$icon: HTMLElement
 
   constructor() {
     super()
@@ -28,33 +26,16 @@ defineCustomElement('sinch-chat-bubble', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$text = shadowRoot.querySelector('#text')!
-    this.#$icon = shadowRoot.querySelector('#icon')!
-  }
-
-  connectedCallback() {
-    super.connectedCallback()
-
-    this.#updateIcon()
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback()
   }
 
   static get observedAttributes() {
-    return ['text', 'status']
+    return ['text']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
-
-        break
-      }
-
-      case 'status': {
-        this.#updateIcon()
 
         break
       }
@@ -79,16 +60,6 @@ defineCustomElement('sinch-chat-bubble', class extends NectaryElement {
 
   get status(): TSinchChatBubbleStatus | null {
     return getLiteralAttribute(this, statusValues, 'status', null)
-  }
-
-  #updateIcon() {
-    if (!this.isConnected) {
-      return
-    }
-
-    const status = this.status
-
-    updateAttribute(this.#$icon, 'name', status !== null ? getCssVar(this, `--sinch-chat-icon-${status}`) : null)
   }
 })
 

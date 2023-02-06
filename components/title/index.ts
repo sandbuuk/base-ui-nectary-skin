@@ -7,6 +7,7 @@ import {
   NectaryElement,
   updateBooleanAttribute,
   getBooleanAttribute,
+  isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertLevel, assertType, typeValues } from './utils'
@@ -31,40 +32,17 @@ defineCustomElement('sinch-title', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'heading')
-
-    // Dont assert here
-    // Angular sets attributes after connect
-  }
-
-  get text() {
-    return getAttribute(this, 'text', '')
-  }
-
-  set text(value: string) {
-    updateAttribute(this, 'text', value)
-  }
-
-  set type(value: TSinchTitleType) {
-    updateLiteralAttribute(this, typeValues, 'type', value)
-  }
-
-  get type(): TSinchTitleType {
-    return getLiteralAttribute(this, typeValues, 'type')
-  }
-
-  set ellipsis(isEllipsis: boolean) {
-    updateBooleanAttribute(this, 'ellipsis', isEllipsis)
-  }
-
-  get ellipsis() {
-    return getBooleanAttribute(this, 'ellipsis')
   }
 
   static get observedAttributes() {
-    return ['text', 'type', 'level']
+    return ['text', 'type', 'level', 'ellipsis']
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
@@ -89,7 +67,37 @@ defineCustomElement('sinch-title', class extends NectaryElement {
 
         break
       }
+
+      case 'ellipsis': {
+        updateBooleanAttribute(this, 'ellipsis', isAttrTrue(newVal))
+
+        break
+      }
     }
+  }
+
+  get text() {
+    return getAttribute(this, 'text', '')
+  }
+
+  set text(value: string) {
+    updateAttribute(this, 'text', value)
+  }
+
+  set type(value: TSinchTitleType) {
+    updateLiteralAttribute(this, typeValues, 'type', value)
+  }
+
+  get type(): TSinchTitleType {
+    return getLiteralAttribute(this, typeValues, 'type')
+  }
+
+  set ellipsis(isEllipsis: boolean) {
+    updateBooleanAttribute(this, 'ellipsis', isEllipsis)
+  }
+
+  get ellipsis() {
+    return getBooleanAttribute(this, 'ellipsis')
   }
 })
 

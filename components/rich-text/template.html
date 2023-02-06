@@ -1,19 +1,25 @@
 <style>
 :host {
   display: block;
-  font: var(--sinch-font-text-m);
+
+  --sinch-comp-rich-text-font: var(--sinch-sys-font-body-m);
 }
 
 :host([size="s"]) {
-  font: var(--sinch-font-text-s);
+  --sinch-comp-rich-text-font: var(--sinch-sys-font-body-s);
 }
 
 :host([size="xs"]) {
-  font: var(--sinch-font-text-xs);
+  --sinch-comp-rich-text-font: var(--sinch-sys-font-body-xs);
 }
 
 :host([size="xxs"]) {
-  font: var(--sinch-font-text-xxs);
+  --sinch-comp-rich-text-font: var(--sinch-sys-font-body-xxs);
+}
+
+#wrapper {
+  font: var(--sinch-comp-rich-text-font);
+  color: var(--sinch-global-color-text, var(--sinch-sys-color-text-default));
 }
 
 .em1 {
@@ -21,12 +27,12 @@
 }
 
 .em2 {
-  font-weight: 700;
+  font-weight: var(--sinch-ref-typography-font-weight-700);
 }
 
 .em3 {
   font-style: italic;
-  font-weight: 700;
+  font-weight: var(--sinch-ref-typography-font-weight-700);
 }
 
 .strikethrough {
@@ -34,14 +40,24 @@
 }
 
 .link {
-  color: var(--sinch-color-tropical-500);
+  font: var(--sinch-comp-link-default-font-initial);
+  color: var(--sinch-comp-link-color-default-text-initial);
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: var(--sinch-comp-link-color-default-text-hover);
+  text-decoration: none;
 }
 
 .code {
-  border: 1px solid var(--sinch-color-border-light);
-  background-color: var(--sinch-color-bg-primary-contrast);
+  font: var(--sinch-comp-code-tag-font-text);
+  line-height: inherit;
+  font-size: inherit;
+  border: 1px solid var(--sinch-comp-code-tag-color-default-border-initial);
+  background-color: var(--sinch-comp-code-tag-color-default-background-initial);
   padding: 0 0.25em;
-  border-radius: var(--sinch-shape-radius-xs);
+  border-radius: var(--sinch-comp-code-tag-shape-radius);
 }
 
 .paragraph {

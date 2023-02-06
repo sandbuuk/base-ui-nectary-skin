@@ -1,0 +1,8 @@
+:root,
+:host {
+  --sinch-comp-tooltip-color-background: var(--sinch-sys-color-container-contrast-default);
+  --sinch-comp-tooltip-color-text: var(--sinch-sys-color-text-default);
+  --sinch-comp-tooltip-shape-radius: var(--sinch-sys-shape-radius-xs);
+  --sinch-comp-tooltip-shadow: var(--sinch-ref-shadow-level-1);
+  --sinch-comp-tooltip-font-body: var(--sinch-sys-font-body-xs);
+}

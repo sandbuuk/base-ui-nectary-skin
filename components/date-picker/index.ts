@@ -5,7 +5,6 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getCssVars,
   getReactEventHandler,
   getRect,
   getTargetAttribute,
@@ -68,10 +67,6 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   #$nextMonth: TSinchIconButtonElement
   #$prevYear: TSinchIconButtonElement
   #$nextYear: TSinchIconButtonElement
-  #$iconPrevMonth: HTMLElement
-  #$iconNextMonth: HTMLElement
-  #$iconPrevYear: HTMLElement
-  #$iconNextYear: HTMLElement
   #$date: TSinchTextElement
   #monthNames: string[]
   #controller: AbortController | null = null
@@ -90,10 +85,6 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     this.#$nextYear = shadowRoot.querySelector('#next-year')!
     this.#$date = shadowRoot.querySelector('#date')!
     this.#$month = shadowRoot.querySelector('#month')!
-    this.#$iconPrevMonth = shadowRoot.querySelector('#icon-prev-month')!
-    this.#$iconNextMonth = shadowRoot.querySelector('#icon-next-month')!
-    this.#$iconPrevYear = shadowRoot.querySelector('#icon-prev-year')!
-    this.#$iconNextYear = shadowRoot.querySelector('#icon-next-year')!
     this.#$days = []
     this.#$weeks = []
     this.#monthNames = []
@@ -123,8 +114,6 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     this.#$nextYear.addEventListener('click', this.#onNextYearClick, options)
     this.#$month.addEventListener('click', this.#onDateClick, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
-
-    this.#updateIcons()
   }
 
   disconnectedCallback() {
@@ -584,20 +573,6 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
       setClass(this.#$weeks[wi], 'empty', isEmptyWeek)
     }
-  }
-
-  #updateIcons() {
-    const names = getCssVars(this, [
-      '--sinch-date-picker-icon-prev-month',
-      '--sinch-date-picker-icon-next-month',
-      '--sinch-date-picker-icon-prev-year',
-      '--sinch-date-picker-icon-next-year',
-    ])
-
-    updateAttribute(this.#$iconPrevMonth, 'name', names[0])
-    updateAttribute(this.#$iconNextMonth, 'name', names[1])
-    updateAttribute(this.#$iconPrevYear, 'name', names[2])
-    updateAttribute(this.#$iconNextYear, 'name', names[3])
   }
 
   #subscribeRangeHover() {

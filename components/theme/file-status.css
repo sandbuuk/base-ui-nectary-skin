@@ -1,7 +1,0 @@
-:root,
-:host {
-  --sinch-file-status-icon-pending: pending_actions;
-  --sinch-file-status-icon-progress: text_snippet;
-  --sinch-file-status-icon-success: check_circle;
-  --sinch-file-status-icon-error: report;
-}

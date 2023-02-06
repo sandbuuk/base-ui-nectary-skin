@@ -1,0 +1,5 @@
+:root,
+:host {
+  --sinch-comp-code-snippet-color-default-background-initial: var(--sinch-sys-color-container-contrast-default);
+  --sinch-comp-code-snippet-shape-radius: var(--sinch-sys-shape-radius-l);
+}

@@ -1,0 +1,5 @@
+:root,
+:host {
+  --sinch-comp-emoji-picker-color-default-text-not-found: var(--sinch-sys-color-text-muted);
+  --sinch-comp-emoji-picker-font-not-found: var(--sinch-sys-font-body-m);
+}

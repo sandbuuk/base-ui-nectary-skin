@@ -50,6 +50,26 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
     return ['data-checked', 'disabled']
   }
 
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'data-checked': {
+        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
+
+        break
+      }
+      case 'disabled': {
+        this.#$button.disabled = isAttrTrue(newVal)
+        updateBooleanAttribute(this, name, this.#$button.disabled)
+
+        break
+      }
+    }
+  }
+
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }
@@ -64,21 +84,6 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
 
   get disabled() {
     return getBooleanAttribute(this, 'disabled')
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'data-checked': {
-        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
-
-        break
-      }
-      case 'disabled': {
-        this.#$button.disabled = isAttrTrue(newVal)
-
-        break
-      }
-    }
   }
 
   get focusable() {

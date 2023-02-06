@@ -3,28 +3,6 @@
   display: inline-block;
   vertical-align: middle;
   outline: none;
-
-  --sinch-size: var(--sinch-size-m);
-  --sinch-size-icon: var(--sinch-select-button-icon-size-m);
-  --sinch-shape-radius: var(--sinch-shape-radius-m);
-}
-
-:host([data-size="l"]) {
-  --sinch-size: var(--sinch-size-l);
-  --sinch-size-icon: var(--sinch-select-button-icon-size-l);
-  --sinch-shape-radius: var(--sinch-shape-radius-l);
-}
-
-:host([data-size="m"]) {
-  --sinch-size: var(--sinch-size-m);
-  --sinch-size-icon: var(--sinch-select-button-icon-size-m);
-  --sinch-shape-radius: var(--sinch-shape-radius-m);
-}
-
-:host([data-size="s"]) {
-  --sinch-size: var(--sinch-size-s);
-  --sinch-size-icon: var(--sinch-select-button-icon-size-s);
-  --sinch-shape-radius: var(--sinch-shape-radius-s);
 }
 
 #wrapper {
@@ -35,12 +13,33 @@
   gap: 8px;
   box-sizing: border-box;
   width: 100%;
-  height: var(--sinch-size);
+  height: var(--sinch-local-size);
   padding: 0 8px 0 12px;
-  background-color: var(--sinch-color-bg-primary-light);
-  border-radius: var(--sinch-shape-radius);
+  background-color: var(--sinch-comp-select-button-color-default-background-initial);
+  border-radius: var(--sinch-local-shape-radius);
 
-  --sinch-color-icon: var(--sinch-color-stormy-500);
+  --sinch-local-size: var(--sinch-comp-select-button-size-container-m);
+  --sinch-global-size-icon: var(--sinch-comp-select-button-size-icon-m);
+  --sinch-local-shape-radius: var(--sinch-comp-select-button-shape-radius-size-m);
+  --sinch-global-color-icon: var(--sinch-comp-select-button-color-default-icon-initial);
+}
+
+:host([data-size="l"]) > #wrapper {
+  --sinch-local-size: var(--sinch-comp-select-button-size-container-l);
+  --sinch-global-size-icon: var(--sinch-comp-select-button-size-icon-l);
+  --sinch-local-shape-radius: var(--sinch-comp-select-button-shape-radius-size-l);
+}
+
+:host([data-size="m"]) > #wrapper {
+  --sinch-local-size: var(--sinch-comp-select-button-size-container-m);
+  --sinch-global-size-icon: var(--sinch-comp-select-button-size-icon-m);
+  --sinch-local-shape-radius: var(--sinch-comp-select-button-shape-radius-size-m);
+}
+
+:host([data-size="s"]) > #wrapper {
+  --sinch-local-size: var(--sinch-comp-select-button-size-container-s);
+  --sinch-global-size-icon: var(--sinch-comp-select-button-size-icon-s);
+  --sinch-local-shape-radius: var(--sinch-comp-select-button-shape-radius-size-s);
 }
 
 :host([data-size="l"]) #wrapper {
@@ -55,8 +54,41 @@
   padding: 0 4px 0 12px;
 }
 
-:host([disabled]:not([disabled="false"])) #wrapper {
-  --sinch-color-icon: var(--sinch-color-text-disabled);
+:host([disabled]) #wrapper {
+  --sinch-global-color-icon: var(--sinch-comp-select-button-color-disabled-icon-initial);
+}
+
+#text {
+  flex: 1;
+  min-width: 0;
+
+  --sinch-comp-text-font: var(--sinch-comp-select-button-font-input);
+  --sinch-global-color-text: var(--sinch-comp-select-button-color-default-text-initial);
+}
+
+#text:empty {
+  display: none;
+}
+
+#placeholder {
+  display: none;
+  flex: 1;
+  min-width: 0;
+
+  --sinch-comp-text-font: var(--sinch-comp-select-button-font-placeholder);
+  --sinch-global-color-text: var(--sinch-comp-select-button-color-default-placeholder-initial);
+}
+
+#text:empty + #placeholder {
+  display: block;
+}
+
+#border {
+  position: absolute;
+  border: 1px solid var(--sinch-comp-select-button-color-default-border-initial);
+  border-radius: var(--sinch-local-shape-radius);
+  inset: 0;
+  pointer-events: none;
 }
 
 #button {
@@ -70,46 +102,29 @@
   z-index: 1;
 }
 
-#border {
-  position: absolute;
-  border: 1px solid var(--sinch-color-border-dark);
-  border-radius: var(--sinch-shape-radius);
-  inset: 0;
-  pointer-events: none;
-}
-
-#text {
-  flex: 1;
-  min-width: 0;
-
-  /* Placeholder color */
-  color: var(--sinch-color-text-muted);
-}
-
-:host([text]:not([text=""])) #text {
-  /* Text color */
-  color: var(--sinch-color-text-default);
-}
-
 #button:disabled {
   cursor: initial;
 }
 
 #button:disabled + #border {
-  border-color: var(--sinch-color-border-disabled);
-}
-
-#button:focus-visible + #border {
-  border-color: var(--sinch-color-border-focus);
-  border-width: 2px;
-}
-
-:host([invalid]) #button:enabled + #border {
-  border-color: var(--sinch-color-text-invalid);
+  border-color: var(--sinch-comp-select-button-color-disabled-border-initial);
 }
 
 #button:disabled ~ #text {
-  color: var(--sinch-color-text-disabled);
+  --sinch-global-color-text: var(--sinch-comp-select-button-color-disabled-text-initial);
+}
+
+#button:disabled ~ #placeholder {
+  --sinch-global-color-text: var(--sinch-comp-select-button-color-disabled-placeholder-initial);
+}
+
+:host([invalid]) #button:enabled + #border {
+  border-color: var(--sinch-comp-select-button-color-invalid-border-initial);
+}
+
+#wrapper > #button:focus-visible + #border {
+  border-color: var(--sinch-comp-select-button-color-default-border-focus);
+  border-width: 2px;
 }
 
 #left {
@@ -138,5 +153,6 @@
   </div>
   <slot name="icon"></slot>
   <sinch-text id="text" type="m" ellipsis></sinch-text>
-  <sinch-icon id="dropdown-icon"></sinch-icon>
+  <sinch-text id="placeholder" type="m" ellipsis></sinch-text>
+  <sinch-icon id="dropdown-icon" name="keyboard_arrow_down"></sinch-icon>
 </div>

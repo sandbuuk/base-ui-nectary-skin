@@ -1,10 +1,10 @@
 <template>
-  <sinch-popover
-    :open="isOpen"
-    orientation="bottom"
+    <sinch-popover
+      :open="isOpen"
+      orientation="bottom"
     modal
-    @--close="onClose"
-  >
+      @--close="onClose"
+    >
     <sinch-field
       slot="target"
       label="Select"

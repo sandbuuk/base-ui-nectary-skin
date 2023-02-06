@@ -1,5 +1,5 @@
 <template>
-  <sinch-radio :value="value" @--change="onChange">
+  <sinch-radio :value="value" :invalid="isInvalid" @--change="onChange">
     <sinch-radio-option v-for="opt in options"
       :key="opt.value"
       :value="opt.value"
@@ -12,6 +12,25 @@
 <script>
 import '@sinch-engage/nectary/radio'
 import '@sinch-engage/nectary/radio-option'
+
+const options = [{
+  value: '1',
+  text: 'Option value 1',
+}, {
+  value: '2',
+  text: 'Option value 2',
+  disabled: true,
+}, {
+  value: '3',
+  text: 'Option value 3',
+}, {
+  value: '4',
+  text: 'Option value 4',
+}]
+const singleOption = [{
+  value: '1',
+  text: 'Option value 1',
+}]
 
 export default {
   props: {
@@ -29,18 +48,15 @@ export default {
     isControlled() {
       return this.search.get('uncontrolled') === null
     },
+    isInvalid() {
+      return this.search.get('invalid') !== null
+    },
     options() {
-      const data = this.search.get('options')
+      const example = this.search.get('example')
 
-      if (data === null) {
-        return []
-      }
-
-      try {
-        return JSON.parse(decodeURI(data))
-      } catch {
-        return []
-      }
+      return example === 'single'
+        ? singleOption
+        : options
     }
   },
   data() {

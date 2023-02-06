@@ -155,6 +155,7 @@ const config: TWebpackConfig = {
   optimization: {
     minimize: false,
     minimizer: [
+      // @ts-expect-error
       new TerserPlugin({
         parallel: true,
         extractComments: true,

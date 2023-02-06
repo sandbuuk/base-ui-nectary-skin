@@ -176,6 +176,22 @@ export const getCssVars = (element: Element, variableNames: string[]): (string |
   })
 }
 
+export const getDropShadowCssVar = (element: Element, varName: string): string | null => {
+  const shadowValue = getCssVar(element, varName)
+
+  if (shadowValue === null) {
+    return null
+  }
+
+  const tokens = shadowValue.split(' ')
+  const x = tokens[0]
+  const y = tokens[1]
+  const blur = tokens[2]
+  const color = tokens.length > 4 ? tokens[4] : tokens[tokens.length - 1]
+
+  return `drop-shadow(${x} ${y} ${blur} ${color})`
+}
+
 export const cloneNode = (el: Element, deep: boolean): Element => {
   const root = el.getRootNode()
 

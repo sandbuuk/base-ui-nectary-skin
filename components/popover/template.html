@@ -8,14 +8,30 @@
   padding-top: 4px;
 }
 
+:host([tip]) #content-wrapper {
+  padding-top: 12px;
+}
+
+:host([orientation^="top"]) #content-wrapper {
+  padding-top: 0;
+  padding-bottom: 4px;
+}
+
+:host([orientation^="top"][tip]) #content-wrapper {
+  padding-top: 0;
+  padding-bottom: 12px;
+}
+
 #content {
-  font: var(--sinch-font-text-m);
-  color: var(--sinch-color-text-default);
-  background-color: var(--sinch-color-snow-100);
-  border: 1px solid var(--sinch-color-snow-500);
-  border-radius: var(--sinch-shape-radius-m);
-  box-shadow: var(--sinch-elevation-level-2);
+  background-color: var(--sinch-comp-popover-color-default-background-initial);
+  border: 1px solid var(--sinch-comp-popover-color-default-border-initial);
+  border-radius: var(--sinch-comp-popover-shape-radius);
+  box-shadow: var(--sinch-comp-popover-shadow);
   overflow: hidden;
+}
+
+:host([tip]) #content {
+  box-shadow: none;
 }
 
 #tip {
@@ -24,8 +40,8 @@
   top: 13px;
   transform: translateX(-50%) rotate(180deg);
   transform-origin: top center;
-  fill: var(--sinch-color-snow-100);
-  stroke: var(--sinch-color-snow-500);
+  fill: var(--sinch-comp-popover-color-default-background-initial);
+  stroke: var(--sinch-comp-popover-color-default-border-initial);
   stroke-linecap: square;
   pointer-events: none;
   display: none;
@@ -39,26 +55,6 @@
 :host([tip]) #tip:not(.hidden) {
   display: block;
 }
-
-:host([tip]) #content {
-  box-shadow: none;
-}
-
-:host([tip]) #content-wrapper {
-  padding-top: 12px;
-  filter: drop-shadow(var(--sinch-elevation-level-2));
-}
-
-:host([orientation^="top"]) #content-wrapper {
-  padding-top: 0;
-  padding-bottom: 4px;
-}
-
-:host([orientation^="top"][tip]) #content-wrapper {
-  padding-top: 0;
-  padding-bottom: 12px;
-}
-
 </style>
 
 <sinch-pop id="pop" inset="4">

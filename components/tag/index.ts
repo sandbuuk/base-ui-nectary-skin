@@ -6,6 +6,7 @@ import {
   updateBooleanAttribute,
   updateAttribute,
   NectaryElement,
+  isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertTagColor, getTagColorBg, getTagColorFg } from './utils'
@@ -61,10 +62,14 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'color']
+    return ['text', 'color', 'small']
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'color': {
         this.#updateColor()
@@ -74,6 +79,12 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
       case 'text': {
         this.#$text.textContent = newVal
+
+        break
+      }
+
+      case 'small': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break
       }
@@ -96,12 +107,12 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
       const fg = getTagColorFg(colorName)
 
       this.#$wrapper.style.setProperty('background-color', bg)
-      this.#$wrapper.style.setProperty('color', fg)
-      this.#$wrapper.style.setProperty('--sinch-color-icon', fg)
+      this.#$wrapper.style.setProperty('--sinch-global-color-text', fg)
+      this.#$wrapper.style.setProperty('--sinch-global-color-icon', fg)
     } else {
       this.#$wrapper.style.removeProperty('background-color')
-      this.#$wrapper.style.removeProperty('color')
-      this.#$wrapper.style.removeProperty('--sinch-color-icon')
+      this.#$wrapper.style.removeProperty('--sinch-global-color-text')
+      this.#$wrapper.style.removeProperty('--sinch-global-color-icon')
     }
   }
 })

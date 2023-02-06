@@ -2,28 +2,10 @@ import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const options = encodeURI(JSON.stringify([{
-  value: 1,
-  text: 'Option value 1',
-}, {
-  value: 2,
-  text: 'Option value 2',
-  disabled: true,
-}, {
-  value: 3,
-  text: 'Option value 3',
-}, {
-  value: 4,
-  text: 'Option value 4',
-}]))
-const singleOption = encodeURI(JSON.stringify([{
-  value: 1,
-  text: 'Option value 1',
-}]))
-const withOptions = `/radio?width=200&options=${options}`
-const withSingleOption = `/radio?options=${singleOption}`
-const narrowLabel = `/radio?width=100&options=${singleOption}`
-const checkRadioOptions = makeAccessibilityTests(`/radio?width=200&options=${options}`, 'sinch-radio')
+const withOptions = `/radio?width=200`
+const withSingleOption = `/radio?example=single`
+const narrowLabel = `/radio?width=100&example=single`
+const checkRadioOptions = makeAccessibilityTests(`/radio?width=200`, 'sinch-radio')
 
 test('accessibility', checkRadioOptions({
   async *fn() {

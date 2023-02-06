@@ -1,6 +1,7 @@
 packages:
   - 'assets/'
   - 'components/'
+  - 'themes/base'
   - 'libs/*'
   - 'tests/'
   - 'tests/apps/*'

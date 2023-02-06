@@ -20,8 +20,6 @@ import {
   subscribeContext,
   debounceTimeout,
   setClass,
-  getCssVar,
-  getCssVars,
 } from '../utils'
 import dataJson from './data.json'
 import templateHTML from './template.html'
@@ -38,15 +36,15 @@ import type {
   TContextVisibility,
 } from '../utils'
 
-const groupIconTagNames = [
-  '--sinch-emoji-picker-icon-emoji-emotions',
-  '--sinch-emoji-picker-icon-emoji-people',
-  '--sinch-emoji-picker-icon-emoji-animals-nature',
-  '--sinch-emoji-picker-icon-emoji-food-drinks',
-  '--sinch-emoji-picker-icon-emoji-travel-places',
-  '--sinch-emoji-picker-icon-emoji-sports-activities',
-  '--sinch-emoji-picker-icon-emoji-objects',
-  '--sinch-emoji-picker-icon-emoji-symbols-flags',
+const groupIconNames = [
+  'sentiment_satisfied',
+  'emoji_people',
+  'pets',
+  'emoji_food_beverage',
+  'emoji_transportation',
+  'sports_tennis',
+  'emoji_objects',
+  'emoji_symbols',
 ]
 const groupLabels = [
   'Emotions',
@@ -75,7 +73,6 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   #$skinButton: TSinchIconButtonElement
   #$list: HTMLElement
   #$notFound: HTMLElement
-  #$iconSearch: HTMLElement
   #controller: AbortController | null = null
   #$sh: ShadowRoot
   #searchDebounce
@@ -98,7 +95,6 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     this.#$skinButton = shadowRoot.querySelector('#skin-button')!
     this.#$list = shadowRoot.querySelector('#list')!
     this.#$notFound = shadowRoot.querySelector('#not-found')!
-    this.#$iconSearch = shadowRoot.querySelector('#icon-search')!
     this.#searchDebounce = debounceTimeout(SEARCH_DEBOUNCE_TIMEOUT)(this.#updateSearch)
   }
 
@@ -115,8 +111,6 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     this.#$skinMenu.addEventListener('-change', this.#onSkinMenuChange as any, { signal })
     this.#$list.addEventListener('click', this.#onListClick, { signal })
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
-
-    updateAttribute(this.#$iconSearch, 'name', getCssVar(this, '--sinch-emoji-picker-icon-search'))
 
     subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
     subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
@@ -259,7 +253,6 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     const doc = this.#getDocumentRoot()
     const tabsFragment = document.createDocumentFragment()
     const activeTab = data[0].name
-    const iconNames = getCssVars(this, groupIconTagNames)
 
     for (let i = 0; i < data.length;i++) {
       const group = data[i]
@@ -267,7 +260,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
       const icon = doc.createElement('sinch-icon')
 
       icon.setAttribute('slot', 'icon')
-      updateAttribute(icon, 'name', iconNames[i])
+      updateAttribute(icon, 'name', groupIconNames[i])
       tabOption.setAttribute('value', group.name)
       tabOption.setAttribute('aria-label', groupLabels[i])
       tabOption.appendChild(icon)
@@ -383,32 +376,32 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     this.#$skinMenu.value = e.detail
 
     switch (e.detail) {
-      case 'skin-tone-0': {
+      case 'skintone-default': {
         this.#currentSkinTone = 0
 
         break
       }
-      case 'skin-tone-10': {
+      case 'skintone-light': {
         this.#currentSkinTone = 1
 
         break
       }
-      case 'skin-tone-20': {
+      case 'skintone-light-medium': {
         this.#currentSkinTone = 2
 
         break
       }
-      case 'skin-tone-30': {
+      case 'skintone-medium': {
         this.#currentSkinTone = 3
 
         break
       }
-      case 'skin-tone-40': {
+      case 'skintone-medium-dark': {
         this.#currentSkinTone = 4
 
         break
       }
-      case 'skin-tone-50': {
+      case 'skintone-dark': {
         this.#currentSkinTone = 5
 
         break

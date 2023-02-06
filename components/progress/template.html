@@ -16,22 +16,24 @@
 }
 
 #progress {
-  background-color: var(--sinch-color-tropical-100);
+  background-color: var(--sinch-comp-progress-color-default-background-initial);
   flex: 1;
   min-width: 0;
 }
 
 #bar {
-  background-color: var(--sinch-color-tropical-500);
+  background-color: var(--sinch-comp-progress-color-default-bar-initial);
   width: 0;
 }
 
 #text {
   display: none;
   width: 46px;
+
+  --sinch-global-color-text: var(--sinch-comp-progress-color-default-text-initial);
 }
 
-:host([detailed]:not([detailed="false"])) #text {
+:host([detailed]) #text {
   display: block;
 }
 </style>

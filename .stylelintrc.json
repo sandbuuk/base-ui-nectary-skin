@@ -12,6 +12,7 @@
     "declaration-block-no-redundant-longhand-properties": null,
     "color-function-notation": "legacy",
     "alpha-value-notation": "number",
-    "block-no-empty": null
+    "block-no-empty": null,
+    "max-line-length": null
   }
 }

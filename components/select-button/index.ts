@@ -15,7 +15,6 @@ import {
   updateExplicitBooleanAttribute,
   updateLiteralAttribute,
   Context,
-  getCssVar,
 } from '../utils'
 import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
@@ -31,8 +30,8 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-select-button', class extends NectaryElement {
   #$button: HTMLButtonElement
-  #$icon: HTMLElement
   #$text: HTMLElement
+  #$placeholder: HTMLElement
   #$leftSlot: HTMLSlotElement
   #$leftWrapper: HTMLElement
   #$wrapper: HTMLElement
@@ -47,8 +46,8 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$button = shadowRoot.querySelector('#button')!
-    this.#$icon = shadowRoot.querySelector('#dropdown-icon')!
     this.#$text = shadowRoot.querySelector('#text')!
+    this.#$placeholder = shadowRoot.querySelector('#placeholder')!
     this.#$leftSlot = shadowRoot.querySelector('slot[name="left"]')!
     this.#$leftWrapper = shadowRoot.querySelector('#left')!
     this.#$wrapper = shadowRoot.querySelector('#wrapper')!
@@ -70,8 +69,6 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
     this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
     this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
     this.#$leftSlot.addEventListener('slotchange', this.#onLeftSlotChange, { signal })
-
-    updateAttribute(this.#$icon, 'name', getCssVar(this, '--sinch-select-button-icon-dropdown'))
 
     this.#sizeContext.listen(this.#controller.signal)
     subscribeContext(this, 'size', this.#onContextSize, signal)
@@ -103,19 +100,13 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
 
     switch (name) {
       case 'text': {
-        const value = newVal ?? ''
-
-        this.#$text.textContent = value.length > 0 ? value : this.placeholder
+        this.#$text.textContent = newVal
 
         break
       }
 
       case 'placeholder': {
-        const value = this.text
-
-        if (value.length === 0) {
-          this.#$text.textContent = newVal ?? ''
-        }
+        this.#$placeholder.textContent = newVal
 
         break
       }
@@ -123,8 +114,8 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
       case 'invalid': {
         const isInvalid = isAttrTrue(newVal)
 
-        updateBooleanAttribute(this, 'invalid', isInvalid)
         updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+        updateBooleanAttribute(this, 'invalid', isInvalid)
 
         break
       }

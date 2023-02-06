@@ -44,6 +44,33 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
     return ['data-checked', 'disabled', 'text']
   }
 
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'text': {
+        this.#$text.textContent = newVal
+
+        break
+      }
+      case 'data-checked': {
+        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
+
+        break
+      }
+      case 'disabled': {
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$button.disabled = isDisabled
+        updateBooleanAttribute(this, name, isDisabled)
+
+        break
+      }
+    }
+  }
+
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }
@@ -66,26 +93,6 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
 
   get text() {
     return getAttribute(this, 'text', '')
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'text': {
-        this.#$text.textContent = newVal
-
-        break
-      }
-      case 'data-checked': {
-        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
-
-        break
-      }
-      case 'disabled': {
-        this.#$button.disabled = isAttrTrue(newVal)
-
-        break
-      }
-    }
   }
 
   get focusable() {

@@ -1,43 +1,58 @@
 <style>
 :host {
-  --sinch-color-radio-outer-circle: var(--sinch-color-transparent);
-  --sinch-color-radio-background: var(--sinch-color-snow-100);
-  --sinch-color-radio-border: var(--sinch-color-stormy-300);
-  --sinch-color-radio-outer-circle-checked: var(--sinch-color-transparent);
-  --sinch-color-radio-border-checked: var(--sinch-color-tropical-500);
-  --sinch-color-radio-outer-circle-hover: var(--sinch-color-snow-500);
-  --sinch-color-radio-border-hover: var(--sinch-color-stormy-300);
-  --sinch-color-radio-outer-circle-hover-checked: var(--sinch-color-tropical-100);
-  --sinch-color-radio-border-hover-checked: var(--sinch-color-tropical-500);
-  --sinch-color-radio-outer-circle-focus: var(--sinch-color-snow-700);
-  --sinch-color-radio-border-focus: var(--sinch-color-stormy-300);
-  --sinch-color-radio-outer-circle-focus-checked: var(--sinch-color-tropical-200);
-  --sinch-color-radio-border-focus-checked: var(--sinch-color-tropical-500);
-  --sinch-color-radio-outer-circle-active: var(--sinch-color-stormy-100);
-  --sinch-color-radio-border-active: var(--sinch-color-stormy-300);
-  --sinch-color-radio-outer-circle-active-checked: var(--sinch-color-tropical-300);
-  --sinch-color-radio-border-active-checked: var(--sinch-color-tropical-500);
-  --sinch-color-radio-outer-circle-disabled: var(--sinch-color-transparent);
-  --sinch-color-radio-border-disabled: var(--sinch-color-stormy-100);
-  --sinch-color-radio-outer-circle-disabled-checked: var(--sinch-color-transparent);
-  --sinch-color-radio-border-disabled-checked: var(--sinch-color-stormy-100);
-
   display: block;
   outline: none;
 }
 
 #wrapper {
   display: flex;
-  height: 32px;
+  flex-direction: row;
   box-sizing: border-box;
   width: 100%;
+
+  --sinch-local-size: 24px;
+  --sinch-local-color-background: var(--sinch-comp-radio-color-default-background-initial);
+  --sinch-local-color-background-hover: var(--sinch-comp-radio-color-default-background-hover);
+  --sinch-local-color-background-active: var(--sinch-comp-radio-color-default-background-active);
+  --sinch-local-color-border: var(--sinch-comp-radio-color-default-border-initial);
+  --sinch-local-color-border-hover: var(--sinch-comp-radio-color-default-border-hover);
+  --sinch-local-color-border-active: var(--sinch-comp-radio-color-default-border-active);
+  --sinch-local-color-knob: var(--sinch-comp-radio-color-checked-knob-initial);
+  --sinch-local-color-knob-hover: var(--sinch-comp-radio-color-checked-knob-hover);
+  --sinch-local-color-knob-active: var(--sinch-comp-radio-color-checked-knob-active);
+  --sinch-local-color-text: var(--sinch-comp-radio-color-default-label-initial);
+}
+
+:host([data-invalid]) > #wrapper {
+  --sinch-local-color-border: var(--sinch-comp-radio-color-invalid-border-initial);
+  --sinch-local-color-border-hover: var(--sinch-comp-radio-color-invalid-border-hover);
+  --sinch-local-color-border-active: var(--sinch-comp-radio-color-invalid-border-active);
+  --sinch-local-color-text: var(--sinch-comp-radio-color-invalid-label-initial);
+}
+
+:host([checked]) > #wrapper {
+  --sinch-local-color-border: var(--sinch-comp-radio-color-checked-border-initial);
+  --sinch-local-color-border-hover: var(--sinch-comp-radio-color-checked-border-hover);
+  --sinch-local-color-border-active: var(--sinch-comp-radio-color-checked-border-active);
+}
+
+:host([disabled]) > #wrapper {
+  --sinch-local-color-background: var(--sinch-comp-radio-color-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-radio-color-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-radio-color-disabled-label-initial);
+}
+
+:host([disabled][checked]) > #wrapper {
+  --sinch-local-color-border: var(--sinch-comp-radio-color-checked-disabled-border-initial);
+  --sinch-local-color-knob: var(--sinch-comp-radio-color-checked-disabled-knob-initial);
+  --sinch-local-color-text: var(--sinch-comp-radio-color-checked-disabled-label-initial);
 }
 
 #input {
   all: initial;
   display: block;
-  width: 32px;
-  height: 32px;
+  width: var(--sinch-local-size);
+  height: var(--sinch-local-size);
   cursor: pointer;
 }
 
@@ -45,57 +60,85 @@
   cursor: initial;
 }
 
-#icon-container {
-  position: relative;
-  width: 32px;
-  height: 32px;
-}
-
-/* Outer Circle */
+/* Outline */
 #input::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  pointer-events: none;
-  background-color: var(--sinch-color-radio-outer-circle);
-  transition: background-color 0.1s linear;
-}
-
-/* Border / Background */
-#input::after {
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  pointer-events: none;
-  background-color: var(--sinch-color-radio-background);
-  border: 2px solid var(--sinch-color-radio-border);
-  transition: background-color 0.1s linear;
-  box-sizing: border-box;
-}
-
-#icon-knob {
-  position: absolute;
-  left: 11px;
-  top: 11px;
-  width: 10px;
-  height: 10px;
+  width: var(--sinch-local-size);
+  height: var(--sinch-local-size);
+  border: 2px solid var(--sinch-comp-radio-color-default-outline-focus);
   border-radius: 50%;
   transition: opacity 0.1s linear;
   opacity: 0;
-  background-color: var(--sinch-color-radio-border);
+  box-sizing: border-box;
   pointer-events: none;
 }
 
+#input:focus-visible::before {
+  opacity: 1;
+}
+
+/* Circle Border / Background */
+#input::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  inset: 0;
+  margin: auto;
+  background-color: var(--sinch-local-color-background);
+  border: 1px solid var(--sinch-local-color-border);
+  border-radius: 50%;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+#input:enabled:hover::after {
+  background-color: var(--sinch-local-color-background-hover);
+  border-color: var(--sinch-local-color-border-hover);
+}
+
+#input:enabled:active::after {
+  background-color: var(--sinch-local-color-background-active);
+  border-color: var(--sinch-local-color-border-active);
+}
+
+#input-wrapper {
+  position: relative;
+  width: var(--sinch-local-size);
+  height: var(--sinch-local-size);
+  align-self: flex-start;
+}
+
+#knob {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  inset: 0;
+  margin: auto;
+  border-radius: 50%;
+  transition: opacity 0.1s linear;
+  opacity: 0;
+  background-color: var(--sinch-local-color-knob);
+  pointer-events: none;
+}
+
+#input:checked + #knob {
+  opacity: 1;
+}
+
+#input:enabled:hover + #knob {
+  background-color: var(--sinch-local-color-knob-hover);
+}
+
+#input:enabled:active + #knob {
+  background-color: var(--sinch-local-color-knob-active);
+}
+
 @media (prefers-reduced-motion) {
-  #icon-knob,
+  #knob,
   #input::before,
   #input::after {
     transition: none;
@@ -103,147 +146,23 @@
 }
 
 #label {
-  align-self: center;
   flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  align-self: center;
   padding-left: 8px;
-  font: var(--sinch-font-text-m);
-  color: var(--sinch-color-text-default);
+  font: var(--sinch-comp-radio-font-label);
+  color: var(--sinch-local-color-text);
+  cursor: pointer;
 }
 
-:host([disabled]:not([disabled="false"])) #label {
-  color: var(--sinch-color-stormy-200);
-}
-
-/* Colors Checked */
-#input:checked::before {
-  background-color: var(--sinch-color-radio-outer-circle-checked);
-}
-
-#input:checked::after {
-  border-color: var(--sinch-color-radio-border-checked);
-}
-
-#input:checked ~ #icon-knob {
-  opacity: 1;
-  background-color: var(--sinch-color-radio-border-checked);
-}
-
-/* Colors Focus */
-#input:focus::before {
-  background-color: var(--sinch-color-radio-outer-circle-focus);
-}
-
-#input:focus::after {
-  border-color: var(--sinch-color-radio-border-focus);
-}
-
-#input:focus ~ #icon-knob {
-  background-color: var(--sinch-color-radio-border-focus);
-}
-
-/* Colors Hover */
-#input:hover::before {
-  background-color: var(--sinch-color-radio-outer-circle-hover);
-}
-
-#input:hover::after {
-  border-color: var(--sinch-color-radio-border-hover);
-}
-
-#input:hover ~ #icon-knob {
-  background-color: var(--sinch-color-radio-border-hover);
-}
-
-/* Colors Active */
-#input:active::before {
-  background-color: var(--sinch-color-radio-outer-circle-active);
-}
-
-#input:active::after {
-  border-color: var(--sinch-color-radio-border-active);
-}
-
-#input:active ~ #icon-knob {
-  background-color: var(--sinch-color-radio-border-active);
-}
-
-/* Colors Disabled */
-#input:disabled::before {
-  background-color: var(--sinch-color-radio-outer-circle-disabled);
-}
-
-#input:disabled::after {
-  border-color: var(--sinch-color-radio-border-disabled);
-}
-
-#input:disabled ~ #icon-knob {
-  background-color: var(--sinch-color-radio-border-disabled);
-}
-
-/* Colors Focus Checked */
-#input:focus:checked::before {
-  background-color: var(--sinch-color-radio-outer-circle-focus-checked);
-}
-
-#input:focus:checked::after {
-  border-color: var(--sinch-color-radio-border-focus-checked);
-}
-
-#input:focus:checked ~ #icon-knob {
-  opacity: 1;
-  background-color: var(--sinch-color-radio-border-focus-checked);
-}
-
-/* Colors Hover Checked */
-#input:hover:checked::before {
-  background-color: var(--sinch-color-radio-outer-circle-hover-checked);
-}
-
-#input:hover:checked::after {
-  border-color: var(--sinch-color-radio-border-hover-checked);
-}
-
-#input:hover:checked ~ #icon-knob {
-  opacity: 1;
-  background-color: var(--sinch-color-radio-border-hover-checked);
-}
-
-/* Colors Active Checked */
-#input:active:checked::before {
-  background-color: var(--sinch-color-radio-outer-circle-active-checked);
-}
-
-#input:active:checked::after {
-  border-color: var(--sinch-color-radio-border-active-checked);
-}
-
-#input:active:checked ~ #icon-knob {
-  opacity: 1;
-  background-color: var(--sinch-color-radio-border-active-checked);
-}
-
-/* Colors Disabled Checked */
-#input:disabled:checked::before {
-  background-color: var(--sinch-color-radio-outer-circle-disabled-checked);
-}
-
-#input:disabled:checked::after {
-  border-color: var(--sinch-color-radio-border-disabled-checked);
-}
-
-#input:disabled:checked ~ #icon-knob {
-  opacity: 1;
-  background-color: var(--sinch-color-radio-border-disabled-checked);
+:host([disabled]) #label {
+  cursor: initial;
 }
 </style>
 
 <div id="wrapper">
-  <div id="icon-container">
+  <div id="input-wrapper">
     <input id="input" type="radio"/>
-    <div id="icon-knob"></div>
+    <div id="knob"></div>
   </div>
   <label for="input" id="label"></label>
 </div>

@@ -1,0 +1,23 @@
+:root,
+:host {
+  --sinch-comp-file-status-color-pending-background: var(--sinch-sys-color-container-contrast-default);
+  --sinch-comp-file-status-color-pending-icon: var(--sinch-sys-color-text-default);
+  --sinch-comp-file-status-color-pending-text: var(--sinch-sys-color-text-default);
+  --sinch-comp-file-status-color-progress-background: var(--sinch-sys-color-container-contrast-default);
+  --sinch-comp-file-status-color-progress-icon: var(--sinch-sys-color-text-default);
+  --sinch-comp-file-status-color-progress-text: var(--sinch-sys-color-text-default);
+  --sinch-comp-file-status-color-progress-info: var(--sinch-sys-color-text-muted);
+  --sinch-comp-file-status-color-success-background: var(--sinch-sys-color-container-contrast-default);
+  --sinch-comp-file-status-color-success-icon: var(--sinch-sys-color-feedback-success-contrast);
+  --sinch-comp-file-status-color-success-text: var(--sinch-sys-color-text-default);
+  --sinch-comp-file-status-color-error-background: var(--sinch-sys-color-container-complement-4-default);
+  --sinch-comp-file-status-color-error-icon: var(--sinch-sys-color-feedback-invalid-contrast);
+  --sinch-comp-file-status-color-error-text: var(--sinch-sys-color-text-default);
+  --sinch-comp-file-status-color-loading-background: var(--sinch-sys-color-container-contrast-default);
+  --sinch-comp-file-status-color-loading-icon: var(--sinch-sys-color-text-default);
+  --sinch-comp-file-status-color-loading-text: var(--sinch-sys-color-text-default);
+  --sinch-comp-file-status-shape-radius: var(--sinch-sys-shape-radius-l);
+  --sinch-comp-file-status-font-title: var(--sinch-sys-font-desktop-title-s);
+  --sinch-comp-file-status-font-body: var(--sinch-sys-font-body-m);
+  --sinch-comp-file-status-font-info: var(--sinch-sys-font-body-m);
+}

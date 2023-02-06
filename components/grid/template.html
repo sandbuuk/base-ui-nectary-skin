@@ -1,40 +1,40 @@
 <style>
 :host {
-  --sinch-grid-gutter: 24px;
-  --sinch-grid-margin: 32px;
-  --sinch-grid-num-columns: 12;
+  --sinch-comp-grid-gutter: 24px;
+  --sinch-comp-grid-margin: 32px;
+  --sinch-comp-grid-num-columns: 12;
 
   display: grid;
-  grid-template-columns: repeat(var(--sinch-grid-num-columns), minmax(0, 1fr));
-  grid-column-gap: var(--sinch-grid-gutter);
-  grid-row-gap: var(--sinch-grid-gutter);
-  padding: var(--sinch-grid-margin);
+  grid-template-columns: repeat(var(--sinch-comp-grid-num-columns), minmax(0, 1fr));
+  grid-column-gap: var(--sinch-comp-grid-gutter);
+  grid-row-gap: var(--sinch-comp-grid-gutter);
+  padding: var(--sinch-comp-grid-margin);
 }
 
 /* L */
 @media only screen and (max-width: 1439px) {
   :host {
-    --sinch-grid-gutter: 24px;
-    --sinch-grid-margin: 24px;
-    --sinch-grid-num-columns: 12;
+    --sinch-comp-grid-gutter: 24px;
+    --sinch-comp-grid-margin: 24px;
+    --sinch-comp-grid-num-columns: 12;
   }
 }
 
 /* M */
 @media only screen and (max-width: 1023px) {
   :host {
-    --sinch-grid-gutter: 24px;
-    --sinch-grid-margin: 24px;
-    --sinch-grid-num-columns: 8;
+    --sinch-comp-grid-gutter: 24px;
+    --sinch-comp-grid-margin: 24px;
+    --sinch-comp-grid-num-columns: 8;
   }
 }
 
 /* S */
 @media only screen and (max-width: 767px) {
   :host {
-    --sinch-grid-gutter: 16px;
-    --sinch-grid-margin: 16px;
-    --sinch-grid-num-columns: 4;
+    --sinch-comp-grid-gutter: 16px;
+    --sinch-comp-grid-margin: 16px;
+    --sinch-comp-grid-num-columns: 4;
   }
 }
 </style>

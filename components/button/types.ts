@@ -4,7 +4,7 @@ import type { TSinchSize } from '../utils/size'
 export type TSinchButtonType = 'primary' | 'secondary' | 'tertiary' | 'cta-primary' | 'cta-secondary' | 'destructive'
 
 export type TSinchButtonElement = HTMLElement & {
-  /** Type, `primary` by default */
+  /** Button Type */
   type: TSinchButtonType,
   /** Size, `m` by default */
   size: TSinchSize,
@@ -29,7 +29,7 @@ export type TSinchButtonElement = HTMLElement & {
 }
 
 export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
-  /** Type, `primary` by default */
+  /** Button Type */
   type?: TSinchButtonType,
   /** Size, `m` by default */
   size?: TSinchSize,

@@ -12,6 +12,7 @@ import {
   setClass,
   rectOverlap,
   subscribeContext,
+  getDropShadowCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertOrientation, getPopOrientation, orientationValues } from './utils'
@@ -27,6 +28,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-popover', class extends NectaryElement {
   #$pop: TSinchPopElement
   #$content: HTMLElement
+  #$contentWrapper: HTMLElement
   #$tip: HTMLElement
   #controller: AbortController | null = null
   constructor() {
@@ -38,6 +40,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     this.#$pop = shadowRoot.querySelector('#pop')!
     this.#$content = shadowRoot.querySelector('#content')!
+    this.#$contentWrapper = shadowRoot.querySelector('#content-wrapper')!
     this.#$tip = shadowRoot.querySelector('#tip')!
   }
 
@@ -51,29 +54,63 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     subscribeContext(this.#$content, 'visibility', this.#onContextVisibility, signal)
     updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
+    this.#updateShadow(this.tip)
   }
 
   disconnectedCallback() {
     this.#controller!.abort()
   }
 
-  #onPopClose = () => {
-    this.#dispatchCloseEvent()
-  }
-
-  #onCloseReactHandler = (e: Event) => {
-    getReactEventHandler(this, 'onClose')?.()
-    getReactEventHandler(this, 'on-close')?.(e)
-  }
-
-  #dispatchCloseEvent() {
-    this.dispatchEvent(
-      new CustomEvent('-close')
-    )
-  }
-
   static get observedAttributes() {
-    return ['orientation', 'open', 'modal', 'tip']
+    return [
+      'orientation',
+      'open',
+      'modal',
+      'tip',
+    ]
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'orientation': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertOrientation(newVal)
+        }
+
+        updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
+
+        if (this.#$pop.open) {
+          this.#updateTipOrientation()
+        }
+
+        break
+      }
+
+      case 'tip': {
+        const hasTip = isAttrTrue(newVal)
+
+        if (hasTip && this.#$pop.open) {
+          this.#updateTipOrientation()
+        }
+
+        this.#updateShadow(hasTip)
+        updateBooleanAttribute(this, name, hasTip)
+
+        break
+      }
+
+      case 'modal':
+      case 'open': {
+        updateAttribute(this.#$pop, name, newVal)
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+    }
   }
 
   set modal(isModal: boolean) {
@@ -116,49 +153,28 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     return this.#$pop.popoverRect
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
+  #updateShadow(hasTip: boolean) {
+    this.#$contentWrapper.style.setProperty(
+      'filter',
+      hasTip
+        ? getDropShadowCssVar(this, '--sinch-comp-popover-shadow')
+        : null
+    )
+  }
 
-    switch (name) {
-      case 'orientation': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertOrientation(newVal)
-        }
+  #onPopClose = () => {
+    this.#dispatchCloseEvent()
+  }
 
-        updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
+  #onCloseReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'onClose')?.()
+    getReactEventHandler(this, 'on-close')?.(e)
+  }
 
-        if (this.#isOpen()) {
-          this.#updateTipOrientation()
-        }
-
-        break
-      }
-
-      case 'tip': {
-        updateBooleanAttribute(this, 'tip', isAttrTrue(newVal))
-
-        if (newVal === '' && this.#isOpen()) {
-          this.#updateTipOrientation()
-        }
-
-        break
-      }
-
-      case 'open': {
-        const isOpen = isAttrTrue(newVal)
-
-        updateBooleanAttribute(this.#$pop, name, isOpen)
-        updateBooleanAttribute(this, name, isOpen)
-
-        break
-      }
-
-      default: {
-        updateAttribute(this.#$pop, name, newVal)
-      }
-    }
+  #dispatchCloseEvent() {
+    this.dispatchEvent(
+      new CustomEvent('-close')
+    )
   }
 
   #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
@@ -194,10 +210,6 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$tip.style.left = `${xPos}px`
 
     setClass(this.#$tip, 'hidden', rectOverlap(targetRect, contentRect))
-  }
-
-  #isOpen() {
-    return this.#$pop.open
   }
 })
 

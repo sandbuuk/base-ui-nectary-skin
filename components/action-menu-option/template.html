@@ -15,30 +15,35 @@
   gap: 10px;
   user-select: none;
   cursor: pointer;
-  color: var(--sinch-color-text-default);
+  background-color: var(--sinch-comp-action-menu-color-default-background-initial);
 
-  --sinch-color-icon: var(--sinch-color-stormy-500);
-  --sinch-size-icon: 24px;
+  --sinch-global-color-text: var(--sinch-comp-action-menu-color-default-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-action-menu-color-default-icon-initial);
+  --sinch-global-size-icon: var(--sinch-comp-action-menu-size-icon);
 }
 
-#content {
-  flex-shrink: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+:host([data-selected]) > #wrapper {
+  background-color: var(--sinch-comp-action-menu-color-default-background-selected);
+}
+
+:host(:hover) > #wrapper {
+  background-color: var(--sinch-comp-action-menu-color-default-background-hover);
 }
 
 :host([disabled]) > #wrapper {
   cursor: initial;
   pointer-events: none;
-  color: var(--sinch-color-text-disabled);
+  background-color: var(--sinch-comp-action-menu-color-disabled-background-initial);
 
-  --sinch-color-icon: var(--sinch-color-stormy-100);
+  --sinch-global-color-text: var(--sinch-comp-action-menu-color-disabled-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-action-menu-color-disabled-icon-initial);
 }
 
-:host([data-selected]) > #wrapper,
-:host(:hover:not([disabled])) > #wrapper {
-  background-color: var(--sinch-color-snow-400);
+#content {
+  flex: 1;
+  min-width: 0;
+
+  --sinch-comp-text-font: var(--sinch-comp-action-menu-font-option);
 }
 
 ::slotted(*) {

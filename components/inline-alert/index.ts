@@ -10,7 +10,6 @@ import {
   updateLiteralAttribute,
   NectaryElement,
   setClass,
-  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertType, typeValues } from './utils'
@@ -21,7 +20,6 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-inline-alert', class extends NectaryElement {
-  #$icon: HTMLElement
   #$text: HTMLElement
   #$caption: HTMLElement
   #$closeWrapper: HTMLElement
@@ -36,7 +34,6 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$icon = shadowRoot.querySelector('#icon')!
     this.#$text = shadowRoot.querySelector('#text')!
     this.#$caption = shadowRoot.querySelector('#caption')!
     this.#$closeWrapper = shadowRoot.querySelector('#close')!
@@ -54,13 +51,40 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
 
     this.#onCloseSlotChange()
     this.#onActionSlotChange()
-    this.#updateIcon()
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
     this.#$closeSlot.removeEventListener('slotchange', this.#onCloseSlotChange)
     this.#$actionSlot.removeEventListener('slotchange', this.#onActionSlotChange)
+  }
+
+  static get observedAttributes() {
+    return ['text', 'caption', 'type']
+  }
+
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+    switch (name) {
+      case 'type': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
+
+        break
+      }
+
+      case 'text': {
+        updateAttribute(this.#$text, 'text', newVal)
+
+        break
+      }
+
+      case 'caption': {
+        updateAttribute(this.#$caption, 'text', newVal)
+
+        break
+      }
+    }
   }
 
   get type() {
@@ -85,44 +109,6 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
 
   set caption(value: string) {
     updateAttribute(this, 'caption', value)
-  }
-
-  static get observedAttributes() {
-    return ['text', 'caption', 'type']
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        this.#updateIcon()
-
-        break
-      }
-
-      case 'text': {
-        updateAttribute(this.#$text, 'text', newVal)
-
-        break
-      }
-
-      case 'caption': {
-        updateAttribute(this.#$caption, 'text', newVal)
-
-        break
-      }
-    }
-  }
-
-  #updateIcon() {
-    if (!this.isConnected) {
-      return
-    }
-
-    updateAttribute(this.#$icon, 'name', getCssVar(this, `--sinch-inline-alert-icon-${this.type}`))
   }
 
   #onCloseSlotChange = () => {

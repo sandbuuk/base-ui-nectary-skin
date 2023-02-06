@@ -7,6 +7,7 @@ import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
 import '@sinch-engage/nectary/flag'
+import '@sinch-engage/nectary/text'
 
 type TDialog = {
   search: URLSearchParams,
@@ -40,6 +41,9 @@ export const DialogExample: FC<TDialog> = () => {
   const onDropdownClose = () => {
     setDropdownOpen(false)
   }
+  const onActionClick = () => {
+    console.log('ACTION CLICK')
+  }
 
   return (
     <>
@@ -56,11 +60,11 @@ export const DialogExample: FC<TDialog> = () => {
         close-aria-label="Close dialog"
         on-close={onDialogClose}
       >
-        <section slot="content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</section>
+        <sinch-text slot="content" type="m">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</sinch-text>
         <sinch-popover
           slot="content"
           open={isDropdownOpen}
-          orientation="bottom"
+          orientation="bottom-left"
           on-close={onDropdownClose}
           aria-label="Select"
         >
@@ -76,6 +80,7 @@ export const DialogExample: FC<TDialog> = () => {
               }}
               on-focus={onInputFocus}
               on-blur={onInputBlur}
+              style={{ width: '200px' }}
             >
               <sinch-flag code="se" slot="icon"/>
               <sinch-button
@@ -84,21 +89,21 @@ export const DialogExample: FC<TDialog> = () => {
                 aria-label="Ok"
                 type="primary"
                 slot="right"
-                on-click={onDropdownOpen}
+                onClick={onDropdownOpen}
                 on-focus={onButtonFocus}
                 on-blur={onButtonBlur}
               />
             </sinch-input>
           </sinch-field>
-          <sinch-action-menu slot="content" aria-label="Action menu">
-            <sinch-action-menu-option text="AAAAAAAAAAAAAAAAA" aria-label="Select"/>
-            <sinch-action-menu-option text="BBB" aria-label="Select"/>
-            <sinch-action-menu-option text="CCC" aria-label="Select"/>
+          <sinch-action-menu slot="content" aria-label="Action menu" onClick={onDropdownClose}>
+            <sinch-action-menu-option text="Lorem Ipsum is simply dummy text" aria-label="Select"/>
+            <sinch-action-menu-option text="of the printing and typesetting industry" aria-label="Select"/>
+            <sinch-action-menu-option text="ever since the 1500s" aria-label="Select"/>
           </sinch-action-menu>
         </sinch-popover>
-        <sinch-button text="Cancel" aria-label="Cancel" type="secondary" slot="buttons" onClick={() => {}}/>
+        <sinch-button text="Cancel" aria-label="Cancel" type="secondary" slot="buttons" onClick={onActionClick}/>
         <sinch-tooltip slot="buttons" inverted text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.">
-          <sinch-button text="Ok" aria-label="Ok" type="primary" onClick={() => {}}/>
+          <sinch-button text="Ok" aria-label="Ok" type="primary" onClick={onActionClick}/>
         </sinch-tooltip>
       </sinch-dialog>
     </>

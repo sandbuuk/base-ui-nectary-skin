@@ -26,7 +26,7 @@
   "devDependencies": {
     "@playwright/test": "1.29.2",
     "@sinch-engage/nectary": "workspace:*",
-    "@types/node": "^18.11.18",
+    "@types/node": "^18.15.11",
     "axe-core": "^4.6.3",
     "concurrently": "^7.6.0",
     "piall": "^0.2.1",

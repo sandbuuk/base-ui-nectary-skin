@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/accordion'
 import '@sinch-engage/nectary/accordion-item'
 import { TSinchAccordionStatusType } from '@sinch-engage/nectary/accordion-item/types'

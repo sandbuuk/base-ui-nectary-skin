@@ -1,0 +1,11 @@
+:root,
+:host {
+  --sinch-comp-segment-color-default-background-initial: var(--sinch-sys-color-container-main-default);
+  --sinch-comp-segment-color-default-text-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-segment-color-default-border-initial: var(--sinch-sys-color-border-default);
+  --sinch-comp-segment-color-disabled-text-initial: var(--sinch-sys-color-text-disabled);
+  --sinch-comp-segment-shape-radius: var(--sinch-sys-shape-radius-l);
+  --sinch-comp-segment-font-size-m-title: var(--sinch-sys-font-desktop-title-m);
+  --sinch-comp-segment-font-size-l-title: var(--sinch-sys-font-desktop-title-l);
+  --sinch-comp-segment-font-size-s-title: var(--sinch-sys-font-desktop-title-s);
+}

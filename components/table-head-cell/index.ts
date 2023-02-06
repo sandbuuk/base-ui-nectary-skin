@@ -1,9 +1,11 @@
+import '../text'
 import { alignValues } from '../table-cell/utils'
 import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
   getLiteralAttribute,
+  isAttrTrue,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
@@ -36,13 +38,23 @@ defineCustomElement('sinch-table-head-cell', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text']
+    return ['text', 'fit']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
+
+        break
+      }
+
+      case 'fit': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break
       }

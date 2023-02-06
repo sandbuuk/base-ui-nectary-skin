@@ -11,15 +11,48 @@
   width: 328px;
   padding: 8px 16px;
   box-sizing: border-box;
-  border-radius: var(--sinch-shape-radius-l);
-  box-shadow: var(--sinch-elevation-level-3);
+  border-radius: var(--sinch-comp-toast-shape-radius);
+  box-shadow: var(--sinch-comp-toast-shadow);
+}
+
+:host([type="success"]) #wrapper {
+  background-color: var(--sinch-comp-toast-color-success-default-background);
+}
+
+:host([type="warn"]) #wrapper {
+  background-color: var(--sinch-comp-toast-color-warning-default-background);
+}
+
+:host([type="error"]) #wrapper {
+  background-color: var(--sinch-comp-toast-color-error-default-background);
+}
+
+:host([type="info"]) #wrapper {
+  background-color: var(--sinch-comp-toast-color-info-default-background);
 }
 
 #text {
-  color: var(--sinch-color-stormy-500);
   padding: 4px 0 4px 4px;
   flex: 1;
   min-width: 0;
+
+  --sinch-comp-text-font: var(--sinch-comp-toast-font-body);
+}
+
+:host([type="success"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-toast-color-success-default-text);
+}
+
+:host([type="warn"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-toast-color-warning-default-text);
+}
+
+:host([type="error"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-toast-color-error-default-text);
+}
+
+:host([type="info"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-toast-color-info-default-text);
 }
 
 #icon {
@@ -27,41 +60,43 @@
   margin: 4px 0;
 }
 
-:host([type="success"]) #wrapper {
-  background-color: var(--sinch-color-feedback-success-bg);
+#icon-info,
+#icon-success,
+#icon-warn,
+#icon-error {
+  display: none;
 }
 
-:host([type="warn"]) #wrapper {
-  background-color: var(--sinch-color-feedback-warning-bg);
+#icon-success {
+  --sinch-global-color-icon: var(--sinch-comp-toast-color-success-default-icon);
 }
 
-:host([type="error"]) #wrapper {
-  background-color: var(--sinch-color-feedback-invalid-bg);
+#icon-warn {
+  --sinch-global-color-icon: var(--sinch-comp-toast-color-warning-default-icon);
 }
 
-:host([type="info"]) #wrapper {
-  background-color: var(--sinch-color-feedback-info-bg);
+#icon-error {
+  --sinch-global-color-icon: var(--sinch-comp-toast-color-error-default-icon);
 }
 
-:host([type="success"]) #icon {
-  --sinch-color-icon: var(--sinch-color-feedback-success-icon);
+#icon-info {
+  --sinch-global-color-icon: var(--sinch-comp-toast-color-info-default-icon);
 }
 
-:host([type="warn"]) #icon {
-  --sinch-color-icon: var(--sinch-color-feedback-warning-icon);
+:host([type="success"]) #icon-success,
+:host([type="warn"]) #icon-warn,
+:host([type="error"]) #icon-error,
+:host([type="info"]) #icon-info {
+  display: block;
 }
 
-:host([type="error"]) #icon {
-  --sinch-color-icon: var(--sinch-color-feedback-invalid-icon);
-}
-
-:host([type="info"]) #icon {
-  --sinch-color-icon: var(--sinch-color-feedback-info-icon);
-}
 </style>
 
 <div id="wrapper">
-  <sinch-icon id="icon"></sinch-icon>
+  <sinch-icon id="icon-info" name="info"></sinch-icon>
+  <sinch-icon id="icon-success" name="check_circle"></sinch-icon>
+  <sinch-icon id="icon-warn" name="report_problem"></sinch-icon>
+  <sinch-icon id="icon-error" name="report"></sinch-icon>
   <sinch-text id="text" type="m"></sinch-text>
   <slot name="action"></slot>
   <slot name="close"></slot>

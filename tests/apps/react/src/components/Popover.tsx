@@ -36,12 +36,13 @@ const PopoverExampleOffset: FC<TPopover> = ({ search }) => {
           on-click={onOpen}
           style={{ margin: '0 0 20px -20px', position: 'relative', left: '20px', transform: 'translate(0, 20px)' }}
         />
-        <section
+        <sinch-text
           slot="content"
+          type="m"
           style={{ maxWidth: '240px', padding: '12px', fontWeight: 'normal' }}
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        </section>
+        </sinch-text>
       </sinch-popover>
       <div style={{ width: '50px', backgroundColor: 'red' }}/>
     </div>
@@ -133,12 +134,13 @@ export const Popover: FC<TPopover> = ({ search }) => {
         aria-label="Button"
         on-click={onOpen}
       />
-      <section
+      <sinch-text
         slot="content"
+        type="m"
         style={{ maxWidth: '240px', padding: '12px' }}
       >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit
-      </section>
+      </sinch-text>
     </sinch-popover>
   )
 }

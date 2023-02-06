@@ -8,7 +8,6 @@ import {
   NectaryElement,
   isAttrTrue,
   getReactEventHandler,
-  getCssVars,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchLinkElement, TSinchLinkReact } from './types'
@@ -20,8 +19,6 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-link', class extends NectaryElement {
   #$anchor: HTMLAnchorElement
   #$text: HTMLElement
-  #$iconStandalone: HTMLElement
-  #$iconExternal: HTMLElement
 
   constructor() {
     super()
@@ -32,8 +29,6 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
     this.#$anchor = shadowRoot.querySelector('a')!
     this.#$text = shadowRoot.querySelector('#content')!
-    this.#$iconExternal = shadowRoot.querySelector('#external-icon')!
-    this.#$iconStandalone = shadowRoot.querySelector('#standalone-icon')!
   }
 
   connectedCallback() {
@@ -44,8 +39,6 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     this.addEventListener('-click', this.#onClickReactHandler)
     this.addEventListener('-focus', this.#onFocusReactHandler)
     this.addEventListener('-blur', this.#onBlurReactHandler)
-
-    this.#updateIcons()
   }
 
   disconnectedCallback() {
@@ -55,6 +48,52 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     this.removeEventListener('-click', this.#onClickReactHandler)
     this.removeEventListener('-focus', this.#onFocusReactHandler)
     this.removeEventListener('-blur', this.#onBlurReactHandler)
+  }
+
+  static get observedAttributes() {
+    return [
+      'text',
+      'href',
+      'external',
+      'standalone',
+      'disabled',
+    ]
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'text': {
+        this.#$text.textContent = newVal
+
+        break
+      }
+
+      case 'href': {
+        updateAttribute(this.#$anchor, 'href', newVal)
+
+        break
+      }
+
+      case 'standalone':
+      case 'disabled': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+
+      case 'external': {
+        const isExternal = isAttrTrue(newVal)
+
+        updateAttribute(this.#$anchor, 'target', isExternal ? '_blank' : null)
+        updateBooleanAttribute(this, name, isExternal)
+
+        break
+      }
+    }
   }
 
   get text() {
@@ -105,36 +144,6 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     return getBooleanAttribute(this, 'preventdefault')
   }
 
-  static get observedAttributes() {
-    return ['text', 'href', 'external']
-  }
-
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
-    switch (name) {
-      case 'text': {
-        this.#$text.textContent = newVal
-
-        break
-      }
-
-      case 'href': {
-        updateAttribute(this.#$anchor, 'href', newVal)
-
-        break
-      }
-
-      case 'external': {
-        updateAttribute(this.#$anchor, 'target', isAttrTrue(newVal) ? '_blank' : null)
-
-        break
-      }
-    }
-  }
-
   get focusable() {
     return true
   }
@@ -145,16 +154,6 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
   blur() {
     this.#$anchor.blur()
-  }
-
-  #updateIcons() {
-    const [externalName, standaloneName] = getCssVars(this, [
-      '--sinch-link-icon-external',
-      '--sinch-link-icon-standalone',
-    ])
-
-    updateAttribute(this.#$iconExternal, 'name', externalName)
-    updateAttribute(this.#$iconStandalone, 'name', standaloneName)
   }
 
   #onAnchorClick = (e: Event) => {
