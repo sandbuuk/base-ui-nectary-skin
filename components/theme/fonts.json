@@ -77,12 +77,13 @@
     }
   },
   {
-    "family": "Material Icons Outlined",
+    "family": "Material Icons",
     "weight": 400,
     "style": "normal",
+    "display": "block",
     "src": {
-      "woff2": "https://fonts.gstatic.com/s/materialsymbolsoutlined/v63/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzazHD_dY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOejbd5zrDAt.woff2",
-      "woff": "https://fonts.gstatic.com/s/materialsymbolsoutlined/v63/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzazHD_dY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOelbd5zrDAt.woff"
+      "local": "MaterialSymbolsRounded24pt-Regular",
+      "woff2": "https://fonts.gstatic.com/s/materialsymbolsrounded/v76/syl7-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvLgyidOK7BDB_Qb9vUdV6_gjDK-P3JuF_Zs-obHph2-jOcZTKPq8a9A5M.woff2"
     }
   }
 ]
