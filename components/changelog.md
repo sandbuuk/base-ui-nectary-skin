@@ -1,3 +1,7 @@
+## v1.0.1 (2023-02-10)
+
+* 🐞 fix icon font
+
 ## v1.0.0 (2023-02-03)
 
 * 💥 extract `@sinch-engage/nectary-assets` package
