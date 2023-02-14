@@ -25,8 +25,8 @@ export default {
     }
   },
   methods: {
-    onClose() {
-      window.dispatchEvent(new CustomEvent('sinch-dialog-close'))
+    onClose(e) {
+      window.dispatchEvent(new CustomEvent('sinch-dialog-close', { detail: e.detail }))
     }
   }
 }

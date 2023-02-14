@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const longText = encodeURIComponent('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.')
 
@@ -100,18 +100,18 @@ test('dialog screenshots', runScreenshotTests('sinch-dialog', [
     async *fn({ $eval, page }) {
       await subscribeToEvents(page, 'sinch-dialog-close')
 
-      const { x, y } = await $eval((el) => el.closeButtonRect)
+      const { x, y } = centerRect(await $eval((el) => el.closeButtonRect))
 
       await page.keyboard.press('Escape')
       await page.mouse.click(0, 0)
-      await page.mouse.click(x + 1, y + 1)
+      await page.mouse.click(x, y)
 
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-dialog-close', detail: null },
-        { type: 'sinch-dialog-close', detail: null },
-        { type: 'sinch-dialog-close', detail: null },
+        { type: 'sinch-dialog-close', detail: 'escape' },
+        { type: 'sinch-dialog-close', detail: 'backdrop' },
+        { type: 'sinch-dialog-close', detail: 'close' },
       ])
     },
   },

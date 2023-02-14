@@ -1,3 +1,4 @@
+import type { TSinchDialogCloseDetail } from '@sinch-engage/nectary/dialog/types'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/dialog'
 import '@sinch-engage/nectary/button'
@@ -10,8 +11,8 @@ export const Dialog: FC<TDialog> = ({ search }) => {
   const title: string = search.get('title') ?? ''
   const content = search.get('content')
   const buttons = search.get('buttons') !== null
-  const onClose = () => {
-    window.dispatchEvent(new CustomEvent('sinch-dialog-close'))
+  const onClose = (e: CustomEvent<TSinchDialogCloseDetail>) => {
+    window.dispatchEvent(new CustomEvent('sinch-dialog-close', { detail: e.detail }))
   }
 
   return (
