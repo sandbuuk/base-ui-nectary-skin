@@ -1,3 +1,8 @@
+## v1.1.0 (2023-02-15)
+
+* ➕ add detail to close event in `sinch-dialog`
+* 🐞 set display to `block` in `sinch-dialog`
+
 ## v1.0.1 (2023-02-10)
 
 * 🐞 fix icon font
