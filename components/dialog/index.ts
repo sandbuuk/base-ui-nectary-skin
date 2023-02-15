@@ -15,7 +15,7 @@ import {
   getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchDialogElement, TSinchDialogReact } from './types'
+import type { TSinchDialogCloseDetail, TSinchDialogElement, TSinchDialogReact } from './types'
 
 const template = document.createElement('template')
 
@@ -26,6 +26,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   #$dialog: HTMLDialogElement
   #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
+  #controller: AbortController | null = null
 
   #prevOverflowValue: string = ''
 
@@ -44,10 +45,16 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   connectedCallback() {
     super.connectedCallback()
     this.setAttribute('role', 'dialog')
-    this.#$closeButton.addEventListener('click', this.#onCloseClick)
-    this.#$dialog.addEventListener('mousedown', this.#onBackdropClick)
-    this.#$dialog.addEventListener('cancel', this.#onCancel)
-    this.addEventListener('-close', this.#onCloseReactHandler)
+    this.#controller = new AbortController()
+
+    const options: AddEventListenerOptions = {
+      signal: this.#controller.signal,
+    }
+
+    this.#$closeButton.addEventListener('click', this.#onCloseClick, options)
+    this.#$dialog.addEventListener('mousedown', this.#onBackdropClick, options)
+    this.#$dialog.addEventListener('cancel', this.#onCancel, options)
+    this.addEventListener('-close', this.#onCloseReactHandler, options)
 
     updateAttribute(this.#$iconClose, 'name', getCssVar(this, '--sinch-dialog-icon-close'))
 
@@ -58,11 +65,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    this.#$closeButton.removeEventListener('click', this.#onCloseClick)
-    this.#$dialog.removeEventListener('mousedown', this.#onBackdropClick)
-    this.#$dialog.removeEventListener('cancel', this.#onCancel)
-    this.removeEventListener('-close', this.#onCloseReactHandler)
-
+    this.#controller!.abort()
     this.#setOpen(false)
   }
 
@@ -104,11 +107,11 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
   #onCancel = (e: Event) => {
     e.preventDefault()
-    this.#dispatchCloseEvent()
+    this.#dispatchCloseEvent('escape')
   }
 
   #onCloseClick = () => {
-    this.#dispatchCloseEvent()
+    this.#dispatchCloseEvent('close')
   }
 
   #onBackdropClick = (e: MouseEvent) => {
@@ -120,18 +123,18 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
     if (!isInside) {
-      this.#dispatchCloseEvent()
+      this.#dispatchCloseEvent('backdrop')
     }
   }
 
   #onCloseReactHandler = (e: Event) => {
-    getReactEventHandler(this, 'onClose')?.()
+    getReactEventHandler(this, 'onClose')?.(e)
     getReactEventHandler(this, 'on-close')?.(e)
   }
 
-  #dispatchCloseEvent() {
+  #dispatchCloseEvent(detail: TSinchDialogCloseDetail) {
     this.dispatchEvent(
-      new CustomEvent('-close')
+      new CustomEvent('-close', { detail })
     )
   }
 

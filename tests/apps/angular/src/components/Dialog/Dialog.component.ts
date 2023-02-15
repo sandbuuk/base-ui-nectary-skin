@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/dialog'
 import '@sinch-engage/nectary/button'
+import type { TSinchDialogCloseDetail } from '@sinch-engage/nectary/dialog/types'
 
 @Component({
   selector: 'dialog-component',
@@ -20,8 +21,8 @@ export class DialogComponent {
     this.content = url.searchParams.get('content')
   }
 
-  onClose() {
-    window.dispatchEvent(new CustomEvent('sinch-dialog-close'))
+  onClose(e: CustomEvent<TSinchDialogCloseDetail>) {
+    window.dispatchEvent(new CustomEvent('sinch-dialog-close', { detail: e.detail }))
   }
 }
 
