@@ -2,6 +2,7 @@ import '../icon-button'
 import '../icon'
 import '../stop-events'
 import '../title'
+import { disableScroll, enableScroll } from '../pop/utils'
 import {
   defineCustomElement,
   getAttribute,
@@ -13,6 +14,7 @@ import {
   NectaryElement,
   updateBooleanAttribute,
   getCssVar,
+  setClass,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDialogCloseDetail, TSinchDialogElement, TSinchDialogReact } from './types'
@@ -26,9 +28,9 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   #$dialog: HTMLDialogElement
   #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
+  #$actionWrapper: HTMLElement
+  #$actionSlot: HTMLSlotElement
   #controller: AbortController | null = null
-
-  #prevOverflowValue: string = ''
 
   constructor() {
     super()
@@ -36,10 +38,12 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-    this.#$dialog = shadowRoot.querySelector('dialog')!
+    this.#$dialog = shadowRoot.querySelector('#dialog')!
     this.#$closeButton = shadowRoot.querySelector('#close')!
     this.#$caption = shadowRoot.querySelector('#caption')!
     this.#$iconClose = shadowRoot.querySelector('#icon-close')!
+    this.#$actionWrapper = shadowRoot.querySelector('#action')!
+    this.#$actionSlot = shadowRoot.querySelector('slot[name="buttons"]')!
   }
 
   connectedCallback() {
@@ -52,21 +56,26 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     }
 
     this.#$closeButton.addEventListener('click', this.#onCloseClick, options)
-    this.#$dialog.addEventListener('mousedown', this.#onBackdropClick, options)
+    this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown, options)
     this.#$dialog.addEventListener('cancel', this.#onCancel, options)
+    this.#$actionSlot.addEventListener('slotchange', this.#onActionSlotChange, options)
     this.addEventListener('-close', this.#onCloseReactHandler, options)
 
     updateAttribute(this.#$iconClose, 'name', getCssVar(this, '--sinch-dialog-icon-close'))
 
+    this.#onActionSlotChange()
+
     // React updates attributes BEFORE connecting to the DOM
     // Angular updates attributes AFTER connecting to the DOM
-    this.#setOpen(getBooleanAttribute(this, 'open'))
+    if (getBooleanAttribute(this, 'open')) {
+      this.#onExpand()
+    }
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
     this.#controller!.abort()
-    this.#setOpen(false)
+    this.#onCollapse()
   }
 
   static get observedAttributes() {
@@ -83,7 +92,13 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
       case 'open': {
         const shouldOpen = isAttrTrue(newVal)
 
-        this.#setOpen(shouldOpen)
+        if (shouldOpen) {
+          requestAnimationFrame(() => {
+            this.#onExpand()
+          })
+        } else {
+          this.#onCollapse()
+        }
 
         updateBooleanAttribute(this, 'open', shouldOpen)
 
@@ -105,8 +120,17 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     return getAttribute(this, 'caption', '')
   }
 
+  get dialogRect() {
+    return getRect(this.#$dialog)
+  }
+
+  get closeButtonRect() {
+    return getRect(this.#$closeButton)
+  }
+
   #onCancel = (e: Event) => {
     e.preventDefault()
+    e.stopPropagation()
     this.#dispatchCloseEvent('escape')
   }
 
@@ -114,16 +138,17 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.#dispatchCloseEvent('close')
   }
 
-  #onBackdropClick = (e: MouseEvent) => {
-    if (e.target !== this.#$dialog) {
-      return
-    }
+  #onBackdropMouseDown = (e: MouseEvent) => {
+    const tgt = (e as any).originalTarget ?? e.target
 
-    const rect = this.dialogRect
-    const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
+    if (tgt === this.#$dialog) {
+      const rect = this.dialogRect
+      const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
-    if (!isInside) {
-      this.#dispatchCloseEvent('backdrop')
+      if (!isInside) {
+        e.stopPropagation()
+        this.#dispatchCloseEvent('backdrop')
+      }
     }
   }
 
@@ -138,25 +163,30 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     )
   }
 
-  #setOpen(shouldOpen: boolean) {
-    if (shouldOpen) {
-      if (this.isConnected && !getBooleanAttribute(this.#$dialog, 'open')) {
-        this.#prevOverflowValue = document.body.style.overflow
-        document.body.style.overflow = 'hidden'
-        this.#$dialog.showModal()
-      }
-    } else {
-      this.#$dialog.close?.()
-      document.body.style.overflow = this.#prevOverflowValue
+  #onExpand() {
+    if (!this.isConnected || this.#isOpen()) {
+      return
     }
+
+    this.#$dialog.showModal()
+    disableScroll()
   }
 
-  get dialogRect() {
-    return getRect(this.#$dialog)
+  #onCollapse() {
+    if (!this.#isOpen()) {
+      return
+    }
+
+    this.#$dialog.close?.()
+    enableScroll()
   }
 
-  get closeButtonRect() {
-    return getRect(this.#$closeButton)
+  #isOpen() {
+    return getBooleanAttribute(this.#$dialog, 'open')
+  }
+
+  #onActionSlotChange = () => {
+    setClass(this.#$actionWrapper, 'empty', this.#$actionSlot.assignedElements().length === 0)
   }
 })
 

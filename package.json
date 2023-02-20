@@ -6,7 +6,7 @@
     "docs:shell": "cd docs/shell; npm run start",
     "docs:build:shell": "cd docs/shell; npm run build",
     "docs:build:components": "cd docs/latest; npm run build",
-    "lint": "eslint . '*/**/*.{js,ts,tsx,mts}' && tsc --noEmit -p components/ && tsc --noEmit -p tests/ && tsc --noEmit -p docs/common && tsc --noEmit -p docs/latest && tsc --noEmit -p docs/shell && stylelint 'components/**/*.html' 'components/**/*.css' 'docs/**/*.css'",
+    "lint": "eslint . '*/**/*.{js,ts,tsx,mts}' && tsc --noEmit -p components/ && tsc --noEmit -p assets/ && tsc --noEmit -p tests/ && tsc --noEmit -p docs/common && tsc --noEmit -p docs/latest && tsc --noEmit -p docs/shell && stylelint 'components/**/*.html' 'components/**/*.css' 'assets/**/*.html' 'assets/**/*.css' 'docs/**/*.css'",
     "test": "pnpm --dir tests test"
   },
   "devDependencies": {

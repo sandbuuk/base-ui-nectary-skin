@@ -1,9 +1,9 @@
 <style>
 :host {
-  display: block;
+  display: contents;
 }
 
-dialog {
+#dialog {
   position: fixed;
   left: 0;
   right: 0;
@@ -23,18 +23,8 @@ dialog {
   box-shadow: var(--sinch-elevation-level-3);
 }
 
-dialog:not([open]) {
+#dialog:not([open]) {
   display: none;
-}
-
-dialog + .backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: black;
-  opacity: 0.55;
 }
 
 dialog::backdrop {
@@ -77,7 +67,7 @@ dialog.fixed {
   padding: 4px 24px;
 }
 
-#buttons {
+#action {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -86,12 +76,16 @@ dialog.fixed {
   padding: 0 24px;
 }
 
+#action.empty {
+  display: none;
+}
+
 #close {
   transform: translate(4px, -4px);
 }
 </style>
 
-<dialog>
+<dialog id="dialog">
   <div id="header">
     <sinch-title id="caption" type="m" level="3" ellipsis></sinch-title>
     <sinch-icon-button id="close" size="s" tabindex="0">
@@ -103,7 +97,7 @@ dialog.fixed {
       <slot name="content"></slot>
     </sinch-stop-events>
   </div>
-  <div id="buttons">
+  <div id="action">
     <sinch-stop-events events="close">
       <slot name="buttons"></slot>
     </sinch-stop-events>
