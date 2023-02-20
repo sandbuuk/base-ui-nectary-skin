@@ -1,3 +1,7 @@
+## v1.1.1 (2023-02-20)
+
+* 🐞 fix events propagation for `sinch-dialog` and `sinch-popover` in Firefox v110
+
 ## v1.1.0 (2023-02-15)
 
 * ➕ add detail to close event in `sinch-dialog`
