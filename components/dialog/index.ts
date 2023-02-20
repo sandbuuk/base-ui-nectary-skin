@@ -145,7 +145,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
       const rect = this.dialogRect
       const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
-
       if (!isInside) {
         e.stopPropagation()
         this.#dispatchCloseEvent('backdrop')

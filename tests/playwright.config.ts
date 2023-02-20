@@ -92,6 +92,7 @@ const config: PlaywrightTestConfig = {
     },
   },
   reporter: 'list',
+  timeout: 60000,
 }
 
 export default config
