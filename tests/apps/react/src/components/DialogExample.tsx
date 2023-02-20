@@ -70,6 +70,7 @@ export const DialogExample: FC<TDialog> = () => {
               slot="input"
               aria-label="Label"
               value={value}
+              size="m"
               on-change={(e) => {
                 setValue(e.detail)
               }}

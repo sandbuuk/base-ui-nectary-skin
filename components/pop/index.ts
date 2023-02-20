@@ -425,20 +425,22 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #onBackdropMouseDown = (e: MouseEvent) => {
-    if (e.target !== this.#$dialog) {
-      return
-    }
+    const tgt = (e as any).originalTarget ?? e.target
 
-    const rect = this.popoverRect
-    const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
+    if (tgt === this.#$dialog) {
+      const rect = this.popoverRect
+      const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
-    if (!isInside) {
-      this.#dispatchCloseEvent()
+      if (!isInside) {
+        e.stopPropagation()
+        this.#dispatchCloseEvent()
+      }
     }
   }
 
   #onCancel = (e: Event) => {
     e.preventDefault()
+    e.stopPropagation()
     this.#dispatchCloseEvent()
   }
 
