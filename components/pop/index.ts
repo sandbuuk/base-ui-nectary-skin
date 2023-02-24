@@ -276,6 +276,13 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     disableScroll()
     window.addEventListener('resize', this.#onResize)
 
+    // Subscribe after delay to not get immediate callbacks
+    requestAnimationFrame(() => {
+      if (this.#isOpen()) {
+        this.#$contentSlot.addEventListener('slotchange', this.#onContentSlotChange)
+      }
+    })
+
     // Dispatch Visibility Context
     this.#dispatchContentVisibility(true)
   }
@@ -354,6 +361,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     enableScroll()
     this.#resizeThrottle.cancel()
     window.removeEventListener('resize', this.#onResize)
+    this.#$contentSlot.removeEventListener('slotchange', this.#onContentSlotChange)
   }
 
   #isOpen() {
@@ -483,6 +491,14 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
     if (!e.detail) {
       this.#dispatchCloseEvent()
+    }
+  }
+
+  #onContentSlotChange = (e: Event) => {
+    e.stopPropagation()
+
+    if (this.#isOpen()) {
+      this.#updateOrientation()
     }
   }
 })

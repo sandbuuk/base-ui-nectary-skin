@@ -50,6 +50,7 @@ import { Tabs } from './components/Tabs'
 import { Tag } from './components/Tag'
 import { Text } from './components/Text'
 import { Textarea } from './components/Textarea'
+import { TextareaExample } from './components/TextareaExample'
 import { TileControl } from './components/TileControl'
 import { TimeInput } from './components/TimeInput'
 import { TimePicker } from './components/TimePicker'
@@ -352,6 +353,12 @@ const mapElement = (url: URL) => {
     case '/textarea': {
       return (
         <Textarea search={url.searchParams}/>
+      )
+    }
+
+    case '/textarea-example': {
+      return (
+        <TextareaExample search={url.searchParams}/>
       )
     }
 

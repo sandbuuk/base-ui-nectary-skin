@@ -8,7 +8,8 @@ const withModal = '/popover?modal=true&orientation=bottom-right'
 const withWideModalOpen = '/popover?width=300&open=true&modal=true&orientation=bottom-right'
 const withWideModal = '/popover?width=300&modal=true&orientation=bottom-right'
 const withWideNonModal = '/popover?width=300&orientation=bottom-right'
-const withNonModalElementOffset = '/popover?width=300&offset=true'
+const withNonModalElementOffset = '/popover?width=300&example=offset'
+const withSwitchingContent = '/popover?width=300&example=switch-content'
 const check = makeAccessibilityTests('/popover?open=true&modal=true', 'sinch-popover')
 
 test('popover accessibility', check({
@@ -157,6 +158,20 @@ test('popover screenshots', runScreenshotTests('sinch-popover', [
       await page.keyboard.press('Escape')
 
       yield { name: '2-close', includeRects: [await $eval((el) => el.popoverRect)] }
+    },
+  },
+  {
+    name: 'switch content',
+    url: withSwitchingContent,
+    async *fn({ page, $eval }) {
+      await page.click('#open')
+      yield { name: '1-open', includeRects: [await $eval((el) => el.popoverRect)] }
+
+      await page.click('#switch-content')
+      yield { name: '2-switch', includeRects: [await $eval((el) => el.popoverRect)] }
+
+      await page.click('#switch-content')
+      yield { name: '3-switch', includeRects: [await $eval((el) => el.popoverRect)] }
     },
   },
   {
