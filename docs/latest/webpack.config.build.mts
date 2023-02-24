@@ -11,8 +11,8 @@ import type { Configuration as TWebpackConfig } from 'webpack'
 
 const NODE_MODULES_REGEXP = /[\\/]node_modules[\\/]/
 const COMPONENTS_REGEXP = /[\\/]components[\\/]/
-const key = pkg.version.replaceAll('.', '')
-const stylesInjectKey = `__styles${key}`
+const versionKey = pkg.version.replaceAll('.', '_')
+const stylesInjectKey = `__styles${versionKey}`
 
 const BabelOptions: TBabelOptions = {
   babelrc: false,
@@ -149,14 +149,14 @@ const config: TWebpackConfig = {
       cacheGroups: {
         default: false,
         common: {
-          name: `common${key}`,
+          name: `common${versionKey}`,
           test: COMPONENTS_REGEXP,
           chunks: 'async',
           minChunks: 10,
           minSize: 0,
         },
         vendor: {
-          name: `vendor${key}`,
+          name: `vendor${versionKey}`,
           test: NODE_MODULES_REGEXP,
           chunks: 'all',
           priority: 10,
@@ -167,12 +167,12 @@ const config: TWebpackConfig = {
   },
   plugins: [
     new webpack.container.ModuleFederationPlugin({
-      name: `components${key}`,
+      name: `components${versionKey}`,
       filename: 'remoteEntry.js',
       exposes: {
         './bootstrap': {
           import: path.resolve('./src/bootstrap.tsx'),
-          name: `components${key}-bootstrap`,
+          name: `components${versionKey}-bootstrap`,
         },
       },
       shared: {
@@ -202,7 +202,7 @@ const config: TWebpackConfig = {
     new webpack.DefinePlugin({
       __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
       STYLE_INJECT_KEY: JSON.stringify(stylesInjectKey),
-      REQ_CHUNK_NAME: JSON.stringify(`Components${key}-[request]`),
+      REQ_CHUNK_NAME: JSON.stringify(`Components${versionKey}-[request]`),
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',

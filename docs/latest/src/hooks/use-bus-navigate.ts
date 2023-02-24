@@ -36,7 +36,6 @@ export const useBusNavigate = () => {
       // Test local pathname not matches message pathname
       if (locationRef.current.pathname !== pathname) {
         // Navigate local router
-        console.log('NAVIGATE LOCAL ROUTER')
 
         navigate(pathname, search, hash)
       } else if (hash.length > 0) {
