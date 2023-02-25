@@ -16,6 +16,7 @@ import {
   getFirstSlotElement,
   Context,
   subscribeContext,
+  isTargetEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertOrientation, disableScroll, enableScroll, orientationValues } from './utils'
@@ -425,9 +426,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #onBackdropMouseDown = (e: MouseEvent) => {
-    const tgt = (e as any).originalTarget ?? e.target
-
-    if (tgt === this.#$dialog) {
+    if (isTargetEqual(e, this.#$dialog)) {
       const rect = this.popoverRect
       const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
