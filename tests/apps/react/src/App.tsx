@@ -19,6 +19,7 @@ import { DatePicker } from './components/DatePicker'
 import { Dialog } from './components/Dialog'
 import { DialogExample } from './components/DialogExample'
 import { EmojiPicker } from './components/EmojiPicker'
+import { EventTargets } from './components/EventsTargets'
 import { Field } from './components/Field'
 import { FileDrop } from './components/FileDrop'
 import { FilePicker } from './components/FilePicker'
@@ -191,6 +192,12 @@ const mapElement = (url: URL) => {
     case '/emoji-picker': {
       return (
         <EmojiPicker search={url.searchParams}/>
+      )
+    }
+
+    case '/event-targets': {
+      return (
+        <EventTargets search={url.searchParams}/>
       )
     }
 
