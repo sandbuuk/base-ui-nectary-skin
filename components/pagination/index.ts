@@ -8,6 +8,8 @@ import {
   getRect,
   getReactEventHandler,
   getCssVars,
+  isTargetEqual,
+  getTargetIndexInParent,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchPaginationElement, TSinchPaginationReact } from './types'
@@ -141,16 +143,16 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     const max = Math.max(0, getIntegerAttribute(this, 'max', 0))
 
     // Left arrow button
-    if (e.target === this.#$left) {
+    if (isTargetEqual(e, this.#$left)) {
       return this.#dispatchChangeEvent(value - 1)
     }
 
     // Right arrow button
-    if (e.target === this.#$right) {
+    if (isTargetEqual(e, this.#$right)) {
       return this.#dispatchChangeEvent(value + 1)
     }
 
-    const btnIndex = Array.prototype.indexOf.call(this.#$wrapper.children, e.target) - 1
+    const btnIndex = getTargetIndexInParent(e, this.#$wrapper) - 1
 
     if (btnIndex >= 0 && btnIndex < this.#$buttons.length) {
       // First number button
