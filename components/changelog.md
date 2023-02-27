@@ -1,3 +1,9 @@
+## v1.1.2 (2023-02-27)
+
+* 🐞 recalculate size on content change in `sinch-popover`
+* 🐞 fix events propagation in `sinch-pagination` for Firefox v110
+* 🐞 fix events propagation in `sinch-date-picker` for Firefox v110
+
 ## v1.1.1 (2023-02-20)
 
 * 🐞 fix events propagation for `sinch-dialog` and `sinch-popover` in Firefox v110
