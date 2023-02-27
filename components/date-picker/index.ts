@@ -8,6 +8,7 @@ import {
   getCssVars,
   getReactEventHandler,
   getRect,
+  getTargetAttribute,
   isAttrTrue,
   NectaryElement,
   packCsv,
@@ -387,7 +388,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
   #onDateMouseEnter = (e: Event) => {
     if (this.#date1 !== null && this.#date2 === null) {
-      const hoverDateIso = (e.target as HTMLElement).getAttribute('data-date')
+      const hoverDateIso = getTargetAttribute(e, 'data-date')
 
       if (hoverDateIso === null) {
         return
@@ -413,7 +414,8 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   #onDateClick = (e: Event) => {
     e.stopPropagation()
 
-    const dateIso = (e.target as HTMLElement).getAttribute('data-date')
+    // Firefox 110 breaks event target
+    const dateIso = getTargetAttribute(e, 'data-date')
 
     if (dateIso === null || dateIso.length === 0) {
       return

@@ -19,6 +19,7 @@ importers:
       eslint-plugin-node: ^11.1.0
       eslint-plugin-react: ^7.32.2
       postcss-html: ^1.5.0
+      rimraf: ^4.1.2
       slackify-markdown: ^4.3.1
       stylelint: ^14.16.1
       stylelint-config-standard: ^25.0.0
@@ -41,6 +42,7 @@ importers:
       eslint-plugin-node: 11.1.0_eslint@8.33.0
       eslint-plugin-react: 7.32.2_eslint@8.33.0
       postcss-html: 1.5.0
+      rimraf: 4.1.2
       slackify-markdown: 4.3.1
       stylelint: 14.16.1
       stylelint-config-standard: 25.0.0_stylelint@14.16.1
@@ -4976,6 +4978,7 @@ packages:
   /errno/0.1.8:
     resolution: {integrity: sha512-dJ6oBr5SQ1VSd9qkk7ByRgb/1SH4JZjCHSW/mr63/QcXO9zLVxvJ6Oy13nio03rxpSnVDDjFor75SjVeZWPW/A==}
     hasBin: true
+    requiresBuild: true
     dependencies:
       prr: 1.0.1
     dev: true
@@ -9749,6 +9752,12 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+    dev: true
+
+  /rimraf/4.1.2:
+    resolution: {integrity: sha512-BlIbgFryTbw3Dz6hyoWFhKk+unCcHMSkZGrTFVAx2WmttdBSonsdtRlwiuTbDqTKr+UlXIUqJVS4QT5tUzGENQ==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /run-async/2.4.1:

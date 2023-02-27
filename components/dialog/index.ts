@@ -15,6 +15,7 @@ import {
   updateBooleanAttribute,
   getCssVar,
   setClass,
+  isTargetEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchDialogCloseDetail, TSinchDialogElement, TSinchDialogReact } from './types'
@@ -139,9 +140,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   #onBackdropMouseDown = (e: MouseEvent) => {
-    const tgt = (e as any).originalTarget ?? e.target
-
-    if (tgt === this.#$dialog) {
+    if (isTargetEqual(e, this.#$dialog)) {
       const rect = this.dialogRect
       const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 

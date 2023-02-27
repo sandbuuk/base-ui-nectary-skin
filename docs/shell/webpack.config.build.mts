@@ -12,17 +12,25 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import type { TransformOptions as TBabelOptions } from '@babel/core'
 import type { Configuration as TWebpackConfig } from 'webpack'
 
+const versionToKey = (version: string) => {
+  switch (version) {
+    case '0.49.0':
+    case '1.0.1':
+      return version.replaceAll('.', '')
+    default:
+      return version.replaceAll('.', '_')
+  }
+}
+const remotes = {} as Record<string, string>
+
 // eslint-disable-next-line node/no-sync
-const versions = fs.readdirSync('../../public/docs/versions/')
+fs.readdirSync('../../public/docs/versions/').forEach((version) => {
+  const key = versionToKey(version)
 
-const remotes = versions.reduce((acc, version) => {
-  const key = version.replaceAll('.', '')
+  remotes[`components${key}`] = `components${key}@//[window.appurl]/versions/${version}/remoteEntry.js`
+})
 
-  acc[`components${key}`] = `components${key}@//[window.appurl]/versions/${version}/remoteEntry.js`
-
-  return acc
-}, {} as Record<string, string>)
-
+console.log('-- REMOTES --')
 console.log(remotes)
 
 const NODE_MODULES_REGEXP = /[\\/]node_modules[\\/]/

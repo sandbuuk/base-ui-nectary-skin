@@ -1,6 +1,7 @@
 import { Example } from '~/components/Example'
 import { SimpleExample } from './examples/Simple.tsx?example'
 import { BottomExample } from './examples/Bottom.tsx?example'
+import { BottomComplexExample } from './examples/BottomComplex.tsx?example'
 import { FieldExample } from './examples/Field.tsx?example'
 import { RowsExample } from './examples/Rows.tsx?example'
 import { ResizableExample } from './examples/Resizable.tsx?example'
@@ -17,12 +18,6 @@ It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled
 ### Simple
 
 <Example Component={SimpleExample}/>
-
-### Bottom Toolbar
-
-Textarea provides slot named `bottom` to allow placing different components on a toolbar
-
-<Example Component={BottomExample}/>
 
 ### Field
 
@@ -45,3 +40,13 @@ Shows the resize handle to manually resize the height of textarea
 ### Disabled
 
 <Example Component={DisabledExample}/>
+
+### Bottom Toolbar
+
+Textarea provides slot named `bottom` to allow placing different components on a toolbar
+
+<Example Component={BottomExample}/>
+
+### Toolbar Popovers
+
+<Example Component={BottomComplexExample}/>

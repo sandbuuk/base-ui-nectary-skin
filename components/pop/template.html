@@ -28,33 +28,6 @@ dialog::backdrop {
   background-color: transparent;
 }
 
-/* Dialog Polyfill */
-dialog + .backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: transparent;
-}
-
-/* Dialog Polyfill */
-dialog.fixed {
-  position: fixed;
-  top: 50%;
-  transform: translate(0, -50%);
-}
-
-/* Dialog Polyfill */
-/* stylelint-disable-next-line selector-class-pattern */
-._dialog_overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
 #content {
   position: relative;
   z-index: 1;

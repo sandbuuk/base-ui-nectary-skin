@@ -1,4 +1,4 @@
-<div *ngIf="hasOffset" style="display: flex;">
+<div *ngIf="isOffsetExample" style="display: flex;">
   <div style="width: 50px; background-color: red;"></div>
   <sinch-popover [attr.open]="isOpen" (-close)="onClose()">
     <sinch-button
@@ -14,7 +14,40 @@
   <div style="width: 50px; background-color: red;"></div>
 </div>
 <sinch-popover
-  *ngIf="!hasOffset"
+  *ngIf="isSwitchContentExample"
+  [attr.open]="isOpen"
+  orientation="bottom-right"
+  aria-label="Popover"
+>
+  <div slot="target">
+    <sinch-button
+      id="open"
+      type="cta-secondary"
+      text="Open"
+      aria-label="Open"
+      (-click)="onOpen()">
+    </sinch-button>
+    <sinch-button
+      id="switch-content"
+      type="cta-secondary"
+      text="Switch"
+      aria-label="Switch"
+      (-click)="onSwitch()"
+    />
+  </div>
+  <div
+    *ngIf="isOtherComponent"
+    slot="content"
+    style="width: 240px;height: 120px;background-color: red;"
+  ></div>
+  <div
+    *ngIf="!isOtherComponent"
+    slot="content"
+    style="width: 120px;height: 240px;background-color: green;"
+  ></div>
+</sinch-popover>
+<sinch-popover
+  *ngIf="isDefaultExample"
   [attr.open]="isOpen"
   [attr.modal]="isModal"
   [attr.orientation]="orientation"

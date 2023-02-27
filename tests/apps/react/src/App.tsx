@@ -19,6 +19,7 @@ import { DatePicker } from './components/DatePicker'
 import { Dialog } from './components/Dialog'
 import { DialogExample } from './components/DialogExample'
 import { EmojiPicker } from './components/EmojiPicker'
+import { EventTargets } from './components/EventsTargets'
 import { Field } from './components/Field'
 import { FileDrop } from './components/FileDrop'
 import { FilePicker } from './components/FilePicker'
@@ -50,6 +51,7 @@ import { Tabs } from './components/Tabs'
 import { Tag } from './components/Tag'
 import { Text } from './components/Text'
 import { Textarea } from './components/Textarea'
+import { TextareaExample } from './components/TextareaExample'
 import { TileControl } from './components/TileControl'
 import { TimeInput } from './components/TimeInput'
 import { TimePicker } from './components/TimePicker'
@@ -190,6 +192,12 @@ const mapElement = (url: URL) => {
     case '/emoji-picker': {
       return (
         <EmojiPicker search={url.searchParams}/>
+      )
+    }
+
+    case '/event-targets': {
+      return (
+        <EventTargets search={url.searchParams}/>
       )
     }
 
@@ -352,6 +360,12 @@ const mapElement = (url: URL) => {
     case '/textarea': {
       return (
         <Textarea search={url.searchParams}/>
+      )
+    }
+
+    case '/textarea-example': {
+      return (
+        <TextareaExample search={url.searchParams}/>
       )
     }
 

@@ -16,6 +16,7 @@ import {
   getFirstSlotElement,
   Context,
   subscribeContext,
+  isTargetEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertOrientation, disableScroll, enableScroll, orientationValues } from './utils'
@@ -275,6 +276,13 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     disableScroll()
     window.addEventListener('resize', this.#onResize)
 
+    // Subscribe after delay to not get immediate callbacks
+    requestAnimationFrame(() => {
+      if (this.#isOpen()) {
+        this.#$contentSlot.addEventListener('slotchange', this.#onContentSlotChange)
+      }
+    })
+
     // Dispatch Visibility Context
     this.#dispatchContentVisibility(true)
   }
@@ -353,6 +361,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     enableScroll()
     this.#resizeThrottle.cancel()
     window.removeEventListener('resize', this.#onResize)
+    this.#$contentSlot.removeEventListener('slotchange', this.#onContentSlotChange)
   }
 
   #isOpen() {
@@ -425,9 +434,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #onBackdropMouseDown = (e: MouseEvent) => {
-    const tgt = (e as any).originalTarget ?? e.target
-
-    if (tgt === this.#$dialog) {
+    if (isTargetEqual(e, this.#$dialog)) {
       const rect = this.popoverRect
       const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
@@ -484,6 +491,14 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
     if (!e.detail) {
       this.#dispatchCloseEvent()
+    }
+  }
+
+  #onContentSlotChange = (e: Event) => {
+    e.stopPropagation()
+
+    if (this.#isOpen()) {
+      this.#updateOrientation()
     }
   }
 })
