@@ -78,6 +78,10 @@ slot[name="action"]::slotted(*) {
   align-self: flex-start;
   max-width: 100%;
 }
+
+:host([draggable="true"]) #header {
+  cursor: grab;
+}
 </style>
 
 <div id="wrapper">

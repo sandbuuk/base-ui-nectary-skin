@@ -9,6 +9,7 @@ import { AvatarComponent } from '../components/Avatar/Avatar.component'
 import { BadgeComponent } from '../components/Badge/Badge.component'
 import { ButtonComponent } from '../components/Button/Button.component'
 import { CardComponent } from '../components/Card/Card.component'
+import { CardDnDComponent } from '../components/CardDnD/CardDnD.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
 import { ChatComponent } from '../components/Chat/Chat.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
@@ -69,6 +70,7 @@ import { AppComponent } from './app.component'
     BadgeComponent,
     ButtonComponent,
     CardComponent,
+    CardDnDComponent,
     CardContainerComponent,
     ChatComponent,
     CheckboxComponent,

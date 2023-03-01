@@ -8,9 +8,12 @@ import {
   updateAttribute,
   setClass,
   NectaryElement,
+  isAttrTrue,
+  getRect,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchCardElement, TSinchCardReact } from './types'
+import type { TRect } from '../types'
 
 const template = document.createElement('template')
 
@@ -20,8 +23,14 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   #$text: HTMLElement
   #$label: HTMLElement
   #$caption: HTMLElement
+  #$header: HTMLElement
+  #$cardBody: HTMLElement
+  #$iconSlot: HTMLSlotElement
   #$illustrationSlot: HTMLSlotElement
   #$illustrationSlotWrapper: HTMLElement
+  #isDraggingCorrectHandle = false
+  #isDraggingSubscribed = false
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -33,26 +42,46 @@ defineCustomElement('sinch-card', class extends NectaryElement {
     this.#$text = shadowRoot.querySelector('#description')!
     this.#$label = shadowRoot.querySelector('#label')!
     this.#$caption = shadowRoot.querySelector('#caption')!
+    this.#$header = shadowRoot.querySelector('#header')!
+    this.#$cardBody = shadowRoot.querySelector('#wrapper')!
+    this.#$iconSlot = shadowRoot.querySelector('slot[name="icon"]')!
 
     this.#$illustrationSlot = shadowRoot.querySelector('slot[name="illustration"]')!
     this.#$illustrationSlotWrapper = shadowRoot.querySelector('#illustration-wrapper')!
   }
 
   connectedCallback() {
-    this.#$illustrationSlot.addEventListener('slotchange', this.#onIllustrationSlotChange)
+    super.connectedCallback()
+    this.#controller = new AbortController()
+
+    const options: AddEventListenerOptions = {
+      signal: this.#controller.signal,
+    }
+
+    this.#$illustrationSlot.addEventListener('slotchange', this.#onIllustrationSlotChange, options)
 
     this.#onIllustrationSlotChange()
+
+    if (getBooleanAttribute(this, 'draggable')) {
+      this.#enableDraggable()
+    }
   }
 
   disconnectedCallback() {
-    this.#$illustrationSlot.removeEventListener('slotchange', this.#onIllustrationSlotChange)
+    super.disconnectedCallback()
+    this.#disableDragging()
+    this.#controller!.abort()
   }
 
   static get observedAttributes() {
-    return ['text', 'label', 'caption', 'disabled']
+    return ['text', 'label', 'caption', 'disabled', 'draggable']
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, prevVal: string | null, newVal: string | null) {
+    if (prevVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
@@ -66,6 +95,23 @@ defineCustomElement('sinch-card', class extends NectaryElement {
       }
       case 'caption': {
         updateAttribute(this.#$caption, 'text', newVal)
+
+        break
+      }
+      case 'disabled': {
+        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+
+        break
+      }
+      case 'draggable': {
+        const isDraggingEnabled = isAttrTrue(newVal)
+
+        if (isDraggingEnabled) {
+          this.#enableDraggable()
+        } else {
+          this.#disableDragging()
+          this.removeAttribute('draggable')
+        }
 
         break
       }
@@ -104,8 +150,40 @@ defineCustomElement('sinch-card', class extends NectaryElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
+  get dragRect(): TRect | null {
+    return this.#isDraggingSubscribed ? getRect(this.#$header) : null
+  }
+
   #onIllustrationSlotChange = () => {
     setClass(this.#$illustrationSlotWrapper, 'active', this.#$illustrationSlot.assignedElements().length > 0)
+  }
+
+  #enableDraggable() {
+    if (this.isConnected && !this.#isDraggingSubscribed) {
+      this.addEventListener('dragstart', this.#onDragStart)
+      this.#$cardBody.addEventListener('mousedown', this.#onDraggableMouseDown)
+      this.#isDraggingSubscribed = true
+    }
+  }
+
+  #disableDragging() {
+    if (this.#isDraggingSubscribed) {
+      this.removeEventListener('dragstart', this.#onDragStart)
+      this.#$cardBody.removeEventListener('mousedown', this.#onDraggableMouseDown)
+      this.#isDraggingSubscribed = false
+    }
+  }
+
+  #onDraggableMouseDown = (e: Event) => {
+    this.#isDraggingCorrectHandle = this.#$header.contains(e.target as Element) ||
+     this.#$iconSlot.assignedElements().includes(e.target as HTMLElement)
+  }
+
+  #onDragStart = (e: Event) => {
+    if (!this.#isDraggingCorrectHandle) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
   }
 })
 
