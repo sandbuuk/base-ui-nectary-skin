@@ -4,6 +4,7 @@ import { IconExample } from './examples/Icon.tsx?example'
 import { ButtonExample } from './examples/Button.tsx?example'
 import { LinkExample } from './examples/Link.tsx?example'
 import { IllustrationExample } from './examples/Illustration.tsx?example'
+import { DraggableExample } from './examples/Draggable.tsx?example'
 
 # Card
 
@@ -42,3 +43,9 @@ The link allows users to navigate to a specific web page or location within the 
 The illustration is a visual element that can be used to add context, interest, or personality to the card. It can be an image, icon, or other graphical element that is relevant to the content of the card. The illustration can help users quickly understand the content of the card and engage with it more effectively.
 
 <Example Component={IllustrationExample}/>
+
+### Draggable
+
+Sinch Card implements HTML5 drag and drop API. Set `draggable` attribute to enable dragging by card title.
+
+<Example Component={DraggableExample}/>

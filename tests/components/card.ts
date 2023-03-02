@@ -1,6 +1,7 @@
 import { test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { getBB, runScreenshotTests } from '../screenshot-tests'
+import { centerRect, getBB, runScreenshotTests } from '../screenshot-tests'
+import type { TSinchCardElement } from '@sinch-engage/nectary/card/types'
 
 const cardLabel = 'Report'
 const cardLabelLong = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
@@ -20,6 +21,7 @@ const withIllustrationLink = `/card?width=400&label=${cardLabel}&header=${cardHe
 const withIllustrationBg = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&bg=blue`
 const withDisabledButton = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&button=${cardButtonText}`
 const withDisabledLink = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&link=${cardLinkText}`
+const withDnD = '/card-dnd'
 const checkWithButton = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&illustration=true&button=${cardButtonText}`, 'sinch-card')
 const checkWithLink = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&illustration=true&link=${cardLinkText}`, 'sinch-card')
 
@@ -110,6 +112,36 @@ test('card screenshots', runScreenshotTests('sinch-card', [
     url: withNarrowWidthLink,
     async *fn() {
       yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'drag and drop',
+    url: withDnD,
+    async *fn({ page }) {
+      const wrapper = page.locator('#dnd-wrapper')
+      const card1 = page.locator('sinch-card').nth(0)
+      const card2 = page.locator('sinch-card').nth(1)
+
+      const dragPt = centerRect(await card1.evaluate((el: TSinchCardElement) => el.dragRect))
+
+      await page.mouse.move(dragPt.x, dragPt.y)
+      await page.mouse.down()
+      await page.mouse.move(dragPt.x + 5, dragPt.y + 5)
+      await page.mouse.move(dragPt.x - 5, dragPt.y - 5)
+
+      yield { name: '1-drag-start', include: [wrapper] }
+
+      const overPt = centerRect(await card2.boundingBox())
+
+      await page.mouse.move(overPt.x, overPt.y)
+      await page.mouse.move(overPt.x + 5, overPt.y + 5)
+      await page.mouse.move(overPt.x - 5, overPt.y - 5)
+
+      yield { name: '2-over-card', include: [wrapper] }
+
+      await page.mouse.up()
+
+      yield { name: '3-drag-end', include: [wrapper] }
     },
   },
 ]))

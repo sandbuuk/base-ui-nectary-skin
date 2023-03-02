@@ -8,6 +8,7 @@
     <Badge v-if="url.pathname === '/badge'" :search="url.searchParams"/>
     <Button v-if="url.pathname === '/button'" :search="url.searchParams"/>
     <Card v-if="url.pathname === '/card'" :search="url.searchParams"/>
+    <CardDnD v-if="url.pathname === '/card-dnd'" :search="url.searchParams"/>
     <CardContainer v-if="url.pathname === '/card-container'" :search="url.searchParams"/>
     <Chat v-if="url.pathname === '/chat'" :search="url.searchParams"/>
     <Checkbox v-if="url.pathname === '/checkbox'" :search="url.searchParams"/>
@@ -68,6 +69,7 @@ import Avatar from './components/Avatar.vue'
 import Button from './components/Button.vue'
 import Badge from './components/Badge.vue'
 import Card from './components/Card.vue'
+import CardDnD from './components/CardDnD.vue'
 import CardContainer from './components/CardContainer.vue'
 import Chat from './components/Chat.vue'
 import Checkbox from './components/Checkbox.vue'
@@ -153,6 +155,7 @@ export default {
     Badge,
     Button,
     Card,
+    CardDnD,
     CardContainer,
     Chat,
     Checkbox,

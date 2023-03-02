@@ -36,7 +36,6 @@ test('button screenshots', runScreenshotTests('sinch-button', [
 
       expect(attrValue).toBe('destructive')
     },
-
   },
   {
     name: 'size',

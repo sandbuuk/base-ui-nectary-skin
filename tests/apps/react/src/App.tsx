@@ -7,6 +7,7 @@ import { Badge } from './components/Badge'
 import { Button } from './components/Button'
 import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
+import { CardDnD } from './components/CardDnD'
 import { Chat } from './components/Chat'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
@@ -115,6 +116,12 @@ const mapElement = (url: URL) => {
     case '/card': {
       return (
         <Card search={url.searchParams}/>
+      )
+    }
+
+    case '/card-dnd': {
+      return (
+        <CardDnD search={url.searchParams}/>
       )
     }
 

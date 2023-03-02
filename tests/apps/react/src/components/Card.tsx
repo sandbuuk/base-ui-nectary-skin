@@ -19,6 +19,7 @@ export const Card: FC<TCard> = ({ search }) => {
   const buttonText = search.get('button')
   const linkText = search.get('link')
   const background: any = search.get('bg')
+  const isDraggable = search.get('draggable') !== null
 
   return (
     <sinch-card
@@ -26,6 +27,7 @@ export const Card: FC<TCard> = ({ search }) => {
       text={text}
       label={label}
       disabled={isDisabled}
+      draggable={isDraggable}
     >
       {hasIcon && <sinch-icon-branded-chatbot slot="icon"/>}
       {hasIllustration && <sinch-illustration-phone-and-cat size={290} valign="top" slot="illustration" background={background}/>}
