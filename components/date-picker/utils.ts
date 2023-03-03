@@ -15,11 +15,11 @@ export const getCalendarMonth = (date: Date, options?: TCalendarOptions): TMaybe
     firstDayOfWeek: 1,
     ...options,
   }
-  const firstDateOfMonth = new Date(date.getFullYear(), date.getMonth(), 1)
-  const lastDateOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0)
-  const firstWeekdayOfMonth = firstDateOfMonth.getDay()
-  const lastWeekdayOfMonth = lastDateOfMonth.getDay()
-  const daysInMonth = lastDateOfMonth.getDate()
+  const firstDateOfMonth = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 1))
+  const lastDateOfMonth = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 0))
+  const firstWeekdayOfMonth = firstDateOfMonth.getUTCDay()
+  const lastWeekdayOfMonth = lastDateOfMonth.getUTCDay()
+  const daysInMonth = lastDateOfMonth.getUTCDate()
   const daysToPrepend = (firstWeekdayOfMonth - firstDayOfWeek + DAYS_IN_WEEK) % DAYS_IN_WEEK
   const daysToAppend = (DAYS_IN_WEEK - 1 - lastWeekdayOfMonth + firstDayOfWeek) % DAYS_IN_WEEK
   const month: TMaybeDate[][] = []
@@ -31,7 +31,7 @@ export const getCalendarMonth = (date: Date, options?: TCalendarOptions): TMaybe
     } else {
       const result = new Date(date)
 
-      result.setDate(i)
+      result.setUTCDate(i)
       week.push(result)
     }
 
@@ -45,15 +45,17 @@ export const getCalendarMonth = (date: Date, options?: TCalendarOptions): TMaybe
 }
 
 export const dateToIso = (date: Date): string => {
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
+  return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`
 }
 
 export const isoToDate = (value: string): Date => {
-  return new Date(`${value.substring(0, 10)}T00:00:00`)
+  return new Date(`${value.substring(0, 10)}T00:00:00Z`)
 }
 
 export const today = (): Date => {
-  return isoToDate(dateToIso(new Date()))
+  const today = new Date()
+
+  return new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()))
 }
 
 export const getDayNames = (locale: string): string[] => {
@@ -129,47 +131,47 @@ export const clampMaxDate = (date: Date, max: Date): void => {
 }
 
 export const incMonth = (date: Date, max: Date): void => {
-  date.setMonth(date.getMonth() + 1)
+  date.setUTCMonth(date.getUTCMonth() + 1)
 
   clampMaxDate(date, max)
 }
 export const decMonth = (date: Date, min: Date): void => {
-  date.setMonth(date.getMonth() - 1)
+  date.setUTCMonth(date.getUTCMonth() - 1)
 
   clampMinDate(date, min)
 }
 export const incYear = (date: Date, max: Date): void => {
-  date.setFullYear(date.getFullYear() + 1)
+  date.setUTCFullYear(date.getUTCFullYear() + 1)
 
   clampMaxDate(date, max)
 }
 
 export const decYear = (date: Date, min: Date): void => {
-  date.setFullYear(date.getFullYear() - 1)
+  date.setUTCFullYear(date.getUTCFullYear() - 1)
 
   clampMinDate(date, min)
 }
 
 export const canGoPrevMonth = (date: Date, min: Date): boolean => {
-  const prevMonth = new Date(Date.UTC(date.getFullYear(), date.getMonth(), 0))
+  const prevMonth = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 0))
 
   return compareDates(prevMonth, min) >= 0
 }
 
 export const canGoNextMonth = (date: Date, max: Date): boolean => {
-  const nextMonth = new Date(Date.UTC(date.getFullYear(), date.getMonth() + 1, 1))
+  const nextMonth = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 1))
 
   return compareDates(max, nextMonth) >= 0
 }
 
 export const canGoNextYear = (date: Date, max: Date): boolean => {
-  const nextYear = new Date(Date.UTC(date.getFullYear() + 1, 0, 1))
+  const nextYear = new Date(Date.UTC(date.getUTCFullYear() + 1, 0, 1))
 
   return compareDates(max, nextYear) >= 0
 }
 
 export const canGoPrevYear = (date: Date, min: Date): boolean => {
-  const prevYear = new Date(Date.UTC(date.getFullYear(), 0, 0))
+  const prevYear = new Date(Date.UTC(date.getUTCFullYear(), 0, 0))
 
   return compareDates(prevYear, min) >= 0
 }

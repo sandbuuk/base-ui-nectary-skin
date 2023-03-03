@@ -536,7 +536,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     updateBooleanAttribute(this.#$prevYear, 'disabled', canGoPrevYear(this.#uiDate, this.#minDate) === false)
     updateBooleanAttribute(this.#$nextYear, 'disabled', canGoNextYear(this.#uiDate, this.#maxDate) === false)
 
-    this.#$date.textContent = `${this.#monthNames[this.#uiDate.getMonth()]} ${this.#uiDate.getFullYear()}`
+    this.#$date.textContent = `${this.#monthNames[this.#uiDate.getUTCMonth()]} ${this.#uiDate.getUTCFullYear()}`
 
     for (let wi = 0; wi < this.#$days.length; wi++) {
       const $week = this.#$days[wi]
@@ -559,7 +559,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
         } else {
           const dayIso = dateToIso(day)
 
-          $day.textContent = day.getDate().toString()
+          $day.textContent = day.getUTCDate().toString()
           $day.setAttribute('data-date', dayIso)
 
           if (isDateBetween(day, this.#minDate, this.#maxDate)) {

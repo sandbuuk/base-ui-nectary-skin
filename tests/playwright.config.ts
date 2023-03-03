@@ -15,6 +15,7 @@ const config: PlaywrightTestConfig = {
       use: {
         browserName: 'firefox',
         baseURL: 'http://localhost:3022',
+        timezoneId: 'Australia/Sydney',
       },
     },
     {
@@ -22,6 +23,7 @@ const config: PlaywrightTestConfig = {
       use: {
         browserName: 'webkit',
         baseURL: 'http://localhost:3023',
+        timezoneId: 'Europe/Stockholm',
       },
     },
     {
@@ -29,7 +31,6 @@ const config: PlaywrightTestConfig = {
       use: {
         browserName: 'chromium',
         baseURL: 'http://localhost:3022',
-        timezoneId: 'Australia/Sydney',
       },
     },
     {
@@ -51,7 +52,6 @@ const config: PlaywrightTestConfig = {
       use: {
         browserName: 'chromium',
         baseURL: 'http://localhost:3023',
-        timezoneId: 'Europe/Stockholm',
       },
     },
     {

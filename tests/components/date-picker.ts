@@ -173,6 +173,13 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
     },
   },
   {
+    name: 'timezone-edge-case',
+    url: '/date-picker?locale=en&min=2023-02-28&max=2023-05-05&value=2023-03-01',
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
     name: 'custom events',
     url: withValue,
     async *fn({ $, page }) {
