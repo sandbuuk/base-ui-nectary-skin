@@ -1,3 +1,8 @@
+## v1.2.0 (2023-03-03)
+
+* ➕ add `draggable` attribute to `sinch-card`
+* 🐞 fix timezones in `sinch-date-picker`
+
 ## v1.1.2 (2023-02-27)
 
 * 🐞 recalculate size on content change in `sinch-popover`
