@@ -38,7 +38,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #$contentSlot: HTMLSlotElement
   #$targetOpenWrapper: HTMLElement
   #targetActiveElement: HTMLElement | null = null
-  #controller: AbortController | null = null
+  #controller: AbortController | null
   #keydownContext: Context<'keydown'>
   #visibilityContext: Context<'visibility'>
   #targetStyleValue: string | null = null
@@ -62,12 +62,15 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     this.#keydownContext = new Context(this.#$contentSlot, 'keydown')
     this.#visibilityContext = new Context(this.#$contentSlot, 'visibility')
+    this.#controller = new AbortController()
   }
 
   connectedCallback() {
     super.connectedCallback()
 
-    this.#controller = new AbortController()
+    if (this.#controller === null) {
+      this.#controller = new AbortController()
+    }
 
     const { signal } = this.#controller
 
@@ -88,6 +91,8 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   disconnectedCallback() {
     super.disconnectedCallback()
     this.#controller!.abort()
+    this.#controller = null
+    this.#resizeThrottle.cancel()
     this.#onCollapse()
   }
 
@@ -143,8 +148,11 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     switch (name) {
       case 'open': {
         if (isAttrTrue(newVal)) {
+          // Delay opening to wait until "orientation" attribute assigned on root
           requestAnimationFrame(() => {
-            this.#onExpand()
+            if (this.isConnected && getBooleanAttribute(this, 'open')) {
+              this.#onExpand()
+            }
           })
         } else {
           this.#onCollapse()
@@ -264,9 +272,11 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
         // Safari requires to delay focus() call
         if (!isElementFocused(this.#targetActiveElement)) {
           requestAnimationFrame(() => {
-            this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
-            this.#targetActiveElement!.focus()
-            this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
+            if (this.isConnected && this.#isOpen()) {
+              this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
+              this.#targetActiveElement!.focus()
+              this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
+            }
           })
         }
       }
@@ -278,7 +288,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     // Subscribe after delay to not get immediate callbacks
     requestAnimationFrame(() => {
-      if (this.#isOpen()) {
+      if (this.isConnected && this.#isOpen()) {
         this.#$contentSlot.addEventListener('slotchange', this.#onContentSlotChange)
       }
     })
@@ -347,9 +357,11 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
           const $targetEl = this.#targetActiveElement
 
           requestAnimationFrame(() => {
-            this.#$targetSlot.addEventListener('focus', this.#stopEventPropagation, true)
-            $targetEl.focus()
-            this.#$targetSlot.removeEventListener('focus', this.#stopEventPropagation, true)
+            if (this.isConnected && !this.#isOpen()) {
+              this.#$targetSlot.addEventListener('focus', this.#stopEventPropagation, true)
+              $targetEl.focus()
+              this.#$targetSlot.removeEventListener('focus', this.#stopEventPropagation, true)
+            }
           })
         }
 
