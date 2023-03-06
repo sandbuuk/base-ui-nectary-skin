@@ -16,7 +16,7 @@ test('accessibility', checkValue({
   },
 }))
 
-test('date input screenshots', runScreenshotTests('sinch-date-picker', [
+test('date picker screenshots', runScreenshotTests('sinch-date-picker', [
   {
     name: 'min',
     url: withValue,
@@ -174,7 +174,7 @@ test('date input screenshots', runScreenshotTests('sinch-date-picker', [
   },
   {
     name: 'timezone-edge-case',
-    url: '/date-picker?locale=en&min=2023-02-28&max=2023-05-05&value=2023-03-01',
+    url: '/date-picker?locale=en&min=2022-02-28&max=2022-05-05&value=2022-03-01',
     async *fn() {
       yield { name: 'shot' }
     },
