@@ -1,3 +1,7 @@
+## v1.2.1 (2023-03-06)
+
+* 🐞 fix remounting `sinch-popover`
+
 ## v1.2.0 (2023-03-03)
 
 * ➕ add `draggable` attribute to `sinch-card`
