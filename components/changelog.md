@@ -1,3 +1,9 @@
+## v1.2.2 (2023-03-07)
+
+* 🐞 adjust built-in search behaviour in `sinch-select-menu`
+* 🐞 adjust palette colors
+* 🐞 tweak presets for `sinch-color-menu`
+
 ## v1.2.1 (2023-03-06)
 
 * 🐞 fix remounting `sinch-popover`
