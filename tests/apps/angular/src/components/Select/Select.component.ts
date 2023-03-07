@@ -9,6 +9,24 @@ import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary-assets/icons/open-in-new'
 import '@sinch-engage/nectary-assets/icons/search'
 
+const optionsLong: Record<string, TMenuValue> = {
+  1: { text: 'Option 1 value long long long', icon: '1' },
+  2: { text: 'Option 2', icon: '1', isDisabled: true },
+  3: { text: 'Option 3', icon: null },
+  4: { text: 'Option 4', icon: null },
+  5: { text: 'Option 1 value long long long', icon: '1' },
+  6: { text: 'Option 2', icon: '1', isDisabled: true },
+  7: { text: 'Option 3', icon: null },
+  8: { text: 'Option 4', icon: null },
+}
+
+const optionsShort: Record<string, TMenuValue> = {
+  1: { text: 'Option 1 value long long long', icon: '1' },
+  2: { text: 'Option 2', icon: '1', isDisabled: true },
+  3: { text: 'Option 3', icon: null },
+  4: { text: 'Option 4', icon: null },
+}
+
 type TMenuValue = {
   text: string,
   icon: string | null,
@@ -30,12 +48,7 @@ export class SelectComponent {
   hasLeft: boolean
   hasIcon: boolean
   rows: number | null
-  options: Record<string, TMenuValue> = {
-    1: { text: 'Option 1 value long long long', icon: '1' },
-    2: { text: 'Option 2', icon: '1', isDisabled: true },
-    3: { text: 'Option 3', icon: null },
-    4: { text: 'Option 4', icon: null },
-  }
+  options: Record<string, TMenuValue>
 
   constructor() {
     const url = new URL(location.href)
@@ -48,6 +61,9 @@ export class SelectComponent {
 
     const numVisibleValue = url.searchParams.get('rows')
     this.rows = numVisibleValue !== null ? parseInt(numVisibleValue) : null
+    this.options = url.searchParams.get('example') === 'lots'
+      ? optionsLong
+      : optionsShort
   }
 
   onChange(e: Event) {

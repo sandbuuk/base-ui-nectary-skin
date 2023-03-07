@@ -19,7 +19,6 @@ export const SimpleExample: FC = () => {
 
   return (
     <sinch-select-menu
-      slot="content"
       aria-label="Action menu"
       style={menuStyles}
       value={value}

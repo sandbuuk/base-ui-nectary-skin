@@ -65,9 +65,10 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
       await page.keyboard.press('ArrowRight')
       await page.keyboard.press('ArrowRight')
       await page.keyboard.press('ArrowRight')
+      await page.keyboard.press('ArrowRight')
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('ArrowDown')
-      yield { name: '1-rrrdd' }
+      yield { name: '1-rrrrdd' }
 
       await page.keyboard.press('ArrowDown')
       yield { name: '2-d' }
@@ -121,7 +122,7 @@ test('color-menu events', runScreenshotTests('sinch-color-menu', [
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-color-menu-change', detail: 'light-blue' },
-        { type: 'sinch-color-menu-change', detail: 'dark-orange' },
+        { type: 'sinch-color-menu-change', detail: 'dark-brown' },
       ])
     },
   },
@@ -142,7 +143,7 @@ test('color-menu events', runScreenshotTests('sinch-color-menu', [
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-color-menu-change', detail: 'light-violet' },
-        { type: 'sinch-color-menu-change', detail: 'light-brown' },
+        { type: 'sinch-color-menu-change', detail: 'light-pink' },
       ])
     },
   },

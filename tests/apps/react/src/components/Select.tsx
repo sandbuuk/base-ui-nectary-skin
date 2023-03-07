@@ -25,6 +25,14 @@ const options: Record<string, TMenuValue> = {
   2: { text: 'Option 2', icon: '1', isDisabled: true },
   3: { text: 'Option 3', icon: null },
   4: { text: 'Option 4', icon: null },
+  7: { text: 'Option 1 value long long long', icon: '1' },
+  8: { text: 'Option 2', icon: '1', isDisabled: true },
+  9: { text: 'Option 3', icon: null },
+  10: { text: 'Option 4', icon: null },
+  11: { text: 'Option 1 value long long long', icon: '1' },
+  12: { text: 'Option 2', icon: '1', isDisabled: true },
+  13: { text: 'Option 3', icon: null },
+  14: { text: 'Option 4', icon: null },
 }
 
 export const Select: FC<TSelect> = ({ search }) => {
@@ -60,6 +68,10 @@ export const Select: FC<TSelect> = ({ search }) => {
 
     return val !== null ? parseInt(val) : undefined
   })()
+  const isLotsItemsExample = search.get('example') === 'lots'
+  const items = isLotsItemsExample
+    ? Object.entries(options)
+    : Object.entries(options).slice(0, 4)
 
   return (
     <sinch-popover
@@ -108,7 +120,7 @@ export const Select: FC<TSelect> = ({ search }) => {
         aria-label="Menu"
       >
         {
-          Object.entries(options).map(([key, { text, icon, isDisabled }]) => (
+          items.map(([key, { text, icon, isDisabled }]) => (
             <sinch-select-menu-option
               key={key}
               value={key}

@@ -19,7 +19,6 @@ export const RowsExample: FC = () => {
 
   return (
     <sinch-select-menu
-      slot="content"
       aria-label="Action menu"
       rows={2}
       style={menuStyles}

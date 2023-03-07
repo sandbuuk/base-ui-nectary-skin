@@ -16,7 +16,6 @@ export const SearchExample: FC = () => {
 
   return (
     <sinch-select-menu
-      slot="content"
       aria-label="Action menu"
       rows={5}
       style={menuStyles}
