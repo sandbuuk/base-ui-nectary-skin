@@ -95,7 +95,7 @@ test('color select events', runScreenshotTests('sinch-color-menu', [
       expect(
         await getAllEvents(page)
       ).toEqual([
-        { type: 'sinch-color-menu-change', detail: 'light-pink' },
+        { type: 'sinch-color-menu-change', detail: 'light-red' },
       ])
     },
   },
