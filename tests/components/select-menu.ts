@@ -121,7 +121,6 @@ test('select menu screenshots', runScreenshotTests('sinch-select-menu', [
       yield { name: '1-begin' }
 
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('ArrowDown')
       yield { name: '2-arrows' }

@@ -156,6 +156,10 @@ export const setClass = (elem: Element, name: string, isSet: boolean) => {
   isSet ? elem.classList.add(name) : elem.classList.remove(name)
 }
 
+export const hasClass = (elem: Element, name: string) => {
+  return elem.classList.contains(name)
+}
+
 export const getCssVar = (element: Element, variableName: string): string | null => {
   const result = getComputedStyle(element).getPropertyValue(variableName).trim()
 

@@ -22,6 +22,7 @@ import {
   setClass,
   subscribeContext,
   getCssVar,
+  hasClass,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
@@ -32,7 +33,7 @@ import type { TContextKeydown, TContextVisibility } from '../utils'
 type TSelectMenuOption = TSinchSelectMenuOptionElement
 
 const ITEM_HEIGHT = 40
-const NUM_ITEMS_SEARCH = 20
+const NUM_ITEMS_SEARCH = 7
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
@@ -65,21 +66,26 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   connectedCallback() {
     this.#controller = new AbortController()
 
-    const { signal } = this.#controller
+    const options: AddEventListenerOptions = {
+      signal: this.#controller.signal,
+    }
 
     this.setAttribute('role', 'listbox')
     this.setAttribute('tabindex', '0')
-    this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
-    this.addEventListener('blur', this.#onListboxBlur, { signal })
-    this.#$listbox.addEventListener('mousedown', this.#onListboxMousedown, { signal })
-    this.#$listbox.addEventListener('click', this.#onListboxClick, { signal })
-    this.#$search.addEventListener('-change', this.#onSearchChange as any, { signal })
-    this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange, { signal })
-    this.addEventListener('-change', this.#onChangeReactHandler, { signal })
-    subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
-    subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
+    this.addEventListener('keydown', this.#onListboxKeyDown, options)
+    this.addEventListener('focus', this.#onFocus, options)
+    this.addEventListener('blur', this.#onListboxBlur, options)
+    this.#$listbox.addEventListener('mousedown', this.#onListboxMousedown, options)
+    this.#$listbox.addEventListener('click', this.#onListboxClick, options)
+    this.#$search.addEventListener('-change', this.#onSearchChange as any, options)
+    this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
+    subscribeContext(this, 'keydown', this.#onContextKeyDown, this.#controller.signal)
+    subscribeContext(this, 'visibility', this.#onContextVisibility, this.#controller.signal)
 
     updateAttribute(this.#$iconSearch, 'name', getCssVar(this, '--sinch-select-menu-icon-search'))
+
+    this.#onOptionSlotChange()
   }
 
   disconnectedCallback() {
@@ -89,30 +95,6 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
   static get observedAttributes() {
     return ['value', 'rows', 'multiple']
-  }
-
-  set value(value: string) {
-    updateAttribute(this, 'value', value)
-  }
-
-  get value(): string {
-    return getAttribute(this, 'value', '')
-  }
-
-  set rows(value: number | null) {
-    updateIntegerAttribute(this, 'rows', value)
-  }
-
-  get rows() {
-    return getIntegerAttribute(this, 'rows', null)
-  }
-
-  set multiple(isMultiple: boolean) {
-    updateBooleanAttribute(this, 'multiple', isMultiple)
-  }
-
-  get multiple() {
-    return getBooleanAttribute(this, 'multiple')
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -139,6 +121,42 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
         break
       }
+    }
+  }
+
+  set value(value: string) {
+    updateAttribute(this, 'value', value)
+  }
+
+  get value(): string {
+    return getAttribute(this, 'value', '')
+  }
+
+  set rows(value: number | null) {
+    updateIntegerAttribute(this, 'rows', value)
+  }
+
+  get rows() {
+    return getIntegerAttribute(this, 'rows', null)
+  }
+
+  set multiple(isMultiple: boolean) {
+    updateBooleanAttribute(this, 'multiple', isMultiple)
+  }
+
+  get multiple() {
+    return getBooleanAttribute(this, 'multiple')
+  }
+
+  get focusable() {
+    return true
+  }
+
+  #onFocus = () => {
+    const isSearchActive = hasClass(this.#$search, 'active')
+
+    if (isSearchActive) {
+      this.#$search.focus()
     }
   }
 
@@ -192,6 +210,9 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     if (e.detail) {
       // Select element when becoming visible
       this.#selectOption(this.#findCheckedOption())
+
+      // Focus search if active
+      this.#onFocus()
     } else {
       // Deselect element when becoming invisible
       this.#selectOption(null)
@@ -400,10 +421,6 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
-  }
-
-  get focusable() {
-    return true
   }
 })
 

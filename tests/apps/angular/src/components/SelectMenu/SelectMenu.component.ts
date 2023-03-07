@@ -12,18 +12,6 @@ const optionsLong: Record<string, TMenuValue> = {
   6: { text: 'Option 2', icon: '1', isDisabled: true },
   7: { text: 'Option 3', icon: null },
   8: { text: 'Option 4', icon: null },
-  9: { text: 'Option 1 value long long long', icon: '1' },
-  10: { text: 'Option 2', icon: '1', isDisabled: true },
-  11: { text: 'Option 3', icon: null },
-  12: { text: 'Option 4', icon: null },
-  13: { text: 'Option 1 value long long long', icon: '1' },
-  14: { text: 'Option 2', icon: '1', isDisabled: true },
-  15: { text: 'Option 3', icon: null },
-  16: { text: 'Option 4', icon: null },
-  17: { text: 'Option 1 value long long long', icon: '1' },
-  18: { text: 'Option 2', icon: '1', isDisabled: true },
-  19: { text: 'Option 3', icon: null },
-  20: { text: 'Option 4', icon: null },
 }
 
 const optionsShort: Record<string, TMenuValue> = {

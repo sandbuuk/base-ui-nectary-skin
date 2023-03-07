@@ -33,7 +33,7 @@
       :value="value"
       @--change="onChange">
       <sinch-select-menu-option
-        v-for="(value, key) in options"
+        v-for="(value, key) in items"
         :key="key"
         :value="key"
         :text="value.text"
@@ -55,6 +55,17 @@ import '@sinch-engage/nectary/select-menu-option'
 import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary-assets/icons/open-in-new'
 import '@sinch-engage/nectary-assets/icons/search'
+
+const options = {
+  1: { text: 'Option 1 value long long long', icon: '1' },
+  2: { text: 'Option 2', icon: '1', isDisabled: true },
+  3: { text: 'Option 3', icon: null },
+  4: { text: 'Option 4', icon: null },
+  5: { text: 'Option 1 value long long long', icon: '1' },
+  6: { text: 'Option 2', icon: '1', isDisabled: true },
+  7: { text: 'Option 3', icon: null },
+  8: { text: 'Option 4', icon: null },
+}
 
 export default {
   methods: {
@@ -85,13 +96,10 @@ export default {
       const val = this.search.get('rows')
       return val !== null ? parseInt(val) : null
     },
-    options() {
-      return {
-        1: { text: 'Option 1 value long long long', icon: '1' },
-        2: { text: 'Option 2', icon: '1', isDisabled: true },
-        3: { text: 'Option 3', icon: null },
-        4: { text: 'Option 4', icon: null },
-      }
+    items() {
+      return this.search.get('example') === 'lots'
+        ? Object.entries(options)
+        : Object.entries(options).slice(0, 4)
     },
     inputText() {
       return this.options[this.value]?.text ?? ''
