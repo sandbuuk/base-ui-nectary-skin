@@ -43,6 +43,7 @@
     <SegmentedIconControl v-if="url.pathname === '/segmented-icon-control'" :search="url.searchParams"/>
     <Select v-if="url.pathname === '/select'" :search="url.searchParams"/>
     <SelectMenu v-if="url.pathname === '/select-menu'" :search="url.searchParams"/>
+    <Skeleton v-if="url.pathname === '/skeleton'" :search="url.searchParams"/>
     <Spinner v-if="url.pathname === '/spinner'" :search="url.searchParams"/>
     <Table v-if="url.pathname === '/table'" :search="url.searchParams"/>
     <Tabs v-if="url.pathname === '/tabs'" :search="url.searchParams"/>
@@ -104,6 +105,7 @@ import SegmentedControl from './components/SegmentedControl.vue'
 import SegmentedIconControl from './components/SegmentedIconControl.vue'
 import Select from './components/Select.vue'
 import SelectMenu from './components/SelectMenu.vue'
+import Skeleton from './components/Skeleton.vue'
 import Spinner from './components/Spinner.vue'
 import Table from './components/Table.vue'
 import Tabs from './components/Tabs.vue'
@@ -190,6 +192,7 @@ export default {
     SegmentedIconControl,
     Select,
     SelectMenu,
+    Skeleton,
     Spinner,
     Table,
     Tabs,

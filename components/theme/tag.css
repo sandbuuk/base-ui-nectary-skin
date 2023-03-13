@@ -18,6 +18,8 @@
   --sinch-tag-color-light-violet-fg: var(--sinch-color-violet-700);
   --sinch-tag-color-light-yellow-bg: var(--sinch-color-bolt-200);
   --sinch-tag-color-light-yellow-fg: var(--sinch-color-bolt-700);
+  --sinch-tag-color-light-red-bg: var(--sinch-color-jasper-200);
+  --sinch-tag-color-light-red-fg: var(--sinch-color-jasper-700);
   --sinch-tag-color-dark-blue-bg: var(--sinch-color-night-700);
   --sinch-tag-color-dark-blue-fg: var(--sinch-color-night-200);
   --sinch-tag-color-dark-brown-bg: var(--sinch-color-mud-700);
@@ -34,6 +36,8 @@
   --sinch-tag-color-dark-violet-fg: var(--sinch-color-violet-200);
   --sinch-tag-color-dark-yellow-bg: var(--sinch-color-bolt-700);
   --sinch-tag-color-dark-yellow-fg: var(--sinch-color-bolt-200);
+  --sinch-tag-color-dark-red-bg: var(--sinch-color-jasper-700);
+  --sinch-tag-color-dark-red-fg: var(--sinch-color-jasper-200);
   --sinch-tag-color-blue-bg: var(--sinch-color-night-400);
   --sinch-tag-color-blue-fg: var(--sinch-color-snow-100);
   --sinch-tag-color-brown-bg: var(--sinch-color-mud-400);
@@ -50,6 +54,8 @@
   --sinch-tag-color-violet-fg: var(--sinch-color-stormy-500);
   --sinch-tag-color-yellow-bg: var(--sinch-color-bolt-400);
   --sinch-tag-color-yellow-fg: var(--sinch-color-stormy-500);
+  --sinch-tag-color-red-bg: var(--sinch-color-jasper-400);
+  --sinch-tag-color-red-fg: var(--sinch-color-stormy-500);
   --sinch-tag-color-celtic-bg: var(--sinch-color-feedback-info-bg);
   --sinch-tag-color-celtic-fg: var(--sinch-color-feedback-info-contrast);
   --sinch-tag-color-olive-bg: var(--sinch-color-feedback-success-bg);

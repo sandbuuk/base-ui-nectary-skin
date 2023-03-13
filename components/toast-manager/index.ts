@@ -5,6 +5,7 @@ import {
   defineCustomElement,
   getRect,
   NectaryElement,
+  shouldReduceMotion,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchToastManagerElement, TSinchToastManagerReact } from './types'
@@ -21,7 +22,7 @@ defineCustomElement('sinch-toast-manager', class extends NectaryElement {
   #$slot: HTMLSlotElement
   #$list: HTMLElement
   #map: WeakMap<Element, Element> = new WeakMap()
-  #shouldReduceMotion = false
+  #shouldReduceMotion: boolean
   #animations = new Set<Animation>()
   constructor() {
     super()
@@ -32,11 +33,11 @@ defineCustomElement('sinch-toast-manager', class extends NectaryElement {
 
     this.#$slot = shadowRoot.querySelector('slot')!
     this.#$list = shadowRoot.querySelector('#list')!
+    this.#shouldReduceMotion = shouldReduceMotion()
   }
 
   connectedCallback() {
     this.#$slot.addEventListener('slotchange', this.#onSlotChange)
-    this.#shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   }
 
   disconnectedCallback() {
