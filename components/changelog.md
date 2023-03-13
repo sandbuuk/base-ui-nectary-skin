@@ -1,3 +1,8 @@
+## v1.3.0 (2023-03-13)
+
+* ➕ add `sinch-skeleton` component
+* 🐞 fix red color in `sinch-tag` and `sinch-chip`
+
 ## v1.2.2 (2023-03-07)
 
 * 🐞 adjust built-in search behaviour in `sinch-select-menu`
