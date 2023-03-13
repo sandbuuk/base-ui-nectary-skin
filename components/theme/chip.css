@@ -18,6 +18,8 @@
   --sinch-chip-color-light-violet-fg: var(--sinch-color-violet-700);
   --sinch-chip-color-light-yellow-bg: var(--sinch-color-bolt-200);
   --sinch-chip-color-light-yellow-fg: var(--sinch-color-bolt-700);
+  --sinch-chip-color-light-red-bg: var(--sinch-color-jasper-200);
+  --sinch-chip-color-light-red-fg: var(--sinch-color-jasper-700);
   --sinch-chip-color-dark-blue-bg: var(--sinch-color-night-700);
   --sinch-chip-color-dark-blue-fg: var(--sinch-color-night-200);
   --sinch-chip-color-dark-brown-bg: var(--sinch-color-mud-700);
@@ -34,6 +36,8 @@
   --sinch-chip-color-dark-violet-fg: var(--sinch-color-violet-200);
   --sinch-chip-color-dark-yellow-bg: var(--sinch-color-bolt-700);
   --sinch-chip-color-dark-yellow-fg: var(--sinch-color-bolt-200);
+  --sinch-chip-color-dark-red-bg: var(--sinch-color-jasper-700);
+  --sinch-chip-color-dark-red-fg: var(--sinch-color-jasper-200);
   --sinch-chip-color-blue-bg: var(--sinch-color-night-400);
   --sinch-chip-color-blue-fg: var(--sinch-color-snow-100);
   --sinch-chip-color-brown-bg: var(--sinch-color-mud-400);
@@ -50,6 +54,8 @@
   --sinch-chip-color-violet-fg: var(--sinch-color-stormy-500);
   --sinch-chip-color-yellow-bg: var(--sinch-color-bolt-400);
   --sinch-chip-color-yellow-fg: var(--sinch-color-stormy-500);
+  --sinch-chip-color-red-bg: var(--sinch-color-jasper-400);
+  --sinch-chip-color-red-fg: var(--sinch-color-stormy-500);
   --sinch-chip-color-celtic-bg: var(--sinch-color-feedback-info-bg);
   --sinch-chip-color-celtic-fg: var(--sinch-color-feedback-info-contrast);
   --sinch-chip-color-olive-bg: var(--sinch-color-feedback-success-bg);
