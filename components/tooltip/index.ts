@@ -12,6 +12,7 @@ import {
   setClass,
   rectOverlap,
   getReactEventHandler,
+  shouldReduceMotion,
 } from '../utils'
 import templateHTML from './template.html'
 import { TooltipState } from './tooltip-state'
@@ -56,7 +57,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     this.#$contentWrapper = shadowRoot.querySelector('#content-wrapper')!
     this.#$tip = shadowRoot.querySelector('#tip')!
     this.#$target = shadowRoot.querySelector('#target')!
-    this.#shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    this.#shouldReduceMotion = shouldReduceMotion()
 
     this.#tooltipState = new TooltipState({
       showDelay: SHOW_DELAY,

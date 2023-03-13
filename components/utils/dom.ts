@@ -199,3 +199,5 @@ export const cloneNode = (el: Element, deep: boolean): Element => {
 
   return el.cloneNode(deep) as Element
 }
+
+export const shouldReduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches

@@ -44,6 +44,7 @@ import { SegmentedControlComponent } from '../components/SegmentedControl/Segmen
 import { SegmentedIconControlComponent } from '../components/SegmentedIconControl/SegmentedIconControl.component'
 import { SelectComponent } from '../components/Select/Select.component'
 import { SelectMenuComponent } from '../components/SelectMenu/SelectMenu.component'
+import { SkeletonComponent } from '../components/Skeleton/Skeleton.component'
 import { SpinnerComponent } from '../components/Spinner/Spinner.component'
 import { TableComponent } from '../components/Table/Table.component'
 import { TabsComponent } from '../components/Tabs/Tabs.component'
@@ -105,6 +106,7 @@ import { AppComponent } from './app.component'
     SegmentedIconControlComponent,
     SelectComponent,
     SelectMenuComponent,
+    SkeletonComponent,
     SpinnerComponent,
     TableComponent,
     TabsComponent,

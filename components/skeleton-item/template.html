@@ -1,0 +1,40 @@
+<style>
+:host {
+  display: block;
+  height: var(--sinch-size-m);
+
+  --sinch-shape-radius: var(--sinch-shape-radius-m);
+}
+
+:host([size="xs"]) {
+  height: var(--sinch-size-xs);
+
+  --sinch-shape-radius: var(--sinch-shape-radius-xs);
+}
+
+:host([size="s"]) {
+  height: var(--sinch-size-s);
+
+  --sinch-shape-radius: var(--sinch-shape-radius-s);
+}
+
+:host([size="m"]) {
+  height: var(--sinch-size-m);
+
+  --sinch-shape-radius: var(--sinch-shape-radius-m);
+}
+
+:host([size="l"]) {
+  height: var(--sinch-size-l);
+
+  --sinch-shape-radius: var(--sinch-shape-radius-l);
+}
+
+#content {
+  height: 100%;
+  background-color: var(--sinch-color-snow-500);
+  border-radius: var(--sinch-shape-radius);
+}
+</style>
+
+<div id="content"></div>

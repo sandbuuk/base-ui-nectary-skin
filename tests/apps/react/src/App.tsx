@@ -46,6 +46,7 @@ import { SegmentedControl } from './components/SegmentedControl'
 import { SegmentedIconControl } from './components/SegmentedIconControl'
 import { Select } from './components/Select'
 import { SelectMenu } from './components/SelectMenu'
+import { Skeleton } from './components/Skeleton'
 import { Spinner } from './components/Spinner'
 import { Table } from './components/Table'
 import { Tabs } from './components/Tabs'
@@ -343,6 +344,12 @@ const mapElement = (url: URL) => {
     case '/select': {
       return (
         <Select search={url.searchParams}/>
+      )
+    }
+
+    case '/skeleton': {
+      return (
+        <Skeleton search={url.searchParams}/>
       )
     }
 
