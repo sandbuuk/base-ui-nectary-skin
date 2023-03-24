@@ -2,16 +2,17 @@ type TTooltipStateOptions = {
   showDelay: number,
   hideDelay: number,
   hideAnimationDuration: number,
-  onShow(): void,
+  onShowStart(): void,
+  onShowEnd(): void,
   onHideStart(): void,
   onHideEnd(): void,
 }
 
-type TTooltipState = 'initial' | 'show-delay' | 'show' | 'hide-delay' | 'hide'
+type TTooltipState = 'hide' | 'hide-to-show' | 'show' | 'show-to-hide'
 
 export class TooltipState {
   #timerId: number | null = null
-  #state: TTooltipState = 'initial'
+  #state: TTooltipState = 'hide'
   #options: TTooltipStateOptions
 
   constructor(options: TTooltipStateOptions) {
@@ -19,20 +20,16 @@ export class TooltipState {
   }
 
   show() {
+    console.log('-> show')
+
     switch (this.#state) {
-      case 'initial': {
-        this.#delayShow()
-
-        break
-      }
-      case 'hide-delay': {
-        this.#cancelStateChange('show')
-
-        break
-      }
       case 'hide': {
-        this.#cancelStateChange()
-        this.#onShow()
+        this.#switchToHideToShow()
+
+        break
+      }
+      case 'show-to-hide': {
+        this.#switchToState('show')
 
         break
       }
@@ -40,14 +37,16 @@ export class TooltipState {
   }
 
   hide() {
+    console.log('-> hide')
+
     switch (this.#state) {
-      case 'show-delay': {
-        this.#cancelStateChange('initial')
+      case 'hide-to-show': {
+        this.#onHideAnimationEnd()
 
         break
       }
       case 'show': {
-        this.#delayHide()
+        this.#switchToShowToHide()
 
         break
       }
@@ -55,20 +54,21 @@ export class TooltipState {
   }
 
   interrupt() {
+    console.log('-> interrupt')
+
     switch (this.#state) {
-      case 'show-delay': {
-        this.#cancelStateChange('initial')
+      case 'hide-to-show': {
+        this.#onHideAnimationEnd()
 
         break
       }
       case 'show': {
-        this.#onHideStart()
+        this.#switchToShowToHide(true, false)
 
         break
       }
-      case 'hide-delay': {
-        this.#cancelStateChange()
-        this.#onHideStart()
+      case 'show-to-hide': {
+        this.#switchToShowToHide(true, false)
 
         break
       }
@@ -76,67 +76,76 @@ export class TooltipState {
   }
 
   destroy() {
+    console.log('-> destroy')
+
     switch (this.#state) {
-      case 'show-delay': {
-        this.#cancelStateChange('initial')
+      case 'hide-to-show': {
+        this.#onHideAnimationEnd()
 
         break
       }
       case 'show': {
-        this.#onHideStart(true)
+        this.#switchToShowToHide(true, true)
 
         break
       }
-      case 'hide-delay': {
-        this.#cancelStateChange()
-        this.#onHideStart(true)
+      case 'show-to-hide': {
+        this.#switchToShowToHide(true, true)
 
         break
       }
       case 'hide': {
-        this.#cancelStateChange()
-        this.#onHideEnd()
+        this.#onHideAnimationEnd()
 
         break
       }
     }
   }
 
-  #delayShow() {
-    this.#state = 'show-delay'
-    this.#timerId = window.setTimeout(this.#onShow, this.#options.showDelay)
-  }
+  #switchToHideToShow() {
+    this.#switchToState('hide-to-show')
+    this.#options.onShowStart()
 
-  #delayHide() {
-    this.#state = 'hide-delay'
-    this.#timerId = window.setTimeout(this.#onHideStart, this.#options.hideDelay)
-  }
-
-  #onShow = () => {
-    this.#state = 'show'
-    this.#options.onShow()
-  }
-
-  #onHideStart = (isImmediate?: boolean) => {
-    this.#state = 'hide'
-    this.#options.onHideStart()
-
-    if (isImmediate === true || this.#options.hideAnimationDuration === 0) {
-      this.#onHideEnd()
+    if (this.#options.showDelay === 0) {
+      this.#onSwitchToShow()
     } else {
-      this.#timerId = window.setTimeout(this.#onHideEnd, this.#options.hideAnimationDuration)
+      this.#timerId = window.setTimeout(this.#onSwitchToShow, this.#options.showDelay)
     }
   }
 
-  #onHideEnd = () => {
-    this.#state = 'initial'
+  #switchToShowToHide(skipDelay?: boolean, skipHideAnimation?: boolean) {
+    this.#switchToState('show-to-hide')
+
+    if (skipDelay === true || this.#options.hideDelay === 0) {
+      this.#onShowToHideEnd(skipHideAnimation)
+    } else {
+      this.#timerId = window.setTimeout(this.#onShowToHideEnd, this.#options.hideDelay)
+    }
+  }
+
+  #onSwitchToShow = () => {
+    this.#switchToState('show')
+    this.#options.onShowEnd()
+  }
+
+  #onShowToHideEnd = (skipHideAnimation?: boolean) => {
+    this.#switchToState('hide')
+    this.#options.onHideStart()
+
+    if (skipHideAnimation === true || this.#options.hideAnimationDuration === 0) {
+      this.#onHideAnimationEnd()
+    } else {
+      this.#timerId = window.setTimeout(this.#onHideAnimationEnd, this.#options.hideAnimationDuration)
+    }
+  }
+
+  #onHideAnimationEnd = () => {
+    this.#switchToState('hide')
     this.#options.onHideEnd()
   }
 
-  #cancelStateChange(nextState?: TTooltipState) {
-    if (nextState != null) {
-      this.#state = nextState
-    }
+  #switchToState(nextState: TTooltipState) {
+    this.#state = nextState
 
     if (this.#timerId !== null) {
       clearTimeout(this.#timerId)
