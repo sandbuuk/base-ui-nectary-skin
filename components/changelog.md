@@ -1,3 +1,7 @@
+## v1.3.1 (2023-03-27)
+
+* 🐞 fix `sinch-popover` freeze in Safari
+
 ## v1.3.0 (2023-03-13)
 
 * ➕ add `sinch-skeleton` component
