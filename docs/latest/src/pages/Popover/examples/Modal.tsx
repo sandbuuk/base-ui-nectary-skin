@@ -24,6 +24,7 @@ export const ModalExample: FC = () => {
       aria-label="Popover"
       modal
       open={isOpen}
+      orientation="bottom-right"
       on-close={onClose}
     >
       <sinch-button

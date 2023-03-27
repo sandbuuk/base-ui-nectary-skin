@@ -22,7 +22,7 @@ export const TipExample: FC = () => {
   return (
     <sinch-popover
       aria-label="Popover"
-      orientation="bottom-right"
+      orientation="top-right"
       modal
       tip
       open={isOpen}
