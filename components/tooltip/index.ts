@@ -24,7 +24,7 @@ import type { TRect } from '../types'
 const TIP_SIZE = 8
 const SHOW_DELAY = 1000
 const HIDE_DELAY = 0
-const ANIMATION_DURATION = 50
+const ANIMATION_DURATION = 100
 
 const template = document.createElement('template')
 
@@ -63,7 +63,8 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
       showDelay: SHOW_DELAY,
       hideDelay: this.#shouldReduceMotion ? HIDE_DELAY + ANIMATION_DURATION : HIDE_DELAY,
       hideAnimationDuration: this.#shouldReduceMotion ? 0 : ANIMATION_DURATION,
-      onShow: this.#onStateShow,
+      onShowStart: this.#onStateShowStart,
+      onShowEnd: this.#onStateShowEnd,
       onHideStart: this.#onStateHideStart,
       onHideEnd: this.#onStateHideEnd,
     })
@@ -153,35 +154,41 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     }
   }
 
+  // Begin hide animation if shown, skipping HIDE_DELAY wait
   #onMouseDown = () => {
-    this.#tooltipState.interrupt()
-    this.#unsubscribeScroll()
+    this.#tooltipState.destroy()
   }
 
+  // Underlying pop asks for a close
   #onPopClose = () => {
+    // Immediately close tooltip
     this.#tooltipState.destroy()
-    this.#unsubscribeScroll()
   }
 
   #onMouseEnter = () => {
     this.#tooltipState.show()
-    this.#subscribeScroll()
-    this.#subscribeMouseLeaveEvents()
   }
 
   #onMouseLeave = (e: MouseEvent) => {
     if (!this.#isOpen() || (e.relatedTarget !== this.#$contentWrapper && e.relatedTarget !== this.#$target)) {
       this.#tooltipState.hide()
-      this.#unsubscribeScroll()
     }
   }
 
   #onScroll = () => {
     this.#tooltipState.destroy()
-    this.#unsubscribeScroll()
   }
 
-  #onStateShow = () => {
+  // Tooltip begins to wait for SHOW_DELAY on mouseenter
+  #onStateShowStart = () => {
+    // Scroll interrupts SHOW_DELAY timer
+    this.#subscribeScroll()
+    // MouseLeave interrupts SHOW_DELAY timer
+    this.#subscribeMouseLeaveEvents()
+  }
+
+  // SHOW_DELAY ended, tooltip can be shown with animation
+  #onStateShowEnd = () => {
     this.#dispatchShowEvent()
     updateBooleanAttribute(this.#$pop, 'open', true)
     requestAnimationFrame(this.#updateTipOrientation)
@@ -200,17 +207,23 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     }
   }
 
+  // HIDE_DELAY ended, begin tooltip hide animation
   #onStateHideStart = () => {
     this.#animation!.updatePlaybackRate(-1)
     this.#animation!.play()
   }
 
+  // Hide animation ended, tooltip can be hidden
   #onStateHideEnd = () => {
-    this.#animation!.finish()
+    if (this.#isOpen()) {
+      this.#animation!.finish()
+      this.#dispatchHideEvent()
+      updateBooleanAttribute(this.#$pop, 'open', false)
+    }
+
     this.#resetTipOrientation()
-    updateBooleanAttribute(this.#$pop, 'open', false)
-    this.#dispatchHideEvent()
     this.#unsubscribeMouseLeaveEvents()
+    this.#unsubscribeScroll()
   }
 
   #resetTipOrientation() {
@@ -251,21 +264,18 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
       return
     }
 
-    const value = this.text
+    const text = this.text
 
-    this.#$tooltipText.textContent = value
+    this.#$tooltipText.textContent = text
 
-    if (value.length === 0) {
+    if (text.length === 0) {
       if (this.#isSubscribed) {
         this.#tooltipState.destroy()
         this.#unsubscribeMouseEnterEvent()
-        this.#unsubscribeMouseLeaveEvents()
       }
-
-      return
+    } else {
+      this.#subscribeMouseEnterEvent()
     }
-
-    this.#subscribeMouseEnterEvent()
   }
 
   #subscribeMouseEnterEvent() {

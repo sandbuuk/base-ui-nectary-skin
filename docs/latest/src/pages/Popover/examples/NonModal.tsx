@@ -23,6 +23,7 @@ export const NonModalExample: FC = () => {
     <sinch-popover
       aria-label="Popover"
       open={isOpen}
+      orientation="bottom-right"
       on-close={onClose}
     >
       <sinch-button

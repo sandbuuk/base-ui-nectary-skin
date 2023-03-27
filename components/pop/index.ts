@@ -213,16 +213,16 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     // When opening dialog in modal mode Firefox does not emit "blur" event on the active element
     // But focuses element back after closing modal, and emits "focus" event
     // Supress "blur" event on target element
-    this.#$targetSlot.addEventListener('blur', this.#stopEventPropagation, true)
-    // Capture using related target
-    // Tooltip can open dialog with outside focused element
-    this.#$focus.style.setProperty('display', 'block')
-    this.#$focus.addEventListener('focus', this.#captureRelatedActiveElement)
+    this.#$targetSlot.addEventListener('blur', this.#captureActiveElement, true)
+    this.#$focus.setAttribute('tabindex', '-1')
+    this.#$focus.style.display = 'block'
     // Focus our target explicitly to capture previous active element
     this.#$focus.focus()
-    this.#$focus.removeEventListener('focus', this.#captureRelatedActiveElement)
-    this.#$focus.style.removeProperty('display')
-    this.#$targetSlot.removeEventListener('blur', this.#stopEventPropagation, true)
+    this.#$targetSlot.removeEventListener('blur', this.#captureActiveElement, true)
+    // Remove tabindex, because Safari freezes the UI, after closing Pop
+    //   when Pop is in target slot of another Pop
+    this.#$focus.removeAttribute('tabindex')
+    this.#$focus.removeAttribute('style')
 
     /* Open dialog */
     this.#$dialog.showModal()
@@ -471,11 +471,6 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('-close')
     )
-  }
-
-  #captureRelatedActiveElement = (e: FocusEvent) => {
-    e.stopPropagation()
-    this.#targetActiveElement = e.relatedTarget as HTMLElement
   }
 
   #captureActiveElement = (e: FocusEvent) => {

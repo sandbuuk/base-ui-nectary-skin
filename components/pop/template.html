@@ -50,12 +50,12 @@ dialog::backdrop {
 </style>
 
 <slot id="target" name="target" aria-haspopup="dialog" aria-expanded="false"></slot>
-<div id="focus" tabindex="-1"></div>
+<div id="focus"></div>
 <dialog id="dialog">
-  <div id="content">
-    <slot name="content"></slot>
-  </div>
   <div id="target-open">
     <slot name="target-open"></slot>
+  </div>
+  <div id="content">
+    <slot name="content"></slot>
   </div>
 </dialog>
