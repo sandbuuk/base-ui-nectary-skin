@@ -6,12 +6,12 @@ import { ComponentsPage } from '../ComponentsPage'
 import { NavigationGroup } from '../NavigationGroup'
 import { NavigationItem } from '../NavigationItem'
 import { NavigationList } from '../NavigationList'
-import { RedirectItem } from '../RedirectItem'
 import { SidebarTitle } from '../SidebarTitle'
 import type { FC } from 'react'
 import { useOnRouteChange } from '~/hooks'
 import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
+import { LandingPage } from '~/pages/Landing'
 import { NotFoundPage } from '~/pages/NotFound'
 import { AppStateProvider } from '~/store'
 import './styles.css'
@@ -42,7 +42,7 @@ const AppImpl: FC = () => {
       <div id="app-content">
         <Suspense fallback={<Loading/>}>
           <Routes>
-            <Route path="/" element={<RedirectItem path={'/intro'}/>}/>
+            <Route path="/" element={<LandingPage/>}/>
             <Route path="/intro" element={<IntroPage/>}/>
             <Route path="/faq" element={<FAQPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>

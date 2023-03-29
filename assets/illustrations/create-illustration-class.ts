@@ -1,7 +1,7 @@
 import { getIntegerAttribute, getLiteralAttribute, NectaryElement, updateAttribute, updateIntegerAttribute, updateLiteralAttribute } from '../utils'
 import illustrationStylesHtml from './illustration-styles.html'
-import { backgroundValues, valignValues } from './utils'
-import type { TSinchIllustrationBackground, TSinchIllustrationVAlign } from './types'
+import { backgroundValues, valignValues, halignValues } from './utils'
+import type { TSinchIllustrationBackground, TSinchIllustrationVAlign, TSinchIllustrationHAlign } from './types'
 
 const DEFAULT_SIZE = 256
 const MIN_SIZE = 16
@@ -52,6 +52,14 @@ export const createIllustrationClass = (templateHTML: string): CustomElementCons
 
     set valign(value: TSinchIllustrationVAlign | null) {
       updateLiteralAttribute(this, valignValues, 'valign', value)
+    }
+
+    get halign(): TSinchIllustrationHAlign | null {
+      return getLiteralAttribute(this, halignValues, 'halign', null)
+    }
+
+    set halign(value: TSinchIllustrationHAlign | null) {
+      updateLiteralAttribute(this, halignValues, 'halign', value)
     }
 
     connectedCallback() {

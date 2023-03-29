@@ -29,6 +29,14 @@ svg {
   align-items: flex-end;
 }
 
+:host([halign="left"]) #wrapper {
+  justify-content: left;
+}
+
+:host([halign="right"]) #wrapper {
+  justify-content: right;
+}
+
 :host([background="yellow"]) #wrapper {
   background-color: var(--sinch-color-bg-secondary-yellow);
 }
