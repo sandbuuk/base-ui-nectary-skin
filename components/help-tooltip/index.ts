@@ -50,7 +50,7 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'width', 'orientation', 'inverted']
+    return ['text', 'width', 'orientation']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -71,14 +71,6 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
 
   set width(value: number | undefined) {
     updateIntegerAttribute(this, 'width', value)
-  }
-
-  get inverted() {
-    return getBooleanAttribute(this, 'inverted')
-  }
-
-  set inverted(isInverted: boolean | undefined) {
-    updateBooleanAttribute(this, 'inverted', isInverted)
   }
 
   get orientation() {

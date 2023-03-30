@@ -102,7 +102,7 @@ export const DialogExample: FC<TDialog> = () => {
           </sinch-action-menu>
         </sinch-popover>
         <sinch-button text="Cancel" aria-label="Cancel" type="secondary" slot="buttons" onClick={onActionClick}/>
-        <sinch-tooltip slot="buttons" inverted text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.">
+        <sinch-tooltip slot="buttons" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.">
           <sinch-button text="Ok" aria-label="Ok" type="primary" onClick={onActionClick}/>
         </sinch-tooltip>
       </sinch-dialog>

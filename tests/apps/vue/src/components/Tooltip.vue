@@ -2,7 +2,6 @@
   <sinch-tooltip
     :orientation="orientation"
     :text="text"
-    :inverted="isInverted"
     @--show="onTooltipShow"
     @--hide="onTooltipHide"
   >
@@ -32,9 +31,6 @@ export default {
     },
     orientation() {
       return this.search.get('orientation')
-    },
-    isInverted() {
-      return this.search.get('disabled') !== null
     },
   }
 }

@@ -7,8 +7,6 @@ export type TSinchTooltipElement = HTMLElement & {
   text: string,
   /** @deprecated */
   width: number | null,
-  /** Inverted */
-  inverted: boolean,
   /** Orientation, where it *points to* from origin */
   orientation: TSinchTooltipOrientation,
   readonly footprintRect: TRect,
@@ -21,8 +19,6 @@ export type TSinchTooltipElement = HTMLElement & {
   setAttribute(name: 'text', value: string): void,
   /** @deprecated */
   setAttribute(name: 'width', value: string): void,
-  /** Inverted */
-  setAttribute(name: 'inverted', value: ''): void,
   /** Orientation, where it *points to* from origin */
   setAttribute(name: 'orientation', value: TSinchTooltipOrientation): void,
 }
@@ -32,8 +28,6 @@ export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
   text: string,
   /** @deprecated */
   width?: number,
-  /** Inverted */
-  inverted?: boolean,
   /** Orientation, where it *points to* from origin */
   orientation?: TSinchTooltipOrientation,
   /** Show event handler */
