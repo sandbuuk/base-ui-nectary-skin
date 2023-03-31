@@ -1,3 +1,7 @@
+## v1.3.2 (2023-03-31)
+
+* 🐞 remove console logs
+
 ## v1.3.1 (2023-03-27)
 
 * 🐞 fix `sinch-popover` freeze in Safari
