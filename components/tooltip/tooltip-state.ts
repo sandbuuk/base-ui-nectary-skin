@@ -20,8 +20,6 @@ export class TooltipState {
   }
 
   show() {
-    console.log('-> show')
-
     switch (this.#state) {
       case 'hide': {
         this.#switchToHideToShow()
@@ -37,8 +35,6 @@ export class TooltipState {
   }
 
   hide() {
-    console.log('-> hide')
-
     switch (this.#state) {
       case 'hide-to-show': {
         this.#onHideAnimationEnd()
@@ -54,8 +50,6 @@ export class TooltipState {
   }
 
   interrupt() {
-    console.log('-> interrupt')
-
     switch (this.#state) {
       case 'hide-to-show': {
         this.#onHideAnimationEnd()
@@ -76,8 +70,6 @@ export class TooltipState {
   }
 
   destroy() {
-    console.log('-> destroy')
-
     switch (this.#state) {
       case 'hide-to-show': {
         this.#onHideAnimationEnd()
