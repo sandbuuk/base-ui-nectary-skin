@@ -1,3 +1,7 @@
+## v1.3.3 (2023-04-04)
+
+* 🐞 fix cancelling animation in `sinch-skeleton`
+
 ## v1.3.2 (2023-03-31)
 
 * 🐞 remove console logs
