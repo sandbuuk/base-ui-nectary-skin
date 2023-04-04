@@ -42,7 +42,7 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
   }
 
   disconnectedCallback(): void {
-    this.#animation!.cancel()
+    this.#animation?.cancel()
     this.#animation = null
     this.#controller!.abort()
     this.#controller = null
