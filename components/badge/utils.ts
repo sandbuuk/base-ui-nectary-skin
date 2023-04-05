@@ -9,17 +9,3 @@ export const assertMode: TAssertMode = (value) => {
     throw new Error(`sinch-badge: invalid mode attribute: ${value}`)
   }
 }
-
-export const getBadgeColorBg = (id: string): string => {
-  return `var(--sinch-badge-color-${id}-bg)`
-}
-
-export const getBadgeColorFg = (id: string): string => {
-  return `var(--sinch-badge-color-${id}-fg)`
-}
-
-export const assertBadgeColor = (root: Element, id: string | null): void => {
-  if (id === null || window.getComputedStyle(root).getPropertyValue(`--sinch-badge-color-${id}-bg`).length === 0) {
-    throw new Error(`Invalid sinch-badge color name: ${id}`)
-  }
-}

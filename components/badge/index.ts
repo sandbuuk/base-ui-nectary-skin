@@ -4,6 +4,7 @@ import {
   getBooleanAttribute,
   getLiteralAttribute,
   getRect,
+  isAttrTrue,
   NectaryElement,
   setClass,
   updateAttribute,
@@ -12,7 +13,7 @@ import {
 } from '../utils'
 import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertBadgeColor, assertMode, getBadgeColorBg, getBadgeColorFg, modeValues } from './utils'
+import { assertMode, modeValues } from './utils'
 import type { TSinchBadgeElement, TSinchBadgeMode, TSinchBadgeReact } from './types'
 import type { TRect } from '../types'
 import type { TSinchSize } from '../utils/size'
@@ -44,7 +45,6 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
 
   connectedCallback() {
     super.connectedCallback()
-    this.#updateColor()
     this.#observer.observe(this)
   }
 
@@ -53,61 +53,20 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
     this.#observer.unobserve(this)
   }
 
-  get text() {
-    return getAttribute(this, 'text', '')
+  static get observedAttributes() {
+    return [
+      'text',
+      'size',
+      'mode',
+      'hidden',
+    ]
   }
 
-  set text(value: string) {
-    updateAttribute(this, 'text', value)
-  }
-
-  get size() {
-    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
-  }
-
-  set size(value: TSinchSize) {
-    updateLiteralAttribute(this, sizeValues, 'size', value)
-  }
-
-  get mode() {
-    return getLiteralAttribute(this, modeValues, 'mode', 'square')
-  }
-
-  set mode(value: TSinchBadgeMode) {
-    updateLiteralAttribute(this, modeValues, 'mode', value)
-  }
-
-  get color() {
-    return getAttribute(this, 'color')
-  }
-
-  set color(value: string | null) {
-    updateAttribute(this, 'color', value)
-  }
-
-  get hidden() {
-    return getBooleanAttribute(this, 'hidden')
-  }
-
-  set hidden(isHidden: boolean) {
-    updateBooleanAttribute(this, 'hidden', isHidden)
-  }
-
-  get badgeRect(): TRect {
-    if (this.hidden) {
-      const selfRect = getRect(this)
-
-      return { x: selfRect.x + selfRect.width, y: selfRect.y, width: 0, height: 0 }
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
     }
 
-    return getRect(this.#$badgeWrapper)
-  }
-
-  static get observedAttributes() {
-    return ['text', 'size', 'mode', 'color', 'hidden']
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
@@ -136,41 +95,55 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
         break
       }
 
-      case 'color': {
-        this.#updateColor()
-
-        break
-      }
-
       case 'hidden': {
         this.#updatePosition()
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break
       }
     }
   }
 
-  #updateColor() {
-    if (!this.isConnected) {
-      return
+  get text() {
+    return getAttribute(this, 'text', '')
+  }
+
+  set text(value: string) {
+    updateAttribute(this, 'text', value)
+  }
+
+  get size() {
+    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
+  }
+
+  set size(value: TSinchSize) {
+    updateLiteralAttribute(this, sizeValues, 'size', value)
+  }
+
+  get mode() {
+    return getLiteralAttribute(this, modeValues, 'mode', 'square')
+  }
+
+  set mode(value: TSinchBadgeMode) {
+    updateLiteralAttribute(this, modeValues, 'mode', value)
+  }
+
+  get hidden() {
+    return getBooleanAttribute(this, 'hidden')
+  }
+
+  set hidden(isHidden: boolean) {
+    updateBooleanAttribute(this, 'hidden', isHidden)
+  }
+
+  get badgeRect(): TRect {
+    if (this.hidden) {
+      const selfRect = getRect(this)
+
+      return { x: selfRect.x + selfRect.width, y: selfRect.y, width: 0, height: 0 }
     }
 
-    const colorName = this.color
-
-    if (colorName !== null && colorName.length > 0) {
-      if (process.env.NODE_ENV !== 'production') {
-        assertBadgeColor(this, colorName)
-      }
-
-      const bg = getBadgeColorBg(colorName)
-      const fg = getBadgeColorFg(colorName)
-
-      this.#$badge.style.setProperty('background-color', bg)
-      this.#$badge.style.setProperty('color', fg)
-    } else {
-      this.#$badge.style.removeProperty('background-color')
-      this.#$badge.style.removeProperty('color')
-    }
+    return getRect(this.#$badgeWrapper)
   }
 
   #updatePosition() {

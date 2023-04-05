@@ -36,6 +36,7 @@
   height: 100%;
   text-align: center;
   font: var(--sinch-comp-badge-font-size-l);
+  line-height: 20px;
   text-rendering: optimizelegibility;
 }
 
@@ -56,6 +57,7 @@
 
 :host([size="m"]) #text {
   font: var(--sinch-comp-badge-font-size-m);
+  line-height: 14px;
 }
 
 :host([size="s"]) #badge {
@@ -68,7 +70,7 @@
   display: none;
 }
 
-:host([hidden]:not([hidden="false"])) #badge-wrapper {
+:host([hidden]) #badge-wrapper {
   display: none;
 }
 </style>
