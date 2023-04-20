@@ -9,6 +9,7 @@
   "dependencies": {
     "@sinch-engage/nectary": "workspace:*",
     "@sinch-engage/nectary-assets": "workspace:*",
+    "@sinch-engage/nectary-theme-base": "workspace:*",
     "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "core-js": "^3.30.0",
     "docs-common": "workspace:*",

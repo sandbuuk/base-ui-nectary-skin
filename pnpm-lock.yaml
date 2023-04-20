@@ -202,6 +202,9 @@ importers:
       '@sinch-engage/nectary-assets':
         specifier: workspace:*
         version: link:../../assets
+      '@sinch-engage/nectary-theme-base':
+        specifier: workspace:*
+        version: link:../../themes/base
       core-js:
         specifier: ^3.30.0
         version: 3.30.0
@@ -338,6 +341,9 @@ importers:
       '@sinch-engage/nectary-assets':
         specifier: workspace:*
         version: link:../../assets
+      '@sinch-engage/nectary-theme-base':
+        specifier: workspace:*
+        version: link:../../themes/base
       '@webcomponents/scoped-custom-element-registry':
         specifier: ^0.0.9
         version: 0.0.9
@@ -825,6 +831,8 @@ importers:
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
+
+  tokens: {}
 
 packages:
 

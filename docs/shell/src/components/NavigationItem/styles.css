@@ -7,22 +7,23 @@
   align-items: center;
   padding-left: 40px;
   text-decoration: none;
-  color: var(--sinch-color-stormy-500);
-  border-radius: var(--sinch-shape-radius-m);
+  color: var(--sinch-sys-color-text-default);
+  border-radius: var(--sinch-sys-shape-radius-m);
+  background-color: var(--sinch-sys-color-container-main-default);
 }
 
 .navigation-link:hover {
-  background-color: var(--sinch-color-bg-hover);
+  background-color: var(--sinch-sys-color-container-main-hover);
 }
 
 .navigation-link:active {
-  background-color: var(--sinch-color-bg-active);
+  background-color: var(--sinch-sys-color-container-main-active);
 }
 
 .navigation-link.selected {
-  background-color: var(--sinch-color-honey-200);
+  background-color: var(--sinch-ref-color-main-honey-200);
 }
 
 .navigation-link.selected:hover {
-  background-color: var(--sinch-color-honey-300);
+  background-color: var(--sinch-ref-color-main-honey-300);
 }

@@ -9,6 +9,7 @@
   "dependencies": {
     "@sinch-engage/nectary": "workspace:*",
     "@sinch-engage/nectary-assets": "workspace:*",
+    "@sinch-engage/nectary-theme-base": "workspace:*",
     "core-js": "^3.30.0",
     "docs-common": "workspace:*",
     "history": "^5.3.0",

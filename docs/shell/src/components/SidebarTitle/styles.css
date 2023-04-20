@@ -14,12 +14,11 @@
   align-self: stretch;
   align-items: center;
   padding: 0 8px 0 16px;
-  color: var(--sinch-color-stormy-500);
-  border-radius: var(--sinch-shape-radius-m);
+  color: var(--sinch-sys-color-text-default);
 }
 
 .sidebar-title-version-text {
   flex: 1;
   min-width: 0;
-  color: var(--sinch-color-stormy-500);
+  color: var(--sinch-sys-color-text-default);
 }
