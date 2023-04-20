@@ -12,9 +12,9 @@ const tableStyles: CSSProperties = {
   width: 300,
 }
 
-const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-pink', 'light-brown', 'light-gray']
-const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-pink', 'dark-brown', 'dark-gray']
-const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'pink', 'brown', 'gray']
+const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
+const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
+const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
 const skinToneColors = ['skin-tone-default', 'skin-tone-light', 'skin-tone-light-medium', 'skin-tone-medium', 'skin-tone-medium-dark', 'skin-tone-dark']
 const allColors = [
   ...lightColors,

@@ -7,8 +7,6 @@ export type TSinchColorMenuElement = HTMLElement & {
   rows: number | null,
   /** How many cols to show and scroll the rest */
   cols: number | null,
-  /** Comma-separated color names, all colors by default */
-  colors: string | null,
   nthItemRect(index: number): TRect | null,
   /** Change event */
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
@@ -29,8 +27,6 @@ export type TSinchColorMenuReact = TSinchElementReact<TSinchColorMenuElement> & 
   rows?: number,
   /** How many cols to show and scroll the rest */
   cols?: number,
-  /** Comma-separated color names, all colors by default */
-  colors?: string,
   /** Label that is used for a11y */
   'aria-label': string,
   /** Change event handler */

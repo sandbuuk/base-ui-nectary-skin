@@ -3,11 +3,11 @@ import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, centerRect, getAllEvents, getBB, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
-const shot = '/color-select?width=200'
-const withPlaceholder = '/color-select?width=200&placeholder=Select%20color'
-const withDisabled = '/color-select?width=200&value=light-blue&placeholder=Placeholder&disabled=true'
-const withMaxItems = '/color-select?width=200&value=dark-blue&rows=2'
-const checkSelectWithEverything = makeAccessibilityTests('/color-select', 'sinch-popover')
+const shot = `/color-select?width=200`
+const withPlaceholder = `/color-select?width=200&placeholder=Select%20color`
+const withDisabled = `/color-select?width=200&value=light-blue&placeholder=Placeholder&disabled=true`
+const withMaxItems = `/color-select?width=200&value=dark-blue&rows=2`
+const checkSelectWithEverything = makeAccessibilityTests(`/color-select`, 'sinch-popover')
 
 const menuRect = (page: Page) => getBB(page.locator('sinch-color-menu'))
 

@@ -1,7 +1,9 @@
-import { lightColorNames } from '@sinch-engage/nectary/theme/colors'
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
+import '@sinch-engage/nectary/color-menu-option'
+
+const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
 
 export const LightColorSetExample: FC = () => {
   const [value, setValue] = useState<string>('')
@@ -11,9 +13,10 @@ export const LightColorSetExample: FC = () => {
     <sinch-color-menu
       value={value}
       cols={4}
-      colors={lightColorNames}
       aria-label="Color menu"
       on-change={onChange}
-    />
+    >
+      {lightColors.map((c) => <sinch-color-menu-option key={c} value={c}/>)}
+    </sinch-color-menu>
   )
 }

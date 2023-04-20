@@ -1,14 +1,8 @@
-import '../color-swatch'
-import '../tooltip'
-import '../icon'
-import { getSwatchColorFg } from '../color-swatch/utils'
-import { lightColorNames, darkColorNames, vibrantColorNames } from '../theme/colors'
 import {
   attrValueToPixels,
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  unpackCsv,
   getIntegerAttribute,
   getReactEventHandler,
   getRect,
@@ -19,9 +13,7 @@ import {
   updateIntegerAttribute,
   subscribeContext,
 } from '../utils'
-import optionTemplateHTML from './option-template.html'
 import templateHTML from './template.html'
-import { getParentOption } from './utils'
 import type { TSinchColorMenuElement, TSinchColorMenuReact } from './types'
 import type { TRect } from '../types'
 import type { TContextVisibility, TContextKeydown } from '../utils'
@@ -30,15 +22,13 @@ const NUM_COLS_DEFAULT = 5
 const ITEM_WIDTH = 44
 const ITEM_HEIGHT = 56
 const template = document.createElement('template')
-const optionTemplate = document.createElement('template')
 
 template.innerHTML = templateHTML
-optionTemplate.innerHTML = optionTemplateHTML
 
 defineCustomElement('sinch-color-menu', class extends NectaryElement {
   #$listbox: HTMLElement
+  #$optionsSlot: HTMLSlotElement
   #controller: AbortController | null = null
-  #prevColorsValue: string | null = ''
 
   constructor() {
     super()
@@ -48,6 +38,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$listbox = shadowRoot.querySelector('#listbox')!
+    this.#$optionsSlot = shadowRoot.querySelector('#options')!
   }
 
   connectedCallback() {
@@ -56,28 +47,57 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     this.#controller = new AbortController()
 
     const { signal } = this.#controller
+    const options: AddEventListenerOptions = { signal }
 
     this.setAttribute('role', 'listbox')
     this.setAttribute('tabindex', '0')
-    this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
-    this.addEventListener('blur', this.#onListboxBlur, { signal })
-    this.#$listbox.addEventListener('click', this.#onListboxClick, { signal })
-    this.addEventListener('-change', this.#onChangeReactHandler, { signal })
+    this.addEventListener('keydown', this.#onListboxKeyDown, options)
+    this.addEventListener('blur', this.#onListboxBlur, options)
+    this.#$listbox.addEventListener('click', this.#onListboxClick, options)
+    this.#$optionsSlot.addEventListener('slotchange', this.#onSlotChange, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
     subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
     subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
-
-    requestAnimationFrame(this.#onMount)
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
-
-    this.#prevColorsValue = null
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
-    return ['value', 'rows', 'cols', 'colors']
+    return ['value', 'rows', 'cols']
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'value': {
+        if (this.isConnected) {
+          this.#onValueChange()
+        }
+
+        break
+      }
+
+      case 'rows': {
+        this.#updateRows()
+
+        break
+      }
+
+      case 'cols': {
+        if (this.isConnected) {
+          this.#updateColumns()
+        }
+
+        break
+      }
+    }
   }
 
   set value(value: string) {
@@ -117,7 +137,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   }
 
   nthItemRect(index: number): TRect | null {
-    const $item = this.#$listbox.children[index]
+    const $item = this.#getOptionElements()[index]
 
     if ($item != null) {
       return getRect($item)
@@ -126,78 +146,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     return null
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
-    switch (name) {
-      case 'value': {
-        if (this.isConnected) {
-          this.#onValueChange()
-        }
-
-        break
-      }
-
-      case 'colors': {
-        if (this.isConnected) {
-          this.#updateColors()
-        }
-
-        break
-      }
-
-      case 'rows': {
-        this.#updateRows()
-
-        break
-      }
-
-      case 'cols': {
-        if (this.isConnected) {
-          this.#updateColumns()
-        }
-
-        break
-      }
-    }
-  }
-
-  #updateColors() {
-    const colorsValue = this.colors
-
-    if (colorsValue === this.#prevColorsValue) {
-      return
-    }
-
-    this.#prevColorsValue = colorsValue
-
-    const colorNames = unpackCsv(colorsValue ?? `${lightColorNames},${vibrantColorNames},${darkColorNames}`)
-    const fragment = document.createDocumentFragment()
-
-    for (const color of colorNames) {
-      // Empty color name
-      if (color.length === 0) {
-        continue
-      }
-
-      const optFrag = optionTemplate.content.cloneNode(true) as Element
-      const $option = optFrag.querySelector('.option') as HTMLElement
-      const $swatch = optFrag.querySelector('.swatch')!
-      const $tooltip = optFrag.querySelector('.tooltip')!
-
-      updateAttribute($option, 'data-value', color)
-      updateAttribute($tooltip, 'text', color)
-      updateAttribute($swatch, 'name', color)
-
-      $option.style.setProperty('--sinch-global-color-icon', getSwatchColorFg(color))
-
-      fragment.appendChild(optFrag)
-    }
-
-    this.#$listbox.replaceChildren(fragment)
-
+  #onSlotChange = () => {
     // Update width of the menu
     this.#updateColumns()
 
@@ -219,7 +168,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
 
   #updateColumns() {
     const colsValue = getAttribute(this, 'cols')
-    const numItems = this.#$listbox.children.length
+    const numItems = this.#getOptionElements().length
 
     this.#$listbox.style.width = attrValueToPixels(
       colsValue,
@@ -230,10 +179,6 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
         itemSizeMultiplier: ITEM_WIDTH,
       }
     )
-  }
-
-  #onMount = () => {
-    this.#updateColors()
   }
 
   #onListboxBlur = () => {
@@ -247,9 +192,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
       return
     }
 
-    const $option = getParentOption($elem)
-
-    this.#dispatchChangeEvent($option)
+    this.#dispatchChangeEvent($elem)
   }
 
   #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
@@ -314,7 +257,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     const value = this.value
 
     for (const $option of this.#getOptionElements()) {
-      const isChecked = value === getAttribute($option, 'data-value', '')
+      const isChecked = value === getAttribute($option, 'value', '')
 
       updateBooleanAttribute($option, 'data-checked', isChecked)
       updateBooleanAttribute($option, 'data-selected', isChecked)
@@ -422,7 +365,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   }
 
   #getOptionElements(): Element[] {
-    return Array.from(this.#$listbox.children)
+    return this.#$optionsSlot.assignedElements()
   }
 
   #getSelectedOptionIndex(): number | null {
@@ -456,7 +399,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     const value = this.value
 
     for (const $el of elements) {
-      if (getAttribute($el, 'data-value') === value) {
+      if (getAttribute($el, 'value') === value) {
         return $el
       }
     }
@@ -471,7 +414,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
 
     if ($opt !== null) {
       this.dispatchEvent(
-        new CustomEvent('-change', { detail: getAttribute($opt, 'data-value') })
+        new CustomEvent('-change', { detail: getAttribute($opt, 'value') })
       )
     }
   }

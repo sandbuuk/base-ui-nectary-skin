@@ -12,51 +12,11 @@
   overflow-y: auto;
 }
 
-#listbox:empty {
+#listbox.empty {
   display: none;
-}
-
-.option {
-  padding: 12px 6px;
-
-  --sinch-global-color-icon: var(--sinch-color-menu-color-icon);
-}
-
-.swatch-wrapper {
-  position: relative;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-}
-
-.swatch-wrapper::after {
-  content: "";
-  position: absolute;
-  width: 34px;
-  height: 34px;
-  inset: -3px;
-  border: 2px solid transparent;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.option[data-selected]:not([data-checked]) .swatch-wrapper::after {
-  border-color: var(--sinch-comp-color-swatch-color-outline-focus);
-}
-
-.check {
-  display: none;
-  position: absolute;
-  left: 4px;
-  top: 4px;
-  pointer-events: none;
-
-  --sinch-global-size-icon: 24px;
-}
-
-.option[data-checked] .check {
-  display: block;
 }
 </style>
 
-<div id="listbox" role="presentation"></div>
+<div id="listbox" role="presentation">
+  <slot id="options"></slot>
+</div>

@@ -2,8 +2,14 @@ import { Component } from '@angular/core'
 
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/color-menu'
+import '@sinch-engage/nectary/color-menu-option'
 import '@sinch-engage/nectary/color-swatch'
 import '@sinch-engage/nectary/select-button'
+
+const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
+const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
+const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const colors = [...lightColors, ...vibrantColors, ...darkColors]
 
 @Component({
   selector: 'color-select-component',
@@ -15,14 +21,14 @@ export class ColorSelectComponent {
   value: string
   cols: number | null
   rows: number | null
-  colors: string | null
+  colors: string[]
   isOpen = false
   isDisabled: boolean
   isInvalid: boolean
   constructor() {
     const url = new URL(location.href)
     this.value = url.searchParams.get('value') ?? ''
-    this.colors = url.searchParams.get('colors')
+    this.colors = colors
     this.isDisabled = url.searchParams.get('disabled') !== null
     this.isInvalid = url.searchParams.get('invalid') !== null
 

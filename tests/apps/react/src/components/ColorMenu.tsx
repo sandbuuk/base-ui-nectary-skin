@@ -1,6 +1,13 @@
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
+import '@sinch-engage/nectary/color-menu-option'
+
+const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
+const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
+const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const allColors = [...lightColors, ...vibrantColors, ...darkColors]
+const lightVibrantColors = [...lightColors, ...vibrantColors]
 
 type TSelectMenu = {
   search: URLSearchParams,
@@ -14,7 +21,6 @@ export const ColorMenu: FC<TSelectMenu> = ({ search }) => {
     window.dispatchEvent(new CustomEvent('sinch-color-menu-change', { detail: value }))
     setValue(value)
   }
-  const colors = search.get('colors') ?? undefined
   const rows = (() => {
     const val = search.get('rows')
 
@@ -25,15 +31,21 @@ export const ColorMenu: FC<TSelectMenu> = ({ search }) => {
 
     return val !== null ? parseInt(val) : undefined
   })()
+  const colors = search.get('example') === 'light'
+    ? lightVibrantColors
+    : allColors
 
   return (
     <sinch-color-menu
       cols={cols}
       rows={rows}
-      colors={colors}
       value={value}
       on-change={onChange}
       aria-label="Menu"
-    />
+    >
+      {colors.map((color) => (
+        <sinch-color-menu-option key={color} value={color}/>
+      ))}
+    </sinch-color-menu>
   )
 }

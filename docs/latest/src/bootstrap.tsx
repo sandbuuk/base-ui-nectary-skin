@@ -6,7 +6,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from './components/App/App'
 import { createShadowRoot } from './utils'
-import '@sinch-engage/nectary/theme'
+import '@sinch-engage/nectary-theme-base'
 
 export * from './entries'
 
