@@ -83,10 +83,10 @@
   --sinch-ref-color-complementary-pumpkin-400: #F35B1C;
   --sinch-ref-color-complementary-pumpkin-700: #9C2E00;
   --sinch-ref-shadow-level-0: none;
-  --sinch-ref-shadow-level-1: 1px 2px 6px 0 #0A273D1A;
-  --sinch-ref-shadow-level-2: 1px 4px 8px 0 #0A273D1A;
-  --sinch-ref-shadow-level-3: 1px 6px 12px 0 #0A273D26;
-  --sinch-ref-shadow-level-4: 0 8px 16px 0 #0A273D1A;
+  --sinch-ref-shadow-level-1: 1px 2px 6px #0A273D1A;
+  --sinch-ref-shadow-level-2: 1px 4px 8px #0A273D1A;
+  --sinch-ref-shadow-level-3: 1px 6px 12px #0A273D26;
+  --sinch-ref-shadow-level-4: 0 8px 16px #0A273D1A;
   --sinch-ref-typography-font-family-main: "DM Sans", "Arial", sans-serif;
   --sinch-ref-typography-font-family-mono: "DM Mono", monospace;
   --sinch-ref-typography-line-height-14: 14px;

@@ -12,7 +12,6 @@ import {
   setClass,
   rectOverlap,
   subscribeContext,
-  getDropShadowCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertOrientation, getPopOrientation, orientationValues } from './utils'
@@ -28,7 +27,6 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-popover', class extends NectaryElement {
   #$pop: TSinchPopElement
   #$content: HTMLElement
-  #$contentWrapper: HTMLElement
   #$tip: HTMLElement
   #controller: AbortController | null = null
   constructor() {
@@ -40,7 +38,6 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     this.#$pop = shadowRoot.querySelector('#pop')!
     this.#$content = shadowRoot.querySelector('#content')!
-    this.#$contentWrapper = shadowRoot.querySelector('#content-wrapper')!
     this.#$tip = shadowRoot.querySelector('#tip')!
   }
 
@@ -54,7 +51,6 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     subscribeContext(this.#$content, 'visibility', this.#onContextVisibility, signal)
     updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
-    this.#updateShadow(this.tip)
   }
 
   disconnectedCallback() {
@@ -97,7 +93,6 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
           this.#updateTipOrientation()
         }
 
-        this.#updateShadow(hasTip)
         updateBooleanAttribute(this, name, hasTip)
 
         break
@@ -151,15 +146,6 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
   get popoverRect() {
     return this.#$pop.popoverRect
-  }
-
-  #updateShadow(hasTip: boolean) {
-    this.#$contentWrapper.style.setProperty(
-      'filter',
-      hasTip
-        ? getDropShadowCssVar(this, '--sinch-comp-popover-shadow')
-        : null
-    )
   }
 
   #onPopClose = () => {

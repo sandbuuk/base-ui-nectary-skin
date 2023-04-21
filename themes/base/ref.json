@@ -126,10 +126,10 @@
   "shadow": {
     "level": {
       "0": "none",
-      "1": "1px 2px 6px 0 #0A273D1A",
-      "2": "1px 4px 8px 0 #0A273D1A",
-      "3": "1px 6px 12px 0 #0A273D26",
-      "4": "0 8px 16px 0 #0A273D1A"
+      "1": "1px 2px 6px #0A273D1A",
+      "2": "1px 4px 8px #0A273D1A",
+      "3": "1px 6px 12px #0A273D26",
+      "4": "0 8px 16px #0A273D1A"
     }
   },
   "typography": {

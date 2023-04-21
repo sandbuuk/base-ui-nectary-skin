@@ -249,15 +249,15 @@ const jsonValueToCssValue = (themeJson: TJson, jsonObj: TValue, forceDereference
         throw new Error(`Incorrect "${type}" value "${value}"`)
       }
 
-      const { x, y, blur, spread, color } = value
+      const { x, y, blur, color } = value
 
-      if (x === ZERO && y === ZERO && blur === ZERO && spread === ZERO) {
+      if (x === ZERO && y === ZERO && blur === ZERO) {
         return 'none'
       }
 
       const colorValue = jsonValueToCssValue(themeJson, { type: 'color', value: color }, forceDereferenceValue)
 
-      return `${px(x)} ${px(y)} ${px(blur)} ${px(spread)} ${colorValue}`
+      return `${px(x)} ${px(y)} ${px(blur)} ${colorValue}`
     }
 
     case 'typography': {
