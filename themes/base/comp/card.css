@@ -8,7 +8,8 @@
   --sinch-comp-card-color-yellow-default-background-initial: var(--sinch-sys-color-container-complement-1-default);
   --sinch-comp-card-color-green-default-background-initial: var(--sinch-sys-color-container-complement-2-default);
   --sinch-comp-card-color-blue-default-background-initial: var(--sinch-sys-color-container-complement-3-default);
-  --sinch-comp-card-color-red-default-background-initial: var(--sinch-sys-color-container-complement-4-default);
+  --sinch-comp-card-color-white-default-background-initial: var(--sinch-sys-color-container-main-default);
+  --sinch-comp-card-color-gray-default-background-initial: var(--sinch-sys-color-container-contrast-default);
   --sinch-comp-card-shape-radius: var(--sinch-sys-shape-radius-l);
   --sinch-comp-card-shadow-initial: var(--sinch-ref-shadow-level-0);
   --sinch-comp-card-shadow-hover: var(--sinch-ref-shadow-level-1);

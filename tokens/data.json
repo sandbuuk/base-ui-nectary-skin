@@ -2434,11 +2434,21 @@
               }
             }
           },
-          "red": {
+          "white": {
             "default": {
               "background": {
                 "initial": {
-                  "value": "{sys.color.container.complement.4.default}",
+                  "value": "{sys.color.container.main.default}",
+                  "type": "color"
+                }
+              }
+            }
+          },
+          "gray": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "{sys.color.container.contrast.default}",
                   "type": "color"
                 }
               }
@@ -7060,100 +7070,6 @@
       }
     }
   },
-  "Nectary / Test theme": {
-    "sys": {
-      "color": {
-        "primary": {
-          "hover": {
-            "value": "{ref.color.main.ocean.400}",
-            "type": "color"
-          },
-          "active": {
-            "value": "{ref.color.main.ocean.600}",
-            "type": "color"
-          },
-          "disabled": {
-            "value": "{ref.color.main.ocean.200}",
-            "type": "color"
-          },
-          "foreground": {
-            "value": "{ref.color.main.snow.100}",
-            "type": "color"
-          },
-          "default": {
-            "value": "{ref.color.main.ocean.500}",
-            "type": "color"
-          },
-          "test": {
-            "value": "#e0e0e0",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "lighten",
-                  "value": "0.5",
-                  "space": "lch"
-                }
-              }
-            }
-          }
-        },
-        "cta": {
-          "hover": {
-            "value": "{ref.color.main.raspberry.400}",
-            "type": "color"
-          },
-          "active": {
-            "value": "{ref.color.main.raspberry.600}",
-            "type": "color"
-          },
-          "disabled": {
-            "value": "{ref.color.main.raspberry.200}",
-            "type": "color"
-          },
-          "foreground": {
-            "value": "{ref.color.main.snow.100}",
-            "type": "color"
-          },
-          "default": {
-            "value": "{ref.color.main.raspberry.500}",
-            "type": "color"
-          }
-        }
-      },
-      "shape-radius": {
-        "l": {
-          "value": "{ref.shape-radius.4}",
-          "type": "borderRadius"
-        },
-        "m": {
-          "value": "{ref.shape-radius.4}",
-          "type": "borderRadius"
-        },
-        "s": {
-          "value": "{ref.shape-radius.4}",
-          "type": "borderRadius"
-        }
-      }
-    },
-    "comp": {
-      "toast": {
-        "shape-radius": {
-          "value": "0",
-          "type": "borderRadius"
-        }
-      }
-    },
-    "test": {
-      "token": {
-        "value": {
-          "fill": "#e0e0e0",
-          "opacity": "lighten"
-        },
-        "type": "composition"
-      }
-    }
-  },
   "$themes": [
     {
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
@@ -10231,8 +10147,7 @@
   "$metadata": {
     "tokenSetOrder": [
       "Nectary / Base theme",
-      "Nectary / Dark theme",
-      "Nectary / Test theme"
+      "Nectary / Dark theme"
     ]
   }
 }
