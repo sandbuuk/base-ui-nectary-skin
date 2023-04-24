@@ -29,8 +29,8 @@
   --sinch-comp-chip-color-dark-green-default-foreground-initial: var(--sinch-ref-color-complementary-grass-200);
   --sinch-comp-chip-color-dark-pink-default-background-initial: var(--sinch-ref-color-complementary-candy-700);
   --sinch-comp-chip-color-dark-pink-default-foreground-initial: var(--sinch-ref-color-complementary-candy-200);
-  --sinch-comp-chip-color-dark-violet-background-initial: var(--sinch-ref-color-complementary-violet-700);
-  --sinch-comp-chip-color-dark-violet-foreground-initial: var(--sinch-ref-color-complementary-violet-200);
+  --sinch-comp-chip-color-dark-violet-default-background-initial: var(--sinch-ref-color-complementary-violet-700);
+  --sinch-comp-chip-color-dark-violet-default-foreground-initial: var(--sinch-ref-color-complementary-violet-200);
   --sinch-comp-chip-color-dark-yellow-default-background-initial: var(--sinch-ref-color-complementary-bolt-700);
   --sinch-comp-chip-color-dark-yellow-default-foreground-initial: var(--sinch-ref-color-complementary-bolt-200);
   --sinch-comp-chip-color-blue-default-background-initial: var(--sinch-ref-color-complementary-night-400);

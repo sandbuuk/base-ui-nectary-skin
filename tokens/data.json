@@ -3257,16 +3257,18 @@
             }
           },
           "dark-violet": {
-            "background": {
-              "initial": {
-                "value": "{ref.color.complementary.violet.700}",
-                "type": "color"
-              }
-            },
-            "foreground": {
-              "initial": {
-                "value": "{ref.color.complementary.violet.200}",
-                "type": "color"
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "{ref.color.complementary.violet.700}",
+                  "type": "color"
+                }
+              },
+              "foreground": {
+                "initial": {
+                  "value": "{ref.color.complementary.violet.200}",
+                  "type": "color"
+                }
               }
             }
           },
