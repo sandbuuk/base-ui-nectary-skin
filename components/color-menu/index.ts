@@ -58,6 +58,8 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     this.addEventListener('-change', this.#onChangeReactHandler, options)
     subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
     subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
+
+    this.#updateColumns()
   }
 
   disconnectedCallback() {
@@ -147,10 +149,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   }
 
   #onSlotChange = () => {
-    // Update width of the menu
     this.#updateColumns()
-
-    // Refresh checkmark
     this.#onValueChange()
   }
 
