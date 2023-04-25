@@ -1,5 +1,4 @@
 import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
 
 export type TSinchTileControlElement = HTMLElement & {
   /** Value */
@@ -33,8 +32,6 @@ export type TSinchTileControlReact = TSinchElementReact<TSinchTileControlElement
   cols: number,
   /** Label that is used for a11y */
   'aria-label': string,
-  /** @deprecated Change value handler */
-  onChange?: (event: SyntheticEvent<TSinchTileControlElement, CustomEvent<string>>) => void,
   /** Change value handler */
   'on-change'?: (e: CustomEvent<string>) => void,
 }

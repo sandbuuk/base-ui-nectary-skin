@@ -1,5 +1,4 @@
 import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
 
 export type TSinchTextareaElement = HTMLElement & {
   /** Value */
@@ -51,8 +50,6 @@ export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   rows?: number,
   /** Whether the text field is resizable */
   resizable?: boolean,
-  /** @deprecated Change value handler */
-  onChange?: (e: SyntheticEvent<TSinchTextareaElement, CustomEvent<string>>) => void,
   /** Change value handler */
   'on-change'?: (e: CustomEvent<string>) => void,
   /** Focus handler */

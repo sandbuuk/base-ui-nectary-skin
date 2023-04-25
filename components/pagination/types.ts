@@ -1,5 +1,4 @@
 import type { TRect, TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
 
 export type TSinchPaginationElement = HTMLElement & {
   value: number,
@@ -16,7 +15,5 @@ export type TSinchPaginationElement = HTMLElement & {
 export type TSinchPaginationReact = TSinchElementReact<TSinchPaginationElement> & {
   value: number,
   max: number,
-  /** @deprecated */
-  onChange?: (event: SyntheticEvent<TSinchPaginationElement, CustomEvent<number>>) => void,
   'on-change': (e: CustomEvent<number>) => void,
 }

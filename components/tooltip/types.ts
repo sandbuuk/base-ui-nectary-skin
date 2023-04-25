@@ -5,8 +5,6 @@ export type TSinchTooltipOrientation = 'top' | 'bottom' | 'left' | 'right' | 'to
 export type TSinchTooltipElement = HTMLElement & {
   /** Text */
   text: string,
-  /** @deprecated */
-  width: number | null,
   /** Orientation, where it *points to* from origin */
   orientation: TSinchTooltipOrientation,
   readonly footprintRect: TRect,
@@ -17,8 +15,6 @@ export type TSinchTooltipElement = HTMLElement & {
   addEventListener(type: '-hide', listener: (e: CustomEvent<void>) => void): void,
   /** Text */
   setAttribute(name: 'text', value: string): void,
-  /** @deprecated */
-  setAttribute(name: 'width', value: string): void,
   /** Orientation, where it *points to* from origin */
   setAttribute(name: 'orientation', value: TSinchTooltipOrientation): void,
 }
@@ -26,8 +22,6 @@ export type TSinchTooltipElement = HTMLElement & {
 export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
   /** Text */
   text: string,
-  /** @deprecated */
-  width?: number,
   /** Orientation, where it *points to* from origin */
   orientation?: TSinchTooltipOrientation,
   /** Show event handler */

@@ -1,5 +1,4 @@
 import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
 
 export type TSinchToggleElement = HTMLElement & {
   checked: boolean,
@@ -23,7 +22,5 @@ export type TSinchToggleReact = TSinchElementReact<TSinchToggleElement> & {
   disabled?: boolean,
   text?: string,
   'aria-label': string,
-  /** @deprecated */
-  onChange?: (e: SyntheticEvent<TSinchToggleElement, CustomEvent<boolean>>) => void,
   'on-change'?: (e: CustomEvent<boolean>) => void,
 }

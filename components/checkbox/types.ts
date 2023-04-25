@@ -1,5 +1,4 @@
 import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
 
 export type TSinchCheckboxElement = HTMLElement & {
   /** Value */
@@ -43,8 +42,6 @@ export type TSinchCheckboxReact = TSinchElementReact<TSinchCheckboxElement> & {
   text?: string,
   /** Label that is used for a11y – might be different from `label` */
   'aria-label': string,
-  /** @deprecated */
-  onChange?: (event: SyntheticEvent<TSinchCheckboxElement, CustomEvent<boolean>>) => void,
   /** Change value handler */
   'on-change'?: (e: CustomEvent<boolean>) => void,
   /** Focus handler */

@@ -1,5 +1,4 @@
 import type { TRect, TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
 
 export type TSinchDatePickerElement = HTMLElement & {
   /** Date value in ISO 8601 format */
@@ -68,8 +67,6 @@ export type TSinchDatePickerReact = TSinchElementReact<TSinchDatePickerElement> 
   'prev-month-aria-label': string,
   /** Label that is used for a11y */
   'next-month-aria-label': string,
-  /** @deprecated Change value handler, return date in ISO 8601 format */
-  onChange?: (e: SyntheticEvent<TSinchDatePickerElement, CustomEvent<string>>) => void,
   /** Change value handler, return date in ISO 8601 format */
   'on-change'?: (e: CustomEvent<string>) => void,
 }
