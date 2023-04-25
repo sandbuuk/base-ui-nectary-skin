@@ -12,6 +12,7 @@ import { useOnRouteChange } from '~/hooks'
 import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
 import { LandingPage } from '~/pages/Landing'
+import { ColorsPage } from '~/pages/NewDocumentationWIP/Colors'
 import { NotFoundPage } from '~/pages/NotFound'
 import { AppStateProvider } from '~/store'
 import './styles.css'
@@ -45,6 +46,7 @@ const AppImpl: FC = () => {
             <Route path="/" element={<LandingPage/>}/>
             <Route path="/intro" element={<IntroPage/>}/>
             <Route path="/faq" element={<FAQPage/>}/>
+            <Route path="/colors" element={<ColorsPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
             <Route path="*" element={<NotFoundPage/>}/>
           </Routes>
