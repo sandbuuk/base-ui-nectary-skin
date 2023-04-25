@@ -88,6 +88,18 @@ const config: TWebpackConfig = {
         loader: '@saas/types-to-mdx-loader',
       },
       {
+        test: /\.css$/,
+        exclude: NODE_MODULES_REGEXP,
+        resourceQuery: '?tokens',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: BabelOptions,
+          },
+          '@saas/css-to-mdx-loader',
+        ],
+      },
+      {
         test: /\.mdx?$/,
         exclude: NODE_MODULES_REGEXP,
         use: [
@@ -119,6 +131,7 @@ const config: TWebpackConfig = {
       },
       {
         test: /\.css$/,
+        resourceQuery: '',
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
