@@ -87,7 +87,7 @@
 }
 
 .code-inline {
-  font: var(--sinch-sys-font-body-s);
+  font: var(--sinch-sys-font-body-monospace-s);
   background-color: #EFF6F6;
 
   /* outline: 1px solid var(--sinch-sys-color-primary-default); */

@@ -2,7 +2,17 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
 
-const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const vibrantColorNames = [
+  'violet',
+  'blue',
+  'green',
+  'yellow',
+  'orange',
+  'red',
+  'pink',
+  'brown',
+  'gray',
+]
 
 export const VibrantColorSetExample: FC = () => {
   const [value, setValue] = useState<string>('')

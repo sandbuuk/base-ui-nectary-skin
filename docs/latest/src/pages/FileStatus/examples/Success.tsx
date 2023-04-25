@@ -22,16 +22,5 @@ export const SuccessExample: FC = () => (
         <sinch-icon-delete-outline slot="icon"/>
       </sinch-icon-button>
     </sinch-file-status>
-    <sinch-file-status type="success" filename="image.png">
-      <sinch-icon-button
-        slot="action"
-        aria-label="Delete file"
-        size="s"
-        disabled
-        on-click={() => {}}
-      >
-        <sinch-icon-delete-outline slot="icon"/>
-      </sinch-icon-button>
-    </sinch-file-status>
   </div>
 )

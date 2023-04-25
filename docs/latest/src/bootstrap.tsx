@@ -1,4 +1,3 @@
-import pkg from '@sinch-engage/nectary/package.json'
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
 import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
 import { DocumentProvider } from 'docs-common'
@@ -18,7 +17,7 @@ setNectaryRegistry(registry)
 setAssetsRegistry(registry)
 
 export const bootstrap = (el: HTMLElement) => {
-  console.log('bootstrap', pkg.version)
+  // console.log('bootstrap', pkg.version)
 
   const wrapper = el
   const { appElement, shadowRoot } = createShadowRoot(wrapper, registry)
@@ -57,7 +56,7 @@ export const bootstrap = (el: HTMLElement) => {
   return {
     ready: readyPromise,
     unmount() {
-      console.log('unmount', pkg.version)
+      // console.log('unmount', pkg.version)
 
       requestAnimationFrame(() => {
         reactRoot.unmount()

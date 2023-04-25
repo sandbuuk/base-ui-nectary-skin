@@ -3,10 +3,11 @@
   flex-direction: column;
   height: 112px;
   border-bottom: 1px solid var(--sinch-sys-color-border-light);
-  padding-top: 24px;
+  padding-top: 20px;
   padding-left: 32px;
   padding-right: calc(265px + 32px);
   box-sizing: border-box;
+  gap: 4px;
 }
 
 #page-body {

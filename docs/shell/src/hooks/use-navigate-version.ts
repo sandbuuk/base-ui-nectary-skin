@@ -36,6 +36,10 @@ export const useNavigateVersion = (): TNavigateVersionResult => {
   )
 
   const versionValue = useMemo(() => {
+    if (urlVersionValue === 'latest') {
+      return latestVersion
+    }
+
     if (urlVersionValue === null || versionKeys.includes(urlVersionValue) === false) {
       requestIdleCallback(() => {
         setVersionValue(latestVersion)

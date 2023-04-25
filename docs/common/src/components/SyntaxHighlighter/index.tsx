@@ -17,13 +17,9 @@ const style: Record<string, CSSProperties> = {
   ...ghcolors,
   'code[class*="language-"]': {
     ...ghcolors['"code[class*="language-"]"'],
-    font: 'var(--sinch-sys-font-body-monospace-s)',
+    fontFamily: 'var(--sinch-ref-typography-font-family-mono)',
     fontSize: 14,
     lineHeight: '22px',
-  },
-  'pre[class*="language-"]': {
-    ...ghcolors['pre[class*="language-"]'],
-    font: 'var(--sinch-sys-font-body-monospace-s)',
   },
 }
 
@@ -32,6 +28,7 @@ const exampleStyle: Record<string, CSSProperties> = {
   'pre[class*="language-"]': {
     background: 'none',
     border: 'none',
+    overflowX: 'auto',
     // margin: '0',
   },
 }

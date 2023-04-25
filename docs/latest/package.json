@@ -29,6 +29,7 @@
     "@mdx-js/react": "^2.3.0",
     "@saas/example-code-loader": "workspace:^0.0.0",
     "@saas/html-minify-loader": "workspace:^0.0.0",
+    "@saas/css-to-mdx-loader": "workspace:^0.0.0",
     "@saas/types-to-mdx-loader": "workspace:^0.0.0",
     "@types/babel__core": "^7.20.0",
     "@types/mdx": "^2.0.4",

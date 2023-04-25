@@ -1,4 +1,3 @@
-import pkg from '@sinch-engage/nectary/package.json'
 import type { TRouteTab } from 'docs-common'
 
 declare let REQ_CHUNK_NAME: string
@@ -63,7 +62,7 @@ const routeNameMap = componentsRoutes.reduce((res, { route, name }) => {
   res[route] = name
 
   return res
-}, {} as Record<string, string>)
+}, {} as Record<string, string | undefined>)
 
 export const getRouteTabs = (route: string) => {
   const name = routeNameMap[route] ?? null
@@ -75,8 +74,14 @@ export const getRouteTabs = (route: string) => {
   return componentTabs[name] ?? null
 }
 
+export const getRouteTitle = (route: string) => {
+  const name = routeNameMap[route] ?? null
+
+  return name
+}
+
 export const getComponentsRoutes = () => {
-  console.log('getSidebarItems', pkg.version)
+  // console.log('getSidebarItems', pkg.version)
 
   return componentsRoutes
 }

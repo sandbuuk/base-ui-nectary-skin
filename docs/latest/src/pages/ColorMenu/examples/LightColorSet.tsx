@@ -3,7 +3,17 @@ import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
 import '@sinch-engage/nectary/color-menu-option'
 
-const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
+const lightColors = [
+  'light-violet',
+  'light-blue',
+  'light-green',
+  'light-yellow',
+  'light-orange',
+  'light-red',
+  'light-pink',
+  'light-brown',
+  'light-gray',
+]
 
 export const LightColorSetExample: FC = () => {
   const [value, setValue] = useState<string>('')

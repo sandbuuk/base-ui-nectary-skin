@@ -82,6 +82,18 @@ const config: Configuration = {
         loader: '@saas/types-to-mdx-loader',
       },
       {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        resourceQuery: '?tokens',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: BabelOptions,
+          },
+          '@saas/css-to-mdx-loader',
+        ],
+      },
+      {
         test: /\.mdx?$/,
         exclude: /node_modules/,
         use: [
@@ -109,6 +121,7 @@ const config: Configuration = {
       },
       {
         test: /\.css$/i,
+        resourceQuery: '',
         use: [
           {
             loader: 'style-loader',

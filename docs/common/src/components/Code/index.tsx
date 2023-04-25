@@ -14,7 +14,7 @@ export const Code: FC<TCode> = ({ src }) => {
   const [isOpen, setOpen] = useState(false)
 
   return (
-    <div className={`code ${isOpen ? 'open' : ''}`} {...(isOpen ? {} : { onClick: () => setOpen(true) })}>
+    <div className={`code ${isOpen ? 'open' : ''}`} onClick={!isOpen ? () => setOpen(true) : void 0}>
       <div className="code-toolbar">
         <sinch-icon-button
           aria-label="Copy"

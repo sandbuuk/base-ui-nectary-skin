@@ -3,7 +3,14 @@ import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
 import '@sinch-engage/nectary/color-menu-option'
 
-const skinToneColorNames = ['skin-tone-0', 'skin-tone-10', 'skin-tone-20', 'skin-tone-30', 'skin-tone-40', 'skin-tone-50']
+const skinToneColorNames = [
+  'skintone-default',
+  'skintone-light',
+  'skintone-light-medium',
+  'skintone-medium',
+  'skintone-medium-dark',
+  'skintone-dark',
+]
 
 export const SkinToneColorSetExample: FC = () => {
   const [value, setValue] = useState<string>('')
