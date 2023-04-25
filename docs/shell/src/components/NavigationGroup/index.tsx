@@ -25,7 +25,6 @@ export const NavigationGroup: FC<TNavigationGroup> = ({ text, children }) => {
           level="3"
           ellipsis
         />
-        <sinch-icon-keyboard-arrow-down class="navigation-group-dropdown-icon"/>
       </button>
       <div className={isOpen ? '' : 'hidden'}>
         {children}

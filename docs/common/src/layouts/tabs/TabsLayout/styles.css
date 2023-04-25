@@ -35,7 +35,7 @@
   width: 265px;
   height: 100%;
   box-sizing: border-box;
-  background-color: white;
+  background-color: var(--sinch-sys-color-container-main-default);
   overflow-y: scroll;
 }
 

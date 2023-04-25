@@ -1,0 +1,13 @@
+#sidebar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  padding: 8px 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+#toggle-theme-button {
+  --sinch-comp-icon-button-color-tertiary-default-icon-initial: var(--sinch-sys-color-cta-active);
+}

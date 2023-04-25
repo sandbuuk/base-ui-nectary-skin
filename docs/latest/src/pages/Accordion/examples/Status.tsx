@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/accordion'
 import '@sinch-engage/nectary/accordion-item'
+import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary-assets/icons/open-in-new'
 
 export const StatusExample: FC = () => {
@@ -17,7 +18,7 @@ export const StatusExample: FC = () => {
         status="info"
       >
         <sinch-icon-open-in-new slot="icon"/>
-        <span slot="content">Accordion content</span>
+        <sinch-text slot="content" type="m">Accordion content</sinch-text>
       </sinch-accordion-item>
       <sinch-accordion-item
         value="2"
@@ -26,7 +27,7 @@ export const StatusExample: FC = () => {
         status="success"
       >
         <sinch-icon-open-in-new slot="icon"/>
-        <span slot="content">Accordion content</span>
+        <sinch-text slot="content" type="m">Accordion content</sinch-text>
       </sinch-accordion-item>
       <sinch-accordion-item
         value="3"
@@ -34,7 +35,7 @@ export const StatusExample: FC = () => {
         status="warn"
       >
         <sinch-icon-open-in-new slot="icon"/>
-        <span slot="content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+        <sinch-text slot="content" type="m">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</sinch-text>
       </sinch-accordion-item>
       <sinch-accordion-item
         value="4"
@@ -42,7 +43,7 @@ export const StatusExample: FC = () => {
         status="error"
       >
         <sinch-icon-open-in-new slot="icon"/>
-        <span slot="content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+        <sinch-text slot="content" type="m">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</sinch-text>
       </sinch-accordion-item>
     </sinch-accordion>
   )

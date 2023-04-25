@@ -2,13 +2,13 @@
 }
 
 .navigation-link {
-  height: 40px;
+  height: 32px;
   display: flex;
   align-items: center;
   padding-left: 40px;
   text-decoration: none;
   color: var(--sinch-sys-color-text-default);
-  border-radius: var(--sinch-sys-shape-radius-m);
+  border-radius: 5px;
   background-color: var(--sinch-sys-color-container-main-default);
 }
 
@@ -21,9 +21,13 @@
 }
 
 .navigation-link.selected {
-  background-color: var(--sinch-ref-color-main-honey-200);
+  background-color: var(--sinch-sys-color-container-complement-2-default);
 }
 
 .navigation-link.selected:hover {
-  background-color: var(--sinch-ref-color-main-honey-300);
+  background-color: var(--sinch-sys-color-container-complement-2-hover);
+}
+
+.navigation-link.selected:active {
+  background-color: var(--sinch-sys-color-container-complement-2-active);
 }

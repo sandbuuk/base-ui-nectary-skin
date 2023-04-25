@@ -1,5 +1,6 @@
 import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/code-tag'
 import '@sinch-engage/nectary/table'
 import '@sinch-engage/nectary/table-head'
 import '@sinch-engage/nectary/table-head-cell'
@@ -57,7 +58,7 @@ export const commonComponents: MDXComponents = {
   code: ({ className, children }) => {
     if (className == null) {
       return (
-        <code className="code-inline">{children}</code>
+        <sinch-code-tag text={children as string}/>
       )
     }
 
@@ -95,9 +96,9 @@ export const commonComponents: MDXComponents = {
   td: ({ children }) => {
     return (
       <sinch-table-cell>
-        <div>
+        <sinch-text type="m">
           {children}
-        </div>
+        </sinch-text>
       </sinch-table-cell>
     )
   },

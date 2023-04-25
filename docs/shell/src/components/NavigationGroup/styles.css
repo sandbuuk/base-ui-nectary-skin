@@ -13,7 +13,7 @@
   text-decoration: none;
   padding: 0 16px;
   user-select: none;
-  border-radius: var(--sinch-sys-shape-radius-l);
+  border-radius: 5px;
   background-color: var(--sinch-sys-color-container-main-default);
   box-sizing: border-box;
   cursor: pointer;

@@ -6,6 +6,7 @@ import { ComponentsPage } from '../ComponentsPage'
 import { NavigationGroup } from '../NavigationGroup'
 import { NavigationItem } from '../NavigationItem'
 import { NavigationList } from '../NavigationList'
+import { SidebarFooter } from '../SidebarFooter'
 import { SidebarTitle } from '../SidebarTitle'
 import type { FC } from 'react'
 import { useOnRouteChange } from '~/hooks'
@@ -21,7 +22,7 @@ const AppImpl: FC = () => {
   return (
     <>
       <div id="app-sidebar">
-        <div id="app-sidebar-fixed">
+        <div className="app-sidebar-fixed">
           <SidebarTitle/>
         </div>
         <div id="app-sidebar-scroll" className="scrollable">
@@ -38,6 +39,9 @@ const AppImpl: FC = () => {
               </NavigationGroup>
             </NavigationList>
           </div>
+        </div>
+        <div className="app-sidebar-fixed border-top">
+          <SidebarFooter/>
         </div>
       </div>
       <div id="app-content">

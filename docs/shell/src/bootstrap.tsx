@@ -1,4 +1,5 @@
 import '@sinch-engage/nectary-theme-base/index'
+import '@sinch-engage/nectary-theme-dark/index'
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
 import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
 import { StrictMode } from 'react'

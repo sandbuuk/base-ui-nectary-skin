@@ -205,6 +205,9 @@ importers:
       '@sinch-engage/nectary-theme-base':
         specifier: workspace:*
         version: link:../../themes/base
+      '@sinch-engage/nectary-theme-dark':
+        specifier: workspace:*
+        version: link:../../themes/dark
       core-js:
         specifier: ^3.30.1
         version: 3.30.1
@@ -347,6 +350,9 @@ importers:
       '@sinch-engage/nectary-theme-base':
         specifier: workspace:*
         version: link:../../themes/base
+      '@sinch-engage/nectary-theme-dark':
+        specifier: workspace:*
+        version: link:../../themes/dark
       '@webcomponents/scoped-custom-element-registry':
         specifier: ^0.0.9
         version: 0.0.9
@@ -830,6 +836,43 @@ importers:
         version: 5.80.0(webpack-cli@5.0.2)
 
   themes/base:
+    dependencies:
+      '@babel/runtime':
+        specifier: ^7.21.0
+        version: 7.21.0
+    devDependencies:
+      '@babel/cli':
+        specifier: ^7.21.0
+        version: 7.21.0(@babel/core@7.21.4)
+      '@babel/core':
+        specifier: ^7.21.4
+        version: 7.21.4
+      '@babel/plugin-transform-runtime':
+        specifier: ^7.21.4
+        version: 7.21.4(@babel/core@7.21.4)
+      '@babel/preset-env':
+        specifier: ^7.21.4
+        version: 7.21.4(@babel/core@7.21.4)
+      '@babel/preset-typescript':
+        specifier: ^7.21.4
+        version: 7.21.4(@babel/core@7.21.4)
+      '@types/node':
+        specifier: ^18.16.0
+        version: 18.16.0
+      '@types/react':
+        specifier: ^18.0.38
+        version: 18.0.38
+      babel-plugin-html-inline-minifier:
+        specifier: workspace:^0.0.0
+        version: link:../../libs/babel-plugin-html-inline-minifier
+      babel-plugin-transform-inline-environment-variables:
+        specifier: ^0.4.4
+        version: 0.4.4
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+
+  themes/dark:
     dependencies:
       '@babel/runtime':
         specifier: ^7.21.0
@@ -2249,16 +2292,6 @@ packages:
       '@babel/helper-plugin-utils': 7.20.2
     dev: true
 
-  /@babel/plugin-syntax-jsx@7.18.6(@babel/core@7.21.4):
-    resolution: {integrity: sha512-6mmljtAedFGTWu2p/8WIORGwy+61PLgOMPOdazc7YoJ9ZCWUyFy3A6CpPkRKLKD1ToAesxX8KGEViAiLo9N+7Q==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.21.4
-      '@babel/helper-plugin-utils': 7.20.2
-    dev: true
-
   /@babel/plugin-syntax-jsx@7.21.4(@babel/core@7.21.4):
     resolution: {integrity: sha512-5hewiLct5OKyh6PLKEYaFclcqtIgCb6bmELouxjF6up5q3Sov7rOayW4RwhbaBL0dit8rA80GNfY+UuDp2mBbQ==}
     engines: {node: '>=6.9.0'}
@@ -2993,7 +3026,7 @@ packages:
       '@babel/helper-annotate-as-pure': 7.18.6
       '@babel/helper-module-imports': 7.21.4
       '@babel/helper-plugin-utils': 7.20.2
-      '@babel/plugin-syntax-jsx': 7.18.6(@babel/core@7.21.4)
+      '@babel/plugin-syntax-jsx': 7.21.4(@babel/core@7.21.4)
       '@babel/types': 7.21.4
     dev: true
 
