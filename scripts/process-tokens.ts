@@ -1,10 +1,10 @@
 import { mkdir, readFile, stat, writeFile } from 'fs/promises'
 import path from 'path'
 
-const [TOKENS_FILEPATH, OUTDIR] = process.argv.slice(2)
+const [TOKENS_FILEPATH, OUTDIR, INPUT_THEME_KEY] = process.argv.slice(2)
 
-if (OUTDIR == null || OUTDIR === '') {
-  throw new Error(`Usage example: tsm ./scripts/process-tokens.ts tokens.json themes/base`)
+if (INPUT_THEME_KEY == null || INPUT_THEME_KEY === '') {
+  throw new Error(`Usage example: tsm ./scripts/process-tokens.ts ./tokens/data.json themes/base base`)
 }
 
 if ((await stat(path.resolve(OUTDIR))).isDirectory() === false) {
@@ -83,6 +83,19 @@ type TValue = {
   value: string,
 }
 
+const [SELECTED_THEME_KEY] = Object.keys(tokensJson).filter((key: string) => key.toLowerCase().includes(INPUT_THEME_KEY))
+
+if (SELECTED_THEME_KEY == null) {
+  throw new Error(`Cannot find theme by key: "${INPUT_THEME_KEY}"`)
+}
+
+const isBaseThemeKey = (key: string) => key.toLowerCase().includes('base')
+const [BASE_THEME_KEY] = Object.keys(tokensJson).filter(isBaseThemeKey)
+
+if (BASE_THEME_KEY == null) {
+  throw new Error(`Cannot find base theme by key "base"`)
+}
+
 const isValue = (obj: TJson): obj is TValue => {
   return Reflect.has(obj, 'type') && Reflect.has(obj, 'value')
 }
@@ -91,6 +104,18 @@ const isJson = (obj: TJson | string): obj is TJson => {
   return typeof obj === 'object' &&
     !Array.isArray(obj) &&
     obj != null
+}
+
+const SELECTED_THEME_JSON = tokensJson[SELECTED_THEME_KEY]
+
+if (!isJson(SELECTED_THEME_JSON)) {
+  throw new Error(`Cannot get theme json, named "${SELECTED_THEME_KEY}" from tokens json`)
+}
+
+const BASE_THEME_JSON = tokensJson[BASE_THEME_KEY]
+
+if (!isJson(BASE_THEME_JSON)) {
+  throw new Error(`Cannot get base theme json, named "${BASE_THEME_KEY}" from tokens json`)
 }
 
 const prepareDir = async (dir: string) => {
@@ -155,43 +180,52 @@ const refToCss = (iStr: string): string => {
   return `var(${getCssVarPrefix(sectionKey)}${DELIMITER}${restPath.join(DELIMITER)})`
 }
 
-const refToValue = (themeJson: TJson, valueObj: TValue): TValue => {
-  const { type: origType, value: iStr } = valueObj
-
-  if (!isInterpolateString(iStr)) {
-    throw new Error(`Value is not a reference: "${iStr}"`)
+const refToValue = (valueObj: TValue): TValue => {
+  if (!isInterpolateString(valueObj.value)) {
+    throw new Error(`Value is not a reference: "${valueObj.value}"`)
   }
 
-  const path = getInterpolatePath(iStr)
-  let pathObj = themeJson
+  const refToValueImpl = (themeJson: TJson, valueObj: TValue): TValue | null => {
+    const { value: iStr } = valueObj
 
-  // Follow the reference path
-  for (const pathEntry of path) {
-    if (!Reflect.has(pathObj, pathEntry)) {
-      throw new Error(`Cannot find key "${pathEntry}" at path "${iStr}"`)
+    if (!isInterpolateString(iStr)) {
+      throw new Error(`Value is not a reference: "${iStr}"`)
     }
 
-    pathObj = pathObj[pathEntry] as TJson
+    const path = getInterpolatePath(iStr)
+    let pathObj = themeJson
+
+    // Follow the reference path
+    for (const pathEntry of path) {
+      if (!Reflect.has(pathObj, pathEntry)) {
+        return null
+      }
+
+      pathObj = pathObj[pathEntry] as TJson
+    }
+
+    // Check if value "TValue" has been reached by following the path
+    if (isValue(pathObj)) {
+      return isInterpolateString(pathObj.value)
+        ? refToValueImpl(themeJson, pathObj)
+        : pathObj
+    }
+
+    return null
   }
 
-  // Check if value "TValue" has been reached by following the path
-  if (isValue(pathObj)) {
-    const { type, value } = pathObj
+  const result = refToValueImpl(SELECTED_THEME_JSON, valueObj) ?? refToValueImpl(BASE_THEME_JSON, valueObj)
 
-    if (isInterpolateString(value)) {
-      return refToValue(themeJson, pathObj)
-    }
-
-    // Check if dereferenced value type is different than reference value type
-    if (type !== origType) {
-      throw new Error(`Reference of type "${origType}" leads to different type "${type}"`)
-    }
-
-    // value has been dereferenced
-    return pathObj
+  if (result === null) {
+    throw new Error(`Cannot dereference value at path "${getInterpolatePath(valueObj.value)}"`)
   }
 
-  throw new Error(`Ref path "${iStr}" didnt lead to a value`)
+  // Check if dereferenced value type is different than reference value type
+  if (result.type !== valueObj.type) {
+    throw new Error(`Reference of type "${valueObj.type}" leads to different type "${result.type}"`)
+  }
+
+  return result
 }
 
 function* visitJsonObject(obj: TJson, accPath: string[] = []): Generator<{path: string[], value: TValue}> {
@@ -213,14 +247,14 @@ function* visitJsonObject(obj: TJson, accPath: string[] = []): Generator<{path: 
   }
 }
 
-const jsonValueToCssValue = (themeJson: TJson, jsonObj: TValue, forceDereferenceValue = false): string => {
+const jsonValueToCssValue = (jsonObj: TValue, forceDereferenceValue = false): string => {
   const { type, value } = jsonObj
   const px = (value: string) => (value.endsWith('%') || value === ZERO ? value : `${value}px`)
 
   if (!hasExtensions(jsonObj)) {
     if (isInterpolateString(value)) {
       return forceDereferenceValue
-        ? jsonValueToCssValue(themeJson, refToValue(themeJson, jsonObj), forceDereferenceValue)
+        ? jsonValueToCssValue(refToValue(jsonObj), forceDereferenceValue)
         : refToCss(value)
     }
   }
@@ -231,10 +265,10 @@ const jsonValueToCssValue = (themeJson: TJson, jsonObj: TValue, forceDereference
 
       if (alpha !== null) {
         const colorValue = isInterpolateString(value)
-          ? refToValue(themeJson, jsonObj).value as typeof value
+          ? refToValue(jsonObj).value as typeof value
           : value
 
-        return jsonValueToCssValue(themeJson, { type, value: colorValue + alpha }, forceDereferenceValue)
+        return jsonValueToCssValue({ type, value: colorValue + alpha }, forceDereferenceValue)
       }
 
       if (value.startsWith('#')) {
@@ -255,7 +289,7 @@ const jsonValueToCssValue = (themeJson: TJson, jsonObj: TValue, forceDereference
         return 'none'
       }
 
-      const colorValue = jsonValueToCssValue(themeJson, { type: 'color', value: color }, forceDereferenceValue)
+      const colorValue = jsonValueToCssValue({ type: 'color', value: color }, forceDereferenceValue)
 
       return `${px(x)} ${px(y)} ${px(blur)} ${colorValue}`
     }
@@ -266,10 +300,10 @@ const jsonValueToCssValue = (themeJson: TJson, jsonObj: TValue, forceDereference
       }
 
       const { fontFamily, fontSize, fontWeight, lineHeight } = value
-      const fontFamilyValue = jsonValueToCssValue(themeJson, { type: 'fontFamilies', value: fontFamily }, forceDereferenceValue)
-      const fontSizeValue = jsonValueToCssValue(themeJson, { type: 'fontSizes', value: fontSize }, forceDereferenceValue)
-      const fontWeightValue = jsonValueToCssValue(themeJson, { type: 'fontWeights', value: fontWeight }, forceDereferenceValue)
-      const lineHeightValue = jsonValueToCssValue(themeJson, { type: 'lineHeights', value: lineHeight }, forceDereferenceValue)
+      const fontFamilyValue = jsonValueToCssValue({ type: 'fontFamilies', value: fontFamily }, forceDereferenceValue)
+      const fontSizeValue = jsonValueToCssValue({ type: 'fontSizes', value: fontSize }, forceDereferenceValue)
+      const fontWeightValue = jsonValueToCssValue({ type: 'fontWeights', value: fontWeight }, forceDereferenceValue)
+      const lineHeightValue = jsonValueToCssValue({ type: 'lineHeights', value: lineHeight }, forceDereferenceValue)
 
       return `${fontWeightValue} ${fontSizeValue}/${lineHeightValue} ${fontFamilyValue}`
     }
@@ -303,11 +337,11 @@ const jsonValueToCssValue = (themeJson: TJson, jsonObj: TValue, forceDereference
   }
 }
 
-const jsonToCss = (themeJson: any, jsonObj: any, prefix: string): string => {
+const jsonToCss = (jsonObj: any, prefix: string): string => {
   let data = ':root,\n:host {\n'
 
   for (const { path, value } of visitJsonObject(jsonObj, [prefix])) {
-    const valueStr = jsonValueToCssValue(themeJson, value)
+    const valueStr = jsonValueToCssValue(value)
 
     // Build CSS entry line
     data += `  ${path.join(DELIMITER)}: ${valueStr};\n`
@@ -338,23 +372,15 @@ function* visitThemeSections(themeJson: any): Generator<{key: string, jsonObj: T
 }
 
 /* Process Theme */
-const isBaseThemeKey = (key: string) => key.toLowerCase().includes('base')
-
-const [baseThemeKey] = Object.keys(tokensJson).filter(isBaseThemeKey)
-const themeJson = tokensJson[baseThemeKey]
-
-if (!isJson(themeJson)) {
-  throw new Error(`Cannot get theme json, named "${baseThemeKey}" from tokens json`)
-}
 
 // Process sections like 'ref' or 'sys'
-for (const { key, jsonObj, isComponent } of visitThemeSections(themeJson)) {
+for (const { key, jsonObj, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
   if (isComponent) {
-    const data = jsonToCss(themeJson, jsonObj, getCssVarPrefix(COMPONENTS_SECTION_KEY, key))
+    const data = jsonToCss(jsonObj, getCssVarPrefix(COMPONENTS_SECTION_KEY, key))
 
     await writeData(path.join(OUTDIR, COMPONENTS_OUTDIR), `${key}.css`, data)
   } else {
-    const data = jsonToCss(themeJson, jsonObj, getCssVarPrefix(key))
+    const data = jsonToCss(jsonObj, getCssVarPrefix(key))
 
     await writeData(OUTDIR, `${key}.css`, data)
   }
@@ -363,26 +389,30 @@ for (const { key, jsonObj, isComponent } of visitThemeSections(themeJson)) {
 /* Process index.ts */
 let importsData = ''
 
-// import fonts.css
-for (const add of ADDITIONAL_SECTION_IMPORTS) {
-  importsData += `import './${add}.css'\n`
+// Base theme only: import additional sections like 'fonts'
+if (isBaseThemeKey(SELECTED_THEME_KEY)) {
+  for (const add of ADDITIONAL_SECTION_IMPORTS) {
+    importsData += `import './${add}.css'\n`
+  }
 }
 
-for (const { key, isComponent } of visitThemeSections(themeJson)) {
+for (const { key, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
   importsData += isComponent
     ? `import './${COMPONENTS_OUTDIR}/${key}.css'\n`
     : `import './${key}.css'\n`
 }
 
-// import 'emoji', 'flag', 'icon'
-for (const add of ADDITIONAL_COMPONENTS_IMPORTS) {
-  importsData += `import './${COMPONENTS_OUTDIR}/${add}.css'\n`
+// Base theme only: import additional components 'emoji', 'flag', 'icon'
+if (isBaseThemeKey(SELECTED_THEME_KEY)) {
+  for (const add of ADDITIONAL_COMPONENTS_IMPORTS) {
+    importsData += `import './${COMPONENTS_OUTDIR}/${add}.css'\n`
+  }
 }
 
 await writeData(OUTDIR, 'index.ts', importsData)
 
-// process section json files, e.g. ref.json, sys.json
-for (const { key: sectionNameKey, jsonObj, isComponent } of visitThemeSections(themeJson)) {
+/* Process section json files, e.g. ref.json, sys.json */
+for (const { key: sectionNameKey, jsonObj, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
   // Skip components
   if (isComponent) {
     continue
@@ -391,7 +421,7 @@ for (const { key: sectionNameKey, jsonObj, isComponent } of visitThemeSections(t
   const sectionRoot: TJson = {}
 
   for (const { path, value } of visitJsonObject(jsonObj)) {
-    const valueStr = jsonValueToCssValue(themeJson, value, true)
+    const valueStr = jsonValueToCssValue(value, true)
     let temp = sectionRoot
 
     // recreate path structure in result object
