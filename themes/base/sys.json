@@ -94,35 +94,44 @@
         "foreground": "#242424"
       },
       "contrast": {
-        "default": "#F2F2F2",
-        "hover": "#E0E0E0",
-        "active": "#D9D9D9",
-        "disabled": "#F2F2F2",
-        "foreground": "#303030"
+        "primary": {
+          "default": "#F2F2F2",
+          "hover": "#E0E0E0",
+          "active": "#D9D9D9",
+          "disabled": "#F2F2F2",
+          "foreground": "#303030"
+        },
+        "secondary": {
+          "hover": "#F2F2F2",
+          "active": "#E0E0E0",
+          "foreground": "#303030",
+          "default": "#F8F8F8",
+          "disabled": "#F8F8F8"
+        }
       },
       "complement": {
-        "1": {
+        "primary": {
           "default": "#FFF7E6",
           "disabled": "#FFF7E6",
           "hover": "#FCECCB",
           "active": "#FFDF9E",
           "foreground": "#242424"
         },
-        "2": {
+        "secondary": {
           "foreground": "#242424",
           "default": "#F5FAF6",
           "disabled": "#F5FAF6",
           "hover": "#DCEDE1",
           "active": "#A7D5C2"
         },
-        "3": {
+        "tertiary": {
           "foreground": "#242424",
           "default": "#DEF2FF",
           "disabled": "#DEF2FF",
           "hover": "#C8E6F9",
           "active": "#A1D5F5"
         },
-        "4": {
+        "quaternary": {
           "foreground": "#242424",
           "default": "#FFF6F5",
           "disabled": "#FFF6F5",
@@ -136,9 +145,6 @@
         "active": "#24242433",
         "disabled": "transparent"
       }
-    },
-    "background": {
-      "default": "#F8F8F8"
     },
     "status": {
       "busy": {

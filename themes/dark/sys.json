@@ -9,7 +9,12 @@
         "foreground": "#F8F8F8"
       },
       "contrast": {
-        "default": "#303030"
+        "secondary": {
+          "default": "#191919"
+        },
+        "primary": {
+          "default": "#191919"
+        }
       }
     },
     "primary": {
@@ -24,9 +29,6 @@
       "invalid": "#EF5858",
       "muted": "#A6A6A6",
       "disabled": "#595959"
-    },
-    "background": {
-      "default": "#191919"
     },
     "border": {
       "default": "#595959",

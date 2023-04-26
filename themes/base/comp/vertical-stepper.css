@@ -1,7 +1,7 @@
 :root,
 :host {
-  --sinch-comp-vertical-stepper-color-background-default: var(--sinch-sys-color-container-contrast-default);
-  --sinch-comp-vertical-stepper-color-background-visited-skip: var(--sinch-sys-color-container-contrast-default);
+  --sinch-comp-vertical-stepper-color-background-default: var(--sinch-sys-color-container-contrast-primary-default);
+  --sinch-comp-vertical-stepper-color-background-visited-skip: var(--sinch-sys-color-container-contrast-primary-default);
   --sinch-comp-vertical-stepper-color-background-active: var(--sinch-ref-color-main-stormy-400);
   --sinch-comp-vertical-stepper-color-background-visited: var(--sinch-ref-color-main-snow-700);
   --sinch-comp-vertical-stepper-color-background-visited-error: var(--sinch-sys-color-feedback-invalid-background);

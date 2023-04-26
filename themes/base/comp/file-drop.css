@@ -1,12 +1,12 @@
 :root,
 :host {
-  --sinch-comp-file-drop-color-default-background-initial: var(--sinch-sys-color-container-contrast-default);
-  --sinch-comp-file-drop-color-default-background-active: var(--sinch-sys-color-container-complement-3-default);
+  --sinch-comp-file-drop-color-default-background-initial: var(--sinch-sys-color-container-contrast-primary-default);
+  --sinch-comp-file-drop-color-default-background-active: var(--sinch-sys-color-container-complement-tertiary-default);
   --sinch-comp-file-drop-color-default-border-initial: var(--sinch-sys-color-border-dark);
   --sinch-comp-file-drop-color-default-border-active: var(--sinch-sys-color-border-focus);
   --sinch-comp-file-drop-color-default-placeholder-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-file-drop-color-default-placeholder-active: var(--sinch-sys-color-text-muted);
-  --sinch-comp-file-drop-color-invalid-background-initial: var(--sinch-sys-color-container-contrast-default);
+  --sinch-comp-file-drop-color-invalid-background-initial: var(--sinch-sys-color-container-contrast-primary-default);
   --sinch-comp-file-drop-color-invalid-border-initial: var(--sinch-sys-color-border-invalid);
   --sinch-comp-file-drop-color-invalid-placeholder-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-file-drop-color-disabled-background-initial: var(--sinch-sys-color-container-main-default);

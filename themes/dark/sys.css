@@ -5,7 +5,8 @@
   --sinch-sys-color-container-main-active: var(--sinch-ref-color-main-stormy-900);
   --sinch-sys-color-container-main-disabled: var(--sinch-ref-color-main-stormy-700);
   --sinch-sys-color-container-main-foreground: var(--sinch-ref-color-main-snow-200);
-  --sinch-sys-color-container-contrast-default: var(--sinch-ref-color-main-stormy-600);
+  --sinch-sys-color-container-contrast-secondary-default: var(--sinch-ref-color-main-stormy-800);
+  --sinch-sys-color-container-contrast-primary-default: var(--sinch-ref-color-main-stormy-800);
   --sinch-sys-color-primary-disabled: var(--sinch-ref-color-main-tropical-600);
   --sinch-sys-color-primary-default: var(--sinch-ref-color-main-tropical-400);
   --sinch-sys-color-primary-hover: var(--sinch-ref-color-main-tropical-300);
@@ -15,7 +16,6 @@
   --sinch-sys-color-text-invalid: var(--sinch-ref-color-main-raspberry-500);
   --sinch-sys-color-text-muted: var(--sinch-ref-color-main-stormy-100);
   --sinch-sys-color-text-disabled: var(--sinch-ref-color-main-stormy-400);
-  --sinch-sys-color-background-default: var(--sinch-ref-color-main-stormy-800);
   --sinch-sys-color-border-default: var(--sinch-ref-color-main-stormy-400);
   --sinch-sys-color-border-disabled: var(--sinch-ref-color-main-stormy-500);
   --sinch-sys-color-border-dark: var(--sinch-ref-color-main-stormy-300);
