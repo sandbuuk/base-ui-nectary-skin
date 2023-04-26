@@ -24,10 +24,31 @@ export const commonComponents: MDXComponents = {
   ),
   a: ({ href = '#', children }) => {
     const isExternal = href.startsWith('http')
+    let newHref = href
+
+    if (!isExternal) {
+      const newSearchParams = new URLSearchParams(href)
+      const currentUrl = new URL(location.href)
+
+      for (const [key, value] of newSearchParams) {
+        currentUrl.searchParams.set(key, value)
+      }
+
+      const { protocol, host, pathname, searchParams } = currentUrl
+
+      newHref = `${protocol}//${host}${pathname}?`
+      newHref += Array.from(searchParams).map(([key, value]) => {
+        if (key !== 'path') {
+          return `${key}=${encodeURIComponent(value)}`
+        }
+
+        return `${key}=${value}`
+      }).join('&')
+    }
 
     return (
       <sinch-link
-        href={href}
+        href={newHref}
         text={children as string}
         aria-label={children as string}
         external={isExternal}

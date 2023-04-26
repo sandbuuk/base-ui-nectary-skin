@@ -197,15 +197,39 @@ test('date-picker events', runScreenshotTests('sinch-date-picker', [
     async *fn({ $eval, page }) {
       await subscribeToEvents(page, 'sinch-date-picker-change')
 
-      // Necessary to normalize "type" behaviour
-      const bb = (await $eval((el) => el.nthButtonRect(3)))!
+      const bb = centerRect(await $eval((el) => el.nthButtonRect(3)))!
 
-      await page.mouse.click(bb.x + 1, bb.y + 1)
+      await page.mouse.click(bb.x, bb.y)
 
       expect(
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-date-picker-change', detail: '2022-06-04' },
+      ])
+    },
+  },
+  {
+    name: 'native events range',
+    url: withRange,
+    async *fn({ $eval, page }) {
+      await subscribeToEvents(page, 'sinch-date-picker-change')
+
+      const day1pt = centerRect(await $eval((el) => el.nthButtonRect(3)))!
+      const day2pt = centerRect(await $eval((el) => el.nthButtonRect(5)))!
+
+      // Click range
+      await page.mouse.click(day1pt.x, day1pt.y)
+      await page.mouse.click(day2pt.x, day2pt.y)
+
+      // Click same day twice
+      await page.mouse.click(day1pt.x, day1pt.y)
+      await page.mouse.click(day1pt.x, day1pt.y)
+
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-date-picker-change', detail: '2022-06-04,2022-06-06' },
+        { type: 'sinch-date-picker-change', detail: '2022-06-04,2022-06-04' },
       ])
     },
   },

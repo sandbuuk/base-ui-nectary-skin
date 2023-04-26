@@ -414,10 +414,6 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
       if (this.#date1 !== null && this.#date2 === null) {
         const date2 = isoToDate(dateIso)
 
-        if (areDatesEqual(this.#date1, date2)) {
-          return
-        }
-
         const dateTuple = sortDates([this.#date1, date2])
         const value = packCsv(dateTuple.map(dateToIso))
 

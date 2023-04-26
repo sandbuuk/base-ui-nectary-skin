@@ -91,4 +91,27 @@ test('tooltip events', runScreenshotTests('sinch-tooltip', [
       ])
     },
   },
+  {
+    name: 'native events type fast',
+    url: withFitWidth,
+    async *fn({ page, $eval }) {
+      await subscribeToEvents(page, 'sinch-tooltip-show', 'sinch-tooltip-hide')
+
+      const ct = await centerBB(page.locator('#content'))
+
+      await $eval((el) => el.setAttribute('type', 'fast'))
+
+      await page.mouse.move(ct.x, ct.y)
+      await page.waitForTimeout(400)
+      await page.mouse.move(0, 0)
+      await page.waitForTimeout(300)
+
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-tooltip-show', detail: null },
+        { type: 'sinch-tooltip-hide', detail: null },
+      ])
+    },
+  },
 ]))
