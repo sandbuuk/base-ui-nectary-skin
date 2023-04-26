@@ -1,5 +1,7 @@
-import type { TSinchTooltipOrientation } from './types'
+import type { TSinchTooltipOrientation, TSinchTooltipType } from './types'
 import type { TSinchPopOrientation } from '../pop/types'
+
+export const typeValues: readonly TSinchTooltipType[] = ['fast', 'slow']
 
 export const orientationValues: readonly TSinchTooltipOrientation[] = [
   'top',
@@ -35,7 +37,15 @@ export const getPopOrientation = (orientation: TSinchTooltipOrientation): TSinch
 type TAssertOrientation = (value: string | null) => asserts value is TSinchTooltipOrientation
 
 export const assertOrientation: TAssertOrientation = (value) => {
-  if (value === null || !orientationValues.includes(value as any)) {
+  if (value !== null && !orientationValues.includes(value as any)) {
     throw new Error(`sinch-tooltip: invalid orientation attribute: ${value}`)
+  }
+}
+
+type TAssertType = (value: string | null) => asserts value is TSinchTooltipType
+
+export const assertType: TAssertType = (value) => {
+  if (value !== null && !typeValues.includes(value as any)) {
+    throw new Error(`sinch-tooltip: invalid type attribute: ${value}`)
   }
 }

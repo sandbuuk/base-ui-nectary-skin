@@ -16,13 +16,14 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { TooltipState } from './tooltip-state'
-import { assertOrientation, getPopOrientation, orientationValues } from './utils'
-import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact } from './types'
+import { assertOrientation, assertType, getPopOrientation, orientationValues, typeValues } from './utils'
+import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact, TSinchTooltipType } from './types'
 import type { TSinchPopElement } from '../pop/types'
 import type { TRect } from '../types'
 
 const TIP_SIZE = 8
-const SHOW_DELAY = 1000
+const SHOW_DELAY_SLOW = 1000
+const SHOW_DELAY_FAST = 250
 const HIDE_DELAY = 0
 const ANIMATION_DURATION = 100
 
@@ -60,7 +61,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     this.#shouldReduceMotion = shouldReduceMotion()
 
     this.#tooltipState = new TooltipState({
-      showDelay: SHOW_DELAY,
+      showDelay: SHOW_DELAY_SLOW,
       hideDelay: this.#shouldReduceMotion ? HIDE_DELAY + ANIMATION_DURATION : HIDE_DELAY,
       hideAnimationDuration: this.#shouldReduceMotion ? 0 : ANIMATION_DURATION,
       onShowStart: this.#onStateShowStart,
@@ -94,7 +95,44 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'orientation']
+    return ['text', 'orientation', 'type']
+  }
+
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+    switch (name) {
+      case 'text': {
+        this.#updateText()
+
+        break
+      }
+
+      case 'orientation': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertOrientation(newVal)
+        }
+
+        updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
+
+        if (this.#isOpen()) {
+          this.#resetTipOrientation()
+          this.#updateTipOrientation()
+        }
+
+        break
+      }
+
+      case 'type': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
+
+        this.#tooltipState.updateOptions({
+          showDelay: newVal === 'fast' ? SHOW_DELAY_FAST : SHOW_DELAY_SLOW,
+        })
+
+        break
+      }
+    }
   }
 
   get text() {
@@ -121,37 +159,20 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     updateLiteralAttribute(this, orientationValues, 'orientation', value)
   }
 
+  get type() {
+    return getLiteralAttribute(this, typeValues, 'type', 'slow')
+  }
+
+  set type(value: TSinchTooltipType) {
+    updateLiteralAttribute(this, typeValues, 'type', value)
+  }
+
   get footprintRect(): TRect {
     return this.#$pop.footprintRect
   }
 
   get tooltipRect(): TRect {
     return this.#$pop.popoverRect
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'text': {
-        this.#updateText()
-
-        break
-      }
-
-      case 'orientation': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertOrientation(newVal)
-        }
-
-        updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
-
-        if (this.#isOpen()) {
-          this.#resetTipOrientation()
-          this.#updateTipOrientation()
-        }
-
-        break
-      }
-    }
   }
 
   // Begin hide animation if shown, skipping HIDE_DELAY wait
