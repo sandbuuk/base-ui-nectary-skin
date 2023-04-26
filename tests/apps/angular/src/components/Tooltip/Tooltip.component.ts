@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/tooltip'
+import { TSinchTooltipType } from '@sinch-engage/nectary/tooltip/types'
 
 @Component({
   selector: 'tooltip-component',
@@ -10,6 +11,7 @@ import '@sinch-engage/nectary/tooltip'
 export class TooltipComponent {
   orientation: string | null
   text: string | null
+  type: TSinchTooltipType | null
   isInverted: boolean
 
   constructor() {
@@ -17,6 +19,7 @@ export class TooltipComponent {
     this.orientation = url.searchParams.get('orientation')
     this.text = url.searchParams.get('text')
     this.isInverted = url.searchParams.get('inverted') !== null
+    this.type = url.searchParams.get('type') as TSinchTooltipType
   }
 
   onTooltipShow() {

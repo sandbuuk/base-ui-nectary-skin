@@ -1,6 +1,7 @@
 import type { TRect, TSinchElementReact } from '../types'
 
 export type TSinchTooltipOrientation = 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+export type TSinchTooltipType = 'slow' | 'fast'
 
 export type TSinchTooltipElement = HTMLElement & {
   /** Text */
@@ -11,6 +12,8 @@ export type TSinchTooltipElement = HTMLElement & {
   inverted: boolean,
   /** Orientation, where it *points to* from origin */
   orientation: TSinchTooltipOrientation,
+  /** Type */
+  type: TSinchTooltipType,
   readonly footprintRect: TRect,
   readonly tooltipRect: TRect,
   /** Show event */
@@ -25,6 +28,8 @@ export type TSinchTooltipElement = HTMLElement & {
   setAttribute(name: 'inverted', value: ''): void,
   /** Orientation, where it *points to* from origin */
   setAttribute(name: 'orientation', value: TSinchTooltipOrientation): void,
+  /** Type */
+  setAttribute(name: 'type', value: TSinchTooltipType): void,
 }
 
 export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
@@ -36,6 +41,8 @@ export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
   inverted?: boolean,
   /** Orientation, where it *points to* from origin */
   orientation?: TSinchTooltipOrientation,
+  /** Type */
+  type?: TSinchTooltipType,
   /** Show event handler */
   'on-show'?: (e: CustomEvent<void>) => void,
   /** Hide event handler */

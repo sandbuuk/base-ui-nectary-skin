@@ -19,6 +19,13 @@ export class TooltipState {
     this.#options = options
   }
 
+  updateOptions(options: Partial<TTooltipStateOptions>) {
+    this.#options = {
+      ...this.#options,
+      ...options,
+    }
+  }
+
   show() {
     switch (this.#state) {
       case 'hide': {

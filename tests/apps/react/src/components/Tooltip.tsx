@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import type { TSinchTooltipType } from '@sinch-engage/nectary/tooltip/types'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/tooltip'
 
@@ -9,6 +10,7 @@ type TTooltip = {
 export const Tooltip: FC<TTooltip> = ({ search }) => {
   const text: any = search.get('text')
   const isInverted = search.get('inverted') !== null
+  const type = search.get('type') as TSinchTooltipType ?? undefined
   const orientation: any = search.get('orientation')
   const onTooltipShow = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-tooltip-show')), [])
   const onTooltipHide = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-tooltip-hide')), [])
@@ -17,6 +19,7 @@ export const Tooltip: FC<TTooltip> = ({ search }) => {
     <sinch-tooltip
       orientation={orientation}
       text={text}
+      type={type}
       inverted={isInverted}
       on-show={onTooltipShow}
       on-hide={onTooltipHide}
