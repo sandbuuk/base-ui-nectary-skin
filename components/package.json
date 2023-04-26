@@ -1,6 +1,6 @@
 {
   "name": "@sinch-engage/nectary",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "files": [
     "**/*/*.css",
     "**/*/*.json",

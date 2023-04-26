@@ -1,3 +1,8 @@
+## v1.4.0 (2023-04-26)
+
+* ➕ add `type` attribute to `sinch-tooltip`
+* 🐞 allow selecting same date in a range in `sinch-date-picker`
+
 ## v1.3.3 (2023-04-04)
 
 * 🐞 fix cancelling animation in `sinch-skeleton`
