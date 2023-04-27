@@ -9,19 +9,19 @@
   text-decoration: none;
   color: var(--sinch-sys-color-text-default);
   border-radius: 5px;
-  background-color: var(--sinch-sys-color-container-main-default);
+  background-color: var(--sinch-sys-color-container-transparent-default);
 }
 
 .navigation-link:hover {
-  background-color: var(--sinch-sys-color-container-main-hover);
+  background-color: var(--sinch-sys-color-container-transparent-hover);
 }
 
 .navigation-link:active {
-  background-color: var(--sinch-sys-color-container-main-active);
+  background-color: var(--sinch-sys-color-container-transparent-active);
 }
 
 .navigation-link.selected {
-  background-color: var(--sinch-sys-color-container-complement-secondary-default);
+  background-color: var(--sinch-sys-color-container-complement-secondary-active);
 }
 
 .navigation-link.selected:hover {

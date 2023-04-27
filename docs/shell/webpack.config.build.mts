@@ -145,7 +145,23 @@ const config: TWebpackConfig = {
       },
       {
         test: /\.css$/,
+        resourceQuery: '',
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.css$/i,
+        resourceQuery: '?theme',
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'lazyStyleTag',
+            },
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
       },
     ],
   },

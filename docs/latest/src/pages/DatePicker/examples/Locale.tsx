@@ -1,10 +1,14 @@
 import { useState } from 'react'
-import type { FC } from 'react'
+import type { FC, CSSProperties } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/date-picker'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary-assets/icons/calendar-today'
+
+const inputStyles: CSSProperties = {
+  width: 300,
+}
 
 export const LocaleExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
@@ -34,6 +38,7 @@ export const LocaleExample: FC = () => {
     >
       <sinch-input
         slot="target"
+        style={inputStyles}
         aria-label="Pick date"
         placeholder="YYYY-MM-DD"
         value={value}

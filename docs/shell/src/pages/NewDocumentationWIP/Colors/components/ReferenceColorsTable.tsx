@@ -36,7 +36,7 @@ const headStyle = {
 const tableStyle = {
   width: '100%',
   borderRadius: 14,
-  backgroundColor: '#F8F8F8',
+  backgroundColor: 'var(--sinch-sys-color-container-contrast-secondary-default)',
 }
 
 interface TypeShowMoreButton {
