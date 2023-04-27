@@ -102,11 +102,11 @@
           "foreground": "#303030"
         },
         "secondary": {
+          "default": "#F8F8F8",
           "hover": "#F2F2F2",
           "active": "#E0E0E0",
-          "foreground": "#303030",
-          "default": "#F8F8F8",
-          "disabled": "#F8F8F8"
+          "disabled": "#F8F8F8",
+          "foreground": "#303030"
         }
       },
       "complement": {
@@ -118,25 +118,25 @@
           "foreground": "#242424"
         },
         "secondary": {
-          "foreground": "#242424",
           "default": "#F5FAF6",
           "disabled": "#F5FAF6",
           "hover": "#DCEDE1",
-          "active": "#A7D5C2"
+          "active": "#A7D5C2",
+          "foreground": "#242424"
         },
         "tertiary": {
-          "foreground": "#242424",
           "default": "#DEF2FF",
           "disabled": "#DEF2FF",
           "hover": "#C8E6F9",
-          "active": "#A1D5F5"
+          "active": "#A1D5F5",
+          "foreground": "#242424"
         },
         "quaternary": {
-          "foreground": "#242424",
           "default": "#FFF6F5",
           "disabled": "#FFF6F5",
           "hover": "#FFE8E4",
-          "active": "#FBD5D5"
+          "active": "#FBD5D5",
+          "foreground": "#242424"
         }
       },
       "transparent": {

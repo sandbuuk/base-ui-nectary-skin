@@ -6,8 +6,8 @@
 
 #wrapper {
   border-radius: var(--sinch-comp-card-shape-radius);
-  border: 1px solid var(--sinch-comp-card-color-main-default-border-initial);
-  background-color: var(--sinch-comp-card-color-main-default-background-initial);
+  border: 1px solid var(--sinch-comp-card-color-white-default-border-initial);
+  background-color: var(--sinch-comp-card-color-white-default-background-initial);
   box-shadow: var(--sinch-comp-card-shadow-initial);
   overflow: hidden;
 }
@@ -36,7 +36,7 @@
 
 #label {
   --sinch-comp-text-font: var(--sinch-comp-card-font-label);
-  --sinch-global-color-text: var(--sinch-comp-card-color-main-default-text-title);
+  --sinch-global-color-text: var(--sinch-comp-card-color-white-default-text-title);
 }
 
 #label:empty {
@@ -57,7 +57,7 @@
   min-width: 0;
 
   --sinch-comp-title-font: var(--sinch-comp-card-font-title);
-  --sinch-global-color-text: var(--sinch-comp-card-color-main-default-text-title);
+  --sinch-global-color-text: var(--sinch-comp-card-color-white-default-text-title);
 }
 
 #description {
@@ -67,7 +67,7 @@
   overflow-y: auto;
 
   --sinch-comp-text-font: var(--sinch-comp-card-font-description);
-  --sinch-global-color-text: var(--sinch-comp-card-color-main-default-text-description);
+  --sinch-global-color-text: var(--sinch-comp-card-color-white-default-text-description);
 }
 
 #description:empty {
@@ -81,7 +81,7 @@
 :host([disabled]) #label,
 :host([disabled]) #caption,
 :host([disabled]) #description {
-  --sinch-global-color-text: var(--sinch-comp-card-color-main-disabled-text-initial);
+  --sinch-global-color-text: var(--sinch-comp-card-color-white-disabled-text-initial);
 }
 
 slot[name="action"]::slotted(*) {
