@@ -110,7 +110,23 @@ const config: Configuration = {
       },
       {
         test: /\.css$/i,
+        resourceQuery: '',
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.css$/i,
+        resourceQuery: '?theme',
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'lazyStyleTag',
+            },
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
       },
     ],
   },

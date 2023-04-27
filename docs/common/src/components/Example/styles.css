@@ -1,6 +1,6 @@
 .example-container {
   padding: 24px 16px;
-  background-color: var(--sinch-sys-color-container-contrast-default);
+  background-color: var(--sinch-sys-color-container-contrast-primary-default);
   border-radius: var(--sinch-sys-shape-radius-l);
 }
 

@@ -1,5 +1,6 @@
+import darkThemeCss from '@sinch-engage/nectary-theme-dark/index.css?theme'
 import { Loading, QueryRouter } from 'docs-common'
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ComponentsList } from '../ComponentsList'
 import { ComponentsPage } from '../ComponentsPage'
@@ -9,18 +10,36 @@ import { NavigationList } from '../NavigationList'
 import { SidebarFooter } from '../SidebarFooter'
 import { SidebarTitle } from '../SidebarTitle'
 import type { FC } from 'react'
+import { useThemeName } from '~/context/ThemeNameProvider'
 import { useOnRouteChange } from '~/hooks'
 import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
 import { LandingPage } from '~/pages/Landing'
 import { ColorsPage } from '~/pages/NewDocumentationWIP/Colors'
 import { NotFoundPage } from '~/pages/NotFound'
-import { AppStateProvider } from '~/store'
 import './styles.css'
+import '@sinch-engage/nectary-theme-base'
 
-const AppImpl: FC = () => {
+const basename = location.pathname.replace(/\/$/, '')
+
+export const App: FC = () => {
+  const onRouteChange = useOnRouteChange()
+  const { themeName } = useThemeName()
+
+  useEffect(() => {
+    if (themeName === 'dark') {
+      darkThemeCss.use()
+    } else {
+      darkThemeCss.unuse()
+    }
+
+    return () => {
+      darkThemeCss.unuse()
+    }
+  }, [themeName])
+
   return (
-    <>
+    <QueryRouter basename={basename} onChange={onRouteChange}>
       <div id="app-sidebar">
         <div className="app-sidebar-fixed">
           <SidebarTitle/>
@@ -32,6 +51,7 @@ const AppImpl: FC = () => {
                 <NavigationList>
                   <NavigationItem path="/intro" text="Intro"/>
                   <NavigationItem path="/faq" text="FAQ"/>
+                  <NavigationItem path="/colors" text="Colors"/>
                 </NavigationList>
               </NavigationGroup>
               <NavigationGroup text="Components">
@@ -56,20 +76,6 @@ const AppImpl: FC = () => {
           </Routes>
         </Suspense>
       </div>
-    </>
-  )
-}
-
-const basename = location.pathname.replace(/\/$/, '')
-
-export const App: FC = () => {
-  const onRouteChange = useOnRouteChange()
-
-  return (
-    <QueryRouter basename={basename} onChange={onRouteChange}>
-      <AppStateProvider>
-        <AppImpl/>
-      </AppStateProvider>
     </QueryRouter>
   )
 }

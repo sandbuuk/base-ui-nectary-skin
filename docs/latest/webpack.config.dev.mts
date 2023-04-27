@@ -142,6 +142,24 @@ const config: Configuration = {
           },
         ],
       },
+      {
+        test: /\.css$/i,
+        resourceQuery: '?theme',
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'lazyStyleTag',
+              insert: (element: HTMLStyleElement, options: Record<string, any>) => {
+                options.target.appendChild(element)
+              },
+            },
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
+      },
     ],
   },
   devtool: 'cheap-module-source-map',
