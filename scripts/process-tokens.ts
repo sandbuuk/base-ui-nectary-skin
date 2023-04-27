@@ -387,29 +387,36 @@ for (const { key, jsonObj, isComponent } of visitThemeSections(SELECTED_THEME_JS
 }
 
 /* Process index.ts */
-let importsData = ''
+let indexTsFileData = ''
+let indexCssFileData = ''
 
 // Base theme only: import additional sections like 'fonts'
 if (isBaseThemeKey(SELECTED_THEME_KEY)) {
   for (const add of ADDITIONAL_SECTION_IMPORTS) {
-    importsData += `import './${add}.css'\n`
+    indexTsFileData += `import './${add}.css'\n`
+    indexCssFileData += `@import "./${add}.css";\n`
   }
 }
 
 for (const { key, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
-  importsData += isComponent
+  indexTsFileData += isComponent
     ? `import './${COMPONENTS_OUTDIR}/${key}.css'\n`
     : `import './${key}.css'\n`
+  indexCssFileData += isComponent
+    ? `@import "./${COMPONENTS_OUTDIR}/${key}.css";\n`
+    : `@import "./${key}.css";\n`
 }
 
 // Base theme only: import additional components 'emoji', 'flag', 'icon'
 if (isBaseThemeKey(SELECTED_THEME_KEY)) {
   for (const add of ADDITIONAL_COMPONENTS_IMPORTS) {
-    importsData += `import './${COMPONENTS_OUTDIR}/${add}.css'\n`
+    indexTsFileData += `import './${COMPONENTS_OUTDIR}/${add}.css'\n`
+    indexCssFileData += `@import "./${COMPONENTS_OUTDIR}/${add}.css";\n`
   }
 }
 
-await writeData(OUTDIR, 'index.ts', importsData)
+await writeData(OUTDIR, 'index.ts', indexTsFileData)
+await writeData(OUTDIR, 'index.css', indexCssFileData)
 
 /* Process section json files, e.g. ref.json, sys.json */
 for (const { key: sectionNameKey, jsonObj, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
