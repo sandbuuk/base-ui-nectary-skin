@@ -169,7 +169,7 @@ const config: TWebpackConfig = {
     hints: false,
   },
   optimization: {
-    minimize: false,
+    minimize: true,
     minimizer: [
       // @ts-expect-error
       new TerserPlugin({

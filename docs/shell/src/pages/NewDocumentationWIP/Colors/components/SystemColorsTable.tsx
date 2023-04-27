@@ -1,4 +1,4 @@
-import { lazyScrollIntoView } from 'docs-common'
+import SystemColorsTableMarkDown from '../markdown/SystemColorsTable.md'
 import colors from './colorsSystem.json'
 import '@sinch-engage/nectary/table'
 import '@sinch-engage/nectary/table-head'
@@ -21,8 +21,6 @@ const tableStyle = {
   borderRadius: 14,
   backgroundColor: 'var(--sinch-sys-color-container-contrast-secondary-default)',
 }
-
-const SystemColorsTableMarkDown = lazyScrollIntoView(() => import(/* webpackChunkName: "Colors" */'../markdown/SystemColorsTable.md'))
 
 export const SystemColorsTable = () => {
   return (

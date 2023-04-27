@@ -5,14 +5,12 @@ import '@sinch-engage/nectary/table-head-cell'
 import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-cell'
-import { lazyScrollIntoView } from 'docs-common'
 import { useEffect, useState } from 'react'
+import ReferenceColorsTableMarkDown from '../markdown/ReferenceColorsTable.md'
 import { SpacingY } from '~/pages/Landing/components'
 import '@sinch-engage/nectary/color-swatch'
 import '@sinch-engage/nectary-assets/icons/expand-more'
 import '@sinch-engage/nectary-assets/icons/expand-less'
-
-const ReferenceColorsTableMarkDown = lazyScrollIntoView(() => import(/* webpackChunkName: "Colors" */'../markdown/ReferenceColorsTable.md'))
 
 const colorMainNames = Object.keys(refJson.color.main) as unknown as (keyof typeof refJson.color.main)[]
 const colorsMap = colorMainNames.reduce((res, name) => {

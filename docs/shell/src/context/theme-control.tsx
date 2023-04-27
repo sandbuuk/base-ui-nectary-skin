@@ -1,26 +1,25 @@
+import { DEFAULT_THEME_NAME, ThemeNameProvider } from 'docs-common'
 import { createContext, useCallback, useContext, useState } from 'react'
+import type { TThemeName } from 'docs-common'
 import type { FC, PropsWithChildren } from 'react'
 
-export type TThemeName = 'light' | 'dark'
-
-const DEFAULT_THEME_NAME: TThemeName = 'light'
-
-type TThemeNameContext = {
+type TThemeControlContext = {
   themeName: TThemeName,
   setThemeName: (theme: TThemeName) => void,
 }
 
-const ThemeNameContext = createContext<TThemeNameContext>({
+const ThemeNameContext = createContext<TThemeControlContext>({
   themeName: DEFAULT_THEME_NAME,
   setThemeName: () => {},
 })
 
 const bus = new BroadcastChannel('MESSAGE_BUS')
 
-export const ThemeNameProvider: FC<PropsWithChildren> = ({ children }) => {
+export const ThemeControlProvider: FC<PropsWithChildren> = ({ children }) => {
   const [themeName, setThemeName] = useState<TThemeName>(() => {
     return localStorage.getItem('themeName') as TThemeName ?? DEFAULT_THEME_NAME
   })
+
   const setThemeNameBus = useCallback((themeName: TThemeName) => {
     setThemeName(themeName)
     localStorage.setItem('themeName', themeName)
@@ -32,7 +31,9 @@ export const ThemeNameProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <ThemeNameContext.Provider value={{ themeName, setThemeName: setThemeNameBus }}>
-      {children}
+      <ThemeNameProvider initialThemeName={themeName}>
+        {children}
+      </ThemeNameProvider>
     </ThemeNameContext.Provider>
   )
 }

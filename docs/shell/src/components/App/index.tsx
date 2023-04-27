@@ -10,7 +10,7 @@ import { NavigationList } from '../NavigationList'
 import { SidebarFooter } from '../SidebarFooter'
 import { SidebarTitle } from '../SidebarTitle'
 import type { FC } from 'react'
-import { useThemeName } from '~/context/ThemeNameProvider'
+import { useThemeName } from '~/context/theme-control'
 import { useOnRouteChange } from '~/hooks'
 import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
@@ -49,6 +49,7 @@ export const App: FC = () => {
             <NavigationList>
               <NavigationGroup text="About">
                 <NavigationList>
+                  <NavigationItem path="/" text="Home"/>
                   <NavigationItem path="/intro" text="Intro"/>
                   <NavigationItem path="/faq" text="FAQ"/>
                   <NavigationItem path="/colors" text="Colors"/>

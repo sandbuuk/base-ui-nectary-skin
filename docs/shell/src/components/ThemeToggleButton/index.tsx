@@ -1,7 +1,7 @@
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icon'
 import './styles.css'
-import { useThemeName } from '~/context/ThemeNameProvider'
+import { useThemeName } from '~/context/theme-control'
 
 export const ThemeToggleButton = () => {
   const { themeName, setThemeName } = useThemeName()

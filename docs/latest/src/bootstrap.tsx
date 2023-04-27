@@ -1,12 +1,13 @@
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
 import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
-import baseThemeCss from '@sinch-engage/nectary-theme-base/index.css?theme'
+import '@sinch-engage/nectary-theme-base'
 import darkThemeCss from '@sinch-engage/nectary-theme-dark/index.css?theme'
-import { DocumentProvider } from 'docs-common'
+import { DocumentProvider, ThemeNameProvider } from 'docs-common'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from './components/App/App'
 import { createShadowRoot } from './utils'
+import type { TThemeName } from 'docs-common'
 
 export * from './entries'
 
@@ -20,7 +21,7 @@ setNectaryRegistry(registry)
 setAssetsRegistry(registry)
 
 type TBootstrapOptions = {
-  themeName: string,
+  themeName: TThemeName,
 }
 
 export const bootstrap = (el: HTMLElement, { themeName }: TBootstrapOptions) => {
@@ -31,10 +32,9 @@ export const bootstrap = (el: HTMLElement, { themeName }: TBootstrapOptions) => 
   const abortController = new AbortController()
 
   let readyPromise: Promise<any> = Promise.resolve()
+  let currentThemeName = themeName
 
-  baseThemeCss.use({ target: shadowRoot })
-
-  if (themeName === 'dark') {
+  if (currentThemeName === 'dark') {
     darkThemeCss.use({ target: shadowRoot })
   }
 
@@ -42,12 +42,14 @@ export const bootstrap = (el: HTMLElement, { themeName }: TBootstrapOptions) => 
     if (msg.data.type === 'THEME') {
       switch (msg.data.payload) {
         case 'dark': {
+          currentThemeName = msg.data.payload
           darkThemeCss.use({ target: shadowRoot })
 
           break
         }
 
         case 'light': {
+          currentThemeName = msg.data.payload
           darkThemeCss.unuse()
 
           break
@@ -84,7 +86,9 @@ export const bootstrap = (el: HTMLElement, { themeName }: TBootstrapOptions) => 
   reactRoot.render(
     <StrictMode>
       <DocumentProvider value={shadowRoot as any as Document}>
-        <App/>
+        <ThemeNameProvider initialThemeName={themeName}>
+          <App/>
+        </ThemeNameProvider>
       </DocumentProvider>
     </StrictMode>
   )
@@ -94,6 +98,10 @@ export const bootstrap = (el: HTMLElement, { themeName }: TBootstrapOptions) => 
     unmount() {
       // console.log('unmount', pkg.version)
       abortController.abort()
+
+      if (currentThemeName === 'dark') {
+        darkThemeCss.unuse()
+      }
 
       requestAnimationFrame(() => {
         reactRoot.unmount()

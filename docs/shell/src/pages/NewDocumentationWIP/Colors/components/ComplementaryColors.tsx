@@ -1,6 +1,4 @@
-import { lazyScrollIntoView } from 'docs-common'
-
-const ComplementaryColorsMarkDown = lazyScrollIntoView(() => import(/* webpackChunkName: "Colors" */'../markdown/ComplementaryColors.md'))
+import ComplementaryColorsMarkDown from '../markdown/ComplementaryColors.md'
 
 export const ComplementaryColors = () => (
   <div id="small-grid">

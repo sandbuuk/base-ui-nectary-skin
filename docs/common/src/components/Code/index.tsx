@@ -33,7 +33,7 @@ export const Code: FC<TCode> = ({ src }) => {
           <sinch-icon-keyboard-arrow-down slot="icon" class="code-toolbar-dropdown-icon"/>
         </sinch-icon-button>
       </div>
-      <SyntaxHighlighter language="tsx" src={src} isExample/>
+      <SyntaxHighlighter language="tsx" src={src} shouldShowLineNumbers/>
     </div>
   )
 }

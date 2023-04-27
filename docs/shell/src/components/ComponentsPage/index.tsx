@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { versions } from '../../utils'
 import type { FC } from 'react'
 import './styles.css'
-import { useThemeName } from '~/context/ThemeNameProvider'
+import { useThemeName } from '~/context/theme-control'
 import { useNavigateVersion } from '~/hooks'
 
 export const ComponentsPage: FC = () => {

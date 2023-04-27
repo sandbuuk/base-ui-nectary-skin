@@ -3,7 +3,7 @@ import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from './components/App'
-import { ThemeNameProvider } from './context/ThemeNameProvider'
+import { ThemeControlProvider } from './context/theme-control'
 import { AppStateProvider } from './store'
 
 const rootEl = document.querySelector('#app')!
@@ -14,9 +14,9 @@ setAssetsRegistry(window.customElements)
 createRoot(rootEl).render(
   <StrictMode>
     <AppStateProvider>
-      <ThemeNameProvider>
+      <ThemeControlProvider>
         <App/>
-      </ThemeNameProvider>
+      </ThemeControlProvider>
     </AppStateProvider>
   </StrictMode>
 )
