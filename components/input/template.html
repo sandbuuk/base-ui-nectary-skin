@@ -121,18 +121,6 @@
   padding-left: calc(var(--sinch-global-size-icon) + 20px);
 }
 
-#clear {
-  margin-left: -10px;
-  margin-right: 4px;
-  display: none;
-}
-
-/* Shows clear button */
-:host([value]:not([value=""])) #clear[data-tooltip],
-:host([value]:not([value=""])) #clear[data-focus] {
-  display: block;
-}
-
 #right {
   display: flex;
   flex-direction: row;
@@ -171,11 +159,6 @@
   </div>
   <input id="input" type="text"/>
   <div id="border"></div>
-  <sinch-stop-events events="keydown">
-    <sinch-icon-button id="clear" aria-label="Clear input value">
-      <sinch-icon id="icon-clear" slot="icon" name="close"></sinch-icon>
-    </sinch-icon-button>
-  </sinch-stop-events>
   <div id="right">
     <slot name="right"></slot>
   </div>

@@ -41,6 +41,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
   #$search: TSinchInputElement
+  #$searchClear: HTMLElement
   #$notFound: HTMLElement
   #controller: AbortController | null = null
   #searchDebounce
@@ -55,6 +56,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.#$optionSlot = shadowRoot.querySelector('slot')!
     this.#$listbox = shadowRoot.querySelector('#listbox')!
     this.#$search = shadowRoot.querySelector('#search')!
+    this.#$searchClear = shadowRoot.querySelector('#search-clear')!
     this.#$notFound = shadowRoot.querySelector('#not-found')!
 
     this.#searchDebounce = debounceTimeout(200)(this.#updateSearch)
@@ -75,6 +77,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.#$listbox.addEventListener('mousedown', this.#onListboxMousedown, options)
     this.#$listbox.addEventListener('click', this.#onListboxClick, options)
     this.#$search.addEventListener('-change', this.#onSearchChange as any, options)
+    this.#$searchClear.addEventListener('-click', this.#onSearchClearClick, options)
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
     subscribeContext(this, 'keydown', this.#onContextKeyDown, this.#controller.signal)
@@ -178,6 +181,14 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   #onSearchChange = (e: CustomEvent<string>) => {
     this.#$search.value = e.detail
     this.#searchDebounce.fn()
+    setClass(this.#$searchClear, 'active', e.detail.length > 0)
+  }
+
+  #onSearchClearClick = () => {
+    this.#$search.value = ''
+    this.#$search.focus()
+    this.#searchDebounce.fn()
+    setClass(this.#$searchClear, 'active', false)
   }
 
   #updateSearch = () => {

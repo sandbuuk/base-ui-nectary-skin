@@ -20,8 +20,12 @@
   padding: 0 12px;
 }
 
-#input {
+#search {
   flex: 1;
+}
+
+#search-clear:not(.active) {
+  display: none;
 }
 
 #list-wrapper {
@@ -61,8 +65,11 @@
 
 <div id="wrapper">
   <div id="toolbar">
-    <sinch-input id="input" size="l" aria-label="Search emojis">
+    <sinch-input id="search" size="l" aria-label="Search emojis">
       <sinch-icon id="icon-search" slot="icon" name="search"></sinch-icon>
+      <sinch-icon-button id="search-clear" slot="right" aria-label="Clear">
+        <sinch-icon slot="icon" name="close"></sinch-icon>
+      </sinch-icon-button>
     </sinch-input>
     <sinch-popover id="skin-popover" orientation="bottom-left" aria-label="Emoji skin tone select">
       <sinch-icon-button id="skin-button" slot="target" size="l" aria-label="Select emoji skin tones">

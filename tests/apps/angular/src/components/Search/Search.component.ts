@@ -1,10 +1,12 @@
-import { Component } from '@angular/core'
+import { Component, ElementRef, ViewChild } from '@angular/core'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary-assets/icons/search'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/icon'
+import { TSinchInputElement } from '@sinch-engage/nectary/input/types'
 
 @Component({
   selector: 'search-component',
@@ -14,6 +16,7 @@ import '@sinch-engage/nectary-assets/icons/search'
 
 export class SearchComponent {
   isOpen = false
+  isClearActive = false
   value: string
   maxVisibleItems: number | null
   options = [
@@ -22,6 +25,9 @@ export class SearchComponent {
     'Option 3',
     'Option 4',
   ]
+
+  //@ts-expect-error
+  @ViewChild('input') inputRef: ElementRef<TSinchInputElement>;
 
   constructor() {
     const url = new URL(location.href)
@@ -32,10 +38,17 @@ export class SearchComponent {
   }
   onChange(e: Event) {
     this.value = (e as CustomEvent).detail
+    this.isClearActive = this.value.length > 0
+  }
+  onClearClick() {
+    this.value = ''
+    this.isClearActive = false
+    this.inputRef.nativeElement.focus()
   }
   onFocus() {
     window.dispatchEvent(new CustomEvent('sinch-search-focus'))
     this.isOpen = true
+    this.isClearActive = this.value.length > 0
   }
   onBlur() {
     window.dispatchEvent(new CustomEvent('sinch-search-blur'))
@@ -52,6 +65,7 @@ export class SearchComponent {
 
     this.value = text
     this.isOpen = false
+    this.isClearActive = this.value.length > 0
   }
   onStopEvent(e: Event) {
     e.stopPropagation()

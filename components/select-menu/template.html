@@ -17,6 +17,10 @@
   display: block;
 }
 
+#search-clear:not(.active) {
+  display: none;
+}
+
 #not-found {
   display: flex;
   align-items: center;
@@ -42,6 +46,9 @@
 
 <sinch-input id="search" size="s" placeholder="Search">
   <sinch-icon id="icon-search" slot="icon" name="search"></sinch-icon>
+  <sinch-icon-button id="search-clear" slot="right">
+    <sinch-icon slot="icon" name="close"></sinch-icon>
+  </sinch-icon-button>
 </sinch-input>
 <div id="not-found">
   <sinch-text type="m">No results</sinch-text>

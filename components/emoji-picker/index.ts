@@ -67,7 +67,8 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   #$tabs: TSinchTabsElement
-  #$input: TSinchInputElement
+  #$searchInput: TSinchInputElement
+  #$searchClearButton: HTMLElement
   #$skinPopover: TSinchPopoverElement
   #$skinMenu: TSinchColorMenuElement
   #$skinSwatch: TSinchColorSwatchElement
@@ -89,7 +90,8 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
 
     this.#$sh = shadowRoot
     this.#$tabs = shadowRoot.querySelector('#tabs')!
-    this.#$input = shadowRoot.querySelector('#input')!
+    this.#$searchInput = shadowRoot.querySelector('#search')!
+    this.#$searchClearButton = shadowRoot.querySelector('#search-clear')!
     this.#$skinPopover = shadowRoot.querySelector('#skin-popover')!
     this.#$skinMenu = shadowRoot.querySelector('#skin-menu')!
     this.#$skinSwatch = shadowRoot.querySelector('#skin-swatch')!
@@ -105,7 +107,8 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     const { signal } = this.#controller
 
     this.#$tabs.addEventListener('-change', this.#onTabsChange as any, { signal })
-    this.#$input.addEventListener('-change', this.#onSearchChange as any, { signal })
+    this.#$searchInput.addEventListener('-change', this.#onSearchChange as any, { signal })
+    this.#$searchClearButton.addEventListener('-click', this.#onSearchClearClick, { signal })
     this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
     this.#$skinButton.addEventListener('-click', this.#onSkinButtonClick, { signal })
     this.#$skinPopover.addEventListener('-close', this.#onSkinPopoverClose, { signal })
@@ -130,11 +133,11 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   }
 
   get searchInputRect(): TRect {
-    return getRect(this.#$input)
+    return getRect(this.#$searchInput)
   }
 
   get searchClearButtonRect(): TRect {
-    return this.#$input.clearButtonRect
+    return getRect(this.#$searchClearButton)
   }
 
   nthSkinToneRect(index: number): TRect | null {
@@ -202,13 +205,21 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     const value = e.detail
 
     updateAttribute(this.#$tabs, 'value', value)
-    updateAttribute(this.#$input, 'value', '')
+    updateAttribute(this.#$searchInput, 'value', '')
     this.#updateEmojis()
   }
 
   #onSearchChange = (e: CustomEvent<string>) => {
-    this.#$input.value = e.detail
+    this.#$searchInput.value = e.detail
     this.#searchDebounce.fn()
+    setClass(this.#$searchClearButton, 'active', e.detail.length > 0)
+  }
+
+  #onSearchClearClick = () => {
+    this.#$searchInput.value = ''
+    this.#$searchInput.focus()
+    this.#searchDebounce.fn()
+    setClass(this.#$searchClearButton, 'active', false)
   }
 
   #onChangeReactHandler = (e: Event) => {
@@ -226,7 +237,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   }
 
   #updateSearch = () => {
-    const value = this.#$input.value
+    const value = this.#$searchInput.value
 
     if (value.length < MIN_SEARCH_LENGTH) {
       if (this.#isSearchMode()) {
@@ -316,7 +327,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   }
 
   #updateSearchEmojis() {
-    const searchValue = this.#$input.value
+    const searchValue = this.#$searchInput.value
 
     if (searchValue.length < MIN_SEARCH_LENGTH) {
       return
