@@ -10,7 +10,6 @@ type TTooltip = {
 
 export const Tooltip: FC<TTooltip> = ({ search }) => {
   const text: any = search.get('text')
-  const isInverted = search.get('inverted') !== null
   const type = search.get('type') as TSinchTooltipType ?? undefined
   const orientation: any = search.get('orientation')
   const onTooltipShow = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-tooltip-show')), [])
@@ -21,7 +20,6 @@ export const Tooltip: FC<TTooltip> = ({ search }) => {
       orientation={orientation}
       text={text}
       type={type}
-      inverted={isInverted}
       on-show={onTooltipShow}
       on-hide={onTooltipHide}
     >

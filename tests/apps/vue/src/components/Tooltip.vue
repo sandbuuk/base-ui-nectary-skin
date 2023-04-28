@@ -3,7 +3,6 @@
     :orientation="orientation"
     :text="text"
     :type="type"
-    :inverted="isInverted"
     @--show="onTooltipShow"
     @--hide="onTooltipHide"
   >
