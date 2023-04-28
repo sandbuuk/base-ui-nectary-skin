@@ -2,8 +2,7 @@
   <sinch-card
     :caption="header"
     :text="text"
-    :label="label"
-    :disabled="isDisabled">
+    :label="label">
     <sinch-icon-branded-chatbot v-if="hasIcon" slot="icon"></sinch-icon-branded-chatbot>
     <sinch-illustration-phone-and-cat v-if="hasIllustration" size="290" :background="background" valign="top" slot="illustration"></sinch-illustration-phone-and-cat>
     <sinch-button v-if="buttonText !== null" type="primary" :text="buttonText" slot="action"></sinch-button>
@@ -31,9 +30,6 @@ export default {
     },
     label() {
       return this.search.get('label')
-    },
-    isDisabled() {
-      return this.search.get('disabled') !== null
     },
     hasIcon() {
       return this.search.get('icon') !== null

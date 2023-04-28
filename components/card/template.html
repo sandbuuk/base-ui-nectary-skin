@@ -74,16 +74,6 @@
   display: none;
 }
 
-:host([disabled]) #illustration-wrapper {
-  opacity: 0.6;
-}
-
-:host([disabled]) #label,
-:host([disabled]) #caption,
-:host([disabled]) #description {
-  --sinch-global-color-text: var(--sinch-comp-card-color-white-disabled-text-initial);
-}
-
 slot[name="action"]::slotted(*) {
   margin-top: 20px;
   align-self: flex-start;

@@ -8,13 +8,17 @@
     <sinch-field slot="target" label="Label">
       <sinch-input
         slot="input"
+        ref="input"
         aria-label="Search input"
         placeholder="Search input"
         :value="value"
         @--change="onChange"
         @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon-search slot="icon"></sinch-icon-search>
+        <sinch-icon slot="icon" name="search"></sinch-icon>
+        <sinch-icon-button v-if="isClearActive" slot="right" @--click="onClearClick">
+          <sinch-icon slot="icon" name="close"></sinch-icon>
+        </sinch-icon-button>
       </sinch-input>
     </sinch-field>
     <sinch-action-menu slot="content" aria-label="Search autocomplete">
@@ -36,23 +40,29 @@ import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/search'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@sinch-engage/nectary/icon'
 
 export default {
   methods: {
     onChange(e) {
       this.value = e.detail
+      this.isClearActive = e.detail.length > 0
     },
     onFocus() {
       window.dispatchEvent(new CustomEvent('sinch-search-focus'))
       this.isOpen = true
+      this.isClearActive = this.value.length > 0
     },
     onBlur() {
       window.dispatchEvent(new CustomEvent('sinch-search-blur'))
     },
     onClose() {
       this.isOpen = false
+    },
+    onClearClick() {
+      this.value = ''
+      this.isClearActive = false
+      this.$refs.input.focus()
     },
     onOptionClick(text) {
       window.dispatchEvent(new CustomEvent('sinch-search-change', { detail: text }))
@@ -68,6 +78,7 @@ export default {
     return {
       value: this.search.get('value') ?? '',
       isOpen: false,
+      isClearActive: false,
       options: [
         'Option 1 value long long long',
         'Option 2',
