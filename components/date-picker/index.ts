@@ -248,10 +248,6 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     }
   }
 
-  get nodeName() {
-    return 'select'
-  }
-
   set locale(value: string) {
     updateAttribute(this, 'locale', value)
   }

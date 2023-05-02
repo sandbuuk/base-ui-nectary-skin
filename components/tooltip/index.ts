@@ -150,7 +150,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     updateLiteralAttribute(this, orientationValues, 'orientation', value)
   }
 
-  get type() {
+  get type(): TSinchTooltipType {
     return getLiteralAttribute(this, typeValues, 'type', 'slow')
   }
 

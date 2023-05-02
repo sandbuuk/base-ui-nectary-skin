@@ -96,14 +96,6 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
     }
   }
 
-  get type() {
-    return 'text'
-  }
-
-  get nodeName() {
-    return 'input'
-  }
-
   set checked(isChecked: boolean) {
     updateBooleanAttribute(this, 'checked', isChecked)
   }

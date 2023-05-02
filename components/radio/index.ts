@@ -48,10 +48,6 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     return ['value', 'invalid']
   }
 
-  get nodeName() {
-    return 'select'
-  }
-
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }

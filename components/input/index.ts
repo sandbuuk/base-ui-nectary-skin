@@ -192,10 +192,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     }
   }
 
-  get nodeName() {
-    return 'input'
-  }
-
   set type(value: TSinchInputType) {
     updateAttribute(this, 'type', value)
   }

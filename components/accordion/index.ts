@@ -48,10 +48,6 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
     this.removeEventListener('-change', this.#onChangeReactHandler)
   }
 
-  get nodeName() {
-    return 'select'
-  }
-
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }

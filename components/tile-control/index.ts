@@ -75,10 +75,6 @@ defineCustomElement('sinch-tile-control', class extends NectaryElement {
     }
   }
 
-  get nodeName() {
-    return 'select'
-  }
-
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }

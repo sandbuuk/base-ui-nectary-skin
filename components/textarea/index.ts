@@ -149,10 +149,6 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     }
   }
 
-  get nodeName() {
-    return 'textarea'
-  }
-
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }

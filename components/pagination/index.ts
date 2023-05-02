@@ -74,10 +74,6 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     }
   }
 
-  get nodeName() {
-    return 'select'
-  }
-
   set value(val: number) {
     updateAttribute(this, 'value', val)
   }

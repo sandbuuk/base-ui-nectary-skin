@@ -46,7 +46,7 @@ defineCustomElement('sinch-file-status', class extends NectaryElement {
     this.#$contentSlot.removeEventListener('slotchange', this.#onContentSlotChange)
   }
 
-  get type() {
+  get type(): TSinchFileStatusType {
     return getLiteralAttribute(this, typeValues, 'type')
   }
 

@@ -39,7 +39,7 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
     super.disconnectedCallback()
   }
 
-  get type() {
+  get type(): TSinchAlertType {
     return getLiteralAttribute(this, typeValues, 'type')
   }
 

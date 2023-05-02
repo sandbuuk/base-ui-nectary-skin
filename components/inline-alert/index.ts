@@ -87,7 +87,7 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
     }
   }
 
-  get type() {
+  get type(): TSinchInlineAlertType {
     return getLiteralAttribute(this, typeValues, 'type')
   }
 

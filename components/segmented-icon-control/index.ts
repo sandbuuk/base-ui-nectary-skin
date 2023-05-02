@@ -47,10 +47,6 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
     return ['value']
   }
 
-  get nodeName() {
-    return 'select'
-  }
-
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }

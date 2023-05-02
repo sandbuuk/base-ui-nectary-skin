@@ -54,14 +54,6 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
     }
   }
 
-  get type() {
-    return 'text'
-  }
-
-  get nodeName() {
-    return 'input'
-  }
-
   set value(isChecked: boolean) {
     updateBooleanAttribute(this, 'value', isChecked)
   }

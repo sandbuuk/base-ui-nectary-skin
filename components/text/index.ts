@@ -58,7 +58,7 @@ defineCustomElement('sinch-text', class extends NectaryElement {
     }
   }
 
-  get type() {
+  get type(): TSinchTextType {
     return getLiteralAttribute(this, typeValues, 'type')
   }
 

@@ -82,7 +82,7 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
     }
   }
 
-  get type() {
+  get type(): TSinchToastType {
     return getLiteralAttribute(this, typeValues, 'type')
   }
 

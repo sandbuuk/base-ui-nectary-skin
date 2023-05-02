@@ -196,10 +196,6 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
     }
   }
 
-  get nodeName() {
-    return 'select'
-  }
-
   set value(value: string) {
     updateAttribute(this, 'value', value)
   }
