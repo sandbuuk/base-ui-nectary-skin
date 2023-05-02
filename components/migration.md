@@ -1,6 +1,6 @@
 # Migration
 
-## v1 → v2
+## v2
 
 ### 💥 extract theme into `@sinch-engage/nectary-theme-base` package
 
@@ -61,3 +61,57 @@ import '@sinch-engage/nectary/color-menu'
   mode="circle"
 >
 ```
+
+### 💥 remove clear button from `sinch-input`
+
+Clear button has been extracted from the Input to support different patterns, just like it was before:
+
+```diff
+export const Input: FC = () => {
+  const [state, setState] = useState('')
+  const onChange = (e: CustomEvent<string>) => setState(e.detail)
++ const onClear = () => setState('')
+
+  return (
+    <sinch-input
+      aria-label="Input"
+      placeholder="Placeholder"
+      value={state}
+      on-change={onChange}
+-   />
++   >
++     <sinch-icon-button
++       slot="right"
++       aria-label="Clear"
++       on-click={onClear}
++     >
++       <sinch-icon slot="icon" name="close"/>
++     </sinch-icon-button>
++   </sinch-input>
+  )
+}
+```
+
+### 💥 remove deprecated React handlers
+
+The long deprecated “old” handlers have been finally removed: 
+
+```diff
+export const Input: FC = () => {
+  const [state, setState] = useState('')
+- const onChange = (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => setState(e.nativeEvent.detail)
++ const onChange = (e: CustomEvent<string>) => setState(e.detail)
+
+  return (
+    <sinch-input
+      aria-label="Input"
+      placeholder="Placeholder"
+      value={state}
+-     onChange={onChange}
++     on-change={onChange}
+    />
+  )
+}
+```
+
+See [Why it's on-change instead of onChange handler in React?](https://sinch.gitlab.io/sinch-projects/applications/teams/nectary/components/docs/?version=1.4.x&path=/faq#why-it-s-on-change-instead-of-on-change-handler-in-react) for more details.
