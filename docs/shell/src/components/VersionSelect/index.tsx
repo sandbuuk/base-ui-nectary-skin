@@ -6,6 +6,7 @@ import '@sinch-engage/nectary/select-menu-option'
 import type { FC } from 'react'
 import { useNavigateVersion } from '~/hooks'
 import { versionKeys } from '~/utils/verions'
+import './styles.css'
 
 type TVersionSelect = {}
 
@@ -17,7 +18,7 @@ export const VersionSelect: FC<TVersionSelect> = () => {
     <sinch-popover
       open={isOpen}
       modal
-      orientation="bottom"
+      orientation="top"
       aria-label="version dropdown"
       on-close={() => setOpen(false)}
     >

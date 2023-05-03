@@ -8,7 +8,7 @@ import { NavigationGroup } from '../NavigationGroup'
 import { NavigationItem } from '../NavigationItem'
 import { NavigationList } from '../NavigationList'
 import { SidebarFooter } from '../SidebarFooter'
-import { SidebarTitle } from '../SidebarTitle'
+import { SidebarHeader } from '../SidebarHeader'
 import type { FC } from 'react'
 import { useThemeName } from '~/context/theme-control'
 import { useOnRouteChange } from '~/hooks'
@@ -42,7 +42,7 @@ export const App: FC = () => {
     <QueryRouter basename={basename} onChange={onRouteChange}>
       <div id="app-sidebar">
         <div className="app-sidebar-fixed">
-          <SidebarTitle/>
+          <SidebarHeader/>
         </div>
         <div id="app-sidebar-scroll" className="scrollable">
           <div id="app-sidebar-scroll-content">
