@@ -6,11 +6,10 @@ import './illustrations/token-explanation'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary-assets/icons/open-in-new'
 import { MDXProvider } from '@mdx-js/react'
-import { commonMdxComponents, lazyScrollIntoView } from 'docs-common'
+import { commonMdxComponents } from 'docs-common'
+import MainDocumentMarkDown from './markdown/mainDocument.mdx'
 
-const MainDocumentMarkDown = lazyScrollIntoView(() => import(/* webpackChunkName: "Colors" */'./markdown/mainDocument.mdx'))
-
-export const ColorsPage = () => {
+const ColorsPage = () => {
   return (
     <MDXProvider components={commonMdxComponents}>
       <div id="page-wrapper">
@@ -23,3 +22,5 @@ export const ColorsPage = () => {
     </MDXProvider>
   )
 }
+
+export default ColorsPage

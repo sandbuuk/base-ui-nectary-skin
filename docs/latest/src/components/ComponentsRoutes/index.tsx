@@ -1,4 +1,4 @@
-import { lazyScrollIntoView, Loading, SimpleLayout, TabsLayout } from 'docs-common'
+import { lazyScrollIntoView, Loading, TabsLayout } from 'docs-common'
 import { memo, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { NotFoundPage } from '../NotFound'
@@ -32,10 +32,7 @@ export const ComponentsRoutes = memo(() => {
           )
         })}
       </Route>
-      <Route
-        path="/components/_"
-        element={<SimpleLayout/>}
-      >
+      <Route path="/components/_">
         {getPagesRoutes().map(({ key, route }) => {
           const Component = lazyScrollIntoView(() => pagesReq(key))
 

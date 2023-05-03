@@ -15,7 +15,6 @@ import { useOnRouteChange } from '~/hooks'
 import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
 import { LandingPage } from '~/pages/Landing'
-import { ColorsPage } from '~/pages/NewDocumentationWIP/Colors'
 import { NotFoundPage } from '~/pages/NotFound'
 import './styles.css'
 import '@sinch-engage/nectary-theme-base'
@@ -52,7 +51,6 @@ export const App: FC = () => {
                   <NavigationItem path="/" text="Home"/>
                   <NavigationItem path="/intro" text="Intro"/>
                   <NavigationItem path="/faq" text="FAQ"/>
-                  <NavigationItem path="/colors" text="Colors"/>
                 </NavigationList>
               </NavigationGroup>
               <NavigationGroup text="Components">
@@ -71,7 +69,6 @@ export const App: FC = () => {
             <Route path="/" element={<LandingPage/>}/>
             <Route path="/intro" element={<IntroPage/>}/>
             <Route path="/faq" element={<FAQPage/>}/>
-            <Route path="/colors" element={<ColorsPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
             <Route path="*" element={<NotFoundPage/>}/>
           </Routes>

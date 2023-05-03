@@ -10,7 +10,7 @@ export const componentReq = import.meta.webpackContext!('./pages/', {
 })
 
 export const pagesReq = import.meta.webpackContext!('./pages/_/', {
-  regExp: /^\.\/\d{2}-.*\/index.tsx?$/,
+  regExp: /^\.\/\d{2}-[^/]+\/index.tsx?$/,
   recursive: true,
   mode: 'lazy',
   chunkName: REQ_CHUNK_NAME,

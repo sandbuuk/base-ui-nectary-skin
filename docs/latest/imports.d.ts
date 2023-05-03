@@ -3,6 +3,9 @@ declare module '*.html' {
   export default value
 }
 
+declare module '*.css' {
+}
+
 declare module '*.css?theme' {
   const obj: {
     use(param: any): void,

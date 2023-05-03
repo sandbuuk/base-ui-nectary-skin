@@ -132,13 +132,20 @@ const config: Configuration = {
                 }
 
                 Reflect.get(document.head, STYLE_INJECT_KEY).appendChild(element)
+              },
+              styleTagTransform: (css: string, element: HTMLStyleElement) => {
+                element.replaceChildren(document.createTextNode(css))
 
-                element.dispatchEvent(new Event('load'))
+                window.dispatchEvent(new CustomEvent('style-loader', { detail: element }))
               },
             },
           },
           {
             loader: 'css-loader',
+            options: {
+              modules: false,
+              sourceMap: false,
+            },
           },
         ],
       },
@@ -157,6 +164,9 @@ const config: Configuration = {
           },
           {
             loader: 'css-loader',
+            options: {
+              sourceMap: false,
+            },
           },
         ],
       },

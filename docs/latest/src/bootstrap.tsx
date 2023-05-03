@@ -62,6 +62,13 @@ export const bootstrap = (el: HTMLElement, { themeName }: TBootstrapOptions) => 
     }
   }, { signal: abortController.signal })
 
+  window.addEventListener('style-loader', ((e: CustomEvent<HTMLStyleElement>) => {
+    const origStyle = e.detail
+    const clonedStyle = origStyle.cloneNode(true) as HTMLStyleElement
+
+    shadowRoot.prepend(clonedStyle)
+  }) as any, { signal: abortController.signal })
+
   if (Reflect.has(document.head, STYLE_INJECT_KEY)) {
     const fragment: HTMLElement = Reflect.get(document.head, STYLE_INJECT_KEY).cloneNode(true)
 

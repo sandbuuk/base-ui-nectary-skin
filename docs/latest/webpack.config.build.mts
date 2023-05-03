@@ -253,6 +253,7 @@ const config: TWebpackConfig = {
         Reflect.get(document.head, key).appendChild(element)
 
         element.dispatchEvent(new Event('load'))
+        window.dispatchEvent(new CustomEvent('style-loader', { detail: element }))
       },
       attributes: {
         'data-key': stylesInjectKey,

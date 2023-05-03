@@ -7,10 +7,10 @@ import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-cell'
 import { useEffect, useState } from 'react'
 import ReferenceColorsTableMarkDown from '../markdown/ReferenceColorsTable.md'
-import { SpacingY } from '~/pages/Landing/components'
 import '@sinch-engage/nectary/color-swatch'
 import '@sinch-engage/nectary-assets/icons/expand-more'
 import '@sinch-engage/nectary-assets/icons/expand-less'
+import { SpacingY } from './SpacingY'
 
 const colorMainNames = Object.keys(refJson.color.main) as unknown as (keyof typeof refJson.color.main)[]
 const colorsMap = colorMainNames.reduce((res, name) => {
@@ -39,12 +39,12 @@ const tableStyle = {
 
 interface TypeShowMoreButton {
   isExpanded: boolean,
-  setShouldIsExpanded: (isExpanded: boolean) => void,
+  setExpanded: (isExpanded: boolean) => void,
 }
 
-const ShowMoreButton = ({ isExpanded, setShouldIsExpanded }: TypeShowMoreButton) => {
+const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
   const handleClick = () => {
-    setShouldIsExpanded(!isExpanded)
+    setExpanded(!isExpanded)
   }
 
   return (
@@ -64,7 +64,7 @@ const ShowMoreButton = ({ isExpanded, setShouldIsExpanded }: TypeShowMoreButton)
 }
 
 export const ReferenceColorsTable = () => {
-  const [isExpanded, setShouldIsExpanded] = useState(false)
+  const [isExpanded, setExpanded] = useState(false)
   const [colors, setColors] = useState(colorsMap.slice(0, 7))
 
   useEffect(() => {
@@ -113,7 +113,7 @@ export const ReferenceColorsTable = () => {
             })}
           </sinch-table-body>
         </sinch-table>
-        <ShowMoreButton isExpanded={isExpanded} setShouldIsExpanded={setShouldIsExpanded}/>
+        <ShowMoreButton isExpanded={isExpanded} setExpanded={setExpanded}/>
       </div>
       <SpacingY height={56}/>
     </>

@@ -43,7 +43,7 @@ export const CompositionExample: FC = () => {
         slot="input"
         style={inputStyles}
         open={isOpen}
-        orientation="bottom-left"
+        orientation="top-right"
         aria-label="Emoji input"
         on-close={onClose}
       >
