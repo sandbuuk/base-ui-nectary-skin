@@ -13,14 +13,18 @@
   gap: 10px;
   user-select: none;
   cursor: pointer;
-  color: var(--sinch-color-text-default);
+  background-color: var(--sinch-comp-select-menu-color-default-background-initial);
 
-  --sinch-color-icon: var(--sinch-color-stormy-500);
-  --sinch-size-icon: 24px;
+  --sinch-global-color-text: var(--sinch-comp-select-menu-color-default-option-initial);
+  --sinch-global-color-icon: var(--sinch-comp-select-menu-color-default-icon-initial);
+  --sinch-global-size-icon: var(--sinch-comp-select-menu-size-icon);
 }
 
 #content {
   flex: 1;
+  min-width: 0;
+
+  --sinch-comp-text-font: var(--sinch-comp-select-menu-font-option);
 }
 
 #icon-check {
@@ -32,16 +36,21 @@
   display: block;
 }
 
-:host([disabled]) > #wrapper {
-  cursor: initial;
-  color: var(--sinch-color-text-disabled);
-
-  --sinch-color-icon: var(--sinch-color-stormy-100);
+:host([data-selected]) > #wrapper {
+  background-color: var(--sinch-comp-select-menu-color-default-background-selected);
 }
 
-:host([data-selected]) > #wrapper,
-:host(:hover:not([disabled])) > #wrapper {
-  background-color: var(--sinch-color-snow-400);
+:host(:hover) > #wrapper {
+  background-color: var(--sinch-comp-select-menu-color-default-background-hover);
+}
+
+:host([disabled]) > #wrapper {
+  cursor: initial;
+  pointer-events: none;
+  background-color: var(--sinch-comp-select-menu-color-disabled-background-initial);
+
+  --sinch-global-color-text: var(--sinch-comp-select-menu-color-disabled-option-initial);
+  --sinch-global-color-icon: var(--sinch-comp-select-menu-color-disabled-icon-initial);
 }
 
 ::slotted(*) {
@@ -52,5 +61,5 @@
 <div id="wrapper">
   <slot name="icon"></slot>
   <sinch-text id="content" type="m" ellipsis></sinch-text>
-  <sinch-icon id="icon-check"></sinch-icon>
+  <sinch-icon id="icon-check" name="check"></sinch-icon>
 </div>

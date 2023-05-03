@@ -82,6 +82,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
       'invalid',
       'disabled',
       'rows',
+      'resizable',
     ]
   }
 
@@ -117,7 +118,10 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
       }
 
       case 'invalid': {
-        updateExplicitBooleanAttribute(this, 'aria-invalid', isAttrTrue(newVal))
+        const isInvalid = isAttrTrue(newVal)
+
+        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+        updateBooleanAttribute(this, 'invalid', isInvalid)
 
         break
       }
@@ -136,11 +140,13 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
 
         break
       }
-    }
-  }
 
-  get nodeName() {
-    return 'textarea'
+      case 'resizable': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+    }
   }
 
   set value(value: string) {

@@ -57,16 +57,6 @@ test('tooltip screenshots', runScreenshotTests('sinch-tooltip', [
       yield { name: 'shot', includeRects: [await getTooltipRect(page)] }
     },
   },
-  {
-    name: 'inverted',
-    url: withFitWidth,
-    async *fn({ $eval, page }) {
-      await hoverTooltip(page)
-      await $eval((el) => el.setAttribute('inverted', ''))
-
-      yield { name: 'on', includeRects: [await getTooltipRect(page)] }
-    },
-  },
 ]))
 
 test('tooltip events', runScreenshotTests('sinch-tooltip', [

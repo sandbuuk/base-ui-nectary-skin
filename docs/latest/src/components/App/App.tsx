@@ -1,6 +1,5 @@
 import { QueryRouter } from 'docs-common'
 import { ComponentsRoutes } from '../ComponentsRoutes'
-import { PagesRoutes } from '../PagesRoutes'
 import type { FC } from 'react'
 import { useBusNavigate } from '~/hooks'
 import './styles.css'
@@ -9,10 +8,7 @@ const AppImpl: FC<{}> = () => {
   useBusNavigate()
 
   return (
-    <>
-      <PagesRoutes/>
-      <ComponentsRoutes/>
-    </>
+    <ComponentsRoutes/>
   )
 }
 

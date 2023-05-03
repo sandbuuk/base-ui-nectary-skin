@@ -5,7 +5,7 @@
     [attr.disabled]="opt.disabled"
     [attr.status]="opt.status"
     [attr.optionaltext]="opt.optional">
-    <span *ngIf="opt.content != null" slot="content">{{opt.content}}</span>
+    <sinch-text *ngIf="opt.content != null" slot="content" type="m">{{opt.content}}</sinch-text>
     <sinch-icon-open-in-new *ngIf="opt.icon === true" slot="icon"></sinch-icon-open-in-new>
   </sinch-accordion-item>
 </sinch-accordion>

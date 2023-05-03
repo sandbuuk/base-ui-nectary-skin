@@ -122,7 +122,7 @@ export const InputSlots: FC<TInput> = ({ search }) => {
         <sinch-spinner slot="icon" size={sizeValue}/>
       </div>
       <div>
-        <sinch-toggle checked={sizeValue === 'l'} onChange={onSizeChange} text="Toggle size" aria-label="Toggle size"/>
+        <sinch-toggle checked={sizeValue === 'l'} on-change={onSizeChange} text="Toggle size" aria-label="Toggle size"/>
       </div>
     </div>
   )

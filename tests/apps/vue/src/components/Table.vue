@@ -5,10 +5,10 @@
         <sinch-table-head-cell v-for="(cell, index) in state.head" :key="index" :text="cell.text" :align="cell.align" :fit="cell.isFit">
           <sinch-checkbox v-if="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
             <sinch-icon-button v-if="cell.isSortable" aria-label="Sort" size="s" slot="right">
-              <sinch-icon-north slot="icon"></sinch-icon-north>
+              <sinch-icon slot="icon" name="north"></sinch-icon>
             </sinch-icon-button>
             <sinch-icon-button v-if="cell.isFilterable" aria-label="Filter" size="s" slot="left">
-              <sinch-icon-filter-list slot="icon"></sinch-icon-filter-list>
+              <sinch-icon slot="icon" name="filter_list"></sinch-icon>
             </sinch-icon-button>
           <sinch-help-tooltip v-if="cell.tooltip != null" slot="tooltip" :text="cell.tooltip"></sinch-help-tooltip>
         </sinch-table-head-cell>
@@ -21,9 +21,10 @@
           <sinch-button v-if="cell.isButton" type="secondary" :text="cell.text"></sinch-button>
           <sinch-toggle v-if="cell.isToggle"></sinch-toggle>
           <sinch-link v-if="cell.isLink" :text="cell.text" href="#"></sinch-link>
-          <sinch-icon-open-in-new v-if="cell.isIcon && cell.iconType === 'open-in-new'"></sinch-icon-open-in-new>
-          <sinch-icon-more-vert v-if="cell.isIcon && cell.iconType === 'more-vert'"></sinch-icon-more-vert>
-          <span v-if="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon">{{cell.text}}</span>
+          <sinch-icon-button v-if="cell.isIcon" aria-label="button">
+            <sinch-icon slot="icon" :name="cell.iconName"></sinch-icon>
+          </sinch-icon-button>
+          <sinch-text v-if="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon">{{cell.text}}</sinch-text>
         </sinch-table-cell>
       </sinch-table-row>
     </sinch-table-body>
@@ -39,14 +40,47 @@ import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-cell'
 import '@sinch-engage/nectary/toggle'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/north'
-import '@sinch-engage/nectary-assets/icons/filter-list'
-import '@sinch-engage/nectary-assets/icons/more-vert'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/checkbox'
 import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/icon'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/text'
+
+const getTableItems = ({ hasLongLine }) => ({
+  head: [
+    { isCheckbox: true, isFit: true },
+    { text: 'ID', isSortable: true, align: 'end' },
+    { text: 'Ticket' },
+    { text: 'Channel', align: 'center', tooltip: 'Tooltip text', isSortable: true, isFilterable: true },
+    { text: 'Comment long long' },
+    { text: 'Active', align: 'center' },
+    { text: 'Actions', isFit: true, tooltip: 'Tooltip text' },
+  ],
+  body: [
+    [
+      { isCheckbox: true },
+      { text: '123', align: 'end' },
+      { isLink: true, text: 'Link' },
+      { isIcon: true, align: 'center', iconName: 'open_in_new' },
+      hasLongLine === true
+        ? { text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.' }
+        : { text: 'Lorem Ipsum' },
+      { isToggle: true, align: 'center' },
+      { isIcon: true, align: 'center', iconName: 'more_vert' },
+    ],
+    [
+      { isCheckbox: true },
+      { text: '456789', align: 'end' },
+      { isLink: true, text: 'Link' },
+      { isIcon: true, align: 'center', iconName: 'open_in_new' },
+      { text: 'Lorem Ipsum' },
+      { isToggle: true, align: 'center' },
+      { isIcon: true, align: 'center', iconName: 'more_vert' },
+    ],
+  ],
+})
 
 export default {
   props: {
@@ -66,7 +100,8 @@ export default {
   },
   computed: {
     state() {
-      return JSON.parse(decodeURI(this.search.get('state')))
+      const example = this.search.get('example')
+      return getTableItems({hasLongLine: example === 'long'})
     }
   },
   data() {

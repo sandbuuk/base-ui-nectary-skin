@@ -8,7 +8,6 @@ import {
   updateAttribute,
   updateLiteralAttribute,
   NectaryElement,
-  getCssVar,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertType, typeValues } from './utils'
@@ -20,7 +19,6 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-alert', class extends NectaryElement {
   #$text: HTMLParagraphElement
-  #$icon: HTMLElement
 
   constructor() {
     super()
@@ -30,20 +28,18 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$text = shadowRoot.querySelector('#text')!
-    this.#$icon = shadowRoot.querySelector('#icon')!
   }
 
   connectedCallback() {
     super.connectedCallback()
     this.setAttribute('role', 'alert')
-    this.#updateIcon()
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
   }
 
-  get type() {
+  get type(): TSinchAlertType {
     return getLiteralAttribute(this, typeValues, 'type')
   }
 
@@ -70,8 +66,6 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
           assertType(newVal)
         }
 
-        this.#updateIcon()
-
         break
       }
 
@@ -81,14 +75,6 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
         break
       }
     }
-  }
-
-  #updateIcon() {
-    if (!this.isConnected) {
-      return
-    }
-
-    updateAttribute(this.#$icon, 'name', getCssVar(this, `--sinch-alert-icon-${this.type}`))
   }
 })
 

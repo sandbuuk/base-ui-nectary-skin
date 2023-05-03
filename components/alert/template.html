@@ -14,42 +14,69 @@
   min-height: 48px;
 }
 
+:host([type="warn"]) #wrapper {
+  background-color: var(--sinch-comp-alert-color-warning-default-background);
+}
+
+:host([type="error"]) #wrapper {
+  background-color: var(--sinch-comp-alert-color-error-default-background);
+}
+
+:host([type="info"]) #wrapper {
+  background-color: var(--sinch-comp-alert-color-info-default-background);
+}
+
+#icon-info,
+#icon-warn,
+#icon-error {
+  display: none;
+}
+
+#icon-warn {
+  --sinch-global-color-icon: var(--sinch-comp-alert-color-warning-default-icon);
+}
+
+#icon-error {
+  --sinch-global-color-icon: var(--sinch-comp-alert-color-error-default-icon);
+}
+
+#icon-info {
+  --sinch-global-color-icon: var(--sinch-comp-alert-color-info-default-icon);
+}
+
+:host([type="warn"]) #icon-warn,
+:host([type="error"]) #icon-error,
+:host([type="info"]) #icon-info {
+  display: block;
+}
+
 #text {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: var(--sinch-color-stormy-500);
   flex: 1;
   min-width: 0;
+
+  --sinch-comp-rich-text-font: var(--sinch-comp-alert-font-body);
 }
 
-:host([type="warn"]) #wrapper {
-  background-color: var(--sinch-color-feedback-warning-bg);
+:host([type="warn"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-alert-color-warning-default-text);
 }
 
-:host([type="error"]) #wrapper {
-  background-color: var(--sinch-color-feedback-invalid-bg);
+:host([type="error"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-alert-color-error-default-text);
 }
 
-:host([type="info"]) #wrapper {
-  background-color: var(--sinch-color-feedback-info-bg);
-}
-
-:host([type="warn"]) #icon {
-  --sinch-color-icon: var(--sinch-color-feedback-warning-icon);
-}
-
-:host([type="error"]) #icon {
-  --sinch-color-icon: var(--sinch-color-feedback-invalid-icon);
-}
-
-:host([type="info"]) #icon {
-  --sinch-color-icon: var(--sinch-color-feedback-info-icon);
+:host([type="info"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-alert-color-info-default-text);
 }
 </style>
 
 <div id="wrapper">
-  <sinch-icon id="icon"></sinch-icon>
+  <sinch-icon id="icon-info" name="info"></sinch-icon>
+  <sinch-icon id="icon-warn" name="report_problem"></sinch-icon>
+  <sinch-icon id="icon-error" name="report"></sinch-icon>
   <sinch-rich-text id="text"></sinch-rich-text>
   <slot name="action"></slot>
   <slot name="close"></slot>

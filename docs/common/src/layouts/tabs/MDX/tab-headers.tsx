@@ -1,17 +1,14 @@
 import { commonHeaders } from '../../../components/MDX/common-headers'
 import { slugify } from '../../../utils'
 import { PageNavMenuItem } from '../PageNavMenuItem'
-import { PageTitle } from '../PageTitle'
 import type { MDXComponents } from 'mdx/types'
 import type { FC, PropsWithChildren } from 'react'
 
 const headers = commonHeaders as Record<string, FC<PropsWithChildren>>
 
 export const tabHeaders: MDXComponents = {
-  h1: ({ children }) => {
-    const text = children as string
-
-    return <PageTitle text={text}/>
+  h1: () => {
+    return null
   },
   h2: ({ children }) => {
     const text = children as string

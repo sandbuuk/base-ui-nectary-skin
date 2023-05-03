@@ -13,7 +13,6 @@ import {
   getReactEventHandler,
   NectaryElement,
   updateBooleanAttribute,
-  getCssVar,
   setClass,
   isTargetEqual,
 } from '../utils'
@@ -25,7 +24,6 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-dialog', class extends NectaryElement {
-  #$iconClose: HTMLElement
   #$dialog: HTMLDialogElement
   #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
@@ -42,7 +40,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.#$dialog = shadowRoot.querySelector('#dialog')!
     this.#$closeButton = shadowRoot.querySelector('#close')!
     this.#$caption = shadowRoot.querySelector('#caption')!
-    this.#$iconClose = shadowRoot.querySelector('#icon-close')!
     this.#$actionWrapper = shadowRoot.querySelector('#action')!
     this.#$actionSlot = shadowRoot.querySelector('slot[name="buttons"]')!
   }
@@ -61,8 +58,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     this.#$dialog.addEventListener('cancel', this.#onCancel, options)
     this.#$actionSlot.addEventListener('slotchange', this.#onActionSlotChange, options)
     this.addEventListener('-close', this.#onCloseReactHandler, options)
-
-    updateAttribute(this.#$iconClose, 'name', getCssVar(this, '--sinch-dialog-icon-close'))
 
     this.#onActionSlotChange()
 

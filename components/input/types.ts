@@ -1,6 +1,5 @@
-import type { TRect, TSinchElementReact } from '../types'
+import type { TSinchElementReact } from '../types'
 import type { TSinchSize } from '../utils/size'
-import type { SyntheticEvent } from 'react'
 
 export type TSinchInputType = 'text' | 'password'
 
@@ -22,7 +21,6 @@ export type TSinchInputElement = HTMLElement & {
   selectionStart: number | null,
   selectionEnd: number | null,
   selectionDirection: 'forward' | 'backward' | 'none' | null,
-  readonly clearButtonRect: TRect,
   /** Change value event */
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   /** Focus event */
@@ -62,8 +60,6 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   disabled?: boolean,
   /** Size, `m` by default */
   size?: TSinchSize,
-  /** @deprecated Change value handler */
-  onChange?: (e: SyntheticEvent<TSinchInputElement, CustomEvent<string>>) => void,
   /** Change value handler */
   'on-change'?: (e: CustomEvent<string>) => void,
   /** Focus handler */

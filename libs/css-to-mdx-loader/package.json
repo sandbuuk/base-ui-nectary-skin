@@ -1,0 +1,22 @@
+{
+  "name": "@saas/css-to-mdx-loader",
+  "version": "0.0.0",
+  "main": "src/index.cjs",
+  "type": "module",
+  "publishConfig": {
+    "registry": "https://nexus.int.clxnetworks.net/repository/sinch_npm/"
+  },
+  "dependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/generator": "^7.21.4",
+    "@babel/parser": "^7.21.4",
+    "@babel/traverse": "^7.21.4",
+    "@babel/types": "^7.21.4",
+    "@mdx-js/mdx": "^2.3.0",
+    "remark-gfm": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/babel__generator": "^7.6.4",
+    "@types/babel__traverse": "^7.18.3"
+  }
+}

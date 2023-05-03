@@ -16,7 +16,7 @@ test('accessibility', checkValue({
   },
 }))
 
-test('date picker screenshots', runScreenshotTests('sinch-date-picker', [
+test('date-picker screenshots', runScreenshotTests('sinch-date-picker', [
   {
     name: 'min',
     url: withValue,
@@ -179,6 +179,9 @@ test('date picker screenshots', runScreenshotTests('sinch-date-picker', [
       yield { name: 'shot' }
     },
   },
+]))
+
+test('date-picker events', runScreenshotTests('sinch-date-picker', [
   {
     name: 'custom events',
     url: withValue,

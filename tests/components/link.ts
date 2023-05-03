@@ -3,7 +3,7 @@ import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/link?text=Anchor%20text&href=url'
-const withNarrow = '/link?width=110&text=Anchor%20text%20text%20long%20long%20long&href=url'
+const withNarrow = '/link?width=115&text=Anchor%20text%20text%20long%20long%20long&href=url'
 const withNarrowStandalone = '/link?width=110&text=Anchor%20text%20text%20long%20long%20long&href=url&standalone=true'
 const withNarrowStandaloneExternal = '/link?width=110&text=Anchor%20text%20text%20long%20long%20long&href=url&standalone=true&external=true'
 const withExternal = '/link?text=Anchor%20text&href=url&external=true'

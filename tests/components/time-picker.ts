@@ -15,7 +15,7 @@ test('accessibility', checkValue({
   },
 }))
 
-test('time input screenshots', runScreenshotTests('sinch-time-picker', [
+test('time picker screenshots', runScreenshotTests('sinch-time-picker', [
   {
     name: 'ampm',
     url: withValue,

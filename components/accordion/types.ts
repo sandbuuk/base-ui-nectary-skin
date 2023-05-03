@@ -1,5 +1,4 @@
 import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
 
 export type TSinchAccordionElement = HTMLElement & {
   /** Value */
@@ -19,8 +18,6 @@ export type TSinchAccordionReact = TSinchElementReact<TSinchAccordionElement> & 
   value: string,
   multiple?: boolean,
   /** Allows to expand multiple items simultanously */
-  /** @deprecated */
-  onChange?: (e: SyntheticEvent<TSinchAccordionElement, CustomEvent<string>>) => void,
   /** Change value handler */
   'on-change'?: (e: CustomEvent<string>) => void,
 }

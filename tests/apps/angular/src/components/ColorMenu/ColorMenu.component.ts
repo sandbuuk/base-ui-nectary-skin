@@ -1,6 +1,13 @@
 import { Component } from '@angular/core'
 
 import '@sinch-engage/nectary/color-menu'
+import '@sinch-engage/nectary/color-menu-option'
+
+const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
+const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
+const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const colors = [...lightColors, ...vibrantColors, ...darkColors]
+const lightVibrantColors = [...lightColors, ...vibrantColors]
 
 @Component({
   selector: 'color-menu-component',
@@ -12,11 +19,13 @@ export class ColorMenuComponent {
   value: string
   cols: number | null
   rows: number | null
-  colors: string | null
+  colors: string[]
   constructor() {
     const url = new URL(location.href)
     this.value = url.searchParams.get('value') ?? ''
-    this.colors = url.searchParams.get('colors')
+    this.colors = url.searchParams.get('example') === 'light'
+      ? lightVibrantColors
+      : colors
 
     let numVisibleValue = url.searchParams.get('rows')
     this.rows = numVisibleValue !== null ? parseInt(numVisibleValue) : null

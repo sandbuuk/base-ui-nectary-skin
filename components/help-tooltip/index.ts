@@ -3,13 +3,10 @@ import '../icon'
 import {
   defineCustomElement,
   getAttribute,
-  getBooleanAttribute,
-  getCssVar,
   getIntegerAttribute,
   getReactEventHandler,
   NectaryElement,
   updateAttribute,
-  updateBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
@@ -21,7 +18,6 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
-  #$icon: HTMLElement
   #$tooltip: TSinchTooltipElement
   #controller: AbortController | null = null
 
@@ -33,7 +29,6 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$tooltip = shadowRoot.querySelector('sinch-tooltip')!
-    this.#$icon = shadowRoot.querySelector('#icon')!
   }
 
   connectedCallback() {
@@ -47,8 +42,6 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
     this.#$tooltip.addEventListener('-hide', this.#onTooltipHide, options)
     this.addEventListener('-show', this.#onTooltipShowReactHandler, options)
     this.addEventListener('-hide', this.#onTooltipHideReactHandler, options)
-
-    updateAttribute(this.#$icon, 'name', getCssVar(this, '--sinch-help-tooltip-icon-help'))
   }
 
   disconnectedCallback() {
@@ -57,7 +50,7 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'width', 'orientation', 'inverted']
+    return ['text', 'width', 'orientation']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -78,14 +71,6 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
 
   set width(value: number | undefined) {
     updateIntegerAttribute(this, 'width', value)
-  }
-
-  get inverted() {
-    return getBooleanAttribute(this, 'inverted')
-  }
-
-  set inverted(isInverted: boolean | undefined) {
-    updateBooleanAttribute(this, 'inverted', isInverted)
   }
 
   get orientation() {

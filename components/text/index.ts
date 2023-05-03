@@ -25,13 +25,40 @@ defineCustomElement('sinch-text', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.setAttribute('role', getBooleanAttribute(this, 'inline') ? 'text' : 'paragraph')
-
-    // Dont assert here
-    // Angular sets attributes after connect
+    this.#updateRole()
   }
 
-  get type() {
+  static get observedAttributes() {
+    return ['type', 'inline', 'ellipsis', 'emphasized']
+  }
+
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+    switch (name) {
+      case 'type': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertType(newVal)
+        }
+
+        break
+      }
+
+      case 'inline': {
+        this.#updateRole()
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+
+      case 'ellipsis':
+      case 'emphasized': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+    }
+  }
+
+  get type(): TSinchTextType {
     return getLiteralAttribute(this, typeValues, 'type')
   }
 
@@ -63,26 +90,13 @@ defineCustomElement('sinch-text', class extends NectaryElement {
     return getBooleanAttribute(this, 'emphasized')
   }
 
-  static get observedAttributes() {
-    return ['type', 'inline']
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        break
-      }
-
-      case 'inline': {
-        this.setAttribute('role', isAttrTrue(newVal) ? 'text' : 'paragraph')
-
-        break
-      }
-    }
+  #updateRole() {
+    this.setAttribute(
+      'role',
+      getBooleanAttribute(this, 'inline')
+        ? 'text'
+        : 'paragraph'
+    )
   }
 })
 

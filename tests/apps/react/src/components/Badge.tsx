@@ -11,7 +11,6 @@ export const Badge: FC<TBadge> = ({ search }) => {
   const text = search.get('text') ?? ''
   const size: any = search.get('size')
   const mode: any = search.get('mode')
-  const color = search.get('color') ?? undefined
   const isHidden = search.get('hidden') !== null
 
   return (
@@ -21,7 +20,6 @@ export const Badge: FC<TBadge> = ({ search }) => {
         text={text}
         size={size}
         mode={mode}
-        color={color}
         hidden={isHidden}
       >
         <sinch-icon-notifications/>

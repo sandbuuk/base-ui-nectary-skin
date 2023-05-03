@@ -2,7 +2,7 @@
   <sinch-segment :caption="caption" :collapsed="isCollapsed" style="flex: 1;min-height: 0;">
     <sinch-segment-collapse v-if="hasCollapse" slot="collapse" :value="isCollapsed" @--change="onCollapse" @focus="onCollapseFocus" @blur="onCollapseBlur"></sinch-segment-collapse>
     <div v-if="hasContent" slot="content" style="display: flex; flex-direction: column; gap: 16px;">
-      <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
+      <sinch-text type="m">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</sinch-text>
       <sinch-field slot="content" label="Label">
         <sinch-input slot="input" aria-label="Input" value=""></sinch-input>
       </sinch-field>
@@ -16,8 +16,8 @@
       <sinch-icon-apps slot="icon"></sinch-icon-apps>
     </sinch-icon-button>
     <div v-if="hasPreview" slot="preview" style="display: flex;flex-direction: column;background-color: #F1F3F4;align-items: center;justify-content: center;height: 100%;">
-      <span style="font-size: 18px">Replace me!</span>
-      <span style="font-size: 12px">Im a template component</span>
+      <sinch-text type="m">Replace me!</sinch-text>
+      <sinch-text type="xs">Im a template component</sinch-text>
     </div>
     <sinch-checkbox v-if="hasAction" text="Checkbox" slot="action"></sinch-checkbox>
     <sinch-button v-if="hasAction" text="Cancel" type="secondary" slot="action" size="s"></sinch-button>
@@ -35,6 +35,7 @@ import '@sinch-engage/nectary-assets/icons-branded/chatbot'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/checkbox'
+import '@sinch-engage/nectary/text'
 
 export default {
   props: {

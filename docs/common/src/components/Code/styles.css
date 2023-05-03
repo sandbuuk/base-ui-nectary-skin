@@ -1,11 +1,11 @@
 .code {
   position: relative;
-  font: var(--sinch-font-text-m);
+  font: var(--sinch-sys-font-body-m);
   height: 120px;
   overflow: hidden;
   cursor: pointer;
-  background-color: var(--sinch-color-bg-primary-contrast);
-  border-radius: var(--sinch-shape-radius-l);
+  background-color: var(--sinch-sys-color-container-contrast-primary-default);
+  border-radius: var(--sinch-sys-shape-radius-l);
 }
 
 .code.open {
@@ -20,7 +20,7 @@
   right: 0;
   bottom: 0;
   height: 80px;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--sinch-color-bg-primary-contrast));
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--sinch-sys-color-container-contrast-primary-default));
 }
 
 .code.open::after {
@@ -39,7 +39,7 @@
   right: 16px;
   display: flex;
   gap: 4px;
-  background-color: var(--sinch-color-bg-primary-contrast);
+  background-color: var(--sinch-sys-color-container-contrast-primary-default);
 }
 
 .code-toolbar-dropdown-icon {

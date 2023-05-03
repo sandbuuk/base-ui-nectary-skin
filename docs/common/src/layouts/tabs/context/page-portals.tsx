@@ -5,12 +5,10 @@ import type { FC, PropsWithChildren } from 'react'
 const EMPTY_DEPS: any[] = []
 
 type TPagePortalsContext = {
-  title: HTMLElement | null,
   navmenu: HTMLElement | null,
 }
 
 const PagePortalsContext = createContext<TPagePortalsContext>({
-  title: null,
   navmenu: null,
 })
 
@@ -19,7 +17,6 @@ export const PagePortalsProvider: FC<PropsWithChildren> = ({ children }) => {
 
   if (valueRef.current === null) {
     valueRef.current = {
-      title: null,
       navmenu: null,
     }
   }
@@ -35,9 +32,6 @@ export const usePortalsRefs = () => {
   const portals = useContext(PagePortalsContext)
 
   return {
-    setTitleELement(el: HTMLElement | null) {
-      portals.title = el
-    },
     setNavElement(el: HTMLElement | null) {
       portals.navmenu = el
     },
@@ -45,7 +39,7 @@ export const usePortalsRefs = () => {
 }
 
 const arePortalsReady = (portals: TPagePortalsContext): boolean => {
-  return portals.title !== null && portals.navmenu !== null
+  return portals.navmenu !== null
 }
 
 export const usePortalsReady = (): boolean => {
@@ -65,12 +59,6 @@ export const usePortalsReady = (): boolean => {
   }, EMPTY_DEPS)
 
   return portalsReadyRef.current
-}
-
-export const usePortalTitle = (): HTMLElement | null => {
-  const portals = useContext(PagePortalsContext)
-
-  return portals.title
 }
 
 export const usePortalNavmenu = (): HTMLElement | null => {

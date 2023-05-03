@@ -4,10 +4,10 @@ import { usePortalsRefs } from '../context/page-portals'
 
 const EMPTY_DEPS: any[] = []
 
-export const useLayoutRef = (key: 'title' | 'navmenu') => {
+export const useLayoutRef = (key: 'navmenu') => {
   const ref = useRef<HTMLDivElement>(null)
   const doc = useDocument()
-  const { setTitleELement, setNavElement } = usePortalsRefs()
+  const { setNavElement } = usePortalsRefs()
 
   useLayoutEffect(() => {
     const $el = ref.current!
@@ -15,20 +15,12 @@ export const useLayoutRef = (key: 'title' | 'navmenu') => {
     Object.defineProperty($el, 'ownerDocument', { value: doc })
 
     switch (key) {
-      case 'title':
-        setTitleELement($el)
-
-        break
       case 'navmenu':
         setNavElement($el)
     }
 
     return () => {
       switch (key) {
-        case 'title':
-          setTitleELement(null)
-
-          break
         case 'navmenu':
           setNavElement(null)
       }

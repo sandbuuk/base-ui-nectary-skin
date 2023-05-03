@@ -1,0 +1,20 @@
+:root,
+:host {
+  --sinch-comp-segmented-control-color-default-background-initial: var(--sinch-sys-color-container-main-default);
+  --sinch-comp-segmented-control-color-default-background-hover: var(--sinch-sys-color-container-main-hover);
+  --sinch-comp-segmented-control-color-default-border-initial: var(--sinch-sys-color-border-default);
+  --sinch-comp-segmented-control-color-default-outline-focus: var(--sinch-sys-color-border-focus);
+  --sinch-comp-segmented-control-color-default-text-initial: var(--sinch-sys-color-text-muted);
+  --sinch-comp-segmented-control-color-default-icon-initial: var(--sinch-sys-color-text-muted);
+  --sinch-comp-segmented-control-color-disabled-background-initial: var(--sinch-sys-color-container-main-default);
+  --sinch-comp-segmented-control-color-disabled-border-initial: var(--sinch-sys-color-border-default);
+  --sinch-comp-segmented-control-color-disabled-text-initial: var(--sinch-sys-color-text-disabled);
+  --sinch-comp-segmented-control-color-disabled-icon-initial: var(--sinch-sys-color-text-disabled);
+  --sinch-comp-segmented-control-color-checked-border-initial: var(--sinch-sys-color-border-active);
+  --sinch-comp-segmented-control-color-checked-background-initial: var(--sinch-sys-color-container-main-active);
+  --sinch-comp-segmented-control-color-checked-text-initial: var(--sinch-sys-color-primary-default);
+  --sinch-comp-segmented-control-color-checked-icon-initial: var(--sinch-sys-color-primary-default);
+  --sinch-comp-segmented-control-shape-radius: var(--sinch-sys-shape-radius-s);
+  --sinch-comp-segmented-control-font-label: var(--sinch-sys-font-body-m);
+  --sinch-comp-segmented-control-size-icon: var(--sinch-sys-size-xs);
+}

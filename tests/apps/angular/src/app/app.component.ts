@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/theme'
+import '@sinch-engage/nectary-theme-base/index'
 
 @Component({
   selector: '#app',

@@ -14,44 +14,46 @@
   padding: 12px 16px;
   box-sizing: border-box;
   cursor: pointer;
-  border-top-left-radius: var(--sinch-shape-radius-l);
-  border-top-right-radius: var(--sinch-shape-radius-l);
+  background-color: var(--sinch-comp-tab-color-default-background-initial);
+  border-top-left-radius: var(--sinch-comp-tab-shape-radius);
+  border-top-right-radius: var(--sinch-comp-tab-shape-radius);
   height: 39px;
-  color: var(--sinch-color-stormy-300);
 
-  --sinch-color-icon: var(--sinch-color-stormy-300);
-  --sinch-size-icon: 16px;
+  --sinch-global-color-text: var(--sinch-comp-tab-color-default-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-tab-color-default-icon-initial);
+  --sinch-global-size-icon: var(--sinch-comp-tab-size-icon);
 }
 
 #button:hover {
-  background-color: var(--sinch-color-tropical-100);
+  background-color: var(--sinch-comp-tab-color-default-background-hover);
 }
 
+/* Outline */
 #button:focus-visible::before {
   content: "";
   position: absolute;
   inset: 0;
   bottom: -3px;
-  border: 2px solid var(--sinch-color-border-focus);
-  border-top-left-radius: var(--sinch-shape-radius-l);
-  border-top-right-radius: var(--sinch-shape-radius-l);
+  border: 2px solid var(--sinch-comp-tab-color-default-outline-focus);
+  border-top-left-radius: var(--sinch-comp-tab-shape-radius);
+  border-top-right-radius: var(--sinch-comp-tab-shape-radius);
   pointer-events: none;
 }
 
 #button:disabled {
   cursor: unset;
   pointer-events: none;
-  color: var(--sinch-color-border-default);
 
-  --sinch-color-icon: var(--sinch-color-border-default);
+  --sinch-global-color-text: var(--sinch-comp-tab-color-disabled-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-tab-color-disabled-icon-initial);
 }
 
 :host([data-checked]) #button {
-  color: var(--sinch-color-tropical-500);
-
-  --sinch-color-icon: var(--sinch-color-tropical-500);
+  --sinch-global-color-text: var(--sinch-comp-tab-color-checked-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-tab-color-checked-icon-initial);
 }
 
+/* Underline */
 :host([data-checked]) #button::after {
   content: "";
   position: absolute;
@@ -59,13 +61,15 @@
   right: 4px;
   bottom: -1px;
   pointer-events: none;
-  border-top: 2px solid var(--sinch-color-tropical-500);
+  border-top: 2px solid var(--sinch-comp-tab-color-checked-border-initial);
 }
 
 #text {
   flex-shrink: 1;
   flex-basis: auto;
   min-width: 0;
+
+  --sinch-comp-text-font: var(--sinch-comp-tab-font-label);
 }
 
 ::slotted(*) {

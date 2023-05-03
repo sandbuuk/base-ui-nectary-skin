@@ -57,23 +57,55 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#controller!.abort()
   }
 
-  #onPopClose = () => {
-    this.#dispatchCloseEvent()
-  }
-
-  #onCloseReactHandler = (e: Event) => {
-    getReactEventHandler(this, 'onClose')?.()
-    getReactEventHandler(this, 'on-close')?.(e)
-  }
-
-  #dispatchCloseEvent() {
-    this.dispatchEvent(
-      new CustomEvent('-close')
-    )
-  }
-
   static get observedAttributes() {
-    return ['orientation', 'open', 'modal', 'tip']
+    return [
+      'orientation',
+      'open',
+      'modal',
+      'tip',
+    ]
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'orientation': {
+        if (process.env.NODE_ENV !== 'production') {
+          assertOrientation(newVal)
+        }
+
+        updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
+
+        if (this.#$pop.open) {
+          this.#updateTipOrientation()
+        }
+
+        break
+      }
+
+      case 'tip': {
+        const hasTip = isAttrTrue(newVal)
+
+        if (hasTip && this.#$pop.open) {
+          this.#updateTipOrientation()
+        }
+
+        updateBooleanAttribute(this, name, hasTip)
+
+        break
+      }
+
+      case 'modal':
+      case 'open': {
+        updateAttribute(this.#$pop, name, newVal)
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+    }
   }
 
   set modal(isModal: boolean) {
@@ -116,49 +148,19 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     return this.#$pop.popoverRect
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
+  #onPopClose = () => {
+    this.#dispatchCloseEvent()
+  }
 
-    switch (name) {
-      case 'orientation': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertOrientation(newVal)
-        }
+  #onCloseReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'onClose')?.()
+    getReactEventHandler(this, 'on-close')?.(e)
+  }
 
-        updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
-
-        if (this.#isOpen()) {
-          this.#updateTipOrientation()
-        }
-
-        break
-      }
-
-      case 'tip': {
-        updateBooleanAttribute(this, 'tip', isAttrTrue(newVal))
-
-        if (newVal === '' && this.#isOpen()) {
-          this.#updateTipOrientation()
-        }
-
-        break
-      }
-
-      case 'open': {
-        const isOpen = isAttrTrue(newVal)
-
-        updateBooleanAttribute(this.#$pop, name, isOpen)
-        updateBooleanAttribute(this, name, isOpen)
-
-        break
-      }
-
-      default: {
-        updateAttribute(this.#$pop, name, newVal)
-      }
-    }
+  #dispatchCloseEvent() {
+    this.dispatchEvent(
+      new CustomEvent('-close')
+    )
   }
 
   #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
@@ -194,10 +196,6 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$tip.style.left = `${xPos}px`
 
     setClass(this.#$tip, 'hidden', rectOverlap(targetRect, contentRect))
-  }
-
-  #isOpen() {
-    return this.#$pop.open
   }
 })
 

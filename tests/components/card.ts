@@ -19,19 +19,17 @@ const withNarrowWidthLink = `/card?width=200&label=${cardLabelLong}&header=${car
 const withIllustrationButton = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&button=${cardButtonText}`
 const withIllustrationLink = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&link=${cardLinkText}`
 const withIllustrationBg = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&bg=blue`
-const withDisabledButton = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&button=${cardButtonText}`
-const withDisabledLink = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&link=${cardLinkText}`
 const withDnD = '/card-dnd'
-const checkWithButton = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&illustration=true&button=${cardButtonText}`, 'sinch-card')
-const checkWithLink = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&disabled=true&icon=true&illustration=true&link=${cardLinkText}`, 'sinch-card')
+const checkWithButton = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&button=${cardButtonText}`, 'sinch-card')
+const checkWithLink = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&link=${cardLinkText}`, 'sinch-card')
 
-test('accessibility button', checkWithButton({
+test('card accessibility with btn', checkWithButton({
   async *fn() {
     yield
   },
 }))
 
-test('accessibility link', checkWithLink({
+test('card accessibility with lnk', checkWithLink({
   async *fn() {
     yield
   },
@@ -47,14 +45,6 @@ test('card screenshots', runScreenshotTests('sinch-card', [
     },
   },
   {
-    name: 'disabled',
-    url: withIllustrationButton,
-    async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('disabled', ''))
-      yield { name: 'set' }
-    },
-  },
-  {
     name: 'illustration button',
     url: withIllustrationButton,
     async *fn() {
@@ -64,20 +54,6 @@ test('card screenshots', runScreenshotTests('sinch-card', [
   {
     name: 'illustration link',
     url: withIllustrationLink,
-    async *fn() {
-      yield { name: 'shot' }
-    },
-  },
-  {
-    name: 'disabled button',
-    url: withDisabledButton,
-    async *fn() {
-      yield { name: 'shot' }
-    },
-  },
-  {
-    name: 'disabled link',
-    url: withDisabledLink,
     async *fn() {
       yield { name: 'shot' }
     },
@@ -140,6 +116,7 @@ test('card screenshots', runScreenshotTests('sinch-card', [
       yield { name: '2-over-card', include: [wrapper] }
 
       await page.mouse.up()
+      await page.mouse.move(0, 0)
 
       yield { name: '3-drag-end', include: [wrapper] }
     },

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { TSinchAccordionStatusType } from '@sinch-engage/nectary/accordion-item/types'
 import type { FC } from 'react'
+import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/accordion'
 import '@sinch-engage/nectary/accordion-item'
 import '@sinch-engage/nectary-assets/icons/open-in-new'
@@ -82,7 +83,7 @@ export const Accordion: FC<TAccordion> = ({ search }) => {
           disabled={opt.disabled}
           optionalText={opt.optional}
         >
-          {opt.content != null && <span slot="content">{opt.content}</span>}
+          {opt.content != null && <sinch-text slot="content" type="m">{opt.content}</sinch-text>}
           {opt.icon === true && <sinch-icon-open-in-new slot="icon"/>}
         </sinch-accordion-item>
       ))}

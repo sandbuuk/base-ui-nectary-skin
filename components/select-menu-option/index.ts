@@ -4,7 +4,6 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getCssVar,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -19,7 +18,6 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 export class SelectMenuOption extends NectaryElement {
-  #$iconCheck: HTMLElement
   #$content: HTMLElement
 
   constructor() {
@@ -30,13 +28,10 @@ export class SelectMenuOption extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$content = shadowRoot.querySelector('#content')!
-    this.#$iconCheck = shadowRoot.querySelector('#icon-check')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'option')
-
-    updateAttribute(this.#$iconCheck, 'name', getCssVar(this, '--sinch-select-menu-icon-check'))
   }
 
   static get observedAttributes() {

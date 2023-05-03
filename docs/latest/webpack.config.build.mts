@@ -88,6 +88,18 @@ const config: TWebpackConfig = {
         loader: '@saas/types-to-mdx-loader',
       },
       {
+        test: /\.css$/,
+        exclude: NODE_MODULES_REGEXP,
+        resourceQuery: '?tokens',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: BabelOptions,
+          },
+          '@saas/css-to-mdx-loader',
+        ],
+      },
+      {
         test: /\.mdx?$/,
         exclude: NODE_MODULES_REGEXP,
         use: [
@@ -119,7 +131,26 @@ const config: TWebpackConfig = {
       },
       {
         test: /\.css$/,
+        resourceQuery: '',
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.css$/i,
+        resourceQuery: '?theme',
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'lazyStyleTag',
+              insert: (element: HTMLStyleElement, options: Record<string, any>) => {
+                options.target.appendChild(element)
+              },
+            },
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
       },
     ],
   },
@@ -127,8 +158,9 @@ const config: TWebpackConfig = {
     hints: false,
   },
   optimization: {
-    minimize: false,
+    minimize: true,
     minimizer: [
+      // @ts-expect-error
       new TerserPlugin({
         parallel: true,
         extractComments: true,
@@ -221,6 +253,7 @@ const config: TWebpackConfig = {
         Reflect.get(document.head, key).appendChild(element)
 
         element.dispatchEvent(new Event('load'))
+        window.dispatchEvent(new CustomEvent('style-loader', { detail: element }))
       },
       attributes: {
         'data-key': stylesInjectKey,

@@ -36,7 +36,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: /theme/,
+        include: /themes/,
         use: ['style-loader', 'css-loader'],
       },
     ],

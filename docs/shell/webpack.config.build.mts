@@ -145,7 +145,23 @@ const config: TWebpackConfig = {
       },
       {
         test: /\.css$/,
+        resourceQuery: '',
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.css$/i,
+        resourceQuery: '?theme',
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'lazyStyleTag',
+            },
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
       },
     ],
   },
@@ -153,8 +169,9 @@ const config: TWebpackConfig = {
     hints: false,
   },
   optimization: {
-    minimize: false,
+    minimize: true,
     minimizer: [
+      // @ts-expect-error
       new TerserPlugin({
         parallel: true,
         extractComments: true,

@@ -1,0 +1,52 @@
+import { ReferenceColorsTable, SystemColorsTable, TokenIllustration, MainColors, ComplementaryColors, Line } from '../components';
+import { SpacingY } from '../components/SpacingY'
+
+# Colors
+
+Color supports brand recognition and brings uniqueness to our design system.
+Using color correctly ensures a consistent identity experience across our different products.
+Access our brand hub to learn more about our brand colors
+
+<SpacingY height={56}/>
+<Line/>
+<SpacingY height={56}/>
+
+## Color anatomy
+
+Here, we'll dive into the details of how we've organized and defined the colors used in our products. Our color palette is divided into two main categories: main colors and complementary colors.
+Typography
+
+<MainColors />
+<ComplementaryColors />
+
+<SpacingY height={56}/>
+<Line/>
+<SpacingY height={56}/>
+
+## Color Tokens
+
+Our colors are stored as token values in our design system. Our tokens allow that color values are consistently used across our design system and the products that use it. They are divided into reference, system and component color tokens. In this section we will talk about the usage of reference and system colors and their correct usage.
+Colors from component tokens are only used to build the component and nothing else.
+
+<TokenIllustration />
+
+### Reference colors
+
+The reference colors stores all the raw values of all color allowed in our system.
+This builds the basis of colors that are meant to be used by our system colors.
+
+<ReferenceColorsTable />
+
+### System colors
+
+System colors  are used throughout the system in various contexts. They are essential for maintaining visual consistency and cohesiveness across the system. System colors are a critical when creating new themes for a design system. Themes allow designers to quickly and easily change the look and feel of an application, without having to manually update each individual UI element.
+
+<br /> All values from the system colors comes from referenced values from the reference colors.
+
+#### Colors system categories
+
+The color system is divided into eight categories: Text, Borders, Primary CTA, Containers ,Feedback, Status, Skin tone
+
+Below we show an example utilizing text colors.
+
+<SystemColorsTable />

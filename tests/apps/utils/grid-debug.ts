@@ -6,11 +6,11 @@ const template = document.createElement('template')
 template.innerHTML = `
 <style>
 :host {
-  --sinch-grid-gutter: 24px;
-  --sinch-grid-margin: 32px;
+  --sinch-local-grid-gutter: 24px;
+  --sinch-local-grid-margin: 32px;
 
   display: flex;
-  gap: var(--sinch-grid-gutter);
+  gap: var(--sinch-local-grid-gutter);
   position: absolute;
   left: 0;
   top: 0;
@@ -18,7 +18,7 @@ template.innerHTML = `
   width: 100%;
   pointer-events: none;
   box-sizing: border-box;
-  padding: var(--sinch-grid-margin);
+  padding: var(--sinch-local-grid-margin);
 }
 
 :host > * {
@@ -28,8 +28,8 @@ template.innerHTML = `
 }
 
 :host::before {
-  font: var(--sinch-font-title-xl);
-  color: var(--sinch-color-text-default);
+  font: var(--sinch-sys-font-desktop-title-xl);
+  color: var(--sinch-sys-color-text-default);
   position: absolute;
   left: 0;
   top: 0;
@@ -42,8 +42,8 @@ template.innerHTML = `
 /* L */
 @media only screen and (max-width: 1439px) {
   :host {
-    --sinch-grid-gutter: 24px;
-    --sinch-grid-margin: 24px;
+    --sinch-local-grid-gutter: 24px;
+    --sinch-local-grid-margin: 24px;
   }
 
   :host::before {
@@ -54,8 +54,8 @@ template.innerHTML = `
 /* M */
 @media only screen and (max-width: 1023px) {
   :host {
-    --sinch-grid-gutter: 24px;
-    --sinch-grid-margin: 24px;
+    --sinch-local-grid-gutter: 24px;
+    --sinch-local-grid-margin: 24px;
   }
 
   .l {
@@ -70,8 +70,8 @@ template.innerHTML = `
 /* S */
 @media only screen and (max-width: 767px) {
   :host {
-    --sinch-grid-gutter: 16px;
-    --sinch-grid-margin: 16px;
+    --sinch-local-grid-gutter: 16px;
+    --sinch-local-grid-margin: 16px;
   }
 
   .m {

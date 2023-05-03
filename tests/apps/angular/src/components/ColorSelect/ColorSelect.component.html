@@ -17,11 +17,15 @@
   </sinch-select-button>
   <sinch-color-menu
     slot="content"
-    [attr.colors]="colors"
     [attr.rows]="rows"
     [attr.cols]="cols"
     [attr.value]="value"
     (-change)="onChange($event)"
     aria-label="Menu"
-  ></sinch-color-menu>
+  >
+    <sinch-color-menu-option
+      *ngFor="let col of colors"
+      [attr.value]="col">
+    </sinch-color-menu-option>
+  </sinch-color-menu>
 </sinch-popover>

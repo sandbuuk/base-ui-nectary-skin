@@ -1,0 +1,18 @@
+:root,
+:host {
+  --sinch-comp-card-shape-radius: var(--sinch-sys-shape-radius-l);
+  --sinch-comp-card-shadow-initial: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-card-shadow-hover: var(--sinch-ref-shadow-level-1);
+  --sinch-comp-card-color-yellow-default-background-initial: var(--sinch-sys-color-container-complement-primary-default);
+  --sinch-comp-card-color-green-default-background-initial: var(--sinch-sys-color-container-complement-secondary-default);
+  --sinch-comp-card-color-blue-default-background-initial: var(--sinch-sys-color-container-complement-tertiary-default);
+  --sinch-comp-card-color-white-default-background-initial: var(--sinch-sys-color-container-main-default);
+  --sinch-comp-card-color-white-default-border-initial: var(--sinch-sys-color-border-default);
+  --sinch-comp-card-color-white-default-title-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-card-color-white-default-description-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-card-color-gray-default-background-initial: var(--sinch-sys-color-container-contrast-primary-default);
+  --sinch-comp-card-font-title: var(--sinch-sys-font-desktop-title-m);
+  --sinch-comp-card-font-description: var(--sinch-sys-font-body-m);
+  --sinch-comp-card-font-label: var(--sinch-sys-font-desktop-title-xs);
+  --sinch-comp-card-size-icon: 48px;
+}

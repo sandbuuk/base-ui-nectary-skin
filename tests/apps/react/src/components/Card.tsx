@@ -10,7 +10,6 @@ type TCard = {
 }
 
 export const Card: FC<TCard> = ({ search }) => {
-  const isDisabled = search.get('disabled') != null
   const text: any = search.get('text')
   const label: any = search.get('label')
   const header: any = search.get('header')
@@ -26,7 +25,6 @@ export const Card: FC<TCard> = ({ search }) => {
       caption={header}
       text={text}
       label={label}
-      disabled={isDisabled}
       draggable={isDraggable}
     >
       {hasIcon && <sinch-icon-branded-chatbot slot="icon"/>}

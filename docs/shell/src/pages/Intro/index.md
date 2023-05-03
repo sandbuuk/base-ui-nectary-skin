@@ -57,18 +57,18 @@ setAssetsRegistry(customRegistry)
 ### Theme
 
 ```js
-import '@sinch-engage/nectary/theme'
+import '@sinch-engage/nectary-theme-base'
 ```
 
 Use color palette or custom font face:
 
 ```css
 span {
-  color: var(--sinch-color-honey-700);
+  color: var(--sinch-ref-color-main-honey-700);
 }
 
 h2 {
-  font: var(--sinch-font-title-l);
+  font: var(--sinch-sys-font-desktop-title-l);
 }
 ```
 
@@ -141,7 +141,7 @@ moduleNameMapper: {
 It lets Jest know how to mock the css imports in your codebase, like for example when you import the theme:
 
 ```js
-import '@sinch-engage/nectary/theme'
+import '@sinch-engage/nectary-theme-base'
 ```
 
 This import should not throw an error now.

@@ -11,7 +11,7 @@
   gap: 8px;
   padding: 12px 0;
 
-  --sinch-icon-font-variation-settings: var(--sinch-emoji-picker-icon-font-variation-settings);
+  --sinch-comp-icon-font-variation-settings: "FILL" 0;
 }
 
 #toolbar {
@@ -20,8 +20,13 @@
   padding: 0 12px;
 }
 
-#input {
+#search {
   flex: 1;
+  min-width: 0;
+}
+
+#search-clear:not(.active) {
+  display: none;
 }
 
 #list-wrapper {
@@ -47,9 +52,11 @@
   height: 48px;
   align-items: center;
   justify-content: center;
-  color: var(--sinch-color-text-muted);
   pointer-events: none;
   user-select: none;
+
+  --sinch-global-color-text: var(--sinch-comp-emoji-picker-color-default-text-not-found);
+  --sinch-comp-text-font: var(--sinch-comp-emoji-picker-font-not-found);
 }
 
 #not-found.active {
@@ -59,21 +66,30 @@
 
 <div id="wrapper">
   <div id="toolbar">
-    <sinch-input id="input" size="l" aria-label="Search emojis">
-      <sinch-icon id="icon-search" slot="icon"></sinch-icon>
+    <sinch-input id="search" size="l" aria-label="Search emojis">
+      <sinch-icon id="icon-search" slot="icon" name="search"></sinch-icon>
+      <sinch-icon-button id="search-clear" slot="right" aria-label="Clear">
+        <sinch-icon slot="icon" name="close"></sinch-icon>
+      </sinch-icon-button>
     </sinch-input>
     <sinch-popover id="skin-popover" orientation="bottom-left" aria-label="Emoji skin tone select">
       <sinch-icon-button id="skin-button" slot="target" size="l" aria-label="Select emoji skin tones">
-        <sinch-color-swatch id="skin-swatch" slot="icon" name="skin-tone-0"></sinch-color-swatch>
+        <sinch-color-swatch id="skin-swatch" slot="icon" name="skintone-default"></sinch-color-swatch>
       </sinch-icon-button>
       <sinch-color-menu
         id="skin-menu"
         slot="content"
         cols="1"
-        value="skin-tone-0"
-        colors="skin-tone-0,skin-tone-10,skin-tone-20,skin-tone-30,skin-tone-40,skin-tone-50"
+        value="skintone-default"
         aria-label="Emoji skin tone menu"
-      ></sinch-color-menu>
+      >
+        <sinch-color-menu-option value="skintone-default"></sinch-color-menu-option>
+        <sinch-color-menu-option value="skintone-light"></sinch-color-menu-option>
+        <sinch-color-menu-option value="skintone-light-medium"></sinch-color-menu-option>
+        <sinch-color-menu-option value="skintone-medium"></sinch-color-menu-option>
+        <sinch-color-menu-option value="skintone-medium-dark"></sinch-color-menu-option>
+        <sinch-color-menu-option value="skintone-dark"></sinch-color-menu-option>
+      </sinch-color-menu>
     </sinch-popover>
   </div>
   <sinch-tabs id="tabs" aria-label="Emoji groups"></sinch-tabs>

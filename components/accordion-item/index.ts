@@ -1,9 +1,10 @@
 import '../icon'
+import '../title'
+import '../text'
 import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getCssVar,
   getLiteralAttribute,
   isAttrTrue,
   NectaryElement,
@@ -15,6 +16,7 @@ import {
 import templateHTML from './template.html'
 import { statusValues } from './utils'
 import type { TSinchAccordionItemElement, TSinchAccordionItemReact, TSinchAccordionStatusType } from './types'
+import type { TSinchTitleElement } from '../title/types'
 
 const template = document.createElement('template')
 
@@ -22,9 +24,8 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-accordion-item', class extends NectaryElement {
   #$button: HTMLButtonElement
-  #$icon: HTMLElement
-  #$buttonContent: HTMLSpanElement
-  #$optionalText: HTMLSpanElement
+  #$title: TSinchTitleElement
+  #$optionalText: HTMLElement
 
   constructor() {
     super()
@@ -34,15 +35,12 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$button = shadowRoot.querySelector('#button')!
-    this.#$icon = shadowRoot.querySelector('#dropdown-icon')!
-    this.#$buttonContent = shadowRoot.querySelector('#title')!
+    this.#$title = shadowRoot.querySelector('#title')!
     this.#$optionalText = shadowRoot.querySelector('#optional')!
   }
 
   connectedCallback() {
     this.#$button.addEventListener('click', this.#onButtonClick)
-
-    updateAttribute(this.#$icon, 'name', getCssVar(this, '--sinch-accordion-item-icon-dropdown'))
   }
 
   disconnectedCallback() {
@@ -50,7 +48,44 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['label', 'disabled', 'data-checked', 'optionaltext']
+    return [
+      'label',
+      'disabled',
+      'data-checked',
+      'optionaltext',
+    ]
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'label': {
+        updateAttribute(this.#$title, 'text', newVal)
+
+        break
+      }
+
+      case 'disabled': {
+        this.#$button.disabled = isAttrTrue(newVal)
+
+        break
+      }
+
+      case 'data-checked': {
+        updateExplicitBooleanAttribute(this.#$button, 'aria-expanded', isAttrTrue(newVal))
+
+        break
+      }
+
+      case 'optionaltext': {
+        this.#$optionalText.textContent = newVal
+
+        break
+      }
+    }
   }
 
   set value(value: string) {
@@ -91,38 +126,6 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
 
   get optionalText() {
     return getAttribute(this, 'optionaltext')
-  }
-
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
-    switch (name) {
-      case 'label': {
-        this.#$buttonContent.textContent = newVal
-
-        break
-      }
-
-      case 'disabled': {
-        this.#$button.disabled = isAttrTrue(newVal)
-
-        break
-      }
-
-      case 'data-checked': {
-        updateExplicitBooleanAttribute(this.#$button, 'aria-expanded', isAttrTrue(newVal))
-
-        break
-      }
-
-      case 'optionaltext': {
-        this.#$optionalText.textContent = newVal
-
-        break
-      }
-    }
   }
 
   #onButtonClick = (e: Event) => {

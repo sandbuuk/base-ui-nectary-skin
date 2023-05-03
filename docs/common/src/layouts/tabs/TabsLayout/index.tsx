@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Outlet } from 'react-router-dom'
 import { tabMdxComponents } from '../MDX'
-import { PagePortalsProvider, RouteTabProvider, usePortalsReady } from '../context'
+import { PagePortalsProvider, RouteTabProvider, RouteTitleProvider, usePortalsReady } from '../context'
 import { PageLayoutNavmenu } from './Navmenu'
 import { PageLayoutTabs } from './Tabs'
 import { PageLayoutTitle } from './Title'
@@ -34,19 +34,22 @@ const TabsLayoutImpl: FC<PropsWithChildren> = ({ children }) => {
 
 type TTabLayout = PropsWithChildren & {
   getRouteTabs(route: string): TRouteTab[] | null,
+  getRouteTitle(route: string): string | null,
 }
 
-export const TabsLayout: FC<TTabLayout> = ({ children, getRouteTabs }) => {
+export const TabsLayout: FC<TTabLayout> = ({ children, getRouteTabs, getRouteTitle }) => {
   return (
     <RouteTabProvider value={{ getRouteTabs }}>
-      <PagePortalsProvider>
-        <MDXProvider components={tabMdxComponents}>
-          <TabsLayoutImpl>
-            {children}
-            <Outlet/>
-          </TabsLayoutImpl>
-        </MDXProvider>
-      </PagePortalsProvider>
+      <RouteTitleProvider value={{ getRouteTitle }}>
+        <PagePortalsProvider>
+          <MDXProvider components={tabMdxComponents}>
+            <TabsLayoutImpl>
+              {children}
+              <Outlet/>
+            </TabsLayoutImpl>
+          </MDXProvider>
+        </PagePortalsProvider>
+      </RouteTitleProvider>
     </RouteTabProvider>
   )
 }

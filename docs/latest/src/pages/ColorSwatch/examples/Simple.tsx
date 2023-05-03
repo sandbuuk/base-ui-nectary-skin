@@ -12,10 +12,10 @@ const tableStyles: CSSProperties = {
   width: 300,
 }
 
-const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-pink', 'light-brown', 'light-gray']
-const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-pink', 'dark-brown', 'dark-gray']
-const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'pink', 'brown', 'gray']
-const skinToneColors = ['skin-tone-0', 'skin-tone-10', 'skin-tone-20', 'skin-tone-30', 'skin-tone-40', 'skin-tone-50']
+const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
+const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
+const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const skinToneColors = ['skintone-default', 'skintone-light', 'skintone-light-medium', 'skintone-medium', 'skintone-medium-dark', 'skintone-dark']
 const allColors = [
   ...lightColors,
   ...darkColors,

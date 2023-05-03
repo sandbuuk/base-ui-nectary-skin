@@ -5,6 +5,8 @@ import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/color-swatch'
 import '@sinch-engage/nectary/color-menu'
 
+const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+
 export const IconButtonExample: FC = () => {
   const [value, setValue] = useState<string>('')
   const [isOpen, setIsOpen] = useState(false)
@@ -36,7 +38,9 @@ export const IconButtonExample: FC = () => {
         value={value}
         aria-label="Color menu"
         on-change={onChange}
-      />
+      >
+        {vibrantColorNames.map((c) => <sinch-color-menu-option key={c} value={c}/>)}
+      </sinch-color-menu>
     </sinch-popover>
   )
 }

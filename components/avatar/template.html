@@ -7,10 +7,40 @@
 
 #wrapper {
   position: relative;
-  width: 40px;
-  height: 40px;
-  background-color: var(--sinch-color-snow-100);
-  border-radius: 50%;
+  width: var(--sinch-local-size);
+  height: var(--sinch-local-size);
+  background-color: var(--sinch-comp-avatar-border-color-default-initial);
+  border-radius: var(--sinch-comp-avatar-shape-radius);
+
+  --sinch-local-size: var(--sinch-comp-avatar-size-m);
+}
+
+:host([size="l"]) #wrapper {
+  --sinch-local-size: var(--sinch-comp-avatar-size-l);
+}
+
+:host([size="s"]) #wrapper {
+  --sinch-local-size: var(--sinch-comp-avatar-size-s);
+}
+
+#text {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font: var(--sinch-comp-avatar-container-font-size-m-text);
+  line-height: calc(var(--sinch-local-size) - 2px);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+:host([size="l"]) #text {
+  font: var(--sinch-comp-avatar-container-font-size-l-text);
+  line-height: calc(var(--sinch-local-size) - 2px);
+}
+
+:host([size="s"]) #text {
+  font: var(--sinch-comp-avatar-container-font-size-s-text);
+  line-height: calc(var(--sinch-local-size) - 2px);
 }
 
 #circle {
@@ -23,38 +53,8 @@
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: linear-gradient(#fff, #000);
   mask: linear-gradient(#fff, #000);
-  background-color: var(--sinch-avatar-color-default-bg);
-  color: var(--sinch-avatar-color-default-fg);
-}
-
-#text {
-  display: block;
-  width: 100%;
-  height: 100%;
-  font: var(--sinch-font-title-s);
-  line-height: 38px;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-:host([size="l"]) #wrapper {
-  width: 56px;
-  height: 56px;
-}
-
-:host([size="l"]) #text {
-  font: var(--sinch-font-title-m);
-  line-height: 54px;
-}
-
-:host([size="s"]) #wrapper {
-  width: 24px;
-  height: 24px;
-}
-
-:host([size="s"]) #text {
-  font: var(--sinch-font-text-xs);
-  line-height: 22px;
+  background-color: var(--sinch-comp-avatar-container-color-default-background);
+  color: var(--sinch-comp-avatar-container-color-default-foreground);
 }
 
 #image {
@@ -80,7 +80,7 @@
   padding: 1px;
   box-sizing: border-box;
   border-radius: 50%;
-  background-color: var(--sinch-color-snow-100);
+  background-color: var(--sinch-comp-avatar-border-color-default-initial);
   display: none;
   pointer-events: none;
 }
@@ -99,19 +99,19 @@
 }
 
 :host([status="online"]) #status {
-  background-color: var(--sinch-avatar-status-color-online);
+  background-color: var(--sinch-comp-avatar-status-color-online-default-background);
 }
 
 :host([status="away"]) #status {
-  background-color: var(--sinch-avatar-status-color-away);
+  background-color: var(--sinch-comp-avatar-status-color-away-default-background);
 }
 
 :host([status="busy"]) #status {
-  background-color: var(--sinch-avatar-status-color-busy);
+  background-color: var(--sinch-comp-avatar-status-color-busy-default-background);
 }
 
 :host([status="offline"]) #status {
-  background-color: var(--sinch-avatar-status-color-offline);
+  background-color: var(--sinch-comp-avatar-status-color-offline-default-background);
 }
 </style>
 

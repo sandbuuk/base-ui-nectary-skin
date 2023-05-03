@@ -24,8 +24,6 @@ export type TSinchDialogReact = TSinchElementReact<TSinchDialogElement> & {
   'aria-label': string,
   /** Close button label that is used for a11y */
   'close-aria-label': string,
-  /** @deprecated close event handler */
-  onClose?: (e: CustomEvent<TSinchDialogCloseDetail>) => void,
   /** close event handler */
   'on-close'?: (e: CustomEvent<TSinchDialogCloseDetail>) => void,
 }

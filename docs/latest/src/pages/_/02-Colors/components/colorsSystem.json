@@ -1,0 +1,44 @@
+[
+  {
+    "tokenName": "sys.color.text.default",
+    "cssName": "--sinch-sys-color-text-default",
+    "tokenRefName": "ref.color.main.stormy.700",
+    "tokenRefValue": "#242424"
+  },
+  {
+    "tokenName": "sys.color.text.muted",
+    "cssName": "--sinch-sys-color-text-muted",
+    "tokenRefName": "ref.color.main.stormy.300",
+    "tokenRefValue": "#999999"
+  },
+  {
+    "tokenName": "sys.color.text.link",
+    "cssName": "--sinch-sys-color-text-link",
+    "tokenRefName": "ref.color.primary.default",
+    "tokenRefValue": "#3a84ff"
+  },
+  {
+    "tokenName": "sys.color.text.link.disabled",
+    "cssName": "--sinch-sys-color-text-link-disabled",
+    "tokenRefName": "ref.color.primary.disabled",
+    "tokenRefValue": "#bfbfbf"
+  },
+  {
+    "tokenName": "sys.color.text.inverted",
+    "cssName": "--sinch-sys-color-text-inverted",
+    "tokenRefName": "ref.color.main.snow.100",
+    "tokenRefValue": "#ffffff"
+  },
+  {
+    "tokenName": "sys.color.text.invalid",
+    "cssName": "--sinch-sys-color-text-invalid",
+    "tokenRefName": "ref.color.main.raspberry.600",
+    "tokenRefValue": "#bf0a2c"
+  },
+  {
+    "tokenName": "sys.color.text.disabled",
+    "cssName": "--sinch-sys-color-text-disabled",
+    "tokenRefName": "ref.color.main.stormy.100",
+    "tokenRefValue": "#eaeaea"
+  }
+]

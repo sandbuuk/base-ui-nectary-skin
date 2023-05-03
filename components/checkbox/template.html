@@ -1,277 +1,189 @@
 <style>
-  :host {
-    --sinch-color-checkbox-circle: var(--sinch-color-transparent);
-    --sinch-color-checkbox-background: var(--sinch-color-snow-100);
-    --sinch-color-checkbox-border: var(--sinch-color-stormy-300);
-    --sinch-color-checkbox-circle-checked: var(--sinch-color-transparent);
-    --sinch-color-checkbox-background-checked: var(--sinch-color-tropical-500);
-    --sinch-color-checkbox-border-checked: var(--sinch-color-tropical-500);
-    --sinch-color-checkbox-circle-hover: var(--sinch-color-snow-500);
-    --sinch-color-checkbox-background-hover: var(--sinch-color-snow-100);
-    --sinch-color-checkbox-border-hover: var(--sinch-color-stormy-300);
-    --sinch-color-checkbox-circle-hover-checked: var(--sinch-color-tropical-100);
-    --sinch-color-checkbox-background-hover-checked: var(--sinch-color-tropical-500);
-    --sinch-color-checkbox-border-hover-checked: var(--sinch-color-tropical-500);
-    --sinch-color-checkbox-circle-focus: var(--sinch-color-snow-700);
-    --sinch-color-checkbox-background-focus: var(--sinch-color-snow-100);
-    --sinch-color-checkbox-border-focus: var(--sinch-color-stormy-300);
-    --sinch-color-checkbox-circle-focus-checked: var(--sinch-color-tropical-200);
-    --sinch-color-checkbox-background-focus-checked: var(--sinch-color-tropical-500);
-    --sinch-color-checkbox-border-focus-checked: var(--sinch-color-tropical-500);
-    --sinch-color-checkbox-circle-active: var(--sinch-color-stormy-100);
-    --sinch-color-checkbox-background-active: var(--sinch-color-snow-100);
-    --sinch-color-checkbox-border-active: var(--sinch-color-stormy-300);
-    --sinch-color-checkbox-circle-active-checked: var(--sinch-color-tropical-300);
-    --sinch-color-checkbox-background-active-checked: var(--sinch-color-tropical-500);
-    --sinch-color-checkbox-border-active-checked: var(--sinch-color-tropical-500);
-    --sinch-color-checkbox-circle-disabled: var(--sinch-color-transparent);
-    --sinch-color-checkbox-background-disabled: var(--sinch-color-snow-100);
-    --sinch-color-checkbox-border-disabled: var(--sinch-color-stormy-100);
-    --sinch-color-checkbox-circle-disabled-checked: var(--sinch-color-transparent);
-    --sinch-color-checkbox-background-disabled-checked: var(--sinch-color-stormy-100);
-    --sinch-color-checkbox-border-disabled-checked: var(--sinch-color-stormy-100);
-    --sinch-color-checkbox-text: var(--sinch-color-text-default);
-    --sinch-color-checkbox-text-disabled: var(--sinch-color-text-disabled);
+:host {
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+}
 
-    display: inline-block;
-    vertical-align: middle;
-    outline: none;
-  }
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  width: 100%;
 
-  :host([invalid]:not([invalid="false"])) {
-    --sinch-color-checkbox-border: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-background-checked: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-border-checked: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-border-hover: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-circle-hover-checked: var(--sinch-color-raspberry-100);
-    --sinch-color-checkbox-background-hover-checked: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-border-hover-checked: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-border-focus: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-circle-focus-checked: var(--sinch-color-raspberry-200);
-    --sinch-color-checkbox-background-focus-checked: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-border-focus-checked: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-border-active: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-circle-active-checked: var(--sinch-color-raspberry-300);
-    --sinch-color-checkbox-background-active-checked: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-border-active-checked: var(--sinch-color-raspberry-500);
-    --sinch-color-checkbox-border-disabled: var(--sinch-color-raspberry-200);
-    --sinch-color-checkbox-background-disabled-checked: var(--sinch-color-raspberry-200);
-    --sinch-color-checkbox-border-disabled-checked: var(--sinch-color-raspberry-200);
-    --sinch-color-checkbox-text: var(--sinch-color-text-invalid);
-    --sinch-color-checkbox-text-disabled: var(--sinch-color-raspberry-200);
-  }
+  --sinch-local-size: 24px;
+  --sinch-local-color-background: var(--sinch-comp-checkbox-color-default-background-initial);
+  --sinch-local-color-background-hover: var(--sinch-comp-checkbox-color-default-background-hover);
+  --sinch-local-color-background-active: var(--sinch-comp-checkbox-color-default-background-active);
+  --sinch-local-color-border: var(--sinch-comp-checkbox-color-default-border-initial);
+  --sinch-local-color-border-hover: var(--sinch-comp-checkbox-color-default-border-hover);
+  --sinch-local-color-border-active: var(--sinch-comp-checkbox-color-default-border-active);
+  --sinch-local-color-text: var(--sinch-comp-checkbox-color-default-text-initial);
+}
 
-  #wrapper {
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
-    width: 100%;
-    height: 32px;
-  }
+/* Invalid */
+:host([invalid]) > #wrapper {
+  --sinch-local-color-background: var(--sinch-comp-checkbox-color-invalid-background-initial);
+  --sinch-local-color-background-hover: var(--sinch-comp-checkbox-color-invalid-background-hover);
+  --sinch-local-color-background-active: var(--sinch-comp-checkbox-color-invalid-background-active);
+  --sinch-local-color-border: var(--sinch-comp-checkbox-color-invalid-border-initial);
+  --sinch-local-color-border-hover: var(--sinch-comp-checkbox-color-invalid-border-hover);
+  --sinch-local-color-border-active: var(--sinch-comp-checkbox-color-invalid-border-active);
+  --sinch-local-color-text: var(--sinch-comp-checkbox-color-invalid-text-initial);
+}
 
-  #checkbox {
-    all: initial;
-    display: block;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-  }
+/* Checked */
+:host([checked]) > #wrapper {
+  --sinch-local-color-background: var(--sinch-comp-checkbox-color-checked-background-initial);
+  --sinch-local-color-background-hover: var(--sinch-comp-checkbox-color-checked-background-hover);
+  --sinch-local-color-background-active: var(--sinch-comp-checkbox-color-checked-background-active);
+  --sinch-local-color-border: var(--sinch-comp-checkbox-color-checked-border-initial);
+  --sinch-local-color-border-hover: var(--sinch-comp-checkbox-color-checked-border-hover);
+  --sinch-local-color-border-active: var(--sinch-comp-checkbox-color-checked-border-active);
+}
 
-  #checkbox:disabled {
-    cursor: initial;
-  }
+/* Disabled */
+:host([disabled]) > #wrapper {
+  --sinch-local-color-background: var(--sinch-comp-checkbox-color-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-checkbox-color-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-checkbox-color-disabled-text-initial);
+}
 
-  #icon-container {
-    position: relative;
-    width: 32px;
-    height: 32px;
-  }
+/* Checked Disabled */
+:host([disabled][checked]) > #wrapper {
+  --sinch-local-color-background: var(--sinch-comp-checkbox-color-checked-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-checkbox-color-checked-disabled-border-initial);
+}
 
-  /* Circle */
-  #checkbox::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 32px;
-    height: 32px;
-    border-radius: 16px;
-    pointer-events: none;
-    background-color: var(--sinch-color-checkbox-circle);
-    transition: background-color 0.1s linear;
-  }
+/* Checked Invalid */
 
-  /* Border / Background */
+/* Invalid Disabled */
+
+/* Checked Invalid Disabled */
+
+#checkbox {
+  all: initial;
+  display: block;
+  width: var(--sinch-local-size);
+  height: var(--sinch-local-size);
+  cursor: pointer;
+}
+
+#checkbox:disabled {
+  cursor: initial;
+}
+
+#icon-container {
+  position: relative;
+  width: var(--sinch-local-size);
+  height: var(--sinch-local-size);
+  align-self: flex-start;
+}
+
+/* Outline */
+#checkbox::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--sinch-local-size);
+  height: var(--sinch-local-size);
+  border: 2px solid var(--sinch-comp-checkbox-color-default-outline-focus);
+  border-radius: calc(var(--sinch-comp-checkbox-shape-radius) + 3px);
+  transition: opacity 0.1s linear;
+  opacity: 0;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+#checkbox:focus-visible::before {
+  opacity: 1;
+}
+
+/* Border / Background */
+#checkbox::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  inset: 0;
+  margin: auto;
+  background-color: var(--sinch-local-color-background);
+  border: 2px solid var(--sinch-local-color-border);
+  border-radius: var(--sinch-comp-checkbox-shape-radius);
+  transition: background-color 0.1s linear;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+#checkbox:enabled:hover::after {
+  background-color: var(--sinch-local-color-background-hover);
+  border-color: var(--sinch-local-color-border-hover);
+}
+
+#checkbox:enabled:active::after {
+  background-color: var(--sinch-local-color-background-active);
+  border-color: var(--sinch-local-color-border-active);
+}
+
+#icon-checkmark,
+#icon-indeterminate {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  transition: opacity 0.1s linear;
+  opacity: 0;
+  pointer-events: none;
+  fill: var(--sinch-sys-color-container-main-default);
+}
+
+@media (prefers-reduced-motion) {
+  #icon-checkmark,
+  #icon-indeterminate,
+  #checkbox::before,
   #checkbox::after {
-    content: "";
-    position: absolute;
-    top: 7px;
-    left: 7px;
-    width: 18px;
-    height: 18px;
-    border-radius: var(--sinch-shape-radius-xs);
-    pointer-events: none;
-    background-color: var(--sinch-color-checkbox-background);
-    border: 2px solid var(--sinch-color-checkbox-border);
-    transition: background-color 0.1s linear;
-    box-sizing: border-box;
+    transition: none;
   }
+}
 
-  #icon-checkmark {
-    position: absolute;
-    left: 9px;
-    top: 10px;
-    transition: opacity 0.1s linear;
-    opacity: 0;
-    pointer-events: none;
-  }
+#label {
+  display: none;
+  flex: 1;
+  align-self: center;
+  padding-left: 7px;
+  font: var(--sinch-comp-checkbox-font-label);
+  color: var(--sinch-local-color-text);
+  cursor: pointer;
+}
 
-  #icon-indeterminate {
-    position: absolute;
-    left: 10px;
-    top: 15px;
-    transition: opacity 0.1s linear;
-    opacity: 0;
-    pointer-events: none;
-  }
+:host([disabled]) #label {
+  cursor: initial;
+}
 
-  @media (prefers-reduced-motion) {
-    #icon-checkmark,
-    #icon-indeterminate,
-    #checkbox::before,
-    #checkbox::after {
-      transition: none;
-    }
-  }
+:host([text]:not([text=""])) #label {
+  display: block;
+}
 
-  #label {
-    display: none;
-    flex: 1;
-    align-self: center;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    padding-left: 6px;
-    font: var(--sinch-font-text-m);
-    color: var(--sinch-color-checkbox-text);
-  }
+/* stylelint-disable-next-line no-descending-specificity */
+:host(:not([indeterminate])) #checkbox:checked ~ #icon-checkmark {
+  opacity: 1;
+}
 
-  :host([text]:not([text=""])) #label {
-    display: block;
-  }
-
-  :host([disabled]:not([disabled="false"])) #label {
-    color: var(--sinch-color-checkbox-text-disabled);
-  }
-
-  /* stylelint-disable-next-line no-descending-specificity */
-  :host(:is(:not([indeterminate]), [indeterminate="false"])) #checkbox:checked ~ #icon-checkmark {
-    opacity: 1;
-  }
-
-  :host([indeterminate]:not([indeterminate="false"])) #checkbox:checked ~ #icon-indeterminate {
-    opacity: 1;
-  }
-
-  /* Colors Checked */
-  #checkbox:checked::before {
-    background-color: var(--sinch-color-checkbox-circle-checked);
-  }
-
-  #checkbox:checked::after {
-    background-color: var(--sinch-color-checkbox-background-checked);
-    border-color: var(--sinch-color-checkbox-border-checked);
-  }
-
-  /* Colors Focus */
-  #checkbox:focus-visible::before {
-    background-color: var(--sinch-color-checkbox-circle-focus);
-  }
-
-  #checkbox:focus-visible::after {
-    background-color: var(--sinch-color-checkbox-background-focus);
-    border-color: var(--sinch-color-checkbox-border-focus);
-  }
-
-  /* Colors Hover */
-  #checkbox:hover::before {
-    background-color: var(--sinch-color-checkbox-circle-hover);
-  }
-
-  #checkbox:hover::after {
-    background-color: var(--sinch-color-checkbox-background-hover);
-    border-color: var(--sinch-color-checkbox-border-hover);
-  }
-
-  /* Colors Active */
-  #checkbox:active::before {
-    background-color: var(--sinch-color-checkbox-circle-active);
-  }
-
-  #checkbox:active::after {
-    background-color: var(--sinch-color-checkbox-background-active);
-    border-color: var(--sinch-color-checkbox-border-active);
-  }
-
-  /* Colors Disabled */
-  #checkbox:disabled::before {
-    background-color: var(--sinch-color-checkbox-circle-disabled);
-  }
-
-  #checkbox:disabled::after {
-    background-color: var(--sinch-color-checkbox-background-disabled);
-    border-color: var(--sinch-color-checkbox-border-disabled);
-  }
-
-  /* Colors Focus Checked */
-  #checkbox:focus-visible:checked::before {
-    background-color: var(--sinch-color-checkbox-circle-focus-checked);
-  }
-
-  #checkbox:focus-visible:checked::after {
-    background-color: var(--sinch-color-checkbox-background-focus-checked);
-    border-color: var(--sinch-color-checkbox-border-focus-checked);
-  }
-
-  /* Colors Hover Checked */
-  #checkbox:hover:checked::before {
-    background-color: var(--sinch-color-checkbox-circle-hover-checked);
-  }
-
-  #checkbox:hover:checked::after {
-    background-color: var(--sinch-color-checkbox-background-hover-checked);
-    border-color: var(--sinch-color-checkbox-border-hover-checked);
-  }
-
-  /* Colors Active Checked */
-  #checkbox:active:checked::before {
-    background-color: var(--sinch-color-checkbox-circle-active-checked);
-  }
-
-  #checkbox:active:checked::after {
-    background-color: var(--sinch-color-checkbox-background-active-checked);
-    border-color: var(--sinch-color-checkbox-border-active-checked);
-  }
-
-  /* Colors Disabled Checked */
-  #checkbox:disabled:checked::before {
-    background-color: var(--sinch-color-checkbox-circle-disabled-checked);
-  }
-
-  #checkbox:disabled:checked::after {
-    background-color: var(--sinch-color-checkbox-background-disabled-checked);
-    border-color: var(--sinch-color-checkbox-border-disabled-checked);
-  }
+:host([indeterminate]) #checkbox:checked ~ #icon-indeterminate {
+  opacity: 1;
+}
 </style>
 
 <div id="wrapper">
   <div id="icon-container">
     <input id="checkbox" type="checkbox"/>
-    <svg id="icon-checkmark" width="14" height="11" aria-hidden="true">
-      <path d="M14 1.99999L12.59 0.579987L4.98995 8.17L1.49997 4.5L0.0799694 5.91L4.98995 11L14 1.99999Z" fill="white"/>
+    <svg id="icon-checkmark" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9 16.17 5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17Z"/>
     </svg>
-    <svg id="icon-indeterminate" width="12" height="2" aria-hidden="true">
-      <line y1="1" x2="12" y2="1" stroke="white" stroke-width="2"/>
+    <svg id="icon-indeterminate" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M18 13H6c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1Z"/>
     </svg>
   </div>
   <label for="checkbox" id="label"></label>

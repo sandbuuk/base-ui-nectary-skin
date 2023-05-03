@@ -10,7 +10,7 @@
         @--click="onOpen"
         style="margin: 0 0 20px -20px; position: relative; left: 20px; transform: translate(0, 20px)"
       ></sinch-button>
-      <section slot="content" style="max-width: 240px; padding: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit</section>
+      <sinch-text slot="content" type="m" style="max-width: 240px; padding: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit</sinch-text>
     </sinch-popover>
     <div style="width: 50px; background-color: red;"></div>
   </div>
@@ -62,13 +62,14 @@
       aria-label="Button"
       @--click="onOpen">
     </sinch-button>
-    <section slot="content" style="max-width: 240px; padding: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit</section>
+    <sinch-text slot="content" type="m" style="max-width: 240px; padding: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit</sinch-text>
   </sinch-popover>
 </template>
 
 <script>
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/text'
 
 export default {
   methods: {

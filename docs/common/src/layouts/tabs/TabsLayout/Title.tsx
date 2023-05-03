@@ -1,10 +1,18 @@
-import { useLayoutRef } from '../hooks'
+import { useLocation } from 'react-router-dom'
+import { useRouteTitleInfo } from '../context'
 import type { FC } from 'react'
 
 export const PageLayoutTitle: FC = () => {
-  const ref = useLayoutRef('title')
+  const { pathname } = useLocation()
+  const { getRouteTitle } = useRouteTitleInfo()
+
+  const title = getRouteTitle(pathname)
+
+  if (title === null || title.length === 0) {
+    return null
+  }
 
   return (
-    <div id="page-title" ref={ref}/>
+    <sinch-title id="page-title" level="1" type="xl" text={title}/>
   )
 }

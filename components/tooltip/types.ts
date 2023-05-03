@@ -6,10 +6,6 @@ export type TSinchTooltipType = 'slow' | 'fast'
 export type TSinchTooltipElement = HTMLElement & {
   /** Text */
   text: string,
-  /** @deprecated */
-  width: number | null,
-  /** Inverted */
-  inverted: boolean,
   /** Orientation, where it *points to* from origin */
   orientation: TSinchTooltipOrientation,
   /** Type */
@@ -22,10 +18,6 @@ export type TSinchTooltipElement = HTMLElement & {
   addEventListener(type: '-hide', listener: (e: CustomEvent<void>) => void): void,
   /** Text */
   setAttribute(name: 'text', value: string): void,
-  /** @deprecated */
-  setAttribute(name: 'width', value: string): void,
-  /** Inverted */
-  setAttribute(name: 'inverted', value: ''): void,
   /** Orientation, where it *points to* from origin */
   setAttribute(name: 'orientation', value: TSinchTooltipOrientation): void,
   /** Type */
@@ -35,10 +27,6 @@ export type TSinchTooltipElement = HTMLElement & {
 export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
   /** Text */
   text: string,
-  /** @deprecated */
-  width?: number,
-  /** Inverted */
-  inverted?: boolean,
   /** Orientation, where it *points to* from origin */
   orientation?: TSinchTooltipOrientation,
   /** Type */

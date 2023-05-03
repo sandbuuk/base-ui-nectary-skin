@@ -2,9 +2,9 @@
   <sinch-list-item *ngFor="let i of [1,2,3,4]">
     <div
       slot="content"
-      style="display: flex;align-items: center;gap: 12px;font: var(--sinch-font-body);">
+      style="display: flex;align-items: center;gap: 12px;">
       <sinch-icon-branded-chatbot></sinch-icon-branded-chatbot>
-      <span style="flex: 1;">Replace me</span>
+      <sinch-text style="flex: 1;" type="m" inline>Replace me</sinch-text>
       <sinch-icon-button aria-label="Add" size="s">
         <sinch-icon-add slot="icon"></sinch-icon-add>
       </sinch-icon-button>

@@ -1,5 +1,5 @@
 import { Example } from '~/components/Example'
-import { SimpleExample } from './examples/Simple.tsx?example'
+import { ColumnsExample } from './examples/Columns.tsx?example'
 import { LightColorSetExample } from './examples/LightColorSet.tsx?example'
 import { DarkColorSetExample } from './examples/DarkColorSet.tsx?example'
 import { VibrantColorSetExample } from './examples/VibrantColorSet.tsx?example'
@@ -12,13 +12,7 @@ import { CustomColorSetExample } from './examples/CustomColorSet.tsx?example'
 
 Color Menu is a building block for high-level compositions like [Color Select](?path=/components/colorselect/examples).
 
-### Simple
-
 A color menu component is a user interface element that allows users to select a specific color from a predefined set of options. Use down/up/right/left arrow keys to navigate and space/enter to select with keyboard.
-
-All colors are added by default.
-
-<Example Component={SimpleExample}/>
 
 ### Color Set
 
@@ -53,3 +47,9 @@ The color menu includes a subset of skin tones, which are colors that are used t
 The color menu includes a customizable subset of colors, which means that the designer has the ability to specify which colors are included in the menu.
 
 <Example Component={CustomColorSetExample}/>
+
+### Number of Columns
+
+`cols` attribute can be used to change number of columns
+
+<Example Component={ColumnsExample}/>

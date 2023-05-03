@@ -1,0 +1,45 @@
+:root,
+:host {
+  --sinch-sys-color-container-main-default: var(--sinch-ref-color-main-stormy-800);
+  --sinch-sys-color-container-main-hover: var(--sinch-ref-color-main-stormy-600);
+  --sinch-sys-color-container-main-active: var(--sinch-ref-color-main-stormy-500);
+  --sinch-sys-color-container-main-disabled: var(--sinch-ref-color-main-stormy-700);
+  --sinch-sys-color-container-main-foreground: var(--sinch-ref-color-main-snow-200);
+  --sinch-sys-color-container-contrast-secondary-default: var(--sinch-ref-color-main-stormy-600);
+  --sinch-sys-color-container-contrast-primary-default: var(--sinch-ref-color-main-stormy-700);
+  --sinch-sys-color-container-complement-primary-default: var(--sinch-ref-color-main-ocean-700);
+  --sinch-sys-color-container-complement-primary-hover: var(--sinch-ref-color-main-ocean-600);
+  --sinch-sys-color-container-complement-primary-active: var(--sinch-ref-color-main-ocean-500);
+  --sinch-sys-color-container-complement-secondary-default: var(--sinch-ref-color-main-tropical-700);
+  --sinch-sys-color-container-complement-secondary-hover: var(--sinch-ref-color-main-tropical-600);
+  --sinch-sys-color-container-complement-secondary-active: var(--sinch-ref-color-main-tropical-500);
+  --sinch-sys-color-container-complement-tertiary-default: var(--sinch-ref-color-main-ocean-700);
+  --sinch-sys-color-container-complement-tertiary-hover: var(--sinch-ref-color-main-ocean-600);
+  --sinch-sys-color-container-complement-tertiary-active: var(--sinch-ref-color-main-ocean-500);
+  --sinch-sys-color-container-complement-quaternary-default: var(--sinch-ref-color-main-raspberry-700);
+  --sinch-sys-color-container-complement-quaternary-hover: var(--sinch-ref-color-main-raspberry-600);
+  --sinch-sys-color-container-complement-quaternary-active: var(--sinch-ref-color-main-raspberry-500);
+  --sinch-sys-color-container-transparent-hover: #F8F8F81A;
+  --sinch-sys-color-container-transparent-active: #F8F8F833;
+  --sinch-sys-color-primary-disabled: var(--sinch-ref-color-main-tropical-600);
+  --sinch-sys-color-primary-default: var(--sinch-ref-color-main-tropical-400);
+  --sinch-sys-color-primary-hover: var(--sinch-ref-color-main-tropical-300);
+  --sinch-sys-color-primary-active: var(--sinch-ref-color-main-tropical-500);
+  --sinch-sys-color-text-default: var(--sinch-ref-color-main-snow-200);
+  --sinch-sys-color-text-inverted: var(--sinch-ref-color-main-stormy-700);
+  --sinch-sys-color-text-invalid: var(--sinch-ref-color-main-raspberry-500);
+  --sinch-sys-color-text-muted: var(--sinch-ref-color-main-stormy-100);
+  --sinch-sys-color-text-disabled: var(--sinch-ref-color-main-stormy-400);
+  --sinch-sys-color-border-default: var(--sinch-ref-color-main-stormy-400);
+  --sinch-sys-color-border-disabled: var(--sinch-ref-color-main-stormy-500);
+  --sinch-sys-color-border-dark: var(--sinch-ref-color-main-stormy-300);
+  --sinch-sys-color-border-light: var(--sinch-ref-color-main-stormy-500);
+  --sinch-sys-color-feedback-info-background: #003B7E66;
+  --sinch-sys-color-feedback-info-foreground: var(--sinch-ref-color-complementary-celtic-200);
+  --sinch-sys-color-feedback-invalid-background: #B71C1C66;
+  --sinch-sys-color-feedback-invalid-foreground: var(--sinch-ref-color-complementary-jasper-200);
+  --sinch-sys-color-feedback-success-background: #275D3366;
+  --sinch-sys-color-feedback-success-foreground: var(--sinch-ref-color-complementary-olive-200);
+  --sinch-sys-color-feedback-warning-background: #9C2E0066;
+  --sinch-sys-color-feedback-warning-foreground: var(--sinch-ref-color-complementary-pumpkin-200);
+}

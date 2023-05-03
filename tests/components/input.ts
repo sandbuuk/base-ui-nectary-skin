@@ -82,9 +82,6 @@ test('input screenshots', runScreenshotTests('sinch-input', [
 
       await page.keyboard.press('Tab')
       yield { name: '3' }
-
-      await page.keyboard.press('Tab')
-      yield { name: '4' }
     },
   },
   {
@@ -141,7 +138,7 @@ test('input screenshots', runScreenshotTests('sinch-input', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-input-focus', 'sinch-input-blur', 'sinch-input-change')
       await page.keyboard.press('Tab')
-      await page.keyboard.press('Tab')
+      await page.mouse.click(0, 0)
 
       expect(
         await getAllEvents(page)

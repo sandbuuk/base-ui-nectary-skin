@@ -4,88 +4,96 @@
 }
 
 a {
-  font: var(--sinch-font-text-m);
+  font: var(--sinch-comp-link-default-font-initial);
   font-size: inherit;
   line-height: inherit;
-  color: var(--sinch-color-tropical-500);
+  text-decoration: var(--sinch-comp-link-default-text-decoration-initial);
+  color: var(--sinch-comp-link-color-default-text-initial);
   border-radius: 0.5em;
   white-space: nowrap;
 
-  --sinch-size-icon: 1em;
-  --sinch-color-icon: var(--sinch-color-tropical-500);
+  --sinch-global-color-icon: var(--sinch-comp-link-color-default-icon-initial);
 }
 
 a:hover {
-  color: var(--sinch-color-tropical-600);
+  text-decoration: var(--sinch-comp-link-default-text-decoration-hover);
+  color: var(--sinch-comp-link-color-default-text-hover);
 
-  --sinch-color-icon: var(--sinch-color-tropical-600);
+  --sinch-global-color-icon: var(--sinch-comp-link-color-default-icon-hover);
 }
 
 a:focus-visible {
-  outline: 2px solid var(--sinch-color-border-focus);
+  outline: 2px solid var(--sinch-comp-link-color-default-outline-focus);
   outline-offset: 2px;
 }
 
-#external-icon {
-  display: none;
-  margin-right: 0.2em;
-  vertical-align: -0.2em;
+:host([standalone]) {
+  display: block;
 }
 
-#standalone-icon,
+:host([standalone]) a {
+  display: block;
+  font: var(--sinch-comp-link-standalone-font-initial);
+  font-size: inherit;
+  line-height: inherit;
+  text-decoration: none;
+  width: fit-content;
+}
+
+#external-icon,
+#standalone-icon {
+  display: none;
+  height: 1em;
+}
+
 #standalone-icon-prefix {
   display: none;
 }
 
-:host([external]:not([external="false"])) #external-icon {
+:host([external]:not([standalone])) #external-icon {
   display: inline-block;
+  margin-right: 0.2em;
+  vertical-align: -0.2em;
+
+  --sinch-global-size-icon: 1em;
 }
 
-:host([standalone]:not([standalone="false"])) {
-  display: block;
+:host([standalone][external]) #external-icon {
+  display: inline-block;
+  vertical-align: -0.4em;
+  margin-right: -0.4em;
+
+  --sinch-global-size-icon: 1.5em;
 }
 
-:host([standalone]:not([standalone="false"])) a {
-  display: block;
-  font: var(--sinch-font-text-m);
-  font-weight: var(--sinch-font-weight-emphasized);
-  text-decoration: none;
-  border-radius: var(--sinch-shape-radius-m);
-  width: fit-content;
-
-  --sinch-size-icon: 24px;
-}
-
-:host([standalone]:not([standalone="false"])) #external-icon {
-  margin-right: 8px;
-  vertical-align: -7px;
-}
-
-:host([standalone]:not([standalone="false"])) #standalone-icon-prefix {
+:host([standalone]) #standalone-icon-prefix {
   display: inline;
 }
 
-:host([standalone]:not([standalone="false"]):is([external="false"], :not([external]))) #standalone-icon {
+:host([standalone]:not([external])) #standalone-icon {
   display: inline-block;
-  vertical-align: -7px;
+  vertical-align: -0.4em;
+
+  --sinch-global-size-icon: 1.5em;
 }
 
-:host([disabled]:not([disabled="false"])) a {
-  color: var(--sinch-color-tropical-200);
+:host([disabled]) a {
+  color: var(--sinch-comp-link-color-disabled-text-initial);
   pointer-events: none;
   cursor: initial;
+  text-decoration: var(--sinch-comp-link-default-text-decoration-disabled);
 
-  --sinch-color-icon: var(--sinch-color-tropical-200);
+  --sinch-global-color-icon: var(--sinch-comp-link-color-disabled-icon-initial);
 }
 
 #content {
-  white-space: var(--sinch-text-white-space, normal);
+  white-space: var(--sinch-global-text-white-space, normal);
 }
 </style>
 
 <a referrerpolicy="no-referer" aria-hidden="true">
-  <sinch-icon id="external-icon"></sinch-icon>
+  <sinch-icon id="external-icon" name="open_in_new"></sinch-icon>
   <span id="content"></span>
   <span id="standalone-icon-prefix">&nbsp;</span>
-  <sinch-icon id="standalone-icon"></sinch-icon>
+  <sinch-icon id="standalone-icon" name="arrow_forward"></sinch-icon>
 </a>

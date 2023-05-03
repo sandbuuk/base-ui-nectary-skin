@@ -13,9 +13,7 @@
   height: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  border-bottom: 1px solid var(--sinch-color-stormy-200);
-
-  --sinch-size-icon: 16px;
+  border-bottom: 1px solid var(--sinch-comp-accordion-color-default-border-initial);
 }
 
 #button {
@@ -28,10 +26,9 @@
   width: 100%;
   height: 48px;
   padding: 12px 8px;
-  font: var(--sinch-font-title-s);
-  color: var(--sinch-color-text-default);
 
-  --sinch-color-icon: var(--sinch-color-stormy-500);
+  --sinch-global-color-icon: var(--sinch-comp-accordion-color-default-icon-initial);
+  --sinch-global-size-icon: var(--sinch-comp-accordion-size-icon);
 }
 
 #button > * {
@@ -40,9 +37,8 @@
 
 #button:disabled {
   cursor: initial;
-  color: var(--sinch-color-stormy-100);
 
-  --sinch-color-icon: var(--sinch-color-stormy-100);
+  --sinch-global-color-icon: var(--sinch-comp-accordion-color-disabled-icon-initial);
 }
 
 #button::before {
@@ -55,29 +51,34 @@
 
 :host([status="success"]) #button::before {
   content: "";
-  background-color: var(--sinch-color-feedback-success-icon);
+  background-color: var(--sinch-comp-accordion-color-default-status-success);
 }
 
 :host([status="warn"]) #button::before {
   content: "";
-  background-color: var(--sinch-color-feedback-warning-icon);
+  background-color: var(--sinch-comp-accordion-color-default-status-warning);
 }
 
 :host([status="error"]) #button::before {
   content: "";
-  background-color: var(--sinch-color-feedback-invalid-icon);
+  background-color: var(--sinch-comp-accordion-color-default-status-error);
 }
 
 :host([status="info"]) #button::before {
   content: "";
-  background-color: var(--sinch-color-feedback-info-icon);
+  background-color: var(--sinch-comp-accordion-color-default-status-info);
 }
 
 #title {
   flex: 1;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  min-width: 0;
+
+  --sinch-comp-title-font: var(--sinch-comp-accordion-font-title);
+  --sinch-global-color-text: var(--sinch-comp-accordion-color-default-title-initial);
+}
+
+#button:disabled > #title {
+  --sinch-global-color-text: var(--sinch-comp-accordion-color-disabled-title-initial);
 }
 
 #content {
@@ -86,12 +87,10 @@
   flex-shrink: 1;
   min-height: 0;
   padding: 0 8px 18px;
-  font: var(--sinch-font-text-m);
-  color: var(--sinch-color-text-default);
 }
 
 #dropdown-icon {
-  --sinch-size-icon: 24px;
+  transform: rotate(0deg);
 }
 
 #button[aria-expanded="true"] > #dropdown-icon {
@@ -103,17 +102,21 @@
 }
 
 #optional {
-  font: var(--sinch-font-text-s);
-  color: var(--sinch-color-stormy-300);
+  --sinch-comp-text-font: var(--sinch-comp-accordion-font-optional-text);
+  --sinch-global-color-text: var(--sinch-comp-accordion-color-default-optional-text-initial);
+}
+
+#button:disabled > #optional {
+  --sinch-global-color-text: var(--sinch-comp-accordion-color-disabled-optional-text-initial);
 }
 </style>
 
 <div id="wrapper">
   <button id="button" aria-controls="content" aria-expanded="false">
     <slot name="icon"></slot>
-    <span id="title"></span>
-    <span id="optional"></span>
-    <sinch-icon id="dropdown-icon"></sinch-icon>
+    <sinch-title id="title" level="3" type="m" ellipsis></sinch-title>
+    <sinch-text id="optional" type="m"></sinch-text>
+    <sinch-icon id="dropdown-icon" name="keyboard_arrow_down"></sinch-icon>
   </button>
   <div id="content" role="region" aria-labelledby="button">
     <slot name="content"></slot>

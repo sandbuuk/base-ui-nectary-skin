@@ -1,5 +1,4 @@
 import type { TSinchElementReact } from '../types'
-import type { SyntheticEvent } from 'react'
 
 export type TSinchSegmentedIconControlElement = HTMLElement & {
   value: string,
@@ -13,7 +12,5 @@ export type TSinchSegmentedIconControlReact = TSinchElementReact<TSinchSegmented
   value: string,
   multiple?: boolean,
   'aria-label': string,
-  /** @deprecated */
-  onChange?: (event: SyntheticEvent<TSinchSegmentedIconControlElement, CustomEvent<string>>) => void,
   'on-change'?: (e: CustomEvent<string>) => void,
 }

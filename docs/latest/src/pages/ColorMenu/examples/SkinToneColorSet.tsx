@@ -1,7 +1,16 @@
-import { skinToneColorNames } from '@sinch-engage/nectary/theme/colors'
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
+import '@sinch-engage/nectary/color-menu-option'
+
+const skinToneColorNames = [
+  'skintone-default',
+  'skintone-light',
+  'skintone-light-medium',
+  'skintone-medium',
+  'skintone-medium-dark',
+  'skintone-dark',
+]
 
 export const SkinToneColorSetExample: FC = () => {
   const [value, setValue] = useState<string>('')
@@ -11,9 +20,10 @@ export const SkinToneColorSetExample: FC = () => {
     <sinch-color-menu
       value={value}
       cols={6}
-      colors={skinToneColorNames}
       aria-label="Color menu"
       on-change={onChange}
-    />
+    >
+      {skinToneColorNames.map((c) => <sinch-color-menu-option key={c} value={c}/>)}
+    </sinch-color-menu>
   )
 }

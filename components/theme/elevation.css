@@ -1,7 +1,0 @@
-:root,
-:host {
-  --sinch-elevation-level-0: none;
-  --sinch-elevation-level-1: 1px 2px 6px rgba(10, 39, 61, 0.1);
-  --sinch-elevation-level-2: 1px 4px 8px rgba(10, 39, 61, 0.1);
-  --sinch-elevation-level-3: 1px 6px 12px rgba(10, 39, 61, 0.15);
-}

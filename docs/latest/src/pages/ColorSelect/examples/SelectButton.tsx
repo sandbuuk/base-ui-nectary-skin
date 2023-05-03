@@ -4,6 +4,9 @@ import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/select-button'
 import '@sinch-engage/nectary/color-swatch'
 import '@sinch-engage/nectary/color-menu'
+import '@sinch-engage/nectary/color-menu-option'
+
+const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
 
 const buttonStyles: CSSProperties = {
   width: 200,
@@ -42,7 +45,9 @@ export const SelectButtonExample: FC = () => {
         value={value}
         aria-label="Color menu"
         on-change={onChange}
-      />
+      >
+        {vibrantColorNames.map((c) => <sinch-color-menu-option key={c} value={c}/>)}
+      </sinch-color-menu>
     </sinch-popover>
   )
 }

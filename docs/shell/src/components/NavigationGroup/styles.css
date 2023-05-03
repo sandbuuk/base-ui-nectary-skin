@@ -8,22 +8,23 @@
   align-items: center;
   height: 48px;
   width: 100%;
-  color: var(--sinch-color-stormy-500);
+  color: var(--sinch-sys-color-text-default);
   line-height: 32px;
   text-decoration: none;
   padding: 0 16px;
   user-select: none;
-  border-radius: var(--sinch-shape-radius-l);
+  border-radius: 5px;
+  background-color: var(--sinch-sys-color-container-main-default);
   box-sizing: border-box;
   cursor: pointer;
 }
 
 .navigation-group-head:hover {
-  background-color: var(--sinch-color-bg-hover);
+  background-color: var(--sinch-sys-color-container-main-hover);
 }
 
 .navigation-group-head:active {
-  background-color: var(--sinch-color-bg-active);
+  background-color: var(--sinch-sys-color-container-main-active);
 }
 
 .navigation-group-text {

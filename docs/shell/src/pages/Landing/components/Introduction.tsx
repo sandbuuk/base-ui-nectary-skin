@@ -15,9 +15,7 @@ export const Introduction = () => (
           <SpacingY height={35}/>
           <sinch-title type="xl" level="1" text="Meet Nectary,"/>
           <sinch-title type="xl" level="1" text="Sinch’s design system"/>
-          <SpacingY height={10}/>
-          <sinch-tag key="celtic" color="celtic" text="version 1.0"/>
-          <SpacingY height={34}/>
+          <SpacingY height={44}/>
           <sinch-text type="m">{introductionText}</sinch-text>
         </div>
       </sinch-grid-item>

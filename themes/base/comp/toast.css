@@ -1,0 +1,18 @@
+:root,
+:host {
+  --sinch-comp-toast-shape-radius: var(--sinch-sys-shape-radius-l);
+  --sinch-comp-toast-color-info-default-background: var(--sinch-sys-color-feedback-info-background);
+  --sinch-comp-toast-color-info-default-text: var(--sinch-sys-color-text-default);
+  --sinch-comp-toast-color-info-default-icon: var(--sinch-sys-color-feedback-info-contrast);
+  --sinch-comp-toast-color-warning-default-text: var(--sinch-sys-color-text-default);
+  --sinch-comp-toast-color-warning-default-background: var(--sinch-sys-color-feedback-warning-background);
+  --sinch-comp-toast-color-warning-default-icon: var(--sinch-sys-color-feedback-warning-contrast);
+  --sinch-comp-toast-color-error-default-text: var(--sinch-sys-color-text-default);
+  --sinch-comp-toast-color-error-default-background: var(--sinch-sys-color-feedback-invalid-background);
+  --sinch-comp-toast-color-error-default-icon: var(--sinch-sys-color-feedback-invalid-contrast);
+  --sinch-comp-toast-color-success-default-text: var(--sinch-sys-color-text-default);
+  --sinch-comp-toast-color-success-default-background: var(--sinch-sys-color-feedback-success-background);
+  --sinch-comp-toast-color-success-default-icon: var(--sinch-sys-color-feedback-success-contrast);
+  --sinch-comp-toast-shadow: var(--sinch-ref-shadow-level-2);
+  --sinch-comp-toast-font-body: var(--sinch-sys-font-body-m);
+}

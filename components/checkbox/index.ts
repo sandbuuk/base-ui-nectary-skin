@@ -51,15 +51,46 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['checked', 'disabled', 'text']
+    return [
+      'checked',
+      'disabled',
+      'text',
+      'invalid',
+      'indeterminate',
+    ]
   }
 
-  get type() {
-    return 'text'
-  }
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+    switch (name) {
+      case 'text': {
+        this.#$label.textContent = newVal
 
-  get nodeName() {
-    return 'input'
+        break
+      }
+      case 'checked': {
+        const isChecked = isAttrTrue(newVal)
+
+        this.#$input.checked = isChecked
+        updateExplicitBooleanAttribute(this, 'aria-checked', isChecked)
+        updateBooleanAttribute(this, 'checked', isChecked)
+
+        break
+      }
+      case 'disabled': {
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$input.disabled = isDisabled
+        updateBooleanAttribute(this, 'disabled', isDisabled)
+
+        break
+      }
+      case 'invalid':
+      case 'indeterminate': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+    }
   }
 
   set checked(isChecked: boolean) {
@@ -100,32 +131,6 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
 
   get text() {
     return getAttribute(this, 'text')
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'text': {
-        this.#$label.textContent = newVal
-
-        break
-      }
-      case 'checked': {
-        const isChecked = isAttrTrue(newVal)
-
-        this.#$input.checked = isChecked
-        updateExplicitBooleanAttribute(this, 'aria-checked', isChecked)
-
-        break
-      }
-      case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
-
-        this.#$input.disabled = isDisabled
-        updateBooleanAttribute(this, 'disabled', isDisabled)
-
-        break
-      }
-    }
   }
 
   get focusable() {

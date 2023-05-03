@@ -1,8 +1,3 @@
-import {
-  lightColorNames,
-  darkColorNames,
-  vibrantColorNames,
-} from '@sinch-engage/nectary/theme/colors'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/chip'
 import '@sinch-engage/nectary/text'
@@ -14,10 +9,14 @@ const wrapperStyles: CSSProperties = {
   gap: 10,
 }
 
+const lightColorNames = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
+const darkColorNames = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
+const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+
 const allColorNames: string[] = [
-  ...lightColorNames.split(','),
-  ...darkColorNames.split(','),
-  ...vibrantColorNames.split(','),
+  ...lightColorNames,
+  ...darkColorNames,
+  ...vibrantColorNames,
 ]
 
 export const SimpleExample: FC = () => (

@@ -1,0 +1,22 @@
+:root,
+:host {
+  --sinch-comp-time-picker-watch-face-color-default-border-initial: var(--sinch-sys-color-container-main-foreground);
+  --sinch-comp-time-picker-watch-face-color-default-background-initial: var(--sinch-sys-color-container-main-default);
+  --sinch-comp-time-picker-header-color-default-icon-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-time-picker-header-color-default-text-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-time-picker-header-font: var(--sinch-sys-font-desktop-title-xl);
+  --sinch-comp-time-picker-digit-color-default-h24-initial: var(--sinch-sys-color-text-muted);
+  --sinch-comp-time-picker-digit-color-default-h12-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-time-picker-digit-color-default-minute-initial: var(--sinch-sys-color-text-muted);
+  --sinch-comp-time-picker-digit-color-checked-h24-initial: var(--sinch-sys-color-primary-default);
+  --sinch-comp-time-picker-digit-color-checked-h12-default: var(--sinch-sys-color-primary-default);
+  --sinch-comp-time-picker-digit-color-checked-minute-initial: var(--sinch-sys-color-primary-default);
+  --sinch-comp-time-picker-digit-font-default-h12: var(--sinch-sys-font-body-s);
+  --sinch-comp-time-picker-digit-font-default-h24: var(--sinch-sys-font-body-xs);
+  --sinch-comp-time-picker-digit-font-default-minutes: var(--sinch-sys-font-body-xs);
+  --sinch-comp-time-picker-digit-font-checked-h12: var(--sinch-sys-font-body-emphasize);
+  --sinch-comp-time-picker-digit-font-checked-h24: var(--sinch-sys-font-body-emphasize);
+  --sinch-comp-time-picker-digit-font-checked-minutes: var(--sinch-sys-font-body-emphasize);
+  --sinch-comp-time-picker-needle-color-default-background-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-time-picker-needle-color-default-background-focus: var(--sinch-sys-color-primary-default);
+}

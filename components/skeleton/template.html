@@ -15,9 +15,9 @@
 
 :host([card]:not([card="false"])) > #wrapper {
   padding: 16px;
-  background-color: var(--sinch-color-snow-100);
-  border-radius: var(--sinch-shape-radius-l);
-  border: 1px solid var(--sinch-color-snow-500);
+  background-color: var(--sinch-sys-color-container-main-default);
+  border-radius: var(--sinch-sys-shape-radius-l);
+  border: 1px solid var(--sinch-sys-color-border-light);
 }
 
 #shimmer {
@@ -27,7 +27,7 @@
     linear-gradient(
       90deg,
       transparent 0,
-      var(--sinch-color-snow-400) 100px,
+      var(--sinch-sys-color-container-contrast-primary-default) 100px,
       transparent 200px
     );
   clip-path: url("#clip");

@@ -1,6 +1,6 @@
 import type { TSinchElementReact } from '../types'
 
-export type TSinchIllustrationBackground = 'grey' | 'green' | 'blue' | 'yellow' | 'white'
+export type TSinchIllustrationBackground = 'grey' | 'gray' | 'green' | 'blue' | 'yellow' | 'white'
 export type TSinchIllustrationVAlign = 'top' | 'center' | 'bottom'
 export type TSinchIllustrationHAlign = 'left' | 'center' | 'right'
 

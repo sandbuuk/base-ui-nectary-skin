@@ -85,7 +85,7 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
       }
 
       case 'collapsed': {
-        updateBooleanAttribute(this, 'collapsed', isAttrTrue(newVal))
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break
       }
@@ -97,7 +97,6 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
 
         const titleType = getTitleTypeFromSize(this.size)
 
-        updateAttribute(this.#$caption, 'type', titleType)
         updateAttribute(this.#$caption, 'level', getTitleLevelFromType(titleType))
 
         break

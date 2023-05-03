@@ -3,6 +3,7 @@
   overflow: hidden;
   width: 100%;
   height: 100vh;
+  background-color: var(--sinch-sys-color-container-main-default);
 }
 
 #app-sidebar {
@@ -11,11 +12,19 @@
   width: 248px;
   height: 100%;
   box-sizing: border-box;
-  border-right: 1px solid var(--sinch-color-snow-600);
+  border-right: 1px solid var(--sinch-sys-color-border-light);
 }
 
-#app-sidebar-fixed {
+.app-sidebar-fixed {
   padding: 0 8px;
+}
+
+.app-sidebar-fixed.border-top {
+  border-top: 1px solid var(--sinch-sys-color-border-default);
+}
+
+.app-sidebar-fixed.border-bottom {
+  border-bottom: 1px solid var(--sinch-sys-color-border-default);
 }
 
 #app-sidebar-scroll {
@@ -28,6 +37,7 @@
 
 #app-sidebar-scroll-content {
   width: 232px;
+  padding: 8px 0;
 }
 
 #app-content {
@@ -41,12 +51,8 @@
 .divider {
   position: relative;
   height: 1px;
-  background-color: var(--sinch-color-snow-500);
+  background-color: var(--sinch-sys-color-border-light);
   margin: 4px 0;
-}
-
-#select-version {
-  width: 120px;
 }
 
 .scrollable {

@@ -1,6 +1,7 @@
 import {
   defineCustomElement,
   getBooleanAttribute,
+  isAttrTrue,
   NectaryElement,
   updateBooleanAttribute,
 } from '../utils'
@@ -22,6 +23,25 @@ defineCustomElement('sinch-table-row', class extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'row')
+  }
+
+  static get observedAttributes() {
+    return ['sticky', 'selected']
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'sticky':
+      case 'selected': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+    }
   }
 
   set sticky(isSticky: boolean) {

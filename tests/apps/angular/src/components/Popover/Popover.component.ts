@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/text'
 
 @Component({
   selector: 'popover-component',

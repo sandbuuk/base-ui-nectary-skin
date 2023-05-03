@@ -2,6 +2,25 @@ import { Component } from '@angular/core'
 import '@sinch-engage/nectary/radio'
 import '@sinch-engage/nectary/radio-option'
 
+const options = [{
+  value: '1',
+  text: 'Option value 1',
+}, {
+  value: '2',
+  text: 'Option value 2',
+  disabled: true,
+}, {
+  value: '3',
+  text: 'Option value 3',
+}, {
+  value: '4',
+  text: 'Option value 4',
+}]
+const singleOption = [{
+  value: '1',
+  text: 'Option value 1',
+}]
+
 @Component({
   selector: 'radio-component',
   templateUrl: './Radio.component.html',
@@ -11,6 +30,7 @@ import '@sinch-engage/nectary/radio-option'
 export class RadioComponent {
   value: string
   isControlled: boolean
+  isInvalid: boolean
   options: any[]
 
   constructor() {
@@ -18,21 +38,12 @@ export class RadioComponent {
     const search = url.searchParams
 
     this.isControlled = search.get('uncontrolled') === null
+    this.isInvalid = search.get('invalid') !== null
     this.value = search.get('value') ?? ''
 
-    this.options = (() => {
-      const data = search.get('options')
-
-      if (data === null) {
-        return []
-      }
-
-      try {
-        return JSON.parse(decodeURI(data))
-      } catch {
-        return []
-      }
-    })()
+    this.options = search.get('example') === 'single'
+      ? singleOption
+      : options
   }
 
   onChange(e: Event) {

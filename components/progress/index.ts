@@ -7,6 +7,7 @@ import {
   getIntegerAttribute,
   getBooleanAttribute,
   attrValueToInteger,
+  isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchProgressElement, TSinchProgressReact } from './types'
@@ -34,24 +35,8 @@ defineCustomElement('sinch-progress', class extends NectaryElement {
     this.setAttribute('role', 'progressbar')
   }
 
-  get value() {
-    return getIntegerAttribute(this, 'value', 0)
-  }
-
-  set value(value: number) {
-    updateAttribute(this, 'value', value)
-  }
-
-  get detailed() {
-    return getBooleanAttribute(this, 'detailed')
-  }
-
-  set detailed(isDetailed: boolean) {
-    updateBooleanAttribute(this, 'detailed', isDetailed)
-  }
-
   static get observedAttributes() {
-    return ['value']
+    return ['value', 'detailed']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -70,7 +55,29 @@ defineCustomElement('sinch-progress', class extends NectaryElement {
 
         break
       }
+
+      case 'detailed': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
     }
+  }
+
+  get value() {
+    return getIntegerAttribute(this, 'value', 0)
+  }
+
+  set value(value: number) {
+    updateAttribute(this, 'value', value)
+  }
+
+  get detailed() {
+    return getBooleanAttribute(this, 'detailed')
+  }
+
+  set detailed(isDetailed: boolean) {
+    updateBooleanAttribute(this, 'detailed', isDetailed)
   }
 })
 

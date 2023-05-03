@@ -1,13 +1,10 @@
 import { expect, test } from '@playwright/test'
-import { lightColorNames, vibrantColorNames } from '@sinch-engage/nectary/theme/colors'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const lightVibrantColors = encodeURIComponent(`${lightColorNames},${vibrantColorNames}`)
-
-const shot = '/color-menu'
-const withLightVibrant = `/color-menu?colors=${lightVibrantColors}`
-const checkSelectWithEverything = makeAccessibilityTests('/color-menu', 'sinch-color-menu')
+const shot = `/color-menu`
+const withLightVibrant = `/color-menu?example=light`
+const checkSelectWithEverything = makeAccessibilityTests(`/color-menu`, 'sinch-color-menu')
 
 test('accessibility', checkSelectWithEverything({
   async *fn() {
@@ -25,17 +22,6 @@ test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
 
       await $eval((el) => el.setAttribute('value', 'light-blue'))
       yield { name: 'light-blue' }
-    },
-  },
-  {
-    name: 'colors',
-    url: shot,
-    async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('colors', 'light-orange,light-blue'))
-      yield { name: 'set' }
-
-      await $eval((el) => el.removeAttribute('colors'))
-      yield { name: 'unset' }
     },
   },
   {

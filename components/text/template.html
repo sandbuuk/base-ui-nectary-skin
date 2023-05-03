@@ -1,38 +1,42 @@
 <style>
 :host {
   display: block;
-  font: var(--sinch-font-text-m);
-  font-style: inherit;
-  font-weight: inherit;
-  text-decoration: inherit;
+  font: var(--sinch-comp-text-font);
+  color: var(--sinch-global-color-text, var(--sinch-sys-color-text-default));
+
+  --sinch-comp-text-font: var(--sinch-sys-font-body-m);
 }
 
-:host([inline]:not([inline="false"])) {
+:host([inline]) {
   display: inline;
 }
 
 :host([type="s"]) {
-  font: var(--sinch-font-text-s);
+  --sinch-comp-text-font: var(--sinch-sys-font-body-s);
 }
 
 :host([type="xs"]) {
-  font: var(--sinch-font-text-xs);
+  --sinch-comp-text-font: var(--sinch-sys-font-body-xs);
 }
 
 :host([type="xxs"]) {
-  font: var(--sinch-font-text-xxs);
+  --sinch-comp-text-font: var(--sinch-sys-font-body-xxs);
 }
 
-:host([emphasized]:not([emphasized="false"])) {
-  font-weight: var(--sinch-font-weight-emphasized);
+:host([type="m"][emphasized]) {
+  --sinch-comp-text-font: var(--sinch-sys-font-body-emphasize);
 }
 
-:host([ellipsis]:not([ellipsis="false"])) {
+:host([type="s"][emphasized]) {
+  --sinch-comp-text-font: var(--sinch-sys-font-body-emphasize-s);
+}
+
+:host([ellipsis]) {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  --sinch-text-white-space: nowrap;
+  --sinch-global-text-white-space: nowrap;
 }
 </style>
 

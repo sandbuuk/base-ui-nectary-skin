@@ -2,158 +2,6 @@
 :host {
   display: inline-block;
   vertical-align: middle;
-
-  --sinch-size: var(--sinch-size-m);
-  --sinch-size-icon: var(--sinch-button-icon-size-m);
-  --sinch-shape-radius: var(--sinch-shape-radius-m);
-  --sinch-button-font: var(--sinch-button-font-m);
-}
-
-:host([data-size="l"]) {
-  --sinch-size: var(--sinch-size-l);
-  --sinch-size-icon: var(--sinch-button-icon-size-l);
-  --sinch-shape-radius: var(--sinch-shape-radius-l);
-  --sinch-button-font: var(--sinch-button-font-l);
-}
-
-:host([data-size="m"]) {
-  --sinch-size: var(--sinch-size-m);
-  --sinch-size-icon: var(--sinch-button-icon-size-m);
-  --sinch-shape-radius: var(--sinch-shape-radius-m);
-  --sinch-button-font: var(--sinch-button-font-m);
-}
-
-:host([data-size="s"]) {
-  --sinch-size: var(--sinch-size-s);
-  --sinch-size-icon: var(--sinch-button-icon-size-s);
-  --sinch-shape-radius: var(--sinch-shape-radius-s);
-  --sinch-button-font: var(--sinch-button-font-s);
-}
-
-:host([type="primary"]) {
-  --sinch-button-color-background: var(--sinch-button-primary-color-background);
-  --sinch-button-color-background-hover: var(--sinch-button-primary-color-background-hover);
-  --sinch-button-color-background-active: var(--sinch-button-primary-color-background-active);
-  --sinch-button-color-background-disabled: var(--sinch-button-primary-color-background-disabled);
-  --sinch-button-color-border: var(--sinch-button-primary-color-border);
-  --sinch-button-color-border-hover: var(--sinch-button-primary-color-border-hover);
-  --sinch-button-color-border-active: var(--sinch-button-primary-color-border-active);
-  --sinch-button-color-border-disabled: var(--sinch-button-primary-color-border-disabled);
-  --sinch-button-color-text: var(--sinch-button-primary-color-text);
-  --sinch-button-color-text-hover: var(--sinch-button-primary-color-text-hover);
-  --sinch-button-color-text-active: var(--sinch-button-primary-color-text-active);
-  --sinch-button-color-text-disabled: var(--sinch-button-primary-color-text-disabled);
-  --sinch-button-color-icon: var(--sinch-button-primary-color-icon);
-  --sinch-button-color-icon-hover: var(--sinch-button-primary-color-icon-hover);
-  --sinch-button-color-icon-active: var(--sinch-button-primary-color-icon-active);
-  --sinch-button-color-icon-disabled: var(--sinch-button-primary-color-icon-disabled);
-  --sinch-button-mix-blend-mode: var(--sinch-button-primary-mix-blend-mode);
-  --sinch-elevation-level: var(--sinch-elevation-level-1);
-}
-
-:host([type="secondary"]) {
-  --sinch-button-color-background: var(--sinch-button-secondary-color-background);
-  --sinch-button-color-background-hover: var(--sinch-button-secondary-color-background-hover);
-  --sinch-button-color-background-active: var(--sinch-button-secondary-color-background-active);
-  --sinch-button-color-background-disabled: var(--sinch-button-secondary-color-background-disabled);
-  --sinch-button-color-border: var(--sinch-button-secondary-color-border);
-  --sinch-button-color-border-hover: var(--sinch-button-secondary-color-border-hover);
-  --sinch-button-color-border-active: var(--sinch-button-secondary-color-border-active);
-  --sinch-button-color-border-disabled: var(--sinch-button-secondary-color-border-disabled);
-  --sinch-button-color-text: var(--sinch-button-secondary-color-text);
-  --sinch-button-color-text-hover: var(--sinch-button-secondary-color-text-hover);
-  --sinch-button-color-text-active: var(--sinch-button-secondary-color-text-active);
-  --sinch-button-color-text-disabled: var(--sinch-button-secondary-color-text-disabled);
-  --sinch-button-color-icon: var(--sinch-button-secondary-color-icon);
-  --sinch-button-color-icon-hover: var(--sinch-button-secondary-color-icon-hover);
-  --sinch-button-color-icon-active: var(--sinch-button-secondary-color-icon-active);
-  --sinch-button-color-icon-disabled: var(--sinch-button-secondary-color-icon-disabled);
-  --sinch-button-mix-blend-mode: var(--sinch-button-secondary-mix-blend-mode);
-  --sinch-elevation-level: var(--sinch-elevation-level-1);
-}
-
-:host([type="tertiary"]) {
-  --sinch-button-color-background: var(--sinch-button-tertiary-color-background);
-  --sinch-button-color-background-hover: var(--sinch-button-tertiary-color-background-hover);
-  --sinch-button-color-background-active: var(--sinch-button-tertiary-color-background-active);
-  --sinch-button-color-background-disabled: var(--sinch-button-tertiary-color-background-disabled);
-  --sinch-button-color-border: var(--sinch-button-tertiary-color-border);
-  --sinch-button-color-border-hover: var(--sinch-button-tertiary-color-border-hover);
-  --sinch-button-color-border-active: var(--sinch-button-tertiary-color-border-active);
-  --sinch-button-color-border-disabled: var(--sinch-button-tertiary-color-border-disabled);
-  --sinch-button-color-text: var(--sinch-button-tertiary-color-text);
-  --sinch-button-color-text-hover: var(--sinch-button-tertiary-color-text-hover);
-  --sinch-button-color-text-active: var(--sinch-button-tertiary-color-text-active);
-  --sinch-button-color-text-disabled: var(--sinch-button-tertiary-color-text-disabled);
-  --sinch-button-color-icon: var(--sinch-button-tertiary-color-icon);
-  --sinch-button-color-icon-hover: var(--sinch-button-tertiary-color-icon-hover);
-  --sinch-button-color-icon-active: var(--sinch-button-tertiary-color-icon-active);
-  --sinch-button-color-icon-disabled: var(--sinch-button-tertiary-color-icon-disabled);
-  --sinch-button-mix-blend-mode: var(--sinch-button-tertiary-mix-blend-mode);
-  --sinch-elevation-level: var(--sinch-elevation-level-0);
-}
-
-:host([type="cta-primary"]) {
-  --sinch-button-color-background: var(--sinch-button-cta-primary-color-background);
-  --sinch-button-color-background-hover: var(--sinch-button-cta-primary-color-background-hover);
-  --sinch-button-color-background-active: var(--sinch-button-cta-primary-color-background-active);
-  --sinch-button-color-background-disabled: var(--sinch-button-cta-primary-color-background-disabled);
-  --sinch-button-color-border: var(--sinch-button-cta-primary-color-border);
-  --sinch-button-color-border-hover: var(--sinch-button-cta-primary-color-border-hover);
-  --sinch-button-color-border-active: var(--sinch-button-cta-primary-color-border-active);
-  --sinch-button-color-border-disabled: var(--sinch-button-cta-primary-color-border-disabled);
-  --sinch-button-color-text: var(--sinch-button-cta-primary-color-text);
-  --sinch-button-color-text-hover: var(--sinch-button-cta-primary-color-text-hover);
-  --sinch-button-color-text-active: var(--sinch-button-cta-primary-color-text-active);
-  --sinch-button-color-text-disabled: var(--sinch-button-cta-primary-color-text-disabled);
-  --sinch-button-color-icon: var(--sinch-button-cta-primary-color-icon);
-  --sinch-button-color-icon-hover: var(--sinch-button-cta-primary-color-icon-hover);
-  --sinch-button-color-icon-active: var(--sinch-button-cta-primary-color-icon-active);
-  --sinch-button-color-icon-disabled: var(--sinch-button-cta-primary-color-icon-disabled);
-  --sinch-button-mix-blend-mode: var(--sinch-button-cta-primary-mix-blend-mode);
-  --sinch-elevation-level: var(--sinch-elevation-level-1);
-}
-
-:host([type="cta-secondary"]) {
-  --sinch-button-color-background: var(--sinch-button-cta-secondary-color-background);
-  --sinch-button-color-background-hover: var(--sinch-button-cta-secondary-color-background-hover);
-  --sinch-button-color-background-active: var(--sinch-button-cta-secondary-color-background-active);
-  --sinch-button-color-background-disabled: var(--sinch-button-cta-secondary-color-background-disabled);
-  --sinch-button-color-border: var(--sinch-button-cta-secondary-color-border);
-  --sinch-button-color-border-hover: var(--sinch-button-cta-secondary-color-border-hover);
-  --sinch-button-color-border-active: var(--sinch-button-cta-secondary-color-border-active);
-  --sinch-button-color-border-disabled: var(--sinch-button-cta-secondary-color-border-disabled);
-  --sinch-button-color-text: var(--sinch-button-cta-secondary-color-text);
-  --sinch-button-color-text-hover: var(--sinch-button-cta-secondary-color-text-hover);
-  --sinch-button-color-text-active: var(--sinch-button-cta-secondary-color-text-active);
-  --sinch-button-color-text-disabled: var(--sinch-button-cta-secondary-color-text-disabled);
-  --sinch-button-color-icon: var(--sinch-button-cta-secondary-color-icon);
-  --sinch-button-color-icon-hover: var(--sinch-button-cta-secondary-color-icon-hover);
-  --sinch-button-color-icon-active: var(--sinch-button-cta-secondary-color-icon-active);
-  --sinch-button-color-icon-disabled: var(--sinch-button-cta-secondary-color-icon-disabled);
-  --sinch-button-mix-blend-mode: var(--sinch-button-cta-secondary-mix-blend-mode);
-  --sinch-elevation-level: var(--sinch-elevation-level-1);
-}
-
-:host([type="destructive"]) {
-  --sinch-button-color-background: var(--sinch-button-destructive-color-background);
-  --sinch-button-color-background-hover: var(--sinch-button-destructive-color-background-hover);
-  --sinch-button-color-background-active: var(--sinch-button-destructive-color-background-active);
-  --sinch-button-color-background-disabled: var(--sinch-button-destructive-color-background-disabled);
-  --sinch-button-color-border: var(--sinch-button-destructive-color-border);
-  --sinch-button-color-border-hover: var(--sinch-button-destructive-color-border-hover);
-  --sinch-button-color-border-active: var(--sinch-button-destructive-color-border-active);
-  --sinch-button-color-border-disabled: var(--sinch-button-destructive-color-border-disabled);
-  --sinch-button-color-text: var(--sinch-button-destructive-color-text);
-  --sinch-button-color-text-hover: var(--sinch-button-destructive-color-text-hover);
-  --sinch-button-color-text-active: var(--sinch-button-destructive-color-text-active);
-  --sinch-button-color-text-disabled: var(--sinch-button-destructive-color-text-disabled);
-  --sinch-button-color-icon: var(--sinch-button-destructive-color-icon);
-  --sinch-button-color-icon-hover: var(--sinch-button-destructive-color-icon-hover);
-  --sinch-button-color-icon-active: var(--sinch-button-destructive-color-icon-active);
-  --sinch-button-color-icon-disabled: var(--sinch-button-destructive-color-icon-disabled);
-  --sinch-button-mix-blend-mode: var(--sinch-button-destructive-mix-blend-mode);
-  --sinch-elevation-level: var(--sinch-elevation-level-1);
 }
 
 #button {
@@ -161,67 +9,250 @@
   display: block;
   position: relative;
   width: 100%;
-  height: var(--sinch-size);
-  font: var(--sinch-button-font);
-  color: var(--sinch-button-color-text);
+  height: var(--sinch-local-size);
   cursor: pointer;
 
-  --sinch-color-icon: var(--sinch-button-color-icon);
+  --sinch-local-size: var(--sinch-comp-button-size-container-m);
+  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-m);
+  --sinch-local-font: var(--sinch-comp-button-font-size-m-text);
+  --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-m);
+  --sinch-global-color-icon: var(--sinch-local-color-icon);
 }
 
-/* Border */
+#button:disabled {
+  cursor: initial;
+}
+
+:host([data-size="l"]) > #button {
+  --sinch-local-size: var(--sinch-comp-button-size-container-l);
+  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-l);
+  --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-l);
+  --sinch-local-font: var(--sinch-comp-button-font-size-l-text);
+}
+
+:host([data-size="m"]) > #button {
+  --sinch-local-size: var(--sinch-comp-button-size-container-m);
+  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-m);
+  --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-m);
+  --sinch-local-font: var(--sinch-comp-button-font-size-m-text);
+}
+
+:host([data-size="s"]) > #button {
+  --sinch-local-size: var(--sinch-comp-button-size-container-s);
+  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-s);
+  --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-s);
+  --sinch-local-font: var(--sinch-comp-button-font-size-s-text);
+}
+
+:host([type="primary"]) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-primary-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-primary-default-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-button-color-primary-default-text-initial);
+  --sinch-local-color-icon: var(--sinch-comp-button-color-primary-default-icon-initial);
+  --sinch-local-color-outline-focus: var(--sinch-comp-button-color-primary-default-outilne-focus);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-initial);
+}
+
+:host([type="secondary"]) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-secondary-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-secondary-default-border-initial);
+  --sinch-local-color-outline-focus: var(--sinch-comp-button-color-secondary-default-outline-focus);
+  --sinch-local-color-text: var(--sinch-comp-button-color-secondary-default-text-initial);
+  --sinch-local-color-icon: var(--sinch-comp-button-color-secondary-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-initial);
+}
+
+:host([type="tertiary"]) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-tertiary-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-tertiary-default-border-initial);
+  --sinch-local-color-outline-focus: var(--sinch-comp-button-color-tertiary-default-outline-focus);
+  --sinch-local-color-text: var(--sinch-comp-button-color-tertiary-default-text-initial);
+  --sinch-local-color-icon: var(--sinch-comp-button-color-tertiary-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-tertiary-initial);
+}
+
+:host([type="cta-primary"]) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-cta-primary-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-cta-primary-default-border-initial);
+  --sinch-local-color-outline-focus: var(--sinch-comp-button-color-cta-primary-default-outline-focus);
+  --sinch-local-color-text: var(--sinch-comp-button-color-cta-primary-default-text-initial);
+  --sinch-local-color-icon: var(--sinch-comp-button-color-cta-primary-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-primary-initial);
+}
+
+:host([type="cta-secondary"]) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-cta-secondary-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-cta-secondary-default-border-initial);
+  --sinch-local-color-outline-focus: var(--sinch-comp-button-color-cta-secondary-default-outline-focus);
+  --sinch-local-color-text: var(--sinch-comp-button-color-cta-secondary-default-text-initial);
+  --sinch-local-color-icon: var(--sinch-comp-button-color-cta-secondary-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-secondary-initial);
+}
+
+:host([type="destructive"]) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-danger-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-danger-default-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-button-color-danger-default-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-danger-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-destructive-initial);
+}
+
+:host([type="primary"]) > #button:disabled {
+  --sinch-local-color-background: var(--sinch-comp-button-color-primary-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-primary-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-button-color-primary-disabled-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-primary-disabled-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-disabled);
+}
+
+:host([type="secondary"]) > #button:disabled {
+  --sinch-local-color-background: var(--sinch-comp-button-color-secondary-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-secondary-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-button-color-secondary-disabled-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-secondary-disabled-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-disabled);
+}
+
+:host([type="tertiary"]) > #button:disabled {
+  --sinch-local-color-background: var(--sinch-comp-button-color-tertiary-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-tertiary-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-button-color-tertiary-disabled-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-tertiary-disabled-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-tertiary-disabled);
+}
+
+:host([type="cta-primary"]) > #button:disabled {
+  --sinch-local-color-background: var(--sinch-comp-button-color-cta-primary-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-cta-primary-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-button-color-cta-primary-disabled-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-cta-primary-disabled-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-primary-disabled);
+}
+
+:host([type="cta-secondary"]) > #button:disabled {
+  --sinch-local-color-background: var(--sinch-comp-button-color-cta-secondary-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-cta-secondary-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-button-color-cta-secondary-disabled-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-cta-secondary-disabled-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-secondary-disabled);
+}
+
+:host([type="destructive"]) > #button:disabled {
+  --sinch-local-color-background: var(--sinch-comp-button-color-danger-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-danger-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-button-color-danger-disabled-text-initial);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-danger-disabled-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-danger-disabled);
+}
+
+:host([type="primary"]) > #button:focus {
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-focus);
+}
+
+:host([type="secondary"]) > #button:focus {
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-focus);
+}
+
+:host([type="tertiary"]) > #button:focus {
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-tertiary-focus);
+}
+
+:host([type="cta-primary"]) > #button:focus {
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-primary-focus);
+}
+
+:host([type="cta-secondary"]) > #button:focus {
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-secondary-focus);
+}
+
+:host([type="destructive"]) > #button:focus {
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-destructive-focus);
+}
+
+:host([type="primary"]) > #button:enabled:hover {
+  --sinch-local-color-background: var(--sinch-comp-button-color-primary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-hover);
+}
+
+:host([type="primary"]) > #button:enabled:active {
+  --sinch-local-color-background: var(--sinch-comp-button-color-primary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-active);
+}
+
+:host([type="secondary"]) > #button:enabled:hover {
+  --sinch-local-color-background: var(--sinch-comp-button-color-secondary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-hover);
+}
+
+:host([type="secondary"]) > #button:enabled:active {
+  --sinch-local-color-background: var(--sinch-comp-button-color-secondary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-active);
+}
+
+:host([type="tertiary"]) > #button:enabled:hover {
+  --sinch-local-color-background: var(--sinch-comp-button-color-tertiary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-tertiary-hover);
+}
+
+:host([type="tertiary"]) > #button:enabled:active {
+  --sinch-local-color-background: var(--sinch-comp-button-color-tertiary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-tertiary-active);
+}
+
+:host([type="cta-primary"]) > #button:enabled:hover {
+  --sinch-local-color-background: var(--sinch-comp-button-color-cta-primary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-primary-hover);
+}
+
+:host([type="cta-primary"]) > #button:enabled:active {
+  --sinch-local-color-background: var(--sinch-comp-button-color-cta-primary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-primary-active);
+}
+
+:host([type="cta-secondary"]) > #button:enabled:hover {
+  --sinch-local-color-background: var(--sinch-comp-button-color-cta-secondary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-secondary-hover);
+}
+
+:host([type="cta-secondary"]) > #button:enabled:active {
+  --sinch-local-color-background: var(--sinch-comp-button-color-cta-secondary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-secondary-active);
+}
+
+:host([type="destructive"]) > #button:enabled:hover {
+  --sinch-local-color-background: var(--sinch-comp-button-color-danger-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-danger-hover);
+}
+
+:host([type="destructive"]) > #button:enabled:active {
+  --sinch-local-color-background: var(--sinch-comp-button-color-danger-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-danger-active);
+}
+
+/* Border / Background */
 #button::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: var(--sinch-button-color-background);
-  border: 1px solid var(--sinch-button-color-border);
-  border-radius: var(--sinch-shape-radius);
-  box-shadow: var(--sinch-elevation-level);
+  background-color: var(--sinch-local-color-background);
+  border: 1px solid var(--sinch-local-color-border);
+  border-radius: var(--sinch-local-shape-radius);
+  box-shadow: var(--sinch-local-shadow);
   pointer-events: none;
-  mix-blend-mode: var(--sinch-button-mix-blend-mode);
 }
 
+#button:active::before {
+  border-width: 2px;
+}
+
+/* Focus Outline */
 #button:focus-visible::after {
   position: absolute;
   content: "";
   inset: -3px;
-  border: 2px solid var(--sinch-color-border-focus);
-  border-radius: calc(var(--sinch-shape-radius) + 3px);
+  border: 2px solid var(--sinch-local-color-outline-focus);
+  border-radius: calc(var(--sinch-local-shape-radius) + 3px);
   pointer-events: none;
-}
-
-#button:disabled {
-  color: var(--sinch-button-color-text-disabled);
-  cursor: initial;
-
-  --sinch-color-icon: var(--sinch-button-color-icon-disabled);
-}
-
-#button:disabled::before {
-  background-color: var(--sinch-button-color-background-disabled);
-  border-color: var(--sinch-button-color-border-disabled);
-  box-shadow: var(--sinch-elevation-level-0);
-}
-
-#button:enabled:hover {
-  --sinch-color-icon: var(--sinch-button-color-icon-hover);
-}
-
-#button:enabled:hover::before {
-  background-color: var(--sinch-button-color-background-hover);
-  border-color: var(--sinch-button-color-border-hover);
-}
-
-#button:enabled:active {
-  --sinch-color-icon: var(--sinch-button-color-icon-active);
-}
-
-#button:enabled:active::before {
-  background-color: var(--sinch-button-color-background-active);
-  border-color: var(--sinch-button-color-border-active);
-  border-width: 2px;
-  box-shadow: var(--sinch-elevation-level-0);
 }
 
 #content {
@@ -238,6 +269,8 @@
 }
 
 #text {
+  font: var(--sinch-local-font);
+  color: var(--sinch-local-color-text);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

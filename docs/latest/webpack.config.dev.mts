@@ -82,6 +82,18 @@ const config: Configuration = {
         loader: '@saas/types-to-mdx-loader',
       },
       {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        resourceQuery: '?tokens',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: BabelOptions,
+          },
+          '@saas/css-to-mdx-loader',
+        ],
+      },
+      {
         test: /\.mdx?$/,
         exclude: /node_modules/,
         use: [
@@ -109,6 +121,7 @@ const config: Configuration = {
       },
       {
         test: /\.css$/i,
+        resourceQuery: '',
         use: [
           {
             loader: 'style-loader',
@@ -119,13 +132,41 @@ const config: Configuration = {
                 }
 
                 Reflect.get(document.head, STYLE_INJECT_KEY).appendChild(element)
+              },
+              styleTagTransform: (css: string, element: HTMLStyleElement) => {
+                element.replaceChildren(document.createTextNode(css))
 
-                element.dispatchEvent(new Event('load'))
+                window.dispatchEvent(new CustomEvent('style-loader', { detail: element }))
               },
             },
           },
           {
             loader: 'css-loader',
+            options: {
+              modules: false,
+              sourceMap: false,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/i,
+        resourceQuery: '?theme',
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'lazyStyleTag',
+              insert: (element: HTMLStyleElement, options: Record<string, any>) => {
+                options.target.appendChild(element)
+              },
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: false,
+            },
           },
         ],
       },

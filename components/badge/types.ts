@@ -10,8 +10,6 @@ export type TSinchBadgeElement = HTMLElement & {
   size: TSinchSize,
   /** Mode, `square` by default */
   mode: TSinchBadgeMode,
-  /** Color */
-  color: string | null,
   /** Hidden */
   hidden: boolean,
   readonly badgeRect: TRect,
@@ -34,8 +32,6 @@ export type TSinchBadgeReact = TSinchElementReact<TSinchBadgeElement> & {
   size?: TSinchSize,
   /** Mode, `square` by default */
   mode?: TSinchBadgeMode,
-  /** Color */
-  color?: string,
   /** Hidden */
   hidden?: boolean,
 }

@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getReactEventHandler,
+  isAttrTrue,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
@@ -44,11 +45,7 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['value']
-  }
-
-  get nodeName() {
-    return 'select'
+    return ['value', 'invalid']
   }
 
   set value(value: string) {
@@ -59,6 +56,14 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     return getAttribute(this, 'value', '')
   }
 
+  set invalid(isInvalid: boolean) {
+    updateBooleanAttribute(this, 'invalid', isInvalid)
+  }
+
+  get invalid() {
+    return getBooleanAttribute(this, 'invalid')
+  }
+
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     if (oldVal === newVal) {
       return
@@ -67,6 +72,12 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     switch (name) {
       case 'value': {
         this.#onValueChange(newVal ?? '')
+
+        break
+      }
+
+      case 'invalid': {
+        this.#updateInvalid(isAttrTrue(newVal))
 
         break
       }
@@ -116,7 +127,7 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
 
   #onValueChange(value: string) {
     for (const $option of this.#$slot.assignedElements()) {
-      const isChecked = !getBooleanAttribute($option, 'disabled') && value === getAttribute($option, 'value', '')
+      const isChecked = value === getAttribute($option, 'value', '')
 
       updateBooleanAttribute($option, 'checked', isChecked)
     }
@@ -181,6 +192,12 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
 
   #findSelectedOption(elements: readonly TSinchRadioOptionElement[]) {
     return elements.find((el) => el.checked) ?? null
+  }
+
+  #updateInvalid(isInvalid: boolean) {
+    for (const opt of this.#$slot.assignedElements()) {
+      updateBooleanAttribute(opt, 'data-invalid', isInvalid)
+    }
   }
 
   #onChangeReactHandler = (e: Event) => {

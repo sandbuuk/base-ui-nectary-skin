@@ -1,5 +1,5 @@
 <template>
-  <div id="link-wrapper">
+  <sinch-text id="link-wrapper" type="m">
     <span>Line with </span>
     <sinch-link
       preventdefault
@@ -13,11 +13,12 @@
       @--blur="onBlur"
     ></sinch-link>
     <span> navigation</span>
-  </div>
+  </sinch-text>
 </template>
 
 <script>
 import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/text'
 
 export default {
   props: {

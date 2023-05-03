@@ -99,6 +99,9 @@ test('inline-alert screenshots', runScreenshotTests('sinch-inline-alert', [
       yield { name: 'shot' }
     },
   },
+]))
+
+test('inline-alert events', runScreenshotTests('sinch-inline-alert', [
   {
     name: 'custom events',
     url: withTextAndButtonAndClose,

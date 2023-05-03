@@ -1,10 +1,9 @@
 <sinch-tooltip
   [attr.orientation]="orientation"
   [attr.text]="text"
-  [attr.isInverted]="isInverted"
   [attr.type]="type"
   (-show)="onTooltipShow()"
   (-hide)="onTooltipHide()"
 >
-  <span id="content">Some content</span>
+  <sinch-text id="content" type="m">Some content</sinch-text>
 </sinch-tooltip>

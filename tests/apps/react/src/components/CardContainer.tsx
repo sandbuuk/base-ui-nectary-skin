@@ -1,4 +1,6 @@
 import type { FC } from 'react'
+import '@sinch-engage/nectary/title'
+import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/card-container'
 
 type TCardContainer = {
@@ -21,8 +23,8 @@ export const CardContainer: FC<TCardContainer> = () => {
           height: '100%',
         }}
       >
-        <span style={{ fontSize: '24px' }}>Replace me!</span>
-        <span style={{ fontSize: '16px' }}>Im a template component</span>
+        <sinch-title type="l" level="2" text="Replace me!"/>
+        <sinch-text type="m">Im a template component</sinch-text>
       </div>
     </sinch-card-container>
   )

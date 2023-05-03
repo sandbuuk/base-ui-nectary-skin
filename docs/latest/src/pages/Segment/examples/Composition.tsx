@@ -45,7 +45,7 @@ export const CompositionExample: FC = () => {
       <sinch-icon-button slot="info" aria-label="Options">
         <sinch-icon-apps slot="icon"/>
       </sinch-icon-button>
-      <section slot="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
+      <sinch-text slot="content" type="m">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</sinch-text>
       <sinch-button slot="action" text="Cancel" type="secondary" aria-label="Cancel"/>
       <sinch-button slot="action" text="Ok" type="primary" aria-label="Ok"/>
     </sinch-segment>

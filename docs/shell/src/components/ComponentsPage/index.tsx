@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from 'react'
 import { versions } from '../../utils'
 import type { FC } from 'react'
 import './styles.css'
+import { useThemeName } from '~/context/theme-control'
 import { useNavigateVersion } from '~/hooks'
 
 export const ComponentsPage: FC = () => {
   const { versionValue } = useNavigateVersion()
+  const { themeName } = useThemeName()
   const ref = useRef<HTMLDivElement | null>(null)
   const [isLoading, setLoading] = useState(true)
 
@@ -23,7 +25,7 @@ export const ComponentsPage: FC = () => {
         const { bootstrap } = await Reflect.get(versions, versionValue).bootstrap()
 
         if (mounted) {
-          const res = bootstrap(ref.current!)
+          const res = bootstrap(ref.current!, { themeName })
 
           unmount = res.unmount
           res.ready.finally(() => {

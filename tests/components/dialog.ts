@@ -42,13 +42,9 @@ test('dialog screenshots', runScreenshotTests('sinch-dialog', [
   {
     name: 'css max-width variable',
     url: withLongContent,
-    async *fn({ page, $eval }) {
-      await page.evaluate(() => {
-        const style = document.createElement('style')
-
-        style.innerHTML = ':root, :host { --sinch-dialog-max-width: 256px; }'
-
-        document.head.append(style)
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.style.setProperty('--sinch-comp-dialog-max-width', '256px')
       })
       yield { name: 'shot', includeRects: [await $eval((el) => el.dialogRect)] }
     },
@@ -56,13 +52,9 @@ test('dialog screenshots', runScreenshotTests('sinch-dialog', [
   {
     name: 'css max-height variable',
     url: withLongContent,
-    async *fn({ page, $eval }) {
-      await page.evaluate(() => {
-        const style = document.createElement('style')
-
-        style.innerHTML = ':root, :host { --sinch-dialog-max-height: 55px; }'
-
-        document.head.append(style)
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.style.setProperty('--sinch-comp-dialog-max-height', '55px')
       })
       yield { name: 'shot', includeRects: [await $eval((el) => el.dialogRect)] }
     },
@@ -72,8 +64,6 @@ test('dialog screenshots', runScreenshotTests('sinch-dialog', [
     url: withTitleContentButtons,
     async *fn({ page, $eval }) {
       const rect = await $eval((el) => el.dialogRect)
-
-      yield { name: 'initial', includeRects: [rect] }
 
       await page.keyboard.press('Tab')
       yield { name: 'tab-1', includeRects: [rect] }

@@ -2,44 +2,10 @@ import { test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
-const items = ({ hasLongLine }: any = {}) => encodeURI(JSON.stringify({
-  head: [
-    { isCheckbox: true, isFit: true },
-    { text: 'ID', isSortable: true, align: 'end' },
-    { text: 'Ticket' },
-    { text: 'Channel', align: 'center', tooltip: 'Tooltip text', isSortable: true, isFilterable: true },
-    { text: 'Comment long long' },
-    { text: 'Active', align: 'center' },
-    { text: 'Actions', isFit: true, tooltip: 'Tooltip text' },
-  ],
-  body: [
-    [
-      { isCheckbox: true },
-      { text: '123', align: 'end' },
-      { isLink: true, text: 'Link' },
-      { isIcon: true, align: 'center', iconType: 'open-in-new' },
-      hasLongLine === true
-        ? { text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.' }
-        : { text: 'Lorem Ipsum' },
-      { isToggle: true, align: 'center' },
-      { isIcon: true, align: 'center', iconType: 'more-vert' },
-    ],
-    [
-      { isCheckbox: true },
-      { text: '456789', align: 'end' },
-      { isLink: true, text: 'Link' },
-      { isIcon: true, align: 'center', iconType: 'open-in-new' },
-      { text: 'Lorem Ipsum' },
-      { isToggle: true, align: 'center' },
-      { isIcon: true, align: 'center', iconType: 'more-vert' },
-    ],
-  ],
-}))
-
-const withItems = `/table?width=1000&state=${items()}`
-const withLongLine = `/table?width=1000&state=${items({ hasLongLine: true })}`
-const withNarrow = `/table?width=300&state=${items()}`
-const checkTableWithItems = makeAccessibilityTests(`/table?width=1000&state=${items()}`, 'sinch-table')
+const withItems = '/table?width=1000'
+const withLongLine = '/table?width=1000&example=long'
+const withNarrow = '/table?width=300'
+const checkTableWithItems = makeAccessibilityTests('/table?width=1000', 'sinch-table')
 
 test('accessibility', checkTableWithItems({
   async *fn() {

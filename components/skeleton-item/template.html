@@ -1,39 +1,39 @@
 <style>
 :host {
   display: block;
-  height: var(--sinch-size-m);
+  height: var(--sinch-sys-size-m);
 
-  --sinch-shape-radius: var(--sinch-shape-radius-m);
+  --sinch-local-shape-radius: var(--sinch-sys-shape-radius-m);
 }
 
 :host([size="xs"]) {
-  height: var(--sinch-size-xs);
+  height: var(--sinch-sys-size-xs);
 
-  --sinch-shape-radius: var(--sinch-shape-radius-xs);
+  --sinch-local-shape-radius: var(--sinch-sys-shape-radius-xs);
 }
 
 :host([size="s"]) {
-  height: var(--sinch-size-s);
+  height: var(--sinch-sys-size-s);
 
-  --sinch-shape-radius: var(--sinch-shape-radius-s);
+  --sinch-local-shape-radius: var(--sinch-sys-shape-radius-s);
 }
 
 :host([size="m"]) {
-  height: var(--sinch-size-m);
+  height: var(--sinch-sys-size-m);
 
-  --sinch-shape-radius: var(--sinch-shape-radius-m);
+  --sinch-local-shape-radius: var(--sinch-sys-shape-radius-m);
 }
 
 :host([size="l"]) {
-  height: var(--sinch-size-l);
+  height: var(--sinch-sys-size-l);
 
-  --sinch-shape-radius: var(--sinch-shape-radius-l);
+  --sinch-local-shape-radius: var(--sinch-sys-shape-radius-l);
 }
 
 #content {
   height: 100%;
-  background-color: var(--sinch-color-snow-500);
-  border-radius: var(--sinch-shape-radius);
+  background-color: var(--sinch-sys-color-border-light);
+  border-radius: var(--sinch-local-shape-radius);
 }
 </style>
 

@@ -7,13 +7,12 @@ const printAxeResults = (axeResults: readonly axeCore.Result[]): string => {
 
   for (const v of axeResults) {
     for (const node of v.nodes) {
-      lines.push(node.html)
-
       const targets: string[] = Array.isArray(node.target[0])
         ? node.target[0]
         : node.target
 
-      lines.push(`${targets.join(' > ')}: ${v.description}`)
+      lines.push(targets.join(' > '))
+      lines.push(node.html)
 
       if (node.failureSummary != null) {
         lines.push(node.failureSummary)
@@ -32,6 +31,14 @@ const evaluateAccessibilityCheck = (page: Page) =>
         values: ['wcag2a', 'wcag2aa'],
       },
     }))
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// const saveScreenshot = async (page: Page, info: TestInfo): Promise<void> => {
+//   const filepath = path.resolve(info.outputDir)
+
+//   await mkdir(filepath, { recursive: true })
+//   await writeFile(path.join(filepath, 'accessibility.png'), await page.screenshot())
+// }
 
 type EvalFunc<T extends keyof HTMLElementTagNameMap> = {
   <R, Arg>(cb: (el: HTMLElementTagNameMap[T], arg: Arg) => R, arg: Arg): Promise<R>,
@@ -85,6 +92,8 @@ export const makeAccessibilityTests = <T extends keyof HTMLElementTagNameMap>(pa
 
           if (violations.length > 0) {
             process.stdout.write(printAxeResults(violations))
+            // console.dir(violations, { depth: 10 })
+            // await saveScreenshot(page, info)
             info.fail()
 
             break

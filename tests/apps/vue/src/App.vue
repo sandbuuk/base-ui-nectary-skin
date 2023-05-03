@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/theme'
+import '@sinch-engage/nectary-theme-base/index'
 import Accordion from './components/Accordion.vue'
 import ActionDropdown from './components/ActionDropdown.vue'
 import ActionMenu from './components/ActionMenu.vue'

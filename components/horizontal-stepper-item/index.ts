@@ -1,8 +1,9 @@
 import '../icon'
+import '../title'
+import '../text'
 import {
   defineCustomElement,
   getAttribute,
-  getCssVars,
   getLiteralAttribute,
   NectaryElement,
   updateAttribute,
@@ -20,8 +21,6 @@ defineCustomElement('sinch-horizontal-stepper-item', class extends NectaryElemen
   #$label: HTMLElement
   #$description: HTMLElement
   #$circleText: HTMLElement
-  #$iconSuccess: HTMLElement
-  #$iconError: HTMLElement
 
   constructor() {
     super()
@@ -33,18 +32,6 @@ defineCustomElement('sinch-horizontal-stepper-item', class extends NectaryElemen
     this.#$label = shadowRoot.querySelector('#label')!
     this.#$description = shadowRoot.querySelector('#description')!
     this.#$circleText = shadowRoot.querySelector('#circle-text')!
-    this.#$iconSuccess = shadowRoot.querySelector('#icon-success')!
-    this.#$iconError = shadowRoot.querySelector('#icon-error')!
-  }
-
-  connectedCallback() {
-    const [successName, errorName] = getCssVars(this, [
-      '--sinch-horizontal-stepper-icon-success',
-      '--sinch-horizontal-stepper-icon-error',
-    ])
-
-    updateAttribute(this.#$iconSuccess, 'name', successName)
-    updateAttribute(this.#$iconError, 'name', errorName)
   }
 
   static get observedAttributes() {
@@ -52,9 +39,13 @@ defineCustomElement('sinch-horizontal-stepper-item', class extends NectaryElemen
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
     switch (name) {
       case 'label': {
-        this.#$label.textContent = newVal
+        updateAttribute(this.#$label, 'text', newVal)
 
         break
       }

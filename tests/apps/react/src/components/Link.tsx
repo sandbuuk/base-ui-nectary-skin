@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/link'
+import '@sinch-engage/nectary/text'
 
 type TLink = {
   search: URLSearchParams,
@@ -19,7 +20,7 @@ export const Link: FC<TLink> = ({ search }) => {
   const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-link-blur')), [])
 
   return (
-    <div id="link-wrapper" style={{ maxWidth: '100%' }}>
+    <sinch-text id="link-wrapper" type="m">
       <span>Line with</span>
       {' '}
       <sinch-link
@@ -36,6 +37,6 @@ export const Link: FC<TLink> = ({ search }) => {
       />
       {' '}
       <span>navigation</span>
-    </div>
+    </sinch-text>
   )
 }

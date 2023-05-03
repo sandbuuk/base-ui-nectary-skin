@@ -8,7 +8,7 @@ import {
   updateAttribute,
   NectaryElement,
   getReactEventHandler,
-  getCssVar,
+  isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
 import { assertChipColor, getChipColorBg, getChipColorFg } from './utils'
@@ -21,20 +21,18 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-chip', class extends NectaryElement {
   #$text: HTMLElement
   #$button: HTMLElement
-  #$iconClose: HTMLElement
 
   #controller: AbortController | null = null
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: true })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$button = shadowRoot.querySelector('#button')!
     this.#$text = shadowRoot.querySelector('#text')!
-    this.#$iconClose = shadowRoot.querySelector('#icon-close')!
   }
 
   connectedCallback() {
@@ -52,14 +50,42 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
     this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
     this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
 
-    updateAttribute(this.#$iconClose, 'name', getCssVar(this, '--sinch-chip-icon-close'))
-
     this.#updateColor()
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
     this.#controller!.abort()
+  }
+
+  static get observedAttributes() {
+    return ['text', 'color', 'small']
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'color': {
+        this.#updateColor()
+
+        break
+      }
+
+      case 'text': {
+        this.#$text.textContent = newVal
+
+        break
+      }
+
+      case 'small': {
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+    }
   }
 
   get color() {
@@ -86,26 +112,6 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
     updateBooleanAttribute(this, 'small', isSmall)
   }
 
-  static get observedAttributes() {
-    return ['text', 'color']
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'color': {
-        this.#updateColor()
-
-        break
-      }
-
-      case 'text': {
-        this.#$text.textContent = newVal
-
-        break
-      }
-    }
-  }
-
   #updateColor() {
     if (!this.isConnected) {
       return
@@ -122,12 +128,12 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
       const fg = getChipColorFg(colorName)
 
       this.#$button.style.setProperty('background-color', bg)
-      this.#$button.style.setProperty('color', fg)
-      this.#$button.style.setProperty('--sinch-color-icon', fg)
+      this.#$button.style.setProperty('--sinch-global-color-text', fg)
+      this.#$button.style.setProperty('--sinch-global-color-icon', fg)
     } else {
       this.#$button.style.removeProperty('background-color')
-      this.#$button.style.removeProperty('color')
-      this.#$button.style.removeProperty('--sinch-color-icon')
+      this.#$button.style.removeProperty('--sinch-global-color-text')
+      this.#$button.style.removeProperty('--sinch-global-color-icon')
     }
   }
 

@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import type { TSinchInputElement } from '@sinch-engage/nectary/input/types'
-import type { FC } from 'react'
+import type { FC, CSSProperties } from 'react'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/spinner'
 import '@sinch-engage/nectary/input'
@@ -8,6 +8,10 @@ import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/emoji-picker'
 import '@sinch-engage/nectary-assets/icons/sentiment-satisfied'
+
+const inputStyles: CSSProperties = {
+  width: 300,
+}
 
 export const CompositionExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
@@ -37,8 +41,9 @@ export const CompositionExample: FC = () => {
     >
       <sinch-popover
         slot="input"
+        style={inputStyles}
         open={isOpen}
-        orientation="bottom-left"
+        orientation="top-right"
         aria-label="Emoji input"
         on-close={onClose}
       >

@@ -1,6 +1,9 @@
 <style>
 :host {
   display: contents;
+
+  --sinch-comp-dialog-max-width: 512px;
+  --sinch-comp-dialog-max-height: 50vh;
 }
 
 #dialog {
@@ -11,16 +14,14 @@
   display: flex;
   flex-direction: column;
   padding: 24px 0;
-  max-width: var(--sinch-dialog-max-width, 512px);
+  max-width: var(--sinch-comp-dialog-max-width);
   max-height: unset;
-  border-radius: var(--sinch-shape-radius-l);
+  border-radius: var(--sinch-comp-dialog-shape-radius);
   box-sizing: border-box;
   contain: content;
-  background-color: var(--sinch-color-snow-100);
-  color: var(--sinch-color-text-default);
-  font: var(--sinch-font-text-m);
+  background-color: var(--sinch-comp-dialog-color-default-background-initial);
   border: none;
-  box-shadow: var(--sinch-elevation-level-3);
+  box-shadow: var(--sinch-comp-dialog-shadow);
 }
 
 #dialog:not([open]) {
@@ -42,13 +43,14 @@ dialog::backdrop {
 }
 
 #caption {
-  color: var(--sinch-color-text-default);
+  --sinch-global-color-text: var(--sinch-comp-dialog-color-default-title-initial);
+  --sinch-comp-title-font: var(--sinch-comp-dialog-font-title);
 }
 
 #content {
   min-height: 0;
   overflow: auto;
-  max-height: var(--sinch-dialog-max-height, 50vh);
+  max-height: var(--sinch-comp-dialog-max-height);
   padding: 4px 24px;
 }
 
@@ -66,7 +68,11 @@ dialog::backdrop {
 }
 
 #close {
-  transform: translate(4px, -4px);
+  position: relative;
+  left: 4px;
+  top: -4px;
+
+  --sinch-global-color-icon: var(--sinch-comp-dialog-color-default-icon-initial);
 }
 </style>
 
@@ -74,7 +80,7 @@ dialog::backdrop {
   <div id="header">
     <sinch-title id="caption" type="m" level="3" ellipsis></sinch-title>
     <sinch-icon-button id="close" size="s" tabindex="0">
-      <sinch-icon id="icon-close" slot="icon"></sinch-icon>
+      <sinch-icon id="icon-close" slot="icon" name="close"></sinch-icon>
     </sinch-icon-button>
   </div>
   <div id="content">

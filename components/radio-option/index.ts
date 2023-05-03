@@ -39,7 +39,51 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['checked', 'disabled', 'text', 'value']
+    return [
+      'checked',
+      'disabled',
+      'text',
+      'value',
+      'data-invalid',
+    ]
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'text': {
+        this.#$label.textContent = newVal
+
+        break
+      }
+      case 'checked': {
+        this.#$input.checked = isAttrTrue(newVal)
+        updateAttribute(this, 'aria-checked', isAttrTrue(newVal))
+
+        break
+      }
+      case 'disabled': {
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$input.disabled = isDisabled
+        updateBooleanAttribute(this, 'disabled', isDisabled)
+
+        break
+      }
+      case 'data-invalid': {
+        updateBooleanAttribute(this, 'data-invalid', isAttrTrue(newVal))
+
+        break
+      }
+      case 'value': {
+        this.#$input.value = newVal ?? ''
+
+        break
+      }
+    }
   }
 
   set checked(isChecked: boolean) {
@@ -72,35 +116,6 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
 
   get text() {
     return getAttribute(this, 'text', '')
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'text': {
-        this.#$label.textContent = newVal
-
-        break
-      }
-      case 'checked': {
-        this.#$input.checked = isAttrTrue(newVal)
-        updateAttribute(this, 'aria-checked', isAttrTrue(newVal))
-
-        break
-      }
-      case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
-
-        this.#$input.disabled = isDisabled
-        updateBooleanAttribute(this, 'disabled', isDisabled)
-
-        break
-      }
-      case 'value': {
-        this.#$input.value = newVal ?? ''
-
-        break
-      }
-    }
   }
 
   get focusable() {

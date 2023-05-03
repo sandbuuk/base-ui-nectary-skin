@@ -2,7 +2,6 @@ import '../text'
 import '../pop'
 import {
   defineCustomElement,
-  getBooleanAttribute,
   getAttribute,
   getLiteralAttribute,
   updateBooleanAttribute,
@@ -143,14 +142,6 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     updateAttribute(this, 'text', value)
   }
 
-  get inverted() {
-    return getBooleanAttribute(this, 'inverted')
-  }
-
-  set inverted(isInverted: boolean) {
-    updateBooleanAttribute(this, 'inverted', isInverted)
-  }
-
   get orientation() {
     return getLiteralAttribute(this, orientationValues, 'orientation', 'top')
   }
@@ -159,7 +150,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     updateLiteralAttribute(this, orientationValues, 'orientation', value)
   }
 
-  get type() {
+  get type(): TSinchTooltipType {
     return getLiteralAttribute(this, typeValues, 'type', 'slow')
   }
 

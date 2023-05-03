@@ -7,13 +7,14 @@
       :disabled="opt.disabled"
       :status="opt.status"
       :optionaltext="opt.optional">
-      <span v-if="opt.content != null" slot="content">{{opt.content}}</span>
+      <sinch-text v-if="opt.content != null" slot="content" type="m">{{opt.content}}</sinch-text>
       <sinch-icon-open-in-new v-if="opt.icon === true" slot="icon"></sinch-icon-open-in-new>
     </sinch-accordion-item>
   </sinch-accordion>
 </template>
 
 <script>
+import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/accordion'
 import '@sinch-engage/nectary/accordion-item'
 import '@sinch-engage/nectary-assets/icons/open-in-new'

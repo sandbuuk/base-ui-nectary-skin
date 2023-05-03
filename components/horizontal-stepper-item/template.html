@@ -19,35 +19,48 @@
   align-self: center;
   width: 32px;
   height: 32px;
-  background-color: var(--sinch-color-snow-700);
-  font: var(--sinch-font-title-s);
+  background-color: var(--sinch-local-color-background);
+  font: var(--sinch-sys-font-desktop-title-s);
   line-height: 32px;
   text-align: center;
-  color: var(--sinch-color-stormy-500);
-  border: 1px solid transparent;
+  color: var(--sinch-local-color-text);
+  border: 1px solid var(--sinch-local-color-border);
   border-radius: 50%;
   box-sizing: border-box;
 
-  --sinch-size-icon: 20px;
+  --sinch-local-color-background: var(--sinch-comp-horizontal-stepper-color-background-default);
+  --sinch-local-color-border: var(--sinch-comp-horizontal-stepper-color-border-default);
+  --sinch-local-color-text: var(--sinch-comp-horizontal-stepper-color-icon-default);
+  --sinch-local-color-icon: var(--sinch-comp-horizontal-stepper-color-icon-default);
+  --sinch-global-size-icon: 20px;
 }
 
-#label {
-  font: var(--sinch-font-title-s);
-  color: var(--sinch-color-stormy-500);
-  text-align: center;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-top: 8px;
+:host([data-progress="active"]) #circle {
+  --sinch-local-color-background: var(--sinch-comp-horizontal-stepper-color-background-active);
+  --sinch-local-color-border: var(--sinch-comp-horizontal-stepper-color-border-active);
+  --sinch-local-color-text: var(--sinch-comp-horizontal-stepper-color-icon-active);
+  --sinch-local-color-icon: var(--sinch-comp-horizontal-stepper-color-icon-active);
 }
 
-#description {
-  font: var(--sinch-font-text-xs);
-  color: var(--sinch-color-stormy-300);
-  text-align: center;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+:host([data-progress="done"]) #circle {
+  --sinch-local-color-background: var(--sinch-comp-horizontal-stepper-color-background-visited);
+  --sinch-local-color-border: var(--sinch-comp-horizontal-stepper-color-border-visited);
+  --sinch-local-color-text: var(--sinch-comp-horizontal-stepper-color-icon-visited);
+  --sinch-local-color-icon: var(--sinch-comp-horizontal-stepper-color-icon-visited);
+}
+
+:host([data-progress="done"][status="error"]) #circle {
+  --sinch-local-color-background: var(--sinch-comp-horizontal-stepper-color-background-visited-error);
+  --sinch-local-color-border: var(--sinch-comp-horizontal-stepper-color-border-visited-error);
+  --sinch-local-color-text: var(--sinch-comp-horizontal-stepper-color-icon-visited-error);
+  --sinch-local-color-icon: var(--sinch-comp-horizontal-stepper-color-icon-visited-error);
+}
+
+:host([data-progress="done"][status="skip"]) #circle {
+  --sinch-local-color-background: var(--sinch-comp-horizontal-stepper-color-background-visited-skip);
+  --sinch-local-color-border: var(--sinch-comp-horizontal-stepper-color-border-visited-skip);
+  --sinch-local-color-text: var(--sinch-comp-horizontal-stepper-color-icon-visited-skip);
+  --sinch-local-color-icon: var(--sinch-comp-horizontal-stepper-color-icon-visited-skip);
 }
 
 #icon-error,
@@ -55,22 +68,8 @@
   display: none;
 }
 
-:host([data-progress="active"]) #circle {
-  color: var(--sinch-color-snow-100);
-  background-color: var(--sinch-color-stormy-400);
-}
-
-:host([data-progress="done"]) #circle {
-  border-color: var(--sinch-color-stormy-400);
-}
-
 :host([data-progress="done"]:not([status])) #icon-success {
   display: block;
-}
-
-:host([data-progress="done"][status="error"]) #circle {
-  background-color: var(--sinch-color-feedback-invalid-bg);
-  border-color: var(--sinch-color-stormy-400);
 }
 
 :host([data-progress="done"][status="error"]) #icon-error {
@@ -80,14 +79,27 @@
 :host([data-progress="done"]:not([status="skip"])) #circle-text {
   display: none;
 }
+
+#label {
+  text-align: center;
+  margin-top: 8px;
+
+  --sinch-global-color-text: var(--sinch-comp-horizontal-stepper-color-label);
+}
+
+#description {
+  text-align: center;
+
+  --sinch-global-color-text: var(--sinch-comp-horizontal-stepper-color-description);
+}
 </style>
 
 <div id="wrapper">
   <div id="circle" aria-hidden="true">
-    <sinch-icon id="icon-success"></sinch-icon>
-    <sinch-icon id="icon-error"></sinch-icon>
+    <sinch-icon id="icon-success" name="check"></sinch-icon>
+    <sinch-icon id="icon-error" name="exclamation"></sinch-icon>
     <span id="circle-text"></span>
   </div>
-  <span id="label"></span>
-  <span id="description"></span>
+  <sinch-title id="label" type="s" ellipsis></sinch-title>
+  <sinch-text id="description" type="xs" ellipsis></sinch-text>
 </div>

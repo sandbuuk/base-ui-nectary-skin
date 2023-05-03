@@ -4,7 +4,6 @@ import {
   defineCustomElement,
   getBooleanAttribute,
   getAttribute,
-  updateBooleanAttribute,
   updateAttribute,
   setClass,
   NectaryElement,
@@ -74,11 +73,16 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'label', 'caption', 'disabled', 'draggable']
+    return [
+      'text',
+      'label',
+      'caption',
+      'draggable',
+    ]
   }
 
-  attributeChangedCallback(name: string, prevVal: string | null, newVal: string | null) {
-    if (prevVal === newVal) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
       return
     }
 
@@ -95,11 +99,6 @@ defineCustomElement('sinch-card', class extends NectaryElement {
       }
       case 'caption': {
         updateAttribute(this.#$caption, 'text', newVal)
-
-        break
-      }
-      case 'disabled': {
-        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
 
         break
       }
@@ -140,14 +139,6 @@ defineCustomElement('sinch-card', class extends NectaryElement {
 
   get label(): string {
     return getAttribute(this, 'label', '')
-  }
-
-  set disabled(isDisabled: boolean) {
-    updateBooleanAttribute(this, 'disabled', isDisabled)
-  }
-
-  get disabled() {
-    return getBooleanAttribute(this, 'disabled')
   }
 
   get dragRect(): TRect | null {

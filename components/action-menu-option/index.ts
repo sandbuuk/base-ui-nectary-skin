@@ -64,7 +64,7 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
       }
 
       case 'disabled': {
-        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break
       }

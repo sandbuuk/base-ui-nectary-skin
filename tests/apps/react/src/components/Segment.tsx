@@ -10,6 +10,7 @@ import '@sinch-engage/nectary-assets/icons-branded/chatbot'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/checkbox'
+import '@sinch-engage/nectary/text'
 
 type TSegment = {
   search: URLSearchParams,
@@ -51,7 +52,7 @@ export const Segment: FC<TSegment> = ({ search }) => {
       )}
       {hasContent && (
         <div slot="content" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</section>
+          <sinch-text type="m">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</sinch-text>
           <sinch-field slot="content" label="Label">
             <sinch-input slot="input" aria-label="Input" value=""/>
           </sinch-field>
@@ -84,15 +85,15 @@ export const Segment: FC<TSegment> = ({ search }) => {
             height: '100%',
           }}
         >
-          <span style={{ fontSize: '18px' }}>Replace me!</span>
-          <span style={{ fontSize: '12px' }}>Im a template component</span>
+          <sinch-text type="m">Replace me!</sinch-text>
+          <sinch-text type="xs">Im a template component</sinch-text>
         </div>
       )}
       {hasAction && (
         <>
-          <sinch-checkbox aria-label="Checkbox" checked={false} onChange={() => {}} text="Checkbox" slot="action"/>
-          <sinch-button size="s" text="Cancel" aria-label="Cancel" type="secondary" slot="action" onClick={() => {}}/>
-          <sinch-button size="s" text="Ok" aria-label="Ok" type="primary" slot="action" onClick={() => {}}/>
+          <sinch-checkbox aria-label="Checkbox" checked={false} text="Checkbox" slot="action"/>
+          <sinch-button size="s" text="Cancel" aria-label="Cancel" type="secondary" slot="action"/>
+          <sinch-button size="s" text="Ok" aria-label="Ok" type="primary" slot="action"/>
         </>
       )}
     </sinch-segment>

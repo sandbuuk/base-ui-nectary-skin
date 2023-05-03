@@ -9,6 +9,7 @@ import '@sinch-engage/nectary-assets/icons/apps'
 import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/text'
 
 @Component({
   selector: 'segment-component',
