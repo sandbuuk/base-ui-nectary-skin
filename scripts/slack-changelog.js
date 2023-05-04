@@ -1,5 +1,6 @@
 const fs = require('fs')
 const https = require('https')
+const path = require('path')
 const slackifyMarkdown = require('slackify-markdown')
 
 const [packagePath] = process.argv.slice(2)
@@ -16,12 +17,12 @@ switch (packagePath) {
 
     break
   }
-  case 'theme-base': {
+  case 'themes/base': {
     packageTitle = 'Base Theme'
 
     break
   }
-  case 'theme-dark': {
+  case 'themes/dark': {
     packageTitle = 'Dark Theme'
 
     break
@@ -32,7 +33,7 @@ switch (packagePath) {
 }
 
 // eslint-disable-next-line node/no-sync
-const changelogMd = fs.readFileSync(`${packagePath}/changelog.md`, 'utf-8')
+const changelogMd = fs.readFileSync(path.resolve(packagePath, 'changelog.md'), 'utf-8')
 const md = slackifyMarkdown(changelogMd.split('\n\n##')[0].replace(/## (v.+?) \(.+?\)/, `## ${packageTitle} $1`))
 
 const dataString = encodeURI(

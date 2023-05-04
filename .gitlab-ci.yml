@@ -128,7 +128,7 @@ publish-theme-base:
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish themes/base/ --verbose
-    - node ./scripts/slack-changelog.js theme-base
+    - node ./scripts/slack-changelog.js themes/base
 
 publish-theme-dark:
   stage: deploy
@@ -142,7 +142,7 @@ publish-theme-dark:
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish themes/dark/ --verbose
-    - node ./scripts/slack-changelog.js theme-dark
+    - node ./scripts/slack-changelog.js themes/dark
 
 pages:
   stage: deploy
