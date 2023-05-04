@@ -835,79 +835,9 @@ importers:
         specifier: ^5.80.0
         version: 5.80.0(webpack-cli@5.0.2)
 
-  themes/base:
-    dependencies:
-      '@babel/runtime':
-        specifier: ^7.21.0
-        version: 7.21.0
-    devDependencies:
-      '@babel/cli':
-        specifier: ^7.21.0
-        version: 7.21.0(@babel/core@7.21.4)
-      '@babel/core':
-        specifier: ^7.21.4
-        version: 7.21.4
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.21.4
-        version: 7.21.4(@babel/core@7.21.4)
-      '@babel/preset-env':
-        specifier: ^7.21.4
-        version: 7.21.4(@babel/core@7.21.4)
-      '@babel/preset-typescript':
-        specifier: ^7.21.4
-        version: 7.21.4(@babel/core@7.21.4)
-      '@types/node':
-        specifier: ^18.16.0
-        version: 18.16.0
-      '@types/react':
-        specifier: ^18.0.38
-        version: 18.0.38
-      babel-plugin-html-inline-minifier:
-        specifier: workspace:^0.0.0
-        version: link:../../libs/babel-plugin-html-inline-minifier
-      babel-plugin-transform-inline-environment-variables:
-        specifier: ^0.4.4
-        version: 0.4.4
-      typescript:
-        specifier: ^5.0.4
-        version: 5.0.4
+  themes/base: {}
 
-  themes/dark:
-    dependencies:
-      '@babel/runtime':
-        specifier: ^7.21.0
-        version: 7.21.0
-    devDependencies:
-      '@babel/cli':
-        specifier: ^7.21.0
-        version: 7.21.0(@babel/core@7.21.4)
-      '@babel/core':
-        specifier: ^7.21.4
-        version: 7.21.4
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.21.4
-        version: 7.21.4(@babel/core@7.21.4)
-      '@babel/preset-env':
-        specifier: ^7.21.4
-        version: 7.21.4(@babel/core@7.21.4)
-      '@babel/preset-typescript':
-        specifier: ^7.21.4
-        version: 7.21.4(@babel/core@7.21.4)
-      '@types/node':
-        specifier: ^18.16.0
-        version: 18.16.0
-      '@types/react':
-        specifier: ^18.0.38
-        version: 18.0.38
-      babel-plugin-html-inline-minifier:
-        specifier: workspace:^0.0.0
-        version: link:../../libs/babel-plugin-html-inline-minifier
-      babel-plugin-transform-inline-environment-variables:
-        specifier: ^0.4.4
-        version: 0.4.4
-      typescript:
-        specifier: ^5.0.4
-        version: 5.0.4
+  themes/dark: {}
 
   tokens: {}
 

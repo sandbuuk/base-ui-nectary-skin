@@ -1,3 +1,14 @@
+## v2.0.0 (2023-05-04)
+
+* 💥 extract theme into `@sinch-engage/nectary-theme-base` package
+* 💥 extract `sinch-color-menu-option` component
+* 💥 extract logo components to `@sinch-engage/assets` package
+* 💥 remove `inverted` attribute from `sinch-tooltip`
+* 💥 remove `color` attribute from `sinch-badge`
+* 💥 remove clear button from `sinch-input`
+* 💥 remove `disabled` attribute from 'sinch-card'
+* 💥 remove deprecated React handlers
+
 ## v1.4.0 (2023-04-26)
 
 * ➕ add `type` attribute to `sinch-tooltip`

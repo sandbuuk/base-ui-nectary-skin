@@ -16,6 +16,16 @@ switch (packagePath) {
 
     break
   }
+  case 'theme-base': {
+    packageTitle = 'Base Theme'
+
+    break
+  }
+  case 'theme-dark': {
+    packageTitle = 'Dark Theme'
+
+    break
+  }
   default: {
     throw new Error(`Cannot determine title for the package path: ${packagePath}`)
   }
