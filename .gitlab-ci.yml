@@ -127,7 +127,7 @@ publish-theme-base:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
-    - npm publish themes/base
+    - npm publish themes/base/ --verbose
     - node ./scripts/slack-changelog.js theme-base
 
 publish-theme-dark:
@@ -141,7 +141,7 @@ publish-theme-dark:
     - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
-    - npm publish themes/dark
+    - npm publish themes/dark/ --verbose
     - node ./scripts/slack-changelog.js theme-dark
 
 pages:
