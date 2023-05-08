@@ -1,6 +1,6 @@
 import { readdir, writeFile } from 'fs/promises'
 
-const versions = await readdir('./public/docs/versions/')
+const entries = await readdir('./public/docs/versions/', { withFileTypes: true })
 
 const versionToKey = (version: string) => {
   switch (version) {
@@ -15,11 +15,14 @@ const sanitizeVersion = (version: string) => {
   return version.split('.').slice(0, -1).concat('x').join('.')
 }
 
-const versionsImports = versions.map((ver) => {
-  const key = versionToKey(ver)
+const versionsImports = entries
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => {
+    const ver = entry.name
+    const key = versionToKey(ver)
 
-  return `'${sanitizeVersion(ver)}': { bootstrap: () => import('components${key}/bootstrap')}`
-})
+    return `'${sanitizeVersion(ver)}': { bootstrap: () => import('components${key}/bootstrap')}`
+  })
 
 const fileContent = `export const versions = {${versionsImports.join(',\n')}}`
 

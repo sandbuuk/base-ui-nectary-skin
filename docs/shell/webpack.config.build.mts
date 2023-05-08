@@ -24,7 +24,12 @@ const versionToKey = (version: string) => {
 const remotes = {} as Record<string, string>
 
 // eslint-disable-next-line node/no-sync
-fs.readdirSync('../../public/docs/versions/').forEach((version) => {
+fs.readdirSync('../../public/docs/versions/', { withFileTypes: true }).forEach((entry) => {
+  if (!entry.isDirectory()) {
+    return
+  }
+
+  const version = entry.name
   const key = versionToKey(version)
 
   remotes[`components${key}`] = `components${key}@//[window.appurl]/versions/${version}/remoteEntry.js`
@@ -34,7 +39,7 @@ console.log('-- REMOTES --')
 console.log(remotes)
 
 const NODE_MODULES_REGEXP = /[\\/]node_modules[\\/]/
-const COMPONENTS_REGEXP = /[\\/]components[\\/]/
+// const COMPONENTS_REGEXP = /[\\/]components[\\/]/
 
 const babelOptions: TBabelOptions = {
   babelrc: false,
@@ -74,8 +79,8 @@ const config: TWebpackConfig = {
   ],
   output: {
     path: path.resolve('./build/'),
-    filename: 'js/[name].[chunkhash].js',
-    chunkFilename: 'js/[name].[chunkhash].js',
+    filename: 'js/[contenthash].js',
+    chunkFilename: 'js/[contenthash].js',
     pathinfo: true,
   },
   resolve: {
@@ -169,12 +174,13 @@ const config: TWebpackConfig = {
     hints: false,
   },
   optimization: {
-    minimize: true,
+    // chunkIds: 'named',
+    minimize: false,
     minimizer: [
       // @ts-expect-error
       new TerserPlugin({
         parallel: true,
-        extractComments: true,
+        extractComments: false,
         terserOptions: {
           ecma: 2020,
           output: {
@@ -192,18 +198,32 @@ const config: TWebpackConfig = {
       cacheGroups: {
         default: false,
         common: {
-          name: 'common',
-          test: COMPONENTS_REGEXP,
+          test: /\/docs\/common\//,
           chunks: 'async',
-          minChunks: 10,
-          minSize: 0,
         },
         vendor: {
-          name: 'vendor',
-          test: NODE_MODULES_REGEXP,
-          chunks: 'all',
+          test: (mod: any) => {
+            if (!Reflect.has(mod, 'resource')) {
+              return false
+            }
+
+            if (!mod.resource.includes('/node_modules/')) {
+              return false
+            }
+
+            if (
+              mod.resource!.includes('/node_modules/react/') ||
+              mod.resource!.includes('/node_modules/react-dom/') ||
+              mod.resource!.includes('/node_modules/history/') ||
+              mod.resource!.includes('/node_modules/react-router-dom/')
+            ) {
+              return false
+            }
+
+            return true
+          },
+          chunks: 'async',
           priority: 10,
-          enforce: true,
         },
       },
     },
@@ -217,7 +237,7 @@ const config: TWebpackConfig = {
           requiredVersion: '*',
           singleton: true,
         },
-        'react-dom/client': {
+        'react-dom': {
           requiredVersion: '*',
           singleton: true,
         },
@@ -229,10 +249,6 @@ const config: TWebpackConfig = {
           requiredVersion: '*',
           singleton: true,
         },
-        'react-syntax-highlighter': {
-          requiredVersion: '*',
-          singleton: true,
-        },
       },
     }),
     new ExternalTemplateRemotesPlugin(),
@@ -241,8 +257,8 @@ const config: TWebpackConfig = {
       __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[name].[contenthash].css',
+      filename: 'css/[contenthash].css',
+      chunkFilename: 'css/[contenthash].css',
     }),
     new HtmlPlugin({
       template: path.resolve('./public/index.html'),
