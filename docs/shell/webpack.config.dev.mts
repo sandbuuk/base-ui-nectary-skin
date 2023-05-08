@@ -160,10 +160,6 @@ const config: Configuration = {
           requiredVersion: '*',
           singleton: true,
         },
-        'react-syntax-highlighter': {
-          requiredVersion: '*',
-          singleton: true,
-        },
       },
     }),
     new HtmlPlugin({

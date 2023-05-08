@@ -10,7 +10,6 @@ import type { TransformOptions as TBabelOptions } from '@babel/core'
 import type { Configuration as TWebpackConfig } from 'webpack'
 
 const NODE_MODULES_REGEXP = /[\\/]node_modules[\\/]/
-const COMPONENTS_REGEXP = /[\\/]components[\\/]/
 const versionKey = pkg.version.replaceAll('.', '_')
 const stylesInjectKey = `__styles${versionKey}`
 
@@ -49,8 +48,8 @@ const config: TWebpackConfig = {
   entry: path.resolve('./src/index.ts'),
   output: {
     path: path.resolve('./build/'),
-    filename: 'js/[name].[chunkhash].js',
-    chunkFilename: 'js/[name].[chunkhash].js',
+    filename: 'js/[contenthash].js',
+    chunkFilename: 'js/[contenthash].js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
@@ -158,12 +157,13 @@ const config: TWebpackConfig = {
     hints: false,
   },
   optimization: {
+    // chunkIds: 'named',
     minimize: true,
     minimizer: [
       // @ts-expect-error
       new TerserPlugin({
         parallel: true,
-        extractComments: true,
+        extractComments: false,
         terserOptions: {
           ecma: 2020,
           output: {
@@ -182,17 +182,33 @@ const config: TWebpackConfig = {
         default: false,
         common: {
           name: `common${versionKey}`,
-          test: COMPONENTS_REGEXP,
+          test: /\/docs\/common\//,
           chunks: 'async',
-          minChunks: 10,
-          minSize: 0,
         },
         vendor: {
           name: `vendor${versionKey}`,
-          test: NODE_MODULES_REGEXP,
-          chunks: 'all',
+          test: (mod: any) => {
+            if (!Reflect.has(mod, 'resource')) {
+              return false
+            }
+
+            if (!mod.resource.includes('/node_modules/')) {
+              return false
+            }
+
+            if (
+              mod.resource.includes('/node_modules/react/') ||
+              mod.resource.includes('/node_modules/react-dom/') ||
+              mod.resource.includes('/node_modules/history/') ||
+              mod.resource.includes('/node_modules/react-router-dom/')
+            ) {
+              return false
+            }
+
+            return true
+          },
+          chunks: 'async',
           priority: 10,
-          enforce: true,
         },
       },
     },
@@ -212,7 +228,7 @@ const config: TWebpackConfig = {
           requiredVersion: '*',
           singleton: true,
         },
-        'react-dom/client': {
+        'react-dom': {
           requiredVersion: '*',
           singleton: true,
         },
@@ -221,10 +237,6 @@ const config: TWebpackConfig = {
           singleton: true,
         },
         history: {
-          requiredVersion: '*',
-          singleton: true,
-        },
-        'react-syntax-highlighter': {
           requiredVersion: '*',
           singleton: true,
         },
@@ -237,8 +249,8 @@ const config: TWebpackConfig = {
       REQ_CHUNK_NAME: JSON.stringify(`Components${versionKey}-[request]`),
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[name].[contenthash].css',
+      filename: 'css/[contenthash].css',
+      chunkFilename: 'css/[contenthash].css',
       insert: (element: Element) => {
         const key = element.getAttribute('data-key')
 

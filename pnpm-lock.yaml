@@ -99,7 +99,7 @@ importers:
         specifier: ^18.0.38
         version: 18.0.38
       babel-plugin-html-inline-minifier:
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../libs/babel-plugin-html-inline-minifier
       babel-plugin-transform-inline-environment-variables:
         specifier: ^0.4.4
@@ -139,7 +139,7 @@ importers:
         specifier: ^18.0.38
         version: 18.0.38
       babel-plugin-html-inline-minifier:
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../libs/babel-plugin-html-inline-minifier
       babel-plugin-transform-inline-environment-variables:
         specifier: ^0.4.4
@@ -255,16 +255,16 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0(react@18.2.0)
       '@saas/css-to-mdx-loader':
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../../libs/css-to-mdx-loader
       '@saas/example-code-loader':
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../../libs/example-code-loader
       '@saas/html-minify-loader':
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../../libs/html-minify-loader
       '@saas/types-to-mdx-loader':
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../../libs/types-to-mdx-loader
       '@types/babel__core':
         specifier: ^7.20.0
@@ -403,13 +403,13 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0(react@18.2.0)
       '@saas/example-code-loader':
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../../libs/example-code-loader
       '@saas/html-minify-loader':
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../../libs/html-minify-loader
       '@saas/types-to-mdx-loader':
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../../libs/types-to-mdx-loader
       '@types/babel__core':
         specifier: ^7.1.20
@@ -493,7 +493,7 @@ importers:
   libs/babel-plugin-html-inline-minifier:
     dependencies:
       html-minifier-terser:
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../html-minifier-terser
 
   libs/css-to-mdx-loader:
@@ -550,7 +550,7 @@ importers:
   libs/html-minify-loader:
     dependencies:
       html-minifier-terser:
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../html-minifier-terser
 
   libs/remark-toc:
@@ -652,7 +652,7 @@ importers:
         specifier: ^15.2.8
         version: 15.2.8(@angular/common@15.2.8)(@angular/core@15.2.8)(@angular/platform-browser@15.2.8)(rxjs@7.8.0)
       '@saas/html-minify-loader':
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../../../libs/html-minify-loader
       '@sinch-engage/nectary':
         specifier: workspace:*
@@ -744,7 +744,7 @@ importers:
         specifier: ^7.21.4
         version: 7.21.4(@babel/core@7.21.4)
       '@saas/html-minify-loader':
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../../../libs/html-minify-loader
       '@types/react':
         specifier: ^18.0.38
@@ -805,7 +805,7 @@ importers:
         specifier: ^7.21.4
         version: 7.21.4(@babel/core@7.21.4)
       '@saas/html-minify-loader':
-        specifier: workspace:^0.0.0
+        specifier: workspace:*
         version: link:../../../libs/html-minify-loader
       '@vue/compiler-sfc':
         specifier: ^3.2.45

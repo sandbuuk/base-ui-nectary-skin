@@ -13,7 +13,7 @@
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-typescript": "^7.21.4",
-    "@saas/html-minify-loader": "workspace:^0.0.0",
+    "@saas/html-minify-loader": "workspace:*",
     "@vue/compiler-sfc": "^3.2.45",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
