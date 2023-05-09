@@ -81,7 +81,7 @@ const config: TWebpackConfig = {
     path: path.resolve('./build/'),
     filename: 'js/[contenthash].js',
     chunkFilename: 'js/[contenthash].js',
-    pathinfo: true,
+    // pathinfo: true,
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
@@ -175,7 +175,7 @@ const config: TWebpackConfig = {
   },
   optimization: {
     // chunkIds: 'named',
-    minimize: false,
+    minimize: true,
     minimizer: [
       // @ts-expect-error
       new TerserPlugin({
@@ -197,10 +197,6 @@ const config: TWebpackConfig = {
     splitChunks: {
       cacheGroups: {
         default: false,
-        common: {
-          test: /\/docs\/common\//,
-          chunks: 'async',
-        },
         vendor: {
           test: (mod: any) => {
             if (!Reflect.has(mod, 'resource')) {
