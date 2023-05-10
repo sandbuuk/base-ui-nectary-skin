@@ -16,14 +16,6 @@ module.exports = {
         regenerator: false,
       },
     ],
-    [
-      'transform-inline-environment-variables',
-      {
-        include: [
-          'NODE_ENV',
-        ],
-      },
-    ],
   ],
   generatorOpts: {
     jsescOption: {
