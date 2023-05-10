@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary-assets/icons/open-in-new'
@@ -17,9 +16,9 @@ export const Button: FC<TButton> = ({ search }) => {
   const text: any = search.get('text') ?? undefined
   const type: any = search.get('type') ?? undefined
   const size: any = search.get('size') ?? undefined
-  const onClick = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-button-click')), [])
-  const onFocus = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-button-focus')), [])
-  const onBlur = useCallback(() => window.dispatchEvent(new CustomEvent('sinch-button-blur')), [])
+  const onClick = () => window.dispatchEvent(new CustomEvent('sinch-button-click'))
+  const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-button-focus'))
+  const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-button-blur'))
 
   return (
     <sinch-button

@@ -76,7 +76,7 @@ test('tooltip events', runScreenshotTests('sinch-tooltip', [
     async *fn({ page }) {
       await subscribeToEvents(page, 'sinch-tooltip-show', 'sinch-tooltip-hide')
 
-      const ct = await centerBB(page.locator('#content'))
+      const ct = await centerBB(page.locator('#example-content'))
 
       await page.mouse.move(ct.x, ct.y)
       await page.waitForTimeout(1200)
@@ -97,7 +97,7 @@ test('tooltip events', runScreenshotTests('sinch-tooltip', [
     async *fn({ page, $eval }) {
       await subscribeToEvents(page, 'sinch-tooltip-show', 'sinch-tooltip-hide')
 
-      const ct = await centerBB(page.locator('#content'))
+      const ct = await centerBB(page.locator('#example-content'))
 
       await $eval((el) => el.setAttribute('type', 'fast'))
 

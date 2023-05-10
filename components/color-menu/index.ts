@@ -33,7 +33,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: false })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -49,8 +49,8 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     const { signal } = this.#controller
     const options: AddEventListenerOptions = { signal }
 
-    this.setAttribute('role', 'listbox')
-    this.setAttribute('tabindex', '0')
+    this.role = 'listbox'
+    this.tabIndex = 0
     this.addEventListener('keydown', this.#onListboxKeyDown, options)
     this.addEventListener('blur', this.#onListboxBlur, options)
     this.#$listbox.addEventListener('click', this.#onListboxClick, options)
@@ -191,6 +191,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
       return
     }
 
+    this.focus()
     this.#dispatchChangeEvent($elem)
   }
 

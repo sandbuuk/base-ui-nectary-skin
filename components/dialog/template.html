@@ -22,6 +22,7 @@
   background-color: var(--sinch-comp-dialog-color-default-background-initial);
   border: none;
   box-shadow: var(--sinch-comp-dialog-shadow);
+  outline: none;
 }
 
 #dialog:not([open]) {
@@ -79,7 +80,7 @@ dialog::backdrop {
 <dialog id="dialog">
   <div id="header">
     <sinch-title id="caption" type="m" level="3" ellipsis></sinch-title>
-    <sinch-icon-button id="close" size="s" tabindex="0">
+    <sinch-icon-button id="close" size="s">
       <sinch-icon id="icon-close" slot="icon" name="close"></sinch-icon>
     </sinch-icon-button>
   </div>

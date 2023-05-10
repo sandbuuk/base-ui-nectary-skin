@@ -49,7 +49,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: false })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -69,8 +69,8 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
       signal: this.#controller.signal,
     }
 
-    this.setAttribute('role', 'listbox')
-    this.setAttribute('tabindex', '0')
+    this.role = 'listbox'
+    this.tabIndex = 0
     this.addEventListener('keydown', this.#onListboxKeyDown, options)
     this.addEventListener('focus', this.#onFocus, options)
     this.addEventListener('blur', this.#onListboxBlur, options)
@@ -172,6 +172,8 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
   #onListboxClick = (e: Event) => {
     const $elem = (e.target) as TSelectMenuOption
+
+    this.focus()
 
     if (!getBooleanAttribute($elem, 'disabled')) {
       this.#selectOption($elem)

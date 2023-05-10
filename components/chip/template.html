@@ -25,7 +25,7 @@
   --sinch-global-size-icon: var(--sinch-comp-chip-size-icon-m);
 }
 
-#button:focus-visible::after {
+:host(:focus-visible) > #button::after {
   content: "";
   position: absolute;
   inset: -4px;
@@ -56,8 +56,8 @@
 }
 </style>
 
-<button id="button">
+<div id="button" inert>
   <slot name="icon"></slot>
   <sinch-text id="text" type="xs" ellipsis></sinch-text>
   <sinch-icon id="icon-close" name="cancel"></sinch-icon>
-</button>
+</div>

@@ -6,7 +6,7 @@
     @--show="onTooltipShow"
     @--hide="onTooltipHide"
   >
-    <sinch-text id="content" type="m">Some content</sinch-text>
+    <sinch-text id="example-content" type="m">Some content</sinch-text>
   </sinch-tooltip>
 </template>
 

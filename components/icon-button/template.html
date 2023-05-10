@@ -7,7 +7,6 @@
 }
 
 #button {
-  all: initial;
   display: block;
   position: relative;
   width: var(--sinch-local-size);
@@ -18,7 +17,7 @@
   --sinch-global-color-icon: var(--sinch-local-color-icon);
 }
 
-#button:disabled {
+:host([disabled]) #button {
   cursor: initial;
 }
 
@@ -72,69 +71,69 @@
   --sinch-local-color-outline: var(--sinch-comp-icon-button-color-tertiary-default-outline-focus);
 }
 
-:host([type="primary"]) #button:disabled {
+:host([type="primary"][disabled]) #button {
   --sinch-local-color-background: var(--sinch-comp-icon-button-color-primary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-icon-button-color-primary-disabled-border-initial);
   --sinch-local-color-icon: var(--sinch-comp-icon-button-color-primary-disabled-icon-initial);
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-primary-disabled);
 }
 
-:host([type="secondary"]) #button:disabled {
+:host([type="secondary"][disabled]) #button {
   --sinch-local-color-background: var(--sinch-comp-icon-button-color-secondary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-icon-button-color-secondary-disabled-border-initial);
   --sinch-local-color-icon: var(--sinch-comp-icon-button-color-secondary-disabled-icon-initial);
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-secondary-disabled);
 }
 
-#button:disabled,
-:host([type="tertiary"]) #button:disabled {
+:host([disabled]) #button,
+:host([type="tertiary"][disabled]) #button {
   --sinch-local-color-background: var(--sinch-comp-icon-button-color-tertiary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-icon-button-color-tertiary-disabled-border-initial);
   --sinch-local-color-icon: var(--sinch-comp-icon-button-color-tertiary-disabled-icon-initial);
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-tertiary-disabled);
 }
 
-:host([type="primary"]) #button:focus {
+:host([type="primary"]:focus) #button {
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-primary-focus);
 }
 
-:host([type="secondary"]) #button:focus {
+:host([type="secondary"]:focus) #button {
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-secondary-focus);
 }
 
-#button:focus,
-:host([type="tertiary"]) #button:focus {
+:host(:focus),
+:host([type="tertiary"]:focus) #button {
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-tertiary-focus);
 }
 
-:host([type="primary"]) #button:enabled:hover {
+:host([type="primary"]:not([disabled]):hover) #button {
   --sinch-local-color-background: var(--sinch-comp-icon-button-color-primary-default-background-hover);
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-primary-hover);
 }
 
-:host([type="secondary"]) #button:enabled:hover {
+:host([type="secondary"]:not([disabled]):hover) #button {
   --sinch-local-color-background: var(--sinch-comp-icon-button-color-secondary-default-background-hover);
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-secondary-hover);
 }
 
-#button:enabled:hover,
-:host([type="tertiary"]) #button:enabled:hover {
+:host(:not([disabled]):hover) #button,
+:host([type="tertiary"]:not([disabled]):active) #button {
   --sinch-local-color-background: var(--sinch-comp-icon-button-color-tertiary-default-background-hover);
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-tertiary-hover);
 }
 
-:host([type="primary"]) #button:enabled:active {
+:host([type="primary"]:not([disabled]):active) #button {
   --sinch-local-color-background: var(--sinch-comp-icon-button-color-primary-default-background-active);
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-primary-active);
 }
 
-:host([type="secondary"]) #button:enabled:active {
+:host([type="secondary"]:not([disabled]):active) #button {
   --sinch-local-color-background: var(--sinch-comp-icon-button-color-secondary-default-background-active);
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-secondary-active);
 }
 
-#button:enabled:active,
-:host([type="tertiary"]) #button:enabled:active {
+:host(:not([disabled]):active) #button,
+:host([type="tertiary"]:not([disabled]):active) #button {
   --sinch-local-color-background: var(--sinch-comp-icon-button-color-tertiary-default-background-active);
   --sinch-local-shadow: var(--sinch-comp-icon-button-shadow-tertiary-active);
 }
@@ -152,7 +151,7 @@
 }
 
 /* Outline */
-#button:focus-visible::after {
+:host(:focus-visible) #button::after {
   content: "";
   position: absolute;
   inset: -3px;
@@ -166,15 +165,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(100%);
-  height: var(100%);
+  width: 100%;
+  height: 100%;
 }
 </style>
 
 <sinch-tooltip id="tooltip">
-  <button id="button">
-    <div id="content">
+  <div id="button">
+    <div id="content" inert>
       <slot name="icon"></slot>
     </div>
-  </button>
+  </div>
 </sinch-tooltip>

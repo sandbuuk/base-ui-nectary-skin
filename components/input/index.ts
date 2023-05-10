@@ -42,7 +42,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ delegatesFocus: true })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -106,6 +106,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       'size',
       'autocomplete',
       'data-size',
+      'aria-label',
     ]
   }
 
@@ -188,6 +189,14 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
       case 'autocomplete': {
         updateAttribute(this.#$input, name, newVal)
+
+        break
+      }
+
+      case 'aria-label': {
+        this.#$input.ariaLabel = newVal
+
+        break
       }
     }
   }

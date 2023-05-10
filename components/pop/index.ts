@@ -29,7 +29,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-pop', class extends NectaryElement {
-  #$target: HTMLElement
+  #$targetWrapper: HTMLElement
   #$focus: HTMLElement
   #$dialog: HTMLDialogElement
   #resizeThrottle
@@ -50,7 +50,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$target = shadowRoot.querySelector('#target')!
+    this.#$targetWrapper = shadowRoot.querySelector('#target')!
     this.#$focus = shadowRoot.querySelector('#focus')!
     this.#$dialog = shadowRoot.querySelector('#dialog')!
     this.#$targetSlot = shadowRoot.querySelector('slot[name="target"]')!
@@ -185,7 +185,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     }
 
     if (item === null) {
-      return getRect(this.#$target)
+      return getRect(this.#$targetWrapper)
     }
 
     if (Reflect.has(item, 'footprintRect')) {
@@ -199,7 +199,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     const item = getFirstSlotElement(slot, true)
 
     if (item === null) {
-      return this.#$target
+      return this.#$targetWrapper
     }
 
     return item
@@ -230,7 +230,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     /* Open dialog */
     this.#$dialog.showModal()
-    this.#$target.setAttribute('aria-expanded', 'true')
+    this.#$targetWrapper.setAttribute('aria-expanded', 'true')
     this.#updateOrientation()
 
     if (this.modal) {
@@ -247,9 +247,9 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       const marginBottom = parseInt(targetElComputedStyle.marginBottom)
       const targetRect = this.#getTargetRect()
 
-      this.#$target.style.setProperty('display', 'block')
-      this.#$target.style.setProperty('width', `${targetRect.width + marginLeft + marginRight}px`)
-      this.#$target.style.setProperty('height', `${targetRect.height + marginTop + marginBottom}px`)
+      this.#$targetWrapper.style.setProperty('display', 'block')
+      this.#$targetWrapper.style.setProperty('width', `${targetRect.width + marginLeft + marginRight}px`)
+      this.#$targetWrapper.style.setProperty('height', `${targetRect.height + marginTop + marginBottom}px`)
       this.#$targetOpenWrapper.style.setProperty('width', `${targetRect.width}px`)
       this.#$targetOpenWrapper.style.setProperty('height', `${targetRect.height}px`)
       this.#targetStyleValue = $targetEl.getAttribute('style')
@@ -316,13 +316,12 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     // In non-modal mode we close dialog first and target element emits blur event
     if (isNonModal) {
-      this.#targetActiveElement = null
       this.#$targetOpenSlot.addEventListener('blur', this.#captureActiveElement, true)
     }
 
     /* Close dialog */
     this.#$dialog.close()
-    this.#$target.setAttribute('aria-expanded', 'false')
+    this.#$targetWrapper.setAttribute('aria-expanded', 'false')
 
     // Unsubscribe "blur" capture
     if (isNonModal) {
@@ -330,22 +329,23 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     }
 
     /* Restore target */
-    /* Restore whether modal or non-modal, since modal flag can change */
-    const targetEl = this.#getFirstTargetElement(this.#$targetOpenSlot)
+    if (isNonModal) {
+      const targetEl = this.#getFirstTargetElement(this.#$targetOpenSlot)
 
-    targetEl.style.removeProperty('margin')
-    targetEl.style.removeProperty('position')
-    targetEl.style.removeProperty('transform')
+      targetEl.style.removeProperty('margin')
+      targetEl.style.removeProperty('position')
+      targetEl.style.removeProperty('transform')
 
-    if (this.#targetStyleValue !== null) {
-      targetEl.setAttribute('style', this.#targetStyleValue)
-      this.#targetStyleValue = null
+      if (this.#targetStyleValue !== null) {
+        targetEl.setAttribute('style', this.#targetStyleValue)
+        this.#targetStyleValue = null
+      }
+
+      getFirstSlotElement(this.#$targetOpenSlot)?.setAttribute('slot', 'target')
+      this.#$targetWrapper.style.removeProperty('display')
+      this.#$targetWrapper.style.removeProperty('width')
+      this.#$targetWrapper.style.removeProperty('height')
     }
-
-    getFirstSlotElement(this.#$targetOpenSlot)?.setAttribute('slot', 'target')
-    this.#$target.style.removeProperty('display')
-    this.#$target.style.removeProperty('width')
-    this.#$target.style.removeProperty('height')
 
     // Refocus before-open active element
     if (this.#targetActiveElement !== null) {

@@ -144,6 +144,9 @@ test('button screenshots', runScreenshotTests('sinch-button', [
       yield { name: 'active' }
     },
   },
+]))
+
+test('button events', runScreenshotTests('sinch-button', [
   {
     name: 'custom events',
     url: withFitWidth,
@@ -160,8 +163,14 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     url: withFitWidth,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-button-focus', 'sinch-button-blur', 'sinch-button-click')
+      // Focus by keyboard
       await page.keyboard.press('Tab')
+      // Click while focused
+      await page.keyboard.press('Enter')
+      await page.keyboard.press('Space')
+      // Defocus
       await page.mouse.click(0, 0)
+
       await $.click()
       await $.click()
 
@@ -169,7 +178,10 @@ test('button screenshots', runScreenshotTests('sinch-button', [
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-button-focus', detail: null },
+        { type: 'sinch-button-click', detail: null },
+        { type: 'sinch-button-click', detail: null },
         { type: 'sinch-button-blur', detail: null },
+        // Click focuses element back
         { type: 'sinch-button-focus', detail: null },
         { type: 'sinch-button-click', detail: null },
         { type: 'sinch-button-click', detail: null },

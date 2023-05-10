@@ -53,6 +53,7 @@ export const ActionDropdown: FC<TActionDropdown> = ({ search }) => {
       on-close={onClose}
       aria-label="Actions"
       orientation="bottom-right"
+      modal
     >
       <sinch-button
         slot="target"
