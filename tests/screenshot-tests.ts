@@ -211,6 +211,7 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
         await page.goto(t.url)
         await page.waitForSelector(elementSelector, { state: 'attached' })
         await page.evaluate(() => document.fonts.ready)
+        await page.mouse.move(0, 0)
 
         const locator = page.locator(elementSelector).nth(0)
 
