@@ -1,3 +1,9 @@
+## v2.1.0 (2023-05-11)
+
+* ➕ open Shadow DOM in components
+* 🐞 fix `sinch-checkbox` style
+* 🐞 fix focus in Safari v16.4
+
 ## v2.0.0 (2023-05-04)
 
 * 💥 extract theme into `@sinch-engage/nectary-theme-base` package
