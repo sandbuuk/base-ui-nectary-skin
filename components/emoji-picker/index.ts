@@ -37,16 +37,6 @@ import type {
   TContextVisibility,
 } from '../utils'
 
-const groupIconNames = [
-  'sentiment_satisfied',
-  'emoji_people',
-  'pets',
-  'emoji_food_beverage',
-  'emoji_transportation',
-  'sports_tennis',
-  'emoji_objects',
-  'emoji_symbols',
-]
 const groupLabels = [
   'Emotions',
   'People',
@@ -262,26 +252,19 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   }
 
   #updateTabs() {
-    const doc = this.#getDocumentRoot()
-    const tabsFragment = document.createDocumentFragment()
-    const activeTab = data[0].name
+    const tabOptions = this.#$tabs.querySelectorAll('sinch-tabs-icon-option')
+    const activeTabName = data[0].name
+    const numTabs = Math.min(data.length, tabOptions.length)
 
-    for (let i = 0; i < data.length;i++) {
+    for (let i = 0; i < numTabs; i++) {
       const group = data[i]
-      const tabOption = doc.createElement('sinch-tabs-icon-option')
-      const icon = doc.createElement('sinch-icon')
+      const tabOption = tabOptions[i]
 
-      icon.setAttribute('slot', 'icon')
-      updateAttribute(icon, 'name', groupIconNames[i])
       tabOption.setAttribute('value', group.name)
       tabOption.setAttribute('aria-label', groupLabels[i])
-      tabOption.appendChild(icon)
-
-      tabsFragment.appendChild(tabOption)
     }
 
-    this.#$tabs.replaceChildren(tabsFragment)
-    updateAttribute(this.#$tabs, 'value', activeTab)
+    updateAttribute(this.#$tabs, 'value', activeTabName)
   }
 
   *#iterateSearchEmojis(searchValue: string, skinTone: number): IterableIterator<TEmoji> {

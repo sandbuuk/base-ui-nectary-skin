@@ -1,5 +1,4 @@
 import '../tooltip'
-import '../icon'
 import {
   defineCustomElement,
   getAttribute,

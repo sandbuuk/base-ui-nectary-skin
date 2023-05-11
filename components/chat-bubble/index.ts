@@ -1,4 +1,3 @@
-import '../icon'
 import {
   defineCustomElement,
   getAttribute,
