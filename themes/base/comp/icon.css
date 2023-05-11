@@ -1,7 +1,7 @@
 :root,
 :host {
   /* Font */
-  --sinch-comp-icon-font-family: "Material Icons Filled";
+  --sinch-comp-icon-font-family: "Material Icons";
   --sinch-comp-icon-font-feature-settings: "liga";
   --sinch-comp-icon-font-weight: 400;
 }

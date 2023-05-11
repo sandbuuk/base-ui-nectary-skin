@@ -82,26 +82,6 @@
     "style": "normal",
     "display": "block",
     "src": {
-      "local": "MaterialSymbolsRounded24pt-Regular",
-      "woff2": "https://fonts.gstatic.com/s/materialsymbolsrounded/v109/syl7-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvLgyidOK7BDB_Qb9vUdV6_gjDK-P3JuF_Zs-obHph2-jOcZTKPq8a9A5M.woff2"
-    }
-  },
-  {
-    "family": "Material Icons Outlined",
-    "weight": 400,
-    "style": "normal",
-    "display": "block",
-    "src": {
-      "local": "MaterialSymbolsRounded24pt-Regular",
-      "woff2": "https://fonts.gstatic.com/s/materialsymbolsrounded/v109/syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDB_Qb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rIelXxeJKJBiCa8.woff2"
-    }
-  },
-  {
-    "family": "Material Icons Filled",
-    "weight": 400,
-    "style": "normal",
-    "display": "block",
-    "src": {
       "local": "MaterialSymbolsRoundedFilled24pt-Regular",
       "woff2": "https://fonts.gstatic.com/s/materialsymbolsrounded/v109/syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDJ_vb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rIelXxeJKJBiCa8.woff2"
     }

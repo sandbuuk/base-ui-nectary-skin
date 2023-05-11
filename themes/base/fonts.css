@@ -76,30 +76,12 @@
 }
 
 /* https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1 */
-@font-face {
-  font-family: "Material Icons";
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src:
-    local("MaterialSymbolsRounded24pt-Regular"),
-    url("https://fonts.gstatic.com/s/materialsymbolsrounded/v109/syl7-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvLgyidOK7BDB_Qb9vUdV6_gjDK-P3JuF_Zs-obHph2-jOcZTKPq8a9A5M.woff2") format("woff2");
-}
+
+/* https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@1 */
 
 /* https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined */
 @font-face {
-  font-family: "Material Icons Outlined";
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src:
-    local("MaterialSymbolsRounded24pt-Regular"),
-    url("https://fonts.gstatic.com/s/materialsymbolsrounded/v109/syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDB_Qb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rIelXxeJKJBiCa8.woff2") format("woff2");
-}
-
-/* https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@1 */
-@font-face {
-  font-family: "Material Icons Filled";
+  font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
   font-display: block;
