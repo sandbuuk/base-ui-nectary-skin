@@ -13,14 +13,6 @@ export const orientationValues: readonly TSinchPopOrientation[] = [
   'center-right',
 ]
 
-type TAssertOrientation = (value: string | null) => asserts value is TSinchPopOrientation
-
-export const assertOrientation: TAssertOrientation = (value) => {
-  if (value === null || !orientationValues.includes(value as any)) {
-    throw new Error(`sinch-pop: invalid orientation attribute: ${value}`)
-  }
-}
-
 const bodyEl = document.body as HTMLBodyElement & { __pop_counter__: number }
 
 export const disableScroll = () => {

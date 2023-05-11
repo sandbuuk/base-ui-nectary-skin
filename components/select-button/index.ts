@@ -16,7 +16,7 @@ import {
   updateLiteralAttribute,
   Context,
 } from '../utils'
-import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import type { TSinchSelectButtonElement, TSinchSelectButtonReact } from './types'
 import type {
@@ -135,10 +135,6 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
       }
 
       case 'data-size': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertSize(newVal, 'sinch-select-button')
-        }
-
         this.#onSizeUpdate()
 
         break

@@ -11,7 +11,7 @@ import {
   isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertChipColor, getChipColorBg, getChipColorFg } from './utils'
+import { getChipColorBg, getChipColorFg } from './utils'
 import type { TSinchChipElement, TSinchChipReact } from './types'
 
 const template = document.createElement('template')
@@ -122,10 +122,6 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
     const colorName = this.color
 
     if (colorName !== null && colorName.length > 0) {
-      if (process.env.NODE_ENV !== 'production') {
-        assertChipColor(this, colorName)
-      }
-
       const bg = getChipColorBg(colorName)
       const fg = getChipColorFg(colorName)
 

@@ -15,7 +15,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { TooltipState } from './tooltip-state'
-import { assertOrientation, assertType, getPopOrientation, orientationValues, typeValues } from './utils'
+import { getPopOrientation, orientationValues, typeValues } from './utils'
 import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact, TSinchTooltipType } from './types'
 import type { TSinchPopElement } from '../pop/types'
 import type { TRect } from '../types'
@@ -106,10 +106,6 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
       }
 
       case 'orientation': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertOrientation(newVal)
-        }
-
         updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
 
         if (this.#isOpen()) {
@@ -121,10 +117,6 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
       }
 
       case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
         this.#tooltipState.updateOptions({
           showDelay: newVal === 'fast' ? SHOW_DELAY_FAST : SHOW_DELAY_SLOW,
         })

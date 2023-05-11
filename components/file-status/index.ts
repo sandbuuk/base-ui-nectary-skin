@@ -11,7 +11,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertType, typeValues } from './utils'
+import { typeValues } from './utils'
 import type { TSinchFileStatusElement, TSinchFileStatusReact, TSinchFileStatusType } from './types'
 import type { TSinchTextElement } from '../text/types'
 
@@ -63,7 +63,7 @@ defineCustomElement('sinch-file-status', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['filename', 'type']
+    return ['filename']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -72,14 +72,6 @@ defineCustomElement('sinch-file-status', class extends NectaryElement {
     }
 
     switch (name) {
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        break
-      }
-
       case 'filename': {
         this.#$filename.textContent = newVal
 

@@ -12,9 +12,9 @@ import {
   Context,
   subscribeContext,
 } from '../utils'
-import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertType, typeValues } from './utils'
+import { typeValues } from './utils'
 import type { TSinchButtonElement, TSinchButtonReact, TSinchButtonType } from './types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
@@ -70,7 +70,7 @@ defineCustomElement('sinch-button', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'disabled', 'size', 'type', 'data-size']
+    return ['text', 'disabled', 'size', 'data-size']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -87,23 +87,12 @@ defineCustomElement('sinch-button', class extends NectaryElement {
 
         break
       }
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        break
-      }
       case 'size': {
         updateAttribute(this, 'data-size', newVal)
 
         break
       }
       case 'data-size': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertSize(newVal, 'sinch-button')
-        }
-
         this.#onSizeUpdate()
 
         break

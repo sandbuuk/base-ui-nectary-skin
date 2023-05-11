@@ -13,7 +13,7 @@ import {
   updateBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
-import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import { getTitleTypeFromSize } from './utils'
 import type { TSinchSegmentElement, TSinchSegmentReact } from './types'
@@ -91,10 +91,6 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
       }
 
       case 'size': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertSize(newVal, 'sinch-segment')
-        }
-
         const titleType = getTitleTypeFromSize(this.size)
 
         updateAttribute(this.#$caption, 'level', getTitleLevelFromType(titleType))

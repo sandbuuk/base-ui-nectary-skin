@@ -19,7 +19,7 @@ import {
   isTargetEqual,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertOrientation, disableScroll, enableScroll, orientationValues } from './utils'
+import { disableScroll, enableScroll, orientationValues } from './utils'
 import type { TSinchPopElement, TSinchPopOrientation, TSinchPopReact } from './types'
 import type { TRect } from '../types'
 import type { TContextVisibility } from '../utils'
@@ -164,10 +164,6 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       }
 
       case 'orientation': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertOrientation(newVal)
-        }
-
         if (this.#$dialog.open) {
           this.#updateOrientation()
         }

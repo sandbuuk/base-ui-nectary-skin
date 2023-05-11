@@ -8,7 +8,7 @@ import {
   parseMarkdown,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertSize, sizeValues } from './utils'
+import { sizeValues } from './utils'
 import type { TSinchRichTextElement, TSinchRichTextReact } from './types'
 import type { TSinchTextType } from '../text/types'
 
@@ -49,19 +49,11 @@ defineCustomElement('sinch-rich-text', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['size', 'text']
+    return ['text']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
-      case 'size': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertSize(newVal)
-        }
-
-        break
-      }
-
       case 'text': {
         this.#updateText(newVal)
 

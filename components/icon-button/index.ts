@@ -13,9 +13,9 @@ import {
   Context,
   getAttribute,
 } from '../utils'
-import { assertSizeEx, DEFAULT_SIZE, sizeExValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertType, typeValues } from './utils'
+import { typeValues } from './utils'
 import type { TSinchIconButtonElement, TSinchIconButtonReact, TSinchIconButtonType } from './types'
 import type { TSinchTooltipElement } from '../tooltip/types'
 import type { TRect } from '../types'
@@ -78,7 +78,6 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
   static get observedAttributes() {
     return [
-      'type',
       'size',
       'disabled',
       'aria-label',
@@ -104,23 +103,12 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
         break
       }
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        break
-      }
       case 'size': {
         updateAttribute(this, 'data-size', newVal)
 
         break
       }
       case 'data-size': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertSizeEx(newVal, 'sinch-icon-button')
-        }
-
         this.#onSizeUpdate()
 
         break

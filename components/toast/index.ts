@@ -13,7 +13,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertType, typeValues } from './utils'
+import { typeValues } from './utils'
 import type { TSinchToastElement, TSinchToastReact, TSinchToastType } from './types'
 
 const TIMEOUT = 5000
@@ -51,7 +51,7 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'type', 'persistent']
+    return ['text', 'persistent']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -60,14 +60,6 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
     }
 
     switch (name) {
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        break
-      }
-
       case 'text': {
         this.#$text.textContent = newVal
 

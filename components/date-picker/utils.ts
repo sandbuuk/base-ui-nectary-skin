@@ -78,40 +78,8 @@ export const getMonthNames = (locale: string): string[] => {
   })
 }
 
-type TAssertMinMax = (value: string | null, attrName: string) => asserts value is string
-
-export const assertMinMax: TAssertMinMax = (value, attrName) => {
-  if (value == null || value === '') {
-    throw new Error(`sinch-date-picker: missing or empty "${attrName}" attribute`)
-  }
-}
-
-type TAssertValue = (value: string | null) => asserts value is string
-
-export const assertValue: TAssertValue = (value) => {
-  if (value == null) {
-    throw new Error(`sinch-date-picker: missing "value" attribute`)
-  }
-}
-
-type TAssertLocale = (value: string | null) => asserts value is string
-
-export const assertLocale: TAssertLocale = (value) => {
-  if (value === null || value.length === 0) {
-    throw new Error(`sinch-date-picker: invalid locale attribute: ${value}`)
-  }
-}
-
-type TAssertDate = (value: any, attrName: string, attrValue: string) => asserts value is Date
-
 export const isValidDate = (value: any): value is Date => {
   return value instanceof Date && !isNaN(value as any)
-}
-
-export const assertDate: TAssertDate = (value, attrName, attrValue) => {
-  if (!isValidDate(value)) {
-    throw new Error(`sinch-date-picker: invalid "${attrName}" attribute: ${attrValue}`)
-  }
 }
 
 export const compareDates = (a: Date, b: Date): number => {

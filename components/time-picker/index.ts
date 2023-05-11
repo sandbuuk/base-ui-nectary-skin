@@ -164,10 +164,6 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
 
     switch (name) {
       case 'value': {
-        if (newVal === null) {
-          throw new Error('Missing "value" attribute')
-        }
-
         const { hours, minutes } = parseTime(newVal)
 
         this.#hour = hours

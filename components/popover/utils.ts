@@ -21,11 +21,3 @@ export const getPopOrientation = (orientation: TSinchPopoverOrientation): TSinch
 
   return orientation
 }
-
-type TAssertOrientation = (value: string | null) => asserts value is TSinchPopoverOrientation
-
-export const assertOrientation: TAssertOrientation = (value) => {
-  if (value === null || !orientationValues.includes(value as any)) {
-    throw new Error(`sinch-popover: invalid orientation attribute: ${value}`)
-  }
-}
