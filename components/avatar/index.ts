@@ -6,9 +6,9 @@ import {
   updateAttribute,
   updateLiteralAttribute,
 } from '../utils'
-import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertAvatarColor, assertStatus, getAvatarColorBg, getAvatarColorFg, statusValues } from './utils'
+import { getAvatarColorBg, getAvatarColorFg, statusValues } from './utils'
 import type { TSinchAvatarElement, TSinchAvatarReact, TSinchAvatarStatus } from './types'
 import type { TSinchSize } from '../utils/size'
 
@@ -80,7 +80,7 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['alt', 'src', 'status', 'size', 'color']
+    return ['alt', 'src', 'color']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -98,24 +98,10 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
         break
       }
 
-      case 'size': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertSize(newVal, 'sinch-avatar')
-        }
-
-        break
-      }
-
-      case 'status': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertStatus(newVal)
-        }
-
-        break
-      }
-
       case 'color': {
         this.#updateColor()
+
+        break
       }
     }
   }
@@ -128,10 +114,6 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
     const colorName = this.color
 
     if (colorName !== null && colorName.length > 0) {
-      if (process.env.NODE_ENV !== 'production') {
-        assertAvatarColor(this, colorName)
-      }
-
       const bg = getAvatarColorBg(colorName)
       const fg = getAvatarColorFg(colorName)
 

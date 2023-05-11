@@ -57,6 +57,9 @@ test('search events', runScreenshotTests('sinch-popover', [
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-search-focus', 'sinch-search-blur', 'sinch-search-change')
       await page.keyboard.press('Tab')
+      // First click closes pop, but not defocuses input
+      await page.mouse.click(0, 0)
+      // Defocus input
       await page.mouse.click(0, 0)
 
       expect(

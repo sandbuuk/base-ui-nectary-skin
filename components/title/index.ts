@@ -10,7 +10,7 @@ import {
   isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertLevel, assertType, typeValues } from './utils'
+import { typeValues } from './utils'
 import type { TSinchTitleElement, TSinchTitleReact, TSinchTitleType } from './types'
 
 const template = document.createElement('template')
@@ -35,7 +35,7 @@ defineCustomElement('sinch-title', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'type', 'level', 'ellipsis']
+    return ['text', 'level', 'ellipsis']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -51,19 +51,7 @@ defineCustomElement('sinch-title', class extends NectaryElement {
       }
 
       case 'level': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertLevel(newVal)
-        }
-
         updateAttribute(this, 'aria-level', newVal)
-
-        break
-      }
-
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
 
         break
       }

@@ -1,16 +1,14 @@
 
-export const parseTime = (value: string): { hours: number, minutes: number } => {
-  if (value === '') {
-    return {
-      hours: 0,
-      minutes: 0,
-    }
+export const parseTime = (value: string | null): { hours: number, minutes: number } => {
+  if (value === '' || value === null) {
+    return { hours: 0, minutes: 0 }
   }
 
   const timeParts = value.split(':')
 
   if (timeParts.length < 3) {
-    throw new Error(`Incorrect time format: ${value}. Should be "hh:mm:ss"`)
+    // throw new Error(`Incorrect time format: ${value}. Should be "hh:mm:ss"`)
+    return { hours: 0, minutes: 0 }
   }
 
   const hours = parseInt(timeParts[0])
@@ -18,15 +16,18 @@ export const parseTime = (value: string): { hours: number, minutes: number } => 
   const seconds = parseInt(timeParts[2])
 
   if (isNaN(hours) || hours > 23 || hours < 0) {
-    throw new Error(`Invalid hours value: ${value}`)
+    // throw new Error(`Invalid hours value: ${value}`)
+    return { hours: 0, minutes: 0 }
   }
 
   if (isNaN(minutes) || minutes > 59 || minutes < 0) {
-    throw new Error(`Invalid minutes value: ${value}`)
+    // throw new Error(`Invalid minutes value: ${value}`)
+    return { hours: 0, minutes: 0 }
   }
 
   if (isNaN(seconds) || seconds > 59 || seconds < 0) {
-    throw new Error(`Invalid seconds value: ${value}`)
+    // throw new Error(`Invalid seconds value: ${value}`)
+    return { hours: 0, minutes: 0 }
   }
 
   return { hours, minutes }

@@ -19,10 +19,6 @@ import {
 import templateHTML from './template.html'
 import {
   areDatesEqual,
-  assertDate,
-  assertLocale,
-  assertMinMax,
-  assertValue,
   canGoNextMonth,
   canGoNextYear,
   canGoPrevMonth,
@@ -142,25 +138,13 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
     switch (name) {
       case 'value': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertValue(newVal)
-        }
-
         this.#onValueChange()
 
         break
       }
 
       case 'min': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertMinMax(newVal, name)
-        }
-
         this.#minDate = isoToDate(newVal!)
-
-        if (process.env.NODE_ENV !== 'production') {
-          assertDate(this.#minDate, name, newVal!)
-        }
 
         // Dont show panel below min date
         if (this.#uiDate !== null) {
@@ -173,15 +157,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
       }
 
       case 'max': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertMinMax(newVal, name)
-        }
-
         this.#maxDate = isoToDate(newVal!)
-
-        if (process.env.NODE_ENV !== 'production') {
-          assertDate(this.#maxDate, name, newVal!)
-        }
 
         // Dont show panel above max date
         if (this.#uiDate !== null) {
@@ -194,10 +170,6 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
       }
 
       case 'locale': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertLocale(newVal)
-        }
-
         const names = getDayNames(newVal!)
 
         this.#$weekDayNames.forEach(($day, i) => {

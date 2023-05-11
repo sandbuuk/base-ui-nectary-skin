@@ -108,25 +108,19 @@ test('chip events', runScreenshotTests('sinch-chip', [
     url: shot,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-chip-focus', 'sinch-chip-blur', 'sinch-chip-click')
-      await page.keyboard.press('Tab')
-      await page.mouse.click(0, 0)
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-chip-focus', detail: null },
-        { type: 'sinch-chip-blur', detail: null },
-      ])
 
       const ct = await centerBB($)
 
+      await page.keyboard.press('Tab')
       await page.mouse.click(ct.x, ct.y)
+      await page.mouse.click(1, 1)
 
       expect(
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-chip-focus', detail: null },
         { type: 'sinch-chip-click', detail: null },
+        { type: 'sinch-chip-blur', detail: null },
       ])
     },
   },

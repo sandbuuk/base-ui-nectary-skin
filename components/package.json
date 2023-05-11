@@ -28,7 +28,6 @@
     "@types/node": "^18.16.0",
     "@types/react": "^18.0.38",
     "babel-plugin-html-inline-minifier": "workspace:*",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "typescript": "^5.0.4"
   }
 }

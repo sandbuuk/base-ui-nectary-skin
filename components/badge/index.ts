@@ -11,9 +11,9 @@ import {
   updateBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
-import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertMode, modeValues } from './utils'
+import { modeValues } from './utils'
 import type { TSinchBadgeElement, TSinchBadgeMode, TSinchBadgeReact } from './types'
 import type { TRect } from '../types'
 import type { TSinchSize } from '../utils/size'
@@ -76,20 +76,12 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
       }
 
       case 'size': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertSize(newVal, 'sinch-badge')
-        }
-
         this.#updatePosition()
 
         break
       }
 
       case 'mode': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertMode(newVal)
-        }
-
         this.#updatePosition()
 
         break

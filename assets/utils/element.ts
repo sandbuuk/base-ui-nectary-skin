@@ -40,8 +40,8 @@ declare global {
 export class NectaryElement extends HTMLElement {
   attachShadow(): ShadowRoot {
     return super.attachShadow({
-      mode: 'closed',
-      delegatesFocus: false,
+      mode: 'open',
+      delegatesFocus: true,
       customElements: nectaryRegistry!,
     })
   }

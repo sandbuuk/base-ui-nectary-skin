@@ -19,18 +19,18 @@
     "test:app-react": "cd ./apps/react; ./node_modules/.bin/webpack serve",
     "test:app-vue": "cd ./apps/vue; ./node_modules/.bin/webpack serve",
     "test:app-angular": "cd ./apps/angular; ./node_modules/.bin/ng serve",
-    "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.29.2 ./tests/entrypoint.dev.sh",
-    "test": "docker run -it --rm --ipc=host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.29.2 ./tests/entrypoint.sh",
+    "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.33.0 ./tests/entrypoint.dev.sh",
+    "test": "docker run -it --rm --ipc=host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.33.0 ./tests/entrypoint.sh",
     "remove-empty-dirs": "find ./test-results -type d -empty -delete"
   },
   "devDependencies": {
-    "@playwright/test": "1.29.2",
+    "@playwright/test": "1.33.0",
     "@sinch-engage/nectary": "workspace:*",
     "@types/node": "^18.16.0",
     "axe-core": "^4.6.3",
     "concurrently": "^7.6.0",
     "piall": "^0.2.1",
-    "playwright-core": "1.29.2",
+    "playwright-core": "1.33.0",
     "wait-on": "^6.0.1"
   }
 }

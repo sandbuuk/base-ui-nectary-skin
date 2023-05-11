@@ -14,9 +14,9 @@ import {
   updateExplicitBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
-import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertType, inputTypes } from './utils'
+import { inputTypes } from './utils'
 import type { TSinchInputElement, TSinchInputReact, TSinchInputType } from './types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
@@ -42,7 +42,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ delegatesFocus: true })
+    const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -106,6 +106,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       'size',
       'autocomplete',
       'data-size',
+      'aria-label',
     ]
   }
 
@@ -116,10 +117,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
     switch (name) {
       case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
         updateLiteralAttribute(this.#$input, inputTypes, 'type', newVal)
         updateAttribute(this.#$input, 'spellcheck', newVal === 'password' ? 'false' : null)
 
@@ -177,10 +174,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       }
 
       case 'data-size': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertSize(newVal, 'sinch-input')
-        }
-
         this.#onSizeUpdate()
 
         break
@@ -188,6 +181,14 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
       case 'autocomplete': {
         updateAttribute(this.#$input, name, newVal)
+
+        break
+      }
+
+      case 'aria-label': {
+        this.#$input.ariaLabel = newVal
+
+        break
       }
     }
   }

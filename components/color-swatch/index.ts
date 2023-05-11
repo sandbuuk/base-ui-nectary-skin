@@ -7,7 +7,7 @@ import {
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertSwatchColor, getSwatchColorBg } from './utils'
+import { getSwatchColorBg } from './utils'
 import type { TSinchColorSwatchElement, TSinchColorSwatchReact } from './types'
 
 const template = document.createElement('template')
@@ -65,10 +65,6 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
     const colorName = this.name
 
     if (colorName !== null && colorName.length > 0) {
-      if (process.env.NODE_ENV !== 'production') {
-        assertSwatchColor(this, colorName)
-      }
-
       const bg = getSwatchColorBg(colorName)
 
       this.#$wrapper.style.setProperty('background-color', bg)

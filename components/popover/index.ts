@@ -14,7 +14,7 @@ import {
   subscribeContext,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertOrientation, getPopOrientation, orientationValues } from './utils'
+import { getPopOrientation, orientationValues } from './utils'
 import type { TSinchPopoverElement, TSinchPopoverOrientation, TSinchPopoverReact } from './types'
 import type { TSinchPopElement } from '../pop/types'
 import type { TContextVisibility } from '../utils'
@@ -73,10 +73,6 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     switch (name) {
       case 'orientation': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertOrientation(newVal)
-        }
-
         updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
 
         if (this.#$pop.open) {

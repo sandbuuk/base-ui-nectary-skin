@@ -27,7 +27,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: false })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -84,6 +84,8 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
   }
 
   #onListboxClick = (e: Event) => {
+    this.focus()
+
     if (isSinchActionMenuOption(e.target)) {
       this.#selectOption(e.target)
     }
@@ -106,7 +108,8 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 
   #handleKeydown(e: TContextKeydown) {
     switch (e.code) {
-      case 'Enter': {
+      case 'Enter':
+      case 'Space': {
         const $opt = this.#findSelectedOption()
 
         if ($opt !== null) {

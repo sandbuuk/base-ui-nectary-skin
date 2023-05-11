@@ -11,7 +11,7 @@ import {
   isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertChipColor, getChipColorBg, getChipColorFg } from './utils'
+import { getChipColorBg, getChipColorFg } from './utils'
 import type { TSinchChipElement, TSinchChipReact } from './types'
 
 const template = document.createElement('template')
@@ -27,7 +27,7 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ delegatesFocus: true })
+    const shadowRoot = this.attachShadow({ delegatesFocus: false })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -42,10 +42,12 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
 
     const { signal } = this.#controller
 
-    this.setAttribute('role', 'button')
-    this.#$button.addEventListener('click', this.#onButtonClick, { signal })
-    this.#$button.addEventListener('focus', this.#onButtonFocus, { signal })
-    this.#$button.addEventListener('blur', this.#onButtonBlur, { signal })
+    this.role = 'button'
+    this.tabIndex = 0
+    this.addEventListener('click', this.#onClick, { signal })
+    this.addEventListener('focus', this.#onFocus, { signal })
+    this.addEventListener('blur', this.#onBlur, { signal })
+    this.addEventListener('keydown', this.#onKeydown, { signal })
     this.addEventListener('-click', this.#onClickReactHandler, { signal })
     this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
     this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
@@ -120,10 +122,6 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
     const colorName = this.color
 
     if (colorName !== null && colorName.length > 0) {
-      if (process.env.NODE_ENV !== 'production') {
-        assertChipColor(this, colorName)
-      }
-
       const bg = getChipColorBg(colorName)
       const fg = getChipColorFg(colorName)
 
@@ -141,25 +139,25 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
     return true
   }
 
-  focus() {
-    this.#$button.focus()
+  #onKeydown = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case 'Space': {
+        this.click()
+      }
+    }
   }
 
-  blur() {
-    this.#$button.blur()
-  }
-
-  #onButtonClick = () => {
+  #onClick = () => {
     this.dispatchEvent(
       new CustomEvent('-click')
     )
   }
 
-  #onButtonFocus = () => {
+  #onFocus = () => {
     this.dispatchEvent(new CustomEvent('-focus'))
   }
 
-  #onButtonBlur = () => {
+  #onBlur = () => {
     this.dispatchEvent(new CustomEvent('-blur'))
   }
 

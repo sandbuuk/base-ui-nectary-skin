@@ -61,8 +61,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
     this.#onActionSlotChange()
 
-    // React updates attributes BEFORE connecting to the DOM
-    // Angular updates attributes AFTER connecting to the DOM
     if (getBooleanAttribute(this, 'open')) {
       this.#onExpand()
     }
@@ -147,7 +145,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   #onCloseReactHandler = (e: Event) => {
-    getReactEventHandler(this, 'onClose')?.(e)
     getReactEventHandler(this, 'on-close')?.(e)
   }
 

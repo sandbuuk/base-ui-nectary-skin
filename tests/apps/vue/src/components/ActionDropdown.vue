@@ -2,6 +2,7 @@
   <sinch-popover
     :open="isOpen"
     @--close="onClose"
+    modal
     orientation="bottom-right">
     <sinch-button
       slot="target"

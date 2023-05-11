@@ -16,7 +16,7 @@ import {
   updateLiteralAttribute,
   Context,
 } from '../utils'
-import { assertSize, DEFAULT_SIZE, sizeValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import type { TSinchSelectButtonElement, TSinchSelectButtonReact } from './types'
 import type {
@@ -29,7 +29,6 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-select-button', class extends NectaryElement {
-  #$button: HTMLButtonElement
   #$text: HTMLElement
   #$placeholder: HTMLElement
   #$leftSlot: HTMLSlotElement
@@ -41,11 +40,10 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ delegatesFocus: true })
+    const shadowRoot = this.attachShadow({ delegatesFocus: false })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$button = shadowRoot.querySelector('#button')!
     this.#$text = shadowRoot.querySelector('#text')!
     this.#$placeholder = shadowRoot.querySelector('#placeholder')!
     this.#$leftSlot = shadowRoot.querySelector('slot[name="left"]')!
@@ -61,10 +59,12 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
 
     const { signal } = this.#controller
 
-    this.setAttribute('role', 'button')
-    this.#$button.addEventListener('click', this.#onButtonClick, { signal })
-    this.#$button.addEventListener('focus', this.#onButtonFocus, { signal })
-    this.#$button.addEventListener('blur', this.#onButtonBlur, { signal })
+    this.role = 'button'
+    this.tabIndex = 0
+    this.addEventListener('click', this.#onButtonClick, { signal })
+    this.addEventListener('focus', this.#onButtonFocus, { signal })
+    this.addEventListener('blur', this.#onButtonBlur, { signal })
+    this.addEventListener('keydown', this.#onButtonKeydown, { signal })
     this.addEventListener('-click', this.#onClickReactHandler, { signal })
     this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
     this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
@@ -123,7 +123,6 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
       case 'disabled': {
         const isDisabled = isAttrTrue(newVal)
 
-        this.#$button.disabled = isDisabled
         updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
@@ -136,10 +135,6 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
       }
 
       case 'data-size': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertSize(newVal, 'sinch-select-button')
-        }
-
         this.#onSizeUpdate()
 
         break
@@ -191,14 +186,6 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
     return true
   }
 
-  focus() {
-    this.#$button.focus()
-  }
-
-  blur() {
-    this.#$button.blur()
-  }
-
   #onContextSize = (e: CustomEvent<TContextSize>) => {
     if (this.hasAttribute('size')) {
       return
@@ -238,8 +225,19 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
     this.dispatchEvent(new CustomEvent('-blur'))
   }
 
+  #onButtonKeydown = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case 'Space':
+      case 'Enter': {
+        this.click()
+      }
+    }
+  }
+
   #onButtonClick = () => {
-    this.dispatchEvent(new CustomEvent('-click'))
+    if (!this.disabled) {
+      this.dispatchEvent(new CustomEvent('-click'))
+    }
   }
 
   #onClickReactHandler = (e: Event) => {

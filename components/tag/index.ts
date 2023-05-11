@@ -9,7 +9,7 @@ import {
   isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertTagColor, getTagColorBg, getTagColorFg } from './utils'
+import { getTagColorBg, getTagColorFg } from './utils'
 import type { TSinchTagElement, TSinchTagReact } from './types'
 
 const template = document.createElement('template')
@@ -99,10 +99,6 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
     const colorName = this.color
 
     if (colorName !== null && colorName.length > 0) {
-      if (process.env.NODE_ENV !== 'production') {
-        assertTagColor(this, colorName)
-      }
-
       const bg = getTagColorBg(colorName)
       const fg = getTagColorFg(colorName)
 

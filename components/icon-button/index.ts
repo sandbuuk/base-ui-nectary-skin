@@ -13,9 +13,9 @@ import {
   Context,
   getAttribute,
 } from '../utils'
-import { assertSizeEx, DEFAULT_SIZE, sizeExValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
-import { assertType, typeValues } from './utils'
+import { typeValues } from './utils'
 import type { TSinchIconButtonElement, TSinchIconButtonReact, TSinchIconButtonType } from './types'
 import type { TSinchTooltipElement } from '../tooltip/types'
 import type { TRect } from '../types'
@@ -35,7 +35,7 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow({ delegatesFocus: true })
+    const shadowRoot = this.attachShadow({ delegatesFocus: false })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -52,10 +52,12 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
     const options = { signal: this.#controller.signal }
 
-    this.setAttribute('role', 'button')
-    this.#$button.addEventListener('click', this.#onButtonClick, options)
-    this.#$button.addEventListener('focus', this.#onButtonFocus, options)
-    this.#$button.addEventListener('blur', this.#onButtonBlur, options)
+    this.role = 'button'
+    this.tabIndex = 0
+    this.addEventListener('click', this.#onButtonClick, options)
+    this.addEventListener('focus', this.#onButtonFocus, options)
+    this.addEventListener('blur', this.#onButtonBlur, options)
+    this.addEventListener('keydown', this.#onButtonKeydown, options)
     this.addEventListener('-click', this.#onClickReactHandler, options)
     this.addEventListener('-focus', this.#onFocusReactHandler, options)
     this.addEventListener('-blur', this.#onBlurReactHandler, options)
@@ -76,7 +78,6 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
   static get observedAttributes() {
     return [
-      'type',
       'size',
       'disabled',
       'aria-label',
@@ -93,7 +94,6 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
       case 'disabled': {
         const isDisabled = isAttrTrue(newVal)
 
-        this.#$button.disabled = isDisabled
         updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
@@ -103,23 +103,12 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
         break
       }
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        break
-      }
       case 'size': {
         updateAttribute(this, 'data-size', newVal)
 
         break
       }
       case 'data-size': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertSizeEx(newVal, 'sinch-icon-button')
-        }
-
         this.#onSizeUpdate()
 
         break
@@ -159,14 +148,6 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
     return true
   }
 
-  focus() {
-    this.#$button.focus()
-  }
-
-  blur() {
-    this.#$button.blur()
-  }
-
   #onSizeUpdate() {
     if (!this.isConnected) {
       return
@@ -200,9 +181,11 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   }
 
   #onButtonClick = () => {
-    this.dispatchEvent(
-      new CustomEvent('-click')
-    )
+    if (!this.disabled) {
+      this.dispatchEvent(
+        new CustomEvent('-click')
+      )
+    }
   }
 
   #onButtonFocus = () => {
@@ -211,6 +194,15 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
 
   #onButtonBlur = () => {
     this.dispatchEvent(new CustomEvent('-blur'))
+  }
+
+  #onButtonKeydown = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case 'Space':
+      case 'Enter': {
+        this.click()
+      }
+    }
   }
 
   #onTooltipShow = () => {

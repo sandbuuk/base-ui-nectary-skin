@@ -10,7 +10,7 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertType, typeValues } from './utils'
+import { typeValues } from './utils'
 import type { TSinchAlertElement, TSinchAlertReact, TSinchAlertType } from './types'
 
 const template = document.createElement('template')
@@ -56,19 +56,11 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'type']
+    return ['text']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        break
-      }
-
       case 'text': {
         updateAttribute(this.#$text, 'text', newVal)
 

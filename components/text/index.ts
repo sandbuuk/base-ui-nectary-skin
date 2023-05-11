@@ -8,7 +8,7 @@ import {
   isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertType, typeValues } from './utils'
+import { typeValues } from './utils'
 import type { TSinchTextElement, TSinchTextReact, TSinchTextType } from './types'
 
 const template = document.createElement('template')
@@ -29,19 +29,11 @@ defineCustomElement('sinch-text', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['type', 'inline', 'ellipsis', 'emphasized']
+    return ['inline', 'ellipsis', 'emphasized']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        break
-      }
-
       case 'inline': {
         this.#updateRole()
         updateBooleanAttribute(this, name, isAttrTrue(newVal))

@@ -33,19 +33,3 @@ export const getPopOrientation = (orientation: TSinchTooltipOrientation): TSinch
 
   return orientation
 }
-
-type TAssertOrientation = (value: string | null) => asserts value is TSinchTooltipOrientation
-
-export const assertOrientation: TAssertOrientation = (value) => {
-  if (value !== null && !orientationValues.includes(value as any)) {
-    throw new Error(`sinch-tooltip: invalid orientation attribute: ${value}`)
-  }
-}
-
-type TAssertType = (value: string | null) => asserts value is TSinchTooltipType
-
-export const assertType: TAssertType = (value) => {
-  if (value !== null && !typeValues.includes(value as any)) {
-    throw new Error(`sinch-tooltip: invalid type attribute: ${value}`)
-  }
-}

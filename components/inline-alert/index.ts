@@ -12,7 +12,7 @@ import {
   setClass,
 } from '../utils'
 import templateHTML from './template.html'
-import { assertType, typeValues } from './utils'
+import { typeValues } from './utils'
 import type { TSinchInlineAlertElement, TSinchInlineAlertReact, TSinchInlineAlertType } from './types'
 
 const template = document.createElement('template')
@@ -60,19 +60,11 @@ defineCustomElement('sinch-inline-alert', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'caption', 'type']
+    return ['text', 'caption']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
-      case 'type': {
-        if (process.env.NODE_ENV !== 'production') {
-          assertType(newVal)
-        }
-
-        break
-      }
-
       case 'text': {
         updateAttribute(this.#$text, 'text', newVal)
 
