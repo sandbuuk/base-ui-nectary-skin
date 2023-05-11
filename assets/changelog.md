@@ -1,3 +1,7 @@
+## v0.4.0 (2023-05-11)
+
+➕ add `sinch-illustration-dream-big` component
+
 ## v0.3.0 (2023-03-31)
 
 * ➕ add `halign` attribute to illustrations
