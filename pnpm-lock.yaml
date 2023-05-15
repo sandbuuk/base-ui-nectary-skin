@@ -76,6 +76,9 @@ importers:
       '@babel/runtime':
         specifier: ^7.21.0
         version: 7.21.0
+      lottie-web:
+        specifier: ^5.11.0
+        version: 5.11.0
     devDependencies:
       '@babel/cli':
         specifier: ^7.21.0
@@ -8727,6 +8730,10 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+
+  /lottie-web@5.11.0:
+    resolution: {integrity: sha512-9vSt0AtdOH98GKDXwD5LPfFg9Pcmxt5+1BllAbudKM5iqPxpJnJUfuGaP45OyudDrESCOBgsjnntVUTygBNlzw==}
+    dev: false
 
   /lower-case@2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
