@@ -1,3 +1,7 @@
+## v0.5.0 (2023-05-15)
+
+➕ add `sinch-animation-engage-logo` component
+
 ## v0.4.0 (2023-05-11)
 
 ➕ add `sinch-illustration-dream-big` component
