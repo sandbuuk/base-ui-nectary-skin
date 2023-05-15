@@ -28,7 +28,7 @@ export const AllIllustrationsExample: FC = () => {
     <sinch-table style={tableStyle}>
       <sinch-table-head>
         <sinch-table-row>
-          <sinch-table-head-cell text="Logo" fit/>
+          <sinch-table-head-cell text="Illustration" fit/>
           <sinch-table-head-cell text="Name"/>
         </sinch-table-row>
       </sinch-table-head>
