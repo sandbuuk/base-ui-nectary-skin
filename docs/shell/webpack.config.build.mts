@@ -13,13 +13,7 @@ import type { TransformOptions as TBabelOptions } from '@babel/core'
 import type { Configuration as TWebpackConfig } from 'webpack'
 
 const versionToKey = (version: string) => {
-  switch (version) {
-    case '0.49.0':
-    case '1.0.1':
-      return version.replaceAll('.', '')
-    default:
-      return version.replaceAll('.', '_')
-  }
+  return version.replaceAll('.', '_')
 }
 const remotes = {} as Record<string, string>
 
@@ -32,7 +26,7 @@ fs.readdirSync('../../public/docs/versions/', { withFileTypes: true }).forEach((
   const version = entry.name
   const key = versionToKey(version)
 
-  remotes[`components${key}`] = `components${key}@//[window.appurl]/versions/${version}/remoteEntry.js`
+  remotes[`components${key}`] = `components${key}@//[window.appurl]/versions/${version}/remoteEntry.js?v=[Date.now()]`
 })
 
 console.log('-- REMOTES --')
@@ -191,9 +185,7 @@ const config: TWebpackConfig = {
       }),
       new CssMinimizerPlugin(),
     ],
-    // runtimeChunk: {
-    //   name: 'runtime',
-    // },
+    runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
         default: false,
