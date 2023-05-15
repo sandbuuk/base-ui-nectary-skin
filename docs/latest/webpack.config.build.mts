@@ -174,9 +174,6 @@ const config: TWebpackConfig = {
       }),
       new CssMinimizerPlugin(),
     ],
-    // runtimeChunk: {
-    //   name: 'runtime',
-    // },
     splitChunks: {
       cacheGroups: {
         default: false,

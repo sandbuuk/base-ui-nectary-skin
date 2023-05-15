@@ -3,13 +3,7 @@ import { readdir, writeFile } from 'fs/promises'
 const entries = await readdir('./public/docs/versions/', { withFileTypes: true })
 
 const versionToKey = (version: string) => {
-  switch (version) {
-    case '0.49.0':
-    case '1.0.1':
-      return version.replaceAll('.', '')
-    default:
-      return version.replaceAll('.', '_')
-  }
+  return version.replaceAll('.', '_')
 }
 const sanitizeVersion = (version: string) => {
   return version.split('.').slice(0, -1).concat('x').join('.')
