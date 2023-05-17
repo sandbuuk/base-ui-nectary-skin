@@ -58,6 +58,7 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   disconnectedCallback() {
     super.disconnectedCallback()
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {

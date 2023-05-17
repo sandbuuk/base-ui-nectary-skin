@@ -67,9 +67,10 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    super.disconnectedCallback()
     this.#disableDragging()
+    super.disconnectedCallback()
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {

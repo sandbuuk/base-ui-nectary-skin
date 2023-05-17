@@ -113,8 +113,9 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller!.abort()
     this.#unsubscribeRangeHover()
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {

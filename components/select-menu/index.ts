@@ -87,8 +87,9 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller!.abort()
     this.#searchDebounce.cancel()
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
