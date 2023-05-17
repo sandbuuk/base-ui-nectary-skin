@@ -1,6 +1,11 @@
 import type { TSinchElementReact } from '../types'
 import type { TSinchSize } from '../utils/size'
 
+// phone: {+46} 00 000-00-00
+// email: A+{@}A+{.}A+
+// date: 00{-}00{-}0000
+// card: 0000-0000-0000-0000
+
 export type TSinchInputType = 'text' | 'password'
 
 export type TSinchInputElement = HTMLElement & {
@@ -31,6 +36,8 @@ export type TSinchInputElement = HTMLElement & {
   setAttribute(name: 'type', value: TSinchInputType): void,
   /** Value */
   setAttribute(name: 'value', value: string): void,
+  /** Mask */
+  setAttribute(name: 'mask', value: string): void,
   /** Text that appears in the text field when it has no value set */
   setAttribute(name: 'placeholder', value: string): void,
   /** The HTML autocomplete attribute */
@@ -46,6 +53,8 @@ export type TSinchInputElement = HTMLElement & {
 export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   /** Controlled value, doesn't change on its own and requres an onChange-value state loop */
   value: string,
+  /** Mask */
+  mask?: string,
   /** Label that is used for a11y – might be different from `label` */
   'aria-label': string,
   /** Text field type, `text` by default */

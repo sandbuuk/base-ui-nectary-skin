@@ -101,6 +101,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       'type',
       'value',
       'placeholder',
+      'mask',
       'invalid',
       'disabled',
       'size',
