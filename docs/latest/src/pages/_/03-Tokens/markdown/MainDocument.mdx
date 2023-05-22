@@ -1,0 +1,112 @@
+import { SegmentedMarkdownTabsMDX, TokenSnippets, Line, SpacingY } from '../components';
+
+import { PalleteOverviewIllustration, TokenConsistencyExplanation, ThemingIllustration, TokensInNectary,TokenFlow, ComponentTokens, ReferenceTokens, SystemTokens } from '../illustrations';
+
+# Design Tokens
+
+Design tokens are a methodology for expressing and storing design decisions in a platform-agnostic way so that they can be shared and consume among different tools and technologies.
+
+<SpacingY height={72}/>
+<Line/>
+<SpacingY height={72}/>
+
+## Token properties
+
+A design token is an information associated with a name, at minimum a name/value pair. Token properties refer to the characteristics and values associated with a token in a design system. The token properties assure we have a consistent way to store a design decision.
+
+<PalleteOverviewIllustration />
+<TokenSnippets />
+<SpacingY height={72}/>
+<Line/>
+<SpacingY height={72}/>
+
+## Token types
+
+Nectary's design system encompasses various types of tokens that define key design properties, including color, typography, shape, elevation, and size. These tokens are carefully curated and managed to ensure consistency and maintainability throughout the design system.
+
+<SpacingY height={28}/>
+<SegmentedMarkdownTabsMDX />
+<SpacingY height={72}/>
+<Line/>
+<SpacingY height={72}/>
+
+## Why tokens are important
+
+By using design tokens, Nectary can increase consistency between design and implementation, while supporting multiple themes. Tokens makes it easy to make style updates to multiple products, tools and code base with a centralised asset.
+
+<SpacingY height={56}/>
+
+### Increase consistency between design and implementation
+
+Design tokens ensure consistency and coherence in a design system by providing a single source of truth for design elements. They help maintain a consistent visual language and user experience across different components in an application or system.
+
+<TokenConsistencyExplanation />
+<SpacingY height={56}/>
+
+### Facilitate theming
+
+In the Nectary design system, theming is facilitated through the use of system tokens. These tokens centralize the management of design properties, such as colors, typography, shape, elevation and size. By modifying the values of these system tokens, you can easily customize the visual appearance of your application or system to reflect different themes or brand identities. This centralized approach to theming in Nectary design system provides consistency, flexibility, and efficiency, allowing you to achieve seamless theming throughout your project. To understand how to implement theming with Nectary go to theming.
+
+<ThemingIllustration />
+
+<SpacingY height={56}/>
+
+
+### Quicker and consistent updates through multiple products, tools and code base
+
+Updates made to design tokens are propagated automatically to all components or interfaces that reference them, making updates more efficient and maintaining a cohesive visual appearance throughout al the design system ecossystem.
+
+<SpacingY height={72}/>
+<Line/>
+<SpacingY height={72}/>
+
+## Tokens in Nectary
+
+Nectary, our design system, uses three layers of tokens (Reference, System, and Component Tokens) to streamline design management. These tokens provide a consistent and standardized way to define and reference design properties, allowing for efficient updates, scalability, and customization across the entire design system.
+
+<TokensInNectary />
+<SpacingY height={56}/>
+
+### Token Flow
+
+Nectary follows a carefully crafted token flow that spans across multiple tools and processes. This flow is designed to ensure consistency and efficiency in managing design properties throughout the design system. Let's take a closer look at how the token flow in Nectary works:
+
+<TokenFlow />
+
+1. Token GitLab Project: The design system includes a dedicated GitLab project where all the design tokens are stored and versioned. This serves as a central repository for managing colors, typography, spacing, and other design properties in a structured and organized manner.
+2. Token Studio (Figma Plugin): Nectary also includes a powerful Figma plugin called Token Studio. This plugin allows designers to easily access and apply tokens directly within the Figma design tool. Designers can select and apply tokens to design elements, ensuring consistent use of design properties across different components or interfaces, and enabling rapid design updates.
+3. Figma Design Tool: Designers use Figma as the primary design tool to create and manage design components and interfaces. With the Token Studio plugin, designers can efficiently apply tokens to their designs, ensuring that the correct design properties are used consistently throughout the design system. This enhances the design workflow and ensures design consistency across different projects.
+4. Token-to-CSS Script: The token values defined in the GitLab project are used by a custom script that converts the JSON tokens into multiple CSS files. These CSS files contain the styles defined in the tokens, such as colors, typography, spacing, etc. The CSS files are generated based on the token values and can be easily imported into web projects.
+5. Web Component Library: Once the token-to-CSS script generates the CSS files, they are applied to the web components in the component library. These web components are coded and documented, and the CSS variables defined in the tokens are used to build the components. This ensures that the design properties defined in the tokens are consistently applied to the web components, promoting design consistency, scalability, and customization in different projects and interfaces.
+6. Applying Tokens/CSS Styles to Components: The generated CSS files containing the token styles are then applied to the web components in the component library. These components can be easily imported and used in different projects, ensuring that the design system's tokens and styles are consistently applied to the user interface.
+
+<SpacingY height={72}/>
+<Line/>
+<SpacingY height={72}/>
+
+## How to read tokens
+
+Understanding how to read tokens is crucial in navigating and utilizing design systems effectively. In Nectary, our design system, tokens are organized into three layers: Reference, System, and Component Tokens. Reference Tokens serve as a reference point for design properties, System Tokens define foundational design properties, and Component Tokens are specific to individual components or interfaces.
+
+<SpacingY height={56}/>
+
+### Reference tokens
+
+These tokens serve as a reference point for design properties, such as colors, typography, spacing, and other visual attributes. They provide a consistent and standardized way to define and reference design properties across the entire design system.
+
+<ReferenceTokens />
+<SpacingY height={56}/>
+
+### System tokens
+
+These tokens define the foundational design properties for the entire design system. They allow for centralized management and customization of design properties, making updates quick and consistent across all components or interfaces that reference them.
+
+<SystemTokens />
+<SpacingY height={56}/>
+
+### Component tokens
+
+These tokens are specific to individual components or interfaces within the design system. They inherit values from system tokens but can also be customized for component-specific design properties. Component tokens provide flexibility and customization while maintaining consistency with the overall design system.
+
+<ComponentTokens />
+<SpacingY height={100}/>
