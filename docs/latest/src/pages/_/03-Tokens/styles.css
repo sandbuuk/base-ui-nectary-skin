@@ -135,7 +135,7 @@
 .token-wrapper {
   margin-top: 16px;
   border-radius: 14px;
-  background-color: var(--sinch-sys-color-container-contrast-primary-default)
+  background-color: var(--sinch-sys-color-container-contrast-primary-default);
 }
 
 .colors-table {
@@ -155,7 +155,7 @@
 }
 
 .color-type-wrapper {
-  margin-top: 0px;
+  margin-top: 0;
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 85px;
@@ -167,5 +167,5 @@
 .list-item-overwrite {
   font-size: var(--sinch-ref-typography-font-size-12);
   color: var(--sinch-sys-color-text-muted);
-  line-height:var(--sinch-ref-typography-line-height-20);
+  line-height: var(--sinch-ref-typography-line-height-20);
 }
