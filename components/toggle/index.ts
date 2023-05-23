@@ -156,9 +156,6 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
     this.#$input.checked = this.checked
 
     this.dispatchEvent(
-      new CustomEvent('change', { detail: isChecked, bubbles: true })
-    )
-    this.dispatchEvent(
       new CustomEvent('-change', { detail: isChecked })
     )
   }

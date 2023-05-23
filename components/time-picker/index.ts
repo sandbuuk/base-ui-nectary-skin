@@ -393,12 +393,6 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
     const value = stringifyTime(this.#hour, this.#minute)
 
     this.dispatchEvent(
-      new CustomEvent('change', {
-        bubbles: true,
-        detail: value,
-      })
-    )
-    this.dispatchEvent(
       new CustomEvent('-change', {
         detail: value,
       })

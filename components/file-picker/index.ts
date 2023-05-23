@@ -22,6 +22,7 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
   #$input: HTMLInputElement
   #$targetSlot: HTMLSlotElement
   #$target: HTMLElement | null = null
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -36,20 +37,21 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#$targetSlot.addEventListener('slotchange', this.#onTargetSlotChange)
-    this.#$input.addEventListener('change', this.#onInputChange)
-    this.addEventListener('-change', this.#onChangeReactHandler)
-    this.addEventListener('-invalid', this.#onInvalidReactHandler)
+    this.#controller = new AbortController()
+
+    const options: AddEventListenerOptions = { signal: this.#controller.signal }
+
+    this.#$targetSlot.addEventListener('slotchange', this.#onTargetSlotChange, options)
+    this.#$input.addEventListener('change', this.#onInputChange, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
+    this.addEventListener('-invalid', this.#onInvalidReactHandler, options)
 
     this.#onTargetSlotChange()
   }
 
   disconnectedCallback() {
-    this.#$targetSlot.removeEventListener('slotchange', this.#onTargetSlotChange)
-    this.#$input.removeEventListener('change', this.#onInputChange)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
-    this.removeEventListener('-invalid', this.#onInvalidReactHandler)
-    this.#$target?.removeEventListener('-click', this.#onTargetClick)
+    this.#controller!.abort()
+    this.#controller = null
     this.#$target = null
   }
 
