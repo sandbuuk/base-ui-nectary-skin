@@ -1,7 +1,6 @@
-import { defineCustomElement, getUid, isAttrTrue, NectaryElement, shouldReduceMotion } from '../utils'
+import { attrValueToInteger, defineCustomElement, getCssVar, getUid, isAttrTrue, NectaryElement } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchSkeletonElement, TSinchSkeletonReact } from './types'
-import type { TSinchSkeletonItemBoundingBox } from '../skeleton-item/types'
 
 const template = document.createElement('template')
 
@@ -13,9 +12,13 @@ const BORDER_WIDTH = 1
 defineCustomElement('sinch-skeleton', class extends NectaryElement {
   #animation: Animation | null = null
   #shimmer: HTMLElement
+  #wrapper: HTMLElement
+  #slot: HTMLSlotElement
   #controller: AbortController | null = null
   #clip: SVGClipPathElement
   #borderWidth = 0
+  #bb: DOMRectReadOnly | null = null
+  #observer: IntersectionObserver | null = null
   constructor() {
     super()
 
@@ -24,6 +27,8 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#shimmer = shadowRoot.querySelector('#shimmer')!
+    this.#slot = shadowRoot.querySelector('slot')!
+    this.#wrapper = shadowRoot.querySelector('#wrapper')!
     this.#clip = shadowRoot.querySelector('#clip')!
   }
 
@@ -35,10 +40,26 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
 
     this.#controller = new AbortController()
 
-    if (!shouldReduceMotion()) {
-      this.addEventListener('skeleton-item-data', this.#onSkeletonItemData, { signal: this.#controller.signal })
+    this.#slot.addEventListener('slotchange', this.#onSlotChange, { signal: this.#controller.signal })
+
+    this.#observer = new IntersectionObserver((entries) => {
+      this.#bb = entries[0].boundingClientRect
+
+      if (this.#bb.width === 0) {
+        return
+      }
+
       this.#updateAnimation()
-    }
+
+      for (const child of this.#slot.assignedElements()) {
+        this.#handleSkeletonItemData(child)
+      }
+
+      this.#observer!.disconnect()
+      this.#observer = null
+    }, { threshold: 1 })
+
+    this.#observer.observe(this.#wrapper)
   }
 
   disconnectedCallback(): void {
@@ -46,6 +67,8 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
     this.#animation = null
     this.#controller!.abort()
     this.#controller = null
+    this.#observer?.disconnect()
+    this.#observer = null
   }
 
   static get observedAttributes() {
@@ -67,7 +90,7 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
   }
 
   #updateAnimation() {
-    const bb = this.getBoundingClientRect()
+    const bb = this.#bb!
     const bgWidth = bb.width * 4
 
     this.#shimmer.style.setProperty('background-size', `${bgWidth}px`)
@@ -80,16 +103,31 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
     })
   }
 
-  #onSkeletonItemData = (e: Event) => {
-    const bb = this.getBoundingClientRect()
-    const data = (e as CustomEvent<TSinchSkeletonItemBoundingBox>).detail
+  #onSlotChange = () => {
+    this.#clip.innerHTML = ''
+
+    if (this.#bb === null) {
+      return
+    }
+
+    for (const child of this.#slot.assignedElements()) {
+      this.#handleSkeletonItemData(child)
+    }
+  }
+
+  #handleSkeletonItemData(child: Element) {
+    const data = child.getBoundingClientRect()
+    const radiusStr = getCssVar(child, '--sinch-local-shape-radius') ?? '0'
+    const radius = attrValueToInteger(radiusStr, { min: 0, defaultValue: 0 })!
+    const bb = this.#bb!
+
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
 
     rect.setAttribute('x', (data.x - bb.x - this.#borderWidth).toString())
     rect.setAttribute('y', (data.y - bb.y - this.#borderWidth).toString())
     rect.setAttribute('width', data.width.toString())
     rect.setAttribute('height', data.height.toString())
-    rect.setAttribute('rx', data.radius.toString())
+    rect.setAttribute('rx', radius.toString())
 
     this.#clip.appendChild(rect)
   }
