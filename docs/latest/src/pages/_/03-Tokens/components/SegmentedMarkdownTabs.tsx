@@ -8,7 +8,7 @@ import type { MDXComponents } from 'mdx/types'
 const Heading3MdxComponent = commonMdxComponents.h3 as React.ElementType
 const ParagraphMdxComponent = commonMdxComponents.p as React.ElementType
 
-const TypographyTabMarkdown = lazyScrollIntoView(() => import(/* webpackChunkName: "Colors" */'../markdown/TokenTypes.mdx'))
+const TokenTypesMarkdown = lazyScrollIntoView(() => import(/* webpackChunkName: "Colors" */'../markdown/TokenTypes.mdx'))
 
 type ContentInput = {
   heading: string,
@@ -63,7 +63,7 @@ const elementTypeMapping: MDXComponents = {
 export const SegmentedMarkdownTabsMDX = () => {
   return (
     <MDXProvider components={{ ...elementTypeMapping }}>
-      <TypographyTabMarkdown/>
+      <TokenTypesMarkdown/>
     </MDXProvider>
   )
 }

@@ -3,16 +3,16 @@ import { createIllustrationClass } from '@sinch-engage/nectary-assets/illustrati
 import templateHTML from './template.html'
 import type { TSinchIllustrationElement, TSinchIllustrationReact } from '@sinch-engage/nectary-assets/illustrations/types'
 
-defineCustomElement('illustration-pallete-overview', createIllustrationClass(templateHTML))
+defineCustomElement('token-properties', createIllustrationClass(templateHTML))
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'illustration-pallete-overview': TSinchIllustrationReact,
+      'token-properties': TSinchIllustrationReact,
     }
 
     interface HTMLElementTagNameMap {
-      'illustration-pallete-overview': TSinchIllustrationElement,
+      'token-properties': TSinchIllustrationElement,
     }
   }
 }
