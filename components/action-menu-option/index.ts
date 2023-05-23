@@ -39,7 +39,7 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
     const { signal } = this.#controller
 
     this.setAttribute('role', 'option')
-    this.#$wrapper.addEventListener('mousedown', this.#onMouseDown, { signal })
+    this.addEventListener('mousedown', this.#onMouseDown, { signal })
     this.addEventListener('-click', this.#onClickReactHandler, { signal })
   }
 
