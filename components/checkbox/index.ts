@@ -60,7 +60,11 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
     ]
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (newVal === oldVal) {
+      return
+    }
+
     switch (name) {
       case 'text': {
         this.#$label.textContent = newVal
@@ -152,9 +156,6 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
 
     this.#$input.checked = this.checked
 
-    this.dispatchEvent(
-      new CustomEvent('change', { detail: isChecked, bubbles: true })
-    )
     this.dispatchEvent(
       new CustomEvent('-change', { detail: isChecked })
     )

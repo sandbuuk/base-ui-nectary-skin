@@ -18,7 +18,6 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends NectaryElement {
-  #$wrapper: HTMLButtonElement
   #$content: HTMLElement
   #controller: AbortController | null = null
 
@@ -29,7 +28,6 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$wrapper = shadowRoot.querySelector('#wrapper')!
     this.#$content = shadowRoot.querySelector('#content')!
   }
 
@@ -39,7 +37,7 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
     const { signal } = this.#controller
 
     this.setAttribute('role', 'option')
-    this.#$wrapper.addEventListener('mousedown', this.#onMouseDown, { signal })
+    this.addEventListener('mousedown', this.#onMouseDown, { signal })
     this.addEventListener('-click', this.#onClickReactHandler, { signal })
   }
 

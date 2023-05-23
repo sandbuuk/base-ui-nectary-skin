@@ -179,9 +179,6 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     const detail = this.#clamp(value)
 
     this.dispatchEvent(
-      new CustomEvent('change', { detail, bubbles: true })
-    )
-    this.dispatchEvent(
       new CustomEvent('-change', { detail })
     )
   }

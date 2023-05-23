@@ -76,9 +76,6 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
     const detail = (e as CustomEvent).detail
 
     this.dispatchEvent(
-      new CustomEvent('change', { detail, bubbles: true })
-    )
-    this.dispatchEvent(
       new CustomEvent('-change', { detail })
     )
   }

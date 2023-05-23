@@ -122,9 +122,6 @@ defineCustomElement('sinch-tile-control', class extends NectaryElement {
       : value
 
     this.dispatchEvent(
-      new CustomEvent('change', { detail, bubbles: true })
-    )
-    this.dispatchEvent(
       new CustomEvent('-change', { detail })
     )
   }

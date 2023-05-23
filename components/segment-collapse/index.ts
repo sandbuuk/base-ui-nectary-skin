@@ -78,9 +78,6 @@ defineCustomElement('sinch-segment-collapse', class extends NectaryElement {
     const detail = !this.value
 
     this.dispatchEvent(
-      new CustomEvent('change', { detail, bubbles: true })
-    )
-    this.dispatchEvent(
       new CustomEvent('-change', { detail })
     )
   }

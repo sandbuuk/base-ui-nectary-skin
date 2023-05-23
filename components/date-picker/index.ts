@@ -392,9 +392,6 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
         this.#render()
 
         this.dispatchEvent(
-          new CustomEvent('change', { detail: value, bubbles: true })
-        )
-        this.dispatchEvent(
           new CustomEvent('-change', { detail: value })
         )
 
@@ -411,9 +408,6 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     }
 
     // Single value mode
-    this.dispatchEvent(
-      new CustomEvent('change', { detail: dateIso, bubbles: true })
-    )
     this.dispatchEvent(
       new CustomEvent('-change', { detail: dateIso })
     )

@@ -3,6 +3,11 @@
   display: inline-block;
   vertical-align: middle;
   outline: none;
+  cursor: pointer;
+}
+
+:host([disabled]) {
+  cursor: initial;
 }
 
 #button {
@@ -11,17 +16,12 @@
   position: relative;
   width: 100%;
   height: var(--sinch-local-size);
-  cursor: pointer;
 
   --sinch-local-size: var(--sinch-comp-button-size-container-m);
   --sinch-global-size-icon: var(--sinch-comp-button-size-icon-m);
   --sinch-local-font: var(--sinch-comp-button-font-size-m-text);
   --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-m);
   --sinch-global-color-icon: var(--sinch-local-color-icon);
-}
-
-#button:disabled {
-  cursor: initial;
 }
 
 :host([data-size="l"]) > #button {

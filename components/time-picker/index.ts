@@ -142,7 +142,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
     }
 
     this.#$pickerTouch.addEventListener('click', this.#onPickerClick, options)
-    this.#$ampm.addEventListener('change', this.#onAmPmChange, options)
+    this.#$ampm.addEventListener('-change', this.#onAmPmChange, options)
     this.#$submitButton.addEventListener('click', this.#onSubmitButtonClick, options)
     this.#$needleHour.addEventListener('keydown', this.#onHoursKeydown, options)
     this.#$needleMinute.addEventListener('keydown', this.#onMinutesKeydown, options)
@@ -364,8 +364,6 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   }
 
   #onAmPmChange = (e: Event) => {
-    e.stopPropagation()
-
     const value = (e as CustomEvent).detail
 
     switch (value) {
@@ -392,12 +390,6 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   #onSubmitButtonClick = () => {
     const value = stringifyTime(this.#hour, this.#minute)
 
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        bubbles: true,
-        detail: value,
-      })
-    )
     this.dispatchEvent(
       new CustomEvent('-change', {
         detail: value,

@@ -135,9 +135,6 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
 
   #dispatchChangeEvent(value: string) {
     this.dispatchEvent(
-      new CustomEvent('change', { detail: value, bubbles: true })
-    )
-    this.dispatchEvent(
       new CustomEvent('-change', { detail: value })
     )
   }

@@ -339,13 +339,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       this.#cursorPos = nextCursorPos
 
       this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: nextValue,
-          bubbles: true,
-        })
-      )
-
-      this.dispatchEvent(
         new CustomEvent('-change', {
           detail: nextValue,
         })

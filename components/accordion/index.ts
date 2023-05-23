@@ -92,9 +92,6 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
       : getBooleanAttribute($elem, 'data-checked') ? '' : value
 
     this.dispatchEvent(
-      new CustomEvent('change', { detail: result, bubbles: true })
-    )
-    this.dispatchEvent(
       new CustomEvent('-change', { detail: result })
     )
   }
