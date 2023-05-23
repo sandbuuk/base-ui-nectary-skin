@@ -13,18 +13,27 @@ const inputStyles: CSSProperties = {
 
 export const CompositionExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
-  const [value, setValue] = useState('2022-07-19')
-  const [isoValue, setIsoValue] = useState('2022-07-19')
+  const [inputValue, setInputValue] = useState('')
+  const [datePickerValue, setDatePickerValue] = useState('')
 
-  const onChange = (e: CustomEvent<string>) => {
-    setValue(e.detail)
+  const onInputChange = (e: CustomEvent<string>) => {
+    console.log('INPUT_CHANGE', e.detail)
+    setInputValue(e.detail)
   }
-  const onIsoChange = (e: CustomEvent<string>) => {
-    setValue(e.detail)
+  const onDatePickerChange = (e: CustomEvent<string>) => {
+    console.log('DATE_CHANGE', e.detail)
+
+    const inputValue = e.detail.split('-').reverse().join('.')
+
+    setInputValue(inputValue)
     setOpen(false)
   }
   const onOpen = () => {
-    setIsoValue(value)
+    const datePickerValue = inputValue.split('.').reverse().join('-')
+
+    console.log('OPEN_DATE_PICKER', datePickerValue)
+
+    setDatePickerValue(datePickerValue)
     setOpen(true)
   }
   const onClose = () => setOpen(false)
@@ -46,9 +55,10 @@ export const CompositionExample: FC = () => {
           slot="input"
           style={inputStyles}
           aria-label="Pick date"
-          placeholder="YYYY-MM-DD"
-          value={value}
-          on-change={onChange}
+          mask="00.00.0000"
+          placeholder="dd.mm.yyyy"
+          value={inputValue}
+          on-change={onInputChange}
         >
           <sinch-icon-button
             slot="right"
@@ -70,8 +80,8 @@ export const CompositionExample: FC = () => {
         prev-month-aria-label="Next Month"
         next-year-aria-label="Next Year"
         prev-year-aria-label="Prev Year"
-        value={isoValue}
-        on-change={onIsoChange}
+        value={datePickerValue}
+        on-change={onDatePickerChange}
       />
     </sinch-popover>
   )

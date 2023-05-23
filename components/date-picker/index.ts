@@ -431,10 +431,9 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
           this.#date1 = date1
           this.#date2 = date2
 
-          // Dont switch calendar page, if already selected
-          if (this.#uiDate === null) {
-            this.#uiDate = cloneDate(this.#date2)
-          }
+          this.#uiDate = cloneDate(this.#date2)
+        } else {
+          this.#uiDate = null
         }
       } else if (isoDates.length === 1) {
         const date1 = isoToDate(isoDates[0])
@@ -450,6 +449,8 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
       if (isValidDate(valueDate)) {
         this.#date1 = valueDate
         this.#uiDate = cloneDate(this.#date1)
+      } else {
+        this.#uiDate = null
       }
     }
 

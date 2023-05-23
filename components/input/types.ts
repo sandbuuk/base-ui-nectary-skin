@@ -8,11 +8,25 @@ import type { TSinchSize } from '../utils/size'
 
 export type TSinchInputType = 'text' | 'password'
 
+export type TSinchInputMaskSymbol = {
+  value: string,
+  mode: 'digit' | 'letter' | 'exact',
+  placeholder: string,
+}
+
+export type TSinchMaskInputResult = {
+  value: string,
+  cursorPos: number,
+  isComplete: boolean,
+}
+
 export type TSinchInputElement = HTMLElement & {
   /** Text field type, `text` by default */
   type: TSinchInputType,
   /** Value */
   value: string,
+  /** Mask */
+  mask: string | null,
   /** Text that appears in the text field when it has no value set */
   placeholder: string | null,
   /** The HTML autocomplete attribute */
