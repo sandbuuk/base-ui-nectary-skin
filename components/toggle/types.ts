@@ -6,7 +6,6 @@ export type TSinchToggleElement = HTMLElement & {
   labeled: boolean,
   disabled: boolean,
   text: string | null,
-  addEventListener(type: 'change', listener: (e: CustomEvent<boolean>) => void): void,
   addEventListener(type: '-change', listener: (e: CustomEvent<boolean>) => void): void,
   setAttribute(name: 'checked', value: ''): void,
   setAttribute(name: 'small', value: ''): void,
