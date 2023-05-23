@@ -1,3 +1,9 @@
+## v2.1.1 (2023-05-23)
+
+* 🐞 fix `sinch-skeleton` mounting
+* 🐞 fix cursor in interactive components
+* 🐞 cleanup old events
+
 ## v2.1.0 (2023-05-11)
 
 * ➕ open Shadow DOM in components
