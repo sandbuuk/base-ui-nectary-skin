@@ -1,4 +1,4 @@
-import { attrValueToInteger, defineCustomElement, getCssVar, getUid, isAttrTrue, NectaryElement } from '../utils'
+import { attrValueToInteger, defineCustomElement, getCssVar, getUid, isAttrTrue, NectaryElement, shouldReduceMotion } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchSkeletonElement, TSinchSkeletonReact } from './types'
 
@@ -40,26 +40,27 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
 
     this.#controller = new AbortController()
 
-    this.#slot.addEventListener('slotchange', this.#onSlotChange, { signal: this.#controller.signal })
+    if (!shouldReduceMotion()) {
+      this.#slot.addEventListener('slotchange', this.#onSlotChange, { signal: this.#controller.signal })
+      this.#observer = new IntersectionObserver((entries) => {
+        this.#bb = entries[0].boundingClientRect
 
-    this.#observer = new IntersectionObserver((entries) => {
-      this.#bb = entries[0].boundingClientRect
+        if (this.#bb.width === 0) {
+          return
+        }
 
-      if (this.#bb.width === 0) {
-        return
-      }
+        this.#updateAnimation()
 
-      this.#updateAnimation()
+        for (const child of this.#slot.assignedElements()) {
+          this.#handleSkeletonItemData(child)
+        }
 
-      for (const child of this.#slot.assignedElements()) {
-        this.#handleSkeletonItemData(child)
-      }
+        this.#observer!.disconnect()
+        this.#observer = null
+      }, { threshold: 1 })
 
-      this.#observer!.disconnect()
-      this.#observer = null
-    }, { threshold: 1 })
-
-    this.#observer.observe(this.#wrapper)
+      this.#observer.observe(this.#wrapper)
+    }
   }
 
   disconnectedCallback(): void {
