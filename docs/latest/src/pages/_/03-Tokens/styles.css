@@ -6,17 +6,17 @@
 }
 
 #page-layout-grid {
-  --sinch-grid-gutter: 24px;
-  --sinch-grid-margin: 0;
-  --sinch-grid-num-columns: 12;
+  --page-layout-grid-gutter: 24px;
+  --page-layout-grid-margin: 0;
+  --page-layout-grid-num-columns: 12;
 
   display: grid;
   justify-items: center;
   place-items: center;
-  grid-template-columns: repeat(var(--sinch-grid-num-columns), minmax(0, 1fr));
-  grid-column-gap: var(--sinch-grid-gutter);
-  grid-row-gap: var(--sinch-grid-gutter);
-  padding: var(--sinch-grid-margin);
+  grid-template-columns: repeat(var(--page-layout-grid-num-columns), minmax(0, 1fr));
+  grid-column-gap: var(--page-layout-grid-gutter);
+  grid-row-gap: var(--page-layout-grid-gutter);
+  padding: var(--page-layout-grid-margin);
   padding-left: 32px;
   padding-right: 32px;
 }
@@ -31,16 +31,16 @@
 #token-snippets-grid {
   margin-top: 56px;
 
-  --grid-gutter: 24px;
-  --grid-margin: 0;
+  --token-snippets-grid-gutter: 24px;
+  --token-snippets-grid-margin: 0;
 
   display: grid;
   justify-items: center;
   place-items: center;
   grid-template-columns: repeat(10, minmax(0, 1fr));
-  grid-column-gap: var(--grid-gutter);
-  grid-row-gap: var(--grid-gutter);
-  padding: var(--grid-margin);
+  grid-column-gap: var(--token-snippets-grid-gutter);
+  grid-row-gap: var(--token-snippets-grid-gutter);
+  padding: var(--token-snippets-grid-margin);
 }
 
 #token-snippets-grid-left-item {
@@ -60,16 +60,16 @@
 #segmented-tabs-grid {
   margin-top: 24px;
 
-  --grid-gutter: 24px;
-  --grid-margin: 0;
+  --segmented-tabs-grid-gutter: 24px;
+  --segmented-tabs-grid-margin: 0;
 
   display: grid;
   justify-items: center;
   place-items: center;
   grid-template-columns: repeat(10, minmax(0, 1fr));
-  grid-column-gap: var(--grid-gutter);
-  grid-row-gap: var(--grid-gutter);
-  padding: var(--grid-margin);
+  grid-column-gap: var(--segmented-tabs-grid-margin);
+  grid-row-gap: var(--segmented-tabs-grid-gutter);
+  padding: var(--segmented-tabs-grid-margin);
 }
 
 #segmented-tabs-grid-left-item {
@@ -85,22 +85,6 @@
   grid-column-start: 5;
   grid-column-end: 11;
   height: 100%;
-}
-
-.colors-table {
-  background-color: #F8F8F8;
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  padding: 32px;
-  margin-top: 16px;
-}
-
-.color-circle {
-  width: 32px;
-  height: 32px;
-  align-self: center;
-  border-radius: 50%;
 }
 
 .list-item-overwrite {
