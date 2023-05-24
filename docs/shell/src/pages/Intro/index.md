@@ -1,6 +1,6 @@
 # 👋 Intro
 
-Design System's framework-agnostic Component Library implementation, see the [original proposal](https://confluence.sinch.com/display/SA/Proposal%3A+Framework-agnostic+Component+Library) and the [following prototype conclusions](https://confluence.sinch.com/display/SA/Prototype%3A+SaaS+Frontend#Prototype:SaaSFrontend-Framework-agnosticComponentLibrary).
+Sinch Design System.
 
 > Nectaries are specialized nectar-producing structures of the flower.
 
@@ -13,7 +13,7 @@ Design System's framework-agnostic Component Library implementation, see the [or
 Add the following line to `.npmrc` in the project root:
 
 ```plain
-//registry.npmjs.org/:_authToken=REDACTED
+//registry.npmjs.org/:_authToken=<TOKEN>
 ```
 
 Add the component library dependency to `package.json`:
@@ -40,7 +40,7 @@ setAssetsRegistry(window.customElements)
 // App
 ```
 
-Or a custom one for the Shell/MFE use case, see [mfe-helper-react](https://gitlab.com/sinch/sinch-projects/applications/teams/core/core-npm-packages/-/tree/main/packages/mfe-helper-react) as an example for more details:
+Or a custom one for the Shell/MFE use case:
 
 ```js
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
@@ -83,7 +83,7 @@ import '@sinch-engage/nectary/button'
 Use it in React/Vue/Angular/etc, for example:
 
 ```jsx
-<sinch-button value="Click me" onClick={() => console.log('click')}></sinch-button>
+<sinch-button value="Click me" aria-label="Submit button" on-click={() => console.log('click')}></sinch-button>
 ```
 
 ⚠️ Note that it's not allowed to self-close custom element tags.
