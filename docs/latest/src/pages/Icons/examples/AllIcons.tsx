@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icon'
 
 const req = import.meta.webpackContext!('@sinch-engage/nectary-assets/icons', {
@@ -34,6 +35,7 @@ const inputStyle: CSSProperties = {
 export const AllIconsExample: FC = () => {
   const [search, setSearch] = useState('')
   const onChange = (e: CustomEvent<string>) => setSearch(e.detail)
+  const onClearSearch = () => setSearch('')
 
   const names = search.length > 1
     ? iconNames.filter((n) => n.includes(search))
@@ -49,6 +51,9 @@ export const AllIconsExample: FC = () => {
         aria-label="Search"
       >
         <sinch-icon slot="icon" name="search"/>
+        <sinch-icon-button slot="right" on-click={onClearSearch} aria-label="Clear search">
+          <sinch-icon slot="icon" name="close"/>
+        </sinch-icon-button>
       </sinch-input>
       <div style={iconsWrapperStyle}>
         {names.map((name) => React.createElement(name, { key: name, title: name }))}

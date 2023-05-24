@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import '@sinch-engage/nectary/alert'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@sinch-engage/nectary/icon'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
@@ -22,7 +22,7 @@ export const MarkdownExample: FC = () => (
       size="s"
       on-click={() => console.log('close')}
     >
-      <sinch-icon-close slot="icon"/>
+      <sinch-icon slot="icon" name="close"/>
     </sinch-icon-button>
   </sinch-alert>
 )
