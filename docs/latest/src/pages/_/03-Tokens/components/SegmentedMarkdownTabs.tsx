@@ -1,14 +1,13 @@
 import { MDXProvider } from '@mdx-js/react'
-import { lazyScrollIntoView, commonMdxComponents } from 'docs-common'
+import { commonMdxComponents } from 'docs-common'
 import { useState } from 'react'
 import '@sinch-engage/nectary/segmented-control'
 import '@sinch-engage/nectary/segmented-control-option'
+import TokenTypesMarkdown from '../markdown/TokenTypes.mdx'
 import type { MDXComponents } from 'mdx/types'
 
 const Heading3MdxComponent = commonMdxComponents.h3 as React.ElementType
 const ParagraphMdxComponent = commonMdxComponents.p as React.ElementType
-
-const TokenTypesMarkdown = lazyScrollIntoView(() => import(/* webpackChunkName: "Colors" */'../markdown/TokenTypes.mdx'))
 
 type ContentInput = {
   heading: string,

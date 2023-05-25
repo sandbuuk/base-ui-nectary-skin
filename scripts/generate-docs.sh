@@ -11,10 +11,10 @@ rm -f public/docs/index.html public/docs/report.html
 npm --prefix ./docs/latest run build
 
 # Move latest app
-node --loader tsm ./scripts/move-latest-to-public.mts
+node --loader=tsm --no-warnings=ExperimentalWarning ./scripts/move-latest-to-public.mts
 
 # Generate "versions" file AFTER moving latest app to its destination
-node --loader tsm ./scripts/generate-versions-file.mts
+node --loader=tsm --no-warnings=ExperimentalWarning ./scripts/generate-versions-file.mts
 
 # Build Shell using updated "versions" file
 npm --prefix ./docs/shell run build

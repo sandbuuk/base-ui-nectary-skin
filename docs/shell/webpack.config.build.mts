@@ -133,7 +133,7 @@ const config: TWebpackConfig = {
         test: /\.(gif|jpg|png)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[hash].[ext]',
+          name: '[contenthash].[ext]',
           outputPath: 'images',
         },
       },

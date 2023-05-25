@@ -11,10 +11,9 @@
   padding-top: 40px;
   padding-bottom: 40px;
   margin-top: 16px;
-  padding-left: 85px;
-  padding-right: 85px;
   background-color: var(--sinch-sys-color-container-contrast-primary-default);
   border-radius: 14px;
+  text-align: center;
 }
 
 .token-consistency-wrapper {

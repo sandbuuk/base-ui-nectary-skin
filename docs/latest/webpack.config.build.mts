@@ -1,6 +1,7 @@
 import path from 'path'
 import pkg from '@sinch-engage/nectary/package.json' assert { type: 'json' }
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
+// import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import remarkGfm from 'remark-gfm'
 import TerserPlugin from 'terser-webpack-plugin'
@@ -50,6 +51,7 @@ const config: TWebpackConfig = {
     path: path.resolve('./build/'),
     filename: 'js/[contenthash].js',
     chunkFilename: 'js/[contenthash].js',
+    assetModuleFilename: 'images/[contenthash][ext]',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
@@ -117,11 +119,7 @@ const config: TWebpackConfig = {
       },
       {
         test: /\.(gif|jpg|png)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[hash].[ext]',
-          outputPath: 'images',
-        },
+        type: 'asset/resource',
       },
       {
         test: /\.html$/,
@@ -158,6 +156,7 @@ const config: TWebpackConfig = {
   },
   optimization: {
     // chunkIds: 'named',
+    // concatenateModules: false,
     minimize: true,
     minimizer: [
       // @ts-expect-error
@@ -173,6 +172,16 @@ const config: TWebpackConfig = {
         },
       }),
       new CssMinimizerPlugin(),
+      // new ImageMinimizerPlugin({
+      //   minimizer: {
+      //     implementation: ImageMinimizerPlugin.imageminMinify,
+      //     options: {
+      //       plugins: [
+      //         'imagemin-pngquant',
+      //       ],
+      //     },
+      //   },
+      // }),
     ],
     splitChunks: {
       cacheGroups: {
