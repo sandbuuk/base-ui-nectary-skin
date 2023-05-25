@@ -3,7 +3,7 @@ import path from 'path'
 import pkg from '@sinch-engage/nectary/package.json' assert { type: 'json' }
 import { rimraf } from 'rimraf'
 
-const VERSIONS_DIR = './public/docs/versions'
+const VERSIONS_DIR = './public/versions'
 
 await mkdir(VERSIONS_DIR, { recursive: true })
 

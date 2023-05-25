@@ -18,7 +18,7 @@ const versionToKey = (version: string) => {
 const remotes = {} as Record<string, string>
 
 // eslint-disable-next-line node/no-sync
-fs.readdirSync('../../public/docs/versions/', { withFileTypes: true }).forEach((entry) => {
+fs.readdirSync('../../public/versions/', { withFileTypes: true }).forEach((entry) => {
   if (!entry.isDirectory()) {
     return
   }

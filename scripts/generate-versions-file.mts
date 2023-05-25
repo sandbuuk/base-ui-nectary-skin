@@ -1,6 +1,6 @@
 import { readdir, writeFile } from 'fs/promises'
 
-const entries = await readdir('./public/docs/versions/', { withFileTypes: true })
+const entries = await readdir('./public/versions/', { withFileTypes: true })
 
 const versionToKey = (version: string) => {
   return version.replaceAll('.', '_')

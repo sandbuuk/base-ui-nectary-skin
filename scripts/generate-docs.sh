@@ -3,9 +3,9 @@
 set -eux pipefail
 
 # Cleanup docs dir
-mkdir -p ./public/docs
-rm -rf public/docs/css public/docs/images public/docs/js
-rm -f public/docs/index.html public/docs/report.html
+mkdir -p ./public
+rm -rf public/css public/images public/js
+rm -f public/index.html public/report.html
 
 # Build latest app
 npm --prefix ./docs/latest run build
@@ -20,4 +20,4 @@ node --loader tsm ./scripts/generate-versions-file.mts
 npm --prefix ./docs/shell run build
 
 # Move built Shell
-mv ./docs/shell/build/* ./public/docs
+mv ./docs/shell/build/* ./public

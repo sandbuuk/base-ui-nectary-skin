@@ -3,7 +3,8 @@ variables:
 
 default:
   tags:
-    - saas-default-role
+    - saas
+    - application
 
 stages:
   - lint
@@ -65,7 +66,7 @@ visual-tests:
 publish-components:
   stage: deploy
   needs:
-    - pages
+    - publish-docs
   rules:
     - if: $CI_COMMIT_TAG =~ /^components@/
   image: node:16
@@ -80,7 +81,6 @@ publish-components:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --offline --reporter silent
@@ -106,7 +106,6 @@ publish-assets:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --offline --reporter silent
@@ -132,7 +131,6 @@ publish-theme-base:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --offline --reporter silent
@@ -157,7 +155,6 @@ publish-theme-dark:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --offline --reporter silent
@@ -166,12 +163,12 @@ publish-theme-dark:
     - npm publish themes/dark/ --verbose
     - node ./scripts/slack-changelog.js themes/dark
 
-pages:
-  stage: deploy
+build-docs:
+  stage: build
   image: node:16
   rules:
     - if: $CI_COMMIT_TAG =~ /^components@/
-    - if: $CI_COMMIT_TAG == "pages"
+    - if: $CI_COMMIT_TAG == "docs"
   cache:
     key:
       files:
@@ -182,7 +179,6 @@ pages:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - set AWS_WEB_IDENTITY_TOKEN_FILE /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
@@ -190,15 +186,31 @@ pages:
   script:
     - git config --global user.email ci@sinch.com
     - git config --global user.name Bot
-    - git fetch origin refs/heads/storybook
-    - git checkout origin/storybook -- public
+    - git fetch origin refs/heads/docs
+    - git checkout origin/docs -- public
     - ./scripts/generate-docs.sh
-    - git branch -D storybook || true
-    - git checkout --orphan storybook
+    - git branch -D docs || true
+    - git checkout --orphan docs
     - git reset
     - git add -f public
-    - git commit -m "build pages"
+    - git commit -m "build docs"
     - git push --force "https://gitlab-ci-token:$PROJECT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
   artifacts:
     paths:
       - public
+
+publish-docs:
+  stage: deploy
+  image: 652860480992.dkr.ecr.eu-west-1.amazonaws.com/aws-cli-runner
+  needs:
+    - build-docs
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^components@/
+    - if: $CI_COMMIT_TAG == "docs"
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+  script:
+    - appcli use production
+    - aws s3 rm s3://${BUCKET_ID}/.public/ --recursive --exclude ""
+    - aws s3 cp public/ s3://${BUCKET_ID}/.public/ --recursive --include "*"
+    - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
