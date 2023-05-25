@@ -6,7 +6,7 @@ import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/toast-manager'
 import '@sinch-engage/nectary/toast'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@sinch-engage/nectary/icon'
 
 const types: TSinchToastType[] = ['info', 'warn', 'success', 'error']
 const text = [
@@ -66,7 +66,7 @@ export const ComplexExample: FC = () => {
                 size="s"
                 on-click={onClose(id)}
               >
-                <sinch-icon-close slot="icon"/>
+                <sinch-icon slot="icon" name="close"/>
               </sinch-icon-button>
             )}
           </sinch-toast>

@@ -1,7 +1,7 @@
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/file-status'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@sinch-engage/nectary/icon'
 import '@sinch-engage/nectary-assets/icons/refresh'
 import '@sinch-engage/nectary/text'
 
@@ -21,7 +21,7 @@ export const ErrorExample: FC = () => (
         size="s"
         on-click={() => {}}
       >
-        <sinch-icon-close slot="icon"/>
+        <sinch-icon slot="icon" name="close"/>
       </sinch-icon-button>
       <sinch-text slot="content" type="m">Invalid file, try another one</sinch-text>
     </sinch-file-status>

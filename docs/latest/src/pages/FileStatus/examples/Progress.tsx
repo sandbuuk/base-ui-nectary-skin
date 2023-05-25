@@ -1,7 +1,7 @@
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/file-status'
 import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@sinch-engage/nectary/icon'
 import '@sinch-engage/nectary/progress'
 
 const style: CSSProperties = {
@@ -20,7 +20,7 @@ export const ProgressExample: FC = () => (
       size="s"
       on-click={() => {}}
     >
-      <sinch-icon-close slot="icon"/>
+      <sinch-icon slot="icon" name="close"/>
     </sinch-icon-button>
     <sinch-progress
       slot="content"
