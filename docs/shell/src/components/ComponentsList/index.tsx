@@ -48,8 +48,6 @@ export const ComponentsList: FC = () => {
   const pagesRef = useRef<TResource<TSidebarItem[]>>()
 
   if (versionValueRef.current !== versionValue) {
-    console.log('--- ComponentsList', versionValue)
-
     const promise = Reflect.get(versions, versionValue).bootstrap()
     const components: Promise<TSidebarItem[]> = promise.then(({ getComponentsRoutes }: any) => getComponentsRoutes())
     const pages: Promise<TSidebarItem[]> = promise.then(({ getPagesRoutes }: any) => getPagesRoutes())

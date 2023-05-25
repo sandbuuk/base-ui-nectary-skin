@@ -59,7 +59,7 @@
 .illustration-wrapper {
   width: 100%;
   height: auto;
-  background-color: #F8F8F8;
+  background-color: var(--sinch-sys-color-container-contrast-secondary-default);
   border-radius: 14px;
   margin-top: 16px;
   margin-bottom: 56px;

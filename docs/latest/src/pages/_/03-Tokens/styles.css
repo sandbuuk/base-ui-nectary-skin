@@ -1,0 +1,94 @@
+#page-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+#page-layout-grid {
+  --page-layout-grid-gutter: 24px;
+  --page-layout-grid-margin: 0;
+  --page-layout-grid-num-columns: 12;
+
+  display: grid;
+  justify-items: center;
+  place-items: center;
+  grid-template-columns: repeat(var(--page-layout-grid-num-columns), minmax(0, 1fr));
+  grid-column-gap: var(--page-layout-grid-gutter);
+  grid-row-gap: var(--page-layout-grid-gutter);
+  padding: var(--page-layout-grid-margin);
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.page-layout-grid-item {
+  grid-column-start: 2;
+  grid-column-end: 12;
+  height: 100%;
+  width: 100%;
+}
+
+#token-snippets-grid {
+  margin-top: 56px;
+
+  --token-snippets-grid-gutter: 24px;
+  --token-snippets-grid-margin: 0;
+
+  display: grid;
+  justify-items: center;
+  place-items: center;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-column-gap: var(--token-snippets-grid-gutter);
+  grid-row-gap: var(--token-snippets-grid-gutter);
+  padding: var(--token-snippets-grid-margin);
+}
+
+#token-snippets-grid-left-item {
+  display: inline-grid;
+  grid-column-start: 1;
+  grid-column-end: 6;
+  height: 100%;
+}
+
+#token-snippets-grid-right-item {
+  display: inline-grid;
+  grid-column-start: 6;
+  grid-column-end: 11;
+  height: 100%;
+}
+
+#segmented-tabs-grid {
+  margin-top: 24px;
+
+  --segmented-tabs-grid-gutter: 24px;
+  --segmented-tabs-grid-margin: 0;
+
+  display: grid;
+  justify-items: center;
+  place-items: center;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-column-gap: var(--segmented-tabs-grid-margin);
+  grid-row-gap: var(--segmented-tabs-grid-gutter);
+  padding: var(--segmented-tabs-grid-margin);
+}
+
+#segmented-tabs-grid-left-item {
+  display: inline-grid;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  height: 100%;
+  width: 100%;
+}
+
+#segmented-tabs-grid-right-item {
+  display: inline-grid;
+  grid-column-start: 5;
+  grid-column-end: 11;
+  height: 100%;
+}
+
+.list-item-overwrite {
+  font-size: var(--sinch-ref-typography-font-size-12);
+  color: var(--sinch-sys-color-text-muted);
+  line-height: var(--sinch-ref-typography-line-height-20);
+}

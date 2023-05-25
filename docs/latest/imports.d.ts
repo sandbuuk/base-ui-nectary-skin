@@ -6,6 +6,11 @@ declare module '*.html' {
 declare module '*.css' {
 }
 
+declare module '*.png' {
+  const value: string
+  export default value
+}
+
 declare module '*.css?theme' {
   const obj: {
     use(param: any): void,
