@@ -18,7 +18,6 @@ import {
   updateBooleanAttribute,
   getReactEventHandler,
   getRect,
-  subscribeContext,
   debounceTimeout,
   setClass,
 } from '../utils'
@@ -32,10 +31,6 @@ import type { TSinchInputElement } from '../input/types'
 import type { TSinchPopoverElement } from '../popover/types'
 import type { TSinchTabsElement } from '../tabs/types'
 import type { TRect } from '../types'
-import type {
-  TContextKeydown,
-  TContextVisibility,
-} from '../utils'
 
 const groupLabels = [
   'Emotions',
@@ -99,15 +94,11 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     this.#$tabs.addEventListener('-change', this.#onTabsChange as any, { signal })
     this.#$searchInput.addEventListener('-change', this.#onSearchChange as any, { signal })
     this.#$searchClearButton.addEventListener('-click', this.#onSearchClearClick, { signal })
-    this.addEventListener('keydown', this.#onListboxKeyDown, { signal })
     this.#$skinButton.addEventListener('-click', this.#onSkinButtonClick, { signal })
     this.#$skinPopover.addEventListener('-close', this.#onSkinPopoverClose, { signal })
     this.#$skinMenu.addEventListener('-change', this.#onSkinMenuChange as any, { signal })
     this.#$list.addEventListener('click', this.#onListClick, { signal })
     this.addEventListener('-change', this.#onChangeReactHandler, { signal })
-
-    subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
-    subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
 
     this.#updateTabs()
     this.#updateEmojis()
@@ -154,41 +145,6 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('-change', { detail: value })
     )
-  }
-
-  #onContextKeyDown = (e: CustomEvent<TContextKeydown>) => {
-    this.#handleKeydown(e.detail)
-  }
-
-  #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
-    if (e.detail) {
-      // Select element when becoming visible
-    } else {
-      // Deselect element when becoming invisible
-    }
-  }
-
-  #onListboxKeyDown = (e: KeyboardEvent) => {
-    this.#handleKeydown(e)
-  }
-
-  #handleKeydown(e: TContextKeydown) {
-    switch (e.code) {
-      case 'Space':
-      case 'Enter': {
-        break
-      }
-      case 'ArrowUp': {
-        e.preventDefault()
-
-        break
-      }
-      case 'ArrowDown': {
-        e.preventDefault()
-
-        break
-      }
-    }
   }
 
   #onTabsChange = (e: CustomEvent<string>) => {

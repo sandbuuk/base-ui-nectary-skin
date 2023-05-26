@@ -229,6 +229,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
     switch (e.code) {
       case 'Space':
       case 'Enter': {
+        e.preventDefault()
         this.click()
       }
     }

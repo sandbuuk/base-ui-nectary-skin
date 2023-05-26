@@ -12,6 +12,7 @@ import {
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
   subscribeContext,
+  isTargetEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchColorMenuElement, TSinchColorMenuReact } from './types'
@@ -187,7 +188,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   #onListboxClick = (e: Event) => {
     const $elem = e.target as Element
 
-    if ($elem === this.#$listbox) {
+    if (isTargetEqual(e, this.#$listbox)) {
       return
     }
 
@@ -217,10 +218,11 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     switch (e.code) {
       case 'Space':
       case 'Enter': {
+        e.preventDefault()
+
         const $option = this.#findSelectedOption()
 
         if ($option !== null) {
-          e.preventDefault()
           this.#dispatchChangeEvent($option)
         }
 

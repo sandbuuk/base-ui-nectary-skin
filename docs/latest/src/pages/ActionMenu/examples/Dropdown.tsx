@@ -14,7 +14,12 @@ export const DropdownExample: FC = () => {
   }
 
   return (
-    <sinch-popover open={isOpen} on-close={() => setOpen(false)} aria-label="Action Menu">
+    <sinch-popover
+      open={isOpen}
+      orientation="bottom-right"
+      on-close={() => setOpen(false)}
+      aria-label="Action Menu"
+    >
       <sinch-icon-button
         slot="target"
         size="l"
