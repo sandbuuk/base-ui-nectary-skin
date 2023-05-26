@@ -1,3 +1,9 @@
+## v2.1.2 (2023-05-26)
+
+* 🐞 fix scrollbar click in `sinch-select-menu`
+* 🐞 remove last item border in `sinch-accordion`
+* 🐞 remove last row border in `sinch-table`
+
 ## v2.1.1 (2023-05-23)
 
 * 🐞 fix `sinch-skeleton` mounting
