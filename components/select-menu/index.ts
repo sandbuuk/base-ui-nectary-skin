@@ -22,6 +22,7 @@ import {
   setClass,
   subscribeContext,
   hasClass,
+  isTargetEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
@@ -74,7 +75,6 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.addEventListener('keydown', this.#onListboxKeyDown, options)
     this.addEventListener('focus', this.#onFocus, options)
     this.addEventListener('blur', this.#onListboxBlur, options)
-    this.#$listbox.addEventListener('mousedown', this.#onListboxMousedown, options)
     this.#$listbox.addEventListener('click', this.#onListboxClick, options)
     this.#$search.addEventListener('-change', this.#onSearchChange as any, options)
     this.#$searchClear.addEventListener('-click', this.#onSearchClearClick, options)
@@ -158,14 +158,6 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     }
   }
 
-  #onListboxMousedown = (e: Event) => {
-    const $elem = (e.target) as TSelectMenuOption
-
-    if (!getBooleanAttribute($elem, 'disabled')) {
-      this.#dispatchChangeEvent($elem)
-    }
-  }
-
   #onListboxBlur = () => {
     this.#selectOption(null)
   }
@@ -175,8 +167,9 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
     this.focus()
 
-    if (!getBooleanAttribute($elem, 'disabled')) {
+    if (!isTargetEqual(e, this.#$listbox) && !getBooleanAttribute($elem, 'disabled')) {
       this.#selectOption($elem)
+      this.#dispatchChangeEvent($elem)
     }
   }
 
@@ -235,10 +228,11 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     switch (e.code) {
       case 'Space':
       case 'Enter': {
+        e.preventDefault()
+
         const $option = this.#findSelectedOption()
 
         if ($option !== null) {
-          e.preventDefault()
           this.#dispatchChangeEvent($option)
         }
 
