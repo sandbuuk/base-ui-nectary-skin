@@ -18,6 +18,10 @@
   z-index: 1;
   background-color: var(--sinch-comp-table-color-row-default-background-sticky);
 }
+
+:host(:last-child) ::slotted(sinch-table-cell) {
+  border-bottom: none;
+}
 </style>
 
 <slot></slot>
