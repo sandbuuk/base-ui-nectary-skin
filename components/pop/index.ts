@@ -19,7 +19,7 @@ import {
   isTargetEqual,
 } from '../utils'
 import templateHTML from './template.html'
-import { disableScroll, enableScroll, orientationValues } from './utils'
+import { disableOverscroll, enableOverscroll, orientationValues } from './utils'
 import type { TSinchPopElement, TSinchPopOrientation, TSinchPopReact } from './types'
 import type { TRect } from '../types'
 import type { TContextVisibility } from '../utils'
@@ -42,6 +42,8 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   #keydownContext: Context<'keydown'>
   #visibilityContext: Context<'visibility'>
   #targetStyleValue: string | null = null
+  #modalWidth = 0
+  #modalHeight = 0
 
   constructor() {
     super()
@@ -282,8 +284,8 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       }
     }
 
-    /* Prevent scroll */
-    disableScroll()
+    disableOverscroll()
+    window.addEventListener('scroll', this.#updatePosition, { passive: false })
     window.addEventListener('resize', this.#onResize)
 
     // Subscribe after delay to not get immediate callbacks
@@ -349,7 +351,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       if (!isElementFocused(this.#targetActiveElement)) {
         // Supress target focus event, to prevent refocus of target to reopen popover
         this.#$targetSlot.addEventListener('focus', this.#stopEventPropagation, true)
-        this.#targetActiveElement.focus()
+        this.#targetActiveElement.focus({ preventScroll: true })
         this.#$targetSlot.removeEventListener('focus', this.#stopEventPropagation, true)
 
         // Safari sometimes does not focus element synchronously
@@ -359,7 +361,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
           requestAnimationFrame(() => {
             if (this.isConnected && !this.#$dialog.open) {
               this.#$targetSlot.addEventListener('focus', this.#stopEventPropagation, true)
-              $targetEl.focus()
+              $targetEl.focus({ preventScroll: true })
               this.#$targetSlot.removeEventListener('focus', this.#stopEventPropagation, true)
             }
           })
@@ -369,15 +371,67 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       }
     }
 
-    /* Restore scroll */
-    enableScroll()
+    enableOverscroll()
     this.#resizeThrottle.cancel()
     window.removeEventListener('resize', this.#onResize)
+    window.removeEventListener('scroll', this.#updatePosition)
     this.#$contentSlot.removeEventListener('slotchange', this.#onContentSlotChange)
   }
 
   #onResize = () => {
     this.#resizeThrottle.fn()
+  }
+
+  #updatePosition = () => {
+    const targetRect = this.#getTargetRect()
+    const orient = this.orientation
+    const modalWidth = this.#modalWidth
+    const modalHeight = this.#modalHeight
+    const inset = this.inset
+    let xPos = 0
+    let yPos = 0
+
+    if (orient === 'bottom-right' || orient === 'top-right' || orient === 'top-stretch' || orient === 'bottom-stretch') {
+      xPos = targetRect.x
+    }
+
+    if (orient === 'bottom-left' || orient === 'top-left') {
+      xPos = targetRect.x + targetRect.width - modalWidth
+    }
+
+    if (orient === 'bottom-center' || orient === 'top-center') {
+      xPos = targetRect.x + targetRect.width / 2 - modalWidth / 2
+    }
+
+    if (orient === 'center-right') {
+      xPos = targetRect.x + targetRect.width
+    }
+
+    if (orient === 'center-left') {
+      xPos = targetRect.x - modalWidth
+    }
+
+    if (orient === 'bottom-left' || orient === 'bottom-right' || orient === 'bottom-stretch' || orient === 'bottom-center') {
+      yPos = targetRect.y + targetRect.height
+    }
+
+    if (orient === 'top-left' || orient === 'top-right' || orient === 'top-stretch' || orient === 'top-center') {
+      yPos = targetRect.y - modalHeight
+    }
+
+    if (orient === 'center-left' || orient === 'center-right') {
+      yPos = targetRect.y + targetRect.height / 2 - modalHeight / 2
+    }
+
+    const clampedXPos = Math.max(inset, Math.min(xPos, window.innerWidth - modalWidth - inset))
+    const clampedYPos = Math.max(inset, Math.min(yPos, window.innerHeight - modalHeight - inset))
+
+    // if (Math.abs(clampedXPos - xPos) > 2 || Math.abs(clampedYPos - yPos) > 2) {
+    //   this.#dispatchCloseEvent()
+    // }
+
+    this.#$dialog.style.setProperty('left', `${clampedXPos}px`)
+    this.#$dialog.style.setProperty('top', `${clampedYPos}px`)
   }
 
   #updateOrientation = () => {
@@ -392,6 +446,9 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     const inset = this.inset
     let xPos = 0
     let yPos = 0
+
+    this.#modalHeight = modalHeight
+    this.#modalWidth = modalWidth
 
     if (orient === 'bottom-right' || orient === 'top-right' || orient === 'top-stretch' || orient === 'bottom-stretch') {
       xPos = targetRect.x

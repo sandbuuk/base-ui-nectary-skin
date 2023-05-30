@@ -2,7 +2,6 @@ import '../icon-button'
 import '../icon'
 import '../stop-events'
 import '../title'
-import { disableScroll, enableScroll } from '../pop/utils'
 import {
   defineCustomElement,
   getAttribute,
@@ -17,6 +16,7 @@ import {
   isTargetEqual,
 } from '../utils'
 import templateHTML from './template.html'
+import { disableScroll, enableScroll } from './utils'
 import type { TSinchDialogCloseDetail, TSinchDialogElement, TSinchDialogReact } from './types'
 
 const template = document.createElement('template')
