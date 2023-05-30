@@ -383,7 +383,9 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #updatePosition = () => {
-    const targetRect = this.#getTargetRect()
+    const targetRect = this.modal
+      ? this.#getTargetRect()
+      : this.#$targetWrapper.getBoundingClientRect()
     const orient = this.orientation
     const modalWidth = this.#modalWidth
     const modalHeight = this.#modalHeight
@@ -432,6 +434,14 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     this.#$dialog.style.setProperty('left', `${clampedXPos}px`)
     this.#$dialog.style.setProperty('top', `${clampedYPos}px`)
+
+    if (!this.modal) {
+      const targetLeftPos = targetRect.x - clampedXPos
+      const targetTopPos = targetRect.y - clampedYPos
+
+      this.#$targetOpenWrapper.style.setProperty('left', `${targetLeftPos}px`)
+      this.#$targetOpenWrapper.style.setProperty('top', `${targetTopPos}px`)
+    }
   }
 
   #updateOrientation = () => {
