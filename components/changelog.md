@@ -1,3 +1,7 @@
+## v2.1.3 (2023-05-31)
+
+* 🐞 fix page scroll behavior in `sinch-popover` and `sinch-tooltip`
+
 ## v2.1.2 (2023-05-26)
 
 * 🐞 fix scrollbar click in `sinch-select-menu`
