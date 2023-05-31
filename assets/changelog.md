@@ -1,3 +1,7 @@
+## v0.7.0 (2023-05-31)
+
+* ➕ add `sinch-animation-sinch-logo` component
+
 ## v0.6.0 (2023-05-23)
 
 * ➕ add `sinch-illustration-person-lightbulb-backpack` component
