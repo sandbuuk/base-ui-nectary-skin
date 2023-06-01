@@ -159,8 +159,8 @@ test('date-picker screenshots', runScreenshotTests('sinch-date-picker', [
     url: shot,
     async *fn({ $eval, page }) {
       const [nextYear, nextMonth] = await $eval((el) => {
-        el.setAttribute('value', '2022-06-06')
-        el.setAttribute('max', '2023-07-07')
+        el.setAttribute('value', '2022-04-04')
+        el.setAttribute('max', '2023-05-05')
 
         return [el.nextYearButtonRect, el.nextMonthButtonRect]
       })
