@@ -8,7 +8,7 @@ import '@sinch-engage/nectary/tabs-option'
 export const PageLayoutTabs: FC = () => {
   const navigate = useNavigatePath()
   const { pathname, search } = useLocation()
-  const { getRouteTabs: getRouteTabInfo } = useRouteTabInfo()
+  const { getRouteTabInfo } = useRouteTabInfo()
 
   const tabs = getRouteTabInfo(pathname)
 

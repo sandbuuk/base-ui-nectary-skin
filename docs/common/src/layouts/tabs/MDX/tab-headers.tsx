@@ -14,10 +14,6 @@ export const tabHeaders: MDXComponents = {
     const text = children as string
     const id = slugify(text, 2)
 
-    if (id === 'table-of-contents') {
-      return null
-    }
-
     const href = `#${id}`
 
     return (

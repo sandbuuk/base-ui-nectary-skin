@@ -11,7 +11,7 @@ export const ComponentsRoutes = memo(() => {
         path="/components"
         element={(
           <TabsLayout
-            getRouteTabs={getRouteTabs}
+            getRouteTabInfo={getRouteTabs}
             getRouteTitle={getRouteTitle}
           />
         )}

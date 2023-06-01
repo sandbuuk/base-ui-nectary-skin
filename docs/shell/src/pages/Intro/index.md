@@ -6,8 +6,6 @@ Sinch Design System.
 
 > Bumblebees eat nectar and pollen made by flowers. The sugary nectar provides the bees with energy while the pollen provides them with protein.
 
-## Table of contents
-
 ## Install
 
 Add the following line to `.npmrc` in the project root:
