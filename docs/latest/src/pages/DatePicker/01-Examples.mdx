@@ -3,13 +3,11 @@ import { CompositionExample } from './examples/Composition.tsx?example'
 import { RangeExample } from './examples/Range.tsx?example'
 import { LocaleExample } from './examples/Locale.tsx?example'
 
-# Date Picker
-
-## Examples
+# Examples
 
 Date Picker communicates using an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) (e.g. `YYYY-MM-DD`) date format. Working with timezones is not a part of the component functionality and all internal date manipulations go through consumer's local timezone reported by browser.
 
-### Composition
+## Composition
 
 The component does *not* provide an input field and does *not* do any input masking. It's a modular *picker* and requires you to compose an input + popover + picker on your own, maintaining all the states and masking/formatting the displayed value.
 
@@ -17,13 +15,13 @@ We'll implement a generic masking functionality for the input field  (like `patt
 
 <Example Component={CompositionExample}/>
 
-### Range
+## Range
 
 Range of dates where formatting and parsing a visual representation is delegated to a consumer side — Date Picker works with an ISO pair of dates in CSV format.
 
 <Example Component={RangeExample}/>
 
-### Locale
+## Locale
 
 `locale` is a special property/attribute that we use to get month and week day short names automatically.
 

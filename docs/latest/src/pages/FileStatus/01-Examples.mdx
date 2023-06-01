@@ -5,9 +5,7 @@ import { ProgressExample } from './examples/Progress.tsx?example'
 import { SuccessExample } from './examples/Success.tsx?example'
 import { ErrorExample } from './examples/Error.tsx?example'
 
-# File Status
-
-## Examples
+# Examples
 
 File Status represents a file state:
 
@@ -18,31 +16,31 @@ File Status represents a file state:
 * `error`
 
 
-### Pending
+## Pending
 
 File has been picked. Action button should remove file from the list.
 
 <Example Component={PendingExample}/>
 
-### Loading
+## Loading
 
 File is uploading. Action button should cancel the uploading process.
 
 <Example Component={LoadingExample}/>
 
-### Progress
+## Progress
 
 File is uploading. Action button should cancel the uploading process.
 
 <Example Component={ProgressExample}/>
 
-### Success
+## Success
 
 File has been uploaded. Action button should cancel the uploading process.
 
 <Example Component={SuccessExample}/>
 
-### Error
+## Error
 
 Something went wrong during file uploading. Action button should either remove file or re-try the failed operation.
 

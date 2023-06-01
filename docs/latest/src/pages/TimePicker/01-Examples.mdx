@@ -2,13 +2,11 @@ import { Example } from '~/components/Example'
 import { CompositionExample } from './examples/Composition.tsx?example'
 import { AMPMExample } from './examples/AMPM.tsx?example'
 
-# Time Picker
-
-## Examples
+# Examples
 
 Time Picker communicates using an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) (e.g. `hh:mm:ss`) time format. Working with timezones is not a part of the component functionality and all internal time manipulations go through consumer's local timezone reported by browser.
 
-### Composition
+## Composition
 
 The component does *not* provide an input field and does *not* do any input masking. It's a modular *picker* and requires you to compose an input + popover + picker on your own, maintaining all the states and masking/formatting the displayed value.
 
@@ -16,7 +14,7 @@ We'll implement a generic masking functionality for the input field  (like `patt
 
 <Example Component={CompositionExample}/>
 
-### AM/PM
+## AM/PM
 
 We follow the "U.S. Government Publishing Office" way:
 

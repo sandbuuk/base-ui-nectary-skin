@@ -18,10 +18,6 @@ export const commonHeaders: MDXComponents = {
     const id = slugify(text, 2)
     const href = `#${id}`
 
-    if (id === 'table-of-contents' || id === 'eof') {
-      return null
-    }
-
     return (
       <div className="title" id={id}>
         <a className="title-anchor" href={href}>#</a>

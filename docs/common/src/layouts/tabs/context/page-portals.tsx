@@ -1,6 +1,5 @@
-import { createContext, useContext, useEffect, useRef } from 'react'
+import { createContext, useContext, useEffect } from 'react'
 import { useRerender } from '../hooks'
-import type { FC, PropsWithChildren } from 'react'
 
 const EMPTY_DEPS: any[] = []
 
@@ -10,55 +9,33 @@ type TPagePortalsContext = {
 
 const PagePortalsContext = createContext<TPagePortalsContext>({
   navmenu: null,
+  // Add more portal elements here
 })
 
-export const PagePortalsProvider: FC<PropsWithChildren> = ({ children }) => {
-  const valueRef = useRef<TPagePortalsContext | null>(null)
-
-  if (valueRef.current === null) {
-    valueRef.current = {
-      navmenu: null,
-    }
-  }
-
-  return (
-    <PagePortalsContext.Provider value={valueRef.current}>
-      {children}
-    </PagePortalsContext.Provider>
-  )
-}
-
-export const usePortalsRefs = () => {
+export const usePortalSetters = () => {
   const portals = useContext(PagePortalsContext)
 
   return {
     setNavElement(el: HTMLElement | null) {
       portals.navmenu = el
     },
+    // Add more portal setters here
   }
 }
 
 const arePortalsReady = (portals: TPagePortalsContext): boolean => {
+  // Should return 'true' if all portals are valid
   return portals.navmenu !== null
 }
 
 export const usePortalsReady = (): boolean => {
   const portals = useContext(PagePortalsContext)
-  const portalsReadyRef = useRef(false)
   const rerender = useRerender()
 
-  portalsReadyRef.current = arePortalsReady(portals)
+  // Just Rerender once and expect that portals become ready
+  useEffect(rerender, EMPTY_DEPS)
 
-  useEffect(() => {
-    const portalsReadyNow = arePortalsReady(portals)
-
-    if (portalsReadyRef.current === false && portalsReadyNow) {
-      portalsReadyRef.current = true
-      rerender()
-    }
-  }, EMPTY_DEPS)
-
-  return portalsReadyRef.current
+  return arePortalsReady(portals)
 }
 
 export const usePortalNavmenu = (): HTMLElement | null => {

@@ -12,14 +12,13 @@ type TPageNavMenuItem = {
 
 export const PageNavMenuItem: FC<TPageNavMenuItem> = ({ level, href, text }) => {
   const { hash } = useLocation()
-
   const $el = usePortalNavmenu()
 
   if ($el === null) {
     return null
   }
 
-  const isActive = href === hash || (hash.length === 0 && level === 0)
+  const isActive = href === hash
 
   return createPortal(
     <a

@@ -21,5 +21,5 @@ export const useNavigatePath = () => {
         doc.getElementById('page-content')?.scroll(0, 0)
       })
     }
-  }, [])
+  }, [doc])
 }

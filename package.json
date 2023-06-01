@@ -10,6 +10,7 @@
     "test": "pnpm --dir tests test"
   },
   "devDependencies": {
+    "@alex-e-leon/stylelint-value-no-unknown-custom-properties": "^4.0.2",
     "@sinch-engage/nectary": "workspace:*",
     "@types/node": "^18.16.0",
     "@types/svgo": "^2.6.4",
