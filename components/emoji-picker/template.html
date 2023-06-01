@@ -61,9 +61,13 @@
   display: flex;
 }
 
-#tabs svg {
+sinch-tabs-icon-option > svg {
   pointer-events: none;
+
+  /* Variables Defined in parent sinch-tabs-icon-option */
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   height: var(--sinch-global-size-icon);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   fill: var(--sinch-global-color-icon);
 }
 </style>
