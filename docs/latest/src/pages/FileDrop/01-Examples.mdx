@@ -5,25 +5,23 @@ import { AcceptExample } from './examples/Accept.tsx?example'
 import { InvalidExample } from './examples/Invalid.tsx?example'
 import { CompositionExample } from './examples/Composition.tsx?example'
 
-# File Drop
-
-## Examples
+# Examples
 
 File Drop encapsulates file drag and drop area and wraps a button with File Picker.
 
-### Simple
+## Simple
 
 File Drop provides an array of [files](https://developer.mozilla.org/en-US/docs/Web/API/File) to upload.
 
 <Example Component={SimpleExample}/>
 
-### Multiple
+## Multiple
 
 Allows to choose multiple files.
 
 <Example Component={MultipleExample}/>
 
-### Accept
+## Accept
 
 [A unique file type specifier](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers) that describes a type of file that may be selected by the user:
 
@@ -37,7 +35,7 @@ Allows to choose multiple files.
 
 <Example Component={AcceptExample}/>
 
-### Invalid
+## Invalid
 
 Unlike with the File Picker button it's possible to drag and drop arbitraty files (and even selected text) onto the droppable area. There is a way to validate this and show an error message via `-invalid` event and mix of `invalid` and `invalidtext` attributes.
 
@@ -51,7 +49,7 @@ Try to drag and drop a non-`.jpg` or larger than 1KB file:
 
 <Example Component={InvalidExample}/>
 
-### Composition
+## Composition
 
 Choose at least 3 files and the example below will emulate the actual uploading functionality with all file status types.
 
