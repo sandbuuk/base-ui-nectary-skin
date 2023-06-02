@@ -135,6 +135,8 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         let nextVal = newVal ?? ''
         const prevVal = this.#$input.value
 
+        // Was it previously cleared by Incomplete Mask input
+        // Dont touch the input, which currently has partially filled value
         if (this.#wasClearedByMask && nextVal.length === 0) {
           this.#wasClearedByMask = false
 
@@ -313,7 +315,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #onCompositionStart = () => {
-    console.log('COMPOS_START')
     this.#isPendingDk = true
 
     if (this.#maskSymbols !== null) {
@@ -329,8 +330,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #onCompositionEnd = (e: CompositionEvent) => {
-    console.log('COMPOS_END', e.data, this.#$input.value, this.#$input.selectionStart, this.#$input.selectionEnd)
-
     this.#isPendingDk = false
 
     if (this.#maskSymbols !== null) {
@@ -361,7 +360,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #onMaskBeforeInput = (e: InputEvent) => {
     this.#selectionStart = this.#$input.selectionStart!
     this.#selectionEnd = this.#$input.selectionEnd!
-    console.log('BEFOREINPUT', this.#selectionStart, this.#selectionEnd, e.inputType, e.data)
 
     let res: TSinchMaskInputResult | null = null
 

@@ -1,11 +1,6 @@
 import type { TSinchElementReact } from '../types'
 import type { TSinchSize } from '../utils/size'
 
-// phone: {+46} 00 000-00-00
-// email: A+{@}A+{.}A+
-// date: 00{-}00{-}0000
-// card: 0000-0000-0000-0000
-
 export type TSinchInputType = 'text' | 'password'
 
 export type TSinchInputMaskSymbol = {
