@@ -234,7 +234,7 @@ function* visitJsonObject(obj: TJson, accPath: string[] = []): Generator<{path: 
     return yield { path: accPath, value: obj }
   }
 
-  const keys = Object.keys(obj)
+  const keys = Object.keys(obj).sort((a, b) => a.localeCompare(b))
 
   for (const key of keys) {
     const nextObj = obj[key]
@@ -360,7 +360,7 @@ function* visitThemeSections(themeJson: any): Generator<{key: string, jsonObj: T
     // Process 'comp' section
     if (sectionKey === COMPONENTS_SECTION_KEY) {
       // foreach component
-      for (const compNameKey of Object.keys(sectionObj)) {
+      for (const compNameKey of Object.keys(sectionObj).sort((a, b) => a.localeCompare(b))) {
         const compName = normalizeKey(compNameKey)
 
         yield { key: compName, isComponent: true, jsonObj: sectionObj[compNameKey] }
@@ -386,22 +386,17 @@ for (const { key, jsonObj, isComponent } of visitThemeSections(SELECTED_THEME_JS
   }
 }
 
-/* Process index.ts */
-let indexTsFileData = ''
+/* Process index.css */
 let indexCssFileData = ''
 
 // Base theme only: import additional sections like 'fonts'
 if (isBaseThemeKey(SELECTED_THEME_KEY)) {
   for (const add of ADDITIONAL_SECTION_IMPORTS) {
-    indexTsFileData += `import './${add}.css'\n`
     indexCssFileData += `@import "./${add}.css";\n`
   }
 }
 
 for (const { key, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
-  indexTsFileData += isComponent
-    ? `import './${COMPONENTS_OUTDIR}/${key}.css'\n`
-    : `import './${key}.css'\n`
   indexCssFileData += isComponent
     ? `@import "./${COMPONENTS_OUTDIR}/${key}.css";\n`
     : `@import "./${key}.css";\n`
@@ -410,12 +405,10 @@ for (const { key, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
 // Base theme only: import additional components 'emoji', 'flag', 'icon'
 if (isBaseThemeKey(SELECTED_THEME_KEY)) {
   for (const add of ADDITIONAL_COMPONENTS_IMPORTS) {
-    indexTsFileData += `import './${COMPONENTS_OUTDIR}/${add}.css'\n`
     indexCssFileData += `@import "./${COMPONENTS_OUTDIR}/${add}.css";\n`
   }
 }
 
-await writeData(OUTDIR, 'index.ts', indexTsFileData)
 await writeData(OUTDIR, 'index.css', indexCssFileData)
 
 /* Process section json files, e.g. ref.json, sys.json */
