@@ -1,0 +1,29 @@
+:root,
+:host {
+  --sinch-comp-progress-stepper-step-color-complete-background-hover: var(--sinch-sys-color-container-transparent-hover);
+  --sinch-comp-progress-stepper-step-color-complete-icon-default: var(--sinch-sys-color-primary-default);
+  --sinch-comp-progress-stepper-step-color-complete-label-default: var(--sinch-sys-color-text-default);
+  --sinch-comp-progress-stepper-step-color-complete-progress-background: var(--sinch-sys-color-container-contrast-secondary-default);
+  --sinch-comp-progress-stepper-step-color-complete-progress-bar: var(--sinch-sys-color-primary-default);
+  --sinch-comp-progress-stepper-step-color-complete-current-label-default: var(--sinch-sys-color-text-default);
+  --sinch-comp-progress-stepper-step-color-inactive-label-default: var(--sinch-sys-color-text-muted);
+  --sinch-comp-progress-stepper-step-color-inactive-progress-background: var(--sinch-sys-color-container-contrast-secondary-default);
+  --sinch-comp-progress-stepper-step-color-incomplete-background-hover: var(--sinch-sys-color-container-transparent-hover);
+  --sinch-comp-progress-stepper-step-color-incomplete-label-default: var(--sinch-sys-color-text-muted);
+  --sinch-comp-progress-stepper-step-color-incomplete-progress-background: var(--sinch-sys-color-container-contrast-secondary-default);
+  --sinch-comp-progress-stepper-step-color-incomplete-progress-bar: var(--sinch-sys-color-primary-default);
+  --sinch-comp-progress-stepper-step-color-incomplete-current-label-default: var(--sinch-sys-color-text-default);
+  --sinch-comp-progress-stepper-step-color-invalid-background-hover: var(--sinch-sys-color-container-transparent-hover);
+  --sinch-comp-progress-stepper-step-color-invalid-icon-default: var(--sinch-sys-color-feedback-invalid-contrast);
+  --sinch-comp-progress-stepper-step-color-invalid-label-default: var(--sinch-sys-color-text-invalid);
+  --sinch-comp-progress-stepper-step-color-invalid-progress-background: var(--sinch-sys-color-feedback-invalid-background);
+  --sinch-comp-progress-stepper-step-color-outline-focus: var(--sinch-sys-color-border-focus);
+  --sinch-comp-progress-stepper-step-font-complete-label: var(--sinch-sys-font-body-m);
+  --sinch-comp-progress-stepper-step-font-complete-current-label: var(--sinch-sys-font-desktop-title-s);
+  --sinch-comp-progress-stepper-step-font-inactive-label: var(--sinch-sys-font-body-m);
+  --sinch-comp-progress-stepper-step-font-incomplete-label: var(--sinch-sys-font-body-m);
+  --sinch-comp-progress-stepper-step-font-incomplete-current-label: var(--sinch-sys-font-desktop-title-s);
+  --sinch-comp-progress-stepper-step-font-invalid-label: var(--sinch-sys-font-body-m);
+  --sinch-comp-progress-stepper-step-font-invalid-current-label: var(--sinch-sys-font-desktop-title-s);
+  --sinch-comp-progress-stepper-step-shape-radius: var(--sinch-sys-shape-radius-m);
+}
