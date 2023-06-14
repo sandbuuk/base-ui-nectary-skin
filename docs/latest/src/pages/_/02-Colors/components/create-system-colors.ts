@@ -3,7 +3,7 @@ import sysJson from '@sinch-engage/nectary-theme-base/sys.json'
 import type { Category } from '~/pages/_/02-Colors/components/SystemColorsTable'
 
 type TableItem = {
-  key: number,
+  key: string,
   value: string,
   cssName: string,
   tokenName: string,
@@ -30,28 +30,26 @@ type SystemColors = {
 const colorMainNames = Object.keys(refJson.color.main) as unknown as (keyof typeof refJson.color.main)[]
 const colorComplementaryNames = Object.keys(refJson.color.complementary) as unknown as (keyof typeof refJson.color.complementary)[]
 
-const colorsMainMap: TableItem[] = colorMainNames.reduce((res, name) => {
+const colorsMainMap: TableItem[] = colorMainNames.reduce((res: TableItem[], name) => {
   for (const variantName of Object.keys(refJson.color.main[name]) as (keyof typeof refJson.color.main[typeof name])[]) {
     const value = refJson.color.main[name][variantName]
     const cssName = `--sinch-ref-color-main-${name}-${variantName}`
     const tokenName = `ref.color.main.${name}.${variantName}`
     const colorName = `${name[0].toUpperCase() + name.substring(1)} ${variantName}`
 
-    // @ts-ignore
     res.push({ key: `${name}+${variantName}`, colorName, cssName, tokenName, value })
   }
 
   return res
 }, [])
 
-const colorsComplementaryMap = colorComplementaryNames.reduce((res, name) => {
+const colorsComplementaryMap: TableItem[] = colorComplementaryNames.reduce((res: TableItem[], name) => {
   for (const variantName of Object.keys(refJson.color.complementary[name]) as (keyof typeof refJson.color.complementary[typeof name])[]) {
     const value = refJson.color.complementary[name][variantName]
     const cssName = `--sinch-ref-color-complementary-${name}-${variantName}`
     const tokenName = `ref.color.complementary.${name}.${variantName}`
     const colorName = `${name[0].toUpperCase() + name.substring(1)} ${variantName}`
 
-    // @ts-ignore
     res.push({ key: `${name}+${variantName}`, colorName, cssName, tokenName, value })
   }
 
@@ -62,7 +60,6 @@ const allColors = [
   ...colorsMainMap,
   ...colorsComplementaryMap,
 ]
-
 
 function iterateNestedObject(obj: Record<string, any>, parent: string) {
   const endArray: SystemColorItem[] = []
