@@ -6,7 +6,6 @@ import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-cell'
 import { useEffect, useState } from 'react'
-import ReferenceColorsTableMarkDown from '../markdown/ReferenceColorsTable.md'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary-assets/icons/expand-more'
@@ -14,7 +13,9 @@ import '@sinch-engage/nectary-assets/icons/expand-less'
 import { SpacingY } from './SpacingY'
 
 const colorMainNames = Object.keys(refJson.color.main) as unknown as (keyof typeof refJson.color.main)[]
-const colorsMap = colorMainNames.reduce((res, name) => {
+const colorComplementaryNames = Object.keys(refJson.color.complementary) as unknown as (keyof typeof refJson.color.complementary)[]
+
+const colorsMainMap = colorMainNames.reduce((res, name) => {
   for (const variantName of Object.keys(refJson.color.main[name]) as (keyof typeof refJson.color.main[typeof name])[]) {
     const value = refJson.color.main[name][variantName]
     const cssName = `--sinch-ref-color-main-${name}-${variantName}`
@@ -27,6 +28,38 @@ const colorsMap = colorMainNames.reduce((res, name) => {
 
   return res
 }, [])
+
+const colorsComplementaryMap = colorComplementaryNames.reduce((res, name) => {
+  for (const variantName of Object.keys(refJson.color.complementary[name]) as (keyof typeof refJson.color.complementary[typeof name])[]) {
+    const value = refJson.color.complementary[name][variantName]
+    const cssName = `--sinch-ref-color-complementary-${name}-${variantName}`
+    const tokenName = `ref.color.complementary.${name}.${variantName}`
+    const colorName = `${name[0].toUpperCase() + name.substring(1)} ${variantName}`
+
+    // @ts-ignore
+    res.push({ key: `${name}+${variantName}`, colorName, cssName, tokenName, value })
+  }
+
+  return res
+}, [])
+
+interface TableItem {
+  key: number,
+  value: string,
+  cssName: string,
+  tokenName: string,
+  colorName: string,
+}
+
+interface ColorMaps {
+  Main: TableItem[],
+  Complementary: TableItem[],
+}
+
+const colorMaps: ColorMaps = {
+  Main: colorsMainMap,
+  Complementary: colorsComplementaryMap,
+}
 
 const headStyle = {
   maxWidth: 105,
@@ -42,6 +75,8 @@ interface TypeShowMoreButton {
   isExpanded: boolean,
   setExpanded: (isExpanded: boolean) => void,
 }
+const categories = ['Main', 'Complementary'] as const
+type Categories = typeof categories[number]
 
 const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
   const handleClick = () => {
@@ -66,16 +101,35 @@ const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
 
 export const ReferenceColorsTable = () => {
   const [isExpanded, setExpanded] = useState(false)
-  const [colors, setColors] = useState(colorsMap.slice(0, 7))
+  const [colors, setColors] = useState<TableItem[]|[]>([])
+  const [colorCategory, setColorCategory] = useState<Categories>('Main')
+
+  const onSelectColorCategory = (e: CustomEvent) => {
+    setColorCategory(e.detail)
+  }
 
   useEffect(() => {
-    setColors(isExpanded ? colorsMap : colors.slice(0, 7))
+    setColors(isExpanded ? colorMaps[colorCategory] : colorMaps[colorCategory].slice(0, 7))
   }, [isExpanded])
+
+  useEffect(() => {
+    setColors(isExpanded ? colorMaps[colorCategory] : colorMaps[colorCategory].slice(0, 7))
+  }, [colorCategory])
 
   return (
     <>
       <div className="colors-table">
-        <ReferenceColorsTableMarkDown/>
+        <div style={{ marginLeft: 'auto' }}>
+          <sinch-segmented-control
+            value={colorCategory}
+            on-change={onSelectColorCategory}
+            aria-label="Token types"
+          >
+            {categories.map((item, i) => {
+              return (<sinch-segmented-control-option key={i} value={item} text={item} aria-label={item}/>)
+            })}
+          </sinch-segmented-control>
+        </div>
         <SpacingY height={28}/>
         <sinch-table style={tableStyle}>
           <sinch-table-head>
