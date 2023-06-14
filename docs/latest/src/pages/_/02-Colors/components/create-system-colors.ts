@@ -1,6 +1,6 @@
 import refJson from '@sinch-engage/nectary-theme-base/ref.json'
 import sysJson from '@sinch-engage/nectary-theme-base/sys.json'
-import type { Category } from '~/pages/_/02-Colors/components/SystemColorsTable'
+import type { Category } from './SystemColorsTable'
 
 type TableItem = {
   key: string,
