@@ -1,4 +1,3 @@
-import refJson from '@sinch-engage/nectary-theme-base/ref.json'
 import '@sinch-engage/nectary/table'
 import '@sinch-engage/nectary/table-head'
 import '@sinch-engage/nectary/table-head-cell'
@@ -11,19 +10,8 @@ import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary-assets/icons/expand-more'
 import '@sinch-engage/nectary-assets/icons/expand-less'
 import { SpacingY } from './SpacingY'
-
-type TableItem = {
-  key: number,
-  value: string,
-  cssName: string,
-  tokenName: string,
-  colorName: string,
-}
-
-type ColorMaps = {
-  Main: TableItem[],
-  Complementary: TableItem[],
-}
+import { colorMaps } from './create-reference-colors'
+import type { TableItem } from './create-reference-colors'
 
 type TypeShowMoreButton = {
   isExpanded: boolean,
@@ -31,42 +19,6 @@ type TypeShowMoreButton = {
 }
 const categories = ['Main', 'Complementary'] as const
 type Categories = typeof categories[number]
-
-const colorMainNames = Object.keys(refJson.color.main) as unknown as (keyof typeof refJson.color.main)[]
-const colorComplementaryNames = Object.keys(refJson.color.complementary) as unknown as (keyof typeof refJson.color.complementary)[]
-
-const colorMainMap = colorMainNames.reduce((res, name) => {
-  for (const variantName of Object.keys(refJson.color.main[name]) as (keyof typeof refJson.color.main[typeof name])[]) {
-    const value = refJson.color.main[name][variantName]
-    const cssName = `--sinch-ref-color-main-${name}-${variantName}`
-    const tokenName = `ref.color.main.${name}.${variantName}`
-    const colorName = `${name[0].toUpperCase() + name.substring(1)} ${variantName}`
-
-    // @ts-ignore
-    res.push({ key: `${name}+${variantName}`, colorName, cssName, tokenName, value })
-  }
-
-  return res
-}, [])
-
-const colorComplementaryMap = colorComplementaryNames.reduce((res, name) => {
-  for (const variantName of Object.keys(refJson.color.complementary[name]) as (keyof typeof refJson.color.complementary[typeof name])[]) {
-    const value = refJson.color.complementary[name][variantName]
-    const cssName = `--sinch-ref-color-complementary-${name}-${variantName}`
-    const tokenName = `ref.color.complementary.${name}.${variantName}`
-    const colorName = `${name[0].toUpperCase() + name.substring(1)} ${variantName}`
-
-    // @ts-ignore
-    res.push({ key: `${name}+${variantName}`, colorName, cssName, tokenName, value })
-  }
-
-  return res
-}, [])
-
-const colorMaps: ColorMaps = {
-  Main: colorMainMap,
-  Complementary: colorComplementaryMap,
-}
 
 const headStyle = {
   maxWidth: 105,
