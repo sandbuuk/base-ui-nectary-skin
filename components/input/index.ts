@@ -16,8 +16,8 @@ import {
 } from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { deleteContentBackward, deleteContentForward, getMaskSymbols, inputTypes, insertText, beginMaskedComposition, endMaskedComposition, mergeValueWithMask } from './utils'
-import type { TSinchInputElement, TSinchInputMaskSymbol, TSinchInputReact, TSinchInputType, TSinchMaskInputResult } from './types'
+import { deleteContentBackward, deleteContentForward, getMaskSymbols, inputTypes, insertText, beginMaskedComposition, endMaskedComposition, splitValueAndMask, getMergedValueSliced } from './utils'
+import type { TSinchInputElement, TSinchInputReact, TSinchInputType } from './types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
 
@@ -27,6 +27,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-input', class extends NectaryElement {
   #$input: HTMLInputElement
+  #$inputMask: HTMLElement
   #$iconSlot: HTMLSlotElement
   #$iconWrapper: HTMLElement
   #$rightSlot: HTMLSlotElement
@@ -40,7 +41,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #wasClearedByMask = false
   #controller: AbortController | null = null
   #sizeContext: Context<'size'>
-  #maskSymbols: TSinchInputMaskSymbol[] | null = null
+  #maskSymbols: ReturnType<typeof getMaskSymbols> | null = null
 
   constructor() {
     super()
@@ -50,6 +51,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$input = shadowRoot.querySelector('#input')!
+    this.#$inputMask = shadowRoot.querySelector('#input-mask')!
     this.#$iconSlot = shadowRoot.querySelector('slot[name="icon"]')!
     this.#$iconWrapper = shadowRoot.querySelector('#icon-wrapper')!
     this.#$rightSlot = shadowRoot.querySelector('slot[name="right"]')!
@@ -132,7 +134,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         break
       }
       case 'value': {
-        let nextVal = newVal ?? ''
+        const nextVal = newVal ?? ''
         const prevVal = this.#$input.value
 
         // Was it previously cleared by Incomplete Mask input
@@ -144,7 +146,13 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         }
 
         if (this.#maskSymbols !== null) {
-          nextVal = mergeValueWithMask(nextVal, this.#maskSymbols)
+          const { value, placeholder } = splitValueAndMask(nextVal, this.#maskSymbols)
+
+          this.#$input.value = value
+          this.#$input.setSelectionRange(this.#selectionEnd, this.#selectionEnd)
+          this.#$inputMask.textContent = placeholder
+
+          break
         }
 
         if (nextVal !== prevVal) {
@@ -317,36 +325,48 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #onCompositionStart = () => {
     this.#isPendingDk = true
 
+    // console.log('COMP_START', this.#$input.value.length, this.#maskSymbols?.length)
+
     if (this.#maskSymbols !== null) {
-      if (this.#$input.selectionStart === this.#$input.value.length) {
+      const selectionStart = this.#$input.selectionStart!
+
+      if (selectionStart === this.#$input.value.length) {
         return
       }
 
-      const { value, cursorPos } = beginMaskedComposition(this.#$input.value, this.#maskSymbols, this.#$input.selectionStart!, this.#$input.selectionEnd!)
+      const { value, placeholder } = beginMaskedComposition(this.#$input.value, this.#maskSymbols, selectionStart)
 
       this.#$input.value = value
-      this.#$input.setSelectionRange(cursorPos, cursorPos)
+      this.#$input.setSelectionRange(selectionStart, selectionStart)
+      this.#$inputMask.textContent = placeholder
     }
   }
 
   #onCompositionEnd = (e: CompositionEvent) => {
     this.#isPendingDk = false
 
+    console.log('COMP_END', this.#$input.value, this.#$input.value.length, this.#maskSymbols?.length)
+
     if (this.#maskSymbols !== null) {
       const res = endMaskedComposition(this.#$input.value, e.data!, this.#maskSymbols, this.#$input.selectionStart!)
 
       if (res !== null) {
-        this.#$input.value = res.value
-        this.#$input.setSelectionRange(res.cursorPos, res.cursorPos)
+        const { value, placeholder, mergedValue, cursorPos } = res
+
+        this.#$input.value = value
+        this.#$input.setSelectionRange(cursorPos, cursorPos)
+        this.#$inputMask.textContent = placeholder
+
+        if (mergedValue.length > 0) {
+          this.#selectionStart = cursorPos
+          this.#selectionEnd = cursorPos
+          this.#dispatchChangeEvent(mergedValue)
+        }
       }
 
-      if ((res === null || !res.isComplete) && this.value.length !== 0) {
+      if ((res === null || res.mergedValue.length === 0) && this.value.length !== 0) {
         this.#wasClearedByMask = true
         this.#dispatchChangeEvent('')
-      }
-
-      if (res !== null && res.isComplete) {
-        this.#dispatchChangeEvent(res.value)
       }
     } else {
       this.#onInput()
@@ -361,7 +381,9 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#selectionStart = this.#$input.selectionStart!
     this.#selectionEnd = this.#$input.selectionEnd!
 
-    let res: TSinchMaskInputResult | null = null
+    console.log('BEFORE_INPUT', e.data, this.#$input.value.length, this.#maskSymbols?.length)
+
+    let res: ReturnType<typeof insertText> | null = null
 
     switch (e.inputType) {
       case 'insertText': {
@@ -387,23 +409,31 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     }
 
     if (res !== null) {
-      this.#$input.value = res.value
-      this.#$input.setSelectionRange(res.cursorPos, res.cursorPos)
+      const { value, placeholder, mergedValue, cursorPos } = res
+
+      this.#$input.value = value
+      this.#$input.setSelectionRange(cursorPos, cursorPos)
+      this.#$inputMask.textContent = placeholder
+
+      if (mergedValue.length > 0) {
+        this.#selectionStart = cursorPos
+        this.#selectionEnd = cursorPos
+        this.#dispatchChangeEvent(mergedValue)
+      }
     }
 
-    if ((res === null || !res.isComplete) && this.value.length !== 0) {
+    if ((res === null || res.mergedValue.length === 0) && this.value.length !== 0) {
+      // Dispatch clear event
       this.#wasClearedByMask = true
       this.#dispatchChangeEvent('')
-    }
-
-    if (res !== null && res.isComplete) {
-      this.#dispatchChangeEvent(res.value)
     }
 
     e.preventDefault()
   }
 
   #onInput = () => {
+    console.log('INPUT', this.#$input.value.length, this.#maskSymbols?.length)
+
     if (this.#isPendingDk) {
       return
     }
@@ -428,6 +458,11 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
       this.#dispatchChangeEvent(nextValue)
     }
+  }
+
+  #onMaskCopy = (e: ClipboardEvent) => {
+    e.preventDefault()
+    e.clipboardData!.setData('text/plain', getMergedValueSliced(this.#$input.value, this.#maskSymbols!, this.#$input.selectionStart!, this.#$input.selectionEnd!))
   }
 
   #dispatchChangeEvent(value: string) {
@@ -456,18 +491,25 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #updateMask() {
-    console.log('UPDATE_MASK', this.mask)
-
     if (this.mask !== null) {
+      // Subscribe once, so only if the mask disabled before
       if (this.#maskSymbols === null) {
         this.#$input.addEventListener('beforeinput', this.#onMaskBeforeInput, { signal: this.#controller!.signal })
+        this.#$input.addEventListener('copy', this.#onMaskCopy, { signal: this.#controller!.signal })
+        this.#$input.addEventListener('cut', this.#onMaskCopy, { signal: this.#controller!.signal })
       }
 
       this.#maskSymbols = getMaskSymbols(this.mask, this.placeholder)
-      this.#$input.value = mergeValueWithMask(this.#$input.value, this.#maskSymbols)
+
+      const { value, placeholder } = splitValueAndMask(this.#$input.value, this.#maskSymbols)
+
+      this.#$input.value = value
+      this.#$inputMask.textContent = placeholder
     } else {
       this.#maskSymbols = null
       this.#$input.removeEventListener('beforeinput', this.#onMaskBeforeInput)
+      this.#$input.removeEventListener('copy', this.#onMaskCopy)
+      this.#$input.removeEventListener('cut', this.#onMaskCopy)
     }
   }
 

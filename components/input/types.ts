@@ -3,18 +3,6 @@ import type { TSinchSize } from '../utils/size'
 
 export type TSinchInputType = 'text' | 'password'
 
-export type TSinchInputMaskSymbol = {
-  value: string,
-  mode: 'digit' | 'letter' | 'exact',
-  placeholder: string,
-}
-
-export type TSinchMaskInputResult = {
-  value: string,
-  cursorPos: number,
-  isComplete: boolean,
-}
-
 export type TSinchInputElement = HTMLElement & {
   /** Text field type, `text` by default */
   type: TSinchInputType,

@@ -23,7 +23,8 @@ export const Input: FC<TInput> = ({ search }) => {
   const type: any = search.get('type') ?? undefined
   const size: any = search.get('size') ?? undefined
   const isInvalid = search.get('invalid') !== null
-  const placeholderText = search.get('placeholder') ?? undefined
+  const mask = search.get('mask') ?? undefined
+  const placeholder = search.get('placeholder') ?? undefined
   const autocomplete = search.get('autocomplete') ?? undefined
   const isDisabled = search.get('disabled') != null
   const hasLeft = search.get('left') != null
@@ -34,7 +35,8 @@ export const Input: FC<TInput> = ({ search }) => {
     <sinch-input
       type={type}
       size={size}
-      placeholder={placeholderText}
+      mask={mask}
+      placeholder={placeholder}
       disabled={isDisabled}
       invalid={isInvalid}
       autocomplete={autocomplete}
