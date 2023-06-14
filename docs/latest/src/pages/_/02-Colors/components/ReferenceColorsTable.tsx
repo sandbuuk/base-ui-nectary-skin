@@ -12,10 +12,30 @@ import '@sinch-engage/nectary-assets/icons/expand-more'
 import '@sinch-engage/nectary-assets/icons/expand-less'
 import { SpacingY } from './SpacingY'
 
+type TableItem = {
+  key: number,
+  value: string,
+  cssName: string,
+  tokenName: string,
+  colorName: string,
+}
+
+type ColorMaps = {
+  Main: TableItem[],
+  Complementary: TableItem[],
+}
+
+type TypeShowMoreButton = {
+  isExpanded: boolean,
+  setExpanded: (isExpanded: boolean) => void,
+}
+const categories = ['Main', 'Complementary'] as const
+type Categories = typeof categories[number]
+
 const colorMainNames = Object.keys(refJson.color.main) as unknown as (keyof typeof refJson.color.main)[]
 const colorComplementaryNames = Object.keys(refJson.color.complementary) as unknown as (keyof typeof refJson.color.complementary)[]
 
-const colorsMainMap = colorMainNames.reduce((res, name) => {
+const colorMainMap = colorMainNames.reduce((res, name) => {
   for (const variantName of Object.keys(refJson.color.main[name]) as (keyof typeof refJson.color.main[typeof name])[]) {
     const value = refJson.color.main[name][variantName]
     const cssName = `--sinch-ref-color-main-${name}-${variantName}`
@@ -29,7 +49,7 @@ const colorsMainMap = colorMainNames.reduce((res, name) => {
   return res
 }, [])
 
-const colorsComplementaryMap = colorComplementaryNames.reduce((res, name) => {
+const colorComplementaryMap = colorComplementaryNames.reduce((res, name) => {
   for (const variantName of Object.keys(refJson.color.complementary[name]) as (keyof typeof refJson.color.complementary[typeof name])[]) {
     const value = refJson.color.complementary[name][variantName]
     const cssName = `--sinch-ref-color-complementary-${name}-${variantName}`
@@ -43,22 +63,9 @@ const colorsComplementaryMap = colorComplementaryNames.reduce((res, name) => {
   return res
 }, [])
 
-interface TableItem {
-  key: number,
-  value: string,
-  cssName: string,
-  tokenName: string,
-  colorName: string,
-}
-
-interface ColorMaps {
-  Main: TableItem[],
-  Complementary: TableItem[],
-}
-
 const colorMaps: ColorMaps = {
-  Main: colorsMainMap,
-  Complementary: colorsComplementaryMap,
+  Main: colorMainMap,
+  Complementary: colorComplementaryMap,
 }
 
 const headStyle = {
@@ -70,13 +77,6 @@ const tableStyle = {
   borderRadius: 14,
   backgroundColor: 'var(--sinch-sys-color-container-contrast-secondary-default)',
 }
-
-interface TypeShowMoreButton {
-  isExpanded: boolean,
-  setExpanded: (isExpanded: boolean) => void,
-}
-const categories = ['Main', 'Complementary'] as const
-type Categories = typeof categories[number]
 
 const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
   const handleClick = () => {
