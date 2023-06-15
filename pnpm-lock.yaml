@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: false
@@ -335,7 +335,7 @@ importers:
         version: 3.3.2(webpack@5.80.0)
       terser-webpack-plugin:
         specifier: ^5.3.7
-        version: 5.3.7(esbuild@0.17.8)(webpack@5.76.1)
+        version: 5.3.7(webpack@5.80.0)
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@18.16.0)(typescript@5.0.4)
@@ -369,9 +369,9 @@ importers:
       '@sinch-engage/nectary-theme-dark':
         specifier: workspace:*
         version: link:../../themes/dark
-      '@webcomponents/scoped-custom-element-registry':
-        specifier: ^0.0.9
-        version: 0.0.9
+      '@sinch-engage/scoped-custom-element-registry':
+        specifier: workspace:*
+        version: link:../../libs/scoped-custom-element-registry
       core-js:
         specifier: ^3.30.1
         version: 3.30.1
@@ -483,7 +483,7 @@ importers:
         version: 3.3.2(webpack@5.80.0)
       terser-webpack-plugin:
         specifier: ^5.3.7
-        version: 5.3.7(esbuild@0.17.8)(webpack@5.76.1)
+        version: 5.3.7(webpack@5.80.0)
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@18.16.0)(typescript@5.0.4)
@@ -576,6 +576,8 @@ importers:
         version: 6.1.1
 
   libs/saas-vue-loader: {}
+
+  libs/scoped-custom-element-registry: {}
 
   libs/types-to-mdx-loader:
     dependencies:
@@ -734,9 +736,9 @@ importers:
       '@sinch-engage/nectary-theme-base':
         specifier: workspace:*
         version: link:../../../themes/base
-      '@webcomponents/scoped-custom-element-registry':
-        specifier: ^0.0.9
-        version: 0.0.9
+      '@sinch-engage/scoped-custom-element-registry':
+        specifier: workspace:*
+        version: link:../../../libs/scoped-custom-element-registry
       axe-core:
         specifier: ^4.6.3
         version: 4.6.3
@@ -4996,10 +4998,6 @@ packages:
       '@webassemblyjs/ast': 1.11.5
       '@xtuc/long': 4.2.2
     dev: true
-
-  /@webcomponents/scoped-custom-element-registry@0.0.9:
-    resolution: {integrity: sha512-4RVHwN9oIp23mhrxeDbP9/0wvdcrB0d/MFMqIStShIgfzsqXZXf1OdU5kvqjgdMYavQ5Zm8C6BuBcAjzNwAetQ==}
-    dev: false
 
   /@webpack-cli/configtest@2.0.1(webpack-cli@5.0.2)(webpack@5.80.0):
     resolution: {integrity: sha512-njsdJXJSiS2iNbQVS0eT8A/KPnmyH4pv1APj2K0d1wrZcBLw+yppxOy4CGqa0OxDJkzfL/XELDhD8rocnIwB5A==}
@@ -13177,6 +13175,30 @@ packages:
       webpack: 5.76.1(esbuild@0.17.8)
     dev: true
 
+  /terser-webpack-plugin@5.3.7(webpack@5.80.0):
+    resolution: {integrity: sha512-AfKwIktyP7Cu50xNjXF/6Qb5lBNzYaWpU6YfoX3uZicTx0zTy0stDDCsvjDapKsSDvOeWo5MEq4TmdBy2cNoHw==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      '@swc/core': '*'
+      esbuild: '*'
+      uglify-js: '*'
+      webpack: ^5.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      esbuild:
+        optional: true
+      uglify-js:
+        optional: true
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.18
+      jest-worker: 27.5.1
+      schema-utils: 3.1.1
+      serialize-javascript: 6.0.1
+      terser: 5.16.9
+      webpack: 5.80.0(webpack-cli@5.0.2)
+    dev: true
+
   /terser@5.16.3:
     resolution: {integrity: sha512-v8wWLaS/xt3nE9dgKEWhNUFP6q4kngO5B8eYFUuebsu7Dw/UNAnpUod6UHo04jSSkv8TzKHjZDSd7EXdDQAl8Q==}
     engines: {node: '>=10'}
@@ -14148,7 +14170,7 @@ packages:
       neo-async: 2.6.2
       schema-utils: 3.1.2
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.7(esbuild@0.17.8)(webpack@5.76.1)
+      terser-webpack-plugin: 5.3.7(webpack@5.80.0)
       watchpack: 2.4.0
       webpack-cli: 5.0.2(webpack-bundle-analyzer@4.8.0)(webpack-dev-server@4.13.3)(webpack@5.80.0)
       webpack-sources: 3.2.3

@@ -2,6 +2,7 @@
 :host {
   display: inline-block;
   vertical-align: middle;
+  outline: none;
 }
 
 #wrapper {
@@ -32,12 +33,12 @@
   pointer-events: initial;
 }
 
-#input:disabled {
+:host([disabled]) #input {
   cursor: initial;
 }
 
 /* Focus Outline */
-#input:focus-visible::after {
+:host(:focus-visible) #input::after {
   position: absolute;
   content: "";
   left: -4px;
@@ -73,15 +74,15 @@
   border-radius: 8px;
 }
 
-#input:checked ~ #knob-container {
+:host([checked]) #knob-container {
   background-color: var(--sinch-comp-toggle-color-checked-background-initial);
 }
 
-#input:disabled ~ #knob-container {
+:host([disabled]) #knob-container {
   background-color: var(--sinch-comp-toggle-color-disabled-background-initial);
 }
 
-#input:checked:disabled ~ #knob-container {
+:host([checked][disabled]) #knob-container {
   background-color: var(--sinch-comp-toggle-color-checked-disabled-background-initial);
 }
 
@@ -103,15 +104,15 @@
   height: 12px;
 }
 
-#input:disabled + #knob-container > #knob {
+:host([disabled]) #knob-container > #knob {
   box-shadow: var(--sinch-comp-toggle-shadow-knob-disabled);
 }
 
-#input:checked + #knob-container > #knob {
+:host([checked]) #knob-container > #knob {
   transform: translateX(20px);
 }
 
-:host([small]) #input:checked + #knob-container > #knob {
+:host([small][checked]) #knob-container > #knob {
   transform: translateX(16px);
 }
 
@@ -159,6 +160,7 @@
   padding-left: 8px;
   font: var(--sinch-comp-toggle-font-size-m-label);
   color: var(--sinch-comp-toggle-color-default-label-initial);
+  cursor: pointer;
 }
 
 #label:empty {
@@ -169,15 +171,16 @@
   font: var(--sinch-comp-toggle-font-size-s-label);
 }
 
-#input:disabled ~ #label {
+:host([disabled]) #label {
   color: var(--sinch-comp-toggle-color-disabled-label-initial);
+  cursor: initial;
 }
 </style>
 
 <div id="wrapper">
-  <input id="input" type="checkbox">
+  <div id="input"></div>
   <div id="knob-container">
     <div id="knob"></div>
   </div>
-  <label id="label" for="input"></label>
+  <span id="label"></span>
 </div>

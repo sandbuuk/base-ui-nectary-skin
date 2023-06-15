@@ -1,1 +1,1 @@
-import '@webcomponents/scoped-custom-element-registry'
+import '@sinch-engage/scoped-custom-element-registry'
