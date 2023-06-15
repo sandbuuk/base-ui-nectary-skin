@@ -1,5 +1,5 @@
 import sysJson from '@sinch-engage/nectary-theme-base/sys.json'
-import { colorMainMap, colorComplementaryMap } from './create-reference-colors'
+import { colorsMain, colorsComplementary } from './create-reference-colors'
 import type { Category } from './SystemColorsTable'
 
 type SystemColorItem = {
@@ -19,9 +19,9 @@ type SystemColors = {
   [key in Category]: SystemColorItem[]
 }
 
-const allColors = [
-  ...colorMainMap,
-  ...colorComplementaryMap,
+const colors = [
+  ...colorsMain,
+  ...colorsComplementary,
 ]
 
 function iterateNestedObject(obj: Record<string, any>, parent: string) {
@@ -40,7 +40,7 @@ function iterateNestedObject(obj: Record<string, any>, parent: string) {
       } else {
         const tokenName = currentPath.reduce((acc, curVal) => `${acc}-${curVal}`, `sinch-sys-color-${parent}`)
         const cssName = currentPath.reduce((acc, curVal) => `${acc}-${curVal}`, `--sinch-sys-color-${parent}`)
-        const tokenRefName = allColors.find((item) => item.value === value)
+        const tokenRefName = colors.find((item) => item.value === value)
 
         endArray.push({
           tokenName,

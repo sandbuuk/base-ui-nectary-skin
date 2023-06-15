@@ -10,7 +10,7 @@ import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary-assets/icons/expand-more'
 import '@sinch-engage/nectary-assets/icons/expand-less'
 import { SpacingY } from './SpacingY'
-import { colorMaps } from './create-reference-colors'
+import { sinchColors } from './create-reference-colors'
 import type { TableItem } from './create-reference-colors'
 
 type TypeShowMoreButton = {
@@ -61,11 +61,11 @@ export const ReferenceColorsTable = () => {
   }
 
   useEffect(() => {
-    setColors(isExpanded ? colorMaps[colorCategory] : colorMaps[colorCategory].slice(0, 7))
+    setColors(isExpanded ? sinchColors[colorCategory] : sinchColors[colorCategory].slice(0, 7))
   }, [isExpanded])
 
   useEffect(() => {
-    setColors(isExpanded ? colorMaps[colorCategory] : colorMaps[colorCategory].slice(0, 7))
+    setColors(isExpanded ? sinchColors[colorCategory] : sinchColors[colorCategory].slice(0, 7))
   }, [colorCategory])
 
   return (
