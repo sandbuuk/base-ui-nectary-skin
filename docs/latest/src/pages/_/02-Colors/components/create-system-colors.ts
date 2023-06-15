@@ -2,7 +2,7 @@ import sysJson from '@sinch-engage/nectary-theme-base/sys.json'
 import { colorsMain, colorsComplementary } from './create-reference-colors'
 import type { Category } from './SystemColorsTable'
 
-type SystemColorItem = {
+type ColorCategoryItem = {
   tokenName: string,
   cssName: string,
   tokenRefName: string,
@@ -16,7 +16,7 @@ type StackItem = {
 }
 
 type SystemColors = {
-  [key in Category]: SystemColorItem[]
+  [key in Category]: ColorCategoryItem[]
 }
 
 const colors = [
@@ -24,8 +24,8 @@ const colors = [
   ...colorsComplementary,
 ]
 
-function iterateNestedObject(obj: Record<string, any>, parent: string) {
-  const endArray: SystemColorItem[] = []
+function createColorCategoryItems(obj: Record<string, any>, parent: string) {
+  const colorCategoryItems: ColorCategoryItem[] = []
   const stack: StackItem[] = [{ obj, keys: Object.keys(obj), path: [] }]
 
   while (stack.length > 0) {
@@ -42,7 +42,7 @@ function iterateNestedObject(obj: Record<string, any>, parent: string) {
         const cssName = currentPath.reduce((acc, curVal) => `${acc}-${curVal}`, `--sinch-sys-color-${parent}`)
         const tokenRefName = colors.find((item) => item.value === value)
 
-        endArray.push({
+        colorCategoryItems.push({
           tokenName,
           cssName,
           tokenRefName: (tokenRefName != null) ? tokenRefName.tokenName : value,
@@ -52,19 +52,19 @@ function iterateNestedObject(obj: Record<string, any>, parent: string) {
     })
   }
 
-  return endArray
+  return colorCategoryItems
 }
 
 export const createSystemColors: () => SystemColors = () => {
   const systemColors = {
-    container: iterateNestedObject(sysJson.color.container, 'container'),
-    status: iterateNestedObject(sysJson.color.status, 'status'),
-    cta: iterateNestedObject(sysJson.color.cta, 'cta'),
-    primary: iterateNestedObject(sysJson.color.primary, 'primary'),
-    text: iterateNestedObject(sysJson.color.text, 'text'),
-    feedback: iterateNestedObject(sysJson.color.feedback, 'feedback'),
-    border: iterateNestedObject(sysJson.color.border, 'border'),
-    'skin tone': iterateNestedObject(sysJson.color.skintone, 'skintone'),
+    container: createColorCategoryItems(sysJson.color.container, 'container'),
+    status: createColorCategoryItems(sysJson.color.status, 'status'),
+    cta: createColorCategoryItems(sysJson.color.cta, 'cta'),
+    primary: createColorCategoryItems(sysJson.color.primary, 'primary'),
+    text: createColorCategoryItems(sysJson.color.text, 'text'),
+    feedback: createColorCategoryItems(sysJson.color.feedback, 'feedback'),
+    border: createColorCategoryItems(sysJson.color.border, 'border'),
+    'skin tone': createColorCategoryItems(sysJson.color.skintone, 'skintone'),
   }
 
   return systemColors
