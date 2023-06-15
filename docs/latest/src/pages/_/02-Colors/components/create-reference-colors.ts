@@ -13,11 +13,11 @@ type SinchColors = {
   Complementary: TableItem[],
 }
 
-const colorMainNames = Object.keys(refJson.color.main) as (keyof typeof refJson.color.main)[]
+const colorMainKeys = Object.keys(refJson.color.main) as (keyof typeof refJson.color.main)[]
 
-const colorComplementaryNames = Object.keys(refJson.color.complementary) as (keyof typeof refJson.color.complementary)[]
+const colorComplementaryKeys = Object.keys(refJson.color.complementary) as (keyof typeof refJson.color.complementary)[]
 
-export const colorsMain = colorMainNames.reduce((res: TableItem[], name: keyof typeof refJson.color.main) => {
+export const colorsMain = colorMainKeys.reduce((res: TableItem[], name: keyof typeof refJson.color.main) => {
   for (const variantName of Object.keys(refJson.color.main[name]) as (keyof typeof refJson.color.main[typeof name])[]) {
     const value = refJson.color.main[name][variantName]
     const cssName = `--sinch-ref-color-main-${name}-${variantName}`
@@ -30,7 +30,7 @@ export const colorsMain = colorMainNames.reduce((res: TableItem[], name: keyof t
   return res
 }, [])
 
-export const colorsComplementary = colorComplementaryNames.reduce((res: TableItem[], name: keyof typeof refJson.color.complementary) => {
+export const colorsComplementary = colorComplementaryKeys.reduce((res: TableItem[], name: keyof typeof refJson.color.complementary) => {
   for (const variantName of Object.keys(refJson.color.complementary[name]) as (keyof typeof refJson.color.complementary[typeof name])[]) {
     const value = refJson.color.complementary[name][variantName]
     const cssName = `--sinch-ref-color-complementary-${name}-${variantName}`
