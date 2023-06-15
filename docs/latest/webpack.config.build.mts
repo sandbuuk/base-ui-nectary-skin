@@ -159,7 +159,7 @@ const config: TWebpackConfig = {
     // concatenateModules: false,
     minimize: true,
     minimizer: [
-      // @ts-expect-error
+      // @ts-ignore
       new TerserPlugin({
         parallel: true,
         extractComments: false,
