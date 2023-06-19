@@ -6760,7 +6760,7 @@
             "inactive": {
               "label": {
                 "default": {
-                  "value": "{sys.color.text.muted}",
+                  "value": "{sys.color.text.disabled}",
                   "type": "color"
                 }
               },
@@ -6806,7 +6806,7 @@
             "complete": {
               "label": {
                 "default": {
-                  "value": "{sys.color.text.default}",
+                  "value": "{sys.color.text.muted}",
                   "type": "color"
                 }
               },
@@ -6822,12 +6822,6 @@
                   "type": "color"
                 },
                 "bar": {
-                  "value": "{sys.color.primary.default}",
-                  "type": "color"
-                }
-              },
-              "icon": {
-                "default": {
                   "value": "{sys.color.primary.default}",
                   "type": "color"
                 }
@@ -6903,19 +6897,19 @@
             },
             "invalid-current": {
               "label": {
-                "value": "{sys.font.desktop-title.s}",
+                "value": "{sys.font.body.emphasize}",
                 "type": "typography"
               }
             },
             "complete-current": {
               "label": {
-                "value": "{sys.font.desktop-title.s}",
+                "value": "{sys.font.body.emphasize}",
                 "type": "typography"
               }
             },
             "incomplete-current": {
               "label": {
-                "value": "{sys.font.desktop-title.s}",
+                "value": "{sys.font.body.emphasize}",
                 "type": "typography"
               }
             }
@@ -9227,7 +9221,6 @@
         "comp.progress-stepper.step.color.complete.background.hover": "S:32b7d018f81451776eccaf530ef1ff358ca136d7,",
         "comp.progress-stepper.step.color.complete.progress.background": "S:dff221c34299c921d9d72af757ce7f14a4a9f17a,",
         "comp.progress-stepper.step.color.complete.progress.bar": "S:47d648d2712924dbfbf4d0354396d4d8d4d0662a,",
-        "comp.progress-stepper.step.color.complete.icon.default": "S:9259b0faf898c95c17f5d760de1c5e136eaa3c73,",
         "comp.progress-stepper.step.color.complete-current.label.default": "S:756f1518a164d958da066a0d1f434941cb6f1992,",
         "comp.progress-stepper.step.color.invalid.label.default": "S:50b0a0e6182124b89722c2099715e83f387e6206,",
         "comp.progress-stepper.step.color.invalid.background.hover": "S:0442cc91a5620656f44d871da445d071f10a10fa,",

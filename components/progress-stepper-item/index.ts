@@ -10,6 +10,7 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import { ATTR_PROGRESS_STEPPER_ITEM_ACTIVE_DESCENDANT, ATTR_PROGRESS_STEPPER_ITEM_CHECKED, ATTR_PROGRESS_STEPPER_ITEM_STATUS, isProgressStepperItemActive, isProgressStepperItemActiveDescendant } from './utils'
 import type { TSinchProgressStepperItemElement, TSinchProgressStepperItemReact } from './types'
 
 const template = document.createElement('template')
@@ -30,14 +31,20 @@ defineCustomElement('sinch-progress-stepper-item', class extends NectaryElement 
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'tab')
+    this.role = 'tab'
   }
 
   disconnectedCallback() {
   }
 
   static get observedAttributes() {
-    return ['data-checked', 'text', 'invalid', 'data-status']
+    return [
+      'text',
+      'invalid',
+      ATTR_PROGRESS_STEPPER_ITEM_STATUS,
+      ATTR_PROGRESS_STEPPER_ITEM_CHECKED,
+      ATTR_PROGRESS_STEPPER_ITEM_ACTIVE_DESCENDANT,
+    ]
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -51,13 +58,18 @@ defineCustomElement('sinch-progress-stepper-item', class extends NectaryElement 
 
         break
       }
-      case 'data-checked': {
+      case ATTR_PROGRESS_STEPPER_ITEM_CHECKED: {
         updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
 
         break
       }
-      case 'data-status': {
-        this.tabIndex = newVal === 'inactive' ? -1 : 0
+      case ATTR_PROGRESS_STEPPER_ITEM_STATUS: {
+        this.#updateTabIndex()
+
+        break
+      }
+      case ATTR_PROGRESS_STEPPER_ITEM_ACTIVE_DESCENDANT: {
+        this.#updateTabIndex()
 
         break
       }
@@ -95,6 +107,10 @@ defineCustomElement('sinch-progress-stepper-item', class extends NectaryElement 
 
   get focusable() {
     return true
+  }
+
+  #updateTabIndex() {
+    this.tabIndex = isProgressStepperItemActiveDescendant(this) && isProgressStepperItemActive(this) ? 0 : -1
   }
 })
 

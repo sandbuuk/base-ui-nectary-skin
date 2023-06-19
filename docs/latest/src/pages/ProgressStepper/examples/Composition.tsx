@@ -1,23 +1,31 @@
 import { useState } from 'react'
-import type { FC } from 'react'
+import type { FC, CSSProperties } from 'react'
 import '@sinch-engage/nectary/progress-stepper'
 import '@sinch-engage/nectary/progress-stepper-item'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/checkbox'
+import '@sinch-engage/nectary/input'
+
+const layoutStyle: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 12,
+}
 
 type TPage = {
   label: string,
+  description: string,
   isInvalid: boolean,
   onNext?: () => void,
   onPrev?: () => void,
   onInvalidToggle: () => void,
 }
 
-const Page: FC<TPage> = ({ label, isInvalid, onNext, onPrev, onInvalidToggle }) => {
+const Page: FC<TPage> = ({ label, description, isInvalid, onNext, onPrev, onInvalidToggle }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <sinch-title type="m" level="2" text={label}/>
-
+      <sinch-text type="m">{description}</sinch-text>
+      <sinch-input value="" placeholder={label} aria-label={label} invalid={isInvalid}/>
       <sinch-checkbox
         checked={isInvalid}
         on-change={onInvalidToggle}
@@ -58,21 +66,25 @@ export const CompositionExample: FC = () => {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <sinch-progress-stepper
-        aria-label="Stepper"
-        value={step}
-        progressValue={progressStep}
-        on-change={onChange}
-      >
-        <sinch-progress-stepper-item value="page1" text="Step 1" invalid={invalidState.page1} aria-label="Step 1"/>
-        <sinch-progress-stepper-item value="page2" text="Step 2 singleveryveryveryverylongword" invalid={invalidState.page2} aria-label="Step 2"/>
-        <sinch-progress-stepper-item value="page3" text="Step 3" invalid={invalidState.page3} aria-label="Step 3"/>
-      </sinch-progress-stepper>
+    <div style={layoutStyle}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <sinch-title level="1" type="l" text="Checkout"/>
+        <sinch-progress-stepper
+          aria-label="Stepper"
+          value={step}
+          progressValue={progressStep}
+          on-change={onChange}
+        >
+          <sinch-progress-stepper-item value="page1" text="Shipping address" invalid={invalidState.page1} aria-label="Step 1"/>
+          <sinch-progress-stepper-item value="page2" text="Payment method" invalid={invalidState.page2} aria-label="Step 2"/>
+          <sinch-progress-stepper-item value="page3" text="Item and shipping" invalid={invalidState.page3} aria-label="Step 3"/>
+        </sinch-progress-stepper>
+      </div>
 
       {step === 'page1' && (
         <Page
-          label="Step 1"
+          label="Shipping address"
+          description="Choose a shipping address to continue checking out. You'll still have a chance to review and edit your order before it's final."
           isInvalid={invalidState.page1}
           onNext={onNext('page1', 'page2')}
           onInvalidToggle={onInvalidToggle('page1')}
@@ -80,7 +92,8 @@ export const CompositionExample: FC = () => {
       )}
       {step === 'page2' && (
         <Page
-          label="Step 2"
+          label="Payment method"
+          description="Choose a payment method to continue checking out. You'll still have a chance to review and edit your order before it's final."
           isInvalid={invalidState.page2}
           onNext={onNext('page2', 'page3')}
           onPrev={onPrev('page1')}
@@ -89,7 +102,8 @@ export const CompositionExample: FC = () => {
       )}
       {step === 'page3' && (
         <Page
-          label="Step 3"
+          label="Item and shipping"
+          description=""
           isInvalid={invalidState.page3}
           onPrev={onPrev('page2')}
           onInvalidToggle={onInvalidToggle('page3')}
