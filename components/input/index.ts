@@ -16,7 +16,7 @@ import {
 } from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { deleteContentBackward, deleteContentForward, getMaskSymbols, inputTypes, insertText, beginMaskedComposition, endMaskedComposition, splitValueAndMask, getMergedValueSliced } from './utils'
+import { deleteContentBackward, deleteContentForward, getMaskSymbols, inputTypes, insertText, beginMaskedComposition, endMaskedComposition, splitValueAndMask, getMergedValueSliced, insertFromPaste } from './utils'
 import type { TSinchInputElement, TSinchInputReact, TSinchInputType } from './types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
@@ -325,8 +325,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #onCompositionStart = () => {
     this.#isPendingDk = true
 
-    // console.log('COMP_START', this.#$input.value.length, this.#maskSymbols?.length)
-
     if (this.#maskSymbols !== null) {
       const selectionStart = this.#$input.selectionStart!
 
@@ -344,8 +342,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   #onCompositionEnd = (e: CompositionEvent) => {
     this.#isPendingDk = false
-
-    console.log('COMP_END', this.#$input.value, this.#$input.value.length, this.#maskSymbols?.length)
 
     if (this.#maskSymbols !== null) {
       const res = endMaskedComposition(this.#$input.value, e.data!, this.#maskSymbols, this.#$input.selectionStart!)
@@ -381,8 +377,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#selectionStart = this.#$input.selectionStart!
     this.#selectionEnd = this.#$input.selectionEnd!
 
-    console.log('BEFORE_INPUT', e.data, this.#$input.value.length, this.#maskSymbols?.length)
-
     let res: ReturnType<typeof insertText> | null = null
 
     switch (e.inputType) {
@@ -392,6 +386,8 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         break
       }
       case 'insertFromPaste': {
+        res = insertFromPaste(this.#$input.value, e.data!, this.#maskSymbols!, this.#selectionStart, this.#selectionEnd)
+
         break
       }
       case 'deleteByCut':
@@ -432,8 +428,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #onInput = () => {
-    console.log('INPUT', this.#$input.value.length, this.#maskSymbols?.length)
-
     if (this.#isPendingDk) {
       return
     }
