@@ -174,8 +174,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       }
 
       case 'placeholder': {
-        this.#$input.placeholder = newVal ?? ''
-        updateAttribute(this, 'aria-placeholder', newVal)
+        this.#updatePlaceholder()
 
         break
       }
@@ -517,6 +516,20 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       this.#$input.removeEventListener('beforeinput', this.#onMaskBeforeInput)
       this.#$input.removeEventListener('copy', this.#onMaskCopy)
       this.#$input.removeEventListener('cut', this.#onMaskCopy)
+    }
+
+    this.#updatePlaceholder()
+  }
+
+  #updatePlaceholder() {
+    if (this.#maskSymbols === null) {
+      const value = this.placeholder
+
+      this.#$input.placeholder = value ?? ''
+      updateAttribute(this, 'aria-placeholder', value)
+    } else {
+      updateAttribute(this, 'aria-placeholder', null)
+      this.#$input.placeholder = ''
     }
   }
 
