@@ -16,7 +16,18 @@ import {
 } from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { deleteContentBackward, deleteContentForward, getMaskSymbols, inputTypes, insertText, beginMaskedComposition, endMaskedComposition, splitValueAndMask, getMergedValueSliced, insertFromPaste } from './utils'
+import {
+  deleteContentBackward,
+  deleteContentForward,
+  getMaskSymbols,
+  inputTypes,
+  insertText,
+  beginMaskedComposition,
+  endMaskedComposition,
+  splitValueAndMask,
+  getMergedValueSliced,
+  insertFromPaste,
+} from './utils'
 import type { TSinchInputElement, TSinchInputReact, TSinchInputType } from './types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
@@ -37,7 +48,8 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #$wrapper: HTMLElement
   #selectionStart = 0
   #selectionEnd = 0
-  #isPendingDk = false
+  #isCompositionInProgress = false
+  #compositionBeginValue = ''
   #wasClearedByMask = false
   #controller: AbortController | null = null
   #sizeContext: Context<'size'>
@@ -79,8 +91,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$input.addEventListener('input', this.#onInput as any, options)
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart, options)
     this.#$input.addEventListener('compositionend', this.#onCompositionEnd, options)
-    this.#$input.addEventListener('mousedown', this.#onSelectionChange, options)
-    this.#$input.addEventListener('keydown', this.#onSelectionChange, options)
     this.#$input.addEventListener('focus', this.#onInputFocus, options)
     this.#$input.addEventListener('blur', this.#onInputBlur, options)
     this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange, options)
@@ -323,10 +333,12 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #onCompositionStart = () => {
-    this.#isPendingDk = true
+    this.#isCompositionInProgress = true
 
     if (this.#maskSymbols !== null) {
       const selectionStart = this.#$input.selectionStart!
+
+      this.#compositionBeginValue = this.#$input.value
 
       if (selectionStart === this.#$input.value.length) {
         return
@@ -337,14 +349,19 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       this.#$input.value = value
       this.#$input.setSelectionRange(selectionStart, selectionStart)
       this.#$inputMask.textContent = placeholder
+      this.#compositionBeginValue = value
     }
   }
 
   #onCompositionEnd = (e: CompositionEvent) => {
-    this.#isPendingDk = false
+    this.#isCompositionInProgress = false
 
     if (this.#maskSymbols !== null) {
-      const res = endMaskedComposition(this.#$input.value, e.data!, this.#maskSymbols, this.#$input.selectionStart!)
+      const value = this.#$input.value
+      const wasValueInserted = value.length !== this.#compositionBeginValue.length
+      const res = endMaskedComposition(value, e.data!, this.#maskSymbols, this.#$input.selectionStart!, wasValueInserted)
+
+      this.#compositionBeginValue = ''
 
       if (res !== null) {
         const { value, placeholder, mergedValue, cursorPos } = res
@@ -367,10 +384,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     } else {
       this.#onInput()
     }
-  }
-
-  #onSelectionChange = () => {
-    this.#selectionEnd = this.#$input.selectionEnd!
   }
 
   #onMaskBeforeInput = (e: InputEvent) => {
@@ -428,7 +441,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #onInput = () => {
-    if (this.#isPendingDk) {
+    if (this.#isCompositionInProgress) {
       return
     }
 

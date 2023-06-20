@@ -21,7 +21,7 @@ export const inputTypes: readonly TSinchInputType[] = ['text', 'password']
 
 const MASK_SYMBOL_LETTER = 'A'
 const MASK_SYMBOL_DIGIT = '0'
-const SPACE_CHAR = ' '
+const EMPTY_CHAR = ' '
 const MASK_MODE_DIGIT: TSInchInputMaskSymbolModeDigit = 0
 const MASK_MODE_LETTER: TSInchInputMaskSymbolModeLetter = 1
 const MASK_MODE_EXACT: TSInchInputMaskSymbolModeExact = 2
@@ -36,19 +36,11 @@ const testMaskedValue = (maskSymbol: TSinchInputMaskSymbol, inputChar: string): 
     }
   }
 
-  return true
+  return false
 }
 
 const isExactMode = (maskSymbol: TSinchInputMaskSymbol) => maskSymbol.mode === MASK_MODE_EXACT
-const isEmptyChar = (char: string) => char === SPACE_CHAR
-
-const clampSelectionStart = (selectionStart: number, selectionEnd: number, maskLength: number): number => {
-  return Math.min(selectionStart, selectionEnd, maskLength)
-}
-
-const clampSelectionEnd = (selectionStart: number, selectionEnd: number, maskLength: number): number => {
-  return Math.max(selectionStart, Math.min(selectionEnd, maskLength))
-}
+const isEmptyChar = (char: string) => char === EMPTY_CHAR
 
 export const getMaskSymbols = (mask: string, placeholder: string | null): TSinchInputMaskSymbol[] => {
   const res: TSinchInputMaskSymbol[] = []
@@ -93,50 +85,53 @@ export const getMaskSymbols = (mask: string, placeholder: string | null): TSinch
   return res
 }
 
-const equalizeCharsAndMaskLength = (chars: string[], maskSymbols: readonly TSinchInputMaskSymbol[]): void => {
-  if (chars.length === maskSymbols.length) {
-    return
-  }
-
-  const prevLength = chars.length
-
-  chars.length = maskSymbols.length
-
-  for (let i = prevLength; i < chars.length; i++) {
-    chars[i] = SPACE_CHAR
-  }
-}
-
 const clearCharsSelection = (chars: string[], selectionStart: number, selectionEnd: number): void => {
-  for (let i = selectionStart; i < selectionEnd; i++) {
-    chars[i] = SPACE_CHAR
+  for (let i = selectionStart; i < selectionEnd && i < chars.length; i++) {
+    chars[i] = EMPTY_CHAR
   }
 }
 
 const getPlaceholder = (chars: readonly string[], maskSymbols: readonly TSinchInputMaskSymbol[]): string => {
-  const res: string[] = new Array(chars.length)
+  const res: string[] = new Array(maskSymbols.length)
 
   for (let i = 0; i < maskSymbols.length; i++) {
-    res[i] = isEmptyChar(chars[i]) || isExactMode(maskSymbols[i])
+    res[i] = i >= chars.length || isEmptyChar(chars[i]) || isExactMode(maskSymbols[i])
       ? maskSymbols[i].placeholder
-      : SPACE_CHAR
+      : EMPTY_CHAR
   }
 
   return res.join('')
 }
 
 const isMaskedInputComplete = (chars: readonly string[], maskSymbols: readonly TSinchInputMaskSymbol[]): boolean => {
-  if (chars.length !== maskSymbols.length) {
-    throw new Error('chars.length !== maskSymbols.length')
+  if (chars.length > maskSymbols.length) {
+    throw new Error('chars.length > maskSymbols.length')
   }
 
-  for (let i = 0; i < chars.length; i++) {
-    if (!testMaskedValue(maskSymbols[i], chars[i])) {
+  if (chars.length < maskSymbols.length) {
+    return false
+  }
+
+  for (let i = 0; i < maskSymbols.length; i++) {
+    if (i >= chars.length || (!isExactMode(maskSymbols[i]) && !testMaskedValue(maskSymbols[i], chars[i]))) {
       return false
     }
   }
 
   return true
+}
+
+const getCharsFromInputValue = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[]): string[] => {
+  const chars: string[] = new Array(maskSymbols.length)
+  let i = 0
+
+  for (const c of inputValue) {
+    chars[i++] = c
+  }
+
+  chars.fill(EMPTY_CHAR, i)
+
+  return chars
 }
 
 const isCursorAtTheBeginning = (maskSymbols: readonly TSinchInputMaskSymbol[], selectoinStart: number): boolean => {
@@ -160,7 +155,7 @@ const getMergedValue = (chars: readonly string[], maskSymbols: readonly TSinchIn
 
   const res: string[] = new Array(chars.length)
 
-  for (let i = 0; i < maskSymbols.length; i++) {
+  for (let i = 0; i < chars.length; i++) {
     res[i] = isExactMode(maskSymbols[i])
       ? maskSymbols[i].value
       : chars[i]
@@ -169,98 +164,104 @@ const getMergedValue = (chars: readonly string[], maskSymbols: readonly TSinchIn
   return res.join('')
 }
 
-const compileResult = (chars: readonly string[], maskSymbols: readonly TSinchInputMaskSymbol[], cursorPos: number) => {
+const compileResult = (chars: string[], maskSymbols: readonly TSinchInputMaskSymbol[], cursorPos: number) => {
+  if (chars.length > maskSymbols.length) {
+    chars.length = maskSymbols.length
+  }
+
+  let lastEmptyPos = chars.findLastIndex((c) => !isEmptyChar(c)) + 1
+
+  while (lastEmptyPos < maskSymbols.length && isExactMode(maskSymbols[lastEmptyPos])) {
+    ++lastEmptyPos
+  }
+
+  if (lastEmptyPos < chars.length) {
+    chars.length = lastEmptyPos
+  }
+
   return {
     value: chars.join(''),
     placeholder: getPlaceholder(chars, maskSymbols),
-    cursorPos,
+    cursorPos: Math.min(cursorPos, chars.length),
     mergedValue: getMergedValue(chars, maskSymbols),
   }
 }
 
-export const deleteContentBackward = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[], prevSelectionStart: number, prevSelectionEnd: number): TSinchMaskInputResult | null => {
-  if (prevSelectionEnd === 0) {
+export const deleteContentBackward = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[], selectionStart: number, selectionEnd: number): TSinchMaskInputResult | null => {
+  if (selectionEnd === 0) {
     // Cursor is at the start
     return null
   }
 
-  const chars = [...inputValue]
-  let selectionStart = clampSelectionStart(prevSelectionStart, prevSelectionEnd, maskSymbols.length)
-  const selectionEnd = clampSelectionEnd(selectionStart, prevSelectionEnd, maskSymbols.length)
+  const chars = getCharsFromInputValue(inputValue, maskSymbols)
 
   // Delete selected characters range
   if (selectionStart !== selectionEnd) {
-    equalizeCharsAndMaskLength(chars, maskSymbols)
     clearCharsSelection(chars, selectionStart, selectionEnd)
 
     return compileResult(chars, maskSymbols, selectionStart)
   }
 
+  let cusrsorPos = selectionStart
+
   // Skip exact-match symbols
-  while (selectionStart > 0 && isExactMode(maskSymbols[selectionStart - 1])) {
-    --selectionStart
+  while (cusrsorPos > 0 && isExactMode(maskSymbols[cusrsorPos - 1])) {
+    --cusrsorPos
   }
 
   // If still has symbol to delete
-  if (selectionStart > 0) {
-    equalizeCharsAndMaskLength(chars, maskSymbols)
+  if (cusrsorPos > 0) {
     // Replace one symbol with mask
-    clearCharsSelection(chars, selectionStart - 1, selectionStart)
+    clearCharsSelection(chars, cusrsorPos - 1, cusrsorPos)
 
     do {
-      --selectionStart
-    } while (selectionStart > 0 && isExactMode(maskSymbols[selectionStart - 1]))
-
-    return compileResult(chars, maskSymbols, selectionStart)
+      --cusrsorPos
+    } while (cusrsorPos > 0 && isExactMode(maskSymbols[cusrsorPos - 1]))
   }
 
-  return null
+  return compileResult(chars, maskSymbols, cusrsorPos)
 }
 
-export const deleteContentForward = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[], prevSelectionStart: number, prevSelectionEnd: number): TSinchMaskInputResult | null => {
-  if (prevSelectionStart >= maskSymbols.length) {
+export const deleteContentForward = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[], selectionStart: number, selectionEnd: number): TSinchMaskInputResult | null => {
+  if (selectionStart >= maskSymbols.length) {
     return null
   }
 
-  const chars = [...inputValue]
-  let selectionStart = clampSelectionStart(prevSelectionStart, prevSelectionEnd, maskSymbols.length)
-  const selectionEnd = clampSelectionEnd(selectionStart, prevSelectionEnd, maskSymbols.length)
+  const chars = getCharsFromInputValue(inputValue, maskSymbols)
 
   // Delete selected characters range
   if (selectionStart !== selectionEnd) {
-    equalizeCharsAndMaskLength(chars, maskSymbols)
     clearCharsSelection(chars, selectionStart, selectionEnd)
 
     return compileResult(chars, maskSymbols, selectionEnd)
   }
 
+  let cursorPos = selectionStart
+
   // Skip exact-match symbols
-  while (selectionStart < maskSymbols.length && isExactMode(maskSymbols[selectionStart])) {
-    selectionStart++
+  while (cursorPos < maskSymbols.length && isExactMode(maskSymbols[cursorPos])) {
+    cursorPos++
   }
 
-  if (selectionStart < chars.length) {
-    equalizeCharsAndMaskLength(chars, maskSymbols)
+  if (cursorPos < chars.length) {
     // Replace one symbol with mask
-    clearCharsSelection(chars, selectionStart, selectionStart + 1)
-
-    return compileResult(chars, maskSymbols, selectionStart + 1)
+    clearCharsSelection(chars, cursorPos, cursorPos + 1)
   }
 
-  return null
+  return compileResult(chars, maskSymbols, cursorPos + 1)
 }
 
 export const beginMaskedComposition = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[], selectionStart: number): Pick<TSinchMaskInputResult, 'value' | 'placeholder'> => {
-  const chars = [...inputValue]
+  const chars = getCharsFromInputValue(inputValue, maskSymbols)
   const placeholder: string[] = new Array(chars.length)
 
   for (let i = 0; i < maskSymbols.length; i++) {
     placeholder[i] = isEmptyChar(chars[i]) || isExactMode(maskSymbols[i])
       ? maskSymbols[i].placeholder
-      : SPACE_CHAR
+      : EMPTY_CHAR
   }
 
-  placeholder[selectionStart] = SPACE_CHAR
+  placeholder[selectionStart] = EMPTY_CHAR
 
   // Splice single character, since browsers add CompositionChar even if 'beforeinput' tries to prevent it
   chars.splice(selectionStart, 1)
@@ -271,58 +272,57 @@ export const beginMaskedComposition = (inputValue: string, maskSymbols: readonly
   }
 }
 
-export const endMaskedComposition = (inputValue: string, data: string, maskSymbols: readonly TSinchInputMaskSymbol[], cursorPos: number): TSinchMaskInputResult | null => {
-  let selectionStart = cursorPos
-  const chars = [...inputValue]
+export const endMaskedComposition = (inputValue: string, data: string, maskSymbols: readonly TSinchInputMaskSymbol[], selectionStart: number, wasValueInserted: boolean): TSinchMaskInputResult | null => {
+  let cursorPos = selectionStart
+  const chars = getCharsFromInputValue(inputValue, maskSymbols)
+  const dataChars = [...data]
 
-  // Safari lacks composed composed symbol in the input.value
+  // Safari lacks composed symbol in the input.value
   // Other browsers already have composed symbol in the input.value
-  if (maskSymbols.length - chars.length === 1) {
+  if (!wasValueInserted) {
     // Insert composed symbol
-    chars.splice(selectionStart, 0, SPACE_CHAR)
-  } else {
-    // Clear composed symbol
-    selectionStart--
-    chars[selectionStart] = SPACE_CHAR
+    chars.splice(cursorPos, 0, ...dataChars)
+    // Trim chars length
+    chars.length = maskSymbols.length
+    cursorPos += dataChars.length
   }
 
   // Remove entered Composed Character
   // Composed Character is force inserted by browser
-  // if (maskSymbols.length < chars.length) {
-  //   chars.splice(selectionStart, chars.length - maskSymbols.length)
-  // }
+  cursorPos -= dataChars.length
+  clearCharsSelection(chars, cursorPos, cursorPos + dataChars.length)
 
-  /* Insert text as usual */
   // Skip placeholder symbols
-  while (selectionStart < maskSymbols.length && isExactMode(maskSymbols[selectionStart])) {
-    selectionStart++
+  while (cursorPos < maskSymbols.length && isExactMode(maskSymbols[cursorPos])) {
+    cursorPos++
   }
 
   // If reached end, while skipping
-  if (selectionStart >= maskSymbols.length) {
-    return compileResult(chars, maskSymbols, selectionStart)
+  if (cursorPos >= maskSymbols.length) {
+    return compileResult(chars, maskSymbols, cursorPos)
   }
 
-  const maskSymbol = maskSymbols[selectionStart]
+  for (let dataPos = 0; dataPos < dataChars.length && cursorPos < maskSymbols.length; ++dataPos, ++cursorPos) {
+    const data = dataChars[dataPos]
 
-  // Test and insert input char
-  if (isEmptyChar(chars[selectionStart]) && testMaskedValue(maskSymbol, data)) {
-    chars[selectionStart] = data
-
-    // Skip placeholder symbols
-    do {
-      selectionStart++
-    } while (selectionStart < maskSymbols.length && isExactMode(maskSymbols[selectionStart]))
+    // Test and insert input char
+    if (isEmptyChar(chars[cursorPos]) && testMaskedValue(maskSymbols[cursorPos], data)) {
+      chars[cursorPos] = data
+    }
   }
 
-  return compileResult(chars, maskSymbols, selectionStart)
+  // Skip placeholder symbols
+  while (cursorPos < maskSymbols.length && isExactMode(maskSymbols[cursorPos])) {
+    cursorPos++
+  }
+
+  return compileResult(chars, maskSymbols, cursorPos)
 }
 
 export const insertText = (inputValue: string, data: string, maskSymbols: readonly TSinchInputMaskSymbol[], selectionStart: number, selectionEnd: number): TSinchMaskInputResult | null => {
-  const chars = [...inputValue]
+  const chars = getCharsFromInputValue(inputValue, maskSymbols)
   let cursorPos = selectionStart
 
-  equalizeCharsAndMaskLength(chars, maskSymbols)
   clearCharsSelection(chars, selectionStart, selectionEnd)
 
   // Skip placeholder symbols (put cursor onto next editable position)
@@ -335,10 +335,12 @@ export const insertText = (inputValue: string, data: string, maskSymbols: readon
     return compileResult(chars, maskSymbols, cursorPos)
   }
 
-  const maskSymbol = maskSymbols[cursorPos]
-
   // Test and insert input char
-  if (isEmptyChar(chars[cursorPos]) && testMaskedValue(maskSymbol, data)) {
+  if (testMaskedValue(maskSymbols[cursorPos], data)) {
+    if (cursorPos >= chars.length) {
+      chars.length = cursorPos + 1
+    }
+
     chars[cursorPos] = data
 
     // Skip placeholder symbols (put cursor onto next editable position)
@@ -350,29 +352,19 @@ export const insertText = (inputValue: string, data: string, maskSymbols: readon
   return compileResult(chars, maskSymbols, cursorPos)
 }
 
-const doesPastePrefixMatch = (chars: readonly string[], maskSymbols: readonly TSinchInputMaskSymbol[], fromIndex: number, toIndex: number) => {
-  for (let i = fromIndex; i < toIndex; i++) {
-    const maskSymbol = maskSymbols[i]
-    const data = chars[i - fromIndex]
-
-    if (!isExactMode(maskSymbol) || data !== maskSymbol.value) {
-      return false
-    }
-  }
-
-  return true
-}
-
 export const insertFromPaste = (inputValue: string, data: string, maskSymbols: readonly TSinchInputMaskSymbol[], selectionStart: number, selectionEnd: number): TSinchMaskInputResult | null => {
-  const chars = [...inputValue]
+  const chars = getCharsFromInputValue(inputValue, maskSymbols)
   let cursorPos = selectionStart
 
-  equalizeCharsAndMaskLength(chars, maskSymbols)
   clearCharsSelection(chars, selectionStart, selectionEnd)
 
-  // Skip placeholder symbols (put cursor onto next editable position)
-  while (cursorPos < maskSymbols.length && isExactMode(maskSymbols[cursorPos])) {
-    cursorPos++
+  if (isCursorAtTheBeginning(maskSymbols, cursorPos)) {
+    cursorPos = 0
+  } else {
+    // Skip placeholder symbols (put cursor onto next editable position)
+    while (cursorPos < maskSymbols.length && isExactMode(maskSymbols[cursorPos])) {
+      cursorPos++
+    }
   }
 
   // If reached end, while skipping
@@ -381,74 +373,46 @@ export const insertFromPaste = (inputValue: string, data: string, maskSymbols: r
   }
 
   const dataChars = [...data]
-  let dataIndexOffset = 0
 
-  if (isCursorAtTheBeginning(maskSymbols, cursorPos)) {
-    if (doesPastePrefixMatch(dataChars, maskSymbols, 0, cursorPos)) {
-      dataIndexOffset = cursorPos
-    } else if (doesPastePrefixMatch(dataChars, maskSymbols, selectionStart, cursorPos)) {
-      dataIndexOffset = cursorPos - selectionStart
-    }
-  }
-
-  const dataLength = Math.min(dataChars.length, maskSymbols.length - cursorPos)
-
-  for (let i = 0; i < dataLength; i++, cursorPos++) {
-    const data = dataChars[i + dataIndexOffset]
+  for (let dataPos = 0; dataPos < dataChars.length && cursorPos < maskSymbols.length;) {
+    const data = dataChars[dataPos]
     const maskSymbol = maskSymbols[cursorPos]
 
     if (isExactMode(maskSymbol)) {
       if (maskSymbol.value === data) {
-        continue
+        ++dataPos
       }
 
-      break
-    }
-
-    if (isEmptyChar(chars[cursorPos])) {
+      ++cursorPos
+    } else {
       if (testMaskedValue(maskSymbol, data)) {
         chars[cursorPos] = data
-        continue
+        ++cursorPos
       }
 
-      break
-    } else {
-      if (chars[cursorPos] === data) {
-        continue
-      }
-
-      break
+      ++dataPos
     }
-
-    // Should not get here
   }
 
   return compileResult(chars, maskSymbols, cursorPos)
 }
 
-export const splitValueAndMask = (value: string, maskSymbols: readonly TSinchInputMaskSymbol[]): Pick<TSinchMaskInputResult, 'value' | 'placeholder'> => {
-  const chars = [...value]
+export const splitValueAndMask = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[]): Pick<TSinchMaskInputResult, 'value' | 'placeholder'> => {
+  const chars = getCharsFromInputValue(inputValue, maskSymbols)
 
-  equalizeCharsAndMaskLength(chars, maskSymbols)
-
-  for (let i = 0; i < maskSymbols.length; i++) {
+  for (let i = 0; i < maskSymbols.length && i < chars.length; i++) {
     if (isExactMode(maskSymbols[i]) || !testMaskedValue(maskSymbols[i], chars[i])) {
-      chars[i] = SPACE_CHAR
+      chars[i] = EMPTY_CHAR
     }
   }
 
-  return {
-    value: chars.join(''),
-    placeholder: getPlaceholder(chars, maskSymbols),
-  }
+  return compileResult(chars, maskSymbols, chars.length)
 }
 
-export const getMergedValueSliced = (value: string, maskSymbols: readonly TSinchInputMaskSymbol[], selectionStart: number, selectionEnd: number): string => {
-  const chars = [...value]
+export const getMergedValueSliced = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[], selectionStart: number, selectionEnd: number): string => {
+  const chars = getCharsFromInputValue(inputValue, maskSymbols)
 
-  equalizeCharsAndMaskLength(chars, maskSymbols)
-
-  for (let i = selectionStart; i < selectionEnd; i++) {
+  for (let i = selectionStart; i < selectionEnd && i < maskSymbols.length; i++) {
     if (isExactMode(maskSymbols[i])) {
       chars[i] = maskSymbols[i].value
     }
