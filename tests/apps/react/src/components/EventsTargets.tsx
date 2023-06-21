@@ -6,7 +6,6 @@ import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/date-picker'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/segment'
-import '@sinch-engage/nectary/dialog'
 import '@sinch-engage/nectary-assets/icons/calendar-today'
 
 type TEventTargets = {

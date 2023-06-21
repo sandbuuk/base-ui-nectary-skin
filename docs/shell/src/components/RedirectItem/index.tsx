@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/text'
 import { useNavigateLink } from '~/hooks'
 
 export type TRedirectItem = {

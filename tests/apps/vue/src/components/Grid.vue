@@ -22,7 +22,7 @@
         </sinch-card>
       </sinch-grid-item>
     </sinch-grid>
-    <sinch-grid-debug/>
+    <test-grid-debug></test-grid-debug>
   </div>
 </template>
 

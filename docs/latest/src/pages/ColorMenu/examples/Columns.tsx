@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
+import '@sinch-engage/nectary/color-menu-option'
 
 const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
 

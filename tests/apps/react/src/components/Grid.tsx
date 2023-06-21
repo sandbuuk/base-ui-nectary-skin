@@ -39,7 +39,7 @@ export const Grid: FC<TGrid> = () => {
           </sinch-card>
         </sinch-grid-item>
       </sinch-grid>
-      <sinch-grid-debug/>
+      <test-grid-debug/>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/color-menu'
+import '@sinch-engage/nectary/color-menu-option'
 
 export const CustomColorSetExample: FC = () => {
   const [value, setValue] = useState<string>('')

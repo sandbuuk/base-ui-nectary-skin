@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import type { FC, CSSProperties } from 'react'
-import '@sinch-engage/nectary/button'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/select-button'
 import '@sinch-engage/nectary/select-menu'

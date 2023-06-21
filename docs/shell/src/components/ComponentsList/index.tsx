@@ -1,4 +1,4 @@
-import { createResource, Loading } from 'docs-common'
+import { Loading, createResource } from 'docs-common'
 import { Suspense, useRef } from 'react'
 import { versions } from '../../utils'
 import { NavigationItem } from '../NavigationItem'

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { FC, CSSProperties } from 'react'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/table'
 import '@sinch-engage/nectary/table-head'
 import '@sinch-engage/nectary/table-head-cell'

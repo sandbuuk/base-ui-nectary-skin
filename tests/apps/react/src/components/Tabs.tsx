@@ -3,6 +3,7 @@ import type { FC } from 'react'
 import '@sinch-engage/nectary/tabs'
 import '@sinch-engage/nectary/tabs-option'
 import '@sinch-engage/nectary/tabs-icon-option'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
 
 type TTabs = {
   search: URLSearchParams,

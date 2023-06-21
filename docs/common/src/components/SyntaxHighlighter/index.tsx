@@ -4,7 +4,7 @@ import css from 'react-syntax-highlighter/dist/esm/languages/prism/css'
 import shell from 'react-syntax-highlighter/dist/esm/languages/prism/shell-session'
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx'
 import ts from 'react-syntax-highlighter/dist/esm/languages/prism/typescript'
-import { oneLight, oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useThemeName } from '../../context'
 import type { CSSProperties, FC } from 'react'
 
