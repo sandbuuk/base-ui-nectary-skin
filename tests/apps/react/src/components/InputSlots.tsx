@@ -2,10 +2,13 @@ import { useState } from 'react'
 import type { TSinchSize } from '@sinch-engage/nectary/utils/size'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/chip'
 import '@sinch-engage/nectary/spinner'
+import '@sinch-engage/nectary/select-button'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/toggle'
 import '@sinch-engage/nectary-assets/icons/search'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
 
 type TInput = {
   search: URLSearchParams,

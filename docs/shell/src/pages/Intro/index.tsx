@@ -1,4 +1,4 @@
-import { lazyScrollIntoView, SimpleLayout } from 'docs-common'
+import { SimpleLayout, lazyScrollIntoView } from 'docs-common'
 import type { FC } from 'react'
 
 const Component = lazyScrollIntoView(() => import(/* webpackChunkName: "Intro" */'./index.md'))

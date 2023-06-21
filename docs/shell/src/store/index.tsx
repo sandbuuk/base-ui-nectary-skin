@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useReducer } from 'react'
 import type { TAnyAction } from './types'
-import type { Reducer, Dispatch, FC, PropsWithChildren } from 'react'
+import type { Dispatch, FC, PropsWithChildren, Reducer } from 'react'
 
 type TState = {
 }

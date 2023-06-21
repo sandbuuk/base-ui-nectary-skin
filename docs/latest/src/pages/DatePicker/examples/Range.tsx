@@ -1,6 +1,6 @@
 import { packCsv, unpackCsv } from '@sinch-engage/nectary/utils'
 import { useState } from 'react'
-import type { FC, CSSProperties } from 'react'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/popover'

@@ -3,6 +3,7 @@ import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary-assets/icons/search'
 
 type TField = {

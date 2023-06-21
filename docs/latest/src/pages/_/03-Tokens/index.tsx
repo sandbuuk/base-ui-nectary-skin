@@ -1,7 +1,4 @@
 import './styles.css'
-import '@sinch-engage/nectary/grid-item'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
 import { MDXProvider } from '@mdx-js/react'
 import { commonMdxComponents } from 'docs-common'
 import MainDocumentMarkDown from './markdown/MainDocument.mdx'

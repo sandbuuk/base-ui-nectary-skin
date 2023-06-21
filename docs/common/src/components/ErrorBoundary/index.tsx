@@ -1,5 +1,5 @@
 import React from 'react'
-import type { ReactElement, PropsWithChildren } from 'react'
+import type { PropsWithChildren, ReactElement } from 'react'
 
 type TErrorBoundary = PropsWithChildren & {
   fallback: ReactElement,
