@@ -1,3 +1,12 @@
+## v2.1.5 (2023-06-15)
+
+* 🐞 align `sinch-tabs` design
+* 🐞 fix selection in `sinch-text` and `sinch-title`
+
+## v2.1.4 (2023-06-02)
+
+* 🐞 fix misassigned CSS vars
+
 ## v2.1.3 (2023-05-31)
 
 * 🐞 fix page scroll behavior in `sinch-popover` and `sinch-tooltip`

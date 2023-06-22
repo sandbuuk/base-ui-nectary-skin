@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/select-button'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/select-menu'

@@ -1,9 +1,9 @@
 import { SpacingY } from './SpacingY'
 import './landing-page-grid'
 import '@sinch-engage/nectary-assets/illustrations/on-a-cloud'
-import '@sinch-engage/nectary/tag'
 import '@sinch-engage/nectary/grid-item'
 import '@sinch-engage/nectary/title'
+import '@sinch-engage/nectary/text'
 
 const introductionText: string = 'With Nectary, you can easily build consistent and high-quality interfaces that are both functional and aesthetically pleasing. Our modular approach allows for maximum composability, so you can create unique and personalized designs without sacrificing consistency or quality.'
 

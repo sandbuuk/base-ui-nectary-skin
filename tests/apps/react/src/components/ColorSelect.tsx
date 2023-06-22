@@ -4,6 +4,7 @@ import '@sinch-engage/nectary/color-menu'
 import '@sinch-engage/nectary/color-menu-option'
 import '@sinch-engage/nectary/color-swatch'
 import '@sinch-engage/nectary/select-button'
+import '@sinch-engage/nectary/popover'
 
 const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
 const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']

@@ -171,7 +171,7 @@ const config: TWebpackConfig = {
     // chunkIds: 'named',
     minimize: true,
     minimizer: [
-      // @ts-expect-error
+      // @ts-ignore
       new TerserPlugin({
         parallel: true,
         extractComments: false,

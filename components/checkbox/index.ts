@@ -17,8 +17,8 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-checkbox', class extends NectaryElement {
-  #$input: HTMLInputElement
   #$label: HTMLLabelElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -27,27 +27,28 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$input = shadowRoot.querySelector('input')!
-    this.#$label = shadowRoot.querySelector('label')!
+    this.#$label = shadowRoot.querySelector('#label')!
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'checkbox')
-    this.#$input.addEventListener('input', this.#onCheckboxInput)
-    this.#$input.addEventListener('focus', this.#onCheckboxFocus)
-    this.#$input.addEventListener('blur', this.#onCheckboxBlur)
-    this.addEventListener('-change', this.#onChangeReactHandler)
-    this.addEventListener('-focus', this.#onFocusReactHandler)
-    this.addEventListener('-blur', this.#onBlurReactHandler)
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+    const options: AddEventListenerOptions = { signal }
+
+    this.role = 'checkbox'
+    this.tabIndex = 0
+    this.addEventListener('click', this.#onClick, options)
+    this.addEventListener('focus', this.#onFocus, options)
+    this.addEventListener('blur', this.#onBlur, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
+    this.addEventListener('-focus', this.#onFocusReactHandler, options)
+    this.addEventListener('-blur', this.#onBlurReactHandler, options)
   }
 
   disconnectedCallback() {
-    this.#$input.removeEventListener('input', this.#onCheckboxInput)
-    this.#$input.removeEventListener('focus', this.#onCheckboxFocus)
-    this.#$input.removeEventListener('blur', this.#onCheckboxBlur)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
-    this.removeEventListener('-focus', this.#onFocusReactHandler)
-    this.removeEventListener('-blur', this.#onBlurReactHandler)
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -74,7 +75,6 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
       case 'checked': {
         const isChecked = isAttrTrue(newVal)
 
-        this.#$input.checked = isChecked
         updateExplicitBooleanAttribute(this, 'aria-checked', isChecked)
         updateBooleanAttribute(this, 'checked', isChecked)
 
@@ -83,7 +83,7 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
       case 'disabled': {
         const isDisabled = isAttrTrue(newVal)
 
-        this.#$input.disabled = isDisabled
+        updateExplicitBooleanAttribute(this, 'aria-disabled', isDisabled)
         updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
@@ -141,33 +141,23 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
     return true
   }
 
-  focus() {
-    this.#$input.focus()
-  }
-
-  blur() {
-    this.#$input.blur()
-  }
-
-  #onCheckboxInput = (e: Event) => {
-    e.stopPropagation()
-
-    const isChecked = this.#$input.checked
-
-    this.#$input.checked = this.checked
+  #onClick = () => {
+    if (this.disabled) {
+      return
+    }
 
     this.dispatchEvent(
-      new CustomEvent('-change', { detail: isChecked })
+      new CustomEvent('-change', { detail: !this.checked })
     )
   }
 
-  #onCheckboxFocus = () => {
+  #onFocus = () => {
     this.dispatchEvent(
       new CustomEvent('-focus')
     )
   }
 
-  #onCheckboxBlur = () => {
+  #onBlur = () => {
     this.dispatchEvent(
       new CustomEvent('-blur')
     )

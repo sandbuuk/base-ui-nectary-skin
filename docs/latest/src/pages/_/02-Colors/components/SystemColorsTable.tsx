@@ -7,10 +7,7 @@ import '@sinch-engage/nectary/table-head-cell'
 import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-cell'
-import '@sinch-engage/nectary-assets/icons/expand-more'
-import '@sinch-engage/nectary-assets/icons/expand-less'
-import '@sinch-engage/nectary/segmented-control'
-import '@sinch-engage/nectary/segmented-control-option'
+import '@sinch-engage/nectary/text'
 
 const headStyle = {
   maxWidth: 105,

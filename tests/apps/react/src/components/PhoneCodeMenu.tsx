@@ -3,8 +3,6 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/select-menu'
 import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/flag'
 
 const countries = Object.entries(countriesJson)

@@ -23,7 +23,7 @@ defineCustomElement('sinch-tabs-icon-option', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: true })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -32,7 +32,7 @@ defineCustomElement('sinch-tabs-icon-option', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'tab')
+    this.role = 'tab'
     this.#$button.addEventListener('click', this.#onClick)
   }
 

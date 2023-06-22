@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { FC, CSSProperties } from 'react'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/tabs'
 import '@sinch-engage/nectary/tabs-option'
 import '@sinch-engage/nectary/text'

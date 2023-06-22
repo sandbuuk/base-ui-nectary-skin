@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { FC, CSSProperties } from 'react'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/input'

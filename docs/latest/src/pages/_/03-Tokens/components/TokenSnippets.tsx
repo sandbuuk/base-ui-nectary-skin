@@ -1,5 +1,3 @@
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/code-tag'
 import { Code } from 'docs-common'
 
 const tokenColor = {

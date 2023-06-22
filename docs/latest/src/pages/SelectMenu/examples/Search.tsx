@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import pokemonNames from './pokemon.json'
-import type { FC, CSSProperties } from 'react'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/popover'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/select-menu'
 import '@sinch-engage/nectary/select-menu-option'
 

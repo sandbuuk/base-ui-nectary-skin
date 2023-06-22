@@ -1,13 +1,13 @@
 import { useLayoutEffect, useRef } from 'react'
 import { useDocument } from '../../../context'
-import { usePortalsRefs } from '../context/page-portals'
+import { usePortalSetters } from '../context/page-portals'
 
 const EMPTY_DEPS: any[] = []
 
 export const useLayoutRef = (key: 'navmenu') => {
   const ref = useRef<HTMLDivElement>(null)
   const doc = useDocument()
-  const { setNavElement } = usePortalsRefs()
+  const { setNavElement } = usePortalSetters()
 
   useLayoutEffect(() => {
     const $el = ref.current!

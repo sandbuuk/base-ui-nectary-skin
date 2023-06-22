@@ -7,10 +7,14 @@ import '@sinch-engage/nectary/table-cell'
 import '@sinch-engage/nectary/checkbox'
 import '@sinch-engage/nectary/link'
 import '@sinch-engage/nectary/toggle'
+import '@sinch-engage/nectary/icon-button'
+import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary-assets/icons/south'
 import '@sinch-engage/nectary-assets/icons/north'
 import '@sinch-engage/nectary-assets/icons/filter-list'
 import '@sinch-engage/nectary-assets/icons/more-vert'
+import '@sinch-engage/nectary-assets/icons/open-in-new'
 
 export const SimpleExample: FC = () => {
   return (

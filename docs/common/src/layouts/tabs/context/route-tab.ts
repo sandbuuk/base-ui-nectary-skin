@@ -7,11 +7,11 @@ export type TRouteTab = {
 }
 
 type TRouteTabContext = {
-  getRouteTabs: (route: string) => TRouteTab[] | null,
+  getRouteTabInfo: (route: string) => TRouteTab[] | null,
 }
 
 const RouteTabContext = createContext<TRouteTabContext>({
-  getRouteTabs() {
+  getRouteTabInfo() {
     throw new Error('Not implemented')
   },
 })
