@@ -1,4 +1,4 @@
-import { Cards, Introduction, BigToast, Cat, SpacingY } from './components'
+import { BigToast, Cards, Cat, Introduction, SpacingY } from './components'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary/title'

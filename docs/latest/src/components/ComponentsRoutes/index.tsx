@@ -1,5 +1,5 @@
-import { lazyScrollIntoView, Loading, TabsLayout } from 'docs-common'
-import { memo, Suspense } from 'react'
+import { Loading, TabsLayout, lazyScrollIntoView } from 'docs-common'
+import { Suspense, memo } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { NotFoundPage } from '../NotFound'
 import { componentReq, getComponentsRoutes, getPagesRoutes, getRouteTabs, getRouteTitle, pagesReq } from '~/entries'

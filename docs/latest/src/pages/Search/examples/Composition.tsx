@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import type { TSinchInputElement } from '@sinch-engage/nectary/input/types'
-import type { FC, CSSProperties } from 'react'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
 import '@sinch-engage/nectary/popover'

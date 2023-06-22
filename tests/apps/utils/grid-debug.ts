@@ -108,7 +108,7 @@ class GridDebug extends NectaryElement {
   }
 }
 
-defineCustomElement('sinch-grid-debug', GridDebug)
+defineCustomElement('test-grid-debug', GridDebug)
 
 type TSinchGridDebugElement = HTMLElement
 
@@ -117,11 +117,11 @@ type TSinchGridDebugReact = TSinchElementReact<TSinchGridDebugElement>
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-grid-debug': TSinchGridDebugReact,
+      'test-grid-debug': TSinchGridDebugReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-grid-debug': TSinchGridDebugElement,
+    'test-grid-debug': TSinchGridDebugElement,
   }
 }

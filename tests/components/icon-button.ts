@@ -148,7 +148,7 @@ test('icon-button events', runScreenshotTests('sinch-icon-button', [
   {
     name: 'native events',
     url: shot,
-    async *fn({ $, page, isFirefox }) {
+    async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-icon-button-focus', 'sinch-icon-button-blur', 'sinch-icon-button-click')
 
       // Focus by keyboard
@@ -162,33 +162,17 @@ test('icon-button events', runScreenshotTests('sinch-icon-button', [
       await $.click()
       await $.click()
 
-      // TODO: IconButton has tooltip inside, that requires non-inert target
-      // Fix requires breaking change - rename aria-label -> a11y-label, make actual <button> as tooltip target
-      if (isFirefox) {
-        expect(
-          await getAllEvents(page)
-        ).toEqual([
-          { type: 'sinch-icon-button-focus', detail: null },
-          { type: 'sinch-icon-button-click', detail: null },
-          { type: 'sinch-icon-button-click', detail: null },
-          { type: 'sinch-icon-button-blur', detail: null },
-          // Additional focus on Firefox
-          { type: 'sinch-icon-button-focus', detail: null },
-          { type: 'sinch-icon-button-click', detail: null },
-          { type: 'sinch-icon-button-click', detail: null },
-        ])
-      } else {
-        expect(
-          await getAllEvents(page)
-        ).toEqual([
-          { type: 'sinch-icon-button-focus', detail: null },
-          { type: 'sinch-icon-button-click', detail: null },
-          { type: 'sinch-icon-button-click', detail: null },
-          { type: 'sinch-icon-button-blur', detail: null },
-          { type: 'sinch-icon-button-click', detail: null },
-          { type: 'sinch-icon-button-click', detail: null },
-        ])
-      }
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
+        { type: 'sinch-icon-button-focus', detail: null },
+        { type: 'sinch-icon-button-click', detail: null },
+        { type: 'sinch-icon-button-click', detail: null },
+        { type: 'sinch-icon-button-blur', detail: null },
+        { type: 'sinch-icon-button-focus', detail: null },
+        { type: 'sinch-icon-button-click', detail: null },
+        { type: 'sinch-icon-button-click', detail: null },
+      ])
     },
   },
   {

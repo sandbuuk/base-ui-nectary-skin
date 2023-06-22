@@ -1,6 +1,6 @@
 import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
 import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
-import '@webcomponents/scoped-custom-element-registry'
+import '@sinch-engage/scoped-custom-element-registry'
 import '@sinch-engage/nectary-theme-base'
 import { render } from 'react-dom'
 import { App } from './App'
