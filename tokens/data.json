@@ -7044,6 +7044,48 @@
       }
     }
   },
+  "SimpleTexting": {
+    "sys": {
+      "color": {
+        "primary": {
+          "default": {
+            "value": "#2399F0",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
+  "MessageMedia": {
+    "sys": {
+      "color": {
+        "primary": {
+          "default": {
+            "value": "#3375D1",
+            "type": "sizing"
+          }
+        }
+      },
+      "shape-radius": {
+        "xs": {
+          "value": "0",
+          "type": "borderRadius"
+        },
+        "s": {
+          "value": "2",
+          "type": "borderRadius"
+        },
+        "m": {
+          "value": "4",
+          "type": "borderRadius"
+        },
+        "l": {
+          "value": "8",
+          "type": "borderRadius"
+        }
+      }
+    }
+  },
   "$themes": [
     {
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
@@ -10154,12 +10196,32 @@
         "comp.toggle.color.default.text-inside.initial": "S:caba43ef577b9213af0827b71903b34e321ab64d,",
         "sys.color.container.contrast.secondary.default": "S:504b83e0af0ba18ffd11ffecd51c9c540f6ba4a9,"
       }
+    },
+    {
+      "id": "5945d5c31dcbdf2692b35efffd87b6e19384a61f",
+      "name": "SimpleTexting",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "Nectary / Base theme": "source",
+        "SimpleTexting": "enabled"
+      }
+    },
+    {
+      "id": "9bf1b1eb292732c275dc4eac42197c2c56e7dc3b",
+      "name": "MessageMedia",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "Nectary / Base theme": "source",
+        "MessageMedia": "enabled"
+      }
     }
   ],
   "$metadata": {
     "tokenSetOrder": [
       "Nectary / Base theme",
-      "Nectary / Dark theme"
+      "Nectary / Dark theme",
+      "SimpleTexting",
+      "MessageMedia"
     ]
   }
 }
