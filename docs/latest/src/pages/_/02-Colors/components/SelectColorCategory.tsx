@@ -6,10 +6,6 @@ import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/select-menu'
 import '@sinch-engage/nectary/select-menu-option'
 import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary-assets/icons/laptop'
-import '@sinch-engage/nectary-assets/icons/smartphone'
-import '@sinch-engage/nectary-assets/icons/tablet'
-import '@sinch-engage/nectary-assets/icons/watch'
 
 const selectStyles: CSSProperties = {
   width: 200,
