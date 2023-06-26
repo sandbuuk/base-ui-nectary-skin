@@ -1,10 +1,11 @@
 import { Example } from '~/components/Example'
 import { SimpleExample } from './examples/Simple.tsx?example'
 import { SizeExample } from './examples/Size.tsx?example'
-import { ComplexExample } from './examples/Complex.tsx?example'
+import { CompositionExample } from './examples/Composition.tsx?example'
 import { FieldExample } from './examples/Field.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
 import { MaskedExample } from './examples/Masked.tsx?example'
+import { CopyExample } from './examples/Copy.tsx?example'
 
 # Examples
 
@@ -16,22 +17,22 @@ It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled
 
 <Example Component={SimpleExample}/>
 
+## Disabled
+
+<Example Component={DisabledExample}/>
+
 ## Size
 
 <Example Component={SizeExample}/>
 
-## Complex
+## Composition
 
-<Example Component={ComplexExample}/>
+<Example Component={CompositionExample}/>
 
 ## Field
 
 <Example Component={FieldExample}/>
 
-## Disabled
-
-<Example Component={DisabledExample}/>
-
-### Masked
+## Masked
 
 <Example Component={MaskedExample}/>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import type { FC, CSSProperties } from 'react'
+import type { TSinchInputClipboardEvent } from '@sinch-engage/nectary/input/types'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/field'
 
@@ -16,6 +17,20 @@ export const MaskedExample: FC = () => {
   const [phoneState, setPhoneState] = useState('')
   const [pnState, setPNState] = useState('')
   const [customState, setCustomState] = useState('')
+  const onPhonePaste = (e: TSinchInputClipboardEvent) => {
+    const value = e.detail.value.replaceAll('-', '')
+
+    if (value.length === 10 && value.startsWith('0')) {
+      e.detail.replaceWith(value.substring(1))
+    }
+  }
+  const onPNPaste = (e: TSinchInputClipboardEvent) => {
+    const value = e.detail.value.replaceAll('-', '')
+
+    if (value.length === 12) {
+      e.detail.replaceWith(value.substring(2))
+    }
+  }
 
   return (
     <div style={wrapperStyle}>
@@ -48,6 +63,7 @@ export const MaskedExample: FC = () => {
           mask="+46-00-000-00-00"
           value={phoneState}
           on-change={(e) => setPhoneState(e.detail)}
+          on-paste={onPhonePaste}
         />
       </sinch-field>
       <sinch-field label="Personal Number">
@@ -57,6 +73,7 @@ export const MaskedExample: FC = () => {
           mask="000000-0000"
           value={pnState}
           on-change={(e) => setPNState(e.detail)}
+          on-paste={onPNPaste}
         />
       </sinch-field>
       <sinch-field label="Custom Token" optionalText="Letters only">

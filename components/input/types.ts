@@ -3,6 +3,8 @@ import type { TSinchSize } from '../utils/size'
 
 export type TSinchInputType = 'text' | 'password'
 
+export type TSinchInputClipboardEvent = CustomEvent<{value: string, replaceWith: (value: string) => void}>
+
 export type TSinchInputElement = HTMLElement & {
   /** Text field type, `text` by default */
   type: TSinchInputType,
@@ -72,4 +74,7 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   'on-focus'?: (e: CustomEvent<void>) => void,
   /** Blur handler */
   'on-blur'?: (e: CustomEvent<void>) => void,
+  'on-cut'?: (e: TSinchInputClipboardEvent) => void,
+  'on-copy'?: (e: TSinchInputClipboardEvent) => void,
+  'on-paste'?: (e: TSinchInputClipboardEvent) => void,
 }

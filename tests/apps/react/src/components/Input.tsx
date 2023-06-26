@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { TSinchInputClipboardEvent } from '@sinch-engage/nectary/input/types'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/select-button'
@@ -20,6 +21,31 @@ export const Input: FC<TInput> = ({ search }) => {
   }
   const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-input-focus'))
   const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-input-blur'))
+  const onCopy = (e: TSinchInputClipboardEvent) => {
+    const value = e.detail
+
+    console.log('REACT_COPY', value)
+
+    e.detail.replaceWith('REPLACED VALUE')
+
+    window.dispatchEvent(new CustomEvent('sinch-input-copy', { detail: value }))
+  }
+  const onCut = (e: TSinchInputClipboardEvent) => {
+    const value = e.detail
+
+    console.log('REACT_CUT', value)
+
+    window.dispatchEvent(new CustomEvent('sinch-input-cut', { detail: value }))
+  }
+  const onPaste = (e: TSinchInputClipboardEvent) => {
+    const value = e.detail.value
+
+    console.log('REACT_PASTE', value)
+
+    e.detail.replaceWith('REPLACED')
+
+    window.dispatchEvent(new CustomEvent('sinch-input-paste', { detail: value }))
+  }
   const type: any = search.get('type') ?? undefined
   const size: any = search.get('size') ?? undefined
   const isInvalid = search.get('invalid') !== null
@@ -44,6 +70,9 @@ export const Input: FC<TInput> = ({ search }) => {
       on-change={onChange}
       on-focus={onFocus}
       on-blur={onBlur}
+      on-copy={onCopy}
+      on-cut={onCut}
+      on-paste={onPaste}
       aria-label="Input"
     >
       {hasIcon && (
