@@ -4068,12 +4068,6 @@
               }
             }
           }
-        },
-        "font": {
-          "text": {
-            "value": "{sys.font.body.monospace-m}",
-            "type": "typography"
-          }
         }
       },
       "avatar": {
