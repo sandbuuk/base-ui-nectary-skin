@@ -905,8 +905,8 @@
           "monospace-s": {
             "value": {
               "fontFamily": "{ref.typography.font-family.mono}",
-              "fontWeight": "{ref.typography.font-weight.500}",
-              "lineHeight": "{ref.typography.line-height.16}",
+              "fontWeight": "{ref.typography.font-weight.400}",
+              "lineHeight": "{ref.typography.line-height.22}",
               "fontSize": "{ref.typography.font-size.14}",
               "letterSpacing": "{ref.typography.letter-spacing.body}",
               "paragraphSpacing": "{ref.typography.paragraph-spacing.0}",
@@ -919,9 +919,23 @@
           "monospace-xs": {
             "value": {
               "fontFamily": "{ref.typography.font-family.mono}",
-              "fontWeight": "{ref.typography.font-weight.500}",
-              "lineHeight": "{ref.typography.line-height.14}",
+              "fontWeight": "{ref.typography.font-weight.400}",
+              "lineHeight": "{ref.typography.line-height.20}",
               "fontSize": "{ref.typography.font-size.12}",
+              "letterSpacing": "{ref.typography.letter-spacing.body}",
+              "paragraphSpacing": "{ref.typography.paragraph-spacing.0}",
+              "paragraphIndent": "",
+              "textCase": "{ref.typography.text-case.none}",
+              "textDecoration": "{ref.typography.text-decoration.none}"
+            },
+            "type": "typography"
+          },
+          "monospace-xxs": {
+            "value": {
+              "fontFamily": "{ref.typography.font-family.mono}",
+              "fontWeight": "{ref.typography.font-weight.400}",
+              "lineHeight": "{ref.typography.line-height.16}",
+              "fontSize": "{ref.typography.font-size.10}",
               "letterSpacing": "{ref.typography.letter-spacing.body}",
               "paragraphSpacing": "{ref.typography.paragraph-spacing.0}",
               "paragraphIndent": "",
