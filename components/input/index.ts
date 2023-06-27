@@ -186,6 +186,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       }
 
       case 'mask': {
+        // Wait for placeholder attribute
         queueMicrotask(() => {
           this.#updateMask()
         })
@@ -553,12 +554,19 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       replacedValue = value ?? ''
     }
 
-    this.dispatchEvent(new CustomEvent('-paste', {
+    const event = new CustomEvent('-paste', {
       detail: {
         value: pasteValue,
         replaceWith,
       },
-    }))
+      cancelable: true,
+    })
+
+    this.dispatchEvent(event)
+
+    if (event.defaultPrevented) {
+      e.preventDefault()
+    }
 
     if (replacedValue.length === 0) {
       return
@@ -573,9 +581,13 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       const selectionStart = this.#$input.selectionStart!
       const selectionEnd = this.#$input.selectionEnd!
       const cursorPos = selectionStart + replacedValue.length
+      const nextValue = value.substring(0, selectionStart) + replacedValue + value.substring(selectionEnd)
 
-      this.value = value.substring(0, selectionStart) + replacedValue + value.substring(selectionEnd)
+      this.value = nextValue
       this.#$input.setSelectionRange(cursorPos, cursorPos)
+      this.#selectionStart = cursorPos
+      this.#selectionEnd = cursorPos
+      this.#dispatchChangeEvent(nextValue)
     }
   }
 

@@ -398,11 +398,27 @@ export const insertFromPaste = (inputValue: string, data: string, maskSymbols: r
 }
 
 export const splitValueAndMask = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[]): Pick<TSinchMaskInputResult, 'value' | 'placeholder'> => {
-  const chars = getCharsFromInputValue(inputValue, maskSymbols)
+  const chars = getCharsFromInputValue('', maskSymbols)
+  const dataChars = getCharsFromInputValue(inputValue, maskSymbols)
+  let cursorPos = 0
 
-  for (let i = 0; i < maskSymbols.length && i < chars.length; i++) {
-    if (isExactMode(maskSymbols[i]) || !testMaskedValue(maskSymbols[i], chars[i])) {
-      chars[i] = EMPTY_CHAR
+  for (let dataPos = 0; dataPos < dataChars.length && cursorPos < maskSymbols.length;) {
+    const data = dataChars[dataPos]
+    const maskSymbol = maskSymbols[cursorPos]
+
+    if (isExactMode(maskSymbol)) {
+      if (maskSymbol.value === data) {
+        ++dataPos
+      }
+
+      ++cursorPos
+    } else {
+      if (testMaskedValue(maskSymbol, data)) {
+        chars[cursorPos] = data
+        ++cursorPos
+      }
+
+      ++dataPos
     }
   }
 
