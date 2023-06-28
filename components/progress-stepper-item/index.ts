@@ -74,7 +74,10 @@ defineCustomElement('sinch-progress-stepper-item', class extends NectaryElement 
         break
       }
       case 'invalid': {
-        updateBooleanAttribute(this, 'invalid', isAttrTrue(newVal))
+        const isInvalid = isAttrTrue(newVal)
+
+        updateBooleanAttribute(this, 'invalid', isInvalid)
+        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
 
         break
       }
