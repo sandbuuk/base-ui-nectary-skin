@@ -4072,7 +4072,8 @@
         "font": {
           "text": {
             "value": "{sys.font.body.monospace-m}",
-            "type": "typography"
+            "type": "typography",
+            "description": "This is a default token which is used by default when no any other value can be applyed"
           }
         }
       },
@@ -10171,6 +10172,9 @@
     }
   ],
   "$metadata": {
-    "tokenSetOrder": ["Nectary / Base theme", "Nectary / Dark theme"]
+    "tokenSetOrder": [
+      "Nectary / Base theme",
+      "Nectary / Dark theme"
+    ]
   }
 }
