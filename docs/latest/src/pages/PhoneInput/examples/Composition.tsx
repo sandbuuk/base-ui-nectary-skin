@@ -19,7 +19,6 @@ export const CompositionExample: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [menuValue, setMenuValue] = useState('')
   const [inputValue, setInputValue] = useState('')
-  const [inputMask, setInputMask] = useState<string | null>()
   const onClose = () => setIsOpen(false)
   const onOpen = () => setIsOpen(true)
   const onMenuChange = (e: CustomEvent<string>) => {
@@ -27,7 +26,6 @@ export const CompositionExample: FC = () => {
 
     onClose()
     setMenuValue(country)
-    setInputMask(countries[country].phoneMask)
   }
   const onInputChange = (e: CustomEvent<string>) => {
     setInputValue(e.detail)
@@ -37,17 +35,15 @@ export const CompositionExample: FC = () => {
 
     if (value.startsWith('+46') || value.startsWith('0')) {
       value = value.substring(value.length - 9)
-      setInputMask(countries.se.phoneMask)
       setMenuValue('se')
     }
 
     if (value !== e.detail.value) {
-      // e.preventDefault()
       e.detail.replaceWith(value)
-      // setInputValue(value)
     }
   }
   const phoneCode = countries[menuValue]?.phoneCode ?? ''
+  const phoneMask = countries[menuValue]?.phoneMask ?? undefined
 
   return (
     <sinch-popover
@@ -60,7 +56,8 @@ export const CompositionExample: FC = () => {
       <sinch-input
         slot="target"
         aria-label="Phone number"
-        mask={inputMask ?? undefined}
+        mask={phoneMask}
+        placeholder={phoneMask == null ? 'Phone Input' : undefined}
         value={inputValue}
         style={inputStyles}
         on-change={onInputChange}

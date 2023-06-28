@@ -482,8 +482,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     const selectionStart = this.#$input.selectionStart ?? 0
     const selectionEnd = this.#$input.selectionEnd ?? 0
 
-    e.preventDefault()
-
     if (e.clipboardData === null || selectionStart === selectionEnd) {
       return
     }
@@ -506,8 +504,12 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
     this.dispatchEvent(event)
 
-    if (!event.defaultPrevented) {
-      e.clipboardData.setData('text/plain', replacedValue ?? copiedValue)
+    if (event.defaultPrevented || replacedValue !== null) {
+      e.preventDefault()
+    }
+
+    if (replacedValue !== null) {
+      e.clipboardData.setData('text/plain', replacedValue)
     }
   }
 
@@ -517,8 +519,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     const selectionEnd = this.#$input.selectionEnd ?? 0
 
     if (e.clipboardData === null || selectionStart === selectionEnd) {
-      e.preventDefault()
-
       return
     }
 
@@ -540,10 +540,12 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
     this.dispatchEvent(event)
 
-    if (!event.defaultPrevented) {
-      e.clipboardData.setData('text/plain', replacedValue ?? copiedValue)
-    } else {
+    if (event.defaultPrevented || replacedValue !== null) {
       e.preventDefault()
+    }
+
+    if (replacedValue !== null) {
+      e.clipboardData.setData('text/plain', replacedValue)
     }
   }
 
@@ -583,8 +585,8 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       const cursorPos = selectionStart + replacedValue.length
       const nextValue = value.substring(0, selectionStart) + replacedValue + value.substring(selectionEnd)
 
-      this.value = nextValue
-      this.#$input.setSelectionRange(cursorPos, cursorPos)
+      // this.value = nextValue
+      // this.#$input.setSelectionRange(cursorPos, cursorPos)
       this.#selectionStart = cursorPos
       this.#selectionEnd = cursorPos
       this.#dispatchChangeEvent(nextValue)
