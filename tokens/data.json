@@ -4068,6 +4068,12 @@
               }
             }
           }
+        },
+        "font": {
+          "text": {
+            "value": "{sys.font.body.monospace-m}",
+            "type": "typography"
+          }
         }
       },
       "avatar": {
@@ -10165,9 +10171,6 @@
     }
   ],
   "$metadata": {
-    "tokenSetOrder": [
-      "Nectary / Base theme",
-      "Nectary / Dark theme"
-    ]
+    "tokenSetOrder": ["Nectary / Base theme", "Nectary / Dark theme"]
   }
 }
