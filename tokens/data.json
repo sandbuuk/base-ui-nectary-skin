@@ -3993,12 +3993,32 @@
         },
         "font": {
           "size": {
-            "l": {
-              "value": "{sys.font.body.monospace-s}",
+            "m": {
+              "value": {
+                "fontFamily": "{ref.typography.font-family.mono}",
+                "fontWeight": "{ref.typography.font-weight.400}",
+                "lineHeight": "14",
+                "fontSize": "12",
+                "letterSpacing": "{ref.typography.letter-spacing.body}",
+                "paragraphSpacing": "{ref.typography.paragraph-spacing.0}",
+                "paragraphIndent": "",
+                "textCase": "{ref.typography.text-case.none}",
+                "textDecoration": "{ref.typography.text-decoration.none}"
+              },
               "type": "typography"
             },
-            "m": {
-              "value": "{sys.font.body.monospace-xs}",
+            "l": {
+              "value": {
+                "fontFamily": "{ref.typography.font-family.mono}",
+                "fontWeight": "{ref.typography.font-weight.400}",
+                "fontSize": "14",
+                "letterSpacing": "{ref.typography.letter-spacing.body}",
+                "paragraphSpacing": "{ref.typography.paragraph-spacing.0}",
+                "paragraphIndent": "",
+                "textCase": "{ref.typography.text-case.none}",
+                "textDecoration": "{ref.typography.text-decoration.none}",
+                "lineHeight": "20"
+              },
               "type": "typography"
             }
           }
@@ -8791,7 +8811,6 @@
         "comp.chip.font.size.s.label": "S:3063bcfc8f92b0c868eda92177da75d23f924b1f,",
         "comp.tag.font.size.m.label": "S:6c8457de5788a892abfec49456192c6fa7b4da12,",
         "comp.tag.font.size.s.label": "S:7e85f9fd8b3ea0ce7dd47d41c45d3b3ded2c86a5,",
-        "comp.badge.font.size.l": "S:6d7e89c29b512cd0c125354d901e03b5d7ae1bae,",
         "comp.badge.font.size.m": "S:1557c131103dfb021e7716309db51f78dd8c4c13,",
         "comp.dialog.font.title": "S:da2a6acf0c4bb16351af40cd9e0cede87fed5136,",
         "comp.code-tag.font.text": "S:39d8d6a073f88e1cd6d90ba0e1524badd591a69e,",
