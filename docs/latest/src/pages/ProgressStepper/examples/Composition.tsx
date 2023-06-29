@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import type { FC, CSSProperties } from 'react'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/progress-stepper'
 import '@sinch-engage/nectary/progress-stepper-item'
 import '@sinch-engage/nectary/button'
 import '@sinch-engage/nectary/checkbox'
 import '@sinch-engage/nectary/input'
+import '@sinch-engage/nectary/text'
+import '@sinch-engage/nectary/title'
 
 const layoutStyle: CSSProperties = {
   display: 'flex',
@@ -23,7 +25,7 @@ type TPage = {
 
 const Page: FC<TPage> = ({ label, description, isInvalid, onNext, onPrev, onInvalidToggle }) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, height: 256 }}>
       <sinch-text type="m">{description}</sinch-text>
       <sinch-input value="" placeholder={label} aria-label={label} invalid={isInvalid}/>
       <sinch-checkbox
@@ -32,8 +34,7 @@ const Page: FC<TPage> = ({ label, description, isInvalid, onNext, onPrev, onInva
         text="Toggle invalid"
         aria-label="Toggle invalid"
       />
-
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 'auto' }}>
         <sinch-button type="secondary" text="Prev" aria-label="Prev step" disabled={onPrev == null} on-click={onPrev}/>
         <sinch-button type="primary" text="Next" aria-label="Next step" disabled={onNext == null} on-click={onNext}/>
       </div>

@@ -4,7 +4,6 @@ import '@sinch-engage/nectary/progress-stepper-item'
 
 export const SimpleExample: FC = () => {
   return (
-
     <sinch-progress-stepper
       aria-label="Stepper"
       value="page3"
@@ -15,6 +14,5 @@ export const SimpleExample: FC = () => {
       <sinch-progress-stepper-item value="page3" text="Step 3" aria-label="Step 3"/>
       <sinch-progress-stepper-item value="page4" text="Step 4" aria-label="Step 4"/>
     </sinch-progress-stepper>
-
   )
 }
