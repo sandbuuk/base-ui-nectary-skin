@@ -1,6 +1,5 @@
 import {
   isProgressStepperItemActive,
-  isProgressStepperItemActiveDescendant,
   isProgressStepperItemChecked,
   setProgressStepperItemActiveDescendant,
   setProgressStepperItemChecked,
@@ -27,6 +26,8 @@ defineCustomElement('sinch-progress-stepper', class extends NectaryElement {
   #$slot: HTMLSlotElement
   #controller: AbortController | null = null
   #$items: HTMLElement[] = []
+  #currentActiveDescendantIndex = -1
+  #isGoingToFocusItem = false
 
   constructor() {
     super()
@@ -119,8 +120,10 @@ defineCustomElement('sinch-progress-stepper', class extends NectaryElement {
   #onOptionClick = (e: Event) => {
     const target = getTargetByAttribute(e, 'value')
 
-    if (target !== null) {
-      this.#dispatchChangeEvent(target)
+    if (target !== null && isProgressStepperItemActive(target)) {
+      this.dispatchEvent(new CustomEvent('-change', {
+        detail: getAttribute(target, 'value'),
+      }))
     }
   }
 
@@ -134,40 +137,21 @@ defineCustomElement('sinch-progress-stepper', class extends NectaryElement {
     this.#resetActiveDescendant()
   }
 
-  #dispatchChangeEvent($item: Element) {
-    if (!isProgressStepperItemActive($item)) {
-      return
-    }
-
-    this.dispatchEvent(
-      new CustomEvent('-change', { detail: getAttribute($item, 'value') })
-    )
-  }
-
-  #getActiveDescendantItemIndex() {
-    for (let i = 0; i < this.#$items.length; i++) {
-      if (isProgressStepperItemActiveDescendant(this.#$items[i])) {
-        return i
-      }
-    }
-
-    return -1
-  }
-
   #focusNextItem() {
-    const currentActiveDescendantIndex = this.#getActiveDescendantItemIndex()
-
-    if (currentActiveDescendantIndex >= 0) {
-      setProgressStepperItemActiveDescendant(this.#$items[currentActiveDescendantIndex], false)
-    }
-
     for (let i = 0; i < this.#$items.length; i++) {
-      const nextIndex = (currentActiveDescendantIndex + 1 + i) % this.#$items.length
+      const nextIndex = (this.#currentActiveDescendantIndex + 1 + i) % this.#$items.length
       const item = this.#$items[nextIndex]
 
       if (isProgressStepperItemActive(item)) {
         setProgressStepperItemActiveDescendant(item, true)
+        this.#isGoingToFocusItem = true
         item.focus()
+
+        if (this.#currentActiveDescendantIndex >= 0) {
+          setProgressStepperItemActiveDescendant(this.#$items[this.#currentActiveDescendantIndex], false)
+        }
+
+        this.#currentActiveDescendantIndex = nextIndex
 
         break
       }
@@ -175,19 +159,20 @@ defineCustomElement('sinch-progress-stepper', class extends NectaryElement {
   }
 
   #focusPrevItem() {
-    const currentActiveDescendantIndex = this.#getActiveDescendantItemIndex()
-
-    if (currentActiveDescendantIndex >= 0) {
-      setProgressStepperItemActiveDescendant(this.#$items[currentActiveDescendantIndex], false)
-    }
-
     for (let i = 0; i < this.#$items.length; i++) {
-      const nextIndex = (currentActiveDescendantIndex - i - 1 + this.#$items.length) % this.#$items.length
+      const nextIndex = (this.#currentActiveDescendantIndex - i - 1 + this.#$items.length) % this.#$items.length
       const item = this.#$items[nextIndex]
 
       if (isProgressStepperItemActive(item)) {
         setProgressStepperItemActiveDescendant(item, true)
+        this.#isGoingToFocusItem = true
         item.focus()
+
+        if (this.#currentActiveDescendantIndex >= 0) {
+          setProgressStepperItemActiveDescendant(this.#$items[this.#currentActiveDescendantIndex], false)
+        }
+
+        this.#currentActiveDescendantIndex = nextIndex
 
         break
       }
@@ -208,38 +193,48 @@ defineCustomElement('sinch-progress-stepper', class extends NectaryElement {
         setProgressStepperItemStatus($items[i], 'incomplete')
       }
     }
+
+    this.#resetActiveDescendant()
   }
 
-  #findCheckedItem() {
-    for (const $item of this.#$items) {
-      if (isProgressStepperItemChecked($item)) {
-        return $item
+  #getCheckedItemIndex(): number {
+    for (let i = 0; i < this.#$items.length; i++) {
+      if (isProgressStepperItemChecked(this.#$items[i])) {
+        return i
       }
     }
 
-    return null
+    return -1
   }
 
-  #findFirstActiveItem() {
-    for (const $item of this.#$items) {
-      if (isProgressStepperItemActive($item)) {
-        return $item
+  #getFirstActiveItemIndex(): number {
+    for (let i = 0; i < this.#$items.length; i++) {
+      if (isProgressStepperItemActive(this.#$items[i])) {
+        return i
       }
     }
 
-    return null
+    return -1
   }
 
   #resetActiveDescendant() {
     // Remove active-descendant
-    for (let i = 0; i < this.#$items.length;i++) {
-      setProgressStepperItemActiveDescendant(this.#$items[i], false)
+    if (this.#currentActiveDescendantIndex >= 0) {
+      setProgressStepperItemActiveDescendant(this.#$items[this.#currentActiveDescendantIndex], false)
     }
 
-    const $item = this.#findCheckedItem() ?? this.#findFirstActiveItem()
+    this.#currentActiveDescendantIndex = this.#getCheckedItemIndex()
 
-    if ($item !== null) {
-      setProgressStepperItemActiveDescendant($item, true)
+    if (this.#currentActiveDescendantIndex >= 0) {
+      setProgressStepperItemActiveDescendant(this.#$items[this.#currentActiveDescendantIndex], true)
+
+      return
+    }
+
+    this.#currentActiveDescendantIndex = this.#getFirstActiveItemIndex()
+
+    if (this.#currentActiveDescendantIndex >= 0) {
+      setProgressStepperItemActiveDescendant(this.#$items[this.#currentActiveDescendantIndex], true)
     }
   }
 
@@ -267,13 +262,11 @@ defineCustomElement('sinch-progress-stepper', class extends NectaryElement {
     }
   }
 
-  #onOptionBlur = (e: FocusEvent) => {
-    const tgt = e.relatedTarget
+  #onOptionBlur = () => {
+    if (this.#isGoingToFocusItem) {
+      this.#isGoingToFocusItem = false
 
-    for (let i = 0; i < this.#$items.length; i++) {
-      if (this.#$items[i] === tgt) {
-        return
-      }
+      return
     }
 
     this.#resetActiveDescendant()
