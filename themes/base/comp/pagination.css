@@ -1,14 +1,14 @@
 :root,
 :host {
-  --sinch-comp-pagination-color-default-background-initial: var(--sinch-sys-color-container-transparent-default);
+  --sinch-comp-pagination-color-checked-background-hover: var(--sinch-sys-color-container-transparent-active);
+  --sinch-comp-pagination-color-checked-background-initial: var(--sinch-sys-color-container-transparent-active);
   --sinch-comp-pagination-color-default-background-hover: var(--sinch-sys-color-container-transparent-hover);
-  --sinch-comp-pagination-color-default-text-initial: var(--sinch-sys-color-text-default);
+  --sinch-comp-pagination-color-default-background-initial: var(--sinch-sys-color-container-transparent-default);
   --sinch-comp-pagination-color-default-icon-default: var(--sinch-sys-color-text-default);
   --sinch-comp-pagination-color-default-outline-focus: var(--sinch-sys-color-border-focus);
+  --sinch-comp-pagination-color-default-text-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-pagination-color-disabled-icon-initial: var(--sinch-sys-color-text-disabled);
-  --sinch-comp-pagination-color-checked-background-initial: var(--sinch-sys-color-container-transparent-active);
-  --sinch-comp-pagination-color-checked-background-hover: var(--sinch-sys-color-container-transparent-active);
-  --sinch-comp-pagination-shape-radius: var(--sinch-sys-shape-radius-s);
-  --sinch-comp-pagination-font-default-page-number: var(--sinch-sys-font-body-m);
   --sinch-comp-pagination-font-checked-page-number: var(--sinch-sys-font-body-emphasize);
+  --sinch-comp-pagination-font-default-page-number: var(--sinch-sys-font-body-m);
+  --sinch-comp-pagination-shape-radius: var(--sinch-sys-shape-radius-s);
 }

@@ -1,15 +1,15 @@
 :root,
 :host {
-  --sinch-comp-link-color-default-text-initial: var(--sinch-sys-color-text-link);
-  --sinch-comp-link-color-default-text-hover: var(--sinch-sys-color-primary-active);
-  --sinch-comp-link-color-default-outline-focus: var(--sinch-sys-color-border-focus);
-  --sinch-comp-link-color-default-icon-initial: var(--sinch-sys-color-text-link);
   --sinch-comp-link-color-default-icon-hover: var(--sinch-sys-color-primary-active);
-  --sinch-comp-link-color-disabled-text-initial: var(--sinch-sys-color-text-link-disabled);
+  --sinch-comp-link-color-default-icon-initial: var(--sinch-sys-color-text-link);
+  --sinch-comp-link-color-default-outline-focus: var(--sinch-sys-color-border-focus);
+  --sinch-comp-link-color-default-text-hover: var(--sinch-sys-color-primary-active);
+  --sinch-comp-link-color-default-text-initial: var(--sinch-sys-color-text-link);
   --sinch-comp-link-color-disabled-icon-initial: var(--sinch-sys-color-text-link-disabled);
+  --sinch-comp-link-color-disabled-text-initial: var(--sinch-sys-color-text-link-disabled);
   --sinch-comp-link-default-font-initial: var(--sinch-sys-font-body-link);
-  --sinch-comp-link-default-text-decoration-initial: var(--sinch-ref-typography-text-decoration-underline);
-  --sinch-comp-link-default-text-decoration-hover: none;
   --sinch-comp-link-default-text-decoration-disabled: none;
+  --sinch-comp-link-default-text-decoration-hover: none;
+  --sinch-comp-link-default-text-decoration-initial: var(--sinch-ref-typography-text-decoration-underline);
   --sinch-comp-link-standalone-font-initial: var(--sinch-sys-font-body-emphasize);
 }
