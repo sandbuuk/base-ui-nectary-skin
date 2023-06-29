@@ -99,8 +99,9 @@
   --sinch-sys-font-body-link: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-16)/var(--sinch-ref-typography-line-height-24) var(--sinch-ref-typography-font-family-main);
   --sinch-sys-font-body-m: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-16)/var(--sinch-ref-typography-line-height-24) var(--sinch-ref-typography-font-family-main);
   --sinch-sys-font-body-monospace-m: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-16)/var(--sinch-ref-typography-line-height-24) var(--sinch-ref-typography-font-family-mono);
-  --sinch-sys-font-body-monospace-s: var(--sinch-ref-typography-font-weight-500) var(--sinch-ref-typography-font-size-14)/var(--sinch-ref-typography-line-height-16) var(--sinch-ref-typography-font-family-mono);
-  --sinch-sys-font-body-monospace-xs: var(--sinch-ref-typography-font-weight-500) var(--sinch-ref-typography-font-size-12)/var(--sinch-ref-typography-line-height-14) var(--sinch-ref-typography-font-family-mono);
+  --sinch-sys-font-body-monospace-s: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-14)/var(--sinch-ref-typography-line-height-22) var(--sinch-ref-typography-font-family-mono);
+  --sinch-sys-font-body-monospace-xs: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-12)/var(--sinch-ref-typography-line-height-20) var(--sinch-ref-typography-font-family-mono);
+  --sinch-sys-font-body-monospace-xxs: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-10)/var(--sinch-ref-typography-line-height-16) var(--sinch-ref-typography-font-family-mono);
   --sinch-sys-font-body-s: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-14)/var(--sinch-ref-typography-line-height-22) var(--sinch-ref-typography-font-family-main);
   --sinch-sys-font-body-xs: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-12)/var(--sinch-ref-typography-line-height-20) var(--sinch-ref-typography-font-family-main);
   --sinch-sys-font-body-xxs: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-10)/var(--sinch-ref-typography-line-height-16) var(--sinch-ref-typography-font-family-main);

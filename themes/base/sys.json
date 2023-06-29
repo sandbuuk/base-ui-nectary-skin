@@ -154,8 +154,9 @@
       "link": "400 16px/24px \"DM Sans\", \"Arial\", sans-serif",
       "m": "400 16px/24px \"DM Sans\", \"Arial\", sans-serif",
       "monospace-m": "400 16px/24px \"DM Mono\", monospace",
-      "monospace-s": "500 14px/16px \"DM Mono\", monospace",
-      "monospace-xs": "500 12px/14px \"DM Mono\", monospace",
+      "monospace-s": "400 14px/22px \"DM Mono\", monospace",
+      "monospace-xs": "400 12px/20px \"DM Mono\", monospace",
+      "monospace-xxs": "400 10px/16px \"DM Mono\", monospace",
       "s": "400 14px/22px \"DM Sans\", \"Arial\", sans-serif",
       "xs": "400 12px/20px \"DM Sans\", \"Arial\", sans-serif",
       "xxs": "400 10px/16px \"DM Sans\", \"Arial\", sans-serif"
