@@ -112,6 +112,7 @@
 #progress {
   height: 8px;
   border-radius: 4px;
+  transition: background-color 0.25s ease-in-out;
 }
 
 :host([data-status="incomplete"]) #progress {
@@ -135,7 +136,7 @@
   height: 8px;
   border-radius: 4px;
   opacity: 0;
-  transition: width 0.25s ease-in-out;
+  transition: width 0.25s ease-in-out, opacity 0.25s ease-in-out;
 }
 
 :host([data-status="incomplete"]) #bar {
