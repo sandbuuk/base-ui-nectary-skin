@@ -24,10 +24,15 @@ export const ProgressStepper: FC<TProgressStepper> = ({ search }) => {
     return (
       <sinch-progress-stepper
         aria-label="Stepper"
-        value=""
+        value={step}
         progressValue={progressValue}
       >
-        <sinch-progress-stepper-item value="1" invalid={invalidValue !== null} text="Shipping address" aria-label="1"/>
+        <sinch-progress-stepper-item
+          value="1"
+          invalid={invalidValue !== null}
+          text="Shipping address"
+          aria-label="1"
+        />
       </sinch-progress-stepper>
     )
   }
