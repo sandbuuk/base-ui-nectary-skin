@@ -137,7 +137,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   connectedCallback() {
     this.#controller = new AbortController()
 
-    const options = {
+    const options: AddEventListenerOptions = {
       signal: this.#controller.signal,
     }
 
