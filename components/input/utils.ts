@@ -25,6 +25,8 @@ const EMPTY_CHAR = ' '
 const MASK_MODE_DIGIT: TSInchInputMaskSymbolModeDigit = 0
 const MASK_MODE_LETTER: TSInchInputMaskSymbolModeLetter = 1
 const MASK_MODE_EXACT: TSInchInputMaskSymbolModeExact = 2
+const MASK_PLACEHOLDER_DELIMITER = '@@'
+const MASK_PLACEHOLDER = '_'
 
 const testMaskedValue = (maskSymbol: TSinchInputMaskSymbol, inputChar: string): boolean => {
   switch (maskSymbol.mode) {
@@ -42,43 +44,38 @@ const testMaskedValue = (maskSymbol: TSinchInputMaskSymbol, inputChar: string): 
 const isExactMode = (maskSymbol: TSinchInputMaskSymbol) => maskSymbol.mode === MASK_MODE_EXACT
 const isEmptyChar = (char: string) => char === EMPTY_CHAR
 
-export const getMaskSymbols = (mask: string, placeholder: string | null): TSinchInputMaskSymbol[] => {
+export const getMaskSymbols = (maskValue: string): TSinchInputMaskSymbol[] => {
   const res: TSinchInputMaskSymbol[] = []
+  const [mask, placeholder] = maskValue.split(MASK_PLACEHOLDER_DELIMITER)
   const maskSymbols = [...mask]
-  const placeholderChars = placeholder !== null ? [...placeholder] : []
-  const shouldUseExternalPlaceholder = placeholderChars.length === maskSymbols.length
+  const placeholderChars = placeholder != null ? [...placeholder] : []
 
-  for (let i = 0; i < maskSymbols.length;i++) {
-    if (isEmptyChar(maskSymbols[i])) {
-      throw new Error('Sinch masked input does not support spaces in mask')
-    }
-
-    if (maskSymbols[i] === '\\') {
+  for (let maskIndex = 0, placeholderIndex = 0; maskIndex < maskSymbols.length; maskIndex++, placeholderIndex++) {
+    if (maskSymbols[maskIndex] === '\\') {
+      maskIndex += 1
       res.push({
-        value: maskSymbols[i + 1],
+        value: maskSymbols[maskIndex],
         mode: MASK_MODE_EXACT,
-        placeholder: shouldUseExternalPlaceholder ? placeholderChars[i] : maskSymbols[i + 1],
+        placeholder: placeholderChars[placeholderIndex] ?? maskSymbols[maskIndex],
       })
-
-      i += 1
 
       continue
     }
 
-    if (maskSymbols[i] === MASK_SYMBOL_LETTER || maskSymbols[i] === MASK_SYMBOL_DIGIT) {
+    if (maskSymbols[maskIndex] === MASK_SYMBOL_LETTER || maskSymbols[maskIndex] === MASK_SYMBOL_DIGIT) {
       res.push({
-        value: maskSymbols[i],
-        mode: maskSymbols[i] === MASK_SYMBOL_LETTER ? MASK_MODE_LETTER : MASK_MODE_DIGIT,
-        placeholder: shouldUseExternalPlaceholder ? placeholderChars[i] : '_',
+        value: maskSymbols[maskIndex],
+        mode: maskSymbols[maskIndex] === MASK_SYMBOL_LETTER ? MASK_MODE_LETTER : MASK_MODE_DIGIT,
+        placeholder: placeholderChars[placeholderIndex] ?? MASK_PLACEHOLDER,
       })
 
       continue
     }
 
     res.push({
-      value: maskSymbols[i],
+      value: maskSymbols[maskIndex],
       mode: MASK_MODE_EXACT,
-      placeholder: shouldUseExternalPlaceholder ? placeholderChars[i] : maskSymbols[i],
+      placeholder: placeholderChars[placeholderIndex] ?? maskSymbols[maskIndex],
     })
   }
 
@@ -164,12 +161,22 @@ const getMergedValue = (chars: readonly string[], maskSymbols: readonly TSinchIn
   return res.join('')
 }
 
+const findLastNonEmptyCharIndex = (chars: readonly string[]) => {
+  for (let i = chars.length - 1; i >= 0; i--) {
+    if (!isEmptyChar(chars[i])) {
+      return i
+    }
+  }
+
+  return -1
+}
+
 const compileResult = (chars: string[], maskSymbols: readonly TSinchInputMaskSymbol[], cursorPos: number) => {
   if (chars.length > maskSymbols.length) {
     chars.length = maskSymbols.length
   }
 
-  let lastEmptyPos = chars.findLastIndex((c) => !isEmptyChar(c)) + 1
+  let lastEmptyPos = findLastNonEmptyCharIndex(chars) + 1
 
   while (lastEmptyPos < maskSymbols.length && isExactMode(maskSymbols[lastEmptyPos])) {
     ++lastEmptyPos
@@ -397,7 +404,7 @@ export const insertFromPaste = (inputValue: string, data: string, maskSymbols: r
   return compileResult(chars, maskSymbols, cursorPos)
 }
 
-export const splitValueAndMask = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[]): Pick<TSinchMaskInputResult, 'value' | 'placeholder'> => {
+export const splitValueAndMask = (inputValue: string, maskSymbols: readonly TSinchInputMaskSymbol[]): TSinchMaskInputResult => {
   const chars = getCharsFromInputValue('', maskSymbols)
   const dataChars = getCharsFromInputValue(inputValue, maskSymbols)
   let cursorPos = 0

@@ -155,10 +155,12 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
         // Was it previously cleared by Incomplete Mask input
         // Dont touch the input, which currently has partially filled value
-        if (this.#wasClearedByMask && nextVal.length === 0) {
+        if (this.#wasClearedByMask) {
           this.#wasClearedByMask = false
 
-          break
+          if (nextVal.length === 0) {
+            break
+          }
         }
 
         if (this.#maskSymbols !== null) {
@@ -186,10 +188,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       }
 
       case 'mask': {
-        // Wait for placeholder attribute
-        queueMicrotask(() => {
-          this.#updateMask()
-        })
+        this.#updateMask()
 
         break
       }
@@ -477,6 +476,28 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     }
   }
 
+  #onMaskInputAutofillChange = () => {
+    const nextVal = this.#$input.value
+
+    if (this.#maskSymbols !== null) {
+      const { value, placeholder, mergedValue, cursorPos } = splitValueAndMask(nextVal, this.#maskSymbols)
+
+      this.#$input.value = value
+      this.#$input.setSelectionRange(cursorPos, cursorPos)
+      this.#$inputMask.textContent = placeholder
+
+      if (mergedValue.length > 0) {
+        this.#selectionStart = cursorPos
+        this.#selectionEnd = cursorPos
+        this.#dispatchChangeEvent(mergedValue)
+      } else {
+        // Dispatch clear event
+        this.#wasClearedByMask = true
+        this.#dispatchChangeEvent('')
+      }
+    }
+  }
+
   #onCopy = (e: ClipboardEvent) => {
     const value = this.#$input.value
     const selectionStart = this.#$input.selectionStart ?? 0
@@ -623,9 +644,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       // Subscribe once, so only if the mask disabled before
       if (this.#maskSymbols === null) {
         this.#$input.addEventListener('beforeinput', this.#onMaskBeforeInput, { signal: this.#controller!.signal })
+        this.#$input.addEventListener('change', this.#onMaskInputAutofillChange, { signal: this.#controller!.signal })
       }
 
-      this.#maskSymbols = getMaskSymbols(this.mask, this.placeholder)
+      this.#maskSymbols = getMaskSymbols(this.mask)
 
       const { value, placeholder } = splitValueAndMask(this.#$input.value, this.#maskSymbols)
 
@@ -634,6 +656,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     } else {
       this.#maskSymbols = null
       this.#$input.removeEventListener('beforeinput', this.#onMaskBeforeInput)
+      this.#$input.removeEventListener('change', this.#onMaskInputAutofillChange)
     }
 
     this.#updatePlaceholder()
