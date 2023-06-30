@@ -38,8 +38,7 @@ export const MaskedExample: FC = () => {
         <sinch-input
           slot="input"
           aria-label="Input"
-          mask="00-00-0000"
-          placeholder="dd/mm/yyyy"
+          mask="00-00-0000@@dd/mm/yyyy"
           value={dateState}
           on-change={(e) => {
             console.log('DATE', e.detail)

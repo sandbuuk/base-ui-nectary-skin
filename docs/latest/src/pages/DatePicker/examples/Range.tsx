@@ -8,32 +8,32 @@ import '@sinch-engage/nectary/date-picker'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary-assets/icons/calendar-today'
 
-const inputStyles: CSSProperties = {
+const styles: CSSProperties = {
   width: 300,
 }
+
+const reverseDateValue = (value: string) => value.split('-').reverse().join('-')
 
 export const RangeExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
   const [inputValue, setInputValue] = useState('')
-  const [datePickerValue, setDatePickerValue] = useState('')
+  const [pickerValue, setPickerValue] = useState('')
 
   const onInputChange = (e: CustomEvent<string>) => {
     setInputValue(e.detail)
   }
-  const onDatePickerChange = (e: CustomEvent<string>) => {
-    const [date1, date2] = unpackCsv(e.detail)
-    const inputDate1 = date1.split('-').reverse().join('.')
-    const inputDate2 = date2.split('-').reverse().join('.')
+  const onPickerChange = (e: CustomEvent<string>) => {
+    const dates = unpackCsv(e.detail).map(reverseDateValue)
 
-    setInputValue(`${inputDate1} / ${inputDate2}`)
+    setInputValue(dates.join(' / '))
     setOpen(false)
   }
   const onOpen = () => {
     const [inputDate1 = '', inputDate2 = ''] = inputValue.split(' / ')
-    const date1 = inputDate1.split('.').reverse().join('-')
-    const date2 = inputDate2.split('.').reverse().join('-')
+    const date1 = reverseDateValue(inputDate1)
+    const date2 = reverseDateValue(inputDate2)
 
-    setDatePickerValue(packCsv([date1, date2]))
+    setPickerValue(packCsv([date1, date2]))
     setOpen(true)
   }
   const onClose = () => setOpen(false)
@@ -50,13 +50,12 @@ export const RangeExample: FC = () => {
         slot="target"
         label="Date picker"
         additionalText="Additional text"
+        style={styles}
       >
         <sinch-input
           slot="input"
           aria-label="Pick date"
-          mask="00.00.0000 / 00.00.0000"
-          placeholder="DD.MM.YYYY / DD.MM.YYYY"
-          style={inputStyles}
+          mask="00-00-0000 / 00-00-0000@@DD/MM/YYYY / DD/MM/YYYY"
           value={inputValue}
           on-change={onInputChange}
         >
@@ -81,8 +80,8 @@ export const RangeExample: FC = () => {
         next-year-aria-label="Next Year"
         prev-year-aria-label="Prev Year"
         range
-        value={datePickerValue}
-        on-change={onDatePickerChange}
+        value={pickerValue}
+        on-change={onPickerChange}
       />
     </sinch-popover>
   )

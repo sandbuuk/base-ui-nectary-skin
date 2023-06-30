@@ -7,9 +7,11 @@ import '@sinch-engage/nectary/date-picker'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary-assets/icons/calendar-today'
 
-const inputStyles: CSSProperties = {
+const styles: CSSProperties = {
   width: 300,
 }
+
+const reverseDateValue = (value: string) => value.split('-').reverse().join('-')
 
 export const CompositionExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
@@ -17,21 +19,16 @@ export const CompositionExample: FC = () => {
   const [datePickerValue, setDatePickerValue] = useState('')
 
   const onInputChange = (e: CustomEvent<string>) => {
-    console.log('INPUT_CHANGE', e.detail)
     setInputValue(e.detail)
   }
   const onDatePickerChange = (e: CustomEvent<string>) => {
-    console.log('DATE_CHANGE', e.detail)
-
-    const inputValue = e.detail.split('-').reverse().join('.')
+    const inputValue = reverseDateValue(e.detail)
 
     setInputValue(inputValue)
     setOpen(false)
   }
   const onOpen = () => {
-    const datePickerValue = inputValue.split('.').reverse().join('-')
-
-    console.log('OPEN_DATE_PICKER', datePickerValue)
+    const datePickerValue = reverseDateValue(inputValue)
 
     setDatePickerValue(datePickerValue)
     setOpen(true)
@@ -50,13 +47,12 @@ export const CompositionExample: FC = () => {
         slot="target"
         label="Date picker"
         additionalText="Additional text"
+        style={styles}
       >
         <sinch-input
           slot="input"
-          style={inputStyles}
           aria-label="Pick date"
-          mask="00.00.0000"
-          placeholder="dd.mm.yyyy"
+          mask="00-00-0000@@DD/MM/YYYY"
           value={inputValue}
           on-change={onInputChange}
         >

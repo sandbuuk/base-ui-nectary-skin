@@ -1,6 +1,5 @@
 import { countries } from '@sinch-engage/nectary/utils/countries'
 import { useState } from 'react'
-import type { TSinchInputClipboardEvent } from '@sinch-engage/nectary/input/types'
 import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/input'
@@ -22,25 +21,11 @@ export const CompositionExample: FC = () => {
   const onClose = () => setIsOpen(false)
   const onOpen = () => setIsOpen(true)
   const onMenuChange = (e: CustomEvent<string>) => {
-    const country = e.detail
-
     onClose()
-    setMenuValue(country)
+    setMenuValue(e.detail)
   }
   const onInputChange = (e: CustomEvent<string>) => {
     setInputValue(e.detail)
-  }
-  const onInputPaste = (e: TSinchInputClipboardEvent) => {
-    let value = e.detail.value
-
-    if (value.startsWith('+46') || value.startsWith('0')) {
-      value = value.substring(value.length - 9)
-      setMenuValue('se')
-    }
-
-    if (value !== e.detail.value) {
-      e.detail.replaceWith(value)
-    }
   }
   const phoneCode = countries[menuValue]?.phoneCode ?? ''
   const phoneMask = countries[menuValue]?.phoneMask ?? undefined
@@ -57,11 +42,10 @@ export const CompositionExample: FC = () => {
         slot="target"
         aria-label="Phone number"
         mask={phoneMask}
-        placeholder={phoneMask == null ? 'Phone Input' : undefined}
+        placeholder="Phone Number"
         value={inputValue}
         style={inputStyles}
         on-change={onInputChange}
-        on-paste={onInputPaste}
       >
         <sinch-select-button
           slot="left"
