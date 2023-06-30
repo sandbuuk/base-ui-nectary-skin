@@ -35,6 +35,7 @@
     <PhoneCodeMenu v-if="url.pathname === '/phone-code-menu'" :search="url.searchParams"/>
     <Popover v-if="url.pathname === '/popover'" :search="url.searchParams"/>
     <Progress v-if="url.pathname === '/progress'" :search="url.searchParams"/>
+    <ProgressStepper v-if="url.pathname === '/progress-stepper'" :search="url.searchParams"/>
     <Radio v-if="url.pathname === '/radio'" :search="url.searchParams"/>
     <RichText v-if="url.pathname === '/rich-text'" :search="url.searchParams"/>
     <Search v-if="url.pathname === '/search'" :search="url.searchParams"/>
@@ -61,7 +62,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary-theme-base/index'
+import '@sinch-engage/nectary-theme-base/index.css'
 import Accordion from './components/Accordion.vue'
 import ActionDropdown from './components/ActionDropdown.vue'
 import ActionMenu from './components/ActionMenu.vue'
@@ -97,6 +98,7 @@ import Pagination from './components/Pagination.vue'
 import PhoneCodeMenu from './components/PhoneCodeMenu.vue'
 import Popover from './components/Popover.vue'
 import Progress from './components/Progress.vue'
+import ProgressStepper from './components/ProgressStepper.vue'
 import Radio from './components/Radio.vue'
 import RichText from './components/RichText.vue'
 import Search from './components/Search.vue'
@@ -184,6 +186,7 @@ export default {
     PhoneCodeMenu,
     Popover,
     Progress,
+    ProgressStepper,
     Radio,
     RichText,
     Search,

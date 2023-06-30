@@ -3,7 +3,9 @@ ESLint plugin to check and autofix missing/redundant Nectary component imports.
 ## Install
 
 ```
-npm add @sinch-engage/eslint-plugin-nectary
+npm add @sinch-engage/eslint-plugin-nectary --save-dev
+yarn add @sinch-engage/eslint-plugin-nectary --dev
+pnpm add @sinch-engage/eslint-plugin-nectary --save-dev
 ```
 
 ## Config

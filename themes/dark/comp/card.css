@@ -1,5 +1,5 @@
 :root,
 :host {
-  --sinch-comp-card-color-white-default-border-initial: transparent;
   --sinch-comp-card-color-white-default-background-initial: var(--sinch-sys-color-container-contrast-secondary-default);
+  --sinch-comp-card-color-white-default-border-initial: transparent;
 }

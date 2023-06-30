@@ -1,8 +1,8 @@
 :root,
 :host {
   --sinch-comp-textarea-color-default-background-initial: var(--sinch-sys-color-container-main-default);
-  --sinch-comp-textarea-color-default-border-initial: var(--sinch-sys-color-border-dark);
   --sinch-comp-textarea-color-default-border-focus: var(--sinch-sys-color-border-focus);
+  --sinch-comp-textarea-color-default-border-initial: var(--sinch-sys-color-border-dark);
   --sinch-comp-textarea-color-default-text-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-textarea-color-default-text-placeholder: var(--sinch-sys-color-text-muted);
   --sinch-comp-textarea-color-disabled-border-initial: var(--sinch-sys-color-border-disabled);
