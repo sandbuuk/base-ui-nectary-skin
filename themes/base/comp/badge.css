@@ -3,7 +3,7 @@
   --sinch-comp-badge-color-background: var(--sinch-sys-color-status-busy-contrast);
   --sinch-comp-badge-color-border: var(--sinch-sys-color-border-light);
   --sinch-comp-badge-color-text: var(--sinch-sys-color-text-inverted);
-  --sinch-comp-badge-font-size-l: var(--sinch-sys-font-body-monospace-s);
-  --sinch-comp-badge-font-size-m: var(--sinch-sys-font-body-monospace-xs);
+  --sinch-comp-badge-font-size-l: var(--sinch-ref-typography-font-weight-400) 14px/20px var(--sinch-ref-typography-font-family-mono);
+  --sinch-comp-badge-font-size-m: var(--sinch-ref-typography-font-weight-400) 12px/14px var(--sinch-ref-typography-font-family-mono);
   --sinch-comp-badge-shape-radius: var(--sinch-sys-shape-radius-full);
 }
