@@ -6788,6 +6788,168 @@
           "value": "{sys.shape-radius.l}",
           "type": "borderRadius"
         }
+      },
+      "progress-stepper": {
+        "step": {
+          "color": {
+            "inactive": {
+              "label": {
+                "default": {
+                  "value": "{sys.color.text.disabled}",
+                  "type": "color"
+                }
+              },
+              "progress": {
+                "background": {
+                  "value": "{sys.color.container.contrast.secondary.default}",
+                  "type": "color"
+                }
+              }
+            },
+            "incomplete": {
+              "label": {
+                "default": {
+                  "value": "{sys.color.text.muted}",
+                  "type": "color"
+                }
+              },
+              "background": {
+                "hover": {
+                  "value": "{sys.color.container.transparent.hover}",
+                  "type": "color"
+                }
+              },
+              "progress": {
+                "background": {
+                  "value": "{sys.color.container.contrast.secondary.default}",
+                  "type": "color"
+                },
+                "bar": {
+                  "value": "{sys.color.primary.default}",
+                  "type": "color"
+                }
+              }
+            },
+            "incomplete-current": {
+              "label": {
+                "default": {
+                  "value": "{sys.color.text.default}",
+                  "type": "color"
+                }
+              }
+            },
+            "complete": {
+              "label": {
+                "default": {
+                  "value": "{sys.color.text.muted}",
+                  "type": "color"
+                }
+              },
+              "background": {
+                "hover": {
+                  "value": "{sys.color.container.transparent.hover}",
+                  "type": "color"
+                }
+              },
+              "progress": {
+                "background": {
+                  "value": "{sys.color.container.contrast.secondary.default}",
+                  "type": "color"
+                },
+                "bar": {
+                  "value": "{sys.color.primary.default}",
+                  "type": "color"
+                }
+              }
+            },
+            "complete-current": {
+              "label": {
+                "default": {
+                  "value": "{sys.color.text.default}",
+                  "type": "color"
+                }
+              }
+            },
+            "invalid": {
+              "label": {
+                "default": {
+                  "value": "{sys.color.text.invalid}",
+                  "type": "color"
+                }
+              },
+              "background": {
+                "hover": {
+                  "value": "{sys.color.container.transparent.hover}",
+                  "type": "color"
+                }
+              },
+              "progress": {
+                "background": {
+                  "value": "{sys.color.feedback.invalid.background}",
+                  "type": "color"
+                }
+              },
+              "icon": {
+                "default": {
+                  "value": "{sys.color.feedback.invalid.contrast}",
+                  "type": "color"
+                }
+              }
+            },
+            "outline-focus": {
+              "value": "{sys.color.border.focus}",
+              "type": "color"
+            }
+          },
+          "shape-radius": {
+            "value": "{sys.shape-radius.m}",
+            "type": "borderRadius"
+          },
+          "font": {
+            "inactive": {
+              "label": {
+                "value": "{sys.font.body.m}",
+                "type": "typography"
+              }
+            },
+            "complete": {
+              "label": {
+                "value": "{sys.font.body.m}",
+                "type": "typography"
+              }
+            },
+            "incomplete": {
+              "label": {
+                "value": "{sys.font.body.m}",
+                "type": "typography"
+              }
+            },
+            "invalid": {
+              "label": {
+                "value": "{sys.font.body.m}",
+                "type": "typography"
+              }
+            },
+            "invalid-current": {
+              "label": {
+                "value": "{sys.font.body.emphasize}",
+                "type": "typography"
+              }
+            },
+            "complete-current": {
+              "label": {
+                "value": "{sys.font.body.emphasize}",
+                "type": "typography"
+              }
+            },
+            "incomplete-current": {
+              "label": {
+                "value": "{sys.font.body.emphasize}",
+                "type": "typography"
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -9040,7 +9202,76 @@
         "comp.card.color.gray.default.background.initial": "S:1238ad0cc882517cbf85a7694b3c49050d522e48,",
         "comp.card.color.white.default.border.initial": "S:10c3b3cf633239e502d683dbc6b37f59ac29837c,",
         "comp.card.color.white.default.title.initial": "S:18038e4d5119caacde7a845c5ea666545516e61b,",
-        "comp.card.color.white.default.description.initial": "S:49e47cc0b7e24dde780cf22fcba49c056fd499fd,"
+        "comp.card.color.white.default.description.initial": "S:49e47cc0b7e24dde780cf22fcba49c056fd499fd,",
+        "comp.horizontal-stepper.color.current.background.initial": "S:7463a7eb41d872390dc636704fee28fa32f35898,",
+        "comp.horizontal-stepper.color.current.text.initial": "S:d7c665ea3e250422291b603db250aef8ea1a1a17,",
+        "comp.horizontal-stepper.color.current.label.initial": "S:1e7e6d6a1e052d5a62ad5aa3ac78b6dc186c380a,",
+        "comp.horizontal-stepper.color.current.border.initial": "S:2de9d4c9678b4436f5138d76c6453c2c6479ce43,",
+        "comp.horizontal-stepper.color.completed.background.initial": "S:8c19e30748c48e293cee350c3093f3b2460f8691,",
+        "comp.horizontal-stepper.color.completed.text.initial": "S:95a76cc02dc099f45c5a494fd3cb3ba851e2ca6b,",
+        "comp.horizontal-stepper.color.completed.label.initial": "S:cd5057254297932959b38324ed9587a65de125d7,",
+        "comp.horizontal-stepper.color.completed.border.initial": "S:538ce07ca01173873c896148e295b90975e6257c,",
+        "comp.horizontal-stepper.color.upcoming.background.initial": "S:0394988b9a28c18d95d920d760c001de46a55be4,",
+        "comp.horizontal-stepper.color.upcoming.text.initial": "S:4bc005eec136124ac273289f000eaa0ef876f47e,",
+        "comp.horizontal-stepper.color.upcoming.label.initial": "S:75ec72d6ddf433133eefdc8c83ff079891dd0764,",
+        "comp.horizontal-stepper.color.upcoming.border.initial": "S:d84aff24f0a4c23678a22fe862b8f60f63f708c9,",
+        "comp.horizontal-stepper.color.visited.background.initial": "S:a75bee2854cceb54d797b543022cd760ad9710b1,",
+        "comp.horizontal-stepper.color.visited.text.initial": "S:86542695d9719e2d10c04863845c32a20f714f09,",
+        "comp.horizontal-stepper.color.visited.label.initial": "S:92a045b107ecb993f20f367e15e981c4fd12c6d4,",
+        "comp.horizontal-stepper.color.visited.border.initial": "S:2ac5749d052c272ddbe9e8d4f5bd1fb2224e2450,",
+        "comp.horizontal-stepper.color.error.background.initial": "S:0c66ee5a39743ec1b079001b7bf712c676cd9f7d,",
+        "comp.horizontal-stepper.color.error.text.initial": "S:1adf75ab03452b4150db8c475083e0ad6123c2c9,",
+        "comp.horizontal-stepper.color.error.label.initial": "S:98eb85242dbd852001dbf87b7fd5d76ecba450fa,",
+        "comp.horizontal-stepper.color.error.border.initial": "S:cff474f1f23746d5f6bf7c0c6215b370c93c6766,",
+        "sys.font.body.emphasize-xs": "S:871918dc2e244f82cf678daac0b136fa902550a4,",
+        "comp.select-menu.font.not-found-text": "S:df10169520c28e87f909868abb4b8e1ecdbf40e8,",
+        "comp.horizontal-stepper.font.step": "S:862a98b4589a569f3869e9a203bdda61eba11d50,",
+        "comp.horizontal-stepper.font.label": "S:5f4fff436d7f87372b01d5501efbb30043becdb6,",
+        "comp.icon-button.shadow.primary.initial": "S:a17dbbed5865a06a9d88bf8375ce8220dc053836,",
+        "comp.icon-button.shadow.primary.focus": "S:5c494febba9baeebea257b159d1c328540f411f9,",
+        "comp.icon-button.shadow.primary.hover": "S:49f8c0c2b4481c4a87cd4e6f29494566a71d51ce,",
+        "comp.icon-button.shadow.primary.active": "S:6403c7629291dc41c2d2e4783795e397020ed6d2,",
+        "comp.icon-button.shadow.primary.disabled": "S:8d0d0375cb37c60b26aac4b7164c00b2dc049f7e,",
+        "comp.icon-button.shadow.secondary.initial": "S:2e1494fc984a82c8d63429e490af54d2c847bb4d,",
+        "comp.icon-button.shadow.secondary.focus": "S:9733b107b2a4ccf2be3eff2f1df5edfcff33177c,",
+        "comp.icon-button.shadow.secondary.hover": "S:4f4ba5ad449220f05d09ca47ca82cf7c113059d3,",
+        "comp.icon-button.shadow.secondary.active": "S:b9407154cdb8fc5384fb19858d3c3497b8b83d97,",
+        "comp.icon-button.shadow.secondary.disabled": "S:3f45658b10d048d42762696661689c8a96615bed,",
+        "comp.icon-button.shadow.tertiary.initial": "S:b973e48802cbf05c6984fa5b537f0e986a9955c4,",
+        "comp.icon-button.shadow.tertiary.focus": "S:bc0b7415c54a90f2d222fe45c50a9969464099e1,",
+        "comp.icon-button.shadow.tertiary.hover": "S:43b0564dbefa3f911088c88b62d6479cbb284640,",
+        "comp.icon-button.shadow.tertiary.active": "S:02523d5b6cf02d5b3fd644bf7a5a756f7b4e68c5,",
+        "comp.icon-button.shadow.tertiary.disabled": "S:5fa47526a16ff4253972a14ef7351f3c04f1ab1c,",
+        "comp.toggle.shadow.knob.disabled": "S:95a2391a847db7631f2cbc4d3051b9307d706b4a,",
+        "comp.toggle.shadow.knob.default": "S:caed24038929cb97d924ddcc124c686248b9933f,",
+        "comp.progress-stepper.step.color.inactive.label.default": "S:e1b683fbcfc630b68202b49ac0dfa443c362b88b,",
+        "comp.progress-stepper.step.color.incomplete.label.default": "S:302e323e5483a6a8170d6281b3f71c4590106a4d,",
+        "comp.progress-stepper.step.color.incomplete-current.label.default": "S:f551f287e493f5b1ae8e562e58d8b279c4b7fcae,",
+        "comp.progress-stepper.step.color.incomplete.background.hover": "S:122f353823cf4bab56eaf3f4b62ac496e4171508,",
+        "comp.progress-stepper.step.color.inactive.progress.background": "S:f725eab15970fc522adc5c7e1ffbfadf171d40a5,",
+        "comp.progress-stepper.step.color.incomplete.progress.background": "S:584b243844a73324ee8c9b466b20e951690401de,",
+        "comp.progress-stepper.step.color.incomplete.progress.bar": "S:cc72ec499f12f76cfd23202dfe19b201003f77b7,",
+        "comp.progress-stepper.step.color.complete.label.default": "S:a50064e7df9db5cfba0bc6c039df2de1da2d51b6,",
+        "comp.progress-stepper.step.color.complete.background.hover": "S:32b7d018f81451776eccaf530ef1ff358ca136d7,",
+        "comp.progress-stepper.step.color.complete.progress.background": "S:dff221c34299c921d9d72af757ce7f14a4a9f17a,",
+        "comp.progress-stepper.step.color.complete.progress.bar": "S:47d648d2712924dbfbf4d0354396d4d8d4d0662a,",
+        "comp.progress-stepper.step.color.complete-current.label.default": "S:756f1518a164d958da066a0d1f434941cb6f1992,",
+        "comp.progress-stepper.step.color.invalid.label.default": "S:50b0a0e6182124b89722c2099715e83f387e6206,",
+        "comp.progress-stepper.step.color.invalid.background.hover": "S:0442cc91a5620656f44d871da445d071f10a10fa,",
+        "comp.progress-stepper.step.color.invalid.progress.background": "S:a9c099c64521cebbf5e857bb693c0652861bcb05,",
+        "comp.progress-stepper.step.color.invalid.icon.default": "S:27d667e42dda38908860405e0a81ccb7612939e0,",
+        "comp.progress-stepper.title.default": "S:aa5c01f3685723437d5b1fdafa60a75747bca331,",
+        "comp.progress-stepper.description.default": "S:2a59ed8eb33bd4a736c95c3cf67cd07849195e0f,",
+        "comp.progress-stepper.step.font.inactive.label": "S:240fc9170ce82b3bbac3ce0fccb2111b16d69267,",
+        "comp.progress-stepper.step.font.complete.label": "S:5f84db44f9d3b17bca6aea0617f7a35fa0890a47,",
+        "comp.progress-stepper.step.font.incomplete.label": "S:a5fd934285b7c7b56fa4124df4ff81cce2e712fc,",
+        "comp.progress-stepper.step.font.invalid.label": "S:e04fbafc98c9110d8f18945b952c757da1448371,",
+        "comp.progress-stepper.step.font.invalid-current.label": "S:0c639883777062a31d5306b7a2293265bc1550a0,",
+        "comp.progress-stepper.step.font.complete-current.label": "S:e246e2f85d0ae52c5346c51ce0d09a9c03436ce3,",
+        "comp.progress-stepper.step.font.incomplete-current.label": "S:d45015c16e386a67808a267cb4ad45292a5590f2,",
+        "comp.progress-stepper.step.color.outline-focus": "S:850d923d7e06b08ffb28254809bfecc1967da1ac,",
+        "comp.progress-stepper.title.font": "S:4cf85aaae00e8412005a48938db1f57890cc1aa3,",
+        "comp.progress-stepper.description.font": "S:753339ad3179f7e5b36c82c09176fd521e53d18b,"
       }
     },
     {

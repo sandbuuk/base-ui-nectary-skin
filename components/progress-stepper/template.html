@@ -1,0 +1,19 @@
+<style>
+:host {
+  display: block;
+}
+
+#wrapper {
+  display: flex;
+  width: 100%;
+}
+
+::slotted(sinch-progress-stepper-item) {
+  flex: 1;
+  min-width: 0;
+}
+</style>
+
+<div id="wrapper">
+  <slot></slot>
+</div>

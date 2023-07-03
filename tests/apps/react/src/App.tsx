@@ -38,6 +38,7 @@ import { PhoneCodeMenu } from './components/PhoneCodeMenu'
 import { PhoneCodeSelect } from './components/PhoneCodeSelect'
 import { Popover } from './components/Popover'
 import { Progress } from './components/Progress'
+import { ProgressStepper } from './components/ProgressStepper'
 import { Radio } from './components/Radio'
 import { RichText } from './components/RichText'
 import { Search } from './components/Search'
@@ -302,6 +303,12 @@ const mapElement = (url: URL) => {
     case '/progress': {
       return (
         <Progress search={url.searchParams}/>
+      )
+    }
+
+    case '/progress-stepper': {
+      return (
+        <ProgressStepper search={url.searchParams}/>
       )
     }
 
