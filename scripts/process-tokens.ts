@@ -234,7 +234,7 @@ function* visitJsonObject(obj: TJson, accPath: string[] = []): Generator<{path: 
     return yield { path: accPath, value: obj }
   }
 
-  const keys = Object.keys(obj)
+  const keys = Object.keys(obj).sort((a, b) => a.localeCompare(b))
 
   for (const key of keys) {
     const nextObj = obj[key]
@@ -360,7 +360,7 @@ function* visitThemeSections(themeJson: any): Generator<{key: string, jsonObj: T
     // Process 'comp' section
     if (sectionKey === COMPONENTS_SECTION_KEY) {
       // foreach component
-      for (const compNameKey of Object.keys(sectionObj)) {
+      for (const compNameKey of Object.keys(sectionObj).sort((a, b) => a.localeCompare(b))) {
         const compName = normalizeKey(compNameKey)
 
         yield { key: compName, isComponent: true, jsonObj: sectionObj[compNameKey] }
@@ -388,6 +388,7 @@ for (const { key, jsonObj, isComponent } of visitThemeSections(SELECTED_THEME_JS
 
 /* Process index.js */
 let indexJsFileData = ''
+/* Process index.css */
 let indexCssFileData = ''
 
 // Base theme only: import additional sections like 'fonts'
