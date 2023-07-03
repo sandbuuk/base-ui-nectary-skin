@@ -22,6 +22,4 @@ export type TSinchProgressStepperItemReact = TSinchElementReact<TSinchProgressSt
   text: string,
   /** Invalid */
   invalid?: boolean,
-  /** Label that is used for a11y */
-  'aria-label': string,
 }
