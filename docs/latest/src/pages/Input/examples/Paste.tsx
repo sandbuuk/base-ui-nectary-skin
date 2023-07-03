@@ -7,15 +7,15 @@ const inputStyles: CSSProperties = {
   width: 300,
 }
 
-export const CopyExample: FC = () => {
+export const PasteExample: FC = () => {
   const [state, setState] = useState('')
   const onChange = (e: CustomEvent<string>) => setState(e.detail)
-  const onCopy = (e: TSinchInputClipboardEvent) => {
+  const onPaste = (e: TSinchInputClipboardEvent) => {
     // Transform the original value
     const value = e.detail.value.toUpperCase()
 
-    // Replace value in the copy event
-    // This value will replace the original in Clipboard
+    // Replace value in the paste event
+    // This value will replace the original from Clipboard
     e.detail.replaceWith(value)
   }
 
@@ -26,8 +26,7 @@ export const CopyExample: FC = () => {
       style={inputStyles}
       value={state}
       on-change={onChange}
-      on-copy={onCopy}
-      on-cut={onCopy}
+      on-paste={onPaste}
     />
   )
 }

@@ -94,7 +94,7 @@ module.exports = {
     'no-new-func': 2,
     'no-new-wrappers': 2,
     'no-octal': 2,
-    'no-octal-escape': 2,
+    'no-octal-escape': 0,
     'no-param-reassign': 2,
     'no-proto': 2,
     'no-redeclare': 2,

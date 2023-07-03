@@ -561,7 +561,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
     this.dispatchEvent(event)
 
-    if (event.defaultPrevented || replacedValue !== null) {
+    if (event.defaultPrevented) {
       e.preventDefault()
     }
 
