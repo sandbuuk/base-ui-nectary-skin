@@ -8,6 +8,9 @@ import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
 import '@sinch-engage/nectary/flag'
 import '@sinch-engage/nectary/text'
+import '@sinch-engage/nectary/popover'
+import '@sinch-engage/nectary/help-tooltip'
+import '@sinch-engage/nectary/tooltip'
 
 type TDialog = {
   search: URLSearchParams,

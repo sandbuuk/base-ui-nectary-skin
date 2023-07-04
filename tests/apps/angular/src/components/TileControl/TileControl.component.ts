@@ -9,8 +9,8 @@ import '@sinch-engage/nectary-assets/icons/qr-code'
 import '@sinch-engage/nectary-assets/icons/library-add-check'
 import '@sinch-engage/nectary-assets/icons/smart-button'
 import '@sinch-engage/nectary-assets/icons/add-to-home-screen'
-import '@sinch-engage/nectary-assets/icons-branded/contact'
-import '@sinch-engage/nectary-assets/icons-channel/whatsapp'
+import '@sinch-engage/nectary-assets/icons/camera'
+import '@sinch-engage/nectary-assets/icons/alarm-add'
 
 @Component({
   selector: 'tile-control-component',

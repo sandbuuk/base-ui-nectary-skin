@@ -4,6 +4,7 @@ import '@sinch-engage/nectary/popover'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/color-swatch'
 import '@sinch-engage/nectary/color-menu'
+import '@sinch-engage/nectary/color-menu-option'
 
 const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
 

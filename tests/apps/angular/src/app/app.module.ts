@@ -36,6 +36,7 @@ import { PaginationComponent } from '../components/Pagination/Pagination.compone
 import { PhoneCodeMenuComponent } from '../components/PhoneCodeMenu/PhoneCodeMenu.component'
 import { PopoverComponent } from '../components/Popover/Popover.component'
 import { ProgressComponent } from '../components/Progress/Progress.component'
+import { ProgressStepperComponent } from '../components/ProgressStepper/ProgressStepper.component'
 import { RadioComponent } from '../components/Radio/Radio.component'
 import { RichTextComponent } from '../components/RichText/RichText.component'
 import { SearchComponent } from '../components/Search/Search.component'
@@ -98,6 +99,7 @@ import { AppComponent } from './app.component'
     PhoneCodeMenuComponent,
     PopoverComponent,
     ProgressComponent,
+    ProgressStepperComponent,
     RadioComponent,
     RichTextComponent,
     SearchComponent,

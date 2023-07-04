@@ -64,7 +64,7 @@
         aria-label="click to call"
         @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon-channel-whatsapp slot="icon"></sinch-icon-channel-whatsapp>
+        <sinch-icon-camera slot="icon"></sinch-icon-camera>
       </sinch-tile-control-option>
       <sinch-tile-control-option
         value="8"
@@ -72,7 +72,7 @@
         aria-label="separator"
         @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon-branded-contact slot="icon"></sinch-icon-branded-contact>
+        <sinch-icon-alarm-add slot="icon"></sinch-icon-alarm-add>
       </sinch-tile-control-option>
     </template>
   </sinch-tile-control>
@@ -89,8 +89,8 @@ import '@sinch-engage/nectary-assets/icons/qr-code'
 import '@sinch-engage/nectary-assets/icons/library-add-check'
 import '@sinch-engage/nectary-assets/icons/smart-button'
 import '@sinch-engage/nectary-assets/icons/add-to-home-screen'
-import '@sinch-engage/nectary-assets/icons-branded/contact'
-import '@sinch-engage/nectary-assets/icons-channel/whatsapp'
+import '@sinch-engage/nectary-assets/icons/camera'
+import '@sinch-engage/nectary-assets/icons/alarm-add'
 
 export default {
   props: {

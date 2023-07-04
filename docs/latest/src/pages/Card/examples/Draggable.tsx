@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import type { TSinchCardElement } from '@sinch-engage/nectary/card/types'
-import type { FC, SyntheticEvent, CSSProperties } from 'react'
+import type { CSSProperties, FC, SyntheticEvent } from 'react'
 import '@sinch-engage/nectary/card'
 import '@sinch-engage/nectary-assets/icons-branded/chatbot'
 

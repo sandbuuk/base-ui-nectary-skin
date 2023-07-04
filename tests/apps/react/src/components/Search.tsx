@@ -6,7 +6,6 @@ import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary/icon'
 import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/help-tooltip'
 import '@sinch-engage/nectary/action-menu'
 import '@sinch-engage/nectary/action-menu-option'
 

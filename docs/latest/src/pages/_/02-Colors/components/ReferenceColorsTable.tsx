@@ -1,4 +1,3 @@
-import refJson from '@sinch-engage/nectary-theme-base/ref.json'
 import '@sinch-engage/nectary/table'
 import '@sinch-engage/nectary/table-head'
 import '@sinch-engage/nectary/table-head-cell'
@@ -6,26 +5,22 @@ import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-cell'
 import { useEffect, useState } from 'react'
-import ReferenceColorsTableMarkDown from '../markdown/ReferenceColorsTable.md'
-import '@sinch-engage/nectary/color-swatch'
+import '@sinch-engage/nectary/button'
+import '@sinch-engage/nectary/text'
 import '@sinch-engage/nectary-assets/icons/expand-more'
 import '@sinch-engage/nectary-assets/icons/expand-less'
+import '@sinch-engage/nectary/segmented-control'
+import '@sinch-engage/nectary/segmented-control-option'
 import { SpacingY } from './SpacingY'
+import { sinchColors } from './create-reference-colors'
+import type { TableItem } from './create-reference-colors'
 
-const colorMainNames = Object.keys(refJson.color.main) as unknown as (keyof typeof refJson.color.main)[]
-const colorsMap = colorMainNames.reduce((res, name) => {
-  for (const variantName of Object.keys(refJson.color.main[name]) as (keyof typeof refJson.color.main[typeof name])[]) {
-    const value = refJson.color.main[name][variantName]
-    const cssName = `--sinch-ref-color-main-${name}-${variantName}`
-    const tokenName = `ref.color.main.${name}.${variantName}`
-    const colorName = `${name[0].toUpperCase() + name.substring(1)} ${variantName}`
-
-    // @ts-ignore
-    res.push({ key: `${name}+${variantName}`, colorName, cssName, tokenName, value })
-  }
-
-  return res
-}, [])
+type TypeShowMoreButton = {
+  isExpanded: boolean,
+  setExpanded: (isExpanded: boolean) => void,
+}
+const categories = ['Main', 'Complementary'] as const
+type Categories = typeof categories[number]
 
 const headStyle = {
   maxWidth: 105,
@@ -35,11 +30,6 @@ const tableStyle = {
   width: '100%',
   borderRadius: 14,
   backgroundColor: 'var(--sinch-sys-color-container-contrast-secondary-default)',
-}
-
-interface TypeShowMoreButton {
-  isExpanded: boolean,
-  setExpanded: (isExpanded: boolean) => void,
 }
 
 const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
@@ -65,16 +55,35 @@ const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
 
 export const ReferenceColorsTable = () => {
   const [isExpanded, setExpanded] = useState(false)
-  const [colors, setColors] = useState(colorsMap.slice(0, 7))
+  const [colors, setColors] = useState<TableItem[]|[]>([])
+  const [colorCategory, setColorCategory] = useState<Categories>('Main')
+
+  const onSelectColorCategory = (e: CustomEvent) => {
+    setColorCategory(e.detail)
+  }
 
   useEffect(() => {
-    setColors(isExpanded ? colorsMap : colors.slice(0, 7))
+    setColors(isExpanded ? sinchColors[colorCategory] : sinchColors[colorCategory].slice(0, 7))
   }, [isExpanded])
+
+  useEffect(() => {
+    setColors(isExpanded ? sinchColors[colorCategory] : sinchColors[colorCategory].slice(0, 7))
+  }, [colorCategory])
 
   return (
     <>
       <div className="colors-table">
-        <ReferenceColorsTableMarkDown/>
+        <div style={{ marginLeft: 'auto' }}>
+          <sinch-segmented-control
+            value={colorCategory}
+            on-change={onSelectColorCategory}
+            aria-label="Token types"
+          >
+            {categories.map((item, i) => {
+              return (<sinch-segmented-control-option key={i} value={item} text={item} aria-label={item}/>)
+            })}
+          </sinch-segmented-control>
+        </div>
         <SpacingY height={28}/>
         <sinch-table style={tableStyle}>
           <sinch-table-head>

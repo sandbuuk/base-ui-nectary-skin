@@ -1,9 +1,6 @@
 import React from 'react'
-import type { FC, CSSProperties } from 'react'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
 
 const req = import.meta.webpackContext!('@sinch-engage/nectary-assets/animations', {
   regExp: /^.*\/index.ts$/,

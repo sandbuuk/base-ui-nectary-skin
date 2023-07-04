@@ -1,16 +1,14 @@
-import SystemColorsTableMarkDown from '../markdown/SystemColorsTable.md'
+import { useState } from 'react'
+import { SelectColorCategory } from './SelectColorCategory'
 import { SpacingY } from './SpacingY'
-import colors from './colorsSystem.json'
 import '@sinch-engage/nectary/table'
 import '@sinch-engage/nectary/table-head'
 import '@sinch-engage/nectary/table-head-cell'
 import '@sinch-engage/nectary/table-row'
 import '@sinch-engage/nectary/table-body'
 import '@sinch-engage/nectary/table-cell'
-import '@sinch-engage/nectary-assets/icons/expand-more'
-import '@sinch-engage/nectary-assets/icons/expand-less'
-import '@sinch-engage/nectary/segmented-control'
-import '@sinch-engage/nectary/segmented-control-option'
+import '@sinch-engage/nectary/text'
+import { createSystemColors } from './create-system-colors'
 
 const headStyle = {
   maxWidth: 105,
@@ -22,12 +20,22 @@ const tableStyle = {
   backgroundColor: 'var(--sinch-sys-color-container-contrast-secondary-default)',
 }
 
+export const categories = ['container', 'status', 'cta', 'primary', 'text', 'feedback', 'border', 'skin tone'] as const
+export type Category = typeof categories[number]
+const colors = createSystemColors()
+
 export const SystemColorsTable = () => {
+  const [category, setCategory] = useState<Category>('text')
+
+  const handleSelectColorCategory = (value: Category) => {
+    setCategory(value)
+  }
+
   return (
     <>
       <div className="colors-table">
-        <SystemColorsTableMarkDown/>
-        <SpacingY height={28}/>
+        <SelectColorCategory category={category} handleSelectColorCategory={handleSelectColorCategory}/>
+        <SpacingY height={24}/>
         <sinch-table style={tableStyle}>
           <sinch-table-head>
             <sinch-table-row>
@@ -39,30 +47,34 @@ export const SystemColorsTable = () => {
             </sinch-table-row>
           </sinch-table-head>
           <sinch-table-body>
-            {colors.map(({ cssName, tokenName, tokenRefName, tokenRefValue }) => {
-              return (
-                <sinch-table-row key={cssName}>
-                  <sinch-table-cell>
-                    <div
-                      className="color-circle"
-                      style={{ backgroundColor: `var(${cssName})` }}
-                    />
-                  </sinch-table-cell>
-                  <sinch-table-cell>
-                    <sinch-text type="m">{tokenName}</sinch-text>
-                  </sinch-table-cell>
-                  <sinch-table-cell>
-                    <sinch-text type="m">{cssName}</sinch-text>
-                  </sinch-table-cell>
-                  <sinch-table-cell>
-                    <sinch-text type="m">{tokenRefName}</sinch-text>
-                  </sinch-table-cell>
-                  <sinch-table-cell>
-                    <sinch-text type="m">{tokenRefValue}</sinch-text>
-                  </sinch-table-cell>
-                </sinch-table-row>
-              )
-            })}
+            {
+              colors[category].map(({ cssName, tokenName, tokenRefName, tokenRefValue }) => {
+                return (
+                  <sinch-table-row key={cssName}>
+                    <sinch-table-cell>
+                      <div
+                        className="color-circle"
+                        style={{
+                          backgroundColor: `var(${cssName})`,
+                          border: tokenRefValue === 'transparent' ? `1px solid var(--sinch-sys-color-border-default)` : undefined,
+                        }}
+                      />
+                    </sinch-table-cell>
+                    <sinch-table-cell>
+                      <sinch-text type="m">{tokenName}</sinch-text>
+                    </sinch-table-cell>
+                    <sinch-table-cell>
+                      <sinch-text type="m">{cssName}</sinch-text>
+                    </sinch-table-cell>
+                    <sinch-table-cell>
+                      <sinch-text type="m">{tokenRefName}</sinch-text>
+                    </sinch-table-cell>
+                    <sinch-table-cell>
+                      <sinch-text type="m">{tokenRefValue}</sinch-text>
+                    </sinch-table-cell>
+                  </sinch-table-row>
+                )
+              })}
           </sinch-table-body>
         </sinch-table>
       </div>

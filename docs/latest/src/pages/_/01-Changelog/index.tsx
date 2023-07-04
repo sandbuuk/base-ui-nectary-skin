@@ -1,3 +1,4 @@
+// eslint-disable-next-line @sinch-engage/nectary/imports
 import Changelog from '@sinch-engage/nectary/changelog.md'
 import '@sinch-engage/nectary/title'
 import { SimpleLayout } from 'docs-common'
