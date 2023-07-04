@@ -25,6 +25,7 @@ export type TSinchInputElement = HTMLElement & {
   selectionStart: number | null,
   selectionEnd: number | null,
   selectionDirection: 'forward' | 'backward' | 'none' | null,
+  setSelectionRange(selectionStart: number, selectionEnd: number): void,
   /** Change value event */
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   /** Focus event */

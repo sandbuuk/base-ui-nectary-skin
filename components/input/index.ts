@@ -325,6 +325,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$input.selectionDirection = value
   }
 
+  setSelectionRange(selectionStart: number, selectionEnd: number): void {
+    this.#$input.setSelectionRange(selectionStart, selectionEnd)
+  }
+
   get focusable() {
     return true
   }
