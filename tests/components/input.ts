@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { makeAccessibilityTests } from '../accessibility-tests'
-import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import { centerBB, centerRect, getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/input?width=200'
 const withValue = '/input?width=200&value=Input%20value'
@@ -9,6 +9,7 @@ const withPlaceholder = '/input?width=200&placeholder=Placeholder%20value'
 const withEverything = '/input?width=300&invalid=true&placeholder=Placeholder%20value&value=Input%20value&left=true&right=true&icon=true'
 const withEverythingInvalid = '/input?width=300&invalid=true&placeholder=Placeholder%20value&value=Input%20value&left=true&right=true&icon=true'
 const checkValue = makeAccessibilityTests('/input?width=200&value=Input%20value', 'sinch-input')
+const withMask = '/input?width=200&mask=-AA-00-'
 
 test('accessibility', checkValue({
   async *fn() {
@@ -119,6 +120,68 @@ test('input screenshots', runScreenshotTests('sinch-input', [
     url: withEverything,
     async *fn() {
       yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'mask',
+    only: true,
+    url: withMask,
+    async *fn({ $, $eval, page }) {
+      const ct = centerRect(await getBB($))
+
+      await page.mouse.click(ct.x, ct.y)
+      yield { name: '01-initial' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(1)
+      await page.keyboard.press('a')
+      yield { name: '02-type-a' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(2)
+      await page.keyboard.press('b')
+      yield { name: '03-type-b' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(4)
+      await page.keyboard.press('c')
+      yield { name: '04-type-c' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(4)
+      await page.keyboard.press('1')
+      yield { name: '05-type-1' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(5)
+      await page.keyboard.press('2')
+      yield { name: '06-type-2' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(7)
+      await page.keyboard.press('3')
+      yield { name: '07-type-3' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(7)
+      await page.keyboard.press('Backspace')
+      yield { name: '08-press-bs' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(5)
+      await page.keyboard.press('ArrowLeft')
+      await page.keyboard.press('ArrowLeft')
+      await page.keyboard.press('ArrowLeft')
+      await page.keyboard.press('Delete')
+      yield { name: '09-press-lll-del' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(3)
+      await page.keyboard.press('Delete')
+      yield { name: '10-press-del' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(2)
+    },
+  },
+  {
+    name: 'mask-range',
+    only: true,
+    url: withMask,
+    async *fn({ $eval, page }) {
+      await $eval((el) => {
+        el.value = 'ab1234'
+      })
+      yield { name: '1-set-value' }
+
+      await $eval((el) => {
+        el.focus()
+        el.setSelectionRange(2, 5)
+      })
+      yield { name: '2-select' }
+
+      await page.keyboard.type('x')
+      yield { name: '3-type-x' }
     },
   },
   {

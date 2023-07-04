@@ -18,6 +18,7 @@ export class InputComponent {
   size: string | null
   isInvalid: boolean
   placeholderText: string | null
+  mask: string | null
   tooltipText: string | null
   isDisabled: boolean
   hasLeft: boolean
@@ -32,6 +33,7 @@ export class InputComponent {
     this.size = url.searchParams.get('size')
     this.isInvalid = url.searchParams.get('invalid') !== null
     this.placeholderText = url.searchParams.get('placeholder')
+    this.mask = url.searchParams.get('mask')
     this.tooltipText = url.searchParams.get('tooltip')
     this.isDisabled = url.searchParams.get('disabled') != null
     this.hasRight = url.searchParams.get('right') != null
@@ -50,5 +52,24 @@ export class InputComponent {
   }
   onBlur() {
     window.dispatchEvent(new CustomEvent('sinch-input-blur'))
+  }
+  onCopy(e: Event) {
+    const { value, replaceWith } = (e as CustomEvent).detail
+
+    replaceWith('REPLACED VALUE')
+
+    window.dispatchEvent(new CustomEvent('sinch-input-copy', { detail: value }))
+  }
+  onCut(e: Event) {
+    const { value } = (e as CustomEvent).detail
+
+    window.dispatchEvent(new CustomEvent('sinch-input-cut', { detail: value }))
+  }
+  onPaste(e: Event) {
+    const { value, replaceWith } = (e as CustomEvent).detail
+
+    replaceWith('REPLACED VALUE')
+
+    window.dispatchEvent(new CustomEvent('sinch-input-paste', { detail: value }))
   }
 }

@@ -22,27 +22,21 @@ export const Input: FC<TInput> = ({ search }) => {
   const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-input-focus'))
   const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-input-blur'))
   const onCopy = (e: TSinchInputClipboardEvent) => {
-    const value = e.detail
+    const { value, replaceWith } = e.detail
 
-    console.log('REACT_COPY', value)
-
-    e.detail.replaceWith('REPLACED VALUE')
+    replaceWith('REPLACED VALUE')
 
     window.dispatchEvent(new CustomEvent('sinch-input-copy', { detail: value }))
   }
   const onCut = (e: TSinchInputClipboardEvent) => {
-    const value = e.detail
-
-    console.log('REACT_CUT', value)
+    const { value } = e.detail
 
     window.dispatchEvent(new CustomEvent('sinch-input-cut', { detail: value }))
   }
   const onPaste = (e: TSinchInputClipboardEvent) => {
-    const value = e.detail.value
+    const { value, replaceWith } = e.detail
 
-    console.log('REACT_PASTE', value)
-
-    e.detail.replaceWith('REPLACED')
+    replaceWith('REPLACED VALUE')
 
     window.dispatchEvent(new CustomEvent('sinch-input-paste', { detail: value }))
   }
