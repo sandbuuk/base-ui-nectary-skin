@@ -1,3 +1,14 @@
+## v0.8.0 (2023-07-04)
+
+* ➕ add `sinch-icon-channel-google-business-*` components
+* ➕ add `sinch-icon-channel-webchat-*` components
+* ➕ add `sinch-icon-channel-mms-*` components
+* ➕ add `sinch-icon-channel-notify-*` components
+* ➕ add `sinch-icon-channel-push-*` components
+* ➕ add `sinch-icon-channel-rcs-*` components
+* ➕ add `sinch-icon-channel-sms-*` components
+* 🐞 align `sinch-icon-channel-whatsapp-*` icons
+
 ## v0.7.0 (2023-05-31)
 
 * ➕ add `sinch-animation-sinch-logo` component
