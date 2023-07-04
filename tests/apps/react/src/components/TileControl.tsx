@@ -9,8 +9,8 @@ import '@sinch-engage/nectary-assets/icons/qr-code'
 import '@sinch-engage/nectary-assets/icons/library-add-check'
 import '@sinch-engage/nectary-assets/icons/smart-button'
 import '@sinch-engage/nectary-assets/icons/add-to-home-screen'
-import '@sinch-engage/nectary-assets/icons-branded/contact'
-import '@sinch-engage/nectary-assets/icons-channel/whatsapp'
+import '@sinch-engage/nectary-assets/icons/camera'
+import '@sinch-engage/nectary-assets/icons/alarm-add'
 
 type TTileButton = {
   search: URLSearchParams,
@@ -117,7 +117,7 @@ export const TileControl: FC<TTileButton> = ({ search }) => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-channel-whatsapp slot="icon"/>
+            <sinch-icon-camera slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="8"
@@ -126,7 +126,7 @@ export const TileControl: FC<TTileButton> = ({ search }) => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-branded-contact slot="icon"/>
+            <sinch-icon-alarm-add slot="icon"/>
           </sinch-tile-control-option>
         </>
       )}

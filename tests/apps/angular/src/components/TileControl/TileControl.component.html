@@ -72,7 +72,7 @@
     aria-label="click to call"
     (-focus)="onFocus()"
     (-blur)="onBlur()">
-    <sinch-icon-channel-whatsapp slot="icon"></sinch-icon-channel-whatsapp>
+    <sinch-icon-camera slot="icon"></sinch-icon-camera>
   </sinch-tile-control-option>
   <sinch-tile-control-option
     value="8"
@@ -80,7 +80,7 @@
     aria-label="separator"
     (-focus)="onFocus()"
     (-blur)="onBlur()">
-    <sinch-icon-branded-contact slot="icon"></sinch-icon-branded-contact>
+    <sinch-icon-alarm-add slot="icon"></sinch-icon-alarm-add>
   </sinch-tile-control-option>
 </ng-template>
 <sinch-tile-control [attr.small]="isSmall" [attr.multiple]="isMultiple" [attr.cols]="numCols" [value]="value" (-change)="onChange($event)">
