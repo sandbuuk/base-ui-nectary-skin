@@ -16,9 +16,9 @@ import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
 import { LandingPage } from '~/pages/Landing'
 import { NotFoundPage } from '~/pages/NotFound'
+import { TestingPage } from '~/pages/Testing'
 import './styles.css'
 import '@sinch-engage/nectary-theme-base'
-import { TestingPage } from '~/pages/Testing'
 
 const basename = location.pathname.replace(/\/$/, '')
 
