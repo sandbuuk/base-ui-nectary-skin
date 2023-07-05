@@ -7241,7 +7241,28 @@
       }
     }
   },
-  "SMB / SMB Base": {},
+  "SMB / SMB Base": {
+    "sys": {
+      "shape-radius": {
+        "xs": {
+          "value": "3",
+          "type": "borderRadius"
+        },
+        "s": {
+          "value": "4",
+          "type": "borderRadius"
+        },
+        "m": {
+          "value": "8",
+          "type": "borderRadius"
+        },
+        "l": {
+          "value": "12",
+          "type": "borderRadius"
+        }
+      }
+    }
+  },
   "SMB / SimpleTexting": {
     "sys": {
       "color": {
@@ -7249,18 +7270,50 @@
           "default": {
             "value": "#2399F0",
             "type": "color"
+          },
+          "hover": {
+            "value": "#0E7FD2",
+            "type": "color"
+          },
+          "active": {
+            "value": "#006CBF",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#dfe3e9",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#FFFFFF",
+            "type": "color"
           }
         }
       }
     }
   },
-  "SMB / MessageMedia": {
+  "SMB / MessageMedia Old": {
     "sys": {
       "color": {
         "primary": {
           "default": {
             "value": "#3375D1",
-            "type": "sizing"
+            "type": "color"
+          },
+          "hover": {
+            "value": "#2559A7",
+            "type": "color"
+          },
+          "active": {
+            "value": "#1C447D",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#9E9E9E",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#FFFFFF",
+            "type": "color"
           }
         }
       },
@@ -7289,7 +7342,8 @@
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
       "name": "Sinch brand light",
       "selectedTokenSets": {
-        "Nectary / Base theme": "enabled"
+        "Nectary / Base theme": "enabled",
+        "SMB / MessageMedia Old": "disabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -9322,7 +9376,8 @@
       "name": "Sinch brand dark",
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
-        "Nectary / Dark theme": "enabled"
+        "Nectary / Dark theme": "enabled",
+        "SMB / MessageMedia Old": "disabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -10469,16 +10524,17 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / SimpleTexting": "enabled"
+        "SMB / SimpleTexting": "enabled",
+        "SMB / MessageMedia Old": "disabled"
       }
     },
     {
       "id": "9bf1b1eb292732c275dc4eac42197c2c56e7dc3b",
-      "name": "MessageMedia",
+      "name": "MessageMedia Old",
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / MessageMedia": "enabled"
+        "SMB / MessageMedia Old": "enabled"
       }
     }
   ],
@@ -10488,7 +10544,7 @@
       "Nectary / Dark theme",
       "SMB / SMB Base",
       "SMB / SimpleTexting",
-      "SMB / MessageMedia"
+      "SMB / MessageMedia Old"
     ]
   }
 }
