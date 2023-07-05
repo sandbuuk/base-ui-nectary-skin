@@ -41,21 +41,29 @@ export default {
       window.dispatchEvent(new CustomEvent('sinch-input-change', {detail: e.detail}))
     },
     onCopy(e) {
+      if (!this.hasCopy) return
+
       const { value, replaceWith } = e.detail
 
-      replaceWith('REPLACED VALUE')
+      replaceWith('REPLACED')
 
       window.dispatchEvent(new CustomEvent('sinch-input-copy', { detail: value }))
     },
     onCut(e) {
-      const { value } = e.detail
+      if (!this.hasCut) return
+
+      const { value, replaceWith } = e.detail
+
+      replaceWith('REPLACED')
 
       window.dispatchEvent(new CustomEvent('sinch-input-cut', { detail: value }))
     },
     onPaste(e) {
+      if (!this.hasPaste) return
+
       const { value, replaceWith } = e.detail
 
-      replaceWith('REPLACED VALUE')
+      replaceWith('REPLACED')
 
       window.dispatchEvent(new CustomEvent('sinch-input-paste', { detail: value }))
     },
@@ -96,7 +104,16 @@ export default {
     },
     hasIcon() {
       return this.search.get('icon') !== null
-    }
+    },
+    hasCopy() {
+      return this.search.get('copy') !== null
+    },
+    hasCut() {
+      return this.search.get('cut') !== null
+    },
+    hasPaste() {
+      return this.search.get('paste') !== null
+    },
   },
   data() {
     return {

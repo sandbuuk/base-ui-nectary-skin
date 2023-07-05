@@ -24,6 +24,9 @@ export class InputComponent {
   hasLeft: boolean
   hasRight: boolean
   hasIcon: boolean
+  hasCopy: boolean
+  hasCut: boolean
+  hasPaste: boolean
 
   constructor() {
     const url = new URL(location.href)
@@ -39,6 +42,9 @@ export class InputComponent {
     this.hasRight = url.searchParams.get('right') != null
     this.hasLeft = url.searchParams.get('left') != null
     this.hasIcon = url.searchParams.get('icon') != null
+    this.hasCopy = url.searchParams.get('copy') != null
+    this.hasCut = url.searchParams.get('cut') != null
+    this.hasPaste = url.searchParams.get('paste') != null
   }
 
   onChange(e: Event) {
@@ -54,21 +60,32 @@ export class InputComponent {
     window.dispatchEvent(new CustomEvent('sinch-input-blur'))
   }
   onCopy(e: Event) {
+    if (!this.hasCopy)
+      return
+
     const { value, replaceWith } = (e as CustomEvent).detail
 
-    replaceWith('REPLACED VALUE')
+    replaceWith('REPLACED')
 
     window.dispatchEvent(new CustomEvent('sinch-input-copy', { detail: value }))
   }
   onCut(e: Event) {
-    const { value } = (e as CustomEvent).detail
+    if (!this.hasCut)
+      return
+
+    const { value, replaceWith } = (e as CustomEvent).detail
+
+    replaceWith('REPLACED')
 
     window.dispatchEvent(new CustomEvent('sinch-input-cut', { detail: value }))
   }
   onPaste(e: Event) {
+    if (!this.hasPaste)
+      return
+
     const { value, replaceWith } = (e as CustomEvent).detail
 
-    replaceWith('REPLACED VALUE')
+    replaceWith('REPLACED')
 
     window.dispatchEvent(new CustomEvent('sinch-input-paste', { detail: value }))
   }

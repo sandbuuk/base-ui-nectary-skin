@@ -21,25 +21,33 @@ export const Input: FC<TInput> = ({ search }) => {
   }
   const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-input-focus'))
   const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-input-blur'))
-  const onCopy = (e: TSinchInputClipboardEvent) => {
-    const { value, replaceWith } = e.detail
+  const onCopy = search.get('copy') != null
+    ? (e: TSinchInputClipboardEvent) => {
+      const { value, replaceWith } = e.detail
 
-    replaceWith('REPLACED VALUE')
+      replaceWith('REPLACED')
 
-    window.dispatchEvent(new CustomEvent('sinch-input-copy', { detail: value }))
-  }
-  const onCut = (e: TSinchInputClipboardEvent) => {
-    const { value } = e.detail
+      window.dispatchEvent(new CustomEvent('sinch-input-copy', { detail: value }))
+    }
+    : undefined
+  const onCut = search.get('cut') != null
+    ? (e: TSinchInputClipboardEvent) => {
+      const { value, replaceWith } = e.detail
 
-    window.dispatchEvent(new CustomEvent('sinch-input-cut', { detail: value }))
-  }
-  const onPaste = (e: TSinchInputClipboardEvent) => {
-    const { value, replaceWith } = e.detail
+      replaceWith('REPLACED')
 
-    replaceWith('REPLACED VALUE')
+      window.dispatchEvent(new CustomEvent('sinch-input-cut', { detail: value }))
+    }
+    : undefined
+  const onPaste = search.get('paste') != null
+    ? (e: TSinchInputClipboardEvent) => {
+      const { value, replaceWith } = e.detail
 
-    window.dispatchEvent(new CustomEvent('sinch-input-paste', { detail: value }))
-  }
+      replaceWith('REPLACED')
+
+      window.dispatchEvent(new CustomEvent('sinch-input-paste', { detail: value }))
+    }
+    : undefined
   const type: any = search.get('type') ?? undefined
   const size: any = search.get('size') ?? undefined
   const isInvalid = search.get('invalid') !== null

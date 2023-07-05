@@ -10,6 +10,13 @@ const withEverything = '/input?width=300&invalid=true&placeholder=Placeholder%20
 const withEverythingInvalid = '/input?width=300&invalid=true&placeholder=Placeholder%20value&value=Input%20value&left=true&right=true&icon=true'
 const checkValue = makeAccessibilityTests('/input?width=200&value=Input%20value', 'sinch-input')
 const withMask = '/input?width=200&mask=-AA-00-'
+const withMaskPlaceholder = '/input?width=200&mask=-AA-00-@@.XX.DD.'
+const withCopy = '/input?copy=true'
+const withCut = '/input?cut=true'
+const withPaste = '/input?paste=true'
+const withMaskCopy = '/input?copy=true&mask=-AA-'
+const withMaskCut = '/input?cut=true&mask=-AA-'
+const withMaskPaste = '/input?paste=true&mask=-AA-'
 
 test('accessibility', checkValue({
   async *fn() {
@@ -124,7 +131,6 @@ test('input screenshots', runScreenshotTests('sinch-input', [
   },
   {
     name: 'mask',
-    only: true,
     url: withMask,
     async *fn({ $, $eval, page }) {
       const ct = centerRect(await getBB($))
@@ -165,11 +171,24 @@ test('input screenshots', runScreenshotTests('sinch-input', [
     },
   },
   {
+    name: 'mask-placeholder',
+    url: withMaskPlaceholder,
+    async *fn({ $, $eval, page }) {
+      const ct = centerRect(await getBB($))
+
+      await page.mouse.click(ct.x, ct.y)
+      yield { name: '01-initial' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(1)
+      await page.keyboard.type('ab12')
+      yield { name: '02-type-ab12' }
+    },
+  },
+  {
     name: 'mask-range',
-    only: true,
     url: withMask,
     async *fn({ $eval, page }) {
       await $eval((el) => {
+        // causing value overflow
         el.value = 'ab1234'
       })
       yield { name: '1-set-value' }
@@ -180,8 +199,208 @@ test('input screenshots', runScreenshotTests('sinch-input', [
       })
       yield { name: '2-select' }
 
-      await page.keyboard.type('x')
+      await page.keyboard.press('x')
       yield { name: '3-type-x' }
+    },
+  },
+  {
+    name: 'mask-range-bs',
+    url: withMask,
+    async *fn({ $eval, page }) {
+      await $eval((el) => {
+        el.value = 'ab12'
+      })
+      yield { name: '1-set-value' }
+
+      await $eval((el) => {
+        el.focus()
+        el.setSelectionRange(2, 5)
+      })
+      await page.keyboard.press('Backspace')
+      yield { name: '2-bs' }
+      expect(await $eval((el) => el.selectionEnd)).toBe(2)
+    },
+  },
+  {
+    name: 'mask-range-del',
+    url: withMask,
+    async *fn({ $eval, page, isWebkit }) {
+      await $eval((el) => {
+        el.value = 'ab12'
+      })
+      yield { name: '1-set-value' }
+
+      await $eval((el) => {
+        el.focus()
+        el.setSelectionRange(2, 5)
+      })
+      await page.keyboard.press('Delete')
+      yield { name: '2-del' }
+
+      if (isWebkit) {
+        // Safari generates 'deleteContentBackward' when deleting selected range
+        expect(await $eval((el) => el.selectionEnd)).toBe(2)
+      } else {
+        expect(await $eval((el) => el.selectionEnd)).toBe(5)
+      }
+    },
+  },
+  {
+    name: 'copy event',
+    url: withCopy,
+    async *fn({ $eval, page, isWebkit }) {
+      await subscribeToEvents(page, 'sinch-input-copy', 'sinch-input-cut', 'sinch-input-paste')
+
+      await $eval((el) => {
+        el.value = '1234'
+        el.focus()
+        el.setSelectionRange(1, 3)
+      })
+      await page.keyboard.press('Control+C')
+
+      expect(await getAllEvents(page)).toEqual([
+        { type: 'sinch-input-copy', detail: '23' },
+      ])
+
+      // Playwright Webkit has empty e.clipboardData on paste
+      if (!isWebkit) {
+        await page.keyboard.press('End')
+        await page.keyboard.press('Control+V')
+
+        expect(await $eval((el) => el.value)).toBe('1234REPLACED')
+      }
+    },
+  },
+  {
+    name: 'cut event',
+    url: withCut,
+    async *fn({ $eval, page, isWebkit }) {
+      await subscribeToEvents(page, 'sinch-input-copy', 'sinch-input-cut', 'sinch-input-paste')
+
+      await $eval((el) => {
+        el.value = '1234'
+        el.focus()
+        el.setSelectionRange(1, 3)
+      })
+      await page.keyboard.press('Control+X')
+
+      expect(await getAllEvents(page)).toEqual([
+        { type: 'sinch-input-cut', detail: '23' },
+      ])
+
+      // Playwright Webkit has empty e.clipboardData on paste
+      if (!isWebkit) {
+        await page.keyboard.press('End')
+        await page.keyboard.press('Control+V')
+        expect(await $eval((el) => el.value)).toBe('14REPLACED')
+      }
+    },
+  },
+  {
+    name: 'paste event',
+    solo: true,
+    url: withPaste,
+    async *fn({ $eval, page, isWebkit }) {
+      // Playwright Webkit has empty e.clipboardData on paste
+      if (isWebkit) {
+        return
+      }
+
+      await subscribeToEvents(page, 'sinch-input-copy', 'sinch-input-cut', 'sinch-input-paste')
+
+      await $eval((el) => {
+        el.value = 'abcd'
+        el.focus()
+        el.setSelectionRange(0, 4)
+      })
+      await page.keyboard.press('Control+C')
+      await page.keyboard.press('End')
+      await page.keyboard.press('Control+V')
+
+      expect(await getAllEvents(page)).toEqual([
+        { type: 'sinch-input-paste', detail: 'abcd' },
+      ])
+      expect(await $eval((el) => el.value)).toBe('abcdREPLACED')
+    },
+  },
+  {
+    name: 'mask copy event',
+    solo: true,
+    url: withMaskCopy,
+    async *fn({ $eval, page, isWebkit }) {
+      await subscribeToEvents(page, 'sinch-input-copy', 'sinch-input-cut', 'sinch-input-paste')
+
+      await $eval((el) => {
+        el.value = 'abcd'
+        el.focus()
+        el.setSelectionRange(0, 4)
+      })
+      await page.keyboard.press('Control+C')
+
+      expect(await getAllEvents(page)).toEqual([
+        { type: 'sinch-input-copy', detail: '-ab-' },
+      ])
+
+      // Playwright Webkit has empty e.clipboardData on paste
+      if (!isWebkit) {
+        await page.keyboard.press('Backspace')
+        await page.keyboard.press('Backspace')
+        await page.keyboard.press('Control+V')
+        expect(await $eval((el) => el.value)).toBe('-RE-')
+      }
+    },
+  },
+  {
+    name: 'mask cut event',
+    solo: true,
+    url: withMaskCut,
+    async *fn({ $eval, page, isWebkit }) {
+      await subscribeToEvents(page, 'sinch-input-copy', 'sinch-input-cut', 'sinch-input-paste')
+
+      await $eval((el) => {
+        el.value = 'abcd'
+        el.focus()
+        el.setSelectionRange(0, 4)
+      })
+      await page.keyboard.press('Control+X')
+
+      expect(await getAllEvents(page)).toEqual([
+        { type: 'sinch-input-cut', detail: '-ab-' },
+      ])
+
+      // Playwright Webkit has empty e.clipboardData on paste
+      if (!isWebkit) {
+        await page.keyboard.press('Control+V')
+        expect(await $eval((el) => el.value)).toBe('-RE-')
+      }
+    },
+  },
+  {
+    name: 'mask paste event',
+    solo: true,
+    url: withMaskPaste,
+    async *fn({ $eval, page, isWebkit }) {
+      // Playwright Webkit has empty e.clipboardData on paste
+      if (isWebkit) {
+        return
+      }
+
+      await subscribeToEvents(page, 'sinch-input-copy', 'sinch-input-cut', 'sinch-input-paste')
+
+      await $eval((el) => {
+        el.value = 'abcd'
+        el.focus()
+        el.setSelectionRange(0, 4)
+      })
+      await page.keyboard.press('Control+C')
+      await page.keyboard.press('Backspace')
+      await page.keyboard.press('Backspace')
+      await page.keyboard.press('Control+V')
+
+      expect(await getAllEvents(page)).toEqual([
+        { type: 'sinch-input-paste', detail: '-ab-' },
+      ])
+      expect(await $eval((el) => el.value)).toBe('-RE-')
     },
   },
   {
@@ -197,6 +416,7 @@ test('input screenshots', runScreenshotTests('sinch-input', [
   },
   {
     name: 'native events',
+    solo: true,
     url: withValue,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-input-focus', 'sinch-input-blur', 'sinch-input-change')
@@ -221,6 +441,30 @@ test('input screenshots', runScreenshotTests('sinch-input', [
       ).toEqual([
         { type: 'sinch-input-focus', detail: null },
         { type: 'sinch-input-change', detail: 'Input valueX' },
+      ])
+    },
+  },
+  {
+    name: 'native mask events',
+    solo: true,
+    url: withMask,
+    async *fn({ $, page }) {
+      await subscribeToEvents(page, 'sinch-input-change')
+
+      const bb = await centerBB($)
+
+      await page.mouse.click(bb.x, bb.y)
+      // Type overflow
+      await $.type('abc123')
+
+      expect(await getAllEvents(page)).toEqual([
+        { type: 'sinch-input-change', detail: '-ab-12-' },
+      ])
+
+      await page.keyboard.press('Backspace')
+
+      expect(await getAllEvents(page)).toEqual([
+        { type: 'sinch-input-change', detail: '' },
       ])
     },
   },
