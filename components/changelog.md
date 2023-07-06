@@ -1,3 +1,14 @@
+## v2.2.0 (2023-07-06)
+
+* ➕ add `mask` attribute to `sinch-input`
+* ➕ add `on-copy`, `on-cut`, `on-paste` event handlers to `sinch-input`
+* ➕ add phone masks to `countries.json`
+* ➕ add `sinch-progress-stepper` component
+* 🐞 prevent text selection when clicking on `sinch-button` and `sinch-icon-button`
+* 🐞 allow time without seconds in `sinch-time-picker`
+* 🐞 improve ui behaviour in `sinch-date-picker`
+* 🐞 stop shadowing `isConnected` in `NectaryElement`
+
 ## v2.1.5 (2023-06-15)
 
 * 🐞 align `sinch-tabs` design
