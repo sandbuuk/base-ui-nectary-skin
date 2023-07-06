@@ -80,7 +80,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
 
     switch (name) {
       case 'value': {
-        if (this.isConnected) {
+        if (this.isDomConnected) {
           this.#onValueChange()
         }
 
@@ -94,7 +94,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
       }
 
       case 'cols': {
-        if (this.isConnected) {
+        if (this.isDomConnected) {
           this.#updateColumns()
         }
 

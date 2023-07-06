@@ -54,7 +54,7 @@ defineCustomElement('sinch-flag', class extends NectaryElement {
   }
 
   #updateCode() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

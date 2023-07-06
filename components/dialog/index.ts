@@ -156,7 +156,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   #onExpand() {
-    if (!this.isConnected || this.#isOpen()) {
+    if (!this.isDomConnected || this.#isOpen()) {
       return
     }
 

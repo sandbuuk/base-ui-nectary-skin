@@ -116,7 +116,7 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   }
 
   #updateColor() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

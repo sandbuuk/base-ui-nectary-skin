@@ -151,7 +151,7 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   }
 
   #enableDraggable() {
-    if (this.isConnected && !this.#isDraggingSubscribed) {
+    if (this.isDomConnected && !this.#isDraggingSubscribed) {
       this.addEventListener('dragstart', this.#onDragStart)
       this.#$cardBody.addEventListener('mousedown', this.#onDraggableMouseDown)
       this.#isDraggingSubscribed = true

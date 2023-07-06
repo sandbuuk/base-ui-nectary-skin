@@ -758,7 +758,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #onSizeUpdate() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

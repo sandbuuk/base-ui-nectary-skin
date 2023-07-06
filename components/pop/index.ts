@@ -152,7 +152,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
         if (isAttrTrue(newVal)) {
           // Delay opening to wait until "orientation" attribute assigned on root
           requestAnimationFrame(() => {
-            if (this.isConnected && getBooleanAttribute(this, 'open')) {
+            if (this.isDomConnected && getBooleanAttribute(this, 'open')) {
               this.#onExpand()
             }
           })
@@ -204,7 +204,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   #onExpand() {
-    if (!this.isConnected || this.#$dialog.open) {
+    if (!this.isDomConnected || this.#$dialog.open) {
       return
     }
 
@@ -274,7 +274,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
         // Safari requires to delay focus() call
         if (!isElementFocused(this.#targetActiveElement)) {
           requestAnimationFrame(() => {
-            if (this.isConnected && this.#$dialog.open) {
+            if (this.isDomConnected && this.#$dialog.open) {
               this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
               this.#targetActiveElement!.focus()
               this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
@@ -290,7 +290,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 
     // Subscribe after delay to not get immediate callbacks
     requestAnimationFrame(() => {
-      if (this.isConnected && this.#$dialog.open) {
+      if (this.isDomConnected && this.#$dialog.open) {
         this.#$contentSlot.addEventListener('slotchange', this.#onContentSlotChange)
       }
     })
@@ -359,7 +359,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
           const $targetEl = this.#targetActiveElement
 
           requestAnimationFrame(() => {
-            if (this.isConnected && !this.#$dialog.open) {
+            if (this.isDomConnected && !this.#$dialog.open) {
               this.#$targetSlot.addEventListener('focus', this.#stopEventPropagation, true)
               $targetEl.focus({ preventScroll: true })
               this.#$targetSlot.removeEventListener('focus', this.#stopEventPropagation, true)

@@ -265,7 +265,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   #updateText() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 
@@ -284,7 +284,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   #subscribeMouseEnterEvent() {
-    if (!this.isConnected || this.#isSubscribed) {
+    if (!this.isDomConnected || this.#isSubscribed) {
       return
     }
 

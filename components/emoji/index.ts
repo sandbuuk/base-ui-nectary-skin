@@ -54,7 +54,7 @@ defineCustomElement('sinch-emoji', class extends NectaryElement {
   }
 
   #updateChar() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

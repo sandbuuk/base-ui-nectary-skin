@@ -92,7 +92,7 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   }
 
   #updateColor() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

@@ -150,7 +150,7 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   }
 
   #onSizeUpdate() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

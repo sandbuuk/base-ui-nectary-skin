@@ -205,7 +205,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   }
 
   #onSizeUpdate() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 
