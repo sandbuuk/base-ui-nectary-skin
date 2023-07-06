@@ -121,7 +121,6 @@ test('date-picker screenshots', runScreenshotTests('sinch-date-picker', [
 
       bb = centerRect(await $eval((el) => el.prevMonthButtonRect))
       await page.mouse.click(bb.x, bb.y)
-
       yield { name: '4-switch-prev-month' }
 
       bb = centerRect(await $eval((el) => el.nthButtonRect(10)))

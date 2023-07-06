@@ -6,6 +6,7 @@ import {
   getLiteralAttribute,
   getReactEventHandler,
   isAttrTrue,
+  isElementFocused,
   NectaryElement,
   setClass,
   subscribeContext,
@@ -16,7 +17,18 @@ import {
 } from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import { inputTypes } from './utils'
+import {
+  deleteContentBackward,
+  deleteContentForward,
+  getMaskSymbols,
+  inputTypes,
+  insertText,
+  beginMaskedComposition,
+  endMaskedComposition,
+  splitValueAndMask,
+  getMergedValueSliced,
+  insertFromPaste,
+} from './utils'
 import type { TSinchInputElement, TSinchInputReact, TSinchInputType } from './types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
@@ -27,6 +39,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-input', class extends NectaryElement {
   #$input: HTMLInputElement
+  #$inputMask: HTMLElement
   #$iconSlot: HTMLSlotElement
   #$iconWrapper: HTMLElement
   #$rightSlot: HTMLSlotElement
@@ -34,10 +47,14 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #$leftSlot: HTMLSlotElement
   #$leftWrapper: HTMLElement
   #$wrapper: HTMLElement
-  #cursorPos: number | null = null
-  #isPendingDk = false
+  #selectionStart = 0
+  #selectionEnd = 0
+  #isCompositionInProgress = false
+  #compositionBeginValue = ''
+  #wasClearedByMask = false
   #controller: AbortController | null = null
   #sizeContext: Context<'size'>
+  #maskSymbols: ReturnType<typeof getMaskSymbols> | null = null
 
   constructor() {
     super()
@@ -47,6 +64,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$input = shadowRoot.querySelector('#input')!
+    this.#$inputMask = shadowRoot.querySelector('#input-mask')!
     this.#$iconSlot = shadowRoot.querySelector('slot[name="icon"]')!
     this.#$iconWrapper = shadowRoot.querySelector('#icon-wrapper')!
     this.#$rightSlot = shadowRoot.querySelector('slot[name="right"]')!
@@ -55,6 +73,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$leftWrapper = shadowRoot.querySelector('#left')!
     this.#$wrapper = shadowRoot.querySelector('#wrapper')!
     this.#sizeContext = new Context(this.#$wrapper, 'size')
+    this.#controller = new AbortController()
   }
 
   connectedCallback() {
@@ -62,16 +81,20 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
     this.setAttribute('role', 'textbox')
 
-    this.#controller = new AbortController()
+    if (this.#controller === null) {
+      this.#controller = new AbortController()
+    }
 
     const options: AddEventListenerOptions = {
       signal: this.#controller.signal,
     }
 
     this.#$input.addEventListener('input', this.#onInput, options)
+    this.#$input.addEventListener('cut', this.#onCut, options)
+    this.#$input.addEventListener('copy', this.#onCopy, options)
+    this.#$input.addEventListener('paste', this.#onPaste, options)
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart, options)
-    this.#$input.addEventListener('mousedown', this.#onSelectionChange, options)
-    this.#$input.addEventListener('keydown', this.#onSelectionChange, options)
+    this.#$input.addEventListener('compositionend', this.#onCompositionEnd, options)
     this.#$input.addEventListener('focus', this.#onInputFocus, options)
     this.#$input.addEventListener('blur', this.#onInputBlur, options)
     this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange, options)
@@ -80,6 +103,9 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.addEventListener('-change', this.#onChangeReactHandler, options)
     this.addEventListener('-focus', this.#onFocusReactHandler, options)
     this.addEventListener('-blur', this.#onBlurReactHandler, options)
+    this.addEventListener('-copy', this.#onCopyReactHandler, options)
+    this.addEventListener('-cut', this.#onCutReactHandler, options)
+    this.addEventListener('-paste', this.#onPasteReactHandler, options)
 
     this.#sizeContext.listen(this.#controller.signal)
     subscribeContext(this, 'size', this.#onContextSize, this.#controller.signal)
@@ -94,6 +120,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   disconnectedCallback() {
     super.disconnectedCallback()
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -101,6 +128,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       'type',
       'value',
       'placeholder',
+      'mask',
       'invalid',
       'disabled',
       'size',
@@ -126,25 +154,48 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         const nextVal = newVal ?? ''
         const prevVal = this.#$input.value
 
-        if (nextVal !== prevVal) {
-          const prevCursorPos = this.#$input.selectionEnd
-          const isPrevCursorEnd = prevCursorPos === prevVal.length
+        // Was it previously cleared by Incomplete Mask input
+        // Dont touch the input, which currently has partially filled value
+        if (this.#wasClearedByMask) {
+          this.#wasClearedByMask = false
 
-          this.#$input.value = nextVal
-
-          if (!isPrevCursorEnd) {
-            this.#$input.setSelectionRange(this.#cursorPos, this.#cursorPos)
+          if (nextVal.length === 0) {
+            break
           }
         }
 
-        this.#onRightSlotChange()
+        if (this.#maskSymbols !== null) {
+          const { value, placeholder } = splitValueAndMask(nextVal, this.#maskSymbols)
+
+          this.#$input.value = value
+          this.#$inputMask.textContent = placeholder
+
+          if (isElementFocused(this.#$input)) {
+            this.#$input.setSelectionRange(this.#selectionEnd, this.#selectionEnd)
+          }
+
+          break
+        }
+
+        if (nextVal !== prevVal) {
+          this.#$input.value = nextVal
+
+          if (isElementFocused(this.#$input)) {
+            this.#$input.setSelectionRange(this.#selectionEnd, this.#selectionEnd)
+          }
+        }
 
         break
       }
 
       case 'placeholder': {
-        this.#$input.placeholder = newVal ?? ''
-        updateAttribute(this, 'aria-placeholder', newVal)
+        this.#updatePlaceholder()
+
+        break
+      }
+
+      case 'mask': {
+        this.#updateMask()
 
         break
       }
@@ -207,6 +258,14 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   get value(): string {
     return getAttribute(this, 'value', '')
+  }
+
+  set mask(value: string | null) {
+    updateAttribute(this, 'mask', value)
+  }
+
+  get mask(): string | null {
+    return getAttribute(this, 'mask')
   }
 
   set placeholder(value: string | null) {
@@ -273,6 +332,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$input.selectionDirection = value
   }
 
+  setSelectionRange(selectionStart: number, selectionEnd: number): void {
+    this.#$input.setSelectionRange(selectionStart, selectionEnd)
+  }
+
   get focusable() {
     return true
   }
@@ -286,17 +349,334 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #onCompositionStart = () => {
-    this.#isPendingDk = true
+    this.#isCompositionInProgress = true
+
+    if (this.#maskSymbols !== null) {
+      const selectionStart = this.#$input.selectionStart!
+
+      this.#compositionBeginValue = this.#$input.value
+
+      if (selectionStart === this.#$input.value.length) {
+        return
+      }
+
+      const { value, placeholder } = beginMaskedComposition(this.#$input.value, this.#maskSymbols, selectionStart)
+
+      this.#$input.value = value
+      this.#$input.setSelectionRange(selectionStart, selectionStart)
+      this.#$inputMask.textContent = placeholder
+      this.#compositionBeginValue = value
+    }
   }
 
-  #onSelectionChange = () => {
-    this.#cursorPos = this.#$input.selectionEnd
+  #onCompositionEnd = (e: CompositionEvent) => {
+    this.#isCompositionInProgress = false
+
+    if (this.#maskSymbols !== null) {
+      const value = this.#$input.value
+      const wasValueInserted = value.length !== this.#compositionBeginValue.length
+      const res = endMaskedComposition(value, e.data!, this.#maskSymbols, this.#$input.selectionStart!, wasValueInserted)
+
+      this.#compositionBeginValue = ''
+
+      if (res !== null) {
+        const { value, placeholder, mergedValue, cursorPos } = res
+
+        this.#$input.value = value
+        this.#$input.setSelectionRange(cursorPos, cursorPos)
+        this.#$inputMask.textContent = placeholder
+
+        if (mergedValue.length > 0) {
+          this.#selectionStart = cursorPos
+          this.#selectionEnd = cursorPos
+          this.#dispatchChangeEvent(mergedValue)
+        }
+      }
+
+      if ((res === null || res.mergedValue.length === 0) && this.value.length !== 0) {
+        this.#dispatchMaskClearChangeEvent()
+      }
+    } else {
+      this.#onInput()
+    }
   }
 
-  #onInput = (e: Event) => {
-    e.stopPropagation()
+  #onMaskBeforeInput = (e: InputEvent) => {
+    this.#handleMaskBeforeInput(e.inputType, e.data)
 
-    this.#handleInput()
+    e.preventDefault()
+  }
+
+  #handleMaskBeforeInput(inputType: string, data: string | null) {
+    const selectionStart = this.#$input.selectionStart ?? 0
+    const selectionEnd = this.#$input.selectionEnd ?? 0
+
+    let res: ReturnType<typeof insertText> | null = null
+
+    switch (inputType) {
+      case 'insertText': {
+        res = insertText(this.#$input.value, data!, this.#maskSymbols!, selectionStart, selectionEnd)
+
+        break
+      }
+      case 'insertFromPaste': {
+        res = insertFromPaste(this.#$input.value, data!, this.#maskSymbols!, selectionStart, selectionEnd)
+
+        break
+      }
+      case 'deleteByCut':
+      case 'deleteContent':
+      case 'deleteContentBackward': {
+        res = deleteContentBackward(this.#$input.value, this.#maskSymbols!, selectionStart, selectionEnd)
+
+        break
+      }
+      case 'deleteContentForward': {
+        res = deleteContentForward(this.#$input.value, this.#maskSymbols!, selectionStart, selectionEnd)
+
+        break
+      }
+    }
+
+    if (res !== null) {
+      const { value, placeholder, mergedValue, cursorPos } = res
+
+      this.#$input.value = value
+      this.#$input.setSelectionRange(cursorPos, cursorPos)
+      this.#$inputMask.textContent = placeholder
+
+      if (mergedValue.length > 0) {
+        this.#selectionStart = cursorPos
+        this.#selectionEnd = cursorPos
+        this.#dispatchChangeEvent(mergedValue)
+      }
+    }
+
+    if ((res === null || res.mergedValue.length === 0) && this.value.length !== 0) {
+      // Dispatch clear event
+      this.#dispatchMaskClearChangeEvent()
+    }
+  }
+
+  #handleBeforeInput(inputType: string, data: string | null) {
+    const selectionStart = this.#$input.selectionStart ?? 0
+    const selectionEnd = this.#$input.selectionEnd ?? 0
+
+    switch (inputType) {
+      case 'insertFromPaste': {
+        if (data === null) {
+          return
+        }
+
+        const value = this.value
+        const cursorPos = selectionStart + data.length
+        const nextValue = value.substring(0, selectionStart) + data + value.substring(selectionEnd)
+
+        this.#selectionStart = cursorPos
+        this.#selectionEnd = cursorPos
+        this.#dispatchChangeEvent(nextValue)
+
+        break
+      }
+      case 'deleteByCut': {
+        const value = this.value
+        const cursorPos = selectionStart
+        const nextValue = value.substring(0, selectionStart) + value.substring(selectionEnd)
+
+        this.#selectionStart = cursorPos
+        this.#selectionEnd = cursorPos
+        this.#dispatchChangeEvent(nextValue)
+
+        break
+      }
+    }
+  }
+
+  #onInput = () => {
+    if (this.#isCompositionInProgress) {
+      return
+    }
+
+    if (this.#maskSymbols !== null) {
+      return
+    }
+
+    const nextValue = this.#$input.value
+    const prevValue = this.value
+
+    if (prevValue !== nextValue) {
+      const nextSelectionStart = this.#$input.selectionStart!
+      const nextSelectionEnd = this.#$input.selectionEnd!
+
+      // Reset input value to enforce controlled state
+      this.#$input.value = prevValue
+      this.#$input.setSelectionRange(this.#selectionStart, this.#selectionEnd)
+
+      this.#selectionStart = nextSelectionStart
+      this.#selectionEnd = nextSelectionEnd
+      this.#dispatchChangeEvent(nextValue)
+    }
+  }
+
+  #onMaskInputAutofillChange = () => {
+    const nextVal = this.#$input.value
+
+    if (this.#maskSymbols !== null) {
+      const { value, placeholder, mergedValue, cursorPos } = splitValueAndMask(nextVal, this.#maskSymbols)
+
+      this.#$input.value = value
+      this.#$input.setSelectionRange(cursorPos, cursorPos)
+      this.#$inputMask.textContent = placeholder
+
+      if (mergedValue.length > 0) {
+        this.#selectionStart = cursorPos
+        this.#selectionEnd = cursorPos
+        this.#dispatchChangeEvent(mergedValue)
+      } else {
+        // Dispatch clear event
+        this.#dispatchMaskClearChangeEvent()
+      }
+    }
+  }
+
+  #onCopy = (e: ClipboardEvent) => {
+    const value = this.#$input.value
+    const selectionStart = this.#$input.selectionStart ?? 0
+    const selectionEnd = this.#$input.selectionEnd ?? 0
+
+    if (e.clipboardData === null || selectionStart === selectionEnd) {
+      return
+    }
+
+    const copiedValue = this.#maskSymbols === null
+      ? value.substring(selectionStart, selectionEnd)
+      : getMergedValueSliced(value, this.#maskSymbols, selectionStart, selectionEnd)
+    let replacedValue: string | null = null
+    const replaceWith = (value: string) => {
+      replacedValue = value ?? null
+    }
+
+    if (this.#maskSymbols !== null) {
+      e.preventDefault()
+      e.clipboardData.setData('text/plain', copiedValue)
+    }
+
+    const event = new CustomEvent('-copy', {
+      detail: {
+        value: copiedValue,
+        replaceWith,
+      },
+      cancelable: true,
+    })
+
+    this.dispatchEvent(event)
+
+    if (event.defaultPrevented || replacedValue !== null) {
+      e.preventDefault()
+    }
+
+    if (replacedValue !== null) {
+      e.clipboardData.setData('text/plain', replacedValue)
+    }
+  }
+
+  #onCut = (e: ClipboardEvent) => {
+    const value = this.#$input.value
+    const selectionStart = this.#$input.selectionStart ?? 0
+    const selectionEnd = this.#$input.selectionEnd ?? 0
+
+    if (e.clipboardData === null || selectionStart === selectionEnd) {
+      return
+    }
+
+    const copiedValue = this.#maskSymbols === null
+      ? value.substring(selectionStart, selectionEnd)
+      : getMergedValueSliced(value, this.#maskSymbols, selectionStart, selectionEnd)
+    let replacedValue: string | null = null
+    const replaceWith = (value: string) => {
+      replacedValue = value ?? null
+    }
+
+    if (this.#maskSymbols !== null) {
+      e.preventDefault()
+      e.clipboardData.setData('text/plain', copiedValue)
+    }
+
+    const event = new CustomEvent('-cut', {
+      detail: {
+        value: copiedValue,
+        replaceWith,
+      },
+      cancelable: true,
+    })
+
+    this.dispatchEvent(event)
+
+    if (event.defaultPrevented || replacedValue !== null) {
+      e.preventDefault()
+    }
+
+    if (replacedValue !== null) {
+      e.clipboardData.setData('text/plain', replacedValue)
+
+      if (this.#maskSymbols !== null) {
+        this.#handleMaskBeforeInput('deleteByCut', null)
+      } else {
+        this.#handleBeforeInput('deleteByCut', null)
+      }
+    }
+  }
+
+  #onPaste = (e: ClipboardEvent) => {
+    const pasteValue = e.clipboardData?.getData('text/plain') ?? ''
+    let replacedValue = ''
+    const replaceWith = (value: string) => {
+      replacedValue = value ?? ''
+    }
+
+    const event = new CustomEvent('-paste', {
+      detail: {
+        value: pasteValue,
+        replaceWith,
+      },
+      cancelable: true,
+    })
+
+    this.dispatchEvent(event)
+
+    if (event.defaultPrevented) {
+      e.preventDefault()
+    }
+
+    if (replacedValue.length === 0) {
+      return
+    }
+
+    e.preventDefault()
+
+    if (this.#maskSymbols !== null) {
+      this.#handleMaskBeforeInput('insertFromPaste', replacedValue)
+    } else {
+      this.#handleBeforeInput('insertFromPaste', replacedValue)
+    }
+  }
+
+  #dispatchMaskClearChangeEvent() {
+    this.#wasClearedByMask = true
+    this.#dispatchChangeEvent('')
+  }
+
+  #dispatchChangeEvent(value: string) {
+    // Dont send same value
+    if (value === this.value) {
+      return
+    }
+
+    this.dispatchEvent(
+      new CustomEvent('-change', {
+        detail: value,
+      })
+    )
   }
 
   #onContextSize = (e: CustomEvent<TContextSize>) => {
@@ -316,33 +696,38 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     }
   }
 
-  #handleInput() {
-    const nextValue = this.#$input.value
-    const prevValue = this.value
-
-    if (prevValue !== nextValue) {
-      const nextCursorPos = this.#$input.selectionEnd
-
-      if (!this.#isPendingDk) {
-        // Reset input value to enforce controlled state
-        this.#$input.value = prevValue
-
-        const prevCursorPos = this.#cursorPos
-        const isPrevCursorEnd = prevCursorPos === null || prevCursorPos === prevValue.length
-
-        if (!isPrevCursorEnd) {
-          this.#$input.setSelectionRange(prevCursorPos, prevCursorPos)
-        }
+  #updateMask() {
+    if (this.mask !== null) {
+      // Subscribe once, so only if the mask disabled before
+      if (this.#maskSymbols === null) {
+        this.#$input.addEventListener('beforeinput', this.#onMaskBeforeInput, { signal: this.#controller!.signal })
+        this.#$input.addEventListener('change', this.#onMaskInputAutofillChange, { signal: this.#controller!.signal })
       }
 
-      this.#isPendingDk = false
-      this.#cursorPos = nextCursorPos
+      this.#maskSymbols = getMaskSymbols(this.mask)
 
-      this.dispatchEvent(
-        new CustomEvent('-change', {
-          detail: nextValue,
-        })
-      )
+      const { value, placeholder } = splitValueAndMask(this.#$input.value, this.#maskSymbols)
+
+      this.#$input.value = value
+      this.#$inputMask.textContent = placeholder
+    } else {
+      this.#maskSymbols = null
+      this.#$input.removeEventListener('beforeinput', this.#onMaskBeforeInput)
+      this.#$input.removeEventListener('change', this.#onMaskInputAutofillChange)
+    }
+
+    this.#updatePlaceholder()
+  }
+
+  #updatePlaceholder() {
+    if (this.#maskSymbols === null) {
+      const value = this.placeholder
+
+      this.#$input.placeholder = value ?? ''
+      updateAttribute(this, 'aria-placeholder', value)
+    } else {
+      updateAttribute(this, 'aria-placeholder', null)
+      this.#$input.placeholder = ''
     }
   }
 
@@ -373,7 +758,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   #onSizeUpdate() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 
@@ -392,6 +777,18 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   #onBlurReactHandler = () => {
     getReactEventHandler(this, 'on-blur')?.()
+  }
+
+  #onCopyReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-copy')?.(e)
+  }
+
+  #onCutReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-cut')?.(e)
+  }
+
+  #onPasteReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-paste')?.(e)
   }
 })
 

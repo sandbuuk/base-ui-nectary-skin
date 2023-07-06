@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { TSinchInputClipboardEvent } from '@sinch-engage/nectary/input/types'
 import type { FC } from 'react'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/select-button'
@@ -20,10 +21,38 @@ export const Input: FC<TInput> = ({ search }) => {
   }
   const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-input-focus'))
   const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-input-blur'))
+  const onCopy = search.get('copy') != null
+    ? (e: TSinchInputClipboardEvent) => {
+      const { value, replaceWith } = e.detail
+
+      replaceWith('REPLACED')
+
+      window.dispatchEvent(new CustomEvent('sinch-input-copy', { detail: value }))
+    }
+    : undefined
+  const onCut = search.get('cut') != null
+    ? (e: TSinchInputClipboardEvent) => {
+      const { value, replaceWith } = e.detail
+
+      replaceWith('REPLACED')
+
+      window.dispatchEvent(new CustomEvent('sinch-input-cut', { detail: value }))
+    }
+    : undefined
+  const onPaste = search.get('paste') != null
+    ? (e: TSinchInputClipboardEvent) => {
+      const { value, replaceWith } = e.detail
+
+      replaceWith('REPLACED')
+
+      window.dispatchEvent(new CustomEvent('sinch-input-paste', { detail: value }))
+    }
+    : undefined
   const type: any = search.get('type') ?? undefined
   const size: any = search.get('size') ?? undefined
   const isInvalid = search.get('invalid') !== null
-  const placeholderText = search.get('placeholder') ?? undefined
+  const mask = search.get('mask') ?? undefined
+  const placeholder = search.get('placeholder') ?? undefined
   const autocomplete = search.get('autocomplete') ?? undefined
   const isDisabled = search.get('disabled') != null
   const hasLeft = search.get('left') != null
@@ -34,7 +63,8 @@ export const Input: FC<TInput> = ({ search }) => {
     <sinch-input
       type={type}
       size={size}
-      placeholder={placeholderText}
+      mask={mask}
+      placeholder={placeholder}
       disabled={isDisabled}
       invalid={isInvalid}
       autocomplete={autocomplete}
@@ -42,6 +72,9 @@ export const Input: FC<TInput> = ({ search }) => {
       on-change={onChange}
       on-focus={onFocus}
       on-blur={onBlur}
+      on-copy={onCopy}
+      on-cut={onCut}
+      on-paste={onPaste}
       aria-label="Input"
     >
       {hasIcon && (

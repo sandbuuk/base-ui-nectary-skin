@@ -10,20 +10,22 @@ const inputStyles: CSSProperties = {
   width: 300,
 }
 
+const reverseDateValue = (value: string) => value.split('-').reverse().join('-')
+
 export const LocaleExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
-  const [value, setValue] = useState('2022-07-19')
-  const [isoValue, setIsoValue] = useState('2022-07-19')
+  const [inputValue, setInputValue] = useState('19-07-2022')
+  const [pickerValue, setPickerValue] = useState('2022-07-19')
 
-  const onChange = (e: CustomEvent<string>) => {
-    setValue(e.detail)
+  const onInputChange = (e: CustomEvent<string>) => {
+    setInputValue(e.detail)
   }
-  const onIsoChange = (e: CustomEvent<string>) => {
-    setValue(e.detail)
+  const onPickerChange = (e: CustomEvent<string>) => {
+    setInputValue(reverseDateValue(e.detail))
     setOpen(false)
   }
   const onOpen = () => {
-    setIsoValue(value)
+    setPickerValue(reverseDateValue(inputValue))
     setOpen(true)
   }
   const onClose = () => setOpen(false)
@@ -40,9 +42,9 @@ export const LocaleExample: FC = () => {
         slot="target"
         style={inputStyles}
         aria-label="Pick date"
-        placeholder="YYYY-MM-DD"
-        value={value}
-        on-change={onChange}
+        mask="00-00-0000@@DD/MM/YYYY"
+        value={inputValue}
+        on-change={onInputChange}
       >
         <sinch-icon-button
           slot="right"
@@ -63,8 +65,8 @@ export const LocaleExample: FC = () => {
         prev-month-aria-label="Next Month"
         next-year-aria-label="Next Year"
         prev-year-aria-label="Prev Year"
-        value={isoValue}
-        on-change={onIsoChange}
+        value={pickerValue}
+        on-change={onPickerChange}
       />
     </sinch-popover>
   )

@@ -3,11 +3,15 @@ import type { TSinchSize } from '../utils/size'
 
 export type TSinchInputType = 'text' | 'password'
 
+export type TSinchInputClipboardEvent = CustomEvent<{value: string, replaceWith: (value: string) => void}>
+
 export type TSinchInputElement = HTMLElement & {
   /** Text field type, `text` by default */
   type: TSinchInputType,
   /** Value */
   value: string,
+  /** Mask */
+  mask: string | null,
   /** Text that appears in the text field when it has no value set */
   placeholder: string | null,
   /** The HTML autocomplete attribute */
@@ -21,6 +25,7 @@ export type TSinchInputElement = HTMLElement & {
   selectionStart: number | null,
   selectionEnd: number | null,
   selectionDirection: 'forward' | 'backward' | 'none' | null,
+  setSelectionRange(selectionStart: number, selectionEnd: number): void,
   /** Change value event */
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   /** Focus event */
@@ -31,6 +36,8 @@ export type TSinchInputElement = HTMLElement & {
   setAttribute(name: 'type', value: TSinchInputType): void,
   /** Value */
   setAttribute(name: 'value', value: string): void,
+  /** Mask */
+  setAttribute(name: 'mask', value: string): void,
   /** Text that appears in the text field when it has no value set */
   setAttribute(name: 'placeholder', value: string): void,
   /** The HTML autocomplete attribute */
@@ -46,6 +53,8 @@ export type TSinchInputElement = HTMLElement & {
 export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   /** Controlled value, doesn't change on its own and requres an onChange-value state loop */
   value: string,
+  /** Mask */
+  mask?: string,
   /** Label that is used for a11y – might be different from `label` */
   'aria-label': string,
   /** Text field type, `text` by default */
@@ -66,4 +75,7 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   'on-focus'?: (e: CustomEvent<void>) => void,
   /** Blur handler */
   'on-blur'?: (e: CustomEvent<void>) => void,
+  'on-cut'?: (e: TSinchInputClipboardEvent) => void,
+  'on-copy'?: (e: TSinchInputClipboardEvent) => void,
+  'on-paste'?: (e: TSinchInputClipboardEvent) => void,
 }

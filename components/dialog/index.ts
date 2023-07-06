@@ -67,9 +67,10 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   disconnectedCallback() {
+    this.#onCollapse()
     super.disconnectedCallback()
     this.#controller!.abort()
-    this.#onCollapse()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -155,7 +156,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   #onExpand() {
-    if (!this.isConnected || this.#isOpen()) {
+    if (!this.isDomConnected || this.#isOpen()) {
       return
     }
 

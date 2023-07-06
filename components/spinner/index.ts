@@ -30,6 +30,7 @@ defineCustomElement('sinch-spinner', class extends NectaryElement {
 
   disconnectedCallback() {
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {

@@ -88,9 +88,10 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   disconnectedCallback() {
+    this.#tooltipState.destroy()
     super.disconnectedCallback()
     this.#controller!.abort()
-    this.#tooltipState.destroy()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -264,7 +265,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   #updateText() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 
@@ -283,7 +284,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   #subscribeMouseEnterEvent() {
-    if (!this.isConnected || this.#isSubscribed) {
+    if (!this.isDomConnected || this.#isSubscribed) {
       return
     }
 

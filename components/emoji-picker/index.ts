@@ -105,8 +105,9 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller!.abort()
     this.#searchDebounce.cancel()
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   get skinToneButtonRect(): TRect {

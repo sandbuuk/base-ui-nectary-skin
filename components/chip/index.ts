@@ -58,6 +58,7 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   disconnectedCallback() {
     super.disconnectedCallback()
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -115,7 +116,7 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   }
 
   #updateColor() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

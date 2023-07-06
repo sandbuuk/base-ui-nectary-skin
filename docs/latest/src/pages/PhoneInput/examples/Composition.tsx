@@ -28,6 +28,7 @@ export const CompositionExample: FC = () => {
     setInputValue(e.detail)
   }
   const phoneCode = countries[menuValue]?.phoneCode ?? ''
+  const phoneMask = countries[menuValue]?.phoneMask ?? undefined
 
   return (
     <sinch-popover
@@ -40,7 +41,8 @@ export const CompositionExample: FC = () => {
       <sinch-input
         slot="target"
         aria-label="Phone number"
-        placeholder="Phone number"
+        mask={phoneMask}
+        placeholder="Phone Number"
         value={inputValue}
         style={inputStyles}
         on-change={onInputChange}

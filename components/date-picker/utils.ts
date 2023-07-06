@@ -171,3 +171,14 @@ export const sortDates = (dateTuple: [Date, Date]): [Date, Date] => {
 
   return dateTuple
 }
+
+export const isDateOnScreen = (uiDate: Date | null, date: Date | null) => {
+  if (uiDate === null || date === null) {
+    return false
+  }
+
+  const firstDateOfMonth = new Date(Date.UTC(uiDate.getUTCFullYear(), uiDate.getUTCMonth(), 1))
+  const lastDateOfMonth = new Date(Date.UTC(uiDate.getUTCFullYear(), uiDate.getUTCMonth() + 1, 0))
+
+  return isDateBetween(date, firstDateOfMonth, lastDateOfMonth)
+}

@@ -20,6 +20,7 @@ defineCustomElement('sinch-stop-events', class extends HTMLElement {
 
   disconnectedCallback() {
     this.#controller!.abort()
+    this.#controller = null
   }
 
   #stopEvent = (e: Event) => {

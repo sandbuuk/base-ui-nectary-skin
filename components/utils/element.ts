@@ -53,17 +53,17 @@ export class NectaryElement extends HTMLElement {
     return false
   }
 
-  #isConnected = false
+  #isDomConnected = false
 
   connectedCallback() {
-    this.#isConnected = true
+    this.#isDomConnected = true
   }
 
   disconnectedCallback() {
-    this.#isConnected = false
+    this.#isDomConnected = false
   }
 
-  get isConnected(): boolean {
-    return this.#isConnected
+  get isDomConnected(): boolean {
+    return this.#isDomConnected
   }
 }

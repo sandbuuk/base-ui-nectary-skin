@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { FC } from 'react'
+import type { CSSProperties, FC } from 'react'
 import '@sinch-engage/nectary/field'
 import '@sinch-engage/nectary/input'
 import '@sinch-engage/nectary/popover'
@@ -7,20 +7,23 @@ import '@sinch-engage/nectary/time-picker'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary-assets/icons/schedule'
 
+const style: CSSProperties = {
+  width: 200,
+}
+
 export const CompositionExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
-  const [value, setValue] = useState('22:30:00')
-  const [isoValue, setIsoValue] = useState('22:30:00')
-
-  const onChange = (e: CustomEvent<string>) => {
-    setValue(e.detail)
+  const [inputValue, setInputValue] = useState('22:30')
+  const [pickerValue, setPickerValue] = useState('22:30')
+  const onInputChange = (e: CustomEvent<string>) => {
+    setInputValue(e.detail)
   }
-  const onIsoChange = (e: CustomEvent<string>) => {
-    setValue(e.detail)
+  const onPickerChange = (e: CustomEvent<string>) => {
+    setInputValue(e.detail)
     setOpen(false)
   }
   const onOpen = () => {
-    setIsoValue(value)
+    setPickerValue(inputValue)
     setOpen(true)
   }
   const onClose = () => setOpen(false)
@@ -35,15 +38,16 @@ export const CompositionExample: FC = () => {
     >
       <sinch-field
         slot="target"
-        label="Date picker"
+        label="Time picker"
         additionalText="Additional text"
+        style={style}
       >
         <sinch-input
           slot="input"
           aria-label="Pick time"
-          placeholder="hh:mm:ss"
-          value={value}
-          on-change={onChange}
+          mask="00:00@@HH:MM"
+          value={inputValue}
+          on-change={onInputChange}
         >
           <sinch-icon-button
             slot="right"
@@ -59,8 +63,8 @@ export const CompositionExample: FC = () => {
         slot="content"
         aria-label="Time Picker"
         submit-aria-label="Submit time"
-        value={isoValue}
-        on-change={onIsoChange}
+        value={pickerValue}
+        on-change={onPickerChange}
       />
     </sinch-popover>
   )

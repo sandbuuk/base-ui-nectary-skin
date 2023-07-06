@@ -73,6 +73,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
   disconnectedCallback() {
     super.disconnectedCallback()
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -288,7 +289,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
   }
 
   #onSizeUpdate() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

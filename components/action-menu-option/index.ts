@@ -43,6 +43,7 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
 
   disconnectedCallback() {
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
