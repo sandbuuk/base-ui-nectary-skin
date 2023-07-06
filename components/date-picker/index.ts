@@ -35,6 +35,7 @@ import {
   incMonth,
   incYear,
   isDateBetween,
+  isDateOnScreen,
   isoToDate,
   isValidDate,
   sortDates,
@@ -428,11 +429,13 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
         const date2 = isoToDate(isoDates[1])
 
         if (isValidDate(date1) && isValidDate(date2)) {
-          this.#date1 = date1
-          this.#date2 = date2
+          [this.#date1, this.#date2] = sortDates([date1, date2])
 
-          this.#uiDate = cloneDate(this.#date2)
+          if (this.#uiDate === null || (!isDateOnScreen(this.#uiDate, date1) && !isDateOnScreen(this.#uiDate, date2))) {
+            this.#uiDate = cloneDate(this.#date1)
+          }
         } else {
+          // goto today
           this.#uiDate = null
         }
       } else if (isoDates.length === 1) {
@@ -450,6 +453,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
         this.#date1 = valueDate
         this.#uiDate = cloneDate(this.#date1)
       } else {
+        // goto today
         this.#uiDate = null
       }
     }
@@ -496,9 +500,7 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
         const week = month[wi]
         const day = week?.[di]
 
-        $day.classList.remove('selected')
-        $day.classList.remove('range')
-        $day.classList.remove('today')
+        $day.classList.remove('selected', 'range', 'today')
 
         if (day == null) {
           $day.textContent = ''
