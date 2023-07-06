@@ -66,7 +66,7 @@ type TTestProps<T extends keyof HTMLElementTagNameMap> = {
 export const makeAccessibilityTests = <T extends keyof HTMLElementTagNameMap>(pageUrl: string, elementSelector: T) =>
   (testProps: TTestProps<T>) =>
     async ({ page }: PlaywrightTestArgs, info: TestInfo) => {
-      if (info.project.name !== 'chromium-react') {
+      if (info.project.name !== 'chromium-reac') {
         info.skip()
 
         return
