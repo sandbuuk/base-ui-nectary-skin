@@ -6,6 +6,7 @@ import {
   getLiteralAttribute,
   getReactEventHandler,
   isAttrTrue,
+  isElementFocused,
   NectaryElement,
   setClass,
   subscribeContext,
@@ -167,15 +168,21 @@ defineCustomElement('sinch-input', class extends NectaryElement {
           const { value, placeholder } = splitValueAndMask(nextVal, this.#maskSymbols)
 
           this.#$input.value = value
-          this.#$input.setSelectionRange(this.#selectionEnd, this.#selectionEnd)
           this.#$inputMask.textContent = placeholder
+
+          if (isElementFocused(this.#$input)) {
+            this.#$input.setSelectionRange(this.#selectionEnd, this.#selectionEnd)
+          }
 
           break
         }
 
         if (nextVal !== prevVal) {
           this.#$input.value = nextVal
-          this.#$input.setSelectionRange(this.#selectionEnd, this.#selectionEnd)
+
+          if (isElementFocused(this.#$input)) {
+            this.#$input.setSelectionRange(this.#selectionEnd, this.#selectionEnd)
+          }
         }
 
         break
