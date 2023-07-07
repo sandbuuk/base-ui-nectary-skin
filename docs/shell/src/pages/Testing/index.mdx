@@ -5,22 +5,21 @@ import { ButtonCounterExample } from './examples/ButtonCounter.tsx?example'
 
 # Introduction
 
-## What should you test
+## Testing your application
 
-Your job is to test **your** application **NOT** the Nectary components (That's the responsibility of the Nectary team!).
-However, in order to test your application, you would need to
-interact with the Nectary components, but only through their interface.
-The implementation details of the components are none of your concern.
-You should only care about the public interface, [Read more here](https://www.artima.com/articles/design-principles-from-design-patterns).
+We hope that the components we have built will make it easier for you to develop your application.
+As the Nectary team, we take responsibility for testing the Nectary components.
+Your role is to test the application you have developed using these components.
+During the testing process, it is important to interact with our components solely through their public interface.
+Keep in mind that implementation details of the components may change, and it is not advisable to rely on those details in your test code.
+[Read more here](https://www.artima.com/articles/design-principles-from-design-patterns).
 
 ## What is the purpose of testing
 
-You are testing for your users.
-Testing can also be a good thing for the development process itself; see [TDD](https://en.wikipedia.org/wiki/Test-driven_development).
-However, we are not testing for code coverage.
-Instead, testing should be similar to how your users interact with your application.
-From a product quality standpoint, the best kind of tests are performed by real users in a real browser.
-However, that would be impractical, so as software developers, we try to automate things.
+Testing serves the purpose of ensuring a positive user experience.
+It also benefits the development process itself, as demonstrated by Test-Driven Development (TDD).
+Effective testing should mirror the way users interact with your application.
+While the ultimate quality standard is achieved through real users in a real browser. However, practicality calls for automation efforts.
 
 ## Our Recommendation: Playwright
 
