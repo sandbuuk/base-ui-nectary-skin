@@ -7315,6 +7315,46 @@
             "value": "#FFFFFF",
             "type": "color"
           }
+        },
+        "cta": {
+          "default": {
+            "value": "#2ebf4e",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{sys.color.cta.default}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": "0.15",
+                  "space": "lch"
+                }
+              }
+            }
+          },
+          "active": {
+            "value": "{sys.color.cta.default}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": "0.3",
+                  "space": "lch"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "value": "#9E9E9E",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#FFFFFF",
+            "type": "color"
+          }
         }
       },
       "shape-radius": {
@@ -7342,8 +7382,7 @@
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
       "name": "Sinch brand light",
       "selectedTokenSets": {
-        "Nectary / Base theme": "enabled",
-        "SMB / MessageMedia Old": "disabled"
+        "Nectary / Base theme": "enabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -9376,8 +9415,7 @@
       "name": "Sinch brand dark",
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
-        "Nectary / Dark theme": "enabled",
-        "SMB / MessageMedia Old": "disabled"
+        "Nectary / Dark theme": "enabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -10524,8 +10562,7 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / SimpleTexting": "enabled",
-        "SMB / MessageMedia Old": "disabled"
+        "SMB / SimpleTexting": "enabled"
       }
     },
     {
