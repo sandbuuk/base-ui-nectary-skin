@@ -11,6 +11,7 @@ import { Children } from 'react'
 import './styles.css'
 import { SyntaxHighlighter } from '../SyntaxHighlighter'
 import type { MDXComponents } from 'mdx/types'
+import type { ReactElement } from 'react'
 
 export const commonComponents: MDXComponents = {
   p: ({ children }) => (
@@ -75,6 +76,9 @@ export const commonComponents: MDXComponents = {
         {children}
       </li>
     )
+  },
+  pre: ({ children }) => {
+    return children as ReactElement
   },
   code: ({ className, children }) => {
     if (className == null) {
