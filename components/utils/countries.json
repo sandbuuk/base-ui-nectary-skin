@@ -152,7 +152,7 @@
   "br": {
     "name": "Brazil",
     "phoneCode": "+55",
-    "phoneMask": "(00)-00000-0000"
+    "phoneMask": "00-00000-0000"
   },
   "bs": {
     "name": "Bahamas",
@@ -166,8 +166,8 @@
   },
   "bv": {
     "name": "Bouvet Island",
-    "phoneCode": "+55",
-    "phoneMask": "(00)-00000-0000"
+    "phoneCode": "+47",
+    "phoneMask": "000-00-000"
   },
   "bw": {
     "name": "Botswana",
