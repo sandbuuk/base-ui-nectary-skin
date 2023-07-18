@@ -1,3 +1,8 @@
+## v2.2.1 (2023-07-18)
+
+* 🐞 fix Bouvet Islands phone code
+* 🐞 tweak Brazil phone code mask
+
 ## v2.2.0 (2023-07-06)
 
 * ➕ add `mask` attribute to `sinch-input`
