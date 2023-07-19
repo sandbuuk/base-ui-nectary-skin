@@ -5973,19 +5973,11 @@
             "background": {
               "value": "{ref.color.main.snow.500}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.stormy.700}",
-              "type": "color"
             }
           },
           "light_blue": {
             "background": {
               "value": "{ref.color.complementary.night.200}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.night.700}",
               "type": "color"
             }
           },
@@ -5993,19 +5985,11 @@
             "background": {
               "value": "{ref.color.complementary.mud.200}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.mud.700}",
-              "type": "color"
             }
           },
           "light_gray": {
             "background": {
               "value": "{ref.color.complementary.dirt.200}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.dirt.700}",
               "type": "color"
             }
           },
@@ -6013,19 +5997,11 @@
             "background": {
               "value": "{ref.color.complementary.grass.200}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.grass.700}",
-              "type": "color"
             }
           },
           "light_orange": {
             "background": {
               "value": "{ref.color.complementary.orange.200}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.orange.700}",
               "type": "color"
             }
           },
@@ -6033,19 +6009,11 @@
             "background": {
               "value": "{ref.color.complementary.candy.200}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.candy.700}",
-              "type": "color"
             }
           },
           "light_violet": {
             "background": {
               "value": "{ref.color.complementary.violet.200}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.violet.700}",
               "type": "color"
             }
           },
@@ -6053,19 +6021,11 @@
             "background": {
               "value": "{ref.color.complementary.bolt.200}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.bolt.700}",
-              "type": "color"
             }
           },
           "dark_blue": {
             "background": {
               "value": "{ref.color.complementary.night.700}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.night.200}",
               "type": "color"
             }
           },
@@ -6073,19 +6033,11 @@
             "background": {
               "value": "{ref.color.complementary.mud.700}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.mud.200}",
-              "type": "color"
             }
           },
           "dark_gray": {
             "background": {
               "value": "{ref.color.complementary.dirt.700}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.dirt.200}",
               "type": "color"
             }
           },
@@ -6093,19 +6045,11 @@
             "background": {
               "value": "{ref.color.complementary.grass.700}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.grass.200}",
-              "type": "color"
             }
           },
           "dark_pink": {
             "background": {
               "value": "{ref.color.complementary.candy.700}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.candy.200}",
               "type": "color"
             }
           },
@@ -6113,19 +6057,11 @@
             "background": {
               "value": "{ref.color.complementary.violet.700}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.violet.200}",
-              "type": "color"
             }
           },
           "dark_yellow": {
             "background": {
               "value": "{ref.color.complementary.bolt.700}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.bolt.200}",
               "type": "color"
             }
           },
@@ -6133,19 +6069,11 @@
             "background": {
               "value": "{ref.color.complementary.night.400}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.snow.100}",
-              "type": "color"
             }
           },
           "brown": {
             "background": {
               "value": "{ref.color.complementary.mud.400}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.snow.100}",
               "type": "color"
             }
           },
@@ -6153,19 +6081,11 @@
             "background": {
               "value": "{ref.color.complementary.dirt.400}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.snow.100}",
-              "type": "color"
             }
           },
           "green": {
             "background": {
               "value": "{ref.color.complementary.grass.400}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.stormy.700}",
               "type": "color"
             }
           },
@@ -6173,19 +6093,11 @@
             "background": {
               "value": "{ref.color.complementary.orange.400}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.stormy.700}",
-              "type": "color"
             }
           },
           "pink": {
             "background": {
               "value": "{ref.color.complementary.candy.400}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.stormy.700}",
               "type": "color"
             }
           },
@@ -6193,19 +6105,11 @@
             "background": {
               "value": "{ref.color.complementary.violet.400}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.stormy.700}",
-              "type": "color"
             }
           },
           "olive": {
             "background": {
               "value": "{sys.color.feedback.success.background}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{sys.color.feedback.success.foreground}",
               "type": "color"
             }
           },
@@ -6213,29 +6117,17 @@
             "background": {
               "value": "{sys.color.feedback.info.background}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{sys.color.feedback.info.foreground}",
-              "type": "color"
             }
           },
           "pumpkin": {
             "background": {
               "value": "{sys.color.feedback.warning.background}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{sys.color.feedback.warning.foreground}",
-              "type": "color"
             }
           },
           "jasper": {
             "background": {
               "value": "{sys.color.feedback.invalid.background}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{sys.color.feedback.invalid.foreground}",
               "type": "color"
             }
           },
@@ -6249,19 +6141,11 @@
             "background": {
               "value": "{ref.color.complementary.bolt.400}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.stormy.700}",
-              "type": "color"
             }
           },
           "light_red": {
             "background": {
               "value": "{ref.color.main.raspberry.200}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.raspberry.700}",
               "type": "color"
             }
           },
@@ -6269,29 +6153,17 @@
             "background": {
               "value": "{ref.color.main.raspberry.700}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.raspberry.200}",
-              "type": "color"
             }
           },
           "red": {
             "background": {
               "value": "{ref.color.main.raspberry.500}",
               "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.main.stormy.800}",
-              "type": "color"
             }
           },
           "dark-orange": {
             "background": {
               "value": "{ref.color.complementary.orange.700}",
-              "type": "color"
-            },
-            "foreground": {
-              "value": "{ref.color.complementary.orange.200}",
               "type": "color"
             }
           },
@@ -6300,19 +6172,11 @@
               "background": {
                 "value": "{sys.color.skintone.default}",
                 "type": "color"
-              },
-              "foreground": {
-                "value": "{ref.color.main.stormy.700}",
-                "type": "color"
               }
             },
             "light": {
               "background": {
                 "value": "{sys.color.skintone.light}",
-                "type": "color"
-              },
-              "foreground": {
-                "value": "{ref.color.main.stormy.700}",
                 "type": "color"
               }
             },
@@ -6320,19 +6184,11 @@
               "background": {
                 "value": "{sys.color.skintone.light-medium}",
                 "type": "color"
-              },
-              "foreground": {
-                "value": "{ref.color.main.stormy.700}",
-                "type": "color"
               }
             },
             "medium": {
               "background": {
                 "value": "{sys.color.skintone.medium}",
-                "type": "color"
-              },
-              "foreground": {
-                "value": "{ref.color.main.stormy.700}",
                 "type": "color"
               }
             },
@@ -6340,19 +6196,11 @@
               "background": {
                 "value": "{sys.color.skintone.medium-dark}",
                 "type": "color"
-              },
-              "foreground": {
-                "value": "{ref.color.main.stormy.700}",
-                "type": "color"
               }
             },
             "dark": {
               "background": {
                 "value": "{sys.color.skintone.dark}",
-                "type": "color"
-              },
-              "foreground": {
-                "value": "{ref.color.main.stormy.700}",
                 "type": "color"
               }
             }
@@ -6946,6 +6794,34 @@
               "label": {
                 "value": "{sys.font.body.emphasize}",
                 "type": "typography"
+              }
+            }
+          }
+        }
+      },
+      "color-menu-option": {
+        "color": {
+          "default": {
+            "border": {
+              "initial": {
+                "value": "rgba(0,0,0,0)",
+                "type": "color"
+              },
+              "hover": {
+                "value": "{ref.color.main.stormy.200}",
+                "type": "color"
+              },
+              "active": {
+                "value": "{ref.color.main.stormy.400}",
+                "type": "color"
+              },
+              "selected": {
+                "value": "{ref.color.main.stormy.900}",
+                "type": "color"
+              },
+              "focus": {
+                "value": "{sys.color.border.focus}",
+                "type": "color"
               }
             }
           }
@@ -8339,59 +8215,32 @@
         "comp.time-picker.needle.color.default.background.focus": "S:e0eace708bf10bfaa27e60a770a68b5b586d372d,",
         "comp.time-picker.digit.color.checked.h12.default": "S:707214c188cef48ee6f078518f432cc251cb5698,",
         "comp.color-swatch.color.default.background": "S:f4bea696e5b35c12f7b17bc76b402eeeb2770b6d,",
-        "comp.color-swatch.color.default.foreground": "S:a6b900eca3da20bc232d243439e3f3bb8063dc29,",
         "comp.color-swatch.color.light_blue.background": "S:91b099b2daf3f2e2baa3424d7712a6d14a59e1df,",
-        "comp.color-swatch.color.light_blue.foreground": "S:8b950c3e27f466f4a06baa834b89c393cac7b503,",
         "comp.color-swatch.color.light_brown.background": "S:0611545080ce58606956aeef09563bbc97ebbada,",
-        "comp.color-swatch.color.light_brown.foreground": "S:a32b5a0d22f31fc0e8f5b8cd5b72e1d14c8c73f0,",
         "comp.color-swatch.color.light_gray.background": "S:0316648f9ecdccb3b58bf350d57f573da0f8f484,",
-        "comp.color-swatch.color.light_gray.foreground": "S:1deb214edc43be91c4cd9f3a3cd6a860f44c122e,",
         "comp.color-swatch.color.light_green.background": "S:44444c886ac89cce5c0795988bea734633a38e6a,",
-        "comp.color-swatch.color.light_green.foreground": "S:0e1164e6e49440467fa02fdc7163ac6c5694e0ea,",
         "comp.color-swatch.color.light_orange.background": "S:135446a7237eb9db3517659734d28af2e148d401,",
-        "comp.color-swatch.color.light_orange.foreground": "S:9e719573d73347e925d07f2a44ccea57e8c8ff2a,",
         "comp.color-swatch.color.light_pink.background": "S:d85e26ce015e6cc038cfd668f883303721dabe25,",
-        "comp.color-swatch.color.light_pink.foreground": "S:787b001444de814960f1561604380762bf9bcac7,",
         "comp.color-swatch.color.light_violet.background": "S:3f8e68a82f342bdcabd1ffbbdbc33507952453ec,",
-        "comp.color-swatch.color.light_violet.foreground": "S:b6ccf1e24fb75e49d27722f9525383dc0c01adb3,",
         "comp.color-swatch.color.light_yellow.background": "S:3acdb3d6320317903e20a96b23147c005ed1334b,",
-        "comp.color-swatch.color.light_yellow.foreground": "S:e8a0ff7913c435beaf2a8ea0d8b01eb4210e84aa,",
         "comp.color-swatch.color.dark_blue.background": "S:e258c457cbcdef23403f2a2bf884355bf8060ec4,",
-        "comp.color-swatch.color.dark_blue.foreground": "S:2f0810160c0b1f42225d5495ba7a165e9d48ced7,",
         "comp.color-swatch.color.dark_brown.background": "S:02ee46bf008212e615cbb97a01e18c6095eed9a4,",
-        "comp.color-swatch.color.dark_brown.foreground": "S:ae638a8df215ec33ce9590e730b44798332eeee4,",
         "comp.color-swatch.color.dark_gray.background": "S:385ee480ae2f5af900a67cb543115efe43ca41cd,",
-        "comp.color-swatch.color.dark_gray.foreground": "S:8a18486c2e3a77afb98dd189a13a67ab35b78565,",
         "comp.color-swatch.color.dark_green.background": "S:4eb999d47c4988863df66d077e047b9ba025602b,",
-        "comp.color-swatch.color.dark_green.foreground": "S:f2cbaa8c71d592212683041d73864832ea9c6b54,",
         "comp.color-swatch.color.dark_pink.background": "S:b0195c2805f742c5f0feb417cacfdefeecfef7a8,",
-        "comp.color-swatch.color.dark_pink.foreground": "S:7aa308967bf12267efd27a263c8d9ab7e080f1a8,",
         "comp.color-swatch.color.dark_violet.background": "S:d6fa93e76024dae8a444787cb15ea8cac05b2c41,",
-        "comp.color-swatch.color.dark_violet.foreground": "S:5153f67647ad18c5123d6f3ebf6caac4baeb5ea3,",
         "comp.color-swatch.color.dark_yellow.background": "S:6dc7b850ce6ec30e8ed56defbf19997f049f88a3,",
-        "comp.color-swatch.color.dark_yellow.foreground": "S:c1f6a872fe8f9bcc2fd337d30f037ca1bc4440cd,",
         "comp.color-swatch.color.blue.background": "S:7a8d74ff4df7c07401f50986bf67dd5ca9feeafa,",
-        "comp.color-swatch.color.blue.foreground": "S:dea05326dc6f1597074ed765e14d084cf3d6d820,",
         "comp.color-swatch.color.brown.background": "S:f94eace5652eb1ee122a0dcf71f3f565f2f4bfce,",
-        "comp.color-swatch.color.brown.foreground": "S:7d888d2ae682be9e23a6841e83fb710ef59963da,",
         "comp.color-swatch.color.gray.background": "S:60d2ea3cfef540fa004050e5bd27d5fa5a7b5c50,",
-        "comp.color-swatch.color.gray.foreground": "S:300b5a1d9ba75fc2392404fe872f67c85e49bc50,",
         "comp.color-swatch.color.green.background": "S:6a09b380f0d608827c7f9edadc76e0fb73d7fa0c,",
-        "comp.color-swatch.color.green.foreground": "S:9ff7c17e01f13a8e89d153f59e3e9c2829e254fa,",
         "comp.color-swatch.color.orange.background": "S:f75896c92ce3941cc3234c05b2d4d4edb5a90fc4,",
-        "comp.color-swatch.color.orange.foreground": "S:dba943bbcd511174ef2c8fc60da235810b15ed3c,",
         "comp.color-swatch.color.pink.background": "S:4bfa443390d4cdc9d5639c086881ff3e75b797a7,",
-        "comp.color-swatch.color.pink.foreground": "S:ad1e749fab28a9dcb771505c0cf329afad236f98,",
         "comp.color-swatch.color.violet.background": "S:89abb466a41992517c6a1cd3a775ca00612799f3,",
-        "comp.color-swatch.color.violet.foreground": "S:a8e412ee23d016f4a8c3ac85172c3ca1a9c55bb8,",
         "comp.color-swatch.color.olive.background": "S:f63769e54fafa918f635883601c306fae4efe079,",
-        "comp.color-swatch.color.olive.foreground": "S:be90897357996bb9bd6e8de5af4e6678776f1c59,",
         "comp.color-swatch.color.celtic.background": "S:fc11d54e0ad08b5654ce028c022f01b912b59a7e,",
-        "comp.color-swatch.color.celtic.foreground": "S:e196440c7d94c3117652aea909088c776482bfd5,",
         "comp.color-swatch.color.pumpkin.background": "S:e9ad14a4f3dd5c3557a3fb32c9761933ab03acf7,",
-        "comp.color-swatch.color.pumpkin.foreground": "S:74236c1d715056b83e00eb037ac7b16149ed8f62,",
         "comp.color-swatch.color.jasper.background": "S:ffceeb387dc68a857d4ea680cc3204e667e7bef2,",
-        "comp.color-swatch.color.jasper.foreground": "S:f53e554917907c0b7166c9aa5d7bc03a73bc6406,",
         "ref.color.main.honey.100": "S:5deea4cc9b9af95eb9c79c66b18ebd9a5c1fa516,",
         "ref.color.main.honey.200": "S:bf9607d2d193bed5a972621cb1ae66ef6f512014,",
         "ref.color.main.honey.300": "S:2591aa458761e3b20fe433ee79f82126fa9feb71,",
@@ -9135,31 +8984,20 @@
         "comp.toggle.color.default.knob.background.initial": "S:023301714829382f3c2004087ed034fa19927b24,",
         "comp.toggle.color.default.text-inside.initial": "S:4f3d3e474c14f55f32b9d6b8ea54adccfba1ce90,",
         "comp.color-swatch.color.yellow.background": "S:61e9d1b54cde62d04d97bae9ebdb297461ff7dae,",
-        "comp.color-swatch.color.yellow.foreground": "S:207236405009e46e0aa2723652edd7f0ffcd5209,",
         "comp.color-swatch.color.light_red.background": "S:90cff4e8acb95cd5ceb88c0f7713bb0be589d0c4,",
-        "comp.color-swatch.color.light_red.foreground": "S:3b35ff3315e42eca1aa38c7336c085863652c134,",
         "comp.color-swatch.color.dark_red.background": "S:bc56d9187b7f27490d80237ede973a0a0340a2ba,",
-        "comp.color-swatch.color.dark_red.foreground": "S:1247c78e7f22b5d7a0deb4d8cb7860333ec2f0f2,",
         "comp.color-swatch.color.red.background": "S:44c2cf6db371c684fbf81bee901defce61022edd,",
-        "comp.color-swatch.color.red.foreground": "S:cc6aa6dda3367d6ecadfd6d0628baf7a3edfca87,",
         "comp.color-swatch.color.dark-orange.background": "S:6bbd94de23ee62e26c0d98c19352be6651c3abce,",
-        "comp.color-swatch.color.dark-orange.foreground": "S:c214dbd21f6d6a658ac3f198bcf8fd09652cd684,",
         "comp.tag.color.dark-orange.background": "S:a10b2d1b08f8daefabbe565de098e9d597211bed,",
         "comp.tag.color.dark-orange.foreground": "S:919caa3f629dfec9427ca8d3a3d8a623bd42196a,",
         "comp.chip.color.dark-orange.default.background.initial": "S:ef3dafc91884aa8d147e2e404dfba7fcac76af7d,",
         "comp.chip.color.dark-orange.default.foreground.initial": "S:327c6bc2be1cd20854e4b75d8ff71c64ba115c3b,",
         "comp.color-swatch.color.skintone.default.background": "S:ca12733f9ad246f9ee27975d1c2a85eb94fbf5b8,",
-        "comp.color-swatch.color.skintone.default.foreground": "S:3d97f2ee51b696484c959ce47876fce6af7887de,",
         "comp.color-swatch.color.skintone.light.background": "S:7cbf72cbeb39b8bea3d96c35a36da2974f4cfbee,",
-        "comp.color-swatch.color.skintone.light.foreground": "S:0703d5ed64bf8a305c066ae80c4921e08242122e,",
         "comp.color-swatch.color.skintone.light-medium.background": "S:f972802750c923830b7e749efc2c11e60b01045f,",
-        "comp.color-swatch.color.skintone.light-medium.foreground": "S:81c703d636e54a164888324379448de44b728501,",
         "comp.color-swatch.color.skintone.medium.background": "S:fe7ef1983fc2ce4aa6010ad8304729c1f51701d0,",
-        "comp.color-swatch.color.skintone.medium.foreground": "S:266ad658face7fefa150447022a0f0d606f4d697,",
         "comp.color-swatch.color.skintone.medium-dark.background": "S:74982e26f7c8ae7dcd6727861906df47b73ef1f6,",
-        "comp.color-swatch.color.skintone.medium-dark.foreground": "S:35f1280664663c2691f44c8d16347f415c20c401,",
         "comp.color-swatch.color.skintone.dark.background": "S:7a935cf262e8732c60a7c9f02041b320528c6877,",
-        "comp.color-swatch.color.skintone.dark.foreground": "S:6fd601555773536870aac5170a86fd15065d281e,",
         "sys.color.container.contrast.secondary.default": "S:ea8d0f0dcb0f25c86a6c3297a3816de2bbde07a8,",
         "sys.color.container.contrast.primary.default": "S:3322f11381601788bc1ec15a1398d0dbc88a43c0,",
         "sys.color.container.contrast.primary.hover": "S:6956e8b49f3431f3ea40ba84f969ff29afeda241,",
