@@ -168,7 +168,6 @@ test('pagination events', runScreenshotTests('sinch-pagination', [
       ])
 
       const prevRect = centerRect(await $eval((el) => el.prevButtonRect))
-      const nextRect = centerRect(await $eval((el) => el.nextButtonRect))
 
       await page.mouse.click(prevRect.x, prevRect.y)
 
@@ -178,6 +177,8 @@ test('pagination events', runScreenshotTests('sinch-pagination', [
         { type: 'sinch-pagination-focus', detail: null },
         { type: 'sinch-pagination-change', detail: 4 },
       ])
+
+      const nextRect = centerRect(await $eval((el) => el.nextButtonRect))
 
       await page.mouse.click(nextRect.x, nextRect.y)
 
