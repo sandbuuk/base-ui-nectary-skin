@@ -21,10 +21,11 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: var(--sinch-local-size);
+  min-width: var(--sinch-local-size);
   height: var(--sinch-local-size);
   cursor: pointer;
   border-radius: var(--sinch-comp-pagination-shape-radius);
+  user-select: none;
 
   --sinch-global-color-icon: var(--sinch-comp-pagination-color-default-icon-default);
 }
@@ -58,6 +59,8 @@ button > * {
   font: var(--sinch-comp-pagination-font-default-page-number);
   color: var(--sinch-comp-pagination-color-default-text-initial);
   background-color: var(--sinch-comp-pagination-color-default-background-initial);
+  padding: 0 4px;
+  box-sizing: border-box;
 }
 
 .page.dots > span {
