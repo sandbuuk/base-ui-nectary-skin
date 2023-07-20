@@ -12,7 +12,7 @@ import {
   updateExplicitBooleanAttribute,
   updateIntegerAttribute,
   subscribeContext,
-  isTargetEqual,
+  getTargetByAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchColorMenuElement, TSinchColorMenuReact } from './types'
@@ -186,14 +186,14 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   }
 
   #onListboxClick = (e: Event) => {
-    const $elem = e.target as Element
+    const target = getTargetByAttribute(e, 'value')
 
-    if (isTargetEqual(e, this.#$listbox)) {
+    if (target === null) {
       return
     }
 
     this.focus()
-    this.#dispatchChangeEvent($elem)
+    this.#dispatchChangeEvent(target)
   }
 
   #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
@@ -409,16 +409,12 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     return null
   }
 
-  #dispatchChangeEvent($opt: Element | null) {
-    if ($opt === null) {
-      return
-    }
+  #dispatchChangeEvent($opt: Element) {
+    const value = getAttribute($opt, 'value', '')
 
-    if ($opt !== null) {
-      this.dispatchEvent(
-        new CustomEvent('-change', { detail: getAttribute($opt, 'value') })
-      )
-    }
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: value })
+    )
   }
 
   #onChangeReactHandler = (e: Event) => {
