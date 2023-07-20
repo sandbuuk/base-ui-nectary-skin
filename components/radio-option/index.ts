@@ -6,6 +6,7 @@ import {
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
+  updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchRadioOptionElement, TSinchRadioOptionReact } from './types'
@@ -15,8 +16,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-radio-option', class extends NectaryElement {
-  #$input: HTMLInputElement
-  #$label: HTMLLabelElement
+  #$label: HTMLElement
 
   constructor() {
     super()
@@ -25,17 +25,15 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$input = shadowRoot.querySelector('input')!
-    this.#$label = shadowRoot.querySelector('label')!
+    this.#$label = shadowRoot.querySelector('#label')!
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'radio')
-    this.#$input.addEventListener('input', this.#onInput)
+    this.role = 'radio'
+    this.tabIndex = 0
   }
 
   disconnectedCallback() {
-    this.#$input.removeEventListener('input', this.#onInput)
   }
 
   static get observedAttributes() {
@@ -43,7 +41,6 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
       'checked',
       'disabled',
       'text',
-      'value',
       'data-invalid',
     ]
   }
@@ -60,26 +57,23 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
         break
       }
       case 'checked': {
-        this.#$input.checked = isAttrTrue(newVal)
-        updateAttribute(this, 'aria-checked', isAttrTrue(newVal))
+        const isChecked = isAttrTrue(newVal)
+
+        updateExplicitBooleanAttribute(this, 'aria-checked', isChecked)
+        updateBooleanAttribute(this, 'checked', isChecked)
 
         break
       }
       case 'disabled': {
         const isDisabled = isAttrTrue(newVal)
 
-        this.#$input.disabled = isDisabled
+        updateExplicitBooleanAttribute(this, 'aria-disabled', isDisabled)
         updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
       }
       case 'data-invalid': {
         updateBooleanAttribute(this, 'data-invalid', isAttrTrue(newVal))
-
-        break
-      }
-      case 'value': {
-        this.#$input.value = newVal ?? ''
 
         break
       }
@@ -120,23 +114,6 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
 
   get focusable() {
     return true
-  }
-
-  focus() {
-    this.#$input.focus()
-  }
-
-  blur() {
-    this.#$input.blur()
-  }
-
-  #onInput = (e: Event) => {
-    e.stopPropagation()
-
-    this.#$input.checked = false
-    this.dispatchEvent(
-      new CustomEvent('option-change', { bubbles: true, detail: this.value })
-    )
   }
 })
 
