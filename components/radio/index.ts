@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getReactEventHandler,
+  getTargetByAttribute,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -18,6 +19,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-radio', class extends NectaryElement {
   #$slot: HTMLSlotElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -30,18 +32,21 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'radiogroup')
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
-    this.#$slot.addEventListener('keydown', this.#onOptionKeyDown)
-    this.#$slot.addEventListener('option-change', this.#onOptionChange)
-    this.addEventListener('-change', this.#onChangeReactHandler)
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+    const options: AddEventListenerOptions = { signal }
+
+    this.role = 'radiogroup'
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange, options)
+    this.#$slot.addEventListener('keydown', this.#onOptionKeyDown, options)
+    this.#$slot.addEventListener('click', this.#onOptionClick, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
   }
 
   disconnectedCallback() {
-    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
-    this.#$slot.removeEventListener('keydown', this.#onOptionKeyDown)
-    this.#$slot.removeEventListener('option-change', this.#onOptionChange)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -94,7 +99,7 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
 
         if ($option !== null) {
           $option.focus()
-          this.#dispatchChangeEvent($option.value)
+          $option.click()
         }
 
         break
@@ -107,7 +112,7 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
 
         if ($option !== null) {
           $option.focus()
-          this.#dispatchChangeEvent($option.value)
+          $option.click()
         }
 
         break
@@ -119,10 +124,18 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     this.#onValueChange(this.value)
   }
 
-  #onOptionChange = (e: Event) => {
-    e.stopPropagation()
+  #onOptionClick = (e: Event) => {
+    const target = getTargetByAttribute(e, 'value')
 
-    this.#dispatchChangeEvent((e as CustomEvent).detail)
+    if (target === null || target.hasAttribute('disabled')) {
+      return
+    }
+
+    const value = getAttribute(target, 'value')!
+
+    this.dispatchEvent(
+      new CustomEvent('-change', { detail: value })
+    )
   }
 
   #onValueChange(value: string) {
@@ -131,12 +144,6 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
 
       updateBooleanAttribute($option, 'checked', isChecked)
     }
-  }
-
-  #dispatchChangeEvent(value: string) {
-    this.dispatchEvent(
-      new CustomEvent('-change', { detail: value })
-    )
   }
 
   #getFirstOption(): TSinchRadioOptionElement | null {
@@ -184,7 +191,7 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
   }
 
   #getEnabledRadioElements(): TSinchRadioOptionElement[] {
-    return (this.#$slot.assignedElements() as TSinchRadioOptionElement[]).filter((el) => el.disabled !== true)
+    return (this.#$slot.assignedElements() as TSinchRadioOptionElement[]).filter((el) => !el.hasAttribute('disabled'))
   }
 
   #findSelectedOption(elements: readonly TSinchRadioOptionElement[]) {

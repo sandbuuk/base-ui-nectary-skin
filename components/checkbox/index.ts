@@ -17,7 +17,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-checkbox', class extends NectaryElement {
-  #$label: HTMLLabelElement
+  #$label: HTMLElement
   #controller: AbortController | null = null
 
   constructor() {
