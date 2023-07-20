@@ -19,8 +19,6 @@ export const FieldExample: FC = () => {
       style={style}
       label="Radio group"
       invalidText="Invalid field"
-      optionalText="Required"
-      additionalText="Please select one option"
     >
       <sinch-radio slot="input" value={value} on-change={onChange} aria-label="Radio">
         <sinch-radio-option value="1" text="Option 1" aria-label="Option 1"/>
