@@ -9,10 +9,10 @@ import {
   updateAttribute,
   updateBooleanAttribute,
   updateCsv,
+  getTargetByAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchAccordionElement, TSinchAccordionReact } from './types'
-import type { TSinchAccordionItemElement } from '../accordion-item/types'
 
 const template = document.createElement('template')
 
@@ -20,6 +20,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-accordion', class extends NectaryElement {
   #$slot: HTMLSlotElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -36,16 +37,19 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.setAttribute('aria-label', 'accordion')
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
-    this.#$slot.addEventListener('option-change', this.#onOptionChange)
-    this.addEventListener('-change', this.#onChangeReactHandler)
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+    const options: AddEventListenerOptions = { signal }
+
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange, options)
+    this.#$slot.addEventListener('click', this.#onOptionClick, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
   }
 
   disconnectedCallback() {
-    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
-    this.#$slot.removeEventListener('option-change', this.#onOptionChange)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   set value(value: string) {
@@ -82,14 +86,17 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
     this.#onValueChange(this.value)
   }
 
-  #onOptionChange = (e: Event) => {
-    e.stopPropagation()
+  #onOptionClick = (e: Event) => {
+    const target = getTargetByAttribute(e, 'value')
 
-    const $elem = e.target as TSinchAccordionItemElement
-    const value = (e as CustomEvent).detail
+    if (target === null || getBooleanAttribute(target, 'disabled')) {
+      return
+    }
+
+    const value = getAttribute(target, 'value', '')
     const result = this.multiple
-      ? updateCsv(this.value, value, !getBooleanAttribute($elem, 'data-checked'))
-      : getBooleanAttribute($elem, 'data-checked') ? '' : value
+      ? updateCsv(this.value, value, !getBooleanAttribute(target, 'data-checked'))
+      : getBooleanAttribute(target, 'data-checked') ? '' : value
 
     this.dispatchEvent(
       new CustomEvent('-change', { detail: result })

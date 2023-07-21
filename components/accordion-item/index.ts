@@ -30,7 +30,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: true })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
@@ -40,11 +40,9 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.#$button.addEventListener('click', this.#onButtonClick)
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onButtonClick)
   }
 
   static get observedAttributes() {
@@ -126,17 +124,6 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
 
   get optionalText() {
     return getAttribute(this, 'optionaltext')
-  }
-
-  #onButtonClick = (e: Event) => {
-    e.stopPropagation()
-
-    this.dispatchEvent(
-      new CustomEvent('option-change', {
-        bubbles: true,
-        detail: this.value,
-      })
-    )
   }
 
   get focusable() {

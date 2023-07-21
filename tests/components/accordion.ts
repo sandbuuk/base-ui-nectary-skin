@@ -117,6 +117,18 @@ test('accordion screenshots', runScreenshotTests('sinch-accordion', [
     },
   },
   {
+    name: 'keyboard-focus',
+    url: withItems,
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
+      yield { name: '1-tab' }
+      await page.keyboard.press('Tab')
+      yield { name: '2-tab' }
+      await page.keyboard.press('Tab')
+      yield { name: '3-tab' }
+    },
+  },
+  {
     name: 'custom events',
     url: withItems,
     async *fn({ $, page }) {
@@ -133,19 +145,13 @@ test('accordion screenshots', runScreenshotTests('sinch-accordion', [
 
       // Click first item
       await $.locator('sinch-accordion-item').nth(0).click()
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-accordion-change', detail: '1' },
-      ])
-
       // Click second item
       await $.locator('sinch-accordion-item').nth(1).click()
 
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-accordion-change', detail: '1' },
         { type: 'sinch-accordion-change', detail: '2' },
       ])
     },
