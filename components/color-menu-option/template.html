@@ -24,27 +24,25 @@
   width: 34px;
   height: 34px;
   inset: -3px;
-  border: 2px solid transparent;
+  border: 2px solid var(--sinch-comp-color-menu-option-color-default-border-initial);
   border-radius: 50%;
   pointer-events: none;
 }
 
-:host([data-selected]:not([data-checked])) #swatch-wrapper::after {
-  border-color: var(--sinch-comp-color-swatch-color-outline-focus);
+:host([data-checked]) #swatch-wrapper::after {
+  border-color: var(--sinch-comp-color-menu-option-color-default-border-selected);
 }
 
-#check {
-  display: none;
-  position: absolute;
-  left: 4px;
-  top: 4px;
-  pointer-events: none;
-
-  --sinch-global-size-icon: 24px;
+:host([data-selected]) #swatch-wrapper::after {
+  border-color: var(--sinch-comp-color-menu-option-color-default-border-focus);
 }
 
-:host([data-checked]) #check {
-  display: block;
+:host(:hover) #swatch-wrapper::after {
+  border-color: var(--sinch-comp-color-menu-option-color-default-border-hover);
+}
+
+:host(:active) #swatch-wrapper::after {
+  border-color: var(--sinch-comp-color-menu-option-color-default-border-active);
 }
 </style>
 
@@ -52,7 +50,6 @@
   <sinch-tooltip id="tooltip">
     <div id="swatch-wrapper">
       <sinch-color-swatch id="swatch"></sinch-color-swatch>
-      <sinch-icon id="check" name="check"></sinch-icon>
     </div>
   </sinch-tooltip>
 </div>

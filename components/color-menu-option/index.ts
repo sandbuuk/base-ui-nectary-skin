@@ -1,6 +1,5 @@
 import '../color-swatch'
 import '../tooltip'
-import '../icon'
 import { getSwatchColorFg } from '../color-swatch/utils'
 import {
   defineCustomElement,

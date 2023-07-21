@@ -1,0 +1,8 @@
+:root,
+:host {
+  --sinch-comp-color-menu-option-color-default-border-active: var(--sinch-ref-color-main-stormy-400);
+  --sinch-comp-color-menu-option-color-default-border-focus: var(--sinch-sys-color-border-focus);
+  --sinch-comp-color-menu-option-color-default-border-hover: var(--sinch-ref-color-main-stormy-200);
+  --sinch-comp-color-menu-option-color-default-border-initial: transparent;
+  --sinch-comp-color-menu-option-color-default-border-selected: var(--sinch-ref-color-main-stormy-900);
+}

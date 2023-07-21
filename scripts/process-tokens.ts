@@ -275,6 +275,10 @@ const jsonValueToCssValue = (jsonObj: TValue, forceDereferenceValue = false): st
         return value.toUpperCase()
       }
 
+      if (value === 'rgba(0,0,0,0)') {
+        return 'transparent'
+      }
+
       return value
     }
 
