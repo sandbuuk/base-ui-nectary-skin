@@ -137,6 +137,20 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
       yield { name: 'shot' }
     },
   },
+  {
+    name: 'keyboard focus',
+    url: withHugeRange,
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
+      yield { name: '1-tab' }
+      await page.keyboard.press('Tab')
+      yield { name: '2-tab' }
+      await page.keyboard.press('Tab')
+      yield { name: '3-tab' }
+      await page.keyboard.press('Tab')
+      yield { name: '4-tab' }
+    },
+  },
 ]))
 
 test('pagination events', runScreenshotTests('sinch-pagination', [
