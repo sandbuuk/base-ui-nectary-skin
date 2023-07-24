@@ -39,6 +39,20 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
     super.disconnectedCallback()
   }
 
+  static get observedAttributes() {
+    return ['text']
+  }
+
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+    switch (name) {
+      case 'text': {
+        updateAttribute(this.#$text, 'text', newVal)
+
+        break
+      }
+    }
+  }
+
   get type(): TSinchAlertType {
     return getLiteralAttribute(this, typeValues, 'type')
   }
@@ -53,20 +67,6 @@ defineCustomElement('sinch-alert', class extends NectaryElement {
 
   set text(value: string) {
     updateAttribute(this, 'text', value)
-  }
-
-  static get observedAttributes() {
-    return ['text']
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'text': {
-        updateAttribute(this.#$text, 'text', newVal)
-
-        break
-      }
-    }
   }
 })
 

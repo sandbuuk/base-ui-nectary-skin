@@ -88,8 +88,8 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#tooltipState.destroy()
     super.disconnectedCallback()
+    this.#tooltipState.destroy()
     this.#controller!.abort()
     this.#controller = null
   }

@@ -134,10 +134,6 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, prevValue: string | null, newVal: string | null) {
-    if (newVal === prevValue) {
-      return
-    }
-
     switch (name) {
       case 'value': {
         this.#onValueChange()

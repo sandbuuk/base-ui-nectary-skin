@@ -8,6 +8,7 @@ import {
   getBooleanAttribute,
   getReactEventHandler,
   getRect,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   setClass,
@@ -159,7 +160,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, prevValue: string | null, newVal: string | null) {
-    if (newVal === prevValue) {
+    if (isAttrEqual(prevValue, newVal)) {
       return
     }
 
@@ -176,11 +177,9 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
       }
 
       case 'ampm': {
-        const isAmpm = isAttrTrue(newVal)
-
-        updateBooleanAttribute(this, 'ampm', isAmpm)
-
         this.#render()
+
+        updateBooleanAttribute(this, 'ampm', isAttrTrue(newVal))
 
         break
       }

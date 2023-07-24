@@ -27,7 +27,12 @@ defineCustomElement('sinch-flag', class extends NectaryElement {
 
   connectedCallback() {
     super.connectedCallback()
+
     this.#updateCode()
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
   }
 
   static get observedAttributes() {

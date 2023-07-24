@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getReactEventHandler,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -51,7 +52,7 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 
@@ -62,8 +63,10 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
         break
       }
       case 'disabled': {
-        this.#$button.disabled = isAttrTrue(newVal)
-        updateBooleanAttribute(this, name, this.#$button.disabled)
+        const isDisabled = isAttrTrue(newVal)
+
+        this.#$button.disabled = isDisabled
+        updateBooleanAttribute(this, name, isDisabled)
 
         break
       }

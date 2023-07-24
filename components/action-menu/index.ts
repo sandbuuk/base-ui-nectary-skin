@@ -58,19 +58,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     return ['rows']
   }
 
-  set rows(value: number | null) {
-    updateIntegerAttribute(this, 'rows', value)
-  }
-
-  get rows() {
-    return getIntegerAttribute(this, 'rows', null)
-  }
-
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'rows': {
         this.#$listbox.style.maxHeight = attrValueToPixels(newVal, { min: 1, itemSizeMultiplier: ITEM_HEIGHT })
@@ -78,6 +66,14 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
         break
       }
     }
+  }
+
+  set rows(value: number | null) {
+    updateIntegerAttribute(this, 'rows', value)
+  }
+
+  get rows() {
+    return getIntegerAttribute(this, 'rows', null)
   }
 
   #onListboxBlur = () => {

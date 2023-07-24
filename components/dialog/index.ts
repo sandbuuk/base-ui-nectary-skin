@@ -14,6 +14,7 @@ import {
   updateBooleanAttribute,
   setClass,
   isTargetEqual,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import { disableScroll, enableScroll } from './utils'
@@ -46,13 +47,14 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
   connectedCallback() {
     super.connectedCallback()
-    this.setAttribute('role', 'dialog')
+
     this.#controller = new AbortController()
 
     const options: AddEventListenerOptions = {
       signal: this.#controller.signal,
     }
 
+    this.role = 'dialog'
     this.#$closeButton.addEventListener('click', this.#onCloseClick, options)
     this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown, options)
     this.#$dialog.addEventListener('cancel', this.#onCancel, options)
@@ -67,8 +69,8 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#onCollapse()
     super.disconnectedCallback()
+    this.#onCollapse()
     this.#controller!.abort()
     this.#controller = null
   }
@@ -77,7 +79,11 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     return ['caption', 'open', 'close-aria-label']
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (isAttrEqual(oldVal, newVal)) {
+      return
+    }
+
     switch (name) {
       case 'caption': {
         updateAttribute(this.#$caption, 'text', newVal)

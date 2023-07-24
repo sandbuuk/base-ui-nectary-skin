@@ -8,6 +8,7 @@ import {
   getBooleanAttribute,
   attrValueToInteger,
   isAttrTrue,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchProgressElement, TSinchProgressReact } from './types'
@@ -40,10 +41,6 @@ defineCustomElement('sinch-progress', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'value': {
         const int = attrValueToInteger(newVal, { min: 0, max: 100 })
@@ -57,6 +54,10 @@ defineCustomElement('sinch-progress', class extends NectaryElement {
       }
 
       case 'detailed': {
+        if (isAttrEqual(oldVal, newVal)) {
+          break
+        }
+
         updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break

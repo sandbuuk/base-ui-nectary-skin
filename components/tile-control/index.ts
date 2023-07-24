@@ -12,6 +12,7 @@ import {
   updateCsv,
   updateIntegerAttribute,
   isAttrTrue,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchTileControlElement, TSinchTileControlReact } from './types'
@@ -51,7 +52,7 @@ defineCustomElement('sinch-tile-control', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 

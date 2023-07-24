@@ -59,13 +59,9 @@ defineCustomElement('sinch-pagination', class extends NectaryElement {
     return ['max', 'value']
   }
 
-  attributeChangedCallback(name: string, _: string | null) {
+  attributeChangedCallback(name: string) {
     switch (name) {
-      case 'value': {
-        this.#onValueChange()
-
-        break
-      }
+      case 'value':
       case 'max': {
         this.#onValueChange()
 

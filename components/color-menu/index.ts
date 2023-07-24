@@ -60,7 +60,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     subscribeContext(this, 'keydown', this.#onContextKeyDown, signal)
     subscribeContext(this, 'visibility', this.#onContextVisibility, signal)
 
-    this.#updateColumns()
+    this.#onSlotChange()
   }
 
   disconnectedCallback() {
@@ -73,11 +73,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     return ['value', 'rows', 'cols']
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
+  attributeChangedCallback(name: string) {
     switch (name) {
       case 'value': {
         if (this.isDomConnected) {

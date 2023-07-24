@@ -70,10 +70,6 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'value': {
         this.#onValueChange(newVal ?? '')

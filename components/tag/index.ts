@@ -7,6 +7,7 @@ import {
   updateAttribute,
   NectaryElement,
   isAttrTrue,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import { getTagColorBg, getTagColorFg } from './utils'
@@ -35,6 +36,10 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
     super.connectedCallback()
 
     this.#updateColor()
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
   }
 
   get color() {
@@ -66,7 +71,7 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 
