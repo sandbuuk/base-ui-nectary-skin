@@ -3,6 +3,7 @@
   --sinch-comp-accordion-color-default-border-initial: var(--sinch-sys-color-border-default);
   --sinch-comp-accordion-color-default-icon-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-accordion-color-default-optional-text-initial: var(--sinch-sys-color-text-muted);
+  --sinch-comp-accordion-color-default-outline-focus: var(--sinch-sys-color-border-focus);
   --sinch-comp-accordion-color-default-status-error: var(--sinch-sys-color-feedback-invalid-contrast);
   --sinch-comp-accordion-color-default-status-info: var(--sinch-sys-color-feedback-info-contrast);
   --sinch-comp-accordion-color-default-status-success: var(--sinch-sys-color-feedback-success-contrast);
