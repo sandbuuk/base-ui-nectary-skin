@@ -32,6 +32,20 @@ defineCustomElement('sinch-rich-text', class extends NectaryElement {
     this.setAttribute('role', 'paragraph')
   }
 
+  static get observedAttributes() {
+    return ['text']
+  }
+
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+    switch (name) {
+      case 'text': {
+        this.#updateText(newVal)
+
+        break
+      }
+    }
+  }
+
   get size() {
     return getLiteralAttribute(this, sizeValues, 'size', 'm')
   }
@@ -46,20 +60,6 @@ defineCustomElement('sinch-rich-text', class extends NectaryElement {
 
   set text(value: string) {
     updateAttribute(this, 'text', value)
-  }
-
-  static get observedAttributes() {
-    return ['text']
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'text': {
-        this.#updateText(newVal)
-
-        break
-      }
-    }
   }
 
   #updateText(text: string | null) {

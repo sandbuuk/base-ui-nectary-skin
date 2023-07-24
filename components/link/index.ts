@@ -8,6 +8,7 @@ import {
   NectaryElement,
   isAttrTrue,
   getReactEventHandler,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchLinkElement, TSinchLinkReact } from './types'
@@ -61,7 +62,7 @@ defineCustomElement('sinch-link', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 

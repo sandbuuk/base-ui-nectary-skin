@@ -8,6 +8,7 @@ import {
   updateBooleanAttribute,
   getBooleanAttribute,
   isAttrTrue,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import { typeValues } from './utils'
@@ -39,10 +40,6 @@ defineCustomElement('sinch-title', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
@@ -57,6 +54,10 @@ defineCustomElement('sinch-title', class extends NectaryElement {
       }
 
       case 'ellipsis': {
+        if (isAttrEqual(oldVal, newVal)) {
+          break
+        }
+
         updateBooleanAttribute(this, 'ellipsis', isAttrTrue(newVal))
 
         break

@@ -6,6 +6,7 @@ import {
   getBooleanAttribute,
   getLiteralAttribute,
   getRect,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   setClass,
@@ -76,7 +77,7 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
     return ['caption', 'collapsed', 'size']
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'caption': {
         updateAttribute(this.#$caption, 'text', newVal)
@@ -85,6 +86,10 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
       }
 
       case 'collapsed': {
+        if (isAttrEqual(oldVal, newVal)) {
+          return
+        }
+
         updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break

@@ -42,11 +42,7 @@ defineCustomElement('sinch-horizontal-stepper', class extends NectaryElement {
     return ['index']
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
+  attributeChangedCallback(name: string) {
     switch (name) {
       case 'index': {
         this.#updateItems()

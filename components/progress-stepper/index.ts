@@ -66,11 +66,7 @@ defineCustomElement('sinch-progress-stepper', class extends NectaryElement {
     return ['value', 'progressvalue']
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
         this.#onValueChange(newVal)

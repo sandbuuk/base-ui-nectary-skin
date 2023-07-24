@@ -5,6 +5,7 @@ import {
   getBooleanAttribute,
   getLiteralAttribute,
   getReactEventHandler,
+  isAttrEqual,
   isAttrTrue,
   isElementFocused,
   NectaryElement,
@@ -79,7 +80,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   connectedCallback() {
     super.connectedCallback()
 
-    this.setAttribute('role', 'textbox')
+    this.role = 'textbox'
 
     if (this.#controller === null) {
       this.#controller = new AbortController()
@@ -139,10 +140,6 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'type': {
         updateLiteralAttribute(this.#$input, inputTypes, 'type', newVal)
@@ -201,6 +198,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       }
 
       case 'invalid': {
+        if (isAttrEqual(oldVal, newVal)) {
+          return
+        }
+
         const isInvalid = isAttrTrue(newVal)
 
         updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
@@ -210,6 +211,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       }
 
       case 'disabled': {
+        if (isAttrEqual(oldVal, newVal)) {
+          return
+        }
+
         const isDisabled = isAttrTrue(newVal)
 
         this.#$input.disabled = isDisabled

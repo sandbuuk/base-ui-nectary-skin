@@ -6,6 +6,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getLiteralAttribute,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -55,7 +56,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 
@@ -68,6 +69,7 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
 
       case 'disabled': {
         this.#$button.disabled = isAttrTrue(newVal)
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break
       }

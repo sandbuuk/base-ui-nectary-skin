@@ -3,6 +3,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -45,7 +46,7 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 

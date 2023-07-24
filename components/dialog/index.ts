@@ -14,6 +14,7 @@ import {
   updateBooleanAttribute,
   setClass,
   isTargetEqual,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import { disableScroll, enableScroll } from './utils'
@@ -46,13 +47,14 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
   connectedCallback() {
     super.connectedCallback()
-    this.setAttribute('role', 'dialog')
+
     this.#controller = new AbortController()
 
     const options: AddEventListenerOptions = {
       signal: this.#controller.signal,
     }
 
+    this.role = 'dialog'
     this.#$closeButton.addEventListener('click', this.#onCloseClick, options)
     this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown, options)
     this.#$dialog.addEventListener('cancel', this.#onCancel, options)
@@ -61,14 +63,14 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
     this.#onActionSlotChange()
 
-    if (getBooleanAttribute(this, 'open')) {
+    if (this.open) {
       this.#onExpand()
     }
   }
 
   disconnectedCallback() {
-    this.#onCollapse()
     super.disconnectedCallback()
+    this.#onCollapse()
     this.#controller!.abort()
     this.#controller = null
   }
@@ -77,7 +79,11 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     return ['caption', 'open', 'close-aria-label']
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (isAttrEqual(oldVal, newVal)) {
+      return
+    }
+
     switch (name) {
       case 'caption': {
         updateAttribute(this.#$caption, 'text', newVal)
@@ -113,6 +119,14 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
   get caption(): string {
     return getAttribute(this, 'caption', '')
+  }
+
+  set open(isOpen: boolean) {
+    updateBooleanAttribute(this, 'open', isOpen)
+  }
+
+  get open(): boolean {
+    return getBooleanAttribute(this, 'open')
   }
 
   get dialogRect() {
@@ -156,7 +170,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   #onExpand() {
-    if (!this.isDomConnected || this.#isOpen()) {
+    if (!this.isDomConnected || this.#$dialog.open || !this.open) {
       return
     }
 
@@ -165,16 +179,12 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   #onCollapse() {
-    if (!this.#isOpen()) {
+    if (!this.#$dialog.open) {
       return
     }
 
     this.#$dialog.close?.()
     enableScroll()
-  }
-
-  #isOpen() {
-    return getBooleanAttribute(this.#$dialog, 'open')
   }
 
   #onActionSlotChange = () => {

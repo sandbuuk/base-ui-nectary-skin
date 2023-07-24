@@ -17,6 +17,7 @@ import {
   Context,
   subscribeContext,
   isTargetEqual,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import { disableOverscroll, enableOverscroll, orientationValues } from './utils'
@@ -143,13 +144,15 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 
     switch (name) {
       case 'open': {
-        if (isAttrTrue(newVal)) {
+        const shouldOpen = isAttrTrue(newVal)
+
+        if (shouldOpen) {
           // Delay opening to wait until "orientation" attribute assigned on root
           requestAnimationFrame(() => {
             if (this.isDomConnected && getBooleanAttribute(this, 'open')) {
@@ -160,7 +163,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
           this.#onCollapse()
         }
 
-        updateBooleanAttribute(this, 'open', isAttrTrue(newVal))
+        updateBooleanAttribute(this, 'open', shouldOpen)
 
         break
       }

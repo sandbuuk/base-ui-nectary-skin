@@ -27,7 +27,12 @@ defineCustomElement('sinch-emoji', class extends NectaryElement {
 
   connectedCallback() {
     super.connectedCallback()
+
     this.#updateChar()
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
   }
 
   static get observedAttributes() {

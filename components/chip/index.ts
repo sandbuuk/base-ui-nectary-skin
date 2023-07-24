@@ -9,6 +9,7 @@ import {
   NectaryElement,
   getReactEventHandler,
   isAttrTrue,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import { getChipColorBg, getChipColorFg } from './utils'
@@ -66,7 +67,7 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 

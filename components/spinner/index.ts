@@ -1,4 +1,11 @@
-import { defineCustomElement, getLiteralAttribute, NectaryElement, subscribeContext, updateAttribute, updateLiteralAttribute } from '../utils'
+import {
+  defineCustomElement,
+  getLiteralAttribute,
+  NectaryElement,
+  subscribeContext,
+  updateAttribute,
+  updateLiteralAttribute,
+} from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import type { TSinchSpinnerElement, TSinchSpinnerReact } from './types'
@@ -38,10 +45,6 @@ defineCustomElement('sinch-spinner', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'size': {
         updateAttribute(this, 'data-size', newVal)

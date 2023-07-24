@@ -5,6 +5,7 @@ import {
   getBooleanAttribute,
   getIntegerAttribute,
   getReactEventHandler,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   setClass,
@@ -50,8 +51,8 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
       signal: this.#controller.signal,
     }
 
-    this.setAttribute('role', 'textbox')
-    this.setAttribute('aria-multiline', 'true')
+    this.role = 'textbox'
+    this.ariaMultiLine = 'true'
     this.#$input.addEventListener('input', this.#onInput, options)
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart, options)
     this.#$input.addEventListener('mousedown', this.#onSelectionChange, options)
@@ -88,10 +89,6 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'value': {
         const nextVal = newVal ?? ''
@@ -119,6 +116,10 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
       }
 
       case 'invalid': {
+        if (isAttrEqual(oldVal, newVal)) {
+          break
+        }
+
         const isInvalid = isAttrTrue(newVal)
 
         updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
@@ -128,6 +129,10 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
       }
 
       case 'disabled': {
+        if (isAttrEqual(oldVal, newVal)) {
+          break
+        }
+
         const isDisabled = isAttrTrue(newVal)
 
         this.#$input.disabled = isDisabled
@@ -143,6 +148,10 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
       }
 
       case 'resizable': {
+        if (isAttrEqual(oldVal, newVal)) {
+          break
+        }
+
         updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break

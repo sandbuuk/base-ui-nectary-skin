@@ -22,6 +22,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-file-status', class extends NectaryElement {
   #$filename: TSinchTextElement
   #$contentSlot: HTMLSlotElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -36,14 +37,19 @@ defineCustomElement('sinch-file-status', class extends NectaryElement {
 
   connectedCallback() {
     super.connectedCallback()
-    this.#$contentSlot.addEventListener('slotchange', this.#onContentSlotChange)
+    this.#controller = new AbortController()
+
+    const options: AddEventListenerOptions = { signal: this.#controller.signal }
+
+    this.#$contentSlot.addEventListener('slotchange', this.#onContentSlotChange, options)
 
     this.#onContentSlotChange()
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    this.#$contentSlot.removeEventListener('slotchange', this.#onContentSlotChange)
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   get type(): TSinchFileStatusType {
@@ -67,10 +73,6 @@ defineCustomElement('sinch-file-status', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'filename': {
         this.#$filename.textContent = newVal
