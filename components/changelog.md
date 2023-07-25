@@ -1,3 +1,14 @@
+## v2.2.2 (2023-07-25)
+
+* 🐞 fix long numbers width in `sinch-pagination`
+* 🐞 fix outline offset in `sinch-pagination`
+* 🐞 add missing `open` prop to `sinch-dialog`
+* 🐞 align styles for `sinch-checkbox`
+* 🐞 align styles for `sinch-radio`
+* 🐞 align styles for `sinch-color-menu` (requires theme-base@0.3.0)
+* 🐞 align styles for `sinch-accordion`
+* 🐞 align icon style in `sinch-help-tooltip`
+
 ## v2.2.1 (2023-07-18)
 
 * 🐞 fix Bouvet Islands phone code
