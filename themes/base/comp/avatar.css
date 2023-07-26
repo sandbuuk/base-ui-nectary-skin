@@ -61,7 +61,7 @@
   --sinch-comp-avatar-container-color-yellow-foreground: var(--sinch-ref-color-main-stormy-700);
   --sinch-comp-avatar-container-font-size-l-text: var(--sinch-sys-font-desktop-title-m);
   --sinch-comp-avatar-container-font-size-m-text: var(--sinch-sys-font-desktop-title-s);
-  --sinch-comp-avatar-container-font-size-s-text: var(--sinch-sys-font-body-xs);
+  --sinch-comp-avatar-container-font-size-s-text: var(--sinch-sys-font-body-xxs);
   --sinch-comp-avatar-shape-radius: var(--sinch-sys-shape-radius-full);
   --sinch-comp-avatar-size-l: 56px;
   --sinch-comp-avatar-size-m: 40px;
