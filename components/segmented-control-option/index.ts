@@ -18,8 +18,8 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-control-option', class extends NectaryElement {
-  #$button: HTMLButtonElement
   #$label: HTMLElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -28,25 +28,27 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$button = shadowRoot.querySelector('#button')!
     this.#$label = shadowRoot.querySelector('#content')!
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'tab')
-    this.#$button.addEventListener('click', this.#onButtonClick)
-    this.#$button.addEventListener('focus', this.#onButtonFocus)
-    this.#$button.addEventListener('blur', this.#onButtonBlur)
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+    const options: AddEventListenerOptions = { signal }
+
+    this.role = 'tab'
+    this.addEventListener('focus', this.#onButtonFocus, options)
+    this.addEventListener('blur', this.#onButtonBlur, options)
     this.addEventListener('-focus', this.#onFocusReactHandler)
     this.addEventListener('-blur', this.#onBlurReactHandler)
+
+    this.#updateTabIndex()
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onButtonClick)
-    this.#$button.removeEventListener('focus', this.#onButtonFocus)
-    this.#$button.removeEventListener('blur', this.#onButtonBlur)
-    this.removeEventListener('-focus', this.#onFocusReactHandler)
-    this.removeEventListener('-blur', this.#onBlurReactHandler)
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -54,10 +56,6 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (isAttrEqual(oldVal, newVal)) {
-      return
-    }
-
     switch (name) {
       case 'text': {
         this.#$label.textContent = newVal
@@ -70,10 +68,13 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
         break
       }
       case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
+        if (isAttrEqual(oldVal, newVal)) {
+          return
+        }
 
-        this.#$button.disabled = isDisabled
-        updateBooleanAttribute(this, name, isDisabled)
+        this.#updateTabIndex()
+
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break
       }
@@ -108,20 +109,8 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
     return true
   }
 
-  focus() {
-    this.#$button.focus()
-  }
-
-  blur() {
-    this.#$button.blur()
-  }
-
-  #onButtonClick = (e: Event) => {
-    e.stopPropagation()
-
-    this.dispatchEvent(
-      new CustomEvent('option-change', { detail: this.value, bubbles: true })
-    )
+  #updateTabIndex() {
+    this.tabIndex = this.disabled ? -1 : 0
   }
 
   #onButtonFocus = () => {

@@ -9,6 +9,7 @@ import {
   updateAttribute,
   updateBooleanAttribute,
   updateCsv,
+  getTargetByAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchSegmentedIconControlElement, TSinchSegmentedIconControlReact } from './types'
@@ -19,6 +20,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement {
   #$slot: HTMLSlotElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -31,20 +33,35 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'tablist')
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
-    this.#$slot.addEventListener('option-change', this.#onOptionChange)
-    this.addEventListener('-change', this.#onChangeReactHandler)
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+    const options: AddEventListenerOptions = { signal }
+
+    this.role = 'tablist'
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange, options)
+    this.#$slot.addEventListener('click', this.#onOptionClick, options)
+    this.#$slot.addEventListener('keydown', this.#onOptionKeydown, options)
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
   }
 
   disconnectedCallback() {
-    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
-    this.#$slot.removeEventListener('option-change', this.#onOptionChange)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
     return ['value']
+  }
+
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    switch (name) {
+      case 'value': {
+        this.#onValueChange(newVal ?? '')
+
+        break
+      }
+    }
   }
 
   set value(value: string) {
@@ -63,32 +80,40 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
     return getBooleanAttribute(this, 'multiple')
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    switch (name) {
-      case 'value': {
-        this.#onValueChange(newVal ?? '')
-
-        break
-      }
-    }
-  }
-
   #onSlotChange = () => {
     this.#onValueChange(this.value)
   }
 
-  #onOptionChange = (e: Event) => {
-    e.stopPropagation()
+  #onOptionClick = (e: Event) => {
+    const target = getTargetByAttribute(e, 'value')
 
-    const $elem = (e.target) as Element
-    const value = (e as CustomEvent).detail
+    if (target === null || getBooleanAttribute(target, 'disabled')) {
+      return
+    }
+
+    const value = getAttribute(target, 'value', '')
     const detail = this.multiple
-      ? updateCsv(this.value, value, !getBooleanAttribute($elem, 'data-checked'))
+      ? updateCsv(this.value, value, !getBooleanAttribute(target, 'data-checked'))
       : value
 
     this.dispatchEvent(
       new CustomEvent('-change', { detail })
     )
+  }
+
+  #onOptionKeydown = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case 'Space':
+      case 'Enter': {
+        e.preventDefault()
+
+        const target = getTargetByAttribute(e, 'value')
+
+        if (target !== null) {
+          target.click()
+        }
+      }
+    }
   }
 
   #onValueChange(csv: string) {

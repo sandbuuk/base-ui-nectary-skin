@@ -11,6 +11,7 @@
   padding: 3px 16px;
   box-sizing: border-box;
   background-color: var(--sinch-local-color-background);
+  cursor: pointer;
 
   --sinch-global-color-icon: var(--sinch-comp-segmented-control-color-default-icon-initial);
   --sinch-global-size-icon: var(--sinch-comp-segmented-control-size-icon);
@@ -19,7 +20,7 @@
   --sinch-local-color-background: var(--sinch-comp-segmented-control-color-default-background-initial);
 }
 
-#wrapper:hover {
+:host(:hover) {
   --sinch-local-color-background: var(--sinch-comp-segmented-control-color-default-background-hover);
 }
 
@@ -39,11 +40,18 @@
   --sinch-local-color-background: var(--sinch-comp-segmented-control-color-checked-background-initial);
 }
 
+:host([disabled]) #wrapper {
+  --sinch-global-color-icon: var(--sinch-comp-segmented-control-color-disabled-icon-initial);
+  --sinch-local-color-border: var(--sinch-comp-segmented-control-color-disabled-border-initial);
+  --sinch-local-color-background: var(--sinch-comp-segmented-control-color-disabled-background-initial);
+
+  cursor: initial;
+}
+
 #border {
   position: absolute;
   inset: 0;
   border: 1px solid var(--sinch-local-color-border);
-  border-right-width: 0;
   pointer-events: none;
   box-sizing: border-box;
 }
@@ -54,70 +62,58 @@
 }
 
 :host(:last-child) #border {
-  border-right-width: 1px;
   border-top-right-radius: var(--sinch-local-shape-radius);
   border-bottom-right-radius: var(--sinch-local-shape-radius);
 }
 
 :host(:not(:first-child)) #border {
-  left: -1px;
-}
-
-:host(:not(:last-child)) #border {
-  right: -1px;
+  border-left-width: 0;
 }
 
 :host([data-checked]) #border {
   border-width: 2px;
-  z-index: 1;
 }
 
-#button {
-  all: initial;
+:host([data-checked]:not(:first-child)) #border {
+  left: -1px;
+}
+
+#outline {
+  display: none;
   position: absolute;
-  left: 0;
-  top: 0;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  z-index: 1;
-}
-
-#button:disabled {
-  cursor: unset;
-}
-
-#button:focus-visible::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
+  inset: -3px;
   border: 2px solid var(--sinch-comp-segmented-control-color-default-outline-focus);
+  pointer-events: none;
+  box-sizing: border-box;
+  z-index: 1;
 }
 
-:host(:first-child) #button:focus-visible::before {
+:host(:focus-visible) #outline {
+  display: block;
+}
+
+:host(:first-child) #outline {
   border-top-left-radius: calc(var(--sinch-local-shape-radius) + 3px);
   border-bottom-left-radius: calc(var(--sinch-local-shape-radius) + 3px);
 }
 
-:host(:last-child) #button:focus-visible::before {
+:host(:last-child) #outline {
   border-top-right-radius: calc(var(--sinch-local-shape-radius) + 3px);
   border-bottom-right-radius: calc(var(--sinch-local-shape-radius) + 3px);
 }
 
-:host([disabled]) #wrapper {
-  --sinch-global-color-icon: var(--sinch-comp-segmented-control-color-disabled-icon-initial);
-  --sinch-local-color-border: var(--sinch-comp-segmented-control-color-disabled-border-initial);
-  --sinch-local-color-background: var(--sinch-comp-segmented-control-color-disabled-background-initial);
+:host(:not(:first-child)) #outline {
+  left: -4px;
 }
 
 ::slotted(*) {
   display: block;
+  pointer-events: none;
 }
 </style>
 
 <div id="wrapper">
   <slot name="icon"></slot>
   <div id="border"></div>
-  <button id="button"></button>
+  <div id="outline"></div>
 </div>
