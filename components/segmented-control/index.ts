@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getReactEventHandler,
+  getTargetByAttribute,
   NectaryElement,
   updateAttribute,
   updateBooleanAttribute,
@@ -16,6 +17,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-control', class extends NectaryElement {
   #$slot: HTMLSlotElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -28,28 +30,25 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'tablist')
-    this.#$slot.addEventListener('option-change', this.#onOptionChange)
-    this.#$slot.addEventListener('slotchange', this.#onSlotChange)
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+    const options: AddEventListenerOptions = { signal }
+
+    this.role = 'tablist'
+    this.#$slot.addEventListener('slotchange', this.#onSlotChange, options)
+    this.#$slot.addEventListener('click', this.#onOptionClick, options)
+    this.#$slot.addEventListener('keydown', this.#onOptionKeydown, options)
     this.addEventListener('-change', this.#onChangeReactHandler)
   }
 
   disconnectedCallback() {
-    this.#$slot.removeEventListener('option-change', this.#onOptionChange)
-    this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
     return ['value']
-  }
-
-  set value(value: string) {
-    updateAttribute(this, 'value', value)
-  }
-
-  get value(): string {
-    return getAttribute(this, 'value', '')
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -62,18 +61,45 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
     }
   }
 
+  set value(value: string) {
+    updateAttribute(this, 'value', value)
+  }
+
+  get value(): string {
+    return getAttribute(this, 'value', '')
+  }
+
   #onSlotChange = () => {
     this.#onValueChange(this.value)
   }
 
-  #onOptionChange = (e: Event) => {
-    e.stopPropagation()
+  #onOptionClick = (e: Event) => {
+    const target = getTargetByAttribute(e, 'value')
 
-    const detail = (e as CustomEvent).detail
+    if (target === null || getBooleanAttribute(target, 'disabled')) {
+      return
+    }
+
+    const value = getAttribute(target, 'value', '')
 
     this.dispatchEvent(
-      new CustomEvent('-change', { detail })
+      new CustomEvent('-change', { detail: value })
     )
+  }
+
+  #onOptionKeydown = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case 'Space':
+      case 'Enter': {
+        e.preventDefault()
+
+        const target = getTargetByAttribute(e, 'value')
+
+        if (target !== null) {
+          target.click()
+        }
+      }
+    }
   }
 
   #onValueChange(value: string | null) {

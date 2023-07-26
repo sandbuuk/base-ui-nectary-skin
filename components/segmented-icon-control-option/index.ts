@@ -18,7 +18,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segmented-icon-control-option', class extends NectaryElement {
-  #$button: HTMLButtonElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -26,25 +26,26 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
     const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
-
-    this.#$button = shadowRoot.querySelector('#button')!
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'tab')
-    this.#$button.addEventListener('click', this.#onButtonClick)
-    this.#$button.addEventListener('focus', this.#onButtonFocus)
-    this.#$button.addEventListener('blur', this.#onButtonBlur)
-    this.addEventListener('-focus', this.#onFocusReactHandler)
-    this.addEventListener('-blur', this.#onBlurReactHandler)
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+    const options: AddEventListenerOptions = { signal }
+
+    this.role = 'tab'
+    this.addEventListener('focus', this.#onButtonFocus, options)
+    this.addEventListener('blur', this.#onButtonBlur, options)
+    this.addEventListener('-focus', this.#onFocusReactHandler, options)
+    this.addEventListener('-blur', this.#onBlurReactHandler, options)
+
+    this.#updateTabIndex()
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onButtonClick)
-    this.#$button.removeEventListener('focus', this.#onButtonFocus)
-    this.#$button.removeEventListener('blur', this.#onButtonBlur)
-    this.removeEventListener('-focus', this.#onFocusReactHandler)
-    this.removeEventListener('-blur', this.#onBlurReactHandler)
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -52,10 +53,6 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (isAttrEqual(oldVal, newVal)) {
-      return
-    }
-
     switch (name) {
       case 'data-checked': {
         updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
@@ -63,10 +60,13 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
         break
       }
       case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
+        if (isAttrEqual(oldVal, newVal)) {
+          break
+        }
 
-        this.#$button.disabled = isDisabled
-        updateBooleanAttribute(this, name, isDisabled)
+        this.#updateTabIndex()
+
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break
       }
@@ -93,20 +93,8 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
     return true
   }
 
-  focus() {
-    this.#$button.focus()
-  }
-
-  blur() {
-    this.#$button.blur()
-  }
-
-  #onButtonClick = (e: Event) => {
-    e.stopPropagation()
-
-    this.dispatchEvent(
-      new CustomEvent('option-change', { detail: this.value, bubbles: true })
-    )
+  #updateTabIndex() {
+    this.tabIndex = this.disabled ? -1 : 0
   }
 
   #onButtonFocus = () => {
