@@ -4411,7 +4411,7 @@
               },
               "s": {
                 "text": {
-                  "value": "{sys.font.body.xs}",
+                  "value": "{sys.font.body.xxs}",
                   "type": "typography"
                 }
               }
