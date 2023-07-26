@@ -1,3 +1,7 @@
+## v2.2.3 (2023-07-26)
+
+* 🐞 fix border z-index in `sinch-segmented-control`
+
 ## v2.2.2 (2023-07-25)
 
 * 🐞 fix long numbers width in `sinch-pagination`
