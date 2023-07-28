@@ -8,6 +8,7 @@ const imageData = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAAB
 const colorValues = ['', 'light-pink', 'light-orange', 'light-yellow', 'light-green', 'light-blue', 'light-violet', 'light-gray', 'light-brown']
 
 const withAlt = '/avatar?alt=NS'
+const withNoParams = '/avatar'
 const withBadgeStatus = '/avatar?size=l&bg=blue&alt=NS&badge=true&status=online'
 const check = makeAccessibilityTests('/avatar?alt=NS', 'sinch-avatar')
 
@@ -77,6 +78,13 @@ test('avatar screenshots', runScreenshotTests('sinch-avatar', [
       })
 
       expect(attrValue).toBe('AA')
+    },
+  },
+  {
+    name: 'silhouette',
+    url: withNoParams,
+    async *fn() {
+      yield { name: 'shot' }
     },
   },
   {

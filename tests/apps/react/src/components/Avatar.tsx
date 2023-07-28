@@ -7,7 +7,7 @@ type TAvatar = {
 }
 
 export const Avatar: FC<TAvatar> = ({ search }) => {
-  const alt = search.get('alt') ?? ''
+  const alt = search.get('alt') ?? undefined
   const src = search.get('src') ?? undefined
   const color: any = search.get('color') ?? undefined
   const size: any = search.get('size') ?? undefined

@@ -71,6 +71,21 @@
   display: block;
 }
 
+#person {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  fill: var(--sinch-comp-avatar-container-color-default-foreground);
+  opacity: 0.15;
+}
+
+:host(:not([src]):is(:not([alt]), [alt=""])) #person {
+  display: block;
+}
+
 #status-wrapper {
   position: absolute;
   left: calc(85% - 5px);
@@ -119,6 +134,9 @@
   <div id="circle">
     <span id="text"></span>
     <img id="image" alt=""/>
+    <svg id="person" viewBox="0 0 40 40" fill="none">
+      <path d="M29.451 15.785a9.451 9.451 0 1 1-18.902 0 9.452 9.452 0 0 1 18.902 0ZM4.734 40.5c.119-7.085 5.899-12.792 13.012-12.792h4.508c7.113 0 12.893 5.707 13.012 12.792H4.734Z"/>
+    </svg>
   </div>
   <div id="status-wrapper">
     <div id="status"></div>
