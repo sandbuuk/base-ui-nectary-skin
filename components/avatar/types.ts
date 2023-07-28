@@ -30,7 +30,7 @@ export type TSinchAvatarReact = TSinchElementReact<TSinchAvatarElement> & {
   /** Image source */
   src?: string,
   /** Alt text */
-  alt: string,
+  alt?: string,
   /** Background color */
   color?: string,
   /** Size, `m` by default */

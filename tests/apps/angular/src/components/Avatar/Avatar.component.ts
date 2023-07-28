@@ -9,7 +9,7 @@ import '@sinch-engage/nectary/badge'
 })
 
 export class AvatarComponent {
-  alt: string
+  alt?: string
   src?: string
   color?: string
   size?: string
@@ -18,7 +18,7 @@ export class AvatarComponent {
 
   constructor() {
     const url = new URL(location.href)
-    this.alt = url.searchParams.get('alt') ?? ''
+    this.alt = url.searchParams.get('alt') ?? undefined
     this.src = url.searchParams.get('src') ?? undefined
     this.color = url.searchParams.get('color') ?? undefined
     this.size = url.searchParams.get('size') ?? undefined

@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     src() {
-      return this.search.get('src') ?? ''
+      return this.search.get('src') ?? undefined
     },
     alt() {
       return this.search.get('alt') ?? undefined
