@@ -1,3 +1,7 @@
+## v0.3.1 (2023-07-31)
+
+* 🐞 align font size in `sinch-avatar`
+
 ## v0.3.0 (2023-07-25)
 
 * 💥 remove `foreground` colors from `sinch-color-swatch`
