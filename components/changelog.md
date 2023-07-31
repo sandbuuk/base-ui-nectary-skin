@@ -1,3 +1,9 @@
+## v2.3.0 (2023-07-31)
+
+* ➕ add silhouette to `sinch-avatar`
+* 🐞 align styles for `sinch-toast`
+
+
 ## v2.2.3 (2023-07-26)
 
 * 🐞 fix border z-index in `sinch-segmented-control`
