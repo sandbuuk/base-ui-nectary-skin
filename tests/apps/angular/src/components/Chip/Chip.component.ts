@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@sinch-engage/nectary/icon'
 
 @Component({
   selector: 'chip-component',
@@ -13,6 +13,7 @@ export class ChipComponent {
   text?: string
   isSmall: boolean
   hasIcon: boolean
+  hasRightIcon: boolean
 
   constructor() {
     const url = new URL(location.href)
@@ -20,6 +21,7 @@ export class ChipComponent {
     this.text = url.searchParams.get('text') ?? ''
     this.isSmall = url.searchParams.get('small') != null
     this.hasIcon = url.searchParams.get('icon') != null
+    this.hasRightIcon = url.searchParams.get('right-icon') != null
   }
 
   onClick() {

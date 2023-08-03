@@ -7,13 +7,14 @@
     @--focus="onFocus"
     @--blur="onBlur"
   >
-    <sinch-icon-open-in-new v-if="hasIcon" slot="icon"></sinch-icon-open-in-new>
+    <sinch-icon v-if="hasIcon" slot="icon" name="sentiment_satisfied"></sinch-icon>
+    <sinch-icon v-if="hasRightIcon" slot="right-icon" name="add"></sinch-icon>
   </sinch-chip>
 </template>
 
 <script>
 import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@sinch-engage/nectary/icon'
 
 export default {
   props: {
@@ -42,6 +43,9 @@ export default {
     },
     hasIcon() {
       return this.search.get('icon') != null
+    },
+    hasRightIcon() {
+      return this.search.get('right-icon') != null
     },
   },
 }

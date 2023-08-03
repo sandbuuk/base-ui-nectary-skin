@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@sinch-engage/nectary/icon'
 
 type TChip = {
   search: URLSearchParams,
@@ -11,6 +11,7 @@ export const Chip: FC<TChip> = ({ search }) => {
   const text = search.get('text') ?? ''
   const isSmall = search.get('small') != null
   const hasIcon = search.get('icon') != null
+  const hasRightIcon = search.get('right-icon') != null
   const onClick = () => window.dispatchEvent(new CustomEvent('sinch-chip-click'))
   const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-chip-focus'))
   const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-chip-blur'))
@@ -25,7 +26,8 @@ export const Chip: FC<TChip> = ({ search }) => {
       on-focus={onFocus}
       on-blur={onBlur}
     >
-      {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
+      {hasIcon && <sinch-icon slot="icon" name="sentiment_satisfied"/>}
+      {hasRightIcon && <sinch-icon slot="right-icon" name="add"/>}
     </sinch-chip>
   )
 }
