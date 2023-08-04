@@ -1,3 +1,7 @@
+## v2.4.0 (2023-08-04)
+
+* ➕ add `right-icon` slot to `sinch-chip`
+
 ## v2.3.0 (2023-07-31)
 
 * ➕ add silhouette to `sinch-avatar`
