@@ -6,6 +6,7 @@ import {
   getBooleanAttribute,
   getIntegerAttribute,
   getReactEventHandler,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   setClass,
@@ -26,6 +27,7 @@ defineCustomElement('sinch-file-drop', class extends NectaryElement {
   #$filePicker: TSinchFilePickerElement
   #$dropArea: HTMLElement
   #$placeholder: TSinchTextElement
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -40,25 +42,24 @@ defineCustomElement('sinch-file-drop', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.addEventListener('-change', this.#onChangeReactHandler)
-    this.addEventListener('-invalid', this.#onInvalidReactHandler)
-    this.addEventListener('dragenter', this.#onDragEnter)
-    this.addEventListener('dragleave', this.#onDragLeave)
-    this.addEventListener('dragover', this.#onDragOver)
-    this.addEventListener('drop', this.#onDrop)
-    this.#$filePicker.addEventListener('-change', this.#onFilePickerChange)
-    this.#$filePicker.addEventListener('-invalid', this.#onFilePickerInvalid)
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+    const options: AddEventListenerOptions = { signal }
+
+    this.addEventListener('-change', this.#onChangeReactHandler, options)
+    this.addEventListener('-invalid', this.#onInvalidReactHandler, options)
+    this.addEventListener('dragenter', this.#onDragEnter, options)
+    this.addEventListener('dragleave', this.#onDragLeave, options)
+    this.addEventListener('dragover', this.#onDragOver, options)
+    this.addEventListener('drop', this.#onDrop, options)
+    this.#$filePicker.addEventListener('-change', this.#onFilePickerChange as any, options)
+    this.#$filePicker.addEventListener('-invalid', this.#onFilePickerInvalid as any, options)
   }
 
   disconnectedCallback() {
-    this.removeEventListener('-change', this.#onChangeReactHandler)
-    this.removeEventListener('-invalid', this.#onInvalidReactHandler)
-    this.removeEventListener('dragenter', this.#onDragEnter)
-    this.removeEventListener('dragleave', this.#onDragLeave)
-    this.removeEventListener('dragover', this.#onDragOver)
-    this.removeEventListener('drop', this.#onDrop)
-    this.#$filePicker.removeEventListener('-change', this.#onFilePickerChange as any)
-    this.#$filePicker.removeEventListener('-invalid', this.#onFilePickerInvalid as any)
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -73,7 +74,7 @@ defineCustomElement('sinch-file-drop', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (newVal === oldVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 
@@ -97,8 +98,8 @@ defineCustomElement('sinch-file-drop', class extends NectaryElement {
       }
 
       case 'disabled': {
-        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
         this.#setDragEffect(false)
+        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
 
         break
       }

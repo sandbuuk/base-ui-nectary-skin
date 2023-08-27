@@ -12,6 +12,7 @@ import {
   setClass,
   rectOverlap,
   subscribeContext,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import { getPopOrientation, orientationValues } from './utils'
@@ -55,6 +56,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
   disconnectedCallback() {
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -67,7 +69,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 

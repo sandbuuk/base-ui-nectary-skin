@@ -6,5 +6,6 @@
   (-focus)="onFocus()"
   (-blur)="onBlur()"
 >
-  <sinch-icon-open-in-new *ngIf="hasIcon" slot="icon"></sinch-icon-open-in-new>
+<sinch-icon *ngIf="hasIcon" slot="icon" name="sentiment_satisfied"></sinch-icon>
+<sinch-icon *ngIf="hasRightIcon" slot="right-icon" name="add"></sinch-icon>
 </sinch-chip>

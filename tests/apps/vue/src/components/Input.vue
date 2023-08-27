@@ -3,9 +3,13 @@
     :type="type"
     :size="size"
     :placeholder="placeholderText"
+    :mask="mask"
     :disabled="isDisabled"
     :invalid="isInvalid"
     :value="value"
+    @--copy="onCopy"
+    @--cut="onCut"
+    @--paste="onPaste"
     @--change="onChange"
     @--focus="onFocus"
     @--blur="onBlur">
@@ -36,6 +40,33 @@ export default {
       this.value = e.detail
       window.dispatchEvent(new CustomEvent('sinch-input-change', {detail: e.detail}))
     },
+    onCopy(e) {
+      if (!this.hasCopy) return
+
+      const { value, replaceWith } = e.detail
+
+      replaceWith('REPLACED')
+
+      window.dispatchEvent(new CustomEvent('sinch-input-copy', { detail: value }))
+    },
+    onCut(e) {
+      if (!this.hasCut) return
+
+      const { value, replaceWith } = e.detail
+
+      replaceWith('REPLACED')
+
+      window.dispatchEvent(new CustomEvent('sinch-input-cut', { detail: value }))
+    },
+    onPaste(e) {
+      if (!this.hasPaste) return
+
+      const { value, replaceWith } = e.detail
+
+      replaceWith('REPLACED')
+
+      window.dispatchEvent(new CustomEvent('sinch-input-paste', { detail: value }))
+    },
     onFocus() {
       window.dispatchEvent(new CustomEvent('sinch-input-focus'))
     },
@@ -49,6 +80,9 @@ export default {
   computed: {
     placeholderText() {
       return this.search.get('placeholder')
+    },
+    mask() {
+      return this.search.get('mask')
     },
     isInvalid() {
       return this.search.get('invalid') !== null
@@ -70,7 +104,16 @@ export default {
     },
     hasIcon() {
       return this.search.get('icon') !== null
-    }
+    },
+    hasCopy() {
+      return this.search.get('copy') !== null
+    },
+    hasCut() {
+      return this.search.get('cut') !== null
+    },
+    hasPaste() {
+      return this.search.get('paste') !== null
+    },
   },
   data() {
     return {

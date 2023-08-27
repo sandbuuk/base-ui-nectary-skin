@@ -1,6 +1,5 @@
 import '../color-swatch'
 import '../tooltip'
-import '../icon'
 import { getSwatchColorFg } from '../color-swatch/utils'
 import {
   defineCustomElement,
@@ -44,11 +43,7 @@ defineCustomElement('sinch-color-menu-option', class extends NectaryElement {
     return ['value']
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
         updateAttribute(this.#$tooltip, 'text', newVal)

@@ -87,8 +87,9 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   disconnectedCallback() {
-    this.#controller!.abort()
     this.#searchDebounce.cancel()
+    this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -96,10 +97,6 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'multiple': {
         this.#onValueChange(this.value)

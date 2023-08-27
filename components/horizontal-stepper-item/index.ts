@@ -39,10 +39,6 @@ defineCustomElement('sinch-horizontal-stepper-item', class extends NectaryElemen
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'label': {
         updateAttribute(this.#$label, 'text', newVal)

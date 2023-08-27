@@ -5,6 +5,7 @@ import {
   getFirstSlotElement,
   getIntegerAttribute,
   getReactEventHandler,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -59,6 +60,26 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
     return ['accept', 'multiple']
   }
 
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    switch (name) {
+      case 'multiple': {
+        if (isAttrEqual(oldVal, newVal)) {
+          return
+        }
+
+        updateBooleanAttribute(this.#$input, 'multiple', isAttrTrue(newVal))
+
+        break
+      }
+
+      case 'accept': {
+        updateAttribute(this.#$input, 'accept', newVal)
+
+        break
+      }
+    }
+  }
+
   set multiple(isMultiple: boolean) {
     updateBooleanAttribute(this, 'multiple', isMultiple)
   }
@@ -81,26 +102,6 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
 
   set size(value: number | null) {
     updateAttribute(this, 'size', value)
-  }
-
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (newVal === oldVal) {
-      return
-    }
-
-    switch (name) {
-      case 'multiple': {
-        updateBooleanAttribute(this.#$input, 'multiple', isAttrTrue(newVal))
-
-        break
-      }
-
-      case 'accept': {
-        updateAttribute(this.#$input, 'accept', newVal)
-
-        break
-      }
-    }
   }
 
   #onTargetSlotChange = () => {

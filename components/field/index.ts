@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getFirstSlotElement,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   setClass,
@@ -54,6 +55,7 @@ defineCustomElement('sinch-field', class extends NectaryElement {
 
   disconnectedCallback() {
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -67,10 +69,6 @@ defineCustomElement('sinch-field', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'label': {
         this.#$label.textContent = newVal
@@ -97,6 +95,10 @@ defineCustomElement('sinch-field', class extends NectaryElement {
       }
 
       case 'disabled': {
+        if (isAttrEqual(oldVal, newVal)) {
+          break
+        }
+
         updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break

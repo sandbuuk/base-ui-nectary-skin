@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { expect } from '@playwright/test'
 import { piAll } from 'piall'
 import type { PlaywrightTestArgs, TestInfo } from '@playwright/test'
@@ -162,7 +163,8 @@ type TBeforeProps = {
 type TScreenshotTest<T extends keyof HTMLElementTagNameMap> = {
   name: string,
   url: string,
-  only?: true,
+  only?: boolean,
+  solo?: boolean,
   before?(props: TBeforeProps): Promise<void | (() => Promise<void>)>,
   fn (props: TUpdateStateProps<T>): AsyncIterable<TUpdateStateResult>,
 }
@@ -176,31 +178,7 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
     const isFirefox = info.project.name.startsWith('firefox-')
     const isWebkit = info.project.name.startsWith('webkit-')
     const isChromium = info.project.name.startsWith('chromium-')
-    const pages = [page]
-
-    if (!isFirefox) {
-      pages.push(
-        await context.newPage(),
-        await context.newPage(),
-        await context.newPage()
-      )
-    }
-
-    pages.forEach(overridePageKeyboard)
-    pages.forEach(overridePageMouse)
-
-    // Optionally subscribe to page console output
-    // pages.forEach((page) => {
-    //   page.on('console', (msg) => console.log(msg.text()))
-    //   page.on('pageerror', (e) => console.log(e))
-    // })
-
-    const onlyTests = tests.filter((t) => t.only)
-    const runTests = onlyTests.length > 0 ? onlyTests : tests
-
-    const it = piAll(runTests.map((t) => async () => {
-      const page = pages.shift()!
-
+    const runInPage = async (t: TScreenshotTest<T>, page: Page) => {
       let after: (() => Promise<void>) | void
 
       try {
@@ -239,13 +217,54 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
         if (after != null) {
           await after()
         }
+      }
+    }
 
+    // Pages
+    const pages = [page]
+
+    if (!isFirefox) {
+      pages.push(
+        await context.newPage(),
+        await context.newPage(),
+        await context.newPage()
+      )
+    }
+
+    pages.forEach(overridePageKeyboard)
+    pages.forEach(overridePageMouse)
+
+    // Optionally subscribe to page console output
+    // pages.forEach((page) => {
+    //   page.on('console', (msg) => console.log(msg.text()))
+    //   page.on('pageerror', (e) => console.log(e))
+    // })
+
+    const onlyTests = tests.filter((t) => t.only)
+    const parallelTests = onlyTests.length > 0
+      ? onlyTests.filter((t) => !t.solo)
+      : tests.filter((t) => !t.solo)
+
+    const it = piAll(parallelTests.map((t) => async () => {
+      const page = pages.shift()!
+
+      try {
+        await runInPage(t, page)
+      } finally {
         pages.push(page)
       }
     }), pages.length)
 
     // eslint-disable-next-line no-empty
     for await (const _ of it) {}
+
+    const soloTests = onlyTests.length > 0
+      ? onlyTests.filter((t) => t.solo)
+      : tests.filter((t) => t.solo)
+
+    for (const t of soloTests) {
+      await runInPage(t, pages[0])
+    }
   }
 
 export const moveCursorTo = async (page: Page, position: TPosition) => {

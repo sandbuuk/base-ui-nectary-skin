@@ -43,10 +43,21 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
 
   disconnectedCallback() {
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
     return ['value']
+  }
+
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+    switch (name) {
+      case 'value': {
+        this.#onValueChange(newVal)
+
+        break
+      }
+    }
   }
 
   set value(value: string) {
@@ -55,16 +66,6 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
 
   get value(): string {
     return getAttribute(this, 'value', '')
-  }
-
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    switch (name) {
-      case 'value': {
-        this.#onValueChange(newVal)
-
-        break
-      }
-    }
   }
 
   nthOptionRect(index: number): TRect | null {

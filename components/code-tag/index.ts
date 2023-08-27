@@ -24,23 +24,11 @@ defineCustomElement('sinch-code-tag', class extends NectaryElement {
     this.#$text = shadowRoot.querySelector('#content')!
   }
 
-  get text() {
-    return getAttribute(this, 'text', '')
-  }
-
-  set text(value: string) {
-    updateAttribute(this, 'text', value)
-  }
-
   static get observedAttributes() {
     return ['text']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
@@ -48,6 +36,14 @@ defineCustomElement('sinch-code-tag', class extends NectaryElement {
         break
       }
     }
+  }
+
+  get text() {
+    return getAttribute(this, 'text', '')
+  }
+
+  set text(value: string) {
+    updateAttribute(this, 'text', value)
   }
 })
 

@@ -12,6 +12,7 @@ import {
   updateLiteralAttribute,
   Context,
   getAttribute,
+  isAttrEqual,
 } from '../utils'
 import { DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
@@ -74,6 +75,7 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   disconnectedCallback() {
     super.disconnectedCallback()
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -86,15 +88,13 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
+        if (isAttrEqual(oldVal, newVal)) {
+          return
+        }
 
-        updateBooleanAttribute(this, 'disabled', isDisabled)
+        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
 
         break
       }
@@ -149,7 +149,7 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
   }
 
   #onSizeUpdate() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

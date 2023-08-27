@@ -3,7 +3,7 @@ export const updateExplicitBooleanAttribute = ($element: Element, attrName: stri
 }
 
 export const isAttrTrue = (attrValue: string | null): boolean => {
-  return attrValue === '' || (attrValue !== 'false' && attrValue !== null)
+  return attrValue !== null && attrValue !== 'false'
 }
 
 export const getBooleanAttribute = ($element: Element, attrName: string) => {
@@ -195,3 +195,7 @@ export const cloneNode = (el: Element, deep: boolean): Element => {
 }
 
 export const shouldReduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+export const isAttrEqual = (oldVal: string | null, newVal: string | null): boolean => {
+  return oldVal === newVal || (newVal === null && oldVal === 'false') || (newVal === '' && oldVal === 'true')
+}

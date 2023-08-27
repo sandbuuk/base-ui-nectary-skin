@@ -6,14 +6,8 @@ export const parseTime = (value: string | null): { hours: number, minutes: numbe
 
   const timeParts = value.split(':')
 
-  if (timeParts.length < 3) {
-    // throw new Error(`Incorrect time format: ${value}. Should be "hh:mm:ss"`)
-    return { hours: 0, minutes: 0 }
-  }
-
-  const hours = parseInt(timeParts[0])
-  const minutes = parseInt(timeParts[1])
-  const seconds = parseInt(timeParts[2])
+  const hours = parseInt(timeParts[0] ?? '00')
+  const minutes = parseInt(timeParts[1] ?? '00')
 
   if (isNaN(hours) || hours > 23 || hours < 0) {
     // throw new Error(`Invalid hours value: ${value}`)
@@ -22,11 +16,6 @@ export const parseTime = (value: string | null): { hours: number, minutes: numbe
 
   if (isNaN(minutes) || minutes > 59 || minutes < 0) {
     // throw new Error(`Invalid minutes value: ${value}`)
-    return { hours: 0, minutes: 0 }
-  }
-
-  if (isNaN(seconds) || seconds > 59 || seconds < 0) {
-    // throw new Error(`Invalid seconds value: ${value}`)
     return { hours: 0, minutes: 0 }
   }
 

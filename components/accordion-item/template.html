@@ -22,14 +22,15 @@
 
 #button {
   all: initial;
-  cursor: pointer;
   display: flex;
+  position: relative;
   align-items: center;
   gap: 8px;
   box-sizing: border-box;
   width: 100%;
   height: 48px;
-  padding: 12px 8px;
+  padding: 0 4px 0 8px;
+  cursor: pointer;
 
   --sinch-global-color-icon: var(--sinch-comp-accordion-color-default-icon-initial);
   --sinch-global-size-icon: var(--sinch-comp-accordion-size-icon);
@@ -45,31 +46,45 @@
   --sinch-global-color-icon: var(--sinch-comp-accordion-color-disabled-icon-initial);
 }
 
-#button::before {
+#button:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--sinch-comp-accordion-color-default-outline-focus);
+  pointer-events: none;
+}
+
+#status-wrapper {
+  display: none;
+  width: 18px;
+  height: 24px;
+  padding: 8px 8px 8px 2px;
+  box-sizing: border-box;
+}
+
+#status {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  margin-left: 2px;
-  margin-right: 8px;
 }
 
-:host([status="success"]) #button::before {
-  content: "";
+:host([status]:not([status=""])) #status-wrapper {
+  display: block;
+}
+
+:host([status="success"]) #status {
   background-color: var(--sinch-comp-accordion-color-default-status-success);
 }
 
-:host([status="warn"]) #button::before {
-  content: "";
+:host([status="warn"]) #status {
   background-color: var(--sinch-comp-accordion-color-default-status-warning);
 }
 
-:host([status="error"]) #button::before {
-  content: "";
+:host([status="error"]) #status {
   background-color: var(--sinch-comp-accordion-color-default-status-error);
 }
 
-:host([status="info"]) #button::before {
-  content: "";
+:host([status="info"]) #status {
   background-color: var(--sinch-comp-accordion-color-default-status-info);
 }
 
@@ -90,11 +105,13 @@
   overflow-y: auto;
   flex-shrink: 1;
   min-height: 0;
-  padding: 0 8px 18px;
+  padding: 0 8px 12px;
 }
 
 #dropdown-icon {
   transform: rotate(0deg);
+  will-change: transform;
+  transition: transform 0.25s ease-in-out;
 }
 
 #button[aria-expanded="true"] > #dropdown-icon {
@@ -117,6 +134,9 @@
 
 <div id="wrapper">
   <button id="button" aria-controls="content" aria-expanded="false">
+    <div id="status-wrapper">
+      <div id="status"></div>
+    </div>
     <slot name="icon"></slot>
     <sinch-title id="title" level="3" type="m" ellipsis></sinch-title>
     <sinch-text id="optional" type="m"></sinch-text>

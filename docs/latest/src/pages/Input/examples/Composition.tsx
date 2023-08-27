@@ -8,7 +8,7 @@ const fieldStyles: CSSProperties = {
   width: 300,
 }
 
-export const ComplexExample: FC = () => {
+export const CompositionExample: FC = () => {
   const [state, setState] = useState('')
 
   return (

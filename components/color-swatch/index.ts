@@ -28,7 +28,26 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
 
   connectedCallback() {
     super.connectedCallback()
+
     this.#updateColor()
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+  }
+
+  static get observedAttributes() {
+    return ['name']
+  }
+
+  attributeChangedCallback(name: string) {
+    switch (name) {
+      case 'name': {
+        this.#updateColor()
+
+        break
+      }
+    }
   }
 
   get name() {
@@ -39,26 +58,8 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
     updateAttribute(this, 'name', value)
   }
 
-  static get observedAttributes() {
-    return ['name']
-  }
-
-  attributeChangedCallback(name: string, oldValue: string | null, newVal: string | null) {
-    if (oldValue === newVal) {
-      return
-    }
-
-    switch (name) {
-      case 'name': {
-        this.#updateColor()
-
-        break
-      }
-    }
-  }
-
   #updateColor() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

@@ -3,6 +3,8 @@ import type { TRect, TSinchElementReact } from '../types'
 export type TSinchDialogCloseDetail = 'close' | 'escape' | 'backdrop'
 
 export type TSinchDialogElement = HTMLElement & {
+  /** Open/close state */
+  open: boolean,
   /** Dialog caption */
   caption: string,
   readonly dialogRect: TRect,

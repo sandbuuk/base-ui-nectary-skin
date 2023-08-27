@@ -1,4 +1,12 @@
-import { attrValueToInteger, defineCustomElement, getCssVar, getUid, isAttrTrue, NectaryElement, shouldReduceMotion } from '../utils'
+import {
+  attrValueToInteger,
+  defineCustomElement,
+  getCssVar,
+  getUid,
+  isAttrTrue,
+  NectaryElement,
+  shouldReduceMotion,
+} from '../utils'
 import templateHTML from './template.html'
 import type { TSinchSkeletonElement, TSinchSkeletonReact } from './types'
 
@@ -77,10 +85,6 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'card': {
         this.#borderWidth = isAttrTrue(newVal) ? BORDER_WIDTH : 0

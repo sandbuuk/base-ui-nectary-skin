@@ -4,6 +4,7 @@ import {
   getBooleanAttribute,
   getLiteralAttribute,
   getRect,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   setClass,
@@ -63,7 +64,7 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 

@@ -16,6 +16,7 @@ import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
 import { LandingPage } from '~/pages/Landing'
 import { NotFoundPage } from '~/pages/NotFound'
+import { TestingPage } from '~/pages/Testing'
 import './styles.css'
 import '@sinch-engage/nectary-theme-base'
 
@@ -50,6 +51,7 @@ export const App: FC = () => {
                 <NavigationList>
                   <NavigationItem path="/" text="Home"/>
                   <NavigationItem path="/intro" text="Intro"/>
+                  <NavigationItem path="/testing" text="Testing"/>
                   <NavigationItem path="/faq" text="FAQ"/>
                 </NavigationList>
               </NavigationGroup>
@@ -68,6 +70,10 @@ export const App: FC = () => {
           <Routes>
             <Route path="/" element={<LandingPage/>}/>
             <Route path="/intro" element={<IntroPage/>}/>
+            <Route
+              path="/testing"
+              element={<TestingPage/>}
+            />
             <Route path="/faq" element={<FAQPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
             <Route path="*" element={<NotFoundPage/>}/>

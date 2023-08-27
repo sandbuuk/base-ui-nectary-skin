@@ -9,6 +9,8 @@ import {
   NectaryElement,
   isAttrTrue,
   getRect,
+  isAttrEqual,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchCardElement, TSinchCardReact } from './types'
@@ -70,6 +72,7 @@ defineCustomElement('sinch-card', class extends NectaryElement {
     super.disconnectedCallback()
     this.#disableDragging()
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -82,10 +85,6 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
@@ -103,14 +102,19 @@ defineCustomElement('sinch-card', class extends NectaryElement {
         break
       }
       case 'draggable': {
+        if (isAttrEqual(oldVal, newVal)) {
+          return
+        }
+
         const isDraggingEnabled = isAttrTrue(newVal)
 
         if (isDraggingEnabled) {
           this.#enableDraggable()
         } else {
           this.#disableDragging()
-          this.removeAttribute('draggable')
         }
+
+        updateBooleanAttribute(this, name, isDraggingEnabled)
 
         break
       }
@@ -150,7 +154,7 @@ defineCustomElement('sinch-card', class extends NectaryElement {
   }
 
   #enableDraggable() {
-    if (this.isConnected && !this.#isDraggingSubscribed) {
+    if (this.isDomConnected && !this.#isDraggingSubscribed) {
       this.addEventListener('dragstart', this.#onDragStart)
       this.#$cardBody.addEventListener('mousedown', this.#onDraggableMouseDown)
       this.#isDraggingSubscribed = true

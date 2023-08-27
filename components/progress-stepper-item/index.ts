@@ -3,6 +3,7 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -48,10 +49,6 @@ defineCustomElement('sinch-progress-stepper-item', class extends NectaryElement 
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
-      return
-    }
-
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
@@ -74,10 +71,14 @@ defineCustomElement('sinch-progress-stepper-item', class extends NectaryElement 
         break
       }
       case 'invalid': {
+        if (isAttrEqual(oldVal, newVal)) {
+          return
+        }
+
         const isInvalid = isAttrTrue(newVal)
 
-        updateBooleanAttribute(this, 'invalid', isInvalid)
         updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+        updateBooleanAttribute(this, 'invalid', isInvalid)
 
         break
       }

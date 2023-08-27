@@ -1,5 +1,6 @@
 import { Example } from '~/components/Example'
 import { SimpleExample } from './examples/Simple.tsx?example'
+import { SilhouetteExample } from './examples/Silhouette.tsx?example'
 import { SizeExample } from './examples/Size.tsx?example'
 import { StatusExample } from './examples/Status.tsx?example'
 import { BadgeExample } from './examples/Badge.tsx?example'
@@ -12,6 +13,12 @@ Avatar is used to represent a user entity. It supports images or letters.
 ## Simple
 
 <Example Component={SimpleExample}/>
+
+## Silhouette
+
+Avatar displays silhouette when `src` and `alt` attributes are omitted
+
+<Example Component={SilhouetteExample}/>
 
 ## Size
 

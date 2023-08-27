@@ -4,6 +4,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getReactEventHandler,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -43,6 +44,7 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
 
   disconnectedCallback() {
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -50,7 +52,7 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 
@@ -70,11 +72,7 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
       case 'data-selected': {
         const isDisabled = getBooleanAttribute(this, 'disabled')
 
-        if (isDisabled) {
-          updateBooleanAttribute(this, 'aria-selected', false)
-        } else {
-          updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
-        }
+        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal) && !isDisabled)
 
         break
       }

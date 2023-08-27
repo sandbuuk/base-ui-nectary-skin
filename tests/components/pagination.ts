@@ -137,6 +137,20 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
       yield { name: 'shot' }
     },
   },
+  {
+    name: 'keyboard focus',
+    url: withHugeRange,
+    async *fn({ page }) {
+      await page.keyboard.press('Tab')
+      yield { name: '1-tab' }
+      await page.keyboard.press('Tab')
+      yield { name: '2-tab' }
+      await page.keyboard.press('Tab')
+      yield { name: '3-tab' }
+      await page.keyboard.press('Tab')
+      yield { name: '4-tab' }
+    },
+  },
 ]))
 
 test('pagination events', runScreenshotTests('sinch-pagination', [
@@ -168,7 +182,6 @@ test('pagination events', runScreenshotTests('sinch-pagination', [
       ])
 
       const prevRect = centerRect(await $eval((el) => el.prevButtonRect))
-      const nextRect = centerRect(await $eval((el) => el.nextButtonRect))
 
       await page.mouse.click(prevRect.x, prevRect.y)
 
@@ -178,6 +191,8 @@ test('pagination events', runScreenshotTests('sinch-pagination', [
         { type: 'sinch-pagination-focus', detail: null },
         { type: 'sinch-pagination-change', detail: 4 },
       ])
+
+      const nextRect = centerRect(await $eval((el) => el.nextButtonRect))
 
       await page.mouse.click(nextRect.x, nextRect.y)
 

@@ -3,6 +3,7 @@ import {
   getAttribute,
   getBooleanAttribute,
   getReactEventHandler,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -17,7 +18,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-checkbox', class extends NectaryElement {
-  #$label: HTMLLabelElement
+  #$label: HTMLElement
   #controller: AbortController | null = null
 
   constructor() {
@@ -62,7 +63,7 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (newVal === oldVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 

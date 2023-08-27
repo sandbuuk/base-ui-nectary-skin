@@ -7,24 +7,30 @@ import '@sinch-engage/nectary/date-picker'
 import '@sinch-engage/nectary/icon-button'
 import '@sinch-engage/nectary-assets/icons/calendar-today'
 
-const inputStyles: CSSProperties = {
+const styles: CSSProperties = {
   width: 300,
 }
 
+const reverseDateValue = (value: string) => value.split('-').reverse().join('-')
+
 export const CompositionExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
-  const [value, setValue] = useState('2022-07-19')
-  const [isoValue, setIsoValue] = useState('2022-07-19')
+  const [inputValue, setInputValue] = useState('')
+  const [datePickerValue, setDatePickerValue] = useState('')
 
-  const onChange = (e: CustomEvent<string>) => {
-    setValue(e.detail)
+  const onInputChange = (e: CustomEvent<string>) => {
+    setInputValue(e.detail)
   }
-  const onIsoChange = (e: CustomEvent<string>) => {
-    setValue(e.detail)
+  const onDatePickerChange = (e: CustomEvent<string>) => {
+    const inputValue = reverseDateValue(e.detail)
+
+    setInputValue(inputValue)
     setOpen(false)
   }
   const onOpen = () => {
-    setIsoValue(value)
+    const datePickerValue = reverseDateValue(inputValue)
+
+    setDatePickerValue(datePickerValue)
     setOpen(true)
   }
   const onClose = () => setOpen(false)
@@ -41,14 +47,14 @@ export const CompositionExample: FC = () => {
         slot="target"
         label="Date picker"
         additionalText="Additional text"
+        style={styles}
       >
         <sinch-input
           slot="input"
-          style={inputStyles}
           aria-label="Pick date"
-          placeholder="YYYY-MM-DD"
-          value={value}
-          on-change={onChange}
+          mask="00-00-0000@@DD/MM/YYYY"
+          value={inputValue}
+          on-change={onInputChange}
         >
           <sinch-icon-button
             slot="right"
@@ -70,8 +76,8 @@ export const CompositionExample: FC = () => {
         prev-month-aria-label="Next Month"
         next-year-aria-label="Next Year"
         prev-year-aria-label="Prev Year"
-        value={isoValue}
-        on-change={onIsoChange}
+        value={datePickerValue}
+        on-change={onDatePickerChange}
       />
     </sinch-popover>
   )

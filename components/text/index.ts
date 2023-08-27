@@ -6,6 +6,7 @@ import {
   getLiteralAttribute,
   updateLiteralAttribute,
   isAttrTrue,
+  isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
 import { typeValues } from './utils'
@@ -32,7 +33,11 @@ defineCustomElement('sinch-text', class extends NectaryElement {
     return ['inline', 'ellipsis', 'emphasized']
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (isAttrEqual(oldVal, newVal)) {
+      return
+    }
+
     switch (name) {
       case 'inline': {
         this.#updateRole()

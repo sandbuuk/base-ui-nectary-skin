@@ -1,6 +1,7 @@
 import {
   defineCustomElement,
   getBooleanAttribute,
+  isAttrEqual,
   isAttrTrue,
   NectaryElement,
   updateBooleanAttribute,
@@ -30,7 +31,7 @@ defineCustomElement('sinch-table-row', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 

@@ -1,3 +1,44 @@
+## v2.4.0 (2023-08-04)
+
+* ➕ add `right-icon` slot to `sinch-chip`
+
+## v2.3.0 (2023-07-31)
+
+* ➕ add silhouette to `sinch-avatar`
+* 🐞 align styles for `sinch-toast`
+
+
+## v2.2.3 (2023-07-26)
+
+* 🐞 fix border z-index in `sinch-segmented-control`
+
+## v2.2.2 (2023-07-25)
+
+* 🐞 fix long numbers width in `sinch-pagination`
+* 🐞 fix outline offset in `sinch-pagination`
+* 🐞 add missing `open` prop to `sinch-dialog`
+* 🐞 align styles for `sinch-checkbox`
+* 🐞 align styles for `sinch-radio`
+* 🐞 align styles for `sinch-color-menu` (requires theme-base@0.3.0)
+* 🐞 align styles for `sinch-accordion`
+* 🐞 align icon style in `sinch-help-tooltip`
+
+## v2.2.1 (2023-07-18)
+
+* 🐞 fix Bouvet Islands phone code
+* 🐞 tweak Brazil phone code mask
+
+## v2.2.0 (2023-07-06)
+
+* ➕ add `mask` attribute to `sinch-input`
+* ➕ add `on-copy`, `on-cut`, `on-paste` event handlers to `sinch-input`
+* ➕ add phone masks to `countries.json`
+* ➕ add `sinch-progress-stepper` component
+* 🐞 prevent text selection when clicking on `sinch-button` and `sinch-icon-button`
+* 🐞 allow time without seconds in `sinch-time-picker`
+* 🐞 improve ui behaviour in `sinch-date-picker`
+* 🐞 stop shadowing `isConnected` in `NectaryElement`
+
 ## v2.1.5 (2023-06-15)
 
 * 🐞 align `sinch-tabs` design

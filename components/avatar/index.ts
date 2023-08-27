@@ -39,6 +39,37 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
     this.#updateColor()
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback()
+  }
+
+  static get observedAttributes() {
+    return ['alt', 'src', 'color']
+  }
+
+  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+    switch (name) {
+      case 'alt': {
+        this.#$text.textContent = newVal
+        this.#$image.alt = newVal ?? ''
+
+        break
+      }
+
+      case 'src': {
+        this.#$image.src = newVal ?? ''
+
+        break
+      }
+
+      case 'color': {
+        this.#updateColor()
+
+        break
+      }
+    }
+  }
+
   get src() {
     return getAttribute(this, 'src')
   }
@@ -79,35 +110,8 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
     updateLiteralAttribute(this, statusValues, 'status', value)
   }
 
-  static get observedAttributes() {
-    return ['alt', 'src', 'color']
-  }
-
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
-    switch (name) {
-      case 'alt': {
-        this.#$text.textContent = newVal
-        this.#$image.alt = newVal ?? ''
-
-        break
-      }
-
-      case 'src': {
-        this.#$image.src = newVal ?? ''
-
-        break
-      }
-
-      case 'color': {
-        this.#updateColor()
-
-        break
-      }
-    }
-  }
-
   #updateColor() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 

@@ -15,6 +15,7 @@ import {
   updateExplicitBooleanAttribute,
   updateLiteralAttribute,
   Context,
+  isAttrEqual,
 } from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
@@ -80,6 +81,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   disconnectedCallback() {
     super.disconnectedCallback()
     this.#controller!.abort()
+    this.#controller = null
   }
 
   static get observedAttributes() {
@@ -94,7 +96,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (oldVal === newVal) {
+    if (isAttrEqual(oldVal, newVal)) {
       return
     }
 
@@ -121,9 +123,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
       }
 
       case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
-
-        updateBooleanAttribute(this, 'disabled', isDisabled)
+        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
 
         break
       }
@@ -204,7 +204,7 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
   }
 
   #onSizeUpdate() {
-    if (!this.isConnected) {
+    if (!this.isDomConnected) {
       return
     }
 
