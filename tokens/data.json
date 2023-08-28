@@ -7448,7 +7448,7 @@
       "color": {
         "primary": {
           "default": {
-            "value": "#3AA7EA",
+            "value": "#3aa7ea",
             "type": "color"
           },
           "hover": {
@@ -7609,12 +7609,105 @@
       }
     }
   },
+  "SMB / Demo3": {
+    "sys": {
+      "color": {
+        "primary": {
+          "default": {
+            "value": "#650090",
+            "type": "color"
+          },
+          "hover": {
+            "value": "#6EBBEE",
+            "type": "color"
+          },
+          "active": {
+            "value": "#0066A5",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#A7A9AA",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#FFFFFF",
+            "type": "color"
+          }
+        },
+        "cta": {
+          "default": {
+            "value": "{ref.color.main.ocean.600}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{ref.color.main.ocean.500}",
+            "type": "color",
+            "$extensions": {}
+          },
+          "active": {
+            "value": "{ref.color.main.ocean.700}",
+            "type": "color",
+            "$extensions": {}
+          },
+          "disabled": {
+            "value": "{ref.color.main.ocean.200}",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#FFFFFF",
+            "type": "color"
+          }
+        }
+      },
+      "shape-radius": {
+        "l": {
+          "value": "20",
+          "type": "borderRadius"
+        },
+        "m": {
+          "value": "16",
+          "type": "borderRadius"
+        },
+        "s": {
+          "value": "12",
+          "type": "borderRadius"
+        },
+        "xs": {
+          "value": "8",
+          "type": "borderRadius"
+        }
+      }
+    },
+    "comp": {
+      "date-picker": {
+        "day": {
+          "color": {
+            "default": {
+              "background": {
+                "hover": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              },
+              "range": {
+                "background": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "$themes": [
     {
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
       "name": "Sinch brand light",
       "selectedTokenSets": {
-        "Nectary / Base theme": "enabled"
+        "Nectary / Base theme": "enabled",
+        "SMB / Demo3": "disabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -9609,7 +9702,8 @@
       "name": "Sinch brand dark",
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
-        "Nectary / Dark theme": "enabled"
+        "Nectary / Dark theme": "enabled",
+        "SMB / Demo3": "disabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -10755,7 +10849,8 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / SimpleTexting": "enabled"
+        "SMB / SimpleTexting": "enabled",
+        "SMB / Demo3": "disabled"
       }
     },
     {
@@ -10764,7 +10859,8 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / MessageMedia": "enabled"
+        "SMB / MessageMedia": "enabled",
+        "SMB / Demo3": "disabled"
       }
     },
     {
@@ -10773,7 +10869,8 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / Demo1": "enabled"
+        "SMB / Demo1": "enabled",
+        "SMB / Demo3": "disabled"
       }
     },
     {
@@ -10782,7 +10879,17 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / Demo2": "enabled"
+        "SMB / Demo2": "enabled",
+        "SMB / Demo3": "disabled"
+      }
+    },
+    {
+      "id": "ac47abc066412687cc56df88633d56caf6fdec87",
+      "name": "Demo3",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "Nectary / Base theme": "source",
+        "SMB / Demo3": "enabled"
       }
     }
   ],
@@ -10793,7 +10900,8 @@
       "SMB / SimpleTexting",
       "SMB / MessageMedia",
       "SMB / Demo1",
-      "SMB / Demo2"
+      "SMB / Demo2",
+      "SMB / Demo3"
     ]
   }
 }
