@@ -7350,6 +7350,80 @@
         }
       },
       "icon-button": {
+        "color": {
+          "primary": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "#2F3943",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "#3E4750",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "#161B20",
+                  "type": "color"
+                }
+              }
+            }
+          },
+          "secondary": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "#EAEAED",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "#DADADA",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "#EAEAEB",
+                  "type": "color"
+                }
+              },
+              "icon": {
+                "initial": {
+                  "value": "#22272B",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "#22272B",
+                  "type": "color"
+                }
+              }
+            },
+            "disabled": {
+              "background": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            }
+          },
+          "tertiary": {
+            "default": {
+              "text": {
+                "icon": {
+                  "value": "{ref.color.main.ocean.600}",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        },
         "shape-radius": {
           "size": {
             "m": {
