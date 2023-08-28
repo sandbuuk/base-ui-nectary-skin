@@ -7393,7 +7393,7 @@
               },
               "border": {
                 "initial": {
-                  "value": "#22272B",
+                  "value": "rgba(0,0,0,0)",
                   "type": "color"
                 }
               }
