@@ -7332,6 +7332,140 @@
             }
           }
         },
+        "shadow": {
+          "primary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "secondary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "tertiary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "cta-primary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "cta-secondary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "danger": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          }
+        },
         "shape-radius": {
           "size": {
             "m": {
@@ -7421,6 +7555,140 @@
                   "type": "color"
                 }
               }
+            }
+          }
+        },
+        "shadow": {
+          "primary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "secondary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "tertiary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "cta-primary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "cta-secondary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "danger": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
             }
           }
         },
@@ -7706,8 +7974,7 @@
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
       "name": "Sinch brand light",
       "selectedTokenSets": {
-        "Nectary / Base theme": "enabled",
-        "SMB / Demo3": "disabled"
+        "Nectary / Base theme": "enabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -9702,8 +9969,7 @@
       "name": "Sinch brand dark",
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
-        "Nectary / Dark theme": "enabled",
-        "SMB / Demo3": "disabled"
+        "Nectary / Dark theme": "enabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -10849,8 +11115,7 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / SimpleTexting": "enabled",
-        "SMB / Demo3": "disabled"
+        "SMB / SimpleTexting": "enabled"
       }
     },
     {
@@ -10859,8 +11124,7 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / MessageMedia": "enabled",
-        "SMB / Demo3": "disabled"
+        "SMB / MessageMedia": "enabled"
       }
     },
     {
@@ -10869,8 +11133,7 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / Demo1": "enabled",
-        "SMB / Demo3": "disabled"
+        "SMB / Demo1": "enabled"
       }
     },
     {
@@ -10879,8 +11142,7 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / Demo2": "enabled",
-        "SMB / Demo3": "disabled"
+        "SMB / Demo2": "enabled"
       }
     },
     {
