@@ -7123,28 +7123,6 @@
       }
     }
   },
-  "SMB / SMB Base": {
-    "sys": {
-      "shape-radius": {
-        "xs": {
-          "value": "3",
-          "type": "borderRadius"
-        },
-        "s": {
-          "value": "4",
-          "type": "borderRadius"
-        },
-        "m": {
-          "value": "8",
-          "type": "borderRadius"
-        },
-        "l": {
-          "value": "12",
-          "type": "borderRadius"
-        }
-      }
-    }
-  },
   "SMB / SimpleTexting": {
     "sys": {
       "color": {
@@ -7173,24 +7151,24 @@
       }
     }
   },
-  "SMB / MessageMedia Old": {
+  "SMB / MessageMedia": {
     "sys": {
       "color": {
         "primary": {
           "default": {
-            "value": "#3375D1",
+            "value": "#3AA7EA",
             "type": "color"
           },
           "hover": {
-            "value": "#2559A7",
+            "value": "#6EBBEE",
             "type": "color"
           },
           "active": {
-            "value": "#1C447D",
+            "value": "#0066A5",
             "type": "color"
           },
           "disabled": {
-            "value": "#9E9E9E",
+            "value": "#A7A9AA",
             "type": "color"
           },
           "foreground": {
@@ -7200,37 +7178,21 @@
         },
         "cta": {
           "default": {
-            "value": "#2ebf4e",
+            "value": "{ref.color.main.ocean.600}",
             "type": "color"
           },
           "hover": {
-            "value": "{sys.color.cta.default}",
+            "value": "{ref.color.main.ocean.500}",
             "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": "0.15",
-                  "space": "lch"
-                }
-              }
-            }
+            "$extensions": {}
           },
           "active": {
-            "value": "{sys.color.cta.default}",
+            "value": "{ref.color.main.ocean.700}",
             "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": "0.3",
-                  "space": "lch"
-                }
-              }
-            }
+            "$extensions": {}
           },
           "disabled": {
-            "value": "#9E9E9E",
+            "value": "{ref.color.main.ocean.200}",
             "type": "color"
           },
           "foreground": {
@@ -7238,23 +7200,93 @@
             "type": "color"
           }
         }
+      }
+    },
+    "comp": {
+      "date-picker": {
+        "day": {
+          "color": {
+            "default": {
+              "background": {
+                "hover": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              },
+              "range": {
+                "background": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        }
       },
-      "shape-radius": {
-        "xs": {
-          "value": "0",
-          "type": "borderRadius"
-        },
-        "s": {
-          "value": "2",
-          "type": "borderRadius"
-        },
-        "m": {
-          "value": "4",
-          "type": "borderRadius"
-        },
-        "l": {
-          "value": "8",
-          "type": "borderRadius"
+      "button": {
+        "color": {
+          "primary": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "#2F3943",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "#3E4750",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "#161B20",
+                  "type": "color"
+                }
+              }
+            }
+          },
+          "secondary": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "#EAEAED",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "#DADADA",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "#EAEAEB",
+                  "type": "color"
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "#22272B",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            },
+            "disabled": {
+              "background": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -7264,7 +7296,8 @@
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
       "name": "Sinch brand light",
       "selectedTokenSets": {
-        "Nectary / Base theme": "enabled"
+        "Nectary / Base theme": "enabled",
+        "SMB / MessageMedia": "disabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -8029,8 +8062,7 @@
         "comp.select_menu.color.disabled.text.default": "S:46f8baf4b10701bb1a42060d939b028619331b45,",
         "comp.button.color.primary.default.background.hover": "S:63fab713fe00d6addcfad6bc9f37d8271204c098,",
         "comp.button.color.primary.default.background.active": "S:fd889584c61afc6f325331f4e35a57721c0f22bc,",
-        "comp.button.color.secondary.default.background.hover": "S:b9fe687d7b30f370a1d9c1f649111d2a931e6895,",
-        "comp.button.color.secondary.default.background.active": "S:8b68136b611bf525f7c0a23d18a03798e72369e0,",
+        "comp.button.color.secondary.default.background.hover": "S:8b68136b611bf525f7c0a23d18a03798e72369e0,",
         "comp.button.color.tertiary.default.background.hover": "S:435675cc05c2423b27f369bcca0b2211b6348065,",
         "comp.button.color.tertiary.default.background.active": "S:4d41855dbf2d8d0820150c143b003296af418f18,",
         "comp.button.color.cta-primary.default.background.hover": "S:0cdaa0322b4eeea51fc9116c5946c4c8c747ab10,",
@@ -9260,7 +9292,8 @@
       "name": "Sinch brand dark",
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
-        "Nectary / Dark theme": "enabled"
+        "Nectary / Dark theme": "enabled",
+        "SMB / MessageMedia": "disabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -10044,8 +10077,7 @@
         "comp.select_menu.color.disabled.text.default": "S:7cb36d4eee562df49bf8bac0398092c59e0f19a6,",
         "comp.button.color.primary.default.background.hover": "S:343bfb6d9f1a465f1824d4d50ef09383fffb843b,",
         "comp.button.color.primary.default.background.active": "S:611fb5a44721a1fa64da956fd493bcffd75c829a,",
-        "comp.button.color.secondary.default.background.hover": "S:f8d7974b930574df244716f2dca524daba95eddf,",
-        "comp.button.color.secondary.default.background.active": "S:b2d5e4ea993b246b7a081876dd3e02770a8b8201,",
+        "comp.button.color.secondary.default.background.hover": "S:b2d5e4ea993b246b7a081876dd3e02770a8b8201,",
         "comp.button.color.tertiary.default.background.hover": "S:e1c75a71e4f547987a7c3fe74608da5a9cfc2ae5,",
         "comp.button.color.tertiary.default.background.active": "S:f522d8286aa086d877711588efc03ec40e88dd91,",
         "comp.button.color.cta-primary.default.background.hover": "S:72e4b25410ad9993a91a0a43e9f95bbd912d48f5,",
@@ -10407,16 +10439,17 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / SimpleTexting": "enabled"
+        "SMB / SimpleTexting": "enabled",
+        "SMB / MessageMedia": "disabled"
       }
     },
     {
       "id": "9bf1b1eb292732c275dc4eac42197c2c56e7dc3b",
-      "name": "MessageMedia Old",
+      "name": "MessageMedia",
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / MessageMedia Old": "enabled"
+        "SMB / MessageMedia": "enabled"
       }
     }
   ],
@@ -10424,9 +10457,8 @@
     "tokenSetOrder": [
       "Nectary / Base theme",
       "Nectary / Dark theme",
-      "SMB / SMB Base",
       "SMB / SimpleTexting",
-      "SMB / MessageMedia Old"
+      "SMB / MessageMedia"
     ]
   }
 }
