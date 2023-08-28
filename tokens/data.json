@@ -7415,8 +7415,8 @@
           },
           "tertiary": {
             "default": {
-              "text": {
-                "icon": {
+              "icon": {
+                "initial": {
                   "value": "{ref.color.main.ocean.600}",
                   "type": "color"
                 }
