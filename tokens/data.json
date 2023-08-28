@@ -7443,6 +7443,172 @@
       }
     }
   },
+  "SMB / Demo1": {
+    "sys": {
+      "color": {
+        "primary": {
+          "default": {
+            "value": "#3AA7EA",
+            "type": "color"
+          },
+          "hover": {
+            "value": "#6EBBEE",
+            "type": "color"
+          },
+          "active": {
+            "value": "#0066A5",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#A7A9AA",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#FFFFFF",
+            "type": "color"
+          }
+        },
+        "cta": {
+          "default": {
+            "value": "{ref.color.main.ocean.600}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{ref.color.main.ocean.500}",
+            "type": "color",
+            "$extensions": {}
+          },
+          "active": {
+            "value": "{ref.color.main.ocean.700}",
+            "type": "color",
+            "$extensions": {}
+          },
+          "disabled": {
+            "value": "{ref.color.main.ocean.200}",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#FFFFFF",
+            "type": "color"
+          }
+        }
+      },
+      "shape-radius": {
+        "l": {
+          "value": "10",
+          "type": "borderRadius"
+        },
+        "m": {
+          "value": "6",
+          "type": "borderRadius"
+        },
+        "s": {
+          "value": "2",
+          "type": "borderRadius"
+        },
+        "xs": {
+          "value": "0",
+          "type": "borderRadius"
+        }
+      }
+    },
+    "comp": {
+      "date-picker": {
+        "day": {
+          "color": {
+            "default": {
+              "background": {
+                "hover": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              },
+              "range": {
+                "background": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "SMB / Demo2": {
+    "sys": {
+      "color": {
+        "primary": {
+          "default": {
+            "value": "#1f1f1f",
+            "type": "color"
+          },
+          "hover": {
+            "value": "#404040",
+            "type": "color"
+          },
+          "active": {
+            "value": "#7e7e7e",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#A7A9AA",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#FFFFFF",
+            "type": "color"
+          }
+        },
+        "cta": {
+          "default": {
+            "value": "{ref.color.main.ocean.600}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{ref.color.main.ocean.500}",
+            "type": "color",
+            "$extensions": {}
+          },
+          "active": {
+            "value": "{ref.color.main.ocean.700}",
+            "type": "color",
+            "$extensions": {}
+          },
+          "disabled": {
+            "value": "{ref.color.main.ocean.200}",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#FFFFFF",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "comp": {
+      "date-picker": {
+        "day": {
+          "color": {
+            "default": {
+              "background": {
+                "hover": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              },
+              "range": {
+                "background": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "$themes": [
     {
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
@@ -10600,6 +10766,24 @@
         "Nectary / Base theme": "source",
         "SMB / MessageMedia": "enabled"
       }
+    },
+    {
+      "id": "b6bfd129f01593b02ff7a9da49aa7cd5b2c92534",
+      "name": "Demo1",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "Nectary / Base theme": "source",
+        "SMB / Demo1": "enabled"
+      }
+    },
+    {
+      "id": "3eaec3602c2c65ff1e7415bc511f8dbf455d68ed",
+      "name": "Demo2",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "Nectary / Base theme": "source",
+        "SMB / Demo2": "enabled"
+      }
     }
   ],
   "$metadata": {
@@ -10607,7 +10791,9 @@
       "Nectary / Base theme",
       "Nectary / Dark theme",
       "SMB / SimpleTexting",
-      "SMB / MessageMedia"
+      "SMB / MessageMedia",
+      "SMB / Demo1",
+      "SMB / Demo2"
     ]
   }
 }
