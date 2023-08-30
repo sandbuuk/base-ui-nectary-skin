@@ -1,3 +1,8 @@
+## v0.9.0 (2023-08-30)
+
+* ➕ add `sinch-icon-channel-facebook` component
+* ➕ add `sinch-icon-channel-facebook-square` component
+
 ## v0.8.0 (2023-07-04)
 
 * ➕ add `sinch-icon-channel-google-business-*` components
