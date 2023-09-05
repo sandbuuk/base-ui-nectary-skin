@@ -4717,7 +4717,7 @@
                   "type": "color"
                 },
                 "hover": {
-                  "value": "#DEF2FF",
+                  "value": "{sys.color.container.complement.secondary.hover}",
                   "type": "color"
                 }
               },
@@ -4741,7 +4741,7 @@
               },
               "range": {
                 "background": {
-                  "value": "#DEF2FF",
+                  "value": "{sys.color.container.complement.secondary.hover}",
                   "type": "color"
                 }
               }
@@ -4785,7 +4785,7 @@
             "default": {
               "background": {
                 "hover": {
-                  "value": "#DEF2FF",
+                  "value": "{sys.color.container.complement.secondary.hover}",
                   "type": "color"
                 },
                 "initial": {
