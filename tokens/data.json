@@ -7156,7 +7156,7 @@
       "color": {
         "primary": {
           "default": {
-            "value": "#114369",
+            "value": "#0A5D9A",
             "type": "color"
           },
           "hover": {
@@ -7453,7 +7453,7 @@
                   "type": "color"
                 }
               },
-              "text": {
+              "icon": {
                 "initial": {
                   "value": "#0A5D9A",
                   "type": "color"
@@ -7473,7 +7473,7 @@
                   "type": "color"
                 }
               },
-              "text": {
+              "icon": {
                 "initial": {
                   "value": "#A1D5F5",
                   "type": "color"
@@ -7503,7 +7503,7 @@
                   "type": "color"
                 }
               },
-              "text": {
+              "icon": {
                 "initial": {
                   "value": "#0A5D9A",
                   "type": "color"
@@ -7523,7 +7523,7 @@
                   "type": "color"
                 }
               },
-              "text": {
+              "icon": {
                 "initial": {
                   "value": "#A1D5F5",
                   "type": "color"
