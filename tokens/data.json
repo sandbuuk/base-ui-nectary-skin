@@ -7672,6 +7672,38 @@
             }
           }
         }
+      },
+      "progress": {
+        "color": {
+          "default": {
+            "background": {
+              "initial": {
+                "value": "#DEF2FF",
+                "type": "color"
+              }
+            }
+          }
+        }
+      },
+      "date-picker": {
+        "day": {
+          "color": {
+            "default": {
+              "range": {
+                "background": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              },
+              "background": {
+                "hover": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
