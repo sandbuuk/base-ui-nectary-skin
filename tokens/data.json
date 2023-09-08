@@ -7179,15 +7179,15 @@
       },
       "shape-radius": {
         "l": {
-          "value": "10",
+          "value": "12",
           "type": "borderRadius"
         },
         "m": {
-          "value": "6",
+          "value": "8",
           "type": "borderRadius"
         },
         "s": {
-          "value": "2",
+          "value": "4",
           "type": "borderRadius"
         },
         "xs": {
