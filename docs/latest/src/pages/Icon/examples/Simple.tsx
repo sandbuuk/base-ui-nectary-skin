@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/icon'
 
 export const SimpleExample: FC = () => (
   <sinch-icon name="check_circle"/>

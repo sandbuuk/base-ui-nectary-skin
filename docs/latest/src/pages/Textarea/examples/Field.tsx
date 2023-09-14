@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/help-tooltip'
-import '@sinch-engage/nectary/textarea'
+import '@nectary/components/field'
+import '@nectary/components/help-tooltip'
+import '@nectary/components/textarea'
 
 export const FieldExample: FC = () => {
   const [state, setState] = useState('')

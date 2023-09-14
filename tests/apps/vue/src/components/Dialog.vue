@@ -6,9 +6,9 @@
   </sinch-dialog>
 </template>
 <script>
-import '@sinch-engage/nectary/dialog'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/dialog'
+import '@nectary/components/button'
+import '@nectary/components/text'
 
 export default {
   props: {

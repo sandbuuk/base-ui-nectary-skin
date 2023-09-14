@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/avatar'
-import '@sinch-engage/nectary/badge'
+import '@nectary/components/avatar'
+import '@nectary/components/badge'
 
 @Component({
   selector: 'avatar-component',

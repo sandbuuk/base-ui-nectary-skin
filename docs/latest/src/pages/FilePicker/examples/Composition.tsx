@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import type { TSinchFilePickerInvalidType } from '@sinch-engage/nectary/file-picker/types'
+import type { TSinchFilePickerInvalidType } from '@nectary/components/file-picker/types'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/file-picker'
-import '@sinch-engage/nectary/file-status'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/field'
+import '@nectary/components/file-picker'
+import '@nectary/components/file-status'
+import '@nectary/components/button'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

@@ -67,9 +67,9 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/popover'
+import '@nectary/components/button'
+import '@nectary/components/text'
 
 export default {
   methods: {

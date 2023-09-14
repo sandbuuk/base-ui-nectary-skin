@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/time-picker'
+import '@nectary/components/time-picker'
 
 export default {
   methods: {

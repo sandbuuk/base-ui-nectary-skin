@@ -1,6 +1,6 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
-import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
-import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
+import { setNectaryRegistry } from '@nectary/components/utils'
+import { setAssetsRegistry } from '@nectary/assets/utils'
 import { AppModule } from './app/app.module'
 import 'axe-core'
 

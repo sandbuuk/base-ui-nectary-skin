@@ -1,6 +1,6 @@
 import { useLayoutRef } from '../hooks'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/title'
+import '@nectary/components/title'
 
 export const PageLayoutNavmenu: FC = () => {
   const ref = useLayoutRef('navmenu')

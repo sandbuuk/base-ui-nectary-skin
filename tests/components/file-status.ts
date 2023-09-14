@@ -1,5 +1,5 @@
+import { typeValues } from '@nectary/components/file-status/utils'
 import { test } from '@playwright/test'
-import { typeValues } from '@sinch-engage/nectary/file-status/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 

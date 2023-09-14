@@ -1,7 +1,7 @@
-import { attrValueToInteger } from '@sinch-engage/nectary/utils'
+import { attrValueToInteger } from '@nectary/components/utils'
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/pagination'
+import '@nectary/components/pagination'
 
 type TPagination = {
   search: URLSearchParams,

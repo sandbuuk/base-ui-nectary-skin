@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { categories } from './SystemColorsTable'
 import type { Category } from './SystemColorsTable'
 import type { CSSProperties } from 'react'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/select-button'
+import '@nectary/components/popover'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/components/select-button'
 
 const selectStyles: CSSProperties = {
   width: 200,

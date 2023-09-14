@@ -1,5 +1,5 @@
 {
-  "name": "@sinch-engage/nectary-theme-dark",
+  "name": "@nectary/theme-dark",
   "version": "0.1.0",
   "files": [
     "**/*.css",

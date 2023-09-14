@@ -1,5 +1,5 @@
 {
-  "name": "@sinch-engage/nectary",
+  "name": "@nectary/components",
   "version": "2.4.0",
   "files": [
     "**/*/*.css",

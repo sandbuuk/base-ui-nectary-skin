@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import pokemonNames from './pokemon.json'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
+import '@nectary/components/popover'
+import '@nectary/components/select-button'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
 
 const selectStyles: CSSProperties = {
   width: 200,

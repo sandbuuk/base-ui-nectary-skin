@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/progress-stepper'
-import '@sinch-engage/nectary/progress-stepper-item'
+import '@nectary/components/progress-stepper'
+import '@nectary/components/progress-stepper-item'
 
 @Component({
   selector: 'progress-stepper-component',

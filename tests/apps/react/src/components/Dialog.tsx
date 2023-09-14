@@ -1,8 +1,8 @@
-import type { TSinchDialogCloseDetail } from '@sinch-engage/nectary/dialog/types'
+import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/dialog'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/dialog'
+import '@nectary/components/text'
+import '@nectary/components/button'
 
 type TDialog = {
   search: URLSearchParams,

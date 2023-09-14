@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/time-picker'
+import '@nectary/components/time-picker'
 
 type TTimePicker = {
   search: URLSearchParams,

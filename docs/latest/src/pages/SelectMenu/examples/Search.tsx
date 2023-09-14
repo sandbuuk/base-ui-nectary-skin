@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import pokemonNames from './pokemon.json'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
 
 const menuStyles: CSSProperties = {
   width: 250,

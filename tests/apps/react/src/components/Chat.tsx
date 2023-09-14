@@ -1,8 +1,8 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/chat'
-import '@sinch-engage/nectary/chat-block'
-import '@sinch-engage/nectary/chat-bubble'
-import '@sinch-engage/nectary/avatar'
+import '@nectary/components/chat'
+import '@nectary/components/chat-block'
+import '@nectary/components/chat-bubble'
+import '@nectary/components/avatar'
 
 type TChat = {
   search: URLSearchParams,

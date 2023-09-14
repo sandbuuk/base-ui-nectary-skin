@@ -1,6 +1,6 @@
 import { readdir, mkdir, rename } from 'fs/promises'
 import path from 'path'
-import pkg from '@sinch-engage/nectary/package.json' assert { type: 'json' }
+import pkg from '@nectary/components/package.json' assert { type: 'json' }
 import { rimraf } from 'rimraf'
 
 const VERSIONS_DIR = './public/versions'

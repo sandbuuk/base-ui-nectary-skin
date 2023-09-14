@@ -1,7 +1,7 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/badge'
-import '@sinch-engage/nectary-assets/icons/notifications'
+import '@nectary/components/icon-button'
+import '@nectary/components/badge'
+import '@nectary/assets/icons/notifications'
 
 type TBadge = {
   search: URLSearchParams,

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary-assets/icons/search'
+import '@nectary/components/input'
+import '@nectary/components/select-button'
+import '@nectary/components/tag'
+import '@nectary/components/chip'
+import '@nectary/assets/icons/search'
 
 @Component({
   selector: 'input-component',

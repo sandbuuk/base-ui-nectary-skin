@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
-import type { TSinchCardElement } from '@sinch-engage/nectary/card/types'
+import type { TSinchCardElement } from '@nectary/components/card/types'
 import type { CSSProperties, FC, SyntheticEvent } from 'react'
-import '@sinch-engage/nectary/card'
+import '@nectary/components/card'
 
 const columnStyle: CSSProperties = {
   display: 'flex',

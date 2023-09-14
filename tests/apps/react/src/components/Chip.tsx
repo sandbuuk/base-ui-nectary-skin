@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/chip'
+import '@nectary/components/icon'
 
 type TChip = {
   search: URLSearchParams,

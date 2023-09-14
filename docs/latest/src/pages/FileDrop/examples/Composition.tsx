@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import type { TSinchFileDropInvalidType } from '@sinch-engage/nectary/file-drop/types'
+import type { TSinchFileDropInvalidType } from '@nectary/components/file-drop/types'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/file-drop'
-import '@sinch-engage/nectary/file-status'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/field'
+import '@nectary/components/file-drop'
+import '@nectary/components/file-status'
+import '@nectary/components/button'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

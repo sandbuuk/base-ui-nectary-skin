@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/toggle'
+import '@nectary/components/toggle'
 
 export const SimpleExample: FC = () => {
   const [isChecked, setChecked] = useState(false)

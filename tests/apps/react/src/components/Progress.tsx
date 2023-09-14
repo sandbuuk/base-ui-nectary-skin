@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/progress'
+import '@nectary/components/progress'
 
 type TProgress = {
   search: URLSearchParams,

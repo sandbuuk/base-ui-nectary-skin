@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/tabs'
-import '@sinch-engage/nectary/tabs-option'
-import '@sinch-engage/nectary/tabs-icon-option'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/tabs'
+import '@nectary/components/tabs-option'
+import '@nectary/components/tabs-icon-option'
+import '@nectary/assets/icons/open-in-new'
 
 type TTabs = {
   search: URLSearchParams,

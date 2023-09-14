@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/button'
+import '@nectary/assets/icons/open-in-new'
 
 export const RightIconExample: FC = () => (
   <sinch-button

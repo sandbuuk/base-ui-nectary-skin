@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/flag'
-import countriesJson from '@sinch-engage/nectary/utils/countries.json'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/components/flag'
+import countriesJson from '@nectary/components/utils/countries.json'
 
 @Component({
   selector: 'phone-code-menu-component',

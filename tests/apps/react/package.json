@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@sinch-engage/nectary": "workspace:*",
-    "@sinch-engage/nectary-assets": "workspace:*",
-    "@sinch-engage/nectary-theme-base": "workspace:*",
-    "@sinch-engage/scoped-custom-element-registry": "workspace:*",
+    "@nectary/components": "workspace:*",
+    "@nectary/assets": "workspace:*",
+    "@nectary/theme-base": "workspace:*",
+    "@nectary/scoped-custom-element-registry": "workspace:*",
     "axe-core": "^4.6.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

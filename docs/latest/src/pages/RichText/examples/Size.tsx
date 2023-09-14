@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/rich-text'
+import '@nectary/components/rich-text'
 
 const mdText = (size: string) => `__Rich Text__ \`size\` property value _"${size}"_`
 

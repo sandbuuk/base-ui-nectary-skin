@@ -1,5 +1,5 @@
-import { defineCustomElement, NectaryElement } from '@sinch-engage/nectary/utils'
-import type { TSinchElementReact } from '@sinch-engage/nectary/types'
+import { defineCustomElement, NectaryElement } from '@nectary/components/utils'
+import type { TSinchElementReact } from '@nectary/components/types'
 
 const template = document.createElement('template')
 

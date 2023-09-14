@@ -1,5 +1,5 @@
+import { sizeValues } from '@nectary/components/utils/size'
 import { test } from '@playwright/test'
-import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { runScreenshotTests } from '../screenshot-tests'
 
 const shot = '/spinner'

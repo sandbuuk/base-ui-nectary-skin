@@ -1,7 +1,7 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/inline-alert'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/inline-alert'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
 
 export const CloseExample: FC = () => (
   <sinch-inline-alert

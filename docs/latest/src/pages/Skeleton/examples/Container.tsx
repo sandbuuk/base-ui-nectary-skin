@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/skeleton'
-import '@sinch-engage/nectary/skeleton-item'
+import '@nectary/components/skeleton'
+import '@nectary/components/skeleton-item'
 
 export const ContainerExample: FC = () => (
   <sinch-skeleton style={{ width: '300px' }}>

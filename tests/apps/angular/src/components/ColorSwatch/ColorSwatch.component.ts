@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 
-import '@sinch-engage/nectary/color-swatch'
+import '@nectary/components/color-swatch'
 
 @Component({
   selector: 'color-swatch-component',

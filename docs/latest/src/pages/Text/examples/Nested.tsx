@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/text'
 
 export const NestedExample: FC = () => {
   return (

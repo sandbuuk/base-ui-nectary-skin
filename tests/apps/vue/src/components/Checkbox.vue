@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/checkbox'
+import '@nectary/components/checkbox'
 
 export default {
   methods: {

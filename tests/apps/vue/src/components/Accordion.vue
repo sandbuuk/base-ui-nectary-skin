@@ -14,10 +14,10 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/accordion'
-import '@sinch-engage/nectary/accordion-item'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/text'
+import '@nectary/components/accordion'
+import '@nectary/components/accordion-item'
+import '@nectary/assets/icons/open-in-new'
 
 const items = [{
   value: '1',

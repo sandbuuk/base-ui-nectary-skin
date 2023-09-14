@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/chip'
+import '@nectary/components/icon'
 
 export default {
   props: {

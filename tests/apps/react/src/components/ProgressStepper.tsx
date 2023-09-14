@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/progress-stepper'
-import '@sinch-engage/nectary/progress-stepper-item'
+import '@nectary/components/progress-stepper'
+import '@nectary/components/progress-stepper-item'
 
 type TProgressStepper = {
   search: URLSearchParams,

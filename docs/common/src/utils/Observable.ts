@@ -1,4 +1,4 @@
-import { debounceTimeout } from '@sinch-engage/nectary/utils'
+import { debounceTimeout } from '@nectary/components/utils'
 
 type TObserver = <T>(value: T) => void
 type TObservableOptions<T> = {

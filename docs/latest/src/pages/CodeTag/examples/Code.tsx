@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/code-tag'
+import '@nectary/components/text'
+import '@nectary/components/code-tag'
 
 export const CodeExample: FC = () => (
   <sinch-text type="m">

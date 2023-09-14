@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/file-drop'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/file-drop'
+import '@nectary/components/button'
 
 export default {
   methods: {

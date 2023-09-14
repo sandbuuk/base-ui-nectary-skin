@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/card'
+import '@nectary/components/card'
 
 const items = [{
   key: '1',

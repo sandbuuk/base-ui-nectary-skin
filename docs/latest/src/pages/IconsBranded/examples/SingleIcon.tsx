@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary-assets/icons-branded/chatbot'
+import '@nectary/assets/icons-branded/chatbot'
 
 export const SingleIconExample: FC = () => {
   return (

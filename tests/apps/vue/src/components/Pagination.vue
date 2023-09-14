@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import { attrValueToInteger } from '@sinch-engage/nectary/utils'
-import '@sinch-engage/nectary/pagination'
+import { attrValueToInteger } from '@nectary/components/utils'
+import '@nectary/components/pagination'
 
 export default {
   props: {

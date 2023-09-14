@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/vertical-stepper'
-import '@sinch-engage/nectary/vertical-stepper-item'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/vertical-stepper'
+import '@nectary/components/vertical-stepper-item'
+import '@nectary/components/text'
 
 @Component({
   selector: 'vertical-stepper-component',

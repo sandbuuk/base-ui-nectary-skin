@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getBB, runScreenshotTests } from '../screenshot-tests'
-import type { TSinchCardElement } from '@sinch-engage/nectary/card/types'
+import type { TSinchCardElement } from '@nectary/components/card/types'
 
 const cardLabel = 'Report'
 const cardLabelLong = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'

@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/chip'
+import '@nectary/components/chip'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/tag'
+import '@nectary/components/tag'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

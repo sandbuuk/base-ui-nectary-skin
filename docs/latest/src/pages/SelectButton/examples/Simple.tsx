@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/select-button'
+import '@nectary/components/select-button'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

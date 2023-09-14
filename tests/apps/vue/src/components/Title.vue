@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/title'
+import '@nectary/components/title'
 
 export default {
   props: {

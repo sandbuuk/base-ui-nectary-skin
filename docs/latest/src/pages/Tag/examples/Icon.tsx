@@ -1,6 +1,6 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary-assets/icons/mood'
+import '@nectary/components/tag'
+import '@nectary/assets/icons/mood'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

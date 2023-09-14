@@ -1,8 +1,8 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/toast'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/toast'
+import '@nectary/components/button'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
 
 export const ActionExample: FC = () => (
   <sinch-toast type="info" text="Info">

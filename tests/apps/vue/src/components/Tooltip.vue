@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/tooltip'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/tooltip'
+import '@nectary/components/text'
 
 export default {
   props: {

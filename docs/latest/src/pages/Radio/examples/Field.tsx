@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/radio'
-import '@sinch-engage/nectary/radio-option'
-import '@sinch-engage/nectary/field'
+import '@nectary/components/radio'
+import '@nectary/components/radio-option'
+import '@nectary/components/field'
 
 const style: CSSProperties = {
   width: 300,

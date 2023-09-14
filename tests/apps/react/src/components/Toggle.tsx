@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/toggle'
+import '@nectary/components/toggle'
 
 type TToggle = {
   search: URLSearchParams,

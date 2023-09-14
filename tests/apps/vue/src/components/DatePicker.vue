@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/date-picker'
+import '@nectary/components/date-picker'
 
 export default {
   methods: {

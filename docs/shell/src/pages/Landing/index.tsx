@@ -1,7 +1,7 @@
 import { BigToast, Cards, Cat, Introduction, SpacingY } from './components'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/title'
+import '@nectary/components/text'
+import '@nectary/components/title'
 import './styles.css'
 
 const nectaryDesignSystem = `The nectary design system offers a number of resources to help designers and developers work with the system. These include a Figma library, which contains design components and templates, as well as a git lab repository with the code for the system. The brand library provides information on the sinch brand, including its tone of voice, logo usage, and color palette.`

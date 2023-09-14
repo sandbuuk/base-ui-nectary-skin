@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/rich-text'
+import '@nectary/components/rich-text'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).

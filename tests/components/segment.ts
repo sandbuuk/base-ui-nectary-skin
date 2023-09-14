@@ -1,5 +1,5 @@
+import { sizeValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
-import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withEverything = '/segment?width=600&caption=Title&action=true&content=true&icon=true&info=true&preview=true'

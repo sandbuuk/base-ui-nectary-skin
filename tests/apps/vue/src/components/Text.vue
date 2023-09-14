@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/link'
-import '@sinch-engage/nectary/code-tag'
+import '@nectary/components/text'
+import '@nectary/components/link'
+import '@nectary/components/code-tag'
 
 export default {
   props: {

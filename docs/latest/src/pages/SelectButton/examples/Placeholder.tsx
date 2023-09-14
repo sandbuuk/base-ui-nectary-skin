@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/select-button'
+import '@nectary/components/select-button'
 
 export const PlaceholderExample: FC = () => {
   const onClick = () => console.log('click')

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/skeleton'
-import '@sinch-engage/nectary/skeleton-item'
+import '@nectary/components/popover'
+import '@nectary/components/select-button'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/components/skeleton'
+import '@nectary/components/skeleton-item'
 
 const selectStyles: CSSProperties = {
   width: 300,

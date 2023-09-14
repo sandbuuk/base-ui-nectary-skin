@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/tooltip'
-import { TSinchTooltipType } from '@sinch-engage/nectary/tooltip/types'
+import '@nectary/components/tooltip'
+import { TSinchTooltipType } from '@nectary/components/tooltip/types'
 
 @Component({
   selector: 'tooltip-component',

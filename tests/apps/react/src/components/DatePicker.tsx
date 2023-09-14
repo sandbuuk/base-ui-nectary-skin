@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/date-picker'
+import '@nectary/components/date-picker'
 
 type TDatePicker = {
   search: URLSearchParams,

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/color-swatch'
+import '@nectary/components/color-swatch'
 
 export default {
   props: {

@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import type { TSinchFileDropInvalidType } from '@sinch-engage/nectary/file-drop/types'
+import type { TSinchFileDropInvalidType } from '@nectary/components/file-drop/types'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/file-drop'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/field'
+import '@nectary/components/file-drop'
+import '@nectary/components/button'
 
 const invalidErrors: Record<TSinchFileDropInvalidType, string> = {
   accept: 'File type is not accepted',
