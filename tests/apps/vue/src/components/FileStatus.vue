@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/file-status'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/progress'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@nectary/components/file-status'
+import '@nectary/components/icon-button'
+import '@nectary/components/text'
+import '@nectary/components/progress'
+import '@nectary/assets/icons/close'
 
 export default {
   methods: {

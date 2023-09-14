@@ -1,1 +1,1 @@
-import '@sinch-engage/scoped-custom-element-registry'
+import '@nectary/scoped-custom-element-registry'

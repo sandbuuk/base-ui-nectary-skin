@@ -1,8 +1,8 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/file-status'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
-import '@sinch-engage/nectary/progress'
+import '@nectary/components/file-status'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
+import '@nectary/components/progress'
 
 const style: CSSProperties = {
   width: 300,

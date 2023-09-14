@@ -1,5 +1,5 @@
+import { orientationValues } from '@nectary/components/popover/utils'
 import { expect, test } from '@playwright/test'
-import { orientationValues } from '@sinch-engage/nectary/popover/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 

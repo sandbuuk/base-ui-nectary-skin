@@ -1,6 +1,6 @@
+import { typeValues } from '@nectary/components/button/utils'
+import { sizeValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
-import { typeValues } from '@sinch-engage/nectary/button/utils'
-import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 

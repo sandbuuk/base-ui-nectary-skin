@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { useRouteTitleInfo } from '../context'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/title'
+import '@nectary/components/title'
 
 export const PageLayoutTitle: FC = () => {
   const { pathname } = useLocation()

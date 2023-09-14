@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/color-swatch'
+import '@nectary/components/color-swatch'
 
 type TColorSwatch = {
   search: URLSearchParams,

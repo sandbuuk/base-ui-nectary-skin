@@ -1,9 +1,9 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/badge'
-import '@sinch-engage/nectary/avatar'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/notifications'
+import '@nectary/components/badge'
+import '@nectary/components/avatar'
+import '@nectary/components/button'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/notifications'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

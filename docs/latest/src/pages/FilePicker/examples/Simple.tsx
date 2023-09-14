@@ -1,7 +1,7 @@
-import type { TSinchFilePickerInvalidType } from '@sinch-engage/nectary/file-picker/types'
+import type { TSinchFilePickerInvalidType } from '@nectary/components/file-picker/types'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/file-picker'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/file-picker'
+import '@nectary/components/button'
 
 export const SimpleExample: FC = () => {
   const onChange = (e: CustomEvent<File[]>) => {

@@ -77,7 +77,7 @@ const processIcon = async (filepath: string) => {
   let storyData = await readFile(storyPath, 'utf-8')
 
   storyData = storyData
-    .replace('// {{icon import}}', `$&\nimport '@sinch-engage/nectary-assets/icons-branded/${filename}'`)
+    .replace('// {{icon import}}', `$&\nimport '@nectary/assets/icons-branded/${filename}'`)
     .replace('// {{icon name}}', `$&\n  'sinch-icon-branded-${filename}',`)
 
   await writeFile(storyPath, storyData)

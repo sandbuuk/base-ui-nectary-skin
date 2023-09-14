@@ -1,4 +1,4 @@
-import darkThemeCss from '@sinch-engage/nectary-theme-dark/index.css?theme'
+import darkThemeCss from '@nectary/theme-dark/index.css?theme'
 import { Loading, QueryRouter } from 'docs-common'
 import { Suspense, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
@@ -18,7 +18,7 @@ import { LandingPage } from '~/pages/Landing'
 import { NotFoundPage } from '~/pages/NotFound'
 import { TestingPage } from '~/pages/Testing'
 import './styles.css'
-import '@sinch-engage/nectary-theme-base'
+import '@nectary/theme-base'
 
 const basename = location.pathname.replace(/\/$/, '')
 

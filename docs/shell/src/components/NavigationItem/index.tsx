@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { FC } from 'react'
 import './styles.css'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/text'
 import { useNavigateLink } from '~/hooks'
 
 export type TNavigationItem = {

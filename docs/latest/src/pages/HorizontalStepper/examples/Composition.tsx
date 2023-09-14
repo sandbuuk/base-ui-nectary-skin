@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/horizontal-stepper'
-import '@sinch-engage/nectary/horizontal-stepper-item'
+import '@nectary/components/horizontal-stepper'
+import '@nectary/components/horizontal-stepper-item'
 
 export const CompositionExample: FC = () => {
   return (

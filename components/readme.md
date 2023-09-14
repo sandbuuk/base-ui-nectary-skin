@@ -17,9 +17,9 @@ Add the following line to `.npmrc` in the project root:
 Add the component library dependency to `package.json`:
 
 ```
-npm install @sinch-engage/nectary
+npm install @nectary/components
 # or
-yarn add @sinch-engage/nectary
+yarn add @nectary/components
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ yarn add @sinch-engage/nectary
 Nectary needs a custom elements registry to work with, even if it's a global default one:
 
 ```js
-import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+import { setNectaryRegistry } from '@nectary/components/utils'
 
 setNectaryRegistry(window.customElements)
 
@@ -39,7 +39,7 @@ setNectaryRegistry(window.customElements)
 Or a custom one for the Shell/MFE use case, see [mfe-helper-react](https://gitlab.com/sinch/sinch-projects/applications/teams/core/core-npm-packages/-/tree/main/packages/mfe-helper-react) as an example for more details:
 
 ```js
-import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+import { setNectaryRegistry } from '@nectary/components/utils'
 
 const customRegistry = new CustomElementRegistry();
 
@@ -51,7 +51,7 @@ setNectaryRegistry(customRegistry)
 ### Theme
 
 ```js
-import '@sinch-engage/nectary-theme-base'
+import '@nectary/theme-base'
 ```
 
 Use color palette or custom font face:
@@ -71,7 +71,7 @@ h2 {
 Import component:
 
 ```js
-import '@sinch-engage/nectary/button'
+import '@nectary/components/button'
 ```
 
 Use it in React/Vue/Angular/etc, for example:
@@ -103,7 +103,7 @@ module.exports = {
         "^.+\\.(js|jsx)$": "babel-jest"
     },
     transformIgnorePatterns: [
-        "node_modules/(?!@sinch-engage)"
+        "node_modules/(?!@nectary)"
     ]
 }
 ```
@@ -135,7 +135,7 @@ Then add this part to your jest.config.js file:
 It lets Jest know how to mock the css imports in your codebase, like for example when you import the theme:
 
 ```js
-import '@sinch-engage/nectary-theme-base'
+import '@nectary/theme-base'
 ```
 
 This import should not throw an error now.
@@ -158,7 +158,7 @@ Then add this lines to your jest.config.js file:
         "^.+\\.(js|jsx)$": "babel-jest"
     },
     transformIgnorePatterns: [
-        "node_modules/(?!@sinch-engage)"
+        "node_modules/(?!@nectary)"
     ]
 ```
 
@@ -171,22 +171,9 @@ module.exports = {presets: ['@babel/preset-env']}
 If you import any component:
 
 ```js
-import '@sinch-engage/nectary/input'
+import '@nectary/components/input'
 ```
 
 It should not throw the error: 
 
 ```Jest encountered an unexpected token```
-
-## TODO
-
-- [x] [Storybook](https://saas.pages.sinch.com/engage/engage/) (VPN is required)
-- [x] Follow the WCAG 2.1 guidelines
-- [x] Tests
-  - [x] (in progress) Cross-browser Chromium/Firefox/WebKit visual regression tests
-  - [x] Cross-framework React/Vue/Angular tests 
-  - [x] a11y tests using [Axe](https://www.deque.com/axe/) library
-- [ ] CI/CD
-  - [x] Auto-publish on Git tag
-  - [x] Send message/changelog to Slack
-  - [ ] Provide unique Storybook preview link in PRs

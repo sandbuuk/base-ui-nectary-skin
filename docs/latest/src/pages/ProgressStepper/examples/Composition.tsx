@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/progress-stepper'
-import '@sinch-engage/nectary/progress-stepper-item'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/checkbox'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/title'
+import '@nectary/components/progress-stepper'
+import '@nectary/components/progress-stepper-item'
+import '@nectary/components/button'
+import '@nectary/components/checkbox'
+import '@nectary/components/input'
+import '@nectary/components/text'
+import '@nectary/components/title'
 
 const layoutStyle: CSSProperties = {
   display: 'flex',

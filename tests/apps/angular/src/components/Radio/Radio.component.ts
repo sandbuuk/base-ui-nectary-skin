@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/radio'
-import '@sinch-engage/nectary/radio-option'
+import '@nectary/components/radio'
+import '@nectary/components/radio-option'
 
 const options = [{
   value: '1',

@@ -1,6 +1,6 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/code-tag'
+import '@nectary/components/text'
+import '@nectary/components/code-tag'
 
 const wrapperStyle: CSSProperties = {
   display: 'flex',

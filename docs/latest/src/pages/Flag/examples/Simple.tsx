@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/flag'
+import '@nectary/components/flag'
 
 export const SimpleExample: FC = () => (
   <sinch-flag code="se"/>

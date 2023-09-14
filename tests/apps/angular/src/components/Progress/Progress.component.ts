@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/progress'
+import '@nectary/components/progress'
 
 @Component({
   selector: 'progress-component',

@@ -1,6 +1,6 @@
-// eslint-disable-next-line @sinch-engage/nectary/imports
-import Changelog from '@sinch-engage/nectary/changelog.md'
-import '@sinch-engage/nectary/title'
+// eslint-disable-next-line @nectary/imports
+import Changelog from '@nectary/components/changelog.md'
+import '@nectary/components/title'
 import { SimpleLayout } from 'docs-common'
 import './styles.css'
 import type { FC } from 'react'

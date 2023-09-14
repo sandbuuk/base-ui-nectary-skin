@@ -5,9 +5,9 @@
     "outDir": "./out-tsc/app",
     "types": ["node"],
     "paths": {
-      "@sinch-engage/nectary/*": ["../../../components/*"],
-      "@sinch-engage/nectary-assets/*": ["../../../assets/*"],
-      "@sinch-engage/nectary-theme-base/*": ["../../../themes/base/*"],
+      "@nectary/components/*": ["../../../components/*"],
+      "@nectary/assets/*": ["../../../assets/*"],
+      "@nectary/theme-base/*": ["../../../themes/base/*"],
       "tslib": ["node_modules/tslib"]
     }
   },

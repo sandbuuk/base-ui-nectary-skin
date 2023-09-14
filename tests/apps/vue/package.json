@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@sinch-engage/nectary": "workspace:*",
-    "@sinch-engage/nectary-assets": "workspace:*",
-    "@sinch-engage/nectary-theme-base": "workspace:*",
+    "@nectary/components": "workspace:*",
+    "@nectary/assets": "workspace:*",
+    "@nectary/theme-base": "workspace:*",
     "axe-core": "^4.6.3",
     "vue": "^3.2.47"
   },

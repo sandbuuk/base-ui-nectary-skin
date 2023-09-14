@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/help-tooltip'
-import '@sinch-engage/nectary/input'
+import '@nectary/components/field'
+import '@nectary/components/help-tooltip'
+import '@nectary/components/input'
 
 const fieldStyles: CSSProperties = {
   width: 300,

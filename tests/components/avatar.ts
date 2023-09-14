@@ -1,6 +1,6 @@
+import { statusValues } from '@nectary/components/avatar/utils'
+import { sizeValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
-import { statusValues } from '@sinch-engage/nectary/avatar/utils'
-import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 

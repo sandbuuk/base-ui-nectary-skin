@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary-assets/animations/engage-logo'
+import '@nectary/assets/animations/engage-logo'
 
 export const SingleAnimationExample: FC = () => {
   return (

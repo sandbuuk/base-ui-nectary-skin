@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/color-swatch'
-import '@sinch-engage/nectary/color-menu'
-import '@sinch-engage/nectary/color-menu-option'
+import '@nectary/components/popover'
+import '@nectary/components/icon-button'
+import '@nectary/components/color-swatch'
+import '@nectary/components/color-menu'
+import '@nectary/components/color-menu-option'
 
 const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
 

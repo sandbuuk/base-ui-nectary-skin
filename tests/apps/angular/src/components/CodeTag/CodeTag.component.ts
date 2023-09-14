@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/code-tag'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/code-tag'
+import '@nectary/components/text'
 
 @Component({
   selector: 'code-tag-component',

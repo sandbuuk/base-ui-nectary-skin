@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/dialog'
-import '@sinch-engage/nectary/button'
-import type { TSinchDialogCloseDetail } from '@sinch-engage/nectary/dialog/types'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/dialog'
+import '@nectary/components/button'
+import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
+import '@nectary/components/text'
 
 @Component({
   selector: 'dialog-component',

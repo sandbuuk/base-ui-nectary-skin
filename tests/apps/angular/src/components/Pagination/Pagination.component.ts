@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/pagination'
-import { attrValueToInteger } from '@sinch-engage/nectary/utils'
+import '@nectary/components/pagination'
+import { attrValueToInteger } from '@nectary/components/utils'
 
 @Component({
   selector: 'pagination-component',

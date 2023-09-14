@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid'
 import { useState } from 'react'
-import type { TSinchToastType } from '@sinch-engage/nectary/toast/types'
+import type { TSinchToastType } from '@nectary/components/toast/types'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/toast-manager'
-import '@sinch-engage/nectary/toast'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/button'
+import '@nectary/components/toast-manager'
+import '@nectary/components/toast'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
 
 const types: TSinchToastType[] = ['info', 'warn', 'success', 'error']
 const text = [

@@ -1,7 +1,7 @@
-import type { TSinchFileDropInvalidType } from '@sinch-engage/nectary/file-drop/types'
+import type { TSinchFileDropInvalidType } from '@nectary/components/file-drop/types'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/file-drop'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/file-drop'
+import '@nectary/components/button'
 
 export const SimpleExample: FC = () => {
   const onChange = (e: CustomEvent<File[]>) => {

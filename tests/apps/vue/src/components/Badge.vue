@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/badge'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/notifications'
+import '@nectary/components/badge'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/notifications'
 
 export default {
   props: {

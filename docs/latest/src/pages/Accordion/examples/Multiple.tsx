@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/accordion'
-import '@sinch-engage/nectary/accordion-item'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/accordion'
+import '@nectary/components/accordion-item'
+import '@nectary/components/text'
 
 export const MultipleExample: FC = () => {
   const [value, setValue] = useState('')

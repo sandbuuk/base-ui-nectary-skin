@@ -1,4 +1,4 @@
-import type { TSinchElementReact } from '@sinch-engage/nectary/types'
+import type { TSinchElementReact } from '@nectary/components/types'
 
 export type TSinchGridElement = HTMLElement & {
   /** no grid padding */

@@ -1,6 +1,6 @@
-import '@sinch-engage/nectary/action-menu'
-import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/action-menu'
+import '@nectary/components/action-menu-option'
+import '@nectary/assets/icons/open-in-new'
 import type { FC } from 'react'
 
 type TMenuValue = {

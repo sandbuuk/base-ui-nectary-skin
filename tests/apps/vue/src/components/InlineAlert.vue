@@ -26,10 +26,10 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/inline-alert'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@nectary/components/inline-alert'
+import '@nectary/components/button'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/close'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).

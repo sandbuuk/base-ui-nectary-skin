@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/toggle'
+import '@nectary/components/toggle'
 
 export default {
   methods: {

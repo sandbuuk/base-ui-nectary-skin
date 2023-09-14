@@ -1,7 +1,7 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/file-picker'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary-assets/icons/upload'
+import '@nectary/components/file-picker'
+import '@nectary/components/button'
+import '@nectary/assets/icons/upload'
 
 type TFilePicker = {
   search: URLSearchParams,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/title'
+import '@nectary/components/title'
 
 @Component({
   selector: 'title-component',

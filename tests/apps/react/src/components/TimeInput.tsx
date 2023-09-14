@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/time-picker'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/schedule'
+import '@nectary/components/time-picker'
+import '@nectary/components/input'
+import '@nectary/components/field'
+import '@nectary/components/popover'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/schedule'
 
 type TTimeInput = {
   search: URLSearchParams,

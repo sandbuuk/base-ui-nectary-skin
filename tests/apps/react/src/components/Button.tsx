@@ -1,8 +1,8 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
-import '@sinch-engage/nectary-assets/icons/expand-more'
-import '@sinch-engage/nectary/spinner'
+import '@nectary/components/button'
+import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/expand-more'
+import '@nectary/components/spinner'
 
 type TButton = {
   search: URLSearchParams,

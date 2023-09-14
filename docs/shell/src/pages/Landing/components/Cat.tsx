@@ -1,4 +1,4 @@
-import '@sinch-engage/nectary-assets/illustrations/cat'
+import '@nectary/assets/illustrations/cat'
 import './styles.css'
 
 export const Cat = () => (

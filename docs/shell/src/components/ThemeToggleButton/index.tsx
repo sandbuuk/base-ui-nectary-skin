@@ -1,5 +1,5 @@
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
 import './styles.css'
 import { useEffect } from 'react'
 import { useThemeName } from '~/context/theme-control'

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/checkbox'
-import '@sinch-engage/nectary/dialog'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/button'
+import '@nectary/components/checkbox'
+import '@nectary/components/dialog'
+import '@nectary/components/text'
 
 export const SimpleExample: FC = () => {
   const [isDialogOpen, setDialogOpen] = useState(false)

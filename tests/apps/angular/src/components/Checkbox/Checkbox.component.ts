@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/checkbox'
+import '@nectary/components/checkbox'
 
 @Component({
   selector: 'checkbox-component',

@@ -1,8 +1,8 @@
 import './landing-page-grid'
-import '@sinch-engage/nectary/grid-item'
-import '@sinch-engage/nectary/card'
-import '@sinch-engage/nectary/link'
-import '@sinch-engage/nectary-assets/logo/sinch-icon'
+import '@nectary/components/grid-item'
+import '@nectary/components/card'
+import '@nectary/components/link'
+import '@nectary/assets/logo/sinch-icon'
 import '../logos/figma-icon'
 import '../logos/gitlab-icon'
 

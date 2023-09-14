@@ -1,8 +1,8 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/spinner'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/input'
+import '@nectary/components/spinner'
+import '@nectary/components/button'
+import '@nectary/components/icon-button'
+import '@nectary/components/input'
 
 const rowStyles: CSSProperties = {
   display: 'flex',

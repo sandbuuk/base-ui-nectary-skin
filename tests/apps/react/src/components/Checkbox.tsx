@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/checkbox'
+import '@nectary/components/checkbox'
 
 type TCheckbox = {
   search: URLSearchParams,

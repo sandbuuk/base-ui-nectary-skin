@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/progress'
+import '@nectary/components/progress'
 
 export default {
   methods: {

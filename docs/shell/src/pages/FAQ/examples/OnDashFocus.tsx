@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/calendar-today'
+import '@nectary/components/input'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/calendar-today'
 
 export const OnDashFocusExample: FC = () => {
   const [state, setState] = useState('')

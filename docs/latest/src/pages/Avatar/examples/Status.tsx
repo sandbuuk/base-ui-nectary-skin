@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/avatar'
+import '@nectary/components/avatar'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

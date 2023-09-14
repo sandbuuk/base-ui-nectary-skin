@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/tabs'
-import '@sinch-engage/nectary/tabs-option'
-import '@sinch-engage/nectary/tabs-icon-option'
+import '@nectary/components/tabs'
+import '@nectary/components/tabs-option'
+import '@nectary/components/tabs-icon-option'
 
 export default {
   props: {

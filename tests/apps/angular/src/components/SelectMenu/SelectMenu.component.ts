@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/assets/icons/open-in-new'
 
 const optionsLong: Record<string, TMenuValue> = {
   1: { text: 'Option 1 value long long long', icon: '1' },

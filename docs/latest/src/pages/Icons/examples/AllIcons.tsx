@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/input'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
 
-const req = import.meta.webpackContext!('@sinch-engage/nectary-assets/icons', {
+const req = import.meta.webpackContext!('@nectary/assets/icons', {
   regExp: /^.*\/index.ts$/,
   recursive: true,
   mode: 'sync',

@@ -26,12 +26,12 @@
 </template>
 
 <script>
-import { typeValues } from '@sinch-engage/nectary/toast/utils'
-import '@sinch-engage/nectary/toast-manager'
-import '@sinch-engage/nectary/toast'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/close'
+import { typeValues } from '@nectary/components/toast/utils'
+import '@nectary/components/toast-manager'
+import '@nectary/components/toast'
+import '@nectary/components/button'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/close'
 
 const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
 

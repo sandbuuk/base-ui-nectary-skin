@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/code-tag'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/code-tag'
+import '@nectary/components/text'
 
 type TCodeTag = {
   search: URLSearchParams,

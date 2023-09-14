@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/pagination'
+import '@nectary/components/pagination'
 
 export const SimpleExample: FC = () => {
   const [value, setValue] = useState(5)

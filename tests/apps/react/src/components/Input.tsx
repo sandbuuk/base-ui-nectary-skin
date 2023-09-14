@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import type { TSinchInputClipboardEvent } from '@sinch-engage/nectary/input/types'
+import type { TSinchInputClipboardEvent } from '@nectary/components/input/types'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary-assets/icons/search'
+import '@nectary/components/input'
+import '@nectary/components/select-button'
+import '@nectary/components/tag'
+import '@nectary/components/chip'
+import '@nectary/assets/icons/search'
 
 type TInput = {
   search: URLSearchParams,

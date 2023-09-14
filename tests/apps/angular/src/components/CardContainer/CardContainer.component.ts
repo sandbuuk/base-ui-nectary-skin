@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/title'
-import '@sinch-engage/nectary/card-container'
+import '@nectary/components/text'
+import '@nectary/components/title'
+import '@nectary/components/card-container'
 
 @Component({
   selector: 'card-container-component',

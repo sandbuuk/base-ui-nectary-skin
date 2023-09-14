@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/chip'
+import '@nectary/components/icon'
 
 @Component({
   selector: 'chip-component',

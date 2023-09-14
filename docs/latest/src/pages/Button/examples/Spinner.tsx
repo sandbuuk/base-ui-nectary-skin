@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/spinner'
+import '@nectary/components/button'
+import '@nectary/components/spinner'
 
 export const SpinnerExample: FC = () => (
   <sinch-button

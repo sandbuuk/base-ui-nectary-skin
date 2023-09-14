@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getBB, runScreenshotTests } from '../screenshot-tests'
-import type { TSinchTooltipElement } from '@sinch-engage/nectary/tooltip/types'
+import type { TSinchTooltipElement } from '@nectary/components/tooltip/types'
 
 const shot = '/field?width=200&label=Label'
 const withValue = '/field?width=200&label=Label&value=Input%20value'

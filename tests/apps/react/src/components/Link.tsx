@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/link'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/link'
+import '@nectary/components/text'
 
 type TLink = {
   search: URLSearchParams,

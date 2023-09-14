@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/help-tooltip'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary-assets/icons/search'
+import '@nectary/components/input'
+import '@nectary/components/help-tooltip'
+import '@nectary/components/tag'
+import '@nectary/assets/icons/search'
 
 @Component({
   selector: 'field-component',

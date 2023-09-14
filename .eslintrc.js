@@ -465,11 +465,11 @@ module.exports = {
       },
       plugins: [
         'react',
-        '@sinch-engage/nectary',
+        '@nectary',
       ],
       rules: {
         'sort-imports': [2, { ignoreDeclarationSort: true }],
-        '@sinch-engage/nectary/imports': 2,
+        '@nectary/imports': 2,
         'jsx-quotes': [2, 'prefer-double'],
         'react/boolean-prop-naming': [2, {
           rule: '^(is|has|should)[A-Z]([A-Za-z0-9]?)+',

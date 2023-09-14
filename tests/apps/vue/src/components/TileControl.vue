@@ -79,18 +79,18 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/tile-control'
-import '@sinch-engage/nectary/tile-control-option'
-import '@sinch-engage/nectary-assets/icons/accessibility'
-import '@sinch-engage/nectary-assets/icons/chat'
-import '@sinch-engage/nectary-assets/icons/title'
-import '@sinch-engage/nectary-assets/icons/format-align-left'
-import '@sinch-engage/nectary-assets/icons/qr-code'
-import '@sinch-engage/nectary-assets/icons/library-add-check'
-import '@sinch-engage/nectary-assets/icons/smart-button'
-import '@sinch-engage/nectary-assets/icons/add-to-home-screen'
-import '@sinch-engage/nectary-assets/icons/camera'
-import '@sinch-engage/nectary-assets/icons/alarm-add'
+import '@nectary/components/tile-control'
+import '@nectary/components/tile-control-option'
+import '@nectary/assets/icons/accessibility'
+import '@nectary/assets/icons/chat'
+import '@nectary/assets/icons/title'
+import '@nectary/assets/icons/format-align-left'
+import '@nectary/assets/icons/qr-code'
+import '@nectary/assets/icons/library-add-check'
+import '@nectary/assets/icons/smart-button'
+import '@nectary/assets/icons/add-to-home-screen'
+import '@nectary/assets/icons/camera'
+import '@nectary/assets/icons/alarm-add'
 
 export default {
   props: {

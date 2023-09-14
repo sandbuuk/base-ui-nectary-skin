@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FC, PropsWithChildren } from 'react'
 import './styles.css'
-import '@sinch-engage/nectary/title'
+import '@nectary/components/title'
 
 export type TNavigationGroup = PropsWithChildren & {
   text: string,

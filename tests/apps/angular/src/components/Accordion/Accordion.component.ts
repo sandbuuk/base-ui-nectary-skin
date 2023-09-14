@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/accordion'
-import '@sinch-engage/nectary/accordion-item'
-import { TSinchAccordionStatusType } from '@sinch-engage/nectary/accordion-item/types'
+import '@nectary/components/text'
+import '@nectary/components/accordion'
+import '@nectary/components/accordion-item'
+import { TSinchAccordionStatusType } from '@nectary/components/accordion-item/types'
 
 type TExampleItem = {
   value: string,

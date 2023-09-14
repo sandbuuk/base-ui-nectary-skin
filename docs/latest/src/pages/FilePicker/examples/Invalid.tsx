@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import type { TSinchFilePickerInvalidType } from '@sinch-engage/nectary/file-picker/types'
+import type { TSinchFilePickerInvalidType } from '@nectary/components/file-picker/types'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/file-picker'
+import '@nectary/components/field'
+import '@nectary/components/button'
+import '@nectary/components/file-picker'
 
 const invalidErrors: Record<TSinchFilePickerInvalidType, string> = {
   size: 'The file is too large',

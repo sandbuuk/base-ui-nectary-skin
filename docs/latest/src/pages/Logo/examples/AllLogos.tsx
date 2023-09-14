@@ -1,14 +1,14 @@
 import React from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/table'
-import '@sinch-engage/nectary/table-head'
-import '@sinch-engage/nectary/table-head-cell'
-import '@sinch-engage/nectary/table-body'
-import '@sinch-engage/nectary/table-row'
-import '@sinch-engage/nectary/table-cell'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/table'
+import '@nectary/components/table-head'
+import '@nectary/components/table-head-cell'
+import '@nectary/components/table-body'
+import '@nectary/components/table-row'
+import '@nectary/components/table-cell'
+import '@nectary/components/text'
 
-const req = import.meta.webpackContext!('@sinch-engage/nectary-assets/logo', {
+const req = import.meta.webpackContext!('@nectary/assets/logo', {
   regExp: /^.*\/index.ts$/,
   recursive: true,
   mode: 'sync',

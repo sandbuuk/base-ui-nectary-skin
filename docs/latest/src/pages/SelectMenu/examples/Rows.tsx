@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary-assets/icons/laptop'
-import '@sinch-engage/nectary-assets/icons/smartphone'
-import '@sinch-engage/nectary-assets/icons/tablet'
-import '@sinch-engage/nectary-assets/icons/watch'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/assets/icons/laptop'
+import '@nectary/assets/icons/smartphone'
+import '@nectary/assets/icons/tablet'
+import '@nectary/assets/icons/watch'
 
 const menuStyles: CSSProperties = {
   width: 250,

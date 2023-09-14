@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/file-drop'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/file-drop'
+import '@nectary/components/button'
 
 type TFileDrop = {
   search: URLSearchParams,

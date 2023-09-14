@@ -46,15 +46,15 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
-import '@sinch-engage/nectary-assets/icons/search'
+import '@nectary/components/field'
+import '@nectary/components/input'
+import '@nectary/components/select-button'
+import '@nectary/components/popover'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/components/tag'
+import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/search'
 
 const optionsLong = {
   1: { text: 'Option 1 value long long long', icon: '1' },

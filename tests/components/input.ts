@@ -1,5 +1,5 @@
+import { sizeValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
-import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, centerRect, getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 

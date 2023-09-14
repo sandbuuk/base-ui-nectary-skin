@@ -2,8 +2,8 @@ import { useLocation } from 'react-router-dom'
 import { useNavigatePath } from '../../../hooks'
 import { useRouteTabInfo } from '../context'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/tabs'
-import '@sinch-engage/nectary/tabs-option'
+import '@nectary/components/tabs'
+import '@nectary/components/tabs-option'
 
 export const PageLayoutTabs: FC = () => {
   const navigate = useNavigatePath()

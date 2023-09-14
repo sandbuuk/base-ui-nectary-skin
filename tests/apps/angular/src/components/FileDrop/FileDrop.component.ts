@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/file-drop'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/file-drop'
+import '@nectary/components/button'
 
 @Component({
   selector: 'file-drop-component',

@@ -1,8 +1,8 @@
 import React from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/text'
 
-const req = import.meta.webpackContext!('@sinch-engage/nectary-assets/animations', {
+const req = import.meta.webpackContext!('@nectary/assets/animations', {
   regExp: /^.*\/index.ts$/,
   recursive: true,
   mode: 'sync',

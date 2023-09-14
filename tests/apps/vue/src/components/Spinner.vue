@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/spinner'
+import '@nectary/components/spinner'
 
 export default {
   props: {

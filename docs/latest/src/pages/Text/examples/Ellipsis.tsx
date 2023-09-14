@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/text'
 
 const textStyles: CSSProperties = {
   width: 100,

@@ -1,8 +1,8 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/alert'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon'
-import '@sinch-engage/nectary/icon-button'
+import '@nectary/components/alert'
+import '@nectary/components/button'
+import '@nectary/components/icon'
+import '@nectary/components/icon-button'
 
 export const ActionExample: FC = () => (
   <sinch-alert type="error" text="Error text">

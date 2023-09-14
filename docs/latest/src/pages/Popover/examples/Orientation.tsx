@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/title'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/popover'
+import '@nectary/components/button'
+import '@nectary/components/title'
+import '@nectary/components/text'
 
 const contentStyles: CSSProperties = {
   width: 300,

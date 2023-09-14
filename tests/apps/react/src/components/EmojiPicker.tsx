@@ -1,4 +1,4 @@
-import '@sinch-engage/nectary/emoji-picker'
+import '@nectary/components/emoji-picker'
 import type { FC } from 'react'
 
 type TEmojiPicker = {

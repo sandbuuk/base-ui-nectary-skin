@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/card'
+import '@nectary/components/card'
 
 export const SimpleExample: FC = () => (
   <sinch-card

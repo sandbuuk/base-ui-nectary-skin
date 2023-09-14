@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/emoji'
+import '@nectary/components/emoji'
 
 export const SimpleExample: FC = () => (
   <sinch-emoji char="😀"/>

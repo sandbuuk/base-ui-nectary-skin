@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
-import type { TSinchTooltipType } from '@sinch-engage/nectary/tooltip/types'
+import type { TSinchTooltipType } from '@nectary/components/tooltip/types'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/tooltip'
+import '@nectary/components/text'
+import '@nectary/components/tooltip'
 
 type TTooltip = {
   search: URLSearchParams,

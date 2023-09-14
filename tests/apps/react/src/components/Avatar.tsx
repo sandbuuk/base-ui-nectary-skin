@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/avatar'
-import '@sinch-engage/nectary/badge'
+import '@nectary/components/avatar'
+import '@nectary/components/badge'
 
 type TAvatar = {
   search: URLSearchParams,

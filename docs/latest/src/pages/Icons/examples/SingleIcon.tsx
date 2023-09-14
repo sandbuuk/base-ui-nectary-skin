@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary-assets/icons/mood'
+import '@nectary/assets/icons/mood'
 
 export const SingleIconExample: FC = () => {
   return (

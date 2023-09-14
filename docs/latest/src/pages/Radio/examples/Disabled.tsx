@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/radio'
-import '@sinch-engage/nectary/radio-option'
+import '@nectary/components/radio'
+import '@nectary/components/radio-option'
 
 export const DisabledExample: FC = () => {
   const [value, setValue] = useState('1')

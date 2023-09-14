@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/textarea'
+import '@nectary/components/textarea'
 
 export const ResizableExample: FC = () => {
   const [state, setState] = useState('')

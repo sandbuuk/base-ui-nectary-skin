@@ -1,7 +1,7 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/card'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary-assets/icons-branded/chatbot'
+import '@nectary/components/card'
+import '@nectary/components/button'
+import '@nectary/assets/icons-branded/chatbot'
 
 export const ButtonExample: FC = () => (
   <sinch-card

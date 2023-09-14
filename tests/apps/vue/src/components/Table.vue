@@ -32,21 +32,21 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/table'
-import '@sinch-engage/nectary/table-row'
-import '@sinch-engage/nectary/table-head'
-import '@sinch-engage/nectary/table-head-cell'
-import '@sinch-engage/nectary/table-body'
-import '@sinch-engage/nectary/table-cell'
-import '@sinch-engage/nectary/toggle'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/help-tooltip'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/checkbox'
-import '@sinch-engage/nectary/link'
-import '@sinch-engage/nectary/icon'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/table'
+import '@nectary/components/table-row'
+import '@nectary/components/table-head'
+import '@nectary/components/table-head-cell'
+import '@nectary/components/table-body'
+import '@nectary/components/table-cell'
+import '@nectary/components/toggle'
+import '@nectary/components/icon-button'
+import '@nectary/components/help-tooltip'
+import '@nectary/components/button'
+import '@nectary/components/checkbox'
+import '@nectary/components/link'
+import '@nectary/components/icon'
+import '@nectary/components/icon-button'
+import '@nectary/components/text'
 
 const getTableItems = ({ hasLongLine }) => ({
   head: [

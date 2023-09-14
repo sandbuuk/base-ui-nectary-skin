@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/skeleton'
-import '@sinch-engage/nectary/skeleton-item'
+import '@nectary/components/skeleton'
+import '@nectary/components/skeleton-item'
 
 export default {
   props: {

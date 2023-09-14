@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react'
-import type { TSinchInputElement } from '@sinch-engage/nectary/input/types'
+import type { TSinchInputElement } from '@nectary/components/input/types'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/emoji-picker'
-import '@sinch-engage/nectary-assets/icons/sentiment-satisfied'
+import '@nectary/components/field'
+import '@nectary/components/input'
+import '@nectary/components/popover'
+import '@nectary/components/icon-button'
+import '@nectary/components/emoji-picker'
+import '@nectary/assets/icons/sentiment-satisfied'
 
 const inputStyles: CSSProperties = {
   width: 300,

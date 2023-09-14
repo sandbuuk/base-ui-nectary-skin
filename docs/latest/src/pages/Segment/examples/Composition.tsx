@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/segment'
-import '@sinch-engage/nectary/segment-collapse'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/apps'
-import '@sinch-engage/nectary-assets/icons-branded/chatbot'
+import '@nectary/components/segment'
+import '@nectary/components/segment-collapse'
+import '@nectary/components/tag'
+import '@nectary/components/button'
+import '@nectary/components/text'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/apps'
+import '@nectary/assets/icons-branded/chatbot'
 
 const previewStyle: CSSProperties = {
   display: 'flex',

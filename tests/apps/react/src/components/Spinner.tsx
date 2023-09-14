@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/spinner'
+import '@nectary/components/spinner'
 
 type TSpinner = {
   search: URLSearchParams,

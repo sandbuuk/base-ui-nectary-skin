@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/action-menu'
-import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/avatar'
+import '@nectary/components/icon-button'
+import '@nectary/components/popover'
+import '@nectary/components/action-menu'
+import '@nectary/components/action-menu-option'
+import '@nectary/components/avatar'
 
 export const DropdownExample: FC = () => {
   const [isOpen, setOpen] = useState(false)

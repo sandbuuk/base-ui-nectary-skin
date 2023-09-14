@@ -94,13 +94,13 @@ module.exports = {
         fixable: 'code',
       },
       create: pipe(
-        handle('sinch-illustration-', '@sinch-engage/nectary-assets/illustrations/'),
-        handle('sinch-animation-', '@sinch-engage/nectary-assets/animations/'),
-        handle('sinch-logo-', '@sinch-engage/nectary-assets/logo/'),
-        handle('sinch-icon-branded-', '@sinch-engage/nectary-assets/icons-branded/'),
-        handle('sinch-icon-channel-', '@sinch-engage/nectary-assets/icons-channel/'),
-        handle('sinch-icon-', '@sinch-engage/nectary-assets/icons/', ['sinch-icon-button']),
-        handle('sinch-', '@sinch-engage/nectary/')
+        handle('sinch-illustration-', '@nectary/assets/illustrations/'),
+        handle('sinch-animation-', '@nectary/assets/animations/'),
+        handle('sinch-logo-', '@nectary/assets/logo/'),
+        handle('sinch-icon-branded-', '@nectary/assets/icons-branded/'),
+        handle('sinch-icon-channel-', '@nectary/assets/icons-channel/'),
+        handle('sinch-icon-', '@nectary/assets/icons/', ['sinch-icon-button']),
+        handle('sinch-', '@nectary/components/')
       ),
     },
   },

@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/tag'
+import '@nectary/assets/icons/open-in-new'
 
 export default {
   props: {

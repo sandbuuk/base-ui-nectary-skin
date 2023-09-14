@@ -1,7 +1,7 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/file-status'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/delete-outline'
+import '@nectary/components/file-status'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/delete-outline'
 
 const wrapperStyle: CSSProperties = {
   display: 'flex',

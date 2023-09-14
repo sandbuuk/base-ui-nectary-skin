@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/time-picker'
+import '@nectary/components/time-picker'
 
 @Component({
   selector: 'time-picker-component',
