@@ -1,6 +1,11 @@
 variables:
   GIT_DEPTH: 1
 
+include:
+  - project: 'sinch/sinch-projects/sinch-platform/infra/pipeline/security'
+    ref: v1-latest
+    file: 'auto_security.yml'
+
 default:
   tags:
     - saas
@@ -10,6 +15,9 @@ stages:
   - lint
   - test
   - build
+  - security-scan-third-parties
+  - security-scan-consolidation
+  - security-scan-sonar
   - deploy
 
 lint:
