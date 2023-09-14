@@ -8,9 +8,6 @@
     "**/*/*.d.ts",
     "types.d.ts"
   ],
-  "publishConfig": {
-    "access": "restricted"
-  },
   "scripts": {
     "build": "NODE_ENV=production babel . --extensions '.ts' --out-dir . && tsc --declaration --emitDeclarationOnly"
   },

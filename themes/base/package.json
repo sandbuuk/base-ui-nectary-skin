@@ -6,8 +6,5 @@
     "*.json",
     "*.js"
   ],
-  "main": "index.css",
-  "publishConfig": {
-    "access": "restricted"
-  }
+  "main": "index.css"
 }
