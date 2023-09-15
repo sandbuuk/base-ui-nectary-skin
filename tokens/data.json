@@ -9958,7 +9958,8 @@
         "comp.progress-stepper.title.font": "S:4cf85aaae00e8412005a48938db1f57890cc1aa3,",
         "comp.progress-stepper.description.font": "S:753339ad3179f7e5b36c82c09176fd521e53d18b,",
         "comp.accordion.color.default.outline.focus": "S:c5b3b1310e8987ffc5571b1d0d5f2f6b812a63c4,"
-      }
+      },
+      "group": "Theme"
     },
     {
       "id": "43179aa77e5eb9a7be711a2d68a4443a18c4de80",
@@ -11103,7 +11104,8 @@
         "comp.toggle.color.default.knob.background.initial": "S:a665e28602ac252a231f13aa60bf279d4f3523ca,",
         "comp.toggle.color.default.text-inside.initial": "S:caba43ef577b9213af0827b71903b34e321ab64d,",
         "sys.color.container.contrast.secondary.default": "S:504b83e0af0ba18ffd11ffecd51c9c540f6ba4a9,"
-      }
+      },
+      "group": "Theme"
     },
     {
       "id": "5945d5c31dcbdf2692b35efffd87b6e19384a61f",
@@ -11112,7 +11114,8 @@
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
         "SMB / SimpleTexting": "enabled"
-      }
+      },
+      "group": "Theme"
     },
     {
       "id": "9bf1b1eb292732c275dc4eac42197c2c56e7dc3b",
@@ -11121,7 +11124,8 @@
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
         "SMB / MessageMedia": "enabled"
-      }
+      },
+      "group": "Theme"
     },
     {
       "id": "b6bfd129f01593b02ff7a9da49aa7cd5b2c92534",
@@ -11130,7 +11134,8 @@
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
         "SMB / Demo1": "enabled"
-      }
+      },
+      "group": "Theme"
     },
     {
       "id": "3eaec3602c2c65ff1e7415bc511f8dbf455d68ed",
@@ -11139,7 +11144,8 @@
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
         "SMB / Demo2": "enabled"
-      }
+      },
+      "group": "Theme"
     },
     {
       "id": "ac47abc066412687cc56df88633d56caf6fdec87",
@@ -11148,7 +11154,8 @@
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
         "SMB / Demo3": "enabled"
-      }
+      },
+      "group": "Theme"
     }
   ],
   "$metadata": {
