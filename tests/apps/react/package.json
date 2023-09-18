@@ -3,29 +3,30 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@nectary/components": "workspace:*",
     "@nectary/assets": "workspace:*",
-    "@nectary/theme-base": "workspace:*",
+    "@nectary/components": "workspace:*",
     "@nectary/scoped-custom-element-registry": "workspace:*",
-    "axe-core": "^4.6.3",
+    "@nectary/theme-base": "workspace:*",
+    "axe-core": "^4.8.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.21.4",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.21.4",
+    "@babel/core": "^7.22.20",
+    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-react": "^7.22.15",
+    "@babel/preset-typescript": "^7.22.15",
     "@saas/html-minify-loader": "workspace:*",
-    "@types/react": "^18.0.38",
-    "@types/react-dom": "^18.0.11",
-    "babel-loader": "^9.1.2",
-    "css-loader": "^6.7.3",
-    "html-webpack-plugin": "^5.5.1",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
     "raw-loader": "^4.0.2",
-    "style-loader": "^3.3.2",
-    "webpack": "^5.80.0",
-    "webpack-cli": "^5.0.2",
-    "webpack-dev-server": "^4.13.3"
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }
