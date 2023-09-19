@@ -59,7 +59,7 @@
 }
 
 #input::placeholder {
-  font: var(--sinch-comp-input-font-placeholder);
+  font: var(--sinch-comp-input-font-placeholder) !important;
   color: var(--sinch-comp-input-color-default-text-placeholder);
   opacity: 1;
 }
@@ -112,7 +112,7 @@
   border-color: var(--sinch-comp-input-color-invalid-border-initial);
 }
 
-#input[type="password"] {
+#input[type="password"]:not(:placeholder-shown) {
   font-size: 1.5em;
   letter-spacing: 0.1em;
 }
