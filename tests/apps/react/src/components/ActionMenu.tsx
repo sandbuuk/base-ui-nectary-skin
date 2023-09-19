@@ -1,6 +1,7 @@
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
 import '@nectary/assets/icons/open-in-new'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 
 type TMenuValue = {
@@ -16,11 +17,8 @@ const options: Record<string, TMenuValue> = {
   4: { text: 'Option 4', icon: null },
 }
 
-type TActionMenu = {
-  search: URLSearchParams,
-}
-
-export const ActionMenu: FC<TActionMenu> = ({ search }) => {
+export const ActionMenu: FC = () => {
+  const [search] = useSearchParams()
   const onOptionClick = (value: string) => {
     window.dispatchEvent(new CustomEvent('sinch-action-menu-click', { detail: value }))
   }

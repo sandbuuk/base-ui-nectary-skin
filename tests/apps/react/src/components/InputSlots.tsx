@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { TSinchSize } from '@nectary/components/utils/size'
 import type { FC } from 'react'
 import '@nectary/components/input'
@@ -10,11 +11,8 @@ import '@nectary/components/toggle'
 import '@nectary/assets/icons/search'
 import '@nectary/assets/icons/open-in-new'
 
-type TInput = {
-  search: URLSearchParams,
-}
-
-export const InputSlots: FC<TInput> = ({ search }) => {
+export const InputSlots: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

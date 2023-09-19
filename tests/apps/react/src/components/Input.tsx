@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { TSinchInputClipboardEvent } from '@nectary/components/input/types'
 import type { FC } from 'react'
 import '@nectary/components/input'
@@ -7,11 +8,8 @@ import '@nectary/components/tag'
 import '@nectary/components/chip'
 import '@nectary/assets/icons/search'
 
-type TInput = {
-  search: URLSearchParams,
-}
-
-export const Input: FC<TInput> = ({ search }) => {
+export const Input: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

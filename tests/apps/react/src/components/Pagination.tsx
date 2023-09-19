@@ -1,13 +1,11 @@
 import { attrValueToInteger } from '@nectary/components/utils'
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/pagination'
 
-type TPagination = {
-  search: URLSearchParams,
-}
-
-export const Pagination: FC<TPagination> = ({ search }) => {
+export const Pagination: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(() => attrValueToInteger(search.get('value')) ?? 0)
   const max = attrValueToInteger(search.get('max')) ?? 0
   const onChange = (e: CustomEvent<number>) => {

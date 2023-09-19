@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/emoji-picker'
 
 @Component({
@@ -8,8 +9,8 @@ import '@nectary/components/emoji-picker'
 })
 
 export class EmojiPickerComponent {
-  constructor() {
-    const url = new URL(location.href)
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
   }
 
   onChange(e: CustomEvent<string>) {

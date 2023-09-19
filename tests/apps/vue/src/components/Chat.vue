@@ -36,10 +36,10 @@ export default {
   },
   computed: {
     isBubble() {
-      return this.search.get('example') === 'bubble'
+      return this.$route.query.example === 'bubble'
     },
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     }
   }
 }

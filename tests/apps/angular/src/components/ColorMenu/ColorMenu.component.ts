@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 
 import '@nectary/components/color-menu'
 import '@nectary/components/color-menu-option'
@@ -20,16 +21,16 @@ export class ColorMenuComponent {
   cols: number | null
   rows: number | null
   colors: string[]
-  constructor() {
-    const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? ''
-    this.colors = url.searchParams.get('example') === 'light'
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.value = search.get('value') ?? ''
+    this.colors = search.get('example') === 'light'
       ? lightVibrantColors
       : colors
 
-    let numVisibleValue = url.searchParams.get('rows')
+    let numVisibleValue = search.get('rows')
     this.rows = numVisibleValue !== null ? parseInt(numVisibleValue) : null
-    numVisibleValue = url.searchParams.get('cols')
+    numVisibleValue = search.get('cols')
     this.cols = numVisibleValue !== null ? parseInt(numVisibleValue) : null
   }
 

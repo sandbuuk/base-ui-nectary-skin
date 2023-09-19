@@ -4,6 +4,7 @@ import '@nectary/components/select-button'
 import '@nectary/components/tag'
 import '@nectary/components/chip'
 import '@nectary/assets/icons/search'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'input-component',
@@ -28,23 +29,25 @@ export class InputComponent {
   hasCut: boolean
   hasPaste: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? ''
-    this.isControlled = url.searchParams.get('uncontrolled') === null
-    this.type = url.searchParams.get('type')
-    this.size = url.searchParams.get('size')
-    this.isInvalid = url.searchParams.get('invalid') !== null
-    this.placeholderText = url.searchParams.get('placeholder')
-    this.mask = url.searchParams.get('mask')
-    this.tooltipText = url.searchParams.get('tooltip')
-    this.isDisabled = url.searchParams.get('disabled') != null
-    this.hasRight = url.searchParams.get('right') != null
-    this.hasLeft = url.searchParams.get('left') != null
-    this.hasIcon = url.searchParams.get('icon') != null
-    this.hasCopy = url.searchParams.get('copy') != null
-    this.hasCut = url.searchParams.get('cut') != null
-    this.hasPaste = url.searchParams.get('paste') != null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.value = search.get('value') ?? ''
+    this.isControlled = search.get('uncontrolled') === null
+    this.type = search.get('type')
+    this.size = search.get('size')
+    this.isInvalid = search.get('invalid') !== null
+    this.placeholderText = search.get('placeholder')
+    this.mask = search.get('mask')
+    this.tooltipText = search.get('tooltip')
+    this.isDisabled = search.get('disabled') != null
+    this.hasRight = search.get('right') != null
+    this.hasLeft = search.get('left') != null
+    this.hasIcon = search.get('icon') != null
+    this.hasCopy = search.get('copy') != null
+    this.hasCut = search.get('cut') != null
+    this.hasPaste = search.get('paste') != null
+
+    console.log(this.route.snapshot)
   }
 
   onChange(e: Event) {

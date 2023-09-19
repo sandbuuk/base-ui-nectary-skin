@@ -18,10 +18,10 @@ export default {
   },
   computed: {
     text() {
-      return this.search.get('text')
+      return this.$route.query.text
     },
     isEllipsis() {
-      return this.search.get('ellipsis') !== null
+      return this.$route.query.ellipsis != null
     }
   },
 }

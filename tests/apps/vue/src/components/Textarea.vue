@@ -73,27 +73,27 @@ export default {
   },
   computed: {
     placeholderText() {
-      return this.search.get('placeholder')
+      return this.$route.query.placeholder
     },
     isInvalid() {
-      return this.search.get('invalid') !== null
+      return this.$route.query.invalid != null
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     },
     hasBottom() {
-      return this.search.get('bottom') !== null
+      return this.$route.query.bottom != null
     },
     rows() {
-      return this.search.get('rows')
+      return this.$route.query.rows
     },
     resizable() {
-      return this.search.get('resizable')
+      return this.$route.query.resizable
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

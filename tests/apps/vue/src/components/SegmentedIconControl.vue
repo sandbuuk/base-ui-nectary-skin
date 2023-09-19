@@ -39,18 +39,18 @@ export default {
   },
   computed: {
     isControlled() {
-      return this.search.get('uncontrolled') === null
+      return this.$route.query.uncontrolled == null
     },
     isMultiple() {
-      return this.search.get('multiple') !== null
+      return this.$route.query.multiple != null
     },
     isSingleOption() {
-      return this.search.get('single-option') !== null
+      return this.$route.query['single-option'] != null
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

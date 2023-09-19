@@ -44,21 +44,21 @@ export default {
   },
   computed: {
     rows() {
-      const val = this.search.get('rows')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.rows
+      return val != null ? parseInt(val) : null
     },
     isMultiple() {
-      return this.search.get('multiple') !== null
+      return this.$route.query.multiple != null
     },
     items() {
-      return this.search.get('example') === 'lots'
+      return this.$route.query.example === 'lots'
         ? Object.entries(options)
         : Object.entries(options).slice(0, 4)
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

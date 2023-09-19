@@ -34,10 +34,10 @@ export default {
   },
   computed: {
     accept() {
-      return this.search.get('type')
+      return this.$route.query.type
     },
     isMultiple() {
-      return this.search.get('multiple') !== null
+      return this.$route.query.multiple != null
     },
   }
 }

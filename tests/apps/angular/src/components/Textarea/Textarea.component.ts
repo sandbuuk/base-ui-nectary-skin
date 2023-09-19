@@ -9,6 +9,7 @@ import '@nectary/assets/icons/mood'
 import '@nectary/assets/icons/search'
 import '@nectary/assets/icons/add-comment'
 import '@nectary/assets/icons/more-horiz'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'textarea-component',
@@ -26,16 +27,16 @@ export class TextareaComponent {
   rows: string | null
   hasBottom: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? ''
-    this.isControlled = url.searchParams.get('uncontrolled') === null
-    this.isInvalid = url.searchParams.get('invalid') !== null
-    this.placeholderText = url.searchParams.get('placeholder')
-    this.isDisabled = url.searchParams.get('disabled') != null
-    this.isResizable = url.searchParams.get('resizable') != null
-    this.rows = url.searchParams.get('rows')
-    this.hasBottom = url.searchParams.get('bottom') !== null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.value = search.get('value') ?? ''
+    this.isControlled = search.get('uncontrolled') === null
+    this.isInvalid = search.get('invalid') !== null
+    this.placeholderText = search.get('placeholder')
+    this.isDisabled = search.get('disabled') != null
+    this.isResizable = search.get('resizable') != null
+    this.rows = search.get('rows')
+    this.hasBottom = search.get('bottom') !== null
   }
 
   onChange(e: Event) {

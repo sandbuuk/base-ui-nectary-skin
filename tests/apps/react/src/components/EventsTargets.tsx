@@ -8,11 +8,7 @@ import '@nectary/components/icon-button'
 import '@nectary/components/segment'
 import '@nectary/assets/icons/calendar-today'
 
-type TEventTargets = {
-  search: URLSearchParams,
-}
-
-export const EventTargets: FC<TEventTargets> = () => {
+export const EventTargets: FC = () => {
   const [_isOpen, setOpen] = useState(false)
   const [value, setValue] = useState('2022-07-19')
   const [isoValue, setIsoValue] = useState('2022-07-19')

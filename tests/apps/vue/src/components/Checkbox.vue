@@ -34,24 +34,24 @@ export default {
   },
   computed: {
     text() {
-      return this.search.get('text')
+      return this.$route.query.text
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     },
     isIndeterminate() {
-      return this.search.get('indeterminate') !== null
+      return this.$route.query.indeterminate != null
     },
     isInvalid() {
-      return this.search.get('invalid') !== null
+      return this.$route.query.invalid != null
     },
     isControlled() {
-      return this.search.get('uncontrolled') === null
+      return this.$route.query.uncontrolled == null
     },
   },
   data() {
     return {
-      checked: this.search.get('checked') !== null
+      checked: this.$route.query.checked != null
     }
   }
 }

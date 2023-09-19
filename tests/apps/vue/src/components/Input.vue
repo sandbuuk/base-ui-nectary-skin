@@ -74,50 +74,47 @@ export default {
       window.dispatchEvent(new CustomEvent('sinch-input-blur'))
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     placeholderText() {
-      return this.search.get('placeholder')
+      return this.$route.query.placeholder
     },
     mask() {
-      return this.search.get('mask')
+      return this.$route.query.mask
     },
     isInvalid() {
-      return this.search.get('invalid') !== null
+      return this.$route.query.invalid != null
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     },
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     },
     size() {
-      return this.search.get('size')
+      return this.$route.query.size
     },
     hasLeft() {
-      return this.search.get('left') !== null
+      return this.$route.query.left != null
     },
     hasRight() {
-      return this.search.get('right') !== null
+      return this.$route.query.right != null
     },
     hasIcon() {
-      return this.search.get('icon') !== null
+      return this.$route.query.icon != null
     },
     hasCopy() {
-      return this.search.get('copy') !== null
+      return this.$route.query.copy != null
     },
     hasCut() {
-      return this.search.get('cut') !== null
+      return this.$route.query.cut != null
     },
     hasPaste() {
-      return this.search.get('paste') !== null
+      return this.$route.query.paste != null
     },
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

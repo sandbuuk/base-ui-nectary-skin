@@ -18,9 +18,7 @@ export class ToastManagerComponent {
   typeValues = typeValues
   state = [`${text}1`, `${text}2`, `${text}3`, 'Item4']
 
-  constructor() {
-    // const url = new URL(location.href)
-  }
+  constructor() {}
 
   ngOnInit() {
     window.addEventListener('sinch-toast-push', this.onPush)

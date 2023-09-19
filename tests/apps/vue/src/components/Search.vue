@@ -76,7 +76,7 @@ export default {
   },
   data() {
     return {
-      value: this.search.get('value') ?? '',
+      value: this.$route.query.value ?? '',
       isOpen: false,
       isClearActive: false,
       options: [

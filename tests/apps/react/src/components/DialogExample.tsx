@@ -12,11 +12,7 @@ import '@nectary/components/popover'
 import '@nectary/components/help-tooltip'
 import '@nectary/components/tooltip'
 
-type TDialog = {
-  search: URLSearchParams,
-}
-
-export const DialogExample: FC<TDialog> = () => {
+export const DialogExample: FC = () => {
   const [isDialogOpen, setDialogOpen] = useState(true)
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [value, setValue] = useState('')

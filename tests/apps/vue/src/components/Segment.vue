@@ -43,25 +43,25 @@ export default {
   },
   computed: {
     caption() {
-      return this.search.get('caption') ?? ''
+      return this.$route.query.caption ?? ''
     },
     hasContent() {
-      return this.search.get('content') !== null
+      return this.$route.query.content != null
     },
     hasIcon() {
-      return this.search.get('icon') !== null
+      return this.$route.query.icon != null
     },
     hasCollapse() {
-      return this.search.get('collapse') !== null
+      return this.$route.query.collapse != null
     },
     hasAction() {
-      return this.search.get('action') !== null
+      return this.$route.query.action != null
     },
     hasInfo() {
-      return this.search.get('info') !== null
+      return this.$route.query.info != null
     },
     hasPreview() {
-      return this.search.get('preview') !== null
+      return this.$route.query.preview != null
     }
   },
   methods: {

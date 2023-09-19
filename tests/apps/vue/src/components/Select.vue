@@ -100,11 +100,11 @@ export default {
   },
   computed: {
     rows() {
-      const val = this.search.get('rows')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.rows
+      return val != null ? parseInt(val) : null
     },
     items() {
-      return this.search.get('example') === 'lots'
+      return this.$route.query.example === 'lots'
         ? optionsLong
         : optionsShort
     },
@@ -112,25 +112,25 @@ export default {
       return this.items[this.value]?.text ?? ''
     },
     size() {
-      return this.search.get('size')
+      return this.$route.query.size
     },
     hasLeft() {
-      return this.search.get('left') !== null
+      return this.$route.query.left != null
     },
     hasIcon() {
-      return this.search.get('icon') !== null
+      return this.$route.query.icon != null
     },
     isInvalid() {
-      return this.search.get('invalid') !== null
+      return this.$route.query.invalid != null
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     }
   },
   data() {
     return {
       isOpen: false,
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

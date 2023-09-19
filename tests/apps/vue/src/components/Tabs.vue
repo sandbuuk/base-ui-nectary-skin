@@ -59,10 +59,10 @@ export default {
   },
   computed: {
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     },
     example() {
-      return this.search.get('example')
+      return this.$route.query.example
     }
   },
   data() {

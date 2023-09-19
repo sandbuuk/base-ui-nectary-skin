@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/color-menu'
 import '@nectary/components/color-menu-option'
@@ -11,11 +12,8 @@ const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'da
 const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
 const colors = [...lightColors, ...vibrantColors, ...darkColors]
 
-type TColorSelect = {
-  search: URLSearchParams,
-}
-
-export const ColorSelect: FC<TColorSelect> = ({ search }) => {
+export const ColorSelect: FC = () => {
+  const [search] = useSearchParams()
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {

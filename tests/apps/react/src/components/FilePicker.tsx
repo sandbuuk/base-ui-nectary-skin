@@ -1,13 +1,11 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/file-picker'
 import '@nectary/components/button'
 import '@nectary/assets/icons/upload'
 
-type TFilePicker = {
-  search: URLSearchParams,
-}
-
-export const FilePicker: FC<TFilePicker> = ({ search }) => {
+export const FilePicker: FC = () => {
+  const [search] = useSearchParams()
   const isMultiple = search.get('multiple') !== null
   const accept = search.get('accept') ?? undefined
   const onChange = (e: CustomEvent<File[]>) => {

@@ -13,6 +13,7 @@ import '@nectary/components/link'
 import '@nectary/components/icon'
 import '@nectary/components/icon-button'
 import '@nectary/components/text'
+import { ActivatedRoute } from '@angular/router'
 
 type TTableItems = {head: TTableItem[], body: TTableItem[][]}
 type TTableItem = {
@@ -74,9 +75,8 @@ export class TableComponent {
   state: TTableItems
   isAsc: boolean = false
 
-  constructor() {
-    const url = new URL(location.href)
-    const search = url.searchParams
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
     const example = search.get('example')
     this.state = getTableItems({hasLongLine: example === 'long'})

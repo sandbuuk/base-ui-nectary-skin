@@ -1,14 +1,12 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/chat'
 import '@nectary/components/chat-block'
 import '@nectary/components/chat-bubble'
 import '@nectary/components/avatar'
 
-type TChat = {
-  search: URLSearchParams,
-}
-
-export const Chat: FC<TChat> = ({ search }) => {
+export const Chat: FC = () => {
+  const [search] = useSearchParams()
   const example = search.get('example')
 
   if (example === 'bubble') {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/tooltip'
 import { TSinchTooltipType } from '@nectary/components/tooltip/types'
 
@@ -13,11 +14,11 @@ export class TooltipComponent {
   text: string | null
   type: TSinchTooltipType | null
 
-  constructor() {
-    const url = new URL(location.href)
-    this.orientation = url.searchParams.get('orientation')
-    this.text = url.searchParams.get('text')
-    this.type = url.searchParams.get('type') as TSinchTooltipType
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.orientation = search.get('orientation')
+    this.text = search.get('text')
+    this.type = search.get('type') as TSinchTooltipType
   }
 
   onTooltipShow() {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/pagination'
 import { attrValueToInteger } from '@nectary/components/utils'
 
@@ -13,11 +14,11 @@ export class PaginationComponent {
   max: number | null
   isControlled: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.value = attrValueToInteger(url.searchParams.get('value'))
-    this.max = attrValueToInteger(url.searchParams.get('max'))
-    this.isControlled = url.searchParams.get('uncontrolled') === null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.value = attrValueToInteger(search.get('value'))
+    this.max = attrValueToInteger(search.get('max'))
+    this.isControlled = search.get('uncontrolled') === null
   }
 
   onChange(e: Event) {

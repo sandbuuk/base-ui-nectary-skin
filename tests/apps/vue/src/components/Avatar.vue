@@ -20,22 +20,22 @@ export default {
   },
   computed: {
     src() {
-      return this.search.get('src') ?? undefined
+      return this.$route.query.src ?? undefined
     },
     alt() {
-      return this.search.get('alt') ?? undefined
+      return this.$route.query.alt ?? undefined
     },
     size() {
-      return this.search.get('size') ?? undefined
+      return this.$route.query.size ?? undefined
     },
     color() {
-      return this.search.get('color') ?? undefined
+      return this.$route.query.color ?? undefined
     },
     hasBadge() {
-      return this.search.get('badge') !== null
+      return this.$route.query.badge != null
     },
     status() {
-      return this.search.get('status') ?? undefined
+      return this.$route.query.status ?? undefined
     }
   },
 }

@@ -4,6 +4,7 @@ import '@nectary/components/link'
 import '@nectary/components/button'
 import '@nectary/assets/illustrations/phone-and-cat'
 import '@nectary/assets/icons-branded/chatbot'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'card-component',
@@ -21,15 +22,15 @@ export class CardComponent {
   buttonText: string | null
   background: string | null
 
-  constructor() {
-    const url = new URL(location.href)
-    this.header = url.searchParams.get('header')
-    this.text = url.searchParams.get('text')
-    this.label = url.searchParams.get('label')
-    this.hasIllustration = url.searchParams.get('illustration') !== null
-    this.hasIcon = url.searchParams.get('icon') !== null
-    this.linkText = url.searchParams.get('link')
-    this.buttonText = url.searchParams.get('button')
-    this.background = url.searchParams.get('bg')
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.header = search.get('header')
+    this.text = search.get('text')
+    this.label = search.get('label')
+    this.hasIllustration = search.get('illustration') !== null
+    this.hasIcon = search.get('icon') !== null
+    this.linkText = search.get('link')
+    this.buttonText = search.get('button')
+    this.background = search.get('bg')
   }
 }

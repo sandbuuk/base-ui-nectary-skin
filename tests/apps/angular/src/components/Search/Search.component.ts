@@ -7,6 +7,7 @@ import '@nectary/components/action-menu-option'
 import '@nectary/components/icon-button'
 import '@nectary/components/icon'
 import { TSinchInputElement } from '@nectary/components/input/types'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'search-component',
@@ -29,11 +30,11 @@ export class SearchComponent {
   //@ts-expect-error
   @ViewChild('input') inputRef: ElementRef<TSinchInputElement>;
 
-  constructor() {
-    const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? ''
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.value = search.get('value') ?? ''
 
-    const numVisibleValue = url.searchParams.get('maxvisibleitems')
+    const numVisibleValue = search.get('maxvisibleitems')
     this.maxVisibleItems = numVisibleValue !== null ? parseInt(numVisibleValue) : null
   }
   onChange(e: Event) {

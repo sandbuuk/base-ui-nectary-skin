@@ -1,12 +1,10 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/tag'
 import '@nectary/assets/icons/open-in-new'
 
-type TTag = {
-  search: URLSearchParams,
-}
-
-export const Tag: FC<TTag> = ({ search }) => {
+export const Tag: FC = () => {
+  const [search] = useSearchParams()
   const color: any = search.get('color') ?? undefined
   const text = search.get('text') ?? ''
   const isSmall = search.get('small') != null

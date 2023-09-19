@@ -4,6 +4,7 @@ import '@nectary/components/badge'
 import '@nectary/components/icon-button'
 import '@nectary/assets/icons/notifications'
 import { TSinchSize } from '@nectary/components/utils/size'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'badge-component',
@@ -18,12 +19,12 @@ export class BadgeComponent {
   text: string
   isHidden: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.color = url.searchParams.get('color') ?? undefined
-    this.size = (url.searchParams.get('size') as TSinchSize | null) ?? 'l'
-    this.mode = (url.searchParams.get('mode') as TSinchBadgeMode) ?? undefined
-    this.text = url.searchParams.get('text') ?? ''
-    this.isHidden = url.searchParams.get('hidden') !== null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.color = search.get('color') ?? undefined
+    this.size = (search.get('size') as TSinchSize | null) ?? 'l'
+    this.mode = (search.get('mode') as TSinchBadgeMode) ?? undefined
+    this.text = search.get('text') ?? ''
+    this.isHidden = search.get('hidden') !== null
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/segmented-control'
 import '@nectary/components/segmented-control-option'
 
@@ -13,9 +14,8 @@ export class SegmentedControlComponent {
   isControlled: boolean
   isSingleOption: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    const search = url.searchParams
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
     this.isControlled = search.get('uncontrolled') === null
     this.isSingleOption = search.get('single-option') !== null

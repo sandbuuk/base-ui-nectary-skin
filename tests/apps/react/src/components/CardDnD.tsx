@@ -8,11 +8,7 @@ const columnStyle: CSSProperties = {
   gap: '8px',
 }
 
-type TCard = {
-  search: URLSearchParams,
-}
-
-export const CardDnD: FC<TCard> = () => {
+export const CardDnD: FC = () => {
   const [items, setItems] = useState(() => ([{
     key: '1',
     caption: 'Card 1',

@@ -39,13 +39,13 @@ export default {
   },
   computed: {
     invalidValue() {
-      return this.search.get('invalid') ?? ''
+      return this.$route.query.invalid ?? ''
     },
     progressValue() {
-      return this.search.get('progress') ?? ''
+      return this.$route.query.progress ?? ''
     },
     example() {
-      return this.search.get('example')
+      return this.$route.query.example
     }
   },
   data() {

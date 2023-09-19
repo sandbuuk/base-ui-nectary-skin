@@ -100,7 +100,7 @@ export default {
   },
   computed: {
     state() {
-      const example = this.search.get('example')
+      const example = this.$route.query.example
       return getTableItems({hasLongLine: example === 'long'})
     }
   },

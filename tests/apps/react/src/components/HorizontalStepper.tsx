@@ -1,12 +1,10 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/horizontal-stepper'
 import '@nectary/components/horizontal-stepper-item'
 
-type THorizontalStepper = {
-  search: URLSearchParams,
-}
-
-export const HorizontalStepper: FC<THorizontalStepper> = ({ search }) => {
+export const HorizontalStepper: FC = () => {
+  const [search] = useSearchParams()
   const index = search.get('index') ?? '0'
 
   return (

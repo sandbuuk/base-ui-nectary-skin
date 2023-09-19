@@ -90,24 +90,24 @@ export default {
   },
   computed: {
     orientation() {
-      return this.search.get('orientation')
+      return this.$route.query.orientation
     },
     isModal() {
-      return this.search.get('modal') !== null
+      return this.$route.query.modal != null
     },
     isOffsetExample() {
-      return this.search.get('example') === 'offset'
+      return this.$route.query.example === 'offset'
     },
     isSwitchContentExample() {
-      return this.search.get('example') === 'switch-content'
+      return this.$route.query.example === 'switch-content'
     },
     isDefaultExample() {
-      return this.search.get('example') === null
+      return this.$route.query.example == null
     }
   },
   data() {
     return {
-      isOpen: this.search.get('open') !== null,
+      isOpen: this.$route.query.open != null,
       isOtherComponent: false
     }
   }

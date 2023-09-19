@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     text() {
-      const example = this.search.get('example')
+      const example = this.$route.query.example
 
       if(example === 'md') {
         return mdText
@@ -81,13 +81,13 @@ export default {
       return shortText
     },
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     },
     hasClose() {
-      return this.search.get('close') != null
+      return this.$route.query.close != null
     },
     hasAction() {
-      return this.search.get('action') != null
+      return this.$route.query.action != null
     },
   },
 }

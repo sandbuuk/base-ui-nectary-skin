@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { TSinchAccordionStatusType } from '@nectary/components/accordion-item/types'
 import type { FC } from 'react'
 import '@nectary/components/text'
@@ -50,11 +51,8 @@ const singleItems: TExampleItem[] = [{
   optional: 'Required',
 }]
 
-type TAccordion = {
-  search: URLSearchParams,
-}
-
-export const Accordion: FC<TAccordion> = ({ search }) => {
+export const Accordion: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

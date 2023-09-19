@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/segmented-icon-control'
 import '@nectary/components/segmented-icon-control-option'
@@ -7,11 +8,8 @@ import '@nectary/assets/icons/format-align-justify'
 import '@nectary/assets/icons/format-align-right'
 import '@nectary/assets/icons/format-align-left'
 
-type TSegmentedIconControl = {
-  search: URLSearchParams,
-}
-
-export const SegmentedIconControl: FC<TSegmentedIconControl> = ({ search }) => {
+export const SegmentedIconControl: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState('')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

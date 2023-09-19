@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Accordion } from './components/Accordion'
 import { ActionDropdown } from './components/ActionDropdown'
 import { ActionMenu } from './components/ActionMenu'
@@ -66,407 +67,7 @@ import { Tooltip } from './components/Tooltip'
 import { VerticalStepper } from './components/VerticalStepper'
 import type { CSSProperties, FC } from 'react'
 
-const mapElement = (url: URL) => {
-  switch (url.pathname) {
-    case '/accordion': {
-      return (
-        <Accordion search={url.searchParams}/>
-      )
-    }
-
-    case '/action-menu': {
-      return (
-        <ActionMenu search={url.searchParams}/>
-      )
-    }
-    case '/action-dropdown': {
-      return (
-        <ActionDropdown search={url.searchParams}/>
-      )
-    }
-
-    case '/alert': {
-      return (
-        <Alert search={url.searchParams}/>
-      )
-    }
-
-    case '/inline-alert': {
-      return (
-        <InlineAlert search={url.searchParams}/>
-      )
-    }
-
-    case '/avatar': {
-      return (
-        <Avatar search={url.searchParams}/>
-      )
-    }
-
-    case '/button': {
-      return (
-        <Button search={url.searchParams}/>
-      )
-    }
-
-    case '/badge': {
-      return (
-        <Badge search={url.searchParams}/>
-      )
-    }
-
-    case '/card': {
-      return (
-        <Card search={url.searchParams}/>
-      )
-    }
-
-    case '/card-dnd': {
-      return (
-        <CardDnD search={url.searchParams}/>
-      )
-    }
-
-    case '/card-container': {
-      return (
-        <CardContainer search={url.searchParams}/>
-      )
-    }
-
-    case '/chat': {
-      return (
-        <Chat search={url.searchParams}/>
-      )
-    }
-
-    case '/checkbox': {
-      return (
-        <Checkbox search={url.searchParams}/>
-      )
-    }
-
-    case '/chip': {
-      return (
-        <Chip search={url.searchParams}/>
-      )
-    }
-
-    case '/code-tag': {
-      return (
-        <CodeTag search={url.searchParams}/>
-      )
-    }
-
-    case '/color-menu': {
-      return (
-        <ColorMenu search={url.searchParams}/>
-      )
-    }
-    case '/color-select': {
-      return (
-        <ColorSelect search={url.searchParams}/>
-      )
-    }
-
-    case '/color-swatch': {
-      return (
-        <ColorSwatch search={url.searchParams}/>
-      )
-    }
-
-    case '/date-input': {
-      return (
-        <DateInput search={url.searchParams}/>
-      )
-    }
-
-    case '/date-picker': {
-      return (
-        <DatePicker search={url.searchParams}/>
-      )
-    }
-
-    case '/dialog': {
-      return (
-        <Dialog search={url.searchParams}/>
-      )
-    }
-
-    case '/dialog-example': {
-      return (
-        <DialogExample search={url.searchParams}/>
-      )
-    }
-
-    case '/emoji-picker': {
-      return (
-        <EmojiPicker search={url.searchParams}/>
-      )
-    }
-
-    case '/event-targets': {
-      return (
-        <EventTargets search={url.searchParams}/>
-      )
-    }
-
-    case '/select-menu': {
-      return (
-        <SelectMenu search={url.searchParams}/>
-      )
-    }
-
-    case '/field': {
-      return (
-        <Field search={url.searchParams}/>
-      )
-    }
-
-    case '/file-drop': {
-      return (
-        <FileDrop search={url.searchParams}/>
-      )
-    }
-
-    case '/file-picker': {
-      return (
-        <FilePicker search={url.searchParams}/>
-      )
-    }
-
-    case '/file-status': {
-      return (
-        <FileStatus search={url.searchParams}/>
-      )
-    }
-
-    case '/grid': {
-      return (
-        <Grid search={url.searchParams}/>
-      )
-    }
-
-    case '/icon-button': {
-      return (
-        <IconButton search={url.searchParams}/>
-      )
-    }
-
-    case '/input': {
-      return (
-        <Input search={url.searchParams}/>
-      )
-    }
-
-    case '/input-slots': {
-      return (
-        <InputSlots search={url.searchParams}/>
-      )
-    }
-
-    case '/link': {
-      return (
-        <Link search={url.searchParams}/>
-      )
-    }
-
-    case '/list': {
-      return (
-        <List search={url.searchParams}/>
-      )
-    }
-
-    case '/pagination': {
-      return (
-        <Pagination search={url.searchParams}/>
-      )
-    }
-
-    case '/phone-code-menu': {
-      return (
-        <PhoneCodeMenu search={url.searchParams}/>
-      )
-    }
-
-    case '/phone-code-select': {
-      return (
-        <PhoneCodeSelect search={url.searchParams}/>
-      )
-    }
-
-    case '/popover': {
-      return (
-        <Popover search={url.searchParams}/>
-      )
-    }
-
-    case '/progress': {
-      return (
-        <Progress search={url.searchParams}/>
-      )
-    }
-
-    case '/progress-stepper': {
-      return (
-        <ProgressStepper search={url.searchParams}/>
-      )
-    }
-
-    case '/radio': {
-      return (
-        <Radio search={url.searchParams}/>
-      )
-    }
-
-    case '/rich-text': {
-      return (
-        <RichText search={url.searchParams}/>
-      )
-    }
-
-    case '/search': {
-      return (
-        <Search search={url.searchParams}/>
-      )
-    }
-
-    case '/segment': {
-      return (
-        <Segment search={url.searchParams}/>
-      )
-    }
-
-    case '/segmented-control': {
-      return (
-        <SegmentedControl search={url.searchParams}/>
-      )
-    }
-
-    case '/segmented-icon-control': {
-      return (
-        <SegmentedIconControl search={url.searchParams}/>
-      )
-    }
-
-    case '/select': {
-      return (
-        <Select search={url.searchParams}/>
-      )
-    }
-
-    case '/skeleton': {
-      return (
-        <Skeleton search={url.searchParams}/>
-      )
-    }
-
-    case '/table': {
-      return (
-        <Table search={url.searchParams}/>
-      )
-    }
-
-    case '/tabs': {
-      return (
-        <Tabs search={url.searchParams}/>
-      )
-    }
-
-    case '/tag': {
-      return (
-        <Tag search={url.searchParams}/>
-      )
-    }
-
-    case '/textarea': {
-      return (
-        <Textarea search={url.searchParams}/>
-      )
-    }
-
-    case '/textarea-example': {
-      return (
-        <TextareaExample search={url.searchParams}/>
-      )
-    }
-
-    case '/text': {
-      return (
-        <Text search={url.searchParams}/>
-      )
-    }
-
-    case '/tile-control': {
-      return (
-        <TileControl search={url.searchParams}/>
-      )
-    }
-
-    case '/time-input': {
-      return (
-        <TimeInput search={url.searchParams}/>
-      )
-    }
-
-    case '/time-picker': {
-      return (
-        <TimePicker search={url.searchParams}/>
-      )
-    }
-
-    case '/title': {
-      return (
-        <Title search={url.searchParams}/>
-      )
-    }
-
-    case '/toast': {
-      return (
-        <Toast search={url.searchParams}/>
-      )
-    }
-
-    case '/toast-manager': {
-      return (
-        <ToastManager search={url.searchParams}/>
-      )
-    }
-
-    case '/toggle': {
-      return (
-        <Toggle search={url.searchParams}/>
-      )
-    }
-
-    case '/tooltip': {
-      return (
-        <Tooltip search={url.searchParams}/>
-      )
-    }
-
-    case '/spinner': {
-      return (
-        <Spinner search={url.searchParams}/>
-      )
-    }
-
-    case '/horizontal-stepper': {
-      return (
-        <HorizontalStepper search={url.searchParams}/>
-      )
-    }
-
-    case '/vertical-stepper': {
-      return (
-        <VerticalStepper search={url.searchParams}/>
-      )
-    }
-  }
-
-  return null
-}
-
-export const App: FC<{}> = () => {
+export const App: FC = () => {
   const url = new URL(window.location.href)
   const width = Number(url.searchParams.get('width') ?? '0')
   const height = Number(url.searchParams.get('height') ?? '0')
@@ -488,7 +89,76 @@ export const App: FC<{}> = () => {
 
   return (
     <div style={style}>
-      {mapElement(url)}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/accordion" element={<Accordion/>}/>
+          <Route path="/action-dropdown" element={<ActionDropdown/>}/>
+          <Route path="/action-menu" element={<ActionMenu/>}/>
+          <Route path="/alert" element={<Alert/>}/>
+          <Route path="/avatar" element={<Avatar/>}/>
+          <Route path="/badge" element={<Badge/>}/>
+          <Route path="/button" element={<Button/>}/>
+          <Route path="/card-container" element={<CardContainer/>}/>
+          <Route path="/card-dnd" element={<CardDnD/>}/>
+          <Route path="/card" element={<Card/>}/>
+          <Route path="/chat" element={<Chat/>}/>
+          <Route path="/checkbox" element={<Checkbox/>}/>
+          <Route path="/chip" element={<Chip/>}/>
+          <Route path="/code-tag" element={<CodeTag/>}/>
+          <Route path="/color-menu" element={<ColorMenu/>}/>
+          <Route path="/color-select" element={<ColorSelect/>}/>
+          <Route path="/color-swatch" element={<ColorSwatch/>}/>
+          <Route path="/date-input" element={<DateInput/>}/>
+          <Route path="/date-picker" element={<DatePicker/>}/>
+          <Route path="/dialog-example" element={<DialogExample/>}/>
+          <Route path="/dialog" element={<Dialog/>}/>
+          <Route path="/emoji-picker" element={<EmojiPicker/>}/>
+          <Route path="/event-targets" element={<EventTargets/>}/>
+          <Route path="/field" element={<Field/>}/>
+          <Route path="/file-drop" element={<FileDrop/>}/>
+          <Route path="/file-picker" element={<FilePicker/>}/>
+          <Route path="/file-status" element={<FileStatus/>}/>
+          <Route path="/grid" element={<Grid/>}/>
+          <Route path="/horizontal-stepper" element={<HorizontalStepper/>}/>
+          <Route path="/icon-button" element={<IconButton/>}/>
+          <Route path="/inline-alert" element={<InlineAlert/>}/>
+          <Route path="/input-slots" element={<InputSlots/>}/>
+          <Route path="/input" element={<Input/>}/>
+          <Route path="/link" element={<Link/>}/>
+          <Route path="/list" element={<List/>}/>
+          <Route path="/pagination" element={<Pagination/>}/>
+          <Route path="/phone-code-menu" element={<PhoneCodeMenu/>}/>
+          <Route path="/phone-code-select" element={<PhoneCodeSelect/>}/>
+          <Route path="/popover" element={<Popover/>}/>
+          <Route path="/progress-stepper" element={<ProgressStepper/>}/>
+          <Route path="/progress" element={<Progress/>}/>
+          <Route path="/radio" element={<Radio/>}/>
+          <Route path="/rich-text" element={<RichText/>}/>
+          <Route path="/search" element={<Search/>}/>
+          <Route path="/segment" element={<Segment/>}/>
+          <Route path="/segmented-control" element={<SegmentedControl/>}/>
+          <Route path="/segmented-icon-control" element={<SegmentedIconControl/>}/>
+          <Route path="/select-menu" element={<SelectMenu/>}/>
+          <Route path="/select" element={<Select/>}/>
+          <Route path="/skeleton" element={<Skeleton/>}/>
+          <Route path="/spinner" element={<Spinner/>}/>
+          <Route path="/table" element={<Table/>}/>
+          <Route path="/tabs" element={<Tabs/>}/>
+          <Route path="/tag" element={<Tag/>}/>
+          <Route path="/text" element={<Text/>}/>
+          <Route path="/textarea-example" element={<TextareaExample/>}/>
+          <Route path="/textarea" element={<Textarea/>}/>
+          <Route path="/tile-control" element={<TileControl/>}/>
+          <Route path="/time-input" element={<TimeInput/>}/>
+          <Route path="/time-picker" element={<TimePicker/>}/>
+          <Route path="/title" element={<Title/>}/>
+          <Route path="/toast-manager" element={<ToastManager/>}/>
+          <Route path="/toast" element={<Toast/>}/>
+          <Route path="/toggle" element={<Toggle/>}/>
+          <Route path="/tooltip" element={<Tooltip/>}/>
+          <Route path="/vertical-stepper" element={<VerticalStepper/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }

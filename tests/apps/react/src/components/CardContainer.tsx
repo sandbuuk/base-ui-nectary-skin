@@ -3,11 +3,7 @@ import '@nectary/components/title'
 import '@nectary/components/text'
 import '@nectary/components/card-container'
 
-type TCardContainer = {
-  search: URLSearchParams,
-}
-
-export const CardContainer: FC<TCardContainer> = () => {
+export const CardContainer: FC = () => {
   return (
     <sinch-card-container
       style={{ flex: 1, minHeight: 0 }}

@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import '@nectary/components/button'
 import '@nectary/assets/icons/open-in-new'
 import '@nectary/assets/icons/expand-more'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'button-component',
@@ -18,15 +19,15 @@ export class ButtonComponent {
   hasRightIcon: boolean
   hasSpinner: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.type = url.searchParams.get('type')
-    this.text = url.searchParams.get('text')
-    this.size = url.searchParams.get('size')
-    this.isDisabled = url.searchParams.get('disabled') !== null
-    this.hasLeftIcon = url.searchParams.get('icon-left') !== null
-    this.hasRightIcon = url.searchParams.get('icon-right') !== null
-    this.hasSpinner = url.searchParams.get('spinner') !== null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.type = search.get('type')
+    this.text = search.get('text')
+    this.size = search.get('size')
+    this.isDisabled = search.get('disabled') !== null
+    this.hasLeftIcon = search.get('icon-left') !== null
+    this.hasRightIcon = search.get('icon-right') !== null
+    this.hasSpinner = search.get('spinner') !== null
   }
 
   onClick() {

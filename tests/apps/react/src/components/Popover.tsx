@@ -1,14 +1,12 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/popover'
 import '@nectary/components/button'
 import '@nectary/components/text'
 
-type TPopover = {
-  search: URLSearchParams,
-}
-
-const PopoverExampleOffset: FC<TPopover> = ({ search }) => {
+const PopoverExampleOffset: FC = () => {
+  const [search] = useSearchParams()
   const [isOpen, setOpen] = useState(search.get('open') !== null)
 
   const onClose = () => {
@@ -49,7 +47,7 @@ const PopoverExampleOffset: FC<TPopover> = ({ search }) => {
   )
 }
 
-const PopoverExampleSwitchContent: FC<TPopover> = () => {
+const PopoverExampleSwitchContent: FC = () => {
   const [isOpen, setOpen] = useState(false)
   const [isOtherContent, setOtherContent] = useState(false)
   const onSwitch = () => {
@@ -95,7 +93,8 @@ const PopoverExampleSwitchContent: FC<TPopover> = () => {
   )
 }
 
-export const Popover: FC<TPopover> = ({ search }) => {
+export const Popover: FC = () => {
+  const [search] = useSearchParams()
   const [isOpen, setOpen] = useState(search.get('open') !== null)
   const orientation: any = search.get('orientation')
   const isModal = search.get('modal') !== null
@@ -111,11 +110,11 @@ export const Popover: FC<TPopover> = ({ search }) => {
   }
 
   if (example === 'offset') {
-    return <PopoverExampleOffset search={search}/>
+    return <PopoverExampleOffset/>
   }
 
   if (example === 'switch-content') {
-    return <PopoverExampleSwitchContent search={search}/>
+    return <PopoverExampleSwitchContent/>
   }
 
   return (

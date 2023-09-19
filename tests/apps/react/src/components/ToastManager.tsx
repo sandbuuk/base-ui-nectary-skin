@@ -9,11 +9,7 @@ import '@nectary/assets/icons/close'
 
 const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
 
-type TToastManager = {
-  search: URLSearchParams,
-}
-
-export const ToastManager: FC<TToastManager> = () => {
+export const ToastManager: FC = () => {
   const [state, setState] = useState<string[]>([`${text}1`, `${text}2`, `${text}3`, 'Item4'])
 
   const onTimeout = (text: string) => () => {

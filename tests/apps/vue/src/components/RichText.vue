@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     text() {
-      const example = this.search.get('example')
+      const example = this.$route.query.example
 
       if(example === 'md') {
         return mdText
@@ -36,7 +36,7 @@ export default {
       return shortText
     },
     size() {
-      return this.search.get('size')
+      return this.$route.query.size
     },
   },
 }

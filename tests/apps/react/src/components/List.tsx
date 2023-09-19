@@ -6,11 +6,7 @@ import '@nectary/assets/icons/add'
 import '@nectary/components/icon-button'
 import '@nectary/components/text'
 
-type TList = {
-  search: URLSearchParams,
-}
-
-export const List: FC<TList> = () => {
+export const List: FC = () => {
   const content = (
     <div
       slot="content"

@@ -32,22 +32,22 @@ export default {
   },
   computed: {
     rows() {
-      const val = this.search.get('rows')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.rows
+      return val != null ? parseInt(val) : null
     },
     cols() {
-      const val = this.search.get('cols')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.cols
+      return val != null ? parseInt(val) : null
     },
     colors() {
-      return this.search.get('example') === 'light'
+      return this.$route.query.example === 'light'
         ? lightVibrantColors
         : colors
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

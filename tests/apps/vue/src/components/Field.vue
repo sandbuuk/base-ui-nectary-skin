@@ -41,30 +41,30 @@ export default {
   },
   computed: {
     placeholderText() {
-      return this.search.get('placeholder')
+      return this.$route.query.placeholder
     },
     tooltipText() {
-      return this.search.get('tooltip')
+      return this.$route.query.tooltip
     },
     labelText() {
-      return this.search.get('label')
+      return this.$route.query.label
     },
     optionalText() {
-      return this.search.get('optional')
+      return this.$route.query.optional
     },
     additionalText() {
-      return this.search.get('additional')
+      return this.$route.query.additional
     },
     invalidText() {
-      return this.search.get('invalid')
+      return this.$route.query.invalid
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

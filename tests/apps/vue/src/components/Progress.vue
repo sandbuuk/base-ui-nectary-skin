@@ -16,13 +16,13 @@ export default {
   },
   computed: {
     value() {
-      const val = this.search.get('value') ?? '0'
+      const val = this.$route.query.value ?? '0'
       const int = parseInt(val)
 
       return Number.isInteger(int) ? int : 0
     },
     isDetailed() {
-      return this.search.get('detailed') !== null
+      return this.$route.query.detailed != null
     },
   }
 }

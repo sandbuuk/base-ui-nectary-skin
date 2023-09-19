@@ -1,11 +1,7 @@
 import '@nectary/components/emoji-picker'
 import type { FC } from 'react'
 
-type TEmojiPicker = {
-  search: URLSearchParams,
-}
-
-export const EmojiPicker: FC<TEmojiPicker> = () => {
+export const EmojiPicker: FC = () => {
   const onChange = (e: CustomEvent<string>) => {
     window.dispatchEvent(new CustomEvent('sinch-emoji-picker-change', { detail: e.detail }))
   }

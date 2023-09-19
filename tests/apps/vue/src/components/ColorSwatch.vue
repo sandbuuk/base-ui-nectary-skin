@@ -11,7 +11,7 @@ export default {
   },
   computed: {
     name() {
-      return this.search.get('name') ?? ''
+      return this.$route.query.name ?? ''
     },
   },
 }

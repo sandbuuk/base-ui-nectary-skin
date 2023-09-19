@@ -1,14 +1,12 @@
 import { useCallback } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/icon-button'
 import '@nectary/assets/icons/help-outline'
 import '@nectary/components/spinner'
 
-type TIconButton = {
-  search: URLSearchParams,
-}
-
-export const IconButton: FC<TIconButton> = ({ search }) => {
+export const IconButton: FC = () => {
+  const [search] = useSearchParams()
   const isDisabled = search.get('disabled') != null
   const hasSpinner = search.get('spinner') != null
   const type: any = search.get('type') ?? undefined

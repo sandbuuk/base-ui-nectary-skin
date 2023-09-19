@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/inline-alert'
 import '@nectary/components/button'
@@ -19,11 +20,8 @@ const shortText = 'Lorem Ipsum is dummy text'
 const longCaption = 'It has survived not only five centuries, but also the leap into electronic typesetting'
 const shortCaption = 'It has survived'
 
-type TInlineAlert = {
-  search: URLSearchParams,
-}
-
-export const InlineAlert: FC<TInlineAlert> = ({ search }) => {
+export const InlineAlert: FC = () => {
+  const [search] = useSearchParams()
   const type: any = search.get('type') ?? undefined
   const hasClose = search.get('close') !== null
   const hasAction = search.get('action') !== null

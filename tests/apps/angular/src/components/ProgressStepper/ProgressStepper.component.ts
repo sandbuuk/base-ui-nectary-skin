@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/progress-stepper'
 import '@nectary/components/progress-stepper-item'
 
@@ -14,9 +15,8 @@ export class ProgressStepperComponent {
   invalidValue = ''
   example: string | null
 
-  constructor() {
-    const url = new URL(location.href)
-    const search = url.searchParams
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
     this.invalidValue = search.get('invalid') ?? ''
     this.progressValue = search.get('progress') ?? ''

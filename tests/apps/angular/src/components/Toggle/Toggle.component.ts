@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/toggle'
 
 @Component({
@@ -15,14 +16,14 @@ export class ToggleComponent {
   isSmall: boolean
   isLabeled: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.isChecked = url.searchParams.get('checked') !== null
-    this.isControlled = url.searchParams.get('uncontrolled') === null
-    this.text = url.searchParams.get('text')
-    this.isDisabled = url.searchParams.get('disabled') !== null
-    this.isSmall = url.searchParams.get('small') !== null
-    this.isLabeled = url.searchParams.get('labeled') !== null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.isChecked = search.get('checked') !== null
+    this.isControlled = search.get('uncontrolled') === null
+    this.text = search.get('text')
+    this.isDisabled = search.get('disabled') !== null
+    this.isSmall = search.get('small') !== null
+    this.isLabeled = search.get('labeled') !== null
   }
 
   onChange(e: Event) {

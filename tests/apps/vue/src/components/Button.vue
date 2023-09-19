@@ -36,25 +36,25 @@ export default {
   },
   computed: {
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     },
     text() {
-      return this.search.get('text')
+      return this.$route.query.text
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     },
     size() {
-      return this.search.get('size') !== null
+      return this.$route.query.size != null
     },
     hasLeftIcon() {
-      return this.search.get('icon-left') !== null
+      return this.$route.query['icon-left'] != null
     },
     hasRightIcon() {
-      return this.search.get('icon-right') !== null
+      return this.$route.query['icon-right'] != null
     },
     hasSpinner() {
-      return this.search.get('spinner') !== null
+      return this.$route.query.spinner != null
     },
   }
 }

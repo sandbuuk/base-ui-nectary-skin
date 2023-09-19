@@ -5,6 +5,7 @@ import '@nectary/assets/icons/format-align-right'
 import '@nectary/assets/icons/format-align-left'
 import '@nectary/assets/icons/format-align-center'
 import '@nectary/assets/icons/format-align-justify'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'segmented-icon-control-component',
@@ -18,9 +19,8 @@ export class SegmentedIconControlComponent {
   isMultiple: boolean
   isSingleOption: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    const search = url.searchParams
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
     this.isControlled = search.get('uncontrolled') === null
     this.isMultiple = search.get('multiple') !== null

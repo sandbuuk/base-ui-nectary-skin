@@ -7,14 +7,14 @@ const PORT = 3022
 
 module.exports = {
   mode: 'development',
-  entry: require.resolve('./src/index.ts'),
+  entry: require.resolve('./src/index.js'),
   output: {
     chunkFilename: '[name].js',
     publicPath: 'auto',
     pathinfo: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    extensions: ['.js', '.ts', '.json'],
   },
   module: {
     rules: [

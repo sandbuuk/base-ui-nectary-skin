@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { TSinchInputElement } from '@nectary/components/input/types'
 import type { FC } from 'react'
 import '@nectary/components/popover'
@@ -9,10 +10,6 @@ import '@nectary/components/field'
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
 
-type TSearch = {
-  search: URLSearchParams,
-}
-
 const options: string[] = [
   'Option 1 value long long long',
   'Option 2',
@@ -20,7 +17,8 @@ const options: string[] = [
   'Option 4',
 ]
 
-export const Search: FC<TSearch> = ({ search }) => {
+export const Search: FC = () => {
+  const [search] = useSearchParams()
   const [isOpen, setOpen] = useState(false)
   const [isClearActive, setClearActive] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')

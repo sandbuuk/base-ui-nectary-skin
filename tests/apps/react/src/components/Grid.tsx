@@ -8,13 +8,9 @@ import '@nectary/components/card'
 import '@nectary/components/link'
 import '@nectary/components/button'
 
-type TGrid = {
-  search: URLSearchParams,
-}
-
 const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...'
 
-export const Grid: FC<TGrid> = () => {
+export const Grid: FC = () => {
   return (
     <div style={{ position: 'relative' }}>
       <sinch-grid>

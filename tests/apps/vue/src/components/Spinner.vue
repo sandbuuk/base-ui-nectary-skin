@@ -11,7 +11,7 @@ export default {
   },
   computed: {
     size() {
-      return this.search.get('size')
+      return this.$route.query.size
     },
   }
 }

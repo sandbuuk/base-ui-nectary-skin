@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import '@nectary/components/text'
 import '@nectary/components/title'
 import '@nectary/components/card-container'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'card-container-component',
@@ -21,7 +22,5 @@ import '@nectary/components/card-container'
 })
 
 export class CardContainerComponent {
-  constructor() {
-    const url = new URL(location.href)
-  }
+  constructor() {}
 }

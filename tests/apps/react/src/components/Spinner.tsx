@@ -1,11 +1,9 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/spinner'
 
-type TSpinner = {
-  search: URLSearchParams,
-}
-
-export const Spinner: FC<TSpinner> = ({ search }) => {
+export const Spinner: FC = () => {
+  const [search] = useSearchParams()
   const size: any = search.get('size')
 
   return (

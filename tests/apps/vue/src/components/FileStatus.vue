@@ -26,16 +26,16 @@ export default {
   },
   computed: {
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     },
     filename() {
-      return this.search.get('filename')
+      return this.$route.query.filename
     },
     hasDescription() {
-      return this.search.get('description') !== null
+      return this.$route.query.description != null
     },
     hasProgress() {
-      return this.search.get('progress') !== null
+      return this.$route.query.progress != null
     },
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/skeleton'
 import '@nectary/components/skeleton-item'
 
@@ -10,9 +11,9 @@ import '@nectary/components/skeleton-item'
 
 export class SkeletonComponent {
   isCard: boolean
-  constructor() {
-    const url = new URL(location.href)
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
-    this.isCard = url.searchParams.get('card') !== null
+    this.isCard = search.get('card') !== null
   }
 }

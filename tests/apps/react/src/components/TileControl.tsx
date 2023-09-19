@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/tile-control'
 import '@nectary/components/tile-control-option'
@@ -12,11 +13,8 @@ import '@nectary/assets/icons/add-to-home-screen'
 import '@nectary/assets/icons/camera'
 import '@nectary/assets/icons/alarm-add'
 
-type TTileButton = {
-  search: URLSearchParams,
-}
-
-export const TileControl: FC<TTileButton> = ({ search }) => {
+export const TileControl: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState('')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

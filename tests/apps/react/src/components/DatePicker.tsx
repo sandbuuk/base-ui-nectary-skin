@@ -1,12 +1,10 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/date-picker'
 
-type TDatePicker = {
-  search: URLSearchParams,
-}
-
-export const DatePicker: FC<TDatePicker> = ({ search }) => {
+export const DatePicker: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

@@ -13,8 +13,5 @@ import '@nectary/assets/icons-branded/chatbot'
 })
 
 export class ListComponent {
-  constructor() {
-    const url = new URL(location.href)
-    const search = url.searchParams
-  }
+  constructor() {}
 }

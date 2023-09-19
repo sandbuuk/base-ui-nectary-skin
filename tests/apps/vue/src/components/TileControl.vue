@@ -112,25 +112,25 @@ export default {
   },
   computed: {
     isControlled() {
-      return this.search.get('uncontrolled') === null
+      return this.$route.query.uncontrolled == null
     },
     isSingleOption() {
-      return this.search.get('single') !== null
+      return this.$route.query.single != null
     },
     isSmall() {
-      return this.search.get('small') !== null
+      return this.$route.query.small != null
     },
     isMultiple() {
-      return this.search.get('multiple') !== null
+      return this.$route.query.multiple != null
     },
     numCols() {
-      const val = this.search.get('cols')
-      return val !== null ? parseInt(val) : 1
+      const val = this.$route.query.cols
+      return val != null ? parseInt(val) : 1
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

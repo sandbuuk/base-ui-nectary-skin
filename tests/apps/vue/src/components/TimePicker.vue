@@ -31,15 +31,15 @@ export default {
   },
   computed: {
     ampm() {
-      return this.search.get('ampm') !== null
+      return this.$route.query.ampm != null
     },
     isControlled() {
-      return this.search.get('uncontrolled') === null
+      return this.$route.query.uncontrolled == null
     },
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

@@ -1,12 +1,10 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/checkbox'
 
-type TCheckbox = {
-  search: URLSearchParams,
-}
-
-export const Checkbox: FC<TCheckbox> = ({ search }) => {
+export const Checkbox: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(search.get('checked') !== null)
   const onChange = (e: CustomEvent<boolean>) => {
     const value = e.detail

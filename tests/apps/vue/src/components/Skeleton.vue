@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     isCard() {
-      return this.search.get('card') !== null
+      return this.$route.query.card != null
     }
   }
 }

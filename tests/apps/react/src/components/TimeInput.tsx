@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/time-picker'
 import '@nectary/components/input'
@@ -7,11 +8,8 @@ import '@nectary/components/popover'
 import '@nectary/components/icon-button'
 import '@nectary/assets/icons/schedule'
 
-type TTimeInput = {
-  search: URLSearchParams,
-}
-
-export const TimeInput: FC<TTimeInput> = ({ search }) => {
+export const TimeInput: FC = () => {
+  const [search] = useSearchParams()
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')
   const [isoValue, setIsoValue] = useState(search.get('isovalue') ?? '')

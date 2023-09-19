@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/field'
 import '@nectary/components/select-button'
@@ -8,10 +9,6 @@ import '@nectary/components/select-menu-option'
 import '@nectary/components/tag'
 import '@nectary/assets/icons/open-in-new'
 import '@nectary/assets/icons/search'
-
-type TSelect = {
-  search: URLSearchParams,
-}
 
 type TMenuValue = {
   text: string,
@@ -34,7 +31,8 @@ const options: Record<string, TMenuValue> = {
   14: { text: 'Option 4', icon: null },
 }
 
-export const Select: FC<TSelect> = ({ search }) => {
+export const Select: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState<string>(search.get('value') ?? '')
   const [isOpen, setOpen] = useState(false)
   const onChange = (e: CustomEvent<string>) => {

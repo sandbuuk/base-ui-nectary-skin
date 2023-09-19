@@ -11,6 +11,7 @@ import '@nectary/assets/icons/smart-button'
 import '@nectary/assets/icons/add-to-home-screen'
 import '@nectary/assets/icons/camera'
 import '@nectary/assets/icons/alarm-add'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'tile-control-component',
@@ -26,9 +27,8 @@ export class TileControlComponent {
   isMultiple: boolean
   numCols: number
 
-  constructor() {
-    const url = new URL(location.href)
-    const search = url.searchParams
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
     this.isControlled = search.get('uncontrolled') === null
     this.isSingleOption = search.get('single') !== null
@@ -36,7 +36,7 @@ export class TileControlComponent {
     this.isMultiple = search.get('multiple') !== null
     this.value = search.get('value') ?? ''
 
-    const numCols = url.searchParams.get('cols')
+    const numCols = search.get('cols')
     this.numCols = numCols !== null ? parseInt(numCols) : 1
   }
 

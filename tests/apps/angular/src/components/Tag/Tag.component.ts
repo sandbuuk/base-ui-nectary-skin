@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import '@nectary/components/tag'
 import '@nectary/assets/icons/open-in-new'
+import { ActivatedRoute } from '@angular/router'
 
 
 @Component({
@@ -15,11 +16,11 @@ export class TagComponent {
   isSmall: boolean
   hasIcon: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.color = url.searchParams.get('color') ?? ''
-    this.text = url.searchParams.get('text') ?? ''
-    this.isSmall = url.searchParams.get('small') != null
-    this.hasIcon = url.searchParams.get('icon') != null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.color = search.get('color') ?? ''
+    this.text = search.get('text') ?? ''
+    this.isSmall = search.get('small') != null
+    this.hasIcon = search.get('icon') != null
   }
 }

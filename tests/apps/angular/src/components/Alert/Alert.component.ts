@@ -3,6 +3,7 @@ import '@nectary/components/alert'
 import '@nectary/components/button'
 import '@nectary/components/icon-button'
 import '@nectary/assets/icons/close'
+import { ActivatedRoute } from '@angular/router'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
@@ -28,13 +29,13 @@ export class AlertComponent {
   hasClose: boolean
   hasAction: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.type = url.searchParams.get('type') ?? undefined
-    this.hasClose = url.searchParams.get('close') != null
-    this.hasAction = url.searchParams.get('action') != null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.type = search.get('type') ?? undefined
+    this.hasClose = search.get('close') != null
+    this.hasAction = search.get('action') != null
 
-    const example = url.searchParams.get('example')
+    const example = search.get('example')
 
     this.text = shortText
 

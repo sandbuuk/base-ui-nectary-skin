@@ -1,6 +1,6 @@
 <template>
   <sinch-dialog open :caption="title" @--close="onClose">
-    <sinch-text v-if="content !== null" slot="content" type="m">{{content}}</sinch-text>
+    <sinch-text v-if="content != null" slot="content" type="m">{{content}}</sinch-text>
     <sinch-button v-if="buttons" text="Cancel" type="secondary" slot="buttons"></sinch-button>
     <sinch-button v-if="buttons" text="Ok" type="primary" slot="buttons"></sinch-button>
   </sinch-dialog>
@@ -16,13 +16,13 @@ export default {
   },
   computed: {
     content() {
-      return this.search.get('content')
+      return this.$route.query.content
     },
     title() {
-      return this.search.get('title') ?? ''
+      return this.$route.query.title ?? ''
     },
     buttons() {
-      return this.search.get('buttons') !== null
+      return this.$route.query.buttons != null
     }
   },
   methods: {

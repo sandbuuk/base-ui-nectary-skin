@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/progress'
 
 @Component({
@@ -10,13 +11,13 @@ import '@nectary/components/progress'
 export class ProgressComponent {
   value: number | null
   isDetailed: boolean
-  constructor() {
-    const url = new URL(location.href)
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
-    this.isDetailed = url.searchParams.get('detailed') != null
+    this.isDetailed = search.get('detailed') != null
 
     this.value = (() => {
-      const val = url.searchParams.get('value') ?? '0'
+      const val = search.get('value') ?? '0'
       const int = parseInt(val)
 
       return Number.isInteger(int) ? int : 0

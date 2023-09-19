@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/alert'
 import '@nectary/components/button'
@@ -16,11 +17,8 @@ Context **bold _italic_ bold** text.
 const longText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.'
 const shortText = 'Lorem Ipsum is dummy text'
 
-type TAlert = {
-  search: URLSearchParams,
-}
-
-export const Alert: FC<TAlert> = ({ search }) => {
+export const Alert: FC = () => {
+  const [search] = useSearchParams()
   const type: any = search.get('type') ?? undefined
   const hasAction = search.get('action') !== null
   const hasClose = search.get('close') !== null

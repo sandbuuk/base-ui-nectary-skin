@@ -26,9 +26,7 @@ export class CardDnDComponent {
   dragTarget: HTMLElement | null = null
   dragOverTarget: HTMLElement | null = null
 
-  constructor() {
-    const url = new URL(location.href)
-  }
+  constructor() {}
 
   onDragStart(e: Event) {
     if ((e.target as HTMLElement).matches('sinch-card')) {

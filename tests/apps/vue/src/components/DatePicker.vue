@@ -24,21 +24,21 @@ export default {
   },
   computed: {
     locale() {
-      return this.search.get('locale')
+      return this.$route.query.locale
     },
     min() {
-      return this.search.get('min')
+      return this.$route.query.min
     },
     max() {
-      return this.search.get('max')
+      return this.$route.query.max
     },
     isRange() {
-      return this.search.get('range') !== null
+      return this.$route.query.range != null
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

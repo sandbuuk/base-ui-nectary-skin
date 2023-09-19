@@ -33,19 +33,19 @@ export default {
   },
   computed: {
     text() {
-      return this.search.get('text') ?? ''
+      return this.$route.query.text ?? ''
     },
     color() {
-      return this.search.get('color')
+      return this.$route.query.color
     },
     isSmall() {
-      return this.search.get('small') != null
+      return this.$route.query.small != null
     },
     hasIcon() {
-      return this.search.get('icon') != null
+      return this.$route.query.icon != null
     },
     hasRightIcon() {
-      return this.search.get('right-icon') != null
+      return this.$route.query['right-icon'] != null
     },
   },
 }

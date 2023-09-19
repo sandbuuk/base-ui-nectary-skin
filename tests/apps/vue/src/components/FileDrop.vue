@@ -36,16 +36,16 @@ export default {
   },
   computed: {
     accept() {
-      return this.search.get('accept')
+      return this.$route.query.accept
     },
     isMultiple() {
-      return this.search.get('multiple') !== null
+      return this.$route.query.multiple != null
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     },
     isInvalid() {
-      return this.search.get('invalid') !== null
+      return this.$route.query.invalid != null
     },
   }
 }

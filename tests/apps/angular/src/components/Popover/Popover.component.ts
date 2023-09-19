@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import '@nectary/components/popover'
 import '@nectary/components/button'
 import '@nectary/components/text'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'popover-component',
@@ -18,14 +19,14 @@ export class PopoverComponent {
   isDefaultExample: boolean
   isOtherComponent:boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.orientation = url.searchParams.get('orientation')
-    this.isModal = url.searchParams.get('modal') !== null
-    this.isOpen = url.searchParams.get('open') !== null
-    this.isOffsetExample = url.searchParams.get('example') === 'offset'
-    this.isSwitchContentExample = url.searchParams.get('example') === 'switch-content'
-    this.isDefaultExample = url.searchParams.get('example') === null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.orientation = search.get('orientation')
+    this.isModal = search.get('modal') !== null
+    this.isOpen = search.get('open') !== null
+    this.isOffsetExample = search.get('example') === 'offset'
+    this.isSwitchContentExample = search.get('example') === 'switch-content'
+    this.isDefaultExample = search.get('example') === null
     this.isOtherComponent = false
   }
 

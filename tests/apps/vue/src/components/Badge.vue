@@ -24,19 +24,19 @@ export default {
   },
   computed: {
     mode() {
-      return this.search.get('mode') ?? undefined
+      return this.$route.query.mode ?? undefined
     },
     text() {
-      return this.search.get('text') ?? ''
+      return this.$route.query.text ?? ''
     },
     size() {
-      return this.search.get('size') ?? undefined
+      return this.$route.query.size ?? undefined
     },
     color() {
-      return this.search.get('color') ?? undefined
+      return this.$route.query.color ?? undefined
     },
     isHidden() {
-      return this.search.get('hidden') !== null
+      return this.$route.query.hidden != null
     }
   },
 }

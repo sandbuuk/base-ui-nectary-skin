@@ -28,8 +28,8 @@ export default {
   },
   computed: {
     rows() {
-      const val = this.search.get('rows')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.rows
+      return val != null ? parseInt(val) : null
     },
     options() {
       return {

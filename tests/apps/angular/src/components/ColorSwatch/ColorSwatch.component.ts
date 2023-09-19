@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 
 import '@nectary/components/color-swatch'
 
@@ -11,8 +12,8 @@ import '@nectary/components/color-swatch'
 export class ColorSwatchComponent {
   name: string
 
-  constructor() {
-    const url = new URL(location.href)
-    this.name = url.searchParams.get('name') ?? ''
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.name = search.get('name') ?? ''
   }
 }

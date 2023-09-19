@@ -1,12 +1,10 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/code-tag'
 import '@nectary/components/text'
 
-type TCodeTag = {
-  search: URLSearchParams,
-}
-
-export const CodeTag: FC<TCodeTag> = ({ search }) => {
+export const CodeTag: FC = () => {
+  const [search] = useSearchParams()
   const text = search.get('text') ?? ''
   const isEllipsis = search.get('ellipsis') !== null
 

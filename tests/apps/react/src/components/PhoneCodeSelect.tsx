@@ -1,5 +1,6 @@
 import { countries } from '@nectary/components/utils/countries'
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/popover'
 import '@nectary/components/input'
@@ -8,13 +9,10 @@ import '@nectary/components/select-menu-option'
 import '@nectary/components/select-button'
 import '@nectary/components/flag'
 
-type TSelect = {
-  search: URLSearchParams,
-}
-
 const countriesArr = Object.entries(countries)
 
-export const PhoneCodeSelect: FC<TSelect> = ({ search }) => {
+export const PhoneCodeSelect: FC = () => {
+  const [search] = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
   const [menuValue, setMenuValue] = useState('')
   const [inputValue, setInputValue] = useState('')

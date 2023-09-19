@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/table'
 import '@nectary/components/table-row'
@@ -48,10 +49,6 @@ const getTableItems = ({ hasLongLine }: any): TTableItems => ({
   ],
 })
 
-type TTable = {
-  search: URLSearchParams,
-}
-
 const noop = () => {}
 type TTableItems = {head: TTableItem[], body: TTableItem[][]}
 type TTableItem = {
@@ -69,7 +66,8 @@ type TTableItem = {
   iconName?: string,
 }
 
-export const Table: FC<TTable> = ({ search }) => {
+export const Table: FC = () => {
+  const [search] = useSearchParams()
   const example = search.get('example')
   const state: TTableItems = getTableItems({ hasLongLine: example === 'long' })
 

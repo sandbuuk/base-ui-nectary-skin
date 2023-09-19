@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/textarea'
 import '@nectary/components/icon-button'
@@ -11,11 +12,8 @@ import '@nectary/assets/icons/add-comment'
 import '@nectary/assets/icons/more-horiz'
 import '@nectary/assets/icons/send'
 
-type TTextarea = {
-  search: URLSearchParams,
-}
-
-export const Textarea: FC<TTextarea> = ({ search }) => {
+export const Textarea: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

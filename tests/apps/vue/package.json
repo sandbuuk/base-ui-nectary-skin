@@ -7,7 +7,8 @@
     "@nectary/components": "workspace:*",
     "@nectary/theme-base": "workspace:*",
     "axe-core": "^4.8.1",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.22.20",

@@ -3,6 +3,7 @@ import '@nectary/components/dialog'
 import '@nectary/components/button'
 import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
 import '@nectary/components/text'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'dialog-component',
@@ -15,11 +16,11 @@ export class DialogComponent {
   buttons: boolean
   content: string | null
 
-  constructor() {
-    const url = new URL(location.href)
-    this.title = url.searchParams.get('title') ?? ''
-    this.buttons = url.searchParams.get('buttons') !== null
-    this.content = url.searchParams.get('content')
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.title = search.get('title') ?? ''
+    this.buttons = search.get('buttons') !== null
+    this.content = search.get('content')
   }
 
   onClose(e: CustomEvent<TSinchDialogCloseDetail>) {

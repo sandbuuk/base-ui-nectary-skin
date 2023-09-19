@@ -1,14 +1,12 @@
+import { useSearchParams } from 'react-router-dom'
 import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
 import type { FC } from 'react'
 import '@nectary/components/dialog'
 import '@nectary/components/text'
 import '@nectary/components/button'
 
-type TDialog = {
-  search: URLSearchParams,
-}
-
-export const Dialog: FC<TDialog> = ({ search }) => {
+export const Dialog: FC = () => {
+  const [search] = useSearchParams()
   const title: string = search.get('title') ?? ''
   const content = search.get('content')
   const buttons = search.get('buttons') !== null
