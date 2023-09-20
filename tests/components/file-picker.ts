@@ -140,7 +140,9 @@ test('file-picker screenshots', runScreenshotTests('sinch-file-picker', [
         },
       ])
 
-      expect(await getAllEvents(page)).toEqual([
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
         {
           type: 'sinch-file-picker-invalid',
           detail: 'size',
@@ -167,7 +169,9 @@ test('file-picker screenshots', runScreenshotTests('sinch-file-picker', [
         },
       ])
 
-      expect(await getAllEvents(page)).toEqual([
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
         {
           type: 'sinch-file-picker-change',
           detail: [
@@ -199,7 +203,9 @@ test('file-picker screenshots', runScreenshotTests('sinch-file-picker', [
         },
       ])
 
-      expect(await getAllEvents(page)).toEqual([
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
         {
           type: 'sinch-file-picker-change',
           detail: [

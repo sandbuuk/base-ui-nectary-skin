@@ -82,20 +82,15 @@ test('action-dropdown events', runScreenshotTests('sinch-popover', [
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
 
+      await page.keyboard.press('Enter')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('Enter')
+
       expect(
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-action-dropdown-click', detail: '1' },
-      ])
-
-      await page.keyboard.press('Enter')
-      await page.keyboard.press('ArrowDown')
-      await page.keyboard.press('ArrowDown')
-      await page.keyboard.press('Enter')
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
         { type: 'sinch-action-dropdown-click', detail: '3' },
       ])
     },

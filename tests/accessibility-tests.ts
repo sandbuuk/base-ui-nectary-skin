@@ -8,8 +8,8 @@ const printAxeResults = (axeResults: readonly axeCore.Result[]): string => {
   for (const v of axeResults) {
     for (const node of v.nodes) {
       const targets: string[] = Array.isArray(node.target[0])
-        ? node.target[0]
-        : node.target
+        ? node.target[0] as string[]
+        : node.target as string[]
 
       lines.push(targets.join(' > '))
       lines.push(node.html)
@@ -72,11 +72,11 @@ export const makeAccessibilityTests = <T extends keyof HTMLElementTagNameMap>(pa
         return
       }
 
-      let after: (() => Promise<void>) | void
+      let after: (() => Promise<void>) | null = null
 
       try {
         if (testProps.before != null) {
-          after = await testProps.before({ page })
+          after = await testProps.before({ page }) ?? null
         }
 
         await page.goto(pageUrl, { waitUntil: 'networkidle' })
@@ -100,7 +100,7 @@ export const makeAccessibilityTests = <T extends keyof HTMLElementTagNameMap>(pa
           }
         }
       } finally {
-        if (after != null) {
+        if (typeof after === 'function') {
           await after()
         }
       }

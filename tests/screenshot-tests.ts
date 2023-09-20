@@ -78,6 +78,14 @@ const mergeBoundingBox = (rects: readonly TRect[]): TRect => {
   })
 }
 
+// const addTestNameToUrl = (url: string, name: string): string => {
+//   const testUrl = new URL(url, 'http://localhost')
+
+//   testUrl.searchParams.set('testname', encodeURIComponent(name))
+
+//   return testUrl.pathname + testUrl.search
+// }
+
 const overrideScreenshotPath = (testInfo: TestInfo): void => {
   const snapshotPath = testInfo.snapshotPath
 
@@ -186,11 +194,13 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
           after = await t.before({ page }) ?? null
         }
 
-        await page.evaluate((url) => {
-          window.location.assign(url)
-        }, t.url)
+        // await page.evaluate((url) => {
+        //   window.location.hash = url
+        // }, addTestNameToUrl(t.url, t.name))
+        await page.goto(t.url)
+        await page.evaluate(() => document.fonts.ready)
         await page.waitForSelector(elementSelector, { state: 'attached' })
-        await page.mouse.move(0, 0)
+        await page.mouse.move(1, 1)
 
         const locator = page.locator(elementSelector).nth(0)
 
@@ -235,10 +245,10 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
     pages.forEach(overridePageKeyboard)
     pages.forEach(overridePageMouse)
 
-    await Promise.all(pages.map(async (page) => {
-      await page.goto('/')
-      await page.evaluate(() => document.fonts.ready)
-    }))
+    // await Promise.all(pages.map(async (page) => {
+    //   await page.goto('/')
+    //   await page.evaluate(() => document.fonts.ready)
+    // }))
 
     // Optionally subscribe to page console output
     // pages.forEach((page) => {
@@ -299,9 +309,10 @@ export const moveCursorTo = async (page: Page, position: TPosition) => {
 
 export const getAllEvents = (page: Page) => {
   return page.evaluate(() => {
-    const result = (window as any).__events__;
+    const wnd = (window as any)
+    const result = wnd.__events__
 
-    (window as any).__events__ = []
+    wnd.__abort__()
 
     return result
   })
@@ -309,18 +320,31 @@ export const getAllEvents = (page: Page) => {
 
 export const subscribeToEvents = (page: Page, ...eventNames: string[]) =>
   page.evaluate((eventNames) => {
-    (window as any).__events__ ??= []
+    const wnd = (window as any)
+
+    wnd.__events__ ??= []
+    wnd.__abort__ = null
+
+    const handler = (e: any) => {
+      wnd.__events__.push({
+        type: e.type,
+        detail: e.detail,
+        // path: e.path
+        //   ?.filter((p: HTMLElement) => p.tagName != null)
+        //   .map((p: HTMLElement) => (p.tagName.toLowerCase() + (p.hasAttribute('id') ? `#${p.id}` : ''))),
+      })
+    }
+
+    const controller = new AbortController()
+    const options = { signal: controller.signal }
 
     for (const eventName of eventNames) {
-      window.addEventListener(eventName, (e: any) => {
-        (window as any).__events__.push({
-          type: e.type,
-          detail: e.detail,
-          // path: e.path
-          //   ?.filter((p: HTMLElement) => p.tagName != null)
-          //   .map((p: HTMLElement) => (p.tagName.toLowerCase() + (p.hasAttribute('id') ? `#${p.id}` : ''))),
-        })
-      })
+      window.addEventListener(eventName, handler, options)
+    }
+
+    wnd.__abort__ = () => {
+      wnd.__events__ = []
+      controller.abort()
     }
   }, eventNames)
 

@@ -119,6 +119,8 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
         { type: 'sinch-textarea-blur', detail: null },
       ])
 
+      await subscribeToEvents(page, 'sinch-textarea-focus', 'sinch-textarea-blur', 'sinch-textarea-change')
+
       const bb = await centerBB($)
 
       await page.mouse.click(bb.x, bb.y)

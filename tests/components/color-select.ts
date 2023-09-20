@@ -82,12 +82,6 @@ test('color select events', runScreenshotTests('sinch-color-menu', [
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-color-menu-change', detail: 'light-violet' },
-      ])
-
       await page.keyboard.press('Enter')
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
@@ -95,6 +89,7 @@ test('color select events', runScreenshotTests('sinch-color-menu', [
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-color-menu-change', detail: 'light-violet' },
         { type: 'sinch-color-menu-change', detail: 'light-red' },
       ])
     },

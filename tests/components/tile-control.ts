@@ -208,28 +208,17 @@ test('tile-control screenshots', runScreenshotTests('sinch-tile-control', [
 
       // Click first item
       await $.locator('sinch-tile-control-option').nth(0).click()
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-tile-control-change', detail: '0' },
-      ])
-
       // Click second item
       await $.locator('sinch-tile-control-option').nth(1).click()
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-tile-control-change', detail: '1' },
-      ])
-
       // Click disabled item
       await $.locator('sinch-tile-control-option').nth(2).click()
 
       expect(
         await getAllEvents(page)
-      ).toEqual([])
+      ).toEqual([
+        { type: 'sinch-tile-control-change', detail: '0' },
+        { type: 'sinch-tile-control-change', detail: '1' },
+      ])
     },
   },
 ]))

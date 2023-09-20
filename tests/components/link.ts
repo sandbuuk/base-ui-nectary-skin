@@ -176,14 +176,14 @@ test('link screenshots', runScreenshotTests('sinch-link', [
         { type: 'sinch-link-blur', detail: null },
       ])
 
+      await subscribeToEvents(page, 'sinch-link-click')
+
       await $.click()
 
       expect(
         await getAllEvents(page)
       ).toEqual(
-        expect.arrayContaining([
-          { type: 'sinch-link-click', detail: null },
-        ])
+        { type: 'sinch-link-click', detail: null }
       )
     },
   },

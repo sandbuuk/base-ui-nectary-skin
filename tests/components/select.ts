@@ -184,6 +184,8 @@ test('select events', runScreenshotTests('sinch-popover', [
         { type: 'sinch-select-blur', detail: null },
       ])
 
+      await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
+
       await page.keyboard.press('Tab')
       await page.keyboard.press('Enter')
       await page.keyboard.press('ArrowDown')
@@ -199,6 +201,8 @@ test('select events', runScreenshotTests('sinch-popover', [
         // { type: 'sinch-select-focus', detail: null },
         { type: 'sinch-select-change', detail: '1' },
       ])
+
+      await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
 
       await page.keyboard.press('Enter')
       await page.keyboard.press('ArrowDown')
@@ -234,6 +238,8 @@ test('select events', runScreenshotTests('sinch-popover', [
       ).toEqual([
         { type: 'sinch-select-change', detail: '1' },
       ])
+
+      await subscribeToEvents(page, 'sinch-select-change')
 
       await page.mouse.click(btnCt.x, btnCt.y)
       await page.keyboard.press('ArrowDown')
