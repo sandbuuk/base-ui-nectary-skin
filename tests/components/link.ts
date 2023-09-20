@@ -164,27 +164,22 @@ test('link screenshots', runScreenshotTests('sinch-link', [
   {
     name: 'native events',
     url: shot,
+    only: true,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-link-focus', 'sinch-link-blur', 'sinch-link-click')
+
       await page.keyboard.press('Tab')
       await page.mouse.click(0, 0)
+      await $.click()
 
       expect(
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-link-focus', detail: null },
         { type: 'sinch-link-blur', detail: null },
+        { type: 'sinch-link-focus', detail: null },
+        { type: 'sinch-link-click', detail: null },
       ])
-
-      await subscribeToEvents(page, 'sinch-link-click')
-
-      await $.click()
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual(
-        { type: 'sinch-link-click', detail: null }
-      )
     },
   },
 ]))

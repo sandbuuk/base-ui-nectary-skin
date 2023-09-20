@@ -313,6 +313,8 @@ export const getAllEvents = (page: Page) => {
     const result = wnd.__events__
 
     wnd.__abort__()
+    wnd.__abort__ = null
+    wnd.__events__ = null
 
     return result
   })
@@ -322,7 +324,7 @@ export const subscribeToEvents = (page: Page, ...eventNames: string[]) =>
   page.evaluate((eventNames) => {
     const wnd = (window as any)
 
-    wnd.__events__ ??= []
+    wnd.__events__ = []
     wnd.__abort__ = null
 
     const handler = (e: any) => {
@@ -343,7 +345,6 @@ export const subscribeToEvents = (page: Page, ...eventNames: string[]) =>
     }
 
     wnd.__abort__ = () => {
-      wnd.__events__ = []
       controller.abort()
     }
   }, eventNames)

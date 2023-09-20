@@ -185,11 +185,6 @@ test('pagination events', runScreenshotTests('sinch-pagination', [
       expect(
         await getAllEvents(page)
       ).toEqual([
-      ])
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
         { type: 'sinch-pagination-focus', detail: null },
         { type: 'sinch-pagination-blur', detail: null },
         { type: 'sinch-pagination-focus', detail: null },
