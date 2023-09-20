@@ -108,20 +108,11 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
     name: 'native events',
     url: withValue,
     async *fn({ $, page }) {
+      const bb = await centerBB($)
+
       await subscribeToEvents(page, 'sinch-textarea-focus', 'sinch-textarea-blur', 'sinch-textarea-change')
       await page.keyboard.press('Tab')
       await page.mouse.click(0, 0)
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-textarea-focus', detail: null },
-        { type: 'sinch-textarea-blur', detail: null },
-      ])
-
-      await subscribeToEvents(page, 'sinch-textarea-focus', 'sinch-textarea-blur', 'sinch-textarea-change')
-
-      const bb = await centerBB($)
 
       await page.mouse.click(bb.x, bb.y)
       await page.keyboard.press('End')
@@ -130,6 +121,8 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-textarea-focus', detail: null },
+        { type: 'sinch-textarea-blur', detail: null },
         { type: 'sinch-textarea-focus', detail: null },
         { type: 'sinch-textarea-change', detail: 'Input valueX' },
       ])

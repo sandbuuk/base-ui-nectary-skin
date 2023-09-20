@@ -27,23 +27,16 @@ test('toast-manager screenshots', runScreenshotTests('sinch-toast-manager', [
 
       await page.mouse.click(closePt.x, closePt.y)
 
-      yield { name: '2-close', includeRects: [await getRect(page)] }
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-toast-close', detail: null },
-      ])
-
-      await subscribeToEvents(page, 'sinch-toast-action', 'sinch-toast-close', 'sinch-toast-timeout')
-
       /* Action */
       const actionPt = centerRect(await $eval((el) => el.nthActionRect(1)))
 
       await page.mouse.click(actionPt.x, actionPt.y)
 
+      yield { name: '2-close', includeRects: [await getRect(page)] }
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-toast-close', detail: null },
         { type: 'sinch-toast-action', detail: null },
       ])
 

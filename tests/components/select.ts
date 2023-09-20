@@ -177,16 +177,11 @@ test('select events', runScreenshotTests('sinch-popover', [
       await page.keyboard.press('Tab')
       await page.mouse.click(0, 0)
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-select-focus', detail: null },
-        { type: 'sinch-select-blur', detail: null },
-      ])
-
-      await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
-
       await page.keyboard.press('Tab')
+      await page.keyboard.press('Enter')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('Enter')
+
       await page.keyboard.press('Enter')
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
@@ -194,23 +189,14 @@ test('select events', runScreenshotTests('sinch-popover', [
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-select-focus', detail: null },
+        { type: 'sinch-select-blur', detail: null },
         { type: 'sinch-select-focus', detail: null },
         /* We suppress blur event on target when modal open to unify with Firefox */
         // { type: 'sinch-select-blur', detail: null },
         /* We suppress focus event on target when focusing back after modal close */
         // { type: 'sinch-select-focus', detail: null },
         { type: 'sinch-select-change', detail: '1' },
-      ])
-
-      await subscribeToEvents(page, 'sinch-select-focus', 'sinch-select-blur', 'sinch-select-change')
-
-      await page.keyboard.press('Enter')
-      await page.keyboard.press('ArrowDown')
-      await page.keyboard.press('Enter')
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
         /* We suppress blur event on target when modal open to unify with Firefox */
         // { type: 'sinch-select-blur', detail: null },
         /* We suppress focus event on target when focusing back after modal close */
@@ -233,14 +219,6 @@ test('select events', runScreenshotTests('sinch-popover', [
 
       await page.mouse.click(optCt.x, optCt.y)
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-select-change', detail: '1' },
-      ])
-
-      await subscribeToEvents(page, 'sinch-select-change')
-
       await page.mouse.click(btnCt.x, btnCt.y)
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
@@ -248,6 +226,7 @@ test('select events', runScreenshotTests('sinch-popover', [
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-select-change', detail: '1' },
         { type: 'sinch-select-change', detail: '3' },
       ])
     },
