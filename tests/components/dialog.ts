@@ -8,6 +8,8 @@ const withTitleContentButtons = '/dialog?title=Title&buttons=Ok|Cancel&content=C
 const withTitleButtons = '/dialog?title=Title&buttons=Ok|Cancel'
 const withTitleLargeContent = `/dialog?title=Title&content=${longText}`
 const withTitle = '/dialog?title=Title'
+const withLongTitle = `/dialog?title=${longText}`
+const withIcon = '/dialog?title=Title&icon=true'
 
 test('dialog screenshots', runScreenshotTests('sinch-dialog', [
   {
@@ -16,6 +18,20 @@ test('dialog screenshots', runScreenshotTests('sinch-dialog', [
     async *fn({ $eval }) {
       await $eval((el) => el.setAttribute('caption', 'Updated title'))
       yield { name: 'updated', includeRects: [await $eval((el) => el.dialogRect)] }
+    },
+  },
+  {
+    name: 'long caption',
+    url: withLongTitle,
+    async *fn({ $eval }) {
+      yield { name: 'shot', includeRects: [await $eval((el) => el.dialogRect)] }
+    },
+  },
+  {
+    name: 'icon caption',
+    url: withIcon,
+    async *fn({ $eval }) {
+      yield { name: 'shot', includeRects: [await $eval((el) => el.dialogRect)] }
     },
   },
   {

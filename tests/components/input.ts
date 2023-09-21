@@ -428,7 +428,6 @@ test('input screenshots', runScreenshotTests('sinch-input', [
   {
     name: 'native events',
     url: withValue,
-    solo: true,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-input-focus', 'sinch-input-blur', 'sinch-input-change')
       await page.keyboard.press('Tab')
@@ -453,7 +452,6 @@ test('input screenshots', runScreenshotTests('sinch-input', [
   {
     name: 'native mask events',
     url: withMask,
-    solo: true,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-input-change')
 

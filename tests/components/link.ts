@@ -164,7 +164,6 @@ test('link screenshots', runScreenshotTests('sinch-link', [
   {
     name: 'native events',
     url: shot,
-    only: true,
     async *fn({ $, page }) {
       await subscribeToEvents(page, 'sinch-link-focus', 'sinch-link-blur', 'sinch-link-click')
 
