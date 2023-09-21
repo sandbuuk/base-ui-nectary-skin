@@ -41,6 +41,10 @@ dialog::backdrop {
   align-items: flex-start;
   margin-bottom: 12px;
   padding: 0 24px;
+  gap: 8px;
+
+  --sinch-global-size-icon: 24px;
+  --sinch-global-color-icon: var(--sinch-comp-dialog-color-default-icon-initial);
 }
 
 #caption {
@@ -72,14 +76,13 @@ dialog::backdrop {
   position: relative;
   left: 4px;
   top: -4px;
-
-  --sinch-global-color-icon: var(--sinch-comp-dialog-color-default-icon-initial);
 }
 </style>
 
 <dialog id="dialog">
   <div id="header">
-    <sinch-title id="caption" type="m" level="3" ellipsis></sinch-title>
+    <slot id="icon" name="icon"></slot>
+    <sinch-title id="caption" type="m" level="3"></sinch-title>
     <sinch-icon-button id="close" size="s">
       <sinch-icon id="icon-close" slot="icon" name="close"></sinch-icon>
     </sinch-icon-button>

@@ -1,5 +1,6 @@
 <template>
   <sinch-dialog open :caption="title" @--close="onClose">
+    <sinch-icon v-if="icon" slot="icon" name="add_reaction"/>
     <sinch-text v-if="content != null" slot="content" type="m">{{content}}</sinch-text>
     <sinch-button v-if="buttons" text="Cancel" type="secondary" slot="buttons"></sinch-button>
     <sinch-button v-if="buttons" text="Ok" type="primary" slot="buttons"></sinch-button>
@@ -9,6 +10,7 @@
 import '@nectary/components/dialog'
 import '@nectary/components/button'
 import '@nectary/components/text'
+import '@nectary/components/icon'
 
 export default {
   props: {
@@ -23,6 +25,9 @@ export default {
     },
     buttons() {
       return this.$route.query.buttons != null
+    },
+    icon() {
+      return this.$route.query.icon != null
     }
   },
   methods: {

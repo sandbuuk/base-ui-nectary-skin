@@ -11,6 +11,7 @@ import '@nectary/components/text'
 import '@nectary/components/popover'
 import '@nectary/components/help-tooltip'
 import '@nectary/components/tooltip'
+import '@nectary/components/icon'
 
 export const DialogExample: FC = () => {
   const [isDialogOpen, setDialogOpen] = useState(true)
@@ -54,11 +55,12 @@ export const DialogExample: FC = () => {
       />
       <sinch-dialog
         open={isDialogOpen}
-        caption="Dialog"
+        caption="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum"
         aria-label="Dialog"
         close-aria-label="Close dialog"
         on-close={onDialogClose}
       >
+        <sinch-icon slot="icon" name="add_reaction"/>
         <sinch-text slot="content" type="m">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</sinch-text>
         <sinch-popover
           slot="content"
