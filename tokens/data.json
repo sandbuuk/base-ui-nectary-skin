@@ -7123,7 +7123,7 @@
       }
     }
   },
-  "SMB / MessageMedia": {
+  "SaaS/ MessageMedia": {
     "sys": {
       "color": {
         "primary": {
@@ -7684,7 +7684,8 @@
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
       "name": "Sinch brand light",
       "selectedTokenSets": {
-        "Nectary / Base theme": "enabled"
+        "Nectary / Base theme": "enabled",
+        "SaaS/ MessageMedia": "disabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -9680,7 +9681,8 @@
       "name": "Sinch brand dark",
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
-        "Nectary / Dark theme": "enabled"
+        "Nectary / Dark theme": "enabled",
+        "SaaS/ MessageMedia": "disabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -10827,7 +10829,7 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
-        "SMB / MessageMedia": "enabled"
+        "SaaS/ MessageMedia": "enabled"
       },
       "group": "Theme"
     }
@@ -10836,7 +10838,7 @@
     "tokenSetOrder": [
       "Nectary / Base theme",
       "Nectary / Dark theme",
-      "SMB / MessageMedia"
+      "SaaS/ MessageMedia"
     ]
   }
 }
