@@ -1,20 +1,16 @@
 import type { FC } from 'react'
 import '../../../utils/grid-debug'
-import '@sinch-engage/nectary/grid'
-import '@sinch-engage/nectary/grid-item'
-import '@sinch-engage/nectary-assets/illustrations/phone-and-cat'
-import '@sinch-engage/nectary-assets/icons-branded/chatbot'
-import '@sinch-engage/nectary/card'
-import '@sinch-engage/nectary/link'
-import '@sinch-engage/nectary/button'
-
-type TGrid = {
-  search: URLSearchParams,
-}
+import '@nectary/components/grid'
+import '@nectary/components/grid-item'
+import '@nectary/assets/illustrations/phone-and-cat'
+import '@nectary/assets/icons-branded/chatbot'
+import '@nectary/components/card'
+import '@nectary/components/link'
+import '@nectary/components/button'
 
 const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...'
 
-export const Grid: FC<TGrid> = () => {
+export const Grid: FC = () => {
   return (
     <div style={{ position: 'relative' }}>
       <sinch-grid>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/title'
+import { ActivatedRoute } from '@angular/router'
+import '@nectary/components/title'
 
 @Component({
   selector: 'title-component',
@@ -12,10 +13,10 @@ export class TitleComponent {
   type: string | null
   level: string | null
 
-  constructor() {
-    const url = new URL(location.href)
-    this.text = url.searchParams.get('text')
-    this.type = url.searchParams.get('type')
-    this.level = url.searchParams.get('level')
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.text = search.get('text')
+    this.type = search.get('type')
+    this.level = search.get('level')
   }
 }

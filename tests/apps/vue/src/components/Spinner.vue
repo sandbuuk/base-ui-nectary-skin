@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/spinner'
+import '@nectary/components/spinner'
 
 export default {
   props: {
@@ -11,7 +11,7 @@ export default {
   },
   computed: {
     size() {
-      return this.search.get('size')
+      return this.$route.query.size
     },
   }
 }

@@ -28,11 +28,11 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/action-menu'
-import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/button'
+import '@nectary/components/popover'
+import '@nectary/components/action-menu'
+import '@nectary/components/action-menu-option'
+import '@nectary/assets/icons/open-in-new'
 
 export default {
   methods: {
@@ -58,8 +58,8 @@ export default {
   },
   computed: {
     rows() {
-      const val = this.search.get('rows')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.rows
+      return val != null ? parseInt(val) : null
     },
     options() {
       return {

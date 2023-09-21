@@ -179,16 +179,17 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
     const isWebkit = info.project.name.startsWith('webkit-')
     const isChromium = info.project.name.startsWith('chromium-')
     const runInPage = async (t: TScreenshotTest<T>, page: Page) => {
-      let after: (() => Promise<void>) | void
+      let after: (() => Promise<void>) | null = null
 
       try {
-        if (t.before != null) {
-          after = await t.before({ page })
+        if (typeof t.before === 'function') {
+          after = await t.before({ page }) ?? null
         }
 
-        await page.goto(t.url)
+        await page.evaluate((url) => {
+          window.location.assign(url)
+        }, t.url)
         await page.waitForSelector(elementSelector, { state: 'attached' })
-        await page.evaluate(() => document.fonts.ready)
         await page.mouse.move(0, 0)
 
         const locator = page.locator(elementSelector).nth(0)
@@ -214,7 +215,7 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
           expect(sc, t.name).toMatchSnapshot(screenshotName)
         }
       } finally {
-        if (after != null) {
+        if (typeof after === 'function') {
           await after()
         }
       }
@@ -233,6 +234,11 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
 
     pages.forEach(overridePageKeyboard)
     pages.forEach(overridePageMouse)
+
+    await Promise.all(pages.map(async (page) => {
+      await page.goto('/')
+      await page.evaluate(() => document.fonts.ready)
+    }))
 
     // Optionally subscribe to page console output
     // pages.forEach((page) => {

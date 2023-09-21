@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/link'
+import '@nectary/components/link'
 
 export const ClickExample: FC = () => (
   <sinch-link

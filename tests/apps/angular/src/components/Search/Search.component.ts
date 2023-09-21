@@ -1,12 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/action-menu'
-import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
-import { TSinchInputElement } from '@sinch-engage/nectary/input/types'
+import '@nectary/components/popover'
+import '@nectary/components/field'
+import '@nectary/components/input'
+import '@nectary/components/action-menu'
+import '@nectary/components/action-menu-option'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
+import { TSinchInputElement } from '@nectary/components/input/types'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'search-component',
@@ -29,11 +30,11 @@ export class SearchComponent {
   //@ts-expect-error
   @ViewChild('input') inputRef: ElementRef<TSinchInputElement>;
 
-  constructor() {
-    const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? ''
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.value = search.get('value') ?? ''
 
-    const numVisibleValue = url.searchParams.get('maxvisibleitems')
+    const numVisibleValue = search.get('maxvisibleitems')
     this.maxVisibleItems = numVisibleValue !== null ? parseInt(numVisibleValue) : null
   }
   onChange(e: Event) {

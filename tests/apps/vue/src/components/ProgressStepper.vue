@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/progress-stepper'
-import '@sinch-engage/nectary/progress-stepper-item'
+import '@nectary/components/progress-stepper'
+import '@nectary/components/progress-stepper-item'
 
 export default {
   props: {
@@ -39,13 +39,13 @@ export default {
   },
   computed: {
     invalidValue() {
-      return this.search.get('invalid') ?? ''
+      return this.$route.query.invalid ?? ''
     },
     progressValue() {
-      return this.search.get('progress') ?? ''
+      return this.$route.query.progress ?? ''
     },
     example() {
-      return this.search.get('example')
+      return this.$route.query.example
     }
   },
   data() {

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/color-swatch'
+import '@nectary/components/color-swatch'
 
 export default {
   props: {
@@ -11,7 +11,7 @@ export default {
   },
   computed: {
     name() {
-      return this.search.get('name') ?? ''
+      return this.$route.query.name ?? ''
     },
   },
 }

@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/segmented-icon-control'
-import '@sinch-engage/nectary/segmented-icon-control-option'
-import '@sinch-engage/nectary-assets/icons/format-align-center'
-import '@sinch-engage/nectary-assets/icons/format-align-justify'
-import '@sinch-engage/nectary-assets/icons/format-align-right'
-import '@sinch-engage/nectary-assets/icons/format-align-left'
+import '@nectary/components/segmented-icon-control'
+import '@nectary/components/segmented-icon-control-option'
+import '@nectary/assets/icons/format-align-center'
+import '@nectary/assets/icons/format-align-justify'
+import '@nectary/assets/icons/format-align-right'
+import '@nectary/assets/icons/format-align-left'
 
 export default {
   props: {
@@ -39,18 +39,18 @@ export default {
   },
   computed: {
     isControlled() {
-      return this.search.get('uncontrolled') === null
+      return this.$route.query.uncontrolled == null
     },
     isMultiple() {
-      return this.search.get('multiple') !== null
+      return this.$route.query.multiple != null
     },
     isSingleOption() {
-      return this.search.get('single-option') !== null
+      return this.$route.query['single-option'] != null
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

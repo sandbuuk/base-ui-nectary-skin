@@ -1,15 +1,13 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/file-status'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/progress'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@nectary/components/file-status'
+import '@nectary/components/icon-button'
+import '@nectary/components/text'
+import '@nectary/components/progress'
+import '@nectary/assets/icons/close'
 
-type TFileStatus = {
-  search: URLSearchParams,
-}
-
-export const FileStatus: FC<TFileStatus> = ({ search }) => {
+export const FileStatus: FC = () => {
+  const [search] = useSearchParams()
   const type: any = search.get('type')
   const filename = search.get('filename') ?? ''
   const hasDescription = search.get('description') !== null

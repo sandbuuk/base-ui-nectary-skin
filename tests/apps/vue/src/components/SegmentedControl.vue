@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/segmented-control'
-import '@sinch-engage/nectary/segmented-control-option'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/segmented-control'
+import '@nectary/components/segmented-control-option'
+import '@nectary/assets/icons/open-in-new'
 
 export default {
   props: {
@@ -32,15 +32,15 @@ export default {
   },
   computed: {
     isControlled() {
-      return this.search.get('uncontrolled') === null
+      return this.$route.query.uncontrolled == null
     },
     isSingleOption() {
-      return this.search.get('single-option') !== null
+      return this.$route.query['single-option'] != null
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

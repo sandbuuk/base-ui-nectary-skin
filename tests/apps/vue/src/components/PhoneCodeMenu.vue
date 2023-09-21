@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/flag'
-import countriesJson from '@sinch-engage/nectary/utils/countries.json'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/components/flag'
+import countriesJson from '@nectary/components/utils/countries.json'
 
 const countries = Object.entries(countriesJson)
 
@@ -36,8 +36,8 @@ export default {
   },
   computed: {
     rows() {
-      const val = this.search.get('rows')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.rows
+      return val != null ? parseInt(val) : null
     },
     countries() {
       return countries
@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

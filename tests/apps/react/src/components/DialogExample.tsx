@@ -1,22 +1,18 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/dialog'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/action-menu'
-import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/flag'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/help-tooltip'
-import '@sinch-engage/nectary/tooltip'
+import '@nectary/components/dialog'
+import '@nectary/components/input'
+import '@nectary/components/field'
+import '@nectary/components/button'
+import '@nectary/components/action-menu'
+import '@nectary/components/action-menu-option'
+import '@nectary/components/flag'
+import '@nectary/components/text'
+import '@nectary/components/popover'
+import '@nectary/components/help-tooltip'
+import '@nectary/components/tooltip'
 
-type TDialog = {
-  search: URLSearchParams,
-}
-
-export const DialogExample: FC<TDialog> = () => {
+export const DialogExample: FC = () => {
   const [isDialogOpen, setDialogOpen] = useState(true)
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [value, setValue] = useState('')

@@ -1,5 +1,5 @@
 {
-  "name": "@sinch-engage/eslint-plugin-nectary",
+  "name": "@nectary/eslint-plugin",
   "version": "0.0.1",
   "main": "./index.js",
   "peerDependencies": {

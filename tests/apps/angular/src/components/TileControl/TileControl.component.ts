@@ -1,16 +1,17 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/tile-control'
-import '@sinch-engage/nectary/tile-control-option'
-import '@sinch-engage/nectary-assets/icons/accessibility'
-import '@sinch-engage/nectary-assets/icons/chat'
-import '@sinch-engage/nectary-assets/icons/title'
-import '@sinch-engage/nectary-assets/icons/format-align-left'
-import '@sinch-engage/nectary-assets/icons/qr-code'
-import '@sinch-engage/nectary-assets/icons/library-add-check'
-import '@sinch-engage/nectary-assets/icons/smart-button'
-import '@sinch-engage/nectary-assets/icons/add-to-home-screen'
-import '@sinch-engage/nectary-assets/icons/camera'
-import '@sinch-engage/nectary-assets/icons/alarm-add'
+import '@nectary/components/tile-control'
+import '@nectary/components/tile-control-option'
+import '@nectary/assets/icons/accessibility'
+import '@nectary/assets/icons/chat'
+import '@nectary/assets/icons/title'
+import '@nectary/assets/icons/format-align-left'
+import '@nectary/assets/icons/qr-code'
+import '@nectary/assets/icons/library-add-check'
+import '@nectary/assets/icons/smart-button'
+import '@nectary/assets/icons/add-to-home-screen'
+import '@nectary/assets/icons/camera'
+import '@nectary/assets/icons/alarm-add'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'tile-control-component',
@@ -26,9 +27,8 @@ export class TileControlComponent {
   isMultiple: boolean
   numCols: number
 
-  constructor() {
-    const url = new URL(location.href)
-    const search = url.searchParams
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
     this.isControlled = search.get('uncontrolled') === null
     this.isSingleOption = search.get('single') !== null
@@ -36,7 +36,7 @@ export class TileControlComponent {
     this.isMultiple = search.get('multiple') !== null
     this.value = search.get('value') ?? ''
 
-    const numCols = url.searchParams.get('cols')
+    const numCols = search.get('cols')
     this.numCols = numCols !== null ? parseInt(numCols) : 1
   }
 

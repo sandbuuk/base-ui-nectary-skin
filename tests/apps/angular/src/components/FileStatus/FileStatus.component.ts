@@ -1,9 +1,10 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/file-status'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/progress'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@nectary/components/file-status'
+import '@nectary/components/icon-button'
+import '@nectary/components/text'
+import '@nectary/components/progress'
+import '@nectary/assets/icons/close'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'file-status-component',
@@ -16,12 +17,12 @@ export class FileStatusComponent {
   filename: string | null
   hasDescription: boolean
   hasProgress: boolean
-  constructor() {
-    const url = new URL(location.href)
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
-    this.type = url.searchParams.get('type')
-    this.filename = url.searchParams.get('filename')
-    this.hasDescription = url.searchParams.get('description') !== null
-    this.hasProgress = url.searchParams.get('progress') !== null
+    this.type = search.get('type')
+    this.filename = search.get('filename')
+    this.hasDescription = search.get('description') !== null
+    this.hasProgress = search.get('progress') !== null
   }
 }

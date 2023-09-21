@@ -1,14 +1,12 @@
 import { useCallback } from 'react'
-import type { TSinchTooltipType } from '@sinch-engage/nectary/tooltip/types'
+import { useSearchParams } from 'react-router-dom'
+import type { TSinchTooltipType } from '@nectary/components/tooltip/types'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/tooltip'
+import '@nectary/components/text'
+import '@nectary/components/tooltip'
 
-type TTooltip = {
-  search: URLSearchParams,
-}
-
-export const Tooltip: FC<TTooltip> = ({ search }) => {
+export const Tooltip: FC = () => {
+  const [search] = useSearchParams()
   const text: any = search.get('text')
   const type = search.get('type') as TSinchTooltipType ?? undefined
   const orientation: any = search.get('orientation')

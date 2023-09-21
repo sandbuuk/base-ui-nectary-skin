@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/alert'
+import '@nectary/components/alert'
 
 export const TypeWarningExample: FC = () => (
   <sinch-alert type="warn" text="Warning text"/>

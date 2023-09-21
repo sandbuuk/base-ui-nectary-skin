@@ -1,5 +1,5 @@
+import { sizeValues } from '@nectary/components/rich-text/utils'
 import { expect, test } from '@playwright/test'
-import { sizeValues } from '@sinch-engage/nectary/rich-text/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 

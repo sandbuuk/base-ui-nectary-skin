@@ -1,8 +1,9 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/flag'
-import countriesJson from '@sinch-engage/nectary/utils/countries.json'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/components/flag'
+import countriesJson from '@nectary/components/utils/countries.json'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'phone-code-menu-component',
@@ -15,11 +16,11 @@ export class PhoneCodeMenuComponent {
   rows: number | null
   countries = countriesJson
 
-  constructor() {
-    const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? ''
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.value = search.get('value') ?? ''
 
-    const numVisibleValue = url.searchParams.get('rows')
+    const numVisibleValue = search.get('rows')
     this.rows = numVisibleValue !== null ? parseInt(numVisibleValue) : null
   }
 

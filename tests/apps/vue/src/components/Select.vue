@@ -46,15 +46,15 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
-import '@sinch-engage/nectary-assets/icons/search'
+import '@nectary/components/field'
+import '@nectary/components/input'
+import '@nectary/components/select-button'
+import '@nectary/components/popover'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/components/tag'
+import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/search'
 
 const optionsLong = {
   1: { text: 'Option 1 value long long long', icon: '1' },
@@ -100,11 +100,11 @@ export default {
   },
   computed: {
     rows() {
-      const val = this.search.get('rows')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.rows
+      return val != null ? parseInt(val) : null
     },
     items() {
-      return this.search.get('example') === 'lots'
+      return this.$route.query.example === 'lots'
         ? optionsLong
         : optionsShort
     },
@@ -112,25 +112,25 @@ export default {
       return this.items[this.value]?.text ?? ''
     },
     size() {
-      return this.search.get('size')
+      return this.$route.query.size
     },
     hasLeft() {
-      return this.search.get('left') !== null
+      return this.$route.query.left != null
     },
     hasIcon() {
-      return this.search.get('icon') !== null
+      return this.$route.query.icon != null
     },
     isInvalid() {
-      return this.search.get('invalid') !== null
+      return this.$route.query.invalid != null
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     }
   },
   data() {
     return {
       isOpen: false,
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

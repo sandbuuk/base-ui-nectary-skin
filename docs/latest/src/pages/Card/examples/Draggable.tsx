@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
-import type { TSinchCardElement } from '@sinch-engage/nectary/card/types'
+import type { TSinchCardElement } from '@nectary/components/card/types'
 import type { CSSProperties, FC, SyntheticEvent } from 'react'
-import '@sinch-engage/nectary/card'
-import '@sinch-engage/nectary-assets/icons-branded/chatbot'
+import '@nectary/components/card'
+import '@nectary/assets/icons-branded/chatbot'
 
 const columnStyle: CSSProperties = {
   display: 'flex',

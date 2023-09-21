@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/link'
+import '@nectary/components/text'
+import '@nectary/components/link'
 
 export const StandaloneExternalExample: FC = () => (
   <sinch-text type="m">

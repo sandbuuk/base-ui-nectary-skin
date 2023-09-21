@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/radio'
-import '@sinch-engage/nectary/radio-option'
+import '@nectary/components/radio'
+import '@nectary/components/radio-option'
 
 const options = [{
   value: '1',
@@ -46,13 +46,13 @@ export default {
   },
   computed: {
     isControlled() {
-      return this.search.get('uncontrolled') === null
+      return this.$route.query.uncontrolled == null
     },
     isInvalid() {
-      return this.search.get('invalid') !== null
+      return this.$route.query.invalid != null
     },
     options() {
-      const example = this.search.get('example')
+      const example = this.$route.query.example
 
       return example === 'single'
         ? singleOption
@@ -61,7 +61,7 @@ export default {
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary/color-swatch'
-import '@sinch-engage/nectary/color-menu'
-import '@sinch-engage/nectary/color-menu-option'
+import '@nectary/components/popover'
+import '@nectary/components/select-button'
+import '@nectary/components/color-swatch'
+import '@nectary/components/color-menu'
+import '@nectary/components/color-menu-option'
 
 const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
 const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
@@ -60,27 +60,27 @@ export default {
   },
   computed: {
     rows() {
-      const val = this.search.get('rows')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.rows
+      return val != null ? parseInt(val) : null
     },
     cols() {
-      const val = this.search.get('cols')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.cols
+      return val != null ? parseInt(val) : null
     },
     colors() {
       return colors
     },
     isInvalid() {
-      return this.search.get('invalid') !== null
+      return this.$route.query.invalid != null
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     }
   },
   data() {
     return {
       isOpen: false,
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

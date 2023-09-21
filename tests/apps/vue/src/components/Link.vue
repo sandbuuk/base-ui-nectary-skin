@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/link'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/link'
+import '@nectary/components/text'
 
 export default {
   props: {
@@ -37,19 +37,19 @@ export default {
   },
   computed: {
     text() {
-      return this.search.get('text')
+      return this.$route.query.text
     },
     href() {
-      return this.search.get('href')
+      return this.$route.query.href
     },
     isDisabled() {
-      return this.search.get('disabled') != null
+      return this.$route.query.disabled != null
     },
     isExternal() {
-      return this.search.get('external') != null
+      return this.$route.query.external != null
     },
     isStandalone() {
-      return this.search.get('standalone') != null
+      return this.$route.query.standalone != null
     },
   },
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/avatar'
-import '@sinch-engage/nectary/badge'
+import { ActivatedRoute } from '@angular/router'
+import '@nectary/components/avatar'
+import '@nectary/components/badge'
 
 @Component({
   selector: 'avatar-component',
@@ -16,13 +17,13 @@ export class AvatarComponent {
   hasBadge: boolean
   status?: string
 
-  constructor() {
-    const url = new URL(location.href)
-    this.alt = url.searchParams.get('alt') ?? undefined
-    this.src = url.searchParams.get('src') ?? undefined
-    this.color = url.searchParams.get('color') ?? undefined
-    this.size = url.searchParams.get('size') ?? undefined
-    this.hasBadge = url.searchParams.get('badge') !== null
-    this.status = url.searchParams.get('status') ?? undefined
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.alt = search.get('alt') ?? undefined
+    this.src = search.get('src') ?? undefined
+    this.color = search.get('color') ?? undefined
+    this.size = search.get('size') ?? undefined
+    this.hasBadge = search.get('badge') !== null
+    this.status = search.get('status') ?? undefined
   }
 }

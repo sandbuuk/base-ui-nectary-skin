@@ -1,6 +1,6 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/title'
+import '@nectary/components/tag'
+import '@nectary/components/title'
 
 const rowsWrapperStyles: CSSProperties = {
   display: 'flex',

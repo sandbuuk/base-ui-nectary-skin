@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/file-drop'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/file-drop'
+import '@nectary/components/button'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'file-drop-component',
@@ -14,13 +15,13 @@ export class FileDropComponent {
   isInvalid: boolean
   accept: string | null
 
-  constructor() {
-    const url = new URL(location.href)
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
-    this.isMultiple = url.searchParams.get('multiple') !== null
-    this.isDisabled = url.searchParams.get('disabled') !== null
-    this.isInvalid = url.searchParams.get('invalid') !== null
-    this.accept = url.searchParams.get('accept')
+    this.isMultiple = search.get('multiple') !== null
+    this.isDisabled = search.get('disabled') !== null
+    this.isInvalid = search.get('invalid') !== null
+    this.accept = search.get('accept')
   }
 
   onChange(e: CustomEvent) {

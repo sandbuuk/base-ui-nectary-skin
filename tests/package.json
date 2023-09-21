@@ -24,10 +24,10 @@
     "remove-empty-dirs": "find ./test-results -type d -empty -delete"
   },
   "devDependencies": {
+    "@nectary/components": "workspace:*",
     "@playwright/test": "1.33.0",
-    "@sinch-engage/nectary": "workspace:*",
-    "@types/node": "^18.16.0",
-    "axe-core": "^4.6.3",
+    "@types/node": "^18.17.17",
+    "axe-core": "^4.8.1",
     "concurrently": "^7.6.0",
     "piall": "^0.2.1",
     "playwright-core": "1.33.0",

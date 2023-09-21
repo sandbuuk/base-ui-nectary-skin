@@ -1,13 +1,11 @@
 import { useCallback } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/link'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/link'
+import '@nectary/components/text'
 
-type TLink = {
-  search: URLSearchParams,
-}
-
-export const Link: FC<TLink> = ({ search }) => {
+export const Link: FC = () => {
+  const [search] = useSearchParams()
   const text = search.get('text') ?? ''
   const href = search.get('href') ?? ''
   const isDisabled = search.get('disabled') !== null

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/link'
-import '@sinch-engage/nectary/text'
+import { ActivatedRoute } from '@angular/router'
+import '@nectary/components/link'
+import '@nectary/components/text'
 
 @Component({
   selector: 'link-component',
@@ -15,13 +16,13 @@ export class LinkComponent {
   isExternal: boolean
   isStandalone: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.href = url.searchParams.get('href')
-    this.text = url.searchParams.get('text')
-    this.isDisabled = url.searchParams.get('disabled') != null
-    this.isExternal = url.searchParams.get('external') != null
-    this.isStandalone = url.searchParams.get('standalone') != null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.href = search.get('href')
+    this.text = search.get('text')
+    this.isDisabled = search.get('disabled') != null
+    this.isExternal = search.get('external') != null
+    this.isStandalone = search.get('standalone') != null
   }
 
   onClick(e: Event) {

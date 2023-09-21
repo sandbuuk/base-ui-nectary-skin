@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/assets/icons/open-in-new'
+import { ActivatedRoute } from '@angular/router'
 
 const optionsLong: Record<string, TMenuValue> = {
   1: { text: 'Option 1 value long long long', icon: '1' },
@@ -39,15 +40,15 @@ export class SelectMenuComponent {
   isMultiple: boolean
   options: Record<string, TMenuValue>
 
-  constructor() {
-    const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? ''
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.value = search.get('value') ?? ''
 
-    const numVisibleValue = url.searchParams.get('rows')
+    const numVisibleValue = search.get('rows')
     this.rows = numVisibleValue !== null ? parseInt(numVisibleValue) : null
-    this.isMultiple = url.searchParams.get('multiple') !== null
+    this.isMultiple = search.get('multiple') !== null
 
-    this.options = url.searchParams.get('example') === 'lots'
+    this.options = search.get('example') === 'lots'
       ? optionsLong
       : optionsShort
   }

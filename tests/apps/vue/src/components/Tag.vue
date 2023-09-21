@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/tag'
+import '@nectary/assets/icons/open-in-new'
 
 export default {
   props: {
@@ -18,16 +18,16 @@ export default {
   },
   computed: {
     text() {
-      return this.search.get('text') ?? ''
+      return this.$route.query.text ?? ''
     },
     color() {
-      return this.search.get('color') ?? ''
+      return this.$route.query.color ?? ''
     },
     isSmall() {
-      return this.search.get('small') != null
+      return this.$route.query.small != null
     },
     hasIcon() {
-      return this.search.get('icon') != null
+      return this.$route.query.icon != null
     },
   },
 }

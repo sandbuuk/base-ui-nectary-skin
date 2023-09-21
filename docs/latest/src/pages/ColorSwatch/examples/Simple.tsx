@@ -1,12 +1,12 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/table'
-import '@sinch-engage/nectary/table-head'
-import '@sinch-engage/nectary/table-body'
-import '@sinch-engage/nectary/table-row'
-import '@sinch-engage/nectary/table-head-cell'
-import '@sinch-engage/nectary/table-cell'
-import '@sinch-engage/nectary/color-swatch'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/table'
+import '@nectary/components/table-head'
+import '@nectary/components/table-body'
+import '@nectary/components/table-row'
+import '@nectary/components/table-head-cell'
+import '@nectary/components/table-cell'
+import '@nectary/components/color-swatch'
+import '@nectary/components/text'
 
 const tableStyles: CSSProperties = {
   width: 300,

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/title'
-import '@sinch-engage/nectary/card-container'
+import '@nectary/components/text'
+import '@nectary/components/title'
+import '@nectary/components/card-container'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'card-container-component',
@@ -21,7 +22,5 @@ import '@sinch-engage/nectary/card-container'
 })
 
 export class CardContainerComponent {
-  constructor() {
-    const url = new URL(location.href)
-  }
+  constructor() {}
 }

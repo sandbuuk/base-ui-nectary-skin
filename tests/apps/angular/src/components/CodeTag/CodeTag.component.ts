@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/code-tag'
-import '@sinch-engage/nectary/text'
+import { ActivatedRoute } from '@angular/router'
+import '@nectary/components/code-tag'
+import '@nectary/components/text'
 
 @Component({
   selector: 'code-tag-component',
@@ -12,9 +13,9 @@ export class CodeTagComponent {
   text: string | null
   isEllipsis: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.text = url.searchParams.get('text')
-    this.isEllipsis = url.searchParams.get('ellipsis') !== null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.text = search.get('text')
+    this.isEllipsis = search.get('ellipsis') !== null
   }
 }

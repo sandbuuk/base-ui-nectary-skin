@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
+import { ActivatedRouteSnapshot, RouterModule } from '@angular/router'
 import { AccordionComponent } from '../components/Accordion/Accordion.component'
 import { ActionDropdownComponent } from '../components/ActionDropdown/ActionDropdown.component'
 import { ActionMenuComponent } from '../components/ActionMenu/ActionMenu.component'
@@ -60,6 +61,7 @@ import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { VerticalStepper } from '../components/VerticalStepper/VerticalStepper.component'
 import { AppComponent } from './app.component'
+import appRoutes from './router-config';
 
 @NgModule({
   declarations: [
@@ -129,6 +131,7 @@ import { AppComponent } from './app.component'
   imports: [
     BrowserModule,
     CommonModule,
+    RouterModule.forRoot(appRoutes)
   ],
   exports: [
     AppComponent,

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/title'
+import '@nectary/components/title'
 
 export default {
   props: {
@@ -15,13 +15,13 @@ export default {
   },
   computed: {
     text() {
-      return this.search.get('text')
+      return this.$route.query.text
     },
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     },
     level() {
-      return this.search.get('level')
+      return this.$route.query.level
     },
   },
 }

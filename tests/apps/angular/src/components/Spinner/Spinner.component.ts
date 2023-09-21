@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/spinner'
+import { ActivatedRoute } from '@angular/router'
+import '@nectary/components/spinner'
 
 @Component({
   selector: 'spinner-component',
@@ -10,8 +11,8 @@ import '@sinch-engage/nectary/spinner'
 export class SpinnerComponent {
   size: string | null
 
-  constructor() {
-    const url = new URL(location.href)
-    this.size = url.searchParams.get('size')
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.size = search.get('size')
   }
 }

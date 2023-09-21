@@ -1,13 +1,11 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/progress-stepper'
-import '@sinch-engage/nectary/progress-stepper-item'
+import '@nectary/components/progress-stepper'
+import '@nectary/components/progress-stepper-item'
 
-type TProgressStepper = {
-  search: URLSearchParams,
-}
-
-export const ProgressStepper: FC<TProgressStepper> = ({ search }) => {
+export const ProgressStepper: FC = () => {
+  const [search] = useSearchParams()
   const [step, setStep] = useState(() => search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

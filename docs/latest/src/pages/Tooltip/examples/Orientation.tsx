@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/tooltip'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/tooltip'
+import '@nectary/components/button'
 
 export const OrientationExample: FC = () => {
   return (

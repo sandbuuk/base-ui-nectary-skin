@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import type { TSinchInputClipboardEvent } from '@sinch-engage/nectary/input/types'
+import type { TSinchInputClipboardEvent } from '@nectary/components/input/types'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/input'
+import '@nectary/components/input'
 
 export const MaskedPhoneExample: FC = () => {
   const [state, setState] = useState('')

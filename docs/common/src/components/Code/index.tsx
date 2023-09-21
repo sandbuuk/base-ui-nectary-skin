@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { SyntaxHighlighter } from '../SyntaxHighlighter'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/content-copy'
-import '@sinch-engage/nectary-assets/icons/keyboard-arrow-down'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/content-copy'
+import '@nectary/assets/icons/keyboard-arrow-down'
 import './styles.css'
 
 export type TCode = {

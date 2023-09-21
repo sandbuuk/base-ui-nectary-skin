@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/tabs'
-import '@sinch-engage/nectary/tabs-option'
-import '@sinch-engage/nectary/tabs-icon-option'
+import '@nectary/components/tabs'
+import '@nectary/components/tabs-option'
+import '@nectary/components/tabs-icon-option'
 
 export default {
   props: {
@@ -59,10 +59,10 @@ export default {
   },
   computed: {
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     },
     example() {
-      return this.search.get('example')
+      return this.$route.query.example
     }
   },
   data() {

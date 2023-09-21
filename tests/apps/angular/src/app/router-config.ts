@@ -1,0 +1,122 @@
+import { Routes } from '@angular/router';
+import { AccordionComponent } from '../components/Accordion/Accordion.component'
+import { ActionDropdownComponent } from '../components/ActionDropdown/ActionDropdown.component'
+import { ActionMenuComponent } from '../components/ActionMenu/ActionMenu.component'
+import { AlertComponent } from '../components/Alert/Alert.component'
+import { AvatarComponent } from '../components/Avatar/Avatar.component'
+import { BadgeComponent } from '../components/Badge/Badge.component'
+import { ButtonComponent } from '../components/Button/Button.component'
+import { CardComponent } from '../components/Card/Card.component'
+import { CardDnDComponent } from '../components/CardDnD/CardDnD.component'
+import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
+import { ChatComponent } from '../components/Chat/Chat.component'
+import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
+import { ChipComponent } from '../components/Chip/Chip.component'
+import { CodeTagComponent } from '../components/CodeTag/CodeTag.component'
+import { ColorMenuComponent } from '../components/ColorMenu/ColorMenu.component'
+import { ColorSelectComponent } from '../components/ColorSelect/ColorSelect.component'
+import { ColorSwatchComponent } from '../components/ColorSwatch/ColorSwatch.component'
+import { DatePickerComponent } from '../components/DatePicker/DatePicker.component'
+import { DialogComponent } from '../components/Dialog/Dialog.component'
+import { EmojiPickerComponent } from '../components/EmojiPicker/EmojiPicker.component'
+import { GridComponent } from '../components/Grid/Grid.component'
+import { HorizontalStepper } from '../components/HorizontalStepper/HorizontalStepper.component'
+import { IconButtonComponent } from '../components/IconButton/IconButton.component'
+import { InlineAlertComponent } from '../components/InlineAlert/InlineAlert.component'
+import { InputComponent } from '../components/Input/Input.component'
+import { FieldComponent } from '../components/Field/Field.component'
+import { FileDropComponent } from '../components/FileDrop/FileDrop.component'
+import { FilePickerComponent } from '../components/FilePicker/FilePicker.component'
+import { FileStatusComponent } from '../components/FileStatus/FileStatus.component'
+import { LinkComponent } from '../components/Link/Link.component'
+import { ListComponent } from '../components/List/List.component'
+import { PaginationComponent } from '../components/Pagination/Pagination.component'
+import { PhoneCodeMenuComponent } from '../components/PhoneCodeMenu/PhoneCodeMenu.component'
+import { PopoverComponent } from '../components/Popover/Popover.component'
+import { ProgressComponent } from '../components/Progress/Progress.component'
+import { ProgressStepperComponent } from '../components/ProgressStepper/ProgressStepper.component'
+import { RadioComponent } from '../components/Radio/Radio.component'
+import { RichTextComponent } from '../components/RichText/RichText.component'
+import { SearchComponent } from '../components/Search/Search.component'
+import { SegmentComponent } from '../components/Segment/Segment.component'
+import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
+import { SegmentedIconControlComponent } from '../components/SegmentedIconControl/SegmentedIconControl.component'
+import { SelectComponent } from '../components/Select/Select.component'
+import { SelectMenuComponent } from '../components/SelectMenu/SelectMenu.component'
+import { SkeletonComponent } from '../components/Skeleton/Skeleton.component'
+import { SpinnerComponent } from '../components/Spinner/Spinner.component'
+import { TableComponent } from '../components/Table/Table.component'
+import { TabsComponent } from '../components/Tabs/Tabs.component'
+import { TagComponent } from '../components/Tag/Tag.component'
+import { TextareaComponent } from '../components/Textarea/Textarea.component'
+import { TextComponent } from '../components/Text/Text.component'
+import { TileControlComponent } from '../components/TileControl/TileControl.component'
+import { TimePickerComponent } from '../components/TimePicker/TimePicker.component'
+import { TitleComponent } from '../components/Title/Title.component'
+import { ToastManagerComponent } from '../components/ToastManager/ToastManager.component'
+import { ToggleComponent } from '../components/Toggle/Toggle.component'
+import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
+import { VerticalStepper } from '../components/VerticalStepper/VerticalStepper.component'
+
+const appRoutes: Routes = [
+  { path: "accordion", component: AccordionComponent },
+  { path: "action-dropdown", component: ActionDropdownComponent },
+  { path: "action-menu", component: ActionMenuComponent },
+  { path: "alert", component: AlertComponent },
+  { path: "avatar", component: AvatarComponent },
+  { path: "badge", component: BadgeComponent },
+  { path: "button", component: ButtonComponent },
+  { path: "card-container", component: CardContainerComponent },
+  { path: "card-dnd", component: CardDnDComponent },
+  { path: "card", component: CardComponent },
+  { path: "chat", component: ChatComponent },
+  { path: "checkbox", component: CheckboxComponent },
+  { path: "chip", component: ChipComponent },
+  { path: "code-tag", component: CodeTagComponent },
+  { path: "color-menu", component: ColorMenuComponent },
+  { path: "color-select", component: ColorSelectComponent },
+  { path: "color-swatch", component: ColorSwatchComponent },
+  { path: "date-picker", component: DatePickerComponent },
+  { path: "dialog", component: DialogComponent },
+  { path: "emoji-picker", component: EmojiPickerComponent },
+  { path: "field", component: FieldComponent },
+  { path: "file-drop", component: FileDropComponent },
+  { path: "file-picker", component: FilePickerComponent },
+  { path: "file-status", component: FileStatusComponent },
+  { path: "grid", component: GridComponent },
+  { path: "horizontal-stepper", component: HorizontalStepper },
+  { path: "icon-button", component: IconButtonComponent },
+  { path: "inline-alert", component: InlineAlertComponent },
+  { path: "input", component: InputComponent },
+  { path: "link", component: LinkComponent },
+  { path: "list", component: ListComponent },
+  { path: "pagination", component: PaginationComponent },
+  { path: "phone-code-menu", component: PhoneCodeMenuComponent },
+  { path: "popover", component: PopoverComponent },
+  { path: "progress-stepper", component: ProgressStepperComponent },
+  { path: "progress", component: ProgressComponent },
+  { path: "radio", component: RadioComponent },
+  { path: "rich-text", component: RichTextComponent },
+  { path: "search", component: SearchComponent },
+  { path: "segment", component: SegmentComponent },
+  { path: "segmented-control", component: SegmentedControlComponent },
+  { path: "segmented-icon-control", component: SegmentedIconControlComponent },
+  { path: "select-menu", component: SelectMenuComponent },
+  { path: "select", component: SelectComponent },
+  { path: "skeleton", component: SkeletonComponent },
+  { path: "spinner", component: SpinnerComponent },
+  { path: "table", component: TableComponent },
+  { path: "tabs", component: TabsComponent },
+  { path: "tag", component: TagComponent },
+  { path: "text", component: TextComponent },
+  { path: "textarea", component: TextareaComponent },
+  { path: "tile-control", component: TileControlComponent },
+  { path: "time-picker", component: TimePickerComponent },
+  { path: "title", component: TitleComponent },
+  { path: "toast-manager", component: ToastManagerComponent },
+  { path: "toggle", component: ToggleComponent },
+  { path: "tooltip", component: TooltipComponent },
+  { path: "vertical-stepper", component: VerticalStepper },
+];
+
+export default appRoutes;

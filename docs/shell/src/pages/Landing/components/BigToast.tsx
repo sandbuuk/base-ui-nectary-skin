@@ -1,8 +1,8 @@
 import './styles.css'
-import '@sinch-engage/nectary-assets/illustrations/lightbulb'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/title'
+import '@nectary/assets/illustrations/lightbulb'
+import '@nectary/assets/icons/open-in-new'
+import '@nectary/components/button'
+import '@nectary/components/title'
 import { useNavigate } from 'react-router-dom'
 import { useNavigateLink } from '~/hooks'
 

@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/tabs'
-import '@sinch-engage/nectary/tabs-icon-option'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary-assets/icons/sentiment-dissatisfied'
-import '@sinch-engage/nectary-assets/icons/sports-handball'
-import '@sinch-engage/nectary-assets/icons/reduce-capacity'
-import '@sinch-engage/nectary-assets/icons/emoji-people'
+import '@nectary/components/tabs'
+import '@nectary/components/tabs-icon-option'
+import '@nectary/components/text'
+import '@nectary/assets/icons/sentiment-dissatisfied'
+import '@nectary/assets/icons/sports-handball'
+import '@nectary/assets/icons/reduce-capacity'
+import '@nectary/assets/icons/emoji-people'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',

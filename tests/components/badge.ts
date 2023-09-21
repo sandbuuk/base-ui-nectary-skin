@@ -1,10 +1,10 @@
+import { modeValues } from '@nectary/components/badge/utils'
+import { sizeValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
-import { modeValues } from '@sinch-engage/nectary/badge/utils'
-import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
+import type { TSinchBadgeElement } from '@nectary/components/badge/types'
 import type { Page } from '@playwright/test'
-import type { TSinchBadgeElement } from '@sinch-engage/nectary/badge/types'
 
 const shot = '/badge?size=l&text=8'
 const check = makeAccessibilityTests('/badge', 'sinch-badge')

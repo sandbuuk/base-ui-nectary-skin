@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary-assets/illustrations/phone-and-cat'
+import '@nectary/assets/illustrations/phone-and-cat'
 
 export const SingleIllustrationExample: FC = () => {
   return (

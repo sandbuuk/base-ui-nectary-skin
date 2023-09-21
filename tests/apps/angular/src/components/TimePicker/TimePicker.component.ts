@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/time-picker'
+import { ActivatedRoute } from '@angular/router'
+import '@nectary/components/time-picker'
 
 @Component({
   selector: 'time-picker-component',
@@ -12,11 +13,11 @@ export class TimePickerComponent {
   isControlled: boolean
   ampm: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? ''
-    this.isControlled = url.searchParams.get('uncontrolled') === null
-    this.ampm = url.searchParams.get('ampm') !== null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.value = search.get('value') ?? ''
+    this.isControlled = search.get('uncontrolled') === null
+    this.ampm = search.get('ampm') !== null
   }
 
   onChange(e: Event) {

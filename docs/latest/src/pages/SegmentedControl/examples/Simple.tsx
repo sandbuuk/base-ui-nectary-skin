@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/segmented-control'
-import '@sinch-engage/nectary/segmented-control-option'
+import '@nectary/components/segmented-control'
+import '@nectary/components/segmented-control-option'
 
 export const SimpleExample: FC = () => {
   const [value, setValue] = useState('')

@@ -1,14 +1,12 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/toast'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@nectary/components/toast'
+import '@nectary/components/button'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/close'
 
-type TToast = {
-  search: URLSearchParams,
-}
-
-export const Toast: FC<TToast> = ({ search }) => {
+export const Toast: FC = () => {
+  const [search] = useSearchParams()
   const type: any = search.get('type') ?? undefined
   const text = search.get('text') ?? ''
   const hasClose = search.get('close') != null

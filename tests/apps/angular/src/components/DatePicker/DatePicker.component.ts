@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/date-picker'
+import { ActivatedRoute } from '@angular/router'
+import '@nectary/components/date-picker'
 
 @Component({
   selector: 'date-picker-component',
@@ -14,13 +15,13 @@ export class DatePickerComponent {
   max: string | null
   isRange: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.value = url.searchParams.get('value') ?? ''
-    this.locale = url.searchParams.get('locale')
-    this.min = url.searchParams.get('min')
-    this.max = url.searchParams.get('max')
-    this.isRange = url.searchParams.get('range') !== null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.value = search.get('value') ?? ''
+    this.locale = search.get('locale')
+    this.min = search.get('min')
+    this.max = search.get('max')
+    this.isRange = search.get('range') !== null
   }
 
   onChange(e: Event) {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/input'
+import '@nectary/components/input'
 
 export const MaskedDateExample: FC = () => {
   const [state, setState] = useState('')

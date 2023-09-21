@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/chat'
-import '@sinch-engage/nectary/chat-block'
-import '@sinch-engage/nectary/chat-bubble'
-import '@sinch-engage/nectary/avatar'
+import '@nectary/components/chat'
+import '@nectary/components/chat-block'
+import '@nectary/components/chat-bubble'
+import '@nectary/components/avatar'
 
 export default {
   props: {
@@ -36,10 +36,10 @@ export default {
   },
   computed: {
     isBubble() {
-      return this.search.get('example') === 'bubble'
+      return this.$route.query.example === 'bubble'
     },
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     }
   }
 }

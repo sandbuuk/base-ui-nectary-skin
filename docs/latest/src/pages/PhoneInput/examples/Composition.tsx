@@ -1,12 +1,12 @@
-import { countries } from '@sinch-engage/nectary/utils/countries'
+import { countries } from '@nectary/components/utils/countries'
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary/flag'
+import '@nectary/components/popover'
+import '@nectary/components/input'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/components/select-button'
+import '@nectary/components/flag'
 
 const inputStyles: CSSProperties = {
   width: 300,

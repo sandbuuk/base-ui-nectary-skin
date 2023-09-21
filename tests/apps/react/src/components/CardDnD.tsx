@@ -1,18 +1,14 @@
 import { useRef, useState } from 'react'
-import type { TSinchCardElement } from '@sinch-engage/nectary/card/types'
+import type { TSinchCardElement } from '@nectary/components/card/types'
 import type { CSSProperties, FC, SyntheticEvent } from 'react'
-import '@sinch-engage/nectary/card'
+import '@nectary/components/card'
 
 const columnStyle: CSSProperties = {
   display: 'flex',
   gap: '8px',
 }
 
-type TCard = {
-  search: URLSearchParams,
-}
-
-export const CardDnD: FC<TCard> = () => {
+export const CardDnD: FC = () => {
   const [items, setItems] = useState(() => ([{
     key: '1',
     caption: 'Card 1',

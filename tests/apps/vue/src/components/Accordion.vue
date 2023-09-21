@@ -14,10 +14,10 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/accordion'
-import '@sinch-engage/nectary/accordion-item'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/text'
+import '@nectary/components/accordion'
+import '@nectary/components/accordion-item'
+import '@nectary/assets/icons/open-in-new'
 
 const items = [{
   value: '1',
@@ -67,20 +67,20 @@ export default {
   },
   computed: {
     isControlled() {
-      return this.search.get('uncontrolled') === null
+      return this.$route.query.uncontrolled == null
     },
     isMultiple() {
-      return this.search.get('multiple') !== null
+      return this.$route.query.multiple != null
     },
     options() {
-      return this.search.get('example') === 'single'
+      return this.$route.query.example === 'single'
         ? singleItems
         : items
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

@@ -8,18 +8,10 @@ Sinch Design System.
 
 ## Install
 
-Add the following line to `.npmrc` in the project root:
-
-```plain
-//registry.npmjs.org/:_authToken=<TOKEN>
-```
-
 Add the component library dependency to `package.json`:
 
 ```shell
-npm install @sinch-engage/nectary @sinch-engage/nectary-assets
-# or
-yarn add @sinch-engage/nectary @sinch-engage/nectary-assets
+npm install @nectary/components @nectary/assets @nectary/theme-base
 ```
 
 ## Usage
@@ -29,8 +21,8 @@ yarn add @sinch-engage/nectary @sinch-engage/nectary-assets
 Nectary needs a custom elements registry to work with, even if it's a global default one:
 
 ```js
-import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
-import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
+import { setNectaryRegistry } from '@nectary/components/utils'
+import { setAssetsRegistry } from '@nectary/assets/utils'
 
 setNectaryRegistry(window.customElements)
 setAssetsRegistry(window.customElements)
@@ -41,8 +33,8 @@ setAssetsRegistry(window.customElements)
 Or a custom one for the Shell/MFE use case:
 
 ```js
-import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
-import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
+import { setNectaryRegistry } from '@nectary/components/utils'
+import { setAssetsRegistry } from '@nectary/assets/utils'
 
 const customRegistry = new CustomElementRegistry();
 
@@ -55,7 +47,7 @@ setAssetsRegistry(customRegistry)
 ### Theme
 
 ```js
-import '@sinch-engage/nectary-theme-base'
+import '@nectary/theme-base'
 ```
 
 Use color palette or custom font face:
@@ -75,7 +67,7 @@ h2 {
 Import component:
 
 ```js
-import '@sinch-engage/nectary/button'
+import '@nectary/components/button'
 ```
 
 Use it in React/Vue/Angular/etc, for example:
@@ -107,7 +99,7 @@ module.exports = {
     "^.+\\.(js|jsx)$": "babel-jest"
   },
   transformIgnorePatterns: [
-    "node_modules/(?!@sinch-engage)"
+    "node_modules/(?!@nectary)"
   ]
 }
 ```
@@ -139,7 +131,7 @@ moduleNameMapper: {
 It lets Jest know how to mock the css imports in your codebase, like for example when you import the theme:
 
 ```js
-import '@sinch-engage/nectary-theme-base'
+import '@nectary/theme-base'
 ```
 
 This import should not throw an error now.
@@ -162,7 +154,7 @@ transform: {
   "^.+\\.(js|jsx)$": "babel-jest"
 },
 transformIgnorePatterns: [
-  "node_modules/(?!@sinch-engage)"
+  "node_modules/(?!@nectary)"
 ]
 ```
 
@@ -175,7 +167,7 @@ module.exports = { presets: ['@babel/preset-env'] }
 If you import any component:
 
 ```js
-import '@sinch-engage/nectary/input'
+import '@nectary/components/input'
 ```
 
 It should not throw the `Jest encountered an unexpected token` error.

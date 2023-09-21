@@ -1,17 +1,15 @@
-import countriesJson from '@sinch-engage/nectary/utils/countries.json'
+import countriesJson from '@nectary/components/utils/countries.json'
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/flag'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/components/flag'
 
 const countries = Object.entries(countriesJson)
 
-type TPhoneCodeMenu = {
-  search: URLSearchParams,
-}
-
-export const PhoneCodeMenu: FC<TPhoneCodeMenu> = ({ search }) => {
+export const PhoneCodeMenu: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

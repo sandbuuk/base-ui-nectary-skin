@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/spinner'
-import '@sinch-engage/nectary-assets/icons/help-outline'
+import '@nectary/components/icon-button'
+import '@nectary/components/spinner'
+import '@nectary/assets/icons/help-outline'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'icon-button-component',
@@ -14,11 +15,11 @@ export class IconButtonComponent {
   size: string | null
   hasSpinner: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.isDisabled = url.searchParams.get('disabled') !== null
-    this.size = url.searchParams.get('size')
-    this.hasSpinner = url.searchParams.get('spinner') !== null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.isDisabled = search.get('disabled') !== null
+    this.size = search.get('size')
+    this.hasSpinner = search.get('spinner') !== null
   }
 
   onClick() {

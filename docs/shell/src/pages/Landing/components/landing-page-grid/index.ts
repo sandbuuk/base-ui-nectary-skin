@@ -1,4 +1,4 @@
-import { defineCustomElement, getBooleanAttribute, NectaryElement, updateBooleanAttribute } from '@sinch-engage/nectary/utils'
+import { defineCustomElement, getBooleanAttribute, NectaryElement, updateBooleanAttribute } from '@nectary/components/utils'
 import templateHTML from './template.html'
 import type { TSinchGridElement, TSinchGridReact } from './types'
 

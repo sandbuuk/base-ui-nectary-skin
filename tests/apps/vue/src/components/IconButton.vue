@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/help-outline'
-import '@sinch-engage/nectary/spinner'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/help-outline'
+import '@nectary/components/spinner'
 
 export default {
   props: {
@@ -42,13 +42,13 @@ export default {
   },
   computed: {
     size() {
-      return this.search.get('size')
+      return this.$route.query.size
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     },
     hasSpinner() {
-      return this.search.get('spinner') !== null
+      return this.$route.query.spinner != null
     },
   }
 }

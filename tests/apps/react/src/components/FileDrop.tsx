@@ -1,12 +1,10 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/file-drop'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/file-drop'
+import '@nectary/components/button'
 
-type TFileDrop = {
-  search: URLSearchParams,
-}
-
-export const FileDrop: FC<TFileDrop> = ({ search }) => {
+export const FileDrop: FC = () => {
+  const [search] = useSearchParams()
   const isMultiple = search.get('multiple') !== null
   const isInvalid = search.get('invalid') !== null
   const isDisabled = search.get('disabled') !== null

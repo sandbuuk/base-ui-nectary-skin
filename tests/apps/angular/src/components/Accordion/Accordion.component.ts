@@ -1,8 +1,9 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/accordion'
-import '@sinch-engage/nectary/accordion-item'
-import { TSinchAccordionStatusType } from '@sinch-engage/nectary/accordion-item/types'
+import '@nectary/components/text'
+import '@nectary/components/accordion'
+import '@nectary/components/accordion-item'
+import { TSinchAccordionStatusType } from '@nectary/components/accordion-item/types'
+import { ActivatedRoute } from '@angular/router'
 
 type TExampleItem = {
   value: string,
@@ -60,9 +61,8 @@ export class AccordionComponent {
   isMultiple: boolean
   options: TExampleItem[]
 
-  constructor() {
-    const url = new URL(location.href)
-    const search = url.searchParams
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
     this.isControlled = search.get('uncontrolled') === null
     this.isMultiple = search.get('multiple') !== null

@@ -1,21 +1,19 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/color-menu'
-import '@sinch-engage/nectary/color-menu-option'
-import '@sinch-engage/nectary/color-swatch'
-import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary/popover'
+import '@nectary/components/color-menu'
+import '@nectary/components/color-menu-option'
+import '@nectary/components/color-swatch'
+import '@nectary/components/select-button'
+import '@nectary/components/popover'
 
 const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
 const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
 const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
 const colors = [...lightColors, ...vibrantColors, ...darkColors]
 
-type TColorSelect = {
-  search: URLSearchParams,
-}
-
-export const ColorSelect: FC<TColorSelect> = ({ search }) => {
+export const ColorSelect: FC = () => {
+  const [search] = useSearchParams()
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/link'
-import '@sinch-engage/nectary/code-tag'
+import '@nectary/components/text'
+import '@nectary/components/link'
+import '@nectary/components/code-tag'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'text-component',
@@ -15,11 +16,11 @@ export class TextComponent {
   isInline: boolean
   isEmphasized: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.text = url.searchParams.get('text')
-    this.type = url.searchParams.get('type')
-    this.isInline = url.searchParams.get('inline') !== null
-    this.isEmphasized = url.searchParams.get('emphasized') !== null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.text = search.get('text')
+    this.type = search.get('type')
+    this.isInline = search.get('inline') !== null
+    this.isEmphasized = search.get('emphasized') !== null
   }
 }

@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/alert'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@nectary/components/alert'
+import '@nectary/components/button'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/close'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     text() {
-      const example = this.search.get('example')
+      const example = this.$route.query.example
 
       if(example === 'md') {
         return mdText
@@ -81,13 +81,13 @@ export default {
       return shortText
     },
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     },
     hasClose() {
-      return this.search.get('close') != null
+      return this.$route.query.close != null
     },
     hasAction() {
-      return this.search.get('action') != null
+      return this.$route.query.action != null
     },
   },
 }

@@ -1,13 +1,11 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/vertical-stepper'
-import '@sinch-engage/nectary/vertical-stepper-item'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/vertical-stepper'
+import '@nectary/components/vertical-stepper-item'
+import '@nectary/components/text'
 
-type TVerticalStepper = {
-  search: URLSearchParams,
-}
-
-export const VerticalStepper: FC<TVerticalStepper> = ({ search }) => {
+export const VerticalStepper: FC = () => {
+  const [search] = useSearchParams()
   const index = search.get('index') ?? '0'
 
   return (

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/horizontal-stepper'
-import '@sinch-engage/nectary/horizontal-stepper-item'
+import '@nectary/components/horizontal-stepper'
+import '@nectary/components/horizontal-stepper-item'
 
 @Component({
   selector: 'horizontal-stepper-component',

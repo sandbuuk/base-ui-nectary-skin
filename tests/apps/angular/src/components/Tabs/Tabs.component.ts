@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/tabs'
-import '@sinch-engage/nectary/tabs-option'
-import '@sinch-engage/nectary/tabs-icon-option'
+import '@nectary/components/tabs'
+import '@nectary/components/tabs-option'
+import '@nectary/components/tabs-icon-option'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'tabs-component',
@@ -14,9 +15,8 @@ export class TabsComponent {
   isDisabled: boolean
   example: string | null
 
-  constructor() {
-    const url = new URL(location.href)
-    const search = url.searchParams
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
     this.isDisabled = search.get('disabled') !== null
     this.example = search.get('example')

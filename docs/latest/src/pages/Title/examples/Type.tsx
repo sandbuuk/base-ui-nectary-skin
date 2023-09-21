@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/title'
+import '@nectary/components/title'
 
 export const TypeExample: FC = () => {
   return (

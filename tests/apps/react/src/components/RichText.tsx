@@ -1,5 +1,6 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/rich-text'
+import '@nectary/components/rich-text'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
@@ -13,11 +14,8 @@ Context **bold _italic_ bold** text.
 const longText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.'
 const shortText = 'Lorem Ipsum is dummy text'
 
-type TRichText = {
-  search: URLSearchParams,
-}
-
-export const RichText: FC<TRichText> = ({ search }) => {
+export const RichText: FC = () => {
+  const [search] = useSearchParams()
   const size: any = search.get('size') ?? undefined
   const example = search.get('example')
 

@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/file-status'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/progress'
-import '@sinch-engage/nectary-assets/icons/close'
+import '@nectary/components/file-status'
+import '@nectary/components/icon-button'
+import '@nectary/components/text'
+import '@nectary/components/progress'
+import '@nectary/assets/icons/close'
 
 export default {
   methods: {
@@ -26,16 +26,16 @@ export default {
   },
   computed: {
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     },
     filename() {
-      return this.search.get('filename')
+      return this.$route.query.filename
     },
     hasDescription() {
-      return this.search.get('description') !== null
+      return this.$route.query.description != null
     },
     hasProgress() {
-      return this.search.get('progress') !== null
+      return this.$route.query.progress != null
     },
   }
 }

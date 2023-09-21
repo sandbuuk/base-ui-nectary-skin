@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/card'
+import '@nectary/components/card'
 
 const items = [{
   key: '1',
@@ -26,9 +26,7 @@ export class CardDnDComponent {
   dragTarget: HTMLElement | null = null
   dragOverTarget: HTMLElement | null = null
 
-  constructor() {
-    const url = new URL(location.href)
-  }
+  constructor() {}
 
   onDragStart(e: Event) {
     if ((e.target as HTMLElement).matches('sinch-card')) {

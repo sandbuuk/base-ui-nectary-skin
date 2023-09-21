@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/input'
+import '@nectary/components/input'
 
 const inputStyles: CSSProperties = {
   width: 300,

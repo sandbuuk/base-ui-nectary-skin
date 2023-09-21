@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/chip'
-import '@sinch-engage/nectary/icon'
+import { ActivatedRoute } from '@angular/router'
+import '@nectary/components/chip'
+import '@nectary/components/icon'
 
 @Component({
   selector: 'chip-component',
@@ -15,13 +16,13 @@ export class ChipComponent {
   hasIcon: boolean
   hasRightIcon: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.color = url.searchParams.get('color') as string ?? undefined
-    this.text = url.searchParams.get('text') ?? ''
-    this.isSmall = url.searchParams.get('small') != null
-    this.hasIcon = url.searchParams.get('icon') != null
-    this.hasRightIcon = url.searchParams.get('right-icon') != null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.color = search.get('color') as string ?? undefined
+    this.text = search.get('text') ?? ''
+    this.isSmall = search.get('small') != null
+    this.hasIcon = search.get('icon') != null
+    this.hasRightIcon = search.get('right-icon') != null
   }
 
   onClick() {

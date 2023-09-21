@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/spinner'
+import '@nectary/components/spinner'
 
 const rowStyles: CSSProperties = {
   display: 'flex',

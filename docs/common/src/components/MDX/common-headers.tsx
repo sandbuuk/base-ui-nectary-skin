@@ -1,4 +1,4 @@
-import '@sinch-engage/nectary/title'
+import '@nectary/components/title'
 import './styles.css'
 import { slugify } from '../../utils'
 import type { MDXComponents } from 'mdx/types'

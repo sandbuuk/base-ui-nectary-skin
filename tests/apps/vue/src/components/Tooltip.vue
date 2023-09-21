@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/tooltip'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/tooltip'
+import '@nectary/components/text'
 
 export default {
   props: {
@@ -28,13 +28,13 @@ export default {
   },
   computed: {
     text() {
-      return this.search.get('text')
+      return this.$route.query.text
     },
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     },
     orientation() {
-      return this.search.get('orientation')
+      return this.$route.query.orientation
     },
   }
 }

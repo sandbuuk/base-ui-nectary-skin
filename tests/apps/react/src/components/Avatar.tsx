@@ -1,12 +1,10 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/avatar'
-import '@sinch-engage/nectary/badge'
+import '@nectary/components/avatar'
+import '@nectary/components/badge'
 
-type TAvatar = {
-  search: URLSearchParams,
-}
-
-export const Avatar: FC<TAvatar> = ({ search }) => {
+export const Avatar: FC = () => {
+  const [search] = useSearchParams()
   const alt = search.get('alt') ?? undefined
   const src = search.get('src') ?? undefined
   const color: any = search.get('color') ?? undefined

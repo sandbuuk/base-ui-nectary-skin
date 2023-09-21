@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/rich-text'
+import { ActivatedRoute } from '@angular/router'
+import '@nectary/components/rich-text'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
@@ -23,11 +24,11 @@ export class RichTextComponent {
   size?: string
   text: string
 
-  constructor() {
-    const url = new URL(location.href)
-    this.size = url.searchParams.get('size') ?? undefined
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.size = search.get('size') ?? undefined
 
-    const example = url.searchParams.get('example')
+    const example = search.get('example')
 
     this.text = shortText
 

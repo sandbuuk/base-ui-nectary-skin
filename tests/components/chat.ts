@@ -1,5 +1,5 @@
+import { statusValues, typeValues } from '@nectary/components/chat-bubble/utils'
 import { test } from '@playwright/test'
-import { statusValues, typeValues } from '@sinch-engage/nectary/chat-bubble/utils'
 import { runScreenshotTests } from '../screenshot-tests'
 
 const withCustomerBubble = '/chat?example=bubble&type=customer'

@@ -1,4 +1,4 @@
-import '@sinch-engage/nectary-assets/logo/sinch-icon'
+import '@nectary/assets/logo/sinch-icon'
 import './styles.css'
 
 export const SidebarHeader = () => {

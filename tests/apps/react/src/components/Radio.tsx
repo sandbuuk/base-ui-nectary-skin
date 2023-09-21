@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/radio'
-import '@sinch-engage/nectary/radio-option'
+import '@nectary/components/radio'
+import '@nectary/components/radio-option'
 
 const options = [{
   value: '1',
@@ -22,11 +23,8 @@ const singleOption = [{
   text: 'Option value 1',
 }]
 
-type TRadio = {
-  search: URLSearchParams,
-}
-
-export const Radio: FC<TRadio> = ({ search }) => {
+export const Radio: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(() => search.get('value') ?? '')
   const isInvalid = search.get('invalid') !== null
   const onChange = (e: CustomEvent<string>) => {

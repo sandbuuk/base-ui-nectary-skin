@@ -1,12 +1,10 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/time-picker'
+import '@nectary/components/time-picker'
 
-type TTimePicker = {
-  search: URLSearchParams,
-}
-
-export const TimePicker: FC<TTimePicker> = ({ search }) => {
+export const TimePicker: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

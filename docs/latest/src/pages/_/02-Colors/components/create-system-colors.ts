@@ -1,4 +1,4 @@
-import sysJson from '@sinch-engage/nectary-theme-base/sys.json'
+import sysJson from '@nectary/theme-base/sys.json'
 import { colorsMain, colorsComplementary } from './create-reference-colors'
 import type { Category } from './SystemColorsTable'
 

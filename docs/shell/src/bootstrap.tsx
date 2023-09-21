@@ -1,5 +1,5 @@
-import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
-import { setAssetsRegistry } from '@sinch-engage/nectary-assets/utils'
+import { setAssetsRegistry } from '@nectary/assets/utils'
+import { setNectaryRegistry } from '@nectary/components/utils'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from './components/App'

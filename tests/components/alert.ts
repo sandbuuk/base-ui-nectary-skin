@@ -1,5 +1,5 @@
+import { typeValues } from '@nectary/components/alert/utils'
 import { expect, test } from '@playwright/test'
-import { typeValues } from '@sinch-engage/nectary/alert/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 

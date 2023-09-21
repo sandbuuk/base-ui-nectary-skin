@@ -29,7 +29,7 @@ For setting things up, it should be enough to follow the guide on the Playwright
 However, you will need to add the following snippet to the `<rootDir>/playwright/index.tsx` file.
 
 ```tsx
-import { setNectaryRegistry } from '@sinch-engage/nectary/utils/element'
+import { setNectaryRegistry } from '@nectary/components/utils/element'
 
 setNectaryRegistry(window.customElements)
 ```
@@ -43,8 +43,8 @@ Below, we show a simple example component: a `sinch-button` connected to a `sinc
 ```tsx
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/button'
+import '@nectary/components/text'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -123,7 +123,7 @@ Its should be enough to follow the steps on the Testing Library [documentation](
 Do not forget to set the NectaryRegistry and like below in your tests.
 
 ```tsx
-import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+import { setNectaryRegistry } from '@nectary/components/utils'
 
 setNectaryRegistry(window.customElements)
 ```
@@ -135,7 +135,7 @@ Below we show a simple example component: A `sinch-button` connected to a `sinch
 `ButtonCounter.test.tsx`
 
 ```tsx
-import { setNectaryRegistry } from '@sinch-engage/nectary/utils'
+import { setNectaryRegistry } from '@nectary/components/utils'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { ButtonCounter } from './ButtonCounter'
 

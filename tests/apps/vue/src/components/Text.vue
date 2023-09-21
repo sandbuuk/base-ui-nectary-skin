@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/text'
-import '@sinch-engage/nectary/link'
-import '@sinch-engage/nectary/code-tag'
+import '@nectary/components/text'
+import '@nectary/components/link'
+import '@nectary/components/code-tag'
 
 export default {
   props: {
@@ -26,16 +26,16 @@ export default {
   },
   computed: {
     text() {
-      return this.search.get('text')
+      return this.$route.query.text
     },
     type() {
-      return this.search.get('type')
+      return this.$route.query.type
     },
     isInline() {
-      return this.search.get('inline') !== null
+      return this.$route.query.inline != null
     },
     isEmphasized() {
-      return this.search.get('emphasized') !== null
+      return this.$route.query.emphasized != null
     },
   },
 }

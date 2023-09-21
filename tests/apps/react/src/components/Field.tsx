@@ -1,16 +1,14 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/help-tooltip'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary-assets/icons/search'
+import '@nectary/components/input'
+import '@nectary/components/field'
+import '@nectary/components/help-tooltip'
+import '@nectary/components/tag'
+import '@nectary/assets/icons/search'
 
-type TField = {
-  search: URLSearchParams,
-}
-
-export const Field: FC<TField> = ({ search }) => {
+export const Field: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     setValue(e.detail)

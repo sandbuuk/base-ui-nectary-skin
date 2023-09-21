@@ -34,13 +34,13 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/action-menu'
-import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/icon'
+import '@nectary/components/popover'
+import '@nectary/components/field'
+import '@nectary/components/input'
+import '@nectary/components/action-menu'
+import '@nectary/components/action-menu-option'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
 
 export default {
   methods: {
@@ -76,7 +76,7 @@ export default {
   },
   data() {
     return {
-      value: this.search.get('value') ?? '',
+      value: this.$route.query.value ?? '',
       isOpen: false,
       isClearActive: false,
       options: [

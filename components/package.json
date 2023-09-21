@@ -1,5 +1,5 @@
 {
-  "name": "@sinch-engage/nectary",
+  "name": "@nectary/components",
   "version": "2.4.0",
   "files": [
     "**/*/*.css",
@@ -9,25 +9,22 @@
     "types.d.ts",
     "colors.json"
   ],
-  "publishConfig": {
-    "access": "restricted"
-  },
   "scripts": {
     "build": "NODE_ENV=production babel . --extensions '.ts' --out-dir . && tsc --declaration --emitDeclarationOnly"
   },
   "dependencies": {
-    "@babel/runtime": "^7.21.0",
+    "@babel/runtime": "^7.22.15",
     "xss": "^1.0.14"
   },
   "devDependencies": {
-    "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.21.4",
-    "@babel/plugin-transform-runtime": "^7.21.4",
-    "@babel/preset-env": "^7.21.4",
-    "@babel/preset-typescript": "^7.21.4",
-    "@types/node": "^18.16.0",
-    "@types/react": "^18.0.38",
+    "@babel/cli": "^7.22.15",
+    "@babel/core": "^7.22.20",
+    "@babel/plugin-transform-runtime": "^7.22.15",
+    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-typescript": "^7.22.15",
+    "@types/node": "^18.17.17",
+    "@types/react": "^18.2.21",
     "babel-plugin-html-inline-minifier": "workspace:*",
-    "typescript": "^5.0.4"
+    "typescript": "^5.2.2"
   }
 }

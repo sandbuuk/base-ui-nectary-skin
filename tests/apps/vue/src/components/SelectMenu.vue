@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/assets/icons/open-in-new'
 
 const options = {
   1: { text: 'Option 1 value long long long', icon: '1' },
@@ -44,21 +44,21 @@ export default {
   },
   computed: {
     rows() {
-      const val = this.search.get('rows')
-      return val !== null ? parseInt(val) : null
+      const val = this.$route.query.rows
+      return val != null ? parseInt(val) : null
     },
     isMultiple() {
-      return this.search.get('multiple') !== null
+      return this.$route.query.multiple != null
     },
     items() {
-      return this.search.get('example') === 'lots'
+      return this.$route.query.example === 'lots'
         ? Object.entries(options)
         : Object.entries(options).slice(0, 4)
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

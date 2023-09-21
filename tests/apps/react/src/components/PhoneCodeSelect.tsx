@@ -1,20 +1,18 @@
-import { countries } from '@sinch-engage/nectary/utils/countries'
+import { countries } from '@nectary/components/utils/countries'
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary/select-button'
-import '@sinch-engage/nectary/flag'
-
-type TSelect = {
-  search: URLSearchParams,
-}
+import '@nectary/components/popover'
+import '@nectary/components/input'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/components/select-button'
+import '@nectary/components/flag'
 
 const countriesArr = Object.entries(countries)
 
-export const PhoneCodeSelect: FC<TSelect> = ({ search }) => {
+export const PhoneCodeSelect: FC = () => {
+  const [search] = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
   const [menuValue, setMenuValue] = useState('')
   const [inputValue, setInputValue] = useState('')

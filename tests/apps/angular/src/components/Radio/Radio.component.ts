@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/radio'
-import '@sinch-engage/nectary/radio-option'
+import { ActivatedRoute } from '@angular/router'
+import '@nectary/components/radio'
+import '@nectary/components/radio-option'
 
 const options = [{
   value: '1',
@@ -33,9 +34,8 @@ export class RadioComponent {
   isInvalid: boolean
   options: any[]
 
-  constructor() {
-    const url = new URL(location.href)
-    const search = url.searchParams
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
     this.isControlled = search.get('uncontrolled') === null
     this.isInvalid = search.get('invalid') !== null

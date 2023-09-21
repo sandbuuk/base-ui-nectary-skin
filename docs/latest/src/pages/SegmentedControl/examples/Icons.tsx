@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/segmented-control'
-import '@sinch-engage/nectary/segmented-control-option'
-import '@sinch-engage/nectary-assets/icons/help-outline'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/segmented-control'
+import '@nectary/components/segmented-control-option'
+import '@nectary/assets/icons/help-outline'
+import '@nectary/assets/icons/open-in-new'
 
 export const IconsExample: FC = () => {
   const [value, setValue] = useState('')

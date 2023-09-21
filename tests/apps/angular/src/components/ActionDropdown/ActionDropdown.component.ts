@@ -1,9 +1,10 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/action-menu'
-import '@sinch-engage/nectary/action-menu-option'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/action-menu'
+import '@nectary/components/action-menu-option'
+import '@nectary/components/button'
+import '@nectary/components/popover'
+import '@nectary/assets/icons/open-in-new'
+import { ActivatedRoute } from '@angular/router'
 
 type TMenuValue = {
   text: string,
@@ -27,10 +28,10 @@ export class ActionDropdownComponent {
     4: { text: 'Option 4', icon: null },
   }
 
-  constructor() {
-    const url = new URL(location.href)
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
-    const numVisibleValue = url.searchParams.get('rows')
+    const numVisibleValue = search.get('rows')
     this.rows = numVisibleValue !== null ? parseInt(numVisibleValue) : null
   }
 

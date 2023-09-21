@@ -1,9 +1,9 @@
+import { orientationValues } from '@nectary/components/tooltip/utils'
 import { expect, test } from '@playwright/test'
-import { orientationValues } from '@sinch-engage/nectary/tooltip/utils'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
+import type { TSinchTooltipElement } from '@nectary/components/tooltip/types'
 import type { Page } from '@playwright/test'
-import type { TSinchTooltipElement } from '@sinch-engage/nectary/tooltip/types'
 
 const withFitWidth = '/tooltip?text=Tooltip%20text'
 const withLongText = '/tooltip?text=Tooltip%20text%20long%20long%20long'

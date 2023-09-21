@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/rich-text'
+import '@nectary/components/rich-text'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     text() {
-      const example = this.search.get('example')
+      const example = this.$route.query.example
 
       if(example === 'md') {
         return mdText
@@ -36,7 +36,7 @@ export default {
       return shortText
     },
     size() {
-      return this.search.get('size')
+      return this.$route.query.size
     },
   },
 }

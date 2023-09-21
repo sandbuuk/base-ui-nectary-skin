@@ -1,18 +1,14 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/date-picker'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/segment'
-import '@sinch-engage/nectary-assets/icons/calendar-today'
+import '@nectary/components/field'
+import '@nectary/components/input'
+import '@nectary/components/popover'
+import '@nectary/components/date-picker'
+import '@nectary/components/icon-button'
+import '@nectary/components/segment'
+import '@nectary/assets/icons/calendar-today'
 
-type TEventTargets = {
-  search: URLSearchParams,
-}
-
-export const EventTargets: FC<TEventTargets> = () => {
+export const EventTargets: FC = () => {
   const [_isOpen, setOpen] = useState(false)
   const [value, setValue] = useState('2022-07-19')
   const [isoValue, setIsoValue] = useState('2022-07-19')

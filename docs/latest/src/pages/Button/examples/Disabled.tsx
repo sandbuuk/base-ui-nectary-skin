@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/button'
+import '@nectary/components/button'
 
 export const DisabledExample: FC = () => (
   <sinch-button

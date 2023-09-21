@@ -1,4 +1,4 @@
-import refJson from '@sinch-engage/nectary-theme-base/ref.json'
+import refJson from '@nectary/theme-base/ref.json'
 
 export type TableItem = {
   key: string,

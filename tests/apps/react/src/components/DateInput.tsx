@@ -1,17 +1,15 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/popover'
-import '@sinch-engage/nectary/date-picker'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary-assets/icons/calendar-today'
+import '@nectary/components/field'
+import '@nectary/components/input'
+import '@nectary/components/popover'
+import '@nectary/components/date-picker'
+import '@nectary/components/icon-button'
+import '@nectary/assets/icons/calendar-today'
 
-type TDateInput = {
-  search: URLSearchParams,
-}
-
-export const DateInput: FC<TDateInput> = ({ search }) => {
+export const DateInput: FC = () => {
+  const [search] = useSearchParams()
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')
   const [isoValue, setIsoValue] = useState(search.get('isovalue') ?? '')

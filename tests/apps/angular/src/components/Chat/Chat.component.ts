@@ -1,8 +1,9 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/chat'
-import '@sinch-engage/nectary/chat-block'
-import '@sinch-engage/nectary/chat-bubble'
-import '@sinch-engage/nectary/avatar'
+import '@nectary/components/chat'
+import '@nectary/components/chat-block'
+import '@nectary/components/chat-bubble'
+import '@nectary/components/avatar'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'chat-component',
@@ -14,9 +15,9 @@ export class ChatComponent {
   isBubble: boolean
   type: string | null
 
-  constructor() {
-    const url = new URL(location.href)
-    this.isBubble = url.searchParams.get('example') === 'bubble'
-    this.type = url.searchParams.get('type')
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.isBubble = search.get('example') === 'bubble'
+    this.type = search.get('type')
   }
 }

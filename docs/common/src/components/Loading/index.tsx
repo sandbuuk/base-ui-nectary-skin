@@ -1,4 +1,4 @@
-import '@sinch-engage/nectary/spinner'
+import '@nectary/components/spinner'
 import type { FC } from 'react'
 import './styles.css'
 

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/segmented-icon-control'
-import '@sinch-engage/nectary/segmented-icon-control-option'
-import '@sinch-engage/nectary-assets/icons/format-align-left'
-import '@sinch-engage/nectary-assets/icons/format-align-center'
-import '@sinch-engage/nectary-assets/icons/format-align-right'
-import '@sinch-engage/nectary-assets/icons/format-align-justify'
+import '@nectary/components/segmented-icon-control'
+import '@nectary/components/segmented-icon-control-option'
+import '@nectary/assets/icons/format-align-left'
+import '@nectary/assets/icons/format-align-center'
+import '@nectary/assets/icons/format-align-right'
+import '@nectary/assets/icons/format-align-justify'
 
 export const SimpleExample: FC = () => {
   const [value, setValue] = useState('')

@@ -1,11 +1,9 @@
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/color-swatch'
+import '@nectary/components/color-swatch'
 
-type TColorSwatch = {
-  search: URLSearchParams,
-}
-
-export const ColorSwatch: FC<TColorSwatch> = ({ search }) => {
+export const ColorSwatch: FC = () => {
+  const [search] = useSearchParams()
   const name: any = search.get('name') ?? undefined
 
   return (

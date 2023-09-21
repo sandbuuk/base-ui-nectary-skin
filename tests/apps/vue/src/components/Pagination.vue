@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import { attrValueToInteger } from '@sinch-engage/nectary/utils'
-import '@sinch-engage/nectary/pagination'
+import { attrValueToInteger } from '@nectary/components/utils'
+import '@nectary/components/pagination'
 
 export default {
   props: {
@@ -32,15 +32,15 @@ export default {
   },
   computed: {
     max() {
-      return attrValueToInteger(this.search.get('max'))
+      return attrValueToInteger(this.$route.query.max)
     },
     isControlled() {
-      return this.search.get('uncontrolled') === null
+      return this.$route.query.uncontrolled == null
     },
   },
   data() {
     return {
-      value: attrValueToInteger(this.search.get('value'))
+      value: attrValueToInteger(this.$route.query.value)
     }
   }
 }

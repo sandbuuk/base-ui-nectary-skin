@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/select-menu'
-import '@sinch-engage/nectary/select-menu-option'
-import '@sinch-engage/nectary-assets/icons/open-in-new'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
+import '@nectary/assets/icons/open-in-new'
 
 type TMenuValue = {
   text: string,
@@ -21,11 +22,8 @@ const options: Record<string, TMenuValue> = {
   8: { text: 'Option 4', icon: null },
 }
 
-type TSelectMenu = {
-  search: URLSearchParams,
-}
-
-export const SelectMenu: FC<TSelectMenu> = ({ search }) => {
+export const SelectMenu: FC = () => {
+  const [search] = useSearchParams()
   const isMultiple = search.get('multiple') !== null
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {

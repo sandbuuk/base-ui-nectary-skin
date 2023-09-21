@@ -26,16 +26,16 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/segment'
-import '@sinch-engage/nectary/segment-collapse'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary-assets/icons/apps'
-import '@sinch-engage/nectary-assets/icons-branded/chatbot'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/checkbox'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/segment'
+import '@nectary/components/segment-collapse'
+import '@nectary/components/input'
+import '@nectary/components/tag'
+import '@nectary/assets/icons/apps'
+import '@nectary/assets/icons-branded/chatbot'
+import '@nectary/components/icon-button'
+import '@nectary/components/button'
+import '@nectary/components/checkbox'
+import '@nectary/components/text'
 
 export default {
   props: {
@@ -43,25 +43,25 @@ export default {
   },
   computed: {
     caption() {
-      return this.search.get('caption') ?? ''
+      return this.$route.query.caption ?? ''
     },
     hasContent() {
-      return this.search.get('content') !== null
+      return this.$route.query.content != null
     },
     hasIcon() {
-      return this.search.get('icon') !== null
+      return this.$route.query.icon != null
     },
     hasCollapse() {
-      return this.search.get('collapse') !== null
+      return this.$route.query.collapse != null
     },
     hasAction() {
-      return this.search.get('action') !== null
+      return this.$route.query.action != null
     },
     hasInfo() {
-      return this.search.get('info') !== null
+      return this.$route.query.info != null
     },
     hasPreview() {
-      return this.search.get('preview') !== null
+      return this.$route.query.preview != null
     }
   },
   methods: {

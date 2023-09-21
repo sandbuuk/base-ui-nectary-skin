@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/list'
-import '@sinch-engage/nectary/list-item'
-import '@sinch-engage/nectary-assets/icons/add'
-import '@sinch-engage/nectary-assets/icons-branded/chatbot'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/list'
+import '@nectary/components/list-item'
+import '@nectary/assets/icons/add'
+import '@nectary/assets/icons-branded/chatbot'
+import '@nectary/components/icon-button'
+import '@nectary/components/text'
 
 export default {
   props: {

@@ -1,7 +1,7 @@
 import type { FC } from 'react'
-import '@sinch-engage/nectary/list'
-import '@sinch-engage/nectary/list-item'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/list'
+import '@nectary/components/list-item'
+import '@nectary/components/text'
 
 export const SimpleExample: FC = () => {
   return (

@@ -1,15 +1,16 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/segment'
-import '@sinch-engage/nectary/segment-collapse'
-import '@sinch-engage/nectary/field'
-import '@sinch-engage/nectary/input'
-import '@sinch-engage/nectary/checkbox'
-import '@sinch-engage/nectary-assets/icons-branded/chatbot'
-import '@sinch-engage/nectary-assets/icons/apps'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/text'
+import '@nectary/components/segment'
+import '@nectary/components/segment-collapse'
+import '@nectary/components/field'
+import '@nectary/components/input'
+import '@nectary/components/checkbox'
+import '@nectary/assets/icons-branded/chatbot'
+import '@nectary/assets/icons/apps'
+import '@nectary/components/tag'
+import '@nectary/components/icon-button'
+import '@nectary/components/button'
+import '@nectary/components/text'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'segment-component',
@@ -39,15 +40,15 @@ export class SegmentComponent {
   hasAction: boolean
   hasPreview: boolean
 
-  constructor() {
-    const url = new URL(location.href)
-    this.caption = url.searchParams.get('caption') ?? ''
-    this.hasContent = url.searchParams.get('content') !== null
-    this.hasIcon = url.searchParams.get('icon') !== null
-    this.hasInfo = url.searchParams.get('info') !== null
-    this.hasCollapse = url.searchParams.get('collapse') !== null
-    this.hasAction = url.searchParams.get('action') !== null
-    this.hasPreview = url.searchParams.get('preview') !== null
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.caption = search.get('caption') ?? ''
+    this.hasContent = search.get('content') !== null
+    this.hasIcon = search.get('icon') !== null
+    this.hasInfo = search.get('info') !== null
+    this.hasCollapse = search.get('collapse') !== null
+    this.hasAction = search.get('action') !== null
+    this.hasPreview = search.get('preview') !== null
   }
 
   onCollapse(e: Event) {

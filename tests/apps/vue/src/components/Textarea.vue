@@ -44,16 +44,16 @@
 </template>
 
 <script>
-import '@sinch-engage/nectary/textarea'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary-assets/icons/attach-file'
-import '@sinch-engage/nectary-assets/icons/send'
-import '@sinch-engage/nectary-assets/icons/mood'
-import '@sinch-engage/nectary-assets/icons/search'
-import '@sinch-engage/nectary-assets/icons/add-comment'
-import '@sinch-engage/nectary-assets/icons/more-horiz'
+import '@nectary/components/textarea'
+import '@nectary/components/button'
+import '@nectary/components/icon-button'
+import '@nectary/components/tag'
+import '@nectary/assets/icons/attach-file'
+import '@nectary/assets/icons/send'
+import '@nectary/assets/icons/mood'
+import '@nectary/assets/icons/search'
+import '@nectary/assets/icons/add-comment'
+import '@nectary/assets/icons/more-horiz'
 
 export default {
   methods: {
@@ -73,27 +73,27 @@ export default {
   },
   computed: {
     placeholderText() {
-      return this.search.get('placeholder')
+      return this.$route.query.placeholder
     },
     isInvalid() {
-      return this.search.get('invalid') !== null
+      return this.$route.query.invalid != null
     },
     isDisabled() {
-      return this.search.get('disabled') !== null
+      return this.$route.query.disabled != null
     },
     hasBottom() {
-      return this.search.get('bottom') !== null
+      return this.$route.query.bottom != null
     },
     rows() {
-      return this.search.get('rows')
+      return this.$route.query.rows
     },
     resizable() {
-      return this.search.get('resizable')
+      return this.$route.query.resizable
     }
   },
   data() {
     return {
-      value: this.search.get('value') ?? ''
+      value: this.$route.query.value ?? ''
     }
   }
 }

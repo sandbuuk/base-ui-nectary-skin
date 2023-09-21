@@ -1,21 +1,19 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
-import '@sinch-engage/nectary/textarea'
-import '@sinch-engage/nectary/icon-button'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary/tag'
-import '@sinch-engage/nectary-assets/icons/mood'
-import '@sinch-engage/nectary-assets/icons/attach-file'
-import '@sinch-engage/nectary-assets/icons/search'
-import '@sinch-engage/nectary-assets/icons/add-comment'
-import '@sinch-engage/nectary-assets/icons/more-horiz'
-import '@sinch-engage/nectary-assets/icons/send'
+import '@nectary/components/textarea'
+import '@nectary/components/icon-button'
+import '@nectary/components/button'
+import '@nectary/components/tag'
+import '@nectary/assets/icons/mood'
+import '@nectary/assets/icons/attach-file'
+import '@nectary/assets/icons/search'
+import '@nectary/assets/icons/add-comment'
+import '@nectary/assets/icons/more-horiz'
+import '@nectary/assets/icons/send'
 
-type TTextarea = {
-  search: URLSearchParams,
-}
-
-export const Textarea: FC<TTextarea> = ({ search }) => {
+export const Textarea: FC = () => {
+  const [search] = useSearchParams()
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

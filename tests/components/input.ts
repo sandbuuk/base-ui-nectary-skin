@@ -1,5 +1,5 @@
+import { sizeValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
-import { sizeValues } from '@sinch-engage/nectary/utils/size'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, centerRect, getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
@@ -61,11 +61,16 @@ test('input screenshots', runScreenshotTests('sinch-input', [
     name: 'placeholder',
     url: shot,
     async *fn({ $eval }) {
-      await $eval((el) => el.setAttribute('placeholder', 'Placeholder Value'))
-      yield { name: 'updated' }
+      await $eval((el) => {
+        el.setAttribute('type', 'text')
+        el.setAttribute('placeholder', 'Placeholder Value')
+      })
 
-      await $eval((el) => el.setAttribute('placeholder', ''))
-      yield { name: 'empty' }
+      yield { name: 'type text' }
+
+      await $eval((el) => el.setAttribute('type', 'password'))
+
+      yield { name: 'type password' }
     },
   },
   {

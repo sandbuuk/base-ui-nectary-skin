@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
-import '@sinch-engage/nectary/file-picker'
-import '@sinch-engage/nectary/button'
-import '@sinch-engage/nectary-assets/icons/upload'
+import '@nectary/components/file-picker'
+import '@nectary/components/button'
+import '@nectary/assets/icons/upload'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'file-picker-component',
@@ -13,11 +14,11 @@ export class FilePickerComponent {
   isMultiple: boolean
   accept: string | null
 
-  constructor() {
-    const url = new URL(location.href)
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
 
-    this.isMultiple = url.searchParams.get('multiple') !== null
-    this.accept = url.searchParams.get('accept')
+    this.isMultiple = search.get('multiple') !== null
+    this.accept = search.get('accept')
   }
 
   onChange(e: CustomEvent) {
