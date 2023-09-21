@@ -9,69 +9,36 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  box-sizing: border-box;
+  gap: 8px;
   width: 100%;
   height: var(--sinch-local-size);
+  cursor: pointer;
+  user-select: none;
 
-  --sinch-local-size: 24px;
+  --sinch-local-size: 20px;
 }
 
 :host([small]) #wrapper {
-  --sinch-local-size: 22px;
+  --sinch-local-size: 16px;
 }
 
-#input {
-  all: initial;
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 2px;
-  width: 40px;
-  height: 20px;
-  cursor: pointer;
-  pointer-events: initial;
-}
-
-:host([disabled]) #input {
+:host([disabled]) #wrapper {
   cursor: initial;
-}
-
-/* Focus Outline */
-:host(:focus-visible) #input::after {
-  position: absolute;
-  content: "";
-  left: -4px;
-  top: -4px;
-  right: -4px;
-  bottom: -4px;
-  border: 2px solid var(--sinch-comp-toggle-color-default-outline-focus);
-  border-radius: 18px;
-  pointer-events: none;
-}
-
-:host([small]) #input {
-  width: 32px;
-  height: 16px;
-  top: 3px;
 }
 
 #knob-container {
   position: relative;
-  box-sizing: border-box;
   width: 40px;
-  height: 20px;
-  border-radius: 10px;
-  pointer-events: none;
-  padding: 2px;
+  height: var(--sinch-local-size);
+  border-radius: calc(var(--sinch-local-size) * 0.5);
   background-color: var(--sinch-comp-toggle-color-default-background-initial);
-  overflow: hidden;
+  pointer-events: none;
+  transition: background-color 0.15s ease-in-out;
 }
 
 :host([small]) #knob-container {
   width: 32px;
-  height: 16px;
-  border-radius: 8px;
+  height: var(--sinch-local-size);
 }
 
 :host([checked]) #knob-container {
@@ -88,14 +55,15 @@
 
 #knob {
   position: relative;
-  box-sizing: border-box;
   width: 16px;
   height: 16px;
+  left: 2px;
+  top: 2px;
   border-radius: 50%;
   background-color: var(--sinch-comp-toggle-color-default-knob-background-initial);
   box-shadow: var(--sinch-comp-toggle-shadow-knob-default);
   transform: translateX(0);
-  transition: transform 0.1s ease-in-out;
+  transition: transform 0.15s ease-in-out;
   will-change: transform;
 }
 
@@ -122,12 +90,12 @@
   font: var(--sinch-comp-toggle-font-size-m-inside-text);
   color: var(--sinch-comp-toggle-color-default-text-inside-initial);
   text-transform: uppercase;
-  font-size: 8px;
-  line-height: 16px;
-  display: none;
   position: absolute;
   top: 0;
-  padding: 0 3px;
+  padding: 0 1px;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+  user-select: none;
 }
 
 #knob::before {
@@ -140,27 +108,48 @@
   left: 100%;
 }
 
-:host([labeled]:not([small])) #knob::before,
-:host([labeled]:not([small])) #knob::after {
-  display: block;
+:host([labeled]:not([small]):not([checked])) #knob::after {
+  opacity: 1;
+}
+
+:host([labeled]:not([small])[checked]) #knob::before {
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion) {
-  #knob {
+  #knob-container,
+  #knob,
+  #knob::before,
+  #knob::after {
     transition: none;
   }
 }
 
+#outline {
+  display: none;
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 2px solid var(--sinch-comp-toggle-color-default-outline-focus);
+  border-radius: 17px;
+  pointer-events: none;
+}
+
+:host(:focus-visible) #outline {
+  display: block;
+}
+
 #label {
   flex: 1;
+  min-width: 0;
   align-self: center;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  padding-left: 8px;
   font: var(--sinch-comp-toggle-font-size-m-label);
   color: var(--sinch-comp-toggle-color-default-label-initial);
-  cursor: pointer;
 }
 
 #label:empty {
@@ -173,13 +162,12 @@
 
 :host([disabled]) #label {
   color: var(--sinch-comp-toggle-color-disabled-label-initial);
-  cursor: initial;
 }
 </style>
 
 <div id="wrapper">
-  <div id="input"></div>
   <div id="knob-container">
+    <div id="outline"></div>
     <div id="knob"></div>
   </div>
   <span id="label"></span>

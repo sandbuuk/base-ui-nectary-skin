@@ -18,7 +18,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-toggle', class extends NectaryElement {
-  #$label: HTMLLabelElement
+  #$label: HTMLElement
   #controller: AbortController | null = null
 
   constructor() {
@@ -38,13 +38,15 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
     const options: AddEventListenerOptions = { signal }
 
     this.role = 'checkbox'
-    this.tabIndex = 0
     this.addEventListener('click', this.#onClick, options)
+    this.addEventListener('keydown', this.#onKeydown, options)
     this.addEventListener('focus', this.#onFocus, options)
     this.addEventListener('blur', this.#onBlur, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
     this.addEventListener('-focus', this.#onFocusReactHandler, options)
     this.addEventListener('-blur', this.#onBlurReactHandler, options)
+
+    this.#updateTabIndex()
   }
 
   disconnectedCallback() {
@@ -83,6 +85,8 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
       }
       case 'disabled': {
         const isDisabled = isAttrTrue(newVal)
+
+        this.#updateTabIndex()
 
         updateExplicitBooleanAttribute(this, 'aria-disabled', isDisabled)
         updateBooleanAttribute(this, name, isDisabled)
@@ -150,6 +154,21 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('-change', { detail: !this.checked })
     )
+  }
+
+  #onKeydown = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case 'Space':
+      case 'Enter': {
+        e.preventDefault()
+
+        this.click()
+      }
+    }
+  }
+
+  #updateTabIndex() {
+    this.tabIndex = this.disabled ? -1 : 0
   }
 
   #onFocus = () => {
