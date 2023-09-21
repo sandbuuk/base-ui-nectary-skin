@@ -1,3 +1,12 @@
+## v2.5.0 (2023-09-21)
+
+* ➕ add `icon` slot to `sinch-dialog`
+* ➕ allow multiline caption for `sinch-dialog`
+* 🐞 align styles for `sinch-toggle`
+* 🐞 fix word breaks in `sinch-toast`
+* 🐞 fix fonts in `sinch-time-picker`
+* 🐞 fix password placeholder for `sinch-input`
+
 ## v2.4.0 (2023-08-04)
 
 * ➕ add `right-icon` slot to `sinch-chip`
