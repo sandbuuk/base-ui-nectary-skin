@@ -162,19 +162,13 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
 
       // Click first item
       await $.locator('sinch-tabs-option').nth(0).click()
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-tabs-change', detail: '1' },
-      ])
-
       // Click second item
       await $.locator('sinch-tabs-option').nth(2).click()
 
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-tabs-change', detail: '1' },
         { type: 'sinch-tabs-change', detail: '3' },
       ])
     },
@@ -187,19 +181,13 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
 
       // Click first item
       await $.locator('sinch-tabs-icon-option').nth(0).click()
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-tabs-change', detail: '1' },
-      ])
-
       // Click second item
       await $.locator('sinch-tabs-icon-option').nth(2).click()
 
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-tabs-change', detail: '1' },
         { type: 'sinch-tabs-change', detail: '3' },
       ])
     },

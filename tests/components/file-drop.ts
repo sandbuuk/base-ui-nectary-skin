@@ -247,7 +247,9 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
         },
       ])
 
-      expect(await getAllEvents(page)).toEqual([
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
         {
           type: 'sinch-file-drop-invalid',
           detail: 'size',
@@ -276,7 +278,9 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
         },
       ])
 
-      expect(await getAllEvents(page)).toEqual([
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
         {
           type: 'sinch-file-drop-change',
           detail: [
@@ -476,7 +480,9 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
         }),
       })
 
-      expect(await getAllEvents(page)).toEqual([
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
         {
           type: 'sinch-file-drop-invalid',
           detail: 'size',
@@ -503,7 +509,9 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
         }),
       })
 
-      expect(await getAllEvents(page)).toEqual([
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
         {
           type: 'sinch-file-drop-change',
           detail: [
@@ -535,7 +543,9 @@ test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
         }),
       })
 
-      expect(await getAllEvents(page)).toEqual([
+      expect(
+        await getAllEvents(page)
+      ).toEqual([
         {
           type: 'sinch-file-drop-change',
           detail: [
