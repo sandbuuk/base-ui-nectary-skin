@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useSearchParams } from 'react-router-dom'
 import { Accordion } from './components/Accordion'
 import { ActionDropdown } from './components/ActionDropdown'
 import { ActionMenu } from './components/ActionMenu'
@@ -67,10 +67,10 @@ import { Tooltip } from './components/Tooltip'
 import { VerticalStepper } from './components/VerticalStepper'
 import type { CSSProperties, FC } from 'react'
 
-export const App: FC = () => {
-  const url = new URL(window.location.href)
-  const width = Number(url.searchParams.get('width') ?? '0')
-  const height = Number(url.searchParams.get('height') ?? '0')
+const AppImpl = () => {
+  const [params] = useSearchParams()
+  const width = Number(params.get('width') ?? '0')
+  const height = Number(params.get('height') ?? '0')
 
   const style: CSSProperties = {
     display: 'flex',
@@ -89,76 +89,82 @@ export const App: FC = () => {
 
   return (
     <div style={style}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/accordion" element={<Accordion/>}/>
-          <Route path="/action-dropdown" element={<ActionDropdown/>}/>
-          <Route path="/action-menu" element={<ActionMenu/>}/>
-          <Route path="/alert" element={<Alert/>}/>
-          <Route path="/avatar" element={<Avatar/>}/>
-          <Route path="/badge" element={<Badge/>}/>
-          <Route path="/button" element={<Button/>}/>
-          <Route path="/card-container" element={<CardContainer/>}/>
-          <Route path="/card-dnd" element={<CardDnD/>}/>
-          <Route path="/card" element={<Card/>}/>
-          <Route path="/chat" element={<Chat/>}/>
-          <Route path="/checkbox" element={<Checkbox/>}/>
-          <Route path="/chip" element={<Chip/>}/>
-          <Route path="/code-tag" element={<CodeTag/>}/>
-          <Route path="/color-menu" element={<ColorMenu/>}/>
-          <Route path="/color-select" element={<ColorSelect/>}/>
-          <Route path="/color-swatch" element={<ColorSwatch/>}/>
-          <Route path="/date-input" element={<DateInput/>}/>
-          <Route path="/date-picker" element={<DatePicker/>}/>
-          <Route path="/dialog-example" element={<DialogExample/>}/>
-          <Route path="/dialog" element={<Dialog/>}/>
-          <Route path="/emoji-picker" element={<EmojiPicker/>}/>
-          <Route path="/event-targets" element={<EventTargets/>}/>
-          <Route path="/field" element={<Field/>}/>
-          <Route path="/file-drop" element={<FileDrop/>}/>
-          <Route path="/file-picker" element={<FilePicker/>}/>
-          <Route path="/file-status" element={<FileStatus/>}/>
-          <Route path="/grid" element={<Grid/>}/>
-          <Route path="/horizontal-stepper" element={<HorizontalStepper/>}/>
-          <Route path="/icon-button" element={<IconButton/>}/>
-          <Route path="/inline-alert" element={<InlineAlert/>}/>
-          <Route path="/input-slots" element={<InputSlots/>}/>
-          <Route path="/input" element={<Input/>}/>
-          <Route path="/link" element={<Link/>}/>
-          <Route path="/list" element={<List/>}/>
-          <Route path="/pagination" element={<Pagination/>}/>
-          <Route path="/phone-code-menu" element={<PhoneCodeMenu/>}/>
-          <Route path="/phone-code-select" element={<PhoneCodeSelect/>}/>
-          <Route path="/popover" element={<Popover/>}/>
-          <Route path="/progress-stepper" element={<ProgressStepper/>}/>
-          <Route path="/progress" element={<Progress/>}/>
-          <Route path="/radio" element={<Radio/>}/>
-          <Route path="/rich-text" element={<RichText/>}/>
-          <Route path="/search" element={<Search/>}/>
-          <Route path="/segment" element={<Segment/>}/>
-          <Route path="/segmented-control" element={<SegmentedControl/>}/>
-          <Route path="/segmented-icon-control" element={<SegmentedIconControl/>}/>
-          <Route path="/select-menu" element={<SelectMenu/>}/>
-          <Route path="/select" element={<Select/>}/>
-          <Route path="/skeleton" element={<Skeleton/>}/>
-          <Route path="/spinner" element={<Spinner/>}/>
-          <Route path="/table" element={<Table/>}/>
-          <Route path="/tabs" element={<Tabs/>}/>
-          <Route path="/tag" element={<Tag/>}/>
-          <Route path="/text" element={<Text/>}/>
-          <Route path="/textarea-example" element={<TextareaExample/>}/>
-          <Route path="/textarea" element={<Textarea/>}/>
-          <Route path="/tile-control" element={<TileControl/>}/>
-          <Route path="/time-input" element={<TimeInput/>}/>
-          <Route path="/time-picker" element={<TimePicker/>}/>
-          <Route path="/title" element={<Title/>}/>
-          <Route path="/toast-manager" element={<ToastManager/>}/>
-          <Route path="/toast" element={<Toast/>}/>
-          <Route path="/toggle" element={<Toggle/>}/>
-          <Route path="/tooltip" element={<Tooltip/>}/>
-          <Route path="/vertical-stepper" element={<VerticalStepper/>}/>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/accordion" element={<Accordion/>}/>
+        <Route path="/action-dropdown" element={<ActionDropdown/>}/>
+        <Route path="/action-menu" element={<ActionMenu/>}/>
+        <Route path="/alert" element={<Alert/>}/>
+        <Route path="/avatar" element={<Avatar/>}/>
+        <Route path="/badge" element={<Badge/>}/>
+        <Route path="/button" element={<Button/>}/>
+        <Route path="/card-container" element={<CardContainer/>}/>
+        <Route path="/card-dnd" element={<CardDnD/>}/>
+        <Route path="/card" element={<Card/>}/>
+        <Route path="/chat" element={<Chat/>}/>
+        <Route path="/checkbox" element={<Checkbox/>}/>
+        <Route path="/chip" element={<Chip/>}/>
+        <Route path="/code-tag" element={<CodeTag/>}/>
+        <Route path="/color-menu" element={<ColorMenu/>}/>
+        <Route path="/color-select" element={<ColorSelect/>}/>
+        <Route path="/color-swatch" element={<ColorSwatch/>}/>
+        <Route path="/date-input" element={<DateInput/>}/>
+        <Route path="/date-picker" element={<DatePicker/>}/>
+        <Route path="/dialog-example" element={<DialogExample/>}/>
+        <Route path="/dialog" element={<Dialog/>}/>
+        <Route path="/emoji-picker" element={<EmojiPicker/>}/>
+        <Route path="/event-targets" element={<EventTargets/>}/>
+        <Route path="/field" element={<Field/>}/>
+        <Route path="/file-drop" element={<FileDrop/>}/>
+        <Route path="/file-picker" element={<FilePicker/>}/>
+        <Route path="/file-status" element={<FileStatus/>}/>
+        <Route path="/grid" element={<Grid/>}/>
+        <Route path="/horizontal-stepper" element={<HorizontalStepper/>}/>
+        <Route path="/icon-button" element={<IconButton/>}/>
+        <Route path="/inline-alert" element={<InlineAlert/>}/>
+        <Route path="/input-slots" element={<InputSlots/>}/>
+        <Route path="/input" element={<Input/>}/>
+        <Route path="/link" element={<Link/>}/>
+        <Route path="/list" element={<List/>}/>
+        <Route path="/pagination" element={<Pagination/>}/>
+        <Route path="/phone-code-menu" element={<PhoneCodeMenu/>}/>
+        <Route path="/phone-code-select" element={<PhoneCodeSelect/>}/>
+        <Route path="/popover" element={<Popover/>}/>
+        <Route path="/progress-stepper" element={<ProgressStepper/>}/>
+        <Route path="/progress" element={<Progress/>}/>
+        <Route path="/radio" element={<Radio/>}/>
+        <Route path="/rich-text" element={<RichText/>}/>
+        <Route path="/search" element={<Search/>}/>
+        <Route path="/segment" element={<Segment/>}/>
+        <Route path="/segmented-control" element={<SegmentedControl/>}/>
+        <Route path="/segmented-icon-control" element={<SegmentedIconControl/>}/>
+        <Route path="/select-menu" element={<SelectMenu/>}/>
+        <Route path="/select" element={<Select/>}/>
+        <Route path="/skeleton" element={<Skeleton/>}/>
+        <Route path="/spinner" element={<Spinner/>}/>
+        <Route path="/table" element={<Table/>}/>
+        <Route path="/tabs" element={<Tabs/>}/>
+        <Route path="/tag" element={<Tag/>}/>
+        <Route path="/text" element={<Text/>}/>
+        <Route path="/textarea-example" element={<TextareaExample/>}/>
+        <Route path="/textarea" element={<Textarea/>}/>
+        <Route path="/tile-control" element={<TileControl/>}/>
+        <Route path="/time-input" element={<TimeInput/>}/>
+        <Route path="/time-picker" element={<TimePicker/>}/>
+        <Route path="/title" element={<Title/>}/>
+        <Route path="/toast-manager" element={<ToastManager/>}/>
+        <Route path="/toast" element={<Toast/>}/>
+        <Route path="/toggle" element={<Toggle/>}/>
+        <Route path="/tooltip" element={<Tooltip/>}/>
+        <Route path="/vertical-stepper" element={<VerticalStepper/>}/>
+      </Routes>
     </div>
+  )
+}
+
+export const App: FC = () => {
+  return (
+    <BrowserRouter>
+      <AppImpl/>
+    </BrowserRouter>
   )
 }

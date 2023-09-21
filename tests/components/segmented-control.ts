@@ -104,18 +104,13 @@ test('segmented-control screenshots', runScreenshotTests('sinch-segmented-contro
       // Click first item
       await $.locator('sinch-segmented-control-option').nth(0).click()
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-segmented-control-change', detail: '1' },
-      ])
-
       // Click second item
       await $.locator('sinch-segmented-control-option').nth(2).click()
 
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-segmented-control-change', detail: '1' },
         { type: 'sinch-segmented-control-change', detail: '3' },
       ])
     },

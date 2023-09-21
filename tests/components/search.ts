@@ -62,13 +62,6 @@ test('search events', runScreenshotTests('sinch-popover', [
       // Defocus input
       await page.mouse.click(0, 0)
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-search-focus', detail: null },
-        { type: 'sinch-search-blur', detail: null },
-      ])
-
       // Necessary to normalize "type" behaviour
       const pt = await centerBB($)
 
@@ -82,6 +75,8 @@ test('search events', runScreenshotTests('sinch-popover', [
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-search-focus', detail: null },
+        { type: 'sinch-search-blur', detail: null },
         { type: 'sinch-search-focus', detail: null },
         { type: 'sinch-search-change', detail: 'Option 2' },
       ])

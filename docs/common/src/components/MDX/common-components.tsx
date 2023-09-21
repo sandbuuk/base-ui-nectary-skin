@@ -24,7 +24,7 @@ export const commonComponents: MDXComponents = {
     </sinch-text>
   ),
   a: ({ href = '#', children }) => {
-    const isExternal = href.startsWith('http')
+    const isExternal: boolean = href.startsWith('http')
     let newHref = href
 
     if (!isExternal) {

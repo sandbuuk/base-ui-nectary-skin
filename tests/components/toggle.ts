@@ -151,13 +151,6 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
       await page.keyboard.press('Tab')
       await page.mouse.click(0, 0)
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-toggle-focus', detail: null },
-        { type: 'sinch-toggle-blur', detail: null },
-      ])
-
       const bb = (await $.boundingBox())!
 
       await page.mouse.click(bb.x + 5, bb.y + bb.height / 2)
@@ -166,6 +159,8 @@ test('toggle screenshots', runScreenshotTests('sinch-toggle', [
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-toggle-focus', detail: null },
+        { type: 'sinch-toggle-blur', detail: null },
         { type: 'sinch-toggle-focus', detail: null },
         { type: 'sinch-toggle-change', detail: true },
         { type: 'sinch-toggle-change', detail: false },

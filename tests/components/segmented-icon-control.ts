@@ -147,19 +147,13 @@ test('segmented-icon-control screenshots', runScreenshotTests('sinch-segmented-i
 
       // Click first item
       await $.locator('sinch-segmented-icon-control-option').nth(0).click()
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-segmented-icon-control-change', detail: '1' },
-      ])
-
       // Click second item
       await $.locator('sinch-segmented-icon-control-option').nth(2).click()
 
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-segmented-icon-control-change', detail: '1' },
         { type: 'sinch-segmented-icon-control-change', detail: '3' },
       ])
     },

@@ -174,23 +174,9 @@ test('pagination events', runScreenshotTests('sinch-pagination', [
       await page.keyboard.press('Tab')
       await page.mouse.click(0, 0)
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-pagination-focus', detail: null },
-        { type: 'sinch-pagination-blur', detail: null },
-      ])
-
       const prevRect = centerRect(await $eval((el) => el.prevButtonRect))
 
       await page.mouse.click(prevRect.x, prevRect.y)
-
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-pagination-focus', detail: null },
-        { type: 'sinch-pagination-change', detail: 4 },
-      ])
 
       const nextRect = centerRect(await $eval((el) => el.nextButtonRect))
 
@@ -199,6 +185,10 @@ test('pagination events', runScreenshotTests('sinch-pagination', [
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-pagination-focus', detail: null },
+        { type: 'sinch-pagination-blur', detail: null },
+        { type: 'sinch-pagination-focus', detail: null },
+        { type: 'sinch-pagination-change', detail: 4 },
         { type: 'sinch-pagination-change', detail: 5 },
       ])
     },

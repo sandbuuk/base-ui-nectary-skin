@@ -118,18 +118,13 @@ test('radio screenshots', runScreenshotTests('sinch-radio', [
       // Click first option
       await $.locator('sinch-radio-option').nth(0).click()
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-radio-change', detail: '1' },
-      ])
-
       // Click third option
       await $.locator('sinch-radio-option').nth(2).click()
 
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-radio-change', detail: '1' },
         { type: 'sinch-radio-change', detail: '3' },
       ])
     },

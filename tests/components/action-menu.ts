@@ -109,18 +109,13 @@ test('action menu events', runScreenshotTests('sinch-action-menu', [
 
       await page.mouse.click(ct.x, ct.y)
 
-      expect(
-        await getAllEvents(page)
-      ).toEqual([
-        { type: 'sinch-action-menu-click', detail: '1' },
-      ])
-
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
 
       expect(
         await getAllEvents(page)
       ).toEqual([
+        { type: 'sinch-action-menu-click', detail: '1' },
         { type: 'sinch-action-menu-click', detail: '3' },
       ])
     },
