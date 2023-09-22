@@ -7123,12 +7123,569 @@
       }
     }
   },
+  "SaaS/ MessageMedia": {
+    "sys": {
+      "color": {
+        "primary": {
+          "default": {
+            "value": "#0A5D9A",
+            "type": "color"
+          },
+          "hover": {
+            "value": "#1686CB",
+            "type": "color"
+          },
+          "active": {
+            "value": "#114369",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#C8E6F9",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#FFFFFF",
+            "type": "color"
+          }
+        }
+      },
+      "shape-radius": {
+        "l": {
+          "value": "12",
+          "type": "borderRadius"
+        },
+        "m": {
+          "value": "8",
+          "type": "borderRadius"
+        },
+        "s": {
+          "value": "4",
+          "type": "borderRadius"
+        },
+        "xs": {
+          "value": "0",
+          "type": "borderRadius"
+        }
+      }
+    },
+    "comp": {
+      "button": {
+        "color": {
+          "secondary": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "#C8E6F9",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "#A1D5F5",
+                  "type": "color"
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "#0A5D9A",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            },
+            "disabled": {
+              "background": {
+                "initial": {
+                  "value": "#F3FAFE",
+                  "type": "color"
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "#A1D5F5",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            }
+          },
+          "tertiary": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "#E0E0E0",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "#CCCCCC",
+                  "type": "color"
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "#0A5D9A",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            },
+            "disabled": {
+              "background": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "#A1D5F5",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        },
+        "shadow": {
+          "primary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "secondary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "tertiary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "cta-primary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "cta-secondary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "danger": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          }
+        }
+      },
+      "icon-button": {
+        "color": {
+          "secondary": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "#C8E6F9",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "#A1D5F5",
+                  "type": "color"
+                }
+              },
+              "icon": {
+                "initial": {
+                  "value": "#0A5D9A",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            },
+            "disabled": {
+              "background": {
+                "initial": {
+                  "value": "#F3FAFE",
+                  "type": "color"
+                }
+              },
+              "icon": {
+                "initial": {
+                  "value": "#A1D5F5",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            }
+          },
+          "tertiary": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "#E0E0E0",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "#CCCCCC",
+                  "type": "color"
+                }
+              },
+              "icon": {
+                "initial": {
+                  "value": "#0A5D9A",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            },
+            "disabled": {
+              "background": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              },
+              "icon": {
+                "initial": {
+                  "value": "#A1D5F5",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        },
+        "shadow": {
+          "primary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "secondary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "tertiary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "cta-primary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "cta-secondary": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          },
+          "danger": {
+            "initial": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "focus": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "hover": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "active": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            },
+            "disabled": {
+              "value": "{ref.shadow.level.0}",
+              "type": "boxShadow"
+            }
+          }
+        }
+      },
+      "progress": {
+        "color": {
+          "default": {
+            "background": {
+              "initial": {
+                "value": "#DEF2FF",
+                "type": "color"
+              }
+            }
+          }
+        }
+      },
+      "date-picker": {
+        "day": {
+          "color": {
+            "default": {
+              "range": {
+                "background": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              },
+              "background": {
+                "hover": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "$themes": [
     {
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
       "name": "Sinch brand light",
       "selectedTokenSets": {
-        "Nectary / Base theme": "enabled"
+        "Nectary / Base theme": "enabled",
+        "SaaS/ MessageMedia": "disabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -7893,8 +8450,7 @@
         "comp.select_menu.color.disabled.text.default": "S:46f8baf4b10701bb1a42060d939b028619331b45,",
         "comp.button.color.primary.default.background.hover": "S:63fab713fe00d6addcfad6bc9f37d8271204c098,",
         "comp.button.color.primary.default.background.active": "S:fd889584c61afc6f325331f4e35a57721c0f22bc,",
-        "comp.button.color.secondary.default.background.hover": "S:b9fe687d7b30f370a1d9c1f649111d2a931e6895,",
-        "comp.button.color.secondary.default.background.active": "S:8b68136b611bf525f7c0a23d18a03798e72369e0,",
+        "comp.button.color.secondary.default.background.hover": "S:8b68136b611bf525f7c0a23d18a03798e72369e0,",
         "comp.button.color.tertiary.default.background.hover": "S:435675cc05c2423b27f369bcca0b2211b6348065,",
         "comp.button.color.tertiary.default.background.active": "S:4d41855dbf2d8d0820150c143b003296af418f18,",
         "comp.button.color.cta-primary.default.background.hover": "S:0cdaa0322b4eeea51fc9116c5946c4c8c747ab10,",
@@ -9117,14 +9673,16 @@
         "comp.progress-stepper.title.font": "S:4cf85aaae00e8412005a48938db1f57890cc1aa3,",
         "comp.progress-stepper.description.font": "S:753339ad3179f7e5b36c82c09176fd521e53d18b,",
         "comp.accordion.color.default.outline.focus": "S:c5b3b1310e8987ffc5571b1d0d5f2f6b812a63c4,"
-      }
+      },
+      "group": "Theme"
     },
     {
       "id": "43179aa77e5eb9a7be711a2d68a4443a18c4de80",
       "name": "Sinch brand dark",
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
-        "Nectary / Dark theme": "enabled"
+        "Nectary / Dark theme": "enabled",
+        "SaaS/ MessageMedia": "disabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -9908,8 +10466,7 @@
         "comp.select_menu.color.disabled.text.default": "S:7cb36d4eee562df49bf8bac0398092c59e0f19a6,",
         "comp.button.color.primary.default.background.hover": "S:343bfb6d9f1a465f1824d4d50ef09383fffb843b,",
         "comp.button.color.primary.default.background.active": "S:611fb5a44721a1fa64da956fd493bcffd75c829a,",
-        "comp.button.color.secondary.default.background.hover": "S:f8d7974b930574df244716f2dca524daba95eddf,",
-        "comp.button.color.secondary.default.background.active": "S:b2d5e4ea993b246b7a081876dd3e02770a8b8201,",
+        "comp.button.color.secondary.default.background.hover": "S:b2d5e4ea993b246b7a081876dd3e02770a8b8201,",
         "comp.button.color.tertiary.default.background.hover": "S:e1c75a71e4f547987a7c3fe74608da5a9cfc2ae5,",
         "comp.button.color.tertiary.default.background.active": "S:f522d8286aa086d877711588efc03ec40e88dd91,",
         "comp.button.color.cta-primary.default.background.hover": "S:72e4b25410ad9993a91a0a43e9f95bbd912d48f5,",
@@ -10263,13 +10820,25 @@
         "comp.toggle.color.default.knob.background.initial": "S:a665e28602ac252a231f13aa60bf279d4f3523ca,",
         "comp.toggle.color.default.text-inside.initial": "S:caba43ef577b9213af0827b71903b34e321ab64d,",
         "sys.color.container.contrast.secondary.default": "S:504b83e0af0ba18ffd11ffecd51c9c540f6ba4a9,"
-      }
+      },
+      "group": "Theme"
+    },
+    {
+      "id": "9bf1b1eb292732c275dc4eac42197c2c56e7dc3b",
+      "name": "MessageMedia",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "Nectary / Base theme": "source",
+        "SaaS/ MessageMedia": "enabled"
+      },
+      "group": "Theme"
     }
   ],
   "$metadata": {
     "tokenSetOrder": [
       "Nectary / Base theme",
-      "Nectary / Dark theme"
+      "Nectary / Dark theme",
+      "SaaS/ MessageMedia"
     ]
   }
 }

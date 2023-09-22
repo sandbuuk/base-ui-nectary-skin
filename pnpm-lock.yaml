@@ -871,6 +871,8 @@ importers:
 
   themes/dark: {}
 
+  themes/message-media: {}
+
   tokens: {}
 
 packages:

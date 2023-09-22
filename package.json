@@ -10,6 +10,7 @@
     "test": "pnpm --dir tests test",
     "tokens:base": "tsm ./scripts/process-tokens.ts ./tokens/data.json themes/base base",
     "tokens:dark": "tsm ./scripts/process-tokens.ts ./tokens/data.json themes/dark dark",
+    "tokens:mm": "tsm ./scripts/process-tokens.ts ./tokens/data.json themes/message-media messagemedia",
     "tokens": "concurrently --raw npm:tokens:base npm:tokens:dark"
   },
   "devDependencies": {

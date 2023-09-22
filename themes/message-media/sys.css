@@ -1,0 +1,12 @@
+:root,
+:host {
+  --sinch-sys-color-primary-active: #114369;
+  --sinch-sys-color-primary-default: #0A5D9A;
+  --sinch-sys-color-primary-disabled: #C8E6F9;
+  --sinch-sys-color-primary-foreground: #FFFFFF;
+  --sinch-sys-color-primary-hover: #1686CB;
+  --sinch-sys-shape-radius-l: 12px;
+  --sinch-sys-shape-radius-m: 8px;
+  --sinch-sys-shape-radius-s: 4px;
+  --sinch-sys-shape-radius-xs: 0;
+}
