@@ -1,5 +1,8 @@
 {
   "name": "@nectary/scoped-custom-element-registry",
   "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "index.js"
 }

@@ -6,5 +6,8 @@
     "*.json",
     "*.js"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "index.css"
 }
