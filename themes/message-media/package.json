@@ -1,0 +1,10 @@
+{
+  "name": "@nectary/theme-message-media",
+  "version": "0.1.0",
+  "files": [
+    "**/*.css",
+    "*.json",
+    "*.js"
+  ],
+  "main": "index.css"
+}

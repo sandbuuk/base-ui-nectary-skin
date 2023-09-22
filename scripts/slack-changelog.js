@@ -27,6 +27,11 @@ switch (packagePath) {
 
     break
   }
+  case 'themes/message-media': {
+    packageTitle = 'MessageMedia Theme'
+
+    break
+  }
   default: {
     throw new Error(`Cannot determine title for the package path: ${packagePath}`)
   }
