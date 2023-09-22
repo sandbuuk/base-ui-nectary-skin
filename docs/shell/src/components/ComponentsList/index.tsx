@@ -1,6 +1,7 @@
 import { Loading, createResource } from 'docs-common'
 import { Suspense, useRef } from 'react'
 import { versions } from '../../utils'
+import { NavigationGroup } from '../NavigationGroup'
 import { NavigationItem } from '../NavigationItem'
 import { NavigationList } from '../NavigationList'
 import type { TResource } from 'docs-common'
@@ -13,16 +14,16 @@ type TSidebarItem = {
   key: string,
 }
 
-type TNaigationItems = {
-  resource: TResource<TSidebarItem[]>,
+type TNavigationItems = {
+  items: TSidebarItem[],
 }
 
-const NavigationItems: FC<TNaigationItems> = ({ resource }) => {
+const NavigationItems: FC<TNavigationItems> = ({ items }) => {
   let prevName = ''
 
   return (
     <>
-      {resource.read().map(({ route, name }) => {
+      {items.map(({ route, name }) => {
         if (prevName === name) {
           return null
         }
@@ -41,30 +42,78 @@ const NavigationItems: FC<TNaigationItems> = ({ resource }) => {
   )
 }
 
+type TResourceNavigationGroup = {
+  resource: TResource<TSidebarItem[] | null>,
+  text: string,
+}
+
+const ResourceNavigationGroup: FC<TResourceNavigationGroup> = ({ resource, text }) => {
+  const items = resource.read()
+
+  if (items === null) {
+    return null
+  }
+
+  return (
+    <NavigationGroup text={text}>
+      <NavigationList>
+        <NavigationItems items={items}/>
+      </NavigationList>
+    </NavigationGroup>
+  )
+}
+
+type TResourceNaigationItems = {
+  resource: TResource<TSidebarItem[] | null>,
+}
+
+const ReourceNavigationItems: FC<TResourceNaigationItems> = ({ resource }) => {
+  const items = resource.read()
+
+  if (items === null) {
+    return null
+  }
+
+  return (
+    <NavigationItems items={items}/>
+  )
+}
+
 export const ComponentsList: FC = () => {
   const { versionValue } = useNavigateVersion()
   const versionValueRef = useRef('')
   const componentsRef = useRef<TResource<TSidebarItem[]>>()
   const pagesRef = useRef<TResource<TSidebarItem[]>>()
+  const compositionsRef = useRef<TResource<TSidebarItem[] | null>>()
 
   if (versionValueRef.current !== versionValue) {
     const promise = Reflect.get(versions, versionValue).bootstrap()
     const components: Promise<TSidebarItem[]> = promise.then(({ getComponentsRoutes }: any) => getComponentsRoutes())
     const pages: Promise<TSidebarItem[]> = promise.then(({ getPagesRoutes }: any) => getPagesRoutes())
+    const compositions: Promise<TSidebarItem[] | null> = promise.then((mod: any) => mod.getCompositionsRoutes?.() ?? null)
 
     componentsRef.current = createResource(components)
     pagesRef.current = createResource(pages)
+    compositionsRef.current = createResource(compositions)
   }
 
   versionValueRef.current = versionValue
 
   return (
-    <Suspense fallback={<Loading/>}>
-      <NavigationList>
-        <NavigationItems resource={pagesRef.current!}/>
-        <div className="divider"/>
-        <NavigationItems resource={componentsRef.current!}/>
-      </NavigationList>
-    </Suspense>
+    <>
+      <Suspense fallback={null}>
+        <ResourceNavigationGroup text="Compositions" resource={compositionsRef.current!}/>
+      </Suspense>
+
+      <NavigationGroup text="Components">
+        <Suspense fallback={<Loading/>}>
+          <NavigationList>
+            <ReourceNavigationItems resource={pagesRef.current!}/>
+            <div className="divider"/>
+            <ReourceNavigationItems resource={componentsRef.current!}/>
+          </NavigationList>
+        </Suspense>
+      </NavigationGroup>
+    </>
   )
 }

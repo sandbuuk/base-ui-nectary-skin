@@ -55,9 +55,7 @@ export const App: FC = () => {
                   <NavigationItem path="/faq" text="FAQ"/>
                 </NavigationList>
               </NavigationGroup>
-              <NavigationGroup text="Components">
-                <ComponentsList/>
-              </NavigationGroup>
+              <ComponentsList/>
             </NavigationList>
           </div>
         </div>
@@ -70,12 +68,10 @@ export const App: FC = () => {
           <Routes>
             <Route path="/" element={<LandingPage/>}/>
             <Route path="/intro" element={<IntroPage/>}/>
-            <Route
-              path="/testing"
-              element={<TestingPage/>}
-            />
+            <Route path="/testing" element={<TestingPage/>}/>
             <Route path="/faq" element={<FAQPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
+            <Route path="/compositions/*" element={<ComponentsPage/>}/>
             <Route path="*" element={<NotFoundPage/>}/>
           </Routes>
         </Suspense>

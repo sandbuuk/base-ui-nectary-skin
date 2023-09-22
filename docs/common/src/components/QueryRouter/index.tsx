@@ -10,7 +10,7 @@ type TQueryRouter = BrowserRouterProps & {
   onChange?: (location: Location) => void,
 }
 
-const getPathFromSearch = (location: Location) => {
+const extractPathFromSearch = (location: Location) => {
   const params = new URLSearchParams(location.search)
   const path = params.get('path') ?? '/'
 
@@ -31,7 +31,7 @@ export const QueryRouter: FC<TQueryRouter> = ({ basename, children, window, onCh
 
   const history = historyRef.current
   const [state, setState] = useState(() => {
-    const { path, search } = getPathFromSearch(history.location)
+    const { path, search } = extractPathFromSearch(history.location)
     const location: Location = {
       pathname: basename + path,
       search,
@@ -48,7 +48,7 @@ export const QueryRouter: FC<TQueryRouter> = ({ basename, children, window, onCh
 
   useLayoutEffect(() => {
     return history.listen((update) => {
-      const { path, search } = getPathFromSearch(update.location)
+      const { path, search } = extractPathFromSearch(update.location)
 
       onChange?.({
         pathname: path,
