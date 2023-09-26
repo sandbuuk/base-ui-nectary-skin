@@ -49,11 +49,15 @@ It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled
 
 Postprocess copied or cut value.
 
+This example transforms copied text to uppercase:
+
 <Example Component={CopyExample}/>
 
 ### Paste
 
 Preprocess pasted value.
+
+This example transforms pasted text to uppercase:
 
 <Example Component={PasteExample}/>
 
@@ -65,7 +69,7 @@ We have decided to use monospace font for masked inputs to avoid unnecessary jum
 
 ⚠️ Make sure you have enough width to fit the whole mask.
 
-See [PhoneInput](?path=/components/phoneinput/examples), [DatePicker](?path=/components/datepicker/examples) or [TimePicker](?path=/components/timepicker/examples) for more examples.
+See [Phone Input](?path=/compositions/phoneinput/examples), [Date Input](?path=/compositions/dateinput/examples) or [Time Input](?path=/compositions/timeinput/examples) for more examples.
 
 ### Syntax
 
@@ -119,6 +123,6 @@ Here `@@` is a delimiter between mask value and placeholder representation. For 
 
 It is possible to combine clipboard events with masked input to normalize pasted value to match the mask.
 
-<Example Component={MaskedPhoneExample}/>
-
 Try pasting phone numbers in international `+46701112233` or local `0701112233` formats.
+
+<Example Component={MaskedPhoneExample}/>

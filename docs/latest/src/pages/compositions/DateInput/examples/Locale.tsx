@@ -1,29 +1,32 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import '@nectary/components/field'
 import '@nectary/components/input'
 import '@nectary/components/popover'
-import '@nectary/components/time-picker'
+import '@nectary/components/date-picker'
 import '@nectary/components/icon-button'
-import '@nectary/assets/icons/schedule'
+import '@nectary/components/field'
+import '@nectary/assets/icons/calendar-today'
 
-const style: CSSProperties = {
-  width: 200,
+const inputStyles: CSSProperties = {
+  width: 300,
 }
 
-export const CompositionExample: FC = () => {
+const reverseDateValue = (value: string) => value.split('-').reverse().join('-')
+
+export const LocaleExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
-  const [inputValue, setInputValue] = useState('22:30')
-  const [pickerValue, setPickerValue] = useState('22:30')
+  const [inputValue, setInputValue] = useState('19-07-2022')
+  const [pickerValue, setPickerValue] = useState('2022-07-19')
+
   const onInputChange = (e: CustomEvent<string>) => {
     setInputValue(e.detail)
   }
   const onPickerChange = (e: CustomEvent<string>) => {
-    setInputValue(e.detail)
+    setInputValue(reverseDateValue(e.detail))
     setOpen(false)
   }
   const onOpen = () => {
-    setPickerValue(inputValue)
+    setPickerValue(reverseDateValue(inputValue))
     setOpen(true)
   }
   const onClose = () => setOpen(false)
@@ -32,37 +35,42 @@ export const CompositionExample: FC = () => {
     <sinch-popover
       open={isOpen}
       orientation="bottom-left"
-      aria-label="Time input"
+      aria-label="Date input"
       modal
       on-close={onClose}
     >
       <sinch-field
         slot="target"
-        label="Time picker"
-        additionalText="Additional text"
-        style={style}
+        label="Datum inmatningsfält"
+        style={inputStyles}
       >
         <sinch-input
           slot="input"
-          aria-label="Pick time"
-          mask="00:00@@HH:MM"
+          aria-label="Pick date"
+          mask="00-00-0000@@DD/MM/YYYY"
           value={inputValue}
           on-change={onInputChange}
         >
           <sinch-icon-button
             slot="right"
             size="s"
-            aria-label="Open Time Picker"
+            aria-label="Open Date Picker"
             on-click={onOpen}
           >
-            <sinch-icon-schedule slot="icon"/>
+            <sinch-icon-calendar-today slot="icon"/>
           </sinch-icon-button>
         </sinch-input>
       </sinch-field>
-      <sinch-time-picker
+      <sinch-date-picker
         slot="content"
-        aria-label="Time Picker"
-        submit-aria-label="Submit time"
+        min="2021-12-25"
+        max="2025-07-19"
+        locale="sv-SE"
+        aria-label="Date Picker"
+        next-month-aria-label="Next Month"
+        prev-month-aria-label="Next Month"
+        next-year-aria-label="Next Year"
+        prev-year-aria-label="Prev Year"
         value={pickerValue}
         on-change={onPickerChange}
       />

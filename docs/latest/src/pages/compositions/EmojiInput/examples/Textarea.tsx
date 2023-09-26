@@ -1,22 +1,21 @@
 import { useRef, useState } from 'react'
-import type { TSinchInputElement } from '@nectary/components/input/types'
+import type { TSinchTextareaElement } from '@nectary/components/textarea/types'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/field'
-import '@nectary/components/input'
 import '@nectary/components/popover'
 import '@nectary/components/icon-button'
 import '@nectary/components/emoji-picker'
-import '@nectary/assets/icons/sentiment-satisfied'
+import '@nectary/components/textarea'
+import '@nectary/components/icon'
 
 const inputStyles: CSSProperties = {
   width: 300,
 }
 
-export const CompositionExample: FC = () => {
+export const TextareaExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState('Input value')
-  const inputRef = useRef<TSinchInputElement>(null)
-  const firstIsOpenRef = useRef(false)
+  const inputRef = useRef<TSinchTextareaElement>(null)
 
   const onChange = (e: CustomEvent<string>) => {
     setValue(e.detail)
@@ -28,7 +27,6 @@ export const CompositionExample: FC = () => {
     setOpen(false)
   }
   const onOpen = () => {
-    firstIsOpenRef.current = true
     setOpen(true)
   }
   const onClose = () => setOpen(false)
@@ -38,39 +36,37 @@ export const CompositionExample: FC = () => {
       label="Emoji picker"
       additionalText="Additional text"
     >
-      <sinch-popover
+      <sinch-textarea
         slot="input"
-        style={inputStyles}
-        open={isOpen}
-        orientation="top-right"
-        aria-label="Emoji input"
-        on-close={onClose}
+        ref={inputRef}
+        aria-label="Pick emoji"
+        placeholder="Placeholder"
+        value={value}
+        on-change={onChange}
       >
-        <sinch-input
-          slot="target"
-          ref={inputRef}
-          aria-label="Pick emoji"
-          placeholder="Placeholder"
-          value={value}
-          on-change={onChange}
+        <sinch-popover
+          slot="bottom"
+          style={inputStyles}
+          open={isOpen}
+          orientation="top-left"
+          aria-label="Emoji input"
+          on-close={onClose}
         >
           <sinch-icon-button
-            slot="right"
+            slot="target"
             size="s"
             aria-label="Open Time Picker"
             on-click={onOpen}
           >
-            <sinch-icon-sentiment-satisfied slot="icon"/>
+            <sinch-icon slot="icon" name="sentiment_satisfied"/>
           </sinch-icon-button>
-        </sinch-input>
-        {firstIsOpenRef.current && (
           <sinch-emoji-picker
             slot="content"
             aria-label="Emoji Picker"
             on-change={onEmojiChange}
           />
-        )}
-      </sinch-popover>
+        </sinch-popover>
+      </sinch-textarea>
     </sinch-field>
   )
 }

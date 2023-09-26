@@ -49,12 +49,15 @@ const pagesRoutes = pagesReq.keys().map((key) => {
 
 const compositionsRoutes = compositionsReq.keys().map((key) => {
   const name = key.replace(/^\.\/(.+?)\/.+$/, '$1')
-  const route = `/compositions/${name.toLowerCase()}`
+  const tab = key.replace(/^\.\/.+\/\d{2}-(.+).mdx?$/, '$1')
+  const route = `/compositions/${name.toLowerCase()}/${tab.toLowerCase()}`
+  const printedName = name.replace(/([a-z\d])([A-Z])/g, '$1 $2')
 
   return {
     key,
-    name,
+    name: printedName,
     route,
+    tab,
   }
 })
 
@@ -76,14 +79,14 @@ const componentTabs = componentsRoutes.reduce((res, { name, tab, route }) => {
   return res
 }, {} as Record<string, TRouteTab[]>)
 
-const routeNameMap = componentsRoutes.reduce((res, { route, name }) => {
+const componentsRouteNameMap = componentsRoutes.reduce((res, { route, name }) => {
   res[route] = name
 
   return res
 }, {} as Record<string, string | undefined>)
 
 export const getRouteTabs = (route: string) => {
-  const name = routeNameMap[route] ?? null
+  const name = componentsRouteNameMap[route] ?? null
 
   if (name === null) {
     return null
@@ -93,7 +96,43 @@ export const getRouteTabs = (route: string) => {
 }
 
 export const getRouteTitle = (route: string) => {
-  const name = routeNameMap[route] ?? null
+  const name = componentsRouteNameMap[route] ?? null
+
+  return name
+}
+
+const compositionsTabs = compositionsRoutes.reduce((res, { name, tab, route }) => {
+  if (!Reflect.has(res, name)) {
+    res[name] = []
+  }
+
+  res[name].push({
+    value: tab,
+    text: printTabName(tab),
+    route,
+  })
+
+  return res
+}, {} as Record<string, TRouteTab[]>)
+
+const compositionsRouteNameMap = compositionsRoutes.reduce((res, { route, name }) => {
+  res[route] = name
+
+  return res
+}, {} as Record<string, string | undefined>)
+
+export const getCompositionsRouteTabs = (route: string) => {
+  const name = compositionsRouteNameMap[route] ?? null
+
+  if (name === null) {
+    return null
+  }
+
+  return compositionsTabs[name] ?? null
+}
+
+export const getCompositionsRouteTitle = (route: string) => {
+  const name = compositionsRouteNameMap[route] ?? null
 
   return name
 }

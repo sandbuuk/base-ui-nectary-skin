@@ -2,8 +2,8 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@nectary/components/date-picker'
 
-export const RangeExample: FC = () => {
-  const [pickerValue, setPickerValue] = useState('')
+export const SimpleExample: FC = () => {
+  const [pickerValue, setPickerValue] = useState('2022-07-19')
 
   const onPickerChange = (e: CustomEvent<string>) => {
     setPickerValue(e.detail)
@@ -20,7 +20,6 @@ export const RangeExample: FC = () => {
       prev-month-aria-label="Next Month"
       next-year-aria-label="Next Year"
       prev-year-aria-label="Prev Year"
-      range
       value={pickerValue}
       on-change={onPickerChange}
     />

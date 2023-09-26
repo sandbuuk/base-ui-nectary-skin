@@ -41,7 +41,7 @@ export const AsyncExample: FC = () => {
       const res = await fetch('https://unpkg.com/cat-names@3.1.0/cat-names.json')
       const json = await res.json()
 
-      await new Promise((res) => setTimeout(res, 5000))
+      await new Promise((res) => setTimeout(res, 3000))
 
       setData(json)
       setLoading(false)

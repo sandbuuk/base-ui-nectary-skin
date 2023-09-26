@@ -1,18 +1,12 @@
 import { Example } from '~/components/Example'
-import { SimpleExample } from './examples/Simple.tsx?example'
+import { TimeInputExample } from './examples/TimeInput.tsx?example'
 import { AMPMExample } from './examples/AMPM.tsx?example'
 
 # Examples
 
-Time Picker communicates using an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) (e.g. `hh:mm:ss`) time format. Working with timezones is not a part of the component functionality and all internal time manipulations go through consumer's local timezone reported by browser.
+It's a modular *input* that requires you to compose an [sinch-input](?path=/components/input/examples) + [sinch-popover](?path=/components/popover/examples) + [sinch-time-picker](?path=/components/timepicker/examples) and maintain the states.
 
-## Compositions
-
-See [Time Input compositions page](?path=/compositions/timeinput/examples) for examples
-
-## 24 Hours
-
-<Example Component={SimpleExample}/>
+<Example Component={TimeInputExample}/>
 
 ## AM/PM
 

@@ -40,7 +40,6 @@ export const AMPMExample: FC = () => {
       <sinch-field
         slot="target"
         label="Time picker"
-        additionalText="Additional text"
         style={style}
       >
         <sinch-input

@@ -13,7 +13,7 @@ const styles: CSSProperties = {
 
 const reverseDateValue = (value: string) => value.split('-').reverse().join('-')
 
-export const CompositionExample: FC = () => {
+export const DateExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [datePickerValue, setDatePickerValue] = useState('')
@@ -45,8 +45,7 @@ export const CompositionExample: FC = () => {
     >
       <sinch-field
         slot="target"
-        label="Date picker"
-        additionalText="Additional text"
+        label="Date input"
         style={styles}
       >
         <sinch-input

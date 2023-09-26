@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@nectary/components/time-picker'
 
-export const AMPMExample: FC = () => {
+export const SimpleExample: FC = () => {
   const [isoValue, setIsoValue] = useState('10:30')
 
   const onIsoChange = (e: CustomEvent<string>) => {
@@ -12,7 +12,6 @@ export const AMPMExample: FC = () => {
   return (
     <sinch-time-picker
       slot="content"
-      ampm
       aria-label="Time Picker"
       submit-aria-label="Submit time"
       value={isoValue}

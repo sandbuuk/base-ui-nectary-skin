@@ -21,7 +21,7 @@ const statusStackStyles: CSSProperties = {
   gap: '8px',
 }
 
-export const CompositionExample: FC = () => {
+export const FileInputExample: FC = () => {
   const [files, setFiles] = useState<File[]>([])
   const onChange = (e: CustomEvent<File[]>) => {
     setFiles(e.detail)

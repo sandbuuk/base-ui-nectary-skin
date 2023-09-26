@@ -1,5 +1,5 @@
 import { Example } from '~/components/Example'
-import { CompositionExample } from './examples/Composition.tsx?example'
+import { SimpleExample } from './examples/Simple.tsx?example'
 import { RangeExample } from './examples/Range.tsx?example'
 import { LocaleExample } from './examples/Locale.tsx?example'
 
@@ -7,13 +7,13 @@ import { LocaleExample } from './examples/Locale.tsx?example'
 
 Date Picker communicates using an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) (e.g. `YYYY-MM-DD`) date format. Working with timezones is not a part of the component functionality and all internal date manipulations go through consumer's local timezone reported by browser.
 
-## Composition
+## Compositions
 
-The component does *not* provide an input field and does *not* do any input masking. It's a modular *picker* and requires you to compose an input + popover + picker on your own, maintaining all the states and masking/formatting the displayed value.
+See [Date Input compositions page](?path=/compositions/dateinput/examples) for examples
 
-We'll implement a generic masking functionality for the input field  (like `pattern` attribute) later and then maybe wrap it all into `DateInput` complete molecule.
+## Simple
 
-<Example Component={CompositionExample}/>
+<Example Component={SimpleExample}/>
 
 ## Range
 

@@ -14,7 +14,7 @@ const inputStyles: CSSProperties = {
 
 const countriesArray = Object.entries(countries)
 
-export const CompositionExample: FC = () => {
+export const PhoneInputExample: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [menuValue, setMenuValue] = useState('')
   const [inputValue, setInputValue] = useState('')

@@ -48,8 +48,7 @@ export const RangeExample: FC = () => {
     >
       <sinch-field
         slot="target"
-        label="Date picker"
-        additionalText="Additional text"
+        label="Ranged date input"
         style={styles}
       >
         <sinch-input

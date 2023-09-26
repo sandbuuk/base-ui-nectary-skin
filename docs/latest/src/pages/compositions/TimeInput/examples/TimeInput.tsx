@@ -11,7 +11,7 @@ const style: CSSProperties = {
   width: 200,
 }
 
-export const CompositionExample: FC = () => {
+export const TimeInputExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
   const [inputValue, setInputValue] = useState('22:30')
   const [pickerValue, setPickerValue] = useState('22:30')
@@ -39,7 +39,6 @@ export const CompositionExample: FC = () => {
       <sinch-field
         slot="target"
         label="Time picker"
-        additionalText="Additional text"
         style={style}
       >
         <sinch-input

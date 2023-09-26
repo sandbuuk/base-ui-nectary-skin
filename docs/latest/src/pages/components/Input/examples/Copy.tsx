@@ -14,8 +14,8 @@ export const CopyExample: FC = () => {
     // Transform the original value
     const value = e.detail.value.toUpperCase()
 
-    // Replace value in the copy event
-    // This value will replace the original in Clipboard
+    // Replace value in the "copy" event
+    // This value will replace the original one in the Clipboard
     e.detail.replaceWith(value)
   }
 
