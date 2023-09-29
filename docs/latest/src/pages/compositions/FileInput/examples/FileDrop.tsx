@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import type { TSinchFilePickerInvalidType } from '@nectary/components/file-picker/types'
+import type { TSinchFileDropInvalidType } from '@nectary/components/file-drop/types'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/field'
-import '@nectary/components/file-picker'
+import '@nectary/components/file-drop'
 import '@nectary/components/file-status'
 import '@nectary/components/button'
 import '@nectary/components/icon-button'
@@ -12,7 +12,7 @@ const wrapperStyles: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   gap: '8px',
-  width: '250px',
+  width: '400px',
 }
 
 const statusStackStyles: CSSProperties = {
@@ -21,12 +21,12 @@ const statusStackStyles: CSSProperties = {
   gap: '8px',
 }
 
-export const FileInputExample: FC = () => {
+export const FileDropExample: FC = () => {
   const [files, setFiles] = useState<File[]>([])
   const onChange = (e: CustomEvent<File[]>) => {
     setFiles(e.detail)
   }
-  const onInvalid = (e: CustomEvent<TSinchFilePickerInvalidType>) => {
+  const onInvalid = (e: CustomEvent<TSinchFileDropInvalidType>) => {
     console.log(e.detail)
   }
 
@@ -37,8 +37,9 @@ export const FileInputExample: FC = () => {
         additionalText="Additonal text"
         optionalText="Optional text"
       >
-        <sinch-file-picker
+        <sinch-file-drop
           slot="input"
+          placeholder="Drag and drop to upload or"
           multiple
           on-change={onChange}
           on-invalid={onInvalid}
@@ -49,7 +50,7 @@ export const FileInputExample: FC = () => {
             aria-label="Choose files to upload"
             size="s"
           />
-        </sinch-file-picker>
+        </sinch-file-drop>
       </sinch-field>
       <div style={statusStackStyles}>
         {

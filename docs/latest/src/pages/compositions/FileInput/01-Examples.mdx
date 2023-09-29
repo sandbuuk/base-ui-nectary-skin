@@ -1,12 +1,19 @@
 import { Example } from '~/components/Example'
-import { FileInputExample } from './examples/FileInput.tsx?example'
+import { FilePickerExample } from './examples/FilePicker.tsx?example'
+import { FileDropExample } from './examples/FileDrop.tsx?example'
 
 # Examples
 
-File Input is a composition of [sinch-file-picker](?path=/components/filepicker/examples), [sinch-button](?path=/components/button/examples) and [sinch-file-status](?path=/components/filestatus/examples)
+File Input is a composition of [FilePicker](?path=/components/filepicker/examples) or [FileDrop](?path=/components/filedrop/examples) + [Button](?path=/components/button/examples) and additional [FileStatus](?path=/components/filestatus/examples) components for upload progress feedback.
 
-## Composition
+## File Picker
 
 Choose at least 3 files and the example below will emulate the actual uploading functionality with all file status types.
 
-<Example Component={FileInputExample}/>
+<Example Component={FilePickerExample}/>
+
+## File Drop
+
+Choose at least 3 files and the example below will emulate the actual uploading functionality with all file status types.
+
+<Example Component={FileDropExample}/>
