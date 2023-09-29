@@ -1,0 +1,30 @@
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import { RangeExample } from './examples/Range.tsx?example'
+import { LocaleExample } from './examples/Locale.tsx?example'
+
+# Examples
+
+Date Picker communicates using an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) (e.g. `YYYY-MM-DD`) date format. Working with timezones is not a part of the component functionality and all internal date manipulations go through consumer's local timezone reported by browser.
+
+## Compositions
+
+See [Date Input compositions page](?path=/compositions/dateinput/examples) for examples
+
+## Simple
+
+<Example Component={SimpleExample}/>
+
+## Range
+
+Range of dates where formatting and parsing a visual representation is delegated to a consumer side — Date Picker works with an ISO pair of dates in CSV format.
+
+<Example Component={RangeExample}/>
+
+## Locale
+
+`locale` is a special property/attribute that we use to get month and week day short names automatically.
+
+It uses [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat) native API under the hood which works with [IETF BCP 47 language tag](https://www.rfc-editor.org/rfc/rfc5646.txt) (e.g. `en-US` or `sv-SE`).
+
+<Example Component={LocaleExample}/>

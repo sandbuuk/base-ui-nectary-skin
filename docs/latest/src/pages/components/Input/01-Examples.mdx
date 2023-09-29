@@ -1,0 +1,128 @@
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import { SizeExample } from './examples/Size.tsx?example'
+import { CompositionExample } from './examples/Composition.tsx?example'
+import { FieldExample } from './examples/Field.tsx?example'
+import { PasswordExample } from './examples/Password.tsx?example'
+import { DisabledExample } from './examples/Disabled.tsx?example'
+import { MaskedDateExample } from './examples/MaskedDate.tsx?example'
+import { MaskedSyntaxExample } from './examples/MaskedSyntax.tsx?example'
+import { MaskedPhoneExample } from './examples/MaskedPhone.tsx?example'
+import { CopyExample } from './examples/Copy.tsx?example'
+import { PasteExample } from './examples/Paste.tsx?example'
+
+# Examples
+
+Input is the basic and most common text field.
+
+It's a stateless and [controlled](https://reactjs.org/docs/forms.html#controlled-components) component.
+
+## Simple
+
+<Example Component={SimpleExample}/>
+
+## Disabled
+
+<Example Component={DisabledExample}/>
+
+## Size
+
+<Example Component={SizeExample}/>
+
+## Composition
+
+<Example Component={CompositionExample}/>
+
+## Field
+
+<Example Component={FieldExample}/>
+
+## Password
+
+<Example Component={PasswordExample}/>
+
+## Clipboard
+
+`sinch-input` provides events to intercept clipboard events which allows to process the value before it gets to or from the clipboard.
+
+### Copy or Cut
+
+Postprocess copied or cut value.
+
+This example transforms copied text to uppercase:
+
+<Example Component={CopyExample}/>
+
+### Paste
+
+Preprocess pasted value.
+
+This example transforms pasted text to uppercase:
+
+<Example Component={PasteExample}/>
+
+## Mask
+
+Masked Input applies only for fixed length inputs known in advance. For example Bank Card number, or Phone number.
+
+We have decided to use monospace font for masked inputs to avoid unnecessary jumping of placeholder symbols.
+
+⚠️ Make sure you have enough width to fit the whole mask.
+
+See [Phone Input](?path=/compositions/phoneinput/examples), [Date Input](?path=/compositions/dateinput/examples) or [Time Input](?path=/compositions/timeinput/examples) for more examples.
+
+### Syntax
+
+In mask syntax any letter is represented by `A` symbol:
+
+```tsx
+<sinch-input mask="AAAA"></sinch-input>
+```
+
+Such mask will allow to input only four any letters, like `abcd`.
+
+Any digit is represented by `0` symbol:
+
+```tsx
+<sinch-input mask="0000"></sinch-input>
+```
+
+Such mask will allow to input only four any digits, like `1234`.
+
+You can use any other symbols to represent non-editable mask placeholders:
+
+```tsx
+<sinch-input mask="+46-000"></sinch-input>
+```
+
+Such mask will have non-editable `+46-` part, followed by 3 editable digits.
+
+In case you need to use `A` or `0` as non-editable placeholder part then it needs to be escaped with `\` symbol:
+
+```tsx
+<sinch-input mask="+46-\000"></sinch-input>
+```
+
+Such mask will have non-editable `+46-0` part, followed by 2 editable digits.
+
+<Example Component={MaskedSyntaxExample}/>
+
+### Placeholder
+
+By default any editable letters or digits are visually presented by `_` symbols. But it is possible to customize this:
+
+```tsx
+<sinch-input mask="00-00-0000@@dd/mm/yyyy"></sinch-input>
+```
+
+Here `@@` is a delimiter between mask value and placeholder representation. For example if user types `01012022`, theactual input value will be `01-01-2022`, but visual representation will be `01/01/2022`.
+
+<Example Component={MaskedDateExample}/>
+
+### Clipboard
+
+It is possible to combine clipboard events with masked input to normalize pasted value to match the mask.
+
+Try pasting phone numbers in international `+46701112233` or local `0701112233` formats.
+
+<Example Component={MaskedPhoneExample}/>

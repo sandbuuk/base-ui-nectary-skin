@@ -1,0 +1,51 @@
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import { MultipleExample } from './examples/Multiple.tsx?example'
+import { InvalidExample } from './examples/Invalid.tsx?example'
+import { AcceptExample } from './examples/Accept.tsx?example'
+
+# Examples
+
+File Picker is an abstract wrapper that makes any clickable target to open a file dialog.
+
+## Simple
+
+File Picker provides an array of [files](https://developer.mozilla.org/en-US/docs/Web/API/File) to upload.
+
+<Example Component={SimpleExample}/>
+
+## Multiple
+
+Allows to choose multiple files.
+
+<Example Component={MultipleExample}/>
+
+## Accept
+
+[A unique file type specifier](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers) that describes a type of file that may be selected by the user:
+
+* a valid case-insensitive filename extension, starting with a period (".") character. For example: `.jpg`, `.pdf`, or `.doc`.
+* a valid MIME type string, with no extensions
+* string `audio/*` meaning "any audio file"
+* string `video/*` meaning "any video file"
+* string `image/*` meaning "any image file"
+
+>The accept attribute takes a string containing one or more of these unique file type specifiers as its value, separated by commas.
+
+<Example Component={AcceptExample}/>
+
+## Invalid
+
+There is a way to validate a picked file and show an error message via `-invalid` event and mix of `invalid` and `invalidtext` attributes.
+
+Possible invalid things:
+
+* `size` – picked file is too large
+
+Try to choose a file larger than 1KB file:
+
+<Example Component={InvalidExample}/>
+
+## Composition
+
+See [File Input example](?path=/compositions/fileinput/examples) on the Compositions page

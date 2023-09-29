@@ -2,11 +2,48 @@ import { Loading, TabsLayout, lazyScrollIntoView } from 'docs-common'
 import { Suspense, memo } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { NotFoundPage } from '../NotFound'
-import { componentReq, getComponentsRoutes, getPagesRoutes, getRouteTabs, getRouteTitle, pagesReq } from '~/entries'
+import {
+  componentReq,
+  compositionsReq,
+  getComponentsRoutes,
+  getCompositionsRouteTabs,
+  getCompositionsRouteTitle,
+  getCompositionsRoutes,
+  getPagesRoutes,
+  getRouteTabs,
+  getRouteTitle,
+  pagesReq,
+} from '~/entries'
 
 export const ComponentsRoutes = memo(() => {
   return (
     <Routes>
+      <Route
+        path="/compositions"
+        element={(
+          <TabsLayout
+            getRouteTabInfo={getCompositionsRouteTabs}
+            getRouteTitle={getCompositionsRouteTitle}
+          />
+        )}
+      >
+        {getCompositionsRoutes().map(({ key, route }) => {
+          const Component = lazyScrollIntoView(() => compositionsReq(key))
+
+          return (
+            <Route
+              key={key}
+              path={route}
+              element={(
+                <Suspense fallback={<Loading/>}>
+                  <Component/>
+                </Suspense>
+              )}
+            />
+          )
+        })}
+      </Route>
+
       <Route
         path="/components"
         element={(
@@ -32,23 +69,22 @@ export const ComponentsRoutes = memo(() => {
           )
         })}
       </Route>
-      <Route path="/components/_">
-        {getPagesRoutes().map(({ key, route }) => {
-          const Component = lazyScrollIntoView(() => pagesReq(key))
 
-          return (
-            <Route
-              key={key}
-              path={route}
-              element={(
-                <Suspense fallback={<Loading/>}>
-                  <Component/>
-                </Suspense>
+      {getPagesRoutes().map(({ key, route }) => {
+        const Component = lazyScrollIntoView(() => pagesReq(key))
+
+        return (
+          <Route
+            key={key}
+            path={route}
+            element={(
+              <Suspense fallback={<Loading/>}>
+                <Component/>
+              </Suspense>
             )}
-            />
-          )
-        })}
-      </Route>
+          />
+        )
+      })}
       <Route path="*" element={<NotFoundPage/>}/>
     </Routes>
   )

@@ -1,0 +1,19 @@
+import { Example } from '~/components/Example'
+import { IconButtonExample } from './examples/IconButton.tsx?example'
+import { SelectButtonExample } from './examples/SelectButton.tsx?example'
+
+# Examples
+
+The color select allows users to select colors from a pre define set of colors. It can be configured to show any set of the listed colors. The list of colors in the color picker will typically be organized in a logical or meaningful way, such as by hue or by common color names, to make it easy for the user to find the desired color. Color pickers with pre-defined lists are often used in graphics or design software, or in settings or preferences screens, to allow the user to select a color for use in their project or application. This component is a composition of a target component, [Popover](?path=/components/popover/examples)  and [Color Menu](?path=/components/colormenu/examples).
+
+## Icon Button
+
+The icon button color picker is mostly used in smaller components that allows the selection of fewer colors. Use them when you want to make sure the users choose accessible and visually aligned colors.
+
+<Example Component={IconButtonExample}/>
+
+## Select Button
+
+The select color picker is mostly used in forms . Use them when you want to make sure the users choose accessible and visually aligned colors.
+
+<Example Component={SelectButtonExample}/>
