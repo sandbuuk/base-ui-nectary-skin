@@ -31,6 +31,11 @@ export const Textarea: FC = () => {
 
     return val !== null ? parseInt(val) : undefined
   })()
+  const minRows = (() => {
+    const val = search.get('minrows')
+
+    return val !== null ? parseInt(val) : undefined
+  })()
   const isResizable = search.get('resizable') !== null
   const hasBottom = search.get('bottom') !== null
 
@@ -41,6 +46,7 @@ export const Textarea: FC = () => {
       disabled={isDisabled}
       value={value}
       rows={rows}
+      minRows={minRows}
       resizable={isResizable}
       on-change={onChange}
       on-focus={onFocus}

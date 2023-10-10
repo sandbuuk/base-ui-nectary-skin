@@ -14,6 +14,7 @@ export type TSinchTextareaElement = HTMLElement & {
   selectionDirection: HTMLTextAreaElement['selectionDirection'],
   /** Number of rows */
   rows: HTMLTextAreaElement['rows'],
+  minRows: HTMLTextAreaElement['rows'],
   /** Whether the text field is resizable */
   resizable: boolean,
   /** Change value event */
@@ -32,6 +33,7 @@ export type TSinchTextareaElement = HTMLElement & {
   setAttribute(name: 'disabled', value: ''): void,
   /** Number of rows */
   setAttribute(name: 'rows', value: string): void,
+  setAttribute(name: 'minrows', value: string): void,
   /** Whether the text field is resizable */
   setAttribute(name: 'resizable', value: ''): void,
 }
@@ -48,6 +50,7 @@ export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   'aria-label': string,
   /** Number of rows */
   rows?: number,
+  minRows?: number,
   /** Whether the text field is resizable */
   resizable?: boolean,
   /** Change value handler */

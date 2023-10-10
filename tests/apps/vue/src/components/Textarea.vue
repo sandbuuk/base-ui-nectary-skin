@@ -5,6 +5,7 @@
     :disabled="isDisabled"
     :value="value"
     :rows="rows"
+    :minrows="minrows"
     :resizable="resizable"
     @--change="onChange"
     @--focus="onFocus"
@@ -86,6 +87,9 @@ export default {
     },
     rows() {
       return this.$route.query.rows
+    },
+    minrows() {
+      return this.$route.query.minrows
     },
     resizable() {
       return this.$route.query.resizable

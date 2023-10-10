@@ -87,6 +87,17 @@ test('textarea screenshots', runScreenshotTests('sinch-textarea', [
     },
   },
   {
+    name: 'minrows',
+    url: withPlaceholder,
+    async *fn({ $eval }) {
+      await $eval((el) => {
+        el.setAttribute('rows', '1')
+        el.setAttribute('minrows', '2')
+      })
+      yield { name: 'updated' }
+    },
+  },
+  {
     name: 'bottom slot',
     url: withBottom,
     async *fn() {

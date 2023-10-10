@@ -25,6 +25,7 @@ export class TextareaComponent {
   isDisabled: boolean
   isResizable: boolean
   rows: string | null
+  minrows: string | null
   hasBottom: boolean
 
   constructor(private route: ActivatedRoute) {
@@ -36,6 +37,7 @@ export class TextareaComponent {
     this.isDisabled = search.get('disabled') != null
     this.isResizable = search.get('resizable') != null
     this.rows = search.get('rows')
+    this.minrows = search.get('minrows')
     this.hasBottom = search.get('bottom') !== null
   }
 
