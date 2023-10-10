@@ -29,6 +29,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
   #isPendingDk = false
   #controller: AbortController | null = null
   #sizeContext: Context<'size'>
+  #contentHeight: number = 0
 
   constructor() {
     super()
@@ -98,8 +99,26 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
         if (nextVal !== prevVal) {
           const prevCursorPos = this.#$input.selectionEnd
           const isPrevCursorEnd = prevCursorPos === prevVal.length
+          const isShrinkingContent = nextVal.length < prevVal.length
 
           this.#$input.value = nextVal
+
+          // Auto-resize textarea if "resizable" attribute is not set
+          if (!this.resizable) {
+            // Remove height property when shrinking content
+            if (isShrinkingContent) {
+              this.#$input.style.removeProperty('height')
+            }
+
+            // Measure height
+            const nextContentHeight = this.#$input.scrollHeight
+
+            // Update auto-resize height
+            if (isShrinkingContent || nextContentHeight !== this.#contentHeight) {
+              this.#contentHeight = nextContentHeight
+              this.#$input.style.setProperty('height', `${this.#contentHeight}px`)
+            }
+          }
 
           if (!isPrevCursorEnd) {
             this.#$input.setSelectionRange(this.#cursorPos, this.#cursorPos)
