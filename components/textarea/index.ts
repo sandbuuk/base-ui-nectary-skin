@@ -29,6 +29,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
   #isPendingDk = false
   #controller: AbortController | null = null
   #sizeContext: Context<'size'>
+  #contentHeight: number = 0
 
   constructor() {
     super()
@@ -67,7 +68,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#sizeContext.listen(this.#controller.signal)
 
     this.#onBottomSlotChange()
-
+    this.updateMinRows()
     this.#onSizeUpdate()
   }
 
@@ -84,6 +85,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
       'invalid',
       'disabled',
       'rows',
+      'minrows',
       'resizable',
     ]
   }
@@ -97,8 +99,26 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
         if (nextVal !== prevVal) {
           const prevCursorPos = this.#$input.selectionEnd
           const isPrevCursorEnd = prevCursorPos === prevVal.length
+          const isShrinkingContent = nextVal.length < prevVal.length
 
           this.#$input.value = nextVal
+
+          // Auto-resize textarea if "resizable" attribute is not set
+          if (!this.resizable) {
+            // Remove height property when shrinking content
+            if (isShrinkingContent) {
+              this.#$input.style.removeProperty('height')
+            }
+
+            // Measure height
+            const nextContentHeight = this.#$input.scrollHeight
+
+            // Update auto-resize height
+            if (isShrinkingContent || nextContentHeight !== this.#contentHeight) {
+              this.#contentHeight = nextContentHeight
+              this.#$input.style.setProperty('height', `${this.#contentHeight}px`)
+            }
+          }
 
           if (!isPrevCursorEnd) {
             this.#$input.setSelectionRange(this.#cursorPos, this.#cursorPos)
@@ -143,6 +163,12 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
 
       case 'rows': {
         updateAttribute(this.#$input, 'rows', newVal)
+
+        break
+      }
+
+      case 'minrows': {
+        this.updateMinRows()
 
         break
       }
@@ -207,6 +233,14 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     return getIntegerAttribute(this, 'rows', 0)
   }
 
+  set minRows(value: number) {
+    updateAttribute(this, 'minrows', value)
+  }
+
+  get minRows(): number {
+    return getIntegerAttribute(this, 'minrows', 0)
+  }
+
   get selectionStart(): HTMLTextAreaElement['selectionStart'] {
     return this.#$input.selectionStart
   }
@@ -241,6 +275,22 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
 
   blur() {
     this.#$input.blur()
+  }
+
+  updateMinRows() {
+    if (!this.isDomConnected) {
+      return
+    }
+
+    const minRows = this.minRows
+
+    if (minRows <= 0) {
+      this.#$input.style.removeProperty('min-height')
+    } else {
+      this.#$input.rows = minRows
+      this.#$input.style.setProperty('min-height', `${this.#$input.clientHeight}px`)
+      this.#$input.rows = this.rows
+    }
   }
 
   #onCompositionStart = () => {
