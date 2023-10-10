@@ -7,6 +7,7 @@ import '@nectary/components/icon-button'
 import '@nectary/assets/icons/close'
 
 const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
+const md = 'To set up the `LINE`, read and **accept** the `LINE` [terms & conditions](https://google.com).'
 
 @Component({
   selector: 'toast-manager-component',
@@ -16,7 +17,7 @@ const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
 
 export class ToastManagerComponent {
   typeValues = typeValues
-  state = [`${text}1`, `${text}2`, `${text}3`, 'Item4']
+  state = [`${text}1`, `${text}2`, md, 'Item4']
 
   constructor() {}
 

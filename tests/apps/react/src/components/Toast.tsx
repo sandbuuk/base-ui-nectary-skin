@@ -5,10 +5,15 @@ import '@nectary/components/button'
 import '@nectary/components/icon-button'
 import '@nectary/assets/icons/close'
 
+const md = 'To set up the `LINE`, read and **accept** the `LINE` [terms & conditions](https://google.com).'
+
 export const Toast: FC = () => {
   const [search] = useSearchParams()
+  const isMarkdownExample = search.get('example') === 'md'
   const type: any = search.get('type') ?? undefined
-  const text = search.get('text') ?? ''
+  const text = isMarkdownExample
+    ? md
+    : search.get('text') ?? ''
   const hasClose = search.get('close') != null
   const hasAction = search.get('action') != null
 
