@@ -11,9 +11,6 @@ import '@nectary/components/progress'
 export default {
   methods: {
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     value() {
       const val = this.$route.query.value ?? '0'

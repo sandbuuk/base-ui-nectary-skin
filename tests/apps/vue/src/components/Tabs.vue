@@ -48,9 +48,6 @@ import '@nectary/components/tabs-option'
 import '@nectary/components/tabs-icon-option'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onChange(e) {
       this.value = e.detail

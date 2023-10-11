@@ -21,9 +21,6 @@ import '@nectary/components/link'
 import '@nectary/components/text'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onClick(e) {
       window.dispatchEvent(new CustomEvent('sinch-link-click'))

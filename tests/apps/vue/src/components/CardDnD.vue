@@ -37,9 +37,6 @@ const items = [{
 }]
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onDragStart(e) {
       if (e.target.matches('sinch-card')) {

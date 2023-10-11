@@ -13,8 +13,5 @@ import '@nectary/components/text'
 import '@nectary/components/card-container'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
 }
 </script>

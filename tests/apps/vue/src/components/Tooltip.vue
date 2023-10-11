@@ -15,9 +15,6 @@ import '@nectary/components/tooltip'
 import '@nectary/components/text'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onTooltipShow() {
       window.dispatchEvent(new CustomEvent('sinch-tooltip-show'))

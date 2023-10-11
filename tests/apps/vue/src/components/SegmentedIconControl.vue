@@ -26,9 +26,6 @@ import '@nectary/assets/icons/format-align-right'
 import '@nectary/assets/icons/format-align-left'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onChange(e) {
       if (this.isControlled) {

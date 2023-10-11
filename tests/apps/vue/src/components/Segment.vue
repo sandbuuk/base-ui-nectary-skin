@@ -38,9 +38,6 @@ import '@nectary/components/checkbox'
 import '@nectary/components/text'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     caption() {
       return this.$route.query.caption ?? ''

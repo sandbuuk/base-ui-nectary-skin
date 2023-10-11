@@ -31,9 +31,6 @@ export default {
       window.dispatchEvent(new CustomEvent('sinch-file-drop-invalid', { detail: e.detail }))
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     accept() {
       return this.$route.query.accept

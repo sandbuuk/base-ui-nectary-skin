@@ -95,9 +95,6 @@ export default {
       this.isOpen = false
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     rows() {
       const val = this.$route.query.rows

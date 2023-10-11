@@ -36,9 +36,6 @@ export default {
       this.value = e.detail
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     placeholderText() {
       return this.$route.query.placeholder

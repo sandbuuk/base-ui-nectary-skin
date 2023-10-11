@@ -28,9 +28,6 @@ import '@nectary/components/progress-stepper'
 import '@nectary/components/progress-stepper-item'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onChange(e) {
       this.value = e.detail

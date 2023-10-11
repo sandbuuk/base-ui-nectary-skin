@@ -71,10 +71,7 @@ export default {
       this.isOpen = false
     }
   },
-  props: {
-    search: URLSearchParams
-  },
-  data() {
+    data() {
     return {
       value: this.$route.query.value ?? '',
       isOpen: false,

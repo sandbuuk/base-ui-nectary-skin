@@ -31,9 +31,6 @@ import '@nectary/components/chat-bubble'
 import '@nectary/components/avatar'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     isBubble() {
       return this.$route.query.example === 'bubble'

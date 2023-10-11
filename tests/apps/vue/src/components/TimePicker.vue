@@ -26,9 +26,6 @@ export default {
       window.dispatchEvent(new CustomEvent('sinch-time-picker-blur'))
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     ampm() {
       return this.$route.query.ampm != null

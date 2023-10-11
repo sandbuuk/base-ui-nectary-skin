@@ -17,9 +17,6 @@ import '@nectary/components/chip'
 import '@nectary/components/icon'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onClick() {
       window.dispatchEvent(new CustomEvent('sinch-chip-click'))

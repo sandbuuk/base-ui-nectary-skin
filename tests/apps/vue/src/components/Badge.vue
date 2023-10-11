@@ -19,9 +19,6 @@ import '@nectary/components/icon-button'
 import '@nectary/assets/icons/notifications'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     mode() {
       return this.$route.query.mode ?? undefined

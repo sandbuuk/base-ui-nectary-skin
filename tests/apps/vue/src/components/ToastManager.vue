@@ -37,9 +37,6 @@ const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
 const md = 'To set up the `LINE`, read and **accept** the `LINE` [terms & conditions](https://google.com).'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     typeValues() {
       return typeValues

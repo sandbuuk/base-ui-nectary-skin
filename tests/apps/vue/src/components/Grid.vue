@@ -37,10 +37,7 @@ import '@nectary/components/link'
 import '@nectary/components/button'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
-  data() {
+    data() {
     return {
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...'
     }
