@@ -1,5 +1,6 @@
 import { Example } from '~/components/Example'
 import { ComplexExample } from './examples/Complex.tsx?example'
+import { OriginExample } from './examples/Origin.tsx?example'
 
 # Examples
 
@@ -14,3 +15,10 @@ A complete example that generates toasts with random text, type, optional close 
 Toast Manager respects `(prefers-reduced-motion: reduce)` [CSS media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) such as "System Preferences → Accessebility → Display → Reduce motion" in macOS.
 
 <Example Component={ComplexExample}/>
+
+## Origin
+
+Toast Manager can show Toasts at different origins.
+> Default origin value is `bottom-right`
+
+<Example Component={OriginExample}/>
