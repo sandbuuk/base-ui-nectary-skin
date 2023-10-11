@@ -19,9 +19,6 @@ import '@nectary/components/segmented-control-option'
 import '@nectary/assets/icons/open-in-new'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onChange(e) {
       if (this.isControlled) {

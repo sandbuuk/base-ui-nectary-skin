@@ -18,9 +18,6 @@ import '@nectary/components/button'
 import '@nectary/components/link'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     header() {
       return this.$route.query.header

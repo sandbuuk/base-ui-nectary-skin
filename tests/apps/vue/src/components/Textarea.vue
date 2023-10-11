@@ -69,9 +69,6 @@ export default {
       window.dispatchEvent(new CustomEvent('sinch-textarea-blur'))
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     placeholderText() {
       return this.$route.query.placeholder

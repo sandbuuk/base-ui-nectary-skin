@@ -47,9 +47,6 @@ const longCaption = 'It has survived not only five centuries, but also the leap 
 const shortCaption = 'It has survived'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onCloseClick() {
       window.dispatchEvent(new CustomEvent('sinch-inline-alert-close-click'))

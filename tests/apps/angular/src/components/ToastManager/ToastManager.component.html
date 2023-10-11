@@ -1,14 +1,15 @@
-<sinch-toast-manager>
+<sinch-toast-manager [attr.origin]="origin">
   <sinch-toast
     *ngFor="let t of state; index as i"
     [attr.type]="typeValues[i % typeValues.length]"
     [attr.text]="t"
-    (-timeout)="onTimeout(i)">
+    [attr.persistent]="i !== 0"
+    (-timeout)="onTimeout()">
     <sinch-icon-button
       *ngIf="(i + 1) % 3 !== 0"
       slot="close"
       size="s"
-      (-click)="onClose(i)">
+      (-click)="onClose()">
       <sinch-icon-close slot="icon"></sinch-icon-close>
     </sinch-icon-button>
     <sinch-button

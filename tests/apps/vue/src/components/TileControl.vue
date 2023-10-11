@@ -93,9 +93,6 @@ import '@nectary/assets/icons/camera'
 import '@nectary/assets/icons/alarm-add'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onChange(e) {
       if (this.isControlled) {

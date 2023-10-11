@@ -29,9 +29,6 @@ export default {
       window.dispatchEvent(new CustomEvent('sinch-toggle-blur'))
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     text() {
       return this.$route.query.text

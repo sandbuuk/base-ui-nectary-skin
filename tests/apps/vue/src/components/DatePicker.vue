@@ -19,9 +19,6 @@ export default {
       window.dispatchEvent(new CustomEvent('sinch-date-picker-change', {detail: e.detail}))
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     locale() {
       return this.$route.query.locale

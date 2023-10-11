@@ -21,9 +21,6 @@ import '@nectary/assets/icons/close'
 export default {
   methods: {
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     type() {
       return this.$route.query.type

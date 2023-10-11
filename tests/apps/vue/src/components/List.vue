@@ -23,9 +23,6 @@ import '@nectary/components/icon-button'
 import '@nectary/components/text'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
-}
+  }
 </script>
 

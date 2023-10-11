@@ -83,9 +83,6 @@ const getTableItems = ({ hasLongLine }) => ({
 })
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onSortChange(e) {
       this.isAsc = e.detail

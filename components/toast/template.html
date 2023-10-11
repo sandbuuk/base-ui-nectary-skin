@@ -9,6 +9,7 @@
   align-items: center;
   gap: 8px;
   width: 328px;
+  max-width: 90vw;
   padding: 16px;
   box-sizing: border-box;
   border-radius: var(--sinch-comp-toast-shape-radius);
@@ -98,7 +99,7 @@
   <sinch-icon id="icon-success" name="check_circle"></sinch-icon>
   <sinch-icon id="icon-warn" name="report_problem"></sinch-icon>
   <sinch-icon id="icon-error" name="report"></sinch-icon>
-  <sinch-text id="text" type="m"></sinch-text>
+  <sinch-rich-text id="text" size="m"></sinch-rich-text>
   <slot name="action"></slot>
   <slot name="close"></slot>
 </div>

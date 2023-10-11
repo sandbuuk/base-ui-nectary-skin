@@ -1,6 +1,5 @@
 import '../icon'
-import '../title'
-import '../text'
+import '../rich-text'
 import {
   defineCustomElement,
   getAttribute,
@@ -57,7 +56,7 @@ defineCustomElement('sinch-toast', class extends NectaryElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.#$text.textContent = newVal
+        updateAttribute(this.#$text, name, newVal)
 
         break
       }

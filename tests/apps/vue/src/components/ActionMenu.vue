@@ -23,9 +23,6 @@ export default {
       window.dispatchEvent(new CustomEvent('sinch-action-menu-click', {detail: text}))
     },
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     rows() {
       const val = this.$route.query.rows

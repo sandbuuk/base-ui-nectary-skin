@@ -15,9 +15,6 @@ import '@nectary/components/skeleton'
 import '@nectary/components/skeleton-item'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     isCard() {
       return this.$route.query.card != null

@@ -31,9 +31,6 @@ export default {
       this.value = e.detail
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     rows() {
       const val = this.$route.query.rows

@@ -43,9 +43,6 @@ const longText = 'Lorem Ipsum is simply dummy text of the printing and typesetti
 const shortText = 'Lorem Ipsum is dummy text'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onCloseClick() {
       window.dispatchEvent(new CustomEvent('sinch-alert-close-click'))

@@ -15,9 +15,6 @@ import '@nectary/components/avatar'
 import '@nectary/components/badge'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     src() {
       return this.$route.query.src ?? undefined

@@ -5,8 +5,10 @@ import '@nectary/components/toast'
 import '@nectary/components/button'
 import '@nectary/components/icon-button'
 import '@nectary/assets/icons/close'
+import { ActivatedRoute } from '@angular/router'
 
 const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
+const md = 'To set up the `LINE`, read and **accept** the `LINE` [terms & conditions](https://google.com).'
 
 @Component({
   selector: 'toast-manager-component',
@@ -16,28 +18,35 @@ const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
 
 export class ToastManagerComponent {
   typeValues = typeValues
-  state = [`${text}1`, `${text}2`, `${text}3`, 'Item4']
+  origin: string | null
+  state = [`${text}1`, `${text}2`, md, 'Item4']
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {
+    const search = this.route.snapshot.queryParamMap
+    this.origin = search.get('origin')
+  }
 
   ngOnInit() {
     window.addEventListener('sinch-toast-push', this.onPush)
+    window.addEventListener('sinch-toast-pop', this.onPop)
   }
   ngOnDestroy() {
     window.removeEventListener('sinch-toast-push', this.onPush)
+    window.removeEventListener('sinch-toast-pop', this.onPop)
   }
 
   onPush = () => {
     this.state.push('Item5')
   }
+  onPop = () => {
+    this.state.splice(1, 1)
+  }
 
-  onTimeout(i: number) {
-    this.state.splice(i, 1)
+  onTimeout() {
     window.dispatchEvent(new CustomEvent('sinch-toast-timeout'))
   }
 
-  onClose(i: number) {
-    this.state.splice(i, 1)
+  onClose() {
     window.dispatchEvent(new CustomEvent('sinch-toast-close'))
   }
 

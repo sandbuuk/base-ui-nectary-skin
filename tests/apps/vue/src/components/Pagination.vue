@@ -13,9 +13,6 @@ import { attrValueToInteger } from '@nectary/components/utils'
 import '@nectary/components/pagination'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onChange(e) {
       window.dispatchEvent(new CustomEvent('sinch-pagination-change', {detail: e.detail}))

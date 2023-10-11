@@ -85,9 +85,6 @@ export default {
       this.isOtherComponent = !this.isOtherComponent
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     orientation() {
       return this.$route.query.orientation

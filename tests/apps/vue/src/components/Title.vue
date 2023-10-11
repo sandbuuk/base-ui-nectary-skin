@@ -10,9 +10,6 @@
 import '@nectary/components/title'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     text() {
       return this.$route.query.text

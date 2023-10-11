@@ -20,9 +20,6 @@ import '@nectary/assets/icons/expand-more'
 import '@nectary/components/spinner'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onClick() {
       window.dispatchEvent(new CustomEvent('sinch-button-click'))

@@ -13,9 +13,6 @@ import '@nectary/components/tag'
 import '@nectary/assets/icons/open-in-new'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     text() {
       return this.$route.query.text ?? ''

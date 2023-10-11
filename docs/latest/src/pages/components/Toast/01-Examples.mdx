@@ -2,6 +2,7 @@ import { Example } from '~/components/Example'
 import { TypeExample } from './examples/Type.tsx?example'
 import { CloseExample } from './examples/Close.tsx?example'
 import { ActionExample } from './examples/Action.tsx?example'
+import { MarkdownExample } from './examples/Markdown.tsx?example'
 
 # Examples
 
@@ -41,3 +42,9 @@ The action button can be used to provide the user with a way to take a specific 
 An action button can be added to the Nectary toast component by passing a string argument to the function that displays the toast. The action button will appear as a secondary button within the toast, next to the main message.
 
 <Example Component={ActionExample}/>
+
+## Markdown
+
+Toasts support rendering text provided in Markdown format
+
+<Example Component={MarkdownExample}/>

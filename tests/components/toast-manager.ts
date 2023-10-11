@@ -1,11 +1,16 @@
+import { originValues } from '@nectary/components/toast-manager/utils'
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
+import type { TSinchToastManagerElement } from '@nectary/components/toast-manager/types'
 import type { Page } from '@playwright/test'
 
 const shot = '/toast-manager'
 const checkValue = makeAccessibilityTests('/toast-manager', 'sinch-toast-manager')
-const getRect = (page: Page) => page.locator('sinch-toast-manager').evaluate((el) => (el as any).containerRect)
+const getRect = (page: Page) =>
+  page
+    .locator('sinch-toast-manager')
+    .evaluate((el) => (el as TSinchToastManagerElement).containerRect)
 
 test('accessibility', checkValue({
   async *fn() {
@@ -32,23 +37,37 @@ test('toast-manager screenshots', runScreenshotTests('sinch-toast-manager', [
 
       await page.mouse.click(actionPt.x, actionPt.y)
 
-      yield { name: '2-close', includeRects: [await getRect(page)] }
+      await page.waitForTimeout(5000)
+
       expect(
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-toast-close', detail: null },
         { type: 'sinch-toast-action', detail: null },
+        { type: 'sinch-toast-timeout', detail: null },
       ])
 
-      await page.waitForSelector('sinch-toast', { state: 'detached', timeout: 10000 })
+      await page.evaluate(() => {
+        window.dispatchEvent(new Event('sinch-toast-pop'))
+      })
+
+      yield { name: '2-pop', includeRects: [await getRect(page)] }
 
       await page.evaluate(() => {
         window.dispatchEvent(new Event('sinch-toast-push'))
       })
 
-      await page.waitForSelector('sinch-toast', { state: 'attached', timeout: 1000 })
-
-      yield { name: '3-add-more', includeRects: [await getRect(page)] }
+      yield { name: '3-push', includeRects: [await getRect(page)] }
+    },
+  },
+  {
+    name: 'origin',
+    url: shot,
+    async *fn({ page, $eval }) {
+      for (const value of originValues) {
+        await $eval((el, origin) => el.setAttribute('origin', origin), value)
+        yield { name: value, includeRects: [await getRect(page)] }
+      }
     },
   },
 ]))

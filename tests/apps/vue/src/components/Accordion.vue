@@ -54,9 +54,6 @@ const singleItems = [{
 }]
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onChange(e) {
       if (this.isControlled) {

@@ -6,9 +6,6 @@
 import '@nectary/components/spinner'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     size() {
       return this.$route.query.size

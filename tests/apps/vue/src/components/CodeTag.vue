@@ -13,9 +13,6 @@ import '@nectary/components/code-tag'
 import '@nectary/components/text'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     text() {
       return this.$route.query.text

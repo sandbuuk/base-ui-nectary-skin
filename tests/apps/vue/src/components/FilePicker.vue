@@ -29,9 +29,6 @@ export default {
       window.dispatchEvent(new CustomEvent('sinch-file-picker-invalid', { detail: e.detail }))
     }
   },
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     accept() {
       return this.$route.query.type

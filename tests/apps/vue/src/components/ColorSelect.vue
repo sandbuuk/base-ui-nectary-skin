@@ -42,9 +42,6 @@ const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pi
 const colors = [...lightColors, ...vibrantColors, ...darkColors]
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   methods: {
     onChange(e) {
       window.dispatchEvent(new CustomEvent('sinch-color-menu-change', {detail: e.detail}))

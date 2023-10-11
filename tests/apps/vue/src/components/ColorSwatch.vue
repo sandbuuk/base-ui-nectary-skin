@@ -6,9 +6,6 @@
 import '@nectary/components/color-swatch'
 
 export default {
-  props: {
-    search: URLSearchParams
-  },
   computed: {
     name() {
       return this.$route.query.name ?? ''
