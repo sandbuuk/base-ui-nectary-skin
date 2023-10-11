@@ -1,16 +1,17 @@
 <template>
-  <sinch-toast-manager>
+  <sinch-toast-manager origin="origin">
     <sinch-toast
       v-for="(t, i) in state"
       :key="t"
       :type="typeValues[i % typeValues.length]"
       :text="t"
-      @--timeout="onTimeout(i)">
+      :persistent="i !== 0"
+      @--timeout="onTimeout">
       <sinch-icon-button
         v-if="(i + 1) % 3 !== 0"
         slot="close"
         size="s"
-        @--click="onClose(i)">
+        @--click="onClose">
         <sinch-icon-close slot="icon"></sinch-icon-close>
       </sinch-icon-button>
       <sinch-button
@@ -41,6 +42,12 @@ export default {
     typeValues() {
       return typeValues
     },
+    origin() {
+      return this.$route.query.origin
+    },
+    ignoreTimeout() {
+      return this.$route.query['ignore-timeout'] !== null
+    }
   },
   data() {
     return {
@@ -48,12 +55,10 @@ export default {
     }
   },
   methods: {
-    onTimeout(index) {
-      this.state = this.state.filter((_, i) => i !== index)
+    onTimeout() {
       window.dispatchEvent(new CustomEvent('sinch-toast-timeout'))
     },
-    onClose(index) {
-      this.state = this.state.filter((_, i) => i !== index)
+    onClose() {
       window.dispatchEvent(new CustomEvent('sinch-toast-close'))
     },
     onAction() {
@@ -61,13 +66,18 @@ export default {
     },
     onPush() {
       this.state.push('Item5')
+    },
+    onPop() {
+      this.state.splice(1, 1)
     }
   },
   mounted() {
     window.addEventListener('sinch-toast-push', this.onPush)
+    window.addEventListener('sinch-toast-pop', this.onPop)
   },
   beforeunmount() {
     window.removeEventListener('sinch-toast-push', this.onPush)
+    window.removeEventListener('sinch-toast-pop', this.onPop)
   }
 }
 </script>

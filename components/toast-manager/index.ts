@@ -3,12 +3,19 @@ import '../text'
 import {
   cloneNode,
   defineCustomElement,
+  getLiteralAttribute,
   getRect,
   NectaryElement,
   shouldReduceMotion,
+  updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchToastManagerElement, TSinchToastManagerReact } from './types'
+import { originValues } from './utils'
+import type {
+  TSinchToastManagerElement,
+  TSinchToastManagerOrigin,
+  TSinchToastManagerReact,
+} from './types'
 import type { TRect } from '../types'
 
 const DURATION_ADD = 250
@@ -43,6 +50,14 @@ defineCustomElement('sinch-toast-manager', class extends NectaryElement {
   disconnectedCallback() {
     this.#$slot.removeEventListener('slotchange', this.#onSlotChange)
     this.#clear()
+  }
+
+  get origin(): TSinchToastManagerOrigin {
+    return getLiteralAttribute(this, originValues, 'origin', 'bottom-right')
+  }
+
+  set origin(value: TSinchToastManagerOrigin) {
+    updateLiteralAttribute(this, originValues, 'origin', value)
   }
 
   get containerRect(): TRect {

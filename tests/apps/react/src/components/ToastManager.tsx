@@ -1,5 +1,6 @@
 import { typeValues } from '@nectary/components/toast/utils'
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/toast-manager'
 import '@nectary/components/toast'
@@ -12,13 +13,13 @@ const md = 'To set up the `LINE`, read and **accept** the `LINE` [terms & condit
 
 export const ToastManager: FC = () => {
   const [state, setState] = useState<string[]>([`${text}1`, `${text}2`, md, 'Item4'])
+  const [search] = useSearchParams()
+  const origin: any = search.get('origin') ?? undefined
 
-  const onTimeout = (text: string) => () => {
-    setState((state) => state.filter((item) => item !== text))
+  const onTimeout = () => {
     window.dispatchEvent(new CustomEvent('sinch-toast-timeout'))
   }
-  const onClose = (text: string) => () => {
-    setState((state) => state.filter((item) => item !== text))
+  const onClose = () => {
     window.dispatchEvent(new CustomEvent('sinch-toast-close'))
   }
   const onAction = () => {
@@ -26,32 +27,38 @@ export const ToastManager: FC = () => {
   }
 
   useEffect(() => {
-    const cb = () => {
+    const popCb = () => {
+      setState((state) => state.filter((_, i) => i !== 1))
+    }
+    const pushCb = () => {
       setState((state) => state.concat('Item5'))
     }
 
-    window.addEventListener('sinch-toast-push', cb)
+    window.addEventListener('sinch-toast-push', pushCb)
+    window.addEventListener('sinch-toast-pop', popCb)
 
     return () => {
-      window.removeEventListener('sinch-toast-push', cb)
+      window.removeEventListener('sinch-toast-push', pushCb)
+      window.removeEventListener('sinch-toast-pop', popCb)
     }
   }, [])
 
   return (
-    <sinch-toast-manager>
+    <sinch-toast-manager origin={origin}>
       {state.map((t, i) => (
         <sinch-toast
           key={t}
           type={typeValues[i % typeValues.length]}
           text={t}
-          on-timeout={onTimeout(t)}
+          persistent={i !== 0}
+          on-timeout={onTimeout}
         >
           {(i + 1) % 3 !== 0 && (
             <sinch-icon-button
               slot="close"
               size="s"
               aria-label="Close"
-              on-click={onClose(t)}
+              on-click={onClose}
             >
               <sinch-icon-close slot="icon"/>
             </sinch-icon-button>
