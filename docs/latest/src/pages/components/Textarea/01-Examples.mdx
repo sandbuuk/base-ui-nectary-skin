@@ -4,6 +4,7 @@ import { BottomExample } from './examples/Bottom.tsx?example'
 import { BottomComplexExample } from './examples/BottomComplex.tsx?example'
 import { FieldExample } from './examples/Field.tsx?example'
 import { RowsExample } from './examples/Rows.tsx?example'
+import { MinRowsExample } from './examples/MinRows.tsx?example'
 import { ResizableExample } from './examples/Resizable.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
 
@@ -23,17 +24,26 @@ Textarea wrapped in `sinch-field` component
 
 <Example Component={FieldExample}/>
 
-## Rows
-
-Number of text lines available before scroll appears
-
-<Example Component={RowsExample}/>
-
 ## Resizable
 
 Shows the resize handle to manually resize the height of textarea
+> User-resizable Textarea does not self-resize on typing
 
 <Example Component={ResizableExample}/>
+
+## Rows
+
+Initial Teaxarea height defined as number of text lines
+
+<Example Component={RowsExample}/>
+
+## Min rows
+
+Used with `resizable` attribute, to prevent shrinking Textarea height below certain number of text lines.
+
+In this example `minRows` value is set to `3`, so you cannot shrink the height of the Textarea below 3 lines.
+
+<Example Component={MinRowsExample}/>
 
 ## Disabled
 
