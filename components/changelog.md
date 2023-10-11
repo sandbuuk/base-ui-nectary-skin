@@ -1,3 +1,10 @@
+## v2.6.0 (2023-10-11)
+
+* ➕ add `origin` attribute to `sinch-toast-manager`
+* ➕ add markdown support to `sinch-toast`
+* ➕ add `minrows` attribute to `sinch-textarea`
+* ➕ auto-resize `sinch-textarea`
+
 ## v2.5.0 (2023-09-21)
 
 * ➕ add `icon` slot to `sinch-dialog`
