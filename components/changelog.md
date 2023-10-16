@@ -1,3 +1,8 @@
+## v2.6.1 (2023-10-16)
+
+* 🐞 fix off-screen `minrows` attribute in `sinch-textarea`
+* 🐞 fix resize handler in `sinch-textarea`
+
 ## v2.6.0 (2023-10-11)
 
 * ➕ add `origin` attribute to `sinch-toast-manager`
