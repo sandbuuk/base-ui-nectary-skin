@@ -5,6 +5,7 @@ import {
   getBooleanAttribute,
   getIntegerAttribute,
   getReactEventHandler,
+  getRect,
   isAttrEqual,
   isAttrTrue,
   NectaryElement,
@@ -25,11 +26,14 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
   #$input: HTMLTextAreaElement
   #$bottomSlot: HTMLSlotElement
   #$bottomWrapper: HTMLElement
+  #$resizeHandle: HTMLElement
   #cursorPos: number | null = null
   #isPendingDk = false
   #controller: AbortController | null = null
   #sizeContext: Context<'size'>
-  #contentHeight: number = 0
+  #prevContentHeight: number = 0
+  #dragStartY = 0
+  #intersectionObserver: IntersectionObserver | null = null
 
   constructor() {
     super()
@@ -41,6 +45,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#$input = shadowRoot.querySelector('#input')!
     this.#$bottomSlot = shadowRoot.querySelector('slot[name="bottom"]')!
     this.#$bottomWrapper = shadowRoot.querySelector('#bottom')!
+    this.#$resizeHandle = shadowRoot.querySelector('#resize-handle')!
     this.#sizeContext = new Context(this.#$bottomWrapper, 'size')
   }
 
@@ -60,6 +65,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#$input.addEventListener('keydown', this.#onSelectionChange, options)
     this.#$input.addEventListener('focus', this.#onInputFocus, options)
     this.#$input.addEventListener('blur', this.#onInputBlur, options)
+    this.#$resizeHandle.addEventListener('mousedown', this.#onDragStart, options)
     this.#$bottomSlot.addEventListener('slotchange', this.#onBottomSlotChange, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
     this.addEventListener('-focus', this.#onFocusReactHandler, options)
@@ -68,7 +74,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#sizeContext.listen(this.#controller.signal)
 
     this.#onBottomSlotChange()
-    this.updateMinRows()
+    this.#updateMinRows()
     this.#onSizeUpdate()
   }
 
@@ -76,6 +82,11 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     super.disconnectedCallback()
     this.#controller!.abort()
     this.#controller = null
+
+    if (this.#intersectionObserver !== null) {
+      this.#intersectionObserver.disconnect()
+      this.#intersectionObserver = null
+    }
   }
 
   static get observedAttributes() {
@@ -114,9 +125,9 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
             const nextContentHeight = this.#$input.scrollHeight
 
             // Update auto-resize height
-            if (isShrinkingContent || nextContentHeight !== this.#contentHeight) {
-              this.#contentHeight = nextContentHeight
-              this.#$input.style.setProperty('height', `${this.#contentHeight}px`)
+            if (isShrinkingContent || nextContentHeight !== this.#prevContentHeight) {
+              this.#prevContentHeight = nextContentHeight
+              this.#$input.style.setProperty('height', `${this.#prevContentHeight}px`)
             }
           }
 
@@ -168,7 +179,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
       }
 
       case 'minrows': {
-        this.updateMinRows()
+        this.#updateMinRows()
 
         break
       }
@@ -277,20 +288,40 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     this.#$input.blur()
   }
 
-  updateMinRows() {
-    if (!this.isDomConnected) {
-      return
-    }
-
+  #updateMinRows() {
     const minRows = this.minRows
 
     if (minRows <= 0) {
       this.#$input.style.removeProperty('min-height')
+
+      // unsub
+      if (this.#intersectionObserver !== null) {
+        this.#intersectionObserver.disconnect()
+        this.#intersectionObserver = null
+      }
     } else {
-      this.#$input.rows = minRows
-      this.#$input.style.setProperty('min-height', `${this.#$input.clientHeight}px`)
-      this.#$input.rows = this.rows
+      if (this.isDomConnected) {
+        this.#calcMinRows()
+      }
+
+      // sub
+      if (this.#intersectionObserver === null) {
+        this.#intersectionObserver = new IntersectionObserver(this.#intersectionObserverCallback, { root: null })
+        this.#intersectionObserver.observe(this.#$input)
+      }
     }
+  }
+
+  #intersectionObserverCallback: IntersectionObserverCallback = ([entry]) => {
+    if (entry != null && entry.isIntersecting) {
+      this.#calcMinRows()
+    }
+  }
+
+  #calcMinRows() {
+    this.#$input.rows = this.minRows
+    this.#$input.style.setProperty('min-height', `${getRect(this.#$input).height}px`)
+    this.#$input.rows = this.rows
   }
 
   #onCompositionStart = () => {
@@ -331,6 +362,34 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
         })
       )
     }
+  }
+
+  #onDragStart = (e: MouseEvent) => {
+    // Prevent drag start while already dragging
+    if (this.#dragStartY !== 0) {
+      return
+    }
+
+    this.#dragStartY = e.clientY
+    this.#prevContentHeight = getRect(this.#$input).height
+
+    window.addEventListener('mousemove', this.#onDragResize, { signal: this.#controller!.signal, capture: true })
+    window.addEventListener('mouseup', this.#onDragEnd, { signal: this.#controller!.signal, capture: true })
+  }
+
+  #onDragResize = (e: MouseEvent) => {
+    const dy = e.clientY - this.#dragStartY
+    const height = Math.round(Math.max(0, this.#prevContentHeight + dy))
+
+    this.#$input.style.setProperty('height', `${height}px`)
+  }
+
+  #onDragEnd = () => {
+    window.removeEventListener('mousemove', this.#onDragResize, { capture: true })
+    window.removeEventListener('mouseup', this.#onDragEnd, { capture: true })
+
+    this.#dragStartY = 0
+    this.#prevContentHeight = 0
   }
 
   #onInputFocus = () => {
