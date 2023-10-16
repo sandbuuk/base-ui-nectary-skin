@@ -10,6 +10,7 @@ export const ResizableExample: FC = () => {
       aria-label="Textarea"
       placeholder="Placeholder"
       resizable
+      minRows={1}
       value={state}
       on-change={(e) => setState(e.detail)}
     />

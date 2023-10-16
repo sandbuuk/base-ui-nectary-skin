@@ -73,6 +73,8 @@ export const BottomComplexExample: FC = () => {
         ref={inputRef}
         aria-label="Textarea"
         placeholder="Type your text"
+        resizable
+        minRows={2}
         value={text}
         on-change={onTextChange}
         style={{ width: '500px' }}
