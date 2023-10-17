@@ -86,7 +86,7 @@ type TValue = {
 const THEME_CLASS_NAMES: Record<string, string> = {
   'Nectary / Base theme': '.nectary-theme-base',
   'Nectary / Dark theme': '.nectary-theme-base.nectary-theme-dark',
-  'SaaS/ MessageMedia': '.nectary-theme-base.nectary-theme-message-media'
+  'SaaS/ MessageMedia': '.nectary-theme-base.nectary-theme-message-media',
 }
 
 const [SELECTED_THEME_KEY] = Object.keys(tokensJson).filter((key: string) => key.toLowerCase().includes(INPUT_THEME_KEY))
