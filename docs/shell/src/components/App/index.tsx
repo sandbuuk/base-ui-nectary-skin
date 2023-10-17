@@ -1,6 +1,5 @@
-import darkThemeCss from '@nectary/theme-dark/index.css?theme'
 import { Loading, QueryRouter } from 'docs-common'
-import { Suspense, useEffect } from 'react'
+import { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ComponentsList } from '../ComponentsList'
 import { ComponentsPage } from '../ComponentsPage'
@@ -19,6 +18,7 @@ import { NotFoundPage } from '~/pages/NotFound'
 import { TestingPage } from '~/pages/Testing'
 import './styles.css'
 import '@nectary/theme-base'
+import '@nectary/theme-dark'
 
 const basename = location.pathname.replace(/\/$/, '')
 
@@ -26,21 +26,9 @@ export const App: FC = () => {
   const onRouteChange = useOnRouteChange()
   const { themeName } = useThemeName()
 
-  useEffect(() => {
-    if (themeName === 'dark') {
-      darkThemeCss.use()
-    } else {
-      darkThemeCss.unuse()
-    }
-
-    return () => {
-      darkThemeCss.unuse()
-    }
-  }, [themeName])
-
   return (
     <QueryRouter basename={basename} onChange={onRouteChange}>
-      <div id="app-sidebar">
+      <div id="app-sidebar" className={`nectary-theme-base ${themeName === 'dark' ? 'nectary-theme-dark' : ''}`}>
         <div className="app-sidebar-fixed">
           <SidebarHeader/>
         </div>
@@ -63,7 +51,7 @@ export const App: FC = () => {
           <SidebarFooter/>
         </div>
       </div>
-      <div id="app-content">
+      <div id="app-content" className={`nectary-theme-base ${themeName === 'dark' ? 'nectary-theme-dark' : ''}`}>
         <Suspense fallback={<Loading/>}>
           <Routes>
             <Route path="/" element={<LandingPage/>}/>

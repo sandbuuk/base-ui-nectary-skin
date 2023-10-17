@@ -46,8 +46,29 @@ setAssetsRegistry(customRegistry)
 
 ### Theme
 
-```js
+Base theme:
+
+```jsx
 import '@nectary/theme-base'
+
+const App = () => (
+  <div id="app" className="nectary-theme-base">
+    ...
+  </div>
+)
+```
+
+Dark theme:
+
+```jsx
+import '@nectary/theme-base'
+import '@nectary/theme-dark'
+
+const App = () => (
+  <div id="app" className="nectary-theme-base nectary-theme-dark">
+    ...
+  </div>
+)
 ```
 
 Use color palette or custom font face:

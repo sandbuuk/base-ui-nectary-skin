@@ -1,7 +1,7 @@
 import { setAssetsRegistry } from '@nectary/assets/utils'
 import { setNectaryRegistry } from '@nectary/components/utils'
 import '@nectary/theme-base'
-import darkThemeCss from '@nectary/theme-dark/index.css?theme'
+import '@nectary/theme-dark'
 import { DocumentProvider, ThemeNameProvider } from 'docs-common'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -34,8 +34,10 @@ export const bootstrap = (el: HTMLElement, { themeName }: TBootstrapOptions) => 
   let readyPromise: Promise<any> = Promise.resolve()
   let currentThemeName = themeName
 
+  appElement.className = 'nectary-theme-base'
+
   if (currentThemeName === 'dark') {
-    darkThemeCss.use({ target: shadowRoot })
+    appElement.classList.add('nectary-theme-dark')
   }
 
   bus.addEventListener('message', (msg) => {
@@ -43,14 +45,14 @@ export const bootstrap = (el: HTMLElement, { themeName }: TBootstrapOptions) => 
       switch (msg.data.payload) {
         case 'dark': {
           currentThemeName = msg.data.payload
-          darkThemeCss.use({ target: shadowRoot })
+          appElement.classList.add('nectary-theme-dark')
 
           break
         }
 
         case 'light': {
           currentThemeName = msg.data.payload
-          darkThemeCss.unuse()
+          appElement.classList.remove('nectary-theme-dark')
 
           break
         }
@@ -105,10 +107,6 @@ export const bootstrap = (el: HTMLElement, { themeName }: TBootstrapOptions) => 
     unmount() {
       // console.log('unmount', pkg.version)
       abortController.abort()
-
-      if (currentThemeName === 'dark') {
-        darkThemeCss.unuse()
-      }
 
       requestAnimationFrame(() => {
         reactRoot.unmount()
