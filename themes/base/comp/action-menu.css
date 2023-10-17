@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-action-menu-color-default-background-hover: var(--sinch-sys-color-container-transparent-hover);
   --sinch-comp-action-menu-color-default-background-initial: var(--sinch-sys-color-container-transparent-default);
   --sinch-comp-action-menu-color-default-background-selected: var(--sinch-sys-color-container-transparent-hover);

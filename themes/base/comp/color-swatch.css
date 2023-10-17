@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-color-swatch-color-blue-background: var(--sinch-ref-color-complementary-night-400);
   --sinch-comp-color-swatch-color-brown-background: var(--sinch-ref-color-complementary-mud-400);
   --sinch-comp-color-swatch-color-celtic-background: var(--sinch-sys-color-feedback-info-background);

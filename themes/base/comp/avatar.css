@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-avatar-border-color-default-initial: var(--sinch-sys-color-border-light);
   --sinch-comp-avatar-container-color-blue-background: var(--sinch-ref-color-complementary-night-400);
   --sinch-comp-avatar-container-color-blue-foreground: var(--sinch-ref-color-main-snow-100);

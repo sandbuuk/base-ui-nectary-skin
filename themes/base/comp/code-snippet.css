@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-code-snippet-color-default-background-initial: var(--sinch-sys-color-container-contrast-secondary-default);
   --sinch-comp-code-snippet-shape-radius: var(--sinch-sys-shape-radius-l);
 }

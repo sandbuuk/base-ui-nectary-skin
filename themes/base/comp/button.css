@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-button-color-cta-primary-default-background-active: var(--sinch-sys-color-cta-active);
   --sinch-comp-button-color-cta-primary-default-background-hover: var(--sinch-sys-color-cta-hover);
   --sinch-comp-button-color-cta-primary-default-background-initial: var(--sinch-sys-color-cta-default);

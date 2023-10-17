@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-card-color-blue-default-background-initial: var(--sinch-sys-color-container-complement-tertiary-default);
   --sinch-comp-card-color-gray-default-background-initial: var(--sinch-sys-color-container-contrast-primary-default);
   --sinch-comp-card-color-green-default-background-initial: var(--sinch-sys-color-container-complement-secondary-default);

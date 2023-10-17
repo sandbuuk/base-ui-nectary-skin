@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-accordion-color-default-border-initial: var(--sinch-sys-color-border-default);
   --sinch-comp-accordion-color-default-icon-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-accordion-color-default-optional-text-initial: var(--sinch-sys-color-text-muted);

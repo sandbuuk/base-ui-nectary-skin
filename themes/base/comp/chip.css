@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-chip-color-blue-default-background-initial: var(--sinch-ref-color-complementary-night-400);
   --sinch-comp-chip-color-blue-default-foreground-initial: var(--sinch-ref-color-main-snow-100);
   --sinch-comp-chip-color-brown-default-background-initial: var(--sinch-ref-color-complementary-mud-400);

@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-time-picker-digit-color-checked-h12-default: var(--sinch-sys-color-primary-default);
   --sinch-comp-time-picker-digit-color-checked-h24-initial: var(--sinch-sys-color-primary-default);
   --sinch-comp-time-picker-digit-color-checked-minute-initial: var(--sinch-sys-color-primary-default);

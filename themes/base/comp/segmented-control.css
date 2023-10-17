@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-segmented-control-color-checked-background-initial: var(--sinch-sys-color-container-main-active);
   --sinch-comp-segmented-control-color-checked-border-initial: var(--sinch-sys-color-border-active);
   --sinch-comp-segmented-control-color-checked-icon-initial: var(--sinch-sys-color-primary-default);

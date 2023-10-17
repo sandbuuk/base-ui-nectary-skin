@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-link-color-default-icon-hover: var(--sinch-sys-color-primary-active);
   --sinch-comp-link-color-default-icon-initial: var(--sinch-sys-color-text-link);
   --sinch-comp-link-color-default-outline-focus: var(--sinch-sys-color-border-focus);
