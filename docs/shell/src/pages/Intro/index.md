@@ -71,6 +71,19 @@ const App = () => (
 )
 ```
 
+MessageMedia theme:
+
+```jsx
+import '@nectary/theme-base'
+import '@nectary/theme-message-media'
+
+const App = () => (
+  <div id="app" className="nectary-theme-base nectary-theme-message-media">
+    ...
+  </div>
+)
+```
+
 Use color palette or custom font face:
 
 ```css
