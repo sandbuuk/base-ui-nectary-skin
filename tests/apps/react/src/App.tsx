@@ -88,7 +88,7 @@ const AppImpl = () => {
   }
 
   return (
-    <div style={style}>
+    <div style={style} className='nectary-theme-base'>
       <Routes>
         <Route path="/accordion" element={<Accordion/>}/>
         <Route path="/action-dropdown" element={<ActionDropdown/>}/>
