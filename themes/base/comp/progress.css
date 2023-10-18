@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-progress-color-default-background-initial: var(--sinch-sys-color-container-complement-secondary-hover);
   --sinch-comp-progress-color-default-bar-initial: var(--sinch-sys-color-primary-default);
   --sinch-comp-progress-color-default-text-initial: var(--sinch-sys-color-text-default);

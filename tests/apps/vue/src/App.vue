@@ -1,5 +1,5 @@
 <template>
-  <div :style="style">
+  <div :style="style" class="nectary-theme-base">
     <router-view/>
   </div>
 </template>

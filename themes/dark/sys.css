@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base.nectary-theme-dark {
   --sinch-sys-color-border-dark: var(--sinch-ref-color-main-stormy-300);
   --sinch-sys-color-border-default: var(--sinch-ref-color-main-stormy-400);
   --sinch-sys-color-border-disabled: var(--sinch-ref-color-main-stormy-500);

@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-badge-color-background: var(--sinch-sys-color-status-busy-contrast);
   --sinch-comp-badge-color-border: var(--sinch-sys-color-border-light);
   --sinch-comp-badge-color-text: var(--sinch-sys-color-text-inverted);

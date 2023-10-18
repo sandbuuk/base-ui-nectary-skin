@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-toggle-color-checked-background-initial: var(--sinch-sys-color-primary-default);
   --sinch-comp-toggle-color-checked-disabled-background-initial: var(--sinch-sys-color-primary-disabled);
   --sinch-comp-toggle-color-default-background-initial: var(--sinch-sys-color-container-contrast-primary-active);

@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base.nectary-theme-message-media {
   --sinch-sys-color-primary-active: #114369;
   --sinch-sys-color-primary-default: #0A5D9A;
   --sinch-sys-color-primary-disabled: #C8E6F9;

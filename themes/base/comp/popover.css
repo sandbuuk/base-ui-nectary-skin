@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-popover-color-default-background-initial: var(--sinch-sys-color-container-main-default);
   --sinch-comp-popover-color-default-border-initial: var(--sinch-sys-color-border-light);
   --sinch-comp-popover-shadow: var(--sinch-ref-shadow-level-2);

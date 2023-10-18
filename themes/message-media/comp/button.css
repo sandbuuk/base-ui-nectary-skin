@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base.nectary-theme-message-media {
   --sinch-comp-button-color-secondary-default-background-active: #A1D5F5;
   --sinch-comp-button-color-secondary-default-background-hover: #C8E6F9;
   --sinch-comp-button-color-secondary-default-background-initial: #DEF2FF;

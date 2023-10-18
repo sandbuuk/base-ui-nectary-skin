@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-file-drop-color-default-background-active: var(--sinch-sys-color-container-complement-tertiary-default);
   --sinch-comp-file-drop-color-default-background-initial: var(--sinch-sys-color-container-contrast-secondary-default);
   --sinch-comp-file-drop-color-default-border-active: var(--sinch-sys-color-border-focus);

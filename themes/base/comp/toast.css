@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-toast-color-error-default-background: var(--sinch-sys-color-feedback-invalid-background);
   --sinch-comp-toast-color-error-default-icon: var(--sinch-sys-color-feedback-invalid-contrast);
   --sinch-comp-toast-color-error-default-text: var(--sinch-sys-color-text-default);

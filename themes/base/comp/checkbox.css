@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-checkbox-color-checked-background-active: var(--sinch-sys-color-primary-active);
   --sinch-comp-checkbox-color-checked-background-hover: var(--sinch-sys-color-primary-hover);
   --sinch-comp-checkbox-color-checked-background-initial: var(--sinch-sys-color-primary-default);

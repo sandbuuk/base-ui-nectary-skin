@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-tab-color-checked-border-initial: var(--sinch-sys-color-border-active);
   --sinch-comp-tab-color-checked-icon-initial: var(--sinch-sys-color-primary-default);
   --sinch-comp-tab-color-checked-text-initial: var(--sinch-sys-color-primary-default);

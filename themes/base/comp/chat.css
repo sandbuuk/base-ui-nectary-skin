@@ -1,4 +1,3 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-comp-chat-shape-radius: var(--sinch-sys-shape-radius-l);
 }
