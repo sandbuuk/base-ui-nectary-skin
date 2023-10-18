@@ -1,3 +1,7 @@
+## v0.4.0 (2023-10-18)
+
+* 💥 require `nectary-theme-base` class on a root element
+
 ## v0.3.1 (2023-07-31)
 
 * 🐞 align font size in `sinch-avatar`
