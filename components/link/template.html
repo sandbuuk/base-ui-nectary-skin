@@ -46,13 +46,14 @@ a:focus-visible {
   height: 1em;
 }
 
-#standalone-icon-prefix {
+#icon-prefix {
   display: none;
+  margin-left: -0.25em;
 }
 
 :host([external]:not([standalone])) #external-icon {
   display: inline-block;
-  margin-right: 0.2em;
+  margin-left: 0.25em;
   vertical-align: -0.2em;
 
   --sinch-global-size-icon: 1em;
@@ -61,12 +62,11 @@ a:focus-visible {
 :host([standalone][external]) #external-icon {
   display: inline-block;
   vertical-align: -0.4em;
-  margin-right: -0.4em;
 
   --sinch-global-size-icon: 1.5em;
 }
 
-:host([standalone]) #standalone-icon-prefix {
+:host([standalone]) #icon-prefix {
   display: inline;
 }
 
@@ -92,8 +92,8 @@ a:focus-visible {
 </style>
 
 <a referrerpolicy="no-referer" aria-hidden="true">
-  <sinch-icon id="external-icon" name="open_in_new"></sinch-icon>
   <span id="content"></span>
-  <span id="standalone-icon-prefix">&nbsp;</span>
+  <span id="icon-prefix">&nbsp;</span>
+  <sinch-icon id="external-icon" name="open_in_new"></sinch-icon>
   <sinch-icon id="standalone-icon" name="arrow_forward"></sinch-icon>
 </a>
