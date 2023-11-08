@@ -10,6 +10,10 @@ import '../emoji'
 import '../text'
 import '../icon'
 import {
+  getEmojiBaseUrl,
+  setEmojiBaseUrl,
+} from '../emoji/utils'
+import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
@@ -275,10 +279,11 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
 
     const doc = this.#getDocumentRoot()
     const fragment = document.createDocumentFragment()
+    const emojiBaseUrl = getEmojiBaseUrl(this)
     let someFound = false
 
     for (const entry of this.#iterateSearchEmojis(searchValue, this.#currentSkinTone)) {
-      const el = this.#createEmojiElement(doc, entry)
+      const el = this.#createEmojiElement(doc, entry, emojiBaseUrl)
 
       someFound = true
       fragment.appendChild(el)
@@ -304,9 +309,10 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
 
     const doc = this.#getDocumentRoot()
     const fragment = document.createDocumentFragment()
+    const emojiBaseUrl = getEmojiBaseUrl(this)
 
     for (const entry of this.#iterateGroupEmojis(group, this.#currentSkinTone)) {
-      const el = this.#createEmojiElement(doc, entry)
+      const el = this.#createEmojiElement(doc, entry, emojiBaseUrl)
 
       fragment.appendChild(el)
     }
@@ -375,13 +381,15 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
     return activeTab === null || activeTab.length === 0
   }
 
-  #createEmojiElement(doc: Document, emoji: TEmoji) {
+  #createEmojiElement(doc: Document, emoji: TEmoji, baseUrl: string | null) {
     const btn = doc.createElement('sinch-icon-button')
     const el = doc.createElement('sinch-emoji')
 
     el.setAttribute('slot', 'icon')
     el.setAttribute('char', emoji.emoji)
     el.setAttribute('label', emoji.label)
+
+    setEmojiBaseUrl(el, baseUrl)
 
     btn.setAttribute('aria-label', emoji.label)
     btn.setAttribute('size', 's')
