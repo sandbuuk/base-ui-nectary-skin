@@ -1,4 +1,4 @@
-import { getAttribute, getCssVar, updateAttribute } from '../utils'
+import { getAttribute, getCssVar, updateAttribute } from '../utils/dom'
 
 const vs16RegExp = /\uFE0F/g
 // avoid using a string literal like '\u200D' here because minifiers expand it inline
