@@ -1,9 +1,12 @@
 <style>
 :host {
   display: contents;
+
+  --sinch-comp-emoji-vertical-align: initial;
 }
 
 #image {
+  vertical-align: var(--sinch-comp-emoji-vertical-align);
   pointer-events: none;
   width: var(--sinch-global-size-icon, 48px);
   height: var(--sinch-global-size-icon, 48px);
