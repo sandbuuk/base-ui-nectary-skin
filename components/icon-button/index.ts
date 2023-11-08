@@ -94,7 +94,10 @@ defineCustomElement('sinch-icon-button', class extends NectaryElement {
           return
         }
 
-        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+        const isDisabled = isAttrTrue(newVal)
+
+        this.ariaDisabled = isDisabled.toString()
+        updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
       }

@@ -13,7 +13,6 @@ import {
   subscribeContext,
   updateAttribute,
   updateBooleanAttribute,
-  updateExplicitBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
@@ -204,7 +203,8 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
         const isInvalid = isAttrTrue(newVal)
 
-        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+        this.ariaInvalid = isInvalid.toString()
+        this.#$input.ariaInvalid = this.ariaInvalid
         updateBooleanAttribute(this, name, isInvalid)
 
         break

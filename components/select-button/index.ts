@@ -12,7 +12,6 @@ import {
   subscribeContext,
   updateAttribute,
   updateBooleanAttribute,
-  updateExplicitBooleanAttribute,
   updateLiteralAttribute,
   Context,
   isAttrEqual,
@@ -116,14 +115,17 @@ defineCustomElement('sinch-select-button', class extends NectaryElement {
       case 'invalid': {
         const isInvalid = isAttrTrue(newVal)
 
-        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+        this.ariaInvalid = isInvalid.toString()
         updateBooleanAttribute(this, 'invalid', isInvalid)
 
         break
       }
 
       case 'disabled': {
-        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+        const isDisabled = isAttrTrue(newVal)
+
+        this.ariaDisabled = isDisabled.toString()
+        updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
       }
