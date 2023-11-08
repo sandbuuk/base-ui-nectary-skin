@@ -42,6 +42,7 @@ import { Progress } from './components/Progress'
 import { ProgressStepper } from './components/ProgressStepper'
 import { Radio } from './components/Radio'
 import { RichText } from './components/RichText'
+import { RichTextarea } from './components/RichTextarea'
 import { Search } from './components/Search'
 import { Segment } from './components/Segment'
 import { SegmentedControl } from './components/SegmentedControl'
@@ -133,6 +134,7 @@ const AppImpl = () => {
         <Route path="/progress" element={<Progress/>}/>
         <Route path="/radio" element={<Radio/>}/>
         <Route path="/rich-text" element={<RichText/>}/>
+        <Route path="/rich-textarea" element={<RichTextarea/>}/>
         <Route path="/search" element={<Search/>}/>
         <Route path="/segment" element={<Segment/>}/>
         <Route path="/segmented-control" element={<SegmentedControl/>}/>
