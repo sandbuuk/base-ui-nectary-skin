@@ -153,7 +153,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
 
         const isInvalid = isAttrTrue(newVal)
 
-        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+        this.ariaInvalid = isInvalid.toString()
         updateBooleanAttribute(this, 'invalid', isInvalid)
 
         break
