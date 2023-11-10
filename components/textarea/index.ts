@@ -12,7 +12,6 @@ import {
   setClass,
   updateAttribute,
   updateBooleanAttribute,
-  updateExplicitBooleanAttribute,
 } from '../utils'
 import { DEFAULT_SIZE } from '../utils/size'
 import templateHTML from './template.html'

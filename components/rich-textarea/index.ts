@@ -404,9 +404,6 @@ defineCustomElement('sinch-rich-textarea', class extends NectaryElement {
       return
     }
 
-    // console.log('-- START', range.startContainer, range.startOffset)
-    // console.log('-- END', range.endContainer, range.endOffset)
-
     const handleResult = this.#handleInput(e.inputType, range, e.data)
 
     if (handleResult.prevent) {
@@ -497,8 +494,6 @@ defineCustomElement('sinch-rich-textarea', class extends NectaryElement {
 
   #dispatchChangeEvent() {
     const value = serializeMarkdown(this.#$input, null)
-
-    console.log('DISPATCH', value)
 
     this.#prevDispatchedValue = value
 

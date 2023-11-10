@@ -1419,8 +1419,6 @@ const removeContentInRange = (range: Readonly<TRange>): TCursor => {
     return aCursor
   }
 
-  // console.log('*REMOVE RANGE', aCursor.$text ?? aCursor.$inline, aCursor.offset, bCursor.$text ?? bCursor.$inline, bCursor.offset)
-
   // Same TextNode case
   if (aCursor.$text === bCursor.$text && isTextNode(aCursor.$text)) {
     const { $text, $inline, offset: startOffset } = aCursor
