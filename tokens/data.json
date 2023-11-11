@@ -7223,12 +7223,6 @@
           },
           "tertiary": {
             "default": {
-              "background": {
-                "initial": {
-                  "value": "rgba(0,0,0,0)",
-                  "type": "color"
-                }
-              },
               "border": {
                 "initial": {
                   "value": "rgba(0,0,0,0)",
