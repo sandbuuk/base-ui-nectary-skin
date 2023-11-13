@@ -1,0 +1,273 @@
+<style>
+:host {
+  display: block;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--sinch-comp-textarea-color-default-background-initial);
+  border-radius: var(--sinch-local-shape-radius);
+  overflow: hidden;
+
+  --sinch-local-shape-radius: var(--sinch-comp-textarea-shape-radius);
+}
+
+#input-wrapper {
+  position: relative;
+  padding: 8px 10px 8px 12px;
+  box-sizing: border-box;
+}
+
+#input {
+  font: var(--sinch-comp-textarea-font-input);
+  color: var(--sinch-comp-textarea-color-default-text-initial);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  border: none;
+  outline: none;
+}
+
+#placeholder {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font: var(--sinch-comp-textarea-font-input);
+  color: var(--sinch-comp-textarea-color-default-text-placeholder);
+  padding: 8px 10px 8px 12px;
+  pointer-events: none;
+  user-select: none;
+}
+
+#input.empty + #placeholder {
+  display: block;
+}
+
+#border {
+  position: absolute;
+  border: 1px solid var(--sinch-comp-textarea-color-default-border-initial);
+  border-radius: var(--sinch-local-shape-radius);
+  inset: 0;
+  pointer-events: none;
+}
+
+:host([invalid]) #border {
+  border-color: var(--sinch-comp-textarea-color-invalid-border-initial);
+}
+
+:host([disabled]) {
+  color: var(--sinch-comp-textarea-color-disabled-text-initial);
+  -webkit-text-fill-color: var(--sinch-comp-textarea-color-disabled-text-initial);
+}
+
+:host([disabled]) #border {
+  border-color: var(--sinch-comp-textarea-color-disabled-border-initial);
+}
+
+:host(:not([disabled])) #input-wrapper:focus-within ~ #border {
+  border-color: var(--sinch-comp-textarea-color-default-border-focus);
+  border-width: 2px;
+}
+
+.p,
+.oli,
+.uli {
+  margin: 0;
+}
+
+.oli.l0,
+.uli.l0 {
+  margin-left: 6px;
+}
+
+.oli.l1,
+.uli.l1 {
+  margin-left: 36px;
+}
+
+.oli.l2,
+.uli.l2 {
+  margin-left: 64px;
+}
+
+.oli.l3,
+.uli.l3 {
+  margin-left: 92px;
+}
+
+.oli.l4,
+.uli.l4 {
+  margin-left: 120px;
+}
+
+.uli.l0 {
+  counter-reset: list-0 list-1 list-2 list-3 list-4;
+}
+
+.uli.l1 {
+  counter-reset: list-1 list-2 list-3 list-4;
+}
+
+.uli.l2 {
+  counter-reset: list-2 list-3 list-4;
+}
+
+.uli.l3 {
+  counter-reset: list-3 list-4;
+}
+
+.uli.l4 {
+  counter-reset: list-4;
+}
+
+.oli.l0 {
+  counter-reset: list-1 list-2 list-3 list-4;
+}
+
+.oli.l1 {
+  counter-reset: list-2 list-3 list-4;
+}
+
+.oli.l2 {
+  counter-reset: list-3 list-4;
+}
+
+.oli.l3 {
+  counter-reset: list-4;
+}
+
+.oli.l0::before {
+  counter-increment: list-0;
+  content: counter(list-0, decimal) ". ";
+}
+
+.oli.l1::before {
+  counter-increment: list-1;
+  content: counter(list-1, lower-alpha) ". ";
+}
+
+.oli.l2::before {
+  counter-increment: list-2;
+  content: counter(list-2, lower-roman) ". ";
+}
+
+.oli.l3::before {
+  counter-increment: list-3;
+  content: counter(list-3, decimal) ". ";
+}
+
+.oli.l4::before {
+  counter-increment: list-4;
+  content: counter(list-4, lower-alpha) ". ";
+}
+
+.oli:first-of-type,
+.oli.block,
+.p + .oli {
+  counter-reset: list-0 list-1 list-2 list-3 list-4;
+}
+
+.uli::before {
+  content: "\25CF";
+  display: inline-block;
+  width: 16px;
+}
+
+.uli.block,
+.oli.block,
+.uli + .p,
+.oli + .p,
+.p + .uli,
+.p + .oli {
+  margin-top: 0.5em;
+}
+
+.c {
+  font: var(--sinch-comp-code-tag-font-text);
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--sinch-comp-code-tag-color-default-text-initial);
+  border: 1px solid var(--sinch-comp-code-tag-color-default-border-initial);
+  background-color: var(--sinch-comp-code-tag-color-default-background-initial);
+  padding: 0 0.25em;
+  border-radius: var(--sinch-comp-code-tag-shape-radius);
+}
+
+.l {
+  font: var(--sinch-comp-link-default-font-initial);
+  color: var(--sinch-comp-link-color-default-text-initial);
+  text-decoration: underline;
+}
+
+.i {
+  font-style: italic;
+}
+
+.b {
+  font-weight: bold;
+}
+
+.s {
+  text-decoration: line-through;
+}
+
+.e {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.2em;
+}
+
+#top-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 4px 0;
+}
+
+#top-wrapper.empty {
+  display: none;
+}
+
+#bottom-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px 4px;
+}
+
+#bottom-wrapper.empty {
+  display: none;
+}
+</style>
+
+<div id="wrapper">
+  <div id="top-wrapper">
+    <slot id="top" name="top"></slot>
+  </div>
+  <div id="input-wrapper">
+    <div
+      id="input"
+      contentEditable
+      suppressContentEditableWarning
+      autoCapitalize="false"
+      autoCorrect="false"
+      autoSave="false"
+      spellCheck="false"
+    >
+    </div>
+    <div id="placeholder"></div>
+  </div>
+  <div id="border"></div>
+  <div id="bottom-wrapper">
+    <slot id="bottom" name="bottom"></slot>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { getCssVar } from '../utils'
+import { getAttribute, getCssVar, updateAttribute } from '../utils/dom'
 
 const vs16RegExp = /\uFE0F/g
 // avoid using a string literal like '\u200D' here because minifiers expand it inline
@@ -31,24 +31,30 @@ function toCodePoints(unicodeSurrogates: string): string[] {
   return points
 }
 
-// Cache emoji Url
-let emojiUrl: string | null = null
+const BASE_URL_ATTR = 'data-emoji-base-url'
 
-export const getEmojiUrl = (root: Element, char: string | null): string => {
-  if (char === null || char.length === 0) {
-    return ''
+export const setEmojiBaseUrl = (emojiEl: Element, baseUrl: string | null) => {
+  updateAttribute(emojiEl, BASE_URL_ATTR, baseUrl)
+}
+
+export const getEmojiBaseUrl = (root: Element): string | null => {
+  let baseUrl = getAttribute(root, BASE_URL_ATTR)
+
+  if (baseUrl !== null) {
+    return baseUrl
   }
 
-  // Lazy get Url from CSS variable
-  if (emojiUrl === null) {
-    emojiUrl = getCssVar(root, '--sinch-emoji-src-url')
+  baseUrl = getCssVar(root, '--sinch-emoji-src-url')
 
-    if (emojiUrl !== null) {
-      emojiUrl = emojiUrl.replaceAll('"', '').trim()
-    }
+  if (baseUrl !== null) {
+    return baseUrl.replaceAll('"', '').trim()
   }
 
-  if (emojiUrl === null) {
+  return null
+}
+
+export const getEmojiUrl = (baseUrl: string | null, char: string | null): string => {
+  if (char === null || char.length === 0 || baseUrl === null) {
     return ''
   }
 
@@ -64,5 +70,5 @@ export const getEmojiUrl = (root: Element, char: string | null): string => {
   //   codepoints = codepoints.substring(2).replace(/-fe0f/, '')
   // }
 
-  return emojiUrl.replace('%s', codepoints)
+  return baseUrl.replace('%s', codepoints)
 }

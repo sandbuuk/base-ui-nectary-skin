@@ -5,6 +5,7 @@ import '@nectary/theme-base'
 import { render } from 'react-dom'
 import { App } from './App'
 import 'axe-core'
+import { DocumentProvider } from './context/document'
 
 const createShadowRoot = (element: HTMLElement, registry: CustomElementRegistry) => {
   const shadowRoot = element.attachShadow({
@@ -32,6 +33,8 @@ setNectaryRegistry(registry)
 setAssetsRegistry(registry)
 
 render(
-  <App/>,
+  <DocumentProvider value={appElement.ownerDocument}>
+    <App/>
+  </DocumentProvider>,
   appElement
 )

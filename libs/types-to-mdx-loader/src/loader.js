@@ -44,7 +44,7 @@ const generateTable = async (entries, exportedName) => {
   let result = '| Name | Type | Description |\n| --- | --- | --- |'
 
   for (const entry of entries) {
-    result += `\n| \`${entry.name + (entry.isOptional ? '?' : '')}\` | \`${entry.value.replaceAll('|', '\\|')}\` | ${entry.comment?.replaceAll('\n', '<br/>') ?? ''} |`
+    result += `\n| \`${entry.name + (entry.isOptional ? '?' : '')}\` | \`${entry.value.replaceAll('|', '\\|').replaceAll('\n', ' ')}\` | ${entry.comment?.replaceAll('\n', '<br/>') ?? ''} |`
   }
 
   const compiled = await compile(result, {

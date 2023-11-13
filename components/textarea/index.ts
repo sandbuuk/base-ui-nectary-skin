@@ -12,7 +12,6 @@ import {
   setClass,
   updateAttribute,
   updateBooleanAttribute,
-  updateExplicitBooleanAttribute,
 } from '../utils'
 import { DEFAULT_SIZE } from '../utils/size'
 import templateHTML from './template.html'
@@ -153,7 +152,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
 
         const isInvalid = isAttrTrue(newVal)
 
-        updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+        this.ariaInvalid = isInvalid.toString()
         updateBooleanAttribute(this, 'invalid', isInvalid)
 
         break

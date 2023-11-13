@@ -1,0 +1,174 @@
+import { useEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import type { TRichTextareaSelection, TSinchRichTextareaElement } from '@nectary/components/rich-textarea/types'
+import type { FC } from 'react'
+import '@nectary/components/rich-textarea'
+import '@nectary/components/icon-button'
+import '@nectary/components/icon'
+import '@nectary/components/button'
+import '@nectary/assets/icons/variables'
+import '@nectary/assets/icons/send'
+
+const mdText = `
+To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
+
+If ___you___ have *any questions*, contact your ~~parents~~😆 account __manager__.
+
+* list item 1
+  1. inner item 1
+  1. inner _item 2_
+     * list \`LINE\` item 2
+     * list __item 3__
+  1. inner ___item 2___
+* list ~~item 2~~
+  * list item 3
+
+1. level 0
+   2. level 1
+      3. level 2
+      3. inner item 2
+   2. inner item 2
+`
+
+export const RichTextarea: FC = () => {
+  const [search] = useSearchParams()
+  const placeholderText = search.get('placeholder') ?? undefined
+  const isMarkdownExample = search.get('example') === 'md'
+  const hasTop = search.get('top') !== null
+  const hasBottom = search.get('bottom') !== null
+  const ref = useRef<TSinchRichTextareaElement>(null)
+  const [value, setValue] = useState(isMarkdownExample ? mdText : (search.get('value') ?? ''))
+
+  const onFormatItalic = () => {
+    ref.current!.formatItalic()
+  }
+  const onFormatBold = () => {
+    ref.current!.formatBold()
+  }
+  const onFormatStrikethrough = () => {
+    ref.current!.formatStrikethrough()
+  }
+  const onFormatCodeTag = () => {
+    ref.current!.formatCodeTag()
+  }
+  const onFormatListBulleted = () => {
+    ref.current!.formatUnorderedList()
+  }
+  const onFormatListNumbered = () => {
+    ref.current!.formatOrderedList()
+  }
+  const onSelection = (e: CustomEvent<TRichTextareaSelection>) => {
+    window.dispatchEvent(new CustomEvent('sinch-rich-textarea-selection', { detail: e.detail }))
+  }
+  const onEditorChange = (e: CustomEvent<string>) => {
+    setValue(e.detail)
+    window.dispatchEvent(new CustomEvent('sinch-rich-textarea-change', { detail: e.detail }))
+  }
+  const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-rich-textarea-focus'))
+  const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-rich-textarea-blur'))
+
+  useEffect(() => {
+    const insertLink = () => {
+      ref.current!.insertLink('link text', 'http://google.com')
+    }
+    const insertEmoji = () => {
+      ref.current!.insertText('👍')
+    }
+    const formatItalic = () => {
+      ref.current!.formatItalic()
+    }
+    const formatBold = () => {
+      ref.current!.formatBold()
+    }
+    const formatStrikethrough = () => {
+      ref.current!.formatStrikethrough()
+    }
+    const formatCodeTag = () => {
+      ref.current!.formatCodeTag()
+    }
+    const formatOrderedList = () => {
+      ref.current!.formatOrderedList()
+    }
+    const formatUnorderedList = () => {
+      ref.current!.formatUnorderedList()
+    }
+
+    const ctr = new AbortController()
+    const options: AddEventListenerOptions = { signal: ctr.signal }
+
+    window.addEventListener('sinch-rich-textarea-insert-link', insertLink, options)
+    window.addEventListener('sinch-rich-textarea-insert-emoji', insertEmoji, options)
+    window.addEventListener('sinch-rich-textarea-format-italic', formatItalic, options)
+    window.addEventListener('sinch-rich-textarea-format-bold', formatBold, options)
+    window.addEventListener('sinch-rich-textarea-format-strikethrough', formatStrikethrough, options)
+    window.addEventListener('sinch-rich-textarea-format-codetag', formatCodeTag, options)
+    window.addEventListener('sinch-rich-textarea-format-ordered-list', formatOrderedList, options)
+    window.addEventListener('sinch-rich-textarea-format-unordered-list', formatUnorderedList, options)
+
+    return () => {
+      ctr.abort()
+    }
+  }, [])
+
+  return (
+    <div>
+      <sinch-rich-textarea
+        ref={ref}
+        value={value}
+        aria-label="Editor"
+        on-selection={onSelection}
+        placeholder={placeholderText}
+        on-change={onEditorChange}
+        on-focus={onFocus}
+        on-blur={onBlur}
+      >
+        { hasTop && (
+          <>
+            <sinch-icon-button slot="top" size="s" id="format-italic" aria-label="Format italic" on-click={onFormatItalic}>
+              <sinch-icon slot="icon" name="format_italic"/>
+            </sinch-icon-button>
+            <sinch-icon-button slot="top" size="s" id="format-bold" aria-label="Format bold" on-click={onFormatBold}>
+              <sinch-icon slot="icon" name="format_bold"/>
+            </sinch-icon-button>
+            <sinch-icon-button slot="top" size="s" id="format-strikethrough" aria-label="Format strikethrough" on-click={onFormatStrikethrough}>
+              <sinch-icon slot="icon" name="format_strikethrough"/>
+            </sinch-icon-button>
+            <sinch-icon-button slot="top" size="s" id="format-code-tag" aria-label="Format code tag" on-click={onFormatCodeTag}>
+              <sinch-icon slot="icon" name="code"/>
+            </sinch-icon-button>
+            <sinch-icon-button slot="top" size="s" id="format-ulist" aria-label="Format list bulleted" on-click={onFormatListBulleted}>
+              <sinch-icon slot="icon" name="format_list_bulleted"/>
+            </sinch-icon-button>
+            <sinch-icon-button slot="top" size="s" id="format-olist" aria-label="Format list numbered" on-click={onFormatListNumbered}>
+              <sinch-icon slot="icon" name="format_list_numbered"/>
+            </sinch-icon-button>
+          </>
+        )}
+
+        {hasBottom && (
+          <>
+            <sinch-icon-button slot="bottom" size="s" aria-label="Attach files">
+              <sinch-icon slot="icon" name="attach_file"/>
+            </sinch-icon-button>
+            <sinch-icon-button slot="bottom" size="s" aria-label="Variables">
+              <sinch-icon-variables slot="icon"/>
+            </sinch-icon-button>
+            <sinch-icon-button slot="bottom" size="s" aria-label="Options">
+              <sinch-icon slot="icon" name="more_horiz"/>
+            </sinch-icon-button>
+            <sinch-button
+              slot="bottom"
+              type="primary"
+              size="s"
+              aria-label="Send"
+              text="Send"
+              style={{ marginLeft: 'auto' }}
+            >
+              <sinch-icon-send slot="right-icon"/>
+            </sinch-button>
+          </>
+        )}
+      </sinch-rich-textarea>
+    </div>
+  )
+}

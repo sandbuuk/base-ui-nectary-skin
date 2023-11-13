@@ -1,0 +1,27 @@
+import { Example } from '~/components/Example'
+import { SlotsExample } from './examples/Slots.tsx?example'
+
+# Examples
+
+Rich Textarea is a Slack-like WYSIWYG editor, which serializes content into Markdown
+
+## Composition
+
+See [Rich Textarea compositions page](?path=/compositions/richtextarea/examples) for full-featured WYSIWYG editor.
+
+## Hotkeys
+
+| Key | Action |
+| ---- | ---- |
+| `Ctrl` / `Cmd` + `I` | toggle selection *italic* |
+| `Ctrl` / `Cmd` + `B` | toggle selection **bold** |
+| `Ctrl` / `Cmd` + `Shift` + `X` | toggle selection ~strikethrough~ |
+| `Ctrl` / `Cmd` + `Shift` + `C` | toggle selection `codetag` |
+| `Tab` | indent list item |
+| `Shift` + `Tab` | outdent list item |
+
+## Slots
+
+`sinch-rich-textarea` component has `top` and `bottom` slots for toolbars and buttons.
+
+<Example Component={SlotsExample}/>
