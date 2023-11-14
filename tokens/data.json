@@ -7223,26 +7223,6 @@
           },
           "tertiary": {
             "default": {
-              "background": {
-                "initial": {
-                  "value": "rgba(0,0,0,0)",
-                  "type": "color"
-                },
-                "hover": {
-                  "value": "#E0E0E0",
-                  "type": "color"
-                },
-                "active": {
-                  "value": "#CCCCCC",
-                  "type": "color"
-                }
-              },
-              "text": {
-                "initial": {
-                  "value": "#0A5D9A",
-                  "type": "color"
-                }
-              },
               "border": {
                 "initial": {
                   "value": "rgba(0,0,0,0)",
@@ -7461,20 +7441,6 @@
           },
           "tertiary": {
             "default": {
-              "background": {
-                "initial": {
-                  "value": "rgba(0,0,0,0)",
-                  "type": "color"
-                },
-                "hover": {
-                  "value": "#E0E0E0",
-                  "type": "color"
-                },
-                "active": {
-                  "value": "#CCCCCC",
-                  "type": "color"
-                }
-              },
               "icon": {
                 "initial": {
                   "value": "#0A5D9A",
@@ -7676,6 +7642,22 @@
             }
           }
         }
+      },
+      "tooltip": {
+        "color": {
+          "text": {
+            "value": "{sys.color.text.inverted}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{sys.color.container.contrast.primary.foreground}",
+            "type": "color"
+          }
+        },
+        "shape-radius": {
+          "value": "{sys.shape-radius.s}",
+          "type": "borderRadius"
+        }
       }
     }
   },
@@ -7684,8 +7666,7 @@
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
       "name": "Sinch brand light",
       "selectedTokenSets": {
-        "Nectary / Base theme": "enabled",
-        "SaaS/ MessageMedia": "disabled"
+        "Nectary / Base theme": "enabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
@@ -9681,8 +9662,7 @@
       "name": "Sinch brand dark",
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
-        "Nectary / Dark theme": "enabled",
-        "SaaS/ MessageMedia": "disabled"
+        "Nectary / Dark theme": "enabled"
       },
       "$figmaStyleReferences": {
         "ref.main.honey.100": "S:1c89ec93e4feb265b45c8a064b7a97659f9ea624,",
