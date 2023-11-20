@@ -95,7 +95,13 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'orientation', 'type']
+    return [
+      'text',
+      'orientation',
+      'type',
+      'aria-label',
+      'aria-description',
+    ]
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -121,6 +127,13 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
         this.#tooltipState.updateOptions({
           showDelay: newVal === 'fast' ? SHOW_DELAY_FAST : SHOW_DELAY_SLOW,
         })
+
+        break
+      }
+
+      case 'aria-label':
+      case 'aria-description': {
+        updateAttribute(this.#$pop, name, newVal)
 
         break
       }
