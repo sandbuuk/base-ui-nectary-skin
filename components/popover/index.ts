@@ -65,6 +65,8 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       'open',
       'modal',
       'tip',
+      'aria-label',
+      'aria-description',
     ]
   }
 
@@ -100,6 +102,13 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
       case 'open': {
         updateAttribute(this.#$pop, name, newVal)
         updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+
+      case 'aria-label':
+      case 'aria-description': {
+        updateAttribute(this.#$pop, name, newVal)
 
         break
       }
