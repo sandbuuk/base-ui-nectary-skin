@@ -2174,7 +2174,7 @@
           },
           "icon": {
             "l": {
-              "value": "24",
+              "value": "32",
               "type": "sizing"
             },
             "m": {
@@ -2206,6 +2206,12 @@
               }
             },
             "s": {
+              "text": {
+                "value": "{sys.font.body.emphasize-s}",
+                "type": "typography"
+              }
+            },
+            "xs": {
               "text": {
                 "value": "{sys.font.body.emphasize-s}",
                 "type": "typography"
