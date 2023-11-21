@@ -1639,7 +1639,7 @@
                 }
               }
             },
-            "checked": {
+            "toggled": {
               "background": {
                 "initial": {
                   "value": "#242424",
@@ -1954,7 +1954,7 @@
                 }
               }
             },
-            "checked": {
+            "toggled": {
               "background": {
                 "initial": {
                   "value": "#242424",
@@ -2166,6 +2166,10 @@
             "s": {
               "value": "{sys.size.s}",
               "type": "sizing"
+            },
+            "xs": {
+              "value": "{sys.size.xs}",
+              "type": "sizing"
             }
           },
           "icon": {
@@ -2178,6 +2182,10 @@
               "type": "sizing"
             },
             "s": {
+              "value": "16",
+              "type": "sizing"
+            },
+            "xs": {
               "value": "16",
               "type": "sizing"
             }
@@ -9552,12 +9560,12 @@
         "comp.button.color.subtle-secondary.disabled.text.initial": "S:498073d87e9eb4c8d521f3e0f0af2ec24aadc3ec,",
         "sys.font.body.monospace-xxs": "S:75f71d342fbeee1be2a57cd189368b66e22bb83a,",
         "comp.badge.font.size.l": "S:6d7e89c29b512cd0c125354d901e03b5d7ae1bae,",
-        "comp.button.color.subtle-primary.checked.background.initial": "S:10bf7d086dc1fa2f1c9be7f01df607ca10685fab,",
-        "comp.button.color.subtle-primary.checked.background.hover": "S:6b94ae851f74d9214871c906ef9228bd4ec56e4e,",
-        "comp.button.color.subtle-primary.checked.background.active": "S:45caf1a0fb631ecd36d852884b45a6ca118a4d2e,",
-        "comp.button.color.subtle-secondary.checked.background.initial": "S:1d15b8ee8966df335450095fde219932745bf6c4,",
-        "comp.button.color.subtle-secondary.checked.background.hover": "S:b0991d2e6b8ab0ee7fb98bb727325168141ef093,",
-        "comp.button.color.subtle-secondary.checked.background.active": "S:e4a3d54d053bac4234e295102c4835fb860b9f84,"
+        "comp.button.color.subtle-secondary.toggled.background.initial": "S:1d15b8ee8966df335450095fde219932745bf6c4,",
+        "comp.button.color.subtle-secondary.toggled.background.hover": "S:b0991d2e6b8ab0ee7fb98bb727325168141ef093,",
+        "comp.button.color.subtle-secondary.toggled.background.active": "S:e4a3d54d053bac4234e295102c4835fb860b9f84,",
+        "comp.button.color.subtle-primary.toggled.background.initial": "S:10bf7d086dc1fa2f1c9be7f01df607ca10685fab,",
+        "comp.button.color.subtle-primary.toggled.background.hover": "S:6b94ae851f74d9214871c906ef9228bd4ec56e4e,",
+        "comp.button.color.subtle-primary.toggled.background.active": "S:45caf1a0fb631ecd36d852884b45a6ca118a4d2e,"
       }
     },
     {
