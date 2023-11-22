@@ -38,6 +38,7 @@ import { ProgressComponent } from '../components/Progress/Progress.component'
 import { ProgressStepperComponent } from '../components/ProgressStepper/ProgressStepper.component'
 import { RadioComponent } from '../components/Radio/Radio.component'
 import { RichTextComponent } from '../components/RichText/RichText.component'
+import { RichTextareaComponent } from '../components/RichTextarea/RichTextarea.component'
 import { SearchComponent } from '../components/Search/Search.component'
 import { SegmentComponent } from '../components/Segment/Segment.component'
 import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
@@ -99,6 +100,7 @@ import appRoutes from './router-config';
     ProgressStepperComponent,
     RadioComponent,
     RichTextComponent,
+    RichTextareaComponent,
     SearchComponent,
     SegmentComponent,
     SegmentedControlComponent,

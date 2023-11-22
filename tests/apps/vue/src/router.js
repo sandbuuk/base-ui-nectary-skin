@@ -35,6 +35,7 @@ import Progress from './components/Progress.vue'
 import ProgressStepper from './components/ProgressStepper.vue'
 import Radio from './components/Radio.vue'
 import RichText from './components/RichText.vue'
+import RichTextarea from './components/RichTextarea.vue'
 import Search from './components/Search.vue'
 import Segment from './components/Segment.vue'
 import SegmentedControl from './components/SegmentedControl.vue'
@@ -92,6 +93,7 @@ const routes = [
   { path: "/progress", component: Progress },
   { path: "/radio", component: Radio },
   { path: "/rich-text", component: RichText },
+  { path: "/rich-textarea", component: RichTextarea },
   { path: "/search", component: Search },
   { path: "/segment", component: Segment },
   { path: "/segmented-control", component: SegmentedControl },

@@ -80,7 +80,7 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
     this.#keydownContext.listen(signal)
     this.#visibilityContext.listen(signal)
 
-    this.setAttribute('role', 'dialog')
+    this.role = 'dialog'
     this.#$dialog.addEventListener('cancel', this.#onCancel, { signal })
     this.#$dialog.addEventListener('mousedown', this.#onBackdropMouseDown, { signal })
     this.addEventListener('-close', this.#onCloseReactHandler, { signal })
@@ -100,7 +100,10 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['orientation', 'open']
+    return [
+      'orientation',
+      'open',
+    ]
   }
 
   set modal(isModal: boolean) {

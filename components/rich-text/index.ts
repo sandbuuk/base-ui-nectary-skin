@@ -1,3 +1,7 @@
+import { getEmojiBaseUrl } from '../emoji/utils'
+import '../emoji'
+import '../code-tag'
+import '../link'
 import {
   defineCustomElement,
   NectaryElement,
@@ -8,7 +12,7 @@ import {
   parseMarkdown,
 } from '../utils'
 import templateHTML from './template.html'
-import { sizeValues } from './utils'
+import { createParseVisitor, sizeValues } from './utils'
 import type { TSinchRichTextElement, TSinchRichTextReact } from './types'
 import type { TSinchTextType } from '../text/types'
 
@@ -18,28 +22,51 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-rich-text', class extends NectaryElement {
   #wrapper: HTMLElement
+  #parseVisitor
 
   constructor() {
     super()
 
     const shadowRoot = this.attachShadow()
 
+    if (typeof (shadowRoot as unknown as Document).createElement !== 'function') {
+      Object.defineProperty(shadowRoot, 'createElement', {
+        value: document.createElement.bind(shadowRoot.ownerDocument),
+      })
+    }
+
+    Object.defineProperty(shadowRoot, 'createTextNode', {
+      value: document.createTextNode.bind(shadowRoot.ownerDocument),
+    })
+    Object.defineProperty(shadowRoot, 'createDocumentFragment', {
+      value: document.createDocumentFragment.bind(shadowRoot.ownerDocument),
+    })
+
     shadowRoot.appendChild(template.content.cloneNode(true))
     this.#wrapper = shadowRoot.querySelector('#wrapper')!
+    this.#parseVisitor = createParseVisitor(shadowRoot as unknown as Document)
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'paragraph')
+    super.connectedCallback()
+    this.role = 'paragraph'
+
+    this.#parseVisitor.updateEmojiBaseUrl(getEmojiBaseUrl(this))
+    this.#updateText()
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
   }
 
   static get observedAttributes() {
     return ['text']
   }
 
-  attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
+  attributeChangedCallback(name: string, _oldVal: string | null, _newVal: string | null) {
     switch (name) {
       case 'text': {
-        this.#updateText(newVal)
+        this.#updateText()
 
         break
       }
@@ -62,14 +89,20 @@ defineCustomElement('sinch-rich-text', class extends NectaryElement {
     updateAttribute(this, 'text', value)
   }
 
-  #updateText(text: string | null) {
-    if (text === null) {
-      this.#wrapper.innerHTML = ''
-
+  #updateText() {
+    if (!this.isDomConnected) {
       return
     }
 
-    this.#wrapper.innerHTML = parseMarkdown(text)
+    const text = this.text
+
+    if (text === null) {
+      this.#wrapper.innerHTML = ''
+    } else {
+      this.#wrapper.replaceChildren(
+        parseMarkdown(text, this.#parseVisitor.createVisitor())
+      )
+    }
   }
 })
 

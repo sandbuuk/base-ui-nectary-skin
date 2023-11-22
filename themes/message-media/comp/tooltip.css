@@ -1,0 +1,5 @@
+.nectary-theme-base.nectary-theme-message-media {
+  --sinch-comp-tooltip-color-background: var(--sinch-sys-color-container-contrast-primary-foreground);
+  --sinch-comp-tooltip-color-text: var(--sinch-sys-color-text-inverted);
+  --sinch-comp-tooltip-shape-radius: var(--sinch-sys-shape-radius-s);
+}

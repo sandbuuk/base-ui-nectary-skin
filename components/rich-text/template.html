@@ -30,11 +30,6 @@
   font-weight: var(--sinch-ref-typography-font-weight-700);
 }
 
-.em3 {
-  font-style: italic;
-  font-weight: var(--sinch-ref-typography-font-weight-700);
-}
-
 .strikethrough {
   text-decoration: line-through;
 }
@@ -60,12 +55,33 @@
   border-radius: var(--sinch-comp-code-tag-shape-radius);
 }
 
-.paragraph {
+.emoji {
+  --sinch-global-size-icon: 1em;
+  --sinch-comp-emoji-vertical-align: -0.2em;
+}
+
+.p,
+.ul,
+.ol {
   margin: 0;
 }
 
-.paragraph + .paragraph {
-  margin-top: 12px;
+.ul,
+.ol {
+  padding-left: 1.5em;
+}
+
+.p + .p,
+.p + .ul,
+.p + .ol,
+.ol + .p,
+.ul + .p {
+  margin-top: 0.5em;
+}
+
+.li > .p + .ul,
+.li > .p + .ol {
+  margin-top: 0;
 }
 </style>
 

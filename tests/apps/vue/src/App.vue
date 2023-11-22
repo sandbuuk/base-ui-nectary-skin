@@ -42,6 +42,7 @@ import Progress from './components/Progress.vue'
 import ProgressStepper from './components/ProgressStepper.vue'
 import Radio from './components/Radio.vue'
 import RichText from './components/RichText.vue'
+import RichTextarea from './components/RichTextarea.vue'
 import Search from './components/Search.vue'
 import Segment from './components/Segment.vue'
 import SegmentedControl from './components/SegmentedControl.vue'
@@ -127,6 +128,7 @@ export default {
     ProgressStepper,
     Radio,
     RichText,
+    RichTextarea,
     Search,
     Segment,
     SegmentedControl,

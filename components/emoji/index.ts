@@ -5,7 +5,7 @@ import {
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import { getEmojiUrl } from './utils'
+import { getEmojiBaseUrl, getEmojiUrl } from './utils'
 import type { TSinchEmojiElement, TSinchEmojiReact } from './types'
 
 const template = document.createElement('template')
@@ -63,7 +63,7 @@ defineCustomElement('sinch-emoji', class extends NectaryElement {
       return
     }
 
-    this.#$img.src = getEmojiUrl(this, this.char)
+    this.#$img.src = getEmojiUrl(getEmojiBaseUrl(this), this.char)
   }
 })
 

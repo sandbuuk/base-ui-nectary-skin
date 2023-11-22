@@ -35,6 +35,7 @@ import { ProgressComponent } from '../components/Progress/Progress.component'
 import { ProgressStepperComponent } from '../components/ProgressStepper/ProgressStepper.component'
 import { RadioComponent } from '../components/Radio/Radio.component'
 import { RichTextComponent } from '../components/RichText/RichText.component'
+import { RichTextareaComponent } from '../components/RichTextarea/RichTextarea.component'
 import { SearchComponent } from '../components/Search/Search.component'
 import { SegmentComponent } from '../components/Segment/Segment.component'
 import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
@@ -92,6 +93,7 @@ const appRoutes: Routes = [
   { path: "progress", component: ProgressComponent },
   { path: "radio", component: RadioComponent },
   { path: "rich-text", component: RichTextComponent },
+  { path: "rich-textarea", component: RichTextareaComponent },
   { path: "search", component: SearchComponent },
   { path: "segment", component: SegmentComponent },
   { path: "segmented-control", component: SegmentedControlComponent },

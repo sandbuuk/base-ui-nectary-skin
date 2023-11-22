@@ -7097,26 +7097,6 @@
           },
           "subtle-primary": {
             "default": {
-              "background": {
-                "initial": {
-                  "value": "rgba(0,0,0,0)",
-                  "type": "color"
-                },
-                "hover": {
-                  "value": "#E0E0E0",
-                  "type": "color"
-                },
-                "active": {
-                  "value": "#CCCCCC",
-                  "type": "color"
-                }
-              },
-              "text": {
-                "initial": {
-                  "value": "#0A5D9A",
-                  "type": "color"
-                }
-              },
               "border": {
                 "initial": {
                   "value": "rgba(0,0,0,0)",
@@ -7335,20 +7315,6 @@
           },
           "tertiary": {
             "default": {
-              "background": {
-                "initial": {
-                  "value": "rgba(0,0,0,0)",
-                  "type": "color"
-                },
-                "hover": {
-                  "value": "#E0E0E0",
-                  "type": "color"
-                },
-                "active": {
-                  "value": "#CCCCCC",
-                  "type": "color"
-                }
-              },
               "icon": {
                 "initial": {
                   "value": "#0A5D9A",
@@ -7549,6 +7515,22 @@
               }
             }
           }
+        }
+      },
+      "tooltip": {
+        "color": {
+          "text": {
+            "value": "{sys.color.text.inverted}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{sys.color.container.contrast.primary.foreground}",
+            "type": "color"
+          }
+        },
+        "shape-radius": {
+          "value": "{sys.shape-radius.s}",
+          "type": "borderRadius"
         }
       }
     }
