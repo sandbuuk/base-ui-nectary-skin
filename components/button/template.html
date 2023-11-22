@@ -21,6 +21,7 @@
   user-select: none;
 
   --sinch-local-size: var(--sinch-comp-button-size-container-m);
+  --sinch-local-padding: 16px;
   --sinch-local-font: var(--sinch-comp-button-font-size-m-text);
   --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-m);
   --sinch-global-size-icon: var(--sinch-comp-button-size-icon-m);
@@ -55,6 +56,22 @@
   --sinch-local-font: var(--sinch-comp-button-font-size-s-text);
   --sinch-global-size-icon: var(--sinch-comp-button-size-icon-xs);
 }
+
+/* icon-button */
+:host(:is([text=""], :not([text]))) > #button {
+  --sinch-local-padding: 8px;
+}
+
+/* icon-button */
+:host([data-size="s"]:is([text=""], :not([text]))) > #button {
+  --sinch-local-padding: 4px;
+}
+
+/* icon-button */
+:host([data-size="xs"]:is([text=""], :not([text]))) > #button {
+  --sinch-local-padding: 4px;
+}
+
 :host([type="primary"]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-primary-default-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-primary-default-border-initial);
@@ -324,9 +341,10 @@
   gap: 0.75em;
   width: 100%;
   height: 100%;
-  padding: 0 1em;
+  padding: 0 var(--sinch-local-padding);
   box-sizing: border-box;
   pointer-events: none;
+  overflow: hidden;
 }
 
 #text {
@@ -338,11 +356,20 @@
   flex-shrink: 1;
   min-width: 0;
 }
+
+/* icon-button */
+:host(:is([text=""], :not([text]))) :is(#left-icon, #right-icon, #text) {
+  display: none;
+}
+
+::slotted(*) {
+  display: block;
+}
 </style>
 
 <div id="button" inert>
   <div id="content">
-    <slot name="left-icon"></slot>
+    <slot id="left-icon" name="left-icon"></slot>
     <span id="text"></span>
     <slot id="icon" name="icon"></slot>
     <slot id="right-icon" name="right-icon"></slot>
