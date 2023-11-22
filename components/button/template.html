@@ -64,6 +64,8 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-initial);
 }
 
+/* default type */
+:host(:not([type])) > #button,
 :host([type="secondary"]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-secondary-default-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-secondary-default-border-initial);
@@ -123,6 +125,8 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-focus);
 }
 
+/* default type */
+:host(:not([type]):focus-visible) > #button,
 :host([type="secondary"]:focus-visible) > #button {
   --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-focus);
 }
@@ -159,11 +163,15 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-active);
 }
 
+/* default type */
+:host(:not([type]):hover) > #button,
 :host([type="secondary"]:hover) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-secondary-default-background-hover);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-hover);
 }
 
+/* default type */
+:host(:not([type]):active) > #button,
 :host([type="secondary"]:active) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-secondary-default-background-active);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-active);
@@ -230,6 +238,8 @@
   --sinch-global-color-icon: var(--sinch-comp-button-color-primary-disabled-icon-initial);
 }
 
+/* default type */
+:host(:not([type])[disabled]) > #button,
 :host([type="secondary"][disabled]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-secondary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-secondary-disabled-border-initial);
