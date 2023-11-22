@@ -7,7 +7,6 @@ import type { FC } from 'react'
 import '@nectary/components/rich-textarea'
 import '@nectary/components/icon'
 import '@nectary/components/popover'
-import '@nectary/components/icon-button'
 import '@nectary/components/emoji-picker'
 import '@nectary/components/field'
 import '@nectary/components/input'
@@ -109,7 +108,7 @@ export const RichTextareaExample: FC = () => {
   const [isLinkOpen, setLinkOpen] = useState(false)
   const [isToolbarVisible, setToolbarVisible] = useState(true)
   const ref = useRef<TSinchRichTextareaElement>(null)
-  const [_, setSelectionState] = useState(DEFAULT_SELECTION)
+  const [selectionState, setSelectionState] = useState(DEFAULT_SELECTION)
   const [value, setValue] = useState(initialMd)
 
   const onEditorChange = (e: CustomEvent<string>) => {
@@ -177,72 +176,80 @@ export const RichTextareaExample: FC = () => {
       >
         {isToolbarVisible && (
           <>
-            <sinch-icon-button
+            <sinch-button
               slot="top"
               size="s"
+              toggled={selectionState.italic}
               aria-label="Format italic"
               on-click={onFormatItalic}
             >
               <sinch-icon slot="icon" name="format_italic"/>
-            </sinch-icon-button>
-            <sinch-icon-button
+            </sinch-button>
+            <sinch-button
               slot="top"
               size="s"
+              toggled={selectionState.bold}
               aria-label="Format bold"
               on-click={onFormatBold}
             >
               <sinch-icon slot="icon" name="format_bold"/>
-            </sinch-icon-button>
-            <sinch-icon-button
+            </sinch-button>
+            <sinch-button
               slot="top"
               size="s"
+              toggled={selectionState.strikethrough}
               aria-label="Format strikethrough"
               on-click={onFormatStrikethrough}
             >
               <sinch-icon slot="icon" name="format_strikethrough"/>
-            </sinch-icon-button>
-            <sinch-icon-button
+            </sinch-button>
+            <sinch-button
               slot="top"
               size="s"
+              toggled={selectionState.codetag}
               aria-label="Format code tag"
               on-click={onFormatCodeTag}
             >
               <sinch-icon slot="icon" name="code"/>
-            </sinch-icon-button>
-            <sinch-icon-button
+            </sinch-button>
+            <sinch-button
               slot="top"
               size="s"
+              toggled={selectionState.link}
               aria-label="Insert link"
               on-click={onLinkOpen}
             >
               <sinch-icon slot="icon" name="link"/>
-            </sinch-icon-button>
-            <sinch-icon-button
+            </sinch-button>
+            <sinch-button
               slot="top"
               size="s"
+              toggled={selectionState.ulist}
               aria-label="Format list bulleted"
               on-click={onFormatListBulleted}
             >
               <sinch-icon slot="icon" name="format_list_bulleted"/>
-            </sinch-icon-button>
-            <sinch-icon-button
+            </sinch-button>
+            <sinch-button
               slot="top"
               size="s"
+              toggled={selectionState.olist}
               aria-label="Format list numbered"
               on-click={onFormatListNumbered}
             >
               <sinch-icon slot="icon" name="format_list_numbered"/>
-            </sinch-icon-button>
+            </sinch-button>
           </>
         )}
-        <sinch-icon-button
+        <sinch-button
           slot="bottom"
           size="s"
+          toggled={isToolbarVisible}
           aria-label="Toggle toolbar"
           on-click={onToggleToolbar}
         >
           <sinch-icon slot="icon" name="text_format"/>
-        </sinch-icon-button>
+        </sinch-button>
         <sinch-popover
           slot="bottom"
           modal
@@ -251,14 +258,14 @@ export const RichTextareaExample: FC = () => {
           aria-label="Emoji input"
           on-close={onEmojiClose}
         >
-          <sinch-icon-button
+          <sinch-button
             slot="target"
             size="s"
             aria-label="Open Emoji Picker"
             on-click={onEmojiOpen}
           >
             <sinch-icon slot="icon" name="sentiment_satisfied"/>
-          </sinch-icon-button>
+          </sinch-button>
           <sinch-emoji-picker
             slot="content"
             aria-label="Emoji Picker"
