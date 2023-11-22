@@ -9,6 +9,6 @@ export const SpinnerExample: FC = () => (
     type="primary"
     on-click={() => console.log('click')}
   >
-    <sinch-spinner slot="left-icon"/>
+    <sinch-spinner slot="icon"/>
   </sinch-button>
 )

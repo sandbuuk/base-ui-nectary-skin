@@ -6,7 +6,6 @@ import type { CSSProperties, FC } from 'react'
 import '@nectary/components/button'
 import '@nectary/components/toast-manager'
 import '@nectary/components/toast'
-import '@nectary/components/icon-button'
 import '@nectary/components/icon'
 import '@nectary/components/popover'
 import '@nectary/components/select-button'
@@ -105,14 +104,14 @@ export const OriginExample: FC = () => {
             on-timeout={onToastClose(id)}
           >
             {closable && (
-              <sinch-icon-button
+              <sinch-button
                 slot="close"
                 aria-label="Close"
                 size="s"
                 on-click={onToastClose(id)}
               >
                 <sinch-icon slot="icon" name="close"/>
-              </sinch-icon-button>
+              </sinch-button>
             )}
           </sinch-toast>
         ))}

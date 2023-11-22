@@ -1,12 +1,12 @@
 import { Example } from '~/components/Example'
 import { TypePrimaryExample } from './examples/TypePrimary.tsx?example'
 import { TypeSecondaryExample } from './examples/TypeSecondary.tsx?example'
-import { TypeTertiaryExample } from './examples/TypeTertiary.tsx?example'
+import { TypeSubtlePrimaryExample } from './examples/TypeSubtlePrimary.tsx?example'
+import { TypeSubtleSecondaryExample } from './examples/TypeSubtleSecondary.tsx?example'
 import { TypeCtaPrimaryExample } from './examples/TypeCtaPrimary.tsx?example'
 import { TypeCtaSecondaryExample } from './examples/TypeCtaSecondary.tsx?example'
 import { TypeDestructiveExample } from './examples/TypeDestructive.tsx?example'
 import { LeftIconExample } from './examples/LeftIcon.tsx?example'
-import { RightIconExample } from './examples/RightIcon.tsx?example'
 import { SpinnerExample } from './examples/Spinner.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
 
@@ -28,12 +28,6 @@ A secondary button is always used in combination with a primary button. It must 
 
 <Example Component={TypeSecondaryExample}/>
 
-### Tertiary
-
-A tertiary buttons is used for actions that are less important than those performed by primary and secondary buttons, and they are often used to provide additional options or to help declutter the user interface
-
-<Example Component={TypeTertiaryExample}/>
-
 ### CTA Primary
 
 A call to action (CTA) button is a type of user interface element that is used to encourage the user to take a specific action.  It is typically designed to be attention-grabbing and easy to click or tap on. The label on a CTA button will typically be a strong call to action, such as "Sign Up", "Purchase”, “Subscribe”, “Upgrade”
@@ -46,6 +40,16 @@ The secondary CTA button is always used in combination with a primary CTA button
 
 <Example Component={TypeCtaSecondaryExample}/>
 
+### Subtle Primary (Tertiary)
+
+Type `tertiary` for buttons has been renamed to `subtle-primary`. The old type will still work, but it is *deprecated* and will be removed in the next major version release of Nectary.
+
+<Example Component={TypeSubtlePrimaryExample}/>
+
+### Subtle Secondary
+
+<Example Component={TypeSubtleSecondaryExample}/>
+
 ### Destructive
 
 A destructive button is a type of user interface element that is used to warn the user about a potentially dangerous or destructive action that cannot be reverted.
@@ -53,18 +57,11 @@ The label on a danger button will typically be a strong warning, such as "Delete
 
 <Example Component={TypeDestructiveExample}/>
 
-## Left Icon
+## Disabled
 
-By including a left icon in a button, the button's purpose can be communicated more quickly and clearly to the user. For example, a button with a trash can icon is likely to be understood as a button for deleting something, while a button with a pencil icon is likely to be understood as a button for editing something
+Disabled buttons are often used to indicate to the user that a certain action is not currently available or cannot be performed. For example, a disabled button might be used to indicate that a form cannot be submitted because required fields have not been filled in, or that a certain action cannot be performed because the user does not have the necessary permissions.The label on a disabled button it is always the same as an enabled button, but it will be unclickable or otherwise not functional.
 
-<Example Component={LeftIconExample}/>
-
-## Multiple actions
-
-This type of button is often used to provide the user with quick access to a range of common actions, without cluttering the interface with multiple separate buttons.
-A multiple action button is always compose with use a button with a chevron as a right icon and a action menu.
-
-<Example Component={RightIconExample}/>
+<Example Component={DisabledExample}/>
 
 ## Spinner
 
@@ -72,8 +69,8 @@ A button with a loading state is a user interface element that is used to indica
 
 <Example Component={SpinnerExample}/>
 
-## Disabled
+## Left Icon
 
-Disabled buttons are often used to indicate to the user that a certain action is not currently available or cannot be performed. For example, a disabled button might be used to indicate that a form cannot be submitted because required fields have not been filled in, or that a certain action cannot be performed because the user does not have the necessary permissions.The label on a disabled button it is always the same as an enabled button, but it will be unclickable or otherwise not functional.
+By including a left icon in a button, the button's purpose can be communicated more quickly and clearly to the user. For example, a button with a trash can icon is likely to be understood as a button for deleting something, while a button with a pencil icon is likely to be understood as a button for editing something
 
-<Example Component={DisabledExample}/>
+<Example Component={LeftIconExample}/>

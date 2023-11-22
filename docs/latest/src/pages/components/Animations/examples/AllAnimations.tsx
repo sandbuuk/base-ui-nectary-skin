@@ -59,9 +59,9 @@ export const AllAnimationsExample: FC = () => {
         aria-label="Search"
       >
         <sinch-icon slot="icon" name="search"/>
-        <sinch-icon-button slot="right" on-click={onClearSearch} aria-label="Clear search">
+        <sinch-button slot="right" on-click={onClearSearch} aria-label="Clear search">
           <sinch-icon slot="icon" name="close"/>
-        </sinch-icon-button>
+        </sinch-button>
       </sinch-input> */}
       <div style={tableStyle}>
         {names.map((name) => (

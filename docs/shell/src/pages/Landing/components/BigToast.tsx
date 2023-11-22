@@ -1,8 +1,8 @@
 import './styles.css'
 import '@nectary/assets/illustrations/lightbulb'
-import '@nectary/assets/icons/open-in-new'
 import '@nectary/components/button'
 import '@nectary/components/title'
+import '@nectary/components/icon'
 import { useNavigate } from 'react-router-dom'
 import { useNavigateLink } from '~/hooks'
 
@@ -23,7 +23,7 @@ export const BigToast = () => {
         size="m"
         on-click={() => navigate(to)}
       >
-        <sinch-icon-open-in-new slot="left-icon"/>
+        <sinch-icon name="open_in_new" slot="left-icon"/>
       </sinch-button>
     </div>
   )

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@nectary/components/textarea'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/components/tag'
 import '@nectary/assets/icons/mood'
 import '@nectary/assets/icons/variables'
@@ -22,21 +21,21 @@ export const BottomExample: FC = () => {
       on-change={(e) => setState(e.detail)}
       style={{ width: '500px' }}
     >
-      <sinch-icon-button slot="bottom" aria-label="Paperclip">
+      <sinch-button slot="bottom" aria-label="Paperclip">
         <sinch-icon-attach-file slot="icon"/>
-      </sinch-icon-button>
-      <sinch-icon-button slot="bottom" aria-label="Emoji">
+      </sinch-button>
+      <sinch-button slot="bottom" aria-label="Emoji">
         <sinch-icon-mood slot="icon"/>
-      </sinch-icon-button>
-      <sinch-icon-button slot="bottom" aria-label="Variables">
+      </sinch-button>
+      <sinch-button slot="bottom" aria-label="Variables">
         <sinch-icon-variables slot="icon"/>
-      </sinch-icon-button>
-      <sinch-icon-button slot="bottom" aria-label="Comment">
+      </sinch-button>
+      <sinch-button slot="bottom" aria-label="Comment">
         <sinch-icon-add-comment slot="icon"/>
-      </sinch-icon-button>
-      <sinch-icon-button slot="bottom" aria-label="Comment">
+      </sinch-button>
+      <sinch-button slot="bottom" aria-label="Comment">
         <sinch-icon-more-horiz slot="icon"/>
-      </sinch-icon-button>
+      </sinch-button>
       <sinch-tag
         slot="bottom"
         text="400"

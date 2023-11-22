@@ -6,10 +6,10 @@ import '@nectary/components/action-menu-option'
 import '@nectary/components/popover'
 import '@nectary/components/field'
 import '@nectary/components/input'
-import '@nectary/components/icon-button'
 import '@nectary/components/icon'
 import '@nectary/components/text'
 import '@nectary/components/spinner'
+import '@nectary/components/button'
 
 const inputWidth: CSSProperties = {
   width: 300,
@@ -108,9 +108,9 @@ export const SearchExample: FC = () => {
         >
           <sinch-icon slot="icon" name="search"/>
           {!isLoading && isClearButtonActive && (
-            <sinch-icon-button slot="right" on-click={onClearClick} aria-label="Clear search">
+            <sinch-button slot="right" on-click={onClearClick} aria-label="Clear search">
               <sinch-icon slot="icon" name="close"/>
-            </sinch-icon-button>
+            </sinch-button>
           )}
           {isLoading && <sinch-spinner slot="right"/>}
         </sinch-input>

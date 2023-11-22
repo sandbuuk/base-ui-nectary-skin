@@ -1,6 +1,6 @@
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/button'
-import '@nectary/assets/icons/open-in-new'
+import '@nectary/components/icon'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -16,7 +16,7 @@ export const TypeSecondaryExample: FC = () => (
       size="l"
       on-click={() => console.log('click')}
     >
-      <sinch-icon-open-in-new slot="left-icon"/>
+      <sinch-icon name="open_in_new" slot="icon"/>
     </sinch-button>
     <sinch-button
       text="Click"
@@ -25,7 +25,7 @@ export const TypeSecondaryExample: FC = () => (
       size="m"
       on-click={() => console.log('click')}
     >
-      <sinch-icon-open-in-new slot="left-icon"/>
+      <sinch-icon name="open_in_new" slot="icon"/>
     </sinch-button>
     <sinch-button
       text="Click"
@@ -34,7 +34,48 @@ export const TypeSecondaryExample: FC = () => (
       size="s"
       on-click={() => console.log('click')}
     >
-      <sinch-icon-open-in-new slot="left-icon"/>
+      <sinch-icon name="open_in_new" slot="icon"/>
+    </sinch-button>
+    <sinch-button
+      text="Click"
+      aria-label="Click"
+      type="secondary"
+      size="xs"
+      on-click={() => console.log('click')}
+    >
+      <sinch-icon name="open_in_new" slot="icon"/>
+    </sinch-button>
+    <sinch-button
+      aria-label="Click"
+      type="secondary"
+      size="l"
+      on-click={() => console.log('click')}
+    >
+      <sinch-icon name="open_in_new" slot="icon"/>
+    </sinch-button>
+    <sinch-button
+      aria-label="Click"
+      type="secondary"
+      size="m"
+      on-click={() => console.log('click')}
+    >
+      <sinch-icon name="open_in_new" slot="icon"/>
+    </sinch-button>
+    <sinch-button
+      aria-label="Click"
+      type="secondary"
+      size="s"
+      on-click={() => console.log('click')}
+    >
+      <sinch-icon name="open_in_new" slot="icon"/>
+    </sinch-button>
+    <sinch-button
+      aria-label="Click"
+      type="secondary"
+      size="xs"
+      on-click={() => console.log('click')}
+    >
+      <sinch-icon name="open_in_new" slot="icon"/>
     </sinch-button>
   </div>
 )

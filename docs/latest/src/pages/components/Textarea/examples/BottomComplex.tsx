@@ -2,7 +2,6 @@ import { useRef, useState } from 'react'
 import type { TSinchTextareaElement } from '@nectary/components/textarea/types'
 import type { FC } from 'react'
 import '@nectary/components/textarea'
-import '@nectary/components/icon-button'
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
 import '@nectary/components/select-menu'
@@ -10,6 +9,7 @@ import '@nectary/components/select-menu-option'
 import '@nectary/components/popover'
 import '@nectary/components/emoji-picker'
 import '@nectary/components/file-picker'
+import '@nectary/components/button'
 import '@nectary/assets/icons/mood'
 import '@nectary/assets/icons/variables'
 import '@nectary/assets/icons/attach-file'
@@ -85,16 +85,16 @@ export const BottomComplexExample: FC = () => {
           on-invalid={() => {}}
           style={{ marginLeft: 'auto' }}
         >
-          <sinch-icon-button aria-label="Attach file">
+          <sinch-button aria-label="Attach file">
             <sinch-icon-attach-file slot="icon"/>
-          </sinch-icon-button>
+          </sinch-button>
         </sinch-file-picker>
-        <sinch-icon-button slot="bottom" aria-label="Emojis" on-click={() => onPopOpenClick('emoji')}>
+        <sinch-button slot="bottom" aria-label="Emojis" on-click={() => onPopOpenClick('emoji')}>
           <sinch-icon-mood slot="icon"/>
-        </sinch-icon-button>
-        <sinch-icon-button slot="bottom" aria-label="Variables" on-click={() => onPopOpenClick('vars')}>
+        </sinch-button>
+        <sinch-button slot="bottom" aria-label="Variables" on-click={() => onPopOpenClick('vars')}>
           <sinch-icon-variables slot="icon"/>
-        </sinch-icon-button>
+        </sinch-button>
         <sinch-popover
           slot="bottom"
           modal
@@ -103,13 +103,13 @@ export const BottomComplexExample: FC = () => {
           onClose={() => setOptionsOpen(false)}
           aria-label="Options"
         >
-          <sinch-icon-button
+          <sinch-button
             slot="target"
             aria-label="More"
             on-click={onOptsOpenClick}
           >
             <sinch-icon-more-horiz slot="icon"/>
-          </sinch-icon-button>
+          </sinch-button>
           <sinch-select-menu
             slot="content"
             multiple

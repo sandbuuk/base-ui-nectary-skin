@@ -3,10 +3,10 @@ import type { TSinchTextareaElement } from '@nectary/components/textarea/types'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/field'
 import '@nectary/components/popover'
-import '@nectary/components/icon-button'
 import '@nectary/components/emoji-picker'
 import '@nectary/components/textarea'
 import '@nectary/components/icon'
+import '@nectary/components/button'
 
 const inputStyles: CSSProperties = {
   width: 300,
@@ -52,14 +52,14 @@ export const TextareaExample: FC = () => {
           aria-label="Emoji input"
           on-close={onClose}
         >
-          <sinch-icon-button
+          <sinch-button
             slot="target"
             size="s"
             aria-label="Open Time Picker"
             on-click={onOpen}
           >
             <sinch-icon slot="icon" name="sentiment_satisfied"/>
-          </sinch-icon-button>
+          </sinch-button>
           <sinch-emoji-picker
             slot="content"
             aria-label="Emoji Picker"

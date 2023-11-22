@@ -4,7 +4,7 @@ import '@nectary/components/field'
 import '@nectary/components/input'
 import '@nectary/components/popover'
 import '@nectary/components/date-picker'
-import '@nectary/components/icon-button'
+import '@nectary/components/button'
 import '@nectary/assets/icons/calendar-today'
 
 const styles: CSSProperties = {
@@ -55,14 +55,14 @@ export const DateExample: FC = () => {
           value={inputValue}
           on-change={onInputChange}
         >
-          <sinch-icon-button
+          <sinch-button
             slot="right"
             size="s"
             aria-label="Open Date Picker"
             on-click={onOpen}
           >
             <sinch-icon-calendar-today slot="icon"/>
-          </sinch-icon-button>
+          </sinch-button>
         </sinch-input>
       </sinch-field>
       <sinch-date-picker

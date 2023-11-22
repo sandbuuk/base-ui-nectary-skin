@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import '@nectary/components/button'
-import '@nectary/assets/icons/open-in-new'
+import '@nectary/components/icon'
 
 export const LeftIconExample: FC = () => (
   <sinch-button
@@ -9,6 +9,6 @@ export const LeftIconExample: FC = () => (
     type="primary"
     on-click={() => console.log('click')}
   >
-    <sinch-icon-open-in-new slot="left-icon"/>
+    <sinch-icon name="open_in_new" slot="left-icon"/>
   </sinch-button>
 )

@@ -5,7 +5,6 @@ import type { FC } from 'react'
 import '@nectary/components/button'
 import '@nectary/components/toast-manager'
 import '@nectary/components/toast'
-import '@nectary/components/icon-button'
 import '@nectary/components/icon'
 
 const types: TSinchToastType[] = ['info', 'warn', 'success', 'error']
@@ -60,14 +59,14 @@ export const ComplexExample: FC = () => {
             on-timeout={onClose(id)}
           >
             {closable && (
-              <sinch-icon-button
+              <sinch-button
                 slot="close"
                 aria-label="Close"
                 size="s"
                 on-click={onClose(id)}
               >
                 <sinch-icon slot="icon" name="close"/>
-              </sinch-icon-button>
+              </sinch-button>
             )}
           </sinch-toast>
         ))}

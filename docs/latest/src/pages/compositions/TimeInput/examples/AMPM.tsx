@@ -3,8 +3,8 @@ import type { CSSProperties, FC } from 'react'
 import '@nectary/components/input'
 import '@nectary/components/popover'
 import '@nectary/components/time-picker'
-import '@nectary/components/icon-button'
 import '@nectary/components/field'
+import '@nectary/components/button'
 import '@nectary/assets/icons/schedule'
 
 const style: CSSProperties = {
@@ -49,14 +49,14 @@ export const AMPMExample: FC = () => {
           value={value}
           on-change={onChange}
         >
-          <sinch-icon-button
+          <sinch-button
             slot="right"
             size="s"
             aria-label="Open Time Picker"
             on-click={onOpen}
           >
             <sinch-icon-schedule slot="icon"/>
-          </sinch-icon-button>
+          </sinch-button>
         </sinch-input>
       </sinch-field>
       <sinch-time-picker
