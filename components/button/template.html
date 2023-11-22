@@ -1,4 +1,5 @@
 <style>
+/* stylelint-disable no-descending-specificity */
 :host {
   display: inline-block;
   vertical-align: middle;
@@ -20,31 +21,31 @@
   user-select: none;
 
   --sinch-local-size: var(--sinch-comp-button-size-container-m);
-  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-m);
   --sinch-local-font: var(--sinch-comp-button-font-size-m-text);
   --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-m);
+  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-m);
   --sinch-global-color-icon: var(--sinch-local-color-icon);
 }
 
 :host([data-size="l"]) > #button {
   --sinch-local-size: var(--sinch-comp-button-size-container-l);
-  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-l);
   --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-l);
   --sinch-local-font: var(--sinch-comp-button-font-size-l-text);
+  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-l);
 }
 
 :host([data-size="m"]) > #button {
   --sinch-local-size: var(--sinch-comp-button-size-container-m);
-  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-m);
   --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-m);
   --sinch-local-font: var(--sinch-comp-button-font-size-m-text);
+  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-m);
 }
 
 :host([data-size="s"]) > #button {
   --sinch-local-size: var(--sinch-comp-button-size-container-s);
-  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-s);
   --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-s);
   --sinch-local-font: var(--sinch-comp-button-font-size-s-text);
+  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-s);
 }
 
 :host([data-size="xs"]) > #button {
@@ -59,7 +60,7 @@
   --sinch-local-color-border: var(--sinch-comp-button-color-primary-default-border-initial);
   --sinch-local-color-text: var(--sinch-comp-button-color-primary-default-text-initial);
   --sinch-local-color-icon: var(--sinch-comp-button-color-primary-default-icon-initial);
-  --sinch-local-color-outline-focus: var(--sinch-comp-button-color-primary-default-outilne-focus);
+  --sinch-local-color-outline-focus: var(--sinch-comp-button-color-primary-default-outline-focus);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-initial);
 }
 
@@ -114,8 +115,8 @@
   --sinch-local-color-background: var(--sinch-comp-button-color-danger-default-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-danger-default-border-initial);
   --sinch-local-color-text: var(--sinch-comp-button-color-danger-default-text-initial);
-  --sinch-global-color-icon: var(--sinch-comp-button-color-danger-default-icon-initial);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-danger-initial);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-danger-default-icon-initial);
 }
 
 :host([type="primary"]:focus-visible) > #button {
@@ -225,16 +226,16 @@
   --sinch-local-color-background: var(--sinch-comp-button-color-primary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-primary-disabled-border-initial);
   --sinch-local-color-text: var(--sinch-comp-button-color-primary-disabled-text-initial);
-  --sinch-global-color-icon: var(--sinch-comp-button-color-primary-disabled-icon-initial);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-disabled);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-primary-disabled-icon-initial);
 }
 
 :host([type="secondary"][disabled]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-secondary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-secondary-disabled-border-initial);
   --sinch-local-color-text: var(--sinch-comp-button-color-secondary-disabled-text-initial);
-  --sinch-global-color-icon: var(--sinch-comp-button-color-secondary-disabled-icon-initial);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-disabled);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-secondary-disabled-icon-initial);
 }
 
 :host([type="subtle-primary"][disabled]) > #button,
@@ -259,24 +260,24 @@
   --sinch-local-color-background: var(--sinch-comp-button-color-cta-primary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-cta-primary-disabled-border-initial);
   --sinch-local-color-text: var(--sinch-comp-button-color-cta-primary-disabled-text-initial);
-  --sinch-global-color-icon: var(--sinch-comp-button-color-cta-primary-disabled-icon-initial);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-primary-disabled);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-cta-primary-disabled-icon-initial);
 }
 
 :host([type="cta-secondary"][disabled]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-cta-secondary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-cta-secondary-disabled-border-initial);
   --sinch-local-color-text: var(--sinch-comp-button-color-cta-secondary-disabled-text-initial);
-  --sinch-global-color-icon: var(--sinch-comp-button-color-cta-secondary-disabled-icon-initial);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-cta-secondary-disabled);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-cta-secondary-disabled-icon-initial);
 }
 
 :host([type="destructive"][disabled]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-danger-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-danger-disabled-border-initial);
   --sinch-local-color-text: var(--sinch-comp-button-color-danger-disabled-text-initial);
-  --sinch-global-color-icon: var(--sinch-comp-button-color-danger-disabled-icon-initial);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-danger-disabled);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-danger-disabled-icon-initial);
 }
 
 /* Border / Background */
