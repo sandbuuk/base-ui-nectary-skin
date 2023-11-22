@@ -72,6 +72,7 @@
   --sinch-local-padding: 4px;
 }
 
+/* Types */
 :host([type="primary"]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-primary-default-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-primary-default-border-initial);
@@ -103,9 +104,9 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-initial);
 }
 
+:host([type="subtle-secondary"]) > #button,
 /* default type for icon-button */
-:host(:not([type]):is([text=""], :not([text]))) > #button,
-:host([type="subtle-secondary"]) > #button {
+:host(:not([type]):is([text=""], :not([text]))) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-subtle-secondary-default-border-initial);
   --sinch-local-color-outline-focus: var(--sinch-comp-button-color-subtle-secondary-default-outline-focus);
@@ -156,9 +157,9 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-focus);
 }
 
+:host([type="subtle-secondary"]:focus-visible) > #button,
 /* default type for icon-button */
-:host(:not([type]):is([text=""], :not([text])):focus-visible) > #button,
-:host([type="subtle-secondary"]:focus-visible) > #button {
+:host(:not([type]):is([text=""], :not([text])):focus-visible) > #button {
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-focus);
 }
 
@@ -174,6 +175,18 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-danger-focus);
 }
 
+/* Toggled state */
+:host([toggled]:not([disabled])[type="subtle-primary"]) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-primary-toggled-background-initial);
+}
+
+:host([toggled]:not([disabled])[type="subtle-secondary"]) > #button,
+/* default type for icon-button */
+:host([toggled]:not([disabled]):not([type]):is([text=""], :not([text]))) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-toggled-background-initial);
+}
+
+/* Hover / Active */
 :host([type="primary"]:hover) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-primary-default-background-hover);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-primary-hover);
@@ -198,30 +211,30 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-active);
 }
 
-:host([type="subtle-primary"]:hover) > #button,
 /* deprecated */
-:host([type="tertiary"]:hover) > #button {
+:host([type="tertiary"]:hover) > #button,
+:host([type="subtle-primary"]:hover) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-subtle-primary-default-background-hover);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-hover);
 }
 
-:host([type="subtle-primary"]:active) > #button,
 /* deprecated */
-:host([type="tertiary"]:active) > #button {
+:host([type="tertiary"]:active) > #button,
+:host([type="subtle-primary"]:active) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-subtle-primary-default-background-active);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-active);
 }
 
+:host([type="subtle-secondary"]:hover) > #button,
 /* default type for icon-button */
-:host(:not([type]):is([text=""], :not([text])):hover) > #button,
-:host([type="subtle-secondary"]:hover) > #button {
+:host(:not([type]):is([text=""], :not([text])):hover) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-hover);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-hover);
 }
 
+:host([type="subtle-secondary"]:active) > #button,
 /* default type for icon-button */
-:host(:not([type]):is([text=""], :not([text])):active) > #button,
-:host([type="subtle-secondary"]:active) > #button {
+:host(:not([type]):is([text=""], :not([text])):active) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-active);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-active);
 }
@@ -256,6 +269,32 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-danger-active);
 }
 
+/* Toggled + Hover / Active */
+:host([toggled]:not([disabled])[type="subtle-primary"]:hover) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-primary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-hover);
+}
+
+:host([toggled]:not([disabled])[type="subtle-primary"]:active) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-primary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-active);
+}
+
+:host([toggled]:not([disabled])[type="subtle-secondary"]:hover) > #button,
+/* default type for icon-button */
+:host([toggled]:not([disabled]):not([type]):is([text=""], :not([text])):hover) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-hover);
+}
+
+:host([toggled]:not([disabled])[type="subtle-secondary"]:active) > #button,
+/* default type for icon-button */
+:host([toggled]:not([disabled]):not([type]):is([text=""], :not([text])):active) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-active);
+}
+
+/* Disabled state */
 :host([type="primary"][disabled]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-primary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-primary-disabled-border-initial);
@@ -284,9 +323,9 @@
   --sinch-global-color-icon: var(--sinch-comp-button-color-subtle-primary-disabled-icon-initial);
 }
 
+:host([type="subtle-secondary"][disabled]) > #button,
 /* default type for icon-button */
-:host(:not([type]):is([text=""], :not([text]))[disabled]) > #button,
-:host([type="subtle-secondary"][disabled]) > #button {
+:host(:not([type]):is([text=""], :not([text]))[disabled]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-subtle-secondary-disabled-border-initial);
   --sinch-local-color-text: var(--sinch-comp-button-color-subtle-secondary-disabled-text-initial);

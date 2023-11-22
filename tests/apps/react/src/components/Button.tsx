@@ -8,6 +8,7 @@ import '@nectary/components/spinner'
 export const Button: FC = () => {
   const [search] = useSearchParams()
   const isDisabled = search.get('disabled') != null
+  const isToggled = search.get('toggled') != null
   const hasLeftIcon = search.get('icon-left') != null
   const hasIcon = search.get('icon') != null
   const hasSpinner = search.get('spinner') != null
@@ -24,6 +25,7 @@ export const Button: FC = () => {
       text={text}
       size={size}
       disabled={isDisabled}
+      toggled={isToggled}
       on-click={onClick}
       on-focus={onFocus}
       on-blur={onBlur}

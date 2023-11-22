@@ -21,6 +21,8 @@ export type TSinchButtonElement = HTMLElement & {
   text: string,
   /** Disabled */
   disabled: boolean,
+  /** Toggled (pressed) */
+  toggled: boolean,
   /** Click event */
   addEventListener(type: '-click', listener: (e: CustomEvent<void>) => void): void,
   /** Focus event */
@@ -35,6 +37,8 @@ export type TSinchButtonElement = HTMLElement & {
   setAttribute(attr: 'text', value: string): void,
   /** Disabled */
   setAttribute(attr: 'disabled', value: ''): void,
+  /** Toggled (pressed) */
+  setAttribute(attr: 'toggled', value: ''): void,
 }
 
 export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
@@ -48,6 +52,8 @@ export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   'aria-label': string,
   /** Disabled */
   disabled?: boolean,
+  /** Toggled (pressed) */
+  toggled?: boolean,
   /** Click event handler */
   'on-click'?: (e: CustomEvent<void>) => void,
   /** Focus event handler */

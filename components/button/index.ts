@@ -72,14 +72,16 @@ defineCustomElement('sinch-button', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'disabled', 'size', 'data-size']
+    return [
+      'text',
+      'disabled',
+      'toggled',
+      'size',
+      'data-size',
+    ]
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (isAttrEqual(oldVal, newVal)) {
-      return
-    }
-
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
@@ -87,7 +89,20 @@ defineCustomElement('sinch-button', class extends NectaryElement {
         break
       }
       case 'disabled': {
-        updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+        if (!isAttrEqual(oldVal, newVal)) {
+          updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+        }
+
+        this.ariaDisabled = isAttrTrue(newVal).toString()
+
+        break
+      }
+      case 'toggled': {
+        if (!isAttrEqual(oldVal, newVal)) {
+          updateBooleanAttribute(this, 'toggled', isAttrTrue(newVal))
+        }
+
+        this.ariaPressed = isAttrTrue(newVal).toString()
 
         break
       }
@@ -126,6 +141,14 @@ defineCustomElement('sinch-button', class extends NectaryElement {
 
   get disabled() {
     return getBooleanAttribute(this, 'disabled')
+  }
+
+  set toggled(isToggled: boolean) {
+    updateBooleanAttribute(this, 'toggled', isToggled)
+  }
+
+  get toggled() {
+    return getBooleanAttribute(this, 'toggled')
   }
 
   set size(size: TSinchSizeEx) {

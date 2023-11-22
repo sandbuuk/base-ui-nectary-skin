@@ -3,6 +3,7 @@
     :type="type"
     :text="text"
     :disabled="isDisabled"
+    :toggled="isToggled"
     :size="size"
     @--click="onClick"
     @--focus="onFocus"
@@ -40,6 +41,9 @@ export default {
     },
     isDisabled() {
       return this.$route.query.disabled != null
+    },
+    isToggled() {
+      return this.$route.query.toggled != null
     },
     size() {
       return this.$route.query.size != null

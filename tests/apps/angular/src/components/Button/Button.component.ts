@@ -15,6 +15,7 @@ export class ButtonComponent {
   text: string | null
   size: string | null
   isDisabled: boolean
+  isToggled: boolean
   hasLeftIcon: boolean
   hasIcon: boolean
   hasSpinner: boolean
@@ -25,6 +26,7 @@ export class ButtonComponent {
     this.text = search.get('text')
     this.size = search.get('size')
     this.isDisabled = search.get('disabled') !== null
+    this.isToggled = search.get('toggled') !== null
     this.hasLeftIcon = search.get('icon-left') !== null
     this.hasIcon = search.get('icon') !== null
     this.hasSpinner = search.get('spinner') !== null

@@ -8,6 +8,7 @@ const withFitWidth = '/button?type=primary&text=Button&icon-left=true'
 const withNarrowWidth = '/button?width=150&type=primary&icon-left=true&icon=true&text=Button%20text%20long%20long%20long'
 const withWideWidth = '/button?width=250&type=primary&icon-left=true&icon=true&text=Button'
 const withDisabled = '/button?type=primary&text=Button&disabled=true&icon=true'
+const withToggled = '/button?type=primary&text=Button&toggled=true&icon=true'
 const withSpinner = '/button?type=primary&text=Button&spinner=true'
 const withIconOnly = '/button?type=primary&icon=true'
 const checkFitWidth = makeAccessibilityTests('/button?type=primary&text=Button&icon-left=true', 'sinch-button')
@@ -64,6 +65,28 @@ test('button screenshots', runScreenshotTests('sinch-button', [
       for (const type of typeValues) {
         await $eval((el, value) => el.setAttribute('type', value), type)
         yield { name: type }
+      }
+    },
+  },
+  {
+    name: 'toggled',
+    url: withToggled,
+    async *fn({ page, $, $eval }) {
+      const ct = await centerBB($)
+
+      for (const type of ['subtle-primary', 'subtle-secondary']) {
+        await $eval((el, value) => el.setAttribute('type', value), type)
+        await page.mouse.move(0, 0)
+
+        yield { name: type }
+
+        await page.mouse.move(ct.x, ct.y)
+
+        await page.mouse.down()
+        yield { name: `${type} active` }
+
+        await page.mouse.up()
+        yield { name: `${type} hover` }
       }
     },
   },
