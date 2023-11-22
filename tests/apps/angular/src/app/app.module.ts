@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { ActivatedRouteSnapshot, RouterModule } from '@angular/router'
+import { RouterModule } from '@angular/router'
 import { AccordionComponent } from '../components/Accordion/Accordion.component'
 import { ActionDropdownComponent } from '../components/ActionDropdown/ActionDropdown.component'
 import { ActionMenuComponent } from '../components/ActionMenu/ActionMenu.component'
@@ -23,7 +23,6 @@ import { DatePickerComponent } from '../components/DatePicker/DatePicker.compone
 import { DialogComponent } from '../components/Dialog/Dialog.component'
 import { EmojiPickerComponent } from '../components/EmojiPicker/EmojiPicker.component'
 import { GridComponent } from '../components/Grid/Grid.component'
-import { IconButtonComponent } from '../components/IconButton/IconButton.component'
 import { InlineAlertComponent } from '../components/InlineAlert/InlineAlert.component'
 import { InputComponent } from '../components/Input/Input.component'
 import { FieldComponent } from '../components/Field/Field.component'
@@ -85,7 +84,6 @@ import appRoutes from './router-config';
     DialogComponent,
     EmojiPickerComponent,
     GridComponent,
-    IconButtonComponent,
     InlineAlertComponent,
     InputComponent,
     FieldComponent,

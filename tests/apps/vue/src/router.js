@@ -24,7 +24,6 @@ import FileDrop from './components/FileDrop.vue'
 import FilePicker from './components/FilePicker.vue'
 import FileStatus from './components/FileStatus.vue'
 import Grid from './components/Grid.vue'
-import IconButton from './components/IconButton.vue'
 import InlineAlert from './components/InlineAlert.vue'
 import Input from './components/Input.vue'
 import Link from './components/Link.vue'
@@ -82,7 +81,6 @@ const routes = [
   { path: "/file-picker", component: FilePicker },
   { path: "/file-status", component: FileStatus },
   { path: "/grid", component: Grid },
-  { path: "/icon-button", component: IconButton },
   { path: "/inline-alert", component: InlineAlert },
   { path: "/input", component: Input },
   { path: "/link", component: Link },

@@ -27,7 +27,6 @@ import { FileDrop } from './components/FileDrop'
 import { FilePicker } from './components/FilePicker'
 import { FileStatus } from './components/FileStatus'
 import { Grid } from './components/Grid'
-import { IconButton } from './components/IconButton'
 import { InlineAlert } from './components/InlineAlert'
 import { Input } from './components/Input'
 import { InputSlots } from './components/InputSlots'
@@ -116,7 +115,6 @@ const AppImpl = () => {
         <Route path="/file-picker" element={<FilePicker/>}/>
         <Route path="/file-status" element={<FileStatus/>}/>
         <Route path="/grid" element={<Grid/>}/>
-        <Route path="/icon-button" element={<IconButton/>}/>
         <Route path="/inline-alert" element={<InlineAlert/>}/>
         <Route path="/input-slots" element={<InputSlots/>}/>
         <Route path="/input" element={<Input/>}/>
