@@ -103,6 +103,8 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-initial);
 }
 
+/* default type for icon-button */
+:host(:not([type]):is([text=""], :not([text]))) > #button,
 :host([type="subtle-secondary"]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-subtle-secondary-default-border-initial);
@@ -154,6 +156,8 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-focus);
 }
 
+/* default type for icon-button */
+:host(:not([type]):is([text=""], :not([text])):focus-visible) > #button,
 :host([type="subtle-secondary"]:focus-visible) > #button {
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-focus);
 }
@@ -208,10 +212,15 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-active);
 }
 
+/* default type for icon-button */
+:host(:not([type]):is([text=""], :not([text])):hover) > #button,
 :host([type="subtle-secondary"]:hover) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-hover);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-hover);
 }
+
+/* default type for icon-button */
+:host(:not([type]):is([text=""], :not([text])):active) > #button,
 :host([type="subtle-secondary"]:active) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-active);
   --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-active);
@@ -275,6 +284,8 @@
   --sinch-global-color-icon: var(--sinch-comp-button-color-subtle-primary-disabled-icon-initial);
 }
 
+/* default type for icon-button */
+:host(:not([type]):is([text=""], :not([text]))[disabled]) > #button,
 :host([type="subtle-secondary"][disabled]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-disabled-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-subtle-secondary-disabled-border-initial);
