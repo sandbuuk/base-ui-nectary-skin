@@ -13,12 +13,12 @@ import {
   subscribeContext,
   isAttrEqual,
 } from '../utils'
-import { DEFAULT_SIZE, sizeValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
 import { typeValues } from './utils'
 import type { TSinchButtonElement, TSinchButtonReact, TSinchButtonType } from './types'
 import type { TContextSize } from '../utils'
-import type { TSinchSize } from '../utils/size'
+import type { TSinchSizeEx } from '../utils/size'
 
 const template = document.createElement('template')
 
@@ -128,12 +128,12 @@ defineCustomElement('sinch-button', class extends NectaryElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set size(size: TSinchSize) {
-    updateLiteralAttribute(this, sizeValues, 'size', size)
+  set size(size: TSinchSizeEx) {
+    updateLiteralAttribute(this, sizeExValues, 'size', size)
   }
 
-  get size(): TSinchSize {
-    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
+  get size(): TSinchSizeEx {
+    return getLiteralAttribute(this, sizeExValues, 'size', DEFAULT_SIZE)
   }
 
   get focusable() {

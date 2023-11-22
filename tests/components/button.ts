@@ -1,5 +1,5 @@
 import { typeValues } from '@nectary/components/button/utils'
-import { sizeValues } from '@nectary/components/utils/size'
+import { sizeExValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
@@ -41,7 +41,7 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     name: 'size',
     url: withSpinner,
     async *fn({ $eval }) {
-      for (const size of sizeValues) {
+      for (const size of sizeExValues) {
         await $eval((el, value) => el.setAttribute('size', value), size)
         yield { name: size }
       }

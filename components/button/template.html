@@ -47,6 +47,13 @@
   --sinch-local-font: var(--sinch-comp-button-font-size-s-text);
 }
 
+:host([data-size="xs"]) > #button {
+  --sinch-local-size: var(--sinch-comp-button-size-container-xs);
+  --sinch-local-padding: 8px;
+  --sinch-local-shape-radius: var(--sinch-comp-button-shape-radius-size-xs);
+  --sinch-local-font: var(--sinch-comp-button-font-size-s-text);
+  --sinch-global-size-icon: var(--sinch-comp-button-size-icon-xs);
+}
 :host([type="primary"]) > #button {
   --sinch-local-color-background: var(--sinch-comp-button-color-primary-default-background-initial);
   --sinch-local-color-border: var(--sinch-comp-button-color-primary-default-border-initial);

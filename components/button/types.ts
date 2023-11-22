@@ -1,5 +1,5 @@
 import type { TSinchElementReact } from '../types'
-import type { TSinchSize } from '../utils/size'
+import type { TSinchSizeEx } from '../utils/size'
 
 export type TSinchButtonType = 'primary' | 'secondary' | 'tertiary' | 'cta-primary' | 'cta-secondary' | 'destructive'
 
@@ -7,7 +7,7 @@ export type TSinchButtonElement = HTMLElement & {
   /** Button Type */
   type: TSinchButtonType,
   /** Size, `m` by default */
-  size: TSinchSize,
+  size: TSinchSizeEx,
   /** Text content */
   text: string,
   /** Disabled */
@@ -21,7 +21,7 @@ export type TSinchButtonElement = HTMLElement & {
   /** Type, `primary` by default */
   setAttribute(attr: 'type', value: TSinchButtonType): void,
   /** Size, `m` by default */
-  setAttribute(attr: 'size', value: TSinchSize): void,
+  setAttribute(attr: 'size', value: TSinchSizeEx): void,
   /** Text content */
   setAttribute(attr: 'text', value: string): void,
   /** Disabled */
@@ -32,7 +32,7 @@ export type TSinchButtonReact = TSinchElementReact<TSinchButtonElement> & {
   /** Button Type */
   type?: TSinchButtonType,
   /** Size, `m` by default */
-  size?: TSinchSize,
+  size?: TSinchSizeEx,
   /** Text content */
   text: string,
   /** Label that is used for a11y */
