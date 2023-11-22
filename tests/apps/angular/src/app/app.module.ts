@@ -23,7 +23,6 @@ import { DatePickerComponent } from '../components/DatePicker/DatePicker.compone
 import { DialogComponent } from '../components/Dialog/Dialog.component'
 import { EmojiPickerComponent } from '../components/EmojiPicker/EmojiPicker.component'
 import { GridComponent } from '../components/Grid/Grid.component'
-import { HorizontalStepper } from '../components/HorizontalStepper/HorizontalStepper.component'
 import { IconButtonComponent } from '../components/IconButton/IconButton.component'
 import { InlineAlertComponent } from '../components/InlineAlert/InlineAlert.component'
 import { InputComponent } from '../components/Input/Input.component'
@@ -59,7 +58,6 @@ import { TitleComponent } from '../components/Title/Title.component'
 import { ToastManagerComponent } from '../components/ToastManager/ToastManager.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
-import { VerticalStepper } from '../components/VerticalStepper/VerticalStepper.component'
 import { AppComponent } from './app.component'
 import appRoutes from './router-config';
 
@@ -87,7 +85,6 @@ import appRoutes from './router-config';
     DialogComponent,
     EmojiPickerComponent,
     GridComponent,
-    HorizontalStepper,
     IconButtonComponent,
     InlineAlertComponent,
     InputComponent,
@@ -123,7 +120,6 @@ import appRoutes from './router-config';
     ToastManagerComponent,
     ToggleComponent,
     TooltipComponent,
-    VerticalStepper,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

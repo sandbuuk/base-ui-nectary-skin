@@ -31,7 +31,6 @@ import FileDrop from './components/FileDrop.vue'
 import FilePicker from './components/FilePicker.vue'
 import FileStatus from './components/FileStatus.vue'
 import Grid from './components/Grid.vue'
-import HorizontalStepper from './components/HorizontalStepper.vue'
 import IconButton from './components/IconButton.vue'
 import InlineAlert from './components/InlineAlert.vue'
 import Input from './components/Input.vue'
@@ -63,7 +62,6 @@ import Title from './components/Title.vue'
 import ToastManager from './components/ToastManager.vue'
 import Toggle from './components/Toggle.vue'
 import Tooltip from './components/Tooltip.vue'
-import VerticalStepper from './components/VerticalStepper.vue'
 
 export default {
   data() {
@@ -119,7 +117,6 @@ export default {
     FilePicker,
     FileStatus,
     Grid,
-    HorizontalStepper,
     IconButton,
     InlineAlert,
     Input,
@@ -151,7 +148,6 @@ export default {
     ToastManager,
     Toggle,
     Tooltip,
-    VerticalStepper,
   }
 };
 </script>

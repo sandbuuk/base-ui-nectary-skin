@@ -24,7 +24,6 @@ import FileDrop from './components/FileDrop.vue'
 import FilePicker from './components/FilePicker.vue'
 import FileStatus from './components/FileStatus.vue'
 import Grid from './components/Grid.vue'
-import HorizontalStepper from './components/HorizontalStepper.vue'
 import IconButton from './components/IconButton.vue'
 import InlineAlert from './components/InlineAlert.vue'
 import Input from './components/Input.vue'
@@ -56,7 +55,6 @@ import Title from './components/Title.vue'
 import ToastManager from './components/ToastManager.vue'
 import Toggle from './components/Toggle.vue'
 import Tooltip from './components/Tooltip.vue'
-import VerticalStepper from './components/VerticalStepper.vue'
 
 const routes = [
   { path: "/accordion", component: Accordion },
@@ -84,7 +82,6 @@ const routes = [
   { path: "/file-picker", component: FilePicker },
   { path: "/file-status", component: FileStatus },
   { path: "/grid", component: Grid },
-  { path: "/horizontal-stepper", component: HorizontalStepper },
   { path: "/icon-button", component: IconButton },
   { path: "/inline-alert", component: InlineAlert },
   { path: "/input", component: Input },
@@ -116,7 +113,6 @@ const routes = [
   { path: "/toast-manager", component: ToastManager },
   { path: "/toggle", component: Toggle },
   { path: "/tooltip", component: Tooltip },
-  { path: "/vertical-stepper", component: VerticalStepper },
 ];
 
 const router = createRouter({
