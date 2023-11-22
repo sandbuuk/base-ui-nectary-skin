@@ -5,10 +5,11 @@ import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withFitWidth = '/button?type=primary&text=Button&icon-left=true'
-const withNarrowWidth = '/button?width=150&type=primary&icon-left=true&icon-right=true&text=Button%20text%20long%20long%20long'
-const withWideWidth = '/button?width=250&type=primary&icon-left=true&icon-right=true&text=Button'
-const withDisabled = '/button?type=primary&text=Button&disabled=true&spinner=true&icon-right=true'
-const withSpinner = '/button?type=primary&text=Button&spinner=true&icon-right=true'
+const withNarrowWidth = '/button?width=150&type=primary&icon-left=true&icon=true&text=Button%20text%20long%20long%20long'
+const withWideWidth = '/button?width=250&type=primary&icon-left=true&icon=true&text=Button'
+const withDisabled = '/button?type=primary&text=Button&disabled=true&icon=true'
+const withSpinner = '/button?type=primary&text=Button&spinner=true'
+const withIconOnly = '/button?type=primary&icon=true'
 const checkFitWidth = makeAccessibilityTests('/button?type=primary&text=Button&icon-left=true', 'sinch-button')
 
 test('accessibility', checkFitWidth({
@@ -89,6 +90,26 @@ test('button screenshots', runScreenshotTests('sinch-button', [
       })
 
       expect(attrValue).toBe('Text')
+    },
+  },
+  {
+    name: 'icon type',
+    url: withIconOnly,
+    async *fn({ $eval }) {
+      for (const type of typeValues) {
+        await $eval((el, value) => el.setAttribute('type', value), type)
+        yield { name: type }
+      }
+    },
+  },
+  {
+    name: 'icon size',
+    url: withIconOnly,
+    async *fn({ $eval }) {
+      for (const size of sizeExValues) {
+        await $eval((el, value) => el.setAttribute('size', value), size)
+        yield { name: size }
+      }
     },
   },
   {

@@ -7,7 +7,7 @@
   (-focus)="onFocus()"
   (-blur)="onBlur()"
   (-click)="onClick()">
-  <sinch-spinner *ngIf="hasSpinner" slot="left-icon"></sinch-spinner>
+  <sinch-spinner *ngIf="hasSpinner" slot="icon"></sinch-spinner>
   <sinch-icon-open-in-new *ngIf="hasLeftIcon" slot="left-icon"></sinch-icon-open-in-new>
-  <sinch-icon-expand-more *ngIf="hasRightIcon" slot="right-icon"></sinch-icon-expand-more>
+  <sinch-icon-expand-more *ngIf="hasIcon" slot="icon"></sinch-icon-expand-more>
 </sinch-button>

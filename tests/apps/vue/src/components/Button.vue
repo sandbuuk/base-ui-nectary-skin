@@ -7,9 +7,9 @@
     @--click="onClick"
     @--focus="onFocus"
     @--blur="onBlur">
-    <sinch-spinner v-if="hasSpinner" static :type="isSmall ? 'small' : 'medium'" slot="left-icon"></sinch-spinner>
+    <sinch-spinner v-if="hasSpinner" static :type="isSmall ? 'small' : 'medium'" slot="icon"></sinch-spinner>
     <sinch-icon-open-in-new v-if="hasLeftIcon" slot="left-icon"></sinch-icon-open-in-new>
-    <sinch-icon-expand-more v-if="hasRightIcon" slot="right-icon"></sinch-icon-expand-more>
+    <sinch-icon-expand-more v-if="hasIcon" slot="icon"></sinch-icon-expand-more>
   </sinch-button>
 </template>
 
@@ -47,8 +47,8 @@ export default {
     hasLeftIcon() {
       return this.$route.query['icon-left'] != null
     },
-    hasRightIcon() {
-      return this.$route.query['icon-right'] != null
+    hasIcon() {
+      return this.$route.query['icon'] != null
     },
     hasSpinner() {
       return this.$route.query.spinner != null
