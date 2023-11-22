@@ -72,13 +72,24 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-initial);
 }
 
+:host([type="subtle-primary"]) > #button,
+/* deprecated */
 :host([type="tertiary"]) > #button {
-  --sinch-local-color-background: var(--sinch-comp-button-color-tertiary-default-background-initial);
-  --sinch-local-color-border: var(--sinch-comp-button-color-tertiary-default-border-initial);
-  --sinch-local-color-outline-focus: var(--sinch-comp-button-color-tertiary-default-outline-focus);
-  --sinch-local-color-text: var(--sinch-comp-button-color-tertiary-default-text-initial);
-  --sinch-local-color-icon: var(--sinch-comp-button-color-tertiary-default-icon-initial);
-  --sinch-local-shadow: var(--sinch-comp-button-shadow-tertiary-initial);
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-primary-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-subtle-primary-default-border-initial);
+  --sinch-local-color-outline-focus: var(--sinch-comp-button-color-subtle-primary-default-outline-focus);
+  --sinch-local-color-text: var(--sinch-comp-button-color-subtle-primary-default-text-initial);
+  --sinch-local-color-icon: var(--sinch-comp-button-color-subtle-primary-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-initial);
+}
+
+:host([type="subtle-secondary"]) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-subtle-secondary-default-border-initial);
+  --sinch-local-color-outline-focus: var(--sinch-comp-button-color-subtle-secondary-default-outline-focus);
+  --sinch-local-color-text: var(--sinch-comp-button-color-subtle-secondary-default-text-initial);
+  --sinch-local-color-icon: var(--sinch-comp-button-color-subtle-secondary-default-icon-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-initial);
 }
 
 :host([type="cta-primary"]) > #button {
@@ -115,8 +126,14 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-focus);
 }
 
+:host([type="subtle-primary"]:focus-visible) > #button,
+/* deprecated */
 :host([type="tertiary"]:focus-visible) > #button {
-  --sinch-local-shadow: var(--sinch-comp-button-shadow-tertiary-focus);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-focus);
+}
+
+:host([type="subtle-secondary"]:focus-visible) > #button {
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-focus);
 }
 
 :host([type="cta-primary"]:focus-visible) > #button {
@@ -151,14 +168,27 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-active);
 }
 
+:host([type="subtle-primary"]:hover) > #button,
+/* deprecated */
 :host([type="tertiary"]:hover) > #button {
-  --sinch-local-color-background: var(--sinch-comp-button-color-tertiary-default-background-hover);
-  --sinch-local-shadow: var(--sinch-comp-button-shadow-tertiary-hover);
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-primary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-hover);
 }
 
+:host([type="subtle-primary"]:active) > #button,
+/* deprecated */
 :host([type="tertiary"]:active) > #button {
-  --sinch-local-color-background: var(--sinch-comp-button-color-tertiary-default-background-active);
-  --sinch-local-shadow: var(--sinch-comp-button-shadow-tertiary-active);
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-primary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-active);
+}
+
+:host([type="subtle-secondary"]:hover) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-hover);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-hover);
+}
+:host([type="subtle-secondary"]:active) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-default-background-active);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-active);
 }
 
 :host([type="cta-primary"]:hover) > #button {
@@ -207,12 +237,22 @@
   --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-disabled);
 }
 
+:host([type="subtle-primary"][disabled]) > #button,
+/* deprecated */
 :host([type="tertiary"][disabled]) > #button {
-  --sinch-local-color-background: var(--sinch-comp-button-color-tertiary-disabled-background-initial);
-  --sinch-local-color-border: var(--sinch-comp-button-color-tertiary-disabled-border-initial);
-  --sinch-local-color-text: var(--sinch-comp-button-color-tertiary-disabled-text-initial);
-  --sinch-global-color-icon: var(--sinch-comp-button-color-tertiary-disabled-icon-initial);
-  --sinch-local-shadow: var(--sinch-comp-button-shadow-tertiary-disabled);
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-primary-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-subtle-primary-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-button-color-subtle-primary-disabled-text-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-disabled);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-subtle-primary-disabled-icon-initial);
+}
+
+:host([type="subtle-secondary"][disabled]) > #button {
+  --sinch-local-color-background: var(--sinch-comp-button-color-subtle-secondary-disabled-background-initial);
+  --sinch-local-color-border: var(--sinch-comp-button-color-subtle-secondary-disabled-border-initial);
+  --sinch-local-color-text: var(--sinch-comp-button-color-subtle-secondary-disabled-text-initial);
+  --sinch-local-shadow: var(--sinch-comp-button-shadow-subtle-disabled);
+  --sinch-global-color-icon: var(--sinch-comp-button-color-subtle-secondary-disabled-icon-initial);
 }
 
 :host([type="cta-primary"][disabled]) > #button {

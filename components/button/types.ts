@@ -1,7 +1,16 @@
 import type { TSinchElementReact } from '../types'
 import type { TSinchSizeEx } from '../utils/size'
 
-export type TSinchButtonType = 'primary' | 'secondary' | 'tertiary' | 'cta-primary' | 'cta-secondary' | 'destructive'
+export type TSinchButtonType =
+  | 'primary'
+  | 'secondary'
+  /** @deprecated */
+  | 'tertiary'
+  | 'subtle-primary'
+  | 'subtle-secondary'
+  | 'cta-primary'
+  | 'cta-secondary'
+  | 'destructive'
 
 export type TSinchButtonElement = HTMLElement & {
   /** Button Type */

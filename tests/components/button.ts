@@ -130,7 +130,7 @@ test('button screenshots', runScreenshotTests('sinch-button', [
     async *fn({ $eval, $, page }) {
       await $eval((el) => {
         document.body.style.backgroundColor = 'beige'
-        el.setAttribute('type', 'tertiary')
+        el.setAttribute('type', 'subtle-secondary')
       })
 
       const ct = await centerBB($)
