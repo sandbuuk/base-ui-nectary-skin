@@ -65,9 +65,9 @@
   --sinch-comp-button-color-subtle-primary-disabled-border-initial: transparent;
   --sinch-comp-button-color-subtle-primary-disabled-icon-initial: var(--sinch-sys-color-primary-disabled);
   --sinch-comp-button-color-subtle-primary-disabled-text-initial: var(--sinch-sys-color-primary-disabled);
-  --sinch-comp-button-color-subtle-primary-toggled-background-active: #24242466;
-  --sinch-comp-button-color-subtle-primary-toggled-background-hover: #2424244D;
-  --sinch-comp-button-color-subtle-primary-toggled-background-initial: #24242433;
+  --sinch-comp-button-color-subtle-primary-toggled-background-active: #24242433;
+  --sinch-comp-button-color-subtle-primary-toggled-background-hover: #24242426;
+  --sinch-comp-button-color-subtle-primary-toggled-background-initial: #2424241A;
   --sinch-comp-button-color-subtle-secondary-default-background-active: var(--sinch-sys-color-container-transparent-active);
   --sinch-comp-button-color-subtle-secondary-default-background-hover: var(--sinch-sys-color-container-transparent-hover);
   --sinch-comp-button-color-subtle-secondary-default-background-initial: var(--sinch-sys-color-container-transparent-default);
@@ -79,9 +79,9 @@
   --sinch-comp-button-color-subtle-secondary-disabled-border-initial: transparent;
   --sinch-comp-button-color-subtle-secondary-disabled-icon-initial: var(--sinch-sys-color-text-disabled);
   --sinch-comp-button-color-subtle-secondary-disabled-text-initial: var(--sinch-sys-color-text-disabled);
-  --sinch-comp-button-color-subtle-secondary-toggled-background-active: #24242466;
-  --sinch-comp-button-color-subtle-secondary-toggled-background-hover: #2424244D;
-  --sinch-comp-button-color-subtle-secondary-toggled-background-initial: #24242433;
+  --sinch-comp-button-color-subtle-secondary-toggled-background-active: #24242433;
+  --sinch-comp-button-color-subtle-secondary-toggled-background-hover: #24242426;
+  --sinch-comp-button-color-subtle-secondary-toggled-background-initial: #2424241A;
   --sinch-comp-button-font-size-l-text: var(--sinch-sys-font-body-emphasize);
   --sinch-comp-button-font-size-m-text: var(--sinch-sys-font-body-emphasize);
   --sinch-comp-button-font-size-s-text: var(--sinch-sys-font-body-emphasize-s);
