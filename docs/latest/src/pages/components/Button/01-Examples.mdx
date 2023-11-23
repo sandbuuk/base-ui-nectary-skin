@@ -9,6 +9,7 @@ import { TypeDestructiveExample } from './examples/TypeDestructive.tsx?example'
 import { LeftIconExample } from './examples/LeftIcon.tsx?example'
 import { SpinnerExample } from './examples/Spinner.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
+import { ToggledExample } from './examples/Toggled.tsx?example'
 
 # Examples
 
@@ -52,8 +53,7 @@ Type `tertiary` for buttons has been renamed to `subtle-primary`. The old type w
 
 ### Destructive
 
-A destructive button is a type of user interface element that is used to warn the user about a potentially dangerous or destructive action that cannot be reverted.
-The label on a danger button will typically be a strong warning, such as "Delete" or "Cancel", to emphasize the potentially destructive nature of the action
+A destructive button is a type of user interface element that is used to warn the user about a potentially dangerous or destructive action that cannot be reverted. The label on a danger button will typically be a strong warning, such as "Delete" or "Cancel", to emphasize the potentially destructive nature of the action
 
 <Example Component={TypeDestructiveExample}/>
 
@@ -62,6 +62,12 @@ The label on a danger button will typically be a strong warning, such as "Delete
 Disabled buttons are often used to indicate to the user that a certain action is not currently available or cannot be performed. For example, a disabled button might be used to indicate that a form cannot be submitted because required fields have not been filled in, or that a certain action cannot be performed because the user does not have the necessary permissions.The label on a disabled button it is always the same as an enabled button, but it will be unclickable or otherwise not functional.
 
 <Example Component={DisabledExample}/>
+
+## Toggled
+
+A button can be in a **toggled** state. The visual highlight shows that the button is in a different mode, and that it affects the behavior of the application. The **toggled** state can be set by `toggled` property.
+
+<Example Component={ToggledExample}/>
 
 ## Spinner
 
