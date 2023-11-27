@@ -6,7 +6,7 @@ import { TypeSubtleSecondaryExample } from './examples/TypeSubtleSecondary.tsx?e
 import { TypeCtaPrimaryExample } from './examples/TypeCtaPrimary.tsx?example'
 import { TypeCtaSecondaryExample } from './examples/TypeCtaSecondary.tsx?example'
 import { TypeDestructiveExample } from './examples/TypeDestructive.tsx?example'
-import { LeftIconExample } from './examples/LeftIcon.tsx?example'
+import { RightIconExample } from './examples/RightIcon.tsx?example'
 import { SpinnerExample } from './examples/Spinner.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
 import { ToggledExample } from './examples/Toggled.tsx?example'
@@ -75,8 +75,8 @@ A button with a loading state is a user interface element that is used to indica
 
 <Example Component={SpinnerExample}/>
 
-## Left Icon
+## Right Icon
 
-By including a left icon in a button, the button's purpose can be communicated more quickly and clearly to the user. For example, a button with a trash can icon is likely to be understood as a button for deleting something, while a button with a pencil icon is likely to be understood as a button for editing something
+Button can have additional icon on the right, by using `right-icon` slot.
 
-<Example Component={LeftIconExample}/>
+<Example Component={RightIconExample}/>
