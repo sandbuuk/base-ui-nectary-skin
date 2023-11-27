@@ -4,14 +4,14 @@ import { expect, test } from '@playwright/test'
 import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
-const withFitWidth = '/button?type=primary&text=Button&icon-left=true'
-const withNarrowWidth = '/button?width=150&type=primary&icon-left=true&icon=true&text=Button%20text%20long%20long%20long'
-const withWideWidth = '/button?width=250&type=primary&icon-left=true&icon=true&text=Button'
+const withFitWidth = '/button?type=primary&text=Button&icon-right=true'
+const withNarrowWidth = '/button?width=150&type=primary&icon-right=true&icon=true&text=Button%20text%20long%20long%20long'
+const withWideWidth = '/button?width=250&type=primary&icon-right=true&icon=true&text=Button'
 const withDisabled = '/button?type=primary&text=Button&disabled=true&icon=true'
 const withToggled = '/button?type=primary&text=Button&toggled=true&icon=true'
 const withSpinner = '/button?type=primary&text=Button&spinner=true'
 const withIconOnly = '/button?type=primary&icon=true'
-const checkFitWidth = makeAccessibilityTests('/button?type=primary&text=Button&icon-left=true', 'sinch-button')
+const checkFitWidth = makeAccessibilityTests('/button?type=primary&text=Button&icon-right=true', 'sinch-button')
 
 test('accessibility', checkFitWidth({
   async *fn() {

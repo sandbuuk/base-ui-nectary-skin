@@ -9,7 +9,7 @@ export const Button: FC = () => {
   const [search] = useSearchParams()
   const isDisabled = search.get('disabled') != null
   const isToggled = search.get('toggled') != null
-  const hasLeftIcon = search.get('icon-left') != null
+  const hasRightIcon = search.get('icon-right') != null
   const hasIcon = search.get('icon') != null
   const hasSpinner = search.get('spinner') != null
   const text: any = search.get('text') ?? undefined
@@ -32,8 +32,8 @@ export const Button: FC = () => {
       aria-label="Button"
     >
       {hasSpinner && <sinch-spinner slot="icon"/>}
-      {hasLeftIcon && <sinch-icon-open-in-new slot="left-icon"/>}
-      {hasIcon && <sinch-icon-expand-more slot="icon"/>}
+      {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
+      {hasRightIcon && <sinch-icon-expand-more slot="right-icon"/>}
     </sinch-button>
   )
 }
