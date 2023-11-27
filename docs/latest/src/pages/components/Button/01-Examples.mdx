@@ -10,6 +10,7 @@ import { RightIconExample } from './examples/RightIcon.tsx?example'
 import { SpinnerExample } from './examples/Spinner.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
 import { ToggledExample } from './examples/Toggled.tsx?example'
+import '@nectary/components/inline-alert'
 
 # Examples
 
@@ -43,7 +44,12 @@ The secondary CTA button is always used in combination with a primary CTA button
 
 ### Subtle Primary (Tertiary)
 
-Type `tertiary` for buttons has been renamed to `subtle-primary`. The old type will still work, but it is *deprecated* and will be removed in the next major version release of Nectary.
+<sinch-inline-alert
+  class="alert"
+  type="warn"
+  caption="Renamed tertiary to subtle-primary"
+  text="Type `tertiary` for buttons has been renamed to `subtle-primary`. The old type will still work, but it is *deprecated* and will be removed in the next major version release of Nectary.">
+</sinch-inline-alert>
 
 <Example Component={TypeSubtlePrimaryExample}/>
 

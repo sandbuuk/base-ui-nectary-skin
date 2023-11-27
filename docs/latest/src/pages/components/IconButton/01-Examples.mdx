@@ -2,10 +2,16 @@ import { Example } from '~/components/Example'
 import { TypePrimaryExample } from './examples/TypePrimary.tsx?example'
 import { TypeSecondaryExample } from './examples/TypeSecondary.tsx?example'
 import { TypeTertiaryExample } from './examples/TypeTertiary.tsx?example'
+import '@nectary/components/inline-alert'
 
 # Examples
 
-The IconButton component is **no longer supported**. Please use the [Button](?path=/components/button/examples) component instead, which has all the same features.
+<sinch-inline-alert
+  class="alert"
+  type="warn"
+  caption="Deprecated IconButton component"
+  text="The IconButton component is **no longer supported**. Please use the [Button](?path=/components/button/examples) component instead, which has all the same features.">
+</sinch-inline-alert>
 
 ## Type
 
