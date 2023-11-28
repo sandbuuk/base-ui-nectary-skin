@@ -1,14 +1,13 @@
 import type { FC } from 'react'
 import '@nectary/components/button'
-import '@nectary/components/spinner'
+import '@nectary/components/icon'
 
-export const SpinnerExample: FC = () => (
+export const IconButtonExample: FC = () => (
   <sinch-button
-    text="Pending"
-    aria-label="Pending"
+    aria-label="Click"
     type="primary"
     on-click={() => console.log('click')}
   >
-    <sinch-spinner slot="icon"/>
+    <sinch-icon name="open_in_new" slot="icon"/>
   </sinch-button>
 )

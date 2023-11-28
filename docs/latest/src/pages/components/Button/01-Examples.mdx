@@ -8,8 +8,10 @@ import { TypeCtaSecondaryExample } from './examples/TypeCtaSecondary.tsx?example
 import { TypeDestructiveExample } from './examples/TypeDestructive.tsx?example'
 import { RightIconExample } from './examples/RightIcon.tsx?example'
 import { SpinnerExample } from './examples/Spinner.tsx?example'
+import { SizeExample } from './examples/Size.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
 import { ToggledExample } from './examples/Toggled.tsx?example'
+import { IconButtonExample } from './examples/IconButton.tsx?example'
 import '@nectary/components/inline-alert'
 
 # Examples
@@ -42,7 +44,7 @@ The secondary CTA button is always used in combination with a primary CTA button
 
 <Example Component={TypeCtaSecondaryExample}/>
 
-### Subtle Primary (Tertiary)
+### Subtle Primary
 
 <sinch-inline-alert
   class="alert"
@@ -75,6 +77,12 @@ A button can be in a **toggled** state. The visual highlight shows that the butt
 
 <Example Component={ToggledExample}/>
 
+## Size
+
+Button component has an attribute called `size` that can be used to change the size of the button.
+
+<Example Component={SizeExample}/>
+
 ## Spinner
 
 A button with a loading state is a user interface element that is used to indicate to the user that an action is currently being performed. It is represented as a labelled button that includes  a spinning animation to the left of the label. When a button is in a loading state are always disabled, to prevent the user to trigger a action multiple times while the action is still loading.
@@ -83,6 +91,12 @@ A button with a loading state is a user interface element that is used to indica
 
 ## Right Icon
 
-Button can have additional icon on the right, by using `right-icon` slot.
+Button can have an additional icon on the right, by using `right-icon` slot.
 
 <Example Component={RightIconExample}/>
+
+## Icon Button
+
+To create an IconButton component, you can use the `icon` slot to specify the icon you want to use and omit the `text` attribute of the Button element.
+
+<Example Component={IconButtonExample}/>

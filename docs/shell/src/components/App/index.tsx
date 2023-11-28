@@ -22,13 +22,22 @@ import '@nectary/theme-dark'
 
 const basename = location.pathname.replace(/\/$/, '')
 
+const getThemeClassName = (themeName: string) => {
+  switch (themeName) {
+    case 'dark':
+      return 'nectary-theme-base nectary-theme-dark'
+    default:
+      return 'nectary-theme-base'
+  }
+}
+
 export const App: FC = () => {
   const onRouteChange = useOnRouteChange()
   const { themeName } = useThemeName()
 
   return (
     <QueryRouter basename={basename} onChange={onRouteChange}>
-      <div id="app-sidebar" className={`nectary-theme-base ${themeName === 'dark' ? 'nectary-theme-dark' : ''}`}>
+      <div id="app-sidebar" className={getThemeClassName(themeName)}>
         <div className="app-sidebar-fixed">
           <SidebarHeader/>
         </div>
@@ -51,7 +60,7 @@ export const App: FC = () => {
           <SidebarFooter/>
         </div>
       </div>
-      <div id="app-content" className={`nectary-theme-base ${themeName === 'dark' ? 'nectary-theme-dark' : ''}`}>
+      <div id="app-content" className={getThemeClassName(themeName)}>
         <Suspense fallback={<Loading/>}>
           <Routes>
             <Route path="/" element={<LandingPage/>}/>

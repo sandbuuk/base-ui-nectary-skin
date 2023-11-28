@@ -7,23 +7,24 @@ const wrapperStyles: CSSProperties = {
 }
 
 export const ToggledExample: FC = () => {
-  const [isToggled, setToggled] = useState(true)
+  const [isPrimaryToggled, setPrimaryToggled] = useState(false)
+  const [isSecondaryToggled, setSecondaryToggled] = useState(false)
 
   return (
     <div style={wrapperStyles}>
       <sinch-button
-        text="Click"
+        text="Subtle primary"
         aria-label="Click"
         type="subtle-primary"
-        toggled={isToggled}
-        on-click={() => setToggled((prev) => !prev)}
+        toggled={isPrimaryToggled}
+        on-click={() => setPrimaryToggled((prev) => !prev)}
       />
       <sinch-button
-        text="Click"
+        text="Subtle secondary"
         aria-label="Click"
         type="subtle-secondary"
-        toggled={isToggled}
-        on-click={() => setToggled((prev) => !prev)}
+        toggled={isSecondaryToggled}
+        on-click={() => setSecondaryToggled((prev) => !prev)}
       />
     </div>
   )

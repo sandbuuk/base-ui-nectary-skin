@@ -11,8 +11,6 @@ import type { TThemeName } from 'docs-common'
 
 export * from './entries'
 
-const bus = new BroadcastChannel('MESSAGE_BUS')
-
 declare let STYLE_INJECT_KEY: string
 
 const registry = new CustomElementRegistry()
@@ -25,44 +23,10 @@ type TBootstrapOptions = {
 }
 
 export const bootstrap = (el: HTMLElement, { themeName }: TBootstrapOptions) => {
-  // console.log('bootstrap', pkg.version)
-
-  const wrapper = el
-  const { appElement, shadowRoot } = createShadowRoot(wrapper, registry)
+  const { appElement, shadowRoot } = createShadowRoot(el, registry)
   const abortController = new AbortController()
 
   let readyPromise: Promise<any> = Promise.resolve()
-  let currentThemeName = themeName
-
-  appElement.className = 'nectary-theme-base'
-
-  if (currentThemeName === 'dark') {
-    appElement.classList.add('nectary-theme-dark')
-  }
-
-  bus.addEventListener('message', (msg) => {
-    if (msg.data.type === 'THEME') {
-      switch (msg.data.payload) {
-        case 'dark': {
-          currentThemeName = msg.data.payload
-          appElement.classList.add('nectary-theme-dark')
-
-          break
-        }
-
-        case 'light': {
-          currentThemeName = msg.data.payload
-          appElement.classList.remove('nectary-theme-dark')
-
-          break
-        }
-
-        default: {
-          console.error(`Unsupported theme: ${msg.data}`)
-        }
-      }
-    }
-  }, { signal: abortController.signal })
 
   window.addEventListener('style-loader', ((e: CustomEvent<HTMLStyleElement>) => {
     const origStyle = e.detail
