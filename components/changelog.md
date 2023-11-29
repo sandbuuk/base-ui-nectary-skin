@@ -1,3 +1,20 @@
+## v2.7.0 (2023-11-29)
+
+* ➕ add `sinch-rich-textarea` component
+* ➕ add lists support to `sinch-rich-text`
+* ➕ add emoji support to `sinch-rich-text`
+* ➕ add `subtle-primary` and `subtle-secondary` types to `sinch-button`
+* ➕ add `toggled` state to `sinch-button`
+* ➕ allow the `text` to be omitted for `sinch-button`
+* ➕ add `icon` slot to `sinch-button`
+* ➕ add size `xs` to `sinch-button`
+* ➕ deprecate `sinch-icon-button` component
+* ➕ deprecate `tertiary` type in `sinch-button`
+* ➕ deprecate `left-icon` slot in `sinch-button`
+* 🐞 make `secondary` a default type for `sinch-button`
+* 🐞 make `subtle-secondary` a default type for icon-only `sinch-button`
+* 🐞 forward aria attributes to `sinch-pop`
+
 ## v2.6.1 (2023-10-16)
 
 * 🐞 fix off-screen `minrows` attribute in `sinch-textarea`
