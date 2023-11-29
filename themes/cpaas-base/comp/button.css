@@ -1,0 +1,20 @@
+.nectary-theme-base.cpaas-theme-base {
+  --sinch-comp-button-font-size-l-text: var(--sinch-sys-font-desktop-title-s);
+  --sinch-comp-button-font-size-m-text: var(--sinch-sys-font-desktop-title-s);
+  --sinch-comp-button-font-size-s-text: var(--sinch-ref-typography-font-weight-500) var(--sinch-ref-typography-font-size-14)/var(--sinch-ref-typography-line-height-24) var(--sinch-ref-typography-font-family-main);
+  --sinch-comp-button-shadow-cta-primary-focus: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-cta-primary-hover: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-cta-primary-initial: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-cta-secondary-focus: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-cta-secondary-hover: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-cta-secondary-initial: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-primary-focus: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-primary-hover: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-primary-initial: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-secondary-focus: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-secondary-hover: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-secondary-initial: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-tertiary-focus: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-tertiary-hover: var(--sinch-ref-shadow-level-0);
+  --sinch-comp-button-shadow-tertiary-initial: var(--sinch-ref-shadow-level-0);
+}

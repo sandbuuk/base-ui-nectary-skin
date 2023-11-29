@@ -19,25 +19,70 @@ import { TestingPage } from '~/pages/Testing'
 import './styles.css'
 import '@nectary/theme-base'
 import '@nectary/theme-dark'
+import '@nectary/theme-message-media'
+import '@nectary/theme-cpaas-base'
+import '@nectary/theme-cpaas-mailgun'
+import '@nectary/theme-cpaas-mailjet'
+import '@nectary/theme-cpaas-dashboard'
+
+const CLASS_NECTARY_THEME_BASE = 'nectary-theme-base'
+const CLASS_NECTARY_THEME_DARK = 'nectary-theme-dark'
+const CLASS_NECTARY_THEME_MESSAGE_MEDIA = 'nectary-theme-message-media'
+const CLASS_CPAAS_THEME_BASE = 'cpaas-theme-base'
+const CLASS_CPAAS_THEME_MAILGUN = 'cpaas-theme-mailgun'
+const CLASS_CPAAS_THEME_MAILJET = 'cpaas-theme-mailjet'
+const CLASS_CPAAS_THEME_DASHBOARD = 'cpaas-theme-dashboard'
 
 const basename = location.pathname.replace(/\/$/, '')
-
-const getThemeClassName = (themeName: string) => {
-  switch (themeName) {
-    case 'dark':
-      return 'nectary-theme-base nectary-theme-dark'
-    default:
-      return 'nectary-theme-base'
-  }
-}
 
 export const App: FC = () => {
   const onRouteChange = useOnRouteChange()
   const { themeName } = useThemeName()
 
+  const themeClasses = [
+    CLASS_NECTARY_THEME_BASE,
+  ]
+
+  switch (themeName) {
+    case 'dark': {
+      themeClasses.push(CLASS_NECTARY_THEME_DARK)
+
+      break
+    }
+    case 'message-media': {
+      themeClasses.push(CLASS_NECTARY_THEME_MESSAGE_MEDIA)
+
+      break
+    }
+    case 'mailgun': {
+      themeClasses.push(
+        CLASS_CPAAS_THEME_BASE,
+        CLASS_CPAAS_THEME_MAILGUN
+      )
+
+      break
+    }
+    case 'mailjet': {
+      themeClasses.push(
+        CLASS_CPAAS_THEME_BASE,
+        CLASS_CPAAS_THEME_MAILJET
+      )
+
+      break
+    }
+    case 'dashboard': {
+      themeClasses.push(
+        CLASS_CPAAS_THEME_BASE,
+        CLASS_CPAAS_THEME_DASHBOARD
+      )
+
+      break
+    }
+  }
+
   return (
     <QueryRouter basename={basename} onChange={onRouteChange}>
-      <div id="app-sidebar" className={getThemeClassName(themeName)}>
+      <div id="app-sidebar" className={themeClasses.join(' ')}>
         <div className="app-sidebar-fixed">
           <SidebarHeader/>
         </div>
@@ -60,7 +105,7 @@ export const App: FC = () => {
           <SidebarFooter/>
         </div>
       </div>
-      <div id="app-content" className={getThemeClassName(themeName)}>
+      <div id="app-content" className={themeClasses.join(' ')}>
         <Suspense fallback={<Loading/>}>
           <Routes>
             <Route path="/" element={<LandingPage/>}/>

@@ -87,6 +87,10 @@ const THEME_CLASS_NAMES: Record<string, string> = {
   'Nectary / Base theme': '.nectary-theme-base',
   'Nectary / Dark theme': '.nectary-theme-base.nectary-theme-dark',
   'SaaS/ MessageMedia': '.nectary-theme-base.nectary-theme-message-media',
+  'cPaas/Base theme': '.nectary-theme-base.cpaas-theme-base',
+  'cPaas/MailGun': '.nectary-theme-base.cpaas-theme-base.cpaas-theme-mailgun',
+  'cPaas/MailJet': '.nectary-theme-base.cpaas-theme-base.cpaas-theme-mailjet',
+  'cPaas/Dashboard': '.nectary-theme-base.cpaas-theme-base.cpaas-theme-dashboard',
 }
 
 const [SELECTED_THEME_KEY] = Object.keys(tokensJson).filter((key: string) => key.toLowerCase().includes(INPUT_THEME_KEY))
@@ -97,7 +101,7 @@ if (SELECTED_THEME_KEY == null) {
 
 const THEME_CLASS_NAME = THEME_CLASS_NAMES[SELECTED_THEME_KEY]
 
-const isBaseThemeKey = (key: string) => key.toLowerCase().includes('base')
+const isBaseThemeKey = (key: string) => key === 'Nectary / Base theme'
 const [BASE_THEME_KEY] = Object.keys(tokensJson).filter(isBaseThemeKey)
 
 if (BASE_THEME_KEY == null) {

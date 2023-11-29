@@ -1,0 +1,18 @@
+.nectary-theme-base.cpaas-theme-base {
+  --sinch-sys-color-feedback-info-background: #DEF2FF;
+  --sinch-sys-color-feedback-info-contrast: #2A91D1;
+  --sinch-sys-color-feedback-invalid-background: #FFE5E3;
+  --sinch-sys-color-feedback-invalid-contrast: #EB5454;
+  --sinch-sys-color-feedback-success-background: #D7F5D7;
+  --sinch-sys-color-feedback-success-contrast: #3D9956;
+  --sinch-sys-color-feedback-warning-background: #FFE9D6;
+  --sinch-sys-color-feedback-warning-contrast: #D66A33;
+  --sinch-sys-color-text-default: #090E12;
+  --sinch-sys-color-text-disabled: #4B575E;
+  --sinch-sys-color-text-invalid: #993138;
+  --sinch-sys-color-text-muted: #272F36;
+  --sinch-sys-shape-radius-l: 8px;
+  --sinch-sys-shape-radius-m: 8px;
+  --sinch-sys-shape-radius-s: 8px;
+  --sinch-sys-shape-radius-xs: 8px;
+}

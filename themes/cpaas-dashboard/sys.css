@@ -1,0 +1,12 @@
+.nectary-theme-base.cpaas-theme-base.cpaas-theme-dashboard {
+  --sinch-sys-color-cta-active: #FFAA00;
+  --sinch-sys-color-cta-hover: #FFCC66;
+  --sinch-sys-color-primary-active: #116FAD;
+  --sinch-sys-color-primary-default: #145A8F;
+  --sinch-sys-color-primary-disabled: #145A8F66;
+  --sinch-sys-color-primary-foreground: #FFFFFF;
+  --sinch-sys-color-primary-hover: #0D304A;
+  --sinch-sys-shape-radius-m: 8px;
+  --sinch-sys-shape-radius-s: 4px;
+  --sinch-sys-shape-radius-xs: 0;
+}
