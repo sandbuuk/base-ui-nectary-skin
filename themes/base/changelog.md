@@ -1,3 +1,11 @@
+## v0.5.0 (2023-11-29)
+
+* 💥 remove `icon-button`
+* 💥 remove `tertiary` tokens from `sinch-button`
+* ➕ add `subtle-primary` and `subtle-secondary` tokens to `sinch-button`
+* ➕ add `xs` size to `sinch-button`
+* 🐞 fix typo in `outline` token in `sinch-button`
+
 ## v0.4.0 (2023-10-18)
 
 * 💥 require `nectary-theme-base` class on a root element
