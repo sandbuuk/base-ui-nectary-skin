@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import '@nectary/components/alert'
-import '@nectary/components/icon-button'
 import '@nectary/components/icon'
+import '@nectary/components/button'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
@@ -15,13 +15,13 @@ Context **bold _italic_ bold** text.
 
 export const MarkdownExample: FC = () => (
   <sinch-alert type="info" text={mdText}>
-    <sinch-icon-button
+    <sinch-button
       slot="close"
       aria-label="Close alert"
       size="s"
       on-click={() => console.log('close')}
     >
       <sinch-icon slot="icon" name="close"/>
-    </sinch-icon-button>
+    </sinch-button>
   </sinch-alert>
 )

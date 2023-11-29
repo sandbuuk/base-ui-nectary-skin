@@ -121,3 +121,12 @@
 .paragraph + .image {
   margin-block-start: 16px;
 }
+
+.alert + .title,
+.alert + .paragraph,
+.alert + .example,
+.title + .alert,
+.paragraph + .alert,
+.example + .alert {
+  margin-block-start: 16px;
+}

@@ -1,7 +1,6 @@
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/spinner'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/components/input'
 
 const rowStyles: CSSProperties = {
@@ -16,12 +15,12 @@ export const EmbeddedExample: FC = () => (
       <sinch-spinner slot="left-icon"/>
     </sinch-button>
     <sinch-input value="" placeholder="Input value" aria-label="Input">
-      <sinch-icon-button slot="right" aria-label="button">
+      <sinch-button slot="right" aria-label="button">
         <sinch-spinner slot="icon"/>
-      </sinch-icon-button>
+      </sinch-button>
     </sinch-input>
-    <sinch-icon-button type="secondary" aria-label="button">
+    <sinch-button type="secondary" aria-label="button">
       <sinch-spinner slot="icon"/>
-    </sinch-icon-button>
+    </sinch-button>
   </div>
 )

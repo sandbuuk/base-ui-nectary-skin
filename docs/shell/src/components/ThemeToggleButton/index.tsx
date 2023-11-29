@@ -1,5 +1,6 @@
-import '@nectary/components/icon-button'
+
 import '@nectary/components/icon'
+import '@nectary/components/button'
 import './styles.css'
 import { useEffect } from 'react'
 import { useThemeName } from '~/context/theme-control'
@@ -20,13 +21,13 @@ export const ThemeToggleButton = () => {
   }, [themeName, isDisabled])
 
   return (
-    <sinch-icon-button
+    <sinch-button
       id="toggle-theme-button"
       aria-label="Toggle dark theme"
       on-click={onClick}
       disabled={isDisabled}
     >
       <sinch-icon slot="icon" name="nights_stay"/>
-    </sinch-icon-button>
+    </sinch-button>
   )
 }

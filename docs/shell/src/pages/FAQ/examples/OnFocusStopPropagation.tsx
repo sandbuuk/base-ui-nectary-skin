@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@nectary/components/input'
-import '@nectary/components/icon-button'
+import '@nectary/components/button'
 import '@nectary/assets/icons/calendar-today'
 
 export const OnFocusStopPropagationExample: FC = () => {
@@ -15,7 +15,7 @@ export const OnFocusStopPropagationExample: FC = () => {
       on-change={(e) => setState(e.detail)}
       onFocus={() => console.log('INPUT FOCUS')}
     >
-      <sinch-icon-button
+      <sinch-button
         slot="right"
         aria-label="Test"
         size="s"
@@ -25,7 +25,7 @@ export const OnFocusStopPropagationExample: FC = () => {
         }}
       >
         <sinch-icon-calendar-today slot="icon"/>
-      </sinch-icon-button>
+      </sinch-button>
     </sinch-input>
   )
 }

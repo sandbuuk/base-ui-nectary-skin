@@ -5,7 +5,6 @@ import '@nectary/components/segment-collapse'
 import '@nectary/components/tag'
 import '@nectary/components/button'
 import '@nectary/components/text'
-import '@nectary/components/icon-button'
 import '@nectary/assets/icons/apps'
 import '@nectary/assets/icons-branded/chatbot'
 
@@ -40,9 +39,9 @@ export const CompositionExample: FC = () => {
         <sinch-text type="m">Lorem ipsum</sinch-text>
       </div>
       <sinch-tag slot="info" text="Label"/>
-      <sinch-icon-button slot="info" aria-label="Options">
+      <sinch-button slot="info" aria-label="Options">
         <sinch-icon-apps slot="icon"/>
-      </sinch-icon-button>
+      </sinch-button>
       <sinch-text slot="content" type="m">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</sinch-text>
       <sinch-button slot="action" text="Cancel" type="secondary" aria-label="Cancel"/>
       <sinch-button slot="action" text="Ok" type="primary" aria-label="Ok"/>

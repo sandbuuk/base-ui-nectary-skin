@@ -1470,7 +1470,7 @@
                   "type": "color"
                 }
               },
-              "outilne": {
+              "outline": {
                 "focus": {
                   "value": "{sys.color.border.focus}",
                   "type": "color"
@@ -1572,7 +1572,7 @@
               }
             }
           },
-          "tertiary": {
+          "subtle-primary": {
             "default": {
               "background": {
                 "initial": {
@@ -1636,6 +1636,49 @@
                 "initial": {
                   "value": "{sys.color.primary.disabled}",
                   "type": "color"
+                }
+              }
+            },
+            "toggled": {
+              "background": {
+                "initial": {
+                  "value": "#242424",
+                  "type": "color",
+                  "$extensions": {
+                    "studio.tokens": {
+                      "modify": {
+                        "type": "alpha",
+                        "value": "0.1",
+                        "space": "srgb"
+                      }
+                    }
+                  }
+                },
+                "hover": {
+                  "value": "#242424",
+                  "type": "color",
+                  "$extensions": {
+                    "studio.tokens": {
+                      "modify": {
+                        "type": "alpha",
+                        "value": "0.15",
+                        "space": "srgb"
+                      }
+                    }
+                  }
+                },
+                "active": {
+                  "value": "#242424",
+                  "type": "color",
+                  "$extensions": {
+                    "studio.tokens": {
+                      "modify": {
+                        "type": "alpha",
+                        "value": "0.20",
+                        "space": "srgb"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -1843,6 +1886,117 @@
                 }
               }
             }
+          },
+          "subtle-secondary": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "{sys.color.container.transparent.default}",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "{sys.color.container.transparent.hover}",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "{sys.color.container.transparent.active}",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "transparent",
+                  "type": "color"
+                }
+              },
+              "icon": {
+                "initial": {
+                  "value": "{sys.color.text.default}",
+                  "type": "color"
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "{sys.color.text.default}",
+                  "type": "color"
+                }
+              },
+              "outline": {
+                "focus": {
+                  "value": "{sys.color.border.focus}",
+                  "type": "color"
+                }
+              }
+            },
+            "disabled": {
+              "background": {
+                "initial": {
+                  "value": "{sys.color.container.transparent.disabled}",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "transparent",
+                  "type": "color"
+                }
+              },
+              "icon": {
+                "initial": {
+                  "value": "{sys.color.text.disabled}",
+                  "type": "color"
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "{sys.color.text.disabled}",
+                  "type": "color"
+                }
+              }
+            },
+            "toggled": {
+              "background": {
+                "initial": {
+                  "value": "#242424",
+                  "type": "color",
+                  "$extensions": {
+                    "studio.tokens": {
+                      "modify": {
+                        "type": "alpha",
+                        "value": "0.1",
+                        "space": "srgb"
+                      }
+                    }
+                  }
+                },
+                "hover": {
+                  "value": "#242424",
+                  "type": "color",
+                  "$extensions": {
+                    "studio.tokens": {
+                      "modify": {
+                        "type": "alpha",
+                        "value": "0.15",
+                        "space": "srgb"
+                      }
+                    }
+                  }
+                },
+                "active": {
+                  "value": "#242424",
+                  "type": "color",
+                  "$extensions": {
+                    "studio.tokens": {
+                      "modify": {
+                        "type": "alpha",
+                        "value": "0.2",
+                        "space": "srgb"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "shape-radius": {
@@ -1857,6 +2011,10 @@
             },
             "s": {
               "value": "{sys.shape-radius.s}",
+              "type": "borderRadius"
+            },
+            "xs": {
+              "value": "{sys.shape-radius.xs}",
               "type": "borderRadius"
             }
           }
@@ -1906,7 +2064,7 @@
               "type": "boxShadow"
             }
           },
-          "tertiary": {
+          "subtle": {
             "initial": {
               "value": "{ref.shadow.level.0}",
               "type": "boxShadow"
@@ -2008,11 +2166,15 @@
             "s": {
               "value": "{sys.size.s}",
               "type": "sizing"
+            },
+            "xs": {
+              "value": "{sys.size.xs}",
+              "type": "sizing"
             }
           },
           "icon": {
             "l": {
-              "value": "24",
+              "value": "32",
               "type": "sizing"
             },
             "m": {
@@ -2020,6 +2182,10 @@
               "type": "sizing"
             },
             "s": {
+              "value": "24",
+              "type": "sizing"
+            },
+            "xs": {
               "value": "16",
               "type": "sizing"
             }
@@ -2040,6 +2206,12 @@
               }
             },
             "s": {
+              "text": {
+                "value": "{sys.font.body.emphasize-s}",
+                "type": "typography"
+              }
+            },
+            "xs": {
               "text": {
                 "value": "{sys.font.body.emphasize-s}",
                 "type": "typography"
@@ -2709,304 +2881,6 @@
           "placeholder": {
             "value": "{sys.font.body.m}",
             "type": "typography"
-          }
-        }
-      },
-      "icon-button": {
-        "shape-radius": {
-          "size": {
-            "l": {
-              "value": "{sys.shape-radius.l}",
-              "type": "borderRadius"
-            },
-            "m": {
-              "value": "{sys.shape-radius.m}",
-              "type": "borderRadius"
-            },
-            "s": {
-              "value": "{sys.shape-radius.s}",
-              "type": "borderRadius"
-            },
-            "xs": {
-              "value": "{sys.shape-radius.xs}",
-              "type": "borderRadius"
-            }
-          }
-        },
-        "shadow": {
-          "primary": {
-            "initial": {
-              "value": "{ref.shadow.level.1}",
-              "type": "boxShadow"
-            },
-            "focus": {
-              "value": "{ref.shadow.level.1}",
-              "type": "boxShadow"
-            },
-            "hover": {
-              "value": "{ref.shadow.level.1}",
-              "type": "boxShadow"
-            },
-            "active": {
-              "value": "{ref.shadow.level.0}",
-              "type": "boxShadow"
-            },
-            "disabled": {
-              "value": "{ref.shadow.level.0}",
-              "type": "boxShadow"
-            }
-          },
-          "secondary": {
-            "initial": {
-              "value": "{ref.shadow.level.1}",
-              "type": "boxShadow"
-            },
-            "focus": {
-              "value": "{ref.shadow.level.1}",
-              "type": "boxShadow"
-            },
-            "hover": {
-              "value": "{ref.shadow.level.1}",
-              "type": "boxShadow"
-            },
-            "active": {
-              "value": "{ref.shadow.level.0}",
-              "type": "boxShadow"
-            },
-            "disabled": {
-              "value": "{ref.shadow.level.0}",
-              "type": "boxShadow"
-            }
-          },
-          "tertiary": {
-            "initial": {
-              "value": "{ref.shadow.level.0}",
-              "type": "boxShadow"
-            },
-            "focus": {
-              "value": "{ref.shadow.level.0}",
-              "type": "boxShadow"
-            },
-            "hover": {
-              "value": "{ref.shadow.level.0}",
-              "type": "boxShadow"
-            },
-            "active": {
-              "value": "{ref.shadow.level.0}",
-              "type": "boxShadow"
-            },
-            "disabled": {
-              "value": "{ref.shadow.level.0}",
-              "type": "boxShadow"
-            }
-          }
-        },
-        "color": {
-          "primary": {
-            "default": {
-              "background": {
-                "initial": {
-                  "value": "{sys.color.primary.default}",
-                  "type": "color"
-                },
-                "hover": {
-                  "value": "{sys.color.primary.hover}",
-                  "type": "color"
-                },
-                "active": {
-                  "value": "{sys.color.primary.active}",
-                  "type": "color"
-                }
-              },
-              "border": {
-                "initial": {
-                  "value": "transparent",
-                  "type": "color"
-                }
-              },
-              "icon": {
-                "initial": {
-                  "value": "{sys.color.primary.foreground}",
-                  "type": "color"
-                }
-              },
-              "outline": {
-                "focus": {
-                  "value": "{sys.color.border.focus}",
-                  "type": "color"
-                }
-              }
-            },
-            "disabled": {
-              "background": {
-                "initial": {
-                  "value": "{sys.color.primary.disabled}",
-                  "type": "color"
-                }
-              },
-              "border": {
-                "initial": {
-                  "value": "transparent",
-                  "type": "color"
-                }
-              },
-              "icon": {
-                "initial": {
-                  "value": "{sys.color.primary.foreground}",
-                  "type": "color"
-                }
-              }
-            }
-          },
-          "secondary": {
-            "default": {
-              "background": {
-                "initial": {
-                  "value": "{sys.color.container.main.default}",
-                  "type": "color"
-                },
-                "hover": {
-                  "value": "{sys.color.container.main.hover}",
-                  "type": "color"
-                },
-                "active": {
-                  "value": "{sys.color.container.main.active}",
-                  "type": "color"
-                }
-              },
-              "border": {
-                "initial": {
-                  "value": "{sys.color.primary.default}",
-                  "type": "color"
-                }
-              },
-              "icon": {
-                "initial": {
-                  "value": "{sys.color.primary.default}",
-                  "type": "color"
-                }
-              },
-              "outline": {
-                "focus": {
-                  "value": "{sys.color.border.focus}",
-                  "type": "color"
-                }
-              }
-            },
-            "disabled": {
-              "background": {
-                "initial": {
-                  "value": "{sys.color.container.main.disabled}",
-                  "type": "color"
-                }
-              },
-              "border": {
-                "initial": {
-                  "value": "{sys.color.primary.disabled}",
-                  "type": "color"
-                }
-              },
-              "icon": {
-                "initial": {
-                  "value": "{sys.color.primary.disabled}",
-                  "type": "color"
-                }
-              }
-            }
-          },
-          "tertiary": {
-            "default": {
-              "background": {
-                "initial": {
-                  "value": "{sys.color.container.transparent.default}",
-                  "type": "color"
-                },
-                "hover": {
-                  "value": "{sys.color.container.transparent.hover}",
-                  "type": "color"
-                },
-                "active": {
-                  "value": "{sys.color.container.transparent.active}",
-                  "type": "color"
-                }
-              },
-              "border": {
-                "initial": {
-                  "value": "transparent",
-                  "type": "color"
-                }
-              },
-              "icon": {
-                "initial": {
-                  "value": "{sys.color.text.default}",
-                  "type": "color"
-                }
-              },
-              "outline": {
-                "focus": {
-                  "value": "{sys.color.border.focus}",
-                  "type": "color"
-                }
-              }
-            },
-            "disabled": {
-              "background": {
-                "initial": {
-                  "value": "{sys.color.container.transparent.disabled}",
-                  "type": "color"
-                }
-              },
-              "border": {
-                "initial": {
-                  "value": "transparent",
-                  "type": "color"
-                }
-              },
-              "icon": {
-                "initial": {
-                  "value": "{sys.color.text.disabled}",
-                  "type": "color"
-                }
-              }
-            }
-          }
-        },
-        "size": {
-          "container": {
-            "l": {
-              "value": "{sys.size.l}",
-              "type": "sizing"
-            },
-            "m": {
-              "value": "{sys.size.m}",
-              "type": "sizing"
-            },
-            "s": {
-              "value": "{sys.size.s}",
-              "type": "sizing"
-            },
-            "xs": {
-              "value": "{sys.size.xs}",
-              "type": "sizing"
-            }
-          },
-          "icon": {
-            "l": {
-              "value": "32",
-              "type": "sizing"
-            },
-            "m": {
-              "value": "24",
-              "type": "sizing"
-            },
-            "s": {
-              "value": "24",
-              "type": "sizing"
-            },
-            "xs": {
-              "value": "16",
-              "type": "sizing"
-            }
           }
         }
       },
@@ -7221,7 +7095,7 @@
               }
             }
           },
-          "tertiary": {
+          "subtle-primary": {
             "default": {
               "border": {
                 "initial": {
@@ -7297,7 +7171,7 @@
               "type": "boxShadow"
             }
           },
-          "tertiary": {
+          "subtle": {
             "initial": {
               "value": "{ref.shadow.level.0}",
               "type": "boxShadow"
@@ -7665,6 +7539,7 @@
     {
       "id": "a02dd067369594b671f3b5465730080209bcddf6",
       "name": "Sinch brand light",
+      "group": "Theme",
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled"
       },
@@ -8432,8 +8307,6 @@
         "comp.button.color.primary.default.background.hover": "S:63fab713fe00d6addcfad6bc9f37d8271204c098,",
         "comp.button.color.primary.default.background.active": "S:fd889584c61afc6f325331f4e35a57721c0f22bc,",
         "comp.button.color.secondary.default.background.hover": "S:8b68136b611bf525f7c0a23d18a03798e72369e0,",
-        "comp.button.color.tertiary.default.background.hover": "S:435675cc05c2423b27f369bcca0b2211b6348065,",
-        "comp.button.color.tertiary.default.background.active": "S:4d41855dbf2d8d0820150c143b003296af418f18,",
         "comp.button.color.cta-primary.default.background.hover": "S:0cdaa0322b4eeea51fc9116c5946c4c8c747ab10,",
         "comp.button.color.cta-primary.default.background.active": "S:2df78616c2c15ba3d2375f954d57f48ba2518a77,",
         "comp.button.color.cta-secondary.default.background.hover": "S:b5c440b279b5630dcd2d0aa2d29ebb32fedca324,",
@@ -8469,9 +8342,7 @@
         "comp.card.color.default.text.title": "S:8a3bf0b34e8ac9c813d073e11bdab8b07b14d4de,",
         "comp.link.color.default.text.hover": "S:e9fb15282607b4eb7cea692d7a2bbb02b76d82ac,",
         "comp.link.color.default.outline.focus": "S:83e003c7f6db8ad20f0ba9ee53a18e7005f84e7b,",
-        "comp.button.color.primary.default.outilne.focus": "S:3c4b2f470255f768dbdcb3c0a0462d0b8044c506,",
         "comp.button.color.secondary.default.outline.focus": "S:e42caab4753b631e92683525db547f3adb2272e8,",
-        "comp.button.color.tertiary.default.outline.focus": "S:6de1ddce8a0069af35c29fcd73073b2d4b6fac45,",
         "comp.button.color.cta-primary.default.outline.focus": "S:6ddfa2a9b6acac6ce4ccbe323bdb44fbee1c0e14,",
         "comp.button.color.danger.default.outline.focus": "S:4e07b220b07acc6de0be66bb74d9fd0f3fe3f853,",
         "comp.action_menu.color.default.background.default": "S:14b1e98b3751ff32f37b1d57e32f347c36e42f1e,",
@@ -8894,7 +8765,6 @@
         "sys.font.general.emphasize": "S:ebc48c1d9d762ac4bfffbfa2a6a3aa176074b068,",
         "sys.font.general.emphasize-s": "S:808b83b13e9d4e7b62f687d4f5e44d440ebda1e9,",
         "comp.file-status.color.progress.icon": "S:9354604acf44d0d026a0f436502a432208001836,",
-        "comp.button.color.tertiary.default.border.initial": "S:07e043fa57d081a2003c775f10cd1f6e39929b21,",
         "comp.button.color.danger.default.border.initial": "S:95bf24402e1fe5a30a5eb39d6aaf35e4e5cb2142,",
         "comp.segmented-control.color.default.border.initial": "S:59dab5ef108e1061354dd9a505737a61afa46ac1,",
         "comp.time-picker.digit.color.default.h24.initial": "S:4513b9f5f2c1298ad34bff2ffcd76edf8bcf08ba,",
@@ -8954,13 +8824,6 @@
         "comp.button.color.secondary.disabled.border.initial": "S:1d5ead2f07625b7e71f2c0de2d7999a6a7f5e162,",
         "comp.button.color.secondary.disabled.icon.initial": "S:665db8f8df44fafb277060840f8eaf28ef1290c7,",
         "comp.button.color.secondary.disabled.text.initial": "S:d85db81348c611011dcd35457d94015eddc44f74,",
-        "comp.button.color.tertiary.default.background.initial": "S:ae877a90bdc148fc50c986ee751d7ab6f7e44877,",
-        "comp.button.color.tertiary.default.icon.initial": "S:c3059c107a900048bdb7a3b8bd755fae0b21c208,",
-        "comp.button.color.tertiary.default.text.initial": "S:6c68c1f56854bb17c7fab1b0ca37307e7b44ceca,",
-        "comp.button.color.tertiary.disabled.background.initial": "S:f4c0f09d1f06bc53087127727f3e76582cd81d4e,",
-        "comp.button.color.tertiary.disabled.border.initial": "S:bd2bf03a8e31a2efddeb8f9cd95212dbbaa3da36,",
-        "comp.button.color.tertiary.disabled.icon.initial": "S:7d91ba87152653a2b45bbb857fa827bca8d542db,",
-        "comp.button.color.tertiary.disabled.text.initial": "S:0e80976d5f2a92f0f2e88717e001a6d0d9d57f7a,",
         "comp.button.color.cta-primary.default.background.initial": "S:7447f960f415ab29f957969a0cd69355934028d6,",
         "comp.button.color.cta-primary.default.icon.initial": "S:4f29a5bcc4228d24dfcae1ff7878831417254a13,",
         "comp.button.color.cta-primary.default.border.initial": "S:39389f571688d5956dd364bd6fb99e2df0ff2808,",
@@ -9367,7 +9230,7 @@
         "comp.tag.font.size.s.label": "S:7e85f9fd8b3ea0ce7dd47d41c45d3b3ded2c86a5,",
         "comp.badge.font.size.m": "S:1557c131103dfb021e7716309db51f78dd8c4c13,",
         "comp.dialog.font.title": "S:da2a6acf0c4bb16351af40cd9e0cede87fed5136,",
-        "comp.code-tag.font.text": "S:39d8d6a073f88e1cd6d90ba0e1524badd591a69e,",
+        "comp.code-tag.font.text": "S:9db0ba58bf1bf481a735eda936dba2f455923da7,",
         "comp.avatar.container.font.size.l.text": "S:d6cdf2d3c498710bfc467f2c5281f538542a598c,",
         "comp.avatar.container.font.size.m.text": "S:72bb531e9da3537ba997a819a1190f5213963496,",
         "comp.avatar.container.font.size.s.text": "S:e47806456b419fa1b8b2e711808fb976ee09cd57,",
@@ -9498,11 +9361,6 @@
         "comp.button.shadow.secondary.hover": "S:007040c5635da919d4b9489eb3fde598f4b3cef2,",
         "comp.button.shadow.secondary.active": "S:15227fe1578d4fa36c80aff148247fbe12664172,",
         "comp.button.shadow.secondary.disabled": "S:45797b835593e2d51f54218fbe3d3b7e8cd6b74f,",
-        "comp.button.shadow.tertiary.initial": "S:eb19d41945f667ef66950b4997263c8e4158c3ba,",
-        "comp.button.shadow.tertiary.focus": "S:fb85a54c52eabd6fed6c09c4c3797fbadfa783e8,",
-        "comp.button.shadow.tertiary.hover": "S:ac3de1312f6e46fb18d4eb95e6865414ea6a4bd8,",
-        "comp.button.shadow.tertiary.active": "S:b88b53b04e56440c30204b0f40b88f687ad0eafc,",
-        "comp.button.shadow.tertiary.disabled": "S:25eaa98bdbe5cf7e7bb8b74ab89110434f37c2f3,",
         "comp.button.shadow.cta-primary.initial": "S:167b85142596bf9e97d029370f7b5ce930ed852b,",
         "comp.button.shadow.cta-primary.focus": "S:ec400ea7e4305967f5d4b8f13e363ebb5a02861d,",
         "comp.button.shadow.cta-primary.hover": "S:af79f85505546251d9953b686997811f8b48a30e,",
@@ -9653,13 +9511,55 @@
         "comp.progress-stepper.step.color.outline-focus": "S:850d923d7e06b08ffb28254809bfecc1967da1ac,",
         "comp.progress-stepper.title.font": "S:4cf85aaae00e8412005a48938db1f57890cc1aa3,",
         "comp.progress-stepper.description.font": "S:753339ad3179f7e5b36c82c09176fd521e53d18b,",
-        "comp.accordion.color.default.outline.focus": "S:c5b3b1310e8987ffc5571b1d0d5f2f6b812a63c4,"
-      },
-      "group": "Theme"
+        "comp.accordion.color.default.outline.focus": "S:c5b3b1310e8987ffc5571b1d0d5f2f6b812a63c4,",
+        "comp.button.color.subtle-primary.default.background.hover": "S:435675cc05c2423b27f369bcca0b2211b6348065,",
+        "comp.button.color.subtle-primary.default.background.active": "S:4d41855dbf2d8d0820150c143b003296af418f18,",
+        "comp.button.color.subtle-primary.default.outline.focus": "S:6de1ddce8a0069af35c29fcd73073b2d4b6fac45,",
+        "comp.button.color.subtle-primary.default.border.initial": "S:07e043fa57d081a2003c775f10cd1f6e39929b21,",
+        "comp.button.color.subtle-primary.default.background.initial": "S:ae877a90bdc148fc50c986ee751d7ab6f7e44877,",
+        "comp.button.color.subtle-primary.default.icon.initial": "S:c3059c107a900048bdb7a3b8bd755fae0b21c208,",
+        "comp.button.color.subtle-primary.default.text.initial": "S:6c68c1f56854bb17c7fab1b0ca37307e7b44ceca,",
+        "comp.button.color.subtle-primary.disabled.background.initial": "S:f4c0f09d1f06bc53087127727f3e76582cd81d4e,",
+        "comp.button.color.subtle-primary.disabled.border.initial": "S:bd2bf03a8e31a2efddeb8f9cd95212dbbaa3da36,",
+        "comp.button.color.subtle-primary.disabled.icon.initial": "S:7d91ba87152653a2b45bbb857fa827bca8d542db,",
+        "comp.button.color.subtle-primary.disabled.text.initial": "S:0e80976d5f2a92f0f2e88717e001a6d0d9d57f7a,",
+        "comp.button.shadow.subtle.initial": "S:eb19d41945f667ef66950b4997263c8e4158c3ba,",
+        "comp.button.shadow.subtle.focus": "S:fb85a54c52eabd6fed6c09c4c3797fbadfa783e8,",
+        "comp.button.shadow.subtle.hover": "S:ac3de1312f6e46fb18d4eb95e6865414ea6a4bd8,",
+        "comp.button.shadow.subtle.active": "S:b88b53b04e56440c30204b0f40b88f687ad0eafc,",
+        "comp.button.shadow.subtle.disabled": "S:25eaa98bdbe5cf7e7bb8b74ab89110434f37c2f3,",
+        "comp.button.color.secondary.default.background.active": "S:8b68136b611bf525f7c0a23d18a03798e72369e0,",
+        "comp.color-menu-option.color.default.border.initial": "S:97edd02a3a633cb946cbff1b6592e7029f47401a,",
+        "comp.color-menu-option.color.default.border.hover": "S:c2652edbda8fe5c482654d0b34834cb2458b0031,",
+        "comp.color-menu-option.color.default.border.active": "S:c5832ecef107b2e4954be9fe1855ac0f36fa7fd2,",
+        "comp.color-menu-option.color.default.border.selected": "S:60dec3f1e5459df54d7891c5f91e32e15b055a96,",
+        "comp.color-menu-option.color.default.border.focus": "S:3963cce3fbe576de30bc528fce5c7801ea226fee,",
+        "comp.button.color.subtle-secondary.default.background.initial": "S:f282ccbbb4017c6a6a05400e8ea27da7465a2874,",
+        "comp.button.color.subtle-secondary.default.background.hover": "S:efbee95d11023e5fe4dc15bc3666580d81443e2b,",
+        "comp.button.color.subtle-secondary.default.background.active": "S:3877ff7827526b9a3eddea6c380baac5ace8f402,",
+        "comp.button.color.subtle-secondary.default.border.initial": "S:e80e884020b7bc39dfb4c7c20d54c1eee3db9e8e,",
+        "comp.button.color.subtle-secondary.default.icon.initial": "S:9e5ae717e5bba844fa9548342f9b91242db7c386,",
+        "comp.button.color.subtle-secondary.default.text.initial": "S:d451c696a39fddcd09e4a47beb9ddee6c747515a,",
+        "comp.button.color.subtle-secondary.default.outline.focus": "S:50b54f2146f33f479526c34cc20288ddbd1447c6,",
+        "comp.button.color.subtle-secondary.disabled.background.initial": "S:b06de8131c2e4dc2ec438ea172d7ee0105158b22,",
+        "comp.button.color.subtle-secondary.disabled.border.initial": "S:0818009278e9f9986217a0e381ce9d07a86bf837,",
+        "comp.button.color.subtle-secondary.disabled.icon.initial": "S:e849b6e7b6397c91cb022ddba90fb7c5265c1d49,",
+        "comp.button.color.subtle-secondary.disabled.text.initial": "S:498073d87e9eb4c8d521f3e0f0af2ec24aadc3ec,",
+        "sys.font.body.monospace-xxs": "S:75f71d342fbeee1be2a57cd189368b66e22bb83a,",
+        "comp.badge.font.size.l": "S:6d7e89c29b512cd0c125354d901e03b5d7ae1bae,",
+        "comp.button.color.subtle-secondary.toggled.background.initial": "S:1d15b8ee8966df335450095fde219932745bf6c4,",
+        "comp.button.color.subtle-secondary.toggled.background.hover": "S:b0991d2e6b8ab0ee7fb98bb727325168141ef093,",
+        "comp.button.color.subtle-secondary.toggled.background.active": "S:e4a3d54d053bac4234e295102c4835fb860b9f84,",
+        "comp.button.color.subtle-primary.toggled.background.initial": "S:10bf7d086dc1fa2f1c9be7f01df607ca10685fab,",
+        "comp.button.color.subtle-primary.toggled.background.hover": "S:6b94ae851f74d9214871c906ef9228bd4ec56e4e,",
+        "comp.button.color.subtle-primary.toggled.background.active": "S:45caf1a0fb631ecd36d852884b45a6ca118a4d2e,",
+        "comp.button.color.primary.default.outline.focus": "S:3c4b2f470255f768dbdcb3c0a0462d0b8044c506,"
+      }
     },
     {
       "id": "43179aa77e5eb9a7be711a2d68a4443a18c4de80",
       "name": "Sinch brand dark",
+      "group": "Theme",
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
         "Nectary / Dark theme": "enabled"
@@ -10447,8 +10347,6 @@
         "comp.button.color.primary.default.background.hover": "S:343bfb6d9f1a465f1824d4d50ef09383fffb843b,",
         "comp.button.color.primary.default.background.active": "S:611fb5a44721a1fa64da956fd493bcffd75c829a,",
         "comp.button.color.secondary.default.background.hover": "S:b2d5e4ea993b246b7a081876dd3e02770a8b8201,",
-        "comp.button.color.tertiary.default.background.hover": "S:e1c75a71e4f547987a7c3fe74608da5a9cfc2ae5,",
-        "comp.button.color.tertiary.default.background.active": "S:f522d8286aa086d877711588efc03ec40e88dd91,",
         "comp.button.color.cta-primary.default.background.hover": "S:72e4b25410ad9993a91a0a43e9f95bbd912d48f5,",
         "comp.button.color.cta-primary.default.background.active": "S:a4c0c8af8ce87df352a9226c9f7dac01733983ea,",
         "comp.button.color.cta-secondary.default.background.hover": "S:ad04bc24d69be12f750f93e85fb1f871681d3bd9,",
@@ -10484,9 +10382,7 @@
         "comp.card.color.default.text.title": "S:643f3633fc1c84379363ac377ae9b5baad991b9a,",
         "comp.link.color.default.text.hover": "S:21c5027539e0bfccba405b23bd4c3d1c076c94c9,",
         "comp.link.color.default.outline.focus": "S:78079ffe2c899f25224af49aee5abea5cef76d76,",
-        "comp.button.color.primary.default.outilne.focus": "S:a48296eabd9f8e3b186084a7d24d5645a62142cc,",
         "comp.button.color.secondary.default.outline.focus": "S:95427d20583bc046ce9bfded0a3d6b4b3c8083ed,",
-        "comp.button.color.tertiary.default.outline.focus": "S:f4694417ffd2401130a1ca8918d9c2d3d2f103ba,",
         "comp.button.color.cta-primary.default.outline.focus": "S:cbacc7714221c0da8ce1296e1177c2920e5c4384,",
         "comp.button.color.danger.default.outline.focus": "S:ddcfc5f81b6c70a358f5bbf0867551fef444c116,",
         "comp.action_menu.color.default.background.default": "S:d40e1e70aaf23e9b9bf523288785c63d9ed3000b,",
@@ -10685,14 +10581,6 @@
         "comp.button.color.secondary.disabled.border.initial": "S:3bc65d4835dbf705910121cc80d5ffea0526b02a,",
         "comp.button.color.secondary.disabled.icon.initial": "S:9584432fdd8f5f7c6dd0029ab745ac37428c2949,",
         "comp.button.color.secondary.disabled.text.initial": "S:3c4ccc527e26c45c269f254e8be8217367110539,",
-        "comp.button.color.tertiary.default.background.initial": "S:9ba14c8eb79cb20f92e8000b23f95d6850b04b50,",
-        "comp.button.color.tertiary.default.border.initial": "S:e7c5095284d334ec9b9569179dcae1cb278f005c,",
-        "comp.button.color.tertiary.default.icon.initial": "S:62931dbdc3bec8d79310fd5f52791ccdc4250f30,",
-        "comp.button.color.tertiary.default.text.initial": "S:1ca3c1feb6abc6df7de35421cdc681b303e33e59,",
-        "comp.button.color.tertiary.disabled.background.initial": "S:ddb7e30eb6c26cfceaadba73b72371e324a3768e,",
-        "comp.button.color.tertiary.disabled.border.initial": "S:b8b6935ee2693dd27c013093c1210656b06cc37c,",
-        "comp.button.color.tertiary.disabled.icon.initial": "S:9d50a645f712d0d4c4c1c8ce5a1ac2836488ec7c,",
-        "comp.button.color.tertiary.disabled.text.initial": "S:2f54f967c6c8fde57fb3a50ca3304001247a3572,",
         "comp.button.color.cta-primary.default.background.initial": "S:523e0f32b9a9e41d82f35ac89fdda5bd16e163c2,",
         "comp.button.color.cta-primary.default.icon.initial": "S:e864f39cd0b3f2ea91053e5062fca814c71e14d3,",
         "comp.button.color.cta-primary.default.border.initial": "S:2bb2410db6f9c8ddf92c978f10bda41358b16f83,",
@@ -10799,19 +10687,30 @@
         "comp.accordion.color.default.title.initial": "S:7f04e30f452a740c94a2a49fe693b3e043cc0983,",
         "comp.toggle.color.default.knob.background.initial": "S:a665e28602ac252a231f13aa60bf279d4f3523ca,",
         "comp.toggle.color.default.text-inside.initial": "S:caba43ef577b9213af0827b71903b34e321ab64d,",
-        "sys.color.container.contrast.secondary.default": "S:504b83e0af0ba18ffd11ffecd51c9c540f6ba4a9,"
-      },
-      "group": "Theme"
+        "sys.color.container.contrast.secondary.default": "S:504b83e0af0ba18ffd11ffecd51c9c540f6ba4a9,",
+        "comp.button.color.subtle-primary.default.background.hover": "S:e1c75a71e4f547987a7c3fe74608da5a9cfc2ae5,",
+        "comp.button.color.subtle-primary.default.background.active": "S:f522d8286aa086d877711588efc03ec40e88dd91,",
+        "comp.button.color.subtle-primary.default.outline.focus": "S:f4694417ffd2401130a1ca8918d9c2d3d2f103ba,",
+        "comp.button.color.subtle-primary.default.background.initial": "S:9ba14c8eb79cb20f92e8000b23f95d6850b04b50,",
+        "comp.button.color.subtle-primary.default.border.initial": "S:e7c5095284d334ec9b9569179dcae1cb278f005c,",
+        "comp.button.color.subtle-primary.default.icon.initial": "S:62931dbdc3bec8d79310fd5f52791ccdc4250f30,",
+        "comp.button.color.subtle-primary.default.text.initial": "S:1ca3c1feb6abc6df7de35421cdc681b303e33e59,",
+        "comp.button.color.subtle-primary.disabled.background.initial": "S:ddb7e30eb6c26cfceaadba73b72371e324a3768e,",
+        "comp.button.color.subtle-primary.disabled.border.initial": "S:b8b6935ee2693dd27c013093c1210656b06cc37c,",
+        "comp.button.color.subtle-primary.disabled.icon.initial": "S:9d50a645f712d0d4c4c1c8ce5a1ac2836488ec7c,",
+        "comp.button.color.subtle-primary.disabled.text.initial": "S:2f54f967c6c8fde57fb3a50ca3304001247a3572,",
+        "comp.button.color.primary.default.outline.focus": "S:a48296eabd9f8e3b186084a7d24d5645a62142cc,"
+      }
     },
     {
       "id": "9bf1b1eb292732c275dc4eac42197c2c56e7dc3b",
       "name": "MessageMedia",
-      "$figmaStyleReferences": {},
+      "group": "Theme",
       "selectedTokenSets": {
         "Nectary / Base theme": "source",
         "SaaS/ MessageMedia": "enabled"
       },
-      "group": "Theme"
+      "$figmaStyleReferences": {}
     }
   ],
   "$metadata": {

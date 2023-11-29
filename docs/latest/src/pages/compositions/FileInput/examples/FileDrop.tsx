@@ -5,7 +5,6 @@ import '@nectary/components/field'
 import '@nectary/components/file-drop'
 import '@nectary/components/file-status'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/components/icon'
 
 const wrapperStyles: CSSProperties = {
@@ -60,14 +59,14 @@ export const FileDropExample: FC = () => {
               filename={file.name}
               type="loading"
             >
-              <sinch-icon-button
+              <sinch-button
                 slot="action"
                 aria-label="Close"
                 size="s"
                 on-click={() => {}}
               >
                 <sinch-icon slot="icon" name="close"/>
-              </sinch-icon-button>
+              </sinch-button>
             </sinch-file-status>
           ))
         }

@@ -13,12 +13,12 @@ import {
   subscribeContext,
   isAttrEqual,
 } from '../utils'
-import { DEFAULT_SIZE, sizeValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
 import { typeValues } from './utils'
 import type { TSinchButtonElement, TSinchButtonReact, TSinchButtonType } from './types'
 import type { TContextSize } from '../utils'
-import type { TSinchSize } from '../utils/size'
+import type { TSinchSizeEx } from '../utils/size'
 
 const template = document.createElement('template')
 
@@ -72,14 +72,16 @@ defineCustomElement('sinch-button', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'disabled', 'size', 'data-size']
+    return [
+      'text',
+      'disabled',
+      'toggled',
+      'size',
+      'data-size',
+    ]
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (isAttrEqual(oldVal, newVal)) {
-      return
-    }
-
     switch (name) {
       case 'text': {
         this.#$text.textContent = newVal
@@ -87,10 +89,20 @@ defineCustomElement('sinch-button', class extends NectaryElement {
         break
       }
       case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
+        if (!isAttrEqual(oldVal, newVal)) {
+          updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+        }
 
-        this.ariaDisabled = isDisabled.toString()
-        updateBooleanAttribute(this, 'disabled', isDisabled)
+        this.ariaDisabled = isAttrTrue(newVal).toString()
+
+        break
+      }
+      case 'toggled': {
+        if (!isAttrEqual(oldVal, newVal)) {
+          updateBooleanAttribute(this, 'toggled', isAttrTrue(newVal))
+        }
+
+        this.ariaPressed = isAttrTrue(newVal).toString()
 
         break
       }
@@ -131,12 +143,20 @@ defineCustomElement('sinch-button', class extends NectaryElement {
     return getBooleanAttribute(this, 'disabled')
   }
 
-  set size(size: TSinchSize) {
-    updateLiteralAttribute(this, sizeValues, 'size', size)
+  set toggled(isToggled: boolean) {
+    updateBooleanAttribute(this, 'toggled', isToggled)
   }
 
-  get size(): TSinchSize {
-    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
+  get toggled() {
+    return getBooleanAttribute(this, 'toggled')
+  }
+
+  set size(size: TSinchSizeEx) {
+    updateLiteralAttribute(this, sizeExValues, 'size', size)
+  }
+
+  get size(): TSinchSizeEx {
+    return getLiteralAttribute(this, sizeExValues, 'size', DEFAULT_SIZE)
   }
 
   get focusable() {

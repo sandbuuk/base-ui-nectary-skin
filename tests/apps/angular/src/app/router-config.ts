@@ -20,8 +20,6 @@ import { DatePickerComponent } from '../components/DatePicker/DatePicker.compone
 import { DialogComponent } from '../components/Dialog/Dialog.component'
 import { EmojiPickerComponent } from '../components/EmojiPicker/EmojiPicker.component'
 import { GridComponent } from '../components/Grid/Grid.component'
-import { HorizontalStepper } from '../components/HorizontalStepper/HorizontalStepper.component'
-import { IconButtonComponent } from '../components/IconButton/IconButton.component'
 import { InlineAlertComponent } from '../components/InlineAlert/InlineAlert.component'
 import { InputComponent } from '../components/Input/Input.component'
 import { FieldComponent } from '../components/Field/Field.component'
@@ -57,7 +55,6 @@ import { TitleComponent } from '../components/Title/Title.component'
 import { ToastManagerComponent } from '../components/ToastManager/ToastManager.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
-import { VerticalStepper } from '../components/VerticalStepper/VerticalStepper.component'
 
 const appRoutes: Routes = [
   { path: "accordion", component: AccordionComponent },
@@ -85,8 +82,6 @@ const appRoutes: Routes = [
   { path: "file-picker", component: FilePickerComponent },
   { path: "file-status", component: FileStatusComponent },
   { path: "grid", component: GridComponent },
-  { path: "horizontal-stepper", component: HorizontalStepper },
-  { path: "icon-button", component: IconButtonComponent },
   { path: "inline-alert", component: InlineAlertComponent },
   { path: "input", component: InputComponent },
   { path: "link", component: LinkComponent },
@@ -118,7 +113,6 @@ const appRoutes: Routes = [
   { path: "toast-manager", component: ToastManagerComponent },
   { path: "toggle", component: ToggleComponent },
   { path: "tooltip", component: TooltipComponent },
-  { path: "vertical-stepper", component: VerticalStepper },
 ];
 
 export default appRoutes;

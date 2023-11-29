@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { SyntaxHighlighter } from '../SyntaxHighlighter'
 import type { FC } from 'react'
-import '@nectary/components/icon-button'
+import '@nectary/components/button'
 import '@nectary/assets/icons/content-copy'
 import '@nectary/assets/icons/keyboard-arrow-down'
 import './styles.css'
@@ -16,14 +16,14 @@ export const Code: FC<TCode> = ({ src }) => {
   return (
     <div className={`code ${isOpen ? 'open' : ''}`} onClick={!isOpen ? () => setOpen(true) : void 0}>
       <div className="code-toolbar">
-        <sinch-icon-button
+        <sinch-button
           aria-label="Copy"
           size="s"
           on-click={() => navigator.clipboard.writeText(src).catch(console.error)}
         >
           <sinch-icon-content-copy slot="icon"/>
-        </sinch-icon-button>
-        <sinch-icon-button
+        </sinch-button>
+        <sinch-button
           aria-label="Expand"
           size="s"
           on-click={() => {
@@ -31,7 +31,7 @@ export const Code: FC<TCode> = ({ src }) => {
           }}
         >
           <sinch-icon-keyboard-arrow-down slot="icon" class="code-toolbar-dropdown-icon"/>
-        </sinch-icon-button>
+        </sinch-button>
       </div>
       <SyntaxHighlighter language="tsx" src={src} shouldShowLineNumbers/>
     </div>

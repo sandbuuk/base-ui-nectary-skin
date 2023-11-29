@@ -15,8 +15,9 @@ export class ButtonComponent {
   text: string | null
   size: string | null
   isDisabled: boolean
-  hasLeftIcon: boolean
+  isToggled: boolean
   hasRightIcon: boolean
+  hasIcon: boolean
   hasSpinner: boolean
 
   constructor(private route: ActivatedRoute) {
@@ -25,8 +26,9 @@ export class ButtonComponent {
     this.text = search.get('text')
     this.size = search.get('size')
     this.isDisabled = search.get('disabled') !== null
-    this.hasLeftIcon = search.get('icon-left') !== null
+    this.isToggled = search.get('toggled') !== null
     this.hasRightIcon = search.get('icon-right') !== null
+    this.hasIcon = search.get('icon') !== null
     this.hasSpinner = search.get('spinner') !== null
   }
 

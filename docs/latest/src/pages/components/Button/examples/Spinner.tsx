@@ -4,11 +4,11 @@ import '@nectary/components/spinner'
 
 export const SpinnerExample: FC = () => (
   <sinch-button
-    text="Click"
-    aria-label="Click"
+    text="Pending"
+    aria-label="Pending"
     type="primary"
     on-click={() => console.log('click')}
   >
-    <sinch-spinner slot="left-icon"/>
+    <sinch-spinner slot="icon"/>
   </sinch-button>
 )

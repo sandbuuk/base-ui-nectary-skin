@@ -1,6 +1,5 @@
 import type { FC } from 'react'
 import '@nectary/components/inline-alert'
-import '@nectary/components/icon-button'
 import '@nectary/components/icon'
 import '@nectary/components/button'
 
@@ -14,13 +13,13 @@ export const ActionExample: FC = () => (
       size="s"
       on-click={() => console.log('action')}
     />
-    <sinch-icon-button
+    <sinch-button
       slot="close"
       aria-label="Close alert"
       size="s"
       on-click={() => console.log('close')}
     >
       <sinch-icon slot="icon" name="close"/>
-    </sinch-icon-button>
+    </sinch-button>
   </sinch-inline-alert>
 )

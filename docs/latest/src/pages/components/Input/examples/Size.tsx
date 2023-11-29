@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/input'
-import '@nectary/components/icon-button'
+import '@nectary/components/button'
 import '@nectary/assets/icons/sentiment-satisfied'
 import '@nectary/assets/icons/search'
 
@@ -27,13 +27,13 @@ export const SizeExample: FC = () => {
         on-change={(e) => setState(e.detail)}
       >
         <sinch-icon-search slot="icon"/>
-        <sinch-icon-button
+        <sinch-button
           slot="right"
           aria-label="Click"
           on-click={() => {}}
         >
           <sinch-icon-sentiment-satisfied slot="icon"/>
-        </sinch-icon-button>
+        </sinch-button>
       </sinch-input>
       <sinch-input
         aria-label="Input"
@@ -44,13 +44,13 @@ export const SizeExample: FC = () => {
         on-change={(e) => setState(e.detail)}
       >
         <sinch-icon-search slot="icon"/>
-        <sinch-icon-button
+        <sinch-button
           slot="right"
           aria-label="Click"
           on-click={() => {}}
         >
           <sinch-icon-sentiment-satisfied slot="icon"/>
-        </sinch-icon-button>
+        </sinch-button>
       </sinch-input>
       <sinch-input
         aria-label="Input"
@@ -61,13 +61,13 @@ export const SizeExample: FC = () => {
         on-change={(e) => setState(e.detail)}
       >
         <sinch-icon-search slot="icon"/>
-        <sinch-icon-button
+        <sinch-button
           slot="right"
           aria-label="Click"
           on-click={() => {}}
         >
           <sinch-icon-sentiment-satisfied slot="icon"/>
-        </sinch-icon-button>
+        </sinch-button>
       </sinch-input>
     </div>
   )

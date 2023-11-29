@@ -2,7 +2,6 @@ import type { CSSProperties, FC } from 'react'
 import '@nectary/components/badge'
 import '@nectary/components/avatar'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/assets/icons/notifications'
 
 const wrapperStyles: CSSProperties = {
@@ -17,7 +16,7 @@ export const ModeExample: FC = () => (
     <sinch-badge text="9" size="l" mode="circle">
       <sinch-avatar src="https://i.pravatar.cc/300" size="l" alt="AB"/>
     </sinch-badge>
-    <sinch-icon-button aria-label="Notifications">
+    <sinch-button aria-label="Notifications">
       <sinch-badge
         text="9"
         size="m"
@@ -26,7 +25,7 @@ export const ModeExample: FC = () => (
       >
         <sinch-icon-notifications/>
       </sinch-badge>
-    </sinch-icon-button>
+    </sinch-button>
     <sinch-badge text="9" size="l" mode="square">
       <sinch-button
         text="Click"

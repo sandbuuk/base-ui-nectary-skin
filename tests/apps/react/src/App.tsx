@@ -27,8 +27,6 @@ import { FileDrop } from './components/FileDrop'
 import { FilePicker } from './components/FilePicker'
 import { FileStatus } from './components/FileStatus'
 import { Grid } from './components/Grid'
-import { HorizontalStepper } from './components/HorizontalStepper'
-import { IconButton } from './components/IconButton'
 import { InlineAlert } from './components/InlineAlert'
 import { Input } from './components/Input'
 import { InputSlots } from './components/InputSlots'
@@ -65,7 +63,6 @@ import { Toast } from './components/Toast'
 import { ToastManager } from './components/ToastManager'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
-import { VerticalStepper } from './components/VerticalStepper'
 import type { CSSProperties, FC } from 'react'
 
 const AppImpl = () => {
@@ -119,8 +116,6 @@ const AppImpl = () => {
         <Route path="/file-picker" element={<FilePicker/>}/>
         <Route path="/file-status" element={<FileStatus/>}/>
         <Route path="/grid" element={<Grid/>}/>
-        <Route path="/horizontal-stepper" element={<HorizontalStepper/>}/>
-        <Route path="/icon-button" element={<IconButton/>}/>
         <Route path="/inline-alert" element={<InlineAlert/>}/>
         <Route path="/input-slots" element={<InputSlots/>}/>
         <Route path="/input" element={<Input/>}/>
@@ -157,7 +152,6 @@ const AppImpl = () => {
         <Route path="/toast" element={<Toast/>}/>
         <Route path="/toggle" element={<Toggle/>}/>
         <Route path="/tooltip" element={<Tooltip/>}/>
-        <Route path="/vertical-stepper" element={<VerticalStepper/>}/>
       </Routes>
     </div>
   )

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import type { FC } from 'react'
 import '@nectary/components/popover'
-import '@nectary/components/icon-button'
 import '@nectary/components/color-swatch'
 import '@nectary/components/color-menu'
 import '@nectary/components/color-menu-option'
+import '@nectary/components/button'
 
 const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
 
@@ -26,14 +26,14 @@ export const IconButtonExample: FC = () => {
       modal
       on-close={onClose}
     >
-      <sinch-icon-button
+      <sinch-button
         slot="target"
         aria-label="Open color select"
         size="s"
         on-click={onOpen}
       >
         <sinch-color-swatch slot="icon" name={value}/>
-      </sinch-icon-button>
+      </sinch-button>
       <sinch-color-menu
         slot="content"
         value={value}
