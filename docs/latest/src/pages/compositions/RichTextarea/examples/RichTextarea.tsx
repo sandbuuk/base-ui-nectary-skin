@@ -14,14 +14,14 @@ import '@nectary/components/button'
 import '@nectary/components/dialog'
 
 const initialMd = `
-To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
+To set up the \`Product\`, read and accept 📝 the \`Product\` [terms & conditions](https://google.com).
 
-If ___you___ have *any questions*, contact your ~~parents~~😆 account __manager__.
+If ___you___ have *any questions*, contact your account __manager__ ✅.
 
-* list item 1
+* list item 1 😀
   1. inner item 1
-  1. inner item 2
-    * list \`LINE\` item 2
+  1. inner item 2 🚧
+    * list \`item\` 2
     * list item 3
   1. inner item 2
 * list item 2
