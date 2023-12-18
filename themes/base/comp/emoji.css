@@ -1,5 +1,4 @@
-:root,
-:host {
+.nectary-theme-base {
   /* --sinch-emoji-src-url: "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/%s.svg"; */
   --sinch-emoji-src-url: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/%s.svg";
 }
