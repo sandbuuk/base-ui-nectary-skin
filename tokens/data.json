@@ -7480,15 +7480,15 @@
               },
               "background": {
                 "initial": {
-                  "value": "#C9D1D6",
+                  "value": "#EBEEF0",
                   "type": "color"
                 },
                 "active": {
-                  "value": "#9EA9B0",
+                  "value": "#DCE2E5",
                   "type": "color"
                 },
                 "hover": {
-                  "value": "#DCE2E5",
+                  "value": "#C9D1D6",
                   "type": "color"
                 }
               }
@@ -7790,15 +7790,15 @@
               },
               "background": {
                 "initial": {
-                  "value": "#C9D1D6",
+                  "value": "#EBEEF0",
                   "type": "color"
                 },
                 "active": {
-                  "value": "#9EA9B0",
+                  "value": "#DCE2E5",
                   "type": "color"
                 },
                 "hover": {
-                  "value": "#DCE2E5",
+                  "value": "#C9D1D6",
                   "type": "color"
                 }
               }
@@ -8083,7 +8083,7 @@
                   "type": "color"
                 },
                 "active": {
-                  "value": "#EBEEF0",
+                  "value": "#DCE2E5",
                   "type": "color"
                 },
                 "hover": {
@@ -8113,6 +8113,38 @@
                   "value": "rgba(0,0,0,0)",
                   "type": "color"
                 }
+              }
+            }
+          }
+        }
+      },
+      "date-picker": {
+        "day": {
+          "color": {
+            "default": {
+              "background": {
+                "hover": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              },
+              "range": {
+                "background": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        }
+      },
+      "progress": {
+        "color": {
+          "default": {
+            "background": {
+              "initial": {
+                "value": "#DEF2FF",
+                "type": "color"
               }
             }
           }
@@ -9106,6 +9138,9 @@
         "comp.button.color.cta-secondary.default.background.hover": "8186eaf5f2afa86785bd9fffd87090f4086436a8",
         "comp.button.color.cta-secondary.disabled.background.initial": "a71de86a1cb7d78cfe606615ebeeefec312c6f8b",
         "comp.button.color.cta-secondary.disabled.border.initial": "655373408c5a2bbc10320881f72204da10065a7b",
+        "comp.date-picker.day.color.default.background.hover": "84d8e0325707d8768fef4e0f533cad5428e7ddf1",
+        "comp.date-picker.day.color.default.range.background": "78d0fbf4f5957412f0b6a574b6373a55711a4664",
+        "comp.progress.color.default.background.initial": "18248a4cd94484cdbb4bf8317ae3e17768a4ccda",
         "sys.shape-radius.l": "09dc54398b35c2e2f5100ee4a77bc9df27911a84",
         "sys.shape-radius.m": "0ffd5f6869ecf046919bcbc29a4be5f11c7757d0",
         "sys.shape-radius.s": "e5bceff6f8160f744613530caee75c3eaa2298d1",
@@ -9729,11 +9764,9 @@
         "comp.accordion.color.disabled.optional-text.initial": "24fe92640e25a20d42f155e1f03474d6fb0cf18a",
         "comp.accordion.size.icon": "5d3c117d99b53e1828190a66b0050ce11fe291c9",
         "comp.date-picker.day.color.default.background.initial": "a701c50117ca2a718adbc546c456b9764dc52d75",
-        "comp.date-picker.day.color.default.background.hover": "84d8e0325707d8768fef4e0f533cad5428e7ddf1",
         "comp.date-picker.day.color.default.border.initial": "a69bb6b9647c3815f838377ce421e75af56f9b39",
         "comp.date-picker.day.color.default.outline.focus": "98e39264eaa82bf187bab07cde0e6e2493ada80a",
         "comp.date-picker.day.color.default.text.initial": "3d0a95ae5c6144511cda399a57c61056ca166047",
-        "comp.date-picker.day.color.default.range.background": "78d0fbf4f5957412f0b6a574b6373a55711a4664",
         "comp.date-picker.day.color.checked.background.initial": "1291e9329a82cc269666f983ac10e731cee727ea",
         "comp.date-picker.day.color.checked.border.initial": "75568b282d346cd2cbc4e3e56f7adc8c64e38db3",
         "comp.date-picker.day.color.checked.text.initial": "14c4e7df918a4ecf0a4f1d60954659fd4f6fba15",
@@ -9794,7 +9827,6 @@
         "comp.pagination.color.checked.background.initial": "c82acf3f74b6e39b16465a12f75e1060c7564618",
         "comp.pagination.color.checked.background.hover": "a7e663d2e6edcdb5c6476d0523d43daa80c20132",
         "comp.pagination.shape-radius": "5a9965e9d1bfa510755c562fc9066ceb87b0d344",
-        "comp.progress.color.default.background.initial": "18248a4cd94484cdbb4bf8317ae3e17768a4ccda",
         "comp.progress.color.default.bar.initial": "49ba042873663e55c25142a16d8d7c6f9015adaa",
         "comp.progress.color.default.text.initial": "3c62dbd3c3ff90328ef85f356e85ef859d77c3d9",
         "comp.segment.color.default.background.initial": "e359ee019d86a84cc59ccf3aca61eb88c8a03305",
