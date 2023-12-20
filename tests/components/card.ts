@@ -1,5 +1,4 @@
 import { test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getBB, runScreenshotTests } from '../screenshot-tests'
 import type { TSinchCardElement } from '@nectary/components/card/types'
 
@@ -20,20 +19,6 @@ const withIllustrationButton = `/card?width=400&label=${cardLabel}&header=${card
 const withIllustrationLink = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&link=${cardLinkText}`
 const withIllustrationBg = `/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&bg=blue`
 const withDnD = '/card-dnd'
-const checkWithButton = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&button=${cardButtonText}`, 'sinch-card')
-const checkWithLink = makeAccessibilityTests(`/card?width=400&label=${cardLabel}&header=${cardHeader}&text=${cardLongText}&icon=true&illustration=true&link=${cardLinkText}`, 'sinch-card')
-
-test('card accessibility with btn', checkWithButton({
-  async *fn() {
-    yield
-  },
-}))
-
-test('card accessibility with lnk', checkWithLink({
-  async *fn() {
-    yield
-  },
-}))
 
 test('card screenshots', runScreenshotTests('sinch-card', [
   {

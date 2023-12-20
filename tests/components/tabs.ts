@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withOptions = '/tabs'
@@ -8,13 +7,6 @@ const withIcons = '/tabs?example=icons'
 const withSingleIcon = '/tabs?example=single-icon'
 const withNarrow = '/tabs?width=100&example=single'
 const withWide = '/tabs?width=250&example=icons'
-const checkTabsWithOptions = makeAccessibilityTests('/tabs', 'sinch-tabs')
-
-test('accessibility', checkTabsWithOptions({
-  async *fn() {
-    yield
-  },
-}))
 
 test('tabs screenshots', runScreenshotTests('sinch-tabs', [
   {

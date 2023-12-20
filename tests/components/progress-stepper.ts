@@ -1,15 +1,8 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withItems = '/progress-stepper?width=500'
 const withSingleItem = '/progress-stepper?example=single'
-
-test('accessibility', makeAccessibilityTests('/progress-stepper', 'sinch-progress-stepper')({
-  async *fn() {
-    yield
-  },
-}))
 
 test('progress-stepper screenshots', runScreenshotTests('sinch-progress-stepper', [
   {

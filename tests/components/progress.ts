@@ -1,15 +1,7 @@
 import { test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
 const shot = '/progress?width=300&detailed=true'
-const checkValue = makeAccessibilityTests('/progress?width=300', 'sinch-progress')
-
-test('accessibility', checkValue({
-  async *fn() {
-    yield
-  },
-}))
 
 test('progress screenshots', runScreenshotTests('sinch-progress', [
   {

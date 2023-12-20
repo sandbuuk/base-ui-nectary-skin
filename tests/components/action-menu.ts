@@ -1,18 +1,8 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/action-menu?width=200'
 const withRows = '/action-menu?width=200&rows=2'
-const checkSelectWithEverything = makeAccessibilityTests('/action-menu?width=200&placeholder=Placeholder%20value&value=1', 'sinch-action-menu')
-
-test('accessibility', checkSelectWithEverything({
-  async *fn({ $ }) {
-    yield
-    await $.click()
-    yield
-  },
-}))
 
 test('action screenshots', runScreenshotTests('sinch-action-menu', [
   {

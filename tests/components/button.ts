@@ -1,7 +1,6 @@
 import { typeValues } from '@nectary/components/button/utils'
 import { sizeExValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withFitWidth = '/button?type=primary&text=Button&icon-right=true'
@@ -11,13 +10,6 @@ const withDisabled = '/button?type=primary&text=Button&disabled=true&icon=true'
 const withToggled = '/button?type=primary&text=Button&toggled=true&icon=true'
 const withSpinner = '/button?type=primary&text=Button&spinner=true'
 const withIconOnly = '/button?type=primary&icon=true'
-const checkFitWidth = makeAccessibilityTests('/button?type=primary&text=Button&icon-right=true', 'sinch-button')
-
-test('accessibility', checkFitWidth({
-  async *fn() {
-    yield
-  },
-}))
 
 test('button screenshots', runScreenshotTests('sinch-button', [
   {

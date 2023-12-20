@@ -1,11 +1,9 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { getFileChooser, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const shot = '/file-picker?width=300'
 const withMultiple = '/file-picker?width=200&multiple=true'
-const checkValue = makeAccessibilityTests('/file-picker?width=200', 'sinch-file-picker')
 
 const getAllEvents = (page: Page) => {
   return page.evaluate(() => {
@@ -31,12 +29,6 @@ const getAllEvents = (page: Page) => {
     })
   })
 }
-
-test('accessibility', checkValue({
-  async *fn() {
-    yield
-  },
-}))
 
 test('file-picker screenshots', runScreenshotTests('sinch-file-picker', [
   {

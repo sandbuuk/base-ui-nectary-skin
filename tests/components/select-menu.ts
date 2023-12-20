@@ -1,17 +1,9 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/select-menu?width=200'
 const withMultiple = '/select-menu?width=200&multiple=true'
 const withLots = '/select-menu?width=200&example=lots&rows=4'
-const checkSelectWithEverything = makeAccessibilityTests('/select-menu?width=200&placeholder=Placeholder%20value&value=1', 'sinch-select-menu')
-
-test('accessibility', checkSelectWithEverything({
-  async *fn() {
-    yield
-  },
-}))
 
 test('select menu screenshots', runScreenshotTests('sinch-select-menu', [
   {

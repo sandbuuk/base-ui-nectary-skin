@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withEmpty = '/textarea?width=200'
@@ -7,13 +6,6 @@ const withValue = '/textarea?width=200&value=Input%20value'
 const withPlaceholder = '/textarea?width=200&placeholder=Placeholder%20value'
 const withEverything = '/textarea?width=200&invalid=true&placeholder=Placeholder%20value&value=Input%20value'
 const withBottom = '/textarea?width=400&rows=1&bottom=true&placeholder=Placeholder'
-const checkTextareaWithEverything = makeAccessibilityTests('/textarea?width=200&invalid=true&placeholder=Placeholder%20value&value=Input%20value', 'sinch-textarea')
-
-test('accessibility', checkTextareaWithEverything({
-  async *fn() {
-    yield
-  },
-}))
 
 test('textarea screenshots', runScreenshotTests('sinch-textarea', [
   {

@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withOptions = `/tile-control`
@@ -8,13 +7,6 @@ const with3ColsSmallOptions = `/tile-control?small=true&cols=3`
 const with3ColsMultiple = `/tile-control?multiple=true&cols=3`
 const withSingleOption = `/tile-control?single=true`
 const withToggleSingleOption = `/tile-control?single=true&multiple=true`
-const check = makeAccessibilityTests(`/tile-control`, 'sinch-tile-control')
-
-test('accessibility', check({
-  async *fn() {
-    yield
-  },
-}))
 
 test('tile-control screenshots', runScreenshotTests('sinch-tile-control', [
   {

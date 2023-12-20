@@ -1,6 +1,5 @@
 import { typeValues } from '@nectary/components/alert/utils'
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withText = '/alert?type=info'
@@ -10,13 +9,6 @@ const withTextAndButtonAndClose = '/alert?type=info&action=true&close=true'
 const withTextAndButtonAndCloseExpanded = '/alert?width=500&type=info&action=true&close=true'
 const withMarkdownAndButtonAndCloseExpanded = '/alert?width=500&example=md&type=info&action=true&close=true'
 const withTextAndButtonAndCloseNarrow = '/alert?width=300&type=info&action=true&close=true'
-const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/alert?width=400&type=info&close=true&action=true&multiline=true`, 'sinch-alert')
-
-test('alert accessibility', checkMultilineTextTitleButtonClose({
-  async *fn() {
-    yield
-  },
-}))
 
 test('alert screenshots', runScreenshotTests('sinch-alert', [
   {

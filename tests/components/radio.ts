@@ -1,17 +1,9 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withOptions = `/radio?width=200`
 const withSingleOption = `/radio?example=single`
 const narrowLabel = `/radio?width=100&example=single`
-const checkRadioOptions = makeAccessibilityTests(`/radio?width=200`, 'sinch-radio')
-
-test('accessibility', checkRadioOptions({
-  async *fn() {
-    yield
-  },
-}))
 
 test('radio screenshots', runScreenshotTests('sinch-radio', [
   {

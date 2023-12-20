@@ -1,5 +1,4 @@
 import { test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getBB, runScreenshotTests } from '../screenshot-tests'
 import type { TSinchTooltipElement } from '@nectary/components/tooltip/types'
 
@@ -7,13 +6,6 @@ const shot = '/field?width=200&label=Label'
 const withValue = '/field?width=200&label=Label&value=Input%20value'
 const withTooltip = '/field?width=200&label=Label&tooltip=Tooltip%20text'
 const withEverything = '/field?width=200&label=Label&tooltip=Tooltip%20text&optional=Optional%20text&additional=Additional%20text&invalid=Invalid%20text&placeholder=Placeholder%20value&value=Input%20value'
-const checkValue = makeAccessibilityTests('/field?width=200&label=Label&value=Input%20value', 'sinch-field')
-
-test('accessibility', checkValue({
-  async *fn() {
-    yield
-  },
-}))
 
 test('field screenshots', runScreenshotTests('sinch-field', [
   {

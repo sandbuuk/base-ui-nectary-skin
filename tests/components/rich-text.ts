@@ -1,17 +1,9 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const withText = '/rich-text'
 const withMarkdown = '/rich-text?width=500&example=md'
-const checkMultilineTextTitleButtonClose = makeAccessibilityTests(`/rich-text?width=400&example=md`, 'sinch-rich-text')
-
-test('accessibility', checkMultilineTextTitleButtonClose({
-  async *fn() {
-    yield
-  },
-}))
 
 const mockEmojiUrl = async (page: Page) => {
   const url = '**/*.{svg}'

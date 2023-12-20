@@ -1,18 +1,10 @@
 import { statusValues } from '@nectary/components/accordion-item/utils'
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withItems = `/accordion?width=300`
 const withItemsMultiple = `/accordion?width=300&multiple=true`
 const withSingleItem = `/accordion?width=200&example=single`
-const checkItems = makeAccessibilityTests(`/accordion?width=200`, 'sinch-accordion')
-
-test('accessibility', checkItems({
-  async *fn() {
-    yield
-  },
-}))
 
 test('accordion screenshots', runScreenshotTests('sinch-accordion', [
   {

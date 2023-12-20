@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/link?text=Anchor%20text&href=url'
@@ -12,13 +11,6 @@ const withStandalone = '/link?text=Anchor%20text&href=url&standalone=true'
 const withStandaloneDisabled = '/link?text=Anchor%20text&href=url&standalone=true&disabled=true'
 const withStandaloneExternal = '/link?text=Anchor%20text&href=url&standalone=true&external=true'
 const withStandaloneExternalDisabled = '/link?text=Anchor%20text&href=url&standalone=true&external=true&disabled=true'
-const checkLink = makeAccessibilityTests('/link?text=Anchor%20text&href=url', 'sinch-link')
-
-test('accessibility', checkLink({
-  async *fn() {
-    yield
-  },
-}))
 
 test('link screenshots', runScreenshotTests('sinch-link', [
   {

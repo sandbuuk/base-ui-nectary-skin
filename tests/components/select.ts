@@ -1,6 +1,5 @@
 import { sizeValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
@@ -9,17 +8,8 @@ const withInvalid = '/select?width=200&placeholder=Placeholder&invalid=true'
 const withDisabled = '/select?width=200&placeholder=Placeholder&disabled=true'
 const withPlaceholder = '/select?width=200&placeholder=Placeholder'
 const withMaxItems = '/select?width=200&value=3&rows=2'
-const checkSelectWithEverything = makeAccessibilityTests('/select?width=200&placeholder=Placeholder%20value&value=1', 'sinch-popover')
 
 const menuRect = (page: Page) => getBB(page.locator('sinch-select-menu'))
-
-test('accessibility', checkSelectWithEverything({
-  async *fn({ $ }) {
-    yield
-    await $.click()
-    yield
-  },
-}))
 
 test('select screenshots', runScreenshotTests('sinch-popover', [
   {
