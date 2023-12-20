@@ -49,6 +49,8 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
       await page.mouse.move(rect.x, rect.y)
       yield { name: 'hover' }
 
+      await page.mouse.move(0, 0)
+      await page.mouse.move(rect.x, rect.y)
       await page.mouse.down()
       yield { name: 'active' }
     },
@@ -63,6 +65,8 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
       await page.mouse.move(rect.x, rect.y)
       yield { name: 'hover' }
 
+      await page.mouse.move(0, 0)
+      await page.mouse.move(rect.x, rect.y)
       await page.mouse.down()
       yield { name: 'active' }
     },
@@ -76,6 +80,8 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
       await page.mouse.move(rect.x, rect.y)
       yield { name: 'hover' }
 
+      await page.mouse.move(0, 0)
+      await page.mouse.move(rect.x, rect.y)
       await page.mouse.down()
       yield { name: 'active' }
     },
@@ -90,6 +96,8 @@ test('tabs screenshots', runScreenshotTests('sinch-tabs', [
       await page.mouse.move(rect.x, rect.y)
       yield { name: 'hover' }
 
+      await page.mouse.move(0, 0)
+      await page.mouse.move(rect.x, rect.y)
       await page.mouse.down()
       yield { name: 'active' }
     },
