@@ -1,3 +1,7 @@
+## v0.5.1 (2023-12-21)
+
+* 🐞 fix classes in base theme
+
 ## v0.5.0 (2023-11-29)
 
 * 💥 remove `icon-button`
