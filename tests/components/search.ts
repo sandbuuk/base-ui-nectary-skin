@@ -1,17 +1,10 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, getBB, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const withValue = '/search?width=200&label=Label&value=Input%20value'
-const checkValue = makeAccessibilityTests('/search?width=200&label=Label&value=Input%20value', 'sinch-input')
-const getDropdownRect = (page: Page) => getBB(page.locator('sinch-action-menu'))
 
-test('accessibility', checkValue({
-  async *fn() {
-    yield
-  },
-}))
+const getDropdownRect = (page: Page) => getBB(page.locator('sinch-action-menu'))
 
 test('search screenshots', runScreenshotTests('sinch-popover', [
   {

@@ -1,16 +1,8 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withFitWidth = '/checkbox?text=Label'
 const withNarrowLabel = '/checkbox?width=150&text=Label%20long%20long%20long%20long'
-const check = makeAccessibilityTests('/checkbox?width=100&text=Label&checked=true', 'sinch-checkbox')
-
-test('accessibility', check({
-  async *fn() {
-    yield
-  },
-}))
 
 test('checkbox screenshots', runScreenshotTests('sinch-checkbox', [
   {

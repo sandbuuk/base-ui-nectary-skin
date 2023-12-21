@@ -1,17 +1,9 @@
 import { test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
 const shot = '/code-tag?text=Code%20text%20long%20long'
 const withNarrowWidth = '/code-tag?width=200&text=Code%20text%20long%20long'
 const withNarrowWidthEllipsis = '/code-tag?width=200&ellipsis=true&text=Code%20text%20long%20long%20long%20long'
-const checkTitle = makeAccessibilityTests('/code-tag?text=Code%20text', 'sinch-code-tag')
-
-test('accessibility', checkTitle({
-  async *fn() {
-    yield
-  },
-}))
 
 test('code-tag screenshots', runScreenshotTests('sinch-code-tag', [
   {

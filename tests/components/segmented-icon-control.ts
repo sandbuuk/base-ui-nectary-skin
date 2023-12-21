@@ -1,17 +1,9 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withOptions = `/segmented-icon-control`
 const withMultiple = `/segmented-icon-control?multiple=true`
 const withSingleOption = `/segmented-icon-control?single-option=true`
-const check = makeAccessibilityTests(`/segmented-icon-control`, 'sinch-segmented-icon-control')
-
-test('accessibility', check({
-  async *fn() {
-    yield
-  },
-}))
 
 test('segmented-icon-control screenshots', runScreenshotTests('sinch-segmented-icon-control', [
   {

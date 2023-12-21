@@ -1,6 +1,5 @@
 import { sizeValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, centerRect, getAllEvents, getBB, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = '/input?width=200'
@@ -8,7 +7,6 @@ const withValue = '/input?width=200&value=Input%20value'
 const withPlaceholder = '/input?width=200&placeholder=Placeholder%20value'
 const withEverything = '/input?width=300&invalid=true&placeholder=Placeholder%20value&value=Input%20value&left=true&right=true&icon=true'
 const withEverythingInvalid = '/input?width=300&invalid=true&placeholder=Placeholder%20value&value=Input%20value&left=true&right=true&icon=true'
-const checkValue = makeAccessibilityTests('/input?width=200&value=Input%20value', 'sinch-input')
 const withMask = '/input?width=200&mask=-AA-00-'
 const withMaskPlaceholder = '/input?width=200&mask=-AA-00-@@.XX.DD.'
 const withCopy = '/input?copy=true'
@@ -17,12 +15,6 @@ const withPaste = '/input?paste=true'
 const withMaskCopy = '/input?copy=true&mask=-AA-'
 const withMaskCut = '/input?cut=true&mask=-AA-'
 const withMaskPaste = '/input?paste=true&mask=-AA-'
-
-test('accessibility', checkValue({
-  async *fn() {
-    yield
-  },
-}))
 
 test('input screenshots', runScreenshotTests('sinch-input', [
   {

@@ -1,4 +1,3 @@
-:root,
-:host {
+.nectary-theme-base {
   --sinch-flag-src-url: "https://flagcdn.com/%s.svg";
 }

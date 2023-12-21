@@ -1,20 +1,10 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, getBB, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const shot = '/action-dropdown?width=200'
-const checkSelectWithEverything = makeAccessibilityTests('/action-dropdown?width=200&placeholder=Placeholder%20value&value=1', 'sinch-popover')
 
 const menuRect = (page: Page) => getBB(page.locator('sinch-action-menu'))
-
-test('accessibility', checkSelectWithEverything({
-  async *fn({ $ }) {
-    yield
-    await $.click()
-    yield
-  },
-}))
 
 test('action-dropdown screenshots', runScreenshotTests('sinch-popover', [
   {

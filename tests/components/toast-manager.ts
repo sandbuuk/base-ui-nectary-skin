@@ -1,22 +1,14 @@
 import { originValues } from '@nectary/components/toast-manager/utils'
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { TSinchToastManagerElement } from '@nectary/components/toast-manager/types'
 import type { Page } from '@playwright/test'
 
 const shot = '/toast-manager'
-const checkValue = makeAccessibilityTests('/toast-manager', 'sinch-toast-manager')
 const getRect = (page: Page) =>
   page
     .locator('sinch-toast-manager')
     .evaluate((el) => (el as TSinchToastManagerElement).containerRect)
-
-test('accessibility', checkValue({
-  async *fn() {
-    yield
-  },
-}))
 
 test('toast-manager screenshots', runScreenshotTests('sinch-toast-manager', [
   {

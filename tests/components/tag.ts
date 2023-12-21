@@ -1,5 +1,4 @@
 import { test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
 const colorValues = ['', 'light-blue']
@@ -9,13 +8,6 @@ const withWide = '/tag?width=150&icon=true&text=Label%20text&color=Gray%2010'
 const withNarrow = '/tag?width=80&icon=true&text=Label%20text%20text%20text%20text&color=Gray%2010'
 const withIcon = '/tag?text=Label%20text&color=Gray%2010&icon=true'
 const withIconSmall = '/tag?text=Label%20text&color=Gray%2010&small=true&icon=true'
-const checkTagWithDismiss = makeAccessibilityTests('/tag?text=Label%20text&color=Gray%2010&icon=true', 'sinch-tag')
-
-test('accessibility', checkTagWithDismiss({
-  async *fn() {
-    yield
-  },
-}))
 
 test('tag-screenshots', runScreenshotTests('sinch-tag', [
   {

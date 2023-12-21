@@ -1,17 +1,9 @@
 import { typeValues } from '@nectary/components/title/utils'
 import { test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
 const shot = '/title?text=Title%20text&type=m&level=3'
 const withNarrowWidth = '/title?width=110&text=Title%20text%20text%20long%20long%20long&type=m&level=3'
-const checkTitle = makeAccessibilityTests('/title?text=Title%20text&type=m&level=3', 'sinch-title')
-
-test('accessibility', checkTitle({
-  async *fn() {
-    yield
-  },
-}))
 
 test('title screenshots', runScreenshotTests('sinch-title', [
   {

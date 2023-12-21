@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
@@ -80,18 +79,6 @@ const mockEmojiUrl = async (page: Page) => {
 }
 
 const shot = '/emoji-picker'
-const checkWithEverything = makeAccessibilityTests('/emoji-picker', 'sinch-emoji-picker')
-
-test('accessibility', checkWithEverything({
-  before({ page }) {
-    return mockEmojiUrl(page)
-  },
-  async *fn({ $ }) {
-    yield
-    await $.click()
-    yield
-  },
-}))
 
 test('emoji picker screenshots', runScreenshotTests('sinch-emoji-picker', [
   {

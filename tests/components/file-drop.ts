@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getFileChooser, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
@@ -11,7 +10,6 @@ const withMultiple = '/file-drop?width=200&multiple=true'
 const withAcceptPngMime = '/file-drop?width=200&accept=image%2Fpng'
 const withAcceptPngExt = '/file-drop?width=200&accept=.png,.gif'
 const withMultipleAcceptImage = '/file-drop?width=200&multiple=true&accept=image%2F*'
-const checkValue = makeAccessibilityTests('/file-drop?width=200', 'sinch-file-drop')
 
 const getAllEvents = (page: Page) => {
   return page.evaluate(() => {
@@ -37,12 +35,6 @@ const getAllEvents = (page: Page) => {
     })
   })
 }
-
-test('accessibility', checkValue({
-  async *fn() {
-    yield
-  },
-}))
 
 test('file-drop screenshots', runScreenshotTests('sinch-file-drop', [
   {

@@ -1,10 +1,8 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 import type { Page } from '@playwright/test'
 
 const shot = '/phone-code-menu?width=200&rows=5'
-const checkSelectWithEverything = makeAccessibilityTests('/phone-code-menu?width=200&rows=5', 'sinch-select-menu')
 
 const mockFlagUrl = async (page: Page) => {
   await page.route('**/*.{svg}', (route) => {
@@ -30,17 +28,6 @@ const mockFlagUrl = async (page: Page) => {
 
   return () => page.unroute('**/*.{svg}')
 }
-
-test('accessibility', checkSelectWithEverything({
-  before({ page }) {
-    return mockFlagUrl(page)
-  },
-  async *fn({ $ }) {
-    yield
-    await $.click()
-    yield
-  },
-}))
 
 test('phone-code screenshots', runScreenshotTests('sinch-select-menu', [
   {

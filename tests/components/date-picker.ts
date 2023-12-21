@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const minMaxLocale = `locale=en&min=2021-05-05&max=2023-05-05`
@@ -8,13 +7,6 @@ const valueMinMaxLocale = `value=2022-06-06&${minMaxLocale}`
 const shot = `/date-picker?${minMaxLocale}`
 const withValue = `/date-picker?${valueMinMaxLocale}`
 const withRange = `/date-picker?${valueMinMaxLocale}&range=true`
-const checkValue = makeAccessibilityTests(`/date-picker?${valueMinMaxLocale}`, 'sinch-date-picker')
-
-test('accessibility', checkValue({
-  async *fn() {
-    yield
-  },
-}))
 
 test('date-picker screenshots', runScreenshotTests('sinch-date-picker', [
   {

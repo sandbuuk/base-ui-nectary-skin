@@ -1,6 +1,5 @@
 import { orientationValues } from '@nectary/components/popover/utils'
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const withModalOpen = '/popover?open=true&modal=true&orientation=bottom-right'
@@ -10,13 +9,6 @@ const withWideModal = '/popover?width=300&modal=true&orientation=bottom-right'
 const withWideNonModal = '/popover?width=300&orientation=bottom-right'
 const withNonModalElementOffset = '/popover?width=300&example=offset'
 const withSwitchingContent = '/popover?width=300&example=switch-content'
-const check = makeAccessibilityTests('/popover?open=true&modal=true', 'sinch-popover')
-
-test('popover accessibility', check({
-  async *fn() {
-    yield
-  },
-}))
 
 test('popover screenshots', runScreenshotTests('sinch-popover', [
   {

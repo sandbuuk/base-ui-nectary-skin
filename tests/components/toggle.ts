@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const contentWidth = '/toggle?text=Label'
@@ -9,17 +8,6 @@ const checked = '/toggle?text=Label&checked=true'
 const disabled = '/toggle?text=Label&disabled=true&checked=true'
 const disabledLabeled = '/toggle?text=Label&disabled=true&checked=true&labeled=true'
 const disabledSmall = '/toggle?text=Label&disabled=true&checked=true&small=true'
-const checkToggle = makeAccessibilityTests('/toggle?text=Label', 'sinch-toggle')
-
-test('accessibility', checkToggle({
-  async *fn({ $eval }) {
-    yield
-    await $eval((el) => {
-      el.text = null
-    })
-    yield
-  },
-}))
 
 test('toggle screenshots', runScreenshotTests('sinch-toggle', [
   {

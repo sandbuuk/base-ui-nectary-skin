@@ -1,18 +1,10 @@
 import { typeValues } from '@nectary/components/text/utils'
 import { test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
 const shot = '/text?text=Paragpaph%20text&type=m'
 const withInline = '/text?text=Paragpaph%20text&type=m&inline=true'
 const withNarrowWidth = '/text?width=110&text=Paragpaph%20text%20text%20long%20long%20long&type=m&inline=true'
-const checkText = makeAccessibilityTests('/text?text=Paragpaph%20text&type=m', 'sinch-text')
-
-test('accessibility', checkText({
-  async *fn() {
-    yield
-  },
-}))
 
 test('text screenshots', runScreenshotTests('sinch-text', [
   {

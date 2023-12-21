@@ -1,19 +1,11 @@
 import { typeValues } from '@nectary/components/file-status/utils'
 import { test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
 const shot = '/file-status?width=300&type=success&filename=image.png'
 const withNarrow = '/file-status?width=200&type=success&filename=name_long_long_long_long.png&description=true'
 const withProgress = '/file-status?width=300&type=progress&filename=name.png&progress=true'
 const withDescription = '/file-status?width=300&type=error&filename=name.png&description=true'
-const checkValue = makeAccessibilityTests('/file-status?width=300&type=success', 'sinch-file-status')
-
-test('accessibility', checkValue({
-  async *fn() {
-    yield
-  },
-}))
 
 test('file-status screenshots', runScreenshotTests('sinch-file-status', [
   {

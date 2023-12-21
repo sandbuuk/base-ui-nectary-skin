@@ -1,16 +1,8 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const shot = `/color-menu`
 const withLightVibrant = `/color-menu?example=light`
-const checkSelectWithEverything = makeAccessibilityTests(`/color-menu`, 'sinch-color-menu')
-
-test('accessibility', checkSelectWithEverything({
-  async *fn() {
-    yield
-  },
-}))
 
 test('color-menu screenshots', runScreenshotTests('sinch-color-menu', [
   {

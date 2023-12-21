@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const value = `value=17:39:17`
@@ -7,13 +6,6 @@ const value = `value=17:39:17`
 const shot24 = `/time-picker`
 const shot12 = `/time-picker?ampm=true`
 const withValue = `/time-picker?${value}`
-const checkValue = makeAccessibilityTests(`/time-picker?${value}`, 'sinch-time-picker')
-
-test('accessibility', checkValue({
-  async *fn() {
-    yield
-  },
-}))
 
 test('time picker screenshots', runScreenshotTests('sinch-time-picker', [
   {

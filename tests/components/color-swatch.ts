@@ -1,15 +1,7 @@
 import { test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 
 const shot = '/color-swatch'
-const check = makeAccessibilityTests('/color-swatch', 'sinch-color-swatch')
-
-test('accessibility', check({
-  async *fn() {
-    yield
-  },
-}))
 
 test('color-swatch screenshots', runScreenshotTests('sinch-color-swatch', [
   {

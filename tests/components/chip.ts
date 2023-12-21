@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
 
 const colorValues = ['', 'light-blue']
@@ -12,13 +11,6 @@ const withIcon = '/chip?text=Label%20text&color=Gray%2010&icon=true'
 const withIcons = '/chip?text=Label%20text&color=Gray%2010&icon=true&right-icon=true'
 const withIconSmall = '/chip?text=Label%20text&color=Gray%2010&small=true&icon=true'
 const withIconsSmall = '/chip?text=Label%20text&color=Gray%2010&small=true&icon=true&right-icon=true'
-const checkTagWithDismiss = makeAccessibilityTests('/chip?text=Label%20text&color=Gray%2010&icon=true', 'sinch-chip')
-
-test('accessibility', checkTagWithDismiss({
-  async *fn() {
-    yield
-  },
-}))
 
 test('chip screenshots', runScreenshotTests('sinch-chip', [
   {

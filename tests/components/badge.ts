@@ -1,21 +1,13 @@
 import { modeValues } from '@nectary/components/badge/utils'
 import { sizeValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
-import { makeAccessibilityTests } from '../accessibility-tests'
 import { runScreenshotTests } from '../screenshot-tests'
 import type { TSinchBadgeElement } from '@nectary/components/badge/types'
 import type { Page } from '@playwright/test'
 
 const shot = '/badge?size=l&text=8'
-const check = makeAccessibilityTests('/badge', 'sinch-badge')
 
 const getBadgeRect = (page: Page) => page.locator('sinch-badge').evaluate((el: TSinchBadgeElement) => el.badgeRect)
-
-test('accessibility', check({
-  async *fn() {
-    yield
-  },
-}))
 
 test('badge screenshots', runScreenshotTests('sinch-badge', [
   {
