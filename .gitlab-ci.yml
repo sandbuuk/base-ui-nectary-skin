@@ -2,9 +2,9 @@ variables:
   GIT_DEPTH: 1
 
 include:
-  - project: 'sinch/sinch-projects/sinch-platform/infra/pipeline/security'
+  - project: "sinch/sinch-projects/sinch-platform/infra/pipeline/security"
     ref: v1-latest
-    file: 'auto_security.yml'
+    file: "auto_security.yml"
 
 default:
   tags:
@@ -135,13 +135,13 @@ publish-theme-base:
       prefix: cache
     paths:
       - .pnpm-store
-    # policy: pull
+    policy: pull
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile #--offline --reporter silent
+    - pnpm install --frozen-lockfile --offline --reporter silent
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish themes/base/ --verbose
