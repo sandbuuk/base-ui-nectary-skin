@@ -61,6 +61,7 @@ visual-tests:
           - firefox-vue
           - webkit-angular
   before_script:
+    - uname -a
     - npm install --no-audit --no-fund --global pnpm
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile --offline --reporter silent
