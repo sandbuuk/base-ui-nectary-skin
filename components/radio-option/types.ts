@@ -13,6 +13,7 @@ export type TSinchRadioOptionElement = HTMLElement & {
 
 export type TSinchRadioOptionReact = TSinchElementReact<TSinchRadioOptionElement> & {
   value: string,
+  checked?: boolean,
   disabled?: boolean,
   text: string,
   'aria-label': string,
