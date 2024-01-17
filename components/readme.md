@@ -8,12 +8,6 @@ Design System's framework-agnostic Component Library implementation.
 
 ## Install
 
-Add the following line to `.npmrc` in the project root:
-
-```
-//registry.npmjs.org/:_authToken=REDACTED
-```
-
 Add the component library dependency to `package.json`:
 
 ```
