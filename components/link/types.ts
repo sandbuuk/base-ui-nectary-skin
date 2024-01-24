@@ -7,6 +7,8 @@ export type TSinchLinkElement = HTMLElement & {
   href: string,
   /** Disabled */
   disabled: boolean,
+  /** Replaces the anchor tag behaviour to use history instead */
+  'use-history': boolean,
   /** Sets `target="_blank" and a special external icon on the left side */
   external: boolean,
   /** Special standalone (`display: block`) mode with an arrow icon on the right side */
@@ -38,6 +40,8 @@ export type TSinchLinkReact = TSinchElementReact<TSinchLinkElement> & {
   text: string,
   /** URL that hyperlink point to */
   href: string,
+  /** Replaces the anchor tag behaviour to use history instead */
+  'use-history'?: boolean,
   /** Disabled */
   disabled?: boolean,
   /** Sets `target="_blank" and a special external icon on the left side */

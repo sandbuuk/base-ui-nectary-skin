@@ -60,11 +60,24 @@ export const createParseVisitor = (doc: Document) => {
 
           $p!.appendChild($br)
         },
-        link(text, href) {
+        link(text, href, attributes) {
           const $link = doc.createElement('sinch-link') as TSinchLinkElement
 
           $link.text = text
           $link.href = href
+
+          if (attributes != null) {
+            attributes.forEach((attr) => {
+              switch (attr) {
+                case 'use-history':
+                  $link['use-history'] = true
+
+                  break
+                default:
+                  break
+              }
+            })
+          }
 
           $p!.appendChild($link)
         },

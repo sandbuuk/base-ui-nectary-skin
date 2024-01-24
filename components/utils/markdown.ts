@@ -5,7 +5,7 @@ export type TMarkdownInlineParams = {
 }
 
 export type TMarkdownParseVisitor = {
-  link(text: string, href: string): void,
+  link(text: string, href: string, attributes?: string[]): void,
   emoji(emojiChar: string): void,
   codetag(text: string): void,
   inline(text: string, params: TMarkdownInlineParams): void,
@@ -27,7 +27,7 @@ const regEm2Underscore = /__(?<em2>.+?)__/
 const regEm1Underscore = /_(?<em1>.+?)_/
 const regCodeTag = /`(?<code>.+?)`/
 const regStrikethrough = /~~(?<strike>.+?)~~/
-const regLink = /!?\[(?<linktext>[^\]]*?)\]\((?<linkhref>[^)]+?)\)/
+const regLink = /!?\[(?<linktext>[^\]]*?)\]\((?<linkhref>[^)]+?)\)(\{(?<linkattrs>[^)]+?)\})?/
 const regEmoji = /(?<emoji>(?![0-9*#])\p{Emoji})/u
 const regUList = /^(?<indent>[\t ]*?)[*+-][\t ]+(?<ultext>.*?)[\t ]*?$/
 const regOList = /^(?<indent>[\t ]*?)\d+\.[\t ]+(?<oltext>.*?)[\t ]*?$/
@@ -77,7 +77,7 @@ const createLineParser = (visitor: Readonly<TMarkdownParseVisitor>) =>
     let match: RegExpExecArray | null = null
 
     while ((match = matchClosest(regs, line)) !== null) {
-      const groups = match.groups!
+      const groups = match.groups
       const matchedStr = match[0]
 
       if (match.index > 0) {
@@ -86,19 +86,19 @@ const createLineParser = (visitor: Readonly<TMarkdownParseVisitor>) =>
 
       line = line.substring(match.index + matchedStr.length)
 
-      if (groups.linkhref != null) {
-        visitor.link(groups.linktext, groups.linkhref)
+      if (groups?.linkhref != null) {
+        visitor.link(groups.linktext, groups.linkhref, groups.linkattrs?.split(' '))
       }
 
-      if (groups.code != null) {
+      if (groups?.code != null) {
         visitor.codetag(groups.code)
       }
 
-      if (groups.emoji != null) {
+      if (groups?.emoji != null) {
         visitor.emoji(groups.emoji)
       }
 
-      if (groups.em1 != null) {
+      if (groups?.em1 != null) {
         parseLine(
           excludeRegs(regs, regEm1Star, regEm1Underscore),
           groups.em1,
@@ -106,7 +106,7 @@ const createLineParser = (visitor: Readonly<TMarkdownParseVisitor>) =>
         )
       }
 
-      if (groups.em2 != null) {
+      if (groups?.em2 != null) {
         parseLine(
           excludeRegs(regs, regEm2Star, regEm2Underscore),
           groups.em2,
@@ -114,7 +114,7 @@ const createLineParser = (visitor: Readonly<TMarkdownParseVisitor>) =>
         )
       }
 
-      if (groups.em3 != null) {
+      if (groups?.em3 != null) {
         parseLine(
           excludeRegs(regs, regEm3Star, regEm3Underscore, regEm2Star, regEm2Underscore, regEm1Star, regEm1Underscore),
           groups.em3,
@@ -122,7 +122,7 @@ const createLineParser = (visitor: Readonly<TMarkdownParseVisitor>) =>
         )
       }
 
-      if (groups.strike != null) {
+      if (groups?.strike != null) {
         parseLine(
           excludeRegs(regs, regStrikethrough),
           groups.strike,

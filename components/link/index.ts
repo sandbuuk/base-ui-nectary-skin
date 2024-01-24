@@ -55,6 +55,7 @@ defineCustomElement('sinch-link', class extends NectaryElement {
     return [
       'text',
       'href',
+      'use-history',
       'external',
       'standalone',
       'disabled',
@@ -75,6 +76,18 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
       case 'href': {
         updateAttribute(this.#$anchor, 'href', newVal)
+
+        break
+      }
+
+      case 'use-history': {
+        const shouldUseHistory = isAttrTrue(newVal)
+
+        if (shouldUseHistory) {
+          updateBooleanAttribute(this, 'preventdefault', true)
+        }
+
+        updateBooleanAttribute(this, name, shouldUseHistory)
 
         break
       }
@@ -111,6 +124,14 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 
   set href(value: string) {
     updateAttribute(this, 'href', value)
+  }
+
+  set 'use-history'(value: boolean) {
+    updateBooleanAttribute(this, 'use-history', value)
+  }
+
+  get 'use-history'() {
+    return getBooleanAttribute(this, 'use-history')
   }
 
   set disabled(isDisabled: boolean) {
@@ -160,6 +181,10 @@ defineCustomElement('sinch-link', class extends NectaryElement {
   #onAnchorClick = (e: Event) => {
     if (this.preventDefault) {
       e.preventDefault()
+
+      if (this['use-history']) {
+        history.pushState({}, '', this.href)
+      }
     }
 
     this.dispatchEvent(

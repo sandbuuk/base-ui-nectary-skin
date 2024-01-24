@@ -4,6 +4,7 @@ import { ExternalExample } from './examples/External.tsx?example'
 import { ClickExample } from './examples/Click.tsx?example'
 import { StandaloneExample } from './examples/Standalone.tsx?example'
 import { StandaloneExternalExample } from './examples/StandaloneExternal.tsx?example'
+import { HistoryExample } from './examples/History.tsx?example'
 
 # Examples
 
@@ -42,3 +43,9 @@ Standalone link has `display: block` and special arrow icon on the right side.
 A standalone link is a type of user interface element that allows users to a different webpage by clicking on it.  A standalone link should never be used embbeded in a text.
 
 <Example Component={StandaloneExternalExample}/>
+
+## Use History
+
+navigate using `history.pushState` instead of the default anchor behaviour
+
+<Example Component={HistoryExample}/>
