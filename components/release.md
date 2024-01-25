@@ -4,5 +4,6 @@
    - Use ➕ for new features
    - Use 🐞 for bug fixing
    - Use 💥 for new breaking change (only on major versions)
-2. commit and merge the change
-3. tag the commit with `components@<version>` for example `components@2.8.0` & push
+2. Update the `version` in package.json
+3. commit and merge the change
+4. tag the commit with `components@<version>` for example `components@2.8.0` & push
