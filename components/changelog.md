@@ -1,3 +1,10 @@
+## v2.8.0 (2024-01-25)
+
+* ➕ markdown support for use-history when doing links
+* ➕ add `use-history` state to `sinch-link`
+* ➕ TileControl: increase maximum columns to 10
+* ➕ add standalone file for nectary
+
 ## v2.7.0 (2023-11-29)
 
 * ➕ add `sinch-rich-textarea` component
