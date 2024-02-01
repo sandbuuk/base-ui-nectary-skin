@@ -6,6 +6,9 @@
     "**/*/*.json",
     "**/*/*.js",
     "**/*/*.d.ts",
+    "standalone.ts",
+    "standalone.d.ts",
+    "standalone.ts",
     "types.d.ts",
     "colors.json"
   ],
