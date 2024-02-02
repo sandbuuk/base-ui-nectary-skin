@@ -8,7 +8,7 @@
     "**/*/*.d.ts",
     "standalone.ts",
     "standalone.d.ts",
-    "standalone.ts",
+    "standalone.js",
     "types.d.ts",
     "colors.json"
   ],
