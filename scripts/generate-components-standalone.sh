@@ -13,7 +13,7 @@ cat <<EOT > "$output_file"
 /* eslint-disable import/first */
 import { setNectaryRegistry } from './utils'
 
-setNectaryRegistry(window.customElements)
+setNectaryRegistry(window.customElements);
 
 // Reminder: Keep this list updated as we add new components
 EOT
@@ -27,7 +27,7 @@ for dir in */ ; do
     if [ "$dir" == "utils/" ]; then
         continue
     fi
-        echo "import './${dir%/}'" >> "$output_file"
+        echo "import './${dir%/}/index.js'" >> "$output_file"
     fi
 done
 
