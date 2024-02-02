@@ -1,3 +1,7 @@
+## v2.8.3 (2024-02-02)
+
+- 🐞 Attempt to fix skypack issue
+
 ## v2.8.2 (2024-02-01)
 
 - 🐞 Fix issue with unpkg
