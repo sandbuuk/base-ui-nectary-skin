@@ -26,8 +26,11 @@ for dir in */ ; do
     # Ignore utils
     if [ "$dir" == "utils/" ]; then
         continue
+    # ignore nodemodules
+    elif [ "$dir" == "node_modules/" ]; then
+        continue
     fi
-        echo "import './${dir%/}'" >> "$output_file"
+        echo "import './${dir%/}/index.js'" >> "$output_file"
     fi
 done
 
