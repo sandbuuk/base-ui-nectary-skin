@@ -1,3 +1,7 @@
+## v2.8.2 (2024-02-01)
+
+- 🐞 Fix issue with unpkg
+
 ## v2.8.1 (2024-02-01)
 
 - 🐞 Ensure that standalone file is included
