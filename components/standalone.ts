@@ -3,7 +3,7 @@
 /* eslint-disable import/first */
 import { setNectaryRegistry } from './utils'
 
-setNectaryRegistry(window.customElements);
+setNectaryRegistry(window.customElements)
 
 // Reminder: Keep this list updated as we add new components
 import './accordion-item/index.js'
