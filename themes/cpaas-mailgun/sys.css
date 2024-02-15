@@ -1,0 +1,12 @@
+.nectary-theme-base.cpaas-theme-base.cpaas-theme-mailgun {
+  --sinch-sys-color-cta-active: #EB5454;
+  --sinch-sys-color-cta-default: #BD3C41;
+  --sinch-sys-color-cta-disabled: #BD3C4166;
+  --sinch-sys-color-cta-foreground: #FFFFFF;
+  --sinch-sys-color-cta-hover: #993138;
+  --sinch-sys-color-primary-active: #0D304A;
+  --sinch-sys-color-primary-default: #145A8F;
+  --sinch-sys-color-primary-disabled: #145A8F66;
+  --sinch-sys-color-primary-foreground: #FFFFFF;
+  --sinch-sys-color-primary-hover: #116FAD;
+}

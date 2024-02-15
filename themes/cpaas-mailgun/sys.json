@@ -1,0 +1,18 @@
+{
+  "color": {
+    "cta": {
+      "active": "#EB5454",
+      "default": "#BD3C41",
+      "disabled": "#BD3C4166",
+      "foreground": "#FFFFFF",
+      "hover": "#993138"
+    },
+    "primary": {
+      "active": "#0D304A",
+      "default": "#145A8F",
+      "disabled": "#145A8F66",
+      "foreground": "#FFFFFF",
+      "hover": "#116FAD"
+    }
+  }
+}

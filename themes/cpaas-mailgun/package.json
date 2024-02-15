@@ -1,0 +1,13 @@
+{
+  "name": "@nectary/theme-cpaas-mailgun",
+  "version": "0.0.0",
+  "files": [
+    "**/*.css",
+    "*.json",
+    "*.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "index.css"
+}

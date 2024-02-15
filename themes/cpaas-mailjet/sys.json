@@ -1,0 +1,23 @@
+{
+  "color": {
+    "cta": {
+      "active": "#4D4AA8",
+      "default": "#645DC2",
+      "disabled": "#645DC266",
+      "foreground": "#FFFFFF",
+      "hover": "#857AEB"
+    },
+    "primary": {
+      "active": "#0C333B",
+      "default": "#006063",
+      "disabled": "#00606366",
+      "foreground": "#FFFFFF",
+      "hover": "#007874"
+    }
+  },
+  "shape-radius": {
+    "m": "8px",
+    "s": "4px",
+    "xs": "0"
+  }
+}

@@ -1,0 +1,15 @@
+.nectary-theme-base.cpaas-theme-base.cpaas-theme-mailjet {
+  --sinch-sys-color-cta-active: #4D4AA8;
+  --sinch-sys-color-cta-default: #645DC2;
+  --sinch-sys-color-cta-disabled: #645DC266;
+  --sinch-sys-color-cta-foreground: #FFFFFF;
+  --sinch-sys-color-cta-hover: #857AEB;
+  --sinch-sys-color-primary-active: #0C333B;
+  --sinch-sys-color-primary-default: #006063;
+  --sinch-sys-color-primary-disabled: #00606366;
+  --sinch-sys-color-primary-foreground: #FFFFFF;
+  --sinch-sys-color-primary-hover: #007874;
+  --sinch-sys-shape-radius-m: 8px;
+  --sinch-sys-shape-radius-s: 4px;
+  --sinch-sys-shape-radius-xs: 0;
+}

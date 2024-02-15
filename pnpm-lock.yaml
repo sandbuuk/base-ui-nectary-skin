@@ -215,9 +215,24 @@ importers:
       '@nectary/theme-base':
         specifier: workspace:*
         version: link:../../themes/base
+      '@nectary/theme-cpaas-base':
+        specifier: workspace:*
+        version: link:../../themes/cpaas-base
+      '@nectary/theme-cpaas-dashboard':
+        specifier: workspace:*
+        version: link:../../themes/cpaas-dashboard
+      '@nectary/theme-cpaas-mailgun':
+        specifier: workspace:*
+        version: link:../../themes/cpaas-mailgun
+      '@nectary/theme-cpaas-mailjet':
+        specifier: workspace:*
+        version: link:../../themes/cpaas-mailjet
       '@nectary/theme-dark':
         specifier: workspace:*
         version: link:../../themes/dark
+      '@nectary/theme-message-media':
+        specifier: workspace:*
+        version: link:../../themes/message-media
       core-js:
         specifier: ^3.32.2
         version: 3.32.2
@@ -372,9 +387,24 @@ importers:
       '@nectary/theme-base':
         specifier: workspace:*
         version: link:../../themes/base
+      '@nectary/theme-cpaas-base':
+        specifier: workspace:*
+        version: link:../../themes/cpaas-base
+      '@nectary/theme-cpaas-dashboard':
+        specifier: workspace:*
+        version: link:../../themes/cpaas-dashboard
+      '@nectary/theme-cpaas-mailgun':
+        specifier: workspace:*
+        version: link:../../themes/cpaas-mailgun
+      '@nectary/theme-cpaas-mailjet':
+        specifier: workspace:*
+        version: link:../../themes/cpaas-mailjet
       '@nectary/theme-dark':
         specifier: workspace:*
         version: link:../../themes/dark
+      '@nectary/theme-message-media':
+        specifier: workspace:*
+        version: link:../../themes/message-media
       core-js:
         specifier: ^3.32.2
         version: 3.32.2
@@ -865,6 +895,14 @@ importers:
         version: 5.88.2(webpack-cli@5.1.4)
 
   themes/base: {}
+
+  themes/cpaas-base: {}
+
+  themes/cpaas-dashboard: {}
+
+  themes/cpaas-mailgun: {}
+
+  themes/cpaas-mailjet: {}
 
   themes/dark: {}
 
