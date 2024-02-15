@@ -32,6 +32,26 @@ switch (packagePath) {
 
     break
   }
+  case 'themes/cpaas-base': {
+    packageTitle = 'CPaas Base Theme'
+
+    break
+  }
+  case 'themes/cpaas-dashboard': {
+    packageTitle = 'CPaas Dashboard Theme'
+
+    break
+  }
+  case 'themes/cpaas-mailgun': {
+    packageTitle = 'CPaas Mailgun Theme'
+
+    break
+  }
+  case 'themes/cpaas-mailjet': {
+    packageTitle = 'CPaas Mailjet Theme'
+
+    break
+  }
   default: {
     throw new Error(`Cannot determine title for the package path: ${packagePath}`)
   }
