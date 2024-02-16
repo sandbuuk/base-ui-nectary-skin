@@ -148,6 +148,12 @@ declare global {
     }
   }
 
+  namespace Nectary {
+    interface Slots {
+      'sinch-accordion-item': 'icon' | 'content',
+    }
+  }
+
   interface HTMLElementTagNameMap {
     'sinch-accordion-item': TSinchAccordionItemElement,
   }

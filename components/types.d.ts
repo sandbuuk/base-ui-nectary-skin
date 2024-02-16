@@ -11,4 +11,11 @@ export type TRect = {
   y: number,
   width: number,
   height: number,
+
+declare global {
+  namespace Nectary {
+    interface Slots {
+      [key: string]: never;
+    }
+  }
 }
