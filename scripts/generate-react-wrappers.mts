@@ -1,0 +1,53 @@
+import fs from "node:fs";
+import path from "node:path";
+
+const dirname = (import.meta as any).dirname as string;
+
+const componentsDir = path.join(dirname, "..", "components");
+
+// Folders that are not node_modules, get the basenames
+const components = fs
+  .readdirSync(componentsDir)
+  .filter((file) => fs.statSync(path.join(componentsDir, file)).isDirectory())
+  .filter(
+    (file) =>
+      file !== "node_modules" && file !== "utils" && file !== "stop-events",
+  );
+
+const items = components.map((x) => createWrapper(x));
+
+const importCodes = items.map((item) => item?.importCode).join("\n");
+const codes = items.map((item) => item?.code).join("\n");
+
+const code = `import React from 'react'\nimport { createReactWrapper, WithSlots } from './utils';\nimport { NamedSlots, UnnamedSlots} from './slots';\n\n${importCodes}\n\n${codes}\n`;
+
+fs.writeFileSync(
+  path.join(dirname, "..", "wrappers", "react", "src", "index.ts"),
+  code,
+);
+
+function camelCase(name: string): string {
+  return name.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+}
+
+function capitalizeFirstLetter(name: string): string {
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+function createWrapper(componentName: string): {
+  code: string;
+  importCode: string;
+} {
+  const elementName = `sinch-${componentName}`;
+  const componentCamelCase = capitalizeFirstLetter(camelCase(componentName));
+
+  const importCode = `import '@nectary/components/${componentName}'`;
+
+  const code = `
+export type ${componentCamelCase}Props = JSX.IntrinsicElements['${elementName}'] & WithSlots<NamedSlots['${elementName}']>
+export const ${componentCamelCase} = createReactWrapper<${componentCamelCase}Props, NamedSlots['${elementName}']>("${elementName}")`;
+  return {
+    importCode,
+    code,
+  };
+}

@@ -11,7 +11,10 @@
     "tokens:base": "tsm ./scripts/process-tokens.ts ./tokens/data.json themes/base base",
     "tokens:dark": "tsm ./scripts/process-tokens.ts ./tokens/data.json themes/dark dark",
     "tokens:mm": "tsm ./scripts/process-tokens.ts ./tokens/data.json themes/message-media messagemedia",
-    "tokens": "concurrently --raw npm:tokens:base npm:tokens:dark"
+    "tokens": "concurrently --raw npm:tokens:base npm:tokens:dark",
+    "wrappers:react": "tsm ./scripts/generate-react-wrappers.mts",
+    "wrappers:slots": "tsm ./scripts/generate-slots-for-wrappers.mts",
+    "wrappers": "concurrently --raw npm:wrappers:react npm:wrappers:slots"
   },
   "devDependencies": {
     "@alex-e-leon/stylelint-value-no-unknown-custom-properties": "^4.0.2",
@@ -39,5 +42,9 @@
     "svgo": "^2.8.0",
     "tsm": "^2.3.0",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@types/jsdom": "^21.1.6",
+    "jsdom": "^24.0.0"
   }
 }
