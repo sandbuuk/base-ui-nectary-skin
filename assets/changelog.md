@@ -1,3 +1,22 @@
+## v0.10.0 (2023-08-30)
+
+* ➕ add `sinch-logo-campaigns-icon` component
+* ➕ add `sinch-logo-campaigns-icon-wordmark` component
+* ➕ add `sinch-logo-chatlayer-icon` component
+* ➕ add `sinch-logo-chatlayer-icon-wordmark` component
+* ➕ add `sinch-logo-contact-pro-icon` component
+* ➕ add `sinch-logo-contact-pro-icon-wordmark` component
+* ➕ add `sinch-logo-email-on-acid-icon` component
+* ➕ add `sinch-logo-email-on-acid-icon-wordmark` component
+* ➕ add `sinch-logo-mailgun-icon` component
+* ➕ add `sinch-logo-mailgun-icon-wordmark` component
+* ➕ add `sinch-logo-mailjet-icon` component
+* ➕ add `sinch-logo-mailjet-icon-wordmark` component
+* ➕ add `sinch-logo-message-media-icon` component
+* ➕ add `sinch-logo-message-media-icon-wordmark` component
+* ➕ add `sinch-logo-message-studio-icon` component
+* ➕ add `sinch-logo-message-studio-icon-wordmark` component
+
 ## v0.9.0 (2023-08-30)
 
 * ➕ add `sinch-icon-channel-facebook` component
