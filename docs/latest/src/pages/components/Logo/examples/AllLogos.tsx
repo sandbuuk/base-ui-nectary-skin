@@ -13,11 +13,15 @@ const req = import.meta.webpackContext!('@nectary/assets/logo', {
   recursive: true,
   mode: 'sync',
 })
-const names = req.keys().map((key) => {
+const names = req.keys().reduce((acc, key) => {
   req(key)
 
-  return `sinch-logo-${key.replace(/^\.\/(.+)\/index.ts$/, '$1')}`
-})
+  if (key.includes('-wordmark') === true) {
+    return acc
+  }
+
+  return [...acc, `sinch-logo-${key.replace(/^\.\/(.+)\/index.ts$/, '$1')}`]
+}, [] as string[])
 
 const tableStyle: CSSProperties = {
   width: '100%',
@@ -30,6 +34,8 @@ export const AllLogosExample: FC = () => {
         <sinch-table-row>
           <sinch-table-head-cell text="Logo" fit/>
           <sinch-table-head-cell text="Name"/>
+          <sinch-table-head-cell text="Logo Wordmark" fit/>
+          <sinch-table-head-cell text="Name Wordmark"/>
         </sinch-table-row>
       </sinch-table-head>
       <sinch-table-body>
@@ -40,6 +46,12 @@ export const AllLogosExample: FC = () => {
             </sinch-table-cell>
             <sinch-table-cell>
               <sinch-text type="m">{name}</sinch-text>
+            </sinch-table-cell>
+            <sinch-table-cell>
+              {React.createElement(`${name}-wordmark`, { title: name })}
+            </sinch-table-cell>
+            <sinch-table-cell>
+              <sinch-text type="m">{`${name}-wordmark`}</sinch-text>
             </sinch-table-cell>
           </sinch-table-row>
         ))}
