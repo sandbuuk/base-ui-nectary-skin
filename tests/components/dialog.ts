@@ -70,7 +70,7 @@ test('dialog screenshots', runScreenshotTests('sinch-dialog', [
     url: withLongContent,
     async *fn({ $eval }) {
       await $eval((el) => {
-        el.style.setProperty('--sinch-comp-dialog-max-height', '55px')
+        el.style.setProperty('--sinch-comp-dialog-max-height', '215px')
       })
       yield { name: 'shot', includeRects: [await $eval((el) => el.dialogRect)] }
     },
