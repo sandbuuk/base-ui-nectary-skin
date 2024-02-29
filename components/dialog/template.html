@@ -3,7 +3,7 @@
   display: contents;
 
   --sinch-comp-dialog-max-width: 512px;
-  --sinch-comp-dialog-max-height: 50vh;
+  --sinch-comp-dialog-max-height: 90vh;
 }
 
 #dialog {
@@ -15,7 +15,7 @@
   flex-direction: column;
   padding: 24px 0;
   max-width: var(--sinch-comp-dialog-max-width);
-  max-height: unset;
+  max-height: var(--sinch-comp-dialog-max-height);
   border-radius: var(--sinch-comp-dialog-shape-radius);
   box-sizing: border-box;
   contain: content;
@@ -54,7 +54,6 @@ dialog::backdrop {
 #content {
   min-height: 0;
   overflow: auto;
-  max-height: var(--sinch-comp-dialog-max-height);
   padding: 4px 24px;
 }
 
