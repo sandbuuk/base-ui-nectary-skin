@@ -1,3 +1,8 @@
+## v0.11.0 (2023-08-30)
+
+* ➕ add `sinch-logo-nectary-icon` component
+* ➕ add `sinch-logo-nectary-icon-wordmark` component
+
 ## v0.10.0 (2023-08-30)
 
 * ➕ add `sinch-logo-campaigns-icon` component

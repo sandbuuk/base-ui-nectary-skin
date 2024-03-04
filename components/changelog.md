@@ -1,3 +1,7 @@
+## v2.8.4 (2024-02-02)
+
+- 🐞 fix max-height setting for dialog
+
 ## v2.8.3 (2024-02-02)
 
 - 🐞 Attempt to fix skypack issue
