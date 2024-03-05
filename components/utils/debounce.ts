@@ -25,6 +25,6 @@ const createDebounce = (delayFn: (cb: () => void) => any, cancelFn: (id: any) =>
   }
 
 export const debounceTimeout = (ms: number) => createDebounce(
-    (cb) => globalThis.setTimeout(cb, ms), globalThis.clearTimeout
+  (cb) => globalThis.setTimeout(cb, ms), globalThis.clearTimeout
 )
 export const debounceAnimationFrame = createDebounce(globalThis.requestAnimationFrame, globalThis.cancelAnimationFrame)
