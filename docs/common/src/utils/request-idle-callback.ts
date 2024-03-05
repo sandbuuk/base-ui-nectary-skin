@@ -1,7 +1,7 @@
 export const requestIdleCallback = (cb: () => void) => {
-  const id = (global.requestIdleCallback ?? global.setTimeout)(cb)
+  const id = (globalThis.requestIdleCallback ?? globalThis.setTimeout)(cb)
 
   return () => {
-    (global.cancelIdleCallback ?? global.clearTimeout)(id)
+    (globalThis.cancelIdleCallback ?? globalThis.clearTimeout)(id)
   }
 }

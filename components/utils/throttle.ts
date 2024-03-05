@@ -22,4 +22,4 @@ const createThrottle = (delayFn: (cb: () => void) => any, cancelFn: (id: any) =>
     }
   }
 
-export const throttleAnimationFrame = createThrottle(global.requestAnimationFrame, global.cancelAnimationFrame)
+export const throttleAnimationFrame = createThrottle(globalThis.requestAnimationFrame, globalThis.cancelAnimationFrame)
