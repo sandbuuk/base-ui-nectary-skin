@@ -133,6 +133,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       'disabled',
       'size',
       'autocomplete',
+      'autofocus',
       'data-size',
       'aria-label',
     ]
@@ -223,6 +224,19 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         break
       }
 
+      case 'autofocus': {
+        if (isAttrEqual(oldVal, newVal)) {
+          return
+        }
+
+        const isAutofocus = isAttrTrue(newVal)
+
+        this.#$input.autofocus = isAutofocus
+        updateBooleanAttribute(this, name, isAutofocus)
+
+        break
+      }
+
       case 'size': {
         updateAttribute(this, 'data-size', newVal)
 
@@ -295,6 +309,14 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   get disabled() {
     return getBooleanAttribute(this, 'disabled')
+  }
+
+  set autofocus(isAutofocus: boolean) {
+    updateBooleanAttribute(this, 'autofocus', isAutofocus)
+  }
+
+  get autofocus() {
+    return getBooleanAttribute(this, 'autofocus')
   }
 
   set size(size: TSinchSize) {

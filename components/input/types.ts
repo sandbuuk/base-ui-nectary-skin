@@ -20,6 +20,8 @@ export type TSinchInputElement = HTMLElement & {
   invalid: boolean,
   /** Disabled */
   disabled: boolean,
+  /** Whether the input should be autocofused */
+  autofocus: boolean,
   /** Size, `m` by default */
   size: TSinchSize,
   selectionStart: number | null,
@@ -46,6 +48,8 @@ export type TSinchInputElement = HTMLElement & {
   setAttribute(name: 'invalid', value: ''): void,
   /** Disabled */
   setAttribute(name: 'disabled', value: ''): void,
+  /** Autofocus */
+  setAttribute(name: 'autofocus', value: ''): void,
   /** Size, `m` by default */
   setAttribute(name: 'size', value: TSinchSize): void,
 }
@@ -67,6 +71,8 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   invalid?: boolean,
   /** Disabled */
   disabled?: boolean,
+  /** Autofocus */
+  autofocus?: boolean,
   /** Size, `m` by default */
   size?: TSinchSize,
   /** Change value handler */
