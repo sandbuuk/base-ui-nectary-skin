@@ -1,3 +1,9 @@
+## v2.8.5 (2024-03-13)
+
+- 🐞 fix: Replace global usage with globalThis
+- ➕ add autofocus prop on input
+- ➕ add --sinch-comp-dialog-width css variable to dialog
+
 ## v2.8.4 (2024-02-02)
 
 - 🐞 fix max-height setting for dialog
