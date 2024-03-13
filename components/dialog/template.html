@@ -4,6 +4,7 @@
 
   --sinch-comp-dialog-max-width: 512px;
   --sinch-comp-dialog-max-height: 90vh;
+  --sinch-comp-dialog-width: fit-content;
 }
 
 #dialog {
@@ -14,6 +15,7 @@
   display: flex;
   flex-direction: column;
   padding: 24px 0;
+  width: var(--sinch-comp-dialog-width);
   max-width: var(--sinch-comp-dialog-max-width);
   max-height: var(--sinch-comp-dialog-max-height);
   border-radius: var(--sinch-comp-dialog-shape-radius);
