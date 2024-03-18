@@ -1,5 +1,5 @@
-import React from 'react'
 import type { ReactNode } from 'react'
+import React from 'react'
 
 export type WithSlots<T extends string | never> = {
   [key in `slot-${T}`]?: React.ReactNode;
