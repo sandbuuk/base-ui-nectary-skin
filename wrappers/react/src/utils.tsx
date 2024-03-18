@@ -1,29 +1,34 @@
-import React, { ReactNode } from "react";
+import React from 'react'
+import type { ReactNode } from 'react'
 
 export type WithSlots<T extends string | never> = {
   [key in `slot-${T}`]?: React.ReactNode;
-};
+}
+export type NamedSlotProps = WithSlots<string> & {
+  children?: React.ReactNode,
+}
 
 function renderSlot(slotName: string, node: ReactNode) {
   const props = {
     key: slotName,
     slot: slotName,
     style: {
-      display: "contents",
+      display: 'contents',
     },
-  };
-  return React.createElement("div", props, node);
+  }
+
+  return React.createElement('div', props, node)
 }
 
 function mapSlots(
   props: NamedSlotProps,
-  fn: (slotName: string, node: ReactNode) => ReactNode,
+  fn: (slotName: string, node: ReactNode) => ReactNode
 ): ReactNode[] {
   const slots = Object.entries(props).filter(([key]) =>
-    key.startsWith("slot-"),
-  );
+    key.startsWith('slot-'))
+
   return slots.map(([key, value]) => {
-    const slotName = key.replace("slot-", "").toLowerCase();
+    const slotName = key.replace('slot-', '').toLowerCase()
     /* SAFETY: By proving that value always is of type ReactNode
      * 1. props is NamedSlotProps
      * 2. NamedSlotProps states keys that start with slot- have ReactNodes for values
@@ -31,29 +36,32 @@ function mapSlots(
      * 4. Modus ponnes 2,3: gives that value is ReactNode
      * QED
      */
-    const node = value as ReactNode;
-    return fn(slotName, node);
-  });
+    const node = value as ReactNode
+
+    return fn(slotName, node)
+  })
 }
 
 function withoutSlots(p: { [k: string]: any }): { [k: string]: any } {
   return Object.fromEntries(
-    Object.entries(p).filter(([k, _v]) => !k.startsWith("slot-")),
-  );
+    Object.entries(p).filter(([k, _v]) => !k.startsWith('slot-'))
+  )
 }
 
-function renderSlotsOrChildren(props: AutoSlotProps): React.ReactNode {
-  if (props.children) {
-    return props.children;
+function renderSlotsOrChildren(props: NamedSlotProps): React.ReactNode {
+  if (props.children != null) {
+    return props.children
   }
-  const renderedSlots = mapSlots(props, renderSlot);
+
+  const renderedSlots = mapSlots(props, renderSlot)
+
   if (renderedSlots.length === 0) {
-    return null;
+    return null
   } else if (renderedSlots.length === 1) {
-    return renderedSlots[0];
-  } else {
-    return renderedSlots;
+    return renderedSlots[0]
   }
+
+  return renderedSlots
 }
 
 export function createReactWrapper<
@@ -64,6 +72,6 @@ export function createReactWrapper<
     React.createElement(
       element,
       withoutSlots(props),
-      renderSlotsOrChildren(props),
-    );
+      renderSlotsOrChildren(props)
+    )
 }

@@ -1,34 +1,11 @@
-import fs from "node:fs";
-import path from "node:path";
-import { JSDOM } from "jsdom";
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import { JSDOM } from 'jsdom'
 
-const dirname = (import.meta as any).dirname as string;
-const componentsDir = path.join(dirname, "..", "components");
+const dirname = (import.meta as any).dirname as string
+const componentsDir = path.join(dirname, '..', 'components')
 
-function getAllComponents(): string[] {
-  return fs
-    .readdirSync(componentsDir)
-    .filter((file) => fs.statSync(path.join(componentsDir, file)).isDirectory())
-    .filter(
-      (file) =>
-        file !== "node_modules" && file !== "utils" && file !== "stop-events",
-    );
-}
-
-function createSlotMap(components: string[]): Map<string, string[]> {
-  const componentSlots = new Map<string, string[]>();
-  for (const component: string of components) {
-    const htmlContent = fs.readFileSync(
-      path.join(componentsDir, component, "template.html"),
-    );
-    const j = new JSDOM(htmlContent);
-    const slots = Array.from(j.window.document.querySelectorAll("slot")).map(
-      (slot) => slot.name,
-    );
-    componentSlots.set(component, slots);
-  }
-  return componentSlots;
-}
+const IGNORED_FOLDERS = ['node_modules', 'utils', 'stop-events']
 
 enum SlotStyle {
   NoSlots,
@@ -38,62 +15,107 @@ enum SlotStyle {
   Both,
 }
 
+async function getAllComponents(): Promise<string[]> {
+  const components = []
+  const files = await fs.readdir(componentsDir)
+
+  for (const file of files) {
+    const stat = await fs.stat(path.join(componentsDir, file))
+    const isDir = stat.isDirectory()
+
+    if (isDir && !IGNORED_FOLDERS.includes(file)) {
+      components.push(file)
+    }
+  }
+
+  return components
+}
+
+async function createSlotMap(
+  components: string[]
+): Promise<Map<string, string[]>> {
+  const componentSlots = new Map<string, string[]>()
+
+  for (const component of components) {
+    const htmlContent = await fs.readFile(
+      path.join(componentsDir, component, 'template.html')
+    )
+    const j = new JSDOM(htmlContent)
+    const slots = Array.from(j.window.document.querySelectorAll('slot')).map(
+      (slot) => slot.name
+    )
+
+    componentSlots.set(component, slots)
+  }
+
+  return componentSlots
+}
+
 function stringOptionType(s: string[]): string {
-  return s.map((x) => `'${x}'`).join(" | ");
+  return s.map((x) => `'${x}'`).join(' | ')
 }
 
 function typeDeclarationLine(componentName: string, t: string): string {
-  return `'sinch-${componentName}': ${t}`;
+  return `'sinch-${componentName}': ${t}`
 }
 
 function declareNamedSlots(
   componentName: string,
-  slots: string[],
+  slots: string[]
 ): string | null {
-  const slotStyle = getSlotStyle(slots);
+  const slotStyle = getSlotStyle(slots)
   const options =
-    slotStyle === SlotStyle.Named ? stringOptionType(slots) : "never";
-  return typeDeclarationLine(componentName, options);
-}
+    slotStyle === SlotStyle.Named ? stringOptionType(slots) : 'never'
 
-function declareUnnamedSlot(componentName: string, slots: string[]) {
-  const slotStyle = getSlotStyle(slots);
-  if (slotStyle === SlotStyle.Both) {
-    throw new Error("SlotStyle both not supported");
-  }
-  const options = slotStyle === SlotStyle.Unnamed ? "1" : "never";
-  return typeDeclarationLine(componentName, options);
+  return typeDeclarationLine(componentName, options)
 }
 
 function getSlotStyle(slots: string[]): SlotStyle {
   if (slots.length === 0) {
-    return SlotStyle.NoSlots;
+    return SlotStyle.NoSlots
   }
-  const hasUnnamed = slots.find((x) => x === "") !== undefined;
-  const hasNamed = slots.find((x) => x !== "") !== undefined;
-  const hasBoth = hasUnnamed && hasNamed;
+
+  const hasUnnamed = slots.find((x) => x === '') !== undefined
+  const hasNamed = slots.find((x) => x !== '') !== undefined
+  const hasBoth = hasUnnamed && hasNamed
+
   if (hasBoth) {
-    return SlotStyle.Both;
+    return SlotStyle.Both
   }
+
   if (hasNamed) {
-    return SlotStyle.Named;
+    return SlotStyle.Named
   }
+
   if (hasUnnamed) {
-    return SlotStyle.Unnamed;
+    return SlotStyle.Unnamed
   }
-  throw new Error("No such slotstyle");
+  throw new Error('No such slotstyle')
+}
+
+function declareUnnamedSlot(componentName: string, slots: string[]) {
+  const slotStyle = getSlotStyle(slots)
+
+  if (slotStyle === SlotStyle.Both) {
+    throw new Error('SlotStyle both not supported')
+  }
+
+  const options = slotStyle === SlotStyle.Unnamed ? '1' : 'never'
+
+  return typeDeclarationLine(componentName, options)
 }
 
 function createSlotsTypes(slotsMap: Map<string, string[]>) {
-  const namedSlotTypes = [];
-  const unnamedSlotsTypes = [];
+  const namedSlotTypes = []
+  const unnamedSlotsTypes = []
+
   for (const [key, value] of slotsMap.entries()) {
-    namedSlotTypes.push(declareNamedSlots(key, value));
-    unnamedSlotsTypes.push(declareUnnamedSlot(key, value));
+    namedSlotTypes.push(declareNamedSlots(key, value))
+    unnamedSlotsTypes.push(declareUnnamedSlot(key, value))
   }
 
-  const unnamedSlotsTypesText = unnamedSlotsTypes.join(",\n");
-  const namedSlotsTypesText = namedSlotTypes.join(",\n");
+  const unnamedSlotsTypesText = unnamedSlotsTypes.join(',\n')
+  const namedSlotsTypesText = namedSlotTypes.join(',\n')
 
   return `
     // AUTOGENERATED DO NOT EDIT
@@ -103,15 +125,17 @@ function createSlotsTypes(slotsMap: Map<string, string[]>) {
     export interface NamedSlots {
         ${namedSlotsTypesText}
     }
-  `;
+  `
 }
 
-function saveSlotsFile(data: string) {
-  const fp = path.join(dirname, "..", "wrappers", "react", "src", "slots.ts");
-  fs.writeFileSync(fp, data);
+async function saveSlotsFile(data: string) {
+  const fp = path.join(dirname, '..', 'wrappers', 'react', 'src', 'slots.ts')
+
+  await fs.writeFile(fp, data)
 }
 
-const components = getAllComponents();
-const componentSlots = createSlotMap(components);
-const slotTypes = createSlotsTypes(componentSlots);
-saveSlotsFile(slotTypes);
+const components = await getAllComponents()
+const componentSlots = await createSlotMap(components)
+const slotTypes = createSlotsTypes(componentSlots)
+
+await saveSlotsFile(slotTypes)
