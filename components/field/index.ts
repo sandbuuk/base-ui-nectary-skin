@@ -75,9 +75,7 @@ defineCustomElement('sinch-field', class extends NectaryElement {
     const label = getAttribute(this, 'label')
     const optionaltext = getAttribute(this, 'optionaltext')
 
-    if (label === null && optionaltext === null) {
-      this.topSection.style.display = 'none'
-    }
+    setClass(this.topSection, 'empty', label === null && optionaltext === null)
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
