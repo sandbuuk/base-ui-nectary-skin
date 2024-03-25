@@ -968,9 +968,6 @@ importers:
       '@babel/runtime':
         specifier: ^7.22.15
         version: 7.22.15
-      '@nectary/components':
-        specifier: 2.8.3
-        version: link:../../components
     devDependencies:
       '@babel/cli':
         specifier: ^7.22.15
