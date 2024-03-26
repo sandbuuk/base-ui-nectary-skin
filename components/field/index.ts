@@ -18,6 +18,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-field', class extends NectaryElement {
+  topSection: HTMLDivElement
   #$label: HTMLLabelElement
   #$optionalText: HTMLSpanElement
   #$additionalText: HTMLSpanElement
@@ -34,6 +35,7 @@ defineCustomElement('sinch-field', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.topSection = shadowRoot.querySelector('#top')!
     this.#$label = shadowRoot.querySelector('#label')!
     this.#$optionalText = shadowRoot.querySelector('#optional')!
     this.#$additionalText = shadowRoot.querySelector('#additional')!
@@ -49,6 +51,7 @@ defineCustomElement('sinch-field', class extends NectaryElement {
     const { signal } = this.#controller
     const options: AddEventListenerOptions = { signal }
 
+    this.shouldShowTopSection()
     this.#$label.addEventListener('click', this.#onLabelClick, options)
     this.#$tooltipSlot.addEventListener('slotchange', this.#onTooltipSlotChange, options)
   }
@@ -66,6 +69,13 @@ defineCustomElement('sinch-field', class extends NectaryElement {
       'invalidtext',
       'disabled',
     ]
+  }
+
+  shouldShowTopSection() {
+    const label = getAttribute(this, 'label')
+    const optionaltext = getAttribute(this, 'optionaltext')
+
+    setClass(this.topSection, 'empty', label === null && optionaltext === null)
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -104,14 +114,16 @@ defineCustomElement('sinch-field', class extends NectaryElement {
         break
       }
     }
+
+    this.shouldShowTopSection()
   }
 
-  set label(value: string) {
+  set label(value: string | null) {
     updateAttribute(this, 'label', value)
   }
 
   get label() {
-    return getAttribute(this, 'label', '')
+    return getAttribute(this, 'label')
   }
 
   set optionalText(value: string | null) {

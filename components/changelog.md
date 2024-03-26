@@ -1,3 +1,7 @@
+## v2.8.6 (2024-03-25)
+
+- ➕ modify label in field component to be optional, when field attributes label & optionalText are not set, the top container will be hidden
+
 ## v2.8.5 (2024-03-13)
 
 - 🐞 fix: Replace global usage with globalThis

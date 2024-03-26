@@ -2,7 +2,7 @@ import type { TSinchElementReact } from '../types'
 
 export type TSinchFieldElement = HTMLElement & {
   /** Label */
-  label: string,
+  label: string | null,
   /** Optional text */
   optionalText: string | null,
   /** Additional text */
@@ -25,7 +25,7 @@ export type TSinchFieldElement = HTMLElement & {
 
 export type TSinchFieldReact = TSinchElementReact<TSinchFieldElement> & {
   /** Label that shows in UI */
-  label: string,
+  label?: string,
   /** Optional text */
   optionalText?: string,
   /** Additional text */
