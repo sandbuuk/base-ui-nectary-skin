@@ -11,7 +11,12 @@ async function getComponents(): Promise<string[]> {
   for (const file of await fs.readdir(componentsDir)) {
     const stat = await fs.stat(path.join(componentsDir, file))
     const isDir = stat.isDirectory()
-    const isIgnored = ['node_modules', 'utils', 'stop-events', 'pagination'].includes(file)
+    const isIgnored = [
+      'node_modules',
+      'utils',
+      'stop-events',
+      'pagination',
+    ].includes(file)
 
     if (!isDir || isIgnored) {
       continue
@@ -44,8 +49,8 @@ function createWrapper(componentName: string): {
   const importCode = `import '@nectary/components/${componentName}'`
 
   const code = `
-export type ${componentCamelCase}Props = JSX.IntrinsicElements['${elementName}'] & WithSlots<NamedSlots['${elementName}']>
-export const ${componentCamelCase} = createReactWrapper<${componentCamelCase}Props, NamedSlots['${elementName}']>('${elementName}')`
+export type ${componentCamelCase}Props = JSX.IntrinsicElements['${elementName}'] & WrapperProps<NamedSlots['${elementName}']>
+export const ${componentCamelCase} = createReactWrapper<NamedSlots['${elementName}']>('${elementName}')`
 
   return {
     importCode,

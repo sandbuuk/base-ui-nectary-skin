@@ -1,6 +1,6 @@
-import { JSDOM } from 'jsdom'
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { JSDOM } from 'jsdom'
 
 const dirname = (import.meta as any).dirname as string
 const componentsDir = path.join(dirname, '..', 'components')
