@@ -94,7 +94,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['value', 'rows', 'multiple']
+    return ['value', 'rows', 'multiple', 'search-placeholder']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -114,6 +114,12 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
       case 'rows': {
         this.#$listbox.style.maxHeight = attrValueToPixels(newVal, { min: 2, itemSizeMultiplier: ITEM_HEIGHT })
+
+        break
+      }
+
+      case 'search-placeholder': {
+        updateAttribute(this.#$search, 'placeholder', newVal)
 
         break
       }
@@ -142,6 +148,14 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
   get multiple() {
     return getBooleanAttribute(this, 'multiple')
+  }
+
+  set 'search-placeholder'(placeholder: string) {
+    updateAttribute(this.#$search, 'placeholder', placeholder)
+  }
+
+  get 'search-placeholder'(): string {
+    return getAttribute(this.#$search, 'placeholder', '')
   }
 
   get focusable() {

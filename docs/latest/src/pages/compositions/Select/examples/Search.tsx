@@ -7,7 +7,7 @@ import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
 
 const selectStyles: CSSProperties = {
-  width: 200,
+  width: 300,
 }
 
 export const SearchExample: FC = () => {
@@ -42,6 +42,7 @@ export const SearchExample: FC = () => {
         rows={3}
         value={value}
         on-change={onChange}
+        search-placeholder="Search Pokemon"
       >
         {
         pokemonNames.map((pokemon) => (
