@@ -1,3 +1,7 @@
+## v2.8.7 (2024-04-08)
+
+- ➕ add `searchable` & `search-placeholder` attributes + `-search-change` event to sinch-select-menu
+
 ## v2.8.6 (2024-03-25)
 
 - ➕ modify label in field component to be optional, when field attributes label & optionalText are not set, the top container will be hidden
