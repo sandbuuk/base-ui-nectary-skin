@@ -3,6 +3,7 @@ import { ButtonExample } from './examples/Button.tsx?example'
 import { MultipleExample } from './examples/Multiple.tsx?example'
 import { SearchExample } from './examples/Search.tsx?example'
 import { AsyncExample } from './examples/Async.tsx?example'
+import { CustomSearchExample } from './examples/CustomSearch.tsx?example'
 
 # Examples
 
@@ -22,9 +23,19 @@ We currently don't have a well-defined UX/UI pattern of how to show multiple sel
 
 ## Search
 
-Built-in search appears automatically with 7+ options available.
+Built-in search appears automatically with 7+ options available, if you want the search to appear before that you can enforce this behavior by setting `searchable` to `true`.
 
 <Example Component={SearchExample}/>
+
+## Custom Search
+
+It is possible to override the search functionality by using `on-search-change` in combination with `e.preventDefault`. Use `searchable` to enforce the display the search bar if your list of displayed items has less than 7 elements.
+
+Please note that nectary adds a slight debounce of 200ms to how often the search event is triggered.
+
+In this example we chose to display only three elements in the list, but the user can type to search within the full list (see the previous example for the full list of items).
+
+<Example Component={CustomSearchExample}/>
 
 ## Async
 
