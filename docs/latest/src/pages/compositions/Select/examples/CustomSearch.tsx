@@ -10,12 +10,29 @@ const selectStyles: CSSProperties = {
   width: 300,
 }
 
-export const SearchExample: FC = () => {
+const getDefaultDisplayedPokemon = () => pokemonNames.slice(0, 3)
+
+export const CustomSearchExample: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [value, setValue] = useState('')
+  const [displayedPokemon, setDisplayedPokemon] = useState(getDefaultDisplayedPokemon())
+
   const onChange = (e: CustomEvent<string>) => {
     setValue(e.detail)
     setIsOpen(false)
+  }
+  const onSearchChange = (e: CustomEvent<string>) => {
+    e.preventDefault()
+
+    const search = e.detail
+
+    if (search !== '' && Boolean(search)) {
+      const found = pokemonNames.filter((pokemonName) => pokemonName.toLowerCase().includes(search))
+
+      return setDisplayedPokemon(found)
+    }
+
+    return setDisplayedPokemon(getDefaultDisplayedPokemon())
   }
   const onClose = () => setIsOpen(false)
   const onOpen = () => setIsOpen(true)
@@ -42,10 +59,12 @@ export const SearchExample: FC = () => {
         rows={3}
         value={value}
         on-change={onChange}
+        on-search-change={onSearchChange}
+        searchable
         search-placeholder="Search Pokemon"
       >
         {
-        pokemonNames.map((pokemon) => (
+        displayedPokemon.map((pokemon) => (
           <sinch-select-menu-option
             key={pokemon}
             value={pokemon}

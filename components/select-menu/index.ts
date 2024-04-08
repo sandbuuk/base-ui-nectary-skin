@@ -79,6 +79,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     this.#$search.addEventListener('-change', this.#onSearchChange as any, options)
     this.#$searchClear.addEventListener('-click', this.#onSearchClearClick, options)
     this.#$optionSlot.addEventListener('slotchange', this.#onOptionSlotChange, options)
+    this.addEventListener('-search-change', this.#onSearchChangeReactHandler, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
     subscribeContext(this, 'keydown', this.#onContextKeyDown, this.#controller.signal)
     subscribeContext(this, 'visibility', this.#onContextVisibility, this.#controller.signal)
@@ -93,7 +94,7 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['value', 'rows', 'multiple']
+    return ['value', 'rows', 'multiple', 'search-placeholder']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -113,6 +114,12 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
       case 'rows': {
         this.#$listbox.style.maxHeight = attrValueToPixels(newVal, { min: 2, itemSizeMultiplier: ITEM_HEIGHT })
+
+        break
+      }
+
+      case 'search-placeholder': {
+        updateAttribute(this.#$search, 'placeholder', newVal)
 
         break
       }
@@ -141,6 +148,14 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
   get multiple() {
     return getBooleanAttribute(this, 'multiple')
+  }
+
+  set 'search-placeholder'(placeholder: string) {
+    updateAttribute(this.#$search, 'placeholder', placeholder)
+  }
+
+  get 'search-placeholder'(): string {
+    return getAttribute(this.#$search, 'placeholder', '')
   }
 
   get focusable() {
@@ -185,19 +200,26 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
   #updateSearch = () => {
     const searchValue = this.#$search.value.toLowerCase()
-    const $options = this.#getOptionElements()
-    let someFound = false
+    const searchChangedEvent = new CustomEvent('-search-change', { detail: searchValue, cancelable: true })
 
-    for (const $opt of $options) {
-      const isHidden = searchValue.length > 0 && !$opt.matchesSearch(searchValue)
+    this.dispatchEvent(searchChangedEvent)
 
-      someFound ||= !isHidden
-      setClass($opt, 'hidden', isHidden)
+    // Default behaviour
+    if (!searchChangedEvent.defaultPrevented) {
+      const $options = this.#getOptionElements()
+      let someFound = false
+
+      for (const $opt of $options) {
+        const isHidden = searchValue.length > 0 && !$opt.matchesSearch(searchValue)
+
+        someFound ||= !isHidden
+        setClass($opt, 'hidden', isHidden)
+      }
+
+      setClass(this.#$notFound, 'active', !someFound)
+
+      this.#selectOption(null)
     }
-
-    setClass(this.#$notFound, 'active', !someFound)
-
-    this.#selectOption(null)
   }
 
   #onContextKeyDown = (e: CustomEvent<TContextKeydown>) => {
@@ -251,7 +273,10 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   #onOptionSlotChange = () => {
-    const isSearchActive = this.#$optionSlot.assignedElements().length >= NUM_ITEMS_SEARCH
+    const hasSearchableAttribute = this.hasAttribute('searchable')
+    const options = this.#$optionSlot.assignedElements()
+    const isEnoughOptions = options.length >= NUM_ITEMS_SEARCH
+    const isSearchActive = isEnoughOptions || hasSearchableAttribute
 
     if (!isSearchActive) {
       updateAttribute(this.#$search, 'value', null)
@@ -420,6 +445,10 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
 
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
+  }
+
+  #onSearchChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-search-change')?.(e)
   }
 })
 
