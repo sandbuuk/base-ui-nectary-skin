@@ -1,6 +1,7 @@
 import '../icon'
 import '../text'
 import '../title'
+import type { TSinchTitleElement } from '../title/types'
 import {
   defineCustomElement,
   getAttribute,
@@ -15,9 +16,8 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
+import type { TSinchAccordionItemElement, TSinchAccordionItemReact, TSinchAccordionStatusType } from './types'
 import { statusValues } from './utils'
-import type { TSinchAccordionStatusType } from './types'
-import type { TSinchTitleElement } from '../title/types'
 
 const template = document.createElement('template')
 
@@ -140,3 +140,15 @@ defineCustomElement('sinch-accordion-item', class extends NectaryElement {
     this.#$button.blur()
   }
 })
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-accordion-item': TSinchAccordionItemReact,
+    }
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-accordion-item': TSinchAccordionItemElement,
+  }
+}
