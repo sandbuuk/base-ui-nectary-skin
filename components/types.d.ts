@@ -1,4 +1,4 @@
-import type { ClassAttributes, DOMAttributes, HTMLAttributes } from 'react'
+import type { ClassAttributes, DOMAttributes, HTMLAttributes } from 'react';
 
 export type TSinchElementReact<TElement> =
   Pick<HTMLAttributes<HTMLElement>, 'id' | 'className' | 'style' | 'slot' | 'children'> &
@@ -11,11 +11,4 @@ export type TRect = {
   y: number,
   width: number,
   height: number,
-
-declare global {
-  namespace Nectary {
-    interface Slots {
-      [key: string]: never;
-    }
-  }
 }
