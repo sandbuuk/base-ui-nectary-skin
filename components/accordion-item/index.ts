@@ -1,6 +1,6 @@
 import '../icon'
-import '../title'
 import '../text'
+import '../title'
 import {
   defineCustomElement,
   getAttribute,

@@ -7,3 +7,5 @@ packages:
   - 'tests/apps/*'
   - 'docs/*'
   - 'tokens/'
+  - 'wrappers/*'
+  - 'labs'

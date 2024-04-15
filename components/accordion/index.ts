@@ -1,15 +1,15 @@
 import {
+  NectaryElement,
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  unpackCsv,
   getFirstCsvValue,
   getReactEventHandler,
-  NectaryElement,
+  getTargetByAttribute,
+  unpackCsv,
   updateAttribute,
   updateBooleanAttribute,
   updateCsv,
-  getTargetByAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchAccordionElement, TSinchAccordionReact } from './types'
