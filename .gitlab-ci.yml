@@ -288,6 +288,7 @@ publish-wrappers-react:
     - pnpm install --frozen-lockfile --offline --reporter silent
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+    - pnpm --dir wrappers/react build
     - npm publish wrappers/react/ --verbose
     - node ./scripts/slack-changelog.js wrappers/react
 publish-theme-cpaas-mailjet:
