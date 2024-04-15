@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@types/jsdom':
-        specifier: ^21.1.6
-        version: 21.1.6
       jsdom:
         specifier: ^24.0.0
         version: 24.0.0
@@ -27,6 +24,9 @@ importers:
       '@nectary/eslint-plugin':
         specifier: workspace:*
         version: link:libs/eslint-plugin
+      '@types/jsdom':
+        specifier: ^21.1.6
+        version: 21.1.6
       '@types/node':
         specifier: ^18.17.17
         version: 18.17.17
@@ -4612,7 +4612,7 @@ packages:
       '@types/node': 18.17.17
       '@types/tough-cookie': 4.0.5
       parse5: 7.1.2
-    dev: false
+    dev: true
 
   /@types/json-schema@7.0.13:
     resolution: {integrity: sha512-RbSSoHliUbnXj3ny0CNFOoxrIDV6SUGyStHsvDqosw6CkdPV8TtWGlfecuK4ToyMEAql6pzNxgCFKanovUzlgQ==}
@@ -4653,6 +4653,7 @@ packages:
 
   /@types/node@18.17.17:
     resolution: {integrity: sha512-cOxcXsQ2sxiwkykdJqvyFS+MLQPLvIdwh5l6gNg8qF6s+C7XSkEWOZjK+XhUZd+mYvHV/180g2cnCcIl4l06Pw==}
+    dev: true
 
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -4751,7 +4752,7 @@ packages:
 
   /@types/tough-cookie@4.0.5:
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
-    dev: false
+    dev: true
 
   /@types/trusted-types@2.0.7:
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
