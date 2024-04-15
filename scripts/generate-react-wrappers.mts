@@ -48,9 +48,7 @@ function createWrapper(componentName: string): {
 
   const importCode = `import '@nectary/components/${componentName}'`
 
-  const code = `
-export type ${componentCamelCase}Props = JSX.IntrinsicElements['${elementName}'] & WrapperProps<NamedSlots['${elementName}']>
-export const ${componentCamelCase} = createReactWrapper<NamedSlots['${elementName}']>('${elementName}')`
+  const code = `export const ${componentCamelCase} = createReactWrapper<JSX.IntrinsicElements['${elementName}'], NamedSlots['${elementName}']>('${elementName}')`
 
   return {
     importCode,
@@ -63,7 +61,7 @@ const items = components.map((x) => createWrapper(x))
 const importCodes = items.map((item) => item?.importCode).join('\n')
 const codes = items.map((item) => item?.code).join('\n')
 
-const code = `import { createReactWrapper, WithSlots } from './utils';\nimport { NamedSlots, UnnamedSlots} from './slots';\n\n${importCodes}\n\n${codes}\n`
+const code = `import { createReactWrapper } from './utils'\nimport type { NamedSlots } from './slots'\n\n${importCodes}\n\n${codes}\n`
 
 await fs.writeFile(
   path.join(dirname, '..', 'wrappers', 'react', 'src', 'index.ts'),

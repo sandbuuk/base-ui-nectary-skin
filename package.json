@@ -6,7 +6,7 @@
     "docs:shell": "cd docs/shell; npm run start",
     "docs:build:shell": "cd docs/shell; npm run build",
     "docs:build:components": "cd docs/latest; npm run build",
-    "lint": "eslint . '*/**/*.{js,ts,tsx,mts}' && tsc --noEmit -p components/ && tsc --noEmit -p assets/ && tsc --noEmit -p tests/ && tsc --noEmit -p docs/common && tsc --noEmit -p docs/latest && tsc --noEmit -p docs/shell && stylelint 'components/**/*.html' 'components/**/*.css' 'assets/**/*.html' 'assets/**/*.css' 'docs/**/*.css'",
+    "lint": "eslint . '*/**/*.{ts,tsx,mts}' && tsc --noEmit -p components/ && tsc --noEmit -p assets/ && tsc --noEmit -p tests/ && tsc --noEmit -p docs/common && tsc --noEmit -p docs/latest && tsc --noEmit -p docs/shell && stylelint 'components/**/*.html' 'components/**/*.css' 'assets/**/*.html' 'assets/**/*.css' 'docs/**/*.css'",
     "test": "pnpm --dir tests test",
     "tokens:base": "tsm ./scripts/process-tokens.ts ./tokens/data.json themes/base base",
     "tokens:dark": "tsm ./scripts/process-tokens.ts ./tokens/data.json themes/dark dark",
@@ -46,7 +46,6 @@
   "dependencies": {
     "@types/jsdom": "^21.1.6",
     "jsdom": "^24.0.0",
-    "labs": "^2.0.2",
-    "lit": "^3.1.2"
+    "labs": "^2.0.2"
   }
 }

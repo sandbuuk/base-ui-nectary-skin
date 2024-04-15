@@ -7,15 +7,17 @@ const componentsDir = path.join(dirname, '..', 'components')
 
 const IGNORED_FOLDERS = ['node_modules', 'utils', 'stop-events']
 
-enum SlotStyle {
-  NoSlots,
-  Named,
-  Unnamed,
+const SlotStyle = {
+  NoSlots: 0,
+  Named: 1,
+  Unnamed: 2,
   // An invalid state
-  Both,
-}
+  Both: 3,
+} as const
 
-function getSlotStyle(slots: string[]): SlotStyle {
+type TSlotStyle = (typeof SlotStyle)[keyof typeof SlotStyle]
+
+function getSlotStyle(slots: string[]): TSlotStyle {
   if (slots.length === 0) {
     return SlotStyle.NoSlots
   }

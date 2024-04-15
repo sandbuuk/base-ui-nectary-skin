@@ -1,4 +1,4 @@
-import React from 'react'
+import { createElement } from 'react'
 import type { ReactNode } from 'react'
 
 type Slots<Keys extends string> = {
@@ -19,7 +19,7 @@ function renderSlot(slotName: string, node: ReactNode) {
     },
   }
 
-  return React.createElement('div', props, node)
+  return createElement('div', props, node)
 }
 
 function mapSlots<T extends string>(
@@ -33,7 +33,8 @@ function mapSlots<T extends string>(
   }
 
   for (const k of Object.keys(slots)) {
-    results.push(fn(k, slots[k]))
+    // SAFETY: Object.keys in TS returns string[], which destorys type infrormation about the keys. They are still keyof Slots<T>
+    results.push(fn(k, slots[k as keyof Slots<T>]))
   }
 
   return results
@@ -47,6 +48,10 @@ function renderSlotsOrChildren<T extends string>(
     return children
   }
 
+  if (slots == undefined) {
+    return null
+  }
+
   const renderedSlots = mapSlots(slots, renderSlot)
 
   if (renderedSlots.length === 0) {
@@ -58,11 +63,11 @@ function renderSlotsOrChildren<T extends string>(
   return renderedSlots
 }
 
-export function createReactWrapper<T extends string>(
+export function createReactWrapper<OtherProps, T extends string>(
   element: string
-): React.FC<WrapperProps<T>> {
-  return ({ slots, children, ...others }: WrapperProps<T>) =>
-    React.createElement(
+): React.FC<WrapperProps<T> & OtherProps> {
+  return ({ slots, children, ...others }: WrapperProps<T> & OtherProps) =>
+    createElement(
       element,
       others,
       renderSlotsOrChildren<T>(children, slots)

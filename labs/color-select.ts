@@ -19,7 +19,7 @@ const vibrantColorNames = [
 ]
 
 @customElement('sinch-color-select')
-class ColorSelect extends LitElement {
+export class ColorSelect extends LitElement {
   @property({ type: 'boolean' }) open = false
   @property() value = ''
 
