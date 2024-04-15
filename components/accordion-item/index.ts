@@ -1,7 +1,6 @@
 import '../icon'
 import '../text'
 import '../title'
-import type { TSinchTitleElement } from '../title/types'
 import {
   defineCustomElement,
   getAttribute,
@@ -16,8 +15,9 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchAccordionItemElement, TSinchAccordionItemReact, TSinchAccordionStatusType } from './types'
 import { statusValues } from './utils'
+import type { TSinchAccordionItemElement, TSinchAccordionItemReact, TSinchAccordionStatusType } from './types'
+import type { TSinchTitleElement } from '../title/types'
 
 const template = document.createElement('template')
 
