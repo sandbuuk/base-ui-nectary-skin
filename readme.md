@@ -13,7 +13,7 @@ This is the monorepo for Nectary, Sinch’s design system. Our modular approach 
 | [`/tokens`](https://gitlab.com/sinch/sinch-projects/applications/teams/nectary/components/-/tree/main/tokens)         | Design tokens                                                                     |
 
 # Dependencies
-* [Node 18](https://nodejs.org/en)
+* [Node 20](https://nodejs.org/en)
 * [pnpm](https://pnpm.io/es/)
 
 # Getting Started
