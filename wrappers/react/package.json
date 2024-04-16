@@ -9,10 +9,10 @@
     "build": "NODE_ENV=production babel . --extensions '.ts' --out-dir . && tsc --declaration --emitDeclarationOnly"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.15",
-    "@nectary/components": "workspace:*"
+    "@babel/runtime": "^7.22.15"
   },
   "devDependencies": {
+    "@nectary/components": "workspace:*",
     "@babel/cli": "^7.22.15",
     "@babel/core": "^7.22.20",
     "@babel/plugin-transform-runtime": "^7.22.15",
