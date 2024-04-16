@@ -46,7 +46,7 @@ function createWrapper(componentName: string): {
   const elementName = `sinch-${componentName}`
   const componentCamelCase = capitalizeFirstLetter(camelCase(componentName))
 
-  const importCode = `import '@nectary/components/${componentName}'`
+  const importCode = `import type {} from '@nectary/components/${componentName}'`
 
   const code = `export const ${componentCamelCase} = createReactWrapper<JSX.IntrinsicElements['${elementName}'], NamedSlots['${elementName}']>('${elementName}')`
 
