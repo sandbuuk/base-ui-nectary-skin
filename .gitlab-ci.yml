@@ -36,6 +36,7 @@ lint:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
     - npm install --no-audit --no-fund --global pnpm
+    - pnpm -v
     - pnpm config set store-dir .pnpm-store
     - pnpm install --frozen-lockfile
   script:
