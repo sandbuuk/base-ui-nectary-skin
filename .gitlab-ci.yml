@@ -35,9 +35,7 @@ lint:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile
+    - ./scripts/ci-install-packages.sh
   script:
     - pnpm lint
 
@@ -61,10 +59,7 @@ visual-tests:
           - firefox-vue
           - webkit-angular
   before_script:
-    - uname -a
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - - ./scripts/ci-install-packages.sh
   script:
     - pnpm --dir tests test:ci-$BROWSER_FRAMEWORK
   artifacts:
@@ -89,9 +84,7 @@ publish-components:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - ./scripts/ci-install-packages.sh
   script:
     - ./scripts/publish-package.sh components ${NPM_TOKEN} $CI_COMMIT_TAG
 
@@ -112,9 +105,7 @@ publish-assets:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - ./scripts/ci-install-packages.sh
   script:
     - ./scripts/publish-package.sh assets ${NPM_TOKEN} $CI_COMMIT_TAG
 
@@ -135,9 +126,7 @@ publish-theme-base:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - ./scripts/ci-install-packages.sh
   script:
     - ./scripts/publish-package.sh themes/base ${NPM_TOKEN} $CI_COMMIT_TAG
 
@@ -158,9 +147,7 @@ publish-theme-dark:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - ./scripts/ci-install-packages.sh
   script:
     - ./scripts/publish-package.sh themes/dark ${NPM_TOKEN} $CI_COMMIT_TAG
 
@@ -181,9 +168,7 @@ publish-theme-mm:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - ./scripts/ci-install-packages.sh
   script:
     - ./scripts/publish-package.sh themes/message-media ${NPM_TOKEN} $CI_COMMIT_TAG
 
@@ -203,9 +188,7 @@ publish-theme-cpaas-base:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - ./scripts/ci-install-packages.sh
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish themes/cpaas-base/ --verbose
@@ -227,9 +210,7 @@ publish-theme-cpaas-dashboard:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - ./scripts/ci-install-packages.sh
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish themes/cpaas-dashboard/ --verbose
@@ -251,9 +232,7 @@ publish-theme-cpaas-mailgun:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - ./scripts/ci-install-packages.sh
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish themes/cpaas-mailgun/ --verbose
@@ -274,9 +253,7 @@ publish-wrappers-react:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - ./scripts/ci-install-packages.sh
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - pnpm --dir wrappers/react build
@@ -298,9 +275,7 @@ publish-theme-cpaas-mailjet:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
-    - npm install --no-audit --no-fund --global pnpm
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile --offline --reporter silent
+    - ./scripts/ci-install-packages.sh
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm publish themes/cpaas-mailjet/ --verbose
