@@ -14,9 +14,10 @@ pnpm --dir $DIR build
 # Configure npm for publishing
 echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
 
+pnpm run dry-run
+
 # Check if CI_COMMIT_TAG is provided and not empty
-if [ ! -z "$CI_COMMIT_TAG" ]; then
-  pnpm run dry-run
+if [ "$CI_COMMIT_REF_SLUG" == "$CI_DEFAULT_BRANCH" ]; then
   pnpm run release
 else
   # TODO: What should we do
