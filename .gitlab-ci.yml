@@ -68,7 +68,7 @@ visual-tests:
 
 publish:
   extends: .cache
-  stage: publish
+  stage: deploy
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   script:
