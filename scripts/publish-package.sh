@@ -16,9 +16,6 @@ echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
 
 pnpm run dry-run
 
-# Check if CI_COMMIT_TAG is provided and not empty
 if [ "$CI_COMMIT_REF_SLUG" == "$CI_DEFAULT_BRANCH" ]; then
   pnpm run release
-else
-  echo "Not on the default branch, skipping release"
 fi
