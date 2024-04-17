@@ -1,6 +1,11 @@
 {
   "private": true,
   "scripts": {
+    "dry-run": "multi-semantic-release --sequential-init --dry-run",
+    "release": "multi-semantic-release --sequential-init",
+    "commit": "commit",
+    "commitlint": "commitlint -e",
+    "prepare": "is-ci || husky install",
     "start": "concurrently --raw npm:docs:shell npm:docs:components",
     "docs:components": "cd docs/latest; npm run start",
     "docs:shell": "cd docs/shell; npm run start",
@@ -47,5 +52,20 @@
   "dependencies": {
     "jsdom": "^24.0.0",
     "labs": "^2.0.2"
-  }
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
 }

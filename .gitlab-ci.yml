@@ -7,6 +7,13 @@ include:
     file: "auto_security.yml"
 
 default:
+  image: node:20
+  before_script:
+    - echo -e "\e[0Ksection_start:`date +%s`:job_env_output[collapsed=true]\r\e[0KJob Environment output"
+    - pwd
+    - env
+    - echo -e "\e[0Ksection_end:`date +%s`:job_env_output\r\e[0K"
+    - ./scripts/ci-install-packages.sh
   tags:
     - saas
     - application
@@ -20,11 +27,7 @@ stages:
   - security-scan-sonar
   - deploy
 
-lint:
-  image: node:20
-  stage: lint
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+.cache:
   cache:
     key:
       files:
@@ -32,34 +35,30 @@ lint:
       prefix: cache
     paths:
       - .pnpm-store
+
+lint:
+  extends: .cache
+  image: node:20
+  stage: lint
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
   script:
     - pnpm lint
 
 visual-tests:
   stage: test
   image: mcr.microsoft.com/playwright:v1.33.0
+  extends: .cache
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
   parallel:
     matrix:
       - BROWSER_FRAMEWORK:
           - chromium-react
           - firefox-vue
           - webkit-angular
-  before_script:
-    - ./scripts/ci-install-packages.sh
   script:
     - pnpm --dir tests test:ci-$BROWSER_FRAMEWORK
   artifacts:
@@ -67,213 +66,18 @@ visual-tests:
     paths:
       - tests/test-results
 
-publish-components:
-  stage: deploy
+publish:
+  extends: .cache
+  stage: publish
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
-    - if: $CI_COMMIT_TAG =~ /^components@/
-  image: node:20
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   script:
-    - ./scripts/publish-package.sh components ${NPM_TOKEN} $CI_COMMIT_TAG
-
-publish-assets:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_BRANCH == "main"
-    - if: $CI_COMMIT_TAG =~ /^assets@/
-  image: node:20
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
-  script:
-    - ./scripts/publish-package.sh assets ${NPM_TOKEN} $CI_COMMIT_TAG
-
-publish-theme-base:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_BRANCH == "main"
-    - if: $CI_COMMIT_TAG =~ /^theme-base@/
-  image: node:20
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
-  script:
-    - ./scripts/publish-package.sh themes/base ${NPM_TOKEN} $CI_COMMIT_TAG
-
-publish-theme-dark:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_BRANCH == "main"
-    - if: $CI_COMMIT_TAG =~ /^theme-dark@/
-  image: node:20
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
-  script:
-    - ./scripts/publish-package.sh themes/dark ${NPM_TOKEN} $CI_COMMIT_TAG
-
-publish-theme-mm:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_BRANCH == "main"
-    - if: $CI_COMMIT_TAG =~ /^theme-mm@/
-  image: node:20
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
-  script:
-    - ./scripts/publish-package.sh themes/message-media ${NPM_TOKEN} $CI_COMMIT_TAG
-
-publish-theme-cpaas-base:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^theme-cpaas-base@/
-  image: node:20
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
-  script:
-    - ./scripts/publish-package.sh themes/cpaas-base ${NPM_TOKEN} $CI_COMMIT_TAG
-
-publish-theme-cpaas-dashboard:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^theme-cpaas-dashboard@/
-  image: node:20
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
-  script:
-    - ./scripts/publish-package.sh themes/cpaas-dashboard ${NPM_TOKEN} $CI_COMMIT_TAG
-
-publish-theme-cpaas-mailgun:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^theme-cpaas-mailgun@/
-  image: node:20
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
-  script:
-    - ./scripts/publish-package.sh themes/cpaas-mailgun ${NPM_TOKEN} $CI_COMMIT_TAG
-publish-wrappers-react:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^wrappers-react@/
-  image: node:20
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
-  script:
-    - ./scripts/publish-package.sh wrappers/react ${NPM_TOKEN} $CI_COMMIT_TAG
-publish-theme-cpaas-mailjet:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^theme-cpaas-mailjet@/
-  image: node:20
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
-    policy: pull
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
-  before_script:
-    - ./scripts/ci-install-packages.sh
-  script:
-    - ./scripts/publish-package.sh themes/cpaas-mailjet ${NPM_TOKEN} $CI_COMMIT_TAG
-
+    # a bit different configuration for publishing packages.
+    - ./script/publish-package.sh ${NPM_TOKEN}
 
 build-docs:
   stage: build
-  image: node:20
+  extends: .cache
   rules:
     - if: $CI_COMMIT_TAG =~ /^components@/
     - if: $CI_COMMIT_TAG == "docs"
@@ -323,7 +127,6 @@ publish-docs:
 
 pages:
   stage: deploy
-  image: node:20
   rules:
     - if: $CI_COMMIT_TAG == "preview"
   cache:
