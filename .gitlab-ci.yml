@@ -71,7 +71,7 @@ publish:
   stage: deploy
   script:
     # a bit different configuration for publishing packages.
-    - ./script/publish-package.sh ${NPM_TOKEN}
+    - ./scripts/publish-package.sh ${NPM_TOKEN}
 
 build-docs:
   stage: build
@@ -79,13 +79,6 @@ build-docs:
   rules:
     - if: $CI_COMMIT_TAG =~ /^components@/
     - if: $CI_COMMIT_TAG == "docs"
-  cache:
-    key:
-      files:
-        - pnpm-lock.yaml
-      prefix: cache
-    paths:
-      - .pnpm-store
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
