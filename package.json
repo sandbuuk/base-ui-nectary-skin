@@ -67,5 +67,5 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  },
+  }
 }
