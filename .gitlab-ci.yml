@@ -69,6 +69,10 @@ visual-tests:
 publish:
   extends: .cache
   stage: deploy
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_BRANCH == $CI_DEFAULT_BRANCH
+    - when: never
   script:
     # a bit different configuration for publishing packages.
     - ./scripts/publish-package.sh ${NPM_TOKEN}
