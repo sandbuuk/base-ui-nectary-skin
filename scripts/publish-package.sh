@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+set -eu pipefail
 
 NPM_TOKEN=$1
 

@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "nectary",
   "scripts": {
     "dry-run": "multi-semantic-release --sequential-init --dry-run",
     "release": "multi-semantic-release --sequential-init",
@@ -42,6 +43,7 @@
     "eslint-plugin-react": "^7.33.2",
     "husky": "^9.0.11",
     "is-ci": "^3.0.1",
+    "multi-semantic-release": "^3.0.2",
     "postcss-html": "^1.5.0",
     "rimraf": "^4.4.1",
     "slackify-markdown": "^4.4.0",
