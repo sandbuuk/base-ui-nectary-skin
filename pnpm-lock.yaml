@@ -1001,6 +1001,7 @@ packages:
   '@aashutoshrathi/word-wrap@1.2.6':
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   '@alex-e-leon/stylelint-value-no-unknown-custom-properties@4.0.2':
     resolution: {integrity: sha512-+bURAemv63n7id7HpEEXAdIcJldkvf/LMlgrQvuN1UGrG1/zV5n1KbzGIh22XMzGTeZZJXzqYYU+wigszvN+2Q==}
@@ -10782,6 +10783,7 @@ snapshots:
     dependencies:
       eslint: 8.49.0
       eslint-visitor-keys: 3.4.3
+    dev: true
 
   '@eslint-community/regexpp@4.8.1': {}
 
@@ -10798,6 +10800,7 @@ snapshots:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   '@eslint/js@8.49.0': {}
 
@@ -10814,6 +10817,7 @@ snapshots:
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   '@humanwhocodes/module-importer@1.0.1': {}
 
@@ -10956,6 +10960,7 @@ snapshots:
     dependencies:
       '@nodelib/fs.stat': 2.0.5
       run-parallel: 1.2.0
+    dev: true
 
   '@nodelib/fs.stat@2.0.5': {}
 
@@ -10963,6 +10968,7 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
+    dev: true
 
   '@npmcli/config@6.2.1':
     dependencies:
@@ -11942,6 +11948,7 @@ snapshots:
   ansi-styles@4.3.0:
     dependencies:
       color-convert: 2.0.1
+    dev: true
 
   ansi-styles@6.2.1: {}
 
@@ -12303,6 +12310,7 @@ snapshots:
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
+    dev: true
 
   brace-expansion@2.0.1:
     dependencies:
@@ -12470,6 +12478,7 @@ snapshots:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+    dev: true
 
   chalk@5.3.0: {}
 
@@ -12558,6 +12567,7 @@ snapshots:
   color-convert@2.0.1:
     dependencies:
       color-name: 1.1.4
+    dev: true
 
   color-name@1.1.3: {}
 
@@ -12747,6 +12757,7 @@ snapshots:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+    dev: true
 
   crypto-random-string@2.0.0: {}
 
@@ -13093,6 +13104,7 @@ snapshots:
   doctrine@2.1.0:
     dependencies:
       esutils: 2.0.3
+    dev: true
 
   doctrine@3.0.0:
     dependencies:
@@ -13657,6 +13669,7 @@ snapshots:
     dependencies:
       esrecurse: 4.3.0
       estraverse: 5.3.0
+    dev: true
 
   eslint-utils@2.1.0:
     dependencies:
@@ -13707,22 +13720,26 @@ snapshots:
       text-table: 0.2.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   espree@9.6.1:
     dependencies:
       acorn: 8.10.0
       acorn-jsx: 5.3.2(acorn@8.10.0)
       eslint-visitor-keys: 3.4.3
+    dev: true
 
   esprima@4.0.1: {}
 
   esquery@1.5.0:
     dependencies:
       estraverse: 5.3.0
+    dev: true
 
   esrecurse@4.3.0:
     dependencies:
       estraverse: 5.3.0
+    dev: true
 
   estraverse@4.3.0: {}
 
@@ -13908,6 +13925,7 @@ snapshots:
   fastq@1.15.0:
     dependencies:
       reusify: 1.0.4
+    dev: true
 
   fault@1.0.4:
     dependencies:
@@ -13936,6 +13954,7 @@ snapshots:
   file-entry-cache@6.0.1:
     dependencies:
       flat-cache: 3.1.0
+    dev: true
 
   file-loader@6.2.0(webpack@5.88.2(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))):
     dependencies:
@@ -14007,6 +14026,7 @@ snapshots:
     dependencies:
       locate-path: 6.0.0
       path-exists: 4.0.0
+    dev: true
 
   find-up@6.3.0:
     dependencies:
@@ -14026,6 +14046,7 @@ snapshots:
       flatted: 3.2.9
       keyv: 4.5.3
       rimraf: 3.0.2
+    dev: true
 
   flatted@3.2.9: {}
 
@@ -14202,6 +14223,7 @@ snapshots:
   glob-parent@6.0.2:
     dependencies:
       is-glob: 4.0.3
+    dev: true
 
   glob-to-regexp@0.4.1: {}
 
@@ -14221,6 +14243,7 @@ snapshots:
       minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
+    dev: true
 
   glob@8.1.0:
     dependencies:
@@ -14252,6 +14275,7 @@ snapshots:
   globals@13.21.0:
     dependencies:
       type-fest: 0.20.2
+    dev: true
 
   globalthis@1.0.3:
     dependencies:
@@ -14691,6 +14715,7 @@ snapshots:
     dependencies:
       parent-module: 1.0.1
       resolve-from: 4.0.0
+    dev: true
 
   import-from@4.0.0: {}
 
@@ -14713,6 +14738,7 @@ snapshots:
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
+    dev: true
 
   inherits@2.0.3: {}
 
@@ -15077,6 +15103,7 @@ snapshots:
   js-yaml@4.1.0:
     dependencies:
       argparse: 2.0.1
+    dev: true
 
   jsbn@0.1.1: {}
 
@@ -15179,6 +15206,7 @@ snapshots:
   keyv@4.5.3:
     dependencies:
       json-buffer: 3.0.1
+    dev: true
 
   kind-of@6.0.3: {}
 
@@ -15250,6 +15278,7 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
       type-check: 0.4.0
+    dev: true
 
   license-webpack-plugin@4.0.2(webpack@5.76.1(esbuild@0.17.8)):
     dependencies:
@@ -15313,6 +15342,7 @@ snapshots:
   locate-path@6.0.0:
     dependencies:
       p-locate: 5.0.0
+    dev: true
 
   locate-path@7.2.0:
     dependencies:
@@ -16083,6 +16113,7 @@ snapshots:
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.11
+    dev: true
 
   minimatch@5.1.6:
     dependencies:
@@ -16460,6 +16491,7 @@ snapshots:
   once@1.4.0:
     dependencies:
       wrappy: 1.0.2
+    dev: true
 
   onetime@5.1.2:
     dependencies:
@@ -16498,6 +16530,7 @@ snapshots:
       levn: 0.4.1
       prelude-ls: 1.2.1
       type-check: 0.4.0
+    dev: true
 
   ora@5.4.1:
     dependencies:
@@ -16556,6 +16589,7 @@ snapshots:
   p-limit@3.1.0:
     dependencies:
       yocto-queue: 0.1.0
+    dev: true
 
   p-limit@4.0.0:
     dependencies:
@@ -16572,6 +16606,7 @@ snapshots:
   p-locate@5.0.0:
     dependencies:
       p-limit: 3.1.0
+    dev: true
 
   p-locate@6.0.0:
     dependencies:
@@ -16644,6 +16679,7 @@ snapshots:
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
+    dev: true
 
   parse-entities@2.0.0:
     dependencies:
@@ -17500,6 +17536,7 @@ snapshots:
   rimraf@3.0.2:
     dependencies:
       glob: 7.2.3
+    dev: true
 
   rimraf@4.4.1:
     dependencies:
@@ -17516,6 +17553,7 @@ snapshots:
   run-parallel@1.2.0:
     dependencies:
       queue-microtask: 1.2.3
+    dev: true
 
   rxjs@6.6.7:
     dependencies:
@@ -17747,6 +17785,7 @@ snapshots:
   shebang-command@2.0.0:
     dependencies:
       shebang-regex: 3.0.0
+    dev: true
 
   shebang-regex@1.0.0: {}
 
@@ -18028,6 +18067,7 @@ snapshots:
   strip-ansi@6.0.1:
     dependencies:
       ansi-regex: 5.0.1
+    dev: true
 
   strip-ansi@7.1.0:
     dependencies:
@@ -18145,6 +18185,7 @@ snapshots:
   supports-color@7.2.0:
     dependencies:
       has-flag: 4.0.0
+    dev: true
 
   supports-color@8.1.1:
     dependencies:
@@ -18426,6 +18467,7 @@ snapshots:
   type-check@0.4.0:
     dependencies:
       prelude-ls: 1.2.1
+    dev: true
 
   type-detect@0.1.1: {}
 
@@ -19258,6 +19300,7 @@ snapshots:
   which@1.3.1:
     dependencies:
       isexe: 2.0.0
+    dev: true
 
   which@2.0.2:
     dependencies:
