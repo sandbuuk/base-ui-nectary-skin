@@ -8,11 +8,15 @@ defineCustomElement('sinch-logo-email-on-acid-icon-wordmark', createLogoClass(te
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-logo-email-on-acid-icon-wordmark': TSinchLogoReact,
+      'sinch-logo-email-on-acid-icon-wordmark': TSinchLogoReact & {
+        colored?: boolean,
+      },
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-logo-email-on-acid-icon-wordmark': TSinchLogoElement,
+    'sinch-logo-email-on-acid-icon-wordmark': TSinchLogoElement & {
+      colored?: boolean,
+    },
   }
 }

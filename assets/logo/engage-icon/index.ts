@@ -8,11 +8,15 @@ defineCustomElement('sinch-logo-engage-icon', createLogoClass(templateHTML))
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-logo-engage-icon': TSinchLogoReact,
+      'sinch-logo-engage-icon': TSinchLogoReact & {
+        colored?: boolean,
+      },
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-logo-engage-icon': TSinchLogoElement,
+    'sinch-logo-engage-icon': TSinchLogoElement & {
+      colored?: boolean,
+    },
   }
 }
