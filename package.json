@@ -2,8 +2,8 @@
   "private": true,
   "name": "nectary",
   "scripts": {
-    "dry-run": "multi-semantic-release --sequential-init --dry-run",
-    "release": "multi-semantic-release --sequential-init",
+    "dry-run": "multi-semantic-release --sequential-init --ignore-private-packages --dry-run",
+    "release": "multi-semantic-release --sequential-init --ignore-private-packages",
     "commit": "commit",
     "commitlint": "commitlint -e",
     "prepare": "is-ci || husky install",
