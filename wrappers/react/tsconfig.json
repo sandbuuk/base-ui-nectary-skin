@@ -1,4 +1,5 @@
 {
+  "extends": "@sinch/typescript-config",
   "compilerOptions": {
     "strict": true,
     "allowSyntheticDefaultImports": true,
@@ -8,11 +9,14 @@
       "esnext",
       "dom",
     ],
-    "jsx": "react-jsx",
     "target": "esnext",
     "module": "nodenext",
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "declaration": true,
+    "exactOptionalPropertyTypes": true,
+    "strictNullChecks": true,
+    "jsx": "react-jsx",
   }
 }

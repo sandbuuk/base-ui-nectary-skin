@@ -6,3 +6,4 @@ node_modules/
 fonts/.uuid
 .idea
 components/**/*.d.ts
+.pnpm-store
