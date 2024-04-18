@@ -6,6 +6,26 @@ include:
     ref: v1-latest
     file: "auto_security.yml"
 
+sinch_global_security_stage_secret_detection_gitleaks:
+  extends: .sinch_global_security_stage_secret_detection_gitleaks
+  rules:
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+
+sinch_global_security_stage_dependency_scanning_dependency_check:
+  extends: .sinch_global_security_stage_dependency_scanning_dependency_check
+  rules:
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+
+consolidate_third_party_security_reports:
+  extends: .consolidate_third_party_security_reports
+  rules:
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+
+sinch_global_security_stage_sast_sonarqube:
+  extends: .sinch_global_security_stage_sast_sonarqube
+  rules:
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+
 default:
   image: node:20
   before_script:
