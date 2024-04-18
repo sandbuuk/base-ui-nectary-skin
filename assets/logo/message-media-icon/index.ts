@@ -8,11 +8,15 @@ defineCustomElement('sinch-logo-message-media-icon', createLogoClass(templateHTM
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-logo-message-media-icon': TSinchLogoReact,
+      'sinch-logo-message-media-icon': TSinchLogoReact & {
+        colored?: boolean,
+      },
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-logo-message-media-icon': TSinchLogoElement,
+    'sinch-logo-message-media-icon': TSinchLogoElement & {
+      colored?: boolean,
+    },
   }
 }
