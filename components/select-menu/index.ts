@@ -150,6 +150,16 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
     return getBooleanAttribute(this, 'multiple')
   }
 
+  set searchable(isSearchable: boolean | null) {
+    updateBooleanAttribute(this, 'searchable', isSearchable)
+  }
+
+  get searchable() {
+    const searchableAttribute = this.getAttribute('searchable')
+
+    return searchableAttribute === null ? searchableAttribute : isAttrTrue(searchableAttribute)
+  }
+
   set 'search-placeholder'(placeholder: string) {
     updateAttribute(this.#$search, 'placeholder', placeholder)
   }
@@ -273,10 +283,13 @@ defineCustomElement('sinch-select-menu', class extends NectaryElement {
   }
 
   #onOptionSlotChange = () => {
-    const hasSearchableAttribute = this.hasAttribute('searchable')
+    const searchable = this.searchable
     const options = this.#$optionSlot.assignedElements()
     const isEnoughOptions = options.length >= NUM_ITEMS_SEARCH
-    const isSearchActive = isEnoughOptions || hasSearchableAttribute
+    // (default)  searchable is null => show search if enough options
+    // searchable is true => always show search
+    // searchable is false => never show search
+    const isSearchActive = (isEnoughOptions && searchable !== false) || Boolean(searchable)
 
     if (!isSearchActive) {
       updateAttribute(this.#$search, 'value', null)

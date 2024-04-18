@@ -4,6 +4,7 @@ import { MultipleExample } from './examples/Multiple.tsx?example'
 import { SearchExample } from './examples/Search.tsx?example'
 import { AsyncExample } from './examples/Async.tsx?example'
 import { CustomSearchExample } from './examples/CustomSearch.tsx?example'
+import { SearchDisabledExample } from './examples/SearchDisabled.tsx?example'
 
 # Examples
 
@@ -28,6 +29,12 @@ Built-in search appears automatically with 7+ options available, if you want the
 Use `search-placeholder` to customise the search bar text.
 
 <Example Component={SearchExample}/>
+
+## Remove Search
+
+By default the search bar will appear automatically when there's more than 7 elements, you can remove it by explicitely setting `searchable` to false.
+
+<Example Component={SearchDisabledExample}/>
 
 ## Custom Search
 

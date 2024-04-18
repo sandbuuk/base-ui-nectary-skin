@@ -8,7 +8,7 @@ export type TSinchSelectMenuElement = HTMLElement & {
   /** Allows multiple selection */
   multiple: boolean,
   /** Enforce the search bar appearing, by default it appears above a certain number of options  */
-  searchable: boolean,
+  searchable: boolean | null,
   /** Text for search bar's placeholder */
   'search-placeholder': string,
   /** Change value event */
@@ -31,7 +31,7 @@ export type TSinchSelectMenuReact = TSinchElementReact<TSinchSelectMenuElement> 
   /** Allows multiple selection */
   multiple?: boolean,
   /** Enforce the search bar appearing, by default it appears above a certain number of options  */
-  searchable?: boolean,
+  searchable?: boolean | null,
   /** Text for search bar's placeholder */
   'search-placeholder'?: string,
   /** Label that is used for a11y */
