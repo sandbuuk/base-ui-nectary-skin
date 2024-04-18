@@ -1,3 +1,7 @@
+## v0.12.0 (2024-04-18)
+
+* ➕ add `colored` attributes for some of the logos
+
 ## v0.11.0 (2023-08-30)
 
 * ➕ add `sinch-logo-nectary-icon` component

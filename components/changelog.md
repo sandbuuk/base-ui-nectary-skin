@@ -1,3 +1,7 @@
+## v2.8.8 (2024-04-18)
+
+- add possibility to remove search bar in select-menu component
+
 ## v2.8.7 (2024-04-08)
 
 - ➕ add `searchable` & `search-placeholder` attributes + `-search-change` event to sinch-select-menu
