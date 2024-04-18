@@ -55,12 +55,14 @@ visual-tests:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   parallel:
     matrix:
-      - BROWSER_FRAMEWORK:
-          - chromium-react
-          - firefox-vue
-          - webkit-angular
+      - BROWSER_FRAMEWORK: chromium-react
+        SHARD: [1, 2, 3]
+      - BROWSER_FRAMEWORK: firefox-vue
+        SHARD: [1, 2, 3]
+      - BROWSER_FRAMEWORK: webkit-angular
+        SHARD: [1, 2, 3]
   script:
-    - pnpm --dir tests test:ci-$BROWSER_FRAMEWORK
+    - pnpm --dir tests test:ci-$BROWSER_FRAMEWORK --shard=$SHARD/3
   artifacts:
     when: on_failure
     paths:
