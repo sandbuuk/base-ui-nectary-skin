@@ -48,6 +48,11 @@ lint:
     - pnpm lint
 
 visual-tests:
+  variables:
+    KUBERNETES_CPU_REQUEST: "1"
+    KUBERNETES_CPU_LIMIT: "2"
+    KUBERNETES_MEMORY_REQUEST: "2Gi"
+    KUBERNETES_MEMORY_LIMIT: "4Gi"
   stage: test
   image: mcr.microsoft.com/playwright:v1.33.0
   extends: .cache
