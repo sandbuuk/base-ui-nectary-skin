@@ -122,7 +122,7 @@ publish:
     NPM_TOKEN: $NPM_TOKEN
   script:
     # a bit different configuration for publishing packages.
-    - ./scripts/publish-package.sh ${NPM_TOKEN}
+    - pnpm run dry-run
 
 build-docs:
   stage: build
