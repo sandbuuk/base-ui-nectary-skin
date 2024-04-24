@@ -9,21 +9,18 @@ include:
 sinch_global_security_stage_secret_detection_gitleaks:
   extends: .sinch_global_security_stage_secret_detection_gitleaks
   before_script: []
-  tags: []
   rules:
     - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
 
 sinch_global_security_stage_dependency_scanning_dependency_check:
   extends: .sinch_global_security_stage_dependency_scanning_dependency_check
   before_script: []
-  tags: []
   rules:
     - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
 
 consolidate_third_party_security_reports:
   extends: .consolidate_third_party_security_reports
   before_script: []
-  tags: []
   rules:
     - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
 
@@ -106,7 +103,7 @@ publish:
   stage: deploy
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
     - when: never
   script:
     # a bit different configuration for publishing packages.
