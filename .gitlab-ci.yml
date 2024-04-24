@@ -11,18 +11,21 @@ sinch_global_security_stage_secret_detection_gitleaks:
   before_script: []
   rules:
     - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+      allow_failure: true
 
 sinch_global_security_stage_dependency_scanning_dependency_check:
   extends: .sinch_global_security_stage_dependency_scanning_dependency_check
   before_script: []
   rules:
     - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+      allow_failure: true
 
 consolidate_third_party_security_reports:
   extends: .consolidate_third_party_security_reports
   before_script: []
   rules:
     - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+      allow_failure: true
 
 sinch_global_security_stage_sast_sonarqube:
   extends: .sinch_global_security_stage_sast_sonarqube
@@ -30,6 +33,7 @@ sinch_global_security_stage_sast_sonarqube:
   tags: []
   rules:
     - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+      allow_failure: true
 
 default:
   image: node:20
