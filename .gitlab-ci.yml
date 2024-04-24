@@ -137,6 +137,8 @@ publish:
     - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
     - when: never
   script:
+    ## apparently just using GIT_LFS_SKIP_SMUDGE isn't enough
+    - git lfs uninstall
     - pnpm run release
 
 build-docs:
