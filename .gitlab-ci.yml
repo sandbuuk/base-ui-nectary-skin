@@ -33,12 +33,6 @@ sinch_global_security_stage_sast_sonarqube:
 
 default:
   image: node:20
-  before_script:
-    - echo -e "\e[0Ksection_start:`date +%s`:job_env_output[collapsed=true]\r\e[0KJob Environment output"
-    - pwd
-    - env
-    - echo -e "\e[0Ksection_end:`date +%s`:job_env_output\r\e[0K"
-    - ./scripts/ci-install-packages.sh
   tags:
     - saas
     - application
@@ -52,6 +46,14 @@ stages:
   - security-scan-sonar
   - deploy
 
+.prepare-ci:
+  before_script:
+    - echo -e "\e[0Ksection_start:`date +%s`:job_env_output[collapsed=true]\r\e[0KJob Environment output"
+    - pwd
+    - env
+    - echo -e "\e[0Ksection_end:`date +%s`:job_env_output\r\e[0K"
+    - ./scripts/ci-install-packages.sh
+
 .cache:
   cache:
     key:
@@ -62,8 +64,9 @@ stages:
       - .pnpm-store
 
 lint:
-  extends: .cache
-  image: node:20
+  extends:
+    - .cache
+    - .prepare-ci
   stage: lint
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
@@ -80,7 +83,9 @@ visual-tests:
     KUBERNETES_MEMORY_LIMIT: "4Gi"
   stage: test
   image: mcr.microsoft.com/playwright:v1.33.0
-  extends: .cache
+  extends:
+    - .cache
+    - .prepare-ci
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   parallel:
@@ -99,7 +104,9 @@ visual-tests:
       - tests/test-results
 
 publish:
-  extends: .cache
+  extends:
+    - .cache
+    - .prepare-ci
   stage: deploy
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
@@ -111,7 +118,9 @@ publish:
 
 build-docs:
   stage: build
-  extends: .cache
+  extends:
+    - .cache
+    - .prepare-ci
   rules:
     - if: $CI_COMMIT_TAG =~ /^components@/
     - if: $CI_COMMIT_TAG == "docs"
@@ -156,6 +165,7 @@ pages:
   stage: deploy
   rules:
     - if: $CI_COMMIT_TAG == "preview"
+  extends: .prepare-ci
   cache:
     key:
       files:
