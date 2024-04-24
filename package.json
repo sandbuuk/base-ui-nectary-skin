@@ -1,6 +1,12 @@
 {
   "private": true,
+  "name": "nectary",
   "scripts": {
+    "dry-run": "multi-semantic-release --sequential-init --ignore-private-packages --dry-run",
+    "release": "multi-semantic-release --sequential-init --ignore-private-packages",
+    "commit": "commit",
+    "commitlint": "commitlint -e",
+    "prepare": "is-ci || husky install",
     "start": "concurrently --raw npm:docs:shell npm:docs:components",
     "docs:components": "cd docs/latest; npm run start",
     "docs:shell": "cd docs/shell; npm run start",
@@ -20,6 +26,7 @@
     "@alex-e-leon/stylelint-value-no-unknown-custom-properties": "^4.0.2",
     "@nectary/components": "workspace:*",
     "@nectary/eslint-plugin": "workspace:*",
+    "@types/jsdom": "^21.1.6",
     "@types/node": "^18.17.17",
     "@types/svgo": "^2.6.4",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -34,6 +41,9 @@
     "eslint-plugin-mdx": "^2.2.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.33.2",
+    "husky": "^9.0.11",
+    "is-ci": "^3.0.1",
+    "multi-semantic-release": "^3.0.2",
     "postcss-html": "^1.5.0",
     "rimraf": "^4.4.1",
     "slackify-markdown": "^4.4.0",
@@ -41,11 +51,26 @@
     "stylelint-config-standard": "^25.0.0",
     "svgo": "^2.8.0",
     "tsm": "^2.3.0",
-    "typescript": "^5.2.2",
-    "@types/jsdom": "^21.1.6"
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "jsdom": "^24.0.0",
     "labs": "^2.0.2"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "tagFormat": "sr-v${version}",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
