@@ -119,6 +119,7 @@ publish:
   variables:
     # token for "semantic-release" to be able to push the tags.
     GITLAB_TOKEN: $CI_GIT_PUSH_TOKEN
+    NPM_TOKEN: $NPM_TOKEN
   script:
     # a bit different configuration for publishing packages.
     - ./scripts/publish-package.sh ${NPM_TOKEN}
