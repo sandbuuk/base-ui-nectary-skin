@@ -107,22 +107,36 @@ visual-tests:
     paths:
       - tests/test-results
 
-publish:
+.publish-base:
   extends:
     - .cache
     - .prepare-ci
   stage: deploy
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
-    - when: never
   variables:
     # token for "semantic-release" to be able to push the tags.
     GITLAB_TOKEN: $CI_GIT_PUSH_TOKEN
     NPM_TOKEN: $NPM_TOKEN
+
+publish-dry-run:
+  extends:
+    - .publish-base
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
+    - when: never
   script:
-    # a bit different configuration for publishing packages.
     - pnpm run dry-run
+
+publish:
+  extends:
+    - .publish-base
+  needs:
+    - publish-dry-run
+  rules:
+    - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
+    - when: never
+  script:
+    - pnpm run release
 
 build-docs:
   stage: build
