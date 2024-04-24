@@ -116,6 +116,9 @@ publish:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
     - when: never
+  variables:
+    # token for "semantic-release" to be able to push the tags.
+    GITLAB_TOKEN: $CI_GIT_PUSH_TOKEN
   script:
     # a bit different configuration for publishing packages.
     - ./scripts/publish-package.sh ${NPM_TOKEN}
