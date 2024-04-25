@@ -28,7 +28,6 @@ async function getComponents(): Promise<string[]> {
   return components
 }
 
-const components = await getComponents()
 // Folders that are not node_modules, get the basenames
 
 function capitalizeFirstLetter(name: string): string {
@@ -55,6 +54,8 @@ function createWrapper(componentName: string): {
     code,
   }
 }
+
+const components = await getComponents()
 
 const items = components.map((x) => createWrapper(x))
 

@@ -20,7 +20,8 @@
     "tokens": "concurrently --raw npm:tokens:base npm:tokens:dark",
     "wrappers:react": "tsm ./scripts/generate-react-wrappers.mts",
     "wrappers:slots": "tsm ./scripts/generate-slots-for-wrappers.mts",
-    "wrappers": "concurrently --raw npm:wrappers:react npm:wrappers:slots"
+    "wrappers:types": "tsm ./scripts/generate-types-for-wrappers.mts",
+    "wrappers": "concurrently --raw npm:wrappers:react npm:wrappers:slots npm:wrappers:types"
   },
   "devDependencies": {
     "@alex-e-leon/stylelint-value-no-unknown-custom-properties": "^4.0.2",

@@ -37,7 +37,5 @@ export type TSinchPopoverReact = TSinchElementReact<TSinchPopoverElement> & {
   /** Label that is used for a11y */
   'aria-label': string,
   /** Close event handler */
-  onClose?: () => void,
-  /** Close event handler */
   'on-close'?: (e: CustomEvent<void>) => void,
 }
