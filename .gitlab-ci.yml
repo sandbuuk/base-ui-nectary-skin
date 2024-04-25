@@ -116,8 +116,6 @@ visual-tests:
     # token for "semantic-release" to be able to push the tags.
     GITLAB_TOKEN: $CI_GIT_PUSH_TOKEN
     NPM_TOKEN: $NPM_TOKEN
-    GIT_LFS_SKIP_SMUDGE: 1
-    GIT_LFS_SKIP_PUSH: 1
 
 publish-dry-run:
   extends:
@@ -138,6 +136,8 @@ publish:
     - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
     - when: never
   script:
+    - apk add --no-cache git git-lfs
+    - git lfs install
     - pnpm run release
 
 build-docs:
