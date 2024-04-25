@@ -117,6 +117,7 @@ visual-tests:
     GITLAB_TOKEN: $CI_GIT_PUSH_TOKEN
     NPM_TOKEN: $NPM_TOKEN
     GIT_LFS_SKIP_SMUDGE: 1
+    GIT_LFS_SKIP_PUSH: 1
 
 publish-dry-run:
   extends:
@@ -137,8 +138,6 @@ publish:
     - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
     - when: never
   script:
-    ## apparently just using GIT_LFS_SKIP_SMUDGE isn't enough
-    - git lfs uninstall
     - pnpm run release
 
 build-docs:
