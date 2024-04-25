@@ -136,7 +136,8 @@ publish:
     - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
     - when: never
   script:
-    - apk add --no-cache git git-lfs
+    - apt-get update -y
+    - apt-get install -y git git-lfs
     - git lfs install
     - pnpm run release
 
