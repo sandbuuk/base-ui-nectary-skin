@@ -1,9 +1,62 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
+/** VARS */
 const dirname = (import.meta as any).dirname as string
-
 const componentsDir = path.join(dirname, '..', 'components')
+
+const jsCommentRegex = new RegExp(/^.*(\/\*[\s\S]*?\*\/)|(\/\/)/gm)
+const typeBodyLineRegex = new RegExp(/([\d|\w|'|-]*)(\??:)\s(.*),/)
+const reactTypeRegexp = new RegExp(/(?<=export type TSinch(?:\w*)React(?:.*){)(\n(.*))*(?=})/)
+const customSubType = new RegExp(/TSinch\w*/g)
+
+/** Some types are to be imported from outside of where it is used, so they are prepopulated */
+const customTypesImportLines: string[] = [
+  'import type { TSinchSize, TSinchSizeEx } from \'@nectary/components/utils/size\'',
+  'import type { TSinchTextType } from \'@nectary/components/text/types\'',
+  'import type { TSinchTableAlignType } from \'@nectary/components/table-cell/types\'',
+]
+const alreadySeenType: string[] = ['TSinchSize', 'TSinchSizeEx', 'TSinchTextType', 'TSinchTableAlignType']
+
+/** HELPERS */
+function capitalizeFirstLetter(name: string): string {
+  return name.charAt(0).toUpperCase() + name.slice(1)
+}
+
+function camelCase(name: string): string {
+  return name.replace(/'/g, '').replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+}
+
+const findReactTypeBody = (fileContent: string) => reactTypeRegexp.exec(fileContent)?.[0]
+
+const mapRegexMatches = (regex: RegExp, str: string, cb: ((_m: RegExpExecArray) => void)) => {
+  let match
+
+  while ((match = regex.exec(str)) !== null) {
+    cb(match)
+  }
+}
+
+const removeJsComments = (tsContent: string) => tsContent.replace(jsCommentRegex, '').trim().replace(/\n+/g, '\n')
+
+const formatTypeLine = (line: string) => {
+  const [_ignore, key, separator, typeDef] = typeBodyLineRegex.exec(line) || []
+
+  return `${camelCase(key)}${separator} ${typeDef}`
+}
+
+const addRequiredImportLines = (componentName: string, lines: string[]) => {
+  lines.forEach((line) => {
+    mapRegexMatches(customSubType, line, (match) => {
+      const type = match[0]
+
+      if (type && !alreadySeenType.includes(type)) {
+        customTypesImportLines.push(`import type { ${type} } from '@nectary/components/${componentName}/types'`)
+        alreadySeenType.push(type)
+      }
+    })
+  })
+}
 
 async function getComponents(): Promise<string[]> {
   const components = []
@@ -28,68 +81,34 @@ async function getComponents(): Promise<string[]> {
   return components
 }
 
-// Folders that are not node_modules, get the basenames
-
-function capitalizeFirstLetter(name: string): string {
-  return name.charAt(0).toUpperCase() + name.slice(1)
-}
-
-function camelCase(name: string): string {
-  return name.replace(/'/g, '').replace(/-([a-z])/g, (g) => g[1].toUpperCase())
-}
-
-const findReactTypeBody = (fileContent: string) => {
-  const reactTypeRegexp = new RegExp(/(?<=export type TSinch(?:\w*)React(?:.*){)(\n(.*))*(?=})/)
-
-  return reactTypeRegexp.exec(fileContent)?.[0]
-}
-
-const jsCommentRegex = new RegExp(/^.*(\/\*[\s\S]*?\*\/)|(\/\/)/gm)
-const typeBodyLineRegex = new RegExp(/([\d|\w|'|-]*)(\??:)\s(.*),/)
-
-async function readTypes(componentName: string): Promise<string> {
+async function createWrapperInterface(componentName: string): Promise<string> {
   const fileContent = (await fs.readFile(path.join(componentsDir, componentName, 'types.ts'))).toString()
-
   const reactTypeBody = findReactTypeBody(fileContent)
 
   if (!reactTypeBody) {
-    // TODO: Do something
     return ''
   }
 
-  const reactTypeBodyTypesOnly = reactTypeBody.replace(jsCommentRegex, '').trim().replace(/\n+/g, '\n')
+  const cleanedReactTypeBody = removeJsComments(reactTypeBody)
+  const typeLines = cleanedReactTypeBody.split('\n').filter((line) => Boolean(line))
+  const formattedLines = typeLines.map(formatTypeLine)
 
-  const fileLines = reactTypeBodyTypesOnly.split('\n').filter((line) => Boolean(line))
+  addRequiredImportLines(componentName, formattedLines)
 
-  const formattedLines = fileLines?.map((line) => {
-    const [_ignore, key, separator, typeDef] = typeBodyLineRegex.exec(line) || []
-
-    return `${camelCase(key)}${separator} ${typeDef}`
-  })
-
-  const result = `export interface TSinch${capitalizeFirstLetter(camelCase(componentName))}Wrapper {
+  return `export interface TSinch${capitalizeFirstLetter(camelCase(componentName))}Wrapper {
   ${formattedLines?.map((line) => `${line},`).join('\n  ')}
 }`
-
-  return result
 }
 
 const components = await getComponents()
 
-const lines = await Promise.all(components.map((x) => readTypes(x)))
-
-// const importCodes = items.map((item) => item?.importCode).join('\n')
-// const codes = items.map((item) => item?.code).join('\n')
-
-// const code = `import { createReactWrapper } from './utils'\nimport type { NamedSlots } from './slots'\n\n${importCodes}\n\n${codes}\n`
+const lines = await Promise.all(components.map((x) => createWrapperInterface(x)))
 
 await fs.writeFile(
   path.join(dirname, '..', 'wrappers', 'react', 'src', 'types.ts'),
-  lines.join('\n')
+  [customTypesImportLines.join('\n'), lines.join('\n')].join('\n\n')
 )
 
 /**
- * TODO: add imports of types
- * TODO: add Comments back
  * TODO: make sure the react props get translated to attributes
  */
