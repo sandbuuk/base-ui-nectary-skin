@@ -1,11 +1,8 @@
-import type { TSinchSize, TSinchSizeEx } from '@nectary/components/utils/size'
-import type { TSinchTextType } from '@nectary/components/text/types'
-import type { TSinchTableAlignType } from '@nectary/components/table-cell/types'
 import type { TSinchAccordionStatusType } from '@nectary/components/accordion-item/types'
 import type { TSinchAlertType } from '@nectary/components/alert/types'
-import type { TSinchButtonType } from '@nectary/components/button/types'
-import type { TSinchBadgeMode } from '@nectary/components/badge/types'
 import type { TSinchAvatarStatus } from '@nectary/components/avatar/types'
+import type { TSinchBadgeMode } from '@nectary/components/badge/types'
+import type { TSinchButtonType } from '@nectary/components/button/types'
 import type { TSinchChatBlockType } from '@nectary/components/chat-block/types'
 import type { TSinchChatBubbleStatus } from '@nectary/components/chat-bubble/types'
 import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
@@ -15,18 +12,18 @@ import type { TSinchFileStatusType } from '@nectary/components/file-status/types
 import type { TSinchHorizontalStepperStatusType } from '@nectary/components/horizontal-stepper-item/types'
 import type { TSinchIconButtonType } from '@nectary/components/icon-button/types'
 import type { TSinchInlineAlertType } from '@nectary/components/inline-alert/types'
-import type { TSinchInputType } from '@nectary/components/input/types'
-import type { TSinchInputClipboardEvent } from '@nectary/components/input/types'
+import type { TSinchInputType, TSinchInputClipboardEvent } from '@nectary/components/input/types'
 import type { TSinchPopOrientation } from '@nectary/components/pop/types'
-import type { TSinchTileControlColumns } from '@nectary/components/tile-control/types'
-import type { TSinchToastType } from '@nectary/components/toast/types'
-import type { TSinchTitleType } from '@nectary/components/title/types'
-import type { TSinchTitleLevel } from '@nectary/components/title/types'
-import type { TSinchToastManagerOrigin } from '@nectary/components/toast-manager/types'
-import type { TSinchTooltipOrientation } from '@nectary/components/tooltip/types'
-import type { TSinchTooltipType } from '@nectary/components/tooltip/types'
-import type { TSinchVerticalStepperStatusType } from '@nectary/components/vertical-stepper-item/types'
 import type { TSinchPopoverOrientation } from '@nectary/components/popover/types'
+import type { TSinchTableAlignType } from '@nectary/components/table-cell/types'
+import type { TSinchTextType } from '@nectary/components/text/types'
+import type { TSinchTileControlColumns } from '@nectary/components/tile-control/types'
+import type { TSinchTitleType, TSinchTitleLevel } from '@nectary/components/title/types'
+import type { TSinchToastType } from '@nectary/components/toast/types'
+import type { TSinchToastManagerOrigin } from '@nectary/components/toast-manager/types'
+import type { TSinchTooltipOrientation, TSinchTooltipType } from '@nectary/components/tooltip/types'
+import type { TSinchSize, TSinchSizeEx } from '@nectary/components/utils/size'
+import type { TSinchVerticalStepperStatusType } from '@nectary/components/vertical-stepper-item/types'
 
 export interface TSinchAccordionWrapper {
   value: string,
@@ -84,7 +81,6 @@ export interface TSinchCardWrapper {
   label?: string,
   draggable?: boolean,
 }
-
 
 export interface TSinchChatBlockWrapper {
   type: TSinchChatBlockType,
@@ -257,7 +253,6 @@ export interface TSinchLinkWrapper {
   onBlur?: (e: CustomEvent<void>) => void,
 }
 
-
 export interface TSinchPopWrapper {
   open: boolean,
   orientation: TSinchPopOrientation,
@@ -386,7 +381,6 @@ export interface TSinchSkeletonItemWrapper {
 export interface TSinchSpinnerWrapper {
   size?: TSinchSize,
 }
-
 
 export interface TSinchTableCellWrapper {
   align?: TSinchTableAlignType,

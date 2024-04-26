@@ -21,7 +21,7 @@
     "wrappers:react": "tsm ./scripts/generate-react-wrappers.mts",
     "wrappers:slots": "tsm ./scripts/generate-slots-for-wrappers.mts",
     "wrappers:types": "tsm ./scripts/generate-types-for-wrappers.mts",
-    "wrappers": "concurrently --raw npm:wrappers:react npm:wrappers:slots npm:wrappers:types"
+    "wrappers": "pnpm wrappers:types && concurrently --raw npm:wrappers:react npm:wrappers:slots && eslint ./wrappers/**/src/**/* --fix"
   },
   "devDependencies": {
     "@alex-e-leon/stylelint-value-no-unknown-custom-properties": "^4.0.2",
