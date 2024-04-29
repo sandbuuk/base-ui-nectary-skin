@@ -28,7 +28,6 @@ async function getComponents(): Promise<string[]> {
   return components
 }
 
-const components = await getComponents()
 // Folders that are not node_modules, get the basenames
 
 function capitalizeFirstLetter(name: string): string {
@@ -39,22 +38,34 @@ function camelCase(name: string): string {
   return name.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
 }
 
+const reactWrapperTypeFileContent = (await fs.readFile(path.join(dirname, '..', 'wrappers', 'react', 'src', 'types.ts'))).toString()
+
+function findCorrespondingType(componentPascalCase: string) {
+  const typeName = `TSinch${componentPascalCase}Wrapper`
+
+  return reactWrapperTypeFileContent.includes(typeName) ? typeName : null
+}
+
 function createWrapper(componentName: string): {
   code: string;
   importCode: string;
 } {
   const elementName = `sinch-${componentName}`
-  const componentCamelCase = capitalizeFirstLetter(camelCase(componentName))
+  const componentPascalCase = capitalizeFirstLetter(camelCase(componentName))
 
-  const importCode = `import type {} from '@nectary/components/${componentName}'`
+  const interfaceName = findCorrespondingType(componentPascalCase)
 
-  const code = `export const ${componentCamelCase} = createReactWrapper<JSX.IntrinsicElements['${elementName}'], NamedSlots['${elementName}']>('${elementName}')`
+  const importCode = `import type {} from '@nectary/components/${componentName}'${interfaceName ? `\nimport type { ${interfaceName} } from './types'` : ''}`
+
+  const code = `export const ${componentPascalCase} = createReactWrapper<${interfaceName ? ` ${interfaceName}` : `JSX.IntrinsicElements['${elementName}']`}, NamedSlots['${elementName}']>('${elementName}')`
 
   return {
     importCode,
     code,
   }
 }
+
+const components = await getComponents()
 
 const items = components.map((x) => createWrapper(x))
 

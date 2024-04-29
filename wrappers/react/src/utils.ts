@@ -63,13 +63,23 @@ function renderSlotsOrChildren<T extends string>(
   return renderedSlots
 }
 
-export function createReactWrapper<OtherProps, T extends string>(
+function camelToKebab(camelCase: string) {
+  return camelCase
+    .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2')
+    .toLowerCase()
+}
+
+function propsToAttributes<P extends {}>(props: P) {
+  return Object.fromEntries(Object.entries(props).map(([key, value]) => [camelToKebab(key), value]))
+}
+
+export function createReactWrapper<OtherProps extends {}, T extends string>(
   element: string
 ): React.FC<WrapperProps<T> & OtherProps> {
-  return ({ slots, children, ...others }: WrapperProps<T> & OtherProps) =>
+  return ({ slots, children, ...otherProps }: WrapperProps<T> & OtherProps) =>
     createElement(
       element,
-      others,
+      propsToAttributes(otherProps),
       renderSlotsOrChildren<T>(children, slots)
     )
 }
