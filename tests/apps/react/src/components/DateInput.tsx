@@ -38,7 +38,7 @@ export const DateInput: FC = () => {
       open={isOpen}
       orientation="bottom-left"
       aria-label="Date input"
-      onClose={onClose}
+      on-close={onClose}
       modal
     >
       <sinch-field slot="target" label="Date input">

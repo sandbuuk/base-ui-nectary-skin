@@ -65,7 +65,7 @@ export const BottomComplexExample: FC = () => {
     <sinch-popover
       aria-label="Pop"
       open={isPopOpen}
-      onClose={() => setPopOpen(false)}
+      on-close={() => setPopOpen(false)}
       orientation="bottom-right"
     >
       <sinch-textarea
@@ -100,7 +100,7 @@ export const BottomComplexExample: FC = () => {
           modal
           orientation="bottom-left"
           open={isOptionsOpen}
-          onClose={() => setOptionsOpen(false)}
+          on-close={() => setOptionsOpen(false)}
           aria-label="Options"
         >
           <sinch-button
