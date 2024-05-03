@@ -19,5 +19,6 @@
     "exactOptionalPropertyTypes": true,
     "strictNullChecks": true,
     "jsx": "react-jsx",
+    "experimentalDecorators": true
   }
 }
