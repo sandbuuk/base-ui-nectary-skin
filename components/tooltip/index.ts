@@ -15,8 +15,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { TooltipState } from './tooltip-state'
-import { getPopOrientation, orientationValues, typeValues } from './utils'
-import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact, TSinchTooltipType } from './types'
+import { getPopOrientation, orientationValues, textAlignValues, typeValues } from './utils'
+import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact, TSinchTooltipTextAlign, TSinchTooltipType } from './types'
 import type { TSinchPopElement } from '../pop/types'
 import type { TRect } from '../types'
 
@@ -98,6 +98,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
     return [
       'text',
       'orientation',
+      'text-align',
       'type',
       'aria-label',
       'aria-description',
@@ -119,6 +120,12 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
           this.#resetTipOrientation()
           this.#updateTipOrientation()
         }
+
+        break
+      }
+
+      case 'text-align': {
+        updateAttribute(this.#$pop, 'text-align', newVal)
 
         break
       }
@@ -154,6 +161,14 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
 
   set orientation(value: TSinchTooltipOrientation) {
     updateLiteralAttribute(this, orientationValues, 'orientation', value)
+  }
+
+  get 'text-align'() {
+    return getLiteralAttribute(this, textAlignValues, 'text-align', 'left')
+  }
+
+  set 'text-align'(value: TSinchTooltipTextAlign) {
+    updateLiteralAttribute(this, textAlignValues, 'text-align', value)
   }
 
   get type(): TSinchTooltipType {
