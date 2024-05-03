@@ -17,7 +17,7 @@ type TSinchMaskInputResult = {
   mergedValue: string,
 }
 
-export const inputTypes: readonly TSinchInputType[] = ['text', 'password']
+export const inputTypes: readonly TSinchInputType[] = ['text', 'password', 'number']
 
 const MASK_SYMBOL_LETTER = 'A'
 const MASK_SYMBOL_DIGIT = '0'

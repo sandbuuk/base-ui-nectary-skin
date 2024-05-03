@@ -1,7 +1,7 @@
 import type { TSinchElementReact } from '../types'
 import type { TSinchSize } from '../utils/size'
 
-export type TSinchInputType = 'text' | 'password'
+export type TSinchInputType = 'text' | 'password' | 'number'
 
 export type TSinchInputClipboardEvent = CustomEvent<{value: string, replaceWith: (value: string) => void}>
 
