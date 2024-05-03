@@ -125,6 +125,7 @@ publish-dry-run:
     - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
     - when: never
   script:
+    - pnpm -r --filter='!docs*' run build
     - pnpm run dry-run
 
 publish:
@@ -136,6 +137,7 @@ publish:
     - if: $CI_COMMIT_BRANCH	 == $CI_DEFAULT_BRANCH
     - when: never
   script:
+    - pnpm -r --filter='!docs*' run build
     - apt-get update -y
     - apt-get install -y git git-lfs
     - git lfs install

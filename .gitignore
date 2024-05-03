@@ -5,5 +5,8 @@ node_modules/
 *.log
 fonts/.uuid
 .idea
+assets/**/*.d.ts
 components/**/*.d.ts
+labs/lib
+wrappers/**/lib
 .pnpm-store
