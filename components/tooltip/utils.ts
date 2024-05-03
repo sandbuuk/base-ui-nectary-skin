@@ -1,4 +1,4 @@
-import type { TSinchTooltipOrientation, TSinchTooltipType } from './types'
+import type { TSinchTooltipOrientation, TSinchTooltipType, TSinchTooltipTextAlign } from './types'
 import type { TSinchPopOrientation } from '../pop/types'
 
 export const typeValues: readonly TSinchTooltipType[] = ['fast', 'slow']
@@ -12,6 +12,12 @@ export const orientationValues: readonly TSinchTooltipOrientation[] = [
   'top-right',
   'bottom-left',
   'bottom-right',
+]
+
+export const textAlignValues: readonly TSinchTooltipTextAlign[] = [
+  'right',
+  'center',
+  'left',
 ]
 
 export const getPopOrientation = (orientation: TSinchTooltipOrientation): TSinchPopOrientation => {

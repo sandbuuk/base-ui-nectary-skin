@@ -168,7 +168,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
           this.#$inputMask.textContent = placeholder
 
           if (isElementFocused(this.#$input)) {
-            this.#$input.setSelectionRange(this.#selectionEnd, this.#selectionEnd)
+            this.#setSelectionRange(this.#selectionEnd, this.#selectionEnd)
           }
 
           break
@@ -178,7 +178,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
           this.#$input.value = nextVal
 
           if (isElementFocused(this.#$input)) {
-            this.#$input.setSelectionRange(this.#selectionEnd, this.#selectionEnd)
+            this.#setSelectionRange(this.#selectionEnd, this.#selectionEnd)
           }
         }
 
@@ -360,7 +360,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   }
 
   setSelectionRange(selectionStart: number, selectionEnd: number): void {
-    this.#$input.setSelectionRange(selectionStart, selectionEnd)
+    this.#setSelectionRange(selectionStart, selectionEnd)
   }
 
   get focusable() {
@@ -373,6 +373,12 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   blur() {
     this.#$input.blur()
+  }
+
+  #setSelectionRange = (start: number | null, end: number | null, direction?: 'forward' | 'backward' | 'none' | undefined) => {
+    if (this.type !== 'number') {
+      this.#$input.setSelectionRange(start, end, direction)
+    }
   }
 
   #onCompositionStart = () => {
@@ -390,7 +396,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       const { value, placeholder } = beginMaskedComposition(this.#$input.value, this.#maskSymbols, selectionStart)
 
       this.#$input.value = value
-      this.#$input.setSelectionRange(selectionStart, selectionStart)
+      this.#setSelectionRange(selectionStart, selectionStart)
       this.#$inputMask.textContent = placeholder
       this.#compositionBeginValue = value
     }
@@ -410,7 +416,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
         const { value, placeholder, mergedValue, cursorPos } = res
 
         this.#$input.value = value
-        this.#$input.setSelectionRange(cursorPos, cursorPos)
+        this.#setSelectionRange(cursorPos, cursorPos)
         this.#$inputMask.textContent = placeholder
 
         if (mergedValue.length > 0) {
@@ -469,7 +475,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       const { value, placeholder, mergedValue, cursorPos } = res
 
       this.#$input.value = value
-      this.#$input.setSelectionRange(cursorPos, cursorPos)
+      this.#setSelectionRange(cursorPos, cursorPos)
       this.#$inputMask.textContent = placeholder
 
       if (mergedValue.length > 0) {
@@ -537,7 +543,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
       // Reset input value to enforce controlled state
       this.#$input.value = prevValue
-      this.#$input.setSelectionRange(this.#selectionStart, this.#selectionEnd)
+      this.#setSelectionRange(this.#selectionStart, this.#selectionEnd)
 
       this.#selectionStart = nextSelectionStart
       this.#selectionEnd = nextSelectionEnd
@@ -552,7 +558,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       const { value, placeholder, mergedValue, cursorPos } = splitValueAndMask(nextVal, this.#maskSymbols)
 
       this.#$input.value = value
-      this.#$input.setSelectionRange(cursorPos, cursorPos)
+      this.#setSelectionRange(cursorPos, cursorPos)
       this.#$inputMask.textContent = placeholder
 
       if (mergedValue.length > 0) {
