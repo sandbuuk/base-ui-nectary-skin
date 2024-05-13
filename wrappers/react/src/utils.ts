@@ -69,17 +69,17 @@ function camelToKebab(camelCase: string) {
     .toLowerCase()
 }
 
-function propsToAttributes<P extends {}>(props: P) {
-  return Object.fromEntries(Object.entries(props).map(([key, value]) => [camelToKebab(key), value]))
+function propsToAttributes<P extends {}>(props: P, skipFormatting?: string[]) {
+  return Object.fromEntries(Object.entries(props).map(([key, value]) => [skipFormatting !== undefined && skipFormatting.includes(key) ? key : camelToKebab(key), value]))
 }
 
 export function createReactWrapper<OtherProps extends {}, T extends string>(
-  element: string
+  element: string, skipPropFormatting?: string[]
 ): React.FC<WrapperProps<T> & OtherProps> {
   return ({ slots, children, ...otherProps }: WrapperProps<T> & OtherProps) =>
     createElement(
       element,
-      propsToAttributes(otherProps),
+      propsToAttributes(otherProps, skipPropFormatting),
       renderSlotsOrChildren<T>(children, slots)
     )
 }

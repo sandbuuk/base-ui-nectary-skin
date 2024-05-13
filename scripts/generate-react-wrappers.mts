@@ -46,6 +46,36 @@ function findCorrespondingType(componentPascalCase: string) {
   return reactWrapperTypeFileContent.includes(typeName) ? typeName : null
 }
 
+const mapRegexMatches = (regex: RegExp, str: string, cb: ((_m: RegExpExecArray) => void)) => {
+  let match
+
+  while ((match = regex.exec(str)) !== null) {
+    cb(match)
+  }
+}
+
+function findCamelCases(interfaceName: string): string[] {
+  const interfaceText = (new RegExp(`${interfaceName} ({(?:\n.*?)*?})`)).exec(reactWrapperTypeFileContent)?.[0]
+
+  const preserveCaseRegExp = new RegExp(/(?:\/\/ @preserve-case)\n(.*)\?*:/g)
+
+  // console.log({ interfaceText })
+
+  if (interfaceText) {
+    const matches: string[] = []
+
+    mapRegexMatches(preserveCaseRegExp, interfaceText, (match) => {
+      matches.push(match[1].trim().replace('?', ''))
+    })
+
+    if (matches.length) {
+      return matches
+    }
+  }
+
+  return []
+}
+
 function createWrapper(componentName: string): {
   code: string;
   importCode: string;
@@ -54,10 +84,10 @@ function createWrapper(componentName: string): {
   const componentPascalCase = capitalizeFirstLetter(camelCase(componentName))
 
   const interfaceName = findCorrespondingType(componentPascalCase)
-
+  const foundCamelCaseAttributes = interfaceName && findCamelCases(interfaceName)
   const importCode = `import type {} from '@nectary/components/${componentName}'${interfaceName ? `\nimport type { ${interfaceName} } from './types'` : ''}`
 
-  const code = `export const ${componentPascalCase} = createReactWrapper<${interfaceName ? ` ${interfaceName}` : `JSX.IntrinsicElements['${elementName}']`}, NamedSlots['${elementName}']>('${elementName}')`
+  const code = `export const ${componentPascalCase} = createReactWrapper<${interfaceName ? ` ${interfaceName}` : `JSX.IntrinsicElements['${elementName}']`}, NamedSlots['${elementName}']>('${elementName}'${foundCamelCaseAttributes?.length ? `, ${JSON.stringify(foundCamelCaseAttributes)}` : ''})`
 
   return {
     importCode,
