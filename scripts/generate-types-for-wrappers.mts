@@ -42,6 +42,12 @@ const removeJsComments = (tsContent: string) => tsContent.replace(jsCommentRegex
 const formatTypeLine = (line: string) => {
   const [_ignore, key, separator, typeDef] = typeBodyLineRegex.exec(line) || []
 
+  // indicate that key is camelCase in components library and should be preserved
+  if (key.match(/[a-z]+([A-Z]+[a-z]+)/)) {
+    return `// @preserve-case
+    ${key}${separator} ${typeDef}`
+  }
+
   return `${camelCase(key)}${separator} ${typeDef}`
 }
 

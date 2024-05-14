@@ -21,7 +21,7 @@ import type { TSinchTileControlColumns } from '@nectary/components/tile-control/
 import type { TSinchTitleType, TSinchTitleLevel } from '@nectary/components/title/types'
 import type { TSinchToastType } from '@nectary/components/toast/types'
 import type { TSinchToastManagerOrigin } from '@nectary/components/toast-manager/types'
-import type { TSinchTooltipOrientation, TSinchTooltipType } from '@nectary/components/tooltip/types'
+import type { TSinchTooltipOrientation, TSinchTooltipType, TSinchTooltipTextAlign } from '@nectary/components/tooltip/types'
 import type { TSinchSize, TSinchSizeEx } from '@nectary/components/utils/size'
 import type { TSinchVerticalStepperStatusType } from '@nectary/components/vertical-stepper-item/types'
 
@@ -33,6 +33,7 @@ export interface TSinchAccordionWrapper {
 export interface TSinchAccordionItemWrapper {
   value: string,
   label: string,
+  // @preserve-case
   optionalText?: string,
   status?: TSinchAccordionStatusType,
   disabled?: boolean,
@@ -84,7 +85,9 @@ export interface TSinchCardWrapper {
 
 export interface TSinchChatBlockWrapper {
   type: TSinchChatBlockType,
+  // @preserve-case
   firstName?: string,
+  // @preserve-case
   lastName?: string,
   timestamp?: string,
 }
@@ -156,8 +159,11 @@ export interface TSinchEmojiPickerWrapper {
 }
 export interface TSinchFieldWrapper {
   label?: string,
+  // @preserve-case
   optionalText?: string,
+  // @preserve-case
   additionalText?: string,
+  // @preserve-case
   invalidText?: string,
   disabled?: boolean,
 }
@@ -246,6 +252,7 @@ export interface TSinchLinkWrapper {
   disabled?: boolean,
   external?: boolean,
   standalone?: boolean,
+  // @preserve-case
   preventDefault?: boolean,
   ariaLabel: string,
   onClick?: (e: CustomEvent<void>) => void,
@@ -276,6 +283,7 @@ export interface TSinchProgressWrapper {
 }
 export interface TSinchProgressStepperWrapper {
   value: string,
+  // @preserve-case
   progressValue: string,
   onChange?: (e: CustomEvent<string>) => void,
 }
@@ -429,6 +437,7 @@ export interface TSinchTextareaWrapper {
   invalid?: boolean,
   ariaLabel: string,
   rows?: number,
+  // @preserve-case
   minRows?: number,
   resizable?: boolean,
   onChange?: (e: CustomEvent<string>) => void,
@@ -486,6 +495,7 @@ export interface TSinchTooltipWrapper {
   text: string,
   orientation?: TSinchTooltipOrientation,
   type?: TSinchTooltipType,
+  textAlign?: TSinchTooltipTextAlign,
   onShow?: (e: CustomEvent<void>) => void,
   onHide?: (e: CustomEvent<void>) => void,
 }
