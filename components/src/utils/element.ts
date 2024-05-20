@@ -1,4 +1,5 @@
-import pkg from '../package.json'
+// @ts-ignore - outside root dir
+import pkg from '../../package.json'
 
 const nectaryDefinitions = new Map<string, CustomElementConstructor>()
 let nectaryRegistry: CustomElementRegistry | null = null

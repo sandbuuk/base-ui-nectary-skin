@@ -1,5 +1,10 @@
 {
+  "include": [
+    "src/**/*.ts"
+  ],
   "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
