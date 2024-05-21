@@ -11,6 +11,12 @@
       "require": "./lib/cjs/*.js",
       "default": "./lib/esm/*.js"
     },
+    "./*.json": {
+      "types": "./lib/esm/*.json",
+      "import": "./lib/esm/*.json",
+      "require": "./lib/cjs/*.json",
+      "default": "./lib/esm/*.json"
+    },
     "./package.json": "./package.json"
   },
   "publishConfig": {
