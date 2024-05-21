@@ -9,7 +9,7 @@ export const MaskedPhoneExample: FC = () => {
   const onPaste = (e: TSinchInputClipboardEvent) => {
     const value = e.detail.value
 
-    if (value.length === 10 && value.startsWith('0')) {
+    if (value.length === 10 && value.startsWith('0') === true) {
       e.detail.replaceWith(value.substring(1))
     }
   }
