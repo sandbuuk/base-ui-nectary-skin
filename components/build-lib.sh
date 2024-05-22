@@ -11,7 +11,7 @@ npx tsc --declaration --emitDeclarationOnly --outDir lib/esm
 ### Copy existing d.ts files
 (cd src && find . -name "*.d.ts" -type f -exec sh -c 'mkdir -p "../lib/esm/$(dirname "{}")"; cp "{}" "../lib/esm/{}"' \;)
 
-## CJS build 
+## CJS build
 ### JS files
 npx babel src --config-file ./babel.config.cjs.js --extensions '.ts' --out-dir lib/cjs 
 ### Generate d.ts files
@@ -21,6 +21,6 @@ npx tsc --declaration --emitDeclarationOnly --outDir lib/cjs
 ### Copy existing d.ts files
 (cd src && find . -name "*.d.ts" -type f -exec sh -c 'mkdir -p "../lib/cjs/$(dirname "{}")"; cp "{}" "../lib/cjs/{}"' \;) 
 
-
-
+# Some util function reads the version from package.json, let's just copy that
+echo "{ $(grep -oE "\"version\": \".*\"" package.json) }" > lib/package.json
 
