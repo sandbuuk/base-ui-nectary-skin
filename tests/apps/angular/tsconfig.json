@@ -23,7 +23,9 @@
       "dom"
     ],
     "paths": {
-      "tslib": ["node_modules/tslib"]
+      "tslib": [
+        "node_modules/tslib"
+      ]
     }
   },
   "angularCompilerOptions": {
