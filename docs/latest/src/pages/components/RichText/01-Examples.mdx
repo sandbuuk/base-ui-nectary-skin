@@ -2,6 +2,7 @@ import { Example } from '~/components/Example'
 import { MarkdownExample } from './examples/Markdown.tsx?example'
 import { SizeExample } from './examples/Size.tsx?example'
 import { HistoryLinkExample } from './examples/HistoryLink.tsx?example'
+import { ExternalLinkExample } from './examples/ExternalLink.tsx?example'
 
 # Examples
 
@@ -17,8 +18,14 @@ Rich Text can have different font sizes
 
 <Example Component={SizeExample}/>
 
-## User history.pushState for links
+## Use history.pushState for links
 
 We enhanced our markdown to support links that uses history.pushState instead of an anchor tag. To do this add the `{use-history}` option after the basic markdown link definition:
 
 <Example Component={HistoryLinkExample}/>
+
+## Use External links
+
+We enhanced our markdown to support [external links](http://localhost:5000/?version=latest&path=/components/link/examples#external). To do this add the `{external}` option after the basic markdown link definition:
+
+<Example Component={ExternalLinkExample}/>

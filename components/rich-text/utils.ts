@@ -73,6 +73,10 @@ export const createParseVisitor = (doc: Document) => {
                   $link['use-history'] = true
 
                   break
+                case 'external':
+                  $link.external = true
+
+                  break
                 default:
                   break
               }
