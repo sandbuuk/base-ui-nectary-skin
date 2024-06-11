@@ -1,5 +1,9 @@
 {
+  "include": [
+    "src/**/*.ts"
+  ],
   "compilerOptions": {
+    "rootDir": "src",
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -11,7 +15,7 @@
     "jsx": "react-jsx",
     "target": "esnext",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,

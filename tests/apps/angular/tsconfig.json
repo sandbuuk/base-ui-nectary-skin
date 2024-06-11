@@ -12,7 +12,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
@@ -23,7 +23,9 @@
       "dom"
     ],
     "paths": {
-      "tslib": ["node_modules/tslib"]
+      "tslib": [
+        "node_modules/tslib"
+      ]
     }
   },
   "angularCompilerOptions": {

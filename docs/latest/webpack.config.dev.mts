@@ -76,7 +76,7 @@ const config: Configuration = {
         loader: '@saas/example-code-loader',
       },
       {
-        test: /\/types\.ts$/,
+        test: /\/types\.(d\.)?ts$/,
         exclude: /node_modules/,
         resourceQuery: '?api',
         loader: '@saas/types-to-mdx-loader',

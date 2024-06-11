@@ -12,7 +12,7 @@
     "jsx": "preserve",
     "target": "esnext",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "paths": {
