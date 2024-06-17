@@ -1,5 +1,5 @@
 node_modules/
 dist/
-*.js
 !babel.config.js
 !.eslintrc.js
+lib/*
