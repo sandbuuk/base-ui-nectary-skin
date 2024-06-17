@@ -9,7 +9,31 @@
     "./changelog.md": "./changelog.md",
     "./*/types": "./lib/esm/*/types.d.ts",
     "./*.json": "./lib/esm/*.json",
-    "./utils/*.json": "./lib/esm/utils/*.json",
+    "./*/create-icon-class": {
+      "types": "./lib/esm/*/create-icon-class.d.ts",
+      "require": "./lib/cjs/*/create-icon-class.js",
+      "default": "./lib/esm/*/create-icon-class.js"
+    },
+    "./*/create-animation-class": {
+      "types": "./lib/esm/*/create-animation-class.d.ts",
+      "require": "./lib/cjs/*/create-animation-class.js",
+      "default": "./lib/esm/*/create-animation-class.js"
+    },
+    "./*/create-logo-class": {
+      "types": "./lib/esm/*/create-logo-class.d.ts",
+      "require": "./lib/cjs/*/create-logo-class.js",
+      "default": "./lib/esm/*/create-logo-class.js"
+    },
+    "./*/create-illustration-class": {
+      "types": "./lib/esm/*/create-illustration-class.d.ts",
+      "require": "./lib/cjs/*/create-illustration-class.js",
+      "default": "./lib/esm/*/create-illustration-class.js"
+    },
+    "./*/utils": {
+      "types": "./lib/esm/*/utils.d.ts",
+      "require": "./lib/cjs/*/utils.js",
+      "default": "./lib/esm/*/utils.js"
+    },
     "./utils/*": {
       "types": "./lib/esm/utils/*.d.ts",
       "require": "./lib/cjs/utils/*.js",
