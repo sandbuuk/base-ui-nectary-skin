@@ -78,6 +78,7 @@ lint:
     GIT_LFS_SKIP_SMUDGE: 1
   script:
     - pnpm --dir components build
+    - pnpm --dir assets build
     - pnpm lint
 
 visual-tests:
@@ -103,6 +104,7 @@ visual-tests:
         SHARD: [1, 2, 3]
   script:
     - pnpm --dir components build
+    - pnpm --dir assets build
     - pnpm --dir tests test:ci-$BROWSER_FRAMEWORK --shard=$SHARD/3
   artifacts:
     when: on_failure
