@@ -1,5 +1,5 @@
 import path from 'path'
-import pkg from '@nectary/components/package.json' assert { type: 'json' }
+import pkg from '@nectary/components/package.json' with { type: 'json' }
 import remarkGfm from 'remark-gfm'
 import webpack from 'webpack'
 import type { TransformOptions as TBabelOptions } from '@babel/core'

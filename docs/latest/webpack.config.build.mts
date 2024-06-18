@@ -1,5 +1,5 @@
 import path from 'path'
-import pkg from '@nectary/components/package.json' assert { type: 'json' }
+import pkg from '@nectary/components/package.json' with { type: 'json' }
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 // import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
