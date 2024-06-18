@@ -27,8 +27,8 @@
     },
     "./*": {
       "types": "./lib/esm/*/index.d.ts",
-      "require": "./lib/cjs/*",
-      "default": "./lib/esm/*"
+      "require": "./lib/cjs/*/index.js",
+      "default": "./lib/esm/*/index.js"
     }
   },
   "publishConfig": {
