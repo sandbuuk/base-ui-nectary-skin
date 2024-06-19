@@ -1,5 +1,9 @@
 {
+  "include": [
+    "src/**/*.ts"
+  ],
   "compilerOptions": {
+    "rootDir": "src",
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
