@@ -25,6 +25,11 @@
       "require": "./lib/cjs/utils/index.js",
       "default": "./lib/esm/utils/index.js"
     },
+    "./standalone": {
+      "types": "./lib/esm/standalone.d.ts",
+      "require": "./lib/cjs/standalone.js",
+      "default": "./lib/esm/standalone.js"
+    },
     "./*": {
       "types": "./lib/esm/*/index.d.ts",
       "require": "./lib/cjs/*/index.js",
