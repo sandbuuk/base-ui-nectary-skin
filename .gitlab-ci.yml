@@ -165,6 +165,8 @@ build-docs:
     - git config --global user.name Bot
     - git fetch origin refs/heads/docs
     - git checkout origin/docs -- public
+    - pnpm --dir components build
+    - pnpm --dir assets build
     - ./scripts/generate-docs.sh
     - git branch -D docs || true
     - git checkout --orphan docs
