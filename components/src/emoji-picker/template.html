@@ -76,14 +76,14 @@ sinch-tabs-icon-option > svg {
   <div id="toolbar">
     <sinch-input id="search" size="l" aria-label="Search emojis">
       <sinch-icon id="icon-search" slot="icon" name="search"></sinch-icon>
-      <sinch-icon-button id="search-clear" slot="right" aria-label="Clear">
+      <sinch-button id="search-clear" slot="right" aria-label="Clear">
         <sinch-icon slot="icon" name="close"></sinch-icon>
-      </sinch-icon-button>
+      </sinch-button>
     </sinch-input>
     <sinch-popover id="skin-popover" orientation="bottom-left" aria-label="Emoji skin tone select">
-      <sinch-icon-button id="skin-button" slot="target" size="l" aria-label="Select emoji skin tones">
+      <sinch-button id="skin-button" slot="target" size="l" aria-label="Select emoji skin tones">
         <sinch-color-swatch id="skin-swatch" slot="icon" name="skintone-default"></sinch-color-swatch>
-      </sinch-icon-button>
+      </sinch-button>
       <sinch-color-menu
         id="skin-menu"
         slot="content"

@@ -3,14 +3,11 @@ import type { TSinchAlertType } from '@nectary/components/alert/types'
 import type { TSinchAvatarStatus } from '@nectary/components/avatar/types'
 import type { TSinchBadgeMode } from '@nectary/components/badge/types'
 import type { TSinchButtonType } from '@nectary/components/button/types'
-import type { TSinchChatBlockType } from '@nectary/components/chat-block/types'
-import type { TSinchChatBubbleStatus } from '@nectary/components/chat-bubble/types'
 import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
 import type { TSinchFileDropInvalidType } from '@nectary/components/file-drop/types'
 import type { TSinchFilePickerInvalidType } from '@nectary/components/file-picker/types'
 import type { TSinchFileStatusType } from '@nectary/components/file-status/types'
 import type { TSinchHorizontalStepperStatusType } from '@nectary/components/horizontal-stepper-item/types'
-import type { TSinchIconButtonType } from '@nectary/components/icon-button/types'
 import type { TSinchInlineAlertType } from '@nectary/components/inline-alert/types'
 import type { TSinchInputType, TSinchInputClipboardEvent } from '@nectary/components/input/types'
 import type { TSinchPopOrientation } from '@nectary/components/pop/types'
@@ -83,18 +80,6 @@ export interface TSinchCardWrapper {
   draggable?: boolean,
 }
 
-export interface TSinchChatBlockWrapper {
-  type: TSinchChatBlockType,
-  // @preserve-case
-  firstName?: string,
-  // @preserve-case
-  lastName?: string,
-  timestamp?: string,
-}
-export interface TSinchChatBubbleWrapper {
-  text: string,
-  status?: TSinchChatBubbleStatus,
-}
 export interface TSinchCheckboxWrapper {
   checked?: boolean,
   indeterminate?: boolean,
@@ -210,17 +195,6 @@ export interface TSinchHorizontalStepperItemWrapper {
 }
 export interface TSinchIconWrapper {
   name: string,
-}
-export interface TSinchIconButtonWrapper {
-  type?: TSinchIconButtonType,
-  size?: TSinchSizeEx,
-  disabled?: boolean,
-  ariaLabel: string,
-  onClick?: (e: CustomEvent<void>) => void,
-  onFocus?: (e: CustomEvent<void>) => void,
-  onBlur?: (e: CustomEvent<void>) => void,
-  onTooltipShow?: (e: CustomEvent<void>) => void,
-  onTooltipHide?: (e: CustomEvent<void>) => void,
 }
 export interface TSinchInlineAlertWrapper {
   type: TSinchInlineAlertType,

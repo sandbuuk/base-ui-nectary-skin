@@ -1,8 +1,7 @@
 .nectary-theme-base.cpaas-theme-base.cpaas-theme-mailgun {
-  --sinch-comp-button-color-cta-primary-disabled-text-initial: var(--sinch-sys-color-text-inverted);
-  --sinch-comp-button-color-cta-secondary-default-background-active: #9EA9B0;
-  --sinch-comp-button-color-cta-secondary-default-background-hover: #DCE2E5;
-  --sinch-comp-button-color-cta-secondary-default-background-initial: #C9D1D6;
+  --sinch-comp-button-color-cta-secondary-default-background-active: #DCE2E5;
+  --sinch-comp-button-color-cta-secondary-default-background-hover: #C9D1D6;
+  --sinch-comp-button-color-cta-secondary-default-background-initial: #EBEEF0;
   --sinch-comp-button-color-cta-secondary-default-border-initial: transparent;
   --sinch-comp-button-color-cta-secondary-disabled-background-initial: #DCE2E566;
   --sinch-comp-button-color-cta-secondary-disabled-border-initial: transparent;
@@ -14,6 +13,6 @@
   --sinch-comp-button-color-secondary-default-background-hover: #145A8F1A;
   --sinch-comp-button-color-secondary-default-text-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-button-color-secondary-disabled-text-initial: var(--sinch-sys-color-text-disabled);
-  --sinch-comp-button-color-tertiary-default-background-active: #DCE2E5;
-  --sinch-comp-button-color-tertiary-default-background-hover: #EBEEF0;
+  --sinch-comp-button-color-subtle-primary-default-background-active: #DCE2E5;
+  --sinch-comp-button-color-subtle-primary-default-background-hover: #EBEEF0;
 }

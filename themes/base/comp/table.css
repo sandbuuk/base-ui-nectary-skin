@@ -1,12 +1,12 @@
 .nectary-theme-base {
-  --sinch-comp-table-color-cell-default-border-initial: var(--sinch-sys-color-border-light);
+  --sinch-comp-table-color-cell-default-border-initial: var(--sinch-sys-color-border-subtle);
   --sinch-comp-table-color-head-cell-default-border-initial: var(--sinch-sys-color-border-default);
   --sinch-comp-table-color-head-cell-default-icon-initial: var(--sinch-sys-color-text-muted);
   --sinch-comp-table-color-head-cell-default-text-initial: var(--sinch-sys-color-text-muted);
   --sinch-comp-table-color-head-cell-sorted-icon-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-table-color-head-cell-sorted-text-initial: var(--sinch-sys-color-text-default);
-  --sinch-comp-table-color-row-checked-background-initial: var(--sinch-sys-color-container-transparent-active);
-  --sinch-comp-table-color-row-default-background-hover: var(--sinch-sys-color-container-transparent-hover);
-  --sinch-comp-table-color-row-default-background-initial: var(--sinch-sys-color-container-transparent-default);
-  --sinch-comp-table-color-row-default-background-sticky: var(--sinch-sys-color-container-main-default);
+  --sinch-comp-table-color-row-checked-background-initial: var(--sinch-sys-color-surface-transparent-active);
+  --sinch-comp-table-color-row-default-background-hover: var(--sinch-sys-color-surface-transparent-hover);
+  --sinch-comp-table-color-row-default-background-initial: var(--sinch-sys-color-surface-transparent-default);
+  --sinch-comp-table-color-row-default-background-sticky: var(--sinch-sys-color-surface-primary-default);
 }

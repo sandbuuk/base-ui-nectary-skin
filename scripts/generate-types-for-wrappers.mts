@@ -3,7 +3,7 @@ import path from 'node:path'
 
 /** VARS */
 const dirname = (import.meta as any).dirname as string
-const componentsDir = path.join(dirname, '..', 'components')
+const componentsDir = path.join(dirname, '..', 'components/src')
 
 const jsCommentRegex = new RegExp(/^.*(\/\*[\s\S]*?\*\/)|(\/\/)/gm)
 const typeBodyLineRegex = new RegExp(/([\d|\w|'|-]*)(\??:)\s(.*),/)

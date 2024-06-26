@@ -15,7 +15,7 @@
   position: relative;
   font: var(--sinch-sys-font-body-m);
   color: var(--sinch-sys-color-text-default);
-  background-color: var(--sinch-sys-color-container-main-default);
+  background-color: var(--sinch-sys-color-surface-primary-default);
   line-height: 36px;
   padding-left: 16px;
   text-decoration: none;
@@ -23,7 +23,7 @@
 }
 
 .navmenu-link:hover {
-  background-color: var(--sinch-sys-color-container-main-hover);
+  background-color: var(--sinch-sys-color-surface-primary-hover);
 }
 
 .navmenu-link.level-1 {

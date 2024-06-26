@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/textarea'
-import '@nectary/components/icon-button'
 import '@nectary/components/button'
 import '@nectary/components/popover'
 import '@nectary/components/action-menu'
@@ -58,25 +57,25 @@ export const TextareaExample: FC = () => {
         on-change={onChange}
         aria-label="Textarea"
       >
-        <sinch-icon-button slot="bottom" aria-label="Paperclip">
+        <sinch-button slot="bottom" aria-label="Paperclip">
           <sinch-icon-attach-file slot="icon"/>
-        </sinch-icon-button>
-        <sinch-icon-button slot="bottom" aria-label="Emoji" on-click={() => onPopOpenClick('emoji')}>
+        </sinch-button>
+        <sinch-button slot="bottom" aria-label="Emoji" on-click={() => onPopOpenClick('emoji')}>
           <sinch-icon-mood slot="icon"/>
-        </sinch-icon-button>
-        <sinch-icon-button slot="bottom" aria-label="Variables" on-click={() => onPopOpenClick('vars')}>
+        </sinch-button>
+        <sinch-button slot="bottom" aria-label="Variables" on-click={() => onPopOpenClick('vars')}>
           <sinch-icon-variables slot="icon"/>
-        </sinch-icon-button>
-        <sinch-icon-button slot="bottom" aria-label="Comment">
+        </sinch-button>
+        <sinch-button slot="bottom" aria-label="Comment">
           <sinch-icon-add-comment slot="icon"/>
-        </sinch-icon-button>
-        <sinch-icon-button slot="bottom" aria-label="More">
+        </sinch-button>
+        <sinch-button slot="bottom" aria-label="More">
           <sinch-icon-more-horiz slot="icon"/>
-        </sinch-icon-button>
+        </sinch-button>
         <sinch-tag
           slot="bottom"
           text="400"
-          color="olive"
+          color="success"
           style={{ marginLeft: 'auto' }}
         />
         <sinch-button

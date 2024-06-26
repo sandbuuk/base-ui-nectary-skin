@@ -98,7 +98,7 @@ test('inline-alert events', runScreenshotTests('sinch-inline-alert', [
     name: 'custom events',
     url: withTextAndButtonAndClose,
     async *fn({ $, page }) {
-      const testButton = testCustomEvent(page, $.locator('sinch-button'))
+      const testButton = testCustomEvent(page, $.locator('sinch-button[slot="action"]'))
 
       await testButton('-click', 'sinch-inline-alert-button-click')
       await testButton('-focus', 'sinch-inline-alert-button-focus')

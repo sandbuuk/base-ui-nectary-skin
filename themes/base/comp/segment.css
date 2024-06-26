@@ -1,5 +1,5 @@
 .nectary-theme-base {
-  --sinch-comp-segment-color-default-background-initial: var(--sinch-sys-color-container-main-default);
+  --sinch-comp-segment-color-default-background-initial: var(--sinch-sys-color-surface-primary-default);
   --sinch-comp-segment-color-default-border-initial: var(--sinch-sys-color-border-default);
   --sinch-comp-segment-color-default-text-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-segment-color-disabled-text-initial: var(--sinch-sys-color-text-disabled);

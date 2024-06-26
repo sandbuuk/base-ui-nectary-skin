@@ -6,7 +6,7 @@ import '@nectary/components/color-swatch'
 import '@nectary/components/color-menu'
 import '@nectary/components/color-menu-option'
 
-const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'gray']
 
 const buttonStyles: CSSProperties = {
   width: 200,

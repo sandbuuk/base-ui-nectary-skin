@@ -14,9 +14,9 @@
       (-focus)="onFocus()"
       (-blur)="onBlur()">
       <sinch-icon slot="icon" name="search"></sinch-icon>
-      <sinch-icon-button *ngIf="isClearActive" slot="right" (-click)="onClearClick()">
+      <sinch-button *ngIf="isClearActive" slot="right" (-click)="onClearClick()">
         <sinch-icon slot="icon" name="close"></sinch-icon>
-      </sinch-icon-button>
+      </sinch-button>
     </sinch-input>
   </sinch-field>
   <sinch-action-menu slot="content" aria-label="Search autocomplete">

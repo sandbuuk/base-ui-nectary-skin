@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/file-status'
-import '@nectary/components/icon-button'
 import '@nectary/components/text'
 import '@nectary/components/progress'
+import '@nectary/components/button'
 import '@nectary/assets/icons/close'
 
 export const FileStatus: FC = () => {
@@ -24,9 +24,9 @@ export const FileStatus: FC = () => {
       {hasProgress && (
         <sinch-progress slot="content" value={73} aria-label="Progress" detailed/>
       )}
-      <sinch-icon-button slot="action" aria-label="Close" size="s">
+      <sinch-button slot="action" aria-label="Close" size="s">
         <sinch-icon-close slot="icon"/>
-      </sinch-icon-button>
+      </sinch-button>
     </sinch-file-status>
   )
 }

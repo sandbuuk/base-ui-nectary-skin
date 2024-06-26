@@ -7,7 +7,6 @@ import '@nectary/components/table-head-cell'
 import '@nectary/components/table-body'
 import '@nectary/components/table-cell'
 import '@nectary/components/toggle'
-import '@nectary/components/icon-button'
 import '@nectary/components/icon'
 import '@nectary/components/help-tooltip'
 import '@nectary/components/button'
@@ -81,14 +80,14 @@ export const Table: FC = () => {
                 <sinch-checkbox slot="checkbox" on-change={noop} aria-label="Checkbox"/>
               )}
               {cell.isSortable === true && (
-                <sinch-icon-button aria-label="Sort" size="s" slot="right" onClick={noop}>
+                <sinch-button aria-label="Sort" size="s" slot="right" onClick={noop}>
                   <sinch-icon slot="icon" name="north"/>
-                </sinch-icon-button>
+                </sinch-button>
               )}
               {cell.isFilterable === true && (
-                <sinch-icon-button aria-label="Filter" size="s" slot="left" onClick={noop}>
+                <sinch-button aria-label="Filter" size="s" slot="left" onClick={noop}>
                   <sinch-icon slot="icon" name="filter_list"/>
-                </sinch-icon-button>
+                </sinch-button>
               )}
               {cell.tooltip != null && (
                 <sinch-help-tooltip slot="tooltip" text={cell.tooltip}/>
@@ -115,9 +114,9 @@ export const Table: FC = () => {
                   <sinch-link text={cell.text ?? ''} href="#" aria-label="Link"/>
                 )}
                 {cell.isIcon === true && (
-                  <sinch-icon-button aria-label="button">
+                  <sinch-button aria-label="button">
                     <sinch-icon slot="icon" name={cell.iconName ?? 'not-defined'}/>
-                  </sinch-icon-button>
+                  </sinch-button>
                 )}
                 {cell.isCheckbox !== true && cell.isButton !== true && cell.isToggle !== true && cell.isLink !== true && cell.isIcon !== true && (
                   <sinch-text type="m">{cell.text}</sinch-text>

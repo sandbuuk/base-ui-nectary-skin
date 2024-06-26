@@ -98,13 +98,13 @@ test('alert events', runScreenshotTests('sinch-alert', [
     name: 'custom events',
     url: withTextAndButtonAndClose,
     async *fn({ $, page }) {
-      const testButton = testCustomEvent(page, $.locator('sinch-button'))
+      const testButton = testCustomEvent(page, $.locator('sinch-button[slot="action"]'))
 
       await testButton('-click', 'sinch-alert-button-click')
       await testButton('-focus', 'sinch-alert-button-focus')
       await testButton('-blur', 'sinch-alert-button-blur')
 
-      const testClose = testCustomEvent(page, $.locator('sinch-icon-button'))
+      const testClose = testCustomEvent(page, $.locator('sinch-button[slot="close"]'))
 
       await testClose('-click', 'sinch-alert-close-click')
       await testClose('-focus', 'sinch-alert-close-focus')

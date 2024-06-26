@@ -11,7 +11,6 @@ const lightColors = [
   'light-orange',
   'light-red',
   'light-pink',
-  'light-brown',
   'light-gray',
 ]
 

@@ -1,7 +1,7 @@
 .nectary-theme-base {
-  --sinch-comp-color-menu-option-color-default-border-active: var(--sinch-ref-color-main-stormy-400);
-  --sinch-comp-color-menu-option-color-default-border-focus: var(--sinch-sys-color-border-focus);
-  --sinch-comp-color-menu-option-color-default-border-hover: var(--sinch-ref-color-main-stormy-200);
+  --sinch-comp-color-menu-option-color-default-border-active: var(--sinch-ref-color-neutral-700);
+  --sinch-comp-color-menu-option-color-default-border-focus: var(--sinch-sys-color-focus);
+  --sinch-comp-color-menu-option-color-default-border-hover: var(--sinch-ref-color-neutral-500);
   --sinch-comp-color-menu-option-color-default-border-initial: transparent;
-  --sinch-comp-color-menu-option-color-default-border-selected: var(--sinch-ref-color-main-stormy-900);
+  --sinch-comp-color-menu-option-color-default-border-selected: var(--sinch-sys-color-basic-pure-inverted);
 }

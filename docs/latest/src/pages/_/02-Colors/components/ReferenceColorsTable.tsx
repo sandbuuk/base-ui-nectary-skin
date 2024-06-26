@@ -9,8 +9,6 @@ import '@nectary/components/button'
 import '@nectary/components/text'
 import '@nectary/assets/icons/expand-more'
 import '@nectary/assets/icons/expand-less'
-import '@nectary/components/segmented-control'
-import '@nectary/components/segmented-control-option'
 import { SpacingY } from './SpacingY'
 import { sinchColors } from './create-reference-colors'
 import type { TableItem } from './create-reference-colors'
@@ -19,8 +17,6 @@ type TypeShowMoreButton = {
   isExpanded: boolean,
   setExpanded: (isExpanded: boolean) => void,
 }
-const categories = ['Main', 'Complementary'] as const
-type Categories = typeof categories[number]
 
 const headStyle = {
   maxWidth: 105,
@@ -29,7 +25,7 @@ const headStyle = {
 const tableStyle = {
   width: '100%',
   borderRadius: 14,
-  backgroundColor: 'var(--sinch-sys-color-container-contrast-secondary-default)',
+  backgroundColor: 'var(--sinch-sys-color-surface-secondary-default)',
 }
 
 const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
@@ -47,7 +43,11 @@ const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
         size="l"
         on-click={handleClick}
       >
-        {isExpanded ? <sinch-icon-expand-less slot="right-icon"/> : <sinch-icon-expand-more slot="right-icon"/>}
+        {isExpanded ? (
+          <sinch-icon-expand-less slot="right-icon"/>
+        ) : (
+          <sinch-icon-expand-more slot="right-icon"/>
+        )}
       </sinch-button>
     </div>
   )
@@ -55,40 +55,31 @@ const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
 
 export const ReferenceColorsTable = () => {
   const [isExpanded, setExpanded] = useState(false)
-  const [colors, setColors] = useState<TableItem[]|[]>([])
-  const [colorCategory, setColorCategory] = useState<Categories>('Main')
-
-  const onSelectColorCategory = (e: CustomEvent) => {
-    setColorCategory(e.detail)
-  }
+  const [colors, setColors] = useState<TableItem[] | []>(isExpanded
+    ? sinchColors
+    : sinchColors.slice(0, 7))
 
   useEffect(() => {
-    setColors(isExpanded ? sinchColors[colorCategory] : sinchColors[colorCategory].slice(0, 7))
+    setColors(
+      isExpanded
+        ? sinchColors
+        : sinchColors.slice(0, 7)
+    )
   }, [isExpanded])
-
-  useEffect(() => {
-    setColors(isExpanded ? sinchColors[colorCategory] : sinchColors[colorCategory].slice(0, 7))
-  }, [colorCategory])
 
   return (
     <>
       <div className="colors-table">
-        <div style={{ marginLeft: 'auto' }}>
-          <sinch-segmented-control
-            value={colorCategory}
-            on-change={onSelectColorCategory}
-            aria-label="Token types"
-          >
-            {categories.map((item, i) => {
-              return (<sinch-segmented-control-option key={i} value={item} text={item} aria-label={item}/>)
-            })}
-          </sinch-segmented-control>
-        </div>
         <SpacingY height={28}/>
         <sinch-table style={tableStyle}>
           <sinch-table-head>
             <sinch-table-row>
-              <sinch-table-head-cell style={headStyle} text="Sample" align="center" fit/>
+              <sinch-table-head-cell
+                style={headStyle}
+                text="Sample"
+                align="center"
+                fit
+              />
               <sinch-table-head-cell text="Color name"/>
               <sinch-table-head-cell text="CSS name"/>
               <sinch-table-head-cell text="Token name"/>

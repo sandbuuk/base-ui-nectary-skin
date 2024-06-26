@@ -6,7 +6,7 @@ import '@nectary/components/color-menu'
 import '@nectary/components/color-menu-option'
 import '@nectary/components/button'
 
-const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'gray']
 
 export const IconButtonExample: FC = () => {
   const [value, setValue] = useState<string>('')

@@ -2,7 +2,6 @@ import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/inline-alert'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/assets/icons/close'
 
 const mdText = `
@@ -63,7 +62,7 @@ export const InlineAlert: FC = () => {
       caption={caption}
     >
       {hasClose && (
-        <sinch-icon-button
+        <sinch-button
           slot="close"
           size="s"
           aria-label="close"
@@ -72,7 +71,7 @@ export const InlineAlert: FC = () => {
           on-blur={onCloseBlur}
         >
           <sinch-icon-close slot="icon"/>
-        </sinch-icon-button>
+        </sinch-button>
       )}
       {hasAction && (
         <sinch-button

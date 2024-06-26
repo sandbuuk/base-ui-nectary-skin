@@ -1,4 +1,3 @@
-import '../icon-button'
 import '../icon'
 import '../text'
 import {
@@ -42,7 +41,7 @@ import {
   today,
 } from './utils'
 import type { TSinchDatePickerElement, TSinchDatePickerReact } from './types'
-import type { TSinchIconButtonElement } from '../icon-button/types'
+import type { TSinchButtonElement } from '../button/types'
 import type { TSinchTextElement } from '../text/types'
 import type { TRect } from '../types'
 
@@ -60,10 +59,10 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   #date2: Date | null = null
   #minDate: Date | null = null
   #maxDate: Date | null = null
-  #$prevMonth: TSinchIconButtonElement
-  #$nextMonth: TSinchIconButtonElement
-  #$prevYear: TSinchIconButtonElement
-  #$nextYear: TSinchIconButtonElement
+  #$prevMonth: TSinchButtonElement
+  #$nextMonth: TSinchButtonElement
+  #$prevYear: TSinchButtonElement
+  #$nextYear: TSinchButtonElement
   #$date: TSinchTextElement
   #monthNames: string[]
   #controller: AbortController | null = null

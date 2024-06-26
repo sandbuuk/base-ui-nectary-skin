@@ -2,7 +2,7 @@
   [attr.type]="type"
   [attr.text]="text"
   [attr.caption]="caption">
-  <sinch-icon-button
+  <sinch-button
     *ngIf="hasClose"
     slot="close"
     size="s"
@@ -11,7 +11,7 @@
     (-blur)="onCloseBlur()"
   >
     <sinch-icon-close slot="icon"></sinch-icon-close>
-  </sinch-icon-button>
+  </sinch-button>
   <sinch-button
     *ngIf="hasAction"
     slot="action"

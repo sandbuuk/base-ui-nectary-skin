@@ -5,7 +5,6 @@ import type { FC } from 'react'
 import '@nectary/components/input'
 import '@nectary/components/spinner'
 import '@nectary/components/select-button'
-import '@nectary/components/icon-button'
 import '@nectary/components/button'
 import '@nectary/components/toggle'
 import '@nectary/assets/icons/search'
@@ -51,22 +50,22 @@ export const InputSlots: FC = () => {
               on-change={onChange}
             >
               <sinch-icon-search slot="icon"/>
-              <sinch-icon-button slot="right" aria-label="button">
+              <sinch-button slot="right" aria-label="button">
                 <sinch-icon-open-in-new slot="icon"/>
-              </sinch-icon-button>
+              </sinch-button>
             </sinch-input>
-            <sinch-icon-button slot="right" aria-label="button">
+            <sinch-button slot="right" aria-label="button">
               <sinch-icon-open-in-new slot="icon"/>
-            </sinch-icon-button>
+            </sinch-button>
           </sinch-input>
-          <sinch-icon-button slot="right" aria-label="button">
+          <sinch-button slot="right" aria-label="button">
             <sinch-spinner slot="icon"/>
-          </sinch-icon-button>
+          </sinch-button>
 
         </sinch-input>
-        <sinch-icon-button type="primary" size={sizeValue} aria-label="button">
+        <sinch-button type="primary" size={sizeValue} aria-label="button">
           <sinch-icon-open-in-new slot="icon"/>
-        </sinch-icon-button>
+        </sinch-button>
       </div>
 
       <div style={{ display: 'flex', gap: '8px' }}>
@@ -111,9 +110,9 @@ export const InputSlots: FC = () => {
             placeholder=""
             text=""
           >
-            <sinch-icon-button type="primary" slot="left" aria-label="button">
+            <sinch-button type="primary" slot="left" aria-label="button">
               <sinch-icon-open-in-new slot="icon"/>
-            </sinch-icon-button>
+            </sinch-button>
             <sinch-spinner slot="icon"/>
           </sinch-select-button>
           <sinch-button slot="right" type="cta-secondary" text="OK" aria-label="button"/>

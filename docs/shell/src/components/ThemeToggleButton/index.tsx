@@ -3,7 +3,7 @@ import '@nectary/components/icon'
 import '@nectary/components/popover'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
-import '@nectary/components/icon-button'
+import '@nectary/components/button'
 import './styles.css'
 import { useEffect, useState } from 'react'
 import type { TThemeName } from 'docs-common'
@@ -40,7 +40,7 @@ export const ThemeToggleButton = () => {
       aria-label="theme select popover"
       orientation="top-right"
     >
-      <sinch-icon-button
+      <sinch-button
         slot="target"
         id="toggle-theme-button"
         aria-label="Toggle dark theme"
@@ -48,7 +48,7 @@ export const ThemeToggleButton = () => {
         disabled={isDisabled}
       >
         <sinch-icon slot="icon" name="nights_stay"/>
-      </sinch-icon-button>
+      </sinch-button>
       <sinch-select-menu
         slot="content"
         value={themeName}

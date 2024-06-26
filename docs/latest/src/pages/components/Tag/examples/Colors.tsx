@@ -14,21 +14,12 @@ const itemWrapperStyles: CSSProperties = {
   gap: 10,
 }
 
-const systemColors = ['celtic', 'olive', 'pumpkin', 'jasper']
-const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
-const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
-const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-gray']
+const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-gray']
+const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'gray']
 
 export const ColorsExample: FC = () => (
   <div style={rowsWrapperStyles}>
-    <sinch-title type="s" level="4" text="System colors"/>
-    <div style={itemWrapperStyles}>
-      {
-        systemColors.map((name) => (
-          <sinch-tag key={name} color={name} text={name}/>
-        ))
-      }
-    </div>
     <sinch-title type="s" level="4" text="Light colors"/>
     <div style={itemWrapperStyles}>
       {

@@ -5,7 +5,7 @@
   --sinch-comp-field-color-disabled-additional-initial: var(--sinch-sys-color-text-disabled);
   --sinch-comp-field-color-disabled-label-initial: var(--sinch-sys-color-text-disabled);
   --sinch-comp-field-color-disabled-optional-initial: var(--sinch-sys-color-text-disabled);
-  --sinch-comp-field-color-invalid-text-initial: var(--sinch-sys-color-text-invalid);
+  --sinch-comp-field-color-invalid-text-initial: var(--sinch-sys-color-feedback-danger-default);
   --sinch-comp-field-font-additional: var(--sinch-sys-font-body-xs);
   --sinch-comp-field-font-invalid: var(--sinch-sys-font-body-xs);
   --sinch-comp-field-font-label: var(--sinch-sys-font-desktop-title-s);

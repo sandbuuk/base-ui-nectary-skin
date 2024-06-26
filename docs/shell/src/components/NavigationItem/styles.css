@@ -9,25 +9,25 @@
   text-decoration: none;
   color: var(--sinch-sys-color-text-default);
   border-radius: 5px;
-  background-color: var(--sinch-sys-color-container-transparent-default);
+  background-color: var(--sinch-sys-color-surface-transparent-default);
 }
 
 .navigation-link:hover {
-  background-color: var(--sinch-sys-color-container-transparent-hover);
+  background-color: var(--sinch-sys-color-surface-transparent-hover);
 }
 
 .navigation-link:active {
-  background-color: var(--sinch-sys-color-container-transparent-active);
+  background-color: var(--sinch-sys-color-surface-transparent-active);
 }
 
 .navigation-link.selected {
-  background-color: var(--sinch-sys-color-container-complement-secondary-active);
+  background-color: var(--sinch-sys-color-surface-secondary-active);
 }
 
 .navigation-link.selected:hover {
-  background-color: var(--sinch-sys-color-container-complement-secondary-hover);
+  background-color: var(--sinch-sys-color-surface-secondary-hover);
 }
 
 .navigation-link.selected:active {
-  background-color: var(--sinch-sys-color-container-complement-secondary-active);
+  background-color: var(--sinch-sys-color-surface-secondary-active);
 }

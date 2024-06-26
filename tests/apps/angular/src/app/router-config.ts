@@ -9,7 +9,6 @@ import { ButtonComponent } from '../components/Button/Button.component'
 import { CardComponent } from '../components/Card/Card.component'
 import { CardDnDComponent } from '../components/CardDnD/CardDnD.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
-import { ChatComponent } from '../components/Chat/Chat.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
 import { ChipComponent } from '../components/Chip/Chip.component'
 import { CodeTagComponent } from '../components/CodeTag/CodeTag.component'
@@ -67,7 +66,6 @@ const appRoutes: Routes = [
   { path: "card-container", component: CardContainerComponent },
   { path: "card-dnd", component: CardDnDComponent },
   { path: "card", component: CardComponent },
-  { path: "chat", component: ChatComponent },
   { path: "checkbox", component: CheckboxComponent },
   { path: "chip", component: ChipComponent },
   { path: "code-tag", component: CodeTagComponent },

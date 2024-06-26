@@ -88,7 +88,7 @@ Use color palette or custom font face:
 
 ```css
 span {
-  color: var(--sinch-ref-color-main-honey-700);
+  color: var(--sinch-ref-color-honey-700);
 }
 
 h2 {

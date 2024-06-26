@@ -39,7 +39,7 @@ export const BottomExample: FC = () => {
       <sinch-tag
         slot="bottom"
         text="400"
-        color="olive"
+        color="success"
         style={{ marginLeft: 'auto' }}
       />
       <sinch-button

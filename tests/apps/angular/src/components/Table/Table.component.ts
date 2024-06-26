@@ -11,7 +11,6 @@ import '@nectary/components/button'
 import '@nectary/components/toggle'
 import '@nectary/components/link'
 import '@nectary/components/icon'
-import '@nectary/components/icon-button'
 import '@nectary/components/text'
 import { ActivatedRoute } from '@angular/router'
 

@@ -59,14 +59,14 @@
 .illustration-wrapper {
   width: 100%;
   height: auto;
-  background-color: var(--sinch-sys-color-container-contrast-secondary-default);
+  background-color: var(--sinch-sys-color-surface-secondary-default);
   border-radius: 14px;
   margin-top: 16px;
   margin-bottom: 56px;
 }
 
 .colors-table {
-  background-color: var(--sinch-sys-color-container-contrast-secondary-default);
+  background-color: var(--sinch-sys-color-surface-secondary-default);
   border-radius: 14px;
   display: flex;
   flex-direction: column;

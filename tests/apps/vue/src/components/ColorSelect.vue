@@ -1,29 +1,10 @@
 <template>
-  <sinch-popover
-    :open="isOpen"
-    @--close="onClose"
-    orientation="bottom-right"
-    modal
-  >
-    <sinch-select-button
-      slot="target"
-      placeholder="Select color"
-      aria-label="Select color"
-      :text="value"
-      :disabled="isDisabled"
-      :invalid="isInvalid"
-      @--click="onClick"
-    >
+  <sinch-popover :open="isOpen" @--close="onClose" orientation="bottom-right" modal>
+    <sinch-select-button slot="target" placeholder="Select color" aria-label="Select color" :text="value"
+      :disabled="isDisabled" :invalid="isInvalid" @--click="onClick">
       <sinch-color-swatch slot="icon" :name="value"></sinch-color-swatch>
     </sinch-select-button>
-    <sinch-color-menu
-      slot="content"
-      :rows="rows"
-      :cols="cols"
-      :value="value"
-      @--change="onChange"
-      aria-label="Menu"
-    >
+    <sinch-color-menu slot="content" :rows="rows" :cols="cols" :value="value" @--change="onChange" aria-label="Menu">
       <sinch-color-menu-option v-for="col in colors" :key="col" :value="col"></sinch-color-menu-option>
     </sinch-color-menu>
   </sinch-popover>
@@ -36,9 +17,9 @@ import '@nectary/components/color-swatch'
 import '@nectary/components/color-menu'
 import '@nectary/components/color-menu-option'
 
-const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
-const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
-const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-gray']
+const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-gray']
+const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'gray']
 const colors = [...lightColors, ...vibrantColors, ...darkColors]
 
 export default {
@@ -82,4 +63,3 @@ export default {
   }
 }
 </script>
-

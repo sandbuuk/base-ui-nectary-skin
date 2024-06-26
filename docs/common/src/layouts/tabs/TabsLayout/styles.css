@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 112px;
-  border-bottom: 1px solid var(--sinch-sys-color-border-light);
+  border-bottom: 1px solid var(--sinch-sys-color-border-subtle);
   padding-top: 20px;
   padding-left: 32px;
   padding-right: calc(265px + 32px);
@@ -35,7 +35,7 @@
   width: 265px;
   height: 100%;
   box-sizing: border-box;
-  background-color: var(--sinch-sys-color-container-main-default);
+  background-color: var(--sinch-sys-color-surface-primary-default);
   overflow-y: scroll;
 }
 
@@ -46,7 +46,7 @@
   bottom: 0;
   left: 0;
   width: 1px;
-  background-color: var(--sinch-sys-color-border-light);
+  background-color: var(--sinch-sys-color-border-subtle);
 }
 
 #page-title {

@@ -1,11 +1,5 @@
 <template>
-  <sinch-color-menu
-    :rows="rows"
-    :cols="cols"
-    :value="value"
-    @--change="onChange"
-    aria-label="Menu"
-  >
+  <sinch-color-menu :rows="rows" :cols="cols" :value="value" @--change="onChange" aria-label="Menu">
     <sinch-color-menu-option v-for="col in colors" :key="col" :value="col"></sinch-color-menu-option>
   </sinch-color-menu>
 </template>
@@ -14,9 +8,9 @@
 import '@nectary/components/color-menu'
 import '@nectary/components/color-menu-option'
 
-const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-brown', 'light-gray']
-const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-brown', 'dark-gray']
-const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const lightColors = ['light-violet', 'light-blue', 'light-green', 'light-yellow', 'light-orange', 'light-red', 'light-pink', 'light-gray']
+const darkColors = ['dark-violet', 'dark-blue', 'dark-green', 'dark-yellow', 'dark-orange', 'dark-red', 'dark-pink', 'dark-gray']
+const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'gray']
 const colors = [...lightColors, ...vibrantColors, ...darkColors]
 const lightVibrantColors = [...lightColors, ...vibrantColors]
 
@@ -49,4 +43,3 @@ export default {
   }
 }
 </script>
-

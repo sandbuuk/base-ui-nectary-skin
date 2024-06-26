@@ -1,2 +1,2 @@
 import './sys.css'
-import './comp/card.css'
+import './comp/date-picker.css'

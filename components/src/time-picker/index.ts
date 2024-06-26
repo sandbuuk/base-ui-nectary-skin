@@ -1,4 +1,3 @@
-import '../icon-button'
 import '../icon'
 import '../segmented-control'
 import '../segmented-control-option'

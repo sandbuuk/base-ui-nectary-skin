@@ -1,9 +1,9 @@
 .example-container {
   padding: 24px 16px;
-  background-color: var(--sinch-sys-color-container-contrast-primary-default);
+  background-color: var(--sinch-sys-color-surface-tertiary-default);
   border-radius: var(--sinch-sys-shape-radius-l);
 }
 
 .example-container.inverted {
-  background-color: var(--sinch-sys-color-container-main-foreground);
+  background-color: var(--sinch-sys-color-text-default);
 }

@@ -1,5 +1,4 @@
 import './sys.css'
 import './comp/button.css'
 import './comp/date-picker.css'
-import './comp/icon-button.css'
 import './comp/progress.css'

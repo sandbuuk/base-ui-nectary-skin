@@ -9,20 +9,50 @@
     "./changelog.md": "./changelog.md",
     "./*/types": "./lib/esm/*/types.d.ts",
     "./*.json": "./lib/esm/*.json",
+    "./icons": {
+      "types": "./lib/esm/icons",
+      "require": "./lib/cjs/icons",
+      "default": "./lib/esm/icons"
+    },
+    "./icons-branded": {
+      "types": "./lib/esm/icons-branded",
+      "require": "./lib/cjs/icons-branded",
+      "default": "./lib/esm/icons-branded"
+    },
+    "./icons-channel": {
+      "types": "./lib/esm/icons-channel",
+      "require": "./lib/cjs/icons-channel",
+      "default": "./lib/esm/icons-channel"
+    },
     "./*/create-icon-class": {
       "types": "./lib/esm/*/create-icon-class.d.ts",
       "require": "./lib/cjs/*/create-icon-class.js",
       "default": "./lib/esm/*/create-icon-class.js"
+    },
+    "./animations": {
+      "types": "./lib/esm/animations",
+      "require": "./lib/cjs/animations",
+      "default": "./lib/esm/animations"
     },
     "./*/create-animation-class": {
       "types": "./lib/esm/*/create-animation-class.d.ts",
       "require": "./lib/cjs/*/create-animation-class.js",
       "default": "./lib/esm/*/create-animation-class.js"
     },
+    "./logo": {
+      "types": "./lib/esm/logo",
+      "require": "./lib/cjs/logo",
+      "default": "./lib/esm/logo"
+    },
     "./*/create-logo-class": {
       "types": "./lib/esm/*/create-logo-class.d.ts",
       "require": "./lib/cjs/*/create-logo-class.js",
       "default": "./lib/esm/*/create-logo-class.js"
+    },
+    "./illustrations": {
+      "types": "./lib/esm/illustrations",
+      "require": "./lib/cjs/illustrations",
+      "default": "./lib/esm/illustrations"
     },
     "./*/create-illustration-class": {
       "types": "./lib/esm/*/create-illustration-class.d.ts",

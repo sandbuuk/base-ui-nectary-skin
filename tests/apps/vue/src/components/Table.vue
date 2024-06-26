@@ -2,14 +2,15 @@
   <sinch-table>
     <sinch-table-head>
       <sinch-table-row>
-        <sinch-table-head-cell v-for="(cell, index) in state.head" :key="index" :text="cell.text" :align="cell.align" :fit="cell.isFit">
+        <sinch-table-head-cell v-for="(cell, index) in state.head" :key="index" :text="cell.text" :align="cell.align"
+          :fit="cell.isFit">
           <sinch-checkbox v-if="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
-            <sinch-icon-button v-if="cell.isSortable" aria-label="Sort" size="s" slot="right">
-              <sinch-icon slot="icon" name="north"></sinch-icon>
-            </sinch-icon-button>
-            <sinch-icon-button v-if="cell.isFilterable" aria-label="Filter" size="s" slot="left">
-              <sinch-icon slot="icon" name="filter_list"></sinch-icon>
-            </sinch-icon-button>
+          <sinch-button v-if="cell.isSortable" aria-label="Sort" size="s" slot="right">
+            <sinch-icon slot="icon" name="north"></sinch-icon>
+          </sinch-button>
+          <sinch-button v-if="cell.isFilterable" aria-label="Filter" size="s" slot="left">
+            <sinch-icon slot="icon" name="filter_list"></sinch-icon>
+          </sinch-button>
           <sinch-help-tooltip v-if="cell.tooltip != null" slot="tooltip" :text="cell.tooltip"></sinch-help-tooltip>
         </sinch-table-head-cell>
       </sinch-table-row>
@@ -21,10 +22,11 @@
           <sinch-button v-if="cell.isButton" type="secondary" :text="cell.text"></sinch-button>
           <sinch-toggle v-if="cell.isToggle"></sinch-toggle>
           <sinch-link v-if="cell.isLink" :text="cell.text" href="#"></sinch-link>
-          <sinch-icon-button v-if="cell.isIcon" aria-label="button">
+          <sinch-button v-if="cell.isIcon" aria-label="button">
             <sinch-icon slot="icon" :name="cell.iconName"></sinch-icon>
-          </sinch-icon-button>
-          <sinch-text v-if="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon">{{cell.text}}</sinch-text>
+          </sinch-button>
+          <sinch-text
+            v-if="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon">{{cell.text}}</sinch-text>
         </sinch-table-cell>
       </sinch-table-row>
     </sinch-table-body>
@@ -39,13 +41,11 @@ import '@nectary/components/table-head-cell'
 import '@nectary/components/table-body'
 import '@nectary/components/table-cell'
 import '@nectary/components/toggle'
-import '@nectary/components/icon-button'
 import '@nectary/components/help-tooltip'
 import '@nectary/components/button'
 import '@nectary/components/checkbox'
 import '@nectary/components/link'
 import '@nectary/components/icon'
-import '@nectary/components/icon-button'
 import '@nectary/components/text'
 
 const getTableItems = ({ hasLongLine }) => ({
@@ -108,4 +108,3 @@ export default {
   }
 }
 </script>
-

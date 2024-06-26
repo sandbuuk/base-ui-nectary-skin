@@ -1,88 +1,97 @@
 <style>
-:host {
-  display: block;
-  outline: none;
-}
+  :host {
+    display: block;
+    outline: none;
+  }
 
-#wrapper {
-  border-radius: var(--sinch-comp-card-shape-radius);
-  border: 1px solid var(--sinch-comp-card-color-white-default-border-initial);
-  background-color: var(--sinch-comp-card-color-white-default-background-initial);
-  box-shadow: var(--sinch-comp-card-shadow-initial);
-  overflow: hidden;
-}
+  #wrapper {
+    border-radius: var(--sinch-comp-card-shape-radius);
+    border: 1px solid var(--sinch-comp-card-color-default-border-initial);
+    background-color: var(--sinch-comp-card-color-default-background-initial);
+    box-shadow: var(--sinch-comp-card-shadow-initial);
+    overflow: hidden;
+  }
 
-:host(:hover) #wrapper {
-  box-shadow: var(--sinch-comp-card-shadow-hover);
-}
+  :host(:hover) #wrapper {
+    box-shadow: var(--sinch-comp-card-shadow-hover);
+  }
 
-#card-body {
-  padding: 24px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+  #card-body {
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 
-#illustration-wrapper {
-  display: none;
-  overflow: hidden;
-  height: 240px;
-}
+  #illustration-wrapper {
+    display: none;
+    overflow: hidden;
+    height: 240px;
+  }
 
-#illustration-wrapper.active {
-  display: block;
-}
+  #illustration-wrapper.active {
+    display: block;
+  }
 
-#label {
-  --sinch-comp-text-font: var(--sinch-comp-card-font-label);
-  --sinch-global-color-text: var(--sinch-comp-card-color-white-default-title-initial);
-}
+  #label {
+    --sinch-comp-text-font: var(--sinch-comp-card-font-label);
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-card-color-default-title-initial
+      );
+  }
 
-#label:empty {
-  display: none;
-}
+  #label:empty {
+    display: none;
+  }
 
-#header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
+  #header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
 
-  --sinch-global-size-icon: var(--sinch-comp-card-size-icon);
-}
+    --sinch-global-size-icon: var(--sinch-comp-card-size-icon);
+  }
 
-#caption {
-  flex: 1;
-  min-width: 0;
+  #caption {
+    flex: 1;
+    min-width: 0;
 
-  --sinch-comp-title-font: var(--sinch-comp-card-font-title);
-  --sinch-global-color-text: var(--sinch-comp-card-color-white-default-title-initial);
-}
+    --sinch-comp-title-font: var(--sinch-comp-card-font-title);
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-card-color-default-title-initial
+      );
+  }
 
-#description {
-  flex: 1;
-  min-height: 0;
-  max-height: 120px;
-  overflow-y: auto;
+  #description {
+    flex: 1;
+    min-height: 0;
+    max-height: 120px;
+    overflow-y: auto;
 
-  --sinch-comp-text-font: var(--sinch-comp-card-font-description);
-  --sinch-global-color-text: var(--sinch-comp-card-color-white-default-description-initial);
-}
+    --sinch-comp-text-font: var(--sinch-comp-card-font-description);
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-card-color-default-description-initial
+      );
+  }
 
-#description:empty {
-  display: none;
-}
+  #description:empty {
+    display: none;
+  }
 
-slot[name="action"]::slotted(*) {
-  margin-top: 20px;
-  align-self: flex-start;
-  max-width: 100%;
-}
+  slot[name="action"]::slotted(*) {
+    margin-top: 20px;
+    align-self: flex-start;
+    max-width: 100%;
+  }
 
-:host([draggable="true"]) #header {
-  cursor: grab;
-}
+  :host([draggable="true"]) #header {
+    cursor: grab;
+  }
 </style>
 
 <div id="wrapper">

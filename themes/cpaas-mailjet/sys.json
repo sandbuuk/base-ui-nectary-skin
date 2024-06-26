@@ -14,10 +14,5 @@
       "foreground": "#FFFFFF",
       "hover": "#007874"
     }
-  },
-  "shape-radius": {
-    "m": "8px",
-    "s": "4px",
-    "xs": "0"
   }
 }

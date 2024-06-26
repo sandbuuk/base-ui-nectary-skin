@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom'
 import type { TRichTextareaSelection, TSinchRichTextareaElement } from '@nectary/components/rich-textarea/types'
 import type { FC } from 'react'
 import '@nectary/components/rich-textarea'
-import '@nectary/components/icon-button'
 import '@nectary/components/icon'
 import '@nectary/components/button'
 import '@nectary/assets/icons/variables'
@@ -124,38 +123,38 @@ export const RichTextarea: FC = () => {
       >
         { hasTop && (
           <>
-            <sinch-icon-button slot="top" size="s" id="format-italic" aria-label="Format italic" on-click={onFormatItalic}>
+            <sinch-button slot="top" size="s" id="format-italic" aria-label="Format italic" on-click={onFormatItalic}>
               <sinch-icon slot="icon" name="format_italic"/>
-            </sinch-icon-button>
-            <sinch-icon-button slot="top" size="s" id="format-bold" aria-label="Format bold" on-click={onFormatBold}>
+            </sinch-button>
+            <sinch-button slot="top" size="s" id="format-bold" aria-label="Format bold" on-click={onFormatBold}>
               <sinch-icon slot="icon" name="format_bold"/>
-            </sinch-icon-button>
-            <sinch-icon-button slot="top" size="s" id="format-strikethrough" aria-label="Format strikethrough" on-click={onFormatStrikethrough}>
+            </sinch-button>
+            <sinch-button slot="top" size="s" id="format-strikethrough" aria-label="Format strikethrough" on-click={onFormatStrikethrough}>
               <sinch-icon slot="icon" name="format_strikethrough"/>
-            </sinch-icon-button>
-            <sinch-icon-button slot="top" size="s" id="format-code-tag" aria-label="Format code tag" on-click={onFormatCodeTag}>
+            </sinch-button>
+            <sinch-button slot="top" size="s" id="format-code-tag" aria-label="Format code tag" on-click={onFormatCodeTag}>
               <sinch-icon slot="icon" name="code"/>
-            </sinch-icon-button>
-            <sinch-icon-button slot="top" size="s" id="format-ulist" aria-label="Format list bulleted" on-click={onFormatListBulleted}>
+            </sinch-button>
+            <sinch-button slot="top" size="s" id="format-ulist" aria-label="Format list bulleted" on-click={onFormatListBulleted}>
               <sinch-icon slot="icon" name="format_list_bulleted"/>
-            </sinch-icon-button>
-            <sinch-icon-button slot="top" size="s" id="format-olist" aria-label="Format list numbered" on-click={onFormatListNumbered}>
+            </sinch-button>
+            <sinch-button slot="top" size="s" id="format-olist" aria-label="Format list numbered" on-click={onFormatListNumbered}>
               <sinch-icon slot="icon" name="format_list_numbered"/>
-            </sinch-icon-button>
+            </sinch-button>
           </>
         )}
 
         {hasBottom && (
           <>
-            <sinch-icon-button slot="bottom" size="s" aria-label="Attach files">
+            <sinch-button slot="bottom" size="s" aria-label="Attach files">
               <sinch-icon slot="icon" name="attach_file"/>
-            </sinch-icon-button>
-            <sinch-icon-button slot="bottom" size="s" aria-label="Variables">
+            </sinch-button>
+            <sinch-button slot="bottom" size="s" aria-label="Variables">
               <sinch-icon-variables slot="icon"/>
-            </sinch-icon-button>
-            <sinch-icon-button slot="bottom" size="s" aria-label="Options">
+            </sinch-button>
+            <sinch-button slot="bottom" size="s" aria-label="Options">
               <sinch-icon slot="icon" name="more_horiz"/>
-            </sinch-icon-button>
+            </sinch-button>
             <sinch-button
               slot="bottom"
               type="primary"
