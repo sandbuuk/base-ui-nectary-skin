@@ -83,7 +83,7 @@ const config: TWebpackConfig = {
         loader: '@saas/example-code-loader',
       },
       {
-        test: /\/types\.ts$/,
+        test: /\.d\.ts$/,
         exclude: NODE_MODULES_REGEXP,
         resourceQuery: '?api',
         loader: '@saas/types-to-mdx-loader',
