@@ -11,7 +11,6 @@ const vibrantColorNames = [
   'orange',
   'red',
   'pink',
-  'brown',
   'gray',
 ]
 

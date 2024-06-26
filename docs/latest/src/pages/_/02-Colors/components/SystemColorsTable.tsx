@@ -17,11 +17,18 @@ const headStyle = {
 const tableStyle = {
   width: '100%',
   borderRadius: 14,
-  backgroundColor: 'var(--sinch-sys-color-container-contrast-secondary-default)',
+  backgroundColor: 'var(--sinch-sys-color-surface-secondary-default)',
 }
 
-export const categories = ['container', 'status', 'cta', 'primary', 'text', 'feedback', 'border', 'skin tone'] as const
-export type Category = typeof categories[number]
+export const categories = [
+  'container',
+  'surface',
+  'primary',
+  'text',
+  'feedback',
+  'border',
+] as const
+export type Category = (typeof categories)[number]
 const colors = createSystemColors()
 
 export const SystemColorsTable = () => {
@@ -34,12 +41,20 @@ export const SystemColorsTable = () => {
   return (
     <>
       <div className="colors-table">
-        <SelectColorCategory category={category} handleSelectColorCategory={handleSelectColorCategory}/>
+        <SelectColorCategory
+          category={category}
+          handleSelectColorCategory={handleSelectColorCategory}
+        />
         <SpacingY height={24}/>
         <sinch-table style={tableStyle}>
           <sinch-table-head>
             <sinch-table-row>
-              <sinch-table-head-cell style={headStyle} text="Sample" align="center" fit/>
+              <sinch-table-head-cell
+                style={headStyle}
+                text="Sample"
+                align="center"
+                fit
+              />
               <sinch-table-head-cell text="Token name"/>
               <sinch-table-head-cell text="CSS Name"/>
               <sinch-table-head-cell text="Token reference"/>
@@ -47,8 +62,8 @@ export const SystemColorsTable = () => {
             </sinch-table-row>
           </sinch-table-head>
           <sinch-table-body>
-            {
-              colors[category].map(({ cssName, tokenName, tokenRefName, tokenRefValue }) => {
+            {colors[category].map(
+              ({ cssName, tokenName, tokenRefName, tokenRefValue }) => {
                 return (
                   <sinch-table-row key={cssName}>
                     <sinch-table-cell>
@@ -56,7 +71,10 @@ export const SystemColorsTable = () => {
                         className="color-circle"
                         style={{
                           backgroundColor: `var(${cssName})`,
-                          border: tokenRefValue === 'transparent' ? `1px solid var(--sinch-sys-color-border-default)` : undefined,
+                          border:
+                            tokenRefValue === 'transparent'
+                              ? `1px solid var(--sinch-sys-color-border-default)`
+                              : undefined,
                         }}
                       />
                     </sinch-table-cell>
@@ -74,7 +92,8 @@ export const SystemColorsTable = () => {
                     </sinch-table-cell>
                   </sinch-table-row>
                 )
-              })}
+              }
+            )}
           </sinch-table-body>
         </sinch-table>
       </div>

@@ -1,33 +1,18 @@
 <template>
-<sinch-alert
-  :type="type"
-  :text="text">
-  <sinch-icon-button
-    v-if="hasClose"
-    slot="close"
-    size="s"
-    @--click="onCloseClick"
-    @--focus="onCloseFocus"
-    @--blur="onCloseBlur">
-    <sinch-icon-close slot="icon"></sinch-icon-close>
-  </sinch-icon-button>
-  <sinch-button
-    v-if="hasAction"
-    slot="action"
-    type="cta-secondary"
-    size="s"
-    text="This is a Button!"
-    @--click="onButtonClick"
-    @--focus="onButtonFocus"
-    @--blur="onButtonBlur">
-  </sinch-button>
-</sinch-alert>
+  <sinch-alert :type="type" :text="text">
+    <sinch-button v-if="hasClose" slot="close" size="s" @--click="onCloseClick" @--focus="onCloseFocus"
+      @--blur="onCloseBlur">
+      <sinch-icon-close slot="icon"></sinch-icon-close>
+    </sinch-button>
+    <sinch-button v-if="hasAction" slot="action" type="cta-secondary" size="s" text="This is a Button!"
+      aria-label="Action" @--click="onButtonClick" @--focus="onButtonFocus" @--blur="onButtonBlur">
+    </sinch-button>
+  </sinch-alert>
 </template>
 
 <script>
 import '@nectary/components/alert'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/assets/icons/close'
 
 const mdText = `
@@ -89,4 +74,3 @@ export default {
   },
 }
 </script>
-

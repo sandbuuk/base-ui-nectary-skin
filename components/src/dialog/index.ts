@@ -1,4 +1,3 @@
-import '../icon-button'
 import '../icon'
 import '../stop-events'
 import '../title'

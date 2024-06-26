@@ -1,5 +1,4 @@
 import '../icon'
-import '../icon-button'
 import {
   defineCustomElement,
   getBooleanAttribute,

@@ -9,7 +9,6 @@ import Button from './components/Button.vue'
 import Card from './components/Card.vue'
 import CardContainer from './components/CardContainer.vue'
 import CardDnD from './components/CardDnD.vue'
-import Chat from './components/Chat.vue'
 import Checkbox from './components/Checkbox.vue'
 import Chip from './components/Chip.vue'
 import CodeTag from './components/CodeTag.vue'
@@ -67,7 +66,6 @@ const routes = [
   { path: "/card-container", component: CardContainer },
   { path: "/card-dnd", component: CardDnD },
   { path: "/card", component: Card },
-  { path: "/chat", component: Chat },
   { path: "/checkbox", component: Checkbox },
   { path: "/chip", component: Chip },
   { path: "/code-tag", component: CodeTag },

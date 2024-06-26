@@ -1,5 +1,5 @@
 .nectary-theme-base {
-  --sinch-comp-list-color-default-background-hover: var(--sinch-sys-color-container-transparent-hover);
-  --sinch-comp-list-color-default-background-initial: var(--sinch-sys-color-container-transparent-default);
-  --sinch-comp-list-color-default-border-initial: var(--sinch-sys-color-border-light);
+  --sinch-comp-list-color-default-background-hover: var(--sinch-sys-color-surface-transparent-hover);
+  --sinch-comp-list-color-default-background-initial: var(--sinch-sys-color-surface-transparent-default);
+  --sinch-comp-list-color-default-border-initial: var(--sinch-sys-color-border-subtle);
 }

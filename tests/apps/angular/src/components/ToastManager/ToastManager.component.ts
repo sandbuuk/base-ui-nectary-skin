@@ -3,7 +3,6 @@ import { typeValues } from '@nectary/components/toast/utils'
 import '@nectary/components/toast-manager'
 import '@nectary/components/toast'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/assets/icons/close'
 import { ActivatedRoute } from '@angular/router'
 

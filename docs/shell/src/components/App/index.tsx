@@ -16,6 +16,7 @@ import { IntroPage } from '~/pages/Intro'
 import { LandingPage } from '~/pages/Landing'
 import { NotFoundPage } from '~/pages/NotFound'
 import { TestingPage } from '~/pages/Testing'
+import { V3MigrationPage } from '~/pages/V3Migration'
 import './styles.css'
 import '@nectary/theme-base'
 import '@nectary/theme-dark'
@@ -94,6 +95,7 @@ export const App: FC = () => {
                   <NavigationItem path="/" text="Home"/>
                   <NavigationItem path="/intro" text="Intro"/>
                   <NavigationItem path="/testing" text="Testing"/>
+                  <NavigationItem path="/V3Migration" text="V3 Migration"/>
                   <NavigationItem path="/faq" text="FAQ"/>
                 </NavigationList>
               </NavigationGroup>
@@ -111,6 +113,7 @@ export const App: FC = () => {
             <Route path="/" element={<LandingPage/>}/>
             <Route path="/intro" element={<IntroPage/>}/>
             <Route path="/testing" element={<TestingPage/>}/>
+            <Route path="/V3Migration" element={<V3MigrationPage/>}/>
             <Route path="/faq" element={<FAQPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
             <Route path="/compositions/*" element={<ComponentsPage/>}/>

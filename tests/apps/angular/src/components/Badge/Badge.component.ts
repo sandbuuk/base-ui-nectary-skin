@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import { TSinchBadgeMode } from '@nectary/components/badge/types'
 import '@nectary/components/badge'
-import '@nectary/components/icon-button'
 import '@nectary/assets/icons/notifications'
 import { TSinchSize } from '@nectary/components/utils/size'
 import { ActivatedRoute } from '@angular/router'

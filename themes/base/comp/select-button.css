@@ -1,7 +1,7 @@
 .nectary-theme-base {
-  --sinch-comp-select-button-color-default-background-initial: var(--sinch-sys-color-container-main-default);
-  --sinch-comp-select-button-color-default-border-focus: var(--sinch-sys-color-border-focus);
-  --sinch-comp-select-button-color-default-border-initial: var(--sinch-sys-color-border-dark);
+  --sinch-comp-select-button-color-default-background-initial: var(--sinch-sys-color-surface-primary-default);
+  --sinch-comp-select-button-color-default-border-focus: var(--sinch-sys-color-focus);
+  --sinch-comp-select-button-color-default-border-initial: var(--sinch-sys-color-border-strong);
   --sinch-comp-select-button-color-default-icon-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-select-button-color-default-placeholder-initial: var(--sinch-sys-color-text-muted);
   --sinch-comp-select-button-color-default-text-initial: var(--sinch-sys-color-text-default);
@@ -9,7 +9,7 @@
   --sinch-comp-select-button-color-disabled-icon-initial: var(--sinch-sys-color-text-disabled);
   --sinch-comp-select-button-color-disabled-placeholder-initial: var(--sinch-sys-color-text-disabled);
   --sinch-comp-select-button-color-disabled-text-initial: var(--sinch-sys-color-text-disabled);
-  --sinch-comp-select-button-color-invalid-border-initial: var(--sinch-sys-color-border-invalid);
+  --sinch-comp-select-button-color-invalid-border-initial: var(--sinch-sys-color-feedback-danger-default);
   --sinch-comp-select-button-font-input: var(--sinch-sys-font-body-m);
   --sinch-comp-select-button-font-placeholder: var(--sinch-sys-font-body-m);
   --sinch-comp-select-button-shape-radius-size-l: var(--sinch-sys-shape-radius-l);

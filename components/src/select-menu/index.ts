@@ -1,5 +1,4 @@
 import '../input'
-import '../icon-button'
 import '../icon'
 import '../text'
 import {

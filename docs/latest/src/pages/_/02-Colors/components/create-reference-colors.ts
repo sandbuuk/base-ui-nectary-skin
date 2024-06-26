@@ -8,18 +8,11 @@ export type TableItem = {
   colorName: string,
 }
 
-type SinchColors = {
-  Main: TableItem[],
-  Complementary: TableItem[],
-}
+const colorKeys = Object.keys(refJson.color) as (keyof typeof refJson.color)[]
 
-const colorMainKeys = Object.keys(refJson.color.main) as (keyof typeof refJson.color.main)[]
-
-const colorComplementaryKeys = Object.keys(refJson.color.complementary) as (keyof typeof refJson.color.complementary)[]
-
-export const colorsMain = colorMainKeys.reduce((res: TableItem[], name: keyof typeof refJson.color.main) => {
-  for (const variantName of Object.keys(refJson.color.main[name]) as (keyof typeof refJson.color.main[typeof name])[]) {
-    const value = refJson.color.main[name][variantName]
+export const sinchColors = colorKeys.reduce((res: TableItem[], name: keyof typeof refJson.color) => {
+  for (const variantName of Object.keys(refJson.color[name]) as (keyof typeof refJson.color[typeof name])[]) {
+    const value = refJson.color[name][variantName]
     const cssName = `--sinch-ref-color-main-${name}-${variantName}`
     const tokenName = `ref.color.main.${name}.${variantName}`
     const colorName = `${name[0].toUpperCase() + name.substring(1)} ${variantName}`
@@ -29,21 +22,3 @@ export const colorsMain = colorMainKeys.reduce((res: TableItem[], name: keyof ty
 
   return res
 }, [])
-
-export const colorsComplementary = colorComplementaryKeys.reduce((res: TableItem[], name: keyof typeof refJson.color.complementary) => {
-  for (const variantName of Object.keys(refJson.color.complementary[name]) as (keyof typeof refJson.color.complementary[typeof name])[]) {
-    const value = refJson.color.complementary[name][variantName]
-    const cssName = `--sinch-ref-color-complementary-${name}-${variantName}`
-    const tokenName = `ref.color.complementary.${name}.${variantName}`
-    const colorName = `${name[0].toUpperCase() + name.substring(1)} ${variantName}`
-
-    res.push({ key: `${name}+${variantName}`, colorName, cssName, tokenName, value })
-  }
-
-  return res
-}, [])
-
-export const sinchColors: SinchColors = {
-  Main: colorsMain,
-  Complementary: colorsComplementary,
-}

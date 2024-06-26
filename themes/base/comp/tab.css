@@ -1,12 +1,12 @@
 .nectary-theme-base {
-  --sinch-comp-tab-color-checked-border-initial: var(--sinch-sys-color-border-active);
+  --sinch-comp-tab-color-checked-border-initial: var(--sinch-sys-color-primary-default);
   --sinch-comp-tab-color-checked-icon-initial: var(--sinch-sys-color-primary-default);
   --sinch-comp-tab-color-checked-text-initial: var(--sinch-sys-color-primary-default);
-  --sinch-comp-tab-color-default-background-hover: var(--sinch-sys-color-container-transparent-hover);
-  --sinch-comp-tab-color-default-background-initial: var(--sinch-sys-color-container-transparent-default);
+  --sinch-comp-tab-color-default-background-hover: var(--sinch-sys-color-surface-transparent-hover);
+  --sinch-comp-tab-color-default-background-initial: var(--sinch-sys-color-surface-transparent-default);
   --sinch-comp-tab-color-default-border-initial: var(--sinch-sys-color-border-default);
   --sinch-comp-tab-color-default-icon-initial: var(--sinch-sys-color-text-muted);
-  --sinch-comp-tab-color-default-outline-focus: var(--sinch-sys-color-border-focus);
+  --sinch-comp-tab-color-default-outline-focus: var(--sinch-sys-color-focus);
   --sinch-comp-tab-color-default-text-initial: var(--sinch-sys-color-text-muted);
   --sinch-comp-tab-color-disabled-icon-initial: var(--sinch-sys-color-text-disabled);
   --sinch-comp-tab-color-disabled-text-initial: var(--sinch-sys-color-text-disabled);

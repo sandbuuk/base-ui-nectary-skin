@@ -5,7 +5,7 @@ import '@nectary/components/time-picker'
 import '@nectary/components/input'
 import '@nectary/components/field'
 import '@nectary/components/popover'
-import '@nectary/components/icon-button'
+import '@nectary/components/button'
 import '@nectary/assets/icons/schedule'
 
 export const TimeInput: FC = () => {
@@ -47,14 +47,14 @@ export const TimeInput: FC = () => {
           value={value}
           on-change={onChange}
         >
-          <sinch-icon-button
+          <sinch-button
             slot="right"
             size="s"
             aria-label="Open Time Picker"
             onClick={onOpen}
           >
             <sinch-icon-schedule slot="icon"/>
-          </sinch-icon-button>
+          </sinch-button>
         </sinch-input>
       </sinch-field>
       <sinch-time-picker

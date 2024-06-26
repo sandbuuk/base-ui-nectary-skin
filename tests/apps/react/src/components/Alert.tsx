@@ -2,7 +2,6 @@ import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/alert'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/assets/icons/close'
 
 const mdText = `
@@ -69,7 +68,7 @@ export const Alert: FC = () => {
         />
       )}
       {hasClose && (
-        <sinch-icon-button
+        <sinch-button
           slot="close"
           size="s"
           aria-label="Close"
@@ -78,7 +77,7 @@ export const Alert: FC = () => {
           on-blur={onCloseBlur}
         >
           <sinch-icon-close slot="icon"/>
-        </sinch-icon-button>
+        </sinch-button>
       )}
     </sinch-alert>
   )

@@ -1,5 +1,5 @@
 import sysJson from '@nectary/theme-base/sys.json'
-import { colorsMain, colorsComplementary } from './create-reference-colors'
+import { sinchColors } from './create-reference-colors'
 import type { Category } from './SystemColorsTable'
 
 type ColorCategoryItem = {
@@ -19,11 +19,6 @@ type SystemColors = {
   [key in Category]: ColorCategoryItem[]
 }
 
-const colors = [
-  ...colorsMain,
-  ...colorsComplementary,
-]
-
 function createColorCategoryItems(obj: Record<string, any>, parent: string) {
   const colorCategoryItems: ColorCategoryItem[] = []
   const stack: StackItem[] = [{ obj, keys: Object.keys(obj), path: [] }]
@@ -40,7 +35,7 @@ function createColorCategoryItems(obj: Record<string, any>, parent: string) {
       } else {
         const tokenName = currentPath.reduce((acc, curVal) => `${acc}-${curVal}`, `sinch-sys-color-${parent}`)
         const cssName = currentPath.reduce((acc, curVal) => `${acc}-${curVal}`, `--sinch-sys-color-${parent}`)
-        const tokenRefName = colors.find((item) => item.value === value)
+        const tokenRefName = sinchColors.find((item) => item.value === value)
 
         colorCategoryItems.push({
           tokenName,
@@ -57,14 +52,12 @@ function createColorCategoryItems(obj: Record<string, any>, parent: string) {
 
 export const createSystemColors: () => SystemColors = () => {
   const systemColors = {
-    container: createColorCategoryItems(sysJson.color.container, 'container'),
-    status: createColorCategoryItems(sysJson.color.status, 'status'),
-    cta: createColorCategoryItems(sysJson.color.cta, 'cta'),
+    container: createColorCategoryItems(sysJson.color.basic, 'basic'),
+    surface: createColorCategoryItems(sysJson.color.surface, 'surface'),
     primary: createColorCategoryItems(sysJson.color.primary, 'primary'),
     text: createColorCategoryItems(sysJson.color.text, 'text'),
     feedback: createColorCategoryItems(sysJson.color.feedback, 'feedback'),
     border: createColorCategoryItems(sysJson.color.border, 'border'),
-    'skin tone': createColorCategoryItems(sysJson.color.skintone, 'skintone'),
   }
 
   return systemColors

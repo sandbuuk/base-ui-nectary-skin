@@ -12,7 +12,6 @@ import { ButtonComponent } from '../components/Button/Button.component'
 import { CardComponent } from '../components/Card/Card.component'
 import { CardDnDComponent } from '../components/CardDnD/CardDnD.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
-import { ChatComponent } from '../components/Chat/Chat.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
 import { ChipComponent } from '../components/Chip/Chip.component'
 import { CodeTagComponent } from '../components/CodeTag/CodeTag.component'
@@ -74,7 +73,6 @@ import appRoutes from './router-config';
     CardComponent,
     CardDnDComponent,
     CardContainerComponent,
-    ChatComponent,
     CheckboxComponent,
     ChipComponent,
     CodeTagComponent,

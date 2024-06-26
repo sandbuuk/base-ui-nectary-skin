@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import '@nectary/components/color-menu'
 import '@nectary/components/color-menu-option'
 
-const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'brown', 'gray']
+const vibrantColorNames = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pink', 'gray']
 
 export const ColumnsExample: FC = () => {
   const [value, setValue] = useState<string>('')

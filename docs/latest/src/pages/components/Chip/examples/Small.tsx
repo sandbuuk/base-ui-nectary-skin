@@ -8,7 +8,7 @@ const wrapperStyles: CSSProperties = {
   gap: 10,
 }
 
-const systemColors = ['celtic', 'olive', 'pumpkin', 'jasper']
+const systemColors = ['info', 'success', 'warning', 'danger']
 
 export const SmallExample: FC = () => (
   <div style={wrapperStyles}>

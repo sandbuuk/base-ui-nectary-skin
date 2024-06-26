@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import '@nectary/components/textarea'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/components/tag'
 import '@nectary/assets/icons/attach-file'
 import '@nectary/assets/icons/send'

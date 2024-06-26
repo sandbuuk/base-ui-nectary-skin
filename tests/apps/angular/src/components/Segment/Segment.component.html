@@ -11,9 +11,9 @@
   </div>
   <sinch-icon-branded-chatbot *ngIf="hasIcon" size="32" slot="icon"></sinch-icon-branded-chatbot>
   <sinch-tag *ngIf="hasInfo" text="Label" slot="info"></sinch-tag>
-  <sinch-icon-button *ngIf="hasInfo" size="s" slot="info">
+  <sinch-button *ngIf="hasInfo" size="s" slot="info">
     <sinch-icon-apps slot="icon"></sinch-icon-apps>
-  </sinch-icon-button>
+  </sinch-button>
   <div *ngIf="hasPreview" slot="preview" class="preview-content">
     <sinch-text type="m">Replace me!</sinch-text>
     <sinch-text type="xs">Im a template component</sinch-text>

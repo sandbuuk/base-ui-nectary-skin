@@ -4,7 +4,10 @@ import css from 'react-syntax-highlighter/dist/esm/languages/prism/css'
 import shell from 'react-syntax-highlighter/dist/esm/languages/prism/shell-session'
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx'
 import ts from 'react-syntax-highlighter/dist/esm/languages/prism/typescript'
-import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import {
+  oneDark,
+  oneLight,
+} from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useThemeName } from '../../context'
 import type { CSSProperties, FC } from 'react'
 
@@ -13,9 +16,11 @@ try {
   PrismLight.registerLanguage('tsx', ts)
   PrismLight.registerLanguage('css', css)
   PrismLight.registerLanguage('shell', shell)
-} catch {}
+} catch { }
 
-const getStyles = (theme: Record<string, CSSProperties>): Record<string, CSSProperties> => {
+const getStyles = (
+  theme: Record<string, CSSProperties>
+): Record<string, CSSProperties> => {
   return {
     ...theme,
     'code[class*="language-"]': {
@@ -26,7 +31,7 @@ const getStyles = (theme: Record<string, CSSProperties>): Record<string, CSSProp
     },
     'pre[class*="language-"]': {
       ...theme['pre[class*="language-"]'],
-      background: 'var(--sinch-sys-color-container-contrast-primary-default)',
+      background: 'var(--sinch-sys-color-surface-tertiary-default)',
       border: 'none',
       overflowX: 'auto',
       // margin: '0',
@@ -40,7 +45,11 @@ export type TSyntaxHighlighter = {
   shouldShowLineNumbers?: boolean,
 }
 
-export const SyntaxHighlighter: FC<TSyntaxHighlighter> = ({ language, src, shouldShowLineNumbers }) => {
+export const SyntaxHighlighter: FC<TSyntaxHighlighter> = ({
+  language,
+  src,
+  shouldShowLineNumbers,
+}) => {
   const { themeName } = useThemeName()
 
   const styles = useMemo(() => {

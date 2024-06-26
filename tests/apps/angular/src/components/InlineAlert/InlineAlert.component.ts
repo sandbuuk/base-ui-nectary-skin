@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import '@nectary/components/inline-alert'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/assets/icons/close'
 import { ActivatedRoute } from '@angular/router'
 

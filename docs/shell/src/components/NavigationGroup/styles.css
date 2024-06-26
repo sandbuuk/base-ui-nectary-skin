@@ -14,17 +14,17 @@
   padding: 0 16px;
   user-select: none;
   border-radius: 5px;
-  background-color: var(--sinch-sys-color-container-main-default);
+  background-color: var(--sinch-sys-color-surface-primary-default);
   box-sizing: border-box;
   cursor: pointer;
 }
 
 .navigation-group-head:hover {
-  background-color: var(--sinch-sys-color-container-main-hover);
+  background-color: var(--sinch-sys-color-surface-primary-hover);
 }
 
 .navigation-group-head:active {
-  background-color: var(--sinch-sys-color-container-main-active);
+  background-color: var(--sinch-sys-color-surface-primary-active);
 }
 
 .navigation-group-text {

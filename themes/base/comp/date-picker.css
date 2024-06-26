@@ -1,12 +1,12 @@
 .nectary-theme-base {
   --sinch-comp-date-picker-day-color-checked-background-initial: var(--sinch-sys-color-primary-default);
-  --sinch-comp-date-picker-day-color-checked-border-initial: transparent;
-  --sinch-comp-date-picker-day-color-checked-text-initial: var(--sinch-sys-color-text-inverted);
-  --sinch-comp-date-picker-day-color-default-background-hover: var(--sinch-sys-color-container-complement-secondary-hover);
-  --sinch-comp-date-picker-day-color-default-background-initial: var(--sinch-sys-color-container-transparent-default);
-  --sinch-comp-date-picker-day-color-default-border-initial: transparent;
-  --sinch-comp-date-picker-day-color-default-outline-focus: var(--sinch-sys-color-border-focus);
-  --sinch-comp-date-picker-day-color-default-range-background: var(--sinch-sys-color-container-complement-secondary-hover);
+  --sinch-comp-date-picker-day-color-checked-border-initial: var(--sinch-sys-color-basic-transparent);
+  --sinch-comp-date-picker-day-color-checked-text-initial: var(--sinch-sys-color-basic-pure);
+  --sinch-comp-date-picker-day-color-default-background-hover: #0060631A;
+  --sinch-comp-date-picker-day-color-default-background-initial: var(--sinch-sys-color-surface-transparent-default);
+  --sinch-comp-date-picker-day-color-default-border-initial: var(--sinch-sys-color-basic-transparent);
+  --sinch-comp-date-picker-day-color-default-outline-focus: var(--sinch-sys-color-focus);
+  --sinch-comp-date-picker-day-color-default-range-background: #0060631A;
   --sinch-comp-date-picker-day-color-default-text-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-date-picker-day-color-disabled-text-initial: var(--sinch-sys-color-text-disabled);
   --sinch-comp-date-picker-day-shape-radius: var(--sinch-comp-button-shape-radius-size-s);
@@ -18,12 +18,12 @@
   --sinch-comp-date-picker-header-color-default-text-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-date-picker-today-color-checked-background-initial: var(--sinch-sys-color-primary-default);
   --sinch-comp-date-picker-today-color-checked-border-initial: var(--sinch-sys-color-primary-default);
-  --sinch-comp-date-picker-today-color-checked-text-initial: var(--sinch-sys-color-text-inverted);
-  --sinch-comp-date-picker-today-color-default-background-hover: var(--sinch-sys-color-container-complement-secondary-hover);
-  --sinch-comp-date-picker-today-color-default-background-initial: var(--sinch-sys-color-container-transparent-default);
+  --sinch-comp-date-picker-today-color-checked-text-initial: var(--sinch-sys-color-basic-pure);
+  --sinch-comp-date-picker-today-color-default-background-hover: #0060631A;
+  --sinch-comp-date-picker-today-color-default-background-initial: var(--sinch-sys-color-surface-transparent-default);
   --sinch-comp-date-picker-today-color-default-border-initial: var(--sinch-sys-color-primary-default);
   --sinch-comp-date-picker-today-color-default-text-initial: var(--sinch-sys-color-text-default);
-  --sinch-comp-date-picker-today-color-disabled-border-initial: var(--sinch-sys-color-border-light);
+  --sinch-comp-date-picker-today-color-disabled-border-initial: var(--sinch-sys-color-border-subtle);
   --sinch-comp-date-picker-today-color-disabled-text-initial: var(--sinch-sys-color-text-disabled);
   --sinch-comp-date-picker-weekday-color-default-text-initial: var(--sinch-sys-color-text-default);
 }

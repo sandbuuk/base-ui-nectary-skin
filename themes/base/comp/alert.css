@@ -1,12 +1,12 @@
 .nectary-theme-base {
-  --sinch-comp-alert-color-error-default-background: var(--sinch-sys-color-feedback-invalid-background);
-  --sinch-comp-alert-color-error-default-icon: var(--sinch-sys-color-feedback-invalid-contrast);
+  --sinch-comp-alert-color-error-default-background: var(--sinch-sys-color-feedback-danger-subtle);
+  --sinch-comp-alert-color-error-default-icon: var(--sinch-sys-color-feedback-danger-default);
   --sinch-comp-alert-color-error-default-text: var(--sinch-sys-color-text-default);
-  --sinch-comp-alert-color-info-default-background: var(--sinch-sys-color-feedback-info-background);
-  --sinch-comp-alert-color-info-default-icon: var(--sinch-sys-color-feedback-info-contrast);
+  --sinch-comp-alert-color-info-default-background: var(--sinch-sys-color-feedback-info-subtle);
+  --sinch-comp-alert-color-info-default-icon: var(--sinch-sys-color-feedback-info-default);
   --sinch-comp-alert-color-info-default-text: var(--sinch-sys-color-text-default);
-  --sinch-comp-alert-color-warning-default-background: var(--sinch-sys-color-feedback-warning-background);
-  --sinch-comp-alert-color-warning-default-icon: var(--sinch-sys-color-feedback-warning-contrast);
+  --sinch-comp-alert-color-warning-default-background: var(--sinch-sys-color-feedback-warning-subtle);
+  --sinch-comp-alert-color-warning-default-icon: var(--sinch-sys-color-feedback-warning-default);
   --sinch-comp-alert-color-warning-default-text: var(--sinch-sys-color-text-default);
   --sinch-comp-alert-font-body: var(--sinch-sys-font-body-m);
 }

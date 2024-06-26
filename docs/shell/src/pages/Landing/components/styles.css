@@ -1,5 +1,5 @@
 .big-toast {
-  background-color: var(--sinch-sys-color-container-complement-primary-default);
+  background-color: var(--sinch-sys-color-surface-secondary-default);
   display: flex;
   flex-direction: row;
   gap: 30px;

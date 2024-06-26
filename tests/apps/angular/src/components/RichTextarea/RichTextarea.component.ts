@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import '@nectary/components/rich-textarea'
 import '@nectary/components/button'
-import '@nectary/components/icon-button'
 import '@nectary/components/icon'
 import '@nectary/assets/icons/variables'
 import '@nectary/assets/icons/send'

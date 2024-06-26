@@ -1,6 +1,6 @@
 .nectary-theme-base {
-  --sinch-comp-popover-color-default-background-initial: var(--sinch-sys-color-container-main-default);
-  --sinch-comp-popover-color-default-border-initial: var(--sinch-sys-color-border-light);
+  --sinch-comp-popover-color-default-background-initial: var(--sinch-sys-color-surface-primary-default);
+  --sinch-comp-popover-color-default-border-initial: var(--sinch-sys-color-border-subtle);
   --sinch-comp-popover-shadow: var(--sinch-ref-shadow-level-2);
   --sinch-comp-popover-shape-radius: var(--sinch-sys-shape-radius-m);
 }

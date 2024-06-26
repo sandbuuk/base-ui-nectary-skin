@@ -8,7 +8,6 @@ import '@nectary/components/input'
 import '@nectary/components/tag'
 import '@nectary/assets/icons/apps'
 import '@nectary/assets/icons-branded/chatbot'
-import '@nectary/components/icon-button'
 import '@nectary/components/button'
 import '@nectary/components/checkbox'
 import '@nectary/components/text'
@@ -62,14 +61,14 @@ export const Segment: FC = () => {
       {hasIcon && <sinch-icon-branded-chatbot size={32} slot="icon"/>}
       {hasInfo && <sinch-tag text="Label" slot="info"/>}
       {hasInfo && (
-        <sinch-icon-button
+        <sinch-button
           size="s"
           aria-label="Icon Button"
           onClick={() => {}}
           slot="info"
         >
           <sinch-icon-apps slot="icon"/>
-        </sinch-icon-button>
+        </sinch-button>
       )}
       {hasPreview && (
         <div

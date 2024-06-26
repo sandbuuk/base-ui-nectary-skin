@@ -1,10 +1,10 @@
 .nectary-theme-base {
-  --sinch-comp-action-menu-color-default-background-hover: var(--sinch-sys-color-container-transparent-hover);
-  --sinch-comp-action-menu-color-default-background-initial: var(--sinch-sys-color-container-transparent-default);
-  --sinch-comp-action-menu-color-default-background-selected: var(--sinch-sys-color-container-transparent-hover);
+  --sinch-comp-action-menu-color-default-background-hover: var(--sinch-sys-color-surface-transparent-hover);
+  --sinch-comp-action-menu-color-default-background-initial: var(--sinch-sys-color-surface-transparent-default);
+  --sinch-comp-action-menu-color-default-background-selected: var(--sinch-sys-color-surface-transparent-hover);
   --sinch-comp-action-menu-color-default-icon-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-action-menu-color-default-text-initial: var(--sinch-sys-color-text-default);
-  --sinch-comp-action-menu-color-disabled-background-initial: var(--sinch-sys-color-container-transparent-disabled);
+  --sinch-comp-action-menu-color-disabled-background-initial: var(--sinch-sys-color-surface-transparent-disabled);
   --sinch-comp-action-menu-color-disabled-icon-initial: var(--sinch-sys-color-text-disabled);
   --sinch-comp-action-menu-color-disabled-text-initial: var(--sinch-sys-color-text-disabled);
   --sinch-comp-action-menu-font-option: var(--sinch-sys-font-body-m);

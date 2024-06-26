@@ -9,7 +9,6 @@ import { Button } from './components/Button'
 import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
 import { CardDnD } from './components/CardDnD'
-import { Chat } from './components/Chat'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeTag } from './components/CodeTag'
@@ -98,7 +97,6 @@ const AppImpl = () => {
         <Route path="/card-container" element={<CardContainer/>}/>
         <Route path="/card-dnd" element={<CardDnD/>}/>
         <Route path="/card" element={<Card/>}/>
-        <Route path="/chat" element={<Chat/>}/>
         <Route path="/checkbox" element={<Checkbox/>}/>
         <Route path="/chip" element={<Chip/>}/>
         <Route path="/code-tag" element={<CodeTag/>}/>

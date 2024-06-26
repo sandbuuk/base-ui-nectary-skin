@@ -3,7 +3,7 @@ import path from 'node:path'
 
 const dirname = (import.meta as any).dirname as string
 
-const componentsDir = path.join(dirname, '..', 'components')
+const componentsDir = path.join(dirname, '..', 'components/src')
 
 async function getComponents(): Promise<string[]> {
   const components = []

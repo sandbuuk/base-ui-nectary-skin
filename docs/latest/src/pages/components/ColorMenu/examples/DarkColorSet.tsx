@@ -11,7 +11,6 @@ const darkColorNames = [
   'dark-orange',
   'dark-red',
   'dark-pink',
-  'dark-brown',
   'dark-gray',
 ]
 

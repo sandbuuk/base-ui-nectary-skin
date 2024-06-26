@@ -5,13 +5,13 @@
     [attr.text]="t"
     [attr.persistent]="i !== 0"
     (-timeout)="onTimeout()">
-    <sinch-icon-button
+    <sinch-button
       *ngIf="(i + 1) % 3 !== 0"
       slot="close"
       size="s"
       (-click)="onClose()">
       <sinch-icon-close slot="icon"></sinch-icon-close>
-    </sinch-icon-button>
+    </sinch-button>
     <sinch-button
       *ngIf="(i + 1) % 2 === 0"
       slot="action"

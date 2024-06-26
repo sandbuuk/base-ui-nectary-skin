@@ -3,12 +3,12 @@
     <sinch-table-row>
       <sinch-table-head-cell *ngFor="let cell of state.head" [attr.text]="cell.text" [attr.align]="cell.align" [attr.fit]="cell.isFit">
         <sinch-checkbox *ngIf="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
-        <sinch-icon-button *ngIf="cell.isSortable" slot="right" size="s" filter="Sort">
+        <sinch-button *ngIf="cell.isSortable" slot="right" size="s" filter="Sort">
           <sinch-icon slot="icon" name="north"></sinch-icon>
-        </sinch-icon-button>
-        <sinch-icon-button *ngIf="cell.isFilterable" slot="left" size="s" aria-label="Filter">
+        </sinch-button>
+        <sinch-button *ngIf="cell.isFilterable" slot="left" size="s" aria-label="Filter">
           <sinch-icon slot="icon" name="filter_list"></sinch-icon>
-        </sinch-icon-button>
+        </sinch-button>
         <sinch-help-tooltip *ngIf="cell.tooltip != null" slot="tooltip" [attr.text]="cell.tooltip"></sinch-help-tooltip>
       </sinch-table-head-cell>
     </sinch-table-row>
@@ -20,9 +20,9 @@
         <sinch-button *ngIf="cell.isButton" type="secondary" [attr.text]="cell.text"></sinch-button>
         <sinch-toggle *ngIf="cell.isToggle"></sinch-toggle>
         <sinch-link *ngIf="cell.isLink" [attr.text]="cell.text" href="#"></sinch-link>
-        <sinch-icon-button *ngIf="cell.isIcon" aria-label="button">
+        <sinch-button *ngIf="cell.isIcon" aria-label="button">
           <sinch-icon slot="icon" [attr.name]="cell.iconName"></sinch-icon>
-        </sinch-icon-button>
+        </sinch-button>
         <sinch-text *ngIf="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon" type="m">{{cell.text}}</sinch-text>
       </sinch-table-cell>
     </sinch-table-row>

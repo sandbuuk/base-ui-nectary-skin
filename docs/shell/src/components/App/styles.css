@@ -10,8 +10,8 @@
   width: 248px;
   height: 100%;
   box-sizing: border-box;
-  border-right: 1px solid var(--sinch-sys-color-border-light);
-  background-color: var(--sinch-sys-color-container-main-default);
+  border-right: 1px solid var(--sinch-sys-color-border-subtle);
+  background-color: var(--sinch-sys-color-surface-primary-default);
 }
 
 .app-sidebar-fixed {
@@ -45,13 +45,13 @@
   flex: 1;
   min-width: 0;
   height: 100%;
-  background-color: var(--sinch-sys-color-container-main-default);
+  background-color: var(--sinch-sys-color-surface-primary-default);
 }
 
 .divider {
   position: relative;
   height: 1px;
-  background-color: var(--sinch-sys-color-border-light);
+  background-color: var(--sinch-sys-color-border-subtle);
   margin: 4px 0;
 }
 

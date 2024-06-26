@@ -3,7 +3,7 @@ import path from 'node:path'
 import { JSDOM } from 'jsdom'
 
 const dirname = (import.meta as any).dirname as string
-const componentsDir = path.join(dirname, '..', 'components')
+const componentsDir = path.join(dirname, '..', 'components/src')
 
 const IGNORED_FOLDERS = ['node_modules', 'utils', 'stop-events']
 

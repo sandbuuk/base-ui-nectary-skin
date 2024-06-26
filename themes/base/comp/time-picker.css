@@ -16,6 +16,6 @@
   --sinch-comp-time-picker-header-font: var(--sinch-sys-font-desktop-title-xl);
   --sinch-comp-time-picker-needle-color-default-background-focus: var(--sinch-sys-color-primary-default);
   --sinch-comp-time-picker-needle-color-default-background-initial: var(--sinch-sys-color-text-default);
-  --sinch-comp-time-picker-watch-face-color-default-background-initial: var(--sinch-sys-color-container-main-default);
-  --sinch-comp-time-picker-watch-face-color-default-border-initial: var(--sinch-sys-color-container-main-foreground);
+  --sinch-comp-time-picker-watch-face-color-default-background-initial: var(--sinch-sys-color-surface-primary-default);
+  --sinch-comp-time-picker-watch-face-color-default-border-initial: var(--sinch-sys-color-text-default);
 }

@@ -100,7 +100,7 @@ test('color-menu events', runScreenshotTests('sinch-color-menu', [
         await getAllEvents(page)
       ).toEqual([
         { type: 'sinch-color-menu-change', detail: 'light-blue' },
-        { type: 'sinch-color-menu-change', detail: 'dark-brown' },
+        { type: 'sinch-color-menu-change', detail: 'dark-orange' },
       ])
     },
   },

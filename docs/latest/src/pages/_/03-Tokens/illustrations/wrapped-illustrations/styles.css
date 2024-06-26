@@ -1,7 +1,7 @@
 .token-properties-wrapper {
   width: 100%;
   height: auto;
-  background-color: var(--sinch-sys-color-container-contrast-primary-default);
+  background-color: var(--sinch-sys-color-surface-tertiary-default);
   border-radius: 14px;
   margin-top: 24px;
 }
@@ -10,7 +10,7 @@
   padding-top: 40px;
   padding-bottom: 40px;
   margin-top: 16px;
-  background-color: var(--sinch-sys-color-container-contrast-primary-default);
+  background-color: var(--sinch-sys-color-surface-tertiary-default);
   border-radius: 14px;
   text-align: center;
 }
@@ -19,7 +19,7 @@
   margin-top: 16px;
   padding-left: 85px;
   padding-right: 85px;
-  background-color: var(--sinch-sys-color-container-contrast-primary-default);
+  background-color: var(--sinch-sys-color-surface-tertiary-default);
   border-radius: 14px;
 }
 
@@ -27,7 +27,7 @@
   margin-top: 16px;
   padding-left: 85px;
   padding-right: 85px;
-  background-color: var(--sinch-sys-color-container-contrast-primary-default);
+  background-color: var(--sinch-sys-color-surface-tertiary-default);
   border-radius: 14px;
 }
 
@@ -37,18 +37,18 @@
   margin-top: 16px;
   padding-left: 85px;
   padding-right: 85px;
-  background-color: var(--sinch-sys-color-container-contrast-primary-default);
+  background-color: var(--sinch-sys-color-surface-tertiary-default);
   border-radius: 14px;
 }
 
 .token-wrapper {
   margin-top: 16px;
   border-radius: 14px;
-  background-color: var(--sinch-sys-color-container-contrast-primary-default);
+  background-color: var(--sinch-sys-color-surface-tertiary-default);
 }
 
 .color-type-wrapper {
   margin: auto;
-  background-color: var(--sinch-sys-color-container-contrast-primary-default);
+  background-color: var(--sinch-sys-color-surface-tertiary-default);
   border-radius: 14px;
 }

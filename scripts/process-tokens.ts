@@ -86,7 +86,7 @@ type TValue = {
 const THEME_CLASS_NAMES: Record<string, string> = {
   'Nectary / Base theme': '.nectary-theme-base',
   'Nectary / Dark theme': '.nectary-theme-base.nectary-theme-dark',
-  'SaaS/ MessageMedia': '.nectary-theme-base.nectary-theme-message-media',
+  'Sass/ MessageMedia': '.nectary-theme-base.nectary-theme-message-media',
   'cPaas/Base theme': '.nectary-theme-base.cpaas-theme-base',
   'cPaas/MailGun': '.nectary-theme-base.cpaas-theme-base.cpaas-theme-mailgun',
   'cPaas/MailJet': '.nectary-theme-base.cpaas-theme-base.cpaas-theme-mailjet',

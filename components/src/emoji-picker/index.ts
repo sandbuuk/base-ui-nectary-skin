@@ -1,5 +1,4 @@
 import '../input'
-import '../icon-button'
 import '../color-swatch'
 import '../color-menu'
 import '../color-menu-option'
@@ -28,9 +27,9 @@ import {
 import dataJson from './data.json'
 import templateHTML from './template.html'
 import type { TEmojiGroup, TEmoji, TSinchEmojiPickerElement, TSinchEmojiPickerReact } from './types'
+import type { TSinchButtonElement } from '../button/types'
 import type { TSinchColorMenuElement } from '../color-menu/types'
 import type { TSinchColorSwatchElement } from '../color-swatch/types'
-import type { TSinchIconButtonElement } from '../icon-button/types'
 import type { TSinchInputElement } from '../input/types'
 import type { TSinchPopoverElement } from '../popover/types'
 import type { TSinchTabsElement } from '../tabs/types'
@@ -61,7 +60,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   #$skinPopover: TSinchPopoverElement
   #$skinMenu: TSinchColorMenuElement
   #$skinSwatch: TSinchColorSwatchElement
-  #$skinButton: TSinchIconButtonElement
+  #$skinButton: TSinchButtonElement
   #$list: HTMLElement
   #$notFound: HTMLElement
   #controller: AbortController | null = null
@@ -382,7 +381,7 @@ defineCustomElement('sinch-emoji-picker', class extends NectaryElement {
   }
 
   #createEmojiElement(doc: Document, emoji: TEmoji, baseUrl: string | null) {
-    const btn = doc.createElement('sinch-icon-button')
+    const btn = doc.createElement('sinch-button')
     const el = doc.createElement('sinch-emoji')
 
     el.setAttribute('slot', 'icon')

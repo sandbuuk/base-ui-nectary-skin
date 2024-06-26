@@ -1,183 +1,262 @@
 <style>
-:host {
-  display: inline-block;
-  vertical-align: middle;
-  outline: none;
-}
-
-#wrapper {
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 24px;
-
-  --sinch-local-color-background: var(--sinch-comp-checkbox-color-default-background-initial);
-  --sinch-local-color-background-hover: var(--sinch-comp-checkbox-color-default-background-hover);
-  --sinch-local-color-background-active: var(--sinch-comp-checkbox-color-default-background-active);
-  --sinch-local-color-border: var(--sinch-comp-checkbox-color-default-border-initial);
-  --sinch-local-color-border-hover: var(--sinch-comp-checkbox-color-default-border-hover);
-  --sinch-local-color-border-active: var(--sinch-comp-checkbox-color-default-border-active);
-  --sinch-local-color-text: var(--sinch-comp-checkbox-color-default-text-initial);
-}
-
-/* Invalid */
-:host([invalid]) > #wrapper {
-  --sinch-local-color-background: var(--sinch-comp-checkbox-color-invalid-background-initial);
-  --sinch-local-color-background-hover: var(--sinch-comp-checkbox-color-invalid-background-hover);
-  --sinch-local-color-background-active: var(--sinch-comp-checkbox-color-invalid-background-active);
-  --sinch-local-color-border: var(--sinch-comp-checkbox-color-invalid-border-initial);
-  --sinch-local-color-border-hover: var(--sinch-comp-checkbox-color-invalid-border-hover);
-  --sinch-local-color-border-active: var(--sinch-comp-checkbox-color-invalid-border-active);
-  --sinch-local-color-text: var(--sinch-comp-checkbox-color-invalid-text-initial);
-}
-
-/* Checked */
-:host([checked]) > #wrapper {
-  --sinch-local-color-background: var(--sinch-comp-checkbox-color-checked-background-initial);
-  --sinch-local-color-background-hover: var(--sinch-comp-checkbox-color-checked-background-hover);
-  --sinch-local-color-background-active: var(--sinch-comp-checkbox-color-checked-background-active);
-  --sinch-local-color-border: var(--sinch-comp-checkbox-color-checked-border-initial);
-  --sinch-local-color-border-hover: var(--sinch-comp-checkbox-color-checked-border-hover);
-  --sinch-local-color-border-active: var(--sinch-comp-checkbox-color-checked-border-active);
-}
-
-/* Disabled */
-:host([disabled]) > #wrapper {
-  --sinch-local-color-background: var(--sinch-comp-checkbox-color-disabled-background-initial);
-  --sinch-local-color-border: var(--sinch-comp-checkbox-color-disabled-border-initial);
-  --sinch-local-color-text: var(--sinch-comp-checkbox-color-disabled-text-initial);
-}
-
-/* Checked Disabled */
-:host([disabled][checked]) > #wrapper {
-  --sinch-local-color-background: var(--sinch-comp-checkbox-color-checked-disabled-background-initial);
-  --sinch-local-color-border: var(--sinch-comp-checkbox-color-checked-disabled-border-initial);
-}
-
-/* Checked Invalid */
-
-/* Invalid Disabled */
-
-/* Checked Invalid Disabled */
-
-#checkbox {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-:host([disabled]) #checkbox {
-  cursor: initial;
-}
-
-#icon-container {
-  position: relative;
-  width: 18px;
-  height: 18px;
-  align-self: flex-start;
-  margin-top: 3px;
-}
-
-/* Outline */
-#checkbox::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border: 2px solid var(--sinch-comp-checkbox-color-default-outline-focus);
-  border-radius: calc(var(--sinch-comp-checkbox-shape-radius) + 3px);
-  transition: opacity 0.1s linear;
-  opacity: 0;
-  box-sizing: border-box;
-  pointer-events: none;
-}
-
-:host(:focus-visible) #checkbox::before {
-  opacity: 1;
-}
-
-/* Border / Background */
-#checkbox::after {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  inset: 0;
-  margin: auto;
-  background-color: var(--sinch-local-color-background);
-  border: 1px solid var(--sinch-local-color-border);
-  border-radius: var(--sinch-comp-checkbox-shape-radius);
-  transition: background-color 0.1s linear;
-  box-sizing: border-box;
-  pointer-events: none;
-}
-
-:host(:hover:not([disabled])) #checkbox::after {
-  background-color: var(--sinch-local-color-background-hover);
-  border-color: var(--sinch-local-color-border-hover);
-}
-
-:host(:active:not([disabled])) #checkbox::after {
-  background-color: var(--sinch-local-color-background-active);
-  border-color: var(--sinch-local-color-border-active);
-}
-
-#icon-checkmark,
-#icon-indeterminate {
-  position: absolute;
-  left: 1px;
-  top: 1px;
-  width: 16px;
-  height: 16px;
-  transition: opacity 0.1s linear;
-  opacity: 0;
-  pointer-events: none;
-  fill: var(--sinch-sys-color-container-main-default);
-}
-
-:host(:not([indeterminate])[checked]) #icon-checkmark {
-  opacity: 1;
-}
-
-:host([indeterminate][checked]) #icon-indeterminate {
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion) {
-  #icon-checkmark,
-  #icon-indeterminate,
-  #checkbox::before,
-  #checkbox::after {
-    transition: none;
+  :host {
+    display: inline-block;
+    vertical-align: middle;
+    outline: none;
   }
-}
 
-#label {
-  flex: 1;
-  align-self: center;
-  padding-left: 8px;
-  font: var(--sinch-comp-checkbox-font-label);
-  color: var(--sinch-local-color-text);
-  cursor: pointer;
-}
+  #wrapper {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 24px;
 
-#label:empty {
-  display: none;
-}
+    --sinch-local-color-background:
+      var(
+        --sinch-comp-checkbox-color-default-background-initial
+      );
+    --sinch-local-color-background-hover:
+      var(
+        --sinch-comp-checkbox-color-default-background-hover
+      );
+    --sinch-local-color-background-active:
+      var(
+        --sinch-comp-checkbox-color-default-background-active
+      );
+    --sinch-local-color-border:
+      var(
+        --sinch-comp-checkbox-color-default-border-initial
+      );
+    --sinch-local-color-border-hover:
+      var(
+        --sinch-comp-checkbox-color-default-border-hover
+      );
+    --sinch-local-color-border-active:
+      var(
+        --sinch-comp-checkbox-color-default-border-active
+      );
+    --sinch-local-color-text:
+      var(
+        --sinch-comp-checkbox-color-default-text-initial
+      );
+  }
 
-:host([disabled]) #label {
-  cursor: initial;
-}
+  /* Invalid */
+  :host([invalid]) > #wrapper {
+    --sinch-local-color-background:
+      var(
+        --sinch-comp-checkbox-color-invalid-background-initial
+      );
+    --sinch-local-color-background-hover:
+      var(
+        --sinch-comp-checkbox-color-invalid-background-hover
+      );
+    --sinch-local-color-background-active:
+      var(
+        --sinch-comp-checkbox-color-invalid-background-active
+      );
+    --sinch-local-color-border:
+      var(
+        --sinch-comp-checkbox-color-invalid-border-initial
+      );
+    --sinch-local-color-border-hover:
+      var(
+        --sinch-comp-checkbox-color-invalid-border-hover
+      );
+    --sinch-local-color-border-active:
+      var(
+        --sinch-comp-checkbox-color-invalid-border-active
+      );
+    --sinch-local-color-text:
+      var(
+        --sinch-comp-checkbox-color-invalid-text-initial
+      );
+  }
+
+  /* Checked */
+  :host([checked]) > #wrapper {
+    --sinch-local-color-background:
+      var(
+        --sinch-comp-checkbox-color-checked-background-initial
+      );
+    --sinch-local-color-background-hover:
+      var(
+        --sinch-comp-checkbox-color-checked-background-hover
+      );
+    --sinch-local-color-background-active:
+      var(
+        --sinch-comp-checkbox-color-checked-background-active
+      );
+    --sinch-local-color-border:
+      var(
+        --sinch-comp-checkbox-color-checked-border-initial
+      );
+    --sinch-local-color-border-hover:
+      var(
+        --sinch-comp-checkbox-color-checked-border-hover
+      );
+    --sinch-local-color-border-active:
+      var(
+        --sinch-comp-checkbox-color-checked-border-active
+      );
+  }
+
+  /* Disabled */
+  :host([disabled]) > #wrapper {
+    --sinch-local-color-background:
+      var(
+        --sinch-comp-checkbox-color-disabled-background-initial
+      );
+    --sinch-local-color-border:
+      var(
+        --sinch-comp-checkbox-color-disabled-border-initial
+      );
+    --sinch-local-color-text:
+      var(
+        --sinch-comp-checkbox-color-disabled-text-initial
+      );
+  }
+
+  /* Checked Disabled */
+  :host([disabled][checked]) > #wrapper {
+    --sinch-local-color-background:
+      var(
+        --sinch-comp-checkbox-color-checked-disabled-background-initial
+      );
+    --sinch-local-color-border:
+      var(
+        --sinch-comp-checkbox-color-checked-disabled-border-initial
+      );
+  }
+
+  /* Checked Invalid */
+
+  /* Invalid Disabled */
+
+  /* Checked Invalid Disabled */
+
+  #checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  :host([disabled]) #checkbox {
+    cursor: initial;
+  }
+
+  #icon-container {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    align-self: flex-start;
+    margin-top: 3px;
+  }
+
+  /* Outline */
+  #checkbox::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border: 2px solid var(--sinch-comp-checkbox-color-default-outline-focus);
+    border-radius: calc(var(--sinch-comp-checkbox-shape-radius) + 3px);
+    transition: opacity 0.1s linear;
+    opacity: 0;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+
+  :host(:focus-visible) #checkbox::before {
+    opacity: 1;
+  }
+
+  /* Border / Background */
+  #checkbox::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    inset: 0;
+    margin: auto;
+    background-color: var(--sinch-local-color-background);
+    border: 1px solid var(--sinch-local-color-border);
+    border-radius: var(--sinch-comp-checkbox-shape-radius);
+    transition: background-color 0.1s linear;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+
+  :host(:hover:not([disabled])) #checkbox::after {
+    background-color: var(--sinch-local-color-background-hover);
+    border-color: var(--sinch-local-color-border-hover);
+  }
+
+  :host(:active:not([disabled])) #checkbox::after {
+    background-color: var(--sinch-local-color-background-active);
+    border-color: var(--sinch-local-color-border-active);
+  }
+
+  #icon-checkmark,
+  #icon-indeterminate {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: 16px;
+    height: 16px;
+    transition: opacity 0.1s linear;
+    opacity: 0;
+    pointer-events: none;
+    fill: var(--sinch-sys-color-surface-primary-default);
+  }
+
+  :host(:not([indeterminate])[checked]) #icon-checkmark {
+    opacity: 1;
+  }
+
+  :host([indeterminate][checked]) #icon-indeterminate {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion) {
+    #icon-checkmark,
+    #icon-indeterminate,
+    #checkbox::before,
+    #checkbox::after {
+      transition: none;
+    }
+  }
+
+  #label {
+    flex: 1;
+    align-self: center;
+    padding-left: 8px;
+    font: var(--sinch-comp-checkbox-font-label);
+    color: var(--sinch-local-color-text);
+    cursor: pointer;
+  }
+
+  #label:empty {
+    display: none;
+  }
+
+  :host([disabled]) #label {
+    cursor: initial;
+  }
 </style>
 
 <div id="wrapper">
   <div id="icon-container">
     <div id="checkbox"></div>
     <svg id="icon-checkmark" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M9 16.17 5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17Z"/>
+      <path
+        d="M9 16.17 5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17Z"
+      />
     </svg>
     <svg id="icon-indeterminate" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M18 13H6c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1Z"/>
+      <path
+        d="M18 13H6c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1Z"
+      />
     </svg>
   </div>
   <span id="label"></span>
