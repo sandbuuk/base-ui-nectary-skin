@@ -167,7 +167,8 @@ build-docs:
     - git checkout origin/docs -- public
     - pnpm --dir components build
     - pnpm --dir assets build
-    - ./scripts/generate-docs.sh
+    - VERSION=$(npm view @nectary/components version)
+    - ./scripts/generate-docs.sh $VERSION
     - git branch -D docs || true
     - git checkout --orphan docs
     - git reset
@@ -211,7 +212,8 @@ pages:
   before_script:
     - ./scripts/ci-install-packages.sh
   script:
-    - ./scripts/generate-docs.sh
+    - VERSION=$(npm view @nectary/components version)
+    - ./scripts/generate-docs.sh $VERSION
   artifacts:
     paths:
       - public
