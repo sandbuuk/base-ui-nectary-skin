@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+VERSION=$1
 set -eux pipefail
 
 # Cleanup docs dir
@@ -8,10 +9,11 @@ rm -rf public/css public/images public/js
 rm -f public/index.html public/report.html
 
 # Build latest app
-npm --prefix ./docs/latest run build
+npm --prefix ./docs/latest run build version="$VERSION"
+
 
 # Move latest app
-node --loader=tsm --no-warnings=ExperimentalWarning ./scripts/move-latest-to-public.mts
+node --loader=tsm --no-warnings=ExperimentalWarning ./scripts/move-latest-to-public.mts $VERSION
 
 # Generate "versions" file AFTER moving latest app to its destination
 node --loader=tsm --no-warnings=ExperimentalWarning ./scripts/generate-versions-file.mts

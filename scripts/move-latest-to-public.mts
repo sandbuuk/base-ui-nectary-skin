@@ -1,13 +1,18 @@
 import { readdir, mkdir, rename } from 'fs/promises'
 import path from 'path'
-import pkg from '@nectary/components/package.json' assert { type: 'json' }
 import { rimraf } from 'rimraf'
+
+const VERSION = process.argv[process.argv.length - 1]
+
+if (!/[0-9]\.[0-9]\.[0-9]/.test(VERSION)) {
+  throw new Error(`Wrong format for version: ${VERSION}`)
+}
 
 const VERSIONS_DIR = './public/versions'
 
 await mkdir(VERSIONS_DIR, { recursive: true })
 
-const versionArr = pkg.version.split('.')
+const versionArr = VERSION.split('.')
 const entries = await readdir(VERSIONS_DIR)
 
 for (const dirVersion of entries) {
@@ -18,4 +23,4 @@ for (const dirVersion of entries) {
   }
 }
 
-await rename('./docs/latest/build', path.join(VERSIONS_DIR, pkg.version))
+await rename('./docs/latest/build', path.join(VERSIONS_DIR, VERSION))

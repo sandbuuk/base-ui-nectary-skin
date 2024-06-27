@@ -1,18 +1,15 @@
 import path from 'path'
-import pkg from '@nectary/components/package.json' with { type: 'json' }
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
-// import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import remarkGfm from 'remark-gfm'
 import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import type { TransformOptions as TBabelOptions } from '@babel/core'
-import type { Configuration as TWebpackConfig } from 'webpack'
+import type { CallableOption as TWebpackConfig } from 'webpack-cli'
 
+type TWebpackEnv = Parameters<TWebpackConfig>[1] & { version?: string }
 const NODE_MODULES_REGEXP = /[\\/]node_modules[\\/]/
-const versionKey = pkg.version.replaceAll('.', '_')
-const stylesInjectKey = `__styles${versionKey}`
 
 const BabelOptions: TBabelOptions = {
   babelrc: false,
@@ -44,134 +41,147 @@ const BabelOptions: TBabelOptions = {
   shouldPrintComment: (val: string) => val.startsWith(' webpackChunkName'),
 }
 
-const config: TWebpackConfig = {
-  mode: 'production',
-  entry: path.resolve('./src/index.ts'),
-  output: {
-    path: path.resolve('./build/'),
-    filename: 'js/[contenthash].js',
-    chunkFilename: 'js/[contenthash].js',
-    assetModuleFilename: 'images/[contenthash][ext]',
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
-    alias: {
-      '~': path.resolve('./src/'),
-      '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
-      'core-js': path.resolve('./node_modules/core-js/'),
-      react: path.resolve('./node_modules/react/'),
-      'react-dom': path.resolve('./node_modules/react-dom'),
+const config: TWebpackConfig = (environment) => {
+  const versionKey = (environment as TWebpackEnv).version?.replaceAll('.', '_')
+
+  if (!versionKey) {
+    throw new Error(`versionKey not found in env`)
+  }
+
+  if (!/[0-9]\.[0-9]\.[0-9]/.test(versionKey)) {
+    throw new Error(`Wrong format for version: ${versionKey}`)
+  }
+
+  const stylesInjectKey = `__styles${versionKey}`
+
+  return {
+    mode: 'production',
+    entry: path.resolve('./src/index.ts'),
+    output: {
+      path: path.resolve('./build/'),
+      filename: 'js/[contenthash].js',
+      chunkFilename: 'js/[contenthash].js',
+      assetModuleFilename: 'images/[contenthash][ext]',
     },
-  },
-  module: {
-    parser: {
-      javascript: {
-        importMetaContext: true,
+    resolve: {
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
+      alias: {
+        '~': path.resolve('./src/'),
+        '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
+        'core-js': path.resolve('./node_modules/core-js/'),
+        react: path.resolve('./node_modules/react/'),
+        'react-dom': path.resolve('./node_modules/react-dom'),
       },
     },
-    rules: [
-      {
-        test: /\.tsx?$/,
-        exclude: NODE_MODULES_REGEXP,
-        loader: 'babel-loader',
-        options: BabelOptions,
+    module: {
+      parser: {
+        javascript: {
+          importMetaContext: true,
+        },
       },
-      {
-        test: /\.tsx?$/,
-        exclude: NODE_MODULES_REGEXP,
-        resourceQuery: '?example',
-        loader: '@saas/example-code-loader',
-      },
-      {
-        test: /\.d\.ts$/,
-        exclude: NODE_MODULES_REGEXP,
-        resourceQuery: '?api',
-        loader: '@saas/types-to-mdx-loader',
-      },
-      {
-        test: /\.css$/,
-        exclude: NODE_MODULES_REGEXP,
-        resourceQuery: '?tokens',
-        use: [
-          {
-            loader: 'babel-loader',
-            options: BabelOptions,
-          },
-          '@saas/css-to-mdx-loader',
-        ],
-      },
-      {
-        test: /\.mdx?$/,
-        exclude: NODE_MODULES_REGEXP,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: BabelOptions,
-          },
-          {
-            loader: '@mdx-js/loader',
-            options: {
-              providerImportSource: '@mdx-js/react',
-              remarkPlugins: [remarkGfm],
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: NODE_MODULES_REGEXP,
+          loader: 'babel-loader',
+          options: BabelOptions,
+        },
+        {
+          test: /\.tsx?$/,
+          exclude: NODE_MODULES_REGEXP,
+          resourceQuery: '?example',
+          loader: '@saas/example-code-loader',
+        },
+        {
+          test: /\.d\.ts$/,
+          exclude: NODE_MODULES_REGEXP,
+          resourceQuery: '?api',
+          loader: '@saas/types-to-mdx-loader',
+        },
+        {
+          test: /\.css$/,
+          exclude: NODE_MODULES_REGEXP,
+          resourceQuery: '?tokens',
+          use: [
+            {
+              loader: 'babel-loader',
+              options: BabelOptions,
             },
-          },
-        ],
-      },
-      {
-        test: /\.(gif|jpg|png)$/,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.html$/,
-        exclude: NODE_MODULES_REGEXP,
-        use: ['raw-loader', '@saas/html-minify-loader'],
-      },
-      {
-        test: /\.css$/,
-        resourceQuery: '',
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      {
-        test: /\.css$/i,
-        resourceQuery: '?theme',
-        use: [
-          {
-            loader: 'style-loader',
-            options: {
-              injectType: 'lazyStyleTag',
-              insert: (element: HTMLStyleElement, options: Record<string, any>) => {
-                options.target.appendChild(element)
+            '@saas/css-to-mdx-loader',
+          ],
+        },
+        {
+          test: /\.mdx?$/,
+          exclude: NODE_MODULES_REGEXP,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: BabelOptions,
+            },
+            {
+              loader: '@mdx-js/loader',
+              options: {
+                providerImportSource: '@mdx-js/react',
+                remarkPlugins: [remarkGfm],
               },
             },
-          },
-          {
-            loader: 'css-loader',
-          },
-        ],
-      },
-    ],
-  },
-  performance: {
-    hints: false,
-  },
-  optimization: {
+          ],
+        },
+        {
+          test: /\.(gif|jpg|png)$/,
+          type: 'asset/resource',
+        },
+        {
+          test: /\.html$/,
+          exclude: NODE_MODULES_REGEXP,
+          use: ['raw-loader', '@saas/html-minify-loader'],
+        },
+        {
+          test: /\.css$/,
+          resourceQuery: '',
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.css$/i,
+          resourceQuery: '?theme',
+          use: [
+            {
+              loader: 'style-loader',
+              options: {
+                injectType: 'lazyStyleTag',
+                insert: (element: HTMLStyleElement, options: Record<string, any>) => {
+                  options.target.appendChild(element)
+                },
+              },
+            },
+            {
+              loader: 'css-loader',
+            },
+          ],
+        },
+      ],
+    },
+    performance: {
+      hints: false,
+    },
+    optimization: {
     // chunkIds: 'named',
     // concatenateModules: false,
-    minimize: true,
-    minimizer: [
+      minimize: true,
+      minimizer: [
       // @ts-ignore
-      new TerserPlugin({
-        parallel: true,
-        extractComments: false,
-        terserOptions: {
-          ecma: 2020,
-          output: {
-            comments: false,
-            beautify: false,
+        new TerserPlugin({
+          parallel: true,
+          extractComments: false,
+          terserOptions: {
+            ecma: 2020,
+            output: {
+              comments: false,
+              beautify: false,
+            },
           },
-        },
-      }),
-      new CssMinimizerPlugin(),
+        }),
+        new CssMinimizerPlugin(),
       // new ImageMinimizerPlugin({
       //   minimizer: {
       //     implementation: ImageMinimizerPlugin.imageminMinify,
@@ -182,107 +192,108 @@ const config: TWebpackConfig = {
       //     },
       //   },
       // }),
-    ],
-    splitChunks: {
-      cacheGroups: {
-        default: false,
-        common: {
-          name: `common${versionKey}`,
-          test: /\/docs\/common\//,
-          chunks: 'async',
-        },
-        vendor: {
-          name: `vendor${versionKey}`,
-          test: (mod: any) => {
-            if (!Reflect.has(mod, 'resource')) {
-              return false
-            }
+      ],
+      splitChunks: {
+        cacheGroups: {
+          default: false,
+          common: {
+            name: `common${versionKey}`,
+            test: /\/docs\/common\//,
+            chunks: 'async',
+          },
+          vendor: {
+            name: `vendor${versionKey}`,
+            test: (mod: any) => {
+              if (!Reflect.has(mod, 'resource')) {
+                return false
+              }
 
-            if (!mod.resource.includes('/node_modules/')) {
-              return false
-            }
+              if (!mod.resource.includes('/node_modules/')) {
+                return false
+              }
 
-            if (
-              mod.resource.includes('/node_modules/react/') ||
+              if (
+                mod.resource.includes('/node_modules/react/') ||
               mod.resource.includes('/node_modules/react-dom/') ||
               mod.resource.includes('/node_modules/history/') ||
               mod.resource.includes('/node_modules/react-router-dom/')
-            ) {
-              return false
-            }
+              ) {
+                return false
+              }
 
-            return true
+              return true
+            },
+            chunks: 'async',
+            priority: 10,
           },
-          chunks: 'async',
-          priority: 10,
         },
       },
     },
-  },
-  plugins: [
-    new webpack.container.ModuleFederationPlugin({
-      name: `components${versionKey}`,
-      filename: 'remoteEntry.js',
-      exposes: {
-        './bootstrap': {
-          import: path.resolve('./src/bootstrap.tsx'),
-          name: `components${versionKey}-bootstrap`,
+    plugins: [
+      new webpack.container.ModuleFederationPlugin({
+        name: `components${versionKey}`,
+        filename: 'remoteEntry.js',
+        exposes: {
+          './bootstrap': {
+            import: path.resolve('./src/bootstrap.tsx'),
+            name: `components${versionKey}-bootstrap`,
+          },
         },
-      },
-      shared: {
-        react: {
-          requiredVersion: '*',
-          singleton: true,
+        shared: {
+          react: {
+            requiredVersion: '*',
+            singleton: true,
+          },
+          'react-dom': {
+            requiredVersion: '*',
+            singleton: true,
+          },
+          'react-router-dom': {
+            requiredVersion: '*',
+            singleton: true,
+          },
+          history: {
+            requiredVersion: '*',
+            singleton: true,
+          },
         },
-        'react-dom': {
-          requiredVersion: '*',
-          singleton: true,
-        },
-        'react-router-dom': {
-          requiredVersion: '*',
-          singleton: true,
-        },
-        history: {
-          requiredVersion: '*',
-          singleton: true,
-        },
-      },
-    }),
-    new webpack.CleanPlugin(),
-    new webpack.DefinePlugin({
-      __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
-      STYLE_INJECT_KEY: JSON.stringify(stylesInjectKey),
-      REQ_CHUNK_NAME: JSON.stringify(`Components${versionKey}-[request]`),
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'css/[contenthash].css',
-      chunkFilename: 'css/[contenthash].css',
-      insert: (element: Element) => {
-        const key = element.getAttribute('data-key')
+      }),
+      new webpack.CleanPlugin(),
+      new webpack.DefinePlugin({
+        __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
+        STYLE_INJECT_KEY: JSON.stringify(stylesInjectKey),
+        REQ_CHUNK_NAME: JSON.stringify(`Components${versionKey}-[request]`),
+      }),
+      new MiniCssExtractPlugin({
+        filename: 'css/[contenthash].css',
+        chunkFilename: 'css/[contenthash].css',
+        insert: (element: Element) => {
+          const key = element.getAttribute('data-key')
 
-        if (key === null) {
-          throw new Error('Cannot get Style inject key')
-        }
+          if (key === null) {
+            throw new Error('Cannot get Style inject key')
+          }
 
-        if (!Reflect.has(document.head, key)) {
-          Reflect.set(document.head, key, document.createDocumentFragment())
-        }
+          if (!Reflect.has(document.head, key)) {
+            Reflect.set(document.head, key, document.createDocumentFragment())
+          }
 
-        Reflect.get(document.head, key).appendChild(element)
+          Reflect.get(document.head, key).appendChild(element)
 
-        element.dispatchEvent(new Event('load'))
-        window.dispatchEvent(new CustomEvent('style-loader', { detail: element }))
-      },
-      attributes: {
-        'data-key': stylesInjectKey,
-      },
-    }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false,
-      logLevel: 'silent',
-    }),
-  ],
+          element.dispatchEvent(new Event('load'))
+          window.dispatchEvent(new CustomEvent('style-loader', { detail: element }))
+        },
+        attributes: {
+          'data-key': stylesInjectKey,
+        },
+      }),
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        openAnalyzer: false,
+        logLevel: 'silent',
+      }),
+    ],
+  }
 }
 
 export default config
