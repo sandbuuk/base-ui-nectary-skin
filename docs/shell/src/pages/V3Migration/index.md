@@ -34,7 +34,7 @@
 |`--sinch-ref-color-main-mud-*`           |                                 |
 |`--sinch-sys-color-text-link`                       |`--sinch-sys-color-primary-default`  |
 |`--sinch-sys-color-text-link-disabled`              |`--sinch-sys-color-primary-disabled` |
-|`--sinch-sys-color-text-inverted`                   |`--sinch-ref-color-main-basic-pure`       |
+|`--sinch-sys-color-text-inverted`                   |`--sinch-sys-color-basic-pure`       |
 |`--sinch-sys-color-text-invalid`                    |`--sinch-sys-color-feedback-invalid`|
 |`--sinch-sys-color-border-invalid`                  |`--sinch-sys-color-feedback-invalid`|
 |`--sinch-sys-color-border-active`                   |`--sinch-sys-color-primary`         |
@@ -69,7 +69,7 @@
 |`--sinch-ref-color-main-ocean-600`               |#0D68D1                    |
 |`--sinch-ref-color-main-ocean-700`               |#1454A8                    |
 |`--sinch-ref-color-main-ocean-900`               |#0F2138                    |
-|`--sinch-ref-color-main-grass-050`               |#ECFFEB                    |
+|`--sinch-ref-color-main-grass-50`               |#ECFFEB                    |
 |`--sinch-ref-color-main-grass-100`               |#D7F5D7                    |
 |`--sinch-ref-color-main-grass-300`               |#99E0A2                    |
 |`--sinch-ref-color-main-grass-350`               |#77D486                    |
@@ -77,7 +77,7 @@
 |`--sinch-ref-color-main-grass-600`               |#2B7845                    |
 |`--sinch-ref-color-main-grass-800`               |#163323                    |
 |`--sinch-ref-color-main-grass-900`               |#102419                    |
-|`--sinch-ref-color-main-mud-050`                 |#FFF8F5                    |
+|`--sinch-ref-color-main-mud-50`                 |#FFF8F5                    |
 |`--sinch-ref-color-main-mud-100`                 |#FFE9E0                    |
 |`--sinch-ref-color-main-mud-300`                 |#EFC7BA                    |
 |`--sinch-ref-color-main-mud-350`                 |#E5B5A5                    |
@@ -85,7 +85,7 @@
 |`--sinch-ref-color-main-mud-500`                 |#AD7D6F                    |
 |`--sinch-ref-color-main-mud-800`                 |#3D2A26                    |
 |`--sinch-ref-color-main-mud-900`                 |#291D1B                    |
-|`--sinch-ref-color-main-violet-050`              |#F8F5FF                    |
+|`--sinch-ref-color-main-violet-50`              |#F8F5FF                    |
 |`--sinch-ref-color-main-violet-100`              |#EFEBFF                    |
 |`--sinch-ref-color-main-violet-200`              |#E2DBFF                    |
 |`--sinch-ref-color-main-violet-350`              |#C1B6FA                    |
@@ -93,7 +93,7 @@
 |`--sinch-ref-color-main-violet-600`              |#645DC2                    |
 |`--sinch-ref-color-main-violet-800`              |#2A2A54                    |
 |`--sinch-ref-color-main-violet-900`              |#1E1E33                    |
-|`--sinch-ref-color-main-pumpkin-050`             |#FFF7F0                    |
+|`--sinch-ref-color-main-pumpkin-50`             |#FFF7F0                    |
 |`--sinch-ref-color-main-pumpkin-100`             |#FFE9D6                    |
 |`--sinch-ref-color-main-pumpkin-200`             |#FFD9BD                    |
 |`--sinch-ref-color-main-pumpkin-350`             |#FFAD75                    |
@@ -101,7 +101,7 @@
 |`--sinch-ref-color-main-pumpkin-600`             |#AD4E24                    |
 |`--sinch-ref-color-main-pumpkin-800`             |#4D2215                    |
 |`--sinch-ref-color-main-pumpkin-900`             |#361811                    |
-|`--sinch-ref-color-main-candy-050`               |#FFF5FC                    |
+|`--sinch-ref-color-main-candy-50`               |#FFF5FC                    |
 |`--sinch-ref-color-main-candy-100`               |#FFE5F7                    |
 |`--sinch-ref-color-main-candy-300`               |#FFBDEC                    |
 |`--sinch-ref-color-main-candy-350`               |#FAA5E3                    |
@@ -120,64 +120,64 @@
 |-----------------------------------------|---------------------------------|--------------------------|
 |`--sinch-ref-color-main-snow-100`                   |`--sinch-sys-color-basic-pure`              |                           |
 |`--sinch-ref-color-main-stormy-900`                 |`--sinch-sys-color-basic-pure-inverted`     |                           |
-|`--sinch-ref-color-main-snow-200`                   |`--sinch-ref-color-main-neutral-050`             |                           |
-|`--sinch-ref-color-main-snow-400`                   |`--sinch-ref-color-main-neutral-100`             |                           |
-|`--sinch-ref-color-main-snow-500`                   |`--sinch-ref-color-main-neutral-200`             |                           |
-|`--sinch-ref-color-main-snow-600`                   |`--sinch-ref-color-main-neutral-300`             |                           |
-|`--sinch-ref-color-main-snow-700`                   |`--sinch-ref-color-main-neutral-350`             |                           |
-|`--sinch-ref-color-main-stormy-100`                 |`--sinch-ref-color-main-neutral-400`             |                           |
-|`--sinch-ref-color-main-stormy-200`                 |`--sinch-ref-color-main-neutral-500`             |                           |
-|`--sinch-ref-color-main-stormy-300`                 |`--sinch-ref-color-main-neutral-600`             |                           |
-|`--sinch-ref-color-main-stormy-400`                 |`--sinch-ref-color-main-neutral-700`             |                           |
-|`--sinch-ref-color-main-stormy-600`                 |`--sinch-ref-color-main-neutral-800`             |                           |
-|`--sinch-ref-color-main-stormy-700`                 |`--sinch-ref-color-main-neutral-900`             |                           |
-|`--sinch-ref-color-main-stormy-800`                 |`--sinch-ref-color-main-neutral-950`             |                           |
-|`--sinch-ref-color-main-raspberry-050`              |`--sinch-ref-color-main-raspberry-050`           |#FFF6F5                    |
-|`--sinch-ref-color-main-raspberry-100`              |`--sinch-ref-color-main-raspberry-100`           |#FFE5E3                    |
-|`--sinch-ref-color-main-raspberry-200`              |`--sinch-ref-color-main-raspberry-200`           |#FFD8D6                    |
-|`--sinch-ref-color-main-raspberry-300`              |`--sinch-ref-color-main-raspberry-350`           |#FFA8A8                    |
-|`--sinch-ref-color-main-raspberry-400`              |`--sinch-ref-color-main-raspberry-400`           |#FF8080                    |
-|`--sinch-ref-color-main-raspberry-500`              |`--sinch-ref-color-main-raspberry-500`           |#EB5454                    |
-|`--sinch-ref-color-main-raspberry-600`              |`--sinch-ref-color-main-raspberry-600`           |#BD3C41                    |
-|`--sinch-ref-color-main-raspberry-700`              |`--sinch-ref-color-main-raspberry-700`           |#993138                    |
-|`--sinch-ref-color-main-honey-100`                  |`--sinch-ref-color-main-honey-050`               |#FFF9EB                    |
-|`--sinch-ref-color-main-honey-200`                  |`--sinch-ref-color-main-honey-100`               |#FCECCB                    |
-|`--sinch-ref-color-main-honey-300`                  |`--sinch-ref-color-main-honey-200`               |#FFDD99                    |
-|`--sinch-ref-color-main-honey-400`                  |`--sinch-ref-color-main-honey-300`               |#FFCA61                    |
-|`--sinch-ref-color-main-honey-500`                  |`--sinch-ref-color-main-honey-350`               |#FFBE3C                    |
-|`--sinch-ref-color-main-honey-600`                  |`--sinch-ref-color-main-honey-400`               |#EB9605                    |
-|`--sinch-ref-color-main-honey-700`                  |`--sinch-ref-color-main-honey-500`               |#C77904                    |
-|`--sinch-ref-color-main-tropical-050`               |`--sinch-ref-color-main-tropical-050`            |#F0FAF4                    |
-|`--sinch-ref-color-main-tropical-100`               |`--sinch-ref-color-main-tropical-100`            |#E2F0E8                    |
-|`--sinch-ref-color-main-tropical-200`               |`--sinch-ref-color-main-tropical-300`            |#AFDBCD                    |
-|`--sinch-ref-color-main-tropical-300`               |`--sinch-ref-color-main-tropical-400`            |#51B8A6                    |
-|`--sinch-ref-color-main-tropical-400`               |`--sinch-ref-color-main-tropical-500`            |#06998B                    |
-|`--sinch-ref-color-main-tropical-500`               |`--sinch-ref-color-main-tropical-600`            |#007874                    |
-|`--sinch-ref-color-main-tropical-600`               |`--sinch-ref-color-main-tropical-700`            |#006063                    |
-|`--sinch-ref-color-main-tropical-700`               |`--sinch-ref-color-main-tropical-800`            |#0C333B                    |
-|`--sinch-ref-color-main-ocean-050`                  |`--sinch-ref-color-main-ocean-050`               |#F2F9FF                    |
-|`--sinch-ref-color-main-ocean-100`                  |`--sinch-ref-color-main-ocean-100`               |#E0F1FF                    |
-|`--sinch-ref-color-main-ocean-200`                  |`--sinch-ref-color-main-ocean-200`               |#C7E5FF                    |
-|`--sinch-ref-color-main-ocean-300`                  |`--sinch-ref-color-main-ocean-300`               |#A8D4FF                    |
-|`--sinch-ref-color-main-ocean-400`                  |`--sinch-ref-color-main-ocean-350`               |#8AC4FF                    |
-|`--sinch-ref-color-main-ocean-500`                  |`--sinch-ref-color-main-ocean-400`               |#61ABFF                    |
-|`--sinch-ref-color-main-ocean-600`                  |`--sinch-ref-color-main-ocean-500`               |#3089F0                    |
-|`--sinch-ref-color-main-ocean-700`                  |`--sinch-ref-color-main-ocean-800`               |#112F57                    |
-|`--sinch-ref-color-main-grass-200`         |`--sinch-ref-color-main-grass-200`               |#C2EDC5                    |
-|`--sinch-ref-color-main-grass-400`         |`--sinch-ref-color-main-grass-400`               |#53BD69                    |
-|`--sinch-ref-color-main-grass-700`         |`--sinch-ref-color-main-grass-700`               |#23613C                    |
-|`--sinch-ref-color-main-mud-200`           |`--sinch-ref-color-main-mud-200`                 |#FAD9CD                    |
-|`--sinch-ref-color-main-mud-400`           |`--sinch-ref-color-main-mud-600`                 |#8C5F54                    |
-|`--sinch-ref-color-main-mud-700`           |`--sinch-ref-color-main-mud-700`                 |#734D45                    |
-|`--sinch-ref-color-main-violet-200`        |`--sinch-ref-color-main-violet-300`              |#D0C8FA                    |
-|`--sinch-ref-color-main-violet-400`        |`--sinch-ref-color-main-violet-500`              |#857AEB                    |
-|`--sinch-ref-color-main-violet-700`        |`--sinch-ref-color-main-violet-700`              |#4D4AA8                    |
-|`--sinch-ref-color-main-pumpkin-200`       |`--sinch-ref-color-main-pumpkin-300`             |#FFC299                    |
-|`--sinch-ref-color-main-pumpkin-400`       |`--sinch-ref-color-main-pumpkin-500`             |#D66A33                    |
-|`--sinch-ref-color-main-pumpkin-700`       |`--sinch-ref-color-main-pumpkin-700`             |#8F3D1F                    |
-|`--sinch-ref-color-main-candy-200`         |`--sinch-ref-color-main-candy-200`               |#FFD6F3                    |
-|`--sinch-ref-color-main-candy-400`         |`--sinch-ref-color-main-candy-500`               |#D15CB4                    |
-|`--sinch-ref-color-main-candy-700`         |`--sinch-ref-color-main-candy-700`               |#8A3778                    |
+|`--sinch-ref-color-main-snow-200`                   |`--sinch-ref-color-neutral-50`             |                           |
+|`--sinch-ref-color-main-snow-400`                   |`--sinch-ref-color-neutral-100`             |                           |
+|`--sinch-ref-color-main-snow-500`                   |`--sinch-ref-color-neutral-200`             |                           |
+|`--sinch-ref-color-main-snow-600`                   |`--sinch-ref-color-neutral-300`             |                           |
+|`--sinch-ref-color-main-snow-700`                   |`--sinch-ref-color-neutral-350`             |                           |
+|`--sinch-ref-color-main-stormy-100`                 |`--sinch-ref-color-neutral-400`             |                           |
+|`--sinch-ref-color-main-stormy-200`                 |`--sinch-ref-color-neutral-500`             |                           |
+|`--sinch-ref-color-main-stormy-300`                 |`--sinch-ref-color-neutral-600`             |                           |
+|`--sinch-ref-color-main-stormy-400`                 |`--sinch-ref-color-neutral-700`             |                           |
+|`--sinch-ref-color-main-stormy-600`                 |`--sinch-ref-color-neutral-800`             |                           |
+|`--sinch-ref-color-main-stormy-700`                 |`--sinch-ref-color-neutral-900`             |                           |
+|`--sinch-ref-color-main-stormy-800`                 |`--sinch-ref-color-neutral-950`             |                           |
+|`--sinch-ref-color-main-raspberry-50`              |`--sinch-ref-color-raspberry-50`           |#FFF6F5                    |
+|`--sinch-ref-color-main-raspberry-100`              |`--sinch-ref-color-raspberry-100`           |#FFE5E3                    |
+|`--sinch-ref-color-main-raspberry-200`              |`--sinch-ref-color-raspberry-200`           |#FFD8D6                    |
+|`--sinch-ref-color-main-raspberry-300`              |`--sinch-ref-color-raspberry-350`           |#FFA8A8                    |
+|`--sinch-ref-color-main-raspberry-400`              |`--sinch-ref-color-raspberry-400`           |#FF8080                    |
+|`--sinch-ref-color-main-raspberry-500`              |`--sinch-ref-color-raspberry-500`           |#EB5454                    |
+|`--sinch-ref-color-main-raspberry-600`              |`--sinch-ref-color-raspberry-600`           |#BD3C41                    |
+|`--sinch-ref-color-main-raspberry-700`              |`--sinch-ref-color-raspberry-700`           |#993138                    |
+|`--sinch-ref-color-main-honey-100`                  |`--sinch-ref-color-honey-50`               |#FFF9EB                    |
+|`--sinch-ref-color-main-honey-200`                  |`--sinch-ref-color-honey-100`               |#FCECCB                    |
+|`--sinch-ref-color-main-honey-300`                  |`--sinch-ref-color-honey-200`               |#FFDD99                    |
+|`--sinch-ref-color-main-honey-400`                  |`--sinch-ref-color-honey-300`               |#FFCA61                    |
+|`--sinch-ref-color-main-honey-500`                  |`--sinch-ref-color-honey-350`               |#FFBE3C                    |
+|`--sinch-ref-color-main-honey-600`                  |`--sinch-ref-color-honey-400`               |#EB9605                    |
+|`--sinch-ref-color-main-honey-700`                  |`--sinch-ref-color-honey-500`               |#C77904                    |
+|`--sinch-ref-color-main-tropical-50`               |`--sinch-ref-color-tropical-50`            |#F0FAF4                    |
+|`--sinch-ref-color-main-tropical-100`               |`--sinch-ref-color-tropical-100`            |#E2F0E8                    |
+|`--sinch-ref-color-main-tropical-200`               |`--sinch-ref-color-tropical-300`            |#AFDBCD                    |
+|`--sinch-ref-color-main-tropical-300`               |`--sinch-ref-color-tropical-400`            |#51B8A6                    |
+|`--sinch-ref-color-main-tropical-400`               |`--sinch-ref-color-tropical-500`            |#06998B                    |
+|`--sinch-ref-color-main-tropical-500`               |`--sinch-ref-color-tropical-600`            |#007874                    |
+|`--sinch-ref-color-main-tropical-600`               |`--sinch-ref-color-tropical-700`            |#006063                    |
+|`--sinch-ref-color-main-tropical-700`               |`--sinch-ref-color-tropical-800`            |#0C333B                    |
+|`--sinch-ref-color-main-ocean-50`                  |`--sinch-ref-color-ocean-50`               |#F2F9FF                    |
+|`--sinch-ref-color-main-ocean-100`                  |`--sinch-ref-color-ocean-100`               |#E0F1FF                    |
+|`--sinch-ref-color-main-ocean-200`                  |`--sinch-ref-color-ocean-200`               |#C7E5FF                    |
+|`--sinch-ref-color-main-ocean-300`                  |`--sinch-ref-color-ocean-300`               |#A8D4FF                    |
+|`--sinch-ref-color-main-ocean-400`                  |`--sinch-ref-color-ocean-350`               |#8AC4FF                    |
+|`--sinch-ref-color-main-ocean-500`                  |`--sinch-ref-color-ocean-400`               |#61ABFF                    |
+|`--sinch-ref-color-main-ocean-600`                  |`--sinch-ref-color-ocean-500`               |#3089F0                    |
+|`--sinch-ref-color-main-ocean-700`                  |`--sinch-ref-color-ocean-800`               |#112F57                    |
+|`--sinch-ref-color-main-grass-200`         |`--sinch-ref-color-grass-200`               |#C2EDC5                    |
+|`--sinch-ref-color-main-grass-400`         |`--sinch-ref-color-grass-400`               |#53BD69                    |
+|`--sinch-ref-color-main-grass-700`         |`--sinch-ref-color-grass-700`               |#23613C                    |
+|`--sinch-ref-color-main-mud-200`           |`--sinch-ref-color-mud-200`                 |#FAD9CD                    |
+|`--sinch-ref-color-main-mud-400`           |`--sinch-ref-color-mud-600`                 |#8C5F54                    |
+|`--sinch-ref-color-main-mud-700`           |`--sinch-ref-color-mud-700`                 |#734D45                    |
+|`--sinch-ref-color-main-violet-200`        |`--sinch-ref-color-violet-300`              |#D0C8FA                    |
+|`--sinch-ref-color-main-violet-400`        |`--sinch-ref-color-violet-500`              |#857AEB                    |
+|`--sinch-ref-color-main-violet-700`        |`--sinch-ref-color-violet-700`              |#4D4AA8                    |
+|`--sinch-ref-color-main-pumpkin-200`       |`--sinch-ref-color-pumpkin-300`             |#FFC299                    |
+|`--sinch-ref-color-main-pumpkin-400`       |`--sinch-ref-color-pumpkin-500`             |#D66A33                    |
+|`--sinch-ref-color-main-pumpkin-700`       |`--sinch-ref-color-pumpkin-700`             |#8F3D1F                    |
+|`--sinch-ref-color-main-candy-200`         |`--sinch-ref-color-candy-200`               |#FFD6F3                    |
+|`--sinch-ref-color-main-candy-400`         |`--sinch-ref-color-candy-500`               |#D15CB4                    |
+|`--sinch-ref-color-main-candy-700`         |`--sinch-ref-color-candy-700`               |#8A3778                    |
 |`--sinch-sys-color-feedback-info-foreground`        |`--sinch-sys-color-feedback-info-subtle`    |                           |
 |`--sinch-sys-color-feedback-info-contrast`          |`--sinch-sys-color-feedback-info-default`   |                           |
 |`--sinch-sys-color-feedback-info-background`        |`--sinch-sys-color-feedback-info-strong`    |                           |
