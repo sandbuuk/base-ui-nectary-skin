@@ -1,50 +1,50 @@
-import { ReferenceColorsTable, SystemColorsTable, TokenIllustration, MainColors, ComplementaryColors, Line } from '../components';
-import { SpacingY } from '../components/SpacingY'
+import {
+  ReferenceColorsTable,
+  SystemColorsTable,
+  Line,
+} from "../components";
+import { SpacingY } from "../components/SpacingY";
 
 # Colors
 
-Color supports brand recognition and brings uniqueness to our design system.
-Using color correctly ensures a consistent identity experience across our different products.
-Access our brand hub to learn more about our brand colors
+Like other values in the design system, we store colors as [Design Tokens](?path=/components/_/tokens). This allows us to maintain consistency and increases the flexibility and scalability of the system. All tokens are categorized into three main groups:
 
-<SpacingY height={56}/>
-<Line/>
-<SpacingY height={56}/>
+- **Reference** - don't have any specific meaning and used only as a reference for System and Component colors.
+- **System** - contains colors following specific purposes, and shared between different components
+- **Component** - they are component specific colors
 
-## Color anatomy
+Below you will find a detailed description of each of these categories.
 
-Here, we'll dive into the details of how we've organized and defined the colors used in our products. Our color palette is divided into two main categories: main colors and complementary colors.
-Typography
+## Reference colors
 
-<MainColors />
-<ComplementaryColors />
+*Starts with `ref`/color/honey/400*
 
-<SpacingY height={56}/>
-<Line/>
-<SpacingY height={56}/>
+The Reference colors are aligned with Brand but don't have any specific meaning. Instead, they are used only as a reference for System and Component colors. As all the other styles are inherited from this base palette, it help us to maintain color consistency across the system and with brand.
 
-## Color Tokens
-
-Our colors are stored as token values in our design system. Our tokens allow that color values are consistently used across our design system and the products that use it. They are divided into reference, system and component color tokens. In this section we will talk about the usage of reference and system colors and their correct usage.
-Colors from component tokens are only used to build the component and nothing else.
-
-<TokenIllustration />
-
-### Reference colors
-
-The reference colors stores all the raw values of all color allowed in our system.
-This builds the basis of colors that are meant to be used by our system colors.
+Avoid using these colors directly.Instead, inherit from them.
 
 <ReferenceColorsTable />
 
-### System colors
+<SpacingY height={56} />
+<Line />
+<SpacingY height={56} />
 
-System colors  are used throughout the system in various contexts. They are essential for maintaining visual consistency and cohesiveness across the system. System colors are a critical when creating new themes for a design system. Themes allow designers to quickly and easily change the look and feel of an application, without having to manually update each individual UI element.
+## System colors
 
-<br /> All values from the system colors comes from referenced values from the reference colors.
+*Starts with `sys`/color/feedback/success/default*
 
-#### Colors system categories
-
-The color system is divided into eight categories: Text, Borders, Primary, CTA, Containers, Feedback, Status, Skin tone
+This palette is designed to have colors following specific purposes. Consider this it as the **initial palette to go with.** They are the swatches you need first to inherit values for your local component styles. For example, if you need to emphasise that something is going as planned, consider using the `sys/color/success/default` as a reference value for your success icon style.
 
 <SystemColorsTable />
+
+<SpacingY height={56} />
+<Line />
+<SpacingY height={56} />
+
+## Component colors
+
+There is also a third set of colors designed for specific components. They are **not supposed to be used directly,** excepting the cases when you literally need to follow styling of a certain component. Otherwise, you may encounter issues if you use these styles improperly.
+
+For example when you create a Super-Custom-Loading-Button and want it to follow the regular button style, you can use `comp/button...` styles as reference.
+
+<SpacingY height={56} />

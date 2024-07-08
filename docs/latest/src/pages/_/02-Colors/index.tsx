@@ -1,7 +1,4 @@
 import './styles.css'
-import './illustrations/pallete-overview-main-colors'
-import './illustrations/pallete-overview-complementary-colors'
-import './illustrations/token-explanation'
 import { MDXProvider } from '@mdx-js/react'
 import { commonMdxComponents } from 'docs-common'
 import MainDocumentMarkDown from './markdown/MainDocument.mdx'

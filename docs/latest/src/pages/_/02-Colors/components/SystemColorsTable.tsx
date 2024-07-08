@@ -21,12 +21,12 @@ const tableStyle = {
 }
 
 export const categories = [
-  'container',
-  'surface',
-  'primary',
+  'basic',
   'text',
-  'feedback',
   'border',
+  'feedback',
+  'primary',
+  'surface',
 ] as const
 export type Category = (typeof categories)[number]
 const colors = createSystemColors()

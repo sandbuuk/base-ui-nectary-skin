@@ -1,1 +1,1 @@
-This table lists all *main colors*
+This table lists all *reference colors*
