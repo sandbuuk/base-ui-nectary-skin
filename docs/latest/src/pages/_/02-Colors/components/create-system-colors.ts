@@ -52,12 +52,12 @@ function createColorCategoryItems(obj: Record<string, any>, parent: string) {
 
 export const createSystemColors: () => SystemColors = () => {
   const systemColors = {
-    container: createColorCategoryItems(sysJson.color.basic, 'basic'),
-    surface: createColorCategoryItems(sysJson.color.surface, 'surface'),
-    primary: createColorCategoryItems(sysJson.color.primary, 'primary'),
+    basic: createColorCategoryItems(sysJson.color.basic, 'basic'),
     text: createColorCategoryItems(sysJson.color.text, 'text'),
-    feedback: createColorCategoryItems(sysJson.color.feedback, 'feedback'),
     border: createColorCategoryItems(sysJson.color.border, 'border'),
+    feedback: createColorCategoryItems(sysJson.color.feedback, 'feedback'),
+    primary: createColorCategoryItems(sysJson.color.primary, 'primary'),
+    surface: createColorCategoryItems(sysJson.color.surface, 'surface'),
   }
 
   return systemColors
