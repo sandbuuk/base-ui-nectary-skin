@@ -48,7 +48,7 @@ const config: TWebpackConfig = (environment) => {
     throw new Error(`versionKey not found in env`)
   }
 
-  if (!/[0-9]\.[0-9]\.[0-9]/.test(versionKey)) {
+  if (!/[0-9]+_[0-9]+_[0-9]+/.test(versionKey)) {
     throw new Error(`Wrong format for version: ${versionKey}`)
   }
 
