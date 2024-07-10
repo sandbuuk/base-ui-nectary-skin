@@ -5,14 +5,15 @@ import '@nectary/components/icon'
 import '@nectary/components/button'
 
 const req = import.meta.webpackContext!('@nectary/assets/icons', {
-  regExp: /^.*\/index.ts$/,
+  regExp: /^.*\/index$/,
   recursive: true,
   mode: 'sync',
 })
+
 const iconNames = req.keys().map((key) => {
   req(key)
 
-  return `sinch-icon-${key.replace(/^\.\/(.+)\/index.ts$/, '$1')}`
+  return `sinch-icon-${key.replace(/^\.\/(.+)\/index$/, '$1')}`
 })
 
 const iconsWrapperStyle: CSSProperties = {
