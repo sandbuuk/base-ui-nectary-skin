@@ -3,14 +3,14 @@ import type { CSSProperties, FC } from 'react'
 import '@nectary/components/text'
 
 const req = import.meta.webpackContext!('@nectary/assets/animations', {
-  regExp: /^.*\/index.ts$/,
+  regExp: /^.*\/index$/,
   recursive: true,
   mode: 'sync',
 })
 const illustrationNames = req.keys().map((key) => {
   req(key)
 
-  return `sinch-animation-${key.replace(/^\.\/(.+)\/index.ts$/, '$1')}`
+  return `sinch-animation-${key.replace(/^\.\/(.+)\/index$/, '$1')}`
 })
 
 const wrapperStyle: CSSProperties = {

@@ -9,7 +9,7 @@ import '@nectary/components/table-cell'
 import '@nectary/components/text'
 
 const req = import.meta.webpackContext!('@nectary/assets/logo', {
-  regExp: /^.*\/index.ts$/,
+  regExp: /^.*\/index$/,
   recursive: true,
   mode: 'sync',
 })
@@ -20,7 +20,7 @@ const names = req.keys().reduce((acc, key) => {
     return acc
   }
 
-  return [...acc, `sinch-logo-${key.replace(/^\.\/(.+)\/index.ts$/, '$1')}`]
+  return [...acc, `sinch-logo-${key.replace(/^\.\/(.+)\/index$/, '$1')}`]
 }, [] as string[])
 
 const tableStyle: CSSProperties = {

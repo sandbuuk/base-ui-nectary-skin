@@ -6,14 +6,14 @@ import '@nectary/components/text'
 import '@nectary/components/button'
 
 export const req = import.meta.webpackContext!('@nectary/assets/icons-channel', {
-  regExp: /^.*\/index.ts$/,
+  regExp: /^.*\/index$/,
   recursive: true,
   mode: 'sync',
 })
 const iconNames = req.keys().map((key) => {
   req(key)
 
-  return `sinch-icon-channel-${key.replace(/^\.\/(.+)\/index.ts$/, '$1')}`
+  return `sinch-icon-channel-${key.replace(/^\.\/(.+)\/index$/, '$1')}`
 })
 
 const wrapperStyle: CSSProperties = {

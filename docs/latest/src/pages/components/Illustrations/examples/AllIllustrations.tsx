@@ -6,14 +6,14 @@ import '@nectary/components/icon'
 import '@nectary/components/button'
 
 const req = import.meta.webpackContext!('@nectary/assets/illustrations', {
-  regExp: /^.*\/index.ts$/,
+  regExp: /^.*\/index$/,
   recursive: true,
   mode: 'sync',
 })
 const illustrationNames = req.keys().map((key) => {
   req(key)
 
-  return `sinch-illustration-${key.replace(/^\.\/(.+)\/index.ts$/, '$1')}`
+  return `sinch-illustration-${key.replace(/^\.\/(.+)\/index$/, '$1')}`
 })
 
 const wrapperStyle: CSSProperties = {
