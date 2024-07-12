@@ -137,13 +137,18 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
   }
 
   #onCancel = (e: Event) => {
-    e.preventDefault()
+    if (e.cancelable) {
+      e.preventDefault()
+    } else {
+      this.#onCollapse()
+    }
+
     e.stopPropagation()
-    this.#dispatchCloseEvent('escape')
+    this.#dispatchCloseEvent('escape', e.cancelable)
   }
 
   #onCloseClick = () => {
-    this.#dispatchCloseEvent('close')
+    this.#dispatchCloseEvent('close', true)
   }
 
   #onBackdropMouseDown = (e: MouseEvent) => {
@@ -153,7 +158,7 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
       if (!isInside) {
         e.stopPropagation()
-        this.#dispatchCloseEvent('backdrop')
+        this.#dispatchCloseEvent('backdrop', e.cancelable)
       }
     }
   }
@@ -162,9 +167,9 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
     getReactEventHandler(this, 'on-close')?.(e)
   }
 
-  #dispatchCloseEvent(detail: TSinchDialogCloseDetail) {
+  #dispatchCloseEvent(detail: TSinchDialogCloseDetail, cancelable: boolean) {
     this.dispatchEvent(
-      new CustomEvent('-close', { detail })
+      new CustomEvent('-close', { detail, cancelable })
     )
   }
 
