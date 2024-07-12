@@ -16,3 +16,31 @@ Simple example showing modal dialog.
 > Click outside to close
 
 <Example Component={SimpleExample}/>
+
+## Note on dialog cancel events
+
+It appears that on chrome-based browsers, if the user presses the `ESC` twice, the second event that is produced isn't cancelable meaning that we can't prevent the default behavior of the browser hiding the dialog.
+
+If you have an on-close callback looking like this:
+
+```js
+on-close={(e) => {
+  if (e.detail === "escape") {
+    // do nothing
+    return
+  }
+}}
+```
+
+Consider adding this before:
+
+```js
+on-close={(e) => {
+  if (!e.cancelable) {
+    return setDialogOpen(false)
+  }
+  if (e.detail === "escape") {
+    return
+  }
+}}
+```
