@@ -111,8 +111,21 @@
   :host(:is(:last-of-type)) #sinchButton:not(:active) {
     --sinch-local-border-left: none;
   }
+
+  /* icon-button */
+  :host(:is([text=""], :not([text]))) :is(#left-icon, #right-icon, #text) {
+    display: none;
+  }
+
+  ::slotted(*) {
+    display: block;
+  }
 </style>
 
 <div id="wrapper">
-  <sinch-button id="sinchButton" />
+  <sinch-button id="sinchButton">
+    <div slot="left-icon"><slot id="left-icon" name="left-icon"></slot></div>
+    <div slot="icon"><slot id="icon" name="icon"></slot></div>
+    <div slot="right-icon"><slot id="right-icon" name="right-icon"></slot></div>
+  </sinch-button>
 </div>
