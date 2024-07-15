@@ -1,10 +1,10 @@
+import { typeValues } from '../button/utils'
 import {
   NectaryElement,
   defineCustomElement,
-  getAttribute,
-  getReactEventHandler,
-  updateAttribute,
+  updateLiteralAttribute,
 } from '../utils'
+import { sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
 import type { TSinchButtonGroupElement, TSinchButtonGroupReact } from './types'
 
@@ -13,7 +13,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-button-group', class extends NectaryElement {
-  #controller: AbortController | null = null
+  #$slot: HTMLSlotElement
 
   constructor() {
     super()
@@ -21,44 +21,34 @@ defineCustomElement('sinch-button-group', class extends NectaryElement {
     const shadowRoot = this.attachShadow()
 
     shadowRoot.appendChild(template.content.cloneNode(true))
+    this.#$slot = shadowRoot.querySelector('slot')!
   }
 
   static get observedAttributes() {
-    return ['value']
+    return ['size', 'type']
   }
 
-  connectedCallback() {
-    this.#controller = new AbortController()
-
-    const { signal } = this.#controller
-    const options: AddEventListenerOptions = { signal }
-
-    this.addEventListener('-change', this.#onChangeReactHandler, options)
-  }
-
-  disconnectedCallback() {
-    this.#controller!.abort()
-    this.#controller = null
-  }
-
-  set value(value: string) {
-    updateAttribute(this, 'value', value)
-  }
-
-  get value(): string {
-    return getAttribute(this, 'value', '')
-  }
-
-  attributeChangedCallback(name: string, _oldVal: string | null, _newVal: string | null) {
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
-      case 'value': {
+      case 'size':
+        for (const $option of this.#$slot.assignedElements()) {
+          updateLiteralAttribute($option, sizeExValues, name, newVal)
+        }
+
         break
-      }
+      case 'type':
+        for (const $option of this.#$slot.assignedElements()) {
+          updateLiteralAttribute($option, typeValues, name, newVal)
+        }
+
+        break
+      default:
+        break
     }
   }
 
-  #onChangeReactHandler = (e: Event) => {
-    getReactEventHandler(this, 'on-change')?.(e)
+  connectedCallback() {
+    this.role = 'group'
   }
 })
 

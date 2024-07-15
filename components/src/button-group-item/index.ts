@@ -26,8 +26,8 @@ defineCustomElement('sinch-button-group-item', class extends NectaryElement {
     this.#$sinchButton = shadowRoot.querySelector('#sinchButton')!
   }
 
-  static get observedAttributes(): (keyof TSinchButtonElement)[] {
-    return ['text', 'disabled', 'toggled', 'size']
+  static get observedAttributes() {
+    return ['type', 'size', 'text', 'disabled', 'toggled']
   }
 
   attributeChangedCallback(name: (keyof TSinchButtonElement), oldVal: string | null, newVal: string | null) {
