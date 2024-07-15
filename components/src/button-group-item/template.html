@@ -1,20 +1,8 @@
 <style>
   :host {
     display: block;
-    --sinch-button-group-item-shape-radius-base: var(
-      --sinch-comp-button-shape-radius-size-m
-    );
-    --sinch-button-group-item-shape-radius-top-right: var(
-      --sinch-button-group-item-shape-radius-base
-    );
-    --sinch-button-group-item-shape-radius-top-left: var(
-      --sinch-button-group-item-shape-radius-base
-    );
-    --sinch-button-group-item-shape-radius-bottom-right: var(
-      --sinch-button-group-item-shape-radius-base
-    );
-    --sinch-button-group-item-shape-radius-bottom-left: var(
-      --sinch-button-group-item-shape-radius-base
+    --sinch-local-divider-color: var(
+      --sinch-comp-button-color-primary-default-text-initial
     );
   }
 
@@ -31,9 +19,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-color: var(
-      --sinch-comp-button-color-secondary-default-text-initial
-    );
+    background-color: var(--sinch-local-divider-color);
     opacity: 0.3;
     pointer-events: none;
     z-index: 2;
@@ -41,6 +27,46 @@
     bottom: 10%;
     left: -0.5px;
     width: 1px;
+  }
+
+  :host([type="primary"]) #wrapper::before {
+    --sinch-local-divider-color: var(
+      --sinch-comp-button-color-primary-default-text-initial
+    );
+  }
+
+  :host([type="secondary"]) #wrapper::before {
+    --sinch-local-divider-color: var(
+      --sinch-comp-button-color-secondary-default-text-initial
+    );
+  }
+  :host([type="subtle-primary"]) #wrapper::before {
+    --sinch-local-divider-color: var(
+      --sinch-comp-button-color-subtle-primary-default-text-initial
+    );
+  }
+
+  :host([type="subtle-secondary"]) #wrapper::before {
+    --sinch-local-divider-color: var(
+      --sinch-comp-button-color-subtle-secondary-default-text-initial
+    );
+  }
+  :host([type="cta-primary"]) #wrapper::before {
+    --sinch-local-divider-color: var(
+      --sinch-comp-button-color-cta-primary-default-text-initial
+    );
+  }
+
+  :host([type="cta-secondary"]) #wrapper::before {
+    --sinch-local-divider-color: var(
+      --sinch-comp-button-color-cta-secondary-default-text-initial
+    );
+  }
+
+  :host([type="destructive"]) #wrapper::before {
+    --sinch-local-divider-color: var(
+      --sinch-comp-button-color-danger-default-text-initial
+    );
   }
 
   #sinchButton {
