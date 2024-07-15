@@ -1,0 +1,80 @@
+<style>
+  :host {
+    display: block;
+    --sinch-button-group-item-shape-radius-base: var(
+      --sinch-comp-button-shape-radius-size-m
+    );
+    --sinch-button-group-item-shape-radius-top-right: var(
+      --sinch-button-group-item-shape-radius-base
+    );
+    --sinch-button-group-item-shape-radius-top-left: var(
+      --sinch-button-group-item-shape-radius-base
+    );
+    --sinch-button-group-item-shape-radius-bottom-right: var(
+      --sinch-button-group-item-shape-radius-base
+    );
+    --sinch-button-group-item-shape-radius-bottom-left: var(
+      --sinch-button-group-item-shape-radius-base
+    );
+  }
+
+  #wrapper {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  /* divider */
+  :host(:is(:not(:first-of-type))) #wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(
+      --sinch-comp-button-color-secondary-default-text-initial
+    );
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 2;
+    top: 10%;
+    bottom: 10%;
+    left: -0.5px;
+    width: 1px;
+  }
+
+  #sinchButton {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    --sinch-local-border: none;
+  }
+
+  /* border radiuses */
+  :host #sinchButton {
+    --sinch-local-shape-radius-base: 0px;
+  }
+
+  :host(:is(:first-of-type)) #sinchButton {
+    --sinch-local-shape-radius-top-left: var(
+      --sinch-comp-button-shape-radius-size-m
+    );
+    --sinch-local-shape-radius-bottom-left: var(
+      --sinch-comp-button-shape-radius-size-m
+    );
+  }
+
+  :host(:is(:last-of-type)) #sinchButton {
+    --sinch-local-shape-radius-top-right: var(
+      --sinch-comp-button-shape-radius-size-m
+    );
+    --sinch-local-shape-radius-bottom-right: var(
+      --sinch-comp-button-shape-radius-size-m
+    );
+  }
+</style>
+
+<div id="wrapper">
+  <sinch-button id="sinchButton" />
+</div>
