@@ -18,8 +18,11 @@
       --sinch-local-shape-radius-base
     );
     --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-initial);
-
-    --sinch-local-border: 1px solid var(--sinch-local-color-border);
+    --sinch-local-border: 1px solid;
+    --sinch-local-border-top: var(--sinch-local-border);
+    --sinch-local-border-bottom: var(--sinch-local-border);
+    --sinch-local-border-left: var(--sinch-local-border);
+    --sinch-local-border-right: var(--sinch-local-border);
   }
 
   :host([disabled]) {
@@ -548,7 +551,11 @@
     position: absolute;
     inset: 0;
     background-color: var(--sinch-local-color-background);
-    border: var(--sinch-local-border);
+    border-top: var(--sinch-local-border-top);
+    border-bottom: var(--sinch-local-border-bottom);
+    border-right: var(--sinch-local-border-right);
+    border-left: var(--sinch-local-border-left);
+    border-color: var(--sinch-local-color-border);
     border-top-right-radius: var(--sinch-local-shape-radius-top-right);
     border-top-left-radius: var(--sinch-local-shape-radius-top-left);
     border-bottom-right-radius: var(--sinch-local-shape-radius-bottom-right);

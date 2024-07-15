@@ -69,16 +69,15 @@
     );
   }
 
+  /* fix border */
   #sinchButton {
     display: flex;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    --sinch-local-border: none;
+    --sinch-local-shape-radius-base: 0px;
   }
-
-  /* border radiuses */
-  :host #sinchButton {
+  :host(:is(:not(:first-of-type, :last-of-type))) #sinchButton {
     --sinch-local-shape-radius-base: 0px;
   }
 
@@ -98,6 +97,19 @@
     --sinch-local-shape-radius-bottom-right: var(
       --sinch-comp-button-shape-radius-size-m
     );
+  }
+
+  :host(:is(:not(:first-of-type, :last-of-type))) #sinchButton:not(:active) {
+    --sinch-local-border-left: none;
+    --sinch-local-border-right: none;
+  }
+
+  :host(:is(:first-of-type)) #sinchButton:not(:active) {
+    --sinch-local-border-right: none;
+  }
+
+  :host(:is(:last-of-type)) #sinchButton:not(:active) {
+    --sinch-local-border-left: none;
   }
 </style>
 
