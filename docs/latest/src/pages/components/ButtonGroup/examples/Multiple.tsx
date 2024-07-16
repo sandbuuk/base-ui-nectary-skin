@@ -37,10 +37,10 @@ const ButtonGroupRow = ({ type, numberOfItem }: ButtonGroupRowProps) => {
 export const MultipleExample: FC = () => {
   return (
     <>
-      <ButtonGroupRow type={'primary'} numberOfItem={2} />
-      <ButtonGroupRow type={'primary'} numberOfItem={3} />
-      <ButtonGroupRow type={'primary'} numberOfItem={4} />
-      <ButtonGroupRow type={'primary'} numberOfItem={5} />
+      <ButtonGroupRow type={'primary'} numberOfItem={2}/>
+      <ButtonGroupRow type={'primary'} numberOfItem={3}/>
+      <ButtonGroupRow type={'primary'} numberOfItem={4}/>
+      <ButtonGroupRow type={'primary'} numberOfItem={5}/>
     </>
   )
 }

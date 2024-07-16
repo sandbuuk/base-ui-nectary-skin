@@ -15,7 +15,7 @@ const ButtonGroupRow = ({ size }: ButtonGroupRowProps) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 10 }}>
-      <sinch-title type="s" level="3" text={size} />
+      <sinch-title type="s" level="3" text={size}/>
       <sinch-button-group size={size}>
         <sinch-button-group-item
           aria-label="button-1"
@@ -41,7 +41,7 @@ const ButtonGroupRow = ({ size }: ButtonGroupRowProps) => {
 export const SizeExample: FC = () => {
   return (
     <>
-      {sizeExValues.map((size) => <ButtonGroupRow key={size} size={size} />)}
+      {sizeExValues.map((size) => <ButtonGroupRow key={size} size={size}/>)}
     </>
   )
 }
