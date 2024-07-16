@@ -23,7 +23,7 @@ defineCustomElement('sinch-button-group-item', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$sinchButton = shadowRoot.querySelector('#sinchButton')!
+    this.#$sinchButton = shadowRoot.querySelector('#sinch-button-element')!
   }
 
   static get observedAttributes() {
