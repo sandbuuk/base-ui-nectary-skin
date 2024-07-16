@@ -87,46 +87,134 @@
     width: 100%;
     height: 100%;
 
-    --sinch-local-shape-radius-base: 0;
-  }
-
-  :host(:is(:not(:first-of-type, :last-of-type))) #sinch-button-element {
-    --sinch-local-shape-radius-base: 0;
+    --sinch-button-shape-radius-base: 0;
+    --sinch-button-shape-radius-top-right: 0;
+    --sinch-button-shape-radius-top-left: 0;
+    --sinch-button-shape-radius-bottom-right: 0;
+    --sinch-button-shape-radius-bottom-left: 0;
   }
 
   :host(:is(:first-of-type)) #sinch-button-element {
-    --sinch-local-shape-radius-top-left:
+    --sinch-button-shape-radius-top-left:
       var(
         --sinch-comp-button-shape-radius-size-m
       );
-    --sinch-local-shape-radius-bottom-left:
+    --sinch-button-shape-radius-bottom-left:
       var(
         --sinch-comp-button-shape-radius-size-m
       );
   }
 
   :host(:is(:last-of-type)) #sinch-button-element {
-    --sinch-local-shape-radius-top-right:
+    --sinch-button-shape-radius-top-right:
       var(
         --sinch-comp-button-shape-radius-size-m
       );
-    --sinch-local-shape-radius-bottom-right:
+    --sinch-button-shape-radius-bottom-right:
       var(
         --sinch-comp-button-shape-radius-size-m
+      );
+  }
+
+  :host([size="l"]:is(:first-of-type)) #sinch-button-element {
+    --sinch-button-shape-radius-top-left:
+      var(
+        --sinch-comp-button-shape-radius-size-l
+      );
+    --sinch-button-shape-radius-bottom-left:
+      var(
+        --sinch-comp-button-shape-radius-size-l
+      );
+  }
+
+  :host([size="l"]:is(:last-of-type)) #sinch-button-element {
+    --sinch-button-shape-radius-top-right:
+      var(
+        --sinch-comp-button-shape-radius-size-l
+      );
+    --sinch-button-shape-radius-bottom-right:
+      var(
+        --sinch-comp-button-shape-radius-size-l
+      );
+  }
+
+  :host([size="m"]:is(:first-of-type)) #sinch-button-element {
+    --sinch-button-shape-radius-top-left:
+      var(
+        --sinch-comp-button-shape-radius-size-m
+      );
+    --sinch-button-shape-radius-bottom-left:
+      var(
+        --sinch-comp-button-shape-radius-size-m
+      );
+  }
+
+  :host([size="m"]:is(:last-of-type)) #sinch-button-element {
+    --sinch-button-shape-radius-top-right:
+      var(
+        --sinch-comp-button-shape-radius-size-m
+      );
+    --sinch-button-shape-radius-bottom-right:
+      var(
+        --sinch-comp-button-shape-radius-size-m
+      );
+  }
+
+  :host([size="s"]:is(:first-of-type)) #sinch-button-element {
+    --sinch-button-shape-radius-top-left:
+      var(
+        --sinch-comp-button-shape-radius-size-s
+      );
+    --sinch-button-shape-radius-bottom-left:
+      var(
+        --sinch-comp-button-shape-radius-size-s
+      );
+  }
+
+  :host([size="s"]:is(:last-of-type)) #sinch-button-element {
+    --sinch-button-shape-radius-top-right:
+      var(
+        --sinch-comp-button-shape-radius-size-s
+      );
+    --sinch-button-shape-radius-bottom-right:
+      var(
+        --sinch-comp-button-shape-radius-size-s
+      );
+  }
+
+  :host([size="xs"]:is(:first-of-type)) #sinch-button-element {
+    --sinch-button-shape-radius-top-left:
+      var(
+        --sinch-comp-button-shape-radius-size-xs
+      );
+    --sinch-button-shape-radius-bottom-left:
+      var(
+        --sinch-comp-button-shape-radius-size-xs
+      );
+  }
+
+  :host([size="xs"]:is(:last-of-type)) #sinch-button-element {
+    --sinch-button-shape-radius-top-right:
+      var(
+        --sinch-comp-button-shape-radius-size-xs
+      );
+    --sinch-button-shape-radius-bottom-right:
+      var(
+        --sinch-comp-button-shape-radius-size-xs
       );
   }
 
   :host(:is(:not(:first-of-type, :last-of-type))) #sinch-button-element:not(:active) {
-    --sinch-local-border-left: none;
-    --sinch-local-border-right: none;
+    --sinch-button-border-left: none;
+    --sinch-button-border-right: none;
   }
 
   :host(:is(:first-of-type)) #sinch-button-element:not(:active) {
-    --sinch-local-border-right: none;
+    --sinch-button-border-right: none;
   }
 
   :host(:is(:last-of-type)) #sinch-button-element:not(:active) {
-    --sinch-local-border-left: none;
+    --sinch-button-border-left: none;
   }
 
   /* icon-button */
