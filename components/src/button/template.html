@@ -6,16 +6,18 @@
     outline: none;
     cursor: pointer;
     user-select: none;
-    --sinch-local-shape-radius-base: var(
+
+    --sinch-local-shape-radius-top-right: var(
       --sinch-comp-button-shape-radius-size-m
     );
-    --sinch-local-shape-radius-top-right: var(--sinch-local-shape-radius-base);
-    --sinch-local-shape-radius-top-left: var(--sinch-local-shape-radius-base);
+    --sinch-local-shape-radius-top-left: var(
+      --sinch-comp-button-shape-radius-size-m
+    );
     --sinch-local-shape-radius-bottom-right: var(
-      --sinch-local-shape-radius-base
+      --sinch-comp-button-shape-radius-size-m
     );
     --sinch-local-shape-radius-bottom-left: var(
-      --sinch-local-shape-radius-base
+      --sinch-comp-button-shape-radius-size-m
     );
     --sinch-local-shadow: var(--sinch-comp-button-shadow-secondary-initial);
     --sinch-local-border: 1px solid;
@@ -46,7 +48,16 @@
 
   :host([data-size="l"]) > #button {
     --sinch-local-size: var(--sinch-comp-button-size-container-l);
-    --sinch-local-shape-radius-base: var(
+    --sinch-local-shape-radius-top-right: var(
+      --sinch-comp-button-shape-radius-size-l
+    );
+    --sinch-local-shape-radius-top-left: var(
+      --sinch-comp-button-shape-radius-size-l
+    );
+    --sinch-local-shape-radius-bottom-right: var(
+      --sinch-comp-button-shape-radius-size-l
+    );
+    --sinch-local-shape-radius-bottom-left: var(
       --sinch-comp-button-shape-radius-size-l
     );
     --sinch-local-font: var(--sinch-comp-button-font-size-l-text);
@@ -55,7 +66,16 @@
 
   :host([data-size="m"]) > #button {
     --sinch-local-size: var(--sinch-comp-button-size-container-m);
-    --sinch-local-shape-radius-base: var(
+    --sinch-local-shape-radius-top-right: var(
+      --sinch-comp-button-shape-radius-size-m
+    );
+    --sinch-local-shape-radius-top-left: var(
+      --sinch-comp-button-shape-radius-size-m
+    );
+    --sinch-local-shape-radius-bottom-right: var(
+      --sinch-comp-button-shape-radius-size-m
+    );
+    --sinch-local-shape-radius-bottom-left: var(
       --sinch-comp-button-shape-radius-size-m
     );
     --sinch-local-font: var(--sinch-comp-button-font-size-m-text);
@@ -64,7 +84,16 @@
 
   :host([data-size="s"]) > #button {
     --sinch-local-size: var(--sinch-comp-button-size-container-s);
-    --sinch-local-shape-radius-base: var(
+    --sinch-local-shape-radius-top-right: var(
+      --sinch-comp-button-shape-radius-size-s
+    );
+    --sinch-local-shape-radius-top-left: var(
+      --sinch-comp-button-shape-radius-size-s
+    );
+    --sinch-local-shape-radius-bottom-right: var(
+      --sinch-comp-button-shape-radius-size-s
+    );
+    --sinch-local-shape-radius-bottom-left: var(
       --sinch-comp-button-shape-radius-size-s
     );
     --sinch-local-font: var(--sinch-comp-button-font-size-s-text);
@@ -74,7 +103,16 @@
   :host([data-size="xs"]) > #button {
     --sinch-local-size: var(--sinch-comp-button-size-container-xs);
     --sinch-local-padding: 8px;
-    --sinch-local-shape-radius-base: var(
+    --sinch-local-shape-radius-top-right: var(
+      --sinch-comp-button-shape-radius-size-xs
+    );
+    --sinch-local-shape-radius-top-left: var(
+      --sinch-comp-button-shape-radius-size-xs
+    );
+    --sinch-local-shape-radius-bottom-right: var(
+      --sinch-comp-button-shape-radius-size-xs
+    );
+    --sinch-local-shape-radius-bottom-left: var(
       --sinch-comp-button-shape-radius-size-xs
     );
     --sinch-local-font: var(--sinch-comp-button-font-size-s-text);
@@ -574,7 +612,18 @@
     content: "";
     inset: -3px;
     border: 2px solid var(--sinch-local-color-outline-focus);
-    border-radius: calc(var(--sinch-local-shape-radius-base) + 3px);
+    border-top-right-radius: calc(
+      var(--sinch-local-shape-radius-top-right) + 3px
+    );
+    border-top-left-radius: calc(
+      var(--sinch-local-shape-radius-top-left) + 3px
+    );
+    border-bottom-right-radius: calc(
+      var(--sinch-local-shape-radius-bottom-right) + 3px
+    );
+    border-bottom-left-radius: calc(
+      var(--sinch-local-shape-radius-bottom-left) + 3px
+    );
     pointer-events: none;
   }
 
