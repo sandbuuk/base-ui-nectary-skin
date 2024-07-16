@@ -130,7 +130,7 @@ const config: Configuration = {
       },
     ],
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   // @ts-ignore
   devServer: {
     host: '0.0.0.0',
