@@ -1,9 +1,11 @@
 <style>
   :host {
     display: block;
-    --sinch-local-divider-color: var(
-      --sinch-comp-button-color-secondary-default-text-initial
-    );
+
+    --sinch-local-divider-color:
+      var(
+        --sinch-comp-button-color-secondary-default-text-initial
+      );
   }
 
   #wrapper {
@@ -30,85 +32,100 @@
   }
 
   :host([type="primary"]) #wrapper::before {
-    --sinch-local-divider-color: var(
-      --sinch-comp-button-color-primary-default-text-initial
-    );
+    --sinch-local-divider-color:
+      var(
+        --sinch-comp-button-color-primary-default-text-initial
+      );
   }
 
   :host([type="secondary"]) #wrapper::before {
-    --sinch-local-divider-color: var(
-      --sinch-comp-button-color-secondary-default-text-initial
-    );
+    --sinch-local-divider-color:
+      var(
+        --sinch-comp-button-color-secondary-default-text-initial
+      );
   }
+
   :host([type="subtle-primary"]) #wrapper::before {
-    --sinch-local-divider-color: var(
-      --sinch-comp-button-color-subtle-primary-default-text-initial
-    );
+    --sinch-local-divider-color:
+      var(
+        --sinch-comp-button-color-subtle-primary-default-text-initial
+      );
   }
 
   :host([type="subtle-secondary"]) #wrapper::before {
-    --sinch-local-divider-color: var(
-      --sinch-comp-button-color-subtle-secondary-default-text-initial
-    );
+    --sinch-local-divider-color:
+      var(
+        --sinch-comp-button-color-subtle-secondary-default-text-initial
+      );
   }
+
   :host([type="cta-primary"]) #wrapper::before {
-    --sinch-local-divider-color: var(
-      --sinch-comp-button-color-cta-primary-default-text-initial
-    );
+    --sinch-local-divider-color:
+      var(
+        --sinch-comp-button-color-cta-primary-default-text-initial
+      );
   }
 
   :host([type="cta-secondary"]) #wrapper::before {
-    --sinch-local-divider-color: var(
-      --sinch-comp-button-color-cta-secondary-default-text-initial
-    );
+    --sinch-local-divider-color:
+      var(
+        --sinch-comp-button-color-cta-secondary-default-text-initial
+      );
   }
 
   :host([type="destructive"]) #wrapper::before {
-    --sinch-local-divider-color: var(
-      --sinch-comp-button-color-danger-default-text-initial
-    );
+    --sinch-local-divider-color:
+      var(
+        --sinch-comp-button-color-danger-default-text-initial
+      );
   }
 
   /* fix border */
-  #sinchButton {
+  #sinch-button-element {
     display: flex;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    --sinch-local-shape-radius-base: 0px;
-  }
-  :host(:is(:not(:first-of-type, :last-of-type))) #sinchButton {
-    --sinch-local-shape-radius-base: 0px;
+
+    --sinch-local-shape-radius-base: 0;
   }
 
-  :host(:is(:first-of-type)) #sinchButton {
-    --sinch-local-shape-radius-top-left: var(
-      --sinch-comp-button-shape-radius-size-m
-    );
-    --sinch-local-shape-radius-bottom-left: var(
-      --sinch-comp-button-shape-radius-size-m
-    );
+  :host(:is(:not(:first-of-type, :last-of-type))) #sinch-button-element {
+    --sinch-local-shape-radius-base: 0;
   }
 
-  :host(:is(:last-of-type)) #sinchButton {
-    --sinch-local-shape-radius-top-right: var(
-      --sinch-comp-button-shape-radius-size-m
-    );
-    --sinch-local-shape-radius-bottom-right: var(
-      --sinch-comp-button-shape-radius-size-m
-    );
+  :host(:is(:first-of-type)) #sinch-button-element {
+    --sinch-local-shape-radius-top-left:
+      var(
+        --sinch-comp-button-shape-radius-size-m
+      );
+    --sinch-local-shape-radius-bottom-left:
+      var(
+        --sinch-comp-button-shape-radius-size-m
+      );
   }
 
-  :host(:is(:not(:first-of-type, :last-of-type))) #sinchButton:not(:active) {
+  :host(:is(:last-of-type)) #sinch-button-element {
+    --sinch-local-shape-radius-top-right:
+      var(
+        --sinch-comp-button-shape-radius-size-m
+      );
+    --sinch-local-shape-radius-bottom-right:
+      var(
+        --sinch-comp-button-shape-radius-size-m
+      );
+  }
+
+  :host(:is(:not(:first-of-type, :last-of-type))) #sinch-button-element:not(:active) {
     --sinch-local-border-left: none;
     --sinch-local-border-right: none;
   }
 
-  :host(:is(:first-of-type)) #sinchButton:not(:active) {
+  :host(:is(:first-of-type)) #sinch-button-element:not(:active) {
     --sinch-local-border-right: none;
   }
 
-  :host(:is(:last-of-type)) #sinchButton:not(:active) {
+  :host(:is(:last-of-type)) #sinch-button-element:not(:active) {
     --sinch-local-border-left: none;
   }
 
@@ -123,7 +140,7 @@
 </style>
 
 <div id="wrapper">
-  <sinch-button id="sinchButton">
+  <sinch-button id="sinch-button-element">
     <div slot="left-icon"><slot id="left-icon" name="left-icon"></slot></div>
     <div slot="icon"><slot id="icon" name="icon"></slot></div>
     <div slot="right-icon"><slot id="right-icon" name="right-icon"></slot></div>
