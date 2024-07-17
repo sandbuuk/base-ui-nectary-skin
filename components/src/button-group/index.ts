@@ -2,11 +2,14 @@ import { typeValues } from '../button/utils'
 import {
   NectaryElement,
   defineCustomElement,
+  getLiteralAttribute,
   updateLiteralAttribute,
 } from '../utils'
-import { sizeExValues } from '../utils/size'
+import { DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
 import type { TSinchButtonGroupElement, TSinchButtonGroupReact } from './types'
+import type { TSinchButtonType } from '../button/types'
+import type { TSinchSizeEx } from '../utils/size'
 
 const template = document.createElement('template')
 
@@ -45,6 +48,22 @@ defineCustomElement('sinch-button-group', class extends NectaryElement {
       default:
         break
     }
+  }
+
+  set type(value: TSinchButtonType) {
+    updateLiteralAttribute(this, typeValues, 'type', value)
+  }
+
+  get type(): TSinchButtonType {
+    return getLiteralAttribute(this, typeValues, 'type', 'primary')
+  }
+
+  set size(size: TSinchSizeEx) {
+    updateLiteralAttribute(this, sizeExValues, 'size', size)
+  }
+
+  get size(): TSinchSizeEx {
+    return getLiteralAttribute(this, sizeExValues, 'size', DEFAULT_SIZE)
   }
 
   connectedCallback() {

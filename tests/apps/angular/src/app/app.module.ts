@@ -10,8 +10,8 @@ import { AvatarComponent } from '../components/Avatar/Avatar.component'
 import { BadgeComponent } from '../components/Badge/Badge.component'
 import { ButtonComponent } from '../components/Button/Button.component'
 import { CardComponent } from '../components/Card/Card.component'
-import { CardDnDComponent } from '../components/CardDnD/CardDnD.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
+import { CardDnDComponent } from '../components/CardDnD/CardDnD.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
 import { ChipComponent } from '../components/Chip/Chip.component'
 import { CodeTagComponent } from '../components/CodeTag/CodeTag.component'
@@ -21,13 +21,13 @@ import { ColorSwatchComponent } from '../components/ColorSwatch/ColorSwatch.comp
 import { DatePickerComponent } from '../components/DatePicker/DatePicker.component'
 import { DialogComponent } from '../components/Dialog/Dialog.component'
 import { EmojiPickerComponent } from '../components/EmojiPicker/EmojiPicker.component'
-import { GridComponent } from '../components/Grid/Grid.component'
-import { InlineAlertComponent } from '../components/InlineAlert/InlineAlert.component'
-import { InputComponent } from '../components/Input/Input.component'
 import { FieldComponent } from '../components/Field/Field.component'
 import { FileDropComponent } from '../components/FileDrop/FileDrop.component'
 import { FilePickerComponent } from '../components/FilePicker/FilePicker.component'
 import { FileStatusComponent } from '../components/FileStatus/FileStatus.component'
+import { GridComponent } from '../components/Grid/Grid.component'
+import { InlineAlertComponent } from '../components/InlineAlert/InlineAlert.component'
+import { InputComponent } from '../components/Input/Input.component'
 import { LinkComponent } from '../components/Link/Link.component'
 import { ListComponent } from '../components/List/List.component'
 import { PaginationComponent } from '../components/Pagination/Pagination.component'
@@ -49,8 +49,8 @@ import { SpinnerComponent } from '../components/Spinner/Spinner.component'
 import { TableComponent } from '../components/Table/Table.component'
 import { TabsComponent } from '../components/Tabs/Tabs.component'
 import { TagComponent } from '../components/Tag/Tag.component'
-import { TextareaComponent } from '../components/Textarea/Textarea.component'
 import { TextComponent } from '../components/Text/Text.component'
+import { TextareaComponent } from '../components/Textarea/Textarea.component'
 import { TileControlComponent } from '../components/TileControl/TileControl.component'
 import { TimePickerComponent } from '../components/TimePicker/TimePicker.component'
 import { TitleComponent } from '../components/Title/Title.component'
@@ -58,7 +58,8 @@ import { ToastManagerComponent } from '../components/ToastManager/ToastManager.c
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { AppComponent } from './app.component'
-import appRoutes from './router-config';
+import appRoutes from './router-config'
+import { ButtonGroupComponent } from 'src/components/ButtonGroup/ButtonGroup.component'
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import appRoutes from './router-config';
     AvatarComponent,
     BadgeComponent,
     ButtonComponent,
+    ButtonGroupComponent,
     CardComponent,
     CardDnDComponent,
     CardContainerComponent,
@@ -125,7 +127,7 @@ import appRoutes from './router-config';
   imports: [
     BrowserModule,
     CommonModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
   ],
   exports: [
     AppComponent,
@@ -133,4 +135,4 @@ import appRoutes from './router-config';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

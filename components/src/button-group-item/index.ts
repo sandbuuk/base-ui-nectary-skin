@@ -1,8 +1,11 @@
 import {
   defineCustomElement,
+  getAttribute,
+  getBooleanAttribute,
   getReactEventHandler,
   NectaryElement,
   updateAttribute,
+  updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchButtonGroupItemElement, TSinchButtonGroupItemReact } from './types'
@@ -44,15 +47,54 @@ defineCustomElement('sinch-button-group-item', class extends NectaryElement {
 
     this.role = 'button'
 
-    const forwardEvent = (e: Event) => this.dispatchEvent(new Event(e.type, { ...e }))
+    const forwardEvent = (e: Event) => this.dispatchEvent(new CustomEvent(e.type, { ...e }))
 
-    // Forward events from button up
-    this.#$sinchButton.addEventListener('focus', forwardEvent, { signal })
-    this.#$sinchButton.addEventListener('blur', forwardEvent, { signal })
-    this.#$sinchButton.addEventListener('keydown', forwardEvent, { signal })
-    this.#$sinchButton.addEventListener('-focus', () => getReactEventHandler(this, 'on-focus')?.(), { signal })
-    this.#$sinchButton.addEventListener('-blur', () => getReactEventHandler(this, 'on-blur')?.(), { signal })
-    this.#$sinchButton.addEventListener('-click', (e) => getReactEventHandler(this, 'on-click')?.(e), { signal })
+    this.addEventListener('-click', (e) => this.#onClickReactHandler(e), { signal })
+    this.addEventListener('-focus', () => this.#onFocusReactHandler(), { signal })
+    this.addEventListener('-blur', () => this.#onBlurReactHandler(), { signal })
+    this.#$sinchButton.addEventListener('-click', (e) => forwardEvent(e), { signal })
+    this.#$sinchButton.addEventListener('-focus', (e) => forwardEvent(e), { signal })
+    this.#$sinchButton.addEventListener('-blur', (e) => forwardEvent(e), { signal })
+  }
+
+  set text(value: string) {
+    updateAttribute(this, 'text', value)
+  }
+
+  get text(): string {
+    return getAttribute(this, 'text', '')
+  }
+
+  set disabled(isDisabled: boolean) {
+    updateBooleanAttribute(this, 'disabled', isDisabled)
+  }
+
+  get disabled() {
+    return getBooleanAttribute(this, 'disabled')
+  }
+
+  set toggled(isToggled: boolean) {
+    updateBooleanAttribute(this, 'toggled', isToggled)
+  }
+
+  get toggled() {
+    return getBooleanAttribute(this, 'toggled')
+  }
+
+  get focusable() {
+    return true
+  }
+
+  #onClickReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-click')?.(e)
+  }
+
+  #onFocusReactHandler = () => {
+    getReactEventHandler(this, 'on-focus')?.()
+  }
+
+  #onBlurReactHandler = () => {
+    getReactEventHandler(this, 'on-blur')?.()
   }
 })
 

@@ -13,6 +13,7 @@ import Alert from './components/Alert.vue'
 import Avatar from './components/Avatar.vue'
 import Badge from './components/Badge.vue'
 import Button from './components/Button.vue'
+import ButtonGroup from './components/ButtonGroup.vue'
 import Card from './components/Card.vue'
 import CardContainer from './components/CardContainer.vue'
 import CardDnD from './components/CardDnD.vue'
@@ -98,6 +99,7 @@ export default {
     Avatar,
     Badge,
     Button,
+    ButtonGroup,
     Card,
     CardContainer,
     CardDnD,

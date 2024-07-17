@@ -1,0 +1,56 @@
+import { useSearchParams } from 'react-router-dom'
+import type { FC } from 'react'
+import '@nectary/components/button-group'
+import '@nectary/components/button-group-item'
+import '@nectary/components/spinner'
+import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/expand-more'
+
+export const ButtonGroup: FC = () => {
+  const [search] = useSearchParams()
+  const isDisabled = search.get('disabled') != null
+  const isToggled = search.get('toggled') != null
+  const hasRightIcon = search.get('icon-right') != null
+  const hasIcon = search.get('icon') != null
+  const hasSpinner = search.get('spinner') != null
+  const text: any = search.get('text') ?? undefined
+  const type: any = search.get('type') ?? undefined
+  const size: any = search.get('size') ?? undefined
+  const onClick = () => window.dispatchEvent(new CustomEvent('sinch-button-click'))
+  const onFocus = () => window.dispatchEvent(new CustomEvent('sinch-button-focus'))
+  const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-button-blur'))
+
+  return (
+    <sinch-button-group type={type} size={size}>
+      <sinch-button-group-item
+        aria-label="button-1"
+        text={text}
+        on-click={onClick}
+        on-focus={onFocus}
+        on-blur={onBlur}
+        disabled={isDisabled}
+        toggled={isToggled}
+      >
+        {hasSpinner && <sinch-spinner slot="icon"/>}
+        {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
+        {hasRightIcon && <sinch-icon-expand-more slot="right-icon"/>}
+      </sinch-button-group-item>
+      <sinch-button-group-item
+        aria-label="button-2"
+        text={text}
+      >
+        {hasSpinner && <sinch-spinner slot="icon"/>}
+        {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
+        {hasRightIcon && <sinch-icon-expand-more slot="right-icon"/>}
+      </sinch-button-group-item>
+      <sinch-button-group-item
+        aria-label="button-3"
+        text={text}
+      >
+        {hasSpinner && <sinch-spinner slot="icon"/>}
+        {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
+        {hasRightIcon && <sinch-icon-expand-more slot="right-icon"/>}
+      </sinch-button-group-item>
+    </sinch-button-group>
+  )
+}
