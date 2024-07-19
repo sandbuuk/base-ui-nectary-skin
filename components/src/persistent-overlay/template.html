@@ -1,0 +1,15 @@
+<style>
+  #persisted-dialog {
+    --sinch-dialog-close-button-display: none;
+  }
+
+  ::slotted(*) {
+    display: block;
+  }
+</style>
+
+<sinch-dialog id="persisted-dialog">
+  <div slot="icon"><slot id="icon" name="icon"></slot></div>
+  <div slot="content"><slot name="content"></slot></div>
+  <div slot="buttons"><slot name="buttons"></slot></div>
+</sinch-dialog>
