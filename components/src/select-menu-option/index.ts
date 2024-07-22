@@ -90,7 +90,7 @@ export class SelectMenuOption extends NectaryElement {
   }
 
   matchesSearch(searchValue: string): boolean {
-    return this.text.toLowerCase().includes(searchValue)
+    return this.text.toLowerCase().includes(searchValue.toLowerCase())
   }
 }
 
