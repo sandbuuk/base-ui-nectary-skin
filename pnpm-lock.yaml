@@ -118,9 +118,6 @@ importers:
       '@babel/core':
         specifier: ^7.22.20
         version: 7.24.7
-      '@babel/plugin-transform-modules-commonjs':
-        specifier: ^7.24.1
-        version: 7.24.7(@babel/core@7.24.7)
       '@babel/plugin-transform-runtime':
         specifier: ^7.22.15
         version: 7.24.7(@babel/core@7.24.7)
@@ -142,9 +139,6 @@ importers:
       babel-plugin-transform-inline-environment-variables:
         specifier: ^0.4.4
         version: 0.4.4
-      rimraf:
-        specifier: ^5.0.7
-        version: 5.0.7
       typescript:
         specifier: ^5.2.2
         version: 5.5.2
@@ -14761,14 +14755,6 @@ packages:
     hasBin: true
     dependencies:
       glob: 9.3.5
-    dev: true
-
-  /rimraf@5.0.7:
-    resolution: {integrity: sha512-nV6YcJo5wbLW77m+8KjH8aB/7/rxQy9SZ0HY5shnwULfS+9nmTtVXAJET5NdZmCzA4fPI/Hm1wo/Po/4mopOdg==}
-    engines: {node: '>=14.18'}
-    hasBin: true
-    dependencies:
-      glob: 10.4.2
     dev: true
 
   /rollup@3.29.4:
