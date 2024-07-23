@@ -94,7 +94,7 @@ const config: TWebpackConfig = (environment) => {
           loader: '@saas/example-code-loader',
         },
         {
-          test: /\.d\.ts$/,
+          test: /\.ts$/,
           exclude: NODE_MODULES_REGEXP,
           resourceQuery: '?api',
           loader: '@saas/types-to-mdx-loader',
@@ -166,11 +166,11 @@ const config: TWebpackConfig = (environment) => {
       hints: false,
     },
     optimization: {
-    // chunkIds: 'named',
-    // concatenateModules: false,
+      // chunkIds: 'named',
+      // concatenateModules: false,
       minimize: true,
       minimizer: [
-      // @ts-ignore
+        // @ts-ignore
         new TerserPlugin({
           parallel: true,
           extractComments: false,
@@ -183,16 +183,16 @@ const config: TWebpackConfig = (environment) => {
           },
         }),
         new CssMinimizerPlugin(),
-      // new ImageMinimizerPlugin({
-      //   minimizer: {
-      //     implementation: ImageMinimizerPlugin.imageminMinify,
-      //     options: {
-      //       plugins: [
-      //         'imagemin-pngquant',
-      //       ],
-      //     },
-      //   },
-      // }),
+        // new ImageMinimizerPlugin({
+        //   minimizer: {
+        //     implementation: ImageMinimizerPlugin.imageminMinify,
+        //     options: {
+        //       plugins: [
+        //         'imagemin-pngquant',
+        //       ],
+        //     },
+        //   },
+        // }),
       ],
       splitChunks: {
         cacheGroups: {
@@ -215,9 +215,9 @@ const config: TWebpackConfig = (environment) => {
 
               if (
                 mod.resource.includes('/node_modules/react/') ||
-              mod.resource.includes('/node_modules/react-dom/') ||
-              mod.resource.includes('/node_modules/history/') ||
-              mod.resource.includes('/node_modules/react-router-dom/')
+                mod.resource.includes('/node_modules/react-dom/') ||
+                mod.resource.includes('/node_modules/history/') ||
+                mod.resource.includes('/node_modules/react-router-dom/')
               ) {
                 return false
               }
