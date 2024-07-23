@@ -77,6 +77,7 @@ const config: TWebpackConfig = {
     chunkFilename: 'js/[contenthash].js',
     // pathinfo: true,
   },
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
     alias: {

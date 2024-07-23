@@ -73,6 +73,7 @@ const config: TWebpackConfig = (environment) => {
         'react-dom': path.resolve('./node_modules/react-dom'),
       },
     },
+    devtool: 'source-map',
     module: {
       parser: {
         javascript: {

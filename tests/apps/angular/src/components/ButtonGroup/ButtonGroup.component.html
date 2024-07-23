@@ -1,0 +1,43 @@
+<sinch-button-group [attr.type]="type" [attr.size]="size">
+  <sinch-button-group-item
+    [attr.text]="text"
+    [attr.disabled]="isDisabled"
+    [attr.toggled]="isToggled"
+    aria-label="Button"
+    (-focus)="onFocus()"
+    (-blur)="onBlur()"
+    (-click)="onClick()"
+  >
+    <sinch-spinner *ngIf="hasSpinner" slot="icon"></sinch-spinner>
+    <sinch-icon-open-in-new
+      *ngIf="hasIcon"
+      slot="icon"
+    ></sinch-icon-open-in-new>
+    <sinch-icon-expand-more
+      *ngIf="hasRightIcon"
+      slot="right-icon"
+    ></sinch-icon-expand-more>
+  </sinch-button-group-item>
+  <sinch-button-group-item [attr.text]="text" aria-label="Button">
+    <sinch-spinner *ngIf="hasSpinner" slot="icon"></sinch-spinner>
+    <sinch-icon-open-in-new
+      *ngIf="hasIcon"
+      slot="icon"
+    ></sinch-icon-open-in-new>
+    <sinch-icon-expand-more
+      *ngIf="hasRightIcon"
+      slot="right-icon"
+    ></sinch-icon-expand-more>
+  </sinch-button-group-item>
+  <sinch-button-group-item [attr.text]="text" aria-label="Button">
+    <sinch-spinner *ngIf="hasSpinner" slot="icon"></sinch-spinner>
+    <sinch-icon-open-in-new
+      *ngIf="hasIcon"
+      slot="icon"
+    ></sinch-icon-open-in-new>
+    <sinch-icon-expand-more
+      *ngIf="hasRightIcon"
+      slot="right-icon"
+    ></sinch-icon-expand-more
+  ></sinch-button-group-item>
+</sinch-button-group>

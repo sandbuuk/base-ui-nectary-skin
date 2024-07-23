@@ -6,6 +6,7 @@ import { Alert } from './components/Alert'
 import { Avatar } from './components/Avatar'
 import { Badge } from './components/Badge'
 import { Button } from './components/Button'
+import { ButtonGroup } from './components/ButtonGroup'
 import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
 import { CardDnD } from './components/CardDnD'
@@ -94,6 +95,7 @@ const AppImpl = () => {
         <Route path="/avatar" element={<Avatar/>}/>
         <Route path="/badge" element={<Badge/>}/>
         <Route path="/button" element={<Button/>}/>
+        <Route path="/button-group" element={<ButtonGroup/>}/>
         <Route path="/card-container" element={<CardContainer/>}/>
         <Route path="/card-dnd" element={<CardDnD/>}/>
         <Route path="/card" element={<Card/>}/>

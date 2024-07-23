@@ -211,6 +211,8 @@ pages:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
     - ./scripts/ci-install-packages.sh
+    - pnpm --dir components build
+    - pnpm --dir assets build
   script:
     - VERSION=$(npm view @nectary/components version)
     - ./scripts/generate-docs.sh $VERSION
