@@ -11,6 +11,8 @@ export type TSinchSelectMenuElement = HTMLElement & {
   searchable: boolean | null,
   /** Text for search bar's placeholder */
   'search-placeholder': string,
+  /** Optionally control search value manually */
+  'search-value': string,
   /** Change value event */
   addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
   /** Change value event */
@@ -38,6 +40,8 @@ export type TSinchSelectMenuReact = TSinchElementReact<TSinchSelectMenuElement> 
   'aria-label': string,
   /** Change value handler */
   'on-search-change'?: (e: CustomEvent<string>) => void,
+  /** Optionally control search value manually */
+  'search-value'?: string,
   /** Change value handler */
   'on-change'?: (e: CustomEvent<string>) => void,
 }
