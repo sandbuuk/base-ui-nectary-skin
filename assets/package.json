@@ -2,90 +2,17 @@
   "name": "@nectary/assets",
   "version": "0.12.0",
   "files": [
-    "lib"
+    "**/*/*.css",
+    "**/*/*.json",
+    "**/*/*.js",
+    "**/*/*.d.ts",
+    "types.d.ts"
   ],
-  "exports": {
-    "./package.json": "./package.json",
-    "./changelog.md": "./changelog.md",
-    "./*/types": "./lib/esm/*/types.d.ts",
-    "./*.json": "./lib/esm/*.json",
-    "./icons": {
-      "types": "./lib/esm/icons",
-      "require": "./lib/cjs/icons",
-      "default": "./lib/esm/icons"
-    },
-    "./icons-branded": {
-      "types": "./lib/esm/icons-branded",
-      "require": "./lib/cjs/icons-branded",
-      "default": "./lib/esm/icons-branded"
-    },
-    "./icons-channel": {
-      "types": "./lib/esm/icons-channel",
-      "require": "./lib/cjs/icons-channel",
-      "default": "./lib/esm/icons-channel"
-    },
-    "./*/create-icon-class": {
-      "types": "./lib/esm/*/create-icon-class.d.ts",
-      "require": "./lib/cjs/*/create-icon-class.js",
-      "default": "./lib/esm/*/create-icon-class.js"
-    },
-    "./animations": {
-      "types": "./lib/esm/animations",
-      "require": "./lib/cjs/animations",
-      "default": "./lib/esm/animations"
-    },
-    "./*/create-animation-class": {
-      "types": "./lib/esm/*/create-animation-class.d.ts",
-      "require": "./lib/cjs/*/create-animation-class.js",
-      "default": "./lib/esm/*/create-animation-class.js"
-    },
-    "./logo": {
-      "types": "./lib/esm/logo",
-      "require": "./lib/cjs/logo",
-      "default": "./lib/esm/logo"
-    },
-    "./*/create-logo-class": {
-      "types": "./lib/esm/*/create-logo-class.d.ts",
-      "require": "./lib/cjs/*/create-logo-class.js",
-      "default": "./lib/esm/*/create-logo-class.js"
-    },
-    "./illustrations": {
-      "types": "./lib/esm/illustrations",
-      "require": "./lib/cjs/illustrations",
-      "default": "./lib/esm/illustrations"
-    },
-    "./*/create-illustration-class": {
-      "types": "./lib/esm/*/create-illustration-class.d.ts",
-      "require": "./lib/cjs/*/create-illustration-class.js",
-      "default": "./lib/esm/*/create-illustration-class.js"
-    },
-    "./*/utils": {
-      "types": "./lib/esm/*/utils.d.ts",
-      "require": "./lib/cjs/*/utils.js",
-      "default": "./lib/esm/*/utils.js"
-    },
-    "./utils/*": {
-      "types": "./lib/esm/utils/*.d.ts",
-      "require": "./lib/cjs/utils/*.js",
-      "default": "./lib/esm/utils/*.js"
-    },
-    "./utils": {
-      "types": "./lib/esm/utils/index.d.ts",
-      "require": "./lib/cjs/utils/index.js",
-      "default": "./lib/esm/utils/index.js"
-    },
-    "./*": {
-      "types": "./lib/esm/*/index.d.ts",
-      "require": "./lib/cjs/*/index.js",
-      "default": "./lib/esm/*/index.js"
-    }
-  },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "prebuild": "rimraf lib",
-    "build": "./build-lib.sh"
+    "build": "NODE_ENV=production babel . --extensions '.ts' --out-dir . && tsc --declaration --emitDeclarationOnly"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.15",
@@ -94,7 +21,6 @@
   "devDependencies": {
     "@babel/cli": "^7.22.15",
     "@babel/core": "^7.22.20",
-    "@babel/plugin-transform-modules-commonjs": "^7.24.1",
     "@babel/plugin-transform-runtime": "^7.22.15",
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-typescript": "^7.22.15",
@@ -102,7 +28,6 @@
     "@types/react": "^18.2.21",
     "babel-plugin-html-inline-minifier": "workspace:*",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
-    "rimraf": "^5.0.7",
     "typescript": "^5.2.2"
   }
 }
