@@ -189,7 +189,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
       return
     }
 
-    this.#$dialogContent.scrollTo(0, 0)
     this.#$dialog.close?.()
     enableScroll()
   }
