@@ -21,7 +21,7 @@ export const ButtonGroup: FC = () => {
   const onBlur = () => window.dispatchEvent(new CustomEvent('sinch-button-blur'))
 
   return (
-    <sinch-button-group type={type} size={size}>
+    <sinch-button-group aria-label="test" type={type} size={size}>
       <sinch-button-group-item
         aria-label="button-1"
         text={text}

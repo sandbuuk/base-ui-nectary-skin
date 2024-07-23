@@ -16,7 +16,7 @@ const ButtonGroupRow = ({ size }: ButtonGroupRowProps) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 10 }}>
       <sinch-title type="s" level="3" text={size}/>
-      <sinch-button-group size={size}>
+      <sinch-button-group aria-label="my-button-group" size={size}>
         <sinch-button-group-item
           aria-label="button-1"
           text="button-1"

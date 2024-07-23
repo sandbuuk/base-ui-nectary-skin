@@ -9,4 +9,5 @@ export type TSinchButtonGroupElement = HTMLElement & {
 export type TSinchButtonGroupReact = TSinchElementReact<TSinchButtonGroupElement> & {
   size?: TSinchButtonReact['size'],
   type?: TSinchButtonReact['type'],
+  'aria-label': TSinchButtonReact['aria-label'],
 }

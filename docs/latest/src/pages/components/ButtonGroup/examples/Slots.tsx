@@ -10,7 +10,7 @@ export const SlotsExample: FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <sinch-button-group type="cta-secondary">
+      <sinch-button-group aria-label="my-button-group" type="cta-secondary">
         <sinch-button-group-item
           aria-label="Click"
           on-click={() => setPressedButton(1)}

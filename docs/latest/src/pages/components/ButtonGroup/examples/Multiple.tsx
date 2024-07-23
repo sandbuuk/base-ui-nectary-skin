@@ -15,7 +15,7 @@ const ButtonGroupRow = ({ type, numberOfItem }: ButtonGroupRowProps) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 10 }}>
-      <sinch-button-group type={type}>
+      <sinch-button-group aria-label="my-button-group" type={type}>
         {new Array(numberOfItem).fill(null).map((_x, index) => {
           const buttonNumber = index + 1
 
