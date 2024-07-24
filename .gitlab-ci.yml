@@ -77,8 +77,6 @@ lint:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   script:
-    - pnpm --dir components build
-    - pnpm --dir assets build
     - pnpm lint
 
 visual-tests:
@@ -103,8 +101,6 @@ visual-tests:
       - BROWSER_FRAMEWORK: webkit-angular
         SHARD: [1, 2, 3]
   script:
-    - pnpm --dir components build
-    - pnpm --dir assets build
     - pnpm --dir tests test:ci-$BROWSER_FRAMEWORK --shard=$SHARD/3
   artifacts:
     when: on_failure
@@ -165,8 +161,6 @@ build-docs:
     - git config --global user.name Bot
     - git fetch origin refs/heads/docs
     - git checkout origin/docs -- public
-    - pnpm --dir components build
-    - pnpm --dir assets build
     - VERSION=$(npm view @nectary/components version)
     - ./scripts/generate-docs.sh $VERSION
     - git branch -D docs || true
@@ -211,8 +205,6 @@ pages:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
     - ./scripts/ci-install-packages.sh
-    - pnpm --dir components build
-    - pnpm --dir assets build
   script:
     - VERSION=$(npm view @nectary/components version)
     - ./scripts/generate-docs.sh $VERSION
