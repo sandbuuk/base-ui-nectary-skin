@@ -3,7 +3,7 @@
 cd "$(dirname "$0")"
 
 # Define the output file
-output_file="../components/src/standalone.ts"
+output_file="../components/standalone.ts"
 output_file="$(cd "$(dirname "$output_file")"; pwd)/$(basename "$output_file")"
 
 # Write the static content to the file
@@ -18,7 +18,7 @@ setNectaryRegistry(window.customElements)
 // Reminder: Keep this list updated as we add new components
 EOT
 
-cd ../components/src
+cd ../components
 
 # Append dynamic import statements for each subdirectory
 for dir in */ ; do

@@ -1,4 +1,4 @@
-import pkg from '../../package.json'
+import pkg from '../package.json'
 
 const nectaryDefinitions = new Map<string, CustomElementConstructor>()
 let nectaryRegistry: CustomElementRegistry | null = null
@@ -15,7 +15,7 @@ export const defineCustomElement = (name: string, constructor: CustomElementCons
   nectaryDefinitions.set(name, constructor)
 }
 
-export const setAssetsRegistry = (registry: CustomElementRegistry): void => {
+export const setNectaryRegistry = (registry: CustomElementRegistry): void => {
   if (nectaryRegistry !== null) {
     throw new Error('Nectary registry already set')
   }
@@ -38,13 +38,32 @@ declare global {
 }
 
 export class NectaryElement extends HTMLElement {
-  attachShadow(): ShadowRoot {
+  attachShadow(options?: Partial<ShadowRootInit>): ShadowRoot {
     return super.attachShadow({
       mode: 'open',
       delegatesFocus: false,
       customElements: nectaryRegistry!,
+      ...options,
     })
   }
 
   version = pkg.version
+
+  get focusable() {
+    return false
+  }
+
+  #isDomConnected = false
+
+  connectedCallback() {
+    this.#isDomConnected = true
+  }
+
+  disconnectedCallback() {
+    this.#isDomConnected = false
+  }
+
+  get isDomConnected(): boolean {
+    return this.#isDomConnected
+  }
 }

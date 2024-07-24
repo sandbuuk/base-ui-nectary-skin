@@ -14,7 +14,6 @@ import {
 import templateHTML from './template.html'
 import type { TSinchPersistentOverlayElement, TSinchPersistentOverlayReact } from './types'
 import type { TSinchDialogElement } from '../dialog/types'
-import '@nectary/components/dialog'
 
 const template = document.createElement('template')
 

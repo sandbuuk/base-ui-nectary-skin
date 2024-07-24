@@ -34,6 +34,8 @@ export type TSinchInputElement = HTMLElement & {
   addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
   /** Blur event */
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
+  /** Blur event */
+  addEventListener(type: '-wheel', listener: (e: CustomEvent<void>) => void): void,
   /** Text field type, `text` by default */
   setAttribute(name: 'type', value: TSinchInputType): void,
   /** Value */

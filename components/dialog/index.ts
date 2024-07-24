@@ -25,7 +25,6 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-dialog', class extends NectaryElement {
   #$dialog: HTMLDialogElement
-  #$dialogContent: HTMLDivElement
   #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
   #$actionWrapper: HTMLElement
@@ -39,7 +38,6 @@ defineCustomElement('sinch-dialog', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
     this.#$dialog = shadowRoot.querySelector('#dialog')!
-    this.#$dialogContent = shadowRoot.querySelector('#content')!
     this.#$closeButton = shadowRoot.querySelector('#close')!
     this.#$caption = shadowRoot.querySelector('#caption')!
     this.#$actionWrapper = shadowRoot.querySelector('#action')!
