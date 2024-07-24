@@ -3,7 +3,7 @@ import type { TSinchSize } from '../utils/size'
 
 export type TSinchInputType = 'text' | 'password' | 'number'
 
-export type TSinchInputClipboardEvent = CustomEvent<{value: string, replaceWith: (value: string) => void}>
+export type TSinchInputClipboardEvent = CustomEvent<{ value: string, replaceWith: (value: string) => void }>
 
 export type TSinchInputElement = HTMLElement & {
   /** Text field type, `text` by default */
@@ -34,7 +34,7 @@ export type TSinchInputElement = HTMLElement & {
   addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
   /** Blur event */
   addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
-  /** Blur event */
+  /** Wheel event */
   addEventListener(type: '-wheel', listener: (e: CustomEvent<void>) => void): void,
   /** Text field type, `text` by default */
   setAttribute(name: 'type', value: TSinchInputType): void,
@@ -86,4 +86,5 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   'on-cut'?: (e: TSinchInputClipboardEvent) => void,
   'on-copy'?: (e: TSinchInputClipboardEvent) => void,
   'on-paste'?: (e: TSinchInputClipboardEvent) => void,
+  'on-wheel'?: (e: CustomEvent<void> & { target: TSinchInputElement }) => void,
 }

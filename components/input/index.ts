@@ -97,6 +97,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#$input.addEventListener('compositionend', this.#onCompositionEnd, options)
     this.#$input.addEventListener('focus', this.#onInputFocus, options)
     this.#$input.addEventListener('blur', this.#onInputBlur, options)
+    this.#$input.addEventListener('wheel', this.#onWheel, options)
     this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange, options)
     this.#$leftSlot.addEventListener('slotchange', this.#onLeftSlotChange, options)
     this.#$rightSlot.addEventListener('slotchange', this.#onRightSlotChange, options)
@@ -106,6 +107,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.addEventListener('-copy', this.#onCopyReactHandler, options)
     this.addEventListener('-cut', this.#onCutReactHandler, options)
     this.addEventListener('-paste', this.#onPasteReactHandler, options)
+    this.addEventListener('-wheel', this.#onWheelReactHandler, options)
 
     this.#sizeContext.listen(this.#controller.signal)
     subscribeContext(this, 'size', this.#onContextSize, this.#controller.signal)
@@ -551,6 +553,12 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     }
   }
 
+  #onWheel = () => {
+    this.dispatchEvent(
+      new CustomEvent('-wheel')
+    )
+  }
+
   #onMaskInputAutofillChange = () => {
     const nextVal = this.#$input.value
 
@@ -822,6 +830,10 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   #onPasteReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-paste')?.(e)
+  }
+
+  #onWheelReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-wheel')?.(e)
   }
 })
 

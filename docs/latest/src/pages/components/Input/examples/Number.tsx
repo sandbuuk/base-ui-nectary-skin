@@ -19,6 +19,9 @@ export const NumberExample: FC = () => {
         placeholder="Only numbers allowed here"
         value={state}
         on-change={(e) => setState(e.detail)}
+        // Known issue with react and native number input causing numbers to change on scroll, see:
+        // https://stackoverflow.com/questions/63224459/disable-scrolling-on-input-type-number-in-react
+        on-wheel={(e) => e.target.blur()}
       />
     </sinch-field>
   )
