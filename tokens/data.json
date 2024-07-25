@@ -7541,19 +7541,19 @@
       "color": {
         "primary": {
           "default": {
-            "value": "#145A8F",
+            "value": "{ref.color.ocean.700}",
             "type": "color"
           },
           "hover": {
-            "value": "#0D304A",
+            "value": "{ref.color.ocean.600}",
             "type": "color"
           },
           "active": {
-            "value": "#116FAD",
+            "value": "{ref.color.ocean.800}",
             "type": "color"
           },
           "disabled": {
-            "value": "#145A8F",
+            "value": "{ref.color.ocean.700}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -7589,7 +7589,7 @@
             "default": {
               "background": {
                 "hover": {
-                  "value": "#145A8F",
+                  "value": "{ref.color.ocean.700}",
                   "type": "color",
                   "$extensions": {
                     "studio.tokens": {
@@ -7602,22 +7602,28 @@
                   }
                 },
                 "active": {
-                  "value": "#145A8F",
+                  "value": "{ref.color.ocean.700}",
                   "type": "color",
                   "$extensions": {
                     "studio.tokens": {
                       "modify": {
                         "type": "alpha",
-                        "value": "0.2",
+                        "value": "0.15",
                         "space": "lch"
                       }
                     }
                   }
                 }
               },
+              "border": {
+                "initial": {
+                  "value": "{ref.color.ocean.700}",
+                  "type": "color"
+                }
+              },
               "text": {
                 "initial": {
-                  "value": "{sys.color.text.default}",
+                  "value": "{ref.color.ocean.700}",
                   "type": "color"
                 }
               }
@@ -7625,13 +7631,22 @@
             "disabled": {
               "text": {
                 "initial": {
-                  "value": "{sys.color.text.disabled}",
-                  "type": "color"
+                  "value": "{ref.color.ocean.700}",
+                  "type": "color",
+                  "$extensions": {
+                    "studio.tokens": {
+                      "modify": {
+                        "type": "alpha",
+                        "value": "0.4",
+                        "space": "lch"
+                      }
+                    }
+                  }
                 }
               },
               "border": {
                 "initial": {
-                  "value": "#006063",
+                  "value": "{ref.color.ocean.700}",
                   "type": "color",
                   "$extensions": {
                     "studio.tokens": {
