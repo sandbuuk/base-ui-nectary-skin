@@ -7662,87 +7662,29 @@
             }
           },
           "subtle-primary": {
-            "disabled": {
-              "text": {
-                "initial": {
-                  "value": "#145A8F",
-                  "type": "color",
-                  "$extensions": {
-                    "studio.tokens": {
-                      "modify": {
-                        "type": "alpha",
-                        "value": "0.4",
-                        "space": "srgb"
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "default": {
               "background": {
                 "hover": {
-                  "value": "#EBEEF0",
+                  "value": "{ref.color.neutral.100}",
                   "type": "color"
                 },
                 "active": {
-                  "value": "#DCE2E5",
+                  "value": "{ref.color.neutral.200}",
                   "type": "color"
                 }
               }
             }
           },
-          "danger": {
+          "subtle-secondary": {
             "default": {
               "background": {
                 "hover": {
-                  "value": "#EB5454",
-                  "type": "color",
-                  "$extensions": {
-                    "studio.tokens": {
-                      "modify": {
-                        "type": "alpha",
-                        "value": "0.1",
-                        "space": "lch"
-                      }
-                    }
-                  }
+                  "value": "{ref.color.neutral.100}",
+                  "type": "color"
                 },
                 "active": {
-                  "value": "#EB5454",
-                  "type": "color",
-                  "$extensions": {
-                    "studio.tokens": {
-                      "modify": {
-                        "type": "alpha",
-                        "value": "0.2",
-                        "space": "lch"
-                      }
-                    }
-                  }
-                }
-              },
-              "text": {
-                "initial": {
-                  "value": "{sys.color.text.default}",
+                  "value": "{ref.color.neutral.200}",
                   "type": "color"
-                }
-              }
-            },
-            "disabled": {
-              "border": {
-                "initial": {
-                  "value": "#EB5454",
-                  "type": "color",
-                  "$extensions": {
-                    "studio.tokens": {
-                      "modify": {
-                        "type": "alpha",
-                        "value": "0.4",
-                        "space": "lch"
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -7837,6 +7779,101 @@
                 "initial": {
                   "value": "{sys.color.basic.transparent}",
                   "type": "color"
+                }
+              }
+            }
+          },
+          "danger": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "{sys.color.surface.primary.default}",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "{ref.color.raspberry.50}",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "{ref.color.raspberry.100}",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "{ref.color.raspberry.600}",
+                  "type": "color"
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "{ref.color.raspberry.600}",
+                  "type": "color"
+                }
+              },
+              "icon": {
+                "initial": {
+                  "value": "{ref.color.raspberry.600}",
+                  "type": "color"
+                }
+              },
+              "outline": {
+                "focus": {
+                  "value": "{sys.color.focus}",
+                  "type": "color"
+                }
+              }
+            },
+            "disabled": {
+              "background": {
+                "initial": {
+                  "value": "{sys.color.surface.primary.disabled}",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "{ref.color.raspberry.600}",
+                  "type": "color",
+                  "$extensions": {
+                    "studio.tokens": {
+                      "modify": {
+                        "type": "lighten",
+                        "value": "0.4",
+                        "space": "lch"
+                      }
+                    }
+                  }
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "{ref.color.raspberry.600}",
+                  "type": "color",
+                  "$extensions": {
+                    "studio.tokens": {
+                      "modify": {
+                        "type": "lighten",
+                        "value": "0.4",
+                        "space": "lch"
+                      }
+                    }
+                  }
+                }
+              },
+              "icon": {
+                "initial": {
+                  "value": "{ref.color.raspberry.600}",
+                  "type": "color",
+                  "$extensions": {
+                    "studio.tokens": {
+                      "modify": {
+                        "type": "lighten",
+                        "value": "0.4",
+                        "space": "lch"
+                      }
+                    }
+                  }
                 }
               }
             }
