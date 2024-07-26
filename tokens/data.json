@@ -7564,20 +7564,6 @@
                 }
               }
             }
-          },
-          "foreground": {
-            "value": "#FFFFFF",
-            "type": "color"
-          }
-        },
-        "cta": {
-          "hover": {
-            "value": "#FFCC66",
-            "type": "color"
-          },
-          "active": {
-            "value": "#FFAA00",
-            "type": "color"
           }
         }
       }
@@ -7875,38 +7861,6 @@
                     }
                   }
                 }
-              }
-            }
-          }
-        }
-      },
-      "date-picker": {
-        "day": {
-          "color": {
-            "default": {
-              "background": {
-                "hover": {
-                  "value": "#DEF2FF",
-                  "type": "color"
-                }
-              },
-              "range": {
-                "background": {
-                  "value": "#DEF2FF",
-                  "type": "color"
-                }
-              }
-            }
-          }
-        }
-      },
-      "progress": {
-        "color": {
-          "default": {
-            "background": {
-              "initial": {
-                "value": "#DEF2FF",
-                "type": "color"
               }
             }
           }
@@ -8799,7 +8753,6 @@
         "sys.color.primary.hover": "13166c6626cf41aaf93c07fdfcbe87e46c06f7b6",
         "sys.color.primary.active": "3a5581f3e851f2d6b2305253cc566465e4ffbf4f",
         "sys.color.primary.disabled": "29e3a3df58ea21323b50a83ce8a3ceddf10a3d09",
-        "sys.color.primary.foreground": "bd0cc419f22d25593f70a1ba0ca9159315078d05",
         "sys.color.cta.hover": "af1138838d782cb23bd189836d69a3a763074239",
         "sys.color.cta.active": "9045981a13b120bcc13c7c8c5988eb708d3a1fc3",
         "comp.button.color.secondary.default.background.hover": "5f3af9ff6b4c422c4cf7a40e15b4733f66d6dcb5",
