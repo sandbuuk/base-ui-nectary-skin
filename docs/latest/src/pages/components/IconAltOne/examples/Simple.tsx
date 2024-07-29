@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @nectary/imports */
-import { iconList } from '@nectary/components/icon-alt-one/switchFile'
-import React, { useState } from 'react'
+import { iconList } from '@nectary/components/icon-alt-one/iconNames'
+import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/icon-alt-one'
 import '@nectary/components/button-group'
@@ -12,15 +12,21 @@ import '@nectary/components/select-menu-option'
 import '@nectary/components/select-button'
 
 const iconsWrapperStyle: CSSProperties = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: '16px',
+  display: 'grid',
+  gridTemplateColumns: 'auto auto auto auto auto',
+  gap: 16,
 }
 
 const wrapperStyle: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   gap: 24,
+}
+
+const iconStyle: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
 }
 
 const inputStyle: CSSProperties = {
@@ -46,13 +52,18 @@ export const SimpleExample: FC = () => {
         on-change={onChange}
         aria-label="Search"
       >
-        <sinch-icon slot="icon" name="search" />
+        <sinch-icon slot="icon" name="search"/>
         <sinch-button slot="right" on-click={onClearSearch} aria-label="Clear search">
-          <sinch-icon slot="icon" name="close" />
+          <sinch-icon slot="icon" name="close"/>
         </sinch-button>
       </sinch-input>
       <div style={iconsWrapperStyle}>
-        {names.map((name) => React.createElement('sinch-icon-alt-one', { key: name, name }))}
+        {names.map((name) => (
+          <div key={name} style={iconStyle}>
+            <sinch-icon-alt-one name={name}/>
+            <sinch-text type="xxs">{name}</sinch-text>
+          </div>
+        ))}
       </div>
     </div>
   )

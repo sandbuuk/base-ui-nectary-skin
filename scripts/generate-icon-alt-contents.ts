@@ -31,31 +31,39 @@ async function getIcons(): Promise<string[]> {
 
 const iconDirs = await getIcons()
 
-await Promise.allSettled(iconDirs.map(async (iconName) => {
+const iconMap: Record<string, string> = {}
+
+for (const iconName of iconDirs) {
   const pathToHtml = path.join(iconsDir, iconName, 'template.html')
 
   const iconHtml = await fs.readFile(pathToHtml)
 
-  await fs.writeFile(path.join(componentsDir, `${iconName}.html`), iconHtml)
-}))
+  iconMap[iconName] = iconHtml.toString()
+}
 
-const ones = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine']
-const formatNameToJSVar = (name: string) => name.replace(/-/g, '').replace(/[0-9]/g, (a) => ones[parseInt(a)])
+const iconNamesFileName = 'iconNames'
 
-const switchFileContent = `
-${iconDirs.map((iconName) => `import ${formatNameToJSVar(iconName)}Html from "./icon-templates/${iconName}.html"`).join(';\n')}
+const iconNameToHtmlFileContent = `
+/* Generated file, use generate-icon-alt-contents script to update it!!  */
+import type { IconNames } from "./${iconNamesFileName}"
 
-export const iconList = [${iconDirs.map((iconName) => `"${iconName}"`).join(',')}] as const;
-export type IconNames = typeof iconList[number];
-
-export const iconNameToHtml = (name: string) => {
+export const iconNameToHtml = (name: IconNames) => {
   switch (name) {
-    ${iconDirs.map((iconName) => `
-      case "${iconName}":
-        return ${formatNameToJSVar(iconName)}Html
+    ${Object.entries(iconMap).map(([name, content]) => `
+      case '${name}':
+        return \`${content}\`
       `).join('\n')}
   }
 }
 `
 
-await fs.writeFile(path.join(componentsDir, `..`, `switchFile.ts`), switchFileContent)
+await fs.writeFile(path.join(componentsDir, `..`, `iconNameToHtml.ts`), iconNameToHtmlFileContent)
+
+const iconNamesFileContent = `
+/* Generated file use generate-icon-alt-contents script to update it!!  */
+export const iconList = [${Object.keys(iconMap).map((iconName) => `'${iconName}'`).join(',\n')}] as const;
+
+export type IconNames = typeof iconList[number];
+`
+
+await fs.writeFile(path.join(componentsDir, `..`, `${iconNamesFileName}.ts`), iconNamesFileContent)

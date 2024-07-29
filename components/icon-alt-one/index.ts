@@ -1,10 +1,12 @@
 import {
   defineCustomElement,
   getAttribute,
+  isLiteralValue,
   NectaryElement,
   updateAttribute,
 } from '../utils'
-import { iconNameToHtml } from './switchFile'
+import { iconNameToHtml } from './iconNameToHtml'
+import { iconList } from './iconNames'
 import wrapperHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from './types'
 
@@ -32,7 +34,7 @@ defineCustomElement('sinch-icon-alt-one', class extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'name': {
-        if (newVal !== null && newVal !== undefined) {
+        if (isLiteralValue(iconList, newVal)) {
           const newIconHtml = iconNameToHtml(newVal)
 
           if (newIconHtml !== undefined) {
@@ -43,10 +45,6 @@ defineCustomElement('sinch-icon-alt-one', class extends NectaryElement {
         break
       }
     }
-  }
-
-  connectedCallback(): void {
-
   }
 
   set name(value: string) {
