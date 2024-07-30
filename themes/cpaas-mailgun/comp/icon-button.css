@@ -1,8 +1,0 @@
-.nectary-theme-base.cpaas-theme-base.cpaas-theme-mailgun {
-  --sinch-comp-icon-button-color-secondary-default-background-active: #145A8F33;
-  --sinch-comp-icon-button-color-secondary-default-background-hover: #145A8F1A;
-  --sinch-comp-icon-button-color-secondary-default-text-initial: var(--sinch-sys-color-text-default);
-  --sinch-comp-icon-button-color-secondary-disabled-text-initial: var(--sinch-sys-color-text-disabled);
-  --sinch-comp-icon-button-color-tertiary-default-background-active: #DCE2E580;
-  --sinch-comp-icon-button-color-tertiary-default-background-hover: #EBEEF080;
-}
