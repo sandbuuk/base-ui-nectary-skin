@@ -1,5 +1,6 @@
 import { mkdir, readFile, stat, writeFile } from 'fs/promises'
 import path from 'path'
+import rimraf from 'rimraf'
 
 const [TOKENS_FILEPATH, OUTDIR, INPUT_THEME_KEY] = process.argv.slice(2)
 
@@ -130,6 +131,8 @@ if (!isJson(BASE_THEME_JSON)) {
   throw new Error(`Cannot get base theme json, named "${BASE_THEME_KEY}" from tokens json`)
 }
 
+const cleanupDir = (dir: string) => rimraf(dir)
+
 const prepareDir = async (dir: string) => {
   try {
     await stat(dir)
@@ -240,7 +243,7 @@ const refToValue = (valueObj: TValue): TValue => {
   return result
 }
 
-function* visitJsonObject(obj: TJson, accPath: string[] = []): Generator<{path: string[], value: TValue}> {
+function* visitJsonObject(obj: TJson, accPath: string[] = []): Generator<{ path: string[], value: TValue }> {
   if (isValue(obj)) {
     // Final leaf reached
     return yield { path: accPath, value: obj }
@@ -366,7 +369,7 @@ const jsonToCss = (jsonObj: any, prefix: string): string => {
   return `${data}}\n`
 }
 
-function* visitThemeSections(themeJson: any): Generator<{key: string, jsonObj: TJson, isComponent: boolean}> {
+function* visitThemeSections(themeJson: any): Generator<{ key: string, jsonObj: TJson, isComponent: boolean }> {
   const sectionKeysToProcess = Object.keys(themeJson)
 
   // Iterate over Theme sections like 'ref', 'sys', 'comp'
@@ -388,6 +391,10 @@ function* visitThemeSections(themeJson: any): Generator<{key: string, jsonObj: T
 }
 
 /* Process Theme */
+
+if (!isBaseThemeKey(SELECTED_THEME_KEY)) {
+  await cleanupDir(path.join(OUTDIR, COMPONENTS_OUTDIR))
+}
 
 // Process sections like 'ref' or 'sys'
 for (const { key, jsonObj, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
