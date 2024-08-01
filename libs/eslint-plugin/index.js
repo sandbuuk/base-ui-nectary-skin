@@ -100,6 +100,7 @@ module.exports = {
         handle('sinch-icon-branded-', '@nectary/assets/icons-branded/'),
         handle('sinch-icon-channel-', '@nectary/assets/icons-channel/'),
         handle('sinch-icon-', '@nectary/assets/icons/', ['sinch-icon-button']),
+        handle('sinch-labs-', '@nectary/labs/'),
         handle('sinch-', '@nectary/components/')
       ),
     },

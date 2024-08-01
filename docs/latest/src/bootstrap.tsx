@@ -1,5 +1,6 @@
 import { setAssetsRegistry } from '@nectary/assets/utils'
 import { setNectaryRegistry } from '@nectary/components/utils'
+import { setLabRegistry } from '@nectary/labs/utils'
 import '@nectary/theme-base'
 import '@nectary/theme-dark'
 import '@nectary/theme-message-media'
@@ -22,6 +23,7 @@ const registry = new CustomElementRegistry()
 
 setNectaryRegistry(registry)
 setAssetsRegistry(registry)
+setLabRegistry(registry)
 
 type TBootstrapOptions = {
   themeName: TThemeName,

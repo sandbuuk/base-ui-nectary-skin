@@ -82,16 +82,20 @@ const ReourceNavigationItems: FC<TResourceNaigationItems> = ({ resource }) => {
 export const ComponentsList: FC = () => {
   const { versionValue } = useNavigateVersion()
   const versionValueRef = useRef('')
+  const labComponentsRef = useRef<TResource<TSidebarItem[]>>()
   const componentsRef = useRef<TResource<TSidebarItem[]>>()
   const pagesRef = useRef<TResource<TSidebarItem[]>>()
   const compositionsRef = useRef<TResource<TSidebarItem[] | null>>()
 
   if (versionValueRef.current !== versionValue) {
     const promise = Reflect.get(versions, versionValue).bootstrap()
+
+    const labComponents: Promise<TSidebarItem[]> = promise.then(({ getLabsComponentsRoutes }: any) => getLabsComponentsRoutes())
     const components: Promise<TSidebarItem[]> = promise.then(({ getComponentsRoutes }: any) => getComponentsRoutes())
     const pages: Promise<TSidebarItem[]> = promise.then(({ getPagesRoutes }: any) => getPagesRoutes())
     const compositions: Promise<TSidebarItem[] | null> = promise.then((mod: any) => mod.getCompositionsRoutes?.() ?? null)
 
+    labComponentsRef.current = createResource(labComponents)
     componentsRef.current = createResource(components)
     pagesRef.current = createResource(pages)
     compositionsRef.current = createResource(compositions)
@@ -111,6 +115,14 @@ export const ComponentsList: FC = () => {
             <ReourceNavigationItems resource={pagesRef.current!}/>
             <div className="divider"/>
             <ReourceNavigationItems resource={componentsRef.current!}/>
+          </NavigationList>
+        </Suspense>
+      </NavigationGroup>
+
+      <NavigationGroup text="Labs (WIP)">
+        <Suspense fallback={<Loading/>}>
+          <NavigationList>
+            <ReourceNavigationItems resource={labComponentsRef.current!}/>
           </NavigationList>
         </Suspense>
       </NavigationGroup>
