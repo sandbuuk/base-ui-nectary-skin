@@ -6932,6 +6932,138 @@
       }
     }
   },
+  "Sass/SimpleTexting": {
+    "sys": {
+      "color": {
+        "primary": {
+          "default": {
+            "value": "#0067FF",
+            "type": "color"
+          },
+          "hover": {
+            "value": "#0058D9",
+            "type": "color"
+          },
+          "active": {
+            "value": "#114369",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#C8E6F9",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "{sys.color.basic.pure}",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "comp": {
+      "button": {
+        "color": {
+          "secondary": {
+            "default": {
+              "background": {
+                "initial": {
+                  "value": "#DEF2FF",
+                  "type": "color"
+                },
+                "hover": {
+                  "value": "#C8E6F9",
+                  "type": "color"
+                },
+                "active": {
+                  "value": "#A1D5F5",
+                  "type": "color"
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "#0A5D9A",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            },
+            "disabled": {
+              "background": {
+                "initial": {
+                  "value": "#F3FAFE",
+                  "type": "color"
+                }
+              },
+              "text": {
+                "initial": {
+                  "value": "#A1D5F5",
+                  "type": "color"
+                }
+              },
+              "border": {
+                "initial": {
+                  "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        }
+      },
+      "progress": {
+        "color": {
+          "default": {
+            "background": {
+              "initial": {
+                "value": "#C8E6F9",
+                "type": "color"
+              }
+            }
+          }
+        }
+      },
+      "date-picker": {
+        "day": {
+          "color": {
+            "default": {
+              "range": {
+                "background": {
+                  "value": "red",
+                  "type": "color"
+                }
+              },
+              "background": {
+                "hover": {
+                  "value": "pink",
+                  "type": "color"
+                }
+              }
+            }
+          }
+        }
+      },
+      "tooltip": {
+        "color": {
+          "text": {
+            "value": "{sys.color.basic.pure}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{ref.color.neutral.900}",
+            "type": "color"
+          }
+        },
+        "shape-radius": {
+          "value": "{sys.shape-radius.s}",
+          "type": "borderRadius"
+        }
+      }
+    }
+  },
   "cPaas/Base theme": {
     "sys": {
       "shape-radius": {
@@ -7875,7 +8007,8 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
-        "Sass/ MessageMedia": "enabled"
+        "Sass/ MessageMedia": "enabled",
+        "Sass/SimpleTexting": "disabled"
       },
       "$figmaCollectionId": "VariableCollectionId:52441:28293",
       "$figmaModeId": "52441:0",
@@ -8746,7 +8879,8 @@
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
         "cPaas/Base theme": "enabled",
-        "cPaas/Dashboard": "enabled"
+        "cPaas/Dashboard": "enabled",
+        "Sass/SimpleTexting": "disabled"
       },
       "$figmaVariableReferences": {
         "sys.color.primary.default": "50785746e5907797f583e4f8e91ee734f7244b13",
@@ -9620,7 +9754,8 @@
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
         "cPaas/Base theme": "enabled",
-        "cPaas/MailGun": "enabled"
+        "cPaas/MailGun": "enabled",
+        "Sass/SimpleTexting": "disabled"
       },
       "$figmaCollectionId": "VariableCollectionId:52441:28293",
       "$figmaModeId": "52441:2",
@@ -10497,7 +10632,8 @@
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
         "cPaas/Base theme": "enabled",
-        "cPaas/MailJet": "enabled"
+        "cPaas/MailJet": "enabled",
+        "Sass/SimpleTexting": "disabled"
       },
       "$figmaCollectionId": "VariableCollectionId:52441:28293",
       "$figmaModeId": "52441:3",
@@ -11372,7 +11508,8 @@
       "name": "Sinch Engage",
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
-        "Nectary / Base theme": "enabled"
+        "Nectary / Base theme": "enabled",
+        "Sass/SimpleTexting": "disabled"
       },
       "group": "Theme",
       "$figmaCollectionId": "VariableCollectionId:52441:28293",
@@ -12243,7 +12380,8 @@
       "$figmaStyleReferences": {},
       "selectedTokenSets": {
         "Nectary / Base theme": "enabled",
-        "Nectary / Dark theme": "enabled"
+        "Nectary / Dark theme": "enabled",
+        "Sass/SimpleTexting": "disabled"
       },
       "$figmaCollectionId": "VariableCollectionId:52441:28293",
       "$figmaModeId": "57954:0",
@@ -13107,6 +13245,16 @@
         "comp.button.color.cta-primary-secondary.disabled.border.initial": "a92e4358791b0b200569e658fda989c85bcdece7"
       },
       "group": "Theme"
+    },
+    {
+      "id": "41eda664d57c6b6b4efab532daf70b9f2ebfed01",
+      "name": "SimpleTexting",
+      "$figmaStyleReferences": {},
+      "selectedTokenSets": {
+        "Nectary / Base theme": "enabled",
+        "Sass/SimpleTexting": "enabled"
+      },
+      "group": "Theme"
     }
   ],
   "$metadata": {
@@ -13114,6 +13262,7 @@
       "Nectary / Base theme",
       "Nectary / Dark theme",
       "Sass/ MessageMedia",
+      "Sass/SimpleTexting",
       "cPaas/Base theme",
       "cPaas/MailGun",
       "cPaas/MailJet",
