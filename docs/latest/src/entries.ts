@@ -2,6 +2,13 @@ import type { TRouteTab } from 'docs-common'
 
 declare let REQ_CHUNK_NAME: string
 
+export const labsComponentsReq = import.meta.webpackContext!('./pages/labComponents', {
+  regExp: /^\.\/[^_]+\/.*\.mdx?$/,
+  recursive: true,
+  mode: 'lazy',
+  chunkName: REQ_CHUNK_NAME,
+})
+
 export const componentReq = import.meta.webpackContext!('./pages/components', {
   regExp: /^\.\/[^_]+\/.*\.mdx?$/,
   recursive: true,
@@ -21,6 +28,19 @@ export const compositionsReq = import.meta.webpackContext!('./pages/compositions
   recursive: true,
   mode: 'lazy',
   chunkName: REQ_CHUNK_NAME,
+})
+
+const labsComponentsRoutes = labsComponentsReq.keys().map((key) => {
+  const name = key.replace(/^\.\/(.+?)\/.+$/, '$1')
+  const tab = key.replace(/^\.\/.+\/\d{2}-(.+).mdx?$/, '$1')
+  const route = `/labComponents/${name.toLowerCase()}/${tab.toLowerCase()}`
+
+  return {
+    key,
+    name,
+    route,
+    tab,
+  }
 })
 
 const componentsRoutes = componentReq.keys().map((key) => {
@@ -135,6 +155,10 @@ export const getCompositionsRouteTitle = (route: string) => {
   const name = compositionsRouteNameMap[route] ?? null
 
   return name
+}
+
+export const getLabsComponentsRoutes = () => {
+  return labsComponentsRoutes
 }
 
 export const getComponentsRoutes = () => {

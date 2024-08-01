@@ -61,6 +61,7 @@ const babelOptions: TBabelOptions = {
       'babel-plugin-polyfill-corejs3',
       { method: 'usage-global' },
     ],
+    ['@babel/plugin-proposal-decorators', { version: '2023-11' }],
   ],
   shouldPrintComment: (val: string) => val.startsWith(' webpackChunkName'),
 }

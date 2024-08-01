@@ -115,6 +115,7 @@ export const App: FC = () => {
             <Route path="/testing" element={<TestingPage/>}/>
             <Route path="/V3Migration" element={<V3MigrationPage/>}/>
             <Route path="/faq" element={<FAQPage/>}/>
+            <Route path="/labComponents/*" element={<ComponentsPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
             <Route path="/compositions/*" element={<ComponentsPage/>}/>
             <Route path="*" element={<NotFoundPage/>}/>

@@ -15,5 +15,7 @@
     "moduleResolution": "Bundler",
     "noUnusedLocals": true,
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
   },
 }

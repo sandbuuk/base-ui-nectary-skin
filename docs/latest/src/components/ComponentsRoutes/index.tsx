@@ -9,9 +9,11 @@ import {
   getCompositionsRouteTabs,
   getCompositionsRouteTitle,
   getCompositionsRoutes,
+  getLabsComponentsRoutes,
   getPagesRoutes,
   getRouteTabs,
   getRouteTitle,
+  labsComponentsReq,
   pagesReq,
 } from '~/entries'
 
@@ -55,6 +57,31 @@ export const ComponentsRoutes = memo(() => {
       >
         {getComponentsRoutes().map(({ key, route }) => {
           const Component = lazyScrollIntoView(() => componentReq(key))
+
+          return (
+            <Route
+              key={key}
+              path={route}
+              element={(
+                <Suspense fallback={<Loading/>}>
+                  <Component/>
+                </Suspense>
+              )}
+            />
+          )
+        })}
+      </Route>
+      <Route
+        path="/labComponents"
+        element={(
+          <TabsLayout
+            getRouteTabInfo={getRouteTabs}
+            getRouteTitle={getRouteTitle}
+          />
+        )}
+      >
+        {getLabsComponentsRoutes().map(({ key, route }) => {
+          const Component = lazyScrollIntoView(() => labsComponentsReq(key))
 
           return (
             <Route
