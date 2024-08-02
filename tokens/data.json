@@ -6996,12 +6996,6 @@
                   "type": "color"
                 }
               },
-              "text": {
-                "initial": {
-                  "value": "#0A5D9A",
-                  "type": "color"
-                }
-              },
               "border": {
                 "initial": {
                   "value": "rgba(0,0,0,0)",
@@ -7025,6 +7019,16 @@
               "border": {
                 "initial": {
                   "value": "rgba(0,0,0,0)",
+                  "type": "color"
+                }
+              }
+            }
+          },
+          "subtle-secondary": {
+            "default": {
+              "icon": {
+                "initial": {
+                  "value": "{sys.color.primary.default}",
                   "type": "color"
                 }
               }
@@ -13277,7 +13281,6 @@
         "comp.button.color.secondary.default.background.initial": "5218b02bddcc926cfff16c7356388c7a20a7016e",
         "comp.button.color.secondary.default.background.hover": "5f3af9ff6b4c422c4cf7a40e15b4733f66d6dcb5",
         "comp.button.color.secondary.default.background.active": "bf90b272aa0c6acd067d40d554bf7b8058600694",
-        "comp.button.color.secondary.default.text.initial": "40b985c3ad2191848af85f213fa92a3aecb10ff4",
         "comp.button.color.secondary.default.border.initial": "e206118fed3dc4a0019a26bdfe97acffc6463358",
         "comp.button.color.secondary.disabled.background.initial": "18e38c309057de02cc2cf5af530854aaae26d2ba",
         "comp.button.color.secondary.disabled.text.initial": "55cff00a52949b9a6bc132720aec390c20c2708c",
@@ -13601,7 +13604,6 @@
         "comp.button.color.subtle-secondary.default.background.active": "b822c7b4dbd8e05b0d120282b535ab385536d223",
         "comp.button.color.subtle-secondary.default.border.initial": "e7e9200a1c0cd34c57ef096d87556f19466ee01f",
         "comp.button.color.subtle-secondary.default.icon.initial": "d1618d60d9524aea1811382a9c6d306d406268f4",
-        "comp.button.color.subtle-secondary.default.text.initial": "8b3541ed22b02a84489a3ff54a09434105fa9358",
         "comp.button.color.subtle-secondary.default.outline.focus": "eba0fc048a91cadb9456109ed73aa4f817cce276",
         "comp.button.color.subtle-secondary.disabled.background.initial": "db63e07cfbd744fc50a091cd6b7174959b3f91d8",
         "comp.button.color.subtle-secondary.disabled.border.initial": "3e1d65ba7d2548e2791177bd6a40702f7db78a8f",
