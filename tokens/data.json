@@ -7023,16 +7023,6 @@
                 }
               }
             }
-          },
-          "subtle-secondary": {
-            "default": {
-              "icon": {
-                "initial": {
-                  "value": "{sys.color.primary.default}",
-                  "type": "color"
-                }
-              }
-            }
           }
         }
       },
@@ -13603,7 +13593,6 @@
         "comp.button.color.subtle-secondary.default.background.hover": "cf3a3ce1187e7ce0f4936a2fc4cf52a4849ae01e",
         "comp.button.color.subtle-secondary.default.background.active": "b822c7b4dbd8e05b0d120282b535ab385536d223",
         "comp.button.color.subtle-secondary.default.border.initial": "e7e9200a1c0cd34c57ef096d87556f19466ee01f",
-        "comp.button.color.subtle-secondary.default.icon.initial": "d1618d60d9524aea1811382a9c6d306d406268f4",
         "comp.button.color.subtle-secondary.default.outline.focus": "eba0fc048a91cadb9456109ed73aa4f817cce276",
         "comp.button.color.subtle-secondary.disabled.background.initial": "db63e07cfbd744fc50a091cd6b7174959b3f91d8",
         "comp.button.color.subtle-secondary.disabled.border.initial": "3e1d65ba7d2548e2791177bd6a40702f7db78a8f",
