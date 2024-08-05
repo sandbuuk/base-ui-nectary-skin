@@ -1,14 +1,14 @@
-import { customElement } from "solid-element";
+import { customElement } from 'solid-element'
 import {
   createComputed,
   createMemo,
   createSignal,
   onCleanup,
   onMount,
-} from "solid-js";
-import html from "solid-js/html";
-import pkg from "./package.json";
-import { defineCustomElement } from "./utils";
+} from 'solid-js'
+import html from 'solid-js/html'
+import pkg from './package.json'
+import { defineCustomElement } from './utils'
 
 const style = `
 :where(*, *::before, *::after) {
@@ -65,56 +65,7 @@ section {
     border-end-end-radius: 16px;
   }
 }
-`;
-
-/**
- * Container for channel previews in a phone skeleton.
- * This container uses a custom scaling where the internal elements are scaled to fit the container from a fixed size.
- * Because of the fixed size, absolute units (px) are preferred over relative units (rem, em) for the internal elements.
- *
- * @param props.locale Clock locale.
- * @param props.clock Clock `Intl.DateTimeFormat` options.
- * @param props.children Content to display in the phone container.
- */
-const PhonePreviewSkeleton = (
-  props: { locale: string; clock: Intl.DateTimeFormatOptions },
-  options: { element: any }
-) => {
-  const host = options.element as HTMLElement;
-  const observer = new ResizeObserver(() => {
-    const style = getComputedStyle(host);
-    const baseSize = parseFloat(style.getPropertyValue("--base-size"));
-    const currentSize = host.getBoundingClientRect().width;
-    host.style.setProperty("--scale", `${currentSize / baseSize}`);
-  });
-  onMount(() => {
-    const section = host.shadowRoot!.querySelector("section")!;
-    observer.observe(host);
-    observer.observe(section);
-  });
-  onCleanup(() => observer.disconnect());
-
-  const fmt = createMemo(() => Intl.DateTimeFormat(props.locale, props.clock));
-  const [clock, setClock] = createSignal();
-  const interval = setInterval(() => setClock(fmt().format()), 60000);
-  createComputed(() => setClock(fmt().format()));
-  onCleanup(() => clearInterval(interval));
-
-  return html`
-    <style>
-      ${style}
-    </style>
-    <section>
-      <header>
-        <span>${clock}</span>
-        <${StatusSvg} />
-      </header>
-      <div>
-        <slot />
-      </div>
-    </section>
-  `;
-};
+`
 
 const StatusSvg = () => html`
   <svg viewBox="0 0 50 12">
@@ -130,29 +81,82 @@ const StatusSvg = () => html`
       d="M32.3 4.4a2 2 0 0 1 1.9-1.9H45c1.1 0 2 .9 2 1.9V8c0 1.1-.9 1.9-2 1.9H34.2c-1 0-1.9-.8-1.9-1.9V4.4Z"
     />
   </svg>
-`;
+`
+
+/**
+ * Container for channel previews in a phone skeleton.
+ * This container uses a custom scaling where the internal elements are scaled to fit the container from a fixed size.
+ * Because of the fixed size, absolute units (px) are preferred over relative units (rem, em) for the internal elements.
+ *
+ * @param props.locale Clock locale.
+ * @param props.clock Clock `Intl.DateTimeFormat` options.
+ * @param props.children Content to display in the phone container.
+ */
+const PhonePreviewSkeleton = (
+  props: { locale: string, clock: Intl.DateTimeFormatOptions },
+  options: { element: any }
+) => {
+  const host = options.element as HTMLElement
+  const observer = new ResizeObserver(() => {
+    const style = getComputedStyle(host)
+    const baseSize = parseFloat(style.getPropertyValue('--base-size'))
+    const currentSize = host.getBoundingClientRect().width
+
+    host.style.setProperty('--scale', `${currentSize / baseSize}`)
+  })
+
+  onMount(() => {
+    const section = host.shadowRoot!.querySelector('section')!
+
+    observer.observe(host)
+    observer.observe(section)
+  })
+  onCleanup(() => observer.disconnect())
+
+  const fmt = createMemo(() => Intl.DateTimeFormat(props.locale, props.clock))
+  const [clock, setClock] = createSignal()
+  const interval = setInterval(() => setClock(fmt().format()), 60000)
+
+  createComputed(() => setClock(fmt().format()))
+  onCleanup(() => clearInterval(interval))
+
+  return html`
+    <style>
+      ${style}
+    </style>
+    <section>
+      <header>
+        <span>${clock}</span>
+        <${StatusSvg} />
+      </header>
+      <div>
+        <slot />
+      </div>
+    </section>
+  `
+}
 
 defineCustomElement(
-  "sinch-labs-phone-preview-skeleton",
+  'sinch-labs-phone-preview-skeleton',
   customElement(
     `sinch-labs-phone-preview-skeleton-${pkg.version}`,
-    { locale: "en-US", clock: { hour: "2-digit", minute: "2-digit" } },
+    { locale: 'en-US', clock: { hour: '2-digit', minute: '2-digit' } },
     PhonePreviewSkeleton
   )
-);
+)
 
-type Props = Partial<Parameters<typeof PhonePreviewSkeleton>[0]>;
-type ElementProps = Partial<{ [K in keyof Props]: Props[K] | string }>;
+type Props = Partial<Parameters<typeof PhonePreviewSkeleton>[0]>
+type ElementProps = Partial<{ [K in keyof Props]: Props[K] | string }>
 
 declare global {
   interface HTMLElementTagNameMap {
-    "sinch-labs-phone-preview-skeleton": ElementProps & HTMLElement;
+    'sinch-labs-phone-preview-skeleton': ElementProps & HTMLElement,
   }
   namespace JSX {
     interface IntrinsicElements {
-      "sinch-labs-phone-preview-skeleton": ElementProps &
+      'sinch-labs-phone-preview-skeleton': ElementProps &
         React.ClassAttributes<HTMLElement> &
-        React.HTMLAttributes<HTMLElement>;
+        React.HTMLAttributes<HTMLElement>,
     }
   }
 }

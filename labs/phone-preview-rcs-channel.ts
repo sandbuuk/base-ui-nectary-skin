@@ -1,9 +1,10 @@
-import "@nectary/components/icon";
-import { customElement } from "solid-element";
-import { Accessor, createSignal, For } from "solid-js";
-import html from "solid-js/html";
-import pkg from "./package.json";
-import { defineCustomElement } from "./utils";
+import '@nectary/components/icon'
+import { customElement } from 'solid-element'
+import { createSignal, For } from 'solid-js'
+import html from 'solid-js/html'
+import pkg from './package.json'
+import { defineCustomElement } from './utils'
+import type { Accessor } from 'solid-js'
 
 const style = `
 :where(*, *::before, *::after) {
@@ -176,7 +177,121 @@ const style = `
     border-color: var(--sinch-sys-color-surface-secondary-active);
   }
 }
-`;
+`
+
+const Actions = (props: Parameters<typeof RcsChannelPreview>[0]) => {
+  const number = () => props.phones.at(0)?.number ?? ''
+  const url = () => props.websites.at(0)?.url ?? ''
+  const email = () => props.emails.at(0)?.address ?? ''
+  const numberHref = () => `tel:${number()}`
+  const urlHref = url
+  const emailHref = () => `mailto:${email()}`
+
+  return html`
+    <section class="actions">
+      <a inert=${() => number() === ''} target="_blank" href=${numberHref}>
+        <sinch-icon name="call" />
+        Call
+      </a>
+      <a inert=${() => url() === ''} target="_blank" href=${urlHref}>
+        <sinch-icon name="public" />
+        Website
+      </a>
+      <a inert=${() => email() === ''} target="_blank" href=${emailHref}>
+        <sinch-icon name="mail" />
+        Email
+      </a>
+    </section>
+  `
+}
+
+const Info = (props: Parameters<typeof RcsChannelPreview>[0]) => {
+  const phones = () =>
+    ((props.phones.length > 0)
+      ? props.phones
+      : [{ label: 'Contact us', number: '+1234567890' }])
+  const websites = () =>
+    ((props.websites.length > 0)
+      ? props.websites
+      : [{ label: 'Contact us', url: 'https://company.com' }])
+  const emails = () =>
+    ((props.emails.length > 0)
+      ? props.emails
+      : [{ label: 'Contact us', address: 'mail@company.com' }])
+
+  return html`
+    <section class="info">
+      <${For} each=${phones}>
+        ${({ label, number }: { label: string, number: string }) => html`
+          <a
+            inert=${() => props.phones.length === 0}
+            target="_blank"
+            href=${`tel:${number}`}
+          >
+            <sinch-icon name="call" />
+            <span>${number}</span>
+            <p>${label}</p>
+          </a>
+        `}
+      <//>
+      <${For} each=${websites}>
+        ${({ label, url }: { label: string, url: string }) => html`
+          <a inert=${() => props.websites.length === 0} target="_blank" href=${url}>
+            <sinch-icon name="public" />
+            <span>${url}</span>
+            <p>${label}</p>
+          </a>
+        `}
+      <//>
+      <${For} each=${emails}>
+        ${({ label, address }: { label: string, address: string }) => html`
+          <a
+            inert=${() => props.emails.length === 0}
+            target="_blank"
+            href=${`mailto:${address}`}
+          >
+            <sinch-icon name="mail" />
+            <span>${address}</span>
+            <p>${label}</p>
+          </a>
+        `}
+      <//>
+    </section>
+  `
+}
+
+const Tabs = (props: {
+  color?: string,
+  tab: number,
+  onTab?: (t: number) => void,
+}) => html`
+  <section class="tabs" style=${() => ({ '--highlight-color': props.color })}>
+    <${For} each=${['Info', 'Options']}>
+      ${(label: string, i: Accessor<number>) => html`
+        <button
+          class=${() => (i() === props.tab ? 'active' : '')}
+          on:click=${() => props.onTab?.(i())}
+        >
+          ${label}
+        </button>
+      `}
+    <//>
+  </section>
+`
+
+const Options = () => html`
+  <section class="options">
+    <header>Notifications</header>
+    <span>Business</span>
+    <button>Block & report spam</button>
+    <hr />
+    <button>View Privacy Policy</button>
+    <hr />
+    <button>View Terms of Service</button>
+    <hr />
+    <button>Learn mode</button>
+  </section>
+`
 
 /**
  * RCS channel preview component.
@@ -191,179 +306,65 @@ const style = `
  * @param props.email Brand email addresses.
  */
 export const RcsChannelPreview = (props: {
-  name: string;
-  description: string;
-  color: string;
-  banner: string;
-  logo: string;
-  phones: { label: string; number: string }[];
-  websites: { label: string; url: string }[];
-  emails: { label: string; address: string }[];
+  name: string,
+  description: string,
+  color: string,
+  banner: string,
+  logo: string,
+  phones: { label: string, number: string }[],
+  websites: { label: string, url: string }[],
+  emails: { label: string, address: string }[],
 }) => {
-  const [tab, setTab] = createSignal(0);
+  const [tab, setTab] = createSignal(0)
   const transparentIcon =
-    "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+    'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
 
   return html`
     <style>
       ${style}
     </style>
-    <section class="root" style=${() => ({ "--banner-color": props.color })}>
-      <img src=${() => props.banner || transparentIcon} alt="" />
-      <img src=${() => props.logo || transparentIcon} alt="" />
-      <h1>${() => props.name || "Brand name"}</h1>
-      <p>${() => props.description || "Brand description"}</p>
+    <section class="root" style=${() => ({ '--banner-color': props.color })}>
+      <img src=${() => (props.banner !== '' ? props.banner : transparentIcon)} alt="" />
+      <img src=${() => (props.logo !== '' ? props.logo : transparentIcon)} alt="" />
+      <h1>${() => (props.name !== '' ? props.name : 'Brand name')}</h1>
+      <p>${() => (props.description !== '' ? props.description : 'Brand description')}</p>
       <${Actions} ...${props} />
       <${Tabs} color=${() => props.color} tab=${tab} onTab=${setTab} />
-      ${() => (!tab() ? html`<${Info} ...${props} />` : html`<${Options} />`)}
+      ${() => (tab() === 0 ? html`<${Info} ...${props} />` : html`<${Options} />`)}
     </section>
-  `;
-};
-
-const Actions = (props: Parameters<typeof RcsChannelPreview>[0]) => {
-  const number = () => props.phones.at(0)?.number;
-  const url = () => props.websites.at(0)?.url;
-  const email = () => props.emails.at(0)?.address;
-  const numberHref = () => `tel:${number()}`;
-  const urlHref = url;
-  const emailHref = () => `mailto:${email()}`;
-
-  return html`
-    <section class="actions">
-      <a inert=${() => !number()} target="_blank" href=${numberHref}>
-        <sinch-icon name="call" />
-        Call
-      </a>
-      <a inert=${() => !url()} target="_blank" href=${urlHref}>
-        <sinch-icon name="public" />
-        Website
-      </a>
-      <a inert=${() => !email()} target="_blank" href=${emailHref}>
-        <sinch-icon name="mail" />
-        Email
-      </a>
-    </section>
-  `;
-};
-
-const Info = (props: Parameters<typeof RcsChannelPreview>[0]) => {
-  const phones = () =>
-    props.phones.length
-      ? props.phones
-      : [{ label: "Contact us", number: "+1234567890" }];
-  const websites = () =>
-    props.websites.length
-      ? props.websites
-      : [{ label: "Contact us", url: "https://company.com" }];
-  const emails = () =>
-    props.emails.length
-      ? props.emails
-      : [{ label: "Contact us", address: "mail@company.com" }];
-
-  return html`
-    <section class="info">
-      <${For} each=${phones}>
-        ${({ label, number }: { label: string; number: string }) => html`
-          <a
-            inert=${() => !props.phones.length}
-            target="_blank"
-            href=${`tel:${number}`}
-          >
-            <sinch-icon name="call" />
-            <span>${number}</span>
-            <p>${label}</p>
-          </a>
-        `}
-      <//>
-      <${For} each=${websites}>
-        ${({ label, url }: { label: string; url: string }) => html`
-          <a inert=${() => !props.websites.length} target="_blank" href=${url}>
-            <sinch-icon name="public" />
-            <span>${url}</span>
-            <p>${label}</p>
-          </a>
-        `}
-      <//>
-      <${For} each=${emails}>
-        ${({ label, address }: { label: string; address: string }) => html`
-          <a
-            inert=${() => !props.emails.length}
-            target="_blank"
-            href=${`mailto:${address}`}
-          >
-            <sinch-icon name="mail" />
-            <span>${address}</span>
-            <p>${label}</p>
-          </a>
-        `}
-      <//>
-    </section>
-  `;
-};
-
-const Tabs = (props: {
-  color?: string;
-  tab: number;
-  onTab?: (t: number) => void;
-}) => html`
-  <section class="tabs" style=${() => ({ "--highlight-color": props.color })}>
-    <${For} each=${["Info", "Options"]}>
-      ${(label: string, i: Accessor<number>) => html`
-        <button
-          class=${() => (i() === props.tab ? "active" : "")}
-          on:click=${() => props.onTab?.(i())}
-        >
-          ${label}
-        </button>
-      `}
-    <//>
-  </section>
-`;
-
-const Options = () => html`
-  <section class="options">
-    <header>Notifications</header>
-    <span>Business</span>
-    <button>Block & report spam</button>
-    <hr />
-    <button>View Privacy Policy</button>
-    <hr />
-    <button>View Terms of Service</button>
-    <hr />
-    <button>Learn mode</button>
-  </section>
-`;
+  `
+}
 
 defineCustomElement(
-  "sinch-labs-phone-preview-rcs-channel",
+  'sinch-labs-phone-preview-rcs-channel',
   customElement(
     `sinch-labs-phone-preview-rcs-channel-${pkg.version}`,
     {
-      name: "",
-      description: "",
-      color: "",
-      banner: "",
-      logo: "",
+      name: '',
+      description: '',
+      color: '',
+      banner: '',
+      logo: '',
       phones: [],
       websites: [],
       emails: [],
     },
     RcsChannelPreview
   )
-);
+)
 
-type Props = Partial<Parameters<typeof RcsChannelPreview>[0]>;
-type ElementProps = Partial<{ [K in keyof Props]: Props[K] | string }>;
+type Props = Partial<Parameters<typeof RcsChannelPreview>[0]>
+type ElementProps = Partial<{ [K in keyof Props]: Props[K] | string }>
 
 declare global {
   interface HTMLElementTagNameMap {
-    "sinch-labs-phone-preview-rcs-channel": ElementProps & HTMLElement;
+    'sinch-labs-phone-preview-rcs-channel': ElementProps & HTMLElement,
   }
   namespace JSX {
     interface IntrinsicElements {
-      "sinch-labs-phone-preview-rcs-channel": ElementProps &
+      'sinch-labs-phone-preview-rcs-channel': ElementProps &
         React.ClassAttributes<HTMLElement> &
-        React.HTMLAttributes<HTMLElement>;
+        React.HTMLAttributes<HTMLElement>,
     }
   }
 }

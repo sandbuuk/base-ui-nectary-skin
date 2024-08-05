@@ -1,6 +1,6 @@
-import "@nectary/labs/phone-preview-rcs-channel";
-import "@nectary/labs/phone-preview-skeleton";
-import { useState } from "react";
+import '@nectary/labs/phone-preview-rcs-channel'
+import '@nectary/labs/phone-preview-skeleton'
+import { useState } from 'react'
 
 const paramsExample = `{
     "name": "Sinch",
@@ -19,30 +19,31 @@ const paramsExample = `{
         {"label": "Sinch Engage", "url": "https://engage.sinch.com/" }
     ],
     "emails": []
-}`;
+}`
 
 export const RcsChannelEditExample = () => {
-  const [params, setParams] = useState(paramsExample);
-  const [parsed, setParsed] = useState(() => JSON.parse(params));
-  const [error, setError] = useState<Error>();
+  const [params, setParams] = useState(paramsExample)
+  const [parsed, setParsed] = useState(() => JSON.parse(params))
+  const [error, setError] = useState<Error>()
 
   return (
     <section>
       <div>Params: </div>
       <textarea
-        style={{ blockSize: "25rem", inlineSize: "100%" }}
+        style={{ blockSize: '25rem', inlineSize: '100%' }}
         value={params}
         onChange={(e) => {
-          setParams(e.target.value);
+          setParams(e.target.value)
+
           try {
-            setParsed(JSON.parse(e.target.value));
-            setError(undefined);
+            setParsed(JSON.parse(e.target.value))
+            setError(undefined)
           } catch (e: any) {
-            setError(e);
+            setError(e)
           }
         }}
       />
-      {error && <pre style={{ color: "red" }}>{error.message}</pre>}
+      {error != undefined && <pre style={{ color: 'red' }}>{error.message}</pre>}
       <sinch-labs-phone-preview-skeleton>
         <sinch-labs-phone-preview-rcs-channel
           {...parsed}
@@ -53,5 +54,5 @@ export const RcsChannelEditExample = () => {
         />
       </sinch-labs-phone-preview-skeleton>
     </section>
-  );
-};
+  )
+}

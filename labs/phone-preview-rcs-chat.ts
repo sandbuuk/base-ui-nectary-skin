@@ -1,10 +1,10 @@
-import "@nectary/components/icon";
-import React from "react";
-import { customElement } from "solid-element";
-import { For } from "solid-js";
-import html from "solid-js/html";
-import pkg from "./package.json";
-import { defineCustomElement } from "./utils";
+import '@nectary/components/icon'
+import { customElement } from 'solid-element'
+import { For } from 'solid-js'
+import html from 'solid-js/html'
+import pkg from './package.json'
+import { defineCustomElement } from './utils'
+import type React from 'react'
 
 const style = `
 :where(*, *::before, *::after) {
@@ -106,8 +106,10 @@ const style = `
   background: var(--sinch-sys-color-feedback-info-subtle);
   font: var(--sinch-sys-font-body-xs);
 }
+`
 
-`;
+const Message = (props: { message: string }) =>
+  html`<section class="message">${props.message}</section>`
 
 /**
  * RCS chat preview component.
@@ -118,13 +120,13 @@ const style = `
  * @param props.messages List of messages.
  */
 export const RcsChatPreview = (props: {
-  name: string;
-  description: string;
-  logo: string;
-  messages: string[];
+  name: string,
+  description: string,
+  logo: string,
+  messages: string[],
 }) => {
   const transparentIcon =
-    "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+    'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
 
   return html` <style>
       ${style}
@@ -132,14 +134,23 @@ export const RcsChatPreview = (props: {
     <section class="root">
       <header>
         <sinch-icon name="arrow_back" />
-        <img src=${() => props.logo || transparentIcon} alt="" />
-        <h1>${() => props.name || "Brand name"}</h1>
+        <img
+          src=${() => (props.logo !== '' ? props.logo : transparentIcon)}
+          alt=""
+        />
+        <h1>${() => (props.name !== '' ? props.name : 'Brand name')}</h1>
         <sinch-icon name="verified_user" />
         <sinch-icon name="more_vert" />
       </header>
       <div>
-        <img src=${() => props.logo || transparentIcon} alt="" />
-        <p>${() => props.description || "Brand description"}</p>
+        <img
+          src=${() => (props.logo !== '' ? props.logo : transparentIcon)}
+          alt=""
+        />
+        <p>
+          ${() =>
+    (props.description !== '' ? props.description : 'Brand description')}
+        </p>
         <hr />
         <${For} each=${() => props.messages}>
           ${(message: string) => html`<${Message} message=${message} />`}
@@ -154,38 +165,35 @@ export const RcsChatPreview = (props: {
           <sinch-icon name="mic" />
         </div>
       </footer>
-    </section>`;
-};
-
-const Message = (props: { message: string }) =>
-  html`<section class="message">${props.message}</section>`;
+    </section>`
+}
 
 defineCustomElement(
-  "sinch-labs-phone-preview-rcs-chat",
+  'sinch-labs-phone-preview-rcs-chat',
   customElement(
     `sinch-labs-phone-preview-rcs-chat-${pkg.version}`,
     {
-      name: "",
-      description: "",
-      logo: "",
+      name: '',
+      description: '',
+      logo: '',
       messages: [],
     },
     RcsChatPreview
   )
-);
+)
 
-type Props = Parameters<typeof RcsChatPreview>[0];
-type ElementProps = Partial<{ [K in keyof Props]: Props[K] | string }>;
+type Props = Parameters<typeof RcsChatPreview>[0]
+type ElementProps = Partial<{ [K in keyof Props]: Props[K] | string }>
 
 declare global {
   interface HTMLElementTagNameMap {
-    "sinch-labs-phone-preview-rcs-chat": ElementProps & HTMLElement;
+    'sinch-labs-phone-preview-rcs-chat': ElementProps & HTMLElement,
   }
   namespace JSX {
     interface IntrinsicElements {
-      "sinch-labs-phone-preview-rcs-chat": ElementProps &
+      'sinch-labs-phone-preview-rcs-chat': ElementProps &
         React.ClassAttributes<HTMLElement> &
-        React.HTMLAttributes<HTMLElement>;
+        React.HTMLAttributes<HTMLElement>,
     }
   }
 }

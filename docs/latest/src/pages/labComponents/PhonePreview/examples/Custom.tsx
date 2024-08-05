@@ -1,11 +1,11 @@
-import "@nectary/labs/phone-preview-skeleton";
-import { useState } from "react";
+import '@nectary/labs/phone-preview-skeleton'
+import { useState } from 'react'
 
 export const CustomExample = () => {
-  const [inlineSize, setInlineSize] = useState(288);
-  const [baseSize, setBaseSize] = useState(288);
-  const [aspectRatio, setAspectRatio] = useState(1 / 2.1);
-  const [locale, setLocale] = useState("en-US");
+  const [inlineSize, setInlineSize] = useState(288)
+  const [baseSize, setBaseSize] = useState(288)
+  const [aspectRatio, setAspectRatio] = useState(1 / 2.1)
+  const [locale, setLocale] = useState('en-US')
 
   return (
     <section>
@@ -17,7 +17,7 @@ export const CustomExample = () => {
           min="100"
           max="600"
           value={inlineSize}
-          onChange={(e) => setInlineSize(+e.target.value)}
+          onChange={(e) => setInlineSize(e.target.valueAsNumber)}
         />
       </div>
       <div>
@@ -28,7 +28,7 @@ export const CustomExample = () => {
           min="100"
           max="600"
           value={baseSize}
-          onChange={(e) => setBaseSize(+e.target.value)}
+          onChange={(e) => setBaseSize(e.target.valueAsNumber)}
         />
       </div>
       <div>
@@ -38,7 +38,7 @@ export const CustomExample = () => {
           type="range"
           min="0.35"
           max="1"
-          step={"0.01"}
+          step={'0.01'}
           value={aspectRatio}
           onChange={(e) => setAspectRatio(e.target.valueAsNumber)}
         />
@@ -54,13 +54,13 @@ export const CustomExample = () => {
           <option value="ar-EG">ar-EG</option>
         </select>
       </div>
-      <hr />
+      <hr/>
       <sinch-labs-phone-preview-skeleton
         style={{
           inlineSize: `${inlineSize}px`,
-          "--base-size": `${baseSize}px`,
-          "--aspect-ratio": aspectRatio,
-        }}
+          '--base-size': `${baseSize}px`,
+          '--aspect-ratio': aspectRatio,
+        } as any}
         locale={locale}
       >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit
@@ -70,15 +70,15 @@ export const CustomExample = () => {
         Curabitur imperdiet scelerisque ex vitae lobortis. Donec dictum orci sed
         cursus placerat. Proin eu odio accumsan quam hendrerit imperdiet. Nam
         volutpat odio et vulputate varius.
-        <br />
-        <br />
+        <br/>
+        <br/>
         Curabitur interdum urna vel quam luctus lacinia. Fusce lacinia felis et
         quam laoreet tincidunt. Cras et euismod nunc. Donec placerat luctus
         gravida. Mauris eu mauris ac mauris fermentum tempor. Donec viverra
         imperdiet sapien, sit amet pretium lectus convallis ut. Etiam tincidunt
         lectus non urna tincidunt, rhoncus malesuada nulla interdum.
-        <br />
-        <br />
+        <br/>
+        <br/>
         Vestibulum id fermentum urna. In in eleifend arcu. Phasellus est est,
         scelerisque et posuere sed, condimentum dictum elit. Sed mauris augue,
         auctor id nisl ac, rutrum sagittis nulla. Praesent purus eros, mattis id
@@ -88,5 +88,5 @@ export const CustomExample = () => {
         arcu.
       </sinch-labs-phone-preview-skeleton>
     </section>
-  );
-};
+  )
+}
