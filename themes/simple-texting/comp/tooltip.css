@@ -1,0 +1,5 @@
+.nectary-theme-base.nectary-theme-simple-texting {
+  --sinch-comp-tooltip-color-background: var(--sinch-ref-color-neutral-900);
+  --sinch-comp-tooltip-color-text: var(--sinch-sys-color-basic-pure);
+  --sinch-comp-tooltip-shape-radius: var(--sinch-sys-shape-radius-s);
+}
