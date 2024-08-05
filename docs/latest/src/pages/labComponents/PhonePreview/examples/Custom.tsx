@@ -1,4 +1,4 @@
-import '@nectary/labs/phone-preview-skeleton'
+import '@nectary/labs/phone-preview'
 import { useState } from 'react'
 
 export const CustomExample = () => {
@@ -55,7 +55,7 @@ export const CustomExample = () => {
         </select>
       </div>
       <hr/>
-      <sinch-labs-phone-preview-skeleton
+      <sinch-labs-phone-preview
         style={{
           inlineSize: `${inlineSize}px`,
           '--base-size': `${baseSize}px`,
@@ -86,7 +86,7 @@ export const CustomExample = () => {
         accumsan. Mauris ac sapien velit. Ut quis mi ipsum. Nullam in augue
         hendrerit, eleifend magna sit amet, feugiat sapien. Aliquam id lorem
         arcu.
-      </sinch-labs-phone-preview-skeleton>
+      </sinch-labs-phone-preview>
     </section>
   )
 }

@@ -1,5 +1,5 @@
+import '@nectary/labs/phone-preview'
 import '@nectary/labs/phone-preview-rcs-channel'
-import '@nectary/labs/phone-preview-skeleton'
 import { useState } from 'react'
 
 const paramsExample = `{
@@ -44,7 +44,7 @@ export const RcsChannelEditExample = () => {
         }}
       />
       {error != undefined && <pre style={{ color: 'red' }}>{error.message}</pre>}
-      <sinch-labs-phone-preview-skeleton>
+      <sinch-labs-phone-preview>
         <sinch-labs-phone-preview-rcs-channel
           {...parsed}
           // react limitation - manual serialization required
@@ -52,7 +52,7 @@ export const RcsChannelEditExample = () => {
           websites={JSON.stringify(parsed?.websites ?? [])}
           emails={JSON.stringify(parsed?.emails ?? [])}
         />
-      </sinch-labs-phone-preview-skeleton>
+      </sinch-labs-phone-preview>
     </section>
   )
 }

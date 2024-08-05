@@ -1,7 +1,7 @@
-import '@nectary/labs/phone-preview-skeleton'
+import '@nectary/labs/phone-preview'
 
 export const BasicExample = () => (
-  <sinch-labs-phone-preview-skeleton>
+  <sinch-labs-phone-preview>
     hello world!
-  </sinch-labs-phone-preview-skeleton>
+  </sinch-labs-phone-preview>
 )

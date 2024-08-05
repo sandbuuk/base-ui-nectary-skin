@@ -8,7 +8,7 @@ import { RcsChatEditExample } from "./examples/RcsChatEdit.tsx?example";
 
 ## Basic
 
-A phone skeleton with custom logic on sizing and scaling behavior.
+A styled phone container with custom logic on sizing and scaling behavior.
 
 <Example Component={BasicExample} />
 
@@ -16,7 +16,7 @@ A phone skeleton with custom logic on sizing and scaling behavior.
 
 **Note: in order to keep style aligned across different applications that use this component, it is preferred to keep these values default.**
 
-The phone skeleton custom element has an inline size of 288px but shrinks if the parent container is smaller than that. If you want to have a larger base inline size, it can be set as an inline style, e.g.:
+The phone container custom element has an inline size of 288px but shrinks if the parent container is smaller than that. If you want to have a larger base inline size, it can be set as an inline style, e.g.:
 
 ```css
 inline-size: min(288px, 100%); /* this is the default */
@@ -45,10 +45,10 @@ The aspect ratio of the phone can also be modified using a custom property. The 
 aspect-ratio: 0.5; /* ❌ bad */
 ```
 
-The phone preview skeleton also accepts the following attributes/properties that affect clock display:
+The phone preview container also accepts the following attributes/properties that affect clock display:
 
 ```ts
-type PhonePreviewSkeletonProps = {
+type PhonePreviewProps = {
   locale?: string;
   clock?: Intl.DateTimeFormatOptions;
 };
@@ -60,7 +60,7 @@ type PhonePreviewSkeletonProps = {
 
 ## RCS channel preview
 
-RCS channel design to be used in combination with the phone preview skeleton. It provides a default style for missing content.
+RCS channel design to be used in combination with the phone preview. It provides a default style for missing content.
 
 <Example Component={RcsChannelExample} />
 
@@ -88,7 +88,7 @@ This poses an integration issue using libraries that do not have proper custom e
 
 ## RCS chat preview
 
-RCS chat design to be used in combination with the phone preview skeleton. It provides a default style for missing content.
+RCS chat design to be used in combination with the phone preview. It provides a default style for missing content.
 The current implementation only supports displaying simple text message bubbles from agent.
 
 <Example Component={RcsChatExample} />
