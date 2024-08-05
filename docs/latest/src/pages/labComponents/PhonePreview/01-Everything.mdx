@@ -1,0 +1,112 @@
+import { Example } from "~/components/Example";
+import { BasicExample } from "./examples/Basic.tsx?example";
+import { CustomExample } from "./examples/Custom.tsx?example";
+import { RcsChannelExample } from "./examples/RcsChannel.tsx?example";
+import { RcsChannelEditExample } from "./examples/RcsChannelEdit.tsx?example";
+import { RcsChatExample } from "./examples/RcsChat.tsx?example";
+import { RcsChatEditExample } from "./examples/RcsChatEdit.tsx?example";
+
+## Basic
+
+A styled phone container with custom logic on sizing and scaling behavior.
+
+<Example Component={BasicExample} />
+
+## Custom
+
+**Note: in order to keep style aligned across different applications that use this component, it is preferred to keep these values default.**
+
+The phone container custom element has an inline size of 288px but shrinks if the parent container is smaller than that. If you want to have a larger base inline size, it can be set as an inline style, e.g.:
+
+```css
+inline-size: min(288px, 100%); /* this is the default */
+
+inline-size: min(30rem, 100%);
+inline-size: 100%;
+```
+
+The content scales and shrinks proportional to the base inline size. The default base inline is also 288px,and can be modified to affect the scaling behavior of the content using a custom property.
+
+If modified, it **MUST BE SET IN PX**.
+
+```css
+--base-size: 288px; /* this is the default */
+
+--base-size: 350px; /* ✅ good */
+--base-size: 20rem; /* ❌ bad */
+```
+
+The aspect ratio of the phone can also be modified using a custom property. The **CSS aspect-ratio property MUST NOT BE USED** as it will break the scale behavior. Instead, a custom property should be used instead.
+
+```css
+--aspect-ratio: 1 / 2.1; /* this is the default */
+
+--aspect-ratio: 0.5; /* ✅ good */
+aspect-ratio: 0.5; /* ❌ bad */
+```
+
+The phone preview container also accepts the following attributes/properties that affect clock display:
+
+```ts
+type PhonePreviewProps = {
+  locale?: string;
+  clock?: Intl.DateTimeFormatOptions;
+};
+```
+
+**Note: `clock` is not a string. Some rendering libraries such as React (\<= 18) don't serialize it properly.**
+
+<Example Component={CustomExample} />
+
+## RCS channel preview
+
+RCS channel design to be used in combination with the phone preview. It provides a default style for missing content.
+
+<Example Component={RcsChannelExample} />
+
+## RCS channel preview edit options
+
+The following props can be used to change the content of the RCS channel preview:
+
+```typescript
+type RcsChannelEditProps {
+  name?: string;
+  description?: string;
+  color?: string;
+  banner?: string;
+  logo?: string;
+  phones?: { label: string; number: string }[];
+  websites?: { label: string; url: string }[];
+  emails?: { label: string; address: string }[];
+}
+```
+
+**Note: `phones`, `websites`, and `emails` properties are not primitives.**
+This poses an integration issue using libraries that do not have proper custom elements support (e.g. React \<= 18). These libraries attempt to inject all parameters as attributes. However, this only works for primitives, other objects are stringifyed with `obj.toString()` which usually results in the `"[object Object]"` string being passed as attribute. In these cases, properties should be JSON serialized manually.
+
+<Example Component={RcsChannelEditExample} />
+
+## RCS chat preview
+
+RCS chat design to be used in combination with the phone preview. It provides a default style for missing content.
+The current implementation only supports displaying simple text message bubbles from agent.
+
+<Example Component={RcsChatExample} />
+
+## RCS chat preview edit options
+
+The following props can be used to change the content of the RCS chat preview:
+
+```typescript
+type RcsChatEditProps {
+  name?: string;
+  description?: string;
+  logo?: string;
+  messages?: string[];
+}
+```
+
+**Note: `messages` property is not a string.**
+This poses an integration issue using libraries that do not have proper custom elements support (e.g. React \<= 18). These libraries attempt to inject all parameters as attributes. However, this only works for primitives, other objects are stringifyed with `obj.toString()` which usually results in the `"[object Object]"` string being passed as attribute. In these cases, properties should be JSON serialized manually.
+
+<Example Component={RcsChatEditExample} />

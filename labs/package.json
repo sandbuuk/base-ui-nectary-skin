@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@lit-labs/scoped-registry-mixin": "^1.0.3",
-    "@nectary/components": "workspace:*"
+    "@nectary/components": "workspace:*",
+    "solid-element": "1.8.1",
+    "solid-js": "1.8.19"
   },
   "devDependencies": {
     "@types/node": "^18.17.17",
