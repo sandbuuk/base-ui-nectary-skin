@@ -1,0 +1,9 @@
+.nectary-theme-base.nectary-theme-simple-texting {
+  --sinch-comp-button-color-secondary-default-background-active: #A1D5F5;
+  --sinch-comp-button-color-secondary-default-background-hover: #C8E6F9;
+  --sinch-comp-button-color-secondary-default-background-initial: #DEF2FF;
+  --sinch-comp-button-color-secondary-default-border-initial: transparent;
+  --sinch-comp-button-color-secondary-disabled-background-initial: #F3FAFE;
+  --sinch-comp-button-color-secondary-disabled-border-initial: transparent;
+  --sinch-comp-button-color-secondary-disabled-text-initial: #A1D5F5;
+}

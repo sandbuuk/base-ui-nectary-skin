@@ -1,0 +1,4 @@
+.nectary-theme-base.nectary-theme-simple-texting {
+  --sinch-comp-date-picker-day-color-default-background-hover: var(--sinch-sys-color-primary-disabled);
+  --sinch-comp-date-picker-day-color-default-range-background: var(--sinch-sys-color-primary-disabled);
+}

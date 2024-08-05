@@ -1,0 +1,17 @@
+{
+  "color": {
+    "primary": {
+      "active": "#114369",
+      "default": "#0067FF",
+      "disabled": "#C8E6F9",
+      "foreground": "#FFFFFF",
+      "hover": "#0058D9"
+    }
+  },
+  "shape-radius": {
+    "l": "12px",
+    "m": "8px",
+    "s": "4px",
+    "xs": "0"
+  }
+}

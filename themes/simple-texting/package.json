@@ -1,0 +1,13 @@
+{
+  "name": "@nectary/theme-simple-texting",
+  "version": "0.3.0",
+  "files": [
+    "**/*.css",
+    "*.json",
+    "*.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "index.css"
+}

@@ -1,0 +1,11 @@
+.nectary-theme-base.nectary-theme-simple-texting {
+  --sinch-sys-color-primary-active: #114369;
+  --sinch-sys-color-primary-default: #0067FF;
+  --sinch-sys-color-primary-disabled: #C8E6F9;
+  --sinch-sys-color-primary-foreground: var(--sinch-sys-color-basic-pure);
+  --sinch-sys-color-primary-hover: #0058D9;
+  --sinch-sys-shape-radius-l: 12px;
+  --sinch-sys-shape-radius-m: 8px;
+  --sinch-sys-shape-radius-s: 4px;
+  --sinch-sys-shape-radius-xs: 0;
+}
