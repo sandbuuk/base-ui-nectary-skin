@@ -25,10 +25,12 @@ import '@nectary/theme-cpaas-base'
 import '@nectary/theme-cpaas-mailgun'
 import '@nectary/theme-cpaas-mailjet'
 import '@nectary/theme-cpaas-dashboard'
+import '@nectary/theme-simple-texting'
 
 const CLASS_NECTARY_THEME_BASE = 'nectary-theme-base'
 const CLASS_NECTARY_THEME_DARK = 'nectary-theme-dark'
 const CLASS_NECTARY_THEME_MESSAGE_MEDIA = 'nectary-theme-message-media'
+const CLASS_NECTARY_THEME_SIMPLE_TEXTING = 'nectary-theme-simple-texting'
 const CLASS_CPAAS_THEME_BASE = 'cpaas-theme-base'
 const CLASS_CPAAS_THEME_MAILGUN = 'cpaas-theme-mailgun'
 const CLASS_CPAAS_THEME_MAILJET = 'cpaas-theme-mailjet'
@@ -52,6 +54,11 @@ export const App: FC = () => {
     }
     case 'message-media': {
       themeClasses.push(CLASS_NECTARY_THEME_MESSAGE_MEDIA)
+
+      break
+    }
+    case 'simple-texting': {
+      themeClasses.push(CLASS_NECTARY_THEME_SIMPLE_TEXTING)
 
       break
     }

@@ -15,6 +15,8 @@ import '@nectary/assets/logo/engage-icon'
 import '@nectary/assets/logo/mailgun-icon'
 import '@nectary/assets/logo/mailjet-icon'
 import '@nectary/assets/logo/message-media-icon'
+import '@nectary/assets/logo/simple-texting-icon'
+import '@nectary/assets/logo/simple-texting-icon-wordmark'
 
 const tableStyle: CSSProperties = {
   width: '100%',
@@ -68,6 +70,14 @@ export const ColoredLogosExample: FC = () => {
           </sinch-table-cell>
           <sinch-table-cell>
             <sinch-logo-message-media-icon-wordmark colored size={24}/>
+          </sinch-table-cell>
+        </sinch-table-row>
+        <sinch-table-row>
+          <sinch-table-cell>
+            <sinch-logo-simple-texting-icon colored size={24}/>
+          </sinch-table-cell>
+          <sinch-table-cell>
+            <sinch-logo-simple-texting-icon-wordmark colored size={24}/>
           </sinch-table-cell>
         </sinch-table-row>
       </sinch-table-body>

@@ -18,6 +18,7 @@
     "@nectary/theme-cpaas-mailjet": "workspace:*",
     "@nectary/theme-dark": "workspace:*",
     "@nectary/theme-message-media": "workspace:*",
+    "@nectary/theme-simple-texting": "workspace:*",
     "core-js": "^3.32.2",
     "docs-common": "workspace:*",
     "history": "^5.3.0",
