@@ -61,6 +61,7 @@ export const ThemeToggleButton = () => {
         <sinch-select-menu-option value="mailgun" text="Mailgun" aria-label="mailgun"/>
         <sinch-select-menu-option value="mailjet" text="Mailjet" aria-label="mailjet"/>
         <sinch-select-menu-option value="dashboard" text="Dashboard" aria-label="dashboard"/>
+        <sinch-select-menu-option value="simple-texting" text="SimpleTexting" aria-label="simple texting"/>
       </sinch-select-menu>
     </sinch-popover>
   )

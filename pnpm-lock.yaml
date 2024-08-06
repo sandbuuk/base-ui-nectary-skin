@@ -433,6 +433,9 @@ importers:
       '@nectary/theme-message-media':
         specifier: workspace:*
         version: link:../../themes/message-media
+      '@nectary/theme-simple-texting':
+        specifier: workspace:*
+        version: link:../../themes/simple-texting
       core-js:
         specifier: ^3.32.2
         version: 3.37.1

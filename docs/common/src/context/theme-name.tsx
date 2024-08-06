@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import type { FC, PropsWithChildren } from 'react'
 
-export type TThemeName = 'light' | 'dark' | 'message-media' | 'mailgun' | 'mailjet' | 'dashboard'
+export type TThemeName = 'light' | 'dark' | 'message-media' | 'simple-texting' | 'mailgun' | 'mailjet' | 'dashboard'
 
 export const DEFAULT_THEME_NAME: TThemeName = 'light'
 
