@@ -2,7 +2,11 @@
   "name": "@nectary/labs",
   "version": "2.8.3",
   "files": [
-    "lib/"
+    "**/*/*.css",
+    "**/*/*.json",
+    "**/*/*.js",
+    "**/*/*.d.ts",
+    "types.d.ts"
   ],
   "publishConfig": {
     "access": "public"
