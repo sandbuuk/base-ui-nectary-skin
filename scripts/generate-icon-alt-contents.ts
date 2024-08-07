@@ -3,67 +3,58 @@ import path from 'node:path'
 
 const dirname = (import.meta as any).dirname as string
 
-const iconsDir = path.join(dirname, '..', 'assets', 'icons')
-const componentsDir = path.join(dirname, '..', 'components', 'icon-alt-one', 'icon-templates')
+const iconsDir = path.join(dirname, '..', 'ICONS-FIXED')
+const componentsDir = path.join(dirname, '..', 'assets', 'icons')
 
-async function getIcons(): Promise<string[]> {
+async function getIconsFiles(): Promise<string[]> {
   const components: string[] = []
 
   for (const file of await fs.readdir(iconsDir)) {
-    const stat = await fs.stat(path.join(iconsDir, file))
-    const isDir = stat.isDirectory()
-    const isIgnored = [
-      'node_modules',
-      'utils',
-      'stop-events',
-      'pagination',
-    ].includes(file)
-
-    if (!isDir || isIgnored) {
-      continue
-    }
-
     components.push(file)
   }
 
   return components
 }
 
-const iconDirs = await getIcons()
+const iconFiles = await getIconsFiles()
 
-const iconMap: Record<string, string> = {}
+try {
+  await fs.mkdir(componentsDir)
+} catch {}
 
-for (const iconName of iconDirs) {
-  const pathToHtml = path.join(iconsDir, iconName, 'template.html')
+for (const iconFileName of iconFiles) {
+  console.log(iconFileName)
 
-  const iconHtml = await fs.readFile(pathToHtml)
+  const iconName = iconFileName.replace('.svg', '').replace('⚠️ ', '').replace('⚠️ ', '')
+  const iconDir = path.join(componentsDir, iconName)
 
-  iconMap[iconName] = iconHtml.toString()
-}
+  await fs.mkdir(iconDir)
 
-const iconNamesFileName = 'iconNames'
+  const svgContent = await fs.readFile(path.join(iconsDir, iconFileName))
+  const utf8Decoder = new TextDecoder('UTF-8')
 
-const iconNameToHtmlFileContent = `
-/* Generated file, use generate-icon-alt-contents script to update it!!  */
-import type { IconNames } from "./${iconNamesFileName}"
+  await fs.writeFile(path.join(iconDir, 'template.html'), utf8Decoder.decode(svgContent).replaceAll(/fill="[A-Za-z0-1#]*"/g, '').replaceAll(/(width|height)="[0-9]*"/g, ''))
 
-export const iconNameToHtml = (name: IconNames) => {
-  switch (name) {
-    ${Object.entries(iconMap).map(([name, content]) => `
-      case '${name}':
-        return \`${content}\`
-      `).join('\n')}
+  const iconIndexContent = `
+  import { defineCustomElement } from '../../utils/element'
+  import { createIconClass } from '../create-icon-class'
+  import templateHTML from './template.html'
+  import type { TSinchIconElement, TSinchIconReact } from '../types'
+
+  defineCustomElement('sinch-icon-${iconName}', createIconClass(templateHTML))
+
+  declare global {
+    namespace JSX {
+      interface IntrinsicElements {
+        'sinch-icon-${iconName}': TSinchIconReact,
+      }
+    }
+
+    interface HTMLElementTagNameMap {
+      'sinch-icon-${iconName}': TSinchIconElement,
+    }
   }
+  `
+
+  await fs.writeFile(path.join(iconDir, 'index.ts'), iconIndexContent)
 }
-`
-
-await fs.writeFile(path.join(componentsDir, `..`, `iconNameToHtml.ts`), iconNameToHtmlFileContent)
-
-const iconNamesFileContent = `
-/* Generated file use generate-icon-alt-contents script to update it!!  */
-export const iconList = [${Object.keys(iconMap).map((iconName) => `'${iconName}'`).join(',\n')}] as const;
-
-export type IconNames = typeof iconList[number];
-`
-
-await fs.writeFile(path.join(componentsDir, `..`, `${iconNamesFileName}.ts`), iconNamesFileContent)
