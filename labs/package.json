@@ -8,7 +8,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "NODE_ENV=production && rimraf lib/ && tsc --outDir lib/"
+    "build": "NODE_ENV=production && rimraf lib/ && tsc"
   },
   "dependencies": {
     "@lit-labs/scoped-registry-mixin": "^1.0.3",
