@@ -6,7 +6,8 @@
     "**/*/*.json",
     "**/*/*.js",
     "**/*/*.d.ts",
-    "types.d.ts"
+    "*.d.ts",
+    "*.js"
   ],
   "publishConfig": {
     "access": "public"
