@@ -2,10 +2,10 @@ import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
-import '@nectary/assets/icons/laptop'
+import '@nectary/assets/icons/fa-tablet'
+import '@nectary/assets/icons/fa-watch'
+import '@nectary/assets/icons/fa-laptop'
 import '@nectary/assets/icons/smartphone'
-import '@nectary/assets/icons/tablet'
-import '@nectary/assets/icons/watch'
 
 const menuStyles: CSSProperties = {
   width: 250,
@@ -27,7 +27,7 @@ export const SimpleExample: FC = () => {
         aria-label="Laptop option"
         value="Laptop"
       >
-        <sinch-icon-laptop slot="icon"/>
+        <sinch-icon-fa-laptop slot="icon"/>
       </sinch-select-menu-option>
       <sinch-select-menu-option
         text="Smartphone"
@@ -42,14 +42,14 @@ export const SimpleExample: FC = () => {
         value="Tablet"
         disabled
       >
-        <sinch-icon-tablet slot="icon"/>
+        <sinch-icon-fa-tablet slot="icon"/>
       </sinch-select-menu-option>
       <sinch-select-menu-option
         text="Watch"
         aria-label="Watch option"
         value="Watch"
       >
-        <sinch-icon-watch slot="icon"/>
+        <sinch-icon-fa-watch slot="icon"/>
       </sinch-select-menu-option>
     </sinch-select-menu>
   )

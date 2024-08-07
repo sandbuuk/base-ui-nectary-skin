@@ -3,10 +3,10 @@ import type { CSSProperties, FC } from 'react'
 import '@nectary/components/tabs'
 import '@nectary/components/tabs-option'
 import '@nectary/components/text'
-import '@nectary/assets/icons/sentiment-dissatisfied'
-import '@nectary/assets/icons/sports-handball'
-import '@nectary/assets/icons/reduce-capacity'
-import '@nectary/assets/icons/emoji-people'
+import '@nectary/assets/icons/fa-face-frown'
+import '@nectary/assets/icons/fa-basketball'
+import '@nectary/assets/icons/fa-arrows-down-to-people'
+import '@nectary/assets/icons/fa-people-pulling'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -30,14 +30,14 @@ export const SimpleExample: FC = () => {
           value="1"
           text="Tab 1"
         >
-          <sinch-icon-sentiment-dissatisfied slot="icon"/>
+          <sinch-icon-fa-face-frown slot="icon"/>
         </sinch-tabs-option>
         <sinch-tabs-option
           aria-label="Tab 2"
           value="2"
           text="Tab 2"
         >
-          <sinch-icon-sports-handball slot="icon"/>
+          <sinch-icon-fa-basketball slot="icon"/>
         </sinch-tabs-option>
         <sinch-tabs-option
           aria-label="Tab 3"
@@ -45,14 +45,14 @@ export const SimpleExample: FC = () => {
           text="Tab 3"
           disabled
         >
-          <sinch-icon-reduce-capacity slot="icon"/>
+          <sinch-icon-fa-arrows-down-to-people slot="icon"/>
         </sinch-tabs-option>
         <sinch-tabs-option
           aria-label="Tab 4"
           value="4"
           text="Tab 4"
         >
-          <sinch-icon-emoji-people slot="icon"/>
+          <sinch-icon-fa-people-pulling slot="icon"/>
         </sinch-tabs-option>
       </sinch-tabs>
       {value === '1' && <sinch-text type="m">1</sinch-text>}

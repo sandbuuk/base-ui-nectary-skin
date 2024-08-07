@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@nectary/components/input'
 import '@nectary/components/button'
-import '@nectary/assets/icons/calendar-today'
+import '@nectary/assets/icons/fa-calendar'
 
 export const OnFocusStopPropagationExample: FC = () => {
   const [state, setState] = useState('')
@@ -24,7 +24,7 @@ export const OnFocusStopPropagationExample: FC = () => {
           console.log('BUTTON FOCUS')
         }}
       >
-        <sinch-icon-calendar-today slot="icon"/>
+        <sinch-icon-fa-calendar slot="icon"/>
       </sinch-button>
     </sinch-input>
   )

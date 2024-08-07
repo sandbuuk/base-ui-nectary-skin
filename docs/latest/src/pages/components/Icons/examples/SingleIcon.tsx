@@ -1,8 +1,8 @@
 import type { FC } from 'react'
-import '@nectary/assets/icons/mood'
+import '@nectary/assets/icons/fa-face-smile'
 
 export const SingleIconExample: FC = () => {
   return (
-    <sinch-icon-mood/>
+    <sinch-icon-fa-face-smile/>
   )
 }

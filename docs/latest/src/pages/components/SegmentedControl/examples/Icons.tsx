@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import '@nectary/components/segmented-control'
 import '@nectary/components/segmented-control-option'
 import '@nectary/components/icon'
-import '@nectary/assets/icons/help-outline'
+import '@nectary/assets/icons/fa-circle-question'
 
 export const IconsExample: FC = () => {
   const [value, setValue] = useState('')
@@ -22,7 +22,7 @@ export const IconsExample: FC = () => {
         <sinch-icon name="open_in_new" slot="icon"/>
       </sinch-segmented-control-option>
       <sinch-segmented-control-option value="3" text="Tab disabled" aria-label="Tab 3">
-        <sinch-icon-help-outline slot="icon"/>
+        <sinch-icon-fa-circle-question slot="icon"/>
       </sinch-segmented-control-option>
       <sinch-segmented-control-option value="4" text="Tab 4 label" aria-label="Tab 4"/>
     </sinch-segmented-control>

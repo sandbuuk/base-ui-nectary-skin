@@ -11,10 +11,10 @@ import '@nectary/components/help-tooltip'
 import '@nectary/components/table-body'
 import '@nectary/components/button'
 import '@nectary/components/icon'
-import '@nectary/assets/icons/south'
-import '@nectary/assets/icons/north'
-import '@nectary/assets/icons/filter-list'
-import '@nectary/assets/icons/more-vert'
+import '@nectary/assets/icons/fa-arrow-down-long'
+import '@nectary/assets/icons/fa-arrow-up-long'
+import '@nectary/assets/icons/fa-bars-filter'
+import '@nectary/assets/icons/fa-ellipsis-vertical'
 
 export const SimpleExample: FC = () => {
   return (
@@ -26,16 +26,16 @@ export const SimpleExample: FC = () => {
           </sinch-table-head-cell>
           <sinch-table-head-cell text="ID" align="end">
             <sinch-button slot="right" aria-label="Sort">
-              <sinch-icon-south slot="icon"/>
+              <sinch-icon-fa-arrow-down-long slot="icon"/>
             </sinch-button>
           </sinch-table-head-cell>
           <sinch-table-head-cell text="Ticket"/>
           <sinch-table-head-cell text="Channel" align="center">
             <sinch-button slot="left" aria-label="Filter">
-              <sinch-icon-filter-list slot="icon"/>
+              <sinch-icon-fa-bars-filter slot="icon"/>
             </sinch-button>
             <sinch-button slot="right" aria-label="Sort">
-              <sinch-icon-north slot="icon"/>
+              <sinch-icon-fa-arrow-up-long slot="icon"/>
             </sinch-button>
             <sinch-help-tooltip slot="tooltip" text="Tooltip text"/>
           </sinch-table-head-cell>
@@ -63,7 +63,7 @@ export const SimpleExample: FC = () => {
             <sinch-toggle aria-label="Toggle"/>
           </sinch-table-cell>
           <sinch-table-cell align="center">
-            <sinch-icon-more-vert/>
+            <sinch-icon-fa-ellipsis-vertical slot="icon"/>
           </sinch-table-cell>
         </sinch-table-row>
         <sinch-table-row>
@@ -84,7 +84,7 @@ export const SimpleExample: FC = () => {
             <sinch-toggle aria-label="Toggle"/>
           </sinch-table-cell>
           <sinch-table-cell align="center">
-            <sinch-icon-more-vert/>
+            <sinch-icon-fa-ellipsis-vertical slot="icon"/>
           </sinch-table-cell>
         </sinch-table-row>
       </sinch-table-body>
