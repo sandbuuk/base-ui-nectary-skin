@@ -1,6 +1,6 @@
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
-import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
 import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 
@@ -42,7 +42,7 @@ export const ActionMenu: FC = () => {
             disabled={isDisabled}
             on-click={() => onOptionClick(key)}
           >
-            {icon === '1' && <sinch-icon-open-in-new slot="icon"/>}
+            {icon === '1' && <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>}
           </sinch-action-menu-option>
         ))
       }

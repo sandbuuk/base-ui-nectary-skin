@@ -1,11 +1,22 @@
-<sinch-accordion [value]="value" (-change)="onChange($event)" [attr.multiple]="isMultiple">
-  <sinch-accordion-item *ngFor="let opt of options"
+<sinch-accordion
+  [value]="value"
+  (-change)="onChange($event)"
+  [attr.multiple]="isMultiple"
+>
+  <sinch-accordion-item
+    *ngFor="let opt of options"
     [attr.value]="opt.value"
     [attr.label]="opt.label"
     [attr.disabled]="opt.disabled"
     [attr.status]="opt.status"
-    [attr.optionaltext]="opt.optional">
-    <sinch-text *ngIf="opt.content != null" slot="content" type="m">{{opt.content}}</sinch-text>
-    <sinch-icon-open-in-new *ngIf="opt.icon === true" slot="icon"></sinch-icon-open-in-new>
+    [attr.optionaltext]="opt.optional"
+  >
+    <sinch-text *ngIf="opt.content != null" slot="content" type="m">{{
+      opt.content
+    }}</sinch-text>
+    <sinch-icon-fa-arrow-up-right-from-square
+      *ngIf="opt.icon === true"
+      slot="icon"
+    ></sinch-icon-fa-arrow-up-right-from-square>
   </sinch-accordion-item>
 </sinch-accordion>

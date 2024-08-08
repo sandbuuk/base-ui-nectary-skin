@@ -23,8 +23,8 @@
         @--blur="onBlur"
       >
         <sinch-tag v-if="hasLeft" slot="left" text="tag"></sinch-tag>
-        <sinch-icon-search v-if="hasIcon" slot="icon"></sinch-icon-search>
-        <sinch-icon-open-in-new v-if="items[value]?.icon === '1'" slot="icon"></sinch-icon-open-in-new>
+        <sinch-icon-fa-magnifying-glass v-if="hasIcon" slot="icon"></sinch-icon-fa-magnifying-glass>
+        <sinch-icon-fa-arrow-up-right-from-square v-if="items[value]?.icon === '1'" slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
       </sinch-select-button>
     </sinch-field>
     <sinch-select-menu
@@ -39,7 +39,7 @@
         :text="value.text"
         :disabled="value.isDisabled"
       >
-        <sinch-icon-open-in-new v-if="value.icon === '1'" slot="icon"></sinch-icon-open-in-new>
+        <sinch-icon-fa-arrow-up-right-from-square v-if="value.icon === '1'" slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
       </sinch-select-menu-option>
     </sinch-select-menu>
   </sinch-popover>
@@ -53,8 +53,8 @@ import '@nectary/components/popover'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
 import '@nectary/components/tag'
-import '@nectary/assets/icons/open-in-new'
-import '@nectary/assets/icons/search'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/assets/icons/fa-magnifying-glass'
 
 const optionsLong = {
   1: { text: 'Option 1 value long long long', icon: '1' },

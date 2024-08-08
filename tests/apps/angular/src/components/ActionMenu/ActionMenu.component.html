@@ -4,7 +4,11 @@
     [value]="opt.key"
     [attr.text]="opt.value.text"
     [attr.disabled]="opt.value.isDisabled"
-    (-click)="onClick(opt.key)">
-    <sinch-icon-open-in-new *ngIf="opt.value.icon === '1'" slot="icon"></sinch-icon-open-in-new>
+    (-click)="onClick(opt.key)"
+  >
+    <sinch-icon-fa-arrow-up-right-from-square
+      *ngIf="opt.value.icon === '1'"
+      slot="icon"
+    ></sinch-icon-fa-arrow-up-right-from-square>
   </sinch-action-menu-option>
 </sinch-action-menu>

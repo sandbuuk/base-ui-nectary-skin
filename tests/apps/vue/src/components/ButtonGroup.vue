@@ -10,36 +10,36 @@
     @--blur="onBlur"
   >
     <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
-    <sinch-icon-open-in-new
+    <sinch-icon-fa-arrow-up-right-from-square
       v-if="hasIcon"
       slot="icon"
-    ></sinch-icon-open-in-new>
-    <sinch-icon-expand-more
+    ></sinch-icon-fa-arrow-up-right-from-square>
+    <sinch-icon-fa-angle-down
       v-if="hasRightIcon"
       slot="right-icon"
-    ></sinch-icon-expand-more>
+    ></sinch-icon-fa-angle-down>
   </sinch-button-group-item>
   <sinch-button-group-item :text="text" :aria-label="Button">
     <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
-    <sinch-icon-open-in-new
+    <sinch-icon-fa-arrow-up-right-from-square
       v-if="hasIcon"
       slot="icon"
-    ></sinch-icon-open-in-new>
-    <sinch-icon-expand-more
+    ></sinch-icon-fa-arrow-up-right-from-square>
+    <sinch-icon-fa-angle-down
       v-if="hasRightIcon"
       slot="right-icon"
-    ></sinch-icon-expand-more>
+    ></sinch-icon-fa-angle-down>
   </sinch-button-group-item>
   <sinch-button-group-item :text="text" :aria-label="Button">
     <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
-    <sinch-icon-open-in-new
+    <sinch-icon-fa-arrow-up-right-from-square
       v-if="hasIcon"
       slot="icon"
-    ></sinch-icon-open-in-new>
-    <sinch-icon-expand-more
+    ></sinch-icon-fa-arrow-up-right-from-square>
+    <sinch-icon-fa-angle-down
       v-if="hasRightIcon"
       slot="right-icon"
-    ></sinch-icon-expand-more
+    ></sinch-icon-fa-angle-down
   ></sinch-button-group-item>
 </sinch-button-group>
 
@@ -48,8 +48,8 @@
 <script>
 import '@nectary/components/button-group'
 import '@nectary/components/button-group-item'
-import '@nectary/assets/icons/open-in-new'
-import '@nectary/assets/icons/expand-more'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/assets/icons/fa-angle-down'
 import '@nectary/components/spinner'
 
 export default {

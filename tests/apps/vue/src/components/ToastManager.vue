@@ -3,7 +3,7 @@
     <sinch-toast v-for="(t, i) in state" :key="t" :type="typeValues[i % typeValues.length]" :text="t"
       :persistent="i !== 0" @--timeout="onTimeout">
       <sinch-button v-if="(i + 1) % 3 !== 0" slot="close" size="s" @--click="onClose">
-        <sinch-icon-close slot="icon"></sinch-icon-close>
+        <sinch-icon-fa-xmark slot="icon"></sinch-icon-fa-xmark>
       </sinch-button>
       <sinch-button v-if="(i + 1) % 2 === 0" slot="action" type="cta-secondary" size="s" text="Undo"
         @--click="onAction">
@@ -17,7 +17,7 @@ import { typeValues } from '@nectary/components/toast/utils'
 import '@nectary/components/toast-manager'
 import '@nectary/components/toast'
 import '@nectary/components/button'
-import '@nectary/assets/icons/close'
+import '@nectary/assets/icons/fa-xmark'
 
 const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
 const md = 'To set up the `LINE`, read and **accept** the `LINE` [terms & conditions](https://google.com).'

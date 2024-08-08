@@ -3,23 +3,23 @@
     :minrows="minrows" :resizable="resizable" @--change="onChange" @--focus="onFocus" @--blur="onBlur">
     <template v-if="hasBottom">
       <sinch-button slot="bottom" aria-label="Paperclip">
-        <sinch-icon-attach-file slot="icon"></sinch-icon-attach-file>
+        <sinch-icon-fa-paperclip-vertical slot="icon"></sinch-icon-fa-paperclip-vertical>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Emoji">
-        <sinch-icon-mood slot="icon"></sinch-icon-mood>
+        <sinch-icon-fa-face-laugh slot="icon"></sinch-icon-fa-face-laugh>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Variables">
-        <sinch-icon-search slot="icon"></sinch-icon-search>
+        <sinch-icon-fa-magnifying-glass slot="icon"></sinch-icon-fa-magnifying-glass>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Comment">
-        <sinch-icon-add-comment slot="icon"></sinch-icon-add-comment>
+        <sinch-icon-fa-comment-plus slot="icon"></sinch-icon-fa-comment-plus>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Comment">
-        <sinch-icon-more-horiz slot="icon"></sinch-icon-more-horiz>
+        <sinch-icon-fa-ellipsis slot="icon"></sinch-icon-fa-ellipsis>
       </sinch-button>
       <sinch-tag slot="bottom" text="400" color="success" style="margin-left: auto;"></sinch-tag>
       <sinch-button slot="bottom" type="primary" aria-label="Send" text="Send">
-        <sinch-icon-send slot="right-icon"></sinch-icon-send>
+        <sinch-icon-fa-paper-plane-top slot="right-icon"></sinch-icon-fa-paper-plane-top>
       </sinch-button>
     </template>
   </sinch-textarea>
@@ -29,12 +29,13 @@
 import '@nectary/components/textarea'
 import '@nectary/components/button'
 import '@nectary/components/tag'
-import '@nectary/assets/icons/attach-file'
-import '@nectary/assets/icons/send'
-import '@nectary/assets/icons/mood'
-import '@nectary/assets/icons/search'
-import '@nectary/assets/icons/add-comment'
-import '@nectary/assets/icons/more-horiz'
+import '@nectary/assets/icons/fa-ellipsis'
+import '@nectary/assets/icons/fa-paperclip-vertical'
+import '@nectary/assets/icons/fa-face-laugh'
+import '@nectary/assets/icons/fa-comment-plus'
+import '@nectary/assets/icons/fa-paper-plane-top'
+import '@nectary/assets/icons/fa-magnifying-glass'
+
 
 export default {
   methods: {

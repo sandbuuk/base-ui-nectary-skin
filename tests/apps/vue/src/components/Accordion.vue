@@ -8,7 +8,7 @@
       :status="opt.status"
       :optionaltext="opt.optional">
       <sinch-text v-if="opt.content != null" slot="content" type="m">{{opt.content}}</sinch-text>
-      <sinch-icon-open-in-new v-if="opt.icon === true" slot="icon"></sinch-icon-open-in-new>
+      <sinch-icon-fa-arrow-up-right-from-square v-if="opt.icon === true" slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
     </sinch-accordion-item>
   </sinch-accordion>
 </template>
@@ -17,7 +17,7 @@
 import '@nectary/components/text'
 import '@nectary/components/accordion'
 import '@nectary/components/accordion-item'
-import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
 
 const items = [{
   value: '1',

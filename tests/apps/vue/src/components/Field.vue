@@ -17,7 +17,7 @@
     :invalid="invalidText != null"
     :value="value"
     @--change="onChange">
-    <sinch-icon-search slot="icon"></sinch-icon-search>
+    <sinch-icon-fa-magnifying-glass slot="icon"></sinch-icon-fa-magnifying-glass>
     <sinch-tag slot="right" text="text"></sinch-tag>
   </sinch-input>
 </sinch-field>
@@ -28,7 +28,7 @@ import '@nectary/components/field'
 import '@nectary/components/input'
 import '@nectary/components/help-tooltip'
 import '@nectary/components/tag'
-import '@nectary/assets/icons/search'
+import '@nectary/assets/icons/fa-magnifying-glass'
 
 export default {
   methods: {

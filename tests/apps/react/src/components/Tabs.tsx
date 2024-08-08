@@ -4,7 +4,7 @@ import type { FC } from 'react'
 import '@nectary/components/tabs'
 import '@nectary/components/tabs-option'
 import '@nectary/components/tabs-icon-option'
-import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
 
 export const Tabs: FC = () => {
   const [search] = useSearchParams()
@@ -30,7 +30,7 @@ export const Tabs: FC = () => {
           disabled={isDisabled}
           aria-label="Tab"
         >
-          <sinch-icon-open-in-new slot="icon"/>
+          <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
         </sinch-tabs-icon-option>
       </sinch-tabs>
     )
@@ -44,16 +44,16 @@ export const Tabs: FC = () => {
         aria-label="Tabs"
       >
         <sinch-tabs-icon-option value="1" aria-label="">
-          <sinch-icon-open-in-new slot="icon"/>
+          <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
         </sinch-tabs-icon-option>
         <sinch-tabs-icon-option value="2" disabled aria-label="">
-          <sinch-icon-open-in-new slot="icon"/>
+          <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
         </sinch-tabs-icon-option>
         <sinch-tabs-icon-option value="3" aria-label="">
-          <sinch-icon-open-in-new slot="icon"/>
+          <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
         </sinch-tabs-icon-option>
         <sinch-tabs-icon-option value="4" aria-label="">
-          <sinch-icon-open-in-new slot="icon"/>
+          <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
         </sinch-tabs-icon-option>
       </sinch-tabs>
     )
@@ -72,7 +72,7 @@ export const Tabs: FC = () => {
           disabled={isDisabled}
           aria-label="Tab"
         >
-          <sinch-icon-open-in-new slot="icon"/>
+          <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
         </sinch-tabs-option>
       </sinch-tabs>
     )
@@ -81,10 +81,10 @@ export const Tabs: FC = () => {
   return (
     <sinch-tabs value={value} on-change={onChange} aria-label="Tabs">
       <sinch-tabs-option value="1" text="Short" aria-label="">
-        <sinch-icon-open-in-new slot="icon"/>
+        <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
       </sinch-tabs-option>
       <sinch-tabs-option value="2" text="Option value 2" disabled aria-label="">
-        <sinch-icon-open-in-new slot="icon"/>
+        <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
       </sinch-tabs-option>
       <sinch-tabs-option value="3" text="Long option text text" aria-label=""/>
       <sinch-tabs-option value="4" text="Option value 4" aria-label=""/>

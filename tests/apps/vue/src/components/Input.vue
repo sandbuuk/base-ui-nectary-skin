@@ -13,7 +13,7 @@
     @--change="onChange"
     @--focus="onFocus"
     @--blur="onBlur">
-    <sinch-icon-search v-if="hasIcon" slot="icon"></sinch-icon-search>
+    <sinch-icon-fa-magnifying-glass v-if="hasIcon" slot="icon"></sinch-icon-fa-magnifying-glass>
     <sinch-select-button
       v-if="hasLeft"
       slot="left"
@@ -32,7 +32,7 @@ import '@nectary/components/input'
 import '@nectary/components/select-button'
 import '@nectary/components/tag'
 import '@nectary/components/chip'
-import '@nectary/assets/icons/search'
+import '@nectary/assets/icons/fa-magnifying-glass'
 
 export default {
   methods: {

@@ -1,8 +1,8 @@
 import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/button'
-import '@nectary/assets/icons/open-in-new'
-import '@nectary/assets/icons/expand-more'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/assets/icons/fa-angle-down'
 import '@nectary/components/spinner'
 
 export const Button: FC = () => {
@@ -31,9 +31,9 @@ export const Button: FC = () => {
       on-blur={onBlur}
       aria-label="Button"
     >
-      {hasSpinner && <sinch-spinner slot="icon"/>}
-      {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
-      {hasRightIcon && <sinch-icon-expand-more slot="right-icon"/>}
+      {hasSpinner && <sinch-spinner slot="icon" />}
+      {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon" />}
+      {hasRightIcon && <sinch-icon-fa-angle-down slot="right-icon" />}
     </sinch-button>
   )
 }

@@ -4,13 +4,13 @@
     v-bind:text="text"
     v-bind:small="isSmall"
   >
-    <sinch-icon-open-in-new v-if="hasIcon" slot="icon"></sinch-icon-open-in-new>
+    <sinch-icon-fa-arrow-up-right-from-square v-if="hasIcon" slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
   </sinch-tag>
 </template>
 
 <script>
 import '@nectary/components/tag'
-import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
 
 export default {
   computed: {

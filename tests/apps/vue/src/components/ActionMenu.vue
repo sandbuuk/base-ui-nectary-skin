@@ -7,7 +7,7 @@
       :text="value.text"
       :disabled="value.isDisabled"
       @--click="onClick(key)">
-      <sinch-icon-open-in-new v-if="value.icon === '1'" slot="icon"></sinch-icon-open-in-new>
+      <sinch-icon-fa-arrow-up-right-from-square v-if="value.icon === '1'" slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
     </sinch-action-menu-option>
   </sinch-action-menu>
 </template>
@@ -15,7 +15,7 @@
 <script>
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
-import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
 
 export default {
   methods: {

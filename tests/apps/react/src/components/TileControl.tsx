@@ -3,15 +3,15 @@ import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/tile-control'
 import '@nectary/components/tile-control-option'
-import '@nectary/assets/icons/chat'
-import '@nectary/assets/icons/title'
-import '@nectary/assets/icons/format-align-left'
-import '@nectary/assets/icons/qr-code'
-import '@nectary/assets/icons/library-add-check'
-import '@nectary/assets/icons/smart-button'
-import '@nectary/assets/icons/add-to-home-screen'
 import '@nectary/assets/icons/camera'
-import '@nectary/assets/icons/alarm-add'
+import '@nectary/assets/icons/fa-message'
+import '@nectary/assets/icons/fa-t'
+import '@nectary/assets/icons/fa-align-left'
+import '@nectary/assets/icons/fa-qrcode'
+import '@nectary/assets/icons/fa-square-check'
+import '@nectary/assets/icons/ai'
+import '@nectary/assets/icons/fa-house-heart'
+import '@nectary/assets/icons-branded/contact'
 
 export const TileControl: FC = () => {
   const [search] = useSearchParams()
@@ -49,7 +49,7 @@ export const TileControl: FC = () => {
         on-focus={onFocus}
         on-blur={onBlur}
       >
-        <sinch-icon-chat slot="icon"/>
+        <sinch-icon-fa-message slot="icon"/>
       </sinch-tile-control-option>
       {!isSingleOption && (
         <>
@@ -60,7 +60,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-title slot="icon"/>
+            <sinch-icon-fa-t slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="2"
@@ -70,7 +70,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-format-align-left slot="icon"/>
+            <sinch-icon-fa-align-left slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="3"
@@ -79,7 +79,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-qr-code slot="icon"/>
+            <sinch-icon-fa-qrcode slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="4"
@@ -88,7 +88,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-library-add-check slot="icon"/>
+            <sinch-icon-fa-square-check slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="5"
@@ -97,7 +97,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-smart-button slot="icon"/>
+            <sinch-icon-ai slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="6"
@@ -106,7 +106,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-add-to-home-screen slot="icon"/>
+            <sinch-icon-fa-house-heart slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="7"
@@ -124,7 +124,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-alarm-add slot="icon"/>
+            <sinch-icon-branded-contact slot="icon"/>
           </sinch-tile-control-option>
         </>
       )}

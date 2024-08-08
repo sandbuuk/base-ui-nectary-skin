@@ -10,7 +10,7 @@
       type="secondary"
       aria-label="Choose files"
     >
-      <sinch-icon-upload slot="left-icon"></sinch-icon-upload>
+      <sinch-icon-fa-arrow-up-from-line slot="left-icon"></sinch-icon-fa-arrow-up-from-line>
     </sinch-button>
   </sinch-file-picker>
 </template>
@@ -18,7 +18,7 @@
 <script>
 import '@nectary/components/file-picker'
 import '@nectary/components/button'
-import '@nectary/assets/icons/upload'
+import '@nectary/assets/icons/fa-arrow-up-from-line'
 
 export default {
   methods: {

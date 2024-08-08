@@ -56,7 +56,6 @@ import { Text } from './components/Text'
 import { Textarea } from './components/Textarea'
 import { TextareaExample } from './components/TextareaExample'
 import { TileControl } from './components/TileControl'
-import { TimeInput } from './components/TimeInput'
 import { TimePicker } from './components/TimePicker'
 import { Title } from './components/Title'
 import { Toast } from './components/Toast'
@@ -145,7 +144,6 @@ const AppImpl = () => {
         <Route path="/textarea-example" element={<TextareaExample/>}/>
         <Route path="/textarea" element={<Textarea/>}/>
         <Route path="/tile-control" element={<TileControl/>}/>
-        <Route path="/time-input" element={<TimeInput/>}/>
         <Route path="/time-picker" element={<TimePicker/>}/>
         <Route path="/title" element={<Title/>}/>
         <Route path="/toast-manager" element={<ToastManager/>}/>

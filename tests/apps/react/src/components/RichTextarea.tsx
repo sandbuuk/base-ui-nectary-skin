@@ -5,8 +5,8 @@ import type { FC } from 'react'
 import '@nectary/components/rich-textarea'
 import '@nectary/components/icon'
 import '@nectary/components/button'
-import '@nectary/assets/icons/variables'
-import '@nectary/assets/icons/send'
+import '@nectary/assets/icons/fa-brackets-curly'
+import '@nectary/assets/icons/fa-paper-plane-top'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
@@ -121,7 +121,7 @@ export const RichTextarea: FC = () => {
         on-focus={onFocus}
         on-blur={onBlur}
       >
-        { hasTop && (
+        {hasTop && (
           <>
             <sinch-button slot="top" size="s" id="format-italic" aria-label="Format italic" on-click={onFormatItalic}>
               <sinch-icon slot="icon" name="format_italic"/>
@@ -150,7 +150,7 @@ export const RichTextarea: FC = () => {
               <sinch-icon slot="icon" name="attach_file"/>
             </sinch-button>
             <sinch-button slot="bottom" size="s" aria-label="Variables">
-              <sinch-icon-variables slot="icon"/>
+              <sinch-icon-fa-brackets-curly slot="icon"/>
             </sinch-button>
             <sinch-button slot="bottom" size="s" aria-label="Options">
               <sinch-icon slot="icon" name="more_horiz"/>
@@ -163,7 +163,7 @@ export const RichTextarea: FC = () => {
               text="Send"
               style={{ marginLeft: 'auto' }}
             >
-              <sinch-icon-send slot="right-icon"/>
+              <sinch-icon-fa-paper-plane-top slot="right-icon"/>
             </sinch-button>
           </>
         )}

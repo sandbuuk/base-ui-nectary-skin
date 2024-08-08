@@ -6,7 +6,7 @@
       aria-label="Message"
       @--focus="onFocus"
       @--blur="onBlur">
-      <sinch-icon-chat slot="icon"></sinch-icon-chat>
+      <sinch-icon-fa-message slot="icon"></sinch-icon-fa-message>
     </sinch-tile-control-option>
     <template v-if="!isSingleOption">
       <sinch-tile-control-option
@@ -15,7 +15,7 @@
         aria-label="Title"
         @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon-title slot="icon"></sinch-icon-title>
+        <sinch-icon-fa-t  slot="icon"></sinch-icon-fa-t>
       </sinch-tile-control-option>
       <sinch-tile-control-option
         value="2"
@@ -24,7 +24,7 @@
         disabled
         @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon-format-align-left slot="icon"></sinch-icon-format-align-left>
+        <sinch-icon-fa-align-left slot="icon"></sinch-icon-fa-align-left>
       </sinch-tile-control-option>
       <sinch-tile-control-option
         value="3"
@@ -32,7 +32,7 @@
         aria-label="qr code"
         @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon-qr-code slot="icon"></sinch-icon-qr-code>
+        <sinch-icon-fa-qrcode slot="icon"></sinch-icon-fa-qrcode>
       </sinch-tile-control-option>
       <sinch-tile-control-option
         value="4"
@@ -40,7 +40,7 @@
         aria-label="terms"
         @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon-library-add-check slot="icon"></sinch-icon-library-add-check>
+        <sinch-icon-fa-square-check slot="icon"></sinch-icon-fa-square-check>
       </sinch-tile-control-option>
       <sinch-tile-control-option
         value="5"
@@ -48,7 +48,7 @@
         aria-label="button"
         @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon-smart-button slot="icon"></sinch-icon-smart-button>
+        <sinch-icon-ai slot="icon"></sinch-icon-ai>
       </sinch-tile-control-option>
       <sinch-tile-control-option
         value="6"
@@ -56,7 +56,7 @@
         aria-label="mobile app"
         @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon-add-to-home-screen slot="icon"></sinch-icon-add-to-home-screen>
+        <sinch-icon-fa-house-heart slot="icon"></sinch-icon-fa-house-heart>
       </sinch-tile-control-option>
       <sinch-tile-control-option
         value="7"
@@ -72,25 +72,24 @@
         aria-label="separator"
         @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon-alarm-add slot="icon"></sinch-icon-alarm-add>
+        <sinch-icon-branded-contact slot="icon"></sinch-icon-branded-contact>
       </sinch-tile-control-option>
     </template>
   </sinch-tile-control>
 </template>
 
 <script>
-import '@nectary/components/tile-control'
-import '@nectary/components/tile-control-option'
-import '@nectary/assets/icons/accessibility'
-import '@nectary/assets/icons/chat'
-import '@nectary/assets/icons/title'
-import '@nectary/assets/icons/format-align-left'
-import '@nectary/assets/icons/qr-code'
-import '@nectary/assets/icons/library-add-check'
-import '@nectary/assets/icons/smart-button'
-import '@nectary/assets/icons/add-to-home-screen'
-import '@nectary/assets/icons/camera'
-import '@nectary/assets/icons/alarm-add'
+import "@nectary/components/tile-control";
+import "@nectary/components/tile-control-option";
+import "@nectary/assets/icons/fa-align-left";
+import "@nectary/assets/icons/camera";
+import "@nectary/assets/icons/fa-message";
+import "@nectary/assets/icons/fa-t";
+import "@nectary/assets/icons/fa-qrcode";
+import "@nectary/assets/icons/fa-square-check";
+import "@nectary/assets/icons/ai";
+import "@nectary/assets/icons/fa-house-heart";
+import "@nectary/assets/icons-branded/contact";
 
 export default {
   methods: {

@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/toast'
 import '@nectary/components/button'
-import '@nectary/assets/icons/close'
+import '@nectary/assets/icons/fa-xmark'
 
 const md = 'To set up the `LINE`, read and **accept** the `LINE` [terms & conditions](https://google.com).'
 
@@ -49,7 +49,7 @@ export const Toast: FC = () => {
           on-focus={onCloseFocus}
           on-blur={onCloseBlur}
         >
-          <sinch-icon-close slot="icon"/>
+          <sinch-icon-fa-xmark slot="icon"/>
         </sinch-button>
       )}
       {hasAction && (

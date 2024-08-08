@@ -1,10 +1,10 @@
-import { Component } from '@angular/core'
-import '@nectary/components/rich-textarea'
-import '@nectary/components/button'
-import '@nectary/components/icon'
-import '@nectary/assets/icons/variables'
-import '@nectary/assets/icons/send'
-import { ActivatedRoute } from '@angular/router'
+import { Component } from "@angular/core";
+import "@nectary/components/rich-textarea";
+import "@nectary/components/button";
+import "@nectary/components/icon";
+import "@nectary/assets/icons/fa-brackets-curly";
+import "@nectary/assets/icons/fa-paper-plane-top";
+import { ActivatedRoute } from "@angular/router";
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
@@ -25,55 +25,47 @@ If ___you___ have *any questions*, contact your ~~parents~~😆 account __manage
       3. level 2
       3. inner item 2
    2. inner item 2
-`
+`;
 
 @Component({
-  selector: 'rich-textarea-component',
-  templateUrl: './RichTextarea.component.html',
-  styles: [':host{ display: contents; }']
+  selector: "rich-textarea-component",
+  templateUrl: "./RichTextarea.component.html",
+  styles: [":host{ display: contents; }"],
 })
-
 export class RichTextareaComponent {
-  value: string
-  placeholderText: string | null
-  hasTop: boolean
-  hasBottom: boolean
+  value: string;
+  placeholderText: string | null;
+  hasTop: boolean;
+  hasBottom: boolean;
 
   constructor(private route: ActivatedRoute) {
-    const search = this.route.snapshot.queryParamMap
+    const search = this.route.snapshot.queryParamMap;
 
-    this.value = search.get('example') === 'md' ? mdText : (search.get('value') ?? '')
-    this.placeholderText = search.get('placeholder')
-    this.hasTop = search.get('top') !== null
-    this.hasBottom = search.get('bottom') !== null
+    this.value =
+      search.get("example") === "md" ? mdText : search.get("value") ?? "";
+    this.placeholderText = search.get("placeholder");
+    this.hasTop = search.get("top") !== null;
+    this.hasBottom = search.get("bottom") !== null;
   }
 
   onChange(e: Event) {
-    this.value = (e as CustomEvent).detail
-    window.dispatchEvent(new CustomEvent('sinch-rich-textarea-change', {detail: (e as CustomEvent).detail}))
+    this.value = (e as CustomEvent).detail;
+    window.dispatchEvent(
+      new CustomEvent("sinch-rich-textarea-change", {
+        detail: (e as CustomEvent).detail,
+      })
+    );
   }
   onFocus() {
-    window.dispatchEvent(new CustomEvent('sinch-rich-textarea-focus'))
+    window.dispatchEvent(new CustomEvent("sinch-rich-textarea-focus"));
   }
   onBlur() {
-    window.dispatchEvent(new CustomEvent('sinch-rich-textarea-blur'))
+    window.dispatchEvent(new CustomEvent("sinch-rich-textarea-blur"));
   }
-  onFormatItalic() {
-
-  }
-  onFormatBold() {
-
-  }
-  onFormatStrikethrough() {
-
-  }
-  onFormatCodeTag() {
-
-  }
-  onFormatListBulleted() {
-
-  }
-  onFormatListNumbered() {
-
-  }
+  onFormatItalic() {}
+  onFormatBold() {}
+  onFormatStrikethrough() {}
+  onFormatCodeTag() {}
+  onFormatListBulleted() {}
+  onFormatListNumbered() {}
 }

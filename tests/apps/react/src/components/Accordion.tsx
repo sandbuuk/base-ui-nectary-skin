@@ -5,7 +5,7 @@ import type { FC } from 'react'
 import '@nectary/components/text'
 import '@nectary/components/accordion'
 import '@nectary/components/accordion-item'
-import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
 
 type TExampleItem = {
   value: string,
@@ -82,7 +82,7 @@ export const Accordion: FC = () => {
           optionalText={opt.optional}
         >
           {opt.content != null && <sinch-text slot="content" type="m">{opt.content}</sinch-text>}
-          {opt.icon === true && <sinch-icon-open-in-new slot="icon"/>}
+          {opt.icon === true && <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>}
         </sinch-accordion-item>
       ))}
     </sinch-accordion>

@@ -4,11 +4,9 @@
   (-change)="onChange($event)"
   (-invalid)="onInvalid($event)"
 >
-  <sinch-button
-    text="Choose files"
-    type="secondary"
-    aria-label="Choose files"
-  >
-    <sinch-icon-upload slot="left-icon"></sinch-icon-upload>
+  <sinch-button text="Choose files" type="secondary" aria-label="Choose files">
+    <sinch-icon-fa-arrow-up-from-line
+      slot="left-icon"
+    ></sinch-icon-fa-arrow-up-from-line>
   </sinch-button>
 </sinch-file-picker>

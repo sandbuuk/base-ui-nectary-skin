@@ -29,13 +29,13 @@
         <sinch-icon slot="icon" name="attach_file"></sinch-icon>
       </sinch-button>
       <sinch-button slot="bottom" size="s" aria-label="Variables">
-        <sinch-icon-variables slot="icon"></sinch-icon-variables>
+        <sinch-icon-fa-brackets-curly slot="icon"></sinch-icon-fa-brackets-curly>
       </sinch-button>
       <sinch-button slot="bottom" size="s" aria-label="Options">
         <sinch-icon slot="icon" name="more_horiz"></sinch-icon>
       </sinch-button>
       <sinch-button slot="bottom" type="primary" size="s" aria-label="Send" text="Send" style="margin-left: auto;">
-        <sinch-icon-send slot="right-icon"></sinch-icon-send>
+        <sinch-icon-fa-paper-plane-top slot="right-icon"></sinch-icon-fa-paper-plane-top>
       </sinch-button>
     </template>
   </sinch-rich-textarea>
@@ -45,8 +45,8 @@
 import '@nectary/components/rich-textarea'
 import '@nectary/components/button'
 import '@nectary/components/icon'
-import '@nectary/assets/icons/variables'
-import '@nectary/assets/icons/send'
+import '@nectary/assets/icons/fa-brackets-curly'
+import '@nectary/assets/icons/fa-paper-plane-top'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).

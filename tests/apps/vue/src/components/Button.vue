@@ -9,15 +9,15 @@
     @--focus="onFocus"
     @--blur="onBlur">
     <sinch-spinner v-if="hasSpinner" static :type="isSmall ? 'small' : 'medium'" slot="icon"></sinch-spinner>
-    <sinch-icon-open-in-new v-if="hasIcon" slot="icon"></sinch-icon-open-in-new>
-    <sinch-icon-expand-more v-if="hasRightIcon" slot="right-icon"></sinch-icon-expand-more>
+    <sinch-icon-fa-arrow-up-right-from-square v-if="hasIcon" slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+    <sinch-icon-fa-angle-down v-if="hasRightIcon" slot="right-icon"></sinch-icon-fa-angle-down>
   </sinch-button>
 </template>
 
 <script>
 import '@nectary/components/button'
-import '@nectary/assets/icons/open-in-new'
-import '@nectary/assets/icons/expand-more'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/assets/icons/fa-angle-down'
 import '@nectary/components/spinner'
 
 export default {
