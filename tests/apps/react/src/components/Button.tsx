@@ -31,9 +31,9 @@ export const Button: FC = () => {
       on-blur={onBlur}
       aria-label="Button"
     >
-      {hasSpinner && <sinch-spinner slot="icon" />}
-      {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon" />}
-      {hasRightIcon && <sinch-icon-fa-angle-down slot="right-icon" />}
+      {hasSpinner && <sinch-spinner slot="icon"/>}
+      {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>}
+      {hasRightIcon && <sinch-icon-fa-angle-down slot="right-icon"/>}
     </sinch-button>
   )
 }

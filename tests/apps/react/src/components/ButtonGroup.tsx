@@ -5,7 +5,6 @@ import '@nectary/components/button-group-item'
 import '@nectary/components/spinner'
 import '@nectary/assets/icons/fa-arrow-up-right-from-square'
 import '@nectary/assets/icons/fa-angle-down'
-import '@nectary/assets/icons/fa-angle-down'
 
 export const ButtonGroup: FC = () => {
   const [search] = useSearchParams()
@@ -32,25 +31,25 @@ export const ButtonGroup: FC = () => {
         disabled={isDisabled}
         toggled={isToggled}
       >
-        {hasSpinner && <sinch-spinner slot="icon" />}
-        {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon" />}
-        {hasRightIcon && <sinch-icon-fa-angle-down slot="right-icon" />}
+        {hasSpinner && <sinch-spinner slot="icon"/>}
+        {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>}
+        {hasRightIcon && <sinch-icon-fa-angle-down slot="right-icon"/>}
       </sinch-button-group-item>
       <sinch-button-group-item
         aria-label="button-2"
         text={text}
       >
-        {hasSpinner && <sinch-spinner slot="icon" />}
-        {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon" />}
-        {hasRightIcon && <sinch-icon-fa-angle-down slot="right-icon" />}
+        {hasSpinner && <sinch-spinner slot="icon"/>}
+        {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>}
+        {hasRightIcon && <sinch-icon-fa-angle-down slot="right-icon"/>}
       </sinch-button-group-item>
       <sinch-button-group-item
         aria-label="button-3"
         text={text}
       >
-        {hasSpinner && <sinch-spinner slot="icon" />}
-        {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon" />}
-        {hasRightIcon && <sinch-icon-fa-angle-down slot="right-icon" />}
+        {hasSpinner && <sinch-spinner slot="icon"/>}
+        {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>}
+        {hasRightIcon && <sinch-icon-fa-angle-down slot="right-icon"/>}
       </sinch-button-group-item>
     </sinch-button-group>
   )
