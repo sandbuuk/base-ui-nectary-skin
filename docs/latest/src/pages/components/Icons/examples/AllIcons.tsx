@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/input'
-import '@nectary/components/icon'
 import '@nectary/components/button'
+import '@nectary/components/icon'
 
 const req = import.meta.webpackContext!('@nectary/assets/icons', {
   regExp: /^.*\/index$/,
@@ -33,6 +33,10 @@ const inputStyle: CSSProperties = {
   alignSelf: 'center',
 }
 
+const getCopyIconNameFn = (name: string) => async () => {
+  await navigator.clipboard.writeText(name)
+}
+
 export const AllIconsExample: FC = () => {
   const [search, setSearch] = useState('')
   const onChange = (e: CustomEvent<string>) => setSearch(e.detail)
@@ -51,13 +55,13 @@ export const AllIconsExample: FC = () => {
         on-change={onChange}
         aria-label="Search"
       >
-        <sinch-icon slot="icon" name="search"/>
+        <sinch-icon slot="icon" name="search" />
         <sinch-button slot="right" on-click={onClearSearch} aria-label="Clear search">
-          <sinch-icon slot="icon" name="close"/>
+          <sinch-icon slot="icon" name="close" />
         </sinch-button>
       </sinch-input>
       <div style={iconsWrapperStyle}>
-        {names.map((name) => React.createElement(name, { key: name, title: name }))}
+        {names.map((name) => React.createElement(name, { key: name, title: name, 'on-click': getCopyIconNameFn(name) }))}
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import '../icon'
+import '@nectary/assets/icons/fa-check'
 import '../text'
 import {
   defineCustomElement,
@@ -12,7 +12,10 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchSelectMenuOptionElement, TSinchSelectMenuOptionReact } from './types'
+import type {
+  TSinchSelectMenuOptionElement,
+  TSinchSelectMenuOptionReact,
+} from './types'
 
 const template = document.createElement('template')
 
@@ -39,7 +42,11 @@ export class SelectMenuOption extends NectaryElement {
     return ['text', 'data-checked', 'disabled']
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+  attributeChangedCallback(
+    name: string,
+    oldVal: string | null,
+    newVal: string | null
+  ) {
     if (isAttrEqual(oldVal, newVal)) {
       return
     }
@@ -52,7 +59,11 @@ export class SelectMenuOption extends NectaryElement {
       }
 
       case 'data-checked': {
-        updateExplicitBooleanAttribute(this, 'aria-selected', isAttrTrue(newVal))
+        updateExplicitBooleanAttribute(
+          this,
+          'aria-selected',
+          isAttrTrue(newVal)
+        )
 
         break
       }

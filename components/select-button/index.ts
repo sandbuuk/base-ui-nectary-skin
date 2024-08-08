@@ -1,5 +1,5 @@
-import '../text'
-import '../icon'
+import "../text";
+import "@nectary/assets/icons/fa-chevron-down";
 import {
   defineCustomElement,
   getAttribute,
@@ -15,255 +15,269 @@ import {
   updateLiteralAttribute,
   Context,
   isAttrEqual,
-} from '../utils'
-import { DEFAULT_SIZE, sizeValues } from '../utils/size'
-import templateHTML from './template.html'
-import type { TSinchSelectButtonElement, TSinchSelectButtonReact } from './types'
+} from "../utils";
+import { DEFAULT_SIZE, sizeValues } from "../utils/size";
+import templateHTML from "./template.html";
 import type {
-  TContextSize,
-} from '../utils'
-import type { TSinchSize } from '../utils/size'
+  TSinchSelectButtonElement,
+  TSinchSelectButtonReact,
+} from "./types";
+import type { TContextSize } from "../utils";
+import type { TSinchSize } from "../utils/size";
 
-const template = document.createElement('template')
+const template = document.createElement("template");
 
-template.innerHTML = templateHTML
+template.innerHTML = templateHTML;
 
-defineCustomElement('sinch-select-button', class extends NectaryElement {
-  #$text: HTMLElement
-  #$placeholder: HTMLElement
-  #$leftSlot: HTMLSlotElement
-  #$leftWrapper: HTMLElement
-  #$wrapper: HTMLElement
-  #controller: AbortController | null = null
-  #sizeContext: Context<'size'>
+defineCustomElement(
+  "sinch-select-button",
+  class extends NectaryElement {
+    #$text: HTMLElement;
+    #$placeholder: HTMLElement;
+    #$leftSlot: HTMLSlotElement;
+    #$leftWrapper: HTMLElement;
+    #$wrapper: HTMLElement;
+    #controller: AbortController | null = null;
+    #sizeContext: Context<"size">;
 
-  constructor() {
-    super()
+    constructor() {
+      super();
 
-    const shadowRoot = this.attachShadow()
+      const shadowRoot = this.attachShadow();
 
-    shadowRoot.appendChild(template.content.cloneNode(true))
+      shadowRoot.appendChild(template.content.cloneNode(true));
 
-    this.#$text = shadowRoot.querySelector('#text')!
-    this.#$placeholder = shadowRoot.querySelector('#placeholder')!
-    this.#$leftSlot = shadowRoot.querySelector('slot[name="left"]')!
-    this.#$leftWrapper = shadowRoot.querySelector('#left')!
-    this.#$wrapper = shadowRoot.querySelector('#wrapper')!
-    this.#sizeContext = new Context(this.#$wrapper, 'size')
-  }
-
-  connectedCallback() {
-    super.connectedCallback()
-
-    this.#controller = new AbortController()
-
-    const { signal } = this.#controller
-
-    this.role = 'button'
-    this.tabIndex = 0
-    this.addEventListener('click', this.#onButtonClick, { signal })
-    this.addEventListener('focus', this.#onButtonFocus, { signal })
-    this.addEventListener('blur', this.#onButtonBlur, { signal })
-    this.addEventListener('keydown', this.#onButtonKeydown, { signal })
-    this.addEventListener('-click', this.#onClickReactHandler, { signal })
-    this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
-    this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
-    this.#$leftSlot.addEventListener('slotchange', this.#onLeftSlotChange, { signal })
-
-    this.#sizeContext.listen(this.#controller.signal)
-    subscribeContext(this, 'size', this.#onContextSize, signal)
-
-    this.#onLeftSlotChange()
-    this.#onSizeUpdate()
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback()
-    this.#controller!.abort()
-    this.#controller = null
-  }
-
-  static get observedAttributes() {
-    return [
-      'text',
-      'placeholder',
-      'invalid',
-      'disabled',
-      'size',
-      'data-size',
-    ]
-  }
-
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (isAttrEqual(oldVal, newVal)) {
-      return
+      this.#$text = shadowRoot.querySelector("#text")!;
+      this.#$placeholder = shadowRoot.querySelector("#placeholder")!;
+      this.#$leftSlot = shadowRoot.querySelector('slot[name="left"]')!;
+      this.#$leftWrapper = shadowRoot.querySelector("#left")!;
+      this.#$wrapper = shadowRoot.querySelector("#wrapper")!;
+      this.#sizeContext = new Context(this.#$wrapper, "size");
     }
 
-    switch (name) {
-      case 'text': {
-        this.#$text.textContent = newVal
+    connectedCallback() {
+      super.connectedCallback();
 
-        break
-      }
+      this.#controller = new AbortController();
 
-      case 'placeholder': {
-        this.#$placeholder.textContent = newVal
+      const { signal } = this.#controller;
 
-        break
-      }
+      this.role = "button";
+      this.tabIndex = 0;
+      this.addEventListener("click", this.#onButtonClick, { signal });
+      this.addEventListener("focus", this.#onButtonFocus, { signal });
+      this.addEventListener("blur", this.#onButtonBlur, { signal });
+      this.addEventListener("keydown", this.#onButtonKeydown, { signal });
+      this.addEventListener("-click", this.#onClickReactHandler, { signal });
+      this.addEventListener("-focus", this.#onFocusReactHandler, { signal });
+      this.addEventListener("-blur", this.#onBlurReactHandler, { signal });
+      this.#$leftSlot.addEventListener("slotchange", this.#onLeftSlotChange, {
+        signal,
+      });
 
-      case 'invalid': {
-        const isInvalid = isAttrTrue(newVal)
+      this.#sizeContext.listen(this.#controller.signal);
+      subscribeContext(this, "size", this.#onContextSize, signal);
 
-        this.ariaInvalid = isInvalid.toString()
-        updateBooleanAttribute(this, 'invalid', isInvalid)
-
-        break
-      }
-
-      case 'disabled': {
-        const isDisabled = isAttrTrue(newVal)
-
-        this.ariaDisabled = isDisabled.toString()
-        updateBooleanAttribute(this, 'disabled', isDisabled)
-
-        break
-      }
-
-      case 'size': {
-        updateAttribute(this, 'data-size', newVal)
-
-        break
-      }
-
-      case 'data-size': {
-        this.#onSizeUpdate()
-
-        break
-      }
-    }
-  }
-
-  set text(value: string) {
-    updateAttribute(this, 'text', value)
-  }
-
-  get text(): string {
-    return getAttribute(this, 'text', '')
-  }
-
-  set placeholder(value: string | null) {
-    updateAttribute(this, 'placeholder', value)
-  }
-
-  get placeholder() {
-    return getAttribute(this, 'placeholder')
-  }
-
-  set invalid(isInvalid: boolean) {
-    updateBooleanAttribute(this, 'invalid', isInvalid)
-  }
-
-  get invalid() {
-    return getBooleanAttribute(this, 'invalid')
-  }
-
-  set disabled(isDisabled: boolean) {
-    updateBooleanAttribute(this, 'disabled', isDisabled)
-  }
-
-  get disabled() {
-    return getBooleanAttribute(this, 'disabled')
-  }
-
-  set size(size: TSinchSize) {
-    updateLiteralAttribute(this, sizeValues, 'size', size)
-  }
-
-  get size(): TSinchSize {
-    return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
-  }
-
-  get focusable() {
-    return true
-  }
-
-  #onContextSize = (e: CustomEvent<TContextSize>) => {
-    if (this.hasAttribute('size')) {
-      return
+      this.#onLeftSlotChange();
+      this.#onSizeUpdate();
     }
 
-    switch (e.detail) {
-      case 'l': {
-        this.setAttribute('data-size', 'm')
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      this.#controller!.abort();
+      this.#controller = null;
+    }
 
-        break
+    static get observedAttributes() {
+      return [
+        "text",
+        "placeholder",
+        "invalid",
+        "disabled",
+        "size",
+        "data-size",
+      ];
+    }
+
+    attributeChangedCallback(
+      name: string,
+      oldVal: string | null,
+      newVal: string | null
+    ) {
+      if (isAttrEqual(oldVal, newVal)) {
+        return;
       }
-      default: {
-        this.setAttribute('data-size', 's')
+
+      switch (name) {
+        case "text": {
+          this.#$text.textContent = newVal;
+
+          break;
+        }
+
+        case "placeholder": {
+          this.#$placeholder.textContent = newVal;
+
+          break;
+        }
+
+        case "invalid": {
+          const isInvalid = isAttrTrue(newVal);
+
+          this.ariaInvalid = isInvalid.toString();
+          updateBooleanAttribute(this, "invalid", isInvalid);
+
+          break;
+        }
+
+        case "disabled": {
+          const isDisabled = isAttrTrue(newVal);
+
+          this.ariaDisabled = isDisabled.toString();
+          updateBooleanAttribute(this, "disabled", isDisabled);
+
+          break;
+        }
+
+        case "size": {
+          updateAttribute(this, "data-size", newVal);
+
+          break;
+        }
+
+        case "data-size": {
+          this.#onSizeUpdate();
+
+          break;
+        }
       }
     }
-  }
 
-  #onSizeUpdate() {
-    if (!this.isDomConnected) {
-      return
+    set text(value: string) {
+      updateAttribute(this, "text", value);
     }
 
-    const size = this.getAttribute('data-size') ?? DEFAULT_SIZE
+    get text(): string {
+      return getAttribute(this, "text", "");
+    }
 
-    this.#sizeContext.dispatch(size)
-  }
+    set placeholder(value: string | null) {
+      updateAttribute(this, "placeholder", value);
+    }
 
-  #onLeftSlotChange = () => {
-    setClass(this.#$leftWrapper, 'empty', this.#$leftSlot.assignedElements().length === 0)
-  }
+    get placeholder() {
+      return getAttribute(this, "placeholder");
+    }
 
-  #onButtonFocus = () => {
-    this.dispatchEvent(new CustomEvent('-focus'))
-  }
+    set invalid(isInvalid: boolean) {
+      updateBooleanAttribute(this, "invalid", isInvalid);
+    }
 
-  #onButtonBlur = () => {
-    this.dispatchEvent(new CustomEvent('-blur'))
-  }
+    get invalid() {
+      return getBooleanAttribute(this, "invalid");
+    }
 
-  #onButtonKeydown = (e: KeyboardEvent) => {
-    switch (e.code) {
-      case 'Space':
-      case 'Enter': {
-        e.preventDefault()
-        this.click()
+    set disabled(isDisabled: boolean) {
+      updateBooleanAttribute(this, "disabled", isDisabled);
+    }
+
+    get disabled() {
+      return getBooleanAttribute(this, "disabled");
+    }
+
+    set size(size: TSinchSize) {
+      updateLiteralAttribute(this, sizeValues, "size", size);
+    }
+
+    get size(): TSinchSize {
+      return getLiteralAttribute(this, sizeValues, "size", DEFAULT_SIZE);
+    }
+
+    get focusable() {
+      return true;
+    }
+
+    #onContextSize = (e: CustomEvent<TContextSize>) => {
+      if (this.hasAttribute("size")) {
+        return;
       }
+
+      switch (e.detail) {
+        case "l": {
+          this.setAttribute("data-size", "m");
+
+          break;
+        }
+        default: {
+          this.setAttribute("data-size", "s");
+        }
+      }
+    };
+
+    #onSizeUpdate() {
+      if (!this.isDomConnected) {
+        return;
+      }
+
+      const size = this.getAttribute("data-size") ?? DEFAULT_SIZE;
+
+      this.#sizeContext.dispatch(size);
     }
-  }
 
-  #onButtonClick = () => {
-    if (!this.disabled) {
-      this.dispatchEvent(new CustomEvent('-click'))
-    }
-  }
+    #onLeftSlotChange = () => {
+      setClass(
+        this.#$leftWrapper,
+        "empty",
+        this.#$leftSlot.assignedElements().length === 0
+      );
+    };
 
-  #onClickReactHandler = (e: Event) => {
-    getReactEventHandler(this, 'on-click')?.(e)
-  }
+    #onButtonFocus = () => {
+      this.dispatchEvent(new CustomEvent("-focus"));
+    };
 
-  #onFocusReactHandler = () => {
-    getReactEventHandler(this, 'on-focus')?.()
-  }
+    #onButtonBlur = () => {
+      this.dispatchEvent(new CustomEvent("-blur"));
+    };
 
-  #onBlurReactHandler = () => {
-    getReactEventHandler(this, 'on-blur')?.()
+    #onButtonKeydown = (e: KeyboardEvent) => {
+      switch (e.code) {
+        case "Space":
+        case "Enter": {
+          e.preventDefault();
+          this.click();
+        }
+      }
+    };
+
+    #onButtonClick = () => {
+      if (!this.disabled) {
+        this.dispatchEvent(new CustomEvent("-click"));
+      }
+    };
+
+    #onClickReactHandler = (e: Event) => {
+      getReactEventHandler(this, "on-click")?.(e);
+    };
+
+    #onFocusReactHandler = () => {
+      getReactEventHandler(this, "on-focus")?.();
+    };
+
+    #onBlurReactHandler = () => {
+      getReactEventHandler(this, "on-blur")?.();
+    };
   }
-})
+);
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-select-button': TSinchSelectButtonReact,
+      "sinch-select-button": TSinchSelectButtonReact;
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-select-button': TSinchSelectButtonElement,
+    "sinch-select-button": TSinchSelectButtonElement;
   }
 }

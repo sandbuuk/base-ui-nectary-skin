@@ -1,6 +1,6 @@
-import '../icon'
-import '../text'
-import '../title'
+import "@nectary/assets/icons/fa-chevron-down";
+import "../text";
+import "../title";
 import {
   defineCustomElement,
   getAttribute,
@@ -13,142 +13,150 @@ import {
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
   updateLiteralAttribute,
-} from '../utils'
-import templateHTML from './template.html'
-import { statusValues } from './utils'
-import type { TSinchAccordionItemElement, TSinchAccordionItemReact, TSinchAccordionStatusType } from './types'
-import type { TSinchTitleElement } from '../title/types'
+} from "../utils";
+import templateHTML from "./template.html";
+import { statusValues } from "./utils";
+import type {
+  TSinchAccordionItemElement,
+  TSinchAccordionItemReact,
+  TSinchAccordionStatusType,
+} from "./types";
+import type { TSinchTitleElement } from "../title/types";
 
-const template = document.createElement('template')
+const template = document.createElement("template");
 
-template.innerHTML = templateHTML
+template.innerHTML = templateHTML;
 
-defineCustomElement('sinch-accordion-item', class extends NectaryElement {
-  #$button: HTMLButtonElement
-  #$title: TSinchTitleElement
-  #$optionalText: HTMLElement
+defineCustomElement(
+  "sinch-accordion-item",
+  class extends NectaryElement {
+    #$button: HTMLButtonElement;
+    #$title: TSinchTitleElement;
+    #$optionalText: HTMLElement;
 
-  constructor() {
-    super()
+    constructor() {
+      super();
 
-    const shadowRoot = this.attachShadow({ delegatesFocus: true })
+      const shadowRoot = this.attachShadow({ delegatesFocus: true });
 
-    shadowRoot.appendChild(template.content.cloneNode(true))
+      shadowRoot.appendChild(template.content.cloneNode(true));
 
-    this.#$button = shadowRoot.querySelector('#button')!
-    this.#$title = shadowRoot.querySelector('#title')!
-    this.#$optionalText = shadowRoot.querySelector('#optional')!
-  }
-
-  connectedCallback() {
-  }
-
-  disconnectedCallback() {
-  }
-
-  static get observedAttributes() {
-    return [
-      'label',
-      'disabled',
-      'data-checked',
-      'optionaltext',
-    ]
-  }
-
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    if (isAttrEqual(oldVal, newVal)) {
-      return
+      this.#$button = shadowRoot.querySelector("#button")!;
+      this.#$title = shadowRoot.querySelector("#title")!;
+      this.#$optionalText = shadowRoot.querySelector("#optional")!;
     }
 
-    switch (name) {
-      case 'label': {
-        updateAttribute(this.#$title, 'text', newVal)
+    connectedCallback() {}
 
-        break
+    disconnectedCallback() {}
+
+    static get observedAttributes() {
+      return ["label", "disabled", "data-checked", "optionaltext"];
+    }
+
+    attributeChangedCallback(
+      name: string,
+      oldVal: string | null,
+      newVal: string | null
+    ) {
+      if (isAttrEqual(oldVal, newVal)) {
+        return;
       }
 
-      case 'disabled': {
-        this.#$button.disabled = isAttrTrue(newVal)
-        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+      switch (name) {
+        case "label": {
+          updateAttribute(this.#$title, "text", newVal);
 
-        break
-      }
+          break;
+        }
 
-      case 'data-checked': {
-        updateExplicitBooleanAttribute(this.#$button, 'aria-expanded', isAttrTrue(newVal))
+        case "disabled": {
+          this.#$button.disabled = isAttrTrue(newVal);
+          updateBooleanAttribute(this, name, isAttrTrue(newVal));
 
-        break
-      }
+          break;
+        }
 
-      case 'optionaltext': {
-        this.#$optionalText.textContent = newVal
+        case "data-checked": {
+          updateExplicitBooleanAttribute(
+            this.#$button,
+            "aria-expanded",
+            isAttrTrue(newVal)
+          );
 
-        break
+          break;
+        }
+
+        case "optionaltext": {
+          this.#$optionalText.textContent = newVal;
+
+          break;
+        }
       }
     }
-  }
 
-  set value(value: string) {
-    updateAttribute(this, 'value', value)
-  }
+    set value(value: string) {
+      updateAttribute(this, "value", value);
+    }
 
-  get value(): string {
-    return getAttribute(this, 'value', '')
-  }
+    get value(): string {
+      return getAttribute(this, "value", "");
+    }
 
-  set label(value: string) {
-    updateAttribute(this, 'label', value)
-  }
+    set label(value: string) {
+      updateAttribute(this, "label", value);
+    }
 
-  get label(): string {
-    return getAttribute(this, 'label', '')
-  }
+    get label(): string {
+      return getAttribute(this, "label", "");
+    }
 
-  set disabled(isDisabled: boolean) {
-    updateBooleanAttribute(this, 'disabled', isDisabled)
-  }
+    set disabled(isDisabled: boolean) {
+      updateBooleanAttribute(this, "disabled", isDisabled);
+    }
 
-  get disabled(): boolean {
-    return getBooleanAttribute(this, 'disabled')
-  }
+    get disabled(): boolean {
+      return getBooleanAttribute(this, "disabled");
+    }
 
-  get status() {
-    return getLiteralAttribute(this, statusValues, 'status', null)
-  }
+    get status() {
+      return getLiteralAttribute(this, statusValues, "status", null);
+    }
 
-  set status(value: TSinchAccordionStatusType | null) {
-    updateLiteralAttribute(this, statusValues, 'status', value)
-  }
+    set status(value: TSinchAccordionStatusType | null) {
+      updateLiteralAttribute(this, statusValues, "status", value);
+    }
 
-  set optionalText(value: string | null) {
-    updateAttribute(this, 'optionaltext', value)
-  }
+    set optionalText(value: string | null) {
+      updateAttribute(this, "optionaltext", value);
+    }
 
-  get optionalText() {
-    return getAttribute(this, 'optionaltext')
-  }
+    get optionalText() {
+      return getAttribute(this, "optionaltext");
+    }
 
-  get focusable() {
-    return true
-  }
+    get focusable() {
+      return true;
+    }
 
-  focus() {
-    this.#$button.focus()
-  }
+    focus() {
+      this.#$button.focus();
+    }
 
-  blur() {
-    this.#$button.blur()
+    blur() {
+      this.#$button.blur();
+    }
   }
-})
+);
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-accordion-item': TSinchAccordionItemReact,
+      "sinch-accordion-item": TSinchAccordionItemReact;
     }
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-accordion-item': TSinchAccordionItemElement,
+    "sinch-accordion-item": TSinchAccordionItemElement;
   }
 }

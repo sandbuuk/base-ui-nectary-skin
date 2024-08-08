@@ -46,17 +46,15 @@
     gap: 8px;
 
     --sinch-global-size-icon: 24px;
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-dialog-color-default-icon-initial
-      );
+    --sinch-global-color-icon: var(
+      --sinch-comp-dialog-color-default-icon-initial
+    );
   }
 
   #caption {
-    --sinch-global-color-text:
-      var(
-        --sinch-comp-dialog-color-default-title-initial
-      );
+    --sinch-global-color-text: var(
+      --sinch-comp-dialog-color-default-title-initial
+    );
     --sinch-comp-title-font: var(--sinch-comp-dialog-font-title);
   }
 
@@ -93,7 +91,7 @@
     <slot id="icon" name="icon"></slot>
     <sinch-title id="caption" type="m" level="3"></sinch-title>
     <sinch-button id="close" size="s">
-      <sinch-icon id="icon-close" slot="icon" name="close"></sinch-icon>
+      <sinch-icon-fa-xmark id="icon-close" slot="icon"></sinch-icon-fa-xmark>
     </sinch-button>
   </div>
   <div id="content">

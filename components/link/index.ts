@@ -1,4 +1,5 @@
-import '../icon'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/assets/icons/fa-arrow-right'
 import {
   defineCustomElement,
   getBooleanAttribute,

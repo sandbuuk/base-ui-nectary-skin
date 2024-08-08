@@ -1,4 +1,5 @@
-import '../icon'
+import '@nectary/assets/icons/fa-arrow-right'
+import '@nectary/assets/icons/fa-arrow-left'
 import {
   defineCustomElement,
   updateAttribute,
@@ -25,192 +26,222 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-pagination', class extends NectaryElement {
-  #$left: HTMLButtonElement
-  #$right: HTMLButtonElement
-  #$buttons: NodeListOf<HTMLButtonElement>
-  #$wrapper: Element
+defineCustomElement(
+  'sinch-pagination',
+  class extends NectaryElement {
+    #$left: HTMLButtonElement
+    #$right: HTMLButtonElement
+    #$buttons: NodeListOf<HTMLButtonElement>
+    #$wrapper: Element
 
-  constructor() {
-    super()
+    constructor() {
+      super()
 
-    const shadowRoot = this.attachShadow()
+      const shadowRoot = this.attachShadow()
 
-    shadowRoot.appendChild(template.content.cloneNode(true))
+      shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$left = shadowRoot.querySelector('#left')!
-    this.#$right = shadowRoot.querySelector('#right')!
-    this.#$buttons = shadowRoot.querySelectorAll<HTMLButtonElement>('.page')
-    this.#$wrapper = shadowRoot.querySelector('#wrapper')!
-  }
-
-  connectedCallback() {
-    this.#onValueChange()
-    this.#$wrapper.addEventListener('click', this.#onButtonClick)
-    this.addEventListener('-change', this.#onChangeReactHandler)
-  }
-
-  disconnectedCallback() {
-    this.#$wrapper.removeEventListener('click', this.#onButtonClick)
-    this.removeEventListener('-change', this.#onChangeReactHandler)
-  }
-
-  static get observedAttributes() {
-    return ['max', 'value']
-  }
-
-  attributeChangedCallback(name: string) {
-    switch (name) {
-      case 'value':
-      case 'max': {
-        this.#onValueChange()
-
-        break
-      }
+      this.#$left = shadowRoot.querySelector('#left')!
+      this.#$right = shadowRoot.querySelector('#right')!
+      this.#$buttons = shadowRoot.querySelectorAll<HTMLButtonElement>('.page')
+      this.#$wrapper = shadowRoot.querySelector('#wrapper')!
     }
-  }
 
-  set value(val: number) {
-    updateAttribute(this, 'value', val)
-  }
+    connectedCallback() {
+      this.#onValueChange()
+      this.#$wrapper.addEventListener('click', this.#onButtonClick)
+      this.addEventListener('-change', this.#onChangeReactHandler)
+    }
 
-  get value(): number {
-    return getIntegerAttribute(this, 'value', 0)
-  }
+    disconnectedCallback() {
+      this.#$wrapper.removeEventListener('click', this.#onButtonClick)
+      this.removeEventListener('-change', this.#onChangeReactHandler)
+    }
 
-  set max(val: number) {
-    updateAttribute(this, 'max', val)
-  }
+    static get observedAttributes() {
+      return ['max', 'value']
+    }
 
-  get max(): number {
-    return getIntegerAttribute(this, 'value', 0)
-  }
+    attributeChangedCallback(name: string) {
+      switch (name) {
+        case 'value':
+        case 'max': {
+          this.#onValueChange()
 
-  #onValueChange() {
-    const value = getIntegerAttribute(this, 'value', 0) - 1
-    const max = Math.max(0, getIntegerAttribute(this, 'max', 0))
-    const valueOffset = Math.min(Math.max(0, value - MIDDLE_BTN_INDEX), Math.max(0, max - NUM_BUTTONS))
-
-    for (let i = 0; i < this.#$buttons.length; i++) {
-      const $b = this.#$buttons[i]
-
-      if (value < 3) {
-        setClass($b, 'active', value === i)
-      } else if (value >= max - MIDDLE_BTN_INDEX) {
-        setClass($b, 'active', i + valueOffset === value)
-      } else {
-        setClass($b, 'active', i === MIDDLE_BTN_INDEX)
-      }
-
-      if (max > NUM_BUTTONS) {
-        setClass($b, 'dots', (i === DOTS_LEFT_INDEX && value > MIDDLE_BTN_INDEX) || (i === DOTS_RIGHT_INDEX && value <= max - DOTS_RIGHT_INDEX))
-      }
-
-      setClass($b, 'hidden', i >= max)
-
-      const btnText = $b.firstElementChild
-
-      if (btnText != null) {
-        btnText.textContent = i === FIRST_BTN_INDEX ? '1' : i === LAST_BTN_INDEX ? String(max) : String(i + 1 + valueOffset)
+          break
+        }
       }
     }
 
-    const isValueBad = value < 0 || value >= max
-
-    this.#$left.disabled = isValueBad || value === 0
-    this.#$right.disabled = isValueBad || value === max - 1
-  }
-
-  #onButtonClick = (e: Event) => {
-    e.stopPropagation()
-
-    const value = Math.max(getIntegerAttribute(this, 'value', 0) - 1)
-    const max = Math.max(0, getIntegerAttribute(this, 'max', 0))
-
-    // Left arrow button
-    if (isTargetEqual(e, this.#$left)) {
-      return this.#dispatchChangeEvent(Math.max(value - 1, 0))
+    set value(val: number) {
+      updateAttribute(this, 'value', val)
     }
 
-    // Right arrow button
-    if (isTargetEqual(e, this.#$right)) {
-      return this.#dispatchChangeEvent(Math.min(value + 1, max))
+    get value(): number {
+      return getIntegerAttribute(this, 'value', 0)
     }
 
-    const btnIndex = getTargetIndexInParent(e, this.#$wrapper) - 1
+    set max(val: number) {
+      updateAttribute(this, 'max', val)
+    }
 
-    if (btnIndex >= FIRST_BTN_INDEX && btnIndex <= LAST_BTN_INDEX) {
-      // First number button
-      if (btnIndex === FIRST_BTN_INDEX) {
-        return this.#dispatchChangeEvent(0)
+    get max(): number {
+      return getIntegerAttribute(this, 'value', 0)
+    }
+
+    #onValueChange() {
+      const value = getIntegerAttribute(this, 'value', 0) - 1
+      const max = Math.max(0, getIntegerAttribute(this, 'max', 0))
+      const valueOffset = Math.min(
+        Math.max(0, value - MIDDLE_BTN_INDEX),
+        Math.max(0, max - NUM_BUTTONS)
+      )
+
+      for (let i = 0; i < this.#$buttons.length; i++) {
+        const $b = this.#$buttons[i]
+
+        if (value < 3) {
+          setClass($b, 'active', value === i)
+        } else if (value >= max - MIDDLE_BTN_INDEX) {
+          setClass($b, 'active', i + valueOffset === value)
+        } else {
+          setClass($b, 'active', i === MIDDLE_BTN_INDEX)
+        }
+
+        if (max > NUM_BUTTONS) {
+          setClass(
+            $b,
+            'dots',
+            (i === DOTS_LEFT_INDEX && value > MIDDLE_BTN_INDEX) ||
+              (i === DOTS_RIGHT_INDEX && value <= max - DOTS_RIGHT_INDEX)
+          )
+        }
+
+        setClass($b, 'hidden', i >= max)
+
+        const btnText = $b.firstElementChild
+
+        if (btnText != null) {
+          btnText.textContent =
+            i === FIRST_BTN_INDEX
+              ? '1'
+              : i === LAST_BTN_INDEX
+                ? String(max)
+                : String(i + 1 + valueOffset)
+        }
       }
 
-      // Last number button
-      if (btnIndex === LAST_BTN_INDEX) {
-        return this.#dispatchChangeEvent(max)
+      const isValueBad = value < 0 || value >= max
+
+      this.#$left.disabled = isValueBad || value === 0
+      this.#$right.disabled = isValueBad || value === max - 1
+    }
+
+    #onButtonClick = (e: Event) => {
+      e.stopPropagation()
+
+      const value = Math.max(getIntegerAttribute(this, 'value', 0) - 1)
+      const max = Math.max(0, getIntegerAttribute(this, 'max', 0))
+
+      // Left arrow button
+      if (isTargetEqual(e, this.#$left)) {
+        return this.#dispatchChangeEvent(Math.max(value - 1, 0))
       }
 
-      // Left dots button
-      if (btnIndex === DOTS_LEFT_INDEX && max > NUM_BUTTONS && value > MIDDLE_BTN_INDEX) {
-        return this.#dispatchChangeEvent(Math.floor(value / 2))
+      // Right arrow button
+      if (isTargetEqual(e, this.#$right)) {
+        return this.#dispatchChangeEvent(Math.min(value + 1, max))
       }
 
-      // Right dots button
-      if (btnIndex === DOTS_RIGHT_INDEX && max > NUM_BUTTONS && value <= max - DOTS_RIGHT_INDEX) {
-        return this.#dispatchChangeEvent(Math.floor((max - value) / 2 + value))
-      }
+      const btnIndex = getTargetIndexInParent(e, this.#$wrapper) - 1
 
-      // Regular number button
-      return this.#dispatchChangeEvent(btnIndex + Math.min(Math.max(0, value - MIDDLE_BTN_INDEX), Math.max(0, max - NUM_BUTTONS)))
+      if (btnIndex >= FIRST_BTN_INDEX && btnIndex <= LAST_BTN_INDEX) {
+        // First number button
+        if (btnIndex === FIRST_BTN_INDEX) {
+          return this.#dispatchChangeEvent(0)
+        }
+
+        // Last number button
+        if (btnIndex === LAST_BTN_INDEX) {
+          return this.#dispatchChangeEvent(max)
+        }
+
+        // Left dots button
+        if (
+          btnIndex === DOTS_LEFT_INDEX &&
+          max > NUM_BUTTONS &&
+          value > MIDDLE_BTN_INDEX
+        ) {
+          return this.#dispatchChangeEvent(Math.floor(value / 2))
+        }
+
+        // Right dots button
+        if (
+          btnIndex === DOTS_RIGHT_INDEX &&
+          max > NUM_BUTTONS &&
+          value <= max - DOTS_RIGHT_INDEX
+        ) {
+          return this.#dispatchChangeEvent(
+            Math.floor((max - value) / 2 + value)
+          )
+        }
+
+        // Regular number button
+        return this.#dispatchChangeEvent(
+          btnIndex +
+            Math.min(
+              Math.max(0, value - MIDDLE_BTN_INDEX),
+              Math.max(0, max - NUM_BUTTONS)
+            )
+        )
+      }
+    }
+
+    #clamp(value: number): number {
+      const max = getIntegerAttribute(this, 'max', 0)
+
+      return Math.max(0, Math.min(max - 1, value)) + 1
+    }
+
+    #dispatchChangeEvent(value: number) {
+      const detail = this.#clamp(value)
+
+      this.dispatchEvent(new CustomEvent('-change', { detail }))
+    }
+
+    #onChangeReactHandler = (e: Event) => {
+      getReactEventHandler(this, 'on-change')?.(e)
+    }
+
+    get focusable() {
+      return true
+    }
+
+    focus() {
+      this.#$left.focus()
+    }
+
+    blur() {
+      this.#$left.blur()
+      this.#$right.blur()
+      this.#$buttons.forEach(($b) => $b.blur())
+    }
+
+    get prevButtonRect() {
+      return getRect(this.#$left)
+    }
+
+    get nextButtonRect() {
+      return getRect(this.#$right)
+    }
+
+    nthButtonRect(index: number): TRect | null {
+      const btn = this.#$buttons[index]
+
+      return btn == null ? null : getRect(btn)
     }
   }
-
-  #clamp(value: number): number {
-    const max = getIntegerAttribute(this, 'max', 0)
-
-    return Math.max(0, Math.min(max - 1, value)) + 1
-  }
-
-  #dispatchChangeEvent(value: number) {
-    const detail = this.#clamp(value)
-
-    this.dispatchEvent(
-      new CustomEvent('-change', { detail })
-    )
-  }
-
-  #onChangeReactHandler = (e: Event) => {
-    getReactEventHandler(this, 'on-change')?.(e)
-  }
-
-  get focusable() {
-    return true
-  }
-
-  focus() {
-    this.#$left.focus()
-  }
-
-  blur() {
-    this.#$left.blur()
-    this.#$right.blur()
-    this.#$buttons.forEach(($b) => $b.blur())
-  }
-
-  get prevButtonRect() {
-    return getRect(this.#$left)
-  }
-
-  get nextButtonRect() {
-    return getRect(this.#$right)
-  }
-
-  nthButtonRect(index: number): TRect | null {
-    const btn = this.#$buttons[index]
-
-    return btn == null ? null : getRect(btn)
-  }
-})
+)
 
 declare global {
   namespace JSX {

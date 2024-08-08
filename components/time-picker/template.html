@@ -1,235 +1,260 @@
 <style>
-:host {
-  display: block;
-  outline: none;
-}
+  :host {
+    display: block;
+    outline: none;
+  }
 
-#wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 248px;
-  padding: 16px;
-  box-sizing: border-box;
-  gap: 16px;
-}
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 248px;
+    padding: 16px;
+    box-sizing: border-box;
+    gap: 16px;
+  }
 
-#header {
-  position: relative;
-  width: 100%;
-  height: 48px;
-  font: var(--sinch-comp-time-picker-header-font);
-  line-height: 48px;
-  user-select: none;
-  color: var(--sinch-comp-time-picker-header-color-default-text-initial);
-}
+  #header {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    font: var(--sinch-comp-time-picker-header-font);
+    line-height: 48px;
+    user-select: none;
+    color: var(--sinch-comp-time-picker-header-color-default-text-initial);
+  }
 
-#footer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 32px;
-}
+  #footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 32px;
+  }
 
-#picker {
-  position: relative;
-  width: 216px;
-  height: 216px;
-  border-radius: 50%;
-  box-sizing: border-box;
-  border: 1px solid var(--sinch-comp-time-picker-watch-face-color-default-border-initial);
-  background-color: var(--sinch-comp-time-picker-watch-face-color-default-background-initial);
-}
+  #picker {
+    position: relative;
+    width: 216px;
+    height: 216px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 1px solid
+      var(--sinch-comp-time-picker-watch-face-color-default-border-initial);
+    background-color: var(
+      --sinch-comp-time-picker-watch-face-color-default-background-initial
+    );
+  }
 
-#picker-hours,
-#picker-minutes {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  pointer-events: none;
-  user-select: none;
-}
+  #picker-hours,
+  #picker-minutes {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    pointer-events: none;
+    user-select: none;
+  }
 
-.digit-hour-12,
-.digit-hour-24,
-.digit-minute {
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  text-align: center;
-  top: calc(50% - 14px);
-  left: calc(50% - 14px);
-  z-index: 1;
-  cursor: pointer;
-}
+  .digit-hour-12,
+  .digit-hour-24,
+  .digit-minute {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    top: calc(50% - 14px);
+    left: calc(50% - 14px);
+    z-index: 1;
+    cursor: pointer;
+  }
 
-.digit-hour-12 {
-  font: var(--sinch-comp-time-picker-digit-font-default-h12);
-  color: var(--sinch-comp-time-picker-digit-color-default-h12-initial);
-  line-height: 28px;
-}
+  .digit-hour-12 {
+    font: var(--sinch-comp-time-picker-digit-font-default-h12);
+    color: var(--sinch-comp-time-picker-digit-color-default-h12-initial);
+    line-height: 28px;
+  }
 
-.digit-hour-12.selected {
-  font: var(--sinch-comp-time-picker-digit-font-checked-h12);
-  color: var(--sinch-comp-time-picker-digit-color-checked-h12-default);
-}
+  .digit-hour-12.selected {
+    font: var(--sinch-comp-time-picker-digit-font-checked-h12);
+    color: var(--sinch-comp-time-picker-digit-color-checked-h12-default);
+  }
 
-.digit-hour-24 {
-  font: var(--sinch-comp-time-picker-digit-font-default-h24);
-  color: var(--sinch-comp-time-picker-digit-color-default-h24-initial);
-  line-height: 28px;
-}
+  .digit-hour-24 {
+    font: var(--sinch-comp-time-picker-digit-font-default-h24);
+    color: var(--sinch-comp-time-picker-digit-color-default-h24-initial);
+    line-height: 28px;
+  }
 
-.digit-hour-24.selected {
-  font: var(--sinch-comp-time-picker-digit-font-checked-h24);
-  color: var(--sinch-comp-time-picker-digit-color-checked-h24-initial);
-}
+  .digit-hour-24.selected {
+    font: var(--sinch-comp-time-picker-digit-font-checked-h24);
+    color: var(--sinch-comp-time-picker-digit-color-checked-h24-initial);
+  }
 
-.digit-minute {
-  font: var(--sinch-comp-time-picker-digit-font-default-minutes);
-  color: var(--sinch-comp-time-picker-digit-color-default-minute-initial);
-  line-height: 28px;
-}
+  .digit-minute {
+    font: var(--sinch-comp-time-picker-digit-font-default-minutes);
+    color: var(--sinch-comp-time-picker-digit-color-default-minute-initial);
+    line-height: 28px;
+  }
 
-.digit-minute.selected {
-  font: var(--sinch-comp-time-picker-digit-font-checked-minutes);
-  color: var(--sinch-comp-time-picker-digit-color-checked-minute-initial);
-}
+  .digit-minute.selected {
+    font: var(--sinch-comp-time-picker-digit-font-checked-minutes);
+    color: var(--sinch-comp-time-picker-digit-color-checked-minute-initial);
+  }
 
-#picker-touch {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  border-radius: 50%;
-}
+  #picker-touch {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 50%;
+  }
 
-#needle-hour,
-#needle-minute,
-#picker-touch::after {
-  background-color: var(--sinch-comp-time-picker-needle-color-default-background-initial);
-}
+  #needle-hour,
+  #needle-minute,
+  #picker-touch::after {
+    background-color: var(
+      --sinch-comp-time-picker-needle-color-default-background-initial
+    );
+  }
 
-#needle-hour,
-#needle-minute {
-  position: absolute;
-  transform-origin: bottom center;
-  transform: rotate(0deg);
-  bottom: 50%;
-  height: 50px;
-  transition-duration: 0.25s;
-  transition-timing-function: ease-in-out;
-  transition-property: transform height;
-  z-index: 2;
-  outline: none;
-}
-
-@media (prefers-reduced-motion) {
   #needle-hour,
   #needle-minute {
-    transition: none;
+    position: absolute;
+    transform-origin: bottom center;
+    transform: rotate(0deg);
+    bottom: 50%;
+    height: 50px;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+    transition-property: transform height;
+    z-index: 2;
+    outline: none;
   }
-}
 
-#needle-hour {
-  width: 4px;
-  left: calc(50% - 2px);
-  border-radius: 2px;
-}
+  @media (prefers-reduced-motion) {
+    #needle-hour,
+    #needle-minute {
+      transition: none;
+    }
+  }
 
-#needle-minute {
-  width: 2px;
-  left: calc(50% - 1px);
-  border-radius: 1px;
-}
+  #needle-hour {
+    width: 4px;
+    left: calc(50% - 2px);
+    border-radius: 2px;
+  }
 
-#needle-hour:focus-visible,
-#needle-minute:focus-visible {
-  background-color: var(--sinch-comp-time-picker-needle-color-default-background-focus);
-}
+  #needle-minute {
+    width: 2px;
+    left: calc(50% - 1px);
+    border-radius: 1px;
+  }
 
-#needle-minute:not(.selected)::after {
-  content: "";
-  position: absolute;
-  transform: translateX(-50%);
-  left: 0;
-  top: -16px;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background-color: var(--sinch-comp-time-picker-digit-color-checked-minute-initial);
-}
+  #needle-hour:focus-visible,
+  #needle-minute:focus-visible {
+    background-color: var(
+      --sinch-comp-time-picker-needle-color-default-background-focus
+    );
+  }
 
-#picker-touch::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
+  #needle-minute:not(.selected)::after {
+    content: "";
+    position: absolute;
+    transform: translateX(-50%);
+    left: 0;
+    top: -16px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(
+      --sinch-comp-time-picker-digit-color-checked-minute-initial
+    );
+  }
 
-#header-hours,
-#header-minutes {
-  position: absolute;
-  padding: 0 4px;
-  width: 50px;
-  outline: none;
-}
+  #picker-touch::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-#header-hours {
-  right: calc(50% + 8px);
-  text-align: right;
-}
+  #header-hours,
+  #header-minutes {
+    position: absolute;
+    padding: 0 4px;
+    width: 50px;
+    outline: none;
+  }
 
-#header-minutes {
-  left: calc(50% + 8px);
-}
+  #header-hours {
+    right: calc(50% + 8px);
+    text-align: right;
+  }
 
-#header-colon {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+  #header-minutes {
+    left: calc(50% + 8px);
+  }
 
-#submit {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
+  #header-colon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-#submit-icon {
-  --sinch-global-color-icon: var(--sinch-comp-time-picker-header-color-default-icon-initial);
-}
+  #submit {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-:host([ampm]) .digit-hour-24 {
-  display: none;
-}
+  #submit-icon {
+    --sinch-global-color-icon: var(
+      --sinch-comp-time-picker-header-color-default-icon-initial
+    );
+  }
 
-:host(:not([ampm])) #footer {
-  display: none;
-}
+  :host([ampm]) .digit-hour-24 {
+    display: none;
+  }
+
+  :host(:not([ampm])) #footer {
+    display: none;
+  }
 </style>
 
 <div id="wrapper">
   <div id="header">
-    <div id="header-hours" role="meter" aria-valuemin="0" aria-valuemax="23" aria-valuenow="0" aria-valuetext="0">
+    <div
+      id="header-hours"
+      role="meter"
+      aria-valuemin="0"
+      aria-valuemax="23"
+      aria-valuenow="0"
+      aria-valuetext="0"
+    >
       <span>00</span>
     </div>
     <div id="header-colon">&colon;</div>
-    <div id="header-minutes" role="meter" aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="0">
+    <div
+      id="header-minutes"
+      role="meter"
+      aria-valuemin="0"
+      aria-valuemax="59"
+      aria-valuenow="0"
+      aria-valuetext="0"
+    >
       <span>00</span>
     </div>
     <sinch-button id="submit" size="s" aria-label="Submit">
-      <sinch-icon id="icon-submit" slot="icon" name="done"></sinch-icon>
+      <sinch-icon-fa-check id="icon-submit" slot="icon"></sinch-icon-fa-check>
     </sinch-button>
   </div>
   <div id="picker" aria-hidden="true">
@@ -242,8 +267,16 @@
   </div>
   <div id="footer">
     <sinch-segmented-control id="ampm">
-      <sinch-segmented-control-option value="am" text="AM" aria-label="AM"></sinch-segmented-control-option>
-      <sinch-segmented-control-option value="pm" text="PM" aria-label="PM"></sinch-segmented-control-option>
+      <sinch-segmented-control-option
+        value="am"
+        text="AM"
+        aria-label="AM"
+      ></sinch-segmented-control-option>
+      <sinch-segmented-control-option
+        value="pm"
+        text="PM"
+        aria-label="PM"
+      ></sinch-segmented-control-option>
     </sinch-segmented-control>
   </div>
 </div>

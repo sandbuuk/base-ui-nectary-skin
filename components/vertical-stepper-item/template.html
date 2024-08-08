@@ -1,141 +1,183 @@
 <style>
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
-:host {
-  display: block;
-  outline: none;
-}
+  /* stylelint-disable csstools/value-no-unknown-custom-properties */
+  :host {
+    display: block;
+    outline: none;
+  }
 
-#wrapper {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  min-height: 68px;
-}
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    min-height: 68px;
+  }
 
-#circle-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 8px;
-  min-width: 0;
-}
+  #circle-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+    min-width: 0;
+  }
 
-#circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background-color: var(--sinch-local-color-background);
-  font: var(--sinch-sys-font-desktop-title-s);
-  line-height: 32px;
-  text-align: center;
-  color: var(--sinch-local-color-text);
-  border: 1px solid var(--sinch-local-color-border);
-  border-radius: 50%;
-  box-sizing: border-box;
+  #circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: var(--sinch-local-color-background);
+    font: var(--sinch-sys-font-desktop-title-s);
+    line-height: 32px;
+    text-align: center;
+    color: var(--sinch-local-color-text);
+    border: 1px solid var(--sinch-local-color-border);
+    border-radius: 50%;
+    box-sizing: border-box;
 
-  --sinch-local-color-background: var(--sinch-comp-vertical-stepper-color-background-default);
-  --sinch-local-color-border: var(--sinch-comp-vertical-stepper-color-border-default);
-  --sinch-local-color-text: var(--sinch-comp-vertical-stepper-color-icon-default);
-  --sinch-local-color-icon: var(--sinch-comp-vertical-stepper-color-icon-default);
-  --sinch-global-size-icon: 20px;
-}
+    --sinch-local-color-background: var(
+      --sinch-comp-vertical-stepper-color-background-default
+    );
+    --sinch-local-color-border: var(
+      --sinch-comp-vertical-stepper-color-border-default
+    );
+    --sinch-local-color-text: var(
+      --sinch-comp-vertical-stepper-color-icon-default
+    );
+    --sinch-local-color-icon: var(
+      --sinch-comp-vertical-stepper-color-icon-default
+    );
+    --sinch-global-size-icon: 20px;
+  }
 
-:host([data-progress="active"]) #circle {
-  --sinch-local-color-background: var(--sinch-comp-vertical-stepper-color-background-active);
-  --sinch-local-color-border: var(--sinch-comp-vertical-stepper-color-border-active);
-  --sinch-local-color-text: var(--sinch-comp-vertical-stepper-color-icon-active);
-  --sinch-local-color-icon: var(--sinch-comp-vertical-stepper-color-icon-active);
-}
+  :host([data-progress="active"]) #circle {
+    --sinch-local-color-background: var(
+      --sinch-comp-vertical-stepper-color-background-active
+    );
+    --sinch-local-color-border: var(
+      --sinch-comp-vertical-stepper-color-border-active
+    );
+    --sinch-local-color-text: var(
+      --sinch-comp-vertical-stepper-color-icon-active
+    );
+    --sinch-local-color-icon: var(
+      --sinch-comp-vertical-stepper-color-icon-active
+    );
+  }
 
-:host([data-progress="done"]) #circle {
-  --sinch-local-color-background: var(--sinch-comp-vertical-stepper-color-background-visited);
-  --sinch-local-color-border: var(--sinch-comp-vertical-stepper-color-border-visited);
-  --sinch-local-color-text: var(--sinch-comp-vertical-stepper-color-icon-visited);
-  --sinch-local-color-icon: var(--sinch-comp-vertical-stepper-color-icon-visited);
-}
+  :host([data-progress="done"]) #circle {
+    --sinch-local-color-background: var(
+      --sinch-comp-vertical-stepper-color-background-visited
+    );
+    --sinch-local-color-border: var(
+      --sinch-comp-vertical-stepper-color-border-visited
+    );
+    --sinch-local-color-text: var(
+      --sinch-comp-vertical-stepper-color-icon-visited
+    );
+    --sinch-local-color-icon: var(
+      --sinch-comp-vertical-stepper-color-icon-visited
+    );
+  }
 
-:host([data-progress="done"][status="error"]) #circle {
-  --sinch-local-color-background: var(--sinch-comp-vertical-stepper-color-background-visited-error);
-  --sinch-local-color-border: var(--sinch-comp-vertical-stepper-color-border-visited-error);
-  --sinch-local-color-text: var(--sinch-comp-vertical-stepper-color-icon-visited-error);
-  --sinch-local-color-icon: var(--sinch-comp-vertical-stepper-color-icon-visited-error);
-}
+  :host([data-progress="done"][status="error"]) #circle {
+    --sinch-local-color-background: var(
+      --sinch-comp-vertical-stepper-color-background-visited-error
+    );
+    --sinch-local-color-border: var(
+      --sinch-comp-vertical-stepper-color-border-visited-error
+    );
+    --sinch-local-color-text: var(
+      --sinch-comp-vertical-stepper-color-icon-visited-error
+    );
+    --sinch-local-color-icon: var(
+      --sinch-comp-vertical-stepper-color-icon-visited-error
+    );
+  }
 
-:host([data-progress="done"][status="skip"]) #circle {
-  --sinch-local-color-background: var(--sinch-comp-vertical-stepper-color-background-visited-skip);
-  --sinch-local-color-border: var(--sinch-comp-vertical-stepper-color-border-visited-skip);
-  --sinch-local-color-text: var(--sinch-comp-vertical-stepper-color-icon-visited-skip);
-  --sinch-local-color-icon: var(--sinch-comp-vertical-stepper-color-icon-visited-skip);
-}
+  :host([data-progress="done"][status="skip"]) #circle {
+    --sinch-local-color-background: var(
+      --sinch-comp-vertical-stepper-color-background-visited-skip
+    );
+    --sinch-local-color-border: var(
+      --sinch-comp-vertical-stepper-color-border-visited-skip
+    );
+    --sinch-local-color-text: var(
+      --sinch-comp-vertical-stepper-color-icon-visited-skip
+    );
+    --sinch-local-color-icon: var(
+      --sinch-comp-vertical-stepper-color-icon-visited-skip
+    );
+  }
 
-#icon-error,
-#icon-success {
-  display: none;
-}
+  #icon-error,
+  #icon-success {
+    display: none;
+  }
 
-:host([data-progress="done"]:not([status])) #icon-success {
-  display: block;
-}
+  :host([data-progress="done"]:not([status])) #icon-success {
+    display: block;
+  }
 
-:host([data-progress="done"][status="error"]) #icon-error {
-  display: block;
-}
+  :host([data-progress="done"][status="error"]) #icon-error {
+    display: block;
+  }
 
-:host([data-progress="done"]:not([status="skip"])) #circle-text {
-  display: none;
-}
+  :host([data-progress="done"]:not([status="skip"])) #circle-text {
+    display: none;
+  }
 
-#content {
-  display: none;
-  padding: 16px 0 16px 40px;
-}
+  #content {
+    display: none;
+    padding: 16px 0 16px 40px;
+  }
 
-:host([data-progress="active"]) #content {
-  display: block;
-}
+  :host([data-progress="active"]) #content {
+    display: block;
+  }
 
-#progress {
-  position: absolute;
-  width: 1px;
-  left: 15.5px;
-  top: 32px;
-  bottom: 0;
-  background-color: var(--sinch-comp-vertical-stepper-color-progress);
-}
+  #progress {
+    position: absolute;
+    width: 1px;
+    left: 15.5px;
+    top: 32px;
+    bottom: 0;
+    background-color: var(--sinch-comp-vertical-stepper-color-progress);
+  }
 
-#bar {
-  position: absolute;
-  width: 1px;
-  height: 0;
-  background-color: var(--sinch-comp-vertical-stepper-color-progress-visited);
-  left: 0;
-  top: 0;
-}
+  #bar {
+    position: absolute;
+    width: 1px;
+    height: 0;
+    background-color: var(--sinch-comp-vertical-stepper-color-progress-visited);
+    left: 0;
+    top: 0;
+  }
 
-:host([data-progress="done"]) #bar {
-  height: 100%;
-}
+  :host([data-progress="done"]) #bar {
+    height: 100%;
+  }
 
-:host(:last-of-type) #progress {
-  display: none;
-}
+  :host(:last-of-type) #progress {
+    display: none;
+  }
 
-#label-wrapper {
-  margin-top: 4px;
-  min-width: 0;
-  flex: 1;
-}
+  #label-wrapper {
+    margin-top: 4px;
+    min-width: 0;
+    flex: 1;
+  }
 
-#label {
-  --sinch-global-color-text: var(--sinch-comp-vertical-stepper-color-label);
-}
+  #label {
+    --sinch-global-color-text: var(--sinch-comp-vertical-stepper-color-label);
+  }
 
-#description {
-  --sinch-global-color-text: var(--sinch-comp-vertical-stepper-color-description);
-}
+  #description {
+    --sinch-global-color-text: var(
+      --sinch-comp-vertical-stepper-color-description
+    );
+  }
 </style>
 
 <div id="wrapper">
@@ -144,8 +186,8 @@
   </div>
   <div id="circle-wrapper">
     <div id="circle" aria-hidden="true">
-      <sinch-icon id="icon-success" name="check"></sinch-icon>
-      <sinch-icon id="icon-error" name="exclamation"></sinch-icon>
+      <sinch-icon-fa-check id="icon-success"></sinch-icon-fa-check>
+      <sinch-icon-fa-exclamation id="icon-error"></sinch-icon-fa-exclamation>
       <span id="circle-text"></span>
     </div>
     <div id="label-wrapper">

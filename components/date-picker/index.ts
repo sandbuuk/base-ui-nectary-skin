@@ -1,4 +1,4 @@
-import '../icon'
+import '@nectary/assets/icons/fa-arrow-left'
 import '../text'
 import {
   defineCustomElement,

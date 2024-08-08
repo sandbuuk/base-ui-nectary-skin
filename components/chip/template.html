@@ -1,65 +1,71 @@
 <style>
-:host {
-  display: inline-block;
-  vertical-align: middle;
-  outline: none;
-  cursor: pointer;
-}
+  :host {
+    display: inline-block;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+  }
 
-#button {
-  all: initial;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 4px;
-  width: 100%;
-  height: var(--sinch-comp-chip-size-container-m);
-  padding: 0 5px 0 9px;
-  border-radius: var(--sinch-comp-chip-shape-radius);
-  background-color: var(--sinch-comp-chip-color-neutral-default-background-initial);
-  box-sizing: border-box;
+  #button {
+    all: initial;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    height: var(--sinch-comp-chip-size-container-m);
+    padding: 0 5px 0 9px;
+    border-radius: var(--sinch-comp-chip-shape-radius);
+    background-color: var(
+      --sinch-comp-chip-color-neutral-default-background-initial
+    );
+    box-sizing: border-box;
 
-  --sinch-global-color-text: var(--sinch-comp-chip-color-neutral-default-foreground-initial);
-  --sinch-global-color-icon: var(--sinch-comp-chip-color-neutral-default-foreground-initial);
-  --sinch-global-size-icon: var(--sinch-comp-chip-size-icon-m);
-}
+    --sinch-global-color-text: var(
+      --sinch-comp-chip-color-neutral-default-foreground-initial
+    );
+    --sinch-global-color-icon: var(
+      --sinch-comp-chip-color-neutral-default-foreground-initial
+    );
+    --sinch-global-size-icon: var(--sinch-comp-chip-size-icon-m);
+  }
 
-:host(:focus-visible) > #button::after {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: calc(var(--sinch-comp-chip-shape-radius) + 4px);
-  border: 2px solid var(--sinch-comp-chip-color-outiline-focus);
-  pointer-events: none;
-}
+  :host(:focus-visible) > #button::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: calc(var(--sinch-comp-chip-shape-radius) + 4px);
+    border: 2px solid var(--sinch-comp-chip-color-outiline-focus);
+    pointer-events: none;
+  }
 
-#text {
-  flex: 1;
+  #text {
+    flex: 1;
 
-  --sinch-comp-text-font: var(--sinch-comp-chip-font-size-m-label);
-}
+    --sinch-comp-text-font: var(--sinch-comp-chip-font-size-m-label);
+  }
 
-:host([small]) #button {
-  height: var(--sinch-comp-chip-size-container-s);
-  padding: 0 3px 0 7px;
+  :host([small]) #button {
+    height: var(--sinch-comp-chip-size-container-s);
+    padding: 0 3px 0 7px;
 
-  --sinch-global-size-icon: var(--sinch-comp-chip-size-icon-s);
-}
+    --sinch-global-size-icon: var(--sinch-comp-chip-size-icon-s);
+  }
 
-:host([small]) #text {
-  --sinch-comp-text-font: var(--sinch-comp-chip-font-size-s-label);
-}
+  :host([small]) #text {
+    --sinch-comp-text-font: var(--sinch-comp-chip-font-size-s-label);
+  }
 
-::slotted([slot="icon"]) {
-  margin-left: -4px;
-}
+  ::slotted([slot="icon"]) {
+    margin-left: -4px;
+  }
 </style>
 
 <div id="button" inert>
   <slot name="icon"></slot>
   <sinch-text id="text" type="xs" ellipsis></sinch-text>
   <slot name="right-icon">
-    <sinch-icon id="icon-close" name="cancel"></sinch-icon>
+    <sinch-circle-cross id="icon-close"></sinch-circle-cross>
   </slot>
 </div>

@@ -1,99 +1,105 @@
 <style>
-:host {
-  display: inline;
-}
+  :host {
+    display: inline;
+  }
 
-a {
-  font: var(--sinch-comp-link-default-font-initial);
-  font-size: inherit;
-  line-height: inherit;
-  text-decoration: var(--sinch-comp-link-default-text-decoration-initial);
-  color: var(--sinch-comp-link-color-default-text-initial);
-  border-radius: 0.5em;
-  white-space: nowrap;
+  a {
+    font: var(--sinch-comp-link-default-font-initial);
+    font-size: inherit;
+    line-height: inherit;
+    text-decoration: var(--sinch-comp-link-default-text-decoration-initial);
+    color: var(--sinch-comp-link-color-default-text-initial);
+    border-radius: 0.5em;
+    white-space: nowrap;
 
-  --sinch-global-color-icon: var(--sinch-comp-link-color-default-icon-initial);
-}
+    --sinch-global-color-icon: var(
+      --sinch-comp-link-color-default-icon-initial
+    );
+  }
 
-a:hover {
-  text-decoration: var(--sinch-comp-link-default-text-decoration-hover);
-  color: var(--sinch-comp-link-color-default-text-hover);
+  a:hover {
+    text-decoration: var(--sinch-comp-link-default-text-decoration-hover);
+    color: var(--sinch-comp-link-color-default-text-hover);
 
-  --sinch-global-color-icon: var(--sinch-comp-link-color-default-icon-hover);
-}
+    --sinch-global-color-icon: var(--sinch-comp-link-color-default-icon-hover);
+  }
 
-a:focus-visible {
-  outline: 2px solid var(--sinch-comp-link-color-default-outline-focus);
-  outline-offset: 2px;
-}
+  a:focus-visible {
+    outline: 2px solid var(--sinch-comp-link-color-default-outline-focus);
+    outline-offset: 2px;
+  }
 
-:host([standalone]) {
-  display: block;
-}
+  :host([standalone]) {
+    display: block;
+  }
 
-:host([standalone]) a {
-  display: block;
-  font: var(--sinch-comp-link-standalone-font-initial);
-  font-size: inherit;
-  line-height: inherit;
-  text-decoration: none;
-  width: fit-content;
-}
+  :host([standalone]) a {
+    display: block;
+    font: var(--sinch-comp-link-standalone-font-initial);
+    font-size: inherit;
+    line-height: inherit;
+    text-decoration: none;
+    width: fit-content;
+  }
 
-#external-icon,
-#standalone-icon {
-  display: none;
-  height: 1em;
-}
+  #external-icon,
+  #standalone-icon {
+    display: none;
+    height: 1em;
+  }
 
-#icon-prefix {
-  display: none;
-  margin-left: -0.25em;
-}
+  #icon-prefix {
+    display: none;
+    margin-left: -0.25em;
+  }
 
-:host([external]:not([standalone])) #external-icon {
-  display: inline-block;
-  margin-left: 0.25em;
-  vertical-align: -0.2em;
+  :host([external]:not([standalone])) #external-icon {
+    display: inline-block;
+    margin-left: 0.25em;
+    vertical-align: -0.2em;
 
-  --sinch-global-size-icon: 1em;
-}
+    --sinch-global-size-icon: 1em;
+  }
 
-:host([standalone][external]) #external-icon {
-  display: inline-block;
-  vertical-align: -0.4em;
+  :host([standalone][external]) #external-icon {
+    display: inline-block;
+    vertical-align: -0.4em;
 
-  --sinch-global-size-icon: 1.5em;
-}
+    --sinch-global-size-icon: 1.5em;
+  }
 
-:host([standalone]) #icon-prefix {
-  display: inline;
-}
+  :host([standalone]) #icon-prefix {
+    display: inline;
+  }
 
-:host([standalone]:not([external])) #standalone-icon {
-  display: inline-block;
-  vertical-align: -0.4em;
+  :host([standalone]:not([external])) #standalone-icon {
+    display: inline-block;
+    vertical-align: -0.4em;
 
-  --sinch-global-size-icon: 1.5em;
-}
+    --sinch-global-size-icon: 1.5em;
+  }
 
-:host([disabled]) a {
-  color: var(--sinch-comp-link-color-disabled-text-initial);
-  pointer-events: none;
-  cursor: initial;
-  text-decoration: var(--sinch-comp-link-default-text-decoration-disabled);
+  :host([disabled]) a {
+    color: var(--sinch-comp-link-color-disabled-text-initial);
+    pointer-events: none;
+    cursor: initial;
+    text-decoration: var(--sinch-comp-link-default-text-decoration-disabled);
 
-  --sinch-global-color-icon: var(--sinch-comp-link-color-disabled-icon-initial);
-}
+    --sinch-global-color-icon: var(
+      --sinch-comp-link-color-disabled-icon-initial
+    );
+  }
 
-#content {
-  white-space: var(--sinch-global-text-white-space, normal);
-}
+  #content {
+    white-space: var(--sinch-global-text-white-space, normal);
+  }
 </style>
 
 <a referrerpolicy="no-referer" aria-hidden="true">
   <span id="content"></span>
   <span id="icon-prefix">&nbsp;</span>
-  <sinch-icon id="external-icon" name="open_in_new"></sinch-icon>
-  <sinch-icon id="standalone-icon" name="arrow_forward"></sinch-icon>
+  <sinch-icon-fa-arrow-up-right-from-square
+    id="external-icon"
+  ></sinch-icon-fa-arrow-up-right-from-square>
+  <sinch-icon-fa-arrow-right id="standalone-icon"></sinch-icon-fa-arrow-right>
 </a>

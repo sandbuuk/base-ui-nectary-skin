@@ -1,5 +1,6 @@
 import '../input'
-import '../icon'
+import '@nectary/assets/icons/fa-xmark'
+import '@nectary/assets/icons/magnifying-glass'
 import '../text'
 import {
   attrValueToPixels,
@@ -287,7 +288,8 @@ defineCustomElement(
     }
 
     #updateSearchValue = (newValue?: string) => {
-      const searchValue = newValue === undefined ? this.#$search.value.toLowerCase() : newValue
+      const searchValue =
+        newValue === undefined ? this.#$search.value.toLowerCase() : newValue
       const searchChangedEvent = new CustomEvent('-search-change', {
         detail: newValue,
         cancelable: true,
