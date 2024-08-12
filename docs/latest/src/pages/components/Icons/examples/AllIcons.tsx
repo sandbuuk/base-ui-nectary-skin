@@ -24,8 +24,8 @@ const iconsWrapperStyle: CSSProperties = {
 }
 
 const wrapperStyle: CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
+  display: 'gris',
+  gridTemplateColumns: 'repeat(15, 1fr)',
   gap: 24,
 }
 
