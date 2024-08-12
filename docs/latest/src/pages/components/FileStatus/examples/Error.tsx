@@ -1,9 +1,9 @@
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/file-status'
-import '@nectary/components/icon'
 import '@nectary/components/text'
 import '@nectary/components/button'
 import '@nectary/assets/icons/fa-arrow-rotate-right'
+import '@nectary/assets/icons/fa-xmark'
 
 const wrapperStyle: CSSProperties = {
   display: 'flex',
@@ -22,7 +22,7 @@ export const ErrorExample: FC = () => (
         type="cta-secondary"
         on-click={() => { }}
       >
-        <sinch-icon slot="icon" name="close"/>
+        <sinch-icon-fa-xmark slot="icon"/>
       </sinch-button>
       <sinch-text slot="content" type="m">Invalid file, try another one</sinch-text>
     </sinch-file-status>

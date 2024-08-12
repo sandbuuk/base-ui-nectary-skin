@@ -5,7 +5,7 @@ import '@nectary/components/field'
 import '@nectary/components/file-drop'
 import '@nectary/components/file-status'
 import '@nectary/components/button'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/fa-xmark'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -63,9 +63,9 @@ export const FileDropExample: FC = () => {
                 slot="action"
                 aria-label="Close"
                 size="s"
-                on-click={() => {}}
+                on-click={() => { }}
               >
-                <sinch-icon slot="icon" name="close"/>
+                <sinch-icon-fa-xmark slot="icon"/>
               </sinch-button>
             </sinch-file-status>
           ))

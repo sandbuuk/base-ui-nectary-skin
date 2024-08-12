@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import '@nectary/components/button'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
 
 export const TypeSubtleSecondaryExample: FC = () => (
   <sinch-button
@@ -9,6 +9,6 @@ export const TypeSubtleSecondaryExample: FC = () => (
     type="subtle-secondary"
     on-click={() => console.log('click')}
   >
-    <sinch-icon slot="icon" name="open_in_new"/>
+    <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
   </sinch-button>
 )

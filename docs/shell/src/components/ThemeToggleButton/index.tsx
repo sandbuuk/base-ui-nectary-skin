@@ -1,5 +1,4 @@
 
-import '@nectary/components/icon'
 import '@nectary/components/popover'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
@@ -9,6 +8,7 @@ import { useEffect, useState } from 'react'
 import type { TThemeName } from 'docs-common'
 import { useThemeName } from '~/context/theme-control'
 import { useNavigateVersion } from '~/hooks'
+import '@nectary/assets/icons/fa-moon-cloud'
 
 export const ThemeToggleButton = () => {
   const { versionValue } = useNavigateVersion()
@@ -47,7 +47,7 @@ export const ThemeToggleButton = () => {
         on-click={onOpen}
         disabled={isDisabled}
       >
-        <sinch-icon slot="icon" name="nights_stay"/>
+        <sinch-icon-fa-moon-cloud slot="icon"/>
       </sinch-button>
       <sinch-select-menu
         slot="content"

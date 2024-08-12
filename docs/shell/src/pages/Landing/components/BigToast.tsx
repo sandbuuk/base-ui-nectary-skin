@@ -2,9 +2,9 @@ import './styles.css'
 import '@nectary/assets/illustrations/lightbulb'
 import '@nectary/components/button'
 import '@nectary/components/title'
-import '@nectary/components/icon'
 import { useNavigate } from 'react-router-dom'
 import { useNavigateLink } from '~/hooks'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
 
 export const BigToast = () => {
   const { to } = useNavigateLink('/intro')
@@ -23,7 +23,7 @@ export const BigToast = () => {
         size="m"
         on-click={() => navigate(to)}
       >
-        <sinch-icon name="open_in_new" slot="left-icon"/>
+        <sinch-icon-fa-arrow-up-right-from-square slot="left-icon"/>
       </sinch-button>
     </div>
   )

@@ -10,11 +10,11 @@ import '@nectary/components/toggle'
 import '@nectary/components/help-tooltip'
 import '@nectary/components/table-body'
 import '@nectary/components/button'
-import '@nectary/components/icon'
 import '@nectary/assets/icons/fa-arrow-down-long'
 import '@nectary/assets/icons/fa-arrow-up-long'
 import '@nectary/assets/icons/fa-bars-filter'
 import '@nectary/assets/icons/fa-ellipsis-vertical'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
 
 export const SimpleExample: FC = () => {
   return (
@@ -56,7 +56,7 @@ export const SimpleExample: FC = () => {
             <sinch-link text="Link" href="#" aria-label="Link"/>
           </sinch-table-cell>
           <sinch-table-cell align="center">
-            <sinch-icon name="open_in_new"/>
+            <sinch-icon-fa-arrow-up-right-from-square/>
           </sinch-table-cell>
           <sinch-table-cell><span>Lorem Ipsum</span></sinch-table-cell>
           <sinch-table-cell align="center">
@@ -75,7 +75,7 @@ export const SimpleExample: FC = () => {
             <sinch-link text="Link" href="#" aria-label="Link"/>
           </sinch-table-cell>
           <sinch-table-cell align="center">
-            <sinch-icon name="open_in_new"/>
+            <sinch-icon-fa-arrow-up-right-from-square/>
           </sinch-table-cell>
           <sinch-table-cell>
             <span>Lorem Ipsum is simply dummy text</span>

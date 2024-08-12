@@ -1,7 +1,7 @@
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/file-status'
-import '@nectary/components/icon'
 import '@nectary/components/button'
+import '@nectary/assets/icons/fa-xmark'
 
 const style: CSSProperties = {
   width: 300,
@@ -17,9 +17,9 @@ export const PendingExample: FC = () => (
       slot="action"
       aria-label="Remove file"
       size="s"
-      on-click={() => {}}
+      on-click={() => { }}
     >
-      <sinch-icon slot="icon" name="close"/>
+      <sinch-icon-fa-xmark slot="icon"/>
     </sinch-button>
   </sinch-file-status>
 )

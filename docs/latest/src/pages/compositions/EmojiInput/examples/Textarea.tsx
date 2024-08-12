@@ -5,8 +5,8 @@ import '@nectary/components/field'
 import '@nectary/components/popover'
 import '@nectary/components/emoji-picker'
 import '@nectary/components/textarea'
-import '@nectary/components/icon'
 import '@nectary/components/button'
+import '@nectary/assets/icons/fa-face-smile'
 
 const inputStyles: CSSProperties = {
   width: 300,
@@ -58,7 +58,7 @@ export const TextareaExample: FC = () => {
             aria-label="Open Time Picker"
             on-click={onOpen}
           >
-            <sinch-icon slot="icon" name="sentiment_satisfied"/>
+            <sinch-icon-fa-face-smile slot="icon"/>
           </sinch-button>
           <sinch-emoji-picker
             slot="content"
