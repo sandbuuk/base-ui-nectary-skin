@@ -128,7 +128,13 @@ if (!ShadowRoot.prototype.createElement) {
 
     upgrade() {
       creationContext.push(this)
-      nativeRegistry.upgrade.apply(nativeRegistry, arguments)
+
+      try {
+        nativeRegistry.upgrade.apply(nativeRegistry, arguments)
+      } catch (error) {
+        console.error(error)
+      }
+
       creationContext.pop()
     }
 
@@ -497,14 +503,20 @@ if (!ShadowRoot.prototype.createElement) {
     ctor.prototype[method] = function() {
       creationContext.push(this)
 
-      const ret = native.apply(from || this, arguments)
+      let ret
 
-      // For disconnected elements, note their creation scope so that e.g.
-      // innerHTML into them will use the correct scope; note that
-      // insertAdjacentHTML doesn't return an element, but that's fine since
-      // it will have a parent that should have a scope
-      if (ret !== undefined) {
-        scopeForElement.set(ret, this)
+      try {
+        ret = native.apply(from || this, arguments)
+
+        // For disconnected elements, note their creation scope so that e.g.
+        // innerHTML into them will use the correct scope; note that
+        // insertAdjacentHTML doesn't return an element, but that's fine since
+        // it will have a parent that should have a scope
+        if (ret !== undefined) {
+          scopeForElement.set(ret, this)
+        }
+      } catch (error) {
+        console.error(error)
       }
 
       creationContext.pop()
@@ -525,7 +537,13 @@ if (!ShadowRoot.prototype.createElement) {
       ...descriptor,
       set(value) {
         creationContext.push(this)
-        descriptor.set.call(this, value)
+
+        try {
+          descriptor.set.call(this, value)
+        } catch (error) {
+          console.error(error)
+        }
+
         creationContext.pop()
       },
     })
