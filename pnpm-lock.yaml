@@ -581,6 +581,9 @@ importers:
       '@lit-labs/scoped-registry-mixin':
         specifier: ^1.0.3
         version: 1.0.3
+      '@nectary/assets':
+        specifier: workspace:*
+        version: link:../assets
       '@nectary/components':
         specifier: workspace:*
         version: link:../components
