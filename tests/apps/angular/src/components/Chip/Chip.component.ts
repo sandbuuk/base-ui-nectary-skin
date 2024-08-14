@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/chip'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/fa-face-smile'
+import '@nectary/assets/icons/fa-plus'
 
 @Component({
   selector: 'chip-component',

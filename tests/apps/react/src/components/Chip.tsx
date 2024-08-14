@@ -1,7 +1,8 @@
 import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/chip'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/fa-face-smile'
+import '@nectary/assets/icons/fa-plus'
 
 export const Chip: FC = () => {
   const [search] = useSearchParams()
@@ -24,8 +25,8 @@ export const Chip: FC = () => {
       on-focus={onFocus}
       on-blur={onBlur}
     >
-      {hasIcon && <sinch-icon slot="icon" name="sentiment_satisfied"/>}
-      {hasRightIcon && <sinch-icon slot="right-icon" name="add"/>}
+      {hasIcon && <sinch-icon-fa-face-smile slot="icon"/>}
+      {hasRightIcon && <sinch-icon-fa-plus slot="right-icon"/>}
     </sinch-chip>
   )
 }

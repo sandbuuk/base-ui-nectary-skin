@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/dialog'
 import '@nectary/components/button'
 import '@nectary/components/text'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/fa-face-smile-plus'
 
 @Component({
   selector: 'dialog-component',

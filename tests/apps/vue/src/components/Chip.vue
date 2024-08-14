@@ -1,20 +1,15 @@
 <template>
-  <sinch-chip
-    v-bind:color="color"
-    v-bind:text="text"
-    v-bind:small="isSmall"
-    @--click="onClick"
-    @--focus="onFocus"
-    @--blur="onBlur"
-  >
-    <sinch-icon v-if="hasIcon" slot="icon" name="sentiment_satisfied"></sinch-icon>
-    <sinch-icon v-if="hasRightIcon" slot="right-icon" name="add"></sinch-icon>
+  <sinch-chip v-bind:color="color" v-bind:text="text" v-bind:small="isSmall" @--click="onClick" @--focus="onFocus"
+    @--blur="onBlur">
+    <sinch-icon-fa-face-smile v-if="hasIcon" slot="icon"></sinch-icon-fa-face-smile>
+    <sinch-icon-fa-plus v-if="hasRightIcon" slot="right-icon"></sinch-icon-fa-plus>
   </sinch-chip>
 </template>
 
 <script>
 import '@nectary/components/chip'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/fa-face-smile'
+import '@nectary/assets/icons/fa-plus'
 
 export default {
   methods: {
@@ -47,4 +42,3 @@ export default {
   },
 }
 </script>
-

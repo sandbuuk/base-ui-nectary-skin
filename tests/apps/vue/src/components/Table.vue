@@ -6,10 +6,10 @@
           :fit="cell.isFit">
           <sinch-checkbox v-if="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
           <sinch-button v-if="cell.isSortable" aria-label="Sort" size="s" slot="right">
-            <sinch-icon slot="icon" name="north"></sinch-icon>
+            <sinch-icon-fa-arrow-up-long slot="icon"></sinch-icon-fa-arrow-up-long>
           </sinch-button>
           <sinch-button v-if="cell.isFilterable" aria-label="Filter" size="s" slot="left">
-            <sinch-icon slot="icon" name="filter_list"></sinch-icon>
+            <sinch-icon-fa-bars-filter slot="icon"></sinch-icon-fa-bars-filter>
           </sinch-button>
           <sinch-help-tooltip v-if="cell.tooltip != null" slot="tooltip" :text="cell.tooltip"></sinch-help-tooltip>
         </sinch-table-head-cell>
@@ -23,7 +23,11 @@
           <sinch-toggle v-if="cell.isToggle"></sinch-toggle>
           <sinch-link v-if="cell.isLink" :text="cell.text" href="#"></sinch-link>
           <sinch-button v-if="cell.isIcon" aria-label="button">
-            <sinch-icon slot="icon" :name="cell.iconName"></sinch-icon>
+            <sinch-icon v-if="cell.iconnName === ''" slot="icon" :name="cell.iconName"></sinch-icon>
+            <sinch-icon-fa-ellipsis-vertical v-if="cell.iconName == 'ellipsis'"
+              slot="icon"></sinch-icon-fa-ellipsis-vertical>
+            <sinch-icon-fa-arrow-up-right-from-square v-if="cell.iconName == 'open'"
+              slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
           </sinch-button>
           <sinch-text
             v-if="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon">{{cell.text}}</sinch-text>
@@ -45,7 +49,10 @@ import '@nectary/components/help-tooltip'
 import '@nectary/components/button'
 import '@nectary/components/checkbox'
 import '@nectary/components/link'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/fa-ellipsis-vertical'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/assets/icons/fa-arrow-up-long'
+import '@nectary/assets/icons/fa-bars-filter'
 import '@nectary/components/text'
 
 const getTableItems = ({ hasLongLine }) => ({
@@ -63,21 +70,21 @@ const getTableItems = ({ hasLongLine }) => ({
       { isCheckbox: true },
       { text: '123', align: 'end' },
       { isLink: true, text: 'Link' },
-      { isIcon: true, align: 'center', iconName: 'open_in_new' },
+      { isIcon: true, align: 'center', iconName: 'open' },
       hasLongLine === true
         ? { text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.' }
         : { text: 'Lorem Ipsum' },
       { isToggle: true, align: 'center' },
-      { isIcon: true, align: 'center', iconName: 'more_vert' },
+      { isIcon: true, align: 'center', iconName: 'ellipsis' },
     ],
     [
       { isCheckbox: true },
       { text: '456789', align: 'end' },
       { isLink: true, text: 'Link' },
-      { isIcon: true, align: 'center', iconName: 'open_in_new' },
+      { isIcon: true, align: 'center', iconName: 'open' },
       { text: 'Lorem Ipsum' },
       { isToggle: true, align: 'center' },
-      { isIcon: true, align: 'center', iconName: 'more_vert' },
+      { isIcon: true, align: 'center', iconName: 'ellipsis' },
     ],
   ],
 })

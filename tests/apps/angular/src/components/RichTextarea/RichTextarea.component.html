@@ -15,7 +15,7 @@
       aria-label="Format italic"
       (-click)="onFormatItalic()"
     >
-      <sinch-icon slot="icon" name="format_italic"></sinch-icon>
+      <sinch-icon-fa-italic slot="icon" name="format_italic"></sinch-icon-fa-italic>
     </sinch-button>
     <sinch-button
       slot="top"
@@ -24,7 +24,7 @@
       aria-label="Format bold"
       (-click)="onFormatBold()"
     >
-      <sinch-icon slot="icon" name="format_bold"></sinch-icon>
+      <sinch-icon-fa-bold slot="icon" name="format_bold"></sinch-icon-fa-bold>
     </sinch-button>
     <sinch-button
       slot="top"
@@ -33,7 +33,7 @@
       aria-label="Format strikethrough"
       (-click)="onFormatStrikethrough()"
     >
-      <sinch-icon slot="icon" name="format_strikethrough"></sinch-icon>
+      <sinch-icon-fa-strikethrough slot="icon" name="format_strikethrough"></sinch-icon-fa-strikethrough>
     </sinch-button>
     <sinch-button
       slot="top"
@@ -42,7 +42,7 @@
       aria-label="Format code tag"
       (-click)="onFormatCodeTag()"
     >
-      <sinch-icon slot="icon" name="code"></sinch-icon>
+      <sinch-icon-fa-code slot="icon" name="code"></sinch-icon-fa-code>
     </sinch-button>
     <sinch-button
       slot="top"
@@ -51,7 +51,7 @@
       aria-label="Format list bulleted"
       (-click)="onFormatListBulleted()"
     >
-      <sinch-icon slot="icon" name="format_list_bulleted"></sinch-icon>
+      <sinch-icon-fa-list-ul  slot="icon" name="format_list_bulleted"></sinch-icon-fa-list-ul >
     </sinch-button>
     <sinch-button
       slot="top"
@@ -60,18 +60,18 @@
       aria-label="Format list numbered"
       (-click)="onFormatListNumbered()"
     >
-      <sinch-icon slot="icon" name="format_list_numbered"></sinch-icon>
+      <sinch-icon-fa-list-ol slot="icon" name="format_list_numbered"></sinch-icon-fa-list-ol>
     </sinch-button>
   </ng-template>
   <ng-template #bottom>
     <sinch-button slot="bottom" size="s" aria-label="Attach files">
-      <sinch-icon slot="icon" name="attach_file"></sinch-icon>
+      <sinch-icon-fa-folder slot="icon"></sinch-icon-fa-folder>
     </sinch-button>
     <sinch-button slot="bottom" size="s" aria-label="Variables">
       <sinch-icon-fa-brackets-curly slot="icon"></sinch-icon-fa-brackets-curly>
     </sinch-button>
     <sinch-button slot="bottom" size="s" aria-label="Options">
-      <sinch-icon slot="icon" name="more_horiz"></sinch-icon>
+      <sinch-icon-fa-ellipsis slot="icon" name="more_horiz"></sinch-icon-fa-ellipsis>
     </sinch-button>
     <sinch-button
       slot="bottom"
@@ -79,7 +79,7 @@
       size="s"
       aria-label="Send"
       text="Send"
-      style="margin-left: auto"
+      style="margin-left: auto;"
     >
       <sinch-icon-fa-paper-plane-top
         slot="right-icon"

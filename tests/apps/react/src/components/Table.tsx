@@ -7,12 +7,15 @@ import '@nectary/components/table-head-cell'
 import '@nectary/components/table-body'
 import '@nectary/components/table-cell'
 import '@nectary/components/toggle'
-import '@nectary/components/icon'
 import '@nectary/components/help-tooltip'
 import '@nectary/components/button'
 import '@nectary/components/checkbox'
 import '@nectary/components/link'
 import '@nectary/components/text'
+import '@nectary/assets/icons/fa-ellipsis-vertical'
+import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/assets/icons/fa-arrow-up-long'
+import '@nectary/assets/icons/fa-bars-filter'
 
 const getTableItems = ({ hasLongLine }: any): TTableItems => ({
   head: [
@@ -29,21 +32,21 @@ const getTableItems = ({ hasLongLine }: any): TTableItems => ({
       { isCheckbox: true },
       { text: '123', align: 'end' },
       { isLink: true, text: 'Link' },
-      { isIcon: true, align: 'center', iconName: 'open_in_new' },
+      { isIcon: true, align: 'center', iconName: 'open' },
       hasLongLine === true
         ? { text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.' }
         : { text: 'Lorem Ipsum' },
       { isToggle: true, align: 'center' },
-      { isIcon: true, align: 'center', iconName: 'more_vert' },
+      { isIcon: true, align: 'center', iconName: 'ellipsis' },
     ],
     [
       { isCheckbox: true },
       { text: '456789', align: 'end' },
       { isLink: true, text: 'Link' },
-      { isIcon: true, align: 'center', iconName: 'open_in_new' },
+      { isIcon: true, align: 'center', iconName: 'open' },
       { text: 'Lorem Ipsum' },
       { isToggle: true, align: 'center' },
-      { isIcon: true, align: 'center', iconName: 'more_vert' },
+      { isIcon: true, align: 'center', iconName: 'ellipsis' },
     ],
   ],
 })
@@ -62,7 +65,7 @@ type TTableItem = {
   text?: string,
   tooltip?: string,
   align?: 'center' | 'end',
-  iconName?: string,
+  iconName?: 'open' | 'ellipsis',
 }
 
 export const Table: FC = () => {
@@ -81,12 +84,12 @@ export const Table: FC = () => {
               )}
               {cell.isSortable === true && (
                 <sinch-button aria-label="Sort" size="s" slot="right" onClick={noop}>
-                  <sinch-icon slot="icon" name="north"/>
+                  <sinch-icon-fa-arrow-up-long slot="icon"/>
                 </sinch-button>
               )}
               {cell.isFilterable === true && (
                 <sinch-button aria-label="Filter" size="s" slot="left" onClick={noop}>
-                  <sinch-icon slot="icon" name="filter_list"/>
+                  <sinch-icon-fa-bars-filter slot="icon"/>
                 </sinch-button>
               )}
               {cell.tooltip != null && (
@@ -115,7 +118,7 @@ export const Table: FC = () => {
                 )}
                 {cell.isIcon === true && (
                   <sinch-button aria-label="button">
-                    <sinch-icon slot="icon" name={cell.iconName ?? 'not-defined'}/>
+                    {cell.iconName === 'ellipsis' ? <sinch-icon-fa-ellipsis-vertical slot="icon"/> : <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>}
                   </sinch-button>
                 )}
                 {cell.isCheckbox !== true && cell.isButton !== true && cell.isToggle !== true && cell.isLink !== true && cell.isIcon !== true && (

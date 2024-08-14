@@ -3,36 +3,36 @@
     @--blur="onBlur">
     <template v-if="hasTop">
       <sinch-button slot="top" size="s" id="format-italic" aria-label="Format italic" @--click="onFormatItalic">
-        <sinch-icon slot="icon" name="format_italic"></sinch-icon>
+        <sinch-icon-fa-italic slot="icon"></sinch-icon-fa-italic>
       </sinch-button>
       <sinch-button slot="top" size="s" id="format-bold" aria-label="Format bold" @--click="onFormatBold">
-        <sinch-icon slot="icon" name="format_bold"></sinch-icon>
+        <sinch-icon-fa-bold slot="icon"></sinch-icon-fa-bold>
       </sinch-button>
       <sinch-button slot="top" size="s" id="format-strikethrough" aria-label="Format strikethrough"
         @--click="onFormatStrikethrough">
-        <sinch-icon slot="icon" name="format_strikethrough"></sinch-icon>
+        <sinch-icon-fa-strikethrough slot="icon"></sinch-icon-fa-strikethrough>
       </sinch-button>
       <sinch-button slot="top" size="s" id="format-code-tag" aria-label="Format code tag" @--click="onFormatCodeTag">
-        <sinch-icon slot="icon" name="code"></sinch-icon>
+        <sinch-icon-fa-code slot="icon"></sinch-icon-fa-code>
       </sinch-button>
       <sinch-button slot="top" size="s" id="format-ulist" aria-label="Format list bulleted"
         @--click="onFormatListBulleted">
-        <sinch-icon slot="icon" name="format_list_bulleted"></sinch-icon>
+        <sinch-icon-fa-list-ul slot="icon"></sinch-icon-fa-list-ul>
       </sinch-button>
       <sinch-button slot="top" size="s" id="format-olist" aria-label="Format list numbered"
         @--click="onFormatListNumbered">
-        <sinch-icon slot="icon" name="format_list_numbered"></sinch-icon>
+        <sinch-icon-fa-list-ol slot="icon"></sinch-icon-fa-list-ol>
       </sinch-button>
     </template>
     <template v-if="hasBottom">
       <sinch-button slot="bottom" size="s" aria-label="Attach files">
-        <sinch-icon slot="icon" name="attach_file"></sinch-icon>
+        <sinch-icon-fa-folder slot="icon"></sinch-icon-fa-folder>
       </sinch-button>
       <sinch-button slot="bottom" size="s" aria-label="Variables">
         <sinch-icon-fa-brackets-curly slot="icon"></sinch-icon-fa-brackets-curly>
       </sinch-button>
       <sinch-button slot="bottom" size="s" aria-label="Options">
-        <sinch-icon slot="icon" name="more_horiz"></sinch-icon>
+        <sinch-icon-fa-ellipsis slot="icon"></sinch-icon-fa-ellipsis>
       </sinch-button>
       <sinch-button slot="bottom" type="primary" size="s" aria-label="Send" text="Send" style="margin-left: auto;">
         <sinch-icon-fa-paper-plane-top slot="right-icon"></sinch-icon-fa-paper-plane-top>
@@ -44,9 +44,16 @@
 <script>
 import '@nectary/components/rich-textarea'
 import '@nectary/components/button'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/fa-italic'
+import '@nectary/assets/icons/fa-bold'
+import '@nectary/assets/icons/fa-strikethrough'
+import '@nectary/assets/icons/fa-code'
 import '@nectary/assets/icons/fa-brackets-curly'
 import '@nectary/assets/icons/fa-paper-plane-top'
+import '@nectary/assets/icons/fa-list-ul'
+import '@nectary/assets/icons/fa-list-ol'
+import '@nectary/assets/icons/fa-folder'
+import '@nectary/assets/icons/fa-ellipsis'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).

@@ -4,11 +4,12 @@ import type { TSinchInputElement } from '@nectary/components/input/types'
 import type { FC } from 'react'
 import '@nectary/components/popover'
 import '@nectary/components/input'
-import '@nectary/components/icon'
 import '@nectary/components/field'
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
 import '@nectary/components/button'
+import '@nectary/assets/icons/magnifying-glass'
+import '@nectary/assets/icons/fa-xmark'
 
 const options: string[] = [
   'Option 1 value long long long',
@@ -69,10 +70,10 @@ export const Search: FC = () => {
           on-focus={onFocus}
           on-blur={onBlur}
         >
-          <sinch-icon slot="icon" name="search"/>
+          <sinch-icon-magnifying-glass slot="icon"/>
           {isClearActive && (
             <sinch-button slot="right" on-click={onClearClick} aria-label="Clear">
-              <sinch-icon slot="icon" name="close"/>
+              <sinch-icon-fa-xmark slot="icon"/>
             </sinch-button>
           )}
         </sinch-input>
