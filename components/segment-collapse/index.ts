@@ -1,4 +1,4 @@
-import "@nectary/assets/icons/fa-chevron-down";
+import '@nectary/assets/icons/fa-chevron-down'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -7,45 +7,45 @@ import {
   NectaryElement,
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
-} from "../utils";
-import templateHTML from "./template.html";
+} from '../utils'
+import templateHTML from './template.html'
 import type {
   TSinchSegmentExpandElement,
   TSinchSegmentExpandReact,
-} from "./types";
+} from './types'
 
-const template = document.createElement("template");
+const template = document.createElement('template')
 
-template.innerHTML = templateHTML;
+template.innerHTML = templateHTML
 
 defineCustomElement(
-  "sinch-segment-collapse",
+  'sinch-segment-collapse',
   class extends NectaryElement {
-    #$button: HTMLElement;
+    #$button: HTMLElement
 
     constructor() {
-      super();
+      super()
 
-      const shadowRoot = this.attachShadow();
+      const shadowRoot = this.attachShadow()
 
-      shadowRoot.appendChild(template.content.cloneNode(true));
+      shadowRoot.appendChild(template.content.cloneNode(true))
 
-      this.#$button = shadowRoot.querySelector("#button")!;
+      this.#$button = shadowRoot.querySelector('#button')!
     }
 
     connectedCallback() {
-      this.setAttribute("role", "checkbox");
-      this.#$button.addEventListener("click", this.#onClick);
-      this.addEventListener("-change", this.#onChangeReactHandler);
+      this.setAttribute('role', 'checkbox')
+      this.#$button.addEventListener('click', this.#onClick)
+      this.addEventListener('-change', this.#onChangeReactHandler)
     }
 
     disconnectedCallback() {
-      this.#$button.removeEventListener("click", this.#onClick);
-      this.removeEventListener("-change", this.#onChangeReactHandler);
+      this.#$button.removeEventListener('click', this.#onClick)
+      this.removeEventListener('-change', this.#onChangeReactHandler)
     }
 
     static get observedAttributes() {
-      return ["value"];
+      return ['value']
     }
 
     attributeChangedCallback(
@@ -54,58 +54,58 @@ defineCustomElement(
       newVal: string | null
     ) {
       switch (name) {
-        case "value": {
+        case 'value': {
           updateExplicitBooleanAttribute(
             this,
-            "aria-checked",
+            'aria-checked',
             isAttrTrue(newVal)
-          );
+          )
 
-          break;
+          break
         }
       }
     }
 
     set value(isChecked: boolean) {
-      updateBooleanAttribute(this, "value", isChecked);
+      updateBooleanAttribute(this, 'value', isChecked)
     }
 
     get value() {
-      return getBooleanAttribute(this, "value");
+      return getBooleanAttribute(this, 'value')
     }
 
     get focusable() {
-      return true;
+      return true
     }
 
     focus() {
-      this.#$button.focus();
+      this.#$button.focus()
     }
 
     blur() {
-      this.#$button.blur();
+      this.#$button.blur()
     }
 
     #onClick = () => {
-      const detail = !this.value;
+      const detail = !this.value
 
-      this.dispatchEvent(new CustomEvent("-change", { detail }));
-    };
+      this.dispatchEvent(new CustomEvent('-change', { detail }))
+    }
 
     #onChangeReactHandler = (e: Event) => {
-      getReactEventHandler(this, "on-change")?.(e);
-    };
+      getReactEventHandler(this, 'on-change')?.(e)
+    }
   }
-);
+)
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "sinch-segment-collapse": TSinchSegmentExpandReact;
+      'sinch-segment-collapse': TSinchSegmentExpandReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    "sinch-segment-collapse": TSinchSegmentExpandElement;
+    'sinch-segment-collapse': TSinchSegmentExpandElement,
   }
 }

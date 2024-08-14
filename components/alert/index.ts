@@ -1,8 +1,8 @@
-import "@nectary/assets/icons/circle-info";
-import "@nectary/assets/icons/triangle-exclamation";
-import "@nectary/assets/icons/octagon-exclamation";
-import "../rich-text";
-import "../text";
+import '@nectary/assets/icons/circle-info'
+import '@nectary/assets/icons/triangle-exclamation'
+import '@nectary/assets/icons/octagon-exclamation'
+import '../rich-text'
+import '../text'
 import {
   defineCustomElement,
   getAttribute,
@@ -10,45 +10,45 @@ import {
   updateAttribute,
   updateLiteralAttribute,
   NectaryElement,
-} from "../utils";
-import templateHTML from "./template.html";
-import { typeValues } from "./utils";
+} from '../utils'
+import templateHTML from './template.html'
+import { typeValues } from './utils'
 import type {
   TSinchAlertElement,
   TSinchAlertReact,
   TSinchAlertType,
-} from "./types";
+} from './types'
 
-const template = document.createElement("template");
+const template = document.createElement('template')
 
-template.innerHTML = templateHTML;
+template.innerHTML = templateHTML
 
 defineCustomElement(
-  "sinch-alert",
+  'sinch-alert',
   class extends NectaryElement {
-    #$text: HTMLParagraphElement;
+    #$text: HTMLParagraphElement
 
     constructor() {
-      super();
+      super()
 
-      const shadowRoot = this.attachShadow();
+      const shadowRoot = this.attachShadow()
 
-      shadowRoot.appendChild(template.content.cloneNode(true));
+      shadowRoot.appendChild(template.content.cloneNode(true))
 
-      this.#$text = shadowRoot.querySelector("#text")!;
+      this.#$text = shadowRoot.querySelector('#text')!
     }
 
     connectedCallback() {
-      super.connectedCallback();
-      this.setAttribute("role", "alert");
+      super.connectedCallback()
+      this.setAttribute('role', 'alert')
     }
 
     disconnectedCallback() {
-      super.disconnectedCallback();
+      super.disconnectedCallback()
     }
 
     static get observedAttributes() {
-      return ["text"];
+      return ['text']
     }
 
     attributeChangedCallback(
@@ -57,40 +57,40 @@ defineCustomElement(
       newVal: string | null
     ) {
       switch (name) {
-        case "text": {
-          updateAttribute(this.#$text, "text", newVal);
+        case 'text': {
+          updateAttribute(this.#$text, 'text', newVal)
 
-          break;
+          break
         }
       }
     }
 
     get type(): TSinchAlertType {
-      return getLiteralAttribute(this, typeValues, "type");
+      return getLiteralAttribute(this, typeValues, 'type')
     }
 
     set type(value: TSinchAlertType) {
-      updateLiteralAttribute(this, typeValues, "type", value);
+      updateLiteralAttribute(this, typeValues, 'type', value)
     }
 
     get text() {
-      return getAttribute(this, "text", "");
+      return getAttribute(this, 'text', '')
     }
 
     set text(value: string) {
-      updateAttribute(this, "text", value);
+      updateAttribute(this, 'text', value)
     }
   }
-);
+)
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "sinch-alert": TSinchAlertReact;
+      'sinch-alert': TSinchAlertReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    "sinch-alert": TSinchAlertElement;
+    'sinch-alert': TSinchAlertElement,
   }
 }

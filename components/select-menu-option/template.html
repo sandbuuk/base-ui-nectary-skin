@@ -13,16 +13,19 @@
     gap: 10px;
     user-select: none;
     cursor: pointer;
-    background-color: var(
-      --sinch-comp-select-menu-color-default-background-initial
-    );
+    background-color:
+      var(
+        --sinch-comp-select-menu-color-default-background-initial
+      );
 
-    --sinch-global-color-text: var(
-      --sinch-comp-select-menu-color-default-option-initial
-    );
-    --sinch-global-color-icon: var(
-      --sinch-comp-select-menu-color-default-icon-initial
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-select-menu-color-default-option-initial
+      );
+    --sinch-global-color-icon:
+      var(
+        --sinch-comp-select-menu-color-default-icon-initial
+      );
     --sinch-global-size-icon: var(--sinch-comp-select-menu-size-icon);
   }
 
@@ -43,30 +46,35 @@
   }
 
   :host([data-selected]) > #wrapper {
-    background-color: var(
-      --sinch-comp-select-menu-color-default-background-selected
-    );
+    background-color:
+      var(
+        --sinch-comp-select-menu-color-default-background-selected
+      );
   }
 
   :host(:hover) > #wrapper {
-    background-color: var(
-      --sinch-comp-select-menu-color-default-background-hover
-    );
+    background-color:
+      var(
+        --sinch-comp-select-menu-color-default-background-hover
+      );
   }
 
   :host([disabled]) > #wrapper {
     cursor: initial;
     pointer-events: none;
-    background-color: var(
-      --sinch-comp-select-menu-color-disabled-background-initial
-    );
+    background-color:
+      var(
+        --sinch-comp-select-menu-color-disabled-background-initial
+      );
 
-    --sinch-global-color-text: var(
-      --sinch-comp-select-menu-color-disabled-option-initial
-    );
-    --sinch-global-color-icon: var(
-      --sinch-comp-select-menu-color-disabled-icon-initial
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-select-menu-color-disabled-option-initial
+      );
+    --sinch-global-color-icon:
+      var(
+        --sinch-comp-select-menu-color-disabled-icon-initial
+      );
   }
 
   ::slotted(*) {

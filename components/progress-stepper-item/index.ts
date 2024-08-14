@@ -1,6 +1,6 @@
-import "@nectary/assets/icons/triangle-exclamation";
-import "@nectary/assets/icons/octagon-exclamation";
-import "../text";
+import '@nectary/assets/icons/triangle-exclamation'
+import '@nectary/assets/icons/octagon-exclamation'
+import '../text'
 import {
   defineCustomElement,
   getAttribute,
@@ -11,53 +11,53 @@ import {
   updateAttribute,
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
-} from "../utils";
-import templateHTML from "./template.html";
+} from '../utils'
+import templateHTML from './template.html'
 import {
   ATTR_PROGRESS_STEPPER_ITEM_ACTIVE_DESCENDANT,
   ATTR_PROGRESS_STEPPER_ITEM_CHECKED,
   ATTR_PROGRESS_STEPPER_ITEM_STATUS,
   isProgressStepperItemActive,
   isProgressStepperItemActiveDescendant,
-} from "./utils";
+} from './utils'
 import type {
   TSinchProgressStepperItemElement,
   TSinchProgressStepperItemReact,
-} from "./types";
+} from './types'
 
-const template = document.createElement("template");
+const template = document.createElement('template')
 
-template.innerHTML = templateHTML;
+template.innerHTML = templateHTML
 
 defineCustomElement(
-  "sinch-progress-stepper-item",
+  'sinch-progress-stepper-item',
   class extends NectaryElement {
-    #$text: HTMLElement;
+    #$text: HTMLElement
 
     constructor() {
-      super();
+      super()
 
-      const shadowRoot = this.attachShadow({ delegatesFocus: false });
+      const shadowRoot = this.attachShadow({ delegatesFocus: false })
 
-      shadowRoot.appendChild(template.content.cloneNode(true));
+      shadowRoot.appendChild(template.content.cloneNode(true))
 
-      this.#$text = shadowRoot.querySelector("#text")!;
+      this.#$text = shadowRoot.querySelector('#text')!
     }
 
     connectedCallback() {
-      this.role = "tab";
+      this.role = 'tab'
     }
 
     disconnectedCallback() {}
 
     static get observedAttributes() {
       return [
-        "text",
-        "invalid",
+        'text',
+        'invalid',
         ATTR_PROGRESS_STEPPER_ITEM_STATUS,
         ATTR_PROGRESS_STEPPER_ITEM_CHECKED,
         ATTR_PROGRESS_STEPPER_ITEM_ACTIVE_DESCENDANT,
-      ];
+      ]
     }
 
     attributeChangedCallback(
@@ -66,71 +66,71 @@ defineCustomElement(
       newVal: string | null
     ) {
       switch (name) {
-        case "text": {
-          this.#$text.textContent = newVal;
+        case 'text': {
+          this.#$text.textContent = newVal
 
-          break;
+          break
         }
         case ATTR_PROGRESS_STEPPER_ITEM_CHECKED: {
           updateExplicitBooleanAttribute(
             this,
-            "aria-selected",
+            'aria-selected',
             isAttrTrue(newVal)
-          );
+          )
 
-          break;
+          break
         }
         case ATTR_PROGRESS_STEPPER_ITEM_STATUS: {
-          this.#updateTabIndex();
+          this.#updateTabIndex()
 
-          break;
+          break
         }
         case ATTR_PROGRESS_STEPPER_ITEM_ACTIVE_DESCENDANT: {
-          this.#updateTabIndex();
+          this.#updateTabIndex()
 
-          break;
+          break
         }
-        case "invalid": {
+        case 'invalid': {
           if (isAttrEqual(oldVal, newVal)) {
-            return;
+            return
           }
 
-          const isInvalid = isAttrTrue(newVal);
+          const isInvalid = isAttrTrue(newVal)
 
-          updateExplicitBooleanAttribute(this, "aria-invalid", isInvalid);
-          updateBooleanAttribute(this, "invalid", isInvalid);
+          updateExplicitBooleanAttribute(this, 'aria-invalid', isInvalid)
+          updateBooleanAttribute(this, 'invalid', isInvalid)
 
-          break;
+          break
         }
       }
     }
 
     set value(value: string) {
-      updateAttribute(this, "value", value);
+      updateAttribute(this, 'value', value)
     }
 
     get value() {
-      return getAttribute(this, "value", "");
+      return getAttribute(this, 'value', '')
     }
 
     set text(value: string) {
-      updateAttribute(this, "text", value);
+      updateAttribute(this, 'text', value)
     }
 
     get text() {
-      return getAttribute(this, "text", "");
+      return getAttribute(this, 'text', '')
     }
 
     set invalid(isInvalid: boolean) {
-      updateBooleanAttribute(this, "invalid", isInvalid);
+      updateBooleanAttribute(this, 'invalid', isInvalid)
     }
 
     get invalid() {
-      return getBooleanAttribute(this, "invalid");
+      return getBooleanAttribute(this, 'invalid')
     }
 
     get focusable() {
-      return true;
+      return true
     }
 
     #updateTabIndex() {
@@ -138,19 +138,19 @@ defineCustomElement(
         isProgressStepperItemActiveDescendant(this) &&
         isProgressStepperItemActive(this)
           ? 0
-          : -1;
+          : -1
     }
   }
-);
+)
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "sinch-progress-stepper-item": TSinchProgressStepperItemReact;
+      'sinch-progress-stepper-item': TSinchProgressStepperItemReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    "sinch-progress-stepper-item": TSinchProgressStepperItemElement;
+    'sinch-progress-stepper-item': TSinchProgressStepperItemElement,
   }
 }

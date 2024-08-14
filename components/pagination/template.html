@@ -27,9 +27,10 @@
     border-radius: var(--sinch-comp-pagination-shape-radius);
     user-select: none;
 
-    --sinch-global-color-icon: var(
-      --sinch-comp-pagination-color-default-icon-default
-    );
+    --sinch-global-color-icon:
+      var(
+        --sinch-comp-pagination-color-default-icon-default
+      );
   }
 
   button:focus-visible::before {
@@ -42,17 +43,19 @@
   }
 
   button:disabled {
-    --sinch-global-color-icon: var(
-      --sinch-comp-pagination-color-disabled-icon-initial
-    );
+    --sinch-global-color-icon:
+      var(
+        --sinch-comp-pagination-color-disabled-icon-initial
+      );
 
     cursor: initial;
   }
 
   button:enabled:hover {
-    background-color: var(
-      --sinch-comp-pagination-color-default-background-hover
-    );
+    background-color:
+      var(
+        --sinch-comp-pagination-color-default-background-hover
+      );
   }
 
   button > * {
@@ -64,9 +67,10 @@
   .page {
     font: var(--sinch-comp-pagination-font-default-page-number);
     color: var(--sinch-comp-pagination-color-default-text-initial);
-    background-color: var(
-      --sinch-comp-pagination-color-default-background-initial
-    );
+    background-color:
+      var(
+        --sinch-comp-pagination-color-default-background-initial
+      );
     padding: 0 4px;
     box-sizing: border-box;
   }
@@ -81,17 +85,19 @@
 
   .page.active {
     font: var(--sinch-comp-pagination-font-checked-page-number);
-    background-color: var(
-      --sinch-comp-pagination-color-checked-background-initial
-    );
+    background-color:
+      var(
+        --sinch-comp-pagination-color-checked-background-initial
+      );
     pointer-events: none;
     cursor: initial;
   }
 
   .page.active:hover {
-    background-color: var(
-      --sinch-comp-pagination-color-checked-background-hover
-    );
+    background-color:
+      var(
+        --sinch-comp-pagination-color-checked-background-hover
+      );
   }
 
   .page.hidden {

@@ -1,8 +1,8 @@
-import "@nectary/assets/icons/circle-info";
-import "@nectary/assets/icons/triangle-exclamation";
-import "@nectary/assets/icons/octagon-exclamation";
-import "@nectary/assets/icons/circle-check";
-import "../rich-text";
+import '@nectary/assets/icons/circle-info'
+import '@nectary/assets/icons/triangle-exclamation'
+import '@nectary/assets/icons/octagon-exclamation'
+import '@nectary/assets/icons/circle-check'
+import '../rich-text'
 import {
   defineCustomElement,
   getAttribute,
@@ -13,53 +13,53 @@ import {
   getReactEventHandler,
   getBooleanAttribute,
   updateBooleanAttribute,
-} from "../utils";
-import templateHTML from "./template.html";
-import { typeValues } from "./utils";
+} from '../utils'
+import templateHTML from './template.html'
+import { typeValues } from './utils'
 import type {
   TSinchToastElement,
   TSinchToastReact,
   TSinchToastType,
-} from "./types";
+} from './types'
 
-const TIMEOUT = 5000;
-const template = document.createElement("template");
+const TIMEOUT = 5000
+const template = document.createElement('template')
 
-template.innerHTML = templateHTML;
+template.innerHTML = templateHTML
 
 defineCustomElement(
-  "sinch-toast",
+  'sinch-toast',
   class extends NectaryElement {
-    #$text: HTMLElement;
-    #tid: number | null = null;
+    #$text: HTMLElement
+    #tid: number | null = null
 
     constructor() {
-      super();
+      super()
 
-      const shadowRoot = this.attachShadow();
+      const shadowRoot = this.attachShadow()
 
-      shadowRoot.appendChild(template.content.cloneNode(true));
+      shadowRoot.appendChild(template.content.cloneNode(true))
 
-      this.#$text = shadowRoot.querySelector("#text")!;
+      this.#$text = shadowRoot.querySelector('#text')!
     }
 
     connectedCallback() {
-      super.connectedCallback();
-      this.setAttribute("aria-atomic", "true");
-      this.setAttribute("aria-live", "polite");
-      this.addEventListener("-timeout", this.#onTimeoutReactHandler);
+      super.connectedCallback()
+      this.setAttribute('aria-atomic', 'true')
+      this.setAttribute('aria-live', 'polite')
+      this.addEventListener('-timeout', this.#onTimeoutReactHandler)
 
-      this.#updateTimeout();
+      this.#updateTimeout()
     }
 
     disconnectedCallback() {
-      super.disconnectedCallback();
-      this.removeEventListener("-timeout", this.#onTimeoutReactHandler);
-      this.#clearTimeout();
+      super.disconnectedCallback()
+      this.removeEventListener('-timeout', this.#onTimeoutReactHandler)
+      this.#clearTimeout()
     }
 
     static get observedAttributes() {
-      return ["text", "persistent"];
+      return ['text', 'persistent']
     }
 
     attributeChangedCallback(
@@ -68,81 +68,81 @@ defineCustomElement(
       newVal: string | null
     ) {
       switch (name) {
-        case "text": {
-          updateAttribute(this.#$text, name, newVal);
+        case 'text': {
+          updateAttribute(this.#$text, name, newVal)
 
-          break;
+          break
         }
 
-        case "persistent": {
-          this.#updateTimeout();
+        case 'persistent': {
+          this.#updateTimeout()
 
-          break;
+          break
         }
       }
     }
 
     get type(): TSinchToastType {
-      return getLiteralAttribute(this, typeValues, "type");
+      return getLiteralAttribute(this, typeValues, 'type')
     }
 
     set type(value: TSinchToastType) {
-      updateLiteralAttribute(this, typeValues, "type", value);
+      updateLiteralAttribute(this, typeValues, 'type', value)
     }
 
     get text() {
-      return getAttribute(this, "text", "");
+      return getAttribute(this, 'text', '')
     }
 
     set text(value: string) {
-      updateAttribute(this, "text", value);
+      updateAttribute(this, 'text', value)
     }
 
     get persistent() {
-      return getBooleanAttribute(this, "persistent");
+      return getBooleanAttribute(this, 'persistent')
     }
 
     set persistent(isPersistent: boolean) {
-      updateBooleanAttribute(this, "persistent", isPersistent);
+      updateBooleanAttribute(this, 'persistent', isPersistent)
     }
 
     #updateTimeout() {
       if (this.persistent) {
-        this.#clearTimeout();
+        this.#clearTimeout()
 
-        return;
+        return
       }
 
       if (this.#tid === null) {
-        this.#tid = window.setTimeout(this.#onTimeout, TIMEOUT);
+        this.#tid = window.setTimeout(this.#onTimeout, TIMEOUT)
       }
     }
 
     #onTimeout = () => {
-      this.dispatchEvent(new CustomEvent("-timeout"));
-    };
+      this.dispatchEvent(new CustomEvent('-timeout'))
+    }
 
     #clearTimeout() {
       if (this.#tid !== null) {
-        window.clearTimeout(this.#tid);
-        this.#tid = null;
+        window.clearTimeout(this.#tid)
+        this.#tid = null
       }
     }
 
     #onTimeoutReactHandler = (e: Event) => {
-      getReactEventHandler(this, "on-timeout")?.(e);
-    };
+      getReactEventHandler(this, 'on-timeout')?.(e)
+    }
   }
-);
+)
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "sinch-toast": TSinchToastReact;
+      'sinch-toast': TSinchToastReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    "sinch-toast": TSinchToastElement;
+    'sinch-toast': TSinchToastElement,
   }
 }

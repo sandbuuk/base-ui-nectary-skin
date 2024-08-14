@@ -20,43 +20,49 @@
     width: 100%;
     height: var(--sinch-local-size);
     padding: 0 8px 0 12px;
-    background-color: var(
-      --sinch-comp-select-button-color-default-background-initial
-    );
+    background-color:
+      var(
+        --sinch-comp-select-button-color-default-background-initial
+      );
     border-radius: var(--sinch-local-shape-radius);
 
     --sinch-local-size: var(--sinch-comp-select-button-size-container-m);
     --sinch-global-size-icon: var(--sinch-comp-select-button-size-icon-m);
-    --sinch-local-shape-radius: var(
-      --sinch-comp-select-button-shape-radius-size-m
-    );
-    --sinch-global-color-icon: var(
-      --sinch-comp-select-button-color-default-icon-initial
-    );
+    --sinch-local-shape-radius:
+      var(
+        --sinch-comp-select-button-shape-radius-size-m
+      );
+    --sinch-global-color-icon:
+      var(
+        --sinch-comp-select-button-color-default-icon-initial
+      );
   }
 
   :host([data-size="l"]) > #wrapper {
     --sinch-local-size: var(--sinch-comp-select-button-size-container-l);
     --sinch-global-size-icon: var(--sinch-comp-select-button-size-icon-l);
-    --sinch-local-shape-radius: var(
-      --sinch-comp-select-button-shape-radius-size-l
-    );
+    --sinch-local-shape-radius:
+      var(
+        --sinch-comp-select-button-shape-radius-size-l
+      );
   }
 
   :host([data-size="m"]) > #wrapper {
     --sinch-local-size: var(--sinch-comp-select-button-size-container-m);
     --sinch-global-size-icon: var(--sinch-comp-select-button-size-icon-m);
-    --sinch-local-shape-radius: var(
-      --sinch-comp-select-button-shape-radius-size-m
-    );
+    --sinch-local-shape-radius:
+      var(
+        --sinch-comp-select-button-shape-radius-size-m
+      );
   }
 
   :host([data-size="s"]) > #wrapper {
     --sinch-local-size: var(--sinch-comp-select-button-size-container-s);
     --sinch-global-size-icon: var(--sinch-comp-select-button-size-icon-s);
-    --sinch-local-shape-radius: var(
-      --sinch-comp-select-button-shape-radius-size-s
-    );
+    --sinch-local-shape-radius:
+      var(
+        --sinch-comp-select-button-shape-radius-size-s
+      );
   }
 
   :host([data-size="l"]) #wrapper {
@@ -72,9 +78,10 @@
   }
 
   :host([disabled]) #wrapper {
-    --sinch-global-color-icon: var(
-      --sinch-comp-select-button-color-disabled-icon-initial
-    );
+    --sinch-global-color-icon:
+      var(
+        --sinch-comp-select-button-color-disabled-icon-initial
+      );
   }
 
   #text {
@@ -82,9 +89,10 @@
     min-width: 0;
 
     --sinch-comp-text-font: var(--sinch-comp-select-button-font-input);
-    --sinch-global-color-text: var(
-      --sinch-comp-select-button-color-default-text-initial
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-select-button-color-default-text-initial
+      );
   }
 
   #text:empty {
@@ -97,9 +105,10 @@
     min-width: 0;
 
     --sinch-comp-text-font: var(--sinch-comp-select-button-font-placeholder);
-    --sinch-global-color-text: var(
-      --sinch-comp-select-button-color-default-placeholder-initial
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-select-button-color-default-placeholder-initial
+      );
   }
 
   #text:empty + #placeholder {
@@ -108,7 +117,8 @@
 
   #border {
     position: absolute;
-    border: 1px solid
+    border:
+      1px solid
       var(--sinch-comp-select-button-color-default-border-initial);
     border-radius: var(--sinch-local-shape-radius);
     inset: 0;
@@ -129,16 +139,18 @@
   }
 
   :host([disabled]) #text {
-    --sinch-global-color-text: var(
-      --sinch-comp-select-button-color-disabled-text-initial
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-select-button-color-disabled-text-initial
+      );
   }
 
   /* stylelint-disable-next-line no-descending-specificity */
   :host([disabled]) #placeholder {
-    --sinch-global-color-text: var(
-      --sinch-comp-select-button-color-disabled-placeholder-initial
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-select-button-color-disabled-placeholder-initial
+      );
   }
 
   #left {

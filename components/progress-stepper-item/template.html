@@ -22,31 +22,36 @@
   }
 
   :host([data-status="incomplete"]:hover) > #button {
-    background-color: var(
-      --sinch-comp-progress-stepper-step-color-incomplete-background-hover
-    );
+    background-color:
+      var(
+        --sinch-comp-progress-stepper-step-color-incomplete-background-hover
+      );
   }
 
   :host([data-status="complete"]:hover) > #button {
-    background-color: var(
-      --sinch-comp-progress-stepper-step-color-complete-background-hover
-    );
+    background-color:
+      var(
+        --sinch-comp-progress-stepper-step-color-complete-background-hover
+      );
   }
 
   :host([data-status="invalid"]:hover) > #button {
-    background-color: var(
-      --sinch-comp-progress-stepper-step-color-invalid-background-hover
-    );
+    background-color:
+      var(
+        --sinch-comp-progress-stepper-step-color-invalid-background-hover
+      );
   }
 
   #outline {
     position: absolute;
     inset: -2px;
-    border: 2px solid
+    border:
+      2px solid
       var(--sinch-comp-progress-stepper-step-color-outline-focus);
-    border-radius: calc(
-      var(--sinch-comp-progress-stepper-step-shape-radius) + 2px
-    );
+    border-radius:
+      calc(
+        var(--sinch-comp-progress-stepper-step-shape-radius) + 2px
+      );
     pointer-events: none;
     opacity: 0;
   }
@@ -66,68 +71,82 @@
   }
 
   :host([data-status="incomplete"]) #text {
-    --sinch-global-color-text: var(
-      --sinch-comp-progress-stepper-step-color-incomplete-label-default
-    );
-    --sinch-comp-text-font: var(
-      --sinch-comp-progress-stepper-step-font-incomplete-label
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-progress-stepper-step-color-incomplete-label-default
+      );
+    --sinch-comp-text-font:
+      var(
+        --sinch-comp-progress-stepper-step-font-incomplete-label
+      );
   }
 
   :host([data-status="complete"]) #text {
-    --sinch-global-color-text: var(
-      --sinch-comp-progress-stepper-step-color-complete-label-default
-    );
-    --sinch-comp-text-font: var(
-      --sinch-comp-progress-stepper-step-font-complete-label
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-progress-stepper-step-color-complete-label-default
+      );
+    --sinch-comp-text-font:
+      var(
+        --sinch-comp-progress-stepper-step-font-complete-label
+      );
   }
 
   :host([data-status="inactive"]) #text {
-    --sinch-global-color-text: var(
-      --sinch-comp-progress-stepper-step-color-inactive-label-default
-    );
-    --sinch-comp-text-font: var(
-      --sinch-comp-progress-stepper-step-font-inactive-label
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-progress-stepper-step-color-inactive-label-default
+      );
+    --sinch-comp-text-font:
+      var(
+        --sinch-comp-progress-stepper-step-font-inactive-label
+      );
   }
 
   :host([invalid]) #text {
-    --sinch-global-color-text: var(
-      --sinch-comp-progress-stepper-step-color-invalid-label-default
-    );
-    --sinch-comp-text-font: var(
-      --sinch-comp-progress-stepper-step-font-invalid-label
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-progress-stepper-step-color-invalid-label-default
+      );
+    --sinch-comp-text-font:
+      var(
+        --sinch-comp-progress-stepper-step-font-invalid-label
+      );
 
     transform: translate(24px, 0);
   }
 
   :host([data-status="incomplete"][data-checked]) #text {
-    --sinch-global-color-text: var(
-      --sinch-comp-progress-stepper-step-color-incomplete-current-label-default
-    );
-    --sinch-comp-text-font: var(
-      --sinch-comp-progress-stepper-step-font-incomplete-current-label
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-progress-stepper-step-color-incomplete-current-label-default
+      );
+    --sinch-comp-text-font:
+      var(
+        --sinch-comp-progress-stepper-step-font-incomplete-current-label
+      );
   }
 
   :host([data-status="complete"][data-checked]) #text {
-    --sinch-global-color-text: var(
-      --sinch-comp-progress-stepper-step-color-complete-current-label-default
-    );
-    --sinch-comp-text-font: var(
-      --sinch-comp-progress-stepper-step-font-complete-current-label
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-progress-stepper-step-color-complete-current-label-default
+      );
+    --sinch-comp-text-font:
+      var(
+        --sinch-comp-progress-stepper-step-font-complete-current-label
+      );
   }
 
   :host([invalid][data-checked]) #text {
-    --sinch-global-color-text: var(
-      --sinch-comp-progress-stepper-step-color-invalid-label-default
-    );
-    --sinch-comp-text-font: var(
-      --sinch-comp-progress-stepper-step-font-invalid-current-label
-    );
+    --sinch-global-color-text:
+      var(
+        --sinch-comp-progress-stepper-step-color-invalid-label-default
+      );
+    --sinch-comp-text-font:
+      var(
+        --sinch-comp-progress-stepper-step-font-invalid-current-label
+      );
   }
 
   #icon-error {
@@ -138,9 +157,10 @@
     opacity: 0;
     transition: opacity 0.25s ease-in-out;
 
-    --sinch-global-color-icon: var(
-      --sinch-comp-progress-stepper-step-color-invalid-icon-default
-    );
+    --sinch-global-color-icon:
+      var(
+        --sinch-comp-progress-stepper-step-color-invalid-icon-default
+      );
     --sinch-global-size-icon: 16px;
   }
 
@@ -155,27 +175,31 @@
   }
 
   :host([data-status="incomplete"]) #progress {
-    background-color: var(
-      --sinch-comp-progress-stepper-step-color-incomplete-progress-background
-    );
+    background-color:
+      var(
+        --sinch-comp-progress-stepper-step-color-incomplete-progress-background
+      );
   }
 
   :host([data-status="complete"]) #progress {
-    background-color: var(
-      --sinch-comp-progress-stepper-step-color-complete-progress-background
-    );
+    background-color:
+      var(
+        --sinch-comp-progress-stepper-step-color-complete-progress-background
+      );
   }
 
   :host([data-status="inactive"]) #progress {
-    background-color: var(
-      --sinch-comp-progress-stepper-step-color-inactive-progress-background
-    );
+    background-color:
+      var(
+        --sinch-comp-progress-stepper-step-color-inactive-progress-background
+      );
   }
 
   :host([invalid]) #progress {
-    background-color: var(
-      --sinch-comp-progress-stepper-step-color-invalid-progress-background
-    );
+    background-color:
+      var(
+        --sinch-comp-progress-stepper-step-color-invalid-progress-background
+      );
   }
 
   #bar {
@@ -187,15 +211,17 @@
   }
 
   :host([data-status="incomplete"]) #bar {
-    background-color: var(
-      --sinch-comp-progress-stepper-step-color-incomplete-progress-bar
-    );
+    background-color:
+      var(
+        --sinch-comp-progress-stepper-step-color-incomplete-progress-bar
+      );
   }
 
   :host([data-status="complete"]) #bar {
-    background-color: var(
-      --sinch-comp-progress-stepper-step-color-complete-progress-bar
-    );
+    background-color:
+      var(
+        --sinch-comp-progress-stepper-step-color-complete-progress-bar
+      );
     width: 100%;
   }
 

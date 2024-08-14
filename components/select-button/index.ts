@@ -1,5 +1,5 @@
-import "../text";
-import "@nectary/assets/icons/fa-chevron-down";
+import '../text'
+import '@nectary/assets/icons/fa-chevron-down'
 import {
   defineCustomElement,
   getAttribute,
@@ -15,88 +15,88 @@ import {
   updateLiteralAttribute,
   Context,
   isAttrEqual,
-} from "../utils";
-import { DEFAULT_SIZE, sizeValues } from "../utils/size";
-import templateHTML from "./template.html";
+} from '../utils'
+import { DEFAULT_SIZE, sizeValues } from '../utils/size'
+import templateHTML from './template.html'
 import type {
   TSinchSelectButtonElement,
   TSinchSelectButtonReact,
-} from "./types";
-import type { TContextSize } from "../utils";
-import type { TSinchSize } from "../utils/size";
+} from './types'
+import type { TContextSize } from '../utils'
+import type { TSinchSize } from '../utils/size'
 
-const template = document.createElement("template");
+const template = document.createElement('template')
 
-template.innerHTML = templateHTML;
+template.innerHTML = templateHTML
 
 defineCustomElement(
-  "sinch-select-button",
+  'sinch-select-button',
   class extends NectaryElement {
-    #$text: HTMLElement;
-    #$placeholder: HTMLElement;
-    #$leftSlot: HTMLSlotElement;
-    #$leftWrapper: HTMLElement;
-    #$wrapper: HTMLElement;
-    #controller: AbortController | null = null;
-    #sizeContext: Context<"size">;
+    #$text: HTMLElement
+    #$placeholder: HTMLElement
+    #$leftSlot: HTMLSlotElement
+    #$leftWrapper: HTMLElement
+    #$wrapper: HTMLElement
+    #controller: AbortController | null = null
+    #sizeContext: Context<'size'>
 
     constructor() {
-      super();
+      super()
 
-      const shadowRoot = this.attachShadow();
+      const shadowRoot = this.attachShadow()
 
-      shadowRoot.appendChild(template.content.cloneNode(true));
+      shadowRoot.appendChild(template.content.cloneNode(true))
 
-      this.#$text = shadowRoot.querySelector("#text")!;
-      this.#$placeholder = shadowRoot.querySelector("#placeholder")!;
-      this.#$leftSlot = shadowRoot.querySelector('slot[name="left"]')!;
-      this.#$leftWrapper = shadowRoot.querySelector("#left")!;
-      this.#$wrapper = shadowRoot.querySelector("#wrapper")!;
-      this.#sizeContext = new Context(this.#$wrapper, "size");
+      this.#$text = shadowRoot.querySelector('#text')!
+      this.#$placeholder = shadowRoot.querySelector('#placeholder')!
+      this.#$leftSlot = shadowRoot.querySelector('slot[name="left"]')!
+      this.#$leftWrapper = shadowRoot.querySelector('#left')!
+      this.#$wrapper = shadowRoot.querySelector('#wrapper')!
+      this.#sizeContext = new Context(this.#$wrapper, 'size')
     }
 
     connectedCallback() {
-      super.connectedCallback();
+      super.connectedCallback()
 
-      this.#controller = new AbortController();
+      this.#controller = new AbortController()
 
-      const { signal } = this.#controller;
+      const { signal } = this.#controller
 
-      this.role = "button";
-      this.tabIndex = 0;
-      this.addEventListener("click", this.#onButtonClick, { signal });
-      this.addEventListener("focus", this.#onButtonFocus, { signal });
-      this.addEventListener("blur", this.#onButtonBlur, { signal });
-      this.addEventListener("keydown", this.#onButtonKeydown, { signal });
-      this.addEventListener("-click", this.#onClickReactHandler, { signal });
-      this.addEventListener("-focus", this.#onFocusReactHandler, { signal });
-      this.addEventListener("-blur", this.#onBlurReactHandler, { signal });
-      this.#$leftSlot.addEventListener("slotchange", this.#onLeftSlotChange, {
+      this.role = 'button'
+      this.tabIndex = 0
+      this.addEventListener('click', this.#onButtonClick, { signal })
+      this.addEventListener('focus', this.#onButtonFocus, { signal })
+      this.addEventListener('blur', this.#onButtonBlur, { signal })
+      this.addEventListener('keydown', this.#onButtonKeydown, { signal })
+      this.addEventListener('-click', this.#onClickReactHandler, { signal })
+      this.addEventListener('-focus', this.#onFocusReactHandler, { signal })
+      this.addEventListener('-blur', this.#onBlurReactHandler, { signal })
+      this.#$leftSlot.addEventListener('slotchange', this.#onLeftSlotChange, {
         signal,
-      });
+      })
 
-      this.#sizeContext.listen(this.#controller.signal);
-      subscribeContext(this, "size", this.#onContextSize, signal);
+      this.#sizeContext.listen(this.#controller.signal)
+      subscribeContext(this, 'size', this.#onContextSize, signal)
 
-      this.#onLeftSlotChange();
-      this.#onSizeUpdate();
+      this.#onLeftSlotChange()
+      this.#onSizeUpdate()
     }
 
     disconnectedCallback() {
-      super.disconnectedCallback();
-      this.#controller!.abort();
-      this.#controller = null;
+      super.disconnectedCallback()
+      this.#controller!.abort()
+      this.#controller = null
     }
 
     static get observedAttributes() {
       return [
-        "text",
-        "placeholder",
-        "invalid",
-        "disabled",
-        "size",
-        "data-size",
-      ];
+        'text',
+        'placeholder',
+        'invalid',
+        'disabled',
+        'size',
+        'data-size',
+      ]
     }
 
     attributeChangedCallback(
@@ -105,179 +105,179 @@ defineCustomElement(
       newVal: string | null
     ) {
       if (isAttrEqual(oldVal, newVal)) {
-        return;
+        return
       }
 
       switch (name) {
-        case "text": {
-          this.#$text.textContent = newVal;
+        case 'text': {
+          this.#$text.textContent = newVal
 
-          break;
+          break
         }
 
-        case "placeholder": {
-          this.#$placeholder.textContent = newVal;
+        case 'placeholder': {
+          this.#$placeholder.textContent = newVal
 
-          break;
+          break
         }
 
-        case "invalid": {
-          const isInvalid = isAttrTrue(newVal);
+        case 'invalid': {
+          const isInvalid = isAttrTrue(newVal)
 
-          this.ariaInvalid = isInvalid.toString();
-          updateBooleanAttribute(this, "invalid", isInvalid);
+          this.ariaInvalid = isInvalid.toString()
+          updateBooleanAttribute(this, 'invalid', isInvalid)
 
-          break;
+          break
         }
 
-        case "disabled": {
-          const isDisabled = isAttrTrue(newVal);
+        case 'disabled': {
+          const isDisabled = isAttrTrue(newVal)
 
-          this.ariaDisabled = isDisabled.toString();
-          updateBooleanAttribute(this, "disabled", isDisabled);
+          this.ariaDisabled = isDisabled.toString()
+          updateBooleanAttribute(this, 'disabled', isDisabled)
 
-          break;
+          break
         }
 
-        case "size": {
-          updateAttribute(this, "data-size", newVal);
+        case 'size': {
+          updateAttribute(this, 'data-size', newVal)
 
-          break;
+          break
         }
 
-        case "data-size": {
-          this.#onSizeUpdate();
+        case 'data-size': {
+          this.#onSizeUpdate()
 
-          break;
+          break
         }
       }
     }
 
     set text(value: string) {
-      updateAttribute(this, "text", value);
+      updateAttribute(this, 'text', value)
     }
 
     get text(): string {
-      return getAttribute(this, "text", "");
+      return getAttribute(this, 'text', '')
     }
 
     set placeholder(value: string | null) {
-      updateAttribute(this, "placeholder", value);
+      updateAttribute(this, 'placeholder', value)
     }
 
     get placeholder() {
-      return getAttribute(this, "placeholder");
+      return getAttribute(this, 'placeholder')
     }
 
     set invalid(isInvalid: boolean) {
-      updateBooleanAttribute(this, "invalid", isInvalid);
+      updateBooleanAttribute(this, 'invalid', isInvalid)
     }
 
     get invalid() {
-      return getBooleanAttribute(this, "invalid");
+      return getBooleanAttribute(this, 'invalid')
     }
 
     set disabled(isDisabled: boolean) {
-      updateBooleanAttribute(this, "disabled", isDisabled);
+      updateBooleanAttribute(this, 'disabled', isDisabled)
     }
 
     get disabled() {
-      return getBooleanAttribute(this, "disabled");
+      return getBooleanAttribute(this, 'disabled')
     }
 
     set size(size: TSinchSize) {
-      updateLiteralAttribute(this, sizeValues, "size", size);
+      updateLiteralAttribute(this, sizeValues, 'size', size)
     }
 
     get size(): TSinchSize {
-      return getLiteralAttribute(this, sizeValues, "size", DEFAULT_SIZE);
+      return getLiteralAttribute(this, sizeValues, 'size', DEFAULT_SIZE)
     }
 
     get focusable() {
-      return true;
+      return true
     }
 
     #onContextSize = (e: CustomEvent<TContextSize>) => {
-      if (this.hasAttribute("size")) {
-        return;
+      if (this.hasAttribute('size')) {
+        return
       }
 
       switch (e.detail) {
-        case "l": {
-          this.setAttribute("data-size", "m");
+        case 'l': {
+          this.setAttribute('data-size', 'm')
 
-          break;
+          break
         }
         default: {
-          this.setAttribute("data-size", "s");
+          this.setAttribute('data-size', 's')
         }
       }
-    };
+    }
 
     #onSizeUpdate() {
       if (!this.isDomConnected) {
-        return;
+        return
       }
 
-      const size = this.getAttribute("data-size") ?? DEFAULT_SIZE;
+      const size = this.getAttribute('data-size') ?? DEFAULT_SIZE
 
-      this.#sizeContext.dispatch(size);
+      this.#sizeContext.dispatch(size)
     }
 
     #onLeftSlotChange = () => {
       setClass(
         this.#$leftWrapper,
-        "empty",
+        'empty',
         this.#$leftSlot.assignedElements().length === 0
-      );
-    };
+      )
+    }
 
     #onButtonFocus = () => {
-      this.dispatchEvent(new CustomEvent("-focus"));
-    };
+      this.dispatchEvent(new CustomEvent('-focus'))
+    }
 
     #onButtonBlur = () => {
-      this.dispatchEvent(new CustomEvent("-blur"));
-    };
+      this.dispatchEvent(new CustomEvent('-blur'))
+    }
 
     #onButtonKeydown = (e: KeyboardEvent) => {
       switch (e.code) {
-        case "Space":
-        case "Enter": {
-          e.preventDefault();
-          this.click();
+        case 'Space':
+        case 'Enter': {
+          e.preventDefault()
+          this.click()
         }
       }
-    };
+    }
 
     #onButtonClick = () => {
       if (!this.disabled) {
-        this.dispatchEvent(new CustomEvent("-click"));
+        this.dispatchEvent(new CustomEvent('-click'))
       }
-    };
+    }
 
     #onClickReactHandler = (e: Event) => {
-      getReactEventHandler(this, "on-click")?.(e);
-    };
+      getReactEventHandler(this, 'on-click')?.(e)
+    }
 
     #onFocusReactHandler = () => {
-      getReactEventHandler(this, "on-focus")?.();
-    };
+      getReactEventHandler(this, 'on-focus')?.()
+    }
 
     #onBlurReactHandler = () => {
-      getReactEventHandler(this, "on-blur")?.();
-    };
+      getReactEventHandler(this, 'on-blur')?.()
+    }
   }
-);
+)
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "sinch-select-button": TSinchSelectButtonReact;
+      'sinch-select-button': TSinchSelectButtonReact,
     }
   }
 
   interface HTMLElementTagNameMap {
-    "sinch-select-button": TSinchSelectButtonElement;
+    'sinch-select-button': TSinchSelectButtonElement,
   }
 }
