@@ -1,5 +1,5 @@
-import '@nectary/assets/icons/fa-arrow-right'
-import '@nectary/assets/icons/fa-arrow-left'
+import '@nectary/assets/icons/fa-angle-right'
+import '@nectary/assets/icons/fa-angle-left'
 import {
   defineCustomElement,
   updateAttribute,

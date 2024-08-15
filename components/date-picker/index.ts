@@ -1,4 +1,7 @@
-import '@nectary/assets/icons/fa-arrow-left'
+import '@nectary/assets/icons/fa-angles-left'
+import '@nectary/assets/icons/fa-angles-right'
+import '@nectary/assets/icons/fa-angle-left'
+import '@nectary/assets/icons/fa-angle-right'
 import '../text'
 import {
   defineCustomElement,
