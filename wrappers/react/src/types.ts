@@ -3,13 +3,14 @@ import type { TSinchAlertType } from '@nectary/components/alert/types'
 import type { TSinchAvatarStatus } from '@nectary/components/avatar/types'
 import type { TSinchBadgeMode } from '@nectary/components/badge/types'
 import type { TSinchButtonType } from '@nectary/components/button/types'
+import type { TSinchButtonReact } from '@nectary/components/button-group-item/types'
 import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
 import type { TSinchFileDropInvalidType } from '@nectary/components/file-drop/types'
 import type { TSinchFilePickerInvalidType } from '@nectary/components/file-picker/types'
 import type { TSinchFileStatusType } from '@nectary/components/file-status/types'
 import type { TSinchHorizontalStepperStatusType } from '@nectary/components/horizontal-stepper-item/types'
 import type { TSinchInlineAlertType } from '@nectary/components/inline-alert/types'
-import type { TSinchInputType, TSinchInputClipboardEvent } from '@nectary/components/input/types'
+import type { TSinchInputType, TSinchInputClipboardEvent, TSinchInputElement } from '@nectary/components/input/types'
 import type { TSinchPopOrientation } from '@nectary/components/pop/types'
 import type { TSinchPopoverOrientation } from '@nectary/components/popover/types'
 import type { TSinchTableAlignType } from '@nectary/components/table-cell/types'
@@ -72,6 +73,20 @@ export interface TSinchButtonWrapper {
   onClick?: (e: CustomEvent<void>) => void,
   onFocus?: (e: CustomEvent<void>) => void,
   onBlur?: (e: CustomEvent<void>) => void,
+}
+export interface TSinchButtonGroupWrapper {
+  size?: TSinchButtonReact['size'],
+  type?: TSinchButtonReact['type'],
+  ariaLabel: TSinchButtonReact['aria-label'],
+}
+export interface TSinchButtonGroupItemWrapper {
+  text?: TSinchButtonReact['text'],
+  disabled?: TSinchButtonReact['disabled'],
+  toggled?: TSinchButtonReact['toggled'],
+  onBlur?: TSinchButtonReact['on-blur'],
+  onClick?: TSinchButtonReact['on-click'],
+  onFocus?: TSinchButtonReact['on-focus'],
+  ariaLabel: TSinchButtonReact['aria-label'],
 }
 export interface TSinchCardWrapper {
   text: string,
@@ -193,9 +208,6 @@ export interface TSinchHorizontalStepperItemWrapper {
   description?: string,
   status?: TSinchHorizontalStepperStatusType,
 }
-export interface TSinchIconWrapper {
-  name: string,
-}
 export interface TSinchInlineAlertWrapper {
   type: TSinchInlineAlertType,
   text?: string,
@@ -218,6 +230,7 @@ export interface TSinchInputWrapper {
   onCut?: (e: TSinchInputClipboardEvent) => void,
   onCopy?: (e: TSinchInputClipboardEvent) => void,
   onPaste?: (e: TSinchInputClipboardEvent) => void,
+  onWheel?: (e: CustomEvent<void> & { target: TSinchInputElement }) => void,
 }
 export interface TSinchLinkWrapper {
   text: string,
@@ -346,6 +359,7 @@ export interface TSinchSelectMenuWrapper {
   searchPlaceholder?: string,
   ariaLabel: string,
   onSearchChange?: (e: CustomEvent<string>) => void,
+  searchValue?: string,
   onChange?: (e: CustomEvent<string>) => void,
 }
 export interface TSinchSelectMenuOptionWrapper {
