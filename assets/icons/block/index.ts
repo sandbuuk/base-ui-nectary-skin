@@ -1,0 +1,18 @@
+import { defineCustomElement } from '../../utils/element'
+import { createIconClass } from '../create-icon-class'
+import templateHTML from './template.html'
+import type { TSinchIconElement, TSinchIconReact } from '../types'
+
+defineCustomElement('sinch-icon-block', createIconClass(templateHTML))
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-block': TSinchIconReact,
+    }
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-icon-block': TSinchIconElement,
+  }
+}
