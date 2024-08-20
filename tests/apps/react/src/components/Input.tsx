@@ -6,7 +6,7 @@ import '@nectary/components/input'
 import '@nectary/components/select-button'
 import '@nectary/components/tag'
 import '@nectary/components/chip'
-import '@nectary/assets/icons/fa-magnifying-glass'
+import '@nectary/components/icon'
 
 export const Input: FC = () => {
   const [search] = useSearchParams()
@@ -76,7 +76,7 @@ export const Input: FC = () => {
       aria-label="Input"
     >
       {hasIcon && (
-        <sinch-icon-fa-magnifying-glass slot="icon"/>
+        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
       )}
       {hasLeft && (
         <sinch-select-button

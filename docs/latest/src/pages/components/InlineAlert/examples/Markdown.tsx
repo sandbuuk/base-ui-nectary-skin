@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import '@nectary/components/inline-alert'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-xmark'
+import '@nectary/components/icon'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
@@ -21,7 +21,7 @@ export const MarkdownExample: FC = () => (
       size="s"
       on-click={() => console.log('close')}
     >
-      <sinch-icon-fa-xmark slot="icon"/>
+      <sinch-icon name="fa-xmark" slot="icon"/>
     </sinch-button>
   </sinch-inline-alert>
 )

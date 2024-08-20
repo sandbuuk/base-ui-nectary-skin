@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import '@nectary/components/inline-alert'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-xmark'
+import '@nectary/components/icon'
 
 export const CloseExample: FC = () => (
   <sinch-inline-alert
@@ -15,7 +15,7 @@ export const CloseExample: FC = () => (
       size="s"
       on-click={() => console.log('close')}
     >
-      <sinch-icon-fa-xmark slot="icon"/>
+      <sinch-icon name="fa-xmark" slot="icon"/>
     </sinch-button>
   </sinch-inline-alert>
 )

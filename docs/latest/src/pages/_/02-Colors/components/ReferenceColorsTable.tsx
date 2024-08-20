@@ -7,11 +7,10 @@ import '@nectary/components/table-cell'
 import { useEffect, useState } from 'react'
 import '@nectary/components/button'
 import '@nectary/components/text'
+import '@nectary/components/icon'
 import { SpacingY } from './SpacingY'
 import { sinchColors } from './create-reference-colors'
 import type { TableItem } from './create-reference-colors'
-import '@nectary/assets/icons/fa-angle-down'
-import '@nectary/assets/icons/fa-angle-up'
 
 type TypeShowMoreButton = {
   isExpanded: boolean,
@@ -44,9 +43,9 @@ const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
         on-click={handleClick}
       >
         {isExpanded ? (
-          <sinch-icon-fa-angle-down slot="right-icon"/>
+          <sinch-icon name="fa-angle-down" slot="right-icon"/>
         ) : (
-          <sinch-icon-fa-angle-up slot="right-icon"/>
+          <sinch-icon name="fa-angle-up" slot="right-icon"/>
         )}
       </sinch-button>
     </div>

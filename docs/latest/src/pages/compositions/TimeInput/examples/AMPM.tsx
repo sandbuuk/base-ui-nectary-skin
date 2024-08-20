@@ -5,7 +5,7 @@ import '@nectary/components/popover'
 import '@nectary/components/time-picker'
 import '@nectary/components/field'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-clock'
+import '@nectary/components/icon'
 
 const style: CSSProperties = {
   width: 200,
@@ -55,7 +55,7 @@ export const AMPMExample: FC = () => {
             aria-label="Open Time Picker"
             on-click={onOpen}
           >
-            <sinch-icon-fa-clock slot="icon"/>
+            <sinch-icon name="fa-clock" slot="icon"/>
           </sinch-button>
         </sinch-input>
       </sinch-field>

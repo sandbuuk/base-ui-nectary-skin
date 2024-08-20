@@ -1,5 +1,4 @@
-import '@nectary/assets/icons/fa-angle-right'
-import '@nectary/assets/icons/fa-angle-left'
+import '../icon'
 import {
   defineCustomElement,
   updateAttribute,

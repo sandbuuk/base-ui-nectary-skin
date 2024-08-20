@@ -106,7 +106,7 @@ test('inline-alert events', runScreenshotTests('sinch-inline-alert', [
 
       const testClose = testCustomEvent(
         page,
-        $.locator('sinch-icon-fa-xmark')
+        $.locator('sinch-icon[name="fa-xmark"]')
       )
 
       await testClose('-click', 'sinch-inline-alert-close-click')

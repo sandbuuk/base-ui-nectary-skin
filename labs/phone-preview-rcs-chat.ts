@@ -1,10 +1,4 @@
-import '@nectary/assets/icons/fa-arrow-left'
-import '@nectary/assets/icons/fa-shield-check'
-import '@nectary/assets/icons/fa-ellipsis-vertical'
-import '@nectary/assets/icons/fa-circle-plus'
-import '@nectary/assets/icons/fa-camera'
-import '@nectary/assets/icons/fa-face-smile'
-import '@nectary/assets/icons/microphone'
+import '@nectary/components/icon'
 import { customElement } from 'solid-element'
 import { For } from 'solid-js'
 import html from 'solid-js/html'
@@ -139,14 +133,14 @@ export const RcsChatPreview = (props: {
     </style>
     <section class="root">
       <header>
-        <sinch-icon-fa-arrow-left></sinch-icon-fa-arrow-left>
+        <sinch-icon name="fa-arrow-left"></sinch-icon>
         <img
           src=${() => (props.logo !== '' ? props.logo : transparentIcon)}
           alt=""
         />
         <h1>${() => (props.name !== '' ? props.name : 'Brand name')}</h1>
-        <sinch-icon-fa-shield-check name="verified_user" />
-        <sinch-icon-fa-ellipsis-vertical name="more_vert" />
+        <sinch-icon name="fa-shield-check" name="verified_user" />
+        <sinch-icon name="fa-ellipsis-vertical" name="more_vert" />
       </header>
       <div>
         <img
@@ -163,12 +157,12 @@ export const RcsChatPreview = (props: {
         <//>
       </div>
       <footer>
-        <sinch-icon-fa-circle-plus />
-        <sinch-icon-fa-camera />
+        <sinch-icon name="fa-circle-plus" />
+        <sinch-icon name="fa-camera" />
         <div>
           <span>RCS Message</span>
-          <sinch-icon-fa-face-smile />
-          <sinch-icon-microphone name="mic" />
+          <sinch-icon name="fa-face-smile" />
+          <sinch-icon name="microphone" name="mic" />
         </div>
       </footer>
     </section>`

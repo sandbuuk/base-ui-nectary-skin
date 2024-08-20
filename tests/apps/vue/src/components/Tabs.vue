@@ -1,41 +1,34 @@
 <template>
   <sinch-tabs v-if="example=='single-icon'" :value="value" @--change="onChange" aria-label="Tabs">
-    <sinch-tabs-icon-option
-      aria-label="Tab"
-      :value="1"
-      :disabled="isDisabled">
-      <sinch-icon-fa-arrow-up-right-from-square slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+    <sinch-tabs-icon-option aria-label="Tab" :value="1" :disabled="isDisabled">
+      <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
     </sinch-tabs-icon-option>
   </sinch-tabs>
   <sinch-tabs v-if="example=='single'" :value="value" @--change="onChange" aria-label="Tabs">
-    <sinch-tabs-option
-      aria-label="Tab"
-      text="Tab label"
-      :value="1"
-      :disabled="isDisabled">
-      <sinch-icon-fa-arrow-up-right-from-square slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+    <sinch-tabs-option aria-label="Tab" text="Tab label" :value="1" :disabled="isDisabled">
+      <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
     </sinch-tabs-option>
   </sinch-tabs>
   <sinch-tabs v-if="example=='icons'" :value="value" @--change="onChange" aria-label="Tabs">
     <sinch-tabs-icon-option value="1">
-      <sinch-icon-fa-arrow-up-right-from-square slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+      <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
     </sinch-tabs-icon-option>
     <sinch-tabs-icon-option value="2" disabled>
-      <sinch-icon-fa-arrow-up-right-from-square slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+      <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
     </sinch-tabs-icon-option>
     <sinch-tabs-icon-option value="3">
-      <sinch-icon-fa-arrow-up-right-from-square slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+      <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
     </sinch-tabs-icon-option>
     <sinch-tabs-icon-option value="4">
-      <sinch-icon-fa-arrow-up-right-from-square slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+      <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
     </sinch-tabs-icon-option>
   </sinch-tabs>
   <sinch-tabs v-if="example==null" :value="value" @--change="onChange" aria-label="Tabs">
     <sinch-tabs-option value="1" text="Short">
-      <sinch-icon-fa-arrow-up-right-from-square slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+      <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
     </sinch-tabs-option>
     <sinch-tabs-option value="2" text="Option value 2" disabled>
-      <sinch-icon-fa-arrow-up-right-from-square slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+      <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
     </sinch-tabs-option>
     <sinch-tabs-option value="3" text="Long option text text"></sinch-tabs-option>
     <sinch-tabs-option value="4" text="Option value 4"></sinch-tabs-option>
@@ -69,4 +62,3 @@ export default {
   }
 }
 </script>
-

@@ -1,7 +1,7 @@
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/file-status'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-trash'
+import '@nectary/components/icon'
 
 const wrapperStyle: CSSProperties = {
   display: 'flex',
@@ -19,7 +19,7 @@ export const SuccessExample: FC = () => (
         size="s"
         on-click={() => { }}
       >
-        <sinch-icon-fa-trash slot="icon"/>
+        <sinch-icon name="fa-trash" slot="icon"/>
       </sinch-button>
     </sinch-file-status>
   </div>

@@ -1,17 +1,17 @@
 <template>
   <sinch-segmented-icon-control :multiple="isMultiple" :value="value" @--change="onChange">
     <sinch-segmented-icon-control-option value="1">
-      <sinch-icon-fa-align-right slot="icon"></sinch-icon-fa-align-right>
+      <sinch-icon name="fa-align-right" slot="icon"></sinch-icon>
     </sinch-segmented-icon-control-option>
     <template v-if="!isSingleOption">
       <sinch-segmented-icon-control-option disabled value="2">
-        <sinch-icon-fa-align-center slot="icon"></sinch-icon-fa-align-center>
+        <sinch-icon name="fa-align-center" slot="icon"></sinch-icon>
       </sinch-segmented-icon-control-option>
       <sinch-segmented-icon-control-option value="3">
-        <sinch-icon-fa-align-left slot="icon"></sinch-icon-fa-align-left>
+        <sinch-icon name="fa-align-left" slot="icon"></sinch-icon>
       </sinch-segmented-icon-control-option>
       <sinch-segmented-icon-control-option value="4">
-        <sinch-icon-fa-align-justify slot="icon"></sinch-icon-fa-align-justify>
+        <sinch-icon name="fa-align-justify" slot="icon"></sinch-icon>
       </sinch-segmented-icon-control-option>
     </template>
   </sinch-segmented-icon-control>
@@ -20,10 +20,7 @@
 <script>
 import '@nectary/components/segmented-icon-control'
 import '@nectary/components/segmented-icon-control-option'
-import '@nectary/assets/icons/fa-align-center'
-import '@nectary/assets/icons/fa-align-justify'
-import '@nectary/assets/icons/fa-align-right'
-import '@nectary/assets/icons/fa-align-left'
+import '@nectary/components/icon'
 
 export default {
   methods: {
@@ -52,4 +49,3 @@ export default {
   }
 }
 </script>
-

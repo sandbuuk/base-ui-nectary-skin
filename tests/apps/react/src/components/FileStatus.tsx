@@ -4,7 +4,7 @@ import '@nectary/components/file-status'
 import '@nectary/components/text'
 import '@nectary/components/progress'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-xmark'
+import '@nectary/components/icon'
 
 export const FileStatus: FC = () => {
   const [search] = useSearchParams()
@@ -25,7 +25,7 @@ export const FileStatus: FC = () => {
         <sinch-progress slot="content" value={73} aria-label="Progress" detailed/>
       )}
       <sinch-button slot="action" aria-label="Close" size="s">
-        <sinch-icon-fa-xmark slot="icon"/>
+        <sinch-icon name="fa-xmark" slot="icon"/>
       </sinch-button>
     </sinch-file-status>
   )

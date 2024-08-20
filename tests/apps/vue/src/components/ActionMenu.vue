@@ -1,13 +1,8 @@
 <template>
   <sinch-action-menu :rows="rows">
-    <sinch-action-menu-option
-      v-for="(value, key) in options"
-      :key="key"
-      :value="key"
-      :text="value.text"
-      :disabled="value.isDisabled"
-      @--click="onClick(key)">
-      <sinch-icon-fa-arrow-up-right-from-square v-if="value.icon === '1'" slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+    <sinch-action-menu-option v-for="(value, key) in options" :key="key" :value="key" :text="value.text"
+      :disabled="value.isDisabled" @--click="onClick(key)">
+      <sinch-icon name="fa-arrow-up-right-from-square" v-if="value.icon === '1'" slot="icon"></sinch-icon>
     </sinch-action-menu-option>
   </sinch-action-menu>
 </template>
@@ -15,7 +10,7 @@
 <script>
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
-import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/components/icon'
 
 export default {
   methods: {
@@ -39,4 +34,3 @@ export default {
   }
 }
 </script>
-

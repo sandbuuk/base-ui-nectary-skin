@@ -23,6 +23,7 @@
     "tokens:cpass:mailjet": "tsm ./scripts/process-tokens.ts ./tokens/data.json themes/cpaas-mailJet cpaas/mailjet",
     "tokens:cpass:dashboard": "tsm ./scripts/process-tokens.ts ./tokens/data.json themes/cpaas-dashboard cpaas/dashboard",
     "tokens": "concurrently --raw npm:tokens:base npm:tokens:dark npm:tokens:mm npm:tokens:cpass:base npm:tokens:cpass:mailgun npm:tokens:cpass:mailjet npm:tokens:cpass:dashboard npm:tokens:simpletexting",
+    "fonts": "tsm scripts/generate-icon-font.ts",
     "wrappers:react": "tsm ./scripts/generate-react-wrappers.mts",
     "wrappers:slots": "tsm ./scripts/generate-slots-for-wrappers.mts",
     "wrappers:types": "tsm ./scripts/generate-types-for-wrappers.mts",
@@ -57,7 +58,9 @@
     "stylelint-config-standard": "^25.0.0",
     "svgo": "^2.8.0",
     "tsm": "^2.3.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "svgtofont": "^5.0.3",
+    "oslllo-svg-fixer": "5.0.0"
   },
   "dependencies": {
     "jsdom": "^24.0.0",

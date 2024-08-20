@@ -1,4 +1,4 @@
-import '@nectary/assets/icons/fa-chevron-down'
+import '../icon'
 import {
   defineCustomElement,
   getBooleanAttribute,

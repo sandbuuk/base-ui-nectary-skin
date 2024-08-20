@@ -1,6 +1,4 @@
-import '@nectary/assets/icons/fa-phone'
-import '@nectary/assets/icons/fa-earth-americas'
-import '@nectary/assets/icons/envelope'
+import '@nectary/components/icon'
 import { customElement } from 'solid-element'
 import { createSignal, For } from 'solid-js'
 import html from 'solid-js/html'
@@ -192,15 +190,15 @@ const Actions = (props: Parameters<typeof RcsChannelPreview>[0]) => {
   return html`
     <section class="actions">
       <a inert=${() => number() === ''} target="_blank" href=${numberHref}>
-        <sinch-icon-fa-phone class="icon-link" />
+        <sinch-icon name="fa-phone" class="icon-link" />
         Call
       </a>
       <a inert=${() => url() === ''} target="_blank" href=${urlHref}>
-        <sinch-icon-fa-earth-americas name="public" class="icon-link" />
+        <sinch-icon name="fa-earth-americas" name="public" class="icon-link" />
         Website
       </a>
       <a inert=${() => email() === ''} target="_blank" href=${emailHref}>
-        <sinch-icon-envelope name="mail" class="icon-link" />
+        <sinch-icon name="envelope" name="mail" class="icon-link" />
         Email
       </a>
     </section>
@@ -230,7 +228,7 @@ const Info = (props: Parameters<typeof RcsChannelPreview>[0]) => {
             target="_blank"
             href=${`tel:${number}`}
           >
-            <sinch-icon-fa-phone class="icon-link" />
+            <sinch-icon name="fa-phone" class="icon-link" />
             <span>${number}</span>
             <p>${label}</p>
           </a>
@@ -239,7 +237,7 @@ const Info = (props: Parameters<typeof RcsChannelPreview>[0]) => {
       <${For} each=${websites}>
         ${({ label, url }: { label: string, url: string }) => html`
           <a inert=${() => props.websites.length === 0} target="_blank" href=${url}>
-            <sinch-icon-fa-earth-americas name="public" class="icon-link" />
+            <sinch-icon name="fa-earth-americas" name="public" class="icon-link" />
             <span>${url}</span>
             <p>${label}</p>
           </a>
@@ -252,7 +250,7 @@ const Info = (props: Parameters<typeof RcsChannelPreview>[0]) => {
             target="_blank"
             href=${`mailto:${address}`}
           >
-            <sinch-icon-envelope name="mail" class="icon-link" />
+            <sinch-icon name="envelope" name="mail" class="icon-link" />
             <span>${address}</span>
             <p>${label}</p>
           </a>

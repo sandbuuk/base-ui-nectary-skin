@@ -1,4 +1,4 @@
-import '@nectary/assets/icons/fa-chevron-down'
+import '../icon'
 import '../text'
 import '../title'
 import {

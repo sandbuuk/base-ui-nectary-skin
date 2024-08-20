@@ -1,5 +1,5 @@
 import '../text'
-import '@nectary/assets/icons/circle-cross'
+import '../icon'
 import {
   defineCustomElement,
   getBooleanAttribute,

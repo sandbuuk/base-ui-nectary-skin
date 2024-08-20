@@ -5,7 +5,7 @@ import '@nectary/components/field'
 import '@nectary/components/file-picker'
 import '@nectary/components/file-status'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-xmark'
+import '@nectary/components/icon'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -64,7 +64,7 @@ export const FilePickerExample: FC = () => {
                 size="s"
                 on-click={() => { }}
               >
-                <sinch-icon-fa-xmark slot="icon"/>
+                <sinch-icon name="fa-xmark" slot="icon"/>
               </sinch-button>
             </sinch-file-status>
           ))

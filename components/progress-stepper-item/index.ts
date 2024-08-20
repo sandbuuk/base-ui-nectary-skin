@@ -1,5 +1,4 @@
-import '@nectary/assets/icons/triangle-exclamation'
-import '@nectary/assets/icons/octagon-exclamation'
+import '../icon'
 import '../text'
 import {
   defineCustomElement,

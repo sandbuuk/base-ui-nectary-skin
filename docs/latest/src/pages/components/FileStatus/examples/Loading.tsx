@@ -1,7 +1,7 @@
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/file-status'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-xmark'
+import '@nectary/components/icon'
 
 const style: CSSProperties = {
   width: 300,
@@ -20,7 +20,7 @@ export const LoadingExample: FC = () => (
       type="cta-secondary"
       on-click={() => { }}
     >
-      <sinch-icon-fa-xmark slot="icon"/>
+      <sinch-icon name="fa-xmark" slot="icon"/>
     </sinch-button>
   </sinch-file-status>
 )

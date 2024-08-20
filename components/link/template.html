@@ -35,7 +35,7 @@
   }
 
   :host([standalone]) a {
-    display: flex;
+    display: block;
     font: var(--sinch-comp-link-standalone-font-initial);
     font-size: inherit;
     line-height: inherit;
@@ -100,8 +100,8 @@
 <a referrerpolicy="no-referer" aria-hidden="true">
   <span id="content"></span>
   <span id="icon-prefix">&nbsp;</span>
-  <sinch-icon-fa-arrow-up-right-from-square
+  <sinch-icon name="fa-arrow-up-right-from-square"
     id="external-icon"
-  ></sinch-icon-fa-arrow-up-right-from-square>
-  <sinch-icon-fa-arrow-right id="standalone-icon"></sinch-icon-fa-arrow-right>
+  ></sinch-icon>
+  <sinch-icon name="fa-arrow-right" id="standalone-icon"></sinch-icon>
 </a>

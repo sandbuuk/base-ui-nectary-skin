@@ -5,7 +5,7 @@ import type { FC } from 'react'
 import '@nectary/components/button'
 import '@nectary/components/toast-manager'
 import '@nectary/components/toast'
-import '@nectary/assets/icons/fa-xmark'
+import '@nectary/components/icon'
 
 const types: TSinchToastType[] = ['info', 'warn', 'success', 'error']
 const text = [
@@ -65,7 +65,7 @@ export const ComplexExample: FC = () => {
                 size="s"
                 on-click={onClose(id)}
               >
-                <sinch-icon-fa-xmark slot="icon"/>
+                <sinch-icon name="fa-xmark" slot="icon"/>
               </sinch-button>
             )}
           </sinch-toast>

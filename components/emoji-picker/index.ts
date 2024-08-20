@@ -7,8 +7,7 @@ import '../tabs'
 import '../tabs-icon-option'
 import '../emoji'
 import '../text'
-import '@nectary/assets/icons/fa-xmark'
-import '@nectary/assets/icons/magnifying-glass'
+import '../icon'
 import { getEmojiBaseUrl, setEmojiBaseUrl } from '../emoji/utils'
 import {
   defineCustomElement,

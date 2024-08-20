@@ -1,4 +1,4 @@
-import '@nectary/assets/icons/fa-check'
+import '../icon'
 import '../segmented-control'
 import '../segmented-control-option'
 import {

@@ -2,7 +2,7 @@ import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
 import '@nectary/components/button'
 import '@nectary/components/popover'
-import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/components/icon'
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
@@ -76,7 +76,7 @@ export const ActionDropdown: FC = () => {
               disabled={isDisabled}
               on-click={() => onOptionClick(key)}
             >
-              {icon === '1' && <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>}
+              {icon === '1' && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
             </sinch-action-menu-option>
           ))
         }

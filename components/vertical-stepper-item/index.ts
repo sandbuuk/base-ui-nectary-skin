@@ -1,5 +1,4 @@
-import '@nectary/assets/icons/fa-check'
-import '@nectary/assets/icons/fa-exclamation'
+import '../icon'
 import '../title'
 import '../text'
 import {

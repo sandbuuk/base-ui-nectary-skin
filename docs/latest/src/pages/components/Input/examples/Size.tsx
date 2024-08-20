@@ -2,8 +2,7 @@ import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/input'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-magnifying-glass'
-import '@nectary/assets/icons/fa-face-smile'
+import '@nectary/components/icon'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -26,13 +25,13 @@ export const SizeExample: FC = () => {
         value={state}
         on-change={(e) => setState(e.detail)}
       >
-        <sinch-icon-fa-magnifying-glass slot="icon"/>
+        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
         <sinch-button
           slot="right"
           aria-label="Click"
           on-click={() => { }}
         >
-          <sinch-icon-fa-face-smile slot="icon"/>
+          <sinch-icon name="fa-face-smile" slot="icon"/>
         </sinch-button>
       </sinch-input>
       <sinch-input
@@ -43,13 +42,13 @@ export const SizeExample: FC = () => {
         value={state}
         on-change={(e) => setState(e.detail)}
       >
-        <sinch-icon-fa-magnifying-glass slot="icon"/>
+        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
         <sinch-button
           slot="right"
           aria-label="Click"
           on-click={() => { }}
         >
-          <sinch-icon-fa-face-smile slot="icon"/>
+          <sinch-icon name="fa-face-smile" slot="icon"/>
         </sinch-button>
       </sinch-input>
       <sinch-input
@@ -60,13 +59,13 @@ export const SizeExample: FC = () => {
         value={state}
         on-change={(e) => setState(e.detail)}
       >
-        <sinch-icon-fa-magnifying-glass slot="icon"/>
+        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
         <sinch-button
           slot="right"
           aria-label="Click"
           on-click={() => { }}
         >
-          <sinch-icon-fa-face-smile slot="icon"/>
+          <sinch-icon name="fa-face-smile" slot="icon"/>
         </sinch-button>
       </sinch-input>
     </div>

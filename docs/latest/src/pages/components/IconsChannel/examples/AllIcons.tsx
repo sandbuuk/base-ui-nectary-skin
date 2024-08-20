@@ -3,8 +3,7 @@ import type { CSSProperties, FC } from 'react'
 import '@nectary/components/input'
 import '@nectary/components/text'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-xmark'
-import '@nectary/assets/icons/magnifying-glass'
+import '@nectary/components/icon'
 
 export const req = import.meta.webpackContext!('@nectary/assets/icons-channel', {
   regExp: /^.*\/index$/,
@@ -61,9 +60,9 @@ export const AllIconsExample: FC = () => {
         on-change={onChange}
         aria-label="Search"
       >
-        <sinch-icon-magnifying-glass slot="icon"/>
+        <sinch-icon name="magnifying-glass" slot="icon"/>
         <sinch-button slot="right" on-click={onClearSearch} aria-label="Clear search">
-          <sinch-icon-fa-xmark slot="icon"/>
+          <sinch-icon name="fa-xmark" slot="icon"/>
         </sinch-button>
       </sinch-input>
       <div style={tableStyle}>

@@ -1,9 +1,8 @@
 import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-arrow-up-right-from-square'
-import '@nectary/assets/icons/fa-angle-down'
 import '@nectary/components/spinner'
+import '@nectary/components/icon'
 
 export const Button: FC = () => {
   const [search] = useSearchParams()
@@ -32,8 +31,8 @@ export const Button: FC = () => {
       aria-label="Button"
     >
       {hasSpinner && <sinch-spinner slot="icon"/>}
-      {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>}
-      {hasRightIcon && <sinch-icon-fa-angle-down slot="right-icon"/>}
+      {hasIcon && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
+      {hasRightIcon && <sinch-icon name="fa-angle-down" slot="right-icon"/>}
     </sinch-button>
   )
 }

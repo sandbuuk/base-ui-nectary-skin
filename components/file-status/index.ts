@@ -1,7 +1,5 @@
 import '../spinner'
-import '@nectary/assets/icons/circle-check'
-import '@nectary/assets/icons/fa-clipboard-question'
-import '@nectary/assets/icons/fa-file-lines'
+import '../icon'
 import '../text'
 import {
   defineCustomElement,

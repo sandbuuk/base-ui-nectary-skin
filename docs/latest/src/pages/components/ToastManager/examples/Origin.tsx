@@ -10,7 +10,7 @@ import '@nectary/components/popover'
 import '@nectary/components/select-button'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
-import '@nectary/assets/icons/fa-xmark'
+import '@nectary/components/icon'
 
 const types: TSinchToastType[] = ['info', 'warn', 'success', 'error']
 const text = [
@@ -110,7 +110,7 @@ export const OriginExample: FC = () => {
                 size="s"
                 on-click={onToastClose(id)}
               >
-                <sinch-icon-fa-xmark slot="icon"/>
+                <sinch-icon name="fa-xmark" slot="icon"/>
               </sinch-button>
             )}
           </sinch-toast>

@@ -3,11 +3,7 @@ import type { FC } from 'react'
 import '@nectary/components/textarea'
 import '@nectary/components/button'
 import '@nectary/components/tag'
-import '@nectary/assets/icons/fa-face-laugh'
-import '@nectary/assets/icons/fa-paperclip-vertical'
-import '@nectary/assets/icons/fa-brackets-curly'
-import '@nectary/assets/icons/fa-comment-plus'
-import '@nectary/assets/icons/fa-ellipsis'
+import '@nectary/components/icon'
 
 export const BottomExample: FC = () => {
   const [state, setState] = useState('')
@@ -21,19 +17,19 @@ export const BottomExample: FC = () => {
       style={{ width: '500px' }}
     >
       <sinch-button slot="bottom" aria-label="Paperclip">
-        <sinch-icon-fa-paperclip-vertical slot="icon"/>
+        <sinch-icon name="fa-paperclip-vertical" slot="icon"/>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Emoji">
-        <sinch-icon-fa-face-laugh slot="icon"/>
+        <sinch-icon name="fa-face-laugh" slot="icon"/>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Variables">
-        <sinch-icon-fa-brackets-curly slot="icon"/>
+        <sinch-icon name="fa-brackets-curly" slot="icon"/>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Comment">
-        <sinch-icon-fa-comment-plus slot="icon"/>
+        <sinch-icon name="fa-comment-plus" slot="icon"/>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Comment">
-        <sinch-icon-fa-ellipsis slot="icon"/>
+        <sinch-icon name="fa-ellipsis" slot="icon"/>
       </sinch-button>
       <sinch-tag
         slot="bottom"
@@ -47,7 +43,7 @@ export const BottomExample: FC = () => {
         aria-label="Send"
         text="Send"
       >
-        {/* <sinch-icon-send slot="right-icon" /> */}
+        {/* <sinch-icon name="send" slot="right-icon" /> */}
       </sinch-button>
     </sinch-textarea>
   )

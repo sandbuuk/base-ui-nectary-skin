@@ -8,8 +8,7 @@ import '@nectary/components/field'
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
 import '@nectary/components/button'
-import '@nectary/assets/icons/magnifying-glass'
-import '@nectary/assets/icons/fa-xmark'
+import '@nectary/components/icon'
 
 const options: string[] = [
   'Option 1 value long long long',
@@ -70,10 +69,10 @@ export const Search: FC = () => {
           on-focus={onFocus}
           on-blur={onBlur}
         >
-          <sinch-icon-magnifying-glass slot="icon"/>
+          <sinch-icon name="magnifying-glass" slot="icon"/>
           {isClearActive && (
             <sinch-button slot="right" on-click={onClearClick} aria-label="Clear">
-              <sinch-icon-fa-xmark slot="icon"/>
+              <sinch-icon name="fa-xmark" slot="icon"/>
             </sinch-button>
           )}
         </sinch-input>

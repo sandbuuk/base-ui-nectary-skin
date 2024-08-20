@@ -6,10 +6,10 @@
           :fit="cell.isFit">
           <sinch-checkbox v-if="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
           <sinch-button v-if="cell.isSortable" aria-label="Sort" size="s" slot="right">
-            <sinch-icon-fa-arrow-up-long slot="icon"></sinch-icon-fa-arrow-up-long>
+            <sinch-icon name="fa-arrow-up-long" slot="icon"></sinch-icon>
           </sinch-button>
           <sinch-button v-if="cell.isFilterable" aria-label="Filter" size="s" slot="left">
-            <sinch-icon-fa-bars-filter slot="icon"></sinch-icon-fa-bars-filter>
+            <sinch-icon name="fa-bars-filter" slot="icon"></sinch-icon>
           </sinch-button>
           <sinch-help-tooltip v-if="cell.tooltip != null" slot="tooltip" :text="cell.tooltip"></sinch-help-tooltip>
         </sinch-table-head-cell>
@@ -23,11 +23,8 @@
           <sinch-toggle v-if="cell.isToggle"></sinch-toggle>
           <sinch-link v-if="cell.isLink" :text="cell.text" href="#"></sinch-link>
           <sinch-button v-if="cell.isIcon" aria-label="button">
-            <sinch-icon v-if="cell.iconnName === ''" slot="icon" :name="cell.iconName"></sinch-icon>
-            <sinch-icon-fa-ellipsis-vertical v-if="cell.iconName == 'ellipsis'"
-              slot="icon"></sinch-icon-fa-ellipsis-vertical>
-            <sinch-icon-fa-arrow-up-right-from-square v-if="cell.iconName == 'open'"
-              slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
+            <sinch-icon name="fa-ellipsis-vertical" v-if="cell.iconName == 'ellipsis'" slot="icon"></sinch-icon>
+            <sinch-icon name="fa-arrow-up-right-from-square" v-if="cell.iconName == 'open'" slot="icon"></sinch-icon>
           </sinch-button>
           <sinch-text
             v-if="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon">{{cell.text}}</sinch-text>
@@ -49,10 +46,7 @@ import '@nectary/components/help-tooltip'
 import '@nectary/components/button'
 import '@nectary/components/checkbox'
 import '@nectary/components/link'
-import '@nectary/assets/icons/fa-ellipsis-vertical'
-import '@nectary/assets/icons/fa-arrow-up-right-from-square'
-import '@nectary/assets/icons/fa-arrow-up-long'
-import '@nectary/assets/icons/fa-bars-filter'
+import '@nectary/components/icon'
 import '@nectary/components/text'
 
 const getTableItems = ({ hasLongLine }) => ({

@@ -9,8 +9,7 @@ import '@nectary/components/input'
 import '@nectary/components/text'
 import '@nectary/components/spinner'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-xmark'
-import '@nectary/assets/icons/magnifying-glass'
+import '@nectary/components/icon'
 
 const inputWidth: CSSProperties = {
   width: 300,
@@ -107,10 +106,10 @@ export const SearchExample: FC = () => {
           value={inputValue}
           on-change={onInputChange}
         >
-          <sinch-icon-magnifying-glass slot="icon"/>
+          <sinch-icon name="magnifying-glass" slot="icon"/>
           {!isLoading && isClearButtonActive && (
             <sinch-button slot="right" on-click={onClearClick} aria-label="Clear search">
-              <sinch-icon-fa-xmark slot="icon"/>
+              <sinch-icon name="fa-xmark" slot="icon"/>
             </sinch-button>
           )}
           {isLoading && <sinch-spinner slot="right"/>}

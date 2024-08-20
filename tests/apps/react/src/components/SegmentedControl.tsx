@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/segmented-control'
 import '@nectary/components/segmented-control-option'
-import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/components/icon'
 
 export const SegmentedControl: FC = () => {
   const [search] = useSearchParams()
@@ -31,7 +31,7 @@ export const SegmentedControl: FC = () => {
         on-focus={onFocus}
         on-blur={onBlur}
       >
-        <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
+        <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
       </sinch-segmented-control-option>
       {!isSingleOption && (
         <>
@@ -41,7 +41,7 @@ export const SegmentedControl: FC = () => {
             aria-label="2"
             disabled
           >
-            <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>
+            <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
           </sinch-segmented-control-option>
           <sinch-segmented-control-option
             value="3"

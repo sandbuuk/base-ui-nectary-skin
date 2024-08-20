@@ -1,23 +1,15 @@
 <template>
-  <sinch-button
-    :type="type"
-    :text="text"
-    :disabled="isDisabled"
-    :toggled="isToggled"
-    :size="size"
-    @--click="onClick"
-    @--focus="onFocus"
-    @--blur="onBlur">
+  <sinch-button :type="type" :text="text" :disabled="isDisabled" :toggled="isToggled" :size="size" @--click="onClick"
+    @--focus="onFocus" @--blur="onBlur">
     <sinch-spinner v-if="hasSpinner" static :type="isSmall ? 'small' : 'medium'" slot="icon"></sinch-spinner>
-    <sinch-icon-fa-arrow-up-right-from-square v-if="hasIcon" slot="icon"></sinch-icon-fa-arrow-up-right-from-square>
-    <sinch-icon-fa-angle-down v-if="hasRightIcon" slot="right-icon"></sinch-icon-fa-angle-down>
+    <sinch-icon name="fa-arrow-up-right-from-square" v-if="hasIcon" slot="icon"></sinch-icon>
+    <sinch-icon name="fa-angle-down" v-if="hasRightIcon" slot="right-icon"></sinch-icon>
   </sinch-button>
 </template>
 
 <script>
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-arrow-up-right-from-square'
-import '@nectary/assets/icons/fa-angle-down'
+import '@nectary/components/icon'
 import '@nectary/components/spinner'
 
 export default {

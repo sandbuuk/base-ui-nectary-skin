@@ -1,4 +1,4 @@
-import '@nectary/assets/icons/fa-xmark'
+import '../icon'
 import '../stop-events'
 import '../title'
 import {

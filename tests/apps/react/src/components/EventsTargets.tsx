@@ -6,7 +6,7 @@ import '@nectary/components/popover'
 import '@nectary/components/date-picker'
 import '@nectary/components/segment'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-calendar'
+import '@nectary/components/icon'
 
 export const EventTargets: FC = () => {
   const [_isOpen, setOpen] = useState(false)
@@ -54,7 +54,7 @@ export const EventTargets: FC = () => {
               aria-label="Open Date Picker"
               on-click={onOpen}
             >
-              <sinch-icon-fa-calendar slot="icon"/>
+              <sinch-icon name="fa-calendar" slot="icon"/>
             </sinch-button>
           </sinch-input>
         </sinch-field>

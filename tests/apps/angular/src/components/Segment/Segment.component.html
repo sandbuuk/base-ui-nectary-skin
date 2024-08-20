@@ -1,7 +1,7 @@
 <sinch-segment
   [caption]="caption"
   [attr.collapsed]="isCollapsed"
-  style="flex: 1; min-height: 0"
+  style="flex: 1; min-height: 0;"
 >
   <sinch-segment-collapse
     *ngIf="hasCollapse"
@@ -14,7 +14,7 @@
   <div
     *ngIf="hasContent"
     slot="content"
-    style="display: flex; flex-direction: column; gap: 16px"
+    style="display: flex; flex-direction: column; gap: 16px;"
   >
     <sinch-text type="m"
       >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -36,7 +36,7 @@
   ></sinch-icon-branded-chatbot>
   <sinch-tag *ngIf="hasInfo" text="Label" slot="info"></sinch-tag>
   <sinch-button *ngIf="hasInfo" size="s" slot="info">
-    <sinch-icon-fa-grid slot="icon"></sinch-icon-fa-grid>
+    <sinch-icon name="fa-grid" slot="icon"></sinch-icon>
   </sinch-button>
   <div *ngIf="hasPreview" slot="preview" class="preview-content">
     <sinch-text type="m">Replace me!</sinch-text>

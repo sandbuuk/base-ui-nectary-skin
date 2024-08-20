@@ -3,9 +3,9 @@
     <sinch-field slot="target" label="Label">
       <sinch-input slot="input" ref="input" aria-label="Search input" placeholder="Search input" :value="value"
         @--change="onChange" @--focus="onFocus" @--blur="onBlur">
-        <sinch-icon-magnifying-glass slot="icon"></sinch-icon-magnifying-glass>
+        <sinch-icon name="magnifying-glass" slot="icon"></sinch-icon>
         <sinch-button v-if="isClearActive" slot="right" @--click="onClearClick">
-          <sinch-icon-fa-xmark slot="icon"></sinch-icon-fa-xmark>
+          <sinch-icon name="fa-xmark" slot="icon"></sinch-icon>
         </sinch-button>
       </sinch-input>
     </sinch-field>
@@ -22,8 +22,7 @@ import '@nectary/components/field'
 import '@nectary/components/input'
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
-import '@nectary/assets/icons/magnifying-glass'
-import '@nectary/assets/icons/fa-xmark'
+import '@nectary/components/icon'
 
 export default {
   methods: {

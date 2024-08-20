@@ -1,17 +1,7 @@
 import { Component } from "@angular/core";
 import "@nectary/components/rich-textarea";
 import "@nectary/components/button";
-import '@nectary/assets/icons/fa-italic';
-import '@nectary/assets/icons/fa-face-smile';
-import '@nectary/assets/icons/fa-bold';
-import '@nectary/assets/icons/fa-strikethrough';
-import '@nectary/assets/icons/fa-code';
-import '@nectary/assets/icons/fa-text';
-import "@nectary/assets/icons/fa-brackets-curly";
-import "@nectary/assets/icons/fa-paper-plane-top";
-import '@nectary/assets/icons/fa-list-ul';
-import "@nectary/assets/icons/fa-list-ol";
-import "@nectary/assets/icons/fa-folder";
+import '@nectary/components/icon';
 
 
 

@@ -1,4 +1,4 @@
-import '@nectary/assets/icons/fa-check'
+import '../icon'
 import '../text'
 import {
   defineCustomElement,

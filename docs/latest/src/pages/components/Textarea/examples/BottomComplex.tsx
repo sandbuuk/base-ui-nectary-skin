@@ -10,11 +10,7 @@ import '@nectary/components/popover'
 import '@nectary/components/emoji-picker'
 import '@nectary/components/file-picker'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-paperclip-vertical'
-import '@nectary/assets/icons/fa-face-laugh'
-import '@nectary/assets/icons/fa-brackets-curly'
-import '@nectary/assets/icons/fa-ellipsis'
-import '@nectary/assets/icons/fa-gear'
+import '@nectary/components/icon'
 
 export const BottomComplexExample: FC = () => {
   const [text, setText] = useState('')
@@ -86,14 +82,14 @@ export const BottomComplexExample: FC = () => {
           style={{ marginLeft: 'auto' }}
         >
           <sinch-button aria-label="Attach file">
-            <sinch-icon-fa-paperclip-vertical slot="icon"/>
+            <sinch-icon name="fa-paperclip-vertical" slot="icon"/>
           </sinch-button>
         </sinch-file-picker>
         <sinch-button slot="bottom" aria-label="Emojis" on-click={() => onPopOpenClick('emoji')}>
-          <sinch-icon-fa-face-laugh slot="icon"/>
+          <sinch-icon name="fa-face-laugh" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="Variables" on-click={() => onPopOpenClick('vars')}>
-          <sinch-icon-fa-brackets-curly slot="icon"/>
+          <sinch-icon name="fa-brackets-curly" slot="icon"/>
         </sinch-button>
         <sinch-popover
           slot="bottom"
@@ -108,7 +104,7 @@ export const BottomComplexExample: FC = () => {
             aria-label="More"
             on-click={onOptsOpenClick}
           >
-            <sinch-icon-fa-ellipsis slot="icon"/>
+            <sinch-icon name="fa-ellipsis" slot="icon"/>
           </sinch-button>
           <sinch-select-menu
             slot="content"
@@ -122,7 +118,7 @@ export const BottomComplexExample: FC = () => {
           </sinch-select-menu>
           <sinch-action-menu aria-label="Action menu" slot="content">
             <sinch-action-menu-option text="Settings" aria-label="Settings" on-click={() => setOptionsOpen(false)}>
-              <sinch-icon-fa-gear slot="icon"/>
+              <sinch-icon name="fa-gear" slot="icon"/>
             </sinch-action-menu-option>
           </sinch-action-menu>
         </sinch-popover>

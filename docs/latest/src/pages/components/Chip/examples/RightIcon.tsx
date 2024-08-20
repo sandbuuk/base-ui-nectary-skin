@@ -1,6 +1,6 @@
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/chip'
-import '@nectary/assets/icons/fa-plus'
+import '@nectary/components/icon'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -22,7 +22,7 @@ export const RightIconExample: FC = () => (
           aria-label="Chip"
           on-click={() => console.log('click')}
         >
-          <sinch-icon-fa-plus slot="right-icon"/>
+          <sinch-icon name="fa-plus" slot="right-icon"/>
         </sinch-chip>
       ))
     }

@@ -1,6 +1,5 @@
 import '../input'
-import '@nectary/assets/icons/fa-xmark'
-import '@nectary/assets/icons/magnifying-glass'
+import '../icon'
 import '../text'
 import {
   attrValueToPixels,

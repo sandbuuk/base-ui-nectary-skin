@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/tag'
-import '@nectary/assets/icons/fa-arrow-up-right-from-square'
+import '@nectary/components/icon'
 
 export const Tag: FC = () => {
   const [search] = useSearchParams()
@@ -16,7 +16,7 @@ export const Tag: FC = () => {
       text={text}
       small={isSmall}
     >
-      {hasIcon && <sinch-icon-fa-arrow-up-right-from-square slot="icon"/>}
+      {hasIcon && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
     </sinch-tag>
   )
 }

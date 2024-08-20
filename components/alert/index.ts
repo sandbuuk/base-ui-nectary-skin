@@ -1,6 +1,4 @@
-import '@nectary/assets/icons/circle-info'
-import '@nectary/assets/icons/triangle-exclamation'
-import '@nectary/assets/icons/octagon-exclamation'
+import '../icon'
 import '../rich-text'
 import '../text'
 import {

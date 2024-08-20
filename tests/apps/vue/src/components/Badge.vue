@@ -1,14 +1,14 @@
 <template>
   <sinch-button aria-label="Button">
     <sinch-badge slot="icon" :text="text" :mode="mode" :size="size" :color="color" :hidden="isHidden">
-      <sinch-icon-fa-bell></sinch-icon-fa-bell>
+      <sinch-icon name="fa-bell"></sinch-icon>
     </sinch-badge>
   </sinch-button>
 </template>
 
 <script>
 import '@nectary/components/badge'
-import '@nectary/assets/icons/fa-bell'
+import '@nectary/components/icon'
 
 export default {
   computed: {

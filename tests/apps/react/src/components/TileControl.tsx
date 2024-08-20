@@ -3,14 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/tile-control'
 import '@nectary/components/tile-control-option'
-import '@nectary/assets/icons/camera'
-import '@nectary/assets/icons/fa-message'
-import '@nectary/assets/icons/fa-t'
-import '@nectary/assets/icons/fa-align-left'
-import '@nectary/assets/icons/fa-qrcode'
-import '@nectary/assets/icons/fa-square-check'
-import '@nectary/assets/icons/ai'
-import '@nectary/assets/icons/fa-house-heart'
+import '@nectary/components/icon'
 import '@nectary/assets/icons-branded/contact'
 
 export const TileControl: FC = () => {
@@ -49,7 +42,7 @@ export const TileControl: FC = () => {
         on-focus={onFocus}
         on-blur={onBlur}
       >
-        <sinch-icon-fa-message slot="icon"/>
+        <sinch-icon name="fa-message" slot="icon"/>
       </sinch-tile-control-option>
       {!isSingleOption && (
         <>
@@ -60,7 +53,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-fa-t slot="icon"/>
+            <sinch-icon name="fa-t" slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="2"
@@ -70,7 +63,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-fa-align-left slot="icon"/>
+            <sinch-icon name="fa-align-left" slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="3"
@@ -79,7 +72,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-fa-qrcode slot="icon"/>
+            <sinch-icon name="fa-qrcode" slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="4"
@@ -88,7 +81,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-fa-square-check slot="icon"/>
+            <sinch-icon name="fa-square-check" slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="5"
@@ -97,7 +90,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-ai slot="icon"/>
+            <sinch-icon name="ai" slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="6"
@@ -106,7 +99,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-fa-house-heart slot="icon"/>
+            <sinch-icon name="fa-house-heart" slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="7"
@@ -115,7 +108,7 @@ export const TileControl: FC = () => {
             on-focus={onFocus}
             on-blur={onBlur}
           >
-            <sinch-icon-camera slot="icon"/>
+            <sinch-icon name="camera" slot="icon"/>
           </sinch-tile-control-option>
           <sinch-tile-control-option
             value="8"

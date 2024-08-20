@@ -1,5 +1,5 @@
 import '../text'
-import '@nectary/assets/icons/fa-chevron-down'
+import '../icon'
 import {
   defineCustomElement,
   getAttribute,

@@ -6,7 +6,7 @@ import '@nectary/components/input'
 import '@nectary/components/popover'
 import '@nectary/components/date-picker'
 import '@nectary/components/button'
-import '@nectary/assets/icons/fa-calendar'
+import '@nectary/components/icon'
 
 export const DateInput: FC = () => {
   const [search] = useSearchParams()
@@ -55,7 +55,7 @@ export const DateInput: FC = () => {
             aria-label="Open Date Picker"
             on-click={onOpen}
           >
-            <sinch-icon-fa-calendar slot="icon"/>
+            <sinch-icon name="fa-calendar" slot="icon"/>
           </sinch-button>
         </sinch-input>
       </sinch-field>

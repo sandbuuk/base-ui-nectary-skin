@@ -10,7 +10,7 @@ import '@nectary/assets/icons-branded/chatbot'
 import '@nectary/components/button'
 import '@nectary/components/checkbox'
 import '@nectary/components/text'
-import '@nectary/assets/icons/fa-grid'
+import '@nectary/components/icon'
 
 export const Segment: FC = () => {
   const [search] = useSearchParams()
@@ -67,7 +67,7 @@ export const Segment: FC = () => {
           onClick={() => { }}
           slot="info"
         >
-          <sinch-icon-fa-grid slot="icon"/>
+          <sinch-icon name="fa-grid" slot="icon"/>
         </sinch-button>
       )}
       {hasPreview && (

@@ -1,5 +1,5 @@
 import '../tooltip'
-import '@nectary/assets/icons/circle-question'
+import '../icon'
 import {
   defineCustomElement,
   getAttribute,

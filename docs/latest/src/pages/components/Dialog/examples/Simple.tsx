@@ -4,7 +4,7 @@ import '@nectary/components/button'
 import '@nectary/components/checkbox'
 import '@nectary/components/dialog'
 import '@nectary/components/text'
-import '@nectary/assets/icons/fa-face-smile-plus'
+import '@nectary/components/icon'
 
 export const SimpleExample: FC = () => {
   const [isDialogOpen, setDialogOpen] = useState(false)
@@ -24,7 +24,7 @@ export const SimpleExample: FC = () => {
         close-aria-label="Close dialog"
         on-close={() => setDialogOpen(false)}
       >
-        <sinch-icon-fa-face-smile-plus slot="icon"/>
+        <sinch-icon name="fa-face-smile-plus" slot="icon"/>
         <div slot="content">
           <sinch-text type="m">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</sinch-text>
         </div>
