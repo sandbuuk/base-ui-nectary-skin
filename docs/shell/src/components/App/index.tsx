@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ComponentsList } from '../ComponentsList'
 import { ComponentsPage } from '../ComponentsPage'
+import { EnhaiButton } from '../EnhaiButton'
 import { NavigationGroup } from '../NavigationGroup'
 import { NavigationItem } from '../NavigationItem'
 import { NavigationList } from '../NavigationList'
@@ -128,6 +129,7 @@ export const App: FC = () => {
             <Route path="*" element={<NotFoundPage/>}/>
           </Routes>
         </Suspense>
+        <EnhaiButton/>
       </div>
     </QueryRouter>
   )
