@@ -1,8 +1,7 @@
 import { Component } from "@angular/core";
 import "@nectary/components/button-group";
 import "@nectary/components/button-group-item";
-import "@nectary/assets/icons/fa-arrow-up-right-from-square";
-import "@nectary/assets/icons/fa-angle-down";
+import "@nectary/components/icon";
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import { ActivatedRoute } from "@angular/router";
 

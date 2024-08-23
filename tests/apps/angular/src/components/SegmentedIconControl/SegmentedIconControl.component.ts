@@ -1,10 +1,7 @@
 import { Component } from "@angular/core";
 import "@nectary/components/segmented-icon-control";
 import "@nectary/components/segmented-icon-control-option";
-import "@nectary/assets/icons/fa-align-right";
-import "@nectary/assets/icons/fa-align-left";
-import "@nectary/assets/icons/fa-align-center";
-import "@nectary/assets/icons/fa-align-justify";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({

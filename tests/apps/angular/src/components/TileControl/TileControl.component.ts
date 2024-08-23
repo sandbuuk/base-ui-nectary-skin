@@ -1,14 +1,7 @@
 import { Component } from "@angular/core";
 import "@nectary/components/tile-control";
 import "@nectary/components/tile-control-option";
-import "@nectary/assets/icons/fa-align-left";
-import "@nectary/assets/icons/camera";
-import "@nectary/assets/icons/fa-message";
-import "@nectary/assets/icons/fa-t";
-import "@nectary/assets/icons/fa-qrcode";
-import "@nectary/assets/icons/fa-square-check";
-import "@nectary/assets/icons/ai";
-import "@nectary/assets/icons/fa-house-heart";
+import "@nectary/components/icon";
 import "@nectary/assets/icons-branded/contact";
 import { ActivatedRoute } from "@angular/router";
 

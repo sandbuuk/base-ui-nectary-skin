@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import "@nectary/components/text";
 import "@nectary/components/accordion";
 import "@nectary/components/accordion-item";
-import "@nectary/assets/icons/fa-arrow-up-right-from-square";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 import type { TSinchAccordionStatusType } from "@nectary/components/accordion-item/types";
 

@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import type { TSinchBadgeMode } from "@nectary/components/badge/types";
 import "@nectary/components/badge";
-import "@nectary/assets/icons/fa-bell";
+import "@nectary/components/icon";
 import type { TSinchSize } from "@nectary/components/utils/size";
 
 @Component({

@@ -2,12 +2,7 @@ import { Component } from "@angular/core";
 import "@nectary/components/textarea";
 import "@nectary/components/button";
 import "@nectary/components/tag";
-import "@nectary/assets/icons/fa-ellipsis";
-import "@nectary/assets/icons/fa-paperclip-vertical";
-import "@nectary/assets/icons/fa-face-laugh";
-import "@nectary/assets/icons/fa-comment-plus";
-import "@nectary/assets/icons/fa-paper-plane-top";
-import "@nectary/assets/icons/fa-magnifying-glass";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({

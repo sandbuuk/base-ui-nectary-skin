@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import "@nectary/components/input";
 import "@nectary/components/help-tooltip";
 import "@nectary/components/tag";
-import "@nectary/assets/icons/fa-magnifying-glass";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({

@@ -6,8 +6,7 @@ import "@nectary/components/popover";
 import "@nectary/components/select-menu";
 import "@nectary/components/select-menu-option";
 import "@nectary/components/tag";
-import "@nectary/assets/icons/fa-arrow-up-right-from-square";
-import "@nectary/assets/icons/fa-magnifying-glass";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 
 const optionsLong: Record<string, TMenuValue> = {

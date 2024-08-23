@@ -3,7 +3,7 @@ import { typeValues } from "@nectary/components/toast/utils";
 import "@nectary/components/toast-manager";
 import "@nectary/components/toast";
 import "@nectary/components/button";
-import "@nectary/assets/icons/fa-xmark";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 
 const text =

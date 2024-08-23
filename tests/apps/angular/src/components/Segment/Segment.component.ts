@@ -5,7 +5,7 @@ import "@nectary/components/field";
 import "@nectary/components/input";
 import "@nectary/components/checkbox";
 import "@nectary/assets/icons-branded/chatbot";
-import "@nectary/assets/icons/fa-grid";
+import "@nectary/components/icon";
 import "@nectary/components/tag";
 import "@nectary/components/button";
 import "@nectary/components/text";

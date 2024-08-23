@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import "@nectary/components/tag";
-import "@nectary/assets/icons/fa-arrow-up-right-from-square";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({

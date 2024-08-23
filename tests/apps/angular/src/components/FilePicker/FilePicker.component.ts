@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import "@nectary/components/file-picker";
 import "@nectary/components/button";
-import "@nectary/assets/icons/fa-arrow-up-from-line";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({

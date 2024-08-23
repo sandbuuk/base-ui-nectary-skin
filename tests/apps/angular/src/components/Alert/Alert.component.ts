@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import "@nectary/components/alert";
 import "@nectary/components/button";
-import "@nectary/assets/icons/fa-xmark";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 
 const mdText = `

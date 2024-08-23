@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import "@nectary/components/file-status";
 import "@nectary/components/text";
 import "@nectary/components/progress";
-import "@nectary/assets/icons/fa-xmark";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({

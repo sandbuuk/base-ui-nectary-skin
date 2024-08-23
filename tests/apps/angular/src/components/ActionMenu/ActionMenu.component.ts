@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import "@nectary/components/action-menu";
 import "@nectary/components/action-menu-option";
-import "@nectary/assets/icons/fa-arrow-up-right-from-square";
+import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
 
 type TMenuValue = {
