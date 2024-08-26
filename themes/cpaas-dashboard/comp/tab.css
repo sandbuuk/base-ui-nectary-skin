@@ -1,0 +1,5 @@
+.nectary-theme-base.cpaas-theme-base.cpaas-theme-dashboard {
+  --sinch-comp-tab-color-default-background-hover: var(--sinch-ref-color-neutral-200);
+  --sinch-comp-tab-color-disabled-icon-initial: #626C7380;
+  --sinch-comp-tab-color-disabled-text-initial: #626C7380;
+}
