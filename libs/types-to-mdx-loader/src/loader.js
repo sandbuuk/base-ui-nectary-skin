@@ -97,7 +97,7 @@ export async function loader(src) {
         if (isTSIntersectionType(decl.typeAnnotation)) {
           const literal = decl.typeAnnotation.types.find((t) => isTSTypeLiteral(t))
 
-          for (const member of literal.members) {
+          for (const member of (literal?.members ?? [])) {
             if (isTSPropertySignature(member)) {
               if (isIdentifier(member.key) || isStringLiteral(member.key)) {
                 const name = member.key.name ?? member.key.value

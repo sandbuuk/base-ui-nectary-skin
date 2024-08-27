@@ -21,7 +21,7 @@ export const ErrorExample: FC = () => (
         type="cta-secondary"
         on-click={() => { }}
       >
-        <sinch-icon name="fa-xmark" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
       </sinch-button>
       <sinch-text slot="content" type="m">Invalid file, try another one</sinch-text>
     </sinch-file-status>
@@ -33,7 +33,7 @@ export const ErrorExample: FC = () => (
         type="cta-secondary"
         on-click={() => { }}
       >
-        <sinch-icon name="fa-arrow-rotate-right" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-arrow-rotate-right" slot="icon"/>
       </sinch-button>
       <sinch-text slot="content" type="m">Error, try again</sinch-text>
     </sinch-file-status>

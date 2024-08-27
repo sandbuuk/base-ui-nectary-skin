@@ -25,14 +25,14 @@ export const MultipleExample: FC = () => {
         aria-label="Laptop option"
         value="Laptop"
       >
-        <sinch-icon name="fa-laptop" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-laptop" slot="icon"/>
       </sinch-select-menu-option>
       <sinch-select-menu-option
         text="Smartphone"
         aria-label="Smartphone option"
         value="Smartphone"
       >
-        <sinch-icon name="smartphone" slot="icon"/>
+        <sinch-icon icons-version="2" name="smartphone" slot="icon"/>
       </sinch-select-menu-option>
       <sinch-select-menu-option
         text="Tablet"
@@ -40,14 +40,14 @@ export const MultipleExample: FC = () => {
         value="Tablet"
         disabled
       >
-        <sinch-icon name="fa-tablet" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-tablet" slot="icon"/>
       </sinch-select-menu-option>
       <sinch-select-menu-option
         text="Watch"
         aria-label="Watch option"
         value="Watch"
       >
-        <sinch-icon name="fa-watch" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-watch" slot="icon"/>
       </sinch-select-menu-option>
     </sinch-select-menu>
   )

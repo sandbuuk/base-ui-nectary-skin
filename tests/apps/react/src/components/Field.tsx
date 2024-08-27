@@ -41,7 +41,7 @@ export const Field: FC = () => {
         on-change={onChange}
         aria-label="Input"
       >
-        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"/>
         <sinch-tag slot="right" text="text"/>
       </sinch-input>
     </sinch-field>

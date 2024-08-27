@@ -31,24 +31,24 @@ export const ButtonGroup: FC = () => {
         toggled={isToggled}
       >
         {hasSpinner && <sinch-spinner slot="icon"/>}
-        {hasIcon && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
-        {hasRightIcon && <sinch-icon name="fa-angle-down" slot="right-icon"/>}
+        {hasIcon && <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>}
+        {hasRightIcon && <sinch-icon icons-version="2" name="fa-angle-down" slot="right-icon"/>}
       </sinch-button-group-item>
       <sinch-button-group-item
         aria-label="button-2"
         text={text}
       >
         {hasSpinner && <sinch-spinner slot="icon"/>}
-        {hasIcon && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
-        {hasRightIcon && <sinch-icon name="fa-angle-down" slot="right-icon"/>}
+        {hasIcon && <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>}
+        {hasRightIcon && <sinch-icon icons-version="2" name="fa-angle-down" slot="right-icon"/>}
       </sinch-button-group-item>
       <sinch-button-group-item
         aria-label="button-3"
         text={text}
       >
         {hasSpinner && <sinch-spinner slot="icon"/>}
-        {hasIcon && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
-        {hasRightIcon && <sinch-icon name="fa-angle-down" slot="right-icon"/>}
+        {hasIcon && <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>}
+        {hasRightIcon && <sinch-icon icons-version="2" name="fa-angle-down" slot="right-icon"/>}
       </sinch-button-group-item>
     </sinch-button-group>
   )

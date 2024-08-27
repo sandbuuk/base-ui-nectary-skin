@@ -76,7 +76,7 @@ export const Input: FC = () => {
       aria-label="Input"
     >
       {hasIcon && (
-        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"/>
       )}
       {hasLeft && (
         <sinch-select-button

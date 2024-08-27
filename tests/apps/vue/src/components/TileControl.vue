@@ -1,31 +1,31 @@
 <template>
   <sinch-tile-control :small="isSmall" :multiple="isMultiple" :cols="numCols" :value="value" @--change="onChange">
     <sinch-tile-control-option value="0" text="Message" aria-label="Message" @--focus="onFocus" @--blur="onBlur">
-      <sinch-icon name="fa-message" slot="icon"></sinch-icon>
+      <sinch-icon icons-version="2" name="fa-message" slot="icon"></sinch-icon>
     </sinch-tile-control-option>
     <template v-if="!isSingleOption">
       <sinch-tile-control-option value="1" text="Title" aria-label="Title" @--focus="onFocus" @--blur="onBlur">
-        <sinch-icon name="fa-t" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-t" slot="icon"></sinch-icon>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="2" text="Text" aria-label="Text" disabled @--focus="onFocus" @--blur="onBlur">
-        <sinch-icon name="fa-align-left" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-align-left" slot="icon"></sinch-icon>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="3" text="QR Code" aria-label="qr code" @--focus="onFocus" @--blur="onBlur">
-        <sinch-icon name="fa-qrcode" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-qrcode" slot="icon"></sinch-icon>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="4" text="Terms" aria-label="terms" @--focus="onFocus" @--blur="onBlur">
-        <sinch-icon name="fa-square-check" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-square-check" slot="icon"></sinch-icon>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="5" text="Button" aria-label="button" @--focus="onFocus" @--blur="onBlur">
-        <sinch-icon name="ai" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="ai" slot="icon"></sinch-icon>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="6" text="Mobile App" aria-label="mobile app" @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon name="fa-house-heart" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-house-heart" slot="icon"></sinch-icon>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="7" text="Click to call" aria-label="click to call" @--focus="onFocus"
         @--blur="onBlur">
-        <sinch-icon name="camera" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="camera" slot="icon"></sinch-icon>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="8" text="Separator" aria-label="separator" @--focus="onFocus" @--blur="onBlur">
         <sinch-icon-branded-contact slot="icon"></sinch-icon-branded-contact>

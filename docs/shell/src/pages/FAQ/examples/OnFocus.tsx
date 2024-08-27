@@ -21,7 +21,7 @@ export const OnFocusExample: FC = () => {
         size="s"
         onFocus={() => console.log('BUTTON FOCUS')}
       >
-        <sinch-icon name="fa-calendar" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-calendar" slot="icon"/>
       </sinch-button>
     </sinch-input>
   )

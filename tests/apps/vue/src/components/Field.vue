@@ -4,7 +4,7 @@
     <sinch-help-tooltip v-if="tooltipText != null" slot="tooltip" :text="tooltipText"></sinch-help-tooltip>
     <sinch-input slot="input" :placeholder="placeholderText" :disabled="isDisabled" :invalid="invalidText != null"
       :value="value" @--change="onChange">
-      <sinch-icon name="fa-magnifying-glass" slot="icon"></sinch-icon>
+      <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"></sinch-icon>
       <sinch-tag slot="right" text="text"></sinch-tag>
     </sinch-input>
   </sinch-field>

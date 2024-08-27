@@ -122,22 +122,22 @@ export const RichTextarea: FC = () => {
         {hasTop && (
           <>
             <sinch-button slot="top" size="s" id="format-italic" aria-label="Format italic" on-click={onFormatItalic}>
-              <sinch-icon name="fa-italic" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-italic" slot="icon"/>
             </sinch-button>
             <sinch-button slot="top" size="s" id="format-bold" aria-label="Format bold" on-click={onFormatBold}>
-              <sinch-icon name="fa-bold" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-bold" slot="icon"/>
             </sinch-button>
             <sinch-button slot="top" size="s" id="format-strikethrough" aria-label="Format strikethrough" on-click={onFormatStrikethrough}>
-              <sinch-icon name="fa-strikethrough" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-strikethrough" slot="icon"/>
             </sinch-button>
             <sinch-button slot="top" size="s" id="format-code-tag" aria-label="Format code tag" on-click={onFormatCodeTag}>
-              <sinch-icon name="fa-code" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-code" slot="icon"/>
             </sinch-button>
             <sinch-button slot="top" size="s" id="format-ulist" aria-label="Format list bulleted" on-click={onFormatListBulleted}>
-              <sinch-icon name="fa-list-ul" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-list-ul" slot="icon"/>
             </sinch-button>
             <sinch-button slot="top" size="s" id="format-olist" aria-label="Format list numbered" on-click={onFormatListNumbered}>
-              <sinch-icon name="fa-list-ol" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-list-ol" slot="icon"/>
             </sinch-button>
           </>
         )}
@@ -145,13 +145,13 @@ export const RichTextarea: FC = () => {
         {hasBottom && (
           <>
             <sinch-button slot="bottom" size="s" aria-label="Attach files">
-              <sinch-icon name="fa-folder" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-folder" slot="icon"/>
             </sinch-button>
             <sinch-button slot="bottom" size="s" aria-label="Variables">
-              <sinch-icon name="fa-brackets-curly" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-brackets-curly" slot="icon"/>
             </sinch-button>
             <sinch-button slot="bottom" size="s" aria-label="Options">
-              <sinch-icon name="fa-ellipsis" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-ellipsis" slot="icon"/>
             </sinch-button>
             <sinch-button
               slot="bottom"
@@ -161,7 +161,7 @@ export const RichTextarea: FC = () => {
               text="Send"
               style={{ marginLeft: 'auto' }}
             >
-              <sinch-icon name="fa-paper-plane-top" slot="right-icon"/>
+              <sinch-icon icons-version="2" name="fa-paper-plane-top" slot="right-icon"/>
             </sinch-button>
           </>
         )}

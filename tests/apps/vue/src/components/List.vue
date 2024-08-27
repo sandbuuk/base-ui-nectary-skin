@@ -5,7 +5,7 @@
         <sinch-icon-branded-chatbot></sinch-icon-branded-chatbot>
         <sinch-text style="flex: 1;" type="m" inline>Replace me</sinch-text>
         <sinch-button aria-label="Add" size="s">
-          <sinch-icon name="fa-plus" slot="icon"></sinch-icon>
+          <sinch-icon icons-version="2" name="fa-plus" slot="icon"></sinch-icon>
         </sinch-button>
       </div>
     </sinch-list-item>

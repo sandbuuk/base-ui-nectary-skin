@@ -1,7 +1,7 @@
 <template>
   <sinch-button aria-label="Button">
     <sinch-badge slot="icon" :text="text" :mode="mode" :size="size" :color="color" :hidden="isHidden">
-      <sinch-icon name="fa-bell"></sinch-icon>
+      <sinch-icon icons-version="2" name="fa-bell"></sinch-icon>
     </sinch-badge>
   </sinch-button>
 </template>

@@ -11,10 +11,10 @@ const selectStyles: CSSProperties = {
 }
 
 const icons: Record<string, JSX.Element> = {
-  Laptop: <sinch-icon name="fa-laptop" slot="icon"/>,
-  Smartphone: <sinch-icon name="smartphone" slot="icon"/>,
-  Tablet: <sinch-icon name="fa-tablet" slot="icon"/>,
-  Watch: <sinch-icon name="fa-watch" slot="icon"/>,
+  Laptop: <sinch-icon icons-version="2" name="fa-laptop" slot="icon"/>,
+  Smartphone: <sinch-icon icons-version="2" name="smartphone" slot="icon"/>,
+  Tablet: <sinch-icon icons-version="2" name="fa-tablet" slot="icon"/>,
+  Watch: <sinch-icon icons-version="2" name="fa-watch" slot="icon"/>,
 }
 
 export const MultipleExample: FC = () => {

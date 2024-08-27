@@ -47,7 +47,7 @@ export const ThemeToggleButton = () => {
         on-click={onOpen}
         disabled={isDisabled}
       >
-        <sinch-icon name="fa-moon-cloud" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-moon-cloud" slot="icon"/>
       </sinch-button>
       <sinch-select-menu
         slot="content"

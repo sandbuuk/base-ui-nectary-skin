@@ -20,7 +20,7 @@ export const LoadingExample: FC = () => (
       type="cta-secondary"
       on-click={() => { }}
     >
-      <sinch-icon name="fa-xmark" slot="icon"/>
+      <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
     </sinch-button>
   </sinch-file-status>
 )

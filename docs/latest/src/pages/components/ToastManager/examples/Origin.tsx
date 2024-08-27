@@ -110,7 +110,7 @@ export const OriginExample: FC = () => {
                 size="s"
                 on-click={onToastClose(id)}
               >
-                <sinch-icon name="fa-xmark" slot="icon"/>
+                <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
               </sinch-button>
             )}
           </sinch-toast>

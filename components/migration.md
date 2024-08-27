@@ -85,7 +85,7 @@ export const Input: FC = () => {
 +       aria-label="Clear"
 +       on-click={onClear}
 +     >
-+       <sinch-icon slot="icon" name="close"/>
++       <sinch-icon icons-version="2" slot="icon" name="close"/>
 +     </sinch-icon-button>
 +   </sinch-input>
   )

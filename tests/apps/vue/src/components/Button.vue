@@ -2,8 +2,8 @@
   <sinch-button :type="type" :text="text" :disabled="isDisabled" :toggled="isToggled" :size="size" @--click="onClick"
     @--focus="onFocus" @--blur="onBlur">
     <sinch-spinner v-if="hasSpinner" static :type="isSmall ? 'small' : 'medium'" slot="icon"></sinch-spinner>
-    <sinch-icon name="fa-arrow-up-right-from-square" v-if="hasIcon" slot="icon"></sinch-icon>
-    <sinch-icon name="fa-angle-down" v-if="hasRightIcon" slot="right-icon"></sinch-icon>
+    <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" v-if="hasIcon" slot="icon"></sinch-icon>
+    <sinch-icon icons-version="2" name="fa-angle-down" v-if="hasRightIcon" slot="right-icon"></sinch-icon>
   </sinch-button>
 </template>
 

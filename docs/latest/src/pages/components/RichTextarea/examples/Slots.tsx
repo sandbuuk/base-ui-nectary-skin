@@ -27,28 +27,28 @@ export const SlotsExample: FC = () => {
           size="s"
           aria-label="Format italic"
         >
-          <sinch-icon name="fa-italic" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-italic" slot="icon"/>
         </sinch-button>
         <sinch-button
           slot="top"
           size="s"
           aria-label="Format bold"
         >
-          <sinch-icon name="fa-bold" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-bold" slot="icon"/>
         </sinch-button>
         <sinch-button
           slot="top"
           size="s"
           aria-label="Format strikethrough"
         >
-          <sinch-icon name="fa-strikethrough" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-strikethrough" slot="icon"/>
         </sinch-button>
         <sinch-button
           slot="top"
           size="s"
           aria-label="Format code tag"
         >
-          <sinch-icon name="fa-code" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-code" slot="icon"/>
 
         </sinch-button>
         <sinch-button
@@ -56,14 +56,14 @@ export const SlotsExample: FC = () => {
           size="s"
           aria-label="Toggle toolbar"
         >
-          <sinch-icon name="fa-text" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-text" slot="icon"/>
         </sinch-button>
         <sinch-button
           slot="bottom"
           size="s"
           aria-label="Open Emoji Picker"
         >
-          <sinch-icon name="fa-face-smile" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-face-smile" slot="icon"/>
         </sinch-button>
       </sinch-rich-textarea>
     </div>

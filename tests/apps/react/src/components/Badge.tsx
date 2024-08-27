@@ -20,7 +20,7 @@ export const Badge: FC = () => {
         mode={mode}
         hidden={isHidden}
       >
-        <sinch-icon name="fa-bell"/>
+        <sinch-icon icons-version="2" name="fa-bell"/>
       </sinch-badge>
     </sinch-button>
   )

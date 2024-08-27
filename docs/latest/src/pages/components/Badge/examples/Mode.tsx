@@ -23,7 +23,7 @@ export const ModeExample: FC = () => (
         mode="square"
         slot="icon"
       >
-        <sinch-icon name="bell"/>
+        <sinch-icon icons-version="2" name="bell"/>
       </sinch-badge>
     </sinch-button>
     <sinch-badge text="9" size="l" mode="square">

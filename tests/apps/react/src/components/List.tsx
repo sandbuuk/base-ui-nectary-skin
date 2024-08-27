@@ -19,7 +19,7 @@ export const List: FC = () => {
       <sinch-icon-branded-chatbot/>
       <sinch-text style={{ flex: 1 }} type="m" inline>Replace me</sinch-text>
       <sinch-button aria-label="Add" size="s" onClick={() => { }}>
-        <sinch-icon name="fa-plus" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-plus" slot="icon"/>
       </sinch-button>
     </div>
   )

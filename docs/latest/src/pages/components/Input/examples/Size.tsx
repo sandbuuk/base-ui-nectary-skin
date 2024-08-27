@@ -25,13 +25,13 @@ export const SizeExample: FC = () => {
         value={state}
         on-change={(e) => setState(e.detail)}
       >
-        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"/>
         <sinch-button
           slot="right"
           aria-label="Click"
           on-click={() => { }}
         >
-          <sinch-icon name="fa-face-smile" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-face-smile" slot="icon"/>
         </sinch-button>
       </sinch-input>
       <sinch-input
@@ -42,13 +42,13 @@ export const SizeExample: FC = () => {
         value={state}
         on-change={(e) => setState(e.detail)}
       >
-        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"/>
         <sinch-button
           slot="right"
           aria-label="Click"
           on-click={() => { }}
         >
-          <sinch-icon name="fa-face-smile" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-face-smile" slot="icon"/>
         </sinch-button>
       </sinch-input>
       <sinch-input
@@ -59,13 +59,13 @@ export const SizeExample: FC = () => {
         value={state}
         on-change={(e) => setState(e.detail)}
       >
-        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"/>
         <sinch-button
           slot="right"
           aria-label="Click"
           on-click={() => { }}
         >
-          <sinch-icon name="fa-face-smile" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-face-smile" slot="icon"/>
         </sinch-button>
       </sinch-input>
     </div>

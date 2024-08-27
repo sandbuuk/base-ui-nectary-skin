@@ -69,10 +69,10 @@ export const Search: FC = () => {
           on-focus={onFocus}
           on-blur={onBlur}
         >
-          <sinch-icon name="magnifying-glass" slot="icon"/>
+          <sinch-icon icons-version="2" name="magnifying-glass" slot="icon"/>
           {isClearActive && (
             <sinch-button slot="right" on-click={onClearClick} aria-label="Clear">
-              <sinch-icon name="fa-xmark" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
             </sinch-button>
           )}
         </sinch-input>

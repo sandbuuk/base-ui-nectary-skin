@@ -4,7 +4,7 @@
       MB</sinch-text>
     <sinch-progress v-if="hasProgress" slot="content" value="73" detailed></sinch-progress>
     <sinch-button slot="action" size="s">
-      <sinch-icon name="fa-xmark" slot="icon"></sinch-icon>
+      <sinch-icon icons-version="2" name="fa-xmark" slot="icon"></sinch-icon>
     </sinch-button>
   </sinch-file-status>
 </template>

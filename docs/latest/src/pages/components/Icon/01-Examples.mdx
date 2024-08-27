@@ -2,6 +2,7 @@ import { Example } from '~/components/Example'
 import { SimpleExample } from './examples/Simple.tsx?example'
 import { StyleExample } from './examples/Style.tsx?example'
 import { AllIconsExample } from './examples/AllIcons.tsx?example'
+import { V1Example } from './examples/V1.tsx?example'
 
 # Examples
 
@@ -22,3 +23,11 @@ Icons are always “filled” as per Sinch brand identity.
 You can click on an icon to copy its name.
 
 <Example Component={AllIconsExample}/>
+
+## Legacy (V1)
+
+Icon renders [Material Symbols and Icons](https://fonts.google.com/icons) by icon name.
+
+Icons are always “filled” as per Sinch brand identity.
+
+<Example Component={V1Example}/>

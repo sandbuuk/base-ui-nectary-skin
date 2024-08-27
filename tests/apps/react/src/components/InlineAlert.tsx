@@ -70,7 +70,7 @@ export const InlineAlert: FC = () => {
           on-focus={onCloseFocus}
           on-blur={onCloseBlur}
         >
-          <sinch-icon name="fa-xmark" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
         </sinch-button>
       )}
       {hasAction && (

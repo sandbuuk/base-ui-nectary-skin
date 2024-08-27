@@ -20,7 +20,7 @@ export const Code: FC<TCode> = ({ src }) => {
           size="s"
           on-click={() => navigator.clipboard.writeText(src).catch(console.error)}
         >
-          <sinch-icon name="fa-copy" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-copy" slot="icon"/>
         </sinch-button>
         <sinch-button
           aria-label="Expand"
@@ -29,7 +29,7 @@ export const Code: FC<TCode> = ({ src }) => {
             setOpen((v) => !v)
           }}
         >
-          <sinch-icon name="fa-chevron-down" slot="icon" class="code-toolbar-dropdown-icon"/>
+          <sinch-icon icons-version="2" name="fa-chevron-down" slot="icon" class="code-toolbar-dropdown-icon"/>
         </sinch-button>
       </div>
       <SyntaxHighlighter language="tsx" src={src} shouldShowLineNumbers/>

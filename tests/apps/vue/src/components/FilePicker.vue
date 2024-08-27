@@ -1,7 +1,7 @@
 <template>
   <sinch-file-picker :multiple="isMultiple" :accept="accept" @--change="onChange" @--invalid="onInvalid">
     <sinch-button text="Choose files" type="secondary" aria-label="Choose files">
-      <sinch-icon name="fa-arrow-up-from-line" slot="left-icon"></sinch-icon>
+      <sinch-icon icons-version="2" name="fa-arrow-up-from-line" slot="left-icon"></sinch-icon>
     </sinch-button>
   </sinch-file-picker>
 </template>

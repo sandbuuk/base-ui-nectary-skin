@@ -2,7 +2,7 @@
   <sinch-select-menu :rows="rows" :multiple="isMultiple" :value="value" @--change="onChange">
     <sinch-select-menu-option v-for="[key, value] in items" :key="key" :value="key" :text="value.text"
       :disabled="value.isDisabled">
-      <sinch-icon name="fa-arrow-up-right-from-square" v-if="value.icon === '1'" slot="icon"></sinch-icon>
+      <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" v-if="value.icon === '1'" slot="icon"></sinch-icon>
     </sinch-select-menu-option>
   </sinch-select-menu>
 </template>

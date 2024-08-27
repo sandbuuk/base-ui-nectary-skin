@@ -23,7 +23,7 @@ export const BigToast = () => {
         size="m"
         on-click={() => navigate(to)}
       >
-        <sinch-icon name="fa-arrow-up-right-from-square" slot="left-icon"/>
+        <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="left-icon"/>
       </sinch-button>
     </div>
   )

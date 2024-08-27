@@ -53,19 +53,19 @@ export const TextareaExample: FC = () => {
         aria-label="Textarea"
       >
         <sinch-button slot="bottom" aria-label="Paperclip">
-          <sinch-icon name="fa-paperclip-vertical" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-paperclip-vertical" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="Emoji" on-click={() => onPopOpenClick('emoji')}>
-          <sinch-icon name="fa-face-laugh" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-face-laugh" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="Variables" on-click={() => onPopOpenClick('vars')}>
-          <sinch-icon name="fa-brackets-curly" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-brackets-curly" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="Comment">
-          <sinch-icon name="fa-comment-plus" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-comment-plus" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="More">
-          <sinch-icon name="fa-ellipsis" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-ellipsis" slot="icon"/>
         </sinch-button>
         <sinch-tag
           slot="bottom"
@@ -79,7 +79,7 @@ export const TextareaExample: FC = () => {
           aria-label="Send"
           text="Send"
         >
-          <sinch-icon name="fa-paper-plane-top" slot="right-icon"/>
+          <sinch-icon icons-version="2" name="fa-paper-plane-top" slot="right-icon"/>
         </sinch-button>
       </sinch-textarea>
       {popMode === 'emoji' && <sinch-emoji-picker slot="content" on-change={() => { }}/>}

@@ -58,7 +58,7 @@ export const TextareaExample: FC = () => {
             aria-label="Open Time Picker"
             on-click={onOpen}
           >
-            <sinch-icon name="fa-face-smile" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-face-smile" slot="icon"/>
           </sinch-button>
           <sinch-emoji-picker
             slot="content"

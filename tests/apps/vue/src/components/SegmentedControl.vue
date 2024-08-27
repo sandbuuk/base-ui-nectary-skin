@@ -1,11 +1,11 @@
 <template>
   <sinch-segmented-control :value="value" @--change="onChange">
     <sinch-segmented-control-option value="1" text="Option value 1">
-      <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
+      <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
     </sinch-segmented-control-option>
     <template v-if="!isSingleOption">
       <sinch-segmented-control-option value="2" text="Option value 2" disabled>
-        <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"></sinch-icon>
       </sinch-segmented-control-option>
       <sinch-segmented-control-option value="3" text="Option value 3"></sinch-segmented-control-option>
       <sinch-segmented-control-option value="4" text="Option value 4"></sinch-segmented-control-option>

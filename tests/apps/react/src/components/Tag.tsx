@@ -16,7 +16,7 @@ export const Tag: FC = () => {
       text={text}
       small={isSmall}
     >
-      {hasIcon && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
+      {hasIcon && <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>}
     </sinch-tag>
   )
 }
