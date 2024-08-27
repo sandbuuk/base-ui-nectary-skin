@@ -22,7 +22,7 @@ export const IconExample: FC = () => (
           aria-label="Chip"
           on-click={() => console.log('click')}
         >
-          <sinch-icon name="fa-face-laugh" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-face-laugh" slot="icon"/>
         </sinch-chip>
       ))
     }

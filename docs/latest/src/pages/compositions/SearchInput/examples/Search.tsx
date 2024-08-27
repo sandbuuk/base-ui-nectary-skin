@@ -106,10 +106,10 @@ export const SearchExample: FC = () => {
           value={inputValue}
           on-change={onInputChange}
         >
-          <sinch-icon name="magnifying-glass" slot="icon"/>
+          <sinch-icon icons-version="2" name="magnifying-glass" slot="icon"/>
           {!isLoading && isClearButtonActive && (
             <sinch-button slot="right" on-click={onClearClick} aria-label="Clear search">
-              <sinch-icon name="fa-xmark" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
             </sinch-button>
           )}
           {isLoading && <sinch-spinner slot="right"/>}

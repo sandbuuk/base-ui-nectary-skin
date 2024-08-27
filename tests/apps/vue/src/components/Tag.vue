@@ -1,6 +1,6 @@
 <template>
   <sinch-tag v-bind:color="color" v-bind:text="text" v-bind:small="isSmall">
-    <sinch-icon name="fa-arrow-up-right-from-square" v-if="hasIcon" slot="icon"></sinch-icon>
+    <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" v-if="hasIcon" slot="icon"></sinch-icon>
   </sinch-tag>
 </template>
 

@@ -1,17 +1,17 @@
 <template>
   <sinch-segmented-icon-control :multiple="isMultiple" :value="value" @--change="onChange">
     <sinch-segmented-icon-control-option value="1">
-      <sinch-icon name="fa-align-right" slot="icon"></sinch-icon>
+      <sinch-icon icons-version="2" name="fa-align-right" slot="icon"></sinch-icon>
     </sinch-segmented-icon-control-option>
     <template v-if="!isSingleOption">
       <sinch-segmented-icon-control-option disabled value="2">
-        <sinch-icon name="fa-align-center" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-align-center" slot="icon"></sinch-icon>
       </sinch-segmented-icon-control-option>
       <sinch-segmented-icon-control-option value="3">
-        <sinch-icon name="fa-align-left" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-align-left" slot="icon"></sinch-icon>
       </sinch-segmented-icon-control-option>
       <sinch-segmented-icon-control-option value="4">
-        <sinch-icon name="fa-align-justify" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-align-justify" slot="icon"></sinch-icon>
       </sinch-segmented-icon-control-option>
     </template>
   </sinch-segmented-icon-control>

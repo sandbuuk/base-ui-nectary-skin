@@ -31,8 +31,8 @@ export const Button: FC = () => {
       aria-label="Button"
     >
       {hasSpinner && <sinch-spinner slot="icon"/>}
-      {hasIcon && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
-      {hasRightIcon && <sinch-icon name="fa-angle-down" slot="right-icon"/>}
+      {hasIcon && <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>}
+      {hasRightIcon && <sinch-icon icons-version="2" name="fa-angle-down" slot="right-icon"/>}
     </sinch-button>
   )
 }

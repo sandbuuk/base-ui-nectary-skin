@@ -31,7 +31,7 @@ export const SegmentedControl: FC = () => {
         on-focus={onFocus}
         on-blur={onBlur}
       >
-        <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>
       </sinch-segmented-control-option>
       {!isSingleOption && (
         <>
@@ -41,7 +41,7 @@ export const SegmentedControl: FC = () => {
             aria-label="2"
             disabled
           >
-            <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>
           </sinch-segmented-control-option>
           <sinch-segmented-control-option
             value="3"

@@ -2,7 +2,7 @@
   <sinch-alert :type="type" :text="text">
     <sinch-button v-if="hasClose" slot="close" size="s" @--click="onCloseClick" @--focus="onCloseFocus"
       @--blur="onCloseBlur">
-      <sinch-icon name="fa-xmark" slot="icon"></sinch-icon>
+      <sinch-icon icons-version="2" name="fa-xmark" slot="icon"></sinch-icon>
     </sinch-button>
     <sinch-button v-if="hasAction" slot="action" type="cta-secondary" size="s" text="This is a Button!"
       aria-label="Action" @--click="onButtonClick" @--focus="onButtonFocus" @--blur="onButtonBlur">

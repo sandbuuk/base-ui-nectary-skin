@@ -61,7 +61,7 @@ export const SelectMenu: FC = () => {
             aria-label={text}
           >
             {icon === '1' && (
-              <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>
             )}
           </sinch-select-menu-option>
         ))

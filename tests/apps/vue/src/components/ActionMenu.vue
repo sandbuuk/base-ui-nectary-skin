@@ -2,7 +2,7 @@
   <sinch-action-menu :rows="rows">
     <sinch-action-menu-option v-for="(value, key) in options" :key="key" :value="key" :text="value.text"
       :disabled="value.isDisabled" @--click="onClick(key)">
-      <sinch-icon name="fa-arrow-up-right-from-square" v-if="value.icon === '1'" slot="icon"></sinch-icon>
+      <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" v-if="value.icon === '1'" slot="icon"></sinch-icon>
     </sinch-action-menu-option>
   </sinch-action-menu>
 </template>

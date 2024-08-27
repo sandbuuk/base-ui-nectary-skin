@@ -54,7 +54,7 @@ export const TimeInputExample: FC = () => {
             aria-label="Open Time Picker"
             on-click={onOpen}
           >
-            <sinch-icon name="fa-clock" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-clock" slot="icon"/>
           </sinch-button>
         </sinch-input>
       </sinch-field>

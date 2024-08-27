@@ -27,7 +27,7 @@ export const FilePicker: FC = () => {
         type="secondary"
         aria-label="Button"
       >
-        <sinch-icon name="fa-arrow-up-from-line" slot="left-icon"/>
+        <sinch-icon icons-version="2" name="fa-arrow-up-from-line" slot="left-icon"/>
       </sinch-button>
     </sinch-file-picker>
   )

@@ -82,7 +82,7 @@ export const Accordion: FC = () => {
           optionalText={opt.optional}
         >
           {opt.content != null && <sinch-text slot="content" type="m">{opt.content}</sinch-text>}
-          {opt.icon === true && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
+          {opt.icon === true && <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>}
         </sinch-accordion-item>
       ))}
     </sinch-accordion>

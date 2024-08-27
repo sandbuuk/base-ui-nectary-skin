@@ -8,6 +8,6 @@ export const IconButtonExample: FC = () => (
     type="primary"
     on-click={() => console.log('click')}
   >
-    <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+    <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>
   </sinch-button>
 )

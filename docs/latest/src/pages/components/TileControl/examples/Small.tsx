@@ -18,25 +18,25 @@ export const SmallExample: FC = () => {
       on-change={(e) => setValue(e.detail)}
     >
       <sinch-tile-control-option value="0" text="Message" aria-label="Message">
-        <sinch-icon name="fa-message" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-message" slot="icon"/>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="1" text="Title" aria-label="Title">
-        <sinch-icon name="fa-t" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-t" slot="icon"/>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="2" disabled text="Text" aria-label="Text">
-        <sinch-icon name="fa-align-left" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-align-left" slot="icon"/>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="3" text="QR Code" aria-label="qr code">
-        <sinch-icon name="fa-qrcode" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-qrcode" slot="icon"/>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="4" text="Terms" aria-label="terms">
-        <sinch-icon name="fa-square-check" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-square-check" slot="icon"/>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="5" text="Button" aria-label="button">
-        <sinch-icon name="ai" slot="icon"/>
+        <sinch-icon icons-version="2" name="ai" slot="icon"/>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="6" text="Mobile App" aria-label="mobile app">
-        <sinch-icon name="fa-house-heart" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-house-heart" slot="icon"/>
       </sinch-tile-control-option>
       <sinch-tile-control-option value="7" text="Click to call" aria-label="click to call">
         <sinch-icon-channel-whatsapp slot="icon"/>

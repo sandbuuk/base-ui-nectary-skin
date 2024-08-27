@@ -3,39 +3,39 @@
     @--blur="onBlur">
     <template v-if="hasTop">
       <sinch-button slot="top" size="s" id="format-italic" aria-label="Format italic" @--click="onFormatItalic">
-        <sinch-icon name="fa-italic" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-italic" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="top" size="s" id="format-bold" aria-label="Format bold" @--click="onFormatBold">
-        <sinch-icon name="fa-bold" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-bold" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="top" size="s" id="format-strikethrough" aria-label="Format strikethrough"
         @--click="onFormatStrikethrough">
-        <sinch-icon name="fa-strikethrough" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-strikethrough" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="top" size="s" id="format-code-tag" aria-label="Format code tag" @--click="onFormatCodeTag">
-        <sinch-icon name="fa-code" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-code" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="top" size="s" id="format-ulist" aria-label="Format list bulleted"
         @--click="onFormatListBulleted">
-        <sinch-icon name="fa-list-ul" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-list-ul" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="top" size="s" id="format-olist" aria-label="Format list numbered"
         @--click="onFormatListNumbered">
-        <sinch-icon name="fa-list-ol" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-list-ol" slot="icon"></sinch-icon>
       </sinch-button>
     </template>
     <template v-if="hasBottom">
       <sinch-button slot="bottom" size="s" aria-label="Attach files">
-        <sinch-icon name="fa-folder" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-folder" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="bottom" size="s" aria-label="Variables">
-        <sinch-icon name="fa-brackets-curly" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-brackets-curly" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="bottom" size="s" aria-label="Options">
-        <sinch-icon name="fa-ellipsis" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-ellipsis" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="bottom" type="primary" size="s" aria-label="Send" text="Send" style="margin-left: auto;">
-        <sinch-icon name="fa-paper-plane-top" slot="right-icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-paper-plane-top" slot="right-icon"></sinch-icon>
       </sinch-button>
     </template>
   </sinch-rich-textarea>

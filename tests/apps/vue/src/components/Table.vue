@@ -6,10 +6,10 @@
           :fit="cell.isFit">
           <sinch-checkbox v-if="cell.isCheckbox" slot="checkbox"></sinch-checkbox>
           <sinch-button v-if="cell.isSortable" aria-label="Sort" size="s" slot="right">
-            <sinch-icon name="fa-arrow-up-long" slot="icon"></sinch-icon>
+            <sinch-icon icons-version="2" name="fa-arrow-up-long" slot="icon"></sinch-icon>
           </sinch-button>
           <sinch-button v-if="cell.isFilterable" aria-label="Filter" size="s" slot="left">
-            <sinch-icon name="fa-bars-filter" slot="icon"></sinch-icon>
+            <sinch-icon icons-version="2" name="fa-bars-filter" slot="icon"></sinch-icon>
           </sinch-button>
           <sinch-help-tooltip v-if="cell.tooltip != null" slot="tooltip" :text="cell.tooltip"></sinch-help-tooltip>
         </sinch-table-head-cell>
@@ -23,8 +23,8 @@
           <sinch-toggle v-if="cell.isToggle"></sinch-toggle>
           <sinch-link v-if="cell.isLink" :text="cell.text" href="#"></sinch-link>
           <sinch-button v-if="cell.isIcon" aria-label="button">
-            <sinch-icon name="fa-ellipsis-vertical" v-if="cell.iconName == 'ellipsis'" slot="icon"></sinch-icon>
-            <sinch-icon name="fa-arrow-up-right-from-square" v-if="cell.iconName == 'open'" slot="icon"></sinch-icon>
+            <sinch-icon icons-version="2" name="fa-ellipsis-vertical" v-if="cell.iconName == 'ellipsis'" slot="icon"></sinch-icon>
+            <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" v-if="cell.iconName == 'open'" slot="icon"></sinch-icon>
           </sinch-button>
           <sinch-text
             v-if="!cell.isCheckbox && !cell.isButton && !cell.isToggle && !cell.isLink && !cell.isIcon">{{cell.text}}</sinch-text>

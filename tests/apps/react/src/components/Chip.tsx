@@ -24,8 +24,8 @@ export const Chip: FC = () => {
       on-focus={onFocus}
       on-blur={onBlur}
     >
-      {hasIcon && <sinch-icon name="fa-face-smile" slot="icon"/>}
-      {hasRightIcon && <sinch-icon name="fa-plus" slot="right-icon"/>}
+      {hasIcon && <sinch-icon icons-version="2" name="fa-face-smile" slot="icon"/>}
+      {hasRightIcon && <sinch-icon icons-version="2" name="fa-plus" slot="right-icon"/>}
     </sinch-chip>
   )
 }

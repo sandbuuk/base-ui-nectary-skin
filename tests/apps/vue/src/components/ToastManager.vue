@@ -3,7 +3,7 @@
     <sinch-toast v-for="(t, i) in state" :key="t" :type="typeValues[i % typeValues.length]" :text="t"
       :persistent="i !== 0" @--timeout="onTimeout">
       <sinch-button v-if="(i + 1) % 3 !== 0" slot="close" size="s" @--click="onClose">
-        <sinch-icon name="fa-xmark" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-xmark" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button v-if="(i + 1) % 2 === 0" slot="action" type="cta-secondary" size="s" text="Undo"
         @--click="onAction">

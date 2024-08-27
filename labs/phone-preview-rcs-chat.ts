@@ -133,14 +133,14 @@ export const RcsChatPreview = (props: {
     </style>
     <section class="root">
       <header>
-        <sinch-icon name="fa-arrow-left"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-arrow-left"></sinch-icon>
         <img
           src=${() => (props.logo !== '' ? props.logo : transparentIcon)}
           alt=""
         />
         <h1>${() => (props.name !== '' ? props.name : 'Brand name')}</h1>
-        <sinch-icon name="fa-shield-check" name="verified_user" />
-        <sinch-icon name="fa-ellipsis-vertical" name="more_vert" />
+        <sinch-icon icons-version="2" name="fa-shield-check" name="verified_user" />
+        <sinch-icon icons-version="2" name="fa-ellipsis-vertical" name="more_vert" />
       </header>
       <div>
         <img
@@ -157,12 +157,12 @@ export const RcsChatPreview = (props: {
         <//>
       </div>
       <footer>
-        <sinch-icon name="fa-circle-plus" />
-        <sinch-icon name="fa-camera" />
+        <sinch-icon icons-version="2" name="fa-circle-plus" />
+        <sinch-icon icons-version="2" name="fa-camera" />
         <div>
           <span>RCS Message</span>
-          <sinch-icon name="fa-face-smile" />
-          <sinch-icon name="microphone" name="mic" />
+          <sinch-icon icons-version="2" name="fa-face-smile" />
+          <sinch-icon icons-version="2" name="microphone" name="mic" />
         </div>
       </footer>
     </section>`

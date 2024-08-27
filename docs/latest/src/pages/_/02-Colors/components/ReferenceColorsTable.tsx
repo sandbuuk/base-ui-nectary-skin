@@ -43,9 +43,9 @@ const ShowMoreButton = ({ isExpanded, setExpanded }: TypeShowMoreButton) => {
         on-click={handleClick}
       >
         {isExpanded ? (
-          <sinch-icon name="fa-angle-down" slot="right-icon"/>
+          <sinch-icon icons-version="2" name="fa-angle-down" slot="right-icon"/>
         ) : (
-          <sinch-icon name="fa-angle-up" slot="right-icon"/>
+          <sinch-icon icons-version="2" name="fa-angle-up" slot="right-icon"/>
         )}
       </sinch-button>
     </div>

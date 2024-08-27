@@ -25,7 +25,7 @@ export const FileStatus: FC = () => {
         <sinch-progress slot="content" value={73} aria-label="Progress" detailed/>
       )}
       <sinch-button slot="action" aria-label="Close" size="s">
-        <sinch-icon name="fa-xmark" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
       </sinch-button>
     </sinch-file-status>
   )

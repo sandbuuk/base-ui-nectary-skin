@@ -59,7 +59,7 @@ export const ToastManager: FC = () => {
               aria-label="Close"
               on-click={onClose}
             >
-              <sinch-icon name="fa-xmark" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
             </sinch-button>
           )}
           {(i + 1) % 2 === 0 && (

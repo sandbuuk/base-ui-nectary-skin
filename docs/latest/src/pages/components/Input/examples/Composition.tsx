@@ -19,7 +19,7 @@ export const CompositionExample: FC = () => {
       value={state}
       on-change={(e) => setState(e.detail)}
     >
-      <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+      <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"/>
       <sinch-tag slot="right" text="Tag 1" color="light-orange"/>
       <sinch-tag slot="right" text="Tag 2" color="light-green"/>
     </sinch-input>

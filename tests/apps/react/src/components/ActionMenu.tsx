@@ -42,7 +42,7 @@ export const ActionMenu: FC = () => {
             disabled={isDisabled}
             on-click={() => onOptionClick(key)}
           >
-            {icon === '1' && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
+            {icon === '1' && <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>}
           </sinch-action-menu-option>
         ))
       }

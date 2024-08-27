@@ -190,15 +190,15 @@ const Actions = (props: Parameters<typeof RcsChannelPreview>[0]) => {
   return html`
     <section class="actions">
       <a inert=${() => number() === ''} target="_blank" href=${numberHref}>
-        <sinch-icon name="fa-phone" class="icon-link" />
+        <sinch-icon icons-version="2" name="fa-phone" class="icon-link" />
         Call
       </a>
       <a inert=${() => url() === ''} target="_blank" href=${urlHref}>
-        <sinch-icon name="fa-earth-americas" name="public" class="icon-link" />
+        <sinch-icon icons-version="2" name="fa-earth-americas" name="public" class="icon-link" />
         Website
       </a>
       <a inert=${() => email() === ''} target="_blank" href=${emailHref}>
-        <sinch-icon name="envelope" name="mail" class="icon-link" />
+        <sinch-icon icons-version="2" name="envelope" name="mail" class="icon-link" />
         Email
       </a>
     </section>
@@ -228,7 +228,7 @@ const Info = (props: Parameters<typeof RcsChannelPreview>[0]) => {
             target="_blank"
             href=${`tel:${number}`}
           >
-            <sinch-icon name="fa-phone" class="icon-link" />
+            <sinch-icon icons-version="2" name="fa-phone" class="icon-link" />
             <span>${number}</span>
             <p>${label}</p>
           </a>
@@ -237,7 +237,7 @@ const Info = (props: Parameters<typeof RcsChannelPreview>[0]) => {
       <${For} each=${websites}>
         ${({ label, url }: { label: string, url: string }) => html`
           <a inert=${() => props.websites.length === 0} target="_blank" href=${url}>
-            <sinch-icon name="fa-earth-americas" name="public" class="icon-link" />
+            <sinch-icon icons-version="2" name="fa-earth-americas" name="public" class="icon-link" />
             <span>${url}</span>
             <p>${label}</p>
           </a>
@@ -250,7 +250,7 @@ const Info = (props: Parameters<typeof RcsChannelPreview>[0]) => {
             target="_blank"
             href=${`mailto:${address}`}
           >
-            <sinch-icon name="envelope" name="mail" class="icon-link" />
+            <sinch-icon icons-version="2" name="envelope" name="mail" class="icon-link" />
             <span>${address}</span>
             <p>${label}</p>
           </a>

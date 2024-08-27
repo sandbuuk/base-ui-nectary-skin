@@ -21,7 +21,7 @@ export const MarkdownExample: FC = () => (
       size="s"
       on-click={() => console.log('close')}
     >
-      <sinch-icon name="fa-xmark" slot="icon"/>
+      <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
     </sinch-button>
   </sinch-inline-alert>
 )

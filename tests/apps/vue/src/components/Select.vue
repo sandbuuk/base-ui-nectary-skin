@@ -5,14 +5,14 @@
       <sinch-select-button slot="input" placeholder="Select option" :size="size" :text="inputText"
         :disabled="isDisabled" :invalid="isInvalid" @--click="onClick" @--focus="onFocus" @--blur="onBlur">
         <sinch-tag v-if="hasLeft" slot="left" text="tag"></sinch-tag>
-        <sinch-icon name="fa-magnifying-glass" v-if="hasIcon" slot="icon"></sinch-icon>
-        <sinch-icon name="fa-arrow-up-right-from-square" v-if="items[value]?.icon === '1'" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-magnifying-glass" v-if="hasIcon" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" v-if="items[value]?.icon === '1'" slot="icon"></sinch-icon>
       </sinch-select-button>
     </sinch-field>
     <sinch-select-menu slot="content" :rows="rows" :value="value" @--change="onChange">
       <sinch-select-menu-option v-for="(value, key) in items" :key="key" :value="key" :text="value.text"
         :disabled="value.isDisabled">
-        <sinch-icon name="fa-arrow-up-right-from-square" v-if="value.icon === '1'" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" v-if="value.icon === '1'" slot="icon"></sinch-icon>
       </sinch-select-menu-option>
     </sinch-select-menu>
   </sinch-popover>

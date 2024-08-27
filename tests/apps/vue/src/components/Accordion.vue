@@ -3,7 +3,7 @@
     <sinch-accordion-item v-for="opt in options" :key="opt.value" :value="opt.value" :label="opt.label"
       :disabled="opt.disabled" :status="opt.status" :optionaltext="opt.optional">
       <sinch-text v-if="opt.content != null" slot="content" type="m">{{opt.content}}</sinch-text>
-      <sinch-icon name="fa-arrow-up-right-from-square" v-if="opt.icon === true"
+      <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" v-if="opt.icon === true"
         slot="icon"></sinch-icon>
     </sinch-accordion-item>
   </sinch-accordion>

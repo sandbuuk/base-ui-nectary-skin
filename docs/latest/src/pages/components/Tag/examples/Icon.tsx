@@ -15,7 +15,7 @@ export const IconExample: FC = () => (
     {
       systemColors.map((colorName) => (
         <sinch-tag key={colorName} color={colorName} text={colorName}>
-          <sinch-icon name="fa-face-laugh" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-face-laugh" slot="icon"/>
         </sinch-tag>
       ))
     }

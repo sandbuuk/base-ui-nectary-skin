@@ -19,7 +19,7 @@ export const SuccessExample: FC = () => (
         size="s"
         on-click={() => { }}
       >
-        <sinch-icon name="fa-trash" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-trash" slot="icon"/>
       </sinch-button>
     </sinch-file-status>
   </div>

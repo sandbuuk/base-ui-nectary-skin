@@ -33,18 +33,18 @@ export const SegmentedIconControl: FC = () => {
         on-focus={onFocus}
         on-blur={onBlur}
       >
-        <sinch-icon name="fa-align-right" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-align-right" slot="icon"/>
       </sinch-segmented-icon-control-option>
       {!isSingleOption && (
         <>
           <sinch-segmented-icon-control-option disabled value="2" aria-label="2">
-            <sinch-icon name="fa-align-center" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-align-center" slot="icon"/>
           </sinch-segmented-icon-control-option>
           <sinch-segmented-icon-control-option value="3" aria-label="3">
-            <sinch-icon name="fa-align-left" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-align-left" slot="icon"/>
           </sinch-segmented-icon-control-option>
           <sinch-segmented-icon-control-option value="4" aria-label="4">
-            <sinch-icon name="fa-align-justify" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-align-justify" slot="icon"/>
           </sinch-segmented-icon-control-option>
         </>
       )}

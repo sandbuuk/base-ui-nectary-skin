@@ -67,7 +67,7 @@ export const Segment: FC = () => {
           onClick={() => { }}
           slot="info"
         >
-          <sinch-icon name="fa-grid" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-grid" slot="icon"/>
         </sinch-button>
       )}
       {hasPreview && (

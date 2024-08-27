@@ -20,7 +20,7 @@ export const ProgressExample: FC = () => (
       size="s"
       on-click={() => { }}
     >
-      <sinch-icon name="fa-xmark" slot="icon"/>
+      <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
     </sinch-button>
     <sinch-progress
       slot="content"

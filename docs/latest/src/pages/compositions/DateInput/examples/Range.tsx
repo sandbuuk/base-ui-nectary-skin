@@ -64,7 +64,7 @@ export const RangeExample: FC = () => {
             aria-label="Open Date Picker"
             on-click={onOpen}
           >
-            <sinch-icon name="fa-calendar" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-calendar" slot="icon"/>
           </sinch-button>
         </sinch-input>
       </sinch-field>

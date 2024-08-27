@@ -27,14 +27,14 @@ export const SimpleExample: FC = () => {
           value="1"
           text="Tab 1"
         >
-          <sinch-icon name="fa-face-frown" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-face-frown" slot="icon"/>
         </sinch-tabs-option>
         <sinch-tabs-option
           aria-label="Tab 2"
           value="2"
           text="Tab 2"
         >
-          <sinch-icon name="fa-basketball" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-basketball" slot="icon"/>
         </sinch-tabs-option>
         <sinch-tabs-option
           aria-label="Tab 3"
@@ -42,14 +42,14 @@ export const SimpleExample: FC = () => {
           text="Tab 3"
           disabled
         >
-          <sinch-icon name="fa-arrows-down-to-people" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-arrows-down-to-people" slot="icon"/>
         </sinch-tabs-option>
         <sinch-tabs-option
           aria-label="Tab 4"
           value="4"
           text="Tab 4"
         >
-          <sinch-icon name="fa-people-pulling" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-people-pulling" slot="icon"/>
         </sinch-tabs-option>
       </sinch-tabs>
       {value === '1' && <sinch-text type="m">1</sinch-text>}

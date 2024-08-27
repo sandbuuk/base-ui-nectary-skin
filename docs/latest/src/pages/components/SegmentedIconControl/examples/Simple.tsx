@@ -17,16 +17,16 @@ export const SimpleExample: FC = () => {
       aria-label="Segmented control"
     >
       <sinch-segmented-icon-control-option value="1" aria-label="Format align left">
-        <sinch-icon name="fa-align-left" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-align-left" slot="icon"/>
       </sinch-segmented-icon-control-option>
       <sinch-segmented-icon-control-option value="2" aria-label="Format align center">
-        <sinch-icon name="fa-align-center" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-align-center" slot="icon"/>
       </sinch-segmented-icon-control-option>
       <sinch-segmented-icon-control-option value="3" aria-label="Format align right">
-        <sinch-icon name="fa-align-right" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-align-right" slot="icon"/>
       </sinch-segmented-icon-control-option>
       <sinch-segmented-icon-control-option value="4" aria-label="Format justify">
-        <sinch-icon name="fa-align-justify" slot="icon"/>
+        <sinch-icon icons-version="2" name="fa-align-justify" slot="icon"/>
       </sinch-segmented-icon-control-option>
     </sinch-segmented-icon-control>
   )

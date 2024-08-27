@@ -23,20 +23,20 @@ export const IconOnlyExample: FC = () => {
         on-change={onChange}
       >
         <sinch-tabs-icon-option aria-label="Tab 1" value="1">
-          <sinch-icon name="fa-face-frown" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-face-frown" slot="icon"/>
         </sinch-tabs-icon-option>
         <sinch-tabs-icon-option aria-label="Tab 2" value="2">
-          <sinch-icon name="fa-basketball" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-basketball" slot="icon"/>
         </sinch-tabs-icon-option>
         <sinch-tabs-icon-option
           aria-label="Tab 3"
           value="3"
           disabled
         >
-          <sinch-icon name="fa-arrows-down-to-people" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-arrows-down-to-people" slot="icon"/>
         </sinch-tabs-icon-option>
         <sinch-tabs-icon-option aria-label="Tab 4" value="4">
-          <sinch-icon name="fa-people-pulling" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-people-pulling" slot="icon"/>
         </sinch-tabs-icon-option>
       </sinch-tabs>
       {value === '1' && <sinch-text type="m">1</sinch-text>}

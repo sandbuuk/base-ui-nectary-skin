@@ -3,23 +3,23 @@
     :minrows="minrows" :resizable="resizable" @--change="onChange" @--focus="onFocus" @--blur="onBlur">
     <template v-if="hasBottom">
       <sinch-button slot="bottom" aria-label="Paperclip">
-        <sinch-icon name="fa-paperclip-vertical" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-paperclip-vertical" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Emoji">
-        <sinch-icon name="fa-face-laugh" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-face-laugh" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Variables">
-        <sinch-icon name="fa-magnifying-glass" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Comment">
-        <sinch-icon name="fa-comment-plus" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-comment-plus" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-button slot="bottom" aria-label="Comment">
-        <sinch-icon name="fa-ellipsis" slot="icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-ellipsis" slot="icon"></sinch-icon>
       </sinch-button>
       <sinch-tag slot="bottom" text="400" color="success" style="margin-left: auto;"></sinch-tag>
       <sinch-button slot="bottom" type="primary" aria-label="Send" text="Send">
-        <sinch-icon name="fa-paper-plane-top" slot="right-icon"></sinch-icon>
+        <sinch-icon icons-version="2" name="fa-paper-plane-top" slot="right-icon"></sinch-icon>
       </sinch-button>
     </template>
   </sinch-textarea>

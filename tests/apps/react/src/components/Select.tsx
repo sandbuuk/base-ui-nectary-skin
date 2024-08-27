@@ -101,10 +101,10 @@ export const Select: FC = () => {
             </>
           )}
           {hasIcon && (
-            <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"/>
           )}
           {options[value]?.icon === '1' && (
-            <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>
           )}
         </sinch-select-button>
       </sinch-field>
@@ -125,7 +125,7 @@ export const Select: FC = () => {
               aria-label={text}
             >
               {icon === '1' && (
-                <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+                <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>
               )}
             </sinch-select-menu-option>
           ))

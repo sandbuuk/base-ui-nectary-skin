@@ -82,14 +82,14 @@ export const BottomComplexExample: FC = () => {
           style={{ marginLeft: 'auto' }}
         >
           <sinch-button aria-label="Attach file">
-            <sinch-icon name="fa-paperclip-vertical" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-paperclip-vertical" slot="icon"/>
           </sinch-button>
         </sinch-file-picker>
         <sinch-button slot="bottom" aria-label="Emojis" on-click={() => onPopOpenClick('emoji')}>
-          <sinch-icon name="fa-face-laugh" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-face-laugh" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="Variables" on-click={() => onPopOpenClick('vars')}>
-          <sinch-icon name="fa-brackets-curly" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-brackets-curly" slot="icon"/>
         </sinch-button>
         <sinch-popover
           slot="bottom"
@@ -104,7 +104,7 @@ export const BottomComplexExample: FC = () => {
             aria-label="More"
             on-click={onOptsOpenClick}
           >
-            <sinch-icon name="fa-ellipsis" slot="icon"/>
+            <sinch-icon icons-version="2" name="fa-ellipsis" slot="icon"/>
           </sinch-button>
           <sinch-select-menu
             slot="content"
@@ -118,7 +118,7 @@ export const BottomComplexExample: FC = () => {
           </sinch-select-menu>
           <sinch-action-menu aria-label="Action menu" slot="content">
             <sinch-action-menu-option text="Settings" aria-label="Settings" on-click={() => setOptionsOpen(false)}>
-              <sinch-icon name="fa-gear" slot="icon"/>
+              <sinch-icon icons-version="2" name="fa-gear" slot="icon"/>
             </sinch-action-menu-option>
           </sinch-action-menu>
         </sinch-popover>
