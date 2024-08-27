@@ -32,7 +32,7 @@ export const SimpleExample: FC = () => {
         aria-label="Dialog"
         on-visibility-altered={forceRemount}
       >
-        <sinch-icon slot="icon" name="add_reaction"/>
+        <sinch-icon name="fa-face-smile-plus" slot="icon"/>
         <div slot="content">
           <sinch-text type="m">
             The only way of closing this overlay is in a controlled manner using the defined button.

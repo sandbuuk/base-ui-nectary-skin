@@ -6,6 +6,7 @@ const dirname = (import.meta as any).dirname as string
 const componentsDir = path.join(dirname, '..', 'components')
 
 const jsCommentRegex = new RegExp(/^.*(\/\*[\s\S]*?\*\/)|(\/\/)/gm)
+const objectTypeBodyLineRegex = new RegExp(/(([\d|\w|'|-]*)(\??:)\s(.*){)|}/)
 const typeBodyLineRegex = new RegExp(/([\d|\w|'|-]*)(\??:)\s(.*),/)
 const reactTypeRegexp = new RegExp(/(?<=export type TSinch(?:\w*)React(?:.*){)(\n(.*))*(?=})/)
 const customSubType = new RegExp(/TSinch\w*/g)
@@ -40,13 +41,18 @@ const mapRegexMatches = (regex: RegExp, str: string, cb: ((_m: RegExpExecArray) 
 const removeJsComments = (tsContent: string) => tsContent.replace(jsCommentRegex, '').trim().replace(/\n+/g, '\n')
 
 const formatTypeLine = (line: string) => {
+  if (objectTypeBodyLineRegex.test(line)) {
+    return line
+  }
+
   const [_ignore, key, separator, typeDef] = typeBodyLineRegex.exec(line) || []
 
-  // indicate that key is camelCase in components library and should be preserved
-  if (key.match(/[a-z]+([A-Z]+[a-z]+)/)) {
+  // exclude CSS var and preformatted keys.
+  if (key.match(/[a-z]+([A-Z]+[a-z]+)/) || key.includes('sinch-global')) {
     return `// @preserve-case
     ${key}${separator} ${typeDef}`
   }
+  // indicate that key is camelCase in components library and should be preserved
 
   return `${camelCase(key)}${separator} ${typeDef}`
 }
@@ -102,7 +108,7 @@ async function createWrapperInterface(componentName: string): Promise<string> {
   addRequiredImportLines(componentName, formattedLines)
 
   return `export interface TSinch${capitalizeFirstLetter(camelCase(componentName))}Wrapper {
-  ${formattedLines?.map((line) => `${line},`).join('\n  ')}
+  ${formattedLines?.map((line) => `${line}`).join('\n  ')}
 }`
 }
 

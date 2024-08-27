@@ -2,5 +2,5 @@ import type { FC } from 'react'
 import '@nectary/components/icon'
 
 export const SimpleExample: FC = () => (
-  <sinch-icon name="check_circle"/>
+  <sinch-icon name="circle-check"/>
 )

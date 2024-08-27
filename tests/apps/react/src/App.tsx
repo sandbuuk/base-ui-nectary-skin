@@ -19,7 +19,6 @@ import { ColorSwatch } from './components/ColorSwatch'
 import { DateInput } from './components/DateInput'
 import { DatePicker } from './components/DatePicker'
 import { Dialog } from './components/Dialog'
-import { DialogExample } from './components/DialogExample'
 import { EmojiPicker } from './components/EmojiPicker'
 import { EventTargets } from './components/EventsTargets'
 import { Field } from './components/Field'
@@ -56,7 +55,6 @@ import { Text } from './components/Text'
 import { Textarea } from './components/Textarea'
 import { TextareaExample } from './components/TextareaExample'
 import { TileControl } from './components/TileControl'
-import { TimeInput } from './components/TimeInput'
 import { TimePicker } from './components/TimePicker'
 import { Title } from './components/Title'
 import { Toast } from './components/Toast'
@@ -107,7 +105,6 @@ const AppImpl = () => {
         <Route path="/color-swatch" element={<ColorSwatch/>}/>
         <Route path="/date-input" element={<DateInput/>}/>
         <Route path="/date-picker" element={<DatePicker/>}/>
-        <Route path="/dialog-example" element={<DialogExample/>}/>
         <Route path="/dialog" element={<Dialog/>}/>
         <Route path="/emoji-picker" element={<EmojiPicker/>}/>
         <Route path="/event-targets" element={<EventTargets/>}/>
@@ -145,7 +142,6 @@ const AppImpl = () => {
         <Route path="/textarea-example" element={<TextareaExample/>}/>
         <Route path="/textarea" element={<Textarea/>}/>
         <Route path="/tile-control" element={<TileControl/>}/>
-        <Route path="/time-input" element={<TimeInput/>}/>
         <Route path="/time-picker" element={<TimePicker/>}/>
         <Route path="/title" element={<Title/>}/>
         <Route path="/toast-manager" element={<ToastManager/>}/>

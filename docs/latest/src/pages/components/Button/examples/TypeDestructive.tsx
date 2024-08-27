@@ -10,6 +10,6 @@ export const TypeDestructiveExample: FC = () => (
     type="destructive"
     on-click={() => console.log('click')}
   >
-    <sinch-icon name="open_in_new" slot="icon"/>
+    <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
   </sinch-button>
 )

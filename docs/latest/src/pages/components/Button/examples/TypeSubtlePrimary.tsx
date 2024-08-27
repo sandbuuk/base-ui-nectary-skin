@@ -9,6 +9,6 @@ export const TypeSubtlePrimaryExample: FC = () => (
     type="subtle-primary"
     on-click={() => console.log('click')}
   >
-    <sinch-icon slot="icon" name="open_in_new"/>
+    <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
   </sinch-button>
 )

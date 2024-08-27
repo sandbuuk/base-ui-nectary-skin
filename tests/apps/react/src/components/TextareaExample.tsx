@@ -8,12 +8,7 @@ import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
 import '@nectary/components/emoji-picker'
 import '@nectary/components/tag'
-import '@nectary/assets/icons/mood'
-import '@nectary/assets/icons/attach-file'
-import '@nectary/assets/icons/variables'
-import '@nectary/assets/icons/add-comment'
-import '@nectary/assets/icons/more-horiz'
-import '@nectary/assets/icons/send'
+import '@nectary/components/icon'
 
 export const TextareaExample: FC = () => {
   const [search] = useSearchParams()
@@ -58,19 +53,19 @@ export const TextareaExample: FC = () => {
         aria-label="Textarea"
       >
         <sinch-button slot="bottom" aria-label="Paperclip">
-          <sinch-icon-attach-file slot="icon"/>
+          <sinch-icon name="fa-paperclip-vertical" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="Emoji" on-click={() => onPopOpenClick('emoji')}>
-          <sinch-icon-mood slot="icon"/>
+          <sinch-icon name="fa-face-laugh" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="Variables" on-click={() => onPopOpenClick('vars')}>
-          <sinch-icon-variables slot="icon"/>
+          <sinch-icon name="fa-brackets-curly" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="Comment">
-          <sinch-icon-add-comment slot="icon"/>
+          <sinch-icon name="fa-comment-plus" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="More">
-          <sinch-icon-more-horiz slot="icon"/>
+          <sinch-icon name="fa-ellipsis" slot="icon"/>
         </sinch-button>
         <sinch-tag
           slot="bottom"
@@ -84,10 +79,10 @@ export const TextareaExample: FC = () => {
           aria-label="Send"
           text="Send"
         >
-          <sinch-icon-send slot="right-icon"/>
+          <sinch-icon name="fa-paper-plane-top" slot="right-icon"/>
         </sinch-button>
       </sinch-textarea>
-      {popMode === 'emoji' && <sinch-emoji-picker slot="content" on-change={() => {}}/>}
+      {popMode === 'emoji' && <sinch-emoji-picker slot="content" on-change={() => { }}/>}
       {popMode === 'vars' && (
         <sinch-action-menu slot="content" aria-label="variables">
           <sinch-action-menu-option text="contents" aria-label="contents"/>

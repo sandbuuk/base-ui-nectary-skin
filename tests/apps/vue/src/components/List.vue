@@ -5,7 +5,7 @@
         <sinch-icon-branded-chatbot></sinch-icon-branded-chatbot>
         <sinch-text style="flex: 1;" type="m" inline>Replace me</sinch-text>
         <sinch-button aria-label="Add" size="s">
-          <sinch-icon-add slot="icon"></sinch-icon-add>
+          <sinch-icon name="fa-plus" slot="icon"></sinch-icon>
         </sinch-button>
       </div>
     </sinch-list-item>
@@ -15,7 +15,7 @@
 <script>
 import '@nectary/components/list'
 import '@nectary/components/list-item'
-import '@nectary/assets/icons/add'
+import '@nectary/components/icon'
 import '@nectary/assets/icons-branded/chatbot'
 import '@nectary/components/text'
 

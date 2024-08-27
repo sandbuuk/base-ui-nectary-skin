@@ -1,6 +1,6 @@
-<sinch-tag
-  [attr.color]="color"
-  [attr.text]="text"
-  [attr.small]="isSmall">
-  <sinch-icon-open-in-new *ngIf="hasIcon" slot="icon"></sinch-icon-open-in-new>
+<sinch-tag [attr.color]="color" [attr.text]="text" [attr.small]="isSmall">
+  <sinch-icon name="fa-arrow-up-right-from-square"
+    *ngIf="hasIcon"
+    slot="icon"
+  ></sinch-icon>
 </sinch-tag>

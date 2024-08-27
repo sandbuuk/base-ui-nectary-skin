@@ -4,13 +4,15 @@
     [attr.type]="typeValues[i % typeValues.length]"
     [attr.text]="t"
     [attr.persistent]="i !== 0"
-    (-timeout)="onTimeout()">
+    (-timeout)="onTimeout()"
+  >
     <sinch-button
       *ngIf="(i + 1) % 3 !== 0"
       slot="close"
       size="s"
-      (-click)="onClose()">
-      <sinch-icon-close slot="icon"></sinch-icon-close>
+      (-click)="onClose()"
+    >
+      <sinch-icon name="fa-xmark" slot="icon"></sinch-icon>
     </sinch-button>
     <sinch-button
       *ngIf="(i + 1) % 2 === 0"
@@ -18,7 +20,8 @@
       type="cta-secondary"
       size="s"
       text="Undo"
-      (-click)="onAction()">
+      (-click)="onAction()"
+    >
     </sinch-button>
   </sinch-toast>
 </sinch-toast-manager>

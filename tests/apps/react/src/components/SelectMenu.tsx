@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
-import '@nectary/assets/icons/open-in-new'
+import '@nectary/components/icon'
 
 type TMenuValue = {
   text: string,
@@ -61,7 +61,7 @@ export const SelectMenu: FC = () => {
             aria-label={text}
           >
             {icon === '1' && (
-              <sinch-icon-open-in-new slot="icon"/>
+              <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
             )}
           </sinch-select-menu-option>
         ))

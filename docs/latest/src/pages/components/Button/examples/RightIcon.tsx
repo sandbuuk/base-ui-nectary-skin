@@ -9,6 +9,6 @@ export const RightIconExample: FC = () => (
     type="primary"
     on-click={() => console.log('click')}
   >
-    <sinch-icon name="open_in_new" slot="right-icon"/>
+    <sinch-icon name="fa-arrow-up-right-from-square" slot="right-icon"/>
   </sinch-button>
 )
