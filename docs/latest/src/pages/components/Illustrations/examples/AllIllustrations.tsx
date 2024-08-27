@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/text'
 import '@nectary/components/input'
-import '@nectary/components/icon'
 import '@nectary/components/button'
+import '@nectary/components/icon'
 
 const req = import.meta.webpackContext!('@nectary/assets/illustrations', {
   regExp: /^.*\/index$/,
@@ -59,9 +59,9 @@ export const AllIllustrationsExample: FC = () => {
         on-change={onSearchChange}
         aria-label="Search"
       >
-        <sinch-icon slot="icon" name="search"/>
+        <sinch-icon name="magnifying-glass" slot="icon"/>
         <sinch-button slot="right" on-click={onClearSearch} aria-label="Clear search">
-          <sinch-icon slot="icon" name="close"/>
+          <sinch-icon name="fa-xmark" slot="icon"/>
         </sinch-button>
       </sinch-input>
       <div style={tableStyle}>

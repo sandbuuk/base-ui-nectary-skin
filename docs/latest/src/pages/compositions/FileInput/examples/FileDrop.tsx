@@ -63,9 +63,9 @@ export const FileDropExample: FC = () => {
                 slot="action"
                 aria-label="Close"
                 size="s"
-                on-click={() => {}}
+                on-click={() => { }}
               >
-                <sinch-icon slot="icon" name="close"/>
+                <sinch-icon name="fa-xmark" slot="icon"/>
               </sinch-button>
             </sinch-file-status>
           ))

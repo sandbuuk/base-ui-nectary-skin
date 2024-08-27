@@ -2,10 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@nectary/components/segmented-icon-control'
 import '@nectary/components/segmented-icon-control-option'
-import '@nectary/assets/icons/format-align-left'
-import '@nectary/assets/icons/format-align-center'
-import '@nectary/assets/icons/format-align-right'
-import '@nectary/assets/icons/format-align-justify'
+import '@nectary/components/icon'
 
 export const SimpleExample: FC = () => {
   const [value, setValue] = useState('')
@@ -20,16 +17,16 @@ export const SimpleExample: FC = () => {
       aria-label="Segmented control"
     >
       <sinch-segmented-icon-control-option value="1" aria-label="Format align left">
-        <sinch-icon-format-align-left slot="icon"/>
+        <sinch-icon name="fa-align-left" slot="icon"/>
       </sinch-segmented-icon-control-option>
       <sinch-segmented-icon-control-option value="2" aria-label="Format align center">
-        <sinch-icon-format-align-center slot="icon"/>
+        <sinch-icon name="fa-align-center" slot="icon"/>
       </sinch-segmented-icon-control-option>
       <sinch-segmented-icon-control-option value="3" aria-label="Format align right">
-        <sinch-icon-format-align-right slot="icon"/>
+        <sinch-icon name="fa-align-right" slot="icon"/>
       </sinch-segmented-icon-control-option>
       <sinch-segmented-icon-control-option value="4" aria-label="Format justify">
-        <sinch-icon-format-align-justify slot="icon"/>
+        <sinch-icon name="fa-align-justify" slot="icon"/>
       </sinch-segmented-icon-control-option>
     </sinch-segmented-icon-control>
   )

@@ -2,7 +2,7 @@ import type { CSSProperties, FC } from 'react'
 import '@nectary/components/badge'
 import '@nectary/components/avatar'
 import '@nectary/components/button'
-import '@nectary/assets/icons/notifications'
+import '@nectary/components/icon'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -23,7 +23,7 @@ export const ModeExample: FC = () => (
         mode="square"
         slot="icon"
       >
-        <sinch-icon-notifications/>
+        <sinch-icon name="bell"/>
       </sinch-badge>
     </sinch-button>
     <sinch-badge text="9" size="l" mode="square">

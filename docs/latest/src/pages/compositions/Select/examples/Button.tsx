@@ -4,20 +4,17 @@ import '@nectary/components/popover'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
 import '@nectary/components/select-button'
-import '@nectary/assets/icons/laptop'
-import '@nectary/assets/icons/smartphone'
-import '@nectary/assets/icons/tablet'
-import '@nectary/assets/icons/watch'
+import '@nectary/components/icon'
 
 const selectStyles: CSSProperties = {
   width: 200,
 }
 
 const icons: Record<string, JSX.Element> = {
-  Laptop: <sinch-icon-laptop slot="icon"/>,
-  Smartphone: <sinch-icon-smartphone slot="icon"/>,
-  Tablet: <sinch-icon-tablet slot="icon"/>,
-  Watch: <sinch-icon-watch slot="icon"/>,
+  Laptop: <sinch-icon name="fa-laptop" slot="icon"/>,
+  Smartphone: <sinch-icon name="smartphone" slot="icon"/>,
+  Tablet: <sinch-icon name="fa-tablet" slot="icon"/>,
+  Watch: <sinch-icon name="fa-watch" slot="icon"/>,
 }
 
 export const ButtonExample: FC = () => {

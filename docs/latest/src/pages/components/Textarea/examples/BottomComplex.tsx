@@ -10,11 +10,7 @@ import '@nectary/components/popover'
 import '@nectary/components/emoji-picker'
 import '@nectary/components/file-picker'
 import '@nectary/components/button'
-import '@nectary/assets/icons/mood'
-import '@nectary/assets/icons/variables'
-import '@nectary/assets/icons/attach-file'
-import '@nectary/assets/icons/more-horiz'
-import '@nectary/assets/icons/settings'
+import '@nectary/components/icon'
 
 export const BottomComplexExample: FC = () => {
   const [text, setText] = useState('')
@@ -81,19 +77,19 @@ export const BottomComplexExample: FC = () => {
       >
         <sinch-file-picker
           slot="bottom"
-          on-change={() => {}}
-          on-invalid={() => {}}
+          on-change={() => { }}
+          on-invalid={() => { }}
           style={{ marginLeft: 'auto' }}
         >
           <sinch-button aria-label="Attach file">
-            <sinch-icon-attach-file slot="icon"/>
+            <sinch-icon name="fa-paperclip-vertical" slot="icon"/>
           </sinch-button>
         </sinch-file-picker>
         <sinch-button slot="bottom" aria-label="Emojis" on-click={() => onPopOpenClick('emoji')}>
-          <sinch-icon-mood slot="icon"/>
+          <sinch-icon name="fa-face-laugh" slot="icon"/>
         </sinch-button>
         <sinch-button slot="bottom" aria-label="Variables" on-click={() => onPopOpenClick('vars')}>
-          <sinch-icon-variables slot="icon"/>
+          <sinch-icon name="fa-brackets-curly" slot="icon"/>
         </sinch-button>
         <sinch-popover
           slot="bottom"
@@ -108,7 +104,7 @@ export const BottomComplexExample: FC = () => {
             aria-label="More"
             on-click={onOptsOpenClick}
           >
-            <sinch-icon-more-horiz slot="icon"/>
+            <sinch-icon name="fa-ellipsis" slot="icon"/>
           </sinch-button>
           <sinch-select-menu
             slot="content"
@@ -122,7 +118,7 @@ export const BottomComplexExample: FC = () => {
           </sinch-select-menu>
           <sinch-action-menu aria-label="Action menu" slot="content">
             <sinch-action-menu-option text="Settings" aria-label="Settings" on-click={() => setOptionsOpen(false)}>
-              <sinch-icon-settings slot="icon"/>
+              <sinch-icon name="fa-gear" slot="icon"/>
             </sinch-action-menu-option>
           </sinch-action-menu>
         </sinch-popover>

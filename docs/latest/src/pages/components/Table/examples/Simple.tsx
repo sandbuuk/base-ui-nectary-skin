@@ -11,10 +11,6 @@ import '@nectary/components/help-tooltip'
 import '@nectary/components/table-body'
 import '@nectary/components/button'
 import '@nectary/components/icon'
-import '@nectary/assets/icons/south'
-import '@nectary/assets/icons/north'
-import '@nectary/assets/icons/filter-list'
-import '@nectary/assets/icons/more-vert'
 
 export const SimpleExample: FC = () => {
   return (
@@ -26,16 +22,16 @@ export const SimpleExample: FC = () => {
           </sinch-table-head-cell>
           <sinch-table-head-cell text="ID" align="end">
             <sinch-button slot="right" aria-label="Sort">
-              <sinch-icon-south slot="icon"/>
+              <sinch-icon name="fa-arrow-down-long" slot="icon"/>
             </sinch-button>
           </sinch-table-head-cell>
           <sinch-table-head-cell text="Ticket"/>
           <sinch-table-head-cell text="Channel" align="center">
             <sinch-button slot="left" aria-label="Filter">
-              <sinch-icon-filter-list slot="icon"/>
+              <sinch-icon name="fa-bars-filter" slot="icon"/>
             </sinch-button>
             <sinch-button slot="right" aria-label="Sort">
-              <sinch-icon-north slot="icon"/>
+              <sinch-icon name="fa-arrow-up-long" slot="icon"/>
             </sinch-button>
             <sinch-help-tooltip slot="tooltip" text="Tooltip text"/>
           </sinch-table-head-cell>
@@ -56,14 +52,14 @@ export const SimpleExample: FC = () => {
             <sinch-link text="Link" href="#" aria-label="Link"/>
           </sinch-table-cell>
           <sinch-table-cell align="center">
-            <sinch-icon name="open_in_new"/>
+            <sinch-icon name="fa-arrow-up-right-from-square"/>
           </sinch-table-cell>
           <sinch-table-cell><span>Lorem Ipsum</span></sinch-table-cell>
           <sinch-table-cell align="center">
             <sinch-toggle aria-label="Toggle"/>
           </sinch-table-cell>
           <sinch-table-cell align="center">
-            <sinch-icon-more-vert/>
+            <sinch-icon name="fa-ellipsis-vertical" slot="icon"/>
           </sinch-table-cell>
         </sinch-table-row>
         <sinch-table-row>
@@ -75,7 +71,7 @@ export const SimpleExample: FC = () => {
             <sinch-link text="Link" href="#" aria-label="Link"/>
           </sinch-table-cell>
           <sinch-table-cell align="center">
-            <sinch-icon name="open_in_new"/>
+            <sinch-icon name="fa-arrow-up-right-from-square"/>
           </sinch-table-cell>
           <sinch-table-cell>
             <span>Lorem Ipsum is simply dummy text</span>
@@ -84,7 +80,7 @@ export const SimpleExample: FC = () => {
             <sinch-toggle aria-label="Toggle"/>
           </sinch-table-cell>
           <sinch-table-cell align="center">
-            <sinch-icon-more-vert/>
+            <sinch-icon name="fa-ellipsis-vertical" slot="icon"/>
           </sinch-table-cell>
         </sinch-table-row>
       </sinch-table-body>

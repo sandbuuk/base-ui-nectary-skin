@@ -5,7 +5,7 @@ import type { FC } from 'react'
 import '@nectary/components/toast-manager'
 import '@nectary/components/toast'
 import '@nectary/components/button'
-import '@nectary/assets/icons/close'
+import '@nectary/components/icon'
 
 const text = 'Lorem Ipsum is simply dummy text of the printing and typesetting.'
 const md = 'To set up the `LINE`, read and **accept** the `LINE` [terms & conditions](https://google.com).'
@@ -59,7 +59,7 @@ export const ToastManager: FC = () => {
               aria-label="Close"
               on-click={onClose}
             >
-              <sinch-icon-close slot="icon"/>
+              <sinch-icon name="fa-xmark" slot="icon"/>
             </sinch-button>
           )}
           {(i + 1) % 2 === 0 && (

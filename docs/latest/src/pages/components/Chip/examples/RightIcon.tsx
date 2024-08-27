@@ -22,7 +22,7 @@ export const RightIconExample: FC = () => (
           aria-label="Chip"
           on-click={() => console.log('click')}
         >
-          <sinch-icon slot="right-icon" name="add"/>
+          <sinch-icon name="fa-plus" slot="right-icon"/>
         </sinch-chip>
       ))
     }

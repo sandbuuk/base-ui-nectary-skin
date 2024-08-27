@@ -65,7 +65,7 @@ export const ComplexExample: FC = () => {
                 size="s"
                 on-click={onClose(id)}
               >
-                <sinch-icon slot="icon" name="close"/>
+                <sinch-icon name="fa-xmark" slot="icon"/>
               </sinch-button>
             )}
           </sinch-toast>

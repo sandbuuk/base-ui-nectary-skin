@@ -24,7 +24,7 @@ export const Dialog: FC = () => {
       close-aria-label="Close dialog"
       on-close={onClose}
     >
-      {icon && <sinch-icon slot="icon" name="add_reaction"/>}
+      {icon && <sinch-icon name="fa-face-smile-plus" slot="icon"/>}
       {content !== null && <sinch-text slot="content" type="m">{content}</sinch-text>}
       {buttons && (
         <>
