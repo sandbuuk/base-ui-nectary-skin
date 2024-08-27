@@ -1,8 +1,8 @@
-import { Component } from "@angular/core";
-import "@nectary/components/inline-alert";
-import "@nectary/components/button";
-import "@nectary/components/icon";
-import { ActivatedRoute } from "@angular/router";
+import { Component } from '@angular/core'
+import '@nectary/components/inline-alert'
+import '@nectary/components/button'
+import '@nectary/assets/icons/close'
+import { ActivatedRoute } from '@angular/router'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
@@ -11,63 +11,62 @@ If ___you___ have *any questions*, contact your ~~parents~~ account __manager__.
 
 Context *italic __bold__ italic* text
 Context **bold _italic_ bold** text.
-`;
+`
 
-const longText =
-  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.";
-const shortText = "Lorem Ipsum is dummy text";
+const longText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.'
+const shortText = 'Lorem Ipsum is dummy text'
 
-const longCaption =
-  "It has survived not only five centuries, but also the leap into electronic typesetting";
-const shortCaption = "It has survived";
+const longCaption = 'It has survived not only five centuries, but also the leap into electronic typesetting'
+const shortCaption = 'It has survived'
 
 @Component({
-  selector: "inline-alert-component",
-  templateUrl: "./InlineAlert.component.html",
-  styles: [":host{ display: contents; }"],
+  selector: 'inline-alert-component',
+  templateUrl: './InlineAlert.component.html',
+  styles: [':host{ display: contents; }']
 })
+
 export class InlineAlertComponent {
-  type?: string;
-  text: string | null;
-  caption: string;
-  hasClose: boolean;
-  hasAction: boolean;
+  type?: string
+  text: string | null
+  caption: string
+  hasClose: boolean
+  hasAction: boolean
 
   constructor(private route: ActivatedRoute) {
-    const search = this.route.snapshot.queryParamMap;
-    this.type = search.get("type") ?? undefined;
-    this.hasClose = search.get("close") != null;
-    this.hasAction = search.get("action") != null;
+    const search = this.route.snapshot.queryParamMap
+    this.type = search.get('type') ?? undefined
+    this.hasClose = search.get('close') != null
+    this.hasAction = search.get('action') != null
 
-    const example = search.get("example");
+    const example = search.get('example')
 
-    this.text = shortText;
-    this.caption = shortCaption;
+    this.text = shortText
+    this.caption = shortCaption
 
-    if (example === "md") {
-      this.text = mdText;
-    } else if (example === "long") {
-      this.text = longText;
-      this.caption = longCaption;
+    if (example === 'md') {
+      this.text = mdText
+    } else if (example === 'long') {
+      this.text = longText
+      this.caption = longCaption
     }
   }
 
   onCloseClick() {
-    window.dispatchEvent(new CustomEvent("sinch-inline-alert-close-click"));
+    window.dispatchEvent(new CustomEvent('sinch-inline-alert-close-click'))
   }
   onCloseFocus() {
-    window.dispatchEvent(new CustomEvent("sinch-inline-alert-close-focus"));
+    window.dispatchEvent(new CustomEvent('sinch-inline-alert-close-focus'))
   }
   onCloseBlur() {
-    window.dispatchEvent(new CustomEvent("sinch-inline-alert-close-blur"));
+    window.dispatchEvent(new CustomEvent('sinch-inline-alert-close-blur'))
   }
   onButtonClick() {
-    window.dispatchEvent(new CustomEvent("sinch-inline-alert-button-click"));
+    window.dispatchEvent(new CustomEvent('sinch-inline-alert-button-click'))
   }
   onButtonFocus() {
-    window.dispatchEvent(new CustomEvent("sinch-inline-alert-button-focus"));
+    window.dispatchEvent(new CustomEvent('sinch-inline-alert-button-focus'))
   }
   onButtonBlur() {
-    window.dispatchEvent(new CustomEvent("sinch-inline-alert-button-blur"));
+    window.dispatchEvent(new CustomEvent('sinch-inline-alert-button-blur'))
   }
 }

@@ -1,205 +1,153 @@
 <style>
-  :host {
-    display: block;
-    outline: none;
-  }
+:host {
+  display: block;
+  outline: none;
+}
 
-  #content {
-    width: fit-content;
-    box-sizing: border-box;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+#content {
+  width: fit-content;
+  box-sizing: border-box;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-  #month {
-    display: flex;
-    flex-direction: column;
-    row-gap: 8px;
-  }
+#month {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
 
-  .week {
-    display: flex;
-    flex-direction: row;
-    column-gap: 8px;
-  }
+.week {
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+}
 
-  .week.empty {
-    display: none;
-  }
+.week.empty {
+  display: none;
+}
 
-  .day {
-    all: initial;
-    font: var(--sinch-comp-date-picker-font-day);
-    width: 24px;
-    height: 24px;
-    line-height: 22px;
-    color: var(--sinch-comp-date-picker-day-color-default-text-initial);
-    background-color:
-      var(
-        --sinch-comp-date-picker-day-color-default-background-initial
-      );
-    border:
-      1px solid
-      var(--sinch-comp-date-picker-day-color-default-border-initial);
-    border-radius: var(--sinch-comp-date-picker-day-shape-radius);
-    text-align: center;
-    box-sizing: border-box;
-    user-select: none;
-    cursor: pointer;
-  }
+.day {
+  all: initial;
+  font: var(--sinch-comp-date-picker-font-day);
+  width: 24px;
+  height: 24px;
+  line-height: 22px;
+  color: var(--sinch-comp-date-picker-day-color-default-text-initial);
+  background-color: var(--sinch-comp-date-picker-day-color-default-background-initial);
+  border: 1px solid var(--sinch-comp-date-picker-day-color-default-border-initial);
+  border-radius: var(--sinch-comp-date-picker-day-shape-radius);
+  text-align: center;
+  box-sizing: border-box;
+  user-select: none;
+  cursor: pointer;
+}
 
-  .day:focus-visible {
-    outline:
-      1px solid
-      var(--sinch-comp-date-picker-day-color-default-outline-focus);
-    outline-offset: 1px;
-  }
+.day:focus-visible {
+  outline: 1px solid var(--sinch-comp-date-picker-day-color-default-outline-focus);
+  outline-offset: 1px;
+}
 
-  .day:disabled {
-    cursor: initial;
-    color: var(--sinch-comp-date-picker-day-color-disabled-text-initial);
-  }
+.day:disabled {
+  cursor: initial;
+  color: var(--sinch-comp-date-picker-day-color-disabled-text-initial);
+}
 
-  .day:enabled:hover {
-    background-color:
-      var(
-        --sinch-comp-date-picker-day-color-default-background-hover
-      );
-  }
+.day:enabled:hover {
+  background-color: var(--sinch-comp-date-picker-day-color-default-background-hover);
+}
 
-  .day:enabled.range {
-    background-color:
-      var(
-        --sinch-comp-date-picker-day-color-default-range-background
-      );
-  }
+.day:enabled.range {
+  background-color: var(--sinch-comp-date-picker-day-color-default-range-background);
+}
 
-  .day:enabled.selected {
-    color: var(--sinch-comp-date-picker-day-color-checked-text-initial);
-    background-color:
-      var(
-        --sinch-comp-date-picker-day-color-checked-background-initial
-      );
-    border-color:
-      var(
-        --sinch-comp-date-picker-day-color-checked-border-initial
-      );
-  }
+.day:enabled.selected {
+  color: var(--sinch-comp-date-picker-day-color-checked-text-initial);
+  background-color: var(--sinch-comp-date-picker-day-color-checked-background-initial);
+  border-color: var(--sinch-comp-date-picker-day-color-checked-border-initial);
+}
 
-  .day.today {
-    font: var(--sinch-comp-date-picker-font-today);
-    color: var(--sinch-comp-date-picker-today-color-default-text-initial);
-    background-color:
-      var(
-        --sinch-comp-date-picker-today-color-default-background-initial
-      );
-    border-color:
-      var(
-        --sinch-comp-date-picker-today-color-default-border-initial
-      );
-  }
+.day.today {
+  font: var(--sinch-comp-date-picker-font-today);
+  color: var(--sinch-comp-date-picker-today-color-default-text-initial);
+  background-color: var(--sinch-comp-date-picker-today-color-default-background-initial);
+  border-color: var(--sinch-comp-date-picker-today-color-default-border-initial);
+}
 
-  .day.today:hover {
-    background-color:
-      var(
-        --sinch-comp-date-picker-today-color-default-background-hover
-      );
-  }
+.day.today:hover {
+  background-color: var(--sinch-comp-date-picker-today-color-default-background-hover);
+}
 
-  .day.today:disabled {
-    color: var(--sinch-comp-date-picker-today-color-disabled-text-initial);
-    border-color:
-      var(
-        --sinch-comp-date-picker-today-color-disabled-border-initial
-      );
-  }
+.day.today:disabled {
+  color: var(--sinch-comp-date-picker-today-color-disabled-text-initial);
+  border-color: var(--sinch-comp-date-picker-today-color-disabled-border-initial);
+}
 
-  .day.today.selected {
-    color: var(--sinch-comp-date-picker-today-color-checked-text-initial);
-    background-color:
-      var(
-        --sinch-comp-date-picker-today-color-checked-background-initial
-      );
-    border-color:
-      var(
-        --sinch-comp-date-picker-today-color-checked-border-initial
-      );
-  }
+.day.today.selected {
+  color: var(--sinch-comp-date-picker-today-color-checked-text-initial);
+  background-color: var(--sinch-comp-date-picker-today-color-checked-background-initial);
+  border-color: var(--sinch-comp-date-picker-today-color-checked-border-initial);
+}
 
-  #week-day-names {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    height: 24px;
-  }
+#week-day-names {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  height: 24px;
+}
 
-  .week-day-name {
-    font: var(--sinch-comp-date-picker-font-weekday);
-    color: var(--sinch-comp-date-picker-weekday-color-default-text-initial);
-    text-align: center;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-    user-select: none;
-    text-transform: uppercase;
-  }
+.week-day-name {
+  font: var(--sinch-comp-date-picker-font-weekday);
+  color: var(--sinch-comp-date-picker-weekday-color-default-text-initial);
+  text-align: center;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  user-select: none;
+  text-transform: uppercase;
+}
 
-  #content-header {
-    display: flex;
-    flex-direction: row;
-    height: 32px;
-    align-items: center;
-  }
+#content-header {
+  display: flex;
+  flex-direction: row;
+  height: 32px;
+  align-items: center;
+}
 
-  #date {
-    flex: 1;
-    text-align: center;
-    text-transform: capitalize;
+#date {
+  flex: 1;
+  text-align: center;
+  text-transform: capitalize;
 
-    --sinch-com-text-font: var(--sinch-comp-date-picker-font-header);
-    --sinch-global-color-text:
-      var(
-        --sinch-comp-date-picker-header-color-default-text-initial
-      );
-  }
+  --sinch-com-text-font: var(--sinch-comp-date-picker-font-header);
+  --sinch-global-color-text: var(--sinch-comp-date-picker-header-color-default-text-initial);
+}
 
-  #prev-year {
-    margin-left: -4px;
-  }
+#prev-year {
+  margin-left: -4px;
+}
 
-  #next-year {
-    margin-right: -4px;
-  }
+#next-year {
+  margin-right: -4px;
+}
 </style>
 
 <div id="content">
   <div id="content-header">
     <sinch-button id="prev-year" size="s">
-      <sinch-icon name="fa-angles-left"
-        id="icon-prev-year"
-        slot="icon"
-      ></sinch-icon>
+      <sinch-icon id="icon-prev-year" slot="icon" name="keyboard_double_arrow_left"></sinch-icon>
     </sinch-button>
     <sinch-button id="prev-month" size="s">
-      <sinch-icon name="fa-angle-left"
-        id="icon-prev-month"
-        slot="icon"
-      ></sinch-icon>
+      <sinch-icon id="icon-prev-month" slot="icon" name="keyboard_arrow_left"></sinch-icon>
     </sinch-button>
     <sinch-text id="date" type="m" emphasized aria-live="polite"></sinch-text>
     <sinch-button id="next-month" size="s">
-      <sinch-icon name="fa-angle-right"
-        id="icon-next-month"
-        slot="icon"
-      ></sinch-icon>
+      <sinch-icon id="icon-next-month" slot="icon" name="keyboard_arrow_right"></sinch-icon>
     </sinch-button>
     <sinch-button id="next-year" size="s">
-      <sinch-icon name="fa-angles-right"
-        id="icon-next-year"
-        slot="icon"
-      ></sinch-icon>
+      <sinch-icon id="icon-next-year" slot="icon" name="keyboard_double_arrow_right"></sinch-icon>
     </sinch-button>
   </div>
   <div id="week-day-names">

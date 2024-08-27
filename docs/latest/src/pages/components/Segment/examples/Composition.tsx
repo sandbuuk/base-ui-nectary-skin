@@ -5,7 +5,7 @@ import '@nectary/components/segment-collapse'
 import '@nectary/components/tag'
 import '@nectary/components/button'
 import '@nectary/components/text'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/apps'
 import '@nectary/assets/icons-branded/chatbot'
 
 const previewStyle: CSSProperties = {
@@ -40,7 +40,7 @@ export const CompositionExample: FC = () => {
       </div>
       <sinch-tag slot="info" text="Label"/>
       <sinch-button slot="info" aria-label="Options">
-        <sinch-icon name="fa-grid" slot="icon"/>
+        <sinch-icon-apps slot="icon"/>
       </sinch-button>
       <sinch-text slot="content" type="m">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</sinch-text>
       <sinch-button slot="action" text="Cancel" type="secondary" aria-label="Cancel"/>

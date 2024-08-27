@@ -2,7 +2,8 @@ import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/input'
 import '@nectary/components/button'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/sentiment-satisfied'
+import '@nectary/assets/icons/search'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -25,13 +26,13 @@ export const SizeExample: FC = () => {
         value={state}
         on-change={(e) => setState(e.detail)}
       >
-        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+        <sinch-icon-search slot="icon"/>
         <sinch-button
           slot="right"
           aria-label="Click"
-          on-click={() => { }}
+          on-click={() => {}}
         >
-          <sinch-icon name="fa-face-smile" slot="icon"/>
+          <sinch-icon-sentiment-satisfied slot="icon"/>
         </sinch-button>
       </sinch-input>
       <sinch-input
@@ -42,13 +43,13 @@ export const SizeExample: FC = () => {
         value={state}
         on-change={(e) => setState(e.detail)}
       >
-        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+        <sinch-icon-search slot="icon"/>
         <sinch-button
           slot="right"
           aria-label="Click"
-          on-click={() => { }}
+          on-click={() => {}}
         >
-          <sinch-icon name="fa-face-smile" slot="icon"/>
+          <sinch-icon-sentiment-satisfied slot="icon"/>
         </sinch-button>
       </sinch-input>
       <sinch-input
@@ -59,13 +60,13 @@ export const SizeExample: FC = () => {
         value={state}
         on-change={(e) => setState(e.detail)}
       >
-        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+        <sinch-icon-search slot="icon"/>
         <sinch-button
           slot="right"
           aria-label="Click"
-          on-click={() => { }}
+          on-click={() => {}}
         >
-          <sinch-icon name="fa-face-smile" slot="icon"/>
+          <sinch-icon-sentiment-satisfied slot="icon"/>
         </sinch-button>
       </sinch-input>
     </div>

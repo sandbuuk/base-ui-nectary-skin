@@ -1,9 +1,26 @@
 <template>
-  <sinch-input :type="type" :size="size" :placeholder="placeholderText" :mask="mask" :disabled="isDisabled"
-    :invalid="isInvalid" :value="value" @--copy="onCopy" @--cut="onCut" @--paste="onPaste" @--change="onChange"
-    @--focus="onFocus" @--blur="onBlur">
-    <sinch-icon name="fa-magnifying-glass" v-if="hasIcon" slot="icon"></sinch-icon>
-    <sinch-select-button v-if="hasLeft" slot="left" text="+0" placeholder="" aria-label="">
+  <sinch-input
+    :type="type"
+    :size="size"
+    :placeholder="placeholderText"
+    :mask="mask"
+    :disabled="isDisabled"
+    :invalid="isInvalid"
+    :value="value"
+    @--copy="onCopy"
+    @--cut="onCut"
+    @--paste="onPaste"
+    @--change="onChange"
+    @--focus="onFocus"
+    @--blur="onBlur">
+    <sinch-icon-search v-if="hasIcon" slot="icon"></sinch-icon-search>
+    <sinch-select-button
+      v-if="hasLeft"
+      slot="left"
+      text="+0"
+      placeholder=""
+      aria-label=""
+    >
     </sinch-select-button>
     <sinch-tag v-if="hasRight" slot="right" text="tag"></sinch-tag>
     <sinch-chip v-if="hasRight" slot="right" text="chip" aria-label=""></sinch-chip>
@@ -15,7 +32,7 @@ import '@nectary/components/input'
 import '@nectary/components/select-button'
 import '@nectary/components/tag'
 import '@nectary/components/chip'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/search'
 
 export default {
   methods: {

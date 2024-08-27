@@ -1,14 +1,10 @@
-<sinch-file-status [attr.type]="type" [attr.filename]="filename">
-  <sinch-progress
-    *ngIf="hasProgress"
-    slot="content"
-    value="73"
-    detailed
-  ></sinch-progress>
-  <sinch-text *ngIf="hasDescription" slot="content" type="m"
-    >The file is too large, try a file size less than 20 MB</sinch-text
-  >
+<sinch-file-status
+  [attr.type]="type"
+  [attr.filename]="filename"
+>
+  <sinch-progress *ngIf="hasProgress" slot="content" value="73" detailed></sinch-progress>
+  <sinch-text *ngIf="hasDescription" slot="content" type="m">The file is too large, try a file size less than 20 MB</sinch-text>
   <sinch-button slot="action" aria-label="Close" size="s">
-    <sinch-icon name="fa-xmark" slot="icon"></sinch-icon>
+    <sinch-icon-close slot="icon"></sinch-icon-close>
   </sinch-button>
 </sinch-file-status>

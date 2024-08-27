@@ -2,8 +2,8 @@ import { useRef, useState } from 'react'
 import type { TSinchRichTextareaElement } from '@nectary/components/rich-textarea/types'
 import type { FC } from 'react'
 import '@nectary/components/rich-textarea'
-import '@nectary/components/button'
 import '@nectary/components/icon'
+import '@nectary/components/button'
 
 export const SlotsExample: FC = () => {
   const ref = useRef<TSinchRichTextareaElement>(null)
@@ -27,43 +27,42 @@ export const SlotsExample: FC = () => {
           size="s"
           aria-label="Format italic"
         >
-          <sinch-icon name="fa-italic" slot="icon"/>
+          <sinch-icon slot="icon" name="format_italic"/>
         </sinch-button>
         <sinch-button
           slot="top"
           size="s"
           aria-label="Format bold"
         >
-          <sinch-icon name="fa-bold" slot="icon"/>
+          <sinch-icon slot="icon" name="format_bold"/>
         </sinch-button>
         <sinch-button
           slot="top"
           size="s"
           aria-label="Format strikethrough"
         >
-          <sinch-icon name="fa-strikethrough" slot="icon"/>
+          <sinch-icon slot="icon" name="format_strikethrough"/>
         </sinch-button>
         <sinch-button
           slot="top"
           size="s"
           aria-label="Format code tag"
         >
-          <sinch-icon name="fa-code" slot="icon"/>
-
+          <sinch-icon slot="icon" name="code"/>
         </sinch-button>
         <sinch-button
           slot="bottom"
           size="s"
           aria-label="Toggle toolbar"
         >
-          <sinch-icon name="fa-text" slot="icon"/>
+          <sinch-icon slot="icon" name="text_format"/>
         </sinch-button>
         <sinch-button
           slot="bottom"
           size="s"
           aria-label="Open Emoji Picker"
         >
-          <sinch-icon name="fa-face-smile" slot="icon"/>
+          <sinch-icon slot="icon" name="sentiment_satisfied"/>
         </sinch-button>
       </sinch-rich-textarea>
     </div>

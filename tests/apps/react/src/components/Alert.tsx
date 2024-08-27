@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/alert'
 import '@nectary/components/button'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/close'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
@@ -76,7 +76,7 @@ export const Alert: FC = () => {
           on-focus={onCloseFocus}
           on-blur={onCloseBlur}
         >
-          <sinch-icon name="fa-xmark" slot="icon"/>
+          <sinch-icon-close slot="icon"/>
         </sinch-button>
       )}
     </sinch-alert>

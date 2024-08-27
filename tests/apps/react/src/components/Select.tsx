@@ -7,7 +7,8 @@ import '@nectary/components/popover'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
 import '@nectary/components/tag'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/search'
 
 type TMenuValue = {
   text: string,
@@ -101,10 +102,10 @@ export const Select: FC = () => {
             </>
           )}
           {hasIcon && (
-            <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+            <sinch-icon-search slot="icon"/>
           )}
           {options[value]?.icon === '1' && (
-            <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+            <sinch-icon-open-in-new slot="icon"/>
           )}
         </sinch-select-button>
       </sinch-field>
@@ -125,7 +126,7 @@ export const Select: FC = () => {
               aria-label={text}
             >
               {icon === '1' && (
-                <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+                <sinch-icon-open-in-new slot="icon"/>
               )}
             </sinch-select-menu-option>
           ))

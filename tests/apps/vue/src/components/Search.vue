@@ -3,9 +3,9 @@
     <sinch-field slot="target" label="Label">
       <sinch-input slot="input" ref="input" aria-label="Search input" placeholder="Search input" :value="value"
         @--change="onChange" @--focus="onFocus" @--blur="onBlur">
-        <sinch-icon name="magnifying-glass" slot="icon"></sinch-icon>
+        <sinch-icon slot="icon" name="search"></sinch-icon>
         <sinch-button v-if="isClearActive" slot="right" @--click="onClearClick">
-          <sinch-icon name="fa-xmark" slot="icon"></sinch-icon>
+          <sinch-icon slot="icon" name="close"></sinch-icon>
         </sinch-button>
       </sinch-input>
     </sinch-field>

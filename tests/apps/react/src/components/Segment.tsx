@@ -6,11 +6,11 @@ import '@nectary/components/segment-collapse'
 import '@nectary/components/field'
 import '@nectary/components/input'
 import '@nectary/components/tag'
+import '@nectary/assets/icons/apps'
 import '@nectary/assets/icons-branded/chatbot'
 import '@nectary/components/button'
 import '@nectary/components/checkbox'
 import '@nectary/components/text'
-import '@nectary/components/icon'
 
 export const Segment: FC = () => {
   const [search] = useSearchParams()
@@ -64,10 +64,10 @@ export const Segment: FC = () => {
         <sinch-button
           size="s"
           aria-label="Icon Button"
-          onClick={() => { }}
+          onClick={() => {}}
           slot="info"
         >
-          <sinch-icon name="fa-grid" slot="icon"/>
+          <sinch-icon-apps slot="icon"/>
         </sinch-button>
       )}
       {hasPreview && (

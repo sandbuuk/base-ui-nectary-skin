@@ -3,7 +3,10 @@ import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/segmented-icon-control'
 import '@nectary/components/segmented-icon-control-option'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/format-align-center'
+import '@nectary/assets/icons/format-align-justify'
+import '@nectary/assets/icons/format-align-right'
+import '@nectary/assets/icons/format-align-left'
 
 export const SegmentedIconControl: FC = () => {
   const [search] = useSearchParams()
@@ -33,18 +36,18 @@ export const SegmentedIconControl: FC = () => {
         on-focus={onFocus}
         on-blur={onBlur}
       >
-        <sinch-icon name="fa-align-right" slot="icon"/>
+        <sinch-icon-format-align-right slot="icon"/>
       </sinch-segmented-icon-control-option>
       {!isSingleOption && (
         <>
           <sinch-segmented-icon-control-option disabled value="2" aria-label="2">
-            <sinch-icon name="fa-align-center" slot="icon"/>
+            <sinch-icon-format-align-center slot="icon"/>
           </sinch-segmented-icon-control-option>
           <sinch-segmented-icon-control-option value="3" aria-label="3">
-            <sinch-icon name="fa-align-left" slot="icon"/>
+            <sinch-icon-format-align-left slot="icon"/>
           </sinch-segmented-icon-control-option>
           <sinch-segmented-icon-control-option value="4" aria-label="4">
-            <sinch-icon name="fa-align-justify" slot="icon"/>
+            <sinch-icon-format-align-justify slot="icon"/>
           </sinch-segmented-icon-control-option>
         </>
       )}

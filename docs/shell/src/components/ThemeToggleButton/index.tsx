@@ -1,9 +1,9 @@
 
+import '@nectary/components/icon'
 import '@nectary/components/popover'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
 import '@nectary/components/button'
-import '@nectary/components/icon'
 import './styles.css'
 import { useEffect, useState } from 'react'
 import type { TThemeName } from 'docs-common'
@@ -47,7 +47,7 @@ export const ThemeToggleButton = () => {
         on-click={onOpen}
         disabled={isDisabled}
       >
-        <sinch-icon name="fa-moon-cloud" slot="icon"/>
+        <sinch-icon slot="icon" name="nights_stay"/>
       </sinch-button>
       <sinch-select-menu
         slot="content"

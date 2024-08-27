@@ -6,10 +6,10 @@ import '@nectary/components/action-menu-option'
 import '@nectary/components/popover'
 import '@nectary/components/field'
 import '@nectary/components/input'
+import '@nectary/components/icon'
 import '@nectary/components/text'
 import '@nectary/components/spinner'
 import '@nectary/components/button'
-import '@nectary/components/icon'
 
 const inputWidth: CSSProperties = {
   width: 300,
@@ -21,7 +21,7 @@ const noResultsStyle: CSSProperties = {
   height: 100,
 }
 
-const NoResults: FC<{ slot: string }> = ({ slot }) => (
+const NoResults: FC<{slot: string}> = ({ slot }) => (
   <div slot={slot} style={noResultsStyle}>
     <sinch-text type="s">No Results</sinch-text>
   </div>
@@ -106,10 +106,10 @@ export const SearchExample: FC = () => {
           value={inputValue}
           on-change={onInputChange}
         >
-          <sinch-icon name="magnifying-glass" slot="icon"/>
+          <sinch-icon slot="icon" name="search"/>
           {!isLoading && isClearButtonActive && (
             <sinch-button slot="right" on-click={onClearClick} aria-label="Clear search">
-              <sinch-icon name="fa-xmark" slot="icon"/>
+              <sinch-icon slot="icon" name="close"/>
             </sinch-button>
           )}
           {isLoading && <sinch-spinner slot="right"/>}

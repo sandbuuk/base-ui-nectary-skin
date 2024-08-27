@@ -1,4 +1,4 @@
-import type { ClassAttributes, DOMAttributes, HTMLAttributes } from 'react'
+import type { ClassAttributes, DOMAttributes, HTMLAttributes } from 'react';
 
 export type TSinchElementReact<TElement> =
   Pick<HTMLAttributes<HTMLElement>, 'id' | 'className' | 'style' | 'slot' | 'children'> &

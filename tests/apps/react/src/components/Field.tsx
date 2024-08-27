@@ -5,7 +5,7 @@ import '@nectary/components/input'
 import '@nectary/components/field'
 import '@nectary/components/help-tooltip'
 import '@nectary/components/tag'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/search'
 
 export const Field: FC = () => {
   const [search] = useSearchParams()
@@ -41,7 +41,7 @@ export const Field: FC = () => {
         on-change={onChange}
         aria-label="Input"
       >
-        <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+        <sinch-icon-search slot="icon"/>
         <sinch-tag slot="right" text="text"/>
       </sinch-input>
     </sinch-field>

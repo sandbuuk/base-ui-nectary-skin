@@ -4,7 +4,7 @@
       MB</sinch-text>
     <sinch-progress v-if="hasProgress" slot="content" value="73" detailed></sinch-progress>
     <sinch-button slot="action" size="s">
-      <sinch-icon name="fa-xmark" slot="icon"></sinch-icon>
+      <sinch-icon-close slot="icon"></sinch-icon-close>
     </sinch-button>
   </sinch-file-status>
 </template>
@@ -13,7 +13,7 @@
 import '@nectary/components/file-status'
 import '@nectary/components/text'
 import '@nectary/components/progress'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/close'
 
 export default {
   methods: {

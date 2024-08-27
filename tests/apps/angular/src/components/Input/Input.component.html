@@ -21,10 +21,7 @@
     placeholder=""
     aria-label=""
   ></sinch-select-button>
-  <sinch-icon name="fa-magnifying-glass"
-    *ngIf="hasIcon"
-    slot="icon"
-  ></sinch-icon>
+  <sinch-icon-search *ngIf="hasIcon" slot="icon"></sinch-icon-search>
   <sinch-tag *ngIf="hasRight" slot="right" text="tag"></sinch-tag>
   <sinch-chip *ngIf="hasRight" slot="right" text="chip"></sinch-chip>
 </sinch-input>

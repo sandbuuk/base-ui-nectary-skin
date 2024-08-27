@@ -1,10 +1,14 @@
 <template>
   <sinch-accordion :value="value" @--change="onChange" :multiple="isMultiple">
-    <sinch-accordion-item v-for="opt in options" :key="opt.value" :value="opt.value" :label="opt.label"
-      :disabled="opt.disabled" :status="opt.status" :optionaltext="opt.optional">
+    <sinch-accordion-item v-for="opt in options"
+      :key="opt.value"
+      :value="opt.value"
+      :label="opt.label"
+      :disabled="opt.disabled"
+      :status="opt.status"
+      :optionaltext="opt.optional">
       <sinch-text v-if="opt.content != null" slot="content" type="m">{{opt.content}}</sinch-text>
-      <sinch-icon name="fa-arrow-up-right-from-square" v-if="opt.icon === true"
-        slot="icon"></sinch-icon>
+      <sinch-icon-open-in-new v-if="opt.icon === true" slot="icon"></sinch-icon-open-in-new>
     </sinch-accordion-item>
   </sinch-accordion>
 </template>
@@ -13,7 +17,7 @@
 import '@nectary/components/text'
 import '@nectary/components/accordion'
 import '@nectary/components/accordion-item'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/open-in-new'
 
 const items = [{
   value: '1',
@@ -78,3 +82,4 @@ export default {
   }
 }
 </script>
+

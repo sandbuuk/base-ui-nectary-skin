@@ -62,9 +62,9 @@ export const FilePickerExample: FC = () => {
                 slot="action"
                 aria-label="Close"
                 size="s"
-                on-click={() => { }}
+                on-click={() => {}}
               >
-                <sinch-icon name="fa-xmark" slot="icon"/>
+                <sinch-icon slot="icon" name="close"/>
               </sinch-button>
             </sinch-file-status>
           ))

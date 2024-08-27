@@ -1,28 +1,55 @@
 <template>
   <sinch-button-group :type="type" :size="size">
-    <sinch-button-group-item :text="text" :disabled="isDisabled" :toggled="isToggled" :aria-label="Button"
-      @--click="onClick" @--focus="onFocus" @--blur="onBlur">
-      <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
-      <sinch-icon name="fa-arrow-up-right-from-square" v-if="hasIcon" slot="icon"></sinch-icon>
-      <sinch-icon name="fa-angle-down" v-if="hasRightIcon" slot="right-icon"></sinch-icon>
-    </sinch-button-group-item>
-    <sinch-button-group-item :text="text" :aria-label="Button">
-      <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
-      <sinch-icon name="fa-arrow-up-right-from-square" v-if="hasIcon" slot="icon"></sinch-icon>
-      <sinch-icon name="fa-angle-down" v-if="hasRightIcon" slot="right-icon"></sinch-icon>
-    </sinch-button-group-item>
-    <sinch-button-group-item :text="text" :aria-label="Button">
-      <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
-      <sinch-icon name="fa-arrow-up-right-from-square" v-if="hasIcon" slot="icon"></sinch-icon>
-      <sinch-icon name="fa-angle-down" v-if="hasRightIcon" slot="right-icon"></sinch-icon></sinch-button-group-item>
-  </sinch-button-group>
+  <sinch-button-group-item
+    :text="text"
+    :disabled="isDisabled"
+    :toggled="isToggled"
+    :aria-label="Button"
+    @--click="onClick"
+    @--focus="onFocus"
+    @--blur="onBlur"
+  >
+    <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
+    <sinch-icon-open-in-new
+      v-if="hasIcon"
+      slot="icon"
+    ></sinch-icon-open-in-new>
+    <sinch-icon-expand-more
+      v-if="hasRightIcon"
+      slot="right-icon"
+    ></sinch-icon-expand-more>
+  </sinch-button-group-item>
+  <sinch-button-group-item :text="text" :aria-label="Button">
+    <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
+    <sinch-icon-open-in-new
+      v-if="hasIcon"
+      slot="icon"
+    ></sinch-icon-open-in-new>
+    <sinch-icon-expand-more
+      v-if="hasRightIcon"
+      slot="right-icon"
+    ></sinch-icon-expand-more>
+  </sinch-button-group-item>
+  <sinch-button-group-item :text="text" :aria-label="Button">
+    <sinch-spinner v-if="hasSpinner" slot="icon"></sinch-spinner>
+    <sinch-icon-open-in-new
+      v-if="hasIcon"
+      slot="icon"
+    ></sinch-icon-open-in-new>
+    <sinch-icon-expand-more
+      v-if="hasRightIcon"
+      slot="right-icon"
+    ></sinch-icon-expand-more
+  ></sinch-button-group-item>
+</sinch-button-group>
 
 </template>
 
 <script>
 import '@nectary/components/button-group'
 import '@nectary/components/button-group-item'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/open-in-new'
+import '@nectary/assets/icons/expand-more'
 import '@nectary/components/spinner'
 
 export default {
