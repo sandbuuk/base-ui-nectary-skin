@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom'
 import type { FC } from 'react'
 import '@nectary/components/badge'
 import '@nectary/components/button'
-import '@nectary/assets/icons/notifications'
+import '@nectary/components/icon'
 
 export const Badge: FC = () => {
   const [search] = useSearchParams()
@@ -20,7 +20,7 @@ export const Badge: FC = () => {
         mode={mode}
         hidden={isHidden}
       >
-        <sinch-icon-notifications/>
+        <sinch-icon name="fa-bell"/>
       </sinch-badge>
     </sinch-button>
   )

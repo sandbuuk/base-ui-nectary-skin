@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { SyntaxHighlighter } from '../SyntaxHighlighter'
 import type { FC } from 'react'
 import '@nectary/components/button'
-import '@nectary/assets/icons/content-copy'
-import '@nectary/assets/icons/keyboard-arrow-down'
+import '@nectary/components/icon'
 import './styles.css'
 
 export type TCode = {
@@ -21,7 +20,7 @@ export const Code: FC<TCode> = ({ src }) => {
           size="s"
           on-click={() => navigator.clipboard.writeText(src).catch(console.error)}
         >
-          <sinch-icon-content-copy slot="icon"/>
+          <sinch-icon name="fa-copy" slot="icon"/>
         </sinch-button>
         <sinch-button
           aria-label="Expand"
@@ -30,7 +29,7 @@ export const Code: FC<TCode> = ({ src }) => {
             setOpen((v) => !v)
           }}
         >
-          <sinch-icon-keyboard-arrow-down slot="icon" class="code-toolbar-dropdown-icon"/>
+          <sinch-icon name="fa-chevron-down" slot="icon" class="code-toolbar-dropdown-icon"/>
         </sinch-button>
       </div>
       <SyntaxHighlighter language="tsx" src={src} shouldShowLineNumbers/>

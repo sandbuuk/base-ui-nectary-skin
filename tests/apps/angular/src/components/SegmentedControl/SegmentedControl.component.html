@@ -1,18 +1,32 @@
 <ng-template #singleTemplate>
   <sinch-segmented-control-option value="1" text="Option value 1">
-    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
+    <sinch-icon name="fa-arrow-up-right-from-square"
+      slot="icon"
+    ></sinch-icon>
   </sinch-segmented-control-option>
 </ng-template>
 <ng-template #multipleTemplate>
   <sinch-segmented-control-option value="1" text="Option value 1">
-    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
+    <sinch-icon name="fa-arrow-up-right-from-square"
+      slot="icon"
+    ></sinch-icon>
   </sinch-segmented-control-option>
   <sinch-segmented-control-option value="2" text="Option value 2" disabled>
-    <sinch-icon-open-in-new slot="icon"></sinch-icon-open-in-new>
+    <sinch-icon name="fa-arrow-up-right-from-square"
+      slot="icon"
+    ></sinch-icon>
   </sinch-segmented-control-option>
-  <sinch-segmented-control-option value="3" text="Option value 3"></sinch-segmented-control-option>
-  <sinch-segmented-control-option value="4" text="Option value 4"></sinch-segmented-control-option>
+  <sinch-segmented-control-option
+    value="3"
+    text="Option value 3"
+  ></sinch-segmented-control-option>
+  <sinch-segmented-control-option
+    value="4"
+    text="Option value 4"
+  ></sinch-segmented-control-option>
 </ng-template>
 <sinch-segmented-control [value]="value" (-change)="onChange($event)">
-  <ng-container *ngIf="isSingleOption; then singleTemplate; else multipleTemplate"></ng-container>
+  <ng-container
+    *ngIf="isSingleOption; then singleTemplate; else multipleTemplate"
+  ></ng-container>
 </sinch-segmented-control>

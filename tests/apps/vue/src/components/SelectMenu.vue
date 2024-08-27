@@ -1,17 +1,8 @@
 <template>
-  <sinch-select-menu
-    :rows="rows"
-    :multiple="isMultiple"
-    :value="value"
-    @--change="onChange">
-    <sinch-select-menu-option
-      v-for="[key, value] in items"
-      :key="key"
-      :value="key"
-      :text="value.text"
-      :disabled="value.isDisabled"
-    >
-      <sinch-icon-open-in-new v-if="value.icon === '1'" slot="icon"></sinch-icon-open-in-new>
+  <sinch-select-menu :rows="rows" :multiple="isMultiple" :value="value" @--change="onChange">
+    <sinch-select-menu-option v-for="[key, value] in items" :key="key" :value="key" :text="value.text"
+      :disabled="value.isDisabled">
+      <sinch-icon name="fa-arrow-up-right-from-square" v-if="value.icon === '1'" slot="icon"></sinch-icon>
     </sinch-select-menu-option>
   </sinch-select-menu>
 </template>
@@ -19,7 +10,7 @@
 <script>
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
-import '@nectary/assets/icons/open-in-new'
+import '@nectary/components/icon'
 
 const options = {
   1: { text: 'Option 1 value long long long', icon: '1' },

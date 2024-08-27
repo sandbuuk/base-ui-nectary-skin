@@ -5,13 +5,13 @@ import type {
 } from '@nectary/components/rich-textarea/types'
 import type { FC } from 'react'
 import '@nectary/components/rich-textarea'
-import '@nectary/components/icon'
 import '@nectary/components/popover'
 import '@nectary/components/emoji-picker'
 import '@nectary/components/field'
 import '@nectary/components/input'
 import '@nectary/components/button'
 import '@nectary/components/dialog'
+import '@nectary/components/icon'
 
 const initialMd = `
 To set up the \`Product\`, read and accept 📝 the \`Product\` [terms & conditions](https://google.com).
@@ -183,7 +183,7 @@ export const RichTextareaExample: FC = () => {
               aria-label="Format italic"
               on-click={onFormatItalic}
             >
-              <sinch-icon slot="icon" name="format_italic"/>
+              <sinch-icon name="fa-italic" slot="icon"/>
             </sinch-button>
             <sinch-button
               slot="top"
@@ -192,7 +192,7 @@ export const RichTextareaExample: FC = () => {
               aria-label="Format bold"
               on-click={onFormatBold}
             >
-              <sinch-icon slot="icon" name="format_bold"/>
+              <sinch-icon name="fa-bold" slot="icon"/>
             </sinch-button>
             <sinch-button
               slot="top"
@@ -201,7 +201,7 @@ export const RichTextareaExample: FC = () => {
               aria-label="Format strikethrough"
               on-click={onFormatStrikethrough}
             >
-              <sinch-icon slot="icon" name="format_strikethrough"/>
+              <sinch-icon name="fa-strikethrough" slot="icon"/>
             </sinch-button>
             <sinch-button
               slot="top"
@@ -210,7 +210,7 @@ export const RichTextareaExample: FC = () => {
               aria-label="Format code tag"
               on-click={onFormatCodeTag}
             >
-              <sinch-icon slot="icon" name="code"/>
+              <sinch-icon name="fa-code" slot="icon"/>
             </sinch-button>
             <sinch-button
               slot="top"
@@ -219,7 +219,7 @@ export const RichTextareaExample: FC = () => {
               aria-label="Insert link"
               on-click={onLinkOpen}
             >
-              <sinch-icon slot="icon" name="link"/>
+              <sinch-icon name="fa-link" slot="icon"/>
             </sinch-button>
             <sinch-button
               slot="top"
@@ -228,7 +228,7 @@ export const RichTextareaExample: FC = () => {
               aria-label="Format list bulleted"
               on-click={onFormatListBulleted}
             >
-              <sinch-icon slot="icon" name="format_list_bulleted"/>
+              <sinch-icon name="fa-list-ul" slot="icon"/>
             </sinch-button>
             <sinch-button
               slot="top"
@@ -237,7 +237,7 @@ export const RichTextareaExample: FC = () => {
               aria-label="Format list numbered"
               on-click={onFormatListNumbered}
             >
-              <sinch-icon slot="icon" name="format_list_numbered"/>
+              <sinch-icon name="fa-list-ol" slot="icon"/>
             </sinch-button>
           </>
         )}
@@ -248,7 +248,7 @@ export const RichTextareaExample: FC = () => {
           aria-label="Toggle toolbar"
           on-click={onToggleToolbar}
         >
-          <sinch-icon slot="icon" name="text_format"/>
+          <sinch-icon name="fa-text" slot="icon"/>
         </sinch-button>
         <sinch-popover
           slot="bottom"
@@ -264,7 +264,7 @@ export const RichTextareaExample: FC = () => {
             aria-label="Open Emoji Picker"
             on-click={onEmojiOpen}
           >
-            <sinch-icon slot="icon" name="sentiment_satisfied"/>
+            <sinch-icon name="fa-face-smile" slot="icon"/>
           </sinch-button>
           <sinch-emoji-picker
             slot="content"

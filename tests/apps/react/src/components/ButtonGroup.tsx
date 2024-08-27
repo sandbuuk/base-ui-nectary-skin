@@ -3,8 +3,7 @@ import type { FC } from 'react'
 import '@nectary/components/button-group'
 import '@nectary/components/button-group-item'
 import '@nectary/components/spinner'
-import '@nectary/assets/icons/open-in-new'
-import '@nectary/assets/icons/expand-more'
+import '@nectary/components/icon'
 
 export const ButtonGroup: FC = () => {
   const [search] = useSearchParams()
@@ -32,24 +31,24 @@ export const ButtonGroup: FC = () => {
         toggled={isToggled}
       >
         {hasSpinner && <sinch-spinner slot="icon"/>}
-        {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
-        {hasRightIcon && <sinch-icon-expand-more slot="right-icon"/>}
+        {hasIcon && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
+        {hasRightIcon && <sinch-icon name="fa-angle-down" slot="right-icon"/>}
       </sinch-button-group-item>
       <sinch-button-group-item
         aria-label="button-2"
         text={text}
       >
         {hasSpinner && <sinch-spinner slot="icon"/>}
-        {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
-        {hasRightIcon && <sinch-icon-expand-more slot="right-icon"/>}
+        {hasIcon && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
+        {hasRightIcon && <sinch-icon name="fa-angle-down" slot="right-icon"/>}
       </sinch-button-group-item>
       <sinch-button-group-item
         aria-label="button-3"
         text={text}
       >
         {hasSpinner && <sinch-spinner slot="icon"/>}
-        {hasIcon && <sinch-icon-open-in-new slot="icon"/>}
-        {hasRightIcon && <sinch-icon-expand-more slot="right-icon"/>}
+        {hasIcon && <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>}
+        {hasRightIcon && <sinch-icon name="fa-angle-down" slot="right-icon"/>}
       </sinch-button-group-item>
     </sinch-button-group>
   )

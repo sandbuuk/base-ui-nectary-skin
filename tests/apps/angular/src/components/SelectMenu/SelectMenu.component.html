@@ -2,13 +2,17 @@
   [attr.rows]="rows"
   [attr.multiple]="isMultiple"
   [value]="value"
-  (-change)="onChange($event)">
+  (-change)="onChange($event)"
+>
   <sinch-select-menu-option
     *ngFor="let opt of options | keyvalue"
     [value]="opt.key"
     [attr.text]="opt.value.text"
     [attr.disabled]="opt.value.isDisabled"
   >
-    <sinch-icon-open-in-new *ngIf="opt.value.icon === '1'" slot="icon"></sinch-icon-open-in-new>
+    <sinch-icon name="fa-arrow-up-right-from-square"
+      *ngIf="opt.value.icon === '1'"
+      slot="icon"
+    ></sinch-icon>
   </sinch-select-menu-option>
 </sinch-select-menu>

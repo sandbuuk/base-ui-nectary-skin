@@ -6,7 +6,7 @@ import '@nectary/components/input'
 import '@nectary/components/popover'
 import '@nectary/components/date-picker'
 import '@nectary/components/button'
-import '@nectary/assets/icons/calendar-today'
+import '@nectary/components/icon'
 
 const styles: CSSProperties = {
   width: 300,
@@ -64,7 +64,7 @@ export const RangeExample: FC = () => {
             aria-label="Open Date Picker"
             on-click={onOpen}
           >
-            <sinch-icon-calendar-today slot="icon"/>
+            <sinch-icon name="fa-calendar" slot="icon"/>
           </sinch-button>
         </sinch-input>
       </sinch-field>

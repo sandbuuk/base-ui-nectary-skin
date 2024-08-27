@@ -11,79 +11,90 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { statusValues } from './utils'
-import type { TSinchHorizontalStepperItemElement, TSinchHorizontalStepperItemReact, TSinchHorizontalStepperStatusType } from './types'
+import type {
+  TSinchHorizontalStepperItemElement,
+  TSinchHorizontalStepperItemReact,
+  TSinchHorizontalStepperStatusType,
+} from './types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-horizontal-stepper-item', class extends NectaryElement {
-  #$label: HTMLElement
-  #$description: HTMLElement
-  #$circleText: HTMLElement
+defineCustomElement(
+  'sinch-horizontal-stepper-item',
+  class extends NectaryElement {
+    #$label: HTMLElement
+    #$description: HTMLElement
+    #$circleText: HTMLElement
 
-  constructor() {
-    super()
+    constructor() {
+      super()
 
-    const shadowRoot = this.attachShadow()
+      const shadowRoot = this.attachShadow()
 
-    shadowRoot.appendChild(template.content.cloneNode(true))
+      shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.#$label = shadowRoot.querySelector('#label')!
-    this.#$description = shadowRoot.querySelector('#description')!
-    this.#$circleText = shadowRoot.querySelector('#circle-text')!
-  }
+      this.#$label = shadowRoot.querySelector('#label')!
+      this.#$description = shadowRoot.querySelector('#description')!
+      this.#$circleText = shadowRoot.querySelector('#circle-text')!
+    }
 
-  static get observedAttributes() {
-    return ['label', 'description', 'data-index']
-  }
+    static get observedAttributes() {
+      return ['label', 'description', 'data-index']
+    }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
-    switch (name) {
-      case 'label': {
-        updateAttribute(this.#$label, 'text', newVal)
+    attributeChangedCallback(
+      name: string,
+      oldVal: string | null,
+      newVal: string | null
+    ) {
+      switch (name) {
+        case 'label': {
+          updateAttribute(this.#$label, 'text', newVal)
 
-        break
-      }
+          break
+        }
 
-      case 'description': {
-        this.#$description.textContent = newVal
+        case 'description': {
+          this.#$description.textContent = newVal
 
-        break
-      }
+          break
+        }
 
-      case 'data-index': {
-        this.#$circleText.textContent = newVal
+        case 'data-index': {
+          this.#$circleText.textContent = newVal
 
-        break
+          break
+        }
       }
     }
-  }
 
-  set label(value: string) {
-    updateAttribute(this, 'label', value)
-  }
+    set label(value: string) {
+      updateAttribute(this, 'label', value)
+    }
 
-  get label(): string {
-    return getAttribute(this, 'label', '')
-  }
+    get label(): string {
+      return getAttribute(this, 'label', '')
+    }
 
-  set description(value: string) {
-    updateAttribute(this, 'description', value)
-  }
+    set description(value: string) {
+      updateAttribute(this, 'description', value)
+    }
 
-  get description(): string {
-    return getAttribute(this, 'description', '')
-  }
+    get description(): string {
+      return getAttribute(this, 'description', '')
+    }
 
-  get status() {
-    return getLiteralAttribute(this, statusValues, 'status', null)
-  }
+    get status() {
+      return getLiteralAttribute(this, statusValues, 'status', null)
+    }
 
-  set status(value: TSinchHorizontalStepperStatusType | null) {
-    updateLiteralAttribute(this, statusValues, 'status', value)
+    set status(value: TSinchHorizontalStepperStatusType | null) {
+      updateLiteralAttribute(this, statusValues, 'status', value)
+    }
   }
-})
+)
 
 declare global {
   namespace JSX {
