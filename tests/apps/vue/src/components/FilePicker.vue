@@ -1,7 +1,16 @@
 <template>
-  <sinch-file-picker :multiple="isMultiple" :accept="accept" @--change="onChange" @--invalid="onInvalid">
-    <sinch-button text="Choose files" type="secondary" aria-label="Choose files">
-      <sinch-icon name="fa-arrow-up-from-line" slot="left-icon"></sinch-icon>
+  <sinch-file-picker
+    :multiple="isMultiple"
+    :accept="accept"
+    @--change="onChange"
+    @--invalid="onInvalid"
+  >
+    <sinch-button
+      text="Choose files"
+      type="secondary"
+      aria-label="Choose files"
+    >
+      <sinch-icon-upload slot="left-icon"></sinch-icon-upload>
     </sinch-button>
   </sinch-file-picker>
 </template>
@@ -9,7 +18,7 @@
 <script>
 import '@nectary/components/file-picker'
 import '@nectary/components/button'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/upload'
 
 export default {
   methods: {
@@ -30,3 +39,4 @@ export default {
   }
 }
 </script>
+

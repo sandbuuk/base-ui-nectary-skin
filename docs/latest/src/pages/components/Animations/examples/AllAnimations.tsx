@@ -58,9 +58,9 @@ export const AllAnimationsExample: FC = () => {
         on-change={onSearchChange}
         aria-label="Search"
       >
-        <sinch-icon name="magnifying-glass" slot="icon" />
+        <sinch-icon slot="icon" name="search"/>
         <sinch-button slot="right" on-click={onClearSearch} aria-label="Clear search">
-          <sinch-icon name="fa-xmark" slot="icon" />
+          <sinch-icon slot="icon" name="close"/>
         </sinch-button>
       </sinch-input> */}
       <div style={tableStyle}>

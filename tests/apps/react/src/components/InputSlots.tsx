@@ -7,7 +7,8 @@ import '@nectary/components/spinner'
 import '@nectary/components/select-button'
 import '@nectary/components/button'
 import '@nectary/components/toggle'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/search'
+import '@nectary/assets/icons/open-in-new'
 
 export const InputSlots: FC = () => {
   const [search] = useSearchParams()
@@ -32,7 +33,7 @@ export const InputSlots: FC = () => {
           size={sizeValue}
           on-change={onChange}
         >
-          <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+          <sinch-icon-search slot="icon"/>
           <sinch-input
             style={{ width: '200px' }}
             slot="left"
@@ -40,7 +41,7 @@ export const InputSlots: FC = () => {
             value={value}
             on-change={onChange}
           >
-            <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+            <sinch-icon-search slot="icon"/>
             <sinch-input
               style={{ width: '75px' }}
               slot="left"
@@ -48,13 +49,13 @@ export const InputSlots: FC = () => {
               value={value}
               on-change={onChange}
             >
-              <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+              <sinch-icon-search slot="icon"/>
               <sinch-button slot="right" aria-label="button">
-                <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+                <sinch-icon-open-in-new slot="icon"/>
               </sinch-button>
             </sinch-input>
             <sinch-button slot="right" aria-label="button">
-              <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+              <sinch-icon-open-in-new slot="icon"/>
             </sinch-button>
           </sinch-input>
           <sinch-button slot="right" aria-label="button">
@@ -63,7 +64,7 @@ export const InputSlots: FC = () => {
 
         </sinch-input>
         <sinch-button type="primary" size={sizeValue} aria-label="button">
-          <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+          <sinch-icon-open-in-new slot="icon"/>
         </sinch-button>
       </div>
 
@@ -105,12 +106,12 @@ export const InputSlots: FC = () => {
             style={{ width: '150px' }}
             slot="left"
             aria-label="Input"
-            on-click={() => { }}
+            on-click={() => {}}
             placeholder=""
             text=""
           >
             <sinch-button type="primary" slot="left" aria-label="button">
-              <sinch-icon name="fa-arrow-up-right-from-square" slot="icon"/>
+              <sinch-icon-open-in-new slot="icon"/>
             </sinch-button>
             <sinch-spinner slot="icon"/>
           </sinch-select-button>

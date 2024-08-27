@@ -1,12 +1,27 @@
 <template>
-  <sinch-popover :open="isOpen" @--close="onClose" modal orientation="bottom-right">
-    <sinch-button slot="target" type="cta-primary" text="Open actions" aria-label="Open actions" @--focus="onFocus"
-      @--blur="onBlur" @--click="onOpen"></sinch-button>
+  <sinch-popover
+    :open="isOpen"
+    @--close="onClose"
+    modal
+    orientation="bottom-right">
+    <sinch-button
+      slot="target"
+      type="cta-primary"
+      text="Open actions"
+      aria-label="Open actions"
+      @--focus="onFocus"
+      @--blur="onBlur"
+      @--click="onOpen"
+    ></sinch-button>
     <sinch-action-menu :rows="rows" slot="content">
-      <sinch-action-menu-option v-for="(value, key) in options" :key="key" :value="key" :text="value.text"
-        :disabled="value.isDisabled" @--click="onClick(key)">
-        <sinch-icon name="fa-arrow-up-right-from-square" v-if="value.icon === '1'"
-          slot="icon"></sinch-icon>
+      <sinch-action-menu-option
+        v-for="(value, key) in options"
+        :key="key"
+        :value="key"
+        :text="value.text"
+        :disabled="value.isDisabled"
+        @--click="onClick(key)">
+        <sinch-icon-open-in-new v-if="value.icon === '1'" slot="icon"></sinch-icon-open-in-new>
       </sinch-action-menu-option>
     </sinch-action-menu>
   </sinch-popover>
@@ -17,7 +32,7 @@ import '@nectary/components/button'
 import '@nectary/components/popover'
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/open-in-new'
 
 export default {
   methods: {
@@ -59,3 +74,4 @@ export default {
   }
 }
 </script>
+

@@ -6,11 +6,11 @@ import type { CSSProperties, FC } from 'react'
 import '@nectary/components/button'
 import '@nectary/components/toast-manager'
 import '@nectary/components/toast'
+import '@nectary/components/icon'
 import '@nectary/components/popover'
 import '@nectary/components/select-button'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
-import '@nectary/components/icon'
 
 const types: TSinchToastType[] = ['info', 'warn', 'success', 'error']
 const text = [
@@ -110,7 +110,7 @@ export const OriginExample: FC = () => {
                 size="s"
                 on-click={onToastClose(id)}
               >
-                <sinch-icon name="fa-xmark" slot="icon"/>
+                <sinch-icon slot="icon" name="close"/>
               </sinch-button>
             )}
           </sinch-toast>

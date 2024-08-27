@@ -4,9 +4,8 @@
     text="Message"
     aria-label="Message"
     (-focus)="onFocus()"
-    (-blur)="onBlur()"
-  >
-    <sinch-icon name="fa-message" slot="icon"></sinch-icon>
+    (-blur)="onBlur()">
+    <sinch-icon-chat slot="icon"></sinch-icon-chat>
   </sinch-tile-control-option>
 </ng-template>
 <ng-template #multipleTemplate>
@@ -15,18 +14,16 @@
     text="Message"
     aria-label="Message"
     (-focus)="onFocus()"
-    (-blur)="onBlur()"
-  >
-    <sinch-icon name="fa-message" slot="icon"></sinch-icon>
+    (-blur)="onBlur()">
+    <sinch-icon-chat slot="icon"></sinch-icon-chat>
   </sinch-tile-control-option>
   <sinch-tile-control-option
     value="1"
     text="Title"
     aria-label="Title"
     (-focus)="onFocus()"
-    (-blur)="onBlur()"
-  >
-    <sinch-icon name="fa-t" slot="icon"></sinch-icon>
+    (-blur)="onBlur()">
+    <sinch-icon-title slot="icon"></sinch-icon-title>
   </sinch-tile-control-option>
   <sinch-tile-control-option
     value="2"
@@ -34,73 +31,58 @@
     aria-label="Text"
     disabled
     (-focus)="onFocus()"
-    (-blur)="onBlur()"
-  >
-    <sinch-icon name="fa-align-left" slot="icon"></sinch-icon>
+    (-blur)="onBlur()">
+    <sinch-icon-format-align-left slot="icon"></sinch-icon-format-align-left>
   </sinch-tile-control-option>
   <sinch-tile-control-option
     value="3"
     text="QR Code"
     aria-label="qr code"
     (-focus)="onFocus()"
-    (-blur)="onBlur()"
-  >
-    <sinch-icon name="fa-qrcode" slot="icon"></sinch-icon>
+    (-blur)="onBlur()">
+    <sinch-icon-qr-code slot="icon"></sinch-icon-qr-code>
   </sinch-tile-control-option>
   <sinch-tile-control-option
     value="4"
     text="Terms"
     aria-label="terms"
     (-focus)="onFocus()"
-    (-blur)="onBlur()"
-  >
-    <sinch-icon name="fa-square-check" slot="icon"></sinch-icon>
+    (-blur)="onBlur()">
+    <sinch-icon-library-add-check slot="icon"></sinch-icon-library-add-check>
   </sinch-tile-control-option>
   <sinch-tile-control-option
     value="5"
     text="Button"
     aria-label="button"
     (-focus)="onFocus()"
-    (-blur)="onBlur()"
-  >
-    <sinch-icon name="ai" slot="icon"></sinch-icon>
+    (-blur)="onBlur()">
+    <sinch-icon-smart-button slot="icon"></sinch-icon-smart-button>
   </sinch-tile-control-option>
   <sinch-tile-control-option
     value="6"
     text="Mobile App"
     aria-label="mobile app"
     (-focus)="onFocus()"
-    (-blur)="onBlur()"
-  >
-    <sinch-icon name="fa-house-heart" slot="icon"></sinch-icon>
+    (-blur)="onBlur()">
+    <sinch-icon-add-to-home-screen slot="icon"></sinch-icon-add-to-home-screen>
   </sinch-tile-control-option>
   <sinch-tile-control-option
     value="7"
     text="Click to call"
     aria-label="click to call"
     (-focus)="onFocus()"
-    (-blur)="onBlur()"
-  >
-    <sinch-icon name="camera" slot="icon"></sinch-icon>
+    (-blur)="onBlur()">
+    <sinch-icon-camera slot="icon"></sinch-icon-camera>
   </sinch-tile-control-option>
   <sinch-tile-control-option
     value="8"
     text="Separator"
     aria-label="separator"
     (-focus)="onFocus()"
-    (-blur)="onBlur()"
-  >
-    <sinch-icon-branded-contact slot="icon"></sinch-icon-branded-contact>
+    (-blur)="onBlur()">
+    <sinch-icon-alarm-add slot="icon"></sinch-icon-alarm-add>
   </sinch-tile-control-option>
 </ng-template>
-<sinch-tile-control
-  [attr.small]="isSmall"
-  [attr.multiple]="isMultiple"
-  [attr.cols]="numCols"
-  [value]="value"
-  (-change)="onChange($event)"
->
-  <ng-container
-    *ngIf="isSingleOption; then singleTemplate; else multipleTemplate"
-  ></ng-container>
+<sinch-tile-control [attr.small]="isSmall" [attr.multiple]="isMultiple" [attr.cols]="numCols" [value]="value" (-change)="onChange($event)">
+  <ng-container *ngIf="isSingleOption; then singleTemplate; else multipleTemplate"></ng-container>
 </sinch-tile-control>

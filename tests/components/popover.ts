@@ -10,7 +10,7 @@ const withWideNonModal = '/popover?width=300&orientation=bottom-right'
 const withNonModalElementOffset = '/popover?width=300&example=offset'
 const withSwitchingContent = '/popover?width=300&example=switch-content'
 
-test.fixme('popover screenshots - very flaky', runScreenshotTests('sinch-popover', [
+test('popover screenshots', runScreenshotTests('sinch-popover', [
   {
     name: 'open',
     url: withModal,

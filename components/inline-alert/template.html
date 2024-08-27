@@ -1,198 +1,146 @@
 <style>
-  :host {
-    display: block;
-  }
+:host {
+  display: block;
+}
 
-  #wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 16px;
-    border-radius: var(--sinch-comp-inline-alert-shape-radius);
-    box-sizing: border-box;
-    width: 100%;
-  }
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: var(--sinch-comp-inline-alert-shape-radius);
+  box-sizing: border-box;
+  width: 100%;
+}
 
-  :host([type="success"]) #wrapper {
-    background-color:
-      var(
-        --sinch-comp-inline-alert-color-success-default-background
-      );
-  }
+:host([type="success"]) #wrapper {
+  background-color: var(--sinch-comp-inline-alert-color-success-default-background);
+}
 
-  :host([type="warn"]) #wrapper {
-    background-color:
-      var(
-        --sinch-comp-inline-alert-color-warning-default-background
-      );
-  }
+:host([type="warn"]) #wrapper {
+  background-color: var(--sinch-comp-inline-alert-color-warning-default-background);
+}
 
-  :host([type="error"]) #wrapper {
-    background-color:
-      var(
-        --sinch-comp-inline-alert-color-error-default-background
-      );
-  }
+:host([type="error"]) #wrapper {
+  background-color: var(--sinch-comp-inline-alert-color-error-default-background);
+}
 
-  :host([type="info"]) #wrapper {
-    background-color:
-      var(
-        --sinch-comp-inline-alert-color-info-default-background
-      );
-  }
+:host([type="info"]) #wrapper {
+  background-color: var(--sinch-comp-inline-alert-color-info-default-background);
+}
 
-  #icon-success,
-  #icon-warn,
-  #icon-error,
-  #icon-info {
-    display: none;
-  }
+#icon-success,
+#icon-warn,
+#icon-error,
+#icon-info {
+  display: none;
+}
 
-  #icon-success {
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-inline-alert-color-success-default-icon
-      );
-  }
+#icon-success {
+  --sinch-global-color-icon: var(--sinch-comp-inline-alert-color-success-default-icon);
+}
 
-  #icon-warn {
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-inline-alert-color-warning-default-icon
-      );
-  }
+#icon-warn {
+  --sinch-global-color-icon: var(--sinch-comp-inline-alert-color-warning-default-icon);
+}
 
-  #icon-error {
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-inline-alert-color-error-default-icon
-      );
-  }
+#icon-error {
+  --sinch-global-color-icon: var(--sinch-comp-inline-alert-color-error-default-icon);
+}
 
-  #icon-info {
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-inline-alert-color-info-default-icon
-      );
-  }
+#icon-info {
+  --sinch-global-color-icon: var(--sinch-comp-inline-alert-color-info-default-icon);
+}
 
-  :host([type="success"]) #icon-success,
-  :host([type="warn"]) #icon-warn,
-  :host([type="error"]) #icon-error,
-  :host([type="info"]) #icon-info {
-    display: block;
-  }
+:host([type="success"]) #icon-success,
+:host([type="warn"]) #icon-warn,
+:host([type="error"]) #icon-error,
+:host([type="info"]) #icon-info {
+  display: block;
+}
 
-  #body-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 8px;
-    min-width: 0;
-    flex: 1;
-  }
+#body-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 8px;
+  min-width: 0;
+  flex: 1;
+}
 
-  #caption {
-    align-self: stretch;
+#caption {
+  align-self: stretch;
 
-    --sinch-comp-title-font: var(--sinch-comp-inline-alert-font-title);
-  }
+  --sinch-comp-title-font: var(--sinch-comp-inline-alert-font-title);
+}
 
-  :host([type="success"]) #caption {
-    --sinch-global-color-text:
-      var(
-        --sinch-comp-inline-alert-color-success-default-text
-      );
-  }
+:host([type="success"]) #caption {
+  --sinch-global-color-text: var(--sinch-comp-inline-alert-color-success-default-text);
+}
 
-  :host([type="warn"]) #caption {
-    --sinch-global-color-text:
-      var(
-        --sinch-comp-inline-alert-color-warning-default-text
-      );
-  }
+:host([type="warn"]) #caption {
+  --sinch-global-color-text: var(--sinch-comp-inline-alert-color-warning-default-text);
+}
 
-  :host([type="error"]) #caption {
-    --sinch-global-color-text:
-      var(
-        --sinch-comp-inline-alert-color-error-default-text
-      );
-  }
+:host([type="error"]) #caption {
+  --sinch-global-color-text: var(--sinch-comp-inline-alert-color-error-default-text);
+}
 
-  :host([type="info"]) #caption {
-    --sinch-global-color-text:
-      var(
-        --sinch-comp-inline-alert-color-info-default-text
-      );
-  }
+:host([type="info"]) #caption {
+  --sinch-global-color-text: var(--sinch-comp-inline-alert-color-info-default-text);
+}
 
-  #text {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 4px;
-    align-self: stretch;
+#text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+  align-self: stretch;
 
-    --sinch-comp-rich-text-font: var(--sinch-comp-inline-alert-font-body);
-  }
+  --sinch-comp-rich-text-font: var(--sinch-comp-inline-alert-font-body);
+}
 
-  :host([type="success"]) #text {
-    --sinch-global-color-text:
-      var(
-        --sinch-comp-inline-alert-color-success-default-text
-      );
-  }
+:host([type="success"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-inline-alert-color-success-default-text);
+}
 
-  :host([type="warn"]) #text {
-    --sinch-global-color-text:
-      var(
-        --sinch-comp-inline-alert-color-warning-default-text
-      );
-  }
+:host([type="warn"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-inline-alert-color-warning-default-text);
+}
 
-  :host([type="error"]) #text {
-    --sinch-global-color-text:
-      var(
-        --sinch-comp-inline-alert-color-error-default-text
-      );
-  }
+:host([type="error"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-inline-alert-color-error-default-text);
+}
 
-  :host([type="info"]) #text {
-    --sinch-global-color-text:
-      var(
-        --sinch-comp-inline-alert-color-info-default-text
-      );
-  }
+:host([type="info"]) #text {
+  --sinch-global-color-text: var(--sinch-comp-inline-alert-color-info-default-text);
+}
 
-  #action {
-    width: 100%;
-    display: flex;
-    margin-top: 16px;
-    min-width: 0;
-  }
+#action {
+  width: 100%;
+  display: flex;
+  margin-top: 16px;
+  min-width: 0;
+}
 
-  #action.empty {
-    display: none;
-  }
+#action.empty {
+  display: none;
+}
 
-  #close {
-    margin-left: 16px;
-  }
+#close {
+  margin-left: 16px;
+}
 
-  #close.empty {
-    display: none;
-  }
+#close.empty {
+  display: none;
+}
 </style>
 
 <div id="wrapper">
-  <sinch-icon name="circle-info" id="icon-info"></sinch-icon>
-  <sinch-icon name="circle-check" id="icon-success"></sinch-icon>
-  <sinch-icon name="triangle-exclamation"
-    id="icon-warn"
-  ></sinch-icon>
-  <sinch-icon name="octagon-exclamation"
-    id="icon-error"
-  ></sinch-icon>
+  <sinch-icon id="icon-info" name="info"></sinch-icon>
+  <sinch-icon id="icon-success" name="check_circle"></sinch-icon>
+  <sinch-icon id="icon-warn" name="report_problem"></sinch-icon>
+  <sinch-icon id="icon-error" name="report"></sinch-icon>
   <div id="body-wrapper">
     <sinch-title id="caption" level="3" type="s"></sinch-title>
     <sinch-rich-text id="text"></sinch-rich-text>

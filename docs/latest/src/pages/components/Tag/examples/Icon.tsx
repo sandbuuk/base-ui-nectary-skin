@@ -1,6 +1,6 @@
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/tag'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/mood'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
@@ -15,7 +15,7 @@ export const IconExample: FC = () => (
     {
       systemColors.map((colorName) => (
         <sinch-tag key={colorName} color={colorName} text={colorName}>
-          <sinch-icon name="fa-face-laugh" slot="icon"/>
+          <sinch-icon-mood slot="icon"/>
         </sinch-tag>
       ))
     }

@@ -2,8 +2,7 @@
   [attr.open]="isOpen"
   (-close)="onClose()"
   modal
-  orientation="bottom-right"
->
+  orientation="bottom-right">
   <sinch-button
     slot="target"
     type="cta-primary"
@@ -13,18 +12,16 @@
     (-blur)="onBlur()"
     (-click)="onOpen()"
   ></sinch-button>
-  <sinch-action-menu slot="content" [attr.rows]="rows">
+  <sinch-action-menu
+    slot="content"
+    [attr.rows]="rows">
     <sinch-action-menu-option
       *ngFor="let opt of options | keyvalue"
       [value]="opt.key"
       [attr.text]="opt.value.text"
       [attr.disabled]="opt.value.isDisabled"
-      (-click)="onClick(opt.key)"
-    >
-      <sinch-icon name="fa-arrow-up-right-from-square"
-        *ngIf="opt.value.icon === '1'"
-        slot="icon"
-      ></sinch-icon>
+      (-click)="onClick(opt.key)">
+      <sinch-icon-open-in-new *ngIf="opt.value.icon === '1'" slot="icon"></sinch-icon-open-in-new>
     </sinch-action-menu-option>
   </sinch-action-menu>
 </sinch-popover>

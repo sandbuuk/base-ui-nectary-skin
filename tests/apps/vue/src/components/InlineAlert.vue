@@ -2,7 +2,7 @@
   <sinch-inline-alert :type="type" :caption="caption" :text="text">
     <sinch-button v-if="hasClose" slot="close" size="s" @--click="onCloseClick" @--focus="onCloseFocus"
       @--blur="onCloseBlur">
-      <sinch-icon name="fa-xmark" slot="icon"></sinch-icon>
+      <sinch-icon-close slot="icon"></sinch-icon-close>
     </sinch-button>
     <sinch-button v-if="hasAction" slot="action" type="cta-secondary" size="s" text="This is a Button!"
       @--click="onButtonClick" @--focus="onButtonFocus" @--blur="onButtonBlur">
@@ -13,7 +13,7 @@
 <script>
 import '@nectary/components/inline-alert'
 import '@nectary/components/button'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/close'
 
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).

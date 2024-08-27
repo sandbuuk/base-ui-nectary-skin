@@ -16,7 +16,7 @@
     <sinch-icon-branded-chatbot v-if="hasIcon" size="32" slot="icon"></sinch-icon-branded-chatbot>
     <sinch-tag v-if="hasInfo" text="Label" slot="info"></sinch-tag>
     <sinch-button v-if="hasInfo" size="s" slot="info">
-      <sinch-icon name="fa-grid" slot="icon"></sinch-icon>
+      <sinch-icon-apps slot="icon"></sinch-icon-apps>
     </sinch-button>
     <div v-if="hasPreview" slot="preview"
       style="display: flex;flex-direction: column;background-color: #F1F3F4;align-items: center;justify-content: center;height: 100%;">
@@ -34,7 +34,7 @@ import '@nectary/components/segment'
 import '@nectary/components/segment-collapse'
 import '@nectary/components/input'
 import '@nectary/components/tag'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/apps'
 import '@nectary/assets/icons-branded/chatbot'
 import '@nectary/components/button'
 import '@nectary/components/checkbox'

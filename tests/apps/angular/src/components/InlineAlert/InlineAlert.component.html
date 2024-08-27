@@ -1,8 +1,7 @@
 <sinch-inline-alert
   [attr.type]="type"
   [attr.text]="text"
-  [attr.caption]="caption"
->
+  [attr.caption]="caption">
   <sinch-button
     *ngIf="hasClose"
     slot="close"
@@ -11,7 +10,7 @@
     (-focus)="onCloseFocus()"
     (-blur)="onCloseBlur()"
   >
-    <sinch-icon name="fa-xmark" slot="icon"></sinch-icon>
+    <sinch-icon-close slot="icon"></sinch-icon-close>
   </sinch-button>
   <sinch-button
     *ngIf="hasAction"

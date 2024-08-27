@@ -4,7 +4,12 @@ import type { FC } from 'react'
 import '@nectary/components/textarea'
 import '@nectary/components/button'
 import '@nectary/components/tag'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/mood'
+import '@nectary/assets/icons/attach-file'
+import '@nectary/assets/icons/search'
+import '@nectary/assets/icons/add-comment'
+import '@nectary/assets/icons/more-horiz'
+import '@nectary/assets/icons/send'
 
 export const Textarea: FC = () => {
   const [search] = useSearchParams()
@@ -50,19 +55,19 @@ export const Textarea: FC = () => {
       {hasBottom && (
         <>
           <sinch-button slot="bottom" aria-label="Paperclip">
-            <sinch-icon name="fa-paperclip-vertical" slot="icon"/>
+            <sinch-icon-attach-file slot="icon"/>
           </sinch-button>
           <sinch-button slot="bottom" aria-label="Emoji">
-            <sinch-icon name="fa-face-laugh" slot="icon"/>
+            <sinch-icon-mood slot="icon"/>
           </sinch-button>
           <sinch-button slot="bottom" aria-label="Variables">
-            <sinch-icon name="fa-magnifying-glass" slot="icon"/>
+            <sinch-icon-search slot="icon"/>
           </sinch-button>
           <sinch-button slot="bottom" aria-label="Comment">
-            <sinch-icon name="fa-comment-plus" slot="icon"/>
+            <sinch-icon-add-comment slot="icon"/>
           </sinch-button>
           <sinch-button slot="bottom" aria-label="Comment">
-            <sinch-icon name="fa-ellipsis" slot="icon"/>
+            <sinch-icon-more-horiz slot="icon"/>
           </sinch-button>
           <sinch-tag
             slot="bottom"
@@ -76,7 +81,7 @@ export const Textarea: FC = () => {
             aria-label="Send"
             text="Send"
           >
-            <sinch-icon name="fa-paper-plane-top" slot="right-icon"/>
+            <sinch-icon-send slot="right-icon"/>
           </sinch-button>
         </>
       )}

@@ -1,10 +1,12 @@
 <sinch-list>
-  <sinch-list-item *ngFor="let i of [1, 2, 3, 4]">
-    <div slot="content" style="display: flex; align-items: center; gap: 12px;">
+  <sinch-list-item *ngFor="let i of [1,2,3,4]">
+    <div
+      slot="content"
+      style="display: flex;align-items: center;gap: 12px;">
       <sinch-icon-branded-chatbot></sinch-icon-branded-chatbot>
       <sinch-text style="flex: 1;" type="m" inline>Replace me</sinch-text>
       <sinch-button aria-label="Add" size="s">
-        <sinch-icon name="fa-plus" slot="icon"></sinch-icon>
+        <sinch-icon-add slot="icon"></sinch-icon-add>
       </sinch-button>
     </div>
   </sinch-list-item>

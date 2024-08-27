@@ -1,8 +1,14 @@
 <template>
-  <sinch-chip v-bind:color="color" v-bind:text="text" v-bind:small="isSmall" @--click="onClick" @--focus="onFocus"
-    @--blur="onBlur">
-    <sinch-icon name="fa-face-smile" v-if="hasIcon" slot="icon"></sinch-icon>
-    <sinch-icon name="fa-plus" v-if="hasRightIcon" slot="right-icon"></sinch-icon>
+  <sinch-chip
+    v-bind:color="color"
+    v-bind:text="text"
+    v-bind:small="isSmall"
+    @--click="onClick"
+    @--focus="onFocus"
+    @--blur="onBlur"
+  >
+    <sinch-icon v-if="hasIcon" slot="icon" name="sentiment_satisfied"></sinch-icon>
+    <sinch-icon v-if="hasRightIcon" slot="right-icon" name="add"></sinch-icon>
   </sinch-chip>
 </template>
 
@@ -41,3 +47,4 @@ export default {
   },
 }
 </script>
+

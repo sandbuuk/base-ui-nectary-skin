@@ -1,7 +1,6 @@
 .nectary-theme-base {
   /* Font */
-  --sinch-comp-icon-font-family-zero-to-d: "Sinch Icons Zero To D";
-  --sinch-comp-icon-font-family-e-to-o: "Sinch Icons E To O";
-  --sinch-comp-icon-font-family-p-to-z: "Sinch Icons P To Z";
+  --sinch-comp-icon-font-family: "Material Icons";
+  --sinch-comp-icon-font-feature-settings: "liga";
   --sinch-comp-icon-font-weight: 400;
 }

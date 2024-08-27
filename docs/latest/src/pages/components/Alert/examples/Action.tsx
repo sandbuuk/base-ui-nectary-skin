@@ -19,7 +19,7 @@ export const ActionExample: FC = () => (
       size="s"
       on-click={() => console.log('close')}
     >
-      <sinch-icon name="fa-xmark" slot="icon"/>
+      <sinch-icon slot="icon" name="close"/>
     </sinch-button>
   </sinch-alert>
 )

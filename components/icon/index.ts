@@ -33,7 +33,6 @@ defineCustomElement('sinch-icon', class extends NectaryElement {
       case 'name': {
         this.#$icon.textContent = newVal
         updateAttribute(this.#$icon, 'aria-label', newVal)
-        this._matchNameToFont()
 
         break
       }
@@ -46,21 +45,6 @@ defineCustomElement('sinch-icon', class extends NectaryElement {
 
   get name() {
     return getAttribute(this, 'name', '')
-  }
-
-  _matchNameToFont() {
-    // ignore "fa-" part of file since 90% of files has it.
-    if (/^(fa-|(?!fa-))[0-9a-d]/.test(this.name)) {
-      return updateAttribute(this.#$icon, 'class', 'zero-to-d')
-    }
-
-    if (/^(fa-|(?!fa-))[e-o]/.test(this.name)) {
-      return updateAttribute(this.#$icon, 'class', 'e-to-o')
-    }
-
-    if (/^(fa-|(?!fa-))[p-z]/.test(this.name)) {
-      return updateAttribute(this.#$icon, 'class', 'p-to-z')
-    }
   }
 })
 

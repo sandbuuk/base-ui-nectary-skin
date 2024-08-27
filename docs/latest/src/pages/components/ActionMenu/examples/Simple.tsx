@@ -1,7 +1,10 @@
 import type { FC } from 'react'
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
-import '@nectary/components/icon'
+import '@nectary/assets/icons/laptop'
+import '@nectary/assets/icons/smartphone'
+import '@nectary/assets/icons/tablet'
+import '@nectary/assets/icons/watch'
 
 export const SimpleExample: FC = () => {
   const onClick = () => console.log('click')
@@ -13,14 +16,14 @@ export const SimpleExample: FC = () => {
         aria-label="Laptop option"
         on-click={onClick}
       >
-        <sinch-icon name="fa-laptop" slot="icon"/>
+        <sinch-icon-laptop slot="icon"/>
       </sinch-action-menu-option>
       <sinch-action-menu-option
         text="Smartphone"
         aria-label="Smartphone option"
         on-click={onClick}
       >
-        <sinch-icon name="smartphone" slot="icon"/>
+        <sinch-icon-smartphone slot="icon"/>
       </sinch-action-menu-option>
       <sinch-action-menu-option
         text="Tablet"
@@ -28,14 +31,14 @@ export const SimpleExample: FC = () => {
         disabled
         on-click={onClick}
       >
-        <sinch-icon name="fa-tablet" slot="icon"/>
+        <sinch-icon-tablet slot="icon"/>
       </sinch-action-menu-option>
       <sinch-action-menu-option
         text="Watch"
         aria-label="Watch option"
         on-click={onClick}
       >
-        <sinch-icon name="fa-watch-smart" slot="icon"/>
+        <sinch-icon-watch slot="icon"/>
       </sinch-action-menu-option>
     </sinch-action-menu>
   )

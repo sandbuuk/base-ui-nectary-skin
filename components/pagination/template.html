@@ -1,118 +1,100 @@
 <style>
-  :host {
-    display: inline-block;
-    vertical-align: middle;
-    outline: none;
-  }
+:host {
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+}
 
-  #wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    height: var(--sinch-local-size);
+#wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: var(--sinch-local-size);
 
-    --sinch-local-size: 24px;
-  }
+  --sinch-local-size: 24px;
+}
 
-  button {
-    all: initial;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: var(--sinch-local-size);
-    height: var(--sinch-local-size);
-    cursor: pointer;
-    border-radius: var(--sinch-comp-pagination-shape-radius);
-    user-select: none;
+button {
+  all: initial;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: var(--sinch-local-size);
+  height: var(--sinch-local-size);
+  cursor: pointer;
+  border-radius: var(--sinch-comp-pagination-shape-radius);
+  user-select: none;
 
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-pagination-color-default-icon-default
-      );
-  }
+  --sinch-global-color-icon: var(--sinch-comp-pagination-color-default-icon-default);
+}
 
-  button:focus-visible::before {
-    content: "";
-    position: absolute;
-    inset: -3px;
-    border: 2px solid var(--sinch-comp-pagination-color-default-outline-focus);
-    border-radius: calc(var(--sinch-comp-pagination-shape-radius) + 3px);
-    pointer-events: none;
-  }
+button:focus-visible::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border: 2px solid var(--sinch-comp-pagination-color-default-outline-focus);
+  border-radius: calc(var(--sinch-comp-pagination-shape-radius) + 3px);
+  pointer-events: none;
+}
 
-  button:disabled {
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-pagination-color-disabled-icon-initial
-      );
+button:disabled {
+  --sinch-global-color-icon: var(--sinch-comp-pagination-color-disabled-icon-initial);
 
-    cursor: initial;
-  }
+  cursor: initial;
+}
 
-  button:enabled:hover {
-    background-color:
-      var(
-        --sinch-comp-pagination-color-default-background-hover
-      );
-  }
+button:enabled:hover {
+  background-color: var(--sinch-comp-pagination-color-default-background-hover);
+}
 
-  button > * {
-    display: block;
-    overflow: hidden;
-    pointer-events: none;
-  }
+button > * {
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+}
 
-  .page {
-    font: var(--sinch-comp-pagination-font-default-page-number);
-    color: var(--sinch-comp-pagination-color-default-text-initial);
-    background-color:
-      var(
-        --sinch-comp-pagination-color-default-background-initial
-      );
-    padding: 0 4px;
-    box-sizing: border-box;
-  }
+.page {
+  font: var(--sinch-comp-pagination-font-default-page-number);
+  color: var(--sinch-comp-pagination-color-default-text-initial);
+  background-color: var(--sinch-comp-pagination-color-default-background-initial);
+  padding: 0 4px;
+  box-sizing: border-box;
+}
 
-  .page.dots > span {
-    display: none;
-  }
+.page.dots > span {
+  display: none;
+}
 
-  .page.dots::after {
-    content: "...";
-  }
+.page.dots::after {
+  content: "...";
+}
 
-  .page.active {
-    font: var(--sinch-comp-pagination-font-checked-page-number);
-    background-color:
-      var(
-        --sinch-comp-pagination-color-checked-background-initial
-      );
-    pointer-events: none;
-    cursor: initial;
-  }
+.page.active {
+  font: var(--sinch-comp-pagination-font-checked-page-number);
+  background-color: var(--sinch-comp-pagination-color-checked-background-initial);
+  pointer-events: none;
+  cursor: initial;
+}
 
-  .page.active:hover {
-    background-color:
-      var(
-        --sinch-comp-pagination-color-checked-background-hover
-      );
-  }
+.page.active:hover {
+  background-color: var(--sinch-comp-pagination-color-checked-background-hover);
+}
 
-  .page.hidden {
-    display: none;
-  }
+.page.hidden {
+  display: none;
+}
 
-  #left,
-  #right {
-    --sinch-icon-size: 24px;
-  }
+#left,
+#right {
+  --sinch-icon-size: 24px;
+}
 </style>
 
 <div id="wrapper">
   <button id="left">
-    <sinch-icon name="fa-angle-left" id="icon-left"></sinch-icon>
+    <sinch-icon id="icon-left" name="keyboard_arrow_left"></sinch-icon>
   </button>
   <button class="page"><span>1</span></button>
   <button class="page active"><span>2</span></button>
@@ -122,6 +104,6 @@
   <button class="page dots"><span>6</span></button>
   <button class="page"><span>20</span></button>
   <button id="right">
-    <sinch-icon name="fa-angle-right" id="icon-right"></sinch-icon>
+    <sinch-icon id="icon-right" name="keyboard_arrow_right"></sinch-icon>
   </button>
 </div>
