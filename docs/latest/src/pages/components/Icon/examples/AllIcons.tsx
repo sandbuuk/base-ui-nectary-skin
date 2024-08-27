@@ -52,13 +52,13 @@ export const AllIconsExample: FC = () => {
         on-change={onChange}
         aria-label="Search"
       >
-        <sinch-icon name="magnifying-glass" slot="icon"/>
+        <sinch-icon icons-version="2" name="ai" slot="icon"/>
         <sinch-button slot="right" on-click={onClearSearch} aria-label="Clear search">
-          <sinch-icon name="fa-xmark" slot="icon"/>
+          <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
         </sinch-button>
       </sinch-input>
       <div style={iconsWrapperStyle} onClick={(e) => copyIconName((e.target as TSinchIconElement).getAttribute('name'))}>
-        {names.map((name) => <sinch-tooltip type="fast" key={name} text={name}><sinch-icon style={iconStyle} name={name}/></sinch-tooltip>)}
+        {names.map((name) => <sinch-tooltip type="fast" key={name} text={name}><sinch-icon icons-version="2" style={iconStyle} name={name}/></sinch-tooltip>)}
       </div>
     </div>
   )

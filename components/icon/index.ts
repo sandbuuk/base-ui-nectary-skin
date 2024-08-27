@@ -25,7 +25,7 @@ defineCustomElement('sinch-icon', class extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['name']
+    return ['name', 'icons-version']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
@@ -33,7 +33,17 @@ defineCustomElement('sinch-icon', class extends NectaryElement {
       case 'name': {
         this.#$icon.textContent = newVal
         updateAttribute(this.#$icon, 'aria-label', newVal)
-        this._matchNameToFont()
+
+        if (getAttribute(this, 'icons-version') !== '1') {
+          this._matchNameToFont()
+        }
+
+        break
+      }
+      case 'icons-version': {
+        if (getAttribute(this, 'icons-version') !== '1') {
+          this._matchNameToFont()
+        }
 
         break
       }
@@ -46,6 +56,14 @@ defineCustomElement('sinch-icon', class extends NectaryElement {
 
   get name() {
     return getAttribute(this, 'name', '')
+  }
+
+  set iconsVersion(value: '1' | '2') {
+    updateAttribute(this, 'icons-version', value)
+  }
+
+  get iconsVersion() {
+    return getAttribute(this, 'icons-version', '1') as '1' | '2'
   }
 
   _matchNameToFont() {
