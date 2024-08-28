@@ -34,7 +34,7 @@ defineCustomElement('sinch-icon', class extends NectaryElement {
         this.#$icon.textContent = newVal
         updateAttribute(this.#$icon, 'aria-label', newVal)
 
-        if (getAttribute(this, 'icons-version') !== '1') {
+        if (getAttribute(this, 'icons-version', '1') !== '1') {
           this._matchNameToFont()
         }
 
