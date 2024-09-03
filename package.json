@@ -33,6 +33,7 @@
     "@alex-e-leon/stylelint-value-no-unknown-custom-properties": "^4.0.2",
     "@nectary/components": "workspace:*",
     "@nectary/eslint-plugin": "workspace:*",
+    "@qiwi/multi-semantic-release": "^7.1.2",
     "@types/jsdom": "^21.1.6",
     "@types/node": "^18.17.17",
     "@types/svgo": "^2.6.4",
@@ -50,17 +51,17 @@
     "eslint-plugin-react": "^7.33.2",
     "husky": "^9.0.11",
     "is-ci": "^3.0.1",
-    "multi-semantic-release": "^3.0.2",
+    "oslllo-svg-fixer": "5.0.0",
     "postcss-html": "^1.5.0",
     "rimraf": "^4.4.1",
+    "semanting-release-slack-update": "workspace:*",
     "slackify-markdown": "^4.4.0",
     "stylelint": "^14.16.1",
     "stylelint-config-standard": "^25.0.0",
     "svgo": "^2.8.0",
-    "tsm": "^2.3.0",
-    "typescript": "^5.2.2",
     "svgtofont": "^5.0.3",
-    "oslllo-svg-fixer": "5.0.0"
+    "tsm": "^2.3.0",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "jsdom": "^24.0.0",
@@ -74,7 +75,8 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/npm"
+      "@semantic-release/npm",
+      "semanting-release-slack-update"
     ]
   },
   "config": {
