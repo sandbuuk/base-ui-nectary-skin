@@ -10,7 +10,7 @@ const introductionText: string = 'With Nectary, you can easily build consistent 
 export const Introduction = () => (
   <>
     <landing-page-grid noPadding>
-      <sinch-grid-item slot="item" xl={7} l={7} m={4} s={2}>
+      <sinch-grid-item slot="item" xl={7} l={7} m={4} s={4}>
         <div slot="content">
           <SpacingY height={35}/>
           <sinch-title type="xl" level="1" text="Meet Nectary,"/>
@@ -19,7 +19,7 @@ export const Introduction = () => (
           <sinch-text type="m">{introductionText}</sinch-text>
         </div>
       </sinch-grid-item>
-      <sinch-grid-item slot="item" xl={5} l={5} m={4} s={2}>
+      <sinch-grid-item slot="item" xl={5} l={5} m={4} s={0}>
         <div slot="content">
           <SpacingY height={40}/>
           <sinch-illustration-on-a-cloud halign="right" size={222}/>

@@ -9,5 +9,6 @@
 
 #page-content {
   width: 660px;
+  max-width: 100%;
   margin: 0 auto;
 }

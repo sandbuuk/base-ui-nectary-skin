@@ -5,13 +5,43 @@
 }
 
 #app-sidebar {
-  display: flex;
-  flex-direction: column;
-  width: 248px;
-  height: 100%;
   box-sizing: border-box;
-  border-right: 1px solid var(--sinch-sys-color-border-subtle);
   background-color: var(--sinch-sys-color-surface-primary-default);
+}
+
+@media screen and (min-width: 768px) {
+  #app-sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 248px;
+    height: 100%;
+    border-right: 1px solid var(--sinch-sys-color-border-subtle);
+  }
+
+  #app-open-sidebar-button {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app-sidebar-open#app-sidebar {
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    overflow-y: scroll;
+  }
+
+  .app-sidebar-close#app-sidebar {
+    display: none;
+  }
+
+  #app-open-sidebar-button {
+    display: block;
+    position: fixed;
+    z-index: 101;
+    top: 8px;
+    left: 8px;
+  }
 }
 
 .app-sidebar-fixed {
@@ -36,6 +66,7 @@
 
 #app-sidebar-scroll-content {
   width: 232px;
+  min-width: 100%;
   padding: 8px 0;
 }
 

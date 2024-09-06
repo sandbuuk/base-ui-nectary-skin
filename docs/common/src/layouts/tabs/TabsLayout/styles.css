@@ -27,6 +27,7 @@
 
 #page-content {
   width: 660px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -47,6 +48,16 @@
   left: 0;
   width: 1px;
   background-color: var(--sinch-sys-color-border-subtle);
+}
+
+@media screen and (max-width: 768px) {
+  #page-side {
+    display: none;
+  }
+
+  #page-side::before {
+    display: none;
+  }
 }
 
 #page-title {

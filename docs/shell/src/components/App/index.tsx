@@ -1,5 +1,5 @@
 import { Loading, QueryRouter } from 'docs-common'
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ComponentsList } from '../ComponentsList'
 import { ComponentsPage } from '../ComponentsPage'
@@ -27,6 +27,8 @@ import '@nectary/theme-cpaas-mailgun'
 import '@nectary/theme-cpaas-mailjet'
 import '@nectary/theme-cpaas-dashboard'
 import '@nectary/theme-simple-texting'
+import '@nectary/components/button'
+import '@nectary/components/icon'
 
 const CLASS_NECTARY_THEME_BASE = 'nectary-theme-base'
 const CLASS_NECTARY_THEME_DARK = 'nectary-theme-dark'
@@ -38,6 +40,8 @@ const CLASS_CPAAS_THEME_MAILJET = 'cpaas-theme-mailjet'
 const CLASS_CPAAS_THEME_DASHBOARD = 'cpaas-theme-dashboard'
 
 const basename = location.pathname.replace(/\/$/, '')
+
+const bus = new BroadcastChannel('MESSAGE_BUS')
 
 export const App: FC = () => {
   const onRouteChange = useOnRouteChange()
@@ -89,9 +93,28 @@ export const App: FC = () => {
     }
   }
 
+  const [mobileMenuOpen, openMobileMenu] = useState(false)
+
+  useEffect(() => {
+    const onMessage = (msg: MessageEvent) => {
+      if (msg.data.type === 'ROUTE' && mobileMenuOpen === true) {
+        openMobileMenu(false)
+      }
+    }
+
+    bus.addEventListener('message', onMessage)
+
+    return () => bus.removeEventListener('message', onMessage)
+  }, [mobileMenuOpen])
+
   return (
     <QueryRouter basename={basename} onChange={onRouteChange}>
-      <div id="app-sidebar" className={themeClasses.join(' ')}>
+      <div id="app-open-sidebar-button" className={[...themeClasses].join(' ')}>
+        <sinch-button type="cta-secondary" aria-label="open-mobile-menu" on-click={() => openMobileMenu(!mobileMenuOpen)}>
+          <sinch-icon slot="icon" icons-version="2" name="fa-bars"/>
+        </sinch-button>
+      </div>
+      <div id="app-sidebar" className={[...themeClasses, mobileMenuOpen ? 'app-sidebar-open' : 'app-sidebar-close'].join(' ')}>
         <div className="app-sidebar-fixed">
           <SidebarHeader/>
         </div>

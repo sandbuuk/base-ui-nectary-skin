@@ -10,3 +10,11 @@
   padding-bottom: 32px;
   margin: auto;
 }
+
+@media only screen and (max-width: 768px) {
+  #landing-page-content {
+    min-width: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
