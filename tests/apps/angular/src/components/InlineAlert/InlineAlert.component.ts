@@ -31,13 +31,13 @@ export class InlineAlertComponent {
   text: string | null;
   caption: string;
   hasClose: boolean;
-  hasAction: boolean;
+  action: string;
 
   constructor(private route: ActivatedRoute) {
     const search = this.route.snapshot.queryParamMap;
     this.type = search.get("type") ?? undefined;
     this.hasClose = search.get("close") != null;
-    this.hasAction = search.get("action") != null;
+    this.action = search.get("action") ?? 'none';
 
     const example = search.get("example");
 

@@ -6,6 +6,7 @@ import { TypeSuccessExample } from './examples/TypeSuccess.tsx?example'
 import { CloseExample } from './examples/Close.tsx?example'
 import { ActionExample } from './examples/Action.tsx?example'
 import { MarkdownExample } from './examples/Markdown.tsx?example'
+import { ActionMultipleExample } from './examples/ActionMultiple.tsx?example'
 
 # Examples
 
@@ -47,7 +48,12 @@ The close button dismiss the Alert.
 
 Action button(s) trigger actions that should allow the user to solve the problem informed in the alert.
 
+You can have one action:
 <Example Component={ActionExample}/>
+
+Or multiple:
+
+<Example Component={ActionMultipleExample}/>
 
 ## Markdown
 
