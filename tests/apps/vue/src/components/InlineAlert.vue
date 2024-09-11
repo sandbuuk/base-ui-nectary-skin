@@ -4,8 +4,11 @@
       @--blur="onCloseBlur">
       <sinch-icon icons-version="2" name="fa-xmark" slot="icon"></sinch-icon>
     </sinch-button>
-    <sinch-button v-if="hasAction" slot="action" type="cta-secondary" size="s" text="This is a Button!"
-      @--click="onButtonClick" @--focus="onButtonFocus" @--blur="onButtonBlur">
+    <sinch-button v-if="action === 'single' || action === 'multiple'" slot="action" type="cta-secondary" size="s"
+      text="This is a Button!" @--click="onButtonClick" @--focus="onButtonFocus" @--blur="onButtonBlur">
+    </sinch-button>
+    <sinch-button v-if="action === 'multiple'" slot="action" type="cta-secondary" size="s"
+      text="This is another Button!" @--click="onButtonClick" @--focus="onButtonFocus" @--blur="onButtonBlur">
     </sinch-button>
   </sinch-inline-alert>
 </template>
@@ -76,8 +79,9 @@ export default {
     hasClose() {
       return this.$route.query.close != null
     },
-    hasAction() {
-      return this.$route.query.action != null
+    action() {
+      const action = this.$route.query.action
+      return action || 'none'
     },
   },
 }

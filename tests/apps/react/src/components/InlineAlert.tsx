@@ -23,7 +23,7 @@ export const InlineAlert: FC = () => {
   const [search] = useSearchParams()
   const type: any = search.get('type') ?? undefined
   const hasClose = search.get('close') !== null
-  const hasAction = search.get('action') !== null
+  const action = search.get('action') ?? 'none'
   const example = search.get('example')
 
   const onCloseFocus = () => {
@@ -73,12 +73,24 @@ export const InlineAlert: FC = () => {
           <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
         </sinch-button>
       )}
-      {hasAction && (
+      {(action === 'single' || action === 'multiple') && (
         <sinch-button
           slot="action"
           type="cta-secondary"
           size="s"
           text="This is a Button!"
+          aria-label="Action"
+          on-click={onButtonClick}
+          on-focus={onButtonFocus}
+          on-blur={onButtonBlur}
+        />
+      )}
+      {(action === 'multiple') && (
+        <sinch-button
+          slot="action"
+          type="cta-secondary"
+          size="s"
+          text="This is another Button!"
           aria-label="Action"
           on-click={onButtonClick}
           on-focus={onButtonFocus}

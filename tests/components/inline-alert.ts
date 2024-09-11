@@ -4,11 +4,12 @@ import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } 
 
 const withText = '/inline-alert?type=info'
 const withTextAndClose = '/inline-alert?type=info&close=true'
-const withTextAndButton = '/inline-alert?type=info&action=true'
-const withTextAndButtonAndClose = '/inline-alert?type=info&action=true&close=true'
-const withTextAndButtonAndCloseExpanded = '/inline-alert?width=500&type=info&action=true&close=true'
-const withMarkdownAndButtonAndCloseExpanded = '/inline-alert?width=500&example=md&type=info&action=true&close=true'
-const withTextAndButtonAndCloseNarrow = '/inline-alert?width=300&type=info&action=true&close=true'
+const withTextAndButton = '/inline-alert?type=info&action=single'
+const withTextAndButtonAndClose = '/inline-alert?type=info&action=single&close=true'
+const withTextAndButtonAndCloseExpanded = '/inline-alert?width=500&type=info&action=single&close=true'
+const withTextAndMultipleButtonAndCloseExpanded = '/inline-alert?width=500&type=info&action=multiple&close=true'
+const withMarkdownAndButtonAndCloseExpanded = '/inline-alert?width=500&example=md&type=info&action=single&close=true'
+const withTextAndButtonAndCloseNarrow = '/inline-alert?width=300&type=info&action=single&close=true'
 
 test('inline-alert screenshots', runScreenshotTests('sinch-inline-alert', [
   {
@@ -73,6 +74,13 @@ test('inline-alert screenshots', runScreenshotTests('sinch-inline-alert', [
   {
     name: 'text button close expanded',
     url: withTextAndButtonAndCloseExpanded,
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'text multiple button close expanded',
+    url: withTextAndMultipleButtonAndCloseExpanded,
     async *fn() {
       yield { name: 'shot' }
     },
