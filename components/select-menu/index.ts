@@ -290,7 +290,7 @@ defineCustomElement(
       const searchValue =
         newValue === undefined ? this.#$search.value.toLowerCase() : newValue
       const searchChangedEvent = new CustomEvent('-search-change', {
-        detail: newValue,
+        detail: searchValue,
         cancelable: true,
       })
 
