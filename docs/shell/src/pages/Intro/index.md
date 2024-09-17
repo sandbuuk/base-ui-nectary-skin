@@ -96,6 +96,69 @@ h2 {
 }
 ```
 
+#### Importing Theme (and CSS) in a Shadow Root
+
+Install the following packages:
+
+1. Dependencies: `yarn add @nectary/scoped-stylesheet` / `npm install @nectary/scoped-stylesheet`
+2. devDepencencies: `yarn add -D postcss postcss-import postcss-loader` / `npm install --save-dev postcss postcss-import postcss-loader`
+
+Make sure to add the following to the webpack rules:
+
+```ts
+module.exports = {
+  //...
+  module: {
+    rules: [
+      // ...
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [require("postcss-import")],
+              },
+            },
+          },
+        ],
+        type: "asset/source",
+      },
+    ],
+  },
+  // ...
+};
+```
+
+In the entry file of your microfrontend:
+
+```tsx
+import { ScopedStyleSheet } from "@nectary/scoped-stylesheet";
+import baseTheme from "@nectary/theme-base";
+import mmTheme from "@nectary/theme-message-media";
+import stTheme from "@nectary/theme-simple-texting";
+
+const mount = (element) => {
+  // ...
+  const shadowRoot = // some logic to create the shadowroot
+
+  const scopedStyleSheet = new ScopedStyleSheet(shadowRoot);
+  scopedStyleSheet.addStyle(baseTheme);
+  scopedStyleSheet.addStyle(mmTheme);
+  scopedStyleSheet.addStyle(stTheme);
+  // ...
+}
+```
+
+##### Explanation
+
+In the `index.css` of the theme we import multiple files that compose the theme, in order to be able to read them, webpack needs the `postcss-loader` with the `postcss-import` plugin. Since we want to be able to inject the css in the shadow root we need the css imports to be a string, therefore we use the rule `type: "asset/source"`.
+
+The `@nectary/scoped-stylesheet` package allows us to append styles directly within the shadow root for use, we can then use this to inject the themes.
+
+This can be use for both our themes and other css files you may have!
+
 ### Components
 
 Import component:
