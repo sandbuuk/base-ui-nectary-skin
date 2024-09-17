@@ -137,17 +137,21 @@ In the entry file of your microfrontend:
 import { ScopedStyleSheet } from "@nectary/scoped-stylesheet";
 import baseTheme from "@nectary/theme-base";
 import mmTheme from "@nectary/theme-message-media";
-import stTheme from "@nectary/theme-simple-texting";
+import simpleTextingTheme from "@nectary/theme-simple-texting";
 
 const mount = (element) => {
   // ...
   const shadowRoot = // some logic to create the shadowroot
+  const appElement = shadowRoot.appendChild(document.createElement("div")); // or other logic for the root element
 
   const scopedStyleSheet = new ScopedStyleSheet(shadowRoot);
   scopedStyleSheet.addStyle(baseTheme);
   scopedStyleSheet.addStyle(mmTheme);
-  scopedStyleSheet.addStyle(stTheme);
-  // ...
+  scopedStyleSheet.addStyle(simpleTextingTheme);
+
+  appElement.className = "nectary-theme-base nectary-theme-message-media nectary-theme-base nectary-simple-texting"
+
+  // ... Render app within appElement
 }
 ```
 
@@ -155,9 +159,7 @@ const mount = (element) => {
 
 In the `index.css` of the theme we import multiple files that compose the theme, in order to be able to read them, webpack needs the `postcss-loader` with the `postcss-import` plugin. Since we want to be able to inject the css in the shadow root we need the css imports to be a string, therefore we use the rule `type: "asset/source"`.
 
-The `@nectary/scoped-stylesheet` package allows us to append styles directly within the shadow root for use, we can then use this to inject the themes.
-
-This can be use for both our themes and other css files you may have!
+The `@nectary/scoped-stylesheet` package allows us to append styles directly within the shadow root for use, we can then use this to inject the themes. Make sure to add the correct className to the root element of the app inside the shadow root!
 
 ### Components
 
