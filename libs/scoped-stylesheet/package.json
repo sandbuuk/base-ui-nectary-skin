@@ -1,0 +1,22 @@
+{
+  "name": "@nectary/scoped-stylesheet",
+  "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "build": "NODE_ENV=production babel . --extensions '.ts' --out-dir . && tsc --declaration --emitDeclarationOnly"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.25.6",
+    "@babel/core": "^7.22.20",
+    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-typescript": "^7.22.15",
+    "@babel/runtime": "^7.25.6"
+  }
+}
