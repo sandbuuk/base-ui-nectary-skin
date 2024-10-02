@@ -4244,6 +4244,74 @@
           }
         }
       },
+      "grid": {
+        "gutter": {
+          "s": {
+            "value": "16",
+            "type": "sizing",
+            "description": "Gap between columns"
+          },
+          "m": {
+            "value": "24",
+            "type": "sizing",
+            "description": "Gap between columns"
+          },
+          "l": {
+            "value": "24",
+            "type": "sizing",
+            "description": "Gap between columns"
+          },
+          "xl": {
+            "value": "24",
+            "type": "sizing",
+            "description": "Gap between columns"
+          }
+        },
+        "margin": {
+          "s": {
+            "value": "16",
+            "type": "sizing",
+            "description": "Space around the grid"
+          },
+          "m": {
+            "value": "24",
+            "type": "sizing",
+            "description": "Space around the grid"
+          },
+          "l": {
+            "value": "24",
+            "type": "sizing",
+            "description": "Space around the grid"
+          },
+          "xl": {
+            "value": "32",
+            "type": "sizing",
+            "description": "Space around the grid"
+          }
+        },
+        "columns": {
+          "s": {
+            "value": "4",
+            "type": "number",
+            "description": "Number of columns"
+          },
+          "m": {
+            "value": "8",
+            "type": "number",
+            "description": "Number of columns"
+          },
+          "l": {
+            "value": "12",
+            "type": "number",
+            "description": "Number of columns"
+          },
+          "xl": {
+            "value": "12",
+            "type": "number",
+            "description": "Number of columns"
+          }
+        }
+      },
       "inline-alert": {
         "color": {
           "info": {

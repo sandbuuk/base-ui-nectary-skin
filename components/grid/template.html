@@ -1,40 +1,39 @@
 <style>
 :host {
-  --sinch-comp-grid-gutter: 24px;
-  --sinch-comp-grid-margin: 32px;
-  --sinch-comp-grid-num-columns: 12;
-
   display: grid;
-  grid-template-columns: repeat(var(--sinch-comp-grid-num-columns), minmax(0, 1fr));
-  grid-column-gap: var(--sinch-comp-grid-gutter);
-  grid-row-gap: var(--sinch-comp-grid-gutter);
-  padding: var(--sinch-comp-grid-margin);
+  grid-template-columns: repeat(var(--sinch-comp-grid-columns-xl), minmax(0, 1fr));
+  grid-column-gap: var(--sinch-comp-grid-gutter-xl);
+  grid-row-gap: var(--sinch-comp-grid-gutter-xl);
+  padding: var(--sinch-comp-grid-margin-xl);
 }
 
 /* L */
 @media only screen and (max-width: 1439px) {
   :host {
-    --sinch-comp-grid-gutter: 24px;
-    --sinch-comp-grid-margin: 24px;
-    --sinch-comp-grid-num-columns: 12;
+    grid-template-columns: repeat(var(--sinch-comp-grid-columns-l), minmax(0, 1fr));
+    grid-column-gap: var(--sinch-comp-grid-gutter-l);
+    grid-row-gap: var(--sinch-comp-grid-gutter-l);
+    padding: var(--sinch-comp-grid-margin-l);
   }
 }
 
 /* M */
 @media only screen and (max-width: 1023px) {
   :host {
-    --sinch-comp-grid-gutter: 24px;
-    --sinch-comp-grid-margin: 24px;
-    --sinch-comp-grid-num-columns: 8;
+    grid-template-columns: repeat(var(--sinch-comp-grid-columns-m), minmax(0, 1fr));
+    grid-column-gap: var(--sinch-comp-grid-gutter-m);
+    grid-row-gap: var(--sinch-comp-grid-gutter-m);
+    padding: var(--sinch-comp-grid-margin-m);
   }
 }
 
 /* S */
 @media only screen and (max-width: 767px) {
   :host {
-    --sinch-comp-grid-gutter: 16px;
-    --sinch-comp-grid-margin: 16px;
-    --sinch-comp-grid-num-columns: 4;
+    grid-template-columns: repeat(var(--sinch-comp-grid-columns-s), minmax(0, 1fr));
+    grid-column-gap: var(--sinch-comp-grid-gutter-s);
+    grid-row-gap: var(--sinch-comp-grid-gutter-s);
+    padding: var(--sinch-comp-grid-margin-s);
   }
 }
 </style>

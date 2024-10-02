@@ -82,6 +82,9 @@ type TValue = {
 } | {
   type: 'sizing',
   value: string,
+} | {
+  type: 'number',
+  value: string,
 }
 
 const THEME_CLASS_NAMES: Record<string, string> = {
@@ -344,6 +347,7 @@ const jsonValueToCssValue = (jsonObj: TValue, forceDereferenceValue = false): st
     }
 
     case 'fontWeights':
+    case 'number':
     case 'letterSpacing':
     case 'paragraphSpacing':
     case 'textDecoration':
