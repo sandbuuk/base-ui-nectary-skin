@@ -2770,6 +2770,70 @@
           }
         }
       },
+      "card-2": {
+        "shape-radius": {
+          "value": "{sys.shape-radius.l}",
+          "type": "borderRadius"
+        },
+        "shadow": {
+          "initial": {
+            "value": "{ref.shadow.level.0}",
+            "type": "boxShadow"
+          },
+          "hover": {
+            "value": "{ref.shadow.level.1}",
+            "type": "boxShadow"
+          }
+        },
+        "color": {
+          "default": {
+            "background": {
+              "initial": {
+                "value": "{sys.color.surface.primary.default}",
+                "type": "color"
+              }
+            },
+            "border": {
+              "initial": {
+                "value": "{sys.color.border.default}",
+                "type": "color"
+              }
+            },
+            "title": {
+              "initial": {
+                "value": "{sys.color.text.default}",
+                "type": "color"
+              }
+            },
+            "description": {
+              "initial": {
+                "value": "{sys.color.text.default}",
+                "type": "color"
+              }
+            }
+          }
+        },
+        "font": {
+          "title": {
+            "value": "{sys.font.desktop-title.m}",
+            "type": "typography"
+          },
+          "description": {
+            "value": "{sys.font.body.m}",
+            "type": "typography"
+          },
+          "label": {
+            "value": "{sys.font.desktop-title.xs}",
+            "type": "typography"
+          }
+        },
+        "size": {
+          "icon": {
+            "value": "48",
+            "type": "sizing"
+          }
+        }
+      },
       "chat": {
         "shape-radius": {
           "value": "{sys.shape-radius.l}",
