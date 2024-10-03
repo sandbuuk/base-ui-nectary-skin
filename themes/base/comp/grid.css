@@ -1,0 +1,14 @@
+.nectary-theme-base {
+  --sinch-comp-grid-columns-l: 12;
+  --sinch-comp-grid-columns-m: 8;
+  --sinch-comp-grid-columns-s: 4;
+  --sinch-comp-grid-columns-xl: 12;
+  --sinch-comp-grid-gutter-l: 24px;
+  --sinch-comp-grid-gutter-m: 24px;
+  --sinch-comp-grid-gutter-s: 16px;
+  --sinch-comp-grid-gutter-xl: 24px;
+  --sinch-comp-grid-margin-l: 24px;
+  --sinch-comp-grid-margin-m: 24px;
+  --sinch-comp-grid-margin-s: 16px;
+  --sinch-comp-grid-margin-xl: 32px;
+}
