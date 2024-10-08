@@ -6,6 +6,7 @@ import {
   getIntegerAttribute,
   getReactEventHandler,
   getRect,
+  hasClass,
   isAttrEqual,
   isAttrTrue,
   NectaryElement,
@@ -188,7 +189,13 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
           break
         }
 
-        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+        const isNewValTrue = isAttrTrue(newVal)
+
+        updateBooleanAttribute(this, name, isNewValTrue)
+
+        if (hasClass(this.#$bottomWrapper, 'empty') && isNewValTrue) {
+          setClass(this.#$bottomWrapper, 'empty', false)
+        }
 
         break
       }
@@ -402,7 +409,9 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
   #onBottomSlotChange = () => {
     const isEmpty = this.#$bottomSlot.assignedElements().length === 0
 
-    setClass(this.#$bottomWrapper, 'empty', isEmpty)
+    if (!this.resizable) {
+      setClass(this.#$bottomWrapper, 'empty', isEmpty)
+    }
   }
 
   #onSizeUpdate() {

@@ -5999,6 +5999,12 @@
         "shape-radius": {
           "value": "{comp.button.shape-radius.size.m}",
           "type": "borderRadius"
+        },
+        "size": {
+          "resize-handle": {
+            "value": "20",
+            "type": "sizing"
+          }
         }
       },
       "tile-control": {
