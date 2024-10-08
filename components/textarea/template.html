@@ -77,22 +77,22 @@
   display: none;
 }
 
+:host([resizable]) #bottom {
+  padding-right: calc(var(--sinch-comp-textarea-size-resize-handle) + 4px);
+}
+
 #resize-handle {
   display: none;
   position: absolute;
-  width: 20px;
-  height: 20px;
-  bottom: 36px;
+  width: var(--sinch-comp-textarea-size-resize-handle);
+  height: var(--sinch-comp-textarea-size-resize-handle);
+  bottom: 0;
   right: 0;
   cursor: ns-resize;
 }
 
 :host([resizable]) #resize-handle {
   display: block;
-}
-
-#bottom.empty + #resize-handle {
-  bottom: 0;
 }
 
 #resize-icon {
@@ -107,10 +107,10 @@
   <div id="border"></div>
   <div id="bottom">
     <slot name="bottom"></slot>
-  </div>
-  <div id="resize-handle">
-    <svg id="resize-icon" width="16" height="16">
-      <path d="m14.833 4.724-9.61 9.61-.942-.944 9.61-9.609.942.943ZM15.443 10 10.5 14.943 9.557 14 14.5 9.057l.943.943Z"/>
-    </svg>
+    <div id="resize-handle">
+      <svg id="resize-icon" width="16" height="16">
+        <path d="m14.833 4.724-9.61 9.61-.942-.944 9.61-9.609.942.943ZM15.443 10 10.5 14.943 9.557 14 14.5 9.057l.943.943Z"/>
+      </svg>
+    </div>
   </div>
 </div>

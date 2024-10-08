@@ -9,4 +9,5 @@
   --sinch-comp-textarea-color-invalid-border-initial: var(--sinch-sys-color-feedback-danger-default);
   --sinch-comp-textarea-font-input: var(--sinch-sys-font-body-m);
   --sinch-comp-textarea-shape-radius: var(--sinch-comp-button-shape-radius-size-m);
+  --sinch-comp-textarea-size-resize-handle: 20px;
 }
