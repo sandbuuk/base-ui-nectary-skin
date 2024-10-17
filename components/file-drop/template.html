@@ -66,6 +66,19 @@
   --sinch-global-color-text: var(--sinch-comp-file-drop-color-default-placeholder-active);
 }
 
+#wrapper.drop.invalid {
+  background-color: var(--sinch-comp-file-drop-color-invalid-background-active);
+}
+
+#wrapper.drop.invalid::after {
+  border-color: var(--sinch-comp-file-drop-color-invalid-border-active);
+  border-width: 2px;
+}
+
+#wrapper.drop.invalid > #placeholder {
+  --sinch-global-color-text: var(--sinch-comp-file-drop-color-invalid-placeholder-active);
+}
+
 :host([disabled]) > #wrapper > #placeholder {
   --sinch-global-color-text: var(--sinch-comp-file-drop-color-disabled-placeholder-initial);
 }
