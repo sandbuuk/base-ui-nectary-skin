@@ -4101,10 +4101,18 @@
               "initial": {
                 "value": "{sys.color.surface.secondary.default}",
                 "type": "color"
+              },
+              "active": {
+                "value": "{sys.color.feedback.danger.subtle}",
+                "type": "color"
               }
             },
             "border": {
               "initial": {
+                "value": "{sys.color.feedback.danger.default}",
+                "type": "color"
+              },
+              "active": {
                 "value": "{sys.color.feedback.danger.default}",
                 "type": "color"
               }
@@ -4112,6 +4120,10 @@
             "placeholder": {
               "initial": {
                 "value": "{sys.color.text.default}",
+                "type": "color"
+              },
+              "active": {
+                "value": "{sys.color.text.muted}",
                 "type": "color"
               }
             }
