@@ -14,7 +14,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import { areFilesAccepted, doFilesSatisfySize } from './utils'
+import { areFilesAccepted, areItemsAccepted, doFilesSatisfySize } from './utils'
 import type { TSinchFileDropElement, TSinchFileDropInvalidType, TSinchFileDropReact } from './types'
 import type { TSinchFilePickerElement, TSinchFilePickerInvalidType } from '../file-picker/types'
 import type { TSinchTextElement } from '../text/types'
@@ -181,10 +181,12 @@ defineCustomElement('sinch-file-drop', class extends NectaryElement {
       if (isElementEnabled) {
         setClass(this.#$dropArea, 'drop', true)
         setClass(this.#$dropArea, 'valid', isValid)
+        setClass(this.#$dropArea, 'invalid', !isValid)
       }
     } else {
       setClass(this.#$dropArea, 'drop', false)
       setClass(this.#$dropArea, 'valid', false)
+      setClass(this.#$dropArea, 'invalid', false)
     }
   }
 
@@ -192,10 +194,17 @@ defineCustomElement('sinch-file-drop', class extends NectaryElement {
     e.stopPropagation()
     e.preventDefault()
 
-    const hasTypes = e.dataTransfer?.types?.includes('Files') === true
-    const hasItems = e.dataTransfer?.items != null && e.dataTransfer.items.length > 0
+    const items = e.dataTransfer?.items
 
-    this.#setDragEffect(true, hasTypes || hasItems)
+    let isValidItems = false
+
+    if (items != null && items.length > 0) {
+      const itemsArray = Array.from(items)
+
+      isValidItems = areItemsAccepted(itemsArray, this.accept)
+    }
+
+    this.#setDragEffect(true, isValidItems)
   }
 
   #onDragLeave = (e: DragEvent) => {

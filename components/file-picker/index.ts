@@ -2,7 +2,6 @@ import {
   defineCustomElement,
   getAttribute,
   getBooleanAttribute,
-  getFirstSlotElement,
   getIntegerAttribute,
   getReactEventHandler,
   isAttrEqual,
@@ -22,7 +21,6 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-file-picker', class extends NectaryElement {
   #$input: HTMLInputElement
   #$targetSlot: HTMLSlotElement
-  #$target: HTMLElement | null = null
   #controller: AbortController | null = null
 
   constructor() {
@@ -53,7 +51,6 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
   disconnectedCallback() {
     this.#controller!.abort()
     this.#controller = null
-    this.#$target = null
   }
 
   static get observedAttributes() {
@@ -105,9 +102,8 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
   }
 
   #onTargetSlotChange = () => {
-    this.#$target?.removeEventListener('-click', this.#onTargetClick)
-    this.#$target = getFirstSlotElement(this.#$targetSlot, true)
-    this.#$target?.addEventListener('-click', this.#onTargetClick)
+    this.#$targetSlot.removeEventListener('click', this.#onTargetClick)
+    this.#$targetSlot.addEventListener('click', this.#onTargetClick)
   }
 
   #onTargetClick = () => {

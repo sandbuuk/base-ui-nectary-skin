@@ -200,8 +200,11 @@ defineCustomElement('sinch-button', class extends NectaryElement {
     }
   }
 
-  #onButtonClick = () => {
-    if (!this.disabled) {
+  #onButtonClick = (e: MouseEvent) => {
+    if (this.disabled) {
+      e.stopPropagation()
+      e.preventDefault()
+    } else {
       this.dispatchEvent(
         new CustomEvent('-click')
       )

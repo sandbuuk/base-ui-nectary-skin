@@ -8,8 +8,11 @@
   --sinch-comp-file-drop-color-disabled-background-initial: var(--sinch-sys-color-surface-primary-default);
   --sinch-comp-file-drop-color-disabled-border-initial: var(--sinch-sys-color-border-strong);
   --sinch-comp-file-drop-color-disabled-placeholder-initial: var(--sinch-sys-color-text-disabled);
+  --sinch-comp-file-drop-color-invalid-background-active: var(--sinch-sys-color-feedback-danger-subtle);
   --sinch-comp-file-drop-color-invalid-background-initial: var(--sinch-sys-color-surface-secondary-default);
+  --sinch-comp-file-drop-color-invalid-border-active: var(--sinch-sys-color-feedback-danger-default);
   --sinch-comp-file-drop-color-invalid-border-initial: var(--sinch-sys-color-feedback-danger-default);
+  --sinch-comp-file-drop-color-invalid-placeholder-active: var(--sinch-sys-color-text-muted);
   --sinch-comp-file-drop-color-invalid-placeholder-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-file-drop-font-placeholder: var(--sinch-sys-font-body-m);
   --sinch-comp-file-drop-shape-radius: var(--sinch-sys-shape-radius-l);
