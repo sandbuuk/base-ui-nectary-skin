@@ -157,9 +157,13 @@ defineCustomElement(
         }
 
         case 'rows': {
+          const numberOfItems = this.#$optionSlot.assignedElements().length
+          const maxNumberOfRows = parseInt(newVal ?? '0', 10)
+
           this.#$listbox.style.maxHeight = attrValueToPixels(newVal, {
             min: 2,
             itemSizeMultiplier: ITEM_HEIGHT,
+            addExtraSpace: numberOfItems > maxNumberOfRows,
           })
 
           break
