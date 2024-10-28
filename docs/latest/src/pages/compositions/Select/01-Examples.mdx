@@ -5,6 +5,8 @@ import { SearchExample } from './examples/Search.tsx?example'
 import { AsyncExample } from './examples/Async.tsx?example'
 import { CustomSearchExample } from './examples/CustomSearch.tsx?example'
 import { SearchDisabledExample } from './examples/SearchDisabled.tsx?example'
+import { SectionExample } from './examples/Section.tsx?example'
+import { SectionCustomSearchExample } from './examples/SectionCustomSearch.tsx?example'
 
 # Examples
 
@@ -49,3 +51,13 @@ In this example we chose to display only three elements in the list, but the use
 ## Async
 
 <Example Component={AsyncExample}/>
+
+## Section
+
+You can use `sinch-title` to separate the options into sections.
+
+<Example Component={SectionExample}/>
+
+You might want to use a custom search to be able to filter out the empty sections like so:
+
+<Example Component={SectionCustomSearchExample}/>
