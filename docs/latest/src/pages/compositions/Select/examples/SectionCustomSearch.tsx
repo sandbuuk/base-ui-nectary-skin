@@ -70,7 +70,7 @@ export const SectionCustomSearchExample: FC = () => {
         {
           Object.entries(displayedPokemon).map(([pokemonType, pokemons]) => ((pokemons.length > 0) ? (
             <>
-              <sinch-title level="3" type="m" text={pokemonType}/>
+              <sinch-title type="s" level="4" text={pokemonType}/>
               {pokemons.map((pokemon) => (
                 <sinch-select-menu-option
                   key={pokemon}

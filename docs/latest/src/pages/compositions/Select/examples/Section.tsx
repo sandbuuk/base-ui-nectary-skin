@@ -48,7 +48,7 @@ export const SectionExample: FC = () => {
         {
         Object.entries(pokemonSections).map(([pokemonType, pokemons]) => (
           <>
-            <sinch-title level="3" type="m" text={pokemonType}/>
+            <sinch-title type="s" level="4" text={pokemonType}/>
             {pokemons.map((pokemon) => (
               <sinch-select-menu-option
                 key={pokemon}
