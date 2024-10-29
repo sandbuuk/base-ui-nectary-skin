@@ -45,6 +45,12 @@
   ::slotted(.hidden) {
     display: none;
   }
+
+  ::slotted(sinch-title) {
+    padding: 8px 16px;
+
+    --sinch-global-color-text: var(--sinch-comp-select-menu-color-default-title-initial);
+  }
 </style>
 
 <sinch-input id="search" size="s" placeholder="Search">

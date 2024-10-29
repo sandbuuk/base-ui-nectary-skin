@@ -1,6 +1,7 @@
 import '../input'
 import '../icon'
 import '../text'
+import { isSelectMenuOption } from '../select-menu-option/utils'
 import {
   attrValueToPixels,
   defineCustomElement,
@@ -156,9 +157,13 @@ defineCustomElement(
         }
 
         case 'rows': {
+          const numberOfItems = this.#$optionSlot.assignedElements().length
+          const maxNumberOfRows = parseInt(newVal ?? '0', 10)
+
           this.#$listbox.style.maxHeight = attrValueToPixels(newVal, {
             min: 2,
             itemSizeMultiplier: ITEM_HEIGHT,
+            addExtraSpace: numberOfItems > maxNumberOfRows,
           })
 
           break
@@ -250,7 +255,11 @@ defineCustomElement(
     }
 
     #onListboxClick = (e: Event) => {
-      const $elem = e.target as TSelectMenuOption
+      const $elem = e.target
+
+      if (($elem == null) || !($elem instanceof Element) || !isSelectMenuOption($elem)) {
+        return
+      }
 
       this.focus()
 
@@ -371,7 +380,7 @@ defineCustomElement(
 
     #onOptionSlotChange = () => {
       const searchable = this.searchable
-      const options = this.#$optionSlot.assignedElements()
+      const options = this.#getOptionElements()
       const isEnoughOptions = options.length >= NUM_ITEMS_SEARCH
       // (default)  searchable is null => show search if enough options
       // searchable is true => always show search
@@ -503,7 +512,9 @@ defineCustomElement(
     }
 
     #getOptionElements(): TSelectMenuOption[] {
-      return this.#$optionSlot.assignedElements() as TSelectMenuOption[]
+      const assignedElements = this.#$optionSlot.assignedElements()
+
+      return assignedElements.filter(isSelectMenuOption)
     }
 
     #getSelectedOptionIndex(): number | null {

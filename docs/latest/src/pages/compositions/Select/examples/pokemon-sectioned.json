@@ -1,0 +1,10 @@
+{
+  "Fire": ["Charizard", "Charmander", "Charmeleon"],
+  "Water": ["Blastoise", "Squirtle", "Wartortle"],
+  "Grass": ["Bulbasaur", "Ivysaur", "Venusaur"],
+  "Electric": ["Pikachu"],
+  "Bug": ["Beedrill", "Butterfree", "Caterpie", "Metapod", "Weedle"],
+  "Normal": ["Rattata", "Raticate", "Spearow"],
+  "Poison": ["Arbok", "Ekans"],
+  "Flying": ["Pidgey", "Pidgeotto", "Pidgeot", "Fearow"]
+}

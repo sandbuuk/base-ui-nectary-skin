@@ -71,6 +71,7 @@ type IntegerOptions = {
   defaultValue?: number | null,
   itemSizeMultiplier?: number,
   itemSpaceBetween?: number,
+  addExtraSpace?: boolean,
 }
 
 const DEFAULT_INTEGER_OPTIONS: IntegerOptions = {
@@ -94,7 +95,7 @@ const applyRange = (value: number, { min, max }: IntegerOptions) => {
 }
 
 export const attrValueToInteger = (value: string | null, options: IntegerOptions = DEFAULT_INTEGER_OPTIONS): number | null => {
-  const { defaultValue = null, itemSizeMultiplier = 1, itemSpaceBetween = 0 } = options
+  const { defaultValue = null, itemSizeMultiplier = 1, itemSpaceBetween = 0, addExtraSpace = false } = options
 
   let intValue = defaultValue
 
@@ -107,7 +108,7 @@ export const attrValueToInteger = (value: string | null, options: IntegerOptions
   }
 
   if (intValue !== null) {
-    return intValue * itemSizeMultiplier + Math.max(intValue - 1, 0) * itemSpaceBetween
+    return intValue * itemSizeMultiplier + Math.max(intValue - 1, 0) * itemSpaceBetween + (addExtraSpace ? (0.5 * itemSizeMultiplier) : 0)
   }
 
   return null

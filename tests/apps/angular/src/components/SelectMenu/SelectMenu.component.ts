@@ -22,6 +22,13 @@ const optionsShort: Record<string, TMenuValue> = {
   4: { text: "Option 4", icon: null },
 };
 
+const sectionedOptions: Record<string, TMenuValue[]> = {
+  'Section 1': [{ text: 'Option 1 value long long long', icon: '1' }, { text: 'Option 2', icon: '1', isDisabled: true }],
+  'Section 2': [{ text: 'Option 3', icon: null }],
+  'Section 3': [{ text: 'Option 4', icon: null }, { text: 'Option 5', icon: '1' }],
+  'Section 4': [{ text: 'Option 6', icon: '1', isDisabled: true }, { text: 'Option 7', icon: null }],
+}
+
 type TMenuValue = {
   text: string;
   icon: string | null;
@@ -37,7 +44,9 @@ export class SelectMenuComponent {
   value: string;
   rows: number | null;
   isMultiple: boolean;
+  withSection: boolean;
   options: Record<string, TMenuValue>;
+  sectionedOptions: Record<string, TMenuValue[]>;
 
   constructor(private route: ActivatedRoute) {
     const search = this.route.snapshot.queryParamMap;
@@ -47,8 +56,10 @@ export class SelectMenuComponent {
     this.rows = numVisibleValue !== null ? parseInt(numVisibleValue) : null;
     this.isMultiple = search.get("multiple") !== null;
 
-    this.options =
-      search.get("example") === "lots" ? optionsLong : optionsShort;
+    this.withSection = search.get("section") === "true";
+
+    this.options = search.get("example") === "lots" ? optionsLong : optionsShort;
+    this.sectionedOptions = sectionedOptions
   }
 
   onChange(e: Event) {

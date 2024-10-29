@@ -4,6 +4,7 @@ import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCust
 const shot = '/select-menu?width=200'
 const withMultiple = '/select-menu?width=200&multiple=true'
 const withLots = '/select-menu?width=200&example=lots&rows=4'
+const withSections = '/select-menu?width=200&example=lots&section=true'
 
 test('select menu screenshots', runScreenshotTests('sinch-select-menu', [
   {
@@ -109,6 +110,31 @@ test('select menu screenshots', runScreenshotTests('sinch-select-menu', [
   {
     name: 'search',
     url: withLots,
+    async *fn({ page }) {
+      yield { name: '1-begin' }
+
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('ArrowDown')
+      await page.keyboard.press('ArrowDown')
+      yield { name: '2-arrows' }
+
+      await page.keyboard.type('aaa')
+      await page.waitForTimeout(200)
+      yield { name: '3-type' }
+
+      await page.keyboard.press('Tab')
+      await page.keyboard.press('Enter')
+      await page.waitForTimeout(200)
+      yield { name: '4-clear' }
+
+      await page.keyboard.type('1')
+      await page.waitForTimeout(200)
+      yield { name: '5-filter' }
+    },
+  },
+  {
+    name: 'section',
+    url: withSections,
     async *fn({ page }) {
       yield { name: '1-begin' }
 
