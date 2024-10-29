@@ -4,6 +4,7 @@ import type { FC } from 'react'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
 import '@nectary/components/icon'
+import '@nectary/components/title'
 
 type TMenuValue = {
   text: string,
@@ -22,6 +23,13 @@ const options: Record<string, TMenuValue> = {
   8: { text: 'Option 4', icon: null },
 }
 
+const sectionedOptions: Record<string, TMenuValue[]> = {
+  'Section 1': [{ text: 'Option 1 value long long long', icon: '1' }, { text: 'Option 2', icon: '1', isDisabled: true }],
+  'Section 2': [{ text: 'Option 3', icon: null }],
+  'Section 3': [{ text: 'Option 4', icon: null }, { text: 'Option 5', icon: '1' }],
+  'Section 4': [{ text: 'Option 6', icon: '1', isDisabled: true }, { text: 'Option 7', icon: null }],
+}
+
 export const SelectMenu: FC = () => {
   const [search] = useSearchParams()
   const isMultiple = search.get('multiple') !== null
@@ -38,10 +46,13 @@ export const SelectMenu: FC = () => {
     return val !== null ? parseInt(val) : undefined
   })()
   const isLotsItemsExample = search.get('example') === 'lots'
+  const isSectionedExample = search.get('section') === 'true'
 
-  const items = isLotsItemsExample
-    ? Object.entries(options)
-    : Object.entries(options).slice(0, 4)
+  const usedOptions = isSectionedExample ? sectionedOptions : options
+
+  const items: (([string, TMenuValue] | [string, TMenuValue[]])[]) = isLotsItemsExample
+    ? Object.entries(usedOptions)
+    : Object.entries(usedOptions).slice(0, 4)
 
   return (
     <sinch-select-menu
@@ -52,19 +63,42 @@ export const SelectMenu: FC = () => {
       aria-label="Menu"
     >
       {
-        items.map(([key, { text, icon, isDisabled }]) => (
-          <sinch-select-menu-option
-            key={key}
-            value={key}
-            text={text}
-            disabled={isDisabled}
-            aria-label={text}
-          >
-            {icon === '1' && (
-              <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>
-            )}
-          </sinch-select-menu-option>
-        ))
+        items.map(([key, menu]) => {
+          if (Array.isArray(menu)) {
+            return (
+              <>
+                <sinch-title type="s" level="4" text={key}/>
+                {menu.map((menu) => (
+                  <sinch-select-menu-option
+                    key={key}
+                    value={key}
+                    text={menu.text}
+                    disabled={menu.isDisabled}
+                    aria-label={menu.text}
+                  >
+                    {menu.icon === '1' && (
+                      <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>
+                    )}
+                  </sinch-select-menu-option>
+                ))}
+              </>
+            )
+          }
+
+          return (
+            <sinch-select-menu-option
+              key={key}
+              value={key}
+              text={menu.text}
+              disabled={menu.isDisabled}
+              aria-label={menu.text}
+            >
+              {menu.icon === '1' && (
+                <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>
+              )}
+            </sinch-select-menu-option>
+          )
+        })
       }
     </sinch-select-menu>
   )

@@ -4,15 +4,36 @@
   [value]="value"
   (-change)="onChange($event)"
 >
-  <sinch-select-menu-option
-    *ngFor="let opt of options | keyvalue"
-    [value]="opt.key"
-    [attr.text]="opt.value.text"
-    [attr.disabled]="opt.value.isDisabled"
-  >
-    <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square"
-      *ngIf="opt.value.icon === '1'"
-      slot="icon"
-    ></sinch-icon>
-  </sinch-select-menu-option>
+  <ng-container *ngIf="withSection === false">
+    <sinch-select-menu-option
+      *ngFor="let opt of options | keyvalue"
+      [value]="opt.key"
+      [attr.text]="opt.value.text"
+      [attr.disabled]="opt.value.isDisabled"
+    >
+      <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square"
+        *ngIf="opt.value.icon === '1'"
+        slot="icon"
+      ></sinch-icon>
+    </sinch-select-menu-option>
+  </ng-container>
+  <ng-container *ngIf="withSection === true">
+    <ng-container *ngFor="let section of sectionedOptions | keyvalue">
+      <sinch-title type="s" level="4" [attr.text]="section.key"/>
+      <ng-container *ngFor="let item of section.value">
+        <sinch-select-menu-option
+          [value]="item.text"
+          [attr.text]="item.text"
+          [attr.disabled]="item.isDisabled"
+        >
+          <sinch-icon
+            icons-version="2"
+            name="fa-arrow-up-right-from-square"
+            *ngIf="item.icon === '1'"
+            slot="icon"
+          ></sinch-icon>
+        </sinch-select-menu-option>
+      </ng-container>
+    </ng-container>
+  </ng-container>
 </sinch-select-menu>
