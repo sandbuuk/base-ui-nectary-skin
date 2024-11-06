@@ -43,11 +43,10 @@ defineCustomElement('sinch-progress', class extends NectaryElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        const int = attrValueToInteger(newVal, { min: 0, max: 100 })
-        const intCss = int === null ? '0%' : `${int}%`
+        const int = attrValueToInteger(newVal, { min: 0, max: 100 }) ?? 0
 
-        this.#$bar.style.width = intCss
-        this.#$text.textContent = intCss
+        this.#$bar.style.width = `${int}%`
+        this.#$text.textContent = Intl.NumberFormat(navigator.language, { style: 'percent' }).format(int / 100)
         this.setAttribute('valuenow', int !== null ? String(int) : '0')
 
         break
