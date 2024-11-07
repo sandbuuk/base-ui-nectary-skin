@@ -40,7 +40,7 @@ Note that the "debounce" functionality is disabled when `search-value` is implem
 
 ## Custom Options
 
-Select options may display content beyond its `text` property and `icon` slot. A `content` slot may be provided to render arbitrary content inside the select option. If `content` slot is provided, the `icon` slot wills still be rendered if available, but the `text` property will not.
+A select option can also display arbitrary content. A `content` slot may be provided to render DOM elements inside the select option. If a `content` slot is provided, the `icon` slot will still be rendered if available, but the `text` property will not be rendered.
 
 The `text` property is still required as it serves other purposes such as search.
 
