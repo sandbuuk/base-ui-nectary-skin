@@ -4,6 +4,7 @@ import { RowsExample } from './examples/Rows.tsx?example'
 import { SearchExample } from './examples/Search.tsx?example'
 import { CustomSearchExample } from './examples/CustomSearch.tsx?example'
 import { MultipleExample } from './examples/Multiple.tsx?example'
+import { CustomOptionsExample } from './examples/CustomOptions.tsx?example'
 
 # Examples
 
@@ -36,3 +37,11 @@ Note that the "debounce" functionality is disabled when `search-value` is implem
 ## Multiple
 
 <Example Component={MultipleExample}/>
+
+## Custom Options
+
+A select option can also display arbitrary content. A `content` slot may be provided to render DOM elements inside the select option. If a `content` slot is provided, the `icon` slot will still be rendered if available, but the `text` property will not be rendered.
+
+The `text` property is still required as it serves other purposes such as search.
+
+<Example Component={CustomOptionsExample}/>

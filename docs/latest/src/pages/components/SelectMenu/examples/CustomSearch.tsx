@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import pokemonNames from './pokemon.json'
+import pokemons from './pokemon.json'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
@@ -27,7 +27,7 @@ export const CustomSearchExample: FC = () => {
         search-value={searchValue}
       >
         {
-          pokemonNames.map((pokemon) => (
+          Object.keys(pokemons).map((pokemon) => (
             <sinch-select-menu-option
               key={pokemon}
               value={pokemon}
