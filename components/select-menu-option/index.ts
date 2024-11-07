@@ -22,6 +22,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 export class SelectMenuOption extends NectaryElement {
+  #$contentSlot: HTMLSlotElement
   #$content: HTMLElement
 
   constructor() {
@@ -31,11 +32,17 @@ export class SelectMenuOption extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#$contentSlot = shadowRoot.querySelector('slot[name="content"]')!
     this.#$content = shadowRoot.querySelector('#content')!
   }
 
   connectedCallback() {
     this.setAttribute('role', 'option')
+    this.#$contentSlot.addEventListener(
+      'slotchange',
+      this.#onContentSlotChange
+    )
+    this.#onContentSlotChange()
   }
 
   static get observedAttributes() {
@@ -102,6 +109,12 @@ export class SelectMenuOption extends NectaryElement {
 
   matchesSearch(searchValue: string): boolean {
     return this.text.toLowerCase().includes(searchValue.toLowerCase())
+  }
+
+  #onContentSlotChange = () => {
+    const elements = this.#$contentSlot.assignedElements()
+
+    this.#$content.style.display = elements.length > 0 ? 'none' : ''
   }
 }
 

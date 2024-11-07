@@ -7,7 +7,7 @@
     display: flex;
     position: relative;
     box-sizing: border-box;
-    height: 40px;
+    min-height: 40px;
     padding: 8px 16px;
     align-items: center;
     gap: 10px;
@@ -77,13 +77,19 @@
       );
   }
 
-  ::slotted(*) {
+  ::slotted([slot="icon"]) {
     margin-left: -6px;
+  }
+
+  ::slotted([slot="content"]) {
+    pointer-events: none;
+    flex: 1;
   }
 </style>
 
 <div id="wrapper">
   <slot name="icon"></slot>
+  <slot name="content"></slot>
   <sinch-text id="content" type="m" ellipsis></sinch-text>
   <sinch-icon icons-version="2" name="fa-check" id="icon-check"></sinch-icon>
 </div>
