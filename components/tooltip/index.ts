@@ -297,16 +297,16 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
       return
     }
 
+    if (this.#isSubscribed) {
+      this.#tooltipState.destroy()
+      this.#unsubscribeMouseEnterEvent()
+    }
+
     const text = this.text
 
     this.#$tooltipText.textContent = text
 
-    if (text.length === 0) {
-      if (this.#isSubscribed) {
-        this.#tooltipState.destroy()
-        this.#unsubscribeMouseEnterEvent()
-      }
-    } else {
+    if (text.length !== 0) {
       this.#subscribeMouseEnterEvent()
     }
   }
