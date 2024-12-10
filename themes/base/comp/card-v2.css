@@ -34,5 +34,5 @@
   --sinch-comp-card-v2-shadow-hover: var(--sinch-ref-shadow-level-2);
   --sinch-comp-card-v2-shadow-initial: var(--sinch-ref-shadow-level-0);
   --sinch-comp-card-v2-shape-radius: var(--sinch-sys-shape-radius-l);
-  --sinch-comp-card-v2-size-icon: var(--sinch-sys-size-xs);
+  --sinch-comp-card-v2-size-icon: var(--sinch-sys-size-l);
 }
