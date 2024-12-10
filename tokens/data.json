@@ -2947,7 +2947,7 @@
         },
         "size": {
           "icon": {
-            "value": "{sys.size.xs}",
+            "value": "{sys.size.l}",
             "type": "sizing"
           }
         }
