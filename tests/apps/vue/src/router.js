@@ -8,6 +8,7 @@ import Badge from "./components/Badge.vue";
 import Button from "./components/Button.vue";
 import ButtonGroup from "./components/ButtonGroup.vue";
 import Card from "./components/Card.vue";
+import CardV2 from "./components/CardV2.vue";
 import CardContainer from "./components/CardContainer.vue";
 import CardDnD from "./components/CardDnD.vue";
 import Checkbox from "./components/Checkbox.vue";
@@ -68,6 +69,7 @@ const routes = [
   { path: "/card-container", component: CardContainer },
   { path: "/card-dnd", component: CardDnD },
   { path: "/card", component: Card },
+  { path: "/card-v2", component: CardV2 },
   { path: "/checkbox", component: Checkbox },
   { path: "/chip", component: Chip },
   { path: "/code-tag", component: CodeTag },

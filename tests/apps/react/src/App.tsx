@@ -10,6 +10,7 @@ import { ButtonGroup } from './components/ButtonGroup'
 import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
 import { CardDnD } from './components/CardDnD'
+import { CardV2 } from './components/CardV2'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeTag } from './components/CodeTag'
@@ -97,6 +98,7 @@ const AppImpl = () => {
         <Route path="/card-container" element={<CardContainer/>}/>
         <Route path="/card-dnd" element={<CardDnD/>}/>
         <Route path="/card" element={<Card/>}/>
+        <Route path="/card-v2" element={<CardV2/>}/>
         <Route path="/checkbox" element={<Checkbox/>}/>
         <Route path="/chip" element={<Chip/>}/>
         <Route path="/code-tag" element={<CodeTag/>}/>

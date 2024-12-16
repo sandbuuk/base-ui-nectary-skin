@@ -10,6 +10,7 @@ import { AvatarComponent } from '../components/Avatar/Avatar.component'
 import { BadgeComponent } from '../components/Badge/Badge.component'
 import { ButtonComponent } from '../components/Button/Button.component'
 import { CardComponent } from '../components/Card/Card.component'
+import { CardV2Component } from '../components/CardV2/CardV2.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
 import { CardDnDComponent } from '../components/CardDnD/CardDnD.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
@@ -73,6 +74,7 @@ import { ButtonGroupComponent } from 'src/components/ButtonGroup/ButtonGroup.com
     ButtonComponent,
     ButtonGroupComponent,
     CardComponent,
+    CardV2Component,
     CardDnDComponent,
     CardContainerComponent,
     CheckboxComponent,

@@ -4,6 +4,7 @@ import type { TSinchAvatarStatus } from '@nectary/components/avatar/types'
 import type { TSinchBadgeMode } from '@nectary/components/badge/types'
 import type { TSinchButtonType } from '@nectary/components/button/types'
 import type { TSinchButtonReact } from '@nectary/components/button-group/types'
+import type { TSinchOrientation } from '@nectary/components/card-v2-title/types'
 import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
 import type { TSinchFileDropInvalidType } from '@nectary/components/file-drop/types'
 import type { TSinchFilePickerInvalidType } from '@nectary/components/file-picker/types'
@@ -94,6 +95,16 @@ export interface TSinchCardWrapper {
   caption: string,
   label?: string,
   draggable?: boolean,
+}
+
+export interface TSinchCardV2Wrapper {
+  disabled?: boolean,
+  selected?: boolean,
+  onClick?: (e: CustomEvent<void>) => void,
+}
+export interface TSinchCardV2TitleWrapper {
+  text: string,
+  orientation?: TSinchOrientation,
 }
 
 export interface TSinchCheckboxWrapper {
