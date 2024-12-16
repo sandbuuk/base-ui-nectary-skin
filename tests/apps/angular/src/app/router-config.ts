@@ -7,6 +7,7 @@ import { BadgeComponent } from '../components/Badge/Badge.component'
 import { ButtonComponent } from '../components/Button/Button.component'
 import { ButtonGroupComponent } from '../components/ButtonGroup/ButtonGroup.component'
 import { CardComponent } from '../components/Card/Card.component'
+import { CardV2Component } from '../components/CardV2/CardV2.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
 import { CardDnDComponent } from '../components/CardDnD/CardDnD.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
@@ -68,6 +69,7 @@ const appRoutes: Routes = [
   { path: 'card-container', component: CardContainerComponent },
   { path: 'card-dnd', component: CardDnDComponent },
   { path: 'card', component: CardComponent },
+  { path: 'card-v2', component: CardV2Component },
   { path: 'checkbox', component: CheckboxComponent },
   { path: 'chip', component: ChipComponent },
   { path: 'code-tag', component: CodeTagComponent },
