@@ -1,0 +1,10 @@
+.nectary-theme-base.nectary-theme-dark {
+  --sinch-comp-card-v2-color-selected-background-active: var(--sinch-ref-color-ocean-700);
+  --sinch-comp-card-v2-color-selected-background-disabled: var(--sinch-ref-color-ocean-900);
+  --sinch-comp-card-v2-color-selected-background-hover: var(--sinch-ref-color-ocean-800);
+  --sinch-comp-card-v2-color-selected-background-initial: var(--sinch-ref-color-ocean-900);
+  --sinch-comp-card-v2-color-selected-border-active: var(--sinch-ref-color-ocean-800);
+  --sinch-comp-card-v2-color-selected-border-disabled: var(--sinch-ref-color-ocean-900);
+  --sinch-comp-card-v2-color-selected-border-hover: var(--sinch-ref-color-ocean-800);
+  --sinch-comp-card-v2-color-selected-border-initial: var(--sinch-ref-color-ocean-800);
+}

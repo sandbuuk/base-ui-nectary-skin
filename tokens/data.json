@@ -7024,6 +7024,48 @@
             }
           }
         }
+      },
+      "card-v2": {
+        "color": {
+          "selected": {
+            "background": {
+              "initial": {
+                "value": "{ref.color.ocean.900}",
+                "type": "color"
+              },
+              "hover": {
+                "value": "{ref.color.ocean.800}",
+                "type": "color"
+              },
+              "active": {
+                "value": "{ref.color.ocean.700}",
+                "type": "color"
+              },
+              "disabled": {
+                "value": "{ref.color.ocean.900}",
+                "type": "color"
+              }
+            },
+            "border": {
+              "initial": {
+                "value": "{ref.color.ocean.800}",
+                "type": "color"
+              },
+              "hover": {
+                "value": "{ref.color.ocean.800}",
+                "type": "color"
+              },
+              "active": {
+                "value": "{ref.color.ocean.800}",
+                "type": "color"
+              },
+              "disabled": {
+                "value": "{ref.color.ocean.900}",
+                "type": "color"
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -8486,6 +8528,10 @@
         "comp.date-picker.day.color.default.background.hover": "bcfdefa520baea17a47e0c22781be5a008bcdcab",
         "comp.date-picker.day.color.default.range.background": "a83c5ed693f855bd79143cda6ec6ae13498c9d2f",
         "comp.date-picker.today.color.default.background.hover": "00ae376223bbbff62e7e4b18e8e00644cc668f2f",
+        "comp.card-v2.color.selected.background.initial": "5a81d56dcf506aea990f47ef5a47af2a59f01f79",
+        "comp.card-v2.color.selected.background.hover": "4c76ec6f9c9b85519e81aa1f5c95bbda4f1afc50",
+        "comp.card-v2.color.selected.background.active": "80875947ea75e84c3eb4b4b224a00c7aef0b45ab",
+        "comp.card-v2.color.selected.background.disabled": "b1c20b0db00eb20e76401f04ba7eb168d3375a9b",
         "sys.color.primary.foreground": "bd0cc419f22d25593f70a1ba0ca9159315078d05",
         "comp.button.color.secondary.default.background.initial": "5218b02bddcc926cfff16c7356388c7a20a7016e",
         "comp.button.color.secondary.default.background.hover": "5f3af9ff6b4c422c4cf7a40e15b4733f66d6dcb5",
@@ -8785,10 +8831,6 @@
         "comp.card-v2.color.default.description.disabled": "fb0941ca9f02e5d7835505e2e1c688541377c011",
         "comp.card-v2.color.default.icon.initial": "9f9edebd1d3eb27f6945653b1acbed62e9a120da",
         "comp.card-v2.color.default.icon.disabled": "376bf75e89dfa1256dcb97c13493b47908fc720a",
-        "comp.card-v2.color.selected.background.initial": "47c95d4f0cdeb1e46a037cdedd843d18b9e28507",
-        "comp.card-v2.color.selected.background.hover": "bad315d88d017f3d55743c9426afbbe455d3491d",
-        "comp.card-v2.color.selected.background.active": "ab7105366f8527f37abccdaad2754f46e255eb7c",
-        "comp.card-v2.color.selected.background.disabled": "7c7e9de137452b110bbf855b2cb809c1d7479630",
         "comp.card-v2.color.selected.border.initial": "ce3e8b5d43f1f6c0577a25c6617bbc829717b490",
         "comp.card-v2.color.selected.border.hover": "395b8e525a37c8c3c22e215677bf6bc2a8acdbe9",
         "comp.card-v2.color.selected.border.active": "5cc50dc7c09f7390d3ec16aebf77b24f2f3ad185",
@@ -9304,6 +9346,10 @@
         "comp.date-picker.day.color.default.background.hover": "bcfdefa520baea17a47e0c22781be5a008bcdcab",
         "comp.date-picker.day.color.default.range.background": "a83c5ed693f855bd79143cda6ec6ae13498c9d2f",
         "comp.date-picker.today.color.default.background.hover": "00ae376223bbbff62e7e4b18e8e00644cc668f2f",
+        "comp.card-v2.color.selected.background.initial": "5a81d56dcf506aea990f47ef5a47af2a59f01f79",
+        "comp.card-v2.color.selected.background.hover": "4c76ec6f9c9b85519e81aa1f5c95bbda4f1afc50",
+        "comp.card-v2.color.selected.background.active": "80875947ea75e84c3eb4b4b224a00c7aef0b45ab",
+        "comp.card-v2.color.selected.background.disabled": "b1c20b0db00eb20e76401f04ba7eb168d3375a9b",
         "sys.color.primary.foreground": "bd0cc419f22d25593f70a1ba0ca9159315078d05",
         "comp.button.color.secondary.default.background.initial": "5218b02bddcc926cfff16c7356388c7a20a7016e",
         "comp.button.color.secondary.default.background.hover": "5f3af9ff6b4c422c4cf7a40e15b4733f66d6dcb5",
@@ -9600,10 +9646,6 @@
         "comp.card-v2.color.default.description.disabled": "fb0941ca9f02e5d7835505e2e1c688541377c011",
         "comp.card-v2.color.default.icon.initial": "9f9edebd1d3eb27f6945653b1acbed62e9a120da",
         "comp.card-v2.color.default.icon.disabled": "376bf75e89dfa1256dcb97c13493b47908fc720a",
-        "comp.card-v2.color.selected.background.initial": "47c95d4f0cdeb1e46a037cdedd843d18b9e28507",
-        "comp.card-v2.color.selected.background.hover": "bad315d88d017f3d55743c9426afbbe455d3491d",
-        "comp.card-v2.color.selected.background.active": "ab7105366f8527f37abccdaad2754f46e255eb7c",
-        "comp.card-v2.color.selected.background.disabled": "7c7e9de137452b110bbf855b2cb809c1d7479630",
         "comp.card-v2.color.selected.border.initial": "ce3e8b5d43f1f6c0577a25c6617bbc829717b490",
         "comp.card-v2.color.selected.border.hover": "395b8e525a37c8c3c22e215677bf6bc2a8acdbe9",
         "comp.card-v2.color.selected.border.active": "5cc50dc7c09f7390d3ec16aebf77b24f2f3ad185",
@@ -10128,6 +10170,10 @@
         "comp.date-picker.day.color.default.background.hover": "bcfdefa520baea17a47e0c22781be5a008bcdcab",
         "comp.date-picker.day.color.default.range.background": "a83c5ed693f855bd79143cda6ec6ae13498c9d2f",
         "comp.date-picker.today.color.default.background.hover": "00ae376223bbbff62e7e4b18e8e00644cc668f2f",
+        "comp.card-v2.color.selected.background.initial": "5a81d56dcf506aea990f47ef5a47af2a59f01f79",
+        "comp.card-v2.color.selected.background.hover": "4c76ec6f9c9b85519e81aa1f5c95bbda4f1afc50",
+        "comp.card-v2.color.selected.background.active": "80875947ea75e84c3eb4b4b224a00c7aef0b45ab",
+        "comp.card-v2.color.selected.background.disabled": "b1c20b0db00eb20e76401f04ba7eb168d3375a9b",
         "sys.color.primary.foreground": "bd0cc419f22d25593f70a1ba0ca9159315078d05",
         "comp.button.color.secondary.default.background.initial": "5218b02bddcc926cfff16c7356388c7a20a7016e",
         "comp.button.color.secondary.default.background.hover": "5f3af9ff6b4c422c4cf7a40e15b4733f66d6dcb5",
@@ -10432,10 +10478,6 @@
         "comp.card-v2.color.default.description.disabled": "fb0941ca9f02e5d7835505e2e1c688541377c011",
         "comp.card-v2.color.default.icon.initial": "9f9edebd1d3eb27f6945653b1acbed62e9a120da",
         "comp.card-v2.color.default.icon.disabled": "376bf75e89dfa1256dcb97c13493b47908fc720a",
-        "comp.card-v2.color.selected.background.initial": "47c95d4f0cdeb1e46a037cdedd843d18b9e28507",
-        "comp.card-v2.color.selected.background.hover": "bad315d88d017f3d55743c9426afbbe455d3491d",
-        "comp.card-v2.color.selected.background.active": "ab7105366f8527f37abccdaad2754f46e255eb7c",
-        "comp.card-v2.color.selected.background.disabled": "7c7e9de137452b110bbf855b2cb809c1d7479630",
         "comp.card-v2.color.selected.border.initial": "ce3e8b5d43f1f6c0577a25c6617bbc829717b490",
         "comp.card-v2.color.selected.border.hover": "395b8e525a37c8c3c22e215677bf6bc2a8acdbe9",
         "comp.card-v2.color.selected.border.active": "5cc50dc7c09f7390d3ec16aebf77b24f2f3ad185",
@@ -10954,6 +10996,10 @@
         "comp.date-picker.day.color.default.background.hover": "bcfdefa520baea17a47e0c22781be5a008bcdcab",
         "comp.date-picker.day.color.default.range.background": "a83c5ed693f855bd79143cda6ec6ae13498c9d2f",
         "comp.date-picker.today.color.default.background.hover": "00ae376223bbbff62e7e4b18e8e00644cc668f2f",
+        "comp.card-v2.color.selected.background.initial": "5a81d56dcf506aea990f47ef5a47af2a59f01f79",
+        "comp.card-v2.color.selected.background.hover": "4c76ec6f9c9b85519e81aa1f5c95bbda4f1afc50",
+        "comp.card-v2.color.selected.background.active": "80875947ea75e84c3eb4b4b224a00c7aef0b45ab",
+        "comp.card-v2.color.selected.background.disabled": "b1c20b0db00eb20e76401f04ba7eb168d3375a9b",
         "sys.color.primary.foreground": "bd0cc419f22d25593f70a1ba0ca9159315078d05",
         "comp.button.color.secondary.default.background.initial": "5218b02bddcc926cfff16c7356388c7a20a7016e",
         "comp.button.color.secondary.default.background.hover": "5f3af9ff6b4c422c4cf7a40e15b4733f66d6dcb5",
@@ -11258,10 +11304,6 @@
         "comp.card-v2.color.default.description.disabled": "fb0941ca9f02e5d7835505e2e1c688541377c011",
         "comp.card-v2.color.default.icon.initial": "9f9edebd1d3eb27f6945653b1acbed62e9a120da",
         "comp.card-v2.color.default.icon.disabled": "376bf75e89dfa1256dcb97c13493b47908fc720a",
-        "comp.card-v2.color.selected.background.initial": "47c95d4f0cdeb1e46a037cdedd843d18b9e28507",
-        "comp.card-v2.color.selected.background.hover": "bad315d88d017f3d55743c9426afbbe455d3491d",
-        "comp.card-v2.color.selected.background.active": "ab7105366f8527f37abccdaad2754f46e255eb7c",
-        "comp.card-v2.color.selected.background.disabled": "7c7e9de137452b110bbf855b2cb809c1d7479630",
         "comp.card-v2.color.selected.border.initial": "ce3e8b5d43f1f6c0577a25c6617bbc829717b490",
         "comp.card-v2.color.selected.border.hover": "395b8e525a37c8c3c22e215677bf6bc2a8acdbe9",
         "comp.card-v2.color.selected.border.active": "5cc50dc7c09f7390d3ec16aebf77b24f2f3ad185",
@@ -11779,6 +11821,10 @@
         "comp.date-picker.day.color.default.background.hover": "bcfdefa520baea17a47e0c22781be5a008bcdcab",
         "comp.date-picker.day.color.default.range.background": "a83c5ed693f855bd79143cda6ec6ae13498c9d2f",
         "comp.date-picker.today.color.default.background.hover": "00ae376223bbbff62e7e4b18e8e00644cc668f2f",
+        "comp.card-v2.color.selected.background.initial": "5a81d56dcf506aea990f47ef5a47af2a59f01f79",
+        "comp.card-v2.color.selected.background.hover": "4c76ec6f9c9b85519e81aa1f5c95bbda4f1afc50",
+        "comp.card-v2.color.selected.background.active": "80875947ea75e84c3eb4b4b224a00c7aef0b45ab",
+        "comp.card-v2.color.selected.background.disabled": "b1c20b0db00eb20e76401f04ba7eb168d3375a9b",
         "sys.color.primary.foreground": "bd0cc419f22d25593f70a1ba0ca9159315078d05",
         "comp.button.color.secondary.default.background.initial": "5218b02bddcc926cfff16c7356388c7a20a7016e",
         "comp.button.color.secondary.default.background.hover": "5f3af9ff6b4c422c4cf7a40e15b4733f66d6dcb5",
@@ -12078,10 +12124,6 @@
         "comp.card-v2.color.default.description.disabled": "fb0941ca9f02e5d7835505e2e1c688541377c011",
         "comp.card-v2.color.default.icon.initial": "9f9edebd1d3eb27f6945653b1acbed62e9a120da",
         "comp.card-v2.color.default.icon.disabled": "376bf75e89dfa1256dcb97c13493b47908fc720a",
-        "comp.card-v2.color.selected.background.initial": "47c95d4f0cdeb1e46a037cdedd843d18b9e28507",
-        "comp.card-v2.color.selected.background.hover": "bad315d88d017f3d55743c9426afbbe455d3491d",
-        "comp.card-v2.color.selected.background.active": "ab7105366f8527f37abccdaad2754f46e255eb7c",
-        "comp.card-v2.color.selected.background.disabled": "7c7e9de137452b110bbf855b2cb809c1d7479630",
         "comp.card-v2.color.selected.border.initial": "ce3e8b5d43f1f6c0577a25c6617bbc829717b490",
         "comp.card-v2.color.selected.border.hover": "395b8e525a37c8c3c22e215677bf6bc2a8acdbe9",
         "comp.card-v2.color.selected.border.active": "5cc50dc7c09f7390d3ec16aebf77b24f2f3ad185",
@@ -12896,14 +12938,14 @@
         "comp.card-v2.color.default.description.disabled": "fb0941ca9f02e5d7835505e2e1c688541377c011",
         "comp.card-v2.color.default.icon.initial": "9f9edebd1d3eb27f6945653b1acbed62e9a120da",
         "comp.card-v2.color.default.icon.disabled": "376bf75e89dfa1256dcb97c13493b47908fc720a",
-        "comp.card-v2.color.selected.background.initial": "47c95d4f0cdeb1e46a037cdedd843d18b9e28507",
-        "comp.card-v2.color.selected.background.hover": "bad315d88d017f3d55743c9426afbbe455d3491d",
-        "comp.card-v2.color.selected.background.active": "ab7105366f8527f37abccdaad2754f46e255eb7c",
-        "comp.card-v2.color.selected.background.disabled": "7c7e9de137452b110bbf855b2cb809c1d7479630",
-        "comp.card-v2.color.selected.border.initial": "ce3e8b5d43f1f6c0577a25c6617bbc829717b490",
-        "comp.card-v2.color.selected.border.hover": "395b8e525a37c8c3c22e215677bf6bc2a8acdbe9",
-        "comp.card-v2.color.selected.border.active": "5cc50dc7c09f7390d3ec16aebf77b24f2f3ad185",
-        "comp.card-v2.color.selected.border.disabled": "8ad8cf12b7f89383a603ead34b9463a581bb6452",
+        "comp.card-v2.color.selected.background.initial": "5a81d56dcf506aea990f47ef5a47af2a59f01f79",
+        "comp.card-v2.color.selected.background.hover": "4c76ec6f9c9b85519e81aa1f5c95bbda4f1afc50",
+        "comp.card-v2.color.selected.background.active": "80875947ea75e84c3eb4b4b224a00c7aef0b45ab",
+        "comp.card-v2.color.selected.background.disabled": "b1c20b0db00eb20e76401f04ba7eb168d3375a9b",
+        "comp.card-v2.color.selected.border.initial": "bc4a87bbcb6eb064712b2c0efd07f4f33f8e7c5d",
+        "comp.card-v2.color.selected.border.hover": "a8118abdeb0ad50e64ebe127e291d595a3eb99ee",
+        "comp.card-v2.color.selected.border.active": "e72197ee12abfeb0e9ea2a96adbaba9f98f605c2",
+        "comp.card-v2.color.selected.border.disabled": "a6760cc7c74ff8c66619201574acf1975ad4762b",
         "comp.card-v2.color.selected.title.initial": "2e1b5e53ebd77c3dde91ee4bb2b8f27faa7b8c7f",
         "comp.card-v2.color.selected.title.disabled": "4fdece3f5b596be5dba253a623fe3779f54ede71",
         "comp.card-v2.color.selected.description.initial": "c8e7bb186df5b46f509b6aa9c4aa985a0903de7d",
@@ -13567,6 +13609,10 @@
         "comp.date-picker.day.color.default.background.hover": "bcfdefa520baea17a47e0c22781be5a008bcdcab",
         "comp.date-picker.day.color.default.range.background": "a83c5ed693f855bd79143cda6ec6ae13498c9d2f",
         "comp.date-picker.today.color.default.background.hover": "00ae376223bbbff62e7e4b18e8e00644cc668f2f",
+        "comp.card-v2.color.selected.background.initial": "5a81d56dcf506aea990f47ef5a47af2a59f01f79",
+        "comp.card-v2.color.selected.background.hover": "4c76ec6f9c9b85519e81aa1f5c95bbda4f1afc50",
+        "comp.card-v2.color.selected.background.active": "80875947ea75e84c3eb4b4b224a00c7aef0b45ab",
+        "comp.card-v2.color.selected.background.disabled": "b1c20b0db00eb20e76401f04ba7eb168d3375a9b",
         "sys.color.primary.foreground": "bd0cc419f22d25593f70a1ba0ca9159315078d05",
         "comp.button.color.secondary.default.background.initial": "5218b02bddcc926cfff16c7356388c7a20a7016e",
         "comp.button.color.secondary.default.background.hover": "5f3af9ff6b4c422c4cf7a40e15b4733f66d6dcb5",
@@ -13866,10 +13912,6 @@
         "comp.card-v2.color.default.description.disabled": "fb0941ca9f02e5d7835505e2e1c688541377c011",
         "comp.card-v2.color.default.icon.initial": "9f9edebd1d3eb27f6945653b1acbed62e9a120da",
         "comp.card-v2.color.default.icon.disabled": "376bf75e89dfa1256dcb97c13493b47908fc720a",
-        "comp.card-v2.color.selected.background.initial": "47c95d4f0cdeb1e46a037cdedd843d18b9e28507",
-        "comp.card-v2.color.selected.background.hover": "bad315d88d017f3d55743c9426afbbe455d3491d",
-        "comp.card-v2.color.selected.background.active": "ab7105366f8527f37abccdaad2754f46e255eb7c",
-        "comp.card-v2.color.selected.background.disabled": "7c7e9de137452b110bbf855b2cb809c1d7479630",
         "comp.card-v2.color.selected.border.initial": "ce3e8b5d43f1f6c0577a25c6617bbc829717b490",
         "comp.card-v2.color.selected.border.hover": "395b8e525a37c8c3c22e215677bf6bc2a8acdbe9",
         "comp.card-v2.color.selected.border.active": "5cc50dc7c09f7390d3ec16aebf77b24f2f3ad185",
