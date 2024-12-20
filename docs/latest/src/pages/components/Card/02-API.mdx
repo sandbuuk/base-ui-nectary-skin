@@ -1,23 +1,31 @@
 import {
   ReactPropsTable,
+  ReactHandlersTable,
   ElementAttributesTable,
-} from '@nectary/components/card/types.ts?api'
+  ElementEventsTable
+} from '@nectary/components/card-v2/types.ts?api'
 
 # API
 
+`sinch-card-v2`
+
 ## Slots
 
-### icon
+### media
 
-Title icon.
+For images and illustrations. Shown at the top of the card.
 
-### illustration
+### title
 
-Illustration.
+Can be used with the ready made `sinch-card-v2-title` or your own component. Shown at the top of the card below the media slot.
 
-### action
+### content
 
-Actionable link or button.
+Text content. Shown at the middle of the card.
+
+### footer
+
+Shown at the bottom of the card.
 
 ## React
 
@@ -25,8 +33,16 @@ Actionable link or button.
 
 <ReactPropsTable/>
 
+### Handlers
+
+<ReactHandlersTable/>
+
 ## Element
 
 ### Attributes
 
 <ElementAttributesTable/>
+
+### Events
+
+<ElementEventsTable/>

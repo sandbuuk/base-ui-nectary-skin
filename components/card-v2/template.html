@@ -51,15 +51,13 @@
   align-self: stretch;
 }
 
-:host(:hover) #card {
-  background-color: var(--sinch-comp-card-v2-color-default-background-hover);
-  border-color: var(--sinch-comp-card-v2-color-default-border-hover);
-  box-shadow: var(--sinch-comp-card-v2-shadow-hover);
-}
-
 :host([selected]:not([selected="false"])) #card {
   background-color: var(--sinch-comp-card-v2-color-selected-background-initial);
   border-color: var(--sinch-comp-card-v2-color-selected-border-initial);
+  cursor: pointer;
+}
+
+:host([clickable]:not([clickable="false"])) #card {
   cursor: pointer;
 }
 
@@ -70,22 +68,24 @@
   cursor: not-allowed;
 }
 
-:host([clickable]:not([clickable="false"])) #card {
-  cursor: pointer;
+:host([clickable]:not([clickable="false"]):is(:not([disabled]), [disabled="false"]):hover) #card {
+  background-color: var(--sinch-comp-card-v2-color-default-background-hover);
+  border-color: var(--sinch-comp-card-v2-color-default-border-hover);
+  box-shadow: var(--sinch-comp-card-v2-shadow-hover);
 }
 
-:host([selected]:not([selected="false"]):hover) #card {
-  background-color: var(--sinch-comp-card-v2-color-selected-background-hover);
-  border-color: var(--sinch-comp-card-v2-color-selected-border-hover);
-}
-
-:host([clickable]:not([clickable="false"]):active) #card {
+:host([clickable]:not([clickable="false"]):is(:not([disabled]), [disabled="false"]):active) #card {
   background-color: var(--sinch-comp-card-v2-color-default-background-active);
   border-color: var(--sinch-comp-card-v2-color-default-border-active);
   box-shadow: var(--sinch-comp-card-v2-shadow-active);
 }
 
-:host([selected]:not([selected="false"]):active) #card {
+:host([selected]:not([selected="false"]):is(:not([disabled]), [disabled="false"]):hover) #card {
+  background-color: var(--sinch-comp-card-v2-color-selected-background-hover);
+  border-color: var(--sinch-comp-card-v2-color-selected-border-hover);
+}
+
+:host([selected]:not([selected="false"]):is(:not([disabled]), [disabled="false"]):active) #card {
   background-color: var(--sinch-comp-card-v2-color-selected-background-active);
   border-color: var(--sinch-comp-card-v2-color-selected-border-active);
 }

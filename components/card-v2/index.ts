@@ -81,7 +81,16 @@ defineCustomElement(
 
       const options = { signal: this.#controller.signal }
 
-      const handleClick = () => this.dispatchEvent(new CustomEvent('-click'))
+      const handleClick = (e: Event) => {
+        if (this.disabled) {
+          e.stopPropagation()
+          e.preventDefault()
+        } else {
+          this.dispatchEvent(
+            new CustomEvent('-click')
+          )
+        }
+      }
       const handleReactClick = (e: Event) => {
         getReactEventHandler(this, 'on-click')?.(e)
       }
