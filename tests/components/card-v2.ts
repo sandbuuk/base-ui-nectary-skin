@@ -22,7 +22,7 @@ const withIllustrationButton = `/card-v2?width=300&title=${cardTitle}&content=${
 const withIllustrationLink = `/card-v2?width=300&title=${cardTitle}&content=${cardContentLong}&icon=true&illustration=true&link=${cardLinkText}`
 const withIllustrationBg = `/card-v2?width=300&title=${cardTitle}&content=${cardContentLong}&icon=true&illustration=true&bg=blue`
 
-test.only('card-v2 screenshots', runScreenshotTests('sinch-card-v2', [
+test('card-v2 screenshots', runScreenshotTests('sinch-card-v2', [
   {
     name: 'title',
     url: withWideWidth,

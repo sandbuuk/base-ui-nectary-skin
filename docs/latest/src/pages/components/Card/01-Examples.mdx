@@ -1,49 +1,64 @@
-import { Example } from '~/components/Example'
-import { SimpleExample } from './examples/Simple.tsx?example'
-import { IconExample } from './examples/Icon.tsx?example'
-import { ButtonExample } from './examples/Button.tsx?example'
-import { LinkExample } from './examples/Link.tsx?example'
-import { IllustrationExample } from './examples/Illustration.tsx?example'
-import { DraggableExample } from './examples/Draggable.tsx?example'
+import { Example } from "~/components/Example";
+import { SimpleExample } from "./examples/Simple.tsx?example";
+import { ComplexExample } from "./examples/Complex.tsx?example";
+import { IconExample } from "./examples/Icon.tsx?example";
+import { SelectedExample } from "./examples/Selected.tsx?example";
+import { DisabledExample } from "./examples/Disabled.tsx?example";
+import { ClickableExample } from "./examples/Clickable.tsx?example";
+import { OtherExample } from "./examples/Other.tsx?example";
+import { TitlesExample } from "./examples/Titles.tsx?example";
 
 # Examples
 
-Cards are containers that group related information. They help to organize and divide content making it easier to scan big chunks of information.
+Cards are versatile containers that group related information into organized, scannable sections. The card has 4 available slots that appears in the following order:
 
-## Simple
+1. `media`
+2. `title`
+3. `content`
+4. `footer`
 
-A simple card in Nectary is a user interface element that is used to present information or content in a compact, organized manner. It typically consists of a container with a fixed or variable size, and includes only a title and text.They can be used in a variety of contexts, such as listing products or services, showcasing articles or blog posts, or displaying information about a particular topic.
+## Simple Card
 
-The title and text of the simple card can be customized to fit the needs of the design and the context in which it is being used.
+A simple card using only the `title` and `content` slots.
 
-<Example Component={SimpleExample}/>
+<Example Component={SimpleExample} />
 
-## Icon
+## Complex
 
-The icon can be used to add visual interest or context to the card. The design and layout of the card is kept minimal and straightforward, with a focus on presenting information in a clear and concise manner.
+A complete card utilizing all four available slots, including the `media` slot for illustrations or other media-related content.
 
-<Example Component={IconExample}/>
+<Example Component={ComplexExample} />
 
-## Button
+## Title Variants
 
- The button allows users to take a specific action, such as viewing more details or accessing related content.
+The `sinch-card-v2-title` component supports an optional icon slot to display icons alongside titles. The icon placement can be controlled with the `orientation` prop:
 
-<Example Component={ButtonExample}/>
+* `orientation="horizontal"` (default): Icon appears beside the title
+* `orientation="vertical"`: Icon appears above the title
 
-## Link
+<Example Component={TitlesExample} />
 
-The link allows users to navigate to a specific web page or location within the application
+## Clickable
 
-<Example Component={LinkExample}/>
+A clickable card provides visual feedback through `:hover` and `:active` state styles, but does not include any built-in interactive functionality. There are two ways to apply this visual style:
 
-## Illustration
+* Automatically: When a click event handler is added to the card (`-click` or `on-click` depending on the framework)
+* Explicitly: By adding the `clickable` attribute
 
-The illustration is a visual element that can be used to add context, interest, or personality to the card. It can be an image, icon, or other graphical element that is relevant to the content of the card. The illustration can help users quickly understand the content of the card and engage with it more effectively.
+<Example Component={ClickableExample} />
 
-<Example Component={IllustrationExample}/>
+## Selected
 
-## Draggable
+Add the `selected` attribute to indicate an active or chosen card state. Here we have created a wrapper component that manages the selected state of the cards.
 
-Sinch Card implements HTML5 drag and drop API. Set `draggable` attribute to enable dragging by card title.
+<Example Component={SelectedExample} />
 
-<Example Component={DraggableExample}/>
+## Disabled
+
+Add the `disabled` attribute to indicate an inactive or unavailable card state. Disabled cards will not respond to click events.
+
+<Example Component={DisabledExample} />
+
+## Other
+
+<Example Component={OtherExample} />
