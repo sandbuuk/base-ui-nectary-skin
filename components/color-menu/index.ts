@@ -214,11 +214,10 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     switch (e.code) {
       case 'Space':
       case 'Enter': {
-        e.preventDefault()
-
         const $option = this.#findSelectedOption()
 
         if ($option !== null) {
+          e.preventDefault()
           this.#dispatchChangeEvent($option)
         }
 

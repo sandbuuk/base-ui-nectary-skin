@@ -107,11 +107,10 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     switch (e.code) {
       case 'Enter':
       case 'Space': {
-        e.preventDefault()
-
         const $opt = this.#findSelectedOption()
 
         if ($opt !== null) {
+          e.preventDefault()
           $opt.click()
         }
 
