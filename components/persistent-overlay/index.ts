@@ -83,7 +83,7 @@ defineCustomElement('sinch-persistent-overlay', class extends NectaryElement {
 
   connectedCallback() {
     super.connectedCallback()
-    this.role = 'dialog'
+    this.setAttribute('role', 'dialog')
     this.#controller = new AbortController()
 
     const { signal } = this.#controller

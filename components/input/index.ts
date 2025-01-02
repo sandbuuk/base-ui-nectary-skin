@@ -79,7 +79,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   connectedCallback() {
     super.connectedCallback()
 
-    this.role = 'textbox'
+    this.setAttribute('role', 'textbox')
 
     if (this.#controller === null) {
       this.#controller = new AbortController()

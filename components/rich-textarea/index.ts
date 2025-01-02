@@ -106,7 +106,7 @@ defineCustomElement('sinch-rich-textarea', class extends NectaryElement {
       signal: this.#controller.signal,
     }
 
-    this.role = 'textbox'
+    this.setAttribute('role', 'textbox')
     this.ariaMultiLine = 'true'
     this.#$input.addEventListener('beforeinput', this.#onBeforeInput, options)
     this.#$input.addEventListener('keydown', this.#onKeydown, options)

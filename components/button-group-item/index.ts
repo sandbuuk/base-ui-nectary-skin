@@ -45,7 +45,7 @@ defineCustomElement('sinch-button-group-item', class extends NectaryElement {
 
     const { signal } = this.#controller
 
-    this.role = 'button'
+    this.setAttribute('role', 'button')
 
     const forwardEvent = (e: Event) => this.dispatchEvent(new CustomEvent(e.type, { ...e }))
 

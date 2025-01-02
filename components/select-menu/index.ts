@@ -74,7 +74,7 @@ defineCustomElement(
         signal: this.#controller.signal,
       }
 
-      this.role = 'listbox'
+      this.setAttribute('role', 'listbox')
       this.tabIndex = 0
       this.addEventListener('keydown', this.#onListboxKeyDown, options)
       this.addEventListener('focus', this.#onFocus, options)

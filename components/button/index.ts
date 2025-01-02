@@ -50,7 +50,7 @@ defineCustomElement('sinch-button', class extends NectaryElement {
 
     const { signal } = this.#controller
 
-    this.role = 'button'
+    this.setAttribute('role', 'button')
     this.tabIndex = 0
     this.addEventListener('click', this.#onButtonClick, { signal })
     this.addEventListener('focus', this.#onButtonFocus, { signal })

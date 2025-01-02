@@ -59,7 +59,7 @@ defineCustomElement(
         signal: this.#controller.signal,
       }
 
-      this.role = 'dialog'
+      this.setAttribute('role', 'dialog')
       this.#$closeButton.addEventListener('click', this.#onCloseClick, options)
       this.#$dialog.addEventListener(
         'mousedown',

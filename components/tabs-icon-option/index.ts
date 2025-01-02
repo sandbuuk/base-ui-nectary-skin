@@ -33,7 +33,7 @@ defineCustomElement('sinch-tabs-icon-option', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.role = 'tab'
+    this.setAttribute('role', 'tab')
     this.#$button.addEventListener('click', this.#onClick)
   }
 

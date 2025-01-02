@@ -44,7 +44,7 @@ defineCustomElement(
     }
 
     connectedCallback() {
-      this.role = 'tab'
+      this.setAttribute('role', 'tab')
     }
 
     disconnectedCallback() {}
