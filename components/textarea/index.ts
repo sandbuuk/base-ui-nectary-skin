@@ -57,7 +57,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
       signal: this.#controller.signal,
     }
 
-    this.role = 'textbox'
+    this.setAttribute('role', 'textbox')
     this.ariaMultiLine = 'true'
     this.#$input.addEventListener('input', this.#onInput, options)
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart, options)

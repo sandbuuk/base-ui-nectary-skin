@@ -37,7 +37,7 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
     const { signal } = this.#controller
     const options: AddEventListenerOptions = { signal }
 
-    this.role = 'tab'
+    this.setAttribute('role', 'tab')
     this.addEventListener('focus', this.#onButtonFocus, options)
     this.addEventListener('blur', this.#onButtonBlur, options)
     this.addEventListener('-focus', this.#onFocusReactHandler)

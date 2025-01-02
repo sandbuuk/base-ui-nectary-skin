@@ -38,7 +38,7 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
     const { signal } = this.#controller
     const options: AddEventListenerOptions = { signal }
 
-    this.role = 'tablist'
+    this.setAttribute('role', 'tablist')
     this.#$slot.addEventListener('slotchange', this.#onSlotChange, options)
     this.#$slot.addEventListener('click', this.#onOptionClick, options)
     this.#$slot.addEventListener('keydown', this.#onOptionKeydown, options)

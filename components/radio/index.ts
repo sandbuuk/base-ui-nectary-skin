@@ -37,7 +37,7 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     const { signal } = this.#controller
     const options: AddEventListenerOptions = { signal }
 
-    this.role = 'radiogroup'
+    this.setAttribute('role', 'radiogroup')
     this.#$slot.addEventListener('slotchange', this.#onSlotChange, options)
     this.#$slot.addEventListener('keydown', this.#onOptionKeyDown, options)
     this.#$slot.addEventListener('click', this.#onOptionClick, options)

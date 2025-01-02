@@ -49,7 +49,7 @@ defineCustomElement('sinch-rich-text', class extends NectaryElement {
 
   connectedCallback() {
     super.connectedCallback()
-    this.role = 'paragraph'
+    this.setAttribute('role', 'paragraph')
 
     this.#parseVisitor.updateEmojiBaseUrl(getEmojiBaseUrl(this))
     this.#updateText()

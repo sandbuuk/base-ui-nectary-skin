@@ -30,7 +30,7 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.role = 'radio'
+    this.setAttribute('role', 'radio')
     this.tabIndex = 0
   }
 

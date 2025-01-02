@@ -37,7 +37,7 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
     const { signal } = this.#controller
     const options: AddEventListenerOptions = { signal }
 
-    this.role = 'checkbox'
+    this.setAttribute('role', 'checkbox')
     this.tabIndex = 0
     this.addEventListener('click', this.#onClick, options)
     this.addEventListener('focus', this.#onFocus, options)

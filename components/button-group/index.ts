@@ -67,7 +67,7 @@ defineCustomElement('sinch-button-group', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.role = 'group'
+    this.setAttribute('role', 'group')
   }
 })
 

@@ -79,6 +79,7 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
       signal: this.#controller.signal,
     }
 
+    this.setAttribute('role', 'tooltip')
     this.#$pop.addEventListener('-close', this.#onPopClose, options)
     this.addEventListener('-show', this.#onShowReactHandler, options)
     this.addEventListener('-hide', this.#onHideReactHandler, options)

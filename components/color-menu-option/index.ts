@@ -33,7 +33,7 @@ defineCustomElement('sinch-color-menu-option', class extends NectaryElement {
   }
 
   connectedCallback() {
-    this.role = 'option'
+    this.setAttribute('role', 'option')
   }
 
   disconnectedCallback() {

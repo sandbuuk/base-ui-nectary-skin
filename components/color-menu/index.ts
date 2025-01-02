@@ -50,7 +50,7 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
     const { signal } = this.#controller
     const options: AddEventListenerOptions = { signal }
 
-    this.role = 'listbox'
+    this.setAttribute('role', 'listbox')
     this.tabIndex = 0
     this.addEventListener('keydown', this.#onListboxKeyDown, options)
     this.addEventListener('blur', this.#onListboxBlur, options)
