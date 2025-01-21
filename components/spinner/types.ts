@@ -11,4 +11,10 @@ export type TSinchSpinnerElement = HTMLElement & {
 export type TSinchSpinnerReact = TSinchElementReact<TSinchSpinnerElement> & {
   /** Spinner size */
   size?: TSinchSize,
+} & {
+  style?: {
+    // Colors
+    '--sinch-global-color-icon'?: string,
+    '--sinch-sys-color-text-default'?: string,
+  },
 }

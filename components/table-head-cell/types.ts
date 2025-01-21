@@ -14,4 +14,15 @@ export type TSinchTableHeaderCellReact = TSinchElementReact<TSinchTableHeaderCel
   text?: string,
   fit?: boolean,
   align?: TSinchTableAlignType,
+} & {
+  style?: {
+    // Colors - Head Cell Default
+    '--sinch-comp-table-color-head-cell-default-border-initial'?: string,
+    '--sinch-comp-table-color-head-cell-default-icon-initial'?: string,
+    '--sinch-comp-table-color-head-cell-default-text-initial'?: string,
+
+    // Global Properties
+    '--sinch-global-color-icon'?: string,
+    '--sinch-global-color-text'?: string,
+  },
 }

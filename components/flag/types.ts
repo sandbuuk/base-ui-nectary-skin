@@ -10,4 +10,9 @@ export type TSinchFlagElement = HTMLElement & {
 export type TSinchFlagReact = TSinchElementReact<TSinchFlagElement> & {
   /** Flag country code */
   code: string,
+} & {
+  style?: {
+    // Global Properties
+    '--sinch-global-size-icon'?: string,
+  },
 }

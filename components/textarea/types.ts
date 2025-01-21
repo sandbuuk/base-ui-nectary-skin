@@ -59,4 +59,29 @@ export type TSinchTextareaReact = TSinchElementReact<TSinchTextareaElement> & {
   'on-focus'?: (e: CustomEvent<void>) => void,
   /** Blur handler */
   'on-blur'?: (e: CustomEvent<void>) => void,
+} & {
+  style?: {
+    // Shape
+    '--sinch-comp-textarea-shape-radius'?: string,
+
+    // Font
+    '--sinch-comp-textarea-font-input'?: string,
+
+    // Sizes
+    '--sinch-comp-textarea-size-resize-handle'?: string,
+
+    // Colors - Default State
+    '--sinch-comp-textarea-color-default-background-initial'?: string,
+    '--sinch-comp-textarea-color-default-text-initial'?: string,
+    '--sinch-comp-textarea-color-default-text-placeholder'?: string,
+    '--sinch-comp-textarea-color-default-border-initial'?: string,
+    '--sinch-comp-textarea-color-default-border-focus'?: string,
+
+    // Colors - Invalid State
+    '--sinch-comp-textarea-color-invalid-border-initial'?: string,
+
+    // Colors - Disabled State
+    '--sinch-comp-textarea-color-disabled-text-initial'?: string,
+    '--sinch-comp-textarea-color-disabled-border-initial'?: string,
+  },
 }

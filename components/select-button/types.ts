@@ -49,4 +49,42 @@ export type TSinchSelectButtonReact = TSinchElementReact<TSinchSelectButtonEleme
   'on-focus'?: (e: CustomEvent<void>) => void,
   /** Blur handler */
   'on-blur'?: (e: CustomEvent<void>) => void,
+} & {
+  style?: {
+    // Sizes - L
+    '--sinch-comp-select-button-size-container-l'?: string,
+    '--sinch-comp-select-button-size-icon-l'?: string,
+    '--sinch-comp-select-button-shape-radius-size-l'?: string,
+
+    // Sizes - M
+    '--sinch-comp-select-button-size-container-m'?: string,
+    '--sinch-comp-select-button-size-icon-m'?: string,
+    '--sinch-comp-select-button-shape-radius-size-m'?: string,
+
+    // Sizes - S
+    '--sinch-comp-select-button-size-container-s'?: string,
+    '--sinch-comp-select-button-size-icon-s'?: string,
+    '--sinch-comp-select-button-shape-radius-size-s'?: string,
+
+    // Colors - Default State
+    '--sinch-comp-select-button-color-default-background-initial'?: string,
+    '--sinch-comp-select-button-color-default-icon-initial'?: string,
+    '--sinch-comp-select-button-color-default-text-initial'?: string,
+    '--sinch-comp-select-button-color-default-placeholder-initial'?: string,
+    '--sinch-comp-select-button-color-default-border-initial'?: string,
+    '--sinch-comp-select-button-color-default-border-focus'?: string,
+
+    // Colors - Invalid State
+    '--sinch-comp-select-button-color-invalid-border-initial'?: string,
+
+    // Colors - Disabled State
+    '--sinch-comp-select-button-color-disabled-icon-initial'?: string,
+    '--sinch-comp-select-button-color-disabled-text-initial'?: string,
+    '--sinch-comp-select-button-color-disabled-placeholder-initial'?: string,
+    '--sinch-comp-select-button-color-disabled-border-initial'?: string,
+
+    // Fonts
+    '--sinch-comp-select-button-font-input'?: string,
+    '--sinch-comp-select-button-font-placeholder'?: string,
+  },
 }

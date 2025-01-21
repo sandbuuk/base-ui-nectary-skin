@@ -17,4 +17,9 @@ export type TSinchTabsReact = TSinchElementReact<TSinchTabsElement> & {
   'aria-label': string,
   /** Change value event */
   'on-change'?: (e: CustomEvent<string>) => void,
+} & {
+  style?: {
+    // Colors - Default State
+    '--sinch-comp-tab-color-default-border-initial'?: string,
+  },
 }

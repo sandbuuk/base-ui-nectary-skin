@@ -28,4 +28,32 @@ export type TSinchDialogReact = TSinchElementReact<TSinchDialogElement> & {
   'close-aria-label': string,
   /** close event handler */
   'on-close'?: (e: CustomEvent<TSinchDialogCloseDetail>) => void,
+} & {
+  style?: {
+    // Component Properties
+    '--sinch-comp-dialog-max-width'?: string,
+    '--sinch-comp-dialog-max-height'?: string,
+    '--sinch-comp-dialog-width'?: string,
+    '--sinch-dialog-close-button-display'?: string,
+
+    // Shape
+    '--sinch-comp-dialog-shape-radius'?: string,
+
+    // Fonts
+    '--sinch-comp-dialog-font-title'?: string,
+
+    // Shadows
+    '--sinch-comp-dialog-shadow'?: string,
+
+    // Colors - Default State
+    '--sinch-comp-dialog-color-default-background-initial'?: string,
+    '--sinch-comp-dialog-color-default-icon-initial'?: string,
+    '--sinch-comp-dialog-color-default-title-initial'?: string,
+
+    // Global Properties
+    '--sinch-global-size-icon'?: string,
+    '--sinch-global-color-icon'?: string,
+    '--sinch-global-color-text'?: string,
+    '--sinch-comp-title-font'?: string,
+  },
 }

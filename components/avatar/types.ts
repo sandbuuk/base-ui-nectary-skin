@@ -37,4 +37,35 @@ export type TSinchAvatarReact = TSinchElementReact<TSinchAvatarElement> & {
   size?: TSinchSize,
   /** Status */
   status?: TSinchAvatarStatus,
+} & {
+  style?: {
+    // Colors - Container
+    '--sinch-comp-avatar-container-color-default-background'?: string,
+    '--sinch-comp-avatar-container-color-default-foreground'?: string,
+
+    // Colors - Border
+    '--sinch-comp-avatar-border-color-default-initial'?: string,
+
+    // Colors - Status
+    '--sinch-comp-avatar-status-color-online-default-background'?: string,
+    '--sinch-comp-avatar-status-color-away-default-background'?: string,
+    '--sinch-comp-avatar-status-color-busy-default-background'?: string,
+    '--sinch-comp-avatar-status-color-offline-default-background'?: string,
+
+    // Shapes
+    '--sinch-comp-avatar-shape-radius'?: string,
+
+    // Sizes
+    '--sinch-comp-avatar-size-s'?: string,
+    '--sinch-comp-avatar-size-m'?: string,
+    '--sinch-comp-avatar-size-l'?: string,
+
+    // Fonts
+    '--sinch-comp-avatar-container-font-size-s-text'?: string,
+    '--sinch-comp-avatar-container-font-size-m-text'?: string,
+    '--sinch-comp-avatar-container-font-size-l-text'?: string,
+
+    // Local Properties
+    '--sinch-local-size'?: string,
+  },
 }

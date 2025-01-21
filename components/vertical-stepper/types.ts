@@ -12,4 +12,35 @@ export type TSinchVerticalStepperReact = TSinchElementReact<TSinchVerticalSteppe
   index: string,
   /** Label that is used for a11y */
   'aria-label': string,
+} & {
+  style?: {
+    // Background Colors
+    '--sinch-comp-vertical-stepper-color-background-default'?: string,
+    '--sinch-comp-vertical-stepper-color-background-visited-skip'?: string,
+    '--sinch-comp-vertical-stepper-color-background-active'?: string,
+    '--sinch-comp-vertical-stepper-color-background-visited'?: string,
+    '--sinch-comp-vertical-stepper-color-background-visited-error'?: string,
+
+    // Border Colors
+    '--sinch-comp-vertical-stepper-color-border-default'?: string,
+    '--sinch-comp-vertical-stepper-color-border-visited-skip'?: string,
+    '--sinch-comp-vertical-stepper-color-border-active'?: string,
+    '--sinch-comp-vertical-stepper-color-border-visited'?: string,
+    '--sinch-comp-vertical-stepper-color-border-visited-error'?: string,
+
+    // Icon Colors
+    '--sinch-comp-vertical-stepper-color-icon-default'?: string,
+    '--sinch-comp-vertical-stepper-color-icon-visited-skip'?: string,
+    '--sinch-comp-vertical-stepper-color-icon-active'?: string,
+    '--sinch-comp-vertical-stepper-color-icon-visited'?: string,
+    '--sinch-comp-vertical-stepper-color-icon-visited-error'?: string,
+
+    // Text Colors
+    '--sinch-comp-vertical-stepper-color-label'?: string,
+    '--sinch-comp-vertical-stepper-color-description'?: string,
+
+    // Progress Colors
+    '--sinch-comp-vertical-stepper-color-progress'?: string,
+    '--sinch-comp-vertical-stepper-color-progress-visited'?: string,
+  },
 }

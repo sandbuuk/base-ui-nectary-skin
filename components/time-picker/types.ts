@@ -33,4 +33,42 @@ export type TSinchTimePickerReact = TSinchElementReact<TSinchTimePickerElement> 
   'submit-aria-label': string,
   /** Change value handler, return time in ISO 8601 format */
   'on-change'?: (e: CustomEvent<string>) => void,
+} & {
+  style?: {
+    // Fonts
+    '--sinch-comp-time-picker-header-font'?: string,
+    '--sinch-comp-time-picker-digit-font-default-h12'?: string,
+    '--sinch-comp-time-picker-digit-font-checked-h12'?: string,
+    '--sinch-comp-time-picker-digit-font-default-h24'?: string,
+    '--sinch-comp-time-picker-digit-font-checked-h24'?: string,
+    '--sinch-comp-time-picker-digit-font-default-minutes'?: string,
+    '--sinch-comp-time-picker-digit-font-checked-minutes'?: string,
+
+    // Colors - Header
+    '--sinch-comp-time-picker-header-color-default-text-initial'?: string,
+    '--sinch-comp-time-picker-header-color-default-icon-initial'?: string,
+
+    // Colors - Watch Face
+    '--sinch-comp-time-picker-watch-face-color-default-border-initial'?: string,
+    '--sinch-comp-time-picker-watch-face-color-default-background-initial'?: string,
+
+    // Colors - Digits - Hours (12h)
+    '--sinch-comp-time-picker-digit-color-default-h12-initial'?: string,
+    '--sinch-comp-time-picker-digit-color-checked-h12-default'?: string,
+
+    // Colors - Digits - Hours (24h)
+    '--sinch-comp-time-picker-digit-color-default-h24-initial'?: string,
+    '--sinch-comp-time-picker-digit-color-checked-h24-initial'?: string,
+
+    // Colors - Digits - Minutes
+    '--sinch-comp-time-picker-digit-color-default-minute-initial'?: string,
+    '--sinch-comp-time-picker-digit-color-checked-minute-initial'?: string,
+
+    // Colors - Needle
+    '--sinch-comp-time-picker-needle-color-default-background-initial'?: string,
+    '--sinch-comp-time-picker-needle-color-default-background-focus'?: string,
+
+    // Global Properties
+    '--sinch-global-color-icon'?: string,
+  },
 }

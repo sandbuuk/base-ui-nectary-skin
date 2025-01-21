@@ -11,4 +11,11 @@ export type TSinchProgressReact = TSinchElementReact<TSinchProgressElement> & {
   value: number,
   detailed?: boolean,
   'aria-label': string,
+} & {
+  style?: {
+    // Colors - Default State
+    '--sinch-comp-progress-color-default-background-initial'?: string,
+    '--sinch-comp-progress-color-default-bar-initial'?: string,
+    '--sinch-comp-progress-color-default-text-initial'?: string,
+  },
 }

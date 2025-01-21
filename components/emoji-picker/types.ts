@@ -27,4 +27,18 @@ export type TSinchEmojiPickerElement = HTMLElement & {
 export type TSinchEmojiPickerReact = TSinchElementReact<TSinchEmojiPickerElement> & {
   /** Change value handler */
   'on-change': (e: CustomEvent<string>) => void,
+} & {
+  style?: {
+    // Fonts
+    '--sinch-comp-emoji-picker-font-not-found'?: string,
+
+    // Colors - Default State
+    '--sinch-comp-emoji-picker-color-default-text-not-found'?: string,
+
+    // Global Properties
+    '--sinch-global-color-text'?: string,
+    '--sinch-global-color-icon'?: string,
+    '--sinch-global-size-icon'?: string,
+    '--sinch-comp-text-font'?: string,
+  },
 }

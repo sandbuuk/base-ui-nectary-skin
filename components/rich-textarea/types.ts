@@ -48,4 +48,37 @@ export type TSinchRichTextareaReact = TSinchElementReact<TSinchRichTextareaEleme
   'on-focus'?: (e: CustomEvent<void>) => void,
   /** Blur handler */
   'on-blur'?: (e: CustomEvent<void>) => void,
+} & {
+  style?: {
+    // Shape
+    '--sinch-comp-textarea-shape-radius'?: string,
+    '--sinch-comp-code-tag-shape-radius'?: string,
+
+    // Colors - Default State
+    '--sinch-comp-textarea-color-default-background-initial'?: string,
+    '--sinch-comp-textarea-color-default-text-initial'?: string,
+    '--sinch-comp-textarea-color-default-text-placeholder'?: string,
+    '--sinch-comp-textarea-color-default-border-initial'?: string,
+    '--sinch-comp-textarea-color-default-border-focus'?: string,
+
+    // Colors - Invalid State
+    '--sinch-comp-textarea-color-invalid-border-initial'?: string,
+
+    // Colors - Disabled State
+    '--sinch-comp-textarea-color-disabled-text-initial'?: string,
+    '--sinch-comp-textarea-color-disabled-border-initial'?: string,
+
+    // Colors - Code
+    '--sinch-comp-code-tag-color-default-text-initial'?: string,
+    '--sinch-comp-code-tag-color-default-border-initial'?: string,
+    '--sinch-comp-code-tag-color-default-background-initial'?: string,
+
+    // Colors - Link
+    '--sinch-comp-link-color-default-text-initial'?: string,
+
+    // Fonts
+    '--sinch-comp-textarea-font-input'?: string,
+    '--sinch-comp-code-tag-font-text'?: string,
+    '--sinch-comp-link-default-font-initial'?: string,
+  },
 }

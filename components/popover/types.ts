@@ -38,4 +38,16 @@ export type TSinchPopoverReact = TSinchElementReact<TSinchPopoverElement> & {
   'aria-label': string,
   /** Close event handler */
   'on-close'?: (e: CustomEvent<void>) => void,
+} & {
+  style?: {
+    // Shape
+    '--sinch-comp-popover-shape-radius'?: string,
+
+    // Shadow
+    '--sinch-comp-popover-shadow'?: string,
+
+    // Default State Colors
+    '--sinch-comp-popover-color-default-background-initial'?: string,
+    '--sinch-comp-popover-color-default-border-initial'?: string,
+  },
 }

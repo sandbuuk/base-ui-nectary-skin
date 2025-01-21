@@ -34,4 +34,18 @@ export type TSinchBadgeReact = TSinchElementReact<TSinchBadgeElement> & {
   mode?: TSinchBadgeMode,
   /** Hidden */
   hidden?: boolean,
+} & {
+  style?: {
+    // Colors
+    '--sinch-comp-badge-color-border'?: string,
+    '--sinch-comp-badge-color-text'?: string,
+    '--sinch-comp-badge-color-background'?: string,
+
+    // Shapes
+    '--sinch-comp-badge-shape-radius'?: string,
+
+    // Fonts
+    '--sinch-comp-badge-font-size-l'?: string,
+    '--sinch-comp-badge-font-size-m'?: string,
+  },
 }
