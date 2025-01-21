@@ -31,4 +31,18 @@ export type TSinchTitleReact = TSinchElementReact<TSinchTitleElement> & {
   level: TSinchTitleLevel,
   /** Cuts the long title with “…” ellipsis */
   ellipsis?: boolean,
+} & {
+  style?: {
+    // Font
+    '--sinch-comp-title-font'?: string,
+    '--sinch-sys-font-desktop-title-xl'?: string,
+    '--sinch-sys-font-desktop-title-l'?: string,
+    '--sinch-sys-font-desktop-title-m'?: string,
+    '--sinch-sys-font-desktop-title-s'?: string,
+    '--sinch-sys-font-desktop-title-xs'?: string,
+
+    // Colors
+    '--sinch-global-color-text'?: string,
+    '--sinch-sys-color-text-default'?: string,
+  },
 }

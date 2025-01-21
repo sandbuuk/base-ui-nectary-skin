@@ -37,4 +37,9 @@ export type TSinchTileControlReact = TSinchElementReact<TSinchTileControlElement
   'aria-label': string,
   /** Change value handler */
   'on-change'?: (e: CustomEvent<string>) => void,
+} & {
+  style?: {
+    // Grid Properties
+    '--sinch-grid-num-columns'?: string,
+  },
 }

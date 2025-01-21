@@ -25,4 +25,9 @@ export type TSinchPersistentOverlayReact =
     'aria-label': TSinchDialogReact['aria-label'],
     /** visibility altered event handler */
     'on-visibility-altered': (e: CustomEvent) => void,
+  } & {
+    style?: {
+      // Dialog Properties
+      '--sinch-dialog-close-button-display'?: string,
+    },
   }

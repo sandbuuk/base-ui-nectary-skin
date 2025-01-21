@@ -19,6 +19,7 @@ export const EnhaiButton = () => {
         <sinch-icon-ai slot="icon"/>
       </sinch-button>
       <sinch-dialog
+        caption="Enhai"
         open={isDialogOpen}
         aria-label="Dialog"
         close-aria-label="Close dialog"

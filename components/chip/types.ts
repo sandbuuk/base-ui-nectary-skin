@@ -36,4 +36,30 @@ export type TSinchChipReact = TSinchElementReact<TSinchChipElement> & {
   'on-blur'?: (e: CustomEvent<void>) => void,
   /** Label that is used for a11y` */
   'aria-label': string,
+} & {
+  style?: {
+    // Sizes
+    '--sinch-comp-chip-size-container-m'?: string,
+    '--sinch-comp-chip-size-container-s'?: string,
+    '--sinch-comp-chip-size-icon-m'?: string,
+    '--sinch-comp-chip-size-icon-s'?: string,
+
+    // Fonts
+    '--sinch-comp-chip-font-size-m-label'?: string,
+    '--sinch-comp-chip-font-size-s-label'?: string,
+
+    // Colors - Neutral State
+    '--sinch-comp-chip-color-neutral-default-background-initial'?: string,
+    '--sinch-comp-chip-color-neutral-default-foreground-initial'?: string,
+    '--sinch-comp-chip-color-outiline-focus'?: string,
+
+    // Shapes
+    '--sinch-comp-chip-shape-radius'?: string,
+
+    // Global Properties
+    '--sinch-global-color-text'?: string,
+    '--sinch-global-color-icon'?: string,
+    '--sinch-global-size-icon'?: string,
+    '--sinch-comp-text-font'?: string,
+  },
 }

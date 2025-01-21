@@ -10,4 +10,14 @@ export type TSinchTableRowElement = HTMLElement & {
 export type TSinchTableRowReact = TSinchElementReact<TSinchTableRowElement> & {
   sticky?: boolean,
   selected?: boolean,
+} & {
+  style?: {
+    // Colors - Row Default
+    '--sinch-comp-table-color-row-default-background-initial'?: string,
+    '--sinch-comp-table-color-row-default-background-hover'?: string,
+    '--sinch-comp-table-color-row-default-background-sticky'?: string,
+
+    // Colors - Row Checked
+    '--sinch-comp-table-color-row-checked-background-initial'?: string,
+  },
 }

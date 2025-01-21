@@ -42,4 +42,28 @@ export type TSinchTooltipReact = TSinchElementReact<TSinchTooltipElement> & {
   'on-show'?: (e: CustomEvent<void>) => void,
   /** Hide event handler */
   'on-hide'?: (e: CustomEvent<void>) => void,
+} & {
+  style?: {
+    // Shadow
+    '--sinch-comp-tooltip-shadow'?: string,
+
+    // Shape
+    '--sinch-comp-tooltip-shape-radius'?: string,
+
+    // Colors
+    '--sinch-comp-tooltip-color-background'?: string,
+    '--sinch-comp-tooltip-color-text'?: string,
+
+    // Local Color Variables
+    '--sinch-local-color-background'?: string,
+
+    // Font
+    '--sinch-comp-tooltip-font-body'?: string,
+
+    // Text Alignment
+    '--sinch-comp-text-align'?: string,
+
+    // Global Color Text
+    '--sinch-global-color-text'?: string,
+  },
 }

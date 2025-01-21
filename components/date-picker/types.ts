@@ -69,4 +69,56 @@ export type TSinchDatePickerReact = TSinchElementReact<TSinchDatePickerElement> 
   'next-month-aria-label': string,
   /** Change value handler, return date in ISO 8601 format */
   'on-change'?: (e: CustomEvent<string>) => void,
+} & {
+  style?: {
+    // Fonts
+    '--sinch-comp-date-picker-font-day'?: string,
+    '--sinch-comp-date-picker-font-today'?: string,
+    '--sinch-comp-date-picker-font-weekday'?: string,
+    '--sinch-comp-date-picker-font-header'?: string,
+
+    // Shape
+    '--sinch-comp-date-picker-day-shape-radius'?: string,
+
+    // Colors - Header
+    '--sinch-comp-date-picker-header-color-default-text-initial'?: string,
+
+    // Colors - Weekday
+    '--sinch-comp-date-picker-weekday-color-default-text-initial'?: string,
+
+    // Colors - Default Day State
+    '--sinch-comp-date-picker-day-color-default-text-initial'?: string,
+    '--sinch-comp-date-picker-day-color-default-background-initial'?: string,
+    '--sinch-comp-date-picker-day-color-default-background-hover'?: string,
+    '--sinch-comp-date-picker-day-color-default-border-initial'?: string,
+    '--sinch-comp-date-picker-day-color-default-outline-focus'?: string,
+    '--sinch-comp-date-picker-day-color-default-range-background'?: string,
+
+    // Colors - Disabled Day State
+    '--sinch-comp-date-picker-day-color-disabled-text-initial'?: string,
+
+    // Colors - Checked Day State
+    '--sinch-comp-date-picker-day-color-checked-text-initial'?: string,
+    '--sinch-comp-date-picker-day-color-checked-background-initial'?: string,
+    '--sinch-comp-date-picker-day-color-checked-border-initial'?: string,
+
+    // Colors - Today Default State
+    '--sinch-comp-date-picker-today-color-default-text-initial'?: string,
+    '--sinch-comp-date-picker-today-color-default-background-initial'?: string,
+    '--sinch-comp-date-picker-today-color-default-background-hover'?: string,
+    '--sinch-comp-date-picker-today-color-default-border-initial'?: string,
+
+    // Colors - Today Disabled State
+    '--sinch-comp-date-picker-today-color-disabled-text-initial'?: string,
+    '--sinch-comp-date-picker-today-color-disabled-border-initial'?: string,
+
+    // Colors - Today Checked State
+    '--sinch-comp-date-picker-today-color-checked-text-initial'?: string,
+    '--sinch-comp-date-picker-today-color-checked-background-initial'?: string,
+    '--sinch-comp-date-picker-today-color-checked-border-initial'?: string,
+
+    // Global Properties
+    '--sinch-com-text-font'?: string,
+    '--sinch-global-color-text'?: string,
+  },
 }

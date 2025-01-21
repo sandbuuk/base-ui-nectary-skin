@@ -31,7 +31,19 @@ export type TSinchIconReact = TSinchElementReact<TSinchIconElement> & ({
   name: TSinchIcons,
 }) & {
   style?: {
+    // Component Properties
+    '--sinch-comp-icon-font-weight'?: string,
+    '--sinch-comp-icon-font-family'?: string,
+    '--sinch-comp-icon-font-feature-settings'?: string,
+    '--sinch-comp-icon-font-family-zero-to-d'?: string,
+    '--sinch-comp-icon-font-family-e-to-o'?: string,
+    '--sinch-comp-icon-font-family-p-to-z'?: string,
+
+    // Global Properties
     '--sinch-global-size-icon'?: string,
     '--sinch-global-color-icon'?: string,
+
+    // System Colors
+    '--sinch-sys-color-text-default'?: string,
   },
 }

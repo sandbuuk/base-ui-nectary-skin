@@ -44,4 +44,13 @@ export type TSinchSelectMenuReact = TSinchElementReact<TSinchSelectMenuElement> 
   'search-value'?: string,
   /** Change value handler */
   'on-change'?: (e: CustomEvent<string>) => void,
+} & {
+  style?: {
+    // Colors - Default State
+    '--sinch-comp-select-menu-color-default-title-initial'?: string,
+    '--sinch-comp-select-menu-color-default-not-found-text-initial'?: string,
+
+    // Fonts
+    '--sinch-comp-select-menu-font-not-found-text'?: string,
+  },
 }

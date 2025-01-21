@@ -87,4 +87,46 @@ export type TSinchInputReact = TSinchElementReact<TSinchInputElement> & {
   'on-copy'?: (e: TSinchInputClipboardEvent) => void,
   'on-paste'?: (e: TSinchInputClipboardEvent) => void,
   'on-wheel'?: (e: CustomEvent<void> & { target: TSinchInputElement }) => void,
+} & {
+  style?: {
+    // Container Sizes
+    '--sinch-comp-input-size-container-l'?: string,
+    '--sinch-comp-input-size-container-m'?: string,
+    '--sinch-comp-input-size-container-s'?: string,
+
+    // Icon Sizes
+    '--sinch-comp-input-size-icon-l'?: string,
+    '--sinch-comp-input-size-icon-m'?: string,
+    '--sinch-comp-input-size-icon-s'?: string,
+
+    // Border Radius
+    '--sinch-comp-input-shape-radius-size-l'?: string,
+    '--sinch-comp-input-shape-radius-size-m'?: string,
+    '--sinch-comp-input-shape-radius-size-s'?: string,
+
+    // Font Properties
+    '--sinch-comp-input-font-input'?: string,
+    '--sinch-comp-input-font-placeholder'?: string,
+    '--sinch-sys-font-body-monospace-m'?: string,
+
+    // Default State Colors
+    '--sinch-comp-input-color-default-background-initial'?: string,
+    '--sinch-comp-input-color-default-text-initial'?: string,
+    '--sinch-comp-input-color-default-text-placeholder'?: string,
+    '--sinch-comp-input-color-default-border-initial'?: string,
+    '--sinch-comp-input-color-default-border-focus'?: string,
+    '--sinch-comp-input-color-default-icon-initial'?: string,
+
+    // Disabled State Colors
+    '--sinch-comp-input-color-disabled-text-initial'?: string,
+    '--sinch-comp-input-color-disabled-border-initial'?: string,
+    '--sinch-comp-input-color-disabled-icon-initial'?: string,
+
+    // Invalid State Colors
+    '--sinch-comp-input-color-invalid-border-initial'?: string,
+
+    // Global Properties
+    '--sinch-global-size-icon'?: string,
+    '--sinch-global-color-icon'?: string,
+  },
 }

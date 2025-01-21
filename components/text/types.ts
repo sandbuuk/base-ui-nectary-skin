@@ -30,4 +30,25 @@ export type TSinchTextReact = TSinchElementReact<TSinchTextElement> & {
   emphasized?: boolean,
   /** Cuts the long text with “…” ellipsis */
   ellipsis?: boolean,
+} & {
+  style?: {
+    // Text Properties
+    '--sinch-comp-text-align'?: string,
+    '--sinch-comp-text-font'?: string,
+
+    // System Fonts
+    '--sinch-sys-font-body-m'?: string,
+    '--sinch-sys-font-body-s'?: string,
+    '--sinch-sys-font-body-xs'?: string,
+    '--sinch-sys-font-body-xxs'?: string,
+    '--sinch-sys-font-body-emphasize'?: string,
+    '--sinch-sys-font-body-emphasize-s'?: string,
+
+    // Colors
+    '--sinch-global-color-text'?: string,
+    '--sinch-sys-color-text-default'?: string,
+
+    // Global Properties
+    '--sinch-global-text-white-space'?: string,
+  },
 }

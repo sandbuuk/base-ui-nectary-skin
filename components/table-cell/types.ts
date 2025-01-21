@@ -9,4 +9,9 @@ export type TSinchTableCellElement = HTMLElement & {
 
 export type TSinchTableCellReact = TSinchElementReact<TSinchTableCellElement> & {
   align?: TSinchTableAlignType,
+} & {
+  style?: {
+    // Colors - Cell Default
+    '--sinch-comp-table-color-cell-default-border-initial'?: string,
+  },
 }

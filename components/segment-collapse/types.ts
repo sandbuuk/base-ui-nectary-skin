@@ -10,4 +10,9 @@ export type TSinchSegmentExpandReact = TSinchElementReact<TSinchSegmentExpandEle
   value: boolean,
   'aria-label': string,
   'on-change'?: (e: CustomEvent<boolean>) => void,
+} & {
+  style?: {
+    // Global
+    '--sinch-global-size-icon'?: string,
+  },
 }
