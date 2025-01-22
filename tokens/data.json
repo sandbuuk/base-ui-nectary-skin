@@ -7397,7 +7397,7 @@
     "sys": {
       "shape-radius": {
         "l": {
-          "value": "8",
+          "value": "12",
           "type": "borderRadius"
         },
         "m": {
@@ -7405,11 +7405,11 @@
           "type": "borderRadius"
         },
         "s": {
-          "value": "8",
+          "value": "4",
           "type": "borderRadius"
         },
         "xs": {
-          "value": "8",
+          "value": "0",
           "type": "borderRadius"
         }
       }
@@ -7425,6 +7425,28 @@
         "shape-radius": {
           "value": "4",
           "type": "borderRadius"
+        }
+      },
+      "button": {
+        "shape-radius": {
+          "size": {
+            "l": {
+              "value": "8",
+              "type": "borderRadius"
+            },
+            "m": {
+              "value": "8",
+              "type": "borderRadius"
+            },
+            "s": {
+              "value": "8",
+              "type": "borderRadius"
+            },
+            "xs": {
+              "value": "8",
+              "type": "borderRadius"
+            }
+          }
         }
       }
     }
