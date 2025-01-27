@@ -1,6 +1,6 @@
 .nectary-theme-base.cpaas-theme-base {
-  --sinch-sys-shape-radius-l: 8px;
+  --sinch-sys-shape-radius-l: 12px;
   --sinch-sys-shape-radius-m: 8px;
-  --sinch-sys-shape-radius-s: 8px;
-  --sinch-sys-shape-radius-xs: 8px;
+  --sinch-sys-shape-radius-s: 4px;
+  --sinch-sys-shape-radius-xs: 0;
 }
