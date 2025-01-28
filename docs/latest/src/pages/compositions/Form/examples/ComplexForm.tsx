@@ -97,6 +97,7 @@ export const ComplexFormExample: FC = () => {
                 placeholder="John"
                 value={field.value}
                 on-change={(e) => field.onChange(e.detail)}
+                on-blur={() => field.onBlur()}
               />
             </sinch-field>
           )
@@ -116,6 +117,7 @@ export const ComplexFormExample: FC = () => {
                 placeholder="Doe"
                 value={field.value}
                 on-change={(e) => field.onChange(e.detail)}
+                on-blur={() => field.onBlur()}
               />
             </sinch-field>
           )
@@ -138,6 +140,7 @@ export const ComplexFormExample: FC = () => {
               placeholder="john.doe@sinch.com"
               value={field.value}
               on-change={(e) => field.onChange(e.detail)}
+              on-blur={() => field.onBlur()}
             />
           </sinch-field>
         )
@@ -157,6 +160,7 @@ export const ComplexFormExample: FC = () => {
               placeholder="****"
               value={field.value}
               on-change={(e) => field.onChange(e.detail)}
+              on-blur={() => field.onBlur()}
               type="password"
             />
           </sinch-field>
@@ -177,6 +181,7 @@ export const ComplexFormExample: FC = () => {
               placeholder="Phone Number"
               value={field.value}
               on-change={(e) => field.onChange(e.detail)}
+              on-blur={() => field.onBlur()}
             />
           </sinch-field>
         )}
@@ -203,6 +208,7 @@ export const ComplexFormExample: FC = () => {
                 placeholder="Select option"
                 aria-label="Open select"
                 on-click={() => setCountryDropDownOpen((state) => !state)}
+                on-blur={() => field.onBlur()}
               />
               <sinch-select-menu
                 slot="content"
@@ -236,6 +242,7 @@ export const ComplexFormExample: FC = () => {
               aria-label="Checkbox"
               checked={field.value}
               on-change={(e) => field.onChange(e.detail)}
+              on-blur={() => field.onBlur()}
             />
             {(error != null) && <sinch-text type="s" style={{ '--sinch-global-color-text': 'var(--sinch-sys-color-feedback-danger-default)' }}>{error.message}</sinch-text>}
           </>
