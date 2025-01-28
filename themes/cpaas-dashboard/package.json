@@ -1,6 +1,6 @@
 {
   "name": "@nectary/theme-cpaas-dashboard",
-  "version": "0.0.0",
+  "version": "1.2.0",
   "files": [
     "**/*.css",
     "*.json",
