@@ -93,6 +93,12 @@ visual-tests:
     - .prepare-ci
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - tests/**/*
+        - themes/**/*
+        - assets/**/*
+        - components/**/*
+        - fonts/**/*
   parallel:
     matrix:
       - BROWSER_FRAMEWORK: chromium-react
@@ -159,6 +165,7 @@ preview:
   script:
     - VERSION=$(npm view @nectary/components version)
     - ./scripts/generate-docs.sh $VERSION
+  pages: true
   artifacts:
     paths:
       - public

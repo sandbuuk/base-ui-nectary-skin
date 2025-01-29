@@ -1,0 +1,16 @@
+import { Example } from '~/components/Example'
+import { SimpleFormExample } from './examples/SimpleForm.tsx?example'
+import { ComplexFormExample } from './examples/ComplexForm.tsx?example'
+
+# Examples
+
+## Simple
+
+<Example Component={SimpleFormExample}/>
+
+## Recommendation for validation on more complex forms
+
+Use `react-hook-form` for validation. It is a simple and powerful library for managing form state and validation.
+You can combine `zod` and `@hookform/resolvers/zod` for schema-based validation.
+
+<Example Component={ComplexFormExample}/>
