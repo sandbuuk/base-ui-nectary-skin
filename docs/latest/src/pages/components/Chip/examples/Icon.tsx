@@ -9,7 +9,7 @@ const wrapperStyles: CSSProperties = {
   gap: 10,
 }
 
-const systemColors = ['info', 'success', 'warning', 'danger']
+const systemColors = ['info', 'success', 'warning', 'danger'] as const
 
 export const IconExample: FC = () => (
   <div style={wrapperStyles}>

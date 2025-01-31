@@ -1,10 +1,11 @@
+import type { TSinchTagColor } from './colors'
 import type { TSinchElementReact } from '../types'
 
 export type TSinchTagElement = HTMLElement & {
   /** Text */
   text: string,
   /** Color, gray by default */
-  color: string | null,
+  color: TSinchTagColor | null,
   /** Small */
   small: boolean,
   /** Text */
@@ -19,7 +20,7 @@ export type TSinchTagReact = TSinchElementReact<TSinchTagElement> & {
   /** Text */
   text: string,
   /** Color, gray by default */
-  color?: string,
+  color?: TSinchTagColor,
   /** Small */
   small?: boolean,
 } & {
