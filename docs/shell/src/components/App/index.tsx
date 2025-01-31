@@ -17,6 +17,7 @@ import { IntroPage } from '~/pages/Intro'
 import { LandingPage } from '~/pages/Landing'
 import { NotFoundPage } from '~/pages/NotFound'
 import { TestingPage } from '~/pages/Testing'
+import { TokensPage } from '~/pages/Token'
 import { V3MigrationPage } from '~/pages/V3Migration'
 import './styles.css'
 import '@nectary/theme-base'
@@ -128,6 +129,7 @@ export const App: FC = () => {
                   <NavigationItem path="/testing" text="Testing"/>
                   <NavigationItem path="/V3Migration" text="V3 Migration"/>
                   <NavigationItem path="/faq" text="FAQ"/>
+                  <NavigationItem path="/tokens" text="Tokens"/>
                 </NavigationList>
               </NavigationGroup>
               <ComponentsList/>
@@ -146,6 +148,7 @@ export const App: FC = () => {
             <Route path="/testing" element={<TestingPage/>}/>
             <Route path="/V3Migration" element={<V3MigrationPage/>}/>
             <Route path="/faq" element={<FAQPage/>}/>
+            <Route path="/tokens" element={<TokensPage/>}/>
             <Route path="/labComponents/*" element={<ComponentsPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
             <Route path="/compositions/*" element={<ComponentsPage/>}/>

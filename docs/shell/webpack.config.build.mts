@@ -5,6 +5,7 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import ExternalTemplateRemotesPlugin from 'external-remotes-plugin'
 import HtmlPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import postCssImport from 'postcss-import'
 import remarkGfm from 'remark-gfm'
 import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
@@ -163,6 +164,21 @@ const config: TWebpackConfig = {
             loader: 'css-loader',
           },
         ],
+      },
+      {
+        test: /\.css$/i,
+        resourceQuery: '?stringify',
+        use: [
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [postCssImport],
+              },
+            },
+          },
+        ],
+        type: 'asset/source',
       },
     ],
   },

@@ -1,5 +1,6 @@
 import path from 'path'
 import HtmlPlugin from 'html-webpack-plugin'
+import postCssImport from 'postcss-import'
 import remarkGfm from 'remark-gfm'
 import webpack from 'webpack'
 import type { TransformOptions as TBabelOptions } from '@babel/core'
@@ -128,6 +129,21 @@ const config: Configuration = {
             loader: 'css-loader',
           },
         ],
+      },
+      {
+        test: /\.css$/i,
+        resourceQuery: '?stringify',
+        use: [
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [postCssImport],
+              },
+            },
+          },
+        ],
+        type: 'asset/source',
       },
     ],
   },

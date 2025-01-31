@@ -10,3 +10,8 @@ declare module '*.css?theme' {
   }
   export default obj
 }
+
+declare module '*.css?stringify' {
+  const val: string
+  export default val
+}
