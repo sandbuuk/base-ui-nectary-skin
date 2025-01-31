@@ -30,6 +30,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   #$content: HTMLElement
   #$tip: HTMLElement
   #controller: AbortController | null = null
+  #resizeObserver: ResizeObserver | null = null
   constructor() {
     super()
 
@@ -52,11 +53,20 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     subscribeContext(this.#$content, 'visibility', this.#onContextVisibility, signal)
     updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
+
+    this.#resizeObserver = new ResizeObserver(() => {
+      if (this.#$pop.open) {
+        this.#updateContentMaxWidth()
+      }
+    })
+    this.#resizeObserver.observe(document.body)
   }
 
   disconnectedCallback() {
     this.#controller!.abort()
     this.#controller = null
+    this.#resizeObserver?.disconnect()
+    this.#resizeObserver = null
   }
 
   static get observedAttributes() {
@@ -173,6 +183,7 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
   #onContextVisibility = (e: CustomEvent<TContextVisibility>) => {
     if (e.detail) {
       this.#updateTipOrientation()
+      this.#updateContentMaxWidth()
     } else {
       this.#resetTipOrientation()
     }
@@ -203,6 +214,14 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
     this.#$tip.style.left = `${xPos}px`
 
     setClass(this.#$tip, 'hidden', rectOverlap(targetRect, contentRect))
+  }
+
+  // Prevent content from overflowing the viewport
+  #updateContentMaxWidth = () => {
+    const contentRect = this.#$content.getBoundingClientRect()
+    const availableSpace = window.innerWidth - contentRect.left - 16 // 16px safety margin
+
+    this.#$content.style.maxWidth = `${availableSpace}px`
   }
 })
 
