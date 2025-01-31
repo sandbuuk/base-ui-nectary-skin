@@ -401,10 +401,40 @@ if (!isBaseThemeKey(SELECTED_THEME_KEY)) {
   await cleanupDir(path.join(OUTDIR, COMPONENTS_OUTDIR))
 }
 
+const extractColorNames = (data: string) => {
+  const compColors = new Set<string>()
+
+  for (const line of data.split('\n')) {
+    const color = /-color-(.*)-(background|default):/.exec(line)?.[1]
+
+    if (color !== null && color !== undefined) {
+      compColors.add(color)
+    }
+  }
+
+  return [...compColors]
+}
+
+const capitalizeFirstLetter = (name: string) => `${name.charAt(0).toUpperCase()}${name.slice(1)}`
+
+const writeColorTypeFile = (name: string, colors: string[]) => {
+  const data = `export type TSinch${capitalizeFirstLetter(name)}Color = ${colors.map((color) => `'${color}'`).join(' | ')}\n`
+
+  return writeData('.', `components/${name}/colors.ts`, data)
+}
+
 // Process sections like 'ref' or 'sys'
 for (const { key, jsonObj, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
   if (isComponent) {
     const data = jsonToCss(jsonObj, getCssVarPrefix(COMPONENTS_SECTION_KEY, key))
+
+    if (['avatar', 'chip', 'tag'].includes(key)) {
+      const colors = extractColorNames(data)
+
+      if (colors.length > 0) {
+        await writeColorTypeFile(key, colors)
+      }
+    }
 
     await writeData(path.join(OUTDIR, COMPONENTS_OUTDIR), `${key}.css`, data)
   } else {

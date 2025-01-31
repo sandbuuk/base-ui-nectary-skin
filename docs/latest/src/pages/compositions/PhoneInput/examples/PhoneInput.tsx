@@ -1,4 +1,5 @@
-import { countries } from '@nectary/components/utils/countries'
+
+import countries from 'countries-phone-masks'
 import { useState } from 'react'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/popover'
@@ -11,8 +12,6 @@ import '@nectary/components/flag'
 const inputStyles: CSSProperties = {
   width: 300,
 }
-
-const countriesArray = Object.entries(countries)
 
 export const PhoneInputExample: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,8 +26,8 @@ export const PhoneInputExample: FC = () => {
   const onInputChange = (e: CustomEvent<string>) => {
     setInputValue(e.detail)
   }
-  const phoneCode = countries[menuValue]?.phoneCode ?? ''
-  const phoneMask = countries[menuValue]?.phoneMask ?? undefined
+  const phoneCode = countries.find((country) => country.iso === menuValue)?.code ?? ''
+  const phoneMask = countries.find((country) => country.iso === menuValue)?.mask ?? ''
 
   return (
     <sinch-popover
@@ -41,7 +40,7 @@ export const PhoneInputExample: FC = () => {
       <sinch-input
         slot="target"
         aria-label="Phone number"
-        mask={phoneMask}
+        mask={phoneMask.replaceAll('#', '0')}
         placeholder="Phone Number"
         value={inputValue}
         style={inputStyles}
@@ -68,14 +67,14 @@ export const PhoneInputExample: FC = () => {
         on-change={onMenuChange}
       >
         {
-          countriesArray.map(([code, data]) => (
+          countries.map(({ code, iso, name }) => (
             <sinch-select-menu-option
-              key={code}
-              value={code}
-              text={`(${data.phoneCode}) ${data.name}`}
-              aria-label={data.name}
+              key={iso}
+              value={iso}
+              text={`(${code}) ${name}`}
+              aria-label={name}
             >
-              <sinch-flag slot="icon" code={code}/>
+              <sinch-flag slot="icon" code={iso.toLowerCase()}/>
             </sinch-select-menu-option>
           ))
         }

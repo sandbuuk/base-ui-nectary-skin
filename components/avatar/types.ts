@@ -1,3 +1,4 @@
+import type { TSinchAvatarColor } from './colors'
 import type { TSinchElementReact } from '../types'
 import type { TSinchSize } from '../utils/size'
 
@@ -9,7 +10,7 @@ export type TSinchAvatarElement = HTMLElement & {
   /** Alt text */
   alt: string,
   /** Background color */
-  color: string | null,
+  color: TSinchAvatarColor | null,
   /** Status */
   status: TSinchAvatarStatus | null,
   /** Size, `m` by default */
@@ -32,7 +33,7 @@ export type TSinchAvatarReact = TSinchElementReact<TSinchAvatarElement> & {
   /** Alt text */
   alt?: string,
   /** Background color */
-  color?: string,
+  color?: TSinchAvatarColor,
   /** Size, `m` by default */
   size?: TSinchSize,
   /** Status */
