@@ -12,10 +12,7 @@
     border-radius: 0.5em;
     white-space: nowrap;
 
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-link-color-default-icon-initial
-      );
+    --sinch-global-color-icon: var(--sinch-comp-link-color-default-icon-initial);
   }
 
   a:hover {
@@ -86,10 +83,7 @@
     cursor: initial;
     text-decoration: var(--sinch-comp-link-default-text-decoration-disabled);
 
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-link-color-disabled-icon-initial
-      );
+    --sinch-global-color-icon: var(--sinch-comp-link-color-disabled-icon-initial);
   }
 
   #content {
@@ -100,8 +94,6 @@
 <a referrerpolicy="no-referer" aria-hidden="true">
   <span id="content"></span>
   <span id="icon-prefix">&nbsp;</span>
-  <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square"
-    id="external-icon"
-  ></sinch-icon>
+  <sinch-icon icons-version="2" name="fa-arrow-up-right" id="external-icon"></sinch-icon>
   <sinch-icon icons-version="2" name="fa-arrow-right" id="standalone-icon"></sinch-icon>
 </a>
