@@ -1,28 +1,45 @@
 import {
-  ReactPropsTable,
-  ReactHandlersTable,
-  ElementAttributesTable,
-  ElementEventsTable
+  ReactPropsTable as SegmentedControlPropsTable,
+  ReactHandlersTable as SegmentedControlHandlersTable,
+  ElementAttributesTable as SegmentedControlAttributesTable,
+  ElementEventsTable as SegmentedControlEventsTable
 } from '@nectary/components/segmented-control/types.ts?api'
+import {
+  ReactPropsTable as SegmentedControlOptionPropsTable,
+  ReactHandlersTable as SegmentedControlOptionHandlersTable,
+  ElementAttributesTable as SegmentedControlOptionAttributesTable,
+  ElementEventsTable as SegmentedControlOptionEventsTable
+} from '@nectary/components/segmented-control-option/types.ts?api'
+import { ComponentContainer, ComponentTitle } from 'docs-common'
 
-# API
+<ComponentContainer>
+  <ComponentTitle>
+    ## \<sinch-segmented-control>
+  </ComponentTitle>
+  ### React
+  #### Props
+  <SegmentedControlPropsTable/>
+  #### Handlers
+  <SegmentedControlHandlersTable/>
+  ### Element
+  #### Attributes
+  <SegmentedControlAttributesTable/>
+  #### Events
+  <SegmentedControlEventsTable/>
+</ComponentContainer>
 
-## React
-
-### Props
-
-<ReactPropsTable/>
-
-### Handlers
-
-<ReactHandlersTable/>
-
-## Element
-
-### Attributes
-
-<ElementAttributesTable/>
-
-### Events
-
-<ElementEventsTable/>
+<ComponentContainer>
+  <ComponentTitle>
+    ## \<sinch-segmented-control-option>
+  </ComponentTitle>
+  ### React
+  #### Props
+  <SegmentedControlOptionPropsTable/>
+  #### Handlers
+  <SegmentedControlOptionHandlersTable/>
+  ### Element
+  #### Attributes
+  <SegmentedControlOptionAttributesTable/>
+  #### Events
+  <SegmentedControlOptionEventsTable/>
+</ComponentContainer>

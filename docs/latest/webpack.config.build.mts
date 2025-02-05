@@ -101,6 +101,18 @@ const config: TWebpackConfig = (environment) => {
           loader: '@saas/types-to-mdx-loader',
         },
         {
+          test: /\.html$/,
+          exclude: NODE_MODULES_REGEXP,
+          resourceQuery: '?slots',
+          use: [
+            {
+              loader: 'babel-loader',
+              options: BabelOptions,
+            },
+            '@saas/slots-to-mdx-loader',
+          ],
+        },
+        {
           test: /\.css$/,
           exclude: NODE_MODULES_REGEXP,
           resourceQuery: '?tokens',
