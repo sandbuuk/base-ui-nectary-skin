@@ -1,0 +1,11 @@
+#page-container {
+  background-color: rgba(0, 0, 0, 0.01);
+  border: 1px solid var(--sinch-sys-color-border-subtle);
+  padding: 1rem;
+  border-radius: 1rem;
+  overflow-x: auto;
+}
+
+#page-container:not(:last-child) {
+  margin-bottom: 2rem;
+}

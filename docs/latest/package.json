@@ -42,6 +42,7 @@
     "@saas/css-to-mdx-loader": "workspace:*",
     "@saas/example-code-loader": "workspace:*",
     "@saas/html-minify-loader": "workspace:*",
+    "@saas/slots-to-mdx-loader": "workspace:*",
     "@saas/types-to-mdx-loader": "workspace:*",
     "@types/babel__core": "^7.20.2",
     "@types/mdx": "^2.0.7",

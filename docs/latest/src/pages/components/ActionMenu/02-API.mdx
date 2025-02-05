@@ -9,46 +9,35 @@ import {
   ElementEventsTable as MenuOptionElementEventsTable,
 } from '@nectary/components/action-menu-option/types.ts?api'
 
-# API
+import { ComponentContainer, ComponentTitle } from 'docs-common'
 
-## Action Menu
+<ComponentContainer>
+  <ComponentTitle>
+    ## \<sinch-action-menu>
+  </ComponentTitle>
+  ### React
+  #### Props
+  <MenuReactPropsTable/>
+  ### Element
+  #### Attributes
+  <MenuElementAttributesTable/>
+</ComponentContainer>
 
-### React
+<ComponentContainer>
+  <ComponentTitle>
+    ## \<sinch-action-menu-option>
+  </ComponentTitle>
+  ### React
+  #### Props
+  <MenuOptionReactPropsTable/>
+  #### Handlers
+  <MenuOptionReactHandlersTable/>
+  ### Element
+  #### Attributes
+  <MenuOptionElementAttributesTable/>
+  #### Events
+  <MenuOptionElementEventsTable/>
+</ComponentContainer>
 
-#### Props
 
-<MenuReactPropsTable/>
 
-### Element
-
-#### Attributes
-
-<MenuElementAttributesTable/>
-
-## Action Menu Option
-
-### Slots
-
-#### icon
-
-`icon` slot puts an icon to the left side.
-
-### React
-
-#### Props
-
-<MenuOptionReactPropsTable/>
-
-#### Handlers
-
-<MenuOptionReactHandlersTable/>
-
-### Element
-
-#### Attributes
-
-<MenuOptionElementAttributesTable/>
-
-#### Events
-
-<MenuOptionElementEventsTable/>

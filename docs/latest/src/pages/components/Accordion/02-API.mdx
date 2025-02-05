@@ -9,50 +9,32 @@ import {
   ElementAttributesTable as ItemElementAttributesTable,
 } from '@nectary/components/accordion-item/types.ts?api'
 
-# API
+import { ComponentContainer, ComponentTitle } from 'docs-common'
 
-## Slots
+<ComponentContainer>
+  <ComponentTitle>
+    ## \<sinch-accordion>
+  </ComponentTitle>
+  ### React
+  #### Props
+  <AccordionReactPropsTable/>
+  #### Handlers
+  <AccordionReactHandlersTable/>
+  ### Element
+  #### Attributes
+  <AccordionElementAttributesTable/>
+  #### Events
+  <AccordionElementEventsTable/>
+</ComponentContainer>
 
-### icon
-
-Optional icon.
-
-### content
-
-Expandable content.
-
-## Accordion
-
-### React
-
-#### Props
-
-<AccordionReactPropsTable/>
-
-#### Handlers
-
-<AccordionReactHandlersTable/>
-
-### Element
-
-#### Attributes
-
-<AccordionElementAttributesTable/>
-
-#### Events
-
-<AccordionElementEventsTable/>
-
-## Accordion Item
-
-### React
-
-#### Props
-
-<ItemReactPropsTable/>
-
-### Element
-
-#### Attributes
-
-<ItemElementAttributesTable/>
+<ComponentContainer>
+  <ComponentTitle>
+    ## \<sinch-accordion-item>
+  </ComponentTitle>
+  ### React
+  #### Props
+  <ItemReactPropsTable/>
+  ### Element
+  #### Attributes
+  <ItemElementAttributesTable/>
+</ComponentContainer>
