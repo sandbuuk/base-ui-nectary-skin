@@ -1,5 +1,6 @@
 {
   "name": "@saas/slots-to-mdx-loader",
+  "private": true,
   "version": "0.0.0",
   "main": "src/index.cjs",
   "type": "module",
