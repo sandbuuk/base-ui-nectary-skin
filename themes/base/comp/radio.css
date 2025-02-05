@@ -26,5 +26,7 @@
   --sinch-comp-radio-color-invalid-border-hover: var(--sinch-sys-color-feedback-danger-default);
   --sinch-comp-radio-color-invalid-border-initial: var(--sinch-sys-color-feedback-danger-default);
   --sinch-comp-radio-color-invalid-label-initial: var(--sinch-sys-color-feedback-danger-default);
+  --sinch-comp-radio-direction: column;
   --sinch-comp-radio-font-label: var(--sinch-sys-font-body-m);
+  --sinch-comp-radio-gap: 8px;
 }

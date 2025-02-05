@@ -30,6 +30,9 @@ type TValue = {
   type: 'color',
   value: string,
 } | {
+  type: 'direction',
+  value: 'row' | 'column',
+} | {
   type: 'boxShadow',
   value: {
     'x': string,
@@ -347,6 +350,7 @@ const jsonValueToCssValue = (jsonObj: TValue, forceDereferenceValue = false): st
     }
 
     case 'fontWeights':
+    case 'direction':
     case 'number':
     case 'letterSpacing':
     case 'paragraphSpacing':

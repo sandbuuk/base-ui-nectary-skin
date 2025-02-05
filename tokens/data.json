@@ -5252,6 +5252,14 @@
             }
           }
         },
+        "direction": {
+          "value": "column",
+          "type": "direction"
+        },
+        "gap": {
+          "value": "8",
+          "type": "sizing"
+        },
         "font": {
           "label": {
             "value": "{sys.font.body.m}",
