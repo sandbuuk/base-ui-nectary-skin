@@ -68,7 +68,15 @@ export const createParseVisitor = (doc: Document) => {
 
           if (attributes != null) {
             attributes.forEach((attr) => {
+              if (attr.startsWith('#')) {
+                $link.id = attr.slice(1)
+              }
+
               switch (attr) {
+                case 'prevent-default':
+                  $link.preventDefault = true
+
+                  break
                 case 'use-history':
                   $link['use-history'] = true
 

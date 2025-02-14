@@ -1,16 +1,24 @@
 import type { TSinchTextType } from '../text/types'
 import type { TSinchElementReact } from '../types'
 
+export type ElementClickedEvent = CustomEvent & {
+  currentTarget: HTMLElement,
+}
+
 export type TSinchRichTextElement = HTMLElement & {
   size: TSinchTextType,
   text: string,
   setAttribute(name: 'size', value: TSinchTextType): void,
   setAttribute(name: 'text', value: string): void,
+  /** Click event */
+  addEventListener(type: '-element-click', listener: (e: ElementClickedEvent) => void): void,
 }
 
 export type TSinchRichTextReact = TSinchElementReact<TSinchRichTextElement> & {
   size?: TSinchTextType,
   text: string,
+  /** Click event handler */
+  'on-element-click'?: (e: ElementClickedEvent) => void,
 } & {
   style?: {
     // Fonts
