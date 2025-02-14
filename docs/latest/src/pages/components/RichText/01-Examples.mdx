@@ -3,6 +3,7 @@ import { MarkdownExample } from './examples/Markdown.tsx?example'
 import { SizeExample } from './examples/Size.tsx?example'
 import { HistoryLinkExample } from './examples/HistoryLink.tsx?example'
 import { ExternalLinkExample } from './examples/ExternalLink.tsx?example'
+import { ClickableLinkExample } from './examples/ClickableLink.tsx?example'
 
 # Examples
 
@@ -29,3 +30,13 @@ We enhanced our markdown to support links that uses history.pushState instead of
 We enhanced our markdown to support [external links](http://localhost:5000/?version=latest&path=/components/link/examples#external). To do this add the `{external}` option after the basic markdown link definition:
 
 <Example Component={ExternalLinkExample}/>
+
+## Clickable links
+
+We usually prefer to reserve links for actual navigation and use buttons for actions, sometimes you need to make a link clickable without navigating, e.g. to open up a modal.
+
+Please note that **it is not a recommended ux pattern**.
+
+To do this add the `preventDefault` attribute along with some id, after the basic markdown link definition of the link you want to make clickable and then listen for the click event on the `sinch-rich-text` component:
+
+<Example Component={ClickableLinkExample}/>

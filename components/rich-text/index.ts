@@ -10,6 +10,7 @@ import {
   getAttribute,
   updateAttribute,
   parseMarkdown,
+  getReactEventHandler,
 } from '../utils'
 import templateHTML from './template.html'
 import { createParseVisitor, sizeValues } from './utils'
@@ -23,6 +24,7 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-rich-text', class extends NectaryElement {
   #wrapper: HTMLElement
   #parseVisitor
+  #controller: AbortController | null = null
 
   constructor() {
     super()
@@ -48,14 +50,24 @@ defineCustomElement('sinch-rich-text', class extends NectaryElement {
   }
 
   connectedCallback() {
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+
     super.connectedCallback()
     this.setAttribute('role', 'paragraph')
 
     this.#parseVisitor.updateEmojiBaseUrl(getEmojiBaseUrl(this))
     this.#updateText()
+    this.#wrapper.addEventListener('click', this.#handleElementClick, { signal })
+    this.addEventListener('-element-click', this.#onClickReactHandler, { signal })
   }
 
   disconnectedCallback() {
+    this.#controller?.abort()
+    this.#controller = null
+    this.#wrapper.removeEventListener('click', this.#handleElementClick)
+    this.removeEventListener('-element-click', this.#onClickReactHandler)
     super.disconnectedCallback()
   }
 
@@ -89,6 +101,16 @@ defineCustomElement('sinch-rich-text', class extends NectaryElement {
     updateAttribute(this, 'text', value)
   }
 
+  #handleElementClick = (e: Event) => {
+    const eventTarget = e.target as HTMLElement
+
+    const elementClickEvent = new CustomEvent('-element-click')
+
+    Object.defineProperty(elementClickEvent, 'currentTarget', { value: eventTarget })
+
+    this.dispatchEvent(elementClickEvent)
+  }
+
   #updateText() {
     if (!this.isDomConnected) {
       return
@@ -103,6 +125,10 @@ defineCustomElement('sinch-rich-text', class extends NectaryElement {
         parseMarkdown(text, this.#parseVisitor.createVisitor())
       )
     }
+  }
+
+  #onClickReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-element-click')?.(e)
   }
 })
 
