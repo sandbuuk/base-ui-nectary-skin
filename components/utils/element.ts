@@ -31,6 +31,10 @@ export const setNectaryRegistry = (registry: CustomElementRegistry): void => {
   nectaryDefinitions.clear()
 }
 
+export const resetNectaryRegistry = () => {
+  nectaryRegistry = null
+}
+
 declare global {
   interface ShadowRootInit {
     customElements?: CustomElementRegistry,
