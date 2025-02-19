@@ -38,8 +38,11 @@ sinch_global_security_stage_sast_sonarqube:
 default:
   image: node:20
   tags:
+    - general
     - saas
-    - application
+    - stg
+    - eu-west-1
+
 
 stages:
   - lint
