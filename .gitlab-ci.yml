@@ -30,7 +30,6 @@ consolidate_third_party_security_reports:
 sinch_global_security_stage_sast_sonarqube:
   extends: .sinch_global_security_stage_sast_sonarqube
   before_script: []
-  tags: []
   rules:
     - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
       allow_failure: true
