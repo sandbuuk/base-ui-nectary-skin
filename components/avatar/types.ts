@@ -25,7 +25,7 @@ export type TSinchAvatarStyle = {
   '--sinch-comp-avatar-container-color-default-foreground'?: string,
 
   // Colors - Border
-  '--sinch-comp-avatar-border-color-default-initial'?: string,
+  '--sinch-comp-avatar-status-color-border'?: string,
 
   // Colors - Status
   '--sinch-comp-avatar-status-color-online-default-background'?: string,
