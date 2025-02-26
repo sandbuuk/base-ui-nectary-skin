@@ -40,4 +40,4 @@ The tests run in the pipeline on GitLab, but if you need to run them locally, in
 
 ## Generate CSS variables from tokens
 
-`pnpm tokens`
+For the base theme `pnpm tokens:base`
