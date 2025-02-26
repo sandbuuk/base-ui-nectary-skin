@@ -1,9 +1,6 @@
 <style>
 :host {
   display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: stretch;
 }
 
 .empty {
@@ -17,6 +14,9 @@
   box-shadow: var(--sinch-comp-card-v2-shadow-initial);
   overflow: hidden;
   transition: 0.15s linear;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 #card-media {
@@ -30,6 +30,7 @@
   padding: 16px;
   gap: 8px;
   align-self: stretch;
+  flex: 1;
 }
 
 #card-title {
@@ -52,6 +53,7 @@
   align-items: center;
   gap: 16px;
   align-self: stretch;
+  margin-top: auto;
 }
 
 :host([selected]:not([selected="false"])) #card {
