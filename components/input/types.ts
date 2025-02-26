@@ -15,7 +15,7 @@ export type TSinchInputElement = HTMLElement & {
   /** Text that appears in the text field when it has no value set */
   placeholder: string | null,
   /** The HTML autocomplete attribute */
-  autocomplete: string,
+  autocomplete: HTMLInputElement['autocomplete'],
   /** Invalid state */
   invalid: boolean,
   /** Disabled */

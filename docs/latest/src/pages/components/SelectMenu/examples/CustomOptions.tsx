@@ -20,6 +20,7 @@ export const CustomOptionsExample: FC = () => {
       value={value}
       on-change={onChange}
       aria-label="Action menu"
+      search-autocomplete="on"
     >
       {Object.entries(pokemons).map(([name, { pokedex, types }]) => (
         <sinch-select-menu-option

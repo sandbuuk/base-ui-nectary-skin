@@ -130,6 +130,7 @@ defineCustomElement(
         'multiple',
         'search-value',
         'search-placeholder',
+        'search-autocomplete',
       ]
     }
 
@@ -150,6 +151,11 @@ defineCustomElement(
           break
         }
 
+        case 'search-autocomplete': {
+          updateAttribute(this.#$search, 'autocomplete', newVal)
+
+          break
+        }
         case 'value': {
           this.#onValueChange(newVal ?? '')
 
@@ -219,6 +225,14 @@ defineCustomElement(
       return searchableAttribute === null
         ? searchableAttribute
         : isAttrTrue(searchableAttribute)
+    }
+
+    set 'search-autocomplete'(autocomplete: string) {
+      updateAttribute(this.#$search, 'autocomplete', autocomplete)
+    }
+
+    get 'search-autocomplete'(): string {
+      return getAttribute(this.#$search, 'autocomplete', '')
     }
 
     set 'search-placeholder'(placeholder: string) {
