@@ -41,6 +41,7 @@ default:
     - saas
     - stg
     - eu-west-1
+    - k8s
 
 
 stages:
@@ -52,6 +53,18 @@ stages:
   - security-scan-sonar
   - deploy
   - preview
+
+.aws-authenticate-classic-engage-nectary:
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
+  variables:
+    AWS_ROLE_ARN: arn:aws:iam::767006020294:role/nectary-components-ci-access
+    AWS_WEB_IDENTITY_TOKEN_FILE: $RUNNER_TEMP_PROJECT_DIR/aws-web-identity-token-file
+    AWS_ROLE_SESSION_NAME: "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+  before_script: &authenticate_aws
+    - echo $GITLAB_OIDC_TOKEN > $AWS_WEB_IDENTITY_TOKEN_FILE
+
 
 .prepare-ci:
   before_script:
@@ -206,6 +219,8 @@ build-docs:
 publish-docs:
   stage: deploy
   image: 652860480992.dkr.ecr.eu-west-1.amazonaws.com/aws-cli-runner
+  extends:
+    - .aws-authenticate-classic-engage-nectary
   needs:
     - build-docs
   rules:
@@ -214,7 +229,6 @@ publish-docs:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   script:
-    - appcli use production
     - aws s3 rm s3://${BUCKET_ID}/.public/ --recursive --exclude ""
     - aws s3 cp public/ s3://${BUCKET_ID}/.public/ --recursive --include "*"
     - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
