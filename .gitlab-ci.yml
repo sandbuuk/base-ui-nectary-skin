@@ -41,6 +41,7 @@ default:
     - saas
     - stg
     - eu-west-1
+    - k8s
 
 
 stages:
