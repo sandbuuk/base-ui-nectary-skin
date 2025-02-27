@@ -218,7 +218,7 @@ build-docs:
 
 publish-docs:
   stage: deploy
-  image: 652860480992.dkr.ecr.eu-west-1.amazonaws.com/aws-cli-runner
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   extends:
     - .aws-authenticate-classic-engage-nectary
   needs:
