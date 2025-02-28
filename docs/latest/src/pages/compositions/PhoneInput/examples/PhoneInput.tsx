@@ -20,14 +20,18 @@ export const PhoneInputExample: FC = () => {
   const onClose = () => setIsOpen(false)
   const onOpen = () => setIsOpen(true)
   const onMenuChange = (e: CustomEvent<string>) => {
+    console.log('INPUT DETAILS', e.detail)
     onClose()
     setMenuValue(e.detail)
+    console.log('INPUT DETAILS', e.detail)
   }
   const onInputChange = (e: CustomEvent<string>) => {
     setInputValue(e.detail)
   }
   const phoneCode = countries.find((country) => country.iso === menuValue)?.code ?? ''
   const phoneMask = countries.find((country) => country.iso === menuValue)?.mask ?? ''
+
+  console.log('PHONE MASK', phoneMask)
 
   return (
     <sinch-popover
@@ -40,7 +44,7 @@ export const PhoneInputExample: FC = () => {
       <sinch-input
         slot="target"
         aria-label="Phone number"
-        mask={phoneMask.replaceAll('#', '0')}
+        mask={(Array.isArray(phoneMask) ? phoneMask[0] : phoneMask).replaceAll('#', '0')} // Typing in country library is sometimes wrong. Ensures it's a string.
         placeholder="Phone Number"
         value={inputValue}
         style={inputStyles}
@@ -55,7 +59,7 @@ export const PhoneInputExample: FC = () => {
           on-click={onOpen}
         >
           {menuValue.length > 0 && (
-            <sinch-flag slot="icon" code={menuValue}/>
+            <sinch-flag slot="icon" code={menuValue.toLowerCase()}/>
           )}
         </sinch-select-button>
       </sinch-input>
