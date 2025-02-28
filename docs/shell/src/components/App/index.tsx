@@ -11,6 +11,7 @@ import { SidebarFooter } from '../SidebarFooter'
 import { SidebarHeader } from '../SidebarHeader'
 import type { FC } from 'react'
 import { useThemeName } from '~/context/theme-control'
+import { useOnRouteChange } from '~/hooks'
 import { FAQPage } from '~/pages/FAQ'
 import { IntroPage } from '~/pages/Intro'
 import { LandingPage } from '~/pages/Landing'
@@ -41,9 +42,8 @@ const CLASS_CPAAS_THEME_DASHBOARD = 'cpaas-theme-dashboard'
 
 const basename = location.pathname.replace(/\/$/, '')
 
-const bus = new BroadcastChannel('MESSAGE_BUS')
-
 export const App: FC = () => {
+  const onRouteChange = useOnRouteChange()
   const { themeName } = useThemeName()
 
   const themeClasses = [
@@ -101,13 +101,13 @@ export const App: FC = () => {
       }
     }
 
-    bus.addEventListener('message', onMessage)
+    window.addEventListener('message', onMessage)
 
-    return () => bus.removeEventListener('message', onMessage)
+    return () => window.removeEventListener('message', onMessage)
   }, [mobileMenuOpen])
 
   return (
-    <QueryRouter basename={basename}>
+    <QueryRouter basename={basename} onChange={onRouteChange}>
       <div id="app-open-sidebar-button" className={[...themeClasses].join(' ')}>
         <sinch-button type="cta-secondary" aria-label="open-mobile-menu" on-click={() => openMobileMenu(!mobileMenuOpen)}>
           <sinch-icon slot="icon" icons-version="2" name="fa-bars"/>
