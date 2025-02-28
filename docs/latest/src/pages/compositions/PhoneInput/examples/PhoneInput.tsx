@@ -20,10 +20,8 @@ export const PhoneInputExample: FC = () => {
   const onClose = () => setIsOpen(false)
   const onOpen = () => setIsOpen(true)
   const onMenuChange = (e: CustomEvent<string>) => {
-    console.log('INPUT DETAILS', e.detail)
     onClose()
     setMenuValue(e.detail)
-    console.log('INPUT DETAILS', e.detail)
   }
   const onInputChange = (e: CustomEvent<string>) => {
     setInputValue(e.detail)
@@ -31,7 +29,6 @@ export const PhoneInputExample: FC = () => {
   const phoneCode = countries.find((country) => country.iso === menuValue)?.code ?? ''
   const phoneMask = countries.find((country) => country.iso === menuValue)?.mask ?? ''
 
-  console.log('PHONE MASK', phoneMask)
 
   return (
     <sinch-popover
