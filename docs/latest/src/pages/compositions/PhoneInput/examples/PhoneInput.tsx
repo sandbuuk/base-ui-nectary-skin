@@ -29,7 +29,6 @@ export const PhoneInputExample: FC = () => {
   const phoneCode = countries.find((country) => country.iso === menuValue)?.code ?? ''
   const phoneMask = countries.find((country) => country.iso === menuValue)?.mask ?? ''
 
-
   return (
     <sinch-popover
       open={isOpen}
