@@ -42,8 +42,6 @@ const CLASS_CPAAS_THEME_DASHBOARD = 'cpaas-theme-dashboard'
 
 const basename = location.pathname.replace(/\/$/, '')
 
-const bus = new BroadcastChannel('MESSAGE_BUS')
-
 export const App: FC = () => {
   const onRouteChange = useOnRouteChange()
   const { themeName } = useThemeName()
@@ -103,9 +101,9 @@ export const App: FC = () => {
       }
     }
 
-    bus.addEventListener('message', onMessage)
+    window.addEventListener('message', onMessage)
 
-    return () => bus.removeEventListener('message', onMessage)
+    return () => window.removeEventListener('message', onMessage)
   }, [mobileMenuOpen])
 
   return (

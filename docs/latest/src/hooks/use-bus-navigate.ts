@@ -3,8 +3,6 @@ import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import type { Location } from 'history'
 
-const bus = new BroadcastChannel('MESSAGE_BUS')
-
 type TRouteMessage = {
   type: 'ROUTE',
   payload: Location,
@@ -46,10 +44,11 @@ export const useBusNavigate = () => {
       }
     }
 
-    bus.addEventListener('message', onMessage, { signal: controller.signal })
+    window.addEventListener('message', onMessage, { signal: controller.signal })
 
     return () => {
       controller.abort()
+      window.removeEventListener('message', onMessage)
     }
   }, [])
 }
