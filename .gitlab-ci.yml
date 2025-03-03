@@ -52,7 +52,7 @@ stages:
   - security-scan-consolidation
   - security-scan-sonar
   - deploy
-  - preview
+  - docs
 
 .aws-authenticate-classic-engage-nectary:
   id_tokens:
@@ -166,7 +166,7 @@ publish:
     - pnpm run release
 
 preview:
-  stage: preview
+  stage: docs
   extends:
     - .prepare-ci
   rules:
@@ -194,6 +194,12 @@ build-docs:
   rules:
     - if: $CI_COMMIT_TAG =~ /^@nectary/
     - if: $CI_COMMIT_TAG == "docs"
+      when: always
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        paths:
+          - docs/**/*
+      when: on_success
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   before_script:
@@ -217,7 +223,7 @@ build-docs:
       - public
 
 publish-docs:
-  stage: deploy
+  stage: docs
   image:
     name: public.ecr.aws/aws-cli/aws-cli:latest
     entrypoint: [""]
@@ -228,10 +234,12 @@ publish-docs:
   rules:
     - if: $CI_COMMIT_TAG =~ /^@nectary/
     - if: $CI_COMMIT_TAG == "docs"
+      when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
         paths:
-          - docs/**
+          - docs/**/*
+      when: on_success
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   script:
