@@ -5,6 +5,9 @@ include:
   - project: "sinch/sinch-projects/sinch-platform/infra/pipeline/security"
     ref: v1-latest
     file: "auto_security.yml"
+  - project: "sinch/sinch-projects/applications/teams/core/core"
+    ref: main
+    file: "/_pipeline-templates/mr-notifications.yml"
 
 sinch_global_security_stage_secret_detection_gitleaks:
   extends: .sinch_global_security_stage_secret_detection_gitleaks
@@ -45,6 +48,7 @@ default:
 
 
 stages:
+  - start
   - lint
   - test
   - build
@@ -82,6 +86,10 @@ stages:
       prefix: cache
     paths:
       - .pnpm-store
+
+notify-on-mr-created:
+  extends: .notify-on-mr-created-template
+  stage: start
 
 lint:
   extends:
