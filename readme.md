@@ -2,6 +2,8 @@
 
 This is the monorepo for Nectary, Sinch’s design system. Our modular approach allows for maximum composability.
 
+Note: This repository uses [git-lfs](https://git-lfs.com/) and before cloning it you need to install git-lfs.
+
 # Packages
 | Package                                                                                                             | Description                                                                       |
 | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
