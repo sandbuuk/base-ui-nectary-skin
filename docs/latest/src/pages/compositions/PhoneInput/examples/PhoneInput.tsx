@@ -40,7 +40,7 @@ export const PhoneInputExample: FC = () => {
       <sinch-input
         slot="target"
         aria-label="Phone number"
-        mask={phoneMask.replaceAll('#', '0')}
+        mask={(Array.isArray(phoneMask) ? phoneMask[0] : phoneMask).replaceAll('#', '0')} // Typing in country library is sometimes wrong. Ensures it's a string.
         placeholder="Phone Number"
         value={inputValue}
         style={inputStyles}
@@ -55,7 +55,7 @@ export const PhoneInputExample: FC = () => {
           on-click={onOpen}
         >
           {menuValue.length > 0 && (
-            <sinch-flag slot="icon" code={menuValue}/>
+            <sinch-flag slot="icon" code={menuValue.toLowerCase()}/>
           )}
         </sinch-select-button>
       </sinch-input>
