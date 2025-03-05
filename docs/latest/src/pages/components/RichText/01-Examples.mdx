@@ -4,6 +4,7 @@ import { SizeExample } from './examples/Size.tsx?example'
 import { HistoryLinkExample } from './examples/HistoryLink.tsx?example'
 import { ExternalLinkExample } from './examples/ExternalLink.tsx?example'
 import { ClickableLinkExample } from './examples/ClickableLink.tsx?example'
+import { EscapingExample } from './examples/Escaping.tsx?example'
 
 # Examples
 
@@ -18,6 +19,12 @@ import { ClickableLinkExample } from './examples/ClickableLink.tsx?example'
 Rich Text can have different font sizes
 
 <Example Component={SizeExample}/>
+
+## Escape Formatting
+
+You can escape markdown formatting by using two backslashes before the character you want to escape, the reason for two backslashes is because the browser removes one before it reaches the internal of the component.
+
+<Example Component={EscapingExample}/>
 
 ## Use history.pushState for links
 

@@ -20,6 +20,20 @@ export const createParseVisitor = (doc: Document) => {
       const $lists: Node[] = []
 
       return {
+        // Add new escaped method to handle escaped characters
+        escaped(char) {
+          // Create a text node for the escaped character
+          const $text = doc.createTextNode(char)
+
+          // If we're in a paragraph, append directly to it
+          if ($p != null) {
+            $p.appendChild($text)
+          } else {
+            // If no paragraph exists, create one
+            this.paragraph()
+            $p!.appendChild($text)
+          }
+        },
         emoji(emojiChar) {
           const $emoji = doc.createElement('sinch-emoji')
 

@@ -5,6 +5,7 @@ export type TMarkdownInlineParams = {
 }
 
 export type TMarkdownParseVisitor = {
+  escaped(char: string): void,
   link(text: string, href: string, attributes?: string[]): void,
   emoji(emojiChar: string): void,
   codetag(text: string): void,
@@ -19,20 +20,23 @@ export type TMarkdownParseVisitor = {
 
 const regLinebreak = /(?:<br>\n|<br>|\n)/
 const regParagraph = /\n{2,}/
-const regEm3Star = /\*\*\*(?<em3>.+?)\*\*\*/
-const regEm2Star = /\*\*(?<em2>.+?)\*\*/
-const regEm1Star = /\*(?<em1>.+?)\*/
-const regEm3Underscore = /___(?<em3>.+?)___/
-const regEm2Underscore = /__(?<em2>.+?)__/
-const regEm1Underscore = /_(?<em1>.+?)_/
-const regCodeTag = /`(?<code>.+?)`/
-const regStrikethrough = /~~(?<strike>.+?)~~/
-const regLink = /!?\[(?<linktext>[^\]]*?)\]\((?<linkhref>[^)]+?)\)(\{(?<linkattrs>[^)]+?)\})?/
+const regEm3Star = /(?<!\\)\*\*\*(?<em3>.+?)(?<!\\)\*\*\*/
+const regEm2Star = /(?<!\\)\*\*(?<em2>.+?)(?<!\\)\*\*/
+const regEm1Star = /(?<!\\)\*(?<em1>.+?)(?<!\\)\*/
+const regEm3Underscore = /(?<!\\)___(?<em3>.+?)(?<!\\)___/
+const regEm2Underscore = /(?<!\\)__(?<em2>.+?)(?<!\\)__/
+const regEm1Underscore = /(?<!\\)_(?<em1>.+?)(?<!\\)_/
+const regCodeTag = /(?<!\\)`(?<code>.+?)(?<!\\)`/
+const regStrikethrough = /(?<!\\)~~(?<strike>.+?)(?<!\\)~~/
+const regLink = /(?<!\\)!?\[(?<linktext>[^\]]*?)\]\((?<linkhref>[^)]+?)\)(\{(?<linkattrs>[^)]+?)\})?/
 const regEmoji = /(?<emoji>(?![0-9*#])\p{Emoji})/u
 const regUList = /^(?<indent>[\t ]*?)[*+-][\t ]+(?<ultext>.*?)[\t ]*?$/
 const regOList = /^(?<indent>[\t ]*?)\d+\.[\t ]+(?<oltext>.*?)[\t ]*?$/
+// eslint-disable-next-line no-useless-escape
+const regEscapedChars = /\\(?<escaped>[\\\*_\[\]`~])/
 
 const allRegs = [
+  regEscapedChars,
   regCodeTag,
   regLink,
   regEm3Star,
@@ -86,6 +90,13 @@ const createLineParser = (visitor: Readonly<TMarkdownParseVisitor>) =>
 
       line = line.substring(match.index + matchedStr.length)
 
+      // Handle escaped characters first
+      if (groups?.escaped != null) {
+        visitor.escaped(groups.escaped)
+        continue
+      }
+
+      // Continue with other matches only if not escaped
       if (groups?.linkhref != null) {
         visitor.link(groups.linktext, groups.linkhref, groups.linkattrs?.split(' '))
       }
