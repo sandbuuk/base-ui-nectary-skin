@@ -232,11 +232,11 @@
     align-self: center;
     padding-left: 8px;
     font: var(--sinch-comp-checkbox-font-label);
-    color: var(--sinch-local-color-text);
+    --sinch-global-color-text: var(--sinch-local-color-text);
     cursor: pointer;
   }
 
-  #label:empty {
+  :host([label=""]) {
     display: none;
   }
 
@@ -259,5 +259,5 @@
       />
     </svg>
   </div>
-  <span id="label"></span>
+  <sinch-rich-text id="label"></sinch-rich-text>
 </div>
