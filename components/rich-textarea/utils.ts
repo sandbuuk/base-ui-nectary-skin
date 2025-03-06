@@ -2366,6 +2366,20 @@ export const createParseVisitor = (doc: Document) => {
       let isFirstListItem = false
 
       return {
+        escaped(char) {
+          // Create a text node for the escaped character
+          const $text = doc.createTextNode(char)
+
+          // If we're in a paragraph, append directly to it
+          if ($currentBlock != null) {
+            $currentBlock.appendChild($text)
+          } else {
+            // If no paragraph exists, create one
+            this.paragraph()
+            $currentBlock!.appendChild($text)
+          }
+        },
+
         emoji(emojiChar) {
           const $emoji = createEmoji(emojiChar, emojiBaseUrl, doc)
 
