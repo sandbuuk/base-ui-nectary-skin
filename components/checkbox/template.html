@@ -4,6 +4,7 @@
     vertical-align: middle;
     outline: none;
   }
+
   #wrapper {
     background-color: #53BD69;
     display: flex;
@@ -233,12 +234,14 @@
     padding-left: 8px;
     font: var(--sinch-comp-checkbox-font-label);
     cursor: pointer;
+
     --sinch-global-color-text: var(--sinch-local-color-text);
   }
 
-  #label:empty{
+  #label:empty {
     display: none;
   }
+
   :host([label=""]) {
     display: none;
   }
