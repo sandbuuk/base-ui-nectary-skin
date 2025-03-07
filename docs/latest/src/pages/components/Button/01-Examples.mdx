@@ -8,6 +8,7 @@ import { TypeCtaSecondaryExample } from './examples/TypeCtaSecondary.tsx?example
 import { TypeDestructiveExample } from './examples/TypeDestructive.tsx?example'
 import { RightIconExample } from './examples/RightIcon.tsx?example'
 import { SpinnerExample } from './examples/Spinner.tsx?example'
+import { SpinnerOnClickExample } from './examples/SpinnerOnClick.tsx?example'
 import { SizeExample } from './examples/Size.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
 import { ToggledExample } from './examples/Toggled.tsx?example'
@@ -85,9 +86,16 @@ Button component has an attribute called `size` that can be used to change the s
 
 ## Spinner
 
-A button with a loading state is a user interface element that is used to indicate to the user that an action is currently being performed. It is represented as a labelled button that includes  a spinning animation to the left of the label. When a button is in a loading state are always disabled, to prevent the user to trigger a action multiple times while the action is still loading.
+A button with a loading state is a user interface element that is used to indicate to the user that an action is currently being performed. It is represented as a labelled button that includes  a spinning animation to the left of the label. When a button is in a loading state, they should always be disabled, to prevent the user to trigger a action multiple times while the action is still loading.
 
 <Example Component={SpinnerExample}/>
+
+## Spinner on Click (Loading Button)
+
+Here follows a usecase of how to present a loading state to the user when a button is clicked.
+
+<Example Component={SpinnerOnClickExample}/>
+
 
 ## Right Icon
 

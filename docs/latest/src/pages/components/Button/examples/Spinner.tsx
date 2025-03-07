@@ -8,6 +8,7 @@ export const SpinnerExample: FC = () => (
     aria-label="Pending"
     type="primary"
     on-click={() => console.log('click')}
+    disabled
   >
     <sinch-spinner slot="icon"/>
   </sinch-button>
