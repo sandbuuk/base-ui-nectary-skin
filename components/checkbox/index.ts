@@ -133,11 +133,11 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
   }
 
   set text(value: string | null) {
-    updateAttribute(this.#$label, 'text', value)
+    updateAttribute(this, 'text', value)
   }
 
   get text() {
-    return getAttribute(this.#$label, 'text')
+    return getAttribute(this, 'text')
   }
 
   get focusable() {
