@@ -1,6 +1,8 @@
 import type { TSinchButtonElement, TSinchButtonReact } from '../button/types'
 import type { TSinchElementReact } from '../types'
 
+export type { TSinchButtonReact }
+
 export type TSinchButtonGroupItemElement = HTMLElement & {
   text: TSinchButtonElement['text'],
   disabled: TSinchButtonElement['disabled'],

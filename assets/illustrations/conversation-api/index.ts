@@ -6,13 +6,15 @@ import type { TSinchIllustrationElement, TSinchIllustrationReact } from '../type
 defineCustomElement('sinch-illustration-conversation-api', createIllustrationClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-illustration-conversation-api': TSinchIllustrationElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-illustration-conversation-api': TSinchIllustrationReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-illustration-conversation-api': TSinchIllustrationElement,
   }
 }

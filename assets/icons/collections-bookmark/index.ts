@@ -6,13 +6,15 @@ import type { TSinchIconElement, TSinchIconReact } from '../types'
 defineCustomElement('sinch-icon-collections-bookmark', createIconClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-icon-collections-bookmark': TSinchIconElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-icon-collections-bookmark': TSinchIconReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-icon-collections-bookmark': TSinchIconElement,
   }
 }

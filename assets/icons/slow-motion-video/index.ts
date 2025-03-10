@@ -6,13 +6,15 @@ import type { TSinchIconElement, TSinchIconReact } from '../types'
 defineCustomElement('sinch-icon-slow-motion-video', createIconClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-icon-slow-motion-video': TSinchIconElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-icon-slow-motion-video': TSinchIconReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-icon-slow-motion-video': TSinchIconElement,
   }
 }

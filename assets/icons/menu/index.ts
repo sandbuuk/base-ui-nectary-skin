@@ -6,13 +6,15 @@ import type { TSinchIconElement, TSinchIconReact } from '../types'
 defineCustomElement('sinch-icon-menu', createIconClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-icon-menu': TSinchIconElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-icon-menu': TSinchIconReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-icon-menu': TSinchIconElement,
   }
 }

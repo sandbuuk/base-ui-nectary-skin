@@ -6,13 +6,15 @@ import type { TSinchIconElement, TSinchIconReact } from '../types'
 defineCustomElement('sinch-icon-stop-screen-share', createIconClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-icon-stop-screen-share': TSinchIconElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-icon-stop-screen-share': TSinchIconReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-icon-stop-screen-share': TSinchIconElement,
   }
 }

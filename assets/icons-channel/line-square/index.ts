@@ -6,13 +6,15 @@ import type { TSinchIconChannelElement, TSinchIconChannelReact } from '../types'
 defineCustomElement('sinch-icon-channel-line-square', createIconClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-icon-channel-line-square': TSinchIconChannelElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-icon-channel-line-square': TSinchIconChannelReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-icon-channel-line-square': TSinchIconChannelElement,
   }
 }

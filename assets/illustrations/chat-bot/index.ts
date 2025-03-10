@@ -6,13 +6,15 @@ import type { TSinchIllustrationElement, TSinchIllustrationReact } from '../type
 defineCustomElement('sinch-illustration-chat-bot', createIllustrationClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-illustration-chat-bot': TSinchIllustrationElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-illustration-chat-bot': TSinchIllustrationReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-illustration-chat-bot': TSinchIllustrationElement,
   }
 }

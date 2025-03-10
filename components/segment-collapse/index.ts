@@ -99,13 +99,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-segment-collapse': TSinchSegmentExpandElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-segment-collapse': TSinchSegmentExpandReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-segment-collapse': TSinchSegmentExpandElement,
   }
 }

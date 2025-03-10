@@ -838,13 +838,15 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-input': TSinchInputElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-input': TSinchInputReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-input': TSinchInputElement,
   }
 }

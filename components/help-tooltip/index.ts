@@ -108,13 +108,15 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-help-tooltip': TSinchHelpTooltipElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-help-tooltip': TSinchHelpTooltipReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-help-tooltip': TSinchHelpTooltipElement,
   }
 }

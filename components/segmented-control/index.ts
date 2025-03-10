@@ -116,13 +116,15 @@ defineCustomElement('sinch-segmented-control', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-segmented-control': TSinchSegmentedControlElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-segmented-control': TSinchSegmentedControlReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-segmented-control': TSinchSegmentedControlElement,
   }
 }

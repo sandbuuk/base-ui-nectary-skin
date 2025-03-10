@@ -6,13 +6,15 @@ import type { TSinchIllustrationElement, TSinchIllustrationReact } from '../type
 defineCustomElement('sinch-illustration-hand-ok', createIllustrationClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-illustration-hand-ok': TSinchIllustrationElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-illustration-hand-ok': TSinchIllustrationReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-illustration-hand-ok': TSinchIllustrationElement,
   }
 }

@@ -296,13 +296,15 @@ defineCustomElement('sinch-file-drop', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-file-drop': TSinchFileDropElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-file-drop': TSinchFileDropReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-file-drop': TSinchFileDropElement,
   }
 }

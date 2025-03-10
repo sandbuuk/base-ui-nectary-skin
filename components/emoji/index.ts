@@ -68,13 +68,15 @@ defineCustomElement('sinch-emoji', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-emoji': TSinchEmojiElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-emoji': TSinchEmojiReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-emoji': TSinchEmojiElement,
   }
 }

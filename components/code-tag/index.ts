@@ -48,13 +48,15 @@ defineCustomElement('sinch-code-tag', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-code-tag': TSinchCodeTagElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-code-tag': TSinchCodeTagReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-code-tag': TSinchCodeTagElement,
   }
 }

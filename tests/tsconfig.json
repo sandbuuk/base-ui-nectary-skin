@@ -20,5 +20,8 @@
   "exclude": [
     "apps/angular/",
     "apps/vue/",
+  ],
+  "types": [
+    "react"
   ]
 }

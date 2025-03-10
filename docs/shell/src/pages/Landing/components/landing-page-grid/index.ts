@@ -25,13 +25,15 @@ defineCustomElement('landing-page-grid', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'landing-page-grid': TSinchGridElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'landing-page-grid': TSinchGridReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'landing-page-grid': TSinchGridElement,
   }
 }

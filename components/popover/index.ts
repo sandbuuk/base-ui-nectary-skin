@@ -226,13 +226,15 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-popover': TSinchPopoverElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-popover': TSinchPopoverReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-popover': TSinchPopoverElement,
   }
 }

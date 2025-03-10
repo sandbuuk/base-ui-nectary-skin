@@ -6,13 +6,15 @@ import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '../types'
 defineCustomElement('sinch-icon-branded-purpose', createIconClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-icon-branded-purpose': TSinchIconBrandedElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-icon-branded-purpose': TSinchIconBrandedReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-icon-branded-purpose': TSinchIconBrandedElement,
   }
 }

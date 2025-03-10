@@ -189,6 +189,9 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-labs-phone-preview-rcs-chat': ElementProps & HTMLElement,
   }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-labs-phone-preview-rcs-chat': ElementProps &

@@ -6,13 +6,15 @@ import type { TSinchLogoElement, TSinchLogoReact } from '../types'
 defineCustomElement('sinch-logo-message-studio-icon-wordmark', createLogoClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-logo-message-studio-icon-wordmark': TSinchLogoElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-logo-message-studio-icon-wordmark': TSinchLogoReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-logo-message-studio-icon-wordmark': TSinchLogoElement,
   }
 }

@@ -70,13 +70,15 @@ defineCustomElement('sinch-color-menu-option', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-color-menu-option': TSinchColorMenuOptionElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-color-menu-option': TSinchColorMenuOptionReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-color-menu-option': TSinchColorMenuOptionElement,
   }
 }

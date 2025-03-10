@@ -241,13 +241,15 @@ defineCustomElement('sinch-toast-manager', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-toast-manager': TSinchToastManagerElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-toast-manager': TSinchToastManagerReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-toast-manager': TSinchToastManagerElement,
   }
 }

@@ -97,13 +97,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-horizontal-stepper-item': TSinchHorizontalStepperItemElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-horizontal-stepper-item': TSinchHorizontalStepperItemReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-horizontal-stepper-item': TSinchHorizontalStepperItemElement,
   }
 }

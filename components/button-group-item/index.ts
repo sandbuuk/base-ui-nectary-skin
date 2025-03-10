@@ -99,13 +99,15 @@ defineCustomElement('sinch-button-group-item', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-button-group-item': TSinchButtonGroupItemElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-button-group-item': TSinchButtonGroupItemReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-button-group-item': TSinchButtonGroupItemElement,
   }
 }

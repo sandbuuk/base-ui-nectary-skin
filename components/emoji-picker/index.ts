@@ -439,13 +439,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-emoji-picker': TSinchEmojiPickerElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-emoji-picker': TSinchEmojiPickerReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-emoji-picker': TSinchEmojiPickerElement,
   }
 }

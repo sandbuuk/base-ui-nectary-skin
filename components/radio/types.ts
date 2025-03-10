@@ -16,5 +16,9 @@ export type TSinchRadioReact = TSinchElementReact<TSinchRadioElement> & {
   invalid?: boolean,
   'aria-label': string,
   'on-change'?: (e: CustomEvent<string>) => void,
-  style?: { '--sinch-comp-radio-direction'?: 'row' | 'column', '--sinch-comp-radio-gap'?: number | string },
+} & {
+  style?: {
+    '--sinch-comp-radio-direction'?: 'row' | 'column',
+    '--sinch-comp-radio-gap'?: number | string,
+  },
 }

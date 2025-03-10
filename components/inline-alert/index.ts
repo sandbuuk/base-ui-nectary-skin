@@ -141,13 +141,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-inline-alert': TSinchInlineAlertElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-inline-alert': TSinchInlineAlertReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-inline-alert': TSinchInlineAlertElement,
   }
 }

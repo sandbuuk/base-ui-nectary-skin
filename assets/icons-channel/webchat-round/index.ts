@@ -6,13 +6,15 @@ import type { TSinchIconChannelElement, TSinchIconChannelReact } from '../types'
 defineCustomElement('sinch-icon-channel-webchat-round', createIconClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-icon-channel-webchat-round': TSinchIconChannelElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-icon-channel-webchat-round': TSinchIconChannelReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-icon-channel-webchat-round': TSinchIconChannelElement,
   }
 }

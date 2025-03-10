@@ -141,13 +141,15 @@ defineCustomElement('sinch-persistent-overlay', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-persistent-overlay': TSinchPersistentOverlayElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-persistent-overlay': TSinchPersistentOverlayReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-persistent-overlay': TSinchPersistentOverlayElement,
   }
 }

@@ -222,13 +222,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-dialog': TSinchDialogElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-dialog': TSinchDialogReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-dialog': TSinchDialogElement,
   }
 }

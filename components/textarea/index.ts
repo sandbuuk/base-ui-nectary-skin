@@ -438,13 +438,15 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-textarea': TSinchTextareaElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-textarea': TSinchTextareaReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-textarea': TSinchTextareaElement,
   }
 }

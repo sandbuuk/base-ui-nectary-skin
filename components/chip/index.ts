@@ -177,13 +177,15 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-chip': TSinchChipElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-chip': TSinchChipReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-chip': TSinchChipElement,
   }
 }

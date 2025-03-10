@@ -552,13 +552,15 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-date-picker': TSinchDatePickerElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-date-picker': TSinchDatePickerReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-date-picker': TSinchDatePickerElement,
   }
 }

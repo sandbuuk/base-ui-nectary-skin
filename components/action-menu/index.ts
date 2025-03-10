@@ -246,13 +246,15 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-action-menu': TSinchActionMenuElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-action-menu': TSinchActionMenuReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-action-menu': TSinchActionMenuElement,
   }
 }

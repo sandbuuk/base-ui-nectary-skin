@@ -121,13 +121,15 @@ export class SelectMenuOption extends NectaryElement {
 defineCustomElement('sinch-select-menu-option', SelectMenuOption)
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-select-menu-option': TSinchSelectMenuOptionElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-select-menu-option': TSinchSelectMenuOptionReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-select-menu-option': TSinchSelectMenuOptionElement,
   }
 }

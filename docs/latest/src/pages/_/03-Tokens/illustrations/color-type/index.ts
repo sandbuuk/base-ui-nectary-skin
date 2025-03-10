@@ -6,13 +6,15 @@ import type { TSinchIllustrationElement, TSinchIllustrationReact } from '@nectar
 defineCustomElement('color-type', createIllustrationClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'color-type': TSinchIllustrationElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'color-type': TSinchIllustrationReact,
-    }
-
-    interface HTMLElementTagNameMap {
-      'color-type': TSinchIllustrationElement,
     }
   }
 }

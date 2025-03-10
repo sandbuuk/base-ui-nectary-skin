@@ -274,13 +274,15 @@ defineCustomElement('sinch-progress-stepper', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-progress-stepper': TSinchProgressStepperElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-progress-stepper': TSinchProgressStepperReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-progress-stepper': TSinchProgressStepperElement,
   }
 }

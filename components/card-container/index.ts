@@ -17,13 +17,15 @@ defineCustomElement('sinch-card-container', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-card-container': TSinchCardContainerElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-card-container': TSinchCardContainerReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-card-container': TSinchCardContainerElement,
   }
 }

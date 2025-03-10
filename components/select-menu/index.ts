@@ -606,13 +606,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-select-menu': TSinchSelectMenuElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-select-menu': TSinchSelectMenuReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-select-menu': TSinchSelectMenuElement,
   }
 }

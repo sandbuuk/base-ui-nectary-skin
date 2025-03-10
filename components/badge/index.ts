@@ -164,13 +164,15 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-badge': TSinchBadgeElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-badge': TSinchBadgeReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-badge': TSinchBadgeElement,
   }
 }

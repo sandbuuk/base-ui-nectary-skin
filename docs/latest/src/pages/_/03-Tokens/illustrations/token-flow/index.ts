@@ -6,13 +6,15 @@ import type { TSinchIllustrationElement, TSinchIllustrationReact } from '@nectar
 defineCustomElement('token-flow', createIllustrationClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'token-flow': TSinchIllustrationElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'token-flow': TSinchIllustrationReact,
-    }
-
-    interface HTMLElementTagNameMap {
-      'token-flow': TSinchIllustrationElement,
     }
   }
 }

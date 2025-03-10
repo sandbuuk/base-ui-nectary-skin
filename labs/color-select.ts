@@ -75,13 +75,15 @@ export class ScopedColorSelect extends ScopedRegistryHost(LitElement) {
 defineCustomElement('sinch-labs-color-select', ScopedColorSelect)
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-labs-color-select': {},
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-labs-color-select': {},
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-labs-color-select': {},
   }
 }

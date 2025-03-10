@@ -243,13 +243,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-pagination': TSinchPaginationElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-pagination': TSinchPaginationReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-pagination': TSinchPaginationElement,
   }
 }

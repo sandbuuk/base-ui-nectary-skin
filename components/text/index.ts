@@ -98,13 +98,15 @@ defineCustomElement('sinch-text', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-text': TSinchTextElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-text': TSinchTextReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-text': TSinchTextElement,
   }
 }

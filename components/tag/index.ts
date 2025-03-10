@@ -119,13 +119,15 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-tag': TSinchTagElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-tag': TSinchTagReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-tag': TSinchTagElement,
   }
 }

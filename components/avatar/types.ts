@@ -2,6 +2,8 @@ import type { TSinchAvatarColor } from './colors'
 import type { TSinchElementReact } from '../types'
 import type { TSinchSize } from '../utils/size'
 
+export type { TSinchAvatarColor }
+
 export type TSinchAvatarStatus = 'online' | 'busy' | 'away' | 'offline'
 
 export type TSinchAvatarElement = HTMLElement & {

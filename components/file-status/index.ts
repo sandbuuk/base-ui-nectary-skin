@@ -109,13 +109,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-file-status': TSinchFileStatusElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-file-status': TSinchFileStatusReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-file-status': TSinchFileStatusElement,
   }
 }
