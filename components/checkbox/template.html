@@ -232,20 +232,23 @@
     align-self: center;
     padding-left: 8px;
     font: var(--sinch-comp-checkbox-font-label);
-    color: var(--sinch-local-color-text);
     cursor: pointer;
+
+    --sinch-global-color-text: var(--sinch-local-color-text);
   }
 
-  #label:empty {
+  :host(:not([text])) #label,
+  :host([text=""]) #label {
     display: none;
   }
 
   :host([disabled]) #label {
     cursor: initial;
   }
+
 </style>
 
-<div id="wrapper">
+<div id="wrapper" >
   <div id="icon-container">
     <div id="checkbox"></div>
     <svg id="icon-checkmark" viewBox="0 0 24 24" aria-hidden="true">
@@ -259,5 +262,5 @@
       />
     </svg>
   </div>
-  <span id="label"></span>
+  <sinch-rich-text id="label"></sinch-rich-text>
 </div>

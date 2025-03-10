@@ -1,3 +1,4 @@
+import '../rich-text'
 import {
   defineCustomElement,
   getAttribute,
@@ -12,13 +13,14 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import type { TSinchCheckboxElement, TSinchCheckboxReact } from './types'
+import type { TSinchRichTextElement } from '../rich-text/types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-checkbox', class extends NectaryElement {
-  #$label: HTMLElement
+  #$label: TSinchRichTextElement
   #controller: AbortController | null = null
 
   constructor() {
@@ -69,7 +71,7 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
 
     switch (name) {
       case 'text': {
-        this.#$label.textContent = newVal
+        updateAttribute(this.#$label, 'text', newVal)
 
         break
       }
