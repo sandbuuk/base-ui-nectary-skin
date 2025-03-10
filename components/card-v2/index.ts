@@ -16,6 +16,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 const CLICK_EVENTS = ['click', '-click'] as const
+
 type ClickEventType = typeof CLICK_EVENTS[number]
 
 defineCustomElement(
