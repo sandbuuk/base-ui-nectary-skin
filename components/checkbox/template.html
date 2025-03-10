@@ -237,8 +237,9 @@
     --sinch-global-color-text: var(--sinch-local-color-text);
   }
 
-  #label:empty {
-    display: none;
+  :host(:not([text])) #label,
+  :host([text=""]) #label {
+    padding-left: 0;
   }
 
   :host([label=""]) {
