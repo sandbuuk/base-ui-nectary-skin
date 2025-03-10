@@ -115,13 +115,15 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-action-menu-option': TSinchActionMenuOptionElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-action-menu-option': TSinchActionMenuOptionReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-action-menu-option': TSinchActionMenuOptionElement,
   }
 }

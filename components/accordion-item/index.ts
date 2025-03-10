@@ -150,13 +150,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-accordion-item': TSinchAccordionItemElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-accordion-item': TSinchAccordionItemReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-accordion-item': TSinchAccordionItemElement,
   }
 }

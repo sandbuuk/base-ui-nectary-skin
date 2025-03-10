@@ -178,13 +178,15 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-checkbox': TSinchCheckboxElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-checkbox': TSinchCheckboxReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-checkbox': TSinchCheckboxElement,
   }
 }

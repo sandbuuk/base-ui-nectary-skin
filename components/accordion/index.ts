@@ -125,13 +125,15 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-accordion': TSinchAccordionElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-accordion': TSinchAccordionReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-accordion': TSinchAccordionElement,
   }
 }

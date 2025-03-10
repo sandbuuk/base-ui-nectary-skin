@@ -6,13 +6,15 @@ import type { TSinchIllustrationElement, TSinchIllustrationReact } from '@nectar
 defineCustomElement('reference-tokens', createIllustrationClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'reference-tokens': TSinchIllustrationElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'reference-tokens': TSinchIllustrationReact,
-    }
-
-    interface HTMLElementTagNameMap {
-      'reference-tokens': TSinchIllustrationElement,
     }
   }
 }

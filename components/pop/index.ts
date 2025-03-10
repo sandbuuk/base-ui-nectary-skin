@@ -585,13 +585,15 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-pop': TSinchPopElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-pop': TSinchPopReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-pop': TSinchPopElement,
   }
 }

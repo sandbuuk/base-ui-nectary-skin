@@ -119,13 +119,15 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-radio-option': TSinchRadioOptionElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-radio-option': TSinchRadioOptionReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-radio-option': TSinchRadioOptionElement,
   }
 }

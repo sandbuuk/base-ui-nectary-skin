@@ -82,13 +82,15 @@ defineCustomElement('sinch-progress', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-progress': TSinchProgressElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-progress': TSinchProgressReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-progress': TSinchProgressElement,
   }
 }

@@ -2,8 +2,10 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 const dirname = (import.meta as any).dirname as string
-
 const componentsDir = path.join(dirname, '..', 'components')
+
+const reactTypeRegexp = new RegExp(/(?<=export type TSinch(?:\w*)React(?:.*){)(\n(.*))*(?=})/)
+const findReactTypeBody = (fileContent: string) => reactTypeRegexp.exec(fileContent)?.[0]
 
 async function getComponents(): Promise<string[]> {
   const components = []
@@ -19,6 +21,13 @@ async function getComponents(): Promise<string[]> {
     ].includes(file)
 
     if (!isDir || isIgnored) {
+      continue
+    }
+
+    const fileContent = (await fs.readFile(path.join(componentsDir, file, 'types.ts'))).toString()
+    const reactTypeBody = findReactTypeBody(fileContent)
+
+    if (!reactTypeBody) {
       continue
     }
 

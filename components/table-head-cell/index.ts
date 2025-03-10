@@ -88,13 +88,15 @@ defineCustomElement('sinch-table-head-cell', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-table-head-cell': TSinchTableHeaderCellElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-table-head-cell': TSinchTableHeaderCellReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-table-head-cell': TSinchTableHeaderCellElement,
   }
 }

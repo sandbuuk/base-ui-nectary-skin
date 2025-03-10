@@ -214,13 +214,15 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-link': TSinchLinkElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-link': TSinchLinkReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-link': TSinchLinkElement,
   }
 }

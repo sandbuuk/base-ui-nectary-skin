@@ -199,13 +199,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-card-v2': TSinchCardV2Element,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-card-v2': TSinchCardV2React,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-card-v2': TSinchCardV2Element,
   }
 }

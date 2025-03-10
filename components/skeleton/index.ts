@@ -139,13 +139,15 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-skeleton': TSinchSkeletonElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-skeleton': TSinchSkeletonReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-skeleton': TSinchSkeletonElement,
   }
 }

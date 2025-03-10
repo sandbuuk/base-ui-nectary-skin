@@ -133,13 +133,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-toast': TSinchToastElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-toast': TSinchToastReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-toast': TSinchToastElement,
   }
 }

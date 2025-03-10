@@ -131,13 +131,15 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-avatar': TSinchAvatarElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-avatar': TSinchAvatarReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-avatar': TSinchAvatarElement,
   }
 }

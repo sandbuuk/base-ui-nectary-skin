@@ -89,13 +89,15 @@ defineCustomElement('sinch-horizontal-stepper', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-horizontal-stepper': TSinchHorizontalStepperElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-horizontal-stepper': TSinchHorizontalStepperReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-horizontal-stepper': TSinchHorizontalStepperElement,
   }
 }

@@ -161,13 +161,15 @@ defineCustomElement('sinch-tile-control', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-tile-control': TSinchTileControlElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-tile-control': TSinchTileControlReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-tile-control': TSinchTileControlElement,
   }
 }

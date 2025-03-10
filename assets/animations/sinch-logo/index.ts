@@ -6,13 +6,15 @@ import type { TSinchAnimationElement, TSinchAnimationReact } from '../types'
 defineCustomElement('sinch-animation-sinch-logo', createAnimationClass(animationData))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-animation-sinch-logo': TSinchAnimationElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-animation-sinch-logo': TSinchAnimationReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-animation-sinch-logo': TSinchAnimationElement,
   }
 }

@@ -147,13 +147,15 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-file-picker': TSinchFilePickerElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-file-picker': TSinchFilePickerReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-file-picker': TSinchFilePickerElement,
   }
 }

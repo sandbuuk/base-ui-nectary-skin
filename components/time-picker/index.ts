@@ -446,13 +446,15 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-time-picker': TSinchTimePickerElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-time-picker': TSinchTimePickerReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-time-picker': TSinchTimePickerElement,
   }
 }

@@ -68,13 +68,15 @@ defineCustomElement('sinch-flag', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-flag': TSinchFlagElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-flag': TSinchFlagReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-flag': TSinchFlagElement,
   }
 }

@@ -168,13 +168,15 @@ defineCustomElement('sinch-field', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-field': TSinchFieldElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-field': TSinchFieldReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-field': TSinchFieldElement,
   }
 }

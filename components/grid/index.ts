@@ -17,13 +17,15 @@ defineCustomElement('sinch-grid', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-grid': TSinchGridElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-grid': TSinchGridReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-grid': TSinchGridElement,
   }
 }

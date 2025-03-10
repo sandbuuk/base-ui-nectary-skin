@@ -6,13 +6,15 @@ import type { TSinchLogoReact, TSinchLogoElement } from '@nectary/assets/logo/ty
 defineCustomElement('figma-icon', createLogoClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'figma-icon': TSinchLogoElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'figma-icon': TSinchLogoReact,
-    }
-
-    interface HTMLElementTagNameMap {
-      'figma-icon': TSinchLogoElement,
     }
   }
 }

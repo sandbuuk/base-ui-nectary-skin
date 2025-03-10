@@ -153,13 +153,15 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-segment': TSinchSegmentElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-segment': TSinchSegmentReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-segment': TSinchSegmentElement,
   }
 }

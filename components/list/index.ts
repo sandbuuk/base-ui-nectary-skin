@@ -24,13 +24,15 @@ defineCustomElement('sinch-list', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-list': TSinchListElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-list': TSinchListReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-list': TSinchListElement,
   }
 }

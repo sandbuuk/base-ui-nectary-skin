@@ -35,13 +35,15 @@ defineCustomElement('sinch-table-cell', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-table-cell': TSinchTableCellElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-table-cell': TSinchTableCellReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-table-cell': TSinchTableCellElement,
   }
 }

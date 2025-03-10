@@ -83,13 +83,15 @@ defineCustomElement('sinch-vertical-stepper', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-vertical-stepper': TSinchVerticalStepperElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-vertical-stepper': TSinchVerticalStepperReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-vertical-stepper': TSinchVerticalStepperElement,
   }
 }

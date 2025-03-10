@@ -6,13 +6,15 @@ import type { TSinchLogoReact, TSinchLogoElement } from '@nectary/assets/logo/ty
 defineCustomElement('gitlab-icon', createLogoClass(templateHTML))
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'gitlab-icon': TSinchLogoElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'gitlab-icon': TSinchLogoReact,
-    }
-
-    interface HTMLElementTagNameMap {
-      'gitlab-icon': TSinchLogoElement,
     }
   }
 }

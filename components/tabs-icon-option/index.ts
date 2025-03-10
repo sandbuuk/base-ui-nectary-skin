@@ -110,13 +110,15 @@ defineCustomElement('sinch-tabs-icon-option', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-tabs-icon-option': TSinchTabsIconOptionElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-tabs-icon-option': TSinchTabsIconOptionReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-tabs-icon-option': TSinchTabsIconOptionElement,
   }
 }

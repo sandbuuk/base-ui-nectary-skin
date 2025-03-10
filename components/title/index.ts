@@ -91,13 +91,15 @@ defineCustomElement('sinch-title', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-title': TSinchTitleElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-title': TSinchTitleReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-title': TSinchTitleElement,
   }
 }

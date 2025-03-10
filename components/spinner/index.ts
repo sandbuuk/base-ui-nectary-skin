@@ -82,13 +82,15 @@ defineCustomElement('sinch-spinner', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-spinner': TSinchSpinnerElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-spinner': TSinchSpinnerReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-spinner': TSinchSpinnerElement,
   }
 }

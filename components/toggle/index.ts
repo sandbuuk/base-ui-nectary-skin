@@ -197,13 +197,15 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
 })
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-toggle': TSinchToggleElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-toggle': TSinchToggleReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-toggle': TSinchToggleElement,
   }
 }

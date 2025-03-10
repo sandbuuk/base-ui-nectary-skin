@@ -143,13 +143,15 @@ defineCustomElement(
 )
 
 declare global {
+  interface HTMLElementTagNameMap {
+    'sinch-progress-stepper-item': TSinchProgressStepperItemElement,
+  }
+}
+
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'sinch-progress-stepper-item': TSinchProgressStepperItemReact,
     }
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-progress-stepper-item': TSinchProgressStepperItemElement,
   }
 }
