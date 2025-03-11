@@ -14,7 +14,7 @@ export type TSinchInlineAlertElement = HTMLElement & {
 export type TSinchInlineAlertReact = TSinchElementReact<TSinchInlineAlertElement> & {
   type: TSinchInlineAlertType,
   text?: string,
-  caption: string,
+  caption?: string,
 } & {
   style?: {
     // Shape
