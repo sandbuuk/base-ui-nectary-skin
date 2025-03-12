@@ -3,6 +3,7 @@ import { TypeInfoExample } from './examples/TypeInfo.tsx?example'
 import { TypeWarningExample } from './examples/TypeWarning.tsx?example'
 import { TypeErrorExample } from './examples/TypeError.tsx?example'
 import { TypeSuccessExample } from './examples/TypeSuccess.tsx?example'
+import { TypeSuccessTextOnlyExample } from './examples/TypeSuccessTextOnly.tsx?example'
 import { CloseExample } from './examples/Close.tsx?example'
 import { ActionExample } from './examples/Action.tsx?example'
 import { MarkdownExample } from './examples/Markdown.tsx?example'
@@ -19,6 +20,11 @@ Inline Alert is a banner that presents pressing and high-singal messages. Their 
 Success Alert convay success information to the user.
 
 <Example Component={TypeSuccessExample}/>
+
+#### Text Only Alert
+To add an Inline Alert with only text inside, simply remove the caption property in order to only display the text. 
+
+<Example Component={TypeSuccessTextOnlyExample}/>
 
 ### Informative
 
