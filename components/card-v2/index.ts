@@ -203,6 +203,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-card-v2': TSinchCardV2Element,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-card-v2': TSinchCardV2React,
+    }
+  }
 }
 
 declare module 'react' {

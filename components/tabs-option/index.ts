@@ -121,6 +121,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-tabs-option': TSinchTabsOptionElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-tabs-option': TSinchTabsOptionReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-compare-arrows': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-compare-arrows': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

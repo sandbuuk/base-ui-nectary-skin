@@ -111,6 +111,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-help-tooltip': TSinchHelpTooltipElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-help-tooltip': TSinchHelpTooltipReact,
+    }
+  }
 }
 
 declare module 'react' {

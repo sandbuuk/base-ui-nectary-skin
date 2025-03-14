@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-history-toggle-off': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-history-toggle-off': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

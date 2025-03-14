@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-sort-by-alpha': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-sort-by-alpha': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

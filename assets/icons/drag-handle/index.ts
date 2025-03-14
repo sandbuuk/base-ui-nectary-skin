@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-drag-handle': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-drag-handle': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

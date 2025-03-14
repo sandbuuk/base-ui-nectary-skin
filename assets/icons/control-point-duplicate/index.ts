@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-control-point-duplicate': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-control-point-duplicate': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

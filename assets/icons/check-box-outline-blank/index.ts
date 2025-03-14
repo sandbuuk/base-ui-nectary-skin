@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-check-box-outline-blank': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-check-box-outline-blank': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

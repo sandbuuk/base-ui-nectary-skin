@@ -113,6 +113,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-tabs-icon-option': TSinchTabsIconOptionElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-tabs-icon-option': TSinchTabsIconOptionReact,
+    }
+  }
 }
 
 declare module 'react' {

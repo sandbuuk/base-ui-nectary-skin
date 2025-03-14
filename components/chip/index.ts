@@ -180,6 +180,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-chip': TSinchChipElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-chip': TSinchChipReact,
+    }
+  }
 }
 
 declare module 'react' {

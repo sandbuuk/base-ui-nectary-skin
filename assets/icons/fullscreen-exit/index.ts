@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-fullscreen-exit': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-fullscreen-exit': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

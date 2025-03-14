@@ -81,6 +81,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-color-swatch': TSinchColorSwatchElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-color-swatch': TSinchColorSwatchReact,
+    }
+  }
 }
 
 declare module 'react' {

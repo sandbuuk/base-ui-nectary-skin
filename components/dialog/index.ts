@@ -225,6 +225,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-dialog': TSinchDialogElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-dialog': TSinchDialogReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -102,6 +102,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-segment-collapse': TSinchSegmentExpandElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-segment-collapse': TSinchSegmentExpandReact,
+    }
+  }
 }
 
 declare module 'react' {

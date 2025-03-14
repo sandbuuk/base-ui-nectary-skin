@@ -136,6 +136,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-rich-text': TSinchRichTextElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-rich-text': TSinchRichTextReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-chat-bubble-outline': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-chat-bubble-outline': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

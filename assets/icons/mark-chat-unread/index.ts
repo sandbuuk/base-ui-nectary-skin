@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-mark-chat-unread': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-mark-chat-unread': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

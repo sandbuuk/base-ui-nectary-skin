@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-unfold-less': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-unfold-less': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

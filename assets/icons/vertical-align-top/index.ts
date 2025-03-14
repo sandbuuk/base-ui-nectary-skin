@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-vertical-align-top': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-vertical-align-top': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

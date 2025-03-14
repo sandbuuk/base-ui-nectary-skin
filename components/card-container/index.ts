@@ -20,6 +20,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-card-container': TSinchCardContainerElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-card-container': TSinchCardContainerReact,
+    }
+  }
 }
 
 declare module 'react' {

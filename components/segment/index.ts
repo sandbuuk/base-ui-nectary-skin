@@ -156,6 +156,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-segment': TSinchSegmentElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-segment': TSinchSegmentReact,
+    }
+  }
 }
 
 declare module 'react' {

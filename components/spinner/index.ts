@@ -85,6 +85,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-spinner': TSinchSpinnerElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-spinner': TSinchSpinnerReact,
+    }
+  }
 }
 
 declare module 'react' {

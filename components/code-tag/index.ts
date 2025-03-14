@@ -51,6 +51,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-code-tag': TSinchCodeTagElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-code-tag': TSinchCodeTagReact,
+    }
+  }
 }
 
 declare module 'react' {

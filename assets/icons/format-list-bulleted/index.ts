@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-format-list-bulleted': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-format-list-bulleted': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

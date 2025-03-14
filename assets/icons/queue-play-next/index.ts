@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-queue-play-next': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-queue-play-next': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -644,6 +644,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-rich-textarea': TSinchRichTextareaElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-rich-textarea': TSinchRichTextareaReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -555,6 +555,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-date-picker': TSinchDatePickerElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-date-picker': TSinchDatePickerReact,
+    }
+  }
 }
 
 declare module 'react' {

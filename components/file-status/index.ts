@@ -112,6 +112,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-file-status': TSinchFileStatusElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-file-status': TSinchFileStatusReact,
+    }
+  }
 }
 
 declare module 'react' {

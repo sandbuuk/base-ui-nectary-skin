@@ -841,6 +841,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-input': TSinchInputElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-input': TSinchInputReact,
+    }
+  }
 }
 
 declare module 'react' {

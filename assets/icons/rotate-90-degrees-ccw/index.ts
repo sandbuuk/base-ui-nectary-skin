@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-rotate-90-degrees-ccw': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-rotate-90-degrees-ccw': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

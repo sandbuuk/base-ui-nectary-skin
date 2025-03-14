@@ -118,6 +118,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-segmented-icon-control-option': TSinchSegmentedIconControlOptionElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-segmented-icon-control-option': TSinchSegmentedIconControlOptionReact,
+    }
+  }
 }
 
 declare module 'react' {

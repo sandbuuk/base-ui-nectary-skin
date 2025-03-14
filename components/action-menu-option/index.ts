@@ -118,6 +118,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-action-menu-option': TSinchActionMenuOptionElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-action-menu-option': TSinchActionMenuOptionReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-trending-flat': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-trending-flat': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

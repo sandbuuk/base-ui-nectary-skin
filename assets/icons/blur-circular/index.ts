@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-blur-circular': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-blur-circular': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

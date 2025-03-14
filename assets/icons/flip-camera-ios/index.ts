@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-flip-camera-ios': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-flip-camera-ios': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

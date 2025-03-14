@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-illustration-sick-kid': TSinchIllustrationElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-illustration-sick-kid': TSinchIllustrationReact,
+    }
+  }
 }
 
 declare module 'react' {

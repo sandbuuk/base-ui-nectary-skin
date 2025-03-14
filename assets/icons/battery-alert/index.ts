@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-battery-alert': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-battery-alert': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

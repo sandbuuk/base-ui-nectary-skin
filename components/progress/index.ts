@@ -85,6 +85,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-progress': TSinchProgressElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-progress': TSinchProgressReact,
+    }
+  }
 }
 
 declare module 'react' {

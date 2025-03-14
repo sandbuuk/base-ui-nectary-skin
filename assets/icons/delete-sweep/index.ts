@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-delete-sweep': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-delete-sweep': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

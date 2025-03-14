@@ -200,6 +200,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-toggle': TSinchToggleElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-toggle': TSinchToggleReact,
+    }
+  }
 }
 
 declare module 'react' {

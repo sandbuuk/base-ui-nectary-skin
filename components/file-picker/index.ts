@@ -150,6 +150,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-file-picker': TSinchFilePickerElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-file-picker': TSinchFilePickerReact,
+    }
+  }
 }
 
 declare module 'react' {

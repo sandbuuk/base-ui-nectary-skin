@@ -299,6 +299,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-file-drop': TSinchFileDropElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-file-drop': TSinchFileDropReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -92,6 +92,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-horizontal-stepper': TSinchHorizontalStepperElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-horizontal-stepper': TSinchHorizontalStepperReact,
+    }
+  }
 }
 
 declare module 'react' {

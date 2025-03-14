@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-gps-not-fixed': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-gps-not-fixed': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {
