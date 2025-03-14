@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-arrow-drop-down-circle': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-arrow-drop-down-circle': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

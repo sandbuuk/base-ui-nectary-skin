@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-format-indent-decrease': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-format-indent-decrease': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

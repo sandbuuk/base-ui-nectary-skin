@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-auto-delete': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-auto-delete': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

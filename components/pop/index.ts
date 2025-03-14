@@ -588,6 +588,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-pop': TSinchPopElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-pop': TSinchPopReact,
+    }
+  }
 }
 
 declare module 'react' {

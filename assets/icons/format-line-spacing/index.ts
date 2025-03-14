@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-format-line-spacing': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-format-line-spacing': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

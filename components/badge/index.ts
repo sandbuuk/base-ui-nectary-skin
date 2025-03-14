@@ -167,6 +167,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-badge': TSinchBadgeElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-badge': TSinchBadgeReact,
+    }
+  }
 }
 
 declare module 'react' {

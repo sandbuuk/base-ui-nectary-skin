@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-branded-voice-calling': TSinchIconBrandedElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-branded-voice-calling': TSinchIconBrandedReact,
+    }
+  }
 }
 
 declare module 'react' {

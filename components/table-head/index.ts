@@ -27,6 +27,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-table-head': TSinchTableHeadElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-table-head': TSinchTableHeadReact,
+    }
+  }
 }
 
 declare module 'react' {

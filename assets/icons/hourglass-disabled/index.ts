@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-hourglass-disabled': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-hourglass-disabled': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

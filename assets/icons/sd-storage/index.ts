@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-sd-storage': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-sd-storage': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

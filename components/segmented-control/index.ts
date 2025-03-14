@@ -119,6 +119,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-segmented-control': TSinchSegmentedControlElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-segmented-control': TSinchSegmentedControlReact,
+    }
+  }
 }
 
 declare module 'react' {

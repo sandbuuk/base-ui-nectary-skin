@@ -442,6 +442,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-emoji-picker': TSinchEmojiPickerElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-emoji-picker': TSinchEmojiPickerReact,
+    }
+  }
 }
 
 declare module 'react' {

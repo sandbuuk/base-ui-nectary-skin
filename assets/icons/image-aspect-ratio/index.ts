@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-image-aspect-ratio': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-image-aspect-ratio': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

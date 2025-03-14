@@ -144,6 +144,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-persistent-overlay': TSinchPersistentOverlayElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-persistent-overlay': TSinchPersistentOverlayReact,
+    }
+  }
 }
 
 declare module 'react' {

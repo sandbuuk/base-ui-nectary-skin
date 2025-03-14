@@ -229,6 +229,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-popover': TSinchPopoverElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-popover': TSinchPopoverReact,
+    }
+  }
 }
 
 declare module 'react' {

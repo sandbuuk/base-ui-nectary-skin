@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-fast-rewind': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-fast-rewind': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

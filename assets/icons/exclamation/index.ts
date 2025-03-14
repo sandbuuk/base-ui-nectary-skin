@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-exclamation': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-exclamation': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

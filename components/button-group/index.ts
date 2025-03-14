@@ -75,6 +75,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-button-group': TSinchButtonGroupElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-button-group': TSinchButtonGroupReact,
+    }
+  }
 }
 
 declare module 'react' {

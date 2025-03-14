@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-cloud-queue': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-cloud-queue': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -134,6 +134,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-avatar': TSinchAvatarElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-avatar': TSinchAvatarReact,
+    }
+  }
 }
 
 declare module 'react' {

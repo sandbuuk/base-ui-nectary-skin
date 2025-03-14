@@ -94,6 +94,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-title': TSinchTitleElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-title': TSinchTitleReact,
+    }
+  }
 }
 
 declare module 'react' {

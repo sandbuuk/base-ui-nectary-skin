@@ -274,6 +274,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-select-button': TSinchSelectButtonElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-select-button': TSinchSelectButtonReact,
+    }
+  }
 }
 
 declare module 'react' {

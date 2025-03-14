@@ -73,6 +73,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-color-menu-option': TSinchColorMenuOptionElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-color-menu-option': TSinchColorMenuOptionReact,
+    }
+  }
 }
 
 declare module 'react' {

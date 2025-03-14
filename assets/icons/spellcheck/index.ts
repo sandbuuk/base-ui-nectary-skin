@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-spellcheck': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-spellcheck': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

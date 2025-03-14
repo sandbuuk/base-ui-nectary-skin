@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-wallpaper': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-wallpaper': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

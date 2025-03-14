@@ -100,6 +100,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-vertical-stepper-item': TSinchVerticalStepperItemElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-vertical-stepper-item': TSinchVerticalStepperItemReact,
+    }
+  }
 }
 
 declare module 'react' {

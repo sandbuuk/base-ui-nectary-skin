@@ -183,6 +183,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-checkbox': TSinchCheckboxElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-checkbox': TSinchCheckboxReact,
+    }
+  }
 }
 
 declare module 'react' {

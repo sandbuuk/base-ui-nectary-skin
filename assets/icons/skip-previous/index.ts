@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-skip-previous': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-skip-previous': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

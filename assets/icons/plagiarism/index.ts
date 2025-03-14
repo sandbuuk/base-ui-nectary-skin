@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-plagiarism': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-plagiarism': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

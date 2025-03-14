@@ -449,6 +449,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-time-picker': TSinchTimePickerElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-time-picker': TSinchTimePickerReact,
+    }
+  }
 }
 
 declare module 'react' {

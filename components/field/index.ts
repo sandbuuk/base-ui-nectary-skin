@@ -171,6 +171,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-field': TSinchFieldElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-field': TSinchFieldReact,
+    }
+  }
 }
 
 declare module 'react' {

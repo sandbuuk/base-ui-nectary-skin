@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-vpn-key': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-vpn-key': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

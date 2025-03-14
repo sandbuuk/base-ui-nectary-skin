@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-keyboard-return': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-keyboard-return': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

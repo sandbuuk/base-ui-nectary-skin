@@ -85,6 +85,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-alert': TSinchAlertElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-alert': TSinchAlertReact,
+    }
+  }
 }
 
 declare module 'react' {

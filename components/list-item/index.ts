@@ -27,6 +27,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-list-item': TSinchListItemElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-list-item': TSinchListItemReact,
+    }
+  }
 }
 
 declare module 'react' {

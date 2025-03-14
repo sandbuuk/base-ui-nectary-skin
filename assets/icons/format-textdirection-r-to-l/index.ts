@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-format-textdirection-r-to-l': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-format-textdirection-r-to-l': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

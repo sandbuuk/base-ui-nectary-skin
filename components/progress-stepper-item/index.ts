@@ -146,6 +146,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-progress-stepper-item': TSinchProgressStepperItemElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-progress-stepper-item': TSinchProgressStepperItemReact,
+    }
+  }
 }
 
 declare module 'react' {

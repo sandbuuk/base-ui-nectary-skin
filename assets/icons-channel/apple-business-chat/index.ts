@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-channel-apple-business-chat': TSinchIconChannelElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-channel-apple-business-chat': TSinchIconChannelReact,
+    }
+  }
 }
 
 declare module 'react' {

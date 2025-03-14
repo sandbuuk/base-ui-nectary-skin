@@ -71,6 +71,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-flag': TSinchFlagElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-flag': TSinchFlagReact,
+    }
+  }
 }
 
 declare module 'react' {

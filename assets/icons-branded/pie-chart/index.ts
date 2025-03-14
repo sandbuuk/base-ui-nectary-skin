@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-branded-pie-chart': TSinchIconBrandedElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-branded-pie-chart': TSinchIconBrandedReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -20,6 +20,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-skeleton-item': TSinchSkeletonItemElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-skeleton-item': TSinchSkeletonItemReact,
+    }
+  }
 }
 
 declare module 'react' {

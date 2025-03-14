@@ -244,6 +244,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-toast-manager': TSinchToastManagerElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-toast-manager': TSinchToastManagerReact,
+    }
+  }
 }
 
 declare module 'react' {

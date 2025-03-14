@@ -217,6 +217,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-link': TSinchLinkElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-link': TSinchLinkReact,
+    }
+  }
 }
 
 declare module 'react' {

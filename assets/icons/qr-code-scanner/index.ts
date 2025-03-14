@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-qr-code-scanner': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-qr-code-scanner': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

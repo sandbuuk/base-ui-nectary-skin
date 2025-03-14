@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-restore-from-trash': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-restore-from-trash': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

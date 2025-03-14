@@ -122,6 +122,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-tag': TSinchTagElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-tag': TSinchTagReact,
+    }
+  }
 }
 
 declare module 'react' {

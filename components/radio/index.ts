@@ -209,6 +209,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-radio': TSinchRadioElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-radio': TSinchRadioReact,
+    }
+  }
 }
 
 declare module 'react' {

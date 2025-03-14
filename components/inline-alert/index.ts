@@ -144,6 +144,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-inline-alert': TSinchInlineAlertElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-inline-alert': TSinchInlineAlertReact,
+    }
+  }
 }
 
 declare module 'react' {

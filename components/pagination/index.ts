@@ -246,6 +246,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-pagination': TSinchPaginationElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-pagination': TSinchPaginationReact,
+    }
+  }
 }
 
 declare module 'react' {

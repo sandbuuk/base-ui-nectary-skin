@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-strikethrough-s': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-strikethrough-s': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -52,6 +52,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-grid-item': TSinchGridItemElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-grid-item': TSinchGridItemReact,
+    }
+  }
 }
 
 declare module 'react' {

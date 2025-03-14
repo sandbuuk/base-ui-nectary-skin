@@ -137,6 +137,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-tile-control-option': TSinchTileControlOptionElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-tile-control-option': TSinchTileControlOptionReact,
+    }
+  }
 }
 
 declare module 'react' {

@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-tablet-mac': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-tablet-mac': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

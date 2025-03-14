@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-stay-current-landscape': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-stay-current-landscape': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

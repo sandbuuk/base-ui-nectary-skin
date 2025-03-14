@@ -91,6 +91,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-table-head-cell': TSinchTableHeaderCellElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-table-head-cell': TSinchTableHeaderCellReact,
+    }
+  }
 }
 
 declare module 'react' {

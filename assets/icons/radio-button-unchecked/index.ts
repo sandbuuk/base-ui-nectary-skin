@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-radio-button-unchecked': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-radio-button-unchecked': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

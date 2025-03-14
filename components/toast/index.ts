@@ -136,6 +136,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-toast': TSinchToastElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-toast': TSinchToastReact,
+    }
+  }
 }
 
 declare module 'react' {

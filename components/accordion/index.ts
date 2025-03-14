@@ -128,6 +128,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-accordion': TSinchAccordionElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-accordion': TSinchAccordionReact,
+    }
+  }
 }
 
 declare module 'react' {

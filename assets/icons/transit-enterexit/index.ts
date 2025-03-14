@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-transit-enterexit': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-transit-enterexit': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

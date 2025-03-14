@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-horizontal-split': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-horizontal-split': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

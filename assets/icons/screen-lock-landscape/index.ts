@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-screen-lock-landscape': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-screen-lock-landscape': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

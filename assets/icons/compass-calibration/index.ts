@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-icon-compass-calibration': TSinchIconElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon-compass-calibration': TSinchIconReact,
+    }
+  }
 }
 
 declare module 'react' {

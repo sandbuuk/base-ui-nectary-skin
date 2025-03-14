@@ -9,6 +9,12 @@ declare global {
   interface HTMLElementTagNameMap {
     'sinch-logo-campaigns-icon-wordmark': TSinchLogoElement,
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-logo-campaigns-icon-wordmark': TSinchLogoReact,
+    }
+  }
 }
 
 declare module 'react' {
