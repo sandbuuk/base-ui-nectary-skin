@@ -1,4 +1,5 @@
 import '../text'
+import '../tooltip'
 import {
   defineCustomElement,
   getBooleanAttribute,
@@ -19,7 +20,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tag', class extends NectaryElement {
   #$text: HTMLElement
-  #$tooltiptext: HTMLElement
+  #$tooltip: HTMLElement
   #$wrapper: HTMLElement
 
   constructor() {
@@ -31,7 +32,7 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
     this.#$wrapper = shadowRoot.querySelector('#wrapper')!
     this.#$text = shadowRoot.querySelector('#text')!
-    this.#$tooltiptext = shadowRoot.querySelector('#tooltiptext')!
+    this.#$tooltip = shadowRoot.querySelector('#tooltip')!
   }
 
   connectedCallback() {
@@ -58,6 +59,7 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
   set text(value: string) {
     updateAttribute(this, 'text', value)
+    updateAttribute(this.#$tooltip, 'text', value)
   }
 
   get small() {
@@ -86,12 +88,11 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
       case 'text': {
         this.#$text.textContent = newVal
-        this.#$tooltiptext.textContent = newVal
 
-        if (this.#$text.scrollWidth > this.#$text.clientWidth) {
-          this.#$wrapper.classList.add('show-tooltip')
-        } else {
-          this.#$wrapper.classList.remove('show-tooltip')
+        const ellipsis = getBooleanAttribute(this, 'ellipsis')
+
+        if (ellipsis && this.#$text.scrollWidth > this.#$text.clientWidth) {
+          updateAttribute(this.#$tooltip, 'text', newVal)
         }
 
         break
