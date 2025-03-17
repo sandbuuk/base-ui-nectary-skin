@@ -89,10 +89,11 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
         this.#$tooltiptext.textContent = newVal
 
         if (this.#$text.scrollWidth > this.#$text.clientWidth) {
-          this.#$wrapper.classList.add("show-tooltip")
+          this.#$wrapper.classList.add('show-tooltip')
         } else {
-          this.#$wrapper.classList.remove("show-tooltip")
+          this.#$wrapper.classList.remove('show-tooltip')
         }
+
         break
       }
 
