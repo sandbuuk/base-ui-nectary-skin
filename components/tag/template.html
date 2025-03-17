@@ -17,6 +17,7 @@
   background-color: var(--sinch-comp-tag-color-default-background);
   box-sizing: border-box;
   user-select: none;
+  position: relative;
 
   --sinch-global-color-text: var(--sinch-comp-tag-color-default-foreground);
   --sinch-global-color-icon: var(--sinch-comp-tag-color-default-foreground);
@@ -32,7 +33,6 @@
 
 #text {
   flex: 1;
-
   --sinch-comp-text-font: var(--sinch-comp-tag-font-size-m-label);
 }
 
@@ -43,9 +43,52 @@
 ::slotted(*) {
   margin-left: -4px;
 }
+
+#wrapper #tooltiptext {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  padding: 7px;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  word-wrap: break-word;
+  max-width: 300px;
+
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#wrapper #tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+:host(:not([no-truncate])) #wrapper:hover #tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+:host(:not([no-truncate])) #text {
+  text-overflow: ellipsis;
+}
+
 </style>
 
 <div id="wrapper">
   <slot name="icon"></slot>
-  <sinch-text id="text" type="s" ellipsis></sinch-text>
+      <sinch-text id="tooltiptext" type="s"></sinch-text>
+      <sinch-text id="text" type="s" ellipsis></sinch-text>
 </div>
