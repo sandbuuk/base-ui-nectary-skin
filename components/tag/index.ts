@@ -40,6 +40,12 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
     this.#updateColor()
     this.#updateEllipsisTooltip()
+
+    const ellipsis = getBooleanAttribute(this, 'ellipsis')
+
+    if (ellipsis) {
+      this.#$text.setAttribute('ellipsis', '')
+    }
   }
 
   disconnectedCallback() {
