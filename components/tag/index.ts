@@ -19,6 +19,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tag', class extends NectaryElement {
   #$text: HTMLElement
+  #$tooltiptext: HTMLElement
   #$wrapper: HTMLElement
 
   constructor() {
@@ -30,6 +31,7 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
     this.#$wrapper = shadowRoot.querySelector('#wrapper')!
     this.#$text = shadowRoot.querySelector('#text')!
+    this.#$tooltiptext = shadowRoot.querySelector('#tooltiptext')!
   }
 
   connectedCallback() {
@@ -84,7 +86,13 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
       case 'text': {
         this.#$text.textContent = newVal
+        this.#$tooltiptext.textContent = newVal
 
+        if (this.#$text.scrollWidth > this.#$text.clientWidth) {
+          this.#$wrapper.classList.add("show-tooltip")
+        } else {
+          this.#$wrapper.classList.remove("show-tooltip")
+        }
         break
       }
 
