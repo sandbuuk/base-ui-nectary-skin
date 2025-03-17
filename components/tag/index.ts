@@ -39,6 +39,7 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
     super.connectedCallback()
 
     this.#updateColor()
+    this.#updateEllipsisTooltip()
   }
 
   disconnectedCallback() {
@@ -88,12 +89,7 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 
       case 'text': {
         this.#$text.textContent = newVal
-
-        const ellipsis = getBooleanAttribute(this, 'ellipsis')
-
-        if (ellipsis && this.#$text.scrollWidth > this.#$text.clientWidth) {
-          updateAttribute(this.#$tooltip, 'text', newVal)
-        }
+        this.#updateEllipsisTooltip()
 
         break
       }
@@ -125,6 +121,20 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
       this.#$wrapper.style.removeProperty('--sinch-global-color-text')
       this.#$wrapper.style.removeProperty('--sinch-global-color-icon')
     }
+  }
+
+  #updateEllipsisTooltip() {
+    const ellipsis = getBooleanAttribute(this, 'ellipsis')
+
+    requestAnimationFrame(() => {
+      const hasOverflow = this.#$text.offsetWidth < this.#$text.scrollWidth
+
+      if (ellipsis && hasOverflow) {
+        updateAttribute(this.#$tooltip, 'text', this.text)
+      } else {
+        updateAttribute(this.#$tooltip, 'text', '')
+      }
+    })
   }
 })
 

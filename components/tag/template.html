@@ -1,6 +1,6 @@
 <style>
 :host {
-  display: inline-block;
+  display: inline;
   vertical-align: middle;
   outline: none;
 }
@@ -17,7 +17,6 @@
   background-color: var(--sinch-comp-tag-color-default-background);
   box-sizing: border-box;
   user-select: none;
-  position: relative;
 
   --sinch-global-color-text: var(--sinch-comp-tag-color-default-foreground);
   --sinch-global-color-icon: var(--sinch-comp-tag-color-default-foreground);
@@ -43,10 +42,6 @@
 
 ::slotted(*) {
   margin-left: -4px;
-}
-
-:host([ellipsis]) #text {
-  text-overflow: ellipsis;
 }
 
 </style>
