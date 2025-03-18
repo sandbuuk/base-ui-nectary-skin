@@ -33,15 +33,32 @@ setAssetsRegistry(window.customElements)
 Or a custom one for the Shell/MFE use case:
 
 ```js
-import { setNectaryRegistry } from '@nectary/components/utils'
-import { setAssetsRegistry } from '@nectary/assets/utils'
+import { setNectaryRegistry, resetNectaryRegistry } from '@nectary/components/utils'
+import { setAssetsRegistry, resetAssetsRegistry } from '@nectary/assets/utils'
 
-const customRegistry = new CustomElementRegistry();
 
-setNectaryRegistry(customRegistry)
-setAssetsRegistry(customRegistry)
+// mount function
+const mount = () => {
+  const customElements = new CustomElementRegistry();
+  
+  setNectaryRegistry(customElements)
+  setAssetsRegistry(customElements)
 
-// ShadowRoot wrapper
+  const shadowRoot = element.attachShadow({
+    mode: "open",
+    customElements,
+  });
+
+  // ... rest of the mount function
+
+
+  // unmount function
+  return () => {
+    resetNectaryRegistry()
+    resetAssetsRegistry()
+    // ... rest of the unmount function
+  }
+}
 ```
 
 ### Theme
