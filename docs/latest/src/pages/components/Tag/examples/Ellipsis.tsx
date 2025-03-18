@@ -3,7 +3,6 @@ import '@nectary/components/tag'
 
 const wrapperStyles: CSSProperties = {
   display: 'flex',
-  flexWrap: 'wrap',
   gap: 10,
 }
 
@@ -12,13 +11,13 @@ export const EllipsisExample: FC = () => (
     <div style={{ width: 100 }}>
       <sinch-tag
         color="info"
+        ellipsis
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       />
     </div>
     <div style={{ width: 100 }}>
       <sinch-tag
         color="info"
-        ellipsis
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       />
     </div>
