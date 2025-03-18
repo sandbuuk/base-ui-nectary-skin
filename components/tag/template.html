@@ -1,8 +1,12 @@
 <style>
 :host {
-  display: inline;
+  display: inline-block;
   vertical-align: middle;
   outline: none;
+}
+
+:host([ellipsis]) {
+  display: inline;
 }
 
 #wrapper {
