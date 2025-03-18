@@ -21,7 +21,6 @@
   background-color: var(--sinch-comp-tag-color-default-background);
   box-sizing: border-box;
   user-select: none;
-  text-wrap: nowrap;
 
   --sinch-global-color-text: var(--sinch-comp-tag-color-default-foreground);
   --sinch-global-color-icon: var(--sinch-comp-tag-color-default-foreground);
@@ -54,6 +53,6 @@
 <sinch-tooltip id="tooltip" type="fast">
   <div id="wrapper">
     <slot name="icon"></slot>
-    <sinch-text id="text" type="s"></sinch-text>
+    <sinch-text id="text" type="s" ellipsis></sinch-text>
   </div>
 </sinch-tooltip>
