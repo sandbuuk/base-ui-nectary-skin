@@ -5,6 +5,10 @@
   outline: none;
 }
 
+:host([ellipsis]) {
+  display: inline;
+}
+
 #wrapper {
   display: flex;
   flex-direction: row;
@@ -43,9 +47,12 @@
 ::slotted(*) {
   margin-left: -4px;
 }
+
 </style>
 
-<div id="wrapper">
-  <slot name="icon"></slot>
-  <sinch-text id="text" type="s" ellipsis></sinch-text>
-</div>
+<sinch-tooltip id="tooltip" type="fast">
+  <div id="wrapper">
+    <slot name="icon"></slot>
+    <sinch-text id="text" type="s" ellipsis></sinch-text>
+  </div>
+</sinch-tooltip>

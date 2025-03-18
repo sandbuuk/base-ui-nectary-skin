@@ -2,6 +2,8 @@ import { Example } from '~/components/Example'
 import { SimpleExample } from './examples/Simple.tsx?example'
 import { IconExample } from './examples/Icon.tsx?example'
 import { SmallExample } from './examples/Small.tsx?example'
+import { EllipsisExample } from './examples/Ellipsis.tsx?example'
+
 
 # Examples
 
@@ -26,3 +28,9 @@ The icon can help to provide additional context or meaning for the label or text
 Using tags in different sizes can help to draw the user's attention to important information and to provide context for other content on the page. It can also be used to create visual hierarchy or to emphasize certain pieces of information. For example, larger tag components may be used to highlight the most important information, while smaller tag components may be used for less important or supplementary information.
 
 <Example Component={SmallExample}/>
+
+## Ellipsis
+
+If the text doesn't fit within the external container, and the ellipsis attribute is set, the text is truncated with an ellipsis to mark that more content is available. A tooltip is added with the full content on hover.
+
+<Example Component={EllipsisExample}/>

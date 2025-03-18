@@ -10,12 +10,16 @@ export type TSinchTagElement = HTMLElement & {
   color: TSinchTagColor | null,
   /** Small */
   small: boolean,
+  /** Ellipsis */
+  ellipsis: boolean,
   /** Text */
   setAttribute(name: 'text', value: string): void,
   /** Color, gray by default */
   setAttribute(name: 'color', value: string): void,
   /** Small */
   setAttribute(name: 'small', value: ''): void,
+  /** Ellipsis */
+  setAttribute(name: 'ellipsis', value: ''): void,
 }
 
 export type TSinchTagReact = TSinchElementReact<TSinchTagElement> & {
@@ -25,6 +29,8 @@ export type TSinchTagReact = TSinchElementReact<TSinchTagElement> & {
   color?: TSinchTagColor,
   /** Small */
   small?: boolean,
+  /** Ellipsis */
+  ellipsis?: boolean,
 } & {
   style?: {
     // Sizes - Container
