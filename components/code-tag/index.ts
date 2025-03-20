@@ -5,7 +5,8 @@ import {
   NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchCodeTagElement, TSinchCodeTagReact } from './types'
+import type { TSinchCodeTag } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -48,13 +49,17 @@ defineCustomElement('sinch-code-tag', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-code-tag': TSinchCodeTag,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-code-tag': TSinchCodeTagElement,
+    'sinch-code-tag': NectaryComponentVanilla<'sinch-code-tag'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-code-tag': TSinchCodeTagReact,
+      'sinch-code-tag': NectaryComponentReact<'sinch-code-tag'>,
     }
   }
 }
@@ -62,7 +67,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-code-tag': TSinchCodeTagReact,
+      'sinch-code-tag': NectaryComponentReact<'sinch-code-tag'>,
     }
   }
 }

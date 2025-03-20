@@ -1,28 +1,9 @@
 import type { TSinchTagColor } from './colors'
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
 export type { TSinchTagColor }
 
-export type TSinchTagElement = HTMLElement & {
-  /** Text */
-  text: string,
-  /** Color, gray by default */
-  color: TSinchTagColor | null,
-  /** Small */
-  small: boolean,
-  /** Ellipsis */
-  ellipsis: boolean,
-  /** Text */
-  setAttribute(name: 'text', value: string): void,
-  /** Color, gray by default */
-  setAttribute(name: 'color', value: string): void,
-  /** Small */
-  setAttribute(name: 'small', value: ''): void,
-  /** Ellipsis */
-  setAttribute(name: 'ellipsis', value: ''): void,
-}
-
-export type TSinchTagReact = TSinchElementReact<TSinchTagElement> & {
+export type TSinchTagProps = {
   /** Text */
   text: string,
   /** Color, gray by default */
@@ -31,30 +12,38 @@ export type TSinchTagReact = TSinchElementReact<TSinchTagElement> & {
   small?: boolean,
   /** Ellipsis */
   ellipsis?: boolean,
-} & {
-  style?: {
-    // Sizes - Container
-    '--sinch-comp-tag-size-container-m'?: string,
-    '--sinch-comp-tag-size-container-s'?: string,
-
-    // Sizes - Icon
-    '--sinch-comp-tag-size-icon-m'?: string,
-    '--sinch-comp-tag-size-icon-s'?: string,
-
-    // Shape
-    '--sinch-comp-tag-shape-radius'?: string,
-
-    // Font Sizes
-    '--sinch-comp-tag-font-size-m-label'?: string,
-    '--sinch-comp-tag-font-size-s-label'?: string,
-
-    // Colors - Default
-    '--sinch-comp-tag-color-default-background'?: string,
-    '--sinch-comp-tag-color-default-foreground'?: string,
-
-    // Global Properties
-    '--sinch-global-color-text'?: string,
-    '--sinch-global-color-icon'?: string,
-    '--sinch-global-size-icon'?: string,
-  },
 }
+
+export type TSinchTagStyle = {
+  // Sizes - Container
+  '--sinch-comp-tag-size-container-m'?: string,
+  '--sinch-comp-tag-size-container-s'?: string,
+
+  // Sizes - Icon
+  '--sinch-comp-tag-size-icon-m'?: string,
+  '--sinch-comp-tag-size-icon-s'?: string,
+
+  // Shape
+  '--sinch-comp-tag-shape-radius'?: string,
+
+  // Font Sizes
+  '--sinch-comp-tag-font-size-m-label'?: string,
+  '--sinch-comp-tag-font-size-s-label'?: string,
+
+  // Colors - Default
+  '--sinch-comp-tag-color-default-background'?: string,
+  '--sinch-comp-tag-color-default-foreground'?: string,
+
+  // Global Properties
+  '--sinch-global-color-text'?: string,
+  '--sinch-global-color-icon'?: string,
+  '--sinch-global-size-icon'?: string,
+}
+
+export type TSinchTag = {
+  props: TSinchTagProps,
+  style: TSinchTagStyle,
+}
+
+export type TSinchTagElement = NectaryComponentVanillaByType<TSinchTag>
+export type TSinchTagReact = NectaryComponentReactByType<TSinchTag>

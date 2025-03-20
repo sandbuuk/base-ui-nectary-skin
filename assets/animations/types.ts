@@ -10,9 +10,11 @@ export type TSinchAnimationElement = HTMLElement & {
   pause(): void,
 }
 
-export type TSinchAnimationReact = TSinchElementReact<TSinchAnimationElement> & {
+export type TSinchAnimationProps = {
   size?: number,
   loop?: boolean,
   autoplay?: boolean,
   direction?: TSinchAnimationDirection,
 }
+
+export type TSinchAnimationReact = TSinchElementReact<TSinchAnimationElement> & TSinchAnimationProps

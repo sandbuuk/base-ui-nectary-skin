@@ -17,9 +17,8 @@ import {
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import { getTitleTypeFromSize } from './utils'
-import type { TSinchSegmentElement, TSinchSegmentReact } from './types'
-import type { TSinchTitleElement } from '../title/types'
-import type { TRect } from '../types'
+import type { TSinchSegment } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
 import type { TSinchSize } from '../utils/size'
 
 const template = document.createElement('template')
@@ -27,7 +26,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-segment', class extends NectaryElement {
-  #$caption: TSinchTitleElement
+  #$caption: NectaryComponentVanilla<'sinch-title'>
   #$previewSlot: HTMLSlotElement
   #$previewWrapper: HTMLElement
   #$infoSlot: HTMLSlotElement
@@ -153,13 +152,17 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-segment': TSinchSegment,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-segment': TSinchSegmentElement,
+    'sinch-segment': NectaryComponentVanilla<'sinch-segment'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-segment': TSinchSegmentReact,
+      'sinch-segment': NectaryComponentReact<'sinch-segment'>,
     }
   }
 }
@@ -167,7 +170,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-segment': TSinchSegmentReact,
+      'sinch-segment': NectaryComponentReact<'sinch-segment'>,
     }
   }
 }

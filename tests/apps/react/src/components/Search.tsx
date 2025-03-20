@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import type { TSinchInputElement } from '@nectary/components/input/types'
 import type { FC } from 'react'
 import '@nectary/components/popover'
 import '@nectary/components/input'
@@ -22,7 +21,7 @@ export const Search: FC = () => {
   const [isOpen, setOpen] = useState(false)
   const [isClearActive, setClearActive] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')
-  const inputRef = useRef<TSinchInputElement>(null)
+  const inputRef = useRef<HTMLElementTagNameMap['sinch-input']>(null)
   const onChange = (e: CustomEvent<string>) => {
     setValue(e.detail)
     setClearActive(e.detail.length > 0)

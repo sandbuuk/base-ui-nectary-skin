@@ -32,12 +32,13 @@ import {
   serializeMarkdown,
   setBrowserCaret,
 } from './utils'
-import type { TRichTextareaSelection, TSinchRichTextareaElement, TSinchRichTextareaReact } from './types'
+import type { TRichTextareaSelection, TSinchRichTextarea } from './types'
 import type {
   TActionResult,
   TRange,
   TRichTextareaRoot,
 } from './utils'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -641,13 +642,17 @@ defineCustomElement('sinch-rich-textarea', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-rich-textarea': TSinchRichTextarea,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-rich-textarea': TSinchRichTextareaElement,
+    'sinch-rich-textarea': NectaryComponentVanilla<'sinch-rich-textarea'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-rich-textarea': TSinchRichTextareaReact,
+      'sinch-rich-textarea': NectaryComponentReact<'sinch-rich-textarea'>,
     }
   }
 }
@@ -655,7 +660,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-rich-textarea': TSinchRichTextareaReact,
+      'sinch-rich-textarea': NectaryComponentReact<'sinch-rich-textarea'>,
     }
   }
 }

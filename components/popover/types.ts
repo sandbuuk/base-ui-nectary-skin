@@ -1,31 +1,8 @@
-import type { TRect, TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
 
 export type TSinchPopoverOrientation = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'bottom' | 'top'
 
-export type TSinchPopoverElement = HTMLElement & {
-  /** Open/close state */
-  open: boolean,
-  /** Orientation, where it *points to* from origin */
-  orientation: TSinchPopoverOrientation,
-  /** Modal/non-modal mode */
-  modal: boolean,
-  /** Show tip */
-  tip: boolean,
-  readonly footprintRect: TRect,
-  readonly popoverRect: TRect,
-  /** Close event */
-  addEventListener(type: '-close', listener: (e: CustomEvent<void>) => void): void,
-  /** Open/close state */
-  setAttribute(name: 'open', value: ''): void,
-  /** Orientation, where it *points to* from origin */
-  setAttribute(name: 'orientation', value: TSinchPopoverOrientation): void,
-  /** Modal/non-modal mode */
-  setAttribute(name: 'modal', value: ''): void,
-  /** Show tip */
-  setAttribute(name: 'tip', value: ''): void,
-}
-
-export type TSinchPopoverReact = TSinchElementReact<TSinchPopoverElement> & {
+export type TSinchPopoverProps = {
   /** Open/close state */
   open: boolean,
   /** Orientation, where it *points to* from origin */
@@ -36,18 +13,32 @@ export type TSinchPopoverReact = TSinchElementReact<TSinchPopoverElement> & {
   tip?: boolean,
   /** Label that is used for a11y */
   'aria-label': string,
-  /** Close event handler */
-  'on-close'?: (e: CustomEvent<void>) => void,
-} & {
-  style?: {
-    // Shape
-    '--sinch-comp-popover-shape-radius'?: string,
-
-    // Shadow
-    '--sinch-comp-popover-shadow'?: string,
-
-    // Default State Colors
-    '--sinch-comp-popover-color-default-background-initial'?: string,
-    '--sinch-comp-popover-color-default-border-initial'?: string,
-  },
+  readonly footprintRect?: TRect,
+  readonly popoverRect?: TRect,
 }
+
+export type TSinchPopoverEvents = {
+  /** Close event handler */
+  '-close'?: (e: CustomEvent<void>) => void,
+}
+
+export type TSinchPopoverStyle = {
+  // Shape
+  '--sinch-comp-popover-shape-radius'?: string,
+
+  // Shadow
+  '--sinch-comp-popover-shadow'?: string,
+
+  // Default State Colors
+  '--sinch-comp-popover-color-default-background-initial'?: string,
+  '--sinch-comp-popover-color-default-border-initial'?: string,
+}
+
+export type TSinchPopover = {
+  props: TSinchPopoverProps,
+  events: TSinchPopoverEvents,
+  style: TSinchPopoverStyle,
+}
+
+export type TSinchPopoverElement = NectaryComponentVanillaByType<TSinchPopover>
+export type TSinchPopoverReact = NectaryComponentReactByType<TSinchPopover>

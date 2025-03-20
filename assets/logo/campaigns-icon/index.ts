@@ -1,11 +1,17 @@
 import { defineCustomElement } from '../../utils'
 import { createLogoClass } from '../create-logo-class'
 import templateHTML from './template.html'
-import type { TSinchLogoElement, TSinchLogoReact } from '../types'
+import type { TSinchLogoElement, TSinchLogoReact, TSinchLogoProps } from '../types'
 
 defineCustomElement('sinch-logo-campaigns-icon', createLogoClass(templateHTML))
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-logo-campaigns-icon': {
+      props: TSinchLogoProps,
+    },
+  }
+
   interface HTMLElementTagNameMap {
     'sinch-logo-campaigns-icon': TSinchLogoElement,
   }

@@ -9,8 +9,10 @@ export type TSinchIconBrandedElement = HTMLElement & {
   setAttribute(name: 'inverted', value: ''): void,
 }
 
-export type TSinchIconBrandedReact = TSinchElementReact<TSinchIconBrandedElement> & {
+export type TSinchIconBrandedProps = {
   /** @deprecated */
   size?: number,
   inverted?: boolean,
 }
+
+export type TSinchIconBrandedReact = TSinchElementReact<TSinchIconBrandedElement> & TSinchIconBrandedProps

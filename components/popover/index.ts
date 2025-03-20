@@ -16,8 +16,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { getPopOrientation, orientationValues } from './utils'
-import type { TSinchPopoverElement, TSinchPopoverOrientation, TSinchPopoverReact } from './types'
-import type { TSinchPopElement } from '../pop/types'
+import type { TSinchPopoverOrientation, TSinchPopover } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TContextVisibility } from '../utils'
 
 const TIP_SIZE = 16
@@ -26,7 +26,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-popover', class extends NectaryElement {
-  #$pop: TSinchPopElement
+  #$pop: NectaryComponentVanilla<'sinch-pop'>
   #$content: HTMLElement
   #$tip: HTMLElement
   #controller: AbortController | null = null
@@ -226,13 +226,17 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-popover': TSinchPopover,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-popover': TSinchPopoverElement,
+    'sinch-popover': NectaryComponentVanilla<'sinch-popover'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-popover': TSinchPopoverReact,
+      'sinch-popover': NectaryComponentReact<'sinch-popover'>,
     }
   }
 }
@@ -240,7 +244,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-popover': TSinchPopoverReact,
+      'sinch-popover': NectaryComponentReact<'sinch-popover'>,
     }
   }
 }

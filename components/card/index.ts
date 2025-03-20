@@ -13,8 +13,8 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchCardElement, TSinchCardReact } from './types'
-import type { TRect } from '../types'
+import type { TSinchCard } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
 
 const template = document.createElement('template')
 
@@ -183,13 +183,17 @@ defineCustomElement('sinch-card', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-card': TSinchCard,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-card': TSinchCardElement,
+    'sinch-card': NectaryComponentVanilla<'sinch-card'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-card': TSinchCardReact,
+      'sinch-card': NectaryComponentReact<'sinch-card'>,
     }
   }
 }
@@ -197,7 +201,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-card': TSinchCardReact,
+      'sinch-card': NectaryComponentReact<'sinch-card'>,
     }
   }
 }

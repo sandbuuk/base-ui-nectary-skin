@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import type { TSinchTextareaElement } from '@nectary/components/textarea/types'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/field'
 import '@nectary/components/popover'
@@ -15,7 +14,7 @@ const inputStyles: CSSProperties = {
 export const TextareaExample: FC = () => {
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState('Input value')
-  const inputRef = useRef<TSinchTextareaElement>(null)
+  const inputRef = useRef<HTMLElementTagNameMap['sinch-textarea']>(null)
 
   const onChange = (e: CustomEvent<string>) => {
     setValue(e.detail)

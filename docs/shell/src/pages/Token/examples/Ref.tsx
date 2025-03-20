@@ -53,7 +53,7 @@ const TextExample = ({ varName }: {varName: string}) => {
   const category = getTypographyCategory(varName)
 
   if (category === undefined) {
-    return
+    return null
   }
 
   return <p style={{ [category]: `var(${varName})` }}>Lorem ipsum dolor,<br/>sit amet</p>

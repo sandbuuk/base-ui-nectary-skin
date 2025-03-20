@@ -10,7 +10,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { typeValues } from './utils'
-import type { TSinchTextElement, TSinchTextReact, TSinchTextType } from './types'
+import type { TSinchTextType, TSinchText } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -98,13 +99,17 @@ defineCustomElement('sinch-text', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-text': TSinchText,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-text': TSinchTextElement,
+    'sinch-text': NectaryComponentVanilla<'sinch-text'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-text': TSinchTextReact,
+      'sinch-text': NectaryComponentReact<'sinch-text'>,
     }
   }
 }
@@ -112,7 +117,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-text': TSinchTextReact,
+      'sinch-text': NectaryComponentReact<'sinch-text'>,
     }
   }
 }

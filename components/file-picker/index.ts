@@ -12,7 +12,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { doFilesSatisfySize } from './utils'
-import type { TSinchFilePickerElement, TSinchFilePickerReact } from './types'
+import type { TSinchFilePicker } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -147,13 +148,17 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-file-picker': TSinchFilePicker,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-file-picker': TSinchFilePickerElement,
+    'sinch-file-picker': NectaryComponentVanilla<'sinch-file-picker'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-file-picker': TSinchFilePickerReact,
+      'sinch-file-picker': NectaryComponentReact<'sinch-file-picker'>,
     }
   }
 }
@@ -161,7 +166,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-file-picker': TSinchFilePickerReact,
+      'sinch-file-picker': NectaryComponentReact<'sinch-file-picker'>,
     }
   }
 }

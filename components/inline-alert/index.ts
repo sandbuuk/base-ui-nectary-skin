@@ -13,11 +13,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { typeValues } from './utils'
-import type {
-  TSinchInlineAlertElement,
-  TSinchInlineAlertReact,
-  TSinchInlineAlertType,
-} from './types'
+import type { TSinchInlineAlertType, TSinchInlineAlert } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -141,13 +138,17 @@ defineCustomElement(
 )
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-inline-alert': TSinchInlineAlert,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-inline-alert': TSinchInlineAlertElement,
+    'sinch-inline-alert': NectaryComponentVanilla<'sinch-inline-alert'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-inline-alert': TSinchInlineAlertReact,
+      'sinch-inline-alert': NectaryComponentReact<'sinch-inline-alert'>,
     }
   }
 }
@@ -155,7 +156,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-inline-alert': TSinchInlineAlertReact,
+      'sinch-inline-alert': NectaryComponentReact<'sinch-inline-alert'>,
     }
   }
 }

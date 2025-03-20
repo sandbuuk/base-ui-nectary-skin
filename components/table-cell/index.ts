@@ -6,7 +6,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { alignValues } from './utils'
-import type { TSinchTableAlignType, TSinchTableCellElement, TSinchTableCellReact } from './types'
+import type { TSinchTableAlignType, TSinchTableCell } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -35,13 +36,17 @@ defineCustomElement('sinch-table-cell', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-table-cell': TSinchTableCell,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-table-cell': TSinchTableCellElement,
+    'sinch-table-cell': NectaryComponentVanilla<'sinch-table-cell'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-table-cell': TSinchTableCellReact,
+      'sinch-table-cell': NectaryComponentReact<'sinch-table-cell'>,
     }
   }
 }
@@ -49,7 +54,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-table-cell': TSinchTableCellReact,
+      'sinch-table-cell': NectaryComponentReact<'sinch-table-cell'>,
     }
   }
 }

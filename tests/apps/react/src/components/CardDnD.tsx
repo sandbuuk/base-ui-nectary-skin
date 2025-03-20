@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import type { TSinchCardElement } from '@nectary/components/card/types'
 import type { CSSProperties, FC, SyntheticEvent } from 'react'
 import '@nectary/components/card'
 
@@ -22,12 +21,12 @@ export const CardDnD: FC = () => {
     caption: 'Card 3',
     draggable: false,
   }]))
-  const dragTargetRef = useRef<TSinchCardElement | null>(null)
-  const dragOverTargetRef = useRef<TSinchCardElement | null>(null)
+  const dragTargetRef = useRef<HTMLElementTagNameMap['sinch-card'] | null>(null)
+  const dragOverTargetRef = useRef<HTMLElementTagNameMap['sinch-card'] | null>(null)
 
   const onDragStart = (e: SyntheticEvent) => {
     if ((e.target as Element).matches('sinch-card')) {
-      dragTargetRef.current = e.target as TSinchCardElement
+      dragTargetRef.current = e.target as HTMLElementTagNameMap['sinch-card']
       dragTargetRef.current.style.setProperty('opacity', '0.3')
     }
   }
@@ -46,7 +45,7 @@ export const CardDnD: FC = () => {
       return
     }
 
-    dragOverTargetRef.current = e.target as TSinchCardElement
+    dragOverTargetRef.current = e.target as HTMLElementTagNameMap['sinch-card']
 
     if (dragOverTargetRef.current === dragTargetRef.current) {
       return

@@ -1,15 +1,15 @@
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchActionMenuElement = HTMLElement & {
-  /** How many rows to show and scroll the rest */
-  rows: number | null,
-  /** How many rows to show and scroll the rest */
-  setAttribute(name: 'rows', value: string): void,
-}
-
-export type TSinchActionMenuReact = TSinchElementReact<TSinchActionMenuElement> & {
+export type TSinchActionMenuProps = {
   /** How many rows to show and scroll the rest */
   rows?: number,
   /** Label that is used for a11y */
   'aria-label': string,
 }
+
+export type TSinchActionMenu = {
+  props: TSinchActionMenuProps,
+}
+
+export type TSinchActionMenuElement = NectaryComponentVanillaByType<TSinchActionMenu>
+export type TSinchActionMenuReact = NectaryComponentReactByType<TSinchActionMenu>

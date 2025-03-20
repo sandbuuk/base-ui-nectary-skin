@@ -10,7 +10,8 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTileControlOptionElement, TSinchTileControlOptionReact } from './types'
+import type { TSinchTileControlOption } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -134,13 +135,17 @@ defineCustomElement('sinch-tile-control-option', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-tile-control-option': TSinchTileControlOption,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-tile-control-option': TSinchTileControlOptionElement,
+    'sinch-tile-control-option': NectaryComponentVanilla<'sinch-tile-control-option'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tile-control-option': TSinchTileControlOptionReact,
+      'sinch-tile-control-option': NectaryComponentReact<'sinch-tile-control-option'>,
     }
   }
 }
@@ -148,7 +153,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tile-control-option': TSinchTileControlOptionReact,
+      'sinch-tile-control-option': NectaryComponentReact<'sinch-tile-control-option'>,
     }
   }
 }

@@ -10,8 +10,10 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchRadioElement, TSinchRadioReact } from './types'
-import type { TSinchRadioOptionElement } from '../radio-option/types'
+import type { TSinchRadio } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+
+type TSinchRadioOptionElement = HTMLElementTagNameMap['sinch-radio-option']
 
 const template = document.createElement('template')
 
@@ -206,13 +208,17 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-radio': TSinchRadio,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-radio': TSinchRadioElement,
+    'sinch-radio': NectaryComponentVanilla<'sinch-radio'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-radio': TSinchRadioReact,
+      'sinch-radio': NectaryComponentReact<'sinch-radio'>,
     }
   }
 }
@@ -220,7 +226,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-radio': TSinchRadioReact,
+      'sinch-radio': NectaryComponentReact<'sinch-radio'>,
     }
   }
 }

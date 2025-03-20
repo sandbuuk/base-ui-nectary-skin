@@ -14,10 +14,10 @@ import {
 import templateHTML from './template.html'
 import { typeValues } from './utils'
 import type {
-  TSinchToastElement,
-  TSinchToastReact,
   TSinchToastType,
+  TSinchToast,
 } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const TIMEOUT = 5000
 const template = document.createElement('template')
@@ -133,13 +133,17 @@ defineCustomElement(
 )
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-toast': TSinchToast,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-toast': TSinchToastElement,
+    'sinch-toast': NectaryComponentVanilla<'sinch-toast'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-toast': TSinchToastReact,
+      'sinch-toast': NectaryComponentReact<'sinch-toast'>,
     }
   }
 }
@@ -147,7 +151,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-toast': TSinchToastReact,
+      'sinch-toast': NectaryComponentReact<'sinch-toast'>,
     }
   }
 }

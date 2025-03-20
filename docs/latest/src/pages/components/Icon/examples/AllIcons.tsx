@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { sinchIconNames } from './icons-list'
-import type { TSinchIconElement } from '@nectary/components/icon/types'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/input'
 import '@nectary/components/button'
@@ -57,7 +56,7 @@ export const AllIconsExample: FC = () => {
           <sinch-icon icons-version="2" name="fa-xmark" slot="icon"/>
         </sinch-button>
       </sinch-input>
-      <div style={iconsWrapperStyle} onClick={(e) => copyIconName((e.target as TSinchIconElement).getAttribute('name'))}>
+      <div style={iconsWrapperStyle} onClick={(e) => copyIconName((e.target as HTMLElementTagNameMap['sinch-icon']).getAttribute('name'))}>
         {names.map((name) => <sinch-tooltip type="fast" key={name} text={name}><sinch-icon icons-version="2" style={iconStyle} name={name}/></sinch-tooltip>)}
       </div>
     </div>

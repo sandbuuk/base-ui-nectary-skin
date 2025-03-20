@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import type { TRichTextareaSelection, TSinchRichTextareaElement } from '@nectary/components/rich-textarea/types'
+import type { TRichTextareaSelection } from '@nectary/components/rich-textarea/types'
 import type { FC } from 'react'
 import '@nectary/components/rich-textarea'
 import '@nectary/components/button'
@@ -33,7 +33,7 @@ export const RichTextarea: FC = () => {
   const isMarkdownExample = search.get('example') === 'md'
   const hasTop = search.get('top') !== null
   const hasBottom = search.get('bottom') !== null
-  const ref = useRef<TSinchRichTextareaElement>(null)
+  const ref = useRef<HTMLElementTagNameMap['sinch-rich-textarea']>(null)
   const [value, setValue] = useState(isMarkdownExample ? mdText : (search.get('value') ?? ''))
 
   const onFormatItalic = () => {

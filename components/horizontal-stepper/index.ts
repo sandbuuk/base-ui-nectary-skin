@@ -7,7 +7,8 @@ import {
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchHorizontalStepperElement, TSinchHorizontalStepperReact } from './types'
+import type { TSinchHorizontalStepper } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -89,13 +90,17 @@ defineCustomElement('sinch-horizontal-stepper', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-horizontal-stepper': TSinchHorizontalStepper,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-horizontal-stepper': TSinchHorizontalStepperElement,
+    'sinch-horizontal-stepper': NectaryComponentVanilla<'sinch-horizontal-stepper'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-horizontal-stepper': TSinchHorizontalStepperReact,
+      'sinch-horizontal-stepper': NectaryComponentReact<'sinch-horizontal-stepper'>,
     }
   }
 }
@@ -103,7 +108,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-horizontal-stepper': TSinchHorizontalStepperReact,
+      'sinch-horizontal-stepper': NectaryComponentReact<'sinch-horizontal-stepper'>,
     }
   }
 }

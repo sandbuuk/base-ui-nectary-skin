@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import type { TSinchTextareaElement } from '@nectary/components/textarea/types'
 import type { FC } from 'react'
 import '@nectary/components/textarea'
 import '@nectary/components/action-menu'
@@ -18,7 +17,7 @@ export const BottomComplexExample: FC = () => {
   const [isPopOpen, setPopOpen] = useState(false)
   const [popMode, setPopMode] = useState<'emoji' | 'vars' | null>(null)
   const [opts, setOpts] = useState('')
-  const inputRef = useRef<TSinchTextareaElement>(null)
+  const inputRef = useRef<HTMLElementTagNameMap['sinch-textarea']>(null)
 
   const onPopOpenClick = (mode: 'emoji' | 'vars') => {
     setPopMode(mode)

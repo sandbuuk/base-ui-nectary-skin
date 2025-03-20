@@ -3,7 +3,6 @@ import type { TSinchAlertType } from '@nectary/components/alert/types'
 import type { TSinchAvatarColor, TSinchAvatarStatus } from '@nectary/components/avatar/types'
 import type { TSinchBadgeMode } from '@nectary/components/badge/types'
 import type { TSinchButtonType } from '@nectary/components/button/types'
-import type { TSinchButtonReact } from '@nectary/components/button-group/types'
 import type { TSinchOrientation } from '@nectary/components/card-v2-title/types'
 import type { TSinchChipColor } from '@nectary/components/chip/types'
 import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
@@ -13,7 +12,7 @@ import type { TSinchFileStatusType } from '@nectary/components/file-status/types
 import type { TSinchHorizontalStepperStatusType } from '@nectary/components/horizontal-stepper-item/types'
 import type { TSinchIcons } from '@nectary/components/icon/types'
 import type { TSinchInlineAlertType } from '@nectary/components/inline-alert/types'
-import type { TSinchInputType, TSinchInputClipboardEvent, TSinchInputElement } from '@nectary/components/input/types'
+import type { TSinchInputType, TSinchInputClipboardEvent } from '@nectary/components/input/types'
 import type { TSinchPopOrientation } from '@nectary/components/pop/types'
 import type { TSinchPopoverOrientation } from '@nectary/components/popover/types'
 import type { ElementClickedEvent } from '@nectary/components/rich-text/types'
@@ -25,6 +24,7 @@ import type { TSinchTitleType, TSinchTitleLevel } from '@nectary/components/titl
 import type { TSinchToastType } from '@nectary/components/toast/types'
 import type { TSinchToastManagerOrigin } from '@nectary/components/toast-manager/types'
 import type { TSinchTooltipOrientation, TSinchTooltipType, TSinchTooltipTextAlign } from '@nectary/components/tooltip/types'
+import type { NectaryComponentReact } from '@nectary/components/types'
 import type { TSinchSize, TSinchSizeEx } from '@nectary/components/utils/size'
 import type { TSinchVerticalStepperStatusType } from '@nectary/components/vertical-stepper-item/types'
 
@@ -484,19 +484,19 @@ export type TSinchButtonWrapper = {
   },
 }
 export type TSinchButtonGroupWrapper = {
-  size?: TSinchButtonReact['size'],
-  type?: TSinchButtonReact['type'],
-  ariaLabel: TSinchButtonReact['aria-label'],
+  size?: NectaryComponentReact<'sinch-button'>['size'],
+  type?: NectaryComponentReact<'sinch-button'>['type'],
+  ariaLabel: NectaryComponentReact<'sinch-button'>['aria-label'],
 
 }
 export type TSinchButtonGroupItemWrapper = {
-  text?: TSinchButtonReact['text'],
-  disabled?: TSinchButtonReact['disabled'],
-  toggled?: TSinchButtonReact['toggled'],
-  onBlur?: TSinchButtonReact['on-blur'],
-  onClick?: TSinchButtonReact['on-click'],
-  onFocus?: TSinchButtonReact['on-focus'],
-  ariaLabel: TSinchButtonReact['aria-label'],
+  text?: NectaryComponentReact<'sinch-button'>['text'],
+  disabled?: NectaryComponentReact<'sinch-button'>['disabled'],
+  toggled?: NectaryComponentReact<'sinch-button'>['toggled'],
+  onBlur?: NectaryComponentReact<'sinch-button'>['on-blur'],
+  onClick?: NectaryComponentReact<'sinch-button'>['on-click'],
+  onFocus?: NectaryComponentReact<'sinch-button'>['on-focus'],
+  ariaLabel: NectaryComponentReact<'sinch-button'>['aria-label'],
 } & {
   style?: {
   // @preserve-case
@@ -1341,7 +1341,7 @@ export type TSinchInputWrapper = {
   onCut?: (e: TSinchInputClipboardEvent) => void,
   onCopy?: (e: TSinchInputClipboardEvent) => void,
   onPaste?: (e: TSinchInputClipboardEvent) => void,
-  'on-wheel'?: (e: CustomEvent<void> & { target: TSinchInputElement }) => void,
+  'on-wheel'?: (e: CustomEvent<void> & { target: HTMLElementTagNameMap['sinch-input'] }) => void,
 } & {
   style?: {
   // @preserve-case

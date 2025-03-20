@@ -1,19 +1,15 @@
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchGridItemElement = HTMLElement & {
-  xl: number | null,
-  l: number | null,
-  m: number | null,
-  s: number | null,
-  setAttribute(name: 'xl', value: string): void,
-  setAttribute(name: 'l', value: string): void,
-  setAttribute(name: 'm', value: string): void,
-  setAttribute(name: 's', value: string): void,
-}
-
-export type TSinchGridItemReact = TSinchElementReact<TSinchGridItemElement> & {
+export type TSinchGridItemProps = {
   xl?: number,
   l?: number,
   m?: number,
   s?: number,
 }
+
+export type TSinchGridItem = {
+  props: TSinchGridItemProps,
+}
+
+export type TSinchGridItemElement = NectaryComponentVanillaByType<TSinchGridItem>
+export type TSinchGridItemReact = NectaryComponentReactByType<TSinchGridItem>

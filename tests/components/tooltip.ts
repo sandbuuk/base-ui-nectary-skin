@@ -1,7 +1,6 @@
 import { orientationValues } from '@nectary/components/tooltip/utils'
 import { expect, test } from '@playwright/test'
 import { centerBB, getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
-import type { TSinchTooltipElement } from '@nectary/components/tooltip/types'
 import type { Page } from '@playwright/test'
 
 const withFitWidth = '/tooltip?text=Tooltip%20text'
@@ -14,7 +13,7 @@ const hoverTooltip = async (page: Page) => {
 }
 
 const getTooltipRect = (page: Page) => {
-  return page.locator('sinch-tooltip').evaluate((el: TSinchTooltipElement) => el.tooltipRect)
+  return page.locator('sinch-tooltip').evaluate((el: HTMLElementTagNameMap['sinch-tooltip']) => el.tooltipRect)
 }
 
 test('tooltip screenshots', runScreenshotTests('sinch-tooltip', [

@@ -7,8 +7,9 @@ import {
 } from '../utils'
 import { DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
-import type { TSinchButtonGroupElement, TSinchButtonGroupReact } from './types'
+import type { TSinchButtonGroup } from './types'
 import type { TSinchButtonType } from '../button/types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TSinchSizeEx } from '../utils/size'
 
 const template = document.createElement('template')
@@ -72,13 +73,17 @@ defineCustomElement('sinch-button-group', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-button-group': TSinchButtonGroup,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-button-group': TSinchButtonGroupElement,
+    'sinch-button-group': NectaryComponentVanilla<'sinch-button-group'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-button-group': TSinchButtonGroupReact,
+      'sinch-button-group': NectaryComponentReact<'sinch-button-group'>,
     }
   }
 }
@@ -86,7 +91,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-button-group': TSinchButtonGroupReact,
+      'sinch-button-group': NectaryComponentReact<'sinch-button-group'>,
     }
   }
 }

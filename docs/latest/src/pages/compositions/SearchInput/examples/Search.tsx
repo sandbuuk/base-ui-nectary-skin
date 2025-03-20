@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import type { TSinchInputElement } from '@nectary/components/input/types'
 import type { CSSProperties, FC } from 'react'
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
@@ -33,7 +32,7 @@ export const SearchExample: FC = () => {
   const [inputValue, setInputValue] = useState('')
   const [searchData, setSearchData] = useState<string[]>([])
   const [isLoading, setLoading] = useState(false)
-  const inputRef = useRef<TSinchInputElement>(null)
+  const inputRef = useRef<HTMLElementTagNameMap['sinch-input']>(null)
   const abortControllerRef = useRef<AbortController | null>(null)
 
   const onInputChange = async (e: CustomEvent<string>) => {

@@ -2,7 +2,7 @@ import {
   defineCustomElement, NectaryElement,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTableBodyElement, TSinchTableBodyReact } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -23,13 +23,17 @@ defineCustomElement('sinch-table-body', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-table-body': {},
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-table-body': TSinchTableBodyElement,
+    'sinch-table-body': NectaryComponentVanilla<'sinch-table-body'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-table-body': TSinchTableBodyReact,
+      'sinch-table-body': NectaryComponentReact<'sinch-table-body'>,
     }
   }
 }
@@ -37,7 +41,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-table-body': TSinchTableBodyReact,
+      'sinch-table-body': NectaryComponentReact<'sinch-table-body'>,
     }
   }
 }

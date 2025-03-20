@@ -1,11 +1,17 @@
 import { defineCustomElement } from '../../utils/element'
 import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
-import type { TSinchIconBrandedElement, TSinchIconBrandedReact } from '../types'
+import type { TSinchIconBrandedElement, TSinchIconBrandedReact, TSinchIconBrandedProps } from '../types'
 
 defineCustomElement('sinch-icon-branded-airplane', createIconClass(templateHTML))
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-icon-branded-airplane': {
+      props: TSinchIconBrandedProps,
+    },
+  }
+
   interface HTMLElementTagNameMap {
     'sinch-icon-branded-airplane': TSinchIconBrandedElement,
   }

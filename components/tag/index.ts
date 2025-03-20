@@ -12,7 +12,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { getTagColorBg, getTagColorFg } from './utils'
-import type { TSinchTagElement, TSinchTagReact } from './types'
+import type { TSinchTag } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -139,13 +140,17 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-tag': TSinchTag,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-tag': TSinchTagElement,
+    'sinch-tag': NectaryComponentVanilla<'sinch-tag'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tag': TSinchTagReact,
+      'sinch-tag': NectaryComponentReact<'sinch-tag'>,
     }
   }
 }
@@ -153,7 +158,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tag': TSinchTagReact,
+      'sinch-tag': NectaryComponentReact<'sinch-tag'>,
     }
   }
 }

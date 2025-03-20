@@ -1,12 +1,11 @@
 import { useRef, useState } from 'react'
-import type { TSinchRichTextareaElement } from '@nectary/components/rich-textarea/types'
 import type { FC } from 'react'
 import '@nectary/components/rich-textarea'
 import '@nectary/components/button'
 import '@nectary/components/icon'
 
 export const SlotsExample: FC = () => {
-  const ref = useRef<TSinchRichTextareaElement>(null)
+  const ref = useRef<HTMLElementTagNameMap['sinch-rich-textarea']>(null)
   const [value, setValue] = useState('')
 
   const onChange = (e: CustomEvent<string>) => {

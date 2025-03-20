@@ -10,8 +10,8 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTabsIconOptionElement, TSinchTabsIconOptionReact } from './types'
-import type { TSinchTooltipElement } from '../tooltip/types'
+import type { TSinchTabsIconOption } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -19,7 +19,7 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tabs-icon-option', class extends NectaryElement {
   #$button: HTMLButtonElement
-  #$tooltip: TSinchTooltipElement
+  #$tooltip: NectaryComponentVanilla<'sinch-tooltip'>
 
   constructor() {
     super()
@@ -110,13 +110,17 @@ defineCustomElement('sinch-tabs-icon-option', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-tabs-icon-option': TSinchTabsIconOption,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-tabs-icon-option': TSinchTabsIconOptionElement,
+    'sinch-tabs-icon-option': NectaryComponentVanilla<'sinch-tabs-icon-option'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tabs-icon-option': TSinchTabsIconOptionReact,
+      'sinch-tabs-icon-option': NectaryComponentReact<'sinch-tabs-icon-option'>,
     }
   }
 }
@@ -124,7 +128,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tabs-icon-option': TSinchTabsIconOptionReact,
+      'sinch-tabs-icon-option': NectaryComponentReact<'sinch-tabs-icon-option'>,
     }
   }
 }

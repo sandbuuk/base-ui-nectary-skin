@@ -1,5 +1,5 @@
 import { defineCustomElement, NectaryElement } from '@nectary/components/utils'
-import type { TSinchElementReact } from '@nectary/components/types'
+import type { NectaryComponentReactByType } from '@nectary/components/types'
 
 const template = document.createElement('template')
 
@@ -110,19 +110,15 @@ class GridDebug extends NectaryElement {
 
 defineCustomElement('test-grid-debug', GridDebug)
 
-type TSinchGridDebugElement = HTMLElement
-
-type TSinchGridDebugReact = TSinchElementReact<TSinchGridDebugElement>
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'test-grid-debug': TSinchGridDebugReact,
+      'test-grid-debug': NectaryComponentReactByType<HTMLElement>,
     }
   }
 
   interface HTMLElementTagNameMap {
-    'test-grid-debug': TSinchGridDebugElement,
+    'test-grid-debug': HTMLElement,
   }
 }
 

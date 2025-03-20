@@ -12,7 +12,8 @@ import {
   updateCsv,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchAccordionElement, TSinchAccordionReact } from './types'
+import type { TSinchAccordion } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -125,13 +126,17 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-accordion': TSinchAccordion,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-accordion': TSinchAccordionElement,
+    'sinch-accordion': NectaryComponentVanilla<'sinch-accordion'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-accordion': TSinchAccordionReact,
+      'sinch-accordion': NectaryComponentReact<'sinch-accordion'>,
     }
   }
 }
@@ -139,7 +144,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-accordion': TSinchAccordionReact,
+      'sinch-accordion': NectaryComponentReact<'sinch-accordion'>,
     }
   }
 }

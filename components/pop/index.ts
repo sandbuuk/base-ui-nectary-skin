@@ -21,8 +21,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { disableOverscroll, enableOverscroll, orientationValues } from './utils'
-import type { TSinchPopElement, TSinchPopOrientation, TSinchPopReact } from './types'
-import type { TRect } from '../types'
+import type { TSinchPopOrientation, TSinchPop } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
 import type { TContextVisibility } from '../utils'
 
 const template = document.createElement('template')
@@ -585,13 +585,17 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-pop': TSinchPop,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-pop': TSinchPopElement,
+    'sinch-pop': NectaryComponentVanilla<'sinch-pop'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-pop': TSinchPopReact,
+      'sinch-pop': NectaryComponentReact<'sinch-pop'>,
     }
   }
 }
@@ -599,7 +603,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-pop': TSinchPopReact,
+      'sinch-pop': NectaryComponentReact<'sinch-pop'>,
     }
   }
 }

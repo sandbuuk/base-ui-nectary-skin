@@ -1,4 +1,4 @@
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
 export type TRichTextareaSelection = {
   italic: boolean,
@@ -10,11 +10,15 @@ export type TRichTextareaSelection = {
   olist: boolean,
 }
 
-export type TSinchRichTextareaElement = HTMLElement & {
+export type TSinchRichTextareaProps = {
   /** Value */
   value: string,
   /** Text that appears in the text field when it has no value set */
-  placeholder: string | null,
+  placeholder?: string,
+  'aria-label': string,
+}
+
+export type TSinchRichTextareaMethods = {
   insertText(value: string): void,
   insertLink(text: string, href: string): void,
   formatItalic(): void,
@@ -23,62 +27,56 @@ export type TSinchRichTextareaElement = HTMLElement & {
   formatCodeTag(): void,
   formatOrderedList(): void,
   formatUnorderedList(): void,
-  /** Change value event */
-  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
-  /** Focus event */
-  addEventListener(type: '-focus', listener: (e: CustomEvent<void>) => void): void,
-  /** Blur event */
-  addEventListener(type: '-blur', listener: (e: CustomEvent<void>) => void): void,
-  addEventListener(type: '-selection', listener: (e: CustomEvent<TRichTextareaSelection>) => void): void,
-  /** Value */
-  setAttribute(name: 'value', value: string): void,
-  /** Text that appears in the text field when it has no value set */
-  setAttribute(name: 'placeholder', value: string): void,
 }
 
-export type TSinchRichTextareaReact = TSinchElementReact<TSinchRichTextareaElement> & {
-  /** Value */
-  value: string,
-  /** Text that appears in the text field when it has no value set */
-  placeholder?: string,
-  'aria-label': string,
+export type TSinchRichTextareaEvents = {
   /** Change value handler */
-  'on-change'?: (e: CustomEvent<string>) => void,
+  '-change'?: (e: CustomEvent<string>) => void,
   /** Focus handler */
-  'on-focus'?: (e: CustomEvent<void>) => void,
+  '-focus'?: (e: CustomEvent<void>) => void,
   /** Blur handler */
-  'on-blur'?: (e: CustomEvent<void>) => void,
-} & {
-  style?: {
-    // Shape
-    '--sinch-comp-textarea-shape-radius'?: string,
-    '--sinch-comp-code-tag-shape-radius'?: string,
-
-    // Colors - Default State
-    '--sinch-comp-textarea-color-default-background-initial'?: string,
-    '--sinch-comp-textarea-color-default-text-initial'?: string,
-    '--sinch-comp-textarea-color-default-text-placeholder'?: string,
-    '--sinch-comp-textarea-color-default-border-initial'?: string,
-    '--sinch-comp-textarea-color-default-border-focus'?: string,
-
-    // Colors - Invalid State
-    '--sinch-comp-textarea-color-invalid-border-initial'?: string,
-
-    // Colors - Disabled State
-    '--sinch-comp-textarea-color-disabled-text-initial'?: string,
-    '--sinch-comp-textarea-color-disabled-border-initial'?: string,
-
-    // Colors - Code
-    '--sinch-comp-code-tag-color-default-text-initial'?: string,
-    '--sinch-comp-code-tag-color-default-border-initial'?: string,
-    '--sinch-comp-code-tag-color-default-background-initial'?: string,
-
-    // Colors - Link
-    '--sinch-comp-link-color-default-text-initial'?: string,
-
-    // Fonts
-    '--sinch-comp-textarea-font-input'?: string,
-    '--sinch-comp-code-tag-font-text'?: string,
-    '--sinch-comp-link-default-font-initial'?: string,
-  },
+  '-blur'?: (e: CustomEvent<void>) => void,
 }
+
+export type TSinchRichTextareaStyle = {
+  // Shape
+  '--sinch-comp-textarea-shape-radius'?: string,
+  '--sinch-comp-code-tag-shape-radius'?: string,
+
+  // Colors - Default State
+  '--sinch-comp-textarea-color-default-background-initial'?: string,
+  '--sinch-comp-textarea-color-default-text-initial'?: string,
+  '--sinch-comp-textarea-color-default-text-placeholder'?: string,
+  '--sinch-comp-textarea-color-default-border-initial'?: string,
+  '--sinch-comp-textarea-color-default-border-focus'?: string,
+
+  // Colors - Invalid State
+  '--sinch-comp-textarea-color-invalid-border-initial'?: string,
+
+  // Colors - Disabled State
+  '--sinch-comp-textarea-color-disabled-text-initial'?: string,
+  '--sinch-comp-textarea-color-disabled-border-initial'?: string,
+
+  // Colors - Code
+  '--sinch-comp-code-tag-color-default-text-initial'?: string,
+  '--sinch-comp-code-tag-color-default-border-initial'?: string,
+  '--sinch-comp-code-tag-color-default-background-initial'?: string,
+
+  // Colors - Link
+  '--sinch-comp-link-color-default-text-initial'?: string,
+
+  // Fonts
+  '--sinch-comp-textarea-font-input'?: string,
+  '--sinch-comp-code-tag-font-text'?: string,
+  '--sinch-comp-link-default-font-initial'?: string,
+}
+
+export type TSinchRichTextarea = {
+  props: TSinchRichTextareaProps,
+  methods: TSinchRichTextareaMethods,
+  events: TSinchRichTextareaEvents,
+  style: TSinchRichTextareaStyle,
+}
+
+export type TSinchRichTextareaElement = NectaryComponentVanillaByType<TSinchRichTextarea>
+export type TSinchRichTextareaReact = NectaryComponentReactByType<TSinchRichTextarea>

@@ -1,25 +1,32 @@
-import type { TRect, TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
 
-export type TSinchTabsElement = HTMLElement & {
-  /** Value */
-  value: string,
-  nthOptionRect(index: number): TRect | null,
-  /** Change value event */
-  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
-  /** Value */
-  setAttribute(name: 'value', value: string): void,
-}
-
-export type TSinchTabsReact = TSinchElementReact<TSinchTabsElement> & {
+export type TSinchTabsProps = {
   /** Value */
   value: string,
   /** Label that is used for a11y */
   'aria-label': string,
-  /** Change value event */
-  'on-change'?: (e: CustomEvent<string>) => void,
-} & {
-  style?: {
-    // Colors - Default State
-    '--sinch-comp-tab-color-default-border-initial'?: string,
-  },
 }
+
+export type TSinchTabsMethods = {
+  nthOptionRect(index: number): TRect | null,
+}
+
+export type TSinchTabsEvents = {
+  /** Change value event */
+  '-change'?: (e: CustomEvent<string>) => void,
+}
+
+export type TSinchTabsStyle = {
+  // Colors - Default State
+  '--sinch-comp-tab-color-default-border-initial'?: string,
+}
+
+export type TSinchTabs = {
+  props: TSinchTabsProps,
+  methods: TSinchTabsMethods,
+  events: TSinchTabsEvents,
+  style: TSinchTabsStyle,
+}
+
+export type TSinchTabsElement = NectaryComponentVanillaByType<TSinchTabs>
+export type TSinchTabsReact = NectaryComponentReactByType<TSinchTabs>

@@ -8,7 +8,8 @@ import {
 } from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
-import type { TSinchSpinnerElement, TSinchSpinnerReact } from './types'
+import type { TSinchSpinner } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
 
@@ -82,13 +83,17 @@ defineCustomElement('sinch-spinner', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-spinner': TSinchSpinner,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-spinner': TSinchSpinnerElement,
+    'sinch-spinner': NectaryComponentVanilla<'sinch-spinner'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-spinner': TSinchSpinnerReact,
+      'sinch-spinner': NectaryComponentReact<'sinch-spinner'>,
     }
   }
 }
@@ -96,7 +101,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-spinner': TSinchSpinnerReact,
+      'sinch-spinner': NectaryComponentReact<'sinch-spinner'>,
     }
   }
 }

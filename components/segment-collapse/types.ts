@@ -1,18 +1,24 @@
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchSegmentExpandElement = HTMLElement & {
-  value: boolean,
-  addEventListener(type: '-change', listener: (e: CustomEvent<boolean>) => void): void,
-  setAttribute(name: 'value', value: string): void,
-}
-
-export type TSinchSegmentExpandReact = TSinchElementReact<TSinchSegmentExpandElement> & {
+export type TSinchSegmentExpandProps = {
   value: boolean,
   'aria-label': string,
-  'on-change'?: (e: CustomEvent<boolean>) => void,
-} & {
-  style?: {
-    // Global
-    '--sinch-global-size-icon'?: string,
-  },
 }
+
+export type TSinchSegmentExpandEvents = {
+  '-change'?: (e: CustomEvent<boolean>) => void,
+}
+
+export type TSinchSegmentExpandStyle = {
+  // Global
+  '--sinch-global-size-icon'?: string,
+}
+
+export type TSinchSegmentExpand = {
+  props: TSinchSegmentExpandProps,
+  events: TSinchSegmentExpandEvents,
+  style: TSinchSegmentExpandStyle,
+}
+
+export type TSinchSegmentExpandElement = NectaryComponentVanillaByType<TSinchSegmentExpand>
+export type TSinchSegmentExpandReact = NectaryComponentReactByType<TSinchSegmentExpand>

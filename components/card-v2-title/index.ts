@@ -8,15 +8,15 @@ import {
   isAttrTrue,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchOrientation, TSinchCardTitleElement, TSinchCardTitleReact } from './types'
-import type { TSinchTextElement } from '../text/types'
+import type { TSinchOrientation, TSinchCardTitle } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-card-v2-title', class extends NectaryElement {
-  #$text: TSinchTextElement
+  #$text: NectaryComponentVanilla<'sinch-text'>
 
   constructor() {
     super()
@@ -83,13 +83,17 @@ defineCustomElement('sinch-card-v2-title', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-card-v2-title': TSinchCardTitle,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-card-v2-title': TSinchCardTitleElement,
+    'sinch-card-v2-title': NectaryComponentVanilla<'sinch-card-v2-title'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-card-v2-title': TSinchCardTitleReact,
+      'sinch-card-v2-title': NectaryComponentReact<'sinch-card-v2-title'>,
     }
   }
 }
@@ -97,7 +101,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-card-v2-title': TSinchCardTitleReact,
+      'sinch-card-v2-title': NectaryComponentReact<'sinch-card-v2-title'>,
     }
   }
 }

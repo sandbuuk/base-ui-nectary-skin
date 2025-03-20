@@ -14,8 +14,9 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { createParseVisitor, sizeValues } from './utils'
-import type { TSinchRichTextElement, TSinchRichTextReact } from './types'
+import type { TSinchRichText } from './types'
 import type { TSinchTextType } from '../text/types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -133,13 +134,17 @@ defineCustomElement('sinch-rich-text', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-rich-text': TSinchRichText,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-rich-text': TSinchRichTextElement,
+    'sinch-rich-text': NectaryComponentVanilla<'sinch-rich-text'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-rich-text': TSinchRichTextReact,
+      'sinch-rich-text': NectaryComponentReact<'sinch-rich-text'>,
     }
   }
 }
@@ -147,7 +152,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-rich-text': TSinchRichTextReact,
+      'sinch-rich-text': NectaryComponentReact<'sinch-rich-text'>,
     }
   }
 }

@@ -1,11 +1,9 @@
 import {
-  ReactPropsTable as MenuReactPropsTable,
-  ReactHandlersTable as MenuReactHandlersTable,
   ElementAttributesTable as MenuElementAttributesTable,
 } from '@nectary/components/select-menu/types.ts?api'
 import {
-  ReactPropsTable as MenuOptionReactPropsTable,
   ElementAttributesTable as MenuOptionElementAttributesTable,
+  ElementMethodsTable as MenuOptionElementMethodsTable,
 } from '@nectary/components/select-menu-option/types.ts?api'
 import { ComponentContainer, ComponentTitle } from 'docs-common'
 
@@ -13,13 +11,7 @@ import { ComponentContainer, ComponentTitle } from 'docs-common'
   <ComponentTitle>
     ## \<sinch-select-menu>
   </ComponentTitle>
-  ### React
-  #### Props
-  <MenuReactPropsTable/>
-  #### Handlers
-  <MenuReactHandlersTable/>
-  ### Element
-  #### Attributes
+  ### Props
   <MenuElementAttributesTable/>
 </ComponentContainer>
 
@@ -27,10 +19,9 @@ import { ComponentContainer, ComponentTitle } from 'docs-common'
   <ComponentTitle>
     ## \<sinch-select-menu-option>
   </ComponentTitle>
-  ### React
-  #### Props
-  <MenuOptionReactPropsTable/>
-  ### Element
-  #### Attributes
+  ### Props
   <MenuOptionElementAttributesTable/>
+  ### Methods
+  #### Vanilla
+  <MenuOptionElementMethodsTable/>
 </ComponentContainer>

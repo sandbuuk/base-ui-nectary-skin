@@ -15,18 +15,18 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { areFilesAccepted, areItemsAccepted, doFilesSatisfySize } from './utils'
-import type { TSinchFileDropElement, TSinchFileDropInvalidType, TSinchFileDropReact } from './types'
-import type { TSinchFilePickerElement, TSinchFilePickerInvalidType } from '../file-picker/types'
-import type { TSinchTextElement } from '../text/types'
+import type { TSinchFileDropInvalidType, TSinchFileDrop } from './types'
+import type { TSinchFilePickerInvalidType } from '../file-picker/types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-file-drop', class extends NectaryElement {
-  #$filePicker: TSinchFilePickerElement
+  #$filePicker: NectaryComponentVanilla<'sinch-file-picker'>
   #$dropArea: HTMLElement
-  #$placeholder: TSinchTextElement
+  #$placeholder: NectaryComponentVanilla<'sinch-text'>
   #controller: AbortController | null = null
 
   constructor() {
@@ -296,13 +296,17 @@ defineCustomElement('sinch-file-drop', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-file-drop': TSinchFileDrop,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-file-drop': TSinchFileDropElement,
+    'sinch-file-drop': NectaryComponentVanilla<'sinch-file-drop'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-file-drop': TSinchFileDropReact,
+      'sinch-file-drop': NectaryComponentReact<'sinch-file-drop'>,
     }
   }
 }
@@ -310,7 +314,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-file-drop': TSinchFileDropReact,
+      'sinch-file-drop': NectaryComponentReact<'sinch-file-drop'>,
     }
   }
 }

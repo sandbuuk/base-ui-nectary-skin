@@ -15,8 +15,8 @@ import {
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import { modeValues } from './utils'
-import type { TSinchBadgeElement, TSinchBadgeMode, TSinchBadgeReact } from './types'
-import type { TRect } from '../types'
+import type { TSinchBadgeMode, TSinchBadge } from './types'
+import type { TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TSinchSize } from '../utils/size'
 
 const template = document.createElement('template')
@@ -164,13 +164,17 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-badge': TSinchBadge,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-badge': TSinchBadgeElement,
+    'sinch-badge': NectaryComponentVanilla<'sinch-badge'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-badge': TSinchBadgeReact,
+      'sinch-badge': NectaryComponentReact<'sinch-badge'>,
     }
   }
 }
@@ -178,7 +182,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-badge': TSinchBadgeReact,
+      'sinch-badge': NectaryComponentReact<'sinch-badge'>,
     }
   }
 }

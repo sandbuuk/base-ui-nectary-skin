@@ -10,9 +10,11 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchActionMenuElement, TSinchActionMenuReact } from './types'
-import type { TSinchActionMenuOptionElement } from '../action-menu-option/types'
+import type { TSinchActionMenu } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 import type { TContextKeydown, TContextVisibility } from '../utils'
+
+type TSinchActionMenuOptionElement = HTMLElementTagNameMap['sinch-action-menu-option']
 
 const ITEM_HEIGHT = 40
 const template = document.createElement('template')
@@ -84,7 +86,7 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
     this.focus()
 
     if (isSinchActionMenuOption(e.target)) {
-      this.#selectOption(e.target)
+      this.#selectOption(e.target as TSinchActionMenuOptionElement)
     }
   }
 
@@ -246,13 +248,17 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-action-menu': TSinchActionMenu,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-action-menu': TSinchActionMenuElement,
+    'sinch-action-menu': NectaryComponentVanilla<'sinch-action-menu'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-action-menu': TSinchActionMenuReact,
+      'sinch-action-menu': NectaryComponentReact<'sinch-action-menu'>,
     }
   }
 }
@@ -260,7 +266,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-action-menu': TSinchActionMenuReact,
+      'sinch-action-menu': NectaryComponentReact<'sinch-action-menu'>,
     }
   }
 }

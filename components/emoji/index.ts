@@ -6,7 +6,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { getEmojiBaseUrl, getEmojiUrl } from './utils'
-import type { TSinchEmojiElement, TSinchEmojiReact } from './types'
+import type { TSinchEmoji } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -68,13 +69,17 @@ defineCustomElement('sinch-emoji', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-emoji': TSinchEmoji,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-emoji': TSinchEmojiElement,
+    'sinch-emoji': NectaryComponentVanilla<'sinch-emoji'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-emoji': TSinchEmojiReact,
+      'sinch-emoji': NectaryComponentReact<'sinch-emoji'>,
     }
   }
 }
@@ -82,7 +87,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-emoji': TSinchEmojiReact,
+      'sinch-emoji': NectaryComponentReact<'sinch-emoji'>,
     }
   }
 }

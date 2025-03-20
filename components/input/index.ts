@@ -29,7 +29,8 @@ import {
   getMergedValueSliced,
   insertFromPaste,
 } from './utils'
-import type { TSinchInputElement, TSinchInputReact, TSinchInputType } from './types'
+import type { TSinchInputType, TSinchInput } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
 
@@ -838,13 +839,17 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-input': TSinchInput,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-input': TSinchInputElement,
+    'sinch-input': NectaryComponentVanilla<'sinch-input'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-input': TSinchInputReact,
+      'sinch-input': NectaryComponentReact<'sinch-input'>,
     }
   }
 }
@@ -852,7 +857,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-input': TSinchInputReact,
+      'sinch-input': NectaryComponentReact<'sinch-input'>,
     }
   }
 }

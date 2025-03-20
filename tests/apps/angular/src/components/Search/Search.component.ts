@@ -5,7 +5,6 @@ import '@nectary/components/input'
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
 import '@nectary/components/icon'
-import { TSinchInputElement } from '@nectary/components/input/types'
 import { ActivatedRoute } from '@angular/router'
 
 @Component({
@@ -27,7 +26,7 @@ export class SearchComponent {
   ]
 
   //@ts-expect-error
-  @ViewChild('input') inputRef: ElementRef<TSinchInputElement>;
+  @ViewChild('input') inputRef: ElementRef<HTMLElementTagNameMap['sinch-input']>;
 
   constructor(private route: ActivatedRoute) {
     const search = this.route.snapshot.queryParamMap

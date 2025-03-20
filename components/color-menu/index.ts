@@ -15,8 +15,8 @@ import {
   getTargetByAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchColorMenuElement, TSinchColorMenuReact } from './types'
-import type { TRect } from '../types'
+import type { TSinchColorMenu } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
 import type { TContextVisibility, TContextKeydown } from '../utils'
 
 const NUM_COLS_DEFAULT = 5
@@ -418,13 +418,17 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-color-menu': TSinchColorMenu,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-color-menu': TSinchColorMenuElement,
+    'sinch-color-menu': NectaryComponentVanilla<'sinch-color-menu'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-color-menu': TSinchColorMenuReact,
+      'sinch-color-menu': NectaryComponentReact<'sinch-color-menu'>,
     }
   }
 }
@@ -432,7 +436,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-color-menu': TSinchColorMenuReact,
+      'sinch-color-menu': NectaryComponentReact<'sinch-color-menu'>,
     }
   }
 }

@@ -16,9 +16,8 @@ import {
 import templateHTML from './template.html'
 import { TooltipState } from './tooltip-state'
 import { getPopOrientation, orientationValues, textAlignValues, typeValues } from './utils'
-import type { TSinchTooltipElement, TSinchTooltipOrientation, TSinchTooltipReact, TSinchTooltipTextAlign, TSinchTooltipType } from './types'
-import type { TSinchPopElement } from '../pop/types'
-import type { TRect } from '../types'
+import type { TSinchTooltipOrientation, TSinchTooltipTextAlign, TSinchTooltipType, TSinchTooltip } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
 
 const TIP_SIZE = 8
 const SHOW_DELAY_SLOW = 1000
@@ -31,7 +30,7 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-tooltip', class extends NectaryElement {
-  #$pop: TSinchPopElement
+  #$pop: NectaryComponentVanilla<'sinch-pop'>
   #$tooltipText: HTMLElement
   #$content: HTMLElement
   #$contentWrapper: HTMLElement
@@ -375,13 +374,17 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-tooltip': TSinchTooltip,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-tooltip': TSinchTooltipElement,
+    'sinch-tooltip': NectaryComponentVanilla<'sinch-tooltip'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tooltip': TSinchTooltipReact,
+      'sinch-tooltip': NectaryComponentReact<'sinch-tooltip'>,
     }
   }
 }
@@ -389,7 +392,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tooltip': TSinchTooltipReact,
+      'sinch-tooltip': NectaryComponentReact<'sinch-tooltip'>,
     }
   }
 }
