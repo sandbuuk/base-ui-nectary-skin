@@ -40,10 +40,11 @@ import {
   sortDates,
   today,
 } from './utils'
-import type { TSinchDatePickerElement, TSinchDatePickerReact } from './types'
-import type { TSinchButtonElement } from '../button/types'
-import type { TSinchTextElement } from '../text/types'
-import type { TRect } from '../types'
+import type { TSinchDatePicker } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
+
+type TSinchButtonElement = HTMLElementTagNameMap['sinch-button']
+type TSinchTextElement = HTMLElementTagNameMap['sinch-text']
 
 const template = document.createElement('template')
 
@@ -552,13 +553,17 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-date-picker': TSinchDatePicker,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-date-picker': TSinchDatePickerElement,
+    'sinch-date-picker': NectaryComponentVanilla<'sinch-date-picker'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-date-picker': TSinchDatePickerReact,
+      'sinch-date-picker': NectaryComponentReact<'sinch-date-picker'>,
     }
   }
 }
@@ -566,7 +571,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-date-picker': TSinchDatePickerReact,
+      'sinch-date-picker': NectaryComponentReact<'sinch-date-picker'>,
     }
   }
 }

@@ -11,7 +11,8 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchSegmentedIconControlOptionElement, TSinchSegmentedIconControlOptionReact } from './types'
+import type { TSinchSegmentedIconControlOption } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -115,13 +116,17 @@ defineCustomElement('sinch-segmented-icon-control-option', class extends Nectary
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-segmented-icon-control-option': TSinchSegmentedIconControlOption,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-segmented-icon-control-option': TSinchSegmentedIconControlOptionElement,
+    'sinch-segmented-icon-control-option': NectaryComponentVanilla<'sinch-segmented-icon-control-option'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-segmented-icon-control-option': TSinchSegmentedIconControlOptionReact,
+      'sinch-segmented-icon-control-option': NectaryComponentReact<'sinch-segmented-icon-control-option'>,
     }
   }
 }
@@ -129,7 +134,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-segmented-icon-control-option': TSinchSegmentedIconControlOptionReact,
+      'sinch-segmented-icon-control-option': NectaryComponentReact<'sinch-segmented-icon-control-option'>,
     }
   }
 }

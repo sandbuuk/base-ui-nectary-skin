@@ -11,7 +11,8 @@ import {
   isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchProgressElement, TSinchProgressReact } from './types'
+import type { TSinchProgress } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -82,13 +83,17 @@ defineCustomElement('sinch-progress', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-progress': TSinchProgress,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-progress': TSinchProgressElement,
+    'sinch-progress': NectaryComponentVanilla<'sinch-progress'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-progress': TSinchProgressReact,
+      'sinch-progress': NectaryComponentReact<'sinch-progress'>,
     }
   }
 }
@@ -96,7 +101,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-progress': TSinchProgressReact,
+      'sinch-progress': NectaryComponentReact<'sinch-progress'>,
     }
   }
 }

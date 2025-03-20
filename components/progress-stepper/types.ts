@@ -1,24 +1,21 @@
-import type { TRect, TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchProgressStepperElement = HTMLElement & {
+export type TSinchProgressStepperProps = {
   /** Current selected item value */
   value: string,
   /** Current progress value */
   progressValue: string,
-  nthOptionRect(index: number): TRect | null,
-  /** Change value event */
-  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
-  /** Current selected item value */
-  setAttribute(name: 'value', value: string): void,
-  /** Current progress value */
-  setAttribute(name: 'progressvalue', value: string): void,
 }
 
-export type TSinchProgressStepperReact = TSinchElementReact<TSinchProgressStepperElement> & {
-  /** Current selected item value */
-  value: string,
-  /** Current progress value */
-  progressValue: string,
+export type TSinchProgressStepperEvents = {
   /** Change selected value event */
-  'on-change'?: (e: CustomEvent<string>) => void,
+  '-change'?: (e: CustomEvent<string>) => void,
 }
+
+export type TSinchProgressStepper = {
+  props: TSinchProgressStepperProps,
+  events: TSinchProgressStepperEvents,
+}
+
+export type TSinchProgressStepperElement = NectaryComponentVanillaByType<TSinchProgressStepper>
+export type TSinchProgressStepperReact = NectaryComponentReactByType<TSinchProgressStepper>

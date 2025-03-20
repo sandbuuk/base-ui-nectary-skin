@@ -10,8 +10,8 @@ import {
   getReactEventHandler,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchPersistentOverlayElement, TSinchPersistentOverlayReact } from './types'
-import type { TSinchDialogElement } from '../dialog/types'
+import type { TSinchPersistentOverlay } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -21,7 +21,7 @@ function isVisible(elementStyle: CSSStyleDeclaration): boolean {
   return elementStyle.visibility === 'visible' && elementStyle.display !== 'none'
 }
 
-const observeDialogVisibilityManipulation = (sinchDialogElement: TSinchDialogElement, cb: () => void, intervalLength: number = 1000) => {
+const observeDialogVisibilityManipulation = (sinchDialogElement: NectaryComponentVanilla<'sinch-dialog'>, cb: () => void, intervalLength: number = 1000) => {
   const checkInterval = setInterval(() => {
     const dialogElement = sinchDialogElement.shadowRoot?.querySelector('dialog')
 
@@ -41,7 +41,7 @@ const observeDialogVisibilityManipulation = (sinchDialogElement: TSinchDialogEle
 }
 
 defineCustomElement('sinch-persistent-overlay', class extends NectaryElement {
-  #$sinchDialog: TSinchDialogElement
+  #$sinchDialog: NectaryComponentVanilla<'sinch-dialog'>
   #visibilityObserverInterval?: ReturnType<typeof setInterval>
   #controller: AbortController | null = null
 
@@ -141,13 +141,17 @@ defineCustomElement('sinch-persistent-overlay', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-persistent-overlay': TSinchPersistentOverlay,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-persistent-overlay': TSinchPersistentOverlayElement,
+    'sinch-persistent-overlay': NectaryComponentVanilla<'sinch-persistent-overlay'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-persistent-overlay': TSinchPersistentOverlayReact,
+      'sinch-persistent-overlay': NectaryComponentReact<'sinch-persistent-overlay'>,
     }
   }
 }
@@ -155,7 +159,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-persistent-overlay': TSinchPersistentOverlayReact,
+      'sinch-persistent-overlay': NectaryComponentReact<'sinch-persistent-overlay'>,
     }
   }
 }

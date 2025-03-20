@@ -1,24 +1,25 @@
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchRadioElement = HTMLElement & {
-  value: string,
-  invalid: boolean,
-  addEventListener(
-    type: '-change',
-    listener: (e: CustomEvent<boolean>) => void
-  ): void,
-  setAttribute(name: 'value', value: string): void,
-  setAttribute(name: 'invalid', value: ''): void,
-}
-
-export type TSinchRadioReact = TSinchElementReact<TSinchRadioElement> & {
+export type TSinchRadioProps = {
   value: string,
   invalid?: boolean,
   'aria-label': string,
-  'on-change'?: (e: CustomEvent<string>) => void,
-} & {
-  style?: {
-    '--sinch-comp-radio-direction'?: 'row' | 'column',
-    '--sinch-comp-radio-gap'?: number | string,
-  },
 }
+
+export type TSinchRadioEvents = {
+  '-change'?: (e: CustomEvent<string>) => void,
+}
+
+export type TSinchRadioStyle = {
+  '--sinch-comp-radio-direction'?: 'row' | 'column',
+  '--sinch-comp-radio-gap'?: number | string,
+}
+
+export type TSinchRadio = {
+  props: TSinchRadioProps,
+  events: TSinchRadioEvents,
+  style: TSinchRadioStyle,
+}
+
+export type TSinchRadioElement = NectaryComponentVanillaByType<TSinchRadio>
+export type TSinchRadioReact = NectaryComponentReactByType<TSinchRadio>

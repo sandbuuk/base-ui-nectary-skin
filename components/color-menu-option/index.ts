@@ -8,9 +8,8 @@ import {
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchColorMenuOptionElement, TSinchColorMenuOptionReact } from './types'
-import type { TSinchColorSwatchElement } from '../color-swatch/types'
-import type { TSinchTooltipElement } from '../tooltip/types'
+import type { TSinchColorMenuOption } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -18,8 +17,8 @@ template.innerHTML = templateHTML
 
 defineCustomElement('sinch-color-menu-option', class extends NectaryElement {
   #$wrapper: HTMLElement
-  #$tooltip: TSinchTooltipElement
-  #$swatch: TSinchColorSwatchElement
+  #$tooltip: NectaryComponentVanilla<'sinch-tooltip'>
+  #$swatch: NectaryComponentVanilla<'sinch-color-swatch'>
   constructor() {
     super()
 
@@ -70,13 +69,17 @@ defineCustomElement('sinch-color-menu-option', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-color-menu-option': TSinchColorMenuOption,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-color-menu-option': TSinchColorMenuOptionElement,
+    'sinch-color-menu-option': NectaryComponentVanilla<'sinch-color-menu-option'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-color-menu-option': TSinchColorMenuOptionReact,
+      'sinch-color-menu-option': NectaryComponentReact<'sinch-color-menu-option'>,
     }
   }
 }
@@ -84,7 +87,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-color-menu-option': TSinchColorMenuOptionReact,
+      'sinch-color-menu-option': NectaryComponentReact<'sinch-color-menu-option'>,
     }
   }
 }

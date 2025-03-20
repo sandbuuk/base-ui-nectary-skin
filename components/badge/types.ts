@@ -1,31 +1,9 @@
-import type { TRect, TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
 import type { TSinchSize } from '../utils/size'
 
 export type TSinchBadgeMode = 'square' | 'circle'
 
-export type TSinchBadgeElement = HTMLElement & {
-  /** Text */
-  text: string,
-  /** Size */
-  size: TSinchSize,
-  /** Mode, `square` by default */
-  mode: TSinchBadgeMode,
-  /** Hidden */
-  hidden: boolean,
-  readonly badgeRect: TRect,
-  /** Text */
-  setAttribute(name: 'text', value: string): void,
-  /** Size */
-  setAttribute(name: 'size', value: TSinchSize): void,
-  /** Mode, `square` by default */
-  setAttribute(name: 'mode', value: TSinchBadgeMode): void,
-  /** Color */
-  setAttribute(name: 'color', value: string): void,
-  /** Hidden */
-  setAttribute(name: 'hidden', value: ''): void,
-}
-
-export type TSinchBadgeReact = TSinchElementReact<TSinchBadgeElement> & {
+export type TSinchBadgeProps = {
   /** Text */
   text: string,
   /** Size */
@@ -34,18 +12,28 @@ export type TSinchBadgeReact = TSinchElementReact<TSinchBadgeElement> & {
   mode?: TSinchBadgeMode,
   /** Hidden */
   hidden?: boolean,
-} & {
-  style?: {
-    // Colors
-    '--sinch-comp-badge-color-border'?: string,
-    '--sinch-comp-badge-color-text'?: string,
-    '--sinch-comp-badge-color-background'?: string,
-
-    // Shapes
-    '--sinch-comp-badge-shape-radius'?: string,
-
-    // Fonts
-    '--sinch-comp-badge-font-size-l'?: string,
-    '--sinch-comp-badge-font-size-m'?: string,
-  },
+  /** Badge rect */
+  readonly badgeRect?: TRect,
 }
+
+export type TSinchBadgeStyle = {
+  // Colors
+  '--sinch-comp-badge-color-border'?: string,
+  '--sinch-comp-badge-color-text'?: string,
+  '--sinch-comp-badge-color-background'?: string,
+
+  // Shapes
+  '--sinch-comp-badge-shape-radius'?: string,
+
+  // Fonts
+  '--sinch-comp-badge-font-size-l'?: string,
+  '--sinch-comp-badge-font-size-m'?: string,
+}
+
+export type TSinchBadge = {
+  props: TSinchBadgeProps,
+  style: TSinchBadgeStyle,
+}
+
+export type TSinchBadgeElement = NectaryComponentVanillaByType<TSinchBadge>
+export type TSinchBadgeReact = NectaryComponentReactByType<TSinchBadge>

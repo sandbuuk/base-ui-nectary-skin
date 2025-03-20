@@ -11,7 +11,8 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchFieldElement, TSinchFieldReact } from './types'
+import type { TSinchField } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -168,13 +169,17 @@ defineCustomElement('sinch-field', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-field': TSinchField,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-field': TSinchFieldElement,
+    'sinch-field': NectaryComponentVanilla<'sinch-field'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-field': TSinchFieldReact,
+      'sinch-field': NectaryComponentReact<'sinch-field'>,
     }
   }
 }
@@ -182,7 +187,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-field': TSinchFieldReact,
+      'sinch-field': NectaryComponentReact<'sinch-field'>,
     }
   }
 }

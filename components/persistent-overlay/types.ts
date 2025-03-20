@@ -1,33 +1,29 @@
-import type { TSinchDialogElement, TSinchDialogReact } from '../dialog/types'
-import type { TSinchElementReact } from '../types'
+import type { TSinchDialogProps } from '../dialog/types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchPersistentOverlayElement = HTMLElement & {
-  /** Open/close state */
-  open: TSinchDialogElement['open'],
+export type TSinchPersistentOverlayProps = {
+  /** Controls whether the dialog should be open */
+  open: TSinchDialogProps['open'],
   /** Dialog caption */
-  caption: TSinchDialogElement['caption'],
-  /** Dialog caption */
-  setAttribute(name: 'caption', value: TSinchDialogElement['caption']): void,
+  caption: TSinchDialogProps['caption'],
+  /** Label that is used for a11y */
+  'aria-label': TSinchDialogProps['aria-label'],
+}
+export type TSinchPersistentOverlayEvents = {
   /** visibility altered event handler */
-  addEventListener(
-    type: '-visibility-altered',
-    listener: (e: CustomEvent) => void
-  ): void,
+  '-visibility-altered': (e: CustomEvent) => void,
 }
 
-export type TSinchPersistentOverlayReact =
-  TSinchElementReact<TSinchPersistentOverlayElement> & {
-    /** Controls whether the dialog should be open */
-    open: TSinchDialogReact['open'],
-    /** Dialog caption */
-    caption: TSinchDialogReact['caption'],
-    /** Label that is used for a11y */
-    'aria-label': TSinchDialogReact['aria-label'],
-    /** visibility altered event handler */
-    'on-visibility-altered': (e: CustomEvent) => void,
-  } & {
-    style?: {
-      // Dialog Properties
-      '--sinch-dialog-close-button-display'?: string,
-    },
-  }
+export type TSinchPersistentOverlayStyle = {
+  // Dialog Properties
+  '--sinch-dialog-close-button-display'?: string,
+}
+
+export type TSinchPersistentOverlay = {
+  props: TSinchPersistentOverlayProps,
+  events: TSinchPersistentOverlayEvents,
+  style: TSinchPersistentOverlayStyle,
+}
+
+export type TSinchPersistentOverlayElement = NectaryComponentVanillaByType<TSinchPersistentOverlay>
+export type TSinchPersistentOverlayReact = NectaryComponentReactByType<TSinchPersistentOverlay>

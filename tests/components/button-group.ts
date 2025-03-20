@@ -3,7 +3,6 @@ import type { } from '@nectary/components/button-group'
 import { sizeExValues } from '@nectary/components/utils/size'
 import { expect, test } from '@playwright/test'
 import { getAllEvents, runScreenshotTests, subscribeToEvents, testCustomEvent } from '../screenshot-tests'
-import type { TSinchButtonGroupItemElement } from '@nectary/components/button-group-item/types'
 
 const withFitWidth = '/button-group?type=primary&text=Text&icon-right=true'
 
@@ -63,7 +62,7 @@ test('button screenshots', runScreenshotTests('sinch-button-group', [
 
       /* Property */
       const attrValue = await $eval((el) => {
-        const buttonItem = el.querySelector('sinch-button-group-item:nth-child(1)') as TSinchButtonGroupItemElement
+        const buttonItem = el.querySelector('sinch-button-group-item:nth-child(1)') as HTMLElementTagNameMap['sinch-button-group-item']
 
         buttonItem.text = 'Text'
 

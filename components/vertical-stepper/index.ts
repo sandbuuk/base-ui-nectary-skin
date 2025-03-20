@@ -7,7 +7,8 @@ import {
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchVerticalStepperElement, TSinchVerticalStepperReact } from './types'
+import type { TSinchVerticalStepper } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -83,13 +84,17 @@ defineCustomElement('sinch-vertical-stepper', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-vertical-stepper': TSinchVerticalStepper,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-vertical-stepper': TSinchVerticalStepperElement,
+    'sinch-vertical-stepper': NectaryComponentVanilla<'sinch-vertical-stepper'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-vertical-stepper': TSinchVerticalStepperReact,
+      'sinch-vertical-stepper': NectaryComponentReact<'sinch-vertical-stepper'>,
     }
   }
 }
@@ -97,7 +102,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-vertical-stepper': TSinchVerticalStepperReact,
+      'sinch-vertical-stepper': NectaryComponentReact<'sinch-vertical-stepper'>,
     }
   }
 }

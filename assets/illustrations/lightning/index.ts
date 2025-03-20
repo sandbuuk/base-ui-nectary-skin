@@ -1,11 +1,17 @@
 import { defineCustomElement } from '../../utils/element'
 import { createIllustrationClass } from '../create-illustration-class'
 import templateHTML from './template.html'
-import type { TSinchIllustrationElement, TSinchIllustrationReact } from '../types'
+import type { TSinchIllustrationElement, TSinchIllustrationReact, TSinchIllustrationProps } from '../types'
 
 defineCustomElement('sinch-illustration-lightning', createIllustrationClass(templateHTML))
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-illustration-lightning': {
+      props: TSinchIllustrationProps,
+    },
+  }
+
   interface HTMLElementTagNameMap {
     'sinch-illustration-lightning': TSinchIllustrationElement,
   }

@@ -12,7 +12,8 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchActionMenuOptionElement, TSinchActionMenuOptionReact } from './types'
+import type { TSinchActionMenuOption } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -115,13 +116,17 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-action-menu-option': TSinchActionMenuOption,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-action-menu-option': TSinchActionMenuOptionElement,
+    'sinch-action-menu-option': NectaryComponentVanilla<'sinch-action-menu-option'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-action-menu-option': TSinchActionMenuOptionReact,
+      'sinch-action-menu-option': NectaryComponentReact<'sinch-action-menu-option'>,
     }
   }
 }
@@ -129,7 +134,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-action-menu-option': TSinchActionMenuOptionReact,
+      'sinch-action-menu-option': NectaryComponentReact<'sinch-action-menu-option'>,
     }
   }
 }

@@ -1,6 +1,4 @@
 import { setEmojiBaseUrl } from '../emoji/utils'
-import type { TSinchCodeTagElement } from '../code-tag/types'
-import type { TSinchLinkElement } from '../link/types'
 import type { TSinchTextType } from '../text/types'
 import type { TMarkdownParseVisitor } from '../utils'
 
@@ -44,7 +42,7 @@ export const createParseVisitor = (doc: Document) => {
           $p!.appendChild($emoji)
         },
         codetag(text) {
-          const $codeTag = doc.createElement('sinch-code-tag') as TSinchCodeTagElement
+          const $codeTag = doc.createElement('sinch-code-tag') as HTMLElementTagNameMap['sinch-code-tag']
 
           $codeTag.text = text
 
@@ -75,7 +73,7 @@ export const createParseVisitor = (doc: Document) => {
           $p!.appendChild($br)
         },
         link(text, href, attributes) {
-          const $link = doc.createElement('sinch-link') as TSinchLinkElement
+          const $link = doc.createElement('sinch-link') as HTMLElementTagNameMap['sinch-link']
 
           $link.text = text
           $link.href = href
@@ -92,7 +90,7 @@ export const createParseVisitor = (doc: Document) => {
 
                   break
                 case 'use-history':
-                  $link['use-history'] = true
+                  $link.useHistory = true
 
                   break
                 case 'external':

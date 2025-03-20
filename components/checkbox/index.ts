@@ -12,15 +12,15 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchCheckboxElement, TSinchCheckboxReact } from './types'
-import type { TSinchRichTextElement } from '../rich-text/types'
+import type { TSinchCheckbox } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-checkbox', class extends NectaryElement {
-  #$label: TSinchRichTextElement
+  #$label: NectaryComponentVanilla<'sinch-rich-text'>
   #controller: AbortController | null = null
 
   constructor() {
@@ -180,13 +180,17 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-checkbox': TSinchCheckbox,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-checkbox': TSinchCheckboxElement,
+    'sinch-checkbox': NectaryComponentVanilla<'sinch-checkbox'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-checkbox': TSinchCheckboxReact,
+      'sinch-checkbox': NectaryComponentReact<'sinch-checkbox'>,
     }
   }
 }
@@ -194,7 +198,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-checkbox': TSinchCheckboxReact,
+      'sinch-checkbox': NectaryComponentReact<'sinch-checkbox'>,
     }
   }
 }

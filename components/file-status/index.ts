@@ -12,12 +12,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { typeValues } from './utils'
-import type {
-  TSinchFileStatusElement,
-  TSinchFileStatusReact,
-  TSinchFileStatusType,
-} from './types'
-import type { TSinchTextElement } from '../text/types'
+import type { TSinchFileStatusType, TSinchFileStatus } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -26,7 +22,7 @@ template.innerHTML = templateHTML
 defineCustomElement(
   'sinch-file-status',
   class extends NectaryElement {
-    #$filename: TSinchTextElement
+    #$filename: NectaryComponentVanilla<'sinch-text'>
     #$contentSlot: HTMLSlotElement
     #controller: AbortController | null = null
 
@@ -109,13 +105,17 @@ defineCustomElement(
 )
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-file-status': TSinchFileStatus,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-file-status': TSinchFileStatusElement,
+    'sinch-file-status': NectaryComponentVanilla<'sinch-file-status'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-file-status': TSinchFileStatusReact,
+      'sinch-file-status': NectaryComponentReact<'sinch-file-status'>,
     }
   }
 }
@@ -123,7 +123,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-file-status': TSinchFileStatusReact,
+      'sinch-file-status': NectaryComponentReact<'sinch-file-status'>,
     }
   }
 }

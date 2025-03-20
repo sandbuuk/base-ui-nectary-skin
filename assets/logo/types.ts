@@ -7,7 +7,9 @@ export type TSinchLogoElement = HTMLElement & {
   setAttribute(name: 'inverted', value: ''): void,
 }
 
-export type TSinchLogoReact = TSinchElementReact<TSinchLogoElement> & {
+export type TSinchLogoProps = {
   size?: number,
   inverted?: boolean,
 }
+
+export type TSinchLogoReact = TSinchElementReact<TSinchLogoElement> & TSinchLogoProps

@@ -1,5 +1,4 @@
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType } from '../types'
 
 export type TSinchTableHeadElement = HTMLElement
-
-export type TSinchTableHeadReact = TSinchElementReact<TSinchTableHeadElement>
+export type TSinchTableHeadReact = NectaryComponentReactByType<TSinchTableHeadElement>

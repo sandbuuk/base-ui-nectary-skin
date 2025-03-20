@@ -25,12 +25,11 @@ import {
   isTargetEqual,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchSelectMenuElement, TSinchSelectMenuReact } from './types'
-import type { TSinchInputElement } from '../input/types'
-import type { TSinchSelectMenuOptionElement } from '../select-menu-option/types'
+import type { TSinchSelectMenu } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TContextKeydown, TContextVisibility } from '../utils'
 
-type TSelectMenuOption = TSinchSelectMenuOptionElement
+type TSelectMenuOption = HTMLElementTagNameMap['sinch-select-menu-option']
 
 const ITEM_HEIGHT = 40
 const NUM_ITEMS_SEARCH = 7
@@ -43,7 +42,7 @@ defineCustomElement(
   class extends NectaryElement {
     #$optionSlot: HTMLSlotElement
     #$listbox: HTMLElement
-    #$search: TSinchInputElement
+    #$search: NectaryComponentVanilla<'sinch-input'>
     #$searchClear: HTMLElement
     #$notFound: HTMLElement
     #controller: AbortController | null = null
@@ -606,13 +605,17 @@ defineCustomElement(
 )
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-select-menu': TSinchSelectMenu,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-select-menu': TSinchSelectMenuElement,
+    'sinch-select-menu': NectaryComponentVanilla<'sinch-select-menu'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-select-menu': TSinchSelectMenuReact,
+      'sinch-select-menu': NectaryComponentReact<'sinch-select-menu'>,
     }
   }
 }
@@ -620,7 +623,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-select-menu': TSinchSelectMenuReact,
+      'sinch-select-menu': NectaryComponentReact<'sinch-select-menu'>,
     }
   }
 }

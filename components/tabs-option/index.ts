@@ -11,7 +11,8 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTabsOptionElement, TSinchTabsOptionReact } from './types'
+import type { TSinchTabsOption } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -118,13 +119,17 @@ defineCustomElement('sinch-tabs-option', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-tabs-option': TSinchTabsOption,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-tabs-option': TSinchTabsOptionElement,
+    'sinch-tabs-option': NectaryComponentVanilla<'sinch-tabs-option'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tabs-option': TSinchTabsOptionReact,
+      'sinch-tabs-option': NectaryComponentReact<'sinch-tabs-option'>,
     }
   }
 }
@@ -132,7 +137,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tabs-option': TSinchTabsOptionReact,
+      'sinch-tabs-option': NectaryComponentReact<'sinch-tabs-option'>,
     }
   }
 }

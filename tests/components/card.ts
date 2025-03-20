@@ -1,6 +1,5 @@
 import { test } from '@playwright/test'
 import { centerRect, getBB, runScreenshotTests } from '../screenshot-tests'
-import type { TSinchCardElement } from '@nectary/components/card/types'
 
 const cardLabel = 'Report'
 const cardLabelLong = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
@@ -83,7 +82,7 @@ test('card screenshots', runScreenshotTests('sinch-card', [
       const card1 = page.locator('sinch-card').nth(0)
       const card2 = page.locator('sinch-card').nth(1)
 
-      const dragPt = centerRect(await card1.evaluate((el: TSinchCardElement) => el.dragRect))
+      const dragPt = centerRect(await card1.evaluate((el: HTMLElementTagNameMap['sinch-card']) => el.dragRect))
 
       await page.mouse.move(dragPt.x, dragPt.y)
       await page.mouse.down()

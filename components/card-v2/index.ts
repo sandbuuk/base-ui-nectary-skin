@@ -9,7 +9,8 @@ import {
   setClass,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchCardV2Element, TSinchCardV2React } from './types'
+import type { TSinchCardV2 } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -200,13 +201,17 @@ defineCustomElement(
 )
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-card-v2': TSinchCardV2,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-card-v2': TSinchCardV2Element,
+    'sinch-card-v2': NectaryComponentVanilla<'sinch-card-v2'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-card-v2': TSinchCardV2React,
+      'sinch-card-v2': NectaryComponentReact<'sinch-card-v2'>,
     }
   }
 }
@@ -214,7 +219,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-card-v2': TSinchCardV2React,
+      'sinch-card-v2': NectaryComponentReact<'sinch-card-v2'>,
     }
   }
 }

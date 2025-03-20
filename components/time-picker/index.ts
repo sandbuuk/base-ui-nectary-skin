@@ -16,9 +16,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { getNeedleRotationDeg, getShortestCssDeg, hourToIndex, parseTime, stringifyHour, stringifyHourFace, stringifyMinute, stringifyTime } from './utils'
-import type { TSinchTimePickerElement, TSinchTimePickerReact } from './types'
-import type { TSinchSegmentedControlElement } from '../segmented-control/types'
-import type { TRect } from '../types'
+import type { TSinchTimePicker } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
 
 const template = document.createElement('template')
 
@@ -45,7 +44,7 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   #$headerHoursText: HTMLElement
   #$headerMinutes: HTMLElement
   #$headerMinutesText: HTMLElement
-  #$ampm: TSinchSegmentedControlElement
+  #$ampm: NectaryComponentVanilla<'sinch-segmented-control'>
   #$submitButton: HTMLButtonElement
   #hour: number = 0
   #minute: number = 0
@@ -446,13 +445,17 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-time-picker': TSinchTimePicker,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-time-picker': TSinchTimePickerElement,
+    'sinch-time-picker': NectaryComponentVanilla<'sinch-time-picker'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-time-picker': TSinchTimePickerReact,
+      'sinch-time-picker': NectaryComponentReact<'sinch-time-picker'>,
     }
   }
 }
@@ -460,7 +463,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-time-picker': TSinchTimePickerReact,
+      'sinch-time-picker': NectaryComponentReact<'sinch-time-picker'>,
     }
   }
 }

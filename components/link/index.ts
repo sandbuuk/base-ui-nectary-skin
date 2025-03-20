@@ -11,7 +11,8 @@ import {
   isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchLinkElement, TSinchLinkReact } from './types'
+import type { TSinchLink } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -214,13 +215,17 @@ defineCustomElement('sinch-link', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-link': TSinchLink,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-link': TSinchLinkElement,
+    'sinch-link': NectaryComponentVanilla<'sinch-link'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-link': TSinchLinkReact,
+      'sinch-link': NectaryComponentReact<'sinch-link'>,
     }
   }
 }
@@ -228,7 +233,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-link': TSinchLinkReact,
+      'sinch-link': NectaryComponentReact<'sinch-link'>,
     }
   }
 }

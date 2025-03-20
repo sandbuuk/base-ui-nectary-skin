@@ -6,7 +6,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { getFlagUrl } from './utils'
-import type { TSinchFlagElement, TSinchFlagReact } from './types'
+import type { TSinchFlag } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -68,13 +69,17 @@ defineCustomElement('sinch-flag', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-flag': TSinchFlag,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-flag': TSinchFlagElement,
+    'sinch-flag': NectaryComponentVanilla<'sinch-flag'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-flag': TSinchFlagReact,
+      'sinch-flag': NectaryComponentReact<'sinch-flag'>,
     }
   }
 }
@@ -82,7 +87,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-flag': TSinchFlagReact,
+      'sinch-flag': NectaryComponentReact<'sinch-flag'>,
     }
   }
 }

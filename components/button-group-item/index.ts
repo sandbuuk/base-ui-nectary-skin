@@ -8,15 +8,15 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchButtonGroupItemElement, TSinchButtonGroupItemReact } from './types'
-import type { TSinchButtonElement } from '../button/types'
+import type { TSinchButtonGroupItem } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-button-group-item', class extends NectaryElement {
-  #$sinchButton: TSinchButtonGroupItemElement
+  #$sinchButton: NectaryComponentVanilla<'sinch-button-group-item'>
   #controller: AbortController | null = null
 
   constructor() {
@@ -33,7 +33,7 @@ defineCustomElement('sinch-button-group-item', class extends NectaryElement {
     return ['type', 'size', 'text', 'disabled', 'toggled']
   }
 
-  attributeChangedCallback(name: (keyof TSinchButtonElement), oldVal: string | null, newVal: string | null) {
+  attributeChangedCallback(name: (keyof NectaryComponentVanilla<'sinch-button'>), oldVal: string | null, newVal: string | null) {
     // Forward the props to the button
     updateAttribute(this.#$sinchButton, name, newVal)
   }
@@ -47,7 +47,7 @@ defineCustomElement('sinch-button-group-item', class extends NectaryElement {
 
     this.setAttribute('role', 'button')
 
-    const forwardEvent = (e: Event) => this.dispatchEvent(new CustomEvent(e.type, { ...e }))
+    const forwardEvent = (e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, { ...e }))
 
     this.addEventListener('-click', (e) => this.#onClickReactHandler(e), { signal })
     this.addEventListener('-focus', () => this.#onFocusReactHandler(), { signal })
@@ -99,13 +99,17 @@ defineCustomElement('sinch-button-group-item', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-button-group-item': TSinchButtonGroupItem,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-button-group-item': TSinchButtonGroupItemElement,
+    'sinch-button-group-item': NectaryComponentVanilla<'sinch-button-group-item'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-button-group-item': TSinchButtonGroupItemReact,
+      'sinch-button-group-item': NectaryComponentReact<'sinch-button-group-item'>,
     }
   }
 }
@@ -113,7 +117,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-button-group-item': TSinchButtonGroupItemReact,
+      'sinch-button-group-item': NectaryComponentReact<'sinch-button-group-item'>,
     }
   }
 }

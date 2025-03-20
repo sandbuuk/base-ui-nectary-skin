@@ -1,33 +1,6 @@
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchSelectMenuElement = HTMLElement & {
-  /** Selected value, CSV when multiple */
-  value: string,
-  /** How many rows to show and scroll the rest */
-  rows: number | null,
-  /** Allows multiple selection */
-  multiple: boolean,
-  /** Enforce the search bar appearing, by default it appears above a certain number of options  */
-  searchable: boolean | null,
-  /** Controls the autocomplete of the search input */
-  'search-autocomplete': HTMLInputElement['autocomplete'],
-  /** Text for search bar's placeholder */
-  'search-placeholder': string,
-  /** Optionally control search value manually */
-  'search-value': string,
-  /** Change value event */
-  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
-  /** Change value event */
-  addEventListener(type: '-search-change', listener: (e: CustomEvent<string>) => void): void,
-  /** Selected value, CSV when multiple */
-  setAttribute(name: 'value', value: string): void,
-  /** How many rows to show and scroll the rest */
-  setAttribute(name: 'rows', value: string): void,
-  /** Allows multiple selection */
-  setAttribute(name: 'multiple', value: ''): void,
-}
-
-export type TSinchSelectMenuReact = TSinchElementReact<TSinchSelectMenuElement> & {
+export type TSinchSelectMenuProps = {
   /** Selected value, CSV when multiple */
   value: string,
   /** How many rows to show and scroll the rest */
@@ -42,19 +15,29 @@ export type TSinchSelectMenuReact = TSinchElementReact<TSinchSelectMenuElement> 
   'search-placeholder'?: string,
   /** Label that is used for a11y */
   'aria-label': string,
-  /** Change value handler */
-  'on-search-change'?: (e: CustomEvent<string>) => void,
-  /** Optionally control search value manually */
-  'search-value'?: string,
-  /** Change value handler */
-  'on-change'?: (e: CustomEvent<string>) => void,
-} & {
-  style?: {
-    // Colors - Default State
-    '--sinch-comp-select-menu-color-default-title-initial'?: string,
-    '--sinch-comp-select-menu-color-default-not-found-text-initial'?: string,
-
-    // Fonts
-    '--sinch-comp-select-menu-font-not-found-text'?: string,
-  },
 }
+
+export type TSinchSelectMenuEvents = {
+  /** Change value handler */
+  '-search-change'?: (e: CustomEvent<string>) => void,
+  /** Change value handler */
+  '-change'?: (e: CustomEvent<string>) => void,
+}
+
+export type TSinchSelectMenuStyle = {
+  // Colors - Default State
+  '--sinch-comp-select-menu-color-default-title-initial'?: string,
+  '--sinch-comp-select-menu-color-default-not-found-text-initial'?: string,
+
+  // Fonts
+  '--sinch-comp-select-menu-font-not-found-text'?: string,
+}
+
+export type TSinchSelectMenu = {
+  props: TSinchSelectMenuProps,
+  events: TSinchSelectMenuEvents,
+  style: TSinchSelectMenuStyle,
+}
+
+export type TSinchSelectMenuElement = NectaryComponentVanillaByType<TSinchSelectMenu>
+export type TSinchSelectMenuReact = NectaryComponentReactByType<TSinchSelectMenu>

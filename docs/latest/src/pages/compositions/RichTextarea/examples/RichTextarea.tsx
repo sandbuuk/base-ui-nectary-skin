@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 import type {
   TRichTextareaSelection,
-  TSinchRichTextareaElement,
 } from '@nectary/components/rich-textarea/types'
 import type { FC } from 'react'
 import '@nectary/components/rich-textarea'
@@ -107,7 +106,7 @@ export const RichTextareaExample: FC = () => {
   const [isEmojiOpen, setEmojiOpen] = useState(false)
   const [isLinkOpen, setLinkOpen] = useState(false)
   const [isToolbarVisible, setToolbarVisible] = useState(true)
-  const ref = useRef<TSinchRichTextareaElement>(null)
+  const ref = useRef<HTMLElementTagNameMap['sinch-rich-textarea']>(null)
   const [selectionState, setSelectionState] = useState(DEFAULT_SELECTION)
   const [value, setValue] = useState(initialMd)
 

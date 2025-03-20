@@ -1,4 +1,4 @@
-import type { TSinchElementReact } from '@nectary/components/types'
+import type { NectaryComponentReactByType } from '@nectary/components/types'
 
 export type TSinchGridElement = HTMLElement & {
   /** no grid padding */
@@ -8,7 +8,7 @@ export type TSinchGridElement = HTMLElement & {
   setAttribute(name: 'nopadding', value: ''): void,
 }
 
-export type TSinchGridReact = TSinchElementReact<TSinchGridElement> & {
+export type TSinchGridReact = NectaryComponentReactByType<TSinchGridElement> & {
   /** no grid padding */
   noPadding?: boolean,
 }

@@ -5,7 +5,8 @@ import {
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchIconElement, TSinchIconReact } from './types'
+import type { TSinchIcon } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -83,13 +84,17 @@ defineCustomElement('sinch-icon', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-icon': TSinchIcon,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-icon': TSinchIconElement,
+    'sinch-icon': NectaryComponentVanilla<'sinch-icon'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-icon': TSinchIconReact,
+      'sinch-icon': NectaryComponentReact<'sinch-icon'>,
     }
   }
 }
@@ -97,7 +102,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-icon': TSinchIconReact,
+      'sinch-icon': NectaryComponentReact<'sinch-icon'>,
     }
   }
 }

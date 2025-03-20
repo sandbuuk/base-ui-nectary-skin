@@ -15,7 +15,8 @@ import {
   isAttrEqual,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTileControlElement, TSinchTileControlReact } from './types'
+import type { TSinchTileControl } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -161,13 +162,17 @@ defineCustomElement('sinch-tile-control', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-tile-control': TSinchTileControl,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-tile-control': TSinchTileControlElement,
+    'sinch-tile-control': NectaryComponentVanilla<'sinch-tile-control'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tile-control': TSinchTileControlReact,
+      'sinch-tile-control': NectaryComponentReact<'sinch-tile-control'>,
     }
   }
 }
@@ -175,7 +180,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-tile-control': TSinchTileControlReact,
+      'sinch-tile-control': NectaryComponentReact<'sinch-tile-control'>,
     }
   }
 }

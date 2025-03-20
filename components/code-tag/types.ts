@@ -1,29 +1,30 @@
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchCodeTagElement = HTMLElement & {
+export type TSinchCodeTagProps = {
   /** Text content of hyperlink */
   text: string,
-  /** Text content of hyperlink */
-  setAttribute(name: 'text', value: string): void,
 }
 
-export type TSinchCodeTagReact = TSinchElementReact<TSinchCodeTagElement> & {
-  /** Text content of hyperlink */
-  text: string,
-} & {
-  style?: {
-    // Colors - Default State
-    '--sinch-comp-code-tag-color-default-text-initial'?: string,
-    '--sinch-comp-code-tag-color-default-border-initial'?: string,
-    '--sinch-comp-code-tag-color-default-background-initial'?: string,
+export type TSinchCodeTagStyle = {
+  // Colors - Default State
+  '--sinch-comp-code-tag-color-default-text-initial'?: string,
+  '--sinch-comp-code-tag-color-default-border-initial'?: string,
+  '--sinch-comp-code-tag-color-default-background-initial'?: string,
 
-    // Fonts
-    '--sinch-comp-code-tag-font-text'?: string,
+  // Fonts
+  '--sinch-comp-code-tag-font-text'?: string,
 
-    // Shapes
-    '--sinch-comp-code-tag-shape-radius'?: string,
+  // Shapes
+  '--sinch-comp-code-tag-shape-radius'?: string,
 
-    // Global Properties
-    '--sinch-global-text-white-space'?: string,
-  },
+  // Global Properties
+  '--sinch-global-text-white-space'?: string,
 }
+
+export type TSinchCodeTag = {
+  props: TSinchCodeTagProps,
+  style: TSinchCodeTagStyle,
+}
+
+export type TSinchCodeTagElement = NectaryComponentVanillaByType<TSinchCodeTag>
+export type TSinchCodeTagReact = NectaryComponentReactByType<TSinchCodeTag>

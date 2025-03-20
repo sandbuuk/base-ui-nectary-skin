@@ -8,7 +8,8 @@ import {
   shouldReduceMotion,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchSkeletonElement, TSinchSkeletonReact } from './types'
+import type { TSinchSkeleton } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -139,13 +140,17 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-skeleton': TSinchSkeleton,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-skeleton': TSinchSkeletonElement,
+    'sinch-skeleton': NectaryComponentVanilla<'sinch-skeleton'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-skeleton': TSinchSkeletonReact,
+      'sinch-skeleton': NectaryComponentReact<'sinch-skeleton'>,
     }
   }
 }
@@ -153,7 +158,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-skeleton': TSinchSkeletonReact,
+      'sinch-skeleton': NectaryComponentReact<'sinch-skeleton'>,
     }
   }
 }

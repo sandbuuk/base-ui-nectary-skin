@@ -13,7 +13,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { getChipColorBg, getChipColorFg } from './utils'
-import type { TSinchChipElement, TSinchChipReact } from './types'
+import type { TSinchChip } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 
 const template = document.createElement('template')
 
@@ -177,13 +178,17 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-chip': TSinchChip,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-chip': TSinchChipElement,
+    'sinch-chip': NectaryComponentVanilla<'sinch-chip'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-chip': TSinchChipReact,
+      'sinch-chip': NectaryComponentReact<'sinch-chip'>,
     }
   }
 }
@@ -191,7 +196,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-chip': TSinchChipReact,
+      'sinch-chip': NectaryComponentReact<'sinch-chip'>,
     }
   }
 }

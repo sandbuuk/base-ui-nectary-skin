@@ -1,4 +1,4 @@
-import type { TRect, TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
 
 export type TSinchPopOrientation =
   | 'top-left'
@@ -12,28 +12,7 @@ export type TSinchPopOrientation =
   | 'center-right'
   | 'center-left'
 
-export type TSinchPopElement = HTMLElement & {
-  /** Open/close state */
-  open: boolean,
-  /** Orientation, where it *points to* from origin */
-  orientation: TSinchPopOrientation,
-  /** Modal/non-modal mode */
-  modal: boolean,
-  inset: number,
-  readonly footprintRect: TRect,
-  readonly popoverRect: TRect,
-  /** Close event */
-  addEventListener(type: '-close', listener: (e: CustomEvent<void>) => void): void,
-  /** Open/close state */
-  setAttribute(name: 'open', value: ''): void,
-  /** Orientation, where it *points to* from origin */
-  setAttribute(name: 'orientation', value: TSinchPopOrientation): void,
-  /** Modal/non-modal mode */
-  setAttribute(name: 'modal', value: boolean): void,
-  setAttribute(name: 'inset', value: string): void,
-}
-
-export type TSinchPopReact = TSinchElementReact<TSinchPopElement> & {
+export type TSinchPopProps = {
   /** Open/close state */
   open: boolean,
   /** Orientation, where it *points to* from origin */
@@ -43,6 +22,20 @@ export type TSinchPopReact = TSinchElementReact<TSinchPopElement> & {
   inset?: number,
   /** Label that is used for a11y */
   'aria-label': string,
-  /** Close event handler */
-  'on-close'?: (e: CustomEvent<void>) => void,
+  readonly footprintRect?: TRect,
+  readonly popoverRect?: TRect,
+
 }
+
+export type TSinchPopEvents = {
+  /** Close event handler */
+  '-close'?: (e: CustomEvent<void>) => void,
+}
+
+export type TSinchPop = {
+  props: TSinchPopProps,
+  events: TSinchPopEvents,
+}
+
+export type TSinchPopElement = NectaryComponentVanillaByType<TSinchPop>
+export type TSinchPopReact = NectaryComponentReactByType<TSinchPop>

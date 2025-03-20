@@ -1,14 +1,13 @@
 import { originValues } from '@nectary/components/toast-manager/utils'
 import { expect, test } from '@playwright/test'
 import { centerRect, getAllEvents, runScreenshotTests, subscribeToEvents } from '../screenshot-tests'
-import type { TSinchToastManagerElement } from '@nectary/components/toast-manager/types'
 import type { Page } from '@playwright/test'
 
 const shot = '/toast-manager'
 const getRect = (page: Page) =>
   page
     .locator('sinch-toast-manager')
-    .evaluate((el) => (el as TSinchToastManagerElement).containerRect)
+    .evaluate((el) => (el as HTMLElementTagNameMap['sinch-toast-manager']).containerRect)
 
 test('toast-manager screenshots', runScreenshotTests('sinch-toast-manager', [
   {

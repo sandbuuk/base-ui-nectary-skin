@@ -15,9 +15,11 @@ export type TSinchIllustrationElement = HTMLElement & {
   setAttribute(name: 'halign', value: TSinchIllustrationHAlign): void,
 }
 
-export type TSinchIllustrationReact = TSinchElementReact<TSinchIllustrationElement> & {
+export type TSinchIllustrationProps = {
   size?: number,
   background?: TSinchIllustrationBackground,
   valign?: TSinchIllustrationVAlign,
   halign?: TSinchIllustrationHAlign,
 }
+
+export type TSinchIllustrationReact = TSinchElementReact<TSinchIllustrationElement> & TSinchIllustrationProps

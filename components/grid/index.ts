@@ -1,6 +1,7 @@
 import { defineCustomElement, NectaryElement } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchGridElement, TSinchGridReact } from './types'
+import type { TSinchGrid } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -17,13 +18,17 @@ defineCustomElement('sinch-grid', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-grid': TSinchGrid,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-grid': TSinchGridElement,
+    'sinch-grid': NectaryComponentVanilla<'sinch-grid'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-grid': TSinchGridReact,
+      'sinch-grid': NectaryComponentReact<'sinch-grid'>,
     }
   }
 }
@@ -31,7 +36,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-grid': TSinchGridReact,
+      'sinch-grid': NectaryComponentReact<'sinch-grid'>,
     }
   }
 }

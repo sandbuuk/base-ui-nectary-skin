@@ -1,15 +1,17 @@
-import type { TSinchButtonElement, TSinchButtonReact } from '../button/types'
-import type { TSinchElementReact } from '../types'
+import type { TSinchButtonProps, TSinchButtonReact } from '../button/types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
 export { TSinchButtonReact }
 
-export type TSinchButtonGroupElement = HTMLElement & {
-  size: TSinchButtonElement['size'],
-  type: TSinchButtonElement['type'],
+export type TSinchButtonGroupProps = {
+  size?: TSinchButtonProps['size'],
+  type?: TSinchButtonProps['type'],
+  'aria-label': TSinchButtonProps['aria-label'],
 }
 
-export type TSinchButtonGroupReact = TSinchElementReact<TSinchButtonGroupElement> & {
-  size?: TSinchButtonReact['size'],
-  type?: TSinchButtonReact['type'],
-  'aria-label': TSinchButtonReact['aria-label'],
+export type TSinchButtonGroup = {
+  props: TSinchButtonGroupProps,
 }
+
+export type TSinchButtonGroupElement = NectaryComponentVanillaByType<TSinchButtonGroup>
+export type TSinchButtonGroupReact = NectaryComponentReactByType<TSinchButtonGroup>

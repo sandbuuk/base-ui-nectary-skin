@@ -16,12 +16,10 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { statusValues } from './utils'
-import type {
-  TSinchAccordionItemElement,
-  TSinchAccordionItemReact,
-  TSinchAccordionStatusType,
-} from './types'
-import type { TSinchTitleElement } from '../title/types'
+import type { TSinchAccordionStatusType, TSinchAccordionItem } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+
+type TSinchTitleElement = HTMLElementTagNameMap['sinch-title']
 
 const template = document.createElement('template')
 
@@ -150,13 +148,17 @@ defineCustomElement(
 )
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-accordion-item': TSinchAccordionItem,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-accordion-item': TSinchAccordionItemElement,
+    'sinch-accordion-item': NectaryComponentVanilla<'sinch-accordion-item'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-accordion-item': TSinchAccordionItemReact,
+      'sinch-accordion-item': NectaryComponentReact<'sinch-accordion-item'>,
     }
   }
 }
@@ -164,7 +166,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-accordion-item': TSinchAccordionItemReact,
+      'sinch-accordion-item': NectaryComponentReact<'sinch-accordion-item'>,
     }
   }
 }

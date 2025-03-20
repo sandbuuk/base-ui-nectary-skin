@@ -19,9 +19,11 @@ import {
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import type {
-  TSinchSelectButtonElement,
-  TSinchSelectButtonReact,
+  TSinchSelectButtonProps,
+  TSinchSelectButtonStyle,
+  TSinchSelectButtonEvents,
 } from './types'
+import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
 
@@ -271,13 +273,21 @@ defineCustomElement(
 )
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-select-button': {
+      props: TSinchSelectButtonProps,
+      events: TSinchSelectButtonEvents,
+      style: TSinchSelectButtonStyle,
+    },
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-select-button': TSinchSelectButtonElement,
+    'sinch-select-button': NectaryComponentVanilla<'sinch-select-button'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-select-button': TSinchSelectButtonReact,
+      'sinch-select-button': NectaryComponentReact<'sinch-select-button'>,
     }
   }
 }
@@ -285,7 +295,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-select-button': TSinchSelectButtonReact,
+      'sinch-select-button': NectaryComponentReact<'sinch-select-button'>,
     }
   }
 }

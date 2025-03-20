@@ -5,6 +5,8 @@ export type TSinchIconChannelElement = HTMLElement & {
   setAttribute(name: 'size', value: string): void,
 }
 
-export type TSinchIconChannelReact = TSinchElementReact<TSinchIconChannelElement> & {
+export type TSinchIconChannelProps = {
   size?: number,
 }
+
+export type TSinchIconChannelReact = TSinchElementReact<TSinchIconChannelElement> & TSinchIconChannelProps

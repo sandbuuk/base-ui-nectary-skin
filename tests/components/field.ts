@@ -1,6 +1,5 @@
 import { test } from '@playwright/test'
 import { centerBB, getBB, runScreenshotTests } from '../screenshot-tests'
-import type { TSinchTooltipElement } from '@nectary/components/tooltip/types'
 
 const shot = '/field?width=200&label=Label'
 const withValue = '/field?width=200&label=Label&value=Input%20value'
@@ -17,7 +16,7 @@ test('field screenshots', runScreenshotTests('sinch-field', [
       await page.mouse.move(hoverRect.x, hoverRect.y)
       await page.waitForTimeout(1200)
 
-      const tooltipRect = await page.locator('sinch-help-tooltip').evaluate((el: TSinchTooltipElement) => el.tooltipRect)
+      const tooltipRect = await page.locator('sinch-help-tooltip').evaluate((el: HTMLElementTagNameMap['sinch-help-tooltip']) => el.tooltipRect)
 
       yield {
         name: 'show',

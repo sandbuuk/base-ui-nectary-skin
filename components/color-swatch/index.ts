@@ -8,7 +8,8 @@ import {
 } from '../utils'
 import templateHTML from './template.html'
 import { getSwatchColorBg } from './utils'
-import type { TSinchColorSwatchElement, TSinchColorSwatchReact } from './types'
+import type { TSinchColorSwatch } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -78,13 +79,17 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-color-swatch': TSinchColorSwatch,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-color-swatch': TSinchColorSwatchElement,
+    'sinch-color-swatch': NectaryComponentVanilla<'sinch-color-swatch'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-color-swatch': TSinchColorSwatchReact,
+      'sinch-color-swatch': NectaryComponentReact<'sinch-color-swatch'>,
     }
   }
 }
@@ -92,7 +97,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-color-swatch': TSinchColorSwatchReact,
+      'sinch-color-swatch': NectaryComponentReact<'sinch-color-swatch'>,
     }
   }
 }

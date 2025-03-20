@@ -1,13 +1,18 @@
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchSegmentedControlElement = HTMLElement & {
-  value: string,
-  addEventListener(type: '-change', listener: (e: CustomEvent<string>) => void): void,
-  setAttribute(name: 'value', value: string): void,
-}
-
-export type TSinchSegmentedControlReact = TSinchElementReact<TSinchSegmentedControlElement> & {
+export type TSinchSegmentedControlProps = {
   value: string,
   'aria-label': string,
-  'on-change'?: (e: CustomEvent<string>) => void,
 }
+
+export type TSinchSegmentedControlEvents = {
+  '-change'?: (e: CustomEvent<string>) => void,
+}
+
+export type TSinchSegmentedControl = {
+  props: TSinchSegmentedControlProps,
+  events: TSinchSegmentedControlEvents,
+}
+
+export type TSinchSegmentedControlElement = NectaryComponentVanillaByType<TSinchSegmentedControl>
+export type TSinchSegmentedControlReact = NectaryComponentReactByType<TSinchSegmentedControl>

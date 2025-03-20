@@ -26,16 +26,9 @@ import templateHTML from './template.html'
 import type {
   TEmojiGroup,
   TEmoji,
-  TSinchEmojiPickerElement,
-  TSinchEmojiPickerReact,
+  TSinchEmojiPicker,
 } from './types'
-import type { TSinchButtonElement } from '../button/types'
-import type { TSinchColorMenuElement } from '../color-menu/types'
-import type { TSinchColorSwatchElement } from '../color-swatch/types'
-import type { TSinchInputElement } from '../input/types'
-import type { TSinchPopoverElement } from '../popover/types'
-import type { TSinchTabsElement } from '../tabs/types'
-import type { TRect } from '../types'
+import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
 
 const groupLabels = [
   'Emotions',
@@ -58,13 +51,13 @@ template.innerHTML = templateHTML
 defineCustomElement(
   'sinch-emoji-picker',
   class extends NectaryElement {
-    #$tabs: TSinchTabsElement
-    #$searchInput: TSinchInputElement
+    #$tabs: NectaryComponentVanilla<'sinch-tabs'>
+    #$searchInput: NectaryComponentVanilla<'sinch-input'>
     #$searchClearButton: HTMLElement
-    #$skinPopover: TSinchPopoverElement
-    #$skinMenu: TSinchColorMenuElement
-    #$skinSwatch: TSinchColorSwatchElement
-    #$skinButton: TSinchButtonElement
+    #$skinPopover: NectaryComponentVanilla<'sinch-popover'>
+    #$skinMenu: NectaryComponentVanilla<'sinch-color-menu'>
+    #$skinSwatch: NectaryComponentVanilla<'sinch-color-swatch'>
+    #$skinButton: NectaryComponentVanilla<'sinch-button'>
     #$list: HTMLElement
     #$notFound: HTMLElement
     #controller: AbortController | null = null
@@ -439,13 +432,17 @@ defineCustomElement(
 )
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-emoji-picker': TSinchEmojiPicker,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-emoji-picker': TSinchEmojiPickerElement,
+    'sinch-emoji-picker': NectaryComponentVanilla<'sinch-emoji-picker'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-emoji-picker': TSinchEmojiPickerReact,
+      'sinch-emoji-picker': NectaryComponentReact<'sinch-emoji-picker'>,
     }
   }
 }
@@ -453,7 +450,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-emoji-picker': TSinchEmojiPickerReact,
+      'sinch-emoji-picker': NectaryComponentReact<'sinch-emoji-picker'>,
     }
   }
 }

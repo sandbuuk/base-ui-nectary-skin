@@ -1,10 +1,17 @@
-import type { TSinchTooltipElement, TSinchTooltipReact } from '../tooltip/types'
+import type { TSinchTooltipProps } from '../tooltip/types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchHelpTooltipElement = TSinchTooltipElement
+export type TSinchHelpTooltipProps = TSinchTooltipProps
 
-export type TSinchHelpTooltipReact = TSinchTooltipReact & {
-  style?: {
-    // Global Properties
-    '--sinch-global-size-icon'?: string,
-  },
+export type TSinchHelpTooltipStyle = {
+  // Global Properties
+  '--sinch-global-size-icon'?: string,
 }
+
+export type TSinchHelpTooltip = {
+  props: TSinchHelpTooltipProps,
+  style: TSinchHelpTooltipStyle,
+}
+
+export type TSinchHelpTooltipElement = NectaryComponentVanillaByType<TSinchHelpTooltip>
+export type TSinchHelpTooltipReact = NectaryComponentReactByType<TSinchHelpTooltip>

@@ -10,15 +10,15 @@ import {
   updateIntegerAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchHelpTooltipElement, TSinchHelpTooltipReact } from './types'
-import type { TSinchTooltipElement } from '../tooltip/types'
+import type { TSinchHelpTooltip } from './types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
-  #$tooltip: TSinchTooltipElement
+  #$tooltip: NectaryComponentVanilla<'sinch-tooltip'>
   #controller: AbortController | null = null
 
   constructor() {
@@ -108,13 +108,17 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-help-tooltip': TSinchHelpTooltip,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-help-tooltip': TSinchHelpTooltipElement,
+    'sinch-help-tooltip': NectaryComponentVanilla<'sinch-help-tooltip'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-help-tooltip': TSinchHelpTooltipReact,
+      'sinch-help-tooltip': NectaryComponentReact<'sinch-help-tooltip'>,
     }
   }
 }
@@ -122,7 +126,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-help-tooltip': TSinchHelpTooltipReact,
+      'sinch-help-tooltip': NectaryComponentReact<'sinch-help-tooltip'>,
     }
   }
 }

@@ -13,8 +13,9 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import templateHTML from './template.html'
-import type { TSinchTableHeaderCellElement, TSinchTableHeaderCellReact } from './types'
+import type { TSinchTableHeaderCell } from './types'
 import type { TSinchTableAlignType } from '../table-cell/types'
+import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 const template = document.createElement('template')
 
@@ -88,13 +89,17 @@ defineCustomElement('sinch-table-head-cell', class extends NectaryElement {
 })
 
 declare global {
+  interface NectaryComponentMap {
+    'sinch-table-head-cell': TSinchTableHeaderCell,
+  }
+
   interface HTMLElementTagNameMap {
-    'sinch-table-head-cell': TSinchTableHeaderCellElement,
+    'sinch-table-head-cell': NectaryComponentVanilla<'sinch-table-head-cell'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-table-head-cell': TSinchTableHeaderCellReact,
+      'sinch-table-head-cell': NectaryComponentReact<'sinch-table-head-cell'>,
     }
   }
 }
@@ -102,7 +107,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-table-head-cell': TSinchTableHeaderCellReact,
+      'sinch-table-head-cell': NectaryComponentReact<'sinch-table-head-cell'>,
     }
   }
 }

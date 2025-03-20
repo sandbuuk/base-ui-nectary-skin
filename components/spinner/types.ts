@@ -1,20 +1,21 @@
-import type { TSinchElementReact } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 import type { TSinchSize } from '../utils/size'
 
-export type TSinchSpinnerElement = HTMLElement & {
-  /** Spinner size */
-  size: TSinchSize,
-  /** Spinner size */
-  setAttribute(name: 'size', value: TSinchSize): void,
-}
-
-export type TSinchSpinnerReact = TSinchElementReact<TSinchSpinnerElement> & {
+export type TSinchSpinnerProps = {
   /** Spinner size */
   size?: TSinchSize,
-} & {
-  style?: {
-    // Colors
-    '--sinch-global-color-icon'?: string,
-    '--sinch-sys-color-text-default'?: string,
-  },
 }
+
+export type TSinchSpinnerStyle = {
+  // Colors
+  '--sinch-global-color-icon'?: string,
+  '--sinch-sys-color-text-default'?: string,
+}
+
+export type TSinchSpinner = {
+  props: TSinchSpinnerProps,
+  style: TSinchSpinnerStyle,
+}
+
+export type TSinchSpinnerElement = NectaryComponentVanillaByType<TSinchSpinner>
+export type TSinchSpinnerReact = NectaryComponentReactByType<TSinchSpinner>

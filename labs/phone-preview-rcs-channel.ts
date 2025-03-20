@@ -179,7 +179,18 @@ const style = `
 }
 `
 
-const Actions = (props: Parameters<typeof RcsChannelPreview>[0]) => {
+interface RcsChannelProps {
+  name: string,
+  description: string,
+  color: string,
+  banner: string,
+  logo: string,
+  phones: { label: string, number: string }[],
+  websites: { label: string, url: string }[],
+  emails: { label: string, address: string }[],
+}
+
+const Actions = (props: RcsChannelProps) => {
   const number = () => props.phones.at(0)?.number ?? ''
   const url = () => props.websites.at(0)?.url ?? ''
   const email = () => props.emails.at(0)?.address ?? ''
@@ -205,7 +216,7 @@ const Actions = (props: Parameters<typeof RcsChannelPreview>[0]) => {
   `
 }
 
-const Info = (props: Parameters<typeof RcsChannelPreview>[0]) => {
+const Info = (props: RcsChannelProps) => {
   const phones = () =>
     ((props.phones.length > 0)
       ? props.phones
@@ -305,16 +316,7 @@ const Options = () => html`
  * @param props.website Brand website URLs.
  * @param props.email Brand email addresses.
  */
-export const RcsChannelPreview = (props: {
-  name: string,
-  description: string,
-  color: string,
-  banner: string,
-  logo: string,
-  phones: { label: string, number: string }[],
-  websites: { label: string, url: string }[],
-  emails: { label: string, address: string }[],
-}) => {
+export const RcsChannelPreview = (props: RcsChannelProps) => {
   const [tab, setTab] = createSignal(0)
   const transparentIcon =
     'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
