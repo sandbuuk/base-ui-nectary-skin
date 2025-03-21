@@ -5,6 +5,22 @@ export type TSinchTableHeaderCellProps = {
   text?: string,
   fit?: boolean,
   align?: TSinchTableAlignType,
+<<<<<<< HEAD
+=======
+} & {
+  style?: {
+    // Colors - Head Cell Default
+    '--sinch-comp-table-color-head-cell-default-border-initial'?: string,
+    '--sinch-comp-table-color-head-cell-default-icon-initial'?: string,
+    '--sinch-comp-table-color-head-cell-default-text-initial'?: string,
+    '--sinch-comp-text-font'?: string,
+
+    // Global Properties
+    '--sinch-global-color-icon'?: string,
+    '--sinch-global-color-text'?: string,
+
+  },
+>>>>>>> 519947253 (More examples and simpler table)
 }
 
 export type TSinchTableHeaderCellStyle = {
