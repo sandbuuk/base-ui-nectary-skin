@@ -1,8 +1,21 @@
 import { Example } from '~/components/Example'
 import { SimpleExample } from './examples/Simple.tsx?example'
+import { AdditionsExample } from './examples/Additions.tsx?example'
+import { TableHeadOptionsExample } from './examples/TableHeadOptions.tsx?example'
 
 # Examples
 
 ## Simple
+Table cells are unstyled. Here is a simple example of a table with only text.
 
 <Example Component={SimpleExample}/>
+
+## Other Types of Content
+The content in the cells can also be added as numbers, links, toggles and more.
+
+<Example Component={AdditionsExample}/>
+
+## Table Header Options
+The table head can also have additions such as Tooltips, checkboxes and icons.
+
+<Example Component={TableHeadOptionsExample}/>

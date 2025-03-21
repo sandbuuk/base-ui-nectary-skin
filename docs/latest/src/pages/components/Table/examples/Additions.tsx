@@ -1,11 +1,14 @@
 import type { FC } from 'react'
 import '@nectary/components/table'
 import '@nectary/components/table-head'
-import '@nectary/components/table-row'
 import '@nectary/components/table-head-cell'
-import '@nectary/components/table-cell'
 import '@nectary/components/table-body'
+import '@nectary/components/table-row'
+import '@nectary/components/link'
 import '@nectary/components/text'
+import '@nectary/components/toggle'
+import '@nectary/components/table-cell'
+import '@nectary/components/icon'
 
 const values = [
   {
@@ -45,16 +48,17 @@ const values = [
   },
 ]
 
-export const SimpleExample: FC = () => {
+export const AdditionsExample: FC = () => {
   return (
     <sinch-table>
       <sinch-table-head>
         <sinch-table-row>
           <sinch-table-head-cell text="Name"/>
-          <sinch-table-head-cell text="Ticket" align="end"/>
+          <sinch-table-head-cell text="Ticket"/>
           <sinch-table-head-cell text="Channel"/>
           <sinch-table-head-cell text="Comment"/>
           <sinch-table-head-cell text="Active"/>
+          <sinch-table-head-cell text="Open"/>
         </sinch-table-row>
       </sinch-table-head>
 
@@ -64,10 +68,8 @@ export const SimpleExample: FC = () => {
             <sinch-table-cell>
               <sinch-text type="s">{value.name}</sinch-text>
             </sinch-table-cell>
-            <sinch-table-cell align="end">
-              <sinch-text type="s">
-                {value.ticket}
-              </sinch-text>
+            <sinch-table-cell>
+              <sinch-link text="Link" href="#" aria-label="Link"/>
             </sinch-table-cell>
             <sinch-table-cell>
               <sinch-text type="s">{value.channel}</sinch-text>
@@ -76,9 +78,10 @@ export const SimpleExample: FC = () => {
               <sinch-text type="s">{value.comment}</sinch-text>
             </sinch-table-cell>
             <sinch-table-cell>
-              <sinch-text type="s">
-                {value.active.toString()}
-              </sinch-text>
+              <sinch-toggle aria-label="Toggle"/>
+            </sinch-table-cell>
+            <sinch-table-cell>
+              <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square"/>
             </sinch-table-cell>
           </sinch-table-row>
         ))}
