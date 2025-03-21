@@ -62,21 +62,21 @@ export const SimpleExample: FC = () => {
         {values.map((value, index) => (
           <sinch-table-row key={index}>
             <sinch-table-cell>
-              <sinch-text>{value.name}</sinch-text>
+              <sinch-text type="s">{value.name}</sinch-text>
             </sinch-table-cell>
             <sinch-table-cell align="end">
-              <sinch-text>
+              <sinch-text type="s">
                 {value.ticket}
               </sinch-text>
             </sinch-table-cell>
             <sinch-table-cell>
-              <sinch-text>{value.channel}</sinch-text>
+              <sinch-text type="s">{value.channel}</sinch-text>
             </sinch-table-cell>
             <sinch-table-cell>
-              <sinch-text>{value.comment}</sinch-text>
+              <sinch-text type="s">{value.comment}</sinch-text>
             </sinch-table-cell>
             <sinch-table-cell>
-              <sinch-text>
+              <sinch-text type="s">
                 {value.active.toString()}
               </sinch-text>
             </sinch-table-cell>

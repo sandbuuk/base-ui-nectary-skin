@@ -1,13 +1,13 @@
 import type { FC } from 'react'
 import '@nectary/components/table'
 import '@nectary/components/table-head'
-import '@nectary/components/table-row'
 import '@nectary/components/table-head-cell'
-import '@nectary/components/table-cell'
 import '@nectary/components/table-body'
+import '@nectary/components/table-row'
+import '@nectary/components/link'
 import '@nectary/components/text'
 import '@nectary/components/toggle'
-import '@nectary/components/link'
+import '@nectary/components/table-cell'
 import '@nectary/components/icon'
 
 const values = [
