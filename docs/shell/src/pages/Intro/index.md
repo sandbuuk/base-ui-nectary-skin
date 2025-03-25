@@ -101,6 +101,18 @@ const App = () => (
 )
 ```
 
+dashboard theme:
+```jsx
+import '@nectary/theme-base'
+import '@nectary/theme-cpaas-dashboard'
+
+const App = () => (
+  <div id="app" className="nectary-theme-base cpaas-theme-base cpaas-theme-dashboard">
+    ...
+  </div>
+)
+```
+
 Use color palette or custom font face:
 
 ```css
