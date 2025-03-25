@@ -116,9 +116,98 @@ test('has title', async ({ page }) => {
 
 It's possible to test your code with Testing Library + Jest.
 
-### Setup
+If you are testing your application using Nectary components with Jest, you might run into some problems, as it does not work out of the box. Here are the common pitfalls and their solutions.
 
-Besides the steps we outlined in the [Intro](http://localhost:5000/?version=latest&path=/intro#testing).
+### Example configuration
+
+`jest.config.js`
+
+```js
+/** @type {import("ts-jest/dist/types").InitialOptionsTsJest} */
+module.exports = {
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
+  moduleNameMapper: {
+    "\\.(css)$": "identity-obj-proxy"
+  },
+  transform: {
+    "^.+\\.(ts|tsx)?$": "ts-jest",
+    "^.+\\.(js|jsx)$": "babel-jest"
+  },
+  transformIgnorePatterns: [
+    "node_modules/(?!@nectary)"
+  ]
+}
+```
+
+`babel.config.js`
+
+```js
+module.exports = {presets: ['@babel/preset-env']}
+```
+
+### CSS
+
+If you already have a babel loader for CSS, you might not need this part. If you do not, you can use [identity-obj-proxy](https://www.npmjs.com/package/identity-obj-proxy) to mock your CSS imports:
+
+```shell
+npm install identity-obj-proxy
+# or
+yarn add identity-obj-proxy
+```
+
+Then add this part to your jest.config.js file:
+
+```js
+moduleNameMapper: {
+  "\\.(css)$": "identity-obj-proxy"
+},
+```
+
+It lets Jest know how to mock the css imports in your codebase, like for example when you import the theme:
+
+```js
+import '@nectary/theme-base'
+```
+
+This import should not throw an error now.
+
+### JS and TS
+
+You are going to need to install [babel-jest](https://www.npmjs.com/package/babel-jest) if it is not already done:
+
+```shell
+npm install babel-jest
+# or
+yarn add babel-jest
+```
+
+Then add this lines to your jest.config.js file:
+
+```js
+transform: {
+  "^.+\\.(ts|tsx)?$": "ts-jest", // if you are using Typescript and ts-jest
+  "^.+\\.(js|jsx)$": "babel-jest"
+},
+transformIgnorePatterns: [
+  "node_modules/(?!@nectary)"
+]
+```
+
+It is necessary to export the env preset in the babel.js.config file:
+
+```js
+module.exports = { presets: ['@babel/preset-env'] }
+```
+
+If you import any component:
+
+```js
+import '@nectary/components/input'
+```
+
+It should not throw the `Jest encountered an unexpected token` error.
+
 Its should be enough to follow the steps on the Testing Library [documentation](https://testing-library.com/).
 Do not forget to set the NectaryRegistry and like below in your tests.
 

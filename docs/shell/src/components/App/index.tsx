@@ -12,14 +12,16 @@ import { SidebarHeader } from '../SidebarHeader'
 import type { FC } from 'react'
 import { useThemeName } from '~/context/theme-control'
 import { useOnRouteChange } from '~/hooks'
-import { FAQPage } from '~/pages/FAQ'
-import { IntroPage } from '~/pages/Intro'
-import { LandingPage } from '~/pages/Landing'
+import { LandingPage } from '~/pages/00-Landing'
+import { ComponentsLibraryPage } from '~/pages/01-Components Library'
+import { ThemesPage } from '~/pages/02-Themes'
+import { AssetsPage } from '~/pages/03-Assets Library'
+import { TestingPage } from '~/pages/04-Testing'
+import { TokensPage } from '~/pages/05-Token'
+import { TypeScriptPage } from '~/pages/06-TypeScript'
+import { FAQPage } from '~/pages/07-FAQ'
+import { V3MigrationPage } from '~/pages/08-V3Migration'
 import { NotFoundPage } from '~/pages/NotFound'
-import { TestingPage } from '~/pages/Testing'
-import { TokensPage } from '~/pages/Token'
-import { TypeScriptPage } from '~/pages/TypeScript'
-import { V3MigrationPage } from '~/pages/V3Migration'
 import './styles.css'
 import '@nectary/theme-base'
 import '@nectary/theme-dark'
@@ -124,12 +126,14 @@ export const App: FC = () => {
               <NavigationGroup text="About">
                 <NavigationList>
                   <NavigationItem path="/" text="Home"/>
-                  <NavigationItem path="/intro" text="Intro"/>
+                  <NavigationItem path="/components" text="Components"/>
+                  <NavigationItem path="/themes" text="Themes"/>
+                  <NavigationItem path="/assets" text="Assets"/>
                   <NavigationItem path="/testing" text="Testing"/>
-                  <NavigationItem path="/V3Migration" text="V3 Migration"/>
-                  <NavigationItem path="/faq" text="FAQ"/>
                   <NavigationItem path="/tokens" text="Tokens"/>
                   <NavigationItem path="/typescript" text="TypeScript"/>
+                  <NavigationItem path="/faq" text="FAQ"/>
+                  <NavigationItem path="/V3Migration" text="V3 Migration"/>
                 </NavigationList>
               </NavigationGroup>
               <ComponentsList/>
@@ -144,12 +148,15 @@ export const App: FC = () => {
         <Suspense fallback={<Loading/>}>
           <Routes>
             <Route path="/" element={<LandingPage/>}/>
-            <Route path="/intro" element={<IntroPage/>}/>
+            <Route path="/intro" element={<ComponentsLibraryPage/>}/>
+            <Route path="/components" element={<ComponentsLibraryPage/>}/>
+            <Route path="/themes" element={<ThemesPage/>}/>
+            <Route path="/assets" element={<AssetsPage/>}/>
             <Route path="/testing" element={<TestingPage/>}/>
-            <Route path="/V3Migration" element={<V3MigrationPage/>}/>
-            <Route path="/faq" element={<FAQPage/>}/>
             <Route path="/tokens" element={<TokensPage/>}/>
             <Route path="/typescript" element={<TypeScriptPage/>}/>
+            <Route path="/faq" element={<FAQPage/>}/>
+            <Route path="/V3Migration" element={<V3MigrationPage/>}/>
             <Route path="/labComponents/*" element={<ComponentsPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
             <Route path="/compositions/*" element={<ComponentsPage/>}/>
