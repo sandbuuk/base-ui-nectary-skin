@@ -31,6 +31,9 @@ export type TSinchSelectMenuStyle = {
 
   // Fonts
   '--sinch-comp-select-menu-font-not-found-text'?: string,
+
+  // Sizes
+  '--sinch-comp-select-menu-font-max-height'?: string,
 }
 
 export type TSinchSelectMenu = {
