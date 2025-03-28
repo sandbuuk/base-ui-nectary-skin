@@ -5572,6 +5572,10 @@
           "not-found-text": {
             "value": "{sys.font.body.m}",
             "type": "typography"
+          },
+          "max-height": {
+            "value": "85vh",
+            "type": "number"
           }
         },
         "color": {
