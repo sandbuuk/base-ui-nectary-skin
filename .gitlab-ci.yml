@@ -255,3 +255,21 @@ publish-docs:
     - aws s3 rm s3://${BUCKET_ID}/.public/ --recursive --exclude ""
     - aws s3 cp public/ s3://${BUCKET_ID}/.public/ --recursive --include "*"
     - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
+
+build-icon-fonts:
+  stage: build
+  extends:
+    - .cache
+    - .prepare-ci
+  rules:
+    - changes:
+        - svg-icons/**/*
+  artifacts:
+    paths:
+      - fonts
+    expire_in: 1 week
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+  script:
+    - pnpm run icons:fonts:clean
+    - pnpm run icons:fonts:process
