@@ -282,8 +282,6 @@ commit-fonts:
     - changes:
         - svg-icons/**/*
     - when: never
-  variables:
-    GIT_LFS_SKIP_SMUDGE: 1
   script:
     - apt-get install -y git git-lfs
     - git lfs install
