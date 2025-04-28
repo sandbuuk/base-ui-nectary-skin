@@ -285,6 +285,7 @@ commit-fonts:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   script:
+    - git fetch origin
     - git checkout main
     - git add -A
     - git commit -m "update icon fonts"
