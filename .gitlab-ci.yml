@@ -274,6 +274,22 @@ build-icon-fonts:
     - pnpm run icons:fonts:clean
     - pnpm run icons:fonts:process
 
+commit-fonts:
+  stage: deploy
+  needs:
+    - build-icon-fonts
+  rules:
+    - changes:
+        - svg-icons/**/*
+    - when: never
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+  script:
+    - git checkout main
+    - git add -A
+    - git commit -m "update icon fonts"
+    - git push --force "https://gitlab-ci-token:$PROJECT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
+
 publish-icon-fonts:
   stage: deploy
   image:
@@ -295,9 +311,5 @@ publish-icon-fonts:
     BUCKET_ID: saas-fonts
     DISTRIBUTION_ID: E2702dPBO3GP1PT
   script:
-    - git checkout main
-    - git add -A
-    - git commit -m "update icon fonts"
-    - git push --force "https://gitlab-ci-token:$PROJECT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
     - aws s3 sync fonts/ s3://${BUCKET_ID}/ --recursive --include "*"
     - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
