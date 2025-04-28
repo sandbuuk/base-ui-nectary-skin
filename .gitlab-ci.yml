@@ -286,6 +286,8 @@ commit-fonts:
     - apt-get update -y
     - apt-get install -y git git-lfs
     - git lfs install
+    - git config --global user.email ci@sinch.com
+    - git config --global user.name Bot
     - git fetch origin
     - git checkout $CI_COMMIT_BRANCH
     - git add -A
