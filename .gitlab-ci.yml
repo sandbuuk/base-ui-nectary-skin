@@ -273,3 +273,31 @@ build-icon-fonts:
   script:
     - pnpm run icons:fonts:clean
     - pnpm run icons:fonts:process
+
+publish-icon-fonts:
+  stage: deploy
+  image:
+    name: public.ecr.aws/aws-cli/aws-cli:latest
+    entrypoint: [""]
+  extends:
+    - .aws-authenticate-classic-engage-nectary
+  needs:
+    - build-icon-fonts
+  rules:
+    - changes:
+        - svg-icons/**/*
+      when: manual
+    - when: never
+  ## TODO: add a visual test for the icons
+  manual_confirmation: 'Are you sure you want to update the icons files?'
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+    BUCKET_ID: saas-fonts
+    DISTRIBUTION_ID: E2702dPBO3GP1PT
+  script:
+    - git checkout main
+    - git add -A
+    - git commit -m "update icon fonts"
+    - git push --force "https://gitlab-ci-token:$PROJECT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
+    - aws s3 sync fonts/ s3://${BUCKET_ID}/ --recursive --include "*"
+    - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
