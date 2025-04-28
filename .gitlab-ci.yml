@@ -285,8 +285,10 @@ commit-fonts:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   script:
+    - apt-get install -y git git-lfs
+    - git lfs install
     - git fetch origin
-    - git checkout main
+    - git checkout $CI_COMMIT_BRANCH
     - git add -A
     - git commit -m "update icon fonts"
     - git push --force "https://gitlab-ci-token:$PROJECT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
