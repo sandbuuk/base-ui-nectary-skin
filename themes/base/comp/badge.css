@@ -1,6 +1,6 @@
 .nectary-theme-base {
   --sinch-comp-badge-color-background: var(--sinch-sys-color-feedback-danger-default);
-  --sinch-comp-badge-color-border: var(--sinch-sys-color-border-subtle);
+  --sinch-comp-badge-color-border: var(--sinch-sys-color-basic-pure);
   --sinch-comp-badge-color-text: var(--sinch-sys-color-basic-pure);
   --sinch-comp-badge-font-size-l: var(--sinch-ref-typography-font-weight-400) 14px/20px var(--sinch-ref-typography-font-family-mono);
   --sinch-comp-badge-font-size-m: var(--sinch-ref-typography-font-weight-400) 12px/14px var(--sinch-ref-typography-font-family-mono);

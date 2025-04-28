@@ -1,5 +1,4 @@
 .nectary-theme-base {
-  --sinch-comp-avatar-border-color-default-initial: var(--sinch-sys-color-border-subtle);
   --sinch-comp-avatar-container-color-blue-background: var(--sinch-ref-color-ocean-700);
   --sinch-comp-avatar-container-color-blue-foreground: var(--sinch-sys-color-basic-pure);
   --sinch-comp-avatar-container-color-dark-blue-background: var(--sinch-ref-color-ocean-800);
@@ -50,14 +49,15 @@
   --sinch-comp-avatar-container-color-violet-foreground: var(--sinch-sys-color-basic-pure-inverted);
   --sinch-comp-avatar-container-color-yellow-background: var(--sinch-ref-color-honey-400);
   --sinch-comp-avatar-container-color-yellow-foreground: var(--sinch-ref-color-neutral-900);
-  --sinch-comp-avatar-container-font-size-l-text: var(--sinch-sys-font-desktop-title-m);
-  --sinch-comp-avatar-container-font-size-m-text: var(--sinch-sys-font-desktop-title-s);
-  --sinch-comp-avatar-container-font-size-s-text: var(--sinch-sys-font-body-xxs);
+  --sinch-comp-avatar-container-font-size-l-text: var(--sinch-ref-typography-font-weight-700) var(--sinch-ref-typography-font-size-20)/var(--sinch-ref-typography-line-height-24) var(--sinch-ref-typography-font-family-main);
+  --sinch-comp-avatar-container-font-size-m-text: var(--sinch-ref-typography-font-weight-700) var(--sinch-ref-typography-font-size-16)/var(--sinch-ref-typography-line-height-24) var(--sinch-ref-typography-font-family-main);
+  --sinch-comp-avatar-container-font-size-s-text: var(--sinch-ref-typography-font-weight-600) var(--sinch-ref-typography-font-size-10)/var(--sinch-ref-typography-line-height-16) var(--sinch-ref-typography-font-family-main);
   --sinch-comp-avatar-shape-radius: var(--sinch-sys-shape-radius-full);
   --sinch-comp-avatar-size-l: 56px;
   --sinch-comp-avatar-size-m: 40px;
   --sinch-comp-avatar-size-s: 24px;
   --sinch-comp-avatar-status-color-away-default-background: var(--sinch-sys-color-feedback-warning-default);
+  --sinch-comp-avatar-status-color-border: var(--sinch-sys-color-basic-pure);
   --sinch-comp-avatar-status-color-busy-default-background: var(--sinch-sys-color-feedback-danger-default);
   --sinch-comp-avatar-status-color-offline-default-background: var(--sinch-sys-color-feedback-neutral-default);
   --sinch-comp-avatar-status-color-online-default-background: var(--sinch-sys-color-feedback-success-default);
