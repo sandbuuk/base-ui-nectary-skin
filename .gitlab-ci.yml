@@ -262,8 +262,13 @@ build-icon-fonts:
     - .cache
     - .prepare-ci
   rules:
-    - changes:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+      changes:
         - svg-icons/**/*
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        - svg-icons/**/*
+    - when: never
   artifacts:
     paths:
       - fonts
@@ -279,7 +284,11 @@ commit-fonts:
   needs:
     - build-icon-fonts
   rules:
-    - changes:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+      changes:
+        - svg-icons/**/*
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
         - svg-icons/**/*
     - when: never
   script:
@@ -305,9 +314,12 @@ publish-icon-fonts:
   needs:
     - build-icon-fonts
   rules:
-    - changes:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+      changes:
         - svg-icons/**/*
-      when: manual
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        - svg-icons/**/*
     - when: never
   ## TODO: add a visual test for the icons
   manual_confirmation: 'Are you sure you want to update the icons files?'
