@@ -124,7 +124,7 @@ const generateDocUtils = async (iconFiles: string[]) => {
 
   const template = `
 import type { TSinchIcons } from '@nectary/components/icon/generated-icon-type'
-export const sinchIconNames: TSinchIcons[] = [${iconFiles.map((file) => `"${file.replace('.svg', '')}"`).join(',')}]
+export const sinchIconNames: TSinchIcons[] = [${iconFiles.map((file) => `"${file.replace('.svg', '')}"`).join(',\n')}]
   `
 
   await fs.writeFile(path.join(docsDir, 'Icon', 'examples', 'icons-list.ts'), template)

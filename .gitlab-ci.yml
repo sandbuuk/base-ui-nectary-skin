@@ -280,6 +280,7 @@ build-icon-fonts:
   script:
     - pnpm run icons:fonts:clean
     - pnpm run icons:fonts:process
+    - pnpm lint:fix
 
 commit-fonts:
   stage: deploy
