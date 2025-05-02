@@ -272,6 +272,8 @@ build-icon-fonts:
   artifacts:
     paths:
       - fonts
+      - components/icon/generated-icon-type.ts
+      - docs/latest/src/pages/components/Icon/examples/icons-list.ts
     expire_in: 1 week
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
