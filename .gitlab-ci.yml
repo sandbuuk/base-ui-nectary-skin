@@ -302,7 +302,7 @@ commit-fonts:
     - git checkout $CI_COMMIT_REF_NAME
     - git add -A
     - git commit -m "update icon fonts"
-    - git push --force "https://gitlab-ci-token:$PROJECT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
+    - git push --force "https://gitlab-ci-token:$CI_JOB_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git" HEAD:$CI_COMMIT_REF_NAME
 
 publish-icon-fonts:
   stage: deploy
@@ -317,6 +317,7 @@ publish-icon-fonts:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
       changes:
         - svg-icons/**/*
+      when: manual
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
         - svg-icons/**/*
@@ -328,5 +329,5 @@ publish-icon-fonts:
     BUCKET_ID: saas-fonts
     DISTRIBUTION_ID: E2702dPBO3GP1PT
   script:
-    - aws s3 sync fonts/ s3://${BUCKET_ID}/ --recursive --include "*"
+    - aws s3 sync fonts/ s3://${BUCKET_ID}/ --include "*"
     - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
