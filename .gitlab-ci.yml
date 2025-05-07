@@ -329,9 +329,9 @@ publish-icon-fonts:
   manual_confirmation: 'Are you sure you want to update the icons files?'
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
-    # BUCKET_ID: saas-fonts
+    BUCKET_ID: saas-fonts
     DISTRIBUTION_ID: E2702dPBO3GP1PT
   script:
     - env
-    - aws s3 sync fonts/ s3://${BUCKET_ID}/ --include "*"
+    - aws s3 cp fonts/ s3://${BUCKET_ID}/ --recursive --include "*"
     - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
