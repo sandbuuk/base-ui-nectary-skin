@@ -1,11 +1,11 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/file-picker'
 import '@nectary/components/button'
 import '@nectary/components/icon'
 
 export const FilePicker: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('file-picker')
   const isMultiple = search.get('multiple') !== null
   const accept = search.get('accept') ?? undefined
   const onChange = (e: CustomEvent<File[]>) => {

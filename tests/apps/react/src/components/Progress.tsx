@@ -1,9 +1,9 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/progress'
 
 export const Progress: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('progress')
   const value = (() => {
     const val = search.get('value') ?? '0'
     const int = parseInt(val)

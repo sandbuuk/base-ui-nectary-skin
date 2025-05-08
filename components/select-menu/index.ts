@@ -24,6 +24,7 @@ import {
   hasClass,
   isTargetEqual,
 } from '../utils'
+import { CSVToFormData, setFormValue } from '../utils/form'
 import templateHTML from './template.html'
 import type { TSinchSelectMenu } from './types'
 import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
@@ -47,8 +48,11 @@ defineCustomElement(
     #$notFound: HTMLElement
     #controller: AbortController | null = null
     #searchDebounce
+    #internals: ElementInternals
 
     #userManagedSearch = false
+
+    static formAssociated = true
 
     constructor() {
       super()
@@ -57,6 +61,7 @@ defineCustomElement(
 
       shadowRoot.appendChild(template.content.cloneNode(true))
 
+      this.#internals = this.attachInternals()
       this.#$optionSlot = shadowRoot.querySelector('slot')!
       this.#$listbox = shadowRoot.querySelector('#listbox')!
       this.#$search = shadowRoot.querySelector('#search')!
@@ -74,6 +79,7 @@ defineCustomElement(
       }
 
       this.setAttribute('role', 'listbox')
+      this.#internals.role = 'listbox'
       this.tabIndex = 0
       this.addEventListener('keydown', this.#onListboxKeyDown, options)
       this.addEventListener('focus', this.#onFocus, options)
@@ -122,6 +128,28 @@ defineCustomElement(
       this.#controller = null
     }
 
+    formAssociatedCallback() {
+      setFormValue(this.#internals, CSVToFormData(this.name, this.value))
+    }
+
+    formResetCallback() {
+      this.value = ''
+      setFormValue(this.#internals, '')
+    }
+
+    formStateRestoreCallback(state: string | FormData | null) {
+      if (this.#internals.form === null || getBooleanAttribute(this.#internals.form, 'data-form-state-restore') === false) {
+        return
+      }
+
+      if (state !== null) {
+        const value = typeof state === 'string' ? state : state.get(this.name)
+
+        this.value = value?.toString() ?? ''
+        setFormValue(this.#internals, CSVToFormData(this.name, value?.toString() ?? ''))
+      }
+    }
+
     static get observedAttributes() {
       return [
         'value',
@@ -146,6 +174,7 @@ defineCustomElement(
             'aria-multiselectable',
             isAttrTrue(newVal)
           )
+          this.#internals.ariaMultiSelectable = isAttrTrue(newVal).toString()
 
           break
         }
@@ -188,6 +217,14 @@ defineCustomElement(
           break
         }
       }
+    }
+
+    set name(value: string) {
+      updateAttribute(this, 'name', value)
+    }
+
+    get name(): string {
+      return getAttribute(this, 'name', '')
     }
 
     set value(value: string) {
@@ -419,6 +456,14 @@ defineCustomElement(
 
           updateBooleanAttribute($option, 'data-checked', isChecked)
         }
+
+        const formData = new FormData()
+
+        values.forEach((value) => {
+          formData.append(this.name, value)
+        })
+
+        setFormValue(this.#internals, formData)
       } else {
         const value = getFirstCsvValue(csv)
 
@@ -429,6 +474,8 @@ defineCustomElement(
 
           updateBooleanAttribute($option, 'data-checked', isChecked)
         }
+
+        setFormValue(this.#internals, value ?? '')
       }
     }
 

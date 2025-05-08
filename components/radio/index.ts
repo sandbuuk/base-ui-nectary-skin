@@ -9,6 +9,7 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
+import { setFormValue } from '../utils/form'
 import templateHTML from './template.html'
 import type { TSinchRadio } from './types'
 import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
@@ -22,14 +23,18 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-radio', class extends NectaryElement {
   #$slot: HTMLSlotElement
   #controller: AbortController | null = null
+  #internals: ElementInternals
+
+  static formAssociated = true
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: true })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#internals = this.attachInternals()
     this.#$slot = shadowRoot.querySelector('slot')!
   }
 
@@ -40,6 +45,7 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     const options: AddEventListenerOptions = { signal }
 
     this.setAttribute('role', 'radiogroup')
+    this.#internals.role = 'radiogroup'
     this.#$slot.addEventListener('slotchange', this.#onSlotChange, options)
     this.#$slot.addEventListener('keydown', this.#onOptionKeyDown, options)
     this.#$slot.addEventListener('click', this.#onOptionClick, options)
@@ -51,8 +57,38 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     this.#controller = null
   }
 
+  formAssociatedCallback() {
+    setFormValue(this.#internals, this.value)
+  }
+
+  formResetCallback() {
+    this.value = ''
+    setFormValue(this.#internals, '')
+  }
+
+  formStateRestoreCallback(state: string | FormData | null) {
+    if (this.#internals.form === null || getBooleanAttribute(this.#internals.form, 'data-form-state-restore') === false) {
+      return
+    }
+
+    if (state !== null) {
+      const value = typeof state === 'string' ? state : state.get(this.name)
+
+      this.value = value?.toString() ?? ''
+      setFormValue(this.#internals, value?.toString() ?? '')
+    }
+  }
+
   static get observedAttributes() {
     return ['value', 'invalid']
+  }
+
+  set name(value: string) {
+    updateAttribute(this, 'name', value)
+  }
+
+  get name(): string {
+    return getAttribute(this, 'name', '')
   }
 
   set value(value: string) {
@@ -75,6 +111,8 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
     switch (name) {
       case 'value': {
         this.#onValueChange(newVal ?? '')
+
+        setFormValue(this.#internals, newVal ?? '')
 
         break
       }

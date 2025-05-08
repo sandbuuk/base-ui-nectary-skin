@@ -14,6 +14,7 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
+import { setFormValue } from '../utils/form'
 import { DEFAULT_SIZE } from '../utils/size'
 import templateHTML from './template.html'
 import type { TSinchTextarea } from './types'
@@ -35,6 +36,9 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
   #prevContentHeight: number = 0
   #dragStartY = 0
   #intersectionObserver: IntersectionObserver | null = null
+  #internals: ElementInternals
+
+  static formAssociated = true
 
   constructor() {
     super()
@@ -43,6 +47,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#internals = this.attachInternals()
     this.#$input = shadowRoot.querySelector('#input')!
     this.#$bottomSlot = shadowRoot.querySelector('slot[name="bottom"]')!
     this.#$bottomWrapper = shadowRoot.querySelector('#bottom')!
@@ -59,7 +64,9 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     }
 
     this.setAttribute('role', 'textbox')
+    this.#internals.role = 'textbox'
     this.ariaMultiLine = 'true'
+    this.#internals.ariaMultiLine = 'true'
     this.#$input.addEventListener('input', this.#onInput, options)
     this.#$input.addEventListener('compositionstart', this.#onCompositionStart, options)
     this.#$input.addEventListener('mousedown', this.#onSelectionChange, options)
@@ -90,6 +97,28 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
     }
   }
 
+  formAssociatedCallback() {
+    setFormValue(this.#internals, this.#$input.value)
+  }
+
+  formResetCallback() {
+    this.#$input.value = ''
+    setFormValue(this.#internals, '')
+  }
+
+  formStateRestoreCallback(state: string | FormData | null) {
+    if (this.#internals.form === null || getBooleanAttribute(this.#internals.form, 'data-form-state-restore') === false) {
+      return
+    }
+
+    if (state !== null) {
+      const value = typeof state === 'string' ? state : state.get(this.name)
+
+      this.#$input.value = value?.toString() ?? ''
+      setFormValue(this.#internals, value?.toString() ?? '')
+    }
+  }
+
   static get observedAttributes() {
     return [
       'value',
@@ -114,6 +143,8 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
           const isShrinkingContent = nextVal.length < prevVal.length
 
           this.#$input.value = nextVal
+
+          setFormValue(this.#internals, nextVal)
 
           // Auto-resize textarea if "resizable" attribute is not set
           if (!this.resizable) {
@@ -143,6 +174,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
       case 'placeholder': {
         this.#$input.placeholder = newVal ?? ''
         updateAttribute(this, 'aria-placeholder', newVal)
+        this.#internals.ariaPlaceholder = newVal ?? ''
 
         break
       }
@@ -155,6 +187,7 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
         const isInvalid = isAttrTrue(newVal)
 
         this.ariaInvalid = isInvalid.toString()
+        this.#internals.ariaInvalid = isInvalid.toString()
         updateBooleanAttribute(this, 'invalid', isInvalid)
 
         break
@@ -201,6 +234,14 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
         break
       }
     }
+  }
+
+  set name(value: string) {
+    updateAttribute(this, 'name', value)
+  }
+
+  get name() {
+    return getAttribute(this, 'name', '')
   }
 
   set value(value: string) {
@@ -344,6 +385,8 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
 
     const nextValue = this.#$input.value
     const prevValue = this.value
+
+    setFormValue(this.#internals, nextValue)
 
     if (prevValue !== nextValue) {
       const nextCursorPos = this.#$input.selectionEnd

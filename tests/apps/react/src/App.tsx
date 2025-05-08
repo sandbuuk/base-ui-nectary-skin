@@ -62,6 +62,7 @@ import { Toast } from './components/Toast'
 import { ToastManager } from './components/ToastManager'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
+import { UncontrolledForm } from './compositions/UncontrolledForm'
 import type { CSSProperties, FC } from 'react'
 
 const AppImpl = () => {
@@ -150,6 +151,10 @@ const AppImpl = () => {
         <Route path="/toast" element={<Toast/>}/>
         <Route path="/toggle" element={<Toggle/>}/>
         <Route path="/tooltip" element={<Tooltip/>}/>
+        {/* Compositions */}
+        <Route path="/composition">
+          <Route path="uncontrolled-form" element={<UncontrolledForm/>}/>
+        </Route>
       </Routes>
     </div>
   )

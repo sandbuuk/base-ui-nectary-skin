@@ -1,5 +1,5 @@
 <template>
-  <sinch-input :type="type" :size="size" :placeholder="placeholderText" :mask="mask" :disabled="isDisabled"
+  <sinch-input :name="name" :type="type" :size="size" :placeholder="placeholderText" :mask="mask" :disabled="isDisabled"
     :invalid="isInvalid" :value="value" @--copy="onCopy" @--cut="onCut" @--paste="onPaste" @--change="onChange"
     @--focus="onFocus" @--blur="onBlur">
     <sinch-icon icons-version="2" name="fa-magnifying-glass" v-if="hasIcon" slot="icon"></sinch-icon>
@@ -16,8 +16,14 @@ import '@nectary/components/select-button'
 import '@nectary/components/tag'
 import '@nectary/components/chip'
 import '@nectary/components/icon'
-
+import { getSearchKey } from '../utils'
 export default {
+  props: {
+    searchPrefix: {
+      type: String,
+      default: 'input'
+    }
+  },
   methods: {
     onChange(e) {
       this.value = e.detail
@@ -55,49 +61,55 @@ export default {
     },
     onBlur() {
       window.dispatchEvent(new CustomEvent('sinch-input-blur'))
+    },
+    getSearchParam(param) {
+      return this.$route.query[getSearchKey(param, this.searchPrefix)]
     }
   },
   computed: {
+    name() {
+      return this.getSearchParam('name')
+    },
     placeholderText() {
-      return this.$route.query.placeholder
+      return this.getSearchParam('placeholder')
     },
     mask() {
-      return this.$route.query.mask
+      return this.getSearchParam('mask')
     },
     isInvalid() {
-      return this.$route.query.invalid != null
+      return this.getSearchParam('invalid') != null
     },
     isDisabled() {
-      return this.$route.query.disabled != null
+      return this.getSearchParam('disabled') != null
     },
     type() {
-      return this.$route.query.type
+      return this.getSearchParam('type')
     },
     size() {
-      return this.$route.query.size
+      return this.getSearchParam('size')
     },
     hasLeft() {
-      return this.$route.query.left != null
+      return this.getSearchParam('left') != null
     },
     hasRight() {
-      return this.$route.query.right != null
+      return this.getSearchParam('right') != null
     },
     hasIcon() {
-      return this.$route.query.icon != null
+      return this.getSearchParam('icon') != null
     },
     hasCopy() {
-      return this.$route.query.copy != null
+      return this.getSearchParam('copy') != null
     },
     hasCut() {
-      return this.$route.query.cut != null
+      return this.getSearchParam('cut') != null
     },
     hasPaste() {
-      return this.$route.query.paste != null
+      return this.getSearchParam('paste') != null
     },
   },
   data() {
     return {
-      value: this.$route.query.value ?? ''
+      value: this.getSearchParam('value') ?? '',
     }
   }
 }

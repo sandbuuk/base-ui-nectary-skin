@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/segmented-control'
 import '@nectary/components/segmented-control-option'
 import '@nectary/components/icon'
 
 export const SegmentedControl: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('segmented-control')
   const [value, setValue] = useState('')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

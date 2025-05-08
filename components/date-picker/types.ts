@@ -1,6 +1,8 @@
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
 
 export type TSinchDatePickerProps = {
+  /** Identification for uncontrolled form submissions */
+  name?: string,
   /** Date value in ISO 8601 format */
   value: string,
   /** Date min limit in ISO 8601 format */

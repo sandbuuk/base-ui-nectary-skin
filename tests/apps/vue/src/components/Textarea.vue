@@ -1,5 +1,5 @@
 <template>
-  <sinch-textarea :placeholder="placeholderText" :invalid="isInvalid" :disabled="isDisabled" :value="value" :rows="rows"
+  <sinch-textarea :name="name" :placeholder="placeholderText" :invalid="isInvalid" :disabled="isDisabled" :value="value" :rows="rows"
     :minrows="minrows" :resizable="resizable" @--change="onChange" @--focus="onFocus" @--blur="onBlur">
     <template v-if="hasBottom">
       <sinch-button slot="bottom" aria-label="Paperclip">
@@ -30,10 +30,19 @@ import '@nectary/components/textarea'
 import '@nectary/components/button'
 import '@nectary/components/tag'
 import '@nectary/components/icon'
-
+import { getSearchKey } from '../utils'
 
 export default {
+  props: {
+    searchPrefix: {
+      type: String,
+      default: 'textarea'
+    }
+  },
   methods: {
+    getSearchParam(param) {
+      return this.$route.query[getSearchKey(param, this.searchPrefix)]
+    },
     onChange(e) {
       this.value = e.detail
       window.dispatchEvent(new CustomEvent('sinch-textarea-change', {detail: e.detail}))
@@ -46,31 +55,34 @@ export default {
     }
   },
   computed: {
+    name() {
+      return this.getSearchParam('name')
+    },
     placeholderText() {
-      return this.$route.query.placeholder
+      return this.getSearchParam('placeholder')
     },
     isInvalid() {
-      return this.$route.query.invalid != null
+      return this.getSearchParam('invalid') != null
     },
     isDisabled() {
-      return this.$route.query.disabled != null
+      return this.getSearchParam('disabled') != null
     },
     hasBottom() {
-      return this.$route.query.bottom != null
+      return this.getSearchParam('bottom') != null
     },
     rows() {
-      return this.$route.query.rows
+      return this.getSearchParam('rows')
     },
     minrows() {
-      return this.$route.query.minrows
+      return this.getSearchParam('minrows')
     },
     resizable() {
-      return this.$route.query.resizable
+      return this.getSearchParam('resizable')
     }
   },
   data() {
     return {
-      value: this.$route.query.value ?? ''
+      value: this.getSearchParam('value') ?? ''
     }
   }
 }

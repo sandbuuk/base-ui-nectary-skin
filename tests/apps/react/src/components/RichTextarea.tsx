@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { TRichTextareaSelection } from '@nectary/components/rich-textarea/types'
 import type { FC } from 'react'
 import '@nectary/components/rich-textarea'
@@ -28,7 +28,7 @@ If ___you___ have *any questions*, contact your ~~parents~~😆 account __manage
 `
 
 export const RichTextarea: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('rich-textarea')
   const placeholderText = search.get('placeholder') ?? undefined
   const isMarkdownExample = search.get('example') === 'md'
   const hasTop = search.get('top') !== null

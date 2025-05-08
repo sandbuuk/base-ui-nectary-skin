@@ -1,10 +1,10 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/avatar'
 import '@nectary/components/badge'
 
 export const Avatar: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('avatar')
   const alt = search.get('alt') ?? undefined
   const src = search.get('src') ?? undefined
   const color: any = search.get('color') ?? undefined

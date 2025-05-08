@@ -262,7 +262,7 @@ if (!ShadowRoot.prototype.createElement) {
   const createStandInElement = (tagName) => {
     return class ScopedCustomElementBase {
       static get ['formAssociated']() {
-        return window.customElements._getDefinition(tagName)?.formAssociated ?? false
+        return true
       }
 
       constructor() {

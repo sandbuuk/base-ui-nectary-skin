@@ -1,6 +1,8 @@
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
 export type TSinchSelectMenuProps = {
+  /** Identification for uncontrolled form submissions */
+  name?: string,
   /** Selected value, CSV when multiple */
   value: string,
   /** How many rows to show and scroll the rest */

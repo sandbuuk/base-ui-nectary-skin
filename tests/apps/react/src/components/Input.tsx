@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { TSinchInputClipboardEvent } from '@nectary/components/input/types'
 import type { FC } from 'react'
 import '@nectary/components/input'
@@ -8,8 +8,13 @@ import '@nectary/components/tag'
 import '@nectary/components/chip'
 import '@nectary/components/icon'
 
-export const Input: FC = () => {
-  const [search] = useSearchParams()
+interface InputProps {
+  searchPrefix?: string,
+  slot?: string,
+}
+
+export const Input: FC<InputProps> = ({ searchPrefix = 'input', slot }) => {
+  const [search] = useComponentSearchParams(searchPrefix)
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail
@@ -56,9 +61,12 @@ export const Input: FC = () => {
   const hasLeft = search.get('left') != null
   const hasRight = search.get('right') != null
   const hasIcon = search.get('icon') != null
+  const name = search.get('name') ?? undefined
 
   return (
     <sinch-input
+      slot={slot}
+      name={name}
       type={type}
       size={size}
       mask={mask}

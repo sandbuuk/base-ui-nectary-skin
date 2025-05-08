@@ -15,6 +15,7 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
+import { setFormValue } from '../utils/form'
 import templateHTML from './template.html'
 import {
   areDatesEqual,
@@ -68,14 +69,18 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   #monthNames: string[]
   #controller: AbortController | null = null
   #isHoverSubscribed = false
+  #internals: ElementInternals
+
+  static formAssociated = true
 
   constructor() {
     super()
 
-    const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow({ delegatesFocus: true })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#internals = this.attachInternals()
     this.#$prevMonth = shadowRoot.querySelector('#prev-month')!
     this.#$nextMonth = shadowRoot.querySelector('#next-month')!
     this.#$prevYear = shadowRoot.querySelector('#prev-year')!
@@ -117,6 +122,28 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
     this.#unsubscribeRangeHover()
     this.#controller!.abort()
     this.#controller = null
+  }
+
+  formAssociatedCallback() {
+    setFormValue(this.#internals, this.value)
+  }
+
+  formResetCallback() {
+    this.value = ''
+    setFormValue(this.#internals, '')
+  }
+
+  formStateRestoreCallback(state: string | FormData | null) {
+    if (this.#internals.form === null || getBooleanAttribute(this.#internals.form, 'data-form-state-restore') === false) {
+      return
+    }
+
+    if (state !== null) {
+      const value = typeof state === 'string' ? state : state.get(this.name)
+
+      this.value = value?.toString() ?? ''
+      setFormValue(this.#internals, value?.toString() ?? '')
+    }
   }
 
   static get observedAttributes() {
@@ -216,6 +243,14 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
         break
       }
     }
+  }
+
+  set name(value: string) {
+    updateAttribute(this, 'name', value)
+  }
+
+  get name(): string {
+    return getAttribute(this, 'name', '')
   }
 
   set locale(value: string) {
@@ -413,6 +448,8 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
 
   #onValueChange() {
     const value = this.value
+
+    setFormValue(this.#internals, this.value)
 
     this.#date1 = null
     this.#date2 = null

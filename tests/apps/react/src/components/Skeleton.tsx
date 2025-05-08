@@ -1,10 +1,10 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/skeleton'
 import '@nectary/components/skeleton-item'
 
 export const Skeleton: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('skeleton')
   const isCard = search.get('card') !== null
 
   return (

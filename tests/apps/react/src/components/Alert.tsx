@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/alert'
 import '@nectary/components/button'
@@ -17,7 +17,7 @@ const longText = 'Lorem Ipsum is simply dummy text of the printing and typesetti
 const shortText = 'Lorem Ipsum is dummy text'
 
 export const Alert: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('alert')
   const type: any = search.get('type') ?? undefined
   const hasAction = search.get('action') !== null
   const hasClose = search.get('close') !== null

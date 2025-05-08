@@ -1,11 +1,11 @@
 import { useCallback } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/link'
 import '@nectary/components/text'
 
 export const Link: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('link')
   const text = search.get('text') ?? ''
   const href = search.get('href') ?? ''
   const isDisabled = search.get('disabled') !== null

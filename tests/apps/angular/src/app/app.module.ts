@@ -59,8 +59,9 @@ import { ToastManagerComponent } from '../components/ToastManager/ToastManager.c
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
 import { AppComponent } from './app.component'
-import appRoutes from './router-config'
 import { ButtonGroupComponent } from 'src/components/ButtonGroup/ButtonGroup.component'
+import { UncontrolledFormComponent } from 'src/compositions/UncontrolledForm/UncontrolledForm.component'
+import appRoutes from './router-config'
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { ButtonGroupComponent } from 'src/components/ButtonGroup/ButtonGroup.com
     ToastManagerComponent,
     ToggleComponent,
     TooltipComponent,
+    UncontrolledFormComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { expect } from '@playwright/test'
 import { piAll } from 'piall'
+import type { NectaryComponentVanilla } from '../components/types'
 import type { PlaywrightTestArgs, TestInfo } from '@playwright/test'
 import type { FileChooser, Locator, Page } from 'playwright-core'
 
@@ -130,12 +131,12 @@ const overridePageMouse = (page: Page): void => {
   ;(page.mouse as any).__modified = true
 }
 
-type TEvalFunc<T extends keyof HTMLElementTagNameMap> = {
-  <R, Arg>(cb: (el: HTMLElementTagNameMap[T], arg: Arg) => R, arg: Arg): Promise<R>,
-  <R>(cb: (el: HTMLElementTagNameMap[T]) => R): Promise<R>,
+type TEvalFunc<T extends keyof globalThis.NectaryComponentMap> = {
+  <R, Arg>(cb: (el: NectaryComponentVanilla<T>, arg: Arg) => R, arg: Arg): Promise<R>,
+  <R>(cb: (el: NectaryComponentVanilla<T>) => R): Promise<R>,
 }
 
-const makeEval = <T extends keyof HTMLElementTagNameMap>($: Locator): TEvalFunc<T> =>
+const makeEval = <T extends keyof globalThis.NectaryComponentMap>($: Locator): TEvalFunc<T> =>
   (cb: any, arg?: any) => $.evaluate(cb, arg)
 
 type TPosition = {
@@ -155,10 +156,11 @@ type TUpdateStateResult = {
   expand?: number,
 }
 
-type TUpdateStateProps<T extends keyof HTMLElementTagNameMap> = {
+type TUpdateStateProps<T extends keyof globalThis.NectaryComponentMap> = {
   page: Page,
   $: Locator,
   $eval: TEvalFunc<T>,
+  $evalBySelectors: { [K in T]: TEvalFunc<K>[] },
   isChromium: boolean,
   isFirefox: boolean,
   isWebkit: boolean,
@@ -168,7 +170,7 @@ type TBeforeProps = {
   page: Page,
 }
 
-type TScreenshotTest<T extends keyof HTMLElementTagNameMap> = {
+type TScreenshotTest<T extends keyof globalThis.NectaryComponentMap> = {
   name: string,
   url: string,
   only?: boolean,
@@ -177,7 +179,34 @@ type TScreenshotTest<T extends keyof HTMLElementTagNameMap> = {
   fn (props: TUpdateStateProps<T>): AsyncIterable<TUpdateStateResult>,
 }
 
-export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elementSelector: T, tests: TScreenshotTest<T>[]) =>
+function createLazyEvalFunctions<T extends keyof globalThis.NectaryComponentMap>(
+  page: Page,
+  selectors: T[]
+): { [K in T]: TEvalFunc<K>[] } {
+  const result = {} as { [K in T]: TEvalFunc<K>[] }
+
+  for (const selector of selectors) {
+    const baseLocator = page.locator(selector)
+
+    // Create a proxy for array-like access
+    result[selector] = new Proxy([], {
+      get: (target, prop) => {
+        const index = Number(prop)
+
+        if (!isNaN(index)) {
+          // Create eval function for specific index
+          return makeEval<typeof selector>(baseLocator.nth(index))
+        }
+
+        return target[prop as any]
+      },
+    })
+  }
+
+  return result
+}
+
+export const runScreenshotTests = <T extends keyof globalThis.NectaryComponentMap>(elementSelector: T | T[], tests: TScreenshotTest<T>[]) =>
   async ({ page, context }: PlaywrightTestArgs, info: TestInfo) => {
     overrideScreenshotPath(info)
 
@@ -194,18 +223,32 @@ export const runScreenshotTests = <T extends keyof HTMLElementTagNameMap>(elemen
           after = await t.before({ page }) ?? null
         }
 
-        // await page.evaluate((url) => {
-        //   window.location.hash = url
-        // }, addTestNameToUrl(t.url, t.name))
         await page.goto(t.url)
         await page.evaluate(() => document.fonts.ready)
-        await page.waitForSelector(elementSelector, { state: 'attached' })
+
+        const selectors = Array.isArray(elementSelector) ? elementSelector : [elementSelector]
+
+        // Wait for all selectors to be attached
+        await Promise.all(selectors.map((selector) =>
+          page.waitForSelector(selector, { state: 'attached' })))
+
         await page.mouse.move(1, 1)
 
-        const locator = page.locator(elementSelector).nth(0)
+        const locators = selectors.map((selector) => page.locator(selector).nth(0))
+        const evalFuncs = locators.map((locator) => makeEval<T>(locator))
 
-        for await (const { name, include = [], includeRects = [], expand = 12 } of t.fn({ page, $: locator, $eval: makeEval<T>(locator), isChromium, isFirefox, isWebkit })) {
-          const rects = await getRects([locator, ...include])
+        const evalFuncsBySelectors = createLazyEvalFunctions(page, selectors)
+
+        for await (const { name, include = [], includeRects = [], expand = 12 } of t.fn({
+          page,
+          $: locators[0],
+          $eval: evalFuncs[0],
+          $evalBySelectors: evalFuncsBySelectors,
+          isChromium,
+          isFirefox,
+          isWebkit,
+        })) {
+          const rects = await getRects([...locators, ...include])
           const clip = expandRect(mergeBoundingBox(rects.concat(includeRects)), expand)
           const screenshotName = `${t.name.toLowerCase()}-${name.toLowerCase()}.png`
 

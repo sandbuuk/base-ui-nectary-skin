@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/input'
 import '@nectary/components/field'
@@ -7,8 +7,8 @@ import '@nectary/components/help-tooltip'
 import '@nectary/components/tag'
 import '@nectary/components/icon'
 
-export const Field: FC = () => {
-  const [search] = useSearchParams()
+export const Field: FC<{ searchPrefix?: string, children?: React.ReactNode }> = ({ searchPrefix = 'field', children }) => {
+  const [search] = useComponentSearchParams(searchPrefix)
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     setValue(e.detail)
@@ -29,21 +29,25 @@ export const Field: FC = () => {
       invalidText={invalidText}
       disabled={isDisabled}
     >
-      {tooltipText !== null && (
-        <sinch-help-tooltip text={tooltipText} slot="tooltip"/>
+      {children ?? (
+        <>
+          {tooltipText !== null && (
+            <sinch-help-tooltip text={tooltipText} slot="tooltip"/>
+          )}
+          <sinch-input
+            slot="input"
+            placeholder={placeholderText}
+            disabled={isDisabled}
+            invalid={Boolean(invalidText)}
+            value={value}
+            on-change={onChange}
+            aria-label="Input"
+          >
+            <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"/>
+            <sinch-tag slot="right" text="text"/>
+          </sinch-input>
+        </>
       )}
-      <sinch-input
-        slot="input"
-        placeholder={placeholderText}
-        disabled={isDisabled}
-        invalid={Boolean(invalidText)}
-        value={value}
-        on-change={onChange}
-        aria-label="Input"
-      >
-        <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"/>
-        <sinch-tag slot="right" text="text"/>
-      </sinch-input>
     </sinch-field>
   )
 }

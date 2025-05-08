@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/card'
 import '@nectary/assets/icons-branded/chatbot'
@@ -7,7 +7,7 @@ import '@nectary/components/button'
 import '@nectary/components/link'
 
 export const Card: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('card')
   const text: any = search.get('text')
   const label: any = search.get('label')
   const header: any = search.get('header')

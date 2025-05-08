@@ -1,22 +1,27 @@
-import { Component } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/date-picker'
-
+import { useComponentSearchParams } from 'src/utils'
 @Component({
   selector: 'date-picker-component',
   templateUrl: './DatePicker.component.html',
   styles: [':host{ display: contents; }']
 })
 
-export class DatePickerComponent {
-  value: string
-  locale: string | null
-  min: string | null
-  max: string | null
-  isRange: boolean
+export class DatePickerComponent implements OnInit {
+  @Input() searchPrefix: string = 'date-picker';
+  name: string | null = null;
+  value: string | null = null;
+  locale: string | null = null;
+  min: string | null = null;
+  max: string | null = null;
+  isRange: boolean = false;
 
-  constructor(private route: ActivatedRoute) {
-    const search = this.route.snapshot.queryParamMap
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    const search = useComponentSearchParams(this.route.snapshot.queryParamMap, this.searchPrefix);
+    this.name = search.get('name')
     this.value = search.get('value') ?? ''
     this.locale = search.get('locale')
     this.min = search.get('min')

@@ -11,6 +11,7 @@ import {
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
 } from '../utils'
+import { setFormValue } from '../utils/form'
 import templateHTML from './template.html'
 import type { TSinchCheckbox } from './types'
 import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
@@ -22,6 +23,9 @@ template.innerHTML = templateHTML
 defineCustomElement('sinch-checkbox', class extends NectaryElement {
   #$label: NectaryComponentVanilla<'sinch-rich-text'>
   #controller: AbortController | null = null
+  #internals: ElementInternals
+
+  static formAssociated = true
 
   constructor() {
     super()
@@ -30,6 +34,7 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#internals = this.attachInternals()
     this.#$label = shadowRoot.querySelector('#label')!
   }
 
@@ -40,6 +45,7 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
     const options: AddEventListenerOptions = { signal }
 
     this.setAttribute('role', 'checkbox')
+    this.#internals.role = 'checkbox'
     this.tabIndex = 0
     this.addEventListener('click', this.#onClick, options)
     this.addEventListener('focus', this.#onFocus, options)
@@ -52,6 +58,32 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
   disconnectedCallback() {
     this.#controller!.abort()
     this.#controller = null
+  }
+
+  formAssociatedCallback() {
+    setFormValue(this.#internals, this.#getFormValue())
+  }
+
+  formResetCallback() {
+    this.checked = false
+    setFormValue(this.#internals, '')
+  }
+
+  formStateRestoreCallback(state: string | FormData | null) {
+    if (this.#internals.form === null || getBooleanAttribute(this.#internals.form, 'data-form-state-restore') === false) {
+      return
+    }
+
+    if (state !== null) {
+      const value = typeof state === 'string' ? state : state.get(this.name)
+
+      this.checked = (value?.toString() ?? '').length > 0
+      setFormValue(this.#internals, this.#getFormValue())
+    }
+  }
+
+  #getFormValue() {
+    return this.checked ? (this.value.length > 0 ? this.value : 'on') : ''
   }
 
   static get observedAttributes() {
@@ -80,6 +112,9 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
 
         updateExplicitBooleanAttribute(this, 'aria-checked', isChecked)
         updateBooleanAttribute(this, 'checked', isChecked)
+        this.#internals.ariaChecked = isChecked.toString()
+
+        setFormValue(this.#internals, this.#getFormValue())
 
         break
       }
@@ -87,6 +122,7 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
         const isDisabled = isAttrTrue(newVal)
 
         updateExplicitBooleanAttribute(this, 'aria-disabled', isDisabled)
+        this.#internals.ariaDisabled = isDisabled.toString()
         updateBooleanAttribute(this, 'disabled', isDisabled)
 
         break
@@ -98,6 +134,22 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
         break
       }
     }
+  }
+
+  set name(value: string) {
+    updateAttribute(this, 'name', value)
+  }
+
+  get name(): string {
+    return getAttribute(this, 'name', '')
+  }
+
+  set value(value: string) {
+    updateAttribute(this, 'value', value)
+  }
+
+  get value(): string {
+    return getAttribute(this, 'value', '')
   }
 
   set checked(isChecked: boolean) {

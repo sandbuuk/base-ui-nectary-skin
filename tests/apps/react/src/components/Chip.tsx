@@ -1,10 +1,10 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/chip'
 import '@nectary/components/icon'
 
 export const Chip: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('chip')
   const color: any = search.get('color') ?? undefined
   const text = search.get('text') ?? ''
   const isSmall = search.get('small') != null

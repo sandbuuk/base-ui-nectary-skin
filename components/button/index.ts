@@ -13,10 +13,11 @@ import {
   subscribeContext,
   isAttrEqual,
 } from '../utils'
+import { requestSubmitForm } from '../utils/form'
 import { DEFAULT_SIZE, sizeExValues } from '../utils/size'
 import templateHTML from './template.html'
-import { typeValues } from './utils'
-import type { TSinchButtonType, TSinchButton } from './types'
+import { typeValues, formTypeValues } from './utils'
+import type { TSinchButtonType, TSinchButton, TSinchButtonFormType } from './types'
 import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TContextSize } from '../utils'
 import type { TSinchSizeEx } from '../utils/size'
@@ -26,10 +27,13 @@ const template = document.createElement('template')
 template.innerHTML = templateHTML
 
 defineCustomElement('sinch-button', class extends NectaryElement {
-  #$button: HTMLButtonElement
+  #$button: HTMLDivElement
   #$text: HTMLElement
   #controller: AbortController | null = null
   #sizeContext: Context<'size'>
+  #internals: ElementInternals
+
+  static formAssociated = true
 
   constructor() {
     super()
@@ -38,6 +42,7 @@ defineCustomElement('sinch-button', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#internals = this.attachInternals()
     this.#$button = shadowRoot.querySelector('#button')!
     this.#$text = shadowRoot.querySelector('#text')!
 
@@ -52,7 +57,9 @@ defineCustomElement('sinch-button', class extends NectaryElement {
     const { signal } = this.#controller
 
     this.setAttribute('role', 'button')
+    this.#internals.role = 'button'
     this.tabIndex = 0
+
     this.addEventListener('click', this.#onButtonClick, { signal })
     this.addEventListener('focus', this.#onButtonFocus, { signal })
     this.addEventListener('blur', this.#onButtonBlur, { signal })
@@ -95,6 +102,7 @@ defineCustomElement('sinch-button', class extends NectaryElement {
         }
 
         this.ariaDisabled = isAttrTrue(newVal).toString()
+        this.#internals.ariaDisabled = isAttrTrue(newVal).toString()
 
         break
       }
@@ -104,6 +112,7 @@ defineCustomElement('sinch-button', class extends NectaryElement {
         }
 
         this.ariaPressed = isAttrTrue(newVal).toString()
+        this.#internals.ariaPressed = isAttrTrue(newVal).toString()
 
         break
       }
@@ -164,6 +173,14 @@ defineCustomElement('sinch-button', class extends NectaryElement {
     return true
   }
 
+  set formType(value: TSinchButtonFormType) {
+    updateLiteralAttribute(this, formTypeValues, 'form-type', value)
+  }
+
+  get formType(): TSinchButtonFormType {
+    return getLiteralAttribute(this, formTypeValues, 'form-type', 'button')
+  }
+
   #onSizeUpdate() {
     if (!this.isDomConnected) {
       return
@@ -206,6 +223,18 @@ defineCustomElement('sinch-button', class extends NectaryElement {
       e.stopPropagation()
       e.preventDefault()
     } else {
+      const form = this.#internals.form
+
+      if (form !== null) {
+        if (this.formType === 'submit') {
+          requestSubmitForm(form, this as NectaryComponentVanilla<'sinch-button'>)
+        }
+
+        if (this.formType === 'reset') {
+          form.reset()
+        }
+      }
+
       this.dispatchEvent(
         new CustomEvent('-click')
       )

@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/rich-text'
 
@@ -27,7 +27,7 @@ const longText = 'Lorem Ipsum is simply dummy text of the printing and typesetti
 const shortText = 'Lorem Ipsum is dummy text'
 
 export const RichText: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('rich-text')
   const size: any = search.get('size') ?? undefined
   const example = search.get('example')
 

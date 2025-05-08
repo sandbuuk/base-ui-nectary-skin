@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/segment'
 import '@nectary/components/segment-collapse'
@@ -13,7 +13,7 @@ import '@nectary/components/text'
 import '@nectary/components/icon'
 
 export const Segment: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('segment')
   const caption: string = search.get('caption') ?? ''
   const hasContent = search.get('content') !== null
   const hasAction = search.get('action') !== null

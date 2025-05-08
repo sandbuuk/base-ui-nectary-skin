@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/popover'
 import '@nectary/components/input'
@@ -17,7 +17,7 @@ const options: string[] = [
 ]
 
 export const Search: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('search')
   const [isOpen, setOpen] = useState(false)
   const [isClearActive, setClearActive] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')

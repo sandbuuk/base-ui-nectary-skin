@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/toast'
 import '@nectary/components/button'
@@ -7,7 +7,7 @@ import '@nectary/components/icon'
 const md = 'To set up the `LINE`, read and **accept** the `LINE` [terms & conditions](https://google.com).'
 
 export const Toast: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('toast')
   const isMarkdownExample = search.get('example') === 'md'
   const type: any = search.get('type') ?? undefined
   const text = isMarkdownExample

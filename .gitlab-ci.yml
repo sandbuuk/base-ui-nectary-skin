@@ -45,6 +45,7 @@ default:
     - stg
     - eu-west-1
     - k8s
+    - arm64
 
 
 stages:

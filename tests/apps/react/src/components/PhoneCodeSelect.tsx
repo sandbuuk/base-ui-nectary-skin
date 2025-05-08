@@ -1,6 +1,6 @@
 import { countries } from '@nectary/components/utils/countries'
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/popover'
 import '@nectary/components/input'
@@ -12,7 +12,7 @@ import '@nectary/components/flag'
 const countriesArr = Object.entries(countries)
 
 export const PhoneCodeSelect: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('phone-code-select')
   const [isOpen, setIsOpen] = useState(false)
   const [menuValue, setMenuValue] = useState('')
   const [inputValue, setInputValue] = useState('')

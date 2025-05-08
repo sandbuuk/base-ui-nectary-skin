@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/tabs'
 import '@nectary/components/tabs-option'
@@ -7,7 +7,7 @@ import '@nectary/components/tabs-icon-option'
 import '@nectary/components/icon'
 
 export const Tabs: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('tabs')
   const [value, setValue] = useState('')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

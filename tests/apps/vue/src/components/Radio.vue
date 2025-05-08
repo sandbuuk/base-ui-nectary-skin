@@ -1,5 +1,5 @@
 <template>
-  <sinch-radio :value="value" :invalid="isInvalid" @--change="onChange">
+  <sinch-radio :name="name" :value="value" :invalid="isInvalid" @--change="onChange">
     <sinch-radio-option v-for="opt in options"
       :key="opt.value"
       :value="opt.value"
@@ -12,7 +12,7 @@
 <script>
 import '@nectary/components/radio'
 import '@nectary/components/radio-option'
-
+import { getSearchKey } from '../utils'
 const options = [{
   value: '1',
   text: 'Option value 1',
@@ -33,6 +33,12 @@ const singleOption = [{
 }]
 
 export default {
+  props: {
+    searchPrefix: {
+      type: String,
+      default: 'radio'
+    }
+  },
   methods: {
     onChange(e) {
       if (this.isControlled) {
@@ -40,16 +46,22 @@ export default {
         window.dispatchEvent(new CustomEvent('sinch-radio-change', {detail: e.detail}))
       }
     },
+    getSearchParam(param) {
+      return this.$route.query[getSearchKey(param, this.searchPrefix)]
+    }
   },
   computed: {
+    name() {
+      return this.getSearchParam('name')
+    },
     isControlled() {
-      return this.$route.query.uncontrolled == null
+      return this.getSearchParam('uncontrolled') == null
     },
     isInvalid() {
-      return this.$route.query.invalid != null
+      return this.getSearchParam('invalid') != null
     },
     options() {
-      const example = this.$route.query.example
+      const example = this.getSearchParam('example')
 
       return example === 'single'
         ? singleOption
@@ -58,7 +70,7 @@ export default {
   },
   data() {
     return {
-      value: this.$route.query.value ?? ''
+      value: this.getSearchParam('value') ?? ''
     }
   }
 }

@@ -1,35 +1,41 @@
-import { Component } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import "@nectary/components/input";
 import "@nectary/components/select-button";
 import "@nectary/components/tag";
 import "@nectary/components/chip";
 import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
+import { useComponentSearchParams } from "src/utils";
 
 @Component({
   selector: "input-component",
   templateUrl: "./Input.component.html",
   styles: [":host{ display: contents; }"],
 })
-export class InputComponent {
-  value: string;
-  isControlled: boolean;
-  type: string | null;
-  size: string | null;
-  isInvalid: boolean;
-  placeholderText: string | null;
-  mask: string | null;
-  tooltipText: string | null;
-  isDisabled: boolean;
-  hasLeft: boolean;
-  hasRight: boolean;
-  hasIcon: boolean;
-  hasCopy: boolean;
-  hasCut: boolean;
-  hasPaste: boolean;
+export class InputComponent implements OnInit {
+  @Input() searchPrefix: string = 'input';
+  name: string | null = null;
+  value: string | null = null;
+  isControlled: boolean = false;
+  type: string | null = null;
+  size: string | null = null;
+  isInvalid: boolean = false;
+  placeholderText: string | null = null;
+  mask: string | null = null;
+  tooltipText: string | null = null;
+  isDisabled: boolean = false;
+  hasLeft: boolean = false;
+  hasRight: boolean = false;
+  hasIcon: boolean = false;
+  hasCopy: boolean = false;
+  hasCut: boolean = false;
+  hasPaste: boolean = false;
 
-  constructor(private route: ActivatedRoute) {
-    const search = this.route.snapshot.queryParamMap;
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    const search = useComponentSearchParams(this.route.snapshot.queryParamMap, this.searchPrefix);
+    this.name = search.get("name")
     this.value = search.get("value") ?? "";
     this.isControlled = search.get("uncontrolled") === null;
     this.type = search.get("type");
@@ -45,8 +51,6 @@ export class InputComponent {
     this.hasCopy = search.get("copy") != null;
     this.hasCut = search.get("cut") != null;
     this.hasPaste = search.get("paste") != null;
-
-    console.log(this.route.snapshot);
   }
 
   onChange(e: Event) {

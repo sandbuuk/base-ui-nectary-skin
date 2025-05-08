@@ -1,8 +1,9 @@
 <template>
   <sinch-field :label="labelText" :optionaltext="optionalText" :additionaltext="additionalText"
     :invalidtext="invalidText">
-    <sinch-help-tooltip v-if="tooltipText != null" slot="tooltip" :text="tooltipText"></sinch-help-tooltip>
-    <sinch-input slot="input" :placeholder="placeholderText" :disabled="isDisabled" :invalid="invalidText != null"
+    <slot></slot>
+    <sinch-help-tooltip v-if="!$slots.default && tooltipText != null" slot="tooltip" :text="tooltipText"></sinch-help-tooltip>
+    <sinch-input v-if="!$slots.default" slot="input" :placeholder="placeholderText" :disabled="isDisabled" :invalid="invalidText != null"
       :value="value" @--change="onChange">
       <sinch-icon icons-version="2" name="fa-magnifying-glass" slot="icon"></sinch-icon>
       <sinch-tag slot="right" text="text"></sinch-tag>
@@ -16,39 +17,48 @@ import '@nectary/components/input'
 import '@nectary/components/help-tooltip'
 import '@nectary/components/tag'
 import '@nectary/components/icon'
-
+import { getSearchKey } from '../utils'
 export default {
+  props: {
+    searchPrefix: {
+      type: String,
+      default: 'field'
+    }
+  },
   methods: {
     onChange(e) {
       this.value = e.detail
+    },
+    getSearchParam(param) {
+      return this.$route.query[getSearchKey(param, this.searchPrefix)]
     }
   },
   computed: {
     placeholderText() {
-      return this.$route.query.placeholder
+      return this.getSearchParam('placeholder')
     },
     tooltipText() {
-      return this.$route.query.tooltip
+      return this.getSearchParam('tooltip')
     },
     labelText() {
-      return this.$route.query.label
+      return this.getSearchParam('label')
     },
     optionalText() {
-      return this.$route.query.optional
+      return this.getSearchParam('optional')
     },
     additionalText() {
-      return this.$route.query.additional
+      return this.getSearchParam('additional')
     },
     invalidText() {
-      return this.$route.query.invalid
+      return this.getSearchParam('invalid')
     },
     isDisabled() {
-      return this.$route.query.disabled != null
+      return this.getSearchParam('disabled') != null
     }
   },
   data() {
     return {
-      value: this.$route.query.value ?? ''
+      value: this.getSearchParam('value') ?? ''
     }
   }
 }

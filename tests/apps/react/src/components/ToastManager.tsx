@@ -1,6 +1,6 @@
 import { typeValues } from '@nectary/components/toast/utils'
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/toast-manager'
 import '@nectary/components/toast'
@@ -12,7 +12,7 @@ const md = 'To set up the `LINE`, read and **accept** the `LINE` [terms & condit
 
 export const ToastManager: FC = () => {
   const [state, setState] = useState<string[]>([`${text}1`, `${text}2`, md, 'Item4'])
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('toast-manager')
   const origin: any = search.get('origin') ?? undefined
 
   const onTimeout = () => {
