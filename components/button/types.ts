@@ -1,6 +1,7 @@
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 import type { TSinchSizeEx } from '../utils/size'
 
+export type TSinchButtonFormType = 'submit' | 'reset' | 'button'
 export type TSinchButtonType =
   | 'primary'
   | 'secondary'
@@ -25,6 +26,8 @@ export type TSinchButtonProps = {
   disabled?: boolean,
   /** Toggled (pressed) */
   toggled?: boolean,
+  /** Makes button participate in forms, `button` by default */
+  'form-type'?: TSinchButtonFormType,
 }
 
 export type TSinchButtonEvents = {

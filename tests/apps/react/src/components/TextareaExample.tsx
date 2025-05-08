@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/textarea'
 import '@nectary/components/button'
@@ -11,7 +11,7 @@ import '@nectary/components/tag'
 import '@nectary/components/icon'
 
 export const TextareaExample: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('textarea')
   const [value, setValue] = useState(search.get('value') ?? '')
   const [isPopOpen, setPopOpen] = useState(false)
   const [popMode, setPopMode] = useState<'emoji' | 'vars' | null>(null)

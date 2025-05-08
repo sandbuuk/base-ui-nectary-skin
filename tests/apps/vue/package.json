@@ -2,6 +2,9 @@
   "name": "vue-test-app",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "start": "webpack serve --config webpack.config.js"
+  },
   "dependencies": {
     "@nectary/assets": "workspace:*",
     "@nectary/components": "workspace:*",

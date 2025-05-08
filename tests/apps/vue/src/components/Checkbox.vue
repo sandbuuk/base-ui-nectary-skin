@@ -1,5 +1,7 @@
 <template>
   <sinch-checkbox
+    :name="name"
+    :value="value"
     :text="text"
     :disabled="isDisabled"
     :indeterminate="isIndeterminate"
@@ -13,8 +15,14 @@
 
 <script>
 import '@nectary/components/checkbox'
-
+import { getSearchKey } from '../utils'
 export default {
+  props: {
+    searchPrefix: {
+      type: String,
+      default: 'checkbox'
+    }
+  },
   methods: {
     onChange(e) {
       if (this.isControlled) {
@@ -27,28 +35,37 @@ export default {
     },
     onBlur() {
       window.dispatchEvent(new CustomEvent('sinch-checkbox-blur'))
+    },
+    getSearchParam(param) {
+      return this.$route.query[getSearchKey(param, this.searchPrefix)]
     }
   },
   computed: {
+    name() {
+      return this.getSearchParam('name')
+    },
+    value() {
+      return this.getSearchParam('value')
+    },
     text() {
-      return this.$route.query.text
+      return this.getSearchParam('text')
     },
     isDisabled() {
-      return this.$route.query.disabled != null
+      return this.getSearchParam('disabled') != null
     },
     isIndeterminate() {
-      return this.$route.query.indeterminate != null
+      return this.getSearchParam('indeterminate') != null
     },
     isInvalid() {
-      return this.$route.query.invalid != null
+      return this.getSearchParam('invalid') != null
     },
     isControlled() {
-      return this.$route.query.uncontrolled == null
+      return this.getSearchParam('uncontrolled') == null
     },
   },
   data() {
     return {
-      checked: this.$route.query.checked != null
+      checked: this.getSearchParam('checked') != null
     }
   }
 }

@@ -15,6 +15,7 @@ import {
   updateBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
+import { requestSubmitForm, setFormValue } from '../utils/form'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
 import templateHTML from './template.html'
 import {
@@ -56,6 +57,9 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #controller: AbortController | null = null
   #sizeContext: Context<'size'>
   #maskSymbols: ReturnType<typeof getMaskSymbols> | null = null
+  #internals: ElementInternals
+
+  static formAssociated = true
 
   constructor() {
     super()
@@ -64,6 +68,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    this.#internals = this.attachInternals()
     this.#$input = shadowRoot.querySelector('#input')!
     this.#$inputMask = shadowRoot.querySelector('#input-mask')!
     this.#$iconSlot = shadowRoot.querySelector('slot[name="icon"]')!
@@ -81,6 +86,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     super.connectedCallback()
 
     this.setAttribute('role', 'textbox')
+    this.#internals.role = 'textbox'
 
     if (this.#controller === null) {
       this.#controller = new AbortController()
@@ -90,6 +96,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       signal: this.#controller.signal,
     }
 
+    this.#$input.addEventListener('keydown', this.#onKeyDown, options)
     this.#$input.addEventListener('input', this.#onInput, options)
     this.#$input.addEventListener('cut', this.#onCut, options)
     this.#$input.addEventListener('copy', this.#onCopy, options)
@@ -126,8 +133,61 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     this.#controller = null
   }
 
+  formAssociatedCallback() {
+    setFormValue(this.#internals, this.#$input.value)
+  }
+
+  formResetCallback() {
+    this.#$input.value = ''
+    setFormValue(this.#internals, '')
+  }
+
+  formStateRestoreCallback(state: string | FormData | null) {
+    // * opt-in feature for backwards compatability
+    // * formStateRestoreCallback only works in the Light DOM
+    if (this.#internals.form === null || getBooleanAttribute(this.#internals.form, 'data-form-state-restore') === false) {
+      return
+    }
+
+    if (state !== null) {
+      const value = typeof state === 'string' ? state : state.get(this.name)
+
+      this.#$input.value = value?.toString() ?? ''
+      setFormValue(this.#internals, value?.toString() ?? '')
+    }
+  }
+
+  // This handler mimicks the behavior (with some exceptions) of the implicit form submission logic from the HTML spec:
+  // https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#implicit-submission
+  #onKeyDown = (e: KeyboardEvent) => {
+    const form = this.#internals.form
+
+    if (form === null) {
+      return
+    }
+
+    if (form.disabled === true) {
+      return
+    }
+
+    if (e.key === 'Enter') {
+      const submitSelectors = [
+        'sinch-button[form-type="submit"]',
+      ]
+
+      const formSubmitters = Array.from(form.querySelectorAll(submitSelectors.join(','))) as NectaryComponentVanilla<'sinch-button'>[]
+
+      const formSubmitter = formSubmitters.find((submitter) => !submitter.disabled) ?? null
+
+      if (formSubmitter !== null) {
+        requestSubmitForm(form, formSubmitter as NectaryComponentVanilla<'sinch-button'>)
+      }
+    }
+  }
+
   static get observedAttributes() {
     return [
+      'name',
       'type',
       'value',
       'placeholder',
@@ -144,12 +204,23 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
+      case 'name': {
+        if (isAttrEqual(oldVal, newVal)) {
+          return
+        }
+
+        updateAttribute(this.#$input, 'name', newVal)
+
+        break
+      }
+
       case 'type': {
         updateLiteralAttribute(this.#$input, inputTypes, 'type', newVal)
         updateAttribute(this.#$input, 'spellcheck', newVal === 'password' ? 'false' : null)
 
         break
       }
+
       case 'value': {
         const nextVal = newVal ?? ''
         const prevVal = this.#$input.value
@@ -168,6 +239,9 @@ defineCustomElement('sinch-input', class extends NectaryElement {
           const { value, placeholder } = splitValueAndMask(nextVal, this.#maskSymbols)
 
           this.#$input.value = value
+
+          setFormValue(this.#internals, value)
+
           this.#$inputMask.textContent = placeholder
 
           if (isElementFocused(this.#$input)) {
@@ -179,6 +253,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
         if (nextVal !== prevVal) {
           this.#$input.value = nextVal
+          setFormValue(this.#internals, nextVal)
 
           if (isElementFocused(this.#$input)) {
             this.#setSelectionRange(this.#selectionEnd, this.#selectionEnd)
@@ -209,6 +284,7 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
         this.ariaInvalid = isInvalid.toString()
         this.#$input.ariaInvalid = this.ariaInvalid
+        this.#internals.ariaInvalid = this.ariaInvalid
         updateBooleanAttribute(this, name, isInvalid)
 
         break
@@ -260,10 +336,19 @@ defineCustomElement('sinch-input', class extends NectaryElement {
 
       case 'aria-label': {
         this.#$input.ariaLabel = newVal
+        this.#internals.ariaLabel = newVal
 
         break
       }
     }
+  }
+
+  set name(value: string) {
+    updateAttribute(this, 'name', value)
+  }
+
+  get name(): string {
+    return getAttribute(this, 'name', '')
   }
 
   set type(value: TSinchInputType) {
@@ -540,13 +625,17 @@ defineCustomElement('sinch-input', class extends NectaryElement {
     const nextValue = this.#$input.value
     const prevValue = this.value
 
+    setFormValue(this.#internals, nextValue)
+
     if (prevValue !== nextValue) {
       const nextSelectionStart = this.#$input.selectionStart!
       const nextSelectionEnd = this.#$input.selectionEnd!
 
-      // Reset input value to enforce controlled state
-      this.#$input.value = prevValue
-      this.#setSelectionRange(this.#selectionStart, this.#selectionEnd)
+      // Only enforce controlled state if value attribute is present
+      if (this.hasAttribute('value')) {
+        this.#$input.value = prevValue
+        this.#setSelectionRange(this.#selectionStart, this.#selectionEnd)
+      }
 
       this.#selectionStart = nextSelectionStart
       this.#selectionEnd = nextSelectionEnd
@@ -766,10 +855,12 @@ defineCustomElement('sinch-input', class extends NectaryElement {
       const value = this.placeholder
 
       this.#$input.placeholder = value ?? ''
+      this.#internals.ariaPlaceholder = value ?? ''
       updateAttribute(this, 'aria-placeholder', value)
     } else {
       updateAttribute(this, 'aria-placeholder', null)
       this.#$input.placeholder = ''
+      this.#internals.ariaPlaceholder = ''
     }
   }
 

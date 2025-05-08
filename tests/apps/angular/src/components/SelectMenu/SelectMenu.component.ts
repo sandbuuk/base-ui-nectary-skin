@@ -1,9 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import "@nectary/components/select-menu";
 import "@nectary/components/select-menu-option";
 import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
-
+import { useComponentSearchParams } from "src/utils";
 const optionsLong: Record<string, TMenuValue> = {
   1: { text: "Option 1 value long long long", icon: "1" },
   2: { text: "Option 2", icon: "1", isDisabled: true },
@@ -40,16 +40,21 @@ type TMenuValue = {
   templateUrl: "./SelectMenu.component.html",
   styles: [":host{ display: contents; }"],
 })
-export class SelectMenuComponent {
-  value: string;
-  rows: number | null;
-  isMultiple: boolean;
-  withSection: boolean;
-  options: Record<string, TMenuValue>;
-  sectionedOptions: Record<string, TMenuValue[]>;
+export class SelectMenuComponent implements OnInit {
+  @Input() searchPrefix: string = 'select-menu';
+  name: string | null = null;
+  value: string | null = null;
+  rows: number | null = null;
+  isMultiple: boolean = false;
+  withSection: boolean = false;
+  options: Record<string, TMenuValue> = {};
+  sectionedOptions: Record<string, TMenuValue[]> = {};
 
-  constructor(private route: ActivatedRoute) {
-    const search = this.route.snapshot.queryParamMap;
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    const search = useComponentSearchParams(this.route.snapshot.queryParamMap, this.searchPrefix);
+    this.name = search.get("name")
     this.value = search.get("value") ?? "";
 
     const numVisibleValue = search.get("rows");

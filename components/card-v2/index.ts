@@ -173,7 +173,7 @@ defineCustomElement(
 
           const titleElement = this.querySelector('sinch-card-v2-title')
 
-          if (titleElement != null) {
+          if (titleElement !== null) {
             updateBooleanAttribute(titleElement, name, bool)
           }
 

@@ -62,6 +62,7 @@ import Title from './components/Title.vue'
 import ToastManager from './components/ToastManager.vue'
 import Toggle from './components/Toggle.vue'
 import Tooltip from './components/Tooltip.vue'
+import UncontrolledForm from './compositions/UncontrolledForm.vue'
 
 export default {
   data() {
@@ -148,6 +149,7 @@ export default {
     ToastManager,
     Toggle,
     Tooltip,
+    UncontrolledForm,
   }
 };
 </script>

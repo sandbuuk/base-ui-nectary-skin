@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/field'
 import '@nectary/components/input'
@@ -9,7 +9,7 @@ import '@nectary/components/button'
 import '@nectary/components/icon'
 
 export const DateInput: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('date-input')
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')
   const [isoValue, setIsoValue] = useState(search.get('isovalue') ?? '')

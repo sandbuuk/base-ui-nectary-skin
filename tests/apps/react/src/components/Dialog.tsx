@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
 import type { FC } from 'react'
 import '@nectary/components/dialog'
@@ -7,7 +7,7 @@ import '@nectary/components/button'
 import '@nectary/components/icon'
 
 export const Dialog: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('dialog')
   const title: string = search.get('title') ?? ''
   const content = search.get('content')
   const buttons = search.get('buttons') !== null

@@ -20,7 +20,8 @@
     "module": "es2020",
     "lib": [
       "esnext",
-      "dom"
+      "dom",
+      "dom.iterable"
     ],
     "paths": {
       "tslib": [

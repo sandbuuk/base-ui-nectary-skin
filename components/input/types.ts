@@ -6,8 +6,10 @@ export type TSinchInputType = 'text' | 'password' | 'number'
 export type TSinchInputClipboardEvent = CustomEvent<{ value: string, replaceWith: (value: string) => void }>
 
 export type TSinchInputProps = {
+  /** Identification for uncontrolled form submissions */
+  name?: string,
   /** Controlled value, doesn't change on its own and requres an onChange-value state loop */
-  value: string,
+  value?: string,
   /** Mask */
   mask?: string | null,
   /** Label that is used for a11y – might be different from `label` */

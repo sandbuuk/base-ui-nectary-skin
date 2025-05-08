@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/radio'
 import '@nectary/components/radio-option'
@@ -23,9 +23,15 @@ const singleOption = [{
   text: 'Option value 1',
 }]
 
-export const Radio: FC = () => {
-  const [search] = useSearchParams()
+interface RadioProps {
+  searchPrefix?: string,
+  slot?: string,
+}
+
+export const Radio: FC<RadioProps> = ({ searchPrefix = 'radio', slot }) => {
+  const [search] = useComponentSearchParams(searchPrefix)
   const [value, setValue] = useState(() => search.get('value') ?? '')
+  const name = search.get('name') ?? ''
   const isInvalid = search.get('invalid') !== null
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail
@@ -43,6 +49,8 @@ export const Radio: FC = () => {
 
   return (
     <sinch-radio
+      slot={slot}
+      name={name}
       value={value}
       on-change={onChange}
       aria-label="Radio"

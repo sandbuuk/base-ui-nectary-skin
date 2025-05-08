@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/time-picker'
 
 export const TimePicker: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('time-picker')
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

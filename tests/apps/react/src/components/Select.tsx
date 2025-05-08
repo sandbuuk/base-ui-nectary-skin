@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/field'
 import '@nectary/components/select-button'
@@ -31,7 +31,7 @@ const options: Record<string, TMenuValue> = {
 }
 
 export const Select: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('select')
   const [value, setValue] = useState<string>(search.get('value') ?? '')
   const [isOpen, setOpen] = useState(false)
   const onChange = (e: CustomEvent<string>) => {

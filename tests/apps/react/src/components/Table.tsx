@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/table'
 import '@nectary/components/table-row'
@@ -66,7 +66,7 @@ type TTableItem = {
 }
 
 export const Table: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('table')
   const example = search.get('example')
   const state: TTableItems = getTableItems({ hasLongLine: example === 'long' })
 

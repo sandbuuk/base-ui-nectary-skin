@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
@@ -30,10 +30,16 @@ const sectionedOptions: Record<string, TMenuValue[]> = {
   'Section 4': [{ text: 'Option 6', icon: '1', isDisabled: true }, { text: 'Option 7', icon: null }],
 }
 
-export const SelectMenu: FC = () => {
-  const [search] = useSearchParams()
+interface SelectMenuProps {
+  searchPrefix?: string,
+  slot?: string,
+}
+
+export const SelectMenu: FC<SelectMenuProps> = ({ searchPrefix = 'select-menu', slot }) => {
+  const [search] = useComponentSearchParams(searchPrefix)
   const isMultiple = search.get('multiple') !== null
   const [value, setValue] = useState(search.get('value') ?? '')
+  const name = search.get('name') ?? ''
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail
 
@@ -56,6 +62,8 @@ export const SelectMenu: FC = () => {
 
   return (
     <sinch-select-menu
+      slot={slot}
+      name={name}
       rows={rows}
       multiple={isMultiple}
       value={value}

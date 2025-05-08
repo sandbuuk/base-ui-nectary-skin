@@ -56,7 +56,7 @@ import Title from "./components/Title.vue";
 import ToastManager from "./components/ToastManager.vue";
 import Toggle from "./components/Toggle.vue";
 import Tooltip from "./components/Tooltip.vue";
-
+import UncontrolledForm from "./compositions/UncontrolledForm.vue";
 const routes = [
   { path: "/accordion", component: Accordion },
   { path: "/action-dropdown", component: ActionDropdown },
@@ -115,6 +115,12 @@ const routes = [
   { path: "/toast-manager", component: ToastManager },
   { path: "/toggle", component: Toggle },
   { path: "/tooltip", component: Tooltip },
+  {
+    path: "/composition",
+    children: [
+      { path: "uncontrolled-form", component: UncontrolledForm }
+    ]
+  }
 ];
 
 const router = createRouter({

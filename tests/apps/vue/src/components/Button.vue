@@ -1,5 +1,5 @@
 <template>
-  <sinch-button :type="type" :text="text" :disabled="isDisabled" :toggled="isToggled" :size="size" @--click="onClick"
+  <sinch-button :form-type="formType" :type="type" :text="text" :disabled="isDisabled" :toggled="isToggled" :size="size" @--click="onClick"
     @--focus="onFocus" @--blur="onBlur">
     <sinch-spinner v-if="hasSpinner" static :type="isSmall ? 'small' : 'medium'" slot="icon"></sinch-spinner>
     <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" v-if="hasIcon" slot="icon"></sinch-icon>
@@ -11,8 +11,14 @@
 import '@nectary/components/button'
 import '@nectary/components/icon'
 import '@nectary/components/spinner'
-
+import { getSearchKey } from '../utils'
 export default {
+  props: {
+    searchPrefix: {
+      type: String,
+      default: 'button'
+    }
+  },
   methods: {
     onClick() {
       window.dispatchEvent(new CustomEvent('sinch-button-click'))
@@ -22,32 +28,38 @@ export default {
     },
     onBlur() {
       window.dispatchEvent(new CustomEvent('sinch-button-blur'))
+    },
+    getSearchParam(param) {
+      return this.$route.query[getSearchKey(param, this.searchPrefix)]
     }
   },
   computed: {
+    formType() {
+      return this.getSearchParam('form-type')
+    },
     type() {
-      return this.$route.query.type
+      return this.getSearchParam('type')
     },
     text() {
-      return this.$route.query.text
+      return this.getSearchParam('text')
     },
     isDisabled() {
-      return this.$route.query.disabled != null
+      return this.getSearchParam('disabled') != null
     },
     isToggled() {
-      return this.$route.query.toggled != null
+      return this.getSearchParam('toggled') != null
     },
     size() {
-      return this.$route.query.size != null
+      return this.getSearchParam('size') != null
     },
     hasRightIcon() {
-      return this.$route.query['icon-right'] != null
+      return this.getSearchParam('icon-right') != null
     },
     hasIcon() {
-      return this.$route.query['icon'] != null
+      return this.getSearchParam('icon') != null
     },
     hasSpinner() {
-      return this.$route.query.spinner != null
+      return this.getSearchParam('spinner') != null
     },
   }
 }

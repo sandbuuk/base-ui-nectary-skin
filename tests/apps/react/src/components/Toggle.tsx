@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/toggle'
 
 export const Toggle: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('toggle')
   const [value, setValue] = useState(search.get('checked') !== null)
   const onChange = (e: CustomEvent<boolean>) => {
     const value = e.detail

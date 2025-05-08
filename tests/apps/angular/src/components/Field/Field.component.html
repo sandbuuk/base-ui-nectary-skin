@@ -6,21 +6,21 @@
   [attr.disabled]="isDisabled"
 >
   <sinch-help-tooltip
-    *ngIf="tooltipText != null"
-    slot="tooltip"
-    [attr.text]="tooltipText"
+  *ngIf="tooltipText != null"
+  slot="tooltip"
+  [attr.text]="tooltipText"
   ></sinch-help-tooltip>
   <sinch-input
-    slot="input"
-    [attr.placeholder]="placeholderText"
-    [attr.disabled]="isDisabled"
-    [attr.invalid]="invalidText != null"
-    [value]="value"
-    (-change)="onChange($event)"
+  slot="input"
+  [attr.placeholder]="placeholderText"
+  [attr.disabled]="isDisabled"
+  [attr.invalid]="invalidText != null"
+  [value]="value"
+  (-change)="onChange($event)"
   >
-    <sinch-icon icons-version="2" name="fa-magnifying-glass"
-      slot="icon"
-    ></sinch-icon>
-    <sinch-tag slot="right" text="text"></sinch-tag>
+  <sinch-icon icons-version="2" name="fa-magnifying-glass"
+    slot="icon"
+  ></sinch-icon>
+  <sinch-tag slot="right" text="text"></sinch-tag>
   </sinch-input>
 </sinch-field>

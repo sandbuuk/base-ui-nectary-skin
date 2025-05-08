@@ -55,6 +55,7 @@ import { TitleComponent } from '../components/Title/Title.component'
 import { ToastManagerComponent } from '../components/ToastManager/ToastManager.component'
 import { ToggleComponent } from '../components/Toggle/Toggle.component'
 import { TooltipComponent } from '../components/Tooltip/Tooltip.component'
+import { UncontrolledFormComponent } from '../compositions/UncontrolledForm/UncontrolledForm.component'
 import type { Routes } from '@angular/router'
 
 const appRoutes: Routes = [
@@ -115,6 +116,12 @@ const appRoutes: Routes = [
   { path: 'toast-manager', component: ToastManagerComponent },
   { path: 'toggle', component: ToggleComponent },
   { path: 'tooltip', component: TooltipComponent },
+  {
+    path: 'composition',
+    children: [
+      { path: 'uncontrolled-form', component: UncontrolledFormComponent }
+    ]
+  }
 ]
 
 export default appRoutes

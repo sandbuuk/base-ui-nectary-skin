@@ -1,4 +1,4 @@
-import type { TSinchButtonType } from './types'
+import type { TSinchButtonType, TSinchButtonFormType } from './types'
 
 export const typeValues: readonly TSinchButtonType[] = [
   'primary',
@@ -8,4 +8,10 @@ export const typeValues: readonly TSinchButtonType[] = [
   'cta-primary',
   'cta-secondary',
   'destructive',
+]
+
+export const formTypeValues: readonly TSinchButtonFormType[] = [
+  'submit',
+  'reset',
+  'button',
 ]

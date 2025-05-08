@@ -1,6 +1,6 @@
 {
   "name": "@nectary/scoped-custom-element-registry",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "publishConfig": {
     "access": "public"
   },

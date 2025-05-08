@@ -1,6 +1,8 @@
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
 export type TSinchTextareaProps = {
+  /** Identification for uncontrolled form submissions */
+  name?: string,
   /** Value */
   value: string,
   /** Text that appears in the text field when it has no value set */

@@ -1,4 +1,4 @@
-<sinch-radio [attr.value]="value" [attr.invalid]="isInvalid" (-change)="onChange($event)">
+<sinch-radio [attr.name]="name" [attr.value]="value" [attr.invalid]="isInvalid" (-change)="onChange($event)">
   <sinch-radio-option
     *ngFor="let opt of options"
     [attr.value]="opt.value"

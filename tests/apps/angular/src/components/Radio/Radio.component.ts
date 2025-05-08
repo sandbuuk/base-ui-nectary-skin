@@ -1,7 +1,8 @@
-import { Component } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/radio'
 import '@nectary/components/radio-option'
+import { useComponentSearchParams } from 'src/utils'
 
 const options = [{
   value: '1',
@@ -28,15 +29,19 @@ const singleOption = [{
   styles: [':host{ display: contents; }']
 })
 
-export class RadioComponent {
-  value: string
-  isControlled: boolean
-  isInvalid: boolean
-  options: any[]
+export class RadioComponent implements OnInit {
+  @Input() searchPrefix: string = 'radio';
+  name: string | null = null;
+  value: string | null = null;
+  isControlled: boolean = false;
+  isInvalid: boolean = false;
+  options: any[] = [];
 
-  constructor(private route: ActivatedRoute) {
-    const search = this.route.snapshot.queryParamMap
+  constructor(private route: ActivatedRoute) {}
 
+  ngOnInit() {
+    const search = useComponentSearchParams(this.route.snapshot.queryParamMap, this.searchPrefix);
+    this.name = search.get('name')
     this.isControlled = search.get('uncontrolled') === null
     this.isInvalid = search.get('invalid') !== null
     this.value = search.get('value') ?? ''

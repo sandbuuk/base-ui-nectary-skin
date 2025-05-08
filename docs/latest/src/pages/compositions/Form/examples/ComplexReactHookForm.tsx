@@ -61,7 +61,7 @@ const nameRowStyles: CSSProperties = {
   gap: 16,
 }
 
-export const ComplexFormExample: FC = () => {
+export const ComplexReactHookFormExample: FC = () => {
   const [countryDropDownOpen, setCountryDropDownOpen] = useState(false)
   const [result, setResult] = useState<[string, unknown][]>([])
 
@@ -81,7 +81,7 @@ export const ComplexFormExample: FC = () => {
   }, [])
 
   return (
-    <div style={formContainerStyles}>
+    <form style={formContainerStyles} onSubmit={handleSubmit(onSubmit, (e) => console.error(e))}>
       <div style={nameRowStyles}>
         <Controller
           name="firstname"
@@ -251,12 +251,12 @@ export const ComplexFormExample: FC = () => {
       <sinch-button
         text="Submit"
         aria-label="Submit"
+        form-type="submit"
         type="primary"
-        onClick={handleSubmit(onSubmit, (e) => console.error(e))}
       />
       {result.map(([key, value]) => (
         <sinch-text key={key} type="m">{`${key}: ${value}`}</sinch-text>
       ))}
-    </div>
+    </form>
   )
 }

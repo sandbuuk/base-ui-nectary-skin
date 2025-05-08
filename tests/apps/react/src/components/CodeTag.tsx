@@ -1,10 +1,10 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/code-tag'
 import '@nectary/components/text'
 
 export const CodeTag: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('code-tag')
   const text = search.get('text') ?? ''
   const isEllipsis = search.get('ellipsis') !== null
 

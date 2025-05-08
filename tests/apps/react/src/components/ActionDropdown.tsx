@@ -4,7 +4,7 @@ import '@nectary/components/button'
 import '@nectary/components/popover'
 import '@nectary/components/icon'
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 
 type TMenuValue = {
@@ -21,7 +21,7 @@ const options: Record<string, TMenuValue> = {
 }
 
 export const ActionDropdown: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('action-dropdown')
   const [isOpen, setOpen] = useState(false)
   const onOptionClick = (value: string) => {
     window.dispatchEvent(new CustomEvent('sinch-action-dropdown-click', { detail: value }))

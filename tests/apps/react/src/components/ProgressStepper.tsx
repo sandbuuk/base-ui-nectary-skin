@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/progress-stepper'
 import '@nectary/components/progress-stepper-item'
 
 export const ProgressStepper: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('progress-stepper')
   const [step, setStep] = useState(() => search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

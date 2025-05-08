@@ -1,6 +1,8 @@
 import { Example } from '~/components/Example'
 import { SimpleFormExample } from './examples/SimpleForm.tsx?example'
-import { ComplexFormExample } from './examples/ComplexForm.tsx?example'
+import { ComplexReactHookFormExample } from './examples/ComplexReactHookForm.tsx?example'
+import { UncontrolledFormExample } from './examples/UncontrolledForm.tsx?example'
+import { ComplexFormikFormExample } from './examples/ComplexFormikForm.tsx?example'
 
 # Examples
 
@@ -8,9 +10,40 @@ import { ComplexFormExample } from './examples/ComplexForm.tsx?example'
 
 <Example Component={SimpleFormExample}/>
 
-## Recommendation for validation on more complex forms
+## Complex (Formik)
 
-Use `react-hook-form` for validation. It is a simple and powerful library for managing form state and validation.
-You can combine `zod` and `@hookform/resolvers/zod` for schema-based validation.
+`Formik` is a mature and comprehensive library for managing form state and validation.
+This example uses `Yup` for schema validation, which provides a straightforward API for defining validation rules.
 
-<Example Component={ComplexFormExample}/>
+<Example Component={ComplexFormikFormExample}/>
+
+## Complex (react-hook-form)
+
+`react-hook-form` is a lightweight and performant library for managing form state and validation.
+You can combine `zod` and `@hookform/resolvers/zod` for schema-based validation, which is the recommended approach for type-safe forms.
+
+<Example Component={ComplexReactHookFormExample}/>
+
+## Uncontrolled Forms
+
+Nectary supports uncontrolled forms where the state is handled by the DOM itself.
+These input related components are form-associated which means they can participate in native form submissions:
+* [Input](?path=/components/input/examples)
+* [Checkbox](?path=/components/checkbox/examples)
+* [Radio](?path=/components/radio/examples)
+* [SelectMenu](?path=/components/selectmenu/examples)
+* [Textarea](?path=/components/textarea/examples)
+* [DatePicker](?path=/components/datepicker/examples)
+
+<Example Component={UncontrolledFormExample}/>
+
+### Enable form state restoration
+Form state restoration is a browser feature that preserves user input after page reloads, navigation, or when the browser suggests autocomplete options.
+This means users won't lose their form entries if they accidentally refresh the page or navigate away and return.
+In native HTML forms, this behavior is enabled by default.
+
+If you want to enable this behavior with Nectary inputs, you can add the `data-form-state-restore="true"` attribute to the form element.
+
+```html
+<form data-form-state-restore="true">
+```

@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -eux pipefail
 
+# Install system dependencies
+apt-get update -y
+apt-get install -y libpng-dev build-essential python3
+
 # @sinch for internally published packages on gitlab repository.
 npm config set --global @sinch:registry https://gitlab.com/api/v4/packages/npm/
 npm config set --global -- '//gitlab.com/api/v4/packages/npm/:_authToken' '${CI_JOB_TOKEN}'

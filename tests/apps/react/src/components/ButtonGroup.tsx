@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/button-group'
 import '@nectary/components/button-group-item'
@@ -6,7 +6,7 @@ import '@nectary/components/spinner'
 import '@nectary/components/icon'
 
 export const ButtonGroup: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('button-group')
   const isDisabled = search.get('disabled') != null
   const isToggled = search.get('toggled') != null
   const hasRightIcon = search.get('icon-right') != null

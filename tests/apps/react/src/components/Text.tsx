@@ -1,11 +1,11 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/text'
 import '@nectary/components/link'
 import '@nectary/components/code-tag'
 
 export const Text: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('text')
   const text = search.get('text') ?? ''
   const type: any = search.get('type')
   const isInline = search.get('inline') !== null

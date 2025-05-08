@@ -1,10 +1,15 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/checkbox'
 
-export const Checkbox: FC = () => {
-  const [search] = useSearchParams()
+interface CheckboxProps {
+  searchPrefix?: string,
+  slot?: string,
+}
+
+export const Checkbox: FC<CheckboxProps> = ({ searchPrefix = 'checkbox', slot }) => {
+  const [search] = useComponentSearchParams(searchPrefix)
   const [value, setValue] = useState(search.get('checked') !== null)
   const onChange = (e: CustomEvent<boolean>) => {
     const value = e.detail
@@ -18,9 +23,14 @@ export const Checkbox: FC = () => {
   const isIndeterminate = search.get('indeterminate') != null
   const isInvalid = search.get('invalid') != null
   const text: any = search.get('text') ?? undefined
+  const name = search.get('name') ?? ''
+  const valueData = search.get('value') ?? ''
 
   return (
     <sinch-checkbox
+      slot={slot}
+      name={name}
+      value={valueData}
       text={text}
       disabled={isDisabled}
       indeterminate={isIndeterminate}

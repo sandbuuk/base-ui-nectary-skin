@@ -1,16 +1,18 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import "@nectary/components/textarea";
 import "@nectary/components/button";
 import "@nectary/components/tag";
 import "@nectary/components/icon";
 import { ActivatedRoute } from "@angular/router";
-
+import { useComponentSearchParams } from "src/utils";
 @Component({
   selector: "textarea-component",
   templateUrl: "./Textarea.component.html",
   styles: [":host{ display: contents; }"],
 })
 export class TextareaComponent {
+  @Input() searchPrefix: string = 'textarea';
+  name: string | null = null;
   value: string;
   isControlled: boolean;
   isInvalid: boolean;
@@ -22,8 +24,9 @@ export class TextareaComponent {
   hasBottom: boolean;
 
   constructor(private route: ActivatedRoute) {
-    const search = this.route.snapshot.queryParamMap;
+    const search = useComponentSearchParams(this.route.snapshot.queryParamMap, this.searchPrefix);
 
+    this.name = search.get("name")
     this.value = search.get("value") ?? "";
     this.isControlled = search.get("uncontrolled") === null;
     this.isInvalid = search.get("invalid") !== null;

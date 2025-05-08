@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/tile-control'
 import '@nectary/components/tile-control-option'
@@ -7,7 +7,7 @@ import '@nectary/components/icon'
 import '@nectary/assets/icons-branded/contact'
 
 export const TileControl: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('tile-control')
   const [value, setValue] = useState('')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail

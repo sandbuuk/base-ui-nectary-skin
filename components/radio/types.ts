@@ -1,8 +1,13 @@
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
 export type TSinchRadioProps = {
-  value: string,
+  /** Identification for uncontrolled form submissions */
+  name?: string,
+  /** Value */
+  value?: string,
+  /** Invalid state */
   invalid?: boolean,
+  /** Label that is used for a11y – might be different from `label` */
   'aria-label': string,
 }
 

@@ -1,10 +1,15 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/date-picker'
 
-export const DatePicker: FC = () => {
-  const [search] = useSearchParams()
+interface DatePickerProps {
+  searchPrefix?: string,
+  slot?: string,
+}
+
+export const DatePicker: FC<DatePickerProps> = ({ searchPrefix = 'date-picker', slot }) => {
+  const [search] = useComponentSearchParams(searchPrefix)
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail
@@ -16,9 +21,12 @@ export const DatePicker: FC = () => {
   const max = search.get('max') ?? ''
   const locale = search.get('locale') ?? ''
   const isRange = search.get('range') != null
+  const name = search.get('name') ?? ''
 
   return (
     <sinch-date-picker
+      slot={slot}
+      name={name}
       min={min}
       max={max}
       locale={locale}

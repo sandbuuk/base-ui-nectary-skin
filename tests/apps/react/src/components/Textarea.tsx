@@ -1,14 +1,20 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/textarea'
 import '@nectary/components/button'
 import '@nectary/components/tag'
 import '@nectary/components/icon'
 
-export const Textarea: FC = () => {
-  const [search] = useSearchParams()
+interface TextareaProps {
+  searchPrefix?: string,
+  slot?: string,
+}
+
+export const Textarea: FC<TextareaProps> = ({ searchPrefix = 'textarea', slot }) => {
+  const [search] = useComponentSearchParams(searchPrefix)
   const [value, setValue] = useState(search.get('value') ?? '')
+  const name = search.get('name') ?? ''
   const onChange = (e: CustomEvent<string>) => {
     const value = e.detail
 
@@ -35,6 +41,8 @@ export const Textarea: FC = () => {
 
   return (
     <sinch-textarea
+      slot={slot}
+      name={name}
       invalid={isInvalid}
       placeholder={placeholderText}
       disabled={isDisabled}

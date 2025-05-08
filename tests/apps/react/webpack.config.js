@@ -9,7 +9,7 @@ module.exports = {
   entry: require.resolve('./src/index.tsx'),
   output: {
     chunkFilename: '[name].js',
-    publicPath: 'auto',
+    publicPath: '/',
     pathinfo: true,
   },
   resolve: {

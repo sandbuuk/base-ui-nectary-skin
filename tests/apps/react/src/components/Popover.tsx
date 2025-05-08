@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/popover'
 import '@nectary/components/button'
 import '@nectary/components/text'
 
 const PopoverExampleOffset: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('popover')
   const [isOpen, setOpen] = useState(search.get('open') !== null)
 
   const onClose = () => {
@@ -94,7 +94,7 @@ const PopoverExampleSwitchContent: FC = () => {
 }
 
 export const Popover: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('popover')
   const [isOpen, setOpen] = useState(search.get('open') !== null)
   const orientation: any = search.get('orientation')
   const isModal = search.get('modal') !== null

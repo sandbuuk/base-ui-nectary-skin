@@ -1,5 +1,5 @@
 <template>
-  <sinch-select-menu :rows="rows" :multiple="isMultiple" :value="value" @--change="onChange">
+  <sinch-select-menu :rows="rows" :multiple="isMultiple" :name="name" :value="value" @--change="onChange">
     <template v-if="isSectionedExample === false">
       <sinch-select-menu-option v-for="[key, value] in items" :key="key" :value="key" :text="value.text"
         :disabled="value.isDisabled">
@@ -22,7 +22,7 @@
 import '@nectary/components/select-menu'
 import '@nectary/components/select-menu-option'
 import '@nectary/components/icon'
-
+import { getSearchKey } from '../utils'
 const options = {
   1: { text: 'Option 1 value long long long', icon: '1' },
   2: { text: 'Option 2', icon: '1', isDisabled: true },
@@ -42,22 +42,34 @@ const sectionedOptions = {
 }
 
 export default {
+  props: {
+    searchPrefix: {
+      type: String,
+      default: 'select-menu'
+    }
+  },
   methods: {
+    getSearchParam(param) {
+      return this.$route.query[getSearchKey(param, this.searchPrefix)]
+    },
     onChange(e) {
       window.dispatchEvent(new CustomEvent('sinch-select-menu-change', {detail: e.detail}))
       this.value = e.detail
     }
   },
   computed: {
+    name() {
+      return this.getSearchParam('name')
+    },
     rows() {
-      const val = this.$route.query.rows
+      const val = this.getSearchParam('rows')
       return val != null ? parseInt(val) : null
     },
     isMultiple() {
-      return this.$route.query.multiple != null
+      return this.getSearchParam('multiple') != null
     },
     items() {
-      return this.$route.query.example === 'lots'
+      return this.getSearchParam('example') === 'lots'
         ? Object.entries(options)
         : Object.entries(options).slice(0, 4)
     },
@@ -65,12 +77,12 @@ export default {
       return Object.entries(sectionedOptions)
     },
     isSectionedExample() {
-      return this.$route.query.section === 'true'
+      return this.getSearchParam('section') === 'true'
     }
   },
   data() {
     return {
-      value: this.$route.query.value ?? ''
+      value: this.getSearchParam('value') ?? ''
     }
   }
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/color-menu'
 import '@nectary/components/color-menu-option'
@@ -13,7 +13,7 @@ const vibrantColors = ['violet', 'blue', 'green', 'yellow', 'orange', 'red', 'pi
 const colors = [...lightColors, ...vibrantColors, ...darkColors]
 
 export const ColorSelect: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('color-select')
   const [isOpen, setOpen] = useState(false)
   const [value, setValue] = useState(search.get('value') ?? '')
   const onChange = (e: CustomEvent<string>) => {

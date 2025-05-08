@@ -1,10 +1,10 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/file-drop'
 import '@nectary/components/button'
 
 export const FileDrop: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('file-drop')
   const isMultiple = search.get('multiple') !== null
   const isInvalid = search.get('invalid') !== null
   const isDisabled = search.get('disabled') !== null

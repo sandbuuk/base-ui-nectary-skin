@@ -1,6 +1,10 @@
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
 export type TSinchCheckboxProps = {
+  /** Identification for uncontrolled form submissions */
+  name?: string,
+  /** Value for uncontrolled form submissions, default: `on` if checked */
+  value?: string,
   /** Checked */
   checked?: boolean,
   /** Indeterminate */

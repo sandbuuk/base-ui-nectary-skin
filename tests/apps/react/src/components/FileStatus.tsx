@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { useComponentSearchParams } from '../usePrefixedSearchParams'
 import type { FC } from 'react'
 import '@nectary/components/file-status'
 import '@nectary/components/text'
@@ -7,7 +7,7 @@ import '@nectary/components/button'
 import '@nectary/components/icon'
 
 export const FileStatus: FC = () => {
-  const [search] = useSearchParams()
+  const [search] = useComponentSearchParams('file-status')
   const type: any = search.get('type')
   const filename = search.get('filename') ?? ''
   const hasDescription = search.get('description') !== null
