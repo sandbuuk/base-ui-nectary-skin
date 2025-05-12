@@ -333,5 +333,5 @@ publish-icon-fonts:
     - BUCKET_ID='saas-fonts'
     - DISTRIBUTION_ID='E2702PBO3GP1PT'
     - env
-    - aws s3 cp fonts/ s3://${BUCKET_ID}/ --recursive --include "*"
+    - aws s3 cp fonts/ s3://${BUCKET_ID}/ --recursive --include "*" --acl public-read
     - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
