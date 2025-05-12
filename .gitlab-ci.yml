@@ -324,6 +324,7 @@ publish-icon-fonts:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
         - svg-icons/**/*
+      when: on_success
     - when: never
   ## TODO: add a visual test for the icons
   manual_confirmation: 'Are you sure you want to update the icons files?'

@@ -41,3 +41,13 @@ The tests run in the pipeline on GitLab, but if you need to run them locally, in
 ## Generate CSS variables from tokens
 
 For the base theme `pnpm tokens:base`
+
+## Update icons
+
+We have a pipeline that generates fonts for the icons, updates the code automatically for the new icons and upload the fonts to S3, to use it:
+
+1. Add the svg to `svg-icons`.
+2. Push it to the repo.
+3. Everything else should be automatic except the actual uploading that is manual for MRs.
+
+WARNING: DO NOT DELETE ICONS SINCE FONTS ARE USED EVERYWHERE THE EFFECT MIGHT BE AUTOMATIC.
