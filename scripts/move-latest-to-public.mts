@@ -4,7 +4,7 @@ import { rimraf } from 'rimraf'
 
 const VERSION = process.argv[process.argv.length - 1]
 
-if (!/[0-9]\.[0-9]\.[0-9]/.test(VERSION)) {
+if (!/[0-9]+\.[0-9]+\.[0-9]+/.test(VERSION)) {
   throw new Error(`Wrong format for version: ${VERSION}`)
 }
 
