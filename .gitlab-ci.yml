@@ -331,7 +331,7 @@ publish-icon-fonts:
     GIT_LFS_SKIP_SMUDGE: 1
   script:
     - BUCKET_ID='saas-fonts'
-    - DISTRIBUTION_ID='E2702dPBO3GP1PT'
+    - DISTRIBUTION_ID='E2702PBO3GP1PT'
     - env
     - aws s3 cp fonts/ s3://${BUCKET_ID}/ --recursive --include "*"
     - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
