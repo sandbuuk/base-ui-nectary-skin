@@ -24,18 +24,11 @@ const allowReject = async (promise: Promise<any>) => {
 async function getIconsFiles(): Promise<string[]> {
   const components: string[] = []
 
+  await import('./clean-icons-name')
+
   for (const file of await fs.readdir(svgIconDir)) {
     if (file.endsWith('.svg')) {
-      // Some files have a warning sign, see: https://sinch.slack.com/archives/C06343D66A0/p1723729348809699?thread_ts=1721908202.309869&cid=C06343D66A0
-      // Also, apparently those two warning signs aren't the same...
-      if (file.includes('⚠️ ') || file.includes('⚠️ ')) {
-        const fixedName = file.replace('⚠️ ', '').replace('⚠️ ', '')
-
-        await fs.rename(path.join(svgIconDir, file), path.join(svgIconDir, fixedName))
-        components.push(fixedName)
-      } else {
-        components.push(file)
-      }
+      components.push(file)
     }
   }
 
@@ -131,7 +124,7 @@ const generateDocUtils = async (iconFiles: string[]) => {
 
   const template = `
 import type { TSinchIcons } from '@nectary/components/icon/generated-icon-type'
-export const sinchIconNames: TSinchIcons[] = [${iconFiles.map((file) => `"${file.replace('.svg', '')}"`).join(',')}]
+export const sinchIconNames: TSinchIcons[] = [${iconFiles.map((file) => `"${file.replace('.svg', '')}"`).join(',\n')}]
   `
 
   await fs.writeFile(path.join(docsDir, 'Icon', 'examples', 'icons-list.ts'), template)
