@@ -19,7 +19,7 @@ import { AssetsPage } from '~/pages/03-Assets Library'
 import { TestingPage } from '~/pages/04-Testing'
 import { TokensPage } from '~/pages/05-Token'
 import { TypeScriptPage } from '~/pages/06-TypeScript'
-import { FAQPage } from '~/pages/07-FAQ'
+import { EventHandlersPage } from '~/pages/07-EventHandlers'
 import { V3MigrationPage } from '~/pages/08-V3Migration'
 import { NotFoundPage } from '~/pages/NotFound'
 import './styles.css'
@@ -132,7 +132,7 @@ export const App: FC = () => {
                   <NavigationItem path="/testing" text="Testing"/>
                   <NavigationItem path="/tokens" text="Tokens"/>
                   <NavigationItem path="/typescript" text="TypeScript"/>
-                  <NavigationItem path="/faq" text="FAQ"/>
+                  <NavigationItem path="/event-handlers" text="Event Handlers"/>
                   <NavigationItem path="/V3Migration" text="V3 Migration"/>
                 </NavigationList>
               </NavigationGroup>
@@ -155,7 +155,7 @@ export const App: FC = () => {
             <Route path="/testing" element={<TestingPage/>}/>
             <Route path="/tokens" element={<TokensPage/>}/>
             <Route path="/typescript" element={<TypeScriptPage/>}/>
-            <Route path="/faq" element={<FAQPage/>}/>
+            <Route path="/event-handlers" element={<EventHandlersPage/>}/>
             <Route path="/V3Migration" element={<V3MigrationPage/>}/>
             <Route path="/labComponents/*" element={<ComponentsPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>

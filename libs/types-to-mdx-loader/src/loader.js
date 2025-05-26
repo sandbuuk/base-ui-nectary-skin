@@ -37,7 +37,7 @@ const getComment = (prop) => {
 }
 
 const generateTable = async (entries, exportedName) => {
-  const frameworks = exportedName === 'ElementEventsTable' ? ['Vanilla', 'React'] : ['']
+  const frameworks = exportedName === 'ElementEventsTable' ? ['Vanilla', 'React ≤18'] : ['']
   let result = ''
 
   for (const framework of frameworks) {
@@ -46,7 +46,7 @@ const generateTable = async (entries, exportedName) => {
       ? '| Name | Parameters | Return Type | Description |\n| --- | --- | --- | --- |'
       : '| Name | Type | Description |\n| --- | --- | --- |'
 
-    const eventNamePrefix = framework === 'React' ? 'on' : ''
+    const eventNamePrefix = framework === 'React ≤18' ? 'on' : ''
 
     for (const entry of entries) {
       if (exportedName === 'ElementMethodsTable') {
