@@ -1,9 +1,9 @@
 import { SimpleLayout, lazyScrollIntoView } from 'docs-common'
 import type { FC } from 'react'
 
-const Component = lazyScrollIntoView(() => import(/* webpackChunkName: "FAQ" */'./index.mdx'))
+const Component = lazyScrollIntoView(() => import(/* webpackChunkName: "EventHandlers" */'./index.mdx'))
 
-export const FAQPage: FC = () => (
+export const EventHandlersPage: FC = () => (
   <SimpleLayout>
     <Component/>
   </SimpleLayout>

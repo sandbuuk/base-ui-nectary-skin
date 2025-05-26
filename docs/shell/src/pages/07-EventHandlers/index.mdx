@@ -5,9 +5,17 @@ import { OnDashFocusExample } from './examples/OnDashFocus.tsx?example'
 import reactEventListenersImage from './images/react-event-listeners.png'
 import eventPropagationImage from './images/event-propagation.gif'
 
-# ❔ Frequently asked question
+## Why do I need to use on-change instead of onChange in React?
 
-## Why it's on-change instead of onChange handler in React?
+### 🆕 React 19
+
+With [React 19](https://react.dev/blog/2024/12/05/react-19#support-for-custom-elements) comes full support for custom elements.
+This means that you can (and should) now use camelCase (e.g. `onChange`) naming for event handlers in React.
+
+⚠️ If you try to use kebab-case (e.g. `on-change`) in React 19, you'll notice that events are fired twice.
+This is because Nectary has a custom event bridging mechanism to support eariler versions of React.
+
+---
 
 ### Pre-reading
 
