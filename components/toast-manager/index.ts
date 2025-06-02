@@ -257,7 +257,7 @@ declare global {
 
 declare module 'react' {
   namespace JSX {
-    interface IntrinsicElements {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
       'sinch-toast-manager': NectaryComponentReact<'sinch-toast-manager'>,
     }
   }

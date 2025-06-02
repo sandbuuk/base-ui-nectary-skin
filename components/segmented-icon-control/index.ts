@@ -160,7 +160,7 @@ declare global {
 
 declare module 'react' {
   namespace JSX {
-    interface IntrinsicElements {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
       'sinch-segmented-icon-control': NectaryComponentReact<'sinch-segmented-icon-control'>,
     }
   }

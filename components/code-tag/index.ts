@@ -66,7 +66,7 @@ declare global {
 
 declare module 'react' {
   namespace JSX {
-    interface IntrinsicElements {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
       'sinch-code-tag': NectaryComponentReact<'sinch-code-tag'>,
     }
   }

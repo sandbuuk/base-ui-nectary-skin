@@ -232,7 +232,7 @@ declare global {
 
 declare module 'react' {
   namespace JSX {
-    interface IntrinsicElements {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
       'sinch-link': NectaryComponentReact<'sinch-link'>,
     }
   }
