@@ -25,7 +25,7 @@ declare global {
 
 declare module 'react' {
   namespace JSX {
-    interface IntrinsicElements {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
       'sinch-illustration-meeting-scrum-2': TSinchIllustrationReact,
     }
   }

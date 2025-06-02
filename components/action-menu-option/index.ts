@@ -133,7 +133,7 @@ declare global {
 
 declare module 'react' {
   namespace JSX {
-    interface IntrinsicElements {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
       'sinch-action-menu-option': NectaryComponentReact<'sinch-action-menu-option'>,
     }
   }
