@@ -130,3 +130,9 @@
 .example + .alert {
   margin-block-start: 16px;
 }
+
+hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 1.5em 0;
+}

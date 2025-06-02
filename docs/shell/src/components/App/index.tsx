@@ -13,14 +13,14 @@ import type { FC } from 'react'
 import { useThemeName } from '~/context/theme-control'
 import { useOnRouteChange } from '~/hooks'
 import { LandingPage } from '~/pages/00-Landing'
-import { ComponentsLibraryPage } from '~/pages/01-Components Library'
-import { ThemesPage } from '~/pages/02-Themes'
-import { AssetsPage } from '~/pages/03-Assets Library'
-import { TestingPage } from '~/pages/04-Testing'
-import { TokensPage } from '~/pages/05-Token'
-import { TypeScriptPage } from '~/pages/06-TypeScript'
-import { EventHandlersPage } from '~/pages/07-EventHandlers'
-import { V3MigrationPage } from '~/pages/08-V3Migration'
+import { QuickStartPage } from '~/pages/01-Quick Start'
+import { QuickStartMFEPage } from '~/pages/02-Quick Start - MFE'
+import { ThemesPage } from '~/pages/04-Themes'
+import { TestingPage } from '~/pages/05-Testing'
+import { TokensPage } from '~/pages/06-Token'
+import { TypeScriptPage } from '~/pages/07-TypeScript'
+import { EventHandlersPage } from '~/pages/08-EventHandlers'
+import { V3MigrationPage } from '~/pages/09-V3Migration'
 import { NotFoundPage } from '~/pages/NotFound'
 import './styles.css'
 import '@nectary/theme-base'
@@ -126,9 +126,9 @@ export const App: FC = () => {
               <NavigationGroup text="About">
                 <NavigationList>
                   <NavigationItem path="/" text="Home"/>
-                  <NavigationItem path="/components" text="Components"/>
+                  <NavigationItem path="/quick-start" text="Quick Start"/>
+                  <NavigationItem path="/quick-start-mfe" text="Quick Start - MFE"/>
                   <NavigationItem path="/themes" text="Themes"/>
-                  <NavigationItem path="/assets" text="Assets"/>
                   <NavigationItem path="/testing" text="Testing"/>
                   <NavigationItem path="/tokens" text="Tokens"/>
                   <NavigationItem path="/typescript" text="TypeScript"/>
@@ -148,10 +148,11 @@ export const App: FC = () => {
         <Suspense fallback={<Loading/>}>
           <Routes>
             <Route path="/" element={<LandingPage/>}/>
-            <Route path="/intro" element={<ComponentsLibraryPage/>}/>
-            <Route path="/components" element={<ComponentsLibraryPage/>}/>
+            <Route path="/quick-start" element={<QuickStartPage/>}/>
+            <Route path="/quick-start-mfe" element={<QuickStartMFEPage/>}/>
+            <Route path="/intro" element={<QuickStartPage/>}/>
+            <Route path="/components" element={<QuickStartPage/>}/>
             <Route path="/themes" element={<ThemesPage/>}/>
-            <Route path="/assets" element={<AssetsPage/>}/>
             <Route path="/testing" element={<TestingPage/>}/>
             <Route path="/tokens" element={<TokensPage/>}/>
             <Route path="/typescript" element={<TypeScriptPage/>}/>

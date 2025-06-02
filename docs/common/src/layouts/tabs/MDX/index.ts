@@ -5,4 +5,12 @@ import type { MDXComponents } from 'mdx/types'
 export const tabMdxComponents: MDXComponents = {
   ...commonComponents,
   ...tabHeaders,
+  h1: () => {
+    return null
+  },
+}
+
+export const tabMdxComponentsFull: MDXComponents = {
+  ...commonComponents,
+  ...tabHeaders,
 }

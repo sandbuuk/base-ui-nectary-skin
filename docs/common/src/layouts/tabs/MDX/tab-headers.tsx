@@ -7,8 +7,18 @@ import type { FC, PropsWithChildren } from 'react'
 const headers = commonHeaders as Record<string, FC<PropsWithChildren>>
 
 export const tabHeaders: MDXComponents = {
-  h1: () => {
-    return null
+  h1: ({ children }) => {
+    const text = children as string
+    const id = slugify(text, 1)
+
+    const href = `#${id}`
+
+    return (
+      <>
+        <PageNavMenuItem text={text} level={0} href={href}/>
+        <headers.h1>{children}</headers.h1>
+      </>
+    )
   },
   h2: ({ children }) => {
     const text = children as string
