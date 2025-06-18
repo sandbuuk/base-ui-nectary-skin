@@ -83,7 +83,7 @@
   "font": {
     "body": {
       "emphasize": "700 16px/24px \"DM Sans\", \"Arial\", sans-serif",
-      "emphasize-s": "700 14px/20px \"DM Sans\", \"Arial\", sans-serif",
+      "emphasize-s": "700 14px/22px \"DM Sans\", \"Arial\", sans-serif",
       "emphasize-xs": "700 12px/20px \"DM Sans\", \"Arial\", sans-serif",
       "link": "400 16px/24px \"DM Sans\", \"Arial\", sans-serif",
       "m": "400 16px/24px \"DM Sans\", \"Arial\", sans-serif",
