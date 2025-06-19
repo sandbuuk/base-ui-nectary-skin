@@ -18,8 +18,8 @@
   --sinch-comp-avatar-container-color-dark-yellow-background: var(--sinch-ref-color-honey-700);
   --sinch-comp-avatar-container-color-dark-yellow-foreground: var(--sinch-ref-color-honey-200);
   --sinch-comp-avatar-container-color-default-background: var(--sinch-ref-color-neutral-200);
-  --sinch-comp-avatar-container-color-default-foreground: var(--sinch-ref-color-neutral-900);
-  --sinch-comp-avatar-container-color-gray-background: var(--sinch-ref-color-neutral-500);
+  --sinch-comp-avatar-container-color-default-foreground: var(--sinch-ref-color-neutral-600);
+  --sinch-comp-avatar-container-color-gray-background: var(--sinch-ref-color-neutral-600);
   --sinch-comp-avatar-container-color-gray-foreground: var(--sinch-sys-color-basic-pure);
   --sinch-comp-avatar-container-color-green-background: var(--sinch-ref-color-grass-400);
   --sinch-comp-avatar-container-color-green-foreground: var(--sinch-ref-color-neutral-900);

@@ -6,7 +6,7 @@
   --sinch-sys-color-border-disabled: var(--sinch-ref-color-neutral-100);
   --sinch-sys-color-border-strong: var(--sinch-ref-color-neutral-400);
   --sinch-sys-color-border-subtle: var(--sinch-ref-color-neutral-200);
-  --sinch-sys-color-feedback-danger-default: var(--sinch-ref-color-raspberry-500);
+  --sinch-sys-color-feedback-danger-default: #D63F3F;
   --sinch-sys-color-feedback-danger-strong: var(--sinch-ref-color-raspberry-700);
   --sinch-sys-color-feedback-danger-subtle: var(--sinch-ref-color-raspberry-200);
   --sinch-sys-color-feedback-info-default: var(--sinch-ref-color-ocean-500);
