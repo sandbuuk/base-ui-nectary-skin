@@ -6627,7 +6627,7 @@
           "default": {
             "background": {
               "initial": {
-                "value": "{ref.color.neutral.300}",
+                "value": "{ref.color.neutral.600}",
                 "type": "color"
               }
             },
