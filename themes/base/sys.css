@@ -49,7 +49,7 @@
   --sinch-sys-color-text-disabled: var(--sinch-ref-color-neutral-400);
   --sinch-sys-color-text-muted: var(--sinch-ref-color-neutral-600);
   --sinch-sys-font-body-emphasize: var(--sinch-ref-typography-font-weight-700) var(--sinch-ref-typography-font-size-16)/var(--sinch-ref-typography-line-height-24) var(--sinch-ref-typography-font-family-main);
-  --sinch-sys-font-body-emphasize-s: var(--sinch-ref-typography-font-weight-700) var(--sinch-ref-typography-font-size-14)/var(--sinch-ref-typography-line-height-20) var(--sinch-ref-typography-font-family-main);
+  --sinch-sys-font-body-emphasize-s: var(--sinch-ref-typography-font-weight-700) var(--sinch-ref-typography-font-size-14)/var(--sinch-ref-typography-line-height-22) var(--sinch-ref-typography-font-family-main);
   --sinch-sys-font-body-emphasize-xs: var(--sinch-ref-typography-font-weight-700) var(--sinch-ref-typography-font-size-12)/var(--sinch-ref-typography-line-height-20) var(--sinch-ref-typography-font-family-main);
   --sinch-sys-font-body-link: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-16)/var(--sinch-ref-typography-line-height-24) var(--sinch-ref-typography-font-family-main);
   --sinch-sys-font-body-m: var(--sinch-ref-typography-font-weight-400) var(--sinch-ref-typography-font-size-16)/var(--sinch-ref-typography-line-height-24) var(--sinch-ref-typography-font-family-main);
