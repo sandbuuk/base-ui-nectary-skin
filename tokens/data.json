@@ -1539,13 +1539,13 @@
                 "type": "color"
               },
               "foreground": {
-                "value": "{ref.color.neutral.900}",
+                "value": "{ref.color.neutral.600}",
                 "type": "color"
               }
             },
             "gray": {
               "background": {
-                "value": "{ref.color.neutral.500}",
+                "value": "{ref.color.neutral.600}",
                 "type": "color"
               },
               "foreground": {
