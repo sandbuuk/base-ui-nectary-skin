@@ -3164,7 +3164,7 @@
             "default": {
               "background": {
                 "initial": {
-                  "value": "{ref.color.neutral.500}",
+                  "value": "{ref.color.neutral.600}",
                   "type": "color"
                 }
               },
@@ -5780,7 +5780,7 @@
           },
           "gray": {
             "background": {
-              "value": "{ref.color.neutral.500}",
+              "value": "{ref.color.neutral.600}",
               "type": "color"
             },
             "foreground": {
