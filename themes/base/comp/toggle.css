@@ -1,7 +1,7 @@
 .nectary-theme-base {
   --sinch-comp-toggle-color-checked-background-initial: var(--sinch-sys-color-primary-default);
   --sinch-comp-toggle-color-checked-disabled-background-initial: var(--sinch-sys-color-primary-disabled);
-  --sinch-comp-toggle-color-default-background-initial: var(--sinch-ref-color-neutral-300);
+  --sinch-comp-toggle-color-default-background-initial: var(--sinch-ref-color-neutral-600);
   --sinch-comp-toggle-color-default-knob-background-initial: var(--sinch-sys-color-surface-primary-default);
   --sinch-comp-toggle-color-default-label-initial: var(--sinch-sys-color-text-default);
   --sinch-comp-toggle-color-default-outline-focus: var(--sinch-sys-color-focus);
