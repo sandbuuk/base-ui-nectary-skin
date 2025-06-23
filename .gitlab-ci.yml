@@ -304,7 +304,7 @@ commit-fonts:
     - echo $CI_COMMIT_REF_NAME
     - git checkout $CI_COMMIT_REF_NAME
     - git add -A
-    - git commit -m "update icon fonts"
+    - 'git commit -m "feat(components): update icon fonts"'
     - git push  -o ci.skip "https://gitlab-ci-token:$FONT_PUSH_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
 
 publish-icon-fonts:
