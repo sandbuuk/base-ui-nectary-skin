@@ -1,3 +1,5 @@
+import pkg from '../package.json'
+
 const nectaryDefinitions = new Map<string, CustomElementConstructor>()
 let nectaryRegistry: CustomElementRegistry | null = null
 
@@ -36,5 +38,36 @@ export const resetLabRegistry = () => {
 declare global {
   interface ShadowRootInit {
     customElements?: CustomElementRegistry,
+  }
+}
+
+export class NectaryElement extends HTMLElement {
+  attachShadow(options?: Partial<ShadowRootInit>): ShadowRoot {
+    return super.attachShadow({
+      mode: 'open',
+      delegatesFocus: false,
+      customElements: nectaryRegistry!,
+      ...options,
+    })
+  }
+
+  version = pkg.version
+
+  get focusable() {
+    return false
+  }
+
+  #isDomConnected = false
+
+  connectedCallback() {
+    this.#isDomConnected = true
+  }
+
+  disconnectedCallback() {
+    this.#isDomConnected = false
+  }
+
+  get isDomConnected(): boolean {
+    return this.#isDomConnected
   }
 }

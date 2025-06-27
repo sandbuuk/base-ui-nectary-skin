@@ -1,0 +1,126 @@
+<style>
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font: inherit;
+}
+
+.root {
+  --logo-color: var(--sinch-sys-color-surface-secondary-default);
+
+  block-size: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.root > header {
+  display: flex;
+  gap: 8px;
+  padding: 12px 4px;
+  background: var(--sinch-sys-color-surface-tertiary-default);
+  font: var(--sinch-sys-font-body-m);
+}
+
+.root > header > img {
+  block-size: 24px;
+  inline-size: 24px;
+  margin-inline-start: 8px;
+  border-radius: 100%;
+  background: var(--logo-color);
+}
+
+.root > header > h1 {
+  flex: 1;
+  overflow: hidden;
+  min-inline-size: 0;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+
+.root > div {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+  padding: 8px;
+  margin-block-end: 8px;
+}
+
+.root > div > img {
+  block-size: 64px;
+  inline-size: 64px;
+  border-radius: 100%;
+  align-self: center;
+  background: var(--logo-color);
+}
+
+.root > div > p {
+  padding-inline: 24px;
+  font: var(--sinch-sys-font-body-xs);
+  text-align: center;
+  text-wrap: balance;
+  word-wrap: break-word;
+}
+
+.root > div > hr {
+  border-block-end: 1px solid var(--sinch-sys-color-border-subtle);
+}
+
+.root > footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: var(--sinch-sys-font-body-xs);
+}
+
+.root > footer > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 24px;
+  background: var(--sinch-sys-color-surface-primary-active);
+}
+
+.root > footer > div > span {
+  flex: 1;
+}
+
+.message {
+  padding: 8px 12px;
+  margin-inline-end: 8px;
+  border-radius: 16px;
+  border-end-start-radius: 0;
+  background: var(--sinch-sys-color-feedback-info-subtle);
+  font: var(--sinch-sys-font-body-xs);
+}
+</style>
+<section class="root">
+  <header>
+    <sinch-icon icons-version="2" name="fa-arrow-left"></sinch-icon>
+    <img id="header-logo" alt="" />
+    <h1 id="brand-name">Brand name</h1>
+    <sinch-icon icons-version="2" name="fa-shield-check"></sinch-icon>
+    <sinch-icon icons-version="2" name="fa-ellipsis-vertical"></sinch-icon>
+  </header>
+  <div>
+    <img id="main-logo" alt="" />
+    <p id="brand-description">Brand description</p>
+    <hr />
+    <div id="messages-container"></div>
+  </div>
+  <footer>
+    <sinch-icon icons-version="2" name="fa-circle-plus"></sinch-icon>
+    <sinch-icon icons-version="2" name="fa-camera"></sinch-icon>
+    <div>
+      <span>RCS Message</span>
+      <sinch-icon icons-version="2" name="fa-face-smile"></sinch-icon>
+      <sinch-icon icons-version="2" name="microphone"></sinch-icon>
+    </div>
+  </footer>
+</section>

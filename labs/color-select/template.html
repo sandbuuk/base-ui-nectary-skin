@@ -1,0 +1,19 @@
+<sinch-popover
+  aria-label="Select color"
+  orientation="bottom-right"
+  modal
+>
+  <sinch-select-button
+    slot="target"
+    placeholder="Select color"
+    aria-label="Open color select"
+  >
+    <sinch-color-swatch slot="icon"></sinch-color-swatch>
+  </sinch-select-button>
+  <sinch-color-menu
+    slot="content"
+    aria-label="Color menu"
+  >
+    <sinch-color-menu-option value="violet"></sinch-color-menu-option>
+  </sinch-color-menu>
+</sinch-popover>

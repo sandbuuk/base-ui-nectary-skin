@@ -16,7 +16,6 @@
     "build": "NODE_ENV=production && rimraf lib/ && tsc"
   },
   "dependencies": {
-    "@lit-labs/scoped-registry-mixin": "^1.0.3",
     "@nectary/components": "workspace:*",
     "solid-element": "1.8.1",
     "solid-js": "1.8.19"
@@ -24,7 +23,6 @@
   "devDependencies": {
     "@types/node": "^18.17.17",
     "@types/react": "^18.2.21",
-    "lit": "^3.1.2",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"

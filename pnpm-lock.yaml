@@ -626,9 +626,6 @@ importers:
 
   labs:
     dependencies:
-      '@lit-labs/scoped-registry-mixin':
-        specifier: ^1.0.3
-        version: 1.0.3
       '@nectary/components':
         specifier: workspace:*
         version: link:../components
@@ -645,9 +642,6 @@ importers:
       '@types/react':
         specifier: ^18.2.21
         version: 18.3.5
-      lit:
-        specifier: ^3.1.2
-        version: 3.2.0
       rimraf:
         specifier: ^3.0.2
         version: 3.0.2
@@ -2449,9 +2443,6 @@ packages:
 
   '@leichtgewicht/ip-codec@2.0.5':
     resolution: {integrity: sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==}
-
-  '@lit-labs/scoped-registry-mixin@1.0.3':
-    resolution: {integrity: sha512-+DywdIJIIR30K0UGdWkn3iPlVvuSfmvo4qUlPTz1hEizksPD4Vl8TrwuXwi4HTIQ2XugYK3WXaWfWqqLEzbrxg==}
 
   '@lit-labs/ssr-dom-shim@1.2.1':
     resolution: {integrity: sha512-wx4aBmgeGvFmOKucFKY+8VFJSYZxs9poN3SDNQFF6lT6NrQUnHiPB2PWz2sc4ieEcAaYYzN+1uWahEeTq2aRIQ==}
@@ -12280,11 +12271,6 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
 
   '@leichtgewicht/ip-codec@2.0.5': {}
-
-  '@lit-labs/scoped-registry-mixin@1.0.3':
-    dependencies:
-      '@lit/reactive-element': 2.0.4
-      lit: 3.2.0
 
   '@lit-labs/ssr-dom-shim@1.2.1': {}
 
