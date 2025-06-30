@@ -1,0 +1,50 @@
+<style>
+a {
+  display: grid;
+  grid-template:
+    "icon contact" auto
+    "icon label  " auto
+    / auto 1fr;
+  align-items: center;
+  gap: 0 16px;
+  padding: 8px 16px;
+  border-block-end:
+    1px solid
+    var(--sinch-sys-color-surface-secondary-active);
+  color: currentcolor;
+  word-break: break-all;
+  text-decoration: none;
+
+  & > sinch-icon {
+    grid-area: icon;
+  }
+
+  & > #contact {
+    grid-area: contact;
+
+    &::before {
+      content: "\200b";
+    }
+  }
+
+  & > #label {
+    grid-area: label;
+
+    &::before {
+      content: "\200b";
+    }
+  }
+
+  &[inert] {
+    --sinch-global-color-icon: currentcolor;
+
+    color: var(--sinch-sys-color-text-muted);
+  }
+}
+</style>
+
+<a target="_blank">
+  <sinch-icon icons-version="2"></sinch-icon>
+  <span id="contact"></span>
+  <p id="label"></p>
+</a>

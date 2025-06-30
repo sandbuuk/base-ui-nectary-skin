@@ -5,7 +5,8 @@ import { createSignal } from 'solid-js' // SolidJS reactive primitives
 import html from 'solid-js/html' // HTML template literal for SolidJS
 import pkg from './package.json' // Package info for versioning
 import './phone-preview-rcs-channel-actions' // Web component for primary contact buttons
-import { Info } from './phone-preview-rcs-channel-info' // Info component for detailed contact information
+import './phone-preview-rcs-channel-info' // Web component for detailed contact information
+import './phone-preview-rcs-channel-info-option' // Web component for individual contact options
 import { Options } from './phone-preview-rcs-channel-options' // Options component for settings view
 import { Tabs } from './phone-preview-rcs-channel-tabs' // Tabs component for navigation
 import { defineCustomElement } from './utils' // Utility for defining custom elements
@@ -140,7 +141,17 @@ export const RcsChannelPreview = (props: RcsChannelProps) => {
       <!-- Tab navigation -->
       <${Tabs} color=${() => props.color} tab=${tab} onTab=${setTab} />
       <!-- Conditional content based on active tab -->
-      ${() => (tab() === 0 ? html`<${Info} ...${props} />` : html`<${Options} />`)}
+      ${() => (tab() === 0
+    ? html`<sinch-labs-phone-preview-rcs-channel-info>
+      ${props.phones.map(({ label, number }) =>
+      html`<sinch-labs-phone-preview-rcs-channel-info-option type="phone" contact=${number} label=${label}></sinch-labs-phone-preview-rcs-channel-info-option>`)}
+      ${props.websites.map(({ label, url }) =>
+      html`<sinch-labs-phone-preview-rcs-channel-info-option type="website" contact=${url} label=${label}></sinch-labs-phone-preview-rcs-channel-info-option>`)}
+      ${props.emails.map(({ label, address }) =>
+      html`<sinch-labs-phone-preview-rcs-channel-info-option type="email" contact=${address} label=${label}></sinch-labs-phone-preview-rcs-channel-info-option>`)}
+      </sinch-labs-phone-preview-rcs-channel-info>`
+    : html`<${Options} />`
+  )}
     </section>
   `
 }
