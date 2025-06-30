@@ -15,6 +15,7 @@ import { useOnRouteChange } from '~/hooks'
 import { LandingPage } from '~/pages/00-Landing'
 import { QuickStartPage } from '~/pages/01-Quick Start'
 import { QuickStartMFEPage } from '~/pages/02-Quick Start - MFE'
+import { LabsPage } from '~/pages/03-Labs'
 import { ThemesPage } from '~/pages/04-Themes'
 import { TestingPage } from '~/pages/05-Testing'
 import { TokensPage } from '~/pages/06-Token'
@@ -158,6 +159,7 @@ export const App: FC = () => {
             <Route path="/typescript" element={<TypeScriptPage/>}/>
             <Route path="/event-handlers" element={<EventHandlersPage/>}/>
             <Route path="/V3Migration" element={<V3MigrationPage/>}/>
+            <Route path="/labComponents" element={<LabsPage/>}/>
             <Route path="/labComponents/*" element={<ComponentsPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
             <Route path="/compositions/*" element={<ComponentsPage/>}/>
