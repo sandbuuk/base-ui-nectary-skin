@@ -1,0 +1,27 @@
+<style>
+.tabs {
+  --highlight-color: var(--sinch-sys-color-text-default);
+
+  display: flex;
+
+  & > button {
+    flex: 1;
+    padding-block-end: 10px;
+    border-block-end: 2px solid transparent;
+    outline: none;
+    background: transparent;
+    color: var(--sinch-sys-color-text-disabled);
+    font: var(--sinch-sys-font-desktop-title-xs);
+
+    &.active {
+      color: var(--sinch-sys-color-primary-default);
+      border-block-end: 2px solid var(--highlight-color);
+    }
+  }
+}
+</style>
+
+<section class="tabs" id="tabs-container">
+  <button>Info</button>
+  <button>Options</button>
+</section>

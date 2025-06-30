@@ -7,8 +7,8 @@ import pkg from './package.json' // Package info for versioning
 import './phone-preview-rcs-channel-actions' // Web component for primary contact buttons
 import './phone-preview-rcs-channel-info' // Web component for detailed contact information
 import './phone-preview-rcs-channel-info-option' // Web component for individual contact options
+import './phone-preview-rcs-channel-tabs' // Web component for tab navigation
 import { Options } from './phone-preview-rcs-channel-options' // Options component for settings view
-import { Tabs } from './phone-preview-rcs-channel-tabs' // Tabs component for navigation
 import { defineCustomElement } from './utils' // Utility for defining custom elements
 
 // CSS styles for the RCS channel preview component
@@ -139,7 +139,11 @@ export const RcsChannelPreview = (props: RcsChannelProps) => {
         email=${() => props.emails.at(0)?.address ?? ''}
       ></sinch-labs-phone-preview-rcs-channel-actions>
       <!-- Tab navigation -->
-      <${Tabs} color=${() => props.color} tab=${tab} onTab=${setTab} />
+      <sinch-labs-phone-preview-rcs-channel-tabs 
+        color=${() => props.color} 
+        active-tab=${tab} 
+        on:-tab-change=${(e: CustomEvent) => setTab(e.detail)}
+      ></sinch-labs-phone-preview-rcs-channel-tabs>
       <!-- Conditional content based on active tab -->
       ${() => (tab() === 0
     ? html`<sinch-labs-phone-preview-rcs-channel-info>
