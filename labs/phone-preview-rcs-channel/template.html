@@ -1,0 +1,74 @@
+<style>
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font: inherit;
+}
+
+:host {
+  --banner-color: var(--sinch-sys-color-surface-tertiary-active);
+  --logo-color: var(--sinch-sys-color-surface-secondary-default);
+
+  display: flex;
+  flex-flow: column;
+  color: var(--sinch-sys-color-text-default);
+}
+
+#banner-img {
+  block-size: 70px;
+  margin-block-end: -40px;
+  background: var(--banner-color);
+}
+
+#logo-img {
+  block-size: 64px;
+  inline-size: 64px;
+  border-radius: 100%;
+  background: var(--logo-color);
+  align-self: center;
+}
+
+#brand-name {
+  padding: 8px 24px;
+  font: var(--sinch-sys-font-body-m);
+  text-align: center;
+  text-wrap: balance;
+  word-wrap: break-word;
+}
+
+#brand-description {
+  padding-inline: 24px;
+  font: var(--sinch-sys-font-body-xs);
+  text-align: center;
+  text-wrap: balance;
+  word-wrap: break-word;
+}
+
+#actions {
+  align-self: center;
+  padding-block: 32px 24px;
+}
+
+#tabs {
+  padding-block-end: 8px;
+}
+
+#info-container {
+  display: block;
+}
+
+#options-container {
+  display: none;
+}
+</style>
+
+<img id="banner-img" alt="" />
+<img id="logo-img" alt="" />
+<h1 id="brand-name">Brand name</h1>
+<p id="brand-description">Brand description</p>
+<sinch-labs-phone-preview-rcs-channel-actions id="actions"></sinch-labs-phone-preview-rcs-channel-actions>
+<sinch-labs-phone-preview-rcs-channel-tabs id="tabs"></sinch-labs-phone-preview-rcs-channel-tabs>
+<sinch-labs-phone-preview-rcs-channel-info id="info-container"></sinch-labs-phone-preview-rcs-channel-info>
+<sinch-labs-phone-preview-rcs-channel-options id="options-container"></sinch-labs-phone-preview-rcs-channel-options>
