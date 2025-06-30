@@ -60,7 +60,7 @@ export class PhonePreviewRcsChannelTabs extends NectaryElement {
 
   get activeTab(): number {
     const value = this.getAttribute('active-tab')
-    
+
     return (value !== null) ? parseInt(value, 10) : 0
   }
 
@@ -78,7 +78,7 @@ export class PhonePreviewRcsChannelTabs extends NectaryElement {
 
     // Update active tab state
     const buttons = this.#tabsContainer.querySelectorAll('button')
-    
+
     buttons.forEach((button, index) => {
       if (index === this.activeTab) {
         button.classList.add('active')
@@ -90,11 +90,11 @@ export class PhonePreviewRcsChannelTabs extends NectaryElement {
 
   #onTabClick = (event: Event) => {
     const target = event.target as HTMLElement
-    
+
     if (target.tagName === 'BUTTON') {
       const buttons = Array.from(this.#tabsContainer.querySelectorAll('button'))
       const clickedIndex = buttons.indexOf(target as HTMLButtonElement)
-      
+
       if (clickedIndex !== -1) {
         this.activeTab = clickedIndex
         this.dispatchEvent(new CustomEvent('-tab-change', {
