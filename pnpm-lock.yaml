@@ -629,12 +629,6 @@ importers:
       '@nectary/components':
         specifier: workspace:*
         version: link:../components
-      solid-element:
-        specifier: 1.8.1
-        version: 1.8.1(solid-js@1.8.19)
-      solid-js:
-        specifier: 1.8.19
-        version: 1.8.19
     devDependencies:
       '@types/node':
         specifier: ^18.17.17
@@ -3929,9 +3923,6 @@ packages:
 
   compare-func@2.0.0:
     resolution: {integrity: sha512-zHig5N+tPWARooBnb0Zx1MFcdfpyJrfTJ3Y5L+IFvUm8rM74hHz66z0gw0x4tijh5CorKkKUCnW82R2vmpeCRA==}
-
-  component-register@0.8.6:
-    resolution: {integrity: sha512-ULwqqIglogJSqm6YpPisl6W38jORlplZDg7yNpGmjj+emczvQZ+AVUnSTD5WH3JNnwl7ZwIJw5w2tyfD0V+Ejg==}
 
   compressible@2.0.18:
     resolution: {integrity: sha512-AF3r7P5dWxL8MxyITRMlORQNaOA2IkAFaTr4k7BUumjPtRpGDTZpl0Pb1XCO6JeDCBdp126Cgs9sMxqSjgYyRg==}
@@ -8518,16 +8509,6 @@ packages:
   serialize-javascript@6.0.2:
     resolution: {integrity: sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==}
 
-  seroval-plugins@1.1.1:
-    resolution: {integrity: sha512-qNSy1+nUj7hsCOon7AO4wdAIo9P0jrzAMp18XhiOzA6/uO5TKtP7ScozVJ8T293oRIvi5wyCHSM4TrJo/c/GJA==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      seroval: ^1.0
-
-  seroval@1.1.1:
-    resolution: {integrity: sha512-rqEO6FZk8mv7Hyv4UCj3FD3b6Waqft605TLfsCe/BiaylRpyyMC0b+uA5TJKawX3KzMrdi3wsLbCaLplrQmBvQ==}
-    engines: {node: '>=10'}
-
   serve-index@1.9.1:
     resolution: {integrity: sha512-pXHfKNP4qujrtteMrSBb0rc8HJ9Ms/GrXwcUtUtD5s4ewDJI8bT3Cz2zTVRMKtri49pLx2e0Ya8ziP5Ya2pZZw==}
     engines: {node: '>= 0.8.0'}
@@ -8641,14 +8622,6 @@ packages:
   socks@2.8.3:
     resolution: {integrity: sha512-l5x7VUUWbjVFbafGLxPWkYsHIhEvmF85tbIeFZWc8ZPtoMyybuEhL7Jye/ooC4/d48FgOjSJXgsF/AJPYCW8Zw==}
     engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
-
-  solid-element@1.8.1:
-    resolution: {integrity: sha512-YYVVKQSZC2Le/rvkNoQzMq1WWUe5+guW4t+b8N9P65oMagJYz6FbmVOHKw/49xcry+seCxYUlNGHx6BDcFOgyg==}
-    peerDependencies:
-      solid-js: ^1.8.18
-
-  solid-js@1.8.19:
-    resolution: {integrity: sha512-h8z/TvTQYsf894LM9Iau/ZW2iAKrCzAWDwjPhMcXnonmW1OIIihc28wp82b1wwei1p81fH5+gnfNOe8RzLbDRQ==}
 
   sort-keys-length@1.0.1:
     resolution: {integrity: sha512-GRbEOUqCxemTAk/b32F2xa8wDTs+Z1QHOkbhJDQTvv/6G3ZkbJ+frYWsTcc7cBB3Fu4wy4XlLCuNtJuMn7Gsvw==}
@@ -14126,8 +14099,6 @@ snapshots:
       array-ify: 1.0.0
       dot-prop: 5.3.0
 
-  component-register@0.8.6: {}
-
   compressible@2.0.18:
     dependencies:
       mime-db: 1.53.0
@@ -19533,12 +19504,6 @@ snapshots:
     dependencies:
       randombytes: 2.1.0
 
-  seroval-plugins@1.1.1(seroval@1.1.1):
-    dependencies:
-      seroval: 1.1.1
-
-  seroval@1.1.1: {}
-
   serve-index@1.9.1:
     dependencies:
       accepts: 1.3.8
@@ -19687,17 +19652,6 @@ snapshots:
     dependencies:
       ip-address: 9.0.5
       smart-buffer: 4.2.0
-
-  solid-element@1.8.1(solid-js@1.8.19):
-    dependencies:
-      component-register: 0.8.6
-      solid-js: 1.8.19
-
-  solid-js@1.8.19:
-    dependencies:
-      csstype: 3.1.3
-      seroval: 1.1.1
-      seroval-plugins: 1.1.1(seroval@1.1.1)
 
   sort-keys-length@1.0.1:
     dependencies:

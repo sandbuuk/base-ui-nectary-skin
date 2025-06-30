@@ -16,9 +16,7 @@
     "build": "NODE_ENV=production && rimraf lib/ && tsc"
   },
   "dependencies": {
-    "@nectary/components": "workspace:*",
-    "solid-element": "1.8.1",
-    "solid-js": "1.8.19"
+    "@nectary/components": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^18.17.17",
