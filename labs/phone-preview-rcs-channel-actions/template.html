@@ -1,0 +1,44 @@
+<style>
+.actions {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  gap: 24px;
+  font: var(--sinch-sys-font-body-xs);
+}
+
+.actions > a {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 2px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.actions > a[inert] {
+  --sinch-global-color-icon: currentcolor;
+
+  color: var(--sinch-sys-color-text-muted);
+}
+</style>
+
+<section class="actions">
+  <!-- Call button -->
+  <a id="call-action" target="_blank">
+    <sinch-icon icons-version="2" name="fa-phone" class="icon-link"></sinch-icon>
+    Call
+  </a>
+
+  <!-- Website button -->
+  <a id="website-action" target="_blank">
+    <sinch-icon icons-version="2" name="fa-earth-americas" name="public" class="icon-link"></sinch-icon>
+    Website
+  </a>
+
+  <!-- Email button -->
+  <a id="email-action" target="_blank">
+    <sinch-icon icons-version="2" name="envelope" name="mail" class="icon-link"></sinch-icon>
+    Email
+  </a>
+</section>

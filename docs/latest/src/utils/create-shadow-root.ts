@@ -1,6 +1,6 @@
 export const createShadowRoot = (element: HTMLElement, registry: CustomElementRegistry) => {
   const shadowRoot = element.attachShadow({
-    mode: 'closed',
+    mode: 'open',
     customElements: registry,
   })
 
