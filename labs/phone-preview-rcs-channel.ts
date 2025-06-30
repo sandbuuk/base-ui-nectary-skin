@@ -1,11 +1,26 @@
-import '@nectary/components/icon'
-import { customElement } from 'solid-element'
-import { createSignal, For } from 'solid-js'
-import html from 'solid-js/html'
-import pkg from './package.json'
-import { defineCustomElement } from './utils'
-import type { Accessor } from 'solid-js'
+// Import required dependencies for the RCS channel preview component
+import '@nectary/components/icon' // Icon component from the Nectary design system
+import { customElement } from 'solid-element' // SolidJS custom element wrapper
+import { createSignal } from 'solid-js' // SolidJS reactive primitives
+import html from 'solid-js/html' // HTML template literal for SolidJS
+import pkg from './package.json' // Package info for versioning
+import { Actions } from './phone-preview-rcs-channel-actions' // Actions component for primary contact buttons
+import { Info } from './phone-preview-rcs-channel-info' // Info component for detailed contact information
+import { Options } from './phone-preview-rcs-channel-options' // Options component for settings view
+import { Tabs } from './phone-preview-rcs-channel-tabs' // Tabs component for navigation
+import { defineCustomElement } from './utils' // Utility for defining custom elements
 
+// CSS styles for the RCS channel preview component
+// This creates a mobile phone interface mockup that displays brand information
+// and contact options in a format similar to how RCS (Rich Communication Services)
+// channels appear on mobile devices
+//
+// Key style features:
+// - Mobile-first responsive design
+// - CSS custom properties for theming (brand colors)
+// - Grid layouts for contact information
+// - Tab navigation with active state styling
+// - Proper accessibility considerations (focus states, semantic HTML)
 const style = `
 :where(*, *::before, *::after) {
   box-sizing: border-box;
@@ -52,7 +67,7 @@ const style = `
     word-wrap: break-word;
   }
 
-  & > .actions {
+    & > .actions {
     align-self: center;
     padding-block: 32px 24px;
   }
@@ -61,263 +76,45 @@ const style = `
     padding-block-end: 8px;
   }
 }
-
-.actions {
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-auto-flow: column;
-  gap: 24px;
-  font: var(--sinch-sys-font-body-xs);
-
-  & > a {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    gap: 2px;
-    color: inherit;
-    text-decoration: none;
-
-    &[inert] {
-      --sinch-global-color-icon: currentColor;
-      color: var(--sinch-sys-color-text-muted);
-    }
-  }
-}
-
-
-.info {
-  display: flex;
-  flex-flow: column;
-  font: var(--sinch-sys-font-body-xs);
-
-  & > a {
-    display: grid;
-    grid-template:
-      "icon contact" auto
-      "icon label  " auto
-      / auto 1fr;
-    align-items: center;
-    gap: 0 16px;
-    padding: 8px 16px;
-    border-block-end: 1px solid
-      var(--sinch-sys-color-surface-secondary-active);
-    color: currentColor;
-    word-break: break-all;
-    text-decoration: none;
-
-    & > .icon-link {
-      grid-area: icon;
-    }
-
-    & > span {
-      grid-area: contact;
-
-      &::before {
-        content: "\\200b";
-      }
-    }
-
-    & > p {
-      grid-area: label;
-
-      &::before {
-        content: "\\200b";
-      }
-    }
-
-    &[inert] {
-      --sinch-global-color-icon: currentColor;
-      color: var(--sinch-sys-color-text-muted);
-    }
-  }
-}
-
-.tabs {
-  --highlight-color: var(--sinch-sys-color-text-default);
-  display: flex;
-
-  & > button {
-    flex: 1;
-    padding-block-end: 10px;
-    border-block-end: 2px solid transparent;
-    outline: none;
-    background: transparent;
-    color: var(--sinch-sys-color-text-disabled);
-    font: var(--sinch-sys-font-desktop-title-xs);
-
-    &.active {
-      color: var(--sinch-sys-color-primary-default);
-      border-block-end: 2px solid var(--highlight-color);
-    }
-  }
-}
-
-
-.options {
-  display: flex;
-  flex-flow: column;
-  font: var(--sinch-sys-font-body-xs);
-
-  & > header {
-    padding-block-end: 8px;
-  }
-
-  & > span {
-    font: var(--sinch-sys-font-body-xxs);
-  }
-
-  & > button {
-    padding: 4px;
-    outline: none;
-    background: transparent;
-    text-align: start;
-  }
-
-  & > hr {
-    border-color: var(--sinch-sys-color-surface-secondary-active);
-  }
-}
 `
 
+// TypeScript interface defining the props structure for RCS channel data
+// This represents all the brand information that can be displayed in the preview
 interface RcsChannelProps {
-  name: string,
-  description: string,
-  color: string,
-  banner: string,
-  logo: string,
-  phones: { label: string, number: string }[],
-  websites: { label: string, url: string }[],
-  emails: { label: string, address: string }[],
+  name: string, // Brand/company name
+  description: string, // Brand description text
+  color: string, // Brand primary color (hex/rgb/css color)
+  banner: string, // URL to banner image
+  logo: string, // URL to brand logo image
+  phones: { label: string, number: string }[], // Array of phone contacts
+  websites: { label: string, url: string }[], // Array of website links
+  emails: { label: string, address: string }[], // Array of email contacts
 }
-
-const Actions = (props: RcsChannelProps) => {
-  const number = () => props.phones.at(0)?.number ?? ''
-  const url = () => props.websites.at(0)?.url ?? ''
-  const email = () => props.emails.at(0)?.address ?? ''
-  const numberHref = () => `tel:${number()}`
-  const urlHref = url
-  const emailHref = () => `mailto:${email()}`
-
-  return html`
-    <section class="actions">
-      <a inert=${() => number() === ''} target="_blank" href=${numberHref}>
-        <sinch-icon icons-version="2" name="fa-phone" class="icon-link" />
-        Call
-      </a>
-      <a inert=${() => url() === ''} target="_blank" href=${urlHref}>
-        <sinch-icon icons-version="2" name="fa-earth-americas" name="public" class="icon-link" />
-        Website
-      </a>
-      <a inert=${() => email() === ''} target="_blank" href=${emailHref}>
-        <sinch-icon icons-version="2" name="envelope" name="mail" class="icon-link" />
-        Email
-      </a>
-    </section>
-  `
-}
-
-const Info = (props: RcsChannelProps) => {
-  const phones = () =>
-    ((props.phones.length > 0)
-      ? props.phones
-      : [{ label: 'Contact us', number: '+1234567890' }])
-  const websites = () =>
-    ((props.websites.length > 0)
-      ? props.websites
-      : [{ label: 'Contact us', url: 'https://company.com' }])
-  const emails = () =>
-    ((props.emails.length > 0)
-      ? props.emails
-      : [{ label: 'Contact us', address: 'mail@company.com' }])
-
-  return html`
-    <section class="info">
-      <${For} each=${phones}>
-        ${({ label, number }: { label: string, number: string }) => html`
-          <a
-            inert=${() => props.phones.length === 0}
-            target="_blank"
-            href=${`tel:${number}`}
-          >
-            <sinch-icon icons-version="2" name="fa-phone" class="icon-link" />
-            <span>${number}</span>
-            <p>${label}</p>
-          </a>
-        `}
-      <//>
-      <${For} each=${websites}>
-        ${({ label, url }: { label: string, url: string }) => html`
-          <a inert=${() => props.websites.length === 0} target="_blank" href=${url}>
-            <sinch-icon icons-version="2" name="fa-earth-americas" name="public" class="icon-link" />
-            <span>${url}</span>
-            <p>${label}</p>
-          </a>
-        `}
-      <//>
-      <${For} each=${emails}>
-        ${({ label, address }: { label: string, address: string }) => html`
-          <a
-            inert=${() => props.emails.length === 0}
-            target="_blank"
-            href=${`mailto:${address}`}
-          >
-            <sinch-icon icons-version="2" name="envelope" name="mail" class="icon-link" />
-            <span>${address}</span>
-            <p>${label}</p>
-          </a>
-        `}
-      <//>
-    </section>
-  `
-}
-
-const Tabs = (props: {
-  color?: string,
-  tab: number,
-  onTab?: (t: number) => void,
-}) => html`
-  <section class="tabs" style=${() => ({ '--highlight-color': props.color })}>
-    <${For} each=${['Info', 'Options']}>
-      ${(label: string, i: Accessor<number>) => html`
-        <button
-          class=${() => (i() === props.tab ? 'active' : '')}
-          on:click=${() => props.onTab?.(i())}
-        >
-          ${label}
-        </button>
-      `}
-    <//>
-  </section>
-`
-
-const Options = () => html`
-  <section class="options">
-    <header>Notifications</header>
-    <span>Business</span>
-    <button>Block & report spam</button>
-    <hr />
-    <button>View Privacy Policy</button>
-    <hr />
-    <button>View Terms of Service</button>
-    <hr />
-    <button>Learn mode</button>
-  </section>
-`
 
 /**
- * RCS channel preview component.
+ * Main RcsChannelPreview component - renders the complete RCS channel preview interface
+ *
+ * This component creates a mobile-like interface that simulates how an RCS (Rich Communication Services)
+ * business channel would appear on a user's phone. It includes:
+ * - Brand banner and logo images
+ * - Brand name and description
+ * - Quick action buttons (Call, Website, Email)
+ * - Tabbed interface with detailed info and options
  *
  * @param props.color Brand color, used in the banner (if no image provided) and tabs.
  * @param props.name Brand name.
  * @param props.description Brand description.
  * @param props.banner Brand banner image.
  * @param props.logo Brand logo image.
- * @param props.phone Brand phone numbers.
- * @param props.website Brand website URLs.
- * @param props.email Brand email addresses.
+ * @param props.phones Brand phone numbers.
+ * @param props.websites Brand website URLs.
+ * @param props.emails Brand email addresses.
  */
 export const RcsChannelPreview = (props: RcsChannelProps) => {
+  // State management for tab switching (0 = Info, 1 = Options)
   const [tab, setTab] = createSignal(0)
+
+  // Transparent placeholder image used when no banner/logo is provided
   const transparentIcon =
     'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
 
@@ -326,22 +123,33 @@ export const RcsChannelPreview = (props: RcsChannelProps) => {
       ${style}
     </style>
     <section class="root" style=${() => ({ '--banner-color': props.color })}>
+      <!-- Banner image - uses transparent placeholder if no banner provided -->
       <img src=${() => (props.banner !== '' ? props.banner : transparentIcon)} alt="" />
+      <!-- Logo image - uses transparent placeholder if no logo provided -->
       <img src=${() => (props.logo !== '' ? props.logo : transparentIcon)} alt="" />
+      <!-- Brand name with fallback text -->
       <h1>${() => (props.name !== '' ? props.name : 'Brand name')}</h1>
+      <!-- Brand description with fallback text -->
       <p>${() => (props.description !== '' ? props.description : 'Brand description')}</p>
+      <!-- Main action buttons (Call, Website, Email) -->
       <${Actions} ...${props} />
+      <!-- Tab navigation -->
       <${Tabs} color=${() => props.color} tab=${tab} onTab=${setTab} />
+      <!-- Conditional content based on active tab -->
       ${() => (tab() === 0 ? html`<${Info} ...${props} />` : html`<${Options} />`)}
     </section>
   `
 }
 
+// Register the component as a custom element with versioned tag name
+// This makes it available as <sinch-labs-phone-preview-rcs-channel> in HTML
+// The version suffix ensures different versions can coexist
 defineCustomElement(
   'sinch-labs-phone-preview-rcs-channel',
   customElement(
-    `sinch-labs-phone-preview-rcs-channel-${pkg.version}`,
+    `sinch-labs-phone-preview-rcs-channel-${pkg.version}`, // Versioned internal tag
     {
+      // Default property values
       name: '',
       description: '',
       color: '',
@@ -351,19 +159,22 @@ defineCustomElement(
       websites: [],
       emails: [],
     },
-    RcsChannelPreview
+    RcsChannelPreview // The SolidJS component to wrap
   )
 )
 
+// TypeScript type definitions for better developer experience
 type Props = Partial<Parameters<typeof RcsChannelPreview>[0]>
 type ElementProps = Partial<{ [K in keyof Props]: Props[K] | string }>
 
+// Extend global HTML element types to include our custom element
 declare global {
   interface HTMLElementTagNameMap {
     'sinch-labs-phone-preview-rcs-channel': ElementProps & HTMLElement,
   }
 }
 
+// Add React JSX type support for the custom element
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
