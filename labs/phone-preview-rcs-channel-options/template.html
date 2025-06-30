@@ -1,27 +1,35 @@
 <style>
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font: inherit;
+}
+
 .options {
   display: flex;
   flex-flow: column;
   font: var(--sinch-sys-font-body-xs);
+}
 
-  & > header {
-    padding-block-end: 8px;
-  }
+.options > header {
+  padding-block-end: 8px;
+}
 
-  & > span {
-    font: var(--sinch-sys-font-body-xxs);
-  }
+.options > span {
+  font: var(--sinch-sys-font-body-xxs);
+}
 
-  & > button {
-    padding: 4px;
-    outline: none;
-    background: transparent;
-    text-align: start;
-  }
+.options > button {
+  padding: 4px;
+  outline: none;
+  background: transparent;
+  text-align: start;
+}
 
-  & > hr {
-    border-color: var(--sinch-sys-color-surface-secondary-active);
-  }
+.options > hr {
+  border-color: var(--sinch-sys-color-surface-secondary-active);
 }
 </style>
 

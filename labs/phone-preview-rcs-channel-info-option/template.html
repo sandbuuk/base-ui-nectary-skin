@@ -1,4 +1,12 @@
 <style>
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font: inherit;
+}
+
 a {
   display: grid;
   grid-template:
@@ -14,32 +22,32 @@ a {
   color: currentcolor;
   word-break: break-all;
   text-decoration: none;
+}
 
-  & > sinch-icon {
-    grid-area: icon;
-  }
+a > sinch-icon {
+  grid-area: icon;
+}
 
-  & > #contact {
-    grid-area: contact;
+a > #contact {
+  grid-area: contact;
+}
 
-    &::before {
-      content: "\200b";
-    }
-  }
+a > #contact::before {
+  content: "\200b";
+}
 
-  & > #label {
-    grid-area: label;
+a > #label {
+  grid-area: label;
+}
 
-    &::before {
-      content: "\200b";
-    }
-  }
+a > #label::before {
+  content: "\200b";
+}
 
-  &[inert] {
-    --sinch-global-color-icon: currentcolor;
+a[inert] {
+  --sinch-global-color-icon: currentcolor;
 
-    color: var(--sinch-sys-color-text-muted);
-  }
+  color: var(--sinch-sys-color-text-muted);
 }
 </style>
 
