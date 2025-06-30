@@ -50,6 +50,21 @@ export class PhonePreviewRcsChannel extends NectaryElement {
 
     this.#tabs.addEventListener('-tab-change', this.#onTabChange as EventListener, { signal })
 
+    // Listen for changes in slotted children
+    this.addEventListener('slotchange', this.#onSlotChange, { signal })
+
+    // Watch for changes to child elements
+    const observer = new MutationObserver(() => {
+      this.#updateActionsFromSlottedChildren()
+    })
+
+    observer.observe(this, { childList: true, subtree: true })
+
+    // Clean up observer when disconnected
+    signal.addEventListener('abort', () => {
+      observer.disconnect()
+    })
+
     this.#updateUI()
     this.#updateTabContent()
   }
@@ -61,7 +76,7 @@ export class PhonePreviewRcsChannel extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['name', 'description', 'color', 'banner', 'logo', 'phones', 'websites', 'emails']
+    return ['name', 'description', 'color', 'banner', 'logo']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -76,13 +91,6 @@ export class PhonePreviewRcsChannel extends NectaryElement {
       case 'banner':
       case 'logo':
         this.#updateUI()
-
-        break
-      case 'phones':
-      case 'websites':
-      case 'emails':
-        this.#updateUI()
-        this.#updateTabContent()
 
         break
     }
@@ -128,48 +136,6 @@ export class PhonePreviewRcsChannel extends NectaryElement {
     this.setAttribute('logo', value)
   }
 
-  get phones(): { label: string, number: string }[] {
-    try {
-      const attribute = this.getAttribute('phones')
-
-      return JSON.parse(attribute ?? '[]')
-    } catch {
-      return []
-    }
-  }
-
-  set phones(value: { label: string, number: string }[]) {
-    this.setAttribute('phones', JSON.stringify(value))
-  }
-
-  get websites(): { label: string, url: string }[] {
-    try {
-      const attribute = this.getAttribute('websites')
-
-      return JSON.parse(attribute ?? '[]')
-    } catch {
-      return []
-    }
-  }
-
-  set websites(value: { label: string, url: string }[]) {
-    this.setAttribute('websites', JSON.stringify(value))
-  }
-
-  get emails(): { label: string, address: string }[] {
-    try {
-      const attribute = this.getAttribute('emails')
-
-      return JSON.parse(attribute ?? '[]')
-    } catch {
-      return []
-    }
-  }
-
-  set emails(value: { label: string, address: string }[]) {
-    this.setAttribute('emails', JSON.stringify(value))
-  }
-
   #updateUI() {
     if (!this.isDomConnected) {
       return
@@ -195,56 +161,42 @@ export class PhonePreviewRcsChannel extends NectaryElement {
       this.style.setProperty('--banner-color', this.color)
     }
 
-    // Update actions component
-    const firstPhone = this.phones.at(0)?.number ?? ''
-    const firstWebsite = this.websites.at(0)?.url ?? ''
-    const firstEmail = this.emails.at(0)?.address ?? ''
-
-    this.#actions.setAttribute('phone', firstPhone)
-    this.#actions.setAttribute('website', firstWebsite)
-    this.#actions.setAttribute('email', firstEmail)
+    // Update actions component with data from slotted children
+    this.#updateActionsFromSlottedChildren()
 
     // Update tabs color
     this.#tabs.setAttribute('color', this.color)
   }
 
-  #updateTabContent() {
-    if (!this.isDomConnected) {
-      return
+  #updateActionsFromSlottedChildren() {
+    // Get slotted contact options
+    const slottedElements = this.querySelectorAll('sinch-labs-phone-preview-rcs-channel-info-option')
+
+    // Find first phone, website, and email from slotted children
+    let firstPhone = ''
+    let firstWebsite = ''
+    let firstEmail = ''
+
+    for (const element of slottedElements) {
+      const type = element.getAttribute('type')
+      const contact = element.getAttribute('contact') ?? ''
+
+      if (type === 'phone' && firstPhone === '') {
+        firstPhone = contact
+      } else if (type === 'website' && firstWebsite === '') {
+        firstWebsite = contact
+      } else if (type === 'email' && firstEmail === '') {
+        firstEmail = contact
+      }
     }
 
-    // Clear existing content
-    this.#infoContainer.innerHTML = ''
+    this.#actions.setAttribute('phone', firstPhone)
+    this.#actions.setAttribute('website', firstWebsite)
+    this.#actions.setAttribute('email', firstEmail)
+  }
 
-    // Add contact options to info container
-    this.phones.forEach(({ label, number }) => {
-      const option = document.createElement('sinch-labs-phone-preview-rcs-channel-info-option')
-
-      option.setAttribute('type', 'phone')
-      option.setAttribute('contact', number)
-      option.setAttribute('label', label)
-      this.#infoContainer.appendChild(option)
-    })
-
-    this.websites.forEach(({ label, url }) => {
-      const option = document.createElement('sinch-labs-phone-preview-rcs-channel-info-option')
-
-      option.setAttribute('type', 'website')
-      option.setAttribute('contact', url)
-      option.setAttribute('label', label)
-      this.#infoContainer.appendChild(option)
-    })
-
-    this.emails.forEach(({ label, address }) => {
-      const option = document.createElement('sinch-labs-phone-preview-rcs-channel-info-option')
-
-      option.setAttribute('type', 'email')
-      option.setAttribute('contact', address)
-      option.setAttribute('label', label)
-      this.#infoContainer.appendChild(option)
-    })
-
-    // Show/hide content based on current tab
+  #updateTabContent() {
+    // No longer needed since we use slots
     this.#updateTabVisibility()
   }
 
@@ -258,6 +210,10 @@ export class PhonePreviewRcsChannel extends NectaryElement {
     }
   }
 
+  #onSlotChange = () => {
+    this.#updateActionsFromSlottedChildren()
+  }
+
   #onTabChange = (event: CustomEvent) => {
     this.#currentTab = event.detail
     this.#updateTabVisibility()
@@ -266,29 +222,26 @@ export class PhonePreviewRcsChannel extends NectaryElement {
 
 defineCustomElement('sinch-labs-phone-preview-rcs-channel', PhonePreviewRcsChannel)
 
-type Props = {
+type RcsChannelProps = {
   name?: string,
   description?: string,
   color?: string,
   banner?: string,
   logo?: string,
-  phones?: { label: string, number: string }[],
-  websites?: { label: string, url: string }[],
-  emails?: { label: string, address: string }[],
 }
 
-type ElementProps = Partial<{ [K in keyof Props]: Props[K] | string }>
+type RcsChannelElementProps = Partial<{ [K in keyof RcsChannelProps]: RcsChannelProps[K] | string }>
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sinch-labs-phone-preview-rcs-channel': ElementProps & HTMLElement,
+    'sinch-labs-phone-preview-rcs-channel': RcsChannelElementProps & HTMLElement,
   }
 }
 
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-labs-phone-preview-rcs-channel': ElementProps &
+      'sinch-labs-phone-preview-rcs-channel': RcsChannelElementProps &
         React.ClassAttributes<HTMLElement> &
         React.HTMLAttributes<HTMLElement>,
     }
