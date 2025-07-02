@@ -1,5 +1,6 @@
 import '@nectary/components/icon'
 import { defineCustomElement, NectaryElement } from '../utils'
+import '../phone-preview-rcs-chat-message'
 import templateHTML from './template.html'
 import type React from 'react'
 
@@ -13,14 +14,12 @@ template.innerHTML = templateHTML
  * @param props.name Brand name.
  * @param props.description Brand description.
  * @param props.logo Brand logo image.
- * @param props.messages List of messages.
  */
 export class RcsChatPreview extends NectaryElement {
   #headerLogo: HTMLImageElement
   #mainLogo: HTMLImageElement
   #brandName: HTMLHeadingElement
   #brandDescription: HTMLParagraphElement
-  #messagesContainer: HTMLDivElement
 
   #transparentIcon = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
 
@@ -35,7 +34,6 @@ export class RcsChatPreview extends NectaryElement {
     this.#mainLogo = shadowRoot.querySelector('#main-logo')!
     this.#brandName = shadowRoot.querySelector('#brand-name')!
     this.#brandDescription = shadowRoot.querySelector('#brand-description')!
-    this.#messagesContainer = shadowRoot.querySelector('#messages-container')!
   }
 
   connectedCallback() {
@@ -44,11 +42,22 @@ export class RcsChatPreview extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['name', 'description', 'logo', 'messages']
+    return ['name', 'description', 'logo']
   }
 
-  attributeChangedCallback() {
-    this.#updateUI()
+  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+    if (oldVal === newVal) {
+      return
+    }
+
+    switch (name) {
+      case 'name':
+      case 'description':
+      case 'logo':
+        this.#updateUI()
+
+        break
+    }
   }
 
   get name(): string {
@@ -56,11 +65,7 @@ export class RcsChatPreview extends NectaryElement {
   }
 
   set name(value: string) {
-    if (value !== '') {
-      this.setAttribute('name', value)
-    } else {
-      this.removeAttribute('name')
-    }
+    this.setAttribute('name', value)
   }
 
   get description(): string {
@@ -68,11 +73,7 @@ export class RcsChatPreview extends NectaryElement {
   }
 
   set description(value: string) {
-    if (value !== '') {
-      this.setAttribute('description', value)
-    } else {
-      this.removeAttribute('description')
-    }
+    this.setAttribute('description', value)
   }
 
   get logo(): string {
@@ -80,29 +81,7 @@ export class RcsChatPreview extends NectaryElement {
   }
 
   set logo(value: string) {
-    if (value !== '') {
-      this.setAttribute('logo', value)
-    } else {
-      this.removeAttribute('logo')
-    }
-  }
-
-  get messages(): string[] {
-    const messagesAttr = this.getAttribute('messages')
-
-    if (messagesAttr !== null && messagesAttr !== '') {
-      try {
-        return JSON.parse(messagesAttr)
-      } catch {
-        return []
-      }
-    }
-
-    return []
-  }
-
-  set messages(value: string[]) {
-    this.setAttribute('messages', JSON.stringify(value))
+    this.setAttribute('logo', value)
   }
 
   #updateUI() {
@@ -118,20 +97,6 @@ export class RcsChatPreview extends NectaryElement {
     this.#mainLogo.src = logoSrc
     this.#brandName.textContent = displayName
     this.#brandDescription.textContent = displayDescription
-
-    this.#renderMessages()
-  }
-
-  #renderMessages() {
-    this.#messagesContainer.innerHTML = ''
-
-    this.messages.forEach((message) => {
-      const messageElement = document.createElement('section')
-
-      messageElement.className = 'message'
-      messageElement.textContent = message
-      this.#messagesContainer.appendChild(messageElement)
-    })
   }
 }
 
@@ -141,7 +106,6 @@ type Props = {
   name?: string,
   description?: string,
   logo?: string,
-  messages?: string[] | string,
 }
 
 type ElementProps = Partial<{ [K in keyof Props]: Props[K] | string }>

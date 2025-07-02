@@ -2,12 +2,6 @@
 
 Welcome to Nectary Labs! This is the experimental playground for new components, patterns, and features that are being evaluated for inclusion in the main Nectary design system.
 
----
-
-> Nectary Labs is where innovation meets collaboration - a shared incubator for experimental components that could become the next generation of design system patterns.
-
----
-
 ## 🎯 What is Nectary Labs?
 
 Nectary Labs is a shared component library where **any team** can contribute their own experimental components. When a component is requested or used by multiple teams, it becomes a candidate for promotion to the main Nectary design system by the official Nectary team.
