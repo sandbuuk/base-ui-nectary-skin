@@ -122,6 +122,9 @@ export const ComponentsList: FC = () => {
       <NavigationGroup text="Labs (WIP)">
         <Suspense fallback={<Loading/>}>
           <NavigationList>
+            <NavigationItem path="/labComponents" text="About Labs"/>
+            <div className="divider"/>
+
             <ReourceNavigationItems resource={labComponentsRef.current!}/>
           </NavigationList>
         </Suspense>

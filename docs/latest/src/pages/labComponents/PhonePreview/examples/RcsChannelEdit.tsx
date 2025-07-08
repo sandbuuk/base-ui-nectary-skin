@@ -1,5 +1,6 @@
 import '@nectary/labs/phone-preview'
 import '@nectary/labs/phone-preview-rcs-channel'
+import '@nectary/labs/phone-preview-rcs-channel-info-option'
 import { useState } from 'react'
 
 const paramsExample = `{
@@ -46,12 +47,40 @@ export const RcsChannelEditExample = () => {
       {error != undefined && <pre style={{ color: 'red' }}>{error.message}</pre>}
       <sinch-labs-phone-preview>
         <sinch-labs-phone-preview-rcs-channel
-          {...parsed}
-          // react limitation - manual serialization required
-          phones={JSON.stringify(parsed?.phones ?? [])}
-          websites={JSON.stringify(parsed?.websites ?? [])}
-          emails={JSON.stringify(parsed?.emails ?? [])}
-        />
+          name={parsed?.name}
+          description={parsed?.description}
+          color={parsed?.color}
+          banner={parsed?.banner}
+          logo={parsed?.logo}
+        >
+          {parsed?.phones?.map((phone: any, index: number) => (
+            <sinch-labs-phone-preview-rcs-channel-info-option
+              key={`phone-${index}`}
+              slot="contacts"
+              type="phone"
+              label={phone.label}
+              contact={phone.number}
+            />
+          ))}
+          {parsed?.websites?.map((website: any, index: number) => (
+            <sinch-labs-phone-preview-rcs-channel-info-option
+              key={`website-${index}`}
+              slot="contacts"
+              type="website"
+              label={website.label}
+              contact={website.url}
+            />
+          ))}
+          {parsed?.emails?.map((email: any, index: number) => (
+            <sinch-labs-phone-preview-rcs-channel-info-option
+              key={`email-${index}`}
+              slot="contacts"
+              type="email"
+              label={email.label}
+              contact={email.address}
+            />
+          ))}
+        </sinch-labs-phone-preview-rcs-channel>
       </sinch-labs-phone-preview>
     </section>
   )

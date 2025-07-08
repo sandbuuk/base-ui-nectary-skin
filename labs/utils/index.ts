@@ -1,1 +1,1 @@
-export { defineCustomElement, setLabRegistry } from './element'
+export { defineCustomElement, setLabRegistry, resetLabRegistry, NectaryElement } from './element'

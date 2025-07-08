@@ -8,7 +8,7 @@ import { RcsChatEditExample } from "./examples/RcsChatEdit.tsx?example";
 
 ## Basic
 
-A styled phone container with custom logic on sizing and scaling behavior.
+A styled phone container with custom logic on sizing and scaling behavior. All phone preview components are built as native web components using primitive props and slots for composition.
 
 <Example Component={BasicExample} />
 
@@ -45,68 +45,120 @@ The aspect ratio of the phone can also be modified using a custom property. The 
 aspect-ratio: 0.5; /* ❌ bad */
 ```
 
-The phone preview container also accepts the following attributes/properties that affect clock display:
+The phone preview container also accepts the following attributes/properties:
 
-```ts
+```typescript
 type PhonePreviewProps = {
   locale?: string;
-  clock?: Intl.DateTimeFormatOptions;
+  clock?: string; // JSON-serialized Intl.DateTimeFormatOptions
 };
 ```
 
-**Note: `clock` is not a string. Some rendering libraries such as React (\<= 18) don't serialize it properly.**
+**Clock Configuration:**
+The `clock` property should be a JSON-serialized `Intl.DateTimeFormatOptions` object when used as an attribute:
+
+```jsx
+<sinch-labs-phone-preview
+  locale="en-US"
+  clock={JSON.stringify({ hour: '2-digit', minute: '2-digit', hour12: true })}
+>
+  <!-- content -->
+</sinch-labs-phone-preview>
+```
 
 <Example Component={CustomExample} />
 
 ## RCS channel preview
 
-RCS channel design to be used in combination with the phone preview. It provides a default style for missing content.
+RCS channel design to be used in combination with the phone preview. Uses slot-based composition for contact information and content.
 
 <Example Component={RcsChannelExample} />
 
-## RCS channel preview edit options
+## RCS channel preview with custom content
 
-The following props can be used to change the content of the RCS channel preview:
+The RCS channel preview component uses primitive props and slotted children for composition:
 
-```typescript
-type RcsChannelEditProps {
-  name?: string;
-  description?: string;
-  color?: string;
-  banner?: string;
-  logo?: string;
-  phones?: { label: string; number: string }[];
-  websites?: { label: string; url: string }[];
-  emails?: { label: string; address: string }[];
-}
+**Primitive Props:**
+- `name` - Brand name (string)
+- `description` - Brand description (string)
+- `color` - Brand color (string)
+- `banner` - Banner image URL (string)
+- `logo` - Logo image URL (string)
+
+**Slotted Content:**
+Use `sinch-labs-phone-preview-rcs-channel-info-option` components as children with `slot="contacts"` to define contact options:
+
+**Contact Option Props:**
+- `type` - Contact type: "phone" | "website" | "email" (string)
+- `label` - Display label (string)
+- `contact` - Contact information (phone number, URL, or email) (string)
+- `placeholder` - Whether this is a placeholder option (boolean)
+
+```jsx
+<sinch-labs-phone-preview-rcs-channel
+  name="Brand Name"
+  description="Brand Description"
+  color="#007bff"
+  banner="/banner.jpg"
+  logo="/logo.png"
+>
+  <sinch-labs-phone-preview-rcs-channel-info-option
+    slot="contacts"
+    type="phone"
+    label="Customer Service"
+    contact="+1-555-0123"
+  />
+  <sinch-labs-phone-preview-rcs-channel-info-option
+    slot="contacts"
+    type="website"
+    label="Visit Website"
+    contact="https://example.com"
+  />
+  <sinch-labs-phone-preview-rcs-channel-info-option
+    slot="contacts"
+    type="email"
+    label="Support Email"
+    contact="support@example.com"
+  />
+</sinch-labs-phone-preview-rcs-channel>
 ```
-
-**Note: `phones`, `websites`, and `emails` properties are not primitives.**
-This poses an integration issue using libraries that do not have proper custom elements support (e.g. React \<= 18). These libraries attempt to inject all parameters as attributes. However, this only works for primitives, other objects are stringifyed with `obj.toString()` which usually results in the `"[object Object]"` string being passed as attribute. In these cases, properties should be JSON serialized manually.
 
 <Example Component={RcsChannelEditExample} />
 
 ## RCS chat preview
 
-RCS chat design to be used in combination with the phone preview. It provides a default style for missing content.
-The current implementation only supports displaying simple text message bubbles from agent.
+RCS chat design to be used in combination with the phone preview. Uses primitive props and slotted children for composition.
+
+**Primitive Props:**
+- `name` - Brand name (string)
+- `description` - Brand description (string)
+- `logo` - Brand logo image URL (string)
+
+**Slotted Content:**
+Use `sinch-labs-phone-preview-rcs-chat-message` components as children with `slot="messages"` to define chat messages:
+
+**Message Props:**
+- `text` - Message text content (string)
+
+```jsx
+<sinch-labs-phone-preview-rcs-chat
+  name="Brand Name"
+  description="Brand Description"
+  logo="/logo.png"
+>
+  <sinch-labs-phone-preview-rcs-chat-message
+    slot="messages"
+    text="Hello! How can I help you today?"
+  />
+  <sinch-labs-phone-preview-rcs-chat-message
+    slot="messages"
+    text="We're here to assist you with any questions."
+  />
+</sinch-labs-phone-preview-rcs-chat>
+```
 
 <Example Component={RcsChatExample} />
 
-## RCS chat preview edit options
-
-The following props can be used to change the content of the RCS chat preview:
-
-```typescript
-type RcsChatEditProps {
-  name?: string;
-  description?: string;
-  logo?: string;
-  messages?: string[];
-}
-```
-
-**Note: `messages` property is not a string.**
-This poses an integration issue using libraries that do not have proper custom elements support (e.g. React \<= 18). These libraries attempt to inject all parameters as attributes. However, this only works for primitives, other objects are stringifyed with `obj.toString()` which usually results in the `"[object Object]"` string being passed as attribute. In these cases, properties should be JSON serialized manually.
+## RCS chat preview with custom content
 
 <Example Component={RcsChatEditExample} />

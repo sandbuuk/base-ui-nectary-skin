@@ -15,11 +15,12 @@ import { useOnRouteChange } from '~/hooks'
 import { LandingPage } from '~/pages/00-Landing'
 import { QuickStartPage } from '~/pages/01-Quick Start'
 import { QuickStartMFEPage } from '~/pages/02-Quick Start - MFE'
-import { ThemesPage } from '~/pages/04-Themes'
-import { TestingPage } from '~/pages/05-Testing'
-import { TokensPage } from '~/pages/06-Token'
-import { TypeScriptPage } from '~/pages/07-TypeScript'
-import { EventHandlersPage } from '~/pages/08-EventHandlers'
+import { ThemesPage } from '~/pages/03-Themes'
+import { TestingPage } from '~/pages/04-Testing'
+import { TokensPage } from '~/pages/05-Token'
+import { TypeScriptPage } from '~/pages/06-TypeScript'
+import { EventHandlersPage } from '~/pages/07-EventHandlers'
+import { LabsPage } from '~/pages/08-Labs'
 import { V3MigrationPage } from '~/pages/09-V3Migration'
 import { NotFoundPage } from '~/pages/NotFound'
 import './styles.css'
@@ -158,6 +159,7 @@ export const App: FC = () => {
             <Route path="/typescript" element={<TypeScriptPage/>}/>
             <Route path="/event-handlers" element={<EventHandlersPage/>}/>
             <Route path="/V3Migration" element={<V3MigrationPage/>}/>
+            <Route path="/labComponents" element={<LabsPage/>}/>
             <Route path="/labComponents/*" element={<ComponentsPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
             <Route path="/compositions/*" element={<ComponentsPage/>}/>
