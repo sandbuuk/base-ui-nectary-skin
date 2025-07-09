@@ -90,6 +90,12 @@ defineCustomElement('sinch-accordion', class extends NectaryElement {
       return
     }
 
+    const isTargetInSlot = this.#$slot.assignedElements().includes(target)
+
+    if (!isTargetInSlot) {
+      return
+    }
+
     const value = getAttribute(target, 'value', '')
     const result = this.multiple
       ? updateCsv(this.value, value, !getBooleanAttribute(target, 'data-checked'))

@@ -4,10 +4,12 @@ import '@nectary/components/accordion'
 import '@nectary/components/accordion-item'
 import '@nectary/components/text'
 import '@nectary/components/icon'
+import '@nectary/components/input'
 
 export const ComplexExample: FC = () => {
   const [value, setValue] = useState('')
-  const onChange = (e: CustomEvent<string>) => setValue(e.detail)
+  const [state, setState] = useState('')
+  const onChange = (e: CustomEvent<string>) => (console.log('sinch-accordion: change', e), setValue(e.detail))
 
   return (
     <sinch-accordion value={value} on-change={onChange}>
@@ -17,7 +19,15 @@ export const ComplexExample: FC = () => {
         optionalText="Required"
       >
         <sinch-icon icons-version="2" name="fa-arrow-up-right-from-square" slot="icon"/>
-        <sinch-text slot="content" type="m">Accordion content</sinch-text>
+        <div slot="content">
+          <sinch-text type="m">Accordion content</sinch-text>
+          <sinch-input
+            aria-label="Input"
+            placeholder="Placeholder"
+            value={state}
+            on-change={(e) => setState(e.detail)}
+          />
+        </div>
       </sinch-accordion-item>
       <sinch-accordion-item
         value="2"
