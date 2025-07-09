@@ -1,12 +1,22 @@
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
 
-export type TSinchRadioOptionProps = {
-  value: string,
-  checked?: boolean,
-  disabled?: boolean,
-  text: string,
-  'aria-label': string,
-}
+export type TSinchRadioOptionProps =
+  | ({
+    value: string,
+    checked?: boolean,
+    disabled?: boolean,
+    text?: string,
+    'aria-label': string,
+    'aria-labelledby'?: never,
+  })
+  | ({
+    value: string,
+    checked?: boolean,
+    disabled?: boolean,
+    text?: string,
+    'aria-label'?: never,
+    'aria-labelledby': string,
+  })
 
 export type TSinchRadioOptionStyle = {
   // Colors - Default State
