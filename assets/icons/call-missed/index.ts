@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-call-missed', createIconClass(templateHTML))
+export const IconCallMissed = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-call-missed', IconCallMissed)
 
 declare global {
   interface HTMLElementTagNameMap {

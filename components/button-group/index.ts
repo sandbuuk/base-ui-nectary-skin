@@ -16,7 +16,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-button-group', class extends NectaryElement {
+export class ButtonGroup extends NectaryElement {
   #$slot: HTMLSlotElement
 
   constructor() {
@@ -70,7 +70,9 @@ defineCustomElement('sinch-button-group', class extends NectaryElement {
   connectedCallback() {
     this.setAttribute('role', 'group')
   }
-})
+}
+
+defineCustomElement('sinch-button-group', ButtonGroup)
 
 declare global {
   interface NectaryComponentMap {

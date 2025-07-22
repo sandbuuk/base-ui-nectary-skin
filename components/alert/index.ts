@@ -18,65 +18,64 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement(
-  'sinch-alert',
-  class extends NectaryElement {
-    #$text: HTMLParagraphElement
+export class Alert extends NectaryElement {
+  #$text: HTMLParagraphElement
 
-    constructor() {
-      super()
+  constructor() {
+    super()
 
-      const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow()
 
-      shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(template.content.cloneNode(true))
 
-      this.#$text = shadowRoot.querySelector('#text')!
-    }
+    this.#$text = shadowRoot.querySelector('#text')!
+  }
 
-    connectedCallback() {
-      super.connectedCallback()
-      this.setAttribute('role', 'alert')
-    }
+  connectedCallback() {
+    super.connectedCallback()
+    this.setAttribute('role', 'alert')
+  }
 
-    disconnectedCallback() {
-      super.disconnectedCallback()
-    }
+  disconnectedCallback() {
+    super.disconnectedCallback()
+  }
 
-    static get observedAttributes() {
-      return ['text']
-    }
+  static get observedAttributes() {
+    return ['text']
+  }
 
-    attributeChangedCallback(
-      name: string,
-      _: string | null,
-      newVal: string | null
-    ) {
-      switch (name) {
-        case 'text': {
-          updateAttribute(this.#$text, 'text', newVal)
+  attributeChangedCallback(
+    name: string,
+    _: string | null,
+    newVal: string | null
+  ) {
+    switch (name) {
+      case 'text': {
+        updateAttribute(this.#$text, 'text', newVal)
 
-          break
-        }
+        break
       }
     }
-
-    get type(): TSinchAlertType {
-      return getLiteralAttribute(this, typeValues, 'type')
-    }
-
-    set type(value: TSinchAlertType) {
-      updateLiteralAttribute(this, typeValues, 'type', value)
-    }
-
-    get text() {
-      return getAttribute(this, 'text', '')
-    }
-
-    set text(value: string) {
-      updateAttribute(this, 'text', value)
-    }
   }
-)
+
+  get type(): TSinchAlertType {
+    return getLiteralAttribute(this, typeValues, 'type')
+  }
+
+  set type(value: TSinchAlertType) {
+    updateLiteralAttribute(this, typeValues, 'type', value)
+  }
+
+  get text() {
+    return getAttribute(this, 'text', '')
+  }
+
+  set text(value: string) {
+    updateAttribute(this, 'text', value)
+  }
+}
+
+defineCustomElement('sinch-alert', Alert)
 
 declare global {
   interface NectaryComponentMap {

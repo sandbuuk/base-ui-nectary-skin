@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-strikethrough-s', createIconClass(templateHTML))
+export const IconStrikethroughS = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-strikethrough-s', IconStrikethroughS)
 
 declare global {
   interface HTMLElementTagNameMap {

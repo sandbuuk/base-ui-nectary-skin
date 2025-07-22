@@ -19,7 +19,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-file-picker', class extends NectaryElement {
+export class FilePicker extends NectaryElement {
   #$input: HTMLInputElement
   #$targetSlot: HTMLSlotElement
   #controller: AbortController | null = null
@@ -145,7 +145,9 @@ defineCustomElement('sinch-file-picker', class extends NectaryElement {
   #onInvalidReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-invalid')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-file-picker', FilePicker)
 
 declare global {
   interface NectaryComponentMap {

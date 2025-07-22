@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-indeterminate-check-box', createIconClass(templateHTML))
+export const IconIndeterminateCheckBox = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-indeterminate-check-box', IconIndeterminateCheckBox)
 
 declare global {
   interface HTMLElementTagNameMap {

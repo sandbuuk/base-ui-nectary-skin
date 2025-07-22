@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-play-arrow', createIconClass(templateHTML))
+export const IconPlayArrow = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-play-arrow', IconPlayArrow)
 
 declare global {
   interface HTMLElementTagNameMap {

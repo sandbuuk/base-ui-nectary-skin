@@ -26,7 +26,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-color-menu', class extends NectaryElement {
+export class ColorMenu extends NectaryElement {
   #$listbox: HTMLElement
   #$optionsSlot: HTMLSlotElement
   #controller: AbortController | null = null
@@ -415,7 +415,9 @@ defineCustomElement('sinch-color-menu', class extends NectaryElement {
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-color-menu', ColorMenu)
 
 declare global {
   interface NectaryComponentMap {

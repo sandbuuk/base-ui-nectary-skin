@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-shuffle', createIconClass(templateHTML))
+export const IconShuffle = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-shuffle', IconShuffle)
 
 declare global {
   interface HTMLElementTagNameMap {

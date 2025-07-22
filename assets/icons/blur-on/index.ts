@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-blur-on', createIconClass(templateHTML))
+export const IconBlurOn = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-blur-on', IconBlurOn)
 
 declare global {
   interface HTMLElementTagNameMap {

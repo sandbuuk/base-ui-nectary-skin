@@ -17,7 +17,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
+export class HelpTooltip extends NectaryElement {
   #$tooltip: NectaryComponentVanilla<'sinch-tooltip'>
   #controller: AbortController | null = null
 
@@ -105,7 +105,9 @@ defineCustomElement('sinch-help-tooltip', class extends NectaryElement {
   #onTooltipHideReactHandler = () => {
     getReactEventHandler(this, 'on-hide')?.()
   }
-})
+}
+
+defineCustomElement('sinch-help-tooltip', HelpTooltip)
 
 declare global {
   interface NectaryComponentMap {

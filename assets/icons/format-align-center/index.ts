@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-format-align-center', createIconClass(templateHTML))
+export const IconFormatAlignCenter = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-format-align-center', IconFormatAlignCenter)
 
 declare global {
   interface HTMLElementTagNameMap {

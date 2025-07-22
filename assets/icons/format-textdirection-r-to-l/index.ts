@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-format-textdirection-r-to-l', createIconClass(templateHTML))
+export const IconFormatTextdirectionRToL = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-format-textdirection-r-to-l', IconFormatTextdirectionRToL)
 
 declare global {
   interface HTMLElementTagNameMap {

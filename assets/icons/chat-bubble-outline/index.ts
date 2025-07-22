@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-chat-bubble-outline', createIconClass(templateHTML))
+export const IconChatBubbleOutline = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-chat-bubble-outline', IconChatBubbleOutline)
 
 declare global {
   interface HTMLElementTagNameMap {

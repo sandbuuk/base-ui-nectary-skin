@@ -13,7 +13,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-flag', class extends NectaryElement {
+export class Flag extends NectaryElement {
   #$img: HTMLImageElement
 
   constructor() {
@@ -66,7 +66,9 @@ defineCustomElement('sinch-flag', class extends NectaryElement {
 
     this.#$img.src = getFlagUrl(this, this.code)
   }
-})
+}
+
+defineCustomElement('sinch-flag', Flag)
 
 declare global {
   interface NectaryComponentMap {

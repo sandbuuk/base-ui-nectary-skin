@@ -23,7 +23,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-file-drop', class extends NectaryElement {
+export class FileDrop extends NectaryElement {
   #$filePicker: NectaryComponentVanilla<'sinch-file-picker'>
   #$dropArea: HTMLElement
   #$placeholder: NectaryComponentVanilla<'sinch-text'>
@@ -293,7 +293,9 @@ defineCustomElement('sinch-file-drop', class extends NectaryElement {
       })
     )
   }
-})
+}
+
+defineCustomElement('sinch-file-drop', FileDrop)
 
 declare global {
   interface NectaryComponentMap {

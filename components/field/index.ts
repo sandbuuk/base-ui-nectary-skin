@@ -18,7 +18,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-field', class extends NectaryElement {
+export class Field extends NectaryElement {
   topSection: HTMLDivElement
   #$label: HTMLLabelElement
   #$optionalText: HTMLSpanElement
@@ -166,7 +166,9 @@ defineCustomElement('sinch-field', class extends NectaryElement {
   #onTooltipSlotChange = () => {
     setClass(this.#$tooltipWrapper, 'empty', this.#$tooltipSlot.assignedElements().length === 0)
   }
-})
+}
+
+defineCustomElement('sinch-field', Field)
 
 declare global {
   interface NectaryComponentMap {

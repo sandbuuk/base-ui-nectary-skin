@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconChannelElement, TSinchIconChannelReact, TSinchIconChannelProps } from '../types'
 
-defineCustomElement('sinch-icon-channel-apple-business-chat-square', createIconClass(templateHTML))
+export const IconChannelAppleBusinessChatSquare = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-channel-apple-business-chat-square', IconChannelAppleBusinessChatSquare)
 
 declare global {
   interface NectaryComponentMap {

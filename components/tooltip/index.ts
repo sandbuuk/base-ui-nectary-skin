@@ -29,7 +29,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-tooltip', class extends NectaryElement {
+export class Tooltip extends NectaryElement {
   #$pop: NectaryComponentVanilla<'sinch-pop'>
   #$tooltipText: HTMLElement
   #$content: HTMLElement
@@ -371,7 +371,9 @@ defineCustomElement('sinch-tooltip', class extends NectaryElement {
   #onHideReactHandler = () => {
     getReactEventHandler(this, 'on-hide')?.()
   }
-})
+}
+
+defineCustomElement('sinch-tooltip', Tooltip)
 
 declare global {
   interface NectaryComponentMap {

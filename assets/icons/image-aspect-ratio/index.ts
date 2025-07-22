@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-image-aspect-ratio', createIconClass(templateHTML))
+export const IconImageAspectRatio = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-image-aspect-ratio', IconImageAspectRatio)
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-rounded-corner', createIconClass(templateHTML))
+export const IconRoundedCorner = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-rounded-corner', IconRoundedCorner)
 
 declare global {
   interface HTMLElementTagNameMap {

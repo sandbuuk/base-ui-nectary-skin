@@ -23,7 +23,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-badge', class extends NectaryElement {
+export class Badge extends NectaryElement {
   #$badgeWrapper: HTMLElement
   #$badge: HTMLElement
   #$text: HTMLElement
@@ -161,7 +161,9 @@ defineCustomElement('sinch-badge', class extends NectaryElement {
   #onResize = () => {
     this.#updatePosition()
   }
-})
+}
+
+defineCustomElement('sinch-badge', Badge)
 
 declare global {
   interface NectaryComponentMap {

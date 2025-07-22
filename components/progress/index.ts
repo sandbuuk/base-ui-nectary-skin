@@ -18,7 +18,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-progress', class extends NectaryElement {
+export class Progress extends NectaryElement {
   #$bar: HTMLElement
   #$text: HTMLElement
 
@@ -80,7 +80,9 @@ defineCustomElement('sinch-progress', class extends NectaryElement {
   set detailed(isDetailed: boolean) {
     updateBooleanAttribute(this, 'detailed', isDetailed)
   }
-})
+}
+
+defineCustomElement('sinch-progress', Progress)
 
 declare global {
   interface NectaryComponentMap {

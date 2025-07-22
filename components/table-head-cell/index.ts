@@ -21,7 +21,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-table-head-cell', class extends NectaryElement {
+export class TableHeadCell extends NectaryElement {
   #$text: HTMLSpanElement
 
   constructor() {
@@ -86,7 +86,9 @@ defineCustomElement('sinch-table-head-cell', class extends NectaryElement {
   get fit() {
     return getBooleanAttribute(this, 'fit')
   }
-})
+}
+
+defineCustomElement('sinch-table-head-cell', TableHeadCell)
 
 declare global {
   interface NectaryComponentMap {

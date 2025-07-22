@@ -14,7 +14,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-table-row', class extends NectaryElement {
+export class TableRow extends NectaryElement {
   constructor() {
     super()
 
@@ -61,7 +61,9 @@ defineCustomElement('sinch-table-row', class extends NectaryElement {
   get selected() {
     return getBooleanAttribute(this, 'selected')
   }
-})
+}
+
+defineCustomElement('sinch-table-row', TableRow)
 
 declare global {
   interface NectaryComponentMap {

@@ -18,7 +18,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-toggle', class extends NectaryElement {
+export class Toggle extends NectaryElement {
   #$label: HTMLElement
   #controller: AbortController | null = null
 
@@ -195,7 +195,9 @@ defineCustomElement('sinch-toggle', class extends NectaryElement {
   #onBlurReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-blur')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-toggle', Toggle)
 
 declare global {
   interface NectaryComponentMap {

@@ -13,7 +13,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-emoji', class extends NectaryElement {
+export class Emoji extends NectaryElement {
   #$img: HTMLImageElement
 
   constructor() {
@@ -66,7 +66,9 @@ defineCustomElement('sinch-emoji', class extends NectaryElement {
 
     this.#$img.src = getEmojiUrl(getEmojiBaseUrl(this), this.char)
   }
-})
+}
+
+defineCustomElement('sinch-emoji', Emoji)
 
 declare global {
   interface NectaryComponentMap {

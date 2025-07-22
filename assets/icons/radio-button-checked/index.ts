@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-radio-button-checked', createIconClass(templateHTML))
+export const IconRadioButtonChecked = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-radio-button-checked', IconRadioButtonChecked)
 
 declare global {
   interface HTMLElementTagNameMap {

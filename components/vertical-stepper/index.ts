@@ -14,7 +14,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-vertical-stepper', class extends NectaryElement {
+export class VerticalStepper extends NectaryElement {
   #$itemsSlot: HTMLSlotElement
 
   constructor() {
@@ -81,7 +81,9 @@ defineCustomElement('sinch-vertical-stepper', class extends NectaryElement {
     this.setAttribute('aria-valuemax', String($items.length))
     this.setAttribute('aria-valuenow', String(clampNumber(activeIndex, 0, $items.length)))
   }
-})
+}
+
+defineCustomElement('sinch-vertical-stepper', VerticalStepper)
 
 declare global {
   interface NectaryComponentMap {

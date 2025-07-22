@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-invert-colors-off', createIconClass(templateHTML))
+export const IconInvertColorsOff = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-invert-colors-off', IconInvertColorsOff)
 
 declare global {
   interface HTMLElementTagNameMap {

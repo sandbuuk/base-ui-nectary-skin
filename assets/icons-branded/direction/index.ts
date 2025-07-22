@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconBrandedElement, TSinchIconBrandedReact, TSinchIconBrandedProps } from '../types'
 
-defineCustomElement('sinch-icon-branded-direction', createIconClass(templateHTML))
+export const IconBrandedDirection = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-branded-direction', IconBrandedDirection)
 
 declare global {
   interface NectaryComponentMap {

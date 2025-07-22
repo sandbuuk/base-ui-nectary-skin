@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-maximize', createIconClass(templateHTML))
+export const IconMaximize = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-maximize', IconMaximize)
 
 declare global {
   interface HTMLElementTagNameMap {

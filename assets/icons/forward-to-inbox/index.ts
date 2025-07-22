@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-forward-to-inbox', createIconClass(templateHTML))
+export const IconForwardToInbox = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-forward-to-inbox', IconForwardToInbox)
 
 declare global {
   interface HTMLElementTagNameMap {

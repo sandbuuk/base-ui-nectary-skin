@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-fast-rewind', createIconClass(templateHTML))
+export const IconFastRewind = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-fast-rewind', IconFastRewind)
 
 declare global {
   interface HTMLElementTagNameMap {

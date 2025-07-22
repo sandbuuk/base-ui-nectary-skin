@@ -9,7 +9,10 @@ import '@nectary/components/input'
 export const ComplexExample: FC = () => {
   const [value, setValue] = useState('')
   const [state, setState] = useState('')
-  const onChange = (e: CustomEvent<string>) => (console.log('sinch-accordion: change', e), setValue(e.detail))
+  const onChange = (e: CustomEvent<string>) => {
+    console.log('sinch-accordion: change', e)
+    setValue(e.detail)
+  }
 
   return (
     <sinch-accordion value={value} on-change={onChange}>

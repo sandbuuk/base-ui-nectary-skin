@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-compass-calibration', createIconClass(templateHTML))
+export const IconCompassCalibration = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-compass-calibration', IconCompassCalibration)
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -48,388 +48,387 @@ const SEARCH_DEBOUNCE_TIMEOUT = 300
 
 template.innerHTML = templateHTML
 
-defineCustomElement(
-  'sinch-emoji-picker',
-  class extends NectaryElement {
-    #$tabs: NectaryComponentVanilla<'sinch-tabs'>
-    #$searchInput: NectaryComponentVanilla<'sinch-input'>
-    #$searchClearButton: HTMLElement
-    #$skinPopover: NectaryComponentVanilla<'sinch-popover'>
-    #$skinMenu: NectaryComponentVanilla<'sinch-color-menu'>
-    #$skinSwatch: NectaryComponentVanilla<'sinch-color-swatch'>
-    #$skinButton: NectaryComponentVanilla<'sinch-button'>
-    #$list: HTMLElement
-    #$notFound: HTMLElement
-    #controller: AbortController | null = null
-    #$sh: ShadowRoot
-    #searchDebounce
-    #currentSkinTone = 0
-    #prevTabsValue: string | null = null
+export class EmojiPicker extends NectaryElement {
+  #$tabs: NectaryComponentVanilla<'sinch-tabs'>
+  #$searchInput: NectaryComponentVanilla<'sinch-input'>
+  #$searchClearButton: HTMLElement
+  #$skinPopover: NectaryComponentVanilla<'sinch-popover'>
+  #$skinMenu: NectaryComponentVanilla<'sinch-color-menu'>
+  #$skinSwatch: NectaryComponentVanilla<'sinch-color-swatch'>
+  #$skinButton: NectaryComponentVanilla<'sinch-button'>
+  #$list: HTMLElement
+  #$notFound: HTMLElement
+  #controller: AbortController | null = null
+  #$sh: ShadowRoot
+  #searchDebounce
+  #currentSkinTone = 0
+  #prevTabsValue: string | null = null
 
-    constructor() {
-      super()
+  constructor() {
+    super()
 
-      const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow()
 
-      shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(template.content.cloneNode(true))
 
-      this.#$sh = shadowRoot
-      this.#$tabs = shadowRoot.querySelector('#tabs')!
-      this.#$searchInput = shadowRoot.querySelector('#search')!
-      this.#$searchClearButton = shadowRoot.querySelector('#search-clear')!
-      this.#$skinPopover = shadowRoot.querySelector('#skin-popover')!
-      this.#$skinMenu = shadowRoot.querySelector('#skin-menu')!
-      this.#$skinSwatch = shadowRoot.querySelector('#skin-swatch')!
-      this.#$skinButton = shadowRoot.querySelector('#skin-button')!
-      this.#$list = shadowRoot.querySelector('#list')!
-      this.#$notFound = shadowRoot.querySelector('#not-found')!
-      this.#searchDebounce = debounceTimeout(SEARCH_DEBOUNCE_TIMEOUT)(
-        this.#updateSearch
-      )
+    this.#$sh = shadowRoot
+    this.#$tabs = shadowRoot.querySelector('#tabs')!
+    this.#$searchInput = shadowRoot.querySelector('#search')!
+    this.#$searchClearButton = shadowRoot.querySelector('#search-clear')!
+    this.#$skinPopover = shadowRoot.querySelector('#skin-popover')!
+    this.#$skinMenu = shadowRoot.querySelector('#skin-menu')!
+    this.#$skinSwatch = shadowRoot.querySelector('#skin-swatch')!
+    this.#$skinButton = shadowRoot.querySelector('#skin-button')!
+    this.#$list = shadowRoot.querySelector('#list')!
+    this.#$notFound = shadowRoot.querySelector('#not-found')!
+    this.#searchDebounce = debounceTimeout(SEARCH_DEBOUNCE_TIMEOUT)(
+      this.#updateSearch
+    )
+  }
+
+  connectedCallback() {
+    this.#controller = new AbortController()
+
+    const { signal } = this.#controller
+
+    this.#$tabs.addEventListener('-change', this.#onTabsChange as any, {
+      signal,
+    })
+    this.#$searchInput.addEventListener(
+      '-change',
+      this.#onSearchChange as any,
+      { signal }
+    )
+    this.#$searchClearButton.addEventListener(
+      '-click',
+      this.#onSearchClearClick,
+      { signal }
+    )
+    this.#$skinButton.addEventListener('-click', this.#onSkinButtonClick, {
+      signal,
+    })
+    this.#$skinPopover.addEventListener('-close', this.#onSkinPopoverClose, {
+      signal,
+    })
+    this.#$skinMenu.addEventListener(
+      '-change',
+      this.#onSkinMenuChange as any,
+      { signal }
+    )
+    this.#$list.addEventListener('click', this.#onListClick, { signal })
+    this.addEventListener('-change', this.#onChangeReactHandler, { signal })
+
+    this.#updateTabs()
+    this.#updateEmojis()
+  }
+
+  disconnectedCallback() {
+    this.#searchDebounce.cancel()
+    this.#controller!.abort()
+    this.#controller = null
+  }
+
+  get skinToneButtonRect(): TRect {
+    return getRect(this.#$skinButton)
+  }
+
+  get searchInputRect(): TRect {
+    return getRect(this.#$searchInput)
+  }
+
+  get searchClearButtonRect(): TRect {
+    return getRect(this.#$searchClearButton)
+  }
+
+  nthSkinToneRect(index: number): TRect | null {
+    return this.#$skinMenu.nthItemRect(index)
+  }
+
+  nthTabRect(index: number): TRect | null {
+    return this.#$tabs.nthOptionRect(index)
+  }
+
+  nthEmojiRect(index: number): TRect | null {
+    const $el = this.#$list.children[index]
+
+    return $el != null ? getRect($el) : null
+  }
+
+  #onListClick = (e: Event) => {
+    const value = (e.target as Element).getAttribute('data-value')
+
+    if (value === null) {
+      return
     }
 
-    connectedCallback() {
-      this.#controller = new AbortController()
+    this.dispatchEvent(new CustomEvent('-change', { detail: value }))
+  }
 
-      const { signal } = this.#controller
+  #onTabsChange = (e: CustomEvent<string>) => {
+    const value = e.detail
 
-      this.#$tabs.addEventListener('-change', this.#onTabsChange as any, {
-        signal,
-      })
-      this.#$searchInput.addEventListener(
-        '-change',
-        this.#onSearchChange as any,
-        { signal }
-      )
-      this.#$searchClearButton.addEventListener(
-        '-click',
-        this.#onSearchClearClick,
-        { signal }
-      )
-      this.#$skinButton.addEventListener('-click', this.#onSkinButtonClick, {
-        signal,
-      })
-      this.#$skinPopover.addEventListener('-close', this.#onSkinPopoverClose, {
-        signal,
-      })
-      this.#$skinMenu.addEventListener(
-        '-change',
-        this.#onSkinMenuChange as any,
-        { signal }
-      )
-      this.#$list.addEventListener('click', this.#onListClick, { signal })
-      this.addEventListener('-change', this.#onChangeReactHandler, { signal })
+    updateAttribute(this.#$tabs, 'value', value)
+    updateAttribute(this.#$searchInput, 'value', '')
+    this.#updateEmojis()
+  }
 
-      this.#updateTabs()
-      this.#updateEmojis()
-    }
+  #onSearchChange = (e: CustomEvent<string>) => {
+    this.#$searchInput.value = e.detail
+    this.#searchDebounce.fn()
+    setClass(this.#$searchClearButton, 'active', e.detail.length > 0)
+  }
 
-    disconnectedCallback() {
-      this.#searchDebounce.cancel()
-      this.#controller!.abort()
-      this.#controller = null
-    }
+  #onSearchClearClick = () => {
+    this.#$searchInput.value = ''
+    this.#$searchInput.focus()
+    this.#searchDebounce.fn()
+    setClass(this.#$searchClearButton, 'active', false)
+  }
 
-    get skinToneButtonRect(): TRect {
-      return getRect(this.#$skinButton)
-    }
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
+  }
 
-    get searchInputRect(): TRect {
-      return getRect(this.#$searchInput)
-    }
+  get focusable() {
+    return true
+  }
 
-    get searchClearButtonRect(): TRect {
-      return getRect(this.#$searchClearButton)
-    }
+  #getDocumentRoot(): Document {
+    return Reflect.has(this.#$sh, 'createElement')
+      ? (this.#$sh as any as Document)
+      : document
+  }
 
-    nthSkinToneRect(index: number): TRect | null {
-      return this.#$skinMenu.nthItemRect(index)
-    }
+  #updateSearch = () => {
+    const value = this.#$searchInput.value
 
-    nthTabRect(index: number): TRect | null {
-      return this.#$tabs.nthOptionRect(index)
-    }
-
-    nthEmojiRect(index: number): TRect | null {
-      const $el = this.#$list.children[index]
-
-      return $el != null ? getRect($el) : null
-    }
-
-    #onListClick = (e: Event) => {
-      const value = (e.target as Element).getAttribute('data-value')
-
-      if (value === null) {
-        return
-      }
-
-      this.dispatchEvent(new CustomEvent('-change', { detail: value }))
-    }
-
-    #onTabsChange = (e: CustomEvent<string>) => {
-      const value = e.detail
-
-      updateAttribute(this.#$tabs, 'value', value)
-      updateAttribute(this.#$searchInput, 'value', '')
-      this.#updateEmojis()
-    }
-
-    #onSearchChange = (e: CustomEvent<string>) => {
-      this.#$searchInput.value = e.detail
-      this.#searchDebounce.fn()
-      setClass(this.#$searchClearButton, 'active', e.detail.length > 0)
-    }
-
-    #onSearchClearClick = () => {
-      this.#$searchInput.value = ''
-      this.#$searchInput.focus()
-      this.#searchDebounce.fn()
-      setClass(this.#$searchClearButton, 'active', false)
-    }
-
-    #onChangeReactHandler = (e: Event) => {
-      getReactEventHandler(this, 'on-change')?.(e)
-    }
-
-    get focusable() {
-      return true
-    }
-
-    #getDocumentRoot(): Document {
-      return Reflect.has(this.#$sh, 'createElement')
-        ? (this.#$sh as any as Document)
-        : document
-    }
-
-    #updateSearch = () => {
-      const value = this.#$searchInput.value
-
-      if (value.length < MIN_SEARCH_LENGTH) {
-        if (this.#isSearchMode()) {
-          if (this.#prevTabsValue !== null) {
-            this.#$tabs.setAttribute('value', this.#prevTabsValue)
-          }
-
-          this.#updateEmojis()
+    if (value.length < MIN_SEARCH_LENGTH) {
+      if (this.#isSearchMode()) {
+        if (this.#prevTabsValue !== null) {
+          this.#$tabs.setAttribute('value', this.#prevTabsValue)
         }
 
-        return
+        this.#updateEmojis()
       }
 
-      const currentActiveTab = this.#$tabs.getAttribute('value')
-
-      if (currentActiveTab !== null) {
-        this.#prevTabsValue = currentActiveTab
-      }
-
-      this.#$tabs.removeAttribute('value')
-      this.#updateSearchEmojis()
+      return
     }
 
-    #updateTabs() {
-      const tabOptions = this.#$tabs.querySelectorAll('sinch-tabs-icon-option')
-      const activeTabName = data[0].name
-      const numTabs = Math.min(data.length, tabOptions.length)
+    const currentActiveTab = this.#$tabs.getAttribute('value')
 
-      for (let i = 0; i < numTabs; i++) {
-        const group = data[i]
-        const tabOption = tabOptions[i]
-
-        tabOption.setAttribute('value', group.name)
-        tabOption.setAttribute('aria-label', groupLabels[i])
-      }
-
-      updateAttribute(this.#$tabs, 'value', activeTabName)
+    if (currentActiveTab !== null) {
+      this.#prevTabsValue = currentActiveTab
     }
 
-    *#iterateSearchEmojis(
-      searchValue: string,
-      skinTone: number
-    ): IterableIterator<TEmoji> {
-      for (const group of data) {
-        for (const entry of group.emojis) {
-          if (entry.label.toLowerCase().includes(searchValue)) {
-            const hasSkins = entry.skins != null
+    this.#$tabs.removeAttribute('value')
+    this.#updateSearchEmojis()
+  }
 
-            if (skinTone === 0 || !hasSkins) {
-              yield entry
-            } else if (hasSkins) {
-              for (const skin of entry.skins!) {
-                if (
-                  skinTone === skin.tone ||
+  #updateTabs() {
+    const tabOptions = this.#$tabs.querySelectorAll('sinch-tabs-icon-option')
+    const activeTabName = data[0].name
+    const numTabs = Math.min(data.length, tabOptions.length)
+
+    for (let i = 0; i < numTabs; i++) {
+      const group = data[i]
+      const tabOption = tabOptions[i]
+
+      tabOption.setAttribute('value', group.name)
+      tabOption.setAttribute('aria-label', groupLabels[i])
+    }
+
+    updateAttribute(this.#$tabs, 'value', activeTabName)
+  }
+
+  *#iterateSearchEmojis(
+    searchValue: string,
+    skinTone: number
+  ): IterableIterator<TEmoji> {
+    for (const group of data) {
+      for (const entry of group.emojis) {
+        if (entry.label.toLowerCase().includes(searchValue)) {
+          const hasSkins = entry.skins != null
+
+          if (skinTone === 0 || !hasSkins) {
+            yield entry
+          } else if (hasSkins) {
+            for (const skin of entry.skins!) {
+              if (
+                skinTone === skin.tone ||
                   (Array.isArray(skin.tone) && skin.tone.includes(skinTone))
-                ) {
-                  yield skin
-                }
+              ) {
+                yield skin
               }
             }
           }
         }
       }
     }
+  }
 
-    *#iterateGroupEmojis(
-      group: TEmojiGroup,
-      skinTone: number
-    ): IterableIterator<TEmoji> {
-      for (const entry of group.emojis) {
-        const hasSkins = entry.skins != null
+  *#iterateGroupEmojis(
+    group: TEmojiGroup,
+    skinTone: number
+  ): IterableIterator<TEmoji> {
+    for (const entry of group.emojis) {
+      const hasSkins = entry.skins != null
 
-        if (skinTone === 0 || !hasSkins) {
-          yield entry
-        } else if (hasSkins) {
-          for (const skin of entry.skins!) {
-            if (
-              skinTone === skin.tone ||
+      if (skinTone === 0 || !hasSkins) {
+        yield entry
+      } else if (hasSkins) {
+        for (const skin of entry.skins!) {
+          if (
+            skinTone === skin.tone ||
               (Array.isArray(skin.tone) && skin.tone.includes(skinTone))
-            ) {
-              yield skin
-            }
+          ) {
+            yield skin
           }
         }
       }
     }
+  }
 
-    #updateSearchEmojis() {
-      const searchValue = this.#$searchInput.value
+  #updateSearchEmojis() {
+    const searchValue = this.#$searchInput.value
 
-      if (searchValue.length < MIN_SEARCH_LENGTH) {
-        return
-      }
-
-      const doc = this.#getDocumentRoot()
-      const fragment = document.createDocumentFragment()
-      const emojiBaseUrl = getEmojiBaseUrl(this)
-      let someFound = false
-
-      for (const entry of this.#iterateSearchEmojis(
-        searchValue,
-        this.#currentSkinTone
-      )) {
-        const el = this.#createEmojiElement(doc, entry, emojiBaseUrl)
-
-        someFound = true
-        fragment.appendChild(el)
-      }
-
-      setClass(this.#$notFound, 'active', !someFound)
-
-      this.#$list.replaceChildren(fragment)
-      this.#$list.scrollTo(0, 0)
+    if (searchValue.length < MIN_SEARCH_LENGTH) {
+      return
     }
 
-    #updateEmojis() {
-      if (this.#isSearchMode()) {
-        return
-      }
+    const doc = this.#getDocumentRoot()
+    const fragment = document.createDocumentFragment()
+    const emojiBaseUrl = getEmojiBaseUrl(this)
+    let someFound = false
 
-      const activeGroup = getAttribute(this.#$tabs, 'value')
-      const group = data.find((group) => group.name === activeGroup)
+    for (const entry of this.#iterateSearchEmojis(
+      searchValue,
+      this.#currentSkinTone
+    )) {
+      const el = this.#createEmojiElement(doc, entry, emojiBaseUrl)
 
-      if (group == null) {
-        return
-      }
-
-      const doc = this.#getDocumentRoot()
-      const fragment = document.createDocumentFragment()
-      const emojiBaseUrl = getEmojiBaseUrl(this)
-
-      for (const entry of this.#iterateGroupEmojis(
-        group,
-        this.#currentSkinTone
-      )) {
-        const el = this.#createEmojiElement(doc, entry, emojiBaseUrl)
-
-        fragment.appendChild(el)
-      }
-
-      this.#$list.replaceChildren(fragment)
-      this.#$list.scrollTo(0, 0)
+      someFound = true
+      fragment.appendChild(el)
     }
 
-    #onSkinButtonClick = () => {
-      updateBooleanAttribute(
-        this.#$skinPopover,
-        'open',
-        !getBooleanAttribute(this.#$skinPopover, 'open')
-      )
+    setClass(this.#$notFound, 'active', !someFound)
+
+    this.#$list.replaceChildren(fragment)
+    this.#$list.scrollTo(0, 0)
+  }
+
+  #updateEmojis() {
+    if (this.#isSearchMode()) {
+      return
     }
 
-    #onSkinPopoverClose = () => {
-      updateBooleanAttribute(this.#$skinPopover, 'open', false)
+    const activeGroup = getAttribute(this.#$tabs, 'value')
+    const group = data.find((group) => group.name === activeGroup)
+
+    if (group == null) {
+      return
     }
 
-    #onSkinMenuChange = (e: CustomEvent<string>) => {
-      this.#$skinSwatch.name = e.detail
-      this.#$skinMenu.value = e.detail
+    const doc = this.#getDocumentRoot()
+    const fragment = document.createDocumentFragment()
+    const emojiBaseUrl = getEmojiBaseUrl(this)
 
-      switch (e.detail) {
-        case 'skintone-default': {
-          this.#currentSkinTone = 0
+    for (const entry of this.#iterateGroupEmojis(
+      group,
+      this.#currentSkinTone
+    )) {
+      const el = this.#createEmojiElement(doc, entry, emojiBaseUrl)
 
-          break
-        }
-        case 'skintone-light': {
-          this.#currentSkinTone = 1
+      fragment.appendChild(el)
+    }
 
-          break
-        }
-        case 'skintone-light-medium': {
-          this.#currentSkinTone = 2
+    this.#$list.replaceChildren(fragment)
+    this.#$list.scrollTo(0, 0)
+  }
 
-          break
-        }
-        case 'skintone-medium': {
-          this.#currentSkinTone = 3
+  #onSkinButtonClick = () => {
+    updateBooleanAttribute(
+      this.#$skinPopover,
+      'open',
+      !getBooleanAttribute(this.#$skinPopover, 'open')
+    )
+  }
 
-          break
-        }
-        case 'skintone-medium-dark': {
-          this.#currentSkinTone = 4
+  #onSkinPopoverClose = () => {
+    updateBooleanAttribute(this.#$skinPopover, 'open', false)
+  }
 
-          break
-        }
-        case 'skintone-dark': {
-          this.#currentSkinTone = 5
+  #onSkinMenuChange = (e: CustomEvent<string>) => {
+    this.#$skinSwatch.name = e.detail
+    this.#$skinMenu.value = e.detail
 
-          break
-        }
+    switch (e.detail) {
+      case 'skintone-default': {
+        this.#currentSkinTone = 0
+
+        break
       }
+      case 'skintone-light': {
+        this.#currentSkinTone = 1
 
-      this.#onSkinPopoverClose()
+        break
+      }
+      case 'skintone-light-medium': {
+        this.#currentSkinTone = 2
 
-      if (this.#isSearchMode()) {
-        this.#updateSearchEmojis()
-      } else {
-        this.#updateEmojis()
+        break
+      }
+      case 'skintone-medium': {
+        this.#currentSkinTone = 3
+
+        break
+      }
+      case 'skintone-medium-dark': {
+        this.#currentSkinTone = 4
+
+        break
+      }
+      case 'skintone-dark': {
+        this.#currentSkinTone = 5
+
+        break
       }
     }
 
-    #isSearchMode() {
-      const activeTab = getAttribute(this.#$tabs, 'value')
+    this.#onSkinPopoverClose()
 
-      return activeTab === null || activeTab.length === 0
-    }
-
-    #createEmojiElement(doc: Document, emoji: TEmoji, baseUrl: string | null) {
-      const btn = doc.createElement('sinch-button')
-      const el = doc.createElement('sinch-emoji')
-
-      el.setAttribute('slot', 'icon')
-      el.setAttribute('char', emoji.emoji)
-      el.setAttribute('label', emoji.label)
-
-      setEmojiBaseUrl(el, baseUrl)
-
-      btn.setAttribute('aria-label', emoji.label)
-      btn.setAttribute('size', 's')
-      btn.setAttribute('data-value', emoji.emoji)
-      btn.appendChild(el)
-
-      return btn
+    if (this.#isSearchMode()) {
+      this.#updateSearchEmojis()
+    } else {
+      this.#updateEmojis()
     }
   }
-)
+
+  #isSearchMode() {
+    const activeTab = getAttribute(this.#$tabs, 'value')
+
+    return activeTab === null || activeTab.length === 0
+  }
+
+  #createEmojiElement(doc: Document, emoji: TEmoji, baseUrl: string | null) {
+    const btn = doc.createElement('sinch-button')
+    const el = doc.createElement('sinch-emoji')
+
+    el.setAttribute('slot', 'icon')
+    el.setAttribute('char', emoji.emoji)
+    el.setAttribute('label', emoji.label)
+
+    setEmojiBaseUrl(el, baseUrl)
+
+    btn.setAttribute('aria-label', emoji.label)
+    btn.setAttribute('size', 's')
+    btn.setAttribute('data-value', emoji.emoji)
+    btn.appendChild(el)
+
+    return btn
+  }
+}
+
+defineCustomElement('sinch-emoji-picker', EmojiPicker)
 
 declare global {
   interface NectaryComponentMap {

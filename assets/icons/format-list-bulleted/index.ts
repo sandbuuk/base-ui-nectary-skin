@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-format-list-bulleted', createIconClass(templateHTML))
+export const IconFormatListBulleted = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-format-list-bulleted', IconFormatListBulleted)
 
 declare global {
   interface HTMLElementTagNameMap {

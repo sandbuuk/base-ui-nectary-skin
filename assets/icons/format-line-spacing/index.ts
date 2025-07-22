@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-format-line-spacing', createIconClass(templateHTML))
+export const IconFormatLineSpacing = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-format-line-spacing', IconFormatLineSpacing)
 
 declare global {
   interface HTMLElementTagNameMap {

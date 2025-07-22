@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-stacked-line-chart', createIconClass(templateHTML))
+export const IconStackedLineChart = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-stacked-line-chart', IconStackedLineChart)
 
 declare global {
   interface HTMLElementTagNameMap {

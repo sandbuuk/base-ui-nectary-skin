@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-spellcheck', createIconClass(templateHTML))
+export const IconSpellcheck = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-spellcheck', IconSpellcheck)
 
 declare global {
   interface HTMLElementTagNameMap {

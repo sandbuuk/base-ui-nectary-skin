@@ -3,7 +3,8 @@ import { createAnimationClass } from '../create-animation-class'
 import animationData from './lottie.json'
 import type { TSinchAnimationElement, TSinchAnimationReact, TSinchAnimationProps } from '../types'
 
-defineCustomElement('sinch-animation-engage-logo', createAnimationClass(animationData))
+export const AnimationEngageLogo = createAnimationClass(animationData)
+defineCustomElement('sinch-animation-engage-logo', AnimationEngageLogo)
 
 declare global {
   interface NectaryComponentMap {

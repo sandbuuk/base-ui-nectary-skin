@@ -21,7 +21,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-action-menu', class extends NectaryElement {
+export class ActionMenu extends NectaryElement {
   #$optionSlot: HTMLSlotElement
   #$listbox: HTMLElement
   #controller: AbortController | null = null
@@ -245,7 +245,9 @@ defineCustomElement('sinch-action-menu', class extends NectaryElement {
   get focusable() {
     return true
   }
-})
+}
+
+defineCustomElement('sinch-action-menu', ActionMenu)
 
 declare global {
   interface NectaryComponentMap {

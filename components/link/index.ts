@@ -18,7 +18,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-link', class extends NectaryElement {
+export class Link extends NectaryElement {
   #$anchor: HTMLAnchorElement
   #$text: HTMLElement
 
@@ -212,7 +212,9 @@ defineCustomElement('sinch-link', class extends NectaryElement {
   #onClickReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-click')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-link', Link)
 
 declare global {
   interface NectaryComponentMap {

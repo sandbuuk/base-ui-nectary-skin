@@ -25,7 +25,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-popover', class extends NectaryElement {
+export class Popover extends NectaryElement {
   #$pop: NectaryComponentVanilla<'sinch-pop'>
   #$content: HTMLElement
   #$tip: HTMLElement
@@ -223,7 +223,9 @@ defineCustomElement('sinch-popover', class extends NectaryElement {
 
     this.#$content.style.maxWidth = `${availableSpace}px`
   }
-})
+}
+
+defineCustomElement('sinch-popover', Popover)
 
 declare global {
   interface NectaryComponentMap {

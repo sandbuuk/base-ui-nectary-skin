@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-fullscreen', createIconClass(templateHTML))
+export const IconFullscreen = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-fullscreen', IconFullscreen)
 
 declare global {
   interface HTMLElementTagNameMap {

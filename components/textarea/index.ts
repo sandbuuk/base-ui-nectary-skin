@@ -24,7 +24,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-textarea', class extends NectaryElement {
+export class Textarea extends NectaryElement {
   #$input: HTMLTextAreaElement
   #$bottomSlot: HTMLSlotElement
   #$bottomWrapper: HTMLElement
@@ -479,7 +479,9 @@ defineCustomElement('sinch-textarea', class extends NectaryElement {
   #onBlurReactHandler = () => {
     getReactEventHandler(this, 'on-blur')?.()
   }
-})
+}
+
+defineCustomElement('sinch-textarea', Textarea)
 
 declare global {
   interface NectaryComponentMap {

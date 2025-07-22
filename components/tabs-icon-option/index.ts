@@ -17,7 +17,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-tabs-icon-option', class extends NectaryElement {
+export class TabsIconOption extends NectaryElement {
   #$button: HTMLButtonElement
   #$tooltip: NectaryComponentVanilla<'sinch-tooltip'>
 
@@ -107,7 +107,9 @@ defineCustomElement('sinch-tabs-icon-option', class extends NectaryElement {
       new CustomEvent('option-change', { bubbles: true, detail: this.value })
     )
   }
-})
+}
+
+defineCustomElement('sinch-tabs-icon-option', TabsIconOption)
 
 declare global {
   interface NectaryComponentMap {

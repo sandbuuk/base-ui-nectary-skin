@@ -15,7 +15,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-button-group-item', class extends NectaryElement {
+export class ButtonGroupItem extends NectaryElement {
   #$sinchButton: NectaryComponentVanilla<'sinch-button-group-item'>
   #controller: AbortController | null = null
 
@@ -96,7 +96,9 @@ defineCustomElement('sinch-button-group-item', class extends NectaryElement {
   #onBlurReactHandler = () => {
     getReactEventHandler(this, 'on-blur')?.()
   }
-})
+}
+
+defineCustomElement('sinch-button-group-item', ButtonGroupItem)
 
 declare global {
   interface NectaryComponentMap {

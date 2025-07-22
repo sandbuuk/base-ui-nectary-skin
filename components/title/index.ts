@@ -19,7 +19,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-title', class extends NectaryElement {
+export class Title extends NectaryElement {
   #$text: HTMLElement
 
   constructor() {
@@ -89,7 +89,9 @@ defineCustomElement('sinch-title', class extends NectaryElement {
   get ellipsis() {
     return getBooleanAttribute(this, 'ellipsis')
   }
-})
+}
+
+defineCustomElement('sinch-title', Title)
 
 declare global {
   interface NectaryComponentMap {

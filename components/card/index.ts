@@ -20,7 +20,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-card', class extends NectaryElement {
+export class Card extends NectaryElement {
   #$text: HTMLElement
   #$label: HTMLElement
   #$caption: HTMLElement
@@ -180,7 +180,9 @@ defineCustomElement('sinch-card', class extends NectaryElement {
       e.stopPropagation()
     }
   }
-})
+}
+
+defineCustomElement('sinch-card', Card)
 
 declare global {
   interface NectaryComponentMap {

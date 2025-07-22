@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-flip-to-back', createIconClass(templateHTML))
+export const IconFlipToBack = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-flip-to-back', IconFlipToBack)
 
 declare global {
   interface HTMLElementTagNameMap {

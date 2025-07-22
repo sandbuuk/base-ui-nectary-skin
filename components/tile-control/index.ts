@@ -22,7 +22,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-tile-control', class extends NectaryElement {
+export class TileControl extends NectaryElement {
   #$slot: HTMLSlotElement
 
   constructor() {
@@ -159,7 +159,9 @@ defineCustomElement('sinch-tile-control', class extends NectaryElement {
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-tile-control', TileControl)
 
 declare global {
   interface NectaryComponentMap {

@@ -3,7 +3,8 @@ import { createIllustrationClass } from '../create-illustration-class'
 import templateHTML from './template.html'
 import type { TSinchIllustrationElement, TSinchIllustrationReact, TSinchIllustrationProps } from '../types'
 
-defineCustomElement('sinch-illustration-parcel-delivery', createIllustrationClass(templateHTML))
+export const IllustrationParcelDelivery = createIllustrationClass(templateHTML)
+defineCustomElement('sinch-illustration-parcel-delivery', IllustrationParcelDelivery)
 
 declare global {
   interface NectaryComponentMap {

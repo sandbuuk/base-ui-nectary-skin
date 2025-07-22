@@ -20,7 +20,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-radio', class extends NectaryElement {
+export class Radio extends NectaryElement {
   #$slot: HTMLSlotElement
   #controller: AbortController | null = null
   #internals: ElementInternals
@@ -263,7 +263,9 @@ defineCustomElement('sinch-radio', class extends NectaryElement {
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-radio', Radio)
 
 declare global {
   interface NectaryComponentMap {

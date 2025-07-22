@@ -20,7 +20,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-checkbox', class extends NectaryElement {
+export class Checkbox extends NectaryElement {
   #$label: NectaryComponentVanilla<'sinch-rich-text'>
   #controller: AbortController | null = null
   #internals: ElementInternals
@@ -229,7 +229,9 @@ defineCustomElement('sinch-checkbox', class extends NectaryElement {
   #onBlurReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-blur')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-checkbox', Checkbox)
 
 declare global {
   interface NectaryComponentMap {

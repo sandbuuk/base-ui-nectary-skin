@@ -40,7 +40,7 @@ const observeDialogVisibilityManipulation = (sinchDialogElement: NectaryComponen
   return checkInterval
 }
 
-defineCustomElement('sinch-persistent-overlay', class extends NectaryElement {
+export class PersistentOverlay extends NectaryElement {
   #$sinchDialog: NectaryComponentVanilla<'sinch-dialog'>
   #visibilityObserverInterval?: ReturnType<typeof setInterval>
   #controller: AbortController | null = null
@@ -138,7 +138,9 @@ defineCustomElement('sinch-persistent-overlay', class extends NectaryElement {
   #onVisibilityAlteredReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-visibility-altered')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-persistent-overlay', PersistentOverlay)
 
 declare global {
   interface NectaryComponentMap {

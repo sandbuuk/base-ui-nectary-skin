@@ -47,7 +47,7 @@ template.innerHTML = templateHTML
 // @ts-ignore
 const SUPPORTS_SHADOW_SELECTION = typeof window.ShadowRoot.prototype.getSelection === 'function'
 
-defineCustomElement('sinch-rich-textarea', class extends NectaryElement {
+export class RichTextarea extends NectaryElement {
   #$input: TRichTextareaRoot
   #$placeholder: HTMLElement
   #controller: AbortController | null = null
@@ -639,8 +639,9 @@ defineCustomElement('sinch-rich-textarea', class extends NectaryElement {
   #onSelectionReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-selection')?.(e)
   }
-})
+}
 
+defineCustomElement('sinch-rich-textarea', RichTextarea)
 declare global {
   interface NectaryComponentMap {
     'sinch-rich-textarea': TSinchRichTextarea,
