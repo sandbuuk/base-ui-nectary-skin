@@ -17,7 +17,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-radio-option', class extends NectaryElement {
+export class RadioOption extends NectaryElement {
   #$label: HTMLElement
 
   constructor() {
@@ -117,7 +117,9 @@ defineCustomElement('sinch-radio-option', class extends NectaryElement {
   get focusable() {
     return true
   }
-})
+}
+
+defineCustomElement('sinch-radio-option', RadioOption)
 
 declare global {
   interface NectaryComponentMap {

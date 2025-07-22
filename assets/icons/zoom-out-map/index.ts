@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-zoom-out-map', createIconClass(templateHTML))
+export const IconZoomOutMap = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-zoom-out-map', IconZoomOutMap)
 
 declare global {
   interface HTMLElementTagNameMap {

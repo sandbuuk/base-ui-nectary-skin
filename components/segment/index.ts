@@ -25,7 +25,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-segment', class extends NectaryElement {
+export class Segment extends NectaryElement {
   #$caption: NectaryComponentVanilla<'sinch-title'>
   #$previewSlot: HTMLSlotElement
   #$previewWrapper: HTMLElement
@@ -149,7 +149,9 @@ defineCustomElement('sinch-segment', class extends NectaryElement {
   #onActionSlotChange = () => {
     setClass(this.#$actionWrapper, 'empty', this.#$actionSlot.assignedElements().length === 0)
   }
-})
+}
+
+defineCustomElement('sinch-segment', Segment)
 
 declare global {
   interface NectaryComponentMap {

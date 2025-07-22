@@ -25,127 +25,126 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement(
-  'sinch-accordion-item',
-  class extends NectaryElement {
-    #$button: HTMLButtonElement
-    #$title: TSinchTitleElement
-    #$optionalText: HTMLElement
+export class AccordionItem extends NectaryElement {
+  #$button: HTMLButtonElement
+  #$title: TSinchTitleElement
+  #$optionalText: HTMLElement
 
-    constructor() {
-      super()
+  constructor() {
+    super()
 
-      const shadowRoot = this.attachShadow({ delegatesFocus: true })
+    const shadowRoot = this.attachShadow({ delegatesFocus: true })
 
-      shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(template.content.cloneNode(true))
 
-      this.#$button = shadowRoot.querySelector('#button')!
-      this.#$title = shadowRoot.querySelector('#title')!
-      this.#$optionalText = shadowRoot.querySelector('#optional')!
+    this.#$button = shadowRoot.querySelector('#button')!
+    this.#$title = shadowRoot.querySelector('#title')!
+    this.#$optionalText = shadowRoot.querySelector('#optional')!
+  }
+
+  connectedCallback() {}
+
+  disconnectedCallback() {}
+
+  static get observedAttributes() {
+    return ['label', 'disabled', 'data-checked', 'optionaltext']
+  }
+
+  attributeChangedCallback(
+    name: string,
+    oldVal: string | null,
+    newVal: string | null
+  ) {
+    if (isAttrEqual(oldVal, newVal)) {
+      return
     }
 
-    connectedCallback() {}
+    switch (name) {
+      case 'label': {
+        updateAttribute(this.#$title, 'text', newVal)
 
-    disconnectedCallback() {}
-
-    static get observedAttributes() {
-      return ['label', 'disabled', 'data-checked', 'optionaltext']
-    }
-
-    attributeChangedCallback(
-      name: string,
-      oldVal: string | null,
-      newVal: string | null
-    ) {
-      if (isAttrEqual(oldVal, newVal)) {
-        return
+        break
       }
 
-      switch (name) {
-        case 'label': {
-          updateAttribute(this.#$title, 'text', newVal)
+      case 'disabled': {
+        this.#$button.disabled = isAttrTrue(newVal)
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
-          break
-        }
-
-        case 'disabled': {
-          this.#$button.disabled = isAttrTrue(newVal)
-          updateBooleanAttribute(this, name, isAttrTrue(newVal))
-
-          break
-        }
-
-        case 'data-checked': {
-          updateExplicitBooleanAttribute(
-            this.#$button,
-            'aria-expanded',
-            isAttrTrue(newVal)
-          )
-
-          break
-        }
-
-        case 'optionaltext': {
-          this.#$optionalText.textContent = newVal
-
-          break
-        }
+        break
       }
-    }
 
-    set value(value: string) {
-      updateAttribute(this, 'value', value)
-    }
+      case 'data-checked': {
+        updateExplicitBooleanAttribute(
+          this.#$button,
+          'aria-expanded',
+          isAttrTrue(newVal)
+        )
 
-    get value(): string {
-      return getAttribute(this, 'value', '')
-    }
+        break
+      }
 
-    set label(value: string) {
-      updateAttribute(this, 'label', value)
-    }
+      case 'optionaltext': {
+        this.#$optionalText.textContent = newVal
 
-    get label(): string {
-      return getAttribute(this, 'label', '')
-    }
-
-    set disabled(isDisabled: boolean) {
-      updateBooleanAttribute(this, 'disabled', isDisabled)
-    }
-
-    get disabled(): boolean {
-      return getBooleanAttribute(this, 'disabled')
-    }
-
-    get status() {
-      return getLiteralAttribute(this, statusValues, 'status', null)
-    }
-
-    set status(value: TSinchAccordionStatusType | null) {
-      updateLiteralAttribute(this, statusValues, 'status', value)
-    }
-
-    set optionalText(value: string | null) {
-      updateAttribute(this, 'optionaltext', value)
-    }
-
-    get optionalText() {
-      return getAttribute(this, 'optionaltext')
-    }
-
-    get focusable() {
-      return true
-    }
-
-    focus() {
-      this.#$button.focus()
-    }
-
-    blur() {
-      this.#$button.blur()
+        break
+      }
     }
   }
-)
+
+  set value(value: string) {
+    updateAttribute(this, 'value', value)
+  }
+
+  get value(): string {
+    return getAttribute(this, 'value', '')
+  }
+
+  set label(value: string) {
+    updateAttribute(this, 'label', value)
+  }
+
+  get label(): string {
+    return getAttribute(this, 'label', '')
+  }
+
+  set disabled(isDisabled: boolean) {
+    updateBooleanAttribute(this, 'disabled', isDisabled)
+  }
+
+  get disabled(): boolean {
+    return getBooleanAttribute(this, 'disabled')
+  }
+
+  get status() {
+    return getLiteralAttribute(this, statusValues, 'status', null)
+  }
+
+  set status(value: TSinchAccordionStatusType | null) {
+    updateLiteralAttribute(this, statusValues, 'status', value)
+  }
+
+  set optionalText(value: string | null) {
+    updateAttribute(this, 'optionaltext', value)
+  }
+
+  get optionalText() {
+    return getAttribute(this, 'optionaltext')
+  }
+
+  get focusable() {
+    return true
+  }
+
+  focus() {
+    this.#$button.focus()
+  }
+
+  blur() {
+    this.#$button.blur()
+  }
+}
+
+defineCustomElement('sinch-accordion-item', AccordionItem)
 
 declare global {
   interface NectaryComponentMap {

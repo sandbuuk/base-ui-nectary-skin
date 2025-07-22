@@ -16,7 +16,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-tabs', class extends NectaryElement {
+export class Tabs extends NectaryElement {
   #$slot: HTMLSlotElement
   #controller: AbortController | null = null
 
@@ -105,7 +105,9 @@ defineCustomElement('sinch-tabs', class extends NectaryElement {
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-tabs', Tabs)
 
 declare global {
   interface NectaryComponentMap {

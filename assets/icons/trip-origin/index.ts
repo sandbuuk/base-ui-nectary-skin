@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-trip-origin', createIconClass(templateHTML))
+export const IconTripOrigin = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-trip-origin', IconTripOrigin)
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -17,7 +17,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-tile-control-option', class extends NectaryElement {
+export class TileControlOption extends NectaryElement {
   #$button: HTMLButtonElement
   #$text: HTMLElement
 
@@ -132,7 +132,9 @@ defineCustomElement('sinch-tile-control-option', class extends NectaryElement {
   #onBlurReactHandler = () => {
     getReactEventHandler(this, 'on-blur')?.()
   }
-})
+}
+
+defineCustomElement('sinch-tile-control-option', TileControlOption)
 
 declare global {
   interface NectaryComponentMap {

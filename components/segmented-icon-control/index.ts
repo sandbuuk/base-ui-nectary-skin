@@ -19,7 +19,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement {
+export class SegmentedIconControl extends NectaryElement {
   #$slot: HTMLSlotElement
   #controller: AbortController | null = null
 
@@ -140,7 +140,9 @@ defineCustomElement('sinch-segmented-icon-control', class extends NectaryElement
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-segmented-icon-control', SegmentedIconControl)
 
 declare global {
   interface NectaryComponentMap {

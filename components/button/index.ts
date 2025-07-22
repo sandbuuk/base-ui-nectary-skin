@@ -26,7 +26,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-button', class extends NectaryElement {
+export class Button extends NectaryElement {
   #$button: HTMLDivElement
   #$text: HTMLElement
   #controller: AbortController | null = null
@@ -260,7 +260,9 @@ defineCustomElement('sinch-button', class extends NectaryElement {
   #onClickReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-click')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-button', Button)
 
 declare global {
   interface NectaryComponentMap {

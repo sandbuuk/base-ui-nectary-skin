@@ -12,7 +12,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-code-tag', class extends NectaryElement {
+export class CodeTag extends NectaryElement {
   #$text: HTMLElement
 
   constructor() {
@@ -46,7 +46,9 @@ defineCustomElement('sinch-code-tag', class extends NectaryElement {
   set text(value: string) {
     updateAttribute(this, 'text', value)
   }
-})
+}
+
+defineCustomElement('sinch-code-tag', CodeTag)
 
 declare global {
   interface NectaryComponentMap {

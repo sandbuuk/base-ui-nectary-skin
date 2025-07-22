@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-filter-center-focus', createIconClass(templateHTML))
+export const IconFilterCenterFocus = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-filter-center-focus', IconFilterCenterFocus)
 
 declare global {
   interface HTMLElementTagNameMap {

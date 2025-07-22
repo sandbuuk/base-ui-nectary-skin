@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-remove-circle', createIconClass(templateHTML))
+export const IconRemoveCircle = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-remove-circle', IconRemoveCircle)
 
 declare global {
   interface HTMLElementTagNameMap {

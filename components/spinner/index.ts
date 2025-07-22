@@ -17,7 +17,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-spinner', class extends NectaryElement {
+export class Spinner extends NectaryElement {
   #controller: AbortController | null = null
 
   constructor() {
@@ -80,7 +80,9 @@ defineCustomElement('sinch-spinner', class extends NectaryElement {
       }
     }
   }
-})
+}
+
+defineCustomElement('sinch-spinner', Spinner)
 
 declare global {
   interface NectaryComponentMap {

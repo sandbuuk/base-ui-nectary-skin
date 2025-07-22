@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-arrow-drop-down', createIconClass(templateHTML))
+export const IconArrowDropDown = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-arrow-drop-down', IconArrowDropDown)
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -7,7 +7,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-grid', class extends NectaryElement {
+export class Grid extends NectaryElement {
   constructor() {
     super()
 
@@ -15,7 +15,9 @@ defineCustomElement('sinch-grid', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
   }
-})
+}
+
+defineCustomElement('sinch-grid', Grid)
 
 declare global {
   interface NectaryComponentMap {

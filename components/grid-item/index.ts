@@ -7,7 +7,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-grid-item', class extends NectaryElement {
+export class GridItem extends NectaryElement {
   constructor() {
     super()
 
@@ -47,7 +47,9 @@ defineCustomElement('sinch-grid-item', class extends NectaryElement {
   set xl(value: number | null) {
     updateIntegerAttribute(this, 'xl', value)
   }
-})
+}
+
+defineCustomElement('sinch-grid-item', GridItem)
 
 declare global {
   interface NectaryComponentMap {

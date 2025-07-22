@@ -14,7 +14,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-horizontal-stepper', class extends NectaryElement {
+export class HorizontalStepper extends NectaryElement {
   #$itemsSlot: HTMLSlotElement
   #$progressBar: HTMLElement
 
@@ -87,7 +87,9 @@ defineCustomElement('sinch-horizontal-stepper', class extends NectaryElement {
     this.setAttribute('aria-valuemax', String($items.length))
     this.setAttribute('aria-valuenow', String(valueIndex + 1))
   }
-})
+}
+
+defineCustomElement('sinch-horizontal-stepper', HorizontalStepper)
 
 declare global {
   interface NectaryComponentMap {

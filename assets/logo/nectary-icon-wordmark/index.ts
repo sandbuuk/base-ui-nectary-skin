@@ -3,7 +3,8 @@ import { createLogoClass } from '../create-logo-class'
 import templateHTML from './template.html'
 import type { TSinchLogoElement, TSinchLogoReact, TSinchLogoProps } from '../types'
 
-defineCustomElement('sinch-logo-nectary-icon-wordmark', createLogoClass(templateHTML))
+export const LogoNectaryIconWordmark = createLogoClass(templateHTML)
+defineCustomElement('sinch-logo-nectary-icon-wordmark', LogoNectaryIconWordmark)
 
 declare global {
   interface NectaryComponentMap {

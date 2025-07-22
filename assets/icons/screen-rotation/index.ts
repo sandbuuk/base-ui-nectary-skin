@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-screen-rotation', createIconClass(templateHTML))
+export const IconScreenRotation = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-screen-rotation', IconScreenRotation)
 
 declare global {
   interface HTMLElementTagNameMap {

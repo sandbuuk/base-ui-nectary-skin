@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-format-underlined', createIconClass(templateHTML))
+export const IconFormatUnderlined = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-format-underlined', IconFormatUnderlined)
 
 declare global {
   interface HTMLElementTagNameMap {

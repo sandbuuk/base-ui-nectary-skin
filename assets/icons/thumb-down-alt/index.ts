@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-thumb-down-alt', createIconClass(templateHTML))
+export const IconThumbDownAlt = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-thumb-down-alt', IconThumbDownAlt)
 
 declare global {
   interface HTMLElementTagNameMap {

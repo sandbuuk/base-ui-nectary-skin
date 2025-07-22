@@ -1,6 +1,6 @@
 import { defineCustomElement, unpackCsv } from '../utils'
 
-defineCustomElement('sinch-stop-events', class extends HTMLElement {
+export class StopEvents extends HTMLElement {
   #controller: AbortController | null = null
   constructor() {
     super()
@@ -26,4 +26,6 @@ defineCustomElement('sinch-stop-events', class extends HTMLElement {
   #stopEvent = (e: Event) => {
     e.stopPropagation()
   }
-})
+}
+
+defineCustomElement('sinch-stop-events', StopEvents)

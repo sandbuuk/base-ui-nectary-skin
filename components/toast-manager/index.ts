@@ -24,7 +24,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-toast-manager', class extends NectaryElement {
+export class ToastManager extends NectaryElement {
   #$slot: HTMLSlotElement
   #$list: HTMLElement
   #map: WeakMap<Element, Element> = new WeakMap()
@@ -237,7 +237,9 @@ defineCustomElement('sinch-toast-manager', class extends NectaryElement {
       this.#map.get(item)?.querySelector('[slot=action]')?.dispatchEvent(new CustomEvent('-click'))
     }
   }
-})
+}
+
+defineCustomElement('sinch-toast-manager', ToastManager)
 
 declare global {
   interface NectaryComponentMap {

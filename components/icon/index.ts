@@ -12,7 +12,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-icon', class extends NectaryElement {
+export class Icon extends NectaryElement {
   #$icon: HTMLElement
 
   constructor() {
@@ -81,7 +81,9 @@ defineCustomElement('sinch-icon', class extends NectaryElement {
       return updateAttribute(this.#$icon, 'class', 'p-to-z')
     }
   }
-})
+}
+
+defineCustomElement('sinch-icon', Icon)
 
 declare global {
   interface NectaryComponentMap {

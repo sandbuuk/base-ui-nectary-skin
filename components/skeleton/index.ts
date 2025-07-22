@@ -18,7 +18,7 @@ template.innerHTML = templateHTML
 const ANIMATION_DURATION = 2000
 const BORDER_WIDTH = 1
 
-defineCustomElement('sinch-skeleton', class extends NectaryElement {
+export class Skeleton extends NectaryElement {
   #animation: Animation | null = null
   #shimmer: HTMLElement
   #wrapper: HTMLElement
@@ -137,7 +137,9 @@ defineCustomElement('sinch-skeleton', class extends NectaryElement {
 
     this.#clip.appendChild(rect)
   }
-})
+}
+
+defineCustomElement('sinch-skeleton', Skeleton)
 
 declare global {
   interface NectaryComponentMap {

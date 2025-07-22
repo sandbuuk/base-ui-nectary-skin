@@ -15,7 +15,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-color-swatch', class extends NectaryElement {
+export class ColorSwatch extends NectaryElement {
   #$wrapper: HTMLElement
 
   constructor() {
@@ -76,7 +76,9 @@ defineCustomElement('sinch-color-swatch', class extends NectaryElement {
       setClass(this.#$wrapper, 'no-color', true)
     }
   }
-})
+}
+
+defineCustomElement('sinch-color-swatch', ColorSwatch)
 
 declare global {
   interface NectaryComponentMap {

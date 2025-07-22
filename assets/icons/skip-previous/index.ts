@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-skip-previous', createIconClass(templateHTML))
+export const IconSkipPrevious = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-skip-previous', IconSkipPrevious)
 
 declare global {
   interface HTMLElementTagNameMap {

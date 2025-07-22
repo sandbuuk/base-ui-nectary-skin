@@ -29,7 +29,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-pop', class extends NectaryElement {
+export class Pop extends NectaryElement {
   #$targetWrapper: HTMLElement
   #$focus: HTMLElement
   #$dialog: HTMLDialogElement
@@ -582,7 +582,9 @@ defineCustomElement('sinch-pop', class extends NectaryElement {
       this.#updateOrientation()
     }
   }
-})
+}
+
+defineCustomElement('sinch-pop', Pop)
 
 declare global {
   interface NectaryComponentMap {

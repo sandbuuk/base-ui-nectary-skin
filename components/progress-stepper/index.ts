@@ -22,7 +22,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-progress-stepper', class extends NectaryElement {
+export class ProgressStepper extends NectaryElement {
   #$slot: HTMLSlotElement
   #controller: AbortController | null = null
   #$items: HTMLElement[] = []
@@ -271,7 +271,9 @@ defineCustomElement('sinch-progress-stepper', class extends NectaryElement {
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-progress-stepper', ProgressStepper)
 
 declare global {
   interface NectaryComponentMap {

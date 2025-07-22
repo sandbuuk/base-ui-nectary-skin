@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-delete-sweep', createIconClass(templateHTML))
+export const IconDeleteSweep = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-delete-sweep', IconDeleteSweep)
 
 declare global {
   interface HTMLElementTagNameMap {

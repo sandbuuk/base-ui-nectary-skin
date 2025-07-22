@@ -34,7 +34,7 @@ const NEEDLE_HOUR_12_LENGTH = HOUR_12_RADIUS
 const NEEDLE_HOUR_24_LENGTH = HOUR_24_RADIUS
 const NEEDLE_MINUTE_LENGTH = MINUTE_RADIUS
 
-defineCustomElement('sinch-time-picker', class extends NectaryElement {
+export class TimePicker extends NectaryElement {
   #$pickerHours: HTMLElement
   #$pickerMinutes: HTMLElement
   #$pickerTouch: HTMLElement
@@ -442,7 +442,9 @@ defineCustomElement('sinch-time-picker', class extends NectaryElement {
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-time-picker', TimePicker)
 
 declare global {
   interface NectaryComponentMap {

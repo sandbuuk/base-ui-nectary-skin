@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-keyboard-capslock', createIconClass(templateHTML))
+export const IconKeyboardCapslock = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-keyboard-capslock', IconKeyboardCapslock)
 
 declare global {
   interface HTMLElementTagNameMap {

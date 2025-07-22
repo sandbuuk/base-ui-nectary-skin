@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-format-indent-increase', createIconClass(templateHTML))
+export const IconFormatIndentIncrease = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-format-indent-increase', IconFormatIndentIncrease)
 
 declare global {
   interface HTMLElementTagNameMap {

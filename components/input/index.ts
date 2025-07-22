@@ -39,7 +39,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-input', class extends NectaryElement {
+export class Input extends NectaryElement {
   #$input: HTMLInputElement
   #$inputMask: HTMLElement
   #$iconSlot: HTMLSlotElement
@@ -927,7 +927,9 @@ defineCustomElement('sinch-input', class extends NectaryElement {
   #onWheelReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-wheel')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-input', Input)
 
 declare global {
   interface NectaryComponentMap {

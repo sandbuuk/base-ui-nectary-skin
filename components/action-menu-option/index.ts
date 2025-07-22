@@ -19,7 +19,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends NectaryElement {
+export class ActionMenuOption extends NectaryElement {
   #$content: HTMLElement
   #controller: AbortController | null = null
 
@@ -113,7 +113,9 @@ defineCustomElement('sinch-action-menu-option', class ActionMenuOption extends N
   #onClickReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-click')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-action-menu-option', ActionMenuOption)
 
 declare global {
   interface NectaryComponentMap {

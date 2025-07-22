@@ -17,7 +17,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-avatar', class extends NectaryElement {
+export class Avatar extends NectaryElement {
   #$circle: HTMLElement
   #$text: HTMLElement
   #$image: HTMLImageElement
@@ -129,7 +129,9 @@ defineCustomElement('sinch-avatar', class extends NectaryElement {
       this.#$circle.style.removeProperty('color')
     }
   }
-})
+}
+
+defineCustomElement('sinch-avatar', Avatar)
 
 declare global {
   interface NectaryComponentMap {

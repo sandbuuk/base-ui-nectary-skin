@@ -51,7 +51,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-date-picker', class extends NectaryElement {
+export class DatePicker extends NectaryElement {
   #$month: HTMLElement
   #$weeks: HTMLElement[]
   #$days: HTMLElement[][]
@@ -587,7 +587,9 @@ defineCustomElement('sinch-date-picker', class extends NectaryElement {
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-date-picker', DatePicker)
 
 declare global {
   interface NectaryComponentMap {

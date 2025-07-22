@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-panorama-vertical', createIconClass(templateHTML))
+export const IconPanoramaVertical = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-panorama-vertical', IconPanoramaVertical)
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-swap-horizontal-circle', createIconClass(templateHTML))
+export const IconSwapHorizontalCircle = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-swap-horizontal-circle', IconSwapHorizontalCircle)
 
 declare global {
   interface HTMLElementTagNameMap {

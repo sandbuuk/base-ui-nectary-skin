@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-keyboard-arrow-up', createIconClass(templateHTML))
+export const IconKeyboardArrowUp = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-keyboard-arrow-up', IconKeyboardArrowUp)
 
 declare global {
   interface HTMLElementTagNameMap {

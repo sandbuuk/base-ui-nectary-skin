@@ -18,7 +18,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-segmented-control-option', class extends NectaryElement {
+export class SegmentedControlOption extends NectaryElement {
   #$label: HTMLElement
   #controller: AbortController | null = null
 
@@ -129,7 +129,9 @@ defineCustomElement('sinch-segmented-control-option', class extends NectaryEleme
   #onBlurReactHandler = () => {
     getReactEventHandler(this, 'on-blur')?.()
   }
-})
+}
+
+defineCustomElement('sinch-segmented-control-option', SegmentedControlOption)
 
 declare global {
   interface NectaryComponentMap {

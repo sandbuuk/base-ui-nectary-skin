@@ -13,7 +13,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-table-cell', class extends NectaryElement {
+export class TableCell extends NectaryElement {
   constructor() {
     super()
 
@@ -33,7 +33,9 @@ defineCustomElement('sinch-table-cell', class extends NectaryElement {
   get align(): TSinchTableAlignType {
     return getLiteralAttribute(this, alignValues, 'align', 'start')
   }
-})
+}
+
+defineCustomElement('sinch-table-cell', TableCell)
 
 declare global {
   interface NectaryComponentMap {

@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-check-box-outline-blank', createIconClass(templateHTML))
+export const IconCheckBoxOutlineBlank = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-check-box-outline-blank', IconCheckBoxOutlineBlank)
 
 declare global {
   interface HTMLElementTagNameMap {

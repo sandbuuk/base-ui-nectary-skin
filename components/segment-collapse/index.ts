@@ -16,85 +16,84 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement(
-  'sinch-segment-collapse',
-  class extends NectaryElement {
-    #$button: HTMLElement
+export class SegmentCollapse extends NectaryElement {
+  #$button: HTMLElement
 
-    constructor() {
-      super()
+  constructor() {
+    super()
 
-      const shadowRoot = this.attachShadow()
+    const shadowRoot = this.attachShadow()
 
-      shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(template.content.cloneNode(true))
 
-      this.#$button = shadowRoot.querySelector('#button')!
-    }
+    this.#$button = shadowRoot.querySelector('#button')!
+  }
 
-    connectedCallback() {
-      this.setAttribute('role', 'checkbox')
-      this.#$button.addEventListener('click', this.#onClick)
-      this.addEventListener('-change', this.#onChangeReactHandler)
-    }
+  connectedCallback() {
+    this.setAttribute('role', 'checkbox')
+    this.#$button.addEventListener('click', this.#onClick)
+    this.addEventListener('-change', this.#onChangeReactHandler)
+  }
 
-    disconnectedCallback() {
-      this.#$button.removeEventListener('click', this.#onClick)
-      this.removeEventListener('-change', this.#onChangeReactHandler)
-    }
+  disconnectedCallback() {
+    this.#$button.removeEventListener('click', this.#onClick)
+    this.removeEventListener('-change', this.#onChangeReactHandler)
+  }
 
-    static get observedAttributes() {
-      return ['value']
-    }
+  static get observedAttributes() {
+    return ['value']
+  }
 
-    attributeChangedCallback(
-      name: string,
-      oldVal: string | null,
-      newVal: string | null
-    ) {
-      switch (name) {
-        case 'value': {
-          updateExplicitBooleanAttribute(
-            this,
-            'aria-checked',
-            isAttrTrue(newVal)
-          )
+  attributeChangedCallback(
+    name: string,
+    oldVal: string | null,
+    newVal: string | null
+  ) {
+    switch (name) {
+      case 'value': {
+        updateExplicitBooleanAttribute(
+          this,
+          'aria-checked',
+          isAttrTrue(newVal)
+        )
 
-          break
-        }
+        break
       }
     }
-
-    set value(isChecked: boolean) {
-      updateBooleanAttribute(this, 'value', isChecked)
-    }
-
-    get value() {
-      return getBooleanAttribute(this, 'value')
-    }
-
-    get focusable() {
-      return true
-    }
-
-    focus() {
-      this.#$button.focus()
-    }
-
-    blur() {
-      this.#$button.blur()
-    }
-
-    #onClick = () => {
-      const detail = !this.value
-
-      this.dispatchEvent(new CustomEvent('-change', { detail }))
-    }
-
-    #onChangeReactHandler = (e: Event) => {
-      getReactEventHandler(this, 'on-change')?.(e)
-    }
   }
-)
+
+  set value(isChecked: boolean) {
+    updateBooleanAttribute(this, 'value', isChecked)
+  }
+
+  get value() {
+    return getBooleanAttribute(this, 'value')
+  }
+
+  get focusable() {
+    return true
+  }
+
+  focus() {
+    this.#$button.focus()
+  }
+
+  blur() {
+    this.#$button.blur()
+  }
+
+  #onClick = () => {
+    const detail = !this.value
+
+    this.dispatchEvent(new CustomEvent('-change', { detail }))
+  }
+
+  #onChangeReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-change')?.(e)
+  }
+}
+
+defineCustomElement('sinch-segment-collapse', SegmentCollapse)
 
 declare global {
   interface NectaryComponentMap {

@@ -15,7 +15,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-color-menu-option', class extends NectaryElement {
+export class ColorMenuOption extends NectaryElement {
   #$wrapper: HTMLElement
   #$tooltip: NectaryComponentVanilla<'sinch-tooltip'>
   #$swatch: NectaryComponentVanilla<'sinch-color-swatch'>
@@ -66,7 +66,9 @@ defineCustomElement('sinch-color-menu-option', class extends NectaryElement {
   get value(): string {
     return getAttribute(this, 'value', '')
   }
-})
+}
+
+defineCustomElement('sinch-color-menu-option', ColorMenuOption)
 
 declare global {
   interface NectaryComponentMap {

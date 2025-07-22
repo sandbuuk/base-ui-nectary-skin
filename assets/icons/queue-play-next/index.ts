@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-queue-play-next', createIconClass(templateHTML))
+export const IconQueuePlayNext = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-queue-play-next', IconQueuePlayNext)
 
 declare global {
   interface HTMLElementTagNameMap {

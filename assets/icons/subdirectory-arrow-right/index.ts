@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-subdirectory-arrow-right', createIconClass(templateHTML))
+export const IconSubdirectoryArrowRight = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-subdirectory-arrow-right', IconSubdirectoryArrowRight)
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -20,7 +20,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-chip', class extends NectaryElement {
+export class Chip extends NectaryElement {
   #$text: HTMLElement
   #$button: HTMLElement
 
@@ -175,7 +175,9 @@ defineCustomElement('sinch-chip', class extends NectaryElement {
   #onClickReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-click')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-chip', Chip)
 
 declare global {
   interface NectaryComponentMap {

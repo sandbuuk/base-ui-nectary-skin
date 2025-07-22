@@ -22,7 +22,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-rich-text', class extends NectaryElement {
+export class RichText extends NectaryElement {
   #wrapper: HTMLElement
   #parseVisitor
   #controller: AbortController | null = null
@@ -131,7 +131,9 @@ defineCustomElement('sinch-rich-text', class extends NectaryElement {
   #onClickReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-element-click')?.(e)
   }
-})
+}
+
+defineCustomElement('sinch-rich-text', RichText)
 
 declare global {
   interface NectaryComponentMap {

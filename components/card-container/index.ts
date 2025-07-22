@@ -6,7 +6,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-card-container', class extends NectaryElement {
+export class CardContainer extends NectaryElement {
   constructor() {
     super()
 
@@ -14,7 +14,9 @@ defineCustomElement('sinch-card-container', class extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
   }
-})
+}
+
+defineCustomElement('sinch-card-container', CardContainer)
 
 declare global {
   interface NectaryComponentMap {

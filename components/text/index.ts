@@ -17,7 +17,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-text', class extends NectaryElement {
+export class Text extends NectaryElement {
   constructor() {
     super()
 
@@ -96,7 +96,9 @@ defineCustomElement('sinch-text', class extends NectaryElement {
         : 'paragraph'
     )
   }
-})
+}
+
+defineCustomElement('sinch-text', Text)
 
 declare global {
   interface NectaryComponentMap {

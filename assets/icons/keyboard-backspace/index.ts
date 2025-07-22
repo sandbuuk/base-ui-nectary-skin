@@ -3,7 +3,8 @@ import { createIconClass } from '../create-icon-class'
 import templateHTML from './template.html'
 import type { TSinchIconElement, TSinchIconReact } from '../types'
 
-defineCustomElement('sinch-icon-keyboard-backspace', createIconClass(templateHTML))
+export const IconKeyboardBackspace = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-keyboard-backspace', IconKeyboardBackspace)
 
 declare global {
   interface HTMLElementTagNameMap {

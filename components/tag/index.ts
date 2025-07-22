@@ -19,7 +19,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-tag', class extends NectaryElement {
+export class Tag extends NectaryElement {
   #$text: HTMLElement
   #$tooltip: HTMLElement
   #$wrapper: HTMLElement
@@ -137,7 +137,9 @@ defineCustomElement('sinch-tag', class extends NectaryElement {
       }
     })
   }
-})
+}
+
+defineCustomElement('sinch-tag', Tag)
 
 declare global {
   interface NectaryComponentMap {

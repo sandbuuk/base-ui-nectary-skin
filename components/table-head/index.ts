@@ -9,7 +9,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('sinch-table-head', class extends NectaryElement {
+export class TableHead extends NectaryElement {
   constructor() {
     super()
 
@@ -21,7 +21,9 @@ defineCustomElement('sinch-table-head', class extends NectaryElement {
   connectedCallback() {
     this.setAttribute('role', 'rowgroup')
   }
-})
+}
+
+defineCustomElement('sinch-table-head', TableHead)
 
 declare global {
   interface NectaryComponentMap {
