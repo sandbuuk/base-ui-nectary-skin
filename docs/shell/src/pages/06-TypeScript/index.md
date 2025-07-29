@@ -36,11 +36,11 @@ declare global {
 This map is the foundation for all type adapters. When creating a custom adapter for your framework, you can use this map to ensure type safety. For example, Nectary internally manages a **VanillaJS** adapter and **React** adapter for you. Here's how the React adapter looks like:
 
 ```ts
-type NectaryComponentReact<K extends keyof NectaryComponentMap, Component = NectaryComponentMap[K]> =
-  ReactifyElement<HTMLElement> &
-  ReactifyEvents<SafeSelect<Component, 'events'>> &
-  RemoveReadonly<SafeSelect<Component, 'props'>> &
-  { style?: SafeSelect<Component, 'style'> }
+type NectaryComponentReactByType<T extends object> =
+  WebComponentReactBaseProp<NectaryComponentVanillaByType<T>> &
+  ReactifyEvents<SafeSelect<T, 'events'>> &
+  RemoveReadonly<SafeSelect<T, 'props'>> &
+  { style?: Partial<T["style"]> & CSSProperties }
 ```
 And its added to the React JSX namespace like this by Nectary:
 ```ts
