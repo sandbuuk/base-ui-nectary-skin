@@ -1,5 +1,5 @@
-import type { ClassAttributes, DOMAttributes, HTMLAttributes } from 'react'
-import type { ReactifyEvents, ReactifyElement, SafeSelect, CamelCaseify, RemoveReadonly, SetAttributes, ExtendEventListeners } from './utils/adapters'
+import type { HTMLAttributes, CSSProperties } from 'react'
+import type { ReactifyEvents, WebComponentReactBaseProp, SafeSelect, CamelCaseify, RemoveReadonly, SetAttributes, ExtendEventListeners } from './utils/adapters'
 
 export type TRect = {
   x: number,
@@ -8,18 +8,21 @@ export type TRect = {
   height: number,
 }
 
-export type NectaryComponentVanillaByType<T extends object> =
+export type NectaryComponentVanillaByType<T extends NectaryComponentMap[keyof NectaryComponentMap]> =
   Omit<HTMLElement, 'addEventListener' | 'removeEventListener'> &
   ExtendEventListeners<Required<SafeSelect<T, 'events'>>> &
   SetAttributes<Required<RemoveReadonly<SafeSelect<T, 'props'>>>> &
   Required<CamelCaseify<SafeSelect<T, 'props'>>> &
   Required<SafeSelect<T, 'methods'>>
 
-export type NectaryComponentReactByType<T extends object> =
-  ReactifyElement<HTMLElement> &
+export type NectaryComponentReactByType<T extends NectaryComponentMap[keyof NectaryComponentMap]> =
+  WebComponentReactBaseProp<NectaryComponentVanillaByType<T>> &
   ReactifyEvents<SafeSelect<T, 'events'>> &
   RemoveReadonly<SafeSelect<T, 'props'>> &
-  { style?: SafeSelect<T, 'style'> }
+  {
+    style?: Partial<SafeSelect<T, 'style'>> & CSSProperties;
+  }
+
 
 export type NectaryComponentVanilla<K extends keyof NectaryComponentMap> =
   NectaryComponentVanillaByType<NectaryComponentMap[K]>

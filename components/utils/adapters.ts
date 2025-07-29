@@ -1,4 +1,4 @@
-import type { ClassAttributes, DOMAttributes, HTMLAttributes } from 'react'
+import type { DetailedHTMLProps, HTMLAttributes } from 'react'
 
 export type SafeSelect<T extends object, K extends string | number | symbol> =
   K extends keyof T
@@ -37,12 +37,10 @@ export type SetAttributes<Props> = {
   ): void,
 }
 
-export type ReactifyElement<TElement> =
-  Pick<HTMLAttributes<HTMLElement>, 'id' | 'className' | 'style' | 'slot' | 'children'> &
-  ClassAttributes<TElement> &
-  Pick<DOMAttributes<TElement>, 'onClick' | 'onDoubleClick' | 'onMouseDown' | 'onMouseUp' | 'onMouseMove' | 'onMouseOver' | 'onMouseOut' | 'onFocus' | 'onBlur' | 'onKeyDown' | 'onKeyUp' | 'onKeyPress'> &
-  { class?: string }
-
 export type ReactifyEvents<T> = {
   [K in keyof T as K extends string ? `on${K}` : never]: T[K]
+}
+
+export type WebComponentReactBaseProp<T = HTMLElement> = Omit<DetailedHTMLProps<HTMLAttributes<T>, T>, 'className' | 'style'> & {
+  class?: string,
 }
