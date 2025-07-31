@@ -8338,47 +8338,20 @@
               },
               "border": {
                 "initial": {
-                  "value": "{ref.color.raspberry.600}",
-                  "type": "color",
-                  "$extensions": {
-                    "studio.tokens": {
-                      "modify": {
-                        "type": "lighten",
-                        "value": "0.4",
-                        "space": "lch"
-                      }
-                    }
-                  }
+                  "value": "{ref.color.raspberry.350}",
+                  "type": "color"
                 }
               },
               "text": {
                 "initial": {
-                  "value": "{ref.color.raspberry.600}",
-                  "type": "color",
-                  "$extensions": {
-                    "studio.tokens": {
-                      "modify": {
-                        "type": "lighten",
-                        "value": "0.4",
-                        "space": "lch"
-                      }
-                    }
-                  }
+                  "value": "{ref.color.raspberry.350}",
+                  "type": "color"
                 }
               },
               "icon": {
                 "initial": {
-                  "value": "{ref.color.raspberry.600}",
-                  "type": "color",
-                  "$extensions": {
-                    "studio.tokens": {
-                      "modify": {
-                        "type": "lighten",
-                        "value": "0.4",
-                        "space": "lch"
-                      }
-                    }
-                  }
+                  "value": "{ref.color.raspberry.350}",
+                  "type": "color"
                 }
               }
             }
