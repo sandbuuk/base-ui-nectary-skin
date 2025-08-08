@@ -102,6 +102,18 @@ export class ActionMenu extends NectaryElement {
     if (!e.detail) {
       this.#selectOption(null)
       this.#$listbox.scrollTo({ top: 0, behavior: 'auto' })
+    } else {
+      const activeElement = this.#getDeepActiveElement() as HTMLElement | null
+
+      const isTextInput = activeElement !== null && activeElement.tagName === 'INPUT'
+
+      // If the active element is a text input, we don't want to break the focus chain
+      if (!isTextInput) {
+        // Focus the action menu container first
+        this.focus()
+        // Then select the first option
+        this.#selectOption(this.#getFirstOption())
+      }
     }
   }
 
@@ -197,6 +209,16 @@ export class ActionMenu extends NectaryElement {
     return this.#getLastOption()
   }
 
+  #getDeepActiveElement(): Element | null {
+    let activeElement = this.ownerDocument.activeElement
+
+    while (activeElement !== null && activeElement.shadowRoot !== null && activeElement.shadowRoot.activeElement !== null) {
+      activeElement = activeElement.shadowRoot.activeElement
+    }
+
+    return activeElement
+  }
+
   #selectOption($option: TSinchActionMenuOptionElement | null) {
     const hasRows = this.hasAttribute('rows')
 
@@ -208,6 +230,18 @@ export class ActionMenu extends NectaryElement {
 
       if (isSelected && hasRows) {
         $op.scrollIntoView?.({ block: 'nearest' })
+      }
+    }
+
+    if ($option !== null) {
+      $option.focus()
+
+      $option.onmouseover = (e) => {
+        if (e.defaultPrevented) {
+          return
+        }
+
+        this.#selectOption(null)
       }
     }
   }

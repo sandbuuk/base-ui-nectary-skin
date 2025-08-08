@@ -24,7 +24,7 @@ export const DropdownExample: FC = () => {
         slot="target"
         size="l"
         aria-label="Open actions"
-        on-click={() => setOpen(true)}
+        on-click={() => setOpen((v) => !v)}
       >
         <sinch-avatar slot="icon" src="https://i.pravatar.cc/300" size="m" alt="AB"/>
       </sinch-button>

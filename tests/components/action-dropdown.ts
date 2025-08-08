@@ -69,11 +69,9 @@ test('action-dropdown events', runScreenshotTests('sinch-popover', [
 
       await page.keyboard.press('Tab')
       await page.keyboard.press('Enter')
-      await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
 
       await page.keyboard.press('Enter')
-      await page.keyboard.press('ArrowDown')
       await page.keyboard.press('ArrowDown')
       await page.keyboard.press('Enter')
 
