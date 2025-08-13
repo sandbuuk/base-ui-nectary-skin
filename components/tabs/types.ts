@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchTabsProps = {
   /** Value */
@@ -30,3 +30,27 @@ export type TSinchTabs = {
 
 export type TSinchTabsElement = NectaryComponentVanillaByType<TSinchTabs>
 export type TSinchTabsReact = NectaryComponentReactByType<TSinchTabs>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-tabs': TSinchTabs,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-tabs': NectaryComponentVanilla<'sinch-tabs'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-tabs': NectaryComponentReact<'sinch-tabs'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-tabs': NectaryComponentReact<'sinch-tabs'>,
+    }
+  }
+}

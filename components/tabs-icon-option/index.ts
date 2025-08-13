@@ -9,9 +9,10 @@ import {
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchTabsIconOption } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+import templateHTML from './template.html?raw'
+import type { NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -110,27 +111,3 @@ export class TabsIconOption extends NectaryElement {
 }
 
 defineCustomElement('sinch-tabs-icon-option', TabsIconOption)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-tabs-icon-option': TSinchTabsIconOption,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-tabs-icon-option': NectaryComponentVanilla<'sinch-tabs-icon-option'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-tabs-icon-option': NectaryComponentReact<'sinch-tabs-icon-option'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-tabs-icon-option': NectaryComponentReact<'sinch-tabs-icon-option'>,
-    }
-  }
-}

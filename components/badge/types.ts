@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TSinchSize } from '../utils/size'
 
 export type TSinchBadgeMode = 'square' | 'circle'
@@ -37,3 +37,27 @@ export type TSinchBadge = {
 
 export type TSinchBadgeElement = NectaryComponentVanillaByType<TSinchBadge>
 export type TSinchBadgeReact = NectaryComponentReactByType<TSinchBadge>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-badge': TSinchBadge,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-badge': NectaryComponentVanilla<'sinch-badge'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-badge': NectaryComponentReact<'sinch-badge'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-badge': NectaryComponentReact<'sinch-badge'>,
+    }
+  }
+}

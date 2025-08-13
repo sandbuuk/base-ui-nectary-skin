@@ -16,6 +16,9 @@
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "paths": {
+      "@nectary/shared": ["../shared/index.ts"],
+    }
   },
   "exclude": [
     "apps/angular/",

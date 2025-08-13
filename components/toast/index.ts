@@ -11,13 +11,11 @@ import {
   getBooleanAttribute,
   updateBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { typeValues } from './utils'
-import type {
-  TSinchToastType,
-  TSinchToast,
-} from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import type { TSinchToastType } from './types'
+
+export * from './types'
 
 const TIMEOUT = 5000
 const template = document.createElement('template')
@@ -130,27 +128,3 @@ export class Toast extends NectaryElement {
 }
 
 defineCustomElement('sinch-toast', Toast)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-toast': TSinchToast,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-toast': NectaryComponentVanilla<'sinch-toast'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-toast': NectaryComponentReact<'sinch-toast'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-toast': NectaryComponentReact<'sinch-toast'>,
-    }
-  }
-}

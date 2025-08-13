@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchGridStyle = {
   // Grid Properties - XL
@@ -25,3 +25,27 @@ export type TSinchGrid = {
 
 export type TSinchGridElement = HTMLElement
 export type TSinchGridReact = NectaryComponentReactByType<TSinchGridElement>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-grid': TSinchGrid,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-grid': NectaryComponentVanilla<'sinch-grid'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-grid': NectaryComponentReact<'sinch-grid'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-grid': NectaryComponentReact<'sinch-grid'>,
+    }
+  }
+}

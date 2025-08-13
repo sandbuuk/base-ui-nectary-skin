@@ -9,10 +9,10 @@ import {
   updateBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchActionMenu } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+import templateHTML from './template.html?raw'
 import type { TContextKeydown, TContextVisibility } from '../utils'
+
+export * from './types'
 
 type TSinchActionMenuOptionElement = HTMLElementTagNameMap['sinch-action-menu-option']
 
@@ -228,7 +228,7 @@ export class ActionMenu extends NectaryElement {
       // Select / Unselect
       updateBooleanAttribute($op, 'data-selected', isSelected)
 
-      if (isSelected && hasRows) {
+      if (isSelected && Boolean(hasRows)) {
         $op.scrollIntoView?.({ block: 'nearest' })
       }
     }
@@ -282,27 +282,3 @@ export class ActionMenu extends NectaryElement {
 }
 
 defineCustomElement('sinch-action-menu', ActionMenu)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-action-menu': TSinchActionMenu,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-action-menu': NectaryComponentVanilla<'sinch-action-menu'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-action-menu': NectaryComponentReact<'sinch-action-menu'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-action-menu': NectaryComponentReact<'sinch-action-menu'>,
-    }
-  }
-}

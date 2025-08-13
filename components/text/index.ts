@@ -8,10 +8,11 @@ import {
   isAttrTrue,
   isAttrEqual,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { typeValues } from './utils'
-import type { TSinchTextType, TSinchText } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+import type { TSinchTextType } from './types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -99,27 +100,3 @@ export class Text extends NectaryElement {
 }
 
 defineCustomElement('sinch-text', Text)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-text': TSinchText,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-text': NectaryComponentVanilla<'sinch-text'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-text': NectaryComponentReact<'sinch-text'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-text': NectaryComponentReact<'sinch-text'>,
-    }
-  }
-}

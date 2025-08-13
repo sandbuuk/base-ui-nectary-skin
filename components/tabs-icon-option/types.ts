@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchTabsIconOptionProps = {
   /** Value */
@@ -41,3 +41,27 @@ export type TSinchTabsIconOption = {
 
 export type TSinchTabsIconOptionElement = NectaryComponentVanillaByType<TSinchTabsIconOption>
 export type TSinchTabsIconOptionReact = NectaryComponentReactByType<TSinchTabsIconOption>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-tabs-icon-option': TSinchTabsIconOption,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-tabs-icon-option': NectaryComponentVanilla<'sinch-tabs-icon-option'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-tabs-icon-option': NectaryComponentReact<'sinch-tabs-icon-option'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-tabs-icon-option': NectaryComponentReact<'sinch-tabs-icon-option'>,
+    }
+  }
+}

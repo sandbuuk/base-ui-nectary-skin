@@ -6,7 +6,7 @@ import {
   updateBooleanAttribute,
   updateIntegerAttribute,
 } from '../utils'
-import logoStylesHtml from './logo-styles.html'
+import logoStylesHtml from './logo-styles.html?raw'
 
 const DEFAULT_SIZE = 16
 const MIN_SIZE = 4

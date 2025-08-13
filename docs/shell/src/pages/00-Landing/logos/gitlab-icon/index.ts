@@ -3,7 +3,7 @@ import { defineCustomElement } from '@nectary/components/utils'
 import templateHTML from './template.html'
 import type { TSinchLogoReact, TSinchLogoElement } from '@nectary/assets/logo/types'
 
-defineCustomElement('gitlab-icon', createLogoClass(templateHTML))
+defineCustomElement('gitlab-icon' as any, createLogoClass(templateHTML))
 
 declare global {
   interface HTMLElementTagNameMap {

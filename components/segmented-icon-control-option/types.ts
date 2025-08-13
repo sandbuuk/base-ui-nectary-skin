@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchSegmentedIconControlOptionProps = {
   value: string,
@@ -44,3 +44,27 @@ export type TSinchSegmentedIconControlOption = {
 
 export type TSinchSegmentedIconControlOptionElement = NectaryComponentVanillaByType<TSinchSegmentedIconControlOption>
 export type TSinchSegmentedIconControlOptionReact = NectaryComponentReactByType<TSinchSegmentedIconControlOption>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-segmented-icon-control-option': TSinchSegmentedIconControlOption,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-segmented-icon-control-option': NectaryComponentVanilla<'sinch-segmented-icon-control-option'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-segmented-icon-control-option': NectaryComponentReact<'sinch-segmented-icon-control-option'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-segmented-icon-control-option': NectaryComponentReact<'sinch-segmented-icon-control-option'>,
+    }
+  }
+}

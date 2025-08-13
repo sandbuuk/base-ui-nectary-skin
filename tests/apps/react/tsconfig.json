@@ -15,5 +15,11 @@
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "noUnusedLocals": true,
+    "paths": {
+      "@nectary/shared": ["../../../shared/index.ts"],
+    }
   },
+  "paths": {
+    "@nectary/shared": ["../../../shared/index.ts"],
+  }
 }

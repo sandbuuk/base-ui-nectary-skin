@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchProgressStepperItemProps = {
   /** Value */
@@ -57,3 +57,27 @@ export type TSinchProgressStepperItem = {
 
 export type TSinchProgressStepperItemElement = NectaryComponentVanillaByType<TSinchProgressStepperItem>
 export type TSinchProgressStepperItemReact = NectaryComponentReactByType<TSinchProgressStepperItem>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-progress-stepper-item': TSinchProgressStepperItem,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-progress-stepper-item': NectaryComponentVanilla<'sinch-progress-stepper-item'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-progress-stepper-item': NectaryComponentReact<'sinch-progress-stepper-item'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-progress-stepper-item': NectaryComponentReact<'sinch-progress-stepper-item'>,
+    }
+  }
+}

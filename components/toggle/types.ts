@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchToggleProps = {
   checked?: boolean,
@@ -52,3 +52,27 @@ export type TSinchToggle = {
 
 export type TSinchToggleElement = NectaryComponentVanillaByType<TSinchToggle>
 export type TSinchToggleReact = NectaryComponentReactByType<TSinchToggle>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-toggle': TSinchToggle,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-toggle': NectaryComponentVanilla<'sinch-toggle'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-toggle': NectaryComponentReact<'sinch-toggle'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-toggle': NectaryComponentReact<'sinch-toggle'>,
+    }
+  }
+}

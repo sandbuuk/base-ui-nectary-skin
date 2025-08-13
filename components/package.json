@@ -1,6 +1,6 @@
 {
   "name": "@nectary/components",
-  "version": "4.6.5",
+  "version": "5.0.0",
   "files": [
     "**/*/*.css",
     "**/*/*.json",
@@ -9,6 +9,9 @@
     "standalone.ts",
     "standalone.d.ts",
     "standalone.js",
+    "bundle.ts",
+    "bundle.d.ts",
+    "bundle.js",
     "types.d.ts",
     "colors.json"
   ],
@@ -16,7 +19,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "NODE_ENV=production babel . --extensions '.ts' --out-dir . && tsc --declaration --emitDeclarationOnly"
+    "build": "rm -rf utils/shared && cp -r ../shared utils/shared && vite build && vite build --mode bundle && npx tsc --declaration --emitDeclarationOnly && npx tsx ../scripts/tsc-alias.ts --alias '@nectary/shared=./utils/shared'",
+    "dev": "vite build --watch"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.15",
@@ -28,10 +32,12 @@
     "@babel/plugin-transform-runtime": "^7.22.15",
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-typescript": "^7.22.15",
-    "@types/node": "^18.17.17",
+    "@types/node": "22.12.0",
     "@types/react": "^18.2.21",
     "babel-plugin-html-inline-minifier": "workspace:*",
-    "typescript": "^5.2.2"
+    "dts-bundle-generator": "^9.5.1",
+    "typescript": "^5.2.2",
+    "vite": "^7.0.6"
   },
   "peerDependencies": {
     "@nectary/theme-base": ">=1.4.0 <2.0.0"

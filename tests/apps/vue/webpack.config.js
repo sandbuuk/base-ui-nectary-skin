@@ -15,6 +15,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.ts', '.json'],
+    alias: {
+      '@nectary/shared': path.resolve(__dirname, '../../../shared/index.ts'),
+    },
   },
   module: {
     rules: [
@@ -86,5 +89,19 @@ module.exports = {
       __VUE_OPTIONS_API__: 'true',
       __VUE_PROD_DEVTOOLS__: 'false'
     }),
+    {
+      apply: (compiler) => {
+        compiler.hooks.done.tap('log', (stats) => {
+          if (stats.hasErrors()) {
+            console.error('Build failed with errors:')
+            stats.compilation.errors.forEach((error) => {
+              console.error(error.message || error)
+            })
+          } else {
+            console.log(`Build completed successfully at http://localhost:${PORT}`)
+          }
+        })
+      },
+    },
   ],
 }

@@ -1,6 +1,6 @@
 import '@nectary/components/button'
 import '@nectary/components/dialog'
-import '@nectary/assets/icons/ai'
+import '@nectary/components/icon'
 import { useState } from 'react'
 
 export const EnhaiButton = () => {
@@ -16,7 +16,7 @@ export const EnhaiButton = () => {
           // @ts-ignore
         style={{ position: 'fixed', right: 40, bottom: 40, '--sinch-button-set-size-shape-radius': 'var(--sinch-sys-shape-radius-full)' }}
       >
-        <sinch-icon-ai slot="icon"/>
+        <sinch-icon icons-version="2" name="ai" slot="icon"/>
       </sinch-button>
       <sinch-dialog
         caption="Enhai"

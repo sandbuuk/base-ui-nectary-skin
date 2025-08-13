@@ -14,10 +14,11 @@ import {
   subscribeContext,
   getTargetByAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchColorMenu } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
+import templateHTML from './template.html?raw'
+import type { TRect } from '../types'
 import type { TContextVisibility, TContextKeydown } from '../utils'
+
+export * from './types'
 
 const NUM_COLS_DEFAULT = 5
 const ITEM_WIDTH = 44
@@ -355,7 +356,7 @@ export class ColorMenu extends NectaryElement {
       // Select / Unselect
       updateBooleanAttribute($op, 'data-selected', isSelected)
 
-      if (isSelected && hasRows) {
+      if (isSelected && Boolean(hasRows)) {
         $op.scrollIntoView?.({ block: 'nearest' })
       }
     }
@@ -418,27 +419,3 @@ export class ColorMenu extends NectaryElement {
 }
 
 defineCustomElement('sinch-color-menu', ColorMenu)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-color-menu': TSinchColorMenu,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-color-menu': NectaryComponentVanilla<'sinch-color-menu'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-color-menu': NectaryComponentReact<'sinch-color-menu'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-color-menu': NectaryComponentReact<'sinch-color-menu'>,
-    }
-  }
-}

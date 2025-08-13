@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchFileStatusType = 'pending' | 'loading' | 'progress' | 'success' | 'error'
 
@@ -50,3 +50,27 @@ export type TSinchFileStatus = {
 
 export type TSinchFileStatusElement = NectaryComponentVanillaByType<TSinchFileStatus>
 export type TSinchFileStatusReact = NectaryComponentReactByType<TSinchFileStatus>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-file-status': TSinchFileStatus,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-file-status': NectaryComponentVanilla<'sinch-file-status'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-file-status': NectaryComponentReact<'sinch-file-status'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-file-status': NectaryComponentReact<'sinch-file-status'>,
+    }
+  }
+}

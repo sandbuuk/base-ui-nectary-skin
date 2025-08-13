@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchPopOrientation =
   | 'top-left'
@@ -39,3 +39,27 @@ export type TSinchPop = {
 
 export type TSinchPopElement = NectaryComponentVanillaByType<TSinchPop>
 export type TSinchPopReact = NectaryComponentReactByType<TSinchPop>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-pop': TSinchPop,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-pop': NectaryComponentVanilla<'sinch-pop'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-pop': NectaryComponentReact<'sinch-pop'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-pop': NectaryComponentReact<'sinch-pop'>,
+    }
+  }
+}

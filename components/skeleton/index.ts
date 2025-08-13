@@ -7,9 +7,9 @@ import {
   NectaryElement,
   shouldReduceMotion,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchSkeleton } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -140,27 +140,3 @@ export class Skeleton extends NectaryElement {
 }
 
 defineCustomElement('sinch-skeleton', Skeleton)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-skeleton': TSinchSkeleton,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-skeleton': NectaryComponentVanilla<'sinch-skeleton'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-skeleton': NectaryComponentReact<'sinch-skeleton'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-skeleton': NectaryComponentReact<'sinch-skeleton'>,
-    }
-  }
-}

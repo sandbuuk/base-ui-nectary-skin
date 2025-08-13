@@ -21,6 +21,9 @@
       "~/*": [
         "./src/*"
       ],
+      "@nectary/shared": [
+        "../../shared/index.ts"
+      ],
       "components/bootstrap": [
         "./versions"
       ],

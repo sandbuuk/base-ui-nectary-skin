@@ -1,7 +1,9 @@
 import { defineCustomElement } from '../../utils/element'
 import { createIconClass } from '../create-icon-class'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import type { TSinchIconChannelElement, TSinchIconChannelReact, TSinchIconChannelProps } from '../types'
+
+export * from '../types'
 
 export const IconChannelSmsSquare = createIconClass(templateHTML)
 defineCustomElement('sinch-icon-channel-sms-square', IconChannelSmsSquare)

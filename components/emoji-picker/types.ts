@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TEmoji = {
   emoji: string,
@@ -53,3 +53,27 @@ export type TSinchEmojiPicker = {
 
 export type TSinchEmojiPickerElement = NectaryComponentVanillaByType<TSinchEmojiPicker>
 export type TSinchEmojiPickerReact = NectaryComponentReactByType<TSinchEmojiPicker>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-emoji-picker': TSinchEmojiPicker,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-emoji-picker': NectaryComponentVanilla<'sinch-emoji-picker'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-emoji-picker': NectaryComponentReact<'sinch-emoji-picker'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-emoji-picker': NectaryComponentReact<'sinch-emoji-picker'>,
+    }
+  }
+}

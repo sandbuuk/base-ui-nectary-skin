@@ -10,9 +10,9 @@ import {
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchToggle } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -198,27 +198,3 @@ export class Toggle extends NectaryElement {
 }
 
 defineCustomElement('sinch-toggle', Toggle)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-toggle': TSinchToggle,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-toggle': NectaryComponentVanilla<'sinch-toggle'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-toggle': NectaryComponentReact<'sinch-toggle'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-toggle': NectaryComponentReact<'sinch-toggle'>,
-    }
-  }
-}

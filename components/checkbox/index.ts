@@ -12,9 +12,10 @@ import {
   updateExplicitBooleanAttribute,
 } from '../utils'
 import { setFormValue } from '../utils/form'
-import templateHTML from './template.html'
-import type { TSinchCheckbox } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+import type { NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -232,27 +233,3 @@ export class Checkbox extends NectaryElement {
 }
 
 defineCustomElement('sinch-checkbox', Checkbox)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-checkbox': TSinchCheckbox,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-checkbox': NectaryComponentVanilla<'sinch-checkbox'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-checkbox': NectaryComponentReact<'sinch-checkbox'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-checkbox': NectaryComponentReact<'sinch-checkbox'>,
-    }
-  }
-}

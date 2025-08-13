@@ -1,7 +1,5 @@
-import type { TSinchButtonProps, TSinchButtonReact } from '../button/types'
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
-
-export { TSinchButtonReact }
+import type { TSinchButtonProps } from '../button/types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchButtonGroupProps = {
   size?: TSinchButtonProps['size'],
@@ -15,3 +13,27 @@ export type TSinchButtonGroup = {
 
 export type TSinchButtonGroupElement = NectaryComponentVanillaByType<TSinchButtonGroup>
 export type TSinchButtonGroupReact = NectaryComponentReactByType<TSinchButtonGroup>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-button-group': TSinchButtonGroup,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-button-group': NectaryComponentVanilla<'sinch-button-group'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-button-group': NectaryComponentReact<'sinch-button-group'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-button-group': NectaryComponentReact<'sinch-button-group'>,
+    }
+  }
+}

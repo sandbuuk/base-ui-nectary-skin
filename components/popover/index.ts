@@ -14,11 +14,13 @@ import {
   subscribeContext,
   isAttrEqual,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { getPopOrientation, orientationValues } from './utils'
-import type { TSinchPopoverOrientation, TSinchPopover } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import type { TSinchPopoverOrientation } from './types'
+import type { NectaryComponentVanilla } from '../types'
 import type { TContextVisibility } from '../utils'
+
+export * from './types'
 
 const TIP_SIZE = 16
 const template = document.createElement('template')
@@ -226,27 +228,3 @@ export class Popover extends NectaryElement {
 }
 
 defineCustomElement('sinch-popover', Popover)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-popover': TSinchPopover,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-popover': NectaryComponentVanilla<'sinch-popover'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-popover': NectaryComponentReact<'sinch-popover'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-popover': NectaryComponentReact<'sinch-popover'>,
-    }
-  }
-}

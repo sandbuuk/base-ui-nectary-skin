@@ -10,10 +10,10 @@ import {
   isAttrTrue,
   isAttrEqual,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { getTagColorBg, getTagColorFg } from './utils'
-import type { TSinchTag } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -140,27 +140,3 @@ export class Tag extends NectaryElement {
 }
 
 defineCustomElement('sinch-tag', Tag)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-tag': TSinchTag,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-tag': NectaryComponentVanilla<'sinch-tag'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-tag': NectaryComponentReact<'sinch-tag'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-tag': NectaryComponentReact<'sinch-tag'>,
-    }
-  }
-}

@@ -1,5 +1,5 @@
 import type { TSinchChipColor } from './colors'
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type { TSinchChipColor }
 
@@ -55,3 +55,27 @@ export type TSinchChip = {
 
 export type TSinchChipElement = NectaryComponentVanillaByType<TSinchChip>
 export type TSinchChipReact = NectaryComponentReactByType<TSinchChip>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-chip': TSinchChip,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-chip': NectaryComponentVanilla<'sinch-chip'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-chip': NectaryComponentReact<'sinch-chip'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-chip': NectaryComponentReact<'sinch-chip'>,
+    }
+  }
+}

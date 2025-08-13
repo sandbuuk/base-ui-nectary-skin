@@ -9,9 +9,10 @@ import {
   updateAttribute,
   updateIntegerAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchHelpTooltip } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+import type { NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -108,27 +109,3 @@ export class HelpTooltip extends NectaryElement {
 }
 
 defineCustomElement('sinch-help-tooltip', HelpTooltip)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-help-tooltip': TSinchHelpTooltip,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-help-tooltip': NectaryComponentVanilla<'sinch-help-tooltip'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-help-tooltip': NectaryComponentReact<'sinch-help-tooltip'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-help-tooltip': NectaryComponentReact<'sinch-help-tooltip'>,
-    }
-  }
-}

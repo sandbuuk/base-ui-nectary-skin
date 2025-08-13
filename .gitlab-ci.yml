@@ -104,6 +104,30 @@ lint:
   script:
     - pnpm lint
 
+unit-tests:
+  extends:
+    - .cache
+    - .prepare-ci
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - components/**/*
+        - assets/**/*
+        - tests/unit/**/*
+        - tests/tsconfig.json
+        - tests/playwright.config.ts
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+  script:
+    - pnpm --dir tests test:unit
+  artifacts:
+    when: on_failure
+    reports:
+      junit: tests/test-results/unit-results.xml
+    paths:
+      - tests/test-results
+
 visual-tests:
   variables:
     KUBERNETES_CPU_REQUEST: "1"

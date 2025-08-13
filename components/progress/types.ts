@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchProgressProps = {
   value: number,
@@ -20,3 +20,27 @@ export type TSinchProgress = {
 
 export type TSinchProgressElement = NectaryComponentVanillaByType<TSinchProgress>
 export type TSinchProgressReact = NectaryComponentReactByType<TSinchProgress>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-progress': TSinchProgress,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-progress': NectaryComponentVanilla<'sinch-progress'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-progress': NectaryComponentReact<'sinch-progress'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-progress': NectaryComponentReact<'sinch-progress'>,
+    }
+  }
+}

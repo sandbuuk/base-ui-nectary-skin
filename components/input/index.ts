@@ -17,7 +17,7 @@ import {
 } from '../utils'
 import { requestSubmitForm, setFormValue } from '../utils/form'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import {
   deleteContentBackward,
   deleteContentForward,
@@ -30,10 +30,12 @@ import {
   getMergedValueSliced,
   insertFromPaste,
 } from './utils'
-import type { TSinchInputType, TSinchInput } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import type { TSinchInputType } from './types'
+import type { NectaryComponentVanilla } from '../types'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -632,7 +634,7 @@ export class Input extends NectaryElement {
       const nextSelectionEnd = this.#$input.selectionEnd!
 
       // Only enforce controlled state if value attribute is present
-      if (this.hasAttribute('value')) {
+      if (this.hasAttribute('value') === true) {
         this.#$input.value = prevValue
         this.#setSelectionRange(this.#selectionStart, this.#selectionEnd)
       }
@@ -811,7 +813,7 @@ export class Input extends NectaryElement {
   }
 
   #onContextSize = (e: CustomEvent<TContextSize>) => {
-    if (this.hasAttribute('size')) {
+    if (this.hasAttribute('size') === true) {
       return
     }
 
@@ -930,27 +932,3 @@ export class Input extends NectaryElement {
 }
 
 defineCustomElement('sinch-input', Input)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-input': TSinchInput,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-input': NectaryComponentVanilla<'sinch-input'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-input': NectaryComponentReact<'sinch-input'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-input': NectaryComponentReact<'sinch-input'>,
-    }
-  }
-}

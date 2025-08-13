@@ -9,7 +9,6 @@ import type { TSinchDialogCloseDetail } from '@nectary/components/dialog/types'
 import type { TSinchFileDropInvalidType } from '@nectary/components/file-drop/types'
 import type { TSinchFilePickerInvalidType } from '@nectary/components/file-picker/types'
 import type { TSinchFileStatusType } from '@nectary/components/file-status/types'
-import type { TSinchHorizontalStepperStatusType } from '@nectary/components/horizontal-stepper-item/types'
 import type { TSinchIcons } from '@nectary/components/icon/types'
 import type { TSinchInlineAlertType } from '@nectary/components/inline-alert/types'
 import type { TSinchInputType, TSinchInputClipboardEvent } from '@nectary/components/input/types'
@@ -19,14 +18,12 @@ import type { ElementClickedEvent } from '@nectary/components/rich-text/types'
 import type { TSinchTableAlignType } from '@nectary/components/table-cell/types'
 import type { TSinchTagColor } from '@nectary/components/tag/types'
 import type { TSinchTextType } from '@nectary/components/text/types'
-import type { TSinchTileControlColumns } from '@nectary/components/tile-control/types'
 import type { TSinchTitleType, TSinchTitleLevel } from '@nectary/components/title/types'
 import type { TSinchToastType } from '@nectary/components/toast/types'
 import type { TSinchToastManagerOrigin } from '@nectary/components/toast-manager/types'
 import type { TSinchTooltipOrientation, TSinchTooltipType, TSinchTooltipTextAlign } from '@nectary/components/tooltip/types'
 import type { NectaryComponentReact } from '@nectary/components/types'
 import type { TSinchSize, TSinchSizeEx } from '@nectary/components/utils/size'
-import type { TSinchVerticalStepperStatusType } from '@nectary/components/vertical-stepper-item/types'
 
 export type TSinchAccordionWrapper = {
   value: string,
@@ -1141,115 +1138,6 @@ export type TSinchHelpTooltipWrapper = {
     '--sinch-global-size-icon'?: string,
   },
 }
-export type TSinchHorizontalStepperWrapper = {
-  index: string,
-  ariaLabel: string,
-} & {
-  style?: {
-  // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-background-default'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-background-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-background-active'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-background-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-background-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-border-default'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-border-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-border-active'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-border-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-border-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-icon-default'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-icon-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-icon-active'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-icon-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-icon-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-label'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-description'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-progress'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-progress-visited'?: string,
-    // @preserve-case
-    '--sinch-sys-color-surface-tertiary-default'?: string,
-    // @preserve-case
-    '--sinch-sys-color-basic-pure'?: string,
-    // @preserve-case
-    '--sinch-sys-color-text-default'?: string,
-    // @preserve-case
-    '--sinch-sys-color-text-muted'?: string,
-    // @preserve-case
-    '--sinch-sys-color-feedback-danger-strong'?: string,
-    // @preserve-case
-    '--sinch-ref-color-neutral-350'?: string,
-    // @preserve-case
-    '--sinch-ref-color-neutral-700'?: string,
-    // @preserve-case
-    '--sinch-ref-color-neutral-900'?: string,
-  },
-}
-export type TSinchHorizontalStepperItemWrapper = {
-  label: string,
-  description?: string,
-  status?: TSinchHorizontalStepperStatusType,
-} & {
-  style?: {
-  // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-background-default'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-background-active'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-background-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-background-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-background-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-border-default'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-border-active'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-border-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-border-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-border-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-icon-default'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-icon-active'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-icon-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-icon-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-icon-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-label'?: string,
-    // @preserve-case
-    '--sinch-comp-horizontal-stepper-color-description'?: string,
-    // @preserve-case
-    '--sinch-sys-font-desktop-title-s'?: string,
-    // @preserve-case
-    '--sinch-global-size-icon'?: string,
-    // @preserve-case
-    '--sinch-global-color-text'?: string,
-  },
-}
 export type TSinchIconWrapper = ({
   iconsVersion: '1',
   name: string,
@@ -1717,28 +1605,6 @@ export type TSinchRichTextareaWrapper = {
     '--sinch-comp-code-tag-font-text'?: string,
     // @preserve-case
     '--sinch-comp-link-default-font-initial'?: string,
-  },
-}
-export type TSinchSegmentWrapper = {
-  caption: string,
-  collapsed?: boolean,
-  size?: TSinchSize,
-} & {
-  style?: {
-  // @preserve-case
-    '--sinch-comp-segment-shape-radius'?: string,
-    // @preserve-case
-    '--sinch-comp-segment-color-default-border-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-segment-color-default-background-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-segment-font-size-m-title'?: string,
-    // @preserve-case
-    '--sinch-comp-segment-font-size-l-title'?: string,
-    // @preserve-case
-    '--sinch-comp-segment-font-size-s-title'?: string,
-    // @preserve-case
-    '--sinch-global-size-icon'?: string,
   },
 }
 export type TSinchSegmentCollapseWrapper = {
@@ -2233,82 +2099,6 @@ export type TSinchTextareaWrapper = {
     '--sinch-comp-textarea-color-disabled-border-initial'?: string,
   },
 }
-export type TSinchTileControlWrapper = {
-  value: string,
-  multiple?: boolean,
-  small?: boolean,
-  cols: TSinchTileControlColumns,
-  ariaLabel: string,
-  onChange?: (e: CustomEvent<string>) => void,
-} & {
-  style?: {
-  // @preserve-case
-    '--sinch-grid-num-columns'?: string,
-  },
-}
-export type TSinchTileControlOptionWrapper = {
-  value: string,
-  text: string,
-  ariaLabel: string,
-  disabled?: boolean,
-  onFocus?: (e: CustomEvent<void>) => void,
-  onBlur?: (e: CustomEvent<void>) => void,
-} & {
-  style?: {
-  // @preserve-case
-    '--sinch-comp-tile-control-shape-radius-l'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-shape-radius-s'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-font-label'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-size-m-icon'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-size-s-icon'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-default-background-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-default-border-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-default-text-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-default-icon-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-default-background-hover'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-default-border-hover'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-default-outline-focus'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-checked-background-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-checked-border-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-checked-text-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-checked-icon-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-disabled-background-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-disabled-border-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-disabled-text-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-color-disabled-icon-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-shadow-initial'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-shadow-hover'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-shadow-active'?: string,
-    // @preserve-case
-    '--sinch-comp-tile-control-shadow-disabled'?: string,
-    // @preserve-case
-    '--sinch-global-size-icon'?: string,
-    // @preserve-case
-    '--sinch-global-color-icon'?: string,
-  },
-}
 export type TSinchTimePickerWrapper = {
   value: string,
   ampm?: boolean,
@@ -2498,106 +2288,5 @@ export type TSinchTooltipWrapper = {
     '--sinch-comp-text-align'?: string,
     // @preserve-case
     '--sinch-global-color-text'?: string,
-  },
-}
-export type TSinchVerticalStepperWrapper = {
-  index: string,
-  ariaLabel: string,
-} & {
-  style?: {
-  // @preserve-case
-    '--sinch-comp-vertical-stepper-color-background-default'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-background-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-background-active'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-background-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-background-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-border-default'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-border-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-border-active'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-border-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-border-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-icon-default'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-icon-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-icon-active'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-icon-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-icon-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-label'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-description'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-progress'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-progress-visited'?: string,
-  },
-}
-export type TSinchVerticalStepperItemWrapper = {
-  label: string,
-  description?: string,
-  status?: TSinchVerticalStepperStatusType,
-} & {
-  style?: {
-  // @preserve-case
-    '--sinch-comp-vertical-stepper-color-background-default'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-background-active'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-background-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-background-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-background-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-border-default'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-border-active'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-border-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-border-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-border-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-icon-default'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-icon-active'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-icon-visited'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-icon-visited-error'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-icon-visited-skip'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-label'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-description'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-progress'?: string,
-    // @preserve-case
-    '--sinch-comp-vertical-stepper-color-progress-visited'?: string,
-    // @preserve-case
-    '--sinch-local-color-background'?: string,
-    // @preserve-case
-    '--sinch-local-color-border'?: string,
-    // @preserve-case
-    '--sinch-local-color-text'?: string,
-    // @preserve-case
-    '--sinch-local-color-icon'?: string,
-    // @preserve-case
-    '--sinch-global-size-icon'?: string,
   },
 }

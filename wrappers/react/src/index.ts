@@ -1,7 +1,7 @@
 import { createReactWrapper } from './utils'
 import type { NamedSlots } from './slots'
 import type {} from '@nectary/components/accordion'
-import type { TSinchAccordionWrapper, TSinchAccordionItemWrapper, TSinchActionMenuWrapper, TSinchActionMenuOptionWrapper, TSinchAlertWrapper, TSinchAvatarWrapper, TSinchBadgeWrapper, TSinchButtonWrapper, TSinchButtonGroupWrapper, TSinchButtonGroupItemWrapper, TSinchCardWrapper, TSinchCardV2Wrapper, TSinchCardV2TitleWrapper, TSinchCheckboxWrapper, TSinchChipWrapper, TSinchCodeTagWrapper, TSinchColorMenuWrapper, TSinchColorMenuOptionWrapper, TSinchColorSwatchWrapper, TSinchDatePickerWrapper, TSinchDialogWrapper, TSinchEmojiWrapper, TSinchEmojiPickerWrapper, TSinchFieldWrapper, TSinchFileDropWrapper, TSinchFilePickerWrapper, TSinchFileStatusWrapper, TSinchFlagWrapper, TSinchGridWrapper, TSinchGridItemWrapper, TSinchHelpTooltipWrapper, TSinchHorizontalStepperWrapper, TSinchHorizontalStepperItemWrapper, TSinchIconWrapper, TSinchInlineAlertWrapper, TSinchInputWrapper, TSinchLinkWrapper, TSinchListItemWrapper, TSinchPopWrapper, TSinchPopoverWrapper, TSinchProgressWrapper, TSinchProgressStepperWrapper, TSinchProgressStepperItemWrapper, TSinchRadioWrapper, TSinchRadioOptionWrapper, TSinchRichTextWrapper, TSinchRichTextareaWrapper, TSinchSegmentWrapper, TSinchSegmentCollapseWrapper, TSinchSegmentedControlWrapper, TSinchSegmentedControlOptionWrapper, TSinchSegmentedIconControlWrapper, TSinchSegmentedIconControlOptionWrapper, TSinchSelectButtonWrapper, TSinchSelectMenuWrapper, TSinchSelectMenuOptionWrapper, TSinchSkeletonWrapper, TSinchSkeletonItemWrapper, TSinchSpinnerWrapper, TSinchTableCellWrapper, TSinchTableHeadCellWrapper, TSinchTableRowWrapper, TSinchTabsWrapper, TSinchTabsIconOptionWrapper, TSinchTabsOptionWrapper, TSinchTagWrapper, TSinchTextWrapper, TSinchTextareaWrapper, TSinchTileControlWrapper, TSinchTileControlOptionWrapper, TSinchTimePickerWrapper, TSinchTitleWrapper, TSinchToastWrapper, TSinchToastManagerWrapper, TSinchToggleWrapper, TSinchTooltipWrapper, TSinchVerticalStepperWrapper, TSinchVerticalStepperItemWrapper } from './types'
+import type { TSinchAccordionWrapper, TSinchAccordionItemWrapper, TSinchActionMenuWrapper, TSinchActionMenuOptionWrapper, TSinchAlertWrapper, TSinchAvatarWrapper, TSinchBadgeWrapper, TSinchButtonWrapper, TSinchButtonGroupWrapper, TSinchButtonGroupItemWrapper, TSinchCardV2Wrapper, TSinchCardV2TitleWrapper, TSinchCheckboxWrapper, TSinchChipWrapper, TSinchCodeTagWrapper, TSinchColorMenuWrapper, TSinchColorMenuOptionWrapper, TSinchColorSwatchWrapper, TSinchDatePickerWrapper, TSinchDialogWrapper, TSinchEmojiWrapper, TSinchEmojiPickerWrapper, TSinchFieldWrapper, TSinchFileDropWrapper, TSinchFilePickerWrapper, TSinchFileStatusWrapper, TSinchFlagWrapper, TSinchGridWrapper, TSinchGridItemWrapper, TSinchHelpTooltipWrapper, TSinchIconWrapper, TSinchInlineAlertWrapper, TSinchInputWrapper, TSinchLinkWrapper, TSinchListItemWrapper, TSinchPopWrapper, TSinchPopoverWrapper, TSinchProgressWrapper, TSinchProgressStepperWrapper, TSinchProgressStepperItemWrapper, TSinchRadioWrapper, TSinchRadioOptionWrapper, TSinchRichTextWrapper, TSinchRichTextareaWrapper, TSinchSegmentCollapseWrapper, TSinchSegmentedControlWrapper, TSinchSegmentedControlOptionWrapper, TSinchSegmentedIconControlWrapper, TSinchSegmentedIconControlOptionWrapper, TSinchSelectButtonWrapper, TSinchSelectMenuWrapper, TSinchSelectMenuOptionWrapper, TSinchSkeletonWrapper, TSinchSkeletonItemWrapper, TSinchSpinnerWrapper, TSinchTableCellWrapper, TSinchTableHeadCellWrapper, TSinchTableRowWrapper, TSinchTabsWrapper, TSinchTabsIconOptionWrapper, TSinchTabsOptionWrapper, TSinchTagWrapper, TSinchTextWrapper, TSinchTextareaWrapper, TSinchTimePickerWrapper, TSinchTitleWrapper, TSinchToastWrapper, TSinchToastManagerWrapper, TSinchToggleWrapper, TSinchTooltipWrapper } from './types'
 import type {} from '@nectary/components/accordion-item'
 import type {} from '@nectary/components/action-menu'
 import type {} from '@nectary/components/action-menu-option'
@@ -11,7 +11,6 @@ import type {} from '@nectary/components/badge'
 import type {} from '@nectary/components/button'
 import type {} from '@nectary/components/button-group'
 import type {} from '@nectary/components/button-group-item'
-import type {} from '@nectary/components/card'
 import type {} from '@nectary/components/card-v2'
 import type {} from '@nectary/components/card-v2-title'
 import type {} from '@nectary/components/checkbox'
@@ -32,8 +31,6 @@ import type {} from '@nectary/components/flag'
 import type {} from '@nectary/components/grid'
 import type {} from '@nectary/components/grid-item'
 import type {} from '@nectary/components/help-tooltip'
-import type {} from '@nectary/components/horizontal-stepper'
-import type {} from '@nectary/components/horizontal-stepper-item'
 import type {} from '@nectary/components/icon'
 import type {} from '@nectary/components/inline-alert'
 import type {} from '@nectary/components/input'
@@ -48,7 +45,6 @@ import type {} from '@nectary/components/radio'
 import type {} from '@nectary/components/radio-option'
 import type {} from '@nectary/components/rich-text'
 import type {} from '@nectary/components/rich-textarea'
-import type {} from '@nectary/components/segment'
 import type {} from '@nectary/components/segment-collapse'
 import type {} from '@nectary/components/segmented-control'
 import type {} from '@nectary/components/segmented-control-option'
@@ -69,16 +65,12 @@ import type {} from '@nectary/components/tabs-option'
 import type {} from '@nectary/components/tag'
 import type {} from '@nectary/components/text'
 import type {} from '@nectary/components/textarea'
-import type {} from '@nectary/components/tile-control'
-import type {} from '@nectary/components/tile-control-option'
 import type {} from '@nectary/components/time-picker'
 import type {} from '@nectary/components/title'
 import type {} from '@nectary/components/toast'
 import type {} from '@nectary/components/toast-manager'
 import type {} from '@nectary/components/toggle'
 import type {} from '@nectary/components/tooltip'
-import type {} from '@nectary/components/vertical-stepper'
-import type {} from '@nectary/components/vertical-stepper-item'
 
 export const Accordion = createReactWrapper< TSinchAccordionWrapper, NamedSlots['sinch-accordion']>('sinch-accordion')
 export const AccordionItem = createReactWrapper< TSinchAccordionItemWrapper, NamedSlots['sinch-accordion-item']>('sinch-accordion-item')
@@ -90,7 +82,6 @@ export const Badge = createReactWrapper< TSinchBadgeWrapper, NamedSlots['sinch-b
 export const Button = createReactWrapper< TSinchButtonWrapper, NamedSlots['sinch-button']>('sinch-button')
 export const ButtonGroup = createReactWrapper< TSinchButtonGroupWrapper, NamedSlots['sinch-button-group']>('sinch-button-group')
 export const ButtonGroupItem = createReactWrapper< TSinchButtonGroupItemWrapper, NamedSlots['sinch-button-group-item']>('sinch-button-group-item')
-export const Card = createReactWrapper< TSinchCardWrapper, NamedSlots['sinch-card']>('sinch-card')
 export const CardV2 = createReactWrapper< TSinchCardV2Wrapper, NamedSlots['sinch-card-v2']>('sinch-card-v2')
 export const CardV2Title = createReactWrapper< TSinchCardV2TitleWrapper, NamedSlots['sinch-card-v2-title']>('sinch-card-v2-title')
 export const Checkbox = createReactWrapper< TSinchCheckboxWrapper, NamedSlots['sinch-checkbox']>('sinch-checkbox')
@@ -111,8 +102,6 @@ export const Flag = createReactWrapper< TSinchFlagWrapper, NamedSlots['sinch-fla
 export const Grid = createReactWrapper< TSinchGridWrapper, NamedSlots['sinch-grid']>('sinch-grid')
 export const GridItem = createReactWrapper< TSinchGridItemWrapper, NamedSlots['sinch-grid-item']>('sinch-grid-item')
 export const HelpTooltip = createReactWrapper< TSinchHelpTooltipWrapper, NamedSlots['sinch-help-tooltip']>('sinch-help-tooltip')
-export const HorizontalStepper = createReactWrapper< TSinchHorizontalStepperWrapper, NamedSlots['sinch-horizontal-stepper']>('sinch-horizontal-stepper')
-export const HorizontalStepperItem = createReactWrapper< TSinchHorizontalStepperItemWrapper, NamedSlots['sinch-horizontal-stepper-item']>('sinch-horizontal-stepper-item')
 export const Icon = createReactWrapper< TSinchIconWrapper, NamedSlots['sinch-icon']>('sinch-icon')
 export const InlineAlert = createReactWrapper< TSinchInlineAlertWrapper, NamedSlots['sinch-inline-alert']>('sinch-inline-alert')
 export const Input = createReactWrapper< TSinchInputWrapper, NamedSlots['sinch-input']>('sinch-input')
@@ -127,7 +116,6 @@ export const Radio = createReactWrapper< TSinchRadioWrapper, NamedSlots['sinch-r
 export const RadioOption = createReactWrapper< TSinchRadioOptionWrapper, NamedSlots['sinch-radio-option']>('sinch-radio-option')
 export const RichText = createReactWrapper< TSinchRichTextWrapper, NamedSlots['sinch-rich-text']>('sinch-rich-text')
 export const RichTextarea = createReactWrapper< TSinchRichTextareaWrapper, NamedSlots['sinch-rich-textarea']>('sinch-rich-textarea')
-export const Segment = createReactWrapper< TSinchSegmentWrapper, NamedSlots['sinch-segment']>('sinch-segment')
 export const SegmentCollapse = createReactWrapper< TSinchSegmentCollapseWrapper, NamedSlots['sinch-segment-collapse']>('sinch-segment-collapse')
 export const SegmentedControl = createReactWrapper< TSinchSegmentedControlWrapper, NamedSlots['sinch-segmented-control']>('sinch-segmented-control')
 export const SegmentedControlOption = createReactWrapper< TSinchSegmentedControlOptionWrapper, NamedSlots['sinch-segmented-control-option']>('sinch-segmented-control-option')
@@ -148,13 +136,9 @@ export const TabsOption = createReactWrapper< TSinchTabsOptionWrapper, NamedSlot
 export const Tag = createReactWrapper< TSinchTagWrapper, NamedSlots['sinch-tag']>('sinch-tag')
 export const Text = createReactWrapper< TSinchTextWrapper, NamedSlots['sinch-text']>('sinch-text')
 export const Textarea = createReactWrapper< TSinchTextareaWrapper, NamedSlots['sinch-textarea']>('sinch-textarea')
-export const TileControl = createReactWrapper< TSinchTileControlWrapper, NamedSlots['sinch-tile-control']>('sinch-tile-control')
-export const TileControlOption = createReactWrapper< TSinchTileControlOptionWrapper, NamedSlots['sinch-tile-control-option']>('sinch-tile-control-option')
 export const TimePicker = createReactWrapper< TSinchTimePickerWrapper, NamedSlots['sinch-time-picker']>('sinch-time-picker')
 export const Title = createReactWrapper< TSinchTitleWrapper, NamedSlots['sinch-title']>('sinch-title')
 export const Toast = createReactWrapper< TSinchToastWrapper, NamedSlots['sinch-toast']>('sinch-toast')
 export const ToastManager = createReactWrapper< TSinchToastManagerWrapper, NamedSlots['sinch-toast-manager']>('sinch-toast-manager')
 export const Toggle = createReactWrapper< TSinchToggleWrapper, NamedSlots['sinch-toggle']>('sinch-toggle')
 export const Tooltip = createReactWrapper< TSinchTooltipWrapper, NamedSlots['sinch-tooltip']>('sinch-tooltip')
-export const VerticalStepper = createReactWrapper< TSinchVerticalStepperWrapper, NamedSlots['sinch-vertical-stepper']>('sinch-vertical-stepper')
-export const VerticalStepperItem = createReactWrapper< TSinchVerticalStepperItemWrapper, NamedSlots['sinch-vertical-stepper-item']>('sinch-vertical-stepper-item')

@@ -14,10 +14,11 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { getNeedleRotationDeg, getShortestCssDeg, hourToIndex, parseTime, stringifyHour, stringifyHourFace, stringifyMinute, stringifyTime } from './utils'
-import type { TSinchTimePicker } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
+import type { NectaryComponentVanilla, TRect } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -445,27 +446,3 @@ export class TimePicker extends NectaryElement {
 }
 
 defineCustomElement('sinch-time-picker', TimePicker)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-time-picker': TSinchTimePicker,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-time-picker': NectaryComponentVanilla<'sinch-time-picker'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-time-picker': NectaryComponentReact<'sinch-time-picker'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-time-picker': NectaryComponentReact<'sinch-time-picker'>,
-    }
-  }
-}

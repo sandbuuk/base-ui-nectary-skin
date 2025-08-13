@@ -13,11 +13,13 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { modeValues } from './utils'
-import type { TSinchBadgeMode, TSinchBadge } from './types'
-import type { TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import type { TSinchBadgeMode } from './types'
+import type { TRect } from '../types'
 import type { TSinchSize } from '../utils/size'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -164,27 +166,3 @@ export class Badge extends NectaryElement {
 }
 
 defineCustomElement('sinch-badge', Badge)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-badge': TSinchBadge,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-badge': NectaryComponentVanilla<'sinch-badge'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-badge': NectaryComponentReact<'sinch-badge'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-badge': NectaryComponentReact<'sinch-badge'>,
-    }
-  }
-}

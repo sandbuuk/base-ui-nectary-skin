@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchDatePickerProps = {
   /** Identification for uncontrolled form submissions */
@@ -99,3 +99,27 @@ export type TSinchDatePicker = {
 
 export type TSinchDatePickerElement = NectaryComponentVanillaByType<TSinchDatePicker>
 export type TSinchDatePickerReact = NectaryComponentReactByType<TSinchDatePicker>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-date-picker': TSinchDatePicker,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-date-picker': NectaryComponentVanilla<'sinch-date-picker'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-date-picker': NectaryComponentReact<'sinch-date-picker'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-date-picker': NectaryComponentReact<'sinch-date-picker'>,
+    }
+  }
+}

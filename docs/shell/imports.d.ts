@@ -3,6 +3,11 @@ declare module '*.html' {
   export default value
 }
 
+declare module '*.html?raw' {
+  const value: string
+  export default value
+}
+
 declare module '*.css?theme' {
   const obj: {
     use(): void,

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test:ci": "(npm run test:app-all &) && npm run test:playwright",
+    "test:unit": "playwright test --project unit-tests",
+    "test:ci": "npm run test:unit && (npm run test:app-all &) && npm run test:playwright",
     "test:ci-chromium-react": "(npm run test:app-react &) && wait-on http://localhost:3021 && playwright test --project chromium-react",
     "test:ci-chromium-vue": "(npm run test:app-vue &) && wait-on http://localhost:3022 && playwright test --project chromium-vue",
     "test:ci-chromium-angular": "(npm run test:app-angular &) && wait-on http://localhost:3023 && playwright test --project chromium-angular",
@@ -25,6 +26,8 @@
   },
   "devDependencies": {
     "@nectary/components": "workspace:*",
+    "@nectary/assets": "workspace:*",
+    "@nectary/shared": "workspace:*",
     "@playwright/test": "1.33.0",
     "@types/node": "^18.17.17",
     "axe-core": "^4.8.1",

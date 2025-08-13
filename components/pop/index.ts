@@ -19,11 +19,13 @@ import {
   isTargetEqual,
   isAttrEqual,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { disableOverscroll, enableOverscroll, orientationValues } from './utils'
-import type { TSinchPopOrientation, TSinchPop } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
+import type { TSinchPopOrientation } from './types'
+import type { TRect } from '../types'
 import type { TContextVisibility } from '../utils'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -585,27 +587,3 @@ export class Pop extends NectaryElement {
 }
 
 defineCustomElement('sinch-pop', Pop)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-pop': TSinchPop,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-pop': NectaryComponentVanilla<'sinch-pop'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-pop': NectaryComponentReact<'sinch-pop'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-pop': NectaryComponentReact<'sinch-pop'>,
-    }
-  }
-}

@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchTooltipOrientation = 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 export type TSinchTooltipTextAlign = 'center' | 'right' | 'left'
@@ -56,3 +56,27 @@ export type TSinchTooltip = {
 
 export type TSinchTooltipElement = NectaryComponentVanillaByType<TSinchTooltip>
 export type TSinchTooltipReact = NectaryComponentReactByType<TSinchTooltip>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-tooltip': TSinchTooltip,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-tooltip': NectaryComponentVanilla<'sinch-tooltip'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-tooltip': NectaryComponentReact<'sinch-tooltip'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-tooltip': NectaryComponentReact<'sinch-tooltip'>,
+    }
+  }
+}

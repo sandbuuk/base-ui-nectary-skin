@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchCardV2Props = {
   /** Disabled */
@@ -63,3 +63,27 @@ export type TSinchCardV2 = {
 
 export type TSinchCardV2Element = NectaryComponentVanillaByType<TSinchCardV2>
 export type TSinchCardV2React = NectaryComponentReactByType<TSinchCardV2>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-card-v2': TSinchCardV2,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-card-v2': NectaryComponentVanilla<'sinch-card-v2'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-card-v2': NectaryComponentReact<'sinch-card-v2'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-card-v2': NectaryComponentReact<'sinch-card-v2'>,
+    }
+  }
+}

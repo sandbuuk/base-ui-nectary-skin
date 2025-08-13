@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TSinchSize } from '../utils/size'
 
 export type TSinchSelectButtonProps = {
@@ -71,3 +71,31 @@ export type TSinchSelectButton = {
 
 export type TSinchSelectButtonElement = NectaryComponentVanillaByType<TSinchSelectButton>
 export type TSinchSelectButtonReact = NectaryComponentReactByType<TSinchSelectButton>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-select-button': {
+      props: TSinchSelectButtonProps,
+      events: TSinchSelectButtonEvents,
+      style: TSinchSelectButtonStyle,
+    },
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-select-button': NectaryComponentVanilla<'sinch-select-button'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-select-button': NectaryComponentReact<'sinch-select-button'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-select-button': NectaryComponentReact<'sinch-select-button'>,
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TSinchSize } from '../utils/size'
 
 export type TSinchSpinnerProps = {
@@ -19,3 +19,27 @@ export type TSinchSpinner = {
 
 export type TSinchSpinnerElement = NectaryComponentVanillaByType<TSinchSpinner>
 export type TSinchSpinnerReact = NectaryComponentReactByType<TSinchSpinner>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-spinner': TSinchSpinner,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-spinner': NectaryComponentVanilla<'sinch-spinner'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-spinner': NectaryComponentReact<'sinch-spinner'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-spinner': NectaryComponentReact<'sinch-spinner'>,
+    }
+  }
+}

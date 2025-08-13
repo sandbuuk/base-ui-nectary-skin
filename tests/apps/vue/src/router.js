@@ -7,10 +7,8 @@ import Avatar from "./components/Avatar.vue";
 import Badge from "./components/Badge.vue";
 import Button from "./components/Button.vue";
 import ButtonGroup from "./components/ButtonGroup.vue";
-import Card from "./components/Card.vue";
 import CardV2 from "./components/CardV2.vue";
 import CardContainer from "./components/CardContainer.vue";
-import CardDnD from "./components/CardDnD.vue";
 import Checkbox from "./components/Checkbox.vue";
 import Chip from "./components/Chip.vue";
 import CodeTag from "./components/CodeTag.vue";
@@ -38,7 +36,6 @@ import Radio from "./components/Radio.vue";
 import RichText from "./components/RichText.vue";
 import RichTextarea from "./components/RichTextarea.vue";
 import Search from "./components/Search.vue";
-import Segment from "./components/Segment.vue";
 import SegmentedControl from "./components/SegmentedControl.vue";
 import SegmentedIconControl from "./components/SegmentedIconControl.vue";
 import Select from "./components/Select.vue";
@@ -50,7 +47,6 @@ import Tabs from "./components/Tabs.vue";
 import Tag from "./components/Tag.vue";
 import Text from "./components/Text.vue";
 import Textarea from "./components/Textarea.vue";
-import TileControl from "./components/TileControl.vue";
 import TimePicker from "./components/TimePicker.vue";
 import Title from "./components/Title.vue";
 import ToastManager from "./components/ToastManager.vue";
@@ -67,8 +63,6 @@ const routes = [
   { path: "/button", component: Button },
   { path: "/button-group", component: ButtonGroup },
   { path: "/card-container", component: CardContainer },
-  { path: "/card-dnd", component: CardDnD },
-  { path: "/card", component: Card },
   { path: "/card-v2", component: CardV2 },
   { path: "/checkbox", component: Checkbox },
   { path: "/chip", component: Chip },
@@ -97,7 +91,6 @@ const routes = [
   { path: "/rich-text", component: RichText },
   { path: "/rich-textarea", component: RichTextarea },
   { path: "/search", component: Search },
-  { path: "/segment", component: Segment },
   { path: "/segmented-control", component: SegmentedControl },
   { path: "/segmented-icon-control", component: SegmentedIconControl },
   { path: "/select-menu", component: SelectMenu },
@@ -109,7 +102,6 @@ const routes = [
   { path: "/tag", component: Tag },
   { path: "/text", component: Text },
   { path: "/textarea", component: Textarea },
-  { path: "/tile-control", component: TileControl },
   { path: "/time-picker", component: TimePicker },
   { path: "/title", component: Title },
   { path: "/toast-manager", component: ToastManager },

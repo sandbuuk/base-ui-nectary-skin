@@ -8,9 +8,10 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchTabs } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact, TRect } from '../types'
+import templateHTML from './template.html?raw'
+import type { TRect } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -108,27 +109,3 @@ export class Tabs extends NectaryElement {
 }
 
 defineCustomElement('sinch-tabs', Tabs)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-tabs': TSinchTabs,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-tabs': NectaryComponentVanilla<'sinch-tabs'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-tabs': NectaryComponentReact<'sinch-tabs'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-tabs': NectaryComponentReact<'sinch-tabs'>,
-    }
-  }
-}

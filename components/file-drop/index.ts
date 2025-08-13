@@ -13,11 +13,13 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { areFilesAccepted, areItemsAccepted, doFilesSatisfySize } from './utils'
-import type { TSinchFileDropInvalidType, TSinchFileDrop } from './types'
+import type { TSinchFileDropInvalidType } from './types'
 import type { TSinchFilePickerInvalidType } from '../file-picker/types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+import type { NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -296,27 +298,3 @@ export class FileDrop extends NectaryElement {
 }
 
 defineCustomElement('sinch-file-drop', FileDrop)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-file-drop': TSinchFileDrop,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-file-drop': NectaryComponentVanilla<'sinch-file-drop'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-file-drop': NectaryComponentReact<'sinch-file-drop'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-file-drop': NectaryComponentReact<'sinch-file-drop'>,
-    }
-  }
-}

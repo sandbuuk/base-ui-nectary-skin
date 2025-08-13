@@ -3,7 +3,7 @@ import { defineCustomElement } from '@nectary/components/utils'
 import templateHTML from './template.html'
 import type { TSinchIllustrationElement, TSinchIllustrationReact } from '@nectary/assets/illustrations/types'
 
-defineCustomElement('reference-tokens', createIllustrationClass(templateHTML))
+defineCustomElement('reference-tokens' as any, createIllustrationClass(templateHTML))
 
 declare global {
   interface HTMLElementTagNameMap {

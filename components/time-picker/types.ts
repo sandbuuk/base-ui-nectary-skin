@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchTimePickerProps = {
   /** Time value in ISO 8601 format */
@@ -71,3 +71,27 @@ export type TSinchTimePicker = {
 
 export type TSinchTimePickerElement = NectaryComponentVanillaByType<TSinchTimePicker>
 export type TSinchTimePickerReact = NectaryComponentReactByType<TSinchTimePicker>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-time-picker': TSinchTimePicker,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-time-picker': NectaryComponentVanilla<'sinch-time-picker'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-time-picker': NectaryComponentReact<'sinch-time-picker'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-time-picker': NectaryComponentReact<'sinch-time-picker'>,
+    }
+  }
+}

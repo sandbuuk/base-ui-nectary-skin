@@ -12,10 +12,10 @@ import {
   updateBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchTableHeaderCell } from './types'
+import templateHTML from './template.html?raw'
 import type { TSinchTableAlignType } from '../table-cell/types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -89,27 +89,3 @@ export class TableHeadCell extends NectaryElement {
 }
 
 defineCustomElement('sinch-table-head-cell', TableHeadCell)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-table-head-cell': TSinchTableHeaderCell,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-table-head-cell': NectaryComponentVanilla<'sinch-table-head-cell'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-table-head-cell': NectaryComponentReact<'sinch-table-head-cell'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-table-head-cell': NectaryComponentReact<'sinch-table-head-cell'>,
-    }
-  }
-}

@@ -10,10 +10,11 @@ import {
   isAttrTrue,
   isAttrEqual,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { typeValues } from './utils'
-import type { TSinchTitleType, TSinchTitle } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import type { TSinchTitleType } from './types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -92,27 +93,3 @@ export class Title extends NectaryElement {
 }
 
 defineCustomElement('sinch-title', Title)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-title': TSinchTitle,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-title': NectaryComponentVanilla<'sinch-title'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-title': NectaryComponentReact<'sinch-title'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-title': NectaryComponentReact<'sinch-title'>,
-    }
-  }
-}

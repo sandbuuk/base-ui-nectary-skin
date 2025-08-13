@@ -7,9 +7,11 @@ import {
   getBooleanAttribute,
   isAttrTrue,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchOrientation, TSinchCardTitle } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+import type { TSinchOrientation } from './types'
+import type { NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -31,7 +33,7 @@ export class CardV2Title extends NectaryElement {
   connectedCallback() {
     super.connectedCallback()
 
-    if (!this.hasAttribute('orientation')) {
+    if (this.hasAttribute('orientation') === false) {
       this.setAttribute('orientation', 'horizontal')
     }
   }
@@ -83,27 +85,3 @@ export class CardV2Title extends NectaryElement {
 }
 
 defineCustomElement('sinch-card-v2-title', CardV2Title)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-card-v2-title': TSinchCardTitle,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-card-v2-title': NectaryComponentVanilla<'sinch-card-v2-title'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-card-v2-title': NectaryComponentReact<'sinch-card-v2-title'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-card-v2-title': NectaryComponentReact<'sinch-card-v2-title'>,
-    }
-  }
-}

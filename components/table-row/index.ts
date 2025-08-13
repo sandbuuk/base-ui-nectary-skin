@@ -6,9 +6,9 @@ import {
   NectaryElement,
   updateBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchTableRow } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -64,27 +64,3 @@ export class TableRow extends NectaryElement {
 }
 
 defineCustomElement('sinch-table-row', TableRow)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-table-row': TSinchTableRow,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-table-row': NectaryComponentVanilla<'sinch-table-row'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-table-row': NectaryComponentReact<'sinch-table-row'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-table-row': NectaryComponentReact<'sinch-table-row'>,
-    }
-  }
-}

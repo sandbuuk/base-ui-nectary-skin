@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchPaginationProps = {
   value: number,
@@ -51,3 +51,27 @@ export type TSinchPagination = {
 
 export type TSinchPaginationElement = NectaryComponentVanillaByType<TSinchPagination>
 export type TSinchPaginationReact = NectaryComponentReactByType<TSinchPagination>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-pagination': TSinchPagination,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-pagination': NectaryComponentVanilla<'sinch-pagination'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-pagination': NectaryComponentReact<'sinch-pagination'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-pagination': NectaryComponentReact<'sinch-pagination'>,
+    }
+  }
+}

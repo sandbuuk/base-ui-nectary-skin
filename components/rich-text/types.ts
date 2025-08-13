@@ -1,5 +1,5 @@
 import type { TSinchTextType } from '../text/types'
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type ElementClickedEvent = CustomEvent & {
   currentTarget: HTMLElement,
@@ -50,3 +50,27 @@ export type TSinchRichText = {
 
 export type TSinchRichTextElement = NectaryComponentVanillaByType<TSinchRichText>
 export type TSinchRichTextReact = NectaryComponentReactByType<TSinchRichText>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-rich-text': TSinchRichText,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-rich-text': NectaryComponentVanilla<'sinch-rich-text'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-rich-text': NectaryComponentReact<'sinch-rich-text'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-rich-text': NectaryComponentReact<'sinch-rich-text'>,
+    }
+  }
+}

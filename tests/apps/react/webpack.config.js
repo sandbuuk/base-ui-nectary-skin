@@ -14,6 +14,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    alias: {
+      '@nectary/shared': path.resolve(__dirname, '../../../shared/index.ts'),
+    },
   },
   module: {
     rules: [
@@ -77,5 +80,19 @@ module.exports = {
     new DefinePlugin({
       __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
     }),
+    {
+      apply: (compiler) => {
+        compiler.hooks.done.tap('log', (stats) => {
+          if (stats.hasErrors()) {
+            console.error('Build failed with errors:')
+            stats.compilation.errors.forEach((error) => {
+              console.error(error.message || error)
+            })
+          } else {
+            console.log(`Build completed successfully at http://localhost:${PORT}`)
+          }
+        })
+      },
+    },
   ],
 }

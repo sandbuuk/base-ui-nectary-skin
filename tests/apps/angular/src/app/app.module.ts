@@ -9,10 +9,8 @@ import { AlertComponent } from '../components/Alert/Alert.component'
 import { AvatarComponent } from '../components/Avatar/Avatar.component'
 import { BadgeComponent } from '../components/Badge/Badge.component'
 import { ButtonComponent } from '../components/Button/Button.component'
-import { CardComponent } from '../components/Card/Card.component'
 import { CardV2Component } from '../components/CardV2/CardV2.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
-import { CardDnDComponent } from '../components/CardDnD/CardDnD.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
 import { ChipComponent } from '../components/Chip/Chip.component'
 import { CodeTagComponent } from '../components/CodeTag/CodeTag.component'
@@ -40,7 +38,6 @@ import { RadioComponent } from '../components/Radio/Radio.component'
 import { RichTextComponent } from '../components/RichText/RichText.component'
 import { RichTextareaComponent } from '../components/RichTextarea/RichTextarea.component'
 import { SearchComponent } from '../components/Search/Search.component'
-import { SegmentComponent } from '../components/Segment/Segment.component'
 import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
 import { SegmentedIconControlComponent } from '../components/SegmentedIconControl/SegmentedIconControl.component'
 import { SelectComponent } from '../components/Select/Select.component'
@@ -52,7 +49,6 @@ import { TabsComponent } from '../components/Tabs/Tabs.component'
 import { TagComponent } from '../components/Tag/Tag.component'
 import { TextComponent } from '../components/Text/Text.component'
 import { TextareaComponent } from '../components/Textarea/Textarea.component'
-import { TileControlComponent } from '../components/TileControl/TileControl.component'
 import { TimePickerComponent } from '../components/TimePicker/TimePicker.component'
 import { TitleComponent } from '../components/Title/Title.component'
 import { ToastManagerComponent } from '../components/ToastManager/ToastManager.component'
@@ -74,9 +70,7 @@ import appRoutes from './router-config'
     BadgeComponent,
     ButtonComponent,
     ButtonGroupComponent,
-    CardComponent,
     CardV2Component,
-    CardDnDComponent,
     CardContainerComponent,
     CheckboxComponent,
     ChipComponent,
@@ -105,7 +99,6 @@ import appRoutes from './router-config'
     RichTextComponent,
     RichTextareaComponent,
     SearchComponent,
-    SegmentComponent,
     SegmentedControlComponent,
     SegmentedIconControlComponent,
     SelectComponent,
@@ -117,7 +110,6 @@ import appRoutes from './router-config'
     TagComponent,
     TextareaComponent,
     TextComponent,
-    TileControlComponent,
     TimePickerComponent,
     TitleComponent,
     ToastManagerComponent,

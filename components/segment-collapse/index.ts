@@ -8,9 +8,9 @@ import {
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchSegmentExpand } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+import templateHTML from './template.html?raw'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -94,27 +94,3 @@ export class SegmentCollapse extends NectaryElement {
 }
 
 defineCustomElement('sinch-segment-collapse', SegmentCollapse)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-segment-collapse': TSinchSegmentExpand,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-segment-collapse': NectaryComponentVanilla<'sinch-segment-collapse'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-segment-collapse': NectaryComponentReact<'sinch-segment-collapse'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-segment-collapse': NectaryComponentReact<'sinch-segment-collapse'>,
-    }
-  }
-}

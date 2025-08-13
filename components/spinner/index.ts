@@ -7,11 +7,11 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
-import templateHTML from './template.html'
-import type { TSinchSpinner } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
 import type { TContextSize } from '../utils'
 import type { TSinchSize } from '../utils/size'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -64,7 +64,7 @@ export class Spinner extends NectaryElement {
   }
 
   #onContextSize = (e: CustomEvent<TContextSize>) => {
-    if (this.hasAttribute('size')) {
+    if (this.hasAttribute('size') === true) {
       return
     }
 
@@ -83,27 +83,3 @@ export class Spinner extends NectaryElement {
 }
 
 defineCustomElement('sinch-spinner', Spinner)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-spinner': TSinchSpinner,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-spinner': NectaryComponentVanilla<'sinch-spinner'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-spinner': NectaryComponentReact<'sinch-spinner'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-spinner': NectaryComponentReact<'sinch-spinner'>,
-    }
-  }
-}

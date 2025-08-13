@@ -25,10 +25,11 @@ import {
   isTargetEqual,
 } from '../utils'
 import { CSVToFormData, setFormValue } from '../utils/form'
-import templateHTML from './template.html'
-import type { TSinchSelectMenu } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+import type { NectaryComponentVanilla } from '../types'
 import type { TContextKeydown, TContextVisibility } from '../utils'
+
+export * from './types'
 
 type TSelectMenuOption = HTMLElementTagNameMap['sinch-select-menu-option']
 
@@ -562,7 +563,7 @@ export class SelectMenu extends NectaryElement {
       // Select / Unselect
       updateBooleanAttribute($op, 'data-selected', isSelected)
 
-      if (isSelected && hasRows) {
+      if (isSelected && Boolean(hasRows)) {
         $op.scrollIntoView?.({ block: 'nearest' })
       }
     }
@@ -649,27 +650,3 @@ export class SelectMenu extends NectaryElement {
 }
 
 defineCustomElement('sinch-select-menu', SelectMenu)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-select-menu': TSinchSelectMenu,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-select-menu': NectaryComponentVanilla<'sinch-select-menu'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-select-menu': NectaryComponentReact<'sinch-select-menu'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-select-menu': NectaryComponentReact<'sinch-select-menu'>,
-    }
-  }
-}

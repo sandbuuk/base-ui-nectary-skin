@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchOrientation = 'horizontal' | 'vertical'
 
@@ -44,3 +44,27 @@ export type TSinchCardTitle = {
 
 export type TSinchCardTitleElement = NectaryComponentVanillaByType<TSinchCardTitle>
 export type TSinchCardTitleReact = NectaryComponentReactByType<TSinchCardTitle>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-card-v2-title': TSinchCardTitle,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-card-v2-title': NectaryComponentVanilla<'sinch-card-v2-title'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-card-v2-title': NectaryComponentReact<'sinch-card-v2-title'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-card-v2-title': NectaryComponentReact<'sinch-card-v2-title'>,
+    }
+  }
+}

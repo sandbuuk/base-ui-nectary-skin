@@ -17,5 +17,8 @@
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
+    "paths": {
+      "@nectary/shared": ["../../shared/index.ts"]
+    }
   },
 }

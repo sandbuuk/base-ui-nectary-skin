@@ -10,9 +10,9 @@ import {
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchSegmentedControlOption } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+import templateHTML from './template.html?raw'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -132,27 +132,3 @@ export class SegmentedControlOption extends NectaryElement {
 }
 
 defineCustomElement('sinch-segmented-control-option', SegmentedControlOption)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-segmented-control-option': TSinchSegmentedControlOption,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-segmented-control-option': NectaryComponentVanilla<'sinch-segmented-control-option'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-segmented-control-option': NectaryComponentReact<'sinch-segmented-control-option'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-segmented-control-option': NectaryComponentReact<'sinch-segmented-control-option'>,
-    }
-  }
-}

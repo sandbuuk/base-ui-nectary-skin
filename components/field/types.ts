@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchFieldProps = {
   /** Label that shows in UI */
@@ -41,3 +41,27 @@ export type TSinchField = {
 
 export type TSinchFieldElement = NectaryComponentVanillaByType<TSinchField>
 export type TSinchFieldReact = NectaryComponentReactByType<TSinchField>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-field': TSinchField,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-field': NectaryComponentVanilla<'sinch-field'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-field': NectaryComponentReact<'sinch-field'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-field': NectaryComponentReact<'sinch-field'>,
+    }
+  }
+}

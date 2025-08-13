@@ -16,7 +16,7 @@ import {
   updateBooleanAttribute,
 } from '../utils'
 import { setFormValue } from '../utils/form'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import {
   areDatesEqual,
   canGoNextMonth,
@@ -41,8 +41,9 @@ import {
   sortDates,
   today,
 } from './utils'
-import type { TSinchDatePicker } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
+import type { TRect } from '../types'
+
+export * from './types'
 
 type TSinchButtonElement = HTMLElementTagNameMap['sinch-button']
 type TSinchTextElement = HTMLElementTagNameMap['sinch-text']
@@ -590,27 +591,3 @@ export class DatePicker extends NectaryElement {
 }
 
 defineCustomElement('sinch-date-picker', DatePicker)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-date-picker': TSinchDatePicker,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-date-picker': NectaryComponentVanilla<'sinch-date-picker'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-date-picker': NectaryComponentReact<'sinch-date-picker'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-date-picker': NectaryComponentReact<'sinch-date-picker'>,
-    }
-  }
-}

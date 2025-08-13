@@ -16,7 +16,8 @@
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "paths": {
-      "react": ["./empty.d.ts"]
+      "react": ["./empty.d.ts"],
+      "@nectary/shared": ["../../../shared/index.ts"],
     }
   },
 }

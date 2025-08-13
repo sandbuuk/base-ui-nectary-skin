@@ -1,5 +1,5 @@
 import { getIntegerAttribute, getLiteralAttribute, NectaryElement, updateAttribute, updateIntegerAttribute, updateLiteralAttribute } from '../utils'
-import illustrationStylesHtml from './illustration-styles.html'
+import illustrationStylesHtml from './illustration-styles.html?raw'
 import { backgroundValues, valignValues, halignValues } from './utils'
 import type { TSinchIllustrationBackground, TSinchIllustrationVAlign, TSinchIllustrationHAlign } from './types'
 

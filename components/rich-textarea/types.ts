@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TRichTextareaSelection = {
   italic: boolean,
@@ -80,3 +80,27 @@ export type TSinchRichTextarea = {
 
 export type TSinchRichTextareaElement = NectaryComponentVanillaByType<TSinchRichTextarea>
 export type TSinchRichTextareaReact = NectaryComponentReactByType<TSinchRichTextarea>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-rich-textarea': TSinchRichTextarea,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-rich-textarea': NectaryComponentVanilla<'sinch-rich-textarea'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-rich-textarea': NectaryComponentReact<'sinch-rich-textarea'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-rich-textarea': NectaryComponentReact<'sinch-rich-textarea'>,
+    }
+  }
+}

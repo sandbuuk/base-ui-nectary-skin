@@ -7,9 +7,10 @@ import {
   NectaryElement,
   updateAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchColorMenuOption } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+import type { NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -69,27 +70,3 @@ export class ColorMenuOption extends NectaryElement {
 }
 
 defineCustomElement('sinch-color-menu-option', ColorMenuOption)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-color-menu-option': TSinchColorMenuOption,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-color-menu-option': NectaryComponentVanilla<'sinch-color-menu-option'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-color-menu-option': NectaryComponentReact<'sinch-color-menu-option'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-color-menu-option': NectaryComponentReact<'sinch-color-menu-option'>,
-    }
-  }
-}

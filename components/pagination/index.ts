@@ -10,9 +10,10 @@ import {
   isTargetEqual,
   getTargetIndexInParent,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchPagination } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
+import templateHTML from './template.html?raw'
+import type { TRect } from '../types'
+
+export * from './types'
 
 const NUM_BUTTONS = 7
 const MIDDLE_BTN_INDEX = Math.floor(NUM_BUTTONS / 2)
@@ -240,27 +241,3 @@ export class Pagination extends NectaryElement {
 }
 
 defineCustomElement('sinch-pagination', Pagination)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-pagination': TSinchPagination,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-pagination': NectaryComponentVanilla<'sinch-pagination'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-pagination': NectaryComponentReact<'sinch-pagination'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-pagination': NectaryComponentReact<'sinch-pagination'>,
-    }
-  }
-}

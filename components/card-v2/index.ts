@@ -8,9 +8,9 @@ import {
   isAttrTrue,
   setClass,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchCardV2 } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -112,10 +112,10 @@ export class CardV2 extends NectaryElement {
 
   #updateClickableState() {
     const hasClickHandler =
-        this.hasAttribute('onclick') ||
+        this.hasAttribute('onclick') === true ||
         Boolean(getReactEventHandler(this, 'on-click'))
 
-    if (!this.hasAttribute('clickable') && hasClickHandler) {
+    if (this.hasAttribute('clickable') === false && hasClickHandler) {
       updateBooleanAttribute(this, 'clickable', true)
     }
   }
@@ -128,7 +128,7 @@ export class CardV2 extends NectaryElement {
       this.#clickEventListeners.set(type, listeners)
     }
 
-    if (!this.hasAttribute('clickable')) {
+    if (this.hasAttribute('clickable') === false) {
       updateBooleanAttribute(this, 'clickable', true)
     }
   }
@@ -198,27 +198,3 @@ export class CardV2 extends NectaryElement {
 }
 
 defineCustomElement('sinch-card-v2', CardV2)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-card-v2': TSinchCardV2,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-card-v2': NectaryComponentVanilla<'sinch-card-v2'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-card-v2': NectaryComponentReact<'sinch-card-v2'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-card-v2': NectaryComponentReact<'sinch-card-v2'>,
-    }
-  }
-}

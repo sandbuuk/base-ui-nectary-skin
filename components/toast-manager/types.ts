@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchToastManagerOrigin = 'top-right' | 'bottom-right'
 
@@ -19,3 +19,27 @@ export type TSinchToastManager = {
 
 export type TSinchToastManagerElement = NectaryComponentVanillaByType<TSinchToastManager>
 export type TSinchToastManagerReact = NectaryComponentReactByType<TSinchToastManager>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-toast-manager': TSinchToastManager,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-toast-manager': NectaryComponentVanilla<'sinch-toast-manager'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-toast-manager': NectaryComponentReact<'sinch-toast-manager'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-toast-manager': NectaryComponentReact<'sinch-toast-manager'>,
+    }
+  }
+}

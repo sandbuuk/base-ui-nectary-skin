@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchToastType = 'info' | 'warn' | 'error' | 'success'
 
@@ -59,3 +59,27 @@ export type TSinchToast = {
 
 export type TSinchToastElement = NectaryComponentVanillaByType<TSinchToast>
 export type TSinchToastReact = NectaryComponentReactByType<TSinchToast>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-toast': TSinchToast,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-toast': NectaryComponentVanilla<'sinch-toast'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-toast': NectaryComponentReact<'sinch-toast'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-toast': NectaryComponentReact<'sinch-toast'>,
+    }
+  }
+}

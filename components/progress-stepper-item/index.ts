@@ -11,7 +11,7 @@ import {
   updateBooleanAttribute,
   updateExplicitBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import {
   ATTR_PROGRESS_STEPPER_ITEM_ACTIVE_DESCENDANT,
   ATTR_PROGRESS_STEPPER_ITEM_CHECKED,
@@ -19,8 +19,8 @@ import {
   isProgressStepperItemActive,
   isProgressStepperItemActiveDescendant,
 } from './utils'
-import type { TSinchProgressStepperItem } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -138,27 +138,3 @@ export class ProgressStepperItem extends NectaryElement {
 }
 
 defineCustomElement('sinch-progress-stepper-item', ProgressStepperItem)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-progress-stepper-item': TSinchProgressStepperItem,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-progress-stepper-item': NectaryComponentVanilla<'sinch-progress-stepper-item'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-progress-stepper-item': NectaryComponentReact<'sinch-progress-stepper-item'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-progress-stepper-item': NectaryComponentReact<'sinch-progress-stepper-item'>,
-    }
-  }
-}

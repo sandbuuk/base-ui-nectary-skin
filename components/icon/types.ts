@@ -1,5 +1,5 @@
 import type { TSinchIcons } from './generated-icon-type'
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export { TSinchIcons }
 
@@ -39,3 +39,27 @@ export type TSinchIcon = {
 
 export type TSinchIconElement = NectaryComponentVanillaByType<TSinchIcon>
 export type TSinchIconReact = NectaryComponentReactByType<TSinchIcon>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-icon': TSinchIcon,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-icon': NectaryComponentVanilla<'sinch-icon'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-icon': NectaryComponentReact<'sinch-icon'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-icon': NectaryComponentReact<'sinch-icon'>,
+    }
+  }
+}

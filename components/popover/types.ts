@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchPopoverOrientation = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'bottom' | 'top'
 
@@ -42,3 +42,27 @@ export type TSinchPopover = {
 
 export type TSinchPopoverElement = NectaryComponentVanillaByType<TSinchPopover>
 export type TSinchPopoverReact = NectaryComponentReactByType<TSinchPopover>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-popover': TSinchPopover,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-popover': NectaryComponentVanilla<'sinch-popover'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-popover': NectaryComponentReact<'sinch-popover'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-popover': NectaryComponentReact<'sinch-popover'>,
+    }
+  }
+}

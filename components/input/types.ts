@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentVanilla } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentVanilla, NectaryComponentReact } from '../types'
 import type { TSinchSize } from '../utils/size'
 
 export type TSinchInputType = 'text' | 'password' | 'number'
@@ -101,3 +101,27 @@ export type TSinchInput = {
 
 export type TSinchInputElement = NectaryComponentVanillaByType<TSinchInput>
 export type TSinchInputReact = NectaryComponentReactByType<TSinchInput>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-input': TSinchInput,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-input': NectaryComponentVanilla<'sinch-input'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-input': NectaryComponentReact<'sinch-input'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-input': NectaryComponentReact<'sinch-input'>,
+    }
+  }
+}

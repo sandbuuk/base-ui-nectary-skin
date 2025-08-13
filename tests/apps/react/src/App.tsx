@@ -7,9 +7,7 @@ import { Avatar } from './components/Avatar'
 import { Badge } from './components/Badge'
 import { Button } from './components/Button'
 import { ButtonGroup } from './components/ButtonGroup'
-import { Card } from './components/Card'
 import { CardContainer } from './components/CardContainer'
-import { CardDnD } from './components/CardDnD'
 import { CardV2 } from './components/CardV2'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
@@ -42,7 +40,6 @@ import { Radio } from './components/Radio'
 import { RichText } from './components/RichText'
 import { RichTextarea } from './components/RichTextarea'
 import { Search } from './components/Search'
-import { Segment } from './components/Segment'
 import { SegmentedControl } from './components/SegmentedControl'
 import { SegmentedIconControl } from './components/SegmentedIconControl'
 import { Select } from './components/Select'
@@ -55,7 +52,6 @@ import { Tag } from './components/Tag'
 import { Text } from './components/Text'
 import { Textarea } from './components/Textarea'
 import { TextareaExample } from './components/TextareaExample'
-import { TileControl } from './components/TileControl'
 import { TimePicker } from './components/TimePicker'
 import { Title } from './components/Title'
 import { Toast } from './components/Toast'
@@ -97,8 +93,6 @@ const AppImpl = () => {
         <Route path="/button" element={<Button/>}/>
         <Route path="/button-group" element={<ButtonGroup/>}/>
         <Route path="/card-container" element={<CardContainer/>}/>
-        <Route path="/card-dnd" element={<CardDnD/>}/>
-        <Route path="/card" element={<Card/>}/>
         <Route path="/card-v2" element={<CardV2/>}/>
         <Route path="/checkbox" element={<Checkbox/>}/>
         <Route path="/chip" element={<Chip/>}/>
@@ -131,7 +125,6 @@ const AppImpl = () => {
         <Route path="/rich-text" element={<RichText/>}/>
         <Route path="/rich-textarea" element={<RichTextarea/>}/>
         <Route path="/search" element={<Search/>}/>
-        <Route path="/segment" element={<Segment/>}/>
         <Route path="/segmented-control" element={<SegmentedControl/>}/>
         <Route path="/segmented-icon-control" element={<SegmentedIconControl/>}/>
         <Route path="/select-menu" element={<SelectMenu/>}/>
@@ -144,7 +137,6 @@ const AppImpl = () => {
         <Route path="/text" element={<Text/>}/>
         <Route path="/textarea-example" element={<TextareaExample/>}/>
         <Route path="/textarea" element={<Textarea/>}/>
-        <Route path="/tile-control" element={<TileControl/>}/>
         <Route path="/time-picker" element={<TimePicker/>}/>
         <Route path="/title" element={<Title/>}/>
         <Route path="/toast-manager" element={<ToastManager/>}/>

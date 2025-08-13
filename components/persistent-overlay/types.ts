@@ -1,5 +1,5 @@
 import type { TSinchDialogProps } from '../dialog/types'
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchPersistentOverlayProps = {
   /** Controls whether the dialog should be open */
@@ -27,3 +27,27 @@ export type TSinchPersistentOverlay = {
 
 export type TSinchPersistentOverlayElement = NectaryComponentVanillaByType<TSinchPersistentOverlay>
 export type TSinchPersistentOverlayReact = NectaryComponentReactByType<TSinchPersistentOverlay>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-persistent-overlay': TSinchPersistentOverlay,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-persistent-overlay': NectaryComponentVanilla<'sinch-persistent-overlay'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-persistent-overlay': NectaryComponentReact<'sinch-persistent-overlay'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-persistent-overlay': NectaryComponentReact<'sinch-persistent-overlay'>,
+    }
+  }
+}

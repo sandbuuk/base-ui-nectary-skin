@@ -6,10 +6,10 @@ import {
   getAttribute,
   updateAttribute,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { getSwatchColorBg } from './utils'
-import type { TSinchColorSwatch } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -79,27 +79,3 @@ export class ColorSwatch extends NectaryElement {
 }
 
 defineCustomElement('sinch-color-swatch', ColorSwatch)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-color-swatch': TSinchColorSwatch,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-color-swatch': NectaryComponentVanilla<'sinch-color-swatch'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-color-swatch': NectaryComponentReact<'sinch-color-swatch'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-color-swatch': NectaryComponentReact<'sinch-color-swatch'>,
-    }
-  }
-}

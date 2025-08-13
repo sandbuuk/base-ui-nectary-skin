@@ -1,7 +1,9 @@
 import { defineCustomElement } from '../../utils/element'
 import { createIllustrationClass } from '../create-illustration-class'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import type { TSinchIllustrationElement, TSinchIllustrationReact, TSinchIllustrationProps } from '../types'
+
+export * from '../types'
 
 export const IllustrationSupportingDevice4 = createIllustrationClass(templateHTML)
 defineCustomElement('sinch-illustration-supporting-device-4', IllustrationSupportingDevice4)

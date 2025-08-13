@@ -2730,70 +2730,6 @@
           }
         }
       },
-      "card": {
-        "shape-radius": {
-          "value": "{sys.shape-radius.l}",
-          "type": "borderRadius"
-        },
-        "shadow": {
-          "initial": {
-            "value": "{ref.shadow.level.0}",
-            "type": "boxShadow"
-          },
-          "hover": {
-            "value": "{ref.shadow.level.1}",
-            "type": "boxShadow"
-          }
-        },
-        "color": {
-          "default": {
-            "background": {
-              "initial": {
-                "value": "{sys.color.surface.primary.default}",
-                "type": "color"
-              }
-            },
-            "border": {
-              "initial": {
-                "value": "{sys.color.border.default}",
-                "type": "color"
-              }
-            },
-            "title": {
-              "initial": {
-                "value": "{sys.color.text.default}",
-                "type": "color"
-              }
-            },
-            "description": {
-              "initial": {
-                "value": "{sys.color.text.default}",
-                "type": "color"
-              }
-            }
-          }
-        },
-        "font": {
-          "title": {
-            "value": "{sys.font.desktop-title.m}",
-            "type": "typography"
-          },
-          "description": {
-            "value": "{sys.font.body.m}",
-            "type": "typography"
-          },
-          "label": {
-            "value": "{sys.font.desktop-title.xs}",
-            "type": "typography"
-          }
-        },
-        "size": {
-          "icon": {
-            "value": "48",
-            "type": "sizing"
-          }
-        }
-      },
       "card-v2": {
         "shape-radius": {
           "value": "{sys.shape-radius.l}",
@@ -5291,64 +5227,6 @@
           }
         }
       },
-      "segment": {
-        "color": {
-          "default": {
-            "background": {
-              "initial": {
-                "value": "{sys.color.surface.primary.default}",
-                "type": "color"
-              }
-            },
-            "text": {
-              "initial": {
-                "value": "{sys.color.text.default}",
-                "type": "color"
-              }
-            },
-            "border": {
-              "initial": {
-                "value": "{sys.color.border.default}",
-                "type": "color"
-              }
-            }
-          },
-          "disabled": {
-            "text": {
-              "initial": {
-                "value": "{sys.color.text.disabled}",
-                "type": "color"
-              }
-            }
-          }
-        },
-        "shape-radius": {
-          "value": "{sys.shape-radius.l}",
-          "type": "borderRadius"
-        },
-        "font": {
-          "size": {
-            "m": {
-              "title": {
-                "value": "{sys.font.desktop-title.m}",
-                "type": "typography"
-              }
-            },
-            "l": {
-              "title": {
-                "value": "{sys.font.desktop-title.l}",
-                "type": "typography"
-              }
-            },
-            "s": {
-              "title": {
-                "value": "{sys.font.desktop-title.s}",
-                "type": "typography"
-              }
-            }
-          }
-        }
-      },
       "segmented-control": {
         "color": {
           "default": {
@@ -6241,154 +6119,6 @@
           "resize-handle": {
             "value": "20",
             "type": "sizing"
-          }
-        }
-      },
-      "tile-control": {
-        "color": {
-          "default": {
-            "background": {
-              "initial": {
-                "value": "{sys.color.surface.primary.default}",
-                "type": "color"
-              },
-              "hover": {
-                "value": "{sys.color.surface.primary.hover}",
-                "type": "color"
-              }
-            },
-            "border": {
-              "initial": {
-                "value": "{sys.color.border.default}",
-                "type": "color"
-              },
-              "hover": {
-                "value": "{sys.color.surface.transparent.hover}",
-                "type": "color"
-              }
-            },
-            "outline": {
-              "focus": {
-                "value": "{sys.color.focus}",
-                "type": "color"
-              }
-            },
-            "text": {
-              "initial": {
-                "value": "{sys.color.text.default}",
-                "type": "color"
-              }
-            },
-            "icon": {
-              "initial": {
-                "value": "{sys.color.text.default}",
-                "type": "color"
-              }
-            }
-          },
-          "disabled": {
-            "background": {
-              "initial": {
-                "value": "{sys.color.surface.primary.disabled}",
-                "type": "color"
-              }
-            },
-            "border": {
-              "initial": {
-                "value": "{sys.color.border.disabled}",
-                "type": "color"
-              }
-            },
-            "text": {
-              "initial": {
-                "value": "{sys.color.text.disabled}",
-                "type": "color"
-              }
-            },
-            "icon": {
-              "initial": {
-                "value": "{sys.color.text.disabled}",
-                "type": "color"
-              }
-            }
-          },
-          "checked": {
-            "background": {
-              "initial": {
-                "value": "{sys.color.surface.primary.active}",
-                "type": "color"
-              }
-            },
-            "border": {
-              "initial": {
-                "value": "{sys.color.primary.default}",
-                "type": "color"
-              }
-            },
-            "text": {
-              "initial": {
-                "value": "{sys.color.primary.default}",
-                "type": "color"
-              }
-            },
-            "icon": {
-              "initial": {
-                "value": "{sys.color.primary.default}",
-                "type": "color"
-              }
-            }
-          }
-        },
-        "shadow": {
-          "initial": {
-            "value": "{ref.shadow.level.1}",
-            "type": "boxShadow"
-          },
-          "focus": {
-            "value": "{ref.shadow.level.1}",
-            "type": "boxShadow"
-          },
-          "hover": {
-            "value": "{ref.shadow.level.1}",
-            "type": "boxShadow"
-          },
-          "active": {
-            "value": "{ref.shadow.level.0}",
-            "type": "boxShadow"
-          },
-          "disabled": {
-            "value": "{ref.shadow.level.0}",
-            "type": "boxShadow"
-          }
-        },
-        "shape-radius": {
-          "l": {
-            "value": "{comp.select-button.shape-radius.size.l}",
-            "type": "borderRadius"
-          },
-          "s": {
-            "value": "{comp.select-button.shape-radius.size.m}",
-            "type": "borderRadius"
-          }
-        },
-        "font": {
-          "label": {
-            "value": "{sys.font.body.m}",
-            "type": "typography"
-          }
-        },
-        "size": {
-          "m": {
-            "icon": {
-              "value": "{sys.size.s}",
-              "type": "sizing"
-            }
-          },
-          "s": {
-            "icon": {
-              "value": "{sys.size.xs}",
-              "type": "sizing"
-            }
           }
         }
       },
@@ -8440,9 +8170,6 @@
         "comp.button.font.size.m.text": "S:bcee04a8c33946131877d6f760cd99b58fce1d01,",
         "comp.button.font.size.s.text": "S:cf90b1316c564753309da9b3b139b3c72f56bad2,",
         "comp.button.font.size.xs.text": "S:26c65856e511db5f21294b87dc1f1a8d940abbba,",
-        "comp.card.font.title": "S:cfb6dc9a311040bc3e168456427ef2bd85dd9f0a,",
-        "comp.card.font.description": "S:96c10019190f6fa2c96c938f76e8b6f752d02e0c,",
-        "comp.card.font.label": "S:7b98139e45c46cf3d0436fb884da0c4985e6f769,",
         "comp.card-v2.font.title": "S:799ad783467ab31635f600d1def26ca8cabbaf4c,",
         "comp.card-v2.font.description": "S:374f1176a7747ff2c9b0be06f4d3c64f2e1be65e,",
         "comp.checkbox.font.label": "S:5f9a0726886bad4916375b6ef60166dc80c5ac20,",
@@ -8479,9 +8206,6 @@
         "comp.progress-stepper.step.font.complete-current.label": "S:e246e2f85d0ae52c5346c51ce0d09a9c03436ce3,",
         "comp.progress-stepper.step.font.incomplete-current.label": "S:d45015c16e386a67808a267cb4ad45292a5590f2,",
         "comp.radio.font.label": "S:f52588a677c158be0e4d1710c5e8b019a90144c9,",
-        "comp.segment.font.size.m.title": "S:e968a70f16e1004d73ee973b1613fb6532ff7ce2,",
-        "comp.segment.font.size.l.title": "S:5791c93cb73b3b11bd17d6e80f0ec75da2209071,",
-        "comp.segment.font.size.s.title": "S:362174e836bf6c3d93e19e7dc64188d7df1cb4a9,",
         "comp.segmented-control.font.label": "S:93ae12e087e129f811be077b8ac196654b9919e9,",
         "comp.select-button.font.input": "S:eaa723105751e675cd9a9f38c72075b40d3cf3c9,",
         "comp.select-button.font.placeholder": "S:c87de63d73d4537b32770ee515324103a205f25a,",
@@ -8491,7 +8215,6 @@
         "comp.tag.font.size.m.label": "S:6c8457de5788a892abfec49456192c6fa7b4da12,",
         "comp.tag.font.size.s.label": "S:7e85f9fd8b3ea0ce7dd47d41c45d3b3ded2c86a5,",
         "comp.textarea.font.input": "S:a090c5df71881da76dc8dcd92846a93984c75fb2,",
-        "comp.tile-control.font.label": "S:c90688df5d648c8bc5d8077c4843b9d51c30c30d,",
         "comp.time-picker.header.font": "S:d62649c9d1cd5d7ddd251fe4ba523b4b8709d074,",
         "comp.time-picker.digit.font.default.h12": "S:d96790c91f14039658b1956d62325fcbc23ec858,",
         "comp.time-picker.digit.font.default.h24": "S:229a24baa1deaab73c1c29aba4e52c11d116a929,",
@@ -8849,9 +8572,6 @@
         "comp.button.color.subtle-secondary.toggled.background.hover": "20dd3fc32b1a839c0cf54a8ed2b4fbfdb9e10d61",
         "comp.button.color.subtle-secondary.toggled.background.active": "2f7408f347f06685d1f2f49a799bc4bf9532fd64",
         "comp.card.color.default.background.initial": "af6c1d51de93ef3676c34a483eb6acdead072b7e",
-        "comp.card.color.default.border.initial": "6db55a7013e897454cd9f03c887d6d92fe5054d5",
-        "comp.card.color.default.title.initial": "44c09ef98c2a696b3510f0cdeb3dcfb12559588b",
-        "comp.card.color.default.description.initial": "44769a822427fffa16e6f71a1e430f2f2410a7eb",
         "comp.card-v2.color.default.background.initial": "0a4ce5d5b34b6573df9987da5703944be4c2c614",
         "comp.card-v2.color.default.background.hover": "fc28995d1c8952938160152ab47701bffc2a11fe",
         "comp.card-v2.color.default.background.active": "7a59d0543e66bcf3b06d99e5f15e8f8f5132d8e8",
@@ -9147,10 +8867,6 @@
         "comp.radio.color.invalid.background.initial": "45d465b85ce378cb7296d55fcd2ce017940140af",
         "comp.radio.color.invalid.background.hover": "e6dbbfac68dc02bb843fa3c29bd3f789b324dc13",
         "comp.radio.color.invalid.background.active": "28204a55f0319c6c7e53620acc5d48fabc361bdf",
-        "comp.segment.color.default.background.initial": "922267efd3f214091190eb250f5baa9afcc174db",
-        "comp.segment.color.default.text.initial": "4bf99eb73a0f10d9e947518d20bc00a935754f0b",
-        "comp.segment.color.default.border.initial": "0940035235faa9245abf8529e37bdeb134981f66",
-        "comp.segment.color.disabled.text.initial": "7689df8e81cf7d0df5fa539922aad81c941c778a",
         "comp.segmented-control.color.default.background.initial": "97a618f127c7a1d7f656b0b25ac2af21437bd216",
         "comp.segmented-control.color.default.background.hover": "d62b578895298792079a0f7dc25997d0a1c14a99",
         "comp.segmented-control.color.default.border.initial": "50e4605134349eb35c8c7411d113bddd83f10ee0",
@@ -9270,21 +8986,6 @@
         "comp.textarea.color.disabled.border.initial": "9904c38a3b8299affad3d59a84a30c33fbf6d645",
         "comp.textarea.color.disabled.text.initial": "220d84f9a38fd1a572b30f98ee52e17555ebd1d0",
         "comp.textarea.color.invalid.border.initial": "b329d5cc58cb06789fe657f5fd500d8bf33d06af",
-        "comp.tile-control.color.default.background.initial": "d3548a356769eff2e72375661193c13adf31cc0b",
-        "comp.tile-control.color.default.background.hover": "73e6f042adf0356a8a75b0bc993377bcee6f9579",
-        "comp.tile-control.color.default.border.initial": "8d31a1648b38dd5f169311ddc97763d5130712b7",
-        "comp.tile-control.color.default.border.hover": "5205675da47ce32115d5f22fa36eec59707a66af",
-        "comp.tile-control.color.default.outline.focus": "39f8809aa12f040db3b118cade5ceacada6e3f66",
-        "comp.tile-control.color.default.text.initial": "10dc6e454da7273591e394cd28a724436c7e432b",
-        "comp.tile-control.color.default.icon.initial": "c5f36e87bd9528c2b5bc6200e5d7c7caed1f141e",
-        "comp.tile-control.color.disabled.background.initial": "987c3665d84f54ea299fba442fbef8b861ae34b8",
-        "comp.tile-control.color.disabled.border.initial": "c8de7724ff63e4879e7e7ca5d042851dd13a8e1e",
-        "comp.tile-control.color.disabled.text.initial": "9514a68dbcd032af53ada933fe1618b25ac48af0",
-        "comp.tile-control.color.disabled.icon.initial": "e7dd0fa85605bb53791e15a6af842a55e0586885",
-        "comp.tile-control.color.checked.background.initial": "b1c9a4fc4eb9bcdcda1009d6a00f92e3753ec0a9",
-        "comp.tile-control.color.checked.border.initial": "aa5a876899119d3d0512685b8cc1031b4ee006db",
-        "comp.tile-control.color.checked.text.initial": "0a6fac45eb056767848bc2a0cd4aebf41b1809bd",
-        "comp.tile-control.color.checked.icon.initial": "52d653c7a36e389eec290e4eed3a27fe5431b5ab",
         "comp.time-picker.watch-face.color.default.border.initial": "12c2127b36a8f210fc9cd3c30e0e269468325dc3",
         "comp.time-picker.watch-face.color.default.background.initial": "f8ff09e515bbdfa19db3c8b769bb338679d3e1d3",
         "comp.time-picker.header.color.default.icon.initial": "1826d49cc986963eeb9a9e635391356c106afa9f",
@@ -9663,10 +9364,6 @@
         "comp.button.color.subtle-secondary.toggled.background.initial": "479beed80838ca6637f56685034888c773105103",
         "comp.button.color.subtle-secondary.toggled.background.hover": "20dd3fc32b1a839c0cf54a8ed2b4fbfdb9e10d61",
         "comp.button.color.subtle-secondary.toggled.background.active": "2f7408f347f06685d1f2f49a799bc4bf9532fd64",
-        "comp.card.color.default.background.initial": "af6c1d51de93ef3676c34a483eb6acdead072b7e",
-        "comp.card.color.default.border.initial": "6db55a7013e897454cd9f03c887d6d92fe5054d5",
-        "comp.card.color.default.title.initial": "44c09ef98c2a696b3510f0cdeb3dcfb12559588b",
-        "comp.card.color.default.description.initial": "44769a822427fffa16e6f71a1e430f2f2410a7eb",
         "comp.card-v2.color.default.background.initial": "0a4ce5d5b34b6573df9987da5703944be4c2c614",
         "comp.card-v2.color.default.background.hover": "fc28995d1c8952938160152ab47701bffc2a11fe",
         "comp.card-v2.color.default.background.active": "7a59d0543e66bcf3b06d99e5f15e8f8f5132d8e8",
@@ -9962,10 +9659,6 @@
         "comp.radio.color.invalid.background.initial": "45d465b85ce378cb7296d55fcd2ce017940140af",
         "comp.radio.color.invalid.background.hover": "e6dbbfac68dc02bb843fa3c29bd3f789b324dc13",
         "comp.radio.color.invalid.background.active": "28204a55f0319c6c7e53620acc5d48fabc361bdf",
-        "comp.segment.color.default.background.initial": "922267efd3f214091190eb250f5baa9afcc174db",
-        "comp.segment.color.default.text.initial": "4bf99eb73a0f10d9e947518d20bc00a935754f0b",
-        "comp.segment.color.default.border.initial": "0940035235faa9245abf8529e37bdeb134981f66",
-        "comp.segment.color.disabled.text.initial": "7689df8e81cf7d0df5fa539922aad81c941c778a",
         "comp.segmented-control.color.default.background.initial": "97a618f127c7a1d7f656b0b25ac2af21437bd216",
         "comp.segmented-control.color.default.background.hover": "d62b578895298792079a0f7dc25997d0a1c14a99",
         "comp.segmented-control.color.default.border.initial": "50e4605134349eb35c8c7411d113bddd83f10ee0",
@@ -10088,21 +9781,6 @@
         "comp.textarea.color.disabled.border.initial": "9904c38a3b8299affad3d59a84a30c33fbf6d645",
         "comp.textarea.color.disabled.text.initial": "220d84f9a38fd1a572b30f98ee52e17555ebd1d0",
         "comp.textarea.color.invalid.border.initial": "b329d5cc58cb06789fe657f5fd500d8bf33d06af",
-        "comp.tile-control.color.default.background.initial": "d3548a356769eff2e72375661193c13adf31cc0b",
-        "comp.tile-control.color.default.background.hover": "73e6f042adf0356a8a75b0bc993377bcee6f9579",
-        "comp.tile-control.color.default.border.initial": "8d31a1648b38dd5f169311ddc97763d5130712b7",
-        "comp.tile-control.color.default.border.hover": "5205675da47ce32115d5f22fa36eec59707a66af",
-        "comp.tile-control.color.default.outline.focus": "39f8809aa12f040db3b118cade5ceacada6e3f66",
-        "comp.tile-control.color.default.text.initial": "10dc6e454da7273591e394cd28a724436c7e432b",
-        "comp.tile-control.color.default.icon.initial": "c5f36e87bd9528c2b5bc6200e5d7c7caed1f141e",
-        "comp.tile-control.color.disabled.background.initial": "987c3665d84f54ea299fba442fbef8b861ae34b8",
-        "comp.tile-control.color.disabled.border.initial": "c8de7724ff63e4879e7e7ca5d042851dd13a8e1e",
-        "comp.tile-control.color.disabled.text.initial": "9514a68dbcd032af53ada933fe1618b25ac48af0",
-        "comp.tile-control.color.disabled.icon.initial": "e7dd0fa85605bb53791e15a6af842a55e0586885",
-        "comp.tile-control.color.checked.background.initial": "b1c9a4fc4eb9bcdcda1009d6a00f92e3753ec0a9",
-        "comp.tile-control.color.checked.border.initial": "aa5a876899119d3d0512685b8cc1031b4ee006db",
-        "comp.tile-control.color.checked.text.initial": "0a6fac45eb056767848bc2a0cd4aebf41b1809bd",
-        "comp.tile-control.color.checked.icon.initial": "52d653c7a36e389eec290e4eed3a27fe5431b5ab",
         "comp.time-picker.watch-face.color.default.border.initial": "12c2127b36a8f210fc9cd3c30e0e269468325dc3",
         "comp.time-picker.watch-face.color.default.background.initial": "f8ff09e515bbdfa19db3c8b769bb338679d3e1d3",
         "comp.time-picker.header.color.default.icon.initial": "1826d49cc986963eeb9a9e635391356c106afa9f",
@@ -10495,10 +10173,7 @@
         "comp.button.color.subtle-secondary.toggled.background.initial": "479beed80838ca6637f56685034888c773105103",
         "comp.button.color.subtle-secondary.toggled.background.hover": "20dd3fc32b1a839c0cf54a8ed2b4fbfdb9e10d61",
         "comp.button.color.subtle-secondary.toggled.background.active": "2f7408f347f06685d1f2f49a799bc4bf9532fd64",
-        "comp.card.color.default.background.initial": "af6c1d51de93ef3676c34a483eb6acdead072b7e",
         "comp.card.color.default.border.initial": "6db55a7013e897454cd9f03c887d6d92fe5054d5",
-        "comp.card.color.default.title.initial": "44c09ef98c2a696b3510f0cdeb3dcfb12559588b",
-        "comp.card.color.default.description.initial": "44769a822427fffa16e6f71a1e430f2f2410a7eb",
         "comp.card-v2.color.default.background.initial": "0a4ce5d5b34b6573df9987da5703944be4c2c614",
         "comp.card-v2.color.default.background.hover": "fc28995d1c8952938160152ab47701bffc2a11fe",
         "comp.card-v2.color.default.background.active": "7a59d0543e66bcf3b06d99e5f15e8f8f5132d8e8",
@@ -10794,10 +10469,6 @@
         "comp.radio.color.invalid.background.initial": "45d465b85ce378cb7296d55fcd2ce017940140af",
         "comp.radio.color.invalid.background.hover": "e6dbbfac68dc02bb843fa3c29bd3f789b324dc13",
         "comp.radio.color.invalid.background.active": "28204a55f0319c6c7e53620acc5d48fabc361bdf",
-        "comp.segment.color.default.background.initial": "922267efd3f214091190eb250f5baa9afcc174db",
-        "comp.segment.color.default.text.initial": "4bf99eb73a0f10d9e947518d20bc00a935754f0b",
-        "comp.segment.color.default.border.initial": "0940035235faa9245abf8529e37bdeb134981f66",
-        "comp.segment.color.disabled.text.initial": "7689df8e81cf7d0df5fa539922aad81c941c778a",
         "comp.segmented-control.color.default.background.initial": "97a618f127c7a1d7f656b0b25ac2af21437bd216",
         "comp.segmented-control.color.default.background.hover": "d62b578895298792079a0f7dc25997d0a1c14a99",
         "comp.segmented-control.color.default.border.initial": "50e4605134349eb35c8c7411d113bddd83f10ee0",
@@ -10917,21 +10588,6 @@
         "comp.textarea.color.disabled.border.initial": "9904c38a3b8299affad3d59a84a30c33fbf6d645",
         "comp.textarea.color.disabled.text.initial": "220d84f9a38fd1a572b30f98ee52e17555ebd1d0",
         "comp.textarea.color.invalid.border.initial": "b329d5cc58cb06789fe657f5fd500d8bf33d06af",
-        "comp.tile-control.color.default.background.initial": "d3548a356769eff2e72375661193c13adf31cc0b",
-        "comp.tile-control.color.default.background.hover": "73e6f042adf0356a8a75b0bc993377bcee6f9579",
-        "comp.tile-control.color.default.border.initial": "8d31a1648b38dd5f169311ddc97763d5130712b7",
-        "comp.tile-control.color.default.border.hover": "5205675da47ce32115d5f22fa36eec59707a66af",
-        "comp.tile-control.color.default.outline.focus": "39f8809aa12f040db3b118cade5ceacada6e3f66",
-        "comp.tile-control.color.default.text.initial": "10dc6e454da7273591e394cd28a724436c7e432b",
-        "comp.tile-control.color.default.icon.initial": "c5f36e87bd9528c2b5bc6200e5d7c7caed1f141e",
-        "comp.tile-control.color.disabled.background.initial": "987c3665d84f54ea299fba442fbef8b861ae34b8",
-        "comp.tile-control.color.disabled.border.initial": "c8de7724ff63e4879e7e7ca5d042851dd13a8e1e",
-        "comp.tile-control.color.disabled.text.initial": "9514a68dbcd032af53ada933fe1618b25ac48af0",
-        "comp.tile-control.color.disabled.icon.initial": "e7dd0fa85605bb53791e15a6af842a55e0586885",
-        "comp.tile-control.color.checked.background.initial": "b1c9a4fc4eb9bcdcda1009d6a00f92e3753ec0a9",
-        "comp.tile-control.color.checked.border.initial": "aa5a876899119d3d0512685b8cc1031b4ee006db",
-        "comp.tile-control.color.checked.text.initial": "0a6fac45eb056767848bc2a0cd4aebf41b1809bd",
-        "comp.tile-control.color.checked.icon.initial": "52d653c7a36e389eec290e4eed3a27fe5431b5ab",
         "comp.time-picker.watch-face.color.default.border.initial": "12c2127b36a8f210fc9cd3c30e0e269468325dc3",
         "comp.time-picker.watch-face.color.default.background.initial": "f8ff09e515bbdfa19db3c8b769bb338679d3e1d3",
         "comp.time-picker.header.color.default.icon.initial": "1826d49cc986963eeb9a9e635391356c106afa9f",
@@ -11321,10 +10977,6 @@
         "comp.button.color.subtle-secondary.toggled.background.initial": "479beed80838ca6637f56685034888c773105103",
         "comp.button.color.subtle-secondary.toggled.background.hover": "20dd3fc32b1a839c0cf54a8ed2b4fbfdb9e10d61",
         "comp.button.color.subtle-secondary.toggled.background.active": "2f7408f347f06685d1f2f49a799bc4bf9532fd64",
-        "comp.card.color.default.background.initial": "af6c1d51de93ef3676c34a483eb6acdead072b7e",
-        "comp.card.color.default.border.initial": "6db55a7013e897454cd9f03c887d6d92fe5054d5",
-        "comp.card.color.default.title.initial": "44c09ef98c2a696b3510f0cdeb3dcfb12559588b",
-        "comp.card.color.default.description.initial": "44769a822427fffa16e6f71a1e430f2f2410a7eb",
         "comp.card-v2.color.default.background.initial": "0a4ce5d5b34b6573df9987da5703944be4c2c614",
         "comp.card-v2.color.default.background.hover": "fc28995d1c8952938160152ab47701bffc2a11fe",
         "comp.card-v2.color.default.background.active": "7a59d0543e66bcf3b06d99e5f15e8f8f5132d8e8",
@@ -11620,10 +11272,6 @@
         "comp.radio.color.invalid.background.initial": "45d465b85ce378cb7296d55fcd2ce017940140af",
         "comp.radio.color.invalid.background.hover": "e6dbbfac68dc02bb843fa3c29bd3f789b324dc13",
         "comp.radio.color.invalid.background.active": "28204a55f0319c6c7e53620acc5d48fabc361bdf",
-        "comp.segment.color.default.background.initial": "922267efd3f214091190eb250f5baa9afcc174db",
-        "comp.segment.color.default.text.initial": "4bf99eb73a0f10d9e947518d20bc00a935754f0b",
-        "comp.segment.color.default.border.initial": "0940035235faa9245abf8529e37bdeb134981f66",
-        "comp.segment.color.disabled.text.initial": "7689df8e81cf7d0df5fa539922aad81c941c778a",
         "comp.segmented-control.color.default.background.initial": "97a618f127c7a1d7f656b0b25ac2af21437bd216",
         "comp.segmented-control.color.default.background.hover": "d62b578895298792079a0f7dc25997d0a1c14a99",
         "comp.segmented-control.color.default.border.initial": "50e4605134349eb35c8c7411d113bddd83f10ee0",
@@ -11743,21 +11391,6 @@
         "comp.textarea.color.disabled.border.initial": "9904c38a3b8299affad3d59a84a30c33fbf6d645",
         "comp.textarea.color.disabled.text.initial": "220d84f9a38fd1a572b30f98ee52e17555ebd1d0",
         "comp.textarea.color.invalid.border.initial": "b329d5cc58cb06789fe657f5fd500d8bf33d06af",
-        "comp.tile-control.color.default.background.initial": "d3548a356769eff2e72375661193c13adf31cc0b",
-        "comp.tile-control.color.default.background.hover": "73e6f042adf0356a8a75b0bc993377bcee6f9579",
-        "comp.tile-control.color.default.border.initial": "8d31a1648b38dd5f169311ddc97763d5130712b7",
-        "comp.tile-control.color.default.border.hover": "5205675da47ce32115d5f22fa36eec59707a66af",
-        "comp.tile-control.color.default.outline.focus": "39f8809aa12f040db3b118cade5ceacada6e3f66",
-        "comp.tile-control.color.default.text.initial": "10dc6e454da7273591e394cd28a724436c7e432b",
-        "comp.tile-control.color.default.icon.initial": "c5f36e87bd9528c2b5bc6200e5d7c7caed1f141e",
-        "comp.tile-control.color.disabled.background.initial": "987c3665d84f54ea299fba442fbef8b861ae34b8",
-        "comp.tile-control.color.disabled.border.initial": "c8de7724ff63e4879e7e7ca5d042851dd13a8e1e",
-        "comp.tile-control.color.disabled.text.initial": "9514a68dbcd032af53ada933fe1618b25ac48af0",
-        "comp.tile-control.color.disabled.icon.initial": "e7dd0fa85605bb53791e15a6af842a55e0586885",
-        "comp.tile-control.color.checked.background.initial": "b1c9a4fc4eb9bcdcda1009d6a00f92e3753ec0a9",
-        "comp.tile-control.color.checked.border.initial": "aa5a876899119d3d0512685b8cc1031b4ee006db",
-        "comp.tile-control.color.checked.text.initial": "0a6fac45eb056767848bc2a0cd4aebf41b1809bd",
-        "comp.tile-control.color.checked.icon.initial": "52d653c7a36e389eec290e4eed3a27fe5431b5ab",
         "comp.time-picker.watch-face.color.default.border.initial": "12c2127b36a8f210fc9cd3c30e0e269468325dc3",
         "comp.time-picker.watch-face.color.default.background.initial": "f8ff09e515bbdfa19db3c8b769bb338679d3e1d3",
         "comp.time-picker.header.color.default.icon.initial": "1826d49cc986963eeb9a9e635391356c106afa9f",
@@ -12141,10 +11774,6 @@
         "comp.button.color.subtle-secondary.toggled.background.initial": "479beed80838ca6637f56685034888c773105103",
         "comp.button.color.subtle-secondary.toggled.background.hover": "20dd3fc32b1a839c0cf54a8ed2b4fbfdb9e10d61",
         "comp.button.color.subtle-secondary.toggled.background.active": "2f7408f347f06685d1f2f49a799bc4bf9532fd64",
-        "comp.card.color.default.background.initial": "af6c1d51de93ef3676c34a483eb6acdead072b7e",
-        "comp.card.color.default.border.initial": "6db55a7013e897454cd9f03c887d6d92fe5054d5",
-        "comp.card.color.default.title.initial": "44c09ef98c2a696b3510f0cdeb3dcfb12559588b",
-        "comp.card.color.default.description.initial": "44769a822427fffa16e6f71a1e430f2f2410a7eb",
         "comp.card-v2.color.default.background.initial": "0a4ce5d5b34b6573df9987da5703944be4c2c614",
         "comp.card-v2.color.default.background.hover": "fc28995d1c8952938160152ab47701bffc2a11fe",
         "comp.card-v2.color.default.background.active": "7a59d0543e66bcf3b06d99e5f15e8f8f5132d8e8",
@@ -12440,10 +12069,6 @@
         "comp.radio.color.invalid.background.initial": "45d465b85ce378cb7296d55fcd2ce017940140af",
         "comp.radio.color.invalid.background.hover": "e6dbbfac68dc02bb843fa3c29bd3f789b324dc13",
         "comp.radio.color.invalid.background.active": "28204a55f0319c6c7e53620acc5d48fabc361bdf",
-        "comp.segment.color.default.background.initial": "922267efd3f214091190eb250f5baa9afcc174db",
-        "comp.segment.color.default.text.initial": "4bf99eb73a0f10d9e947518d20bc00a935754f0b",
-        "comp.segment.color.default.border.initial": "0940035235faa9245abf8529e37bdeb134981f66",
-        "comp.segment.color.disabled.text.initial": "7689df8e81cf7d0df5fa539922aad81c941c778a",
         "comp.segmented-control.color.default.background.initial": "97a618f127c7a1d7f656b0b25ac2af21437bd216",
         "comp.segmented-control.color.default.background.hover": "d62b578895298792079a0f7dc25997d0a1c14a99",
         "comp.segmented-control.color.default.border.initial": "50e4605134349eb35c8c7411d113bddd83f10ee0",
@@ -12563,21 +12188,6 @@
         "comp.textarea.color.disabled.border.initial": "9904c38a3b8299affad3d59a84a30c33fbf6d645",
         "comp.textarea.color.disabled.text.initial": "220d84f9a38fd1a572b30f98ee52e17555ebd1d0",
         "comp.textarea.color.invalid.border.initial": "b329d5cc58cb06789fe657f5fd500d8bf33d06af",
-        "comp.tile-control.color.default.background.initial": "d3548a356769eff2e72375661193c13adf31cc0b",
-        "comp.tile-control.color.default.background.hover": "73e6f042adf0356a8a75b0bc993377bcee6f9579",
-        "comp.tile-control.color.default.border.initial": "8d31a1648b38dd5f169311ddc97763d5130712b7",
-        "comp.tile-control.color.default.border.hover": "5205675da47ce32115d5f22fa36eec59707a66af",
-        "comp.tile-control.color.default.outline.focus": "39f8809aa12f040db3b118cade5ceacada6e3f66",
-        "comp.tile-control.color.default.text.initial": "10dc6e454da7273591e394cd28a724436c7e432b",
-        "comp.tile-control.color.default.icon.initial": "c5f36e87bd9528c2b5bc6200e5d7c7caed1f141e",
-        "comp.tile-control.color.disabled.background.initial": "987c3665d84f54ea299fba442fbef8b861ae34b8",
-        "comp.tile-control.color.disabled.border.initial": "c8de7724ff63e4879e7e7ca5d042851dd13a8e1e",
-        "comp.tile-control.color.disabled.text.initial": "9514a68dbcd032af53ada933fe1618b25ac48af0",
-        "comp.tile-control.color.disabled.icon.initial": "e7dd0fa85605bb53791e15a6af842a55e0586885",
-        "comp.tile-control.color.checked.background.initial": "b1c9a4fc4eb9bcdcda1009d6a00f92e3753ec0a9",
-        "comp.tile-control.color.checked.border.initial": "aa5a876899119d3d0512685b8cc1031b4ee006db",
-        "comp.tile-control.color.checked.text.initial": "0a6fac45eb056767848bc2a0cd4aebf41b1809bd",
-        "comp.tile-control.color.checked.icon.initial": "52d653c7a36e389eec290e4eed3a27fe5431b5ab",
         "comp.time-picker.watch-face.color.default.border.initial": "12c2127b36a8f210fc9cd3c30e0e269468325dc3",
         "comp.time-picker.watch-face.color.default.background.initial": "f8ff09e515bbdfa19db3c8b769bb338679d3e1d3",
         "comp.time-picker.header.color.default.icon.initial": "1826d49cc986963eeb9a9e635391356c106afa9f",
@@ -12951,10 +12561,6 @@
         "comp.button.color.subtle-secondary.toggled.background.initial": "479beed80838ca6637f56685034888c773105103",
         "comp.button.color.subtle-secondary.toggled.background.hover": "20dd3fc32b1a839c0cf54a8ed2b4fbfdb9e10d61",
         "comp.button.color.subtle-secondary.toggled.background.active": "2f7408f347f06685d1f2f49a799bc4bf9532fd64",
-        "comp.card.color.default.background.initial": "af6c1d51de93ef3676c34a483eb6acdead072b7e",
-        "comp.card.color.default.border.initial": "6db55a7013e897454cd9f03c887d6d92fe5054d5",
-        "comp.card.color.default.title.initial": "44c09ef98c2a696b3510f0cdeb3dcfb12559588b",
-        "comp.card.color.default.description.initial": "44769a822427fffa16e6f71a1e430f2f2410a7eb",
         "comp.card-v2.color.default.background.initial": "0a4ce5d5b34b6573df9987da5703944be4c2c614",
         "comp.card-v2.color.default.background.hover": "fc28995d1c8952938160152ab47701bffc2a11fe",
         "comp.card-v2.color.default.background.active": "7a59d0543e66bcf3b06d99e5f15e8f8f5132d8e8",
@@ -13259,10 +12865,6 @@
         "comp.radio.color.invalid.background.initial": "45d465b85ce378cb7296d55fcd2ce017940140af",
         "comp.radio.color.invalid.background.hover": "e6dbbfac68dc02bb843fa3c29bd3f789b324dc13",
         "comp.radio.color.invalid.background.active": "28204a55f0319c6c7e53620acc5d48fabc361bdf",
-        "comp.segment.color.default.background.initial": "922267efd3f214091190eb250f5baa9afcc174db",
-        "comp.segment.color.default.text.initial": "4bf99eb73a0f10d9e947518d20bc00a935754f0b",
-        "comp.segment.color.default.border.initial": "0940035235faa9245abf8529e37bdeb134981f66",
-        "comp.segment.color.disabled.text.initial": "7689df8e81cf7d0df5fa539922aad81c941c778a",
         "comp.segmented-control.color.default.background.initial": "97a618f127c7a1d7f656b0b25ac2af21437bd216",
         "comp.segmented-control.color.default.background.hover": "d62b578895298792079a0f7dc25997d0a1c14a99",
         "comp.segmented-control.color.default.border.initial": "50e4605134349eb35c8c7411d113bddd83f10ee0",
@@ -13382,21 +12984,6 @@
         "comp.textarea.color.disabled.border.initial": "9904c38a3b8299affad3d59a84a30c33fbf6d645",
         "comp.textarea.color.disabled.text.initial": "220d84f9a38fd1a572b30f98ee52e17555ebd1d0",
         "comp.textarea.color.invalid.border.initial": "b329d5cc58cb06789fe657f5fd500d8bf33d06af",
-        "comp.tile-control.color.default.background.initial": "d3548a356769eff2e72375661193c13adf31cc0b",
-        "comp.tile-control.color.default.background.hover": "73e6f042adf0356a8a75b0bc993377bcee6f9579",
-        "comp.tile-control.color.default.border.initial": "8d31a1648b38dd5f169311ddc97763d5130712b7",
-        "comp.tile-control.color.default.border.hover": "5205675da47ce32115d5f22fa36eec59707a66af",
-        "comp.tile-control.color.default.outline.focus": "39f8809aa12f040db3b118cade5ceacada6e3f66",
-        "comp.tile-control.color.default.text.initial": "10dc6e454da7273591e394cd28a724436c7e432b",
-        "comp.tile-control.color.default.icon.initial": "c5f36e87bd9528c2b5bc6200e5d7c7caed1f141e",
-        "comp.tile-control.color.disabled.background.initial": "987c3665d84f54ea299fba442fbef8b861ae34b8",
-        "comp.tile-control.color.disabled.border.initial": "c8de7724ff63e4879e7e7ca5d042851dd13a8e1e",
-        "comp.tile-control.color.disabled.text.initial": "9514a68dbcd032af53ada933fe1618b25ac48af0",
-        "comp.tile-control.color.disabled.icon.initial": "e7dd0fa85605bb53791e15a6af842a55e0586885",
-        "comp.tile-control.color.checked.background.initial": "b1c9a4fc4eb9bcdcda1009d6a00f92e3753ec0a9",
-        "comp.tile-control.color.checked.border.initial": "aa5a876899119d3d0512685b8cc1031b4ee006db",
-        "comp.tile-control.color.checked.text.initial": "0a6fac45eb056767848bc2a0cd4aebf41b1809bd",
-        "comp.tile-control.color.checked.icon.initial": "52d653c7a36e389eec290e4eed3a27fe5431b5ab",
         "comp.time-picker.watch-face.color.default.border.initial": "12c2127b36a8f210fc9cd3c30e0e269468325dc3",
         "comp.time-picker.watch-face.color.default.background.initial": "f8ff09e515bbdfa19db3c8b769bb338679d3e1d3",
         "comp.time-picker.header.color.default.icon.initial": "1826d49cc986963eeb9a9e635391356c106afa9f",
@@ -13468,9 +13055,6 @@
         "comp.button.font.size.m.text": "S:bcee04a8c33946131877d6f760cd99b58fce1d01,",
         "comp.button.font.size.s.text": "S:cf90b1316c564753309da9b3b139b3c72f56bad2,",
         "comp.button.font.size.xs.text": "S:26c65856e511db5f21294b87dc1f1a8d940abbba,",
-        "comp.card.font.title": "S:cfb6dc9a311040bc3e168456427ef2bd85dd9f0a,",
-        "comp.card.font.description": "S:96c10019190f6fa2c96c938f76e8b6f752d02e0c,",
-        "comp.card.font.label": "S:7b98139e45c46cf3d0436fb884da0c4985e6f769,",
         "comp.card-v2.font.title": "S:799ad783467ab31635f600d1def26ca8cabbaf4c,",
         "comp.card-v2.font.description": "S:374f1176a7747ff2c9b0be06f4d3c64f2e1be65e,",
         "comp.checkbox.font.label": "S:5f9a0726886bad4916375b6ef60166dc80c5ac20,",
@@ -13507,9 +13091,6 @@
         "comp.progress-stepper.step.font.complete-current.label": "S:e246e2f85d0ae52c5346c51ce0d09a9c03436ce3,",
         "comp.progress-stepper.step.font.incomplete-current.label": "S:d45015c16e386a67808a267cb4ad45292a5590f2,",
         "comp.radio.font.label": "S:f52588a677c158be0e4d1710c5e8b019a90144c9,",
-        "comp.segment.font.size.m.title": "S:e968a70f16e1004d73ee973b1613fb6532ff7ce2,",
-        "comp.segment.font.size.l.title": "S:5791c93cb73b3b11bd17d6e80f0ec75da2209071,",
-        "comp.segment.font.size.s.title": "S:362174e836bf6c3d93e19e7dc64188d7df1cb4a9,",
         "comp.segmented-control.font.label": "S:93ae12e087e129f811be077b8ac196654b9919e9,",
         "comp.select-button.font.input": "S:eaa723105751e675cd9a9f38c72075b40d3cf3c9,",
         "comp.select-button.font.placeholder": "S:c87de63d73d4537b32770ee515324103a205f25a,",
@@ -13519,7 +13100,6 @@
         "comp.tag.font.size.m.label": "S:6c8457de5788a892abfec49456192c6fa7b4da12,",
         "comp.tag.font.size.s.label": "S:7e85f9fd8b3ea0ce7dd47d41c45d3b3ded2c86a5,",
         "comp.textarea.font.input": "S:a090c5df71881da76dc8dcd92846a93984c75fb2,",
-        "comp.tile-control.font.label": "S:c90688df5d648c8bc5d8077c4843b9d51c30c30d,",
         "comp.time-picker.header.font": "S:d62649c9d1cd5d7ddd251fe4ba523b4b8709d074,",
         "comp.time-picker.digit.font.default.h12": "S:d96790c91f14039658b1956d62325fcbc23ec858,",
         "comp.time-picker.digit.font.default.h24": "S:229a24baa1deaab73c1c29aba4e52c11d116a929,",
@@ -13567,19 +13147,12 @@
         "comp.button.shadow.danger.hover": "S:e6811f4ce4af91b72716323cb1721484bbd18891,",
         "comp.button.shadow.danger.active": "S:ca950ad1854819521f2ec76362c1acbcce736795,",
         "comp.button.shadow.danger.disabled": "S:42aca4cf4276d19bbb8cb501179a5cde56752088,",
-        "comp.card.shadow.initial": "S:330e3d557483f7fab4175ebbf84da4ee8be3d6bc,",
-        "comp.card.shadow.hover": "S:965ef6c6a2d18d61b700dca7557cb6e06219cc8f,",
         "comp.card-v2.shadow.initial": "S:fbcdf1ea7bda096c29c52b169e86f74c209c4e8c,",
         "comp.card-v2.shadow.hover": "S:17d36f4ed7417b1b73ab04081606252bb9a0c2ca,",
         "comp.card-v2.shadow.active": "S:1df7b27fa3f3c3937bd747e72e65a73cfa3712d2,",
         "comp.card-v2.shadow.disabled": "S:cdbcfd7db4cfbeb31903154b4cbbccb357ca0789,",
         "comp.dialog.shadow": "S:3e1657a0da4f90ef96cb578e82689b22079a1a47,",
         "comp.popover.shadow": "S:8ee57c87e731f616584738c10e375dde67daeba6,",
-        "comp.tile-control.shadow.initial": "S:a3df33caa460bc611d4e5eca3bf9f848e6144e85,",
-        "comp.tile-control.shadow.focus": "S:258c51cd2b3a5c09647baf51b63b9c96ecc7be3d,",
-        "comp.tile-control.shadow.hover": "S:8c0487489d64ef2f97dc8e2955724fef02efa153,",
-        "comp.tile-control.shadow.active": "S:2f403bd31fa68f6879aefc53557e4cf5c86879cd,",
-        "comp.tile-control.shadow.disabled": "S:2da9a25993e2a1203696e4f53662a721db79a729,",
         "comp.toast.shadow": "S:d21bbb0c1e40fb31cf4350537035723eac6b39f3,",
         "comp.toggle.shadow.knob.disabled": "S:95a2391a847db7631f2cbc4d3051b9307d706b4a,",
         "comp.toggle.shadow.knob.default": "S:caed24038929cb97d924ddcc124c686248b9933f,",
@@ -13929,10 +13502,6 @@
         "comp.button.color.subtle-secondary.toggled.background.initial": "479beed80838ca6637f56685034888c773105103",
         "comp.button.color.subtle-secondary.toggled.background.hover": "20dd3fc32b1a839c0cf54a8ed2b4fbfdb9e10d61",
         "comp.button.color.subtle-secondary.toggled.background.active": "2f7408f347f06685d1f2f49a799bc4bf9532fd64",
-        "comp.card.color.default.background.initial": "af6c1d51de93ef3676c34a483eb6acdead072b7e",
-        "comp.card.color.default.border.initial": "6db55a7013e897454cd9f03c887d6d92fe5054d5",
-        "comp.card.color.default.title.initial": "44c09ef98c2a696b3510f0cdeb3dcfb12559588b",
-        "comp.card.color.default.description.initial": "44769a822427fffa16e6f71a1e430f2f2410a7eb",
         "comp.card-v2.color.default.background.initial": "0a4ce5d5b34b6573df9987da5703944be4c2c614",
         "comp.card-v2.color.default.background.hover": "fc28995d1c8952938160152ab47701bffc2a11fe",
         "comp.card-v2.color.default.background.active": "7a59d0543e66bcf3b06d99e5f15e8f8f5132d8e8",
@@ -14228,10 +13797,6 @@
         "comp.radio.color.invalid.background.initial": "45d465b85ce378cb7296d55fcd2ce017940140af",
         "comp.radio.color.invalid.background.hover": "e6dbbfac68dc02bb843fa3c29bd3f789b324dc13",
         "comp.radio.color.invalid.background.active": "28204a55f0319c6c7e53620acc5d48fabc361bdf",
-        "comp.segment.color.default.background.initial": "922267efd3f214091190eb250f5baa9afcc174db",
-        "comp.segment.color.default.text.initial": "4bf99eb73a0f10d9e947518d20bc00a935754f0b",
-        "comp.segment.color.default.border.initial": "0940035235faa9245abf8529e37bdeb134981f66",
-        "comp.segment.color.disabled.text.initial": "7689df8e81cf7d0df5fa539922aad81c941c778a",
         "comp.segmented-control.color.default.background.initial": "97a618f127c7a1d7f656b0b25ac2af21437bd216",
         "comp.segmented-control.color.default.background.hover": "d62b578895298792079a0f7dc25997d0a1c14a99",
         "comp.segmented-control.color.default.border.initial": "50e4605134349eb35c8c7411d113bddd83f10ee0",
@@ -14351,21 +13916,6 @@
         "comp.textarea.color.disabled.border.initial": "9904c38a3b8299affad3d59a84a30c33fbf6d645",
         "comp.textarea.color.disabled.text.initial": "220d84f9a38fd1a572b30f98ee52e17555ebd1d0",
         "comp.textarea.color.invalid.border.initial": "b329d5cc58cb06789fe657f5fd500d8bf33d06af",
-        "comp.tile-control.color.default.background.initial": "d3548a356769eff2e72375661193c13adf31cc0b",
-        "comp.tile-control.color.default.background.hover": "73e6f042adf0356a8a75b0bc993377bcee6f9579",
-        "comp.tile-control.color.default.border.initial": "8d31a1648b38dd5f169311ddc97763d5130712b7",
-        "comp.tile-control.color.default.border.hover": "5205675da47ce32115d5f22fa36eec59707a66af",
-        "comp.tile-control.color.default.outline.focus": "39f8809aa12f040db3b118cade5ceacada6e3f66",
-        "comp.tile-control.color.default.text.initial": "10dc6e454da7273591e394cd28a724436c7e432b",
-        "comp.tile-control.color.default.icon.initial": "c5f36e87bd9528c2b5bc6200e5d7c7caed1f141e",
-        "comp.tile-control.color.disabled.background.initial": "987c3665d84f54ea299fba442fbef8b861ae34b8",
-        "comp.tile-control.color.disabled.border.initial": "c8de7724ff63e4879e7e7ca5d042851dd13a8e1e",
-        "comp.tile-control.color.disabled.text.initial": "9514a68dbcd032af53ada933fe1618b25ac48af0",
-        "comp.tile-control.color.disabled.icon.initial": "e7dd0fa85605bb53791e15a6af842a55e0586885",
-        "comp.tile-control.color.checked.background.initial": "b1c9a4fc4eb9bcdcda1009d6a00f92e3753ec0a9",
-        "comp.tile-control.color.checked.border.initial": "aa5a876899119d3d0512685b8cc1031b4ee006db",
-        "comp.tile-control.color.checked.text.initial": "0a6fac45eb056767848bc2a0cd4aebf41b1809bd",
-        "comp.tile-control.color.checked.icon.initial": "52d653c7a36e389eec290e4eed3a27fe5431b5ab",
         "comp.time-picker.watch-face.color.default.border.initial": "12c2127b36a8f210fc9cd3c30e0e269468325dc3",
         "comp.time-picker.watch-face.color.default.background.initial": "f8ff09e515bbdfa19db3c8b769bb338679d3e1d3",
         "comp.time-picker.header.color.default.icon.initial": "1826d49cc986963eeb9a9e635391356c106afa9f",

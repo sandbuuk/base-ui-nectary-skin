@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchCheckboxProps = {
   /** Identification for uncontrolled form submissions */
@@ -83,3 +83,27 @@ export type TSinchCheckbox = {
 
 export type TSinchCheckboxElement = NectaryComponentVanillaByType<TSinchCheckbox>
 export type TSinchCheckboxReact = NectaryComponentReactByType<TSinchCheckbox>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-checkbox': TSinchCheckbox,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-checkbox': NectaryComponentVanilla<'sinch-checkbox'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-checkbox': NectaryComponentReact<'sinch-checkbox'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-checkbox': NectaryComponentReact<'sinch-checkbox'>,
+    }
+  }
+}

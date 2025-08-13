@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchTitleType = 'xl' | 'l' | 'm' | 's' | 'xs'
 export type TSinchTitleLevel = '1' | '2' | '3' | '4' | '5' | '6'
@@ -35,3 +35,27 @@ export type TSinchTitle = {
 
 export type TSinchTitleElement = NectaryComponentVanillaByType<TSinchTitle>
 export type TSinchTitleReact = NectaryComponentReactByType<TSinchTitle>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-title': TSinchTitle,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-title': NectaryComponentVanilla<'sinch-title'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-title': NectaryComponentReact<'sinch-title'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-title': NectaryComponentReact<'sinch-title'>,
+    }
+  }
+}

@@ -10,15 +10,24 @@ Add the `components`, `assets` and `theme-base` library to `package.json`:
 npm install @nectary/components @nectary/assets @nectary/theme-base
 ```
 
-## For Micro-Frontends not using ShadowRoot
+## For Micro-Frontends NOT using ShadowRoot
 
-The setup is the same as for regular applications, see [Quick Start](?path=/quick-start).
+`@nectary/components@5.0` and `@nectary/assets@3.0` comes with a new `/global` import path that's optimized for MFEs using Nectary with the global registry:
+```js
+import '@nectary/components/button/global' // ✅ Optimized bundle size
+```
+```js
+import '@nectary/components/button' // ⚠️ Imports redundant JavaScript code
+```
+> This assumes that the Host application has enabled Global Components for Micro-Frontends to consume, you can read more about it in the [Global Components](?path=/global-components) page.
+
+Apart from this, the setup is the same as for regular applications, see [Quick Start](?path=/quick-start).
 
 ## For Micro-Frontends using ShadowRoot
 
 ### Registry
 
-For the browser to be able to parse the custom elements, they need to be added to the elmenets registry.
+For the browser to be able to parse the custom elements, they need to be added to the elements registry.
 The registry then needs to be attached to the MFE's shadowRoot, inside of your mount function:
 
 ```js
@@ -44,10 +53,6 @@ const mount = (element) => {
   }
 }
 ```
-
-#### window.customElements
-
-⚠️ `window.customElements` is the global registry provided by the browser. If used, some elements might already be imported by other MFEs and might not be using the same Nectary version as the one in your package.json. Thats why its highly recommended to use the scoped `CustomElementRegistry` whenever possible.
 
 ### Theme
 
@@ -138,6 +143,22 @@ export const App = () => {
     </div>
   )
 }
+```
+
+### Manual Component Registration
+
+By default, components register themselves automatically when you import them. However, this automatic registration can cause issues if your bundler reorders or optimizes imports during the build process, leading to unpredictable registration order and unexpected runtime behavior.
+
+You can disable the import side-effect by setting the `manualRegistration` option:
+```js
+setNectaryRegistry(customRegistry, { manualRegistration: true })
+```
+And in some other part of your code:
+```js
+import { registerComponent } from "@nectary/components/utils"
+import { Button } from "@nectary/components/button"
+
+registerComponent("sinch-button", Button)
 ```
 
 ### Automatic Imports using eslint

@@ -108,7 +108,7 @@ class GridDebug extends NectaryElement {
   }
 }
 
-defineCustomElement('test-grid-debug', GridDebug)
+defineCustomElement('test-grid-debug' as any, GridDebug)
 
 declare global {
   namespace JSX {

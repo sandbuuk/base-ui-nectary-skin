@@ -10,10 +10,12 @@ import {
   NectaryElement,
   updateBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { typeValues } from './utils'
-import type { TSinchFileStatusType, TSinchFileStatus } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+import type { TSinchFileStatusType } from './types'
+import type { NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -102,27 +104,3 @@ export class FileStatus extends NectaryElement {
 }
 
 defineCustomElement('sinch-file-status', FileStatus)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-file-status': TSinchFileStatus,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-file-status': NectaryComponentVanilla<'sinch-file-status'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-file-status': NectaryComponentReact<'sinch-file-status'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-file-status': NectaryComponentReact<'sinch-file-status'>,
-    }
-  }
-}

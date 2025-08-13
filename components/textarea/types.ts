@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchTextareaProps = {
   /** Identification for uncontrolled form submissions */
@@ -64,3 +64,27 @@ export type TSinchTextarea = {
 
 export type TSinchTextareaElement = NectaryComponentVanillaByType<TSinchTextarea>
 export type TSinchTextareaReact = NectaryComponentReactByType<TSinchTextarea>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-textarea': TSinchTextarea,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-textarea': NectaryComponentVanilla<'sinch-textarea'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-textarea': NectaryComponentReact<'sinch-textarea'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-textarea': NectaryComponentReact<'sinch-textarea'>,
+    }
+  }
+}

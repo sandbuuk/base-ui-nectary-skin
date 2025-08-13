@@ -9,10 +9,11 @@ import {
   updateLiteralAttribute,
   NectaryElement,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { typeValues } from './utils'
-import type { TSinchAlertType, TSinchAlert } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import type { TSinchAlertType } from './types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -76,27 +77,3 @@ export class Alert extends NectaryElement {
 }
 
 defineCustomElement('sinch-alert', Alert)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-alert': TSinchAlert,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-alert': NectaryComponentVanilla<'sinch-alert'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-alert': NectaryComponentReact<'sinch-alert'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-alert': NectaryComponentReact<'sinch-alert'>,
-    }
-  }
-}

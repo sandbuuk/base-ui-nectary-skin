@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchFileDropInvalidType = 'accept' | 'multiple' | 'size'
 
@@ -64,3 +64,27 @@ export type TSinchFileDrop = {
 
 export type TSinchFileDropElement = NectaryComponentVanillaByType<TSinchFileDrop>
 export type TSinchFileDropReact = NectaryComponentReactByType<TSinchFileDrop>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-file-drop': TSinchFileDrop,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-file-drop': NectaryComponentVanilla<'sinch-file-drop'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-file-drop': NectaryComponentReact<'sinch-file-drop'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-file-drop': NectaryComponentReact<'sinch-file-drop'>,
+    }
+  }
+}

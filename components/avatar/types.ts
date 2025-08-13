@@ -1,5 +1,5 @@
 import type { TSinchAvatarColor } from './colors'
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TSinchSize } from '../utils/size'
 
 export type { TSinchAvatarColor }
@@ -86,3 +86,27 @@ export type TSinchAvatar = {
 
 export type TSinchAvatarElement = NectaryComponentVanillaByType<TSinchAvatar>
 export type TSinchAvatarReact = NectaryComponentReactByType<TSinchAvatar>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-avatar': TSinchAvatar,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-avatar': NectaryComponentVanilla<'sinch-avatar'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-avatar': NectaryComponentReact<'sinch-avatar'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-avatar': NectaryComponentReact<'sinch-avatar'>,
+    }
+  }
+}

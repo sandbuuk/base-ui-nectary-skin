@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchCodeTagProps = {
   /** Text content of hyperlink */
@@ -28,3 +28,27 @@ export type TSinchCodeTag = {
 
 export type TSinchCodeTagElement = NectaryComponentVanillaByType<TSinchCodeTag>
 export type TSinchCodeTagReact = NectaryComponentReactByType<TSinchCodeTag>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-code-tag': TSinchCodeTag,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-code-tag': NectaryComponentVanilla<'sinch-code-tag'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-code-tag': NectaryComponentReact<'sinch-code-tag'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-code-tag': NectaryComponentReact<'sinch-code-tag'>,
+    }
+  }
+}

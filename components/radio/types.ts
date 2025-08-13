@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchRadioProps = {
   /** Identification for uncontrolled form submissions */
@@ -28,3 +28,27 @@ export type TSinchRadio = {
 
 export type TSinchRadioElement = NectaryComponentVanillaByType<TSinchRadio>
 export type TSinchRadioReact = NectaryComponentReactByType<TSinchRadio>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-radio': TSinchRadio,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-radio': NectaryComponentVanilla<'sinch-radio'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-radio': NectaryComponentReact<'sinch-radio'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-radio': NectaryComponentReact<'sinch-radio'>,
+    }
+  }
+}

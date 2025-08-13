@@ -22,13 +22,14 @@ import {
   setClass,
 } from '../utils'
 import dataJson from './data.json'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import type {
   TEmojiGroup,
   TEmoji,
-  TSinchEmojiPicker,
 } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
+import type { NectaryComponentVanilla, TRect } from '../types'
+
+export * from './types'
 
 const groupLabels = [
   'Emotions',
@@ -429,27 +430,3 @@ export class EmojiPicker extends NectaryElement {
 }
 
 defineCustomElement('sinch-emoji-picker', EmojiPicker)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-emoji-picker': TSinchEmojiPicker,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-emoji-picker': NectaryComponentVanilla<'sinch-emoji-picker'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-emoji-picker': NectaryComponentReact<'sinch-emoji-picker'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-emoji-picker': NectaryComponentReact<'sinch-emoji-picker'>,
-    }
-  }
-}

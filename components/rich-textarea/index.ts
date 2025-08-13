@@ -12,7 +12,7 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import {
   createParseVisitor,
   deleteContentBackward,
@@ -32,13 +32,14 @@ import {
   serializeMarkdown,
   setBrowserCaret,
 } from './utils'
-import type { TRichTextareaSelection, TSinchRichTextarea } from './types'
+import type { TRichTextareaSelection } from './types'
 import type {
   TActionResult,
   TRange,
   TRichTextareaRoot,
 } from './utils'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -150,7 +151,7 @@ export class RichTextarea extends NectaryElement {
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        if (this.isConnected) {
+        if (this.isConnected === true) {
           this.#onValueChange(newVal)
         }
 
@@ -642,26 +643,3 @@ export class RichTextarea extends NectaryElement {
 }
 
 defineCustomElement('sinch-rich-textarea', RichTextarea)
-declare global {
-  interface NectaryComponentMap {
-    'sinch-rich-textarea': TSinchRichTextarea,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-rich-textarea': NectaryComponentVanilla<'sinch-rich-textarea'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-rich-textarea': NectaryComponentReact<'sinch-rich-textarea'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-rich-textarea': NectaryComponentReact<'sinch-rich-textarea'>,
-    }
-  }
-}

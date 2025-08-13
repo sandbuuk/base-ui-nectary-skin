@@ -6,10 +6,8 @@ import { AvatarComponent } from '../components/Avatar/Avatar.component'
 import { BadgeComponent } from '../components/Badge/Badge.component'
 import { ButtonComponent } from '../components/Button/Button.component'
 import { ButtonGroupComponent } from '../components/ButtonGroup/ButtonGroup.component'
-import { CardComponent } from '../components/Card/Card.component'
 import { CardV2Component } from '../components/CardV2/CardV2.component'
 import { CardContainerComponent } from '../components/CardContainer/CardContainer.component'
-import { CardDnDComponent } from '../components/CardDnD/CardDnD.component'
 import { CheckboxComponent } from '../components/Checkbox/Checkbox.component'
 import { ChipComponent } from '../components/Chip/Chip.component'
 import { CodeTagComponent } from '../components/CodeTag/CodeTag.component'
@@ -37,7 +35,6 @@ import { RadioComponent } from '../components/Radio/Radio.component'
 import { RichTextComponent } from '../components/RichText/RichText.component'
 import { RichTextareaComponent } from '../components/RichTextarea/RichTextarea.component'
 import { SearchComponent } from '../components/Search/Search.component'
-import { SegmentComponent } from '../components/Segment/Segment.component'
 import { SegmentedControlComponent } from '../components/SegmentedControl/SegmentedControl.component'
 import { SegmentedIconControlComponent } from '../components/SegmentedIconControl/SegmentedIconControl.component'
 import { SelectComponent } from '../components/Select/Select.component'
@@ -49,7 +46,6 @@ import { TabsComponent } from '../components/Tabs/Tabs.component'
 import { TagComponent } from '../components/Tag/Tag.component'
 import { TextComponent } from '../components/Text/Text.component'
 import { TextareaComponent } from '../components/Textarea/Textarea.component'
-import { TileControlComponent } from '../components/TileControl/TileControl.component'
 import { TimePickerComponent } from '../components/TimePicker/TimePicker.component'
 import { TitleComponent } from '../components/Title/Title.component'
 import { ToastManagerComponent } from '../components/ToastManager/ToastManager.component'
@@ -68,8 +64,6 @@ const appRoutes: Routes = [
   { path: 'button', component: ButtonComponent },
   { path: 'button-group', component: ButtonGroupComponent },
   { path: 'card-container', component: CardContainerComponent },
-  { path: 'card-dnd', component: CardDnDComponent },
-  { path: 'card', component: CardComponent },
   { path: 'card-v2', component: CardV2Component },
   { path: 'checkbox', component: CheckboxComponent },
   { path: 'chip', component: ChipComponent },
@@ -98,7 +92,6 @@ const appRoutes: Routes = [
   { path: 'rich-text', component: RichTextComponent },
   { path: 'rich-textarea', component: RichTextareaComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'segment', component: SegmentComponent },
   { path: 'segmented-control', component: SegmentedControlComponent },
   { path: 'segmented-icon-control', component: SegmentedIconControlComponent },
   { path: 'select-menu', component: SelectMenuComponent },
@@ -110,7 +103,6 @@ const appRoutes: Routes = [
   { path: 'tag', component: TagComponent },
   { path: 'text', component: TextComponent },
   { path: 'textarea', component: TextareaComponent },
-  { path: 'tile-control', component: TileControlComponent },
   { path: 'time-picker', component: TimePickerComponent },
   { path: 'title', component: TitleComponent },
   { path: 'toast-manager', component: ToastManagerComponent },

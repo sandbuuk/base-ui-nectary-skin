@@ -4,9 +4,9 @@ import '@nectary/components/field'
 import '@nectary/components/input'
 import '@nectary/components/popover'
 import '@nectary/components/date-picker'
-import '@nectary/components/segment'
 import '@nectary/components/button'
 import '@nectary/components/icon'
+import '@nectary/components/card-v2'
 
 export const EventTargets: FC = () => {
   const [_isOpen, setOpen] = useState(false)
@@ -27,7 +27,7 @@ export const EventTargets: FC = () => {
   const onClose = () => setOpen(false)
 
   return (
-    <sinch-segment caption="Segment">
+    <sinch-card-v2>
       <sinch-popover
         slot="content"
         open
@@ -72,6 +72,6 @@ export const EventTargets: FC = () => {
           on-change={onIsoChange}
         />
       </sinch-popover>
-    </sinch-segment>
+    </sinch-card-v2>
   )
 }

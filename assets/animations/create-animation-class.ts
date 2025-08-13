@@ -1,6 +1,6 @@
 import lottie from 'lottie-web'
 import { attrValueToPixels, getBooleanAttribute, getIntegerAttribute, getLiteralAttribute, NectaryElement, updateAttribute, updateBooleanAttribute, updateLiteralAttribute } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import type { TSinchAnimationDirection } from './types'
 import type { AnimationConfigWithData, AnimationItem } from 'lottie-web'
 

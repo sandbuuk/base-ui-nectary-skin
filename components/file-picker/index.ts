@@ -10,10 +10,10 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { doFilesSatisfySize } from './utils'
-import type { TSinchFilePicker } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -148,27 +148,3 @@ export class FilePicker extends NectaryElement {
 }
 
 defineCustomElement('sinch-file-picker', FilePicker)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-file-picker': TSinchFilePicker,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-file-picker': NectaryComponentVanilla<'sinch-file-picker'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-file-picker': NectaryComponentReact<'sinch-file-picker'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-file-picker': NectaryComponentReact<'sinch-file-picker'>,
-    }
-  }
-}

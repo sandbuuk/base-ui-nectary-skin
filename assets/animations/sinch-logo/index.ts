@@ -3,6 +3,8 @@ import { createAnimationClass } from '../create-animation-class'
 import animationData from './lottie.json'
 import type { TSinchAnimationElement, TSinchAnimationReact, TSinchAnimationProps } from '../types'
 
+export * from '../types'
+
 export const AnimationSinchLogo = createAnimationClass(animationData)
 defineCustomElement('sinch-animation-sinch-logo', AnimationSinchLogo)
 

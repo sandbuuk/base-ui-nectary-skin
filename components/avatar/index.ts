@@ -7,11 +7,12 @@ import {
   updateLiteralAttribute,
 } from '../utils'
 import { DEFAULT_SIZE, sizeValues } from '../utils/size'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { getAvatarColorBg, getAvatarColorFg, statusValues } from './utils'
-import type { TSinchAvatarStatus, TSinchAvatar } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import type { TSinchAvatarStatus } from './types'
 import type { TSinchSize } from '../utils/size'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -132,27 +133,3 @@ export class Avatar extends NectaryElement {
 }
 
 defineCustomElement('sinch-avatar', Avatar)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-avatar': TSinchAvatar,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-avatar': NectaryComponentVanilla<'sinch-avatar'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-avatar': NectaryComponentReact<'sinch-avatar'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-avatar': NectaryComponentReact<'sinch-avatar'>,
-    }
-  }
-}

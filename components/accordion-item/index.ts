@@ -14,10 +14,11 @@ import {
   updateExplicitBooleanAttribute,
   updateLiteralAttribute,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { statusValues } from './utils'
-import type { TSinchAccordionStatusType, TSinchAccordionItem } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+import type { TSinchAccordionStatusType } from './types'
+
+export * from './types'
 
 type TSinchTitleElement = HTMLElementTagNameMap['sinch-title']
 
@@ -145,27 +146,3 @@ export class AccordionItem extends NectaryElement {
 }
 
 defineCustomElement('sinch-accordion-item', AccordionItem)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-accordion-item': TSinchAccordionItem,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-accordion-item': NectaryComponentVanilla<'sinch-accordion-item'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-accordion-item': NectaryComponentReact<'sinch-accordion-item'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-accordion-item': NectaryComponentReact<'sinch-accordion-item'>,
-    }
-  }
-}

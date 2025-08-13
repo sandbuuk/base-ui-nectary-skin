@@ -6,7 +6,7 @@ const template = document.createElement('template')
 
 template.innerHTML = templateHTML
 
-defineCustomElement('landing-page-grid', class extends NectaryElement {
+defineCustomElement('landing-page-grid' as any, class extends NectaryElement {
   constructor() {
     super()
 

@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchInlineAlertType = 'info' | 'success' | 'warn' | 'error'
 
@@ -52,3 +52,27 @@ export type TSinchInlineAlert = {
 
 export type TSinchInlineAlertElement = NectaryComponentVanillaByType<TSinchInlineAlert>
 export type TSinchInlineAlertReact = NectaryComponentReactByType<TSinchInlineAlert>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-inline-alert': TSinchInlineAlert,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-inline-alert': NectaryComponentVanilla<'sinch-inline-alert'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-inline-alert': NectaryComponentReact<'sinch-inline-alert'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-inline-alert': NectaryComponentReact<'sinch-inline-alert'>,
+    }
+  }
+}

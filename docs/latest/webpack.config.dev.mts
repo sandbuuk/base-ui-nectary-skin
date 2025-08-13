@@ -55,6 +55,7 @@ const config: Configuration = {
       'core-js': path.resolve('./node_modules/core-js/'),
       react: path.resolve('./node_modules/react/'),
       'react-dom': path.resolve('./node_modules/react-dom/'),
+      '@nectary/shared': path.resolve('../../shared/index.ts'),
     },
   },
   module: {

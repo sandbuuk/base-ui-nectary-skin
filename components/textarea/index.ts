@@ -16,9 +16,9 @@ import {
 } from '../utils'
 import { setFormValue } from '../utils/form'
 import { DEFAULT_SIZE } from '../utils/size'
-import templateHTML from './template.html'
-import type { TSinchTextarea } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -482,27 +482,3 @@ export class Textarea extends NectaryElement {
 }
 
 defineCustomElement('sinch-textarea', Textarea)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-textarea': TSinchTextarea,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-textarea': NectaryComponentVanilla<'sinch-textarea'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-textarea': NectaryComponentReact<'sinch-textarea'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-textarea': NectaryComponentReact<'sinch-textarea'>,
-    }
-  }
-}

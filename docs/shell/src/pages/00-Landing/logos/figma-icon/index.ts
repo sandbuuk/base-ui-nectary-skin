@@ -3,7 +3,7 @@ import { defineCustomElement } from '@nectary/components/utils'
 import templateHTML from './template.html'
 import type { TSinchLogoReact, TSinchLogoElement } from '@nectary/assets/logo/types'
 
-defineCustomElement('figma-icon', createLogoClass(templateHTML))
+defineCustomElement('figma-icon' as any, createLogoClass(templateHTML))
 
 declare global {
   interface HTMLElementTagNameMap {

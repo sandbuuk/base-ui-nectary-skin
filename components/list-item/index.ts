@@ -2,9 +2,9 @@ import {
   defineCustomElement,
   NectaryElement,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchListItem } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -25,27 +25,3 @@ export class ListItem extends NectaryElement {
 }
 
 defineCustomElement('sinch-list-item', ListItem)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-list-item': TSinchListItem,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-list-item': NectaryComponentVanilla<'sinch-list-item'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-list-item': NectaryComponentReact<'sinch-list-item'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-list-item': NectaryComponentReact<'sinch-list-item'>,
-    }
-  }
-}

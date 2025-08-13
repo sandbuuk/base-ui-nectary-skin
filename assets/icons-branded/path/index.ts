@@ -1,7 +1,9 @@
 import { defineCustomElement } from '../../utils/element'
 import { createIconClass } from '../create-icon-class'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import type { TSinchIconBrandedElement, TSinchIconBrandedReact, TSinchIconBrandedProps } from '../types'
+
+export * from '../types'
 
 export const IconBrandedPath = createIconClass(templateHTML)
 defineCustomElement('sinch-icon-branded-path', IconBrandedPath)

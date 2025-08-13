@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchEmojiProps = {
   /** Emoji character */
@@ -20,3 +20,27 @@ export type TSinchEmoji = {
 
 export type TSinchEmojiElement = NectaryComponentVanillaByType<TSinchEmoji>
 export type TSinchEmojiReact = NectaryComponentReactByType<TSinchEmoji>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-emoji': TSinchEmoji,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-emoji': NectaryComponentVanilla<'sinch-emoji'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-emoji': NectaryComponentReact<'sinch-emoji'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-emoji': NectaryComponentReact<'sinch-emoji'>,
+    }
+  }
+}

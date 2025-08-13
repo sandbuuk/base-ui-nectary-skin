@@ -9,13 +9,12 @@ import {
   shouldReduceMotion,
   updateLiteralAttribute,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { originValues } from './utils'
-import type {
-  TSinchToastManagerOrigin,
-  TSinchToastManager,
-} from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
+import type { TSinchToastManagerOrigin } from './types'
+import type { TRect } from '../types'
+
+export * from './types'
 
 const DURATION_ADD = 250
 const DURATION_REMOVE = 250
@@ -240,27 +239,3 @@ export class ToastManager extends NectaryElement {
 }
 
 defineCustomElement('sinch-toast-manager', ToastManager)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-toast-manager': TSinchToastManager,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-toast-manager': NectaryComponentVanilla<'sinch-toast-manager'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-toast-manager': NectaryComponentReact<'sinch-toast-manager'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-toast-manager': NectaryComponentReact<'sinch-toast-manager'>,
-    }
-  }
-}

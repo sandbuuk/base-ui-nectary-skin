@@ -1,7 +1,9 @@
 import './landing-page-grid'
 import '@nectary/components/grid-item'
-import '@nectary/components/card'
+import '@nectary/components/card-v2'
+import '@nectary/components/card-v2-title'
 import '@nectary/components/link'
+import '@nectary/components/text'
 import '@nectary/assets/logo/sinch-icon'
 import '../logos/figma-icon'
 import '../logos/gitlab-icon'
@@ -17,48 +19,53 @@ const brandLibraryText = `Looking for the latest guidelines and assets for our c
 export const Cards = () => (
   <landing-page-grid noPadding>
     <sinch-grid-item slot="item" xl={4} l={4} m={2} s={2}>
-      <sinch-card slot="content" caption="Git lab" text={gitLabText}>
-        <gitlab-icon size={24} slot="icon"/>
+      <sinch-card-v2 slot="content">
+        <sinch-card-v2-title slot="title" text="Git lab">
+          <gitlab-icon size={24} slot="icon"/>
+        </sinch-card-v2-title>
+        <sinch-text slot="content" type="m">{gitLabText}</sinch-text>
         <sinch-link
-          slot="action"
+          slot="footer"
           href={gitlabLink}
           text="Go to the Git lab reposirory"
           aria-label="Link"
           standalone
         />
-      </sinch-card>
+      </sinch-card-v2>
     </sinch-grid-item>
     <sinch-grid-item slot="item" xl={4} l={4} m={2} s={2}>
-      <sinch-card
+      <sinch-card-v2
         slot="content"
-        caption="Figma library"
-        text={figmaText}
       >
-        <figma-icon size={24} slot="icon"/>
+        <sinch-card-v2-title slot="title" text="Figma library">
+          <figma-icon size={24} slot="icon"/>
+        </sinch-card-v2-title>
+        <sinch-text slot="content" type="m">{figmaText}</sinch-text>
         <sinch-link
-          slot="action"
+          slot="footer"
           href={figmaLink}
           text="Go to the figma library"
           aria-label="Link"
           standalone
         />
-      </sinch-card>
+      </sinch-card-v2>
     </sinch-grid-item>
     <sinch-grid-item slot="item" xl={4} l={4} m={2} s={2}>
-      <sinch-card
+      <sinch-card-v2
         slot="content"
-        caption="Brand library"
-        text={brandLibraryText}
       >
-        <sinch-logo-sinch-icon size={24} slot="icon"/>
+        <sinch-card-v2-title slot="title" text="Brand library">
+          <sinch-logo-sinch-icon size={24} slot="icon"/>
+        </sinch-card-v2-title>
+        <sinch-text slot="content" type="m">{brandLibraryText}</sinch-text>
         <sinch-link
-          slot="action"
+          slot="footer"
           href={brandLink}
           text="Go to the brand library"
           aria-label="Link"
           standalone
         />
-      </sinch-card>
+      </sinch-card-v2>
     </sinch-grid-item>
   </landing-page-grid>
 )

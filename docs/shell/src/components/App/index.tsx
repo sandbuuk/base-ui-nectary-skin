@@ -21,7 +21,9 @@ import { TokensPage } from '~/pages/05-Token'
 import { TypeScriptPage } from '~/pages/06-TypeScript'
 import { EventHandlersPage } from '~/pages/07-EventHandlers'
 import { LabsPage } from '~/pages/08-Labs'
-import { V3MigrationPage } from '~/pages/09-V3Migration'
+import { GlobalComponentsPage } from '~/pages/09-GlobalComponents'
+import { V3MigrationPage } from '~/pages/10-V3Migration'
+import { V5MigrationPage } from '~/pages/11-V5Migration'
 import { NotFoundPage } from '~/pages/NotFound'
 import './styles.css'
 import '@nectary/theme-base'
@@ -134,6 +136,8 @@ export const App: FC = () => {
                   <NavigationItem path="/tokens" text="Tokens"/>
                   <NavigationItem path="/typescript" text="TypeScript"/>
                   <NavigationItem path="/event-handlers" text="Event Handlers"/>
+                  <NavigationItem path="/global-components" text="Global Components"/>
+                  <NavigationItem path="/V5Migration" text="V5 Migration"/>
                   <NavigationItem path="/V3Migration" text="V3 Migration"/>
                 </NavigationList>
               </NavigationGroup>
@@ -158,6 +162,8 @@ export const App: FC = () => {
             <Route path="/tokens" element={<TokensPage/>}/>
             <Route path="/typescript" element={<TypeScriptPage/>}/>
             <Route path="/event-handlers" element={<EventHandlersPage/>}/>
+            <Route path="/global-components" element={<GlobalComponentsPage/>}/>
+            <Route path="/V5Migration" element={<V5MigrationPage/>}/>
             <Route path="/V3Migration" element={<V3MigrationPage/>}/>
             <Route path="/labComponents" element={<LabsPage/>}/>
             <Route path="/labComponents/*" element={<ComponentsPage/>}/>

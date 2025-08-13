@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchColorSwatchProps = {
   /** Color name */
@@ -23,3 +23,27 @@ export type TSinchColorSwatch = {
 
 export type TSinchColorSwatchElement = NectaryComponentVanillaByType<TSinchColorSwatch>
 export type TSinchColorSwatchReact = NectaryComponentReactByType<TSinchColorSwatch>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-color-swatch': TSinchColorSwatch,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-color-swatch': NectaryComponentVanilla<'sinch-color-swatch'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-color-swatch': NectaryComponentReact<'sinch-color-swatch'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-color-swatch': NectaryComponentReact<'sinch-color-swatch'>,
+    }
+  }
+}

@@ -15,13 +15,11 @@ import {
   isTargetEqual,
   isAttrEqual,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { disableScroll, enableScroll } from './utils'
-import type {
-  TSinchDialogCloseDetail,
-  TSinchDialog,
-} from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import type { TSinchDialogCloseDetail } from './types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -219,27 +217,3 @@ export class Dialog extends NectaryElement {
 }
 
 defineCustomElement('sinch-dialog', Dialog)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-dialog': TSinchDialog,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-dialog': NectaryComponentVanilla<'sinch-dialog'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-dialog': NectaryComponentReact<'sinch-dialog'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-dialog': NectaryComponentReact<'sinch-dialog'>,
-    }
-  }
-}

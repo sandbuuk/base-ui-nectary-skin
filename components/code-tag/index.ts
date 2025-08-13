@@ -4,9 +4,9 @@ import {
   updateAttribute,
   NectaryElement,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchCodeTag } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+import templateHTML from './template.html?raw'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -49,27 +49,3 @@ export class CodeTag extends NectaryElement {
 }
 
 defineCustomElement('sinch-code-tag', CodeTag)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-code-tag': TSinchCodeTag,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-code-tag': NectaryComponentVanilla<'sinch-code-tag'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-code-tag': NectaryComponentReact<'sinch-code-tag'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-code-tag': NectaryComponentReact<'sinch-code-tag'>,
-    }
-  }
-}

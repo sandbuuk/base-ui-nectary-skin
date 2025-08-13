@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchTableAlignType = 'start' | 'center' | 'end'
 
@@ -18,3 +18,27 @@ export type TSinchTableCell = {
 
 export type TSinchTableCellElement = NectaryComponentVanillaByType<TSinchTableCell>
 export type TSinchTableCellReact = NectaryComponentReactByType<TSinchTableCell>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-table-cell': TSinchTableCell,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-table-cell': NectaryComponentVanilla<'sinch-table-cell'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-table-cell': NectaryComponentReact<'sinch-table-cell'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-table-cell': NectaryComponentReact<'sinch-table-cell'>,
+    }
+  }
+}

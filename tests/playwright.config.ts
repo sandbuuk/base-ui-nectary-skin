@@ -3,6 +3,12 @@ import type { PlaywrightTestConfig } from '@playwright/test'
 const config: PlaywrightTestConfig = {
   projects: [
     {
+      name: 'unit-tests',
+      testDir: '.',
+      testMatch: '*unit.test.ts',
+      use: {},
+    },
+    {
       name: 'chromium-react',
       use: {
         browserName: 'chromium',
@@ -91,7 +97,10 @@ const config: PlaywrightTestConfig = {
       threshold: 0.05,
     },
   },
-  reporter: 'list',
+  reporter: process.env.CI != null ? [
+    ['list'],
+    ['junit', { outputFile: 'test-results/unit-results.xml' }],
+  ] : 'list',
   timeout: 60000,
 }
 

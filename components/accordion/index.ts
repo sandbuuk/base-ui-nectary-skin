@@ -11,9 +11,9 @@ import {
   updateBooleanAttribute,
   updateCsv,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchAccordion } from './types'
-import type { NectaryComponentVanilla, NectaryComponentReact } from '../types'
+import templateHTML from './template.html?raw'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -132,27 +132,3 @@ export class Accordion extends NectaryElement {
 }
 
 defineCustomElement('sinch-accordion', Accordion)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-accordion': TSinchAccordion,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-accordion': NectaryComponentVanilla<'sinch-accordion'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-accordion': NectaryComponentReact<'sinch-accordion'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-accordion': NectaryComponentReact<'sinch-accordion'>,
-    }
-  }
-}

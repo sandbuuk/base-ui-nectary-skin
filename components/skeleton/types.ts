@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchSkeletonProps = {
   /** Card like container */
@@ -24,3 +24,27 @@ export type TSinchSkeleton = {
 
 export type TSinchSkeletonElement = NectaryComponentVanillaByType<TSinchSkeleton>
 export type TSinchSkeletonReact = NectaryComponentReactByType<TSinchSkeleton>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-skeleton': TSinchSkeleton,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-skeleton': NectaryComponentVanilla<'sinch-skeleton'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-skeleton': NectaryComponentReact<'sinch-skeleton'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-skeleton': NectaryComponentReact<'sinch-skeleton'>,
+    }
+  }
+}

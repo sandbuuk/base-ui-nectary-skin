@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchAccordionStatusType = 'info' | 'success' | 'warn' | 'error'
 
@@ -56,3 +56,27 @@ export type TSinchAccordionItem = {
 
 export type TSinchAccordionItemElement = NectaryComponentVanillaByType<TSinchAccordionItem>
 export type TSinchAccordionItemReact = NectaryComponentReactByType<TSinchAccordionItem>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-accordion-item': TSinchAccordionItem,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-accordion-item': NectaryComponentVanilla<'sinch-accordion-item'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-accordion-item': NectaryComponentReact<'sinch-accordion-item'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-accordion-item': NectaryComponentReact<'sinch-accordion-item'>,
+    }
+  }
+}

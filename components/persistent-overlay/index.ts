@@ -9,9 +9,10 @@ import {
   isAttrTrue,
   getReactEventHandler,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchPersistentOverlay } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import templateHTML from './template.html?raw'
+import type { NectaryComponentVanilla } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -141,27 +142,3 @@ export class PersistentOverlay extends NectaryElement {
 }
 
 defineCustomElement('sinch-persistent-overlay', PersistentOverlay)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-persistent-overlay': TSinchPersistentOverlay,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-persistent-overlay': NectaryComponentVanilla<'sinch-persistent-overlay'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-persistent-overlay': NectaryComponentReact<'sinch-persistent-overlay'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-persistent-overlay': NectaryComponentReact<'sinch-persistent-overlay'>,
-    }
-  }
-}

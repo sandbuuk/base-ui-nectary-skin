@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchActionMenuOptionProps = {
   /** Display text */
@@ -48,3 +48,27 @@ export type TSinchActionMenuOption = {
 
 export type TSinchActionMenuOptionElement = NectaryComponentVanillaByType<TSinchActionMenuOption>
 export type TSinchActionMenuOptionReact = NectaryComponentReactByType<TSinchActionMenuOption>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-action-menu-option': TSinchActionMenuOption,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-action-menu-option': NectaryComponentVanilla<'sinch-action-menu-option'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-action-menu-option': NectaryComponentReact<'sinch-action-menu-option'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-action-menu-option': NectaryComponentReact<'sinch-action-menu-option'>,
+    }
+  }
+}

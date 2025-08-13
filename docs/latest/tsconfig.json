@@ -20,6 +20,9 @@
     "paths": {
       "~/*": [
         "./src/*"
+      ],
+      "@nectary/shared": [
+        "../../shared/index.ts"
       ]
     },
   },

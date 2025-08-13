@@ -14,9 +14,7 @@ import Avatar from './components/Avatar.vue'
 import Badge from './components/Badge.vue'
 import Button from './components/Button.vue'
 import ButtonGroup from './components/ButtonGroup.vue'
-import Card from './components/Card.vue'
 import CardContainer from './components/CardContainer.vue'
-import CardDnD from './components/CardDnD.vue'
 import Checkbox from './components/Checkbox.vue'
 import Chip from './components/Chip.vue'
 import CodeTag from './components/CodeTag.vue'
@@ -44,7 +42,6 @@ import Radio from './components/Radio.vue'
 import RichText from './components/RichText.vue'
 import RichTextarea from './components/RichTextarea.vue'
 import Search from './components/Search.vue'
-import Segment from './components/Segment.vue'
 import SegmentedControl from './components/SegmentedControl.vue'
 import SegmentedIconControl from './components/SegmentedIconControl.vue'
 import Select from './components/Select.vue'
@@ -56,7 +53,6 @@ import Tabs from './components/Tabs.vue'
 import Tag from './components/Tag.vue'
 import Text from './components/Text.vue'
 import Textarea from './components/Textarea.vue'
-import TileControl from './components/TileControl.vue'
 import TimePicker from './components/TimePicker.vue'
 import Title from './components/Title.vue'
 import ToastManager from './components/ToastManager.vue'
@@ -101,9 +97,7 @@ export default {
     Badge,
     Button,
     ButtonGroup,
-    Card,
     CardContainer,
-    CardDnD,
     Checkbox,
     Chip,
     CodeTag,
@@ -131,7 +125,6 @@ export default {
     RichText,
     RichTextarea,
     Search,
-    Segment,
     SegmentedControl,
     SegmentedIconControl,
     Select,
@@ -143,7 +136,6 @@ export default {
     Tag,
     Text,
     Textarea,
-    TileControl,
     TimePicker,
     Title,
     ToastManager,

@@ -4,7 +4,7 @@ import {
   NectaryElement,
   updateAttribute,
 } from '../utils'
-import iconStylesHtml from './icon-styles.html'
+import iconStylesHtml from './icon-styles.html?raw'
 
 const DEFAULT_SIZE = 48
 const MIN_SIZE = 4

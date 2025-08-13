@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 import type { TSinchSizeEx } from '../utils/size'
 
 export type TSinchSkeletonItemBoundingBox = TRect & { radius: number }
@@ -35,3 +35,27 @@ export type TSinchSkeletonItem = {
 
 export type TSinchSkeletonItemElement = NectaryComponentVanillaByType<TSinchSkeletonItem>
 export type TSinchSkeletonItemReact = NectaryComponentReactByType<TSinchSkeletonItem>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-skeleton-item': TSinchSkeletonItem,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-skeleton-item': NectaryComponentVanilla<'sinch-skeleton-item'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-skeleton-item': NectaryComponentReact<'sinch-skeleton-item'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-skeleton-item': NectaryComponentReact<'sinch-skeleton-item'>,
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchDialogCloseDetail = 'close' | 'escape' | 'backdrop'
 
@@ -56,3 +56,27 @@ export type TSinchDialog = {
 
 export type TSinchDialogElement = NectaryComponentVanillaByType<TSinchDialog>
 export type TSinchDialogReact = NectaryComponentReactByType<TSinchDialog>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-dialog': TSinchDialog,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-dialog': NectaryComponentVanilla<'sinch-dialog'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-dialog': NectaryComponentReact<'sinch-dialog'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-dialog': NectaryComponentReact<'sinch-dialog'>,
+    }
+  }
+}

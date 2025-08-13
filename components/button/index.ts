@@ -15,12 +15,14 @@ import {
 } from '../utils'
 import { requestSubmitForm } from '../utils/form'
 import { DEFAULT_SIZE, sizeExValues } from '../utils/size'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { typeValues, formTypeValues } from './utils'
-import type { TSinchButtonType, TSinchButton, TSinchButtonFormType } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla } from '../types'
+import type { TSinchButtonType, TSinchButtonFormType } from './types'
+import type { NectaryComponentVanilla } from '../types'
 import type { TContextSize } from '../utils'
 import type { TSinchSizeEx } from '../utils/size'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -192,7 +194,7 @@ export class Button extends NectaryElement {
   }
 
   #onContextSize = (e: CustomEvent<TContextSize>) => {
-    if (this.hasAttribute('size')) {
+    if (this.hasAttribute('size') === true) {
       return
     }
 
@@ -263,27 +265,3 @@ export class Button extends NectaryElement {
 }
 
 defineCustomElement('sinch-button', Button)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-button': TSinchButton,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-button': NectaryComponentVanilla<'sinch-button'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-button': NectaryComponentReact<'sinch-button'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-button': NectaryComponentReact<'sinch-button'>,
-    }
-  }
-}

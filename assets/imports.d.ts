@@ -1,7 +1,4 @@
-declare module '*.html' {
-  const value: string
-  export default value
-}
+/// <reference types="vite/client" />
 
 declare module '*.svg' {
   const value: string

@@ -14,9 +14,10 @@ import {
   NectaryElement,
   updateAttribute,
 } from '../utils'
-import templateHTML from './template.html'
-import type { TSinchProgressStepper } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
+import templateHTML from './template.html?raw'
+import type { TRect } from '../types'
+
+export * from './types'
 
 const template = document.createElement('template')
 
@@ -274,27 +275,3 @@ export class ProgressStepper extends NectaryElement {
 }
 
 defineCustomElement('sinch-progress-stepper', ProgressStepper)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-progress-stepper': TSinchProgressStepper,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-progress-stepper': NectaryComponentVanilla<'sinch-progress-stepper'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-progress-stepper': NectaryComponentReact<'sinch-progress-stepper'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-progress-stepper': NectaryComponentReact<'sinch-progress-stepper'>,
-    }
-  }
-}

@@ -1,4 +1,4 @@
-import type { NectaryComponentReactByType, NectaryComponentVanillaByType } from '../types'
+import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchSelectMenuProps = {
   /** Identification for uncontrolled form submissions */
@@ -46,3 +46,27 @@ export type TSinchSelectMenu = {
 
 export type TSinchSelectMenuElement = NectaryComponentVanillaByType<TSinchSelectMenu>
 export type TSinchSelectMenuReact = NectaryComponentReactByType<TSinchSelectMenu>
+
+declare global {
+  interface NectaryComponentMap {
+    'sinch-select-menu': TSinchSelectMenu,
+  }
+
+  interface HTMLElementTagNameMap {
+    'sinch-select-menu': NectaryComponentVanilla<'sinch-select-menu'>,
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-select-menu': NectaryComponentReact<'sinch-select-menu'>,
+    }
+  }
+}
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
+      'sinch-select-menu': NectaryComponentReact<'sinch-select-menu'>,
+    }
+  }
+}

@@ -13,11 +13,13 @@ import {
   getReactEventHandler,
   shouldReduceMotion,
 } from '../utils'
-import templateHTML from './template.html'
+import templateHTML from './template.html?raw'
 import { TooltipState } from './tooltip-state'
 import { getPopOrientation, orientationValues, textAlignValues, typeValues } from './utils'
-import type { TSinchTooltipOrientation, TSinchTooltipTextAlign, TSinchTooltipType, TSinchTooltip } from './types'
-import type { NectaryComponentReact, NectaryComponentVanilla, TRect } from '../types'
+import type { TSinchTooltipOrientation, TSinchTooltipTextAlign, TSinchTooltipType } from './types'
+import type { NectaryComponentVanilla, TRect } from '../types'
+
+export * from './types'
 
 const TIP_SIZE = 8
 const SHOW_DELAY_SLOW = 1000
@@ -374,27 +376,3 @@ export class Tooltip extends NectaryElement {
 }
 
 defineCustomElement('sinch-tooltip', Tooltip)
-
-declare global {
-  interface NectaryComponentMap {
-    'sinch-tooltip': TSinchTooltip,
-  }
-
-  interface HTMLElementTagNameMap {
-    'sinch-tooltip': NectaryComponentVanilla<'sinch-tooltip'>,
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'sinch-tooltip': NectaryComponentReact<'sinch-tooltip'>,
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-tooltip': NectaryComponentReact<'sinch-tooltip'>,
-    }
-  }
-}
