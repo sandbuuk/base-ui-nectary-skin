@@ -1,5 +1,12 @@
 {
   "color": {
+    "container": {
+      "active": "#DCE2E5",
+      "default": "#FFFFFF",
+      "disabled": "#FFFFFF",
+      "foreground": "#14181C",
+      "hover": "#F7F9FA"
+    },
     "cta": {
       "active": "#4D4AA8",
       "default": "#645DC2",
