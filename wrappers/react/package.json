@@ -1,6 +1,7 @@
 {
   "name": "@nectary/wrappers-react",
   "version": "2.8.10",
+  "private": true,
   "main": "lib/index.js",
   "files": [
     "/lib"

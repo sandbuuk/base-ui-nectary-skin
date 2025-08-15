@@ -1,6 +1,7 @@
 {
   "name": "@nectary/theme-base",
   "version": "1.4.0",
+  "private": true,
   "files": [
     "**/*.css",
     "*.json",
