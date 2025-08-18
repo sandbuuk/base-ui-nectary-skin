@@ -75,6 +75,7 @@ export class SelectMenuOption extends NectaryElement {
 
       case 'disabled': {
         updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
+        updateExplicitBooleanAttribute(this, 'aria-disabled', isAttrTrue(newVal))
 
         break
       }

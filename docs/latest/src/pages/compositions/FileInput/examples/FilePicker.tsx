@@ -60,7 +60,7 @@ export const FilePickerExample: FC = () => {
             >
               <sinch-button
                 slot="action"
-                aria-label="Close"
+                aria-label="Cancel Upload"
                 size="s"
                 on-click={() => { }}
               >
