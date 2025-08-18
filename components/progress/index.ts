@@ -49,6 +49,7 @@ export class Progress extends NectaryElement {
         this.#$bar.style.width = `${int}%`
         this.#$text.textContent = Intl.NumberFormat(navigator.language, { style: 'percent' }).format(int / 100)
         this.setAttribute('valuenow', int !== null ? String(int) : '0')
+        this.setAttribute('aria-valuenow', int !== null ? String(int) : '0')
 
         break
       }

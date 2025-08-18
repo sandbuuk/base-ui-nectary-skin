@@ -33,6 +33,9 @@ export class Popover extends NectaryElement {
   #$tip: HTMLElement
   #controller: AbortController | null = null
   #resizeObserver: ResizeObserver | null = null
+  #$targetSlot: HTMLSlotElement | null
+  #$contentSlot: HTMLSlotElement | null
+
   constructor() {
     super()
 
@@ -43,6 +46,8 @@ export class Popover extends NectaryElement {
     this.#$pop = shadowRoot.querySelector('#pop')!
     this.#$content = shadowRoot.querySelector('#content')!
     this.#$tip = shadowRoot.querySelector('#tip')!
+    this.#$targetSlot = shadowRoot.querySelector('slot[name="target"]')
+    this.#$contentSlot = shadowRoot.querySelector('slot[name="content"]')
   }
 
   connectedCallback() {
@@ -55,6 +60,23 @@ export class Popover extends NectaryElement {
 
     subscribeContext(this.#$content, 'visibility', this.#onContextVisibility, signal)
     updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
+
+    const slottedTarget = this.#getFirstAssignedElementInSlot(this.#$targetSlot)
+    const slottedContent = this.#getFirstAssignedElementInSlot(this.#$contentSlot)
+    const popoverIdReference = `popover-${new Date().getMilliseconds()}-${Math.round(100 * Math.random())}`
+
+    if ((slottedContent != null) && (slottedTarget != null)) {
+      updateAttribute(slottedContent, 'aria-lablledby', popoverIdReference)
+    }
+
+    if (slottedTarget != null) {
+      updateAttribute(slottedTarget, 'aria-controls', popoverIdReference)
+      updateAttribute(slottedTarget, 'aria-haspopup', true)
+
+      const isOpen = this.getAttribute('open') ?? false
+
+      updateAttribute(slottedTarget, 'aria-expanded', isOpen)
+    }
 
     this.#resizeObserver = new ResizeObserver(() => {
       if (this.#$pop.open) {
@@ -115,6 +137,12 @@ export class Popover extends NectaryElement {
         updateAttribute(this.#$pop, name, newVal)
         updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
+        const slottedContent = this.#getFirstAssignedElementInSlot(this.#$targetSlot)
+
+        if (slottedContent != null) {
+          updateAttribute(slottedContent, 'aria-expanded', isAttrTrue(newVal))
+        }
+
         break
       }
 
@@ -165,6 +193,20 @@ export class Popover extends NectaryElement {
 
   get popoverRect() {
     return this.#$pop.popoverRect
+  }
+
+  #getFirstAssignedElementInSlot(slot: HTMLSlotElement | null): Element | null {
+    if (slot === null) {
+      return null
+    }
+
+    const elements = (slot != null) ? (slot as HTMLSlotElement).assignedElements() : null
+
+    if (elements === null) {
+      return null
+    }
+
+    return elements[0]
   }
 
   #onPopClose = () => {

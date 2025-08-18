@@ -24,7 +24,7 @@ export const ColorsExample: FC = () => (
     <div style={itemWrapperStyles}>
       {
         lightColors.map((name) => (
-          <sinch-chip key={name} color={name} text={name} aria-label="Chip" on-click={() => console.log('click')}/>
+          <sinch-chip key={name} color={name} text={name} on-click={() => console.log('click')}/>
         ))
       }
     </div>
@@ -32,7 +32,7 @@ export const ColorsExample: FC = () => (
     <div style={itemWrapperStyles}>
       {
         vibrantColors.map((name) => (
-          <sinch-chip key={name} color={name} text={name} aria-label="Chip" on-click={() => console.log('click')}/>
+          <sinch-chip key={name} color={name} text={name} on-click={() => console.log('click')}/>
         ))
       }
     </div>
@@ -40,7 +40,7 @@ export const ColorsExample: FC = () => (
     <div style={itemWrapperStyles}>
       {
         darkColors.map((name) => (
-          <sinch-chip key={name} color={name} text={name} aria-label="Chip" on-click={() => console.log('click')}/>
+          <sinch-chip key={name} color={name} text={name} on-click={() => console.log('click')}/>
         ))
       }
     </div>

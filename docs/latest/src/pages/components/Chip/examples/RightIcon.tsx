@@ -19,7 +19,6 @@ export const RightIconExample: FC = () => (
           key={name}
           color={name}
           text={name}
-          aria-label="Chip"
           on-click={() => console.log('click')}
         >
           <sinch-icon icons-version="2" name="fa-plus" slot="right-icon"/>

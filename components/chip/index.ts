@@ -81,6 +81,8 @@ export class Chip extends NectaryElement {
 
       case 'text': {
         this.#$text.textContent = newVal
+        updateAttribute(this, 'aria-label', newVal)
+        updateAttribute(this.#$button, 'aria-label', `Delete ${newVal}`)
 
         break
       }

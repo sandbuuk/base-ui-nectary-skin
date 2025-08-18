@@ -19,7 +19,6 @@ export const IconExample: FC = () => (
           key={name}
           color={name}
           text={name}
-          aria-label="Chip"
           on-click={() => console.log('click')}
         >
           <sinch-icon icons-version="2" name="fa-face-laugh" slot="icon"/>

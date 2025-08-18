@@ -51,7 +51,7 @@ export const PhoneInputExample: FC = () => {
           size="s"
           text={phoneCode}
           placeholder="+0"
-          aria-label="Open select"
+          aria-label="Open area code select"
           on-click={onOpen}
         >
           {menuValue.length > 0 && (
@@ -62,7 +62,7 @@ export const PhoneInputExample: FC = () => {
       <sinch-select-menu
         slot="content"
         rows={5}
-        aria-label="Action menu"
+        aria-label={menuValue !== '' ? `Area code selected ${menuValue}` : 'Select area code'}
         value={menuValue}
         on-change={onMenuChange}
       >
@@ -72,7 +72,7 @@ export const PhoneInputExample: FC = () => {
               key={iso}
               value={iso}
               text={`(${code}) ${name}`}
-              aria-label={name}
+              aria-label={`Select ${name}`}
             >
               <sinch-flag slot="icon" code={iso.toLowerCase()}/>
             </sinch-select-menu-option>

@@ -18,7 +18,6 @@ export const SmallExample: FC = () => (
           key={name}
           color={name}
           text={name}
-          aria-label="Chip"
           small
           on-click={() => console.log('click')}
         />

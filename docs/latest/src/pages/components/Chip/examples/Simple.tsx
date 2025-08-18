@@ -27,7 +27,6 @@ export const SimpleExample: FC = () => (
           key={colorName}
           color={colorName}
           text={colorName.length > 0 ? colorName : 'default'}
-          aria-label="Chip"
           on-click={() => console.log('click')}
         />
       ))

@@ -105,6 +105,8 @@ export class Checkbox extends NectaryElement {
     switch (name) {
       case 'text': {
         updateAttribute(this.#$label, 'text', newVal)
+        updateAttribute(this.#$label, 'aria-label', newVal)
+        updateAttribute(this, 'aria-label', newVal)
 
         break
       }
