@@ -8,18 +8,18 @@
       "hover": "#F7F9FA"
     },
     "cta": {
-      "active": "#EB5454",
-      "default": "#BD3C41",
-      "disabled": "#BD3C4166",
+      "active": "#BD3C41",
+      "default": "#EB5454",
+      "disabled": "#EB545466",
       "foreground": "#FFFFFF",
-      "hover": "#993138"
+      "hover": "#FF8080"
     },
     "primary": {
-      "active": "#0D304A",
-      "default": "#145A8F",
-      "disabled": "#145A8F66",
+      "active": "#112F57",
+      "default": "#1454A8",
+      "disabled": "#1454A866",
       "foreground": "#FFFFFF",
-      "hover": "#116FAD"
+      "hover": "#0D68D1"
     }
   }
 }

@@ -4,11 +4,11 @@
   --sinch-sys-color-container-disabled: #FFFFFF;
   --sinch-sys-color-container-foreground: var(--sinch-ref-color-neutral-950);
   --sinch-sys-color-container-hover: var(--sinch-ref-color-neutral-50);
-  --sinch-sys-color-cta-active: #4D4AA8;
-  --sinch-sys-color-cta-default: #645DC2;
-  --sinch-sys-color-cta-disabled: #645DC266;
+  --sinch-sys-color-cta-active: var(--sinch-ref-color-violet-800);
+  --sinch-sys-color-cta-default: var(--sinch-ref-color-violet-700);
+  --sinch-sys-color-cta-disabled: #4D4AA866;
   --sinch-sys-color-cta-foreground: #FFFFFF;
-  --sinch-sys-color-cta-hover: #857AEB;
+  --sinch-sys-color-cta-hover: var(--sinch-ref-color-violet-600);
   --sinch-sys-color-primary-active: #0C333B;
   --sinch-sys-color-primary-default: #006063;
   --sinch-sys-color-primary-disabled: #00606366;

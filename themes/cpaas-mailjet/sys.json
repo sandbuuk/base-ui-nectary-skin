@@ -8,11 +8,11 @@
       "hover": "#F7F9FA"
     },
     "cta": {
-      "active": "#4D4AA8",
-      "default": "#645DC2",
-      "disabled": "#645DC266",
+      "active": "#2A2A54",
+      "default": "#4D4AA8",
+      "disabled": "#4D4AA866",
       "foreground": "#FFFFFF",
-      "hover": "#857AEB"
+      "hover": "#645DC2"
     },
     "primary": {
       "active": "#0C333B",
