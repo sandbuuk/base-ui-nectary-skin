@@ -1,4 +1,10 @@
 .nectary-theme-base.cpaas-theme-base.cpaas-theme-mailgun {
+  --sinch-sys-color-border-default: var(--sinch-ref-color-neutral-300);
+  --sinch-sys-color-border-light: var(--sinch-ref-color-neutral-200);
+  --sinch-sys-color-border-dark: var(--sinch-ref-color-neutral-500);
+  --sinch-sys-color-border-active: var(--sinch-ref-color-ocean-700);
+  --sinch-sys-color-border-focus: var(--sinch-ref-color-ocean-400);
+  --sinch-sys-color-border-invalid: var(--sinch-ref-color-raspberry-600);
   --sinch-sys-color-container-active: var(--sinch-ref-color-neutral-200);
   --sinch-sys-color-container-default: #FFFFFF;
   --sinch-sys-color-container-disabled: #FFFFFF;
@@ -14,4 +20,11 @@
   --sinch-sys-color-primary-disabled: #1454A866;
   --sinch-sys-color-primary-foreground: #FFFFFF;
   --sinch-sys-color-primary-hover: var(--sinch-ref-color-ocean-600);
+  --sinch-sys-color-text-default: var(--sinch-ref-color-neutral-950);
+  --sinch-sys-color-text-disabled: var(--sinch-ref-color-neutral-500);
+  --sinch-sys-color-text-invalid: var(--sinch-ref-color-raspberry-600);
+  --sinch-sys-color-text-inverted: #FFFFFF;
+  --sinch-sys-color-text-link: var(--sinch-ref-color-ocean-700);
+  --sinch-sys-color-text-link-disabled: #1454A866;
+  --sinch-sys-color-text-muted: var(--sinch-ref-color-neutral-200);
 }

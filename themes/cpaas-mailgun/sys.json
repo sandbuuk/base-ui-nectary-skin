@@ -1,5 +1,13 @@
 {
   "color": {
+    "border": {
+      "default": "#C9D1D6",
+      "light": "#DCE2E5",
+      "dark": "#808A91",
+      "active": "#1454A8",
+      "focus": "#61ABFF",
+      "invalid": "#BD3C41"
+    },
     "container": {
       "active": "#DCE2E5",
       "default": "#FFFFFF",
@@ -20,6 +28,15 @@
       "disabled": "#1454A866",
       "foreground": "#FFFFFF",
       "hover": "#0D68D1"
+    },
+    "text": {
+      "default": "#14181C",
+      "disabled": "#DCE2E5",
+      "invalid": "#BD3C41",
+      "inverted": "#FFFFFF",
+      "link": "#1454A8",
+      "linkDisabled": "#1454A866",
+      "muted": "#808A91"
     }
   }
 }
