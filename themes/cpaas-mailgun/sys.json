@@ -22,6 +22,11 @@
       "foreground": "#FFFFFF",
       "hover": "#FF8080"
     },
+    "feedback": {
+      "success": {
+        "subtle": "#D7F5D7"
+      }
+    },
     "primary": {
       "active": "#112F57",
       "default": "#1454A8",

@@ -15,6 +15,7 @@
   --sinch-sys-color-cta-disabled: #EB545466;
   --sinch-sys-color-cta-foreground: #FFFFFF;
   --sinch-sys-color-cta-hover: var(--sinch-ref-color-raspberry-400);
+  --sinch-sys-color-feedback-success-subtle: var(--sinch-ref-color-grass-100);
   --sinch-sys-color-primary-active: var(--sinch-ref-color-ocean-800);
   --sinch-sys-color-primary-default: var(--sinch-ref-color-ocean-700);
   --sinch-sys-color-primary-disabled: #1454A866;
