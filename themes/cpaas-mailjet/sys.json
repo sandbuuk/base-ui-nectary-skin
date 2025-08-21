@@ -34,6 +34,21 @@
       "foreground": "#FFFFFF",
       "hover": "#007874"
     },
+    "status": {
+      "blocked": "#14181C",
+      "clicked": "#3D9956",
+      "delivered": "#9EA9B0",
+      "excluded": "#D66A33",
+      "hardBounced": "#F58B4E",
+      "opened": "#77D486",
+      "retrying": "#808A91",
+      "sent": "#857AEB",
+      "softBounced": "#FFC299",
+      "spam": "#BD3C41",
+      "subscribed": "#99E0A2",
+      "total": "#808A91",
+      "unsubscribed": "#A3488E"
+    },
     "text": {
       "default": "#14181C",
       "disabled": "#DCE2E5",
