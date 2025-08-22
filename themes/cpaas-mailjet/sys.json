@@ -1,5 +1,42 @@
 {
   "color": {
+    "analytics": {
+      "decorative": {
+        "light": "#C1B6FA",
+        "default": "#857AEB",
+        "dark": "#645DC2"
+      },
+      "decorativeAlt": {
+        "light": "#FAA5E3",
+        "default": "#D15CB4",
+        "dark": "#A3488E"
+      },
+      "error" : {
+        "light": "#FFBDBD",
+        "default": "#EB5454",
+        "dark": "#993138"
+      },
+      "informative": {
+        "light": "#61ABFF",
+        "default": "#0D68D1",
+        "dark": "#112F57"
+      },
+      "pending": {
+        "light": "#FFDD99",
+        "default": "#FFCA61",
+        "dark": "#EB9605"
+      },
+      "success": {
+        "light": "#99E0A2",
+        "default": "#53BD69",
+        "dark": "#2B7845"
+      },
+      "warning": {
+        "light": "#FFAD75",
+        "default": "#F58B4E",
+        "dark": "#D66A33"
+      }
+    },
     "border": {
       "default": "#C9D1D6",
       "light": "#DCE2E5",
@@ -7,6 +44,17 @@
       "active": "#006063",
       "focus": "#61ABFF",
       "invalid": "#BD3C41"
+    },
+    "chip": {
+      "decorative": "#E2DBFF",
+      "decorativeAlt": "#FFD6F3",
+      "error": "#FFD8D6",
+      "foreground": "#14181C",
+      "informative": "#C7E5FF",
+      "neutral": "#DCE2E5",
+      "pending": "#FCECCB",
+      "success": "#D7F5D7",
+      "warning": "#FFD9BD"
     },
     "container": {
       "active": "#DCE2E5",
