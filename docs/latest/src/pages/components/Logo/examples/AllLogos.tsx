@@ -9,7 +9,7 @@ import '@nectary/components/table-cell'
 import '@nectary/components/text'
 
 const req = import.meta.webpackContext!('@nectary/assets/logo', {
-  regExp: /^.*\/index$/,
+  regExp: /^((?!\/global\/).)*\/index$/,
   recursive: true,
   mode: 'sync',
 })
