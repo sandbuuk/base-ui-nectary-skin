@@ -1,5 +1,61 @@
 {
   "color": {
+    "analytics": {
+      "decorative": {
+        "dark": "#645DC2",
+        "default": "#857AEB",
+        "light": "#C1B6FA"
+      },
+      "decorative-alt": {
+        "dark": "#A3488E",
+        "default": "#D15CB4",
+        "light": "#FAA5E3"
+      },
+      "error": {
+        "dark": "#993138",
+        "default": "#EB5454",
+        "light": "#FFBDBD"
+      },
+      "informative": {
+        "dark": "#112F57",
+        "default": "#0D68D1",
+        "light": "#61ABFF"
+      },
+      "pending": {
+        "dark": "#EB9605",
+        "default": "#FFCA61",
+        "light": "#FFDD99"
+      },
+      "success": {
+        "dark": "#2B7845",
+        "default": "#53BD69",
+        "light": "#99E0A2"
+      },
+      "warning": {
+        "dark": "#D66A33",
+        "default": "#F58B4E",
+        "light": "#FFAD75"
+      }
+    },
+    "border": {
+      "active": "#006063",
+      "dark": "#808A91",
+      "default": "#C9D1D6",
+      "focus": "#61ABFF",
+      "invalid": "#BD3C41",
+      "light": "#DCE2E5"
+    },
+    "chip": {
+      "decorative": "#E2DBFF",
+      "decorative-alt": "#FFD6F3",
+      "error": "#FFD8D6",
+      "foreground": "#14181C",
+      "informative": "#C7E5FF",
+      "neutral": "#DCE2E5",
+      "pending": "#FCECCB",
+      "success": "#D7F5D7",
+      "warning": "#FFD9BD"
+    },
     "container": {
       "active": "#DCE2E5",
       "default": "#FFFFFF",
@@ -8,11 +64,16 @@
       "hover": "#F7F9FA"
     },
     "cta": {
-      "active": "#4D4AA8",
-      "default": "#645DC2",
-      "disabled": "#645DC266",
+      "active": "#2A2A54",
+      "default": "#4D4AA8",
+      "disabled": "#4D4AA866",
       "foreground": "#FFFFFF",
-      "hover": "#857AEB"
+      "hover": "#645DC2"
+    },
+    "feedback": {
+      "success": {
+        "subtle": "#D7F5D7"
+      }
     },
     "primary": {
       "active": "#0C333B",
@@ -20,6 +81,30 @@
       "disabled": "#00606366",
       "foreground": "#FFFFFF",
       "hover": "#007874"
+    },
+    "status": {
+      "blocked": "#14181C",
+      "clicked": "#3D9956",
+      "delivered": "#9EA9B0",
+      "excluded": "#D66A33",
+      "hard-bounced": "#F58B4E",
+      "opened": "#77D486",
+      "retrying": "#808A91",
+      "sent": "#857AEB",
+      "soft-bounced": "#FFC299",
+      "spam": "#BD3C41",
+      "subscribed": "#99E0A2",
+      "total": "#808A91",
+      "unsubscribed": "#A3488E"
+    },
+    "text": {
+      "default": "#14181C",
+      "disabled": "#DCE2E5",
+      "invalid": "#BD3C41",
+      "inverted": "#FFFFFF",
+      "link": "#006063",
+      "link-disabled": "#00606366",
+      "muted": "#808A91"
     }
   }
 }
