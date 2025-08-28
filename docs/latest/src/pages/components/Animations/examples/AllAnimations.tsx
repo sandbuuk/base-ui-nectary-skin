@@ -3,7 +3,7 @@ import type { CSSProperties, FC } from 'react'
 import '@nectary/components/text'
 
 const req = import.meta.webpackContext!('@nectary/assets/animations', {
-  regExp: /^.*\/index$/,
+  regExp: /^((?!\/global\/).)*\/index$/,
   recursive: true,
   mode: 'sync',
 })

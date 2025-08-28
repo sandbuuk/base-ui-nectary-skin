@@ -6,7 +6,7 @@ import '@nectary/components/button'
 import '@nectary/components/icon'
 
 export const req = import.meta.webpackContext!('@nectary/assets/icons-channel', {
-  regExp: /^.*\/index$/,
+  regExp: /^((?!\/global\/).)*\/index$/,
   recursive: true,
   mode: 'sync',
 })
