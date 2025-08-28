@@ -2,52 +2,52 @@
   "color": {
     "analytics": {
       "decorative": {
-        "light": "#C1B6FA",
+        "dark": "#645DC2",
         "default": "#857AEB",
-        "dark": "#645DC2"
+        "light": "#C1B6FA"
       },
-      "decorativeAlt": {
-        "light": "#FAA5E3",
+      "decorative-alt": {
+        "dark": "#A3488E",
         "default": "#D15CB4",
-        "dark": "#A3488E"
+        "light": "#FAA5E3"
       },
-      "error" : {
-        "light": "#FFBDBD",
+      "error": {
+        "dark": "#993138",
         "default": "#EB5454",
-        "dark": "#993138"
+        "light": "#FFBDBD"
       },
       "informative": {
-        "light": "#61ABFF",
+        "dark": "#112F57",
         "default": "#0D68D1",
-        "dark": "#112F57"
+        "light": "#61ABFF"
       },
       "pending": {
-        "light": "#FFDD99",
+        "dark": "#EB9605",
         "default": "#FFCA61",
-        "dark": "#EB9605"
+        "light": "#FFDD99"
       },
       "success": {
-        "light": "#99E0A2",
+        "dark": "#2B7845",
         "default": "#53BD69",
-        "dark": "#2B7845"
+        "light": "#99E0A2"
       },
       "warning": {
-        "light": "#FFAD75",
+        "dark": "#D66A33",
         "default": "#F58B4E",
-        "dark": "#D66A33"
+        "light": "#FFAD75"
       }
     },
     "border": {
-      "default": "#C9D1D6",
-      "light": "#DCE2E5",
-      "dark": "#808A91",
       "active": "#006063",
+      "dark": "#808A91",
+      "default": "#C9D1D6",
       "focus": "#61ABFF",
-      "invalid": "#BD3C41"
+      "invalid": "#BD3C41",
+      "light": "#DCE2E5"
     },
     "chip": {
       "decorative": "#E2DBFF",
-      "decorativeAlt": "#FFD6F3",
+      "decorative-alt": "#FFD6F3",
       "error": "#FFD8D6",
       "foreground": "#14181C",
       "informative": "#C7E5FF",
@@ -87,11 +87,11 @@
       "clicked": "#3D9956",
       "delivered": "#9EA9B0",
       "excluded": "#D66A33",
-      "hardBounced": "#F58B4E",
+      "hard-bounced": "#F58B4E",
       "opened": "#77D486",
       "retrying": "#808A91",
       "sent": "#857AEB",
-      "softBounced": "#FFC299",
+      "soft-bounced": "#FFC299",
       "spam": "#BD3C41",
       "subscribed": "#99E0A2",
       "total": "#808A91",
@@ -103,7 +103,7 @@
       "invalid": "#BD3C41",
       "inverted": "#FFFFFF",
       "link": "#006063",
-      "linkDisabled": "#00606366",
+      "link-disabled": "#00606366",
       "muted": "#808A91"
     }
   }

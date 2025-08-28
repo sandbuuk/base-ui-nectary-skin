@@ -2,52 +2,52 @@
   "color": {
     "analytics": {
       "decorative": {
-        "light": "#C1B6FA",
+        "dark": "#645DC2",
         "default": "#857AEB",
-        "dark": "#645DC2"
+        "light": "#C1B6FA"
       },
-      "decorativeAlt": {
-        "light": "#FAA5E3",
+      "decorative-alt": {
+        "dark": "#A3488E",
         "default": "#D15CB4",
-        "dark": "#A3488E"
+        "light": "#FAA5E3"
       },
-      "error" : {
-        "light": "#FFBDBD",
+      "error": {
+        "dark": "#993138",
         "default": "#EB5454",
-        "dark": "#993138"
+        "light": "#FFBDBD"
       },
       "informative": {
-        "light": "#61ABFF",
+        "dark": "#112F57",
         "default": "#0D68D1",
-        "dark": "#112F57"
+        "light": "#61ABFF"
       },
       "pending": {
-        "light": "#FFDD99",
+        "dark": "#EB9605",
         "default": "#FFCA61",
-        "dark": "#EB9605"
+        "light": "#FFDD99"
       },
       "success": {
-        "light": "#99E0A2",
+        "dark": "#2B7845",
         "default": "#53BD69",
-        "dark": "#2B7845"
+        "light": "#99E0A2"
       },
       "warning": {
-        "light": "#FFAD75",
+        "dark": "#D66A33",
         "default": "#F58B4E",
-        "dark": "#D66A33"
+        "light": "#FFAD75"
       }
     },
     "border": {
-      "default": "#C9D1D6",
-      "light": "#DCE2E5",
-      "dark": "#808A91",
       "active": "#1454A8",
+      "dark": "#808A91",
+      "default": "#C9D1D6",
       "focus": "#61ABFF",
-      "invalid": "#BD3C41"
+      "invalid": "#BD3C41",
+      "light": "#DCE2E5"
     },
     "chip": {
       "decorative": "#E2DBFF",
-      "decorativeAlt": "#FFD6F3",
+      "decorative-alt": "#FFD6F3",
       "error": "#FFD8D6",
       "foreground": "#14181C",
       "informative": "#C7E5FF",
@@ -83,50 +83,50 @@
       "hover": "#0D68D1"
     },
     "reporting": {
-      "acceptedCount": "#53BD69",
-      "acceptedIncomingCount": "#61ABFF",
-      "bouncedCount": "#D66A33",
-      "bouncedRate": "#FF8080",
-      "clickedCount": "#993138",
-      "clickedRate": "#23613C",
-      "complainedCount": "#FFAD75",
-      "complainedRate": "#857AEB",
-      "criticalBounceCount": "#F58B4E",
-      "criticalBounceRate": "#F58B4E",
-      "criticalDelayCount": "#51B8A6",
-      "criticalDelayRate": "#51B8A6",
-      "delayedFirstAttempt": "#006063",
-      "delayedRate": "#4B575E",
-      "deliveredCount": "#824703",
-      "deliveredRate": "#0D68D1",
-      "deliveredSmtpCount": "#A89BFA",
-      "deliveredSubsequent": "#1454A8",
-      "deliveredFirstAttempt": "#8F3D1F",
-      "deliveredOptimizedCount": "#06998B",
-      "deliveredHttpCount": "#626C73",
-      "failedCount": "#BD3C41",
-      "failRate": "#14181C",
-      "hardBouncesCount": "#4D4AA8",
-      "nonCriticalBounceCount": "#A89BFA",
-      "nonCriticalBounceRate": "#A89BFA",
-      "openedCount": "#EB9605",
-      "openedRate": "#3D9956",
-      "optimizedCount": "#FFBE3C",
-      "permanentFailedCount": "#FFA8A8",
-      "processedCount": "#4B575E",
-      "sentCount": "#3089F0",
-      "suppressedBounceCount": "#808A91",
-      "suppressedUnsubscribedCount": "#51B8A6",
-      "storedCount": "#80CFBC",
-      "temporaryFailedCount": "#C77904",
-      "temporaryFailedEspBlockCount": "#F58B4E",
-      "uniqueClickedCount": "#AD4E24",
-      "uniqueClickedRate": "#9E5A00",
-      "uniqueOpenedCount": "#2B7845",
-      "uniqueOpenedRate": "#645DC2",
-      "unsubscribedCount": "#EB5454",
-      "unsubscribedRate": "#9EA9B0",
-      "webhookCount": "#007874"
+      "accepted-count": "#53BD69",
+      "accepted-incoming-count": "#61ABFF",
+      "bounced-count": "#D66A33",
+      "bounced-rate": "#FF8080",
+      "clicked-count": "#993138",
+      "clicked-rate": "#23613C",
+      "complained-count": "#FFAD75",
+      "complained-rate": "#857AEB",
+      "critical-bounce-count": "#F58B4E",
+      "critical-bounce-rate": "#F58B4E",
+      "critical-delay-count": "#51B8A6",
+      "critical-delay-rate": "#51B8A6",
+      "delayed-first-attempt": "#006063",
+      "delayed-rate": "#4B575E",
+      "delivered-count": "#824703",
+      "delivered-first-attempt": "#8F3D1F",
+      "delivered-http-count": "#626C73",
+      "delivered-optimized-count": "#06998B",
+      "delivered-rate": "#0D68D1",
+      "delivered-smtp-count": "#A89BFA",
+      "delivered-subsequent": "#1454A8",
+      "fail-rate": "#14181C",
+      "failed-count": "#BD3C41",
+      "hard-bounces-count": "#4D4AA8",
+      "non-critical-bounce-count": "#A89BFA",
+      "non-critical-bounce-rate": "#A89BFA",
+      "opened-count": "#EB9605",
+      "opened-rate": "#3D9956",
+      "optimized-count": "#FFBE3C",
+      "permanent-failed-count": "#FFA8A8",
+      "processed-count": "#4B575E",
+      "sent-count": "#3089F0",
+      "stored-count": "#80CFBC",
+      "suppressed-bounce-count": "#808A91",
+      "suppressed-unsubscribed-count": "#51B8A6",
+      "temporary-failed-count": "#C77904",
+      "temporary-failed-esp-block-count": "#F58B4E",
+      "unique-clicked-count": "#AD4E24",
+      "unique-clicked-rate": "#9E5A00",
+      "unique-opened-count": "#2B7845",
+      "unique-opened-rate": "#645DC2",
+      "unsubscribed-count": "#EB5454",
+      "unsubscribed-rate": "#9EA9B0",
+      "webhook-count": "#007874"
     },
     "text": {
       "default": "#14181C",
@@ -134,7 +134,7 @@
       "invalid": "#BD3C41",
       "inverted": "#FFFFFF",
       "link": "#1454A8",
-      "linkDisabled": "#1454A866",
+      "link-disabled": "#1454A866",
       "muted": "#808A91"
     }
   }

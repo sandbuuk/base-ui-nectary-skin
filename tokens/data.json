@@ -7220,21 +7220,203 @@
   "cPaas/MailGun": {
     "sys": {
       "color": {
-        "primary": {
+        "analytics": {
+          "decorative": {
+            "light": {
+              "value": "#C1B6FA",
+              "type": "color"
+            },
+            "default": {
+              "value": "#857AEB",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#645DC2",
+              "type": "color"
+            }
+          },
+          "decorative-alt": {
+            "light": {
+              "value": "#FAA5E3",
+              "type": "color"
+            },
+            "default": {
+              "value": "#D15CB4",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#A3488E",
+              "type": "color"
+            }
+          },
+          "error": {
+            "light": {
+              "value": "#FFBDBD",
+              "type": "color"
+            },
+            "default": {
+              "value": "#EB5454",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#993138",
+              "type": "color"
+            }
+          },
+          "informative": {
+            "light": {
+              "value": "#61ABFF",
+              "type": "color"
+            },
+            "default": {
+              "value": "#0D68D1",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#112F57",
+              "type": "color"
+            }
+          },
+          "pending": {
+            "light": {
+              "value": "#FFDD99",
+              "type": "color"
+            },
+            "default": {
+              "value": "#FFCA61",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#EB9605",
+              "type": "color"
+            }
+          },
+          "success": {
+            "light": {
+              "value": "#99E0A2",
+              "type": "color"
+            },
+            "default": {
+              "value": "#53BD69",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#2B7845",
+              "type": "color"
+            }
+          },
+          "warning": {
+            "light": {
+              "value": "#FFAD75",
+              "type": "color"
+            },
+            "default": {
+              "value": "#F58B4E",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#D66A33",
+              "type": "color"
+            }
+          }
+        },
+        "border": {
           "default": {
-            "value": "#145A8F",
+            "value": "#C9D1D6",
             "type": "color"
           },
-          "hover": {
-            "value": "#116FAD",
+          "light": {
+            "value": "#DCE2E5",
+            "type": "color"
+          },
+          "dark": {
+            "value": "#808A91",
             "type": "color"
           },
           "active": {
-            "value": "#0D304A",
+            "value": "#1454A8",
+            "type": "color"
+          },
+          "focus": {
+            "value": "#61ABFF",
+            "type": "color"
+          },
+          "invalid": {
+            "value": "#BD3C41",
+            "type": "color"
+          }
+        },
+        "chip": {
+          "decorative": {
+            "value": "#E2DBFF",
+            "type": "color"
+          },
+          "decorative-alt": {
+            "value": "#FFD6F3",
+            "type": "color"
+          },
+          "error": {
+            "value": "#FFD8D6",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#14181C",
+            "type": "color"
+          },
+          "informative": {
+            "value": "#C7E5FF",
+            "type": "color"
+          },
+          "neutral": {
+            "value": "#DCE2E5",
+            "type": "color"
+          },
+          "pending": {
+            "value": "#FCECCB",
+            "type": "color"
+          },
+          "success": {
+            "value": "#D7F5D7",
+            "type": "color"
+          },
+          "warning": {
+            "value": "#FFD9BD",
+            "type": "color"
+          }
+        },
+        "container": {
+          "active": {
+            "value": "#DCE2E5",
+            "type": "color"
+          },
+          "default": {
+            "value": "#FFFFFF",
             "type": "color"
           },
           "disabled": {
-            "value": "#145A8F",
+            "value": "#FFFFFF",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#14181C",
+            "type": "color"
+          },
+          "hover": {
+            "value": "#F7F9FA",
+            "type": "color"
+          }
+        },
+        "cta": {
+          "active": {
+            "value": "#BD3C41",
+            "type": "color"
+          },
+          "default": {
+            "value": "#EB5454",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#EB5454",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -7249,23 +7431,31 @@
           "foreground": {
             "value": "#FFFFFF",
             "type": "color"
-          }
-        },
-        "cta": {
-          "default": {
-            "value": "#BD3C41",
-            "type": "color"
           },
           "hover": {
-            "value": "#993138",
+            "value": "#FF8080",
+            "type": "color"
+          }
+        },
+        "feedback": {
+          "success": {
+            "subtle": {
+              "value": "#D7F5D7",
+              "type": "color"
+            }
+          }
+        },
+        "primary": {
+          "active": {
+            "value": "#112F57",
             "type": "color"
           },
-          "active": {
-            "value": "#EB5454",
+          "default": {
+            "value": "#1454A8",
             "type": "color"
           },
           "disabled": {
-            "value": "#BD3C41",
+            "value": "#1454A8",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -7278,7 +7468,228 @@
             }
           },
           "foreground": {
-            "value": "#ffffff",
+            "value": "#FFFFFF",
+            "type": "color"
+          },
+          "hover": {
+            "value": "#0D68D1",
+            "type": "color"
+          }
+        },
+        "reporting": {
+          "accepted-count": {
+            "value": "#53BD69",
+            "type": "color"
+          },
+          "accepted-incoming-count": {
+            "value": "#61ABFF",
+            "type": "color"
+          },
+          "bounced-count": {
+            "value": "#D66A33",
+            "type": "color"
+          },
+          "bounced-rate": {
+            "value": "#FF8080",
+            "type": "color"
+          },
+          "clicked-count": {
+            "value": "#993138",
+            "type": "color"
+          },
+          "clicked-rate": {
+            "value": "#23613C",
+            "type": "color"
+          },
+          "complained-count": {
+            "value": "#FFAD75",
+            "type": "color"
+          },
+          "complained-rate": {
+            "value": "#857AEB",
+            "type": "color"
+          },
+          "critical-bounce-count": {
+            "value": "#F58B4E",
+            "type": "color"
+          },
+          "critical-bounce-rate": {
+            "value": "#F58B4E",
+            "type": "color"
+          },
+          "critical-delay-count": {
+            "value": "#51B8A6",
+            "type": "color"
+          },
+          "critical-delay-rate": {
+            "value": "#51B8A6",
+            "type": "color"
+          },
+          "delayed-first-attempt": {
+            "value": "#006063",
+            "type": "color"
+          },
+          "delayed-rate": {
+            "value": "#4B575E",
+            "type": "color"
+          },
+          "delivered-count": {
+            "value": "#824703",
+            "type": "color"
+          },
+          "delivered-rate": {
+            "value": "#0D68D1",
+            "type": "color"
+          },
+          "delivered-smtp-count": {
+            "value": "#A89BFA",
+            "type": "color"
+          },
+          "delivered-subsequent": {
+            "value": "#1454A8",
+            "type": "color"
+          },
+          "delivered-first-attempt": {
+            "value": "#8F3D1F",
+            "type": "color"
+          },
+          "delivered-optimized-count": {
+            "value": "#06998B",
+            "type": "color"
+          },
+          "delivered-http-count": {
+            "value": "#626C73",
+            "type": "color"
+          },
+          "failed-count": {
+            "value": "#BD3C41",
+            "type": "color"
+          },
+          "fail-rate": {
+            "value": "#14181C",
+            "type": "color"
+          },
+          "hard-bounces-count": {
+            "value": "#4D4AA8",
+            "type": "color"
+          },
+          "non-critical-bounce-count": {
+            "value": "#A89BFA",
+            "type": "color"
+          },
+          "non-critical-bounce-rate": {
+            "value": "#A89BFA",
+            "type": "color"
+          },
+          "opened-count": {
+            "value": "#EB9605",
+            "type": "color"
+          },
+          "opened-rate": {
+            "value": "#3D9956",
+            "type": "color"
+          },
+          "optimized-count": {
+            "value": "#FFBE3C",
+            "type": "color"
+          },
+          "permanent-failed-count": {
+            "value": "#FFA8A8",
+            "type": "color"
+          },
+          "processed-count": {
+            "value": "#4B575E",
+            "type": "color"
+          },
+          "sent-count": {
+            "value": "#3089F0",
+            "type": "color"
+          },
+          "suppressed-bounce-count": {
+            "value": "#808A91",
+            "type": "color"
+          },
+          "suppressed-unsubscribed-count": {
+            "value": "#51B8A6",
+            "type": "color"
+          },
+          "stored-count": {
+            "value": "#80CFBC",
+            "type": "color"
+          },
+          "temporary-failed-count": {
+            "value": "#C77904",
+            "type": "color"
+          },
+          "temporary-failed-esp-block-count": {
+            "value": "#F58B4E",
+            "type": "color"
+          },
+          "unique-clicked-count": {
+            "value": "#AD4E24",
+            "type": "color"
+          },
+          "unique-clicked-rate": {
+            "value": "#9E5A00",
+            "type": "color"
+          },
+          "unique-opened-count": {
+            "value": "#2B7845",
+            "type": "color"
+          },
+          "unique-opened-rate": {
+            "value": "#645DC2",
+            "type": "color"
+          },
+          "unsubscribed-count": {
+            "value": "#EB5454",
+            "type": "color"
+          },
+          "unsubscribed-rate": {
+            "value": "#9EA9B0",
+            "type": "color"
+          },
+          "webhook-count": {
+            "value": "#007874",
+            "type": "color"
+          }
+        },
+        "text": {
+          "default": {
+            "value": "#14181C",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#DCE2E5",
+            "type": "color"
+          },
+          "invalid": {
+            "value": "#BD3C41",
+            "type": "color"
+          },
+          "inverted": {
+            "value": "#FFFFFF",
+            "type": "color"
+          },
+          "link": {
+            "value": "#1454A8",
+            "type": "color"
+          },
+          "link-disabled": {
+            "value": "#1454A8",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.4",
+                  "space": "srgb"
+                }
+              }
+            }
+          },
+          "muted": {
+            "value": "#808A91",
             "type": "color"
           }
         }
@@ -7488,21 +7899,203 @@
   "cPaas/MailJet": {
     "sys": {
       "color": {
-        "cta": {
+        "analytics": {
+          "decorative": {
+            "light": {
+              "value": "#C1B6FA",
+              "type": "color"
+            },
+            "default": {
+              "value": "#857AEB",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#645DC2",
+              "type": "color"
+            }
+          },
+          "decorative-alt": {
+            "light": {
+              "value": "#FAA5E3",
+              "type": "color"
+            },
+            "default": {
+              "value": "#D15CB4",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#A3488E",
+              "type": "color"
+            }
+          },
+          "error": {
+            "light": {
+              "value": "#FFBDBD",
+              "type": "color"
+            },
+            "default": {
+              "value": "#EB5454",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#993138",
+              "type": "color"
+            }
+          },
+          "informative": {
+            "light": {
+              "value": "#61ABFF",
+              "type": "color"
+            },
+            "default": {
+              "value": "#0D68D1",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#112F57",
+              "type": "color"
+            }
+          },
+          "pending": {
+            "light": {
+              "value": "#FFDD99",
+              "type": "color"
+            },
+            "default": {
+              "value": "#FFCA61",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#EB9605",
+              "type": "color"
+            }
+          },
+          "success": {
+            "light": {
+              "value": "#99E0A2",
+              "type": "color"
+            },
+            "default": {
+              "value": "#53BD69",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#2B7845",
+              "type": "color"
+            }
+          },
+          "warning": {
+            "light": {
+              "value": "#FFAD75",
+              "type": "color"
+            },
+            "default": {
+              "value": "#F58B4E",
+              "type": "color"
+            },
+            "dark": {
+              "value": "#D66A33",
+              "type": "color"
+            }
+          }
+        },
+        "border": {
           "default": {
-            "value": "#645DC2",
+            "value": "#C9D1D6",
             "type": "color"
           },
-          "hover": {
-            "value": "#857AEB",
+          "light": {
+            "value": "#DCE2E5",
+            "type": "color"
+          },
+          "dark": {
+            "value": "#808A91",
             "type": "color"
           },
           "active": {
+            "value": "#006063",
+            "type": "color"
+          },
+          "focus": {
+            "value": "#61ABFF",
+            "type": "color"
+          },
+          "invalid": {
+            "value": "#BD3C41",
+            "type": "color"
+          }
+        },
+        "chip": {
+          "decorative": {
+            "value": "#E2DBFF",
+            "type": "color"
+          },
+          "decorative-alt": {
+            "value": "#FFD6F3",
+            "type": "color"
+          },
+          "error": {
+            "value": "#FFD8D6",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#14181C",
+            "type": "color"
+          },
+          "informative": {
+            "value": "#C7E5FF",
+            "type": "color"
+          },
+          "neutral": {
+            "value": "#DCE2E5",
+            "type": "color"
+          },
+          "pending": {
+            "value": "#FCECCB",
+            "type": "color"
+          },
+          "success": {
+            "value": "#D7F5D7",
+            "type": "color"
+          },
+          "warning": {
+            "value": "#FFD9BD",
+            "type": "color"
+          }
+        },
+        "container": {
+          "active": {
+            "value": "#DCE2E5",
+            "type": "color"
+          },
+          "default": {
+            "value": "#FFFFFF",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#FFFFFF",
+            "type": "color"
+          },
+          "foreground": {
+            "value": "#14181C",
+            "type": "color"
+          },
+          "hover": {
+            "value": "#F7F9FA",
+            "type": "color"
+          }
+        },
+        "cta": {
+          "active": {
+            "value": "#2A2A54",
+            "type": "color"
+          },
+          "default": {
             "value": "#4D4AA8",
             "type": "color"
           },
           "disabled": {
-            "value": "#645DC2",
+            "value": "#4D4AA8",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -7517,22 +8110,127 @@
           "foreground": {
             "value": "#FFFFFF",
             "type": "color"
+          },
+          "hover": {
+            "value": "#645DC2",
+            "type": "color"
+          }
+        },
+        "feedback": {
+          "success": {
+            "subtle": {
+              "value": "#D7F5D7",
+              "type": "color"
+            }
           }
         },
         "primary": {
+          "active": {
+            "value": "#0C333B",
+            "type": "color"
+          },
           "default": {
             "value": "#006063",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#006063",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.4",
+                  "space": "srgb"
+                }
+              }
+            }
+          },
+          "foreground": {
+            "value": "#FFFFFF",
             "type": "color"
           },
           "hover": {
             "value": "#007874",
             "type": "color"
+          }
+        },
+        "status": {
+          "blocked": {
+            "value": "#14181C",
+            "type": "color"
           },
-          "active": {
-            "value": "#0C333B",
+          "clicked": {
+            "value": "#3D9956",
+            "type": "color"
+          },
+          "delivered": {
+            "value": "#9EA9B0",
+            "type": "color"
+          },
+          "excluded": {
+            "value": "#D66A33",
+            "type": "color"
+          },
+          "hard-bounced": {
+            "value": "#F58B4E",
+            "type": "color"
+          },
+          "opened": {
+            "value": "#77D486",
+            "type": "color"
+          },
+          "retrying": {
+            "value": "#808A91",
+            "type": "color"
+          },
+          "sent": {
+            "value": "#857AEB",
+            "type": "color"
+          },
+          "soft-bounced": {
+            "value": "#FFC299",
+            "type": "color"
+          },
+          "spam": {
+            "value": "#BD3C41",
+            "type": "color"
+          },
+          "subscribed": {
+            "value": "#99E0A2",
+            "type": "color"
+          },
+          "total": {
+            "value": "#808A91",
+            "type": "color"
+          },
+          "unsubscribed": {
+            "value": "#A3488E",
+            "type": "color"
+          }
+        },
+        "text": {
+          "default": {
+            "value": "#14181C",
             "type": "color"
           },
           "disabled": {
+            "value": "#DCE2E5",
+            "type": "color"
+          },
+          "invalid": {
+            "value": "#BD3C41",
+            "type": "color"
+          },
+          "inverted": {
+            "value": "#FFFFFF",
+            "type": "color"
+          },
+          "link": {
+            "value": "#006063",
+            "type": "color"
+          },
+          "link-disabled": {
             "value": "#006063",
             "type": "color",
             "$extensions": {
@@ -7545,8 +8243,8 @@
               }
             }
           },
-          "foreground": {
-            "value": "#FFFFFF",
+          "muted": {
+            "value": "#808A91",
             "type": "color"
           }
         }
