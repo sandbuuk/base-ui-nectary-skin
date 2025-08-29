@@ -2,6 +2,7 @@
 const handle = (PREFIX, IMPORT, ignores = []) => {
   const nectaryImports = new Map()
   const nectaryElements = new Map()
+  const nectaryGlobalImports = new Map()
   let lastNectaryImportNode = null
   let lastImportNode = null
 
@@ -12,6 +13,18 @@ const handle = (PREFIX, IMPORT, ignores = []) => {
       const value = node.source?.value
 
       if (value?.startsWith(IMPORT) === true && !value.includes('/utils') && !value.endsWith('/types')) {
+        const isGlobalImport = value.endsWith('/global')
+
+        if (isGlobalImport) {
+          const basePath = value.replace('/global', '')
+
+          const relativePath = basePath.substr(IMPORT.length)
+
+          nectaryGlobalImports.set(relativePath, node)
+
+          return true
+        }
+
         nectaryImports.set(value.substr(IMPORT.length), node)
         lastNectaryImportNode = node
 
@@ -33,7 +46,7 @@ const handle = (PREFIX, IMPORT, ignores = []) => {
     },
     'Program:exit'(context, programNode) {
       for (const [value, node] of nectaryElements) {
-        if (!nectaryImports.has(value)) {
+        if (!nectaryGlobalImports.has(value) && !nectaryImports.has(value)) {
           context.report({
             node,
             message: `${PREFIX}${value} import is missing`,
@@ -53,7 +66,7 @@ const handle = (PREFIX, IMPORT, ignores = []) => {
       }
 
       for (const [value, node] of nectaryImports) {
-        if (!nectaryElements.has(value)) {
+        if (!nectaryElements.has(value) && !nectaryGlobalImports.has(value)) {
           context.report({
             node,
             message: `${PREFIX}${value} import is redundant`,
@@ -66,6 +79,7 @@ const handle = (PREFIX, IMPORT, ignores = []) => {
 
       nectaryElements.clear()
       nectaryImports.clear()
+      nectaryGlobalImports.clear()
       lastImportNode = null
       lastNectaryImportNode = null
     },
