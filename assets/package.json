@@ -15,7 +15,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf utils/shared && cp -r ../shared utils/shared && vite build && vite build --mode bundle && npx tsc --declaration --emitDeclarationOnly && npx tsx ../scripts/tsc-alias.ts --alias '@nectary/shared=./utils/shared'",
+    "build": "rm -rf utils/shared && cp -r ../shared utils/shared && npx tsx ../scripts/minify-html.ts && vite build && vite build --mode bundle && npx tsc --declaration --emitDeclarationOnly && npx tsx ../scripts/tsc-alias.ts --alias '@nectary/shared=./utils/shared'",
     "dev": "vite build --watch"
   },
   "dependencies": {
