@@ -536,6 +536,7 @@ export class Pop extends NectaryElement {
 
   #onCloseReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-close')?.(e)
+    getReactEventHandler(this, 'onClose')?.(e)
   }
 
   #dispatchCloseEvent() {

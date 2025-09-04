@@ -274,10 +274,12 @@ export class FileDrop extends NectaryElement {
 
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
+    getReactEventHandler(this, 'onChange')?.(e)
   }
 
   #onInvalidReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-invalid')?.(e)
+    getReactEventHandler(this, 'onInvalid')?.(e)
   }
 
   #dispatchChangeEvent(files: File[]) {

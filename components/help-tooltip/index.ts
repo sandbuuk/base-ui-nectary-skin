@@ -101,10 +101,12 @@ export class HelpTooltip extends NectaryElement {
 
   #onTooltipShowReactHandler = () => {
     getReactEventHandler(this, 'on-show')?.()
+    getReactEventHandler(this, 'onShow')?.()
   }
 
   #onTooltipHideReactHandler = () => {
     getReactEventHandler(this, 'on-hide')?.()
+    getReactEventHandler(this, 'onHide')?.()
   }
 }
 

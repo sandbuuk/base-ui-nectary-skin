@@ -642,10 +642,12 @@ export class SelectMenu extends NectaryElement {
 
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
+    getReactEventHandler(this, 'onChange')?.(e)
   }
 
   #onSearchChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-search-change')?.(e)
+    getReactEventHandler(this, 'onSearchChange')?.(e)
   }
 }
 

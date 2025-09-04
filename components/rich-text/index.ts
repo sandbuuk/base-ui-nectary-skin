@@ -130,6 +130,7 @@ export class RichText extends NectaryElement {
 
   #onClickReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-element-click')?.(e)
+    getReactEventHandler(this, 'onElementClick')?.(e)
   }
 }
 

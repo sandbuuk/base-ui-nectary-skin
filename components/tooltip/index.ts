@@ -368,10 +368,12 @@ export class Tooltip extends NectaryElement {
 
   #onShowReactHandler = () => {
     getReactEventHandler(this, 'on-show')?.()
+    getReactEventHandler(this, 'onShow')?.()
   }
 
   #onHideReactHandler = () => {
     getReactEventHandler(this, 'on-hide')?.()
+    getReactEventHandler(this, 'onHide')?.()
   }
 }
 
