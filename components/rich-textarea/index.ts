@@ -627,6 +627,7 @@ export class RichTextarea extends NectaryElement {
 
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
+    getReactEventHandler(this, 'onChange')?.(e)
   }
 
   #onFocusReactHandler = () => {
@@ -639,6 +640,7 @@ export class RichTextarea extends NectaryElement {
 
   #onSelectionReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-selection')?.(e)
+    getReactEventHandler(this, 'onSelection')?.(e)
   }
 }
 

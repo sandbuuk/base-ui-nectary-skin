@@ -44,3 +44,6 @@ export type ReactifyEvents<T> = {
 export type WebComponentReactBaseProp<T = HTMLElement> = Omit<DetailedHTMLProps<HTMLAttributes<T>, T>, 'className' | 'style'> & {
   class?: string,
 }
+
+// Needed for React >= 19 where the camelCase version of the event handler should be used (onClick instead of on-click)
+export type PatchReactEvents<T, Events> = Omit<T, keyof CamelCaseify<Events>> & Partial<CamelCaseify<Events>> & Partial<Events>

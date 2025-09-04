@@ -138,6 +138,7 @@ export class PersistentOverlay extends NectaryElement {
 
   #onVisibilityAlteredReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-visibility-altered')?.(e)
+    getReactEventHandler(this, 'onVisibilityAltered')?.(e)
   }
 }
 

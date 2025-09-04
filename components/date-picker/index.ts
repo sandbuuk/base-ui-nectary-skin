@@ -587,6 +587,7 @@ export class DatePicker extends NectaryElement {
 
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
+    getReactEventHandler(this, 'onChange')?.(e)
   }
 }
 

@@ -1,4 +1,4 @@
-import type { ReactifyEvents, WebComponentReactBaseProp, SafeSelect, CamelCaseify, RemoveReadonly, SetAttributes, ExtendEventListeners } from './utils/adapters'
+import type { ReactifyEvents, WebComponentReactBaseProp, SafeSelect, CamelCaseify, RemoveReadonly, SetAttributes, ExtendEventListeners, PatchReactEvents } from './utils/adapters'
 import type { CSSProperties } from 'react'
 
 export type TRect = {
@@ -16,8 +16,10 @@ export type NectaryComponentVanillaByType<T extends NectaryComponentMap[keyof Ne
   Required<SafeSelect<T, 'methods'>>
 
 export type NectaryComponentReactByType<T extends NectaryComponentMap[keyof NectaryComponentMap]> =
-  WebComponentReactBaseProp<NectaryComponentVanillaByType<T>> &
-  ReactifyEvents<SafeSelect<T, 'events'>> &
+  PatchReactEvents<
+  WebComponentReactBaseProp<NectaryComponentVanillaByType<T>>,
+  ReactifyEvents<SafeSelect<T, 'events'>>
+  > &
   RemoveReadonly<SafeSelect<T, 'props'>> &
   {
     style?: Partial<SafeSelect<T, 'style'>> & CSSProperties,

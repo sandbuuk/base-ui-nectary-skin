@@ -124,6 +124,7 @@ export class Toast extends NectaryElement {
 
   #onTimeoutReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-timeout')?.(e)
+    getReactEventHandler(this, 'onTimeout')?.(e)
   }
 }
 

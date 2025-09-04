@@ -78,6 +78,7 @@ stages:
     - env
     - echo -e "\e[0Ksection_end:`date +%s`:job_env_output\r\e[0K"
     - ./scripts/ci-install-packages.sh
+    - export NODE_OPTIONS="--max-old-space-size=4096"
 
 .cache:
   cache:
