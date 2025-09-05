@@ -88,6 +88,7 @@ export class Button extends NectaryElement {
       'toggled',
       'size',
       'data-size',
+      'data-managed-aria-disabled',
     ]
   }
 
@@ -98,13 +99,19 @@ export class Button extends NectaryElement {
 
         break
       }
+      case 'data-managed-aria-disabled': {
+        this.#updateAriaDisabled(newVal)
+
+        break
+      }
       case 'disabled': {
         if (!isAttrEqual(oldVal, newVal)) {
           updateBooleanAttribute(this, 'disabled', isAttrTrue(newVal))
         }
 
-        this.ariaDisabled = isAttrTrue(newVal).toString()
-        this.#internals.ariaDisabled = isAttrTrue(newVal).toString()
+        if (!this.hasAttribute('data-managed-aria-disabled')) {
+          this.#updateAriaDisabled(newVal)
+        }
 
         break
       }
@@ -183,6 +190,10 @@ export class Button extends NectaryElement {
     return getLiteralAttribute(this, formTypeValues, 'form-type', 'button')
   }
 
+  get dataManagedAriaDisabled(): boolean {
+    return getBooleanAttribute(this, 'data-managed-aria-disabled')
+  }
+
   #onSizeUpdate() {
     if (!this.isDomConnected) {
       return
@@ -208,6 +219,11 @@ export class Button extends NectaryElement {
         this.setAttribute('data-size', 's')
       }
     }
+  }
+
+  #updateAriaDisabled = (newVal: string | null) => {
+    this.ariaDisabled = isAttrTrue(newVal).toString()
+    this.#internals.ariaDisabled = isAttrTrue(newVal).toString()
   }
 
   #onButtonKeydown = (e: KeyboardEvent) => {

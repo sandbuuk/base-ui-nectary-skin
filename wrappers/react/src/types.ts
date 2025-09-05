@@ -223,6 +223,7 @@ export type TSinchButtonWrapper = {
   size?: TSinchSizeEx,
   text?: string,
   ariaLabel: string,
+  dataManagedAriaDisabled?: boolean,
   disabled?: boolean,
   toggled?: boolean,
   onClick?: (e: CustomEvent<void>) => void,

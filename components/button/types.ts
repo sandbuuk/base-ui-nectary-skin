@@ -28,6 +28,12 @@ export type TSinchButtonProps = {
   toggled?: boolean,
   /** Makes button participate in forms, `button` by default */
   'form-type'?: TSinchButtonFormType,
+  /*
+  * Allows to optionally override the aria-disabled property
+  * Useful when you want to functionally disable the button without applying the disabled style (e.g: loading on MJ theme)
+  * We cannot use aria-disabled directly for this, as since we already update it inside the web component, observing it would create infinite loops
+  */
+  'data-managed-aria-disabled'?: boolean,
 }
 
 export type TSinchButtonEvents = {
