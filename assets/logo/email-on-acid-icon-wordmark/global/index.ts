@@ -24,3 +24,13 @@ declare global {
     },
   }
 }
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-logo-email-on-acid-icon-wordmark': TSinchLogoReact & {
+        colored?: boolean,
+      },
+    }
+  }
+}

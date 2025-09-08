@@ -24,3 +24,13 @@ declare global {
     },
   }
 }
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-logo-mailjet-icon': TSinchLogoReact & {
+        colored?: boolean,
+      },
+    }
+  }
+}

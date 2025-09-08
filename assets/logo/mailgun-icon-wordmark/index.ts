@@ -29,3 +29,13 @@ declare global {
     },
   }
 }
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'sinch-logo-mailgun-icon-wordmark': TSinchLogoReact & {
+        colored?: boolean,
+      },
+    }
+  }
+}
