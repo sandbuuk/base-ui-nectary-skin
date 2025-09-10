@@ -6,6 +6,8 @@ export const orientationValues: readonly TSinchPopoverOrientation[] = [
   'top-right',
   'bottom-left',
   'bottom-right',
+  'left',
+  'right',
   'bottom',
   'top',
 ]
@@ -17,6 +19,14 @@ export const getPopOrientation = (orientation: TSinchPopoverOrientation): TSinch
 
   if (orientation === 'bottom') {
     return 'bottom-stretch'
+  }
+
+  if (orientation === 'left') {
+    return 'center-left'
+  }
+
+  if (orientation === 'right') {
+    return 'center-right'
   }
 
   return orientation

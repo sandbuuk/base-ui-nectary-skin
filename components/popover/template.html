@@ -20,9 +20,29 @@
   padding-bottom: 4px;
 }
 
+:host([orientation="left"]) #content-wrapper {
+  padding-top: 0;
+  padding-right: 4px;
+}
+
+:host([orientation="right"]) #content-wrapper {
+  padding-top: 0;
+  padding-left: 4px;
+}
+
 :host([orientation^="top"][tip]) #content-wrapper {
   padding-top: 0;
   padding-bottom: 12px;
+}
+
+:host([orientation="left"][tip]) #content-wrapper {
+  padding-top: 0;
+  padding-right: 12px;
+}
+
+:host([orientation="right"][tip]) #content-wrapper {
+  padding-top: 0;
+  padding-left: 12px;
 }
 
 #content {
@@ -53,6 +73,18 @@
 :host([orientation^="top"]) #tip {
   transform: translateX(-50%) rotate(0deg);
   top: calc(100% - 13px);
+}
+
+:host([orientation="left"]) #tip {
+  transform: translateX(-50%) rotate(-90deg);
+  top: calc(50%);
+  left: calc(100% - 13px);
+}
+
+:host([orientation="right"]) #tip {
+  transform: translateX(-50%) rotate(90deg);
+  top: calc(50%);
+  left: 13px;
 }
 
 :host([tip]) #tip:not(.hidden) {

@@ -242,20 +242,29 @@ export class Popover extends NectaryElement {
     const orientation = this.orientation
     const targetRect = this.#$pop.footprintRect
     const contentRect = this.#$content.getBoundingClientRect()
-    const diffX = targetRect.x - contentRect.x
-    let desiredX = diffX + targetRect.width / 2
 
-    if (orientation === 'bottom-left' || orientation === 'top-left') {
-      desiredX = Math.max(desiredX, contentRect.width * 0.75)
+    if (orientation.startsWith('top') || orientation.startsWith('bottom')) {
+      const diffX = targetRect.x - contentRect.x
+      let desiredX = diffX + targetRect.width / 2
+
+      if (orientation === 'bottom-left' || orientation === 'top-left') {
+        desiredX = Math.max(desiredX, contentRect.width * 0.75)
+      }
+
+      if (orientation === 'bottom-right' || orientation === 'top-right') {
+        desiredX = Math.min(desiredX, contentRect.width * 0.25)
+      }
+
+      const xPos = Math.max(TIP_SIZE, Math.min(desiredX, contentRect.width - TIP_SIZE))
+
+      this.#$tip.style.left = `${xPos}px`
+    } else if (orientation.startsWith('left') || orientation.startsWith('right')) {
+      const diffY = targetRect.y - contentRect.y
+      const desiredY = diffY + targetRect.height / 2
+      const yPos = Math.max(TIP_SIZE, Math.min(desiredY, contentRect.height - TIP_SIZE))
+
+      this.#$tip.style.top = `${yPos}px`
     }
-
-    if (orientation === 'bottom-right' || orientation === 'top-right') {
-      desiredX = Math.min(desiredX, contentRect.width * 0.25)
-    }
-
-    const xPos = Math.max(TIP_SIZE, Math.min(desiredX, contentRect.width - TIP_SIZE))
-
-    this.#$tip.style.left = `${xPos}px`
 
     setClass(this.#$tip, 'hidden', rectOverlap(targetRect, contentRect))
   }
