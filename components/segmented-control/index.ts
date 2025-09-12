@@ -8,6 +8,7 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
+import { createKeyboardNavigation } from '../utils/control-keyboard-navigation'
 import templateHTML from './template.html?raw'
 
 export * from './types'
@@ -19,6 +20,8 @@ template.innerHTML = templateHTML
 export class SegmentedControl extends NectaryElement {
   #$slot: HTMLSlotElement
   #controller: AbortController | null = null
+  #enabledOptions: Element[] = []
+  #keyboardNav = createKeyboardNavigation()
 
   constructor() {
     super()
@@ -37,10 +40,13 @@ export class SegmentedControl extends NectaryElement {
     const options: AddEventListenerOptions = { signal }
 
     this.setAttribute('role', 'tablist')
+    this.setAttribute('aria-orientation', 'horizontal')
     this.#$slot.addEventListener('slotchange', this.#onSlotChange, options)
     this.#$slot.addEventListener('click', this.#onOptionClick, options)
     this.#$slot.addEventListener('keydown', this.#onOptionKeydown, options)
     this.addEventListener('-change', this.#onChangeReactHandler)
+
+    this.#updateEnabledOptions()
   }
 
   disconnectedCallback() {
@@ -70,8 +76,15 @@ export class SegmentedControl extends NectaryElement {
     return getAttribute(this, 'value', '')
   }
 
+  #updateEnabledOptions = () => {
+    this.#enabledOptions = Array.from(this.#$slot.assignedElements()).filter(
+      (option) => !getBooleanAttribute(option, 'disabled')
+    )
+  }
+
   #onSlotChange = () => {
     this.#onValueChange(this.value)
+    this.#updateEnabledOptions()
   }
 
   #onOptionClick = (e: Event) => {
@@ -89,18 +102,7 @@ export class SegmentedControl extends NectaryElement {
   }
 
   #onOptionKeydown = (e: KeyboardEvent) => {
-    switch (e.code) {
-      case 'Space':
-      case 'Enter': {
-        e.preventDefault()
-
-        const target = getTargetByAttribute(e, 'value')
-
-        if (target !== null) {
-          target.click()
-        }
-      }
-    }
+    this.#keyboardNav.handleKeyboardNavigation(e, this.#enabledOptions)
   }
 
   #onValueChange(value: string | null) {
