@@ -34,7 +34,6 @@ export class Link extends NectaryElement {
   }
 
   connectedCallback() {
-    this.setAttribute('role', 'link')
     this.#$anchor.addEventListener('click', this.#onAnchorClick)
     this.#$anchor.addEventListener('focus', this.#onAnchorFocus)
     this.#$anchor.addEventListener('blur', this.#onAnchorBlur)
