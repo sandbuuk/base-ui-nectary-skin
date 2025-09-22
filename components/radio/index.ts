@@ -3,7 +3,6 @@ import {
   getAttribute,
   getBooleanAttribute,
   getReactEventHandler,
-  getTargetByAttribute,
   isAttrTrue,
   NectaryElement,
   updateAttribute,
@@ -126,6 +125,12 @@ export class Radio extends NectaryElement {
   }
 
   #onOptionKeyDown = (e: Event) => {
+    const option = (e.target as HTMLElement | null)?.closest('sinch-radio-option') ?? null
+
+    if (option === null) {
+      return
+    }
+
     switch ((e as KeyboardEvent).code) {
       case 'ArrowUp':
       case 'ArrowLeft': {
@@ -161,13 +166,19 @@ export class Radio extends NectaryElement {
   }
 
   #onOptionClick = (e: Event) => {
-    const target = getTargetByAttribute(e, 'value')
+    const target = e.target as HTMLElement | null
 
-    if (target === null || target.hasAttribute('disabled')) {
+    if (target === null) {
       return
     }
 
-    const value = getAttribute(target, 'value')!
+    const option = target.closest('sinch-radio-option')
+
+    if (option === null || option.hasAttribute('disabled')) {
+      return
+    }
+
+    const value = getAttribute(option, 'value')!
 
     this.dispatchEvent(
       new CustomEvent('-change', { detail: value })
