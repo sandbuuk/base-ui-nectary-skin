@@ -3,12 +3,25 @@
 import type { SinchElementName } from './nectary-element-base'
 
 interface GlobalStore {
+  definitions: Map<SinchElementName, () => Promise<any>>,
   hasInitialized: boolean,
   targetlibVersion: string,
   patchPerviousVersions: boolean,
   useFallbackExclusively: boolean,
   preload: boolean,
-  definitions: Map<SinchElementName, () => Promise<any>>,
+  loadPromise: {
+    promise: Promise<void>,
+    resolve: (value: void) => void,
+  },
+}
+
+const createDeferredPromise = () => {
+  let resolve!: (value: void) => void
+  const promise = new Promise<void>((r) => {
+    resolve = r
+  })
+
+  return { promise, resolve }
 }
 
 export const getStore = (storeKey: symbol): GlobalStore => {
@@ -17,12 +30,13 @@ export const getStore = (storeKey: symbol): GlobalStore => {
   }
 
   const store: GlobalStore = {
+    definitions: new Map(),
     hasInitialized: false,
     targetlibVersion: '',
     patchPerviousVersions: false,
     useFallbackExclusively: false,
     preload: false,
-    definitions: new Map(),
+    loadPromise: createDeferredPromise(),
   }
 
   Object.defineProperty(window, storeKey, {

@@ -200,46 +200,54 @@ export abstract class GlobalElementsManager {
     store.patchPerviousVersions = options.patchPerviousVersions ?? true
     store.useFallbackExclusively = options.useFallbackExclusively ?? false
 
-    if (store.preload) {
-      const version = options.targetlibVersion
+    try {
+      if (store.preload) {
+        const version = options.targetlibVersion
 
-      store.targetlibVersion = version ?? store.targetlibVersion
+        store.targetlibVersion = version ?? store.targetlibVersion
 
-      const importPath = version != null
-        ? `${this.config.cdnUrl}@${version}/es2022/bundle.mjs`
-        : `${this.config.cdnUrl}/bundle`
+        const importPath = version != null
+          ? `${this.config.cdnUrl}@${version}/es2022/bundle.mjs`
+          : `${this.config.cdnUrl}/bundle`
 
-      await this.preloadBundle(importPath, options.fallbackLoaderBundle, store.useFallbackExclusively)
+        await this.preloadBundle(importPath, options.fallbackLoaderBundle, store.useFallbackExclusively)
+      } else {
+        if (store.patchPerviousVersions) {
+          this.patchCustomElements()
+        }
 
-      return
+        // Initial loaders with un-versioned importPath (automatically resolves to latest module but takes 2 requests)
+        this.config.baseElementNames.forEach((name: string) => {
+          const importPath = `${this.config.cdnUrl}/${this.getImportPathFromName(name)}`
+
+          store.definitions.set(`sinch-${name}`, this.createLoader(importPath, name, options.fallbackLoader, store.useFallbackExclusively))
+        })
+
+        if (options.targetlibVersion != null) {
+          store.targetlibVersion = options.targetlibVersion
+        } else {
+          const registry = await fetch(`${this.config.registryUrl}/latest`)
+          const registryData = await registry.json()
+
+          store.targetlibVersion = registryData.version
+        }
+
+        // Overwrite the loaders with versioned importPath so it only takes one request to resolve modules
+        this.config.baseElementNames.forEach((name: string) => {
+          const importPath = `${this.config.cdnUrl}@${store.targetlibVersion}/es2022/${this.getImportPathFromName(name)}.mjs`
+
+          store.definitions.set(`sinch-${name}`, this.createLoader(importPath, name, options.fallbackLoader, store.useFallbackExclusively))
+        })
+      }
+    } finally {
+      store.loadPromise.resolve()
     }
+  }
 
-    if (store.patchPerviousVersions) {
-      this.patchCustomElements()
-    }
+  whenLoaded(): Promise<void> {
+    const store = getStore(this.config.storeKey)
 
-    // Initial loaders with un-versioned importPath (automatically resolves to latest module but takes 2 requests)
-    this.config.baseElementNames.forEach((name: string) => {
-      const importPath = `${this.config.cdnUrl}/${this.getImportPathFromName(name)}`
-
-      store.definitions.set(`sinch-${name}`, this.createLoader(importPath, name, options.fallbackLoader, store.useFallbackExclusively))
-    })
-
-    if (options.targetlibVersion != null) {
-      store.targetlibVersion = options.targetlibVersion
-    } else {
-      const registry = await fetch(`${this.config.registryUrl}/latest`)
-      const registryData = await registry.json()
-
-      store.targetlibVersion = registryData.version
-    }
-
-    // Overwrite the loaders with versioned importPath so it only takes one request to resolve modules
-    this.config.baseElementNames.forEach((name: string) => {
-      const importPath = `${this.config.cdnUrl}@${store.targetlibVersion}/es2022/${this.getImportPathFromName(name)}.mjs`
-
-      store.definitions.set(`sinch-${name}`, this.createLoader(importPath, name, options.fallbackLoader, store.useFallbackExclusively))
-    })
+    return store.loadPromise.promise
   }
 
   private getImportPathFromName(name: string): string {
