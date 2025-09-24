@@ -36,6 +36,7 @@ export class Pop extends NectaryElement {
   #$focus: HTMLElement
   #$dialog: HTMLDialogElement
   #resizeThrottle
+  #resizeObserver: ResizeObserver
   #$targetSlot: HTMLSlotElement
   #$targetOpenSlot: HTMLSlotElement
   #$contentSlot: HTMLSlotElement
@@ -64,6 +65,9 @@ export class Pop extends NectaryElement {
     this.#$targetOpenWrapper = shadowRoot.querySelector('#target-open')!
 
     this.#resizeThrottle = throttleAnimationFrame(this.#updateOrientation)
+    this.#resizeObserver = new ResizeObserver(() => {
+      this.#resizeThrottle.fn()
+    })
 
     this.#keydownContext = new Context(this.#$contentSlot, 'keydown')
     this.#visibilityContext = new Context(this.#$contentSlot, 'visibility')
@@ -98,6 +102,7 @@ export class Pop extends NectaryElement {
     this.#controller!.abort()
     this.#controller = null
     this.#resizeThrottle.cancel()
+    this.#resizeObserver.disconnect()
     this.#onCollapse()
   }
 
@@ -239,6 +244,8 @@ export class Pop extends NectaryElement {
     this.#$targetWrapper.setAttribute('aria-expanded', 'true')
     this.#updateOrientation()
 
+    this.#resizeObserver.observe(this.#$dialog)
+
     if (this.modal) {
       // When opening dialog in modal mode Firefox does not set focus to the first focusable element
       // Instead focus defaults to the body
@@ -311,6 +318,8 @@ export class Pop extends NectaryElement {
     if (!this.#$dialog.open) {
       return
     }
+
+    this.#resizeObserver.disconnect()
 
     const isNonModal = !this.modal
 
