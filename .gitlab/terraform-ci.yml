@@ -1,0 +1,58 @@
+variables:
+  SYSTEM_ACCOUNT_ID_prd: 953094423485
+  ENVIRONMENT: prd
+  TF_ROOT: terraform
+  REGION: ap-southeast-2
+  ACCOUNT: $SYSTEM_ACCOUNT_ID_${ENVIRONMENT}
+  TF_VAR_region: $REGION
+  TF_VAR_bucket_name: nectary-global-components
+  TF_VAR_system_account_id: $SYSTEM_ACCOUNT_ID_${ENVIRONMENT}
+  AWS_ROLE_ARN: arn:aws:iam::$ACCOUNT:role/ci-deployment-role
+  AWS_WEB_IDENTITY_TOKEN_FILE: $RUNNER_TEMP_PROJECT_DIR/aws-web-identity-token-file
+  AWS_ROLE_SESSION_NAME: "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+
+default:
+  tags:
+    - saas
+    - general
+    - stg
+    - eu-west-1
+
+stages:
+  - start
+
+.authenticate_aws:
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
+  before_script:
+    - echo $GITLAB_OIDC_TOKEN > $AWS_WEB_IDENTITY_TOKEN_FILE
+    - export TF_STATE_NAME="$(echo $PROJECT_DIR | tr '/' '-')-${REGION}-${ENVIRONMENT}"
+
+plan:
+  stage: start
+  extends:
+    - .authenticate_aws
+  image: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+  script:
+    - cd ${TF_ROOT}
+    - gitlab-terraform init
+    - gitlab-terraform plan
+
+apply:
+  stage: start
+  extends:
+  - .authenticate_aws
+  image: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
+  needs: ["plan"]
+  script:
+    - cd ${TF_ROOT}
+    - gitlab-terraform init
+    - gitlab-terraform plan
+    - gitlab-terraform apply
+  when: manual
+  allow_failure: false
+
+
