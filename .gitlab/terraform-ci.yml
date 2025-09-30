@@ -40,19 +40,20 @@ plan:
     - cd ${TF_ROOT}
     - gitlab-terraform init
     - gitlab-terraform plan
+  allow_failure: false
 
 apply:
   stage: start
   extends:
   - .authenticate_aws
   image: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
-  needs: ["plan"]
+  rules:
+  - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
   script:
     - cd ${TF_ROOT}
     - gitlab-terraform init
     - gitlab-terraform plan
     - gitlab-terraform apply
-  when: manual
   allow_failure: false
 
 
