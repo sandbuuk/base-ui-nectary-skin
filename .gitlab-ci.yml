@@ -101,6 +101,8 @@ terraform:
       changes:
         paths:
           - terraform/**/*
+    - if: $CI_MERGE_REQUEST_ID || $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+      when: manual
 
 lint:
   extends:
