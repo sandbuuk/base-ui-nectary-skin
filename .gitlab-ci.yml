@@ -47,7 +47,6 @@ default:
     - k8s
     - arm64
 
-
 stages:
   - start
   - lint
@@ -70,7 +69,6 @@ stages:
   before_script: &authenticate_aws
     - echo $GITLAB_OIDC_TOKEN > $AWS_WEB_IDENTITY_TOKEN_FILE
 
-
 .prepare-ci:
   before_script:
     - echo -e "\e[0Ksection_start:`date +%s`:job_env_output[collapsed=true]\r\e[0KJob Environment output"
@@ -92,6 +90,17 @@ stages:
 notify-on-mr-created:
   extends: .notify-on-mr-created-template
   stage: start
+
+terraform:
+  stage: start
+  trigger:
+    include: .gitlab/terraform-ci.yml
+    strategy: depend
+  rules:
+    - if: $CI_MERGE_REQUEST_ID || $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+      changes:
+        paths:
+          - terraform/**/*
 
 lint:
   extends:
@@ -363,3 +372,4 @@ publish-icon-fonts:
     - env
     - aws s3 cp fonts/ s3://${BUCKET_ID}/ --recursive --include "*" --acl public-read
     - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
+
