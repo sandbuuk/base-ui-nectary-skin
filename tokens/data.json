@@ -8659,6 +8659,18 @@
           }
         }
       },
+      "tooltip": {
+        "color": {
+          "background": {
+            "value": "#1A2126",
+            "type": "color"
+          },
+          "text": {
+            "value": "#FFFFFF",
+            "type": "color"
+          }
+        }
+      },
       "date-picker": {
         "day": {
           "color": {
