@@ -153,6 +153,10 @@ export class Pop extends NectaryElement {
     return getRect(this.#$dialog)
   }
 
+  get shouldCloseOnBackdropClick(): boolean {
+    return !getBooleanAttribute(this, 'disable-backdrop-close')
+  }
+
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
     if (isAttrEqual(oldVal, newVal)) {
       return
@@ -526,7 +530,7 @@ export class Pop extends NectaryElement {
   }
 
   #onBackdropMouseDown = (e: MouseEvent) => {
-    if (isTargetEqual(e, this.#$dialog)) {
+    if (this.shouldCloseOnBackdropClick && isTargetEqual(e, this.#$dialog)) {
       const rect = this.popoverRect
       const isInside = e.x >= rect.x && e.x < rect.x + rect.width && e.y >= rect.y && e.y < rect.y + rect.height
 
