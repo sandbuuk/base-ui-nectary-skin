@@ -8,6 +8,7 @@ include:
   - project: "sinch/sinch-projects/applications/teams/core/core"
     ref: main
     file: "/_pipeline-templates/mr-notifications.yml"
+  - local: .gitlab/deploy-global-components.yml
 
 sinch_global_security_stage_secret_detection_gitleaks:
   extends: .sinch_global_security_stage_secret_detection_gitleaks
@@ -103,6 +104,7 @@ terraform:
           - terraform/**/*
     - if: $CI_MERGE_REQUEST_ID || $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
       when: manual
+      allow_failure: true
 
 lint:
   extends:
@@ -209,7 +211,14 @@ publish:
     - apt-get install -y git git-lfs
     - git lfs update --force
     - git lfs install
-    - pnpm run release
+    - MSR_OUT="$(pnpm run release 2>&1)"; MSR_STATUS=$?; echo "$MSR_OUT"; [ $MSR_STATUS -eq 0 ] || exit $MSR_STATUS
+    - echo "$MSR_OUT" | sed -nE 's/.*\[([^]]+)\].*Published release ([^ ]+).*/\1 \2/p' > published.txt
+  artifacts:
+    when: always
+    paths:
+      - published.txt
+      - components
+      - assets
 
 preview:
   stage: docs

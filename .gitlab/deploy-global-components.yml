@@ -1,0 +1,47 @@
+variables:
+  AWS_ROLE_ARN: arn:aws:iam::953094423485:role/ci-deployment-role
+  AWS_WEB_IDENTITY_TOKEN_FILE: $RUNNER_TEMP_PROJECT_DIR/aws-web-identity-token-file
+  AWS_ROLE_SESSION_NAME: "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+  AWS_DEFAULT_REGION: ap-southeast-2
+
+.authenticate_aws:
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
+  before_script:
+    - echo $GITLAB_OIDC_TOKEN > $AWS_WEB_IDENTITY_TOKEN_FILE
+
+deploy-global-components:
+  stage: deploy
+  image:
+    name: public.ecr.aws/aws-cli/aws-cli:latest
+    entrypoint: [""]
+  extends:
+    - .authenticate_aws
+  needs:
+    - publish
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+  script:
+    - BUCKET_ID='nectary-global-components'
+    - |
+      if [ ! -s published.txt ]; then
+        echo "No published packages to deploy"
+        exit 0
+      fi
+    - |
+      while read -r NAME VERSION; do
+        [ -z "$NAME" ] && continue
+        PKG_DIR=$(printf "%s" "$NAME" | sed -E 's/^@[^\/]+\///')
+        SRC_DIR="$PKG_DIR"
+        if [ ! -d "$SRC_DIR" ]; then
+          echo "Skip $NAME@$VERSION: missing directory $SRC_DIR"
+          continue
+        fi
+        echo "Uploading $SRC_DIR to s3://$BUCKET_ID/$PKG_DIR/$VERSION/"
+        aws s3 sync "$SRC_DIR/" "s3://$BUCKET_ID/$PKG_DIR/$VERSION/" --delete
+      done < published.txt
+
+
