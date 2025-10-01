@@ -1,5 +1,5 @@
 type TTooltipStateOptions = {
-  isOpened?: boolean,
+  isOpened?: boolean | undefined,
   showDelay: number,
   hideDelay: number,
   hideAnimationDuration: number,
