@@ -119,6 +119,10 @@ export class Pop extends NectaryElement {
     return getBooleanAttribute(this, 'allow-scroll')
   }
 
+  get hideOutsideViewport(): boolean {
+    return getBooleanAttribute(this, 'hide-outside-viewport')
+  }
+
   set modal(isModal: boolean) {
     updateBooleanAttribute(this, 'modal', isModal)
   }
@@ -326,7 +330,7 @@ export class Pop extends NectaryElement {
     } else {
       this.#scrollableParents = getScrollableParents(this.#getFirstTargetElement(this.#$targetSlot))
       this.#scrollableParents.forEach((el) => {
-        el.addEventListener('scroll', this.#updatePosition, { passive: true, capture: true })
+        el.addEventListener('scroll', () => this.#updatePosition(false), { passive: true, capture: true })
       })
     }
 
@@ -338,6 +342,8 @@ export class Pop extends NectaryElement {
         this.#$contentSlot.addEventListener('slotchange', this.#onContentSlotChange)
       }
     })
+
+    requestAnimationFrame(() => this.#updatePosition())
 
     // Dispatch Visibility Context
     this.#dispatchContentVisibility(true)
@@ -422,7 +428,7 @@ export class Pop extends NectaryElement {
       enableOverscroll()
     } else {
       this.#scrollableParents.forEach((el) => {
-        el.removeEventListener('scroll', this.#updatePosition, { capture: true })
+        el.removeEventListener('scroll', () => this.#updatePosition(false), { capture: true })
       })
     }
 
@@ -437,7 +443,7 @@ export class Pop extends NectaryElement {
     this.#resizeThrottle.fn()
   }
 
-  #updatePosition = () => {
+  #updatePosition = (updateWidth?: boolean) => {
     const targetRect = this.modal || this.allowScroll
       ? this.#getTargetRect()
       : this.#$targetWrapper.getBoundingClientRect()
@@ -483,12 +489,19 @@ export class Pop extends NectaryElement {
     const clampedXPos = Math.max(inset, Math.min(xPos, window.innerWidth - modalWidth - inset))
     const clampedYPos = Math.max(inset, Math.min(yPos, window.innerHeight - modalHeight - inset))
 
-    // if (Math.abs(clampedXPos - xPos) > 2 || Math.abs(clampedYPos - yPos) > 2) {
-    //   this.#dispatchCloseEvent()
-    // }
+    // Hides dialog when target is out of viewport and unhides it when it comes back
+    if (this.hideOutsideViewport && this.#isPopPointInViewport(xPos, yPos)) {
+      this.#$dialog.style.setProperty('visibility', 'hidden')
+    } else {
+      this.#$dialog.style.removeProperty('visibility')
+    }
 
     this.#$dialog.style.setProperty('left', `${clampedXPos}px`)
     this.#$dialog.style.setProperty('top', `${clampedYPos}px`)
+
+    if (updateWidth === true) {
+      this.#$dialog.style.setProperty('width', `${modalWidth}px`)
+    }
 
     if (!this.modal && !this.allowScroll) {
       const targetLeftPos = targetRect.x - clampedXPos
@@ -508,59 +521,11 @@ export class Pop extends NectaryElement {
     const shouldSetWidthToTarget = orient === 'top-stretch' || orient === 'bottom-stretch'
     const modalHeight = modalRect.height
     const modalWidth = shouldSetWidthToTarget ? targetRect.width : modalRect.width
-    const inset = this.inset
-    let xPos = 0
-    let yPos = 0
 
     this.#modalHeight = modalHeight
     this.#modalWidth = modalWidth
 
-    if (orient === 'bottom-right' || orient === 'top-right' || orient === 'top-stretch' || orient === 'bottom-stretch') {
-      xPos = targetRect.x
-    }
-
-    if (orient === 'bottom-left' || orient === 'top-left') {
-      xPos = targetRect.x + targetRect.width - modalWidth
-    }
-
-    if (orient === 'bottom-center' || orient === 'top-center') {
-      xPos = targetRect.x + targetRect.width / 2 - modalWidth / 2
-    }
-
-    if (orient === 'center-right') {
-      xPos = targetRect.x + targetRect.width
-    }
-
-    if (orient === 'center-left') {
-      xPos = targetRect.x - modalWidth
-    }
-
-    if (orient === 'bottom-left' || orient === 'bottom-right' || orient === 'bottom-stretch' || orient === 'bottom-center') {
-      yPos = targetRect.y + targetRect.height
-    }
-
-    if (orient === 'top-left' || orient === 'top-right' || orient === 'top-stretch' || orient === 'top-center') {
-      yPos = targetRect.y - modalHeight
-    }
-
-    if (orient === 'center-left' || orient === 'center-right') {
-      yPos = targetRect.y + targetRect.height / 2 - modalHeight / 2
-    }
-
-    xPos = Math.round(Math.max(inset, Math.min(xPos, window.innerWidth - modalWidth - inset)))
-    yPos = Math.round(Math.max(inset, Math.min(yPos, window.innerHeight - modalHeight - inset)))
-
-    this.#$dialog.style.setProperty('left', `${xPos}px`)
-    this.#$dialog.style.setProperty('top', `${yPos}px`)
-    this.#$dialog.style.setProperty('width', `${modalWidth}px`)
-
-    if (!this.modal && !this.allowScroll) {
-      const targetLeftPos = targetRect.x - xPos
-      const targetTopPos = targetRect.y - yPos
-
-      this.#$targetOpenWrapper.style.setProperty('left', `${targetLeftPos}px`)
-      this.#$targetOpenWrapper.style.setProperty('top', `${targetTopPos}px`)
-    }
+    this.#updatePosition(true)
   }
 
   #onBackdropMouseDown = (e: MouseEvent) => {
@@ -631,6 +596,17 @@ export class Pop extends NectaryElement {
     if (this.#$dialog.open) {
       this.#updateOrientation()
     }
+  }
+
+  #isPopPointInViewport(x: number, y: number): boolean {
+    const inset = this.inset
+    const modalWidth = this.#modalWidth
+    const modalHeight = this.#modalHeight
+
+    const clampedX = Math.max(inset, Math.min(x, window.innerWidth - modalWidth - inset))
+    const clampedY = Math.max(inset, Math.min(y, window.innerHeight - modalHeight - inset))
+
+    return Math.abs(clampedX - x) > 2 || Math.abs(clampedY - y) > 2
   }
 }
 

@@ -19,6 +19,11 @@ export type TSinchPopProps = {
   open: boolean,
   /** Orientation, where it *points to* from origin */
   orientation: TSinchPopOrientation,
+  /*
+  * Whether or not to hide the pop if it cannot be fully displayed within the viewport
+  * Useful for tooltips, but not for popovers where content should always be accessible
+  */
+  'hide-outside-viewport'?: boolean,
   /** Modal/non-modal mode */
   modal?: boolean,
   inset?: number,
