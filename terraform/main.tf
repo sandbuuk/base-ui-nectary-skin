@@ -45,6 +45,23 @@ resource "aws_s3_bucket_policy" "nectary_cdn" {
             "AWS:SourceArn" = aws_cloudfront_distribution.nectary_cdn.arn
           }
         }
+      },
+      {
+        Sid       = "AllowCIRole"
+        Effect    = "Allow"
+        Principal = {
+          AWS = "arn:aws:iam::${var.system_account_id}:role/ci-deployment-role"
+        }
+        Action = [
+          "s3:ListBucket",
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject"
+        ]
+        Resource = [
+          aws_s3_bucket.nectary_cdn.arn,
+          "${aws_s3_bucket.nectary_cdn.arn}/*"
+        ]
       }
     ]
   })
