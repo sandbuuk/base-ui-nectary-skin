@@ -50,16 +50,13 @@ resource "aws_s3_bucket_policy" "nectary_cdn" {
         Sid       = "AllowCIRole"
         Effect    = "Allow"
         Principal = {
-          AWS = [
-            "arn:aws:iam::${var.system_account_id}:role/ci-deployment-role",
-            "arn:aws:iam::${var.system_account_id}:assumed-role/ci-deployment-role/*"
-          ]
+          AWS = "arn:aws:iam::${var.system_account_id}:role/ci-deployment-role",
         }
         Action = [
-          "s3:ListBucket",
-          "s3:GetObject",
+          "s3:Get*",
+          "s3:List*",
           "s3:PutObject",
-          "s3:DeleteObject"
+          "s3:DeleteObject",
         ]
         Resource = [
           aws_s3_bucket.nectary_cdn.arn,
