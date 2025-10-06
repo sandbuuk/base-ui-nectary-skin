@@ -13,6 +13,8 @@ export type TSinchPopOrientation =
   | 'center-left'
 
 export type TSinchPopProps = {
+  /** Allow scrolling of the page when pop is open */
+  'allow-scroll'?: boolean,
   /** Open/close state */
   open: boolean,
   /** Orientation, where it *points to* from origin */

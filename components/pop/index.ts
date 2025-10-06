@@ -18,6 +18,7 @@ import {
   subscribeContext,
   isTargetEqual,
   isAttrEqual,
+  getScrollableParents,
 } from '../utils'
 import templateHTML from './template.html?raw'
 import { disableOverscroll, enableOverscroll, orientationValues } from './utils'
@@ -48,6 +49,7 @@ export class Pop extends NectaryElement {
   #targetStyleValue: string | null = null
   #modalWidth = 0
   #modalHeight = 0
+  #scrollableParents: (HTMLElement | Document)[] = []
 
   constructor() {
     super()
@@ -111,6 +113,10 @@ export class Pop extends NectaryElement {
       'orientation',
       'open',
     ]
+  }
+
+  get allowScroll(): boolean {
+    return getBooleanAttribute(this, 'allow-scroll')
   }
 
   set modal(isModal: boolean) {
@@ -243,8 +249,16 @@ export class Pop extends NectaryElement {
     this.#$focus.removeAttribute('tabindex')
     this.#$focus.removeAttribute('style')
 
-    /* Open dialog */
-    this.#$dialog.showModal()
+    /*
+    * Open dialog
+    * We should theoretically always call show() instead of showModal() in non-modal mode, but this currently has too many side-effects accross the project
+    */
+    if (this.modal || !this.allowScroll) {
+      this.#$dialog.showModal()
+    } else {
+      this.#$dialog.show()
+    }
+
     this.#$targetWrapper.setAttribute('aria-expanded', 'true')
     this.#updateOrientation()
 
@@ -255,56 +269,67 @@ export class Pop extends NectaryElement {
       // Instead focus defaults to the body
       getFirstFocusableElement(this.#$contentSlot)?.focus()
     } else {
-      /* Measure target */
-      const $targetEl = this.#getFirstTargetElement(this.#$targetSlot)
-      const targetElComputedStyle = getComputedStyle($targetEl)
-      const marginLeft = parseInt(targetElComputedStyle.marginLeft)
-      const marginRight = parseInt(targetElComputedStyle.marginRight)
-      const marginTop = parseInt(targetElComputedStyle.marginTop)
-      const marginBottom = parseInt(targetElComputedStyle.marginBottom)
-      const targetRect = this.#getTargetRect()
+      if (!this.allowScroll) {
+        /* Measure target */
+        const $targetEl = this.#getFirstTargetElement(this.#$targetSlot)
+        const targetElComputedStyle = getComputedStyle($targetEl)
+        const marginLeft = parseInt(targetElComputedStyle.marginLeft)
+        const marginRight = parseInt(targetElComputedStyle.marginRight)
+        const marginTop = parseInt(targetElComputedStyle.marginTop)
+        const marginBottom = parseInt(targetElComputedStyle.marginBottom)
+        const targetRect = this.#getTargetRect()
 
-      this.#$targetWrapper.style.setProperty('display', 'block')
-      this.#$targetWrapper.style.setProperty('width', `${targetRect.width + marginLeft + marginRight}px`)
-      this.#$targetWrapper.style.setProperty('height', `${targetRect.height + marginTop + marginBottom}px`)
-      this.#$targetOpenWrapper.style.setProperty('width', `${targetRect.width}px`)
-      this.#$targetOpenWrapper.style.setProperty('height', `${targetRect.height}px`)
-      this.#targetStyleValue = $targetEl.getAttribute('style')
-      $targetEl.style.setProperty('margin', '0')
-      $targetEl.style.setProperty('position', 'static')
+        this.#$targetWrapper.style.setProperty('display', 'block')
+        this.#$targetWrapper.style.setProperty('width', `${targetRect.width + marginLeft + marginRight}px`)
+        this.#$targetWrapper.style.setProperty('height', `${targetRect.height + marginTop + marginBottom}px`)
+        this.#$targetOpenWrapper.style.setProperty('width', `${targetRect.width}px`)
+        this.#$targetOpenWrapper.style.setProperty('height', `${targetRect.height}px`)
+        this.#targetStyleValue = $targetEl.getAttribute('style')
+        $targetEl.style.setProperty('margin', '0')
+        $targetEl.style.setProperty('position', 'static')
 
-      if (targetElComputedStyle.transform !== 'none') {
-        const matrix = new DOMMatrixReadOnly(targetElComputedStyle.transform)
+        if (targetElComputedStyle.transform !== 'none') {
+          const matrix = new DOMMatrixReadOnly(targetElComputedStyle.transform)
 
-        $targetEl.style.setProperty('transform', matrix.translate(-matrix.e, -matrix.f).toString())
+          $targetEl.style.setProperty('transform', matrix.translate(-matrix.e, -matrix.f).toString())
+        }
+
+        /* Transfer target */
+        getFirstSlotElement(this.#$targetSlot)?.setAttribute('slot', 'target-open')
       }
 
-      /* Transfer target */
-      getFirstSlotElement(this.#$targetSlot)?.setAttribute('slot', 'target-open')
+      const activeSlot = this.allowScroll ? this.#$targetSlot : this.#$targetOpenSlot
 
       // Route keyboard events to content
-      this.#$targetOpenSlot.addEventListener('keydown', this.#onTargetKeydown)
+      activeSlot.addEventListener('keydown', this.#onTargetKeydown)
 
       if (this.#targetActiveElement !== null) {
-        this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
+        activeSlot.addEventListener('focus', this.#stopEventPropagation, true)
         this.#targetActiveElement.focus()
-        this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
+        activeSlot.removeEventListener('focus', this.#stopEventPropagation, true)
 
         // Safari requires to delay focus() call
         if (!isElementFocused(this.#targetActiveElement)) {
           requestAnimationFrame(() => {
             if (this.isDomConnected && this.#$dialog.open) {
-              this.#$targetOpenSlot.addEventListener('focus', this.#stopEventPropagation, true)
+              activeSlot.addEventListener('focus', this.#stopEventPropagation, true)
               this.#targetActiveElement!.focus()
-              this.#$targetOpenSlot.removeEventListener('focus', this.#stopEventPropagation, true)
+              activeSlot.removeEventListener('focus', this.#stopEventPropagation, true)
             }
           })
         }
       }
     }
 
-    disableOverscroll()
-    window.addEventListener('scroll', this.#updatePosition, { passive: false })
+    if (!this.allowScroll) {
+      disableOverscroll()
+    } else {
+      this.#scrollableParents = getScrollableParents(this.#getFirstTargetElement(this.#$targetSlot))
+      this.#scrollableParents.forEach((el) => {
+        el.addEventListener('scroll', this.#updatePosition, { passive: true, capture: true })
+      })
+    }
+
     window.addEventListener('resize', this.#onResize)
 
     // Subscribe after delay to not get immediate callbacks
@@ -326,16 +351,17 @@ export class Pop extends NectaryElement {
     this.#resizeObserver.disconnect()
 
     const isNonModal = !this.modal
+    const activeSlot = this.allowScroll ? this.#$targetSlot : this.#$targetOpenSlot
 
     /* Dispatch Visibility Context */
     this.#dispatchContentVisibility(false)
 
     // Unsubscribe keyboard route
-    this.#$targetOpenSlot.removeEventListener('keydown', this.#onTargetKeydown)
+    activeSlot.removeEventListener('keydown', this.#onTargetKeydown)
 
     // In non-modal mode we close dialog first and target element emits blur event
     if (isNonModal) {
-      this.#$targetOpenSlot.addEventListener('blur', this.#captureActiveElement, true)
+      activeSlot.addEventListener('blur', this.#captureActiveElement, true)
     }
 
     /* Close dialog */
@@ -344,11 +370,11 @@ export class Pop extends NectaryElement {
 
     // Unsubscribe "blur" capture
     if (isNonModal) {
-      this.#$targetOpenSlot.removeEventListener('blur', this.#captureActiveElement, true)
+      activeSlot.removeEventListener('blur', this.#captureActiveElement, true)
     }
 
     /* Restore target */
-    if (isNonModal) {
+    if (isNonModal && !this.allowScroll) {
       const targetEl = this.#getFirstTargetElement(this.#$targetOpenSlot)
 
       targetEl.style.removeProperty('margin')
@@ -392,10 +418,18 @@ export class Pop extends NectaryElement {
       }
     }
 
-    enableOverscroll()
+    if (!this.allowScroll) {
+      enableOverscroll()
+    } else {
+      this.#scrollableParents.forEach((el) => {
+        el.removeEventListener('scroll', this.#updatePosition, { capture: true })
+      })
+    }
+
     this.#resizeThrottle.cancel()
     window.removeEventListener('resize', this.#onResize)
-    window.removeEventListener('scroll', this.#updatePosition)
+
+    this.#scrollableParents = []
     this.#$contentSlot.removeEventListener('slotchange', this.#onContentSlotChange)
   }
 
@@ -404,7 +438,7 @@ export class Pop extends NectaryElement {
   }
 
   #updatePosition = () => {
-    const targetRect = this.modal
+    const targetRect = this.modal || this.allowScroll
       ? this.#getTargetRect()
       : this.#$targetWrapper.getBoundingClientRect()
     const orient = this.orientation
@@ -456,7 +490,7 @@ export class Pop extends NectaryElement {
     this.#$dialog.style.setProperty('left', `${clampedXPos}px`)
     this.#$dialog.style.setProperty('top', `${clampedYPos}px`)
 
-    if (!this.modal) {
+    if (!this.modal && !this.allowScroll) {
       const targetLeftPos = targetRect.x - clampedXPos
       const targetTopPos = targetRect.y - clampedYPos
 
@@ -520,7 +554,7 @@ export class Pop extends NectaryElement {
     this.#$dialog.style.setProperty('top', `${yPos}px`)
     this.#$dialog.style.setProperty('width', `${modalWidth}px`)
 
-    if (!this.modal) {
+    if (!this.modal && !this.allowScroll) {
       const targetLeftPos = targetRect.x - xPos
       const targetTopPos = targetRect.y - yPos
 
