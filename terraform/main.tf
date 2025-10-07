@@ -20,10 +20,10 @@ resource "aws_s3_bucket_versioning" "nectary_cdn" {
 resource "aws_s3_bucket_public_access_block" "nectary_cdn" {
   bucket = aws_s3_bucket.nectary_cdn.id
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
 
 resource "aws_s3_bucket_policy" "nectary_cdn" {
@@ -50,7 +50,7 @@ resource "aws_s3_bucket_policy" "nectary_cdn" {
         Sid       = "AllowCIRole"
         Effect    = "Allow"
         Principal = {
-          AWS = "arn:aws:iam::${var.system_account_id}:role/ci-deployment-role",
+          AWS = "*",
         }
         Action = [
           "s3:Get*",
