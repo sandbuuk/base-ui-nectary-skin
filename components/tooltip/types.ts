@@ -5,6 +5,12 @@ export type TSinchTooltipTextAlign = 'center' | 'right' | 'left'
 export type TSinchTooltipType = 'slow' | 'fast'
 
 export type TSinchTooltipProps = {
+  /*
+  * Property that allows to use the tooltip in controlled mode.
+  * If set, will force the open state to the prop's value. Otherwise if undefined use the default uncontrolled behavior
+  * Is a string to make sure we can explictly set it to 'false'
+  */
+  'is-opened'?: string,
   /** Text */
   text: string,
   /** Orientation, where it *points to* from origin */

@@ -1,4 +1,5 @@
 type TTooltipStateOptions = {
+  isOpened?: boolean | undefined,
   showDelay: number,
   hideDelay: number,
   hideAnimationDuration: number,
@@ -27,6 +28,10 @@ export class TooltipState {
   }
 
   show() {
+    if (this.#options.isOpened === false) {
+      return
+    }
+
     switch (this.#state) {
       case 'hide': {
         this.#switchToHideToShow()
@@ -42,6 +47,10 @@ export class TooltipState {
   }
 
   hide() {
+    if (this.#options.isOpened === true) {
+      return
+    }
+
     switch (this.#state) {
       case 'hide-to-show': {
         this.#onHideAnimationEnd()
@@ -107,6 +116,8 @@ export class TooltipState {
 
     if (this.#options.showDelay === 0) {
       this.#onSwitchToShow()
+    } else if (this.#options.isOpened !== undefined) {
+      this.#timerId = window.setTimeout(this.#onSwitchToShow, 100)
     } else {
       this.#timerId = window.setTimeout(this.#onSwitchToShow, this.#options.showDelay)
     }
@@ -115,7 +126,7 @@ export class TooltipState {
   #switchToShowToHide(skipDelay?: boolean, skipHideAnimation?: boolean) {
     this.#switchToState('show-to-hide')
 
-    if (skipDelay === true || this.#options.hideDelay === 0) {
+    if (skipDelay === true || this.#options.hideDelay === 0 || this.#options.isOpened !== undefined) {
       this.#onShowToHideEnd(skipHideAnimation)
     } else {
       this.#timerId = window.setTimeout(this.#onShowToHideEnd, this.#options.hideDelay)

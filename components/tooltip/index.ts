@@ -98,6 +98,7 @@ export class Tooltip extends NectaryElement {
 
   static get observedAttributes() {
     return [
+      'is-opened',
       'text',
       'orientation',
       'text-align',
@@ -146,7 +147,30 @@ export class Tooltip extends NectaryElement {
 
         break
       }
+
+      case 'is-opened': {
+        this.#tooltipState.updateOptions({
+          isOpened: this.isOpenedControlled,
+        })
+
+        if (this.isOpenedControlled === true) {
+          updateBooleanAttribute(this.#$pop, 'disable-backdrop-close', true)
+          this.#tooltipState.show()
+          // Explicitly check for false, because undefined means uncontrolled mode, so we don't want to force hide in that case
+        } else if (this.isOpenedControlled === false) {
+          updateBooleanAttribute(this.#$pop, 'disable-backdrop-close', false)
+
+          this.#tooltipState.hide()
+        }
+      }
     }
+  }
+
+  get isOpenedControlled() {
+    const isOpenedAttr = getAttribute(this, 'is-opened')
+
+    // Undefine/null means uncontrolled mode
+    return isOpenedAttr === null ? undefined : isOpenedAttr !== 'false'
   }
 
   get text() {
@@ -216,10 +240,12 @@ export class Tooltip extends NectaryElement {
 
   // Tooltip begins to wait for SHOW_DELAY on mouseenter
   #onStateShowStart = () => {
-    // Scroll interrupts SHOW_DELAY timer
-    this.#subscribeScroll()
-    // MouseLeave interrupts SHOW_DELAY timer
-    this.#subscribeMouseLeaveEvents()
+    if (this.isOpenedControlled === undefined) {
+      // Scroll interrupts SHOW_DELAY timer
+      this.#subscribeScroll()
+      // MouseLeave interrupts SHOW_DELAY timer
+      this.#subscribeMouseLeaveEvents()
+    }
   }
 
   // SHOW_DELAY ended, tooltip can be shown with animation

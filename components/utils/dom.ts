@@ -200,3 +200,37 @@ export const shouldReduceMotion = () => window.matchMedia('(prefers-reduced-moti
 export const isAttrEqual = (oldVal: string | null, newVal: string | null): boolean => {
   return oldVal === newVal || (newVal === null && oldVal === 'false') || (newVal === '' && oldVal === 'true')
 }
+
+export const getScrollableParents = (node: HTMLElement | null): (HTMLElement | Document)[] => {
+  const scrollableParents: (HTMLElement | Document)[] = []
+
+  if (node == null) {
+    return scrollableParents
+  }
+
+  let parent = node.parentElement
+
+  while (parent != null) {
+    const computedStyle = getComputedStyle(parent)
+
+    if (
+      (parent.scrollHeight > parent.clientHeight || parent.scrollWidth > parent.clientWidth) &&
+      (computedStyle.overflow === 'auto' ||
+        computedStyle.overflow === 'scroll' ||
+        computedStyle.overflowY === 'auto' ||
+        computedStyle.overflowY === 'scroll' ||
+        computedStyle.overflowX === 'auto' ||
+        computedStyle.overflowX === 'scroll')
+    ) {
+      scrollableParents.push(parent)
+    }
+
+    parent = parent.parentElement
+  }
+
+  // The document itself can be a scrollable container.
+  scrollableParents.push(document)
+
+  return scrollableParents
+}
+
