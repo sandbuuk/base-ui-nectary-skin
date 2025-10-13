@@ -24,7 +24,7 @@ export const BASE_ASSET_NAMES_LIST = [
   'icon-branded-chat',
   'icon-branded-chat-message',
   'icon-branded-chatbot',
-  'icon-branded-chatlayert',
+  'icon-branded-chatlayer',
   'icon-branded-cloud',
   'icon-branded-connection',
   'icon-branded-contact',
