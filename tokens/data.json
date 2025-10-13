@@ -4799,13 +4799,17 @@
         },
         "shape-radius": {
           "default": {
-            "value": "{sys.shape-radius.m}",
+            "value": "{comp.icon-channel.size} / 4",
             "type": "borderRadius"
           },
           "round": {
             "value": "{sys.shape-radius.full}",
             "type": "borderRadius"
           }
+        },
+        "size": {
+          "value": "{sys.size.l}",
+          "type": "sizing"
         }
       },
       "inline-alert": {

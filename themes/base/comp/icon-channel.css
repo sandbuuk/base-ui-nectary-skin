@@ -44,6 +44,7 @@
   --sinch-comp-icon-channel-color-whatsapp-layera: #FFFFFF;
   --sinch-comp-icon-channel-color-x-bg: linear-gradient(180deg, #000000 0%, #000000 100%);
   --sinch-comp-icon-channel-color-x-layera: #FFFFFF;
-  --sinch-comp-icon-channel-shape-radius-default: var(--sinch-sys-shape-radius-m);
+  --sinch-comp-icon-channel-shape-radius-default: var(--sinch-comp-icon-channel-size} / );
   --sinch-comp-icon-channel-shape-radius-round: var(--sinch-sys-shape-radius-full);
+  --sinch-comp-icon-channel-size: var(--sinch-sys-size-l);
 }
