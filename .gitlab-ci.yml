@@ -128,6 +128,7 @@ unit-tests:
       changes:
         - components/**/*
         - assets/**/*
+        - shared/**/*
         - tests/unit/**/*
         - tests/tsconfig.json
         - tests/playwright.config.ts
@@ -160,6 +161,7 @@ visual-tests:
         - themes/**/*
         - assets/**/*
         - components/**/*
+        - shared/**/*
         - fonts/**/*
   parallel:
     matrix:
@@ -194,8 +196,20 @@ publish-dry-run:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - when: never
   script:
+    - set -o pipefail
     - pnpm -r --filter='!docs*' --filter='!wrappers*' run build
-    - pnpm run dry-run
+    - |
+      touch $CI_PROJECT_DIR/published.txt
+      pnpm run dry-run 2>&1 | tee /tmp/msr_output.txt
+      sed -nE 's/.*\[([^]]+)\].*Published release ([^ ]+).*/\1 \2/p' /tmp/msr_output.txt > $CI_PROJECT_DIR/published.txt
+      [ -s $CI_PROJECT_DIR/published.txt ] || echo "No releases to publish" > $CI_PROJECT_DIR/published.txt
+      cat $CI_PROJECT_DIR/published.txt
+  artifacts:
+    when: always
+    paths:
+      - published.txt
+      - components
+      - assets
 
 publish:
   extends:
@@ -211,8 +225,7 @@ publish:
     - apt-get install -y git git-lfs
     - git lfs update --force
     - git lfs install
-    - MSR_OUT="$(pnpm run release 2>&1)"; MSR_STATUS=$?; echo "$MSR_OUT"; [ $MSR_STATUS -eq 0 ] || exit $MSR_STATUS
-    - echo "$MSR_OUT" | sed -nE 's/.*\[([^]]+)\].*Published release ([^ ]+).*/\1 \2/p' > published.txt
+    - pnpm run release
   artifacts:
     when: always
     paths:

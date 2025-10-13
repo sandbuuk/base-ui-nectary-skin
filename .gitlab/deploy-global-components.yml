@@ -1,51 +1,167 @@
 variables:
-  TF_ROOT: terraform
-  REGION: eu-north-1
-  TF_VAR_region: $REGION
-  TF_VAR_bucket_name: nectary-global-components
-  TF_VAR_system_account_id: 767006020294
-  AWS_ROLE_ARN: arn:aws:iam::767006020294:role/nectary-components-ci-access
-  AWS_WEB_IDENTITY_TOKEN_FILE: $RUNNER_TEMP_PROJECT_DIR/aws-web-identity-token-file
-  AWS_ROLE_SESSION_NAME: GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}
+  BUCKET_ID: nectary-components
 
-.authenticate_aws:
+.deploy_base:
+  stage: deploy
+  image:
+    name: public.ecr.aws/aws-cli/aws-cli:latest
+    entrypoint: [""]
   id_tokens:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
   before_script:
     - echo $GITLAB_OIDC_TOKEN > $AWS_WEB_IDENTITY_TOKEN_FILE
-
-deploy-global-components:
-  stage: deploy
-  image:
-    name: public.ecr.aws/aws-cli/aws-cli:latest
-    entrypoint: [""]
-  extends:
-    - .authenticate_aws
-  needs:
-    - publish
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
+    ACCOUNT: 953094423485
+    AWS_ROLE_ARN: arn:aws:iam::$ACCOUNT:role/ci-deployment-role
+    AWS_WEB_IDENTITY_TOKEN_FILE: $RUNNER_TEMP_PROJECT_DIR/aws-web-identity-token-file
+    AWS_ROLE_SESSION_NAME: "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+    AWS_DEFAULT_REGION: ap-southeast-2
+
+.deploy_dry_run:
+  extends: .deploy_base
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - when: never
+  needs:
+    - job: publish-dry-run
+      artifacts: true
+
+.deploy:
+  extends: .deploy_base
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - when: never
+  needs:
+    - job: publish
+      artifacts: true
+
+deploy-global-components-dry-run:
+  extends: .deploy_dry_run
   script:
-    - BUCKET_ID='nectary-global-components'
     - |
-      if [ ! -s published.txt ]; then
-        echo "No published packages to deploy"
+      COMPONENTS_VERSION=$(grep "@nectary/components" published.txt | awk '{print $2}' || true)
+      if [ -z "$COMPONENTS_VERSION" ]; then
+        echo "No new published version of @nectary/components, skipping."
         exit 0
       fi
+
+      echo "Components version: $COMPONENTS_VERSION"
+
+      # Upload versioned files
+      aws s3 sync components/ s3://nectary-components/components/$COMPONENTS_VERSION \
+        --exclude "**/node_modules/*" \
+        --exclude "**/*.ts" \
+        --include "**/*.d.ts" \
+        --no-progress \
+        --delete \
+        --dry-run || exit_code=$?
+
+      if [ $exit_code -ne 0 ]; then
+        echo "Sync completed with warnings (exit code $exit_code)"
+        exit 0
+      fi
+
+deploy-global-components:
+  extends: .deploy
+  script:
     - |
-      while read -r NAME VERSION; do
-        [ -z "$NAME" ] && continue
-        PKG_DIR=$(printf "%s" "$NAME" | sed -E 's/^@[^\/]+\///')
-        SRC_DIR="$PKG_DIR"
-        if [ ! -d "$SRC_DIR" ]; then
-          echo "Skip $NAME@$VERSION: missing directory $SRC_DIR"
-          continue
-        fi
-        echo "Uploading $SRC_DIR to s3://$BUCKET_ID/$PKG_DIR/$VERSION/"
-        aws s3 sync "$SRC_DIR/" "s3://$BUCKET_ID/$PKG_DIR/$VERSION/" --delete
-      done < published.txt
+      COMPONENTS_VERSION=$(grep "@nectary/components" published.txt | awk '{print $2}' || true)
+      if [ -z "$COMPONENTS_VERSION" ]; then
+        echo "No new published version of @nectary/components, skipping."
+        exit 0
+      fi
 
+      # Upload versioned files
+      aws s3 sync components/ s3://nectary-components/components/$COMPONENTS_VERSION \
+        --exclude "**/node_modules/*" \
+        --exclude "**/*.ts" \
+        --include "**/*.d.ts" \
+        --no-progress \
+        --delete || exit_code=$?
 
+      if [ $exit_code -ne 0 ]; then
+        echo "Sync completed with warnings (exit code $exit_code)"
+        exit 0
+      fi
+
+      # Update 'latest' pointer
+      echo "Updating 'latest' pointer to $COMPONENTS_VERSION"
+      aws s3 sync components/ s3://nectary-components/components/latest \
+        --exclude "**/node_modules/*" \
+        --exclude "**/*.ts" \
+        --include "**/*.d.ts" \
+        --no-progress \
+        --delete || exit_code=$?
+
+      if [ $exit_code -ne 0 ]; then
+        echo "Latest sync completed with warnings (exit code $exit_code)"
+      fi
+
+      echo "Components $COMPONENTS_VERSION deployed!"
+
+deploy-global-assets-dry-run:
+  extends: .deploy_dry_run
+  script:
+    - |
+      ASSETS_VERSION=$(grep "@nectary/assets" published.txt | awk '{print $2}' || true)
+      if [ -z "$ASSETS_VERSION" ]; then
+        echo "No new published version of @nectary/assets, skipping."
+        exit 0
+      fi
+
+      echo "Assets version: $ASSETS_VERSION"
+
+      # Upload versioned files
+      aws s3 sync assets/ s3://nectary-components/assets/$ASSETS_VERSION \
+        --exclude "**/node_modules/*" \
+        --exclude "**/*.ts" \
+        --include "**/*.d.ts" \
+        --no-progress \
+        --delete \
+        --dry-run || exit_code=$?
+
+      if [ $exit_code -ne 0 ]; then
+        echo "Sync completed with warnings (exit code $exit_code)"
+        exit 0
+      fi
+
+deploy-global-assets:
+  extends: .deploy
+  script:
+    - |
+      ASSETS_VERSION=$(grep "@nectary/assets" published.txt | awk '{print $2}' || true)
+      if [ -z "$ASSETS_VERSION" ]; then
+        echo "No new published version of @nectary/assets, skipping."
+        exit 0
+      fi
+
+      # Upload versioned files
+      aws s3 sync assets/ s3://nectary-components/assets/$ASSETS_VERSION \
+        --exclude "**/node_modules/*" \
+        --exclude "**/*.ts" \
+        --include "**/*.d.ts" \
+        --no-progress \
+        --delete || exit_code=$?
+
+      if [ $exit_code -ne 0 ]; then
+        echo "Sync completed with warnings (exit code $exit_code)"
+        exit 0
+      fi
+
+      # Update 'latest' pointer
+      echo "Updating 'latest' pointer to $ASSETS_VERSION"
+      aws s3 sync assets/ s3://nectary-components/assets/latest \
+        --exclude "**/node_modules/*" \
+        --exclude "**/*.ts" \
+        --include "**/*.d.ts" \
+        --no-progress \
+        --delete || exit_code=$?
+
+      if [ $exit_code -ne 0 ]; then
+        echo "Latest sync completed with warnings (exit code $exit_code)"
+      fi
+
+      echo "Assets $ASSETS_VERSION deployed!"

@@ -151,6 +151,7 @@ test('emoji picker screenshots', runScreenshotTests('sinch-emoji-picker', [
 
       await page.mouse.click(tonePt.x, tonePt.y)
       await page.mouse.move(0, 0)
+      await page.waitForTimeout(100)
 
       yield { name: '3-skin-selected' }
 
