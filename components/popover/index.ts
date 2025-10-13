@@ -66,7 +66,7 @@ export class Popover extends NectaryElement {
     const popoverIdReference = `popover-${new Date().getMilliseconds()}-${Math.round(100 * Math.random())}`
 
     if ((slottedContent != null) && (slottedTarget != null)) {
-      updateAttribute(slottedContent, 'aria-lablledby', popoverIdReference)
+      updateAttribute(slottedContent, 'aria-labelledby', popoverIdReference)
     }
 
     if (slottedTarget != null) {

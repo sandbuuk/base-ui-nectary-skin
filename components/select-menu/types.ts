@@ -11,6 +11,8 @@ export type TSinchSelectMenuProps = {
   multiple?: boolean,
   /** Enforce the search bar appearing, by default it appears above a certain number of options  */
   searchable?: boolean | null,
+  /** Value for the search input */
+  'search-value'?: string,
   /** Controls the autocomplete of the search input */
   'search-autocomplete'?: HTMLInputElement['autocomplete'],
   /** Text for search bar's placeholder */

@@ -2,21 +2,21 @@ import { defineCustomElement } from '../../../utils/element'
 import type { TSinchIconBrandedElement, TSinchIconBrandedReact, TSinchIconBrandedProps } from '../../types'
 
 export * from '../../types'
-defineCustomElement('sinch-icon-branded-chatlayert')
+defineCustomElement('sinch-icon-branded-chatlayer')
 declare global {
   interface NectaryComponentMap {
-    'sinch-icon-branded-chatlayert': {
+    'sinch-icon-branded-chatlayer': {
       props: TSinchIconBrandedProps,
     },
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-icon-branded-chatlayert': TSinchIconBrandedElement,
+    'sinch-icon-branded-chatlayer': TSinchIconBrandedElement,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-icon-branded-chatlayert': TSinchIconBrandedReact,
+      'sinch-icon-branded-chatlayer': TSinchIconBrandedReact,
     }
   }
 }
@@ -24,7 +24,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-icon-branded-chatlayert': TSinchIconBrandedReact,
+      'sinch-icon-branded-chatlayer': TSinchIconBrandedReact,
     }
   }
 }

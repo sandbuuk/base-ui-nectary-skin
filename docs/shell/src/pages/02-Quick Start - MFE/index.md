@@ -84,7 +84,7 @@ import '@nectary/components/button'
 Use it in React/Vue/Angular/etc, for example:
 
 ```jsx
-<sinch-button value="Click me" aria-label="Submit button" on-click={() => console.log('click')}></sinch-button>
+<sinch-button text="Click me" aria-label="Submit button" on-click={() => console.log('click')}></sinch-button>
 ```
 
 ⚠️ Note that it's not allowed to self-close custom element tags.

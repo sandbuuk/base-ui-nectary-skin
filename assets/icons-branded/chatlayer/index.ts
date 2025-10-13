@@ -5,23 +5,23 @@ import type { TSinchIconBrandedElement, TSinchIconBrandedReact, TSinchIconBrande
 
 export * from '../types'
 
-export const IconBrandedChatlayert = createIconClass(templateHTML)
-defineCustomElement('sinch-icon-branded-chatlayert', IconBrandedChatlayert)
+export const IconBrandedChatlayer = createIconClass(templateHTML)
+defineCustomElement('sinch-icon-branded-chatlayer', IconBrandedChatlayer)
 
 declare global {
   interface NectaryComponentMap {
-    'sinch-icon-branded-chatlayert': {
+    'sinch-icon-branded-chatlayer': {
       props: TSinchIconBrandedProps,
     },
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-icon-branded-chatlayert': TSinchIconBrandedElement,
+    'sinch-icon-branded-chatlayer': TSinchIconBrandedElement,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-icon-branded-chatlayert': TSinchIconBrandedReact,
+      'sinch-icon-branded-chatlayer': TSinchIconBrandedReact,
     }
   }
 }
@@ -29,7 +29,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-icon-branded-chatlayert': TSinchIconBrandedReact,
+      'sinch-icon-branded-chatlayer': TSinchIconBrandedReact,
     }
   }
 }
