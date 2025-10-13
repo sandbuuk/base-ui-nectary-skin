@@ -216,6 +216,8 @@ publish:
     - .publish-base
   needs:
     - publish-dry-run
+  dependencies:
+    - publish-dry-run
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - when: never
@@ -226,12 +228,6 @@ publish:
     - git lfs update --force
     - git lfs install
     - pnpm run release
-  artifacts:
-    when: always
-    paths:
-      - published.txt
-      - components
-      - assets
 
 preview:
   stage: docs
