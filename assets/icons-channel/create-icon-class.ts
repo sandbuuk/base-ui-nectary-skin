@@ -7,8 +7,6 @@ import {
 import iconStylesHtml from './icon-styles.html?raw'
 
 const DEFAULT_SIZE = 48
-const MIN_SIZE = 4
-const MAX_SIZE = 256
 
 export const createIconClass = (templateHTML: string): CustomElementConstructor => {
   const template = document.createElement('template')
@@ -48,7 +46,7 @@ export const createIconClass = (templateHTML: string): CustomElementConstructor 
     attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
       switch (name) {
         case 'size': {
-          this.$svg.style.height = attrValueToPixels(newVal, { min: MIN_SIZE, max: MAX_SIZE })
+          this.style.setProperty('--sinch-comp-icon-channel-size', attrValueToPixels(newVal))
 
           break
         }

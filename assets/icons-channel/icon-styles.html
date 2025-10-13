@@ -1,8 +1,9 @@
 <style>
   :host {
+    --sinch-comp-icon-channel-shape-radius: calc(var(--sinch-comp-icon-channel-size, 48px) / 4);
     display: inline-block;
     vertical-align: middle;
-    border-radius: calc(var(--sinch-comp-icon-channel-size, 48px) / 4)
+    border-radius: var(--sinch-comp-icon-channel-shape-radius, 12px)
   }
 
   svg {
