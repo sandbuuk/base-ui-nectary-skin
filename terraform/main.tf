@@ -50,7 +50,7 @@ resource "aws_s3_bucket_policy" "nectary_cdn" {
         Sid       = "AllowCIRole"
         Effect    = "Allow"
         Principal = {
-          AWS = "arn:aws:iam::${var.system_account_id}:role/nectary-components-ci-access"
+          AWS = "arn:aws:iam::${var.system_account_id}:role/ci-deployment-role"
         }
         Action = [
           "s3:Get*",
@@ -110,11 +110,29 @@ resource "aws_cloudfront_distribution" "nectary_cdn" {
     }
 
     min_ttl     = 0
-    default_ttl = 86400
-    max_ttl     = 86400
+    default_ttl = 86400 # 24 hours
+    max_ttl     = 86400 # 24 hours
   }
 
-  # Removed JS-specific ordered_cache_behavior; default behavior now caches for 24 hours
+  ordered_cache_behavior {
+    path_pattern     = "*/latest/*"
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "S3-nectary-cdn"
+    compress         = true
+    viewer_protocol_policy = "redirect-to-https"
+
+    forwarded_values {
+      query_string = false
+      cookies {
+        forward = "none"
+      }
+    }
+
+    min_ttl                = 0
+    default_ttl            = 300 # 5 minutes
+    max_ttl                = 3600 # 1 hour
+  }
 
   price_class = "PriceClass_100"
 
