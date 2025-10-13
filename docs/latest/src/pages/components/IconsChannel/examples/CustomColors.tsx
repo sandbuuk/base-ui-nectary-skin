@@ -6,9 +6,9 @@ import '@nectary/assets/icons-channel/mms-round'
 export const CustomColorsExample: FC = () => {
   const customColors: CSSProperties = {
     '--sinch-comp-icon-channel-color-instagram-bg': 'orange',
-    '--sinch-comp-icon-channel-color-instagram-layera': '#ff0073',
+    '--sinch-comp-icon-channel-color-instagram-layera': '#e50067',
 
-    '--sinch-comp-icon-channel-color-apple-business-chat-bg': 'linear-gradient(135deg, #00A2E8 0%, #4CD964 100%)',
+    '--sinch-comp-icon-channel-color-apple-business-chat-bg': 'linear-gradient(135deg, #00c3ff 0%, #0fda31 100%)',
     '--sinch-comp-icon-channel-color-apple-business-chat-layera': '#006356',
 
     '--sinch-comp-icon-channel-color-mms-bg': '#6fcaff',
