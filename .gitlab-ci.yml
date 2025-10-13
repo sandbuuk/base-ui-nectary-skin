@@ -228,6 +228,9 @@ publish:
     - git lfs update --force
     - git lfs install
     - pnpm run release
+  artifacts:
+    paths:
+      - published.txt
 
 preview:
   stage: docs

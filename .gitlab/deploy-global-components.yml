@@ -51,13 +51,14 @@ deploy-global-components-dry-run:
       echo "Components version: $COMPONENTS_VERSION"
 
       # Upload versioned files
+      exit_code=0
       aws s3 sync components/ s3://nectary-components/components/$COMPONENTS_VERSION \
         --exclude "**/node_modules/*" \
         --exclude "**/*.ts" \
         --include "**/*.d.ts" \
         --no-progress \
         --delete \
-        --dry-run || exit_code=$?
+        --dryrun || exit_code=$?
 
       if [ $exit_code -ne 0 ]; then
         echo "Sync completed with warnings (exit code $exit_code)"
@@ -75,6 +76,7 @@ deploy-global-components:
       fi
 
       # Upload versioned files
+      exit_code=0
       aws s3 sync components/ s3://nectary-components/components/$COMPONENTS_VERSION \
         --exclude "**/node_modules/*" \
         --exclude "**/*.ts" \
@@ -115,13 +117,14 @@ deploy-global-assets-dry-run:
       echo "Assets version: $ASSETS_VERSION"
 
       # Upload versioned files
+      exit_code=0
       aws s3 sync assets/ s3://nectary-components/assets/$ASSETS_VERSION \
         --exclude "**/node_modules/*" \
         --exclude "**/*.ts" \
         --include "**/*.d.ts" \
         --no-progress \
         --delete \
-        --dry-run || exit_code=$?
+        --dryrun || exit_code=$?
 
       if [ $exit_code -ne 0 ]; then
         echo "Sync completed with warnings (exit code $exit_code)"
@@ -139,6 +142,7 @@ deploy-global-assets:
       fi
 
       # Upload versioned files
+      exit_code=0
       aws s3 sync assets/ s3://nectary-components/assets/$ASSETS_VERSION \
         --exclude "**/node_modules/*" \
         --exclude "**/*.ts" \
