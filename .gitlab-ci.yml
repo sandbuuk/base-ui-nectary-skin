@@ -231,6 +231,8 @@ publish:
   artifacts:
     paths:
       - published.txt
+      - components
+      - assets
 
 preview:
   stage: docs
