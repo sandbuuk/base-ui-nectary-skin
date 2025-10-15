@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { GlobalElementsManager } from '@nectary/shared'
 import { BASE_ASSET_NAMES, NAME_TO_PATH_MAP } from './asset-names'
-import { ASSETS_CDN_URL, ASSETS_REGISTRY_URL, ASSETS_STORE_KEY } from './global-assets-constants'
+import { ASSETS_REGISTRY_URL, ASSETS_STORE_KEY } from './global-assets-constants'
 
 class GlobalAssetsManagerImpl extends GlobalElementsManager {
   private static instance: GlobalAssetsManagerImpl | null = null
@@ -10,7 +10,6 @@ class GlobalAssetsManagerImpl extends GlobalElementsManager {
     super({
       storeKey: ASSETS_STORE_KEY,
       registryUrl: ASSETS_REGISTRY_URL,
-      cdnUrl: ASSETS_CDN_URL,
       baseElementNames: BASE_ASSET_NAMES,
       nameToPathMap: NAME_TO_PATH_MAP,
     })

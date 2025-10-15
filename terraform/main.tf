@@ -101,6 +101,7 @@ resource "aws_cloudfront_distribution" "nectary_cdn" {
     target_origin_id       = "S3-nectary-cdn"
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
+    response_headers_policy_id = "60669652-455b-4ae9-85a4-c4c02393f86c" # SimpleCORS
 
     forwarded_values {
       query_string = false
@@ -121,6 +122,7 @@ resource "aws_cloudfront_distribution" "nectary_cdn" {
     target_origin_id = "S3-nectary-cdn"
     compress         = true
     viewer_protocol_policy = "redirect-to-https"
+    response_headers_policy_id = "60669652-455b-4ae9-85a4-c4c02393f86c" # SimpleCORS
 
     forwarded_values {
       query_string = false

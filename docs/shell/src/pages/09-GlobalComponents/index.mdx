@@ -25,7 +25,7 @@ Global Components solves this by ensuring that every MFE resolves the components
 
 <img className="image" width="640" src={afterImage} alt="After"/>
 
-Here, the first time `sinch-button` is requested, it loads the latest version directly from the CDN. This ensures that every MFE always gets the same or a newer version of the component, preventing version conflicts. To support this, Nectary maintains backwards compatibility and avoids introducing breaking changes in future releases.
+Here, the first time `sinch-button` is requested, it loads the latest version directly from the CDN. This ensures that every MFE always gets the same or a newer version of the component, preventing version conflicts. To support this, Nectary maintains forwards compatibility and avoids introducing breaking changes in future releases.
 
 Because components are loaded on demand, you may notice a brief flicker the first time a component is used. To prevent this, the Host application can preload all components so they are ready and available as soon as an MFE loads.
 

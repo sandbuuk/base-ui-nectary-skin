@@ -2,7 +2,7 @@
 // The host applicatin should import this file from "@nectary/components/utils/global-components-manager"
 import { GlobalElementsManager } from '@nectary/shared'
 import { BASE_COMPONENT_NAMES } from './component-names'
-import { COMPONENTS_CDN_URL, COMPONENTS_REGISTRY_URL, COMPONENTS_STORE_KEY } from './global-components-constants'
+import { COMPONENTS_REGISTRY_URL, COMPONENTS_STORE_KEY } from './global-components-constants'
 
 class GlobalComponentsManagerImpl extends GlobalElementsManager {
   private static instance: GlobalComponentsManagerImpl | null = null
@@ -11,7 +11,6 @@ class GlobalComponentsManagerImpl extends GlobalElementsManager {
     super({
       storeKey: COMPONENTS_STORE_KEY,
       registryUrl: COMPONENTS_REGISTRY_URL,
-      cdnUrl: COMPONENTS_CDN_URL,
       baseElementNames: BASE_COMPONENT_NAMES,
     })
   }
