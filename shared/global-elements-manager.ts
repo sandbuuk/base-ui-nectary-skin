@@ -5,50 +5,29 @@ import type { NectaryElementBase, SinchElementName } from './nectary-element-bas
 interface GlobalManagerConfig {
   storeKey: symbol,
   registryUrl: string,
-  cdnUrl: string,
   baseElementNames: Set<string>,
   nameToPathMap?: Map<string, string>,
 }
 
 interface GlobalManagerInitOptions {
   /**
-   * If components should be preloaded from the bundle module (nectary/components/bundle) (Not supported for nectary/assets).
-   *
-   * When preload is true:
-   *
-   * targetlibVersion will only work since v5 of nectary/components and v3 of nectary/assets.
-   *
-   * parchPreviousVersions will have no effect since its not needed.
-   *
-   * fallbackLoaderBundle will be used instead of fallbackLoader
+   * URL to resolve the modules from
+   */
+  cdnUrl: string,
+  /**
+   * Fallback URL to resolve the modules from if `cdnUrl` fails
+   */
+  fallbackCdnUrl?: string,
+  /**
+   * Preloads all components from the bundle.js module
    */
   preload?: boolean,
   /**
-   * Target version of the library to resolve the constructor from the CDN.
+   * Target version of the library to resolve
    *
-   * If left unspecified, it will resolve to the latest version.
+   * If left unspecified, it will resolve to the latest version
    */
   targetlibVersion?: string,
-  /**
-   * If previous versions of Nectary should opt in to using Global Components.
-   *
-   * @default true
-   */
-  patchPerviousVersions?: boolean,
-  /**
-   * Fallback loader if the CDN fails.
-   */
-  fallbackLoader?: (name: string) => Promise<any>,
-  /**
-   * Should be used like this:
-   *
-   * fallbackLoaderBundle: () => import("@nectary/components/bundle")
-   */
-  fallbackLoaderBundle?: () => Promise<any>,
-  /**
-   * Constructors will be resolved from fallback directly and CDN will not be used.
-   */
-  useFallbackExclusively?: boolean,
 }
 
 export abstract class GlobalElementsManager {
@@ -108,26 +87,25 @@ export abstract class GlobalElementsManager {
       .join('')
   }
 
-  private async loadModuleWithFallback<TModule = Record<string, any>>(
-    importPath: string,
-    fallbackThunk?: (() => Promise<TModule>) | null,
-    useFallbackExclusively: boolean = false
-  ): Promise<TModule> {
-    if (useFallbackExclusively && fallbackThunk != null) {
-      return fallbackThunk()
-    }
+  private async loadModuleWithFallback<TModule = Record<string, any>>(modulePath: string): Promise<TModule> {
+    const store = getStore(this.config.storeKey)
+
+    const importPath = this.getImportPath(store.cdnUrl, modulePath)!
+    const fallbackImportPath = this.getImportPath(store.fallbackCdnUrl, modulePath)
 
     try {
       const module = await import(/* webpackIgnore: true */ importPath)
 
       return module as TModule
     } catch (error) {
-      if (fallbackThunk != null) {
+      if (fallbackImportPath !== null) {
         try {
-          return fallbackThunk()
+          const fallbackModule = await import(/* webpackIgnore: true */ fallbackImportPath)
+
+          return fallbackModule as TModule
         } catch (fallbackError) {
           console.error(`Nectary Primary load failed: ${importPath}`, error)
-          console.error(`Nectary fallback load failed:`, fallbackError)
+          console.error(`Nectary fallback load failed: ${fallbackImportPath}`, fallbackError)
           throw fallbackError
         }
       }
@@ -137,19 +115,15 @@ export abstract class GlobalElementsManager {
     }
   }
 
-  private createLoader(importPath: string, itemName: string, fallbackLoader?: (name: string) => Promise<any>, useFallbackExclusively: boolean = false) {
+  private createLoader(modulePath: string, itemName: string) {
     return async () => {
-      const module = await this.loadModuleWithFallback(
-        importPath,
-        (fallbackLoader != null) ? () => fallbackLoader(itemName) : null,
-        useFallbackExclusively
-      )
+      const module = await this.loadModuleWithFallback(modulePath)
 
       const className = this.toClassName(itemName)
       const globalConstructor = module[className] as typeof NectaryElementBase | undefined
 
       if (globalConstructor == null) {
-        throw new Error(`Nectary element ${className} not found in module: ${importPath}`)
+        throw new Error(`Nectary element ${className} not found in module`)
       }
 
       globalConstructor.isGlobal = true
@@ -158,14 +132,10 @@ export abstract class GlobalElementsManager {
     }
   }
 
-  private async preloadBundle(importPath: string, fallbackLoaderBundle?: () => Promise<any>, useFallbackExclusively: boolean = false) {
+  private async preloadBundle() {
     const store = getStore(this.config.storeKey)
 
-    const module = await this.loadModuleWithFallback(
-      importPath,
-      fallbackLoaderBundle,
-      useFallbackExclusively
-    )
+    const module = await this.loadModuleWithFallback('bundle')
 
     for (const itemName of this.config.baseElementNames) {
       const className = this.toClassName(itemName)
@@ -173,7 +143,7 @@ export abstract class GlobalElementsManager {
       const globalConstructor = module[className] as typeof NectaryElementBase | undefined
 
       if (globalConstructor == null) {
-        console.error(`Nectary element ${className} not found in module: ${importPath}`)
+        console.error(`Nectary element ${className} not found in module`)
         continue
       }
 
@@ -186,7 +156,7 @@ export abstract class GlobalElementsManager {
     }
   }
 
-  public async init(options: GlobalManagerInitOptions = {}) {
+  public async init(options: GlobalManagerInitOptions) {
     const store = getStore(this.config.storeKey)
 
     if (store.hasInitialized) {
@@ -196,48 +166,37 @@ export abstract class GlobalElementsManager {
     }
 
     store.hasInitialized = true
+    store.cdnUrl = options.cdnUrl
+    store.fallbackCdnUrl = options.fallbackCdnUrl ?? ''
+    store.targetlibVersion = options.targetlibVersion ?? ''
     store.preload = options.preload ?? false
-    store.patchPerviousVersions = options.patchPerviousVersions ?? true
-    store.useFallbackExclusively = options.useFallbackExclusively ?? false
 
     try {
       if (store.preload) {
-        const version = options.targetlibVersion
-
-        store.targetlibVersion = version ?? store.targetlibVersion
-
-        const importPath = version != null
-          ? `${this.config.cdnUrl}@${version}/es2022/bundle.mjs`
-          : `${this.config.cdnUrl}/bundle`
-
-        await this.preloadBundle(importPath, options.fallbackLoaderBundle, store.useFallbackExclusively)
+        await this.preloadBundle()
       } else {
-        if (store.patchPerviousVersions) {
-          this.patchCustomElements()
+        this.patchCustomElements()
+
+        const setDefinitions = () => {
+          this.config.baseElementNames.forEach((name: string) => {
+            const modulePath = this.getModulePath(name)
+
+            store.definitions.set(`sinch-${name}`, this.createLoader(modulePath, name))
+          })
         }
 
         // Initial loaders with un-versioned importPath (automatically resolves to latest module but takes 2 requests)
-        this.config.baseElementNames.forEach((name: string) => {
-          const importPath = `${this.config.cdnUrl}/${this.getImportPathFromName(name)}`
+        setDefinitions()
 
-          store.definitions.set(`sinch-${name}`, this.createLoader(importPath, name, options.fallbackLoader, store.useFallbackExclusively))
-        })
-
-        if (options.targetlibVersion != null) {
-          store.targetlibVersion = options.targetlibVersion
-        } else {
+        if (store.targetlibVersion.length === 0) {
           const registry = await fetch(`${this.config.registryUrl}/latest`)
           const registryData = await registry.json()
 
           store.targetlibVersion = registryData.version
         }
 
-        // Overwrite the loaders with versioned importPath so it only takes one request to resolve modules
-        this.config.baseElementNames.forEach((name: string) => {
-          const importPath = `${this.config.cdnUrl}@${store.targetlibVersion}/es2022/${this.getImportPathFromName(name)}.mjs`
-
-          store.definitions.set(`sinch-${name}`, this.createLoader(importPath, name, options.fallbackLoader, store.useFallbackExclusively))
-        })
+        // Overwrites the loaders with versioned importPath so it only takes one request to resolve modules
+        setDefinitions()
       }
     } finally {
       store.loadPromise.resolve()
@@ -250,7 +209,30 @@ export abstract class GlobalElementsManager {
     return store.loadPromise.promise
   }
 
-  private getImportPathFromName(name: string): string {
+  private getImportPath(cdnUrl: string, modulePath: string): string | null {
+    if (cdnUrl.length === 0) {
+      return null
+    }
+
+    const store = getStore(this.config.storeKey)
+    const host = new URL(cdnUrl).host
+
+    if (host === 'esm.sh') {
+      if (store.targetlibVersion.length !== 0) {
+        return `${cdnUrl}@${store.targetlibVersion}/es2022/${modulePath}.mjs`
+      }
+
+      return `${cdnUrl}/${modulePath}`
+    }
+
+    if (store.targetlibVersion.length !== 0) {
+      return `${cdnUrl}/${store.targetlibVersion}/${modulePath}.js`
+    }
+
+    return `${cdnUrl}/latest/${modulePath}.js`
+  }
+
+  private getModulePath(name: string): string {
     for (const [key, value] of this.config.nameToPathMap ?? []) {
       const splittedName = name.startsWith(key) ? name.split(key) : [name]
 

@@ -6,9 +6,9 @@ interface GlobalStore {
   definitions: Map<SinchElementName, () => Promise<any>>,
   hasInitialized: boolean,
   targetlibVersion: string,
-  patchPerviousVersions: boolean,
-  useFallbackExclusively: boolean,
   preload: boolean,
+  cdnUrl: string,
+  fallbackCdnUrl: string,
   loadPromise: {
     promise: Promise<void>,
     resolve: (value: void) => void,
@@ -33,8 +33,8 @@ export const getStore = (storeKey: symbol): GlobalStore => {
     definitions: new Map(),
     hasInitialized: false,
     targetlibVersion: '',
-    patchPerviousVersions: false,
-    useFallbackExclusively: false,
+    cdnUrl: '',
+    fallbackCdnUrl: '',
     preload: false,
     loadPromise: createDeferredPromise(),
   }
