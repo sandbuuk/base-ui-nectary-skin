@@ -76,6 +76,7 @@ export const sinchIconNames: TSinchIcons[] = ['ai-speech-bubble-dots-horizontal-
   'envelope-clock',
   'envelope-open',
   'envelope',
+  'eye-slash',
   'eye',
   'fa-0',
   'fa-00',
