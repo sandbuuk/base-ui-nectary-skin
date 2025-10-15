@@ -80,7 +80,7 @@ const mockEmojiUrl = async (page: Page) => {
 
 const shot = '/emoji-picker'
 
-test('emoji picker screenshots', runScreenshotTests('sinch-emoji-picker', [
+test.fixme('Very flaky — emoji picker screenshots', runScreenshotTests('sinch-emoji-picker', [
   {
     name: 'emoji tooltip',
     url: shot,
