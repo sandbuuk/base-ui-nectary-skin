@@ -19,6 +19,12 @@ export type TSinchTooltipProps = {
   type?: TSinchTooltipType,
   /** Text Align */
   'text-align'?: TSinchTooltipTextAlign,
+  /*
+  * Whether or not the tooltip should be displayed in the case it is outside the viewport
+  * If not present, this defaults to false, which should cover most common use cases
+  * Note that this does not force it open/closed when it goes outside the viewport, this only affects cases where it was supposed to open in the first place (i.e is-opened=true or hover)
+  */
+  'show-outside-viewport'?: boolean,
   readonly footprintRect?: TRect,
   readonly tooltipRect?: TRect,
 }
