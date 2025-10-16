@@ -12,6 +12,7 @@ import {
   rectOverlap,
   getReactEventHandler,
   shouldReduceMotion,
+  getBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html?raw'
 import { TooltipState } from './tooltip-state'
@@ -86,6 +87,7 @@ export class Tooltip extends NectaryElement {
     this.addEventListener('-hide', this.#onHideReactHandler, options)
 
     updateAttribute(this.#$pop, 'orientation', getPopOrientation(this.orientation))
+    updateBooleanAttribute(this.#$pop, 'hide-outside-viewport', !this.showOutsideViewport)
     this.#updateText()
   }
 
@@ -105,6 +107,7 @@ export class Tooltip extends NectaryElement {
       'type',
       'aria-label',
       'aria-description',
+      'show-outside-viewport',
     ]
   }
 
@@ -148,6 +151,13 @@ export class Tooltip extends NectaryElement {
         break
       }
 
+      case 'show-outside-viewport': {
+        console.log(`UPDATING TO ${this.showOutsideViewport}`)
+        updateBooleanAttribute(this.#$pop, 'hide-outside-viewport', !this.showOutsideViewport)
+
+        break
+      }
+
       case 'is-opened': {
         this.#tooltipState.updateOptions({
           isOpened: this.isOpenedControlled,
@@ -171,6 +181,10 @@ export class Tooltip extends NectaryElement {
 
     // Undefine/null means uncontrolled mode
     return isOpenedAttr === null ? undefined : isOpenedAttr !== 'false'
+  }
+
+  get showOutsideViewport() {
+    return getBooleanAttribute(this, 'show-outside-viewport')
   }
 
   get text() {
