@@ -1,3 +1,5 @@
 @import "./sys.css";
 @import "./comp/card-v2.css";
+@import "./comp/chip.css";
 @import "./comp/date-picker.css";
+@import "./comp/tag.css";

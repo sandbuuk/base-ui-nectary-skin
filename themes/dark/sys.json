@@ -12,7 +12,7 @@
     },
     "feedback": {
       "danger": {
-        "default": "#EB5454",
+        "default": "#D63F3F",
         "strong": "#FFBDBD",
         "subtle": "#57181C"
       },
