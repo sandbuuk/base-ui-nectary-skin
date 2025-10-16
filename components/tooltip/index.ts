@@ -152,7 +152,6 @@ export class Tooltip extends NectaryElement {
       }
 
       case 'show-outside-viewport': {
-        console.log(`UPDATING TO ${this.showOutsideViewport}`)
         updateBooleanAttribute(this.#$pop, 'hide-outside-viewport', !this.showOutsideViewport)
 
         break
