@@ -84,11 +84,6 @@ deploy-global-components:
         --no-progress \
         --delete || exit_code=$?
 
-      if [ $exit_code -ne 0 ]; then
-        echo "Sync completed with warnings (exit code $exit_code)"
-        exit 0
-      fi
-
       # Update 'latest' pointer
       echo "Updating 'latest' pointer to $COMPONENTS_VERSION"
       aws s3 sync components/ s3://nectary-components/components/latest \
@@ -149,11 +144,6 @@ deploy-global-assets:
         --include "**/*.d.ts" \
         --no-progress \
         --delete || exit_code=$?
-
-      if [ $exit_code -ne 0 ]; then
-        echo "Sync completed with warnings (exit code $exit_code)"
-        exit 0
-      fi
 
       # Update 'latest' pointer
       echo "Updating 'latest' pointer to $ASSETS_VERSION"
