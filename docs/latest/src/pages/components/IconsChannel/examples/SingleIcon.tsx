@@ -1,8 +1,8 @@
 import type { FC } from 'react'
-import '@nectary/assets/icons-channel/notify'
+import '@nectary/assets/icons-channel/telegram'
 
 export const SingleIconExample: FC = () => {
   return (
-    <sinch-icon-channel-notify/>
+    <sinch-icon-channel-telegram/>
   )
 }
