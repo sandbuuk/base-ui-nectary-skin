@@ -201,6 +201,8 @@ export class Input extends NectaryElement {
       'autofocus',
       'data-size',
       'aria-label',
+      'maxlength',
+      'required',
     ]
   }
 
@@ -329,8 +331,10 @@ export class Input extends NectaryElement {
 
         break
       }
-
-      case 'autocomplete': {
+      case 'autocomplete':
+      case 'maxlength':
+      case 'required':
+      {
         updateAttribute(this.#$input, name, newVal)
 
         break
