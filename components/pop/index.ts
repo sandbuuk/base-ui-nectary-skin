@@ -343,7 +343,7 @@ export class Pop extends NectaryElement {
       }
     })
 
-    requestAnimationFrame(() => this.#updatePosition())
+    this.#updatePosition()
 
     // Dispatch Visibility Context
     this.#dispatchContentVisibility(true)
