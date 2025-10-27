@@ -16,6 +16,7 @@
   --sinch-comp-icon-channel-color-line-layera: #FFFFFF;
   --sinch-comp-icon-channel-color-mms-bg: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
   --sinch-comp-icon-channel-color-mms-layera: #242424;
+  --sinch-comp-icon-channel-color-mms-layerb: #242424;
   --sinch-comp-icon-channel-color-notify-bg: linear-gradient(180deg, #A7D7F7 0%, #A7D7F7 100%);
   --sinch-comp-icon-channel-color-notify-layera: #E44436;
   --sinch-comp-icon-channel-color-notify-layerb: #FFFFFF;
@@ -24,10 +25,13 @@
   --sinch-comp-icon-channel-color-phone-layera: #242424;
   --sinch-comp-icon-channel-color-push-bg: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
   --sinch-comp-icon-channel-color-push-layera: #242424;
+  --sinch-comp-icon-channel-color-push-layerb: #242424;
   --sinch-comp-icon-channel-color-rcs-bg: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
   --sinch-comp-icon-channel-color-rcs-layera: #242424;
+  --sinch-comp-icon-channel-color-rcs-layerb: #242424;
   --sinch-comp-icon-channel-color-sms-bg: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
   --sinch-comp-icon-channel-color-sms-layera: #242424;
+  --sinch-comp-icon-channel-color-sms-layerb: #242424;
   --sinch-comp-icon-channel-color-talk-bg: linear-gradient(180deg, #FFE812 0%, #FFE812 100%);
   --sinch-comp-icon-channel-color-talk-layera: #000000;
   --sinch-comp-icon-channel-color-telegram-bg: linear-gradient(180deg, #25A2E0 0%, #25A2E0 100%);
@@ -38,6 +42,7 @@
   --sinch-comp-icon-channel-color-viber-layera: #FFFFFF;
   --sinch-comp-icon-channel-color-webchat-bg: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
   --sinch-comp-icon-channel-color-webchat-layera: #242424;
+  --sinch-comp-icon-channel-color-webchat-layerb: #242424;
   --sinch-comp-icon-channel-color-wechat-bg: linear-gradient(180deg, #2DC100 0%, #2DC100 100%);
   --sinch-comp-icon-channel-color-wechat-layera: #FFFFFF;
   --sinch-comp-icon-channel-color-whatsapp-bg: linear-gradient(180deg, #25D366 0%, #25D366 100%);
