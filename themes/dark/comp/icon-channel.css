@@ -1,0 +1,19 @@
+.nectary-theme-base.nectary-theme-dark {
+  --sinch-comp-icon-channel-color-mms-bg: linear-gradient(180deg, #000000 0%, #000000 100%);
+  --sinch-comp-icon-channel-color-mms-layera: #FFFFFF;
+  --sinch-comp-icon-channel-color-mms-layerb: #FFFFFF;
+  --sinch-comp-icon-channel-color-phone-bg: linear-gradient(180deg, #000000 0%, #000000 100%);
+  --sinch-comp-icon-channel-color-phone-layera: #FFFFFF;
+  --sinch-comp-icon-channel-color-push-bg: linear-gradient(180deg, #000000 0%, #000000 100%);
+  --sinch-comp-icon-channel-color-push-layera: #FFFFFF;
+  --sinch-comp-icon-channel-color-push-layerb: #FFFFFF;
+  --sinch-comp-icon-channel-color-rcs-bg: linear-gradient(180deg, #000000 0%, #000000 100%);
+  --sinch-comp-icon-channel-color-rcs-layera: #FFFFFF;
+  --sinch-comp-icon-channel-color-rcs-layerb: #FFFFFF;
+  --sinch-comp-icon-channel-color-sms-bg: linear-gradient(180deg, #000000 0%, #000000 100%);
+  --sinch-comp-icon-channel-color-sms-layera: #FFFFFF;
+  --sinch-comp-icon-channel-color-sms-layerb: #FFFFFF;
+  --sinch-comp-icon-channel-color-webchat-bg: linear-gradient(180deg, #000000 0%, #000000 100%);
+  --sinch-comp-icon-channel-color-webchat-layera: #FFFFFF;
+  --sinch-comp-icon-channel-color-webchat-layerb: #FFFFFF;
+}

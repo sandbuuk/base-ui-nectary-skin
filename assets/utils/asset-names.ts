@@ -145,6 +145,8 @@ export const BASE_ASSET_NAMES_LIST = [
   'icon-channel-mms-square',
   'icon-channel-notify',
   'icon-channel-notify-square',
+  'icon-channel-phone-round',
+  'icon-channel-phone-square',
   'icon-channel-push-round',
   'icon-channel-push-square',
   'icon-channel-rcs-round',
