@@ -99,23 +99,105 @@ export const clampMaxDate = (date: Date, max: Date): void => {
 }
 
 export const incMonth = (date: Date, max: Date): void => {
-  date.setUTCMonth(date.getUTCMonth() + 1)
+  const currentDay = date.getUTCDate()
+  const currentMonth = date.getUTCMonth()
+  const currentYear = date.getUTCFullYear()
+
+  // Calculate the next month and year
+  let nextMonth = currentMonth + 1
+  let nextYear = currentYear
+
+  if (nextMonth > 11) {
+    nextMonth = 0
+    nextYear++
+  }
+
+  // Get the last day of next month
+  const nextMonthLastDay = new Date(Date.UTC(nextYear, nextMonth + 1, 0))
+  const maxDayInNextMonth = nextMonthLastDay.getUTCDate()
+
+  // Use the minimum of current day and max day in next month
+  const targetDay = Math.min(currentDay, maxDayInNextMonth)
+
+  // Set the date to the target day of next month
+  date.setUTCFullYear(nextYear, nextMonth, targetDay)
 
   clampMaxDate(date, max)
 }
 export const decMonth = (date: Date, min: Date): void => {
-  date.setUTCMonth(date.getUTCMonth() - 1)
+  const currentDay = date.getUTCDate()
+  const currentMonth = date.getUTCMonth()
+  const currentYear = date.getUTCFullYear()
+
+  // Calculate the previous month and year
+  let prevMonth = currentMonth - 1
+  let prevYear = currentYear
+
+  if (prevMonth < 0) {
+    prevMonth = 11
+    prevYear--
+  }
+
+  // Get the last day of previous month
+  const prevMonthLastDay = new Date(Date.UTC(prevYear, prevMonth + 1, 0))
+  const maxDayInPrevMonth = prevMonthLastDay.getUTCDate()
+
+  // Use the minimum of current day and max day in previous month
+  const targetDay = Math.min(currentDay, maxDayInPrevMonth)
+
+  // Set the date to the target day of previous month
+  date.setUTCFullYear(prevYear, prevMonth, targetDay)
 
   clampMinDate(date, min)
 }
 export const incYear = (date: Date, max: Date): void => {
-  date.setUTCFullYear(date.getUTCFullYear() + 1)
+  const currentDay = date.getUTCDate()
+  const currentMonth = date.getUTCMonth()
+  const currentYear = date.getUTCFullYear()
+  const nextYear = currentYear + 1
+
+  // Check if current date is Feb 29th and next year is not a leap year
+  if (currentMonth === 1 && currentDay === 29) {
+    // Check if next year is a leap year
+    const isNextYearLeap = new Date(Date.UTC(nextYear, 1, 29)).getUTCDate() === 29
+
+    if (!isNextYearLeap) {
+      // If next year is not a leap year, use Feb 28th
+      date.setUTCFullYear(nextYear, currentMonth, 28)
+    } else {
+      // If next year is a leap year, keep Feb 29th
+      date.setUTCFullYear(nextYear, currentMonth, currentDay)
+    }
+  } else {
+    // For all other dates, just increment the year
+    date.setUTCFullYear(nextYear, currentMonth, currentDay)
+  }
 
   clampMaxDate(date, max)
 }
 
 export const decYear = (date: Date, min: Date): void => {
-  date.setUTCFullYear(date.getUTCFullYear() - 1)
+  const currentDay = date.getUTCDate()
+  const currentMonth = date.getUTCMonth()
+  const currentYear = date.getUTCFullYear()
+  const prevYear = currentYear - 1
+
+  // Check if current date is Feb 29th and previous year is not a leap year
+  if (currentMonth === 1 && currentDay === 29) {
+    // Check if previous year is a leap year
+    const isPrevYearLeap = new Date(Date.UTC(prevYear, 1, 29)).getUTCDate() === 29
+
+    if (!isPrevYearLeap) {
+      // If previous year is not a leap year, use Feb 28th
+      date.setUTCFullYear(prevYear, currentMonth, 28)
+    } else {
+      // If previous year is a leap year, keep Feb 29th
+      date.setUTCFullYear(prevYear, currentMonth, currentDay)
+    }
+  } else {
+    // For all other dates, just decrement the year
+    date.setUTCFullYear(prevYear, currentMonth, currentDay)
+  }
 
   clampMinDate(date, min)
 }
