@@ -55,6 +55,7 @@ export class Field extends NectaryElement {
     this.shouldShowTopSection()
     this.#$label.addEventListener('click', this.#onLabelClick, options)
     this.#$tooltipSlot.addEventListener('slotchange', this.#onTooltipSlotChange, options)
+    this.#$inputSlot.addEventListener('slotchange', this.#onInputSlotChange, options)
   }
 
   disconnectedCallback() {
@@ -165,6 +166,15 @@ export class Field extends NectaryElement {
 
   #onTooltipSlotChange = () => {
     setClass(this.#$tooltipWrapper, 'empty', this.#$tooltipSlot.assignedElements().length === 0)
+  }
+
+  #onInputSlotChange = () => {
+    const inputElement = getFirstSlotElement(this.#$inputSlot)
+    const labelText = this.#$label.textContent
+
+    if (inputElement !== null && labelText != null && labelText.length > 0) {
+      inputElement.setAttribute('aria-label', 'label')
+    }
   }
 }
 
