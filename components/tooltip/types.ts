@@ -27,6 +27,11 @@ export type TSinchTooltipProps = {
   'show-outside-viewport'?: boolean,
   readonly footprintRect?: TRect,
   readonly tooltipRect?: TRect,
+  /**
+   * Whether or not the tooltip allows scrolling, blocks by default, setting it
+   * to true can have unexpected behavior in dialogs
+   */
+  'allow-scroll'?: boolean,
 }
 
 export type TSinchTooltipEvents = {
