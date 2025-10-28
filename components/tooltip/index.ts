@@ -108,6 +108,7 @@ export class Tooltip extends NectaryElement {
       'aria-label',
       'aria-description',
       'show-outside-viewport',
+      'allow-scroll',
     ]
   }
 
@@ -171,6 +172,13 @@ export class Tooltip extends NectaryElement {
 
           this.#tooltipState.hide()
         }
+
+        break
+      }
+      case 'allow-scroll': {
+        updateAttribute(this.#$pop, 'allow-scroll', newVal)
+
+        break
       }
     }
   }
@@ -307,6 +315,14 @@ export class Tooltip extends NectaryElement {
 
   #updateTipOrientation = () => {
     const orient = this.orientation
+
+    // Wait for sinch-pop to be defined and upgraded
+    if (!('footprintRect' in this.#$pop)) {
+      requestAnimationFrame(this.#updateTipOrientation)
+
+      return
+    }
+
     const targetRect = this.#$pop.footprintRect
     const contentRect = this.#$content.getBoundingClientRect()
     const diffX = targetRect.x - contentRect.x
