@@ -194,9 +194,12 @@ export class Input extends NectaryElement {
       'value',
       'placeholder',
       'mask',
+      'max',
+      'min',
       'invalid',
       'disabled',
       'size',
+      'step',
       'autocomplete',
       'autofocus',
       'data-size',
@@ -334,7 +337,9 @@ export class Input extends NectaryElement {
       case 'autocomplete':
       case 'maxlength':
       case 'required':
-      {
+      case 'max':
+      case 'min':
+      case 'step': {
         updateAttribute(this.#$input, name, newVal)
 
         break
