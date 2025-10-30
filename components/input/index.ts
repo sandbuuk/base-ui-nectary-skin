@@ -87,8 +87,9 @@ export class Input extends NectaryElement {
   connectedCallback() {
     super.connectedCallback()
 
-    this.setAttribute('role', 'textbox')
-    this.#internals.role = 'textbox'
+    const role = this.type === 'number' ? 'spinbutton' : 'textbox'
+
+    this.#setRole(role)
 
     if (this.#controller === null) {
       this.#controller = new AbortController()
@@ -161,7 +162,7 @@ export class Input extends NectaryElement {
 
   // This handler mimicks the behavior (with some exceptions) of the implicit form submission logic from the HTML spec:
   // https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#implicit-submission
-  #onKeyDown = (e: KeyboardEvent) => {
+  #formSubmitHandler = () => {
     const form = this.#internals.form
 
     if (form === null) {
@@ -172,17 +173,47 @@ export class Input extends NectaryElement {
       return
     }
 
-    if (e.key === 'Enter') {
-      const submitSelectors = [
-        'sinch-button[form-type="submit"]',
-      ]
+    const submitSelectors = [
+      'sinch-button[form-type="submit"]',
+    ]
 
-      const formSubmitters = Array.from(form.querySelectorAll(submitSelectors.join(','))) as NectaryComponentVanilla<'sinch-button'>[]
+    const formSubmitters = Array.from(form.querySelectorAll(submitSelectors.join(','))) as NectaryComponentVanilla<'sinch-button'>[]
 
-      const formSubmitter = formSubmitters.find((submitter) => !submitter.disabled) ?? null
+    const formSubmitter = formSubmitters.find((submitter) => !submitter.disabled) ?? null
 
-      if (formSubmitter !== null) {
-        requestSubmitForm(form, formSubmitter as NectaryComponentVanilla<'sinch-button'>)
+    if (formSubmitter !== null) {
+      requestSubmitForm(form, formSubmitter as NectaryComponentVanilla<'sinch-button'>)
+    }
+  }
+
+  #onKeyDown = (e: KeyboardEvent) => {
+    switch (e.key) {
+      case 'Enter': {
+        this.#formSubmitHandler()
+
+        break
+      }
+      case 'Home': {
+        if (this.type === 'number') {
+          const min = getAttribute(this, 'min')
+
+          if (min !== null && !isNaN(parseFloat(min))) {
+            this.#$input.value = min
+            setFormValue(this.#internals, min)
+          }
+        }
+
+        break
+      }
+      case 'End': {
+        if (this.type === 'number') {
+          const max = getAttribute(this, 'max')
+
+          if (max !== null && !isNaN(parseFloat(max))) {
+            this.#$input.value = max
+            setFormValue(this.#internals, max)
+          }
+        }
       }
     }
   }
@@ -224,6 +255,14 @@ export class Input extends NectaryElement {
       case 'type': {
         updateLiteralAttribute(this.#$input, inputTypes, 'type', newVal)
         updateAttribute(this.#$input, 'spellcheck', newVal === 'password' ? 'false' : null)
+
+        const role = newVal === 'number' ? 'spinbutton' : 'textbox'
+
+        this.#setRole(role)
+
+        if (newVal === 'number') {
+          this.#resetAriaPlaceholder()
+        }
 
         break
       }
@@ -866,13 +905,21 @@ export class Input extends NectaryElement {
       const value = this.placeholder
 
       this.#$input.placeholder = value ?? ''
-      this.#internals.ariaPlaceholder = value ?? ''
-      updateAttribute(this, 'aria-placeholder', value)
+
+      // ARIA spec does not allow aria-placeholder for non textbox role inputs
+      if (this.type !== 'number') {
+        this.#internals.ariaPlaceholder = value ?? ''
+        updateAttribute(this, 'aria-placeholder', value)
+      }
     } else {
-      updateAttribute(this, 'aria-placeholder', null)
       this.#$input.placeholder = ''
-      this.#internals.ariaPlaceholder = ''
+      this.#resetAriaPlaceholder()
     }
+  }
+
+  #resetAriaPlaceholder() {
+    updateAttribute(this, 'aria-placeholder', null)
+    this.#internals.ariaPlaceholder = ''
   }
 
   #onIconSlotChange = () => {
@@ -938,6 +985,11 @@ export class Input extends NectaryElement {
 
   #onWheelReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-wheel')?.(e)
+  }
+
+  #setRole = (role: string) => {
+    this.setAttribute('role', role)
+    this.#internals.role = role
   }
 }
 
