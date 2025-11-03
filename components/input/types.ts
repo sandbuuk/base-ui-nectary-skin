@@ -28,6 +28,18 @@ export type TSinchInputProps = {
   autofocus?: boolean,
   /** Size, `m` by default */
   size?: TSinchSize,
+  /** Whether or not the input is in readonly mode **/
+  readonly?: boolean,
+  /** Whether or not the input is required **/
+  required?: boolean,
+  /** Maximum length of the input value */
+  maxLength?: number | null,
+  /** Maximum numeric value for type 'number' */
+  max?: number | null,
+  /** Minimum numeric value for type 'number' */
+  min?: number | null,
+  /** Step value for type 'number' */
+  step?: number | null,
   selectionStart?: number | null,
   selectionEnd?: number | null,
   selectionDirection?: 'forward' | 'backward' | 'none' | null,
