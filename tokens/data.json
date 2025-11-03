@@ -6366,7 +6366,7 @@
                   "type": "color"
                 },
                 "hover": {
-                  "value": "{sys.color.surface.transparent.hover}",
+                  "value": "{sys.color.surface.primary.hover}",
                   "type": "color"
                 },
                 "sticky": {
@@ -6378,7 +6378,7 @@
             "checked": {
               "background": {
                 "initial": {
-                  "value": "{sys.color.surface.transparent.active}",
+                  "value": "{sys.color.surface.primary.active}",
                   "type": "color"
                 }
               }
