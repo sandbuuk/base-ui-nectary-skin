@@ -6372,6 +6372,11 @@
                 "sticky": {
                   "value": "{sys.color.surface.primary.default}",
                   "type": "color"
+                },
+                "hightlited": {
+                  "value": "{ref.color.honey.50}",
+                  "type": "color",
+                  "description": "To hightlight row in bulk actions cases"
                 }
               }
             },
