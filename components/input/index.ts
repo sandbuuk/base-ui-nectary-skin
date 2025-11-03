@@ -232,6 +232,7 @@ export class Input extends NectaryElement {
       'size',
       'step',
       'autocomplete',
+      'readonly',
       'autofocus',
       'data-size',
       'aria-label',
@@ -376,6 +377,7 @@ export class Input extends NectaryElement {
       case 'autocomplete':
       case 'maxlength':
       case 'required':
+      case 'readonly':
       case 'max':
       case 'min':
       case 'step': {
