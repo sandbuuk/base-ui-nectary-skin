@@ -33,7 +33,7 @@ export type TSinchInputProps = {
   /** Whether or not the input is required **/
   required?: boolean,
   /** Maximum length of the input value */
-  maxLength?: number | null,
+  maxlength?: number | null,
   /** Maximum numeric value for type 'number' */
   max?: number | null,
   /** Minimum numeric value for type 'number' */
