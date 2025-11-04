@@ -200,6 +200,12 @@ export class Input extends NectaryElement {
           if (min !== null && !isNaN(parseFloat(min))) {
             this.#$input.value = min
             setFormValue(this.#internals, min)
+
+            this.dispatchEvent(
+              new CustomEvent('-change', {
+                detail: min,
+              })
+            )
           }
         }
 
@@ -212,6 +218,12 @@ export class Input extends NectaryElement {
           if (max !== null && !isNaN(parseFloat(max))) {
             this.#$input.value = max
             setFormValue(this.#internals, max)
+
+            this.dispatchEvent(
+              new CustomEvent('-change', {
+                detail: max,
+              })
+            )
           }
         }
       }
