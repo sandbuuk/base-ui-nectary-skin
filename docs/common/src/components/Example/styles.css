@@ -2,6 +2,8 @@
   padding: 24px 16px;
   background-color: var(--sinch-sys-color-surface-tertiary-default);
   border-radius: var(--sinch-sys-shape-radius-l);
+  overflow: auto;
+  max-width: 100%;
 }
 
 .example-container.inverted {

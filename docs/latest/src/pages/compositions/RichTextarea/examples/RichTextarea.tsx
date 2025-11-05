@@ -11,11 +11,16 @@ import '@nectary/components/input'
 import '@nectary/components/button'
 import '@nectary/components/dialog'
 import '@nectary/components/icon'
+import '@nectary/components/select-button'
+import '@nectary/components/select-menu'
+import '@nectary/components/select-menu-option'
 
 const initialMd = `
 To set up the \`Product\`, read and accept 📝 the \`Product\` [terms & conditions](https://google.com).
 
 If ___you___ have *any questions*, contact your account __manager__ ✅.
+
+You can also use tags, e.g. to mention users like {{JohnDoe}} or {{JaneSmith}} in your text.
 
 * list item 1 😀
   1. inner item 1
@@ -26,6 +31,8 @@ If ___you___ have *any questions*, contact your account __manager__ ✅.
 * list item 2
 * list item 3
 `
+
+const users = ['JohnDoe', 'JaneSmith', 'AliceWonder', 'BobBuilder', 'CharlieChaplin', 'JamesBond', 'DianaPrince', 'BruceWayne', 'ClarkKent', 'PeterParker']
 
 type TLinkDialogContent = {
   isOpen: boolean,
@@ -100,11 +107,13 @@ const DEFAULT_SELECTION: TRichTextareaSelection = {
   strikethrough: false,
   olist: false,
   ulist: false,
+  tag: false,
 }
 
 export const RichTextareaExample: FC = () => {
   const [isEmojiOpen, setEmojiOpen] = useState(false)
   const [isLinkOpen, setLinkOpen] = useState(false)
+  const [isMentionOpen, setMentionOpen] = useState(false)
   const [isToolbarVisible, setToolbarVisible] = useState(true)
   const ref = useRef<HTMLElementTagNameMap['sinch-rich-textarea']>(null)
   const [selectionState, setSelectionState] = useState(DEFAULT_SELECTION)
@@ -156,6 +165,16 @@ export const RichTextareaExample: FC = () => {
   }
   const onToggleToolbar = () => {
     setToolbarVisible(!isToolbarVisible)
+  }
+  const onMentionOpen = () => {
+    setMentionOpen(true)
+  }
+  const onMentionClose = () => {
+    setMentionOpen(false)
+  }
+  const onSelectMention = (e: CustomEvent<string>) => {
+    ref.current!.insertMention(e.detail)
+    setMentionOpen(false)
   }
 
   return (
@@ -271,7 +290,48 @@ export const RichTextareaExample: FC = () => {
             on-change={onEmojiChange}
           />
         </sinch-popover>
+        <sinch-popover
+          slot="bottom"
+          open={isMentionOpen}
+          aria-label="Select user to mention"
+          orientation="top-left"
+          modal
+          on-close={onMentionClose}
+        >
+          <sinch-select-button
+            slot="target"
+            text=""
+            placeholder="User name..."
+            aria-label="Open mention select"
+            size="s"
+            on-click={onMentionOpen}
+          >
+            <sinch-icon icons-version="2" name="fa-at" slot="icon"/>
+          </sinch-select-button>
+          <sinch-select-menu
+            slot="content"
+            value=""
+            aria-label="User menu"
+            rows={3}
+            on-change={onSelectMention}
+            search-placeholder="Search users"
+          >
+            {users.map((user) => (
+              <sinch-select-menu-option
+                key={user}
+                value={user}
+                text={user}
+                aria-label={`Mention ${user}`}
+              />
+            ))}
+          </sinch-select-menu>
+        </sinch-popover>
       </sinch-rich-textarea>
+      <div>
+        Raw markdown value: <br/>
+        <pre>{value}</pre>
+
+      </div>
     </div>
   )
 }

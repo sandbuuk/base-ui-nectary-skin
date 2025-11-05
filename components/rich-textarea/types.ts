@@ -5,6 +5,7 @@ export type TRichTextareaSelection = {
   bold: boolean,
   strikethrough: boolean,
   codetag: boolean,
+  tag: boolean,
   link: boolean,
   ulist: boolean,
   olist: boolean,
@@ -21,6 +22,7 @@ export type TSinchRichTextareaProps = {
 export type TSinchRichTextareaMethods = {
   insertText(value: string): void,
   insertLink(text: string, href: string): void,
+  insertMention(username: string): void,
   formatItalic(): void,
   formatBold(): void,
   formatStrikethrough(): void,

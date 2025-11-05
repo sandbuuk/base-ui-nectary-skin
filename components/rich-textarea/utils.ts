@@ -233,7 +233,7 @@ const isAllInsideList = (isOrdered: boolean, $a: TTextContent, $b: TTextContent)
 
 export type TRichTextareaFormatInputType = 'formatItalic' | 'formatBold' | 'formatStrikeThrough' | 'formatCodeTag'
 
-type TFormatName = 'i' | 'b' | 's' | 'c' | 'l'
+type TFormatName = 'i' | 'b' | 's' | 'c' | 'l' | 'm'
 
 const FORMAT_TYPE_TO_NAME: Record<TRichTextareaFormatInputType, TFormatName> = {
   formatBold: 'b',
@@ -251,6 +251,7 @@ const isFormatItalic = ($n: TInline) => isFormatName($n, 'i')
 const isFormatStrikethrough = ($n: TInline) => isFormatName($n, 's')
 const isFormatCodetag = ($n: TInline) => isFormatName($n, 'c')
 const isFormatLink = ($n: TInline) => isFormatName($n, 'l')
+const isFormatTag = ($n: TInline) => isFormatName($n, 'm')
 
 const isAllInsideFormatName = ($a: TTextContent, $b: TTextContent, formatName: TFormatName): boolean => {
   const aBlock = getParentTextBlock($a)
@@ -315,6 +316,10 @@ const setInlineFormat = ($n: TInline, formatName: TFormatName, shouldEnable: boo
     if (formatName === 'l' || isFormatName($n, 'l')) {
       $n.className = ''
       $n.removeAttribute(LINK_HREF_ATTR_NAME)
+    }
+
+    if (formatName === 'm' || isFormatName($n, 'm')) {
+      $n.className = ''
     }
 
     $n.classList.add(formatName)
@@ -406,6 +411,14 @@ const createLink = (text: string, href: string, doc: Document): TInline => {
   $link.setAttribute(LINK_HREF_ATTR_NAME, href)
 
   return $link
+}
+
+const createTag = (text: string, doc: Document): TInline => {
+  const $tag = createInlineWithText(`${text}`, doc)
+
+  setInlineFormat($tag, 'm', true)
+
+  return $tag
 }
 
 const EMOJI_CHAR_ATTR_NAME = 'data-char'
@@ -1616,6 +1629,44 @@ export const insertLink = ($root: TRichTextareaRoot, text: string, href: string,
   }
 }
 
+export const insertTag = ($root: TRichTextareaRoot, text: string, range: TRange): TActionResult => {
+  const cursor = removeContentInRange(range)
+  const { $text, $inline, offset, isAfterInline: isAfterLastChild } = cursor
+  const $tag = createTag(text, $root.ownerDocument)
+
+  /* Insert Tag element */
+  if (isTextNode($text)) {
+    if (isEmptyText($text.nodeValue)) {
+      getParentTextBlock($inline).replaceChild($tag, $inline)
+    } else {
+      const [$before, $after] = splitTextNode($text, offset)
+
+      if ($before === null) {
+        assertNonNull($after)
+        $after.before($tag)
+      } else {
+        $before.after($tag)
+      }
+    }
+  } else if (isAfterLastChild === true) {
+    $inline.after($tag)
+  } else {
+    $inline.before($tag)
+  }
+
+  // Create a trailing space after the tag
+  const $trailingSpace = createInlineWithText(' ', $root.ownerDocument)
+
+  $tag.after($trailingSpace)
+
+  return {
+    prevent: true,
+    range: createCollapsedRange(
+      createEndCursorFromTextContent($trailingSpace)
+    ),
+  }
+}
+
 export const insertLineBreak = (range: TRange): TActionResult => {
   const cursor = removeContentInRange(range)
   const { $text, $inline, offset, isAfterInline: isAfterLastChild } = cursor
@@ -1705,7 +1756,7 @@ export const insertText = ($root: TRichTextareaRoot, data: string | null, range:
     const isHotTextWhitespace =
       range.startOffset === range.startContainer.length &&
       data === TEXT_WHITESPACE &&
-      (isFormatCodetag($inline) || isFormatLink($inline))
+      (isFormatCodetag($inline) || isFormatLink($inline) || isFormatTag($inline))
 
     if (!isHotTextWhitespace) {
       return DEFAULT_ACTION_RESULT
@@ -1755,7 +1806,7 @@ export const insertText = ($root: TRichTextareaRoot, data: string | null, range:
     }
 
     if (offset === $text.length && data === TEXT_WHITESPACE) {
-      if (isFormatLink($inline) || isFormatCodetag($inline)) {
+      if (isFormatLink($inline) || isFormatCodetag($inline) || isFormatTag($inline)) {
         const $newinline = createInlineWithText(data, $root.ownerDocument)
 
         $inline.after($newinline)
@@ -1764,6 +1815,35 @@ export const insertText = ($root: TRichTextareaRoot, data: string | null, range:
           prevent: true,
           range: createCollapsedRange(
             createEndCursorFromTextContent($newinline)
+          ),
+        }
+      }
+
+      const content = $text.nodeValue!
+      const tagMatch = content.match(/\{\{([a-zA-Z0-9_-]+)\}\}$/)
+
+      if (tagMatch !== null) {
+        const text = tagMatch[1]
+        const tagStartPos = content.length - tagMatch[0].length
+        const $tag = createTag(text, $root.ownerDocument)
+        const $space = createInlineWithText(data, $root.ownerDocument)
+
+        // Split the text at the tag start
+        if (tagStartPos === 0) {
+          // The entire text is the tag
+          getParentTextBlock($inline).replaceChild($tag, $inline)
+        } else {
+          // Keep text before the tag
+          $text.nodeValue = content.substring(0, tagStartPos)
+          $inline.after($tag)
+        }
+
+        $tag.after($space)
+
+        return {
+          prevent: true,
+          range: createCollapsedRange(
+            createEndCursorFromTextContent($space)
           ),
         }
       }
@@ -1934,6 +2014,7 @@ export const getSelectionInfo = (range: TRange): TRichTextareaSelection => {
         italic: isFormatItalic($inline),
         strikethrough: isFormatStrikethrough($inline),
         codetag: isFormatCodetag($inline),
+        tag: isFormatTag($inline),
         link: isFormatLink($inline),
         olist: isInsideList(true, $inline),
         ulist: isInsideList(false, $inline),
@@ -1945,6 +2026,7 @@ export const getSelectionInfo = (range: TRange): TRichTextareaSelection => {
       bold: false,
       strikethrough: false,
       codetag: false,
+      tag: false,
       link: false,
       olist: false,
       ulist: false,
@@ -1956,6 +2038,7 @@ export const getSelectionInfo = (range: TRange): TRichTextareaSelection => {
     italic: isAllInsideItalic(aCursor.$inline, bCursor.$inline),
     strikethrough: isAllInsideStrikethrough(aCursor.$inline, bCursor.$inline),
     codetag: isAllInsideCodetag(aCursor.$inline, bCursor.$inline),
+    tag: false, // Tags are atomic, so multi-selection doesn't apply
     link: isAllInsideLink(aCursor.$inline, bCursor.$inline),
     olist: isAllInsideList(true, aCursor.$inline, bCursor.$inline),
     ulist: isAllInsideList(false, aCursor.$inline, bCursor.$inline),
@@ -1987,6 +2070,7 @@ const isEmptyTextBlock = ($block: TTextBlock): boolean => {
   const isEmptyText =
     isInline($inline) &&
     !isFormatCodetag($inline) &&
+    !isFormatTag($inline) &&
     isEmptyTextNode(getChildText($inline))
 
   return isEmptyText
@@ -2012,6 +2096,7 @@ type TTextContentDescriptor = {
   isWhitespace?: boolean,
   isEmoji?: boolean,
   isCodetag?: boolean,
+  isTag?: boolean,
   isBold?: boolean,
   isItalic?: boolean,
   isStrikethrough?: boolean,
@@ -2052,6 +2137,12 @@ const serializeDescriptorReducer = (range: TCursorPair | null) => (state: TTextC
 
   if (isFormatCodetag($n)) {
     state.push({ isCodetag: true, text })
+
+    return state
+  }
+
+  if (isFormatTag($n)) {
+    state.push({ isTag: true, text: `{{${text}}}` })
 
     return state
   }
@@ -2141,6 +2232,12 @@ const serializeTextReducer = (state: TSerializeChunkState, desc: TTextContentDes
 
   if (desc.isCodetag === true) {
     chunks.push(`${MD_CODETAG_TOKEN}${desc.text!}${MD_CODETAG_TOKEN}`)
+
+    return state
+  }
+
+  if (desc.isTag === true) {
+    chunks.push(desc.text!)
 
     return state
   }
@@ -2391,6 +2488,11 @@ export const createParseVisitor = (doc: Document) => {
           setInlineFormat($inline, 'c', true)
 
           $currentBlock!.appendChild($inline)
+        },
+        tag(text) {
+          const $tag = createTag(text, doc)
+
+          $currentBlock!.appendChild($tag)
         },
         inline(text, { isBold, isItalic, isStrikethrough }) {
           const $inline = createInlineWithText(text, doc)
