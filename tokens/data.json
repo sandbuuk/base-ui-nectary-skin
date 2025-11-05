@@ -6376,7 +6376,7 @@
                 "hightlited": {
                   "value": "{ref.color.honey.50}",
                   "type": "color",
-                  "description": "To hightlight row in bulk actions cases"
+                  "description": "Highlights just changed or updated row (eg: in bulk actions)"
                 }
               }
             },
