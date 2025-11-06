@@ -113,8 +113,15 @@
 }
 
 #input[type="password"]:not(:placeholder-shown) {
-  font-size: 1.5em;
   letter-spacing: 0.1em;
+}
+
+:host(:not([enforce-consistent-font-size])) #input[type="password"]:not(:placeholder-shown) {
+  font-size: 1.5em;
+}
+
+:host([enforce-consistent-font-size]) #input[type="password"]:not(:placeholder-shown) {
+  font-size: inherit;
 }
 
 #icon-wrapper {
