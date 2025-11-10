@@ -40,6 +40,8 @@ export type TSinchInputProps = {
   min?: number | null,
   /** Step value for type 'number' */
   step?: number | null,
+  /** Enforce consistent font size across input types to avoid layout shifts when switching types between text and password. **/
+  'enforce-consistent-font-size'?: boolean,
   selectionStart?: number | null,
   selectionEnd?: number | null,
   selectionDirection?: 'forward' | 'backward' | 'none' | null,
