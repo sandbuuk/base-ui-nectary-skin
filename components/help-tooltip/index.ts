@@ -52,7 +52,7 @@ export class HelpTooltip extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'width', 'orientation']
+    return ['aria-label', 'text', 'width', 'orientation']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
