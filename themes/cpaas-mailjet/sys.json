@@ -103,8 +103,7 @@
       "invalid": "#BD3C41",
       "inverted": "#FFFFFF",
       "link": "#006063",
-      "link-disabled": "#00606366",
-      "muted": "#808A91"
+      "link-disabled": "#00606366"
     }
   }
 }
