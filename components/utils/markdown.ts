@@ -9,6 +9,7 @@ export type TMarkdownParseVisitor = {
   link(text: string, href: string, attributes?: string[]): void,
   emoji(emojiChar: string): void,
   codetag(text: string): void,
+  tag(username: string): void,
   inline(text: string, params: TMarkdownInlineParams): void,
   linebreak(): void,
   paragraph(): void,
@@ -29,16 +30,18 @@ const regEm1Underscore = /(?<!\\)_(?<em1>.+?)(?<!\\)_/
 const regCodeTag = /(?<!\\)`(?<code>.+?)(?<!\\)`/
 const regStrikethrough = /(?<!\\)~~(?<strike>.+?)(?<!\\)~~/
 const regLink = /(?<!\\)!?\[(?<linktext>[^\]]*?)\]\((?<linkhref>[^)]+?)\)(\{(?<linkattrs>[^)]+?)\})?/
+const regMention = /(?<!\\)\{\{(?<mention>[a-zA-Z0-9_-]+)\}\}/
 const regEmoji = /(?<emoji>(?![0-9*#])\p{Emoji})/u
 const regUList = /^(?<indent>[\t ]*?)[*+-][\t ]+(?<ultext>.*?)[\t ]*?$/
 const regOList = /^(?<indent>[\t ]*?)\d+\.[\t ]+(?<oltext>.*?)[\t ]*?$/
 // eslint-disable-next-line no-useless-escape
-const regEscapedChars = /\\(?<escaped>[\\\*_\[\]`~])/
+const regEscapedChars = /\\(?<escaped>[\\\*_\[\]`~\{\}])/
 
 const allRegs = [
   regEscapedChars,
   regCodeTag,
   regLink,
+  regMention,
   regEm3Star,
   regEm2Star,
   regEm1Star,
@@ -103,6 +106,10 @@ const createLineParser = (visitor: Readonly<TMarkdownParseVisitor>) =>
 
       if (groups?.code != null) {
         visitor.codetag(groups.code)
+      }
+
+      if (groups?.mention != null) {
+        visitor.tag(groups.mention)
       }
 
       if (groups?.emoji != null) {

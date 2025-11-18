@@ -48,6 +48,13 @@ export const createParseVisitor = (doc: Document) => {
 
           $p!.appendChild($codeTag)
         },
+        tag(text: string) {
+          const $tag = doc.createElement('sinch-tag') as HTMLElementTagNameMap['sinch-tag']
+
+          $tag.text = text
+
+          $p!.appendChild($tag)
+        },
         inline(text, { isBold, isItalic, isStrikethrough }) {
           const $inline = doc.createElement('SPAN')
 

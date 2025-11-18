@@ -26,6 +26,7 @@ import {
   insertFromPaste,
   insertLineBreak,
   insertLink,
+  insertTag,
   insertText,
   isEditorEmpty,
   isSelectionEqual,
@@ -219,6 +220,12 @@ export class RichTextarea extends NectaryElement {
 
   insertLink(text: string, href: string) {
     const res = this.#handleInput('insertLink', this.#getCurrentRange(), text, href)
+
+    this.#handleActionResult(res)
+  }
+
+  insertMention(username: string) {
+    const res = this.#handleInput('insertMention', this.#getCurrentRange(), username)
 
     this.#handleActionResult(res)
   }
@@ -445,6 +452,9 @@ export class RichTextarea extends NectaryElement {
       }
       case 'insertLink': {
         return insertLink(this.#$input, text!, href!, range)
+      }
+      case 'insertMention': {
+        return insertTag(this.#$input, text!, range)
       }
       // case 'formatUnderline':
       case 'formatItalic':
