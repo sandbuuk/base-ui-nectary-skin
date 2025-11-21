@@ -14,6 +14,7 @@ import {
 import templateHTML from './template.html?raw'
 import { typeValues } from './utils'
 import type { TSinchInlineAlertType } from './types'
+import type { TSinchIcons } from '../icon'
 
 export * from './types'
 
@@ -28,6 +29,11 @@ export class InlineAlert extends NectaryElement {
   #$closeSlot: HTMLSlotElement
   #$actionWrapper: HTMLElement
   #$actionSlot: HTMLSlotElement
+  #$iconCustom: HTMLElement
+  #$iconSuccess: HTMLElement
+  #$iconWarn: HTMLElement
+  #$iconError: HTMLElement
+  #$iconInfo: HTMLElement
 
   constructor() {
     super()
@@ -42,6 +48,11 @@ export class InlineAlert extends NectaryElement {
     this.#$closeSlot = shadowRoot.querySelector('slot[name="close"]')!
     this.#$actionWrapper = shadowRoot.querySelector('#action')!
     this.#$actionSlot = shadowRoot.querySelector('slot[name="action"]')!
+    this.#$iconCustom = shadowRoot.querySelector('#icon-custom')!
+    this.#$iconSuccess = shadowRoot.querySelector('#icon-success')!
+    this.#$iconWarn = shadowRoot.querySelector('#icon-warn')!
+    this.#$iconError = shadowRoot.querySelector('#icon-error')!
+    this.#$iconInfo = shadowRoot.querySelector('#icon-info')!
   }
 
   connectedCallback() {
@@ -56,6 +67,7 @@ export class InlineAlert extends NectaryElement {
 
     this.#onCloseSlotChange()
     this.#onActionSlotChange()
+    this.#updateIconDisplay()
   }
 
   disconnectedCallback() {
@@ -71,7 +83,7 @@ export class InlineAlert extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'caption']
+    return ['text', 'caption', 'icon']
   }
 
   attributeChangedCallback(
@@ -88,6 +100,16 @@ export class InlineAlert extends NectaryElement {
 
       case 'caption': {
         updateAttribute(this.#$caption, 'text', newVal)
+
+        break
+      }
+
+      case 'icon': {
+        this.#updateIconDisplay()
+
+        if (newVal != null && newVal !== '') {
+          updateAttribute(this.#$iconCustom, 'name', newVal)
+        }
 
         break
       }
@@ -118,6 +140,14 @@ export class InlineAlert extends NectaryElement {
     updateAttribute(this, 'caption', value)
   }
 
+  get icon() {
+    return getAttribute(this, 'icon', '') as TSinchIcons
+  }
+
+  set icon(value: TSinchIcons) {
+    updateAttribute(this, 'icon', value)
+  }
+
   #onCloseSlotChange = () => {
     setClass(
       this.#$closeWrapper,
@@ -132,6 +162,17 @@ export class InlineAlert extends NectaryElement {
       'empty',
       this.#$actionSlot.assignedElements().length === 0
     )
+  }
+
+  #updateIconDisplay = () => {
+    const iconValue = this.icon
+    const hasCustomIcon = Boolean(iconValue)
+
+    setClass(this.#$iconCustom, 'hidden', !hasCustomIcon)
+    setClass(this.#$iconSuccess, 'hidden', hasCustomIcon)
+    setClass(this.#$iconWarn, 'hidden', hasCustomIcon)
+    setClass(this.#$iconError, 'hidden', hasCustomIcon)
+    setClass(this.#$iconInfo, 'hidden', hasCustomIcon)
   }
 }
 

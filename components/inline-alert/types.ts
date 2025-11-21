@@ -1,3 +1,4 @@
+import type { TSinchIcons } from '../icon'
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchInlineAlertType = 'info' | 'success' | 'warn' | 'error'
@@ -6,6 +7,7 @@ export type TSinchInlineAlertProps = {
   type: TSinchInlineAlertType,
   text?: string | null,
   caption?: string,
+  icon?: TSinchIcons,
 }
 
 export type TSinchInlineAlertStyle = {
