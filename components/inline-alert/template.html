@@ -41,82 +41,32 @@
       );
   }
 
-  #icon-custom {
-    display: none;
-  }
-
-  #icon-custom:not(.hidden) {
-    display: block;
-  }
-
-  :host([type="success"]) #icon-custom {
+  :host([type="success"]) #icon {
     --sinch-global-color-icon:
       var(
         --sinch-comp-inline-alert-color-success-default-icon
       );
   }
 
-  :host([type="warn"]) #icon-custom {
+  :host([type="warn"]) #icon {
     --sinch-global-color-icon:
       var(
         --sinch-comp-inline-alert-color-warning-default-icon
       );
   }
 
-  :host([type="error"]) #icon-custom {
+  :host([type="error"]) #icon {
     --sinch-global-color-icon:
       var(
         --sinch-comp-inline-alert-color-error-default-icon
       );
   }
 
-  :host([type="info"]) #icon-custom {
+  :host([type="info"]) #icon {
     --sinch-global-color-icon:
       var(
         --sinch-comp-inline-alert-color-info-default-icon
       );
-  }
-
-  #icon-success,
-  #icon-warn,
-  #icon-error,
-  #icon-info {
-    display: none;
-  }
-
-  #icon-success {
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-inline-alert-color-success-default-icon
-      );
-  }
-
-  #icon-warn {
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-inline-alert-color-warning-default-icon
-      );
-  }
-
-  #icon-error {
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-inline-alert-color-error-default-icon
-      );
-  }
-
-  #icon-info {
-    --sinch-global-color-icon:
-      var(
-        --sinch-comp-inline-alert-color-info-default-icon
-      );
-  }
-
-  :host([type="success"]) #icon-success:not(.hidden),
-  :host([type="warn"]) #icon-warn:not(.hidden),
-  :host([type="error"]) #icon-error:not(.hidden),
-  :host([type="info"]) #icon-info:not(.hidden) {
-    display: block;
   }
 
   #body-wrapper {
@@ -227,15 +177,7 @@
 </style>
 
 <div id="wrapper">
-  <sinch-icon icons-version="2" name="" id="icon-custom" class="hidden"></sinch-icon>
-  <sinch-icon icons-version="2" name="circle-info" id="icon-info"></sinch-icon>
-  <sinch-icon icons-version="2" name="circle-check" id="icon-success"></sinch-icon>
-  <sinch-icon icons-version="2" name="triangle-exclamation"
-    id="icon-warn"
-  ></sinch-icon>
-  <sinch-icon icons-version="2" name="octagon-exclamation"
-    id="icon-error"
-  ></sinch-icon>
+  <sinch-icon icons-version="2" name="" id="icon"></sinch-icon>
   <div id="body-wrapper">
     <sinch-title id="caption" level="3" type="s"></sinch-title>
     <sinch-rich-text id="text"></sinch-rich-text>

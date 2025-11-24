@@ -15,6 +15,7 @@ import templateHTML from './template.html?raw'
 import { typeValues } from './utils'
 import type { TSinchInlineAlertType } from './types'
 import type { TSinchIcons } from '../icon'
+import type { NectaryComponentVanilla } from '../types'
 
 export * from './types'
 
@@ -29,11 +30,7 @@ export class InlineAlert extends NectaryElement {
   #$closeSlot: HTMLSlotElement
   #$actionWrapper: HTMLElement
   #$actionSlot: HTMLSlotElement
-  #$iconCustom: HTMLElement
-  #$iconSuccess: HTMLElement
-  #$iconWarn: HTMLElement
-  #$iconError: HTMLElement
-  #$iconInfo: HTMLElement
+  #$icon: NectaryComponentVanilla<'sinch-icon'>
 
   constructor() {
     super()
@@ -48,11 +45,7 @@ export class InlineAlert extends NectaryElement {
     this.#$closeSlot = shadowRoot.querySelector('slot[name="close"]')!
     this.#$actionWrapper = shadowRoot.querySelector('#action')!
     this.#$actionSlot = shadowRoot.querySelector('slot[name="action"]')!
-    this.#$iconCustom = shadowRoot.querySelector('#icon-custom')!
-    this.#$iconSuccess = shadowRoot.querySelector('#icon-success')!
-    this.#$iconWarn = shadowRoot.querySelector('#icon-warn')!
-    this.#$iconError = shadowRoot.querySelector('#icon-error')!
-    this.#$iconInfo = shadowRoot.querySelector('#icon-info')!
+    this.#$icon = shadowRoot.querySelector('#icon')!
   }
 
   connectedCallback() {
@@ -67,7 +60,6 @@ export class InlineAlert extends NectaryElement {
 
     this.#onCloseSlotChange()
     this.#onActionSlotChange()
-    this.#updateIconDisplay()
   }
 
   disconnectedCallback() {
@@ -83,7 +75,7 @@ export class InlineAlert extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'caption', 'icon']
+    return ['text', 'caption', 'type', 'icon']
   }
 
   attributeChangedCallback(
@@ -104,12 +96,14 @@ export class InlineAlert extends NectaryElement {
         break
       }
 
-      case 'icon': {
-        this.#updateIconDisplay()
+      case 'type': {
+        this.#updateDefaultIcon(newVal)
 
-        if (newVal != null && newVal !== '') {
-          updateAttribute(this.#$iconCustom, 'name', newVal)
-        }
+        break
+      }
+
+      case 'icon': {
+        updateAttribute(this.#$icon, 'name', newVal)
 
         break
       }
@@ -164,15 +158,31 @@ export class InlineAlert extends NectaryElement {
     )
   }
 
-  #updateIconDisplay = () => {
+  #updateDefaultIcon = (type: string | null) => {
     const iconValue = this.icon
     const hasCustomIcon = Boolean(iconValue)
 
-    setClass(this.#$iconCustom, 'hidden', !hasCustomIcon)
-    setClass(this.#$iconSuccess, 'hidden', hasCustomIcon)
-    setClass(this.#$iconWarn, 'hidden', hasCustomIcon)
-    setClass(this.#$iconError, 'hidden', hasCustomIcon)
-    setClass(this.#$iconInfo, 'hidden', hasCustomIcon)
+    // Update default if "icon" is not explicitly set
+    if (!hasCustomIcon) {
+      switch (type) {
+        case 'info':
+          updateAttribute(this.#$icon, 'name', 'circle-info')
+
+          break
+        case 'success':
+          updateAttribute(this.#$icon, 'name', 'circle-check')
+
+          break
+        case 'warn':
+          updateAttribute(this.#$icon, 'name', 'triangle-exclamation')
+
+          break
+        case 'error':
+          updateAttribute(this.#$icon, 'name', 'octagon-exclamation')
+
+          break
+      }
+    }
   }
 }
 
