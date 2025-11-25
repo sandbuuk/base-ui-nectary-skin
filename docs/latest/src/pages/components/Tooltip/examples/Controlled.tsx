@@ -10,7 +10,11 @@ const wrapperStyles: CSSProperties = {
 export const ControlledExample: FC = () => {
   return (
     <div style={wrapperStyles}>
-      <sinch-tooltip is-opened="true" text="I am a tooltip that is always opened">
+      <sinch-tooltip
+        allow-scroll
+        is-opened="true"
+        text="I am a tooltip that is always opened"
+      >
         <sinch-button
           size="s"
           text="Always open"
@@ -18,10 +22,7 @@ export const ControlledExample: FC = () => {
           type="cta-secondary"
         />
       </sinch-tooltip>
-      <sinch-tooltip
-        is-opened="false"
-        text="Tooltip"
-      >
+      <sinch-tooltip is-opened="false" text="Tooltip">
         <sinch-button
           size="s"
           text="Always closed"
