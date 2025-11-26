@@ -41,6 +41,7 @@ export const createIconClass = (templateHTML: string): CustomElementConstructor 
 
     connectedCallback() {
       updateAttribute(this.$svg, 'preserveAspectRatio', 'xMinYMin meet')
+      updateAttribute(this, 'role', 'img')
     }
 
     attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
