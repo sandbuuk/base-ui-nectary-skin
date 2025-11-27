@@ -35,11 +35,11 @@ export class TabsOption extends NectaryElement {
 
   connectedCallback() {
     this.setAttribute('role', 'tab')
-    this.#$button.addEventListener('click', this.#onClick)
+    this.addEventListener('click', this.#onClick)
   }
 
   disconnectedCallback() {
-    this.#$button.removeEventListener('click', this.#onClick)
+    this.removeEventListener('click', this.#onClick)
   }
 
   static get observedAttributes() {
