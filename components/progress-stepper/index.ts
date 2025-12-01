@@ -70,7 +70,7 @@ export class ProgressStepper extends NectaryElement {
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
-        this.#onValueChange(newVal)
+        this.#onValueChange(newVal, true)
 
         break
       }
@@ -110,7 +110,7 @@ export class ProgressStepper extends NectaryElement {
 
   #onSlotChange = () => {
     this.#$items = this.#$slot.assignedElements()as HTMLElement[]
-    this.#onValueChange(this.value)
+    this.#onValueChange(this.value, false)
     this.#updateProgressValue()
   }
 
@@ -124,9 +124,15 @@ export class ProgressStepper extends NectaryElement {
     }
   }
 
-  #onValueChange(value: string | null) {
+  #onValueChange(value: string | null, shouldFocus: boolean) {
     for (const $item of this.#$items) {
       const isChecked = value === getAttribute($item, 'value')
+
+      if (shouldFocus && isChecked) {
+        requestAnimationFrame(() => {
+          $item.focus()
+        })
+      }
 
       setProgressStepperItemChecked($item, isChecked)
     }
