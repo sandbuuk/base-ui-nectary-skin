@@ -19,6 +19,7 @@ export const DropdownExample: FC = () => {
       orientation="bottom-right"
       on-close={() => setOpen(false)}
       aria-label="Action Menu"
+      allow-scroll
     >
       <sinch-button
         slot="target"

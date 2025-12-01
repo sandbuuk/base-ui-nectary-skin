@@ -98,6 +98,7 @@ export class Popover extends NectaryElement {
       'orientation',
       'open',
       'modal',
+      'allow-scroll',
       'tip',
       'aria-label',
       'aria-description',
@@ -132,6 +133,13 @@ export class Popover extends NectaryElement {
         break
       }
 
+      case 'allow-scroll': {
+        updateAttribute(this.#$pop, name, newVal)
+        updateBooleanAttribute(this, name, isAttrTrue(newVal))
+
+        break
+      }
+
       case 'modal':
       case 'open': {
         updateAttribute(this.#$pop, name, newVal)
@@ -161,6 +169,14 @@ export class Popover extends NectaryElement {
 
   get modal(): boolean {
     return getBooleanAttribute(this, 'modal')
+  }
+
+  set allowScroll(allow: boolean) {
+    updateBooleanAttribute(this, 'allow-scroll', allow)
+  }
+
+  get allowScroll(): boolean {
+    return getBooleanAttribute(this, 'allow-scroll')
   }
 
   set open(isOpen: boolean) {

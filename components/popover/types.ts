@@ -3,6 +3,8 @@ import type { NectaryComponentReactByType, NectaryComponentVanillaByType, TRect,
 export type TSinchPopoverOrientation = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'bottom' | 'top' | 'left' | 'right'
 
 export type TSinchPopoverProps = {
+  /** Allow scrolling of the page when popover is open */
+  'allow-scroll'?: boolean,
   /** Open/close state */
   open: boolean,
   /** Orientation, where it *points to* from origin */

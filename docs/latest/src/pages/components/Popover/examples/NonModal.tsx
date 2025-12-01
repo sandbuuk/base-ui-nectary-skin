@@ -25,6 +25,7 @@ export const NonModalExample: FC = () => {
       open={isOpen}
       orientation="bottom-right"
       on-close={onClose}
+      allow-scroll
     >
       <sinch-button
         slot="target"
