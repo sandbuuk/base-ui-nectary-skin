@@ -14,6 +14,8 @@ import {
 import templateHTML from './template.html?raw'
 import { typeValues } from './utils'
 import type { TSinchInlineAlertType } from './types'
+import type { TSinchIcons } from '../icon'
+import type { NectaryComponentVanilla } from '../types'
 
 export * from './types'
 
@@ -28,6 +30,7 @@ export class InlineAlert extends NectaryElement {
   #$closeSlot: HTMLSlotElement
   #$actionWrapper: HTMLElement
   #$actionSlot: HTMLSlotElement
+  #$icon: NectaryComponentVanilla<'sinch-icon'>
 
   constructor() {
     super()
@@ -42,6 +45,7 @@ export class InlineAlert extends NectaryElement {
     this.#$closeSlot = shadowRoot.querySelector('slot[name="close"]')!
     this.#$actionWrapper = shadowRoot.querySelector('#action')!
     this.#$actionSlot = shadowRoot.querySelector('slot[name="action"]')!
+    this.#$icon = shadowRoot.querySelector('#icon')!
   }
 
   connectedCallback() {
@@ -71,7 +75,7 @@ export class InlineAlert extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'caption']
+    return ['text', 'caption', 'type', 'icon']
   }
 
   attributeChangedCallback(
@@ -88,6 +92,18 @@ export class InlineAlert extends NectaryElement {
 
       case 'caption': {
         updateAttribute(this.#$caption, 'text', newVal)
+
+        break
+      }
+
+      case 'type': {
+        this.#updateDefaultIcon(newVal)
+
+        break
+      }
+
+      case 'icon': {
+        updateAttribute(this.#$icon, 'name', newVal)
 
         break
       }
@@ -118,6 +134,14 @@ export class InlineAlert extends NectaryElement {
     updateAttribute(this, 'caption', value)
   }
 
+  get icon() {
+    return getAttribute(this, 'icon', '') as TSinchIcons
+  }
+
+  set icon(value: TSinchIcons) {
+    updateAttribute(this, 'icon', value)
+  }
+
   #onCloseSlotChange = () => {
     setClass(
       this.#$closeWrapper,
@@ -132,6 +156,33 @@ export class InlineAlert extends NectaryElement {
       'empty',
       this.#$actionSlot.assignedElements().length === 0
     )
+  }
+
+  #updateDefaultIcon = (type: string | null) => {
+    const iconValue = this.icon
+    const hasCustomIcon = Boolean(iconValue)
+
+    // Update default if "icon" is not explicitly set
+    if (!hasCustomIcon) {
+      switch (type) {
+        case 'info':
+          updateAttribute(this.#$icon, 'name', 'circle-info')
+
+          break
+        case 'success':
+          updateAttribute(this.#$icon, 'name', 'circle-check')
+
+          break
+        case 'warn':
+          updateAttribute(this.#$icon, 'name', 'triangle-exclamation')
+
+          break
+        case 'error':
+          updateAttribute(this.#$icon, 'name', 'octagon-exclamation')
+
+          break
+      }
+    }
   }
 }
 

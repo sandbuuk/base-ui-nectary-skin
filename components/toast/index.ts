@@ -39,7 +39,6 @@ export class Toast extends NectaryElement {
   connectedCallback() {
     super.connectedCallback()
     this.setAttribute('aria-atomic', 'true')
-    this.setAttribute('aria-live', 'polite')
     this.addEventListener('-timeout', this.#onTimeoutReactHandler)
 
     this.#updateTimeout()

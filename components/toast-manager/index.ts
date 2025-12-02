@@ -1,5 +1,6 @@
 import '../title'
 import '../text'
+import { Toast } from '../toast'
 import {
   cloneNode,
   defineCustomElement,
@@ -163,6 +164,14 @@ export class ToastManager extends NectaryElement {
       const cloned = cloneNode(item, true)
       const rect = item.getBoundingClientRect()
       const wrapper = document.createElement('div')
+
+      if (item instanceof Toast) {
+        if (item.hasAttribute('type')) {
+          const type = item.type
+
+          this.#$list.setAttribute('aria-live', type === 'error' || type === 'warn' ? 'assertive' : 'polite')
+        }
+      }
 
       wrapper.className = 'item-wrapper'
       wrapper.appendChild(cloned)

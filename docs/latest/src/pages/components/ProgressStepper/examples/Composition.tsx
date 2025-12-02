@@ -51,7 +51,9 @@ export const CompositionExample: FC = () => {
     page3: false,
   })
   const onChange = (e: CustomEvent<string>) => setStep(e.detail)
-  const onPrev = (gotoPage: string) => () => setStep(gotoPage)
+  const onPrev = (gotoPage: string) => () => {
+    setStep(gotoPage)
+  }
   const onNext = (currentPage: string, gotoPage: string) => () => {
     if (progressStep === currentPage) {
       setProgressStep(gotoPage)
@@ -76,9 +78,9 @@ export const CompositionExample: FC = () => {
           progressValue={progressStep}
           on-change={onChange}
         >
-          <sinch-progress-stepper-item value="page1" text="Shipping address" invalid={invalidState.page1} aria-label="Step 1"/>
-          <sinch-progress-stepper-item value="page2" text="Payment method" invalid={invalidState.page2} aria-label="Step 2"/>
-          <sinch-progress-stepper-item value="page3" text="Item and shipping" invalid={invalidState.page3} aria-label="Step 3"/>
+          <sinch-progress-stepper-item value="page1" text="Shipping address" invalid={invalidState.page1} aria-label="Shipping adress"/>
+          <sinch-progress-stepper-item value="page2" text="Payment method" invalid={invalidState.page2} aria-label="Payment method"/>
+          <sinch-progress-stepper-item value="page3" text="Item and shipping" invalid={invalidState.page3} aria-label="Item and shippping"/>
         </sinch-progress-stepper>
       </div>
 

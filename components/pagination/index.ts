@@ -9,6 +9,7 @@ import {
   getReactEventHandler,
   isTargetEqual,
   getTargetIndexInParent,
+  // updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html?raw'
 import type { TRect } from '../types'
@@ -97,22 +98,35 @@ export class Pagination extends NectaryElement {
 
     for (let i = 0; i < this.#$buttons.length; i++) {
       const $b = this.#$buttons[i]
+      let isActive = false
 
       if (value < 3) {
-        setClass($b, 'active', value === i)
+        isActive = value === i
       } else if (value >= max - MIDDLE_BTN_INDEX) {
-        setClass($b, 'active', i + valueOffset === value)
+        isActive = i + valueOffset === value
       } else {
-        setClass($b, 'active', i === MIDDLE_BTN_INDEX)
+        isActive = i === MIDDLE_BTN_INDEX
+      }
+
+      setClass($b, 'active', isActive)
+
+      if (isActive) {
+        $b.setAttribute('aria-current', 'page')
+      } else {
+        $b.removeAttribute('aria-current')
       }
 
       if (max > NUM_BUTTONS) {
-        setClass(
-          $b,
-          'dots',
-          (i === DOTS_LEFT_INDEX && value > MIDDLE_BTN_INDEX) ||
+        const isEllipsis = (i === DOTS_LEFT_INDEX && value > MIDDLE_BTN_INDEX) ||
               (i === DOTS_RIGHT_INDEX && value <= max - DOTS_RIGHT_INDEX)
-        )
+
+        setClass($b, 'dots', isEllipsis)
+
+        if (isEllipsis) {
+          $b.setAttribute('aria-hidden', 'true')
+        } else {
+          $b.removeAttribute('aria-hidden')
+        }
       }
 
       setClass($b, 'hidden', i >= max)
@@ -120,12 +134,14 @@ export class Pagination extends NectaryElement {
       const btnText = $b.firstElementChild
 
       if (btnText != null) {
-        btnText.textContent =
-            i === FIRST_BTN_INDEX
-              ? '1'
-              : i === LAST_BTN_INDEX
-                ? String(max)
-                : String(i + 1 + valueOffset)
+        const page = i === FIRST_BTN_INDEX
+          ? '1'
+          : i === LAST_BTN_INDEX
+            ? String(max)
+            : String(i + 1 + valueOffset)
+
+        btnText.textContent = page
+        $b.setAttribute('aria-label', `Go to page ${page}`)
       }
     }
 
