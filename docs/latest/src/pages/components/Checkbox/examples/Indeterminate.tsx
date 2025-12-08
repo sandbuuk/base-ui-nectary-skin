@@ -9,7 +9,7 @@ export const IndeterminateExample: FC = () => {
   return (
     <sinch-checkbox
       text="Label"
-      aria-label="Checkbox"
+      aria-label="Label"
       indeterminate
       checked={isChecked}
       on-change={onChange}
