@@ -9,7 +9,6 @@ import {
   getReactEventHandler,
   isTargetEqual,
   getTargetIndexInParent,
-  // updateBooleanAttribute,
 } from '../utils'
 import templateHTML from './template.html?raw'
 import type { TRect } from '../types'
@@ -22,6 +21,11 @@ const FIRST_BTN_INDEX = 0
 const LAST_BTN_INDEX = NUM_BUTTONS - 1
 const DOTS_LEFT_INDEX = 1
 const DOTS_RIGHT_INDEX = LAST_BTN_INDEX - 1
+
+const isEllipsis = (btnIndex: number, value: number, max: number) => {
+  return (btnIndex === DOTS_LEFT_INDEX && value > MIDDLE_BTN_INDEX) ||
+(btnIndex === DOTS_RIGHT_INDEX && value <= max - DOTS_RIGHT_INDEX)
+}
 
 const template = document.createElement('template')
 
@@ -109,24 +113,14 @@ export class Pagination extends NectaryElement {
       }
 
       setClass($b, 'active', isActive)
-
-      if (isActive) {
-        $b.setAttribute('aria-current', 'page')
-      } else {
-        $b.removeAttribute('aria-current')
-      }
+      updateAttribute($b, 'aria-current', isActive ? 'page' : null)
 
       if (max > NUM_BUTTONS) {
-        const isEllipsis = (i === DOTS_LEFT_INDEX && value > MIDDLE_BTN_INDEX) ||
-              (i === DOTS_RIGHT_INDEX && value <= max - DOTS_RIGHT_INDEX)
+        const ellipsis = isEllipsis(i, value, max)
 
-        setClass($b, 'dots', isEllipsis)
-
-        if (isEllipsis) {
-          $b.setAttribute('aria-hidden', 'true')
-        } else {
-          $b.removeAttribute('aria-hidden')
-        }
+        setClass($b, 'dots', ellipsis)
+        updateAttribute($b, 'aria-hidden', ellipsis)
+        $b.disabled = ellipsis
       }
 
       setClass($b, 'hidden', i >= max)
@@ -154,7 +148,7 @@ export class Pagination extends NectaryElement {
   #onButtonClick = (e: Event) => {
     e.stopPropagation()
 
-    const value = Math.max(getIntegerAttribute(this, 'value', 0) - 1)
+    const value = getIntegerAttribute(this, 'value', 0) - 1
     const max = Math.max(0, getIntegerAttribute(this, 'max', 0))
 
     // Left arrow button

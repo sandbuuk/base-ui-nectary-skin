@@ -239,7 +239,7 @@ export const ComplexReactHookFormExample: FC = () => {
           <>
             <sinch-checkbox
               text="I accept the conditions"
-              aria-label="Checkbox"
+              aria-label="I accept the conditions"
               checked={field.value}
               on-change={(e) => field.onChange(e.detail)}
               on-blur={() => field.onBlur()}

@@ -32,6 +32,7 @@ export const Checkbox: FC<CheckboxProps> = ({ searchPrefix = 'checkbox', slot })
       name={name}
       value={valueData}
       text={text}
+      aria-label={text}
       disabled={isDisabled}
       indeterminate={isIndeterminate}
       invalid={isInvalid}
@@ -39,7 +40,6 @@ export const Checkbox: FC<CheckboxProps> = ({ searchPrefix = 'checkbox', slot })
       on-change={onChange}
       on-focus={onFocus}
       on-blur={onBlur}
-      aria-label="Checkbox"
     />
   )
 }

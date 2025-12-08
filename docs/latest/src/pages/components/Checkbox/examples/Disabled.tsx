@@ -9,7 +9,7 @@ export const DisabledExample: FC = () => {
   return (
     <sinch-checkbox
       text="Label"
-      aria-label="Checkbox"
+      aria-label="Label"
       disabled
       checked={isChecked}
       on-change={onChange}

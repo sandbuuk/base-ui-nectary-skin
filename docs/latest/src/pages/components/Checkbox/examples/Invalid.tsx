@@ -9,7 +9,7 @@ export const InvalidExample: FC = () => {
   return (
     <sinch-checkbox
       text="Label"
-      aria-label="Checkbox"
+      aria-label="Label"
       invalid
       checked={isChecked}
       on-change={onChange}

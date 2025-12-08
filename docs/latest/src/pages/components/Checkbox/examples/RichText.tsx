@@ -11,7 +11,7 @@ export const RichTextExample: FC = () => {
   return (
     <sinch-checkbox
       text={mdText}
-      aria-label="Checkbox"
+      aria-label={mdText}
       checked={isChecked}
       on-change={onChange}
     />

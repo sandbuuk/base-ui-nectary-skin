@@ -246,7 +246,7 @@ export const ComplexFormikFormExample: FC = () => {
               <>
                 <sinch-checkbox
                   text="I accept the conditions"
-                  aria-label="Checkbox"
+                  aria-label="I accept the conditions"
                   checked={field.value}
                   on-change={(e) => setFieldValue('conditionAccepted', e.detail)}
                   on-blur={() => setFieldTouched('conditionAccepted')}
