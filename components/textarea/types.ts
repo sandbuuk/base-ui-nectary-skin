@@ -15,6 +15,7 @@ export type TSinchTextareaProps = {
   /** Number of rows */
   rows?: number,
   minRows?: number,
+  maxRows?: number,
   /** Whether the text field is resizable */
   resizable?: boolean,
   selectionStart?: number,

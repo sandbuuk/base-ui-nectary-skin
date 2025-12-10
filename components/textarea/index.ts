@@ -83,6 +83,7 @@ export class Textarea extends NectaryElement {
 
     this.#onBottomSlotChange()
     this.#updateMinRows()
+    this.#updateMaxRows()
     this.#onSizeUpdate()
   }
 
@@ -212,6 +213,12 @@ export class Textarea extends NectaryElement {
         break
       }
 
+      case 'maxrows': {
+        this.#updateMaxRows()
+
+        break
+      }
+
       case 'minrows': {
         this.#updateMinRows()
 
@@ -300,6 +307,14 @@ export class Textarea extends NectaryElement {
     return getIntegerAttribute(this, 'minrows', 0)
   }
 
+  get maxRows(): number {
+    return getIntegerAttribute(this, 'maxrows', 0)
+  }
+
+  set maxRows(value: number) {
+    updateAttribute(this, 'maxRows', value)
+  }
+
   get selectionStart(): HTMLTextAreaElement['selectionStart'] {
     return this.#$input.selectionStart
   }
@@ -336,6 +351,18 @@ export class Textarea extends NectaryElement {
     this.#$input.blur()
   }
 
+  #updateMaxRows() {
+    if (this.maxRows === 0) {
+      this.#$input.style.removeProperty('max-height')
+
+      return
+    }
+
+    if (this.isDomConnected) {
+      this.#calcMaxRows()
+    }
+  }
+
   #updateMinRows() {
     const minRows = this.minRows
 
@@ -364,6 +391,16 @@ export class Textarea extends NectaryElement {
     if (entry != null && entry.isIntersecting) {
       this.#calcMinRows()
     }
+  }
+
+  #calcMaxRows() {
+    if (this.maxRows === 0) {
+      return
+    }
+
+    this.#$input.rows = this.maxRows
+    this.#$input.style.setProperty('max-height', `${getRect(this.#$input).height}px`)
+    this.#$input.rows = this.rows
   }
 
   #calcMinRows() {

@@ -5,6 +5,7 @@ import { BottomComplexExample } from './examples/BottomComplex.tsx?example'
 import { FieldExample } from './examples/Field.tsx?example'
 import { RowsExample } from './examples/Rows.tsx?example'
 import { MinRowsExample } from './examples/MinRows.tsx?example'
+import { MaxRowsExample } from './examples/MaxRows.tsx?example'
 import { ResizableExample } from './examples/Resizable.tsx?example'
 import { DisabledExample } from './examples/Disabled.tsx?example'
 
@@ -44,6 +45,14 @@ Used with `resizable` attribute, to prevent shrinking Textarea height below cert
 In this example `minRows` value is set to `3`, so you cannot shrink the height of the Textarea below 3 lines.
 
 <Example Component={MinRowsExample}/>
+
+## Max rows
+
+Used with `resizable` attribute, to prevent expaned Textarea height above certain number of text lines.
+
+In this example `maxRows` value is set to `6`, so you cannot expand the height of the Textarea above 6 lines.
+
+<Example Component={MaxRowsExample}/>
 
 ## Disabled
 
