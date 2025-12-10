@@ -52,6 +52,8 @@ export type TSinchInputMethods = {
 }
 
 export type TSinchInputEvents = {
+  /** key-down handler*/
+  '-key-down'?: (e: KeyboardEvent) => void,
   /** Change value handler */
   '-change'?: (e: CustomEvent<string>) => void,
   /** Focus handler */
