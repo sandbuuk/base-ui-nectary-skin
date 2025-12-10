@@ -112,6 +112,7 @@ export class Input extends NectaryElement {
     this.#$iconSlot.addEventListener('slotchange', this.#onIconSlotChange, options)
     this.#$leftSlot.addEventListener('slotchange', this.#onLeftSlotChange, options)
     this.#$rightSlot.addEventListener('slotchange', this.#onRightSlotChange, options)
+    this.addEventListener('-key-down', this.#onKeyDownReactHandler, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
     this.addEventListener('-focus', this.#onFocusReactHandler, options)
     this.addEventListener('-blur', this.#onBlurReactHandler, options)
@@ -228,6 +229,8 @@ export class Input extends NectaryElement {
         }
       }
     }
+
+    this.dispatchEvent(new CustomEvent('-key-down', e))
   }
 
   static get observedAttributes() {
@@ -970,6 +973,11 @@ export class Input extends NectaryElement {
     const size = this.getAttribute('data-size') ?? DEFAULT_SIZE
 
     this.#sizeContext.dispatch(size)
+  }
+
+  #onKeyDownReactHandler = (e: Event) => {
+    getReactEventHandler(this, 'on-key-down')?.(e)
+    getReactEventHandler(this, 'onKeyDown')?.(e)
   }
 
   #onChangeReactHandler = (e: Event) => {
