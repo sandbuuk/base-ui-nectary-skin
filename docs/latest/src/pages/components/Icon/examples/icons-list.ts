@@ -50,6 +50,7 @@ export const sinchIconNames: TSinchIcons[] = ['ai-speech-bubble-dots-horizontal-
   'circle-plus',
   'circle-question',
   'circle-slash',
+  'clipboard-clock',
   'clipboard-list',
   'clock-rotate-left',
   'clock-rotate-right',
