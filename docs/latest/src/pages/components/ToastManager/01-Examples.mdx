@@ -6,6 +6,11 @@ import { OriginExample } from './examples/Origin.tsx?example'
 
 Toast Manager displays short messages about app processes in the screen. It is mostly used to provide feedback in a user action recently taken by the user. Toast are always dismissable and have a timeout in the aplication. They're meant to be noticed without disrupting a user's experience or requiring an action to be taken.
 
+### Note for Shell User
+
+If you're developing an MFE running on th framework's team Shell, please note that Toast Manager is already included in the Shell, so you don't need to add it again in your MFE. You can use the bus to trigger toasts from your MFE. See [docs](https://platform.int.sinch.com/docs/one-shell/03-features/07-toasts/) for more info.
+
+
 ## Complex
 
 A complete example that generates toasts with random text, type, optional close button and persistent mode. Click a lot to see all the use cases.
