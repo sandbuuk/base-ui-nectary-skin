@@ -154,7 +154,7 @@ export class Chip extends NectaryElement {
 
   #onClick = () => {
     this.dispatchEvent(
-      new CustomEvent('-click')
+      new CustomEvent('-click', { bubbles: true, composed: true })
     )
   }
 

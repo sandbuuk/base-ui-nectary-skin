@@ -49,11 +49,12 @@ export const createParseVisitor = (doc: Document) => {
           $p!.appendChild($codeTag)
         },
         tag(text: string) {
-          const $tag = doc.createElement('sinch-tag') as HTMLElementTagNameMap['sinch-tag']
+          const $chip = doc.createElement('sinch-chip') as HTMLElementTagNameMap['sinch-chip']
 
-          $tag.text = text
+          $chip.text = text
+          $chip.setAttribute('readonly', '')
 
-          $p!.appendChild($tag)
+          $p!.appendChild($chip)
         },
         inline(text, { isBold, isItalic, isStrikethrough }) {
           const $inline = doc.createElement('SPAN')

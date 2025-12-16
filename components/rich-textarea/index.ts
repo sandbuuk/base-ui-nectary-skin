@@ -1,4 +1,5 @@
 import { getEmojiBaseUrl } from '../emoji/utils'
+import '../chip'
 import {
   defineCustomElement,
   getAttribute,
@@ -30,6 +31,7 @@ import {
   insertText,
   isEditorEmpty,
   isSelectionEqual,
+  removeChip,
   serializeMarkdown,
   setBrowserCaret,
 } from './utils'
@@ -120,6 +122,7 @@ export class RichTextarea extends NectaryElement {
     this.#$input.addEventListener('cut', this.#onCut, options)
     this.#$input.addEventListener('copy', this.#onCopy, options)
     this.#$input.addEventListener('paste', this.#onPaste, options)
+    this.#$input.addEventListener('-click', this.#onChipClick, options)
     this.#$bottomSlot.addEventListener('slotchange', this.#onBottomSlotChange, options)
     this.#$topSlot.addEventListener('slotchange', this.#onTopSlotChange, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
@@ -312,6 +315,19 @@ export class RichTextarea extends NectaryElement {
     this.#handleActionResult(
       handleEmojiMousedown(e.target as Node)
     )
+  }
+
+  #onChipClick = (e: Event) => {
+    console.log('Chip click event', e)
+
+    const $chip = e.target as Node
+    const range = removeChip($chip, this.#$input)
+
+    if (range !== null) {
+      setBrowserCaret(range)
+      this.#cachedRange = range
+      this.#dispatchChangeEvent()
+    }
   }
 
   #onKeydown = (e: KeyboardEvent) => {

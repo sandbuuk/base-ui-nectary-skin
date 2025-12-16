@@ -2,7 +2,7 @@ import { getEmojiBaseUrl } from '../emoji/utils'
 import '../emoji'
 import '../code-tag'
 import '../link'
-import '../tag'
+import '../chip'
 import {
   defineCustomElement,
   NectaryElement,

@@ -63,6 +63,14 @@
   ::slotted([slot="icon"]) {
     margin-left: -4px;
   }
+
+  :host([readonly]) #button {
+    padding-right: 9px;
+  }
+
+  :host([readonly]) slot[name="right-icon"] {
+    display: none;
+  }
 </style>
 
 <div id="button" inert>
