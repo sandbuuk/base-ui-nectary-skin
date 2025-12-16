@@ -10,6 +10,8 @@ export type TSinchChipProps = {
   color?: TSinchChipColor,
   /** Small */
   small?: boolean,
+  /** Readonly - hides the close button */
+  readonly?: boolean,
 }
 
 export type TSinchChipEvents = {
