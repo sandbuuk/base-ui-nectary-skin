@@ -7,6 +7,7 @@ const withValue = '/rich-textarea?width=400&value=Input%20value'
 const withPlaceholder = '/rich-textarea?width=400&placeholder=Enter%20text...'
 const withEverything = '/rich-textarea?width=400&top=true&bottom=true&placeholder=Enter%20text...'
 const withMd = '/rich-textarea?width=400&example=md'
+const withTag = '/rich-textarea?width=400&value=Hello%20%7B%7BJohnDoe%7D%7D%20world'
 
 const mockEmojiUrl = async (page: Page) => {
   const url = '**/*.{svg}'
@@ -87,6 +88,13 @@ test('rich-textarea screenshots', runScreenshotTests('sinch-rich-textarea', [
     before({ page }) {
       return mockEmojiUrl(page)
     },
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'tag',
+    url: withTag,
     async *fn() {
       yield { name: 'shot' }
     },

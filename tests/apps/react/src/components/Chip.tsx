@@ -8,6 +8,7 @@ export const Chip: FC = () => {
   const color: any = search.get('color') ?? undefined
   const text = search.get('text') ?? ''
   const isSmall = search.get('small') != null
+  const isReadonly = search.get('readonly') != null
   const hasIcon = search.get('icon') != null
   const hasRightIcon = search.get('right-icon') != null
   const onClick = () => window.dispatchEvent(new CustomEvent('sinch-chip-click'))
@@ -19,6 +20,7 @@ export const Chip: FC = () => {
       color={color}
       text={text}
       small={isSmall}
+      readonly={isReadonly}
       aria-label="Chip"
       on-click={onClick}
       on-focus={onFocus}

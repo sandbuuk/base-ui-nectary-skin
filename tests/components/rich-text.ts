@@ -4,6 +4,7 @@ import type { Page } from '@playwright/test'
 
 const withText = '/rich-text'
 const withMarkdown = '/rich-text?width=500&example=md'
+const withTag = '/rich-text?width=400&example=tag'
 
 const mockEmojiUrl = async (page: Page) => {
   const url = '**/*.{svg}'
@@ -66,6 +67,13 @@ test('rich-text screenshots', runScreenshotTests('sinch-rich-text', [
     before({ page }) {
       return mockEmojiUrl(page)
     },
+    async *fn() {
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'tag',
+    url: withTag,
     async *fn() {
       yield { name: 'shot' }
     },
