@@ -152,7 +152,12 @@ export abstract class GlobalElementsManager {
       const sinchName = `sinch-${itemName}` as SinchElementName
 
       store.definitions.set(sinchName, () => Promise.resolve(globalConstructor))
-      window.customElements.define(sinchName, globalConstructor)
+
+      try {
+        window.customElements.define(sinchName, globalConstructor)
+      } catch (error) {
+        console.warn(error)
+      }
     }
   }
 
