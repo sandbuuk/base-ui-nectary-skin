@@ -1,8 +1,51 @@
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
+export const SKINTONE_SWATCH_COLORS = [
+  'skintone-dark',
+  'skintone-default',
+  'skintone-light',
+  'skintone-light-medium',
+  'skintone-medium',
+  'skintone-medium-dark',
+] as const
+
+export const SWATCH_COLORS = [
+  'blue',
+  'dark-blue',
+  'dark-gray',
+  'dark-green',
+  'dark-orange',
+  'dark-pink',
+  'dark-red',
+  'dark-violet',
+  'dark-yellow',
+  'default',
+  'gray',
+  'green',
+  'light-blue',
+  'light-gray',
+  'light-green',
+  'light-orange',
+  'light-pink',
+  'light-red',
+  'light-violet',
+  'light-yellow',
+  'orange',
+  'pink',
+  'red',
+  'violet',
+  'yellow',
+  ...SKINTONE_SWATCH_COLORS,
+] as const
+
+export type SkinToneColor = typeof SKINTONE_SWATCH_COLORS[number]
+export type SwatchColors = typeof SWATCH_COLORS[number]
+
 export type TSinchColorSwatchProps = {
   /** Color name */
   name?: string,
+  /** Aria label */
+  'aria-label'?: string,
 }
 
 export type TSinchColorSwatchStyle = {

@@ -3,6 +3,8 @@ import type { NectaryComponentReactByType, NectaryComponentVanillaByType, Nectar
 export type TSinchColorMenuOptionProps = {
   /** Value */
   value: string,
+  /** Aria label */
+  'aria-label'?: string,
 }
 
 export type TSinchColorMenuOptionStyle = {
