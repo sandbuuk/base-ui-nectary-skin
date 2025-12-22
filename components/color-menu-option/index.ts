@@ -1,6 +1,6 @@
 import '../color-swatch'
 import '../tooltip'
-import { getSwatchColorFg } from '../color-swatch/utils'
+import { getSwatchColorFg, isSwatchColor } from '../color-swatch/utils'
 import {
   defineCustomElement,
   getAttribute,
@@ -40,20 +40,37 @@ export class ColorMenuOption extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['value']
+    return ['value', 'aria-label']
   }
 
   attributeChangedCallback(name: string, _: string | null, newVal: string | null) {
     switch (name) {
       case 'value': {
+        if (newVal == null) {
+          this.#$wrapper.style.removeProperty('--sinch-global-color-icon')
+
+          break
+        }
+
+        if (!isSwatchColor(newVal)) {
+          this.#$wrapper.style.setProperty('--sinch-global-color-icon', newVal)
+
+          break
+        }
+
         updateAttribute(this.#$tooltip, 'text', newVal)
         updateAttribute(this.#$swatch, 'name', newVal)
 
-        if (newVal !== null) {
-          this.#$wrapper.style.setProperty('--sinch-global-color-icon', getSwatchColorFg(newVal))
-        } else {
-          this.#$wrapper.style.removeProperty('--sinch-global-color-icon')
+        this.#$wrapper.style.setProperty('--sinch-global-color-icon', getSwatchColorFg(newVal))
+
+        break
+      }
+      case 'aria-label': {
+        if (newVal == null) {
+          break
         }
+
+        updateAttribute(this.#$swatch, 'aria-label', newVal)
 
         break
       }

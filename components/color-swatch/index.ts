@@ -7,7 +7,7 @@ import {
   updateAttribute,
 } from '../utils'
 import templateHTML from './template.html?raw'
-import { getSwatchColorBg } from './utils'
+import { getSwatchColorBg, isSwatchColor } from './utils'
 
 export * from './types'
 
@@ -38,7 +38,7 @@ export class ColorSwatch extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['name']
+    return ['name', 'aria-label']
   }
 
   attributeChangedCallback(name: string) {
@@ -59,6 +59,14 @@ export class ColorSwatch extends NectaryElement {
     updateAttribute(this, 'name', value)
   }
 
+  get 'aria-label'() {
+    return getAttribute(this, 'aria-label')
+  }
+
+  set 'aria-label'(value: string | null) {
+    updateAttribute(this, 'aria-label', value)
+  }
+
   #updateColor() {
     if (!this.isDomConnected) {
       return
@@ -66,14 +74,27 @@ export class ColorSwatch extends NectaryElement {
 
     const colorName = this.name
 
-    if (colorName !== null && colorName.length > 0) {
+    if (colorName === null || colorName.length === 0) {
+      this.#$wrapper.style.removeProperty('background-color')
+      setClass(this.#$wrapper, 'no-color', true)
+
+      return
+    }
+
+    if (isSwatchColor(colorName)) {
+      const exitingAriaLabel = getAttribute(this, 'aria-label')
+
+      if (exitingAriaLabel == null || isSwatchColor(exitingAriaLabel)) {
+        updateAttribute(this, 'aria-label', colorName)
+      }
+
       const bg = getSwatchColorBg(colorName)
 
       this.#$wrapper.style.setProperty('background-color', bg)
       setClass(this.#$wrapper, 'no-color', false)
     } else {
-      this.#$wrapper.style.removeProperty('background-color')
-      setClass(this.#$wrapper, 'no-color', true)
+      this.#$wrapper.style.setProperty('background-color', colorName)
+      setClass(this.#$wrapper, 'no-color', false)
     }
   }
 }
