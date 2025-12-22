@@ -16,7 +16,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   background: var(--nectary-surface-secondary);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   border-bottom: 1px solid var(--nectary-border-primary);
   flex-shrink: 0;
   height: var(--header-height);
