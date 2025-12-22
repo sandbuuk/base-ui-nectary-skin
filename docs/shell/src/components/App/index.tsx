@@ -24,6 +24,7 @@ import { LabsPage } from '~/pages/08-Labs'
 import { GlobalComponentsPage } from '~/pages/09-GlobalComponents'
 import { V3MigrationPage } from '~/pages/10-V3Migration'
 import { V5MigrationPage } from '~/pages/11-V5Migration'
+import { PlaygroundPage } from '~/pages/12-Playground'
 import { NotFoundPage } from '~/pages/NotFound'
 import './styles.css'
 import '@nectary/theme-base'
@@ -139,6 +140,7 @@ export const App: FC = () => {
                   <NavigationItem path="/global-components" text="Global Components"/>
                   <NavigationItem path="/V5Migration" text="V5 Migration"/>
                   <NavigationItem path="/V3Migration" text="V3 Migration"/>
+                  <NavigationItem path="/playground" text="Playground"/>
                 </NavigationList>
               </NavigationGroup>
               <ComponentsList/>
@@ -165,6 +167,7 @@ export const App: FC = () => {
             <Route path="/global-components" element={<GlobalComponentsPage/>}/>
             <Route path="/V5Migration" element={<V5MigrationPage/>}/>
             <Route path="/V3Migration" element={<V3MigrationPage/>}/>
+            <Route path="/playground" element={<PlaygroundPage/>}/>
             <Route path="/labComponents" element={<LabsPage/>}/>
             <Route path="/labComponents/*" element={<ComponentsPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>

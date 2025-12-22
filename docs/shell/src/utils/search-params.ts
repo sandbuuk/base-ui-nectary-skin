@@ -1,6 +1,7 @@
 export const VERSION_KEY = 'version'
+export const CODE_KEY = 'code'
 
-const supportedParams = [VERSION_KEY]
+const supportedParams = [VERSION_KEY, CODE_KEY]
 
 const getSearchKeys = (params: URLSearchParams): string[] => {
   const res: string[] = []
