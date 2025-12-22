@@ -95,12 +95,7 @@ export const EXAMPLES: Record<string, string> = {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {items.map((item, index) => (
           <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <sinch-chip>{item}</sinch-chip>
-            <sinch-button
-              type="danger"
-              text="Remove"
-              on-click={() => removeItem(index)}
-            />
+            <sinch-chip text={item} on-click={() => removeItem(index)}></sinch-chip>
           </div>
         ))}
       </div>

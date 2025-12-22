@@ -9,6 +9,8 @@ import { decodeCode, getShareableUrl } from './utils/url-codec'
 import type { FC } from 'react'
 import { useThemeName } from '~/context/theme-control'
 // Only import components used by the playground UI itself
+import '@nectary/components/accordion'
+import '@nectary/components/accordion-item'
 import '@nectary/components/action-menu'
 import '@nectary/components/action-menu-option'
 import '@nectary/components/button'
@@ -184,8 +186,8 @@ export const PlaygroundPage: FC = () => {
     return urlCode ?? DEFAULT_CODE
   })
   const [error, setError] = useState<string | null>(null)
-  const [showToast, setShowToast] = useState(false)
   const [examplesOpen, setExamplesOpen] = useState(false)
+  const [openPanels, setOpenPanels] = useState<string>('editor,preview')
 
   const isDarkTheme = themeName === 'dark'
   const themeClass = isDarkTheme ? 'nectary-theme-base nectary-theme-dark' : 'nectary-theme-base'
@@ -298,8 +300,6 @@ export const PlaygroundPage: FC = () => {
 
     try {
       await navigator.clipboard.writeText(url)
-      setShowToast(true)
-      setTimeout(() => setShowToast(false), 3000)
     } catch (err) {
       console.error('Failed to copy URL:', err)
     }
@@ -363,42 +363,44 @@ export const PlaygroundPage: FC = () => {
         </div>
       </header>
 
-      <div className="playground-editor-pane">
-        <div className="playground-editor-header">
-          <sinch-title text="JSX" type="xs" level="2"/>
-          {error !== null && <span className="playground-error-indicator">Error</span>}
-        </div>
-        <div className="playground-editor-content">
-          <Editor
-            height="100%"
-            language="typescript"
-            path="playground.tsx"
-            value={code}
-            onChange={handleEditorChange}
-            beforeMount={configureMonaco}
-            theme="nectary-dark"
-            options={{
-              minimap: { enabled: false },
-              fontSize: 14,
-              lineNumbers: 'on',
-              scrollBeyondLastLine: false,
-              automaticLayout: true,
-              tabSize: 2,
-              wordWrap: 'on',
-              padding: { top: 8 },
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="playground-preview-pane">
-        <div className="playground-preview-header">
-          <sinch-title text="Preview" type="xs" level="2"/>
-        </div>
-        <div className="playground-preview-content">
-          <div ref={previewRef} className="playground-preview-shadow-host"/>
-        </div>
-      </div>
+      <sinch-accordion
+        multiple
+        value={openPanels}
+        on-change={(e: CustomEvent<string>) => setOpenPanels(e.detail)}
+        class="playground-accordion"
+      >
+        <sinch-accordion-item value="editor" label="JSX">
+          {error !== null && (
+            <span slot="icon" className="playground-error-indicator">Error</span>
+          )}
+          <div slot="content" className="playground-editor-content">
+            <Editor
+              height="100%"
+              language="typescript"
+              path="playground.tsx"
+              value={code}
+              onChange={handleEditorChange}
+              beforeMount={configureMonaco}
+              theme="nectary-dark"
+              options={{
+                minimap: { enabled: false },
+                fontSize: 14,
+                lineNumbers: 'on',
+                scrollBeyondLastLine: false,
+                automaticLayout: true,
+                tabSize: 2,
+                wordWrap: 'on',
+                padding: { top: 8 },
+              }}
+            />
+          </div>
+        </sinch-accordion-item>
+        <sinch-accordion-item value="preview" label="Preview">
+          <div slot="content" className="playground-preview-content">
+            <div ref={previewRef} className="playground-preview-shadow-host"/>
+          </div>
+        </sinch-accordion-item>
+      </sinch-accordion>
     </div>
   )
 }
