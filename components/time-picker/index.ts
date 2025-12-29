@@ -91,7 +91,7 @@ export class TimePicker extends NectaryElement {
       el.style.transform = `translate(${x}px, ${y}px)`
       el.textContent = hourDisplayValue
       el.setAttribute('role', 'button')
-      el.setAttribute('tabindex', '0')
+      el.setAttribute('tabindex', '-1')
       el.setAttribute('aria-label', `${hourDisplayValue} o'clock`)
       el.addEventListener('click', () => this.#onHourDigitClick(i))
       el.addEventListener('keydown', (e) => this.#onDigitKeydown(e, () => this.#onHourDigitClick(i)))
@@ -115,7 +115,7 @@ export class TimePicker extends NectaryElement {
       el.style.transform = `translate(${x}px, ${y}px)`
       el.textContent = hourDisplayValue
       el.setAttribute('role', 'button')
-      el.setAttribute('tabindex', '0')
+      el.setAttribute('tabindex', '-1')
       el.setAttribute('aria-label', `${hourDisplayValue} o'clock`)
       el.addEventListener('click', () => this.#onHourDigitClick(i))
       el.addEventListener('keydown', (e) => this.#onDigitKeydown(e, () => this.#onHourDigitClick(i)))
@@ -138,7 +138,7 @@ export class TimePicker extends NectaryElement {
       el.style.transform = `translate(${x}px, ${y}px)`
       el.textContent = stringifyMinute(i)
       el.setAttribute('role', 'button')
-      el.setAttribute('tabindex', '0')
+      el.setAttribute('tabindex', '-1')
       el.setAttribute('aria-label', `${i} minutes`)
       el.addEventListener('click', () => this.#onMinuteDigitClick(i))
       el.addEventListener('keydown', (e) => this.#onDigitKeydown(e, () => this.#onMinuteDigitClick(i)))
