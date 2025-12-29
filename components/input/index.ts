@@ -87,9 +87,7 @@ export class Input extends NectaryElement {
   connectedCallback() {
     super.connectedCallback()
 
-    const role = this.type === 'number' ? 'spinbutton' : 'textbox'
-
-    this.#setRole(role)
+    this.#updateInputRole()
 
     if (this.#controller === null) {
       this.#controller = new AbortController()
@@ -201,6 +199,7 @@ export class Input extends NectaryElement {
           if (min !== null && !isNaN(parseFloat(min))) {
             this.#$input.value = min
             setFormValue(this.#internals, min)
+            this.#updateAriaValueAttributes()
 
             this.dispatchEvent(
               new CustomEvent('-change', {
@@ -219,6 +218,7 @@ export class Input extends NectaryElement {
           if (max !== null && !isNaN(parseFloat(max))) {
             this.#$input.value = max
             setFormValue(this.#internals, max)
+            this.#updateAriaValueAttributes()
 
             this.dispatchEvent(
               new CustomEvent('-change', {
@@ -272,9 +272,8 @@ export class Input extends NectaryElement {
         updateLiteralAttribute(this.#$input, inputTypes, 'type', newVal)
         updateAttribute(this.#$input, 'spellcheck', newVal === 'password' ? 'false' : null)
 
-        const role = newVal === 'number' ? 'spinbutton' : 'textbox'
-
-        this.#setRole(role)
+        this.#updateInputRole()
+        this.#updateAriaValueAttributes()
 
         if (newVal === 'number') {
           this.#resetAriaPlaceholder()
@@ -316,6 +315,7 @@ export class Input extends NectaryElement {
         if (nextVal !== prevVal) {
           this.#$input.value = nextVal
           setFormValue(this.#internals, nextVal)
+          this.#updateAriaValueAttributes()
 
           if (isElementFocused(this.#$input)) {
             this.#setSelectionRange(this.#selectionEnd, this.#selectionEnd)
@@ -343,10 +343,10 @@ export class Input extends NectaryElement {
         }
 
         const isInvalid = isAttrTrue(newVal)
+        const ariaInvalidValue = isInvalid.toString()
 
-        this.ariaInvalid = isInvalid.toString()
-        this.#$input.ariaInvalid = this.ariaInvalid
-        this.#internals.ariaInvalid = this.ariaInvalid
+        this.#$input.ariaInvalid = ariaInvalidValue
+        this.#internals.ariaInvalid = ariaInvalidValue
         updateBooleanAttribute(this, name, isInvalid)
 
         break
@@ -397,13 +397,13 @@ export class Input extends NectaryElement {
       case 'min':
       case 'step': {
         updateAttribute(this.#$input, name, newVal)
+        this.#updateAriaValueAttributes()
 
         break
       }
 
       case 'aria-label': {
         this.#$input.ariaLabel = newVal
-        this.#internals.ariaLabel = newVal
 
         break
       }
@@ -925,8 +925,7 @@ export class Input extends NectaryElement {
 
       // ARIA spec does not allow aria-placeholder for non textbox role inputs
       if (this.type !== 'number') {
-        this.#internals.ariaPlaceholder = value ?? ''
-        updateAttribute(this, 'aria-placeholder', value)
+        this.#$input.ariaPlaceholder = value ?? ''
       }
     } else {
       this.#$input.placeholder = ''
@@ -935,8 +934,7 @@ export class Input extends NectaryElement {
   }
 
   #resetAriaPlaceholder() {
-    updateAttribute(this, 'aria-placeholder', null)
-    this.#internals.ariaPlaceholder = ''
+    this.#$input.ariaPlaceholder = ''
   }
 
   #onIconSlotChange = () => {
@@ -1009,9 +1007,46 @@ export class Input extends NectaryElement {
     getReactEventHandler(this, 'on-wheel')?.(e)
   }
 
-  #setRole = (role: string) => {
-    this.setAttribute('role', role)
-    this.#internals.role = role
+  #updateInputRole() {
+    if (this.type === 'number') {
+      this.#$input.setAttribute('role', 'spinbutton')
+      this.#updateAriaValueAttributes()
+    } else {
+      this.#$input.removeAttribute('role')
+      this.#$input.removeAttribute('aria-valuenow')
+      this.#$input.removeAttribute('aria-valuemin')
+      this.#$input.removeAttribute('aria-valuemax')
+    }
+  }
+
+  #updateAriaValueAttributes() {
+    if (this.type !== 'number') {
+      return
+    }
+
+    const value = this.#$input.value
+    const min = getAttribute(this, 'min')
+    const max = getAttribute(this, 'max')
+
+    // Set current value
+    if (value !== '') {
+      this.#$input.setAttribute('aria-valuenow', value)
+    } else {
+      this.#$input.removeAttribute('aria-valuenow')
+    }
+
+    // Set min/max if they exist
+    if (min !== null && !isNaN(parseFloat(min))) {
+      this.#$input.setAttribute('aria-valuemin', min)
+    } else {
+      this.#$input.removeAttribute('aria-valuemin')
+    }
+
+    if (max !== null && !isNaN(parseFloat(max))) {
+      this.#$input.setAttribute('aria-valuemax', max)
+    } else {
+      this.#$input.removeAttribute('aria-valuemax')
+    }
   }
 }
 
