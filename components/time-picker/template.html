@@ -263,12 +263,12 @@
       <sinch-icon icons-version="2" name="fa-check" id="icon-submit" slot="icon"></sinch-icon>
     </sinch-button>
   </div>
-  <div id="picker" aria-hidden="true">
+  <div id="picker" role="group" aria-label="Time picker clock face">
     <div id="picker-hours"></div>
     <div id="picker-minutes"></div>
     <div id="picker-touch">
-      <div id="needle-hour" tabindex="0"></div>
-      <div id="needle-minute" tabindex="0"></div>
+      <div id="needle-hour" tabindex="0" role="slider" aria-label="Hour selector" aria-valuemin="0" aria-valuemax="23" aria-valuenow="0"></div>
+      <div id="needle-minute" tabindex="0" role="slider" aria-label="Minute selector" aria-valuemin="0" aria-valuemax="59" aria-valuenow="0"></div>
     </div>
   </div>
   <div id="footer">

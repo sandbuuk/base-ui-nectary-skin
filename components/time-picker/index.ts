@@ -90,6 +90,11 @@ export class TimePicker extends NectaryElement {
       el.className = 'digit-hour-12'
       el.style.transform = `translate(${x}px, ${y}px)`
       el.textContent = hourDisplayValue
+      el.setAttribute('role', 'button')
+      el.setAttribute('tabindex', '-1')
+      el.setAttribute('aria-label', `${hourDisplayValue} o'clock`)
+      el.addEventListener('click', () => this.#onHourDigitClick(i))
+      el.addEventListener('keydown', (e) => this.#onDigitKeydown(e, () => this.#onHourDigitClick(i)))
 
       hours12Frag.appendChild(el)
     }
@@ -109,6 +114,11 @@ export class TimePicker extends NectaryElement {
       el.className = 'digit-hour-24'
       el.style.transform = `translate(${x}px, ${y}px)`
       el.textContent = hourDisplayValue
+      el.setAttribute('role', 'button')
+      el.setAttribute('tabindex', '-1')
+      el.setAttribute('aria-label', `${hourDisplayValue} o'clock`)
+      el.addEventListener('click', () => this.#onHourDigitClick(i))
+      el.addEventListener('keydown', (e) => this.#onDigitKeydown(e, () => this.#onHourDigitClick(i)))
 
       hours24Frag.appendChild(el)
     }
@@ -127,6 +137,11 @@ export class TimePicker extends NectaryElement {
       el.className = 'digit-minute'
       el.style.transform = `translate(${x}px, ${y}px)`
       el.textContent = stringifyMinute(i)
+      el.setAttribute('role', 'button')
+      el.setAttribute('tabindex', '-1')
+      el.setAttribute('aria-label', `${i} minutes`)
+      el.addEventListener('click', () => this.#onMinuteDigitClick(i))
+      el.addEventListener('keydown', (e) => this.#onDigitKeydown(e, () => this.#onMinuteDigitClick(i)))
 
       minutesFrag.appendChild(el)
     }
@@ -176,9 +191,16 @@ export class TimePicker extends NectaryElement {
       }
 
       case 'ampm': {
-        this.#render()
+        const isAMPM = isAttrTrue(newVal)
 
-        updateBooleanAttribute(this, 'ampm', isAttrTrue(newVal))
+        updateBooleanAttribute(this, 'ampm', isAMPM)
+
+        // Update needle max values based on AMPM mode
+        const hourMax = isAMPM ? 12 : 23
+
+        updateAttribute(this.#$needleHour, 'aria-valuemax', hourMax)
+
+        this.#render()
 
         break
       }
@@ -319,6 +341,12 @@ export class TimePicker extends NectaryElement {
     updateAttribute(this.#$headerHours, 'aria-valuetext', this.#hour)
     updateAttribute(this.#$headerMinutes, 'aria-valuenow', this.#minute)
     updateAttribute(this.#$headerMinutes, 'aria-valuetext', this.#minute)
+
+    // Update needle ARIA attributes
+    updateAttribute(this.#$needleHour, 'aria-valuenow', this.#hour)
+    updateAttribute(this.#$needleHour, 'aria-valuetext', `${this.#hour} o'clock`)
+    updateAttribute(this.#$needleMinute, 'aria-valuenow', this.#minute)
+    updateAttribute(this.#$needleMinute, 'aria-valuetext', `${this.#minute} minutes`)
   }
 
   #selectHour(is24: boolean) {
@@ -443,6 +471,23 @@ export class TimePicker extends NectaryElement {
   #onChangeReactHandler = (e: Event) => {
     getReactEventHandler(this, 'on-change')?.(e)
     getReactEventHandler(this, 'onChange')?.(e)
+  }
+
+  #onHourDigitClick = (hour: number) => {
+    this.#hour = hour
+    this.#render()
+  }
+
+  #onMinuteDigitClick = (minute: number) => {
+    this.#minute = minute
+    this.#render()
+  }
+
+  #onDigitKeydown = (e: KeyboardEvent, callback: () => void) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      callback()
+    }
   }
 }
 

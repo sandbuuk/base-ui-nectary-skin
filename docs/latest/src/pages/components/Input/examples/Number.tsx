@@ -15,6 +15,8 @@ export const NumberExample: FC = () => {
       <sinch-input
         slot="input"
         type="number"
+        min={10}
+        max={100}
         aria-label="Number Input"
         placeholder="Only numbers allowed here"
         value={state}
