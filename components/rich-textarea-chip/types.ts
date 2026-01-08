@@ -1,3 +1,4 @@
+import type { TSinchTagColor } from '../tag/colors'
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TSinchRichTextareaChipProps = {
@@ -5,6 +6,8 @@ export type TSinchRichTextareaChipProps = {
   text: string,
   /** Readonly - hides the close button */
   readonly?: boolean,
+  /** Color using the tag color system */
+  color?: TSinchTagColor,
 }
 
 export type TSinchRichTextareaChipEvents = {

@@ -56,6 +56,7 @@ export const SlotsExample: FC = () => {
         on-change={onChange}
         aria-label="Editor"
         placeholder="Write your message..."
+        chip-color="violet"
       >
         <sinch-button
           slot="top"

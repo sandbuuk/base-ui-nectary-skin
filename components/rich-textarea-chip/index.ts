@@ -1,5 +1,6 @@
-import '../text'
 import '../icon'
+import '../text'
+import { getTagColorBg, getTagColorFg } from '../tag/utils'
 import {
   defineCustomElement,
   getAttribute,
@@ -20,6 +21,7 @@ template.innerHTML = templateHTML
 
 export class RichTextareaChip extends NectaryElement {
   #$text: HTMLElement
+  #$button: HTMLElement
 
   #controller: AbortController | null = null
 
@@ -31,6 +33,7 @@ export class RichTextareaChip extends NectaryElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.#$text = shadowRoot.querySelector('#text')!
+    this.#$button = shadowRoot.querySelector('#button')!
   }
 
   connectedCallback() {
@@ -52,7 +55,7 @@ export class RichTextareaChip extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'readonly']
+    return ['text', 'color', 'readonly']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -73,6 +76,12 @@ export class RichTextareaChip extends NectaryElement {
 
         break
       }
+
+      case 'color': {
+        this.#updateColor(newVal)
+
+        break
+      }
     }
   }
 
@@ -90,6 +99,26 @@ export class RichTextareaChip extends NectaryElement {
 
   set readonly(isReadonly: boolean) {
     updateBooleanAttribute(this, 'readonly', isReadonly)
+  }
+
+  get color() {
+    return getAttribute(this, 'color', '')
+  }
+
+  set color(value: string) {
+    updateAttribute(this, 'color', value)
+  }
+
+  #updateColor(color: string | null) {
+    if (color !== null && color !== '') {
+      this.#$button.style.setProperty('background-color', getTagColorBg(color))
+      this.#$button.style.setProperty('--sinch-global-color-text', getTagColorFg(color))
+      this.#$button.style.setProperty('--sinch-global-color-icon', getTagColorFg(color))
+    } else {
+      this.#$button.style.removeProperty('background-color')
+      this.#$button.style.removeProperty('--sinch-global-color-text')
+      this.#$button.style.removeProperty('--sinch-global-color-icon')
+    }
   }
 
   #onClick = () => {

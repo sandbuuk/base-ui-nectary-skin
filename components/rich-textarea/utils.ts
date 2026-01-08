@@ -418,11 +418,15 @@ const createLink = (text: string, href: string, doc: Document): TInline => {
   return $link
 }
 
-const createTag = (text: string, doc: Document): TChip => {
+const createTag = (text: string, doc: Document, color?: string | null): TChip => {
   const $chip = doc.createElement('sinch-rich-textarea-chip') as unknown as TChip
 
   $chip.text = text
   $chip.contentEditable = 'false'
+
+  if (color !== undefined && color !== null && color !== '') {
+    $chip.setAttribute('color', color)
+  }
 
   return $chip
 }
@@ -2526,10 +2530,14 @@ export const serializeMarkdown = ($root: TRichTextareaRoot, range: Readonly<TRan
 
 export const createParseVisitor = (doc: Document) => {
   let emojiBaseUrl: string | null = null
+  let chipColor: string | null = null
 
   return {
     updateEmojiBaseUrl(url: string | null) {
       emojiBaseUrl = url
+    },
+    updateChipColor(color: string | null) {
+      chipColor = color
     },
     createVisitor(): TMarkdownParseVisitor {
       const $root = doc.createDocumentFragment()
@@ -2565,7 +2573,7 @@ export const createParseVisitor = (doc: Document) => {
           $currentBlock!.appendChild($inline)
         },
         tag(text) {
-          const $tag = createTag(text, doc)
+          const $tag = createTag(text, doc, chipColor)
 
           $currentBlock!.appendChild($tag)
         },

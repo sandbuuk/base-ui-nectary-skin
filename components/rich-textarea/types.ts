@@ -1,3 +1,4 @@
+import type { TSinchTagColor } from '../tag/colors'
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
 export type TRichTextareaSelection = {
@@ -16,6 +17,8 @@ export type TSinchRichTextareaProps = {
   value: string,
   /** Text that appears in the text field when it has no value set */
   placeholder?: string,
+  /** Color for chips/tags using the tag color system */
+  'chip-color'?: TSinchTagColor,
   'aria-label': string,
 }
 

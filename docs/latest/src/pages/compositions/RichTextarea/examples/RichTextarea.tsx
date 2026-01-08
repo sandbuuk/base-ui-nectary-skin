@@ -191,6 +191,7 @@ export const RichTextareaExample: FC = () => {
         on-selection={onSelection}
         aria-label="Editor"
         placeholder="Write your message..."
+        chip-color="violet"
       >
         {isToolbarVisible && (
           <>

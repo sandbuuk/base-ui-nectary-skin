@@ -132,6 +132,7 @@ export class RichTextarea extends NectaryElement {
     document.addEventListener('selectionchange', this.#onSelectionChange, options)
 
     this.#parseVisitor.updateEmojiBaseUrl(getEmojiBaseUrl(this))
+    this.#parseVisitor.updateChipColor(this.chipColor)
     this.#onTopSlotChange()
     this.#onBottomSlotChange()
     this.#onValueChange(this.value)
@@ -149,6 +150,7 @@ export class RichTextarea extends NectaryElement {
     return [
       'value',
       'placeholder',
+      'chip-color',
     ]
   }
 
@@ -165,6 +167,12 @@ export class RichTextarea extends NectaryElement {
       case 'placeholder': {
         this.#$placeholder.textContent = newVal
         updateAttribute(this, 'aria-placeholder', newVal)
+
+        break
+      }
+
+      case 'chip-color': {
+        this.#updateChipColors(newVal)
 
         break
       }
@@ -201,6 +209,14 @@ export class RichTextarea extends NectaryElement {
 
   get rows(): HTMLTextAreaElement['rows'] {
     return getIntegerAttribute(this, 'rows', 0)
+  }
+
+  set chipColor(value: string | null) {
+    updateAttribute(this, 'chip-color', value)
+  }
+
+  get chipColor() {
+    return getAttribute(this, 'chip-color')
   }
 
   get focusable() {
@@ -633,6 +649,22 @@ export class RichTextarea extends NectaryElement {
 
   #updateEditorEmptyClass() {
     setClass(this.#$input, 'empty', isEditorEmpty(this.#$input))
+  }
+
+  #updateChipColors(color: string | null) {
+    // Update the parse visitor so new chips get the color
+    this.#parseVisitor.updateChipColor(color)
+
+    // Update existing chips
+    const chips = this.#$input.querySelectorAll('sinch-rich-textarea-chip')
+
+    chips.forEach((chip) => {
+      if (color !== null && color !== '') {
+        chip.setAttribute('color', color)
+      } else {
+        chip.removeAttribute('color')
+      }
+    })
   }
 
   #onBottomSlotChange = () => {
