@@ -8,6 +8,8 @@ export type TSinchRichTextareaChipProps = {
   readonly?: boolean,
   /** Color using the tag color system */
   color?: TSinchTagColor,
+  /** Icon name */
+  icon?: string,
 }
 
 export type TSinchRichTextareaChipEvents = {

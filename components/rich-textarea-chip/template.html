@@ -43,6 +43,10 @@
     pointer-events: none;
   }
 
+  :host(:not([icon])) #icon-start {
+    display: none;
+  }
+
   #text {
     flex: 1;
 
@@ -59,6 +63,7 @@
 </style>
 
 <div id="button" inert>
+  <sinch-icon icons-version="2" id="icon-start"></sinch-icon>
   <sinch-text id="text" type="xs" ellipsis></sinch-text>
   <sinch-icon icons-version="2" name="circle-cross" id="icon-close"></sinch-icon>
 </div>

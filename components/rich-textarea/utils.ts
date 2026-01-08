@@ -2,7 +2,7 @@
 
 import { getEmojiBaseUrl, getEmojiUrl } from '../emoji/utils'
 import { isEmojiString, parseMarkdown } from '../utils'
-import type { TRichTextareaSelection } from './types'
+import type { TRichTextareaSelection, TChipResolver } from './types'
 import type { TMarkdownParseVisitor } from '../utils'
 
 // eslint-disable-next-line no-irregular-whitespace
@@ -418,7 +418,7 @@ const createLink = (text: string, href: string, doc: Document): TInline => {
   return $link
 }
 
-const createTag = (text: string, doc: Document, color?: string | null): TChip => {
+const createTag = (text: string, doc: Document, color?: string | null, icon?: string | null): TChip => {
   const $chip = doc.createElement('sinch-rich-textarea-chip') as unknown as TChip
 
   $chip.text = text
@@ -426,6 +426,10 @@ const createTag = (text: string, doc: Document, color?: string | null): TChip =>
 
   if (color !== undefined && color !== null && color !== '') {
     $chip.setAttribute('color', color)
+  }
+
+  if (icon !== undefined && icon !== null && icon !== '') {
+    $chip.setAttribute('icon', icon)
   }
 
   return $chip
@@ -1686,10 +1690,15 @@ export const insertLink = ($root: TRichTextareaRoot, text: string, href: string,
   }
 }
 
-export const insertTag = ($root: TRichTextareaRoot, text: string, range: TRange): TActionResult => {
+export const insertChip = (
+  $root: TRichTextareaRoot,
+  text: string,
+  range: TRange,
+  options?: { color?: string, icon?: string }
+): TActionResult => {
   const cursor = removeContentInRange(range)
   const { $text, $inline, offset, isAfterInline: isAfterLastChild } = cursor
-  const $tag = createTag(text, $root.ownerDocument)
+  const $tag = createTag(text, $root.ownerDocument, options?.color, options?.icon)
 
   /* Insert Tag element */
   if (isTextNode($text)) {
@@ -2531,6 +2540,8 @@ export const serializeMarkdown = ($root: TRichTextareaRoot, range: Readonly<TRan
 export const createParseVisitor = (doc: Document) => {
   let emojiBaseUrl: string | null = null
   let chipColor: string | null = null
+  let chipIcon: string | null = null
+  let chipResolver: TChipResolver | null = null
 
   return {
     updateEmojiBaseUrl(url: string | null) {
@@ -2538,6 +2549,12 @@ export const createParseVisitor = (doc: Document) => {
     },
     updateChipColor(color: string | null) {
       chipColor = color
+    },
+    updateChipIcon(icon: string | null) {
+      chipIcon = icon
+    },
+    updateChipResolver(resolver: TChipResolver | null) {
+      chipResolver = resolver
     },
     createVisitor(): TMarkdownParseVisitor {
       const $root = doc.createDocumentFragment()
@@ -2573,7 +2590,8 @@ export const createParseVisitor = (doc: Document) => {
           $currentBlock!.appendChild($inline)
         },
         tag(text) {
-          const $tag = createTag(text, doc, chipColor)
+          const resolved = chipResolver?.(text)
+          const $tag = createTag(text, doc, resolved?.color ?? chipColor, resolved?.icon ?? chipIcon)
 
           $currentBlock!.appendChild($tag)
         },

@@ -27,7 +27,7 @@ import {
   insertFromPaste,
   insertLineBreak,
   insertLink,
-  insertTag,
+  insertChip,
   insertText,
   isEditorEmpty,
   isSelectionEqual,
@@ -35,7 +35,7 @@ import {
   serializeMarkdown,
   setBrowserCaret,
 } from './utils'
-import type { TRichTextareaSelection } from './types'
+import type { TRichTextareaSelection, TChipResolver } from './types'
 import type {
   TActionResult,
   TRange,
@@ -66,6 +66,7 @@ export class RichTextarea extends NectaryElement {
   #lastSelectionInfo: TRichTextareaSelection | null = null
   #prevDispatchedValue: string | null = null
   #parseVisitor
+  #chipResolver: TChipResolver | null = null
 
   constructor() {
     super()
@@ -133,6 +134,7 @@ export class RichTextarea extends NectaryElement {
 
     this.#parseVisitor.updateEmojiBaseUrl(getEmojiBaseUrl(this))
     this.#parseVisitor.updateChipColor(this.chipColor)
+    this.#parseVisitor.updateChipIcon(this.chipIcon)
     this.#onTopSlotChange()
     this.#onBottomSlotChange()
     this.#onValueChange(this.value)
@@ -151,6 +153,7 @@ export class RichTextarea extends NectaryElement {
       'value',
       'placeholder',
       'chip-color',
+      'chip-icon',
     ]
   }
 
@@ -173,6 +176,12 @@ export class RichTextarea extends NectaryElement {
 
       case 'chip-color': {
         this.#updateChipColors(newVal)
+
+        break
+      }
+
+      case 'chip-icon': {
+        this.#updateChipIcons(newVal)
 
         break
       }
@@ -219,6 +228,24 @@ export class RichTextarea extends NectaryElement {
     return getAttribute(this, 'chip-color')
   }
 
+  set chipIcon(value: string | null) {
+    updateAttribute(this, 'chip-icon', value)
+  }
+
+  get chipIcon() {
+    return getAttribute(this, 'chip-icon')
+  }
+
+  set chipResolver(resolver: TChipResolver | null) {
+    this.#chipResolver = resolver
+    this.#parseVisitor.updateChipResolver(resolver)
+    this.#applyChipResolver()
+  }
+
+  get chipResolver() {
+    return this.#chipResolver
+  }
+
   get focusable() {
     return true
   }
@@ -243,8 +270,8 @@ export class RichTextarea extends NectaryElement {
     this.#handleActionResult(res)
   }
 
-  insertMention(username: string) {
-    const res = this.#handleInput('insertMention', this.#getCurrentRange(), username)
+  insertChip(text: string) {
+    const res = this.#handleInput('insertChip', this.#getCurrentRange(), text)
 
     this.#handleActionResult(res)
   }
@@ -485,8 +512,13 @@ export class RichTextarea extends NectaryElement {
       case 'insertLink': {
         return insertLink(this.#$input, text!, href!, range)
       }
-      case 'insertMention': {
-        return insertTag(this.#$input, text!, range)
+      case 'insertMention':
+      case 'insertChip': {
+        const resolved = this.#chipResolver?.(text!)
+        const color = resolved?.color ?? this.getAttribute('chip-color') ?? undefined
+        const icon = resolved?.icon ?? this.getAttribute('chip-icon') ?? undefined
+
+        return insertChip(this.#$input, text!, range, { color, icon })
       }
       // case 'formatUnderline':
       case 'formatItalic':
@@ -655,14 +687,68 @@ export class RichTextarea extends NectaryElement {
     // Update the parse visitor so new chips get the color
     this.#parseVisitor.updateChipColor(color)
 
-    // Update existing chips
+    // Update existing chips (only if no resolver overrides)
+    if (this.#chipResolver === null) {
+      const chips = this.#$input.querySelectorAll('sinch-rich-textarea-chip')
+
+      chips.forEach((chip) => {
+        if (color !== null && color !== '') {
+          chip.setAttribute('color', color)
+        } else {
+          chip.removeAttribute('color')
+        }
+      })
+    }
+  }
+
+  #updateChipIcons(icon: string | null) {
+    // Update the parse visitor so new chips get the icon
+    this.#parseVisitor.updateChipIcon(icon)
+
+    // Update existing chips (only if no resolver overrides)
+    if (this.#chipResolver === null) {
+      const chips = this.#$input.querySelectorAll('sinch-rich-textarea-chip')
+
+      chips.forEach((chip) => {
+        if (icon !== null && icon !== '') {
+          chip.setAttribute('icon', icon)
+        } else {
+          chip.removeAttribute('icon')
+        }
+      })
+    }
+  }
+
+  #applyChipResolver() {
+    if (this.#chipResolver === null) {
+      return
+    }
+
     const chips = this.#$input.querySelectorAll('sinch-rich-textarea-chip')
 
     chips.forEach((chip) => {
-      if (color !== null && color !== '') {
-        chip.setAttribute('color', color)
-      } else {
-        chip.removeAttribute('color')
+      const text = chip.getAttribute('text')
+
+      if (text !== null && text !== '') {
+        const resolved = this.#chipResolver!(text)
+
+        if (resolved?.icon !== undefined) {
+          chip.setAttribute('icon', resolved.icon)
+        } else if (this.chipIcon !== null) {
+          // Fall back to chip-icon prop
+          chip.setAttribute('icon', this.chipIcon)
+        } else {
+          chip.removeAttribute('icon')
+        }
+
+        if (resolved?.color !== undefined) {
+          chip.setAttribute('color', resolved.color)
+        } else if (this.chipColor !== null) {
+          // Fall back to chip-color prop
+          chip.setAttribute('color', this.chipColor)
+        } else {
+          chip.removeAttribute('color')
+        }
       }
     })
   }

@@ -27,8 +27,8 @@ export const SlotsExample: FC = () => {
     setIsOpen(false)
   }
 
-  const onSelectMention = (e: CustomEvent<string>) => {
-    ref.current?.insertMention(e.detail)
+  const onSelectChip = (e: CustomEvent<string>) => {
+    ref.current?.insertChip(e.detail)
     setIsOpen(false)
   }
 
@@ -108,7 +108,7 @@ export const SlotsExample: FC = () => {
         <sinch-popover
           slot="bottom"
           open={isOpen}
-          aria-label="Select user to mention"
+          aria-label="Select user to chip"
           orientation="top-left"
           modal
           on-close={onCloseTags}
@@ -116,8 +116,8 @@ export const SlotsExample: FC = () => {
           <sinch-select-button
             slot="target"
             text=""
-            placeholder="{{mention}}"
-            aria-label="Open mention select"
+            placeholder="{{chip}}"
+            aria-label="Open chip select"
             size="s"
             on-click={onOpenTags}
           >
@@ -128,7 +128,7 @@ export const SlotsExample: FC = () => {
             value=""
             aria-label="User menu"
             rows={3}
-            on-change={onSelectMention}
+            on-change={onSelectChip}
             search-placeholder="Search users"
           >
             {users.map((user) => (
@@ -136,7 +136,7 @@ export const SlotsExample: FC = () => {
                 key={user}
                 value={user}
                 text={`{{${user}}}`}
-                aria-label={`Mention ${user}`}
+                aria-label={`Chip ${user}`}
               />
             ))}
           </sinch-select-menu>

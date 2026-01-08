@@ -22,6 +22,7 @@ template.innerHTML = templateHTML
 export class RichTextareaChip extends NectaryElement {
   #$text: HTMLElement
   #$button: HTMLElement
+  #$iconStart: HTMLElement
 
   #controller: AbortController | null = null
 
@@ -34,6 +35,7 @@ export class RichTextareaChip extends NectaryElement {
 
     this.#$text = shadowRoot.querySelector('#text')!
     this.#$button = shadowRoot.querySelector('#button')!
+    this.#$iconStart = shadowRoot.querySelector('#icon-start')!
   }
 
   connectedCallback() {
@@ -55,7 +57,7 @@ export class RichTextareaChip extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'color', 'readonly']
+    return ['text', 'color', 'icon', 'readonly']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -79,6 +81,12 @@ export class RichTextareaChip extends NectaryElement {
 
       case 'color': {
         this.#updateColor(newVal)
+
+        break
+      }
+
+      case 'icon': {
+        this.#$iconStart.setAttribute('name', newVal ?? '')
 
         break
       }
@@ -107,6 +115,14 @@ export class RichTextareaChip extends NectaryElement {
 
   set color(value: string) {
     updateAttribute(this, 'color', value)
+  }
+
+  get icon() {
+    return getAttribute(this, 'icon', '')
+  }
+
+  set icon(value: string) {
+    updateAttribute(this, 'icon', value)
   }
 
   #updateColor(color: string | null) {

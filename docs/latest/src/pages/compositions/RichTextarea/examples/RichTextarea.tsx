@@ -20,7 +20,7 @@ To set up the \`Product\`, read and accept 📝 the \`Product\` [terms & conditi
 
 If ___you___ have *any questions*, contact your account __manager__ ✅.
 
-You can also use tags, e.g. to mention users like {{JohnDoe}} or {{JaneSmith}} in your text.
+You can also use tags, e.g. to chip users like {{JohnDoe}} or {{JaneSmith}} in your text.
 
 * list item 1 😀
   1. inner item 1
@@ -113,7 +113,7 @@ const DEFAULT_SELECTION: TRichTextareaSelection = {
 export const RichTextareaExample: FC = () => {
   const [isEmojiOpen, setEmojiOpen] = useState(false)
   const [isLinkOpen, setLinkOpen] = useState(false)
-  const [isMentionOpen, setMentionOpen] = useState(false)
+  const [isChipOpen, setChipOpen] = useState(false)
   const [isToolbarVisible, setToolbarVisible] = useState(true)
   const ref = useRef<HTMLElementTagNameMap['sinch-rich-textarea']>(null)
   const [selectionState, setSelectionState] = useState(DEFAULT_SELECTION)
@@ -166,15 +166,15 @@ export const RichTextareaExample: FC = () => {
   const onToggleToolbar = () => {
     setToolbarVisible(!isToolbarVisible)
   }
-  const onMentionOpen = () => {
-    setMentionOpen(true)
+  const onChipOpen = () => {
+    setChipOpen(true)
   }
-  const onMentionClose = () => {
-    setMentionOpen(false)
+  const onChipClose = () => {
+    setChipOpen(false)
   }
-  const onSelectMention = (e: CustomEvent<string>) => {
-    ref.current!.insertMention(e.detail)
-    setMentionOpen(false)
+  const onSelectChip = (e: CustomEvent<string>) => {
+    ref.current!.insertChip(e.detail)
+    setChipOpen(false)
   }
 
   return (
@@ -293,19 +293,19 @@ export const RichTextareaExample: FC = () => {
         </sinch-popover>
         <sinch-popover
           slot="bottom"
-          open={isMentionOpen}
-          aria-label="Select user to mention"
+          open={isChipOpen}
+          aria-label="Select user to chip"
           orientation="top-left"
           modal
-          on-close={onMentionClose}
+          on-close={onChipClose}
         >
           <sinch-select-button
             slot="target"
             text=""
             placeholder="User name..."
-            aria-label="Open mention select"
+            aria-label="Open chip select"
             size="s"
-            on-click={onMentionOpen}
+            on-click={onChipOpen}
           >
             <sinch-icon icons-version="2" name="fa-at" slot="icon"/>
           </sinch-select-button>
@@ -314,7 +314,7 @@ export const RichTextareaExample: FC = () => {
             value=""
             aria-label="User menu"
             rows={3}
-            on-change={onSelectMention}
+            on-change={onSelectChip}
             search-placeholder="Search users"
           >
             {users.map((user) => (
@@ -322,7 +322,7 @@ export const RichTextareaExample: FC = () => {
                 key={user}
                 value={user}
                 text={user}
-                aria-label={`Mention ${user}`}
+                aria-label={`Chip ${user}`}
               />
             ))}
           </sinch-select-menu>

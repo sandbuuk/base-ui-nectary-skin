@@ -12,26 +12,35 @@ export type TRichTextareaSelection = {
   olist: boolean,
 }
 
+/** Resolver callback for chip properties based on tag name */
+export type TChipResolver = (tagName: string) => { icon?: string, color?: string } | undefined
+
 export type TSinchRichTextareaProps = {
   /** Value */
   value: string,
   /** Text that appears in the text field when it has no value set */
   placeholder?: string,
-  /** Color for chips/tags using the tag color system */
+  /** Default Color for chips/tags using the tag color system */
   'chip-color'?: TSinchTagColor,
+  /** Default icon for chips/tags */
+  'chip-icon'?: string,
   'aria-label': string,
 }
 
 export type TSinchRichTextareaMethods = {
   insertText(value: string): void,
   insertLink(text: string, href: string): void,
+  /** @deprecated — use insertChip instead */
   insertMention(username: string): void,
+  insertChip(name: string): void,
   formatItalic(): void,
   formatBold(): void,
   formatStrikethrough(): void,
   formatCodeTag(): void,
   formatOrderedList(): void,
   formatUnorderedList(): void,
+  /** Resolver callback for chip icon and color based on tag name */
+  chipResolver: TChipResolver | null,
 }
 
 export type TSinchRichTextareaEvents = {
