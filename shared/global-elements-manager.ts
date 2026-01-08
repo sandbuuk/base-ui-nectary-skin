@@ -93,24 +93,40 @@ export abstract class GlobalElementsManager {
     const importPath = this.getImportPath(store.cdnUrl, modulePath)!
     const fallbackImportPath = this.getImportPath(store.fallbackCdnUrl, modulePath)
 
+    const promises = [
+      import(/* webpackIgnore: true */ importPath),
+    ]
+
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+    const FALLBACK_DELAY_MS = 2000
+
+    if (fallbackImportPath !== null) {
+      promises.push(
+        new Promise((resolve) => {
+          timeoutId = setTimeout(() => resolve(import(/* webpackIgnore: true */ fallbackImportPath)), FALLBACK_DELAY_MS)
+        })
+      )
+    }
+
     try {
-      const module = await import(/* webpackIgnore: true */ importPath)
+      const module = await Promise.any(promises)
+
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId)
+      }
 
       return module as TModule
     } catch (error) {
-      if (fallbackImportPath !== null) {
-        try {
-          const fallbackModule = await import(/* webpackIgnore: true */ fallbackImportPath)
+      // AggregateError - all attempts failed
+      if (error instanceof AggregateError) {
+        console.error(`Nectary Primary load failed: ${importPath}`, error.errors[0])
 
-          return fallbackModule as TModule
-        } catch (fallbackError) {
-          console.error(`Nectary Primary load failed: ${importPath}`, error)
-          console.error(`Nectary fallback load failed: ${fallbackImportPath}`, fallbackError)
-          throw fallbackError
+        if (fallbackImportPath !== null) {
+          console.error(`Nectary fallback load failed: ${fallbackImportPath}`, error.errors[1])
         }
+      } else {
+        console.error(`Nectary failed to load module: ${importPath}`, error)
       }
-
-      console.error(`Nectary failed to load module: ${importPath}`, error)
       throw error
     }
   }
