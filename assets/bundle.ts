@@ -1,5 +1,6 @@
 // Reminder: Keep this list updated as we add new assets
 // Icons Branded
+
 export { IconBranded5gReadiness } from './icons-branded/5g-readiness'
 export { IconBrandedAbcd } from './icons-branded/abcd'
 export { IconBrandedAi } from './icons-branded/ai'
