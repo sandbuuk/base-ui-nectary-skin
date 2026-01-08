@@ -206,18 +206,20 @@ export abstract class GlobalElementsManager {
           })
         }
 
-        // Initial loaders with un-versioned importPath (automatically resolves to latest module but takes 2 requests)
+        // Initial loaders with un-versioned importPath (automatically resolves to latest module but takes 2 requests for esm.sh)
         setDefinitions()
 
-        if (store.targetlibVersion.length === 0) {
+        const host = new URL(store.cdnUrl).host
+
+        // Overwrites the loaders with versioned importPath so it only takes one request to resolve modules (for esm.sh)
+        if (host === 'esm.sh' && store.targetlibVersion.length === 0 && store.preload === false) {
           const registry = await fetch(`${this.config.registryUrl}/latest`)
           const registryData = await registry.json()
 
           store.targetlibVersion = registryData.version
-        }
 
-        // Overwrites the loaders with versioned importPath so it only takes one request to resolve modules
-        setDefinitions()
+          setDefinitions()
+        }
       }
     } finally {
       store.loadPromise.resolve()
