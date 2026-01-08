@@ -48,6 +48,7 @@ export const BASE_COMPONENT_NAMES_LIST = [
   'radio',
   'rich-text',
   'rich-textarea',
+  'rich-textarea-chip',
   'segment-collapse',
   'segmented-control-option',
   'segmented-control',

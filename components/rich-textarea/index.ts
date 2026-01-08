@@ -1,5 +1,5 @@
 import { getEmojiBaseUrl } from '../emoji/utils'
-import '../chip'
+import '../rich-textarea-chip'
 import {
   defineCustomElement,
   getAttribute,

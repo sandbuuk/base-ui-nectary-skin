@@ -61,12 +61,12 @@ const isEmoji = ($n: Node | null): $n is TEmoji => {
 }
 
 interface TChip extends HTMLElement {
-  nodeName: 'SINCH-CHIP',
+  nodeName: 'SINCH-RICH-TEXTAREA-CHIP',
   text: string,
 }
 
 const isChip = ($n: Node | null): $n is TChip => {
-  return $n !== null && $n.nodeName === 'SINCH-CHIP'
+  return $n !== null && $n.nodeName === 'SINCH-RICH-TEXTAREA-CHIP'
 }
 
 interface TInline extends HTMLElement {
@@ -419,7 +419,7 @@ const createLink = (text: string, href: string, doc: Document): TInline => {
 }
 
 const createTag = (text: string, doc: Document): TChip => {
-  const $chip = doc.createElement('sinch-chip') as unknown as TChip
+  const $chip = doc.createElement('sinch-rich-textarea-chip') as unknown as TChip
 
   $chip.text = text
   $chip.contentEditable = 'false'

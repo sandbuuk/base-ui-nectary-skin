@@ -1,36 +1,24 @@
-import type { TSinchChipColor } from './colors'
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
-export type { TSinchChipColor }
-
-export type TSinchChipProps = {
+export type TSinchRichTextareaChipProps = {
   /** Text */
   text: string,
-  /** Color, gray by default */
-  color?: TSinchChipColor,
-  /** Small */
-  small?: boolean,
+  /** Readonly - hides the close button */
+  readonly?: boolean,
 }
 
-export type TSinchChipEvents = {
+export type TSinchRichTextareaChipEvents = {
   /** Click event handler */
   '-click'?: (e: CustomEvent<void>) => void,
-  /** Focus event handler */
-  '-focus'?: (e: CustomEvent<void>) => void,
-  /** Blur event handler */
-  '-blur'?: (e: CustomEvent<void>) => void,
 }
 
-export type TSinchChipStyle = {
+export type TSinchRichTextareaChipStyle = {
   // Sizes
   '--sinch-comp-chip-size-container-m'?: string,
-  '--sinch-comp-chip-size-container-s'?: string,
   '--sinch-comp-chip-size-icon-m'?: string,
-  '--sinch-comp-chip-size-icon-s'?: string,
 
   // Fonts
   '--sinch-comp-chip-font-size-m-label'?: string,
-  '--sinch-comp-chip-font-size-s-label'?: string,
 
   // Colors - Neutral State
   '--sinch-comp-chip-color-neutral-default-background-initial'?: string,
@@ -47,27 +35,27 @@ export type TSinchChipStyle = {
   '--sinch-comp-text-font'?: string,
 }
 
-export type TSinchChip = {
-  props: TSinchChipProps,
-  events: TSinchChipEvents,
-  style: TSinchChipStyle,
+export type TSinchRichTextareaChip = {
+  props: TSinchRichTextareaChipProps,
+  events: TSinchRichTextareaChipEvents,
+  style: TSinchRichTextareaChipStyle,
 }
 
-export type TSinchChipElement = NectaryComponentVanillaByType<TSinchChip>
-export type TSinchChipReact = NectaryComponentReactByType<TSinchChip>
+export type TSinchRichTextareaChipElement = NectaryComponentVanillaByType<TSinchRichTextareaChip>
+export type TSinchRichTextareaChipReact = NectaryComponentReactByType<TSinchRichTextareaChip>
 
 declare global {
   interface NectaryComponentMap {
-    'sinch-chip': TSinchChip,
+    'sinch-rich-textarea-chip': TSinchRichTextareaChip,
   }
 
   interface HTMLElementTagNameMap {
-    'sinch-chip': NectaryComponentVanilla<'sinch-chip'>,
+    'sinch-rich-textarea-chip': NectaryComponentVanilla<'sinch-rich-textarea-chip'>,
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      'sinch-chip': NectaryComponentReact<'sinch-chip'>,
+      'sinch-rich-textarea-chip': NectaryComponentReact<'sinch-rich-textarea-chip'>,
     }
   }
 }
@@ -75,7 +63,7 @@ declare global {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements extends globalThis.JSX.IntrinsicElements {
-      'sinch-chip': NectaryComponentReact<'sinch-chip'>,
+      'sinch-rich-textarea-chip': NectaryComponentReact<'sinch-rich-textarea-chip'>,
     }
   }
 }

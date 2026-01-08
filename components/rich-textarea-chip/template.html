@@ -49,26 +49,16 @@
     --sinch-comp-text-font: var(--sinch-comp-chip-font-size-m-label);
   }
 
-  :host([small]) #button {
-    height: var(--sinch-comp-chip-size-container-s);
-    padding: 0 3px 0 7px;
-
-    --sinch-global-size-icon: var(--sinch-comp-chip-size-icon-s);
+  :host([readonly]) #button {
+    padding-right: 9px;
   }
 
-  :host([small]) #text {
-    --sinch-comp-text-font: var(--sinch-comp-chip-font-size-s-label);
-  }
-
-  ::slotted([slot="icon"]) {
-    margin-left: -4px;
+  :host([readonly]) #icon-close {
+    display: none;
   }
 </style>
 
 <div id="button" inert>
-  <slot name="icon"></slot>
   <sinch-text id="text" type="xs" ellipsis></sinch-text>
-  <slot name="right-icon">
-    <sinch-icon icons-version="2" name="circle-cross" id="icon-close"></sinch-icon>
-  </slot>
+  <sinch-icon icons-version="2" name="circle-cross" id="icon-close"></sinch-icon>
 </div>

@@ -13,7 +13,6 @@ export class ChipComponent {
   color?: string
   text?: string
   isSmall: boolean
-  isReadonly: boolean
   hasIcon: boolean
   hasRightIcon: boolean
 
@@ -22,7 +21,6 @@ export class ChipComponent {
     this.color = search.get('color') as string ?? undefined
     this.text = search.get('text') ?? ''
     this.isSmall = search.get('small') != null
-    this.isReadonly = search.get('readonly') != null
     this.hasIcon = search.get('icon') != null
     this.hasRightIcon = search.get('right-icon') != null
   }

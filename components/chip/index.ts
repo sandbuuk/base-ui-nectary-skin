@@ -64,7 +64,7 @@ export class Chip extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text', 'color', 'small', 'readonly']
+    return ['text', 'color', 'small']
   }
 
   attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
@@ -88,12 +88,6 @@ export class Chip extends NectaryElement {
       }
 
       case 'small': {
-        updateBooleanAttribute(this, name, isAttrTrue(newVal))
-
-        break
-      }
-
-      case 'readonly': {
         updateBooleanAttribute(this, name, isAttrTrue(newVal))
 
         break
@@ -123,14 +117,6 @@ export class Chip extends NectaryElement {
 
   set small(isSmall: boolean) {
     updateBooleanAttribute(this, 'small', isSmall)
-  }
-
-  get readonly() {
-    return getBooleanAttribute(this, 'readonly')
-  }
-
-  set readonly(isReadonly: boolean) {
-    updateBooleanAttribute(this, 'readonly', isReadonly)
   }
 
   #updateColor() {
@@ -168,7 +154,7 @@ export class Chip extends NectaryElement {
 
   #onClick = () => {
     this.dispatchEvent(
-      new CustomEvent('-click', { bubbles: true, composed: true })
+      new CustomEvent('-click')
     )
   }
 
