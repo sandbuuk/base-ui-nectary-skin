@@ -39,6 +39,8 @@ export type TSinchRichTextareaMethods = {
   formatCodeTag(): void,
   formatOrderedList(): void,
   formatUnorderedList(): void,
+  /** Returns the bounding rectangle of the current caret/selection */
+  getCaretRect(): DOMRect | null,
   /** Resolver callback for chip icon and color based on tag name */
   chipResolver: TChipResolver | null,
 }

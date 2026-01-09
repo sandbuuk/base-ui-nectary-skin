@@ -312,6 +312,22 @@ export class RichTextarea extends NectaryElement {
     this.#handleActionResult(res)
   }
 
+  getCaretRect(): DOMRect | null {
+    const tRange = this.#getSelectionRange()
+
+    if (tRange === null) {
+      return null
+    }
+
+    // Create a native Range from TRange to get bounding rect
+    const range = document.createRange()
+
+    range.setStart(tRange.startContainer, tRange.startOffset)
+    range.setEnd(tRange.endContainer, tRange.endOffset)
+
+    return range.getBoundingClientRect()
+  }
+
   /**
    * Input must be in focus
    */

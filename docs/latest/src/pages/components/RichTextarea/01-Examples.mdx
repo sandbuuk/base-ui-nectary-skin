@@ -31,4 +31,6 @@ See [Rich Textarea compositions page](?path=/compositions/richtextarea/examples)
 
 Chips are rendered as chips using the `{{chipName}}` syntax. Use the `chipResolver` property to customize each chip's icon and color based on its name. The resolver is set via the component ref and does not affect the markdown output.
 
+In this example, we also handle typing `@` to open a popover with available chips to insert at the current caret position.
+
 <Example Component={TagsExample}/>
