@@ -1,4 +1,5 @@
 import { setEmojiBaseUrl } from '../emoji/utils'
+import type { TChipResolver } from './types'
 import type { TSinchTextType } from '../text/types'
 import type { TMarkdownParseVisitor } from '../utils'
 
@@ -6,10 +7,22 @@ export const sizeValues: readonly TSinchTextType[] = ['m', 's', 'xs', 'xxs']
 
 export const createParseVisitor = (doc: Document) => {
   let emojiBaseUrl: string | null = null
+  let chipColor: string | null = null
+  let chipIcon: string | null = null
+  let chipResolver: TChipResolver | null = null
 
   return {
     updateEmojiBaseUrl(url: string | null) {
       emojiBaseUrl = url
+    },
+    updateChipColor(color: string | null) {
+      chipColor = color
+    },
+    updateChipIcon(icon: string | null) {
+      chipIcon = icon
+    },
+    updateChipResolver(resolver: TChipResolver | null) {
+      chipResolver = resolver
     },
     createVisitor(): TMarkdownParseVisitor {
       const $root = doc.createDocumentFragment()
@@ -49,10 +62,22 @@ export const createParseVisitor = (doc: Document) => {
           $p!.appendChild($codeTag)
         },
         tag(text: string) {
-          const $chip = doc.createElement('sinch-chip') as HTMLElementTagNameMap['sinch-chip']
+          const $chip = doc.createElement('sinch-rich-textarea-chip')
+          const resolved = chipResolver?.(text)
 
           $chip.text = text
           $chip.setAttribute('readonly', '')
+
+          const resolvedColor = resolved?.color ?? chipColor
+          const resolvedIcon = resolved?.icon ?? chipIcon
+
+          if (resolvedColor !== null && resolvedColor !== undefined) {
+            $chip.setAttribute('color', resolvedColor)
+          }
+
+          if (resolvedIcon !== null && resolvedIcon !== undefined) {
+            $chip.setAttribute('icon', resolvedIcon)
+          }
 
           $p!.appendChild($chip)
         },

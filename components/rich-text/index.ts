@@ -2,7 +2,7 @@ import { getEmojiBaseUrl } from '../emoji/utils'
 import '../emoji'
 import '../code-tag'
 import '../link'
-import '../chip'
+import '../rich-textarea-chip'
 import {
   defineCustomElement,
   NectaryElement,
@@ -15,6 +15,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html?raw'
 import { createParseVisitor, sizeValues } from './utils'
+import type { TChipResolver } from './types'
 import type { TSinchTextType } from '../text/types'
 
 export * from './types'
@@ -27,6 +28,7 @@ export class RichText extends NectaryElement {
   #wrapper: HTMLElement
   #parseVisitor
   #controller: AbortController | null = null
+  #chipResolver: TChipResolver | null = null
 
   constructor() {
     super()
@@ -60,6 +62,9 @@ export class RichText extends NectaryElement {
     this.setAttribute('role', 'paragraph')
 
     this.#parseVisitor.updateEmojiBaseUrl(getEmojiBaseUrl(this))
+    this.#parseVisitor.updateChipColor(this.chipColor)
+    this.#parseVisitor.updateChipIcon(this.chipIcon)
+    this.#parseVisitor.updateChipResolver(this.#chipResolver)
     this.#updateText()
     this.#wrapper.addEventListener('click', this.#handleElementClick, { signal })
     this.addEventListener('-element-click', this.#onClickReactHandler, { signal })
@@ -74,12 +79,24 @@ export class RichText extends NectaryElement {
   }
 
   static get observedAttributes() {
-    return ['text']
+    return ['text', 'chip-color', 'chip-icon']
   }
 
   attributeChangedCallback(name: string, _oldVal: string | null, _newVal: string | null) {
     switch (name) {
       case 'text': {
+        this.#updateText()
+
+        break
+      }
+      case 'chip-color': {
+        this.#parseVisitor.updateChipColor(this.chipColor)
+        this.#updateText()
+
+        break
+      }
+      case 'chip-icon': {
+        this.#parseVisitor.updateChipIcon(this.chipIcon)
         this.#updateText()
 
         break
@@ -101,6 +118,32 @@ export class RichText extends NectaryElement {
 
   set text(value: string) {
     updateAttribute(this, 'text', value)
+  }
+
+  get chipColor() {
+    return getAttribute(this, 'chip-color')
+  }
+
+  set chipColor(value: string | null) {
+    updateAttribute(this, 'chip-color', value)
+  }
+
+  get chipIcon() {
+    return getAttribute(this, 'chip-icon')
+  }
+
+  set chipIcon(value: string | null) {
+    updateAttribute(this, 'chip-icon', value)
+  }
+
+  get chipResolver(): TChipResolver | null {
+    return this.#chipResolver
+  }
+
+  set chipResolver(value: TChipResolver | null) {
+    this.#chipResolver = value
+    this.#parseVisitor.updateChipResolver(value)
+    this.#updateText()
   }
 
   #handleElementClick = (e: Event) => {
