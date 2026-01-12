@@ -1,3 +1,4 @@
+import type { TChipResolver } from '../rich-textarea/types'
 import type { TSinchTagColor } from '../tag/colors'
 import type { TSinchTextType } from '../text/types'
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
@@ -5,9 +6,6 @@ import type { NectaryComponentReactByType, NectaryComponentVanillaByType, Nectar
 export type ElementClickedEvent = CustomEvent & {
   currentTarget: HTMLElement,
 }
-
-/** Resolver callback for chip properties based on tag name */
-export type TChipResolver = (tagName: string) => { icon?: string, color?: string } | undefined
 
 export type TSinchRichTextProps = {
   size?: TSinchTextType,

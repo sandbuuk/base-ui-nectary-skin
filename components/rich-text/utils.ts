@@ -1,5 +1,5 @@
 import { setEmojiBaseUrl } from '../emoji/utils'
-import type { TChipResolver } from './types'
+import type { TChipResolver } from '../rich-textarea/types'
 import type { TSinchTextType } from '../text/types'
 import type { TMarkdownParseVisitor } from '../utils'
 

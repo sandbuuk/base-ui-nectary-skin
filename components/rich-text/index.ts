@@ -15,7 +15,7 @@ import {
 } from '../utils'
 import templateHTML from './template.html?raw'
 import { createParseVisitor, sizeValues } from './utils'
-import type { TChipResolver } from './types'
+import type { TChipResolver } from '../rich-textarea/types'
 import type { TSinchTextType } from '../text/types'
 
 export * from './types'
