@@ -112,8 +112,6 @@ export class RichTextarea extends NectaryElement {
       signal: this.#controller.signal,
     }
 
-    this.setAttribute('role', 'textbox')
-    this.ariaMultiLine = 'true'
     this.#$input.addEventListener('beforeinput', this.#onBeforeInput, options)
     this.#$input.addEventListener('keydown', this.#onKeydown, options)
     this.#$input.addEventListener('mousedown', this.#onMouseDown, options)
@@ -152,6 +150,7 @@ export class RichTextarea extends NectaryElement {
     return [
       'value',
       'placeholder',
+      'aria-label',
       'chip-color',
       'chip-icon',
     ]
@@ -170,6 +169,13 @@ export class RichTextarea extends NectaryElement {
       case 'placeholder': {
         this.#$placeholder.textContent = newVal
         updateAttribute(this, 'aria-placeholder', newVal)
+        updateAttribute(this.#$input, 'aria-placeholder', newVal)
+
+        break
+      }
+
+      case 'aria-label': {
+        updateAttribute(this.#$input, 'aria-label', newVal)
 
         break
       }
