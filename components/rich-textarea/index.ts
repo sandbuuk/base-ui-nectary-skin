@@ -383,7 +383,6 @@ export class RichTextarea extends NectaryElement {
   }
 
   #onChipCloseClick = (e: Event) => {
-    console.log('Chip close click event', e)
 
     const $chip = e.target as Node
     const range = removeChip($chip, this.#$input)
