@@ -123,7 +123,7 @@ export class RichTextarea extends NectaryElement {
     this.#$input.addEventListener('cut', this.#onCut, options)
     this.#$input.addEventListener('copy', this.#onCopy, options)
     this.#$input.addEventListener('paste', this.#onPaste, options)
-    this.#$input.addEventListener('-click', this.#onChipClick, options)
+    this.#$input.addEventListener('-right-icon-click', this.#onChipCloseClick, options)
     this.#$bottomSlot.addEventListener('slotchange', this.#onBottomSlotChange, options)
     this.#$topSlot.addEventListener('slotchange', this.#onTopSlotChange, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
@@ -376,8 +376,8 @@ export class RichTextarea extends NectaryElement {
     )
   }
 
-  #onChipClick = (e: Event) => {
-    console.log('Chip click event', e)
+  #onChipCloseClick = (e: Event) => {
+    console.log('Chip close click event', e)
 
     const $chip = e.target as Node
     const range = removeChip($chip, this.#$input)

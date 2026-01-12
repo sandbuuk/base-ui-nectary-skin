@@ -3,7 +3,6 @@
     display: inline-block;
     vertical-align: middle;
     outline: none;
-    cursor: pointer;
   }
 
   #button {
@@ -34,15 +33,6 @@
     --sinch-global-size-icon: var(--sinch-comp-chip-size-icon-m);
   }
 
-  :host(:focus-visible) > #button::after {
-    content: "";
-    position: absolute;
-    inset: -4px;
-    border-radius: calc(var(--sinch-comp-chip-shape-radius) + 4px);
-    border: 2px solid var(--sinch-comp-chip-color-outiline-focus);
-    pointer-events: none;
-  }
-
   :host(:not([icon])) #icon-start {
     display: none;
   }
@@ -57,12 +47,16 @@
     padding-right: 9px;
   }
 
+  #icon-close {
+    cursor: pointer;
+  }
+
   :host([readonly]) #icon-close {
     display: none;
   }
 </style>
 
-<div id="button" inert>
+<div id="button">
   <sinch-icon icons-version="2" id="icon-start"></sinch-icon>
   <sinch-text id="text" type="xs" ellipsis></sinch-text>
   <sinch-icon icons-version="2" name="circle-cross" id="icon-close"></sinch-icon>

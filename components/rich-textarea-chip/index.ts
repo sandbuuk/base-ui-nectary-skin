@@ -23,6 +23,7 @@ export class RichTextareaChip extends NectaryElement {
   #$text: HTMLElement
   #$button: HTMLElement
   #$iconStart: HTMLElement
+  #$iconClose: HTMLElement
 
   #controller: AbortController | null = null
 
@@ -36,6 +37,7 @@ export class RichTextareaChip extends NectaryElement {
     this.#$text = shadowRoot.querySelector('#text')!
     this.#$button = shadowRoot.querySelector('#button')!
     this.#$iconStart = shadowRoot.querySelector('#icon-start')!
+    this.#$iconClose = shadowRoot.querySelector('#icon-close')!
   }
 
   connectedCallback() {
@@ -45,8 +47,7 @@ export class RichTextareaChip extends NectaryElement {
 
     const { signal } = this.#controller
 
-    this.setAttribute('role', 'button')
-    this.tabIndex = 0
+    this.#$iconClose.addEventListener('click', this.#onRightIconClick, { signal })
     this.addEventListener('click', this.#onClick, { signal })
   }
 
@@ -137,9 +138,21 @@ export class RichTextareaChip extends NectaryElement {
     }
   }
 
-  #onClick = () => {
+  #onClick = (e: Event) => {
+    // Don't fire chip click if the right icon was clicked
+    if (e.target === this.#$iconClose || this.#$iconClose.contains(e.target as Node)) {
+      return
+    }
+
     this.dispatchEvent(
       new CustomEvent('-click', { bubbles: true, composed: true })
+    )
+  }
+
+  #onRightIconClick = (e: Event) => {
+    e.stopPropagation()
+    this.dispatchEvent(
+      new CustomEvent('-right-icon-click', { bubbles: true, composed: true })
     )
   }
 }
