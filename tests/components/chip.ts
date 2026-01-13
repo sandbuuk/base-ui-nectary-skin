@@ -5,6 +5,7 @@ const colorValues = ['', 'light-blue']
 
 const shot = '/chip?text=Label%20text&color=Gray%2010'
 const withSmall = '/chip?text=Label%20text&color=Gray%2010&small=true'
+const withReadonly = '/chip?text=Label%20text&color=Gray%2010&readonly=true'
 const withWide = '/chip?width=150&icon=true&text=Label%20text&color=Gray%2010'
 const withNarrow = '/chip?width=80&icon=true&text=Label%20text%20text%20text%20text&color=Gray%2010'
 const withIcon = '/chip?text=Label%20text&color=Gray%2010&icon=true'
@@ -95,6 +96,13 @@ test('chip screenshots', runScreenshotTests('sinch-chip', [
     url: withSmall,
     async *fn({ page }) {
       await page.keyboard.press('Tab')
+      yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'readonly',
+    url: withReadonly,
+    async *fn() {
       yield { name: 'shot' }
     },
   },

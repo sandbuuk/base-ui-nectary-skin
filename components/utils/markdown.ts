@@ -30,7 +30,7 @@ const regEm1Underscore = /(?<!\\)_(?<em1>.+?)(?<!\\)_/
 const regCodeTag = /(?<!\\)`(?<code>.+?)(?<!\\)`/
 const regStrikethrough = /(?<!\\)~~(?<strike>.+?)(?<!\\)~~/
 const regLink = /(?<!\\)!?\[(?<linktext>[^\]]*?)\]\((?<linkhref>[^)]+?)\)(\{(?<linkattrs>[^)]+?)\})?/
-const regMention = /(?<!\\)\{\{(?<mention>[a-zA-Z0-9_-]+)\}\}/
+const regChip = /(?<!\\)\{\{(?<chip>[a-zA-Z0-9_-]+)\}\}/
 const regEmoji = /(?<emoji>(?![0-9*#])\p{Emoji})/u
 const regUList = /^(?<indent>[\t ]*?)[*+-][\t ]+(?<ultext>.*?)[\t ]*?$/
 const regOList = /^(?<indent>[\t ]*?)\d+\.[\t ]+(?<oltext>.*?)[\t ]*?$/
@@ -41,7 +41,7 @@ const allRegs = [
   regEscapedChars,
   regCodeTag,
   regLink,
-  regMention,
+  regChip,
   regEm3Star,
   regEm2Star,
   regEm1Star,
@@ -108,8 +108,8 @@ const createLineParser = (visitor: Readonly<TMarkdownParseVisitor>) =>
         visitor.codetag(groups.code)
       }
 
-      if (groups?.mention != null) {
-        visitor.tag(groups.mention)
+      if (groups?.chip != null) {
+        visitor.tag(groups.chip)
       }
 
       if (groups?.emoji != null) {

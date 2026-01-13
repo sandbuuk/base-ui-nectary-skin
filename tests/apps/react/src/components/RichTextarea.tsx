@@ -9,7 +9,7 @@ import '@nectary/components/icon'
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
 
-If ___you___ have *any questions*, contact your ~~parents~~😆 account __manager__.
+If ___you___ have *any questions*, contact your ~~parents~~😆 account __manager__ or {{JohnDoe}}.
 
 * list item 1
   1. inner item 1

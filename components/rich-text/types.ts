@@ -1,3 +1,5 @@
+import type { TChipResolver } from '../rich-textarea/types'
+import type { TSinchTagColor } from '../tag/colors'
 import type { TSinchTextType } from '../text/types'
 import type { NectaryComponentReactByType, NectaryComponentVanillaByType, NectaryComponentReact, NectaryComponentVanilla } from '../types'
 
@@ -8,6 +10,15 @@ export type ElementClickedEvent = CustomEvent & {
 export type TSinchRichTextProps = {
   size?: TSinchTextType,
   text: string,
+  /** Default color for chips using the tag color system */
+  'chip-color'?: TSinchTagColor,
+  /** Default icon for chips */
+  'chip-icon'?: string,
+}
+
+export type TSinchRichTextMethods = {
+  /** Resolver callback for chip icon and color based on tag name */
+  chipResolver: TChipResolver | null,
 }
 
 export type TSinchRichTextEvents = {
@@ -44,6 +55,7 @@ export type TSinchRichTextStyle = {
 
 export type TSinchRichText = {
   props: TSinchRichTextProps,
+  methods: TSinchRichTextMethods,
   events: TSinchRichTextEvents,
   style: TSinchRichTextStyle,
 }

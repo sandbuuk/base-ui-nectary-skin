@@ -2,7 +2,7 @@
 
 import { getEmojiBaseUrl, getEmojiUrl } from '../emoji/utils'
 import { isEmojiString, parseMarkdown } from '../utils'
-import type { TRichTextareaSelection } from './types'
+import type { TRichTextareaSelection, TChipResolver } from './types'
 import type { TMarkdownParseVisitor } from '../utils'
 
 // eslint-disable-next-line no-irregular-whitespace
@@ -59,6 +59,16 @@ interface TEmoji extends HTMLElement {
 const isEmoji = ($n: Node | null): $n is TEmoji => {
   return $n !== null && $n.nodeName === 'IMG'
 }
+
+interface TChip extends HTMLElement {
+  nodeName: 'SINCH-RICH-TEXTAREA-CHIP',
+  text: string,
+}
+
+const isChip = ($n: Node | null): $n is TChip => {
+  return $n !== null && $n.nodeName === 'SINCH-RICH-TEXTAREA-CHIP'
+}
+
 interface TInline extends HTMLElement {
   nodeName: 'SPAN',
 }
@@ -165,10 +175,10 @@ const assertInline: AssertInline = ($n) => {
     throw new Error(`Node is not an Inline: ${$n?.nodeName}`)
   }
 }
-type TTextContent = TInline | TEmoji
+type TTextContent = TInline | TEmoji | TChip
 
 const isTextContent = ($n: Node | null): $n is TTextContent => {
-  return $n !== null && $n.nodeType === Node.ELEMENT_NODE && (isInline($n) || isEmoji($n))
+  return $n !== null && $n.nodeType === Node.ELEMENT_NODE && (isInline($n) || isEmoji($n) || isChip($n))
 }
 type AssertTextContent = ($n: Node | null) => asserts $n is TTextContent
 
@@ -233,7 +243,7 @@ const isAllInsideList = (isOrdered: boolean, $a: TTextContent, $b: TTextContent)
 
 export type TRichTextareaFormatInputType = 'formatItalic' | 'formatBold' | 'formatStrikeThrough' | 'formatCodeTag'
 
-type TFormatName = 'i' | 'b' | 's' | 'c' | 'l' | 'm'
+type TFormatName = 'i' | 'b' | 's' | 'c' | 'l'
 
 const FORMAT_TYPE_TO_NAME: Record<TRichTextareaFormatInputType, TFormatName> = {
   formatBold: 'b',
@@ -251,7 +261,6 @@ const isFormatItalic = ($n: TInline) => isFormatName($n, 'i')
 const isFormatStrikethrough = ($n: TInline) => isFormatName($n, 's')
 const isFormatCodetag = ($n: TInline) => isFormatName($n, 'c')
 const isFormatLink = ($n: TInline) => isFormatName($n, 'l')
-const isFormatTag = ($n: TInline) => isFormatName($n, 'm')
 
 const isAllInsideFormatName = ($a: TTextContent, $b: TTextContent, formatName: TFormatName): boolean => {
   const aBlock = getParentTextBlock($a)
@@ -316,10 +325,6 @@ const setInlineFormat = ($n: TInline, formatName: TFormatName, shouldEnable: boo
     if (formatName === 'l' || isFormatName($n, 'l')) {
       $n.className = ''
       $n.removeAttribute(LINK_HREF_ATTR_NAME)
-    }
-
-    if (formatName === 'm' || isFormatName($n, 'm')) {
-      $n.className = ''
     }
 
     $n.classList.add(formatName)
@@ -413,12 +418,60 @@ const createLink = (text: string, href: string, doc: Document): TInline => {
   return $link
 }
 
-const createTag = (text: string, doc: Document): TInline => {
-  const $tag = createInlineWithText(`${text}`, doc)
+const createTag = (text: string, doc: Document, color?: string | null, icon?: string | null): TChip => {
+  const $chip = doc.createElement('sinch-rich-textarea-chip') as unknown as TChip
 
-  setInlineFormat($tag, 'm', true)
+  $chip.text = text
+  $chip.contentEditable = 'false'
 
-  return $tag
+  if (color !== undefined && color !== null && color !== '') {
+    $chip.setAttribute('color', color)
+  }
+
+  if (icon !== undefined && icon !== null && icon !== '') {
+    $chip.setAttribute('icon', icon)
+  }
+
+  return $chip
+}
+
+export const removeChip = ($chip: Node, $root: TRichTextareaRoot): TRange | null => {
+  if (!isChip($chip)) {
+    return null
+  }
+
+  const $parent = $chip.parentNode
+
+  if ($parent === null) {
+    return null
+  }
+
+  // Get next sibling or previous sibling to place cursor
+  const $next = $chip.nextSibling
+  const $prev = $chip.previousSibling
+
+  // Remove the chip
+  $parent.removeChild($chip)
+
+  // Determine cursor position
+  if ($next !== null && isTextContent($next)) {
+    return createCollapsedRange(createBeginCursorFromTextContent($next))
+  }
+
+  if ($prev !== null && isTextContent($prev)) {
+    return createCollapsedRange(createEndCursorFromTextContent($prev))
+  }
+
+  // If no siblings, ensure there's an empty inline element for cursor
+  if (isTextBlock($parent)) {
+    const $empty = createEmptyInline($parent.ownerDocument)
+
+    $parent.appendChild($empty)
+
+    return createCollapsedRange(createBeginCursorFromTextContent($empty))
+  }
+
+  return getBeginRange($root)
 }
 
 const EMOJI_CHAR_ATTR_NAME = 'data-char'
@@ -1297,7 +1350,7 @@ export const formatList = (isOrdered: boolean, range: TRange): TActionResult => 
 
 type TCursor = {
   $text: null,
-  $inline: TEmoji,
+  $inline: TEmoji | TChip,
   offset: number,
   isAfterInline?: boolean,
 } | {
@@ -1364,6 +1417,14 @@ const createIncomingCursorFromNodeWithOffset = (node: Node, offset: number): TCu
   }
 
   if (isEmoji(node)) {
+    return {
+      $text: null,
+      $inline: node,
+      offset: 0,
+    }
+  }
+
+  if (isChip(node)) {
     return {
       $text: null,
       $inline: node,
@@ -1629,10 +1690,15 @@ export const insertLink = ($root: TRichTextareaRoot, text: string, href: string,
   }
 }
 
-export const insertTag = ($root: TRichTextareaRoot, text: string, range: TRange): TActionResult => {
+export const insertChip = (
+  $root: TRichTextareaRoot,
+  text: string,
+  range: TRange,
+  options?: { color?: string, icon?: string }
+): TActionResult => {
   const cursor = removeContentInRange(range)
   const { $text, $inline, offset, isAfterInline: isAfterLastChild } = cursor
-  const $tag = createTag(text, $root.ownerDocument)
+  const $tag = createTag(text, $root.ownerDocument, options?.color, options?.icon)
 
   /* Insert Tag element */
   if (isTextNode($text)) {
@@ -1756,7 +1822,7 @@ export const insertText = ($root: TRichTextareaRoot, data: string | null, range:
     const isHotTextWhitespace =
       range.startOffset === range.startContainer.length &&
       data === TEXT_WHITESPACE &&
-      (isFormatCodetag($inline) || isFormatLink($inline) || isFormatTag($inline))
+      (isFormatCodetag($inline) || isFormatLink($inline))
 
     if (!isHotTextWhitespace) {
       return DEFAULT_ACTION_RESULT
@@ -1806,7 +1872,7 @@ export const insertText = ($root: TRichTextareaRoot, data: string | null, range:
     }
 
     if (offset === $text.length && data === TEXT_WHITESPACE) {
-      if (isFormatLink($inline) || isFormatCodetag($inline) || isFormatTag($inline)) {
+      if (isFormatLink($inline) || isFormatCodetag($inline)) {
         const $newinline = createInlineWithText(data, $root.ownerDocument)
 
         $inline.after($newinline)
@@ -2006,6 +2072,19 @@ export const getSelectionInfo = (range: TRange): TRichTextareaSelection => {
   if (aCursor.$inline === bCursor.$inline) {
     const { $text, $inline } = aCursor
 
+    if (isChip($inline)) {
+      return {
+        bold: false,
+        italic: false,
+        strikethrough: false,
+        codetag: false,
+        tag: true,
+        link: false,
+        olist: isInsideList(true, $inline),
+        ulist: isInsideList(false, $inline),
+      }
+    }
+
     if ($text !== null || isInline($inline)) {
       assertInline($inline)
 
@@ -2014,7 +2093,7 @@ export const getSelectionInfo = (range: TRange): TRichTextareaSelection => {
         italic: isFormatItalic($inline),
         strikethrough: isFormatStrikethrough($inline),
         codetag: isFormatCodetag($inline),
-        tag: isFormatTag($inline),
+        tag: false,
         link: isFormatLink($inline),
         olist: isInsideList(true, $inline),
         ulist: isInsideList(false, $inline),
@@ -2067,10 +2146,15 @@ const isEmptyTextBlock = ($block: TTextBlock): boolean => {
   }
 
   const $inline = blockChildren[0]
+
+  // Chips are not empty
+  if (isChip($inline)) {
+    return false
+  }
+
   const isEmptyText =
     isInline($inline) &&
     !isFormatCodetag($inline) &&
-    !isFormatTag($inline) &&
     isEmptyTextNode(getChildText($inline))
 
   return isEmptyText
@@ -2114,6 +2198,16 @@ const serializeDescriptorReducer = (range: TCursorPair | null) => (state: TTextC
     return state
   }
 
+  if (isChip($n)) {
+    const text = $n.text ?? ''
+
+    if (text.length > 0) {
+      state.push({ isTag: true, text: `{{${text}}}` })
+    }
+
+    return state
+  }
+
   let text = getTextValue(getChildText($n))
   let trailingSpaces = ''
 
@@ -2137,12 +2231,6 @@ const serializeDescriptorReducer = (range: TCursorPair | null) => (state: TTextC
 
   if (isFormatCodetag($n)) {
     state.push({ isCodetag: true, text })
-
-    return state
-  }
-
-  if (isFormatTag($n)) {
-    state.push({ isTag: true, text: `{{${text}}}` })
 
     return state
   }
@@ -2451,10 +2539,22 @@ export const serializeMarkdown = ($root: TRichTextareaRoot, range: Readonly<TRan
 
 export const createParseVisitor = (doc: Document) => {
   let emojiBaseUrl: string | null = null
+  let chipColor: string | null = null
+  let chipIcon: string | null = null
+  let chipResolver: TChipResolver | null = null
 
   return {
     updateEmojiBaseUrl(url: string | null) {
       emojiBaseUrl = url
+    },
+    updateChipColor(color: string | null) {
+      chipColor = color
+    },
+    updateChipIcon(icon: string | null) {
+      chipIcon = icon
+    },
+    updateChipResolver(resolver: TChipResolver | null) {
+      chipResolver = resolver
     },
     createVisitor(): TMarkdownParseVisitor {
       const $root = doc.createDocumentFragment()
@@ -2490,7 +2590,8 @@ export const createParseVisitor = (doc: Document) => {
           $currentBlock!.appendChild($inline)
         },
         tag(text) {
-          const $tag = createTag(text, doc)
+          const resolved = chipResolver?.(text)
+          const $tag = createTag(text, doc, resolved?.color ?? chipColor, resolved?.icon ?? chipIcon)
 
           $currentBlock!.appendChild($tag)
         },

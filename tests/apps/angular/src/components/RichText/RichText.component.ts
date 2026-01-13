@@ -5,7 +5,7 @@ import '@nectary/components/rich-text'
 const mdText = `
 To set up the \`LINE\`, read and accept* the \`LINE\` [terms & conditions](https://google.com).
 
-If ___you___ have *any questions*, contact your ~~parents~~😆 account __manager__.
+If ___you___ have *any questions*, contact your ~~parents~~😆 account __manager__ or {{JohnDoe}}.
 
 paragraph text
 * list item 1
@@ -25,6 +25,7 @@ Context **bold _italic_ bold** text.
 
 const longText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.'
 const shortText = 'Lorem Ipsum is dummy text'
+const tagText = 'Hello {{JohnDoe}} this is a tag example'
 
 @Component({
   selector: 'rich-text-component',
@@ -48,6 +49,8 @@ export class RichTextComponent {
       this.text = mdText
     } else if (example === 'long') {
       this.text = longText
+    } else if (example === 'tag') {
+      this.text = tagText
     }
   }
 }

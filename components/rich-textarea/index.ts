@@ -1,4 +1,5 @@
 import { getEmojiBaseUrl } from '../emoji/utils'
+import '../rich-textarea-chip'
 import {
   defineCustomElement,
   getAttribute,
@@ -26,14 +27,15 @@ import {
   insertFromPaste,
   insertLineBreak,
   insertLink,
-  insertTag,
+  insertChip,
   insertText,
   isEditorEmpty,
   isSelectionEqual,
+  removeChip,
   serializeMarkdown,
   setBrowserCaret,
 } from './utils'
-import type { TRichTextareaSelection } from './types'
+import type { TRichTextareaSelection, TChipResolver } from './types'
 import type {
   TActionResult,
   TRange,
@@ -64,6 +66,7 @@ export class RichTextarea extends NectaryElement {
   #lastSelectionInfo: TRichTextareaSelection | null = null
   #prevDispatchedValue: string | null = null
   #parseVisitor
+  #chipResolver: TChipResolver | null = null
 
   constructor() {
     super()
@@ -109,8 +112,6 @@ export class RichTextarea extends NectaryElement {
       signal: this.#controller.signal,
     }
 
-    this.setAttribute('role', 'textbox')
-    this.ariaMultiLine = 'true'
     this.#$input.addEventListener('beforeinput', this.#onBeforeInput, options)
     this.#$input.addEventListener('keydown', this.#onKeydown, options)
     this.#$input.addEventListener('mousedown', this.#onMouseDown, options)
@@ -120,6 +121,7 @@ export class RichTextarea extends NectaryElement {
     this.#$input.addEventListener('cut', this.#onCut, options)
     this.#$input.addEventListener('copy', this.#onCopy, options)
     this.#$input.addEventListener('paste', this.#onPaste, options)
+    this.#$input.addEventListener('-right-icon-click', this.#onChipCloseClick, options)
     this.#$bottomSlot.addEventListener('slotchange', this.#onBottomSlotChange, options)
     this.#$topSlot.addEventListener('slotchange', this.#onTopSlotChange, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
@@ -129,6 +131,8 @@ export class RichTextarea extends NectaryElement {
     document.addEventListener('selectionchange', this.#onSelectionChange, options)
 
     this.#parseVisitor.updateEmojiBaseUrl(getEmojiBaseUrl(this))
+    this.#parseVisitor.updateChipColor(this.chipColor)
+    this.#parseVisitor.updateChipIcon(this.chipIcon)
     this.#onTopSlotChange()
     this.#onBottomSlotChange()
     this.#onValueChange(this.value)
@@ -146,6 +150,9 @@ export class RichTextarea extends NectaryElement {
     return [
       'value',
       'placeholder',
+      'aria-label',
+      'chip-color',
+      'chip-icon',
     ]
   }
 
@@ -162,6 +169,25 @@ export class RichTextarea extends NectaryElement {
       case 'placeholder': {
         this.#$placeholder.textContent = newVal
         updateAttribute(this, 'aria-placeholder', newVal)
+        updateAttribute(this.#$input, 'aria-placeholder', newVal)
+
+        break
+      }
+
+      case 'aria-label': {
+        updateAttribute(this.#$input, 'aria-label', newVal)
+
+        break
+      }
+
+      case 'chip-color': {
+        this.#updateChipColors(newVal)
+
+        break
+      }
+
+      case 'chip-icon': {
+        this.#updateChipIcons(newVal)
 
         break
       }
@@ -200,6 +226,32 @@ export class RichTextarea extends NectaryElement {
     return getIntegerAttribute(this, 'rows', 0)
   }
 
+  set chipColor(value: string | null) {
+    updateAttribute(this, 'chip-color', value)
+  }
+
+  get chipColor() {
+    return getAttribute(this, 'chip-color')
+  }
+
+  set chipIcon(value: string | null) {
+    updateAttribute(this, 'chip-icon', value)
+  }
+
+  get chipIcon() {
+    return getAttribute(this, 'chip-icon')
+  }
+
+  set chipResolver(resolver: TChipResolver | null) {
+    this.#chipResolver = resolver
+    this.#parseVisitor.updateChipResolver(resolver)
+    this.#applyChipResolver()
+  }
+
+  get chipResolver() {
+    return this.#chipResolver
+  }
+
   get focusable() {
     return true
   }
@@ -224,8 +276,8 @@ export class RichTextarea extends NectaryElement {
     this.#handleActionResult(res)
   }
 
-  insertMention(username: string) {
-    const res = this.#handleInput('insertMention', this.#getCurrentRange(), username)
+  insertChip(text: string) {
+    const res = this.#handleInput('insertChip', this.#getCurrentRange(), text)
 
     this.#handleActionResult(res)
   }
@@ -264,6 +316,22 @@ export class RichTextarea extends NectaryElement {
     const res = formatList(false, this.#getCurrentRange())
 
     this.#handleActionResult(res)
+  }
+
+  getCaretRect(): DOMRect | null {
+    const tRange = this.#getSelectionRange()
+
+    if (tRange === null) {
+      return null
+    }
+
+    // Create a native Range from TRange to get bounding rect
+    const range = document.createRange()
+
+    range.setStart(tRange.startContainer, tRange.startOffset)
+    range.setEnd(tRange.endContainer, tRange.endOffset)
+
+    return range.getBoundingClientRect()
   }
 
   /**
@@ -312,6 +380,17 @@ export class RichTextarea extends NectaryElement {
     this.#handleActionResult(
       handleEmojiMousedown(e.target as Node)
     )
+  }
+
+  #onChipCloseClick = (e: Event) => {
+    const $chip = e.target as Node
+    const range = removeChip($chip, this.#$input)
+
+    if (range !== null) {
+      setBrowserCaret(range)
+      this.#cachedRange = range
+      this.#dispatchChangeEvent()
+    }
   }
 
   #onKeydown = (e: KeyboardEvent) => {
@@ -453,8 +532,13 @@ export class RichTextarea extends NectaryElement {
       case 'insertLink': {
         return insertLink(this.#$input, text!, href!, range)
       }
-      case 'insertMention': {
-        return insertTag(this.#$input, text!, range)
+      case 'insertMention':
+      case 'insertChip': {
+        const resolved = this.#chipResolver?.(text!)
+        const color = resolved?.color ?? this.getAttribute('chip-color') ?? undefined
+        const icon = resolved?.icon ?? this.getAttribute('chip-icon') ?? undefined
+
+        return insertChip(this.#$input, text!, range, { color, icon })
       }
       // case 'formatUnderline':
       case 'formatItalic':
@@ -617,6 +701,76 @@ export class RichTextarea extends NectaryElement {
 
   #updateEditorEmptyClass() {
     setClass(this.#$input, 'empty', isEditorEmpty(this.#$input))
+  }
+
+  #updateChipColors(color: string | null) {
+    // Update the parse visitor so new chips get the color
+    this.#parseVisitor.updateChipColor(color)
+
+    // Update existing chips (only if no resolver overrides)
+    if (this.#chipResolver === null) {
+      const chips = this.#$input.querySelectorAll('sinch-rich-textarea-chip')
+
+      chips.forEach((chip) => {
+        if (color !== null && color !== '') {
+          chip.setAttribute('color', color)
+        } else {
+          chip.removeAttribute('color')
+        }
+      })
+    }
+  }
+
+  #updateChipIcons(icon: string | null) {
+    // Update the parse visitor so new chips get the icon
+    this.#parseVisitor.updateChipIcon(icon)
+
+    // Update existing chips (only if no resolver overrides)
+    if (this.#chipResolver === null) {
+      const chips = this.#$input.querySelectorAll('sinch-rich-textarea-chip')
+
+      chips.forEach((chip) => {
+        if (icon !== null && icon !== '') {
+          chip.setAttribute('icon', icon)
+        } else {
+          chip.removeAttribute('icon')
+        }
+      })
+    }
+  }
+
+  #applyChipResolver() {
+    if (this.#chipResolver === null) {
+      return
+    }
+
+    const chips = this.#$input.querySelectorAll('sinch-rich-textarea-chip')
+
+    chips.forEach((chip) => {
+      const text = chip.getAttribute('text')
+
+      if (text !== null && text !== '') {
+        const resolved = this.#chipResolver!(text)
+
+        if (resolved?.icon !== undefined) {
+          chip.setAttribute('icon', resolved.icon)
+        } else if (this.chipIcon !== null) {
+          // Fall back to chip-icon prop
+          chip.setAttribute('icon', this.chipIcon)
+        } else {
+          chip.removeAttribute('icon')
+        }
+
+        if (resolved?.color !== undefined) {
+          chip.setAttribute('color', resolved.color)
+        } else if (this.chipColor !== null) {
+          // Fall back to chip-color prop
+          chip.setAttribute('color', this.chipColor)
+        } else {
+          chip.removeAttribute('color')
+        }
+      }
+    })
   }
 
   #onBottomSlotChange = () => {

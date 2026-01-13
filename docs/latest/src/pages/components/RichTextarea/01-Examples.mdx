@@ -1,5 +1,6 @@
 import { Example } from '~/components/Example'
 import { SlotsExample } from './examples/Slots.tsx?example'
+import { TagsExample } from './examples/Tags.tsx?example'
 
 # Examples
 
@@ -25,3 +26,11 @@ See [Rich Textarea compositions page](?path=/compositions/richtextarea/examples)
 `sinch-rich-textarea` component has `top` and `bottom` slots for toolbars and buttons.
 
 <Example Component={SlotsExample}/>
+
+## Chips
+
+Chips are rendered as chips using the `{{chipName}}` syntax. Use the `chipResolver` property to customize each chip's icon and color based on its name. The resolver is set via the component ref and does not affect the markdown output.
+
+In this example, we also handle typing `@` to open a popover with available chips to insert at the current caret position.
+
+<Example Component={TagsExample}/>
