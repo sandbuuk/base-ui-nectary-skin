@@ -1010,6 +1010,7 @@ export class Input extends NectaryElement {
   #updateInputRole() {
     if (this.type === 'number') {
       this.#$input.setAttribute('role', 'spinbutton')
+      this.#$input.removeAttribute('aria-placeholder')
       this.#updateAriaValueAttributes()
     } else {
       this.#$input.removeAttribute('role')
