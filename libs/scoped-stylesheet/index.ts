@@ -7,10 +7,18 @@
 export class ScopedStyleSheet {
   constructor(private shadowRoot: ShadowRoot) {}
 
-  addStyle(styles: string) {
+  addStyle(styles: string, attributes?: Record<string, string>) {
     const style = document.createElement('style')
 
     style.textContent = styles
     this.shadowRoot.appendChild(style)
+
+    if (attributes != null) {
+      for (const [key, value] of Object.entries(attributes)) {
+        style.setAttribute(key, value)
+      }
+    }
+
+    return style
   }
 }
