@@ -140,6 +140,10 @@ export const App: FC = () => {
                   <NavigationItem path="/global-components" text="Global Components"/>
                   <NavigationItem path="/V5Migration" text="V5 Migration"/>
                   <NavigationItem path="/V3Migration" text="V3 Migration"/>
+                </NavigationList>
+              </NavigationGroup>
+              <NavigationGroup text="Tools">
+                <NavigationList>
                   <NavigationItem path="/playground" text="Playground"/>
                 </NavigationList>
               </NavigationGroup>
