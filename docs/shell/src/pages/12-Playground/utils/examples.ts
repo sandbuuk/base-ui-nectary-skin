@@ -1,8 +1,8 @@
-export const DEFAULT_CODE = `// Welcome to the Nectary Playground!
-// Write React components using Nectary and see the live preview.
+export const DEFAULT_CODE = `// In a real app, replace this with: import { useState } from 'react'
+const { useState } = React;
 
 function App() {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = useState(0);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -27,26 +27,32 @@ function App() {
 export const EXAMPLES: Record<string, string> = {
   Counter: DEFAULT_CODE,
 
-  'Toggle State': `function App() {
-  const [enabled, setEnabled] = React.useState(false);
+  'Toggle State': `// In a real app, replace this with: import { useState } from 'react'
+const { useState } = React;
+
+function App() {
+  const [enabled, setEnabled] = useState(false);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <sinch-toggle
-      text="Toggle"
-      aria-label="Toggle"
-      small
-      checked={enabled}
-      on-change={(e) => setEnabled(e.detail)}
-    />
+      <sinch-toggle
+        text="Toggle"
+        aria-label="Toggle"
+        small
+        checked={enabled}
+        on-change={(e) => setEnabled(e.detail)}
+      />
       <sinch-alert type={enabled ? 'info' : 'warn'} text={\`Feature is \${enabled ? 'enabled' : 'disabled'}\`}>
       </sinch-alert>
     </div>
   );
 }`,
 
-  'Form Input': `function App() {
-  const [name, setName] = React.useState('');
+  'Form Input': `// In a real app, replace this with: import { useState } from 'react'
+const { useState } = React;
+
+function App() {
+  const [name, setName] = useState('');
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '300px' }}>
@@ -66,9 +72,12 @@ export const EXAMPLES: Record<string, string> = {
 }
 `,
 
-  'Dynamic List': `function App() {
-  const [items, setItems] = React.useState(['Item 1', 'Item 2']);
-  const [newItem, setNewItem] = React.useState('');
+  'Dynamic List': `// In a real app, replace this with: import { useState } from 'react'
+const { useState } = React;
+
+function App() {
+  const [items, setItems] = useState(['Item 1', 'Item 2']);
+  const [newItem, setNewItem] = useState('');
 
   const addItem = () => {
     if (newItem.trim()) {
@@ -104,8 +113,11 @@ export const EXAMPLES: Record<string, string> = {
 }
 `,
 
-  'Dialog Control': `function App() {
-  const [open, setOpen] = React.useState(false);
+  'Dialog Control': `// In a real app, replace this with: import { useState } from 'react'
+const { useState } = React;
+
+function App() {
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
