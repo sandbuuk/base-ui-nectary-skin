@@ -9,7 +9,7 @@ function App() {
       <sinch-text>You clicked {count} times</sinch-text>
       <div style={{ display: 'flex', gap: '8px' }}>
         <sinch-button
-          type="cta-primary"
+          type="primary"
           text="Increment"
           on-click={() => setCount(count + 1)}
         />
@@ -99,7 +99,7 @@ function App() {
           on-change={(e) => setNewItem(e.detail)}
           style={{ flex: 1 }}
         />
-        <sinch-button type="cta-primary" text="Add" on-click={addItem} />
+        <sinch-button type="primary" text="Add" on-click={addItem} />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {items.map((item, index) => (
@@ -122,7 +122,7 @@ function App() {
   return (
     <div>
       <sinch-button
-        type="cta-primary"
+        type="primary"
         text="Open Dialog"
         on-click={() => setOpen(true)}
       />
@@ -138,7 +138,7 @@ function App() {
         </div>
         <div slot="buttons" style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
           <sinch-button type="secondary" text="Cancel" on-click={() => setOpen(false)} />
-          <sinch-button type="cta-primary" text="Confirm" on-click={() => setOpen(false)} />
+          <sinch-button type="primary" text="Confirm" on-click={() => setOpen(false)} />
         </div>
       </sinch-dialog>
     </div>

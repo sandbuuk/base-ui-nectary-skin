@@ -90,7 +90,7 @@ const importedComponents = new Set<string>()
  */
 const extractComponentSuffixes = (code: string): string[] => {
   // Match JSX-style <sinch-*> elements
-  const regex = /<sinch-([a-z-]+)/g
+  const regex = /<sinch-([a-z][a-z0-9-]*)/gi
   const suffixes = new Set<string>()
 
   let match
@@ -99,7 +99,7 @@ const extractComponentSuffixes = (code: string): string[] => {
     const suffix = match[1]
 
     if (suffix !== undefined) {
-      suffixes.add(suffix)
+      suffixes.add(suffix.toLowerCase())
     }
   }
 
@@ -122,11 +122,9 @@ export const importComponents = async (code: string): Promise<void> => {
     const importer = COMPONENT_IMPORTS[suffix]
 
     if (importer !== undefined) {
-      console.log(`Importing sinch-${suffix} component...`)
       importsNeeded.push(
         importer()
           .then(() => {
-            console.log(`Imported sinch-${suffix} component`)
             importedComponents.add(suffix)
           })
           .catch((err) => {

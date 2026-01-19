@@ -38,7 +38,7 @@ export const getCodeFromUrl = (): string | null => {
   const params = new URLSearchParams(window.location.search)
   const encoded = params.get('code')
 
-  if (encoded === null || encoded === '') {
+  if (encoded === null) {
     return null
   }
 
