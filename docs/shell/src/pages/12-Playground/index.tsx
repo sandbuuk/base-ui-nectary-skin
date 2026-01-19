@@ -191,15 +191,22 @@ export const PlaygroundPage: FC = () => {
   const [examplesOpen, setExamplesOpen] = useState(false)
   const [openPanels, setOpenPanels] = useState<string>('editor,preview')
   const [showCopiedToast, setShowCopiedToast] = useState(false)
+  const [layout, setLayout] = useState<'vertical' | 'horizontal'>('horizontal')
 
   const isDarkTheme = themeName === 'dark'
   const themeClass = isDarkTheme ? 'nectary-theme-base nectary-theme-dark' : 'nectary-theme-base'
 
+  // Re-attach shadow root when previewRef element changes (e.g., layout switch)
   useEffect(() => {
-    if (previewRef.current !== null && shadowRootRef.current === null) {
-      shadowRootRef.current = previewRef.current.attachShadow({ mode: 'open' })
+    if (previewRef.current !== null) {
+      // Check if this element already has a shadow root
+      if (previewRef.current.shadowRoot === null) {
+        shadowRootRef.current = previewRef.current.attachShadow({ mode: 'open' })
+      } else {
+        shadowRootRef.current = previewRef.current.shadowRoot
+      }
     }
-  }, [])
+  }, [layout])
 
   useEffect(() => {
     const shadowRoot = shadowRootRef.current
@@ -290,7 +297,7 @@ export const PlaygroundPage: FC = () => {
         currentRoot.unmount()
       }
     }
-  }, [code, themeClass])
+  }, [code, themeClass, layout])
 
   const handleEditorChange = useCallback((value: string | undefined) => {
     setCode(value ?? '')
@@ -327,7 +334,7 @@ export const PlaygroundPage: FC = () => {
   }, [])
 
   return (
-    <div className="playground-container">
+    <div className="playground-container" data-layout={layout}>
       <header className="playground-header">
         <div className="playground-header-left">
           <sinch-title text="Playground" type="m" level="1"/>
@@ -360,6 +367,14 @@ export const PlaygroundPage: FC = () => {
           </sinch-popover>
         </div>
         <div className="playground-header-right">
+          <sinch-button
+            size="s"
+            type="tertiary"
+            aria-label={layout === 'vertical' ? 'Switch to horizontal layout' : 'Switch to vertical layout'}
+            on-click={() => setLayout((l) => (l === 'vertical' ? 'horizontal' : 'vertical'))}
+          >
+            <sinch-icon slot="icon" icons-version="2" name={layout === 'vertical' ? 'fa-table-columns' : 'fa-table-rows'}/>
+          </sinch-button>
           <sinch-button size="s" type="secondary" text="Reset" aria-label="Reset code" on-click={handleReset}/>
           <sinch-button size="s" type="cta-primary" text="Share" aria-label="Share code" on-click={handleShare}>
             <sinch-icon slot="icon" icons-version="2" name="fa-share-nodes"/>
@@ -367,17 +382,48 @@ export const PlaygroundPage: FC = () => {
         </div>
       </header>
 
-      <sinch-accordion
-        multiple
-        value={openPanels}
-        on-change={(e: CustomEvent<string>) => setOpenPanels(e.detail)}
-        class="playground-accordion"
-      >
-        <sinch-accordion-item value="editor" label="JSX">
-          {error !== null && (
-            <span slot="icon" className="playground-error-indicator">Error</span>
-          )}
-          <div slot="content" className="playground-editor-content">
+      {layout === 'vertical' ? (
+        <sinch-accordion
+          multiple
+          value={openPanels}
+          on-change={(e: CustomEvent<string>) => setOpenPanels(e.detail)}
+          class="playground-accordion"
+        >
+          <sinch-accordion-item value="editor" label="JSX">
+            {error !== null && (
+              <span slot="icon" className="playground-error-indicator">Error</span>
+            )}
+            <div slot="content" className="playground-editor-content">
+              <Editor
+                height="100%"
+                language="typescript"
+                path="playground.tsx"
+                value={code}
+                onChange={handleEditorChange}
+                beforeMount={configureMonaco}
+                theme="nectary-dark"
+                options={{
+                  minimap: { enabled: false },
+                  fontSize: 14,
+                  lineNumbers: 'on',
+                  scrollBeyondLastLine: false,
+                  automaticLayout: true,
+                  tabSize: 2,
+                  wordWrap: 'on',
+                  padding: { top: 8 },
+                }}
+              />
+            </div>
+          </sinch-accordion-item>
+          <sinch-accordion-item value="preview" label="Preview">
+            <div slot="content" className="playground-preview-content">
+              <div ref={previewRef} className="playground-preview-shadow-host"/>
+            </div>
+          </sinch-accordion-item>
+        </sinch-accordion>
+      ) : (
+        <div className="playground-horizontal-layout">
+          <div className="playground-horizontal-editor">
             <Editor
               height="100%"
               language="typescript"
@@ -398,13 +444,11 @@ export const PlaygroundPage: FC = () => {
               }}
             />
           </div>
-        </sinch-accordion-item>
-        <sinch-accordion-item value="preview" label="Preview">
-          <div slot="content" className="playground-preview-content">
+          <div className="playground-horizontal-preview">
             <div ref={previewRef} className="playground-preview-shadow-host"/>
           </div>
-        </sinch-accordion-item>
-      </sinch-accordion>
+        </div>
+      )}
 
       <sinch-toast-manager origin="bottom-right">
         {showCopiedToast && (
