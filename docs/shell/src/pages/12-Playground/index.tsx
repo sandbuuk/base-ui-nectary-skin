@@ -17,6 +17,8 @@ import '@nectary/components/button'
 import '@nectary/components/icon'
 import '@nectary/components/popover'
 import '@nectary/components/title'
+import '@nectary/components/toast'
+import '@nectary/components/toast-manager'
 import './styles.css'
 
 loader.config({
@@ -188,6 +190,7 @@ export const PlaygroundPage: FC = () => {
   const [error, setError] = useState<string | null>(null)
   const [examplesOpen, setExamplesOpen] = useState(false)
   const [openPanels, setOpenPanels] = useState<string>('editor,preview')
+  const [showCopiedToast, setShowCopiedToast] = useState(false)
 
   const isDarkTheme = themeName === 'dark'
   const themeClass = isDarkTheme ? 'nectary-theme-base nectary-theme-dark' : 'nectary-theme-base'
@@ -300,6 +303,7 @@ export const PlaygroundPage: FC = () => {
 
     try {
       await navigator.clipboard.writeText(url)
+      setShowCopiedToast(true)
     } catch (err) {
       console.error('Failed to copy URL:', err)
     }
@@ -401,6 +405,16 @@ export const PlaygroundPage: FC = () => {
           </div>
         </sinch-accordion-item>
       </sinch-accordion>
+
+      <sinch-toast-manager origin="bottom-right">
+        {showCopiedToast && (
+          <sinch-toast
+            type="success"
+            text="URL copied to clipboard"
+            on-timeout={() => setShowCopiedToast(false)}
+          />
+        )}
+      </sinch-toast-manager>
     </div>
   )
 }
