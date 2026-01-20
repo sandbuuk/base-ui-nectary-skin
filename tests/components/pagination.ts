@@ -6,6 +6,7 @@ const withShortRange = '/pagination?max=3'
 const withMidRange = '/pagination?value=5&max=9'
 const withHugeRange = '/pagination?value=99999&max=99999'
 const withLargeRange = '/pagination?value=50&max=100'
+const withSixPages = '/pagination?value=1&max=6'
 
 test('pagination screenshots', runScreenshotTests('sinch-pagination', [
   {
@@ -135,6 +136,22 @@ test('pagination screenshots', runScreenshotTests('sinch-pagination', [
     url: withHugeRange,
     async *fn() {
       yield { name: 'shot' }
+    },
+  },
+  {
+    name: 'six pages edge case',
+    url: withSixPages,
+    async *fn({ $eval, page }) {
+      const nextRect = centerRect(await $eval((el) => el.nextButtonRect))
+
+      yield { name: 'page-1' }
+
+      for (let i = 0; i < 5; i++) {
+        await page.mouse.click(nextRect.x, nextRect.y)
+        await page.mouse.move(0, 0)
+      }
+
+      yield { name: 'page-6' }
     },
   },
   {
