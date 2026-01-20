@@ -121,6 +121,10 @@ export class Pagination extends NectaryElement {
         setClass($b, 'dots', ellipsis)
         updateAttribute($b, 'aria-hidden', ellipsis)
         $b.disabled = ellipsis
+      } else {
+        setClass($b, 'dots', false)
+        updateAttribute($b, 'aria-hidden', false)
+        $b.disabled = false
       }
 
       setClass($b, 'hidden', i >= max)
