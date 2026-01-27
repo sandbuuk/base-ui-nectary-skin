@@ -5909,7 +5909,7 @@
       "sheet": {
         "size": {
           "width": {
-            "value": "{sys.size.l}",
+            "value": "400",
             "type": "sizing"
           },
           "padding": {
@@ -5942,7 +5942,7 @@
               "type": "color"
             },
             "description": {
-              "value": "{sys.color.text.default}",
+              "value": "{sys.color.text.caption}",
               "type": "color"
             }
           }
