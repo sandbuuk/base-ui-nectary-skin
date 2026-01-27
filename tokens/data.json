@@ -5906,6 +5906,48 @@
           }
         }
       },
+      "sheet": {
+        "size": {
+          "width": {
+            "value": "{sys.size.l}",
+            "type": "sizing"
+          },
+          "padding": {
+            "value": "16",
+            "type": "sizing"
+          },
+          "gap": {
+            "value": "16",
+            "type": "sizing"
+          }
+        },
+        "font": {
+          "title": {
+            "value": "{sys.font.desktop-title.l}",
+            "type": "typography"
+          },
+          "description": {
+            "value": "{sys.font.body.m}",
+            "type": "typography"
+          }
+        },
+        "color": {
+          "default": {
+            "background": {
+              "value": "{sys.color.surface.primary.default}",
+              "type": "color"
+            },
+            "title": {
+              "value": "{sys.color.text.default}",
+              "type": "color"
+            },
+            "description": {
+              "value": "{sys.color.text.default}",
+              "type": "color"
+            }
+          }
+        }
+      },
       "tab": {
         "color": {
           "default": {
