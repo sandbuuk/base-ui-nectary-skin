@@ -5984,6 +5984,16 @@
               }
             }
           }
+        },
+        "animation": {
+          "duration": {
+            "value": "750ms",
+            "type": "other"
+          },
+          "easing": {
+            "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+            "type": "other"
+          }
         }
       },
       "tab": {
