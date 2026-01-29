@@ -5908,9 +5908,15 @@
       },
       "sheet": {
         "size": {
-          "width": {
-            "value": "400",
-            "type": "sizing"
+          "max": {
+            "vertical": {
+              "value": "85vh",
+              "type": "number"
+            },
+            "horizontal": {
+              "value": "400",
+              "type": "sizing"
+            }
           },
           "padding": {
             "value": "16",
@@ -5932,18 +5938,44 @@
           }
         },
         "color": {
-          "default": {
-            "background": {
-              "value": "{sys.color.surface.primary.default}",
-              "type": "color"
+          "background": {
+            "value": "{sys.color.surface.primary.default}",
+            "type": "color"
+          },
+          "title": {
+            "value": "{sys.color.text.default}",
+            "type": "color"
+          },
+          "description": {
+            "value": "{sys.color.text.caption}",
+            "type": "color"
+          },
+          "backdrop": {
+            "from": {
+              "value": "{ref.color.neutral.950}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": "0.5",
+                    "space": "srgb"
+                  }
+                }
+              }
             },
-            "title": {
-              "value": "{sys.color.text.default}",
-              "type": "color"
-            },
-            "description": {
-              "value": "{sys.color.text.caption}",
-              "type": "color"
+            "to": {
+              "value": "{ref.color.neutral.950}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": "0.2",
+                    "space": "srgb"
+                  }
+                }
+              }
             }
           }
         }
