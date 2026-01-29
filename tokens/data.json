@@ -5911,7 +5911,7 @@
           "max": {
             "vertical": {
               "value": "85vh",
-              "type": "number"
+              "type": "other"
             },
             "horizontal": {
               "value": "400",
