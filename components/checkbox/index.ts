@@ -49,6 +49,7 @@ export class Checkbox extends NectaryElement {
     this.#internals.role = 'checkbox'
     this.tabIndex = 0
     this.addEventListener('click', this.#onClick, options)
+    this.addEventListener('keydown', this.#onKeyDown, options)
     this.addEventListener('focus', this.#onFocus, options)
     this.addEventListener('blur', this.#onBlur, options)
     this.addEventListener('-change', this.#onChangeReactHandler, options)
@@ -207,6 +208,13 @@ export class Checkbox extends NectaryElement {
     this.dispatchEvent(
       new CustomEvent('-change', { detail: !this.checked })
     )
+  }
+
+  #onKeyDown = (e: KeyboardEvent) => {
+    if (e.code === 'Space') {
+      e.preventDefault()
+      this.#onClick()
+    }
   }
 
   #onFocus = () => {

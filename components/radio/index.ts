@@ -158,6 +158,15 @@ export class Radio extends NectaryElement {
 
         break
       }
+      case 'Space': {
+        e.preventDefault()
+
+        if (option !== null && !option.hasAttribute('disabled')) {
+          option.click()
+        }
+
+        break
+      }
     }
   }
 
