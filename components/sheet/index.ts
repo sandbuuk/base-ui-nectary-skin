@@ -147,7 +147,7 @@ export class Sheet extends NectaryElement {
         break
       }
       case 'placement': {
-        this.#$dialog.classList.remove(`placement-${oldVal}`)
+        this.#$dialog.classList.remove(...Array.from(this.#$dialog.classList).filter((cls) => cls.startsWith('placement-')))
         this.#$dialog.classList.add(`placement-${newVal ?? 'right'}`)
 
         break
