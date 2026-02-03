@@ -53,11 +53,11 @@ export type TSinchSheetStyle = {
   '--sinch-sheet-close-button-display'?: string,
 
   // Animation
-  '--sinch-comp-dialog-animation-duration'?: string,
-  '--sinch-comp-dialog-animation-easing'?: string,
+  '--sinch-comp-sheet-animation-duration'?: string,
+  '--sinch-comp-sheet-animation-easing'?: string,
 
   // Shape
-  '--sinch-comp-dialog-shape-radius'?: string,
+  '--sinch-comp-sheet-shape-radius'?: string,
 
   // Fonts
   '--sinch-comp-sheet-font-description'?: string,

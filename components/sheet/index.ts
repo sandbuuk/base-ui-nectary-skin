@@ -112,6 +112,8 @@ export class Sheet extends NectaryElement {
     document.body.style.removeProperty('--sinch-sheet-export-current-height')
   }
 
+  // overlay attribute is not observed because it is expected to be set once on initialization
+  // there is no practical use case for changing it dynamically
   static get observedAttributes() {
     return ['caption', 'open', 'placement']
   }
@@ -302,7 +304,10 @@ export class Sheet extends NectaryElement {
     }
 
     this.#$dialog.close?.()
-    enableScroll()
+
+    if (this.overlay === 'modal') {
+      enableScroll()
+    }
   }
 
   #onActionSlotChange = () => {
