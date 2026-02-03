@@ -1,0 +1,55 @@
+# Tokens
+
+The Sheet component uses various CSS custom properties (tokens) for styling and layout. Below are the available tokens and their default values:
+
+## Animation
+
+* `--sinch-comp-sheet-animation-duration`: `750ms` - Duration of the slide animation
+* `--sinch-comp-sheet-animation-easing`: `cubic-bezier(0.25, 1, 0.5, 1)` - Easing function for the animation
+
+## Sizing
+
+* `--sinch-comp-sheet-size-max-horizontal`: `400px` - Maximum width for left/right placements
+* `--sinch-comp-sheet-size-max-vertical`: `85vh` - Maximum height for top/bottom placements
+* `--sinch-comp-sheet-size-padding`: `16px` - Internal padding of the sheet
+* `--sinch-comp-sheet-size-gap`: `16px` - Gap between sheet sections
+* `--sinch-comp-sheet-size-backdrop-blur`: `2px` - Backdrop blur effect
+
+## Colors
+
+* `--sinch-comp-sheet-color-backdrop-from`: Gradient start color for the backdrop
+* `--sinch-comp-sheet-color-backdrop-to`: Gradient end color for the backdrop
+* `--sinch-comp-sheet-color-background`: Background color of the sheet
+* `--sinch-comp-sheet-color-title`: Color of the title text
+* `--sinch-comp-sheet-color-description`: Color of the description text
+
+## Typography
+
+* `--sinch-comp-sheet-font-title`: Font styles for the title
+* `--sinch-comp-sheet-font-description`: Font styles for the description
+
+## Control
+
+* `--sinch-sheet-close-button-display`: `unset` - Controls the visibility of the close button (set to `none` to hide)
+
+## Exported Variables (for Push Overlay)
+
+When using `overlay="push"`, the sheet exports its current dimensions as CSS variables on `document.body`:
+
+* `--sinch-sheet-export-current-width`: Current width of the sheet (e.g., `400px`)
+* `--sinch-sheet-export-current-height`: Current height of the sheet (e.g., `500px`)
+
+These variables are available during animations and can be used to transition your page layout. They are set when the sheet opens and removed when it closes.
+
+### Example: Using exported variables for push transitions
+
+```css
+#main-content {
+  transition: margin-right var(--sinch-comp-sheet-animation-duration) var(--sinch-comp-sheet-animation-easing);
+  margin-right: 0;
+}
+
+#main-content:has(sinch-sheet[overlay="push"][open]) {
+  margin-right: var(--sinch-sheet-export-current-width, 0px);
+}
+```

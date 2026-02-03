@@ -57,6 +57,7 @@ export const BASE_COMPONENT_NAMES_LIST = [
   'select-button',
   'select-menu-option',
   'select-menu',
+  'sheet',
   'skeleton-item',
   'skeleton',
   'spinner',
