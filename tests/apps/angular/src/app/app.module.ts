@@ -19,6 +19,7 @@ import { ColorSelectComponent } from '../components/ColorSelect/ColorSelect.comp
 import { ColorSwatchComponent } from '../components/ColorSwatch/ColorSwatch.component'
 import { DatePickerComponent } from '../components/DatePicker/DatePicker.component'
 import { DialogComponent } from '../components/Dialog/Dialog.component'
+import { SheetComponent } from '../components/Sheet/Sheet.component'
 import { EmojiPickerComponent } from '../components/EmojiPicker/EmojiPicker.component'
 import { FieldComponent } from '../components/Field/Field.component'
 import { FileDropComponent } from '../components/FileDrop/FileDrop.component'
@@ -80,6 +81,7 @@ import appRoutes from './router-config'
     ColorSwatchComponent,
     DatePickerComponent,
     DialogComponent,
+    SheetComponent,
     EmojiPickerComponent,
     GridComponent,
     InlineAlertComponent,

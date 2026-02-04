@@ -33,6 +33,7 @@ export type TSinchSheetProps = {
   /** Sheet overlay, set once when connecting the component */
   overlay?: TSinchSheetOverlayMode,
   readonly dialogRect?: TRect,
+  readonly closeButtonRect?: TRect,
 }
 
 export type TSinchSheetEvents = {

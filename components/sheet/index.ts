@@ -116,7 +116,7 @@ export class Sheet extends NectaryElement {
   // overlay attribute is not observed because it is expected to be set once on initialization
   // there is no practical use case for changing it dynamically
   static get observedAttributes() {
-    return ['caption', 'open', 'placement']
+    return ['caption', 'open', 'placement', 'close-aria-label']
   }
 
   attributeChangedCallback(
@@ -150,6 +150,11 @@ export class Sheet extends NectaryElement {
       case 'placement': {
         this.#$dialog.classList.remove(...Array.from(this.#$dialog.classList).filter((cls) => cls.startsWith('placement-')))
         this.#$dialog.classList.add(`placement-${newVal ?? 'right'}`)
+
+        break
+      }
+      case 'close-aria-label': {
+        updateAttribute(this.#$closeButton, 'aria-label', newVal)
 
         break
       }
@@ -190,6 +195,10 @@ export class Sheet extends NectaryElement {
 
   get dialogRect() {
     return getRect(this.#$dialog)
+  }
+
+  get closeButtonRect() {
+    return getRect(this.#$closeButton)
   }
 
   #onAnimationStart = (e: TransitionEvent) => {

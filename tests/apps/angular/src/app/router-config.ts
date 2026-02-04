@@ -16,6 +16,7 @@ import { ColorSelectComponent } from '../components/ColorSelect/ColorSelect.comp
 import { ColorSwatchComponent } from '../components/ColorSwatch/ColorSwatch.component'
 import { DatePickerComponent } from '../components/DatePicker/DatePicker.component'
 import { DialogComponent } from '../components/Dialog/Dialog.component'
+import { SheetComponent } from '../components/Sheet/Sheet.component'
 import { EmojiPickerComponent } from '../components/EmojiPicker/EmojiPicker.component'
 import { FieldComponent } from '../components/Field/Field.component'
 import { FileDropComponent } from '../components/FileDrop/FileDrop.component'
@@ -73,6 +74,7 @@ const appRoutes: Routes = [
   { path: 'color-swatch', component: ColorSwatchComponent },
   { path: 'date-picker', component: DatePickerComponent },
   { path: 'dialog', component: DialogComponent },
+  { path: 'sheet', component: SheetComponent },
   { path: 'emoji-picker', component: EmojiPickerComponent },
   { path: 'field', component: FieldComponent },
   { path: 'file-drop', component: FileDropComponent },

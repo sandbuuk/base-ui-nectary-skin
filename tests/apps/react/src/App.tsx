@@ -44,6 +44,7 @@ import { SegmentedControl } from './components/SegmentedControl'
 import { SegmentedIconControl } from './components/SegmentedIconControl'
 import { Select } from './components/Select'
 import { SelectMenu } from './components/SelectMenu'
+import { Sheet } from './components/Sheet'
 import { Skeleton } from './components/Skeleton'
 import { Spinner } from './components/Spinner'
 import { Table } from './components/Table'
@@ -103,6 +104,7 @@ const AppImpl = () => {
         <Route path="/date-input" element={<DateInput/>}/>
         <Route path="/date-picker" element={<DatePicker/>}/>
         <Route path="/dialog" element={<Dialog/>}/>
+        <Route path="/sheet" element={<Sheet/>}/>
         <Route path="/emoji-picker" element={<EmojiPicker/>}/>
         <Route path="/event-targets" element={<EventTargets/>}/>
         <Route path="/field" element={<Field/>}/>
