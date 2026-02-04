@@ -56,7 +56,6 @@ export class Sheet extends NectaryElement {
       signal: this.#controller.signal,
     }
 
-    this.setAttribute('role', 'dialog')
     this.#$closeButton.addEventListener('click', this.#onCloseClick, options)
     this.#$dialog.classList.add(`placement-${this.placement}`)
     this.#$dialog.classList.add(`overlay-${this.overlay}`)

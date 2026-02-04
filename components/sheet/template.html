@@ -126,13 +126,19 @@
       max-width: 100dvw;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    #dialog {
+      transition-duration: 0.01ms;
+    }
+  }
 </style>
 
-<dialog id="dialog">
+<dialog id="dialog" aria-labelledby="caption" aria-describedby="content">
   <div id="header">
     <slot id="icon" name="icon"></slot>
     <sinch-title id="caption" type="m" level="3"></sinch-title>
-    <sinch-button id="close" size="s">
+    <sinch-button id="close" size="s" aria-label="Close">
       <sinch-icon icons-version="2" name="fa-xmark" id="icon-close" slot="icon"></sinch-icon>
     </sinch-button>
   </div>
