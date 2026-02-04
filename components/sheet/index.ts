@@ -16,8 +16,8 @@ import {
   updateAttribute,
   updateBooleanAttribute,
 } from '../utils'
+import { disableScroll, enableScroll } from '../utils/scroll-lock'
 import templateHTML from './template.html?raw'
-import { disableScroll, enableScroll } from './utils'
 import type { TSinchSheetCloseDetail } from './types'
 
 export * from './types'
@@ -108,6 +108,7 @@ export class Sheet extends NectaryElement {
     this.#controller!.abort()
     this.#controller = null
 
+    // multiple sheets are not supported
     document.body.style.removeProperty('--sinch-sheet-export-current-width')
     document.body.style.removeProperty('--sinch-sheet-export-current-height')
   }

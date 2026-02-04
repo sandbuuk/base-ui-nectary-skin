@@ -30,7 +30,7 @@ export type TSinchSheetProps = {
   'aria-label': string,
   /** Sheet placement */
   placement?: TSinchSheetPlacement,
-  /** Sheet overlay */
+  /** Sheet overlay, set once when connecting the component */
   overlay?: TSinchSheetOverlayMode,
   readonly dialogRect?: TRect,
 }
