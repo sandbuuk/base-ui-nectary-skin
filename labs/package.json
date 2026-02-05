@@ -7,7 +7,9 @@
     "**/*/*.js",
     "**/*/*.d.ts",
     "*.d.ts",
-    "*.js"
+    "*.js",
+    "*.html",
+    "**/*/*.html"
   ],
   "publishConfig": {
     "access": "public"
