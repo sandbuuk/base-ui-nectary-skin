@@ -125,7 +125,9 @@ export class Sheet extends NectaryElement {
         const shouldOpen = isAttrTrue(newVal)
 
         if (shouldOpen) {
-          this.#onExpand()
+          requestAnimationFrame(() => {
+            this.#onExpand()
+          })
         } else {
           this.#onCollapse()
         }
