@@ -241,9 +241,9 @@ export class Sheet extends NectaryElement {
     const width = this.#$dialog.offsetWidth
     const height = this.#$dialog.offsetHeight
     const duration =
-      getCssVar(this, '--sinch-comp-sheet-animation-duration') ?? '300ms'
+      getCssVar(this, '--sinch-comp-sheet-animation-duration') ?? '750ms'
     const easing =
-      getCssVar(this, '--sinch-comp-sheet-animation-easing') ?? 'ease'
+      getCssVar(this, '--sinch-comp-sheet-animation-easing') ?? 'cubic-bezier(0.25, 1, 0.5, 1)'
     const detail = {
       action,
       width,
