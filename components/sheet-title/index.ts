@@ -68,13 +68,11 @@ export class SheetTitle extends NectaryElement {
 
     switch (name) {
       case 'title': {
-        updateAttribute(this, 'title', newVal)
         updateAttribute(this.#$text, 'text', newVal)
 
         break
       }
       case 'description': {
-        updateAttribute(this, 'description', newVal)
         this.#$description.textContent = newVal
 
         break
