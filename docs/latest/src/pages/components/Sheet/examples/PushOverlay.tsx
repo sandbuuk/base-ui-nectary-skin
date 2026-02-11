@@ -1,5 +1,6 @@
 import '@nectary/components/button'
 import '@nectary/components/sheet'
+import '@nectary/components/sheet-title'
 import '@nectary/components/text'
 import '@nectary/components/icon'
 import { type FC, useState } from 'react'
@@ -41,14 +42,17 @@ export const PushOverlayExample: FC = () => {
 
       <sinch-sheet
         open={isSheetOpen}
-        caption="Settings"
-        aria-label="Settings panel"
         placement="right"
         overlay="push"
         on-close={() => setSheetOpen(false)}
         on-animation-start={handleAnimationStart}
       >
-        <sinch-icon icons-version="2" name="fa-gear" slot="icon"/>
+        <sinch-sheet-title
+          slot="title"
+          title="Settings"
+        >
+          <sinch-icon icons-version="2" name="fa-gear" slot="icon"/>
+        </sinch-sheet-title>
         <div slot="content">
           <sinch-text type="m" style={{ display: 'block', marginBottom: '16px' }}>
             This sheet uses <code>overlay="push"</code> mode. Notice how the main
@@ -56,14 +60,14 @@ export const PushOverlayExample: FC = () => {
           </sinch-text>
         </div>
         <sinch-button
-          slot="buttons"
+          slot="footer"
           text="Cancel"
           aria-label="Cancel"
           type="secondary"
           on-click={() => setSheetOpen(false)}
         />
         <sinch-button
-          slot="buttons"
+          slot="footer"
           text="Save Changes"
           aria-label="Save Changes"
           type="primary"

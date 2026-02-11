@@ -1,5 +1,6 @@
 import '@nectary/components/button'
 import '@nectary/components/sheet'
+import '@nectary/components/sheet-title'
 import '@nectary/components/text'
 import '@nectary/components/icon'
 import { type FC, useState } from 'react'
@@ -44,15 +45,18 @@ export const PlacementsExample: FC = () => {
       </div>
       <sinch-sheet
         open={isSheetOpen}
-        caption={`Sheet from ${placement}`}
-        aria-label={`Sheet from ${placement}`}
         placement={placement}
         overlay="modal"
         on-close={() => setSheetOpen(false)}
         /** The key is added for demo purposes, do not copy it into your project. */
         key={placement}
       >
-        <sinch-icon icons-version="2" name="fa-location-arrow" slot="icon"/>
+        <sinch-sheet-title
+          slot="title"
+          title={`Sheet from ${placement}`}
+        >
+          <sinch-icon icons-version="2" name="fa-location-arrow" slot="icon"/>
+        </sinch-sheet-title>
         <div slot="content">
           <sinch-text type="m">
             This sheet is sliding in from the <strong>{placement}</strong> edge of the screen.
@@ -65,7 +69,7 @@ export const PlacementsExample: FC = () => {
           </sinch-text>
         </div>
         <sinch-button
-          slot="buttons"
+          slot="footer"
           text="Close"
           aria-label="Close"
           type="primary"

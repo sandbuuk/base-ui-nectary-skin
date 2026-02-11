@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { FC } from 'react'
 import '@nectary/components/button'
 import '@nectary/components/sheet'
+import '@nectary/components/sheet-title'
 import '@nectary/components/text'
 import '@nectary/components/icon'
 
@@ -18,8 +19,6 @@ export const SimpleExample: FC = () => {
       />
       <sinch-sheet
         open={isSheetOpen}
-        caption="Sheet Caption"
-        aria-label="Sheet"
         placement="right"
         overlay="modal"
         on-close={(e) => {
@@ -30,7 +29,14 @@ export const SimpleExample: FC = () => {
           setSheetOpen(false)
         }}
       >
-        <sinch-icon icons-version="2" name="fa-bars" slot="icon"/>
+        <sinch-sheet-title
+          slot="title"
+          title="Sheet Title"
+          description="This is a description for the sheet."
+          close-aria-label="Close Sheet"
+        >
+          <sinch-icon icons-version="2" name="fa-bars" slot="icon"/>
+        </sinch-sheet-title>
         <div slot="content">
           <sinch-text type="m">
             This is a simple sheet that slides in from the right side of the screen.
@@ -44,14 +50,14 @@ export const SimpleExample: FC = () => {
           </sinch-text>
         </div>
         <sinch-button
-          slot="buttons"
+          slot="footer"
           text="Cancel"
           aria-label="Cancel"
           type="secondary"
           on-click={() => setSheetOpen(false)}
         />
         <sinch-button
-          slot="buttons"
+          slot="footer"
           text="Save"
           aria-label="Save"
           type="primary"

@@ -8,7 +8,7 @@ module.exports = {
     runtimeChunk: false,
   },
   devServer: {
-    host: 'localhost',
+    host: '0.0.0.0',
     port: PORT,
     liveReload: false,
     hot: false,

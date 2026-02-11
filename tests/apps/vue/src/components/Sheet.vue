@@ -1,23 +1,28 @@
 <template>
   <sinch-sheet
     open
-    :caption="title"
-    :aria-label="title"
-    close-aria-label="Close"
     :placement="placement"
     :overlay="overlay"
     @--close="onClose"
   >
-    <sinch-icon v-if="icon" icons-version="2" name="fa-face-smile-plus" slot="icon" />
+    <sinch-sheet-title
+      slot="title"
+      :title="title"
+      :description="desc"
+      close-aria-label="Close"
+    >
+      <sinch-icon v-if="icon" icons-version="2" name="fa-face-smile-plus" slot="icon" />
+    </sinch-sheet-title>
     <div v-if="content != null" slot="content">
       <sinch-text type="m">{{ content }}</sinch-text>
     </div>
-    <sinch-button v-if="buttons" text="Cancel" type="secondary" slot="buttons"></sinch-button>
-    <sinch-button v-if="buttons" text="Ok" type="primary" slot="buttons"></sinch-button>
+    <sinch-button v-if="buttons" text="Cancel" type="secondary" slot="footer"></sinch-button>
+    <sinch-button v-if="buttons" text="Ok" type="primary" slot="footer"></sinch-button>
   </sinch-sheet>
 </template>
 <script>
 import '@nectary/components/sheet'
+import '@nectary/components/sheet-title'
 import '@nectary/components/button'
 import '@nectary/components/text'
 import '@nectary/components/icon'
@@ -29,6 +34,9 @@ export default {
     },
     title() {
       return this.$route.query.title ?? ''
+    },
+    desc() {
+      return this.$route.query.desc ?? ''
     },
     buttons() {
       return this.$route.query.buttons != null

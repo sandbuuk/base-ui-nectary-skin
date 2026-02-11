@@ -19,7 +19,7 @@ test('sheet screenshots', runScreenshotTests('sinch-sheet', [
     url: withTitle,
     async *fn({ page, $eval }) {
       await waitForSheetAnimation(page)
-      await $eval((el) => el.setAttribute('caption', 'Updated title'))
+      await $eval((el) => el.querySelector('sinch-sheet-title')?.setAttribute('title', 'Updated title'))
       yield { name: 'updated', includeRects: [await $eval((el) => el.dialogRect)] }
     },
   },
@@ -123,7 +123,7 @@ test('sheet screenshots', runScreenshotTests('sinch-sheet', [
       await subscribeToEvents(page, 'sinch-sheet-close')
 
       await $eval((el) => {
-        (el as unknown as { shadowRoot: ShadowRoot }).shadowRoot.querySelector<HTMLButtonElement>('#close')!.click()
+        el.querySelector('sinch-sheet-title')?.shadowRoot?.querySelector<HTMLButtonElement>('#close')?.click()
       })
       await page.keyboard.press('Escape')
       await page.mouse.click(0, 0)

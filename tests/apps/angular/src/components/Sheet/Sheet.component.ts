@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import type { TSinchSheetCloseDetail } from '@nectary/components/sheet/types'
 import { ActivatedRoute } from '@angular/router'
 import '@nectary/components/sheet'
+import '@nectary/components/sheet-title'
 import '@nectary/components/button'
 import '@nectary/components/text'
 import '@nectary/components/icon'
@@ -14,6 +15,7 @@ import '@nectary/components/icon'
 
 export class SheetComponent {
   title: string
+  desc: string
   buttons: boolean
   icon: boolean
   content: string | null
@@ -23,6 +25,7 @@ export class SheetComponent {
   constructor(private route: ActivatedRoute) {
     const search = this.route.snapshot.queryParamMap
     this.title = search.get('title') ?? ''
+    this.desc = search.get('desc') ?? ''
     this.buttons = search.get('buttons') !== null
     this.icon = search.get('icon') !== null
     this.content = search.get('content')

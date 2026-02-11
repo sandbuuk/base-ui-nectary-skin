@@ -37,6 +37,26 @@ There are two ways to animate your content when using the push overlay mode:
 
 <Example Component={PushOverlayExample}/>
 
+### CSS Variables
+
+When using `overlay="push"`, the sheet exports its current dimensions as CSS variables on `document.body`:
+
+* `--sinch-sheet-export-current-width`: Current width of the sheet (e.g., `400px`)
+* `--sinch-sheet-export-current-height`: Current height of the sheet (e.g., `500px`)
+
+These variables are available during animations and can be used to transition your page layout. They are set when the sheet opens and removed when it closes.
+
+```css
+#main-content {
+  transition: margin-right var(--sinch-comp-sheet-animation-duration) var(--sinch-comp-sheet-animation-easing);
+  margin-right: 0;
+}
+
+#main-content:has(sinch-sheet[overlay="push"][open]) {
+  margin-right: var(--sinch-sheet-export-current-width, 0px);
+}
+```
+
 ## Animation
 `animation-end` event is useful to know when the sheet has finished its opening or closing animation. This can be particularly helpful for triggering actions that should only occur after the sheet is fully visible or hidden, such as navigating to a different page, loading content, or updating the UI.
 

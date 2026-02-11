@@ -20,6 +20,7 @@
     "test:app-react": "cd ./apps/react; ./node_modules/.bin/webpack serve",
     "test:app-vue": "cd ./apps/vue; ./node_modules/.bin/webpack serve",
     "test:app-angular": "cd ./apps/angular; ./node_modules/.bin/ng serve",
+    "test:dev-mac": "docker run -it --rm --ipc=host --network bridge -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.33.0 ./tests/entrypoint.dev.sh",
     "test:dev": "docker run -it --rm --ipc=host --network host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.33.0 ./tests/entrypoint.dev.sh",
     "test": "docker run -it --rm --ipc=host -v $PWD/..:/app:delegated -v $PWD/../fonts:/root/.fonts --workdir=/app mcr.microsoft.com/playwright:v1.33.0 ./tests/entrypoint.sh",
     "remove-empty-dirs": "find ./test-results -type d -empty -delete"

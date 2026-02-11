@@ -28,7 +28,6 @@ template.innerHTML = templateHTML
 
 export class Sheet extends NectaryElement {
   #$dialog: HTMLDialogElement
-  #$closeButton: HTMLButtonElement
   #$caption: HTMLElement
   #$actionWrapper: HTMLElement
   #$actionSlot: HTMLSlotElement
@@ -41,10 +40,9 @@ export class Sheet extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
     this.#$dialog = shadowRoot.querySelector('#dialog')!
-    this.#$closeButton = shadowRoot.querySelector('#close')!
     this.#$caption = shadowRoot.querySelector('#caption')!
     this.#$actionWrapper = shadowRoot.querySelector('#action')!
-    this.#$actionSlot = shadowRoot.querySelector('slot[name="buttons"]')!
+    this.#$actionSlot = shadowRoot.querySelector('slot[name="footer"]')!
   }
 
   connectedCallback() {
@@ -56,7 +54,6 @@ export class Sheet extends NectaryElement {
       signal: this.#controller.signal,
     }
 
-    this.#$closeButton.addEventListener('click', this.#onCloseClick, options)
     this.#$dialog.classList.add(`placement-${this.placement}`)
     this.#$dialog.classList.add(`overlay-${this.overlay}`)
     this.#$dialog.addEventListener(
@@ -152,11 +149,6 @@ export class Sheet extends NectaryElement {
 
         break
       }
-      case 'close-aria-label': {
-        updateAttribute(this.#$closeButton, 'aria-label', newVal)
-
-        break
-      }
     }
   }
 
@@ -196,10 +188,6 @@ export class Sheet extends NectaryElement {
     return getRect(this.#$dialog)
   }
 
-  get closeButtonRect() {
-    return getRect(this.#$closeButton)
-  }
-
   #onAnimationStart = (e: TransitionEvent) => {
     if (e.propertyName !== 'transform') {
       return
@@ -225,10 +213,6 @@ export class Sheet extends NectaryElement {
 
     e.stopPropagation()
     this.#dispatchCloseEvent('escape', e.cancelable)
-  }
-
-  #onCloseClick = () => {
-    this.#dispatchCloseEvent('close', true)
   }
 
   #onBackdropMouseDown = (e: MouseEvent) => {

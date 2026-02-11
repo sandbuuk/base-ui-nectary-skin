@@ -24,16 +24,11 @@ export type TSinchSheetOverlayMode = 'modal' | 'push'
 export type TSinchSheetProps = {
   /** Controls whether the sheet should be open */
   open: boolean,
-  /** Sheet caption */
-  caption: string,
-  /** Label that is used for a11y */
-  'aria-label': string,
   /** Sheet placement */
   placement?: TSinchSheetPlacement,
   /** Sheet overlay, set once when connecting the component */
   overlay?: TSinchSheetOverlayMode,
   readonly dialogRect?: TRect,
-  readonly closeButtonRect?: TRect,
 }
 
 export type TSinchSheetEvents = {
