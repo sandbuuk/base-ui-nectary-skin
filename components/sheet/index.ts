@@ -28,7 +28,6 @@ template.innerHTML = templateHTML
 
 export class Sheet extends NectaryElement {
   #$dialog: HTMLDialogElement
-  #$caption: HTMLElement
   #$actionWrapper: HTMLElement
   #$actionSlot: HTMLSlotElement
   #controller: AbortController | null = null
@@ -40,7 +39,6 @@ export class Sheet extends NectaryElement {
 
     shadowRoot.appendChild(template.content.cloneNode(true))
     this.#$dialog = shadowRoot.querySelector('#dialog')!
-    this.#$caption = shadowRoot.querySelector('#caption')!
     this.#$actionWrapper = shadowRoot.querySelector('#action')!
     this.#$actionSlot = shadowRoot.querySelector('slot[name="footer"]')!
   }
@@ -112,7 +110,7 @@ export class Sheet extends NectaryElement {
   // overlay attribute is not observed because it is expected to be set once on initialization
   // there is no practical use case for changing it dynamically
   static get observedAttributes() {
-    return ['caption', 'open', 'placement', 'close-aria-label']
+    return ['open', 'placement']
   }
 
   attributeChangedCallback(
@@ -125,11 +123,6 @@ export class Sheet extends NectaryElement {
     }
 
     switch (name) {
-      case 'caption': {
-        updateAttribute(this.#$caption, 'text', newVal)
-
-        break
-      }
       case 'open': {
         const shouldOpen = isAttrTrue(newVal)
 
@@ -150,14 +143,6 @@ export class Sheet extends NectaryElement {
         break
       }
     }
-  }
-
-  set caption(caption: string) {
-    updateAttribute(this, 'caption', caption)
-  }
-
-  get caption(): string {
-    return getAttribute(this, 'caption', '')
   }
 
   set open(isOpen: boolean) {
