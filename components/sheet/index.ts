@@ -1,6 +1,4 @@
-import '../icon'
 import '../stop-events'
-import '../title'
 import {
   NectaryElement,
   defineCustomElement,
