@@ -46,18 +46,10 @@ export type TSinchSheetStyle = {
   '--sinch-comp-sheet-size-max-horizontal'?: string,
   '--sinch-comp-sheet-size-max-vertical'?: string,
   '--sinch-comp-sheet-size-padding'?: string,
-  '--sinch-sheet-close-button-display'?: string,
 
   // Animation
   '--sinch-comp-sheet-animation-duration'?: string,
   '--sinch-comp-sheet-animation-easing'?: string,
-
-  // Shape
-  '--sinch-comp-sheet-shape-radius'?: string,
-
-  // Fonts
-  '--sinch-comp-sheet-font-description'?: string,
-  '--sinch-comp-sheet-font-title'?: string,
 
   // Shadows
   '--sinch-comp-sheet-size-backdrop-blur'?: string,
@@ -66,14 +58,6 @@ export type TSinchSheetStyle = {
   '--sinch-comp-sheet-color-backdrop-from'?: string,
   '--sinch-comp-sheet-color-backdrop-to'?: string,
   '--sinch-comp-sheet-color-background'?: string,
-  '--sinch-comp-sheet-color-description'?: string,
-  '--sinch-comp-sheet-color-title'?: string,
-
-  // Global Properties
-  '--sinch-global-size-icon'?: string,
-  '--sinch-global-color-icon'?: string,
-  '--sinch-global-color-text'?: string,
-  '--sinch-comp-title-font'?: string,
 }
 
 export type TSinchSheet = {

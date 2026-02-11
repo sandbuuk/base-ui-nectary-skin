@@ -36,6 +36,9 @@ export type TSinchSheetTitleStyle = {
   // Global Properties
   '--sinch-global-size-icon'?: string,
   '--sinch-global-color-icon'?: string,
+  '--sinch-global-color-text'?: string,
+  '--sinch-comp-title-font'?: string,
+  '--sinch-comp-text-font'?: string,
 }
 
 export type TSinchSheetTitle = {
