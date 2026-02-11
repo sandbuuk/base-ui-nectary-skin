@@ -190,6 +190,14 @@ export class Button extends NectaryElement {
     return getLiteralAttribute(this, formTypeValues, 'form-type', 'button')
   }
 
+  set form(value: string | null) {
+    updateAttribute(this, 'form', value)
+  }
+
+  get form() {
+    return getAttribute(this, 'form', '')
+  }
+
   get dataManagedAriaDisabled(): boolean {
     return getBooleanAttribute(this, 'data-managed-aria-disabled')
   }
