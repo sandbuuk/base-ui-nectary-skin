@@ -1,5 +1,6 @@
 import { Example } from '~/components/Example'
 import { SimpleExample } from './examples/Simple.tsx?example'
+import { RightIconExample } from './examples/RightIcon.tsx?example'
 
 # Examples
 
@@ -12,6 +13,12 @@ The specific options available in the action menu will depend on the context in 
 Use down/up arrow keys to navigate and space/enter to click with keyboard.
 
 <Example Component={SimpleExample}/>
+
+## Right Icon
+
+An option can have an additional icon on the right side, by using the `right-icon` slot. This is useful for indicating status or providing secondary actions.
+
+<Example Component={RightIconExample}/>
 
 ## Dropdown
 

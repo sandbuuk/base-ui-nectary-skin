@@ -49,12 +49,17 @@
   --sinch-comp-text-font: var(--sinch-comp-action-menu-font-option);
 }
 
-::slotted(*) {
+::slotted([slot="icon"]) {
   margin-left: -6px;
+}
+
+::slotted([slot="right-icon"]) {
+  margin-right: -6px;
 }
 </style>
 
 <div id="wrapper" inert>
   <slot name="icon"></slot>
   <sinch-text id="content" type="m" ellipsis></sinch-text>
+  <slot name="right-icon"></slot>
 </div>
