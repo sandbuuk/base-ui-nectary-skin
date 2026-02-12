@@ -1,0 +1,16 @@
+.nectary-theme-base {
+  --sinch-comp-sheet-animation-duration: 750ms;
+  --sinch-comp-sheet-animation-easing: cubic-bezier(0.25, 1, 0.5, 1);
+  --sinch-comp-sheet-color-backdrop-from: #14181C66;
+  --sinch-comp-sheet-color-backdrop-to: #14181C99;
+  --sinch-comp-sheet-color-background: var(--sinch-sys-color-surface-primary-default);
+  --sinch-comp-sheet-color-description: var(--sinch-sys-color-text-caption);
+  --sinch-comp-sheet-color-title: var(--sinch-sys-color-text-default);
+  --sinch-comp-sheet-font-description: var(--sinch-sys-font-body-m);
+  --sinch-comp-sheet-font-title: var(--sinch-sys-font-desktop-title-l);
+  --sinch-comp-sheet-size-backdrop-blur: 2px;
+  --sinch-comp-sheet-size-gap: 16px;
+  --sinch-comp-sheet-size-max-horizontal: 400px;
+  --sinch-comp-sheet-size-max-vertical: 85vh;
+  --sinch-comp-sheet-size-padding: 16px;
+}

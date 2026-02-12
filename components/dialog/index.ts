@@ -15,8 +15,8 @@ import {
   isTargetEqual,
   isAttrEqual,
 } from '../utils'
+import { disableScroll, enableScroll } from '../utils/scroll-lock'
 import templateHTML from './template.html?raw'
-import { disableScroll, enableScroll } from './utils'
 import type { TSinchDialogCloseDetail } from './types'
 
 export * from './types'

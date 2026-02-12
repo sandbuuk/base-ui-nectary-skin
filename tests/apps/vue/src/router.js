@@ -17,6 +17,7 @@ import ColorSelect from "./components/ColorSelect.vue";
 import ColorSwatch from "./components/ColorSwatch.vue";
 import DatePicker from "./components/DatePicker.vue";
 import Dialog from "./components/Dialog.vue";
+import Sheet from "./components/Sheet.vue";
 import EmojiPicker from "./components/EmojiPicker.vue";
 import Field from "./components/Field.vue";
 import FileDrop from "./components/FileDrop.vue";
@@ -72,6 +73,7 @@ const routes = [
   { path: "/color-swatch", component: ColorSwatch },
   { path: "/date-picker", component: DatePicker },
   { path: "/dialog", component: Dialog },
+  { path: "/sheet", component: Sheet },
   { path: "/emoji-picker", component: EmojiPicker },
   { path: "/field", component: Field },
   { path: "/file-drop", component: FileDrop },

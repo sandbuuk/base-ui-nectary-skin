@@ -5,14 +5,18 @@ import rimraf from 'rimraf'
 const [TOKENS_FILEPATH, OUTDIR, INPUT_THEME_KEY] = process.argv.slice(2)
 
 if (INPUT_THEME_KEY == null || INPUT_THEME_KEY === '') {
-  throw new Error(`Usage example: tsm ./scripts/process-tokens.ts ./tokens/data.json themes/base base`)
+  throw new Error(
+    `Usage example: tsm ./scripts/process-tokens.ts ./tokens/data.json themes/base base`
+  )
 }
 
 if ((await stat(path.resolve(OUTDIR))).isDirectory() === false) {
   throw new Error(`Cannot find output directory "${OUTDIR}"`)
 }
 
-const tokensJson = JSON.parse(await readFile(path.resolve(TOKENS_FILEPATH), 'utf-8')) as TJson
+const tokensJson = JSON.parse(
+  await readFile(path.resolve(TOKENS_FILEPATH), 'utf-8')
+) as TJson
 const omitThemeSectionKeysInCssVarName: readonly string[] = []
 const CSS_VAR_PREFIX = '--sinch'
 const DELIMITER = '-'
@@ -26,69 +30,90 @@ interface TJson {
   [x: string]: string | TJson,
 }
 
-type TValue = {
-  type: 'color',
-  value: string,
-} | {
-  type: 'direction',
-  value: 'row' | 'column',
-} | {
-  type: 'boxShadow',
-  value: {
-    'x': string,
-    'y': string,
-    'blur': string,
-    'spread': string,
-    'color': string,
-    'type': 'innerShadow' | 'dropShadow',
-  } | string,
-} | {
-  type: 'fontFamilies',
-  value: string,
-} | {
-  type: 'lineHeights',
-  value: string,
-} | {
-  type: 'fontWeights',
-  value: string,
-} | {
-  type: 'fontSizes',
-  value: string,
-} | {
-  type: 'letterSpacing',
-  value: string,
-} | {
-  type: 'paragraphSpacing',
-  value: string,
-} | {
-  type: 'textCase',
-  value: string,
-} | {
-  type: 'textDecoration',
-  value: 'none' | 'underline',
-} | {
-  type: 'borderRadius',
-  value: string,
-} | {
-  type: 'typography',
-  value: {
-    'fontFamily': string,
-    'fontWeight': string,
-    'lineHeight': string,
-    'fontSize': string,
-    'letterSpacing': string,
-    'paragraphSpacing': string,
-    'paragraphIndent': string,
-    'textCase': string,
-    'textDecoration': string,
-  },
-} | {
-  type: 'sizing',
-  value: string,
-} | {
-  type: 'number',
-  value: string,
-}
+type TValue =
+  | {
+    type: 'color',
+    value: string,
+  }
+  | {
+    type: 'direction',
+    value: 'row' | 'column',
+  }
+  | {
+    type: 'boxShadow',
+    value:
+    | {
+      x: string,
+      y: string,
+      blur: string,
+      spread: string,
+      color: string,
+      type: 'innerShadow' | 'dropShadow',
+    }
+    | string,
+  }
+  | {
+    type: 'fontFamilies',
+    value: string,
+  }
+  | {
+    type: 'lineHeights',
+    value: string,
+  }
+  | {
+    type: 'fontWeights',
+    value: string,
+  }
+  | {
+    type: 'fontSizes',
+    value: string,
+  }
+  | {
+    type: 'letterSpacing',
+    value: string,
+  }
+  | {
+    type: 'paragraphSpacing',
+    value: string,
+  }
+  | {
+    type: 'textCase',
+    value: string,
+  }
+  | {
+    type: 'textDecoration',
+    value: 'none' | 'underline',
+  }
+  | {
+    type: 'borderRadius',
+    value: string,
+  }
+  | {
+    type: 'typography',
+    value: {
+      fontFamily: string,
+      fontWeight: string,
+      lineHeight: string,
+      fontSize: string,
+      letterSpacing: string,
+      paragraphSpacing: string,
+      paragraphIndent: string,
+      textCase: string,
+      textDecoration: string,
+    },
+  }
+  | {
+    type: 'sizing',
+    value: string,
+  }
+  | {
+    type: 'number',
+    value: string,
+  }
+  | {
+    type: 'other',
+    value: string,
+  }
 
 const THEME_CLASS_NAMES: Record<string, string> = {
   'Nectary / Base theme': '.nectary-theme-base',
@@ -98,10 +123,12 @@ const THEME_CLASS_NAMES: Record<string, string> = {
   'cPaas/Base theme': '.nectary-theme-base.cpaas-theme-base',
   'cPaas/MailGun': '.nectary-theme-base.cpaas-theme-base.cpaas-theme-mailgun',
   'cPaas/MailJet': '.nectary-theme-base.cpaas-theme-base.cpaas-theme-mailjet',
-  'cPaas/Dashboard': '.nectary-theme-base.cpaas-theme-base.cpaas-theme-dashboard',
+  'cPaas/Dashboard':
+    '.nectary-theme-base.cpaas-theme-base.cpaas-theme-dashboard',
 }
 
-const [SELECTED_THEME_KEY] = Object.keys(tokensJson).filter((key: string) => key.toLowerCase().includes(INPUT_THEME_KEY))
+const [SELECTED_THEME_KEY] = Object.keys(tokensJson).filter((key: string) =>
+  key.toLowerCase().includes(INPUT_THEME_KEY))
 
 if (SELECTED_THEME_KEY == null) {
   throw new Error(`Cannot find theme by key: "${INPUT_THEME_KEY}"`)
@@ -121,21 +148,23 @@ const isValue = (obj: TJson): obj is TValue => {
 }
 
 const isJson = (obj: TJson | string): obj is TJson => {
-  return typeof obj === 'object' &&
-    !Array.isArray(obj) &&
-    obj != null
+  return typeof obj === 'object' && !Array.isArray(obj) && obj != null
 }
 
 const SELECTED_THEME_JSON = tokensJson[SELECTED_THEME_KEY]
 
 if (!isJson(SELECTED_THEME_JSON)) {
-  throw new Error(`Cannot get theme json, named "${SELECTED_THEME_KEY}" from tokens json`)
+  throw new Error(
+    `Cannot get theme json, named "${SELECTED_THEME_KEY}" from tokens json`
+  )
 }
 
 const BASE_THEME_JSON = tokensJson[BASE_THEME_KEY]
 
 if (!isJson(BASE_THEME_JSON)) {
-  throw new Error(`Cannot get base theme json, named "${BASE_THEME_KEY}" from tokens json`)
+  throw new Error(
+    `Cannot get base theme json, named "${BASE_THEME_KEY}" from tokens json`
+  )
 }
 
 const cleanupDir = (dir: string) => rimraf(dir)
@@ -173,7 +202,8 @@ const alphaToHex = (alpha: string): string => {
   return Math.round(parseFloat(alpha) * 255).toString(16)
 }
 
-const isInterpolateString = (value: TValue['value']): value is string => typeof value === 'string' && value.startsWith('{')
+const isInterpolateString = (value: TValue['value']): value is string =>
+  typeof value === 'string' && value.startsWith('{')
 const getInterpolatePath = (iStr: string): string[] => {
   return iStr.slice(1, -1).split('.').map(normalizeKey)
 }
@@ -207,7 +237,10 @@ const refToValue = (valueObj: TValue): TValue => {
     throw new Error(`Value is not a reference: "${valueObj.value}"`)
   }
 
-  const refToValueImpl = (themeJson: TJson, valueObj: TValue): TValue | null => {
+  const refToValueImpl = (
+    themeJson: TJson,
+    valueObj: TValue
+  ): TValue | null => {
     const { value: iStr } = valueObj
 
     if (!isInterpolateString(iStr)) {
@@ -236,21 +269,30 @@ const refToValue = (valueObj: TValue): TValue => {
     return null
   }
 
-  const result = refToValueImpl(SELECTED_THEME_JSON, valueObj) ?? refToValueImpl(BASE_THEME_JSON, valueObj)
+  const result =
+    refToValueImpl(SELECTED_THEME_JSON, valueObj) ??
+    refToValueImpl(BASE_THEME_JSON, valueObj)
 
   if (result === null) {
-    throw new Error(`Cannot dereference value at path "${getInterpolatePath(valueObj.value)}"`)
+    throw new Error(
+      `Cannot dereference value at path "${getInterpolatePath(valueObj.value)}"`
+    )
   }
 
   // Check if dereferenced value type is different than reference value type
   if (result.type !== valueObj.type) {
-    throw new Error(`Reference of type "${valueObj.type}" leads to different type "${result.type}"`)
+    throw new Error(
+      `Reference of type "${valueObj.type}" leads to different type "${result.type}"`
+    )
   }
 
   return result
 }
 
-function* visitJsonObject(obj: TJson, accPath: string[] = []): Generator<{ path: string[], value: TValue }> {
+function* visitJsonObject(
+  obj: TJson,
+  accPath: string[] = []
+): Generator<{ path: string[], value: TValue }> {
   if (isValue(obj)) {
     // Final leaf reached
     return yield { path: accPath, value: obj }
@@ -269,9 +311,13 @@ function* visitJsonObject(obj: TJson, accPath: string[] = []): Generator<{ path:
   }
 }
 
-const jsonValueToCssValue = (jsonObj: TValue, forceDereferenceValue = false): string => {
+const jsonValueToCssValue = (
+  jsonObj: TValue,
+  forceDereferenceValue = false
+): string => {
   const { type, value } = jsonObj
-  const px = (value: string) => (value.endsWith('%') || value === ZERO ? value : `${value}px`)
+  const px = (value: string) =>
+    (value.endsWith('%') || value === ZERO ? value : `${value}px`)
 
   if (!hasExtensions(jsonObj)) {
     if (isInterpolateString(value)) {
@@ -287,10 +333,13 @@ const jsonValueToCssValue = (jsonObj: TValue, forceDereferenceValue = false): st
 
       if (alpha !== null) {
         const colorValue = isInterpolateString(value)
-          ? refToValue(jsonObj).value as typeof value
+          ? (refToValue(jsonObj).value as typeof value)
           : value
 
-        return jsonValueToCssValue({ type, value: colorValue + alpha }, forceDereferenceValue)
+        return jsonValueToCssValue(
+          { type, value: colorValue + alpha },
+          forceDereferenceValue
+        )
       }
 
       if (value.startsWith('#')) {
@@ -315,7 +364,10 @@ const jsonValueToCssValue = (jsonObj: TValue, forceDereferenceValue = false): st
         return 'none'
       }
 
-      const colorValue = jsonValueToCssValue({ type: 'color', value: color }, forceDereferenceValue)
+      const colorValue = jsonValueToCssValue(
+        { type: 'color', value: color },
+        forceDereferenceValue
+      )
 
       return `${px(x)} ${px(y)} ${px(blur)} ${colorValue}`
     }
@@ -326,10 +378,22 @@ const jsonValueToCssValue = (jsonObj: TValue, forceDereferenceValue = false): st
       }
 
       const { fontFamily, fontSize, fontWeight, lineHeight } = value
-      const fontFamilyValue = jsonValueToCssValue({ type: 'fontFamilies', value: fontFamily }, forceDereferenceValue)
-      const fontSizeValue = jsonValueToCssValue({ type: 'fontSizes', value: fontSize }, forceDereferenceValue)
-      const fontWeightValue = jsonValueToCssValue({ type: 'fontWeights', value: fontWeight }, forceDereferenceValue)
-      const lineHeightValue = jsonValueToCssValue({ type: 'lineHeights', value: lineHeight }, forceDereferenceValue)
+      const fontFamilyValue = jsonValueToCssValue(
+        { type: 'fontFamilies', value: fontFamily },
+        forceDereferenceValue
+      )
+      const fontSizeValue = jsonValueToCssValue(
+        { type: 'fontSizes', value: fontSize },
+        forceDereferenceValue
+      )
+      const fontWeightValue = jsonValueToCssValue(
+        { type: 'fontWeights', value: fontWeight },
+        forceDereferenceValue
+      )
+      const lineHeightValue = jsonValueToCssValue(
+        { type: 'lineHeights', value: lineHeight },
+        forceDereferenceValue
+      )
 
       return `${fontWeightValue} ${fontSizeValue}/${lineHeightValue} ${fontFamilyValue}`
     }
@@ -352,6 +416,7 @@ const jsonValueToCssValue = (jsonObj: TValue, forceDereferenceValue = false): st
     case 'fontWeights':
     case 'direction':
     case 'number':
+    case 'other':
     case 'letterSpacing':
     case 'paragraphSpacing':
     case 'textDecoration':
@@ -378,7 +443,9 @@ const jsonToCss = (jsonObj: any, prefix: string): string => {
   return `${data}}\n`
 }
 
-function* visitThemeSections(themeJson: any): Generator<{ key: string, jsonObj: TJson, isComponent: boolean }> {
+function* visitThemeSections(
+  themeJson: any
+): Generator<{ key: string, jsonObj: TJson, isComponent: boolean }> {
   const sectionKeysToProcess = Object.keys(themeJson)
 
   // Iterate over Theme sections like 'ref', 'sys', 'comp'
@@ -388,10 +455,15 @@ function* visitThemeSections(themeJson: any): Generator<{ key: string, jsonObj: 
     // Process 'comp' section
     if (sectionKey === COMPONENTS_SECTION_KEY) {
       // foreach component
-      for (const compNameKey of Object.keys(sectionObj).sort((a, b) => a.localeCompare(b))) {
+      for (const compNameKey of Object.keys(sectionObj).sort((a, b) =>
+        a.localeCompare(b))) {
         const compName = normalizeKey(compNameKey)
 
-        yield { key: compName, isComponent: true, jsonObj: sectionObj[compNameKey] }
+        yield {
+          key: compName,
+          isComponent: true,
+          jsonObj: sectionObj[compNameKey],
+        }
       }
     } else {
       yield { key: sectionKey, isComponent: false, jsonObj: sectionObj }
@@ -419,7 +491,8 @@ const extractColorNames = (data: string) => {
   return [...compColors]
 }
 
-const capitalizeFirstLetter = (name: string) => `${name.charAt(0).toUpperCase()}${name.slice(1)}`
+const capitalizeFirstLetter = (name: string) =>
+  `${name.charAt(0).toUpperCase()}${name.slice(1)}`
 
 const writeColorTypeFile = (name: string, colors: string[]) => {
   const data = `export type TSinch${capitalizeFirstLetter(name)}Color = ${colors.map((color) => `'${color}'`).join(' | ')}\n`
@@ -428,9 +501,14 @@ const writeColorTypeFile = (name: string, colors: string[]) => {
 }
 
 // Process sections like 'ref' or 'sys'
-for (const { key, jsonObj, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
+for (const { key, jsonObj, isComponent } of visitThemeSections(
+  SELECTED_THEME_JSON
+)) {
   if (isComponent) {
-    const data = jsonToCss(jsonObj, getCssVarPrefix(COMPONENTS_SECTION_KEY, key))
+    const data = jsonToCss(
+      jsonObj,
+      getCssVarPrefix(COMPONENTS_SECTION_KEY, key)
+    )
 
     if (['avatar', 'chip', 'tag'].includes(key)) {
       const colors = extractColorNames(data)
@@ -482,7 +560,9 @@ await writeData(OUTDIR, 'index.js', indexJsFileData)
 await writeData(OUTDIR, 'index.css', indexCssFileData)
 
 /* Process section json files, e.g. ref.json, sys.json */
-for (const { key: sectionNameKey, jsonObj, isComponent } of visitThemeSections(SELECTED_THEME_JSON)) {
+for (const { key: sectionNameKey, jsonObj, isComponent } of visitThemeSections(
+  SELECTED_THEME_JSON
+)) {
   // Skip components
   if (isComponent) {
     continue
@@ -507,5 +587,9 @@ for (const { key: sectionNameKey, jsonObj, isComponent } of visitThemeSections(S
     }
   }
 
-  await writeData(OUTDIR, `${sectionNameKey}.json`, JSON.stringify(sectionRoot, null, 2))
+  await writeData(
+    OUTDIR,
+    `${sectionNameKey}.json`,
+    JSON.stringify(sectionRoot, null, 2)
+  )
 }

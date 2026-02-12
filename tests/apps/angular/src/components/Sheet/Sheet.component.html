@@ -1,0 +1,22 @@
+<sinch-sheet
+  open
+  [attr.placement]="placement"
+  [attr.overlay]="overlay"
+  (-close)="onClose($event)"
+>
+  <sinch-sheet-title
+    slot="title"
+    [attr.title]="title"
+    [attr.description]="desc"
+    close-aria-label="Close"
+  >
+    <sinch-icon icons-version="2" name="fa-face-smile-plus" *ngIf="icon" slot="icon" />
+  </sinch-sheet-title>
+  <div *ngIf="content !== null" slot="content">
+    <sinch-text type="m">{{ content }}</sinch-text>
+  </div>
+  <ng-container *ngIf="buttons">
+    <sinch-button text="Cancel" type="secondary" slot="footer"></sinch-button>
+    <sinch-button text="Ok" type="primary" slot="footer"></sinch-button>
+  </ng-container>
+</sinch-sheet>
