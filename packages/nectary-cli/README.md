@@ -17,6 +17,20 @@ npx nectary@latest list
 
 Prints each available composition name and its one-line description.
 
+### View a composition
+
+Preview a composition before adding it (description, dependencies, and files that would be written):
+
+```bash
+npx nectary@latest view <name>
+```
+
+Example:
+
+```bash
+npx nectary@latest view table
+```
+
 ### Add a composition
 
 From your project root:

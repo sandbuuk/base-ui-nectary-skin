@@ -14,7 +14,8 @@
   "scripts": {
     "build": "tsc && node scripts/build-registry.mjs",
     "build:registry": "node scripts/build-registry.mjs",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "test": "pnpm run build && node --test test/add.select.smoke.test.mjs"
   },
   "dependencies": {
     "@antfu/ni": "^0.21.0",

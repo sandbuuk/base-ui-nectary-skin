@@ -5,6 +5,7 @@ import { Command } from 'commander'
 import { getComponentsPath, loadNectaryConfig } from './config.js'
 import { installDependencies } from './install.js'
 import { loadRegistryItem } from './registry.js'
+import { validateProjectDependencies } from './validate.js'
 
 export function addCommand(): Command {
   return new Command('add')
@@ -12,8 +13,12 @@ export function addCommand(): Command {
     .argument('<name>', 'Registry item name or URL to a registry item JSON')
     .option('-p, --path <path>', 'Override components output path')
     .option('-o, --overwrite', 'Overwrite existing files', false)
+    .option('-y, --yes', 'Skip any confirmation prompts (non-interactive, for scripting)', false)
     .action(async (name: string, options: { path?: string, overwrite?: boolean }) => {
       const cwd = process.cwd()
+
+      validateProjectDependencies(cwd)
+
       const config = loadNectaryConfig(cwd)
       const basePath = options.path ?? getComponentsPath(config, cwd)
 
@@ -49,7 +54,14 @@ export function addCommand(): Command {
         const toInstall = filterMissingDependencies(cwd, item.dependencies)
 
         if (toInstall.length > 0) {
-          await installDependencies(cwd, toInstall)
+          try {
+            await installDependencies(cwd, toInstall)
+          } catch (err) {
+            const message = err instanceof Error ? err.message : String(err)
+
+            console.error(`Failed to install dependencies: ${message}`)
+            process.exit(1)
+          }
         } else {
           console.log('All dependencies already present.')
         }
