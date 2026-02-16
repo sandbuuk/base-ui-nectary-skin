@@ -155,7 +155,7 @@ cli-tests:
   variables:
     GIT_LFS_SKIP_SMUDGE: 1
   script:
-    - pnpm --filter nectary test
+    - pnpm --filter @nectary/cli test
 
 visual-tests:
   variables:
