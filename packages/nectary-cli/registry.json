@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "name": "select",
+      "description": "Select composition with search (Popover + SelectButton + SelectMenu). Accepts options, placeholder, value, onChange and style props.",
+      "dependencies": [],
+      "files": [
+        { "path": "Select/Search.tsx", "source": "registry/select/Search.tsx" }
+      ]
+    },
+    {
+      "name": "phone-input",
+      "description": "Phone input with country code selector. Accepts placeholder, value, onChange, style and ariaLabel props.",
+      "dependencies": ["countries-phone-masks@^1.1.0"],
+      "files": [
+        { "path": "PhoneInput/PhoneInput.tsx", "source": "registry/phone-input/PhoneInput.tsx" }
+      ]
+    }
+  ]
+}
