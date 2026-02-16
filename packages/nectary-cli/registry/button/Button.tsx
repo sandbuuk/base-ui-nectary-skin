@@ -21,8 +21,8 @@ export interface ButtonProps {
   type?: ButtonType,
   /** Size: s, m, l. Default: m. */
   size?: ButtonSize,
-  disabled?: boolean,
-  toggled?: boolean,
+  isDisabled?: boolean,
+  isToggled?: boolean,
   /** Form association: button, submit, reset. Default: button. */
   formType?: 'button' | 'submit' | 'reset',
   onClick?: () => void,

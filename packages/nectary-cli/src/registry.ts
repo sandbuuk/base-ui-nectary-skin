@@ -13,6 +13,60 @@ export interface RegistryItem {
   files: RegistryFile[],
 }
 
+function isRegistryFile(value: unknown): value is RegistryFile {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'path' in value &&
+    'content' in value &&
+    typeof (value as RegistryFile).path === 'string' &&
+    typeof (value as RegistryFile).content === 'string'
+  )
+}
+
+function parseRegistryItem(data: unknown): RegistryItem | null {
+  if (data === null || typeof data !== 'object' || !('name' in data) || !('files' in data)) {
+    return null
+  }
+
+  const obj = data as Record<string, unknown>
+  const name = obj.name
+  const description = obj.description
+  const dependencies = obj.dependencies
+  const files = obj.files
+
+  if (typeof name !== 'string' || name === '') {
+    return null
+  }
+
+  if (description !== undefined && typeof description !== 'string') {
+    return null
+  }
+
+  if (!Array.isArray(dependencies)) {
+    return null
+  }
+
+  if (!dependencies.every((d): d is string => typeof d === 'string')) {
+    return null
+  }
+
+  if (!Array.isArray(files)) {
+    return null
+  }
+
+  if (!files.every(isRegistryFile)) {
+    return null
+  }
+
+  return {
+    name,
+    description: typeof description === 'string' ? description : '',
+    dependencies,
+    files,
+  }
+}
+
 function isUrl(name: string): boolean {
   return name.startsWith('http://') || name.startsWith('https://')
 }
@@ -24,7 +78,9 @@ async function loadFromUrl(url: string): Promise<RegistryItem | null> {
     return null
   }
 
-  return (await res.json()) as RegistryItem
+  const data: unknown = await res.json()
+
+  return parseRegistryItem(data)
 }
 
 function loadFromBundle(name: string, cliDir: string): RegistryItem | null {
@@ -36,8 +92,9 @@ function loadFromBundle(name: string, cliDir: string): RegistryItem | null {
   }
 
   const raw = fs.readFileSync(filePath, 'utf8')
+  const data: unknown = JSON.parse(raw)
 
-  return JSON.parse(raw) as RegistryItem
+  return parseRegistryItem(data)
 }
 
 export function loadRegistryItem(
