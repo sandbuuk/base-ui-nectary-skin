@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { Command } from 'commander'
+import { filterMissingDependencies, resolvePathWithinBase } from './add-helpers.js'
 import { getComponentsPath, loadNectaryConfig } from './config.js'
 import { installDependencies } from './install.js'
 import { loadRegistryItem } from './registry.js'
@@ -30,10 +31,17 @@ export function addCommand(): Command {
         process.exit(1)
       }
 
+      const baseDir = path.resolve(cwd, basePath)
       const written: string[] = []
 
       for (const file of item.files) {
-        const targetPath = path.join(cwd, basePath, file.path)
+        const targetPath = resolvePathWithinBase(baseDir, file.path)
+
+        if (targetPath === null) {
+          console.error(`Error: invalid file path "${file.path}" (path traversal not allowed).`)
+          process.exit(1)
+        }
+
         const dir = path.dirname(targetPath)
 
         if (!fs.existsSync(dir)) {
@@ -71,41 +79,4 @@ export function addCommand(): Command {
         console.log('No files written (use --overwrite to replace existing).')
       }
     })
-}
-
-/** Extract package name and full spec from a dependency spec (e.g. "zod@^3.20.0" or "@hookform/resolvers"). */
-function parseDepSpec(spec: string): { name: string, spec: string } {
-  const lastAt = spec.lastIndexOf('@')
-
-  if (lastAt <= 0) {
-    return { name: spec, spec }
-  }
-
-  const afterAt = spec.slice(lastAt + 1)
-
-  if (/^[\d^~]/.test(afterAt) || /^\d/.test(afterAt)) {
-    return { name: spec.slice(0, lastAt), spec }
-  }
-
-  return { name: spec, spec }
-}
-
-function filterMissingDependencies(cwd: string, deps: string[]): string[] {
-  const pkgPath = path.join(cwd, 'package.json')
-
-  if (!fs.existsSync(pkgPath)) {
-    return deps
-  }
-
-  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8')) as {
-    dependencies?: Record<string, string>,
-    devDependencies?: Record<string, string>,
-  }
-  const all = { ...pkg.dependencies, ...pkg.devDependencies }
-
-  return deps.filter((spec) => {
-    const { name } = parseDepSpec(spec)
-
-    return !Object.prototype.hasOwnProperty.call(all, name)
-  })
 }
