@@ -33,8 +33,8 @@ export const Button: FC<ButtonProps> = ({
   'aria-label': ariaLabel,
   type = 'primary',
   size = 'm',
-  disabled = false,
-  toggled = false,
+  isDisabled = false,
+  isToggled = false,
   formType = 'button',
   onClick,
 }) => {
@@ -44,8 +44,8 @@ export const Button: FC<ButtonProps> = ({
       aria-label={ariaLabel}
       type={type as 'primary' | 'secondary' | 'subtle-primary' | 'subtle-secondary' | 'cta-primary' | 'cta-secondary' | 'destructive'}
       size={size as 's' | 'm' | 'l'}
-      disabled={disabled}
-      toggled={toggled}
+      disabled={isDisabled}
+      toggled={isToggled}
       form-type={formType}
       on-click={onClick}
     />
