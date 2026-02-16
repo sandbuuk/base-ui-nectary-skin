@@ -21,7 +21,7 @@ export function addCommand(): Command {
       validateProjectDependencies(cwd)
 
       const config = loadNectaryConfig(cwd)
-      const basePath = options.path ?? getComponentsPath(config, cwd)
+      const basePath = options.path ?? getComponentsPath(config)
 
       const cliDir = path.dirname(fileURLToPath(import.meta.url))
       const item = await loadRegistryItem(name, cliDir)

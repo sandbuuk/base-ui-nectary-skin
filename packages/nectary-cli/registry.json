@@ -1,6 +1,14 @@
 {
   "items": [
     {
+      "name": "button",
+      "description": "Simple Button wrapper (sinch-button). Props: text, aria-label, type, size, disabled, toggled, formType, onClick.",
+      "dependencies": [],
+      "files": [
+        { "path": "Button/Button.tsx", "source": "registry/button/Button.tsx" }
+      ]
+    },
+    {
       "name": "select",
       "description": "Select composition with search (Popover + SelectButton + SelectMenu). Accepts options, placeholder, value, onChange and style props.",
       "dependencies": [],

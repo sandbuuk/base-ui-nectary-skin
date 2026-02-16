@@ -42,6 +42,7 @@ npx nectary@latest add <name>
 Examples:
 
 ```bash
+npx nectary@latest add button
 npx nectary@latest add select
 npx nectary@latest add phone-input
 npx nectary@latest add table
@@ -72,6 +73,7 @@ Compositions live in this package under `registry/` and can be customized (e.g. 
 
 | Name | Description | Dependencies |
 |------|-------------|--------------|
+| `button` | Simple Button (sinch-button). Props: `text`, `aria-label`, `type`, `size`, `disabled`, `toggled`, `formType`, `onClick`. | — |
 | `select` | Select with search. Props: `options`, `placeholder`, `searchPlaceholder`, `value`, `onChange`, `style`, `ariaLabel`. | — |
 | `phone-input` | Phone input with country code selector. Props: `placeholder`, `value`, `onChange`, `style`, `ariaLabel`. | countries-phone-masks |
 | `table` | Table composition. Props: `columns`, `data`, `getRowKey`. | — |
