@@ -48,7 +48,7 @@ export function addCommand(): Command {
           fs.mkdirSync(dir, { recursive: true })
         }
 
-        if (fs.existsSync(targetPath) && options.overwrite !== false) {
+        if (fs.existsSync(targetPath) && options.overwrite !== true) {
           console.warn(`Skip (exists): ${path.relative(cwd, targetPath)}`)
           continue
         }
