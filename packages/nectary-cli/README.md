@@ -4,7 +4,7 @@ Add Nectary compositions (higher-order React components built on `@nectary/compo
 
 ## Prerequisites
 
-- Node 18+
+- Node ^18.19.0 or >=20.5.0 (see `engines` in package.json)
 - A project with `@nectary/components` installed
 
 ## Usage
