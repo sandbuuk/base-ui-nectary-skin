@@ -9,6 +9,14 @@ Add Nectary compositions (higher-order React components built on `@nectary/compo
 
 ## Usage
 
+### List compositions
+
+```bash
+npx nectary@latest list
+```
+
+Prints each available composition name and its one-line description.
+
 ### Add a composition
 
 From your project root:

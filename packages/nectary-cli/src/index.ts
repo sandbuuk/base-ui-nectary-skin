@@ -2,6 +2,7 @@
 
 import { program } from 'commander'
 import { addCommand } from './add.js'
+import { listCommand } from './list.js'
 
 program
   .name('nectary')
@@ -9,5 +10,6 @@ program
   .version('0.0.1')
 
 program.addCommand(addCommand())
+program.addCommand(listCommand())
 
 program.parse()
