@@ -6,15 +6,21 @@ export type PackageManager = 'pnpm' | 'npm' | 'yarn' | 'bun'
 function normalizePackageManager(
   detected: string | undefined
 ): PackageManager {
-  if (detected === 'yarn@berry' || detected === 'yarn') {
+  if (detected === undefined || detected === null || typeof detected !== 'string') {
+    return 'npm'
+  }
+
+  const id = detected.toLowerCase()
+
+  if (id.startsWith('yarn')) {
     return 'yarn'
   }
 
-  if (detected === 'pnpm@6' || detected === 'pnpm@7' || detected === 'pnpm@8' || detected === 'pnpm@9' || detected === 'pnpm') {
+  if (id.startsWith('pnpm')) {
     return 'pnpm'
   }
 
-  if (detected === 'bun') {
+  if (id.startsWith('bun')) {
     return 'bun'
   }
 

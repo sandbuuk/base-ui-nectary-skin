@@ -72,15 +72,19 @@ function isUrl(name: string): boolean {
 }
 
 async function loadFromUrl(url: string): Promise<RegistryItem | null> {
-  const res = await fetch(url)
+  try {
+    const res = await fetch(url)
 
-  if (!res.ok) {
+    if (!res.ok) {
+      return null
+    }
+
+    const data: unknown = await res.json()
+
+    return parseRegistryItem(data)
+  } catch {
     return null
   }
-
-  const data: unknown = await res.json()
-
-  return parseRegistryItem(data)
 }
 
 function loadFromBundle(name: string, cliDir: string): RegistryItem | null {
