@@ -15,6 +15,14 @@
       "files": [
         { "path": "PhoneInput/PhoneInput.tsx", "source": "registry/phone-input/PhoneInput.tsx" }
       ]
+    },
+    {
+      "name": "table",
+      "description": "Table composition (Table + TableHead + TableRow + TableHeadCell + TableCell + TableBody). Accepts columns and data props.",
+      "dependencies": [],
+      "files": [
+        { "path": "Table/Table.tsx", "source": "registry/table/Table.tsx" }
+      ]
     }
   ]
 }

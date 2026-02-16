@@ -30,6 +30,7 @@ Examples:
 ```bash
 npx nectary@latest add select
 npx nectary@latest add phone-input
+npx nectary@latest add table
 ```
 
 Files are written under `src/components/nectary/` by default (see [Configuration](#configuration)). The CLI will also install any npm dependencies required by the composition (e.g. `countries-phone-masks` for `phone-input`).
@@ -59,6 +60,7 @@ Compositions live in this package under `registry/` and can be customized (e.g. 
 |------|-------------|--------------|
 | `select` | Select with search. Props: `options`, `placeholder`, `searchPlaceholder`, `value`, `onChange`, `style`, `ariaLabel`. | — |
 | `phone-input` | Phone input with country code selector. Props: `placeholder`, `value`, `onChange`, `style`, `ariaLabel`. | countries-phone-masks |
+| `table` | Table composition. Props: `columns`, `data`, `getRowKey`. | — |
 
 ## Running locally (development)
 

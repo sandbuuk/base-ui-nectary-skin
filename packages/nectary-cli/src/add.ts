@@ -8,7 +8,7 @@ import { loadRegistryItem } from './registry.js'
 
 export function addCommand(): Command {
   return new Command('add')
-    .description('Add a composition (e.g. select, phone-input)')
+    .description('Add a composition (e.g. select, phone-input, table)')
     .argument('<name>', 'Registry item name or URL to a registry item JSON')
     .option('-p, --path <path>', 'Override components output path')
     .option('-o, --overwrite', 'Overwrite existing files', false)
