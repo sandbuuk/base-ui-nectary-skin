@@ -11,15 +11,15 @@ const defaultSelectStyles: CSSProperties = {
 
 export interface SelectSearchProps {
   /** Options to display. */
-  options?: string[]
-  placeholder?: string
-  searchPlaceholder?: string
+  options?: string[],
+  placeholder?: string,
+  searchPlaceholder?: string,
   /** Controlled value */
-  value?: string
+  value?: string,
   /** Callback when selection changes */
-  onChange?: (value: string) => void
-  style?: CSSProperties
-  ariaLabel?: string
+  onChange?: (value: string) => void,
+  style?: CSSProperties,
+  ariaLabel?: string,
 }
 
 export const SelectSearch: FC<SelectSearchProps> = ({
@@ -34,7 +34,9 @@ export const SelectSearch: FC<SelectSearchProps> = ({
   const [isOpen, setIsOpen] = useState(false)
   const [internalValue, setInternalValue] = useState('')
   const value = controlledValue ?? internalValue
-  const setValue = onChange != null ? (v: string) => { onChange(v); setInternalValue(v) } : setInternalValue
+  const setValue = onChange != null ? (v: string) => {
+    onChange(v); setInternalValue(v)
+  } : setInternalValue
 
   const onSelectChange = (e: CustomEvent<string>) => {
     setValue(e.detail)

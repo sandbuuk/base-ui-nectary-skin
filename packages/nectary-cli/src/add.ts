@@ -48,7 +48,7 @@ export function addCommand(): Command {
           fs.mkdirSync(dir, { recursive: true })
         }
 
-        if (fs.existsSync(targetPath) && !options.overwrite) {
+        if (fs.existsSync(targetPath) && options.overwrite !== false) {
           console.warn(`Skip (exists): ${path.relative(cwd, targetPath)}`)
           continue
         }
@@ -75,7 +75,7 @@ export function addCommand(): Command {
         }
       }
 
-      if (written.length === 0 && !options.overwrite) {
+      if (written.length === 0 && options.overwrite !== true) {
         console.log('No files written (use --overwrite to replace existing).')
       }
     })

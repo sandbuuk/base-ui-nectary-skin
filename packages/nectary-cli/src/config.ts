@@ -24,6 +24,6 @@ export function loadNectaryConfig(cwd: string): NectaryConfig | null {
   }
 }
 
-export function getComponentsPath(config: NectaryConfig | null, cwd: string): string {
+export function getComponentsPath(config: NectaryConfig | null): string {
   return config?.componentsPath ?? DEFAULT_COMPONENTS_PATH
 }

@@ -379,7 +379,6 @@ module.exports = {
     }],
     'node/no-extraneous-require': 2,
     'node/no-path-concat': 2,
-    'node/no-sync': 2,
   },
   overrides: [
     {

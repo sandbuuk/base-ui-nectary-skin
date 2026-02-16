@@ -40,15 +40,15 @@ function loadFromBundle(name: string, cliDir: string): RegistryItem | null {
   return JSON.parse(raw) as RegistryItem
 }
 
-export async function loadRegistryItem(
+export function loadRegistryItem(
   name: string,
   cliDir: string
 ): Promise<RegistryItem | null> {
   if (isUrl(name)) {
-    return await loadFromUrl(name)
+    return loadFromUrl(name)
   }
 
-  return loadFromBundle(name, cliDir)
+  return Promise.resolve(loadFromBundle(name, cliDir))
 }
 
 export interface RegistryListItem {
