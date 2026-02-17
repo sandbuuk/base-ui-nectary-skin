@@ -143,6 +143,20 @@ unit-tests:
     paths:
       - tests/test-results
 
+cli-tests:
+  extends:
+    - .cache
+    - .prepare-ci
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - packages/nectary-cli/**/*
+  variables:
+    GIT_LFS_SKIP_SMUDGE: 1
+  script:
+    - pnpm --filter @nectary/cli test
+
 visual-tests:
   variables:
     KUBERNETES_CPU_REQUEST: "1"

@@ -4,6 +4,7 @@ packages:
   - 'shared/'
   - 'themes/*'
   - 'libs/*'
+  - 'packages/*'
   - 'tests/'
   - 'tests/apps/*'
   - 'docs/*'

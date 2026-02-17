@@ -1,0 +1,34 @@
+{
+  "name": "@nectary/cli",
+  "version": "0.0.1",
+  "private": false,
+  "type": "module",
+  "description": "CLI to add Nectary compositions as React components to your project",
+  "bin": {
+    "nectary": "./dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && node scripts/build-registry.mjs",
+    "build:registry": "node scripts/build-registry.mjs",
+    "prepublishOnly": "pnpm run build",
+    "test": "pnpm run build && node --test test/add.select.smoke.test.mjs"
+  },
+  "dependencies": {
+    "@antfu/ni": "^0.21.0",
+    "commander": "^12.0.0",
+    "execa": "^9.0.0"
+  },
+  "devDependencies": {
+    "react": "^18.2.0",
+    "@nectary/components": "workspace:*",
+    "@types/node": "^18.17.17",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": "^18.19.0 || >=20.5.0"
+  }
+}
