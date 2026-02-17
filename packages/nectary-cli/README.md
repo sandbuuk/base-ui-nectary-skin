@@ -12,7 +12,7 @@ Add Nectary compositions (higher-order React components built on `@nectary/compo
 ### List compositions
 
 ```bash
-npx nectary@latest list
+npx @nectary/cli list
 ```
 
 Prints each available composition name and its one-line description.
@@ -22,13 +22,13 @@ Prints each available composition name and its one-line description.
 Preview a composition before adding it (description, dependencies, and files that would be written):
 
 ```bash
-npx nectary@latest view <name>
+npx @nectary/cli view <name>
 ```
 
 Example:
 
 ```bash
-npx nectary@latest view table
+npx @nectary/cli view table
 ```
 
 ### Add a composition
@@ -36,16 +36,16 @@ npx nectary@latest view table
 From your project root:
 
 ```bash
-npx nectary@latest add <name>
+npx @nectary/cli add <name>
 ```
 
 Examples:
 
 ```bash
-npx nectary@latest add button
-npx nectary@latest add select
-npx nectary@latest add phone-input
-npx nectary@latest add table
+npx @nectary/cli add button
+npx @nectary/cli add select
+npx @nectary/cli add phone-input
+npx @nectary/cli add table
 ```
 
 Files are written under `src/components/nectary/` by default (see [Configuration](#configuration)). The CLI will also install any npm dependencies required by the composition (e.g. `countries-phone-masks` for `phone-input`).
@@ -108,4 +108,4 @@ node dist/index.js add select
    - `files` – Array of `{ "path": "OutputPath/File.tsx", "source": "registry/<name>/File.tsx" }`.  
      `path` is where the file will be written in the user's project (relative to their components path). `source` is relative to **this package root** (e.g. `registry/select/Search.tsx`).
 3. **Rebuild the registry**: from `packages/nectary-cli`, run `pnpm run build` (or `pnpm run build:registry` after `tsc`). This reads the manifest and writes `dist/registry/<name>.json`.
-4. **Publish** the `nectary` package so users can run `npx nectary@latest add <name>`.
+4. **Publish** the `nectary` package so users can run `npx @nectary/cli add <name>`.
