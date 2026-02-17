@@ -4,6 +4,9 @@
   "private": false,
   "type": "module",
   "description": "CLI to add Nectary compositions as React components to your project",
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "nectary": "./dist/index.js"
   },
