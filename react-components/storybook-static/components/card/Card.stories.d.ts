@@ -1,0 +1,25 @@
+import { Meta, StoryObj } from '@storybook/react';
+import { Card, CardContainer, CardTitle } from './Card';
+
+declare const meta: Meta<typeof Card>;
+export default meta;
+type Story = StoryObj<typeof Card>;
+export declare const Default: Story;
+export declare const WithIcon: Story;
+export declare const VerticalLayout: Story;
+export declare const Clickable: Story;
+export declare const Selected: Story;
+export declare const Disabled: Story;
+export declare const SelectedDisabled: Story;
+export declare const WithMedia: Story;
+export declare const WithFooter: Story;
+export declare const FullExample: Story;
+export declare const WithEllipsis: Story;
+export declare const TitleDefault: StoryObj<typeof CardTitle>;
+export declare const TitleWithIcon: StoryObj<typeof CardTitle>;
+export declare const TitleVertical: StoryObj<typeof CardTitle>;
+export declare const TitleEllipsis: StoryObj<typeof CardTitle>;
+export declare const ContainerDefault: StoryObj<typeof CardContainer>;
+export declare const ContainerWithMultipleCards: StoryObj<typeof CardContainer>;
+export declare const ContainerWithHeight: StoryObj<typeof CardContainer>;
+export declare const AllStates: Story;

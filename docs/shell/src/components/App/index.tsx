@@ -176,6 +176,7 @@ export const App: FC = () => {
             <Route path="/labComponents/*" element={<ComponentsPage/>}/>
             <Route path="/components/*" element={<ComponentsPage/>}/>
             <Route path="/compositions/*" element={<ComponentsPage/>}/>
+            <Route path="/react-components/*" element={<ComponentsPage/>}/>
             <Route path="*" element={<NotFoundPage/>}/>
           </Routes>
         </Suspense>

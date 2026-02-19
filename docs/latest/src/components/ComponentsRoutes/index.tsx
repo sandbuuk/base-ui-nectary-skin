@@ -11,10 +11,14 @@ import {
   getCompositionsRoutes,
   getLabsComponentsRoutes,
   getPagesRoutes,
+  getReactComponentsRouteTabs,
+  getReactComponentsRouteTitle,
+  getReactComponentsRoutes,
   getRouteTabs,
   getRouteTitle,
   labsComponentsReq,
   pagesReq,
+  reactComponentsReq,
 } from '~/entries'
 
 export const ComponentsRoutes = memo(() => {
@@ -82,6 +86,32 @@ export const ComponentsRoutes = memo(() => {
       >
         {getLabsComponentsRoutes().map(({ key, route }) => {
           const Component = lazyScrollIntoView(() => labsComponentsReq(key))
+
+          return (
+            <Route
+              key={key}
+              path={route}
+              element={(
+                <Suspense fallback={<Loading/>}>
+                  <Component/>
+                </Suspense>
+              )}
+            />
+          )
+        })}
+      </Route>
+
+      <Route
+        path="/react-components"
+        element={(
+          <TabsLayout
+            getRouteTabInfo={getReactComponentsRouteTabs}
+            getRouteTitle={getReactComponentsRouteTitle}
+          />
+        )}
+      >
+        {getReactComponentsRoutes().map(({ key, route }) => {
+          const Component = lazyScrollIntoView(() => reactComponentsReq(key))
 
           return (
             <Route

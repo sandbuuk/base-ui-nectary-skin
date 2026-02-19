@@ -1,0 +1,47 @@
+import { Example } from '~/components/Example'
+import { CustomOptionsExample } from './examples/CustomOptions.tsx?example'
+import { CustomSearchExample } from './examples/CustomSearch.tsx?example'
+import { MultipleExample } from './examples/Multiple.tsx?example'
+import { RowsExample } from './examples/Rows.tsx?example'
+import { SearchExample } from './examples/Search.tsx?example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+
+# Examples
+
+Select Menu is a building block for high-level compositions like [Select](?path=/compositions/select/examples).
+
+## Simple
+
+Use down/up arrow keys to navigate and space/enter to select with keyboard.
+
+<Example Component={SimpleExample}/>
+
+## Rows
+
+<Example Component={RowsExample}/>
+
+## Search
+
+Built-in search appears automatically with 7+ options available.
+
+<Example Component={SearchExample}/>
+
+## Custom Search
+
+You can make the search appear with less options by using `searchable`. You can also control the search behaviour by using `onSearchChange` with `searchValue`.
+
+Note that the "debounce" functionality is disabled when `searchValue` is implemented manually.
+
+<Example Component={CustomSearchExample}/>
+
+## Multiple
+
+<Example Component={MultipleExample}/>
+
+## Custom Options
+
+A select option can also display arbitrary content. A `customContent` prop may be provided to render elements inside the select option. If `customContent` is provided, the `icon` prop will still be rendered if available, but the `text` property will not be rendered.
+
+The `text` property is still required as it serves other purposes such as search.
+
+<Example Component={CustomOptionsExample}/>

@@ -1,6 +1,7 @@
 packages:
   - 'assets/'
   - 'components/'
+  - 'react-components/'
   - 'shared/'
   - 'themes/*'
   - 'libs/*'

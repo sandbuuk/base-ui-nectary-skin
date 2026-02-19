@@ -1,0 +1,71 @@
+import { Example } from '~/components/Example'
+import { TypeInfoExample } from './examples/TypeInfo.tsx?example'
+import { TypeWarningExample } from './examples/TypeWarning.tsx?example'
+import { TypeErrorExample } from './examples/TypeError.tsx?example'
+import { TypeSuccessExample } from './examples/TypeSuccess.tsx?example'
+import { TypeSuccessTextOnlyExample } from './examples/TypeSuccessTextOnly.tsx?example'
+import { CloseExample } from './examples/Close.tsx?example'
+import { ActionExample } from './examples/Action.tsx?example'
+import { MarkdownExample } from './examples/Markdown.tsx?example'
+import { ActionMultipleExample } from './examples/ActionMultiple.tsx?example'
+import { CustomIconExample } from './examples/CustomIcon.tsx?example'
+
+# Examples
+
+Inline Alert is a banner that presents pressing and high-singal messages. Their go is to communicate with users in a prominent way to drive their attention about a service disruption or critical information.
+
+## Type
+
+### Success
+
+Success Alert convay success information to the user.
+
+<Example Component={TypeSuccessExample}/>
+
+#### Text Only Alert
+To add an Inline Alert with only text inside, simply remove the caption property in order to only display the text.
+
+<Example Component={TypeSuccessTextOnlyExample}/>
+
+### Informative
+
+Informative Alert convay non-critical information to the user.
+
+<Example Component={TypeInfoExample}/>
+
+### Warning
+
+Warning Alert convay critical information to the user that may disrupt the user exeperience in a near future.
+
+<Example Component={TypeWarningExample}/>
+
+### Error
+
+Error Alert convay information that is disrupting the user experience at the moment to the user and that might require a immediate action to solve it.
+
+<Example Component={TypeErrorExample}/>
+
+## Close
+
+The close button dismiss the Alert.
+
+<Example Component={CloseExample}/>
+
+## Action
+
+Action button(s) trigger actions that should allow the user to solve the problem informed in the alert.
+
+You can have one action:
+<Example Component={ActionExample}/>
+
+Or multiple:
+
+<Example Component={ActionMultipleExample}/>
+
+## Markdown
+
+<Example Component={MarkdownExample}/>
+
+## Custom Icon
+
+<Example Component={CustomIconExample}/>

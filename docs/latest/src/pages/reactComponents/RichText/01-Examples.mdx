@@ -1,0 +1,58 @@
+import { Example } from '~/components/Example'
+import { ClickableLinkExample } from './examples/ClickableLink.tsx?example'
+import { EscapingExample } from './examples/Escaping.tsx?example'
+import { ExternalLinkExample } from './examples/ExternalLink.tsx?example'
+import { HistoryLinkExample } from './examples/HistoryLink.tsx?example'
+import { MarkdownExample } from './examples/Markdown.tsx?example'
+import { SizeExample } from './examples/Size.tsx?example'
+import { TagsExample } from './examples/Tags.tsx?example'
+
+# Examples
+
+`RichText` component parses and renders markdown subset, passed to a `text` prop.
+
+## Markdown
+
+<Example Component={MarkdownExample}/>
+
+## Chips
+
+You can use chips to highlight special items in your text. Chips are written using double curly braces `{{chipname}}` and will be rendered as chip components.
+
+Use `chipColor` and `chipIcon` props to set default styling, and the `chipResolver` prop to customize individual chips with specific icons and colors.
+
+<Example Component={TagsExample}/>
+
+## Size
+
+Rich Text can have different font sizes
+
+<Example Component={SizeExample}/>
+
+## Escape Formatting
+
+You can escape markdown formatting by using two backslashes before the character you want to escape, the reason for two backslashes is because the browser removes one before it reaches the internal of the component.
+
+<Example Component={EscapingExample}/>
+
+## Use history.pushState for links
+
+We enhanced our markdown to support links that uses history.pushState instead of an anchor tag. To do this add the `{use-history}` option after the basic markdown link definition:
+
+<Example Component={HistoryLinkExample}/>
+
+## Use External links
+
+We enhanced our markdown to support external links. To do this add the `{external}` option after the basic markdown link definition:
+
+<Example Component={ExternalLinkExample}/>
+
+## Clickable links
+
+We usually prefer to reserve links for actual navigation and use buttons for actions, sometimes you need to make a link clickable without navigating, e.g. to open up a modal.
+
+Please note that **it is not a recommended ux pattern**.
+
+To do this add the `preventDefault` attribute along with some id, after the basic markdown link definition of the link you want to make clickable and then use the `onElementClick` prop to handle the click event:
+
+<Example Component={ClickableLinkExample}/>

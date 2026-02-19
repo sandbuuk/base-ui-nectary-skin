@@ -56,6 +56,7 @@ const config: Configuration = {
       react: path.resolve('./node_modules/react/'),
       'react-dom': path.resolve('./node_modules/react-dom/'),
       '@nectary/shared': path.resolve('../../shared/index.ts'),
+      '@nectary/react': path.resolve('../../react-components/src/index.ts'),
     },
   },
   module: {
@@ -159,6 +160,17 @@ const config: Configuration = {
             options: {
               modules: false,
               sourceMap: false,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  'tailwindcss',
+                  'autoprefixer',
+                ],
+              },
             },
           },
         ],

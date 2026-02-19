@@ -1,0 +1,20 @@
+import { Meta, StoryObj } from '@storybook/react';
+import { InlineAlert } from './InlineAlert';
+
+declare const meta: Meta<typeof InlineAlert>;
+export default meta;
+type Story = StoryObj<typeof InlineAlert>;
+export declare const Default: Story;
+export declare const Info: Story;
+export declare const Success: Story;
+export declare const Warning: Story;
+export declare const Error: Story;
+export declare const AllTypes: Story;
+export declare const WithoutCaption: Story;
+export declare const LongText: Story;
+export declare const WithCustomIcon: Story;
+export declare const WithAction: Story;
+export declare const WithMultipleActions: Story;
+export declare const WithClose: Story;
+export declare const WithActionAndClose: Story;
+export declare const WithChildren: Story;

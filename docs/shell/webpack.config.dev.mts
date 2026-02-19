@@ -6,7 +6,7 @@ import webpack from 'webpack'
 import type { TransformOptions as TBabelOptions } from '@babel/core'
 import type { Configuration } from 'webpack'
 
-const PORT = 5000
+const PORT = 5002
 
 const babelOptions: TBabelOptions = {
   babelrc: false,

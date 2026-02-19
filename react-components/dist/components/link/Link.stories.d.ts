@@ -1,0 +1,20 @@
+import { Link } from './Link';
+import { Meta, StoryObj } from '@storybook/react';
+
+declare const meta: Meta<typeof Link>;
+export default meta;
+type Story = StoryObj<typeof Link>;
+export declare const Default: Story;
+export declare const WithChildren: Story;
+export declare const External: Story;
+export declare const Standalone: Story;
+export declare const StandaloneExternal: Story;
+export declare const Disabled: Story;
+export declare const DisabledExternal: Story;
+export declare const DisabledStandalone: Story;
+export declare const InParagraph: Story;
+export declare const ExternalInParagraph: Story;
+export declare const AllVariants: Story;
+export declare const SPANavigation: Story;
+export declare const WithCustomClassName: Story;
+export declare const InteractiveStates: Story;

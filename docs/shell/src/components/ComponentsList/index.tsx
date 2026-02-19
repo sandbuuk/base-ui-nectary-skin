@@ -86,6 +86,7 @@ export const ComponentsList: FC = () => {
   const componentsRef = useRef<TResource<TSidebarItem[]>>()
   const pagesRef = useRef<TResource<TSidebarItem[]>>()
   const compositionsRef = useRef<TResource<TSidebarItem[] | null>>()
+  const reactComponentsRef = useRef<TResource<TSidebarItem[] | null>>()
 
   if (versionValueRef.current !== versionValue) {
     const promise = Reflect.get(versions, versionValue).bootstrap()
@@ -94,11 +95,13 @@ export const ComponentsList: FC = () => {
     const components: Promise<TSidebarItem[]> = promise.then(({ getComponentsRoutes }: any) => getComponentsRoutes())
     const pages: Promise<TSidebarItem[]> = promise.then(({ getPagesRoutes }: any) => getPagesRoutes())
     const compositions: Promise<TSidebarItem[] | null> = promise.then((mod: any) => mod.getCompositionsRoutes?.() ?? null)
+    const reactComponents: Promise<TSidebarItem[] | null> = promise.then((mod: any) => mod.getReactComponentsRoutes?.() ?? null)
 
     labComponentsRef.current = createResource(labComponents)
     componentsRef.current = createResource(components)
     pagesRef.current = createResource(pages)
     compositionsRef.current = createResource(compositions)
+    reactComponentsRef.current = createResource(reactComponents)
   }
 
   versionValueRef.current = versionValue
@@ -129,6 +132,10 @@ export const ComponentsList: FC = () => {
           </NavigationList>
         </Suspense>
       </NavigationGroup>
+
+      <Suspense fallback={null}>
+        <ResourceNavigationGroup text="React Components" resource={reactComponentsRef.current!}/>
+      </Suspense>
     </>
   )
 }

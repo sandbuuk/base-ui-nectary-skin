@@ -1,0 +1,32 @@
+import { Example } from '~/components/Example'
+import { OrientationExample } from './examples/Orientation.tsx?example'
+import { TypeExample } from './examples/Type.tsx?example'
+import { TextAlignExample } from './examples/TextAlign.tsx?example'
+import { ControlledExample } from './examples/Controlled.tsx?example'
+
+# Examples
+
+Tooltip shows contextual help about specific target component when user hovers on them.
+
+## Orientation
+
+Orientation – where it *points to* from origin.
+
+See API section for all the possible values.
+
+<Example Component={OrientationExample}/>
+
+## Type
+
+<Example Component={TypeExample}/>
+
+## Text Align
+
+<Example Component={TextAlignExample}/>
+
+## Controlled Mode
+
+In addition to the default mode, you can use this component in controlled mode by using the `isOpen` prop.
+When it is set, the tooltip will no longer open or close based on mouse events, but will consider the value of this prop.
+
+<Example Component={ControlledExample}/>

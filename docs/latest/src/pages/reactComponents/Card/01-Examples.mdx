@@ -1,0 +1,55 @@
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import { ComplexExample } from './examples/Complex.tsx?example'
+import { TitlesExample } from './examples/Titles.tsx?example'
+import { ClickableExample } from './examples/Clickable.tsx?example'
+import { SelectedExample } from './examples/Selected.tsx?example'
+import { DisabledExample } from './examples/Disabled.tsx?example'
+import { OtherExample } from './examples/Other.tsx?example'
+
+# Examples
+
+Cards are versatile containers that group related information into organized, scannable sections.
+
+## Simple Card
+
+A simple card using the `title` and `content` props.
+
+<Example Component={SimpleExample}/>
+
+## Complex
+
+A complete card utilizing all four available props: `media`, `title`, `content`, and `footer`.
+
+<Example Component={ComplexExample}/>
+
+## Title Variants
+
+The `CardTitle` component supports an optional `icon` prop to display icons alongside titles. The icon placement can be controlled with the `orientation` prop:
+
+* `orientation="horizontal"` (default): Icon appears beside the title
+* `orientation="vertical"`: Icon appears above the title
+
+<Example Component={TitlesExample}/>
+
+## Clickable
+
+A clickable card provides visual feedback through hover and active state styles. The card automatically becomes clickable when an `onClick` handler is provided. You can also explicitly set the `clickable` prop.
+
+<Example Component={ClickableExample}/>
+
+## Selected
+
+Use the `selected` prop to indicate an active or chosen card state. Here we have created a wrapper component that manages the selected state of the cards.
+
+<Example Component={SelectedExample}/>
+
+## Disabled
+
+Use the `disabled` prop to indicate an inactive or unavailable card state. Disabled cards will not respond to click events.
+
+<Example Component={DisabledExample}/>
+
+## Other
+
+<Example Component={OtherExample}/>

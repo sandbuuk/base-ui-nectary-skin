@@ -23,6 +23,9 @@
       ],
       "@nectary/shared": [
         "../../shared/index.ts"
+      ],
+      "@nectary/react": [
+        "../../react-components/src/index.ts"
       ]
     },
   },

@@ -1,0 +1,33 @@
+import { Example } from '~/components/Example'
+import { SimpleExample } from './examples/Simple.tsx?example'
+import { DisabledExample } from './examples/Disabled.tsx?example'
+import { LabeledExample } from './examples/Labeled.tsx?example'
+import { SmallExample } from './examples/Small.tsx?example'
+
+# Examples
+
+A toggle is an input element that allow the user to switch between two possible states. Switches always provides an immediate change in the UI.
+
+## Simple
+
+<Example Component={SimpleExample}/>
+
+## Labeled
+
+The labeled toggle component is a good choice when the user needs to toggle between two mutually exclusive options, and when it is important to clearly communicate the purpose and current state of the toggle to the user. It is a simple and intuitive way to allow the user to enable or disable a feature or setting within the application.
+
+<Example Component={LabeledExample}/>
+
+## Size
+
+You can then use the appropriate size for the toggle based on the context and available space in the user interface. The toggle component will adjust its layout and style to match the selected size.
+
+It is important to consider the usability and readability of the toggle when selecting the size. The toggle should be large enough to be easily interactive, but not so large as to take up unnecessary space or draw too much attention away from other elements.
+
+<Example Component={SmallExample}/>
+
+## Disabled
+
+It is important to consider the context in which the toggle is used when deciding whether to enable or disable it. The toggle should be disabled if the feature or setting it controls is not currently available or applicable, or if the user does not have the necessary permissions to change it.
+
+<Example Component={DisabledExample}/>

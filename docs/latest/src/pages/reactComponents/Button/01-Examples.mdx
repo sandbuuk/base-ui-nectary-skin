@@ -1,0 +1,101 @@
+import { Example } from '~/components/Example'
+import { TypePrimaryExample } from './examples/TypePrimary.tsx?example'
+import { TypeSecondaryExample } from './examples/TypeSecondary.tsx?example'
+import { TypeSubtlePrimaryExample } from './examples/TypeSubtlePrimary.tsx?example'
+import { TypeSubtleSecondaryExample } from './examples/TypeSubtleSecondary.tsx?example'
+import { TypeCtaPrimaryExample } from './examples/TypeCtaPrimary.tsx?example'
+import { TypeCtaSecondaryExample } from './examples/TypeCtaSecondary.tsx?example'
+import { TypeDestructiveExample } from './examples/TypeDestructive.tsx?example'
+import { RightIconExample } from './examples/RightIcon.tsx?example'
+import { SpinnerExample } from './examples/Spinner.tsx?example'
+import { SpinnerOnClickExample } from './examples/SpinnerOnClick.tsx?example'
+import { SizeExample } from './examples/Size.tsx?example'
+import { DisabledExample } from './examples/Disabled.tsx?example'
+import { ToggledExample } from './examples/Toggled.tsx?example'
+import { IconButtonExample } from './examples/IconButton.tsx?example'
+
+# Examples
+
+The Button component is a React wrapper for user interactions.
+
+## Variant
+
+### Primary
+
+A primary button is used to initiate the most important action on a page or screen.
+
+<Example Component={TypePrimaryExample}/>
+
+### Secondary
+
+A secondary button is always used in combination with a primary button for less important actions.
+
+<Example Component={TypeSecondaryExample}/>
+
+### CTA Primary
+
+A call to action (CTA) button is used to encourage the user to take a specific action.
+
+<Example Component={TypeCtaPrimaryExample}/>
+
+### CTA Secondary
+
+The secondary CTA button is always used in combination with a primary CTA button.
+
+<Example Component={TypeCtaSecondaryExample}/>
+
+### Subtle Primary
+
+<Example Component={TypeSubtlePrimaryExample}/>
+
+### Subtle Secondary
+
+<Example Component={TypeSubtleSecondaryExample}/>
+
+### Destructive
+
+A destructive button is used to warn the user about a potentially dangerous or destructive action.
+
+<Example Component={TypeDestructiveExample}/>
+
+## Disabled
+
+Disabled buttons indicate that a certain action is not currently available.
+
+<Example Component={DisabledExample}/>
+
+## Toggled
+
+A button can be in a **toggled** state using the `toggled` prop. This is only applicable for subtle variants.
+
+<Example Component={ToggledExample}/>
+
+## Size
+
+Button component has a `size` prop that can be used to change the size of the button.
+
+<Example Component={SizeExample}/>
+
+## Loading
+
+A button with a loading state indicates that an action is currently being performed.
+
+<Example Component={SpinnerExample}/>
+
+## Loading on Click
+
+Here is a use case of how to present a loading state to the user when a button is clicked.
+
+<Example Component={SpinnerOnClickExample}/>
+
+## Right Icon
+
+Button can have an additional icon on the right using the `rightIcon` prop.
+
+<Example Component={RightIconExample}/>
+
+## Icon Button
+
+To create an IconButton, use the `icon` prop and omit the text content.
+
+<Example Component={IconButtonExample}/>

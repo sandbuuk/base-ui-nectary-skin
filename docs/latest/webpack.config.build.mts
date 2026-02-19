@@ -66,14 +66,15 @@ const config: TWebpackConfig = (environment) => {
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.md', '.mdx'],
-      alias: {
-        '~': path.resolve('./src/'),
-        '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
-        'core-js': path.resolve('./node_modules/core-js/'),
-        react: path.resolve('./node_modules/react/'),
-        'react-dom': path.resolve('./node_modules/react-dom'),
-        '@nectary/shared': path.resolve('../../shared/index.ts'),
-      },
+    alias: {
+      '~': path.resolve('./src/'),
+      '@mdx-js/react': path.resolve('./node_modules/@mdx-js/react/'),
+      'core-js': path.resolve('./node_modules/core-js/'),
+      react: path.resolve('./node_modules/react/'),
+      'react-dom': path.resolve('./node_modules/react-dom'),
+      '@nectary/shared': path.resolve('../../shared/index.ts'),
+      '@nectary/react': path.resolve('../../react-components/src/index.ts'),
+    },
     },
     devtool: 'source-map',
     module: {
@@ -154,7 +155,21 @@ const config: TWebpackConfig = (environment) => {
         {
           test: /\.css$/,
           resourceQuery: '',
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                postcssOptions: {
+                  plugins: [
+                    'tailwindcss',
+                    'autoprefixer',
+                  ],
+                },
+              },
+            },
+          ],
         },
         {
           test: /\.css$/i,

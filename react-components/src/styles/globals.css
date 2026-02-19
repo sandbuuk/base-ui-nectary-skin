@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles for the theme container */
+.nectary-theme-base {
+  font-family: var(--sinch-ref-typography-font-family-main), system-ui, sans-serif;
+  color: var(--sinch-sys-color-text-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* Ensure body inherits theme font when it has the theme class */
+body.nectary-theme-base {
+  margin: 0;
+  padding: 0;
+}

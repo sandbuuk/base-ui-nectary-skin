@@ -16,6 +16,13 @@ export const componentReq = import.meta.webpackContext!('./pages/components', {
   chunkName: REQ_CHUNK_NAME,
 })
 
+export const reactComponentsReq = import.meta.webpackContext!('./pages/reactComponents', {
+  regExp: /^\.\/[^_]+\/.*\.mdx?$/,
+  recursive: true,
+  mode: 'lazy',
+  chunkName: REQ_CHUNK_NAME,
+})
+
 export const pagesReq = import.meta.webpackContext!('./pages/_/', {
   regExp: /^\.\/\d{2}-[^/]+\/index.tsx?$/,
   recursive: true,
@@ -76,6 +83,19 @@ const compositionsRoutes = compositionsReq.keys().map((key) => {
   return {
     key,
     name: printedName,
+    route,
+    tab,
+  }
+})
+
+const reactComponentsRoutes = reactComponentsReq.keys().map((key) => {
+  const name = key.replace(/^\.\/(.+?)\/.+$/, '$1')
+  const tab = key.replace(/^\.\/.+\/\d{2}-(.+).mdx?$/, '$1')
+  const route = `/react-components/${name.toLowerCase()}/${tab.toLowerCase()}`
+
+  return {
+    key,
+    name,
     route,
     tab,
   }
@@ -155,6 +175,46 @@ export const getCompositionsRouteTitle = (route: string) => {
   const name = compositionsRouteNameMap[route] ?? null
 
   return name
+}
+
+const reactComponentsTabs = reactComponentsRoutes.reduce((res, { name, tab, route }) => {
+  if (!Reflect.has(res, name)) {
+    res[name] = []
+  }
+
+  res[name].push({
+    value: tab,
+    text: printTabName(tab),
+    route,
+  })
+
+  return res
+}, {} as Record<string, TRouteTab[]>)
+
+const reactComponentsRouteNameMap = reactComponentsRoutes.reduce((res, { route, name }) => {
+  res[route] = name
+
+  return res
+}, {} as Record<string, string | undefined>)
+
+export const getReactComponentsRouteTabs = (route: string) => {
+  const name = reactComponentsRouteNameMap[route] ?? null
+
+  if (name === null) {
+    return null
+  }
+
+  return reactComponentsTabs[name] ?? null
+}
+
+export const getReactComponentsRouteTitle = (route: string) => {
+  const name = reactComponentsRouteNameMap[route] ?? null
+
+  return name
+}
+
+export const getReactComponentsRoutes = () => {
+  return reactComponentsRoutes
 }
 
 export const getLabsComponentsRoutes = () => {
