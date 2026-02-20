@@ -434,7 +434,7 @@ export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
                 isExpanded && 'rotate-180'
               )}
             >
-              <Icon name="fa-chevron-down" />
+              <Icon name="fa-chevron-down" iconsVersion="2" />
             </span>
           </button>
 

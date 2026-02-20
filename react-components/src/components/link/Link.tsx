@@ -180,6 +180,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             <span>&nbsp;</span>
             <Icon
               name="fa-arrow-up-right"
+              iconsVersion="2"
               className="inline-block align-[-0.4em] [--sinch-global-size-icon:1.5em]"
             />
           </>
@@ -191,6 +192,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             <span>&nbsp;</span>
             <Icon
               name="fa-arrow-right"
+              iconsVersion="2"
               className="inline-block align-[-0.4em] [--sinch-global-size-icon:1.5em]"
             />
           </>
@@ -200,6 +202,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
         {!standalone && external && (
           <Icon
             name="fa-arrow-up-right"
+            iconsVersion="2"
             className="inline-block ml-1 align-[-0.2em] h-[1em] [--sinch-global-size-icon:1em]"
           />
         )}
