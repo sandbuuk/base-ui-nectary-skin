@@ -1,0 +1,46 @@
+.root {
+  width: 100%;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--sinch-spacing-3) 0;
+  font: var(--sinch-font-label-m);
+  color: var(--sinch-sys-color-text-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: color 150ms ease;
+  user-select: none;
+}
+
+.trigger:hover {
+  color: var(--sinch-color-action-primary, #006063);
+}
+
+.trigger:focus-visible {
+  box-shadow: 0 0 0 2px var(--sinch-sys-color-border-focus);
+  border-radius: var(--sinch-radius-s);
+}
+
+.trigger[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.panel {
+  overflow: hidden;
+  transition: height 200ms ease;
+}
+
+.panel[data-open] {
+  /* Open state handled by Base UI */
+}
+
+.panel[hidden] {
+  display: none;
+}

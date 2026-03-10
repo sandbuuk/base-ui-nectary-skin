@@ -1,0 +1,18 @@
+.root {
+  display: block;
+  background: var(--sinch-sys-color-surface-secondary, #F7F9FA);
+  border-radius: var(--sinch-radius-s);
+  animation: shimmer 1.5s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.circle {
+  border-radius: var(--sinch-radius-full);
+}
+
+@keyframes shimmer {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}

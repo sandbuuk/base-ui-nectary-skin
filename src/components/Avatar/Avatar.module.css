@@ -1,0 +1,51 @@
+.root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--sinch-radius-full);
+  background: var(--sinch-sys-color-surface-secondary);
+  color: var(--sinch-sys-color-text-primary);
+  overflow: hidden;
+  flex-shrink: 0;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.s { width: 24px; height: 24px; font-size: 10px; }
+.m { width: 32px; height: 32px; font-size: 12px; }
+.l { width: 40px; height: 40px; font-size: 14px; }
+
+.initials {
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fallback {
+  color: var(--sinch-sys-color-icon-secondary);
+}
+
+/* Status indicator */
+.status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--sinch-radius-full);
+  border: 2px solid var(--sinch-sys-color-surface-primary-default, #fff);
+}
+
+.s .status { width: 8px; height: 8px; border-width: 1.5px; }
+
+.statusOnline { background: var(--sinch-sys-color-status-success, #53BD69); }
+.statusBusy { background: var(--sinch-sys-color-status-error, #D63F3F); }
+.statusAway { background: var(--sinch-sys-color-status-warning, #F58B4E); }
+.statusOffline { background: var(--sinch-sys-color-border-strong, #9EA9B0); }

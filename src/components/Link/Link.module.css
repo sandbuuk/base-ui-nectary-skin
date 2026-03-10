@@ -1,0 +1,44 @@
+.root {
+  color: var(--sinch-color-action-primary, #006063);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  outline: none;
+  transition: color 150ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.root:hover {
+  color: var(--sinch-color-action-primary-hover, #007874);
+}
+
+.root:focus-visible {
+  outline: 2px solid var(--sinch-sys-color-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--sinch-radius-xs);
+}
+
+.standalone {
+  display: flex;
+  text-decoration: none;
+  font: var(--sinch-font-label-m);
+  font-weight: 600;
+}
+
+.standalone:hover {
+  text-decoration: underline;
+}
+
+.disabled {
+  color: var(--sinch-sys-color-text-disabled);
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.externalIcon {
+  font-size: 0.85em;
+  flex-shrink: 0;
+}

@@ -1,0 +1,53 @@
+.root {
+  display: inline-flex;
+  gap: 0;
+}
+
+.horizontal {
+  flex-direction: row;
+}
+
+.horizontal > :first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.horizontal > :last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.horizontal > :not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.horizontal > :not(:first-child) {
+  margin-left: -1px;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.vertical > :first-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.vertical > :last-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.vertical > :not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.vertical > :not(:first-child) {
+  margin-top: -1px;
+}
+
+.root[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}

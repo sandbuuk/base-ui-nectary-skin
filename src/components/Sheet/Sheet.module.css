@@ -1,0 +1,66 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--sinch-sys-color-surface-overlay, rgba(0, 0, 0, 0.4));
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.backdrop[data-open] {
+  opacity: 1;
+}
+
+@starting-style {
+  .backdrop[data-open] {
+    opacity: 0;
+  }
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--sinch-sys-color-surface-primary-default);
+  z-index: 1001;
+  width: min(400px, 85vw);
+  max-width: 85vw;
+  overflow-y: auto;
+  padding: var(--sinch-spacing-6);
+  outline: none;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+.right {
+  right: 0;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+}
+
+.right[data-open] {
+  transform: translateX(0);
+}
+
+@starting-style {
+  .right[data-open] {
+    transform: translateX(100%);
+  }
+}
+
+.left {
+  left: 0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(-100%);
+}
+
+.left[data-open] {
+  transform: translateX(0);
+}
+
+@starting-style {
+  .left[data-open] {
+    transform: translateX(-100%);
+  }
+}

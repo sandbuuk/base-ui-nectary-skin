@@ -1,0 +1,33 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dividers > :not(:last-child) {
+  border-bottom: 1px solid var(--sinch-sys-color-border-subtle, #DCE2E5);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  transition: background-color 150ms ease;
+}
+
+.itemClickable {
+  cursor: pointer;
+}
+
+.itemClickable:hover:not([data-disabled]) {
+  background: var(--sinch-sys-color-surface-primary-hover);
+}
+
+.itemSelected {
+  background: var(--sinch-sys-color-surface-primary-hover);
+}
+
+.itemDisabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

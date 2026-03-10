@@ -1,0 +1,38 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font: var(--sinch-font-label-s);
+}
+
+.separator {
+  color: var(--sinch-sys-color-text-disabled, #9EA9B0);
+  user-select: none;
+}
+
+.item {
+  color: var(--sinch-sys-color-text-secondary);
+  text-decoration: none;
+  transition: color 150ms ease;
+  white-space: nowrap;
+}
+
+.itemLink {
+  cursor: pointer;
+}
+
+.itemLink:hover {
+  color: var(--sinch-color-action-primary, #006063);
+  text-decoration: underline;
+}
+
+.itemLink:focus-visible {
+  outline: 2px solid var(--sinch-sys-color-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--sinch-radius-xs);
+}
+
+.itemCurrent {
+  color: var(--sinch-sys-color-text-primary);
+  font-weight: 600;
+}

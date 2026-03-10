@@ -1,0 +1,17 @@
+.root {
+  color: var(--sinch-sys-color-text-primary);
+  margin: 0;
+}
+
+.m { font: var(--sinch-font-body-m); }
+.s { font: var(--sinch-font-body-s); }
+.xs { font: var(--sinch-font-label-xs); }
+.xxs { font: var(--sinch-font-label-xs); font-size: 10px; }
+
+.emphasized { font-weight: 600; }
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

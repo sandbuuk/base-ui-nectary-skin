@@ -1,0 +1,32 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sinch-sys-color-icon-secondary);
+  cursor: help;
+  border: none;
+  background: transparent;
+  padding: 0;
+  outline: none;
+  border-radius: var(--sinch-radius-full);
+  transition: color 150ms ease;
+}
+
+.trigger:hover {
+  color: var(--sinch-sys-color-text-primary);
+}
+
+.trigger:focus-visible {
+  box-shadow: 0 0 0 2px var(--sinch-sys-color-border-focus);
+}
+
+.popup {
+  background: var(--sinch-sys-color-text-primary, #1A2126);
+  color: #fff;
+  font: var(--sinch-font-body-s);
+  padding: 6px 10px;
+  border-radius: var(--sinch-radius-s);
+  max-width: 240px;
+  z-index: 1100;
+  box-shadow: var(--sinch-shadow-2, 1px 4px 8px #0A273D1A);
+}

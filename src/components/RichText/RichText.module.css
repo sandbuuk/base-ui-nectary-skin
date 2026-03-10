@@ -1,0 +1,122 @@
+.root {
+  font: var(--sinch-font-body-m);
+  color: var(--sinch-sys-color-text-primary);
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.root h1,
+.root h2,
+.root h3,
+.root h4,
+.root h5,
+.root h6 {
+  color: var(--sinch-sys-color-text-primary);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.root h1 { font: var(--sinch-font-heading-xl); }
+.root h2 { font: var(--sinch-font-heading-l); }
+.root h3 { font: var(--sinch-font-heading-m); }
+.root h4 { font: var(--sinch-font-heading-s); }
+
+.root p {
+  margin: 0 0 12px;
+}
+
+.root p:last-child {
+  margin-bottom: 0;
+}
+
+.root a {
+  color: var(--sinch-sys-color-text-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.root a:hover {
+  color: var(--sinch-sys-color-text-link-hover, var(--sinch-sys-color-text-link));
+}
+
+.root strong,
+.root b {
+  font-weight: 600;
+}
+
+.root em,
+.root i {
+  font-style: italic;
+}
+
+.root ul,
+.root ol {
+  margin: 0 0 12px;
+  padding-left: 24px;
+}
+
+.root li {
+  margin-bottom: 4px;
+}
+
+.root blockquote {
+  margin: 0 0 12px;
+  padding: 8px 16px;
+  border-left: 3px solid var(--sinch-sys-color-border-subtle, #DCE2E5);
+  color: var(--sinch-sys-color-text-secondary);
+}
+
+.root code {
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+  font-size: 0.875em;
+  background: var(--sinch-sys-color-surface-secondary-default, #F2F5F7);
+  padding: 2px 6px;
+  border-radius: var(--sinch-radius-xs, 4px);
+  border: 1px solid var(--sinch-sys-color-border-subtle, #DCE2E5);
+}
+
+.root pre {
+  margin: 0 0 12px;
+  padding: 12px 16px;
+  background: var(--sinch-sys-color-surface-secondary-default, #F2F5F7);
+  border-radius: var(--sinch-radius-m, 8px);
+  overflow-x: auto;
+}
+
+.root pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.root hr {
+  border: none;
+  border-top: 1px solid var(--sinch-sys-color-border-subtle, #DCE2E5);
+  margin: 16px 0;
+}
+
+.root img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--sinch-radius-m, 8px);
+}
+
+.root table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 12px;
+}
+
+.root th,
+.root td {
+  padding: 8px 12px;
+  border: 1px solid var(--sinch-sys-color-border-subtle, #DCE2E5);
+  text-align: left;
+}
+
+.root th {
+  font-weight: 600;
+  background: var(--sinch-sys-color-surface-secondary-default, #F2F5F7);
+}

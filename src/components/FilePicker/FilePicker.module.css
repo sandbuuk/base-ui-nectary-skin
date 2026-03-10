@@ -1,0 +1,42 @@
+.root {
+  display: inline-block;
+  position: relative;
+}
+
+.hiddenInput {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.defaultTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sinch-spacing-2);
+  height: 40px;
+  padding: 0 var(--sinch-spacing-4);
+  font: var(--sinch-font-label-m);
+  color: var(--sinch-sys-color-text-primary);
+  background: transparent;
+  border: 1px solid var(--sinch-sys-color-border-default);
+  border-radius: var(--sinch-radius-m);
+  cursor: pointer;
+  outline: none;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.defaultTrigger:hover:not(:disabled) {
+  background: var(--sinch-sys-color-surface-primary-hover);
+}
+
+.defaultTrigger:focus-visible {
+  box-shadow: 0 0 0 2px var(--sinch-sys-color-border-focus);
+}
+
+.defaultTrigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

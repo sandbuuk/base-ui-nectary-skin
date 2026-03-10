@@ -1,0 +1,22 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sinch-spacing-1);
+  border-radius: var(--sinch-radius-full);
+  background: var(--sinch-sys-color-surface-secondary);
+  color: var(--sinch-sys-color-text-primary);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.m {
+  height: 32px;
+  padding: 0 12px;
+  font: var(--sinch-font-label-s);
+}
+
+.s {
+  height: 24px;
+  padding: 0 8px;
+  font: var(--sinch-font-label-xs);
+}

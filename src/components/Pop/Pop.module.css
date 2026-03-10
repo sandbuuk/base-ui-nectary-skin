@@ -1,0 +1,9 @@
+.popup {
+  background: var(--sinch-sys-color-surface-primary-default);
+  border: 1px solid var(--sinch-sys-color-border-subtle, #DCE2E5);
+  border-radius: var(--sinch-radius-m, 8px);
+  box-shadow: var(--sinch-shadow-2, 1px 4px 8px #0A273D1A);
+  padding: 8px;
+  z-index: 1000;
+  outline: none;
+}

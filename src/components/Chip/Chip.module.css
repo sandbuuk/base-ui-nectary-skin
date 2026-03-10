@@ -1,0 +1,53 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sinch-spacing-1);
+  border-radius: var(--sinch-radius-full);
+  background: var(--sinch-sys-color-surface-secondary);
+  color: var(--sinch-sys-color-text-primary);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  font-weight: 500;
+  transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.m {
+  height: 44px;
+  padding: 0 12px 0 16px;
+  font: var(--sinch-font-label-s);
+}
+
+.s {
+  height: 32px;
+  padding: 0 8px 0 12px;
+  font: var(--sinch-font-label-xs);
+}
+
+.root:hover:not(:disabled) {
+  background: var(--sinch-sys-color-surface-primary-hover);
+}
+
+.root:focus-visible {
+  box-shadow: 0 0 0 2px var(--sinch-sys-color-border-focus);
+}
+
+.root:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.deleteIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--sinch-sys-color-icon-secondary);
+  border-radius: var(--sinch-radius-full);
+  transition: color 150ms ease;
+}
+
+.deleteIcon:hover {
+  color: var(--sinch-sys-color-text-primary);
+}

@@ -1,0 +1,34 @@
+.root {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.icon {
+  display: flex;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.caption {
+  font: var(--sinch-font-label-s);
+  font-weight: 600;
+  color: var(--sinch-sys-color-text-primary);
+}
+
+.text {
+  font: var(--sinch-font-body-s);
+  color: var(--sinch-sys-color-text-secondary);
+}
+
+.info .icon { color: var(--sinch-sys-color-status-info, #3089F0); }
+.warning .icon { color: var(--sinch-sys-color-status-warning, #F58B4E); }
+.error .icon { color: var(--sinch-sys-color-status-error, #D63F3F); }
+.success .icon { color: var(--sinch-sys-color-status-success, #53BD69); }

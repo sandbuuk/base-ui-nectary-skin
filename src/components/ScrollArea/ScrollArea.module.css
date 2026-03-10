@@ -1,0 +1,67 @@
+.root {
+  position: relative;
+  overflow: hidden;
+}
+
+.viewport {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar {
+  display: flex;
+  touch-action: none;
+  user-select: none;
+  transition: opacity 150ms ease;
+  opacity: 0;
+}
+
+.scrollbar:hover {
+  opacity: 1;
+}
+
+.scrollbar[data-scrolling] {
+  opacity: 1;
+}
+
+.scrollbar[data-hovering] {
+  opacity: 1;
+}
+
+.scrollbar[data-orientation='vertical'] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 8px;
+  padding: 2px;
+}
+
+.scrollbar[data-orientation='horizontal'] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  padding: 2px;
+  flex-direction: row;
+}
+
+.thumb {
+  flex: 1;
+  background: var(--sinch-sys-color-border-strong, #9EA9B0);
+  border-radius: var(--sinch-radius-full);
+  opacity: 0.6;
+  transition: opacity 150ms ease;
+}
+
+.thumb:hover {
+  opacity: 0.9;
+}

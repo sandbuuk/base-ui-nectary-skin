@@ -1,0 +1,56 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font: var(--sinch-font-label-s);
+  color: var(--sinch-sys-color-text-primary);
+  background: transparent;
+  border: none;
+  border-radius: var(--sinch-radius-s);
+  cursor: pointer;
+  outline: none;
+  transition: background-color 150ms ease, color 150ms ease;
+  user-select: none;
+}
+
+.button:hover:not(:disabled):not(.active) {
+  background: var(--sinch-sys-color-surface-primary-hover);
+}
+
+.button:focus-visible {
+  box-shadow: 0 0 0 2px var(--sinch-sys-color-border-focus);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.active {
+  background: var(--sinch-color-action-primary, #006063);
+  color: var(--sinch-color-on-action-primary, #fff);
+}
+
+.active:hover {
+  background: var(--sinch-color-action-primary-hover, #007874);
+}
+
+.ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font: var(--sinch-font-label-s);
+  color: var(--sinch-sys-color-text-secondary);
+  user-select: none;
+}

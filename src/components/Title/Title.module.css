@@ -1,0 +1,17 @@
+.root {
+  color: var(--sinch-sys-color-text-primary);
+  margin: 0;
+  font-weight: 600;
+}
+
+.xl { font: var(--sinch-font-desktop-title-xl, 600 32px/40px var(--sinch-sys-font-family)); }
+.l { font: var(--sinch-font-desktop-title-l, 600 24px/32px var(--sinch-sys-font-family)); }
+.m { font: var(--sinch-font-desktop-title-m, 600 20px/28px var(--sinch-sys-font-family)); }
+.s { font: var(--sinch-font-desktop-title-s, 600 16px/24px var(--sinch-sys-font-family)); }
+.xs { font: var(--sinch-font-desktop-title-xs, 600 14px/20px var(--sinch-sys-font-family)); }
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

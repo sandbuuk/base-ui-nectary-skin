@@ -1,0 +1,44 @@
+.root {
+  width: 100%;
+  border-collapse: collapse;
+  font: var(--sinch-font-body-s);
+  color: var(--sinch-sys-color-text-primary);
+}
+
+.head {
+  border-bottom: 2px solid var(--sinch-sys-color-border-default, #B7C1C7);
+}
+
+.headCell {
+  font: var(--sinch-font-label-s);
+  font-weight: 600;
+  color: var(--sinch-sys-color-text-secondary);
+  padding: 8px 12px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.row {
+  border-bottom: 1px solid var(--sinch-sys-color-border-subtle, #DCE2E5);
+  transition: background-color 150ms ease;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.rowClickable {
+  cursor: pointer;
+}
+
+.rowClickable:hover {
+  background: var(--sinch-sys-color-surface-primary-hover);
+}
+
+.rowSelected {
+  background: var(--sinch-sys-color-surface-primary-hover);
+}
+
+.cell {
+  padding: 12px;
+}

@@ -1,0 +1,54 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sinch-spacing-1);
+  width: 100%;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: var(--sinch-spacing-2);
+  min-height: 24px;
+}
+
+.label {
+  font: var(--sinch-font-label-s);
+  color: var(--sinch-sys-color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.optional {
+  font: var(--sinch-font-label-xs);
+  color: var(--sinch-sys-color-text-secondary);
+  white-space: nowrap;
+}
+
+.bottom {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sinch-spacing-2);
+}
+
+.helperText {
+  font: var(--sinch-font-label-xs);
+  color: var(--sinch-sys-color-text-secondary);
+  flex: 1;
+}
+
+.errorText {
+  font: var(--sinch-font-label-xs);
+  color: var(--sinch-sys-color-status-error);
+  flex: 1;
+}
+
+/* Disabled */
+.root[data-disabled] .label {
+  color: var(--sinch-sys-color-text-disabled);
+}
+
+.root[data-disabled] .helperText {
+  color: var(--sinch-sys-color-text-disabled);
+}
