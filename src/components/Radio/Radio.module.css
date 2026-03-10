@@ -1,0 +1,105 @@
+.group {
+  display: flex;
+  flex-direction: var(--sinch-comp-radio-direction, column);
+  gap: var(--sinch-comp-radio-gap, 8px);
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sinch-spacing-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--sinch-comp-radio-color-default-border-initial, var(--sinch-sys-color-border-strong));
+  border-radius: var(--sinch-radius-full);
+  background: var(--sinch-comp-radio-color-default-background-initial, var(--sinch-sys-color-surface-primary-default));
+  flex-shrink: 0;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.root:hover:not([data-disabled]) .indicator {
+  background: var(--sinch-comp-radio-color-default-background-hover);
+  border-color: var(--sinch-comp-radio-color-default-border-hover);
+}
+
+.root:active:not([data-disabled]) .indicator {
+  background: var(--sinch-comp-radio-color-default-background-active);
+  border-color: var(--sinch-comp-radio-color-default-border-active);
+}
+
+/* Checked state */
+.root[data-checked] .indicator {
+  border-color: var(--sinch-comp-radio-color-checked-border-initial, var(--sinch-sys-color-border-strong));
+}
+
+.root[data-checked]:hover:not([data-disabled]) .indicator {
+  border-color: var(--sinch-comp-radio-color-checked-border-hover);
+}
+
+.knob {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--sinch-radius-full);
+  background: transparent;
+  transition: background-color 150ms ease;
+}
+
+.root[data-checked] .knob {
+  background: var(--sinch-comp-radio-color-checked-knob-initial, var(--sinch-sys-color-primary-default));
+}
+
+.root[data-checked]:hover:not([data-disabled]) .knob {
+  background: var(--sinch-comp-radio-color-checked-knob-hover);
+}
+
+.root[data-checked]:active:not([data-disabled]) .knob {
+  background: var(--sinch-comp-radio-color-checked-knob-active);
+}
+
+/* Focus ring */
+.root:focus-visible .indicator {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--sinch-comp-radio-color-default-outline-focus, var(--sinch-sys-color-border-focus));
+}
+
+/* Label */
+.label {
+  font: var(--sinch-comp-radio-font-label, var(--sinch-font-body-m));
+  color: var(--sinch-comp-radio-color-default-label-initial, var(--sinch-sys-color-text-default));
+}
+
+/* Disabled */
+.root[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.root[data-disabled] .indicator {
+  border-color: var(--sinch-comp-radio-color-disabled-border-initial);
+  background: var(--sinch-comp-radio-color-disabled-background-initial);
+}
+
+.root[data-disabled] .label {
+  color: var(--sinch-comp-radio-color-disabled-label-initial);
+}
+
+.root[data-disabled][data-checked] .indicator {
+  border-color: var(--sinch-comp-radio-color-checked-disabled-border-initial);
+}
+
+.root[data-disabled][data-checked] .knob {
+  background: var(--sinch-comp-radio-color-checked-disabled-knob-initial);
+}
+
+.root[data-disabled][data-checked] .label {
+  color: var(--sinch-comp-radio-color-checked-disabled-label-initial);
+}

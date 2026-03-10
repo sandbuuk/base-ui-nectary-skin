@@ -1,0 +1,61 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--sinch-sys-color-surface-overlay, rgba(0, 0, 0, 0.4));
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.backdrop[data-open] {
+  opacity: 1;
+}
+
+@starting-style {
+  .backdrop[data-open] {
+    opacity: 0;
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: var(--sinch-comp-dialog-color-default-background-initial, var(--sinch-sys-color-surface-primary-default));
+  border-radius: var(--sinch-comp-dialog-shape-radius, var(--sinch-radius-l));
+  box-shadow: var(--sinch-comp-dialog-shadow);
+  padding: var(--sinch-spacing-6);
+  z-index: 1001;
+  min-width: 400px;
+  max-width: min(90vw, 560px);
+  max-height: 85vh;
+  overflow-y: auto;
+  opacity: 0;
+  outline: none;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.popup[data-open] {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@starting-style {
+  .popup[data-open] {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+.title {
+  font: var(--sinch-comp-dialog-font-title, var(--sinch-font-title-m));
+  color: var(--sinch-comp-dialog-color-default-title-initial, var(--sinch-sys-color-text-default));
+  margin: 0 0 var(--sinch-spacing-2) 0;
+}
+
+.description {
+  font: var(--sinch-font-body-m);
+  color: var(--sinch-sys-color-text-muted);
+  margin: 0 0 var(--sinch-spacing-4) 0;
+}

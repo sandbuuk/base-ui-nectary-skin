@@ -1,0 +1,46 @@
+.popup {
+  background: var(--sinch-comp-popover-color-default-background-initial, var(--sinch-sys-color-surface-primary-default));
+  border: 1px solid var(--sinch-comp-popover-color-default-border-initial, var(--sinch-sys-color-border-subtle));
+  border-radius: var(--sinch-comp-popover-shape-radius, var(--sinch-radius-m));
+  box-shadow: var(--sinch-comp-popover-shadow);
+  padding: var(--sinch-spacing-4);
+  outline: none;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.popup[data-open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  .popup[data-open] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.arrow {
+  width: 10px;
+  height: 10px;
+}
+
+.arrow > svg {
+  fill: var(--sinch-comp-popover-color-default-background-initial, var(--sinch-sys-color-surface-primary-default));
+  stroke: var(--sinch-comp-popover-color-default-border-initial, var(--sinch-sys-color-border-subtle));
+  stroke-width: 1px;
+}
+
+.title {
+  font: var(--sinch-font-label-m);
+  color: var(--sinch-sys-color-text-default);
+  margin: 0 0 var(--sinch-spacing-1) 0;
+}
+
+.description {
+  font: var(--sinch-font-body-s);
+  color: var(--sinch-sys-color-text-muted);
+  margin: 0;
+}

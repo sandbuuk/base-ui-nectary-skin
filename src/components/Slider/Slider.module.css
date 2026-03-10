@@ -1,0 +1,63 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sinch-spacing-2);
+  width: 100%;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.track {
+  position: relative;
+  height: 4px;
+  width: 100%;
+  border-radius: var(--sinch-radius-full);
+  background: var(--sinch-sys-color-border-default);
+}
+
+.indicator {
+  height: 100%;
+  border-radius: var(--sinch-radius-full);
+  background: var(--sinch-sys-color-primary-default);
+}
+
+.thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--sinch-radius-full);
+  background: var(--sinch-sys-color-surface-primary-default);
+  border: 2px solid var(--sinch-sys-color-primary-default);
+  cursor: grab;
+  outline: none;
+  transition: box-shadow 150ms ease;
+}
+
+.thumb:focus-visible {
+  box-shadow: 0 0 0 2px var(--sinch-sys-color-border-focus);
+}
+
+.thumb:active {
+  cursor: grabbing;
+}
+
+.output {
+  font: var(--sinch-font-body-s);
+  color: var(--sinch-sys-color-text-muted);
+  text-align: center;
+}
+
+/* Disabled */
+.root[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.root[data-disabled] .control {
+  cursor: not-allowed;
+}

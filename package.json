@@ -1,0 +1,59 @@
+{
+  "name": "@nectary/react",
+  "version": "0.1.0",
+  "description": "Nectary design system — React component library built on Base UI and @nectary/theme-base tokens",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist",
+    "android",
+    "ios",
+    "README.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build:lib"
+  },
+  "keywords": [
+    "sinch",
+    "nectary",
+    "design-system",
+    "react",
+    "components",
+    "base-ui"
+  ],
+  "peerDependencies": {
+    "@base-ui-components/react": ">=1.0.0-rc.0",
+    "@nectary/theme-base": ">=1.0.0",
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@nectary/theme-base": "^1.4.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.0"
+  },
+  "dependencies": {
+    "@base-ui-components/react": "1.0.0-rc.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

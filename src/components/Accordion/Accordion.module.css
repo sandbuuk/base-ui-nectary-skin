@@ -1,0 +1,75 @@
+.root {
+  border-top: 1px solid var(--sinch-comp-accordion-color-default-border-initial, var(--sinch-sys-color-border-default));
+}
+
+.item {
+  border-bottom: 1px solid var(--sinch-comp-accordion-color-default-border-initial, var(--sinch-sys-color-border-default));
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--sinch-spacing-4) 0;
+  font: var(--sinch-comp-accordion-font-title, var(--sinch-font-title-m));
+  color: var(--sinch-comp-accordion-color-default-title-initial, var(--sinch-sys-color-text-default));
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+}
+
+.trigger:focus-visible {
+  box-shadow: 0 0 0 2px var(--sinch-comp-accordion-color-default-outline-focus, var(--sinch-sys-color-border-focus));
+  border-radius: var(--sinch-radius-s);
+}
+
+.triggerContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sinch-spacing-1);
+}
+
+.subtitle {
+  font: var(--sinch-comp-accordion-font-optional-text, var(--sinch-font-body-s));
+  color: var(--sinch-comp-accordion-color-default-optional-text-initial, var(--sinch-sys-color-text-muted));
+}
+
+.chevron {
+  display: flex;
+  align-items: center;
+  color: var(--sinch-comp-accordion-color-default-icon-initial, var(--sinch-sys-color-text-default));
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+}
+
+.item[data-open] .chevron {
+  transform: rotate(180deg);
+}
+
+.panel {
+  overflow: hidden;
+}
+
+.panelContent {
+  padding: 0 0 var(--sinch-spacing-4) 0;
+  font: var(--sinch-font-body-m);
+  color: var(--sinch-sys-color-text-default);
+}
+
+/* Disabled */
+.item[data-disabled] .trigger {
+  color: var(--sinch-comp-accordion-color-disabled-title-initial, var(--sinch-sys-color-text-disabled));
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.item[data-disabled] .subtitle {
+  color: var(--sinch-comp-accordion-color-disabled-optional-text-initial, var(--sinch-sys-color-text-disabled));
+}
+
+.item[data-disabled] .chevron {
+  color: var(--sinch-comp-accordion-color-disabled-icon-initial, var(--sinch-sys-color-text-disabled));
+}

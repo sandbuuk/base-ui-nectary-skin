@@ -1,0 +1,74 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--sinch-font-label-xs);
+  border-radius: var(--sinch-radius-full);
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Sizes */
+.s {
+  padding: 2px var(--sinch-spacing-1);
+  min-width: 16px;
+  height: 16px;
+  font-size: 10px;
+}
+
+.m {
+  padding: 3px var(--sinch-spacing-2);
+  min-width: 20px;
+  height: 20px;
+  font-size: 12px;
+}
+
+/* Dot variant */
+.dot {
+  padding: 0;
+  border-radius: var(--sinch-radius-full);
+}
+
+.dot.s {
+  width: 8px;
+  height: 8px;
+  min-width: unset;
+}
+
+.dot.m {
+  width: 10px;
+  height: 10px;
+  min-width: unset;
+}
+
+/* Variants */
+.neutral {
+  background: var(--sinch-sys-color-surface-secondary);
+  color: var(--sinch-sys-color-text-primary);
+}
+
+.primary {
+  background: var(--sinch-color-action-primary);
+  color: var(--sinch-color-on-action-primary);
+}
+
+.success {
+  background: var(--sinch-sys-color-status-success);
+  color: #ffffff;
+}
+
+.warning {
+  background: var(--sinch-sys-color-status-warning);
+  color: #ffffff;
+}
+
+.error {
+  background: var(--sinch-sys-color-status-error);
+  color: #ffffff;
+}
+
+.info {
+  background: var(--sinch-sys-color-status-info);
+  color: #ffffff;
+}

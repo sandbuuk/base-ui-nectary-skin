@@ -1,0 +1,280 @@
+{
+  "version": 1.1,
+  "properties": [
+    {
+      "name": "--sinch-color-action-primary",
+      "description": "Primary action colour (buttons, links, focus rings). Nectary: `color.actionPrimary`",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-color-action-primary-hover",
+      "description": "Hover state of the primary action colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-color-action-primary-active",
+      "description": "Active/pressed state of the primary action colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-color-action-secondary",
+      "description": "Secondary action colour (typically transparent).",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-color-action-destructive",
+      "description": "Destructive action colour (delete, danger).",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-color-on-action-primary",
+      "description": "Foreground colour for content placed on the primary action colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-color-on-action-secondary",
+      "description": "Foreground colour for content placed on the secondary action colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-surface-primary-default",
+      "description": "Default background surface colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-surface-secondary",
+      "description": "Secondary/elevated surface colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-surface-overlay",
+      "description": "Scrim/overlay colour used behind modals and sheets.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-text-primary",
+      "description": "Primary text colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-text-secondary",
+      "description": "Secondary/subdued text colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-text-disabled",
+      "description": "Disabled text colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-text-on-color",
+      "description": "Text colour for use on coloured backgrounds.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-icon-primary",
+      "description": "Primary icon colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-icon-secondary",
+      "description": "Secondary/subdued icon colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-icon-disabled",
+      "description": "Disabled icon colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-border-default",
+      "description": "Default border/separator colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-border-focus",
+      "description": "Focus ring border colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-border-invalid",
+      "description": "Invalid/error border colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-status-success",
+      "description": "Success status colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-status-warning",
+      "description": "Warning status colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-status-error",
+      "description": "Error status colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-sys-color-status-info",
+      "description": "Informational status colour.",
+      "syntax": "<color>"
+    },
+    {
+      "name": "--sinch-spacing-0",
+      "description": "Spacing token 0 → 0px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-spacing-1",
+      "description": "Spacing token 1 → 4px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-spacing-2",
+      "description": "Spacing token 2 → 8px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-spacing-3",
+      "description": "Spacing token 3 → 12px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-spacing-4",
+      "description": "Spacing token 4 → 16px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-spacing-5",
+      "description": "Spacing token 5 → 20px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-spacing-6",
+      "description": "Spacing token 6 → 24px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-spacing-7",
+      "description": "Spacing token 7 → 32px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-spacing-8",
+      "description": "Spacing token 8 → 48px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-radius-xs",
+      "description": "Border radius XS → 2px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-radius-s",
+      "description": "Border radius S → 4px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-radius-m",
+      "description": "Border radius M → 8px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-radius-l",
+      "description": "Border radius L → 12px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-radius-xl",
+      "description": "Border radius XL → 16px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-radius-full",
+      "description": "Border radius full pill → 9999px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-font-label-xs",
+      "description": "Typography: Label XS — 10px/500",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-font-label-s",
+      "description": "Typography: Label S — 12px/500",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-font-label-m",
+      "description": "Typography: Label M — 14px/500",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-font-label-l",
+      "description": "Typography: Label L — 16px/500",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-font-body-s",
+      "description": "Typography: Body S — 12px/400",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-font-body-m",
+      "description": "Typography: Body M — 14px/400",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-font-body-l",
+      "description": "Typography: Body L — 16px/400",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-font-heading-s",
+      "description": "Typography: Heading S — 18px/600",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-font-heading-m",
+      "description": "Typography: Heading M — 22px/600",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-font-heading-l",
+      "description": "Typography: Heading L — 28px/700",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-font-heading-xl",
+      "description": "Typography: Heading XL — 36px/700",
+      "syntax": "<font>"
+    },
+    {
+      "name": "--sinch-size-icon-xs",
+      "description": "Icon size XS → 16px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-size-icon-s",
+      "description": "Icon size S → 20px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-size-icon-m",
+      "description": "Icon size M → 24px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-size-icon-l",
+      "description": "Icon size L → 32px",
+      "syntax": "<length>"
+    },
+    {
+      "name": "--sinch-size-icon-xl",
+      "description": "Icon size XL → 40px",
+      "syntax": "<length>"
+    }
+  ]
+}

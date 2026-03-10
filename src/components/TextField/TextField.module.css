@@ -1,0 +1,110 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sinch-spacing-1);
+}
+
+.label {
+  font: var(--sinch-font-label-s);
+  color: var(--sinch-sys-color-text-primary);
+}
+
+.label .required {
+  color: var(--sinch-sys-color-status-error);
+  margin-left: var(--sinch-spacing-1);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--sinch-sys-color-border-default);
+  border-radius: var(--sinch-radius-m);
+  background: var(--sinch-sys-color-surface-primary-default);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.inputWrapper:focus-within {
+  border-color: var(--sinch-sys-color-border-focus);
+  box-shadow: 0 0 0 2px var(--sinch-sys-color-border-focus, rgba(0, 0, 0, 0.2));
+}
+
+.invalid .inputWrapper {
+  border-color: var(--sinch-sys-color-border-invalid);
+}
+
+.invalid .inputWrapper:focus-within {
+  box-shadow: 0 0 0 2px var(--sinch-sys-color-border-invalid, rgba(220, 53, 69, 0.25));
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--sinch-sys-color-text-primary);
+  font: var(--sinch-font-body-m);
+  min-width: 0;
+}
+
+.input::placeholder {
+  color: var(--sinch-sys-color-text-secondary);
+}
+
+/* Sizes */
+.s .inputWrapper {
+  height: var(--sinch-comp-text-field-size-container-s, 32px);
+  padding: 0 var(--sinch-spacing-3);
+  border-radius: var(--sinch-radius-s);
+}
+
+.s .input {
+  font: var(--sinch-font-body-s);
+}
+
+.m .inputWrapper {
+  height: var(--sinch-comp-text-field-size-container-m, 40px);
+  padding: 0 var(--sinch-spacing-3);
+}
+
+.l .inputWrapper {
+  height: var(--sinch-comp-text-field-size-container-l, 48px);
+  padding: 0 var(--sinch-spacing-4);
+}
+
+/* Icon slots */
+.startIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--sinch-sys-color-icon-secondary);
+  margin-right: var(--sinch-spacing-2);
+}
+
+.endIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--sinch-sys-color-icon-secondary);
+  margin-left: var(--sinch-spacing-2);
+}
+
+/* Helper text */
+.helperText {
+  font: var(--sinch-font-label-xs);
+  color: var(--sinch-sys-color-text-secondary);
+}
+
+.invalid .helperText {
+  color: var(--sinch-sys-color-status-error);
+}
+
+/* Disabled */
+.disabled .inputWrapper {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.disabled .input {
+  cursor: not-allowed;
+}

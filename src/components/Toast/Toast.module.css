@@ -1,0 +1,109 @@
+.viewport {
+  position: fixed;
+  bottom: var(--sinch-spacing-4);
+  right: var(--sinch-spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sinch-spacing-2);
+  z-index: 2000;
+  max-width: 400px;
+  width: 100%;
+  outline: none;
+}
+
+.root {
+  background: var(--sinch-sys-color-surface-primary-default);
+  border-radius: var(--sinch-comp-toast-shape-radius, var(--sinch-radius-l));
+  box-shadow: var(--sinch-comp-toast-shadow);
+  padding: var(--sinch-spacing-3) var(--sinch-spacing-4);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sinch-spacing-3);
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.root[data-open] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@starting-style {
+  .root[data-open] {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Variant backgrounds */
+.success {
+  border-left: 3px solid var(--sinch-comp-toast-color-success-default-icon, var(--sinch-sys-color-feedback-success-default));
+}
+.error {
+  border-left: 3px solid var(--sinch-comp-toast-color-error-default-icon, var(--sinch-sys-color-feedback-danger-default));
+}
+.warning {
+  border-left: 3px solid var(--sinch-comp-toast-color-warning-default-icon, var(--sinch-sys-color-feedback-warning-default));
+}
+.info {
+  border-left: 3px solid var(--sinch-comp-toast-color-info-default-icon, var(--sinch-sys-color-feedback-info-default));
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success .icon {
+  color: var(--sinch-comp-toast-color-success-default-icon, var(--sinch-sys-color-feedback-success-default));
+}
+.error .icon {
+  color: var(--sinch-comp-toast-color-error-default-icon, var(--sinch-sys-color-feedback-danger-default));
+}
+.warning .icon {
+  color: var(--sinch-comp-toast-color-warning-default-icon, var(--sinch-sys-color-feedback-warning-default));
+}
+.info .icon {
+  color: var(--sinch-comp-toast-color-info-default-icon, var(--sinch-sys-color-feedback-info-default));
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font: var(--sinch-font-label-m);
+  color: var(--sinch-sys-color-text-default);
+  margin: 0;
+}
+
+.description {
+  font: var(--sinch-comp-toast-font-body, var(--sinch-font-body-m));
+  color: var(--sinch-sys-color-text-muted);
+  margin: var(--sinch-spacing-1) 0 0 0;
+}
+
+.close {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--sinch-sys-color-text-muted);
+  border-radius: var(--sinch-radius-s);
+  transition: background-color 150ms ease;
+}
+
+.close:hover {
+  background: var(--sinch-sys-color-surface-transparent-hover);
+}

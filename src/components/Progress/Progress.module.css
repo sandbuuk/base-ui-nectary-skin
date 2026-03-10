@@ -1,0 +1,43 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sinch-spacing-1);
+  width: 100%;
+}
+
+.labelRow {
+  display: flex;
+  justify-content: space-between;
+  font: var(--sinch-font-body-s);
+  color: var(--sinch-comp-progress-color-default-text-initial, var(--sinch-sys-color-text-default));
+}
+
+.track {
+  position: relative;
+  height: 6px;
+  border-radius: var(--sinch-radius-full);
+  background: var(--sinch-comp-progress-color-default-background-initial, #00606333);
+  overflow: hidden;
+}
+
+.indicator {
+  height: 100%;
+  border-radius: var(--sinch-radius-full);
+  background: var(--sinch-comp-progress-color-default-bar-initial, var(--sinch-sys-color-primary-default));
+  transition: width 150ms ease;
+}
+
+/* Indeterminate animation */
+.indeterminate .indicator {
+  width: 40% !important;
+  animation: indeterminate 1.5s ease-in-out infinite;
+}
+
+@keyframes indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}

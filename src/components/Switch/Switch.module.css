@@ -1,0 +1,83 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: var(--sinch-spacing-2);
+  user-select: none;
+}
+
+.track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--sinch-radius-full);
+  transition: background-color 150ms ease;
+  flex-shrink: 0;
+}
+
+/* Size: m (default) */
+.m .track {
+  width: 44px;
+  height: 24px;
+  padding: 2px;
+}
+
+/* Size: s */
+.s .track {
+  width: 36px;
+  height: 20px;
+  padding: 2px;
+}
+
+/* Unchecked */
+.root:not([data-checked]) .track {
+  background: var(--sinch-sys-color-border-default);
+}
+
+/* Checked */
+.root[data-checked] .track {
+  background: var(--sinch-color-action-primary);
+}
+
+.thumb {
+  border-radius: var(--sinch-radius-full);
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 150ms ease;
+  flex-shrink: 0;
+}
+
+.m .thumb {
+  width: 20px;
+  height: 20px;
+}
+
+.s .thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.root:not([data-checked]) .thumb {
+  transform: translateX(0);
+}
+
+.m.root[data-checked] .thumb {
+  transform: translateX(20px);
+}
+
+.s.root[data-checked] .thumb {
+  transform: translateX(16px);
+}
+
+/* Focus ring */
+.root:focus-visible .track {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--sinch-sys-color-border-focus);
+}
+
+/* Disabled */
+.root[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}

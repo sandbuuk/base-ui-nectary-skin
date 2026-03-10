@@ -1,0 +1,59 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  display: flex;
+  border-bottom: 1px solid var(--sinch-comp-tab-color-default-border-initial, var(--sinch-sys-color-border-default));
+  position: relative;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sinch-spacing-1);
+  padding: var(--sinch-spacing-2) var(--sinch-spacing-4);
+  font: var(--sinch-comp-tab-font-label, var(--sinch-font-body-m));
+  color: var(--sinch-comp-tab-color-default-text-initial, var(--sinch-sys-color-text-muted));
+  background: var(--sinch-comp-tab-color-default-background-initial, transparent);
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  outline: none;
+  transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+  margin-bottom: -1px;
+}
+
+.tab:hover:not([data-disabled]) {
+  background: var(--sinch-comp-tab-color-default-background-hover, var(--sinch-sys-color-surface-transparent-hover));
+}
+
+.tab[data-selected] {
+  color: var(--sinch-comp-tab-color-checked-text-initial, var(--sinch-sys-color-primary-default));
+  border-bottom-color: var(--sinch-comp-tab-color-checked-border-initial, var(--sinch-sys-color-primary-default));
+}
+
+.tab:focus-visible {
+  box-shadow: 0 0 0 2px var(--sinch-comp-tab-color-default-outline-focus, var(--sinch-sys-color-border-focus));
+  border-radius: var(--sinch-comp-tab-shape-radius, var(--sinch-radius-l)) var(--sinch-comp-tab-shape-radius, var(--sinch-radius-l)) 0 0;
+}
+
+.tab[data-disabled] {
+  color: var(--sinch-comp-tab-color-disabled-text-initial, var(--sinch-sys-color-text-disabled));
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.indicator {
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  background: var(--sinch-comp-tab-color-checked-border-initial, var(--sinch-sys-color-primary-default));
+  transition: left 150ms ease, width 150ms ease;
+}
+
+.panel {
+  padding: var(--sinch-spacing-4) 0;
+}

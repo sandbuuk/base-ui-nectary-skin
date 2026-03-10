@@ -1,0 +1,34 @@
+.popup {
+  background: var(--sinch-comp-tooltip-color-background, var(--sinch-sys-color-surface-secondary-default));
+  color: var(--sinch-comp-tooltip-color-text, var(--sinch-sys-color-text-default));
+  font: var(--sinch-comp-tooltip-font-body, var(--sinch-font-body-xs));
+  border-radius: var(--sinch-comp-tooltip-shape-radius, var(--sinch-radius-xs));
+  box-shadow: var(--sinch-comp-tooltip-shadow);
+  padding: var(--sinch-spacing-1) var(--sinch-spacing-2);
+  max-width: 240px;
+  outline: none;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.popup[data-open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  .popup[data-open] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.arrow {
+  width: 8px;
+  height: 8px;
+}
+
+.arrow > svg {
+  fill: var(--sinch-comp-tooltip-color-background, var(--sinch-sys-color-surface-secondary-default));
+}

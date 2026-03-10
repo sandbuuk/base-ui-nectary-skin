@@ -1,0 +1,77 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sinch-spacing-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--sinch-sys-color-border-default);
+  border-radius: var(--sinch-radius-xs);
+  background: var(--sinch-sys-color-surface-primary-default);
+  flex-shrink: 0;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+/* Sizes */
+.s .indicator {
+  width: 16px;
+  height: 16px;
+}
+
+.m .indicator {
+  width: 20px;
+  height: 20px;
+}
+
+/* Checked / indeterminate */
+.root[data-checked] .indicator,
+.root[data-indeterminate] .indicator {
+  background: var(--sinch-color-action-primary);
+  border-color: var(--sinch-color-action-primary);
+}
+
+.checkIcon {
+  display: none;
+  color: var(--sinch-color-on-action-primary);
+}
+
+.indeterminateIcon {
+  display: none;
+  color: var(--sinch-color-on-action-primary);
+}
+
+.root[data-checked] .checkIcon {
+  display: block;
+}
+
+.root[data-indeterminate] .indeterminateIcon {
+  display: block;
+}
+
+/* Focus ring */
+.root:focus-visible .indicator {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--sinch-sys-color-border-focus);
+}
+
+/* Label */
+.label {
+  font: var(--sinch-font-body-m);
+  color: var(--sinch-sys-color-text-primary);
+}
+
+.s .label {
+  font: var(--sinch-font-body-s);
+}
+
+/* Disabled */
+.root[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}

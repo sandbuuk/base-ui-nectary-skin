@@ -1,0 +1,142 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sinch-spacing-2);
+  font: var(--sinch-font-label-m);
+  border: 1px solid transparent;
+  border-radius: var(--sinch-radius-m);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+  position: relative;
+}
+
+.root:focus-visible {
+  box-shadow: 0 0 0 2px var(--sinch-comp-button-color-primary-default-outline-focus, var(--sinch-sys-color-border-focus));
+}
+
+/* Sizes */
+.xs {
+  height: var(--sinch-comp-button-size-container-xs, 24px);
+  padding: 0 var(--sinch-spacing-2);
+  font: var(--sinch-font-label-s);
+  border-radius: var(--sinch-comp-button-shape-radius-size-xs, var(--sinch-radius-s));
+}
+.s {
+  height: var(--sinch-comp-button-size-container-s, 32px);
+  padding: 0 var(--sinch-spacing-3);
+  font: var(--sinch-font-label-s);
+  border-radius: var(--sinch-comp-button-shape-radius-size-s, var(--sinch-radius-m));
+}
+.m {
+  height: var(--sinch-comp-button-size-container-m, 40px);
+  padding: 0 var(--sinch-spacing-4);
+  font: var(--sinch-font-label-m);
+  border-radius: var(--sinch-comp-button-shape-radius-size-m, var(--sinch-radius-m));
+}
+.l {
+  height: var(--sinch-comp-button-size-container-l, 48px);
+  padding: 0 var(--sinch-spacing-5);
+  font: var(--sinch-font-label-l);
+  border-radius: var(--sinch-comp-button-shape-radius-size-l, var(--sinch-radius-m));
+}
+
+/* Variants */
+.primary {
+  background: var(--sinch-comp-button-color-primary-default-background-initial, var(--sinch-color-action-primary));
+  color: var(--sinch-comp-button-color-primary-default-text-initial, var(--sinch-color-on-action-primary));
+  border-color: var(--sinch-comp-button-color-primary-default-border-initial, transparent);
+  box-shadow: var(--sinch-comp-button-shadow-primary-initial);
+}
+.primary:hover:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-primary-default-background-hover);
+  box-shadow: var(--sinch-comp-button-shadow-primary-hover);
+}
+.primary:active:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-primary-default-background-active);
+  box-shadow: var(--sinch-comp-button-shadow-primary-active);
+}
+
+.secondary {
+  background: var(--sinch-comp-button-color-secondary-default-background-initial, transparent);
+  color: var(--sinch-comp-button-color-secondary-default-text-initial, var(--sinch-sys-color-text-primary));
+  border-color: var(--sinch-comp-button-color-secondary-default-border-initial, var(--sinch-sys-color-border-default));
+  box-shadow: var(--sinch-comp-button-shadow-secondary-initial);
+}
+.secondary:hover:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-secondary-default-background-hover);
+  box-shadow: var(--sinch-comp-button-shadow-secondary-hover);
+}
+.secondary:active:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-secondary-default-background-active);
+}
+
+.subtlePrimary {
+  background: var(--sinch-comp-button-color-subtle-primary-default-background-initial, transparent);
+  color: var(--sinch-comp-button-color-subtle-primary-default-text-initial, var(--sinch-color-action-primary));
+  border-color: var(--sinch-comp-button-color-subtle-primary-default-border-initial, transparent);
+}
+.subtlePrimary:hover:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-subtle-primary-default-background-hover);
+}
+.subtlePrimary:active:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-subtle-primary-default-background-active);
+}
+.subtlePrimary[data-toggled] {
+  background: var(--sinch-comp-button-color-subtle-primary-toggled-background-initial);
+}
+
+.subtleSecondary {
+  background: var(--sinch-comp-button-color-subtle-secondary-default-background-initial, transparent);
+  color: var(--sinch-comp-button-color-subtle-secondary-default-text-initial, var(--sinch-sys-color-text-primary));
+  border-color: var(--sinch-comp-button-color-subtle-secondary-default-border-initial, transparent);
+}
+.subtleSecondary:hover:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-subtle-secondary-default-background-hover);
+}
+.subtleSecondary:active:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-subtle-secondary-default-background-active);
+}
+
+.ctaPrimary {
+  background: var(--sinch-comp-button-color-cta-primary-default-background-initial, var(--sinch-color-action-primary));
+  color: var(--sinch-comp-button-color-cta-primary-default-text-initial, var(--sinch-color-on-action-primary));
+  border-color: var(--sinch-comp-button-color-cta-primary-default-border-initial, transparent);
+  box-shadow: var(--sinch-comp-button-shadow-cta-primary-initial);
+}
+.ctaPrimary:hover:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-cta-primary-default-background-hover);
+  box-shadow: var(--sinch-comp-button-shadow-cta-primary-hover);
+}
+
+.ctaSecondary {
+  background: var(--sinch-comp-button-color-cta-secondary-default-background-initial, transparent);
+  color: var(--sinch-comp-button-color-cta-secondary-default-text-initial, var(--sinch-color-action-primary));
+  border-color: var(--sinch-comp-button-color-cta-secondary-default-border-initial, var(--sinch-color-action-primary));
+  box-shadow: var(--sinch-comp-button-shadow-cta-secondary-initial);
+}
+.ctaSecondary:hover:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-cta-secondary-default-background-hover);
+}
+
+.destructive {
+  background: var(--sinch-comp-button-color-danger-default-background-initial, var(--sinch-sys-color-status-error));
+  color: var(--sinch-comp-button-color-danger-default-text-initial, #fff);
+  border-color: var(--sinch-comp-button-color-danger-default-border-initial, transparent);
+  box-shadow: var(--sinch-comp-button-shadow-danger-initial);
+}
+.destructive:hover:not([data-disabled]) {
+  background: var(--sinch-comp-button-color-danger-default-background-hover);
+  box-shadow: var(--sinch-comp-button-shadow-danger-hover);
+}
+
+/* Disabled */
+.root[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
