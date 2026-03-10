@@ -2,5 +2,9 @@ node_modules/
 dist/
 *.tsbuildinfo
 .DS_Store
-ios/.build/
+ios/
+android/
 .claude/
+CLAUDE.md
+sinch-prototype.html
+messaging-inbox-prototype.html
