@@ -289,8 +289,9 @@ const focusRingVariants = cva(
     'border-2 border-[var(--sinch-comp-segmented-control-color-default-outline-focus)]',
     'transition-opacity duration-100 opacity-0',
     'z-[1]',
-    // Positioned with inset -3px
-    'inset-[-3px]',
+    // Focus ring offset: border-width (2px) + gap (1px) = 3px
+    '[--sinch-local-focus-offset:var(--sinch-comp-segmented-control-size-focus-offset,3px)]',
+    'inset-[calc(var(--sinch-local-focus-offset)*-1)]',
   ],
   {
     variants: {
@@ -299,11 +300,11 @@ const focusRingVariants = cva(
         false: '',
       },
       isFirst: {
-        true: 'rounded-l-[calc(var(--sinch-comp-segmented-control-shape-radius)+3px)]',
-        false: '-left-[4px]',
+        true: 'rounded-l-[calc(var(--sinch-comp-segmented-control-shape-radius)+var(--sinch-local-focus-offset))]',
+        false: '-left-[calc(var(--sinch-local-focus-offset)+1px)]',
       },
       isLast: {
-        true: 'rounded-r-[calc(var(--sinch-comp-segmented-control-shape-radius)+3px)]',
+        true: 'rounded-r-[calc(var(--sinch-comp-segmented-control-shape-radius)+var(--sinch-local-focus-offset))]',
         false: '',
       },
     },

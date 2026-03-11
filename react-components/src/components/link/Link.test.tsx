@@ -85,42 +85,22 @@ describe('Link', () => {
 
   // Disabled state
   describe('disabled', () => {
-    it('sets aria-disabled when disabled', () => {
+    it('renders as span with role="link" when disabled', () => {
       render(<Link href="/test" text="Disabled" disabled/>)
 
-      // An anchor without href doesn't have link role, so we query by text
-      const anchor = screen.getByText('Disabled').closest('a')
+      const span = screen.getByRole('link')
 
-      expect(anchor).toHaveAttribute('aria-disabled', 'true')
-    })
-
-    it('removes href when disabled', () => {
-      render(<Link href="/test" text="Disabled" disabled/>)
-
-      const anchor = screen.getByText('Disabled').closest('a')
-
-      expect(anchor).not.toHaveAttribute('href')
+      expect(span.tagName).toBe('SPAN')
+      expect(span).toHaveAttribute('aria-disabled', 'true')
+      expect(span).not.toHaveAttribute('href')
     })
 
     it('applies disabled styles', () => {
       render(<Link href="/test" text="Disabled" disabled/>)
 
-      const anchor = screen.getByText('Disabled').closest('a')
+      const span = screen.getByRole('link')
 
-      expect(anchor).toHaveClass('pointer-events-none')
-    })
-
-    it('prevents click events when disabled', async () => {
-      const onClick = vi.fn()
-
-      render(<Link href="/test" text="Disabled" disabled onClick={onClick}/>)
-
-      const anchor = screen.getByText('Disabled').closest('a')!
-
-      // Even though pointer-events-none prevents normal clicks,
-      // the onClick handler still checks for disabled and returns early
-      await userEvent.click(anchor, { pointerEventsCheck: 0 })
-      expect(onClick).not.toHaveBeenCalled()
+      expect(span).toHaveClass('pointer-events-none')
     })
   })
 
@@ -205,13 +185,14 @@ describe('Link', () => {
       expect(link).toHaveClass('block')
     })
 
-    it('disabled + external does not have href', () => {
+    it('disabled + external renders as span without href', () => {
       render(<Link href="https://example.com" text="Test" disabled external/>)
 
-      const anchor = screen.getByText('Test').closest('a')
+      const span = screen.getByRole('link')
 
-      expect(anchor).not.toHaveAttribute('href')
-      expect(anchor).toHaveAttribute('aria-disabled', 'true')
+      expect(span.tagName).toBe('SPAN')
+      expect(span).not.toHaveAttribute('href')
+      expect(span).toHaveAttribute('aria-disabled', 'true')
     })
   })
 })

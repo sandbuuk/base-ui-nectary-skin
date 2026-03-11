@@ -5,6 +5,13 @@ const meta: Meta<typeof Tag> = {
   title: 'Components/Tag',
   component: Tag,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A compact colored label with multiple color variants, optional icon support, and removable option for categorizing or filtering content.',
+      },
+    },
+  },
   argTypes: {
     color: {
       control: 'select',

@@ -8,6 +8,13 @@ const meta: Meta<typeof RichText> = {
   title: 'Components/RichText',
   component: RichText,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A lightweight markdown-like text renderer supporting bold, italic, strikethrough, inline links, chips, lists, and code blocks.',
+      },
+    },
+  },
   argTypes: {
     size: {
       control: 'select',

@@ -24,6 +24,13 @@ const meta: Meta<typeof InlineAlert> = {
       description: 'Custom icon name (overrides default type icon)',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A prominent inline message component supporting info, success, warning, and error types with icons, optional caption, and action slots.',
+      },
+    },
+  },
 }
 
 export default meta

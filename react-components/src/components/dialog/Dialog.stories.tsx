@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { Text } from '../text'
-import { Dialog, type DialogCloseDetail } from './Dialog'
+import { Dialog, type DialogCloseDetail, type DialogSize } from './Dialog'
 
 const meta: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
@@ -26,6 +26,11 @@ const meta: Meta<typeof Dialog> = {
   },
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: 'A modal dialog with backdrop, focus trapping, escape-key support, and size variants (sm, md, lg, fullscreen) with header, content, and footer areas.\n\nKeyboard: Escape to close. Tab cycles through focusable elements (focus trapped).',
+      },
+    },
   },
 }
 
@@ -36,12 +41,14 @@ type Story = StoryObj<typeof Dialog>
 const DialogDemo = ({
   caption = 'Dialog Title',
   hideCloseButton = false,
+  size,
   icon,
   children,
   buttons,
 }: {
   caption?: string,
   hideCloseButton?: boolean,
+  size?: DialogSize,
   icon?: React.ReactNode,
   children?: React.ReactNode,
   buttons?: (handleClose: () => void) => React.ReactNode,
@@ -62,6 +69,7 @@ const DialogDemo = ({
         open={open}
         onClose={handleClose}
         caption={caption}
+        size={size}
         hideCloseButton={hideCloseButton}
         icon={icon}
         buttons={buttons?.(closeDialog)}
@@ -259,6 +267,84 @@ export const NoCaption: Story = {
           </Text>
         </Dialog>
       </>
+    )
+  },
+}
+
+export const SmallSize: Story = {
+  render: () => (
+    <DialogDemo
+      caption="Quick Confirm"
+      size="sm"
+      buttons={(handleClose) => (
+        <>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button variant="primary" onClick={handleClose}>
+            OK
+          </Button>
+        </>
+      )}
+    >
+      <Text>Are you sure?</Text>
+    </DialogDemo>
+  ),
+}
+
+export const LargeSize: Story = {
+  render: () => (
+    <DialogDemo
+      caption="Detailed View"
+      size="lg"
+      buttons={(handleClose) => (
+        <Button variant="primary" onClick={handleClose}>
+          Done
+        </Button>
+      )}
+    >
+      <Text>
+        This is a large dialog for displaying more complex content like forms,
+        tables, or detailed information that needs more horizontal space.
+      </Text>
+    </DialogDemo>
+  ),
+}
+
+/**
+ * Dialog with animation transition callbacks.
+ */
+export const WithTransitionCallbacks: Story = {
+  render: function TransitionCallbacksDialog() {
+    const [open, setOpen] = useState(false)
+    const [log, setLog] = useState<string[]>([])
+
+    const addLog = (msg: string) =>
+      setLog((prev) => [...prev.slice(-4), `${new Date().toLocaleTimeString()}: ${msg}`])
+
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <Button onClick={() => setOpen(true)}>Open Dialog</Button>
+        <Dialog
+          open={open}
+          onClose={() => setOpen(false)}
+          caption="Transition Callbacks"
+          onDialogTransitionStart={(action) => addLog(`transitionStart: ${action}`)}
+          onDialogTransitionEnd={(action) => addLog(`transitionEnd: ${action}`)}
+        >
+          <Text>
+            Open and close this dialog to see animation callbacks fire.
+          </Text>
+        </Dialog>
+        <div className="mt-4 p-4 bg-surface-secondary rounded text-sm font-mono w-80">
+          <p className="text-foreground-muted mb-2">Event Log:</p>
+          {log.length === 0 ? (
+            <p className="text-foreground-caption">No events yet</p>
+          ) : (
+            log.map((entry, i) => (
+              <p key={i} className="text-foreground">{entry}</p>
+            ))
+          )}
+        </div>
+      </div>
     )
   },
 }

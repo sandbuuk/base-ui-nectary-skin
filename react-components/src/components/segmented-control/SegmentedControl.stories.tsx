@@ -11,6 +11,13 @@ const meta: Meta<typeof SegmentedControl> = {
   title: 'Components/SegmentedControl',
   component: SegmentedControl,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A horizontal tab-like control for single selection from multiple options with keyboard navigation and optional icons.\n\nKeyboard: Tab to focus. Arrow Left/Right to switch options. Enter or Space to select.',
+      },
+    },
+  },
   args: {
     onChange: fn(),
   },

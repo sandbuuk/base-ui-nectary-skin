@@ -25,6 +25,13 @@ const meta: Meta<typeof Badge> = {
       description: 'Whether to hide the badge indicator',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A notification indicator displaying a numeric or text badge positioned on content like avatars or icons, with multiple sizes and positioning modes.',
+      },
+    },
+  },
 }
 
 export default meta

@@ -33,6 +33,13 @@ const meta: Meta<typeof DatePicker> = {
       description: 'Enable date range selection mode',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'An interactive calendar for selecting single dates or date ranges with locale-aware formatting, month/year navigation, and min/max date constraints.\n\nKeyboard: Arrow keys to navigate dates. Enter to select. Tab to move between month/year controls.',
+      },
+    },
+  },
 }
 
 export default meta
@@ -215,4 +222,27 @@ export const NavigationStates: Story = {
       </div>
     </div>
   ),
+}
+
+/**
+ * Clearable DatePicker with a button to reset the selection.
+ */
+export const Clearable: Story = {
+  render: function ClearableDatePicker() {
+    const [value, setValue] = useState('2024-06-15')
+
+    return (
+      <div>
+        <p className="mb-4 text-sm">
+          Selected date: <strong>{value || 'None'}</strong>
+        </p>
+        <DatePicker
+          value={value}
+          onChange={setValue}
+          clearable
+          onClear={() => setValue('')}
+        />
+      </div>
+    )
+  },
 }

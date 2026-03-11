@@ -9,6 +9,7 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { cn } from '../../utils/cn'
+import { useScrollLock } from '../../utils/useScrollLock'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { Title } from '../title'
@@ -52,7 +53,7 @@ const sheetDialogVariants = cva(
     'p-[var(--sinch-comp-sheet-size-padding,24px)]',
     'gap-[var(--sinch-comp-sheet-size-gap,16px)]',
     'box-border',
-    'bg-[var(--sinch-comp-sheet-color-background,white)]',
+    'bg-[var(--sinch-comp-sheet-color-background,var(--sinch-sys-color-surface-primary-default,white))]',
     'border-none',
     'outline-none',
     'transition-[transform,opacity]',
@@ -97,7 +98,7 @@ const sheetDialogVariants = cva(
       },
       overlay: {
         modal: 'opacity-0',
-        push: 'opacity-50',
+        push: 'opacity-[var(--sinch-sys-opacity-disabled,0.5)]',
       },
       open: {
         true: 'translate-x-0 translate-y-0 opacity-100',
@@ -126,8 +127,8 @@ const backdropVariants = cva(
     'inset-0',
     'z-40',
     'bg-gradient-to-b',
-    'from-[var(--sinch-comp-sheet-color-backdrop-from,rgba(0,0,0,0.5))]',
-    'to-[var(--sinch-comp-sheet-color-backdrop-to,rgba(0,0,0,0.5))]',
+    'from-[var(--sinch-comp-sheet-color-backdrop-from,var(--sinch-sys-color-backdrop))]',
+    'to-[var(--sinch-comp-sheet-color-backdrop-to,var(--sinch-sys-color-backdrop))]',
     'backdrop-blur-[var(--sinch-comp-sheet-size-backdrop-blur,0)]',
     'transition-opacity',
     'duration-[var(--sinch-comp-sheet-animation-duration,300ms)]',
@@ -166,6 +167,11 @@ export interface SheetProps extends VariantProps<typeof sheetDialogVariants> {
    * Callback when the sheet requests to be closed
    */
   onClose?: (detail: SheetCloseDetail) => void,
+  /**
+   * Callback when the open state should change.
+   * Fires with `false` for all close actions.
+   */
+  onOpenChange?: (open: boolean) => void,
   /**
    * Callback when sheet slide animation starts
    */
@@ -206,6 +212,14 @@ export interface SheetProps extends VariantProps<typeof sheetDialogVariants> {
    * Additional data attributes
    */
   'data-testid'?: string,
+  /**
+   * Accessible label for the sheet (alternative to title)
+   */
+  'aria-label'?: string,
+  /**
+   * ID of an element that labels the sheet (alternative to title)
+   */
+  'aria-labelledby'?: string,
 }
 
 /**
@@ -238,6 +252,7 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(
       placement = 'right',
       overlay = 'modal',
       onClose,
+      onOpenChange,
       onSheetAnimationStart,
       onSheetAnimationEnd,
       title,
@@ -246,6 +261,8 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(
       id,
       style,
       'data-testid': dataTestId,
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
     },
     ref
   ) => {
@@ -256,6 +273,25 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(
 
     // Expose the dialog ref through the forwarded ref
     useImperativeHandle(ref, () => dialogRef.current as HTMLDivElement)
+
+    // Dev-only: warn if Sheet lacks an accessible label
+    useEffect(() => {
+      if (process.env.NODE_ENV !== 'production' && open && !title) {
+        const el = dialogRef.current
+        if (
+          el &&
+          !el.getAttribute('aria-label') &&
+          !el.getAttribute('aria-labelledby')
+        ) {
+          console.warn(
+            'Sheet: Missing accessible label. Provide a `title` prop, or pass `aria-label` / `aria-labelledby` for screen readers.'
+          )
+        }
+      }
+    }, [open, title])
+
+    // Lock body scroll for modal overlay while visible
+    useScrollLock(isVisible && overlay === 'modal')
 
     // Handle visibility state for animation
     useEffect(() => {
@@ -270,11 +306,6 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(
         requestAnimationFrame(() => {
           setIsAnimating(true)
         })
-
-        // Lock body scroll for modal overlay
-        if (overlay === 'modal') {
-          document.body.style.overflow = 'hidden'
-        }
       } else if (isVisible) {
         // Start close animation
         setIsAnimating(false)
@@ -290,12 +321,13 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(
           e.preventDefault()
           e.stopPropagation()
           onClose?.('escape')
+          onOpenChange?.(false)
         }
       }
 
       document.addEventListener('keydown', handleKeyDown)
       return () => document.removeEventListener('keydown', handleKeyDown)
-    }, [open, onClose])
+    }, [open, onClose, onOpenChange])
 
     // Helper to create animation detail
     const createAnimationDetail = useCallback((): SheetAnimationDetail => ({
@@ -335,16 +367,11 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(
         if (!isAnimating) {
           setIsVisible(false)
 
-          // Restore body scroll
-          if (overlay === 'modal') {
-            document.body.style.overflow = ''
-          }
-
           // Restore focus to previous element
           previousActiveElement.current?.focus()
         }
       },
-      [isAnimating, onSheetAnimationEnd, overlay, createAnimationDetail]
+      [isAnimating, onSheetAnimationEnd, createAnimationDetail]
     )
 
     // Handle backdrop click
@@ -352,9 +379,10 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(
       (e: React.MouseEvent) => {
         if (e.target === e.currentTarget) {
           onClose?.('backdrop')
+          onOpenChange?.(false)
         }
       },
-      [onClose]
+      [onClose, onOpenChange]
     )
 
     // Focus trap for modal overlay
@@ -410,7 +438,8 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(
           ref={dialogRef}
           role="dialog"
           aria-modal={overlay === 'modal'}
-          aria-labelledby={title ? 'sheet-title' : undefined}
+          aria-label={!title ? ariaLabel : undefined}
+          aria-labelledby={title ? 'sheet-title' : ariaLabelledBy}
           aria-describedby="sheet-content"
           id={id}
           style={style}
@@ -427,19 +456,30 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(
           onTransitionEnd={handleTransitionEnd}
         >
           {/* Title slot */}
-          {title && <div id="sheet-title">{title}</div>}
+          {title && (
+            <div
+              id="sheet-title"
+              className={cn(
+                (children || footer) && 'border-b border-[var(--sinch-sys-color-border-default,#e5e7eb)]'
+              )}
+            >
+              {title}
+            </div>
+          )}
 
           {/* Content slot */}
           <div
             id="sheet-content"
-            className="min-h-0 overflow-auto overscroll-contain"
+            className="min-h-0 flex-1 overflow-auto overscroll-contain"
           >
             {children}
           </div>
 
           {/* Footer slot */}
           {footer && (
-            <div className="flex flex-row justify-end gap-4">{footer}</div>
+            <div className="flex flex-row justify-end gap-4 border-t border-[var(--sinch-sys-color-border-default,#e5e7eb)] pt-4 px-4 pb-4">
+              {footer}
+            </div>
           )}
         </div>
       </>

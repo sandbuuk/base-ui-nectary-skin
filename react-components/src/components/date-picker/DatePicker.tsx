@@ -246,6 +246,15 @@ export interface DatePickerProps extends Omit<React.HTMLAttributes<HTMLDivElemen
    */
   onChange?: (value: string) => void,
   /**
+   * Allow clearing the selected date
+   * @default false
+   */
+  clearable?: boolean,
+  /**
+   * Callback when the date value is cleared
+   */
+  onClear?: () => void,
+  /**
    * Aria label for the previous year button
    */
   prevYearAriaLabel?: string,
@@ -291,6 +300,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       max = '2100-12-31',
       locale = 'en-US',
       range = false,
+      clearable = false,
+      onClear,
       onChange,
       prevYearAriaLabel = 'Previous year',
       nextYearAriaLabel = 'Next year',
@@ -486,6 +497,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         ref={ref}
         className={cn('inline-block outline-none', className)}
         onMouseLeave={handleMouseLeave}
+        data-value={value ?? undefined}
         {...props}
       >
         <div className="box-border w-fit p-4 flex flex-col gap-2">
@@ -655,6 +667,25 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               )
             })}
           </div>
+
+          {/* Clear button */}
+          {clearable && value && value.length > 0 && (
+            <div className="flex justify-end">
+              <Button
+                size="s"
+                variant="subtle-secondary"
+                text="Clear"
+                aria-label="Clear selected date"
+                onClick={() => {
+                  if (!isControlled) {
+                    setInternalValue('')
+                  }
+                  onClear?.()
+                  onChange?.('')
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     )

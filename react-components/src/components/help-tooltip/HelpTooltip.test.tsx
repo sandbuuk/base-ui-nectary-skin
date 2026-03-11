@@ -10,9 +10,11 @@ describe('HelpTooltip', () => {
       expect(screen.getByRole('img', { name: 'circle-question' })).toBeInTheDocument()
     })
 
-    it('renders with tooltip role', () => {
-      render(<HelpTooltip text="Help text" />)
-      expect(screen.getByRole('tooltip')).toBeInTheDocument()
+    it('renders with tooltip role when open', async () => {
+      render(<HelpTooltip text="Help text" isOpen={true} />)
+      await waitFor(() => {
+        expect(screen.getByRole('tooltip')).toBeInTheDocument()
+      })
     })
 
     it('does not show tooltip text initially', () => {
@@ -29,13 +31,13 @@ describe('HelpTooltip', () => {
 
   describe('props', () => {
     it('applies custom className', () => {
-      render(<HelpTooltip text="Help text" className="custom-class" />)
-      expect(screen.getByRole('tooltip')).toHaveClass('custom-class')
+      render(<HelpTooltip text="Help text" className="custom-class" data-testid="help-tooltip" />)
+      expect(screen.getByTestId('help-tooltip')).toHaveClass('custom-class')
     })
 
     it('applies custom style', () => {
-      render(<HelpTooltip text="Help text" style={{ marginTop: '10px' }} />)
-      expect(screen.getByRole('tooltip')).toHaveStyle({ marginTop: '10px' })
+      render(<HelpTooltip text="Help text" style={{ marginTop: '10px' }} data-testid="help-tooltip" />)
+      expect(screen.getByTestId('help-tooltip')).toHaveStyle({ marginTop: '10px' })
     })
 
     it('applies custom width to the icon', () => {

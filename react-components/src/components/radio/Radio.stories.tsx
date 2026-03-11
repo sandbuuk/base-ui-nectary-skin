@@ -7,6 +7,13 @@ const meta: Meta<typeof Radio> = {
   title: 'Components/Radio',
   component: Radio,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A radio button group with controlled/uncontrolled modes, full keyboard navigation, and compound component pattern with RadioGroup and RadioOption.\n\nKeyboard: Tab to focus the group. Arrow Up/Down or Left/Right to select options.',
+      },
+    },
+  },
   args: {
     onChange: fn(),
   },

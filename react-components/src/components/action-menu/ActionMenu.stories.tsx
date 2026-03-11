@@ -13,6 +13,13 @@ const meta: Meta<typeof ActionMenu> = {
       description: 'How many rows to show before scrolling',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A dropdown menu displaying a list of action options with keyboard navigation support and customizable row scrolling limits. Compose with `ActionMenuOption` children for each menu item.\n\nKeyboard: Arrow Up/Down to navigate options. Enter or Space to select. Escape to close.',
+      },
+    },
+  },
 }
 
 export default meta

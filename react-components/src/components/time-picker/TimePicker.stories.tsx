@@ -34,6 +34,11 @@ const meta: Meta<typeof TimePicker> = {
   },
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: 'A circular clock interface for intuitive time selection supporting 12-hour and 24-hour formats with keyboard navigation.\n\nKeyboard: Tab to focus controls. Arrow Up/Down to adjust hours/minutes.',
+      },
+    },
   },
 }
 
@@ -227,4 +232,34 @@ export const NonStandardMinute: Story = {
     'aria-label': 'Select time',
   },
   name: 'Non-standard Minute',
+}
+
+/**
+ * Clearable TimePicker with a button to reset to 00:00.
+ */
+export const Clearable: Story = {
+  render: function ClearableTimePicker(args) {
+    const [time, setTime] = useState('14:30:00')
+
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <TimePicker
+          {...args}
+          value={time}
+          clearable
+          onChange={(newTime) => {
+            setTime(newTime)
+            args.onChange?.(newTime)
+          }}
+          onClear={() => setTime('00:00:00')}
+        />
+        <div className="text-foreground font-mono">
+          Selected time: {time}
+        </div>
+      </div>
+    )
+  },
+  args: {
+    'aria-label': 'Select time',
+  },
 }

@@ -78,9 +78,9 @@ const checkboxBoxVariants = cva(
 const focusRingVariants = cva(
   // Focus ring styles
   [
-    'absolute inset-[-3px] pointer-events-none',
+    'absolute inset-[-2px] pointer-events-none',
     'border-2 border-[var(--sinch-comp-checkbox-color-default-outline-focus)]',
-    'rounded-[calc(var(--sinch-comp-checkbox-shape-radius)+3px)]',
+    'rounded-[calc(var(--sinch-comp-checkbox-shape-radius)+2px)]',
     'transition-opacity duration-100 opacity-0',
   ],
   {

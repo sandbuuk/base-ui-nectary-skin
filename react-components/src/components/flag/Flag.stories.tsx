@@ -25,6 +25,13 @@ const meta: Meta<typeof Flag> = {
       description: 'URL template with %s placeholder for country code',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'Renders country flags from ISO 3166-1 alpha-2 country codes with multiple size variants and customizable image sources.',
+      },
+    },
+  },
 }
 
 export default meta

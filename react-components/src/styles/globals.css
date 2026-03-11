@@ -9,6 +9,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
+
+  /* System-level shadow fallbacks — overridden by theme tokens when available */
+  --sinch-sys-shadow-overlay-sm: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --sinch-sys-shadow-overlay-md: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --sinch-sys-color-backdrop: rgba(0, 0, 0, 0.5);
+  --sinch-sys-opacity-disabled: 0.5;
 }
 
 /* Ensure body inherits theme font when it has the theme class */

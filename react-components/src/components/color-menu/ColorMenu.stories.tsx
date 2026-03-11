@@ -29,6 +29,13 @@ const meta: Meta<typeof ColorMenu> = {
       description: 'Callback when a color is selected',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A grid-based color selection menu with keyboard navigation, customizable layout, and support for predefined and custom CSS colors.\n\nKeyboard: Arrow keys to navigate the grid. Enter or Space to select a color.',
+      },
+    },
+  },
 }
 
 export default meta

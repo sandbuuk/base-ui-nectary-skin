@@ -2,6 +2,7 @@ import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../utils/cn'
+import { useScrollLock } from '../../utils/useScrollLock'
 
 /**
  * PersistentOverlay is a dialog that cannot be closed via normal means (ESC, backdrop click, close button).
@@ -28,7 +29,7 @@ const dialogVariants = cva(
     'w-fit',
     'rounded-[var(--sinch-comp-dialog-shape-radius,8px)]',
     'bg-[var(--sinch-comp-dialog-color-default-background-initial,var(--sinch-sys-color-surface-primary-default))]',
-    'shadow-[var(--sinch-comp-dialog-shadow,0_4px_16px_rgba(0,0,0,0.2))]',
+    'shadow-[var(--sinch-comp-dialog-shadow,var(--sinch-sys-shadow-overlay-sm))]',
     'outline-none',
   ],
   {
@@ -160,18 +161,7 @@ export const PersistentOverlay = forwardRef<HTMLDivElement, PersistentOverlayPro
     }, [open])
 
     // Prevent scroll when open
-    useEffect(() => {
-      if (!open) {
-        return
-      }
-
-      const originalOverflow = document.body.style.overflow
-      document.body.style.overflow = 'hidden'
-
-      return () => {
-        document.body.style.overflow = originalOverflow
-      }
-    }, [open])
+    useScrollLock(open)
 
     if (!open) {
       return null

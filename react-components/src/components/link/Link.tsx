@@ -132,12 +132,6 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     const shouldPreventDefault = preventDefaultProp ?? useHistory
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-      if (disabled) {
-        e.preventDefault()
-
-        return
-      }
-
       if (shouldPreventDefault) {
         e.preventDefault()
 
@@ -154,22 +148,8 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       ? '[--sinch-global-color-icon:var(--sinch-comp-link-color-disabled-icon-initial)]'
       : '[--sinch-global-color-icon:var(--sinch-comp-link-color-default-icon-initial)] hover:[--sinch-global-color-icon:var(--sinch-comp-link-color-default-icon-hover)]'
 
-    return (
-      <a
-        ref={ref}
-        href={disabled ? undefined : href}
-        target={external ? '_blank' : undefined}
-        rel={external ? 'noopener noreferrer' : undefined}
-        referrerPolicy="no-referrer"
-        aria-disabled={disabled || undefined}
-        onClick={handleClick}
-        className={cn(
-          linkVariants({ standalone, disabled }),
-          iconColorClass,
-          className
-        )}
-        {...props}
-      >
+    const content = (
+      <>
         <span className="whitespace-[var(--sinch-global-text-white-space,normal)]">
           {text ?? children}
         </span>
@@ -206,6 +186,45 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             className="inline-block ml-1 align-[-0.2em] h-[1em] [--sinch-global-size-icon:1em]"
           />
         )}
+      </>
+    )
+
+    // Render as <span> when disabled to prevent keyboard navigation to non-interactive element
+    if (disabled) {
+      const { href: _href, target: _target, rel: _rel, onClick: _onClick, ...spanProps } = props as Record<string, unknown>
+      return (
+        <span
+          ref={ref as React.Ref<HTMLSpanElement>}
+          role="link"
+          aria-disabled="true"
+          className={cn(
+            linkVariants({ standalone, disabled }),
+            iconColorClass,
+            className
+          )}
+          {...spanProps}
+        >
+          {content}
+        </span>
+      )
+    }
+
+    return (
+      <a
+        ref={ref}
+        href={href}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
+        referrerPolicy="no-referrer"
+        onClick={handleClick}
+        className={cn(
+          linkVariants({ standalone, disabled }),
+          iconColorClass,
+          className
+        )}
+        {...props}
+      >
+        {content}
       </a>
     )
   }

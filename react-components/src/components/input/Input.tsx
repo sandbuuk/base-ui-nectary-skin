@@ -1,5 +1,5 @@
 import { type VariantProps, cva } from 'class-variance-authority'
-import { forwardRef, useCallback, useState } from 'react'
+import { forwardRef, useCallback, useEffect, useState } from 'react'
 import { cn } from '../../utils/cn'
 
 const inputWrapperVariants = cva(
@@ -246,6 +246,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     // Internal state for uncontrolled mode
     const [internalValue, setInternalValue] = useState(defaultValue ?? '')
     const [isFocused, setIsFocused] = useState(false)
+
+    // Warn in development if input has no accessible label
+    useEffect(() => {
+      if (process.env.NODE_ENV !== 'production' && !ariaLabel && !props['aria-labelledby'] && !props.id) {
+        console.warn(
+          'Input: Must have an `aria-label`, `aria-labelledby`, or an associated `<label>` (via matching `id`) for accessibility.'
+        )
+      }
+    }, [ariaLabel, props['aria-labelledby'], props.id])
 
     // Determine if controlled
     const isControlled = controlledValue !== undefined

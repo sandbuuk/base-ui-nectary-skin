@@ -24,6 +24,13 @@ const meta: Meta<typeof Accordion> = {
       description: 'Allow multiple items to be expanded at once',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A collapsible container that displays content sections with expand/collapse toggle, supporting single and multiple expanded items with optional status indicators. Compose with `AccordionItem` children, or use the `AccordionGroup` compound export (`AccordionGroup.Item`).\n\nKeyboard: Tab to focus items. Enter or Space to expand/collapse.',
+      },
+    },
+  },
 }
 
 export default meta

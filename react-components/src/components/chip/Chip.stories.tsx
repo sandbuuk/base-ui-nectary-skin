@@ -54,6 +54,13 @@ const meta: Meta<typeof Chip> = {
       control: 'boolean',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A removable tag or label component with multiple color variants, two sizes, optional icons, and click handlers for dismissal.\n\nKeyboard: Tab to focus. Enter or Space to activate. Delete or Backspace to remove.',
+      },
+    },
+  },
 }
 
 export default meta

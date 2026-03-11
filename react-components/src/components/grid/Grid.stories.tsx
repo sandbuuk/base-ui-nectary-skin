@@ -8,6 +8,12 @@ const meta: Meta<typeof Grid> = {
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
+    docs: {
+      description: {
+        component:
+          'A responsive CSS grid container that adapts to multiple breakpoints with configurable columns, gutters, and margins via CSS variables.',
+      },
+    },
   },
   argTypes: {
     style: {

@@ -41,6 +41,13 @@ const meta: Meta<typeof FileDrop> = {
       description: 'Button text',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A drag-and-drop file upload zone with validation for file type, size, and quantity, plus a fallback button for file selection.',
+      },
+    },
+  },
 }
 
 export default meta

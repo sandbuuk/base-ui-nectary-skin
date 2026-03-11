@@ -5,6 +5,13 @@ const meta: Meta<typeof Title> = {
   title: 'Components/Title',
   component: Title,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A semantic heading component with configurable size and heading levels (h1-h6) supporting text ellipsis, custom colors, and typography tokens.',
+      },
+    },
+  },
   argTypes: {
     type: {
       control: 'select',

@@ -35,13 +35,15 @@ describe('Tooltip', () => {
       expect(ref.current).toBeInstanceOf(HTMLDivElement)
     })
 
-    it('has role="tooltip"', () => {
+    it('has role="tooltip" when open', async () => {
       render(
-        <Tooltip text="Tooltip text">
+        <Tooltip text="Tooltip text" isOpen>
           <button>Trigger</button>
         </Tooltip>
       )
-      expect(screen.getByRole('tooltip')).toBeInTheDocument()
+      await waitFor(() => {
+        expect(screen.getByRole('tooltip')).toBeInTheDocument()
+      })
     })
   })
 
@@ -49,11 +51,11 @@ describe('Tooltip', () => {
   describe('props', () => {
     it('applies custom className to container', () => {
       render(
-        <Tooltip text="Tooltip text" className="custom-class">
+        <Tooltip text="Tooltip text" className="custom-class" data-testid="tooltip-wrapper">
           <button>Trigger</button>
         </Tooltip>
       )
-      expect(screen.getByRole('tooltip')).toHaveClass('custom-class')
+      expect(screen.getByTestId('tooltip-wrapper')).toHaveClass('custom-class')
     })
 
     it('passes through additional HTML attributes', () => {

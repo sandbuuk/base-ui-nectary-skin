@@ -16,6 +16,13 @@ const meta: Meta<typeof Alert> = {
       description: 'Text content to display in the alert',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A message display component for informational, warning, and error notifications with icon, text content, and optional action/close buttons.',
+      },
+    },
+  },
 }
 
 export default meta

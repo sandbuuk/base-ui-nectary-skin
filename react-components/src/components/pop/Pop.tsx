@@ -8,6 +8,7 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { cn } from '../../utils/cn'
+import { useScrollLock } from '../../utils/useScrollLock'
 
 /**
  * Pop is a low-level floating element utility component.
@@ -48,6 +49,8 @@ export interface PopProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'co
   disableBackdropClose?: boolean
   /** Callback when the pop requests to close */
   onClose?: () => void
+  /** Callback when the open state should change */
+  onOpenChange?: (open: boolean) => void
   /** The target/trigger element */
   children: React.ReactNode
   /** The floating content */
@@ -94,6 +97,7 @@ export const Pop = forwardRef<HTMLDivElement, PopProps>(
       inset = 0,
       disableBackdropClose = false,
       onClose,
+      onOpenChange,
       'aria-label': ariaLabel,
       ...props
     },
@@ -250,6 +254,7 @@ export const Pop = forwardRef<HTMLDivElement, PopProps>(
         if (e.key === 'Escape') {
           e.preventDefault()
           onClose?.()
+          onOpenChange?.(false)
         }
       }
 
@@ -258,23 +263,20 @@ export const Pop = forwardRef<HTMLDivElement, PopProps>(
       return () => {
         document.removeEventListener('keydown', handleKeyDown)
       }
-    }, [open, onClose])
+    }, [open, onClose, onOpenChange])
 
     // Handle scroll locking
+    useScrollLock(open && !allowScroll)
+
     useEffect(() => {
-      if (!open) {
+      if (!open || allowScroll) {
         return
       }
 
-      if (!allowScroll) {
-        disableOverscroll()
-        const originalOverflow = document.body.style.overflow
-        document.body.style.overflow = 'hidden'
+      disableOverscroll()
 
-        return () => {
-          enableOverscroll()
-          document.body.style.overflow = originalOverflow
-        }
+      return () => {
+        enableOverscroll()
       }
     }, [open, allowScroll])
 
@@ -286,9 +288,10 @@ export const Pop = forwardRef<HTMLDivElement, PopProps>(
         }
         if (e.target === e.currentTarget) {
           onClose?.()
+          onOpenChange?.(false)
         }
       },
-      [disableBackdropClose, onClose]
+      [disableBackdropClose, onClose, onOpenChange]
     )
 
     // Handle click outside in non-modal mode
@@ -312,6 +315,7 @@ export const Pop = forwardRef<HTMLDivElement, PopProps>(
           !targetRef.current.contains(e.target as Node)
         ) {
           onClose?.()
+          onOpenChange?.(false)
         }
       }
 
@@ -324,7 +328,7 @@ export const Pop = forwardRef<HTMLDivElement, PopProps>(
         clearTimeout(timeoutId)
         document.removeEventListener('mousedown', handleClickOutside)
       }
-    }, [open, modal, disableBackdropClose, onClose])
+    }, [open, modal, disableBackdropClose, onClose, onOpenChange])
 
     const popContent = open && (
       <>

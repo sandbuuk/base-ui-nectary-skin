@@ -8,6 +8,11 @@ const meta: Meta<typeof ProgressStepper> = {
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
+    docs: {
+      description: {
+        component: 'A multi-step progress indicator displaying completion status for each step with connecting lines and optional descriptions. Compose with `ProgressStepperItem` children, or use the `ProgressStepperGroup` compound export (`ProgressStepperGroup.Item`).',
+      },
+    },
   },
   argTypes: {
     value: {

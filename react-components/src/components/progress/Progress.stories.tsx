@@ -5,6 +5,13 @@ const meta: Meta<typeof Progress> = {
   title: 'Components/Progress',
   component: Progress,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A linear progress bar displaying completion percentage with optional animated fill and text label, supporting indeterminate state.',
+      },
+    },
+  },
   argTypes: {
     value: {
       control: { type: 'range', min: 0, max: 100, step: 1 },

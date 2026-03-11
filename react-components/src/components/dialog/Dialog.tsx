@@ -9,6 +9,7 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { cn } from '../../utils/cn'
+import { useScrollLock } from '../../utils/useScrollLock'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { Title } from '../title'
@@ -28,16 +29,14 @@ const dialogContainerVariants = cva(
     'm-auto',
     'flex',
     'flex-col',
-    'py-6',
     'border-none',
     'outline-none',
     'box-border',
-    'bg-[var(--sinch-comp-dialog-color-default-background-initial,white)]',
-    'rounded-[var(--sinch-comp-dialog-shape-radius,8px)]',
-    'shadow-[var(--sinch-comp-dialog-shadow,0_8px_32px_rgba(0,0,0,0.2))]',
-    'max-w-[var(--sinch-comp-dialog-max-width,512px)]',
-    'max-h-[var(--sinch-comp-dialog-max-height,90vh)]',
-    'w-[var(--sinch-comp-dialog-width,fit-content)]',
+    'bg-[var(--sinch-comp-dialog-color-default-background-initial,var(--sinch-sys-color-surface-primary-default,white))]',
+    'rounded-[var(--sinch-comp-dialog-shape-radius,12px)]',
+    'shadow-[var(--sinch-comp-dialog-shadow,var(--sinch-sys-shadow-overlay-md))]',
+    'max-h-[var(--sinch-comp-dialog-max-height,85vh)]',
+    'min-w-[320px]',
     'z-50',
     // Animation
     'transition-all',
@@ -50,9 +49,16 @@ const dialogContainerVariants = cva(
         true: 'opacity-100 scale-100',
         false: 'opacity-0 scale-95',
       },
+      size: {
+        sm: 'max-w-[384px] w-full',
+        md: 'max-w-[512px] w-full',
+        lg: 'max-w-[768px] w-full',
+        fullscreen: 'max-w-none w-[calc(100vw-48px)] max-h-[calc(100vh-48px)]',
+      },
     },
     defaultVariants: {
       open: false,
+      size: 'md',
     },
   }
 )
@@ -63,8 +69,9 @@ const backdropVariants = cva(
     'fixed',
     'inset-0',
     'z-40',
-    'bg-black/55',
-    'transition-opacity',
+    'bg-[var(--sinch-comp-dialog-color-backdrop,var(--sinch-sys-color-backdrop))]',
+    'backdrop-blur-sm',
+    'transition-[opacity,backdrop-filter]',
     'duration-200',
   ],
   {
@@ -80,14 +87,21 @@ const backdropVariants = cva(
   }
 )
 
+export type DialogSize = 'sm' | 'md' | 'lg' | 'fullscreen'
+
 export interface DialogProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>,
-    VariantProps<typeof dialogContainerVariants> {
+    Omit<VariantProps<typeof dialogContainerVariants>, 'size'> {
   /**
    * Whether the dialog is open
    * @default false
    */
   open?: boolean,
+  /**
+   * Dialog size variant
+   * @default 'md'
+   */
+  size?: DialogSize,
   /**
    * Dialog title/caption
    */
@@ -97,6 +111,12 @@ export interface DialogProps
    * @param detail - The reason for closing ('close', 'escape', or 'backdrop')
    */
   onClose?: (detail: DialogCloseDetail) => void,
+  /**
+   * Callback when the open state should change.
+   * Fires with `false` for all close actions (escape, backdrop, close button).
+   * Useful for controlled state: `onOpenChange={(open) => setOpen(open)}`
+   */
+  onOpenChange?: (open: boolean) => void,
   /**
    * Aria label for the close button
    * @default 'Close'
@@ -124,6 +144,14 @@ export interface DialogProps
    * @default false
    */
   hideCloseButton?: boolean,
+  /**
+   * Callback when the open/close transition starts
+   */
+  onDialogTransitionStart?: (action: 'open' | 'close') => void,
+  /**
+   * Callback when the open/close transition ends
+   */
+  onDialogTransitionEnd?: (action: 'open' | 'close') => void,
 }
 
 /**
@@ -161,13 +189,17 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       className,
       children,
       open = false,
+      size = 'md',
       caption,
       onClose,
+      onOpenChange,
       closeAriaLabel = 'Close',
       icon,
       buttons,
       container,
       hideCloseButton = false,
+      onDialogTransitionStart,
+      onDialogTransitionEnd,
       style,
       id,
       'aria-label': ariaLabel,
@@ -183,6 +215,9 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     // Expose the dialog ref through the forwarded ref
     useImperativeHandle(ref, () => dialogRef.current as HTMLDivElement)
 
+    // Lock body scroll while dialog is visible
+    useScrollLock(isVisible)
+
     // Handle visibility state for animation
     useEffect(() => {
       if (open) {
@@ -195,15 +230,14 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         // Start open animation on next frame
         requestAnimationFrame(() => {
           setIsAnimating(true)
+          onDialogTransitionStart?.('open')
         })
-
-        // Lock body scroll
-        document.body.style.overflow = 'hidden'
       } else if (isVisible) {
         // Start close animation
         setIsAnimating(false)
+        onDialogTransitionStart?.('close')
       }
-    }, [open, isVisible])
+    }, [open, isVisible, onDialogTransitionStart])
 
     // Handle escape key
     useEffect(() => {
@@ -214,30 +248,30 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           e.preventDefault()
           e.stopPropagation()
           onClose?.('escape')
+          onOpenChange?.(false)
         }
       }
 
       document.addEventListener('keydown', handleKeyDown)
       return () => document.removeEventListener('keydown', handleKeyDown)
-    }, [open, onClose])
+    }, [open, onClose, onOpenChange])
 
     // Handle animation end - clean up after closing
     const handleTransitionEnd = useCallback(
       (e: React.TransitionEvent<HTMLDivElement>) => {
         if (e.propertyName !== 'opacity') return
 
-        // If we just finished closing, hide the dialog
-        if (!isAnimating) {
+        if (isAnimating) {
+          onDialogTransitionEnd?.('open')
+        } else {
+          onDialogTransitionEnd?.('close')
           setIsVisible(false)
-
-          // Restore body scroll
-          document.body.style.overflow = ''
 
           // Restore focus to previous element
           previousActiveElement.current?.focus()
         }
       },
-      [isAnimating]
+      [isAnimating, onDialogTransitionEnd]
     )
 
     // Handle backdrop click
@@ -245,26 +279,36 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       (e: React.MouseEvent) => {
         if (e.target === e.currentTarget) {
           onClose?.('backdrop')
+          onOpenChange?.(false)
         }
       },
-      [onClose]
+      [onClose, onOpenChange]
     )
 
     // Handle close button click
     const handleCloseClick = useCallback(() => {
       onClose?.('close')
-    }, [onClose])
+      onOpenChange?.(false)
+    }, [onClose, onOpenChange])
 
     // Focus trap for modal
     useEffect(() => {
       if (!open || !dialogRef.current) return
 
       const dialog = dialogRef.current
-      const focusableElements = dialog.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      )
+
+      // Get focusable elements, excluding those inside nested dialogs
+      const getFocusableElements = () => {
+        const all = dialog.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        return Array.from(all).filter(
+          (el) => !el.closest('[role="dialog"]') || el.closest('[role="dialog"]') === dialog
+        )
+      }
+
+      const focusableElements = getFocusableElements()
       const firstFocusable = focusableElements[0]
-      const lastFocusable = focusableElements[focusableElements.length - 1]
 
       // Focus first focusable element
       firstFocusable?.focus()
@@ -272,15 +316,22 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       const handleTabKey = (e: KeyboardEvent) => {
         if (e.key !== 'Tab') return
 
+        // Re-query to handle dynamic content
+        const currentFocusable = getFocusableElements()
+        if (currentFocusable.length === 0) return
+
+        const first = currentFocusable[0]
+        const last = currentFocusable[currentFocusable.length - 1]
+
         if (e.shiftKey) {
-          if (document.activeElement === firstFocusable) {
+          if (document.activeElement === first) {
             e.preventDefault()
-            lastFocusable?.focus()
+            last?.focus()
           }
         } else {
-          if (document.activeElement === lastFocusable) {
+          if (document.activeElement === last) {
             e.preventDefault()
-            firstFocusable?.focus()
+            first?.focus()
           }
         }
       }
@@ -317,7 +368,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
             id={id}
             style={style}
             className={cn(
-              dialogContainerVariants({ open: isAnimating }),
+              dialogContainerVariants({ open: isAnimating, size }),
               'pointer-events-auto',
               className
             )}
@@ -327,13 +378,14 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
             {/* Header */}
             <div
               className={cn(
-                'flex flex-row items-start gap-2 mb-3 px-6',
+                'flex flex-row items-start gap-2 px-6 pt-6 pb-4',
+                (children || buttons) && 'border-b border-[var(--sinch-sys-color-border-default,#e5e7eb)]',
                 '[--sinch-global-size-icon:24px]',
                 '[--sinch-global-color-icon:var(--sinch-comp-dialog-color-default-icon-initial)]'
               )}
             >
               {/* Icon slot */}
-              {icon && <span className="shrink-0">{icon}</span>}
+              {icon && <span className="shrink-0 mt-0.5">{icon}</span>}
 
               {/* Caption */}
               {caption && (
@@ -356,7 +408,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
                   size="s"
                   aria-label={closeAriaLabel}
                   onClick={handleCloseClick}
-                  className="relative left-1 -top-1 ml-auto"
+                  className="ml-auto shrink-0"
                   icon={<Icon name="fa-xmark" iconsVersion="2" size="sm" />}
                 />
               )}
@@ -365,14 +417,14 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
             {/* Content */}
             <div
               id="dialog-content"
-              className="min-h-0 overflow-auto px-6 py-1"
+              className="min-h-0 overflow-auto px-6 py-5"
             >
               {children}
             </div>
 
             {/* Buttons/Actions */}
             {buttons && (
-              <div className="flex flex-row justify-end gap-4 mt-5 px-6">
+              <div className="flex flex-row justify-end gap-3 px-6 pt-4 pb-6 border-t border-[var(--sinch-sys-color-border-default,#e5e7eb)]">
                 {buttons}
               </div>
             )}

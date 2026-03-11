@@ -439,7 +439,7 @@ export const FileDrop = forwardRef<HTMLDivElement, FileDropProps>(
               'bg-surface-primary border border-border',
               'text-foreground font-sans text-sm',
               'hover:bg-surface-primary-hover',
-              'disabled:opacity-50 disabled:cursor-not-allowed'
+              'disabled:opacity-[var(--sinch-sys-opacity-disabled,0.5)] disabled:cursor-not-allowed'
             )}
           >
             {buttonText}

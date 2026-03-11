@@ -24,6 +24,13 @@ const meta: Meta<typeof FileStatus> = {
     filename: 'document.pdf',
     type: 'pending',
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'Displays file upload or processing status with status-specific icons, filename, optional content, and action buttons.',
+      },
+    },
+  },
 }
 
 export default meta

@@ -28,6 +28,13 @@ const meta: Meta<typeof Pagination> = {
       description: 'Aria label for the navigation element',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A pagination control displaying page numbers with ellipsis for large sets and navigation arrows for moving between pages.\n\nKeyboard: Tab to focus page buttons. Enter or Space to navigate to a page.',
+      },
+    },
+  },
 }
 
 export default meta

@@ -1,5 +1,5 @@
 import { type VariantProps, cva } from 'class-variance-authority'
-import { forwardRef } from 'react'
+import { forwardRef, useEffect } from 'react'
 import { cn } from '../../utils/cn'
 import { Spinner } from '../spinner'
 
@@ -299,6 +299,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     // Determine if this is an icon-only button
     const hasText = text !== undefined || children !== undefined
     const isIconOnly = !hasText && icon !== undefined
+
+    // Warn in development if icon-only button lacks aria-label
+    useEffect(() => {
+      if (process.env.NODE_ENV !== 'production' && isIconOnly && !props['aria-label'] && !props['aria-labelledby']) {
+        console.warn(
+          'Button: Icon-only buttons must have an `aria-label` or `aria-labelledby` for accessibility.'
+        )
+      }
+    }, [isIconOnly, props['aria-label'], props['aria-labelledby']])
 
     // Determine the effective disabled state (disabled or loading)
     const isDisabled = disabled || loading

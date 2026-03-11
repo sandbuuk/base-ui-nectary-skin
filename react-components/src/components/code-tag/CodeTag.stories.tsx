@@ -15,6 +15,13 @@ const meta: Meta<typeof CodeTag> = {
       description: 'Children content (alternative to text prop)',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'An inline code display component rendering text with monospace font and subtle background styling for code snippets or technical terms.',
+      },
+    },
+  },
 }
 
 export default meta

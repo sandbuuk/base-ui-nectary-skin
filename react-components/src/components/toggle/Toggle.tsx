@@ -11,8 +11,8 @@ const toggleVariants = cva(
   {
     variants: {
       small: {
-        true: '[--sinch-local-size:16px] [--sinch-local-width:32px] [--sinch-local-knob-size:12px] [--sinch-local-translate:16px]',
-        false: '[--sinch-local-size:20px] [--sinch-local-width:40px] [--sinch-local-knob-size:16px] [--sinch-local-translate:20px]',
+        true: '[--sinch-local-size:var(--sinch-comp-toggle-size-container-s,16px)] [--sinch-local-width:var(--sinch-comp-toggle-size-track-s,32px)] [--sinch-local-knob-size:var(--sinch-comp-toggle-size-knob-s,12px)] [--sinch-local-translate:var(--sinch-comp-toggle-size-translate-s,16px)]',
+        false: '[--sinch-local-size:var(--sinch-comp-toggle-size-container-m,20px)] [--sinch-local-width:var(--sinch-comp-toggle-size-track-m,40px)] [--sinch-local-knob-size:var(--sinch-comp-toggle-size-knob-m,16px)] [--sinch-local-translate:var(--sinch-comp-toggle-size-translate-m,20px)]',
       },
       disabled: {
         true: 'cursor-default',
@@ -263,6 +263,7 @@ export const Toggle = forwardRef<HTMLDivElement, ToggleProps>(
         aria-checked={checked}
         aria-disabled={disabled}
         aria-label={ariaLabel}
+        data-value={String(checked)}
         tabIndex={disabled ? -1 : 0}
         className={cn(toggleVariants({ small, disabled }), className)}
         onClick={handleClick}
@@ -278,8 +279,9 @@ export const Toggle = forwardRef<HTMLDivElement, ToggleProps>(
             className={cn(
               'absolute -inset-[3px] pointer-events-none',
               'border-2 border-[var(--sinch-comp-toggle-color-default-outline-focus)]',
-              'rounded-[17px]',
-              isFocused ? 'block' : 'hidden'
+              'rounded-full',
+              'transition-opacity duration-100',
+              isFocused ? 'opacity-100' : 'opacity-0'
             )}
           />
           {/* Knob */}

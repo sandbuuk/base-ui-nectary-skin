@@ -25,6 +25,13 @@ const meta: Meta<typeof FilePicker> = {
       description: 'Maximum file size in bytes',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A wrapper component that opens the native file picker when its child element is clicked, with optional file size validation.',
+      },
+    },
+  },
 }
 
 export default meta

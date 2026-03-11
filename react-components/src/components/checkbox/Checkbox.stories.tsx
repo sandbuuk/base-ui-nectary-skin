@@ -50,6 +50,13 @@ const meta: Meta<typeof Checkbox> = {
       description: 'Accessible label',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A binary or tri-state selection input with controlled/uncontrolled patterns, indeterminate state, and keyboard navigation via spacebar.\n\nKeyboard: Tab to focus. Space to toggle checked state.',
+      },
+    },
+  },
 }
 
 export default meta

@@ -9,7 +9,7 @@ const meta: Meta<typeof List> = {
   parameters: {
     docs: {
       description: {
-        component: 'A container component for displaying vertical lists of items with consistent styling.',
+        component: 'A container component for displaying vertical lists of items with consistent styling. Compose with `ListItem` children for each row.',
       },
     },
   },

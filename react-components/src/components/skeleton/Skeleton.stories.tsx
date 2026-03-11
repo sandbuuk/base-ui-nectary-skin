@@ -6,6 +6,13 @@ const meta: Meta<typeof Skeleton> = {
   title: 'Components/Skeleton',
   component: Skeleton,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A loading placeholder component with shimmer animation that matches content dimensions for smooth skeleton screen layouts.',
+      },
+    },
+  },
   argTypes: {
     card: {
       control: 'boolean',

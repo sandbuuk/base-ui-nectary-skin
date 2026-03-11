@@ -35,6 +35,13 @@ const meta: Meta<typeof Emoji> = {
       description: 'Vertical alignment of the emoji',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'Renders emoji characters with optional custom image URLs, supporting multiple size variants for inline or standalone display.',
+      },
+    },
+  },
 }
 
 export default meta

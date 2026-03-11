@@ -7,6 +7,13 @@ const meta: Meta<typeof SegmentCollapse> = {
   title: 'Components/SegmentCollapse',
   component: SegmentCollapse,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A toggle button controlling section expansion/collapse with a rotating chevron icon and smooth animation.\n\nKeyboard: Tab to focus. Enter or Space to toggle expansion.',
+      },
+    },
+  },
   args: {
     onChange: fn(),
     'aria-label': 'Toggle section',

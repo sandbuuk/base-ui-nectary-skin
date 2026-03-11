@@ -112,7 +112,7 @@ export const ColorSwatch = forwardRef<HTMLDivElement, ColorSwatchProps>(
       const hasColor = name !== null && name !== undefined && name.length > 0
 
       if (!hasColor) {
-        return { backgroundColor: undefined, hasColor: false, computedAriaLabel: ariaLabel }
+        return { backgroundColor: undefined, hasColor: false, computedAriaLabel: ariaLabel ?? 'No color' }
       }
 
       if (isSwatchColor(name)) {

@@ -280,7 +280,7 @@ const radioCircleVariants = cva(
 const focusRingVariants = cva(
   // Focus ring styles
   [
-    'absolute inset-[-3px] pointer-events-none',
+    'absolute inset-[-2px] pointer-events-none',
     'border-2 border-[var(--sinch-comp-radio-color-default-outline-focus)]',
     'rounded-full',
     'transition-opacity duration-100 opacity-0',

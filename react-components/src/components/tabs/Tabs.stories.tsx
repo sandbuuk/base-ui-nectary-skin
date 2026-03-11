@@ -44,6 +44,13 @@ const meta: Meta<typeof Tabs> = {
   title: 'Components/Tabs',
   component: Tabs,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A horizontal tab navigation component with text and icon support, keyboard navigation, and smooth active indicator animation. Compose with `TabsOption` and `TabsIconOption` children, or use the `TabsGroup` compound export (`TabsGroup.Option`, `TabsGroup.IconOption`).\n\nKeyboard: Tab to focus the tab list. Arrow Left/Right to switch tabs.',
+      },
+    },
+  },
   args: {
     onChange: fn(),
   },

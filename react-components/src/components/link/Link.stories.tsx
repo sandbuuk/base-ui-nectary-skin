@@ -39,6 +39,13 @@ const meta: Meta<typeof Link> = {
       description: 'Prevents default anchor behavior on click',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A navigation link component supporting inline and standalone modes, external link indicators, and SPA-friendly history navigation.\n\nKeyboard: Tab to focus. Enter to navigate.',
+      },
+    },
+  },
 }
 
 export default meta

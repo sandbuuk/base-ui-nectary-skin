@@ -5,6 +5,7 @@ import {
   isValidElement,
   useCallback,
   useEffect,
+  useId,
   useRef,
   useState,
 } from 'react'
@@ -153,6 +154,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const [isVisible, setIsVisible] = useState(false)
     const showTimeoutRef = useRef<number | null>(null)
     const hideTimeoutRef = useRef<number | null>(null)
+    const tooltipId = `tooltip-${useId()}`
 
     // Determine if controlled or uncontrolled
     const isControlled = controlledIsOpen !== undefined
@@ -239,9 +241,37 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       return children
     }
 
-    // Clone the child to add event handlers
+    const handleFocus = useCallback(() => {
+      if (isControlled || text.length === 0) {
+        return
+      }
+
+      setInternalIsOpen(true)
+    }, [isControlled, text])
+
+    const handleBlur = useCallback(() => {
+      if (isControlled) {
+        return
+      }
+
+      setInternalIsOpen(false)
+    }, [isControlled])
+
+    const handleKeyDown = useCallback(
+      (e: React.KeyboardEvent<HTMLElement>) => {
+        if (e.key === 'Escape' && !isControlled) {
+          setInternalIsOpen(false)
+        }
+      },
+      [isControlled]
+    )
+
+    // Clone the child to add event handlers, aria-describedby, and tabIndex for keyboard access
+    const childProps = children.props as React.HTMLAttributes<HTMLElement>
     const childWithHandlers = isValidElement(children)
       ? cloneElement(children as React.ReactElement<React.HTMLAttributes<HTMLElement>>, {
+        'aria-describedby': isOpen ? tooltipId : undefined,
+        tabIndex: childProps?.tabIndex ?? 0,
         onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
           handleMouseEnter()
           ;(children.props as React.HTMLAttributes<HTMLElement>)?.onMouseEnter?.(e)
@@ -254,19 +284,32 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           handleMouseDown()
           ;(children.props as React.HTMLAttributes<HTMLElement>)?.onMouseDown?.(e)
         },
-      })
+        onFocus: (e: React.FocusEvent<HTMLElement>) => {
+          handleFocus()
+          ;(children.props as React.HTMLAttributes<HTMLElement>)?.onFocus?.(e)
+        },
+        onBlur: (e: React.FocusEvent<HTMLElement>) => {
+          handleBlur()
+          ;(children.props as React.HTMLAttributes<HTMLElement>)?.onBlur?.(e)
+        },
+        onKeyDown: (e: React.KeyboardEvent<HTMLElement>) => {
+          handleKeyDown(e)
+          ;(children.props as React.HTMLAttributes<HTMLElement>)?.onKeyDown?.(e)
+        },
+      } as React.HTMLAttributes<HTMLElement>)
       : children
 
     return (
       <div
         ref={ref}
         className={cn('relative inline-flex', className)}
-        role="tooltip"
         {...props}
       >
         {childWithHandlers}
         {(isOpen || isVisible) && (
           <div
+            id={tooltipId}
+            role="tooltip"
             className={cn(
               tooltipContentVariants({
                 orientation,

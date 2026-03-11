@@ -36,6 +36,13 @@ const meta: Meta<typeof HelpTooltip> = {
       control: 'boolean',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A convenience wrapper combining a help icon with tooltip functionality for displaying contextual help text on hover.\n\nKeyboard: Tab to focus the help icon. Tooltip appears on focus.',
+      },
+    },
+  },
   // Add padding to ensure tooltips have room to display
   decorators: [
     (Story) => (

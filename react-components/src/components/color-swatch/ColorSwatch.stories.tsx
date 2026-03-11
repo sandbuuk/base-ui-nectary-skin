@@ -16,6 +16,13 @@ const meta: Meta<typeof ColorSwatch> = {
       description: 'Accessible label for the color swatch',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A circular color indicator displaying a solid color from predefined swatches or custom CSS values.',
+      },
+    },
+  },
 }
 
 export default meta

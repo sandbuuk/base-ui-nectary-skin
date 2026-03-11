@@ -12,6 +12,12 @@ const meta: Meta<typeof EmojiPicker> = {
   },
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component:
+          'A comprehensive emoji picker with category navigation, search functionality, and skin tone selection for selecting emojis with customizable image sources.\n\nKeyboard: Tab to navigate sections. Arrow keys within emoji grid. Enter to select.',
+      },
+    },
   },
 }
 

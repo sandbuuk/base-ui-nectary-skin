@@ -242,6 +242,15 @@ export interface TimePickerProps
    */
   submitAriaLabel?: string
   /**
+   * Allow clearing the selected time
+   * @default false
+   */
+  clearable?: boolean
+  /**
+   * Callback when the time value is cleared
+   */
+  onClear?: () => void
+  /**
    * Change handler - called when submit button is clicked
    * Returns time in ISO 8601 format (HH:mm:ss)
    */
@@ -257,6 +266,8 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
       ampm = false,
       'aria-label': ariaLabel,
       submitAriaLabel = 'Submit',
+      clearable = false,
+      onClear,
       onChange,
       ...props
     },
@@ -410,6 +421,14 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
       onChange?.(timeValue)
     }, [internalHour, internalMinute, onChange])
 
+    // Handle clear
+    const handleClear = useCallback(() => {
+      setInternalHour(0)
+      setInternalMinute(0)
+      onClear?.()
+      onChange?.('00:00:00')
+    }, [onClear, onChange])
+
     // Handle keyboard navigation on hour needle
     const handleHourKeyDown = useCallback((e: React.KeyboardEvent) => {
       switch (e.key) {
@@ -454,9 +473,10 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
         ref={ref}
         className={cn(timePickerVariants(), className)}
         aria-label={ariaLabel}
+        data-value={stringifyTime(internalHour, internalMinute)}
         {...props}
       >
-        <div className="flex flex-col w-[248px] p-4 box-border gap-4">
+        <div className="flex flex-col w-[var(--sinch-comp-time-picker-size-container-width,248px)] p-4 box-border gap-4">
           {/* Header */}
           <div
             className="relative w-full h-12 select-none"
@@ -516,10 +536,11 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
 
           {/* Clock Face */}
           <div
-            className="relative w-[216px] h-[216px] rounded-full box-border cursor-pointer"
+            className="relative w-[var(--sinch-comp-time-picker-size-clock-face,216px)] h-[var(--sinch-comp-time-picker-size-clock-face,216px)] rounded-full box-border cursor-pointer"
             style={{
-              border: '1px solid var(--sinch-comp-time-picker-watch-face-color-default-border-initial)',
+              border: '2px solid var(--sinch-comp-time-picker-watch-face-color-default-border-initial)',
               backgroundColor: 'var(--sinch-comp-time-picker-watch-face-color-default-background-initial)',
+              boxShadow: 'inset 0 1px 3px var(--sinch-comp-time-picker-watch-face-color-default-shadow-inner, rgba(0,0,0,0.06))',
             }}
             role="group"
             aria-label="Time picker clock face"
@@ -663,6 +684,19 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
                   isLast
                 />
               </SegmentedControl>
+            </div>
+          )}
+
+          {/* Clear button */}
+          {clearable && (internalHour !== 0 || internalMinute !== 0) && (
+            <div className="flex justify-end px-4 pb-2">
+              <Button
+                size="s"
+                variant="subtle-secondary"
+                text="Clear"
+                aria-label="Clear selected time"
+                onClick={handleClear}
+              />
             </div>
           )}
         </div>

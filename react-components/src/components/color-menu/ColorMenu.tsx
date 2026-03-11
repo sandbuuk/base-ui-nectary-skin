@@ -25,6 +25,7 @@ import {
  */
 
 const NUM_COLS_DEFAULT = 5
+// Must match --sinch-comp-color-menu-size-option-width / height fallback values
 const ITEM_WIDTH = 44
 const ITEM_HEIGHT = 56
 
@@ -405,7 +406,7 @@ const colorMenuOptionVariants = cva(
 
 const colorMenuOptionWrapperVariants = cva(
   // The inner wrapper
-  ['w-[44px]', 'h-[56px]', 'p-3', 'box-border'],
+  ['w-[var(--sinch-comp-color-menu-size-option-width,44px)]', 'h-[var(--sinch-comp-color-menu-size-option-height,56px)]', 'p-3', 'box-border'],
   {
     variants: {},
     defaultVariants: {},

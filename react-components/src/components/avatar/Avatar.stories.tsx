@@ -57,6 +57,13 @@ const meta: Meta<typeof Avatar> = {
       description: 'Alt text / initials',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A circular profile image component with fallback to user initials or default person icon, supporting multiple sizes, colors, and online presence indicators.',
+      },
+    },
+  },
 }
 
 export default meta

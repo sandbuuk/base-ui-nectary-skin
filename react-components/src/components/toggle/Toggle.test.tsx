@@ -84,7 +84,7 @@ describe('Toggle', () => {
 
       const toggle = screen.getByRole('checkbox')
 
-      expect(toggle).toHaveClass('[--sinch-local-size:16px]')
+      expect(toggle).toHaveClass('[--sinch-local-size:var(--sinch-comp-toggle-size-container-s,16px)]')
     })
 
     it('applies default size', () => {
@@ -92,7 +92,7 @@ describe('Toggle', () => {
 
       const toggle = screen.getByRole('checkbox')
 
-      expect(toggle).toHaveClass('[--sinch-local-size:20px]')
+      expect(toggle).toHaveClass('[--sinch-local-size:var(--sinch-comp-toggle-size-container-m,20px)]')
     })
   })
 

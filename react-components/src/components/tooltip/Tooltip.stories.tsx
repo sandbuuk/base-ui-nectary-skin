@@ -40,6 +40,13 @@ const meta: Meta<typeof Tooltip> = {
       description: 'Controlled open state',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'An information tooltip appearing on hover with multiple positioning options and configurable delay, repositioning to avoid viewport boundaries.\n\nKeyboard: Tooltip appears when trigger element receives focus via Tab.',
+      },
+    },
+  },
   // Center the stories with padding for tooltip visibility
   decorators: [
     (Story) => (
@@ -303,4 +310,20 @@ export const NoText: Story = {
     text: '',
     children: <DemoButton>No tooltip (empty text)</DemoButton>,
   },
+}
+
+/**
+ * Keyboard accessible tooltip - Tab to the button to show, Escape to dismiss.
+ */
+export const KeyboardAccessible: Story = {
+  render: () => (
+    <div className="flex flex-col items-center gap-4">
+      <p className="text-sm text-foreground-muted">
+        Tab to the button to show the tooltip. Press Escape to dismiss.
+      </p>
+      <Tooltip text="Shown via keyboard focus" type="fast">
+        <DemoButton>Tab to me</DemoButton>
+      </Tooltip>
+    </div>
+  ),
 }

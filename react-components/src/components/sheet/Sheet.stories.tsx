@@ -10,6 +10,11 @@ const meta: Meta<typeof Sheet> = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: 'A slide-in panel drawer appearing from any edge with modal or push overlay modes, focus trapping, and escape-key support. Use `SheetTitle` for the header title slot.\n\nKeyboard: Escape to close. Tab cycles through focusable elements (focus trapped).',
+      },
+    },
   },
   args: {
     onClose: fn(),
@@ -319,4 +324,28 @@ const AllPlacementsTemplate = () => {
 export const AllPlacements: Story = {
   render: () => <AllPlacementsTemplate />,
   name: 'All Placements',
+}
+
+/**
+ * Sheet with aria-label instead of a title, for accessible untitled sheets.
+ */
+export const WithAriaLabel: Story = {
+  render: function AriaLabelSheet() {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open Untitled Sheet</Button>
+        <Sheet
+          open={open}
+          onClose={() => setOpen(false)}
+          aria-label="Notification settings"
+        >
+          <div className="p-4">
+            <p>This sheet has no visible title but provides an accessible label for screen readers.</p>
+          </div>
+        </Sheet>
+      </>
+    )
+  },
 }

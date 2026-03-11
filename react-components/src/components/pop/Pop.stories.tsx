@@ -48,6 +48,13 @@ const meta: Meta<typeof Pop> = {
       description: 'Disable closing on backdrop click',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A low-level floating element utility that positions content relative to a trigger with multiple orientations, modal support, and viewport clamping.\n\nKeyboard: Escape to close. Tab cycles through content.',
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div className="flex items-center justify-center min-h-[400px] p-16">

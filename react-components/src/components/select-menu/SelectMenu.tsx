@@ -453,7 +453,7 @@ export const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
         >
           {/* Search input */}
           {showSearch && (
-            <div className="mx-[10px] my-[10px]">
+            <div className="sticky top-0 z-10 px-2 pt-2 pb-2 border-b border-[var(--sinch-sys-color-border-default,#e5e7eb)] bg-[var(--sinch-comp-select-menu-color-default-background-initial,var(--sinch-sys-color-surface-primary-default,white))]">
               <Input
                 size="s"
                 value={currentSearchValue}
@@ -586,6 +586,7 @@ export const SelectMenuOption = forwardRef<
       setSelectedOptionValue,
       selectedOptionValue,
       isValueSelected,
+      multiple,
     } = useSelectMenuContext()
 
     const internalRef = useRef<HTMLDivElement | null>(null)
@@ -640,7 +641,8 @@ export const SelectMenuOption = forwardRef<
       <div
         ref={setRef}
         role="option"
-        aria-selected={isChecked}
+        aria-selected={!multiple ? isChecked : undefined}
+        aria-checked={multiple ? isChecked : undefined}
         aria-disabled={disabled}
         aria-label={ariaLabel ?? text}
         className={cn(
@@ -843,6 +845,15 @@ export interface SelectButtonProps
    * Content to display on the left (before the text)
    */
   leftAddon?: React.ReactNode
+  /**
+   * Show a clear button when a value is selected
+   * @default false
+   */
+  clearable?: boolean
+  /**
+   * Callback when the clear button is clicked
+   */
+  onClear?: () => void
 }
 
 export const SelectButton = forwardRef<HTMLDivElement, SelectButtonProps>(
@@ -860,6 +871,8 @@ export const SelectButton = forwardRef<HTMLDivElement, SelectButtonProps>(
       onBlur,
       icon,
       leftAddon,
+      clearable = false,
+      onClear,
       ...props
     },
     ref
@@ -914,6 +927,7 @@ export const SelectButton = forwardRef<HTMLDivElement, SelectButtonProps>(
         role="button"
         tabIndex={disabled ? -1 : 0}
         aria-label={ariaLabel}
+        aria-haspopup="listbox"
         aria-invalid={invalid || undefined}
         aria-disabled={disabled || undefined}
         className={cn(
@@ -988,6 +1002,33 @@ export const SelectButton = forwardRef<HTMLDivElement, SelectButtonProps>(
           >
             {placeholder}
           </span>
+        )}
+
+        {/* Clear button */}
+        {clearable && hasText && !disabled && (
+          <div
+            role="button"
+            tabIndex={-1}
+            aria-label="Clear selection"
+            className={cn(
+              '-ml-1 cursor-pointer',
+              '[--sinch-global-color-icon:var(--sinch-comp-select-button-color-default-icon-initial,var(--sinch-sys-color-text-muted))]',
+              'hover:[--sinch-global-color-icon:var(--sinch-comp-select-button-color-default-text-initial,var(--sinch-sys-color-text-default))]'
+            )}
+            onClick={(e) => {
+              e.stopPropagation()
+              onClear?.()
+            }}
+            onKeyDown={(e) => {
+              if (e.code === 'Enter' || e.code === 'Space') {
+                e.preventDefault()
+                e.stopPropagation()
+                onClear?.()
+              }
+            }}
+          >
+            <Icon name="fa-xmark" iconsVersion="2" />
+          </div>
         )}
 
         {/* Dropdown icon */}

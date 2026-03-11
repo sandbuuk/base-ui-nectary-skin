@@ -43,7 +43,7 @@ const toastVariants = cva(
     'flex',
     'flex-row',
     'items-center',
-    'gap-2',
+    'gap-3',
     'w-[328px]',
     'max-w-[90vw]',
     'p-4',
@@ -167,11 +167,11 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
         <Icon
           name={iconName}
           iconsVersion="2"
-          className="self-start my-1"
+          className="shrink-0"
           style={{ color: iconColor }}
         />
         <div
-          className="flex-1 min-w-0 break-words py-1 pl-1 font-[var(--sinch-comp-toast-font-body)]"
+          className="flex-1 min-w-0 break-words font-[var(--sinch-comp-toast-font-body)]"
           style={{ color: textColor }}
         >
           {text ?? children}

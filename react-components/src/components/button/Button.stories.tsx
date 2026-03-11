@@ -61,6 +61,13 @@ const meta: Meta<typeof Button> = {
       description: 'Form behavior type',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'An interactive button supporting multiple visual variants, sizes, optional icons, loading state, toggled state, and form integration.\n\nKeyboard: Tab to focus. Enter or Space to activate.',
+      },
+    },
+  },
 }
 
 export default meta

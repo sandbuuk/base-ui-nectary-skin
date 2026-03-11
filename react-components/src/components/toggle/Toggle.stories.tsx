@@ -7,6 +7,13 @@ const meta: Meta<typeof Toggle> = {
   title: 'Components/Toggle',
   component: Toggle,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A boolean toggle switch with optional label, small size variant, and on/off indicators, supporting controlled/uncontrolled modes with keyboard accessibility.\n\nKeyboard: Tab to focus. Space or Enter to toggle.',
+      },
+    },
+  },
   args: {
     onChange: fn(),
   },

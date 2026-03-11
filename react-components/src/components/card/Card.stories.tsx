@@ -21,6 +21,13 @@ const meta: Meta<typeof Card> = {
       control: 'boolean',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A flexible container for displaying content in a styled box with support for media, title, description, footer, and interactive states. Use `CardTitle` for the heading and `CardContainer` as a layout wrapper.\n\nKeyboard: Tab to focus interactive cards. Enter or Space to activate.',
+      },
+    },
+  },
 }
 
 export default meta

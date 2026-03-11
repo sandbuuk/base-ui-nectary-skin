@@ -38,6 +38,13 @@ const meta: Meta<typeof Popover> = {
       description: 'Allow page scrolling when open',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A floating content panel anchored to a trigger element with customizable positioning, optional backdrop, and automatic viewport repositioning.\n\nKeyboard: Escape to close. Tab cycles through content.',
+      },
+    },
+  },
   // Center the stories with padding for popover visibility
   decorators: [
     (Story) => (

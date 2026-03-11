@@ -17,6 +17,13 @@ const meta: Meta<typeof ButtonGroup> = {
       options: ['xs', 's', 'm', 'l'],
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A container that groups multiple buttons with unified styling, passing size and variant context to child `ButtonGroupItem` components.',
+      },
+    },
+  },
 }
 
 export default meta

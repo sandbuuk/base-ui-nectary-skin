@@ -20,6 +20,13 @@ const meta: Meta<typeof PersistentOverlay> = {
       description: 'Interval for checking visibility manipulation (ms)',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A modal-like dialog that cannot be dismissed via escape key or backdrop clicks, used for mandatory user interactions.\n\nKeyboard: Tab cycles through focusable elements. Cannot be dismissed via Escape.',
+      },
+    },
+  },
 }
 
 export default meta

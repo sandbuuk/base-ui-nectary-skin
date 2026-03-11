@@ -95,6 +95,13 @@ const meta: Meta<typeof SegmentedIconControl> = {
   title: 'Components/SegmentedIconControl',
   component: SegmentedIconControl,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'An icon-only variant of segmented control supporting both single and multiple selection modes for compact toolbar interactions.\n\nKeyboard: Tab to focus. Arrow Left/Right to switch options. Enter or Space to select.',
+      },
+    },
+  },
   args: {
     onChange: fn(),
   },

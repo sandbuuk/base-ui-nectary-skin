@@ -28,6 +28,13 @@ const meta: Meta<typeof Field> = {
       description: 'Disabled state for the field',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A form field wrapper providing label, optional indicator, tooltip slot, helper text, and error message display for form inputs.',
+      },
+    },
+  },
 }
 
 export default meta

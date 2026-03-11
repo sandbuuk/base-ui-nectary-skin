@@ -17,6 +17,13 @@ const meta: Meta<typeof SelectMenu> = {
   title: 'Components/SelectMenu',
   component: SelectMenu,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A dropdown selection menu with built-in search, keyboard navigation, multi-select capability, and customizable trigger.\n\nKeyboard: Arrow Up/Down to navigate. Enter or Space to select. Home/End to jump. Type to search.',
+      },
+    },
+  },
   args: {
     onChange: fn(),
   },
@@ -412,6 +419,38 @@ export const FullExample: StoryObj<typeof Select> = {
             </Select>
           </div>
         )}
+      </div>
+    )
+  },
+}
+
+/**
+ * SelectMenu with a clearable button to reset the selection.
+ */
+export const Clearable: Story = {
+  render: function ClearableSelectMenu() {
+    const [value, setValue] = useState('apple')
+
+    return (
+      <div className="w-64">
+        <Select
+          aria-label="Select a fruit"
+          value={value}
+          onChange={setValue}
+        >
+          <SelectButton
+            aria-label="Select a fruit"
+            text={value || 'Select a fruit...'}
+            clearable
+            onClear={() => setValue('')}
+          />
+          <SelectMenu aria-label="Fruits">
+            <SelectMenuOption value="apple" text="Apple" />
+            <SelectMenuOption value="banana" text="Banana" />
+            <SelectMenuOption value="cherry" text="Cherry" />
+            <SelectMenuOption value="grape" text="Grape" />
+          </SelectMenu>
+        </Select>
       </div>
     )
   },

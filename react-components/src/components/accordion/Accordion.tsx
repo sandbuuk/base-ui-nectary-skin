@@ -444,15 +444,16 @@ export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
             role="region"
             aria-labelledby={buttonId}
             className={cn(
-              'overflow-hidden',
-              'transition-[max-height,opacity] duration-[250ms] ease-in-out',
+              'grid transition-[grid-template-rows,opacity] duration-[250ms] ease-in-out',
               isExpanded
-                ? 'max-h-[2000px] opacity-100'
-                : 'max-h-0 opacity-0 overflow-hidden'
+                ? 'grid-rows-[1fr] opacity-100'
+                : 'grid-rows-[0fr] opacity-0'
             )}
           >
-            <div className="px-2 pb-3">
-              {children}
+            <div className="overflow-hidden">
+              <div className="px-2 pb-3">
+                {children}
+              </div>
             </div>
           </div>
         </div>

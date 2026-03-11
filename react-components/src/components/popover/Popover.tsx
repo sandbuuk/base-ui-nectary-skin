@@ -10,6 +10,7 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { cn } from '../../utils/cn'
+import { useScrollLock } from '../../utils/useScrollLock'
 
 /**
  * Popover component that displays floating content anchored to a trigger element.
@@ -63,7 +64,7 @@ const contentVariants = cva(
     'border',
     'border-[var(--sinch-comp-popover-color-default-border-initial,var(--sinch-sys-color-border-default))]',
     'rounded-[var(--sinch-comp-popover-shape-radius,8px)]',
-    'shadow-[var(--sinch-comp-popover-shadow,0_4px_16px_rgba(0,0,0,0.12))]',
+    'shadow-[var(--sinch-comp-popover-shadow,var(--sinch-sys-shadow-overlay-sm))]',
     'overflow-hidden',
   ],
   {
@@ -155,6 +156,8 @@ export interface PopoverProps
   allowScroll?: boolean,
   /** Callback when the popover requests to close */
   onClose?: () => void,
+  /** Callback when the open state should change */
+  onOpenChange?: (open: boolean) => void,
   /** The trigger element */
   children: React.ReactNode,
   /** The popover content */
@@ -180,6 +183,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       modal = false,
       allowScroll = false,
       onClose,
+      onOpenChange,
       'aria-label': ariaLabel,
       ...props
     },
@@ -339,38 +343,27 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         if (e.key === 'Escape') {
           e.preventDefault()
           onClose?.()
+          onOpenChange?.(false)
         }
       }
 
       document.addEventListener('keydown', handleKeyDown)
-      
+
       return () => {
         document.removeEventListener('keydown', handleKeyDown)
       }
-    }, [open, onClose])
+    }, [open, onClose, onOpenChange])
 
     // Prevent scroll when modal or allowScroll is false
-    useEffect(() => {
-      if (!open) {
-        return
-      }
-
-      if (!allowScroll) {
-        const originalOverflow = document.body.style.overflow
-        document.body.style.overflow = 'hidden'
-        
-        return () => {
-          document.body.style.overflow = originalOverflow
-        }
-      }
-    }, [open, allowScroll])
+    useScrollLock(open && !allowScroll)
 
     // Handle backdrop click
     const handleBackdropClick = useCallback((e: React.MouseEvent) => {
       if (e.target === e.currentTarget) {
         onClose?.()
+        onOpenChange?.(false)
       }
-    }, [onClose])
+    }, [onClose, onOpenChange])
 
     // Handle click outside
     useEffect(() => {
@@ -386,6 +379,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           !triggerRef.current.contains(e.target as Node)
         ) {
           onClose?.()
+          onOpenChange?.(false)
         }
       }
 
@@ -393,12 +387,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       const timeoutId = setTimeout(() => {
         document.addEventListener('mousedown', handleClickOutside)
       }, 0)
-      
+
       return () => {
         clearTimeout(timeoutId)
         document.removeEventListener('mousedown', handleClickOutside)
       }
-    }, [open, modal, onClose])
+    }, [open, modal, onClose, onOpenChange])
 
     const popoverContent = open && (
       <>
@@ -411,13 +405,13 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         {/* Dialog - not inside aria-hidden */}
         <div
           ref={contentRef}
+          id={contentId}
           role="dialog"
           aria-modal={modal}
           aria-label={ariaLabel}
-          aria-labelledby={ariaLabel !== undefined ? undefined : contentId}
           className={cn(
             'fixed z-50',
-            tip && 'drop-shadow-[var(--sinch-comp-popover-shadow,0_4px_16px_rgba(0,0,0,0.12))]'
+            tip && 'drop-shadow-[var(--sinch-comp-popover-shadow,var(--sinch-sys-shadow-overlay-sm))]'
           )}
           style={{
             left: position.x,
