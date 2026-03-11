@@ -1,3 +1,6 @@
+/* Theme tokens — fonts, reference palette, semantic system tokens, component overrides */
+@import '../../../themes/base/index.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

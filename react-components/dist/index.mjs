@@ -1,54 +1,54 @@
-import { jsxs as A, jsx as l, Fragment as Ne } from "react/jsx-runtime";
-import Ue, { forwardRef as P, useMemo as J, useState as F, useCallback as k, useRef as Z, useEffect as X, isValidElement as Ke, cloneElement as ro, createContext as de, useContext as be, useId as mo, Children as He, useImperativeHandle as Le, useReducer as Cn, useLayoutEffect as Ao } from "react";
-import { createPortal as Pe } from "react-dom";
-function Lo(o) {
+import { jsxs as L, jsx as l, Fragment as Ne } from "react/jsx-runtime";
+import We, { forwardRef as R, useMemo as J, useState as U, useEffect as X, useCallback as f, useRef as Y, useId as eo, isValidElement as oo, cloneElement as ho, createContext as be, useContext as ue, Children as Ze, useImperativeHandle as Fe, useReducer as Tn, useLayoutEffect as _o } from "react";
+import { createPortal as $e } from "react-dom";
+function Uo(o) {
   var e, n, t = "";
   if (typeof o == "string" || typeof o == "number") t += o;
   else if (typeof o == "object") if (Array.isArray(o)) {
-    var i = o.length;
-    for (e = 0; e < i; e++) o[e] && (n = Lo(o[e])) && (t && (t += " "), t += n);
+    var a = o.length;
+    for (e = 0; e < a; e++) o[e] && (n = Uo(o[e])) && (t && (t += " "), t += n);
   } else for (n in o) o[n] && (t && (t += " "), t += n);
   return t;
 }
-function Po() {
-  for (var o, e, n = 0, t = "", i = arguments.length; n < i; n++) (o = arguments[n]) && (e = Lo(o)) && (t && (t += " "), t += e);
+function Ho() {
+  for (var o, e, n = 0, t = "", a = arguments.length; n < a; n++) (o = arguments[n]) && (e = Uo(o)) && (t && (t += " "), t += e);
   return t;
 }
-const co = "-", Vn = (o) => {
-  const e = zn(o), {
+const po = "-", Sn = (o) => {
+  const e = An(o), {
     conflictingClassGroups: n,
     conflictingClassGroupModifiers: t
   } = o;
   return {
-    getClassGroupId: (r) => {
-      const s = r.split(co);
-      return s[0] === "" && s.length !== 1 && s.shift(), Ro(s, e) || In(r);
+    getClassGroupId: (s) => {
+      const r = s.split(po);
+      return r[0] === "" && r.length !== 1 && r.shift(), Bo(r, e) || En(s);
     },
-    getConflictingClassGroupIds: (r, s) => {
-      const m = n[r] || [];
-      return s && t[r] ? [...m, ...t[r]] : m;
+    getConflictingClassGroupIds: (s, r) => {
+      const m = n[s] || [];
+      return r && t[s] ? [...m, ...t[s]] : m;
     }
   };
-}, Ro = (o, e) => {
-  var r;
+}, Bo = (o, e) => {
+  var s;
   if (o.length === 0)
     return e.classGroupId;
-  const n = o[0], t = e.nextPart.get(n), i = t ? Ro(o.slice(1), t) : void 0;
-  if (i)
-    return i;
+  const n = o[0], t = e.nextPart.get(n), a = t ? Bo(o.slice(1), t) : void 0;
+  if (a)
+    return a;
   if (e.validators.length === 0)
     return;
-  const a = o.join(co);
-  return (r = e.validators.find(({
-    validator: s
-  }) => s(a))) == null ? void 0 : r.classGroupId;
-}, xo = /^\[(.+)\]$/, In = (o) => {
-  if (xo.test(o)) {
-    const e = xo.exec(o)[1], n = e == null ? void 0 : e.substring(0, e.indexOf(":"));
+  const i = o.join(po);
+  return (s = e.validators.find(({
+    validator: r
+  }) => r(i))) == null ? void 0 : s.classGroupId;
+}, zo = /^\[(.+)\]$/, En = (o) => {
+  if (zo.test(o)) {
+    const e = zo.exec(o)[1], n = e == null ? void 0 : e.substring(0, e.indexOf(":"));
     if (n)
       return "arbitrary.." + n;
   }
-}, zn = (o) => {
+}, An = (o) => {
   const {
     theme: e,
     prefix: n
@@ -56,43 +56,43 @@ const co = "-", Vn = (o) => {
     nextPart: /* @__PURE__ */ new Map(),
     validators: []
   };
-  return Tn(Object.entries(o.classGroups), n).forEach(([a, r]) => {
-    lo(r, t, a, e);
+  return Ln(Object.entries(o.classGroups), n).forEach(([i, s]) => {
+    bo(s, t, i, e);
   }), t;
-}, lo = (o, e, n, t) => {
-  o.forEach((i) => {
-    if (typeof i == "string") {
-      const a = i === "" ? e : yo(e, i);
-      a.classGroupId = n;
+}, bo = (o, e, n, t) => {
+  o.forEach((a) => {
+    if (typeof a == "string") {
+      const i = a === "" ? e : Io(e, a);
+      i.classGroupId = n;
       return;
     }
-    if (typeof i == "function") {
-      if (Dn(i)) {
-        lo(i(t), e, n, t);
+    if (typeof a == "function") {
+      if (On(a)) {
+        bo(a(t), e, n, t);
         return;
       }
       e.validators.push({
-        validator: i,
+        validator: a,
         classGroupId: n
       });
       return;
     }
-    Object.entries(i).forEach(([a, r]) => {
-      lo(r, yo(e, a), n, t);
+    Object.entries(a).forEach(([i, s]) => {
+      bo(s, Io(e, i), n, t);
     });
   });
-}, yo = (o, e) => {
+}, Io = (o, e) => {
   let n = o;
-  return e.split(co).forEach((t) => {
+  return e.split(po).forEach((t) => {
     n.nextPart.has(t) || n.nextPart.set(t, {
       nextPart: /* @__PURE__ */ new Map(),
       validators: []
     }), n = n.nextPart.get(t);
   }), n;
-}, Dn = (o) => o.isThemeGetter, Tn = (o, e) => e ? o.map(([n, t]) => {
-  const i = t.map((a) => typeof a == "string" ? e + a : typeof a == "object" ? Object.fromEntries(Object.entries(a).map(([r, s]) => [e + r, s])) : a);
-  return [n, i];
-}) : o, Mn = (o) => {
+}, On = (o) => o.isThemeGetter, Ln = (o, e) => e ? o.map(([n, t]) => {
+  const a = t.map((i) => typeof i == "string" ? e + i : typeof i == "object" ? Object.fromEntries(Object.entries(i).map(([s, r]) => [e + s, r])) : i);
+  return [n, a];
+}) : o, Pn = (o) => {
   if (o < 1)
     return {
       get: () => {
@@ -101,55 +101,55 @@ const co = "-", Vn = (o) => {
       }
     };
   let e = 0, n = /* @__PURE__ */ new Map(), t = /* @__PURE__ */ new Map();
-  const i = (a, r) => {
-    n.set(a, r), e++, e > o && (e = 0, t = n, n = /* @__PURE__ */ new Map());
+  const a = (i, s) => {
+    n.set(i, s), e++, e > o && (e = 0, t = n, n = /* @__PURE__ */ new Map());
   };
   return {
-    get(a) {
-      let r = n.get(a);
-      if (r !== void 0)
-        return r;
-      if ((r = t.get(a)) !== void 0)
-        return i(a, r), r;
+    get(i) {
+      let s = n.get(i);
+      if (s !== void 0)
+        return s;
+      if ((s = t.get(i)) !== void 0)
+        return a(i, s), s;
     },
-    set(a, r) {
-      n.has(a) ? n.set(a, r) : i(a, r);
+    set(i, s) {
+      n.has(i) ? n.set(i, s) : a(i, s);
     }
   };
-}, $o = "!", Sn = (o) => {
+}, Go = "!", Rn = (o) => {
   const {
     separator: e,
     experimentalParseClassName: n
-  } = o, t = e.length === 1, i = e[0], a = e.length, r = (s) => {
+  } = o, t = e.length === 1, a = e[0], i = e.length, s = (r) => {
     const m = [];
-    let d = 0, c = 0, u;
-    for (let x = 0; x < s.length; x++) {
-      let V = s[x];
-      if (d === 0) {
-        if (V === i && (t || s.slice(x, x + a) === e)) {
-          m.push(s.slice(c, x)), c = x + a;
+    let c = 0, b = 0, h;
+    for (let N = 0; N < r.length; N++) {
+      let I = r[N];
+      if (c === 0) {
+        if (I === a && (t || r.slice(N, N + i) === e)) {
+          m.push(r.slice(b, N)), b = N + i;
           continue;
         }
-        if (V === "/") {
-          u = x;
+        if (I === "/") {
+          h = N;
           continue;
         }
       }
-      V === "[" ? d++ : V === "]" && d--;
+      I === "[" ? c++ : I === "]" && c--;
     }
-    const b = m.length === 0 ? s : s.substring(c), p = b.startsWith($o), f = p ? b.substring(1) : b, g = u && u > c ? u - c : void 0;
+    const d = m.length === 0 ? r : r.substring(b), u = d.startsWith(Go), g = u ? d.substring(1) : d, v = h && h > b ? h - b : void 0;
     return {
       modifiers: m,
-      hasImportantModifier: p,
-      baseClassName: f,
-      maybePostfixModifierPosition: g
+      hasImportantModifier: u,
+      baseClassName: g,
+      maybePostfixModifierPosition: v
     };
   };
-  return n ? (s) => n({
-    className: s,
-    parseClassName: r
-  }) : r;
-}, On = (o) => {
+  return n ? (r) => n({
+    className: r,
+    parseClassName: s
+  }) : s;
+}, Fn = (o) => {
   if (o.length <= 1)
     return o;
   const e = [];
@@ -157,122 +157,122 @@ const co = "-", Vn = (o) => {
   return o.forEach((t) => {
     t[0] === "[" ? (e.push(...n.sort(), t), n = []) : n.push(t);
   }), e.push(...n.sort()), e;
-}, En = (o) => ({
-  cache: Mn(o.cacheSize),
-  parseClassName: Sn(o),
-  ...Vn(o)
-}), An = /\s+/, Ln = (o, e) => {
+}, $n = (o) => ({
+  cache: Pn(o.cacheSize),
+  parseClassName: Rn(o),
+  ...Sn(o)
+}), _n = /\s+/, Un = (o, e) => {
   const {
     parseClassName: n,
     getClassGroupId: t,
-    getConflictingClassGroupIds: i
-  } = e, a = [], r = o.trim().split(An);
-  let s = "";
-  for (let m = r.length - 1; m >= 0; m -= 1) {
-    const d = r[m], {
-      modifiers: c,
-      hasImportantModifier: u,
-      baseClassName: b,
-      maybePostfixModifierPosition: p
-    } = n(d);
-    let f = !!p, g = t(f ? b.substring(0, p) : b);
-    if (!g) {
-      if (!f) {
-        s = d + (s.length > 0 ? " " + s : s);
+    getConflictingClassGroupIds: a
+  } = e, i = [], s = o.trim().split(_n);
+  let r = "";
+  for (let m = s.length - 1; m >= 0; m -= 1) {
+    const c = s[m], {
+      modifiers: b,
+      hasImportantModifier: h,
+      baseClassName: d,
+      maybePostfixModifierPosition: u
+    } = n(c);
+    let g = !!u, v = t(g ? d.substring(0, u) : d);
+    if (!v) {
+      if (!g) {
+        r = c + (r.length > 0 ? " " + r : r);
         continue;
       }
-      if (g = t(b), !g) {
-        s = d + (s.length > 0 ? " " + s : s);
+      if (v = t(d), !v) {
+        r = c + (r.length > 0 ? " " + r : r);
         continue;
       }
-      f = !1;
+      g = !1;
     }
-    const x = On(c).join(":"), V = u ? x + $o : x, I = V + g;
-    if (a.includes(I))
+    const N = Fn(b).join(":"), I = h ? N + Go : N, V = I + v;
+    if (i.includes(V))
       continue;
-    a.push(I);
-    const N = i(g, f);
-    for (let j = 0; j < N.length; ++j) {
-      const v = N[j];
-      a.push(V + v);
+    i.push(V);
+    const z = a(v, g);
+    for (let y = 0; y < z.length; ++y) {
+      const w = z[y];
+      i.push(I + w);
     }
-    s = d + (s.length > 0 ? " " + s : s);
+    r = c + (r.length > 0 ? " " + r : r);
   }
-  return s;
+  return r;
 };
-function Pn() {
+function Hn() {
   let o = 0, e, n, t = "";
   for (; o < arguments.length; )
-    (e = arguments[o++]) && (n = Fo(e)) && (t && (t += " "), t += n);
+    (e = arguments[o++]) && (n = Wo(e)) && (t && (t += " "), t += n);
   return t;
 }
-const Fo = (o) => {
+const Wo = (o) => {
   if (typeof o == "string")
     return o;
   let e, n = "";
   for (let t = 0; t < o.length; t++)
-    o[t] && (e = Fo(o[t])) && (n && (n += " "), n += e);
+    o[t] && (e = Wo(o[t])) && (n && (n += " "), n += e);
   return n;
 };
-function Rn(o, ...e) {
-  let n, t, i, a = r;
-  function r(m) {
-    const d = e.reduce((c, u) => u(c), o());
-    return n = En(d), t = n.cache.get, i = n.cache.set, a = s, s(m);
-  }
+function Bn(o, ...e) {
+  let n, t, a, i = s;
   function s(m) {
-    const d = t(m);
-    if (d)
-      return d;
-    const c = Ln(m, n);
-    return i(m, c), c;
+    const c = e.reduce((b, h) => h(b), o());
+    return n = $n(c), t = n.cache.get, a = n.cache.set, i = r, r(m);
+  }
+  function r(m) {
+    const c = t(m);
+    if (c)
+      return c;
+    const b = Un(m, n);
+    return a(m, b), b;
   }
   return function() {
-    return a(Pn.apply(null, arguments));
+    return i(Hn.apply(null, arguments));
   };
 }
-const ie = (o) => {
+const te = (o) => {
   const e = (n) => n[o] || [];
   return e.isThemeGetter = !0, e;
-}, _o = /^\[(?:([a-z-]+):)?(.+)\]$/i, $n = /^\d+\/\d+$/, Fn = /* @__PURE__ */ new Set(["px", "full", "screen"]), _n = /^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/, Un = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/, Hn = /^(rgba?|hsla?|hwb|(ok)?(lab|lch)|color-mix)\(.+\)$/, Bn = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/, Gn = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/, ke = (o) => Ie(o) || Fn.has(o) || $n.test(o), je = (o) => Te(o, "length", Qn), Ie = (o) => !!o && !Number.isNaN(Number(o)), eo = (o) => Te(o, "number", Ie), Me = (o) => !!o && Number.isInteger(Number(o)), Wn = (o) => o.endsWith("%") && Ie(o.slice(0, -1)), Y = (o) => _o.test(o), ve = (o) => _n.test(o), Zn = /* @__PURE__ */ new Set(["length", "size", "percentage"]), qn = (o) => Te(o, Zn, Uo), Yn = (o) => Te(o, "position", Uo), Kn = /* @__PURE__ */ new Set(["image", "url"]), Jn = (o) => Te(o, Kn, ot), Xn = (o) => Te(o, "", et), Se = () => !0, Te = (o, e, n) => {
-  const t = _o.exec(o);
+}, Zo = /^\[(?:([a-z-]+):)?(.+)\]$/i, Gn = /^\d+\/\d+$/, Wn = /* @__PURE__ */ new Set(["px", "full", "screen"]), Zn = /^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/, qn = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/, Yn = /^(rgba?|hsla?|hwb|(ok)?(lab|lch)|color-mix)\(.+\)$/, Kn = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/, Jn = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/, ke = (o) => Me(o) || Wn.has(o) || Gn.test(o), ve = (o) => Se(o, "length", at), Me = (o) => !!o && !Number.isNaN(Number(o)), ao = (o) => Se(o, "number", Me), Ae = (o) => !!o && Number.isInteger(Number(o)), Xn = (o) => o.endsWith("%") && Me(o.slice(0, -1)), K = (o) => Zo.test(o), we = (o) => Zn.test(o), Qn = /* @__PURE__ */ new Set(["length", "size", "percentage"]), et = (o) => Se(o, Qn, qo), ot = (o) => Se(o, "position", qo), nt = /* @__PURE__ */ new Set(["image", "url"]), tt = (o) => Se(o, nt, st), it = (o) => Se(o, "", lt), Oe = () => !0, Se = (o, e, n) => {
+  const t = Zo.exec(o);
   return t ? t[1] ? typeof e == "string" ? t[1] === e : e.has(t[1]) : n(t[2]) : !1;
-}, Qn = (o) => (
+}, at = (o) => (
   // `colorFunctionRegex` check is necessary because color functions can have percentages in them which which would be incorrectly classified as lengths.
   // For example, `hsl(0 0% 0%)` would be classified as a length without this check.
   // I could also use lookbehind assertion in `lengthUnitRegex` but that isn't supported widely enough.
-  Un.test(o) && !Hn.test(o)
-), Uo = () => !1, et = (o) => Bn.test(o), ot = (o) => Gn.test(o), nt = () => {
-  const o = ie("colors"), e = ie("spacing"), n = ie("blur"), t = ie("brightness"), i = ie("borderColor"), a = ie("borderRadius"), r = ie("borderSpacing"), s = ie("borderWidth"), m = ie("contrast"), d = ie("grayscale"), c = ie("hueRotate"), u = ie("invert"), b = ie("gap"), p = ie("gradientColorStops"), f = ie("gradientColorStopPositions"), g = ie("inset"), x = ie("margin"), V = ie("opacity"), I = ie("padding"), N = ie("saturate"), j = ie("scale"), v = ie("sepia"), y = ie("skew"), w = ie("space"), T = ie("translate"), z = () => ["auto", "contain", "none"], O = () => ["auto", "hidden", "clip", "visible", "scroll"], $ = () => ["auto", Y, e], C = () => [Y, e], E = () => ["", ke, je], _ = () => ["auto", Ie, Y], L = () => ["bottom", "center", "left", "left-bottom", "left-top", "right", "right-bottom", "right-top", "top"], R = () => ["solid", "dashed", "dotted", "double", "none"], U = () => ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"], G = () => ["start", "end", "center", "between", "around", "evenly", "stretch"], q = () => ["", "0", Y], H = () => ["auto", "avoid", "all", "avoid-page", "page", "left", "right", "column"], S = () => [Ie, Y];
+  qn.test(o) && !Yn.test(o)
+), qo = () => !1, lt = (o) => Kn.test(o), st = (o) => Jn.test(o), rt = () => {
+  const o = te("colors"), e = te("spacing"), n = te("blur"), t = te("brightness"), a = te("borderColor"), i = te("borderRadius"), s = te("borderSpacing"), r = te("borderWidth"), m = te("contrast"), c = te("grayscale"), b = te("hueRotate"), h = te("invert"), d = te("gap"), u = te("gradientColorStops"), g = te("gradientColorStopPositions"), v = te("inset"), N = te("margin"), I = te("opacity"), V = te("padding"), z = te("saturate"), y = te("scale"), w = te("sepia"), j = te("skew"), k = te("space"), M = te("translate"), T = () => ["auto", "contain", "none"], P = () => ["auto", "hidden", "clip", "visible", "scroll"], B = () => ["auto", K, e], D = () => [K, e], x = () => ["", ke, ve], E = () => ["auto", Me, K], S = () => ["bottom", "center", "left", "left-bottom", "left-top", "right", "right-bottom", "right-top", "top"], F = () => ["solid", "dashed", "dotted", "double", "none"], $ = () => ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"], H = () => ["start", "end", "center", "between", "around", "evenly", "stretch"], Z = () => ["", "0", K], _ = () => ["auto", "avoid", "all", "avoid-page", "page", "left", "right", "column"], A = () => [Me, K];
   return {
     cacheSize: 500,
     separator: ":",
     theme: {
-      colors: [Se],
-      spacing: [ke, je],
-      blur: ["none", "", ve, Y],
-      brightness: S(),
+      colors: [Oe],
+      spacing: [ke, ve],
+      blur: ["none", "", we, K],
+      brightness: A(),
       borderColor: [o],
-      borderRadius: ["none", "", "full", ve, Y],
-      borderSpacing: C(),
-      borderWidth: E(),
-      contrast: S(),
-      grayscale: q(),
-      hueRotate: S(),
-      invert: q(),
-      gap: C(),
+      borderRadius: ["none", "", "full", we, K],
+      borderSpacing: D(),
+      borderWidth: x(),
+      contrast: A(),
+      grayscale: Z(),
+      hueRotate: A(),
+      invert: Z(),
+      gap: D(),
       gradientColorStops: [o],
-      gradientColorStopPositions: [Wn, je],
-      inset: $(),
-      margin: $(),
-      opacity: S(),
-      padding: C(),
-      saturate: S(),
-      scale: S(),
-      sepia: q(),
-      skew: S(),
-      space: C(),
-      translate: C()
+      gradientColorStopPositions: [Xn, ve],
+      inset: B(),
+      margin: B(),
+      opacity: A(),
+      padding: D(),
+      saturate: A(),
+      scale: A(),
+      sepia: Z(),
+      skew: A(),
+      space: D(),
+      translate: D()
     },
     classGroups: {
       // Layout
@@ -281,7 +281,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/aspect-ratio
        */
       aspect: [{
-        aspect: ["auto", "square", "video", Y]
+        aspect: ["auto", "square", "video", K]
       }],
       /**
        * Container
@@ -293,21 +293,21 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/columns
        */
       columns: [{
-        columns: [ve]
+        columns: [we]
       }],
       /**
        * Break After
        * @see https://tailwindcss.com/docs/break-after
        */
       "break-after": [{
-        "break-after": H()
+        "break-after": _()
       }],
       /**
        * Break Before
        * @see https://tailwindcss.com/docs/break-before
        */
       "break-before": [{
-        "break-before": H()
+        "break-before": _()
       }],
       /**
        * Break Inside
@@ -366,49 +366,49 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/object-position
        */
       "object-position": [{
-        object: [...L(), Y]
+        object: [...S(), K]
       }],
       /**
        * Overflow
        * @see https://tailwindcss.com/docs/overflow
        */
       overflow: [{
-        overflow: O()
+        overflow: P()
       }],
       /**
        * Overflow X
        * @see https://tailwindcss.com/docs/overflow
        */
       "overflow-x": [{
-        "overflow-x": O()
+        "overflow-x": P()
       }],
       /**
        * Overflow Y
        * @see https://tailwindcss.com/docs/overflow
        */
       "overflow-y": [{
-        "overflow-y": O()
+        "overflow-y": P()
       }],
       /**
        * Overscroll Behavior
        * @see https://tailwindcss.com/docs/overscroll-behavior
        */
       overscroll: [{
-        overscroll: z()
+        overscroll: T()
       }],
       /**
        * Overscroll Behavior X
        * @see https://tailwindcss.com/docs/overscroll-behavior
        */
       "overscroll-x": [{
-        "overscroll-x": z()
+        "overscroll-x": T()
       }],
       /**
        * Overscroll Behavior Y
        * @see https://tailwindcss.com/docs/overscroll-behavior
        */
       "overscroll-y": [{
-        "overscroll-y": z()
+        "overscroll-y": T()
       }],
       /**
        * Position
@@ -420,63 +420,63 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/top-right-bottom-left
        */
       inset: [{
-        inset: [g]
+        inset: [v]
       }],
       /**
        * Right / Left
        * @see https://tailwindcss.com/docs/top-right-bottom-left
        */
       "inset-x": [{
-        "inset-x": [g]
+        "inset-x": [v]
       }],
       /**
        * Top / Bottom
        * @see https://tailwindcss.com/docs/top-right-bottom-left
        */
       "inset-y": [{
-        "inset-y": [g]
+        "inset-y": [v]
       }],
       /**
        * Start
        * @see https://tailwindcss.com/docs/top-right-bottom-left
        */
       start: [{
-        start: [g]
+        start: [v]
       }],
       /**
        * End
        * @see https://tailwindcss.com/docs/top-right-bottom-left
        */
       end: [{
-        end: [g]
+        end: [v]
       }],
       /**
        * Top
        * @see https://tailwindcss.com/docs/top-right-bottom-left
        */
       top: [{
-        top: [g]
+        top: [v]
       }],
       /**
        * Right
        * @see https://tailwindcss.com/docs/top-right-bottom-left
        */
       right: [{
-        right: [g]
+        right: [v]
       }],
       /**
        * Bottom
        * @see https://tailwindcss.com/docs/top-right-bottom-left
        */
       bottom: [{
-        bottom: [g]
+        bottom: [v]
       }],
       /**
        * Left
        * @see https://tailwindcss.com/docs/top-right-bottom-left
        */
       left: [{
-        left: [g]
+        left: [v]
       }],
       /**
        * Visibility
@@ -488,7 +488,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/z-index
        */
       z: [{
-        z: ["auto", Me, Y]
+        z: ["auto", Ae, K]
       }],
       // Flexbox and Grid
       /**
@@ -496,7 +496,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/flex-basis
        */
       basis: [{
-        basis: $()
+        basis: B()
       }],
       /**
        * Flex Direction
@@ -517,35 +517,35 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/flex
        */
       flex: [{
-        flex: ["1", "auto", "initial", "none", Y]
+        flex: ["1", "auto", "initial", "none", K]
       }],
       /**
        * Flex Grow
        * @see https://tailwindcss.com/docs/flex-grow
        */
       grow: [{
-        grow: q()
+        grow: Z()
       }],
       /**
        * Flex Shrink
        * @see https://tailwindcss.com/docs/flex-shrink
        */
       shrink: [{
-        shrink: q()
+        shrink: Z()
       }],
       /**
        * Order
        * @see https://tailwindcss.com/docs/order
        */
       order: [{
-        order: ["first", "last", "none", Me, Y]
+        order: ["first", "last", "none", Ae, K]
       }],
       /**
        * Grid Template Columns
        * @see https://tailwindcss.com/docs/grid-template-columns
        */
       "grid-cols": [{
-        "grid-cols": [Se]
+        "grid-cols": [Oe]
       }],
       /**
        * Grid Column Start / End
@@ -553,29 +553,29 @@ const ie = (o) => {
        */
       "col-start-end": [{
         col: ["auto", {
-          span: ["full", Me, Y]
-        }, Y]
+          span: ["full", Ae, K]
+        }, K]
       }],
       /**
        * Grid Column Start
        * @see https://tailwindcss.com/docs/grid-column
        */
       "col-start": [{
-        "col-start": _()
+        "col-start": E()
       }],
       /**
        * Grid Column End
        * @see https://tailwindcss.com/docs/grid-column
        */
       "col-end": [{
-        "col-end": _()
+        "col-end": E()
       }],
       /**
        * Grid Template Rows
        * @see https://tailwindcss.com/docs/grid-template-rows
        */
       "grid-rows": [{
-        "grid-rows": [Se]
+        "grid-rows": [Oe]
       }],
       /**
        * Grid Row Start / End
@@ -583,22 +583,22 @@ const ie = (o) => {
        */
       "row-start-end": [{
         row: ["auto", {
-          span: [Me, Y]
-        }, Y]
+          span: [Ae, K]
+        }, K]
       }],
       /**
        * Grid Row Start
        * @see https://tailwindcss.com/docs/grid-row
        */
       "row-start": [{
-        "row-start": _()
+        "row-start": E()
       }],
       /**
        * Grid Row End
        * @see https://tailwindcss.com/docs/grid-row
        */
       "row-end": [{
-        "row-end": _()
+        "row-end": E()
       }],
       /**
        * Grid Auto Flow
@@ -612,42 +612,42 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/grid-auto-columns
        */
       "auto-cols": [{
-        "auto-cols": ["auto", "min", "max", "fr", Y]
+        "auto-cols": ["auto", "min", "max", "fr", K]
       }],
       /**
        * Grid Auto Rows
        * @see https://tailwindcss.com/docs/grid-auto-rows
        */
       "auto-rows": [{
-        "auto-rows": ["auto", "min", "max", "fr", Y]
+        "auto-rows": ["auto", "min", "max", "fr", K]
       }],
       /**
        * Gap
        * @see https://tailwindcss.com/docs/gap
        */
       gap: [{
-        gap: [b]
+        gap: [d]
       }],
       /**
        * Gap X
        * @see https://tailwindcss.com/docs/gap
        */
       "gap-x": [{
-        "gap-x": [b]
+        "gap-x": [d]
       }],
       /**
        * Gap Y
        * @see https://tailwindcss.com/docs/gap
        */
       "gap-y": [{
-        "gap-y": [b]
+        "gap-y": [d]
       }],
       /**
        * Justify Content
        * @see https://tailwindcss.com/docs/justify-content
        */
       "justify-content": [{
-        justify: ["normal", ...G()]
+        justify: ["normal", ...H()]
       }],
       /**
        * Justify Items
@@ -668,7 +668,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/align-content
        */
       "align-content": [{
-        content: ["normal", ...G(), "baseline"]
+        content: ["normal", ...H(), "baseline"]
       }],
       /**
        * Align Items
@@ -689,7 +689,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/place-content
        */
       "place-content": [{
-        "place-content": [...G(), "baseline"]
+        "place-content": [...H(), "baseline"]
       }],
       /**
        * Place Items
@@ -711,133 +711,133 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/padding
        */
       p: [{
-        p: [I]
+        p: [V]
       }],
       /**
        * Padding X
        * @see https://tailwindcss.com/docs/padding
        */
       px: [{
-        px: [I]
+        px: [V]
       }],
       /**
        * Padding Y
        * @see https://tailwindcss.com/docs/padding
        */
       py: [{
-        py: [I]
+        py: [V]
       }],
       /**
        * Padding Start
        * @see https://tailwindcss.com/docs/padding
        */
       ps: [{
-        ps: [I]
+        ps: [V]
       }],
       /**
        * Padding End
        * @see https://tailwindcss.com/docs/padding
        */
       pe: [{
-        pe: [I]
+        pe: [V]
       }],
       /**
        * Padding Top
        * @see https://tailwindcss.com/docs/padding
        */
       pt: [{
-        pt: [I]
+        pt: [V]
       }],
       /**
        * Padding Right
        * @see https://tailwindcss.com/docs/padding
        */
       pr: [{
-        pr: [I]
+        pr: [V]
       }],
       /**
        * Padding Bottom
        * @see https://tailwindcss.com/docs/padding
        */
       pb: [{
-        pb: [I]
+        pb: [V]
       }],
       /**
        * Padding Left
        * @see https://tailwindcss.com/docs/padding
        */
       pl: [{
-        pl: [I]
+        pl: [V]
       }],
       /**
        * Margin
        * @see https://tailwindcss.com/docs/margin
        */
       m: [{
-        m: [x]
+        m: [N]
       }],
       /**
        * Margin X
        * @see https://tailwindcss.com/docs/margin
        */
       mx: [{
-        mx: [x]
+        mx: [N]
       }],
       /**
        * Margin Y
        * @see https://tailwindcss.com/docs/margin
        */
       my: [{
-        my: [x]
+        my: [N]
       }],
       /**
        * Margin Start
        * @see https://tailwindcss.com/docs/margin
        */
       ms: [{
-        ms: [x]
+        ms: [N]
       }],
       /**
        * Margin End
        * @see https://tailwindcss.com/docs/margin
        */
       me: [{
-        me: [x]
+        me: [N]
       }],
       /**
        * Margin Top
        * @see https://tailwindcss.com/docs/margin
        */
       mt: [{
-        mt: [x]
+        mt: [N]
       }],
       /**
        * Margin Right
        * @see https://tailwindcss.com/docs/margin
        */
       mr: [{
-        mr: [x]
+        mr: [N]
       }],
       /**
        * Margin Bottom
        * @see https://tailwindcss.com/docs/margin
        */
       mb: [{
-        mb: [x]
+        mb: [N]
       }],
       /**
        * Margin Left
        * @see https://tailwindcss.com/docs/margin
        */
       ml: [{
-        ml: [x]
+        ml: [N]
       }],
       /**
        * Space Between X
        * @see https://tailwindcss.com/docs/space
        */
       "space-x": [{
-        "space-x": [w]
+        "space-x": [k]
       }],
       /**
        * Space Between X Reverse
@@ -849,7 +849,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/space
        */
       "space-y": [{
-        "space-y": [w]
+        "space-y": [k]
       }],
       /**
        * Space Between Y Reverse
@@ -862,51 +862,51 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/width
        */
       w: [{
-        w: ["auto", "min", "max", "fit", "svw", "lvw", "dvw", Y, e]
+        w: ["auto", "min", "max", "fit", "svw", "lvw", "dvw", K, e]
       }],
       /**
        * Min-Width
        * @see https://tailwindcss.com/docs/min-width
        */
       "min-w": [{
-        "min-w": [Y, e, "min", "max", "fit"]
+        "min-w": [K, e, "min", "max", "fit"]
       }],
       /**
        * Max-Width
        * @see https://tailwindcss.com/docs/max-width
        */
       "max-w": [{
-        "max-w": [Y, e, "none", "full", "min", "max", "fit", "prose", {
-          screen: [ve]
-        }, ve]
+        "max-w": [K, e, "none", "full", "min", "max", "fit", "prose", {
+          screen: [we]
+        }, we]
       }],
       /**
        * Height
        * @see https://tailwindcss.com/docs/height
        */
       h: [{
-        h: [Y, e, "auto", "min", "max", "fit", "svh", "lvh", "dvh"]
+        h: [K, e, "auto", "min", "max", "fit", "svh", "lvh", "dvh"]
       }],
       /**
        * Min-Height
        * @see https://tailwindcss.com/docs/min-height
        */
       "min-h": [{
-        "min-h": [Y, e, "min", "max", "fit", "svh", "lvh", "dvh"]
+        "min-h": [K, e, "min", "max", "fit", "svh", "lvh", "dvh"]
       }],
       /**
        * Max-Height
        * @see https://tailwindcss.com/docs/max-height
        */
       "max-h": [{
-        "max-h": [Y, e, "min", "max", "fit", "svh", "lvh", "dvh"]
+        "max-h": [K, e, "min", "max", "fit", "svh", "lvh", "dvh"]
       }],
       /**
        * Size
        * @see https://tailwindcss.com/docs/size
        */
       size: [{
-        size: [Y, e, "auto", "min", "max", "fit"]
+        size: [K, e, "auto", "min", "max", "fit"]
       }],
       // Typography
       /**
@@ -914,7 +914,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/font-size
        */
       "font-size": [{
-        text: ["base", ve, je]
+        text: ["base", we, ve]
       }],
       /**
        * Font Smoothing
@@ -931,14 +931,14 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/font-weight
        */
       "font-weight": [{
-        font: ["thin", "extralight", "light", "normal", "medium", "semibold", "bold", "extrabold", "black", eo]
+        font: ["thin", "extralight", "light", "normal", "medium", "semibold", "bold", "extrabold", "black", ao]
       }],
       /**
        * Font Family
        * @see https://tailwindcss.com/docs/font-family
        */
       "font-family": [{
-        font: [Se]
+        font: [Oe]
       }],
       /**
        * Font Variant Numeric
@@ -975,35 +975,35 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/letter-spacing
        */
       tracking: [{
-        tracking: ["tighter", "tight", "normal", "wide", "wider", "widest", Y]
+        tracking: ["tighter", "tight", "normal", "wide", "wider", "widest", K]
       }],
       /**
        * Line Clamp
        * @see https://tailwindcss.com/docs/line-clamp
        */
       "line-clamp": [{
-        "line-clamp": ["none", Ie, eo]
+        "line-clamp": ["none", Me, ao]
       }],
       /**
        * Line Height
        * @see https://tailwindcss.com/docs/line-height
        */
       leading: [{
-        leading: ["none", "tight", "snug", "normal", "relaxed", "loose", ke, Y]
+        leading: ["none", "tight", "snug", "normal", "relaxed", "loose", ke, K]
       }],
       /**
        * List Style Image
        * @see https://tailwindcss.com/docs/list-style-image
        */
       "list-image": [{
-        "list-image": ["none", Y]
+        "list-image": ["none", K]
       }],
       /**
        * List Style Type
        * @see https://tailwindcss.com/docs/list-style-type
        */
       "list-style-type": [{
-        list: ["none", "disc", "decimal", Y]
+        list: ["none", "disc", "decimal", K]
       }],
       /**
        * List Style Position
@@ -1025,7 +1025,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/placeholder-opacity
        */
       "placeholder-opacity": [{
-        "placeholder-opacity": [V]
+        "placeholder-opacity": [I]
       }],
       /**
        * Text Alignment
@@ -1046,7 +1046,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/text-opacity
        */
       "text-opacity": [{
-        "text-opacity": [V]
+        "text-opacity": [I]
       }],
       /**
        * Text Decoration
@@ -1058,21 +1058,21 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/text-decoration-style
        */
       "text-decoration-style": [{
-        decoration: [...R(), "wavy"]
+        decoration: [...F(), "wavy"]
       }],
       /**
        * Text Decoration Thickness
        * @see https://tailwindcss.com/docs/text-decoration-thickness
        */
       "text-decoration-thickness": [{
-        decoration: ["auto", "from-font", ke, je]
+        decoration: ["auto", "from-font", ke, ve]
       }],
       /**
        * Text Underline Offset
        * @see https://tailwindcss.com/docs/text-underline-offset
        */
       "underline-offset": [{
-        "underline-offset": ["auto", ke, Y]
+        "underline-offset": ["auto", ke, K]
       }],
       /**
        * Text Decoration Color
@@ -1103,14 +1103,14 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/text-indent
        */
       indent: [{
-        indent: C()
+        indent: D()
       }],
       /**
        * Vertical Alignment
        * @see https://tailwindcss.com/docs/vertical-align
        */
       "vertical-align": [{
-        align: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom", "sub", "super", Y]
+        align: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom", "sub", "super", K]
       }],
       /**
        * Whitespace
@@ -1138,7 +1138,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/content
        */
       content: [{
-        content: ["none", Y]
+        content: ["none", K]
       }],
       // Backgrounds
       /**
@@ -1161,7 +1161,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/background-opacity
        */
       "bg-opacity": [{
-        "bg-opacity": [V]
+        "bg-opacity": [I]
       }],
       /**
        * Background Origin
@@ -1175,7 +1175,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/background-position
        */
       "bg-position": [{
-        bg: [...L(), Yn]
+        bg: [...S(), ot]
       }],
       /**
        * Background Repeat
@@ -1191,7 +1191,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/background-size
        */
       "bg-size": [{
-        bg: ["auto", "cover", "contain", qn]
+        bg: ["auto", "cover", "contain", et]
       }],
       /**
        * Background Image
@@ -1200,7 +1200,7 @@ const ie = (o) => {
       "bg-image": [{
         bg: ["none", {
           "gradient-to": ["t", "tr", "r", "br", "b", "bl", "l", "tl"]
-        }, Jn]
+        }, tt]
       }],
       /**
        * Background Color
@@ -1214,42 +1214,42 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/gradient-color-stops
        */
       "gradient-from-pos": [{
-        from: [f]
+        from: [g]
       }],
       /**
        * Gradient Color Stops Via Position
        * @see https://tailwindcss.com/docs/gradient-color-stops
        */
       "gradient-via-pos": [{
-        via: [f]
+        via: [g]
       }],
       /**
        * Gradient Color Stops To Position
        * @see https://tailwindcss.com/docs/gradient-color-stops
        */
       "gradient-to-pos": [{
-        to: [f]
+        to: [g]
       }],
       /**
        * Gradient Color Stops From
        * @see https://tailwindcss.com/docs/gradient-color-stops
        */
       "gradient-from": [{
-        from: [p]
+        from: [u]
       }],
       /**
        * Gradient Color Stops Via
        * @see https://tailwindcss.com/docs/gradient-color-stops
        */
       "gradient-via": [{
-        via: [p]
+        via: [u]
       }],
       /**
        * Gradient Color Stops To
        * @see https://tailwindcss.com/docs/gradient-color-stops
        */
       "gradient-to": [{
-        to: [p]
+        to: [u]
       }],
       // Borders
       /**
@@ -1257,189 +1257,189 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/border-radius
        */
       rounded: [{
-        rounded: [a]
+        rounded: [i]
       }],
       /**
        * Border Radius Start
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-s": [{
-        "rounded-s": [a]
+        "rounded-s": [i]
       }],
       /**
        * Border Radius End
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-e": [{
-        "rounded-e": [a]
+        "rounded-e": [i]
       }],
       /**
        * Border Radius Top
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-t": [{
-        "rounded-t": [a]
+        "rounded-t": [i]
       }],
       /**
        * Border Radius Right
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-r": [{
-        "rounded-r": [a]
+        "rounded-r": [i]
       }],
       /**
        * Border Radius Bottom
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-b": [{
-        "rounded-b": [a]
+        "rounded-b": [i]
       }],
       /**
        * Border Radius Left
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-l": [{
-        "rounded-l": [a]
+        "rounded-l": [i]
       }],
       /**
        * Border Radius Start Start
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-ss": [{
-        "rounded-ss": [a]
+        "rounded-ss": [i]
       }],
       /**
        * Border Radius Start End
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-se": [{
-        "rounded-se": [a]
+        "rounded-se": [i]
       }],
       /**
        * Border Radius End End
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-ee": [{
-        "rounded-ee": [a]
+        "rounded-ee": [i]
       }],
       /**
        * Border Radius End Start
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-es": [{
-        "rounded-es": [a]
+        "rounded-es": [i]
       }],
       /**
        * Border Radius Top Left
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-tl": [{
-        "rounded-tl": [a]
+        "rounded-tl": [i]
       }],
       /**
        * Border Radius Top Right
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-tr": [{
-        "rounded-tr": [a]
+        "rounded-tr": [i]
       }],
       /**
        * Border Radius Bottom Right
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-br": [{
-        "rounded-br": [a]
+        "rounded-br": [i]
       }],
       /**
        * Border Radius Bottom Left
        * @see https://tailwindcss.com/docs/border-radius
        */
       "rounded-bl": [{
-        "rounded-bl": [a]
+        "rounded-bl": [i]
       }],
       /**
        * Border Width
        * @see https://tailwindcss.com/docs/border-width
        */
       "border-w": [{
-        border: [s]
+        border: [r]
       }],
       /**
        * Border Width X
        * @see https://tailwindcss.com/docs/border-width
        */
       "border-w-x": [{
-        "border-x": [s]
+        "border-x": [r]
       }],
       /**
        * Border Width Y
        * @see https://tailwindcss.com/docs/border-width
        */
       "border-w-y": [{
-        "border-y": [s]
+        "border-y": [r]
       }],
       /**
        * Border Width Start
        * @see https://tailwindcss.com/docs/border-width
        */
       "border-w-s": [{
-        "border-s": [s]
+        "border-s": [r]
       }],
       /**
        * Border Width End
        * @see https://tailwindcss.com/docs/border-width
        */
       "border-w-e": [{
-        "border-e": [s]
+        "border-e": [r]
       }],
       /**
        * Border Width Top
        * @see https://tailwindcss.com/docs/border-width
        */
       "border-w-t": [{
-        "border-t": [s]
+        "border-t": [r]
       }],
       /**
        * Border Width Right
        * @see https://tailwindcss.com/docs/border-width
        */
       "border-w-r": [{
-        "border-r": [s]
+        "border-r": [r]
       }],
       /**
        * Border Width Bottom
        * @see https://tailwindcss.com/docs/border-width
        */
       "border-w-b": [{
-        "border-b": [s]
+        "border-b": [r]
       }],
       /**
        * Border Width Left
        * @see https://tailwindcss.com/docs/border-width
        */
       "border-w-l": [{
-        "border-l": [s]
+        "border-l": [r]
       }],
       /**
        * Border Opacity
        * @see https://tailwindcss.com/docs/border-opacity
        */
       "border-opacity": [{
-        "border-opacity": [V]
+        "border-opacity": [I]
       }],
       /**
        * Border Style
        * @see https://tailwindcss.com/docs/border-style
        */
       "border-style": [{
-        border: [...R(), "hidden"]
+        border: [...F(), "hidden"]
       }],
       /**
        * Divide Width X
        * @see https://tailwindcss.com/docs/divide-width
        */
       "divide-x": [{
-        "divide-x": [s]
+        "divide-x": [r]
       }],
       /**
        * Divide Width X Reverse
@@ -1451,7 +1451,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/divide-width
        */
       "divide-y": [{
-        "divide-y": [s]
+        "divide-y": [r]
       }],
       /**
        * Divide Width Y Reverse
@@ -1463,105 +1463,105 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/divide-opacity
        */
       "divide-opacity": [{
-        "divide-opacity": [V]
+        "divide-opacity": [I]
       }],
       /**
        * Divide Style
        * @see https://tailwindcss.com/docs/divide-style
        */
       "divide-style": [{
-        divide: R()
+        divide: F()
       }],
       /**
        * Border Color
        * @see https://tailwindcss.com/docs/border-color
        */
       "border-color": [{
-        border: [i]
+        border: [a]
       }],
       /**
        * Border Color X
        * @see https://tailwindcss.com/docs/border-color
        */
       "border-color-x": [{
-        "border-x": [i]
+        "border-x": [a]
       }],
       /**
        * Border Color Y
        * @see https://tailwindcss.com/docs/border-color
        */
       "border-color-y": [{
-        "border-y": [i]
+        "border-y": [a]
       }],
       /**
        * Border Color S
        * @see https://tailwindcss.com/docs/border-color
        */
       "border-color-s": [{
-        "border-s": [i]
+        "border-s": [a]
       }],
       /**
        * Border Color E
        * @see https://tailwindcss.com/docs/border-color
        */
       "border-color-e": [{
-        "border-e": [i]
+        "border-e": [a]
       }],
       /**
        * Border Color Top
        * @see https://tailwindcss.com/docs/border-color
        */
       "border-color-t": [{
-        "border-t": [i]
+        "border-t": [a]
       }],
       /**
        * Border Color Right
        * @see https://tailwindcss.com/docs/border-color
        */
       "border-color-r": [{
-        "border-r": [i]
+        "border-r": [a]
       }],
       /**
        * Border Color Bottom
        * @see https://tailwindcss.com/docs/border-color
        */
       "border-color-b": [{
-        "border-b": [i]
+        "border-b": [a]
       }],
       /**
        * Border Color Left
        * @see https://tailwindcss.com/docs/border-color
        */
       "border-color-l": [{
-        "border-l": [i]
+        "border-l": [a]
       }],
       /**
        * Divide Color
        * @see https://tailwindcss.com/docs/divide-color
        */
       "divide-color": [{
-        divide: [i]
+        divide: [a]
       }],
       /**
        * Outline Style
        * @see https://tailwindcss.com/docs/outline-style
        */
       "outline-style": [{
-        outline: ["", ...R()]
+        outline: ["", ...F()]
       }],
       /**
        * Outline Offset
        * @see https://tailwindcss.com/docs/outline-offset
        */
       "outline-offset": [{
-        "outline-offset": [ke, Y]
+        "outline-offset": [ke, K]
       }],
       /**
        * Outline Width
        * @see https://tailwindcss.com/docs/outline-width
        */
       "outline-w": [{
-        outline: [ke, je]
+        outline: [ke, ve]
       }],
       /**
        * Outline Color
@@ -1575,7 +1575,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/ring-width
        */
       "ring-w": [{
-        ring: E()
+        ring: x()
       }],
       /**
        * Ring Width Inset
@@ -1594,14 +1594,14 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/ring-opacity
        */
       "ring-opacity": [{
-        "ring-opacity": [V]
+        "ring-opacity": [I]
       }],
       /**
        * Ring Offset Width
        * @see https://tailwindcss.com/docs/ring-offset-width
        */
       "ring-offset-w": [{
-        "ring-offset": [ke, je]
+        "ring-offset": [ke, ve]
       }],
       /**
        * Ring Offset Color
@@ -1616,35 +1616,35 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/box-shadow
        */
       shadow: [{
-        shadow: ["", "inner", "none", ve, Xn]
+        shadow: ["", "inner", "none", we, it]
       }],
       /**
        * Box Shadow Color
        * @see https://tailwindcss.com/docs/box-shadow-color
        */
       "shadow-color": [{
-        shadow: [Se]
+        shadow: [Oe]
       }],
       /**
        * Opacity
        * @see https://tailwindcss.com/docs/opacity
        */
       opacity: [{
-        opacity: [V]
+        opacity: [I]
       }],
       /**
        * Mix Blend Mode
        * @see https://tailwindcss.com/docs/mix-blend-mode
        */
       "mix-blend": [{
-        "mix-blend": [...U(), "plus-lighter", "plus-darker"]
+        "mix-blend": [...$(), "plus-lighter", "plus-darker"]
       }],
       /**
        * Background Blend Mode
        * @see https://tailwindcss.com/docs/background-blend-mode
        */
       "bg-blend": [{
-        "bg-blend": U()
+        "bg-blend": $()
       }],
       // Filters
       /**
@@ -1681,42 +1681,42 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/drop-shadow
        */
       "drop-shadow": [{
-        "drop-shadow": ["", "none", ve, Y]
+        "drop-shadow": ["", "none", we, K]
       }],
       /**
        * Grayscale
        * @see https://tailwindcss.com/docs/grayscale
        */
       grayscale: [{
-        grayscale: [d]
+        grayscale: [c]
       }],
       /**
        * Hue Rotate
        * @see https://tailwindcss.com/docs/hue-rotate
        */
       "hue-rotate": [{
-        "hue-rotate": [c]
+        "hue-rotate": [b]
       }],
       /**
        * Invert
        * @see https://tailwindcss.com/docs/invert
        */
       invert: [{
-        invert: [u]
+        invert: [h]
       }],
       /**
        * Saturate
        * @see https://tailwindcss.com/docs/saturate
        */
       saturate: [{
-        saturate: [N]
+        saturate: [z]
       }],
       /**
        * Sepia
        * @see https://tailwindcss.com/docs/sepia
        */
       sepia: [{
-        sepia: [v]
+        sepia: [w]
       }],
       /**
        * Backdrop Filter
@@ -1752,42 +1752,42 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/backdrop-grayscale
        */
       "backdrop-grayscale": [{
-        "backdrop-grayscale": [d]
+        "backdrop-grayscale": [c]
       }],
       /**
        * Backdrop Hue Rotate
        * @see https://tailwindcss.com/docs/backdrop-hue-rotate
        */
       "backdrop-hue-rotate": [{
-        "backdrop-hue-rotate": [c]
+        "backdrop-hue-rotate": [b]
       }],
       /**
        * Backdrop Invert
        * @see https://tailwindcss.com/docs/backdrop-invert
        */
       "backdrop-invert": [{
-        "backdrop-invert": [u]
+        "backdrop-invert": [h]
       }],
       /**
        * Backdrop Opacity
        * @see https://tailwindcss.com/docs/backdrop-opacity
        */
       "backdrop-opacity": [{
-        "backdrop-opacity": [V]
+        "backdrop-opacity": [I]
       }],
       /**
        * Backdrop Saturate
        * @see https://tailwindcss.com/docs/backdrop-saturate
        */
       "backdrop-saturate": [{
-        "backdrop-saturate": [N]
+        "backdrop-saturate": [z]
       }],
       /**
        * Backdrop Sepia
        * @see https://tailwindcss.com/docs/backdrop-sepia
        */
       "backdrop-sepia": [{
-        "backdrop-sepia": [v]
+        "backdrop-sepia": [w]
       }],
       // Tables
       /**
@@ -1802,21 +1802,21 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/border-spacing
        */
       "border-spacing": [{
-        "border-spacing": [r]
+        "border-spacing": [s]
       }],
       /**
        * Border Spacing X
        * @see https://tailwindcss.com/docs/border-spacing
        */
       "border-spacing-x": [{
-        "border-spacing-x": [r]
+        "border-spacing-x": [s]
       }],
       /**
        * Border Spacing Y
        * @see https://tailwindcss.com/docs/border-spacing
        */
       "border-spacing-y": [{
-        "border-spacing-y": [r]
+        "border-spacing-y": [s]
       }],
       /**
        * Table Layout
@@ -1838,35 +1838,35 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/transition-property
        */
       transition: [{
-        transition: ["none", "all", "", "colors", "opacity", "shadow", "transform", Y]
+        transition: ["none", "all", "", "colors", "opacity", "shadow", "transform", K]
       }],
       /**
        * Transition Duration
        * @see https://tailwindcss.com/docs/transition-duration
        */
       duration: [{
-        duration: S()
+        duration: A()
       }],
       /**
        * Transition Timing Function
        * @see https://tailwindcss.com/docs/transition-timing-function
        */
       ease: [{
-        ease: ["linear", "in", "out", "in-out", Y]
+        ease: ["linear", "in", "out", "in-out", K]
       }],
       /**
        * Transition Delay
        * @see https://tailwindcss.com/docs/transition-delay
        */
       delay: [{
-        delay: S()
+        delay: A()
       }],
       /**
        * Animation
        * @see https://tailwindcss.com/docs/animation
        */
       animate: [{
-        animate: ["none", "spin", "ping", "pulse", "bounce", Y]
+        animate: ["none", "spin", "ping", "pulse", "bounce", K]
       }],
       // Transforms
       /**
@@ -1881,63 +1881,63 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/scale
        */
       scale: [{
-        scale: [j]
+        scale: [y]
       }],
       /**
        * Scale X
        * @see https://tailwindcss.com/docs/scale
        */
       "scale-x": [{
-        "scale-x": [j]
+        "scale-x": [y]
       }],
       /**
        * Scale Y
        * @see https://tailwindcss.com/docs/scale
        */
       "scale-y": [{
-        "scale-y": [j]
+        "scale-y": [y]
       }],
       /**
        * Rotate
        * @see https://tailwindcss.com/docs/rotate
        */
       rotate: [{
-        rotate: [Me, Y]
+        rotate: [Ae, K]
       }],
       /**
        * Translate X
        * @see https://tailwindcss.com/docs/translate
        */
       "translate-x": [{
-        "translate-x": [T]
+        "translate-x": [M]
       }],
       /**
        * Translate Y
        * @see https://tailwindcss.com/docs/translate
        */
       "translate-y": [{
-        "translate-y": [T]
+        "translate-y": [M]
       }],
       /**
        * Skew X
        * @see https://tailwindcss.com/docs/skew
        */
       "skew-x": [{
-        "skew-x": [y]
+        "skew-x": [j]
       }],
       /**
        * Skew Y
        * @see https://tailwindcss.com/docs/skew
        */
       "skew-y": [{
-        "skew-y": [y]
+        "skew-y": [j]
       }],
       /**
        * Transform Origin
        * @see https://tailwindcss.com/docs/transform-origin
        */
       "transform-origin": [{
-        origin: ["center", "top", "top-right", "right", "bottom-right", "bottom", "bottom-left", "left", "top-left", Y]
+        origin: ["center", "top", "top-right", "right", "bottom-right", "bottom", "bottom-left", "left", "top-left", K]
       }],
       // Interactivity
       /**
@@ -1959,7 +1959,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/cursor
        */
       cursor: [{
-        cursor: ["auto", "default", "pointer", "wait", "text", "move", "help", "not-allowed", "none", "context-menu", "progress", "cell", "crosshair", "vertical-text", "alias", "copy", "no-drop", "grab", "grabbing", "all-scroll", "col-resize", "row-resize", "n-resize", "e-resize", "s-resize", "w-resize", "ne-resize", "nw-resize", "se-resize", "sw-resize", "ew-resize", "ns-resize", "nesw-resize", "nwse-resize", "zoom-in", "zoom-out", Y]
+        cursor: ["auto", "default", "pointer", "wait", "text", "move", "help", "not-allowed", "none", "context-menu", "progress", "cell", "crosshair", "vertical-text", "alias", "copy", "no-drop", "grab", "grabbing", "all-scroll", "col-resize", "row-resize", "n-resize", "e-resize", "s-resize", "w-resize", "ne-resize", "nw-resize", "se-resize", "sw-resize", "ew-resize", "ns-resize", "nesw-resize", "nwse-resize", "zoom-in", "zoom-out", K]
       }],
       /**
        * Caret Color
@@ -1994,126 +1994,126 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/scroll-margin
        */
       "scroll-m": [{
-        "scroll-m": C()
+        "scroll-m": D()
       }],
       /**
        * Scroll Margin X
        * @see https://tailwindcss.com/docs/scroll-margin
        */
       "scroll-mx": [{
-        "scroll-mx": C()
+        "scroll-mx": D()
       }],
       /**
        * Scroll Margin Y
        * @see https://tailwindcss.com/docs/scroll-margin
        */
       "scroll-my": [{
-        "scroll-my": C()
+        "scroll-my": D()
       }],
       /**
        * Scroll Margin Start
        * @see https://tailwindcss.com/docs/scroll-margin
        */
       "scroll-ms": [{
-        "scroll-ms": C()
+        "scroll-ms": D()
       }],
       /**
        * Scroll Margin End
        * @see https://tailwindcss.com/docs/scroll-margin
        */
       "scroll-me": [{
-        "scroll-me": C()
+        "scroll-me": D()
       }],
       /**
        * Scroll Margin Top
        * @see https://tailwindcss.com/docs/scroll-margin
        */
       "scroll-mt": [{
-        "scroll-mt": C()
+        "scroll-mt": D()
       }],
       /**
        * Scroll Margin Right
        * @see https://tailwindcss.com/docs/scroll-margin
        */
       "scroll-mr": [{
-        "scroll-mr": C()
+        "scroll-mr": D()
       }],
       /**
        * Scroll Margin Bottom
        * @see https://tailwindcss.com/docs/scroll-margin
        */
       "scroll-mb": [{
-        "scroll-mb": C()
+        "scroll-mb": D()
       }],
       /**
        * Scroll Margin Left
        * @see https://tailwindcss.com/docs/scroll-margin
        */
       "scroll-ml": [{
-        "scroll-ml": C()
+        "scroll-ml": D()
       }],
       /**
        * Scroll Padding
        * @see https://tailwindcss.com/docs/scroll-padding
        */
       "scroll-p": [{
-        "scroll-p": C()
+        "scroll-p": D()
       }],
       /**
        * Scroll Padding X
        * @see https://tailwindcss.com/docs/scroll-padding
        */
       "scroll-px": [{
-        "scroll-px": C()
+        "scroll-px": D()
       }],
       /**
        * Scroll Padding Y
        * @see https://tailwindcss.com/docs/scroll-padding
        */
       "scroll-py": [{
-        "scroll-py": C()
+        "scroll-py": D()
       }],
       /**
        * Scroll Padding Start
        * @see https://tailwindcss.com/docs/scroll-padding
        */
       "scroll-ps": [{
-        "scroll-ps": C()
+        "scroll-ps": D()
       }],
       /**
        * Scroll Padding End
        * @see https://tailwindcss.com/docs/scroll-padding
        */
       "scroll-pe": [{
-        "scroll-pe": C()
+        "scroll-pe": D()
       }],
       /**
        * Scroll Padding Top
        * @see https://tailwindcss.com/docs/scroll-padding
        */
       "scroll-pt": [{
-        "scroll-pt": C()
+        "scroll-pt": D()
       }],
       /**
        * Scroll Padding Right
        * @see https://tailwindcss.com/docs/scroll-padding
        */
       "scroll-pr": [{
-        "scroll-pr": C()
+        "scroll-pr": D()
       }],
       /**
        * Scroll Padding Bottom
        * @see https://tailwindcss.com/docs/scroll-padding
        */
       "scroll-pb": [{
-        "scroll-pb": C()
+        "scroll-pb": D()
       }],
       /**
        * Scroll Padding Left
        * @see https://tailwindcss.com/docs/scroll-padding
        */
       "scroll-pl": [{
-        "scroll-pl": C()
+        "scroll-pl": D()
       }],
       /**
        * Scroll Snap Align
@@ -2181,7 +2181,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/will-change
        */
       "will-change": [{
-        "will-change": ["auto", "scroll", "contents", "transform", Y]
+        "will-change": ["auto", "scroll", "contents", "transform", K]
       }],
       // SVG
       /**
@@ -2196,7 +2196,7 @@ const ie = (o) => {
        * @see https://tailwindcss.com/docs/stroke-width
        */
       "stroke-w": [{
-        stroke: [ke, je, eo]
+        stroke: [ke, ve, ao]
       }],
       /**
        * Stroke
@@ -2271,40 +2271,40 @@ const ie = (o) => {
       "font-size": ["leading"]
     }
   };
-}, tt = /* @__PURE__ */ Rn(nt);
-function h(...o) {
-  return tt(Po(o));
+}, mt = /* @__PURE__ */ Bn(rt);
+function p(...o) {
+  return mt(Ho(o));
 }
-const No = (o) => typeof o == "boolean" ? `${o}` : o === 0 ? "0" : o, Co = Po, D = (o, e) => (n) => {
+const Co = (o) => typeof o == "boolean" ? `${o}` : o === 0 ? "0" : o, Mo = Ho, C = (o, e) => (n) => {
   var t;
-  if ((e == null ? void 0 : e.variants) == null) return Co(o, n == null ? void 0 : n.class, n == null ? void 0 : n.className);
-  const { variants: i, defaultVariants: a } = e, r = Object.keys(i).map((d) => {
-    const c = n == null ? void 0 : n[d], u = a == null ? void 0 : a[d];
-    if (c === null) return null;
-    const b = No(c) || No(u);
-    return i[d][b];
-  }), s = n && Object.entries(n).reduce((d, c) => {
-    let [u, b] = c;
-    return b === void 0 || (d[u] = b), d;
-  }, {}), m = e == null || (t = e.compoundVariants) === null || t === void 0 ? void 0 : t.reduce((d, c) => {
-    let { class: u, className: b, ...p } = c;
-    return Object.entries(p).every((f) => {
-      let [g, x] = f;
-      return Array.isArray(x) ? x.includes({
-        ...a,
-        ...s
-      }[g]) : {
-        ...a,
-        ...s
-      }[g] === x;
+  if ((e == null ? void 0 : e.variants) == null) return Mo(o, n == null ? void 0 : n.class, n == null ? void 0 : n.className);
+  const { variants: a, defaultVariants: i } = e, s = Object.keys(a).map((c) => {
+    const b = n == null ? void 0 : n[c], h = i == null ? void 0 : i[c];
+    if (b === null) return null;
+    const d = Co(b) || Co(h);
+    return a[c][d];
+  }), r = n && Object.entries(n).reduce((c, b) => {
+    let [h, d] = b;
+    return d === void 0 || (c[h] = d), c;
+  }, {}), m = e == null || (t = e.compoundVariants) === null || t === void 0 ? void 0 : t.reduce((c, b) => {
+    let { class: h, className: d, ...u } = b;
+    return Object.entries(u).every((g) => {
+      let [v, N] = g;
+      return Array.isArray(N) ? N.includes({
+        ...i,
+        ...r
+      }[v]) : {
+        ...i,
+        ...r
+      }[v] === N;
     }) ? [
-      ...d,
-      u,
-      b
-    ] : d;
+      ...c,
+      h,
+      d
+    ] : c;
   }, []);
-  return Co(o, r, m, n == null ? void 0 : n.class, n == null ? void 0 : n.className);
-}, it = D(
+  return Mo(o, s, m, n == null ? void 0 : n.class, n == null ? void 0 : n.className);
+}, ct = C(
   // Base styles
   "block animate-spin",
   {
@@ -2319,9 +2319,9 @@ const No = (o) => typeof o == "boolean" ? `${o}` : o === 0 ? "0" : o, Co = Po, D
       size: "m"
     }
   }
-), bo = P(
+), go = R(
   ({ className: o, size: e = "m", ...n }, t) => {
-    const a = {
+    const i = {
       s: {
         viewBox: "0 0 16 16",
         center: 8,
@@ -2344,7 +2344,7 @@ const No = (o) => typeof o == "boolean" ? `${o}` : o === 0 ? "0" : o, Co = Po, D
         path: "M25 3a22 22 0 0 1 22 22"
       }
     }[e ?? "m"];
-    return /* @__PURE__ */ A(
+    return /* @__PURE__ */ L(
       "svg",
       {
         ref: t,
@@ -2353,25 +2353,25 @@ const No = (o) => typeof o == "boolean" ? `${o}` : o === 0 ? "0" : o, Co = Po, D
         "aria-busy": "true",
         "aria-label": "Loading",
         fill: "none",
-        className: h(it({ size: e }), o),
-        viewBox: a.viewBox,
+        className: p(ct({ size: e }), o),
+        viewBox: i.viewBox,
         ...n,
         children: [
           /* @__PURE__ */ l(
             "circle",
             {
-              cx: a.center,
-              cy: a.center,
-              r: a.radius,
-              strokeWidth: a.strokeWidth,
+              cx: i.center,
+              cy: i.center,
+              r: i.radius,
+              strokeWidth: i.strokeWidth,
               className: "stroke-current opacity-30"
             }
           ),
           /* @__PURE__ */ l(
             "path",
             {
-              d: a.path,
-              strokeWidth: a.strokeWidth,
+              d: i.path,
+              strokeWidth: i.strokeWidth,
               strokeLinecap: "round",
               className: "stroke-current"
             }
@@ -2381,8 +2381,8 @@ const No = (o) => typeof o == "boolean" ? `${o}` : o === 0 ? "0" : o, Co = Po, D
     );
   }
 );
-bo.displayName = "Spinner";
-const at = D(
+go.displayName = "Spinner";
+const dt = C(
   // Base styles matching template.html #icon styles
   [
     "inline-block",
@@ -2405,34 +2405,34 @@ const at = D(
       size: "md"
     }
   }
-), lt = (o, e) => e === "1" ? "var(--sinch-comp-icon-font-family)" : /^(fa-|(?!fa-))[0-9a-d]/i.test(o) ? "var(--sinch-comp-icon-font-family-zero-to-d)" : /^(fa-|(?!fa-))[e-o]/i.test(o) ? "var(--sinch-comp-icon-font-family-e-to-o)" : /^(fa-|(?!fa-))[p-z]/i.test(o) ? "var(--sinch-comp-icon-font-family-p-to-z)" : "var(--sinch-comp-icon-font-family)", ne = P(
-  ({ className: o, name: e, iconsVersion: n = "1", size: t = "md", style: i, ...a }, r) => {
-    const s = J(
-      () => lt(e, n),
+), bt = (o, e) => e === "1" ? "var(--sinch-comp-icon-font-family)" : /^(fa-|(?!fa-))[0-9a-d]/i.test(o) ? "var(--sinch-comp-icon-font-family-zero-to-d)" : /^(fa-|(?!fa-))[e-o]/i.test(o) ? "var(--sinch-comp-icon-font-family-e-to-o)" : /^(fa-|(?!fa-))[p-z]/i.test(o) ? "var(--sinch-comp-icon-font-family-p-to-z)" : "var(--sinch-comp-icon-font-family)", oe = R(
+  ({ className: o, name: e, iconsVersion: n = "1", size: t = "md", style: a, ...i }, s) => {
+    const r = J(
+      () => bt(e, n),
       [e, n]
     );
     return /* @__PURE__ */ l(
       "span",
       {
-        ref: r,
+        ref: s,
         role: "img",
         "aria-label": e,
-        className: h(at({ size: t }), o),
+        className: p(dt({ size: t }), o),
         style: {
-          fontFamily: s,
+          fontFamily: r,
           fontWeight: "var(--sinch-comp-icon-font-weight)",
           fontFeatureSettings: "var(--sinch-comp-icon-font-feature-settings)",
           color: "var(--sinch-global-color-icon, var(--sinch-sys-color-text-default))",
-          ...i
+          ...a
         },
-        ...a,
+        ...i,
         children: e
       }
     );
   }
 );
-ne.displayName = "Icon";
-const st = D(
+oe.displayName = "Icon";
+const ut = C(
   // Base styles - uses design system font and color tokens
   "text-foreground [font:var(--sinch-sys-font-body-m)]",
   {
@@ -2488,31 +2488,31 @@ const st = D(
       ellipsis: !1
     }
   }
-), Je = P(
+), no = R(
   ({
     className: o,
     children: e,
     type: n = "m",
     inline: t = !1,
-    emphasized: i = !1,
-    ellipsis: a = !1,
-    as: r,
-    ...s
+    emphasized: a = !1,
+    ellipsis: i = !1,
+    as: s,
+    ...r
   }, m) => /* @__PURE__ */ l(
-    r ?? (t ? "span" : "p"),
+    s ?? (t ? "span" : "p"),
     {
       ref: m,
-      className: h(
-        st({ type: n, inline: t, emphasized: i, ellipsis: a }),
+      className: p(
+        ut({ type: n, inline: t, emphasized: a, ellipsis: i }),
         o
       ),
-      ...s,
+      ...r,
       children: e
     }
   )
 );
-Je.displayName = "Text";
-const rt = D(
+no.displayName = "Text";
+const ht = C(
   // Base styles
   [
     "relative flex flex-row items-center box-border w-full",
@@ -2539,7 +2539,7 @@ const rt = D(
       size: "m"
     }
   }
-), mt = D(
+), pt = C(
   // Base styles for the input element
   [
     "w-full h-full px-3 box-border",
@@ -2562,7 +2562,7 @@ const rt = D(
       hasIcon: !1
     }
   }
-), ct = D(
+), gt = C(
   // Base styles for the border overlay
   [
     "absolute inset-0 pointer-events-none",
@@ -2609,122 +2609,128 @@ const rt = D(
       isDisabled: !1
     }
   }
-), uo = P(
+), ko = R(
   ({
     className: o,
     type: e = "text",
     value: n,
     defaultValue: t,
-    placeholder: i,
-    size: a = "m",
-    invalid: r = !1,
-    disabled: s = !1,
+    placeholder: a,
+    size: i = "m",
+    invalid: s = !1,
+    disabled: r = !1,
     readOnly: m = !1,
-    required: d = !1,
-    autoComplete: c,
-    maxLength: u,
-    min: b,
-    max: p,
-    step: f,
-    "aria-label": g,
-    icon: x,
-    leftAddon: V,
-    rightAddon: I,
-    onChange: N,
-    onFocus: j,
-    onBlur: v,
-    onKeyDown: y,
-    ...w
-  }, T) => {
-    const [z, O] = F(t ?? ""), [$, C] = F(!1), E = n !== void 0, _ = E ? n : z, L = x !== void 0, R = {
+    required: c = !1,
+    autoComplete: b,
+    maxLength: h,
+    min: d,
+    max: u,
+    step: g,
+    "aria-label": v,
+    icon: N,
+    leftAddon: I,
+    rightAddon: V,
+    onChange: z,
+    onFocus: y,
+    onBlur: w,
+    onKeyDown: j,
+    ...k
+  }, M) => {
+    const [T, P] = U(t ?? ""), [B, D] = U(!1);
+    X(() => {
+      process.env.NODE_ENV !== "production" && !v && !k["aria-labelledby"] && !k.id && console.warn(
+        "Input: Must have an `aria-label`, `aria-labelledby`, or an associated `<label>` (via matching `id`) for accessibility."
+      );
+    }, [v, k["aria-labelledby"], k.id]);
+    const x = n !== void 0, E = x ? n : T, S = N !== void 0, F = {
       s: "var(--sinch-comp-input-size-icon-s)",
       m: "var(--sinch-comp-input-size-icon-m)",
       l: "var(--sinch-comp-input-size-icon-l)"
-    }[a], U = k(
-      (H) => {
-        const S = H.target.value;
-        E || O(S), N == null || N(S);
+    }[i], $ = f(
+      (_) => {
+        const A = _.target.value;
+        x || P(A), z == null || z(A);
       },
-      [E, N]
-    ), G = k(
-      (H) => {
-        C(!0), j == null || j(H);
+      [x, z]
+    ), H = f(
+      (_) => {
+        D(!0), y == null || y(_);
       },
-      [j]
-    ), q = k(
-      (H) => {
-        C(!1), v == null || v(H);
+      [y]
+    ), Z = f(
+      (_) => {
+        D(!1), w == null || w(_);
       },
-      [v]
+      [w]
     );
-    return /* @__PURE__ */ A(
+    return /* @__PURE__ */ L(
       "div",
       {
-        className: h(rt({ size: a }), o),
+        className: p(ht({ size: i }), o),
         style: {
-          "--sinch-local-icon-size": R
+          "--sinch-local-icon-size": F
         },
         children: [
-          V && /* @__PURE__ */ l("div", { className: "flex flex-row items-center self-stretch gap-1 pl-1", children: V }),
-          L && /* @__PURE__ */ l("div", { className: "relative h-full", children: /* @__PURE__ */ l(
+          I && /* @__PURE__ */ l("div", { className: "flex flex-row items-center self-stretch gap-1 pl-1", children: I }),
+          S && /* @__PURE__ */ l("div", { className: "relative h-full", children: /* @__PURE__ */ l(
             "div",
             {
-              className: h(
+              className: p(
                 "absolute flex items-center left-3 top-0 bottom-0 pointer-events-none",
-                s ? "[--sinch-global-color-icon:var(--sinch-comp-input-color-disabled-icon-initial)]" : "[--sinch-global-color-icon:var(--sinch-comp-input-color-default-icon-initial)]"
+                r ? "[--sinch-global-color-icon:var(--sinch-comp-input-color-disabled-icon-initial)]" : "[--sinch-global-color-icon:var(--sinch-comp-input-color-default-icon-initial)]"
               ),
               style: {
-                width: R
+                width: F
               },
-              children: x
+              children: N
             }
           ) }),
           /* @__PURE__ */ l("div", { className: "relative flex-1 min-w-0 self-stretch", children: /* @__PURE__ */ l(
             "input",
             {
-              ref: T,
+              ref: M,
               type: e,
-              value: _,
-              placeholder: i,
-              disabled: s,
+              value: E,
+              placeholder: a,
+              disabled: r,
               readOnly: m,
-              required: d,
-              autoComplete: c,
-              maxLength: u,
-              min: b,
-              max: p,
-              step: f,
-              "aria-label": g,
-              "aria-invalid": r,
-              className: h(mt({ hasIcon: L })),
-              onChange: U,
-              onFocus: G,
-              onBlur: q,
-              onKeyDown: y,
-              ...w
+              required: c,
+              autoComplete: b,
+              maxLength: h,
+              min: d,
+              max: u,
+              step: g,
+              "aria-label": v,
+              "aria-invalid": s,
+              className: p(pt({ hasIcon: S })),
+              onChange: $,
+              onFocus: H,
+              onBlur: Z,
+              onKeyDown: j,
+              ...k
             }
           ) }),
           /* @__PURE__ */ l(
             "div",
             {
-              className: h(
-                ct({
-                  size: a,
-                  isFocused: $,
-                  isInvalid: r && !$,
-                  isDisabled: s
+              className: p(
+                gt({
+                  size: i,
+                  isFocused: B,
+                  isInvalid: s && !B,
+                  isDisabled: r
                 })
               )
             }
           ),
-          I && /* @__PURE__ */ l("div", { className: "flex flex-row items-center self-stretch gap-1 pr-1", children: I })
+          V && /* @__PURE__ */ l("div", { className: "flex flex-row items-center self-stretch gap-1 pr-1", children: V })
         ]
       }
     );
   }
 );
-uo.displayName = "Input";
-const dt = D(
+ko.displayName = "Input";
+const kt = C(
   // Base styles
   [
     "relative inline-flex items-center justify-center",
@@ -2869,7 +2875,7 @@ const dt = D(
       iconOnly: !1
     }
   }
-), bt = {
+), ft = {
   primary: [
     "bg-[var(--sinch-comp-button-color-primary-disabled-background-initial)]",
     "border-[var(--sinch-comp-button-color-primary-disabled-border-initial)]",
@@ -2911,59 +2917,65 @@ const dt = D(
     "border-[var(--sinch-comp-button-color-danger-disabled-border-initial)]",
     "text-[var(--sinch-comp-button-color-danger-disabled-text-initial)]"
   ].join(" ")
-}, ut = {
+}, jt = {
   "subtle-primary": "bg-[var(--sinch-comp-button-color-subtle-primary-toggled-background-initial)]",
   "subtle-secondary": "bg-[var(--sinch-comp-button-color-subtle-secondary-toggled-background-initial)]"
-}, me = P(
+}, re = R(
   ({
     className: o,
     variant: e = "secondary",
     size: n = "m",
     text: t,
-    icon: i,
-    leftIcon: a,
-    rightIcon: r,
-    loading: s = !1,
+    icon: a,
+    leftIcon: i,
+    rightIcon: s,
+    loading: r = !1,
     toggled: m = !1,
-    disabled: d = !1,
-    formType: c = "button",
-    children: u,
-    ...b
-  }, p) => {
-    const f = t !== void 0 || u !== void 0, g = !f && i !== void 0, x = d || s, V = g && e === "secondary" ? "subtle-secondary" : e, I = h(
-      dt({ variant: V, size: n, iconOnly: g }),
+    disabled: c = !1,
+    formType: b = "button",
+    children: h,
+    ...d
+  }, u) => {
+    const g = t !== void 0 || h !== void 0, v = !g && a !== void 0;
+    X(() => {
+      process.env.NODE_ENV !== "production" && v && !d["aria-label"] && !d["aria-labelledby"] && console.warn(
+        "Button: Icon-only buttons must have an `aria-label` or `aria-labelledby` for accessibility."
+      );
+    }, [v, d["aria-label"], d["aria-labelledby"]]);
+    const N = c || r, I = v && e === "secondary" ? "subtle-secondary" : e, V = p(
+      kt({ variant: I, size: n, iconOnly: v }),
       // Disabled styles
-      x && [
+      N && [
         "cursor-not-allowed",
         "pointer-events-none",
-        bt[V]
+        ft[I]
       ],
       // Toggled state (only for subtle variants when not disabled)
-      !x && m && ut[V],
+      !N && m && jt[I],
       o
     );
-    return /* @__PURE__ */ A(
+    return /* @__PURE__ */ L(
       "button",
       {
-        ref: p,
-        type: c,
-        disabled: x,
+        ref: u,
+        type: b,
+        disabled: N,
         "aria-pressed": m ? "true" : void 0,
-        "aria-busy": s ? "true" : void 0,
-        className: I,
-        ...b,
+        "aria-busy": r ? "true" : void 0,
+        className: V,
+        ...d,
         children: [
-          s ? /* @__PURE__ */ l(bo, { size: n === "l" ? "m" : "s", className: "shrink-0" }) : a && /* @__PURE__ */ l("span", { className: "shrink-0", children: a }),
-          g && !s && /* @__PURE__ */ l("span", { className: "shrink-0", children: i }),
-          f && /* @__PURE__ */ l("span", { className: "truncate", children: t ?? u }),
-          r && !s && /* @__PURE__ */ l("span", { className: "shrink-0", children: r })
+          r ? /* @__PURE__ */ l(go, { size: n === "l" ? "m" : "s", className: "shrink-0" }) : i && /* @__PURE__ */ l("span", { className: "shrink-0", children: i }),
+          v && !r && /* @__PURE__ */ l("span", { className: "shrink-0", children: a }),
+          g && /* @__PURE__ */ l("span", { className: "truncate", children: t ?? h }),
+          s && !r && /* @__PURE__ */ l("span", { className: "shrink-0", children: s })
         ]
       }
     );
   }
 );
-me.displayName = "Button";
-const ht = D(
+re.displayName = "Button";
+const vt = C(
   // Base styles for the badge indicator
   [
     "absolute",
@@ -3007,7 +3019,7 @@ const ht = D(
       mode: "square"
     }
   }
-), pt = D(
+), wt = C(
   // Base styles for the inner badge circle
   [
     "box-border",
@@ -3052,7 +3064,7 @@ const ht = D(
       long: !1
     }
   }
-), gt = D(
+), xt = C(
   // Base styles for the text
   [
     "block",
@@ -3072,25 +3084,25 @@ const ht = D(
       size: "m"
     }
   }
-), kt = P(
-  ({ className: o, children: e, text: n, size: t = "m", mode: i = "square", hidden: a = !1, ...r }, s) => {
+), yt = R(
+  ({ className: o, children: e, text: n, size: t = "m", mode: a = "square", hidden: i = !1, ...s }, r) => {
     const m = n !== void 0 && n.length > 1;
-    return /* @__PURE__ */ A(
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: s,
-        className: h("relative inline-flex flex-col", o),
-        ...r,
+        ref: r,
+        className: p("relative inline-flex flex-col", o),
+        ...s,
         children: [
           e,
-          !a && /* @__PURE__ */ l("div", { className: h(ht({ size: t, mode: i })), children: /* @__PURE__ */ l("div", { className: h(pt({ size: t, long: m })), children: /* @__PURE__ */ l("span", { className: h(gt({ size: t })), children: n }) }) })
+          !i && /* @__PURE__ */ l("div", { className: p(vt({ size: t, mode: a })), children: /* @__PURE__ */ l("div", { className: p(wt({ size: t, long: m })), children: /* @__PURE__ */ l("span", { className: p(xt({ size: t })), children: n }) }) })
         ]
       }
     );
   }
 );
-kt.displayName = "Badge";
-const ft = D(
+yt.displayName = "Badge";
+const Nt = C(
   // Base styles
   [
     "inline-block",
@@ -3109,7 +3121,7 @@ const ft = D(
       size: "m"
     }
   }
-), jt = D(
+), Vt = C(
   // Base wrapper styles
   [
     "relative",
@@ -3127,7 +3139,7 @@ const ft = D(
       size: "m"
     }
   }
-), vt = D(
+), zt = C(
   // Base text styles
   [
     "block",
@@ -3148,7 +3160,7 @@ const ft = D(
       size: "m"
     }
   }
-), wt = D(
+), It = C(
   // Base status styles
   [
     "w-2",
@@ -3165,7 +3177,7 @@ const ft = D(
       }
     }
   }
-), xt = () => /* @__PURE__ */ l(
+), Ct = () => /* @__PURE__ */ l(
   "svg",
   {
     className: "absolute left-0 top-0 w-full h-full fill-[var(--sinch-comp-avatar-container-color-default-foreground)]",
@@ -3173,39 +3185,39 @@ const ft = D(
     fill: "none",
     children: /* @__PURE__ */ l("path", { d: "M29.451 15.785a9.451 9.451 0 1 1-18.902 0 9.452 9.452 0 0 1 18.902 0ZM4.734 40.5c.119-7.085 5.899-12.792 13.012-12.792h4.508c7.113 0 12.893 5.707 13.012 12.792H4.734Z" })
   }
-), yt = P(
+), Mt = R(
   ({
     className: o,
     src: e,
     alt: n = "",
     color: t,
-    size: i = "m",
-    status: a,
-    onImageError: r,
-    style: s,
+    size: a = "m",
+    status: i,
+    onImageError: s,
+    style: r,
     ...m
-  }, d) => {
-    const [c, u] = F(!1), b = k(
-      (x) => {
-        u(!0), r == null || r(x);
+  }, c) => {
+    const [b, h] = U(!1), d = f(
+      (N) => {
+        h(!0), s == null || s(N);
       },
-      [r]
-    ), p = e !== void 0 && e !== "" && !c, f = n !== void 0 && n !== "", g = J(() => t === void 0 ? {} : {
+      [s]
+    ), u = e !== void 0 && e !== "" && !b, g = n !== void 0 && n !== "", v = J(() => t === void 0 ? {} : {
       backgroundColor: `var(--sinch-comp-avatar-container-color-${t}-background)`,
       color: `var(--sinch-comp-avatar-container-color-${t}-foreground)`
     }, [t]);
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: d,
-        className: h(ft({ size: i }), o),
-        style: s,
+        ref: c,
+        className: p(Nt({ size: a }), o),
+        style: r,
         ...m,
-        children: /* @__PURE__ */ A("div", { className: h(jt({ size: i })), children: [
-          /* @__PURE__ */ A(
+        children: /* @__PURE__ */ L("div", { className: p(Vt({ size: a })), children: [
+          /* @__PURE__ */ L(
             "div",
             {
-              className: h(
+              className: p(
                 "relative",
                 "w-[calc(100%-2px)]",
                 "h-[calc(100%-2px)]",
@@ -3217,26 +3229,26 @@ const ft = D(
                 // Mask for smooth edges
                 "[mask:linear-gradient(#fff,#000)]"
               ),
-              style: g,
+              style: v,
               children: [
-                !p && f && /* @__PURE__ */ l("span", { className: h(vt({ size: i })), children: n }),
-                p && /* @__PURE__ */ l(
+                !u && g && /* @__PURE__ */ l("span", { className: p(zt({ size: a })), children: n }),
+                u && /* @__PURE__ */ l(
                   "img",
                   {
                     src: e,
                     alt: n,
-                    onError: b,
+                    onError: d,
                     className: "absolute left-0 top-0 w-full h-full object-contain"
                   }
                 ),
-                !p && !f && /* @__PURE__ */ l(xt, {})
+                !u && !g && /* @__PURE__ */ l(Ct, {})
               ]
             }
           ),
-          a !== void 0 && /* @__PURE__ */ l(
+          i !== void 0 && /* @__PURE__ */ l(
             "div",
             {
-              className: h(
+              className: p(
                 "absolute",
                 "left-[calc(85%-5px)]",
                 "top-[calc(85%-5px)]",
@@ -3248,7 +3260,7 @@ const ft = D(
                 "bg-[var(--sinch-comp-avatar-status-color-border)]",
                 "pointer-events-none"
               ),
-              children: /* @__PURE__ */ l("div", { className: h(wt({ status: a })) })
+              children: /* @__PURE__ */ l("div", { className: p(It({ status: i })) })
             }
           )
         ] })
@@ -3256,8 +3268,8 @@ const ft = D(
     );
   }
 );
-yt.displayName = "Avatar";
-const Nt = D(
+Mt.displayName = "Avatar";
+const Do = C(
   // Base styles for the anchor element
   [
     "font-[var(--sinch-comp-link-default-font-initial)]",
@@ -3312,79 +3324,95 @@ const Nt = D(
       disabled: !1
     }
   }
-), Ct = P(
+), Dt = R(
   ({
     className: o,
     text: e,
     href: n,
     useHistory: t = !1,
-    disabled: i = !1,
-    external: a = !1,
-    standalone: r = !1,
-    preventDefault: s,
+    disabled: a = !1,
+    external: i = !1,
+    standalone: s = !1,
+    preventDefault: r,
     onClick: m,
-    children: d,
-    ...c
-  }, u) => {
-    const b = s ?? t, p = (g) => {
-      if (i) {
-        g.preventDefault();
-        return;
-      }
-      b && (g.preventDefault(), t && history.pushState({}, "", n)), m == null || m(g);
-    }, f = i ? "[--sinch-global-color-icon:var(--sinch-comp-link-color-disabled-icon-initial)]" : "[--sinch-global-color-icon:var(--sinch-comp-link-color-default-icon-initial)] hover:[--sinch-global-color-icon:var(--sinch-comp-link-color-default-icon-hover)]";
-    return /* @__PURE__ */ A(
+    children: c,
+    ...b
+  }, h) => {
+    const d = r ?? t, u = (N) => {
+      d && (N.preventDefault(), t && history.pushState({}, "", n)), m == null || m(N);
+    }, g = a ? "[--sinch-global-color-icon:var(--sinch-comp-link-color-disabled-icon-initial)]" : "[--sinch-global-color-icon:var(--sinch-comp-link-color-default-icon-initial)] hover:[--sinch-global-color-icon:var(--sinch-comp-link-color-default-icon-hover)]", v = /* @__PURE__ */ L(Ne, { children: [
+      /* @__PURE__ */ l("span", { className: "whitespace-[var(--sinch-global-text-white-space,normal)]", children: e ?? c }),
+      s && i && /* @__PURE__ */ L(Ne, { children: [
+        /* @__PURE__ */ l("span", { children: " " }),
+        /* @__PURE__ */ l(
+          oe,
+          {
+            name: "fa-arrow-up-right",
+            iconsVersion: "2",
+            className: "inline-block align-[-0.4em] [--sinch-global-size-icon:1.5em]"
+          }
+        )
+      ] }),
+      s && !i && /* @__PURE__ */ L(Ne, { children: [
+        /* @__PURE__ */ l("span", { children: " " }),
+        /* @__PURE__ */ l(
+          oe,
+          {
+            name: "fa-arrow-right",
+            iconsVersion: "2",
+            className: "inline-block align-[-0.4em] [--sinch-global-size-icon:1.5em]"
+          }
+        )
+      ] }),
+      !s && i && /* @__PURE__ */ l(
+        oe,
+        {
+          name: "fa-arrow-up-right",
+          iconsVersion: "2",
+          className: "inline-block ml-1 align-[-0.2em] h-[1em] [--sinch-global-size-icon:1em]"
+        }
+      )
+    ] });
+    if (a) {
+      const { href: N, target: I, rel: V, onClick: z, ...y } = b;
+      return /* @__PURE__ */ l(
+        "span",
+        {
+          ref: h,
+          role: "link",
+          "aria-disabled": "true",
+          className: p(
+            Do({ standalone: s, disabled: a }),
+            g,
+            o
+          ),
+          ...y,
+          children: v
+        }
+      );
+    }
+    return /* @__PURE__ */ l(
       "a",
       {
-        ref: u,
-        href: i ? void 0 : n,
-        target: a ? "_blank" : void 0,
-        rel: a ? "noopener noreferrer" : void 0,
+        ref: h,
+        href: n,
+        target: i ? "_blank" : void 0,
+        rel: i ? "noopener noreferrer" : void 0,
         referrerPolicy: "no-referrer",
-        "aria-disabled": i || void 0,
-        onClick: p,
-        className: h(
-          Nt({ standalone: r, disabled: i }),
-          f,
+        onClick: u,
+        className: p(
+          Do({ standalone: s, disabled: a }),
+          g,
           o
         ),
-        ...c,
-        children: [
-          /* @__PURE__ */ l("span", { className: "whitespace-[var(--sinch-global-text-white-space,normal)]", children: e ?? d }),
-          r && a && /* @__PURE__ */ A(Ne, { children: [
-            /* @__PURE__ */ l("span", { children: " " }),
-            /* @__PURE__ */ l(
-              ne,
-              {
-                name: "fa-arrow-up-right",
-                className: "inline-block align-[-0.4em] [--sinch-global-size-icon:1.5em]"
-              }
-            )
-          ] }),
-          r && !a && /* @__PURE__ */ A(Ne, { children: [
-            /* @__PURE__ */ l("span", { children: " " }),
-            /* @__PURE__ */ l(
-              ne,
-              {
-                name: "fa-arrow-right",
-                className: "inline-block align-[-0.4em] [--sinch-global-size-icon:1.5em]"
-              }
-            )
-          ] }),
-          !r && a && /* @__PURE__ */ l(
-            ne,
-            {
-              name: "fa-arrow-up-right",
-              className: "inline-block ml-1 align-[-0.2em] h-[1em] [--sinch-global-size-icon:1em]"
-            }
-          )
-        ]
+        ...b,
+        children: v
       }
     );
   }
 );
-Ct.displayName = "Link";
-const Vt = D(
+Dt.displayName = "Link";
+const Tt = C(
   // Base styles
   [
     "inline-flex items-center",
@@ -3419,42 +3447,42 @@ const Vt = D(
       ellipsis: !1
     }
   }
-), It = P(
+), St = R(
   ({
     className: o,
     text: e,
     color: n,
     small: t = !1,
-    size: i,
-    ellipsis: a = !1,
-    icon: r,
-    children: s,
+    size: a,
+    ellipsis: i = !1,
+    icon: s,
+    children: r,
     style: m,
-    ...d
-  }, c) => {
-    const u = t ? "s" : i ?? "m", b = {};
-    n !== void 0 && n !== "default" && (b.backgroundColor = `var(--sinch-comp-tag-color-${n}-background)`, b.color = `var(--sinch-comp-tag-color-${n}-foreground)`, b["--sinch-global-color-icon"] = `var(--sinch-comp-tag-color-${n}-foreground)`);
-    const p = u === "s" ? "var(--sinch-comp-tag-size-icon-s)" : "var(--sinch-comp-tag-size-icon-m)";
-    return b["--sinch-global-size-icon"] = p, /* @__PURE__ */ A(
+    ...c
+  }, b) => {
+    const h = t ? "s" : a ?? "m", d = {};
+    n !== void 0 && n !== "default" && (d.backgroundColor = `var(--sinch-comp-tag-color-${n}-background)`, d.color = `var(--sinch-comp-tag-color-${n}-foreground)`, d["--sinch-global-color-icon"] = `var(--sinch-comp-tag-color-${n}-foreground)`);
+    const u = h === "s" ? "var(--sinch-comp-tag-size-icon-s)" : "var(--sinch-comp-tag-size-icon-m)";
+    return d["--sinch-global-size-icon"] = u, /* @__PURE__ */ L(
       "div",
       {
-        ref: c,
-        className: h(
-          Vt({ size: u, ellipsis: a }),
+        ref: b,
+        className: p(
+          Tt({ size: h, ellipsis: i }),
           o
         ),
-        style: { ...b, ...m },
-        ...d,
+        style: { ...d, ...m },
+        ...c,
         children: [
-          r && /* @__PURE__ */ l("span", { className: "-ml-1", children: r }),
+          s && /* @__PURE__ */ l("span", { className: "-ml-1", children: s }),
           /* @__PURE__ */ l(
             "span",
             {
-              className: h(
+              className: p(
                 "flex-1",
-                a && "overflow-hidden text-ellipsis whitespace-nowrap"
+                i && "overflow-hidden text-ellipsis whitespace-nowrap"
               ),
-              children: e ?? s
+              children: e ?? r
             }
           )
         ]
@@ -3462,8 +3490,8 @@ const Vt = D(
     );
   }
 );
-It.displayName = "Tag";
-const zt = D(
+St.displayName = "Tag";
+const Et = C(
   // Base styles
   [
     "flex",
@@ -3488,55 +3516,55 @@ const zt = D(
       type: "info"
     }
   }
-), Dt = {
+), At = {
   info: "var(--sinch-comp-alert-color-info-default-icon)",
   warn: "var(--sinch-comp-alert-color-warning-default-icon)",
   error: "var(--sinch-comp-alert-color-error-default-icon)"
-}, Tt = {
+}, Ot = {
   info: "var(--sinch-comp-alert-color-info-default-text)",
   warn: "var(--sinch-comp-alert-color-warning-default-text)",
   error: "var(--sinch-comp-alert-color-error-default-text)"
-}, Mt = {
+}, Lt = {
   info: "circle-info",
   warn: "triangle-exclamation",
   error: "octagon-exclamation"
-}, St = P(
-  ({ className: o, type: e = "info", text: n, action: t, close: i, children: a, ...r }, s) => {
-    const m = Mt[e], d = Dt[e], c = Tt[e];
-    return /* @__PURE__ */ A(
+}, Pt = R(
+  ({ className: o, type: e = "info", text: n, action: t, close: a, children: i, ...s }, r) => {
+    const m = Lt[e], c = At[e], b = Ot[e];
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: s,
+        ref: r,
         role: "alert",
-        className: h(zt({ type: e }), o),
-        ...r,
+        className: p(Et({ type: e }), o),
+        ...s,
         children: [
           /* @__PURE__ */ l(
-            ne,
+            oe,
             {
               name: m,
               iconsVersion: "2",
               size: "md",
-              style: { color: d }
+              style: { color: c }
             }
           ),
           /* @__PURE__ */ l(
             "div",
             {
               className: "flex flex-col gap-2 flex-1 min-w-0 font-[var(--sinch-comp-alert-font-body)]",
-              style: { color: c },
-              children: n ?? a
+              style: { color: b },
+              children: n ?? i
             }
           ),
           t,
-          i
+          a
         ]
       }
     );
   }
 );
-St.displayName = "Alert";
-const Ot = D(
+Pt.displayName = "Alert";
+const Rt = C(
   // Base styles for the toggle wrapper
   [
     "inline-flex items-center gap-2 outline-none",
@@ -3545,8 +3573,8 @@ const Ot = D(
   {
     variants: {
       small: {
-        true: "[--sinch-local-size:16px] [--sinch-local-width:32px] [--sinch-local-knob-size:12px] [--sinch-local-translate:16px]",
-        false: "[--sinch-local-size:20px] [--sinch-local-width:40px] [--sinch-local-knob-size:16px] [--sinch-local-translate:20px]"
+        true: "[--sinch-local-size:var(--sinch-comp-toggle-size-container-s,16px)] [--sinch-local-width:var(--sinch-comp-toggle-size-track-s,32px)] [--sinch-local-knob-size:var(--sinch-comp-toggle-size-knob-s,12px)] [--sinch-local-translate:var(--sinch-comp-toggle-size-translate-s,16px)]",
+        false: "[--sinch-local-size:var(--sinch-comp-toggle-size-container-m,20px)] [--sinch-local-width:var(--sinch-comp-toggle-size-track-m,40px)] [--sinch-local-knob-size:var(--sinch-comp-toggle-size-knob-m,16px)] [--sinch-local-translate:var(--sinch-comp-toggle-size-translate-m,20px)]"
       },
       disabled: {
         true: "cursor-default",
@@ -3558,7 +3586,7 @@ const Ot = D(
       disabled: !1
     }
   }
-), Et = D(
+), Ft = C(
   // Base styles for the knob container (the track)
   [
     "relative",
@@ -3595,7 +3623,7 @@ const Ot = D(
       disabled: !1
     }
   }
-), At = D(
+), $t = C(
   // Base styles for the knob (the circle)
   [
     "relative",
@@ -3622,7 +3650,7 @@ const Ot = D(
       disabled: !1
     }
   }
-), Lt = D(
+), _t = C(
   // Base styles for the label
   [
     "flex-1 min-w-0",
@@ -3645,90 +3673,92 @@ const Ot = D(
       disabled: !1
     }
   }
-), Pt = P(
+), Ut = R(
   ({
     className: o,
     checked: e,
     defaultChecked: n = !1,
     small: t = !1,
-    labeled: i = !1,
-    disabled: a = !1,
-    text: r,
-    "aria-label": s,
+    labeled: a = !1,
+    disabled: i = !1,
+    text: s,
+    "aria-label": r,
     onChange: m,
-    onFocus: d,
-    onBlur: c,
-    onKeyDown: u,
-    onClick: b,
-    ...p
-  }, f) => {
-    const [g, x] = F(n), [V, I] = F(!1), N = e !== void 0, j = N ? e : g, v = k(
-      (z) => {
-        if (a)
+    onFocus: c,
+    onBlur: b,
+    onKeyDown: h,
+    onClick: d,
+    ...u
+  }, g) => {
+    const [v, N] = U(n), [I, V] = U(!1), z = e !== void 0, y = z ? e : v, w = f(
+      (T) => {
+        if (i)
           return;
-        const O = !j;
-        N || x(O), m == null || m(O), b == null || b(z);
+        const P = !y;
+        z || N(P), m == null || m(P), d == null || d(T);
       },
-      [a, j, N, m, b]
-    ), y = k(
-      (z) => {
-        if ((z.code === "Space" || z.code === "Enter") && (z.preventDefault(), !a)) {
-          const O = !j;
-          N || x(O), m == null || m(O);
+      [i, y, z, m, d]
+    ), j = f(
+      (T) => {
+        if ((T.code === "Space" || T.code === "Enter") && (T.preventDefault(), !i)) {
+          const P = !y;
+          z || N(P), m == null || m(P);
         }
-        u == null || u(z);
+        h == null || h(T);
       },
-      [a, j, N, m, u]
-    ), w = k(
-      (z) => {
-        I(!0), d == null || d(z);
-      },
-      [d]
-    ), T = k(
-      (z) => {
-        I(!1), c == null || c(z);
+      [i, y, z, m, h]
+    ), k = f(
+      (T) => {
+        V(!0), c == null || c(T);
       },
       [c]
+    ), M = f(
+      (T) => {
+        V(!1), b == null || b(T);
+      },
+      [b]
     );
-    return /* @__PURE__ */ A(
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: f,
+        ref: g,
         role: "checkbox",
-        "aria-checked": j,
-        "aria-disabled": a,
-        "aria-label": s,
-        tabIndex: a ? -1 : 0,
-        className: h(Ot({ small: t, disabled: a }), o),
-        onClick: v,
-        onKeyDown: y,
-        onFocus: w,
-        onBlur: T,
-        ...p,
+        "aria-checked": y,
+        "aria-disabled": i,
+        "aria-label": r,
+        "data-value": String(y),
+        tabIndex: i ? -1 : 0,
+        className: p(Rt({ small: t, disabled: i }), o),
+        onClick: w,
+        onKeyDown: j,
+        onFocus: k,
+        onBlur: M,
+        ...u,
         children: [
-          /* @__PURE__ */ A("div", { className: h(Et({ checked: j, disabled: a })), children: [
+          /* @__PURE__ */ L("div", { className: p(Ft({ checked: y, disabled: i })), children: [
             /* @__PURE__ */ l(
               "div",
               {
-                className: h(
+                className: p(
                   "absolute -inset-[3px] pointer-events-none",
                   "border-2 border-[var(--sinch-comp-toggle-color-default-outline-focus)]",
-                  "rounded-[17px]",
-                  V ? "block" : "hidden"
+                  "rounded-full",
+                  "transition-opacity duration-100",
+                  I ? "opacity-100" : "opacity-0"
                 )
               }
             ),
-            /* @__PURE__ */ l("div", { className: h(At({ checked: j, disabled: a })), children: i && !t && /* @__PURE__ */ A(Ne, { children: [
+            /* @__PURE__ */ l("div", { className: p($t({ checked: y, disabled: i })), children: a && !t && /* @__PURE__ */ L(Ne, { children: [
               /* @__PURE__ */ l(
                 "span",
                 {
-                  className: h(
+                  className: p(
                     "absolute top-0 right-full px-[1px]",
                     "font-[var(--sinch-comp-toggle-font-size-m-inside-text)]",
                     "text-[var(--sinch-comp-toggle-color-default-text-inside-initial)]",
                     "uppercase select-none",
                     "transition-opacity duration-150 ease-in-out",
-                    j ? "opacity-100" : "opacity-0"
+                    y ? "opacity-100" : "opacity-0"
                   ),
                   children: "on"
                 }
@@ -3736,27 +3766,27 @@ const Ot = D(
               /* @__PURE__ */ l(
                 "span",
                 {
-                  className: h(
+                  className: p(
                     "absolute top-0 left-full px-[1px]",
                     "font-[var(--sinch-comp-toggle-font-size-m-inside-text)]",
                     "text-[var(--sinch-comp-toggle-color-default-text-inside-initial)]",
                     "uppercase select-none",
                     "transition-opacity duration-150 ease-in-out",
-                    j ? "opacity-0" : "opacity-100"
+                    y ? "opacity-0" : "opacity-100"
                   ),
                   children: "off"
                 }
               )
             ] }) })
           ] }),
-          r && /* @__PURE__ */ l("span", { className: h(Lt({ small: t, disabled: a })), children: r })
+          s && /* @__PURE__ */ l("span", { className: p(_t({ small: t, disabled: i })), children: s })
         ]
       }
     );
   }
 );
-Pt.displayName = "Toggle";
-const Rt = D(
+Ut.displayName = "Toggle";
+const Ht = C(
   // Base styles
   [
     "inline-flex items-center",
@@ -3792,7 +3822,7 @@ const Rt = D(
       size: "m"
     }
   }
-), $t = ({ size: o }) => /* @__PURE__ */ l(
+), Bt = ({ size: o }) => /* @__PURE__ */ l(
   "svg",
   {
     width: o === "s" ? 12 : 16,
@@ -3809,48 +3839,48 @@ const Rt = D(
       }
     )
   }
-), Ft = P(
+), Gt = R(
   ({
     className: o,
     text: e,
     color: n,
     small: t = !1,
-    size: i,
-    icon: a,
-    rightIcon: r,
-    onClick: s,
+    size: a,
+    icon: i,
+    rightIcon: s,
+    onClick: r,
     onFocus: m,
-    onBlur: d,
-    onKeyDown: c,
-    style: u,
-    ...b
-  }, p) => {
-    const f = t ? "s" : i ?? "m", g = {};
-    n !== void 0 && n !== "neutral" && (g.backgroundColor = `var(--sinch-comp-chip-color-${n}-default-background-initial)`, g.color = `var(--sinch-comp-chip-color-${n}-default-foreground-initial)`, g["--sinch-global-color-icon"] = `var(--sinch-comp-chip-color-${n}-default-foreground-initial)`);
-    const x = f === "s" ? "var(--sinch-comp-chip-size-icon-s)" : "var(--sinch-comp-chip-size-icon-m)";
-    g["--sinch-global-size-icon"] = x;
-    const V = k((I) => {
-      I.code === "Space" && (I.preventDefault(), I.currentTarget.click()), c == null || c(I);
-    }, [c]);
-    return /* @__PURE__ */ A(
+    onBlur: c,
+    onKeyDown: b,
+    style: h,
+    ...d
+  }, u) => {
+    const g = t ? "s" : a ?? "m", v = {};
+    n !== void 0 && n !== "neutral" && (v.backgroundColor = `var(--sinch-comp-chip-color-${n}-default-background-initial)`, v.color = `var(--sinch-comp-chip-color-${n}-default-foreground-initial)`, v["--sinch-global-color-icon"] = `var(--sinch-comp-chip-color-${n}-default-foreground-initial)`);
+    const N = g === "s" ? "var(--sinch-comp-chip-size-icon-s)" : "var(--sinch-comp-chip-size-icon-m)";
+    v["--sinch-global-size-icon"] = N;
+    const I = f((V) => {
+      V.code === "Space" && (V.preventDefault(), V.currentTarget.click()), b == null || b(V);
+    }, [b]);
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: p,
+        ref: u,
         role: "button",
         tabIndex: 0,
         "aria-label": e,
-        className: h(
-          Rt({ size: f }),
+        className: p(
+          Ht({ size: g }),
           o
         ),
-        style: { ...g, ...u },
-        onClick: s,
+        style: { ...v, ...h },
+        onClick: r,
         onFocus: m,
-        onBlur: d,
-        onKeyDown: V,
-        ...b,
+        onBlur: c,
+        onKeyDown: I,
+        ...d,
         children: [
-          a && /* @__PURE__ */ l("span", { className: "-ml-1", children: a }),
+          i && /* @__PURE__ */ l("span", { className: "-ml-1", children: i }),
           /* @__PURE__ */ l(
             "span",
             {
@@ -3858,14 +3888,14 @@ const Rt = D(
               children: e
             }
           ),
-          /* @__PURE__ */ l("span", { "aria-label": `Delete ${e}`, children: r ?? /* @__PURE__ */ l($t, { size: f }) })
+          /* @__PURE__ */ l("span", { "aria-label": `Delete ${e}`, children: s ?? /* @__PURE__ */ l(Bt, { size: g }) })
         ]
       }
     );
   }
 );
-Ft.displayName = "Chip";
-const _t = D(
+Gt.displayName = "Chip";
+const Wt = C(
   // Base styles
   [
     "inline-flex flex-row items-start box-border w-auto min-h-[24px]",
@@ -3882,7 +3912,7 @@ const _t = D(
       isDisabled: !1
     }
   }
-), Ut = D(
+), Zt = C(
   // Base styles for the checkbox box
   [
     "relative w-[18px] h-[18px] mt-[3px] flex-shrink-0",
@@ -3934,12 +3964,12 @@ const _t = D(
       isDisabled: !1
     }
   }
-), Ht = D(
+), qt = C(
   // Focus ring styles
   [
-    "absolute inset-[-3px] pointer-events-none",
+    "absolute inset-[-2px] pointer-events-none",
     "border-2 border-[var(--sinch-comp-checkbox-color-default-outline-focus)]",
-    "rounded-[calc(var(--sinch-comp-checkbox-shape-radius)+3px)]",
+    "rounded-[calc(var(--sinch-comp-checkbox-shape-radius)+2px)]",
     "transition-opacity duration-100 opacity-0"
   ],
   {
@@ -3953,7 +3983,7 @@ const _t = D(
       isFocused: !1
     }
   }
-), Bt = () => /* @__PURE__ */ l(
+), Yt = () => /* @__PURE__ */ l(
   "svg",
   {
     className: "absolute left-[1px] top-[1px] w-4 h-4 pointer-events-none fill-[var(--sinch-sys-color-surface-primary-default)]",
@@ -3961,7 +3991,7 @@ const _t = D(
     "aria-hidden": "true",
     children: /* @__PURE__ */ l("path", { d: "M9 16.17 5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17Z" })
   }
-), Gt = () => /* @__PURE__ */ l(
+), Kt = () => /* @__PURE__ */ l(
   "svg",
   {
     className: "absolute left-[1px] top-[1px] w-4 h-4 pointer-events-none fill-[var(--sinch-sys-color-surface-primary-default)]",
@@ -3969,54 +3999,54 @@ const _t = D(
     "aria-hidden": "true",
     children: /* @__PURE__ */ l("path", { d: "M18 13H6c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1Z" })
   }
-), Wt = P(
+), Jt = R(
   ({
     className: o,
     name: e,
     value: n = "",
     checked: t,
-    defaultChecked: i = !1,
-    indeterminate: a = !1,
-    disabled: r = !1,
-    invalid: s = !1,
+    defaultChecked: a = !1,
+    indeterminate: i = !1,
+    disabled: s = !1,
+    invalid: r = !1,
     text: m,
-    "aria-label": d,
-    onChange: c,
-    onFocus: u,
-    onBlur: b,
-    onKeyDown: p,
-    ...f
-  }, g) => {
-    const [x, V] = F(i), [I, N] = F(!1), j = Z(null), v = t !== void 0, y = v ? t : x;
+    "aria-label": c,
+    onChange: b,
+    onFocus: h,
+    onBlur: d,
+    onKeyDown: u,
+    ...g
+  }, v) => {
+    const [N, I] = U(a), [V, z] = U(!1), y = Y(null), w = t !== void 0, j = w ? t : N;
     X(() => {
-      g != null && (typeof g == "function" ? g(j.current) : g.current = j.current);
-    }, [g]);
-    const w = k(() => {
-      if (r)
+      v != null && (typeof v == "function" ? v(y.current) : v.current = y.current);
+    }, [v]);
+    const k = f(() => {
+      if (s)
         return;
-      const E = !y;
-      v || V(E), c == null || c(E);
-    }, [r, y, v, c]), T = k(
-      (E) => {
-        E.code === "Space" && (E.preventDefault(), w()), p == null || p(E);
+      const x = !j;
+      w || I(x), b == null || b(x);
+    }, [s, j, w, b]), M = f(
+      (x) => {
+        x.code === "Space" && (x.preventDefault(), k()), u == null || u(x);
       },
-      [w, p]
-    ), z = k(
-      (E) => {
-        N(!0), u == null || u(E);
+      [k, u]
+    ), T = f(
+      (x) => {
+        z(!0), h == null || h(x);
       },
-      [u]
-    ), O = k(
-      (E) => {
-        N(!1), b == null || b(E);
+      [h]
+    ), P = f(
+      (x) => {
+        z(!1), d == null || d(x);
       },
-      [b]
-    ), $ = () => r ? "" : y && !s ? [
+      [d]
+    ), B = () => s ? "" : j && !r ? [
       "hover:bg-[var(--sinch-comp-checkbox-color-checked-background-hover)]",
       "hover:border-[var(--sinch-comp-checkbox-color-checked-border-hover)]",
       "active:bg-[var(--sinch-comp-checkbox-color-checked-background-active)]",
       "active:border-[var(--sinch-comp-checkbox-color-checked-border-active)]"
-    ].join(" ") : s ? [
+    ].join(" ") : r ? [
       "hover:bg-[var(--sinch-comp-checkbox-color-invalid-background-hover)]",
       "hover:border-[var(--sinch-comp-checkbox-color-invalid-border-hover)]",
       "active:bg-[var(--sinch-comp-checkbox-color-invalid-background-active)]",
@@ -4026,73 +4056,73 @@ const _t = D(
       "hover:border-[var(--sinch-comp-checkbox-color-default-border-hover)]",
       "active:bg-[var(--sinch-comp-checkbox-color-default-background-active)]",
       "active:border-[var(--sinch-comp-checkbox-color-default-border-active)]"
-    ].join(" "), C = () => r ? "text-[var(--sinch-comp-checkbox-color-disabled-text-initial)]" : s ? "text-[var(--sinch-comp-checkbox-color-invalid-text-initial)]" : "text-[var(--sinch-comp-checkbox-color-default-text-initial)]";
-    return /* @__PURE__ */ A(
+    ].join(" "), D = () => s ? "text-[var(--sinch-comp-checkbox-color-disabled-text-initial)]" : r ? "text-[var(--sinch-comp-checkbox-color-invalid-text-initial)]" : "text-[var(--sinch-comp-checkbox-color-default-text-initial)]";
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: j,
+        ref: y,
         role: "checkbox",
-        "aria-checked": y && a ? "mixed" : y,
-        "aria-disabled": r,
-        "aria-invalid": s,
-        "aria-label": d ?? m,
-        tabIndex: r ? -1 : 0,
+        "aria-checked": j && i ? "mixed" : j,
+        "aria-disabled": s,
+        "aria-invalid": r,
+        "aria-label": c ?? m,
+        tabIndex: s ? -1 : 0,
         "data-name": e,
-        "data-value": y ? n.length > 0 ? n : "on" : "",
-        className: h(
-          _t({ isDisabled: r }),
+        "data-value": j ? n.length > 0 ? n : "on" : "",
+        className: p(
+          Wt({ isDisabled: s }),
           o
         ),
-        onClick: w,
-        onKeyDown: T,
-        onFocus: z,
-        onBlur: O,
-        ...f,
+        onClick: k,
+        onKeyDown: M,
+        onFocus: T,
+        onBlur: P,
+        ...g,
         children: [
-          /* @__PURE__ */ A("div", { className: "relative w-[18px] h-[18px] mt-[3px] flex-shrink-0", children: [
-            /* @__PURE__ */ l("div", { className: h(Ht({ isFocused: I })) }),
+          /* @__PURE__ */ L("div", { className: "relative w-[18px] h-[18px] mt-[3px] flex-shrink-0", children: [
+            /* @__PURE__ */ l("div", { className: p(qt({ isFocused: V })) }),
             /* @__PURE__ */ l(
               "div",
               {
-                className: h(
-                  Ut({
-                    isChecked: y,
-                    isInvalid: s && !y,
-                    isDisabled: r
+                className: p(
+                  Zt({
+                    isChecked: j,
+                    isInvalid: r && !j,
+                    isDisabled: s
                   }),
-                  $()
+                  B()
                 )
               }
             ),
             /* @__PURE__ */ l(
               "div",
               {
-                className: h(
+                className: p(
                   "transition-opacity duration-100",
-                  y && !a ? "opacity-100" : "opacity-0"
+                  j && !i ? "opacity-100" : "opacity-0"
                 ),
-                children: /* @__PURE__ */ l(Bt, {})
+                children: /* @__PURE__ */ l(Yt, {})
               }
             ),
             /* @__PURE__ */ l(
               "div",
               {
-                className: h(
+                className: p(
                   "transition-opacity duration-100",
-                  y && a ? "opacity-100" : "opacity-0"
+                  j && i ? "opacity-100" : "opacity-0"
                 ),
-                children: /* @__PURE__ */ l(Gt, {})
+                children: /* @__PURE__ */ l(Kt, {})
               }
             )
           ] }),
           m && /* @__PURE__ */ l(
             "span",
             {
-              className: h(
+              className: p(
                 "flex-1 self-center pl-2",
                 "font-[var(--sinch-comp-checkbox-font-label)]",
-                C(),
-                r ? "cursor-default" : "cursor-pointer"
+                D(),
+                s ? "cursor-default" : "cursor-pointer"
               ),
               children: m
             }
@@ -4102,33 +4132,33 @@ const _t = D(
     );
   }
 );
-Wt.displayName = "Checkbox";
-const Zt = D(
+Jt.displayName = "Checkbox";
+const Xt = C(
   // Base styles
   "block",
   {
     variants: {},
     defaultVariants: {}
   }
-), qt = D(
+), Qt = C(
   "flex items-center h-6",
   {
     variants: {},
     defaultVariants: {}
   }
-), Yt = D(
+), ei = C(
   "h-2 rounded-full flex-1 min-w-0 bg-[var(--sinch-comp-progress-color-default-background-initial)]",
   {
     variants: {},
     defaultVariants: {}
   }
-), Kt = D(
+), oi = C(
   "h-2 rounded-full bg-[var(--sinch-comp-progress-color-default-bar-initial)] transition-[width] duration-200",
   {
     variants: {},
     defaultVariants: {}
   }
-), Jt = D(
+), ni = C(
   "w-[46px] text-sm text-[var(--sinch-comp-progress-color-default-text-initial)]",
   {
     variants: {
@@ -4141,29 +4171,29 @@ const Zt = D(
       visible: !1
     }
   }
-), Xt = P(
-  ({ className: o, value: e = 0, detailed: n = !1, ...t }, i) => {
-    const a = Math.min(100, Math.max(0, e)), r = J(() => Intl.NumberFormat(
+), ti = R(
+  ({ className: o, value: e = 0, detailed: n = !1, ...t }, a) => {
+    const i = Math.min(100, Math.max(0, e)), s = J(() => Intl.NumberFormat(
       typeof navigator < "u" ? navigator.language : "en-US",
       { style: "percent" }
-    ).format(a / 100), [a]);
+    ).format(i / 100), [i]);
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: i,
+        ref: a,
         role: "progressbar",
-        "aria-valuenow": a,
+        "aria-valuenow": i,
         "aria-valuemin": 0,
         "aria-valuemax": 100,
-        className: h(Zt(), o),
+        className: p(Xt(), o),
         ...t,
-        children: /* @__PURE__ */ A("div", { className: qt(), children: [
-          /* @__PURE__ */ l("span", { className: Jt({ visible: n }), children: r }),
-          /* @__PURE__ */ l("div", { className: Yt(), children: /* @__PURE__ */ l(
+        children: /* @__PURE__ */ L("div", { className: Qt(), children: [
+          /* @__PURE__ */ l("span", { className: ni({ visible: n }), children: s }),
+          /* @__PURE__ */ l("div", { className: ei(), children: /* @__PURE__ */ l(
             "div",
             {
-              className: Kt(),
-              style: { width: `${a}%` }
+              className: oi(),
+              style: { width: `${i}%` }
             }
           ) })
         ] })
@@ -4171,8 +4201,8 @@ const Zt = D(
     );
   }
 );
-Xt.displayName = "Progress";
-const Qt = D(
+ti.displayName = "Progress";
+const ii = C(
   // Base styles - uses design system font and color tokens
   [
     "block",
@@ -4205,45 +4235,45 @@ const Qt = D(
       ellipsis: !1
     }
   }
-), ei = {
+), ai = {
   xl: "1",
   l: "2",
   m: "3",
   s: "4",
   xs: "5"
-}, oi = {
+}, li = {
   1: "h1",
   2: "h2",
   3: "h3",
   4: "h4",
   5: "h5",
   6: "h6"
-}, ho = P(
+}, fo = R(
   ({
     className: o,
     children: e,
     type: n = "m",
     level: t,
-    ellipsis: i = !1,
-    as: a,
-    ...r
-  }, s) => {
-    const m = t ?? ei[n], d = a ?? oi[m];
+    ellipsis: a = !1,
+    as: i,
+    ...s
+  }, r) => {
+    const m = t ?? ai[n], c = i ?? li[m];
     return /* @__PURE__ */ l(
-      d,
+      c,
       {
-        ref: s,
+        ref: r,
         role: "heading",
         "aria-level": parseInt(m, 10),
-        className: h(Qt({ type: n, ellipsis: i }), o),
-        ...r,
+        className: p(ii({ type: n, ellipsis: a }), o),
+        ...s,
         children: e
       }
     );
   }
 );
-ho.displayName = "Title";
-const ni = 1e3, ti = 250, ii = 100, ai = D(
+fo.displayName = "Title";
+const si = 1e3, ri = 250, mi = 100, ci = C(
   // Base styles for the tooltip content
   [
     "absolute",
@@ -4290,7 +4320,7 @@ const ni = 1e3, ti = 250, ii = 100, ai = D(
       visible: !1
     }
   }
-), li = D(
+), di = C(
   // Base styles for the arrow tip
   [
     "absolute",
@@ -4316,75 +4346,99 @@ const ni = 1e3, ti = 250, ii = 100, ai = D(
       orientation: "top"
     }
   }
-), Xe = P(
+), to = R(
   ({
     className: o,
     children: e,
     text: n,
     orientation: t = "top",
-    textAlign: i = "left",
-    type: a = "slow",
-    isOpen: r,
-    onShow: s,
+    textAlign: a = "left",
+    type: i = "slow",
+    isOpen: s,
+    onShow: r,
     onHide: m,
-    ...d
-  }, c) => {
-    const [u, b] = F(!1), [p, f] = F(!1), g = Z(null), x = Z(null), V = r !== void 0, I = V ? r : u;
+    ...c
+  }, b) => {
+    const [h, d] = U(!1), [u, g] = U(!1), v = Y(null), N = Y(null), I = `tooltip-${eo()}`, V = s !== void 0, z = V ? s : h;
     X(() => () => {
-      g.current !== null && window.clearTimeout(g.current), x.current !== null && window.clearTimeout(x.current);
+      v.current !== null && window.clearTimeout(v.current), N.current !== null && window.clearTimeout(N.current);
     }, []), X(() => {
-      I ? (requestAnimationFrame(() => {
-        f(!0);
-      }), s == null || s()) : (f(!1), x.current = window.setTimeout(() => {
+      z ? (requestAnimationFrame(() => {
+        g(!0);
+      }), r == null || r()) : (g(!1), N.current = window.setTimeout(() => {
         m == null || m();
-      }, ii));
-    }, [I, s, m]);
-    const N = k(() => {
+      }, mi));
+    }, [z, r, m]);
+    const y = f(() => {
       if (V || n.length === 0)
         return;
-      x.current !== null && (window.clearTimeout(x.current), x.current = null);
-      const w = a === "fast" ? ti : ni;
-      g.current = window.setTimeout(() => {
-        b(!0);
-      }, w);
-    }, [V, a, n]), j = k(() => {
-      V || (g.current !== null && (window.clearTimeout(g.current), g.current = null), b(!1));
-    }, [V]), v = k(() => {
-      V || (g.current !== null && (window.clearTimeout(g.current), g.current = null), b(!1));
+      N.current !== null && (window.clearTimeout(N.current), N.current = null);
+      const D = i === "fast" ? ri : si;
+      v.current = window.setTimeout(() => {
+        d(!0);
+      }, D);
+    }, [V, i, n]), w = f(() => {
+      V || (v.current !== null && (window.clearTimeout(v.current), v.current = null), d(!1));
+    }, [V]), j = f(() => {
+      V || (v.current !== null && (window.clearTimeout(v.current), v.current = null), d(!1));
     }, [V]);
     if (n.length === 0)
       return e;
-    const y = Ke(e) ? ro(e, {
-      onMouseEnter: (w) => {
-        var T, z;
-        N(), (z = (T = e.props) == null ? void 0 : T.onMouseEnter) == null || z.call(T, w);
+    const k = f(() => {
+      V || n.length === 0 || d(!0);
+    }, [V, n]), M = f(() => {
+      V || d(!1);
+    }, [V]), T = f(
+      (D) => {
+        D.key === "Escape" && !V && d(!1);
       },
-      onMouseLeave: (w) => {
-        var T, z;
-        j(), (z = (T = e.props) == null ? void 0 : T.onMouseLeave) == null || z.call(T, w);
+      [V]
+    ), P = e.props, B = oo(e) ? ho(e, {
+      "aria-describedby": z ? I : void 0,
+      tabIndex: (P == null ? void 0 : P.tabIndex) ?? 0,
+      onMouseEnter: (D) => {
+        var x, E;
+        y(), (E = (x = e.props) == null ? void 0 : x.onMouseEnter) == null || E.call(x, D);
       },
-      onMouseDown: (w) => {
-        var T, z;
-        v(), (z = (T = e.props) == null ? void 0 : T.onMouseDown) == null || z.call(T, w);
+      onMouseLeave: (D) => {
+        var x, E;
+        w(), (E = (x = e.props) == null ? void 0 : x.onMouseLeave) == null || E.call(x, D);
+      },
+      onMouseDown: (D) => {
+        var x, E;
+        j(), (E = (x = e.props) == null ? void 0 : x.onMouseDown) == null || E.call(x, D);
+      },
+      onFocus: (D) => {
+        var x, E;
+        k(), (E = (x = e.props) == null ? void 0 : x.onFocus) == null || E.call(x, D);
+      },
+      onBlur: (D) => {
+        var x, E;
+        M(), (E = (x = e.props) == null ? void 0 : x.onBlur) == null || E.call(x, D);
+      },
+      onKeyDown: (D) => {
+        var x, E;
+        T(D), (E = (x = e.props) == null ? void 0 : x.onKeyDown) == null || E.call(x, D);
       }
     }) : e;
-    return /* @__PURE__ */ A(
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: c,
-        className: h("relative inline-flex", o),
-        role: "tooltip",
-        ...d,
+        ref: b,
+        className: p("relative inline-flex", o),
+        ...c,
         children: [
-          y,
-          (I || p) && /* @__PURE__ */ A(
+          B,
+          (z || u) && /* @__PURE__ */ L(
             "div",
             {
-              className: h(
-                ai({
+              id: I,
+              role: "tooltip",
+              className: p(
+                ci({
                   orientation: t,
-                  textAlign: i,
-                  visible: p
+                  textAlign: a,
+                  visible: u
                 })
               ),
               children: [
@@ -4392,7 +4446,7 @@ const ni = 1e3, ti = 250, ii = 100, ai = D(
                 /* @__PURE__ */ l(
                   "svg",
                   {
-                    className: h(li({ orientation: t })),
+                    className: p(di({ orientation: t })),
                     viewBox: "0 0 8 4",
                     "aria-hidden": "true",
                     children: /* @__PURE__ */ l("path", { d: "m4 4 4-4h-8l4 4Z" })
@@ -4406,8 +4460,8 @@ const ni = 1e3, ti = 250, ii = 100, ai = D(
     );
   }
 );
-Xe.displayName = "Tooltip";
-const si = D(
+to.displayName = "Tooltip";
+const bi = C(
   // Base styles - inline code styling with monospace font
   [
     "inline",
@@ -4423,19 +4477,19 @@ const si = D(
     variants: {},
     defaultVariants: {}
   }
-), ri = P(
-  ({ className: o, text: e, children: n, ...t }, i) => /* @__PURE__ */ l(
+), ui = R(
+  ({ className: o, text: e, children: n, ...t }, a) => /* @__PURE__ */ l(
     "code",
     {
-      ref: i,
-      className: h(si(), o),
+      ref: a,
+      className: p(bi(), o),
       ...t,
       children: e ?? n
     }
   )
 );
-ri.displayName = "CodeTag";
-const mi = D(
+ui.displayName = "CodeTag";
+const hi = C(
   // Base styles for wrapper
   [
     "flex",
@@ -4459,83 +4513,83 @@ const mi = D(
       type: "info"
     }
   }
-), ci = {
+), pi = {
   info: "var(--sinch-comp-inline-alert-color-info-default-icon)",
   success: "var(--sinch-comp-inline-alert-color-success-default-icon)",
   warn: "var(--sinch-comp-inline-alert-color-warning-default-icon)",
   error: "var(--sinch-comp-inline-alert-color-error-default-icon)"
-}, di = {
+}, gi = {
   info: "var(--sinch-comp-inline-alert-color-info-default-text)",
   success: "var(--sinch-comp-inline-alert-color-success-default-text)",
   warn: "var(--sinch-comp-inline-alert-color-warning-default-text)",
   error: "var(--sinch-comp-inline-alert-color-error-default-text)"
-}, bi = {
+}, ki = {
   info: "circle-info",
   success: "circle-check",
   warn: "triangle-exclamation",
   error: "octagon-exclamation"
-}, ui = P(
+}, fi = R(
   ({
     className: o,
     type: e = "info",
     text: n,
     caption: t,
-    icon: i,
-    action: a,
-    close: r,
-    children: s,
+    icon: a,
+    action: i,
+    close: s,
+    children: r,
     ...m
-  }, d) => {
-    const c = i ?? bi[e], u = ci[e], b = di[e];
-    return /* @__PURE__ */ A(
+  }, c) => {
+    const b = a ?? ki[e], h = pi[e], d = gi[e];
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: d,
+        ref: c,
         role: "alert",
         "aria-atomic": "true",
         "aria-live": "polite",
-        className: h(mi({ type: e }), o),
+        className: p(hi({ type: e }), o),
         ...m,
         children: [
           /* @__PURE__ */ l(
-            ne,
+            oe,
             {
-              name: c,
+              name: b,
               iconsVersion: "2",
               size: "md",
-              style: { color: u }
+              style: { color: h }
             }
           ),
-          /* @__PURE__ */ A("div", { className: "flex flex-col items-start ml-2 min-w-0 flex-1", children: [
+          /* @__PURE__ */ L("div", { className: "flex flex-col items-start ml-2 min-w-0 flex-1", children: [
             t && /* @__PURE__ */ l(
               "div",
               {
                 className: "self-stretch font-[var(--sinch-comp-inline-alert-font-title)]",
-                style: { color: b },
+                style: { color: d },
                 children: t
               }
             ),
             /* @__PURE__ */ l(
               "div",
               {
-                className: h(
+                className: p(
                   "flex flex-col gap-2 self-stretch font-[var(--sinch-comp-inline-alert-font-body)]",
                   t && "mt-1"
                 ),
-                style: { color: b },
-                children: n ?? s
+                style: { color: d },
+                children: n ?? r
               }
             ),
-            a && /* @__PURE__ */ l("div", { className: "w-full flex mt-4 min-w-0 gap-4", children: a })
+            i && /* @__PURE__ */ l("div", { className: "w-full flex mt-4 min-w-0 gap-4", children: i })
           ] }),
-          r && /* @__PURE__ */ l("div", { className: "ml-4", children: r })
+          s && /* @__PURE__ */ l("div", { className: "ml-4", children: s })
         ]
       }
     );
   }
 );
-ui.displayName = "InlineAlert";
-const hi = D(
+fi.displayName = "InlineAlert";
+const ji = C(
   // Base styles
   [
     "relative flex flex-col box-border w-full",
@@ -4547,7 +4601,7 @@ const hi = D(
     variants: {},
     defaultVariants: {}
   }
-), pi = D(
+), vi = C(
   // Base styles for the textarea element
   [
     "w-full px-3 py-2 box-border",
@@ -4564,7 +4618,7 @@ const hi = D(
     variants: {},
     defaultVariants: {}
   }
-), gi = D(
+), wi = C(
   // Base styles for the border overlay
   [
     "absolute inset-0 pointer-events-none",
@@ -4606,143 +4660,143 @@ const hi = D(
       isDisabled: !1
     }
   }
-), ki = P(
+), xi = R(
   ({
     className: o,
     value: e,
     defaultValue: n,
     placeholder: t,
-    invalid: i = !1,
-    disabled: a = !1,
-    readOnly: r = !1,
-    required: s = !1,
+    invalid: a = !1,
+    disabled: i = !1,
+    readOnly: s = !1,
+    required: r = !1,
     rows: m,
-    minRows: d,
-    maxRows: c,
-    resizable: u = !1,
-    "aria-label": b,
-    bottomContent: p,
-    onChange: f,
-    onFocus: g,
-    onBlur: x,
-    onKeyDown: V,
-    ...I
-  }, N) => {
-    const [j, v] = F(n ?? ""), [y, w] = F(!1), T = Z(null), z = k(
-      (H) => {
-        T.current = H, typeof N == "function" ? N(H) : N !== null && (N.current = H);
+    minRows: c,
+    maxRows: b,
+    resizable: h = !1,
+    "aria-label": d,
+    bottomContent: u,
+    onChange: g,
+    onFocus: v,
+    onBlur: N,
+    onKeyDown: I,
+    ...V
+  }, z) => {
+    const [y, w] = U(n ?? ""), [j, k] = U(!1), M = Y(null), T = f(
+      (_) => {
+        M.current = _, typeof z == "function" ? z(_) : z !== null && (z.current = _);
+      },
+      [z]
+    ), P = Y({ startY: 0, startHeight: 0 }), [B, D] = U(null), x = e !== void 0, E = x ? e : y;
+    X(() => {
+      const _ = M.current;
+      if (_ === null || h)
+        return;
+      _.style.height = "auto";
+      let A = 0, ne = 1 / 0;
+      if (c !== void 0 && c > 0) {
+        const he = _.rows;
+        _.rows = c, A = _.scrollHeight, _.rows = he;
+      }
+      if (b !== void 0 && b > 0) {
+        const he = _.rows;
+        _.rows = b, ne = _.scrollHeight, _.rows = he;
+      }
+      const G = _.scrollHeight, me = Math.min(Math.max(G, A), ne);
+      _.style.height = `${me}px`;
+    }, [E, c, b, h]), X(() => {
+      const _ = M.current;
+      _ === null || B === null || (_.style.height = `${B}px`);
+    }, [B]);
+    const S = f(
+      (_) => {
+        const A = _.target.value;
+        x || w(A), g == null || g(A);
+      },
+      [x, g]
+    ), F = f(
+      (_) => {
+        k(!0), v == null || v(_);
+      },
+      [v]
+    ), $ = f(
+      (_) => {
+        k(!1), N == null || N(_);
       },
       [N]
-    ), O = Z({ startY: 0, startHeight: 0 }), [$, C] = F(null), E = e !== void 0, _ = E ? e : j;
-    X(() => {
-      const H = T.current;
-      if (H === null || u)
-        return;
-      H.style.height = "auto";
-      let S = 0, ee = 1 / 0;
-      if (d !== void 0 && d > 0) {
-        const te = H.rows;
-        H.rows = d, S = H.scrollHeight, H.rows = te;
-      }
-      if (c !== void 0 && c > 0) {
-        const te = H.rows;
-        H.rows = c, ee = H.scrollHeight, H.rows = te;
-      }
-      const M = H.scrollHeight, K = Math.min(Math.max(M, S), ee);
-      H.style.height = `${K}px`;
-    }, [_, d, c, u]), X(() => {
-      const H = T.current;
-      H === null || $ === null || (H.style.height = `${$}px`);
-    }, [$]);
-    const L = k(
-      (H) => {
-        const S = H.target.value;
-        E || v(S), f == null || f(S);
-      },
-      [E, f]
-    ), R = k(
-      (H) => {
-        w(!0), g == null || g(H);
-      },
-      [g]
-    ), U = k(
-      (H) => {
-        w(!1), x == null || x(H);
-      },
-      [x]
-    ), G = k(
-      (H) => {
-        H.preventDefault();
-        const S = T.current;
-        if (S === null)
+    ), H = f(
+      (_) => {
+        _.preventDefault();
+        const A = M.current;
+        if (A === null)
           return;
-        O.current = {
-          startY: H.clientY,
-          startHeight: S.getBoundingClientRect().height
+        P.current = {
+          startY: _.clientY,
+          startHeight: A.getBoundingClientRect().height
         };
-        const ee = (K) => {
-          const te = K.clientY - O.current.startY, W = Math.max(0, O.current.startHeight + te);
-          C(W);
-        }, M = () => {
-          document.removeEventListener("mousemove", ee), document.removeEventListener("mouseup", M);
+        const ne = (me) => {
+          const he = me.clientY - P.current.startY, O = Math.max(0, P.current.startHeight + he);
+          D(O);
+        }, G = () => {
+          document.removeEventListener("mousemove", ne), document.removeEventListener("mouseup", G);
         };
-        document.addEventListener("mousemove", ee), document.addEventListener("mouseup", M);
+        document.addEventListener("mousemove", ne), document.addEventListener("mouseup", G);
       },
       []
-    ), q = p !== void 0 || u;
-    return /* @__PURE__ */ A("div", { className: h(hi({}), o), children: [
+    ), Z = u !== void 0 || h;
+    return /* @__PURE__ */ L("div", { className: p(ji({}), o), children: [
       /* @__PURE__ */ l(
         "textarea",
         {
-          ref: z,
-          value: _,
+          ref: T,
+          value: E,
           placeholder: t,
-          disabled: a,
-          readOnly: r,
-          required: s,
+          disabled: i,
+          readOnly: s,
+          required: r,
           rows: m,
-          "aria-label": b,
-          "aria-invalid": i,
+          "aria-label": d,
+          "aria-invalid": a,
           "aria-multiline": "true",
-          className: h(pi({})),
-          onChange: L,
-          onFocus: R,
-          onBlur: U,
-          onKeyDown: V,
-          ...I
+          className: p(vi({})),
+          onChange: S,
+          onFocus: F,
+          onBlur: $,
+          onKeyDown: I,
+          ...V
         }
       ),
       /* @__PURE__ */ l(
         "div",
         {
-          className: h(
-            gi({
-              isFocused: y,
-              isInvalid: i && !y,
-              isDisabled: a
+          className: p(
+            wi({
+              isFocused: j,
+              isInvalid: a && !j,
+              isDisabled: i
             })
           )
         }
       ),
-      q && /* @__PURE__ */ l(
+      Z && /* @__PURE__ */ l(
         "div",
         {
-          className: h(
+          className: p(
             "flex flex-row items-center gap-2 px-1 pt-3 pb-1",
-            u && "pr-[calc(var(--sinch-comp-textarea-size-resize-handle)+4px)]"
+            h && "pr-[calc(var(--sinch-comp-textarea-size-resize-handle)+4px)]"
           ),
-          children: p
+          children: u
         }
       ),
-      u && /* @__PURE__ */ l(
+      h && /* @__PURE__ */ l(
         "div",
         {
-          className: h(
+          className: p(
             "absolute bottom-0 right-0 cursor-ns-resize",
             "w-[var(--sinch-comp-textarea-size-resize-handle)]",
             "h-[var(--sinch-comp-textarea-size-resize-handle)]"
           ),
-          onMouseDown: G,
+          onMouseDown: H,
           "aria-hidden": "true",
           children: /* @__PURE__ */ l(
             "svg",
@@ -4758,13 +4812,13 @@ const hi = D(
     ] });
   }
 );
-ki.displayName = "Textarea";
-const Ho = de(null), fi = () => {
-  const o = be(Ho);
+xi.displayName = "Textarea";
+const Yo = be(null), yi = () => {
+  const o = ue(Yo);
   if (o === null)
     throw new Error("RadioOption must be used within a Radio component");
   return o;
-}, ji = D(
+}, Ni = C(
   // Base styles
   "flex box-border w-full",
   {
@@ -4778,68 +4832,68 @@ const Ho = de(null), fi = () => {
       direction: "column"
     }
   }
-), Bo = P(
+), Ko = R(
   ({
     className: o,
     direction: e = "column",
     name: n,
     value: t,
-    defaultValue: i = "",
-    invalid: a = !1,
-    "aria-label": r,
-    onChange: s,
+    defaultValue: a = "",
+    invalid: i = !1,
+    "aria-label": s,
+    onChange: r,
     children: m,
-    ...d
-  }, c) => {
-    const [u, b] = F(i), p = Z(/* @__PURE__ */ new Map()), f = t !== void 0, g = f ? t : u, x = k(
-      (y) => {
-        f || b(y), s == null || s(y);
+    ...c
+  }, b) => {
+    const [h, d] = U(a), u = Y(/* @__PURE__ */ new Map()), g = t !== void 0, v = g ? t : h, N = f(
+      (j) => {
+        g || d(j), r == null || r(j);
       },
-      [f, s]
-    ), V = k(
-      (y, w) => {
-        p.current.set(y, w);
+      [g, r]
+    ), I = f(
+      (j, k) => {
+        u.current.set(j, k);
       },
       []
-    ), I = k((y) => {
-      p.current.delete(y);
-    }, []), N = k(() => Array.from(p.current.entries()).filter(([, y]) => y.getAttribute("aria-disabled") !== "true").map(([y, w]) => ({ value: y, element: w })), []), j = k(() => {
-      const y = N();
-      if (y.length === 0)
+    ), V = f((j) => {
+      u.current.delete(j);
+    }, []), z = f(() => Array.from(u.current.entries()).filter(([, j]) => j.getAttribute("aria-disabled") !== "true").map(([j, k]) => ({ value: j, element: k })), []), y = f(() => {
+      const j = z();
+      if (j.length === 0)
         return;
-      const w = y.findIndex((O) => O.value === g), T = w < 0 ? 0 : (w + 1) % y.length, z = y[T];
-      z.element.focus(), x(z.value);
-    }, [g, N, x]), v = k(() => {
-      const y = N();
-      if (y.length === 0)
+      const k = j.findIndex((P) => P.value === v), M = k < 0 ? 0 : (k + 1) % j.length, T = j[M];
+      T.element.focus(), N(T.value);
+    }, [v, z, N]), w = f(() => {
+      const j = z();
+      if (j.length === 0)
         return;
-      const w = y.findIndex((O) => O.value === g), T = w < 0 ? y.length - 1 : (w - 1 + y.length) % y.length, z = y[T];
-      z.element.focus(), x(z.value);
-    }, [g, N, x]);
+      const k = j.findIndex((P) => P.value === v), M = k < 0 ? j.length - 1 : (k - 1 + j.length) % j.length, T = j[M];
+      T.element.focus(), N(T.value);
+    }, [v, z, N]);
     return /* @__PURE__ */ l(
-      Ho.Provider,
+      Yo.Provider,
       {
         value: {
           name: n,
-          value: g,
-          invalid: a,
-          onChange: x,
-          registerOption: V,
-          unregisterOption: I,
-          focusNextOption: j,
-          focusPrevOption: v
+          value: v,
+          invalid: i,
+          onChange: N,
+          registerOption: I,
+          unregisterOption: V,
+          focusNextOption: y,
+          focusPrevOption: w
         },
         children: /* @__PURE__ */ l(
           "div",
           {
-            ref: c,
+            ref: b,
             role: "radiogroup",
-            "aria-label": r,
-            "aria-invalid": a || void 0,
+            "aria-label": s,
+            "aria-invalid": i || void 0,
             "data-name": n,
-            "data-value": g,
-            className: h(ji({ direction: e }), o),
-            ...d,
+            "data-value": v,
+            className: p(Ni({ direction: e }), o),
+            ...c,
             children: m
           }
         )
@@ -4847,8 +4901,8 @@ const Ho = de(null), fi = () => {
     );
   }
 );
-Bo.displayName = "Radio";
-const vi = D(
+Ko.displayName = "Radio";
+const Vi = C(
   // Base styles
   [
     "flex flex-row box-border w-full min-h-[24px]",
@@ -4865,7 +4919,7 @@ const vi = D(
       isDisabled: !1
     }
   }
-), wi = D(
+), zi = C(
   // Base styles for the radio circle
   [
     "relative w-[18px] h-[18px]",
@@ -4913,10 +4967,10 @@ const vi = D(
       isDisabled: !1
     }
   }
-), xi = D(
+), Ii = C(
   // Focus ring styles
   [
-    "absolute inset-[-3px] pointer-events-none",
+    "absolute inset-[-2px] pointer-events-none",
     "border-2 border-[var(--sinch-comp-radio-color-default-outline-focus)]",
     "rounded-full",
     "transition-opacity duration-100 opacity-0"
@@ -4932,7 +4986,7 @@ const vi = D(
       isFocused: !1
     }
   }
-), yi = D(
+), Ci = C(
   // Knob (inner circle) styles
   [
     "absolute w-[10px] h-[10px]",
@@ -4958,52 +5012,52 @@ const vi = D(
       isDisabled: !1
     }
   }
-), Go = P(
+), Jo = R(
   ({
     className: o,
     value: e,
     disabled: n = !1,
     text: t,
-    "aria-label": i,
-    "aria-labelledby": a,
-    onKeyDown: r,
-    ...s
+    "aria-label": a,
+    "aria-labelledby": i,
+    onKeyDown: s,
+    ...r
   }, m) => {
-    const d = fi(), [c, u] = F(!1), b = Z(null), p = d.value === e, f = d.invalid, g = k(
-      (w) => {
-        b.current = w, w !== null ? d.registerOption(e, w) : d.unregisterOption(e), m !== null && (typeof m == "function" ? m(w) : m.current = w);
+    const c = yi(), [b, h] = U(!1), d = Y(null), u = c.value === e, g = c.invalid, v = f(
+      (k) => {
+        d.current = k, k !== null ? c.registerOption(e, k) : c.unregisterOption(e), m !== null && (typeof m == "function" ? m(k) : m.current = k);
       },
-      [d, m, e]
-    ), x = k(() => {
-      n || d.onChange(e);
-    }, [d, n, e]), V = k(
-      (w) => {
-        switch (w.code) {
+      [c, m, e]
+    ), N = f(() => {
+      n || c.onChange(e);
+    }, [c, n, e]), I = f(
+      (k) => {
+        switch (k.code) {
           case "ArrowUp":
           case "ArrowLeft":
-            w.preventDefault(), d.focusPrevOption();
+            k.preventDefault(), c.focusPrevOption();
             break;
           case "ArrowDown":
           case "ArrowRight":
-            w.preventDefault(), d.focusNextOption();
+            k.preventDefault(), c.focusNextOption();
             break;
           case "Space":
-            w.preventDefault(), n || d.onChange(e);
+            k.preventDefault(), n || c.onChange(e);
             break;
         }
-        r == null || r(w);
+        s == null || s(k);
       },
-      [d, n, r, e]
-    ), I = k(() => {
-      u(!0);
-    }, []), N = k(() => {
-      u(!1);
-    }, []), j = () => n ? "" : p && !f ? [
+      [c, n, s, e]
+    ), V = f(() => {
+      h(!0);
+    }, []), z = f(() => {
+      h(!1);
+    }, []), y = () => n ? "" : u && !g ? [
       "hover:bg-[var(--sinch-comp-radio-color-default-background-hover)]",
       "hover:border-[var(--sinch-comp-radio-color-checked-border-hover)]",
       "active:bg-[var(--sinch-comp-radio-color-default-background-active)]",
       "active:border-[var(--sinch-comp-radio-color-checked-border-active)]"
-    ].join(" ") : f ? [
+    ].join(" ") : g ? [
       "hover:bg-[var(--sinch-comp-radio-color-default-background-hover)]",
       "hover:border-[var(--sinch-comp-radio-color-invalid-border-hover)]",
       "active:bg-[var(--sinch-comp-radio-color-default-background-active)]",
@@ -5013,55 +5067,55 @@ const vi = D(
       "hover:border-[var(--sinch-comp-radio-color-default-border-hover)]",
       "active:bg-[var(--sinch-comp-radio-color-default-background-active)]",
       "active:border-[var(--sinch-comp-radio-color-default-border-active)]"
-    ].join(" "), v = () => n || !p ? "" : [
+    ].join(" "), w = () => n || !u ? "" : [
       "group-hover:bg-[var(--sinch-comp-radio-color-checked-knob-hover)]",
       "group-active:bg-[var(--sinch-comp-radio-color-checked-knob-active)]"
-    ].join(" "), y = () => n && p ? "text-[var(--sinch-comp-radio-color-checked-disabled-label-initial)]" : n ? "text-[var(--sinch-comp-radio-color-disabled-label-initial)]" : f ? "text-[var(--sinch-comp-radio-color-invalid-label-initial)]" : "text-[var(--sinch-comp-radio-color-default-label-initial)]";
-    return /* @__PURE__ */ A(
+    ].join(" "), j = () => n && u ? "text-[var(--sinch-comp-radio-color-checked-disabled-label-initial)]" : n ? "text-[var(--sinch-comp-radio-color-disabled-label-initial)]" : g ? "text-[var(--sinch-comp-radio-color-invalid-label-initial)]" : "text-[var(--sinch-comp-radio-color-default-label-initial)]";
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: g,
+        ref: v,
         role: "radio",
-        "aria-checked": p,
+        "aria-checked": u,
         "aria-disabled": n,
-        "aria-label": i ?? t,
-        "aria-labelledby": a,
+        "aria-label": a ?? t,
+        "aria-labelledby": i,
         tabIndex: n ? -1 : 0,
-        className: h(
-          vi({ isDisabled: n }),
+        className: p(
+          Vi({ isDisabled: n }),
           "group",
           o
         ),
-        onClick: x,
-        onKeyDown: V,
-        onFocus: I,
-        onBlur: N,
-        ...s,
+        onClick: N,
+        onKeyDown: I,
+        onFocus: V,
+        onBlur: z,
+        ...r,
         children: [
-          /* @__PURE__ */ A("div", { className: "relative w-[18px] h-[18px] mt-[3px] flex-shrink-0 self-start", children: [
-            /* @__PURE__ */ l("div", { className: h(xi({ isFocused: c })) }),
+          /* @__PURE__ */ L("div", { className: "relative w-[18px] h-[18px] mt-[3px] flex-shrink-0 self-start", children: [
+            /* @__PURE__ */ l("div", { className: p(Ii({ isFocused: b })) }),
             /* @__PURE__ */ l(
               "div",
               {
-                className: h(
-                  wi({
-                    isChecked: p,
-                    isInvalid: f && !p,
+                className: p(
+                  zi({
+                    isChecked: u,
+                    isInvalid: g && !u,
                     isDisabled: n
                   }),
-                  j()
+                  y()
                 )
               }
             ),
             /* @__PURE__ */ l(
               "div",
               {
-                className: h(
-                  yi({
-                    isVisible: p,
+                className: p(
+                  Ci({
+                    isVisible: u,
                     isDisabled: n
                   }),
-                  v()
+                  w()
                 )
               }
             )
@@ -5069,10 +5123,10 @@ const vi = D(
           t !== void 0 && t.length > 0 && /* @__PURE__ */ l(
             "span",
             {
-              className: h(
+              className: p(
                 "flex-1 self-center pl-2",
                 "font-[var(--sinch-comp-radio-font-label)]",
-                y(),
+                j(),
                 n ? "cursor-default" : "cursor-pointer"
               ),
               children: t
@@ -5083,10 +5137,10 @@ const vi = D(
     );
   }
 );
-Go.displayName = "RadioOption";
-const dr = Object.assign(Bo, {
-  Option: Go
-}), Ni = D(
+Jo.displayName = "RadioOption";
+const pr = Object.assign(Ko, {
+  Option: Jo
+}), Mi = C(
   // Base styles
   "block w-full",
   {
@@ -5100,7 +5154,7 @@ const dr = Object.assign(Bo, {
       disabled: !1
     }
   }
-), Ci = D(
+), Di = C(
   // Label text styles
   [
     "font-[var(--sinch-comp-field-font-label)]",
@@ -5117,7 +5171,7 @@ const dr = Object.assign(Bo, {
       disabled: !1
     }
   }
-), Vi = D(
+), Ti = C(
   // Optional text styles
   [
     "font-[var(--sinch-comp-field-font-optional)]",
@@ -5135,7 +5189,7 @@ const dr = Object.assign(Bo, {
       disabled: !1
     }
   }
-), Ii = D(
+), Si = C(
   // Additional text styles
   [
     "font-[var(--sinch-comp-field-font-additional)]",
@@ -5153,65 +5207,65 @@ const dr = Object.assign(Bo, {
       disabled: !1
     }
   }
-), zi = [
+), Ei = [
   "font-[var(--sinch-comp-field-font-invalid)]",
   "text-[var(--sinch-comp-field-color-invalid-text-initial)]",
   "overflow-hidden text-ellipsis whitespace-nowrap",
   "leading-5 mt-0.5"
-], Di = P(
+], Ai = R(
   ({
     className: o,
     label: e,
     optionalText: n,
     additionalText: t,
-    invalidText: i,
-    disabled: a = !1,
-    tooltip: r,
-    children: s,
+    invalidText: a,
+    disabled: i = !1,
+    tooltip: s,
+    children: r,
     htmlFor: m,
-    ...d
-  }, c) => {
-    const u = mo(), b = m ?? u, p = Z(null), f = e !== void 0 || n !== void 0, g = k(() => {
-      const x = p.current;
-      if (x !== null) {
-        const V = x.querySelector(
+    ...c
+  }, b) => {
+    const h = eo(), d = m ?? h, u = Y(null), g = e !== void 0 || n !== void 0, v = f(() => {
+      const N = u.current;
+      if (N !== null) {
+        const I = N.querySelector(
           'input, textarea, select, [tabindex]:not([tabindex="-1"])'
         );
-        V == null || V.focus();
+        I == null || I.focus();
       }
     }, []);
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: c,
-        className: h(Ni({ disabled: a }), o),
-        ...d,
-        children: /* @__PURE__ */ A("div", { className: "flex flex-col w-full", children: [
-          f && /* @__PURE__ */ A("div", { className: "flex items-baseline h-6 mb-0.5", children: [
+        ref: b,
+        className: p(Mi({ disabled: i }), o),
+        ...c,
+        children: /* @__PURE__ */ L("div", { className: "flex flex-col w-full", children: [
+          g && /* @__PURE__ */ L("div", { className: "flex items-baseline h-6 mb-0.5", children: [
             e !== void 0 && /* @__PURE__ */ l(
               "label",
               {
-                htmlFor: b,
-                className: h(Ci({ disabled: a }), "cursor-pointer"),
-                onClick: g,
+                htmlFor: d,
+                className: p(Di({ disabled: i }), "cursor-pointer"),
+                onClick: v,
                 children: e
               }
             ),
-            r !== void 0 && /* @__PURE__ */ l("div", { className: "self-center mx-2 flex", children: r }),
-            n !== void 0 && /* @__PURE__ */ l("span", { className: h(Vi({ disabled: a })), children: n })
+            s !== void 0 && /* @__PURE__ */ l("div", { className: "self-center mx-2 flex", children: s }),
+            n !== void 0 && /* @__PURE__ */ l("span", { className: p(Ti({ disabled: i })), children: n })
           ] }),
-          /* @__PURE__ */ l("div", { ref: p, children: s }),
-          (i !== void 0 || t !== void 0) && /* @__PURE__ */ A("div", { className: "flex items-baseline", children: [
-            i !== void 0 && /* @__PURE__ */ l("div", { className: h(zi), children: i }),
-            t !== void 0 && /* @__PURE__ */ l("div", { className: h(Ii({ disabled: a })), children: t })
+          /* @__PURE__ */ l("div", { ref: u, children: r }),
+          (a !== void 0 || t !== void 0) && /* @__PURE__ */ L("div", { className: "flex items-baseline", children: [
+            a !== void 0 && /* @__PURE__ */ l("div", { className: p(Ei), children: a }),
+            t !== void 0 && /* @__PURE__ */ l("div", { className: p(Si({ disabled: i })), children: t })
           ] })
         ] })
       }
     );
   }
 );
-Di.displayName = "Field";
-const Ti = D(
+Ai.displayName = "Field";
+const Oi = C(
   // Base styles matching template.html #image styles
   [
     "inline-block",
@@ -5232,35 +5286,35 @@ const Ti = D(
       size: "md"
     }
   }
-), Mi = P(
-  ({ className: o, code: e, size: n = "md", flagUrlTemplate: t, alt: i, loading: a = "lazy", style: r, ...s }, m) => {
-    const d = J(() => e === "" || e === null || e === void 0 ? "" : t !== void 0 && t !== "" ? t.replace("%s", e) : "", [e, t]);
-    return d === "" ? null : /* @__PURE__ */ l(
+), Li = R(
+  ({ className: o, code: e, size: n = "md", flagUrlTemplate: t, alt: a, loading: i = "lazy", style: s, ...r }, m) => {
+    const c = J(() => e === "" || e === null || e === void 0 ? "" : t !== void 0 && t !== "" ? t.replace("%s", e) : "", [e, t]);
+    return c === "" ? null : /* @__PURE__ */ l(
       "img",
       {
         ref: m,
-        src: d,
-        alt: i ?? e,
-        loading: a,
-        className: h(Ti({ size: n }), o),
+        src: c,
+        alt: a ?? e,
+        loading: i,
+        className: p(Oi({ size: n }), o),
         style: {
           width: "var(--sinch-global-size-icon)",
           height: "var(--sinch-global-size-icon)",
-          ...r
+          ...s
         },
-        ...s
+        ...r
       }
     );
   }
 );
-Mi.displayName = "Flag";
-const xe = 7, Ve = Math.floor(xe / 2), Vo = 0, so = xe - 1, Wo = 1, Be = so - 1, Si = (o, e, n) => o === Wo && e > Ve || o === Be && e <= n - Be, Oi = D([
+Li.displayName = "Flag";
+const ye = 7, Ce = Math.floor(ye / 2), To = 0, uo = ye - 1, Xo = 1, qe = uo - 1, Pi = (o, e, n) => o === Xo && e > Ce || o === qe && e <= n - qe, Ri = C([
   "flex",
   "justify-center",
   "items-center",
   "gap-2",
   "h-6"
-]), oo = D(
+]), lo = C(
   [
     // Reset and base
     "relative",
@@ -5313,83 +5367,83 @@ const xe = 7, Ve = Math.floor(xe / 2), Vo = 0, so = xe - 1, Wo = 1, Be = so - 1,
       variant: "page"
     }
   }
-), Ei = P(
-  ({ className: o, value: e, max: n, onChange: t, ariaLabel: i = "Pagination", ...a }, r) => {
-    const s = e - 1, m = Math.max(0, n), d = J(() => Math.min(
-      Math.max(0, s - Ve),
-      Math.max(0, m - xe)
-    ), [s, m]), c = J(() => Array.from({ length: xe }, (I, N) => {
-      let j = !1;
-      s < 3 ? j = s === N : s >= m - Ve ? j = N + d === s : j = N === Ve;
-      const v = N === Vo ? 1 : N === so ? m : N + 1 + d, y = m > xe && Si(N, s, m);
+), Fi = R(
+  ({ className: o, value: e, max: n, onChange: t, ariaLabel: a = "Pagination", ...i }, s) => {
+    const r = e - 1, m = Math.max(0, n), c = J(() => Math.min(
+      Math.max(0, r - Ce),
+      Math.max(0, m - ye)
+    ), [r, m]), b = J(() => Array.from({ length: ye }, (V, z) => {
+      let y = !1;
+      r < 3 ? y = r === z : r >= m - Ce ? y = z + c === r : y = z === Ce;
+      const w = z === To ? 1 : z === uo ? m : z + 1 + c, j = m > ye && Pi(z, r, m);
       return {
-        index: N,
-        pageNumber: v,
-        isActive: j,
-        isEllipsis: y,
-        isHidden: N >= m
+        index: z,
+        pageNumber: w,
+        isActive: y,
+        isEllipsis: j,
+        isHidden: z >= m
       };
-    }), [s, m, d]), u = k(
-      (I) => Math.max(0, Math.min(m - 1, I)) + 1,
+    }), [r, m, c]), h = f(
+      (V) => Math.max(0, Math.min(m - 1, V)) + 1,
       [m]
-    ), b = k(
-      (I) => {
-        let N;
-        I === Vo ? N = 0 : I === so ? N = m - 1 : I === Wo && m > xe && s > Ve ? N = Math.floor(s / 2) : I === Be && m > xe && s <= m - Be ? N = Math.floor((m - s) / 2 + s) : N = I + Math.min(
-          Math.max(0, s - Ve),
-          Math.max(0, m - xe)
-        ), t == null || t(u(N));
+    ), d = f(
+      (V) => {
+        let z;
+        V === To ? z = 0 : V === uo ? z = m - 1 : V === Xo && m > ye && r > Ce ? z = Math.floor(r / 2) : V === qe && m > ye && r <= m - qe ? z = Math.floor((m - r) / 2 + r) : z = V + Math.min(
+          Math.max(0, r - Ce),
+          Math.max(0, m - ye)
+        ), t == null || t(h(z));
       },
-      [s, m, t, u]
-    ), p = k(() => {
-      t == null || t(u(Math.max(s - 1, 0)));
-    }, [s, t, u]), f = k(() => {
-      t == null || t(u(Math.min(s + 1, m - 1)));
-    }, [s, m, t, u]), g = s < 0 || s >= m, x = g || s === 0, V = g || s === m - 1;
+      [r, m, t, h]
+    ), u = f(() => {
+      t == null || t(h(Math.max(r - 1, 0)));
+    }, [r, t, h]), g = f(() => {
+      t == null || t(h(Math.min(r + 1, m - 1)));
+    }, [r, m, t, h]), v = r < 0 || r >= m, N = v || r === 0, I = v || r === m - 1;
     return /* @__PURE__ */ l(
       "nav",
       {
-        ref: r,
-        "aria-label": i,
-        className: h("inline-block align-middle outline-none", o),
-        ...a,
-        children: /* @__PURE__ */ A("div", { className: Oi(), children: [
+        ref: s,
+        "aria-label": a,
+        className: p("inline-block align-middle outline-none", o),
+        ...i,
+        children: /* @__PURE__ */ L("div", { className: Ri(), children: [
           /* @__PURE__ */ l(
             "button",
             {
               type: "button",
               "aria-label": "Go back",
-              disabled: x,
-              onClick: p,
-              className: oo({ variant: "arrow" }),
-              children: /* @__PURE__ */ l(ne, { name: "fa-angle-left", iconsVersion: "2", size: "md" })
+              disabled: N,
+              onClick: u,
+              className: lo({ variant: "arrow" }),
+              children: /* @__PURE__ */ l(oe, { name: "fa-angle-left", iconsVersion: "2", size: "md" })
             }
           ),
-          c.map((I) => I.isHidden ? null : /* @__PURE__ */ l(
+          b.map((V) => V.isHidden ? null : /* @__PURE__ */ l(
             "button",
             {
               type: "button",
-              "aria-label": `Go to page ${I.pageNumber}`,
-              "aria-current": I.isActive ? "page" : void 0,
-              "aria-hidden": I.isEllipsis ? !0 : void 0,
-              disabled: I.isEllipsis,
-              onClick: () => b(I.index),
-              className: oo({
-                variant: I.isActive ? "pageActive" : "page"
+              "aria-label": `Go to page ${V.pageNumber}`,
+              "aria-current": V.isActive ? "page" : void 0,
+              "aria-hidden": V.isEllipsis ? !0 : void 0,
+              disabled: V.isEllipsis,
+              onClick: () => d(V.index),
+              className: lo({
+                variant: V.isActive ? "pageActive" : "page"
               }),
-              children: I.isEllipsis ? "..." : /* @__PURE__ */ l("span", { children: I.pageNumber })
+              children: V.isEllipsis ? "..." : /* @__PURE__ */ l("span", { children: V.pageNumber })
             },
-            I.index
+            V.index
           )),
           /* @__PURE__ */ l(
             "button",
             {
               type: "button",
               "aria-label": "Go forward",
-              disabled: V,
-              onClick: f,
-              className: oo({ variant: "arrow" }),
-              children: /* @__PURE__ */ l(ne, { name: "fa-angle-right", iconsVersion: "2", size: "md" })
+              disabled: I,
+              onClick: g,
+              className: lo({ variant: "arrow" }),
+              children: /* @__PURE__ */ l(oe, { name: "fa-angle-right", iconsVersion: "2", size: "md" })
             }
           )
         ] })
@@ -5397,50 +5451,50 @@ const xe = 7, Ve = Math.floor(xe / 2), Vo = 0, so = xe - 1, Wo = 1, Be = so - 1,
     );
   }
 );
-Ei.displayName = "Pagination";
-const Ai = P(
+Fi.displayName = "Pagination";
+const $i = R(
   ({
     className: o,
     text: e,
     orientation: n = "top",
     textAlign: t,
-    width: i,
-    isOpen: a,
-    onShow: r,
-    onHide: s,
+    width: a,
+    isOpen: i,
+    onShow: s,
+    onHide: r,
     style: m,
-    ...d
-  }, c) => {
-    const u = i !== void 0 ? { "--sinch-global-size-icon": `${i}px` } : { "--sinch-global-size-icon": "18px" };
+    ...c
+  }, b) => {
+    const h = a !== void 0 ? { "--sinch-global-size-icon": `${a}px` } : { "--sinch-global-size-icon": "18px" };
     return /* @__PURE__ */ l(
-      Xe,
+      to,
       {
-        ref: c,
+        ref: b,
         text: e,
         orientation: n,
         textAlign: t,
         type: "fast",
-        isOpen: a,
-        onShow: r,
-        onHide: s,
-        className: h("inline-flex", o),
+        isOpen: i,
+        onShow: s,
+        onHide: r,
+        className: p("inline-flex", o),
         style: m,
-        ...d,
+        ...c,
         children: /* @__PURE__ */ l(
-          ne,
+          oe,
           {
             name: "circle-question",
             iconsVersion: "2",
             className: "text-foreground-muted cursor-help",
-            style: u
+            style: h
           }
         )
       }
     );
   }
 );
-Ai.displayName = "HelpTooltip";
-const Li = [
+$i.displayName = "HelpTooltip";
+const _i = [
   "grid",
   // XL breakpoint (default): 12 columns
   "grid-cols-[repeat(var(--sinch-comp-grid-columns-xl),minmax(0,1fr))]",
@@ -5458,37 +5512,37 @@ const Li = [
   "max-[767px]:grid-cols-[repeat(var(--sinch-comp-grid-columns-s),minmax(0,1fr))]",
   "max-[767px]:gap-[var(--sinch-comp-grid-gutter-s)]",
   "max-[767px]:p-[var(--sinch-comp-grid-margin-s)]"
-].join(" "), Pi = P(
+].join(" "), Ui = R(
   ({ className: o, children: e, ...n }, t) => /* @__PURE__ */ l(
     "div",
     {
       ref: t,
-      className: h(Li, o),
+      className: p(_i, o),
       ...n,
       children: e
     }
   )
 );
-Pi.displayName = "Grid";
-const Ri = P(
-  ({ className: o, s: e, m: n, l: t, xl: i, children: a, ...r }, s) => {
+Ui.displayName = "Grid";
+const Hi = R(
+  ({ className: o, s: e, m: n, l: t, xl: a, children: i, ...s }, r) => {
     const m = J(() => {
-      const d = ["block"];
-      return i !== void 0 ? d.push(`col-span-${i}`) : d.push("col-span-12"), t !== void 0 ? d.push(`max-[1439px]:col-span-${t}`) : d.push("max-[1439px]:col-span-12"), n !== void 0 ? d.push(`max-[1023px]:col-span-${n}`) : d.push("max-[1023px]:col-span-8"), e !== void 0 ? d.push(`max-[767px]:col-span-${e}`) : d.push("max-[767px]:col-span-4"), d.join(" ");
-    }, [e, n, t, i]);
+      const c = ["block"];
+      return a !== void 0 ? c.push(`col-span-${a}`) : c.push("col-span-12"), t !== void 0 ? c.push(`max-[1439px]:col-span-${t}`) : c.push("max-[1439px]:col-span-12"), n !== void 0 ? c.push(`max-[1023px]:col-span-${n}`) : c.push("max-[1023px]:col-span-8"), e !== void 0 ? c.push(`max-[767px]:col-span-${e}`) : c.push("max-[767px]:col-span-4"), c.join(" ");
+    }, [e, n, t, a]);
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: s,
-        className: h(m, o),
-        ...r,
-        children: a
+        ref: r,
+        className: p(m, o),
+        ...s,
+        children: i
       }
     );
   }
 );
-Ri.displayName = "GridItem";
-const $i = D(
+Hi.displayName = "GridItem";
+const Bi = C(
   // Base styles
   "relative block overflow-hidden",
   {
@@ -5508,12 +5562,12 @@ const $i = D(
       card: !1
     }
   }
-), Fi = P(
-  ({ className: o, card: e = !1, children: n, ...t }, i) => /* @__PURE__ */ l(
+), Gi = R(
+  ({ className: o, card: e = !1, children: n, ...t }, a) => /* @__PURE__ */ l(
     "div",
     {
-      ref: i,
-      className: h($i({ card: e }), o),
+      ref: a,
+      className: p(Bi({ card: e }), o),
       role: "status",
       "aria-label": "Loading",
       ...t,
@@ -5521,8 +5575,8 @@ const $i = D(
     }
   )
 );
-Fi.displayName = "Skeleton";
-const _i = D(
+Gi.displayName = "Skeleton";
+const Wi = C(
   // Base styles - shimmer animation
   [
     "relative",
@@ -5552,29 +5606,29 @@ const _i = D(
       size: "md"
     }
   }
-), Ui = P(
-  ({ className: o, size: e = "md", width: n, style: t, ...i }, a) => {
-    const r = n !== void 0 ? { ...t, width: typeof n == "number" ? `${n}px` : n } : t;
+), Zi = R(
+  ({ className: o, size: e = "md", width: n, style: t, ...a }, i) => {
+    const s = n !== void 0 ? { ...t, width: typeof n == "number" ? `${n}px` : n } : t;
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: a,
-        className: h(_i({ size: e }), o),
-        style: r,
+        ref: i,
+        className: p(Wi({ size: e }), o),
+        style: s,
         "aria-hidden": "true",
-        ...i
+        ...a
       }
     );
   }
 );
-Ui.displayName = "SkeletonItem";
-const Hi = P(
+Zi.displayName = "SkeletonItem";
+const qi = R(
   ({ className: o, children: e, ...n }, t) => /* @__PURE__ */ l(
     "div",
     {
       ref: t,
       role: "list",
-      className: h(
+      className: p(
         // Base styles
         "block h-full",
         o
@@ -5584,14 +5638,14 @@ const Hi = P(
     }
   )
 );
-Hi.displayName = "List";
-const Bi = P(
+qi.displayName = "List";
+const Yi = R(
   ({ className: o, children: e, ...n }, t) => /* @__PURE__ */ l(
     "div",
     {
       ref: t,
       role: "listitem",
-      className: h(
+      className: p(
         // Base styles
         "block outline-none",
         o
@@ -5600,7 +5654,7 @@ const Bi = P(
       children: /* @__PURE__ */ l(
         "div",
         {
-          className: h(
+          className: p(
             "box-border h-full w-full overflow-hidden",
             "py-2",
             // Background colors using component tokens
@@ -5616,21 +5670,21 @@ const Bi = P(
     }
   )
 );
-Bi.displayName = "ListItem";
-const Gi = /\uFE0F/g, Wi = "‍", Zi = (o) => o.indexOf(Wi) < 0 ? o.replace(Gi, "") : o;
-function qi(o) {
+Yi.displayName = "ListItem";
+const Ki = /\uFE0F/g, Ji = "‍", Xi = (o) => o.indexOf(Ji) < 0 ? o.replace(Ki, "") : o;
+function Qi(o) {
   const e = [];
-  let n = 0, t = 0, i = 0;
-  for (; i < o.length; )
-    n = o.charCodeAt(i++), t !== 0 ? (e.push((65536 + (t - 55296 << 10) + (n - 56320)).toString(16)), t = 0) : n > 55296 && n <= 56319 ? t = n : e.push(n.toString(16));
+  let n = 0, t = 0, a = 0;
+  for (; a < o.length; )
+    n = o.charCodeAt(a++), t !== 0 ? (e.push((65536 + (t - 55296 << 10) + (n - 56320)).toString(16)), t = 0) : n > 55296 && n <= 56319 ? t = n : e.push(n.toString(16));
   return e;
 }
-const Yi = (o, e) => {
+const ea = (o, e) => {
   if (e == null || e.length === 0 || o === null || o === void 0)
     return "";
-  let n = qi(Zi(e)).join("-");
+  let n = Qi(Xi(e)).join("-");
   return n === "1f441-fe0f-200d-1f5e8-fe0f" && (n = "1f441-200d-1f5e8"), o.replace("%s", n);
-}, Ki = D(
+}, oa = C(
   // Base styles - display:contents to not affect layout
   "contents",
   {
@@ -5647,26 +5701,26 @@ const Yi = (o, e) => {
       size: "md"
     }
   }
-), Zo = P(
-  ({ className: o, char: e, baseUrl: n, size: t, verticalAlign: i, customSize: a, style: r, ...s }, m) => {
-    const d = J(() => Yi(n, e), [n, e]), c = a ?? "var(--emoji-size, 24px)";
+), Qo = R(
+  ({ className: o, char: e, baseUrl: n, size: t, verticalAlign: a, customSize: i, style: s, ...r }, m) => {
+    const c = J(() => ea(n, e), [n, e]), b = i ?? "var(--emoji-size, 24px)";
     return /* @__PURE__ */ l(
       "span",
       {
         ref: m,
-        className: h(Ki({ size: t }), o),
-        style: r,
-        ...s,
-        children: d !== "" && /* @__PURE__ */ l(
+        className: p(oa({ size: t }), o),
+        style: s,
+        ...r,
+        children: c !== "" && /* @__PURE__ */ l(
           "img",
           {
-            src: d,
+            src: c,
             alt: e,
             loading: "lazy",
             style: {
-              width: c,
-              height: c,
-              verticalAlign: i ?? "initial",
+              width: b,
+              height: b,
+              verticalAlign: a ?? "initial",
               pointerEvents: "none"
             }
           }
@@ -5675,37 +5729,37 @@ const Yi = (o, e) => {
     );
   }
 );
-Zo.displayName = "Emoji";
-const qo = de(null);
-function Ji() {
-  return be(qo);
+Qo.displayName = "Emoji";
+const en = be(null);
+function na() {
+  return ue(en);
 }
-const Xi = D(
+const ta = C(
   // Base styles - flex container
   "inline-flex",
   {
     variants: {},
     defaultVariants: {}
   }
-), Qi = P(
-  ({ className: o, children: e, size: n = "m", variant: t = "secondary", ...i }, a) => {
-    const r = He.count(e);
-    return /* @__PURE__ */ l(qo.Provider, { value: { size: n, variant: t, itemCount: r }, children: /* @__PURE__ */ l(
+), ia = R(
+  ({ className: o, children: e, size: n = "m", variant: t = "secondary", ...a }, i) => {
+    const s = Ze.count(e);
+    return /* @__PURE__ */ l(en.Provider, { value: { size: n, variant: t, itemCount: s }, children: /* @__PURE__ */ l(
       "div",
       {
-        ref: a,
+        ref: i,
         role: "group",
-        className: h(Xi(), o),
-        ...i,
-        children: He.map(e, (s, m) => Ke(s) ? ro(s, {
+        className: p(ta(), o),
+        ...a,
+        children: Ze.map(e, (r, m) => oo(r) ? ho(r, {
           _index: m
-        }) : s)
+        }) : r)
       }
     ) });
   }
 );
-Qi.displayName = "ButtonGroup";
-function ea(o) {
+ia.displayName = "ButtonGroup";
+function aa(o) {
   return {
     primary: "var(--sinch-comp-button-color-primary-default-text-initial)",
     secondary: "var(--sinch-comp-button-color-secondary-default-text-initial)",
@@ -5716,7 +5770,7 @@ function ea(o) {
     destructive: "var(--sinch-comp-button-color-danger-default-text-initial)"
   }[o];
 }
-function oa(o) {
+function la(o) {
   return {
     xs: "var(--sinch-comp-button-shape-radius-size-xs)",
     s: "var(--sinch-comp-button-shape-radius-size-s)",
@@ -5724,27 +5778,27 @@ function oa(o) {
     l: "var(--sinch-comp-button-shape-radius-size-l)"
   }[o];
 }
-const na = D(
+const sa = C(
   // Base styles - relative position for the divider
   "relative flex",
   {
     variants: {},
     defaultVariants: {}
   }
-), ta = P(
-  ({ className: o, _index: e = 0, style: n, ...t }, i) => {
-    const a = Ji(), r = (a == null ? void 0 : a.size) ?? "m", s = (a == null ? void 0 : a.variant) ?? "secondary", m = (a == null ? void 0 : a.itemCount) ?? 1, d = e === 0, c = e === m - 1, u = !d && !c, b = oa(r), p = ea(s), f = {
+), ra = R(
+  ({ className: o, _index: e = 0, style: n, ...t }, a) => {
+    const i = na(), s = (i == null ? void 0 : i.size) ?? "m", r = (i == null ? void 0 : i.variant) ?? "secondary", m = (i == null ? void 0 : i.itemCount) ?? 1, c = e === 0, b = e === m - 1, h = !c && !b, d = la(s), u = aa(r), g = {
       ...n,
       // Set CSS custom properties for the divider
-      "--button-group-item-divider-color": p
+      "--button-group-item-divider-color": u
     };
     return /* @__PURE__ */ l(
       "div",
       {
-        className: h(
-          na(),
+        className: p(
+          sa(),
           // Add divider pseudo-element for non-first items
-          !d && [
+          !c && [
             "before:absolute before:left-0 before:top-[10%] before:bottom-[10%]",
             "before:w-px before:-translate-x-[0.5px]",
             "before:bg-[var(--button-group-item-divider-color)]",
@@ -5752,25 +5806,25 @@ const na = D(
           ],
           o
         ),
-        style: f,
+        style: g,
         children: /* @__PURE__ */ l(
-          me,
+          re,
           {
-            ref: i,
-            variant: s,
-            size: r,
-            className: h(
+            ref: a,
+            variant: r,
+            size: s,
+            className: p(
               // Override border radius based on position
               "!rounded-none",
-              d && "!rounded-l-[var(--button-group-item-radius)]",
-              c && "!rounded-r-[var(--button-group-item-radius)]",
+              c && "!rounded-l-[var(--button-group-item-radius)]",
+              b && "!rounded-r-[var(--button-group-item-radius)]",
               // Remove inner borders for connected appearance
-              !d && "!border-l-0",
-              !c && "!border-r-0",
-              u && "!border-l-0 !border-r-0"
+              !c && "!border-l-0",
+              !b && "!border-r-0",
+              h && "!border-l-0 !border-r-0"
             ),
             style: {
-              "--button-group-item-radius": b
+              "--button-group-item-radius": d
             },
             ...t
           }
@@ -5779,15 +5833,15 @@ const na = D(
     );
   }
 );
-ta.displayName = "ButtonGroupItem";
-const Yo = de({}), ia = D(
+ra.displayName = "ButtonGroupItem";
+const on = be({}), ma = C(
   // Base styles for the outer container
   "flex",
   {
     variants: {},
     defaultVariants: {}
   }
-), aa = D(
+), ca = C(
   // Base styles for the inner card
   [
     "flex",
@@ -5867,63 +5921,63 @@ const Yo = de({}), ia = D(
       disabled: !1
     }
   }
-), la = P(
+), da = R(
   ({
     className: o,
     disabled: e = !1,
     selected: n = !1,
     clickable: t,
-    onClick: i,
-    media: a,
-    title: r,
-    content: s,
+    onClick: a,
+    media: i,
+    title: s,
+    content: r,
     footer: m,
-    children: d,
-    ...c
-  }, u) => {
-    const b = t ?? !!i, p = (j) => {
+    children: c,
+    ...b
+  }, h) => {
+    const d = t ?? !!a, u = (y) => {
       if (e) {
-        j.stopPropagation(), j.preventDefault();
+        y.stopPropagation(), y.preventDefault();
         return;
       }
-      i == null || i(j);
-    }, f = b ? "button" : void 0, g = b ? 0 : void 0, x = !!a, V = !!r, I = !!s || !!d, N = !!m;
-    return /* @__PURE__ */ l(Yo.Provider, { value: { disabled: e, selected: n }, children: /* @__PURE__ */ l(
+      a == null || a(y);
+    }, g = d ? "button" : void 0, v = d ? 0 : void 0, N = !!i, I = !!s, V = !!r || !!c, z = !!m;
+    return /* @__PURE__ */ l(on.Provider, { value: { disabled: e, selected: n }, children: /* @__PURE__ */ l(
       "div",
       {
-        ref: u,
-        className: h(ia(), o),
-        ...c,
-        children: /* @__PURE__ */ A(
+        ref: h,
+        className: p(ma(), o),
+        ...b,
+        children: /* @__PURE__ */ L(
           "div",
           {
-            role: f,
-            tabIndex: g,
-            className: h(
-              aa({ clickable: b, selected: n, disabled: e })
+            role: g,
+            tabIndex: v,
+            className: p(
+              ca({ clickable: d, selected: n, disabled: e })
             ),
-            onClick: b ? p : void 0,
-            onKeyDown: b ? (j) => {
-              (j.key === "Enter" || j.key === " ") && (j.preventDefault(), p(j));
+            onClick: d ? u : void 0,
+            onKeyDown: d ? (y) => {
+              (y.key === "Enter" || y.key === " ") && (y.preventDefault(), u(y));
             } : void 0,
             children: [
-              x && /* @__PURE__ */ l("div", { className: "block overflow-hidden", children: a }),
-              /* @__PURE__ */ A("div", { className: "flex flex-col flex-1 self-stretch gap-2 p-4", children: [
-                V && /* @__PURE__ */ l("div", { className: "flex flex-row items-center gap-2 self-stretch", children: r }),
-                I && /* @__PURE__ */ l("div", { className: "flex gap-[10px] self-stretch", children: /* @__PURE__ */ l(
+              N && /* @__PURE__ */ l("div", { className: "block overflow-hidden", children: i }),
+              /* @__PURE__ */ L("div", { className: "flex flex-col flex-1 self-stretch gap-2 p-4", children: [
+                I && /* @__PURE__ */ l("div", { className: "flex flex-row items-center gap-2 self-stretch", children: s }),
+                V && /* @__PURE__ */ l("div", { className: "flex gap-[10px] self-stretch", children: /* @__PURE__ */ l(
                   "div",
                   {
-                    className: h(
+                    className: p(
                       "max-w-full font-[var(--sinch-comp-card-v2-font-description)]",
                       !e && !n && "text-[var(--sinch-comp-card-v2-color-default-description-initial)]",
                       n && !e && "text-[var(--sinch-comp-card-v2-color-selected-description-initial)]",
                       e && !n && "text-[var(--sinch-comp-card-v2-color-default-description-disabled)]",
                       e && n && "text-[var(--sinch-comp-card-v2-color-selected-description-disabled)]"
                     ),
-                    children: s ?? d
+                    children: r ?? c
                   }
                 ) }),
-                N && /* @__PURE__ */ l("div", { className: "flex flex-row items-center gap-4 self-stretch mt-auto", children: m })
+                z && /* @__PURE__ */ l("div", { className: "flex flex-row items-center gap-4 self-stretch mt-auto", children: m })
               ] })
             ]
           }
@@ -5932,51 +5986,51 @@ const Yo = de({}), ia = D(
     ) });
   }
 );
-la.displayName = "Card";
-const sa = P(
+da.displayName = "Card";
+const ba = R(
   ({
     className: o,
     text: e,
     orientation: n = "horizontal",
     ellipsis: t = !1,
-    icon: i,
-    children: a,
-    ...r
-  }, s) => {
-    const { disabled: m, selected: d } = be(Yo), c = n === "vertical", u = () => m && d ? "var(--sinch-comp-card-v2-color-selected-icon-disabled)" : m ? "var(--sinch-comp-card-v2-color-default-icon-disabled)" : d ? "var(--sinch-comp-card-v2-color-selected-icon-initial)" : "var(--sinch-comp-card-v2-color-default-icon-initial)", b = () => m && d ? "var(--sinch-comp-card-v2-color-selected-title-disabled)" : m ? "var(--sinch-comp-card-v2-color-default-title-disabled)" : "var(--sinch-comp-card-v2-color-default-title-initial)";
-    return /* @__PURE__ */ A(
+    icon: a,
+    children: i,
+    ...s
+  }, r) => {
+    const { disabled: m, selected: c } = ue(on), b = n === "vertical", h = () => m && c ? "var(--sinch-comp-card-v2-color-selected-icon-disabled)" : m ? "var(--sinch-comp-card-v2-color-default-icon-disabled)" : c ? "var(--sinch-comp-card-v2-color-selected-icon-initial)" : "var(--sinch-comp-card-v2-color-default-icon-initial)", d = () => m && c ? "var(--sinch-comp-card-v2-color-selected-title-disabled)" : m ? "var(--sinch-comp-card-v2-color-default-title-disabled)" : "var(--sinch-comp-card-v2-color-default-title-initial)";
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: s,
-        className: h(
+        ref: r,
+        className: p(
           "flex items-center",
-          c ? "flex-col items-start" : "flex-row",
+          b ? "flex-col items-start" : "flex-row",
           o
         ),
-        ...r,
+        ...s,
         children: [
-          i && /* @__PURE__ */ l(
+          a && /* @__PURE__ */ l(
             "div",
             {
-              className: h(
+              className: p(
                 "flex",
-                c ? "mb-2" : "mr-2"
+                b ? "mb-2" : "mr-2"
               ),
               style: {
-                "--sinch-global-color-icon": u(),
+                "--sinch-global-color-icon": h(),
                 "--sinch-global-size-icon": "var(--sinch-comp-card-v2-size-icon)"
               },
-              children: i
+              children: a
             }
           ),
           /* @__PURE__ */ l(
-            Je,
+            no,
             {
               type: "m",
               ellipsis: t,
               className: "max-w-full font-[var(--sinch-comp-card-v2-font-title)]",
-              style: { color: b() },
-              children: e ?? a
+              style: { color: d() },
+              children: e ?? i
             }
           )
         ]
@@ -5984,18 +6038,18 @@ const sa = P(
     );
   }
 );
-sa.displayName = "CardTitle";
-const ra = P(
+ba.displayName = "CardTitle";
+const ua = R(
   ({ className: o, children: e, ...n }, t) => /* @__PURE__ */ l(
     "div",
     {
       ref: t,
-      className: h("block", o),
+      className: p("block", o),
       ...n,
       children: /* @__PURE__ */ l(
         "div",
         {
-          className: h(
+          className: p(
             "h-full",
             "py-5",
             "box-border",
@@ -6010,13 +6064,13 @@ const ra = P(
     }
   )
 );
-ra.displayName = "CardContainer";
-const Ko = de(null), ma = () => {
-  const o = be(Ko);
+ua.displayName = "CardContainer";
+const nn = be(null), ha = () => {
+  const o = ue(nn);
   if (o === null)
     throw new Error("AccordionItem must be used within an Accordion component");
   return o;
-}, ca = D(
+}, pa = C(
   // Base styles
   "flex flex-col box-border w-full h-full",
   {
@@ -6024,61 +6078,61 @@ const Ko = de(null), ma = () => {
     defaultVariants: {}
   }
 );
-function da(o) {
+function ga(o) {
   return o.length === 0 ? /* @__PURE__ */ new Set() : new Set(o.split(",").map((e) => e.trim()).filter((e) => e.length > 0));
 }
-function ba(o) {
+function ka(o) {
   return Array.from(o).join(",");
 }
-const Jo = P(
+const tn = R(
   ({
     className: o,
     value: e,
     defaultValue: n = "",
     multiple: t = !1,
-    onChange: i,
-    children: a,
-    ...r
-  }, s) => {
-    const [m, d] = F(n), c = e !== void 0, b = da(c ? e : m), p = k(
-      (f) => {
-        let g;
-        t ? (g = new Set(b), g.has(f) ? g.delete(f) : g.add(f)) : b.has(f) ? g = /* @__PURE__ */ new Set() : g = /* @__PURE__ */ new Set([f]);
-        const x = ba(g);
-        c || d(x), i == null || i(x);
+    onChange: a,
+    children: i,
+    ...s
+  }, r) => {
+    const [m, c] = U(n), b = e !== void 0, d = ga(b ? e : m), u = f(
+      (g) => {
+        let v;
+        t ? (v = new Set(d), v.has(g) ? v.delete(g) : v.add(g)) : d.has(g) ? v = /* @__PURE__ */ new Set() : v = /* @__PURE__ */ new Set([g]);
+        const N = ka(v);
+        b || c(N), a == null || a(N);
       },
-      [b, c, t, i]
+      [d, b, t, a]
     );
     return /* @__PURE__ */ l(
-      Ko.Provider,
+      nn.Provider,
       {
         value: {
-          expandedItems: b,
+          expandedItems: d,
           multiple: t,
-          toggleItem: p
+          toggleItem: u
         },
         children: /* @__PURE__ */ l(
           "div",
           {
-            ref: s,
-            className: h(ca(), o),
-            ...r,
-            children: a
+            ref: r,
+            className: p(pa(), o),
+            ...s,
+            children: i
           }
         )
       }
     );
   }
 );
-Jo.displayName = "Accordion";
-const ua = D(
+tn.displayName = "Accordion";
+const fa = C(
   // Base styles
   "block outline-none min-h-[48px]",
   {
     variants: {},
     defaultVariants: {}
   }
-), ha = D(
+), ja = C(
   // Wrapper styles
   [
     "flex flex-col relative w-full h-full box-border overflow-hidden",
@@ -6089,7 +6143,7 @@ const ua = D(
     variants: {},
     defaultVariants: {}
   }
-), pa = D(
+), va = C(
   // Button styles
   [
     "flex relative items-center gap-2 box-border w-full h-[48px]",
@@ -6110,7 +6164,7 @@ const ua = D(
       isDisabled: !1
     }
   }
-), ga = D(
+), wa = C(
   // Status indicator styles
   "w-2 h-2 rounded-full",
   {
@@ -6124,7 +6178,7 @@ const ua = D(
     },
     defaultVariants: {}
   }
-), ka = D(
+), xa = C(
   // Focus ring styles
   [
     "absolute inset-0 pointer-events-none",
@@ -6142,62 +6196,62 @@ const ua = D(
       isFocused: !1
     }
   }
-), Xo = P(
+), an = R(
   ({
     className: o,
     value: e,
     label: n,
     optionalText: t,
-    status: i,
-    disabled: a = !1,
-    icon: r,
-    children: s,
+    status: a,
+    disabled: i = !1,
+    icon: s,
+    children: r,
     ...m
-  }, d) => {
-    const c = ma(), [u, b] = F(!1), p = Z(null), f = mo(), g = `accordion-content-${f}`, x = `accordion-button-${f}`, V = c.expandedItems.has(e), I = k(() => {
-      a || c.toggleItem(e);
-    }, [c, a, e]), N = k(
-      (z) => {
-        (z.key === "Enter" || z.key === " ") && (z.preventDefault(), a || c.toggleItem(e));
+  }, c) => {
+    const b = ha(), [h, d] = U(!1), u = Y(null), g = eo(), v = `accordion-content-${g}`, N = `accordion-button-${g}`, I = b.expandedItems.has(e), V = f(() => {
+      i || b.toggleItem(e);
+    }, [b, i, e]), z = f(
+      (T) => {
+        (T.key === "Enter" || T.key === " ") && (T.preventDefault(), i || b.toggleItem(e));
       },
-      [c, a, e]
-    ), j = k(() => {
-      b(!0);
-    }, []), v = k(() => {
-      b(!1);
-    }, []), y = () => a ? "text-[var(--sinch-comp-accordion-color-disabled-icon-initial)]" : "text-[var(--sinch-comp-accordion-color-default-icon-initial)]", w = () => a ? "text-[var(--sinch-comp-accordion-color-disabled-title-initial)]" : "text-[var(--sinch-comp-accordion-color-default-title-initial)]", T = () => a ? "text-[var(--sinch-comp-accordion-color-disabled-optional-text-initial)]" : "text-[var(--sinch-comp-accordion-color-default-optional-text-initial)]";
+      [b, i, e]
+    ), y = f(() => {
+      d(!0);
+    }, []), w = f(() => {
+      d(!1);
+    }, []), j = () => i ? "text-[var(--sinch-comp-accordion-color-disabled-icon-initial)]" : "text-[var(--sinch-comp-accordion-color-default-icon-initial)]", k = () => i ? "text-[var(--sinch-comp-accordion-color-disabled-title-initial)]" : "text-[var(--sinch-comp-accordion-color-default-title-initial)]", M = () => i ? "text-[var(--sinch-comp-accordion-color-disabled-optional-text-initial)]" : "text-[var(--sinch-comp-accordion-color-default-optional-text-initial)]";
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: d,
-        className: h(ua(), o),
+        ref: c,
+        className: p(fa(), o),
         ...m,
-        children: /* @__PURE__ */ A("div", { className: h(ha()), children: [
-          /* @__PURE__ */ A(
+        children: /* @__PURE__ */ L("div", { className: p(ja()), children: [
+          /* @__PURE__ */ L(
             "button",
             {
-              ref: p,
-              id: x,
+              ref: u,
+              id: N,
               type: "button",
-              "aria-controls": g,
-              "aria-expanded": V,
-              disabled: a,
-              className: h(pa({ isDisabled: a })),
-              onClick: I,
-              onKeyDown: N,
-              onFocus: j,
-              onBlur: v,
+              "aria-controls": v,
+              "aria-expanded": I,
+              disabled: i,
+              className: p(va({ isDisabled: i })),
+              onClick: V,
+              onKeyDown: z,
+              onFocus: y,
+              onBlur: w,
               children: [
-                /* @__PURE__ */ l("div", { className: h(ka({ isFocused: u })) }),
-                i !== void 0 && /* @__PURE__ */ l("div", { className: "w-[18px] h-6 py-2 pl-0.5 pr-2 box-border", children: /* @__PURE__ */ l("div", { className: h(ga({ status: i })) }) }),
-                r !== void 0 && /* @__PURE__ */ l("span", { className: h("pointer-events-none", y()), children: r }),
+                /* @__PURE__ */ l("div", { className: p(xa({ isFocused: h })) }),
+                a !== void 0 && /* @__PURE__ */ l("div", { className: "w-[18px] h-6 py-2 pl-0.5 pr-2 box-border", children: /* @__PURE__ */ l("div", { className: p(wa({ status: a })) }) }),
+                s !== void 0 && /* @__PURE__ */ l("span", { className: p("pointer-events-none", j()), children: s }),
                 /* @__PURE__ */ l(
                   "span",
                   {
-                    className: h(
+                    className: p(
                       "flex-1 min-w-0 truncate pointer-events-none",
                       "font-[var(--sinch-comp-accordion-font-title)]",
-                      w()
+                      k()
                     ),
                     children: n
                   }
@@ -6205,10 +6259,10 @@ const ua = D(
                 t !== void 0 && t.length > 0 && /* @__PURE__ */ l(
                   "span",
                   {
-                    className: h(
+                    className: p(
                       "pointer-events-none",
                       "font-[var(--sinch-comp-accordion-font-optional-text)]",
-                      T()
+                      M()
                     ),
                     children: t
                   }
@@ -6216,12 +6270,12 @@ const ua = D(
                 /* @__PURE__ */ l(
                   "span",
                   {
-                    className: h(
+                    className: p(
                       "pointer-events-none transition-transform duration-[250ms] ease-in-out",
-                      y(),
-                      V && "rotate-180"
+                      j(),
+                      I && "rotate-180"
                     ),
-                    children: /* @__PURE__ */ l(ne, { name: "fa-chevron-down" })
+                    children: /* @__PURE__ */ l(oe, { name: "fa-chevron-down", iconsVersion: "2" })
                   }
                 )
               ]
@@ -6230,15 +6284,14 @@ const ua = D(
           /* @__PURE__ */ l(
             "div",
             {
-              id: g,
+              id: v,
               role: "region",
-              "aria-labelledby": x,
-              className: h(
-                "overflow-hidden",
-                "transition-[max-height,opacity] duration-[250ms] ease-in-out",
-                V ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+              "aria-labelledby": N,
+              className: p(
+                "grid transition-[grid-template-rows,opacity] duration-[250ms] ease-in-out",
+                I ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
               ),
-              children: /* @__PURE__ */ l("div", { className: "px-2 pb-3", children: s })
+              children: /* @__PURE__ */ l("div", { className: "overflow-hidden", children: /* @__PURE__ */ l("div", { className: "px-2 pb-3", children: r }) })
             }
           )
         ] })
@@ -6246,116 +6299,116 @@ const ua = D(
     );
   }
 );
-Xo.displayName = "AccordionItem";
-const br = Object.assign(Jo, {
-  Item: Xo
-}), Qo = de(null), fa = () => {
-  const o = be(Qo);
+an.displayName = "AccordionItem";
+const gr = Object.assign(tn, {
+  Item: an
+}), ln = be(null), ya = () => {
+  const o = ue(ln);
   if (o === null)
     throw new Error("ProgressStepperItem must be used within a ProgressStepper component");
   return o;
-}, ja = D(
+}, Na = C(
   // Base styles
   "block",
   {
     variants: {},
     defaultVariants: {}
   }
-), va = D(
+), Va = C(
   "flex w-full",
   {
     variants: {},
     defaultVariants: {}
   }
-), en = P(
+), sn = R(
   ({
     className: o,
     value: e,
     defaultValue: n = "",
     progressValue: t = "",
-    "aria-label": i,
-    onChange: a,
-    children: r,
-    ...s
+    "aria-label": a,
+    onChange: i,
+    children: s,
+    ...r
   }, m) => {
-    const [d, c] = F(n), u = Z(/* @__PURE__ */ new Map()), b = e !== void 0, p = b ? e : d, f = J(() => {
-      const w = [];
-      return He.forEach(r, (T) => {
-        if (Ke(T) && typeof T.props == "object" && T.props !== null) {
-          const z = T.props;
-          typeof z.value == "string" && w.push(z.value);
+    const [c, b] = U(n), h = Y(/* @__PURE__ */ new Map()), d = e !== void 0, u = d ? e : c, g = J(() => {
+      const k = [];
+      return Ze.forEach(s, (M) => {
+        if (oo(M) && typeof M.props == "object" && M.props !== null) {
+          const T = M.props;
+          typeof T.value == "string" && k.push(T.value);
         }
-      }), w;
-    }, [r]), g = k(
-      (w) => {
-        b || c(w), a == null || a(w);
+      }), k;
+    }, [s]), v = f(
+      (k) => {
+        d || b(k), i == null || i(k);
       },
-      [b, a]
-    ), x = k(
-      (w, T) => {
-        u.current.set(w, T);
+      [d, i]
+    ), N = f(
+      (k, M) => {
+        h.current.set(k, M);
       },
       []
-    ), V = k((w) => {
-      u.current.delete(w);
-    }, []), I = k((w) => {
-      const T = f.indexOf(t), z = f.indexOf(w);
-      return T < 0 || T < z ? "inactive" : T > z ? "complete" : "incomplete";
-    }, [f, t]), N = k((w) => I(w) !== "inactive", [I]), j = k(() => f.filter((w) => N(w)).map((w) => ({
-      value: w,
-      element: u.current.get(w)
-    })).filter((w) => w.element !== void 0), [f, N]), v = k(() => {
-      const w = j();
-      if (w.length === 0)
+    ), I = f((k) => {
+      h.current.delete(k);
+    }, []), V = f((k) => {
+      const M = g.indexOf(t), T = g.indexOf(k);
+      return M < 0 || M < T ? "inactive" : M > T ? "complete" : "incomplete";
+    }, [g, t]), z = f((k) => V(k) !== "inactive", [V]), y = f(() => g.filter((k) => z(k)).map((k) => ({
+      value: k,
+      element: h.current.get(k)
+    })).filter((k) => k.element !== void 0), [g, z]), w = f(() => {
+      const k = y();
+      if (k.length === 0)
         return;
-      const T = w.findIndex(($) => $.value === p), z = T < 0 ? 0 : (T + 1) % w.length;
-      w[z].element.focus();
-    }, [p, j]), y = k(() => {
-      const w = j();
-      if (w.length === 0)
+      const M = k.findIndex((B) => B.value === u), T = M < 0 ? 0 : (M + 1) % k.length;
+      k[T].element.focus();
+    }, [u, y]), j = f(() => {
+      const k = y();
+      if (k.length === 0)
         return;
-      const T = w.findIndex(($) => $.value === p), z = T < 0 ? w.length - 1 : (T - 1 + w.length) % w.length;
-      w[z].element.focus();
-    }, [p, j]);
+      const M = k.findIndex((B) => B.value === u), T = M < 0 ? k.length - 1 : (M - 1 + k.length) % k.length;
+      k[T].element.focus();
+    }, [u, y]);
     return /* @__PURE__ */ l(
-      Qo.Provider,
+      ln.Provider,
       {
         value: {
-          value: p,
+          value: u,
           progressValue: t,
-          itemValues: f,
-          onChange: g,
-          registerItem: x,
-          unregisterItem: V,
-          focusNextItem: v,
-          focusPrevItem: y
+          itemValues: g,
+          onChange: v,
+          registerItem: N,
+          unregisterItem: I,
+          focusNextItem: w,
+          focusPrevItem: j
         },
         children: /* @__PURE__ */ l(
           "div",
           {
             ref: m,
             role: "tablist",
-            "aria-label": i,
-            "data-value": p,
+            "aria-label": a,
+            "data-value": u,
             "data-progress-value": t,
-            className: h(ja(), o),
-            ...s,
-            children: /* @__PURE__ */ l("div", { className: va(), children: r })
+            className: p(Na(), o),
+            ...r,
+            children: /* @__PURE__ */ l("div", { className: Va(), children: s })
           }
         )
       }
     );
   }
 );
-en.displayName = "ProgressStepper";
-const wa = D(
+sn.displayName = "ProgressStepper";
+const za = C(
   // Base styles
   "flex-1 min-w-0 outline-none",
   {
     variants: {},
     defaultVariants: {}
   }
-), xa = D(
+), Ia = C(
   // Base styles
   [
     "relative flex flex-col gap-1 w-full h-full",
@@ -6380,7 +6433,7 @@ const wa = D(
       invalid: !1
     }
   }
-), ya = D(
+), Ca = C(
   [
     "absolute inset-[-2px] pointer-events-none",
     "border-2 border-[var(--sinch-comp-progress-stepper-step-color-outline-focus)]",
@@ -6398,7 +6451,7 @@ const wa = D(
       isFocused: !1
     }
   }
-), Na = D(
+), Ma = C(
   "h-2 rounded transition-colors",
   {
     variants: {
@@ -6417,7 +6470,7 @@ const wa = D(
       invalid: !1
     }
   }
-), Ca = D(
+), Da = C(
   "w-2 h-2 rounded transition-[width,opacity]",
   {
     variants: {
@@ -6436,75 +6489,75 @@ const wa = D(
       invalid: !1
     }
   }
-), Va = (o, e, n) => n ? "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-invalid-label-default)]" : o === "incomplete" && e ? "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-incomplete-current-label-default)]" : o === "complete" && e ? "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-complete-current-label-default)]" : o === "incomplete" ? "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-incomplete-label-default)]" : o === "complete" ? "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-complete-label-default)]" : "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-inactive-label-default)]", Ia = (o, e, n) => n && e ? "[font:var(--sinch-comp-progress-stepper-step-font-invalid-current-label)]" : n ? "[font:var(--sinch-comp-progress-stepper-step-font-invalid-label)]" : o === "incomplete" && e ? "[font:var(--sinch-comp-progress-stepper-step-font-incomplete-current-label)]" : o === "complete" && e ? "[font:var(--sinch-comp-progress-stepper-step-font-complete-current-label)]" : o === "incomplete" ? "[font:var(--sinch-comp-progress-stepper-step-font-incomplete-label)]" : o === "complete" ? "[font:var(--sinch-comp-progress-stepper-step-font-complete-label)]" : "[font:var(--sinch-comp-progress-stepper-step-font-inactive-label)]", za = (o, e, n) => {
-  const t = n.indexOf(e), i = n.indexOf(o);
-  return t < 0 || t < i ? "inactive" : t > i ? "complete" : "incomplete";
-}, on = P(
+), Ta = (o, e, n) => n ? "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-invalid-label-default)]" : o === "incomplete" && e ? "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-incomplete-current-label-default)]" : o === "complete" && e ? "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-complete-current-label-default)]" : o === "incomplete" ? "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-incomplete-label-default)]" : o === "complete" ? "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-complete-label-default)]" : "[--sinch-global-color-text:var(--sinch-comp-progress-stepper-step-color-inactive-label-default)]", Sa = (o, e, n) => n && e ? "[font:var(--sinch-comp-progress-stepper-step-font-invalid-current-label)]" : n ? "[font:var(--sinch-comp-progress-stepper-step-font-invalid-label)]" : o === "incomplete" && e ? "[font:var(--sinch-comp-progress-stepper-step-font-incomplete-current-label)]" : o === "complete" && e ? "[font:var(--sinch-comp-progress-stepper-step-font-complete-current-label)]" : o === "incomplete" ? "[font:var(--sinch-comp-progress-stepper-step-font-incomplete-label)]" : o === "complete" ? "[font:var(--sinch-comp-progress-stepper-step-font-complete-label)]" : "[font:var(--sinch-comp-progress-stepper-step-font-inactive-label)]", Ea = (o, e, n) => {
+  const t = n.indexOf(e), a = n.indexOf(o);
+  return t < 0 || t < a ? "inactive" : t > a ? "complete" : "incomplete";
+}, rn = R(
   ({
     className: o,
     value: e,
     text: n,
     invalid: t = !1,
-    onKeyDown: i,
-    ...a
-  }, r) => {
-    const s = fa(), [m, d] = F(!1), c = Z(null), u = s.value === e, b = za(e, s.progressValue, s.itemValues), p = b !== "inactive", f = k(
-      (N) => {
-        c.current = N, N !== null ? s.registerItem(e, N) : s.unregisterItem(e), r !== null && (typeof r == "function" ? r(N) : r.current = N);
+    onKeyDown: a,
+    ...i
+  }, s) => {
+    const r = ya(), [m, c] = U(!1), b = Y(null), h = r.value === e, d = Ea(e, r.progressValue, r.itemValues), u = d !== "inactive", g = f(
+      (z) => {
+        b.current = z, z !== null ? r.registerItem(e, z) : r.unregisterItem(e), s !== null && (typeof s == "function" ? s(z) : s.current = z);
       },
-      [s, r, e]
-    ), g = k(() => {
-      p && s.onChange(e);
-    }, [s, p, e]), x = k(
-      (N) => {
-        switch (N.code) {
+      [r, s, e]
+    ), v = f(() => {
+      u && r.onChange(e);
+    }, [r, u, e]), N = f(
+      (z) => {
+        switch (z.code) {
           case "Enter":
           case "Space":
-            N.preventDefault(), p && s.onChange(e);
+            z.preventDefault(), u && r.onChange(e);
             break;
           case "ArrowRight":
-            N.preventDefault(), s.focusNextItem();
+            z.preventDefault(), r.focusNextItem();
             break;
           case "ArrowLeft":
-            N.preventDefault(), s.focusPrevItem();
+            z.preventDefault(), r.focusPrevItem();
             break;
         }
-        i == null || i(N);
+        a == null || a(z);
       },
-      [s, p, i, e]
-    ), V = k(() => {
-      d(!0);
-    }, []), I = k(() => {
-      d(!1);
+      [r, u, a, e]
+    ), I = f(() => {
+      c(!0);
+    }, []), V = f(() => {
+      c(!1);
     }, []);
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: f,
+        ref: g,
         role: "tab",
-        "aria-selected": u,
+        "aria-selected": h,
         "aria-invalid": t || void 0,
-        tabIndex: p ? 0 : -1,
-        "data-status": b,
-        "data-checked": u || void 0,
+        tabIndex: u ? 0 : -1,
+        "data-status": d,
+        "data-checked": h || void 0,
         "data-value": e,
-        className: h(wa(), o),
-        onClick: g,
-        onKeyDown: x,
-        onFocus: V,
-        onBlur: I,
-        ...a,
-        children: /* @__PURE__ */ A("div", { className: h(xa({ status: b, invalid: t })), children: [
-          /* @__PURE__ */ l("div", { className: h(Na({ status: b, invalid: t })), children: /* @__PURE__ */ l("div", { className: h(Ca({ status: b, invalid: t })) }) }),
-          /* @__PURE__ */ A("div", { className: "relative", children: [
+        className: p(za(), o),
+        onClick: v,
+        onKeyDown: N,
+        onFocus: I,
+        onBlur: V,
+        ...i,
+        children: /* @__PURE__ */ L("div", { className: p(Ia({ status: d, invalid: t })), children: [
+          /* @__PURE__ */ l("div", { className: p(Ma({ status: d, invalid: t })), children: /* @__PURE__ */ l("div", { className: p(Da({ status: d, invalid: t })) }) }),
+          /* @__PURE__ */ L("div", { className: "relative", children: [
             /* @__PURE__ */ l(
-              ne,
+              oe,
               {
                 name: "triangle-exclamation",
                 iconsVersion: "2",
                 size: "xs",
                 "aria-hidden": !0,
-                className: h(
+                className: p(
                   "absolute left-0 top-0 pointer-events-none transition-opacity",
                   "[--sinch-global-color-icon:var(--sinch-comp-progress-stepper-step-color-invalid-icon-default)]",
                   t ? "opacity-100" : "opacity-0"
@@ -6514,27 +6567,27 @@ const wa = D(
             /* @__PURE__ */ l(
               "span",
               {
-                className: h(
+                className: p(
                   "flex-shrink min-w-0 transition-transform pr-6",
                   "text-[color:var(--sinch-global-color-text)]",
-                  Va(b, u, t),
-                  Ia(b, u, t),
+                  Ta(d, h, t),
+                  Sa(d, h, t),
                   t ? "translate-x-6" : "translate-x-0"
                 ),
                 children: n
               }
             )
           ] }),
-          /* @__PURE__ */ l("div", { className: h(ya({ isFocused: m })) })
+          /* @__PURE__ */ l("div", { className: p(Ca({ isFocused: m })) })
         ] })
       }
     );
   }
 );
-on.displayName = "ProgressStepperItem";
-const ur = Object.assign(en, {
-  Item: on
-}), Da = D(
+rn.displayName = "ProgressStepperItem";
+const kr = Object.assign(sn, {
+  Item: rn
+}), Aa = C(
   // Base styles matching template.html #wrapper styles
   [
     "flex",
@@ -6561,109 +6614,109 @@ const ur = Object.assign(en, {
       type: "pending"
     }
   }
-), Ta = {
+), Oa = {
   pending: "var(--sinch-comp-file-status-color-pending-icon)",
   loading: "var(--sinch-comp-file-status-color-loading-icon)",
   progress: "var(--sinch-comp-file-status-color-progress-icon)",
   success: "var(--sinch-comp-file-status-color-success-icon)",
   error: "var(--sinch-comp-file-status-color-error-icon)"
-}, Ma = {
+}, La = {
   pending: "var(--sinch-comp-file-status-color-pending-text)",
   loading: "var(--sinch-comp-file-status-color-loading-text)",
   progress: "var(--sinch-comp-file-status-color-progress-text)",
   success: "var(--sinch-comp-file-status-color-success-text)",
   error: "var(--sinch-comp-file-status-color-error-text)"
-}, Sa = {
+}, Pa = {
   pending: "fa-clipboard-question",
   loading: null,
   // Uses Spinner instead
   progress: "fa-file-lines",
   success: "circle-check",
   error: "octagon-exclamation"
-}, Oa = P(
-  ({ className: o, type: e = "pending", filename: n, content: t, action: i, ...a }, r) => {
-    const s = Ta[e], m = Ma[e], d = Sa[e], c = t != null;
-    return /* @__PURE__ */ A(
+}, Ra = R(
+  ({ className: o, type: e = "pending", filename: n, content: t, action: a, ...i }, s) => {
+    const r = Oa[e], m = La[e], c = Pa[e], b = t != null;
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: r,
-        className: h(Da({ type: e }), o),
-        ...a,
+        ref: s,
+        className: p(Aa({ type: e }), o),
+        ...i,
         children: [
-          e === "loading" ? /* @__PURE__ */ l(bo, { size: "m", style: { color: s } }) : /* @__PURE__ */ l(
-            ne,
+          e === "loading" ? /* @__PURE__ */ l(go, { size: "m", style: { color: r } }) : /* @__PURE__ */ l(
+            oe,
             {
-              name: d,
+              name: c,
               iconsVersion: "2",
               size: "md",
-              style: { color: s }
+              style: { color: r }
             }
           ),
-          /* @__PURE__ */ A("div", { className: "flex flex-col gap-2 flex-1 min-w-0 min-h-[24px] ml-4", children: [
+          /* @__PURE__ */ L("div", { className: "flex flex-col gap-2 flex-1 min-w-0 min-h-[24px] ml-4", children: [
             /* @__PURE__ */ l(
-              Je,
+              no,
               {
                 type: "m",
                 ellipsis: !0,
-                emphasized: c,
+                emphasized: b,
                 style: { color: m },
                 children: n
               }
             ),
             t
           ] }),
-          i && /* @__PURE__ */ l("div", { className: "flex gap-1 h-8 -mt-1 -mb-1", children: i })
+          a && /* @__PURE__ */ l("div", { className: "flex gap-1 h-8 -mt-1 -mb-1", children: a })
         ]
       }
     );
   }
 );
-Oa.displayName = "FileStatus";
-const Ea = P(
-  ({ events: o, className: e, children: n, ...t }, i) => {
-    const a = Z(null), r = k(
-      (s) => {
-        a.current = s, typeof i == "function" ? i(s) : i !== null && (i.current = s);
+Ra.displayName = "FileStatus";
+const Fa = R(
+  ({ events: o, className: e, children: n, ...t }, a) => {
+    const i = Y(null), s = f(
+      (r) => {
+        i.current = r, typeof a == "function" ? a(r) : a !== null && (a.current = r);
       },
-      [i]
+      [a]
     );
     return X(() => {
-      const s = a.current;
-      if (s === null) return;
-      const m = (d) => {
-        d.stopPropagation();
+      const r = i.current;
+      if (r === null) return;
+      const m = (c) => {
+        c.stopPropagation();
       };
-      for (const d of o)
-        s.addEventListener(d, m);
+      for (const c of o)
+        r.addEventListener(c, m);
       return () => {
-        for (const d of o)
-          s.removeEventListener(d, m);
+        for (const c of o)
+          r.removeEventListener(c, m);
       };
     }, [o]), /* @__PURE__ */ l(
       "div",
       {
-        ref: r,
-        className: h("contents", e),
+        ref: s,
+        className: p("contents", e),
         ...t,
         children: n
       }
     );
   }
 );
-Ea.displayName = "StopEvents";
-const nn = de(null), tn = () => {
-  const o = be(nn);
+Fa.displayName = "StopEvents";
+const mn = be(null), cn = () => {
+  const o = ue(mn);
   if (o === null)
     throw new Error("TabsOption must be used within a Tabs component");
   return o;
-}, Aa = D(
+}, $a = C(
   // Base styles
   "block",
   {
     variants: {},
     defaultVariants: {}
   }
-), La = D(
+), _a = C(
   // Wrapper styles
   [
     "flex",
@@ -6677,72 +6730,72 @@ const nn = de(null), tn = () => {
     variants: {},
     defaultVariants: {}
   }
-), po = P(
+), jo = R(
   ({
     className: o,
     value: e,
     defaultValue: n = "",
     "aria-label": t,
-    onChange: i,
-    children: a,
-    ...r
-  }, s) => {
-    const [m, d] = F(n), c = Z(/* @__PURE__ */ new Map()), u = Z([]), b = e !== void 0, p = b ? e : m, f = k(
-      (j) => {
-        b || d(j), i == null || i(j);
+    onChange: a,
+    children: i,
+    ...s
+  }, r) => {
+    const [m, c] = U(n), b = Y(/* @__PURE__ */ new Map()), h = Y([]), d = e !== void 0, u = d ? e : m, g = f(
+      (y) => {
+        d || c(y), a == null || a(y);
       },
-      [b, i]
-    ), g = k(
-      (j, v) => {
-        c.current.has(j) || u.current.push(j), c.current.set(j, v);
+      [d, a]
+    ), v = f(
+      (y, w) => {
+        b.current.has(y) || h.current.push(y), b.current.set(y, w);
       },
       []
-    ), x = k((j) => {
-      c.current.delete(j), u.current = u.current.filter((v) => v !== j);
-    }, []), V = k(() => u.current.map((j) => ({ value: j, element: c.current.get(j) })).filter(
-      (j) => j.element !== void 0 && !j.element.disabled
-    ), []), I = k(() => {
-      const j = V();
-      if (j.length === 0)
+    ), N = f((y) => {
+      b.current.delete(y), h.current = h.current.filter((w) => w !== y);
+    }, []), I = f(() => h.current.map((y) => ({ value: y, element: b.current.get(y) })).filter(
+      (y) => y.element !== void 0 && !y.element.disabled
+    ), []), V = f(() => {
+      const y = I();
+      if (y.length === 0)
         return;
-      const v = j.findIndex((T) => T.value === p), y = v < 0 ? 0 : (v + 1) % j.length, w = j[y];
-      w.element.focus(), f(w.value);
-    }, [p, V, f]), N = k(() => {
-      const j = V();
-      if (j.length === 0)
+      const w = y.findIndex((M) => M.value === u), j = w < 0 ? 0 : (w + 1) % y.length, k = y[j];
+      k.element.focus(), g(k.value);
+    }, [u, I, g]), z = f(() => {
+      const y = I();
+      if (y.length === 0)
         return;
-      const v = j.findIndex((T) => T.value === p), y = v < 0 ? j.length - 1 : (v - 1 + j.length) % j.length, w = j[y];
-      w.element.focus(), f(w.value);
-    }, [p, V, f]);
+      const w = y.findIndex((M) => M.value === u), j = w < 0 ? y.length - 1 : (w - 1 + y.length) % y.length, k = y[j];
+      k.element.focus(), g(k.value);
+    }, [u, I, g]);
     return /* @__PURE__ */ l(
-      nn.Provider,
+      mn.Provider,
       {
         value: {
-          value: p,
-          onChange: f,
-          registerOption: g,
-          unregisterOption: x,
-          focusNextOption: I,
-          focusPrevOption: N
+          value: u,
+          onChange: g,
+          registerOption: v,
+          unregisterOption: N,
+          focusNextOption: V,
+          focusPrevOption: z
         },
         children: /* @__PURE__ */ l(
           "div",
           {
-            ref: s,
+            ref: r,
             role: "tablist",
             "aria-label": t,
-            "data-value": p,
-            className: h(Aa(), o),
-            ...r,
-            children: /* @__PURE__ */ l("div", { className: h(La()), children: a })
+            "data-value": u,
+            className: p($a(), o),
+            ...s,
+            children: /* @__PURE__ */ l("div", { className: p(_a()), children: i })
           }
         )
       }
     );
   }
 );
-po.displayName = "Tabs";
-const Pa = D(
+jo.displayName = "Tabs";
+const Ua = C(
   // Base styles for the button
   [
     "relative",
@@ -6789,56 +6842,56 @@ const Pa = D(
       isDisabled: !1
     }
   }
-), an = P(
+), dn = R(
   ({
     className: o,
     value: e,
     text: n,
     disabled: t = !1,
-    icon: i,
-    onKeyDown: a,
-    ...r
-  }, s) => {
-    const m = tn(), d = Z(null), c = m.value === e, u = k(
-      (x) => {
-        d.current = x, x !== null ? m.registerOption(e, x) : m.unregisterOption(e), s !== null && (typeof s == "function" ? s(x) : s.current = x);
+    icon: a,
+    onKeyDown: i,
+    ...s
+  }, r) => {
+    const m = cn(), c = Y(null), b = m.value === e, h = f(
+      (N) => {
+        c.current = N, N !== null ? m.registerOption(e, N) : m.unregisterOption(e), r !== null && (typeof r == "function" ? r(N) : r.current = N);
       },
-      [m, s, e]
-    ), b = k(() => {
+      [m, r, e]
+    ), d = f(() => {
       t || m.onChange(e);
-    }, [m, t, e]), p = k(
-      (x) => {
-        switch (x.code) {
+    }, [m, t, e]), u = f(
+      (N) => {
+        switch (N.code) {
           case "ArrowLeft":
-            x.preventDefault(), m.focusPrevOption();
+            N.preventDefault(), m.focusPrevOption();
             break;
           case "ArrowRight":
-            x.preventDefault(), m.focusNextOption();
+            N.preventDefault(), m.focusNextOption();
             break;
           case "Home":
-            x.preventDefault(), m.focusPrevOption();
+            N.preventDefault(), m.focusPrevOption();
             break;
           case "End":
-            x.preventDefault(), m.focusNextOption();
+            N.preventDefault(), m.focusNextOption();
             break;
         }
-        a == null || a(x);
+        i == null || i(N);
       },
-      [m, a]
-    ), f = () => t ? "[--sinch-global-color-icon:var(--sinch-comp-tab-color-disabled-icon-initial)]" : c ? "[--sinch-global-color-icon:var(--sinch-comp-tab-color-checked-icon-initial)]" : "[--sinch-global-color-icon:var(--sinch-comp-tab-color-default-icon-initial)]", g = () => t ? "" : "hover:bg-[var(--sinch-comp-tab-color-default-background-hover)]";
-    return /* @__PURE__ */ A(
+      [m, i]
+    ), g = () => t ? "[--sinch-global-color-icon:var(--sinch-comp-tab-color-disabled-icon-initial)]" : b ? "[--sinch-global-color-icon:var(--sinch-comp-tab-color-checked-icon-initial)]" : "[--sinch-global-color-icon:var(--sinch-comp-tab-color-default-icon-initial)]", v = () => t ? "" : "hover:bg-[var(--sinch-comp-tab-color-default-background-hover)]";
+    return /* @__PURE__ */ L(
       "button",
       {
-        ref: u,
+        ref: h,
         type: "button",
         role: "tab",
-        "aria-selected": c,
+        "aria-selected": b,
         disabled: t,
         tabIndex: t ? -1 : 0,
-        className: h(
-          Pa({ isChecked: c, isDisabled: t }),
+        className: p(
+          Ua({ isChecked: b, isDisabled: t }),
+          v(),
           g(),
-          f(),
           // Focus outline - positioned with pseudo-element
           'focus-visible:after:content-[""]',
           "focus-visible:after:absolute",
@@ -6850,7 +6903,7 @@ const Pa = D(
           "focus-visible:after:rounded-tr-[var(--sinch-comp-tab-shape-radius)]",
           "focus-visible:after:pointer-events-none",
           // Checked underline - positioned with pseudo-element
-          c && [
+          b && [
             'before:content-[""]',
             "before:absolute",
             "before:left-0",
@@ -6862,15 +6915,15 @@ const Pa = D(
           ],
           o
         ),
-        onClick: b,
-        onKeyDown: p,
-        ...r,
+        onClick: d,
+        onKeyDown: u,
+        ...s,
         children: [
-          i !== void 0 && /* @__PURE__ */ l("span", { className: "flex-shrink-0", children: i }),
+          a !== void 0 && /* @__PURE__ */ l("span", { className: "flex-shrink-0", children: a }),
           /* @__PURE__ */ l(
             "span",
             {
-              className: h(
+              className: p(
                 "flex-shrink-1",
                 "flex-basis-auto",
                 "min-w-0",
@@ -6885,8 +6938,8 @@ const Pa = D(
     );
   }
 );
-an.displayName = "TabsOption";
-const Ra = D(
+dn.displayName = "TabsOption";
+const Ha = C(
   // Base styles for the icon-only button
   [
     "relative",
@@ -6929,56 +6982,56 @@ const Ra = D(
       isDisabled: !1
     }
   }
-), go = P(
+), vo = R(
   ({
     className: o,
     value: e,
     "aria-label": n,
     disabled: t = !1,
-    icon: i,
-    onKeyDown: a,
-    ...r
-  }, s) => {
-    const m = tn(), d = Z(null), c = m.value === e, u = k(
-      (V) => {
-        d.current = V, V !== null ? m.registerOption(e, V) : m.unregisterOption(e), s !== null && (typeof s == "function" ? s(V) : s.current = V);
+    icon: a,
+    onKeyDown: i,
+    ...s
+  }, r) => {
+    const m = cn(), c = Y(null), b = m.value === e, h = f(
+      (I) => {
+        c.current = I, I !== null ? m.registerOption(e, I) : m.unregisterOption(e), r !== null && (typeof r == "function" ? r(I) : r.current = I);
       },
-      [m, s, e]
-    ), b = k(() => {
+      [m, r, e]
+    ), d = f(() => {
       t || m.onChange(e);
-    }, [m, t, e]), p = k(
-      (V) => {
-        switch (V.code) {
+    }, [m, t, e]), u = f(
+      (I) => {
+        switch (I.code) {
           case "ArrowLeft":
-            V.preventDefault(), m.focusPrevOption();
+            I.preventDefault(), m.focusPrevOption();
             break;
           case "ArrowRight":
-            V.preventDefault(), m.focusNextOption();
+            I.preventDefault(), m.focusNextOption();
             break;
           case "Home":
-            V.preventDefault(), m.focusPrevOption();
+            I.preventDefault(), m.focusPrevOption();
             break;
           case "End":
-            V.preventDefault(), m.focusNextOption();
+            I.preventDefault(), m.focusNextOption();
             break;
         }
-        a == null || a(V);
+        i == null || i(I);
       },
-      [m, a]
-    ), f = () => t ? "[--sinch-global-color-icon:var(--sinch-comp-tab-color-disabled-icon-initial)]" : c ? "[--sinch-global-color-icon:var(--sinch-comp-tab-color-checked-icon-initial)]" : "[--sinch-global-color-icon:var(--sinch-comp-tab-color-default-icon-initial)]", g = () => t ? "" : "hover:bg-[var(--sinch-comp-tab-color-default-background-hover)]", x = /* @__PURE__ */ l(
+      [m, i]
+    ), g = () => t ? "[--sinch-global-color-icon:var(--sinch-comp-tab-color-disabled-icon-initial)]" : b ? "[--sinch-global-color-icon:var(--sinch-comp-tab-color-checked-icon-initial)]" : "[--sinch-global-color-icon:var(--sinch-comp-tab-color-default-icon-initial)]", v = () => t ? "" : "hover:bg-[var(--sinch-comp-tab-color-default-background-hover)]", N = /* @__PURE__ */ l(
       "button",
       {
-        ref: u,
+        ref: h,
         type: "button",
         role: "tab",
-        "aria-selected": c,
+        "aria-selected": b,
         "aria-label": n,
         disabled: t,
         tabIndex: t ? -1 : 0,
-        className: h(
-          Ra({ isChecked: c, isDisabled: t }),
+        className: p(
+          Ha({ isChecked: b, isDisabled: t }),
+          v(),
           g(),
-          f(),
           // Icon size
           "[--sinch-global-size-icon:var(--sinch-comp-tab-size-icon)]",
           // Focus outline - positioned with pseudo-element
@@ -6992,7 +7045,7 @@ const Ra = D(
           "focus-visible:after:rounded-tr-[var(--sinch-comp-tab-shape-radius)]",
           "focus-visible:after:pointer-events-none",
           // Checked underline - positioned with pseudo-element
-          c && [
+          b && [
             'before:content-[""]',
             "before:absolute",
             "before:left-0",
@@ -7004,96 +7057,96 @@ const Ra = D(
           ],
           o
         ),
-        onClick: b,
-        onKeyDown: p,
-        ...r,
-        children: i
+        onClick: d,
+        onKeyDown: u,
+        ...s,
+        children: a
       }
     );
-    return /* @__PURE__ */ l(Xe, { text: n, orientation: "top", type: "fast", children: x });
+    return /* @__PURE__ */ l(to, { text: n, orientation: "top", type: "fast", children: N });
   }
 );
-go.displayName = "TabsIconOption";
-const hr = Object.assign(po, {
-  Option: an,
-  IconOption: go
-}), ln = de(null), $a = () => {
-  const o = be(ln);
+vo.displayName = "TabsIconOption";
+const fr = Object.assign(jo, {
+  Option: dn,
+  IconOption: vo
+}), bn = be(null), Ba = () => {
+  const o = ue(bn);
   if (o === null)
     throw new Error("SegmentedControlOption must be used within a SegmentedControl component");
   return o;
-}, Fa = D(
+}, Ga = C(
   // Base styles
   "flex flex-row w-full box-border relative z-0 outline-none",
   {
     variants: {},
     defaultVariants: {}
   }
-), ko = P(
+), wo = R(
   ({
     className: o,
     value: e,
     defaultValue: n = "",
     "aria-label": t,
-    onChange: i,
-    children: a,
-    ...r
-  }, s) => {
-    const [m, d] = F(n), c = Z(/* @__PURE__ */ new Map()), u = e !== void 0, b = u ? e : m, p = k(
-      (N) => {
-        u || d(N), i == null || i(N);
+    onChange: a,
+    children: i,
+    ...s
+  }, r) => {
+    const [m, c] = U(n), b = Y(/* @__PURE__ */ new Map()), h = e !== void 0, d = h ? e : m, u = f(
+      (z) => {
+        h || c(z), a == null || a(z);
       },
-      [u, i]
-    ), f = k(
-      (N, j) => {
-        c.current.set(N, j);
+      [h, a]
+    ), g = f(
+      (z, y) => {
+        b.current.set(z, y);
       },
       []
-    ), g = k((N) => {
-      c.current.delete(N);
-    }, []), x = k(() => Array.from(c.current.entries()).filter(([, N]) => N.getAttribute("aria-disabled") !== "true").map(([N, j]) => ({ value: N, element: j })), []), V = k(() => {
-      const N = x();
-      if (N.length === 0)
+    ), v = f((z) => {
+      b.current.delete(z);
+    }, []), N = f(() => Array.from(b.current.entries()).filter(([, z]) => z.getAttribute("aria-disabled") !== "true").map(([z, y]) => ({ value: z, element: y })), []), I = f(() => {
+      const z = N();
+      if (z.length === 0)
         return;
-      const j = N.findIndex((w) => w.value === b), v = j < 0 ? 0 : (j + 1) % N.length;
-      N[v].element.focus();
-    }, [b, x]), I = k(() => {
-      const N = x();
-      if (N.length === 0)
+      const y = z.findIndex((k) => k.value === d), w = y < 0 ? 0 : (y + 1) % z.length;
+      z[w].element.focus();
+    }, [d, N]), V = f(() => {
+      const z = N();
+      if (z.length === 0)
         return;
-      const j = N.findIndex((w) => w.value === b), v = j < 0 ? N.length - 1 : (j - 1 + N.length) % N.length;
-      N[v].element.focus();
-    }, [b, x]);
+      const y = z.findIndex((k) => k.value === d), w = y < 0 ? z.length - 1 : (y - 1 + z.length) % z.length;
+      z[w].element.focus();
+    }, [d, N]);
     return /* @__PURE__ */ l(
-      ln.Provider,
+      bn.Provider,
       {
         value: {
-          value: b,
-          onChange: p,
-          registerOption: f,
-          unregisterOption: g,
-          focusNextOption: V,
-          focusPrevOption: I
+          value: d,
+          onChange: u,
+          registerOption: g,
+          unregisterOption: v,
+          focusNextOption: I,
+          focusPrevOption: V
         },
         children: /* @__PURE__ */ l(
           "div",
           {
-            ref: s,
+            ref: r,
             role: "tablist",
             "aria-label": t,
             "aria-orientation": "horizontal",
-            "data-value": b,
-            className: h(Fa(), o),
-            ...r,
-            children: a
+            "data-value": d,
+            className: p(Ga(), o),
+            ...s,
+            children: i
           }
         )
       }
     );
   }
 );
-ko.displayName = "SegmentedControl";
-const _a = D(
+wo.displayName = "SegmentedControl";
+const Wa = C(
   // Base styles
   [
     "relative flex flex-row items-center gap-3",
@@ -7145,7 +7198,7 @@ const _a = D(
       isLast: !1
     }
   }
-), Ua = D(
+), Za = C(
   // Base border styles
   [
     "absolute inset-0 pointer-events-none box-border",
@@ -7189,15 +7242,16 @@ const _a = D(
       isLast: !1
     }
   }
-), Ha = D(
+), qa = C(
   // Focus ring styles
   [
     "absolute pointer-events-none box-border",
     "border-2 border-[var(--sinch-comp-segmented-control-color-default-outline-focus)]",
     "transition-opacity duration-100 opacity-0",
     "z-[1]",
-    // Positioned with inset -3px
-    "inset-[-3px]"
+    // Focus ring offset: border-width (2px) + gap (1px) = 3px
+    "[--sinch-local-focus-offset:var(--sinch-comp-segmented-control-size-focus-offset,3px)]",
+    "inset-[calc(var(--sinch-local-focus-offset)*-1)]"
   ],
   {
     variants: {
@@ -7206,11 +7260,11 @@ const _a = D(
         false: ""
       },
       isFirst: {
-        true: "rounded-l-[calc(var(--sinch-comp-segmented-control-shape-radius)+3px)]",
-        false: "-left-[4px]"
+        true: "rounded-l-[calc(var(--sinch-comp-segmented-control-shape-radius)+var(--sinch-local-focus-offset))]",
+        false: "-left-[calc(var(--sinch-local-focus-offset)+1px)]"
       },
       isLast: {
-        true: "rounded-r-[calc(var(--sinch-comp-segmented-control-shape-radius)+3px)]",
+        true: "rounded-r-[calc(var(--sinch-comp-segmented-control-shape-radius)+var(--sinch-local-focus-offset))]",
         false: ""
       }
     },
@@ -7220,89 +7274,89 @@ const _a = D(
       isLast: !1
     }
   }
-), Ge = P(
+), Ye = R(
   ({
     className: o,
     value: e,
     disabled: n = !1,
     text: t,
-    "aria-label": i,
-    icon: a,
-    isFirst: r = !1,
-    isLast: s = !1,
+    "aria-label": a,
+    icon: i,
+    isFirst: s = !1,
+    isLast: r = !1,
     onKeyDown: m,
-    ...d
-  }, c) => {
-    const u = $a(), [b, p] = F(!1), f = Z(null), g = u.value === e, x = k(
-      (v) => {
-        f.current = v, v !== null ? u.registerOption(e, v) : u.unregisterOption(e), c !== null && (typeof c == "function" ? c(v) : c.current = v);
+    ...c
+  }, b) => {
+    const h = Ba(), [d, u] = U(!1), g = Y(null), v = h.value === e, N = f(
+      (w) => {
+        g.current = w, w !== null ? h.registerOption(e, w) : h.unregisterOption(e), b !== null && (typeof b == "function" ? b(w) : b.current = w);
       },
-      [u, c, e]
-    ), V = k(() => {
-      n || u.onChange(e);
-    }, [u, n, e]), I = k(
-      (v) => {
-        switch (v.code) {
+      [h, b, e]
+    ), I = f(() => {
+      n || h.onChange(e);
+    }, [h, n, e]), V = f(
+      (w) => {
+        switch (w.code) {
           case "ArrowUp":
           case "ArrowLeft":
-            v.preventDefault(), u.focusPrevOption();
+            w.preventDefault(), h.focusPrevOption();
             break;
           case "ArrowDown":
           case "ArrowRight":
-            v.preventDefault(), u.focusNextOption();
+            w.preventDefault(), h.focusNextOption();
             break;
           case "Space":
           case "Enter":
-            v.preventDefault(), n || u.onChange(e);
+            w.preventDefault(), n || h.onChange(e);
             break;
         }
-        m == null || m(v);
+        m == null || m(w);
       },
-      [u, n, m, e]
-    ), N = k(() => {
-      p(!0);
-    }, []), j = k(() => {
-      p(!1);
+      [h, n, m, e]
+    ), z = f(() => {
+      u(!0);
+    }, []), y = f(() => {
+      u(!1);
     }, []);
-    return /* @__PURE__ */ A(
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: x,
+        ref: N,
         role: "tab",
-        "aria-selected": g,
+        "aria-selected": v,
         "aria-disabled": n,
-        "aria-label": i ?? t,
+        "aria-label": a ?? t,
         tabIndex: n ? -1 : 0,
-        "data-checked": g || void 0,
-        className: h(
-          _a({
-            isChecked: g,
+        "data-checked": v || void 0,
+        className: p(
+          Wa({
+            isChecked: v,
             isDisabled: n,
-            isFirst: r,
-            isLast: s
+            isFirst: s,
+            isLast: r
           }),
           o
         ),
-        onClick: V,
-        onKeyDown: I,
-        onFocus: N,
-        onBlur: j,
-        ...d,
+        onClick: I,
+        onKeyDown: V,
+        onFocus: z,
+        onBlur: y,
+        ...c,
         children: [
-          a !== void 0 && /* @__PURE__ */ l(
+          i !== void 0 && /* @__PURE__ */ l(
             "span",
             {
               className: "block pointer-events-none",
               style: {
-                color: n ? "var(--sinch-comp-segmented-control-color-disabled-icon-initial)" : g ? "var(--sinch-comp-segmented-control-color-checked-icon-initial)" : "var(--sinch-comp-segmented-control-color-default-icon-initial)"
+                color: n ? "var(--sinch-comp-segmented-control-color-disabled-icon-initial)" : v ? "var(--sinch-comp-segmented-control-color-checked-icon-initial)" : "var(--sinch-comp-segmented-control-color-default-icon-initial)"
               },
-              children: a
+              children: i
             }
           ),
           t !== void 0 && t.length > 0 && /* @__PURE__ */ l(
             "span",
             {
-              className: h(
+              className: p(
                 "flex-shrink overflow-hidden whitespace-nowrap text-ellipsis pointer-events-none",
                 "font-[var(--sinch-comp-segmented-control-font-label)]"
               ),
@@ -7312,12 +7366,12 @@ const _a = D(
           /* @__PURE__ */ l(
             "div",
             {
-              className: h(
-                Ua({
-                  isChecked: g,
+              className: p(
+                Za({
+                  isChecked: v,
                   isDisabled: n,
-                  isFirst: r,
-                  isLast: s
+                  isFirst: s,
+                  isLast: r
                 })
               )
             }
@@ -7325,11 +7379,11 @@ const _a = D(
           /* @__PURE__ */ l(
             "div",
             {
-              className: h(
-                Ha({
-                  isFocused: b,
-                  isFirst: r,
-                  isLast: s
+              className: p(
+                qa({
+                  isFocused: d,
+                  isFirst: s,
+                  isLast: r
                 })
               )
             }
@@ -7339,104 +7393,104 @@ const _a = D(
     );
   }
 );
-Ge.displayName = "SegmentedControlOption";
-const pr = Object.assign(ko, {
-  Option: Ge
-}), sn = de(null), Ba = () => {
-  const o = be(sn);
+Ye.displayName = "SegmentedControlOption";
+const jr = Object.assign(wo, {
+  Option: Ye
+}), un = be(null), Ya = () => {
+  const o = ue(un);
   if (o === null)
     throw new Error("SegmentedIconControlOption must be used within a SegmentedIconControl component");
   return o;
-}, We = (o) => o === "" ? [] : o.split(",").filter(Boolean), Ga = (o, e, n) => {
-  const t = We(o);
+}, Ke = (o) => o === "" ? [] : o.split(",").filter(Boolean), Ka = (o, e, n) => {
+  const t = Ke(o);
   if (n)
     t.includes(e) || t.push(e);
   else {
-    const i = t.indexOf(e);
-    i !== -1 && t.splice(i, 1);
+    const a = t.indexOf(e);
+    a !== -1 && t.splice(a, 1);
   }
   return t.join(",");
-}, Wa = (o) => We(o)[0] ?? "", Za = D(
+}, Ja = (o) => Ke(o)[0] ?? "", Xa = C(
   // Base styles
   "flex flex-row w-full box-border relative z-0 outline-none",
   {
     variants: {},
     defaultVariants: {}
   }
-), rn = P(
+), hn = R(
   ({
     className: o,
     value: e,
     defaultValue: n = "",
     multiple: t = !1,
-    "aria-label": i,
-    onChange: a,
-    children: r,
-    ...s
+    "aria-label": a,
+    onChange: i,
+    children: s,
+    ...r
   }, m) => {
-    const [d, c] = F(n), u = Z(/* @__PURE__ */ new Map()), b = e !== void 0, p = b ? e : d, f = t ? We(p) : [Wa(p)], g = k(
-      (v) => {
-        let y;
+    const [c, b] = U(n), h = Y(/* @__PURE__ */ new Map()), d = e !== void 0, u = d ? e : c, g = t ? Ke(u) : [Ja(u)], v = f(
+      (w) => {
+        let j;
         if (t) {
-          const w = We(p).includes(v);
-          y = Ga(p, v, !w);
+          const k = Ke(u).includes(w);
+          j = Ka(u, w, !k);
         } else
-          y = v;
-        b || c(y), a == null || a(y);
+          j = w;
+        d || b(j), i == null || i(j);
       },
-      [p, b, t, a]
-    ), x = k(
-      (v, y) => {
-        u.current.set(v, y);
+      [u, d, t, i]
+    ), N = f(
+      (w, j) => {
+        h.current.set(w, j);
       },
       []
-    ), V = k((v) => {
-      u.current.delete(v);
-    }, []), I = k(() => Array.from(u.current.entries()).filter(([, v]) => v.getAttribute("aria-disabled") !== "true").map(([v, y]) => ({ value: v, element: y })), []), N = k(() => {
-      const v = I();
-      if (v.length === 0)
+    ), I = f((w) => {
+      h.current.delete(w);
+    }, []), V = f(() => Array.from(h.current.entries()).filter(([, w]) => w.getAttribute("aria-disabled") !== "true").map(([w, j]) => ({ value: w, element: j })), []), z = f(() => {
+      const w = V();
+      if (w.length === 0)
         return;
-      const y = document.activeElement, w = v.findIndex((O) => O.element === y), T = w < 0 ? 0 : (w + 1) % v.length;
-      v[T].element.focus();
-    }, [I]), j = k(() => {
-      const v = I();
-      if (v.length === 0)
+      const j = document.activeElement, k = w.findIndex((P) => P.element === j), M = k < 0 ? 0 : (k + 1) % w.length;
+      w[M].element.focus();
+    }, [V]), y = f(() => {
+      const w = V();
+      if (w.length === 0)
         return;
-      const y = document.activeElement, w = v.findIndex((O) => O.element === y), T = w < 0 ? v.length - 1 : (w - 1 + v.length) % v.length;
-      v[T].element.focus();
-    }, [I]);
+      const j = document.activeElement, k = w.findIndex((P) => P.element === j), M = k < 0 ? w.length - 1 : (k - 1 + w.length) % w.length;
+      w[M].element.focus();
+    }, [V]);
     return /* @__PURE__ */ l(
-      sn.Provider,
+      un.Provider,
       {
         value: {
-          value: f,
+          value: g,
           multiple: t,
-          onChange: g,
-          registerOption: x,
-          unregisterOption: V,
-          focusNextOption: N,
-          focusPrevOption: j
+          onChange: v,
+          registerOption: N,
+          unregisterOption: I,
+          focusNextOption: z,
+          focusPrevOption: y
         },
         children: /* @__PURE__ */ l(
           "div",
           {
             ref: m,
             role: "tablist",
-            "aria-label": i,
+            "aria-label": a,
             "aria-orientation": "horizontal",
-            "data-value": p,
+            "data-value": u,
             "data-multiple": t || void 0,
-            className: h(Za(), o),
-            ...s,
-            children: r
+            className: p(Xa(), o),
+            ...r,
+            children: s
           }
         )
       }
     );
   }
 );
-rn.displayName = "SegmentedIconControl";
-const qa = D(
+hn.displayName = "SegmentedIconControl";
+const Qa = C(
   // Base styles - 56x32px icon-only option
   [
     "relative flex items-center justify-center",
@@ -7481,7 +7535,7 @@ const qa = D(
       isLast: !1
     }
   }
-), Ya = D(
+), el = C(
   // Base border styles
   [
     "absolute inset-0 pointer-events-none box-border",
@@ -7525,7 +7579,7 @@ const qa = D(
       isLast: !1
     }
   }
-), Ka = D(
+), ol = C(
   // Focus ring styles
   [
     "absolute pointer-events-none box-border",
@@ -7556,72 +7610,72 @@ const qa = D(
       isLast: !1
     }
   }
-), mn = P(
+), pn = R(
   ({
     className: o,
     value: e,
     disabled: n = !1,
     "aria-label": t,
-    icon: i,
-    isFirst: a = !1,
-    isLast: r = !1,
-    onKeyDown: s,
+    icon: a,
+    isFirst: i = !1,
+    isLast: s = !1,
+    onKeyDown: r,
     ...m
-  }, d) => {
-    const c = Ba(), [u, b] = F(!1), p = Z(null), f = c.value.includes(e), g = k(
-      (v) => {
-        p.current = v, v !== null ? c.registerOption(e, v) : c.unregisterOption(e), d !== null && (typeof d == "function" ? d(v) : d.current = v);
+  }, c) => {
+    const b = Ya(), [h, d] = U(!1), u = Y(null), g = b.value.includes(e), v = f(
+      (w) => {
+        u.current = w, w !== null ? b.registerOption(e, w) : b.unregisterOption(e), c !== null && (typeof c == "function" ? c(w) : c.current = w);
       },
-      [c, d, e]
-    ), x = k(() => {
-      n || c.onChange(e);
-    }, [c, n, e]), V = k(
-      (v) => {
-        switch (v.code) {
+      [b, c, e]
+    ), N = f(() => {
+      n || b.onChange(e);
+    }, [b, n, e]), I = f(
+      (w) => {
+        switch (w.code) {
           case "ArrowUp":
           case "ArrowLeft":
-            v.preventDefault(), c.focusPrevOption();
+            w.preventDefault(), b.focusPrevOption();
             break;
           case "ArrowDown":
           case "ArrowRight":
-            v.preventDefault(), c.focusNextOption();
+            w.preventDefault(), b.focusNextOption();
             break;
           case "Space":
           case "Enter":
-            v.preventDefault(), n || c.onChange(e);
+            w.preventDefault(), n || b.onChange(e);
             break;
         }
-        s == null || s(v);
+        r == null || r(w);
       },
-      [c, n, s, e]
-    ), I = k(() => {
-      b(!0);
-    }, []), N = k(() => {
-      b(!1);
-    }, []), j = n ? "var(--sinch-comp-segmented-control-color-disabled-icon-initial)" : f ? "var(--sinch-comp-segmented-control-color-checked-icon-initial)" : "var(--sinch-comp-segmented-control-color-default-icon-initial)";
-    return /* @__PURE__ */ A(
+      [b, n, r, e]
+    ), V = f(() => {
+      d(!0);
+    }, []), z = f(() => {
+      d(!1);
+    }, []), y = n ? "var(--sinch-comp-segmented-control-color-disabled-icon-initial)" : g ? "var(--sinch-comp-segmented-control-color-checked-icon-initial)" : "var(--sinch-comp-segmented-control-color-default-icon-initial)";
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: g,
+        ref: v,
         role: "tab",
-        "aria-selected": f,
+        "aria-selected": g,
         "aria-disabled": n,
         "aria-label": t,
         tabIndex: n ? -1 : 0,
-        "data-checked": f || void 0,
-        className: h(
-          qa({
-            isChecked: f,
+        "data-checked": g || void 0,
+        className: p(
+          Qa({
+            isChecked: g,
             isDisabled: n,
-            isFirst: a,
-            isLast: r
+            isFirst: i,
+            isLast: s
           }),
           o
         ),
-        onClick: x,
-        onKeyDown: V,
-        onFocus: I,
-        onBlur: N,
+        onClick: N,
+        onKeyDown: I,
+        onFocus: V,
+        onBlur: z,
         ...m,
         children: [
           /* @__PURE__ */ l(
@@ -7629,22 +7683,22 @@ const qa = D(
             {
               className: "block pointer-events-none",
               style: {
-                color: j,
+                color: y,
                 // Icon size from component tokens
                 fontSize: "var(--sinch-comp-segmented-control-size-icon, 24px)"
               },
-              children: i
+              children: a
             }
           ),
           /* @__PURE__ */ l(
             "div",
             {
-              className: h(
-                Ya({
-                  isChecked: f,
+              className: p(
+                el({
+                  isChecked: g,
                   isDisabled: n,
-                  isFirst: a,
-                  isLast: r
+                  isFirst: i,
+                  isLast: s
                 })
               )
             }
@@ -7652,11 +7706,11 @@ const qa = D(
           /* @__PURE__ */ l(
             "div",
             {
-              className: h(
-                Ka({
-                  isFocused: u,
-                  isFirst: a,
-                  isLast: r
+              className: p(
+                ol({
+                  isFocused: h,
+                  isFirst: i,
+                  isLast: s
                 })
               )
             }
@@ -7666,20 +7720,20 @@ const qa = D(
     );
   }
 );
-mn.displayName = "SegmentedIconControlOption";
-const gr = Object.assign(rn, {
-  Option: mn
-}), Ja = (o, e) => {
+pn.displayName = "SegmentedIconControlOption";
+const vr = Object.assign(hn, {
+  Option: pn
+}), nl = (o, e) => {
   if (e === null)
     return !0;
   const n = e.split(/\s*,\s*/);
-  return o.every((t) => n.some((i) => i.startsWith(".") ? t.name.endsWith(i) : i === "image/*" ? t.type.startsWith("image/") : i === "video/*" ? t.type.startsWith("video/") : i === "audio/*" ? t.type.startsWith("audio/") : i === t.type));
-}, Xa = (o, e) => {
+  return o.every((t) => n.some((a) => a.startsWith(".") ? t.name.endsWith(a) : a === "image/*" ? t.type.startsWith("image/") : a === "video/*" ? t.type.startsWith("video/") : a === "audio/*" ? t.type.startsWith("audio/") : a === t.type));
+}, tl = (o, e) => {
   if (e === null)
     return !0;
   const n = e.split(/\s*,\s*/);
-  return o.every((t) => n.some((i) => i === "image/*" ? t.type.startsWith("image/") : i === "video/*" ? t.type.startsWith("video/") : i === "audio/*" ? t.type.startsWith("audio/") : i === t.type));
-}, Io = (o, e) => e === null || e <= 0 ? !0 : o.every((n) => n.size <= e), Qa = D(
+  return o.every((t) => n.some((a) => a === "image/*" ? t.type.startsWith("image/") : a === "video/*" ? t.type.startsWith("video/") : a === "audio/*" ? t.type.startsWith("audio/") : a === t.type));
+}, So = (o, e) => e === null || e <= 0 ? !0 : o.every((n) => n.size <= e), il = C(
   // Base styles
   [
     "relative flex flex-row flex-wrap justify-center content-center gap-2",
@@ -7718,7 +7772,7 @@ const gr = Object.assign(rn, {
       isDragInvalid: !1
     }
   }
-), el = D(
+), al = C(
   // Base border styles (dashed border pseudo-element)
   [
     "absolute inset-0 pointer-events-none",
@@ -7757,7 +7811,7 @@ const gr = Object.assign(rn, {
       isDragInvalid: !1
     }
   }
-), ol = D(
+), ll = C(
   // Base placeholder styles
   [
     "self-center text-center",
@@ -7785,159 +7839,159 @@ const gr = Object.assign(rn, {
       isDragInvalid: !1
     }
   }
-), nl = P(
+), sl = R(
   ({
     className: o,
     multiple: e = !1,
     accept: n,
     maxSize: t,
-    disabled: i = !1,
-    invalid: a = !1,
-    placeholder: r,
-    buttonText: s = "Choose file",
+    disabled: a = !1,
+    invalid: i = !1,
+    placeholder: s,
+    buttonText: r = "Choose file",
     onChange: m,
-    onInvalid: d,
-    children: c,
-    ...u
-  }, b) => {
-    const p = Z(null), [f, g] = F(!1), [x, V] = F(!1), I = f && !x, N = k(
-      (z) => {
-        var C;
-        if (z.stopPropagation(), z.preventDefault(), i)
+    onInvalid: c,
+    children: b,
+    ...h
+  }, d) => {
+    const u = Y(null), [g, v] = U(!1), [N, I] = U(!1), V = g && !N, z = f(
+      (T) => {
+        var D;
+        if (T.stopPropagation(), T.preventDefault(), a)
           return;
-        const O = (C = z.dataTransfer) == null ? void 0 : C.items;
-        let $ = !1;
-        if (O !== void 0 && O.length > 0) {
-          const E = Array.from(O);
-          $ = Xa(E, n ?? null);
+        const P = (D = T.dataTransfer) == null ? void 0 : D.items;
+        let B = !1;
+        if (P !== void 0 && P.length > 0) {
+          const x = Array.from(P);
+          B = tl(x, n ?? null);
         }
-        g(!0), V($);
+        v(!0), I(B);
       },
-      [i, n]
-    ), j = k(
-      (z) => {
-        z.stopPropagation(), z.preventDefault(), g(!1), V(!1);
-      },
-      []
-    ), v = k(
-      (z) => {
-        z.stopPropagation(), z.preventDefault();
+      [a, n]
+    ), y = f(
+      (T) => {
+        T.stopPropagation(), T.preventDefault(), v(!1), I(!1);
       },
       []
-    ), y = k(
-      (z) => {
-        if (z.stopPropagation(), z.preventDefault(), g(!1), V(!1), i)
-          return;
-        const O = z.dataTransfer;
-        if (O === null || O.files.length === 0)
-          return;
-        if (!e && O.files.length > 1) {
-          d == null || d("multiple");
-          return;
-        }
-        const $ = Array.from(O.files);
-        if (!Ja($, n ?? null)) {
-          d == null || d("accept");
-          return;
-        }
-        if (!Io($, t ?? null)) {
-          d == null || d("size");
-          return;
-        }
-        m == null || m($);
+    ), w = f(
+      (T) => {
+        T.stopPropagation(), T.preventDefault();
       },
-      [i, e, n, t, m, d]
-    ), w = k(
-      (z) => {
-        const O = z.target.files;
-        if (O === null || O.length === 0)
+      []
+    ), j = f(
+      (T) => {
+        if (T.stopPropagation(), T.preventDefault(), v(!1), I(!1), a)
           return;
-        const $ = Array.from(O);
-        if (!Io($, t ?? null)) {
-          d == null || d("size"), z.target.value = "";
+        const P = T.dataTransfer;
+        if (P === null || P.files.length === 0)
+          return;
+        if (!e && P.files.length > 1) {
+          c == null || c("multiple");
           return;
         }
-        m == null || m($), z.target.value = "";
+        const B = Array.from(P.files);
+        if (!nl(B, n ?? null)) {
+          c == null || c("accept");
+          return;
+        }
+        if (!So(B, t ?? null)) {
+          c == null || c("size");
+          return;
+        }
+        m == null || m(B);
       },
-      [t, m, d]
-    ), T = k(() => {
-      var z;
-      i || (z = p.current) == null || z.click();
-    }, [i]);
-    return /* @__PURE__ */ A(
+      [a, e, n, t, m, c]
+    ), k = f(
+      (T) => {
+        const P = T.target.files;
+        if (P === null || P.length === 0)
+          return;
+        const B = Array.from(P);
+        if (!So(B, t ?? null)) {
+          c == null || c("size"), T.target.value = "";
+          return;
+        }
+        m == null || m(B), T.target.value = "";
+      },
+      [t, m, c]
+    ), M = f(() => {
+      var T;
+      a || (T = u.current) == null || T.click();
+    }, [a]);
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: b,
-        className: h(
-          Qa({
-            isInvalid: a,
-            isDisabled: i,
-            isDragging: f,
-            isDragValid: f && x,
-            isDragInvalid: f && I
+        ref: d,
+        className: p(
+          il({
+            isInvalid: i,
+            isDisabled: a,
+            isDragging: g,
+            isDragValid: g && N,
+            isDragInvalid: g && V
           }),
           o
         ),
-        onDragEnter: N,
-        onDragLeave: j,
-        onDragOver: v,
-        onDrop: y,
-        ...u,
+        onDragEnter: z,
+        onDragLeave: y,
+        onDragOver: w,
+        onDrop: j,
+        ...h,
         children: [
-          r !== void 0 && /* @__PURE__ */ l(
+          s !== void 0 && /* @__PURE__ */ l(
             "span",
             {
-              className: h(
-                ol({
-                  isDisabled: i,
-                  isDragValid: f && x,
-                  isDragInvalid: f && I
+              className: p(
+                ll({
+                  isDisabled: a,
+                  isDragValid: g && N,
+                  isDragInvalid: g && V
                 })
               ),
               "aria-hidden": "true",
-              children: r
+              children: s
             }
           ),
           /* @__PURE__ */ l(
             "input",
             {
-              ref: p,
+              ref: u,
               type: "file",
               className: "sr-only",
               multiple: e,
               accept: n,
-              disabled: i,
-              onChange: w,
+              disabled: a,
+              onChange: k,
               "aria-label": "File input"
             }
           ),
-          c !== void 0 ? /* @__PURE__ */ l("div", { onClick: T, children: c }) : /* @__PURE__ */ l(
+          b !== void 0 ? /* @__PURE__ */ l("div", { onClick: M, children: b }) : /* @__PURE__ */ l(
             "button",
             {
               type: "button",
-              onClick: T,
-              disabled: i,
-              className: h(
+              onClick: M,
+              disabled: a,
+              className: p(
                 "inline-flex items-center justify-center",
                 "px-4 py-2 rounded-md",
                 "bg-surface-primary border border-border",
                 "text-foreground font-sans text-sm",
                 "hover:bg-surface-primary-hover",
-                "disabled:opacity-50 disabled:cursor-not-allowed"
+                "disabled:opacity-[var(--sinch-sys-opacity-disabled,0.5)] disabled:cursor-not-allowed"
               ),
-              children: s
+              children: r
             }
           ),
           /* @__PURE__ */ l(
             "div",
             {
-              className: h(
-                el({
-                  isInvalid: a,
-                  isDisabled: i,
-                  isDragging: f,
-                  isDragValid: f && x,
-                  isDragInvalid: f && I
+              className: p(
+                al({
+                  isInvalid: i,
+                  isDisabled: a,
+                  isDragging: g,
+                  isDragValid: g && N,
+                  isDragInvalid: g && V
                 })
               )
             }
@@ -7947,61 +8001,71 @@ const gr = Object.assign(rn, {
     );
   }
 );
-nl.displayName = "FileDrop";
-const tl = (o, e) => e == null || e <= 0 ? !0 : o.every((n) => n.size <= e), il = P(
+sl.displayName = "FileDrop";
+const rl = (o, e) => e == null || e <= 0 ? !0 : o.every((n) => n.size <= e), ml = R(
   ({
     className: o,
     children: e,
     multiple: n,
     accept: t,
-    maxSize: i,
-    onChange: a,
-    onInvalid: r,
-    ...s
+    maxSize: a,
+    onChange: i,
+    onInvalid: s,
+    ...r
   }, m) => {
-    const d = Z(null), c = k(() => {
-      var b;
-      (b = d.current) == null || b.click();
-    }, []), u = k(
-      (b) => {
-        const p = b.target.files;
-        if (p === null)
+    const c = Y(null), b = f(() => {
+      var d;
+      (d = c.current) == null || d.click();
+    }, []), h = f(
+      (d) => {
+        const u = d.target.files;
+        if (u === null)
           return;
-        const f = Array.from(p);
-        if (b.target.value = "", !tl(f, i)) {
-          r == null || r("size");
+        const g = Array.from(u);
+        if (d.target.value = "", !rl(g, a)) {
+          s == null || s("size");
           return;
         }
-        a == null || a(f);
+        i == null || i(g);
       },
-      [i, a, r]
+      [a, i, s]
     );
-    return /* @__PURE__ */ A(
+    return /* @__PURE__ */ L(
       "div",
       {
         ref: m,
-        className: h("inline-block", o),
-        ...s,
+        className: p("inline-block", o),
+        ...r,
         children: [
           /* @__PURE__ */ l(
             "input",
             {
-              ref: d,
+              ref: c,
               type: "file",
               className: "hidden",
               multiple: n,
               accept: t,
-              onChange: u
+              onChange: h
             }
           ),
-          /* @__PURE__ */ l("div", { onClick: c, className: "cursor-pointer", children: e })
+          /* @__PURE__ */ l("div", { onClick: b, className: "cursor-pointer", children: e })
         ]
       }
     );
   }
 );
-il.displayName = "FilePicker";
-const al = D(
+ml.displayName = "FilePicker";
+function _e(o) {
+  X(() => {
+    if (!o)
+      return;
+    const e = document.body.style.overflow;
+    return document.body.style.overflow = "hidden", () => {
+      document.body.style.overflow = e;
+    };
+  }, [o]);
+}
+const cl = C(
   // Base styles
   [
     "fixed",
@@ -8011,7 +8075,7 @@ const al = D(
     "p-[var(--sinch-comp-sheet-size-padding,24px)]",
     "gap-[var(--sinch-comp-sheet-size-gap,16px)]",
     "box-border",
-    "bg-[var(--sinch-comp-sheet-color-background,white)]",
+    "bg-[var(--sinch-comp-sheet-color-background,var(--sinch-sys-color-surface-primary-default,white))]",
     "border-none",
     "outline-none",
     "transition-[transform,opacity]",
@@ -8056,7 +8120,7 @@ const al = D(
       },
       overlay: {
         modal: "opacity-0",
-        push: "opacity-50"
+        push: "opacity-[var(--sinch-sys-opacity-disabled,0.5)]"
       },
       open: {
         true: "translate-x-0 translate-y-0 opacity-100",
@@ -8076,14 +8140,14 @@ const al = D(
       open: !1
     }
   }
-), ll = D(
+), dl = C(
   [
     "fixed",
     "inset-0",
     "z-40",
     "bg-gradient-to-b",
-    "from-[var(--sinch-comp-sheet-color-backdrop-from,rgba(0,0,0,0.5))]",
-    "to-[var(--sinch-comp-sheet-color-backdrop-to,rgba(0,0,0,0.5))]",
+    "from-[var(--sinch-comp-sheet-color-backdrop-from,var(--sinch-sys-color-backdrop))]",
+    "to-[var(--sinch-comp-sheet-color-backdrop-to,var(--sinch-sys-color-backdrop))]",
     "backdrop-blur-[var(--sinch-comp-sheet-size-backdrop-blur,0)]",
     "transition-opacity",
     "duration-[var(--sinch-comp-sheet-animation-duration,300ms)]",
@@ -8100,147 +8164,167 @@ const al = D(
       visible: !1
     }
   }
-), sl = P(
+), bl = R(
   ({
     className: o,
     children: e,
     open: n = !1,
     placement: t = "right",
-    overlay: i = "modal",
-    onClose: a,
+    overlay: a = "modal",
+    onClose: i,
+    onOpenChange: s,
     onSheetAnimationStart: r,
-    onSheetAnimationEnd: s,
-    title: m,
-    footer: d,
-    container: c,
-    id: u,
-    style: b,
-    "data-testid": p
-  }, f) => {
-    const g = Z(null), [x, V] = F(!1), [I, N] = F(!1), j = Z(null);
-    Le(f, () => g.current), X(() => {
-      n ? (j.current = document.activeElement, V(!0), requestAnimationFrame(() => {
-        N(!0);
-      }), i === "modal" && (document.body.style.overflow = "hidden")) : x && N(!1);
-    }, [n, i, x]), X(() => {
+    onSheetAnimationEnd: m,
+    title: c,
+    footer: b,
+    container: h,
+    id: d,
+    style: u,
+    "data-testid": g,
+    "aria-label": v,
+    "aria-labelledby": N
+  }, I) => {
+    const V = Y(null), [z, y] = U(!1), [w, j] = U(!1), k = Y(null);
+    Fe(I, () => V.current), X(() => {
+      if (process.env.NODE_ENV !== "production" && n && !c) {
+        const D = V.current;
+        D && !D.getAttribute("aria-label") && !D.getAttribute("aria-labelledby") && console.warn(
+          "Sheet: Missing accessible label. Provide a `title` prop, or pass `aria-label` / `aria-labelledby` for screen readers."
+        );
+      }
+    }, [n, c]), _e(z && a === "modal"), X(() => {
+      n ? (k.current = document.activeElement, y(!0), requestAnimationFrame(() => {
+        j(!0);
+      })) : z && j(!1);
+    }, [n, a, z]), X(() => {
       if (!n) return;
-      const z = (O) => {
-        O.key === "Escape" && (O.preventDefault(), O.stopPropagation(), a == null || a("escape"));
+      const D = (x) => {
+        x.key === "Escape" && (x.preventDefault(), x.stopPropagation(), i == null || i("escape"), s == null || s(!1));
       };
-      return document.addEventListener("keydown", z), () => document.removeEventListener("keydown", z);
-    }, [n, a]);
-    const v = k(() => {
-      var z, O;
+      return document.addEventListener("keydown", D), () => document.removeEventListener("keydown", D);
+    }, [n, i, s]);
+    const M = f(() => {
+      var D, x;
       return {
-        action: I ? "expand" : "collapse",
-        width: ((z = g.current) == null ? void 0 : z.offsetWidth) ?? 0,
-        height: ((O = g.current) == null ? void 0 : O.offsetHeight) ?? 0,
-        duration: g.current && getComputedStyle(g.current).getPropertyValue("--sinch-comp-sheet-animation-duration") || "300ms",
-        easing: g.current && getComputedStyle(g.current).getPropertyValue("--sinch-comp-sheet-animation-easing") || "cubic-bezier(0.25, 1, 0.5, 1)"
+        action: w ? "expand" : "collapse",
+        width: ((D = V.current) == null ? void 0 : D.offsetWidth) ?? 0,
+        height: ((x = V.current) == null ? void 0 : x.offsetHeight) ?? 0,
+        duration: V.current && getComputedStyle(V.current).getPropertyValue("--sinch-comp-sheet-animation-duration") || "300ms",
+        easing: V.current && getComputedStyle(V.current).getPropertyValue("--sinch-comp-sheet-animation-easing") || "cubic-bezier(0.25, 1, 0.5, 1)"
       };
-    }, [I]);
+    }, [w]);
     X(() => {
-      const z = g.current;
-      if (!z || !r) return;
-      const O = ($) => {
-        $.propertyName === "transform" && r(v());
+      const D = V.current;
+      if (!D || !r) return;
+      const x = (E) => {
+        E.propertyName === "transform" && r(M());
       };
-      return z.addEventListener("transitionstart", O), () => z.removeEventListener("transitionstart", O);
-    }, [r, v]);
-    const y = k(
-      (z) => {
-        var O;
-        z.propertyName === "transform" && (s == null || s(v()), I || (V(!1), i === "modal" && (document.body.style.overflow = ""), (O = j.current) == null || O.focus()));
+      return D.addEventListener("transitionstart", x), () => D.removeEventListener("transitionstart", x);
+    }, [r, M]);
+    const T = f(
+      (D) => {
+        var x;
+        D.propertyName === "transform" && (m == null || m(M()), w || (y(!1), (x = k.current) == null || x.focus()));
       },
-      [I, s, i, v]
-    ), w = k(
-      (z) => {
-        z.target === z.currentTarget && (a == null || a("backdrop"));
+      [w, m, M]
+    ), P = f(
+      (D) => {
+        D.target === D.currentTarget && (i == null || i("backdrop"), s == null || s(!1));
       },
-      [a]
+      [i, s]
     );
     if (X(() => {
-      if (!n || i !== "modal" || !g.current) return;
-      const O = g.current.querySelectorAll(
+      if (!n || a !== "modal" || !V.current) return;
+      const x = V.current.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      ), $ = O[0], C = O[O.length - 1];
-      $ == null || $.focus();
-      const E = (_) => {
-        _.key === "Tab" && (_.shiftKey ? document.activeElement === $ && (_.preventDefault(), C == null || C.focus()) : document.activeElement === C && (_.preventDefault(), $ == null || $.focus()));
+      ), E = x[0], S = x[x.length - 1];
+      E == null || E.focus();
+      const F = ($) => {
+        $.key === "Tab" && ($.shiftKey ? document.activeElement === E && ($.preventDefault(), S == null || S.focus()) : document.activeElement === S && ($.preventDefault(), E == null || E.focus()));
       };
-      return document.addEventListener("keydown", E), () => document.removeEventListener("keydown", E);
-    }, [n, i]), !x && !n) return null;
-    const T = /* @__PURE__ */ A(Ne, { children: [
-      i === "modal" && /* @__PURE__ */ l(
+      return document.addEventListener("keydown", F), () => document.removeEventListener("keydown", F);
+    }, [n, a]), !z && !n) return null;
+    const B = /* @__PURE__ */ L(Ne, { children: [
+      a === "modal" && /* @__PURE__ */ l(
         "div",
         {
-          className: h(ll({ visible: I })),
-          onClick: w,
+          className: p(dl({ visible: w })),
+          onClick: P,
           "aria-hidden": "true"
         }
       ),
-      /* @__PURE__ */ A(
+      /* @__PURE__ */ L(
         "div",
         {
-          ref: g,
+          ref: V,
           role: "dialog",
-          "aria-modal": i === "modal",
-          "aria-labelledby": m ? "sheet-title" : void 0,
+          "aria-modal": a === "modal",
+          "aria-label": c ? void 0 : v,
+          "aria-labelledby": c ? "sheet-title" : N,
           "aria-describedby": "sheet-content",
-          id: u,
-          style: b,
-          "data-testid": p,
-          className: h(
+          id: d,
+          style: u,
+          "data-testid": g,
+          className: p(
             "z-50",
-            al({
+            cl({
               placement: t,
-              overlay: i,
-              open: I
+              overlay: a,
+              open: w
             }),
             o
           ),
-          onTransitionEnd: y,
+          onTransitionEnd: T,
           children: [
-            m && /* @__PURE__ */ l("div", { id: "sheet-title", children: m }),
+            c && /* @__PURE__ */ l(
+              "div",
+              {
+                id: "sheet-title",
+                className: p(
+                  (e || b) && "border-b border-[var(--sinch-sys-color-border-default,#e5e7eb)]"
+                ),
+                children: c
+              }
+            ),
             /* @__PURE__ */ l(
               "div",
               {
                 id: "sheet-content",
-                className: "min-h-0 overflow-auto overscroll-contain",
+                className: "min-h-0 flex-1 overflow-auto overscroll-contain",
                 children: e
               }
             ),
-            d && /* @__PURE__ */ l("div", { className: "flex flex-row justify-end gap-4", children: d })
+            b && /* @__PURE__ */ l("div", { className: "flex flex-row justify-end gap-4 border-t border-[var(--sinch-sys-color-border-default,#e5e7eb)] pt-4 px-4 pb-4", children: b })
           ]
         }
       )
     ] });
-    return Pe(T, c ?? document.body);
+    return $e(B, h ?? document.body);
   }
 );
-sl.displayName = "Sheet";
-const rl = D(
+bl.displayName = "Sheet";
+const ul = C(
   // Base styles
   ["contents"]
-), ml = P(
+), hl = R(
   ({
     className: o,
     title: e,
     description: n,
     onClose: t,
-    closeAriaLabel: i = "Close",
-    icon: a,
-    hideCloseButton: r = !1,
-    ...s
+    closeAriaLabel: a = "Close",
+    icon: i,
+    hideCloseButton: s = !1,
+    ...r
   }, m) => {
-    const d = k(() => {
+    const c = f(() => {
       t == null || t();
     }, [t]);
-    return /* @__PURE__ */ A("div", { ref: m, className: h(rl(), o), ...s, children: [
-      /* @__PURE__ */ A("div", { className: "flex flex-row items-center gap-2 mt-2", children: [
-        a && /* @__PURE__ */ l("span", { className: "shrink-0", children: a }),
+    return /* @__PURE__ */ L("div", { ref: m, className: p(ul(), o), ...r, children: [
+      /* @__PURE__ */ L("div", { className: "flex flex-row items-center gap-2 mt-2", children: [
+        i && /* @__PURE__ */ l("span", { className: "shrink-0", children: i }),
         /* @__PURE__ */ l(
-          ho,
+          fo,
           {
             type: "m",
             level: "3",
@@ -8248,14 +8332,14 @@ const rl = D(
             children: e
           }
         ),
-        !r && /* @__PURE__ */ l(
-          me,
+        !s && /* @__PURE__ */ l(
+          re,
           {
             size: "s",
-            "aria-label": i,
-            onClick: d,
+            "aria-label": a,
+            onClick: c,
             className: "ml-auto",
-            icon: /* @__PURE__ */ l(ne, { name: "fa-xmark", iconsVersion: "2", size: "sm" })
+            icon: /* @__PURE__ */ l(oe, { name: "fa-xmark", iconsVersion: "2", size: "sm" })
           }
         )
       ] }),
@@ -8263,14 +8347,14 @@ const rl = D(
     ] });
   }
 );
-ml.displayName = "SheetTitle";
-const cl = 5e3, Re = 250, dl = D(
+hl.displayName = "SheetTitle";
+const pl = 5e3, Ue = 250, gl = C(
   // Base styles
   [
     "flex",
     "flex-row",
     "items-center",
-    "gap-2",
+    "gap-3",
     "w-[328px]",
     "max-w-[90vw]",
     "p-4",
@@ -8291,81 +8375,81 @@ const cl = 5e3, Re = 250, dl = D(
       type: "info"
     }
   }
-), bl = {
+), kl = {
   success: "var(--sinch-comp-toast-color-success-default-icon)",
   warn: "var(--sinch-comp-toast-color-warning-default-icon)",
   error: "var(--sinch-comp-toast-color-error-default-icon)",
   info: "var(--sinch-comp-toast-color-info-default-icon)"
-}, ul = {
+}, fl = {
   success: "var(--sinch-comp-toast-color-success-default-text)",
   warn: "var(--sinch-comp-toast-color-warning-default-text)",
   error: "var(--sinch-comp-toast-color-error-default-text)",
   info: "var(--sinch-comp-toast-color-info-default-text)"
-}, hl = {
+}, jl = {
   info: "circle-info",
   success: "circle-check",
   warn: "triangle-exclamation",
   error: "octagon-exclamation"
-}, cn = P(
+}, gn = R(
   ({
     className: o,
     type: e = "info",
     text: n,
     persistent: t = !1,
-    onTimeout: i,
-    action: a,
-    close: r,
-    children: s,
+    onTimeout: a,
+    action: i,
+    close: s,
+    children: r,
     ...m
-  }, d) => {
-    const c = Z(null);
+  }, c) => {
+    const b = Y(null);
     X(() => {
       if (t) {
-        c.current !== null && (window.clearTimeout(c.current), c.current = null);
+        b.current !== null && (window.clearTimeout(b.current), b.current = null);
         return;
       }
-      return c.current = window.setTimeout(() => {
-        i == null || i(), c.current = null;
-      }, cl), () => {
-        c.current !== null && (window.clearTimeout(c.current), c.current = null);
+      return b.current = window.setTimeout(() => {
+        a == null || a(), b.current = null;
+      }, pl), () => {
+        b.current !== null && (window.clearTimeout(b.current), b.current = null);
       };
-    }, [t, i]);
-    const u = hl[e], b = bl[e], p = ul[e];
-    return /* @__PURE__ */ A(
+    }, [t, a]);
+    const h = jl[e], d = kl[e], u = fl[e];
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: d,
+        ref: c,
         role: "alert",
         "aria-atomic": "true",
-        className: h(dl({ type: e }), o),
+        className: p(gl({ type: e }), o),
         ...m,
         children: [
           /* @__PURE__ */ l(
-            ne,
+            oe,
             {
-              name: u,
+              name: h,
               iconsVersion: "2",
-              className: "self-start my-1",
-              style: { color: b }
+              className: "shrink-0",
+              style: { color: d }
             }
           ),
           /* @__PURE__ */ l(
             "div",
             {
-              className: "flex-1 min-w-0 break-words py-1 pl-1 font-[var(--sinch-comp-toast-font-body)]",
-              style: { color: p },
-              children: n ?? s
+              className: "flex-1 min-w-0 break-words font-[var(--sinch-comp-toast-font-body)]",
+              style: { color: u },
+              children: n ?? r
             }
           ),
-          a,
-          r
+          i,
+          s
         ]
       }
     );
   }
 );
-cn.displayName = "Toast";
-function pl(o, e) {
+gn.displayName = "Toast";
+function vl(o, e) {
   switch (e.type) {
     case "ADD_TOAST":
       return {
@@ -8386,154 +8470,154 @@ function pl(o, e) {
       return o;
   }
 }
-const dn = de(null);
-function kr({
+const kn = be(null);
+function wr({
   children: o,
   origin: e = "bottom-right",
   reduceMotion: n = !1
 }) {
-  const [t, i] = Cn(pl, { toasts: [] }), a = k((d) => {
-    const c = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-    return i({ type: "ADD_TOAST", payload: { ...d, id: c } }), c;
-  }, []), r = k((d) => {
-    i({ type: "REMOVE_TOAST", payload: { id: d } });
-  }, []), s = k(() => {
-    i({ type: "CLEAR_ALL" });
+  const [t, a] = Tn(vl, { toasts: [] }), i = f((c) => {
+    const b = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+    return a({ type: "ADD_TOAST", payload: { ...c, id: b } }), b;
+  }, []), s = f((c) => {
+    a({ type: "REMOVE_TOAST", payload: { id: c } });
+  }, []), r = f(() => {
+    a({ type: "CLEAR_ALL" });
   }, []), m = J(
     () => ({
       toasts: t.toasts,
-      addToast: a,
-      removeToast: r,
-      clearAll: s
+      addToast: i,
+      removeToast: s,
+      clearAll: r
     }),
-    [t.toasts, a, r, s]
+    [t.toasts, i, s, r]
   );
-  return /* @__PURE__ */ A(dn.Provider, { value: m, children: [
+  return /* @__PURE__ */ L(kn.Provider, { value: m, children: [
     o,
-    /* @__PURE__ */ l(kl, { origin: e, reduceMotion: n })
+    /* @__PURE__ */ l(xl, { origin: e, reduceMotion: n })
   ] });
 }
-function gl() {
-  const o = be(dn);
+function wl() {
+  const o = ue(kn);
   if (o === null)
     throw new Error("useToast must be used within a ToastProvider");
   return o;
 }
-function kl({ origin: o, reduceMotion: e }) {
-  const { toasts: n, removeToast: t } = gl(), i = J(() => n.some(
-    (r) => r.type === "error" || r.type === "warn"
+function xl({ origin: o, reduceMotion: e }) {
+  const { toasts: n, removeToast: t } = wl(), a = J(() => n.some(
+    (s) => s.type === "error" || s.type === "warn"
   ) ? "assertive" : "polite", [n]);
   return /* @__PURE__ */ l(
     "div",
     {
-      className: h(
+      className: p(
         "fixed z-50 right-4 flex flex-col gap-4",
         o === "top-right" ? "top-4 flex-col-reverse" : "bottom-4"
       ),
-      "aria-live": i,
-      children: n.map((a) => /* @__PURE__ */ l(
-        fl,
+      "aria-live": a,
+      children: n.map((i) => /* @__PURE__ */ l(
+        yl,
         {
-          toast: a,
-          onRemove: () => t(a.id),
+          toast: i,
+          onRemove: () => t(i.id),
           reduceMotion: e
         },
-        a.id
+        i.id
       ))
     }
   );
 }
-function fl({ toast: o, onRemove: e, reduceMotion: n }) {
-  const [t, i] = F(!0), [a, r] = F(!1), s = Z(null);
+function yl({ toast: o, onRemove: e, reduceMotion: n }) {
+  const [t, a] = U(!0), [i, s] = U(!1), r = Y(null);
   X(() => {
     if (n) {
-      i(!1);
+      a(!1);
       return;
     }
-    const c = setTimeout(() => {
-      i(!1);
-    }, Re);
-    return () => clearTimeout(c);
+    const b = setTimeout(() => {
+      a(!1);
+    }, Ue);
+    return () => clearTimeout(b);
   }, [n]);
-  const m = k(() => {
+  const m = f(() => {
     if (n) {
       e();
       return;
     }
-    r(!0), setTimeout(() => {
+    s(!0), setTimeout(() => {
       e();
-    }, Re);
-  }, [e, n]), d = k(() => {
+    }, Ue);
+  }, [e, n]), c = f(() => {
     if (n) {
       e();
       return;
     }
-    r(!0), setTimeout(() => {
+    s(!0), setTimeout(() => {
       e();
-    }, Re);
+    }, Ue);
   }, [e, n]);
   return /* @__PURE__ */ l(
     "div",
     {
-      ref: s,
-      className: h(
+      ref: r,
+      className: p(
         "transition-all",
         !n && "duration-250 ease-out",
         t && "opacity-0 translate-y-2",
-        a && "opacity-0 -translate-y-2",
-        !t && !a && "opacity-100 translate-y-0"
+        i && "opacity-0 -translate-y-2",
+        !t && !i && "opacity-100 translate-y-0"
       ),
       style: {
-        transitionDuration: n ? "0ms" : `${Re}ms`
+        transitionDuration: n ? "0ms" : `${Ue}ms`
       },
       children: /* @__PURE__ */ l(
-        cn,
+        gn,
         {
           type: o.type,
           text: o.text,
           persistent: o.persistent,
           onTimeout: m,
           action: o.action,
-          close: o.close !== void 0 ? /* @__PURE__ */ l("div", { onClick: d, children: o.close }) : void 0
+          close: o.close !== void 0 ? /* @__PURE__ */ l("div", { onClick: c, children: o.close }) : void 0
         }
       )
     }
   );
 }
-const jl = P(
-  ({ className: o, origin: e = "bottom-right", children: n, ...t }, i) => {
-    const [a, r] = F([]), s = J(() => {
-      const d = [];
-      return Ue.Children.forEach(n, (c) => {
-        Ue.isValidElement(c) && d.push(c);
-      }), d;
+const Nl = R(
+  ({ className: o, origin: e = "bottom-right", children: n, ...t }, a) => {
+    const [i, s] = U([]), r = J(() => {
+      const c = [];
+      return We.Children.forEach(n, (b) => {
+        We.isValidElement(b) && c.push(b);
+      }), c;
     }, [n]);
     X(() => {
-      r(s);
-    }, [s]);
-    const m = J(() => a.some((c) => {
-      var b;
-      const u = (b = c.props) == null ? void 0 : b.type;
-      return u === "error" || u === "warn";
-    }) ? "assertive" : "polite", [a]);
-    return /* @__PURE__ */ A("div", { ref: i, className: h("block", o), ...t, children: [
+      s(r);
+    }, [r]);
+    const m = J(() => i.some((b) => {
+      var d;
+      const h = (d = b.props) == null ? void 0 : d.type;
+      return h === "error" || h === "warn";
+    }) ? "assertive" : "polite", [i]);
+    return /* @__PURE__ */ L("div", { ref: a, className: p("block", o), ...t, children: [
       /* @__PURE__ */ l("div", { className: "w-0 h-0 overflow-hidden invisible", children: n }),
       /* @__PURE__ */ l(
         "div",
         {
-          className: h(
+          className: p(
             "fixed z-50 right-4 flex flex-col",
             e === "top-right" ? "top-4 flex-col-reverse" : "bottom-0"
           ),
           "aria-live": m,
-          children: a.map((d, c) => /* @__PURE__ */ l("div", { className: "mb-4", children: d }, d.key ?? c))
+          children: i.map((c, b) => /* @__PURE__ */ l("div", { className: "mb-4", children: c }, c.key ?? b))
         }
       )
     ] });
   }
 );
-jl.displayName = "ToastManager";
-const fr = {
+Nl.displayName = "ToastManager";
+const xr = {
   success: (o, e) => ({
     type: "success",
     text: o,
@@ -8554,7 +8638,7 @@ const fr = {
     text: o,
     ...e
   })
-}, $e = 16, vl = D(
+}, He = 16, Vl = C(
   "relative w-fit min-w-full",
   {
     variants: {
@@ -8589,13 +8673,13 @@ const fr = {
       tip: !1
     }
   }
-), wl = D(
+), zl = C(
   [
     "bg-[var(--sinch-comp-popover-color-default-background-initial,var(--sinch-sys-color-surface-primary-default))]",
     "border",
     "border-[var(--sinch-comp-popover-color-default-border-initial,var(--sinch-sys-color-border-default))]",
     "rounded-[var(--sinch-comp-popover-shape-radius,8px)]",
-    "shadow-[var(--sinch-comp-popover-shadow,0_4px_16px_rgba(0,0,0,0.12))]",
+    "shadow-[var(--sinch-comp-popover-shadow,var(--sinch-sys-shadow-overlay-sm))]",
     "overflow-hidden"
   ],
   {
@@ -8609,7 +8693,7 @@ const fr = {
       tip: !1
     }
   }
-), xl = D(
+), Il = C(
   [
     "absolute",
     "w-4",
@@ -8641,7 +8725,7 @@ const fr = {
       hidden: !0
     }
   }
-), yl = D(
+), Cl = C(
   "fixed inset-0 z-50",
   {
     variants: {
@@ -8654,127 +8738,121 @@ const fr = {
       modal: !1
     }
   }
-), bn = P(
+), fn = R(
   ({
     className: o,
     children: e,
     content: n,
     open: t = !1,
-    orientation: i = "bottom-left",
-    tip: a = !1,
-    modal: r = !1,
-    allowScroll: s = !1,
+    orientation: a = "bottom-left",
+    tip: i = !1,
+    modal: s = !1,
+    allowScroll: r = !1,
     onClose: m,
-    "aria-label": d,
-    ...c
-  }, u) => {
-    const [b, p] = F({ x: 0, y: 0 }), [f, g] = F({}), [x, V] = F(!1), [I, N] = F(void 0), j = Z(null), v = Z(null), w = `popover-content-${mo()}`, T = k(() => {
-      if (j.current === null || v.current === null)
+    onOpenChange: c,
+    "aria-label": b,
+    ...h
+  }, d) => {
+    const [u, g] = U({ x: 0, y: 0 }), [v, N] = U({}), [I, V] = U(!1), [z, y] = U(void 0), w = Y(null), j = Y(null), M = `popover-content-${eo()}`, T = f(() => {
+      if (w.current === null || j.current === null)
         return;
-      const C = j.current.getBoundingClientRect(), E = v.current.getBoundingClientRect(), _ = 4;
-      let L = 0, R = 0;
-      i === "bottom-right" || i === "top-right" || i === "bottom" || i === "top" ? L = C.x : i === "bottom-left" || i === "top-left" ? L = C.x + C.width - E.width : i === "right" ? L = C.x + C.width : i === "left" && (L = C.x - E.width), i.startsWith("bottom") ? R = C.y + C.height : i.startsWith("top") ? R = C.y - E.height : (i === "left" || i === "right") && (R = C.y + C.height / 2 - E.height / 2);
-      const U = Math.max(_, Math.min(L, window.innerWidth - E.width - _)), G = Math.max(_, Math.min(R, window.innerHeight - E.height - _));
-      p({ x: U, y: G });
-      const q = window.innerWidth - U - 16;
-      N(q), a && z(C, E, U, G);
-    }, [i, a]), z = (C, E, _, L) => {
-      const R = {};
-      if (i.startsWith("top") || i.startsWith("bottom")) {
-        let q = C.x - _ + C.width / 2;
-        (i === "bottom-left" || i === "top-left") && (q = Math.max(q, E.width * 0.75)), (i === "bottom-right" || i === "top-right") && (q = Math.min(q, E.width * 0.25));
-        const H = Math.max($e, Math.min(q, E.width - $e));
-        R.left = `${H}px`;
-      } else if (i === "left" || i === "right") {
-        const q = C.y - L + C.height / 2, H = Math.max($e, Math.min(q, E.height - $e));
-        R.top = `${H}px`;
+      const x = w.current.getBoundingClientRect(), E = j.current.getBoundingClientRect(), S = 4;
+      let F = 0, $ = 0;
+      a === "bottom-right" || a === "top-right" || a === "bottom" || a === "top" ? F = x.x : a === "bottom-left" || a === "top-left" ? F = x.x + x.width - E.width : a === "right" ? F = x.x + x.width : a === "left" && (F = x.x - E.width), a.startsWith("bottom") ? $ = x.y + x.height : a.startsWith("top") ? $ = x.y - E.height : (a === "left" || a === "right") && ($ = x.y + x.height / 2 - E.height / 2);
+      const H = Math.max(S, Math.min(F, window.innerWidth - E.width - S)), Z = Math.max(S, Math.min($, window.innerHeight - E.height - S));
+      g({ x: H, y: Z });
+      const _ = window.innerWidth - H - 16;
+      y(_), i && P(x, E, H, Z);
+    }, [a, i]), P = (x, E, S, F) => {
+      const $ = {};
+      if (a.startsWith("top") || a.startsWith("bottom")) {
+        let _ = x.x - S + x.width / 2;
+        (a === "bottom-left" || a === "top-left") && (_ = Math.max(_, E.width * 0.75)), (a === "bottom-right" || a === "top-right") && (_ = Math.min(_, E.width * 0.25));
+        const A = Math.max(He, Math.min(_, E.width - He));
+        $.left = `${A}px`;
+      } else if (a === "left" || a === "right") {
+        const _ = x.y - F + x.height / 2, A = Math.max(He, Math.min(_, E.height - He));
+        $.top = `${A}px`;
       }
-      g(R);
-      const U = !(C.right < E.left || C.left > E.right || C.bottom < E.top || C.top > E.bottom);
-      V(U);
+      N($);
+      const H = !(x.right < E.left || x.left > E.right || x.bottom < E.top || x.top > E.bottom);
+      V(H);
     };
-    Ao(() => {
+    _o(() => {
       t && T();
     }, [t, T]), X(() => {
       if (!t)
         return;
-      const C = () => {
+      const x = () => {
         T();
-      }, E = new ResizeObserver(C);
-      if (v.current !== null && E.observe(v.current), window.addEventListener("resize", C), s && j.current !== null) {
-        const _ = () => T();
-        return window.addEventListener("scroll", _, { passive: !0, capture: !0 }), () => {
-          E.disconnect(), window.removeEventListener("resize", C), window.removeEventListener("scroll", _, { capture: !0 });
+      }, E = new ResizeObserver(x);
+      if (j.current !== null && E.observe(j.current), window.addEventListener("resize", x), r && w.current !== null) {
+        const S = () => T();
+        return window.addEventListener("scroll", S, { passive: !0, capture: !0 }), () => {
+          E.disconnect(), window.removeEventListener("resize", x), window.removeEventListener("scroll", S, { capture: !0 });
         };
       }
       return () => {
-        E.disconnect(), window.removeEventListener("resize", C);
+        E.disconnect(), window.removeEventListener("resize", x);
       };
-    }, [t, s, T]), X(() => {
+    }, [t, r, T]), X(() => {
       if (!t)
         return;
-      const C = (E) => {
-        E.key === "Escape" && (E.preventDefault(), m == null || m());
+      const x = (E) => {
+        E.key === "Escape" && (E.preventDefault(), m == null || m(), c == null || c(!1));
       };
-      return document.addEventListener("keydown", C), () => {
-        document.removeEventListener("keydown", C);
+      return document.addEventListener("keydown", x), () => {
+        document.removeEventListener("keydown", x);
       };
-    }, [t, m]), X(() => {
-      if (t && !s) {
-        const C = document.body.style.overflow;
-        return document.body.style.overflow = "hidden", () => {
-          document.body.style.overflow = C;
-        };
-      }
-    }, [t, s]);
-    const O = k((C) => {
-      C.target === C.currentTarget && (m == null || m());
-    }, [m]);
+    }, [t, m, c]), _e(t && !r);
+    const B = f((x) => {
+      x.target === x.currentTarget && (m == null || m(), c == null || c(!1));
+    }, [m, c]);
     X(() => {
-      if (!t || r)
+      if (!t || s)
         return;
-      const C = (_) => {
-        v.current !== null && !v.current.contains(_.target) && j.current !== null && !j.current.contains(_.target) && (m == null || m());
+      const x = (S) => {
+        j.current !== null && !j.current.contains(S.target) && w.current !== null && !w.current.contains(S.target) && (m == null || m(), c == null || c(!1));
       }, E = setTimeout(() => {
-        document.addEventListener("mousedown", C);
+        document.addEventListener("mousedown", x);
       }, 0);
       return () => {
-        clearTimeout(E), document.removeEventListener("mousedown", C);
+        clearTimeout(E), document.removeEventListener("mousedown", x);
       };
-    }, [t, r, m]);
-    const $ = t && /* @__PURE__ */ A(Ne, { children: [
+    }, [t, s, m, c]);
+    const D = t && /* @__PURE__ */ L(Ne, { children: [
       /* @__PURE__ */ l(
         "div",
         {
-          className: h(yl({ modal: r })),
-          onClick: O,
+          className: p(Cl({ modal: s })),
+          onClick: B,
           "aria-hidden": "true"
         }
       ),
       /* @__PURE__ */ l(
         "div",
         {
-          ref: v,
+          ref: j,
+          id: M,
           role: "dialog",
-          "aria-modal": r,
-          "aria-label": d,
-          "aria-labelledby": d !== void 0 ? void 0 : w,
-          className: h(
+          "aria-modal": s,
+          "aria-label": b,
+          className: p(
             "fixed z-50",
-            a && "drop-shadow-[var(--sinch-comp-popover-shadow,0_4px_16px_rgba(0,0,0,0.12))]"
+            i && "drop-shadow-[var(--sinch-comp-popover-shadow,var(--sinch-sys-shadow-overlay-sm))]"
           ),
           style: {
-            left: b.x,
-            top: b.y,
-            maxWidth: I
+            left: u.x,
+            top: u.y,
+            maxWidth: z
           },
-          children: /* @__PURE__ */ A("div", { className: h(vl({ orientation: i, tip: a })), children: [
-            /* @__PURE__ */ l("div", { className: h(wl({ tip: a }), o), children: n }),
-            a && /* @__PURE__ */ l(
+          children: /* @__PURE__ */ L("div", { className: p(Vl({ orientation: a, tip: i })), children: [
+            /* @__PURE__ */ l("div", { className: p(zl({ tip: i }), o), children: n }),
+            i && /* @__PURE__ */ l(
               "svg",
               {
-                className: h(xl({ orientation: i, hidden: x })),
-                style: f,
+                className: p(Il({ orientation: a, hidden: I })),
+                style: v,
                 width: "16",
                 height: "9",
                 "aria-hidden": "true",
@@ -8785,182 +8863,182 @@ const fr = {
         }
       )
     ] });
-    return /* @__PURE__ */ A(
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: u,
+        ref: d,
         className: "contents",
-        ...c,
+        ...h,
         children: [
           /* @__PURE__ */ l(
             "div",
             {
-              ref: j,
-              "aria-controls": w,
+              ref: w,
+              "aria-controls": M,
               "aria-haspopup": "dialog",
               "aria-expanded": t,
               children: e
             }
           ),
-          Pe($, document.body)
+          $e(D, document.body)
         ]
       }
     );
   }
 );
-bn.displayName = "Popover";
-const Nl = 40, un = de(null), Cl = () => {
-  const o = be(un);
+fn.displayName = "Popover";
+const Ml = 40, jn = be(null), Dl = () => {
+  const o = ue(jn);
   if (!o)
     throw new Error("ActionMenuOption must be used within an ActionMenu");
   return o;
-}, Vl = P(
-  ({ className: o, rows: e, children: n, "aria-label": t, onKeyDown: i, onBlur: a, ...r }, s) => {
-    const [m, d] = F(null), c = Z(/* @__PURE__ */ new Map()), u = Z(null), b = Z(null);
-    Le(s, () => u.current);
-    const p = k((y, w, T) => {
-      c.current.set(y, { disabled: w, onClick: T });
-    }, []), f = k(() => {
-      const y = [];
-      return c.current.forEach((w, T) => {
-        w.disabled || y.push(T);
-      }), y.sort((w, T) => w - T);
-    }, []), g = k(() => {
+}, Tl = R(
+  ({ className: o, rows: e, children: n, "aria-label": t, onKeyDown: a, onBlur: i, ...s }, r) => {
+    const [m, c] = U(null), b = Y(/* @__PURE__ */ new Map()), h = Y(null), d = Y(null);
+    Fe(r, () => h.current);
+    const u = f((j, k, M) => {
+      b.current.set(j, { disabled: k, onClick: M });
+    }, []), g = f(() => {
+      const j = [];
+      return b.current.forEach((k, M) => {
+        k.disabled || j.push(M);
+      }), j.sort((k, M) => k - M);
+    }, []), v = f(() => {
       if (m !== null) {
-        const y = c.current.get(m);
-        y && !y.disabled && y.onClick && y.onClick();
+        const j = b.current.get(m);
+        j && !j.disabled && j.onClick && j.onClick();
       }
-    }, [m]), x = k((y) => {
-      const w = f();
-      if (w.length === 0) return null;
+    }, [m]), N = f((j) => {
+      const k = g();
+      if (k.length === 0) return null;
       if (m === null)
-        return y === "down" ? w[0] : w[w.length - 1];
-      const T = w.indexOf(m);
-      return T === -1 ? w[0] : y === "down" ? w[(T + 1) % w.length] : w[(T - 1 + w.length) % w.length];
-    }, [m, f]), V = k((y) => {
-      if (i == null || i(y), !y.defaultPrevented)
-        switch (y.code) {
+        return j === "down" ? k[0] : k[k.length - 1];
+      const M = k.indexOf(m);
+      return M === -1 ? k[0] : j === "down" ? k[(M + 1) % k.length] : k[(M - 1 + k.length) % k.length];
+    }, [m, g]), I = f((j) => {
+      if (a == null || a(j), !j.defaultPrevented)
+        switch (j.code) {
           case "ArrowDown": {
-            y.preventDefault();
-            const w = x("down");
-            d(w);
+            j.preventDefault();
+            const k = N("down");
+            c(k);
             break;
           }
           case "ArrowUp": {
-            y.preventDefault();
-            const w = x("up");
-            d(w);
+            j.preventDefault();
+            const k = N("up");
+            c(k);
             break;
           }
           case "Enter":
           case "Space": {
-            m !== null && (y.preventDefault(), g());
+            m !== null && (j.preventDefault(), v());
             break;
           }
         }
-    }, [i, x, m, g]), I = k((y) => {
-      var w;
-      a == null || a(y), (w = u.current) != null && w.contains(y.relatedTarget) || d(null);
-    }, [a]), N = e != null ? e * Nl : void 0, j = He.map(n, (y, w) => Ke(y) ? ro(y, { index: w }) : y), v = {
+    }, [a, N, m, v]), V = f((j) => {
+      var k;
+      i == null || i(j), (k = h.current) != null && k.contains(j.relatedTarget) || c(null);
+    }, [i]), z = e != null ? e * Ml : void 0, y = Ze.map(n, (j, k) => oo(j) ? ho(j, { index: k }) : j), w = {
       selectedIndex: m,
-      setSelectedIndex: d,
-      registerOption: p,
-      getEnabledIndices: f,
-      triggerSelectedOption: g
+      setSelectedIndex: c,
+      registerOption: u,
+      getEnabledIndices: g,
+      triggerSelectedOption: v
     };
-    return /* @__PURE__ */ l(un.Provider, { value: v, children: /* @__PURE__ */ l(
+    return /* @__PURE__ */ l(jn.Provider, { value: w, children: /* @__PURE__ */ l(
       "div",
       {
-        ref: u,
+        ref: h,
         role: "listbox",
         tabIndex: 0,
         "aria-label": t,
-        className: h(
+        className: p(
           // Base styles
           "block outline-none",
           o
         ),
-        onKeyDown: V,
-        onBlur: I,
-        ...r,
+        onKeyDown: I,
+        onBlur: V,
+        ...s,
         children: /* @__PURE__ */ l(
           "div",
           {
-            ref: b,
+            ref: d,
             role: "presentation",
             className: "overflow-y-auto",
-            style: { maxHeight: N },
-            children: j
+            style: { maxHeight: z },
+            children: y
           }
         )
       }
     ) });
   }
 );
-Vl.displayName = "ActionMenu";
-const Il = P(
+Tl.displayName = "ActionMenu";
+const Sl = R(
   ({
     className: o,
     text: e,
     disabled: n = !1,
     "aria-label": t,
-    icon: i,
-    rightIcon: a,
-    onClick: r,
-    index: s = 0,
+    icon: a,
+    rightIcon: i,
+    onClick: s,
+    index: r = 0,
     onMouseDown: m,
-    onMouseOver: d,
-    onKeyDown: c,
-    ...u
-  }, b) => {
-    const p = Cl(), f = Z(null);
-    Le(b, () => f.current);
-    const g = p.selectedIndex === s;
+    onMouseOver: c,
+    onKeyDown: b,
+    ...h
+  }, d) => {
+    const u = Dl(), g = Y(null);
+    Fe(d, () => g.current);
+    const v = u.selectedIndex === r;
     X(() => {
-      p.registerOption(s, n, r);
-    }, [p, s, n, r]), X(() => {
-      g && f.current && f.current.scrollIntoView && f.current.scrollIntoView({ block: "nearest" });
-    }, [g]);
-    const x = k(() => {
-      n || r == null || r();
-    }, [n, r]), V = k((j) => {
-      m == null || m(j), !(j.defaultPrevented || n) && x();
-    }, [m, n, x]), I = k((j) => {
-      d == null || d(j), !j.defaultPrevented && g && p.setSelectedIndex(null);
-    }, [d, g, p]), N = k((j) => {
-      c == null || c(j), !(j.defaultPrevented || n) && (j.code === "Enter" || j.code === "Space") && (j.preventDefault(), x());
-    }, [c, n, x]);
+      u.registerOption(r, n, s);
+    }, [u, r, n, s]), X(() => {
+      v && g.current && g.current.scrollIntoView && g.current.scrollIntoView({ block: "nearest" });
+    }, [v]);
+    const N = f(() => {
+      n || s == null || s();
+    }, [n, s]), I = f((y) => {
+      m == null || m(y), !(y.defaultPrevented || n) && N();
+    }, [m, n, N]), V = f((y) => {
+      c == null || c(y), !y.defaultPrevented && v && u.setSelectedIndex(null);
+    }, [c, v, u]), z = f((y) => {
+      b == null || b(y), !(y.defaultPrevented || n) && (y.code === "Enter" || y.code === "Space") && (y.preventDefault(), N());
+    }, [b, n, N]);
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: f,
+        ref: g,
         role: "option",
-        "aria-selected": g && !n,
+        "aria-selected": v && !n,
         "aria-disabled": n,
         "aria-label": t ?? e,
         tabIndex: -1,
-        className: h(
+        className: p(
           // Base styles
           "block cursor-pointer outline-none",
           // Disabled state
           n && "cursor-default",
           o
         ),
-        onMouseDown: V,
-        onMouseOver: I,
-        onKeyDown: N,
-        ...u,
-        children: /* @__PURE__ */ A(
+        onMouseDown: I,
+        onMouseOver: V,
+        onKeyDown: z,
+        ...h,
+        children: /* @__PURE__ */ L(
           "div",
           {
-            className: h(
+            className: p(
               // Base wrapper styles
               "box-border flex h-10 w-full items-center gap-2.5 px-4 py-2",
               "select-none",
               // Background colors
               "bg-[var(--sinch-comp-action-menu-color-default-background-initial)]",
               // Selected state
-              g && !n && "bg-[var(--sinch-comp-action-menu-color-default-background-selected)]",
+              v && !n && "bg-[var(--sinch-comp-action-menu-color-default-background-selected)]",
               // Hover state (only when not disabled)
               !n && "hover:bg-[var(--sinch-comp-action-menu-color-default-background-hover)]",
               // Disabled state
@@ -8976,11 +9054,11 @@ const Il = P(
               "--sinch-global-size-icon": "var(--sinch-comp-action-menu-size-icon)"
             },
             children: [
-              i && /* @__PURE__ */ l("span", { className: "-ml-1.5", children: i }),
+              a && /* @__PURE__ */ l("span", { className: "-ml-1.5", children: a }),
               /* @__PURE__ */ l(
                 "span",
                 {
-                  className: h(
+                  className: p(
                     "min-w-0 flex-1 truncate",
                     "text-[color:var(--sinch-global-color-text)]",
                     "font-[var(--sinch-comp-action-menu-font-option)]"
@@ -8988,7 +9066,7 @@ const Il = P(
                   children: e
                 }
               ),
-              a && /* @__PURE__ */ l("span", { className: "-mr-1.5", children: a })
+              i && /* @__PURE__ */ l("span", { className: "-mr-1.5", children: i })
             ]
           }
         )
@@ -8996,128 +9074,128 @@ const Il = P(
     );
   }
 );
-Il.displayName = "ActionMenuOption";
-const hn = de(null), zl = () => {
-  const o = be(hn);
+Sl.displayName = "ActionMenuOption";
+const vn = be(null), El = () => {
+  const o = ue(vn);
   if (o === null)
     throw new Error(
       "SelectMenuOption must be used within a SelectMenu component"
     );
   return o;
-}, zo = 40, Dl = 7, Tl = D(
+}, Eo = 40, Al = 7, Ol = C(
   // Base styles
   ["block outline-none"],
   {
     variants: {},
     defaultVariants: {}
   }
-), pn = P(
+), wn = R(
   ({
     className: o,
     name: e,
     value: n,
     defaultValue: t = "",
-    rows: i,
-    multiple: a = !1,
-    searchable: r = null,
-    searchValue: s,
+    rows: a,
+    multiple: i = !1,
+    searchable: s = null,
+    searchValue: r,
     defaultSearchValue: m = "",
-    searchPlaceholder: d = "Search",
-    searchAutocomplete: c,
-    "aria-label": u,
-    onChange: b,
-    onSearchChange: p,
-    children: f,
-    ...g
-  }, x) => {
-    const [V, I] = F(t), [N, j] = F(m), [v, y] = F(null), [w, T] = F(0), z = Z(/* @__PURE__ */ new Map()), O = n !== void 0, $ = O ? n : V, C = s !== void 0, E = C ? s : N, _ = J(() => $ === "" ? /* @__PURE__ */ new Set() : new Set($.split(",").map((W) => W.trim())), [$]), L = k(
-      (W) => _.has(W),
-      [_]
-    ), R = J(() => r === !0 ? !0 : r === !1 ? !1 : w >= Dl, [r, w]), U = J(() => {
-      if (i === void 0)
+    searchPlaceholder: c = "Search",
+    searchAutocomplete: b,
+    "aria-label": h,
+    onChange: d,
+    onSearchChange: u,
+    children: g,
+    ...v
+  }, N) => {
+    const [I, V] = U(t), [z, y] = U(m), [w, j] = U(null), [k, M] = U(0), T = Y(/* @__PURE__ */ new Map()), P = n !== void 0, B = P ? n : I, D = r !== void 0, x = D ? r : z, E = J(() => B === "" ? /* @__PURE__ */ new Set() : new Set(B.split(",").map((O) => O.trim())), [B]), S = f(
+      (O) => E.has(O),
+      [E]
+    ), F = J(() => s === !0 ? !0 : s === !1 ? !1 : k >= Al, [s, k]), $ = J(() => {
+      if (a === void 0)
         return;
-      const W = i * zo;
-      return w > i ? W + zo / 2 : W;
-    }, [i, w]), G = k(
-      (W) => {
-        let Q;
-        if (a) {
-          const le = new Set(_);
-          le.has(W) ? le.delete(W) : le.add(W), Q = Array.from(le).join(",");
+      const O = a * Eo;
+      return k > a ? O + Eo / 2 : O;
+    }, [a, k]), H = f(
+      (O) => {
+        let W;
+        if (i) {
+          const Q = new Set(E);
+          Q.has(O) ? Q.delete(O) : Q.add(O), W = Array.from(Q).join(",");
         } else
-          Q = W;
-        O || I(Q), b == null || b(Q);
+          W = O;
+        P || V(W), d == null || d(W);
       },
-      [O, a, b, _]
-    ), q = k(
-      (W) => {
-        C || j(W), p == null || p(W);
+      [P, i, d, E]
+    ), Z = f(
+      (O) => {
+        D || y(O), u == null || u(O);
       },
-      [C, p]
-    ), H = k(
-      (W, Q, le, ce) => {
-        z.current.set(W, {
-          element: Q,
-          text: le,
-          disabled: ce
-        }), T((se) => se + 1);
+      [D, u]
+    ), _ = f(
+      (O, W, Q, ae) => {
+        T.current.set(O, {
+          element: W,
+          text: Q,
+          disabled: ae
+        }), M((ie) => ie + 1);
       },
       []
-    ), S = k((W) => {
-      z.current.delete(W), T((Q) => Math.max(0, Q - 1));
-    }, []), ee = k(() => Array.from(z.current.entries()).filter(([, W]) => !(W.disabled || E !== "" && !W.text.toLowerCase().includes(E.toLowerCase()))).map(([W, Q]) => ({ value: W, element: Q.element })), [E]), M = k(
-      (W) => {
-        var le, ce, se, B;
-        const Q = ee();
-        if (Q.length !== 0)
-          switch (W.code) {
+    ), A = f((O) => {
+      T.current.delete(O), M((W) => Math.max(0, W - 1));
+    }, []), ne = f(() => Array.from(T.current.entries()).filter(([, O]) => !(O.disabled || x !== "" && !O.text.toLowerCase().includes(x.toLowerCase()))).map(([O, W]) => ({ value: O, element: W.element })), [x]), G = f(
+      (O) => {
+        var Q, ae, ie, le;
+        const W = ne();
+        if (W.length !== 0)
+          switch (O.code) {
             case "ArrowDown": {
-              W.preventDefault();
-              const oe = Q.findIndex(
-                (re) => re.value === v
-              ), ue = oe < 0 ? 0 : (oe + 1) % Q.length, ae = Q[ue];
-              y(ae.value), (ce = (le = ae.element).scrollIntoView) == null || ce.call(le, { block: "nearest" });
+              O.preventDefault();
+              const ce = W.findIndex(
+                (de) => de.value === w
+              ), q = ce < 0 ? 0 : (ce + 1) % W.length, ee = W[q];
+              j(ee.value), (ae = (Q = ee.element).scrollIntoView) == null || ae.call(Q, { block: "nearest" });
               break;
             }
             case "ArrowUp": {
-              W.preventDefault();
-              const oe = Q.findIndex(
-                (re) => re.value === v
-              ), ue = oe < 0 ? Q.length - 1 : (oe - 1 + Q.length) % Q.length, ae = Q[ue];
-              y(ae.value), (B = (se = ae.element).scrollIntoView) == null || B.call(se, { block: "nearest" });
+              O.preventDefault();
+              const ce = W.findIndex(
+                (de) => de.value === w
+              ), q = ce < 0 ? W.length - 1 : (ce - 1 + W.length) % W.length, ee = W[q];
+              j(ee.value), (le = (ie = ee.element).scrollIntoView) == null || le.call(ie, { block: "nearest" });
               break;
             }
             case "Enter":
             case "Space": {
-              v !== null && (W.preventDefault(), G(v));
+              w !== null && (O.preventDefault(), H(w));
               break;
             }
           }
       },
-      [ee, G, v]
-    ), K = k(
-      (W) => {
-        W.currentTarget.contains(W.relatedTarget) || y(null);
+      [ne, H, w]
+    ), me = f(
+      (O) => {
+        O.currentTarget.contains(O.relatedTarget) || j(null);
       },
       []
-    ), te = J(() => {
-      if (E === "")
-        return f;
-      let W = 0;
-      const le = ((ce) => {
-        const se = [];
-        return Ue.Children.forEach(ce, (B) => {
-          if (!Ue.isValidElement(B)) {
-            se.push(B);
+    ), he = J(() => {
+      if (x === "")
+        return g;
+      let O = 0;
+      const Q = ((ae) => {
+        const ie = [];
+        return We.Children.forEach(ae, (le) => {
+          if (!We.isValidElement(le)) {
+            ie.push(le);
             return;
           }
-          B.type === fo || B.type.displayName === "SelectMenuOption" ? (B.props.text ?? "").toLowerCase().includes(E.toLowerCase()) && (W++, se.push(B)) : se.push(B);
-        }), se;
-      })(f);
-      return W === 0 ? /* @__PURE__ */ l(
+          le.type === xo || le.type.displayName === "SelectMenuOption" ? (le.props.text ?? "").toLowerCase().includes(x.toLowerCase()) && (O++, ie.push(le)) : ie.push(le);
+        }), ie;
+      })(g);
+      return O === 0 ? /* @__PURE__ */ l(
         "div",
         {
-          className: h(
+          className: p(
             "flex items-center justify-center w-full h-[30px] mb-[10px]",
             "pointer-events-none select-none",
             "text-[var(--sinch-comp-select-menu-color-default-not-found-text-initial,var(--sinch-sys-color-text-muted))]",
@@ -9125,54 +9203,54 @@ const hn = de(null), zl = () => {
           ),
           children: "No results"
         }
-      ) : le;
-    }, [f, E]);
+      ) : Q;
+    }, [g, x]);
     return /* @__PURE__ */ l(
-      hn.Provider,
+      vn.Provider,
       {
         value: {
-          value: $,
-          multiple: a,
-          onChange: G,
-          registerOption: H,
-          unregisterOption: S,
-          selectedOptionValue: v,
-          setSelectedOptionValue: y,
-          isValueSelected: L
+          value: B,
+          multiple: i,
+          onChange: H,
+          registerOption: _,
+          unregisterOption: A,
+          selectedOptionValue: w,
+          setSelectedOptionValue: j,
+          isValueSelected: S
         },
-        children: /* @__PURE__ */ A(
+        children: /* @__PURE__ */ L(
           "div",
           {
-            ref: x,
+            ref: N,
             role: "listbox",
             tabIndex: 0,
-            "aria-label": u,
-            "aria-multiselectable": a || void 0,
+            "aria-label": h,
+            "aria-multiselectable": i || void 0,
             "data-name": e,
-            "data-value": $,
-            className: h(Tl(), o),
-            onKeyDown: M,
-            onBlur: K,
-            ...g,
+            "data-value": B,
+            className: p(Ol(), o),
+            onKeyDown: G,
+            onBlur: me,
+            ...v,
             children: [
-              R && /* @__PURE__ */ l("div", { className: "mx-[10px] my-[10px]", children: /* @__PURE__ */ l(
-                uo,
+              F && /* @__PURE__ */ l("div", { className: "sticky top-0 z-10 px-2 pt-2 pb-2 border-b border-[var(--sinch-sys-color-border-default,#e5e7eb)] bg-[var(--sinch-comp-select-menu-color-default-background-initial,var(--sinch-sys-color-surface-primary-default,white))]", children: /* @__PURE__ */ l(
+                ko,
                 {
                   size: "s",
-                  value: E,
-                  placeholder: d,
-                  autoComplete: c,
+                  value: x,
+                  placeholder: c,
+                  autoComplete: b,
                   "aria-label": "Search options",
-                  icon: /* @__PURE__ */ l(ne, { name: "magnifying-glass", iconsVersion: "2" }),
-                  onChange: q,
-                  rightAddon: E !== "" ? /* @__PURE__ */ l(
+                  icon: /* @__PURE__ */ l(oe, { name: "magnifying-glass", iconsVersion: "2" }),
+                  onChange: Z,
+                  rightAddon: x !== "" ? /* @__PURE__ */ l(
                     "button",
                     {
                       type: "button",
                       className: "flex items-center justify-center p-1 hover:bg-surface-secondary-hover rounded-sm",
-                      onClick: () => q(""),
+                      onClick: () => Z(""),
                       "aria-label": "Clear search",
-                      children: /* @__PURE__ */ l(ne, { name: "fa-xmark", iconsVersion: "2", size: "xs" })
+                      children: /* @__PURE__ */ l(oe, { name: "fa-xmark", iconsVersion: "2", size: "xs" })
                     }
                   ) : void 0
                 }
@@ -9183,9 +9261,9 @@ const hn = de(null), zl = () => {
                   role: "presentation",
                   className: "overflow-y-auto",
                   style: {
-                    maxHeight: U !== void 0 ? `${U}px` : void 0
+                    maxHeight: $ !== void 0 ? `${$}px` : void 0
                   },
-                  children: te
+                  children: he
                 }
               )
             ]
@@ -9195,8 +9273,8 @@ const hn = de(null), zl = () => {
     );
   }
 );
-pn.displayName = "SelectMenu";
-const Ml = D(
+wn.displayName = "SelectMenu";
+const Ll = C(
   // Base styles - wrapper
   [
     "flex relative box-border min-h-[40px] px-4 py-2",
@@ -9225,90 +9303,92 @@ const Ml = D(
       isDisabled: !1
     }
   }
-), fo = P(
+), xo = R(
   ({
     className: o,
     value: e,
     text: n = "",
     disabled: t = !1,
-    "aria-label": i,
-    icon: a,
-    customContent: r,
-    children: s,
+    "aria-label": a,
+    icon: i,
+    customContent: s,
+    children: r,
     ...m
-  }, d) => {
+  }, c) => {
     const {
-      registerOption: c,
-      unregisterOption: u,
-      onChange: b,
-      setSelectedOptionValue: p,
-      selectedOptionValue: f,
-      isValueSelected: g
-    } = zl(), x = Z(null), V = g(e), I = f === e, N = k(
-      (y) => {
-        x.current = y, y !== null ? c(e, y, n, t) : u(e), d !== null && (typeof d == "function" ? d(y) : d.current = y);
+      registerOption: b,
+      unregisterOption: h,
+      onChange: d,
+      setSelectedOptionValue: u,
+      selectedOptionValue: g,
+      isValueSelected: v,
+      multiple: N
+    } = El(), I = Y(null), V = v(e), z = g === e, y = f(
+      (k) => {
+        I.current = k, k !== null ? b(e, k, n, t) : h(e), c !== null && (typeof c == "function" ? c(k) : c.current = k);
       },
-      [t, d, c, n, u, e]
+      [t, c, b, n, h, e]
     );
     X(() => {
-      x.current !== null && c(e, x.current, n, t);
-    }, [t, c, n, e]);
-    const j = k(() => {
-      t || b(e);
-    }, [t, b, e]), v = k(() => {
-      t || p(e);
-    }, [t, p, e]);
-    return /* @__PURE__ */ A(
+      I.current !== null && b(e, I.current, n, t);
+    }, [t, b, n, e]);
+    const w = f(() => {
+      t || d(e);
+    }, [t, d, e]), j = f(() => {
+      t || u(e);
+    }, [t, u, e]);
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: N,
+        ref: y,
         role: "option",
-        "aria-selected": V,
+        "aria-selected": N ? void 0 : V,
+        "aria-checked": N ? V : void 0,
         "aria-disabled": t,
-        "aria-label": i ?? n,
-        className: h(
-          Ml({
-            isSelected: I,
+        "aria-label": a ?? n,
+        className: p(
+          Ll({
+            isSelected: z,
             isDisabled: t
           }),
           o
         ),
-        onClick: j,
-        onMouseEnter: v,
+        onClick: w,
+        onMouseEnter: j,
         ...m,
         children: [
-          a !== void 0 && /* @__PURE__ */ l(
+          i !== void 0 && /* @__PURE__ */ l(
             "div",
             {
-              className: h(
+              className: p(
                 "-ml-[6px]",
                 t ? "[--sinch-global-color-icon:var(--sinch-comp-select-menu-color-disabled-icon-initial)]" : "[--sinch-global-color-icon:var(--sinch-comp-select-menu-color-default-icon-initial)]"
               ),
-              children: a
+              children: i
             }
           ),
-          r !== void 0 ? /* @__PURE__ */ l("div", { className: "flex-1 min-w-0 pointer-events-none", children: r }) : /* @__PURE__ */ A(
+          s !== void 0 ? /* @__PURE__ */ l("div", { className: "flex-1 min-w-0 pointer-events-none", children: s }) : /* @__PURE__ */ L(
             "span",
             {
-              className: h(
+              className: p(
                 "flex-1 min-w-0",
                 "font-[var(--sinch-comp-select-menu-font-option)]",
                 "truncate"
               ),
               children: [
                 n,
-                s
+                r
               ]
             }
           ),
           V && /* @__PURE__ */ l(
             "div",
             {
-              className: h(
+              className: p(
                 "-mr-[6px]",
                 t ? "[--sinch-global-color-icon:var(--sinch-comp-select-menu-color-disabled-icon-initial)]" : "[--sinch-global-color-icon:var(--sinch-comp-select-menu-color-default-icon-initial)]"
               ),
-              children: /* @__PURE__ */ l(ne, { name: "fa-check", iconsVersion: "2" })
+              children: /* @__PURE__ */ l(oe, { name: "fa-check", iconsVersion: "2" })
             }
           )
         ]
@@ -9316,8 +9396,8 @@ const Ml = D(
     );
   }
 );
-fo.displayName = "SelectMenuOption";
-const Sl = D(
+xo.displayName = "SelectMenuOption";
+const Pl = C(
   // Base styles
   [
     "relative inline-flex items-center gap-2 box-border w-full",
@@ -9353,7 +9433,7 @@ const Sl = D(
       isDisabled: !1
     }
   }
-), Ol = D(
+), Rl = C(
   // Base border styles
   [
     "absolute inset-0 pointer-events-none",
@@ -9393,34 +9473,36 @@ const Sl = D(
       isDisabled: !1
     }
   }
-), gn = P(
+), xn = R(
   ({
     className: o,
     text: e,
     placeholder: n,
     size: t = "m",
-    invalid: i = !1,
-    disabled: a = !1,
-    "aria-label": r,
-    onClick: s,
+    invalid: a = !1,
+    disabled: i = !1,
+    "aria-label": s,
+    onClick: r,
     onFocus: m,
-    onBlur: d,
-    icon: c,
-    leftAddon: u,
-    ...b
-  }, p) => {
-    const [f, g] = F(!1), x = k(() => {
-      a || s == null || s();
-    }, [a, s]), V = k(
-      (y) => {
-        (y.code === "Enter" || y.code === "Space") && (y.preventDefault(), x());
+    onBlur: c,
+    icon: b,
+    leftAddon: h,
+    clearable: d = !1,
+    onClear: u,
+    ...g
+  }, v) => {
+    const [N, I] = U(!1), V = f(() => {
+      i || r == null || r();
+    }, [i, r]), z = f(
+      (M) => {
+        (M.code === "Enter" || M.code === "Space") && (M.preventDefault(), V());
       },
-      [x]
-    ), I = k(() => {
-      g(!0), m == null || m();
-    }, [m]), N = k(() => {
-      g(!1), d == null || d();
-    }, [d]), j = e !== void 0 && e !== "", v = () => {
+      [V]
+    ), y = f(() => {
+      I(!0), m == null || m();
+    }, [m]), w = f(() => {
+      I(!1), c == null || c();
+    }, [c]), j = e !== void 0 && e !== "", k = () => {
       switch (t) {
         case "s":
           return "var(--sinch-comp-select-button-size-icon-s,16px)";
@@ -9430,80 +9512,101 @@ const Sl = D(
           return "var(--sinch-comp-select-button-size-icon-m,20px)";
       }
     };
-    return /* @__PURE__ */ A(
+    return /* @__PURE__ */ L(
       "div",
       {
-        ref: p,
+        ref: v,
         role: "button",
-        tabIndex: a ? -1 : 0,
-        "aria-label": r,
-        "aria-invalid": i || void 0,
-        "aria-disabled": a || void 0,
-        className: h(
-          Sl({ size: t, isDisabled: a }),
+        tabIndex: i ? -1 : 0,
+        "aria-label": s,
+        "aria-haspopup": "listbox",
+        "aria-invalid": a || void 0,
+        "aria-disabled": i || void 0,
+        className: p(
+          Pl({ size: t, isDisabled: i }),
           o
         ),
-        onClick: x,
-        onKeyDown: V,
-        onFocus: I,
-        onBlur: N,
+        onClick: V,
+        onKeyDown: z,
+        onFocus: y,
+        onBlur: w,
         style: {
-          "--sinch-global-size-icon": v()
+          "--sinch-global-size-icon": k()
         },
-        ...b,
+        ...g,
         children: [
           /* @__PURE__ */ l(
             "div",
             {
-              className: h(
-                Ol({
+              className: p(
+                Rl({
                   size: t,
-                  isFocused: f,
-                  isInvalid: i && !f,
-                  isDisabled: a
+                  isFocused: N,
+                  isInvalid: a && !N,
+                  isDisabled: i
                 })
               )
             }
           ),
-          u !== void 0 && /* @__PURE__ */ l("div", { className: "flex flex-row items-center self-stretch gap-1 -ml-1", children: u }),
-          c !== void 0 && /* @__PURE__ */ l(
+          h !== void 0 && /* @__PURE__ */ l("div", { className: "flex flex-row items-center self-stretch gap-1 -ml-1", children: h }),
+          b !== void 0 && /* @__PURE__ */ l(
             "div",
             {
-              className: h(
-                a ? "[--sinch-global-color-icon:var(--sinch-comp-select-button-color-disabled-icon-initial,var(--sinch-sys-color-text-disabled))]" : "[--sinch-global-color-icon:var(--sinch-comp-select-button-color-default-icon-initial,var(--sinch-sys-color-text-muted))]"
+              className: p(
+                i ? "[--sinch-global-color-icon:var(--sinch-comp-select-button-color-disabled-icon-initial,var(--sinch-sys-color-text-disabled))]" : "[--sinch-global-color-icon:var(--sinch-comp-select-button-color-default-icon-initial,var(--sinch-sys-color-text-muted))]"
               ),
-              children: c
+              children: b
             }
           ),
           j ? /* @__PURE__ */ l(
             "span",
             {
-              className: h(
+              className: p(
                 "flex-1 min-w-0 truncate",
                 "font-[var(--sinch-comp-select-button-font-input)]",
-                a ? "text-[var(--sinch-comp-select-button-color-disabled-text-initial,var(--sinch-sys-color-text-disabled))]" : "text-[var(--sinch-comp-select-button-color-default-text-initial,var(--sinch-sys-color-text-default))]"
+                i ? "text-[var(--sinch-comp-select-button-color-disabled-text-initial,var(--sinch-sys-color-text-disabled))]" : "text-[var(--sinch-comp-select-button-color-default-text-initial,var(--sinch-sys-color-text-default))]"
               ),
               children: e
             }
           ) : /* @__PURE__ */ l(
             "span",
             {
-              className: h(
+              className: p(
                 "flex-1 min-w-0 truncate",
                 "font-[var(--sinch-comp-select-button-font-placeholder)]",
-                a ? "text-[var(--sinch-comp-select-button-color-disabled-placeholder-initial,var(--sinch-sys-color-text-disabled))]" : "text-[var(--sinch-comp-select-button-color-default-placeholder-initial,var(--sinch-sys-color-text-muted))]"
+                i ? "text-[var(--sinch-comp-select-button-color-disabled-placeholder-initial,var(--sinch-sys-color-text-disabled))]" : "text-[var(--sinch-comp-select-button-color-default-placeholder-initial,var(--sinch-sys-color-text-muted))]"
               ),
               children: n
+            }
+          ),
+          d && j && !i && /* @__PURE__ */ l(
+            "div",
+            {
+              role: "button",
+              tabIndex: -1,
+              "aria-label": "Clear selection",
+              className: p(
+                "-ml-1 cursor-pointer",
+                "[--sinch-global-color-icon:var(--sinch-comp-select-button-color-default-icon-initial,var(--sinch-sys-color-text-muted))]",
+                "hover:[--sinch-global-color-icon:var(--sinch-comp-select-button-color-default-text-initial,var(--sinch-sys-color-text-default))]"
+              ),
+              onClick: (M) => {
+                M.stopPropagation(), u == null || u();
+              },
+              onKeyDown: (M) => {
+                (M.code === "Enter" || M.code === "Space") && (M.preventDefault(), M.stopPropagation(), u == null || u());
+              },
+              children: /* @__PURE__ */ l(oe, { name: "fa-xmark", iconsVersion: "2" })
             }
           ),
           /* @__PURE__ */ l(
             "div",
             {
-              className: h(
+              className: p(
                 "-ml-1",
-                a ? "[--sinch-global-color-icon:var(--sinch-comp-select-button-color-disabled-icon-initial,var(--sinch-sys-color-text-disabled))]" : "[--sinch-global-color-icon:var(--sinch-comp-select-button-color-default-icon-initial,var(--sinch-sys-color-text-muted))]"
+                i ? "[--sinch-global-color-icon:var(--sinch-comp-select-button-color-disabled-icon-initial,var(--sinch-sys-color-text-disabled))]" : "[--sinch-global-color-icon:var(--sinch-comp-select-button-color-default-icon-initial,var(--sinch-sys-color-text-muted))]"
               ),
-              children: /* @__PURE__ */ l(ne, { name: "fa-chevron-down", iconsVersion: "2" })
+              children: /* @__PURE__ */ l(oe, { name: "fa-chevron-down", iconsVersion: "2" })
             }
           )
         ]
@@ -9511,18 +9614,18 @@ const Sl = D(
     );
   }
 );
-gn.displayName = "SelectButton";
-const jr = Object.assign(pn, {
-  Option: fo,
-  Button: gn
-}), El = [
+xn.displayName = "SelectButton";
+const yr = Object.assign(wn, {
+  Option: xo,
+  Button: xn
+}), Fl = [
   "skintone-dark",
   "skintone-default",
   "skintone-light",
   "skintone-light-medium",
   "skintone-medium",
   "skintone-medium-dark"
-], Al = [
+], $l = [
   "blue",
   "dark-blue",
   "dark-gray",
@@ -9548,15 +9651,15 @@ const jr = Object.assign(pn, {
   "red",
   "violet",
   "yellow",
-  ...El
-], Ze = (o = "") => Al.includes(o), Ll = (o) => `var(--sinch-comp-color-swatch-color-${o}-background)`, Pl = (o) => `var(--sinch-comp-color-swatch-color-${o}-foreground)`, Rl = D(
+  ...Fl
+], Je = (o = "") => $l.includes(o), _l = (o) => `var(--sinch-comp-color-swatch-color-${o}-background)`, Ul = (o) => `var(--sinch-comp-color-swatch-color-${o}-foreground)`, Hl = C(
   // Base styles - the outer container
   "inline-block align-middle",
   {
     variants: {},
     defaultVariants: {}
   }
-), $l = D(
+), Bl = C(
   // Inner wrapper styles - the colored circle
   [
     "w-[var(--sinch-global-size-icon,32px)]",
@@ -9574,17 +9677,17 @@ const jr = Object.assign(pn, {
       noColor: !1
     }
   }
-), jo = P(
-  ({ className: o, name: e, "aria-label": n, ...t }, i) => {
-    const { backgroundColor: a, hasColor: r, computedAriaLabel: s } = J(() => {
+), yo = R(
+  ({ className: o, name: e, "aria-label": n, ...t }, a) => {
+    const { backgroundColor: i, hasColor: s, computedAriaLabel: r } = J(() => {
       if (!(e != null && e.length > 0))
-        return { backgroundColor: void 0, hasColor: !1, computedAriaLabel: n };
-      if (Ze(e)) {
-        const d = n == null || Ze(n) ? e : n;
+        return { backgroundColor: void 0, hasColor: !1, computedAriaLabel: n ?? "No color" };
+      if (Je(e)) {
+        const c = n == null || Je(n) ? e : n;
         return {
-          backgroundColor: Ll(e),
+          backgroundColor: _l(e),
           hasColor: !0,
-          computedAriaLabel: d
+          computedAriaLabel: c
         };
       }
       return { backgroundColor: e, hasColor: !0, computedAriaLabel: n };
@@ -9592,17 +9695,17 @@ const jr = Object.assign(pn, {
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: i,
-        className: h(Rl(), o),
-        "aria-label": s,
+        ref: a,
+        className: p(Hl(), o),
+        "aria-label": r,
         role: "img",
         ...t,
         children: /* @__PURE__ */ l(
           "div",
           {
-            className: h($l({ noColor: !r })),
-            style: r ? { backgroundColor: a } : void 0,
-            ...!r && {
+            className: p(Bl({ noColor: !s })),
+            style: s ? { backgroundColor: i } : void 0,
+            ...!s && {
               style: {
                 background: `linear-gradient(
                 45deg,
@@ -9620,13 +9723,13 @@ const jr = Object.assign(pn, {
     );
   }
 );
-jo.displayName = "ColorSwatch";
-const Fl = 5, _l = 44, Ul = 56, kn = de(null), Hl = () => {
-  const o = be(kn);
+yo.displayName = "ColorSwatch";
+const Gl = 5, Wl = 44, Zl = 56, yn = be(null), ql = () => {
+  const o = ue(yn);
   if (o === null)
     throw new Error("ColorMenuOption must be used within a ColorMenu");
   return o;
-}, Bl = D(
+}, Yl = C(
   // Base styles - the container
   [
     "block",
@@ -9636,7 +9739,7 @@ const Fl = 5, _l = 44, Ul = 56, kn = de(null), Hl = () => {
     variants: {},
     defaultVariants: {}
   }
-), Gl = D(
+), Kl = C(
   // The inner listbox wrapper
   [
     "flex",
@@ -9650,90 +9753,90 @@ const Fl = 5, _l = 44, Ul = 56, kn = de(null), Hl = () => {
     variants: {},
     defaultVariants: {}
   }
-), vo = P(
+), No = R(
   ({
     className: o,
     children: e,
     value: n,
     defaultValue: t = "",
-    rows: i,
-    cols: a,
-    onChange: r,
-    onKeyDown: s,
+    rows: a,
+    cols: i,
+    onChange: s,
+    onKeyDown: r,
     onBlur: m,
-    "aria-label": d,
-    ...c
-  }, u) => {
-    const [b, p] = F(t), f = n !== void 0, g = f ? n : b, [x, V] = F(null), I = Z(/* @__PURE__ */ new Map()), N = J(() => {
-      let L = 0;
-      const R = (U) => {
-        Array.isArray(U) ? U.forEach(R) : U != null && L++;
+    "aria-label": c,
+    ...b
+  }, h) => {
+    const [d, u] = U(t), g = n !== void 0, v = g ? n : d, [N, I] = U(null), V = Y(/* @__PURE__ */ new Map()), z = J(() => {
+      let S = 0;
+      const F = ($) => {
+        Array.isArray($) ? $.forEach(F) : $ != null && S++;
       };
-      return R(e), L;
-    }, [e]), j = a ?? Math.min(N, Fl), v = J(() => {
-      const L = {};
-      if (N > 0) {
-        const R = Math.min(j, N);
-        L.width = `${R * _l}px`;
+      return F(e), S;
+    }, [e]), y = i ?? Math.min(z, Gl), w = J(() => {
+      const S = {};
+      if (z > 0) {
+        const F = Math.min(y, z);
+        S.width = `${F * Wl}px`;
       }
-      return i !== void 0 && i >= 2 && (L.maxHeight = `${i * Ul}px`), L;
-    }, [j, N, i]), y = k(
-      (L) => {
-        f || p(L), r == null || r(L);
+      return a !== void 0 && a >= 2 && (S.maxHeight = `${a * Zl}px`), S;
+    }, [y, z, a]), j = f(
+      (S) => {
+        g || u(S), s == null || s(S);
       },
-      [f, r]
-    ), w = k((L) => {
-      V(L);
-    }, []), T = k((L, R) => {
-      I.current.set(L, R);
-    }, []), z = k(() => I.current.size, []), O = k(
-      (L) => {
-        const R = z();
-        if (R === 0) {
-          s == null || s(L);
+      [g, s]
+    ), k = f((S) => {
+      I(S);
+    }, []), M = f((S, F) => {
+      V.current.set(S, F);
+    }, []), T = f(() => V.current.size, []), P = f(
+      (S) => {
+        const F = T();
+        if (F === 0) {
+          r == null || r(S);
           return;
         }
-        const U = x ?? -1;
-        switch (L.key) {
+        const $ = N ?? -1;
+        switch (S.key) {
           case "ArrowLeft": {
-            L.preventDefault();
-            const G = U <= 0 ? R - 1 : U - 1;
-            V(G);
+            S.preventDefault();
+            const H = $ <= 0 ? F - 1 : $ - 1;
+            I(H);
             break;
           }
           case "ArrowRight": {
-            L.preventDefault();
-            const G = U < 0 || U >= R - 1 ? 0 : U + 1;
-            V(G);
+            S.preventDefault();
+            const H = $ < 0 || $ >= F - 1 ? 0 : $ + 1;
+            I(H);
             break;
           }
           case "ArrowUp": {
-            if (L.preventDefault(), U < 0)
-              V(0);
+            if (S.preventDefault(), $ < 0)
+              I(0);
             else {
-              const G = U - j;
-              if (G >= 0)
-                V(G);
+              const H = $ - y;
+              if (H >= 0)
+                I(H);
               else {
-                const q = Math.ceil(R / j), H = U % j, S = (q - 1) * j + H;
-                V(
-                  S < R ? S : R - 1
+                const Z = Math.ceil(F / y), _ = $ % y, A = (Z - 1) * y + _;
+                I(
+                  A < F ? A : F - 1
                 );
               }
             }
             break;
           }
           case "ArrowDown": {
-            if (L.preventDefault(), U < 0)
-              V(0);
+            if (S.preventDefault(), $ < 0)
+              I(0);
             else {
-              const G = U + j;
-              if (G < R)
-                V(G);
+              const H = $ + y;
+              if (H < F)
+                I(H);
               else {
-                const q = U % j;
-                V(
-                  q < R ? q : 0
+                const Z = $ % y;
+                I(
+                  Z < F ? Z : 0
                 );
               }
             }
@@ -9741,90 +9844,90 @@ const Fl = 5, _l = 44, Ul = 56, kn = de(null), Hl = () => {
           }
           case "Enter":
           case " ": {
-            if (L.preventDefault(), x !== null) {
-              const G = I.current.get(x);
-              G !== void 0 && y(G);
+            if (S.preventDefault(), N !== null) {
+              const H = V.current.get(N);
+              H !== void 0 && j(H);
             }
             break;
           }
         }
-        s == null || s(L);
+        r == null || r(S);
       },
       [
-        x,
-        j,
-        z,
+        N,
         y,
-        s
+        T,
+        j,
+        r
       ]
-    ), $ = k(
-      (L) => {
-        V(null), m == null || m(L);
+    ), B = f(
+      (S) => {
+        I(null), m == null || m(S);
       },
       [m]
-    ), C = J(
+    ), D = J(
       () => ({
-        value: g,
-        selectedIndex: x,
-        onOptionClick: y,
-        onOptionSelect: w,
-        registerOption: T
+        value: v,
+        selectedIndex: N,
+        onOptionClick: j,
+        onOptionSelect: k,
+        registerOption: M
       }),
-      [g, x, y, w, T]
+      [v, N, j, k, M]
     );
-    let E = 0;
-    const _ = J(() => {
-      const L = (R) => {
-        if (Array.isArray(R))
-          return R.map(L);
-        if (R != null && typeof R == "object" && "type" in R) {
-          const U = R, G = E++;
-          return { ...U, props: { ...U.props, index: G } };
+    let x = 0;
+    const E = J(() => {
+      const S = (F) => {
+        if (Array.isArray(F))
+          return F.map(S);
+        if (F != null && typeof F == "object" && "type" in F) {
+          const $ = F, H = x++;
+          return { ...$, props: { ...$.props, index: H } };
         }
-        return R;
+        return F;
       };
-      return L(e);
+      return S(e);
     }, [e]);
-    return /* @__PURE__ */ l(kn.Provider, { value: C, children: /* @__PURE__ */ l(
+    return /* @__PURE__ */ l(yn.Provider, { value: D, children: /* @__PURE__ */ l(
       "div",
       {
-        ref: u,
+        ref: h,
         role: "listbox",
         tabIndex: 0,
-        "aria-label": d,
-        className: h(Bl(), o),
-        onKeyDown: O,
-        onBlur: $,
-        ...c,
+        "aria-label": c,
+        className: p(Yl(), o),
+        onKeyDown: P,
+        onBlur: B,
+        ...b,
         children: /* @__PURE__ */ l(
           "div",
           {
             role: "presentation",
-            className: h(Gl()),
-            style: v,
-            children: _
+            className: p(Kl()),
+            style: w,
+            children: E
           }
         )
       }
     ) });
   }
 );
-vo.displayName = "ColorMenu";
-const Wl = D(
+No.displayName = "ColorMenu";
+const Jl = C(
   // Base styles - the option container
   ["block", "outline-none"],
   {
     variants: {},
     defaultVariants: {}
   }
-), Zl = D(
+), Xl = C(
   // The inner wrapper
-  ["w-[44px]", "h-[56px]", "p-3", "box-border"],
+  ["w-[var(--sinch-comp-color-menu-size-option-width,44px)]", "h-[var(--sinch-comp-color-menu-size-option-height,56px)]", "p-3", "box-border"],
   {
     variants: {},
     defaultVariants: {}
   }
-), ql = D(
+), Ql = C(
   // Swatch wrapper with border ring
   [
     "relative",
@@ -9837,25 +9940,25 @@ const Wl = D(
     variants: {},
     defaultVariants: {}
   }
-), wo = P(
-  ({ className: o, value: e, index: n = 0, "aria-label": t, ...i }, a) => {
-    const r = Hl(), s = r.value === e, m = r.selectedIndex === n;
+), Vo = R(
+  ({ className: o, value: e, index: n = 0, "aria-label": t, ...a }, i) => {
+    const s = ql(), r = s.value === e, m = s.selectedIndex === n;
     J(() => {
-      r.registerOption(n, e);
+      s.registerOption(n, e);
     }, [n, e]);
-    const d = k(() => {
-      r.onOptionClick(e), r.onOptionSelect(n);
-    }, [r, e, n]), c = J(() => Ze(e) ? { "--sinch-global-color-icon": Pl(e) } : { "--sinch-global-color-icon": e }, [e]), u = Ze(e) ? e : "", b = J(() => m ? "border-[var(--sinch-comp-color-menu-option-color-default-border-focus)]" : s ? "border-[var(--sinch-comp-color-menu-option-color-default-border-selected)]" : "border-[var(--sinch-comp-color-menu-option-color-default-border-initial)]", [m, s]), p = /* @__PURE__ */ A(
+    const c = f(() => {
+      s.onOptionClick(e), s.onOptionSelect(n);
+    }, [s, e, n]), b = J(() => Je(e) ? { "--sinch-global-color-icon": Ul(e) } : { "--sinch-global-color-icon": e }, [e]), h = Je(e) ? e : "", d = J(() => m ? "border-[var(--sinch-comp-color-menu-option-color-default-border-focus)]" : r ? "border-[var(--sinch-comp-color-menu-option-color-default-border-selected)]" : "border-[var(--sinch-comp-color-menu-option-color-default-border-initial)]", [m, r]), u = /* @__PURE__ */ L(
       "div",
       {
-        className: h(ql()),
-        style: c,
+        className: p(Ql()),
+        style: b,
         children: [
-          /* @__PURE__ */ l(jo, { name: e, "aria-label": t }),
+          /* @__PURE__ */ l(yo, { name: e, "aria-label": t }),
           /* @__PURE__ */ l(
             "div",
             {
-              className: h(
+              className: p(
                 "absolute",
                 "w-[34px]",
                 "h-[34px]",
@@ -9864,7 +9967,7 @@ const Wl = D(
                 "rounded-full",
                 "pointer-events-none",
                 "transition-colors",
-                b,
+                d,
                 "hover:border-[var(--sinch-comp-color-menu-option-color-default-border-hover)]",
                 "active:border-[var(--sinch-comp-color-menu-option-color-default-border-active)]"
               )
@@ -9876,168 +9979,166 @@ const Wl = D(
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: a,
+        ref: i,
         role: "option",
-        "aria-selected": s,
-        "data-checked": s || void 0,
+        "aria-selected": r,
+        "data-checked": r || void 0,
         "data-selected": m || void 0,
         "data-value": e,
-        className: h(Wl(), o),
-        onClick: d,
-        ...i,
-        children: /* @__PURE__ */ l("div", { className: h(Zl()), children: u.length > 0 ? /* @__PURE__ */ l(Xe, { text: u, children: p }) : p })
+        className: p(Jl(), o),
+        onClick: c,
+        ...a,
+        children: /* @__PURE__ */ l("div", { className: p(Xl()), children: h.length > 0 ? /* @__PURE__ */ l(to, { text: h, children: u }) : u })
       }
     );
   }
 );
-wo.displayName = "ColorMenuOption";
-const vr = Object.assign(vo, {
-  Option: wo
+Vo.displayName = "ColorMenuOption";
+const Nr = Object.assign(No, {
+  Option: Vo
 });
-let Ee = 0;
-const Yl = () => {
-  Ee++, Ee === 1 && (document.body.style.setProperty("overscroll-behavior", "none"), document.documentElement.style.setProperty("overscroll-behavior", "none"));
-}, Kl = () => {
-  Ee = Math.max(0, Ee - 1), Ee === 0 && (document.body.style.removeProperty("overscroll-behavior"), document.documentElement.style.removeProperty("overscroll-behavior"));
-}, Jl = P(
+let Pe = 0;
+const es = () => {
+  Pe++, Pe === 1 && (document.body.style.setProperty("overscroll-behavior", "none"), document.documentElement.style.setProperty("overscroll-behavior", "none"));
+}, os = () => {
+  Pe = Math.max(0, Pe - 1), Pe === 0 && (document.body.style.removeProperty("overscroll-behavior"), document.documentElement.style.removeProperty("overscroll-behavior"));
+}, ns = R(
   ({
     className: o,
     children: e,
     content: n,
     open: t = !1,
-    orientation: i = "bottom-right",
-    modal: a = !1,
-    allowScroll: r = !1,
-    hideOutsideViewport: s = !1,
+    orientation: a = "bottom-right",
+    modal: i = !1,
+    allowScroll: s = !1,
+    hideOutsideViewport: r = !1,
     inset: m = 0,
-    disableBackdropClose: d = !1,
-    onClose: c,
-    "aria-label": u,
-    ...b
-  }, p) => {
-    const [f, g] = F({ x: 0, y: 0 }), [x, V] = F(void 0), [I, N] = F(!1), j = Z(null), v = Z(null), y = Z(null), w = Z(null), T = k(() => {
-      if (j.current === null)
+    disableBackdropClose: c = !1,
+    onClose: b,
+    onOpenChange: h,
+    "aria-label": d,
+    ...u
+  }, g) => {
+    const [v, N] = U({ x: 0, y: 0 }), [I, V] = U(void 0), [z, y] = U(!1), w = Y(null), j = Y(null), k = Y(null), M = Y(null), T = f(() => {
+      if (w.current === null)
         return { x: 0, y: 0, width: 0, height: 0 };
-      const C = j.current.firstElementChild;
-      return C !== null && "footprintRect" in C ? C.footprintRect : j.current.getBoundingClientRect();
-    }, []), z = k(() => {
-      if (v.current === null)
+      const x = w.current.firstElementChild;
+      return x !== null && "footprintRect" in x ? x.footprintRect : w.current.getBoundingClientRect();
+    }, []), P = f(() => {
+      if (j.current === null)
         return;
-      const C = T(), E = v.current.getBoundingClientRect(), _ = E.width, L = E.height;
-      let R = 0, U = 0;
-      i === "bottom-right" || i === "top-right" || i === "top-stretch" || i === "bottom-stretch" ? R = C.x : i === "bottom-left" || i === "top-left" ? R = C.x + C.width - _ : i === "bottom-center" || i === "top-center" ? R = C.x + C.width / 2 - _ / 2 : i === "center-right" ? R = C.x + C.width : i === "center-left" && (R = C.x - _), i === "bottom-left" || i === "bottom-right" || i === "bottom-stretch" || i === "bottom-center" ? U = C.y + C.height : i === "top-left" || i === "top-right" || i === "top-stretch" || i === "top-center" ? U = C.y - L : (i === "center-left" || i === "center-right") && (U = C.y + C.height / 2 - L / 2);
-      const G = Math.max(m, Math.min(R, window.innerWidth - _ - m)), q = Math.max(m, Math.min(U, window.innerHeight - L - m));
-      if (s) {
-        const H = Math.abs(G - R) > 2 || Math.abs(q - U) > 2;
-        N(H);
+      const x = T(), E = j.current.getBoundingClientRect(), S = E.width, F = E.height;
+      let $ = 0, H = 0;
+      a === "bottom-right" || a === "top-right" || a === "top-stretch" || a === "bottom-stretch" ? $ = x.x : a === "bottom-left" || a === "top-left" ? $ = x.x + x.width - S : a === "bottom-center" || a === "top-center" ? $ = x.x + x.width / 2 - S / 2 : a === "center-right" ? $ = x.x + x.width : a === "center-left" && ($ = x.x - S), a === "bottom-left" || a === "bottom-right" || a === "bottom-stretch" || a === "bottom-center" ? H = x.y + x.height : a === "top-left" || a === "top-right" || a === "top-stretch" || a === "top-center" ? H = x.y - F : (a === "center-left" || a === "center-right") && (H = x.y + x.height / 2 - F / 2);
+      const Z = Math.max(m, Math.min($, window.innerWidth - S - m)), _ = Math.max(m, Math.min(H, window.innerHeight - F - m));
+      if (r) {
+        const A = Math.abs(Z - $) > 2 || Math.abs(_ - H) > 2;
+        y(A);
       }
-      g({ x: G, y: q }), V(i === "top-stretch" || i === "bottom-stretch" ? C.width : void 0);
-    }, [i, m, s, T]);
-    Ao(() => {
+      N({ x: Z, y: _ }), V(a === "top-stretch" || a === "bottom-stretch" ? x.width : void 0);
+    }, [a, m, r, T]);
+    _o(() => {
       t && requestAnimationFrame(() => {
-        z();
+        P();
       });
-    }, [t, z]), X(() => {
+    }, [t, P]), X(() => {
       if (!t)
         return;
-      const C = () => {
-        z();
-      }, E = new ResizeObserver(C);
-      if (v.current !== null && E.observe(v.current), window.addEventListener("resize", C), r) {
-        const _ = () => z();
-        return window.addEventListener("scroll", _, { passive: !0, capture: !0 }), () => {
-          E.disconnect(), window.removeEventListener("resize", C), window.removeEventListener("scroll", _, { capture: !0 });
+      const x = () => {
+        P();
+      }, E = new ResizeObserver(x);
+      if (j.current !== null && E.observe(j.current), window.addEventListener("resize", x), s) {
+        const S = () => P();
+        return window.addEventListener("scroll", S, { passive: !0, capture: !0 }), () => {
+          E.disconnect(), window.removeEventListener("resize", x), window.removeEventListener("scroll", S, { capture: !0 });
         };
       }
       return () => {
-        E.disconnect(), window.removeEventListener("resize", C);
+        E.disconnect(), window.removeEventListener("resize", x);
       };
-    }, [t, r, z]), X(() => {
+    }, [t, s, P]), X(() => {
       if (!t)
         return;
-      const C = (E) => {
-        E.key === "Escape" && (E.preventDefault(), c == null || c());
+      const x = (E) => {
+        E.key === "Escape" && (E.preventDefault(), b == null || b(), h == null || h(!1));
       };
-      return document.addEventListener("keydown", C), () => {
-        document.removeEventListener("keydown", C);
+      return document.addEventListener("keydown", x), () => {
+        document.removeEventListener("keydown", x);
       };
-    }, [t, c]), X(() => {
-      if (t && !r) {
-        Yl();
-        const C = document.body.style.overflow;
-        return document.body.style.overflow = "hidden", () => {
-          Kl(), document.body.style.overflow = C;
+    }, [t, b, h]), _e(t && !s), X(() => {
+      if (!(!t || s))
+        return es(), () => {
+          os();
         };
-      }
-    }, [t, r]);
-    const O = k(
-      (C) => {
-        d || C.target === C.currentTarget && (c == null || c());
+    }, [t, s]);
+    const B = f(
+      (x) => {
+        c || x.target === x.currentTarget && (b == null || b(), h == null || h(!1));
       },
-      [d, c]
+      [c, b, h]
     );
     X(() => {
-      if (!t || a)
+      if (!t || i)
         return;
-      const C = (_) => {
-        d || w.current !== null && w.current.contains(_.target) || v.current !== null && !v.current.contains(_.target) && j.current !== null && !j.current.contains(_.target) && (c == null || c());
+      const x = (S) => {
+        c || M.current !== null && M.current.contains(S.target) || j.current !== null && !j.current.contains(S.target) && w.current !== null && !w.current.contains(S.target) && (b == null || b(), h == null || h(!1));
       }, E = setTimeout(() => {
-        document.addEventListener("mousedown", C);
+        document.addEventListener("mousedown", x);
       }, 0);
       return () => {
-        clearTimeout(E), document.removeEventListener("mousedown", C);
+        clearTimeout(E), document.removeEventListener("mousedown", x);
       };
-    }, [t, a, d, c]);
-    const $ = t && /* @__PURE__ */ A(Ne, { children: [
+    }, [t, i, c, b, h]);
+    const D = t && /* @__PURE__ */ L(Ne, { children: [
       /* @__PURE__ */ l(
         "div",
         {
-          ref: w,
-          className: h(
+          ref: M,
+          className: p(
             "fixed inset-0 z-50",
             "bg-transparent"
           ),
-          onClick: O,
+          onClick: B,
           "aria-hidden": "true"
         }
       ),
       /* @__PURE__ */ l(
         "dialog",
         {
-          ref: y,
-          className: h(
+          ref: k,
+          className: p(
             "fixed z-50 m-0 p-0 border-none bg-transparent outline-none",
             "max-w-none max-h-none overflow-visible",
-            I && "invisible"
+            z && "invisible"
           ),
           style: {
-            left: f.x,
-            top: f.y,
-            width: x
+            left: v.x,
+            top: v.y,
+            width: I
           },
           open: !0,
-          "aria-label": u,
-          "aria-modal": a,
-          children: /* @__PURE__ */ l("div", { ref: v, className: h("relative", o), ...b, children: n })
+          "aria-label": d,
+          "aria-modal": i,
+          children: /* @__PURE__ */ l("div", { ref: j, className: p("relative", o), ...u, children: n })
         }
       )
     ] });
-    return /* @__PURE__ */ A("div", { ref: p, className: "contents", children: [
+    return /* @__PURE__ */ L("div", { ref: g, className: "contents", children: [
       /* @__PURE__ */ l(
         "div",
         {
-          ref: j,
+          ref: w,
           "aria-haspopup": "dialog",
           "aria-expanded": t,
           children: e
         }
       ),
-      Pe($, document.body)
+      $e(D, document.body)
     ] });
   }
 );
-Jl.displayName = "Pop";
-const Xl = D(
+ns.displayName = "Pop";
+const ts = C(
   [
     "fixed inset-0 z-50 flex items-center justify-center",
     "bg-black/55"
@@ -10046,7 +10147,7 @@ const Xl = D(
     variants: {},
     defaultVariants: {}
   }
-), Ql = D(
+), is = C(
   [
     "flex flex-col",
     "py-6",
@@ -10054,144 +10155,137 @@ const Xl = D(
     "w-fit",
     "rounded-[var(--sinch-comp-dialog-shape-radius,8px)]",
     "bg-[var(--sinch-comp-dialog-color-default-background-initial,var(--sinch-sys-color-surface-primary-default))]",
-    "shadow-[var(--sinch-comp-dialog-shadow,0_4px_16px_rgba(0,0,0,0.2))]",
+    "shadow-[var(--sinch-comp-dialog-shadow,var(--sinch-sys-shadow-overlay-sm))]",
     "outline-none"
   ],
   {
     variants: {},
     defaultVariants: {}
   }
-), es = P(
+), as = R(
   ({
     className: o,
     open: e = !1,
     caption: n,
     onVisibilityAltered: t,
-    icon: i,
-    content: a,
-    buttons: r,
-    "aria-label": s,
+    icon: a,
+    content: i,
+    buttons: s,
+    "aria-label": r,
     checkInterval: m = 1e3,
-    ...d
-  }, c) => {
-    const [u, b] = F(e), p = Z(null), f = Z(null);
+    ...c
+  }, b) => {
+    const [h, d] = U(e), u = Y(null), g = Y(null);
     X(() => {
-      b(e);
+      d(e);
     }, [e]);
-    const g = k(() => {
-      if (p.current === null)
+    const v = f(() => {
+      if (u.current === null)
         return;
-      const V = p.current, I = getComputedStyle(V);
-      !(I.visibility === "visible" && I.display !== "none" && V.open === !0) && u && (t == null || t());
-    }, [u, t]);
+      const I = u.current, V = getComputedStyle(I);
+      !(V.visibility === "visible" && V.display !== "none" && I.open === !0) && h && (t == null || t());
+    }, [h, t]);
     if (X(() => {
       if (!e) {
-        f.current !== null && (clearInterval(f.current), f.current = null);
+        g.current !== null && (clearInterval(g.current), g.current = null);
         return;
       }
       return requestAnimationFrame(() => {
-        f.current = setInterval(g, m);
+        g.current = setInterval(v, m);
       }), () => {
-        f.current !== null && (clearInterval(f.current), f.current = null);
+        g.current !== null && (clearInterval(g.current), g.current = null);
       };
-    }, [e, m, g]), X(() => () => {
-      f.current !== null && clearInterval(f.current), e && (t == null || t());
+    }, [e, m, v]), X(() => () => {
+      g.current !== null && clearInterval(g.current), e && (t == null || t());
     }, []), X(() => {
       if (!e)
         return;
-      const V = (I) => {
-        I.key === "Escape" && (I.preventDefault(), I.stopPropagation());
+      const I = (V) => {
+        V.key === "Escape" && (V.preventDefault(), V.stopPropagation());
       };
-      return document.addEventListener("keydown", V, { capture: !0 }), () => {
-        document.removeEventListener("keydown", V, { capture: !0 });
+      return document.addEventListener("keydown", I, { capture: !0 }), () => {
+        document.removeEventListener("keydown", I, { capture: !0 });
       };
-    }, [e]), X(() => {
-      if (!e)
-        return;
-      const V = document.body.style.overflow;
-      return document.body.style.overflow = "hidden", () => {
-        document.body.style.overflow = V;
-      };
-    }, [e]), !e)
+    }, [e]), _e(e), !e)
       return null;
-    const x = /* @__PURE__ */ l(
+    const N = /* @__PURE__ */ l(
       "div",
       {
-        ref: c,
-        className: h(Xl()),
+        ref: b,
+        className: p(ts()),
         role: "presentation",
-        ...d,
-        children: /* @__PURE__ */ A(
+        ...c,
+        children: /* @__PURE__ */ L(
           "dialog",
           {
-            ref: p,
-            className: h(Ql(), o),
+            ref: u,
+            className: p(is(), o),
             open: !0,
             "aria-modal": "true",
-            "aria-label": s,
+            "aria-label": r,
             children: [
-              /* @__PURE__ */ A("div", { className: "flex items-start gap-2 px-6 mb-3", children: [
-                i !== void 0 && /* @__PURE__ */ l("div", { className: "flex-shrink-0 text-[var(--sinch-comp-dialog-color-default-icon-initial,var(--sinch-sys-color-text-default))]", children: i }),
+              /* @__PURE__ */ L("div", { className: "flex items-start gap-2 px-6 mb-3", children: [
+                a !== void 0 && /* @__PURE__ */ l("div", { className: "flex-shrink-0 text-[var(--sinch-comp-dialog-color-default-icon-initial,var(--sinch-sys-color-text-default))]", children: a }),
                 n !== void 0 && /* @__PURE__ */ l("h3", { className: "text-[var(--sinch-comp-dialog-color-default-title-initial,var(--sinch-sys-color-text-default))] font-semibold text-lg", children: n })
               ] }),
-              a !== void 0 && /* @__PURE__ */ l("div", { className: "min-h-0 overflow-auto px-6 py-1", children: a }),
-              r !== void 0 && /* @__PURE__ */ l("div", { className: "flex justify-end gap-4 px-6 mt-5", children: r })
+              i !== void 0 && /* @__PURE__ */ l("div", { className: "min-h-0 overflow-auto px-6 py-1", children: i }),
+              s !== void 0 && /* @__PURE__ */ l("div", { className: "flex justify-end gap-4 px-6 mt-5", children: s })
             ]
           }
         )
       }
     );
-    return Pe(x, document.body);
+    return $e(N, document.body);
   }
 );
-es.displayName = "PersistentOverlay";
-const os = P(
+as.displayName = "PersistentOverlay";
+const ls = R(
   ({
     className: o,
     value: e,
     defaultValue: n = !1,
     onChange: t,
-    "aria-label": i,
-    iconSize: a = "32px",
-    style: r,
-    ...s
+    "aria-label": a,
+    iconSize: i = "32px",
+    style: s,
+    ...r
   }, m) => {
-    const [d, c] = F(n), u = e !== void 0, b = u ? e : d, p = k(() => {
-      const g = !b;
-      u || c(g), t == null || t(g);
-    }, [b, u, t]), f = b ? "rotate(0deg)" : "rotate(180deg)";
+    const [c, b] = U(n), h = e !== void 0, d = h ? e : c, u = f(() => {
+      const v = !d;
+      h || b(v), t == null || t(v);
+    }, [d, h, t]), g = d ? "rotate(0deg)" : "rotate(180deg)";
     return /* @__PURE__ */ l(
-      me,
+      re,
       {
         ref: m,
         role: "checkbox",
-        "aria-checked": b,
-        "aria-label": i,
+        "aria-checked": d,
+        "aria-label": a,
         size: "s",
-        onClick: p,
-        className: h("block", o),
+        onClick: u,
+        className: p("block", o),
         style: {
-          "--sinch-global-size-icon": a,
-          ...r
+          "--sinch-global-size-icon": i,
+          ...s
         },
         icon: /* @__PURE__ */ l(
-          ne,
+          oe,
           {
             name: "fa-chevron-down",
             iconsVersion: "2",
             style: {
-              transform: f,
+              transform: g,
               willChange: "transform"
             }
           }
         ),
-        ...s
+        ...r
       }
     );
   }
 );
-os.displayName = "SegmentCollapse";
-const ns = [
+ls.displayName = "SegmentCollapse";
+const ss = [
   {
     name: "smileys-emotion",
     emojis: [
@@ -29123,7 +29217,7 @@ const ns = [
       }
     ]
   }
-], Fe = ns, no = 2, ts = 300, is = [
+], Be = ss, so = 2, rs = 300, ms = [
   "Emotions",
   "People",
   "Animals and nature",
@@ -29132,7 +29226,7 @@ const ns = [
   "Sports and activities",
   "Objects",
   "Symbols and flags"
-], Do = [
+], Ao = [
   { name: "skintone-default", value: 0 },
   { name: "skintone-light", value: 1 },
   { name: "skintone-light-medium", value: 2 },
@@ -29140,17 +29234,17 @@ const ns = [
   { name: "skintone-medium-dark", value: 4 },
   { name: "skintone-dark", value: 5 }
 ], fe = {
-  emotions: /* @__PURE__ */ A("svg", { viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false", className: "w-full h-full fill-current", children: [
+  emotions: /* @__PURE__ */ L("svg", { viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false", className: "w-full h-full fill-current", children: [
     /* @__PURE__ */ l("path", { d: "M15.5 11a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm-7 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" }),
     /* @__PURE__ */ l("path", { d: "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2ZM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8Zm4.41-6.11a.745.745 0 0 0-1.03.24A3.98 3.98 0 0 1 12 16c-1.38 0-2.64-.7-3.38-1.88a.747.747 0 1 0-1.27.79A5.446 5.446 0 0 0 12 17.5c1.9 0 3.63-.97 4.65-2.58.22-.35.11-.81-.24-1.03Z" })
   ] }),
-  people: /* @__PURE__ */ A("svg", { viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false", className: "w-full h-full fill-current", children: [
+  people: /* @__PURE__ */ L("svg", { viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false", className: "w-full h-full fill-current", children: [
     /* @__PURE__ */ l("path", { d: "M12 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" }),
     /* @__PURE__ */ l("path", { d: "M15.89 8.11C15.5 7.72 14.83 7 13.53 7h-2.54a5.023 5.023 0 0 1-4.92-4.15.998.998 0 0 0-.98-.85c-.61 0-1.09.54-1 1.14A7.037 7.037 0 0 0 9 8.71V21c0 .55.45 1 1 1s1-.45 1-1v-5h2v5c0 .55.45 1 1 1s1-.45 1-1V10.05l3.24 3.24a.996.996 0 1 0 1.41-1.41l-3.76-3.77Z" })
   ] }),
   animals: /* @__PURE__ */ l("svg", { viewBox: "0 0 24 24", className: "w-full h-full fill-current", children: /* @__PURE__ */ l("path", { d: "M17 14c-.24-.24-.44-.49-.65-.75C17.51 11.5 19 8.56 19 5c0-1.95-.74-3-2-3-1.54 0-3.96 2.06-5 5.97C10.96 4.06 8.54 2 7 2 5.74 2 5 3.05 5 5c0 3.56 1.49 6.5 2.65 8.25-.21.26-.41.51-.65.75-.25.25-2 1.39-2 3.5C5 19.98 7.02 22 9.5 22c1.5 0 2.5-.5 2.5-.5s1 .5 2.5.5c2.48 0 4.5-2.02 4.5-4.5 0-2.11-1.75-3.25-2-3.5Zm-.12-9.97c.06.17.12.48.12.97 0 2.84-1.11 5.24-2.07 6.78-.38-.26-.83-.48-1.4-.62.24-4.52 2.44-6.83 3.35-7.13ZM7 5c0-.49.06-.8.12-.97.91.3 3.11 2.61 3.36 7.13-.58.14-1.03.35-1.4.62C8.11 10.24 7 7.84 7 5Zm7.5 15c-1 0-1.8-.33-2.22-.56.42-.18.72-.71.72-.94 0-.28-.45-.5-1-.5s-1 .22-1 .5c0 .23.3.76.72.94-.42.23-1.22.56-2.22.56A2.5 2.5 0 0 1 7 17.5c0-.7.43-1.24 1-1.73.44-.36.61-.52 1.3-1.37.76-.95 1.09-1.4 2.7-1.4s1.94.45 2.7 1.4c.69.85.86 1.01 1.3 1.37.57.49 1 1.03 1 1.73a2.5 2.5 0 0 1-2.5 2.5Zm-.5-4c0 .41-.22.75-.5.75s-.5-.34-.5-.75.22-.75.5-.75.5.34.5.75Zm-3 0c0 .41-.22.75-.5.75s-.5-.34-.5-.75.22-.75.5-.75.5.34.5.75Z" }) }),
   food: /* @__PURE__ */ l("svg", { viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false", className: "w-full h-full fill-current", children: /* @__PURE__ */ l("path", { d: "M19 19H3c-.55 0-1 .45-1 1s.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1Zm1-16H9v2.4l1.81 1.45c.12.09.19.24.19.39v4.26c0 .28-.22.5-.5.5h-4c-.28 0-.5-.22-.5-.5V7.24c0-.15.07-.3.19-.39L8 5.4V3H6c-1.1 0-2 .9-2 2v8c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2Zm0 5h-2V5h2v3Z" }) }),
-  travel: /* @__PURE__ */ A("svg", { viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false", className: "w-full h-full fill-current", children: [
+  travel: /* @__PURE__ */ L("svg", { viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false", className: "w-full h-full fill-current", children: [
     /* @__PURE__ */ l("path", { d: "m21.99 14.77-1.43-4.11c-.14-.4-.52-.66-.97-.66H12.4c-.46 0-.83.26-.98.66L10 14.77v5.24c0 .55.45.99 1 .99s1-.45 1-1v-1h8v1a1 1 0 0 0 2 .01l-.01-5.24Zm-10.38-1.43.69-2c.05-.2.24-.34.46-.34h6.48c.21 0 .4.14.47.34l.69 2a.5.5 0 0 1-.47.66h-7.85a.5.5 0 0 1-.47-.66Zm.38 3.66c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1Zm8 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1Z" }),
     /* @__PURE__ */ l("path", { d: "M14 4.5V9h1V4c0-.55-.45-1-1-1H8c-.55 0-1 .45-1 1v4H3c-.55 0-1 .45-1 1v12h1V9.5c0-.28.22-.5.5-.5h4c.28 0 .5-.22.5-.5v-4c0-.28.22-.5.5-.5h5c.28 0 .5.22.5.5Z" }),
     /* @__PURE__ */ l("path", { d: "M7 11H5v2h2v-2Zm5-6h-2v2h2V5ZM7 15H5v2h2v-2Zm0 4H5v2h2v-2Z" })
@@ -29158,7 +29252,7 @@ const ns = [
   sports: /* @__PURE__ */ l("svg", { viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false", className: "w-full h-full fill-current", children: /* @__PURE__ */ l("path", { d: "M19.52 2.49C17.18.15 12.9.62 9.97 3.55c-1.6 1.6-2.52 3.87-2.54 5.46-.02 1.58.26 3.89-1.35 5.5l-3.54 3.53c-.39.39-.39 1.02 0 1.42.39.39 1.02.39 1.42 0l3.53-3.54c1.61-1.61 3.92-1.33 5.5-1.35 1.58-.02 3.86-.94 5.46-2.54 2.93-2.92 3.41-7.2 1.07-9.54Zm-9.2 9.19c-1.53-1.53-1.05-4.61 1.06-6.72 2.11-2.11 5.18-2.59 6.72-1.06 1.53 1.53 1.05 4.61-1.06 6.72-2.11 2.11-5.18 2.59-6.72 1.06ZM18 17c.53 0 1.04.21 1.41.59.78.78.78 2.05 0 2.83-.37.37-.88.58-1.41.58-.53 0-1.04-.21-1.41-.59-.78-.78-.78-2.05 0-2.83.37-.37.88-.58 1.41-.58Zm0-2a3.998 3.998 0 0 0-2.83 6.83c.78.78 1.81 1.17 2.83 1.17a3.998 3.998 0 0 0 2.83-6.83A3.998 3.998 0 0 0 18 15Z" }) }),
   objects: /* @__PURE__ */ l("svg", { viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false", className: "w-full h-full fill-current", children: /* @__PURE__ */ l("path", { d: "M12 3c-.46 0-.93.04-1.4.14-2.76.53-4.96 2.76-5.48 5.52-.48 2.61.48 5.01 2.22 6.56.43.38.66.91.66 1.47V19c0 1.1.9 2 2 2h.28a1.98 1.98 0 0 0 3.44 0H14c1.1 0 2-.9 2-2v-2.31c0-.55.22-1.09.64-1.46A6.956 6.956 0 0 0 19 10c0-3.87-3.13-7-7-7Zm.5 11h-1v-2.59L9.67 9.59l.71-.71L12 10.5l1.62-1.62.71.71-1.83 1.83V14Zm1 5c-.01 0-.02-.01-.03-.01V19h-2.94v-.01c-.01 0-.02.01-.03.01-.28 0-.5-.22-.5-.5s.22-.5.5-.5c.01 0 .02.01.03.01V18h2.94v.01c.01 0 .02-.01.03-.01.28 0 .5.22.5.5s-.22.5-.5.5Zm0-2h-3c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h3c.28 0 .5.22.5.5s-.22.5-.5.5Z" }) }),
   symbols: /* @__PURE__ */ l("svg", { viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false", className: "w-full h-full fill-current", children: /* @__PURE__ */ l("path", { d: "M10 5H4c-.55 0-1 .45-1 1s.45 1 1 1h2v3c0 .55.45 1 1 1s1-.45 1-1V7h2c.55 0 1-.45 1-1s-.45-1-1-1Zm0-3H4c-.55 0-1 .45-1 1s.45 1 1 1h6c.55 0 1-.45 1-1s-.45-1-1-1Zm10.89 11.11a.996.996 0 0 0-1.41 0l-6.36 6.36a.996.996 0 1 0 1.41 1.41l6.36-6.36a.996.996 0 0 0 0-1.41ZM14.5 16a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm-4-10A2.5 2.5 0 0 0 18 8.5V4h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1v3.51c-.42-.32-.93-.51-1.5-.51a2.5 2.5 0 0 0 0 5Zm-5.05 7.09a.996.996 0 1 0-1.41-1.41l-.71.71-.71-.71.35-.35a2.499 2.499 0 0 0-1.77-4.27 2.499 2.499 0 0 0-1.77 4.27l.35.35-1.06 1.06c-.98.98-.98 2.56 0 3.54.5.48 1.14.72 1.78.72.64 0 1.28-.24 1.77-.73l1.06-1.06.71.71a.996.996 0 1 0 1.41-1.41l-.71-.71.71-.71Zm-4.6-3.89a.5.5 0 0 1 .35-.15.5.5 0 0 1 .35.15c.19.2.19.51 0 .71l-.35.35-.35-.36a.5.5 0 0 1-.15-.35.5.5 0 0 1 .15-.35Zm0 5.65a.5.5 0 0 1-.35.15.5.5 0 0 1-.35-.15.5.5 0 0 1-.15-.35.5.5 0 0 1 .15-.35l1.06-1.06.71.71-1.07 1.05Z" }) })
-}, as = {
+}, cs = {
   "smileys-emotion": fe.emotions,
   "people-body": fe.people,
   "animals-nature": fe.animals,
@@ -29167,14 +29261,14 @@ const ns = [
   activities: fe.sports,
   objects: fe.objects,
   symbols: fe.symbols
-}, ls = D(
+}, ds = C(
   // Base styles
   "block",
   {
     variants: {},
     defaultVariants: {}
   }
-), ss = D(
+), bs = C(
   // Wrapper styles from template.html #wrapper
   [
     "w-96",
@@ -29188,14 +29282,14 @@ const ns = [
     variants: {},
     defaultVariants: {}
   }
-), rs = D(
+), us = C(
   // Toolbar styles from template.html #toolbar
   ["flex", "gap-2", "px-3"],
   {
     variants: {},
     defaultVariants: {}
   }
-), ms = D(
+), hs = C(
   // List wrapper styles from template.html #list-wrapper
   [
     "overflow-y-auto",
@@ -29208,7 +29302,7 @@ const ns = [
     variants: {},
     defaultVariants: {}
   }
-), cs = D(
+), ps = C(
   // List styles from template.html #list
   [
     "flex",
@@ -29223,7 +29317,7 @@ const ns = [
     variants: {},
     defaultVariants: {}
   }
-), ds = D(
+), gs = C(
   // Not found styles from template.html #not-found
   [
     "w-full",
@@ -29245,273 +29339,273 @@ const ns = [
       visible: !1
     }
   }
-), bs = P(
-  ({ className: o, emojiBaseUrl: e, onChange: n, ...t }, i) => {
-    var _;
-    const [a, r] = F(""), [s, m] = F(((_ = Fe[0]) == null ? void 0 : _.name) ?? ""), [d, c] = F(0), [u, b] = F("skintone-default"), [p, f] = F(!1), [g, x] = F(null), V = s.length === 0, [I, N] = F(""), j = k((L) => {
-      r(L);
-      const R = setTimeout(() => {
-        N(L), L.length >= no ? s.length > 0 && (x(s), m("")) : g !== null && (m(g), x(null));
-      }, ts);
-      return () => clearTimeout(R);
-    }, [s, g]), v = k((L) => {
-      m(L), r(""), N(""), x(null);
-    }, []), y = k(() => {
-      r(""), N(""), g !== null && (m(g), x(null));
-    }, [g]), w = k((L) => {
-      const R = Do.find((U) => U.name === L);
-      R !== void 0 && (c(R.value), b(R.name)), f(!1);
-    }, []), T = k(
-      (L) => {
-        n == null || n(L);
+), ks = R(
+  ({ className: o, emojiBaseUrl: e, onChange: n, ...t }, a) => {
+    var E;
+    const [i, s] = U(""), [r, m] = U(((E = Be[0]) == null ? void 0 : E.name) ?? ""), [c, b] = U(0), [h, d] = U("skintone-default"), [u, g] = U(!1), [v, N] = U(null), I = r.length === 0, [V, z] = U(""), y = f((S) => {
+      s(S);
+      const F = setTimeout(() => {
+        z(S), S.length >= so ? r.length > 0 && (N(r), m("")) : v !== null && (m(v), N(null));
+      }, rs);
+      return () => clearTimeout(F);
+    }, [r, v]), w = f((S) => {
+      m(S), s(""), z(""), N(null);
+    }, []), j = f(() => {
+      s(""), z(""), v !== null && (m(v), N(null));
+    }, [v]), k = f((S) => {
+      const F = Ao.find(($) => $.name === S);
+      F !== void 0 && (b(F.value), d(F.name)), g(!1);
+    }, []), M = f(
+      (S) => {
+        n == null || n(S);
       },
       [n]
-    ), z = J(() => {
-      if (I.length < no)
+    ), T = J(() => {
+      if (V.length < so)
         return [];
-      const L = I.toLowerCase(), R = [];
-      for (const U of Fe)
-        for (const G of U.emojis)
-          if (G.label.toLowerCase().includes(L)) {
-            const q = G.skins !== void 0 && G.skins.length > 0;
-            if (d === 0 || !q)
-              R.push(G);
-            else if (q)
-              for (const H of G.skins)
-                (d === H.tone || Array.isArray(H.tone) && H.tone.includes(d)) && R.push(H);
+      const S = V.toLowerCase(), F = [];
+      for (const $ of Be)
+        for (const H of $.emojis)
+          if (H.label.toLowerCase().includes(S)) {
+            const Z = H.skins !== void 0 && H.skins.length > 0;
+            if (c === 0 || !Z)
+              F.push(H);
+            else if (Z)
+              for (const _ of H.skins)
+                (c === _.tone || Array.isArray(_.tone) && _.tone.includes(c)) && F.push(_);
           }
-      return R;
-    }, [I, d]), O = J(() => {
-      if (V)
+      return F;
+    }, [V, c]), P = J(() => {
+      if (I)
         return [];
-      const L = Fe.find((U) => U.name === s);
-      if (L === void 0)
+      const S = Be.find(($) => $.name === r);
+      if (S === void 0)
         return [];
-      const R = [];
-      for (const U of L.emojis) {
-        const G = U.skins !== void 0 && U.skins.length > 0;
-        if (d === 0 || !G)
-          R.push(U);
-        else if (G)
-          for (const q of U.skins)
-            (d === q.tone || Array.isArray(q.tone) && q.tone.includes(d)) && R.push(q);
+      const F = [];
+      for (const $ of S.emojis) {
+        const H = $.skins !== void 0 && $.skins.length > 0;
+        if (c === 0 || !H)
+          F.push($);
+        else if (H)
+          for (const Z of $.skins)
+            (c === Z.tone || Array.isArray(Z.tone) && Z.tone.includes(c)) && F.push(Z);
       }
-      return R;
-    }, [s, V, d]), $ = V ? z : O, C = V && $.length === 0 && I.length >= no, E = /* @__PURE__ */ l(
-      vo,
+      return F;
+    }, [r, I, c]), B = I ? T : P, D = I && B.length === 0 && V.length >= so, x = /* @__PURE__ */ l(
+      No,
       {
-        value: u,
+        value: h,
         cols: 1,
         "aria-label": "Emoji skin tone menu",
-        onChange: w,
-        children: Do.map((L) => /* @__PURE__ */ l(wo, { value: L.name }, L.name))
+        onChange: k,
+        children: Ao.map((S) => /* @__PURE__ */ l(Vo, { value: S.name }, S.name))
       }
     );
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: i,
-        className: h(ls(), o),
+        ref: a,
+        className: p(ds(), o),
         ...t,
-        children: /* @__PURE__ */ A("div", { className: h(ss()), children: [
-          /* @__PURE__ */ A("div", { className: h(rs()), children: [
+        children: /* @__PURE__ */ L("div", { className: p(bs()), children: [
+          /* @__PURE__ */ L("div", { className: p(us()), children: [
             /* @__PURE__ */ l(
-              uo,
+              ko,
               {
                 size: "l",
                 "aria-label": "Search emojis",
-                value: a,
-                onChange: j,
-                icon: /* @__PURE__ */ l(ne, { name: "magnifying-glass", iconsVersion: "2" }),
-                rightAddon: a.length > 0 && /* @__PURE__ */ l(
-                  me,
+                value: i,
+                onChange: y,
+                icon: /* @__PURE__ */ l(oe, { name: "magnifying-glass", iconsVersion: "2" }),
+                rightAddon: i.length > 0 && /* @__PURE__ */ l(
+                  re,
                   {
                     size: "s",
                     "aria-label": "Clear",
-                    icon: /* @__PURE__ */ l(ne, { name: "fa-xmark", iconsVersion: "2" }),
-                    onClick: y
+                    icon: /* @__PURE__ */ l(oe, { name: "fa-xmark", iconsVersion: "2" }),
+                    onClick: j
                   }
                 ),
                 className: "flex-1 min-w-0"
               }
             ),
             /* @__PURE__ */ l(
-              bn,
+              fn,
               {
-                open: p,
+                open: u,
                 orientation: "bottom-left",
                 "aria-label": "Emoji skin tone select",
-                content: E,
-                onClose: () => f(!1),
+                content: x,
+                onClose: () => g(!1),
                 children: /* @__PURE__ */ l(
-                  me,
+                  re,
                   {
                     size: "l",
                     "aria-label": "Select emoji skin tones",
-                    icon: /* @__PURE__ */ l(jo, { name: u }),
-                    onClick: () => f(!p)
+                    icon: /* @__PURE__ */ l(yo, { name: h }),
+                    onClick: () => g(!u)
                   }
                 )
               }
             )
           ] }),
           /* @__PURE__ */ l(
-            po,
+            jo,
             {
-              value: s,
+              value: r,
               "aria-label": "Emoji groups",
-              onChange: v,
-              children: Fe.map((L, R) => /* @__PURE__ */ l(
-                go,
+              onChange: w,
+              children: Be.map((S, F) => /* @__PURE__ */ l(
+                vo,
                 {
-                  value: L.name,
-                  "aria-label": is[R] ?? L.name,
+                  value: S.name,
+                  "aria-label": ms[F] ?? S.name,
                   icon: /* @__PURE__ */ l(
                     "span",
                     {
-                      className: h(
+                      className: p(
                         "w-5 h-5",
                         "[--sinch-global-color-icon:var(--sinch-comp-tab-color-default-icon-initial)]"
                       ),
-                      children: as[L.name] ?? fe.emotions
+                      children: cs[S.name] ?? fe.emotions
                     }
                   )
                 },
-                L.name
+                S.name
               ))
             }
           ),
-          /* @__PURE__ */ A("div", { className: h(ms()), children: [
-            /* @__PURE__ */ l("div", { className: h(cs()), children: $.map((L, R) => /* @__PURE__ */ l(
-              me,
+          /* @__PURE__ */ L("div", { className: p(hs()), children: [
+            /* @__PURE__ */ l("div", { className: p(ps()), children: B.map((S, F) => /* @__PURE__ */ l(
+              re,
               {
                 size: "s",
-                "aria-label": L.label,
-                "data-value": L.emoji,
+                "aria-label": S.label,
+                "data-value": S.emoji,
                 icon: /* @__PURE__ */ l(
-                  Zo,
+                  Qo,
                   {
-                    char: L.emoji,
+                    char: S.emoji,
                     baseUrl: e,
                     size: "sm"
                   }
                 ),
-                onClick: () => T(L.emoji)
+                onClick: () => M(S.emoji)
               },
-              `${L.emoji}-${R}`
+              `${S.emoji}-${F}`
             )) }),
-            /* @__PURE__ */ l("div", { className: h(ds({ visible: C })), children: /* @__PURE__ */ l(Je, { type: "m", children: "No results" }) })
+            /* @__PURE__ */ l("div", { className: p(gs({ visible: D })), children: /* @__PURE__ */ l(no, { type: "m", children: "No results" }) })
           ] })
         ] })
       }
     );
   }
 );
-bs.displayName = "EmojiPicker";
-function fn(o) {
+ks.displayName = "EmojiPicker";
+function Nn(o) {
   if (o === "" || o === null || o === void 0)
     return [];
   const e = o.split(`
 `), n = [];
-  let t = null, i = [];
-  for (let a = 0; a < e.length; a++) {
-    const r = e[a], s = r.match(/^[-*]\s+(.*)$/);
-    if (s !== null) {
-      (t === null || t.ordered === !0) && (t !== null && (t.children = i, n.push(t)), t = { type: "list", ordered: !1, children: [] }, i = []), i.push({
+  let t = null, a = [];
+  for (let i = 0; i < e.length; i++) {
+    const s = e[i], r = s.match(/^[-*]\s+(.*)$/);
+    if (r !== null) {
+      (t === null || t.ordered === !0) && (t !== null && (t.children = a, n.push(t)), t = { type: "list", ordered: !1, children: [] }, a = []), a.push({
         type: "listItem",
-        children: ze(s[1])
+        children: De(r[1])
       });
       continue;
     }
-    const m = r.match(/^(\d+)\.\s+(.*)$/);
+    const m = s.match(/^(\d+)\.\s+(.*)$/);
     if (m !== null) {
-      (t === null || t.ordered === !1) && (t !== null && (t.children = i, n.push(t)), t = { type: "list", ordered: !0, children: [] }, i = []), i.push({
+      (t === null || t.ordered === !1) && (t !== null && (t.children = a, n.push(t)), t = { type: "list", ordered: !0, children: [] }, a = []), a.push({
         type: "listItem",
-        children: ze(m[2])
+        children: De(m[2])
       });
       continue;
     }
-    if (t !== null && (t.children = i, n.push(t), t = null, i = []), r.trim() === "") {
+    if (t !== null && (t.children = a, n.push(t), t = null, a = []), s.trim() === "") {
       n.length > 0 && n.push({ type: "linebreak" });
       continue;
     }
     n.push({
       type: "paragraph",
-      children: ze(r)
+      children: De(s)
     });
   }
-  return t !== null && (t.children = i, n.push(t)), n;
+  return t !== null && (t.children = a, n.push(t)), n;
 }
-function ze(o) {
+function De(o) {
   var t;
   const e = [];
   let n = o;
   for (; n.length > 0; ) {
-    const i = n.match(/^\\(.)/);
-    if (i !== null) {
-      e.push({ type: "text", content: i[1] }), n = n.slice(i[0].length);
-      continue;
-    }
-    const a = n.match(/^\{\{([a-zA-Z0-9_-]+)\}\}/);
+    const a = n.match(/^\\(.)/);
     if (a !== null) {
-      e.push({ type: "chip", content: a[1] }), n = n.slice(a[0].length);
+      e.push({ type: "text", content: a[1] }), n = n.slice(a[0].length);
       continue;
     }
-    const r = n.match(/^`([^`]+)`/);
-    if (r !== null) {
-      e.push({ type: "code", content: r[1] }), n = n.slice(r[0].length);
+    const i = n.match(/^\{\{([a-zA-Z0-9_-]+)\}\}/);
+    if (i !== null) {
+      e.push({ type: "chip", content: i[1] }), n = n.slice(i[0].length);
       continue;
     }
-    const s = n.match(/^\*\*(.+?)\*\*/);
+    const s = n.match(/^`([^`]+)`/);
     if (s !== null) {
+      e.push({ type: "code", content: s[1] }), n = n.slice(s[0].length);
+      continue;
+    }
+    const r = n.match(/^\*\*(.+?)\*\*/);
+    if (r !== null) {
       e.push({
         type: "bold",
-        children: ze(s[1])
-      }), n = n.slice(s[0].length);
+        children: De(r[1])
+      }), n = n.slice(r[0].length);
       continue;
     }
     const m = n.match(/^\*([^*]+)\*/);
     if (m !== null) {
       e.push({
         type: "italic",
-        children: ze(m[1])
+        children: De(m[1])
       }), n = n.slice(m[0].length);
       continue;
     }
-    const d = n.match(/^~~(.+?)~~/);
-    if (d !== null) {
+    const c = n.match(/^~~(.+?)~~/);
+    if (c !== null) {
       e.push({
         type: "strikethrough",
-        children: ze(d[1])
-      }), n = n.slice(d[0].length);
-      continue;
-    }
-    const c = n.match(/^\[([^\]]+)\]\(([^)]+)\)(?:\{([^}]+)\})?/);
-    if (c !== null) {
-      const p = ((t = c[3]) == null ? void 0 : t.split(",").map((f) => f.trim())) ?? [];
-      e.push({
-        type: "link",
-        content: c[1],
-        href: c[2],
-        external: p.includes("external")
+        children: De(c[1])
       }), n = n.slice(c[0].length);
       continue;
     }
-    const u = n.match(/^([\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F600}-\u{1F64F}]|[\u{1F680}-\u{1F6FF}])/u);
-    if (u !== null) {
-      e.push({ type: "emoji", content: u[1] }), n = n.slice(u[0].length);
+    const b = n.match(/^\[([^\]]+)\]\(([^)]+)\)(?:\{([^}]+)\})?/);
+    if (b !== null) {
+      const u = ((t = b[3]) == null ? void 0 : t.split(",").map((g) => g.trim())) ?? [];
+      e.push({
+        type: "link",
+        content: b[1],
+        href: b[2],
+        external: u.includes("external")
+      }), n = n.slice(b[0].length);
       continue;
     }
-    const b = n.match(/^[^*`\[\\{~\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}]+/u);
-    if (b !== null) {
-      e.push({ type: "text", content: b[0] }), n = n.slice(b[0].length);
+    const h = n.match(/^([\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F600}-\u{1F64F}]|[\u{1F680}-\u{1F6FF}])/u);
+    if (h !== null) {
+      e.push({ type: "emoji", content: h[1] }), n = n.slice(h[0].length);
+      continue;
+    }
+    const d = n.match(/^[^*`\[\\{~\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}]+/u);
+    if (d !== null) {
+      e.push({ type: "text", content: d[0] }), n = n.slice(d[0].length);
       continue;
     }
     e.push({ type: "text", content: n[0] }), n = n.slice(1);
   }
   return e;
 }
-const us = D(
+const fs = C(
   // Base styles
   [
     "block"
@@ -29529,71 +29623,71 @@ const us = D(
       size: "m"
     }
   }
-), hs = P(
+), js = R(
   ({
     className: o,
     text: e,
     size: n = "m",
     chipColor: t,
-    chipIcon: i,
-    chipResolver: a,
-    onElementClick: r,
-    ...s
+    chipIcon: a,
+    chipResolver: i,
+    onElementClick: s,
+    ...r
   }, m) => {
-    const d = J(() => fn(e), [e]), c = k((b) => {
-      const p = b.target;
-      (p.tagName === "A" || p.closest("[data-chip]") !== null || p.closest("a") !== null) && (r == null || r(b, p));
-    }, [r]), u = (b, p) => {
-      var f, g, x, V, I, N, j;
-      switch (b.type) {
+    const c = J(() => Nn(e), [e]), b = f((d) => {
+      const u = d.target;
+      (u.tagName === "A" || u.closest("[data-chip]") !== null || u.closest("a") !== null) && (s == null || s(d, u));
+    }, [s]), h = (d, u) => {
+      var g, v, N, I, V, z, y;
+      switch (d.type) {
         case "text":
-          return b.content;
+          return d.content;
         case "bold":
-          return /* @__PURE__ */ l("span", { className: "[font-weight:var(--sinch-ref-typography-font-weight-700)]", children: (f = b.children) == null ? void 0 : f.map((v, y) => u(v, y)) }, p);
+          return /* @__PURE__ */ l("span", { className: "[font-weight:var(--sinch-ref-typography-font-weight-700)]", children: (g = d.children) == null ? void 0 : g.map((w, j) => h(w, j)) }, u);
         case "italic":
-          return /* @__PURE__ */ l("span", { className: "italic", children: (g = b.children) == null ? void 0 : g.map((v, y) => u(v, y)) }, p);
+          return /* @__PURE__ */ l("span", { className: "italic", children: (v = d.children) == null ? void 0 : v.map((w, j) => h(w, j)) }, u);
         case "strikethrough":
-          return /* @__PURE__ */ l("span", { className: "line-through", children: (x = b.children) == null ? void 0 : x.map((v, y) => u(v, y)) }, p);
+          return /* @__PURE__ */ l("span", { className: "line-through", children: (N = d.children) == null ? void 0 : N.map((w, j) => h(w, j)) }, u);
         case "code":
           return /* @__PURE__ */ l(
             "code",
             {
-              className: h(
+              className: p(
                 "[font:var(--sinch-comp-code-tag-font-text)]",
                 "leading-inherit text-[length:inherit]",
                 "border border-[var(--sinch-comp-code-tag-color-default-border-initial)]",
                 "bg-[var(--sinch-comp-code-tag-color-default-background-initial)]",
                 "px-[0.25em] rounded-[var(--sinch-comp-code-tag-shape-radius)]"
               ),
-              children: b.content
+              children: d.content
             },
-            p
+            u
           );
         case "link":
           return /* @__PURE__ */ l(
             "a",
             {
-              href: b.href,
-              className: h(
+              href: d.href,
+              className: p(
                 "[font:var(--sinch-comp-link-default-font-initial)]",
                 "text-[var(--sinch-comp-link-color-default-text-initial)]",
                 "underline",
                 "hover:text-[var(--sinch-comp-link-color-default-text-hover)]",
                 "hover:no-underline"
               ),
-              target: b.external === !0 ? "_blank" : void 0,
-              rel: b.external === !0 ? "noopener noreferrer" : void 0,
-              children: b.content
+              target: d.external === !0 ? "_blank" : void 0,
+              rel: d.external === !0 ? "noopener noreferrer" : void 0,
+              children: d.content
             },
-            p
+            u
           );
         case "chip": {
-          const v = a == null ? void 0 : a(b.content ?? ""), y = (v == null ? void 0 : v.color) ?? t, w = (v == null ? void 0 : v.icon) ?? i, T = y !== void 0 ? `var(--sinch-comp-tag-color-${y}-background)` : void 0, z = y !== void 0 ? `var(--sinch-comp-tag-color-${y}-foreground)` : void 0;
-          return /* @__PURE__ */ A(
+          const w = i == null ? void 0 : i(d.content ?? ""), j = (w == null ? void 0 : w.color) ?? t, k = (w == null ? void 0 : w.icon) ?? a, M = j !== void 0 ? `var(--sinch-comp-tag-color-${j}-background)` : void 0, T = j !== void 0 ? `var(--sinch-comp-tag-color-${j}-foreground)` : void 0;
+          return /* @__PURE__ */ L(
             "span",
             {
               "data-chip": !0,
-              className: h(
+              className: p(
                 "inline-flex items-center align-middle",
                 "h-[var(--sinch-comp-chip-size-container-m)]",
                 "px-[9px] gap-1",
@@ -29604,21 +29698,21 @@ const us = D(
                 "select-none"
               ),
               style: {
-                backgroundColor: T,
-                color: z
+                backgroundColor: M,
+                color: T
               },
               children: [
-                w !== void 0 && /* @__PURE__ */ l(
+                k !== void 0 && /* @__PURE__ */ l(
                   "span",
                   {
                     className: "w-[var(--sinch-comp-chip-size-icon-m)] h-[var(--sinch-comp-chip-size-icon-m)]",
-                    style: { color: z }
+                    style: { color: T }
                   }
                 ),
-                /* @__PURE__ */ l("span", { className: "overflow-hidden text-ellipsis whitespace-nowrap", children: b.content })
+                /* @__PURE__ */ l("span", { className: "overflow-hidden text-ellipsis whitespace-nowrap", children: d.content })
               ]
             },
-            p
+            u
           );
         }
         case "emoji":
@@ -29627,19 +29721,19 @@ const us = D(
             {
               className: "inline w-[1em] h-[1em] align-[-0.2em]",
               role: "img",
-              "aria-label": b.content,
-              children: b.content
+              "aria-label": d.content,
+              children: d.content
             },
-            p
+            u
           );
         case "linebreak":
-          return /* @__PURE__ */ l("br", {}, p);
+          return /* @__PURE__ */ l("br", {}, u);
         case "paragraph":
-          return /* @__PURE__ */ l("p", { className: "m-0 [&+p]:mt-[0.5em] [&+ul]:mt-[0.5em] [&+ol]:mt-[0.5em]", children: (V = b.children) == null ? void 0 : V.map((v, y) => u(v, y)) }, p);
+          return /* @__PURE__ */ l("p", { className: "m-0 [&+p]:mt-[0.5em] [&+ul]:mt-[0.5em] [&+ol]:mt-[0.5em]", children: (I = d.children) == null ? void 0 : I.map((w, j) => h(w, j)) }, u);
         case "list":
-          return b.ordered === !0 ? /* @__PURE__ */ l("ol", { className: "m-0 pl-[1.5em] [p+&]:mt-[0.5em]", children: (I = b.children) == null ? void 0 : I.map((v, y) => u(v, y)) }, p) : /* @__PURE__ */ l("ul", { className: "m-0 pl-[1.5em] [p+&]:mt-[0.5em]", children: (N = b.children) == null ? void 0 : N.map((v, y) => u(v, y)) }, p);
+          return d.ordered === !0 ? /* @__PURE__ */ l("ol", { className: "m-0 pl-[1.5em] [p+&]:mt-[0.5em]", children: (V = d.children) == null ? void 0 : V.map((w, j) => h(w, j)) }, u) : /* @__PURE__ */ l("ul", { className: "m-0 pl-[1.5em] [p+&]:mt-[0.5em]", children: (z = d.children) == null ? void 0 : z.map((w, j) => h(w, j)) }, u);
         case "listItem":
-          return /* @__PURE__ */ l("li", { children: (j = b.children) == null ? void 0 : j.map((v, y) => u(v, y)) }, p);
+          return /* @__PURE__ */ l("li", { children: (y = d.children) == null ? void 0 : y.map((w, j) => h(w, j)) }, u);
         default:
           return null;
       }
@@ -29649,20 +29743,20 @@ const us = D(
       {
         ref: m,
         role: "paragraph",
-        className: h(
-          us({ size: n }),
+        className: p(
+          fs({ size: n }),
           "text-[var(--sinch-global-color-text,var(--sinch-sys-color-text-default))]",
           o
         ),
-        onClick: c,
-        ...s,
-        children: d.map((b, p) => u(b, p))
+        onClick: b,
+        ...r,
+        children: c.map((d, u) => h(d, u))
       }
     );
   }
 );
-hs.displayName = "RichText";
-const ps = D(
+js.displayName = "RichText";
+const vs = C(
   // Base styles for wrapper
   [
     "relative flex flex-col w-full box-border",
@@ -29674,7 +29768,7 @@ const ps = D(
     variants: {},
     defaultVariants: {}
   }
-), gs = D(
+), ws = C(
   // Base styles for the editable area
   [
     "w-full px-3 py-2 box-border",
@@ -29688,7 +29782,7 @@ const ps = D(
     variants: {},
     defaultVariants: {}
   }
-), ks = D(
+), xs = C(
   // Base styles for the border overlay
   [
     "absolute inset-0 pointer-events-none",
@@ -29728,161 +29822,161 @@ const ps = D(
       isDisabled: !1
     }
   }
-), fs = P(
+), ys = R(
   ({
     className: o,
     value: e,
     defaultValue: n,
     placeholder: t,
-    invalid: i = !1,
-    disabled: a = !1,
-    rows: r,
-    chipColor: s,
+    invalid: a = !1,
+    disabled: i = !1,
+    rows: s,
+    chipColor: r,
     chipIcon: m,
-    chipResolver: d,
-    "aria-label": c,
-    topContent: u,
-    bottomContent: b,
-    onChange: p,
-    onFocus: f,
-    onBlur: g,
-    onSelectionChange: x,
-    ...V
-  }, I) => {
-    const [N, j] = F(n ?? ""), [v, y] = F(!1), w = Z(null), T = e !== void 0, z = T ? e : N, O = J(() => fn(z), [z]), $ = k(() => {
-      const S = w.current;
-      if (S === null)
+    chipResolver: c,
+    "aria-label": b,
+    topContent: h,
+    bottomContent: d,
+    onChange: u,
+    onFocus: g,
+    onBlur: v,
+    onSelectionChange: N,
+    ...I
+  }, V) => {
+    const [z, y] = U(n ?? ""), [w, j] = U(!1), k = Y(null), M = e !== void 0, T = M ? e : z, P = J(() => Nn(T), [T]), B = f(() => {
+      const A = k.current;
+      if (A === null)
         return "";
-      let M = S.innerHTML;
-      return M = M.replace(/<br\s*\/?>/gi, `
-`), M = M.replace(/<\/p>\s*<p[^>]*>/gi, `
+      let G = A.innerHTML;
+      return G = G.replace(/<br\s*\/?>/gi, `
+`), G = G.replace(/<\/p>\s*<p[^>]*>/gi, `
 
-`), M = M.replace(/<\/?p[^>]*>/gi, ""), M = M.replace(/<strong>([^<]*)<\/strong>/gi, "**$1**"), M = M.replace(/<b>([^<]*)<\/b>/gi, "**$1**"), M = M.replace(/<em>([^<]*)<\/em>/gi, "*$1*"), M = M.replace(/<i>([^<]*)<\/i>/gi, "*$1*"), M = M.replace(/<del>([^<]*)<\/del>/gi, "~~$1~~"), M = M.replace(/<s>([^<]*)<\/s>/gi, "~~$1~~"), M = M.replace(/<code>([^<]*)<\/code>/gi, "`$1`"), M = M.replace(/<a[^>]*href="([^"]*)"[^>]*>([^<]*)<\/a>/gi, "[$2]($1)"), M = M.replace(/<span[^>]*data-chip[^>]*>([^<]*)<\/span>/gi, "{{$1}}"), M = M.replace(/<[^>]+>/g, ""), M = M.replace(/&nbsp;/g, " "), M = M.replace(/&lt;/g, "<"), M = M.replace(/&gt;/g, ">"), M = M.replace(/&amp;/g, "&"), M.trim();
+`), G = G.replace(/<\/?p[^>]*>/gi, ""), G = G.replace(/<strong>([^<]*)<\/strong>/gi, "**$1**"), G = G.replace(/<b>([^<]*)<\/b>/gi, "**$1**"), G = G.replace(/<em>([^<]*)<\/em>/gi, "*$1*"), G = G.replace(/<i>([^<]*)<\/i>/gi, "*$1*"), G = G.replace(/<del>([^<]*)<\/del>/gi, "~~$1~~"), G = G.replace(/<s>([^<]*)<\/s>/gi, "~~$1~~"), G = G.replace(/<code>([^<]*)<\/code>/gi, "`$1`"), G = G.replace(/<a[^>]*href="([^"]*)"[^>]*>([^<]*)<\/a>/gi, "[$2]($1)"), G = G.replace(/<span[^>]*data-chip[^>]*>([^<]*)<\/span>/gi, "{{$1}}"), G = G.replace(/<[^>]+>/g, ""), G = G.replace(/&nbsp;/g, " "), G = G.replace(/&lt;/g, "<"), G = G.replace(/&gt;/g, ">"), G = G.replace(/&amp;/g, "&"), G.trim();
     }, []);
     X(() => {
-      const S = w.current;
-      if (S === null || document.activeElement === S)
+      const A = k.current;
+      if (A === null || document.activeElement === A)
         return;
-      $() !== z && (S.innerHTML = js(O, s, m, d));
-    }, [z, O, s, m, d, $]);
-    const C = k(() => {
-      const S = $();
-      T || j(S), p == null || p(S);
-    }, [T, p, $]), E = k(() => {
-      y(!0), f == null || f();
-    }, [f]), _ = k(() => {
-      y(!1), g == null || g();
-      const S = $();
-      S !== z && (T || j(S), p == null || p(S));
-    }, [T, g, p, $, z]), L = k((S) => {
-      if (a) {
-        S.preventDefault();
+      B() !== T && (A.innerHTML = Ns(P, r, m, c));
+    }, [T, P, r, m, c, B]);
+    const D = f(() => {
+      const A = B();
+      M || y(A), u == null || u(A);
+    }, [M, u, B]), x = f(() => {
+      j(!0), g == null || g();
+    }, [g]), E = f(() => {
+      j(!1), v == null || v();
+      const A = B();
+      A !== T && (M || y(A), u == null || u(A));
+    }, [M, v, u, B, T]), S = f((A) => {
+      if (i) {
+        A.preventDefault();
         return;
       }
-      if (S.metaKey || S.ctrlKey) {
-        switch (S.key.toLowerCase()) {
+      if (A.metaKey || A.ctrlKey) {
+        switch (A.key.toLowerCase()) {
           case "b":
-            S.preventDefault(), document.execCommand("bold"), C();
+            A.preventDefault(), document.execCommand("bold"), D();
             break;
           case "i":
-            S.preventDefault(), document.execCommand("italic"), C();
+            A.preventDefault(), document.execCommand("italic"), D();
             break;
         }
-        if (S.shiftKey)
-          switch (S.key.toLowerCase()) {
+        if (A.shiftKey)
+          switch (A.key.toLowerCase()) {
             case "x":
-              S.preventDefault(), document.execCommand("strikeThrough"), C();
+              A.preventDefault(), document.execCommand("strikeThrough"), D();
               break;
           }
       }
-    }, [a, C]), R = k((S) => {
-      S.preventDefault();
-      const ee = S.clipboardData.getData("text/plain");
-      document.execCommand("insertText", !1, ee), C();
-    }, [C]);
-    Le(I, () => ({
+    }, [i, D]), F = f((A) => {
+      A.preventDefault();
+      const ne = A.clipboardData.getData("text/plain");
+      document.execCommand("insertText", !1, ne), D();
+    }, [D]);
+    Fe(V, () => ({
       focus: () => {
-        var S;
-        return (S = w.current) == null ? void 0 : S.focus();
+        var A;
+        return (A = k.current) == null ? void 0 : A.focus();
       },
       blur: () => {
-        var S;
-        return (S = w.current) == null ? void 0 : S.blur();
+        var A;
+        return (A = k.current) == null ? void 0 : A.blur();
       },
-      insertText: (S) => {
-        var ee;
-        (ee = w.current) == null || ee.focus(), document.execCommand("insertText", !1, S), C();
+      insertText: (A) => {
+        var ne;
+        (ne = k.current) == null || ne.focus(), document.execCommand("insertText", !1, A), D();
       },
-      insertLink: (S, ee) => {
-        var M;
-        (M = w.current) == null || M.focus(), document.execCommand("insertHTML", !1, `<a href="${ee}">${S}</a>`), C();
+      insertLink: (A, ne) => {
+        var G;
+        (G = k.current) == null || G.focus(), document.execCommand("insertHTML", !1, `<a href="${ne}">${A}</a>`), D();
       },
-      insertChip: (S) => {
-        var M;
-        (M = w.current) == null || M.focus();
-        const ee = `<span data-chip contenteditable="false">${S}</span>&nbsp;`;
-        document.execCommand("insertHTML", !1, ee), C();
+      insertChip: (A) => {
+        var G;
+        (G = k.current) == null || G.focus();
+        const ne = `<span data-chip contenteditable="false">${A}</span>&nbsp;`;
+        document.execCommand("insertHTML", !1, ne), D();
       },
       formatBold: () => {
-        var S;
-        (S = w.current) == null || S.focus(), document.execCommand("bold"), C();
+        var A;
+        (A = k.current) == null || A.focus(), document.execCommand("bold"), D();
       },
       formatItalic: () => {
-        var S;
-        (S = w.current) == null || S.focus(), document.execCommand("italic"), C();
+        var A;
+        (A = k.current) == null || A.focus(), document.execCommand("italic"), D();
       },
       formatStrikethrough: () => {
-        var S;
-        (S = w.current) == null || S.focus(), document.execCommand("strikeThrough"), C();
+        var A;
+        (A = k.current) == null || A.focus(), document.execCommand("strikeThrough"), D();
       },
       formatCodeTag: () => {
-        var ee;
-        (ee = w.current) == null || ee.focus();
-        const S = window.getSelection();
-        if (S !== null && S.rangeCount > 0) {
-          const K = S.getRangeAt(0).toString();
-          K.length > 0 && (document.execCommand("insertHTML", !1, `<code>${K}</code>`), C());
+        var ne;
+        (ne = k.current) == null || ne.focus();
+        const A = window.getSelection();
+        if (A !== null && A.rangeCount > 0) {
+          const me = A.getRangeAt(0).toString();
+          me.length > 0 && (document.execCommand("insertHTML", !1, `<code>${me}</code>`), D());
         }
       },
       formatOrderedList: () => {
-        var S;
-        (S = w.current) == null || S.focus(), document.execCommand("insertOrderedList"), C();
+        var A;
+        (A = k.current) == null || A.focus(), document.execCommand("insertOrderedList"), D();
       },
       formatUnorderedList: () => {
-        var S;
-        (S = w.current) == null || S.focus(), document.execCommand("insertUnorderedList"), C();
+        var A;
+        (A = k.current) == null || A.focus(), document.execCommand("insertUnorderedList"), D();
       },
       getCaretRect: () => {
-        const S = window.getSelection();
-        return S === null || S.rangeCount === 0 ? null : S.getRangeAt(0).getBoundingClientRect();
+        const A = window.getSelection();
+        return A === null || A.rangeCount === 0 ? null : A.getRangeAt(0).getBoundingClientRect();
       }
-    }), [C]);
-    const U = u !== void 0, G = b !== void 0, q = z === "", H = r !== void 0 && r > 0 ? `${r * 1.5}em` : void 0;
-    return /* @__PURE__ */ A(
+    }), [D]);
+    const $ = h !== void 0, H = d !== void 0, Z = T === "", _ = s !== void 0 && s > 0 ? `${s * 1.5}em` : void 0;
+    return /* @__PURE__ */ L(
       "div",
       {
-        className: h(ps({}), o),
-        ...V,
+        className: p(vs({}), o),
+        ...I,
         children: [
-          U && /* @__PURE__ */ l("div", { className: "flex flex-row items-center gap-2 px-1 pt-1 pb-0", children: u }),
-          /* @__PURE__ */ A("div", { className: "relative px-[10px] py-2 box-border", children: [
+          $ && /* @__PURE__ */ l("div", { className: "flex flex-row items-center gap-2 px-1 pt-1 pb-0", children: h }),
+          /* @__PURE__ */ L("div", { className: "relative px-[10px] py-2 box-border", children: [
             /* @__PURE__ */ l(
               "div",
               {
-                ref: w,
+                ref: k,
                 role: "textbox",
                 "aria-multiline": "true",
-                "aria-label": c,
+                "aria-label": b,
                 "aria-placeholder": t,
-                "aria-invalid": i,
-                contentEditable: !a,
+                "aria-invalid": a,
+                contentEditable: !i,
                 suppressContentEditableWarning: !0,
                 autoCapitalize: "off",
                 autoCorrect: "off",
                 spellCheck: !1,
-                className: h(
-                  gs({}),
-                  a && "text-[var(--sinch-comp-textarea-color-disabled-text-initial)] cursor-not-allowed",
+                className: p(
+                  ws({}),
+                  i && "text-[var(--sinch-comp-textarea-color-disabled-text-initial)] cursor-not-allowed",
                   // Inline styles for formatting
                   "[&_b]:font-bold [&_strong]:font-bold",
                   "[&_i]:italic [&_em]:italic",
@@ -29902,18 +29996,18 @@ const ps = D(
                   "[&_[data-chip]]:[font:var(--sinch-comp-chip-font-size-m-label)]",
                   "[&_[data-chip]]:select-none"
                 ),
-                style: { minHeight: H },
-                onInput: C,
-                onFocus: E,
-                onBlur: _,
-                onKeyDown: L,
-                onPaste: R
+                style: { minHeight: _ },
+                onInput: D,
+                onFocus: x,
+                onBlur: E,
+                onKeyDown: S,
+                onPaste: F
               }
             ),
-            q && t !== void 0 && /* @__PURE__ */ l(
+            Z && t !== void 0 && /* @__PURE__ */ l(
               "div",
               {
-                className: h(
+                className: p(
                   "absolute left-0 top-0 px-3 py-2",
                   "[font:var(--sinch-comp-textarea-font-input)]",
                   "text-[var(--sinch-comp-textarea-color-default-text-placeholder)]",
@@ -29926,63 +30020,63 @@ const ps = D(
           /* @__PURE__ */ l(
             "div",
             {
-              className: h(
-                ks({
-                  isFocused: v,
-                  isInvalid: i && !v,
-                  isDisabled: a
+              className: p(
+                xs({
+                  isFocused: w,
+                  isInvalid: a && !w,
+                  isDisabled: i
                 })
               )
             }
           ),
-          G && /* @__PURE__ */ l("div", { className: "flex flex-row items-center gap-2 px-1 pt-0 pb-1", children: b })
+          H && /* @__PURE__ */ l("div", { className: "flex flex-row items-center gap-2 px-1 pt-0 pb-1", children: d })
         ]
       }
     );
   }
 );
-fs.displayName = "RichTextarea";
-function js(o, e, n, t) {
-  const i = (a) => {
-    var r, s, m, d, c, u, b;
-    switch (a.type) {
+ys.displayName = "RichTextarea";
+function Ns(o, e, n, t) {
+  const a = (i) => {
+    var s, r, m, c, b, h, d;
+    switch (i.type) {
       case "text":
-        return Oe(a.content ?? "");
+        return Le(i.content ?? "");
       case "bold":
-        return `<b>${((r = a.children) == null ? void 0 : r.map(i).join("")) ?? ""}</b>`;
+        return `<b>${((s = i.children) == null ? void 0 : s.map(a).join("")) ?? ""}</b>`;
       case "italic":
-        return `<i>${((s = a.children) == null ? void 0 : s.map(i).join("")) ?? ""}</i>`;
+        return `<i>${((r = i.children) == null ? void 0 : r.map(a).join("")) ?? ""}</i>`;
       case "strikethrough":
-        return `<s>${((m = a.children) == null ? void 0 : m.map(i).join("")) ?? ""}</s>`;
+        return `<s>${((m = i.children) == null ? void 0 : m.map(a).join("")) ?? ""}</s>`;
       case "code":
-        return `<code>${Oe(a.content ?? "")}</code>`;
+        return `<code>${Le(i.content ?? "")}</code>`;
       case "link":
-        return `<a href="${Oe(a.href ?? "")}">${Oe(a.content ?? "")}</a>`;
+        return `<a href="${Le(i.href ?? "")}">${Le(i.content ?? "")}</a>`;
       case "chip": {
-        const p = t == null ? void 0 : t(a.content ?? ""), f = (p == null ? void 0 : p.color) ?? e;
-        let g = "";
-        return f !== void 0 && (g = ` style="background-color:var(--sinch-comp-tag-color-${f}-background);color:var(--sinch-comp-tag-color-${f}-foreground)"`), `<span data-chip contenteditable="false"${g}>${Oe(a.content ?? "")}</span>`;
+        const u = t == null ? void 0 : t(i.content ?? ""), g = (u == null ? void 0 : u.color) ?? e;
+        let v = "";
+        return g !== void 0 && (v = ` style="background-color:var(--sinch-comp-tag-color-${g}-background);color:var(--sinch-comp-tag-color-${g}-foreground)"`), `<span data-chip contenteditable="false"${v}>${Le(i.content ?? "")}</span>`;
       }
       case "emoji":
-        return a.content ?? "";
+        return i.content ?? "";
       case "linebreak":
         return "<br>";
       case "paragraph":
-        return `<p>${((d = a.children) == null ? void 0 : d.map(i).join("")) ?? ""}</p>`;
+        return `<p>${((c = i.children) == null ? void 0 : c.map(a).join("")) ?? ""}</p>`;
       case "list":
-        return a.ordered === !0 ? `<ol>${((c = a.children) == null ? void 0 : c.map(i).join("")) ?? ""}</ol>` : `<ul>${((u = a.children) == null ? void 0 : u.map(i).join("")) ?? ""}</ul>`;
+        return i.ordered === !0 ? `<ol>${((b = i.children) == null ? void 0 : b.map(a).join("")) ?? ""}</ol>` : `<ul>${((h = i.children) == null ? void 0 : h.map(a).join("")) ?? ""}</ul>`;
       case "listItem":
-        return `<li>${((b = a.children) == null ? void 0 : b.map(i).join("")) ?? ""}</li>`;
+        return `<li>${((d = i.children) == null ? void 0 : d.map(a).join("")) ?? ""}</li>`;
       default:
         return "";
     }
   };
-  return o.map(i).join("");
+  return o.map(a).join("");
 }
-function Oe(o) {
+function Le(o) {
   return o.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
-const vs = D(
+const Vs = C(
   // Base styles
   [
     "inline-flex items-center",
@@ -30007,7 +30101,7 @@ const vs = D(
       readonly: !1
     }
   }
-), ws = () => /* @__PURE__ */ l(
+), zs = () => /* @__PURE__ */ l(
   "svg",
   {
     width: "16",
@@ -30024,45 +30118,45 @@ const vs = D(
       }
     )
   }
-), xs = P(
+), Is = R(
   ({
     className: o,
     text: e,
     readonly: n = !1,
     color: t,
-    icon: i,
-    onClick: a,
-    onRemove: r,
-    style: s,
+    icon: a,
+    onClick: i,
+    onRemove: s,
+    style: r,
     ...m
-  }, d) => {
-    const c = {};
-    t !== void 0 && t !== "default" && (c.backgroundColor = `var(--sinch-comp-tag-color-${t}-background)`, c.color = `var(--sinch-comp-tag-color-${t}-foreground)`, c["--sinch-global-color-icon"] = `var(--sinch-comp-tag-color-${t}-foreground)`);
-    const u = k((p) => {
-      p.stopPropagation(), r == null || r(p);
-    }, [r]), b = k((p) => {
-      p.target.closest("[data-close-icon]") === null && (a == null || a(p));
-    }, [a]);
-    return /* @__PURE__ */ A(
+  }, c) => {
+    const b = {};
+    t !== void 0 && t !== "default" && (b.backgroundColor = `var(--sinch-comp-tag-color-${t}-background)`, b.color = `var(--sinch-comp-tag-color-${t}-foreground)`, b["--sinch-global-color-icon"] = `var(--sinch-comp-tag-color-${t}-foreground)`);
+    const h = f((u) => {
+      u.stopPropagation(), s == null || s(u);
+    }, [s]), d = f((u) => {
+      u.target.closest("[data-close-icon]") === null && (i == null || i(u));
+    }, [i]);
+    return /* @__PURE__ */ L(
       "span",
       {
-        ref: d,
+        ref: c,
         role: "button",
         "aria-label": e,
         contentEditable: !1,
-        className: h(
-          vs({ readonly: n }),
+        className: p(
+          Vs({ readonly: n }),
           o
         ),
-        style: { ...c, ...s },
-        onClick: b,
+        style: { ...b, ...r },
+        onClick: d,
         ...m,
         children: [
-          i !== void 0 && /* @__PURE__ */ l(
+          a !== void 0 && /* @__PURE__ */ l(
             "span",
             {
               className: "w-[var(--sinch-comp-chip-size-icon-m)] h-[var(--sinch-comp-chip-size-icon-m)] flex items-center justify-center",
-              children: i
+              children: a
             }
           ),
           /* @__PURE__ */ l("span", { className: "flex-1 overflow-hidden text-ellipsis whitespace-nowrap", children: e }),
@@ -30071,10 +30165,10 @@ const vs = D(
             {
               "data-close-icon": !0,
               className: "cursor-pointer flex items-center justify-center",
-              onClick: u,
+              onClick: h,
               role: "button",
               "aria-label": `Remove ${e}`,
-              children: /* @__PURE__ */ l(ws, {})
+              children: /* @__PURE__ */ l(zs, {})
             }
           )
         ]
@@ -30082,34 +30176,34 @@ const vs = D(
     );
   }
 );
-xs.displayName = "RichTextareaChip";
-const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = Ye - wn, Ns = Ye, Cs = xn, Vs = qe, To = (o) => {
+Is.displayName = "RichTextareaChip";
+const Cs = 216 / 2, Vn = 30, zn = 26, In = 26, Xe = Cs - Vn, Qe = Xe - zn, Cn = Qe - In, Ms = Qe, Ds = Cn, Ts = Xe, Oo = (o) => {
   if (o === "" || o === null || o === void 0)
     return { hours: 0, minutes: 0 };
   const e = o.split(":"), n = parseInt(e[0] ?? "00"), t = parseInt(e[1] ?? "00");
   return isNaN(n) || n > 23 || n < 0 ? { hours: 0, minutes: 0 } : isNaN(t) || t > 59 || t < 0 ? { hours: 0, minutes: 0 } : { hours: n, minutes: t };
-}, Ae = (o) => o.toString().padStart(2, "0"), Is = (o, e) => `${Ae(o)}:${Ae(e)}:00`, zs = (o, e) => e ? Ae(o) : o === 0 || o === 12 ? "12" : Ae(o % 12), Ds = (o) => o === 0 ? "12" : o === 12 ? "24" : String(o), yn = (o) => Ae(o), Ts = (o, e) => e ? o === 0 ? 12 : o === 12 ? 0 : o : o % 12, Mo = (o, e) => {
+}, Re = (o) => o.toString().padStart(2, "0"), Lo = (o, e) => `${Re(o)}:${Re(e)}:00`, Ss = (o, e) => e ? Re(o) : o === 0 || o === 12 ? "12" : Re(o % 12), Es = (o) => o === 0 ? "12" : o === 12 ? "24" : String(o), Mn = (o) => Re(o), As = (o, e) => e ? o === 0 ? 12 : o === 12 ? 0 : o : o % 12, Po = (o, e) => {
   const t = (360 - (o % 360 - e)) % 360;
   return t > 180 ? o - 360 + t : o + t;
-}, Ms = D(
+}, Os = C(
   // Base styles
   "block outline-none",
   {
     variants: {},
     defaultVariants: {}
   }
-), So = ({ hour: o, x: e, y: n, isSelected: t, onClick: i }) => {
-  const a = Ds(o), r = o >= 12 && o !== 12 || o === 0, s = (m) => {
-    (m.key === "Enter" || m.key === " ") && (m.preventDefault(), i());
+), Ro = ({ hour: o, x: e, y: n, isSelected: t, onClick: a }) => {
+  const i = Es(o), s = o >= 12 && o !== 12 || o === 0, r = (m) => {
+    (m.key === "Enter" || m.key === " ") && (m.preventDefault(), a());
   };
   return /* @__PURE__ */ l(
     "div",
     {
-      className: h(
+      className: p(
         "absolute w-7 h-7 text-center z-[1] cursor-pointer pointer-events-auto",
         "top-[calc(50%-14px)] left-[calc(50%-14px)]",
         "leading-7",
-        r ? [
+        s ? [
           "font-[var(--sinch-comp-time-picker-digit-font-default-h24)]",
           t ? "font-[var(--sinch-comp-time-picker-digit-font-checked-h24)] text-[var(--sinch-comp-time-picker-digit-color-checked-h24-initial)]" : "text-[var(--sinch-comp-time-picker-digit-color-default-h24-initial)]"
         ] : [
@@ -30120,22 +30214,22 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
       style: { transform: `translate(${e}px, ${n}px)` },
       role: "button",
       tabIndex: -1,
-      "aria-label": `${a} o'clock`,
+      "aria-label": `${i} o'clock`,
       onClick: (m) => {
-        m.stopPropagation(), i();
+        m.stopPropagation(), a();
       },
-      onKeyDown: s,
-      children: a
+      onKeyDown: r,
+      children: i
     }
   );
-}, Ss = ({ minute: o, x: e, y: n, isSelected: t, onClick: i }) => {
-  const a = (r) => {
-    (r.key === "Enter" || r.key === " ") && (r.preventDefault(), i());
+}, Ls = ({ minute: o, x: e, y: n, isSelected: t, onClick: a }) => {
+  const i = (s) => {
+    (s.key === "Enter" || s.key === " ") && (s.preventDefault(), a());
   };
   return /* @__PURE__ */ l(
     "div",
     {
-      className: h(
+      className: p(
         "absolute w-7 h-7 text-center z-[1] cursor-pointer pointer-events-auto",
         "top-[calc(50%-14px)] left-[calc(50%-14px)]",
         "leading-7",
@@ -30146,98 +30240,103 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
       role: "button",
       tabIndex: -1,
       "aria-label": `${o} minutes`,
-      onClick: (r) => {
-        r.stopPropagation(), i();
+      onClick: (s) => {
+        s.stopPropagation(), a();
       },
-      onKeyDown: a,
-      children: yn(o)
+      onKeyDown: i,
+      children: Mn(o)
     }
   );
-}, Os = P(
+}, Ps = R(
   ({
     className: o,
     value: e,
     defaultValue: n = "00:00:00",
     ampm: t = !1,
-    "aria-label": i,
-    submitAriaLabel: a = "Submit",
-    onChange: r,
-    ...s
-  }, m) => {
-    const d = To(e ?? n), [c, u] = F(d.hours), [b, p] = F(d.minutes), [f, g] = F(0), [x, V] = F(0), I = Z(null), N = Z(null), j = e !== void 0;
+    "aria-label": a,
+    submitAriaLabel: i = "Submit",
+    clearable: s = !1,
+    onClear: r,
+    onChange: m,
+    ...c
+  }, b) => {
+    const h = Oo(e ?? n), [d, u] = U(h.hours), [g, v] = U(h.minutes), [N, I] = U(0), [V, z] = U(0), y = Y(null), w = Y(null), j = e !== void 0;
     X(() => {
       if (j) {
-        const M = To(e);
-        u(M.hours), p(M.minutes);
+        const O = Oo(e);
+        u(O.hours), v(O.minutes);
       }
     }, [j, e]), X(() => {
-      const M = c % 12, K = Mo(f, M * 30);
-      g(K);
-    }, [c]), X(() => {
-      const M = Mo(x, b * 6);
-      V(M);
-    }, [b]);
-    const v = !t, y = qe + jn / 2, w = Ye + vn / 2, T = xn + wn / 2, z = J(() => Array.from({ length: 12 }, (M, K) => {
-      const te = Math.PI / 6 * (K - 3), W = Math.cos(te) * w, Q = Math.sin(te) * w;
-      return { hour: K, x: W, y: Q };
-    }), [w]), O = J(() => Array.from({ length: 12 }, (M, K) => {
-      const te = K + 12, W = Math.PI / 6 * (K - 3), Q = Math.cos(W) * T, le = Math.sin(W) * T;
-      return { hour: te, x: Q, y: le };
-    }), [T]), $ = J(() => Array.from({ length: 12 }, (M, K) => {
-      const te = K * 5, W = Math.PI / 30 * (te - 15), Q = Math.cos(W) * y, le = Math.sin(W) * y;
-      return { minute: te, x: Q, y: le };
-    }), [y]), C = Ts(c, v), E = k((M) => {
-      u(M);
-    }, []), _ = k((M) => {
-      p(M);
-    }, []), L = k((M) => {
-      const K = M.currentTarget.getBoundingClientRect(), te = K.width / 2, W = K.height / 2, Q = M.clientX - K.left, le = K.height - (M.clientY - K.top), ce = Q - te, se = le - W, B = Math.sqrt(ce * ce + se * se), oe = ce / B;
-      let re = (Math.acos(oe * (se < 0 ? -1 : 1)) * (180 / Math.PI) - 90 - 360) % 360 * -1;
-      se < 0 && (re += 180);
-      const ge = B > qe ? 0 : B > Ye ? 1 : 2, ye = ge > 0, Qe = ge > 1;
-      if (ye) {
-        const he = Math.round(re / 30) % 12;
-        if (v)
-          u(Qe ? he === 0 ? 0 : he + 12 : he === 0 ? 12 : he);
+      const O = d % 12, W = Po(N, O * 30);
+      I(W);
+    }, [d]), X(() => {
+      const O = Po(V, g * 6);
+      z(O);
+    }, [g]);
+    const k = !t, M = Xe + Vn / 2, T = Qe + zn / 2, P = Cn + In / 2, B = J(() => Array.from({ length: 12 }, (O, W) => {
+      const Q = Math.PI / 6 * (W - 3), ae = Math.cos(Q) * T, ie = Math.sin(Q) * T;
+      return { hour: W, x: ae, y: ie };
+    }), [T]), D = J(() => Array.from({ length: 12 }, (O, W) => {
+      const Q = W + 12, ae = Math.PI / 6 * (W - 3), ie = Math.cos(ae) * P, le = Math.sin(ae) * P;
+      return { hour: Q, x: ie, y: le };
+    }), [P]), x = J(() => Array.from({ length: 12 }, (O, W) => {
+      const Q = W * 5, ae = Math.PI / 30 * (Q - 15), ie = Math.cos(ae) * M, le = Math.sin(ae) * M;
+      return { minute: Q, x: ie, y: le };
+    }), [M]), E = As(d, k), S = f((O) => {
+      u(O);
+    }, []), F = f((O) => {
+      v(O);
+    }, []), $ = f((O) => {
+      const W = O.currentTarget.getBoundingClientRect(), Q = W.width / 2, ae = W.height / 2, ie = O.clientX - W.left, le = W.height - (O.clientY - W.top), ce = ie - Q, q = le - ae, ee = Math.sqrt(ce * ce + q * q), de = ce / ee;
+      let pe = (Math.acos(de * (q < 0 ? -1 : 1)) * (180 / Math.PI) - 90 - 360) % 360 * -1;
+      q < 0 && (pe += 180);
+      const je = ee > Xe ? 0 : ee > Qe ? 1 : 2, io = je > 0, ze = je > 1;
+      if (io) {
+        const Ee = Math.round(pe / 30) % 12;
+        if (k)
+          u(ze ? Ee === 0 ? 0 : Ee + 12 : Ee === 0 ? 12 : Ee);
         else {
-          const Nn = c >= 12 ? 12 : 0;
-          u(he + Nn);
+          const Dn = d >= 12 ? 12 : 0;
+          u(Ee + Dn);
         }
       } else
-        p(Math.round(re / 6) % 60);
-    }, [v, c]), R = k((M) => {
-      M === "am" && c >= 12 ? u(c - 12) : M === "pm" && c < 12 && u(c + 12);
-    }, [c]), U = k(() => {
-      const M = Is(c, b);
-      r == null || r(M);
-    }, [c, b, r]), G = k((M) => {
-      switch (M.key) {
+        v(Math.round(pe / 6) % 60);
+    }, [k, d]), H = f((O) => {
+      O === "am" && d >= 12 ? u(d - 12) : O === "pm" && d < 12 && u(d + 12);
+    }, [d]), Z = f(() => {
+      const O = Lo(d, g);
+      m == null || m(O);
+    }, [d, g, m]), _ = f(() => {
+      u(0), v(0), r == null || r(), m == null || m("00:00:00");
+    }, [r, m]), A = f((O) => {
+      switch (O.key) {
         case "ArrowUp":
-          M.preventDefault(), u((K) => (K + 1) % 24);
+          O.preventDefault(), u((W) => (W + 1) % 24);
           break;
         case "ArrowDown":
-          M.preventDefault(), u((K) => (K + 23) % 24);
+          O.preventDefault(), u((W) => (W + 23) % 24);
           break;
       }
-    }, []), q = k((M) => {
-      switch (M.key) {
+    }, []), ne = f((O) => {
+      switch (O.key) {
         case "ArrowUp":
-          M.preventDefault(), p((K) => (K + 1) % 60);
+          O.preventDefault(), v((W) => (W + 1) % 60);
           break;
         case "ArrowDown":
-          M.preventDefault(), p((K) => (K + 59) % 60);
+          O.preventDefault(), v((W) => (W + 59) % 60);
           break;
       }
-    }, []), H = v && (c <= 0 || c > 12) ? Cs : Ns, S = b % 5 === 0, ee = c >= 0 && c < 12 ? "am" : "pm";
+    }, []), G = k && (d <= 0 || d > 12) ? Ds : Ms, me = g % 5 === 0, he = d >= 0 && d < 12 ? "am" : "pm";
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: m,
-        className: h(Ms(), o),
-        "aria-label": i,
-        ...s,
-        children: /* @__PURE__ */ A("div", { className: "flex flex-col w-[248px] p-4 box-border gap-4", children: [
-          /* @__PURE__ */ A(
+        ref: b,
+        className: p(Os(), o),
+        "aria-label": a,
+        "data-value": Lo(d, g),
+        ...c,
+        children: /* @__PURE__ */ L("div", { className: "flex flex-col w-[var(--sinch-comp-time-picker-size-container-width,248px)] p-4 box-border gap-4", children: [
+          /* @__PURE__ */ L(
             "div",
             {
               className: "relative w-full h-12 select-none",
@@ -30253,10 +30352,10 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
                     className: "absolute p-0 px-1 w-[50px] outline-none right-[calc(50%+8px)] text-right",
                     role: "meter",
                     "aria-valuemin": 0,
-                    "aria-valuemax": v ? 23 : 12,
-                    "aria-valuenow": c,
-                    "aria-valuetext": String(c),
-                    children: /* @__PURE__ */ l("span", { children: zs(c, v) })
+                    "aria-valuemax": k ? 23 : 12,
+                    "aria-valuenow": d,
+                    "aria-valuetext": String(d),
+                    children: /* @__PURE__ */ l("span", { children: Ss(d, k) })
                   }
                 ),
                 /* @__PURE__ */ l("div", { className: "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2", children: ":" }),
@@ -30267,20 +30366,20 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
                     role: "meter",
                     "aria-valuemin": 0,
                     "aria-valuemax": 59,
-                    "aria-valuenow": b,
-                    "aria-valuetext": String(b),
-                    children: /* @__PURE__ */ l("span", { children: yn(b) })
+                    "aria-valuenow": g,
+                    "aria-valuetext": String(g),
+                    children: /* @__PURE__ */ l("span", { children: Mn(g) })
                   }
                 ),
                 /* @__PURE__ */ l(
-                  me,
+                  re,
                   {
                     size: "s",
-                    "aria-label": a,
+                    "aria-label": i,
                     className: "absolute right-0 top-1/2 -translate-y-1/2",
-                    onClick: U,
+                    onClick: Z,
                     icon: /* @__PURE__ */ l(
-                      ne,
+                      oe,
                       {
                         name: "fa-check",
                         iconsVersion: "2",
@@ -30295,61 +30394,62 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
               ]
             }
           ),
-          /* @__PURE__ */ A(
+          /* @__PURE__ */ L(
             "div",
             {
-              className: "relative w-[216px] h-[216px] rounded-full box-border cursor-pointer",
+              className: "relative w-[var(--sinch-comp-time-picker-size-clock-face,216px)] h-[var(--sinch-comp-time-picker-size-clock-face,216px)] rounded-full box-border cursor-pointer",
               style: {
-                border: "1px solid var(--sinch-comp-time-picker-watch-face-color-default-border-initial)",
-                backgroundColor: "var(--sinch-comp-time-picker-watch-face-color-default-background-initial)"
+                border: "2px solid var(--sinch-comp-time-picker-watch-face-color-default-border-initial)",
+                backgroundColor: "var(--sinch-comp-time-picker-watch-face-color-default-background-initial)",
+                boxShadow: "inset 0 1px 3px var(--sinch-comp-time-picker-watch-face-color-default-shadow-inner, rgba(0,0,0,0.06))"
               },
               role: "group",
               "aria-label": "Time picker clock face",
-              onClick: L,
+              onClick: $,
               children: [
-                /* @__PURE__ */ A("div", { className: "absolute inset-0 rounded-full pointer-events-none select-none", children: [
-                  z.map(({ hour: M, x: K, y: te }) => /* @__PURE__ */ l(
-                    So,
+                /* @__PURE__ */ L("div", { className: "absolute inset-0 rounded-full pointer-events-none select-none", children: [
+                  B.map(({ hour: O, x: W, y: Q }) => /* @__PURE__ */ l(
+                    Ro,
                     {
-                      hour: M,
-                      x: K,
-                      y: te,
+                      hour: O,
+                      x: W,
+                      y: Q,
                       is24Hour: !1,
-                      isSelected: v ? C === M && c > 0 && c <= 12 : C === M,
-                      onClick: () => E(M)
+                      isSelected: k ? E === O && d > 0 && d <= 12 : E === O,
+                      onClick: () => S(O)
                     },
-                    `h12-${M}`
+                    `h12-${O}`
                   )),
-                  v && O.map(({ hour: M, x: K, y: te }) => /* @__PURE__ */ l(
-                    So,
+                  k && D.map(({ hour: O, x: W, y: Q }) => /* @__PURE__ */ l(
+                    Ro,
                     {
-                      hour: M,
-                      x: K,
-                      y: te,
+                      hour: O,
+                      x: W,
+                      y: Q,
                       is24Hour: !0,
-                      isSelected: C === M,
-                      onClick: () => E(M)
+                      isSelected: E === O,
+                      onClick: () => S(O)
                     },
-                    `h24-${M}`
+                    `h24-${O}`
                   ))
                 ] }),
-                /* @__PURE__ */ l("div", { className: "absolute inset-0 rounded-full pointer-events-none select-none", children: $.map(({ minute: M, x: K, y: te }) => /* @__PURE__ */ l(
-                  Ss,
+                /* @__PURE__ */ l("div", { className: "absolute inset-0 rounded-full pointer-events-none select-none", children: x.map(({ minute: O, x: W, y: Q }) => /* @__PURE__ */ l(
+                  Ls,
                   {
-                    minute: M,
-                    x: K,
-                    y: te,
-                    isSelected: b === M,
-                    onClick: () => _(M)
+                    minute: O,
+                    x: W,
+                    y: Q,
+                    isSelected: g === O,
+                    onClick: () => F(O)
                   },
-                  `m-${M}`
+                  `m-${O}`
                 )) }),
-                /* @__PURE__ */ A("div", { className: "absolute inset-0 cursor-pointer rounded-full", children: [
+                /* @__PURE__ */ L("div", { className: "absolute inset-0 cursor-pointer rounded-full", children: [
                   /* @__PURE__ */ l(
                     "div",
                     {
-                      ref: I,
-                      className: h(
+                      ref: y,
+                      className: p(
                         "absolute w-1 rounded-sm z-[2] outline-none",
                         "left-[calc(50%-2px)] bottom-1/2",
                         "origin-bottom",
@@ -30358,25 +30458,25 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
                         "focus-visible:bg-[var(--sinch-comp-time-picker-needle-color-default-background-focus)]"
                       ),
                       style: {
-                        height: `${H}px`,
-                        transform: `rotate(${f}deg)`,
+                        height: `${G}px`,
+                        transform: `rotate(${N}deg)`,
                         backgroundColor: "var(--sinch-comp-time-picker-needle-color-default-background-initial)"
                       },
                       tabIndex: 0,
                       role: "slider",
                       "aria-label": "Hour selector",
                       "aria-valuemin": 0,
-                      "aria-valuemax": v ? 23 : 12,
-                      "aria-valuenow": c,
-                      "aria-valuetext": `${c} o'clock`,
-                      onKeyDown: G
+                      "aria-valuemax": k ? 23 : 12,
+                      "aria-valuenow": d,
+                      "aria-valuetext": `${d} o'clock`,
+                      onKeyDown: A
                     }
                   ),
                   /* @__PURE__ */ l(
                     "div",
                     {
-                      ref: N,
-                      className: h(
+                      ref: w,
+                      className: p(
                         "absolute w-0.5 rounded-[1px] z-[2] outline-none",
                         "left-[calc(50%-1px)] bottom-1/2",
                         "origin-bottom",
@@ -30385,8 +30485,8 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
                         "focus-visible:bg-[var(--sinch-comp-time-picker-needle-color-default-background-focus)]"
                       ),
                       style: {
-                        height: `${Vs}px`,
-                        transform: `rotate(${x}deg)`,
+                        height: `${Ts}px`,
+                        transform: `rotate(${V}deg)`,
                         backgroundColor: "var(--sinch-comp-time-picker-needle-color-default-background-initial)"
                       },
                       tabIndex: 0,
@@ -30394,10 +30494,10 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
                       "aria-label": "Minute selector",
                       "aria-valuemin": 0,
                       "aria-valuemax": 59,
-                      "aria-valuenow": b,
-                      "aria-valuetext": `${b} minutes`,
-                      onKeyDown: q,
-                      children: !S && /* @__PURE__ */ l(
+                      "aria-valuenow": g,
+                      "aria-valuetext": `${g} minutes`,
+                      onKeyDown: ne,
+                      children: !me && /* @__PURE__ */ l(
                         "div",
                         {
                           className: "absolute w-1 h-1 rounded-full -left-[1px] -top-4",
@@ -30421,15 +30521,15 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
               ]
             }
           ),
-          t && /* @__PURE__ */ l("div", { className: "flex justify-center w-full h-8", children: /* @__PURE__ */ A(
-            ko,
+          t && /* @__PURE__ */ l("div", { className: "flex justify-center w-full h-8", children: /* @__PURE__ */ L(
+            wo,
             {
-              value: ee,
+              value: he,
               "aria-label": "AM/PM selection",
-              onChange: R,
+              onChange: H,
               children: [
                 /* @__PURE__ */ l(
-                  Ge,
+                  Ye,
                   {
                     value: "am",
                     text: "AM",
@@ -30438,7 +30538,7 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
                   }
                 ),
                 /* @__PURE__ */ l(
-                  Ge,
+                  Ye,
                   {
                     value: "pm",
                     text: "PM",
@@ -30448,256 +30548,269 @@ const ys = 216 / 2, jn = 30, vn = 26, wn = 26, qe = ys - jn, Ye = qe - vn, xn = 
                 )
               ]
             }
+          ) }),
+          s && (d !== 0 || g !== 0) && /* @__PURE__ */ l("div", { className: "flex justify-end px-4 pb-2", children: /* @__PURE__ */ l(
+            re,
+            {
+              size: "s",
+              variant: "subtle-secondary",
+              text: "Clear",
+              "aria-label": "Clear selected time",
+              onClick: _
+            }
           ) })
         ] })
       }
     );
   }
 );
-Os.displayName = "TimePicker";
-const _e = 7, Oo = (o) => o.toString().padStart(2, "0"), Es = (o) => {
-  const n = new Date(Date.UTC(o.getUTCFullYear(), o.getUTCMonth(), 1)), t = new Date(Date.UTC(o.getUTCFullYear(), o.getUTCMonth() + 1, 0)), i = n.getUTCDay(), a = t.getUTCDay(), r = t.getUTCDate(), s = (i - 1 + _e) % _e, m = (_e - 1 - a + 1) % _e, d = [];
-  let c = [];
-  for (let u = 1 - s; u <= r + m + 1; u++) {
-    if (u <= 0 || u > r)
-      c.push(null);
+Ps.displayName = "TimePicker";
+const Ge = 7, Fo = (o) => o.toString().padStart(2, "0"), Rs = (o) => {
+  const n = new Date(Date.UTC(o.getUTCFullYear(), o.getUTCMonth(), 1)), t = new Date(Date.UTC(o.getUTCFullYear(), o.getUTCMonth() + 1, 0)), a = n.getUTCDay(), i = t.getUTCDay(), s = t.getUTCDate(), r = (a - 1 + Ge) % Ge, m = (Ge - 1 - i + 1) % Ge, c = [];
+  let b = [];
+  for (let h = 1 - r; h <= s + m + 1; h++) {
+    if (h <= 0 || h > s)
+      b.push(null);
     else {
-      const b = new Date(o);
-      b.setUTCDate(u), c.push(b);
+      const d = new Date(o);
+      d.setUTCDate(h), b.push(d);
     }
-    c.length === 7 && (d.push(c), c = []);
+    b.length === 7 && (c.push(b), b = []);
   }
-  return d;
-}, to = (o) => `${o.getUTCFullYear()}-${Oo(o.getUTCMonth() + 1)}-${Oo(o.getUTCDate())}`, Ce = (o) => {
+  return c;
+}, ro = (o) => `${o.getUTCFullYear()}-${Fo(o.getUTCMonth() + 1)}-${Fo(o.getUTCDate())}`, Ie = (o) => {
   if (o === "" || o === null || o === void 0) return null;
   const e = /* @__PURE__ */ new Date(`${o.substring(0, 10)}T00:00:00Z`);
   return isNaN(e.getTime()) ? null : e;
-}, Eo = () => {
+}, $o = () => {
   const o = /* @__PURE__ */ new Date();
   return new Date(Date.UTC(o.getUTCFullYear(), o.getUTCMonth(), o.getUTCDate()));
-}, As = (o) => {
+}, Fs = (o) => {
   const e = new Intl.DateTimeFormat(o, { weekday: "narrow", timeZone: "UTC" });
   return [1, 2, 3, 4, 5, 6, 7].map((n) => {
     const t = new Date(Date.UTC(2018, 0, n));
     return e.format(t);
   });
-}, Ls = (o) => {
+}, $s = (o) => {
   const e = new Intl.DateTimeFormat(o, { month: "short", timeZone: "UTC" });
   return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((n) => {
     const t = new Date(Date.UTC(2018, n, 1));
     return e.format(t);
   });
-}, pe = (o, e) => o.getTime() - e.getTime(), we = (o, e) => e === null ? !1 : pe(o, e) === 0, io = (o, e, n) => e === null || n === null ? !1 : pe(o, e) >= 0 && pe(n, o) >= 0, ao = (o) => pe(o[0], o[1]) > 0 ? [o[1], o[0]] : o, Ps = (o, e) => {
+}, ge = (o, e) => o.getTime() - e.getTime(), xe = (o, e) => e === null ? !1 : ge(o, e) === 0, mo = (o, e, n) => e === null || n === null ? !1 : ge(o, e) >= 0 && ge(n, o) >= 0, co = (o) => ge(o[0], o[1]) > 0 ? [o[1], o[0]] : o, _s = (o, e) => {
   const n = new Date(Date.UTC(o.getUTCFullYear(), o.getUTCMonth(), 0));
-  return pe(n, e) >= 0;
-}, Rs = (o, e) => {
-  const n = new Date(Date.UTC(o.getUTCFullYear(), o.getUTCMonth() + 1, 1));
-  return pe(e, n) >= 0;
-}, $s = (o, e) => {
-  const n = new Date(Date.UTC(o.getUTCFullYear() + 1, 0, 1));
-  return pe(e, n) >= 0;
-}, Fs = (o, e) => {
-  const n = new Date(Date.UTC(o.getUTCFullYear(), 0, 0));
-  return pe(n, e) >= 0;
-}, De = (o, e, n) => {
-  const t = new Date(o.getTime());
-  return pe(t, e) < 0 && t.setTime(e.getTime()), pe(t, n) > 0 && t.setTime(n.getTime()), t;
-}, _s = (o, e) => {
-  const n = o.getUTCDate(), t = o.getUTCMonth(), i = o.getUTCFullYear();
-  let a = t + 1, r = i;
-  a > 11 && (a = 0, r++);
-  const m = new Date(Date.UTC(r, a + 1, 0)).getUTCDate(), d = Math.min(n, m), c = new Date(Date.UTC(r, a, d));
-  return De(c, o, e);
+  return ge(n, e) >= 0;
 }, Us = (o, e) => {
-  const n = o.getUTCDate(), t = o.getUTCMonth(), i = o.getUTCFullYear();
-  let a = t - 1, r = i;
-  a < 0 && (a = 11, r--);
-  const m = new Date(Date.UTC(r, a + 1, 0)).getUTCDate(), d = Math.min(n, m), c = new Date(Date.UTC(r, a, d));
-  return De(c, e, o);
+  const n = new Date(Date.UTC(o.getUTCFullYear(), o.getUTCMonth() + 1, 1));
+  return ge(e, n) >= 0;
 }, Hs = (o, e) => {
-  const n = o.getUTCDate(), t = o.getUTCMonth(), a = o.getUTCFullYear() + 1;
-  let r = n;
-  t === 1 && n === 29 && (new Date(Date.UTC(a, 1, 29)).getUTCDate() === 29 || (r = 28));
-  const s = new Date(Date.UTC(a, t, r));
-  return De(s, o, e);
+  const n = new Date(Date.UTC(o.getUTCFullYear() + 1, 0, 1));
+  return ge(e, n) >= 0;
 }, Bs = (o, e) => {
-  const n = o.getUTCDate(), t = o.getUTCMonth(), a = o.getUTCFullYear() - 1;
-  let r = n;
-  t === 1 && n === 29 && (new Date(Date.UTC(a, 1, 29)).getUTCDate() === 29 || (r = 28));
-  const s = new Date(Date.UTC(a, t, r));
-  return De(s, e, o);
-}, Gs = (o) => o.join(","), Ws = (o) => o.split(",").filter(Boolean), Zs = P(
+  const n = new Date(Date.UTC(o.getUTCFullYear(), 0, 0));
+  return ge(n, e) >= 0;
+}, Te = (o, e, n) => {
+  const t = new Date(o.getTime());
+  return ge(t, e) < 0 && t.setTime(e.getTime()), ge(t, n) > 0 && t.setTime(n.getTime()), t;
+}, Gs = (o, e) => {
+  const n = o.getUTCDate(), t = o.getUTCMonth(), a = o.getUTCFullYear();
+  let i = t + 1, s = a;
+  i > 11 && (i = 0, s++);
+  const m = new Date(Date.UTC(s, i + 1, 0)).getUTCDate(), c = Math.min(n, m), b = new Date(Date.UTC(s, i, c));
+  return Te(b, o, e);
+}, Ws = (o, e) => {
+  const n = o.getUTCDate(), t = o.getUTCMonth(), a = o.getUTCFullYear();
+  let i = t - 1, s = a;
+  i < 0 && (i = 11, s--);
+  const m = new Date(Date.UTC(s, i + 1, 0)).getUTCDate(), c = Math.min(n, m), b = new Date(Date.UTC(s, i, c));
+  return Te(b, e, o);
+}, Zs = (o, e) => {
+  const n = o.getUTCDate(), t = o.getUTCMonth(), i = o.getUTCFullYear() + 1;
+  let s = n;
+  t === 1 && n === 29 && (new Date(Date.UTC(i, 1, 29)).getUTCDate() === 29 || (s = 28));
+  const r = new Date(Date.UTC(i, t, s));
+  return Te(r, o, e);
+}, qs = (o, e) => {
+  const n = o.getUTCDate(), t = o.getUTCMonth(), i = o.getUTCFullYear() - 1;
+  let s = n;
+  t === 1 && n === 29 && (new Date(Date.UTC(i, 1, 29)).getUTCDate() === 29 || (s = 28));
+  const r = new Date(Date.UTC(i, t, s));
+  return Te(r, e, o);
+}, Ys = (o) => o.join(","), Ks = (o) => o.split(",").filter(Boolean), Js = R(
   ({
     className: o,
     value: e,
     defaultValue: n = "",
     min: t = "1900-01-01",
-    max: i = "2100-12-31",
-    locale: a = "en-US",
-    range: r = !1,
-    onChange: s,
-    prevYearAriaLabel: m = "Previous year",
-    nextYearAriaLabel: d = "Next year",
-    prevMonthAriaLabel: c = "Previous month",
+    max: a = "2100-12-31",
+    locale: i = "en-US",
+    range: s = !1,
+    clearable: r = !1,
+    onClear: m,
+    onChange: c,
+    prevYearAriaLabel: b = "Previous year",
+    nextYearAriaLabel: h = "Next year",
+    prevMonthAriaLabel: d = "Previous month",
     nextMonthAriaLabel: u = "Next month",
-    ...b
-  }, p) => {
-    const f = e !== void 0, [g, x] = F(n), V = f ? e : g, I = J(() => Ce(t) ?? new Date(Date.UTC(1900, 0, 1)), [t]), N = J(() => Ce(i) ?? new Date(Date.UTC(2100, 11, 31)), [i]), { date1: j, date2: v } = J(() => {
-      if (r) {
-        const oe = Ws(V);
-        if (oe.length === 2) {
-          const ue = Ce(oe[0]), ae = Ce(oe[1]);
-          if (ue !== null && ae !== null) {
-            const re = ao([ue, ae]);
-            return { date1: re[0], date2: re[1] };
+    ...g
+  }, v) => {
+    const N = e !== void 0, [I, V] = U(n), z = N ? e : I, y = J(() => Ie(t) ?? new Date(Date.UTC(1900, 0, 1)), [t]), w = J(() => Ie(a) ?? new Date(Date.UTC(2100, 11, 31)), [a]), { date1: j, date2: k } = J(() => {
+      if (s) {
+        const ee = Ks(z);
+        if (ee.length === 2) {
+          const de = Ie(ee[0]), se = Ie(ee[1]);
+          if (de !== null && se !== null) {
+            const Ve = co([de, se]);
+            return { date1: Ve[0], date2: Ve[1] };
           }
         }
-        return oe.length === 1 ? { date1: Ce(oe[0]), date2: null } : { date1: null, date2: null };
+        return ee.length === 1 ? { date1: Ie(ee[0]), date2: null } : { date1: null, date2: null };
       }
-      return { date1: Ce(V), date2: null };
-    }, [V, r]), [y, w] = F(() => {
-      const B = j ?? Eo();
-      return De(B, I, N);
-    }), [T, z] = F(null), [O, $] = F(null);
+      return { date1: Ie(z), date2: null };
+    }, [z, s]), [M, T] = U(() => {
+      const q = j ?? $o();
+      return Te(q, y, w);
+    }), [P, B] = U(null), [D, x] = U(null);
     X(() => {
-      j !== null && w((B) => j.getUTCMonth() === B.getUTCMonth() && j.getUTCFullYear() === B.getUTCFullYear() ? B : De(j, I, N));
-    }, [j, I, N]);
-    const C = J(() => As(a), [a]), E = J(() => Ls(a), [a]), _ = J(() => Es(y), [y]), L = J(() => Eo(), []), R = k(() => {
-      w((B) => Us(B, I));
-    }, [I]), U = k(() => {
-      w((B) => _s(B, N));
-    }, [N]), G = k(() => {
-      w((B) => Bs(B, I));
-    }, [I]), q = k(() => {
-      w((B) => Hs(B, N));
-    }, [N]), H = k(
-      (B) => {
-        const oe = to(B);
-        if (r)
-          if (T !== null) {
-            const ue = ao([T, B]), ae = Gs(ue.map(to));
-            f || x(ae), s == null || s(ae), z(null), $(null);
+      j !== null && T((q) => j.getUTCMonth() === q.getUTCMonth() && j.getUTCFullYear() === q.getUTCFullYear() ? q : Te(j, y, w));
+    }, [j, y, w]);
+    const E = J(() => Fs(i), [i]), S = J(() => $s(i), [i]), F = J(() => Rs(M), [M]), $ = J(() => $o(), []), H = f(() => {
+      T((q) => Ws(q, y));
+    }, [y]), Z = f(() => {
+      T((q) => Gs(q, w));
+    }, [w]), _ = f(() => {
+      T((q) => qs(q, y));
+    }, [y]), A = f(() => {
+      T((q) => Zs(q, w));
+    }, [w]), ne = f(
+      (q) => {
+        const ee = ro(q);
+        if (s)
+          if (P !== null) {
+            const de = co([P, q]), se = Ys(de.map(ro));
+            N || V(se), c == null || c(se), B(null), x(null);
           } else
-            z(B);
+            B(q);
         else
-          f || x(oe), s == null || s(oe);
+          N || V(ee), c == null || c(ee);
       },
-      [r, T, f, s]
-    ), S = k(
-      (B) => {
-        r && T !== null && $(B);
+      [s, P, N, c]
+    ), G = f(
+      (q) => {
+        s && P !== null && x(q);
       },
-      [r, T]
-    ), ee = k(() => {
-      $(null);
-    }, []), M = k(
-      (B) => {
-        if (j !== null && v !== null)
-          return io(B, j, v) && !we(B, j) && !we(B, v);
-        if (T !== null && O !== null) {
-          const oe = ao([T, O]);
-          return io(B, oe[0], oe[1]) && !we(B, oe[0]) && !we(B, oe[1]);
+      [s, P]
+    ), me = f(() => {
+      x(null);
+    }, []), he = f(
+      (q) => {
+        if (j !== null && k !== null)
+          return mo(q, j, k) && !xe(q, j) && !xe(q, k);
+        if (P !== null && D !== null) {
+          const ee = co([P, D]);
+          return mo(q, ee[0], ee[1]) && !xe(q, ee[0]) && !xe(q, ee[1]);
         }
         return !1;
       },
-      [j, v, T, O]
-    ), K = k(
-      (B) => we(B, j) || we(B, v) || we(B, T),
-      [j, v, T]
-    ), te = k(
-      (B) => io(B, I, N),
-      [I, N]
-    ), W = !Ps(y, I), Q = !Rs(y, N), le = !Fs(y, I), ce = !$s(y, N), se = `${E[y.getUTCMonth()]} ${y.getUTCFullYear()}`;
+      [j, k, P, D]
+    ), O = f(
+      (q) => xe(q, j) || xe(q, k) || xe(q, P),
+      [j, k, P]
+    ), W = f(
+      (q) => mo(q, y, w),
+      [y, w]
+    ), Q = !_s(M, y), ae = !Us(M, w), ie = !Bs(M, y), le = !Hs(M, w), ce = `${S[M.getUTCMonth()]} ${M.getUTCFullYear()}`;
     return /* @__PURE__ */ l(
       "div",
       {
-        ref: p,
-        className: h("inline-block outline-none", o),
-        onMouseLeave: ee,
-        ...b,
-        children: /* @__PURE__ */ A("div", { className: "box-border w-fit p-4 flex flex-col gap-2", children: [
-          /* @__PURE__ */ A("div", { className: "flex flex-row h-8 items-center", children: [
+        ref: v,
+        className: p("inline-block outline-none", o),
+        onMouseLeave: me,
+        "data-value": z ?? void 0,
+        ...g,
+        children: /* @__PURE__ */ L("div", { className: "box-border w-fit p-4 flex flex-col gap-2", children: [
+          /* @__PURE__ */ L("div", { className: "flex flex-row h-8 items-center", children: [
             /* @__PURE__ */ l(
-              me,
+              re,
               {
                 size: "s",
                 variant: "subtle-secondary",
-                icon: /* @__PURE__ */ l(ne, { name: "fa-angles-left", iconsVersion: "2", size: "sm" }),
-                disabled: le,
-                onClick: G,
-                "aria-label": m,
+                icon: /* @__PURE__ */ l(oe, { name: "fa-angles-left", iconsVersion: "2", size: "sm" }),
+                disabled: ie,
+                onClick: _,
+                "aria-label": b,
                 className: "-ml-1"
               }
             ),
             /* @__PURE__ */ l(
-              me,
+              re,
               {
                 size: "s",
                 variant: "subtle-secondary",
-                icon: /* @__PURE__ */ l(ne, { name: "fa-angle-left", iconsVersion: "2", size: "sm" }),
-                disabled: W,
-                onClick: R,
-                "aria-label": c
+                icon: /* @__PURE__ */ l(oe, { name: "fa-angle-left", iconsVersion: "2", size: "sm" }),
+                disabled: Q,
+                onClick: H,
+                "aria-label": d
               }
             ),
             /* @__PURE__ */ l(
               "span",
               {
                 role: "status",
-                className: h(
+                className: p(
                   "flex-1 text-center capitalize",
                   "font-[var(--sinch-comp-date-picker-font-header)]",
                   "text-[var(--sinch-comp-date-picker-header-color-default-text-initial)]"
                 ),
                 "aria-live": "polite",
-                children: se
+                children: ce
               }
             ),
             /* @__PURE__ */ l(
-              me,
+              re,
               {
                 size: "s",
                 variant: "subtle-secondary",
-                icon: /* @__PURE__ */ l(ne, { name: "fa-angle-right", iconsVersion: "2", size: "sm" }),
-                disabled: Q,
-                onClick: U,
+                icon: /* @__PURE__ */ l(oe, { name: "fa-angle-right", iconsVersion: "2", size: "sm" }),
+                disabled: ae,
+                onClick: Z,
                 "aria-label": u
               }
             ),
             /* @__PURE__ */ l(
-              me,
+              re,
               {
                 size: "s",
                 variant: "subtle-secondary",
-                icon: /* @__PURE__ */ l(ne, { name: "fa-angles-right", iconsVersion: "2", size: "sm" }),
-                disabled: ce,
-                onClick: q,
-                "aria-label": d,
+                icon: /* @__PURE__ */ l(oe, { name: "fa-angles-right", iconsVersion: "2", size: "sm" }),
+                disabled: le,
+                onClick: A,
+                "aria-label": h,
                 className: "-mr-1"
               }
             )
           ] }),
-          /* @__PURE__ */ l("div", { className: "flex flex-row gap-2 h-6", children: C.map((B, oe) => /* @__PURE__ */ l(
+          /* @__PURE__ */ l("div", { className: "flex flex-row gap-2 h-6", children: E.map((q, ee) => /* @__PURE__ */ l(
             "div",
             {
-              className: h(
+              className: p(
                 "w-6 h-6 leading-6 text-center uppercase select-none",
                 "font-[var(--sinch-comp-date-picker-font-weekday)]",
                 "text-[var(--sinch-comp-date-picker-weekday-color-default-text-initial)]"
               ),
-              children: B
+              children: q
             },
-            oe
+            ee
           )) }),
-          /* @__PURE__ */ l("div", { className: "flex flex-col gap-2", children: _.map((B, oe) => B.every((ae) => ae === null) ? null : /* @__PURE__ */ l("div", { className: "flex flex-row gap-2", children: B.map((ae, re) => {
-            if (ae === null)
+          /* @__PURE__ */ l("div", { className: "flex flex-col gap-2", children: F.map((q, ee) => q.every((se) => se === null) ? null : /* @__PURE__ */ l("div", { className: "flex flex-row gap-2", children: q.map((se, Ve) => {
+            if (se === null)
               return /* @__PURE__ */ l(
                 "button",
                 {
                   type: "button",
                   disabled: !0,
                   "aria-hidden": "true",
-                  className: h(
+                  className: p(
                     "w-6 h-6 leading-[22px] text-center box-border",
                     "rounded-[var(--sinch-comp-date-picker-day-shape-radius)]",
                     "font-[var(--sinch-comp-date-picker-font-day)]",
@@ -30705,18 +30818,18 @@ const _e = 7, Oo = (o) => o.toString().padStart(2, "0"), Es = (o) => {
                     "cursor-default"
                   )
                 },
-                re
+                Ve
               );
-            const ge = we(ae, L), ye = K(ae), Qe = M(ae), he = te(ae);
+            const pe = xe(se, $), je = O(se), io = he(se), ze = W(se);
             return /* @__PURE__ */ l(
               "button",
               {
                 type: "button",
-                disabled: !he,
-                onClick: () => H(ae),
-                onMouseEnter: () => S(ae),
-                "data-date": to(ae),
-                className: h(
+                disabled: !ze,
+                onClick: () => ne(se),
+                onMouseEnter: () => G(se),
+                "data-date": ro(se),
+                className: p(
                   "w-6 h-6 leading-[22px] text-center box-border select-none",
                   "rounded-[var(--sinch-comp-date-picker-day-shape-radius)]",
                   "border border-solid",
@@ -30724,59 +30837,71 @@ const _e = 7, Oo = (o) => o.toString().padStart(2, "0"), Es = (o) => {
                   "focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-1",
                   "focus-visible:outline-[var(--sinch-comp-date-picker-day-color-default-outline-focus)]",
                   // Default day styles
-                  !ge && !ye && [
+                  !pe && !je && [
                     "font-[var(--sinch-comp-date-picker-font-day)]",
                     "text-[var(--sinch-comp-date-picker-day-color-default-text-initial)]",
                     "bg-[var(--sinch-comp-date-picker-day-color-default-background-initial)]",
                     "border-[var(--sinch-comp-date-picker-day-color-default-border-initial)]",
-                    he && "hover:bg-[var(--sinch-comp-date-picker-day-color-default-background-hover)]"
+                    ze && "hover:bg-[var(--sinch-comp-date-picker-day-color-default-background-hover)]"
                   ],
                   // Range highlight
-                  Qe && !ge && !ye && [
+                  io && !pe && !je && [
                     "bg-[var(--sinch-comp-date-picker-day-color-default-range-background)]"
                   ],
                   // Selected styles
-                  ye && !ge && [
+                  je && !pe && [
                     "text-[var(--sinch-comp-date-picker-day-color-checked-text-initial)]",
                     "bg-[var(--sinch-comp-date-picker-day-color-checked-background-initial)]",
                     "border-[var(--sinch-comp-date-picker-day-color-checked-border-initial)]"
                   ],
                   // Today styles (not selected)
-                  ge && !ye && [
+                  pe && !je && [
                     "font-[var(--sinch-comp-date-picker-font-today)]",
                     "text-[var(--sinch-comp-date-picker-today-color-default-text-initial)]",
                     "bg-[var(--sinch-comp-date-picker-today-color-default-background-initial)]",
                     "border-[var(--sinch-comp-date-picker-today-color-default-border-initial)]",
-                    he && "hover:bg-[var(--sinch-comp-date-picker-today-color-default-background-hover)]"
+                    ze && "hover:bg-[var(--sinch-comp-date-picker-today-color-default-background-hover)]"
                   ],
                   // Today selected styles
-                  ge && ye && [
+                  pe && je && [
                     "font-[var(--sinch-comp-date-picker-font-today)]",
                     "text-[var(--sinch-comp-date-picker-today-color-checked-text-initial)]",
                     "bg-[var(--sinch-comp-date-picker-today-color-checked-background-initial)]",
                     "border-[var(--sinch-comp-date-picker-today-color-checked-border-initial)]"
                   ],
                   // Disabled styles
-                  !he && [
+                  !ze && [
                     "cursor-default",
-                    ge ? [
+                    pe ? [
                       "text-[var(--sinch-comp-date-picker-today-color-disabled-text-initial)]",
                       "border-[var(--sinch-comp-date-picker-today-color-disabled-border-initial)]"
                     ] : "text-[var(--sinch-comp-date-picker-day-color-disabled-text-initial)]"
                   ]
                 ),
-                children: ae.getUTCDate()
+                children: se.getUTCDate()
               },
-              re
+              Ve
             );
-          }) }, oe)) })
+          }) }, ee)) }),
+          r && z && z.length > 0 && /* @__PURE__ */ l("div", { className: "flex justify-end", children: /* @__PURE__ */ l(
+            re,
+            {
+              size: "s",
+              variant: "subtle-secondary",
+              text: "Clear",
+              "aria-label": "Clear selected date",
+              onClick: () => {
+                N || V(""), m == null || m(), c == null || c("");
+              }
+            }
+          ) })
         ] })
       }
     );
   }
 );
-Zs.displayName = "DatePicker";
-const qs = D(
+Js.displayName = "DatePicker";
+const Xs = C(
   // Base styles for the dialog panel
   [
     "fixed",
@@ -30785,16 +30910,14 @@ const qs = D(
     "m-auto",
     "flex",
     "flex-col",
-    "py-6",
     "border-none",
     "outline-none",
     "box-border",
-    "bg-[var(--sinch-comp-dialog-color-default-background-initial,white)]",
-    "rounded-[var(--sinch-comp-dialog-shape-radius,8px)]",
-    "shadow-[var(--sinch-comp-dialog-shadow,0_8px_32px_rgba(0,0,0,0.2))]",
-    "max-w-[var(--sinch-comp-dialog-max-width,512px)]",
-    "max-h-[var(--sinch-comp-dialog-max-height,90vh)]",
-    "w-[var(--sinch-comp-dialog-width,fit-content)]",
+    "bg-[var(--sinch-comp-dialog-color-default-background-initial,var(--sinch-sys-color-surface-primary-default,white))]",
+    "rounded-[var(--sinch-comp-dialog-shape-radius,12px)]",
+    "shadow-[var(--sinch-comp-dialog-shadow,var(--sinch-sys-shadow-overlay-md))]",
+    "max-h-[var(--sinch-comp-dialog-max-height,85vh)]",
+    "min-w-[320px]",
     "z-50",
     // Animation
     "transition-all",
@@ -30806,19 +30929,27 @@ const qs = D(
       open: {
         true: "opacity-100 scale-100",
         false: "opacity-0 scale-95"
+      },
+      size: {
+        sm: "max-w-[384px] w-full",
+        md: "max-w-[512px] w-full",
+        lg: "max-w-[768px] w-full",
+        fullscreen: "max-w-none w-[calc(100vw-48px)] max-h-[calc(100vh-48px)]"
       }
     },
     defaultVariants: {
-      open: !1
+      open: !1,
+      size: "md"
     }
   }
-), Ys = D(
+), Qs = C(
   [
     "fixed",
     "inset-0",
     "z-40",
-    "bg-black/55",
-    "transition-opacity",
+    "bg-[var(--sinch-comp-dialog-color-backdrop,var(--sinch-sys-color-backdrop))]",
+    "backdrop-blur-sm",
+    "transition-[opacity,backdrop-filter]",
     "duration-200"
   ],
   {
@@ -30832,66 +30963,79 @@ const qs = D(
       visible: !1
     }
   }
-), Ks = P(
+), er = R(
   ({
     className: o,
     children: e,
     open: n = !1,
-    caption: t,
+    size: t = "md",
+    caption: a,
     onClose: i,
-    closeAriaLabel: a = "Close",
-    icon: r,
-    buttons: s,
-    container: m,
-    hideCloseButton: d = !1,
-    style: c,
-    id: u,
-    "aria-label": b,
-    ...p
-  }, f) => {
-    const g = Z(null), [x, V] = F(!1), [I, N] = F(!1), j = Z(null);
-    Le(f, () => g.current), X(() => {
-      n ? (j.current = document.activeElement, V(!0), requestAnimationFrame(() => {
-        N(!0);
-      }), document.body.style.overflow = "hidden") : x && N(!1);
-    }, [n, x]), X(() => {
+    onOpenChange: s,
+    closeAriaLabel: r = "Close",
+    icon: m,
+    buttons: c,
+    container: b,
+    hideCloseButton: h = !1,
+    onDialogTransitionStart: d,
+    onDialogTransitionEnd: u,
+    style: g,
+    id: v,
+    "aria-label": N,
+    ...I
+  }, V) => {
+    const z = Y(null), [y, w] = U(!1), [j, k] = U(!1), M = Y(null);
+    Fe(V, () => z.current), _e(y), X(() => {
+      n ? (M.current = document.activeElement, w(!0), requestAnimationFrame(() => {
+        k(!0), d == null || d("open");
+      })) : y && (k(!1), d == null || d("close"));
+    }, [n, y, d]), X(() => {
       if (!n) return;
-      const z = (O) => {
-        O.key === "Escape" && (O.preventDefault(), O.stopPropagation(), i == null || i("escape"));
+      const x = (E) => {
+        E.key === "Escape" && (E.preventDefault(), E.stopPropagation(), i == null || i("escape"), s == null || s(!1));
       };
-      return document.addEventListener("keydown", z), () => document.removeEventListener("keydown", z);
-    }, [n, i]);
-    const v = k(
-      (z) => {
-        var O;
-        z.propertyName === "opacity" && (I || (V(!1), document.body.style.overflow = "", (O = j.current) == null || O.focus()));
+      return document.addEventListener("keydown", x), () => document.removeEventListener("keydown", x);
+    }, [n, i, s]);
+    const T = f(
+      (x) => {
+        var E;
+        x.propertyName === "opacity" && (j ? u == null || u("open") : (u == null || u("close"), w(!1), (E = M.current) == null || E.focus()));
       },
-      [I]
-    ), y = k(
-      (z) => {
-        z.target === z.currentTarget && (i == null || i("backdrop"));
+      [j, u]
+    ), P = f(
+      (x) => {
+        x.target === x.currentTarget && (i == null || i("backdrop"), s == null || s(!1));
       },
-      [i]
-    ), w = k(() => {
-      i == null || i("close");
-    }, [i]);
+      [i, s]
+    ), B = f(() => {
+      i == null || i("close"), s == null || s(!1);
+    }, [i, s]);
     if (X(() => {
-      if (!n || !g.current) return;
-      const O = g.current.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      ), $ = O[0], C = O[O.length - 1];
-      $ == null || $.focus();
-      const E = (_) => {
-        _.key === "Tab" && (_.shiftKey ? document.activeElement === $ && (_.preventDefault(), C == null || C.focus()) : document.activeElement === C && (_.preventDefault(), $ == null || $.focus()));
+      if (!n || !z.current) return;
+      const x = z.current, E = () => {
+        const H = x.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        return Array.from(H).filter(
+          (Z) => !Z.closest('[role="dialog"]') || Z.closest('[role="dialog"]') === x
+        );
+      }, F = E()[0];
+      F == null || F.focus();
+      const $ = (H) => {
+        if (H.key !== "Tab") return;
+        const Z = E();
+        if (Z.length === 0) return;
+        const _ = Z[0], A = Z[Z.length - 1];
+        H.shiftKey ? document.activeElement === _ && (H.preventDefault(), A == null || A.focus()) : document.activeElement === A && (H.preventDefault(), _ == null || _.focus());
       };
-      return document.addEventListener("keydown", E), () => document.removeEventListener("keydown", E);
-    }, [n]), !x && !n) return null;
-    const T = /* @__PURE__ */ A(Ne, { children: [
+      return document.addEventListener("keydown", $), () => document.removeEventListener("keydown", $);
+    }, [n]), !y && !n) return null;
+    const D = /* @__PURE__ */ L(Ne, { children: [
       /* @__PURE__ */ l(
         "div",
         {
-          className: h(Ys({ visible: I })),
-          onClick: y,
+          className: p(Qs({ visible: j })),
+          onClick: P,
           "aria-hidden": "true",
           "data-testid": "dialog-backdrop"
         }
@@ -30900,56 +31044,57 @@ const qs = D(
         "div",
         {
           className: "fixed inset-0 z-50 flex items-center justify-center pointer-events-none",
-          children: /* @__PURE__ */ A(
+          children: /* @__PURE__ */ L(
             "div",
             {
-              ref: g,
+              ref: z,
               role: "dialog",
               "aria-modal": "true",
-              "aria-label": b ?? t,
-              "aria-labelledby": t ? "dialog-caption" : void 0,
+              "aria-label": N ?? a,
+              "aria-labelledby": a ? "dialog-caption" : void 0,
               "aria-describedby": "dialog-content",
-              id: u,
-              style: c,
-              className: h(
-                qs({ open: I }),
+              id: v,
+              style: g,
+              className: p(
+                Xs({ open: j, size: t }),
                 "pointer-events-auto",
                 o
               ),
-              onTransitionEnd: v,
-              ...p,
+              onTransitionEnd: T,
+              ...I,
               children: [
-                /* @__PURE__ */ A(
+                /* @__PURE__ */ L(
                   "div",
                   {
-                    className: h(
-                      "flex flex-row items-start gap-2 mb-3 px-6",
+                    className: p(
+                      "flex flex-row items-start gap-2 px-6 pt-6 pb-4",
+                      (e || c) && "border-b border-[var(--sinch-sys-color-border-default,#e5e7eb)]",
                       "[--sinch-global-size-icon:24px]",
                       "[--sinch-global-color-icon:var(--sinch-comp-dialog-color-default-icon-initial)]"
                     ),
                     children: [
-                      r && /* @__PURE__ */ l("span", { className: "shrink-0", children: r }),
-                      t && /* @__PURE__ */ l(
-                        ho,
+                      m && /* @__PURE__ */ l("span", { className: "shrink-0 mt-0.5", children: m }),
+                      a && /* @__PURE__ */ l(
+                        fo,
                         {
                           type: "m",
                           level: "3",
                           id: "dialog-caption",
-                          className: h(
+                          className: p(
                             "[color:var(--sinch-comp-dialog-color-default-title-initial)]",
                             "[font:var(--sinch-comp-dialog-font-title)]"
                           ),
-                          children: t
+                          children: a
                         }
                       ),
-                      !d && /* @__PURE__ */ l(
-                        me,
+                      !h && /* @__PURE__ */ l(
+                        re,
                         {
                           size: "s",
-                          "aria-label": a,
-                          onClick: w,
-                          className: "relative left-1 -top-1 ml-auto",
-                          icon: /* @__PURE__ */ l(ne, { name: "fa-xmark", iconsVersion: "2", size: "sm" })
+                          "aria-label": r,
+                          onClick: B,
+                          className: "ml-auto shrink-0",
+                          icon: /* @__PURE__ */ l(oe, { name: "fa-xmark", iconsVersion: "2", size: "sm" })
                         }
                       )
                     ]
@@ -30959,27 +31104,27 @@ const qs = D(
                   "div",
                   {
                     id: "dialog-content",
-                    className: "min-h-0 overflow-auto px-6 py-1",
+                    className: "min-h-0 overflow-auto px-6 py-5",
                     children: e
                   }
                 ),
-                s && /* @__PURE__ */ l("div", { className: "flex flex-row justify-end gap-4 mt-5 px-6", children: s })
+                c && /* @__PURE__ */ l("div", { className: "flex flex-row justify-end gap-3 px-6 pt-4 pb-6 border-t border-[var(--sinch-sys-color-border-default,#e5e7eb)]", children: c })
               ]
             }
           )
         }
       )
     ] });
-    return Pe(T, m ?? document.body);
+    return $e(D, b ?? document.body);
   }
 );
-Ks.displayName = "Dialog";
-const Js = P(
+er.displayName = "Dialog";
+const or = R(
   ({ className: o, children: e, ...n }, t) => /* @__PURE__ */ l(
     "table",
     {
       ref: t,
-      className: h(
+      className: p(
         // Base styles matching web component
         "table-auto",
         o
@@ -30989,32 +31134,32 @@ const Js = P(
     }
   )
 );
-Js.displayName = "Table";
-const Xs = P(
+or.displayName = "Table";
+const nr = R(
   ({ className: o, children: e, ...n }, t) => /* @__PURE__ */ l(
     "thead",
     {
       ref: t,
-      className: h(o),
+      className: p(o),
       ...n,
       children: e
     }
   )
 );
-Xs.displayName = "TableHead";
-const Qs = P(
+nr.displayName = "TableHead";
+const tr = R(
   ({ className: o, children: e, ...n }, t) => /* @__PURE__ */ l(
     "tbody",
     {
       ref: t,
-      className: h(o),
+      className: p(o),
       ...n,
       children: e
     }
   )
 );
-Qs.displayName = "TableBody";
-const er = D(
+tr.displayName = "TableBody";
+const ir = C(
   // Base styles
   "bg-[var(--sinch-comp-table-color-row-default-background-initial)] hover:bg-[var(--sinch-comp-table-color-row-default-background-hover)]",
   {
@@ -31028,28 +31173,28 @@ const er = D(
       selected: !1
     }
   }
-), or = P(
-  ({ className: o, children: e, sticky: n, selected: t, ...i }, a) => /* @__PURE__ */ l(
+), ar = R(
+  ({ className: o, children: e, sticky: n, selected: t, ...a }, i) => /* @__PURE__ */ l(
     "tr",
     {
-      ref: a,
+      ref: i,
       "data-sticky": n || void 0,
       "data-selected": t || void 0,
-      className: h(
-        er({ selected: t }),
+      className: p(
+        ir({ selected: t }),
         // Apply last:border-b-0 on child cells via parent data attribute
         "[&:last-child_td]:border-b-0",
         // Sticky styles for header cells within this row
         n && "[&_th]:sticky [&_th]:top-0 [&_th]:z-10 [&_th]:bg-[var(--sinch-comp-table-color-row-default-background-sticky)]",
         o
       ),
-      ...i,
+      ...a,
       children: e
     }
   )
 );
-or.displayName = "TableRow";
-const nr = D(
+ar.displayName = "TableRow";
+const lr = C(
   // Base styles
   [
     "border-b border-[var(--sinch-comp-table-color-head-cell-default-border-initial)]",
@@ -31074,7 +31219,7 @@ const nr = D(
       fit: !1
     }
   }
-), tr = D(
+), sr = C(
   // Base wrapper styles
   [
     "relative",
@@ -31098,41 +31243,41 @@ const nr = D(
       align: "start"
     }
   }
-), ir = P(
+), rr = R(
   ({
     className: o,
     children: e,
     text: n,
     align: t = "start",
-    fit: i,
-    leftContent: a,
-    rightContent: r,
-    checkboxContent: s,
+    fit: a,
+    leftContent: i,
+    rightContent: s,
+    checkboxContent: r,
     tooltipContent: m,
-    ...d
-  }, c) => {
-    const u = n !== void 0 && n !== "", b = e !== void 0;
+    ...c
+  }, b) => {
+    const h = n !== void 0 && n !== "", d = e !== void 0;
     return /* @__PURE__ */ l(
       "th",
       {
-        ref: c,
+        ref: b,
         scope: "col",
-        className: h(nr({ align: t, fit: i }), o),
-        ...d,
-        children: /* @__PURE__ */ A("div", { className: h(tr({ align: t })), children: [
-          s,
-          a,
-          u && /* @__PURE__ */ l("span", { className: "min-w-0 shrink text-[var(--sinch-comp-table-color-head-cell-default-text-initial)]", children: n }),
-          b && !u && e,
+        className: p(lr({ align: t, fit: a }), o),
+        ...c,
+        children: /* @__PURE__ */ L("div", { className: p(sr({ align: t })), children: [
+          r,
+          i,
+          h && /* @__PURE__ */ l("span", { className: "min-w-0 shrink text-[var(--sinch-comp-table-color-head-cell-default-text-initial)]", children: n }),
+          d && !h && e,
           m,
-          r
+          s
         ] })
       }
     );
   }
 );
-ir.displayName = "TableHeadCell";
-const ar = D(
+rr.displayName = "TableHeadCell";
+const mr = C(
   // Base styles
   [
     "border-b border-[var(--sinch-comp-table-color-cell-default-border-initial)]",
@@ -31150,7 +31295,7 @@ const ar = D(
       align: "start"
     }
   }
-), lr = D(
+), cr = C(
   // Base wrapper styles
   [
     "flex",
@@ -31172,119 +31317,119 @@ const ar = D(
       align: "start"
     }
   }
-), sr = P(
-  ({ className: o, children: e, align: n = "start", ...t }, i) => /* @__PURE__ */ l(
+), dr = R(
+  ({ className: o, children: e, align: n = "start", ...t }, a) => /* @__PURE__ */ l(
     "td",
     {
-      ref: i,
-      className: h(ar({ align: n }), o),
+      ref: a,
+      className: p(mr({ align: n }), o),
       ...t,
-      children: /* @__PURE__ */ l("div", { className: h(lr({ align: n })), children: e })
+      children: /* @__PURE__ */ l("div", { className: p(cr({ align: n })), children: e })
     }
   )
 );
-sr.displayName = "TableCell";
+dr.displayName = "TableCell";
 export {
-  Jo as Accordion,
-  br as AccordionGroup,
-  Xo as AccordionItem,
-  Vl as ActionMenu,
-  Il as ActionMenuOption,
-  St as Alert,
-  yt as Avatar,
-  kt as Badge,
-  me as Button,
-  Qi as ButtonGroup,
-  qo as ButtonGroupContext,
-  ta as ButtonGroupItem,
-  la as Card,
-  ra as CardContainer,
-  sa as CardTitle,
-  Wt as Checkbox,
-  Ft as Chip,
-  ri as CodeTag,
-  vo as ColorMenu,
-  vr as ColorMenuCompound,
-  wo as ColorMenuOption,
-  jo as ColorSwatch,
-  Zs as DatePicker,
-  Ks as Dialog,
-  Zo as Emoji,
-  bs as EmojiPicker,
-  Di as Field,
-  nl as FileDrop,
-  il as FilePicker,
-  Oa as FileStatus,
-  Mi as Flag,
-  Pi as Grid,
-  Ri as GridItem,
-  Ai as HelpTooltip,
-  ne as Icon,
-  ui as InlineAlert,
-  uo as Input,
-  Ct as Link,
-  Hi as List,
-  Bi as ListItem,
-  Ei as Pagination,
-  es as PersistentOverlay,
-  Jl as Pop,
-  bn as Popover,
-  Xt as Progress,
-  en as ProgressStepper,
-  ur as ProgressStepperGroup,
-  on as ProgressStepperItem,
-  Bo as Radio,
-  dr as RadioGroup,
-  Go as RadioOption,
-  hs as RichText,
-  fs as RichTextarea,
-  xs as RichTextareaChip,
-  El as SKINTONE_SWATCH_COLORS,
-  Al as SWATCH_COLORS,
-  os as SegmentCollapse,
-  ko as SegmentedControl,
-  pr as SegmentedControlGroup,
-  Ge as SegmentedControlOption,
-  rn as SegmentedIconControl,
-  gr as SegmentedIconControlGroup,
-  mn as SegmentedIconControlOption,
-  jr as Select,
-  gn as SelectButton,
-  pn as SelectMenu,
-  fo as SelectMenuOption,
-  sl as Sheet,
-  ml as SheetTitle,
-  Fi as Skeleton,
-  Ui as SkeletonItem,
-  bo as Spinner,
-  Ea as StopEvents,
-  Js as Table,
-  Qs as TableBody,
-  sr as TableCell,
-  Xs as TableHead,
-  ir as TableHeadCell,
-  or as TableRow,
-  po as Tabs,
-  hr as TabsGroup,
-  go as TabsIconOption,
-  an as TabsOption,
-  It as Tag,
-  Je as Text,
-  ki as Textarea,
-  Os as TimePicker,
-  ho as Title,
-  cn as Toast,
-  jl as ToastManager,
-  kr as ToastProvider,
-  Pt as Toggle,
-  Xe as Tooltip,
-  h as cn,
-  Ll as getSwatchColorBg,
-  Pl as getSwatchColorFg,
-  Ze as isSwatchColor,
-  fn as parseRichText,
-  fr as toast,
-  Cl as useActionMenuContext,
-  Ji as useButtonGroupContext,
-  gl as useToast
+  tn as Accordion,
+  gr as AccordionGroup,
+  an as AccordionItem,
+  Tl as ActionMenu,
+  Sl as ActionMenuOption,
+  Pt as Alert,
+  Mt as Avatar,
+  yt as Badge,
+  re as Button,
+  ia as ButtonGroup,
+  en as ButtonGroupContext,
+  ra as ButtonGroupItem,
+  da as Card,
+  ua as CardContainer,
+  ba as CardTitle,
+  Jt as Checkbox,
+  Gt as Chip,
+  ui as CodeTag,
+  No as ColorMenu,
+  Nr as ColorMenuCompound,
+  Vo as ColorMenuOption,
+  yo as ColorSwatch,
+  Js as DatePicker,
+  er as Dialog,
+  Qo as Emoji,
+  ks as EmojiPicker,
+  Ai as Field,
+  sl as FileDrop,
+  ml as FilePicker,
+  Ra as FileStatus,
+  Li as Flag,
+  Ui as Grid,
+  Hi as GridItem,
+  $i as HelpTooltip,
+  oe as Icon,
+  fi as InlineAlert,
+  ko as Input,
+  Dt as Link,
+  qi as List,
+  Yi as ListItem,
+  Fi as Pagination,
+  as as PersistentOverlay,
+  ns as Pop,
+  fn as Popover,
+  ti as Progress,
+  sn as ProgressStepper,
+  kr as ProgressStepperGroup,
+  rn as ProgressStepperItem,
+  Ko as Radio,
+  pr as RadioGroup,
+  Jo as RadioOption,
+  js as RichText,
+  ys as RichTextarea,
+  Is as RichTextareaChip,
+  Fl as SKINTONE_SWATCH_COLORS,
+  $l as SWATCH_COLORS,
+  ls as SegmentCollapse,
+  wo as SegmentedControl,
+  jr as SegmentedControlGroup,
+  Ye as SegmentedControlOption,
+  hn as SegmentedIconControl,
+  vr as SegmentedIconControlGroup,
+  pn as SegmentedIconControlOption,
+  yr as Select,
+  xn as SelectButton,
+  wn as SelectMenu,
+  xo as SelectMenuOption,
+  bl as Sheet,
+  hl as SheetTitle,
+  Gi as Skeleton,
+  Zi as SkeletonItem,
+  go as Spinner,
+  Fa as StopEvents,
+  or as Table,
+  tr as TableBody,
+  dr as TableCell,
+  nr as TableHead,
+  rr as TableHeadCell,
+  ar as TableRow,
+  jo as Tabs,
+  fr as TabsGroup,
+  vo as TabsIconOption,
+  dn as TabsOption,
+  St as Tag,
+  no as Text,
+  xi as Textarea,
+  Ps as TimePicker,
+  fo as Title,
+  gn as Toast,
+  Nl as ToastManager,
+  wr as ToastProvider,
+  Ut as Toggle,
+  to as Tooltip,
+  p as cn,
+  _l as getSwatchColorBg,
+  Ul as getSwatchColorFg,
+  Je as isSwatchColor,
+  Nn as parseRichText,
+  xr as toast,
+  Dl as useActionMenuContext,
+  na as useButtonGroupContext,
+  wl as useToast
 };

@@ -1,6 +1,9 @@
 // Nectary React Components
 // Barrel exports for all components
 
+// Styles — imported so Vite emits dist/styles.css during library build
+import './styles/globals.css'
+
 // Utils
 export { cn } from './utils/cn'
 
