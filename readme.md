@@ -1,53 +1,34 @@
-# Nectary
+# Nectary — React Design System
 
-This is the monorepo for Nectary, Sinch’s design system. Our modular approach allows for maximum composability.
+A React component library built on Sinch's Nectary design system. 50+ components with Tailwind CSS and design tokens.
 
-Note: This repository uses [git-lfs](https://git-lfs.com/) and before cloning it you need to install git-lfs.
+## Structure
 
-## Packages
+| Package | Description |
+|---------|-------------|
+| [`/react-components`](./react-components/) | React component library (`@nectary/react`) |
+| [`/themes`](./themes/) | Generated CSS tokens (colors, spacing, typography) |
+| [`/tokens`](./tokens/) | Design token source data |
+| [`/scripts`](./scripts/) | Token processing scripts |
 
-| Package                                                                                                             | Description                                                                       |
-| ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [`/assets`](https://gitlab.com/sinch/sinch-projects/applications/teams/nectary/components/-/tree/main/assets)         | All assets included in the component library. Images, logos, icons and animations |
-| [`/components`](https://gitlab.com/sinch/sinch-projects/applications/teams/nectary/components/-/tree/main/components) | Component library based in web components                                         |
-| [`/docs`](https://gitlab.com/sinch/sinch-projects/applications/teams/nectary/components/-/tree/main/docs)             | Docs website nectary.sinch.com                                                    |
-| [`/libs`](https://gitlab.com/sinch/sinch-projects/applications/teams/nectary/components/-/tree/main/libs)             | Utility libraries to work with Nectary                                             |
-| [`/tests`](https://gitlab.com/sinch/sinch-projects/applications/teams/nectary/components/-/tree/main/tests)           |                                                                                   |
-| [`/tokens`](https://gitlab.com/sinch/sinch-projects/applications/teams/nectary/components/-/tree/main/tokens)         | Design tokens                                                                     |
+## Quick Start
 
-### Dependencies
+```bash
+git clone https://github.com/sandbuuk/base-ui-nectary-skin.git
+cd base-ui-nectary-skin
+pnpm install
+cd react-components
+pnpm dev
+```
 
-* [Node 20](https://nodejs.org/en)
-* [pnpm](https://pnpm.io/es/)
+Open **http://localhost:6006** to browse components in Storybook.
 
-## Getting Started
+See [`react-components/README.md`](./react-components/README.md) for full setup instructions and usage guide.
 
-Nectary uses pnpm to bundle js. Use the following command to install packages from package.json.
+## Regenerate Tokens
 
-### `pnpm install`
-
-When you want to run code from your local machine to preview it in the [Nectary Documentation](https://nectary.sinch.com/), use the following steps:
-
-### `pnpm start`
-
-### Open [`localhost:5000`](http://localhost:5000)
-
-**Note!** If you are using a Mac, make sure to **turn off AirDrop** in System Settings, since AirDrop runs on port 5000 already.
-
-## Run Tests Locally
-
-The tests run in the pipeline on GitLab, but if you need to run them locally, instructions to do so are stated in the [Test Folder Readme](https://gitlab.com/sinch/sinch-projects/applications/teams/nectary/components/-/tree/main/tests?ref_type=heads).
-
-## Generate CSS variables from tokens
-
-For the base theme `pnpm tokens:base`
-
-## Update icons
-
-We have a pipeline that generates fonts for the icons, updates the code automatically for the new icons and upload the fonts to S3, to use it:
-
-1. Add the svg to `svg-icons`.
-2. Push it to the repo.
-3. Everything else should be automatic except the actual uploading that is manual for MRs.
-
-WARNING: DO NOT DELETE ICONS SINCE FONTS ARE USED EVERYWHERE THE EFFECT MIGHT BE AUTOMATIC.
+```bash
+pnpm tokens:base    # Base theme
+pnpm tokens:dark    # Dark theme
+pnpm tokens          # All themes
+```

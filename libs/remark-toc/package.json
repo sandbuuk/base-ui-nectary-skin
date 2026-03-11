@@ -1,9 +1,0 @@
-{
-  "name": "remark-toc",
-  "version": "0.0.0",
-  "main": "src/index.js",
-  "type": "module",
-  "dependencies": {
-    "mdast-util-toc": "^6.1.1"
-  }
-}

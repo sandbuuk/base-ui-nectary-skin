@@ -1,7 +1,0 @@
-public/
-tests/apps/angular/
-tests/apps/vue/
-lib/
-build/
-components/**/*.d.ts
-components/**/*.js

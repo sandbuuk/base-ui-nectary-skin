@@ -1,8 +1,0 @@
-{
-  "name": "@saas/example-code-loader",
-  "version": "0.0.0",
-  "main": "src/index.js",
-  "publishConfig": {
-    "registry": "https://nexus.int.clxnetworks.net/repository/sinch_npm/"
-  }
-}

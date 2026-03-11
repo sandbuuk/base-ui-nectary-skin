@@ -1,8 +1,0 @@
-<sinch-dialog open [attr.caption]="title" (-close)="onClose($event)">
-  <sinch-icon icons-version="2" name="fa-face-smile-plus" *ngIf="icon" slot="icon" />
-  <sinch-text *ngIf="content !== null" slot="content" type="m">{{content}}</sinch-text>
-  <ng-container *ngIf="buttons">
-    <sinch-button text="Cancel" type="secondary" slot="buttons"></sinch-button>
-    <sinch-button text="Ok" type="primary" slot="buttons"></sinch-button>
-  </ng-container>
-</sinch-dialog>

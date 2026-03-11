@@ -1,9 +1,0 @@
-import '@nectary/components/spinner'
-import type { FC } from 'react'
-import './styles.css'
-
-export const Loading: FC = () => (
-  <div className="loading">
-    <sinch-spinner size="l"/>
-  </div>
-)
