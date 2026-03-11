@@ -66,6 +66,63 @@ react-components/
   DESIGN_AUDIT.md   # Audit status and remaining items
 ```
 
+## Using as a Design System (in your own project)
+
+The library ships a self-contained CSS bundle with all design tokens, fonts, and Tailwind utilities. To use it in any React project:
+
+```bash
+npm install @nectary/react
+# or install from GitHub directly:
+npm install sandbuuk/base-ui-nectary-skin
+```
+
+Then in your code:
+
+```tsx
+import { Button, Card, Dialog, Text } from '@nectary/react'
+import '@nectary/react/styles.css'
+
+function App() {
+  return (
+    <div className="nectary-theme-base">
+      <Card
+        title={<CardTitle text="Hello" />}
+        content={<Text>Your app content here.</Text>}
+        footer={<Button variant="primary" text="Get Started" />}
+      />
+    </div>
+  )
+}
+```
+
+The `styles.css` import includes everything — fonts (DM Sans, DM Mono), color tokens, spacing, and component overrides. No extra setup needed.
+
+## AI-Assisted Prototyping
+
+You can use this library with Claude or other AI tools to generate working prototypes. The repo includes a complete **[Component API Reference](./COMPONENT_API.md)** with every component's props, variants, and usage examples.
+
+**How it works:**
+1. Give the AI the `COMPONENT_API.md` file as context
+2. Describe the UI you want (e.g. "build a settings page with a form, toggle, and save button")
+3. The AI generates JSX using real Nectary components and Tailwind token classes
+4. Run it locally — styles just work via `@nectary/react/styles.css`
+
+**Components that exist** get imported from the library. **Components that don't exist yet** can be built inline using Tailwind with the same `--sinch-*` design tokens, so everything stays visually consistent.
+
+### Tailwind Token Classes (quick reference)
+
+| Category | Classes |
+|----------|---------|
+| **Primary** | `bg-primary`, `bg-primary-hover`, `text-primary` |
+| **Surfaces** | `bg-surface-canvas`, `bg-surface-primary`, `bg-surface-secondary` |
+| **Text** | `text-foreground`, `text-foreground-muted`, `text-foreground-caption` |
+| **Borders** | `border-border`, `border-border-subtle`, `border-border-strong` |
+| **Feedback** | `bg-feedback-danger`, `bg-feedback-success`, `bg-feedback-warning`, `bg-feedback-info` |
+| **Radius** | `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl` |
+| **Fonts** | `font-sans` (DM Sans), `font-mono` (DM Mono) |
+
+See `COMPONENT_API.md` for the full reference with all 50+ components.
+
 ## For Designers
 
 Each component in Storybook has:
